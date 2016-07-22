@@ -48,7 +48,7 @@ namespace PokemonGo.RocketAPI.Logic
                     if (settings.CandyToEvolve == 0)
                         continue;
 
-                    var amountToSkip = (familyCandy.Candy + settings.CandyToEvolve - 1)/settings.CandyToEvolve + 2;
+                    var amountToSkip = familyCandy.Candy/settings.CandyToEvolve;
 
                     results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key && x.Favorite == 0)
                         .OrderByDescending(x => x.Cp)
@@ -72,13 +72,27 @@ namespace PokemonGo.RocketAPI.Logic
                             .ToList());
         }
 
-        public async Task<int> GetHighestCPofType(PokemonData pokemon)
+        public async Task<IEnumerable<PokemonData>> GetHighestsCP(int limit)
+        {
+            var myPokemon = await GetPokemons();
+            var pokemons = myPokemon.ToList();
+            return pokemons.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax).Take(limit);
+        }
+
+        public async Task<IEnumerable<PokemonData>> GetHighestsPerfect(int limit)
+        {
+            var myPokemon = await GetPokemons();
+            var pokemons = myPokemon.ToList();
+            return pokemons.OrderByDescending(x => Logic.CalculatePokemonPerfection(x)).Take(limit);
+        }
+
+        public async Task<PokemonData> GetHighestPokemonOfTypeByCP(PokemonData pokemon)
         {
             var myPokemon = await GetPokemons();
             var pokemons = myPokemon.ToList();
             return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
-                .OrderByDescending(x => x.Cp)
-                .First().Cp;
+                            .OrderByDescending(x => x.Cp)
+                            .First();
         }
 
         public async Task<int> GetItemAmountByType(MiscEnums.Item type)
