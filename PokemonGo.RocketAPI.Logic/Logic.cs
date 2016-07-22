@@ -31,7 +31,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         public async Task Execute()
         {
-            Git.CheckVersion();
+            await Git.CheckVersion();
 
             Logger.Write($"Starting Execute on login server: {_clientSettings.AuthType}", LogLevel.Info);
 
@@ -59,10 +59,11 @@ namespace PokemonGo.RocketAPI.Logic
         public async Task PostLoginExecute()
         {
             while (true)
-            {
+            { 
+                 DisplayPlayerLevelInTitle();
                 try
                 {
-                    await DisplayPlayerLevelInTitle();
+                   
                     if (_clientSettings.EvolveAllPokemonWithEnoughCandy) await EvolveAllPokemonWithEnoughCandy();
                     if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
                     await RecycleItems();
@@ -264,17 +265,21 @@ namespace PokemonGo.RocketAPI.Logic
             await Task.Delay(3000);
         }
 
-        private async Task DisplayPlayerLevelInTitle()
+   private async Task DisplayPlayerLevelInTitle()
         {
-            var playerStats = await _inventory.GetPlayerStats();
-            var playerStat = playerStats.FirstOrDefault();
-            if (playerStat != null)
+            do
             {
+                await Task.Delay(1000);
+                var playerStats = await _inventory.GetPlayerStats();// await _inventory.GetPlayerStats();
+                var playerStat = playerStats.FirstOrDefault();
+                //  if (playerStat != null)
+                // {
                 var message = $"Player level {playerStat.Level:0} - ({(playerStat.Experience - playerStat.PrevLevelXp):0} / {(playerStat.NextLevelXp - playerStat.PrevLevelXp):0})";
                 System.Console.Title = message;
-                Logger.Write(message);
-            }
-            await Task.Delay(5000);
+                //Logger.Write(message);
+                //   }
+                // await Task.Delay(5000);
+            } while (true);
         }
     }
 }
