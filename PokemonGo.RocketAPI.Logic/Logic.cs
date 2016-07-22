@@ -215,7 +215,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                 var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                 var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                Logger.Write($"(POKESTOP): {fortInfo.Name} in {Math.Round(distance)}m distance", LogLevel.Info, ConsoleColor.DarkRed);
+                Logger.Write($"(POKESTOP): {fortInfo.Name} in {Math.Round(distance)}m distance", LogLevel.Info, ConsoleColor.Magenta);
                 if (fortSearch.ExperienceAwarded > 0)
                     Logger.Write(
                         $"(POKESTOP) XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
@@ -307,7 +307,7 @@ namespace PokemonGo.RocketAPI.Logic
             foreach (var item in items)
             {
                 var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                Logger.Write($"(RECYCLE) {item.Count}x {(ItemId) item.Item_}", LogLevel.Info, ConsoleColor.DarkBlue);
+                Logger.Write($"(RECYCLE) {item.Count}x {(ItemId) item.Item_}", LogLevel.Info, ConsoleColor.Cyan);
                 await Task.Delay(500);
             }
         }
