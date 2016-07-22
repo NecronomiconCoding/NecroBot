@@ -1,6 +1,10 @@
-﻿using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.GeneratedCode;
+﻿#region
+
 using System.Collections.Generic;
+using PokemonGo.RocketAPI.Enums;
+using PokemonGo.RocketAPI.GeneratedCode;
+
+#endregion
 
 namespace PokemonGo.RocketAPI
 {
@@ -19,10 +23,10 @@ namespace PokemonGo.RocketAPI
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool TransferDuplicatePokemon { get; }
 
-        ICollection<KeyValuePair<AllEnum.ItemId, int>> ItemRecycleFilter { get; }
+        ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
-        ICollection<AllEnum.PokemonId> PokemonsToEvolve { get; }
+        ICollection<PokemonId> PokemonsToEvolve { get; }
 
-        ICollection<AllEnum.PokemonId> PokemonsNotToTransfer { get; }
+        ICollection<PokemonId> PokemonsNotToTransfer { get; }
     }
 }

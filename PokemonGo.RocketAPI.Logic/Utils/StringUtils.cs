@@ -1,9 +1,10 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PokemonGo.RocketAPI.GeneratedCode;
+
+#endregion
 
 namespace PokemonGo.RocketAPI.Logic.Utils
 {
@@ -18,9 +19,9 @@ namespace PokemonGo.RocketAPI.Logic.Utils
 
             return
                 enumerable.GroupBy(i => i.ItemId)
-                          .Select(kvp => new { ItemName = kvp.Key.ToString(), Amount = kvp.Sum(x => x.ItemCount) })
-                          .Select(y => $"{y.Amount} x {y.ItemName}")
-                          .Aggregate((a, b) => $"{a}, {b}");
+                    .Select(kvp => new {ItemName = kvp.Key.ToString(), Amount = kvp.Sum(x => x.ItemCount)})
+                    .Select(y => $"{y.Amount} x {y.ItemName}")
+                    .Aggregate((a, b) => $"{a}, {b}");
         }
     }
 }

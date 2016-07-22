@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region
+
+using System;
+
+#endregion
 
 namespace PokemonGo.RocketAPI.Helpers
 {
@@ -13,6 +13,5 @@ namespace PokemonGo.RocketAPI.Helpers
             var bytes = BitConverter.GetBytes(value);
             return BitConverter.ToUInt64(bytes, 0);
         }
-
     }
 }
