@@ -405,9 +405,10 @@ namespace PokemonGo.RocketAPI.Logic
                 var vrList = fucnReturnLocs();
                 Logger.Write("(LOCATION) found count " + vrList.Count, LogLevel.Info, ConsoleColor.DarkGreen);
                 int irLoop = 1;
-                double dblMinDistance = 909999292;
+                double dblMinDistance = 0;
                 double dblMinDistLat = 0;
                 double dblMinDistLng = 0;
+                string srMinDistLoc = "na";
 
                 foreach (var vrloc in vrList)
                 {
@@ -430,6 +431,7 @@ namespace PokemonGo.RocketAPI.Logic
                         dblMinDistance = distance;
                         dblMinDistLat = dblLat;
                         dblMinDistLng = dblLong;
+                        srMinDistLoc = vrloc;
                     }
 
                 }
@@ -438,7 +440,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                 if (dblMinDistLat > 0 && dblMinDistLng > 0)
                 {
-                    hsGonaLocations.Add(dblMinDistLat + ";" + dblMinDistLng);
+                    hsGonaLocations.Add(srMinDistLoc);
                     var update =
     await
         _navigation.HumanLikeWalking(new Navigation.Location(dblMinDistLat, dblMinDistLng),
