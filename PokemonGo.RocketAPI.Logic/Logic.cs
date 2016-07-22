@@ -69,12 +69,13 @@ namespace PokemonGo.RocketAPI.Logic
                         ? $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) ({Math.Round(CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfection) | Chance: {encounter?.CaptureProbability.CaptureProbability_.First()} | {Math.Round(distance)}m distance | with {pokeball} "
                         : $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()))} | {Math.Round(distance)}m distance {caughtPokemonResponse.Status} | with {pokeball}",
                     LogLevel.Caught);
+                await DisplayPlayerLevelInTitle(true);
                 await Task.Delay(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
-        private async Task DisplayPlayerLevelInTitle()
+        private async Task DisplayPlayerLevelInTitle(bool updateOnly = false)
         {
             _playerProfile = _playerProfile.Profile != null ? _playerProfile : await _client.GetProfile();
             var playerName = _playerProfile.Profile.Username != null ? _playerProfile.Profile.Username : "";
@@ -85,9 +86,11 @@ namespace PokemonGo.RocketAPI.Logic
                 var message =
                     $"Character Level {playerName} {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp:0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp:0} XP)";
                 Console.Title = message;
-                Logger.Write(message);
+                if (updateOnly == false)
+                    Logger.Write(message);
             }
-            await Task.Delay(5000);
+            if (updateOnly == false)
+                await Task.Delay(5000);
         }
 
         public static int GetXpDiff(int Level)
@@ -186,8 +189,11 @@ namespace PokemonGo.RocketAPI.Logic
                 var evolvePokemonOutProto = await _client.EvolvePokemon(pokemon.Id);
 
                 if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
+                {
                     Logger.Write($"{pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp",
                         LogLevel.Evolve);
+                    await DisplayPlayerLevelInTitle(true);
+                }
                 else
                     Logger.Write(
                         $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
@@ -322,9 +328,12 @@ namespace PokemonGo.RocketAPI.Logic
                 var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                 Logger.Write($"{fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
                 if (fortSearch.ExperienceAwarded > 0)
+                {
                     Logger.Write(
                         $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
                         LogLevel.Pokestop);
+                    await DisplayPlayerLevelInTitle(true);
+                }
 
                 await Task.Delay(1000);
                 await RecycleItems();
