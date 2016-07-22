@@ -285,6 +285,11 @@ namespace PokemonGo.RocketAPI.Logic
                     Logger.Write("InvalidResponseException - Restarting", LogLevel.Error);
                     await Execute();
                 }
+                catch (AggregateException)
+                {
+                    Logger.Write("AggregateException - Restarting", LogLevel.Error);
+                    await Execute();
+                }
                 await Task.Delay(10000);
             }
         }
@@ -471,11 +476,11 @@ namespace PokemonGo.RocketAPI.Logic
             var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
             var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
 
-            if (masterBallsCount > 0 && pokemonCp >= 1500)
+            if (masterBallsCount > 0 && pokemonCp >= 2000)
                 return MiscEnums.Item.ITEM_MASTER_BALL;
-            if (ultraBallsCount > 0 && pokemonCp >= 1500)
+            if (ultraBallsCount > 0 && pokemonCp >= 2000)
                 return MiscEnums.Item.ITEM_ULTRA_BALL;
-            if (greatBallsCount > 0 && pokemonCp >= 1500)
+            if (greatBallsCount > 0 && pokemonCp >= 2000)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
             if (ultraBallsCount > 0 && pokemonCp >= 1000)
@@ -483,7 +488,7 @@ namespace PokemonGo.RocketAPI.Logic
             if (greatBallsCount > 0 && pokemonCp >= 1000)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
-            if (greatBallsCount > 0 && pokemonCp >= 600)
+            if (greatBallsCount > 0 && pokemonCp >= 300)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
             if (pokeBallsCount > 0)
@@ -495,7 +500,7 @@ namespace PokemonGo.RocketAPI.Logic
             if (masterBallsCount > 0)
                 return MiscEnums.Item.ITEM_MASTER_BALL;
 
-            return MiscEnums.Item.ITEM_POKE_BALL;
+            return MiscEnums.Item.ITEM_UNKNOWN;
         }
 
         public async Task PostLoginExecute()
@@ -509,6 +514,7 @@ namespace PokemonGo.RocketAPI.Logic
                     if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
                         await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                     if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                    await DisplayHighests();
                     await RecycleItems();
                     await ExecuteFarmingPokestopsAndPokemons();
 
@@ -568,9 +574,9 @@ namespace PokemonGo.RocketAPI.Logic
                     continue;
 
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
-                var bestPokemonOfType = await _inventory.GetHighestCPofType(duplicatePokemon);
+                PokemonData bestPokemonOfType = await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
                 Logger.Write(
-                    $"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} CP (Best: {bestPokemonOfType})",
+                    $"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")}\t% perfect) CP (Best: {bestPokemonOfType.Id} | ({CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")}\t% perfect))",
                     LogLevel.Transfer);
                 await Task.Delay(500);
             }
@@ -590,6 +596,7 @@ namespace PokemonGo.RocketAPI.Logic
             await Task.Delay(3000);
         }
 
+<<<<<<< HEAD
         private static List<string> fucnReturnLocs()
         {
             List<string> lstFileNames = new List<string> { @"C:\Python27\test2.txt" };
@@ -642,5 +649,22 @@ namespace PokemonGo.RocketAPI.Logic
             LstLatLong = LstLatLong.Distinct().ToList();
             return LstLatLong;
         }
+=======
+        private async Task DisplayHighests()
+        {
+            Logger.Write($"====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
+            var highestsPokemonCP = await _inventory.GetHighestsCP(20);
+            foreach (var pokemon in highestsPokemonCP)
+                Logger.Write($"# CP {pokemon.Cp}\t| ({CalculatePokemonPerfection(pokemon).ToString("0.00")}\t% perfect) NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
+            Logger.Write($"====== DisplayHighestsPerfect ======", LogLevel.Info, ConsoleColor.Yellow);
+            var highestsPokemonPerfect = await _inventory.GetHighestsPerfect(10);
+            foreach (var pokemon in highestsPokemonPerfect)
+            {
+                Logger.Write($"# CP {pokemon.Cp}\t| ({CalculatePokemonPerfection(pokemon).ToString("0.00")}\t% perfect) NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
+            }
+        }
+
+>>>>>>> refs/remotes/NecronomiconCoding/master
     }
+
 }
