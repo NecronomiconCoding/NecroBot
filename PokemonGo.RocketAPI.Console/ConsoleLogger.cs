@@ -29,7 +29,8 @@ namespace PokemonGo.RocketAPI.Console
         /// </summary>
         /// <param name="message">The message to log. The current time will be prepended.</param>
         /// <param name="level">Optional. Default <see cref="LogLevel.Info" />.</param>
-        public void Write(string message, LogLevel level = LogLevel.Info)
+        /// <param name="color">Optional. Default is auotmatic</param>
+        public void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black)
         {
             if (level > maxLogLevel)
                 return;
@@ -37,23 +38,27 @@ namespace PokemonGo.RocketAPI.Console
             switch (level)
             {
                 case LogLevel.Error:
-                    System.Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.ForegroundColor = color != ConsoleColor.Black ? color : ConsoleColor.Red;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ERROR) {message}");
                     break;
                 case LogLevel.Warning:
-                    System.Console.ForegroundColor = ConsoleColor.Yellow;
+                    System.Console.ForegroundColor = color != ConsoleColor.Black ? color : ConsoleColor.Yellow;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (WARNING) {message}");
                     break;
                 case LogLevel.Info:
-                    System.Console.ForegroundColor = ConsoleColor.Gray;
+                    System.Console.ForegroundColor = color != ConsoleColor.Black ? color : ConsoleColor.Gray;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (INFO) {message}");
                     break;
                 case LogLevel.Debug:
-                    System.Console.ForegroundColor = ConsoleColor.Gray;
+                    System.Console.ForegroundColor = color != ConsoleColor.Black ? color : ConsoleColor.Gray;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (DEBUG) {message}");
                     break;
+                case LogLevel.None:
+                    System.Console.ForegroundColor = color != ConsoleColor.Black ? color : ConsoleColor.White;
+                    System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ERROR) {message}");
+                    break;
                 default:
-                    System.Console.ForegroundColor = ConsoleColor.White;
+                    System.Console.ForegroundColor = color != ConsoleColor.Black ? color : ConsoleColor.White;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ERROR) {message}");
                     break;
             }
