@@ -23,6 +23,8 @@ namespace PokemonGo.RocketAPI.Logic
         private readonly Inventory _inventory;
         private readonly Navigation _navigation;
 
+        private GetPlayerResponse _playerProfile;
+
         public Logic(ISettings clientSettings)
         {
             _clientSettings = clientSettings;
@@ -67,12 +69,16 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task DisplayPlayerLevelInTitle()
         {
+
+            _playerProfile = _playerProfile.Profile != null ? _playerProfile : await _client.GetProfile();
+            var playerName = _playerProfile.Profile.Username != null ? _playerProfile.Profile.Username : "";
+
             var playerStats = await _inventory.GetPlayerStats();
             var playerStat = playerStats.FirstOrDefault();
             if (playerStat != null)
             {
                 var message =
-                    $"Character Level {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp:0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp:0} XP)";
+                    $"Character Level {playerName} {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp:0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp:0} XP)";
                 Console.Title = message;
                 Logger.Write(message);
             }
@@ -102,7 +108,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             Git.CheckVersion();
             Logger.Write(
-                $"Make sure Lat & Lng is right. Exit Program if not! Lat: {_clientSettings.DefaultLatitude} Lng: {_clientSettings.DefaultLongitude}",
+                $"Make sure Lat & Lng is right. Exit Program if not! Lat: {_client.CurrentLat} Lng: {_client.CurrentLng}",
                 LogLevel.Warning);
             Thread.Sleep(3000);
             Logger.Write($"Logging in via: {_clientSettings.AuthType}", LogLevel.Info);
@@ -270,6 +276,7 @@ namespace PokemonGo.RocketAPI.Logic
             {
                 try
                 {
+                    _playerProfile = await _client.GetProfile();
                     await DisplayPlayerLevelInTitle();
                     if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
                         await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
