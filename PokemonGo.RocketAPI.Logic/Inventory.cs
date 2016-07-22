@@ -13,9 +13,11 @@ namespace PokemonGo.RocketAPI.Logic
     public class Inventory
     {
         private readonly Client _client;
+        private readonly ISettings _clientSettings;
 
-        public Inventory(Client client)
+        public Inventory(ISettings clientSettings, Client client)
         {
+            _clientSettings = clientSettings;
             _client = client;
         }
 
@@ -68,7 +70,7 @@ namespace PokemonGo.RocketAPI.Logic
                         p.Where(x => x.Favorite == 0)
                             .OrderByDescending(x => x.Cp)
                             .ThenBy(n => n.StaminaMax)
-                            .Skip(1)
+                            .Skip(_clientSettings.KeepMinDuplicatePokemon)
                             .ToList());
         }
 
