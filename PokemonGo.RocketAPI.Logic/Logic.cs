@@ -596,7 +596,7 @@ namespace PokemonGo.RocketAPI.Logic
             await Task.Delay(3000);
         }
 
-<<<<<<< HEAD
+
         private static List<string> fucnReturnLocs()
         {
             List<string> lstFileNames = new List<string> { @"C:\Python27\test2.txt" };
@@ -649,7 +649,7 @@ namespace PokemonGo.RocketAPI.Logic
             LstLatLong = LstLatLong.Distinct().ToList();
             return LstLatLong;
         }
-=======
+
         private async Task DisplayHighests()
         {
             Logger.Write($"====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
@@ -664,7 +664,7 @@ namespace PokemonGo.RocketAPI.Logic
             }
         }
 
->>>>>>> refs/remotes/NecronomiconCoding/master
+
     }
 
 }
