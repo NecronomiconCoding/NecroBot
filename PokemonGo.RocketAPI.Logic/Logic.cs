@@ -410,45 +410,48 @@ namespace PokemonGo.RocketAPI.Logic
                 double dblMinDistLng = 0;
                 string srMinDistLoc = "na";
 
-                foreach (var vrloc in vrList)
+                for (int i = 0; i < vrList.Count; i++)
                 {
-                    double dblLat;
-                    double dblLong;
-
-                    double.TryParse(vrloc.Split(';')[0], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLat);
-                    double.TryParse(vrloc.Split(';')[1], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLong);
-
-                    if (dblLat < 1 || dblLong < 1)
+                    foreach (var vrloc in vrList)
                     {
-                        continue;
+                        double dblLat;
+                        double dblLong;
+
+                        double.TryParse(vrloc.Split(';')[0], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLat);
+                        double.TryParse(vrloc.Split(';')[1], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLong);
+
+                        if (dblLat < 1 || dblLong < 1)
+                        {
+                            continue;
+                        }
+
+                        var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
+                dblLat, dblLong);
+
+                        if (distance < dblMinDistance)
+                        {
+                            dblMinDistance = distance;
+                            dblMinDistLat = dblLat;
+                            dblMinDistLng = dblLong;
+                            srMinDistLoc = vrloc;
+                        }
+
                     }
 
-                    var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
-            dblLat, dblLong);
+                    Logger.Write("(LOCATION) loop " + irLoop, LogLevel.Info, ConsoleColor.DarkGreen);
 
-                    if (distance < dblMinDistance)
+                    if (dblMinDistLat > 0 && dblMinDistLng > 0)
                     {
-                        dblMinDistance = distance;
-                        dblMinDistLat = dblLat;
-                        dblMinDistLng = dblLong;
-                        srMinDistLoc = vrloc;
+                        hsGonaLocations.Add(srMinDistLoc);
+                        var update =
+        await
+            _navigation.HumanLikeWalking(new Navigation.Location(dblMinDistLat, dblMinDistLng),
+                _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+
+                        await ExecuteCatchAllNearbyPokemons();
+                        if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                        irLoop++;
                     }
-
-                }
-
-                Logger.Write("(LOCATION) loop " + irLoop, LogLevel.Info, ConsoleColor.DarkGreen);
-
-                if (dblMinDistLat > 0 && dblMinDistLng > 0)
-                {
-                    hsGonaLocations.Add(srMinDistLoc);
-                    var update =
-    await
-        _navigation.HumanLikeWalking(new Navigation.Location(dblMinDistLat, dblMinDistLng),
-            _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
-
-                    await ExecuteCatchAllNearbyPokemons();
-                    if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
-                    irLoop++;
                 }
             }
 
