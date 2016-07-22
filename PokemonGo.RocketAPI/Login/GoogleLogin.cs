@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
@@ -58,12 +59,20 @@ namespace PokemonGo.RocketAPI.Login
             Logger.Write($"Please visit {deviceCode.verification_url} and enter {deviceCode.user_code}", LogLevel.None);
 
             await Task.Delay(2000);
-
-            Process.Start(@"http://www.google.com/device");
-            var thread = new Thread(() => Clipboard.SetText(deviceCode.user_code)); //Copy device code
-            thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
-            thread.Start();
-            thread.Join();
+            try
+            {
+                Process.Start(@"http://www.google.com/device");
+                var thread = new Thread(() => Clipboard.SetText(deviceCode.user_code)); //Copy device code
+                thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
+                thread.Start();
+                thread.Join();
+            }
+            catch (Exception)
+            {
+                Logger.Write("Couldnt copy to clipboard, do it manually", LogLevel.Error);
+                Logger.Write($"Goto: http://www.google.com/device & enter {deviceCode.user_code}", LogLevel.Error);
+            }
+            
             return deviceCode;
         }
 
