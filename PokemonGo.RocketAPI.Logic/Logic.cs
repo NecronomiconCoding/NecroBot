@@ -265,13 +265,13 @@ namespace PokemonGo.RocketAPI.Logic
                 await Task.Delay(distance > 100 ? 15000 : 500);
 
                 var encounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
-
+                await Task.Delay(10000);
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                     await CatchEncounter(encounter, pokemon);
                 else
                     Logger.Write($"Encounter problem: {encounter?.Status}");
             }
-            await Task.Delay(15000);
+  
         }
 
 
@@ -290,6 +290,14 @@ namespace PokemonGo.RocketAPI.Logic
                             LocationUtils.CalculateDistanceInMeters(
                                 new Navigation.Location(_client.CurrentLat, _client.CurrentLng),
                                 new Navigation.Location(i.Latitude, i.Longitude)));
+
+            foreach (var pokeStop in pokeStops)
+            {
+                var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
+                    pokeStop.Latitude, pokeStop.Longitude);
+
+                Logger.Write($"(POKESTOP): lure info {pokeStop?.LureInfo} lat {pokeStop.Latitude} lng {pokeStop.Longitude} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkYellow);
+            }
 
             foreach (var pokeStop in pokeStops)
             {
