@@ -42,7 +42,8 @@ namespace PokemonGo.RocketAPI.Logic
             do
             {
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
-                if (probability.HasValue && probability.Value < 0.35 && encounter?.WildPokemon?.PokemonData?.Cp > 400)
+                if ((probability.HasValue && probability.Value < 0.35 && encounter?.WildPokemon?.PokemonData?.Cp > 400) ||
+                    CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >= _clientSettings.KeepMinIVPercentage)
                 {
                     //Throw berry is we can
                     await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
@@ -271,7 +272,12 @@ namespace PokemonGo.RocketAPI.Logic
                 else
                     Logger.Write($"Encounter problem: {encounter?.Status}");
             }
+<<<<<<< HEAD
   
+=======
+            
+            await Task.Delay(_clientSettings.DelayBetweenMove);
+>>>>>>> refs/remotes/NecronomiconCoding/master
         }
 
 
