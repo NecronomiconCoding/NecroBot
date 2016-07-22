@@ -271,7 +271,8 @@ namespace PokemonGo.RocketAPI.Logic
                 else
                     Logger.Write($"Encounter problem: {encounter?.Status}");
             }
-            await Task.Delay(15000);
+            
+            await Task.Delay(_clientSettings.DelayBetweenMove);
         }
 
 
