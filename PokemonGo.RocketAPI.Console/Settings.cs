@@ -23,6 +23,8 @@ namespace PokemonGo.RocketAPI.Console
         public double WalkingSpeedInKilometerPerHour => UserSettings.Default.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => UserSettings.Default.EvolveAllPokemonWithEnoughCandy;
         public bool TransferDuplicatePokemon => UserSettings.Default.TransferDuplicatePokemon;
+        public int DelayBetweenMove => UserSettings.Default.DelayBetweenMove;
+        public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
 
         private ICollection<PokemonId> _pokemonsToEvolve;
         private ICollection<PokemonId> _pokemonsNotToTransfer;
@@ -124,6 +126,22 @@ namespace PokemonGo.RocketAPI.Console
                 //Type of pokemons not to transfer
                 _pokemonsNotToTransfer = _pokemonsNotToTransfer != null ? _pokemonsNotToTransfer : LoadPokemonList("Configs\\ConfigPokemonsToKeep.txt"); 
                 return _pokemonsNotToTransfer;
+            }
+        }
+
+        public ICollection<PokemonId> PokemonsNotToCatch
+        {
+            get
+            {
+                //Do not catch those
+
+                return new[]
+                {
+                    //add pokemon here
+                   PokemonId.Pidgey,
+                   PokemonId.Rattata
+                };
+
             }
         }
     }
