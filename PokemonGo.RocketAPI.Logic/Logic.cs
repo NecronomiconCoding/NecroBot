@@ -253,6 +253,11 @@ namespace PokemonGo.RocketAPI.Logic
                     Logger.Write("InvalidResponseException - Restarting", LogLevel.Error);
                     await Execute();
                 }
+                catch (AggregateException)
+                {
+                    Logger.Write("AggregateException - Restarting", LogLevel.Error);
+                    await Execute();
+                }
                 await Task.Delay(10000);
             }
         }
