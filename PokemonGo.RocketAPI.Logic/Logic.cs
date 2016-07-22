@@ -294,12 +294,14 @@ namespace PokemonGo.RocketAPI.Logic
                                 new Navigation.Location(_client.CurrentLat, _client.CurrentLng),
                                 new Navigation.Location(i.Latitude, i.Longitude)));
 
+            HashSet<string> hsEncounterHappened = new HashSet<string>();
+
             foreach (var pokemon in pokemons)
             {
                 var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
                     pokemon.Latitude, pokemon.Longitude);
                 await Task.Delay(distance > 100 ? 15000 : 500);
-
+                hsEncounterHappened.Add(pokemon.EncounterId.ToString());
                 var encounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
                 await Task.Delay(10000);
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
@@ -318,16 +320,20 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var pokemon in pokemons2)
             {
+                if (hsEncounterHappened.Contains(pokemon.EncounterId.ToString()))
+                    continue;
                 var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
                     pokemon.Latitude, pokemon.Longitude);
                 await Task.Delay(distance > 100 ? 15000 : 500);
-
+                hsEncounterHappened.Add(pokemon.EncounterId.ToString());
                 var encounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
                 await Task.Delay(10000);
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                     await CatchEncounter(encounter, pokemon);
                 else
                     Logger.Write($"Encounter problem: {encounter?.Status}");
+
+                Logger.Write($"Encounter problem: new wild pokemon good work");
             }
 
             //  await Task.Delay(_clientSettings.DelayBetweenMove);
