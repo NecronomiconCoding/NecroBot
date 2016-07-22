@@ -83,7 +83,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             var myPokemon = await GetPokemons();
             var pokemons = myPokemon.ToList();
-            return pokemons.OrderByDescending(x => Logic.Perfect(x)).Take(limit);
+            return pokemons.OrderByDescending(x => Logic.CalculatePokemonPerfection(x)).Take(limit);
         }
 
         public async Task<int> GetHighestCPofType(PokemonData pokemon)
