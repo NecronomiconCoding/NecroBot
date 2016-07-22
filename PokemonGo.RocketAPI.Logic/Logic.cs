@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using AllEnum;
 using PokemonGo.RocketAPI.Enums;
@@ -28,12 +27,13 @@ namespace PokemonGo.RocketAPI.Logic
             _inventory = new Inventory(_client);
             _navigation = new Navigation(_client);
         }
-
+        
         public async Task Execute()
         {
             Git.CheckVersion();
-
-            Logger.Write($"Starting Execute on login server: {_clientSettings.AuthType}", LogLevel.Info);
+            Logger.Write($"Make sure Lat & Lng is right. Exit Program if not! Lat: {_clientSettings.DefaultLatitude} Lng: {_clientSettings.DefaultLongitude}", LogLevel.Warning);
+            Thread.Sleep(3000);
+            Logger.Write($"Logging in via: {_clientSettings.AuthType}", LogLevel.Info);
 
             while (true)
             {
