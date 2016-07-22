@@ -414,6 +414,8 @@ namespace PokemonGo.RocketAPI.Logic
                 {
                     foreach (var vrloc in vrList)
                     {
+                        if (hsGonaLocations.Contains(vrloc))
+                            continue;
                         double dblLat;
                         double dblLong;
 
