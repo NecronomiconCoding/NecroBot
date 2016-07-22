@@ -31,7 +31,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         public async Task Execute()
         {
-            await Git.CheckVersion();
+            Git.CheckVersion();
 
             Logger.Write($"Starting Execute on login server: {_clientSettings.AuthType}", LogLevel.Info);
 
