@@ -463,6 +463,58 @@ namespace PokemonGo.RocketAPI.Logic
 
                     }
 
+
+                    var mapObjectsMine = await _client.GetMapObjects();
+
+                    var pokeStopsMine =
+                        mapObjectsMine.MapCells.SelectMany(ir => ir.Forts)
+                            .Where(
+                                ir =>
+                                    ir.Type == FortType.Checkpoint &&
+                                    ir.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
+                            .OrderBy(
+                                ir =>
+                                    LocationUtils.CalculateDistanceInMeters(
+                                        new Navigation.Location(_client.CurrentLat, _client.CurrentLng),
+                                        new Navigation.Location(ir.Latitude, ir.Longitude)));
+
+                    foreach (var pokeStop in pokeStopsMine)
+                    {
+                        var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
+                            pokeStop.Latitude, pokeStop.Longitude);
+
+                        if(distance<200)
+                        {
+                            var update =
+    await
+        _navigation.HumanLikeWalking(new Navigation.Location(pokeStop.Latitude, pokeStop.Longitude),
+            _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+
+                            var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                            var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                            Logger.Write($"{fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
+                            if (fortSearch.ExperienceAwarded > 0)
+                            {
+                                Logger.Write(
+                                    $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
+                                    LogLevel.Pokestop);
+                                await DisplayPlayerLevelInTitle(true);
+                            }
+
+
+                            Logger.Write($"(POKESTOP): {fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
+
+                            if (fortSearch.ExperienceAwarded > 0)
+                                Logger.Write(
+                                    $"(POKESTOP) XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
+                                    LogLevel.Info, ConsoleColor.Magenta);
+
+                            await Task.Delay(1000);
+                            await RecycleItems();
+                            await ExecuteCatchAllNearbyPokemons();
+                        }
+                    }
+
                     Logger.Write("(LOCATION) loop " + irLoop + " target: " + srMinDistLoc, LogLevel.Info, ConsoleColor.DarkGreen);
 
                     if (dblMinDistLat > 0 && dblMinDistLng > 0)
