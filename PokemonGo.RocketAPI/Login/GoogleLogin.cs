@@ -47,6 +47,8 @@ namespace PokemonGo.RocketAPI.Login
 
             Logger.Write($"Please visit {deviceCode.verification_url} and enter {deviceCode.user_code}", LogLevel.None);
             
+            await Task.Delay(2000);
+            
             Process.Start(@"http://www.google.com/device"); 
             Thread thread = new Thread(() => Clipboard.SetText(deviceCode.user_code)); //Copy device code
             thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
