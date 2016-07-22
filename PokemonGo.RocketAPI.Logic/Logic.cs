@@ -52,8 +52,34 @@ namespace PokemonGo.RocketAPI.Logic
                 {
                     Logger.Write($"Access token expired", LogLevel.Info);
                 }
+                catch (TaskCanceledException)
+                {
+                    Logger.Write("Task Canceled Exception - Restarting", LogLevel.Error);
+                    await Execute();
+                }
+                catch (UriFormatException)
+                {
+                    Logger.Write("UriFormatException - Restarting", LogLevel.Error);
+                    await Execute();
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Logger.Write("ArgumentOutOfRangeException - Restarting", LogLevel.Error);
+                    await Execute();
+                }
+                catch (ArgumentNullException)
+                {
+                    Logger.Write("ArgumentNullException - Restarting", LogLevel.Error);
+                    await Execute();
+                }
+                catch (NullReferenceException)
+                {
+                    Logger.Write("NullReferenceException - Restarting", LogLevel.Error);
+                    await Execute();
+                }
                 await Task.Delay(10000);
             }
+
         }
 
         public async Task PostLoginExecute()
