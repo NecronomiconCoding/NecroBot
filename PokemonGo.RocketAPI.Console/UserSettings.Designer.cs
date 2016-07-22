@@ -145,7 +145,7 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool EvolveAllPokemonWithEnoughCandy {
             get {
                 return ((bool)(this["EvolveAllPokemonWithEnoughCandy"]));
@@ -164,6 +164,30 @@ namespace PokemonGo.RocketAPI.Console {
             }
             set {
                 this["TransferDuplicatePokemon"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5000")]
+        public int DelayBetweenMove {
+            get {
+                return ((int)(this["DelayBetweenMove"]));
+            }
+            set {
+                this["DelayBetweenMove"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UsePokemonToNotCatchFilter {
+            get {
+                return ((bool)(this["UsePokemonToNotCatchFilter"]));
+            }
+            set {
+                this["UsePokemonToNotCatchFilter"] = value;
             }
         }
     }

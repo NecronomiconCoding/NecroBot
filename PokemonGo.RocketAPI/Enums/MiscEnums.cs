@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PokemonGo.RocketAPI.GeneratedCode
+﻿namespace PokemonGo.RocketAPI.Enums
 {
     public class MiscEnums
     {
-        public enum FortType 
+        public enum FortType
         {
             GYM = 0,
             CHECKPOINT = 1
