@@ -394,9 +394,14 @@ namespace PokemonGo.RocketAPI.Logic
             }
             else
             {
+                HashSet<string> hsGonaLocations = new HashSet<string>();
                 var vrList = fucnReturnLocs();
                 Logger.Write("(LOCATION) found count " + vrList.Count, LogLevel.Info, ConsoleColor.DarkGreen);
                 int irLoop = 1;
+                double dblMinDistance = 909999292;
+                double dblMinDistLat = 0;
+                double dblMinDistLng = 0;
+
                 foreach (var vrloc in vrList)
                 {
                     double dblLat;
@@ -405,17 +410,31 @@ namespace PokemonGo.RocketAPI.Logic
                     double.TryParse(vrloc.Split(';')[0], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLat);
                     double.TryParse(vrloc.Split(';')[1], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLong);
 
-
                     if (dblLat < 1 || dblLong < 1)
                     {
                         continue;
                     }
 
-                    Logger.Write("(LOCATION) loop " + irLoop, LogLevel.Info, ConsoleColor.DarkGreen);
+                    var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
+            dblLat, dblLong);
 
+                    if (distance > dblMinDistance)
+                    {
+                        dblMinDistance = distance;
+                        dblMinDistLat = dblLat;
+                        dblMinDistLng = dblLong;
+                    }
+
+                }
+
+                Logger.Write("(LOCATION) loop " + irLoop, LogLevel.Info, ConsoleColor.DarkGreen);
+
+                if (dblMinDistLat > 0 && dblMinDistLng > 0)
+                {
+                    hsGonaLocations.Add(dblMinDistLat + ";" + dblMinDistLng);
                     var update =
     await
-        _navigation.HumanLikeWalking(new Navigation.Location(dblLat, dblLong),
+        _navigation.HumanLikeWalking(new Navigation.Location(dblMinDistLat, dblMinDistLng),
             _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
 
                     await ExecuteCatchAllNearbyPokemons();
@@ -505,8 +524,8 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var item in items)
             {
-                var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                Logger.Write($"{item.Count}x {(ItemId) item.Item_}", LogLevel.Recycling);
+                var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
+                Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
 
                 await Task.Delay(500);
             }
