@@ -178,5 +178,17 @@ namespace PokemonGo.RocketAPI.Console {
                 this["DelayBetweenMove"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UsePokemonToNotCatchFilter {
+            get {
+                return ((bool)(this["UsePokemonToNotCatchFilter"]));
+            }
+            set {
+                this["UsePokemonToNotCatchFilter"] = value;
+            }
+        }
     }
 }

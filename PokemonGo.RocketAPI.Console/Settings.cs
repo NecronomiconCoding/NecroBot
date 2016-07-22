@@ -23,6 +23,7 @@ namespace PokemonGo.RocketAPI.Console
         public bool EvolveAllPokemonWithEnoughCandy => UserSettings.Default.EvolveAllPokemonWithEnoughCandy;
         public bool TransferDuplicatePokemon => UserSettings.Default.TransferDuplicatePokemon;
         public int DelayBetweenMove => UserSettings.Default.DelayBetweenMove;
+        public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
 
         public string GoogleRefreshToken
         {
@@ -139,6 +140,22 @@ namespace PokemonGo.RocketAPI.Console
                     PokemonId.Mew,
                     PokemonId.Mewtwo
                 };
+            }
+        }
+
+        public ICollection<PokemonId> PokemonsNotToCatch
+        {
+            get
+            {
+                //Do not catch those
+                
+                return new[]
+                {
+                    //add pokemon here
+                   PokemonId.Pidgey,
+                   PokemonId.Rattata
+                };
+                
             }
         }
     }

@@ -42,6 +42,13 @@ namespace PokemonGo.RocketAPI.Logic
             CatchPokemonResponse caughtPokemonResponse;
             do
             {
+                if (_clientSettings.UsePokemonToNotCatchFilter &&
+                    pokemon.PokemonId.Equals(
+                        _clientSettings.PokemonsNotToCatch.FirstOrDefault(i => i == pokemon.PokemonId)))
+                {
+                    Logger.Write("Skipped " + pokemon.PokemonId);
+                    return;
+                }
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
                 if ((probability.HasValue && probability.Value < 0.35 && encounter?.WildPokemon?.PokemonData?.Cp > 400) ||
                     CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >= _clientSettings.KeepMinIVPercentage)

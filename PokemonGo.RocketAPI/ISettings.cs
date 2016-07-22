@@ -23,10 +23,13 @@ namespace PokemonGo.RocketAPI
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool TransferDuplicatePokemon { get; }
         int DelayBetweenMove { get; }
+        bool UsePokemonToNotCatchFilter { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
 
         ICollection<PokemonId> PokemonsNotToTransfer { get; }
+
+        ICollection<PokemonId> PokemonsNotToCatch { get; }
     }
 }
