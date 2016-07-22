@@ -77,7 +77,7 @@ namespace PokemonGo.RocketAPI.Logic
             if (playerStat != null)
             {
                 var message =
-                    $"Character Level {playerName} {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp:0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp:0} XP)";
+                    $" {playerName} | Level {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp:0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp:0} XP)";
                 Console.Title = message;
                 if (updateOnly == false)
                     Logger.Write(message);
