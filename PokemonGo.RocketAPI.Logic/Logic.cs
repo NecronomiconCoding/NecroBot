@@ -440,7 +440,7 @@ namespace PokemonGo.RocketAPI.Logic
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
                 PokemonData bestPokemonOfType = await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
                 Logger.Write(
-                    $"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")}\t% perfect) CP (Best: {bestPokemonOfType.Id} | ({CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")}\t% perfect))",
+                    $"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")}\t% perfect) CP (Best: {bestPokemonOfType.Cp} | ({CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")}\t% perfect))",
                     LogLevel.Transfer);
                 await Task.Delay(500);
             }
