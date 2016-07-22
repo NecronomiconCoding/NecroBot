@@ -25,7 +25,7 @@ namespace PokemonGo.RocketAPI
         private AuthType _authType = AuthType.Google;
         private Request.Types.UnknownAuth _unknownAuth;
 
-        public static bool blUseMySystem = true;
+        public static bool blUseMySystem = false;
         public static double marinaLat = 36.77120;
         public static double marinaLng = 34.57015;
 
