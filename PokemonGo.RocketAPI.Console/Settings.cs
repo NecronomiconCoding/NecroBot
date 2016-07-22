@@ -12,7 +12,7 @@ namespace PokemonGo.RocketAPI.Console
 {
     public class Settings : ISettings
     {
-        public AuthType AuthType => (AuthType) Enum.Parse(typeof (AuthType), UserSettings.Default.AuthType, true);
+        public AuthType AuthType => (AuthType)Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         public string PtcUsername => UserSettings.Default.PtcUsername;
         public string PtcPassword => UserSettings.Default.PtcPassword;
         public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
@@ -87,8 +87,8 @@ namespace PokemonGo.RocketAPI.Console
                 var pokemonName = tr.ReadLine();
                 while (pokemonName != null)
                 {
-                    var pokemon = Enum.Parse(typeof (PokemonId), pokemonName, true);
-                    if (pokemon != null) result.Add((PokemonId) pokemon);
+                    var pokemon = Enum.Parse(typeof(PokemonId), pokemonName, true);
+                    if (pokemon != null) result.Add((PokemonId)pokemon);
                     pokemonName = tr.ReadLine();
                 }
             }
