@@ -61,9 +61,9 @@ namespace PokemonGo.RocketAPI.Logic
                             pokemon.Longitude, pokeball);
                 Logger.Write(
                     caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess
-                        ? $"(CATCH) {pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) ({Math.Round(CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfection) | Chance: {encounter?.CaptureProbability.CaptureProbability_.First()} | {Math.Round(distance)}m distance | with {pokeball} "
+                        ? $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) ({Math.Round(CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfection) | Chance: {encounter?.CaptureProbability.CaptureProbability_.First()} | {Math.Round(distance)}m distance | with {pokeball} "
                         : $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()))} | {Math.Round(distance)}m distance {caughtPokemonResponse.Status} | with {pokeball}",
-                    LogLevel.Info, ConsoleColor.DarkCyan);
+                    LogLevel.Caught);
                 await Task.Delay(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
@@ -211,12 +211,12 @@ namespace PokemonGo.RocketAPI.Logic
                 var evolvePokemonOutProto = await _client.EvolvePokemon(pokemon.Id);
 
                 if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
-                    Logger.Write($"(EVOLVE) {pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp",
-                        LogLevel.Info, ConsoleColor.DarkYellow);
+                    Logger.Write($"{pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp",
+                        LogLevel.Evolve);
                 else
                     Logger.Write(
-                        $"(EVOLVE) Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
-                        LogLevel.Info);
+                        $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
+                        LogLevel.Evolve);
 
                 await Task.Delay(3000);
             }
@@ -405,12 +405,22 @@ namespace PokemonGo.RocketAPI.Logic
                     double.TryParse(vrloc.Split(';')[0], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLat);
                     double.TryParse(vrloc.Split(';')[1], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLong);
 
+<<<<<<< HEAD
                     if (dblLat < 1 || dblLong < 1)
                     {
                         continue;
                     }
 
                     Logger.Write("(LOCATION) loop " + irLoop, LogLevel.Info, ConsoleColor.DarkGreen);
+=======
+                var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                Logger.Write($"{fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
+                if (fortSearch.ExperienceAwarded > 0)
+                    Logger.Write(
+                        $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
+                        LogLevel.Pokestop);
+>>>>>>> refs/remotes/NecronomiconCoding/master
 
                     var update =
     await
@@ -504,10 +514,15 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var item in items)
             {
+<<<<<<< HEAD
                 var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
 
                 Logger.Write($"(RECYCLE) {item.Count}x {(ItemId)item.Item_}", LogLevel.Info, ConsoleColor.Blue);
 
+=======
+                var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
+                Logger.Write($"{item.Count}x {(ItemId) item.Item_}", LogLevel.Recycling);
+>>>>>>> refs/remotes/NecronomiconCoding/master
                 await Task.Delay(500);
             }
         }
@@ -534,8 +549,8 @@ namespace PokemonGo.RocketAPI.Logic
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
                 var bestPokemonOfType = await _inventory.GetHighestCPofType(duplicatePokemon);
                 Logger.Write(
-                    $"(TRANSFER) {duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} CP (Best: {bestPokemonOfType})",
-                    LogLevel.Info, ConsoleColor.DarkGreen);
+                    $"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} CP (Best: {bestPokemonOfType})",
+                    LogLevel.Transfer);
                 await Task.Delay(500);
             }
         }
@@ -550,7 +565,7 @@ namespace PokemonGo.RocketAPI.Logic
                 return;
 
             var useRaspberry = await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
-            Logger.Write($"(BERRY) Used, remaining: {berry.Count}", LogLevel.Info, ConsoleColor.DarkMagenta);
+            Logger.Write($"Used, remaining: {berry.Count}", LogLevel.Berry);
             await Task.Delay(3000);
         }
 
