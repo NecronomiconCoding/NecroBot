@@ -453,6 +453,9 @@ namespace PokemonGo.RocketAPI.Logic
                         await ExecuteCatchAllNearbyPokemons();
                         if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
                         irLoop++;
+                        dblMinDistance = 9999999;
+                        dblMinDistLat = 0;
+                        dblMinDistLng = 0;
                     }
                 }
             }
