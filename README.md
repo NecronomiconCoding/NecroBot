@@ -1,17 +1,14 @@
-# Pokemon Go API Client Library #
+# Pokemon Go Bot & API Client Library #
 
 
 ## About
 
-Chat about this Repository via Discord: https://discord.gg/5CMa3CY
-
-**GitHub issues will be deleted if they are not API related.**
-
+Chat about this Repository via Discord: https://discord.gg/CWFRh
 
 
 ## Features
 
-Note: There is a list of feature requests [here](https://github.com/FeroxRev/Pokemon-Go-Rocket-API/wiki/Feature-requests).
+Feature Requests: NOT accepting any for now
 
 ```
 #PTC Login / Google
@@ -23,6 +20,7 @@ Note: There is a list of feature requests [here](https://github.com/FeroxRev/Pok
 #Evolve all pokemons
 #Throws away unneeded items
 #Humanlike Walking
+#Evolve and Transfer toggle in Settings
 
 ```
 
@@ -31,7 +29,7 @@ Note: You need some basic Computer Expierience, if you need help somewhere, ask 
 
 
 1. Download and Install [Visual Studio 2015](https://go.microsoft.com/fwlink/?LinkId=691979&clcid=0x407)
-2. Download [this Repository](https://github.com/FeroxRev/Pokemon-Go-Rocket-API/archive/master.zip)
+2. Download [this Repository](https://github.com/NecronomiconCoding/Pokemon-Go-Bot/archive/master.zip)
 3. Open Pokemon Go Rocket API.sln
 4. On the right hand side, double click on UserSettings.settings
 5. Enter the DefaultLatitude and DefaultLongitude [can be found here](http://mondeca.com/index.php/en/any-place-en)
@@ -44,10 +42,10 @@ Note: You need some basic Computer Expierience, if you need help somewhere, ask 
 ## License
 This Project is licensed as GNU (GNU GENERAL PUBLIC LICENSE v3) 
 
-You can find all necessary Information [here](https://github.com/FeroxRev/Pokemon-Go-Rocket-API/blob/master/LICENSE.md)
+You can find all necessary Information [here](https://github.com/NecronomiconCoding/Pokemon-Go-Bot/blob/master/LICENSE.md)
 
 
-# Pokemon-Go-Rocket-API
+# Pokemon-Go-RocketAPI
 Note: To use the API you have to be an experienced Developer, do not touch or modify Project Files if you are not experienced.
 
 Example:
