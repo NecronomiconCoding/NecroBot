@@ -405,7 +405,7 @@ namespace PokemonGo.RocketAPI.Logic
                 var vrList = fucnReturnLocs();
                 Logger.Write("(LOCATION) found count " + vrList.Count, LogLevel.Info, ConsoleColor.DarkGreen);
                 int irLoop = 1;
-                double dblMinDistance = 0;
+                double dblMinDistance = 9999999;
                 double dblMinDistLat = 0;
                 double dblMinDistLng = 0;
                 string srMinDistLoc = "na";
@@ -426,7 +426,7 @@ namespace PokemonGo.RocketAPI.Logic
                     var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
             dblLat, dblLong);
 
-                    if (distance > dblMinDistance)
+                    if (distance < dblMinDistance)
                     {
                         dblMinDistance = distance;
                         dblMinDistLat = dblLat;
