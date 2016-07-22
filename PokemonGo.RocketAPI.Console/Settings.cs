@@ -22,7 +22,7 @@ namespace PokemonGo.RocketAPI.Console
         public double WalkingSpeedInKilometerPerHour => UserSettings.Default.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => UserSettings.Default.EvolveAllPokemonWithEnoughCandy;
         public bool TransferDuplicatePokemon => UserSettings.Default.TransferDuplicatePokemon;
-
+        public int DelayBetweenMove => UserSettings.Default.DelayBetweenMove;
 
         public string GoogleRefreshToken
         {
