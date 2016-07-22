@@ -39,22 +39,27 @@ namespace PokemonGo.RocketAPI.Console
             {
                 case LogLevel.Error:
                     System.Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine($"[{ DateTime.Now.ToString("HH:mm:ss")}] (ERROR) { message}");
                     break;
                 case LogLevel.Warning:
                     System.Console.ForegroundColor = ConsoleColor.Yellow;
+                    System.Console.WriteLine($"[{ DateTime.Now.ToString("HH:mm:ss")}] (WARNING) { message}");
                     break;
                 case LogLevel.Info:
-                    System.Console.ForegroundColor = ConsoleColor.Green;
+                    System.Console.ForegroundColor = ConsoleColor.Gray;
+                    System.Console.WriteLine($"[{ DateTime.Now.ToString("HH:mm:ss")}] (INFO) { message}");
                     break;
                 case LogLevel.Debug:
                     System.Console.ForegroundColor = ConsoleColor.Gray;
+                    System.Console.WriteLine($"[{ DateTime.Now.ToString("HH:mm:ss")}] (DEBUG) { message}");
                     break;
                 default:
                     System.Console.ForegroundColor = ConsoleColor.White;
+                    System.Console.WriteLine($"[{ DateTime.Now.ToString("HH:mm:ss")}] (ERROR) { message}");
                     break;
             }
             
-            System.Console.WriteLine($"[{ DateTime.Now.ToString("HH:mm:ss")}] { message}");
+            
         }
     }
 }

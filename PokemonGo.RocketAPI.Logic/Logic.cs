@@ -220,19 +220,19 @@ namespace PokemonGo.RocketAPI.Logic
             var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
             var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
 
-            if (masterBallsCount > 0 && pokemonCp >= 1000)
+            if (masterBallsCount > 0 && pokemonCp >= 1500)
                 return MiscEnums.Item.ITEM_MASTER_BALL;
-            else if (ultraBallsCount > 0 && pokemonCp >= 1000)
+            else if (ultraBallsCount > 0 && pokemonCp >= 1500)
+                return MiscEnums.Item.ITEM_ULTRA_BALL;
+            else if (greatBallsCount > 0 && pokemonCp >= 1500)
+                return MiscEnums.Item.ITEM_GREAT_BALL;
+
+            if (ultraBallsCount > 0 && pokemonCp >= 1000)
                 return MiscEnums.Item.ITEM_ULTRA_BALL;
             else if (greatBallsCount > 0 && pokemonCp >= 1000)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
-            if (ultraBallsCount > 0 && pokemonCp >= 600)
-                return MiscEnums.Item.ITEM_ULTRA_BALL;
-            else if (greatBallsCount > 0 && pokemonCp >= 600)
-                return MiscEnums.Item.ITEM_GREAT_BALL;
-
-            if (greatBallsCount > 0 && pokemonCp >= 350)
+            if (greatBallsCount > 0 && pokemonCp >= 6000)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
             if (pokeBallsCount > 0)
