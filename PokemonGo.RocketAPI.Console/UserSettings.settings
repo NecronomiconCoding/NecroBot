@@ -33,7 +33,7 @@
       <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="EvolveAllPokemonWithEnoughCandy" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="TransferDuplicatePokemon" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

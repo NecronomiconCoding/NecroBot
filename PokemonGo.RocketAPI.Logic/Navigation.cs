@@ -23,7 +23,7 @@ namespace PokemonGo.RocketAPI.Logic
 
             Location sourceLocation = new Location(_client.CurrentLat, _client.CurrentLng);
             var distanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
-            Logger.Write($"Distance to target location: {distanceToTarget:0.##} meters. Will take {distanceToTarget/speedInMetersPerSecond:0.##} seconds!", LogLevel.Info);
+           // Logger.Write($"Distance to target location: {distanceToTarget:0.##} meters. Will take {distanceToTarget/speedInMetersPerSecond:0.##} seconds!", LogLevel.Info);
 
             double nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
             double nextWaypointDistance = speedInMetersPerSecond;
@@ -44,17 +44,17 @@ namespace PokemonGo.RocketAPI.Logic
                 {
                     if (speedInMetersPerSecond > speedDownTo)
                     {
-                        Logger.Write("We are within 40 meters of the target. Speeding down to 10 km/h to not pass the target.", LogLevel.Info);
+                        //Logger.Write("We are within 40 meters of the target. Speeding down to 10 km/h to not pass the target.", LogLevel.Info);
                         speedInMetersPerSecond = speedDownTo;
                     }
                     else
                     {
-                        Logger.Write("We are within 40 meters of the target, attempting to interact.", LogLevel.Info);
+                       // Logger.Write("We are within 40 meters of the target, attempting to interact.", LogLevel.Info);
                     }
                 }
                 else
                 {
-                    Logger.Write($"Distance to target location: {LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation):0.##} meters.", LogLevel.Debug);
+                    //Logger.Write($"Distance to target location: {LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation):0.##} meters.", LogLevel.Debug);
                 }
 
                 nextWaypointDistance = Math.Min(currentDistanceToTarget, millisecondsUntilGetUpdatePlayerLocationResponse / 1000 * speedInMetersPerSecond);
