@@ -5,13 +5,10 @@
 
 Chat about this Repository via Discord: https://discord.gg/VsVrjgr
 
-**GitHub issues will be deleted if they are not API related.**
 
 
 
 ## Features
-
-Note: There is a list of feature requests [here](https://github.com/FeroxRev/Pokemon-Go-Rocket-API/wiki/Feature-requests).
 
 ```
 #PTC Login / Google
