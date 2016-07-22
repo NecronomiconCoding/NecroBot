@@ -440,7 +440,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                     }
 
-                    Logger.Write("(LOCATION) loop " + irLoop, LogLevel.Info, ConsoleColor.DarkGreen);
+                    Logger.Write("(LOCATION) loop " + irLoop + " target: " + srMinDistLoc, LogLevel.Info, ConsoleColor.DarkGreen);
 
                     if (dblMinDistLat > 0 && dblMinDistLng > 0)
                     {
