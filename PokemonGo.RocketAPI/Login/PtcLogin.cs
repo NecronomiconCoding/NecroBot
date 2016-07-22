@@ -29,6 +29,10 @@ namespace PokemonGo.RocketAPI.Login
                 var sessionResp = await tempHttpClient.GetAsync(Resources.PtcLoginUrl);
                 var data = await sessionResp.Content.ReadAsStringAsync();
                 if (data == null) throw new PtcOfflineException();
+
+                if (sessionResp.StatusCode == HttpStatusCode.InternalServerError || data.Contains("<title>Maintenance"))
+                    throw new PtcOfflineException();
+
                 var lt = JsonHelper.GetValue(data, "lt");
                 var executionId = JsonHelper.GetValue(data, "execution");
 

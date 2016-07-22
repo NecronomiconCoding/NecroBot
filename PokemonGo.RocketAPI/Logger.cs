@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.IO;
 using PokemonGo.RocketAPI.Logging;
 
 #endregion
@@ -23,6 +24,7 @@ namespace PokemonGo.RocketAPI
         public static void SetLogger(ILogger logger)
         {
             Logger.logger = logger;
+            Log($"Initializing Rocket logger at time {DateTime.Now}...");
         }
 
         /// <summary>
@@ -36,6 +38,17 @@ namespace PokemonGo.RocketAPI
             if (logger == null)
                 return;
             logger.Write(message, level, color);
+            Log(String.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
+        }
+
+        private static void Log(string message)
+        {
+            // maybe do a new log rather than appending?
+            using (StreamWriter log = File.AppendText("log.txt"))
+            {
+                log.WriteLine(message);
+                log.Flush();
+            }
         }
     }
 

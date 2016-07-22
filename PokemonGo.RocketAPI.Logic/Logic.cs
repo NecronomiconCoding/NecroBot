@@ -105,13 +105,13 @@ namespace PokemonGo.RocketAPI.Logic
         private async Task DisplayPlayerLevelInTitle(bool updateOnly = false)
         {
             _playerProfile = _playerProfile.Profile != null ? _playerProfile : await _client.GetProfile();
-            var playerName = _playerProfile.Profile.Username != null ? _playerProfile.Profile.Username : "";
+            var playerName = _playerProfile.Profile.Username ?? "";
             var playerStats = await _inventory.GetPlayerStats();
             var playerStat = playerStats.FirstOrDefault();
             if (playerStat != null)
             {
                 var message =
-                    $"Character Level {playerName} {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp:0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp:0} XP)";
+                    $" {playerName} | Level {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp:0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp:0} XP)";
                 Console.Title = message;
                 if (updateOnly == false)
                     Logger.Write(message);
@@ -281,9 +281,10 @@ namespace PokemonGo.RocketAPI.Logic
                     Logger.Write("NullReferenceException - Restarting", LogLevel.Error);
                     await Execute();
                 }
-                catch (InvalidResponseException)
+                catch (InvalidResponseException e)
                 {
                     Logger.Write("InvalidResponseException - Restarting", LogLevel.Error);
+                    Logger.Write("err: " + e);
                     await Execute();
                 }
                 catch (AggregateException)
@@ -587,8 +588,6 @@ await
         {
             while (true)
             {
-                try
-                {
                     _playerProfile = await _client.GetProfile();
                     await DisplayPlayerLevelInTitle();
                     if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
@@ -607,16 +606,7 @@ await
             var inventory = await _client.GetInventory();
             var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
             */
-                }
-                catch (AccessTokenExpiredException)
-                {
-                    throw;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Write($"Exception: {ex}", LogLevel.Error);
-                }
-
+               
                 await Task.Delay(10000);
             }
         }
@@ -656,7 +646,7 @@ await
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
                 PokemonData bestPokemonOfType = await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
                 Logger.Write(
-                    $"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")}\t% perfect) CP (Best: {bestPokemonOfType.Id} | ({CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")}\t% perfect))",
+                    $"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")} % perfect) CP (Best: {bestPokemonOfType.Cp} | ({CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")} % perfect))",
                     LogLevel.Transfer);
                 await Task.Delay(500);
             }
