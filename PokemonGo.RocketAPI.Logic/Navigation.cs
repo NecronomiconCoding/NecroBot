@@ -31,8 +31,7 @@ namespace PokemonGo.RocketAPI.Logic
             return d;
         }
 
-        public async Task<PlayerUpdateResponse> HumanLikeWalking(Location targetLocation,
-            double walkingSpeedInKilometersPerHour)
+       public async Task<PlayerUpdateResponse> HumanLikeWalking(Location targetLocation, double walkingSpeedInKilometersPerHour, Func<Task> functionExecutedWhileWalking)
         {
             var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
 
@@ -50,6 +49,8 @@ namespace PokemonGo.RocketAPI.Logic
                 await
                     _client.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude, _client.Settings.DefaultAltitude);
 
+           if (functionExecutedWhileWalking != null)
+               await functionExecutedWhileWalking();
             do
             {
                 var millisecondsUntilGetUpdatePlayerLocationResponse =
