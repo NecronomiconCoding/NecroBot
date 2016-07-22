@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region
+
+using System;
 using PokemonGo.RocketAPI.Logging;
+
+#endregion
 
 namespace PokemonGo.RocketAPI.Console
 {
-
     /// <summary>
-    /// The ConsoleLogger is a simple logger which writes all logs to the Console.
+    ///     The ConsoleLogger is a simple logger which writes all logs to the Console.
     /// </summary>
     public class ConsoleLogger : ILogger
     {
-        private LogLevel maxLogLevel;
+        private readonly LogLevel maxLogLevel;
 
         /// <summary>
-        /// To create a ConsoleLogger, we must define a maximum log level.
-        /// All levels above won't be logged.
+        ///     To create a ConsoleLogger, we must define a maximum log level.
+        ///     All levels above won't be logged.
         /// </summary>
         /// <param name="maxLogLevel"></param>
         public ConsoleLogger(LogLevel maxLogLevel)
@@ -26,10 +25,10 @@ namespace PokemonGo.RocketAPI.Console
         }
 
         /// <summary>
-        /// Log a specific message by LogLevel. Won't log if the LogLevel is greater than the maxLogLevel set.
+        ///     Log a specific message by LogLevel. Won't log if the LogLevel is greater than the maxLogLevel set.
         /// </summary>
         /// <param name="message">The message to log. The current time will be prepended.</param>
-        /// <param name="level">Optional. Default <see cref="LogLevel.Info"/>.</param>
+        /// <param name="level">Optional. Default <see cref="LogLevel.Info" />.</param>
         public void Write(string message, LogLevel level = LogLevel.Info)
         {
             if (level > maxLogLevel)
@@ -39,27 +38,25 @@ namespace PokemonGo.RocketAPI.Console
             {
                 case LogLevel.Error:
                     System.Console.ForegroundColor = ConsoleColor.Red;
-                    System.Console.WriteLine($"[{ DateTime.Now.ToString("HH:mm:ss")}] (ERROR) { message}");
+                    System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ERROR) {message}");
                     break;
                 case LogLevel.Warning:
                     System.Console.ForegroundColor = ConsoleColor.Yellow;
-                    System.Console.WriteLine($"[{ DateTime.Now.ToString("HH:mm:ss")}] (WARNING) { message}");
+                    System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (WARNING) {message}");
                     break;
                 case LogLevel.Info:
                     System.Console.ForegroundColor = ConsoleColor.Gray;
-                    System.Console.WriteLine($"[{ DateTime.Now.ToString("HH:mm:ss")}] (INFO) { message}");
+                    System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (INFO) {message}");
                     break;
                 case LogLevel.Debug:
                     System.Console.ForegroundColor = ConsoleColor.Gray;
-                    System.Console.WriteLine($"[{ DateTime.Now.ToString("HH:mm:ss")}] (DEBUG) { message}");
+                    System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (DEBUG) {message}");
                     break;
                 default:
                     System.Console.ForegroundColor = ConsoleColor.White;
-                    System.Console.WriteLine($"[{ DateTime.Now.ToString("HH:mm:ss")}] (ERROR) { message}");
+                    System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ERROR) {message}");
                     break;
             }
-            
-            
         }
     }
 }

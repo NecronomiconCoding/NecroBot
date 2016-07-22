@@ -1,9 +1,12 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace PokemonGo.RocketAPI.Helpers
 {
@@ -32,7 +35,8 @@ namespace PokemonGo.RocketAPI.Helpers
 
 
                 Logger.Write(
-                    "There is a new Version available: https://github.com/NecronomiconCoding/Pokemon-Go-Bot", LogLevel.Warning);
+                    "There is a new Version available: https://github.com/NecronomiconCoding/Pokemon-Go-Bot",
+                    LogLevel.Warning);
                 Thread.Sleep(1000);
             }
             catch (Exception)

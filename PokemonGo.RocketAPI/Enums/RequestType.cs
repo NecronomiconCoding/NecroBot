@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PokemonGo.RocketAPI.Enums
+﻿namespace PokemonGo.RocketAPI.Enums
 {
     public enum RequestType
     {
@@ -78,6 +72,6 @@ namespace PokemonGo.RocketAPI.Enums
         SFIDA_UPDATE = 803,
         SFIDA_ACTION = 804,
         SFIDA_DOWSER = 805,
-        SFIDA_CAPTURE = 806,
+        SFIDA_CAPTURE = 806
     }
 }
