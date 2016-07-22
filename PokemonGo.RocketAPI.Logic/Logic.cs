@@ -77,12 +77,7 @@ namespace PokemonGo.RocketAPI.Logic
             var playerStat = playerStats.FirstOrDefault();
             if (playerStat != null)
             {
-                var message =
-<<<<<<< HEAD
-                    $"Character Level {playerName} {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp:0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp:0} XP)";
-=======
-                    $"Character Level {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp - GetXpDiff(playerStat.Level):0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp - GetXpDiff(playerStat.Level):0} XP)";
->>>>>>> refs/remotes/NecronomiconCoding/master
+                var message = $"Character {playerName} Level {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp - GetXpDiff(playerStat.Level):0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp - GetXpDiff(playerStat.Level):0} XP)";
                 Console.Title = message;
                 Logger.Write(message);
             }
