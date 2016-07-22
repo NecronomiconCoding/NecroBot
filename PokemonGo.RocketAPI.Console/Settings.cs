@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.IO;
 using System.Collections.Generic;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
@@ -24,6 +25,9 @@ namespace PokemonGo.RocketAPI.Console
         public bool TransferDuplicatePokemon => UserSettings.Default.TransferDuplicatePokemon;
         public int DelayBetweenMove => UserSettings.Default.DelayBetweenMove;
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
+
+        private ICollection<PokemonId> _pokemonsToEvolve;
+        private ICollection<PokemonId> _pokemonsNotToTransfer;
 
         public string GoogleRefreshToken
         {
@@ -75,71 +79,53 @@ namespace PokemonGo.RocketAPI.Console
                 };
             }
         }
+        private ICollection<PokemonId> LoadPokemonList(string filename)
+        {
+            ICollection<PokemonId> result = new List<PokemonId>();
 
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
+            {
+                Logger.Write($"Loading File: {filename}", LogLevel.Info);
+                TextReader tr;
+                tr = File.OpenText(filename);
+
+                var pokemonName = tr.ReadLine();
+                while (pokemonName != null)
+                {
+
+                    var pokemon = Enum.Parse(typeof(PokemonId), pokemonName, true);
+                    if (pokemon != null) result.Add((PokemonId)pokemon);
+                    pokemonName = tr.ReadLine();
+                }
+
+            }
+            else
+            {
+                Logger.Write($"File: {filename} not found, creating new...", LogLevel.Error);
+                using (StreamWriter w = File.AppendText(Directory.GetCurrentDirectory() + "\\" + filename)) { w.WriteLine(PokemonId.Mewtwo.ToString()); }
+            }
+
+
+            return result;
+
+        }
         public ICollection<PokemonId> PokemonsToEvolve
         {
             get
             {
                 //Type of pokemons to evolve
-                return new[]
-                {
-                    PokemonId.Rattata,
-                    PokemonId.Spearow,
-                    PokemonId.Ekans,
-                    PokemonId.Pikachu,
-                    PokemonId.Sandshrew,
-                    PokemonId.Clefable,
-                    PokemonId.Vulpix,
-                    PokemonId.Jigglypuff,
-                    PokemonId.Zubat,
-                    PokemonId.Paras,
-                    PokemonId.Venonat,
-                    PokemonId.Diglett,
-                    PokemonId.Meowth,
-                    PokemonId.Psyduck,
-                    PokemonId.Mankey,
-                    PokemonId.Tentacool,
-                    PokemonId.Ponyta,
-                    PokemonId.Slowpoke,
-                    PokemonId.Magnemite,
-                    PokemonId.Doduo,
-                    PokemonId.Seel,
-                    PokemonId.Grimer,
-                    PokemonId.Shellder,
-                    PokemonId.Drowzee,
-                    PokemonId.Krabby,
-                    PokemonId.Voltorb,
-                    PokemonId.Exeggcute,
-                    PokemonId.Cubone,
-                    PokemonId.Koffing,
-                    PokemonId.Rhyhorn,
-                    PokemonId.Horsea,
-                    PokemonId.Goldeen,
-                    PokemonId.Staryu,
-                    PokemonId.Omanyte,
-                    PokemonId.Kabuto,
-                    PokemonId.Pidgey,
-                    PokemonId.Weedle,
-                    PokemonId.Caterpie
-                };
+                _pokemonsToEvolve = _pokemonsToEvolve != null ? _pokemonsToEvolve : LoadPokemonList("Configs\\ConfigPokemonsToEvolve.txt");
+                return _pokemonsToEvolve;
             }
         }
-
+        
         public ICollection<PokemonId> PokemonsNotToTransfer
         {
             get
             {
                 //Type of pokemons not to transfer
-                return new[]
-                {
-                    PokemonId.Dragonite,
-                    PokemonId.Charizard,
-                    PokemonId.Zapdos,
-                    PokemonId.Snorlax,
-                    PokemonId.Alakhazam,
-                    PokemonId.Mew,
-                    PokemonId.Mewtwo
-                };
+                _pokemonsNotToTransfer = _pokemonsNotToTransfer != null ? _pokemonsNotToTransfer : LoadPokemonList("Configs\\ConfigPokemonsToKeep.txt"); 
+                return _pokemonsNotToTransfer;
             }
         }
 
@@ -148,14 +134,14 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Do not catch those
-                
+
                 return new[]
                 {
                     //add pokemon here
                    PokemonId.Pidgey,
                    PokemonId.Rattata
                 };
-                
+
             }
         }
     }
