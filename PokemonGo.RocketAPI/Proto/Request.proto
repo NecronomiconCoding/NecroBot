@@ -1,0 +1,108 @@
+﻿syntax = "proto3";
+
+package PokemonGo.RocketAPI.GeneratedCode;
+
+message Request {
+  int32 unknown1 = 1;
+  int64 rpc_id = 3;
+  repeated Requests requests = 4;
+  Unknown6 unknown6 = 6;
+  fixed64 latitude = 7;
+  fixed64 longitude = 8;
+  fixed64 altitude = 9;
+  AuthInfo auth = 10;
+  UnknownAuth unknownauth = 11;
+  int64 unknown12 = 12;
+
+  
+  message UnknownAuth {
+    bytes unknown71 = 1;
+    int64 timestamp = 2;
+    bytes unknown73 = 3;
+  }
+
+  message Requests {
+    int32 type = 1;
+    bytes message = 2;
+  }
+
+  message Unknown3 {
+    string unknown4 = 1;
+  }
+
+  message Unknown6 {
+    int32 unknown1 = 1;
+    Unknown2 unknown2 = 2;
+
+    message Unknown2 {
+      bytes unknown1 = 1;
+    }
+
+  }
+  
+  message AuthInfo {
+    string provider = 1;
+    JWT token = 2;
+
+    message JWT {
+      string contents = 1;
+      int32 unknown13  = 2;
+    }
+  }
+	message PlayerUpdateProto {
+	fixed64 Lat = 1;
+	fixed64 Lng = 2;
+	}
+
+	message MapObjectsRequest
+	{
+		bytes cellIds = 1;
+		bytes unknown14 = 2;
+		fixed64 latitude = 3;
+		fixed64 longitude = 4;
+	}
+
+	 message FortSearchRequest
+	{
+		bytes Id = 1;
+		fixed64 PlayerLatDegrees = 2;
+		fixed64 PlayerLngDegrees = 3;
+		fixed64 FortLatDegrees = 4;
+		fixed64 FortLngDegrees = 5;
+	}
+
+	message FortDetailsRequest
+	{
+  		bytes Id = 1;
+		fixed64 Latitude = 2;
+		fixed64 Longitude = 3;
+	}
+
+	 message EncounterRequest {
+		 fixed64 EncounterId = 1;
+		 string SpawnpointId = 2;
+		 fixed64 PlayerLatDegrees = 3;
+		 fixed64 PlayerLngDegrees = 4;
+	}
+
+	 message CatchPokemonRequest {
+		fixed64 EncounterId = 1;
+		int32 Pokeball = 2;
+		fixed64 NormalizedReticleSize = 3;
+		string SpawnPointGuid = 4;
+		int32 HitPokemon = 5;
+		fixed64 SpinModifier = 6;
+		fixed64 NormalizedHitPosition = 7;
+	}
+  
+	message SettingsGuid
+	{
+		bytes guid = 1;
+	}
+
+	message Time
+	{
+		int64 time = 1;
+	}
+
+}
