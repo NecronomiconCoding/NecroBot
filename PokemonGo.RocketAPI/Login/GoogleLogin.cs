@@ -36,6 +36,8 @@ namespace PokemonGo.RocketAPI.Login
                 tokenResponse = await PollSubmittedToken(deviceCode.device_code);
             } while (tokenResponse.access_token == null || tokenResponse.refresh_token == null);
 
+            Logger.Write($"Save the refresh token in your settings: {tokenResponse.refresh_token}", LogLevel.None);
+
             return tokenResponse;
         }
 
