@@ -272,12 +272,9 @@ namespace PokemonGo.RocketAPI.Logic
                 else
                     Logger.Write($"Encounter problem: {encounter?.Status}");
             }
-<<<<<<< HEAD
-  
-=======
             
-            await Task.Delay(_clientSettings.DelayBetweenMove);
->>>>>>> refs/remotes/NecronomiconCoding/master
+          //  await Task.Delay(_clientSettings.DelayBetweenMove);
+
         }
 
 
