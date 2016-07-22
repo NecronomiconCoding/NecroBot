@@ -70,7 +70,7 @@ namespace PokemonGo.RocketAPI.Logic
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
-<<<<<<< HEAD
+
         private async Task CatchEncounter(EncounterResponse encounter, WildPokemon pokemon)
         {
             CatchPokemonResponse caughtPokemonResponse;
@@ -101,10 +101,8 @@ namespace PokemonGo.RocketAPI.Logic
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
-        private async Task DisplayPlayerLevelInTitle()
-=======
+
         private async Task DisplayPlayerLevelInTitle(bool updateOnly = false)
->>>>>>> refs/remotes/NecronomiconCoding/master
         {
             _playerProfile = _playerProfile.Profile != null ? _playerProfile : await _client.GetProfile();
             var playerName = _playerProfile.Profile.Username != null ? _playerProfile.Profile.Username : "";
@@ -399,10 +397,6 @@ namespace PokemonGo.RocketAPI.Logic
                             _navigation.HumanLikeWalking(new Navigation.Location(pokeStop.Latitude, pokeStop.Longitude),
                                 _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
 
-<<<<<<< HEAD
-                    var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                    var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-=======
                 var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                 var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                 Logger.Write($"{fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
@@ -413,7 +407,7 @@ namespace PokemonGo.RocketAPI.Logic
                         LogLevel.Pokestop);
                     await DisplayPlayerLevelInTitle(true);
                 }
->>>>>>> refs/remotes/NecronomiconCoding/master
+
 
                     Logger.Write($"(POKESTOP): {fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
 
@@ -500,6 +494,8 @@ namespace PokemonGo.RocketAPI.Logic
             var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
             var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
 
+            Logger.Write($"poke ball ({pokeBallsCount}) , great ball ({greatBallsCount}) , ultra ball ({ultraBallsCount}) , master ball ({masterBallsCount}) ", LogLevel.Info);
+
             if (masterBallsCount > 0 && pokemonCp >= 2000)
                 return MiscEnums.Item.ITEM_MASTER_BALL;
             if (ultraBallsCount > 0 && pokemonCp >= 2000)
@@ -523,6 +519,8 @@ namespace PokemonGo.RocketAPI.Logic
                 return MiscEnums.Item.ITEM_ULTRA_BALL;
             if (masterBallsCount > 0)
                 return MiscEnums.Item.ITEM_MASTER_BALL;
+
+         
 
             return MiscEnums.Item.ITEM_UNKNOWN;
         }
