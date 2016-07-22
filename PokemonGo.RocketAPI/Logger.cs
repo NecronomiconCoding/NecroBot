@@ -33,9 +33,7 @@ namespace PokemonGo.RocketAPI
         /// <param name="color">Optional. Default is automatic color.</param>
         public static void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black)
         {
-            if (logger == null)
-                return;
-            logger.Write(message, level, color);
+            logger?.Write(message, level, color);
         }
     }
 

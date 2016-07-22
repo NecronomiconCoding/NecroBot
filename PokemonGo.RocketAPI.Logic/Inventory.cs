@@ -124,7 +124,7 @@ namespace PokemonGo.RocketAPI.Logic
             var inventory = await _client.GetInventory();
             return
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonFamily)
-                    .Where(p => p != null && p?.FamilyId != PokemonFamilyId.FamilyUnset);
+                    .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
         }
 
         public async Task<IEnumerable<PokemonData>> GetPokemons()
@@ -132,7 +132,7 @@ namespace PokemonGo.RocketAPI.Logic
             var inventory = await _client.GetInventory();
             return
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon)
-                    .Where(p => p != null && p?.PokemonId > 0);
+                    .Where(p => p != null && p.PokemonId > 0);
         }
 
         public async Task<IEnumerable<PokemonSettings>> GetPokemonSettings()
@@ -140,7 +140,7 @@ namespace PokemonGo.RocketAPI.Logic
             var templates = await _client.GetItemTemplates();
             return
                 templates.ItemTemplates.Select(i => i.PokemonSettings)
-                    .Where(p => p != null && p?.FamilyId != PokemonFamilyId.FamilyUnset);
+                    .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
         }
 
 

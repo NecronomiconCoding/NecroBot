@@ -43,8 +43,9 @@ namespace PokemonGo.RocketAPI.Logic
             do
             {
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
-                if ((probability.HasValue && probability.Value < 0.35 && encounter?.WildPokemon?.PokemonData?.Cp > 400) ||
-                    CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >= _clientSettings.KeepMinIVPercentage)
+                if ((probability.HasValue && probability.Value < 0.35 && encounter.WildPokemon?.PokemonData?.Cp > 400) ||
+                    CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >=
+                    _clientSettings.KeepMinIVPercentage)
                 {
                     //Throw berry is we can
                     await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
@@ -70,7 +71,7 @@ namespace PokemonGo.RocketAPI.Logic
         private async Task DisplayPlayerLevelInTitle()
         {
             _playerProfile = _playerProfile.Profile != null ? _playerProfile : await _client.GetProfile();
-            var playerName = _playerProfile.Profile.Username != null ? _playerProfile.Profile.Username : "";
+            var playerName = _playerProfile.Profile.Username ?? "";
             var playerStats = await _inventory.GetPlayerStats();
             var playerStat = playerStats.FirstOrDefault();
             if (playerStat != null)
@@ -83,9 +84,9 @@ namespace PokemonGo.RocketAPI.Logic
             await Task.Delay(5000);
         }
 
-        public static int GetXpDiff(int Level)
+        public static int GetXpDiff(int level)
         {
-            switch (Level)
+            switch (level)
             {
                 case 1:
                     return 0;
@@ -183,8 +184,7 @@ namespace PokemonGo.RocketAPI.Logic
                         LogLevel.Info, ConsoleColor.DarkYellow);
                 else
                     Logger.Write(
-                        $"(EVOLVE) Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
-                        LogLevel.Info);
+                        $"(EVOLVE) Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}");
 
                 await Task.Delay(3000);
             }
@@ -197,7 +197,7 @@ namespace PokemonGo.RocketAPI.Logic
                 $"Make sure Lat & Lng is right. Exit Program if not! Lat: {_client.CurrentLat} Lng: {_client.CurrentLng}",
                 LogLevel.Warning);
             Thread.Sleep(3000);
-            Logger.Write($"Logging in via: {_clientSettings.AuthType}", LogLevel.Info);
+            Logger.Write($"Logging in via: {_clientSettings.AuthType}");
 
             while (true)
             {
@@ -214,7 +214,7 @@ namespace PokemonGo.RocketAPI.Logic
                 }
                 catch (AccessTokenExpiredException)
                 {
-                    Logger.Write($"Access token expired", LogLevel.Info);
+                    Logger.Write("Access token expired");
                 }
                 catch (TaskCanceledException)
                 {
@@ -273,9 +273,9 @@ namespace PokemonGo.RocketAPI.Logic
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                     await CatchEncounter(encounter, pokemon);
                 else
-                    Logger.Write($"Encounter problem: {encounter?.Status}");
+                    Logger.Write($"Encounter problem: {encounter.Status}");
             }
-            
+
             await Task.Delay(_clientSettings.DelayBetweenMove);
         }
 
@@ -308,7 +308,8 @@ namespace PokemonGo.RocketAPI.Logic
 
                 var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                 var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                Logger.Write($"(POKESTOP): {fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
+                Logger.Write($"(POKESTOP): {fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info,
+                    ConsoleColor.DarkRed);
                 if (fortSearch.ExperienceAwarded > 0)
                     Logger.Write(
                         $"(POKESTOP) XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
@@ -401,7 +402,7 @@ namespace PokemonGo.RocketAPI.Logic
             foreach (var item in items)
             {
                 var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                Logger.Write($"(RECYCLE) {item.Count}x {(ItemId) item.Item_}", LogLevel.Info, ConsoleColor.Blue);
+                Logger.Write($"(RECYCLE) {item.Count}x {item.Item_}", LogLevel.Info, ConsoleColor.Blue);
                 await Task.Delay(500);
             }
         }

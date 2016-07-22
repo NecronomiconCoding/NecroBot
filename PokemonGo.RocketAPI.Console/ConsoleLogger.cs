@@ -12,7 +12,7 @@ namespace PokemonGo.RocketAPI.Console
     /// </summary>
     public class ConsoleLogger : ILogger
     {
-        private readonly LogLevel maxLogLevel;
+        private readonly LogLevel _maxLogLevel;
 
         /// <summary>
         ///     To create a ConsoleLogger, we must define a maximum log level.
@@ -21,7 +21,7 @@ namespace PokemonGo.RocketAPI.Console
         /// <param name="maxLogLevel"></param>
         public ConsoleLogger(LogLevel maxLogLevel)
         {
-            this.maxLogLevel = maxLogLevel;
+            _maxLogLevel = maxLogLevel;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace PokemonGo.RocketAPI.Console
         /// <param name="color">Optional. Default is auotmatic</param>
         public void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black)
         {
-            if (level > maxLogLevel)
+            if (level > _maxLogLevel)
                 return;
 
             switch (level)
