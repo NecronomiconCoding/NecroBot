@@ -98,7 +98,6 @@ namespace PokemonGo.RocketAPI.Console
                     PokemonId.Meowth,
                     PokemonId.Psyduck,
                     PokemonId.Mankey,
-                    PokemonId.Growlithe,
                     PokemonId.Tentacool,
                     PokemonId.Ponyta,
                     PokemonId.Slowpoke,
@@ -119,7 +118,9 @@ namespace PokemonGo.RocketAPI.Console
                     PokemonId.Staryu,
                     PokemonId.Omanyte,
                     PokemonId.Kabuto,
-                    PokemonId.Dratini
+                    PokemonId.Pidgey,
+                    PokemonId.Weedle,
+                    PokemonId.Caterpie
                 };
             }
         }
