@@ -71,7 +71,7 @@ namespace PokemonGo.RocketAPI.Logic
         private async Task DisplayPlayerLevelInTitle(bool updateOnly = false)
         {
             _playerProfile = _playerProfile.Profile != null ? _playerProfile : await _client.GetProfile();
-            var playerName = _playerProfile.Profile.Username != null ? _playerProfile.Profile.Username : "";
+            var playerName = _playerProfile.Profile.Username ?? "";
             var playerStats = await _inventory.GetPlayerStats();
             var playerStat = playerStats.FirstOrDefault();
             if (playerStat != null)
@@ -383,8 +383,6 @@ namespace PokemonGo.RocketAPI.Logic
         {
             while (true)
             {
-                try
-                {
                     _playerProfile = await _client.GetProfile();
                     await DisplayPlayerLevelInTitle();
                     if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
@@ -403,16 +401,7 @@ namespace PokemonGo.RocketAPI.Logic
             var inventory = await _client.GetInventory();
             var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
             */
-                }
-                catch (AccessTokenExpiredException)
-                {
-                    throw;
-                }
-                catch (Exception ex)
-                {
-                    Logger.Write($"Exception: {ex}", LogLevel.Error);
-                }
-
+               
                 await Task.Delay(10000);
             }
         }
