@@ -18,6 +18,7 @@ namespace PokemonGo.RocketAPI
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool TransferDuplicatePokemon { get; }
+        int KeepMinDuplicatePokemon { get; }
 
         ICollection<KeyValuePair<AllEnum.ItemId, int>> ItemRecycleFilter { get; }
 

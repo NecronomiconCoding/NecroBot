@@ -23,7 +23,7 @@ namespace PokemonGo.RocketAPI.Console
         public bool EvolveAllPokemonWithEnoughCandy => UserSettings.Default.EvolveAllPokemonWithEnoughCandy;
         public bool TransferDuplicatePokemon => UserSettings.Default.TransferDuplicatePokemon;
 
-
+        public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
 
         public string GoogleRefreshToken
         {

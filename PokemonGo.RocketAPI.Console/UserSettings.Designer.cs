@@ -166,5 +166,17 @@ namespace PokemonGo.RocketAPI.Console {
                 this["TransferDuplicatePokemon"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int KeepMinDuplicatePokemon {
+            get {
+                return ((int)(this["KeepMinDuplicatePokemon"]));
+            }
+            set {
+                this["KeepMinDuplicatePokemon"] = value;
+            }
+        }
     }
 }
