@@ -72,13 +72,27 @@ namespace PokemonGo.RocketAPI.Logic
                             .ToList());
         }
 
+        public async Task<IEnumerable<PokemonData>> GetHighestsCP(int limit)
+        {
+            var myPokemon = await GetPokemons();
+            var pokemons = myPokemon.ToList();
+            return pokemons.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax).Take(limit);
+        }
+
+        public async Task<IEnumerable<PokemonData>> GetHighestsPerfect(int limit)
+        {
+            var myPokemon = await GetPokemons();
+            var pokemons = myPokemon.ToList();
+            return pokemons.OrderByDescending(x => Logic.Perfect(x)).Take(limit);
+        }
+
         public async Task<int> GetHighestCPofType(PokemonData pokemon)
         {
             var myPokemon = await GetPokemons();
             var pokemons = myPokemon.ToList();
             return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
-                .OrderByDescending(x => x.Cp)
-                .First().Cp;
+                            .OrderByDescending(x => x.Cp)
+                            .First().Cp;
         }
 
         public async Task<int> GetItemAmountByType(MiscEnums.Item type)

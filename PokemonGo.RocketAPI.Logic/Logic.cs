@@ -36,40 +36,48 @@ namespace PokemonGo.RocketAPI.Logic
             return (poke.IndividualAttack*2 + poke.IndividualDefense + poke.IndividualStamina)/(4.0f*15.0f)*100.0f;
         }
 
-        private async Task CatchEncounter(EncounterResponse encounter, MapPokemon pokemon)
+        private async Task CatchEncounter(EncounterResponse encounter, MapPokemon pokemon, Double distance)
         {
-            CatchPokemonResponse caughtPokemonResponse;
-            do
+            if (encounter?.Status == EncounterResponse.Types.Status.EncounterSuccess)
             {
-                var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
-                if ((probability.HasValue && probability.Value < 0.35 && encounter?.WildPokemon?.PokemonData?.Cp > 400) ||
-                    CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >= _clientSettings.KeepMinIVPercentage)
+                CatchPokemonResponse caughtPokemonResponse;
+                do
                 {
-                    //Throw berry is we can
-                    await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
-                }
+                    var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
+                    if ((probability.HasValue && probability.Value < 0.35 && encounter?.WildPokemon?.PokemonData?.Cp > 400) ||
+                        CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >= _clientSettings.KeepMinIVPercentage)
+                    {
+                        //Throw berry is we can
+                        await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
+                    }
 
-                var pokeball = await GetBestBall(encounter?.WildPokemon);
-                var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
-                    pokemon.Latitude, pokemon.Longitude);
-                caughtPokemonResponse =
-                    await
-                        _client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude,
-                            pokemon.Longitude, pokeball);
-                Logger.Write(
-                    caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess
-                        ? $"(CATCH) {pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) ({Math.Round(CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfection) | Chance: {encounter?.CaptureProbability.CaptureProbability_.First()} | {Math.Round(distance)}m distance | with {pokeball} "
-                        : $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()))} | {Math.Round(distance)}m distance {caughtPokemonResponse.Status} | with {pokeball}",
-                    LogLevel.Info, ConsoleColor.DarkCyan);
-                await Task.Delay(2000);
-            } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
-                     caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
+                    var pokeball = await GetBestBall(encounter?.WildPokemon);
+                    caughtPokemonResponse =
+                        await
+                            _client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude,
+                                pokemon.Longitude, pokeball);
+                    Logger.Write(
+                        caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess
+                            ? $"(CATCH) {pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) ({Math.Round(CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfection) | Chance: {encounter?.CaptureProbability.CaptureProbability_.First()} | {Math.Round(distance)}m distance | with {pokeball} "
+                            : $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()))} | {Math.Round(distance)}m distance {caughtPokemonResponse.Status} | with {pokeball}",
+                        LogLevel.Info, ConsoleColor.DarkCyan);
+                    await Task.Delay(2000);
+                } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
+                         caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
+            }
+            else
+            {
+                if (encounter?.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
+                    Logger.Write($"Pokemon inventory full. {pokemon.PokemonId} avoided.", LogLevel.Info, ConsoleColor.DarkYellow);
+                else
+                    Logger.Write($"Unknown encounter error. {pokemon.PokemonId} avoided.", LogLevel.Info, ConsoleColor.DarkRed);
+            }
         }
 
         private async Task DisplayPlayerLevelInTitle()
         {
             var playerStats = await _inventory.GetPlayerStats();
-            var playerStat = playerStats.FirstOrDefault();
+            PlayerStats playerStat = playerStats.FirstOrDefault();
             if (playerStat != null)
             {
                 var message =
@@ -268,7 +276,7 @@ namespace PokemonGo.RocketAPI.Logic
                 var encounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
 
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
-                    await CatchEncounter(encounter, pokemon);
+                    await CatchEncounter(encounter, pokemon, distance);
                 else
                     Logger.Write($"Encounter problem: {encounter?.Status}");
             }
@@ -327,11 +335,11 @@ namespace PokemonGo.RocketAPI.Logic
             var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
             var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
 
-            if (masterBallsCount > 0 && pokemonCp >= 1500)
+            if (masterBallsCount > 0 && pokemonCp >= 2000)
                 return MiscEnums.Item.ITEM_MASTER_BALL;
-            if (ultraBallsCount > 0 && pokemonCp >= 1500)
+            if (ultraBallsCount > 0 && pokemonCp >= 2000)
                 return MiscEnums.Item.ITEM_ULTRA_BALL;
-            if (greatBallsCount > 0 && pokemonCp >= 1500)
+            if (greatBallsCount > 0 && pokemonCp >= 2000)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
             if (ultraBallsCount > 0 && pokemonCp >= 1000)
@@ -339,7 +347,7 @@ namespace PokemonGo.RocketAPI.Logic
             if (greatBallsCount > 0 && pokemonCp >= 1000)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
-            if (greatBallsCount > 0 && pokemonCp >= 600)
+            if (greatBallsCount > 0 && pokemonCp >= 300)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
             if (pokeBallsCount > 0)
@@ -351,7 +359,7 @@ namespace PokemonGo.RocketAPI.Logic
             if (masterBallsCount > 0)
                 return MiscEnums.Item.ITEM_MASTER_BALL;
 
-            return MiscEnums.Item.ITEM_POKE_BALL;
+            return MiscEnums.Item.ITEM_UNKNOWN;
         }
 
         public async Task PostLoginExecute()
@@ -364,6 +372,7 @@ namespace PokemonGo.RocketAPI.Logic
                     if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
                         await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                     if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                    await DisplayHighests();
                     await RecycleItems();
                     await ExecuteFarmingPokestopsAndPokemons();
 
@@ -419,7 +428,7 @@ namespace PokemonGo.RocketAPI.Logic
             {
                 if (CalculatePokemonPerfection(duplicatePokemon) >= _clientSettings.KeepMinIVPercentage ||
                     duplicatePokemon.Cp > _clientSettings.KeepMinCP)
-                    continue;
+                    continue;   
 
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
                 var bestPokemonOfType = await _inventory.GetHighestCPofType(duplicatePokemon);
@@ -427,6 +436,20 @@ namespace PokemonGo.RocketAPI.Logic
                     $"(TRANSFER) {duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} CP (Best: {bestPokemonOfType})",
                     LogLevel.Info, ConsoleColor.DarkGreen);
                 await Task.Delay(500);
+            }
+        }
+
+        private async Task DisplayHighests()
+        {
+            Logger.Write($"====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
+            var highestsPokemonCP = await _inventory.GetHighestsCP(20);
+            foreach (var pokemon in highestsPokemonCP)
+                Logger.Write($"# CP {pokemon.Cp}\t| ({Perfect(pokemon).ToString("0.00")}\t% perfect) NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
+            Logger.Write($"====== DisplayHighestsPerfect ======", LogLevel.Info, ConsoleColor.Yellow);
+            var highestsPokemonPerfect = await _inventory.GetHighestsPerfect(10);
+            foreach (var pokemon in highestsPokemonPerfect)
+            {
+                Logger.Write($"# CP {pokemon.Cp}\t| ({Perfect(pokemon).ToString("0.00")}\t% perfect) NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
             }
         }
 
