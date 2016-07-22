@@ -307,7 +307,7 @@ namespace PokemonGo.RocketAPI.Logic
                 if (fortSearch.ExperienceAwarded > 0)
                     Logger.Write(
                         $"(POKESTOP) XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
-                        LogLevel.Info, ConsoleColor.DarkRed);
+                        LogLevel.Info, ConsoleColor.Magenta);
 
                 await Task.Delay(1000);
                 await RecycleItems();
