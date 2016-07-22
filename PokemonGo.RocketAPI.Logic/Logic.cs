@@ -59,7 +59,7 @@ namespace PokemonGo.RocketAPI.Logic
                     caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess
                         ? $"(CATCH) {pokemon.PokemonId} with CP {encounter?.WildPokemon?.PokemonData?.Cp} ({CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData).ToString("0.00")}% perfect) and CaptureProbability: {encounter?.CaptureProbability.CaptureProbability_.First()} using a {pokeball} in {Math.Round(distance)}m distance"
                         : $"{pokemon.PokemonId} with CP {encounter?.WildPokemon?.PokemonData?.Cp} CaptureProbability: {encounter?.CaptureProbability.CaptureProbability_.First()} in {Math.Round(distance)}m distance {caughtPokemonResponse.Status} while using a {pokeball}..",
-                    LogLevel.Info);
+                    LogLevel.Info, ConsoleColor.DarkCyan);
                 await Task.Delay(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
@@ -88,7 +88,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                 if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
                     Logger.Write($"(EVOLVE) {pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp",
-                        LogLevel.Info);
+                        LogLevel.Info, ConsoleColor.DarkYellow);
                 else
                     Logger.Write(
                         $"(EVOLVE) Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
@@ -215,11 +215,11 @@ namespace PokemonGo.RocketAPI.Logic
 
                 var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                 var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                Logger.Write($"(POKESTOP): {fortInfo.Name} in {Math.Round(distance)}m distance");
+                Logger.Write($"(POKESTOP): {fortInfo.Name} in {Math.Round(distance)}m distance", LogLevel.Info, ConsoleColor.DarkRed);
                 if (fortSearch.ExperienceAwarded > 0)
                     Logger.Write(
                         $"(POKESTOP) XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
-                        LogLevel.Info);
+                        LogLevel.Info, ConsoleColor.DarkRed);
 
                 await Task.Delay(1000);
                 await RecycleItems();
@@ -307,7 +307,7 @@ namespace PokemonGo.RocketAPI.Logic
             foreach (var item in items)
             {
                 var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                Logger.Write($"(RECYCLE) {item.Count}x {(ItemId) item.Item_}", LogLevel.Info);
+                Logger.Write($"(RECYCLE) {item.Count}x {(ItemId) item.Item_}", LogLevel.Info, ConsoleColor.DarkBlue);
                 await Task.Delay(500);
             }
         }
@@ -335,7 +335,7 @@ namespace PokemonGo.RocketAPI.Logic
                 var bestPokemonOfType = await _inventory.GetHighestCPofType(duplicatePokemon);
                 Logger.Write(
                     $"(TRANSFER) {duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} CP (Best: {bestPokemonOfType})",
-                    LogLevel.Info);
+                    LogLevel.Info, ConsoleColor.DarkGreen);
                 await Task.Delay(500);
             }
         }
@@ -350,7 +350,7 @@ namespace PokemonGo.RocketAPI.Logic
                 return;
 
             var useRaspberry = await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
-            Logger.Write($"(BERRY) Used, remaining: {berry.Count}", LogLevel.Info);
+            Logger.Write($"(BERRY) Used, remaining: {berry.Count}", LogLevel.Info, ConsoleColor.DarkMagenta);
             await Task.Delay(3000);
         }
     }
