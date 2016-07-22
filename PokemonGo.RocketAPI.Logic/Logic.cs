@@ -86,6 +86,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             while (true)
             {
+                DisplayPlayerLevelInTitle();
                 try
                 {
                     await DisplayPlayerLevelInTitle();
@@ -293,15 +294,18 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task DisplayPlayerLevelInTitle()
         {
-            var playerStats = await _inventory.GetPlayerStats();
-            var playerStat = playerStats.FirstOrDefault();
-            if (playerStat != null)
-            {
-                var message = $"Character Level {playerStat.Level:0} - ({(playerStat.Experience - playerStat.PrevLevelXp):0} / {(playerStat.NextLevelXp - playerStat.PrevLevelXp):0} XP)" ;
-                System.Console.Title = message;
-                Logger.Write(message);
-            }
-            await Task.Delay(5000);
+            do{
+                 await Task.Delay(1000);
+                    var playerStats = await _inventory.GetPlayerStats();
+                    var playerStat = playerStats.FirstOrDefault();
+                  //  if (playerStat != null)
+                  // {
+                        var message = $"Character Level {playerStat.Level:0} - ({(playerStat.Experience - playerStat.PrevLevelXp):0} / {(playerStat.NextLevelXp - playerStat.PrevLevelXp):0} XP)" ;
+                        System.Console.Title = message;
+                        //Logger.Write(message);
+                  //  }
+                  //  await Task.Delay(5000);
+            }while(true); // Lol forgot this on the comment post 7/22/2016 
         }
     }
 }
