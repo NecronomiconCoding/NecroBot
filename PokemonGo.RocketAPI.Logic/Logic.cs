@@ -9,6 +9,7 @@ using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.GeneratedCode;
+using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Logic.Utils;
 
 namespace PokemonGo.RocketAPI.Logic
@@ -30,6 +31,8 @@ namespace PokemonGo.RocketAPI.Logic
 
         public async Task Execute()
         {
+            Git.CheckVersion();
+
             Logger.Write($"Starting Execute on login server: {_clientSettings.AuthType}", LogLevel.Info);
 
             while (true)
@@ -232,7 +235,7 @@ namespace PokemonGo.RocketAPI.Logic
             else if (greatBallsCount > 0 && pokemonCp >= 1000)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
-            if (greatBallsCount > 0 && pokemonCp >= 6000)
+            if (greatBallsCount > 0 && pokemonCp >= 600)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
             if (pokeBallsCount > 0)
