@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -27,6 +28,11 @@ namespace PokemonGo.RocketAPI.Login
                 //Get session cookie
                 var sessionResp = await tempHttpClient.GetAsync(Resources.PtcLoginUrl);
                 var data = await sessionResp.Content.ReadAsStringAsync();
+                if (data == null) throw new PtcOfflineException();
+
+                if (sessionResp.StatusCode == HttpStatusCode.InternalServerError || data.Contains("<title>Maintenance"))
+                    throw new PtcOfflineException();
+
                 var lt = JsonHelper.GetValue(data, "lt");
                 var executionId = JsonHelper.GetValue(data, "execution");
 
