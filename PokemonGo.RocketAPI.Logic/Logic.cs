@@ -279,7 +279,7 @@ namespace PokemonGo.RocketAPI.Logic
                         //Logger.Write(message);
                   //  }
                   //  await Task.Delay(5000);
-            }
+            }while(true); // Lol forgot this on the comment post 7/22/2016 
         }
     }
 }
