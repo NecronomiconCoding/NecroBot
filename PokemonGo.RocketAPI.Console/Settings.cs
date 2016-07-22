@@ -83,6 +83,7 @@ namespace PokemonGo.RocketAPI.Console
                 //Type of pokemons to evolve
                 return new[]
                 {
+                    PokemonId.Pidgey,
                     PokemonId.Rattata,
                     PokemonId.Spearow,
                     PokemonId.Ekans,
