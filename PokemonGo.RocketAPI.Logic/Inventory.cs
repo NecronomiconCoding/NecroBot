@@ -86,13 +86,13 @@ namespace PokemonGo.RocketAPI.Logic
             return pokemons.OrderByDescending(x => Logic.CalculatePokemonPerfection(x)).Take(limit);
         }
 
-        public async Task<int> GetHighestCPofType(PokemonData pokemon)
+        public async Task<PokemonData> GetHighestPokemonOfTypeByCP(PokemonData pokemon)
         {
             var myPokemon = await GetPokemons();
             var pokemons = myPokemon.ToList();
             return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
                             .OrderByDescending(x => x.Cp)
-                            .First().Cp;
+                            .First();
         }
 
         public async Task<int> GetItemAmountByType(MiscEnums.Item type)
