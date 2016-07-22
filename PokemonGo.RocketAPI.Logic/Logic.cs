@@ -317,6 +317,8 @@ namespace PokemonGo.RocketAPI.Logic
                 await Task.Delay(1000);
                 await RecycleItems();
                 await ExecuteCatchAllNearbyPokemons();
+                if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
+                    await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
             }
         }
