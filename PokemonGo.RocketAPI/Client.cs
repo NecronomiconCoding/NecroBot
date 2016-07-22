@@ -11,6 +11,7 @@ using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.Login;
 using static PokemonGo.RocketAPI.GeneratedCode.Response.Types;
 using System.IO;
+using System.Configuration;
 
 namespace PokemonGo.RocketAPI
 {
@@ -49,7 +50,7 @@ namespace PokemonGo.RocketAPI
             };
             _httpClient = new HttpClient(new RetryHandler(handler));
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Niantic App");
-                //"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-G900F Build/LMY48G)");
+            //"Dalvik/2.1.0 (Linux; U; Android 5.1.1; SM-G900F Build/LMY48G)");
             _httpClient.DefaultRequestHeaders.ExpectContinue = false;
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Connection", "keep-alive");
             _httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "*/*");
@@ -82,7 +83,7 @@ namespace PokemonGo.RocketAPI
                 tokenResponse = await GoogleLogin.GetAccessToken(Settings.GoogleRefreshToken);
                 AccessToken = tokenResponse?.id_token;
             }
-            
+
             if (AccessToken == null)
             {
                 var deviceCode = await GoogleLogin.GetDeviceCode();
@@ -90,7 +91,7 @@ namespace PokemonGo.RocketAPI
                 Settings.GoogleRefreshToken = tokenResponse?.refresh_token;
                 AccessToken = tokenResponse?.id_token;
             }
-            
+
         }
 
         /// <summary>
@@ -135,7 +136,7 @@ namespace PokemonGo.RocketAPI
                 RequestType.GET_PLAYER, RequestType.GET_HATCHED_OBJECTS, RequestType.GET_INVENTORY,
                 RequestType.CHECK_AWARDED_BADGES, RequestType.DOWNLOAD_SETTINGS);
             var serverResponse = await _httpClient.PostProto<Request>(Resources.RpcUrl, serverRequest);
-            
+
             if (serverResponse.Auth == null)
                 throw new AccessTokenExpiredException();
 
