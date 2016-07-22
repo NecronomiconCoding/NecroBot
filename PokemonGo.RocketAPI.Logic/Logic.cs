@@ -405,22 +405,13 @@ namespace PokemonGo.RocketAPI.Logic
                     double.TryParse(vrloc.Split(';')[0], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLat);
                     double.TryParse(vrloc.Split(';')[1], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLong);
 
-<<<<<<< HEAD
+
                     if (dblLat < 1 || dblLong < 1)
                     {
                         continue;
                     }
 
                     Logger.Write("(LOCATION) loop " + irLoop, LogLevel.Info, ConsoleColor.DarkGreen);
-=======
-                var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                Logger.Write($"{fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
-                if (fortSearch.ExperienceAwarded > 0)
-                    Logger.Write(
-                        $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
-                        LogLevel.Pokestop);
->>>>>>> refs/remotes/NecronomiconCoding/master
 
                     var update =
     await
@@ -514,15 +505,9 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var item in items)
             {
-<<<<<<< HEAD
-                var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
-
-                Logger.Write($"(RECYCLE) {item.Count}x {(ItemId)item.Item_}", LogLevel.Info, ConsoleColor.Blue);
-
-=======
                 var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
                 Logger.Write($"{item.Count}x {(ItemId) item.Item_}", LogLevel.Recycling);
->>>>>>> refs/remotes/NecronomiconCoding/master
+
                 await Task.Delay(500);
             }
         }
