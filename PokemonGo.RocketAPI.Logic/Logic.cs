@@ -59,8 +59,8 @@ namespace PokemonGo.RocketAPI.Logic
                             pokemon.Longitude, pokeball);
                 Logger.Write(
                     caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess
-                        ? $"(CATCH) {pokemon.PokemonId} with CP {encounter?.WildPokemon?.PokemonData?.Cp} ({CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData).ToString("0.00")}% perfect) and CaptureProbability: {encounter?.CaptureProbability.CaptureProbability_.First()} using a {pokeball} in {Math.Round(distance)}m distance"
-                        : $"{pokemon.PokemonId} with CP {encounter?.WildPokemon?.PokemonData?.Cp} CaptureProbability: {encounter?.CaptureProbability.CaptureProbability_.First()} in {Math.Round(distance)}m distance {caughtPokemonResponse.Status} while using a {pokeball}..",
+                        ? $"(CATCH) {pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) ({Math.Round(CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfection) | Chance: {encounter?.CaptureProbability.CaptureProbability_.First()} | {Math.Round(distance)}m distance | with {pokeball} "
+                        : $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()))} | {Math.Round(distance)}m distance {caughtPokemonResponse.Status} | with {pokeball}",
                     LogLevel.Info, ConsoleColor.DarkCyan);
                 await Task.Delay(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
@@ -78,11 +78,103 @@ namespace PokemonGo.RocketAPI.Logic
             if (playerStat != null)
             {
                 var message =
+<<<<<<< HEAD
                     $"Character Level {playerName} {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp:0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp:0} XP)";
+=======
+                    $"Character Level {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp - GetXpDiff(playerStat.Level):0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp - GetXpDiff(playerStat.Level):0} XP)";
+>>>>>>> refs/remotes/NecronomiconCoding/master
                 Console.Title = message;
                 Logger.Write(message);
             }
             await Task.Delay(5000);
+        }
+
+        public static int GetXpDiff(int Level)
+        {
+            switch (Level)
+            {
+                case 1:
+                    return 0;
+                case 2:
+                    return 1000;
+                case 3:
+                    return 2000;
+                case 4:
+                    return 3000;
+                case 5:
+                    return 4000;
+                case 6:
+                    return 5000;
+                case 7:
+                    return 6000;
+                case 8:
+                    return 7000;
+                case 9:
+                    return 8000;
+                case 10:
+                    return 9000;
+                case 11:
+                    return 10000;
+                case 12:
+                    return 10000;
+                case 13:
+                    return 10000;
+                case 14:
+                    return 10000;
+                case 15:
+                    return 15000;
+                case 16:
+                    return 20000;
+                case 17:
+                    return 20000;
+                case 18:
+                    return 20000;
+                case 19:
+                    return 25000;
+                case 20:
+                    return 25000;
+                case 21:
+                    return 50000;
+                case 22:
+                    return 75000;
+                case 23:
+                    return 100000;
+                case 24:
+                    return 125000;
+                case 25:
+                    return 150000;
+                case 26:
+                    return 190000;
+                case 27:
+                    return 200000;
+                case 28:
+                    return 250000;
+                case 29:
+                    return 300000;
+                case 30:
+                    return 350000;
+                case 31:
+                    return 500000;
+                case 32:
+                    return 500000;
+                case 33:
+                    return 750000;
+                case 34:
+                    return 1000000;
+                case 35:
+                    return 1250000;
+                case 36:
+                    return 1500000;
+                case 37:
+                    return 2000000;
+                case 38:
+                    return 2500000;
+                case 39:
+                    return 1000000;
+                case 40:
+                    return 1000000;
+            }
+            return 0;
         }
 
         private async Task EvolveAllPokemonWithEnoughCandy(IEnumerable<PokemonId> filter = null)
@@ -217,11 +309,11 @@ namespace PokemonGo.RocketAPI.Logic
                 var update =
                     await
                         _navigation.HumanLikeWalking(new Navigation.Location(pokeStop.Latitude, pokeStop.Longitude),
-                            _clientSettings.WalkingSpeedInKilometerPerHour);
+                            _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
 
                 var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                 var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                Logger.Write($"(POKESTOP): {fortInfo.Name} in {Math.Round(distance)}m distance", LogLevel.Info, ConsoleColor.DarkRed);
+                Logger.Write($"(POKESTOP): {fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
                 if (fortSearch.ExperienceAwarded > 0)
                     Logger.Write(
                         $"(POKESTOP) XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
@@ -314,7 +406,7 @@ namespace PokemonGo.RocketAPI.Logic
             foreach (var item in items)
             {
                 var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                Logger.Write($"(RECYCLE) {item.Count}x {(ItemId) item.Item_}", LogLevel.Info, ConsoleColor.DarkBlue);
+                Logger.Write($"(RECYCLE) {item.Count}x {(ItemId) item.Item_}", LogLevel.Info, ConsoleColor.Blue);
                 await Task.Delay(500);
             }
         }
