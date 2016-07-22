@@ -489,7 +489,9 @@ namespace PokemonGo.RocketAPI.Logic
                     var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
                         pokeStop.Latitude, pokeStop.Longitude);
 
-                    if (distance < 250)
+                    Logger.Write($"(POKESTOP): in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkMagenta);
+
+                    if (distance < 500)
                     {
                         var update =
 await
