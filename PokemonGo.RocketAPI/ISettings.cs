@@ -22,7 +22,7 @@ namespace PokemonGo.RocketAPI
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool TransferDuplicatePokemon { get; }
-
+        int DelayBetweenMove { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
