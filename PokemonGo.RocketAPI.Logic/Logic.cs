@@ -11,6 +11,8 @@ using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Logic.Utils;
+using System.IO;
+using System.Globalization;
 
 #endregion
 
@@ -34,7 +36,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         public static float CalculatePokemonPerfection(PokemonData poke)
         {
-            return (poke.IndividualAttack*2 + poke.IndividualDefense + poke.IndividualStamina)/(4.0f*15.0f)*100.0f;
+            return (poke.IndividualAttack * 2 + poke.IndividualDefense + poke.IndividualStamina) / (4.0f * 15.0f) * 100.0f;
         }
 
         private async Task CatchEncounter(EncounterResponse encounter, MapPokemon pokemon)
@@ -332,56 +334,89 @@ namespace PokemonGo.RocketAPI.Logic
 
         }
 
-
         private async Task ExecuteFarmingPokestopsAndPokemons()
         {
-            var mapObjects = await _client.GetMapObjects();
-
-            var pokeStops =
-                mapObjects.MapCells.SelectMany(i => i.Forts)
-                    .Where(
-                        i =>
-                            i.Type == FortType.Checkpoint &&
-                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
-                    .OrderBy(
-                        i =>
-                            LocationUtils.CalculateDistanceInMeters(
-                                new Navigation.Location(_client.CurrentLat, _client.CurrentLng),
-                                new Navigation.Location(i.Latitude, i.Longitude)));
-
-            foreach (var pokeStop in pokeStops)
+            if (Client.blUseMySystem == false)
             {
-                var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
-                    pokeStop.Latitude, pokeStop.Longitude);
+                var mapObjects = await _client.GetMapObjects();
 
-                Logger.Write($"(POKESTOP): lure info {pokeStop?.LureInfo} lat {pokeStop.Latitude} lng {pokeStop.Longitude} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkYellow);
+                var pokeStops =
+                    mapObjects.MapCells.SelectMany(i => i.Forts)
+                        .Where(
+                            i =>
+                                i.Type == FortType.Checkpoint &&
+                                i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
+                        .OrderBy(
+                            i =>
+                                LocationUtils.CalculateDistanceInMeters(
+                                    new Navigation.Location(_client.CurrentLat, _client.CurrentLng),
+                                    new Navigation.Location(i.Latitude, i.Longitude)));
+
+                foreach (var pokeStop in pokeStops)
+                {
+                    var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
+                        pokeStop.Latitude, pokeStop.Longitude);
+
+                    Logger.Write($"(POKESTOP): lure info {pokeStop?.LureInfo} lat {pokeStop.Latitude} lng {pokeStop.Longitude} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkYellow);
+                }
+
+                foreach (var pokeStop in pokeStops)
+                {
+                    var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
+                        pokeStop.Latitude, pokeStop.Longitude);
+
+                    var update =
+                        await
+                            _navigation.HumanLikeWalking(new Navigation.Location(pokeStop.Latitude, pokeStop.Longitude),
+                                _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+
+                    var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+
+                    Logger.Write($"(POKESTOP): {fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
+
+                    if (fortSearch.ExperienceAwarded > 0)
+                        Logger.Write(
+                            $"(POKESTOP) XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
+                            LogLevel.Info, ConsoleColor.Magenta);
+
+                    await Task.Delay(1000);
+                    await RecycleItems();
+                    await ExecuteCatchAllNearbyPokemons();
+                    if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                }
+            }
+            else
+            {
+                var vrList = fucnReturnLocs();
+                Logger.Write("(LOCATION) found count " + vrList.Count, LogLevel.Info, ConsoleColor.DarkGreen);
+                int irLoop = 1;
+                foreach (var vrloc in vrList)
+                {
+                    double dblLat;
+                    double dblLong;
+
+                    double.TryParse(vrloc.Split(';')[0], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLat);
+                    double.TryParse(vrloc.Split(';')[1], NumberStyles.Any, CultureInfo.InvariantCulture, out dblLong);
+
+                    if (dblLat < 1 || dblLong < 1)
+                    {
+                        continue;
+                    }
+
+                    Logger.Write("(LOCATION) loop " + irLoop, LogLevel.Info, ConsoleColor.DarkGreen);
+
+                    var update =
+    await
+        _navigation.HumanLikeWalking(new Navigation.Location(dblLat, dblLong),
+            _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+
+                    await ExecuteCatchAllNearbyPokemons();
+                    if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                    irLoop++;
+                }
             }
 
-            foreach (var pokeStop in pokeStops)
-            {
-                var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
-                    pokeStop.Latitude, pokeStop.Longitude);
-
-                var update =
-                    await
-                        _navigation.HumanLikeWalking(new Navigation.Location(pokeStop.Latitude, pokeStop.Longitude),
-                            _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
-
-                var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-
-                Logger.Write($"(POKESTOP): {fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
-
-                if (fortSearch.ExperienceAwarded > 0)
-                    Logger.Write(
-                        $"(POKESTOP) XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
-                        LogLevel.Info, ConsoleColor.Magenta);
-
-                await Task.Delay(1000);
-                await RecycleItems();
-                await ExecuteCatchAllNearbyPokemons();
-                if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
-            }
         }
 
         private async Task<MiscEnums.Item> GetBestBall(WildPokemon pokemon)
@@ -463,9 +498,9 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var item in items)
             {
-                var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
+                var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
 
-                Logger.Write($"(RECYCLE) {item.Count}x {(ItemId) item.Item_}", LogLevel.Info, ConsoleColor.Blue);
+                Logger.Write($"(RECYCLE) {item.Count}x {(ItemId)item.Item_}", LogLevel.Info, ConsoleColor.Blue);
 
                 await Task.Delay(500);
             }
@@ -502,7 +537,7 @@ namespace PokemonGo.RocketAPI.Logic
         public async Task UseBerry(ulong encounterId, string spawnPointId)
         {
             var inventoryBalls = await _inventory.GetItems();
-            var berries = inventoryBalls.Where(p => (ItemId) p.Item_ == ItemId.ItemRazzBerry);
+            var berries = inventoryBalls.Where(p => (ItemId)p.Item_ == ItemId.ItemRazzBerry);
             var berry = berries.FirstOrDefault();
 
             if (berry == null)
@@ -511,6 +546,59 @@ namespace PokemonGo.RocketAPI.Logic
             var useRaspberry = await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             Logger.Write($"(BERRY) Used, remaining: {berry.Count}", LogLevel.Info, ConsoleColor.DarkMagenta);
             await Task.Delay(3000);
+        }
+
+        private static List<string> fucnReturnLocs()
+        {
+            List<string> lstFileNames = new List<string> { @"C:\Python27\test2.txt" };
+            List<string> LstLatLong = new List<string>();
+            foreach (var vrFileName in lstFileNames)
+            {
+                List<string> lstLines = new List<string>();
+
+                if (File.Exists(vrFileName) == false)
+                    continue;
+
+                using (FileStream fs = new FileStream(vrFileName,
+                                              FileMode.Open,
+                                              FileAccess.Read,
+                                              FileShare.ReadWrite))
+                {
+                    using (StreamReader sr = new StreamReader(fs))
+                    {
+                        while (sr.Peek() >= 0) // reading the old data
+                        {
+                            lstLines.Add(sr.ReadLine());
+                        }
+                    }
+                }
+
+                foreach (var vrLine in lstLines)
+                {
+                    List<string> lstSplit = vrLine.Replace("(", " ").Replace(")", " ").Replace(",", " ").Split(' ').ToList();
+                    for (int i = 0; i < lstSplit.Count; i++)
+                    {
+                        if (lstSplit[i].Contains("."))
+                        {
+                            try
+                            {
+                                if (lstSplit[i + 1].Contains(".") == false)
+                                    continue;
+                            }
+                            catch
+                            {
+
+                                continue;
+                            }
+
+                            LstLatLong.Add(lstSplit[i] + ";" + lstSplit[i + 1]);
+                        }
+                    }
+                }
+            }
+
+            LstLatLong = LstLatLong.Distinct().ToList();
+            return LstLatLong;
         }
     }
 }
