@@ -75,7 +75,7 @@ namespace PokemonGo.RocketAPI.Logic
             {
                 var xpDifference = GetXPDiff(playerStat.Level);
                 var message =
-                    $"{playerName} | Level {playerStat.Level}: {playerStat.Experience - playerStat.PrevLevelXp - xpDifference}/{playerStat.NextLevelXp - playerStat.PrevLevelXp - xpDifference}XP";
+                    $"{playerName} | Level {playerStat.Level}: {playerStat.Experience - playerStat.PrevLevelXp - xpDifference}/{playerStat.NextLevelXp - playerStat.PrevLevelXp - xpDifference}XP Stardust: {_playerProfile.Profile.Currency.ToArray()[1].Amount}";
                 Console.Title = message;
                 if (updateOnly == false)
                     Logger.Write(message);
