@@ -37,12 +37,24 @@ namespace PokemonGo.RocketAPI
                 {
                     try
                     {
-                        SetCoordinates(Convert.ToDouble(latlng[0]), Convert.ToDouble(latlng[1]),
+                        double temp_lat = Convert.ToDouble(latlng[0]);
+                        double temp_long = Convert.ToDouble(latlng[1]);
+
+                        if(temp_lat >= -90 && temp_lat <= 90 && temp_long >= -180 && temp_long <= 180)
+                        {
+                            SetCoordinates(Convert.ToDouble(latlng[0]), Convert.ToDouble(latlng[1]),
                             Settings.DefaultAltitude);
+                        }
+                        else
+                        {
+                            Logger.Write("Coordinates in \"Coords.txt\" file are invalid, using the default coordinates ",
+                            LogLevel.Warning);
+                            SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
+                        }
                     }
                     catch (FormatException)
                     {
-                        Logger.Write("Coordinates in \"Coords.txt\" file is invalid, using the default coordinates ",
+                        Logger.Write("Coordinates in \"Coords.txt\" file are invalid, using the default coordinates ",
                             LogLevel.Warning);
                         SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
                     }
