@@ -5,8 +5,12 @@
 
 Chat about this Repository via Discord: https://discord.gg/VsVrjgr
 
+## Donate
+All Donations will be split 100% with the most active Collaborators.
 
+Bitcoin Address:  17Ma97oygzBLdSupfHdUdVZnZoKu9fWB3g
 
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=farhaninoor1%40gmail%2ecom&lc=GB&item_name=POGO%20Bot%20Donations&item_number=POGO&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)
 
 ## Features
 

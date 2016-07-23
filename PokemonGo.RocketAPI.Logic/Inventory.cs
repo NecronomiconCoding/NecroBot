@@ -14,13 +14,6 @@ namespace PokemonGo.RocketAPI.Logic
     {
         private readonly Client _client;
 
-        private readonly ISettings _clientSettings;
-
-        public Inventory(ISettings clientSettings)
-        {
-            _clientSettings = clientSettings;
-        }
-
         public Inventory(Client client)
         {
             _client = client;
@@ -75,7 +68,7 @@ namespace PokemonGo.RocketAPI.Logic
                         p.Where(x => x.Favorite == 0)
                             .OrderByDescending(x => x.Cp)
                             .ThenBy(n => n.StaminaMax)
-                            .Skip(_clientSettings.KeepMinDuplicatePokemon)
+                            .Skip(1)
                             .ToList());
         }
 
@@ -90,7 +83,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             var myPokemon = await GetPokemons();
             var pokemons = myPokemon.ToList();
-            return pokemons.OrderByDescending(x => Logic.CalculatePokemonPerfection(x)).Take(limit);
+            return pokemons.OrderByDescending(Logic.CalculatePokemonPerfection).Take(limit);
         }
 
         public async Task<PokemonData> GetHighestPokemonOfTypeByCP(PokemonData pokemon)
@@ -98,8 +91,8 @@ namespace PokemonGo.RocketAPI.Logic
             var myPokemon = await GetPokemons();
             var pokemons = myPokemon.ToList();
             return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
-                            .OrderByDescending(x => x.Cp)
-                            .First();
+                .OrderByDescending(x => x.Cp)
+                .First();
         }
 
         public async Task<int> GetItemAmountByType(MiscEnums.Item type)
@@ -145,7 +138,7 @@ namespace PokemonGo.RocketAPI.Logic
             var inventory = await _client.GetInventory();
             return
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonFamily)
-                    .Where(p => p != null && p?.FamilyId != PokemonFamilyId.FamilyUnset);
+                    .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
         }
 
         public async Task<IEnumerable<PokemonData>> GetPokemons()
@@ -153,7 +146,7 @@ namespace PokemonGo.RocketAPI.Logic
             var inventory = await _client.GetInventory();
             return
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon)
-                    .Where(p => p != null && p?.PokemonId > 0);
+                    .Where(p => p != null && p.PokemonId > 0);
         }
 
         public async Task<IEnumerable<PokemonSettings>> GetPokemonSettings()
@@ -161,7 +154,7 @@ namespace PokemonGo.RocketAPI.Logic
             var templates = await _client.GetItemTemplates();
             return
                 templates.ItemTemplates.Select(i => i.PokemonSettings)
-                    .Where(p => p != null && p?.FamilyId != PokemonFamilyId.FamilyUnset);
+                    .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
         }
 
 

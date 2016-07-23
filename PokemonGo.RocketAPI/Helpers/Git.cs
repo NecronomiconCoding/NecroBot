@@ -29,7 +29,7 @@ namespace PokemonGo.RocketAPI.Helpers
                 {
                     Logger.Write(
                         "Awesome! You have already got the newest version! " +
-                        Assembly.GetExecutingAssembly().GetName().Version, LogLevel.Info);
+                        Assembly.GetExecutingAssembly().GetName().Version);
                     return;
                 }
 
