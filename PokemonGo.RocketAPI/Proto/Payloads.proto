@@ -269,7 +269,7 @@ message FortData {
 
 message FortLureInfo {
   string fort_id = 1;
-  double unknown2 = 2;
+  fixed64 encounter_id = 2;
   .AllEnum.PokemonId active_pokemon_id = 3;
   int64 lure_expires_timestamp_ms = 4;
 }
