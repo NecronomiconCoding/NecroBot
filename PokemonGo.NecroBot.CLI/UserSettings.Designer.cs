@@ -25,7 +25,7 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Google")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Ptc")]
         public string AuthType {
             get {
                 return ((string)(this["AuthType"]));
@@ -37,7 +37,7 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("username2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("user1")]
         public string PtcUsername {
             get {
                 return ((string)(this["PtcUsername"]));
@@ -49,7 +49,7 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("pw")]
+        [global::System.Configuration.DefaultSettingValueAttribute("pwd1")]
         public string PtcPassword {
             get {
                 return ((string)(this["PtcPassword"]));
@@ -73,7 +73,7 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("52.379189")]
+        [global::System.Configuration.DefaultSettingValueAttribute("40.800621")]
         public double DefaultLatitude {
             get {
                 return ((double)(this["DefaultLatitude"]));
@@ -85,7 +85,7 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4.899431")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-74.001889")]
         public double DefaultLongitude {
             get {
                 return ((double)(this["DefaultLongitude"]));

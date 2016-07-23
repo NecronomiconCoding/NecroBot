@@ -8,10 +8,11 @@ using PokemonGo.RocketAPI.GeneratedCode;
 using System.Collections.Concurrent;
 using System;
 using System.Threading;
+using PokemonGo.RocketAPI;
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Logic
+namespace PokemonGo.NecroBot.Logic
 {
     public class Inventory
     {

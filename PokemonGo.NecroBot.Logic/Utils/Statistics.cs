@@ -7,7 +7,7 @@ using PokemonGo.RocketAPI.GeneratedCode;
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Logic.Utils
+namespace PokemonGo.NecroBot.Logic.Utils
 {
     internal class Statistics
     {

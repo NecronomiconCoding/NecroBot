@@ -2,11 +2,11 @@
 
 using System;
 using System.Device.Location;
-using static PokemonGo.RocketAPI.Logic.Navigation;
+using static PokemonGo.NecroBot.Logic.Navigation;
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Logic.Utils
+namespace PokemonGo.NecroBot.Logic.Utils
 {
     public static class LocationUtils
     {

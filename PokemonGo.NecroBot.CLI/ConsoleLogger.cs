@@ -1,11 +1,12 @@
 ﻿#region
 
 using System;
+using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Logging;
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Console
+namespace PokemonGo.NecroBot.CLI
 {
     /// <summary>
     ///     The ConsoleLogger is a simple logger which writes all logs to the Console.
@@ -28,7 +29,7 @@ namespace PokemonGo.RocketAPI.Console
         ///     Log a specific message by LogLevel. Won't log if the LogLevel is greater than the maxLogLevel set.
         /// </summary>
         /// <param name="message">The message to log. The current time will be prepended.</param>
-        /// <param name="level">Optional. Default <see cref="LogLevel.Info" />.</param>
+        /// <param name="level">Optional. Default <see cref="System.LogLevel.Info" />.</param>
         /// <param name="color">Optional. Default is auotmatic</param>
         public void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black)
         {

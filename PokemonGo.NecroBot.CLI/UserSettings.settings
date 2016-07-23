@@ -3,22 +3,22 @@
   <Profiles />
   <Settings>
     <Setting Name="AuthType" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Google</Value>
+      <Value Profile="(Default)">Ptc</Value>
     </Setting>
     <Setting Name="PtcUsername" Type="System.String" Scope="User">
-      <Value Profile="(Default)">username2</Value>
+      <Value Profile="(Default)">user1</Value>
     </Setting>
     <Setting Name="PtcPassword" Type="System.String" Scope="User">
-      <Value Profile="(Default)">pw</Value>
+      <Value Profile="(Default)">pwd1</Value>
     </Setting>
     <Setting Name="GoogleRefreshToken" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="DefaultLatitude" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">52.379189</Value>
+      <Value Profile="(Default)">40.800621</Value>
     </Setting>
     <Setting Name="DefaultLongitude" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">4.899431</Value>
+      <Value Profile="(Default)">-74.001889</Value>
     </Setting>
     <Setting Name="DefaultAltitude" Type="System.Double" Scope="User">
       <Value Profile="(Default)">10</Value>

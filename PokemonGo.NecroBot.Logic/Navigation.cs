@@ -3,12 +3,13 @@
 using System;
 using System.Threading.Tasks;
 using PokemonGo.RocketAPI.GeneratedCode;
-using PokemonGo.RocketAPI.Logic.Utils;
 using System.Device.Location;
+using PokemonGo.NecroBot.Logic.Utils;
+using PokemonGo.RocketAPI;
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Logic
+namespace PokemonGo.NecroBot.Logic
 {
     public class Navigation
     {
