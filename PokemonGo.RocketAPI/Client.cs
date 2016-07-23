@@ -33,7 +33,7 @@ namespace PokemonGo.RocketAPI
             {
                 var latlngFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Coords.txt");
                 var latlng = latlngFromFile.Split(':');
-                if (latlng[0].Length != 0 && latlng[1].Length != 0 && latlng[0] != "NaN" && latlng[1] != "NaN")
+                if (latlng[0].Length != 0 && latlng[1].Length != 0)
                 {
                     try
                     {
@@ -335,6 +335,8 @@ namespace PokemonGo.RocketAPI
 
         private void SetCoordinates(double lat, double lng, double altitude)
         {
+            if (double.IsNaN(lat) || double.IsNaN(lng)) return;
+
             CurrentLat = lat;
             CurrentLng = lng;
             CurrentAltitude = altitude;
