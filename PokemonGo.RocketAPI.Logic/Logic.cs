@@ -78,7 +78,7 @@ namespace PokemonGo.RocketAPI.Logic
             if (playerStat != null)
             {
                 var message =
-                    $" {playerName} | Level {playerStat.Level:0} - ({playerStat.Experience - playerStat.PrevLevelXp:0} / {playerStat.NextLevelXp - playerStat.PrevLevelXp:0} XP)";
+                var xpDifference = GetXPDiff(playerStat.Level);
                 Console.Title = message;
                 if (updateOnly == false)
                     Logger.Write(message);
@@ -87,7 +87,7 @@ namespace PokemonGo.RocketAPI.Logic
                 await Task.Delay(5000);
         }
 
-        public static int GetXpDiff(int level)
+        public static int GetXPDiff(int level)
         {
             switch (level)
             {
@@ -415,7 +415,7 @@ namespace PokemonGo.RocketAPI.Logic
             foreach (var item in items)
             {
                 var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                Logger.Write($"{item.Count}x {(ItemId) item.Item_}", LogLevel.Recycling);
+                Logger.Write($"{item.Count}x {item.Item_}", LogLevel.Recycling);
                 await Task.Delay(500);
             }
         }
