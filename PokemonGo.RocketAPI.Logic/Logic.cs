@@ -335,6 +335,7 @@ namespace PokemonGo.RocketAPI.Logic
                 await Task.Delay(1000);
                 if(++stopsHit % 5 == 0) //TODO: OR item/pokemon bag is full
                 {
+                    stopsHit = 0;
                     await RecycleItems();
                     if (_clientSettings.EvolveAllPokemonWithEnoughCandy) await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                     if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
