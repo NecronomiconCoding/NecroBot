@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
+using System.Device.Location;
 
 #endregion
 
@@ -26,11 +27,14 @@ namespace PokemonGo.RocketAPI
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
+        bool WalkRouteInsteadAreaAroundDefault { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
 
         ICollection<PokemonId> PokemonsNotToTransfer { get; }
 
         ICollection<PokemonId> PokemonsNotToCatch { get; }
+
+        ICollection<GeoCoordinate> GetRoutePoints { get; }
     }
 }

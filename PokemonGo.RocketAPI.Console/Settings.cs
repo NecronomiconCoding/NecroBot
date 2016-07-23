@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
+using System.Device.Location;
 
 #endregion
 
@@ -15,6 +16,7 @@ namespace PokemonGo.RocketAPI.Console
         private ICollection<PokemonId> _pokemonsNotToTransfer;
         private ICollection<PokemonId> _pokemonsToEvolve;
         private ICollection<PokemonId> _pokemonsNotToCatch;
+        private ICollection<GeoCoordinate> _routeCoordinates;
 
         public AuthType AuthType => (AuthType) Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         public string PtcUsername => UserSettings.Default.PtcUsername;
@@ -30,6 +32,7 @@ namespace PokemonGo.RocketAPI.Console
         public int DelayBetweenPokemonCatch => UserSettings.Default.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
+        public bool WalkRouteInsteadAreaAroundDefault => UserSettings.Default.WalkRouteInsteadAreaAroundDefault;
 
         public string GoogleRefreshToken
         {
@@ -120,7 +123,7 @@ namespace PokemonGo.RocketAPI.Console
                 while (pokemonName != null)
                 {
                     var pokemon = Enum.Parse(typeof(PokemonId), pokemonName, true);
-                    if (pokemon != null) result.Add((PokemonId) pokemon);
+                    if (pokemon != null) result.Add((PokemonId)pokemon);
                     pokemonName = tr.ReadLine();
                 }
             }
@@ -134,6 +137,62 @@ namespace PokemonGo.RocketAPI.Console
             }
 
 
+            return result;
+        }
+
+        public ICollection<GeoCoordinate> GetRoutePoints
+        {
+            get
+            {
+                //Coordinates to walk
+                _routeCoordinates = _routeCoordinates ?? LoadRoute("Configs\\Route.txt");
+                return _routeCoordinates;
+            }
+        }
+
+        private static ICollection<GeoCoordinate> LoadRoute(string filename)
+        {
+            ICollection<GeoCoordinate> result = new List<GeoCoordinate>();
+
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
+            {
+                Logger.Write($"Loading File: {filename}");
+                TextReader tr = File.OpenText(filename);
+
+                var coordinateLine = tr.ReadLine();
+                while (coordinateLine != null)
+                {
+                    try
+                    {
+                        var latlng = coordinateLine.Split(':');
+                        if (latlng[0].Length != 0 && latlng[1].Length != 0)
+                        {
+                            double temp_lat = Convert.ToDouble(latlng[0]);
+                            double temp_long = Convert.ToDouble(latlng[1]);
+
+                            if (temp_lat >= -90 && temp_lat <= 90 && temp_long >= -180 && temp_long <= 180)
+                            {
+                                result.Add(new GeoCoordinate(temp_lat, temp_long));
+                            }
+                            else
+                            {
+                                throw new FormatException();
+                            }
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        Logger.Write($"Coordinates in \"{filename}\" file are invalid.", LogLevel.Error);
+                    }
+                    coordinateLine = tr.ReadLine();
+                }
+            }
+            else
+            {
+                Logger.Write($"File: {filename} not found, creating new...", LogLevel.Error);
+                File.AppendText(Directory.GetCurrentDirectory() + "\\" + filename);
+            }
+            
             return result;
         }
     }
