@@ -92,7 +92,7 @@ namespace PokemonGo.RocketAPI.Logic
             var pokemons = myPokemon.ToList();
             return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
                 .OrderByDescending(x => x.Cp)
-                .First();
+                .FirstOrDefault();
         }
 
         public async Task<int> GetItemAmountByType(MiscEnums.Item type)
