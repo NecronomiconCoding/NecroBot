@@ -29,10 +29,10 @@ namespace PokemonGo.RocketAPI
         public Client(ISettings settings)
         {
             Settings = settings;
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\Coords.txt") &&
-                File.ReadAllText(Directory.GetCurrentDirectory() + "\\Coords.txt").Contains(":"))
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini") &&
+                File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini").Contains(":"))
             {
-                var latlngFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Coords.txt");
+                var latlngFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini");
                 var latlng = latlngFromFile.Split(':');
                 if (latlng[0].Length != 0 && latlng[1].Length != 0)
                 {
@@ -48,14 +48,14 @@ namespace PokemonGo.RocketAPI
                         }
                         else
                         {
-                            Logger.Write("Coordinates in \"Coords.txt\" file are invalid, using the default coordinates ",
+                            Logger.Write("Coordinates in \"Coords.ini\" file are invalid, using the default coordinates ",
                             LogLevel.Warning);
                             SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
                         }
                     }
                     catch (FormatException)
                     {
-                        Logger.Write("Coordinates in \"Coords.txt\" file are invalid, using the default coordinates ",
+                        Logger.Write("Coordinates in \"Coords.ini\" file are invalid, using the default coordinates ",
                             LogLevel.Warning);
                         SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
                     }
@@ -318,7 +318,7 @@ namespace PokemonGo.RocketAPI
         public void SaveLatLng(double lat, double lng)
         {
             var latlng = lat + ":" + lng;
-            File.WriteAllText(Directory.GetCurrentDirectory() + "\\Coords.txt", latlng);
+            File.WriteAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini", latlng);
         }
 
         public async Task<FortSearchResponse> SearchFort(string fortId, double fortLat, double fortLng)

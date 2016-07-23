@@ -82,7 +82,7 @@ Need help? <a name="chat">Join the Chat!</a> **The Issue Tracker is not for help
 <h2><a name="changing-location">Changing Location of the Bot</a></h2><br/>
 
 1. Get new latitude and longitude
-2. Delete `Coords.txt` from folder `PokemonGo.RocketAPI.Console\bin\Debug\`
+2. Delete `Coords.ini` from folder `PokemonGo.RocketAPI.Console\bin\Debug\Configs`
 3. Change the value of `DefaultLatitude` and `DefaultLongitude` in `UserSettings.settings`
 4. Compile and run (CTRL + F5)<br/>
 
