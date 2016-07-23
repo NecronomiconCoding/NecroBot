@@ -26,6 +26,7 @@ namespace PokemonGo.RocketAPI
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
+        bool UseRandomDelay { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
 
