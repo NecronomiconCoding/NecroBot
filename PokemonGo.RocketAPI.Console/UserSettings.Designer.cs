@@ -170,12 +170,12 @@ namespace PokemonGo.RocketAPI.Console {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5000")]
-        public int DelayBetweenMove {
+        public int DelayBetweenPokemonCatch {
             get {
-                return ((int)(this["DelayBetweenMove"]));
+                return ((int)(this["DelayBetweenPokemonCatch"]));
             }
             set {
-                this["DelayBetweenMove"] = value;
+                this["DelayBetweenPokemonCatch"] = value;
             }
         }
         
@@ -188,6 +188,18 @@ namespace PokemonGo.RocketAPI.Console {
             }
             set {
                 this["UsePokemonToNotCatchFilter"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int KeepMinDuplicatePokemon {
+            get {
+                return ((int)(this["KeepMinDuplicatePokemon"]));
+            }
+            set {
+                this["KeepMinDuplicatePokemon"] = value;
             }
         }
     }
