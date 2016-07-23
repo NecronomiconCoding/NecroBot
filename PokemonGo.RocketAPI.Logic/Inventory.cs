@@ -59,7 +59,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                 return results;
             }
-            Logger.Write($"{_client.Settings.KeepMinDuplicatePokemon}");
+          
             return pokemonList
                 .GroupBy(p => p.PokemonId)
                 .Where(x => x.Count() > 1)

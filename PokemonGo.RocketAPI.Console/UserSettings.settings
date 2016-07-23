@@ -42,7 +42,7 @@
       <Value Profile="(Default)">5000</Value>
     </Setting>
     <Setting Name="UsePokemonToNotCatchFilter" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="KeepMinDuplicatePokemon" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>

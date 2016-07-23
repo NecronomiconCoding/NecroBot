@@ -13,8 +13,9 @@ namespace PokemonGo.RocketAPI.Console
     public class Settings : ISettings
     {
         private ICollection<PokemonId> _pokemonsNotToTransfer;
-
         private ICollection<PokemonId> _pokemonsToEvolve;
+        private ICollection<PokemonId> _pokemonsNotToCatch;
+
         public AuthType AuthType => (AuthType) Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         public string PtcUsername => UserSettings.Default.PtcUsername;
         public string PtcPassword => UserSettings.Default.PtcPassword;
@@ -96,12 +97,15 @@ namespace PokemonGo.RocketAPI.Console
         }
 
         //Do not catch those
-        public ICollection<PokemonId> PokemonsNotToCatch => new[]
+        public ICollection<PokemonId> PokemonsNotToCatch
         {
-            //Add pokemon here
-            PokemonId.Pidgey,
-            PokemonId.Rattata
-        };
+            get
+            {
+                //Type of pokemons not to catch
+                _pokemonsNotToCatch = _pokemonsNotToCatch ?? LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.txt");
+                return _pokemonsNotToCatch;
+            }
+        }
 
         private static ICollection<PokemonId> LoadPokemonList(string filename)
         {
