@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- define warning icon -->
 [1.1]: http://i.imgur.com/M4fJ65n.png (ATTENTION)
 [1.2]: http://i.imgur.com/NNcGs1n.png (BTC)
@@ -75,6 +76,51 @@ Note: You will need some basic Computer Expierience.<br/>
 Need help? <a name="chat">Join the Chat!</a> **The Issue Tracker is not for help!**<br/>
 <br/>
 <h2><a name="install-config">Installation & Configuration</a></h2><br/>
+=======
+<<<<<<< HEAD
+# Fan made free Pokemon RPG 
+# http://www.pokemonpets.com 
+
+# Pokemon alike but unique Monster RPG 
+# http://www.monstermmorpg.com 
+
+# Pokemon Go API Client Library #
+=======
+# Pokemon Go Bot based on FeroxRevs API #
+>>>>>>> refs/remotes/NecronomiconCoding/master
+
+This is only for educational use and a proof of concept. 
+
+## About
+
+Chat about this Repository via Discord: https://discord.gg/VsVrjgr
+
+## Donate
+
+Bitcoin Address:  1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e (All of those go to Ferox only)
+
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=farhaninoor1%40gmail%2ecom&lc=GB&item_name=POGO%20Bot%20Donations&item_number=POGO&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest) 
+(All of the PayPal Donations are split with the most active Collaborators.)
+
+## Features
+
+```
+#PTC Login / Google
+#Get Map Objects and Inventory
+#Search for gyms/pokestops/spawns
+#Farm pokestops
+#Farm all pokemons in neighbourhood and throw berries/use best pokeball
+#Transfers duplicate pokemons
+#Evolve all pokemons
+#Throws away unneeded items
+#Humanlike Walking
+
+```
+
+## Setting it up
+Note: You need some basic Computer Expierience, if you need help somewhere, ask the community and do not spam us via private messages. **The Issue Tracker is not for help!**
+
+>>>>>>> refs/remotes/origin/master
 
 1. Download and Install [Visual Studio 2015](https://go.microsoft.com/fwlink/?LinkId=691979&clcid=0x407)
 2. Download [this Repository](https://github.com/NecronomiconCoding/Pokemon-Go-Bot/archive/master.zip)

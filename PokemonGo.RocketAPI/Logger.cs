@@ -39,7 +39,7 @@ namespace PokemonGo.RocketAPI
             if (_logger == null)
                 return;
             _logger.Write(message, level, color);
-            Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
+            Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss.fff")}] ", message));
         }
 
         private static void Log(string message)
@@ -55,6 +55,7 @@ namespace PokemonGo.RocketAPI
 
     public enum LogLevel
     {
+        Self = -1,
         None = 0,
         Error = 1,
         Warning = 2,
@@ -67,5 +68,6 @@ namespace PokemonGo.RocketAPI
         Evolve = 9,
         Info = 10,
         Debug = 11
+
     }
 }
