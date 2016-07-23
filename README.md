@@ -34,13 +34,20 @@ Note: You need some basic Computer Expierience, if you need help somewhere, ask 
 1. Download and Install [Visual Studio 2015](https://go.microsoft.com/fwlink/?LinkId=691979&clcid=0x407)
 2. Download [this Repository](https://github.com/NecronomiconCoding/Pokemon-Go-Bot/archive/master.zip)
 3. Open Pokemon Go Rocket API.sln
-4. On the right hand side, double click on UserSettings.settings
+4. On the right hand side, double click on "UserSettings.settings"
 5. Enter the DefaultLatitude and DefaultLongitude [can be found here](http://mondeca.com/index.php/en/any-place-en)
 6. Select the AuthType (Google or Ptc for Pokémon Trainer Club)
 7. If selected Ptc , enter the Username and Password of your Account
-8. Right click on PokemonGo.RocketAPI.Console and Set it as Startup Project
+8. Right click on "PokemonGo.RocketAPI.Console" and Set it as Startup Project
 9. Press CTRL + F5 and follow the Instructions
 10. Have fun! 
+
+## Changing location of bot
+
+1. Get new latitude and longitude
+2. Delete "Coords.txt" in "PokemonGo.RocketAPI.Console\bin\Debug\" folder
+3. Change the value of DefaultLatitude and DefaultLongitude in "UserSettings.settings"
+4. Compile and run (CTRL + F5)
 
 ## License
 This Project is licensed as GNU (GNU GENERAL PUBLIC LICENSE v3) 
