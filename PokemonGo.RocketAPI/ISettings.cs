@@ -27,6 +27,8 @@ namespace PokemonGo.RocketAPI
         bool PrioritizeIVOverCP {get; }
         bool EvolveAllPokemonAboveIV { get; }
         float EvolveAboveIVValue { get; }
+        int MaxTravelDistanceInMeters { get; }
+
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }

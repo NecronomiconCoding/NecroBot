@@ -224,6 +224,17 @@ namespace PokemonGo.RocketAPI.Console {
             }
             set {
                 this["EvolveAboveIVValue"] = value;
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
+        public int MaxTravelDistanceInMeters {
+            get {
+                return ((int)(this["MaxTravelDistanceInMeters"]));
+            }
+            set {
+                this["MaxTravelDistanceInMeters"] = value;
+
             }
         }
     }

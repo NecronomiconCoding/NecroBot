@@ -52,6 +52,8 @@
     </Setting>
     <Setting Name="EvolveAboveIVValue" Type="System.Single" Scope="User">
       <Value Profile="(Default)">0</Value>
+    <Setting Name="MaxTravelDistanceInMeters" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
     </Setting>
   </Settings>
 </SettingsFile>
