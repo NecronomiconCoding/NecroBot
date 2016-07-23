@@ -575,12 +575,14 @@ namespace PokemonGo.RocketAPI.Logic
 
             Logger.Write($"poke ball ({pokeBallsCount}) , great ball ({greatBallsCount}) , ultra ball ({ultraBallsCount}) , master ball ({masterBallsCount}) ", LogLevel.Info);
 
-            if ((pokeBallsCount + greatBallsCount + ultraBallsCount) < 100)
+            if ((pokeBallsCount + greatBallsCount + ultraBallsCount) < 50)
             {
                 blCriticalBall = true;
             }
-            else
+            if ((pokeBallsCount + greatBallsCount + ultraBallsCount) > 100)
+            {
                 blCriticalBall = false;
+            }
 
             if (masterBallsCount > 0 && pokemonCp >= 2000)
                 return MiscEnums.Item.ITEM_MASTER_BALL;
