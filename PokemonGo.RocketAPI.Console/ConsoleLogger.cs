@@ -86,6 +86,7 @@ namespace PokemonGo.RocketAPI.Console
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ERROR) {message}");
                     break;
                 case LogLevel.Self:
+                    System.Console.ForegroundColor = color;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (SELF) {message}");
                     break;
             }
