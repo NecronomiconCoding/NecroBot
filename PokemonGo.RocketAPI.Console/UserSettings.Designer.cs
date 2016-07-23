@@ -202,5 +202,17 @@ namespace PokemonGo.RocketAPI.Console {
                 this["KeepMinDuplicatePokemon"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PrioritizeIVOverCP {
+            get {
+                return ((bool)(this["PrioritizeIVOverCP"]));
+            }
+            set {
+                this["PrioritizeIVOverCP"] = value;
+            }
+        }
     }
 }
