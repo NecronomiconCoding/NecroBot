@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -73,7 +74,8 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Type of pokemons to evolve
-                _pokemonsToEvolve = _pokemonsToEvolve ?? LoadPokemonList("Configs\\ConfigPokemonsToEvolve.txt");
+                var defaultText = new string[] { "Zubat", "Pidgey", "Ratata" };
+                _pokemonsToEvolve = _pokemonsToEvolve ?? LoadPokemonList("Configs\\ConfigPokemonsToEvolve.txt", defaultText);
                 return _pokemonsToEvolve;
             }
         }
@@ -83,7 +85,8 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Type of pokemons not to transfer
-                _pokemonsNotToTransfer = _pokemonsNotToTransfer ?? LoadPokemonList("Configs\\ConfigPokemonsToKeep.txt");
+                var defaultText = new string[] { "Dragonite", "Charizard", "Zapdos", "Snorlax", "Alakhazam", "Mew", "Mewtwo" };
+                _pokemonsNotToTransfer = _pokemonsNotToTransfer ?? LoadPokemonList("Configs\\ConfigPokemonsToKeep.txt", defaultText);
                 return _pokemonsNotToTransfer;
             }
         }
@@ -94,38 +97,59 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Type of pokemons not to catch
-                _pokemonsNotToCatch = _pokemonsNotToCatch ?? LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.txt");
+                var defaultText = new string[] { "Zubat", "Pidgey", "Ratata" };
+                _pokemonsNotToCatch = _pokemonsNotToCatch ?? LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.txt", defaultText);
                 return _pokemonsNotToCatch;
             }
         }
 
-        private static ICollection<PokemonId> LoadPokemonList(string filename)
+        private static ICollection<PokemonId> LoadPokemonList(string filename, string[] defaultContent)
         {
             ICollection<PokemonId> result = new List<PokemonId>();
+            Func<string, ICollection<PokemonId>> addPokemonToResult = delegate (string pokemonName) {
+                PokemonId pokemon;
+                if (Enum.TryParse<PokemonId>(pokemonName, out pokemon))
+                {
+                    result.Add((PokemonId)pokemon);
+                }
+                return result;
+            };
+
+            DirectoryInfo di = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
 
             if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
             {
                 Logger.Write($"Loading File: {filename}");
-                TextReader tr = File.OpenText(filename);
+
+                var content = string.Empty;
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    content = reader.ReadToEnd();
+                    reader.Close();
+                }
+
+                content = Regex.Replace(content, @"\\/\*(.|\n)*?\*\/", ""); //todo: supposed to remove comment blocks
+
+
+                StringReader tr = new StringReader(content);
 
                 var pokemonName = tr.ReadLine();
                 while (pokemonName != null)
                 {
-                    var pokemon = Enum.Parse(typeof(PokemonId), pokemonName, true);
-                    if (pokemon != null) result.Add((PokemonId) pokemon);
+                    addPokemonToResult(pokemonName);
                     pokemonName = tr.ReadLine();
                 }
             }
             else
             {
-                Logger.Write($"File: {filename} not found, creating new...", LogLevel.Error);
+                Logger.Write($"File: {filename} not found, creating new...", LogLevel.Warning);
                 using (var w = File.AppendText(Directory.GetCurrentDirectory() + "\\" + filename))
                 {
-                    w.WriteLine(PokemonId.Mewtwo.ToString());
+                    Array.ForEach(defaultContent, x => w.WriteLine(x));
+                    Array.ForEach(defaultContent, x => addPokemonToResult(x));
+                    w.Close();
                 }
             }
-
-
             return result;
         }
     }
