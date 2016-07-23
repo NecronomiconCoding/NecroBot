@@ -33,7 +33,8 @@ namespace PokemonGo.RocketAPI.Console
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
         public bool PrioritizeIVOverCP => UserSettings.Default.PrioritizeIVOverCP;
-
+        public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
+         
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
         {
