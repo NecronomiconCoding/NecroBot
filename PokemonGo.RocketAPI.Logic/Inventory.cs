@@ -72,7 +72,7 @@ namespace PokemonGo.RocketAPI.Logic
                     p =>
                         p.OrderByDescending(x => x.Cp)
                             .ThenBy(n => n.StaminaMax)
-                            .Skip(1)
+                            .Skip(_client.Settings.KeepMinDuplicatePokemon)
                             .ToList());
         }
 
