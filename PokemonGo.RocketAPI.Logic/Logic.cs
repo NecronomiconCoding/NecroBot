@@ -298,7 +298,6 @@ namespace PokemonGo.RocketAPI.Logic
                     Logger.Write($"Encounter problem: {encounter.Status}");
                 if (pokemons.ElementAtOrDefault(pokemons.Count() - 1) != pokemon) // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
                 {
-                    Logger.Write("There's more pokemon here",LogLevel.Info);
                     await Task.Delay(_clientSettings.DelayBetweenPokemonCatch);
                 }
 
