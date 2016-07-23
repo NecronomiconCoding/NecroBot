@@ -290,7 +290,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             var mapObjects = await _client.GetMapObjects();
 
-            // Wasn't sure how to make this pretty.
+            // Wasn't sure how to make this pretty. Edit as needed.
             var pokeStops =
                 mapObjects.MapCells.SelectMany(i => i.Forts)
                     .Where(
@@ -298,7 +298,7 @@ namespace PokemonGo.RocketAPI.Logic
                             i.Type == FortType.Checkpoint &&
                             i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
                             ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
-                            Navigation.DistanceBetween2Coordinates(
+                            LocationUtils.CalculateDistanceInMeters(
                                 _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
                                     i.Latitude, i.Longitude) < _clientSettings.MaxTravelDistanceInMeters) ||
                                         _clientSettings.MaxTravelDistanceInMeters == 0
