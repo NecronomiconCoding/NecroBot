@@ -428,15 +428,22 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task RecycleItems()
         {
-            var items = await _inventory.GetItemsToRecycle(_clientSettings);
+            var allItems = await _inventory.GetItems();
+            Random rnd = new Random();
+            int recycleThreshold = rnd.Next(200, 251);
 
-            foreach (var item in items)
+            if (allItems.Count() >= recycleThreshold)
             {
-                var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
-                _stats.AddItemsRemoved(item.Count);
-                _stats.UpdateConsoleTitle(_inventory);
-                await Task.Delay(500);
+                var items = await _inventory.GetItemsToRecycle(_clientSettings);
+
+                foreach (var item in items)
+                {
+                    var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
+                    Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
+                    _stats.AddItemsRemoved(item.Count);
+                    _stats.UpdateConsoleTitle(_inventory);
+                    await Task.Delay(500);
+                }
             }
         }
 
