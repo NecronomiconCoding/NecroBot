@@ -245,8 +245,9 @@ namespace PokemonGo.RocketAPI.Logic
 
                     await PostLoginExecute();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Logger.Write(e.Message + " from " + e.Source);
                     Logger.Write("Got an exception, trying automatic restart..", LogLevel.Error);
                     await Execute();
                 }
