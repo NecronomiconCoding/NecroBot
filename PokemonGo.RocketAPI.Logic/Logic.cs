@@ -266,6 +266,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task ExecuteCatchAllNearbyPokemons()
         {
+            Logger.Write("Looking for pokemon..");
             var mapObjects = await _client.GetMapObjects();
 
             var pokemons =
