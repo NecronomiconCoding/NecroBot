@@ -1,4 +1,4 @@
-﻿#region
+﻿#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -31,10 +31,10 @@ namespace PokemonGo.RocketAPI.Login
             do
             {
                 await Task.Delay(2000);
-                tokenResponse = await PollSubmittedToken(deviceCode.device_code);
-            } while (tokenResponse.access_token == null || tokenResponse.refresh_token == null);
+                tokenResponse = await PollSubmittedToken(deviceCode.DeviceCode);
+            } while (tokenResponse.AccessToken == null || tokenResponse.RefreshToken == null);
 
-            Logger.Write($"Save the refresh token in your settings: {tokenResponse.refresh_token}", LogLevel.None);
+            Logger.Write($"Save the refresh token in your settings: {tokenResponse.RefreshToken}", LogLevel.None);
 
             return tokenResponse;
         }
@@ -56,13 +56,13 @@ namespace PokemonGo.RocketAPI.Login
                 new KeyValuePair<string, string>("client_id", ClientId),
                 new KeyValuePair<string, string>("scope", "openid email https://www.googleapis.com/auth/userinfo.email"));
 
-            Logger.Write($"Please visit {deviceCode.verification_url} and enter {deviceCode.user_code}", LogLevel.None);
+            Logger.Write($"Please visit {deviceCode.VerificationUrl} and enter {deviceCode.UserCode}", LogLevel.None);
 
             await Task.Delay(2000);
             try
             {
                 Process.Start(@"http://www.google.com/device");
-                var thread = new Thread(() => Clipboard.SetText(deviceCode.user_code)); //Copy device code
+                var thread = new Thread(() => Clipboard.SetText(deviceCode.UserCode)); //Copy device code
                 thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
                 thread.Start();
                 thread.Join();
@@ -70,7 +70,7 @@ namespace PokemonGo.RocketAPI.Login
             catch (Exception)
             {
                 Logger.Write("Couldnt copy to clipboard, do it manually", LogLevel.Error);
-                Logger.Write($"Goto: http://www.google.com/device & enter {deviceCode.user_code}", LogLevel.Error);
+                Logger.Write($"Goto: http://www.google.com/device & enter {deviceCode.UserCode}", LogLevel.Error);
             }
 
             return deviceCode;
@@ -89,27 +89,27 @@ namespace PokemonGo.RocketAPI.Login
 
         internal class ErrorResponseModel
         {
-            public string error { get; set; }
-            public string error_description { get; set; }
+            public string Error { get; set; }
+            public string ErrorDescription { get; set; }
         }
 
         public class TokenResponseModel
         {
-            public string access_token { get; set; }
-            public string token_type { get; set; }
-            public int expires_in { get; set; }
-            public string refresh_token { get; set; }
-            public string id_token { get; set; }
+            public string AccessToken { get; set; }
+            public string TokenType { get; set; }
+            public int ExpiresIn { get; set; }
+            public string RefreshToken { get; set; }
+            public string IdToken { get; set; }
         }
 
 
         public class DeviceCodeModel
         {
-            public string verification_url { get; set; }
-            public int expires_in { get; set; }
-            public int interval { get; set; }
-            public string device_code { get; set; }
-            public string user_code { get; set; }
+            public string VerificationUrl { get; set; }
+            public int ExpiresIn { get; set; }
+            public int Interval { get; set; }
+            public string DeviceCode { get; set; }
+            public string UserCode { get; set; }
         }
     }
 }

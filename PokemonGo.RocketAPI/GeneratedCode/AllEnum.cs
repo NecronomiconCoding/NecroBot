@@ -779,7 +779,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
     [pbr::OriginalName("PIKACHU")] Pikachu = 25,
     [pbr::OriginalName("RAICHU")] Raichu = 26,
     [pbr::OriginalName("SANDSHREW")] Sandshrew = 27,
-    [pbr::OriginalName("SANDLASH")] Sandlash = 28,
+    [pbr::OriginalName("SANDSLASH")] Sandslash = 28,
     [pbr::OriginalName("NIDORAN_FEMALE")] NidoranFemale = 29,
     [pbr::OriginalName("NIDORINA")] Nidorina = 30,
     [pbr::OriginalName("NIDOQUEEN")] Nidoqueen = 31,
