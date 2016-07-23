@@ -1,4 +1,4 @@
-﻿#region
+#region
 
 using System;
 using System.Collections.Generic;
@@ -440,7 +440,7 @@ namespace PokemonGo.RocketAPI.Logic
                 }
                 else
                 {
-                    await ExecuteFarmingPokestopsAndPokemons();
+                await ExecuteFarmingPokestopsAndPokemons();
                 }
 
                 /*
@@ -479,7 +479,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task TransferDuplicatePokemon(bool keepPokemonsThatCanEvolve = false)
         {
-            var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve, _clientSettings.PokemonsNotToTransfer);
+            var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve, _clientSettings.PrioritizeIVOverCP,_clientSettings.PokemonsNotToTransfer);
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {

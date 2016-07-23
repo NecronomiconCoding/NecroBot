@@ -9897,6 +9897,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             fromFort_ = other.fromFort_;
         }
 
+        public double CalculateIV()
+        {
+            return ((double)(IndividualAttack + IndividualDefense + IndividualStamina) / (3.0f * 15.0f)) * 100.0f;
+        }
+
         public static pb::MessageParser<PokemonData> Parser
         {
             get { return _parser; }

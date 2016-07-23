@@ -32,6 +32,7 @@ namespace PokemonGo.RocketAPI.Console
         public int DelayBetweenPokemonCatch => UserSettings.Default.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
+        public bool PrioritizeIVOverCP => UserSettings.Default.PrioritizeIVOverCP;
         public bool WalkRouteInsteadAreaAroundDefault => UserSettings.Default.WalkRouteInsteadAreaAroundDefault;
 
         public string GoogleRefreshToken
@@ -138,7 +139,7 @@ namespace PokemonGo.RocketAPI.Console
 
 
             return result;
-        }
+            }
 
         public ICollection<GeoCoordinate> GetRoutePoints
         {
@@ -192,7 +193,7 @@ namespace PokemonGo.RocketAPI.Console
                 Logger.Write($"File: {filename} not found, creating new...", LogLevel.Error);
                 File.AppendText(Directory.GetCurrentDirectory() + "\\" + filename);
             }
-            
+
             return result;
         }
     }
