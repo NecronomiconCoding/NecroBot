@@ -60,23 +60,25 @@ namespace PokemonGo.RocketAPI.Logic
                             ? $"{pokemon.PokemonId} Lvl {PokemonInfo.GetLevel(encounter?.WildPokemon?.PokemonData)} ({encounter?.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter?.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {encounter?.CaptureProbability?.CaptureProbability_.First()} | {Math.Round(distance)}m dist | with {pokeball} "
                             : $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()))} | {Math.Round(distance)}m distance {caughtPokemonResponse.Status} | with {pokeball}",
                         LogLevel.Caught);
-                await DisplayPlayerLevelInTitle(true);
+                await UpdateTitleInfo(true);
                 await Task.Delay(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
-        private async Task DisplayPlayerLevelInTitle(bool updateOnly = false)
+        private async Task UpdateTitleInfo(bool updateOnly = false)
         {
             _playerProfile = _playerProfile.Profile != null ? _playerProfile : await _client.GetProfile();
             var playerName = _playerProfile.Profile.Username ?? "";
             var playerStats = await _inventory.GetPlayerStats();
             var playerStat = playerStats.FirstOrDefault();
+            var playerLat = _client.CurrentLat.ToString("f4");
+            var playerLng = _client.CurrentLng.ToString("f4");
             if (playerStat != null)
             {
                 var xpDifference = GetXPDiff(playerStat.Level);
                 var message =
-                     $"{playerName} | Level {playerStat.Level}: {playerStat.Experience - playerStat.PrevLevelXp - xpDifference}/{playerStat.NextLevelXp - playerStat.PrevLevelXp - xpDifference}XP Stardust: {_playerProfile.Profile.Currency.ToArray()[1].Amount}";
+                     $"{playerName} | Level {playerStat.Level}: {playerStat.Experience - playerStat.PrevLevelXp - xpDifference}/{playerStat.NextLevelXp - playerStat.PrevLevelXp - xpDifference}XP | Stardust: {_playerProfile.Profile.Currency.ToArray()[1].Amount} | Location: {playerLat}, {playerLng}";
                 Console.Title = message;
                 if (updateOnly == false)
                     Logger.Write(message);
@@ -184,7 +186,7 @@ namespace PokemonGo.RocketAPI.Logic
                 {
                     Logger.Write($"{pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp",
                         LogLevel.Evolve);
-                    await DisplayPlayerLevelInTitle(true);
+                    await UpdateTitleInfo(true);
                 }
                 else
                     Logger.Write(
@@ -335,7 +337,7 @@ namespace PokemonGo.RocketAPI.Logic
                     Logger.Write(
                         $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
                         LogLevel.Pokestop);
-                    await DisplayPlayerLevelInTitle(true);
+                    await UpdateTitleInfo(true);
                 }
 
                 await Task.Delay(1000);
@@ -385,7 +387,7 @@ namespace PokemonGo.RocketAPI.Logic
             while (true)
             {
                 _playerProfile = await _client.GetProfile();
-                await DisplayPlayerLevelInTitle();
+                await UpdateTitleInfo();
                 if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
                     await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
