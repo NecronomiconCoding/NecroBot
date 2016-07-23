@@ -42,7 +42,7 @@ namespace PokemonGo.RocketAPI
             {
                 var latlngFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Coords.txt");
                 var latlng = latlngFromFile.Split(':');
-                if (latlng[0].Length != 0 && latlng[1].Length != 0)
+                if (latlng[0].Length != 0 && latlng[1].Length != 0 && latlng[0] != "NaN" && latlng[1] != "NaN")
                 {
                     try
                     {
