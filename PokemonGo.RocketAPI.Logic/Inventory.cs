@@ -1,11 +1,10 @@
-﻿#region
+﻿#region Usings
 
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
-using System.Collections.Concurrent;
 using System;
 using System.Threading;
 
@@ -107,7 +106,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         public async Task<IEnumerable<Item>> GetItems()
         {
-            var inventory = await getCachedInventory();
+            var inventory = await GetCachedInventory();
             return inventory.InventoryDelta.InventoryItems
                 .Select(i => i.InventoryItemData?.Item)
                 .Where(p => p != null);
@@ -131,7 +130,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         public async Task<IEnumerable<PlayerStats>> GetPlayerStats()
         {
-            var inventory = await getCachedInventory();
+            var inventory = await GetCachedInventory();
             return inventory.InventoryDelta.InventoryItems
                 .Select(i => i.InventoryItemData?.PlayerStats)
                 .Where(p => p != null);
@@ -139,7 +138,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         public async Task<IEnumerable<PokemonFamily>> GetPokemonFamilies()
         {
-            var inventory = await getCachedInventory();
+            var inventory = await GetCachedInventory();
             return
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonFamily)
                     .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
@@ -147,7 +146,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         public async Task<IEnumerable<PokemonData>> GetPokemons()
         {
-            var inventory = await getCachedInventory();
+            var inventory = await GetCachedInventory();
             return
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon)
                     .Where(p => p != null && p.PokemonId > 0);
@@ -200,30 +199,27 @@ namespace PokemonGo.RocketAPI.Logic
         }
 
 
-        private async Task<GetInventoryResponse> getCachedInventory()
+        private async Task<GetInventoryResponse> GetCachedInventory()
         {
             var now = DateTime.UtcNow;
             SemaphoreSlim ss = new SemaphoreSlim(10);
 
-            if (_lastRefresh != null && _lastRefresh.AddSeconds(30).Ticks > now.Ticks)
+            if (_lastRefresh.AddSeconds(30).Ticks > now.Ticks)
             {
                 return _cachedInventory;
             }
-            else
+
+            await ss.WaitAsync();
+            try
             {
-                await ss.WaitAsync();
-                try
-                {
-                    _lastRefresh = now;
-                    _cachedInventory = await _client.GetInventory();
-                    return _cachedInventory;
-                }
-                finally
-                {
-                    ss.Release();
-                }
+                _lastRefresh = now;
+                _cachedInventory = await _client.GetInventory();
+                return _cachedInventory;
             }
-           
+            finally
+            {
+                ss.Release();
+            }
         }
     }
 }

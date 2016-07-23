@@ -1,4 +1,4 @@
-﻿#region
+﻿#region Usings
 
 using System;
 using System.Threading.Tasks;
@@ -62,10 +62,7 @@ namespace PokemonGo.RocketAPI.Logic
                 waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
 
                 requestSendDateTime = DateTime.Now;
-                result =
-                    await
-                        _client.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                            _client.Settings.DefaultAltitude);
+                result = await _client.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude, _client.Settings.DefaultAltitude);
                 if (functionExecutedWhileWalking != null) 
                     await functionExecutedWhileWalking();// look for pokemon
                 await Task.Delay(Math.Min((int) (distanceToTarget/speedInMetersPerSecond*1000), 3000));

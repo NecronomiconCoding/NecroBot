@@ -1,4 +1,4 @@
-﻿#region
+﻿#region Usings
 
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,8 @@ using PokemonGo.RocketAPI.GeneratedCode;
 
 namespace PokemonGo.RocketAPI.Console
 {
-    public class Settings : ISettings
+    public class Settings 
+        : ISettings
     {
         private ICollection<PokemonId> _pokemonsNotToTransfer;
         private ICollection<PokemonId> _pokemonsToEvolve;
