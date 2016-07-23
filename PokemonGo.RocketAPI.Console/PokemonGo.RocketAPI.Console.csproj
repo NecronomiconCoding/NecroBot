@@ -62,6 +62,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Configs\GoogleAuth.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="UserSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
