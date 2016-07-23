@@ -1,6 +1,7 @@
 ﻿syntax = "proto3";
 
 package AllEnum;
+option csharp_namespace = "PokemonGo.RocketAPI.GeneratedCode";
 
 enum RpcDirection {
   UNKNOWN = 0;
