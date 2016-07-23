@@ -416,7 +416,7 @@ namespace PokemonGo.RocketAPI.Logic
             foreach (var item in items)
             {
                 var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                Logger.Write($"{item.Count}x {item.Item_}", LogLevel.Recycling);
+                Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
                 await Task.Delay(500);
             }
         }
