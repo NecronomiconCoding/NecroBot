@@ -30,12 +30,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GMap.NET.Core, Version=1.7.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.NET.WindowsForms.1.7.1\lib\net40\GMap.NET.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsForms, Version=1.7.0.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.NET.WindowsForms.1.7.1\lib\net40\GMap.NET.WindowsForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Google.Protobuf">
-      <HintPath>..\PokemonGo.RocketAPI\bin\Debug\Google.Protobuf.dll</HintPath>
+      <HintPath>..\packages\Google.Protobuf.3.0.0-beta3\lib\dotnet\Google.Protobuf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,9 +55,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Inventory.cs" />
+    <Compile Include="liveView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="liveView.designer.cs">
+      <DependentUpon>liveView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Logic.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Utils\LocationUtils.cs" />
     <Compile Include="Utils\StringUtils.cs" />
   </ItemGroup>
@@ -61,6 +82,556 @@
     <None Include="app.config">
       <SubType>Designer</SubType>
     </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="liveView.resx">
+      <DependentUpon>liveView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_101.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_102.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_103.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_104.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_201.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_202.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_301.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_401.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_402.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_403.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_404.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_701.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_702.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_703.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_704.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_705.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_901.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\item_902.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\avatar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Instinct.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mystic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokegym.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokestop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokestop_lured.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Valor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_19.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_26.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_27.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_28.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_31.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_33.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_34.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_35.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_36.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_37.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_38.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_39.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_41.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_42.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_43.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_44.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_45.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_46.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_47.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_49.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_51.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_52.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_53.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_54.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_55.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_56.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_57.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_58.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_59.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_60.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_61.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_62.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_63.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_65.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_66.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_67.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_68.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_69.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_70.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_71.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_73.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_74.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_75.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_76.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_77.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_78.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_79.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_80.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_81.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_82.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_83.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_84.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_85.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_86.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_87.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_88.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_89.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_90.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_91.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_92.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_93.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_94.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_95.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_97.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_98.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_99.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_101.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_102.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_103.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_104.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_105.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_106.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_107.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_108.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_109.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_110.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_111.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_112.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_113.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_114.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_115.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_116.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_117.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_118.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_119.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_120.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_121.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_122.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_123.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_124.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_125.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_126.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_127.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_128.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_129.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_130.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_131.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_132.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_133.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_134.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_135.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_136.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_137.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_138.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_139.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_140.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_141.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_142.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_143.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_144.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_145.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_146.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_147.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_148.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_149.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_150.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pokemon_151.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

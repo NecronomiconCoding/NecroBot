@@ -11,6 +11,7 @@ using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Logic.Utils;
+using System.Windows.Forms;
 
 #endregion
 
@@ -23,6 +24,9 @@ namespace PokemonGo.RocketAPI.Logic
         private readonly Inventory _inventory;
         private readonly Navigation _navigation;
         private GetPlayerResponse _playerProfile;
+
+        private static liveView _liveView;
+        private static bool _useLiveview = true;
 
         public Logic(ISettings clientSettings)
         {
@@ -64,6 +68,7 @@ namespace PokemonGo.RocketAPI.Logic
                         : $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()))} | {Math.Round(distance)}m distance {caughtPokemonResponse.Status} | with {pokeball}",
                     LogLevel.Caught);
                 await DisplayPlayerLevelInTitle(true);
+                UpdateLiveView();
                 await Task.Delay(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
@@ -207,6 +212,12 @@ namespace PokemonGo.RocketAPI.Logic
             Thread.Sleep(3000);
             Logger.Write($"Logging in via: {_clientSettings.AuthType}");
 
+            if (_useLiveview)
+            {
+                Thread t = new Thread(StartLiveView);
+                t.Start();
+            }
+
             while (true)
             {
                 try
@@ -217,6 +228,8 @@ namespace PokemonGo.RocketAPI.Logic
                         await _client.DoGoogleLogin();
 
                     await _client.SetServer();
+
+                    UpdateLiveView();
 
                     await PostLoginExecute();
                 }
@@ -276,6 +289,8 @@ namespace PokemonGo.RocketAPI.Logic
                                 new Navigation.Location(_client.CurrentLat, _client.CurrentLng),
                                 new Navigation.Location(i.Latitude, i.Longitude)));
 
+            UpdateLiveViewMapPokemons(pokemons);
+
             foreach (var pokemon in pokemons)
             {
                 if (_clientSettings.UsePokemonToNotCatchFilter &&
@@ -318,6 +333,9 @@ namespace PokemonGo.RocketAPI.Logic
                                 new Navigation.Location(_client.CurrentLat, _client.CurrentLng),
                                 new Navigation.Location(i.Latitude, i.Longitude)));
 
+
+            UpdateLiveViewMapPokestops(pokeStops);
+
             foreach (var pokeStop in pokeStops)
             {
                 var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
@@ -338,7 +356,7 @@ namespace PokemonGo.RocketAPI.Logic
                         LogLevel.Pokestop);
                     await DisplayPlayerLevelInTitle(true);
                 }
-
+                UpdateLiveView();
                 await Task.Delay(1000);
                 await RecycleItems();
                 await ExecuteCatchAllNearbyPokemons();
@@ -394,7 +412,7 @@ namespace PokemonGo.RocketAPI.Logic
                 await DisplayHighests();
                 await RecycleItems();
                 await ExecuteFarmingPokestopsAndPokemons();
-
+                UpdateLiveView();
                 /*
             * Example calls below
             *
@@ -479,6 +497,48 @@ namespace PokemonGo.RocketAPI.Logic
                     $"# CP {pokemon.Cp}\t| ({CalculatePokemonPerfection(pokemon).ToString("0.00")}\t% perfect) NAME: '{pokemon.PokemonId}'",
                     LogLevel.Info, ConsoleColor.Yellow);
             }
+        }
+
+        public void StartLiveView()
+        {
+            _liveView = new liveView();
+            Application.EnableVisualStyles();
+            Application.Run(_liveView);
+        }
+
+        private async void UpdateLiveView()
+        {
+            if (_liveView != null)
+            {
+                _liveView.UpdateLatLng(_client.CurrentLat, _client.CurrentLng);
+
+                var mapObjects = await _client.GetMapObjects();
+
+                var profile = await _client.GetProfile();
+                _liveView.UpdateMyProfile(profile.Profile);
+
+                var inventory = await _client.GetInventory();
+                PlayerStats mystats = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData.PlayerStats).Where(p => p != null).FirstOrDefault();
+                _liveView.UpdateMyStats(mystats);
+
+                IEnumerable<PokemonData> mypokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0).OrderBy(pp => pp.PokemonId.ToString()).ThenBy(pp => pp.Cp).ToList<PokemonData>();
+                _liveView.UpdateMyPokemons(mypokemons);
+
+                IEnumerable<Item> myitems = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData.Item).Where(p => p != null).ToList<Item>();
+                _liveView.UpdateMyItems(myitems);
+            }
+        }
+
+        private void UpdateLiveViewMapPokestops(IEnumerable<FortData> pokeStops)
+        {
+            if(_liveView != null)
+                _liveView.UpdateMapPokeStops(pokeStops);
+        }
+
+        private void UpdateLiveViewMapPokemons(IEnumerable<MapPokemon> pokemons)
+        {
+            if (_liveView != null)
+                _liveView.UpdateMapPokemons(pokemons);
         }
     }
 }
