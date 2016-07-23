@@ -202,5 +202,17 @@ namespace PokemonGo.RocketAPI.Console {
                 this["KeepMinDuplicatePokemon"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool KeepPokemonsThatCanEvolve {
+            get {
+                return ((bool)(this["KeepPokemonsThatCanEvolve"]));
+            }
+            set {
+                this["KeepPokemonsThatCanEvolve"] = value;
+            }
+        }
     }
 }
