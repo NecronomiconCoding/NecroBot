@@ -1,18 +1,7 @@
-Venusaur
-Charizard
-Blastiose
-Alakazam
-Farfetch'd
-Kangaskhan
-Mr. Mime
-Lapras
-Ditto
-Porygon
-Aerodactyl
-Snorlax
-Articuno
-Zapdos
-Moltres
 Dragonite
-Mewtwo
+Charizard
+Zapdos
+Snorlax
+Alakhazam
 Mew
+Mewtwo
