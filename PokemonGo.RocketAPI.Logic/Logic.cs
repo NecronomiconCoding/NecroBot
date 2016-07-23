@@ -615,6 +615,7 @@ namespace PokemonGo.RocketAPI.Logic
             while (true)
             {
                 _playerProfile = await _client.GetProfile();
+                _stats.SetUsername(_playerProfile);
                 if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
                     await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
@@ -639,15 +640,30 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task RecycleItems()
         {
-            var items = await _inventory.GetItemsToRecycle(_clientSettings);
+            var allItems = await _inventory.GetItems();
+            Random rnd = new Random();
+            int recycleThreshold = rnd.Next(200, 251);
 
-            foreach (var item in items)
+            if (allItems.Count() >= recycleThreshold)
             {
+<<<<<<< HEAD
                 var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
                 Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
                 _stats.AddItemsRemoved(item.Count);
                 _stats.UpdateConsoleTitle(_inventory);
                 await Task.Delay(500);
+=======
+                var items = await _inventory.GetItemsToRecycle(_clientSettings);
+
+                foreach (var item in items)
+                {
+                    var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
+                    Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
+                    _stats.AddItemsRemoved(item.Count);
+                    _stats.UpdateConsoleTitle(_inventory);
+                    await Task.Delay(500);
+                }
+>>>>>>> refs/remotes/NecronomiconCoding/master
             }
         }
 
