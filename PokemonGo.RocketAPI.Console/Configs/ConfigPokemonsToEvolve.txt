@@ -1,3 +1,4 @@
+Caterpie
 Clefable
 Cubone
 Diglett
@@ -19,6 +20,7 @@ Mankey
 Meowth
 Omanyte
 Paras
+Pidgey
 Ponyta
 Psyduck
 Rattata
@@ -33,4 +35,5 @@ Tentacool
 Venonat
 Voltorb
 Vulpix
+Weedle
 Zubat
