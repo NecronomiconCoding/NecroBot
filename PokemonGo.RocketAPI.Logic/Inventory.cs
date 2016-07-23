@@ -83,6 +83,12 @@ namespace PokemonGo.RocketAPI.Logic
             return pokemons.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax).Take(limit);
         }
 
+        public async Task<IEnumerable<PokemonData>> GetAllPokemonOrderedByPerfection()
+        {
+            var myPokemon = await GetPokemons();
+            var pokemons = myPokemon.ToList();
+            return pokemons.OrderByDescending(x => PokemonInfo.CalculatePokemonPerfection(x));
+        }
         public async Task<IEnumerable<PokemonData>> GetHighestsPerfect(int limit)
         {
             var myPokemon = await GetPokemons();

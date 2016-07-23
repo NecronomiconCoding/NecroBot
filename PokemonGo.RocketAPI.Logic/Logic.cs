@@ -1,6 +1,8 @@
 ﻿#region
 
 using System;
+using System.IO;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -389,6 +391,7 @@ namespace PokemonGo.RocketAPI.Logic
                     await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
                 await DisplayHighests();
+                await PokemonToCSV();
                 await RecycleItems();
                 await ExecuteFarmingPokestopsAndPokemons();
 
@@ -476,6 +479,28 @@ namespace PokemonGo.RocketAPI.Logic
                     $"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon)}\t NAME: '{pokemon.PokemonId}'",
                     LogLevel.Info, ConsoleColor.Yellow);
             }
+        }
+        private async Task PokemonToCSV()
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory) + "PokeList.csv";
+            if (File.Exists(path) == true)
+            {
+                File.Delete(path);
+            }
+            var AllPokemon = await _inventory.GetAllPokemonOrderedByPerfection();
+            var csvExportPokemonAll = new StringBuilder();
+            var columnnames = string.Format("{0};{1};{2};{3}", "#", "NAME", "CP", "PERFECTION");
+            csvExportPokemonAll.AppendLine(columnnames);
+            foreach (var pokemon in AllPokemon)
+            {
+                int POKENUMBER = (int)pokemon.PokemonId;
+                var NAME = $"{pokemon.PokemonId}";
+                var CP = $"{pokemon.Cp}";
+                string PERFECTION = PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00");
+                var pokedata = string.Format("{0};{1};{2};{3}", POKENUMBER, NAME, CP, PERFECTION);
+                csvExportPokemonAll.AppendLine(pokedata);
+            }
+            File.WriteAllText(path, csvExportPokemonAll.ToString());
         }
     }
 }
