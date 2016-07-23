@@ -37,6 +37,7 @@ namespace PokemonGo.RocketAPI.Console
                 catch (Exception ex)
                 {
                     Logger.Write($"Unhandled exception: {ex}", LogLevel.Error);
+                    new Logic.Logic(new Settings()).Execute().Wait();
                 }
             });
             System.Console.ReadLine();
