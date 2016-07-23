@@ -40,7 +40,15 @@ Please keep your conversations in the designated channels.
 
 <h6><em>[ all PayPal donations are distributed amongst our most active collaborators ]</em></h6><br/>
 
-<a name="btc">Donate Bitcoins to FeroxRev (the API library developer): *1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e*</a><br/>
+<br/>
+
+<a name="btc">Or donate bitcoins:</a><br/>
+
+<strong><img src="http://i.imgur.com/NNcGs1n.png" alt="BTC_logo"/> 1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e</strong>
+ 
+<br/>
+
+<h6><em>[ all Bitcoin donations are sent to Ferox only ]</em></h6>
 
 <hr/>
 
@@ -59,7 +67,7 @@ Please keep your conversations in the designated channels.
 
 <br/>
 <h2><a name="screenshots">Screenshots</a></h2><br/>
-- coming soon -<br/>
+coming soon<br/>
 <hr/>
 
 <h2><a name="getting-started">Getting Started</a></h2>
