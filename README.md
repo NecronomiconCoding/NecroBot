@@ -68,7 +68,7 @@ Need help? <a name="chat">Join the Chat!</a> **The Issue Tracker is not for help
 <br/>
 <h2><a name="install-config">Installation & Configuration</a></h2><br/>
 
-1. Download and Install [Visual Studio 2015](https://go.microsoft.com/fwlink/?LinkId=691979&clcid=0x407)
+1. Download and Install [Visual Studio 2015](https://go.microsoft.com/fwlink/?LinkId=691979&clcid=0x409)
 2. Download [this Repository](https://github.com/NecronomiconCoding/Pokemon-Go-Bot/archive/master.zip)
 3. Open Pokemon Go Rocket API.sln
 4. On the right hand side, double click on "UserSettings.settings"
@@ -82,7 +82,7 @@ Need help? <a name="chat">Join the Chat!</a> **The Issue Tracker is not for help
 <h2><a name="changing-location">Changing Location of the Bot</a></h2><br/>
 
 1. Get new latitude and longitude
-2. Delete `Coords.txt` from folder `PokemonGo.RocketAPI.Console\bin\Debug\`
+2. Delete `Coords.ini` from folder `PokemonGo.RocketAPI.Console\bin\Debug\Configs`
 3. Change the value of `DefaultLatitude` and `DefaultLongitude` in `UserSettings.settings`
 4. Compile and run (CTRL + F5)<br/>
 
