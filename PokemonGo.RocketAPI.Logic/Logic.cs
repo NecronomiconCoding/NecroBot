@@ -373,6 +373,13 @@ namespace PokemonGo.RocketAPI.Logic
                 return;
             }
 
+            await ExecutePokeStops();
+        }
+
+        private static bool blPokeStopFound = false;
+
+        private async Task ExecutePokeStops()
+        {
             var mapObjects = await _client.GetMapObjects();
 
             var pokeStops =
@@ -380,40 +387,13 @@ namespace PokemonGo.RocketAPI.Logic
                     .Where(
                         i =>
                             i.Type == FortType.Checkpoint &&
-<<<<<<< HEAD
-                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
-                    .OrderBy(
-                        i =>
-                            LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude, i.Longitude));
-
-            bool blFound = false;
-            foreach (var pokeStop in pokeStops)
-            {
-                var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
-                    pokeStop.Latitude, pokeStop.Longitude);
-
-                Logger.Write($"(POKESTOP): lure info {pokeStop?.LureInfo} lat {pokeStop.Latitude} lng {pokeStop.Longitude} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkYellow);
-                blFound = true;
-            }
-
-            if (blFound == false)
-            {
-                Logger.Write("No PokeSTOP left returning to starting location...", LogLevel.Info, ConsoleColor.DarkRed);
-                var update =
-                await
-                    _navigation.HumanLikeWalking(new GeoCoordinate(Client.dblGlobalLat, Client.dblGlobalLng),
-                        _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
-                return;
-            }
-=======
                             i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime());
-
->>>>>>> refs/remotes/NecronomiconCoding/master
 
             var pokestopList = pokeStops.ToList();
 
             while (pokestopList.Any())
             {
+                blPokeStopFound = true;
                 //resort
                 pokestopList =
                     pokestopList.OrderBy(
@@ -463,7 +443,7 @@ namespace PokemonGo.RocketAPI.Logic
         HashSet<string> hsGonaLocations = new HashSet<string>();
 
         private async Task ExeCuteMyFarm()
-        {        
+        {
             var vrList = fucnReturnLocs();
             Logger.Write("Location found count " + vrList.Count, LogLevel.Self, ConsoleColor.DarkGray);
             int irLoop = 1;
@@ -472,7 +452,7 @@ namespace PokemonGo.RocketAPI.Logic
             double dblMinDistLng = 0;
             string srMinDistLoc = "na";
 
-            if(hsGonaLocations.Count>vrList.Count-10)
+            if (hsGonaLocations.Count > vrList.Count - 10)
             {
                 hsGonaLocations = new HashSet<string>();
             }
@@ -507,63 +487,12 @@ namespace PokemonGo.RocketAPI.Logic
 
                 }
 
-                bool blPokeStopFound = false;
+                blPokeStopFound = false;
 
                 if (blCriticalBall == true)
                 {
                     Logger.Write("Critical BALL check...", LogLevel.Self, ConsoleColor.Yellow);
-                    var mapObjectsMine = await _client.GetMapObjects();
-
-                    var pokeStopsMine =
-                        mapObjectsMine.MapCells.SelectMany(ir => ir.Forts)
-                            .Where(
-                                ir =>
-                                    ir.Type == FortType.Checkpoint &&
-                                    ir.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
-                            .OrderBy(
-                                ir =>
-                                    LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, ir.Latitude, ir.Longitude));
-
-                    foreach (var pokeStop in pokeStopsMine)
-                    {
-
-                        var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
-                            pokeStop.Latitude, pokeStop.Longitude);
-
-                        Logger.Write($"(POKESTOP): in ({Math.Round(distance)}m)", LogLevel.Self, ConsoleColor.White);
-
-                        if (distance < 5000)
-                        {
-                            blPokeStopFound = true;
-                            var update =
-    await
-       _navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
-                            _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
-
-                            var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                            var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                            Logger.Write($"{fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
-                            if (fortSearch.ExperienceAwarded > 0)
-                            {
-                                Logger.Write(
-                                    $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
-                                    LogLevel.Pokestop);
-                                //await DisplayPlayerLevelInTitle(true);
-                            }
-
-
-                            Logger.Write($"(POKESTOP): {fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Self, ConsoleColor.Gray);
-
-                            if (fortSearch.ExperienceAwarded > 0)
-                                Logger.Write(
-                                    $"(POKESTOP) XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
-                                    LogLevel.Info, ConsoleColor.Magenta);
-
-                            await Task.Delay(1000);
-                            await RecycleItems();
-                            await ExecuteCatchAllNearbyPokemons();
-                        }
-                    }
+                    await ExecutePokeStops();
                 }
 
                 if (blPokeStopFound == false && blCriticalBall == true)
@@ -687,26 +616,11 @@ _navigation.HumanLikeWalking(new GeoCoordinate(Client.dblGlobalLat, Client.dblGl
 
             foreach (var item in items)
             {
-<<<<<<< HEAD
-
-                var items = await _inventory.GetItemsToRecycle(_clientSettings);
-
-                foreach (var item in items)
-                {
-                    var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
-                    Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
-                    _stats.AddItemsRemoved(item.Count);
-                    _stats.UpdateConsoleTitle(_inventory);
-                    await Task.Delay(500);
-                }
-
-=======
-                var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
+                var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
                 Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
                 _stats.AddItemsRemoved(item.Count);
                 _stats.UpdateConsoleTitle(_inventory);
                 await Task.Delay(500);
->>>>>>> refs/remotes/NecronomiconCoding/master
             }
         }
 
