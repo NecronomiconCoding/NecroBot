@@ -40,18 +40,19 @@ namespace PokemonGo.RocketAPI.Logic
         private async Task CatchEncounter(EncounterResponse encounter, MapPokemon pokemon)
         {
             CatchPokemonResponse caughtPokemonResponse;
+            int attemptCounter = 1;
             do
             {
+                var pokeball = await GetBestBall(encounter?.WildPokemon);
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
-                if ((probability.HasValue && probability.Value < 0.35 && encounter.WildPokemon?.PokemonData?.Cp > 400) ||
-                    CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >=
-                    _clientSettings.KeepMinIVPercentage)
+                if (pokeball != MiscEnums.Item.ITEM_UNKNOWN &&
+                    ((probability.HasValue && probability.Value < 0.35 && encounter.WildPokemon?.PokemonData?.Cp > 400) ||
+                    CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >= _clientSettings.KeepMinIVPercentage))
                 {
                     //Throw berry is we can
                     await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
                 }
 
-                var pokeball = await GetBestBall(encounter?.WildPokemon);
                 var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
                     pokemon.Latitude, pokemon.Longitude);
                 caughtPokemonResponse =
@@ -60,9 +61,12 @@ namespace PokemonGo.RocketAPI.Logic
                             pokemon.Longitude, pokeball);
                 Logger.Write(
                     caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess
-                        ? $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) ({Math.Round(CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfection) | Chance: {encounter?.CaptureProbability.CaptureProbability_.First()} | {Math.Round(distance)}m distance | with {pokeball} "
-                        : $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()))} | {Math.Round(distance)}m distance {caughtPokemonResponse.Status} | with {pokeball}",
+                        ? $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) ({Math.Round(CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfection) | Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()), 2)} | {Math.Round(distance)}m distance | with {pokeball} "
+                        : pokeball == MiscEnums.Item.ITEM_UNKNOWN
+                            ? $"(FAILED) No balls remaining. {pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) escaped."
+                            : $"(FAILED-{caughtPokemonResponse.Status} Attempt #{attemptCounter}) {pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()), 2)} | {Math.Round(distance)}m distance | with {pokeball}",
                     LogLevel.Caught);
+                attemptCounter++;
                 await DisplayPlayerLevelInTitle(true);
                 await Task.Delay(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
