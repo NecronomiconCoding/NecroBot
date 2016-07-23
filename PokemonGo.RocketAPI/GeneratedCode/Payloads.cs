@@ -15591,7 +15591,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
         private long cooldownCompleteTimestampMs_;
         private int experienceAwarded_;
         private int gemsAwarded_;
-        private global::PokemonGo.RocketAPI.GeneratedCode.PokemonData pokemonDataEgg_;
+        private PokemonData pokemonDataEgg_;
         private global::PokemonGo.RocketAPI.GeneratedCode.FortSearchResponse.Types.Result result_ = 0;
 
         public FortSearchResponse()
