@@ -1,7 +1,8 @@
-# Fan made free Pokemon RPG 
-http://www.pokemonpets.com #
+# Fan made free Pokemon RPG #
+# http://www.pokemonpets.com #
 
-# Pokemon alike but unique Monster RPG http://www.monstermmorpg.com #
+# Pokemon alike but unique Monster # 
+# RPG http://www.monstermmorpg.com #
 
 # Pokemon Go API Client Library #
 
