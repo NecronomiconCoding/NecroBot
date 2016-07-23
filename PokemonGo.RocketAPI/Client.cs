@@ -28,19 +28,22 @@ namespace PokemonGo.RocketAPI
         public Client(ISettings settings)
         {
             Settings = settings;
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\Coords.txt") && File.ReadAllText(Directory.GetCurrentDirectory() + "\\Coords.txt").Contains(":"))
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\Coords.txt") &&
+                File.ReadAllText(Directory.GetCurrentDirectory() + "\\Coords.txt").Contains(":"))
             {
                 var latlngFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Coords.txt");
                 var latlng = latlngFromFile.Split(':');
-                if (latlng[0].Length != 0 && latlng[1].Length != 0)
+                if (latlng[0].Length != 0 && latlng[1].Length != 0 && latlng[0] != "NaN" && latlng[1] != "NaN")
                 {
                     try
                     {
-                        SetCoordinates(Convert.ToDouble(latlng[0]), Convert.ToDouble(latlng[1]), Settings.DefaultAltitude);
+                        SetCoordinates(Convert.ToDouble(latlng[0]), Convert.ToDouble(latlng[1]),
+                            Settings.DefaultAltitude);
                     }
                     catch (FormatException)
                     {
-                        Logger.Write($"Coordinates in \"Coords.txt\" file is invalid, using the default coordinates ", LogLevel.Warning);
+                        Logger.Write("Coordinates in \"Coords.txt\" file is invalid, using the default coordinates ",
+                            LogLevel.Warning);
                         SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
                     }
                 }
@@ -107,7 +110,7 @@ namespace PokemonGo.RocketAPI
         {
             _authType = AuthType.Google;
 
-            GoogleLogin.TokenResponseModel tokenResponse = null;
+            GoogleLogin.TokenResponseModel tokenResponse;
             if (Settings.GoogleRefreshToken != string.Empty)
             {
                 tokenResponse = await GoogleLogin.GetAccessToken(Settings.GoogleRefreshToken);
