@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region Usings
+
+using System;
 using PokemonGo.RocketAPI.GeneratedCode;
+
+#endregion
 
 namespace PokemonGo.RocketAPI
 {
@@ -12,13 +12,13 @@ namespace PokemonGo.RocketAPI
         public int BaseAttack, BaseDefense, BaseStamina;
         public BaseStats(int baseStamina, int baseAttack, int baseDefense)
         {
-            this.BaseAttack = baseAttack;
-            this.BaseDefense = baseDefense;
-            this.BaseStamina = baseStamina;
+            BaseAttack = baseAttack;
+            BaseDefense = baseDefense;
+            BaseStamina = baseStamina;
         }
         public override string ToString()
         {
-            return (String.Format("({0} atk,{1} def,{2} sta)", BaseAttack, BaseDefense, BaseStamina));
+            return ($"({BaseAttack} atk,{BaseDefense} def,{BaseStamina} sta)");
         }
     }
 
