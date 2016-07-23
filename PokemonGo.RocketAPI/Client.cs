@@ -1,4 +1,4 @@
-﻿#region
+﻿#region Usings
 
 using System;
 using System.IO;
@@ -37,10 +37,10 @@ namespace PokemonGo.RocketAPI
                 {
                     try
                     {
-                        double temp_lat = Convert.ToDouble(latlng[0]);
-                        double temp_long = Convert.ToDouble(latlng[1]);
+                        double tempLat = Convert.ToDouble(latlng[0]);
+                        double tempLong = Convert.ToDouble(latlng[1]);
 
-                        if(temp_lat >= -90 && temp_lat <= 90 && temp_long >= -180 && temp_long <= 180)
+                        if(tempLat >= -90 && tempLat <= 90 && tempLong >= -180 && tempLong <= 180)
                         {
                             SetCoordinates(Convert.ToDouble(latlng[0]), Convert.ToDouble(latlng[1]),
                             Settings.DefaultAltitude);
@@ -126,16 +126,16 @@ namespace PokemonGo.RocketAPI
             if (Settings.GoogleRefreshToken != string.Empty)
             {
                 tokenResponse = await GoogleLogin.GetAccessToken(Settings.GoogleRefreshToken);
-                AccessToken = tokenResponse?.id_token;
+                AccessToken = tokenResponse?.IdToken;
             }
 
             if (AccessToken == null)
             {
                 var deviceCode = await GoogleLogin.GetDeviceCode();
                 tokenResponse = await GoogleLogin.GetAccessToken(deviceCode);
-                Settings.GoogleRefreshToken = tokenResponse?.refresh_token;
-                Logger.Write("Refreshtoken " + tokenResponse?.refresh_token + " saved");
-                AccessToken = tokenResponse?.id_token;
+                Settings.GoogleRefreshToken = tokenResponse?.RefreshToken;
+                Logger.Write("Refreshtoken " + tokenResponse?.RefreshToken + " saved");
+                AccessToken = tokenResponse?.IdToken;
             }
         }
 

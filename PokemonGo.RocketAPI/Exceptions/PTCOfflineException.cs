@@ -1,4 +1,4 @@
-﻿#region
+﻿#region Usings
 
 using System;
 
@@ -6,7 +6,8 @@ using System;
 
 namespace PokemonGo.RocketAPI.Exceptions
 {
-    public class PtcOfflineException : Exception
+    public class PtcOfflineException 
+        : Exception
     {
     }
 }
