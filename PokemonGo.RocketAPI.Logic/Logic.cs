@@ -50,8 +50,9 @@ namespace PokemonGo.RocketAPI.Logic
         private async Task CatchEncounter(EncounterResponse encounter, MapPokemon pokemon)
         {
             CatchPokemonResponse caughtPokemonResponse;
+            int attemptCounter = 1;
             do
-            {
+            {//test
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
 
 
@@ -85,11 +86,11 @@ namespace PokemonGo.RocketAPI.Logic
                 _stats.UpdateConsoleTitle(_inventory);
 
                 if (encounter?.CaptureProbability?.CaptureProbability_ != null)
-                    Logger.Write(
-                        caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess
-                            ? $"{pokemon.PokemonId} Lvl {PokemonInfo.GetLevel(encounter?.WildPokemon?.PokemonData)} ({encounter?.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter?.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {encounter?.CaptureProbability?.CaptureProbability_.First()} | {Math.Round(distance)}m dist | with {pokeball} "
-                            : $"{pokemon.PokemonId} ({encounter?.WildPokemon?.PokemonData?.Cp} CP) Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()))} | {Math.Round(distance)}m distance {caughtPokemonResponse.Status} | with {pokeball}",
-                        LogLevel.Caught);
+                {
+                    string catchStatus = attemptCounter > 1 ? $"{caughtPokemonResponse.Status} Attempt #{attemptCounter}" : $"{caughtPokemonResponse.Status}";
+                    Logger.Write($"({catchStatus}) | {pokemon.PokemonId} Lvl {PokemonInfo.GetLevel(encounter?.WildPokemon?.PokemonData)} ({encounter?.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter?.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()) * 100, 2)}% | {Math.Round(distance)}m dist | with {pokeball}", LogLevel.Caught);
+                }
+                attemptCounter++;
                 await Task.Delay(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
@@ -379,6 +380,7 @@ namespace PokemonGo.RocketAPI.Logic
                     .Where(
                         i =>
                             i.Type == FortType.Checkpoint &&
+<<<<<<< HEAD
                             i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
                     .OrderBy(
                         i =>
@@ -403,9 +405,26 @@ namespace PokemonGo.RocketAPI.Logic
                         _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
                 return;
             }
+=======
+                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime());
 
-            foreach (var pokeStop in pokeStops)
+>>>>>>> refs/remotes/NecronomiconCoding/master
+
+            var pokestopList = pokeStops.ToList();
+
+            while (pokestopList.Any())
             {
+                //resort
+                pokestopList =
+                    pokestopList.OrderBy(
+                        i =>
+                            LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude,
+                                i.Longitude)).ToList();
+
+                var pokeStop = pokestopList[0];
+                pokestopList.RemoveAt(0);
+
+
                 var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
                     pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
@@ -664,12 +683,11 @@ _navigation.HumanLikeWalking(new GeoCoordinate(Client.dblGlobalLat, Client.dblGl
 
         private async Task RecycleItems()
         {
-            var allItems = await _inventory.GetItems();
-            Random rnd = new Random();
-            int recycleThreshold = rnd.Next(200, 251);
+            var items = await _inventory.GetItemsToRecycle(_clientSettings);
 
-            if (allItems.Count() >= recycleThreshold)
+            foreach (var item in items)
             {
+<<<<<<< HEAD
 
                 var items = await _inventory.GetItemsToRecycle(_clientSettings);
 
@@ -682,6 +700,13 @@ _navigation.HumanLikeWalking(new GeoCoordinate(Client.dblGlobalLat, Client.dblGl
                     await Task.Delay(500);
                 }
 
+=======
+                var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
+                Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
+                _stats.AddItemsRemoved(item.Count);
+                _stats.UpdateConsoleTitle(_inventory);
+                await Task.Delay(500);
+>>>>>>> refs/remotes/NecronomiconCoding/master
             }
         }
 
