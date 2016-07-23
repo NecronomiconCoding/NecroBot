@@ -424,7 +424,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             HashSet<string> hsGonaLocations = new HashSet<string>();
             var vrList = fucnReturnLocs();
-            Logger.Write("Location found count " + vrList.Count, LogLevel.Self, ConsoleColor.DarkGreen);
+            Logger.Write("Location found count " + vrList.Count, LogLevel.Self, ConsoleColor.DarkGray);
             int irLoop = 1;
             double dblMinDistance = 9999999;
             double dblMinDistLat = 0;
@@ -516,7 +516,7 @@ namespace PokemonGo.RocketAPI.Logic
                     }
                 }
 
-                Logger.Write("(LOCATION) loop " + irLoop + " target: " + srMinDistLoc, LogLevel.Self, ConsoleColor.DarkGreen);
+                Logger.Write("(LOCATION) loop " + irLoop + " target: " + srMinDistLoc, LogLevel.Self, ConsoleColor.DarkGray);
 
                 if (dblMinDistLat > 0 && dblMinDistLng > 0)
                 {
@@ -548,7 +548,7 @@ namespace PokemonGo.RocketAPI.Logic
             var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
             var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
 
-            Logger.Write($"poke ball ({pokeBallsCount}) , great ball ({greatBallsCount}) , ultra ball ({ultraBallsCount}) , master ball ({masterBallsCount}) ", LogLevel.Self,ConsoleColor.DarkGray);
+            Logger.Write($"poke ball ({pokeBallsCount}) , great ball ({greatBallsCount}) , ultra ball ({ultraBallsCount}) , master ball ({masterBallsCount}) ", LogLevel.Self,ConsoleColor.White);
 
             if ((pokeBallsCount + greatBallsCount + ultraBallsCount) < 25)
             {
