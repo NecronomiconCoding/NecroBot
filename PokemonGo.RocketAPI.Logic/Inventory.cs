@@ -29,7 +29,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             var myPokemon = await GetPokemons();
 
-            var pokemonList = myPokemon.Where(p => p.DeployedFortId == 0).ToList(); //Don't evolve pokemon in gyms
+            var pokemonList = myPokemon.Where(p => p.DeployedFortId == 0 && p.Favorite == 0).ToList(); //Don't evolve pokemon in gyms
             if (filter != null)
             {
                 pokemonList = pokemonList.Where(p => !filter.Contains(p.PokemonId)).ToList();
@@ -55,7 +55,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                     var amountToSkip = familyCandy.Candy / settings.CandyToEvolve;
 
-                    results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key && x.Favorite == 0)
+                    results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
                         .OrderByDescending(x => x.Cp)
                         .ThenBy(n => n.StaminaMax)
                         .Skip(amountToSkip)
@@ -70,10 +70,9 @@ namespace PokemonGo.RocketAPI.Logic
                 .Where(x => x.Count() > 1)
                 .SelectMany(
                     p =>
-                        p.Where(x => x.Favorite == 0)
-                            .OrderByDescending(x => x.Cp)
+                        p.OrderByDescending(x => x.Cp)
                             .ThenBy(n => n.StaminaMax)
-                            .Skip(1)
+                            .Skip(_client.Settings.KeepMinDuplicatePokemon)
                             .ToList());
         }
 
