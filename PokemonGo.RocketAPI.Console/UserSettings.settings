@@ -38,7 +38,7 @@
     <Setting Name="TransferDuplicatePokemon" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="DelayBetweenMove" Type="System.Int32" Scope="User">
+    <Setting Name="DelayBetweenPokemonCatch" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5000</Value>
     </Setting>
     <Setting Name="UsePokemonToNotCatchFilter" Type="System.Boolean" Scope="User">
