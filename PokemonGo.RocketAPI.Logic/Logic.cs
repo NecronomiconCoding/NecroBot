@@ -483,6 +483,8 @@ namespace PokemonGo.RocketAPI.Logic
 
                 }
 
+                bool blPokeStopFound = false;
+
                 if (blCriticalBall == true)
                 {
                     Logger.Write("Critical BALL check...", LogLevel.Self, ConsoleColor.Yellow);
@@ -500,6 +502,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                     foreach (var pokeStop in pokeStopsMine)
                     {
+
                         var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
                             pokeStop.Latitude, pokeStop.Longitude);
 
@@ -507,6 +510,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                         if (distance < 5000)
                         {
+                            blPokeStopFound = true;
                             var update =
     await
        _navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
@@ -538,6 +542,12 @@ namespace PokemonGo.RocketAPI.Logic
                     }
                 }
 
+                if (blPokeStopFound == false && blCriticalBall == true)
+                {
+                    await resetLocation();
+                    break;
+                }
+
                 Logger.Write("(LOCATION) loop " + irLoop + " target: " + srMinDistLoc, LogLevel.Self, ConsoleColor.DarkGray);
 
                 if (dblMinDistLat > 0 && dblMinDistLng > 0)
@@ -557,6 +567,15 @@ namespace PokemonGo.RocketAPI.Logic
                     dblMinDistLng = 0;
                 }
             }
+        }
+
+        private async Task resetLocation()
+        {
+            Logger.Write("Re setting global location no Poke Stop", LogLevel.Self, ConsoleColor.Yellow);
+
+            await
+_navigation.HumanLikeWalking(new GeoCoordinate(Client.dblGlobalLat, Client.dblGlobalLng),
+               _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
         }
 
         public static bool blCriticalBall = false;
