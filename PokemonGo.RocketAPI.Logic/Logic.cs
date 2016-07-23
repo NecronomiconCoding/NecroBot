@@ -34,7 +34,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         public static float CalculatePokemonPerfection(PokemonData poke)
         {
-            return (poke.IndividualAttack*2 + poke.IndividualDefense + poke.IndividualStamina)/(4.0f*15.0f)*100.0f;
+            return (poke.IndividualAttack * 2 + poke.IndividualDefense + poke.IndividualStamina) / (4.0f * 15.0f) * 100.0f;
         }
 
         private async Task CatchEncounter(EncounterResponse encounter, MapPokemon pokemon)
@@ -294,7 +294,7 @@ namespace PokemonGo.RocketAPI.Logic
                 else
                     Logger.Write($"Encounter problem: {encounter?.Status}");
             }
-            
+
             await Task.Delay(_clientSettings.DelayBetweenMove);
         }
 
@@ -303,44 +303,79 @@ namespace PokemonGo.RocketAPI.Logic
         {
             var mapObjects = await _client.GetMapObjects();
 
+            // Wasn't sure how to make this pretty.
             var pokeStops =
                 mapObjects.MapCells.SelectMany(i => i.Forts)
                     .Where(
                         i =>
                             i.Type == FortType.Checkpoint &&
-                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
+                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
+                            ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
+                            Navigation.DistanceBetween2Coordinates(
+                                _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
+                                    i.Latitude, i.Longitude) < _clientSettings.MaxTravelDistanceInMeters) ||
+                                        _clientSettings.MaxTravelDistanceInMeters == 0
+                            )
                     .OrderBy(
                         i =>
                             LocationUtils.CalculateDistanceInMeters(
                                 new Navigation.Location(_client.CurrentLat, _client.CurrentLng),
                                 new Navigation.Location(i.Latitude, i.Longitude)));
 
-            foreach (var pokeStop in pokeStops)
+            if (pokeStops.Count() > 0)
             {
-                var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
-                    pokeStop.Latitude, pokeStop.Longitude);
-
-                var update =
-                    await
-                        _navigation.HumanLikeWalking(new Navigation.Location(pokeStop.Latitude, pokeStop.Longitude),
-                            _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
-
-                var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                Logger.Write($"{fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
-                if (fortSearch.ExperienceAwarded > 0)
+                foreach (var pokeStop in pokeStops)
                 {
-                    Logger.Write(
-                        $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
-                        LogLevel.Pokestop);
-                    await DisplayPlayerLevelInTitle(true);
-                }
+                    var playerToStopDist = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
+                        pokeStop.Latitude, pokeStop.Longitude);
+                    var startToStopDist = Navigation.DistanceBetween2Coordinates(_clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
+                        pokeStop.Latitude, pokeStop.Longitude); // This can be removed after debugging.
 
-                await Task.Delay(1000);
-                await RecycleItems();
-                await ExecuteCatchAllNearbyPokemons();
-                if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                    var update =
+                        await
+                            _navigation.HumanLikeWalking(new Navigation.Location(pokeStop.Latitude, pokeStop.Longitude),
+                                _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+
+                    var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    Logger.Write($"{fortInfo.Name} in ({Math.Round(playerToStopDist)}m) at ({pokeStop.Latitude},{pokeStop.Longitude}) ({Math.Round(startToStopDist)}m from start)", LogLevel.Info, ConsoleColor.DarkRed);
+                    if (fortSearch.ExperienceAwarded > 0)
+                    {
+                        Logger.Write(
+                            $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
+                            LogLevel.Pokestop);
+                        await DisplayPlayerLevelInTitle(true);
+                    }
+
+                    await Task.Delay(1000);
+                    await RecycleItems();
+                    await ExecuteCatchAllNearbyPokemons();
+                    if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                }
             }
+            else
+            {
+                Logger.Write($"No PokeStops found!", LogLevel.Warning, ConsoleColor.Yellow);
+
+                if (Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
+                        _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude) > 1)
+                    await MoveToStartLocation();
+                else
+                    // Should an exception be thrown?
+                    Logger.Write($"No PokeStops at starting location within your maximum distance! Is your radius too small?", LogLevel.Error, ConsoleColor.DarkRed);
+            }
+
+        }
+
+        private async Task MoveToStartLocation()
+        {
+            Logger.Write($"Moving to start location ({_clientSettings.DefaultLatitude}, {_clientSettings.DefaultLongitude}).", LogLevel.Info, ConsoleColor.Yellow);
+            var update =
+                await
+                    _navigation.HumanLikeWalking(new Navigation.Location(_clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude),
+                         _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+            await Task.Delay(1000);
+            await ExecuteCatchAllNearbyPokemons();
         }
 
         private async Task<MiscEnums.Item> GetBestBall(WildPokemon pokemon)
@@ -383,25 +418,25 @@ namespace PokemonGo.RocketAPI.Logic
         {
             while (true)
             {
-                    _playerProfile = await _client.GetProfile();
-                    await DisplayPlayerLevelInTitle();
-                    if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
-                        await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
-                    if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
-                    await DisplayHighests();
-                    await RecycleItems();
-                    await ExecuteFarmingPokestopsAndPokemons();
+                _playerProfile = await _client.GetProfile();
+                await DisplayPlayerLevelInTitle();
+                if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
+                    await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
+                if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                await DisplayHighests();
+                await RecycleItems();
+                await ExecuteFarmingPokestopsAndPokemons();
 
-                    /*
-            * Example calls below
-            *
-            var profile = await _client.GetProfile();
-            var settings = await _client.GetSettings();
-            var mapObjects = await _client.GetMapObjects();
-            var inventory = await _client.GetInventory();
-            var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
-            */
-               
+                /*
+        * Example calls below
+        *
+        var profile = await _client.GetProfile();
+        var settings = await _client.GetSettings();
+        var mapObjects = await _client.GetMapObjects();
+        var inventory = await _client.GetInventory();
+        var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
+        */
+
                 await Task.Delay(10000);
             }
         }
@@ -412,8 +447,8 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var item in items)
             {
-                var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                Logger.Write($"{item.Count}x {(ItemId) item.Item_}", LogLevel.Recycling);
+                var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
+                Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
                 await Task.Delay(500);
             }
         }
@@ -449,7 +484,7 @@ namespace PokemonGo.RocketAPI.Logic
         public async Task UseBerry(ulong encounterId, string spawnPointId)
         {
             var inventoryBalls = await _inventory.GetItems();
-            var berries = inventoryBalls.Where(p => (ItemId) p.Item_ == ItemId.ItemRazzBerry);
+            var berries = inventoryBalls.Where(p => (ItemId)p.Item_ == ItemId.ItemRazzBerry);
             var berry = berries.FirstOrDefault();
 
             if (berry == null)
