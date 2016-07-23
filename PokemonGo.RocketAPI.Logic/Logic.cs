@@ -632,14 +632,8 @@ await
 
             foreach (var item in items)
             {
-<<<<<<< HEAD
-                var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
-                Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
-
-=======
                 var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
                 Logger.Write($"{item.Count}x {item.Item_}", LogLevel.Recycling);
->>>>>>> refs/remotes/NecronomiconCoding/master
                 await Task.Delay(500);
             }
         }
