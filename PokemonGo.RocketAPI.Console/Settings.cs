@@ -12,11 +12,53 @@ namespace PokemonGo.RocketAPI.Console
 {
     public class Settings : ISettings
     {
+
+        public Settings()
+        {
+            BuildItemRecycleFilter();
+        }
+
+        private void BuildItemRecycleFilter()
+        {
+            _ItemRecycleFilter = new Dictionary<ItemId, int>();
+            ItemRecycleFilter.Add(ItemId.ItemUnknown, 0);
+            ItemRecycleFilter.Add(ItemId.ItemPokeBall, 20);
+            ItemRecycleFilter.Add(ItemId.ItemGreatBall, KeepMoreItems ? 28 : 20);
+            ItemRecycleFilter.Add(ItemId.ItemUltraBall, KeepMoreItems ? 83 : 50);
+            ItemRecycleFilter.Add(ItemId.ItemMasterBall, 100);
+            ItemRecycleFilter.Add(ItemId.ItemPotion, 0);
+            ItemRecycleFilter.Add(ItemId.ItemSuperPotion, 0);
+            ItemRecycleFilter.Add(ItemId.ItemHyperPotion, KeepMoreItems ? 73 : 20);
+            ItemRecycleFilter.Add(ItemId.ItemMaxPotion, 50);
+            ItemRecycleFilter.Add(ItemId.ItemRevive, KeepMoreItems ? 23 : 10);
+            ItemRecycleFilter.Add(ItemId.ItemMaxRevive, 50);
+            ItemRecycleFilter.Add(ItemId.ItemLuckyEgg, 200);
+            ItemRecycleFilter.Add(ItemId.ItemIncenseOrdinary, 100);
+            ItemRecycleFilter.Add(ItemId.ItemIncenseSpicy, 100);
+            ItemRecycleFilter.Add(ItemId.ItemIncenseCool, 100);
+            ItemRecycleFilter.Add(ItemId.ItemIncenseFloral, 100);
+            ItemRecycleFilter.Add(ItemId.ItemTroyDisk, 100);
+            ItemRecycleFilter.Add(ItemId.ItemXAttack, 100);
+            ItemRecycleFilter.Add(ItemId.ItemXDefense, 100);
+            ItemRecycleFilter.Add(ItemId.ItemXMiracle, 100);
+            ItemRecycleFilter.Add(ItemId.ItemRazzBerry, KeepMoreItems ? 200 : 50);
+            ItemRecycleFilter.Add(ItemId.ItemBlukBerry, 10);
+            ItemRecycleFilter.Add(ItemId.ItemNanabBerry, 10);
+            ItemRecycleFilter.Add(ItemId.ItemWeparBerry, 30);
+            ItemRecycleFilter.Add(ItemId.ItemPinapBerry, 30);
+            ItemRecycleFilter.Add(ItemId.ItemSpecialCamera, 100);
+            ItemRecycleFilter.Add(ItemId.ItemIncubatorBasicUnlimited, 100);
+            ItemRecycleFilter.Add(ItemId.ItemIncubatorBasic, 100);
+            ItemRecycleFilter.Add(ItemId.ItemPokemonStorageUpgrade, 100);
+            ItemRecycleFilter.Add(ItemId.ItemItemStorageUpgrade, 100);
+        }
+
         private ICollection<PokemonId> _pokemonsNotToTransfer;
         private ICollection<PokemonId> _pokemonsToEvolve;
         private ICollection<PokemonId> _pokemonsNotToCatch;
+        private Dictionary<ItemId, int> _ItemRecycleFilter;
 
-        public AuthType AuthType => (AuthType) Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
+        public AuthType AuthType => (AuthType)Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         public string PtcUsername => UserSettings.Default.PtcUsername;
         public string PtcPassword => UserSettings.Default.PtcPassword;
         public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
@@ -30,6 +72,7 @@ namespace PokemonGo.RocketAPI.Console
         public int DelayBetweenPokemonCatch => UserSettings.Default.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
+        public bool KeepMoreItems => UserSettings.Default.KeepMoreItems;
 
         public string GoogleRefreshToken
         {
@@ -42,39 +85,13 @@ namespace PokemonGo.RocketAPI.Console
         }
 
         //Type and amount to keep
-        public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => new[]
+        public Dictionary<ItemId, int> ItemRecycleFilter
         {
-            new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 20),
-            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 20),
-            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 20),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseCool, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseFloral, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemTroyDisk, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXAttack, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXDefense, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXMiracle, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 200),
-            new KeyValuePair<ItemId, int>(ItemId.ItemBlukBerry, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemNanabBerry, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemWeparBerry, 30),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPinapBerry, 30),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSpecialCamera, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasicUnlimited, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasic, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokemonStorageUpgrade, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
-        };
+            get
+            {
+                return _ItemRecycleFilter;
+            }
+        }
 
         public ICollection<PokemonId> PokemonsToEvolve
         {
@@ -120,7 +137,7 @@ namespace PokemonGo.RocketAPI.Console
                 while (pokemonName != null)
                 {
                     var pokemon = Enum.Parse(typeof(PokemonId), pokemonName, true);
-                    if (pokemon != null) result.Add((PokemonId) pokemon);
+                    if (pokemon != null) result.Add((PokemonId)pokemon);
                     pokemonName = tr.ReadLine();
                 }
             }

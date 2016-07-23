@@ -45,7 +45,10 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="KeepMinDuplicatePokemon" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">1</Value>
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="KeepMoreItems" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>
