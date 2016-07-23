@@ -1,10 +1,10 @@
 Venusaur
 Charizard
-Blastiose
-Alakazam
-Farfetch'd
+Blastoise
+Alakhazam
+Farfetchd
 Kangaskhan
-Mr. Mime
+MrMime
 Lapras
 Ditto
 Porygon
