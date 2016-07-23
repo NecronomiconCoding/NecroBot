@@ -95,7 +95,7 @@ namespace PokemonGo.RocketAPI.Logic
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
-<<<<<<< HEAD
+
 
         private async Task CatchEncounter(EncounterResponse encounter, WildPokemon pokemon)
         {
@@ -128,7 +128,7 @@ namespace PokemonGo.RocketAPI.Logic
         }
 
 
-=======
+
         /*
 >>>>>>> refs/remotes/NecronomiconCoding/master
         private async Task DisplayPlayerLevelInTitle(bool updateOnly = false)
@@ -520,7 +520,7 @@ namespace PokemonGo.RocketAPI.Logic
                                 Logger.Write(
                                     $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
                                     LogLevel.Pokestop);
-                                await DisplayPlayerLevelInTitle(true);
+                                //await DisplayPlayerLevelInTitle(true);
                             }
 
 
