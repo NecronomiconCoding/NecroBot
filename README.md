@@ -2,7 +2,7 @@
 # http://www.pokemonpets.com #
 
 # Pokemon alike but unique Monster RPG # 
-# http://www.monstermmorpg.com #
+# http://www.monstermmorpg.com 
 
 # Pokemon Go API Client Library #
 
