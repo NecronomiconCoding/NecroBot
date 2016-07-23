@@ -61,7 +61,7 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-37.766236738652779")]
+        [global::System.Configuration.DefaultSettingValueAttribute("52.379189")]
         public double DefaultLatitude {
             get {
                 return ((double)(this["DefaultLatitude"]));
@@ -73,7 +73,7 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("145.35577297210693")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4.899431")]
         public double DefaultLongitude {
             get {
                 return ((double)(this["DefaultLongitude"]));
@@ -109,7 +109,7 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1300")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
         public int KeepMinCP {
             get {
                 return ((int)(this["KeepMinCP"]));

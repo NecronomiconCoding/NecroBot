@@ -75,19 +75,8 @@ namespace PokemonGo.RocketAPI.Logic
 
                 if (encounter?.CaptureProbability?.CaptureProbability_ != null)
                 {
-                    Func<MiscEnums.Item, string> returnRealBallName = a =>
-                    {
-                        switch (a)
-                        {
-                            case MiscEnums.Item.ITEM_POKE_BALL: return "Normal";
-                            case MiscEnums.Item.ITEM_GREAT_BALL: return "Great";
-                            case MiscEnums.Item.ITEM_ULTRA_BALL: return "Ultra";
-                            case MiscEnums.Item.ITEM_MASTER_BALL: return "Master";
-                            default: return "Unknown";
-                        }
-                    };
                     string catchStatus = attemptCounter > 1 ? $"{caughtPokemonResponse.Status} Attempt #{attemptCounter}" : $"{caughtPokemonResponse.Status}";
-                    Logger.Write($"({catchStatus}) | {pokemon.PokemonId} Lvl {PokemonInfo.GetLevel(encounter?.WildPokemon?.PokemonData)} ({encounter?.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter?.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()) * 100, 2)}% | {Math.Round(distance)}m dist | with a {returnRealBallName(pokeball)} ball.", LogLevel.Caught);
+                    Logger.Write($"({catchStatus}) | {pokemon.PokemonId} Lvl {PokemonInfo.GetLevel(encounter?.WildPokemon?.PokemonData)} ({encounter?.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter?.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()) * 100, 2)}% | {Math.Round(distance)}m dist | with {pokeball}", LogLevel.Caught);
                 }
                 attemptCounter++;
                 await Task.Delay(2000);
