@@ -56,7 +56,6 @@ namespace PokemonGo.RocketAPI.Logic
                     var amountToSkip = familyCandy.Candy / settings.CandyToEvolve;
                     if (prioritizeIVoverCP)
                     {
-                        Console.WriteLine("Totally hitting the right transfer thing");
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
                             .OrderByDescending(x => x.CalculateIV())
                             .ThenBy(n => n.StaminaMax)
@@ -77,8 +76,6 @@ namespace PokemonGo.RocketAPI.Logic
             }
             if (prioritizeIVoverCP)
             {
-                Console.WriteLine("Totally hitting the right transfer thing");
-
                 return pokemonList
                 .GroupBy(p => p.PokemonId)
                 .Where(x => x.Count() > 1)
