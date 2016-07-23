@@ -72,7 +72,7 @@ namespace PokemonGo.RocketAPI.Login
                 Logger.Write("Couldnt copy to clipboard, do it manually", LogLevel.Error);
                 Logger.Write($"Goto: http://www.google.com/device & enter {deviceCode.user_code}", LogLevel.Error);
             }
-            
+
             return deviceCode;
         }
 

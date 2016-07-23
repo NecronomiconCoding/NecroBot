@@ -45,8 +45,9 @@ namespace PokemonGo.RocketAPI.Logic
             do
             {
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
-                if ((probability.HasValue && probability.Value < 0.35 && encounter?.WildPokemon?.PokemonData?.Cp > 400) ||
-                    CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >= _clientSettings.KeepMinIVPercentage)
+                if ((probability.HasValue && probability.Value < 0.35 && encounter.WildPokemon?.PokemonData?.Cp > 400) ||
+                    CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >=
+                    _clientSettings.KeepMinIVPercentage)
                 {
                     //Throw berry is we can
                     await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
@@ -120,9 +121,9 @@ namespace PokemonGo.RocketAPI.Logic
                 await Task.Delay(5000);
         }
 
-        public static int GetXpDiff(int Level)
+        public static int GetXpDiff(int level)
         {
-            switch (Level)
+            switch (level)
             {
                 case 1:
                     return 0;
@@ -237,7 +238,7 @@ namespace PokemonGo.RocketAPI.Logic
                 $"Make sure Lat & Lng is right. Exit Program if not! Lat: {_client.CurrentLat} Lng: {_client.CurrentLng}",
                 LogLevel.Warning);
             Thread.Sleep(3000);
-            Logger.Write($"Logging in via: {_clientSettings.AuthType}", LogLevel.Info);
+            Logger.Write($"Logging in via: {_clientSettings.AuthType}");
 
             while (true)
             {
@@ -254,7 +255,7 @@ namespace PokemonGo.RocketAPI.Logic
                 }
                 catch (AccessTokenExpiredException)
                 {
-                    Logger.Write($"Access token expired", LogLevel.Info);
+                    Logger.Write("Access token expired");
                 }
                 catch (TaskCanceledException)
                 {
@@ -353,10 +354,18 @@ namespace PokemonGo.RocketAPI.Logic
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                     await CatchEncounter(encounter, pokemon);
                 else
+<<<<<<< HEAD
                     Logger.Write($"Encounter problem: {encounter?.Status}");
 
                 Logger.Write($"Encounter problem: new wild pokemon good work");
             }
+=======
+                    Logger.Write($"Encounter problem: {encounter.Status}");
+            }
+
+            await Task.Delay(_clientSettings.DelayBetweenMove);
+        }
+>>>>>>> refs/remotes/NecronomiconCoding/master
 
             //  await Task.Delay(_clientSettings.DelayBetweenMove);
 
@@ -605,6 +614,7 @@ await
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
                 await DisplayHighests();
                 await RecycleItems();
+<<<<<<< HEAD
 
                 await ExecuteFarmingPokestopsAndPokemons();
 
@@ -617,6 +627,19 @@ await
         var inventory = await _client.GetInventory();
         var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
         */
+=======
+                await ExecuteFarmingPokestopsAndPokemons();
+
+                /*
+            * Example calls below
+            *
+            var profile = await _client.GetProfile();
+            var settings = await _client.GetSettings();
+            var mapObjects = await _client.GetMapObjects();
+            var inventory = await _client.GetInventory();
+            var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
+            */
+>>>>>>> refs/remotes/NecronomiconCoding/master
 
                 await Task.Delay(10000);
             }
@@ -655,7 +678,7 @@ await
                     continue;
 
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
-                PokemonData bestPokemonOfType = await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
+                var bestPokemonOfType = await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
                 Logger.Write(
                     $"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")} % perfect) CP (Best: {bestPokemonOfType.Cp} | ({CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")} % perfect))",
                     LogLevel.Transfer);
@@ -733,19 +756,25 @@ await
 
         private async Task DisplayHighests()
         {
-            Logger.Write($"====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
+            Logger.Write("====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
             var highestsPokemonCP = await _inventory.GetHighestsCP(20);
             foreach (var pokemon in highestsPokemonCP)
-                Logger.Write($"# CP {pokemon.Cp}\t| ({CalculatePokemonPerfection(pokemon).ToString("0.00")}\t% perfect) NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
-            Logger.Write($"====== DisplayHighestsPerfect ======", LogLevel.Info, ConsoleColor.Yellow);
+                Logger.Write(
+                    $"# CP {pokemon.Cp}\t| ({CalculatePokemonPerfection(pokemon).ToString("0.00")}\t% perfect) NAME: '{pokemon.PokemonId}'",
+                    LogLevel.Info, ConsoleColor.Yellow);
+            Logger.Write("====== DisplayHighestsPerfect ======", LogLevel.Info, ConsoleColor.Yellow);
             var highestsPokemonPerfect = await _inventory.GetHighestsPerfect(10);
             foreach (var pokemon in highestsPokemonPerfect)
             {
-                Logger.Write($"# CP {pokemon.Cp}\t| ({CalculatePokemonPerfection(pokemon).ToString("0.00")}\t% perfect) NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
+                Logger.Write(
+                    $"# CP {pokemon.Cp}\t| ({CalculatePokemonPerfection(pokemon).ToString("0.00")}\t% perfect) NAME: '{pokemon.PokemonId}'",
+                    LogLevel.Info, ConsoleColor.Yellow);
             }
         }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> refs/remotes/NecronomiconCoding/master
     }
-
 }
