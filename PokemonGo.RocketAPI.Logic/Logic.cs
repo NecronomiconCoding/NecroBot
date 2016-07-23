@@ -489,7 +489,7 @@ namespace PokemonGo.RocketAPI.Logic
             var berries = inventoryBalls.Where(p => (ItemId) p.Item_ == ItemId.ItemRazzBerry);
             var berry = berries.FirstOrDefault();
 
-            if (berry == null)
+            if (berry == null || berry.Count <= 0)
                 return;
 
             var useRaspberry = await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
