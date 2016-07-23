@@ -32,7 +32,7 @@ namespace PokemonGo.RocketAPI
         public static double marinaLng = 34.57015;
         public static double dblGlobalLat = 0;
         public static double dblGlobalLng = 0;
-       
+
 
         public Client(ISettings settings)
         {
@@ -59,20 +59,27 @@ namespace PokemonGo.RocketAPI
                 else
                 {
                     SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
+                    Logger.Write("Manual set cordinates!", LogLevel.Warning);
                 }
             }
             else
             {
                 SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
+                Logger.Write("Manual set cordinates!", LogLevel.Warning);
             }
 
-            if (blOverWriteLastLoc == true)
+            if (blOverWriteLastLoc == true && blUseMySystem == false)
             {
                 SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
+                Logger.Write("Manual set cordinates!", LogLevel.Warning);
             }
 
             if (blUseMarina)
+            {
                 SetCoordinates(marinaLat, marinaLng, Settings.DefaultAltitude);
+                Logger.Write("Manual set cordinates!", LogLevel.Warning);
+            }
+
 
             dblGlobalLat = CurrentLat;
             dblGlobalLng = CurrentLng;
