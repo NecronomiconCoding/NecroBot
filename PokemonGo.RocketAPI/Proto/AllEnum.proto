@@ -1,6 +1,7 @@
-﻿syntax = "proto3";
+syntax = "proto3";
 
 package AllEnum;
+option csharp_namespace = "PokemonGo.RocketAPI.GeneratedCode";
 
 enum RpcDirection {
   UNKNOWN = 0;
@@ -416,7 +417,7 @@ enum PokemonId {
   BULBASAUR = 1;
   IVYSAUR = 2;
   VENUSAUR = 3;
-  CHARMENDER = 4;
+  CHARMANDER = 4;
   CHARMELEON = 5;
   CHARIZARD = 6;
   SQUIRTLE = 7;
@@ -440,14 +441,14 @@ enum PokemonId {
   PIKACHU = 25;
   RAICHU = 26;
   SANDSHREW = 27;
-  SANDLASH = 28;
+  SANDSLASH = 28;
   NIDORAN_FEMALE = 29;
   NIDORINA = 30;
   NIDOQUEEN = 31;
   NIDORAN_MALE = 32;
   NIDORINO = 33;
   NIDOKING = 34;
-  CLEFARY = 35;
+  CLEFAIRY = 35;
   CLEFABLE = 36;
   VULPIX = 37;
   NINETALES = 38;
@@ -477,16 +478,16 @@ enum PokemonId {
   POLIWRATH = 62;
   ABRA = 63;
   KADABRA = 64;
-  ALAKHAZAM = 65;
+  ALAKAZAM = 65;
   MACHOP = 66;
   MACHOKE = 67;
   MACHAMP = 68;
   BELLSPROUT = 69;
   WEEPINBELL = 70;
-  VICTREEBELL = 71;
+  VICTREEBEL = 71;
   TENTACOOL = 72;
   TENTACRUEL = 73;
-  GEODUGE = 74;
+  GEODUDE = 74;
   GRAVELER = 75;
   GOLEM = 76;
   PONYTA = 77;

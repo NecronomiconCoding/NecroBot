@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.IO;
 using PokemonGo.RocketAPI.Logging;
 
 #endregion
@@ -13,16 +14,18 @@ namespace PokemonGo.RocketAPI
     /// </summary>
     public static class Logger
     {
-        private static ILogger logger;
+        private static ILogger _logger;
 
         /// <summary>
-        ///     Set the logger. All future requests to <see cref="Write(string, LogLevel)" /> will use that logger, any old will be
+        ///     Set the logger. All future requests to <see cref="Write(string,LogLevel,ConsoleColor)" /> will use that logger, any
+        ///     old will be
         ///     unset.
         /// </summary>
         /// <param name="logger"></param>
         public static void SetLogger(ILogger logger)
         {
-            Logger.logger = logger;
+            _logger = logger;
+            Log($"Initializing Rocket logger at time {DateTime.Now}...");
         }
 
         /// <summary>
@@ -33,9 +36,20 @@ namespace PokemonGo.RocketAPI
         /// <param name="color">Optional. Default is automatic color.</param>
         public static void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black)
         {
-            if (logger == null)
+            if (_logger == null)
                 return;
-            logger.Write(message, level, color);
+            _logger.Write(message, level, color);
+            Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
+        }
+
+        private static void Log(string message)
+        {
+            // maybe do a new log rather than appending?
+            using (var log = File.AppendText("log.txt"))
+            {
+                log.WriteLine(message);
+                log.Flush();
+            }
         }
     }
 

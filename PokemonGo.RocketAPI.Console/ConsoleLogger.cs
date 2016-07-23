@@ -12,7 +12,7 @@ namespace PokemonGo.RocketAPI.Console
     /// </summary>
     public class ConsoleLogger : ILogger
     {
-        private readonly LogLevel maxLogLevel;
+        private readonly LogLevel _maxLogLevel;
 
         /// <summary>
         ///     To create a ConsoleLogger, we must define a maximum log level.
@@ -21,7 +21,7 @@ namespace PokemonGo.RocketAPI.Console
         /// <param name="maxLogLevel"></param>
         public ConsoleLogger(LogLevel maxLogLevel)
         {
-            this.maxLogLevel = maxLogLevel;
+            _maxLogLevel = maxLogLevel;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace PokemonGo.RocketAPI.Console
         /// <param name="color">Optional. Default is auotmatic</param>
         public void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black)
         {
-            if (level > maxLogLevel)
+            if (level > _maxLogLevel)
                 return;
 
             switch (level)
@@ -42,8 +42,8 @@ namespace PokemonGo.RocketAPI.Console
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ERROR) {message}");
                     break;
                 case LogLevel.Warning:
-                    System.Console.ForegroundColor = ConsoleColor.DarkRed;
-                    System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (WARNING) {message}");
+                    System.Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ATTENTION) {message}");
                     break;
                 case LogLevel.Info:
                     System.Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -63,7 +63,7 @@ namespace PokemonGo.RocketAPI.Console
                     break;
                 case LogLevel.Caught:
                     System.Console.ForegroundColor = ConsoleColor.Green;
-                    System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (CAUGHT) {message}");
+                    System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (PKMN) {message}");
                     break;
                 case LogLevel.Transfer:
                     System.Console.ForegroundColor = ConsoleColor.DarkGreen;
@@ -74,7 +74,7 @@ namespace PokemonGo.RocketAPI.Console
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (EVOLVED) {message}");
                     break;
                 case LogLevel.Berry:
-                    System.Console.ForegroundColor = ConsoleColor.Magenta;
+                    System.Console.ForegroundColor = ConsoleColor.DarkYellow;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (BERRY) {message}");
                     break;
                 case LogLevel.Debug:

@@ -98,7 +98,7 @@ message Pokemon {
   int32 individual_attack = 17;
   int32 individual_defense = 18;
   int32 individual_stamina = 19;
-  int32 cp_multiplier = 20;
+  float cp_multiplier = 20;
   int32 pokeball = 21;
   uint64 captured_cell_id = 22;
   int32 battles_attacked = 23;
@@ -106,7 +106,7 @@ message Pokemon {
   int32 egg_incubator_id = 25;
   uint64 creation_time_ms = 26;
   int32 num_upgrades = 27;
-  int32 additional_cp_multiplier = 28;
+  float additional_cp_multiplier = 28;
   int32 favorite = 29;
   string nickname = 30;
   int32 from_fort = 31;
@@ -315,7 +315,7 @@ message PokemonData {
   int32 individual_attack = 17;
   int32 individual_defense = 18;
   int32 individual_stamina = 19;
-  int32 cp_multiplier = 20;
+  float cp_multiplier = 20;
   int32 pokeball = 21;
   uint64 captured_cell_id = 22;
   int32 battles_attacked = 23;
@@ -323,7 +323,7 @@ message PokemonData {
   int32 egg_incubator_id = 25;
   uint64 creation_time_ms = 26;
   int32 num_upgrades = 27;
-  int32 additional_cp_multiplier = 28;
+  float additional_cp_multiplier = 28;
   int32 favorite = 29;
   string nickname = 30;
   int32 from_fort = 31;
