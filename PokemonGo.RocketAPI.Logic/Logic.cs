@@ -398,6 +398,7 @@ namespace PokemonGo.RocketAPI.Logic
 
             if (blFound == false)
             {
+                Logger.Write("No PokeSTOP left returning to starting location...", LogLevel.Info, ConsoleColor.DarkRed);
                 var update =
                 await
                     _navigation.HumanLikeWalking(new Navigation.Location(Client.dblGlobalLat, Client.dblGlobalLng),
