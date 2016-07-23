@@ -11,9 +11,6 @@
     <Setting Name="PtcPassword" Type="System.String" Scope="User">
       <Value Profile="(Default)">pw</Value>
     </Setting>
-    <Setting Name="GoogleRefreshToken" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="DefaultLatitude" Type="System.Double" Scope="User">
       <Value Profile="(Default)">52.379189</Value>
     </Setting>
@@ -38,10 +35,16 @@
     <Setting Name="TransferDuplicatePokemon" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="DelayBetweenMove" Type="System.Int32" Scope="User">
+    <Setting Name="DelayBetweenPokemonCatch" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5000</Value>
     </Setting>
     <Setting Name="UsePokemonToNotCatchFilter" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="KeepMinDuplicatePokemon" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="PrioritizeIVOverCP" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

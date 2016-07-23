@@ -14,7 +14,6 @@ namespace PokemonGo.RocketAPI
         double DefaultLatitude { get; }
         double DefaultLongitude { get; }
         double DefaultAltitude { get; }
-        string GoogleRefreshToken { get; set; }
         string PtcPassword { get; }
         string PtcUsername { get; }
         float KeepMinIVPercentage { get; }
@@ -22,8 +21,10 @@ namespace PokemonGo.RocketAPI
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool TransferDuplicatePokemon { get; }
-        int DelayBetweenMove { get; }
+        int DelayBetweenPokemonCatch { get; }
         bool UsePokemonToNotCatchFilter { get; }
+        int KeepMinDuplicatePokemon { get; }
+        bool PrioritizeIVOverCP {get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
