@@ -307,15 +307,11 @@ namespace PokemonGo.RocketAPI.Logic
             Logger.Write("Looking for pokemon..", LogLevel.Debug);
             var mapObjects = await _client.GetMapObjects();
 
-<<<<<<< HEAD
-            var pokemons = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons).OrderBy(i => LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude, i.Longitude));
-=======
             var pokemons =
                 mapObjects.MapCells.SelectMany(i => i.CatchablePokemons)
                     .OrderBy(
                         i =>
                             LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude, i.Longitude));
->>>>>>> refs/remotes/origin/master
 
             foreach (var pokemon in pokemons)
             {
@@ -339,8 +335,6 @@ namespace PokemonGo.RocketAPI.Logic
                     await Task.Delay(_clientSettings.DelayBetweenPokemonCatch);
                 }
             }
-<<<<<<< HEAD
-=======
         }
 
         private async Task ExecuteFarmingPokestopsAndPokemons()
@@ -352,7 +346,6 @@ namespace PokemonGo.RocketAPI.Logic
             }
 
             await ExecutePokeStops();
->>>>>>> refs/remotes/origin/master
         }
 
         private static bool blPokeStopFound = false;
@@ -583,13 +576,8 @@ _navigation.HumanLikeWalking(new GeoCoordinate(Client.dblGlobalLat, Client.dblGl
 
             foreach (var item in items)
             {
-<<<<<<< HEAD
-                var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                Logger.Write($"{item.Count}x {(ItemId) item.Item_}", LogLevel.Recycling);
-=======
                 var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
                 Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
->>>>>>> refs/remotes/origin/master
                 _stats.AddItemsRemoved(item.Count);
                 _stats.UpdateConsoleTitle(_inventory);
                 await Task.Delay(500);
