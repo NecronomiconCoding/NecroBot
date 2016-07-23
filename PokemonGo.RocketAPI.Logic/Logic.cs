@@ -1,4 +1,4 @@
-﻿#region
+#region
 
 using System;
 using System.Collections.Generic;
@@ -39,7 +39,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             CatchPokemonResponse caughtPokemonResponse;
             do
-            {
+            {//test
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
                 
 
@@ -429,22 +429,15 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task RecycleItems()
         {
-            var allItems = await _inventory.GetItems();
-            Random rnd = new Random();
-            int recycleThreshold = rnd.Next(200, 251);
+            var items = await _inventory.GetItemsToRecycle(_clientSettings);
 
-            if (allItems.Count() >= recycleThreshold)
+            foreach (var item in items)
             {
-                var items = await _inventory.GetItemsToRecycle(_clientSettings);
-
-                foreach (var item in items)
-                {
-                    var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
-                    Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
-                    _stats.AddItemsRemoved(item.Count);
-                    _stats.UpdateConsoleTitle(_inventory);
-                    await Task.Delay(500);
-                }
+                var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
+                 Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
+                 _stats.AddItemsRemoved(item.Count);
+                 _stats.UpdateConsoleTitle(_inventory);
+                 await Task.Delay(500);
             }
         }
 
