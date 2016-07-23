@@ -1,6 +1,5 @@
 <!-- define warning icon -->
 [1.1]: http://i.imgur.com/M4fJ65n.png (ATTENTION)
-[1.2]: http://i.imgur.com/NNcGs1n.png (BTC)
 <!-- title -->
 <h1>Pokemon Go Bot based on FeroxRevs API</h1>
 <br/>
@@ -44,8 +43,8 @@ Feel free to buy us all a beer, by using PayPal:
 
 <a name="btc">Or donate bitcoins:</a><br/>
 
- ![alt text][1.2] 1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e
- 
+<img src="http://i.imgur.com/NNcGs1n.png" alt="BTC"/><strong> 1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e</strong>
+
 <br/>
 
 <h6><em>[ all Bitcoin donations are sent to Ferox only ]</em></h6>
