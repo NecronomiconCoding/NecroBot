@@ -1,4 +1,4 @@
-#region Usings
+#region
 
 using System;
 using System.Net;
@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 
 namespace PokemonGo.RocketAPI.Helpers
 {
-    internal class RetryHandler 
-        : DelegatingHandler
+    internal class RetryHandler : DelegatingHandler
     {
         private const int MaxRetries = 25;
 

@@ -1,4 +1,4 @@
-﻿syntax = "proto3";
+syntax = "proto3";
 
 package AllEnum;
 option csharp_namespace = "PokemonGo.RocketAPI.GeneratedCode";
@@ -441,7 +441,7 @@ enum PokemonId {
   PIKACHU = 25;
   RAICHU = 26;
   SANDSHREW = 27;
-  SANDLASH = 28;
+  SANDSLASH = 28;
   NIDORAN_FEMALE = 29;
   NIDORINA = 30;
   NIDOQUEEN = 31;
@@ -478,13 +478,13 @@ enum PokemonId {
   POLIWRATH = 62;
   ABRA = 63;
   KADABRA = 64;
-  ALAKHAZAM = 65;
+  ALAKAZAM = 65;
   MACHOP = 66;
   MACHOKE = 67;
   MACHAMP = 68;
   BELLSPROUT = 69;
   WEEPINBELL = 70;
-  VICTREEBELL = 71;
+  VICTREEBEL = 71;
   TENTACOOL = 72;
   TENTACRUEL = 73;
   GEODUDE = 74;

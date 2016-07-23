@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System.Linq;
 using PokemonGo.RocketAPI.Enums;

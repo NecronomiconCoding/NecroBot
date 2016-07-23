@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System;
 
@@ -6,8 +6,7 @@ using System;
 
 namespace PokemonGo.RocketAPI.Exceptions
 {
-    public class AccountNotVerifiedException 
-        : Exception
+    public class AccountNotVerifiedException : Exception
     {
     }
 }
