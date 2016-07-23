@@ -404,6 +404,7 @@ namespace PokemonGo.RocketAPI.Logic
             while (true)
             {
                 _playerProfile = await _client.GetProfile();
+                _stats.SetUsername(_playerProfile);
                 if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
                     await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
