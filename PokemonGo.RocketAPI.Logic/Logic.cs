@@ -446,12 +446,12 @@ namespace PokemonGo.RocketAPI.Logic
             Logger.Write($"====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
             var highestsPokemonCP = await _inventory.GetHighestsCP(20);
             foreach (var pokemon in highestsPokemonCP)
-                Logger.Write($"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon)}\t NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
+                Logger.Write($"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
             Logger.Write($"====== DisplayHighestsPerfect ======", LogLevel.Info, ConsoleColor.Yellow);
             var highestsPokemonPerfect = await _inventory.GetHighestsPerfect(10);
             foreach (var pokemon in highestsPokemonPerfect)
             {
-                Logger.Write($"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon)}\t NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
+                Logger.Write($"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
             }
         }
     }
