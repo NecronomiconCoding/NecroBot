@@ -503,7 +503,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                     "HEZBSUxFRF9QT0tFTU9OX0NBTk5PVF9FVk9MVkUQBBIeChpGQUlMRURfUE9L",
                     "RU1PTl9JU19ERVBMT1lFRBAFYgZwcm90bzM="));
             descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
-                new pbr::FileDescriptor[] {global::PokemonGo.RocketAPI.GeneratedCode.AllEnumReflection.Descriptor,},
+                new pbr::FileDescriptor[] { global::PokemonGo.RocketAPI.GeneratedCode.AllEnumReflection.Descriptor, },
                 new pbr::GeneratedClrTypeInfo(null, new pbr::GeneratedClrTypeInfo[]
                 {
                     new pbr::GeneratedClrTypeInfo(typeof(global::PokemonGo.RocketAPI.GeneratedCode.GetPlayerResponse),
@@ -1150,19 +1150,19 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        Unknown1 = input.ReadInt32();
-                        break;
-                    }
-                    case 18:
-                    {
-                        if (profile_ == null)
                         {
-                            profile_ = new global::PokemonGo.RocketAPI.GeneratedCode.Profile();
+                            Unknown1 = input.ReadInt32();
+                            break;
                         }
-                        input.ReadMessage(profile_);
-                        break;
-                    }
+                    case 18:
+                        {
+                            if (profile_ == null)
+                            {
+                                profile_ = new global::PokemonGo.RocketAPI.GeneratedCode.Profile();
+                            }
+                            input.ReadMessage(profile_);
+                            break;
+                        }
                 }
             }
         }
@@ -1388,7 +1388,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Team != 0)
             {
                 output.WriteRawTag(40);
-                output.WriteEnum((int) Team);
+                output.WriteEnum((int)Team);
             }
             if (Tutorial.Length != 0)
             {
@@ -1441,7 +1441,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (Team != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Team);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Team);
             }
             if (Tutorial.Length != 0)
             {
@@ -1543,68 +1543,68 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        CreationTime = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            CreationTime = input.ReadInt64();
+                            break;
+                        }
                     case 18:
-                    {
-                        Username = input.ReadString();
-                        break;
-                    }
+                        {
+                            Username = input.ReadString();
+                            break;
+                        }
                     case 40:
-                    {
-                        team_ = (global::PokemonGo.RocketAPI.GeneratedCode.TeamColor) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            team_ = (global::PokemonGo.RocketAPI.GeneratedCode.TeamColor)input.ReadEnum();
+                            break;
+                        }
                     case 58:
-                    {
-                        Tutorial = input.ReadBytes();
-                        break;
-                    }
+                        {
+                            Tutorial = input.ReadBytes();
+                            break;
+                        }
                     case 66:
-                    {
-                        if (avatar_ == null)
                         {
-                            avatar_ = new global::PokemonGo.RocketAPI.GeneratedCode.AvatarDetails();
+                            if (avatar_ == null)
+                            {
+                                avatar_ = new global::PokemonGo.RocketAPI.GeneratedCode.AvatarDetails();
+                            }
+                            input.ReadMessage(avatar_);
+                            break;
                         }
-                        input.ReadMessage(avatar_);
-                        break;
-                    }
                     case 72:
-                    {
-                        PokeStorage = input.ReadInt32();
-                        break;
-                    }
-                    case 80:
-                    {
-                        ItemStorage = input.ReadInt32();
-                        break;
-                    }
-                    case 90:
-                    {
-                        if (dailyBonus_ == null)
                         {
-                            dailyBonus_ = new global::PokemonGo.RocketAPI.GeneratedCode.DailyBonus();
+                            PokeStorage = input.ReadInt32();
+                            break;
                         }
-                        input.ReadMessage(dailyBonus_);
-                        break;
-                    }
+                    case 80:
+                        {
+                            ItemStorage = input.ReadInt32();
+                            break;
+                        }
+                    case 90:
+                        {
+                            if (dailyBonus_ == null)
+                            {
+                                dailyBonus_ = new global::PokemonGo.RocketAPI.GeneratedCode.DailyBonus();
+                            }
+                            input.ReadMessage(dailyBonus_);
+                            break;
+                        }
                     case 98:
-                    {
-                        Unknown12 = input.ReadBytes();
-                        break;
-                    }
+                        {
+                            Unknown12 = input.ReadBytes();
+                            break;
+                        }
                     case 106:
-                    {
-                        Unknown13 = input.ReadBytes();
-                        break;
-                    }
+                        {
+                            Unknown13 = input.ReadBytes();
+                            break;
+                        }
                     case 114:
-                    {
-                        currency_.AddEntriesFrom(input, _repeated_currency_codec);
-                        break;
-                    }
+                        {
+                            currency_.AddEntriesFrom(input, _repeated_currency_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -1767,15 +1767,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        NextCollectTimestampMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            NextCollectTimestampMs = input.ReadInt64();
+                            break;
+                        }
                     case 16:
-                    {
-                        NextDefenderBonusCollectTimestampMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            NextDefenderBonusCollectTimestampMs = input.ReadInt64();
+                            break;
+                        }
                 }
             }
         }
@@ -1929,15 +1929,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        Type = input.ReadString();
-                        break;
-                    }
+                        {
+                            Type = input.ReadString();
+                            break;
+                        }
                     case 16:
-                    {
-                        Amount = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Amount = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -2141,25 +2141,25 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 16:
-                    {
-                        Unknown2 = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Unknown2 = input.ReadInt32();
+                            break;
+                        }
                     case 24:
-                    {
-                        Unknown3 = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Unknown3 = input.ReadInt32();
+                            break;
+                        }
                     case 72:
-                    {
-                        Unknown9 = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Unknown9 = input.ReadInt32();
+                            break;
+                        }
                     case 80:
-                    {
-                        Unknown10 = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Unknown10 = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -2290,10 +2290,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        Hash = input.ReadString();
-                        break;
-                    }
+                        {
+                            Hash = input.ReadString();
+                            break;
+                        }
                 }
             }
         }
@@ -2450,19 +2450,19 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        Success = input.ReadBool();
-                        break;
-                    }
-                    case 18:
-                    {
-                        if (inventoryDelta_ == null)
                         {
-                            inventoryDelta_ = new global::PokemonGo.RocketAPI.GeneratedCode.InventoryDelta();
+                            Success = input.ReadBool();
+                            break;
                         }
-                        input.ReadMessage(inventoryDelta_);
-                        break;
-                    }
+                    case 18:
+                        {
+                            if (inventoryDelta_ == null)
+                            {
+                                inventoryDelta_ = new global::PokemonGo.RocketAPI.GeneratedCode.InventoryDelta();
+                            }
+                            input.ReadMessage(inventoryDelta_);
+                            break;
+                        }
                 }
             }
         }
@@ -2636,20 +2636,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        OriginalTimestampMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            OriginalTimestampMs = input.ReadInt64();
+                            break;
+                        }
                     case 16:
-                    {
-                        NewTimestampMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            NewTimestampMs = input.ReadInt64();
+                            break;
+                        }
                     case 26:
-                    {
-                        inventoryItems_.AddEntriesFrom(input, _repeated_inventoryItems_codec);
-                        break;
-                    }
+                        {
+                            inventoryItems_.AddEntriesFrom(input, _repeated_inventoryItems_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -2833,24 +2833,24 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        ModifiedTimestampMs = input.ReadInt64();
-                        break;
-                    }
-                    case 16:
-                    {
-                        DeletedItemKey = input.ReadInt64();
-                        break;
-                    }
-                    case 26:
-                    {
-                        if (inventoryItemData_ == null)
                         {
-                            inventoryItemData_ = new global::PokemonGo.RocketAPI.GeneratedCode.InventoryItemData();
+                            ModifiedTimestampMs = input.ReadInt64();
+                            break;
                         }
-                        input.ReadMessage(inventoryItemData_);
-                        break;
-                    }
+                    case 16:
+                        {
+                            DeletedItemKey = input.ReadInt64();
+                            break;
+                        }
+                    case 26:
+                        {
+                            if (inventoryItemData_ == null)
+                            {
+                                inventoryItemData_ = new global::PokemonGo.RocketAPI.GeneratedCode.InventoryItemData();
+                            }
+                            input.ReadMessage(inventoryItemData_);
+                            break;
+                        }
                 }
             }
         }
@@ -3245,95 +3245,95 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        if (pokemon_ == null)
                         {
-                            pokemon_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonData();
+                            if (pokemon_ == null)
+                            {
+                                pokemon_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonData();
+                            }
+                            input.ReadMessage(pokemon_);
+                            break;
                         }
-                        input.ReadMessage(pokemon_);
-                        break;
-                    }
                     case 18:
-                    {
-                        if (item_ == null)
                         {
-                            item_ = new global::PokemonGo.RocketAPI.GeneratedCode.Item();
+                            if (item_ == null)
+                            {
+                                item_ = new global::PokemonGo.RocketAPI.GeneratedCode.Item();
+                            }
+                            input.ReadMessage(item_);
+                            break;
                         }
-                        input.ReadMessage(item_);
-                        break;
-                    }
                     case 26:
-                    {
-                        if (pokedexEntry_ == null)
                         {
-                            pokedexEntry_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokedexEntry();
+                            if (pokedexEntry_ == null)
+                            {
+                                pokedexEntry_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokedexEntry();
+                            }
+                            input.ReadMessage(pokedexEntry_);
+                            break;
                         }
-                        input.ReadMessage(pokedexEntry_);
-                        break;
-                    }
                     case 34:
-                    {
-                        if (playerStats_ == null)
                         {
-                            playerStats_ = new global::PokemonGo.RocketAPI.GeneratedCode.PlayerStats();
+                            if (playerStats_ == null)
+                            {
+                                playerStats_ = new global::PokemonGo.RocketAPI.GeneratedCode.PlayerStats();
+                            }
+                            input.ReadMessage(playerStats_);
+                            break;
                         }
-                        input.ReadMessage(playerStats_);
-                        break;
-                    }
                     case 42:
-                    {
-                        if (playerCurrency_ == null)
                         {
-                            playerCurrency_ = new global::PokemonGo.RocketAPI.GeneratedCode.PlayerCurrency();
+                            if (playerCurrency_ == null)
+                            {
+                                playerCurrency_ = new global::PokemonGo.RocketAPI.GeneratedCode.PlayerCurrency();
+                            }
+                            input.ReadMessage(playerCurrency_);
+                            break;
                         }
-                        input.ReadMessage(playerCurrency_);
-                        break;
-                    }
                     case 50:
-                    {
-                        if (playerCamera_ == null)
                         {
-                            playerCamera_ = new global::PokemonGo.RocketAPI.GeneratedCode.PlayerCamera();
+                            if (playerCamera_ == null)
+                            {
+                                playerCamera_ = new global::PokemonGo.RocketAPI.GeneratedCode.PlayerCamera();
+                            }
+                            input.ReadMessage(playerCamera_);
+                            break;
                         }
-                        input.ReadMessage(playerCamera_);
-                        break;
-                    }
                     case 58:
-                    {
-                        if (inventoryUpgrades_ == null)
                         {
-                            inventoryUpgrades_ = new global::PokemonGo.RocketAPI.GeneratedCode.InventoryUpgrades();
+                            if (inventoryUpgrades_ == null)
+                            {
+                                inventoryUpgrades_ = new global::PokemonGo.RocketAPI.GeneratedCode.InventoryUpgrades();
+                            }
+                            input.ReadMessage(inventoryUpgrades_);
+                            break;
                         }
-                        input.ReadMessage(inventoryUpgrades_);
-                        break;
-                    }
                     case 66:
-                    {
-                        if (appliedItems_ == null)
                         {
-                            appliedItems_ = new global::PokemonGo.RocketAPI.GeneratedCode.AppliedItems();
+                            if (appliedItems_ == null)
+                            {
+                                appliedItems_ = new global::PokemonGo.RocketAPI.GeneratedCode.AppliedItems();
+                            }
+                            input.ReadMessage(appliedItems_);
+                            break;
                         }
-                        input.ReadMessage(appliedItems_);
-                        break;
-                    }
                     case 74:
-                    {
-                        if (eggIncubators_ == null)
                         {
-                            eggIncubators_ = new global::PokemonGo.RocketAPI.GeneratedCode.EggIncubators();
+                            if (eggIncubators_ == null)
+                            {
+                                eggIncubators_ = new global::PokemonGo.RocketAPI.GeneratedCode.EggIncubators();
+                            }
+                            input.ReadMessage(eggIncubators_);
+                            break;
                         }
-                        input.ReadMessage(eggIncubators_);
-                        break;
-                    }
                     case 82:
-                    {
-                        if (pokemonFamily_ == null)
                         {
-                            pokemonFamily_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonFamily();
+                            if (pokemonFamily_ == null)
+                            {
+                                pokemonFamily_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonFamily();
+                            }
+                            input.ReadMessage(pokemonFamily_);
+                            break;
                         }
-                        input.ReadMessage(pokemonFamily_);
-                        break;
-                    }
                 }
             }
         }
@@ -3445,7 +3445,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (ItemId != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) ItemId);
+                output.WriteEnum((int)ItemId);
             }
             if (Count != 0)
             {
@@ -3459,7 +3459,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (ItemId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ItemId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemId);
             }
             if (Count != 0)
             {
@@ -3495,15 +3495,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId)input.ReadEnum();
+                            break;
+                        }
                     case 16:
-                    {
-                        Count = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Count = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -3623,12 +3623,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode
         public const int FromFortFieldNumber = 31;
 
         private static readonly pb::MessageParser<Pokemon> _parser = new pb::MessageParser<Pokemon>(() => new Pokemon());
-        private int additionalCpMultiplier_;
+        private float additionalCpMultiplier_;
         private int battlesAttacked_;
         private int battlesDefended_;
         private ulong capturedCellId_;
         private int cp_;
-        private int cpMultiplier_;
+        private float cpMultiplier_;
         private ulong creationTimeMs_;
         private int deployedFortId_;
         private int eggIncubatorId_;
@@ -3811,7 +3811,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             set { individualStamina_ = value; }
         }
 
-        public int CpMultiplier
+        public float CpMultiplier
         {
             get { return cpMultiplier_; }
             set { cpMultiplier_ = value; }
@@ -3859,7 +3859,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             set { numUpgrades_ = value; }
         }
 
-        public int AdditionalCpMultiplier
+        public float AdditionalCpMultiplier
         {
             get { return additionalCpMultiplier_; }
             set { additionalCpMultiplier_ = value; }
@@ -3946,7 +3946,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (PokemonType != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) PokemonType);
+                output.WriteEnum((int)PokemonType);
             }
             if (Cp != 0)
             {
@@ -3966,12 +3966,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Move1 != 0)
             {
                 output.WriteRawTag(48);
-                output.WriteEnum((int) Move1);
+                output.WriteEnum((int)Move1);
             }
             if (Move2 != 0)
             {
                 output.WriteRawTag(56);
-                output.WriteEnum((int) Move2);
+                output.WriteEnum((int)Move2);
             }
             if (DeployedFortId != 0)
             {
@@ -4030,8 +4030,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (CpMultiplier != 0)
             {
-                output.WriteRawTag(160, 1);
-                output.WriteInt32(CpMultiplier);
+                output.WriteRawTag(165, 1);
+                output.WriteFloat(CpMultiplier);
             }
             if (Pokeball != 0)
             {
@@ -4070,8 +4070,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (AdditionalCpMultiplier != 0)
             {
-                output.WriteRawTag(224, 1);
-                output.WriteInt32(AdditionalCpMultiplier);
+                output.WriteRawTag(229, 1);
+                output.WriteFloat(AdditionalCpMultiplier);
             }
             if (Favorite != 0)
             {
@@ -4099,7 +4099,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (PokemonType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) PokemonType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)PokemonType);
             }
             if (Cp != 0)
             {
@@ -4115,11 +4115,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (Move1 != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Move1);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Move1);
             }
             if (Move2 != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Move2);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Move2);
             }
             if (DeployedFortId != 0)
             {
@@ -4165,9 +4165,9 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             {
                 size += 2 + pb::CodedOutputStream.ComputeInt32Size(IndividualStamina);
             }
-            if (CpMultiplier != 0)
+            if (CpMultiplier != 0F)
             {
-                size += 2 + pb::CodedOutputStream.ComputeInt32Size(CpMultiplier);
+                size += 2 + 4;
             }
             if (Pokeball != 0)
             {
@@ -4197,9 +4197,9 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             {
                 size += 2 + pb::CodedOutputStream.ComputeInt32Size(NumUpgrades);
             }
-            if (AdditionalCpMultiplier != 0)
+            if (AdditionalCpMultiplier != 0F)
             {
-                size += 2 + pb::CodedOutputStream.ComputeInt32Size(AdditionalCpMultiplier);
+                size += 2 + 4;
             }
             if (Favorite != 0)
             {
@@ -4355,155 +4355,155 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        Id = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Id = input.ReadInt32();
+                            break;
+                        }
                     case 16:
-                    {
-                        pokemonType_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            pokemonType_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId)input.ReadEnum();
+                            break;
+                        }
                     case 24:
-                    {
-                        Cp = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Cp = input.ReadInt32();
+                            break;
+                        }
                     case 32:
-                    {
-                        Stamina = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Stamina = input.ReadInt32();
+                            break;
+                        }
                     case 40:
-                    {
-                        StaminaMax = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            StaminaMax = input.ReadInt32();
+                            break;
+                        }
                     case 48:
-                    {
-                        move1_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            move1_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove)input.ReadEnum();
+                            break;
+                        }
                     case 56:
-                    {
-                        move2_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            move2_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove)input.ReadEnum();
+                            break;
+                        }
                     case 64:
-                    {
-                        DeployedFortId = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            DeployedFortId = input.ReadInt32();
+                            break;
+                        }
                     case 74:
-                    {
-                        OwnerName = input.ReadString();
-                        break;
-                    }
+                        {
+                            OwnerName = input.ReadString();
+                            break;
+                        }
                     case 80:
-                    {
-                        IsEgg = input.ReadBool();
-                        break;
-                    }
+                        {
+                            IsEgg = input.ReadBool();
+                            break;
+                        }
                     case 88:
-                    {
-                        EggKmWalkedTarget = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            EggKmWalkedTarget = input.ReadInt32();
+                            break;
+                        }
                     case 96:
-                    {
-                        EggKmWalkedStart = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            EggKmWalkedStart = input.ReadInt32();
+                            break;
+                        }
                     case 112:
-                    {
-                        Origin = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Origin = input.ReadInt32();
+                            break;
+                        }
                     case 125:
-                    {
-                        HeightM = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            HeightM = input.ReadFloat();
+                            break;
+                        }
                     case 133:
-                    {
-                        WeightKg = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            WeightKg = input.ReadFloat();
+                            break;
+                        }
                     case 136:
-                    {
-                        IndividualAttack = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            IndividualAttack = input.ReadInt32();
+                            break;
+                        }
                     case 144:
-                    {
-                        IndividualDefense = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            IndividualDefense = input.ReadInt32();
+                            break;
+                        }
                     case 152:
-                    {
-                        IndividualStamina = input.ReadInt32();
-                        break;
-                    }
-                    case 160:
-                    {
-                        CpMultiplier = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            IndividualStamina = input.ReadInt32();
+                            break;
+                        }
+                    case 165:
+                        {
+                            CpMultiplier = input.ReadFloat();
+                            break;
+                        }
                     case 168:
-                    {
-                        Pokeball = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Pokeball = input.ReadInt32();
+                            break;
+                        }
                     case 176:
-                    {
-                        CapturedCellId = input.ReadUInt64();
-                        break;
-                    }
+                        {
+                            CapturedCellId = input.ReadUInt64();
+                            break;
+                        }
                     case 184:
-                    {
-                        BattlesAttacked = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BattlesAttacked = input.ReadInt32();
+                            break;
+                        }
                     case 192:
-                    {
-                        BattlesDefended = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BattlesDefended = input.ReadInt32();
+                            break;
+                        }
                     case 200:
-                    {
-                        EggIncubatorId = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            EggIncubatorId = input.ReadInt32();
+                            break;
+                        }
                     case 208:
-                    {
-                        CreationTimeMs = input.ReadUInt64();
-                        break;
-                    }
+                        {
+                            CreationTimeMs = input.ReadUInt64();
+                            break;
+                        }
                     case 216:
-                    {
-                        NumUpgrades = input.ReadInt32();
-                        break;
-                    }
-                    case 224:
-                    {
-                        AdditionalCpMultiplier = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            NumUpgrades = input.ReadInt32();
+                            break;
+                        }
+                    case 229:
+                        {
+                            AdditionalCpMultiplier = input.ReadFloat();
+                            break;
+                        }
                     case 232:
-                    {
-                        Favorite = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Favorite = input.ReadInt32();
+                            break;
+                        }
                     case 242:
-                    {
-                        Nickname = input.ReadString();
-                        break;
-                    }
+                        {
+                            Nickname = input.ReadString();
+                            break;
+                        }
                     case 248:
-                    {
-                        FromFort = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            FromFort = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -4645,7 +4645,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Item_ != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) Item_);
+                output.WriteEnum((int)Item_);
             }
             if (Count != 0)
             {
@@ -4664,7 +4664,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (Item_ != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Item_);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Item_);
             }
             if (Count != 0)
             {
@@ -4708,20 +4708,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        item_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            item_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemType)input.ReadEnum();
+                            break;
+                        }
                     case 16:
-                    {
-                        Count = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Count = input.ReadInt32();
+                            break;
+                        }
                     case 24:
-                    {
-                        Unseen = input.ReadBool();
-                        break;
-                    }
+                        {
+                            Unseen = input.ReadBool();
+                            break;
+                        }
                 }
             }
         }
@@ -4951,30 +4951,30 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        PokedexEntryNumber = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            PokedexEntryNumber = input.ReadInt32();
+                            break;
+                        }
                     case 16:
-                    {
-                        TimesEncountered = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            TimesEncountered = input.ReadInt32();
+                            break;
+                        }
                     case 24:
-                    {
-                        TimesCaptured = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            TimesCaptured = input.ReadInt32();
+                            break;
+                        }
                     case 32:
-                    {
-                        EvolutionStonePieces = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            EvolutionStonePieces = input.ReadInt32();
+                            break;
+                        }
                     case 40:
-                    {
-                        EvolutionStones = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            EvolutionStones = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -5659,120 +5659,120 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        Level = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Level = input.ReadInt32();
+                            break;
+                        }
                     case 16:
-                    {
-                        Experience = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            Experience = input.ReadInt64();
+                            break;
+                        }
                     case 24:
-                    {
-                        PrevLevelXp = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            PrevLevelXp = input.ReadInt64();
+                            break;
+                        }
                     case 32:
-                    {
-                        NextLevelXp = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            NextLevelXp = input.ReadInt64();
+                            break;
+                        }
                     case 45:
-                    {
-                        KmWalked = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            KmWalked = input.ReadFloat();
+                            break;
+                        }
                     case 48:
-                    {
-                        PokemonsEncountered = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            PokemonsEncountered = input.ReadInt32();
+                            break;
+                        }
                     case 56:
-                    {
-                        UniquePokedexEntries = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            UniquePokedexEntries = input.ReadInt32();
+                            break;
+                        }
                     case 64:
-                    {
-                        PokemonsCaptured = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            PokemonsCaptured = input.ReadInt32();
+                            break;
+                        }
                     case 72:
-                    {
-                        Evolutions = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Evolutions = input.ReadInt32();
+                            break;
+                        }
                     case 80:
-                    {
-                        PokeStopVisits = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            PokeStopVisits = input.ReadInt32();
+                            break;
+                        }
                     case 88:
-                    {
-                        PokeballsThrown = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            PokeballsThrown = input.ReadInt32();
+                            break;
+                        }
                     case 96:
-                    {
-                        EggsHatched = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            EggsHatched = input.ReadInt32();
+                            break;
+                        }
                     case 104:
-                    {
-                        BigMagikarpCaught = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BigMagikarpCaught = input.ReadInt32();
+                            break;
+                        }
                     case 112:
-                    {
-                        BattleAttackWon = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BattleAttackWon = input.ReadInt32();
+                            break;
+                        }
                     case 120:
-                    {
-                        BattleAttackTotal = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BattleAttackTotal = input.ReadInt32();
+                            break;
+                        }
                     case 128:
-                    {
-                        BattleDefendedWon = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BattleDefendedWon = input.ReadInt32();
+                            break;
+                        }
                     case 136:
-                    {
-                        BattleTrainingWon = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BattleTrainingWon = input.ReadInt32();
+                            break;
+                        }
                     case 144:
-                    {
-                        BattleTrainingTotal = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BattleTrainingTotal = input.ReadInt32();
+                            break;
+                        }
                     case 152:
-                    {
-                        PrestigeRaisedTotal = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            PrestigeRaisedTotal = input.ReadInt32();
+                            break;
+                        }
                     case 160:
-                    {
-                        PrestigeDroppedTotal = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            PrestigeDroppedTotal = input.ReadInt32();
+                            break;
+                        }
                     case 168:
-                    {
-                        PokemonDeployed = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            PokemonDeployed = input.ReadInt32();
+                            break;
+                        }
                     case 178:
-                    {
-                        PokemonCaughtByType = input.ReadBytes();
-                        break;
-                    }
+                        {
+                            PokemonCaughtByType = input.ReadBytes();
+                            break;
+                        }
                     case 184:
-                    {
-                        SmallRattataCaught = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            SmallRattataCaught = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -5922,10 +5922,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        Gems = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Gems = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -6053,10 +6053,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        IsDefaultCamera = input.ReadBool();
-                        break;
-                    }
+                        {
+                            IsDefaultCamera = input.ReadBool();
+                            break;
+                        }
                 }
             }
         }
@@ -6178,10 +6178,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        inventoryUpgrades_.AddEntriesFrom(input, _repeated_inventoryUpgrades_codec);
-                        break;
-                    }
+                        {
+                            inventoryUpgrades_.AddEntriesFrom(input, _repeated_inventoryUpgrades_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -6296,12 +6296,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Item != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) Item);
+                output.WriteEnum((int)Item);
             }
             if (UpgradeType != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) UpgradeType);
+                output.WriteEnum((int)UpgradeType);
             }
             if (AdditionalStorage != 0)
             {
@@ -6315,11 +6315,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (Item != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Item);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Item);
             }
             if (UpgradeType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) UpgradeType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)UpgradeType);
             }
             if (AdditionalStorage != 0)
             {
@@ -6359,20 +6359,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        item_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            item_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemType)input.ReadEnum();
+                            break;
+                        }
                     case 16:
-                    {
-                        upgradeType_ = (global::PokemonGo.RocketAPI.GeneratedCode.InventoryUpgradeType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            upgradeType_ = (global::PokemonGo.RocketAPI.GeneratedCode.InventoryUpgradeType)input.ReadEnum();
+                            break;
+                        }
                     case 24:
-                    {
-                        AdditionalStorage = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            AdditionalStorage = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -6506,14 +6506,14 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 34:
-                    {
-                        if (item_ == null)
                         {
-                            item_ = new global::PokemonGo.RocketAPI.GeneratedCode.AppliedItem();
+                            if (item_ == null)
+                            {
+                                item_ = new global::PokemonGo.RocketAPI.GeneratedCode.AppliedItem();
+                            }
+                            input.ReadMessage(item_);
+                            break;
                         }
-                        input.ReadMessage(item_);
-                        break;
-                    }
                 }
             }
         }
@@ -6640,12 +6640,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (ItemType != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) ItemType);
+                output.WriteEnum((int)ItemType);
             }
             if (ItemTypeCategory != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) ItemTypeCategory);
+                output.WriteEnum((int)ItemTypeCategory);
             }
             if (ExpireMs != 0L)
             {
@@ -6664,11 +6664,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (ItemType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ItemType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemType);
             }
             if (ItemTypeCategory != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ItemTypeCategory);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemTypeCategory);
             }
             if (ExpireMs != 0L)
             {
@@ -6716,25 +6716,25 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        itemType_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            itemType_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId)input.ReadEnum();
+                            break;
+                        }
                     case 16:
-                    {
-                        itemTypeCategory_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            itemTypeCategory_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemType)input.ReadEnum();
+                            break;
+                        }
                     case 24:
-                    {
-                        ExpireMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            ExpireMs = input.ReadInt64();
+                            break;
+                        }
                     case 32:
-                    {
-                        AppliedMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            AppliedMs = input.ReadInt64();
+                            break;
+                        }
                 }
             }
         }
@@ -6869,14 +6869,14 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        if (eggIncubator_ == null)
                         {
-                            eggIncubator_ = new global::PokemonGo.RocketAPI.GeneratedCode.EggIncubator();
+                            if (eggIncubator_ == null)
+                            {
+                                eggIncubator_ = new global::PokemonGo.RocketAPI.GeneratedCode.EggIncubator();
+                            }
+                            input.ReadMessage(eggIncubator_);
+                            break;
                         }
-                        input.ReadMessage(eggIncubator_);
-                        break;
-                    }
                 }
             }
         }
@@ -7047,12 +7047,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (ItemType != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) ItemType);
+                output.WriteEnum((int)ItemType);
             }
             if (IncubatorType != 0)
             {
                 output.WriteRawTag(24);
-                output.WriteEnum((int) IncubatorType);
+                output.WriteEnum((int)IncubatorType);
             }
             if (UsesRemaining != 0)
             {
@@ -7085,11 +7085,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (ItemType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ItemType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemType);
             }
             if (IncubatorType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) IncubatorType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)IncubatorType);
             }
             if (UsesRemaining != 0)
             {
@@ -7157,40 +7157,40 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        ItemId = input.ReadString();
-                        break;
-                    }
+                        {
+                            ItemId = input.ReadString();
+                            break;
+                        }
                     case 16:
-                    {
-                        itemType_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            itemType_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemType)input.ReadEnum();
+                            break;
+                        }
                     case 24:
-                    {
-                        incubatorType_ = (global::PokemonGo.RocketAPI.GeneratedCode.EggIncubatorType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            incubatorType_ = (global::PokemonGo.RocketAPI.GeneratedCode.EggIncubatorType)input.ReadEnum();
+                            break;
+                        }
                     case 32:
-                    {
-                        UsesRemaining = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            UsesRemaining = input.ReadInt32();
+                            break;
+                        }
                     case 40:
-                    {
-                        PokemonId = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            PokemonId = input.ReadInt64();
+                            break;
+                        }
                     case 49:
-                    {
-                        StartKmWalked = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            StartKmWalked = input.ReadDouble();
+                            break;
+                        }
                     case 57:
-                    {
-                        TargetKmWalked = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            TargetKmWalked = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -7299,7 +7299,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (FamilyId != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) FamilyId);
+                output.WriteEnum((int)FamilyId);
             }
             if (Candy != 0)
             {
@@ -7313,7 +7313,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (FamilyId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) FamilyId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)FamilyId);
             }
             if (Candy != 0)
             {
@@ -7349,15 +7349,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        familyId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonFamilyId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            familyId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonFamilyId)input.ReadEnum();
+                            break;
+                        }
                     case 16:
-                    {
-                        Candy = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Candy = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -7561,25 +7561,25 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        CellId = input.ReadBytes();
-                        break;
-                    }
+                        {
+                            CellId = input.ReadBytes();
+                            break;
+                        }
                     case 18:
-                    {
-                        SinceTimestampMs = input.ReadBytes();
-                        break;
-                    }
+                        {
+                            SinceTimestampMs = input.ReadBytes();
+                            break;
+                        }
                     case 25:
-                    {
-                        Latitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Latitude = input.ReadDouble();
+                            break;
+                        }
                     case 33:
-                    {
-                        Longitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Longitude = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -7691,7 +7691,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Status != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) Status);
+                output.WriteEnum((int)Status);
             }
         }
 
@@ -7701,7 +7701,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             size += mapCells_.CalculateSize(_repeated_mapCells_codec);
             if (Status != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Status);
             }
             return size;
         }
@@ -7730,15 +7730,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        mapCells_.AddEntriesFrom(input, _repeated_mapCells_codec);
-                        break;
-                    }
+                        {
+                            mapCells_.AddEntriesFrom(input, _repeated_mapCells_codec);
+                            break;
+                        }
                     case 16:
-                    {
-                        status_ = (global::PokemonGo.RocketAPI.GeneratedCode.MapObjectsStatus) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            status_ = (global::PokemonGo.RocketAPI.GeneratedCode.MapObjectsStatus)input.ReadEnum();
+                            break;
+                        }
                 }
             }
         }
@@ -8086,60 +8086,60 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        S2CellId = input.ReadUInt64();
-                        break;
-                    }
+                        {
+                            S2CellId = input.ReadUInt64();
+                            break;
+                        }
                     case 16:
-                    {
-                        CurrentTimestampMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            CurrentTimestampMs = input.ReadInt64();
+                            break;
+                        }
                     case 26:
-                    {
-                        forts_.AddEntriesFrom(input, _repeated_forts_codec);
-                        break;
-                    }
+                        {
+                            forts_.AddEntriesFrom(input, _repeated_forts_codec);
+                            break;
+                        }
                     case 34:
-                    {
-                        spawnPoints_.AddEntriesFrom(input, _repeated_spawnPoints_codec);
-                        break;
-                    }
+                        {
+                            spawnPoints_.AddEntriesFrom(input, _repeated_spawnPoints_codec);
+                            break;
+                        }
                     case 42:
-                    {
-                        wildPokemons_.AddEntriesFrom(input, _repeated_wildPokemons_codec);
-                        break;
-                    }
+                        {
+                            wildPokemons_.AddEntriesFrom(input, _repeated_wildPokemons_codec);
+                            break;
+                        }
                     case 50:
-                    {
-                        deletedObjects_.AddEntriesFrom(input, _repeated_deletedObjects_codec);
-                        break;
-                    }
+                        {
+                            deletedObjects_.AddEntriesFrom(input, _repeated_deletedObjects_codec);
+                            break;
+                        }
                     case 56:
-                    {
-                        IsTruncatedList = input.ReadBool();
-                        break;
-                    }
+                        {
+                            IsTruncatedList = input.ReadBool();
+                            break;
+                        }
                     case 66:
-                    {
-                        fortSummaries_.AddEntriesFrom(input, _repeated_fortSummaries_codec);
-                        break;
-                    }
+                        {
+                            fortSummaries_.AddEntriesFrom(input, _repeated_fortSummaries_codec);
+                            break;
+                        }
                     case 74:
-                    {
-                        decimatedSpawnPoints_.AddEntriesFrom(input, _repeated_decimatedSpawnPoints_codec);
-                        break;
-                    }
+                        {
+                            decimatedSpawnPoints_.AddEntriesFrom(input, _repeated_decimatedSpawnPoints_codec);
+                            break;
+                        }
                     case 82:
-                    {
-                        catchablePokemons_.AddEntriesFrom(input, _repeated_catchablePokemons_codec);
-                        break;
-                    }
+                        {
+                            catchablePokemons_.AddEntriesFrom(input, _repeated_catchablePokemons_codec);
+                            break;
+                        }
                     case 90:
-                    {
-                        nearbyPokemons_.AddEntriesFrom(input, _repeated_nearbyPokemons_codec);
-                        break;
-                    }
+                        {
+                            nearbyPokemons_.AddEntriesFrom(input, _repeated_nearbyPokemons_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -8458,12 +8458,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (OwnedByTeam != 0)
             {
                 output.WriteRawTag(40);
-                output.WriteEnum((int) OwnedByTeam);
+                output.WriteEnum((int)OwnedByTeam);
             }
             if (GuardPokemonId != 0)
             {
                 output.WriteRawTag(48);
-                output.WriteEnum((int) GuardPokemonId);
+                output.WriteEnum((int)GuardPokemonId);
             }
             if (GuardPokemonCp != 0)
             {
@@ -8478,7 +8478,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Type != 0)
             {
                 output.WriteRawTag(72);
-                output.WriteEnum((int) Type);
+                output.WriteEnum((int)Type);
             }
             if (GymPoints != 0L)
             {
@@ -8508,12 +8508,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Sponsor != 0)
             {
                 output.WriteRawTag(120);
-                output.WriteEnum((int) Sponsor);
+                output.WriteEnum((int)Sponsor);
             }
             if (RenderingType != 0)
             {
                 output.WriteRawTag(128, 1);
-                output.WriteEnum((int) RenderingType);
+                output.WriteEnum((int)RenderingType);
             }
         }
 
@@ -8542,15 +8542,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (Type != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Type);
             }
             if (OwnedByTeam != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) OwnedByTeam);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)OwnedByTeam);
             }
             if (GuardPokemonId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) GuardPokemonId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)GuardPokemonId);
             }
             if (GuardPokemonCp != 0)
             {
@@ -8570,11 +8570,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (Sponsor != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Sponsor);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Sponsor);
             }
             if (RenderingType != 0)
             {
-                size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) RenderingType);
+                size += 2 + pb::CodedOutputStream.ComputeEnumSize((int)RenderingType);
             }
             if (ActiveFortModifier.Length != 0)
             {
@@ -8674,89 +8674,89 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        Id = input.ReadString();
-                        break;
-                    }
-                    case 16:
-                    {
-                        LastModifiedTimestampMs = input.ReadInt64();
-                        break;
-                    }
-                    case 25:
-                    {
-                        Latitude = input.ReadDouble();
-                        break;
-                    }
-                    case 33:
-                    {
-                        Longitude = input.ReadDouble();
-                        break;
-                    }
-                    case 40:
-                    {
-                        ownedByTeam_ = (global::PokemonGo.RocketAPI.GeneratedCode.TeamColor) input.ReadEnum();
-                        break;
-                    }
-                    case 48:
-                    {
-                        guardPokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId) input.ReadEnum();
-                        break;
-                    }
-                    case 56:
-                    {
-                        GuardPokemonCp = input.ReadInt32();
-                        break;
-                    }
-                    case 64:
-                    {
-                        Enabled = input.ReadBool();
-                        break;
-                    }
-                    case 72:
-                    {
-                        type_ = (global::PokemonGo.RocketAPI.GeneratedCode.FortType) input.ReadEnum();
-                        break;
-                    }
-                    case 80:
-                    {
-                        GymPoints = input.ReadInt64();
-                        break;
-                    }
-                    case 88:
-                    {
-                        IsInBattle = input.ReadBool();
-                        break;
-                    }
-                    case 98:
-                    {
-                        ActiveFortModifier = input.ReadBytes();
-                        break;
-                    }
-                    case 106:
-                    {
-                        if (lureInfo_ == null)
                         {
-                            lureInfo_ = new global::PokemonGo.RocketAPI.GeneratedCode.FortLureInfo();
+                            Id = input.ReadString();
+                            break;
                         }
-                        input.ReadMessage(lureInfo_);
-                        break;
-                    }
+                    case 16:
+                        {
+                            LastModifiedTimestampMs = input.ReadInt64();
+                            break;
+                        }
+                    case 25:
+                        {
+                            Latitude = input.ReadDouble();
+                            break;
+                        }
+                    case 33:
+                        {
+                            Longitude = input.ReadDouble();
+                            break;
+                        }
+                    case 40:
+                        {
+                            ownedByTeam_ = (global::PokemonGo.RocketAPI.GeneratedCode.TeamColor)input.ReadEnum();
+                            break;
+                        }
+                    case 48:
+                        {
+                            guardPokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId)input.ReadEnum();
+                            break;
+                        }
+                    case 56:
+                        {
+                            GuardPokemonCp = input.ReadInt32();
+                            break;
+                        }
+                    case 64:
+                        {
+                            Enabled = input.ReadBool();
+                            break;
+                        }
+                    case 72:
+                        {
+                            type_ = (global::PokemonGo.RocketAPI.GeneratedCode.FortType)input.ReadEnum();
+                            break;
+                        }
+                    case 80:
+                        {
+                            GymPoints = input.ReadInt64();
+                            break;
+                        }
+                    case 88:
+                        {
+                            IsInBattle = input.ReadBool();
+                            break;
+                        }
+                    case 98:
+                        {
+                            ActiveFortModifier = input.ReadBytes();
+                            break;
+                        }
+                    case 106:
+                        {
+                            if (lureInfo_ == null)
+                            {
+                                lureInfo_ = new global::PokemonGo.RocketAPI.GeneratedCode.FortLureInfo();
+                            }
+                            input.ReadMessage(lureInfo_);
+                            break;
+                        }
                     case 112:
-                    {
-                        CooldownCompleteTimestampMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            CooldownCompleteTimestampMs = input.ReadInt64();
+                            break;
+                        }
                     case 120:
-                    {
-                        sponsor_ = (global::PokemonGo.RocketAPI.GeneratedCode.FortSponsor) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            sponsor_ = (global::PokemonGo.RocketAPI.GeneratedCode.FortSponsor)input.ReadEnum();
+                            break;
+                        }
                     case 128:
-                    {
-                        renderingType_ = (global::PokemonGo.RocketAPI.GeneratedCode.FortRenderingType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            renderingType_ = (global::PokemonGo.RocketAPI.GeneratedCode.FortRenderingType)input.ReadEnum();
+                            break;
+                        }
                 }
             }
         }
@@ -8908,7 +8908,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (ActivePokemonId != 0)
             {
                 output.WriteRawTag(24);
-                output.WriteEnum((int) ActivePokemonId);
+                output.WriteEnum((int)ActivePokemonId);
             }
             if (LureExpiresTimestampMs != 0L)
             {
@@ -8930,7 +8930,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (ActivePokemonId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ActivePokemonId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ActivePokemonId);
             }
             if (LureExpiresTimestampMs != 0L)
             {
@@ -8974,25 +8974,25 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        FortId = input.ReadString();
-                        break;
-                    }
+                        {
+                            FortId = input.ReadString();
+                            break;
+                        }
                     case 17:
-                    {
-                        Unknown2 = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Unknown2 = input.ReadDouble();
+                            break;
+                        }
                     case 24:
-                    {
-                        activePokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            activePokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId)input.ReadEnum();
+                            break;
+                        }
                     case 32:
-                    {
-                        LureExpiresTimestampMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            LureExpiresTimestampMs = input.ReadInt64();
+                            break;
+                        }
                 }
             }
         }
@@ -9148,15 +9148,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 17:
-                    {
-                        Latitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Latitude = input.ReadDouble();
+                            break;
+                        }
                     case 25:
-                    {
-                        Longitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Longitude = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -9360,25 +9360,25 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        FortSummaryId = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            FortSummaryId = input.ReadInt32();
+                            break;
+                        }
                     case 16:
-                    {
-                        LastModifiedTimestampMs = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            LastModifiedTimestampMs = input.ReadInt32();
+                            break;
+                        }
                     case 24:
-                    {
-                        Latitude = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Latitude = input.ReadInt32();
+                            break;
+                        }
                     case 32:
-                    {
-                        Longitude = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Longitude = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -9663,44 +9663,44 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 9:
-                    {
-                        EncounterId = input.ReadFixed64();
-                        break;
-                    }
-                    case 16:
-                    {
-                        LastModifiedTimestampMs = input.ReadInt64();
-                        break;
-                    }
-                    case 25:
-                    {
-                        Latitude = input.ReadDouble();
-                        break;
-                    }
-                    case 33:
-                    {
-                        Longitude = input.ReadDouble();
-                        break;
-                    }
-                    case 42:
-                    {
-                        SpawnpointId = input.ReadString();
-                        break;
-                    }
-                    case 58:
-                    {
-                        if (pokemonData_ == null)
                         {
-                            pokemonData_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonData();
+                            EncounterId = input.ReadFixed64();
+                            break;
                         }
-                        input.ReadMessage(pokemonData_);
-                        break;
-                    }
+                    case 16:
+                        {
+                            LastModifiedTimestampMs = input.ReadInt64();
+                            break;
+                        }
+                    case 25:
+                        {
+                            Latitude = input.ReadDouble();
+                            break;
+                        }
+                    case 33:
+                        {
+                            Longitude = input.ReadDouble();
+                            break;
+                        }
+                    case 42:
+                        {
+                            SpawnpointId = input.ReadString();
+                            break;
+                        }
+                    case 58:
+                        {
+                            if (pokemonData_ == null)
+                            {
+                                pokemonData_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonData();
+                            }
+                            input.ReadMessage(pokemonData_);
+                            break;
+                        }
                     case 88:
-                    {
-                        TimeTillHiddenMs = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            TimeTillHiddenMs = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -9827,12 +9827,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode
         private static readonly pb::MessageParser<PokemonData> _parser =
             new pb::MessageParser<PokemonData>(() => new PokemonData());
 
-        private int additionalCpMultiplier_;
+        private float additionalCpMultiplier_;
         private int battlesAttacked_;
         private int battlesDefended_;
         private ulong capturedCellId_;
         private int cp_;
-        private int cpMultiplier_;
+        private float cpMultiplier_;
         private ulong creationTimeMs_;
         private int deployedFortId_;
         private int eggIncubatorId_;
@@ -9895,6 +9895,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             favorite_ = other.favorite_;
             nickname_ = other.nickname_;
             fromFort_ = other.fromFort_;
+        }
+
+        public double CalculateIV()
+        {
+            return ((double)(IndividualAttack + IndividualDefense + IndividualStamina) / (3.0f * 15.0f)) * 100.0f;
         }
 
         public static pb::MessageParser<PokemonData> Parser
@@ -10015,7 +10020,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             set { individualStamina_ = value; }
         }
 
-        public int CpMultiplier
+        public float CpMultiplier
         {
             get { return cpMultiplier_; }
             set { cpMultiplier_ = value; }
@@ -10063,7 +10068,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             set { numUpgrades_ = value; }
         }
 
-        public int AdditionalCpMultiplier
+        public float AdditionalCpMultiplier
         {
             get { return additionalCpMultiplier_; }
             set { additionalCpMultiplier_ = value; }
@@ -10150,7 +10155,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (PokemonId != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) PokemonId);
+                output.WriteEnum((int)PokemonId);
             }
             if (Cp != 0)
             {
@@ -10170,12 +10175,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Move1 != 0)
             {
                 output.WriteRawTag(48);
-                output.WriteEnum((int) Move1);
+                output.WriteEnum((int)Move1);
             }
             if (Move2 != 0)
             {
                 output.WriteRawTag(56);
-                output.WriteEnum((int) Move2);
+                output.WriteEnum((int)Move2);
             }
             if (DeployedFortId != 0)
             {
@@ -10234,8 +10239,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (CpMultiplier != 0)
             {
-                output.WriteRawTag(160, 1);
-                output.WriteInt32(CpMultiplier);
+                output.WriteRawTag(165, 1);
+                output.WriteFloat(CpMultiplier);
             }
             if (Pokeball != 0)
             {
@@ -10274,8 +10279,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (AdditionalCpMultiplier != 0)
             {
-                output.WriteRawTag(224, 1);
-                output.WriteInt32(AdditionalCpMultiplier);
+                output.WriteRawTag(229, 1);
+                output.WriteFloat(AdditionalCpMultiplier);
             }
             if (Favorite != 0)
             {
@@ -10303,7 +10308,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (PokemonId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) PokemonId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)PokemonId);
             }
             if (Cp != 0)
             {
@@ -10319,11 +10324,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (Move1 != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Move1);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Move1);
             }
             if (Move2 != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Move2);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Move2);
             }
             if (DeployedFortId != 0)
             {
@@ -10369,9 +10374,9 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             {
                 size += 2 + pb::CodedOutputStream.ComputeInt32Size(IndividualStamina);
             }
-            if (CpMultiplier != 0)
+            if (CpMultiplier != 0F)
             {
-                size += 2 + pb::CodedOutputStream.ComputeInt32Size(CpMultiplier);
+                size += 2 + 4;
             }
             if (Pokeball != 0)
             {
@@ -10401,9 +10406,9 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             {
                 size += 2 + pb::CodedOutputStream.ComputeInt32Size(NumUpgrades);
             }
-            if (AdditionalCpMultiplier != 0)
+            if (AdditionalCpMultiplier != 0F)
             {
-                size += 2 + pb::CodedOutputStream.ComputeInt32Size(AdditionalCpMultiplier);
+                size += 2 + 4;
             }
             if (Favorite != 0)
             {
@@ -10498,7 +10503,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             {
                 IndividualStamina = other.IndividualStamina;
             }
-            if (other.CpMultiplier != 0)
+            if (other.CpMultiplier != 0F)
             {
                 CpMultiplier = other.CpMultiplier;
             }
@@ -10530,7 +10535,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             {
                 NumUpgrades = other.NumUpgrades;
             }
-            if (other.AdditionalCpMultiplier != 0)
+            if (other.AdditionalCpMultiplier != 0F)
             {
                 AdditionalCpMultiplier = other.AdditionalCpMultiplier;
             }
@@ -10559,155 +10564,155 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 9:
-                    {
-                        Id = input.ReadFixed64();
-                        break;
-                    }
+                        {
+                            Id = input.ReadFixed64();
+                            break;
+                        }
                     case 16:
-                    {
-                        pokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            pokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId)input.ReadEnum();
+                            break;
+                        }
                     case 24:
-                    {
-                        Cp = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Cp = input.ReadInt32();
+                            break;
+                        }
                     case 32:
-                    {
-                        Stamina = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Stamina = input.ReadInt32();
+                            break;
+                        }
                     case 40:
-                    {
-                        StaminaMax = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            StaminaMax = input.ReadInt32();
+                            break;
+                        }
                     case 48:
-                    {
-                        move1_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            move1_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove)input.ReadEnum();
+                            break;
+                        }
                     case 56:
-                    {
-                        move2_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            move2_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove)input.ReadEnum();
+                            break;
+                        }
                     case 64:
-                    {
-                        DeployedFortId = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            DeployedFortId = input.ReadInt32();
+                            break;
+                        }
                     case 74:
-                    {
-                        OwnerName = input.ReadString();
-                        break;
-                    }
+                        {
+                            OwnerName = input.ReadString();
+                            break;
+                        }
                     case 80:
-                    {
-                        IsEgg = input.ReadBool();
-                        break;
-                    }
+                        {
+                            IsEgg = input.ReadBool();
+                            break;
+                        }
                     case 88:
-                    {
-                        EggKmWalkedTarget = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            EggKmWalkedTarget = input.ReadInt32();
+                            break;
+                        }
                     case 96:
-                    {
-                        EggKmWalkedStart = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            EggKmWalkedStart = input.ReadInt32();
+                            break;
+                        }
                     case 112:
-                    {
-                        Origin = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Origin = input.ReadInt32();
+                            break;
+                        }
                     case 125:
-                    {
-                        HeightM = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            HeightM = input.ReadFloat();
+                            break;
+                        }
                     case 133:
-                    {
-                        WeightKg = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            WeightKg = input.ReadFloat();
+                            break;
+                        }
                     case 136:
-                    {
-                        IndividualAttack = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            IndividualAttack = input.ReadInt32();
+                            break;
+                        }
                     case 144:
-                    {
-                        IndividualDefense = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            IndividualDefense = input.ReadInt32();
+                            break;
+                        }
                     case 152:
-                    {
-                        IndividualStamina = input.ReadInt32();
-                        break;
-                    }
-                    case 160:
-                    {
-                        CpMultiplier = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            IndividualStamina = input.ReadInt32();
+                            break;
+                        }
+                    case 165:
+                        {
+                            CpMultiplier = input.ReadFloat();
+                            break;
+                        }
                     case 168:
-                    {
-                        Pokeball = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Pokeball = input.ReadInt32();
+                            break;
+                        }
                     case 176:
-                    {
-                        CapturedCellId = input.ReadUInt64();
-                        break;
-                    }
+                        {
+                            CapturedCellId = input.ReadUInt64();
+                            break;
+                        }
                     case 184:
-                    {
-                        BattlesAttacked = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BattlesAttacked = input.ReadInt32();
+                            break;
+                        }
                     case 192:
-                    {
-                        BattlesDefended = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BattlesDefended = input.ReadInt32();
+                            break;
+                        }
                     case 200:
-                    {
-                        EggIncubatorId = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            EggIncubatorId = input.ReadInt32();
+                            break;
+                        }
                     case 208:
-                    {
-                        CreationTimeMs = input.ReadUInt64();
-                        break;
-                    }
+                        {
+                            CreationTimeMs = input.ReadUInt64();
+                            break;
+                        }
                     case 216:
-                    {
-                        NumUpgrades = input.ReadInt32();
-                        break;
-                    }
-                    case 224:
-                    {
-                        AdditionalCpMultiplier = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            NumUpgrades = input.ReadInt32();
+                            break;
+                        }
+                    case 229:
+                        {
+                            AdditionalCpMultiplier = input.ReadFloat();
+                            break;
+                        }
                     case 232:
-                    {
-                        Favorite = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Favorite = input.ReadInt32();
+                            break;
+                        }
                     case 242:
-                    {
-                        Nickname = input.ReadString();
-                        break;
-                    }
+                        {
+                            Nickname = input.ReadString();
+                            break;
+                        }
                     case 248:
-                    {
-                        FromFort = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            FromFort = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -10900,7 +10905,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (PokemonId != 0)
             {
                 output.WriteRawTag(24);
-                output.WriteEnum((int) PokemonId);
+                output.WriteEnum((int)PokemonId);
             }
             if (ExpirationTimestampMs != 0L)
             {
@@ -10932,7 +10937,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (PokemonId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) PokemonId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)PokemonId);
             }
             if (ExpirationTimestampMs != 0L)
             {
@@ -10992,35 +10997,35 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        SpawnpointId = input.ReadString();
-                        break;
-                    }
+                        {
+                            SpawnpointId = input.ReadString();
+                            break;
+                        }
                     case 17:
-                    {
-                        EncounterId = input.ReadFixed64();
-                        break;
-                    }
+                        {
+                            EncounterId = input.ReadFixed64();
+                            break;
+                        }
                     case 24:
-                    {
-                        pokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            pokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId)input.ReadEnum();
+                            break;
+                        }
                     case 32:
-                    {
-                        ExpirationTimestampMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            ExpirationTimestampMs = input.ReadInt64();
+                            break;
+                        }
                     case 41:
-                    {
-                        Latitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Latitude = input.ReadDouble();
+                            break;
+                        }
                     case 49:
-                    {
-                        Longitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Longitude = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -11140,7 +11145,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (PokemonId != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) PokemonId);
+                output.WriteEnum((int)PokemonId);
             }
             if (DistanceInMeters != 0F)
             {
@@ -11159,7 +11164,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (PokemonId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) PokemonId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)PokemonId);
             }
             if (DistanceInMeters != 0F)
             {
@@ -11203,20 +11208,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        pokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            pokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId)input.ReadEnum();
+                            break;
+                        }
                     case 21:
-                    {
-                        DistanceInMeters = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            DistanceInMeters = input.ReadFloat();
+                            break;
+                        }
                     case 25:
-                    {
-                        EncounterId = input.ReadFixed64();
-                        break;
-                    }
+                        {
+                            EncounterId = input.ReadFixed64();
+                            break;
+                        }
                 }
             }
         }
@@ -11400,24 +11405,24 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        Error = input.ReadString();
-                        break;
-                    }
-                    case 18:
-                    {
-                        Hash = input.ReadString();
-                        break;
-                    }
-                    case 26:
-                    {
-                        if (settings_ == null)
                         {
-                            settings_ = new global::PokemonGo.RocketAPI.GeneratedCode.GlobalSettings();
+                            Error = input.ReadString();
+                            break;
                         }
-                        input.ReadMessage(settings_);
-                        break;
-                    }
+                    case 18:
+                        {
+                            Hash = input.ReadString();
+                            break;
+                        }
+                    case 26:
+                        {
+                            if (settings_ == null)
+                            {
+                                settings_ = new global::PokemonGo.RocketAPI.GeneratedCode.GlobalSettings();
+                            }
+                            input.ReadMessage(settings_);
+                            break;
+                        }
                 }
             }
         }
@@ -11663,46 +11668,46 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 18:
-                    {
-                        if (fortSettings_ == null)
                         {
-                            fortSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.FortSettings();
+                            if (fortSettings_ == null)
+                            {
+                                fortSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.FortSettings();
+                            }
+                            input.ReadMessage(fortSettings_);
+                            break;
                         }
-                        input.ReadMessage(fortSettings_);
-                        break;
-                    }
                     case 26:
-                    {
-                        if (mapSettings_ == null)
                         {
-                            mapSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.MapSettings();
+                            if (mapSettings_ == null)
+                            {
+                                mapSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.MapSettings();
+                            }
+                            input.ReadMessage(mapSettings_);
+                            break;
                         }
-                        input.ReadMessage(mapSettings_);
-                        break;
-                    }
                     case 34:
-                    {
-                        if (levelSettings_ == null)
                         {
-                            levelSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.LevelSettings();
+                            if (levelSettings_ == null)
+                            {
+                                levelSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.LevelSettings();
+                            }
+                            input.ReadMessage(levelSettings_);
+                            break;
                         }
-                        input.ReadMessage(levelSettings_);
-                        break;
-                    }
                     case 42:
-                    {
-                        if (inventorySettings_ == null)
                         {
-                            inventorySettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.InventorySettings();
+                            if (inventorySettings_ == null)
+                            {
+                                inventorySettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.InventorySettings();
+                            }
+                            input.ReadMessage(inventorySettings_);
+                            break;
                         }
-                        input.ReadMessage(inventorySettings_);
-                        break;
-                    }
                     case 50:
-                    {
-                        MinimumClientVersion = input.ReadString();
-                        break;
-                    }
+                        {
+                            MinimumClientVersion = input.ReadString();
+                            break;
+                        }
                 }
             }
         }
@@ -11959,35 +11964,35 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 9:
-                    {
-                        InteractionRangeMeters = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            InteractionRangeMeters = input.ReadDouble();
+                            break;
+                        }
                     case 16:
-                    {
-                        MaxTotalDeployedPokemon = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MaxTotalDeployedPokemon = input.ReadInt32();
+                            break;
+                        }
                     case 24:
-                    {
-                        MaxPlayerDeployedPokemon = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MaxPlayerDeployedPokemon = input.ReadInt32();
+                            break;
+                        }
                     case 33:
-                    {
-                        DeployStaminaMultiplier = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            DeployStaminaMultiplier = input.ReadDouble();
+                            break;
+                        }
                     case 41:
-                    {
-                        DeployAttackMultiplier = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            DeployAttackMultiplier = input.ReadDouble();
+                            break;
+                        }
                     case 49:
-                    {
-                        FarInteractionRangeMeters = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            FarInteractionRangeMeters = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -12270,40 +12275,40 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 9:
-                    {
-                        PokemonVisibleRange = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            PokemonVisibleRange = input.ReadDouble();
+                            break;
+                        }
                     case 17:
-                    {
-                        PokeNavRangeMeters = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            PokeNavRangeMeters = input.ReadDouble();
+                            break;
+                        }
                     case 25:
-                    {
-                        EncounterRangeMeters = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            EncounterRangeMeters = input.ReadDouble();
+                            break;
+                        }
                     case 37:
-                    {
-                        GetMapObjectsMinRefreshSeconds = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            GetMapObjectsMinRefreshSeconds = input.ReadFloat();
+                            break;
+                        }
                     case 45:
-                    {
-                        GetMapObjectsMaxRefreshSeconds = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            GetMapObjectsMaxRefreshSeconds = input.ReadFloat();
+                            break;
+                        }
                     case 53:
-                    {
-                        GetMapObjectsMinDistanceMeters = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            GetMapObjectsMinDistanceMeters = input.ReadFloat();
+                            break;
+                        }
                     case 58:
-                    {
-                        GoogleMapsApiKey = input.ReadString();
-                        break;
-                    }
+                        {
+                            GoogleMapsApiKey = input.ReadString();
+                            break;
+                        }
                 }
             }
         }
@@ -12462,15 +12467,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 17:
-                    {
-                        TrainerCpModifier = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            TrainerCpModifier = input.ReadDouble();
+                            break;
+                        }
                     case 25:
-                    {
-                        TrainerDifficultyModifier = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            TrainerDifficultyModifier = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -12699,30 +12704,30 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        MaxPokemon = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MaxPokemon = input.ReadInt32();
+                            break;
+                        }
                     case 16:
-                    {
-                        MaxBagItems = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MaxBagItems = input.ReadInt32();
+                            break;
+                        }
                     case 24:
-                    {
-                        BasePokemon = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BasePokemon = input.ReadInt32();
+                            break;
+                        }
                     case 32:
-                    {
-                        BaseBagItems = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BaseBagItems = input.ReadInt32();
+                            break;
+                        }
                     case 40:
-                    {
-                        BaseEggs = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BaseEggs = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -12879,15 +12884,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 9:
-                    {
-                        Latitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Latitude = input.ReadDouble();
+                            break;
+                        }
                     case 17:
-                    {
-                        Longitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Longitude = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -13055,20 +13060,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        wildPokemons_.AddEntriesFrom(input, _repeated_wildPokemons_codec);
-                        break;
-                    }
+                        {
+                            wildPokemons_.AddEntriesFrom(input, _repeated_wildPokemons_codec);
+                            break;
+                        }
                     case 18:
-                    {
-                        forts_.AddEntriesFrom(input, _repeated_forts_codec);
-                        break;
-                    }
+                        {
+                            forts_.AddEntriesFrom(input, _repeated_forts_codec);
+                            break;
+                        }
                     case 24:
-                    {
-                        FortsNearby = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            FortsNearby = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -13354,20 +13359,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        Success = input.ReadBool();
-                        break;
-                    }
+                        {
+                            Success = input.ReadBool();
+                            break;
+                        }
                     case 18:
-                    {
-                        itemTemplates_.AddEntriesFrom(input, _repeated_itemTemplates_codec);
-                        break;
-                    }
+                        {
+                            itemTemplates_.AddEntriesFrom(input, _repeated_itemTemplates_codec);
+                            break;
+                        }
                     case 24:
-                    {
-                        TimestampMs = input.ReadUInt64();
-                        break;
-                    }
+                        {
+                            TimestampMs = input.ReadUInt64();
+                            break;
+                        }
                 }
             }
         }
@@ -13944,150 +13949,150 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                                 input.SkipLastField();
                                 break;
                             case 10:
-                            {
-                                TemplateId = input.ReadString();
-                                break;
-                            }
+                                {
+                                    TemplateId = input.ReadString();
+                                    break;
+                                }
                             case 18:
-                            {
-                                if (pokemonSettings_ == null)
                                 {
-                                    pokemonSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonSettings();
+                                    if (pokemonSettings_ == null)
+                                    {
+                                        pokemonSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonSettings();
+                                    }
+                                    input.ReadMessage(pokemonSettings_);
+                                    break;
                                 }
-                                input.ReadMessage(pokemonSettings_);
-                                break;
-                            }
                             case 26:
-                            {
-                                if (itemSettings_ == null)
                                 {
-                                    itemSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.ItemSettings();
+                                    if (itemSettings_ == null)
+                                    {
+                                        itemSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.ItemSettings();
+                                    }
+                                    input.ReadMessage(itemSettings_);
+                                    break;
                                 }
-                                input.ReadMessage(itemSettings_);
-                                break;
-                            }
                             case 34:
-                            {
-                                if (moveSettings_ == null)
                                 {
-                                    moveSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.MoveSettings();
+                                    if (moveSettings_ == null)
+                                    {
+                                        moveSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.MoveSettings();
+                                    }
+                                    input.ReadMessage(moveSettings_);
+                                    break;
                                 }
-                                input.ReadMessage(moveSettings_);
-                                break;
-                            }
                             case 42:
-                            {
-                                if (moveSequenceSettings_ == null)
                                 {
-                                    moveSequenceSettings_ =
-                                        new global::PokemonGo.RocketAPI.GeneratedCode.MoveSequenceSettings();
+                                    if (moveSequenceSettings_ == null)
+                                    {
+                                        moveSequenceSettings_ =
+                                            new global::PokemonGo.RocketAPI.GeneratedCode.MoveSequenceSettings();
+                                    }
+                                    input.ReadMessage(moveSequenceSettings_);
+                                    break;
                                 }
-                                input.ReadMessage(moveSequenceSettings_);
-                                break;
-                            }
                             case 66:
-                            {
-                                if (typeEffective_ == null)
                                 {
-                                    typeEffective_ =
-                                        new global::PokemonGo.RocketAPI.GeneratedCode.TypeEffectiveSettings();
+                                    if (typeEffective_ == null)
+                                    {
+                                        typeEffective_ =
+                                            new global::PokemonGo.RocketAPI.GeneratedCode.TypeEffectiveSettings();
+                                    }
+                                    input.ReadMessage(typeEffective_);
+                                    break;
                                 }
-                                input.ReadMessage(typeEffective_);
-                                break;
-                            }
                             case 82:
-                            {
-                                if (badgeSettings_ == null)
                                 {
-                                    badgeSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.BadgeSettings();
+                                    if (badgeSettings_ == null)
+                                    {
+                                        badgeSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.BadgeSettings();
+                                    }
+                                    input.ReadMessage(badgeSettings_);
+                                    break;
                                 }
-                                input.ReadMessage(badgeSettings_);
-                                break;
-                            }
                             case 90:
-                            {
-                                if (camera_ == null)
                                 {
-                                    camera_ = new global::PokemonGo.RocketAPI.GeneratedCode.CameraSettings();
+                                    if (camera_ == null)
+                                    {
+                                        camera_ = new global::PokemonGo.RocketAPI.GeneratedCode.CameraSettings();
+                                    }
+                                    input.ReadMessage(camera_);
+                                    break;
                                 }
-                                input.ReadMessage(camera_);
-                                break;
-                            }
                             case 98:
-                            {
-                                if (playerLevel_ == null)
                                 {
-                                    playerLevel_ = new global::PokemonGo.RocketAPI.GeneratedCode.PlayerLevelSettings();
+                                    if (playerLevel_ == null)
+                                    {
+                                        playerLevel_ = new global::PokemonGo.RocketAPI.GeneratedCode.PlayerLevelSettings();
+                                    }
+                                    input.ReadMessage(playerLevel_);
+                                    break;
                                 }
-                                input.ReadMessage(playerLevel_);
-                                break;
-                            }
                             case 106:
-                            {
-                                if (gymLevel_ == null)
                                 {
-                                    gymLevel_ = new global::PokemonGo.RocketAPI.GeneratedCode.GymLevelSettings();
+                                    if (gymLevel_ == null)
+                                    {
+                                        gymLevel_ = new global::PokemonGo.RocketAPI.GeneratedCode.GymLevelSettings();
+                                    }
+                                    input.ReadMessage(gymLevel_);
+                                    break;
                                 }
-                                input.ReadMessage(gymLevel_);
-                                break;
-                            }
                             case 114:
-                            {
-                                if (battleSettings_ == null)
                                 {
-                                    battleSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.GymBattleSettings();
+                                    if (battleSettings_ == null)
+                                    {
+                                        battleSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.GymBattleSettings();
+                                    }
+                                    input.ReadMessage(battleSettings_);
+                                    break;
                                 }
-                                input.ReadMessage(battleSettings_);
-                                break;
-                            }
                             case 122:
-                            {
-                                if (encounterSettings_ == null)
                                 {
-                                    encounterSettings_ =
-                                        new global::PokemonGo.RocketAPI.GeneratedCode.EncounterSettings();
+                                    if (encounterSettings_ == null)
+                                    {
+                                        encounterSettings_ =
+                                            new global::PokemonGo.RocketAPI.GeneratedCode.EncounterSettings();
+                                    }
+                                    input.ReadMessage(encounterSettings_);
+                                    break;
                                 }
-                                input.ReadMessage(encounterSettings_);
-                                break;
-                            }
                             case 130:
-                            {
-                                if (iapItemDisplay_ == null)
                                 {
-                                    iapItemDisplay_ = new global::PokemonGo.RocketAPI.GeneratedCode.IapItemDisplay();
+                                    if (iapItemDisplay_ == null)
+                                    {
+                                        iapItemDisplay_ = new global::PokemonGo.RocketAPI.GeneratedCode.IapItemDisplay();
+                                    }
+                                    input.ReadMessage(iapItemDisplay_);
+                                    break;
                                 }
-                                input.ReadMessage(iapItemDisplay_);
-                                break;
-                            }
                             case 138:
-                            {
-                                if (iapSettings_ == null)
                                 {
-                                    iapSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.IapSettings();
+                                    if (iapSettings_ == null)
+                                    {
+                                        iapSettings_ = new global::PokemonGo.RocketAPI.GeneratedCode.IapSettings();
+                                    }
+                                    input.ReadMessage(iapSettings_);
+                                    break;
                                 }
-                                input.ReadMessage(iapSettings_);
-                                break;
-                            }
                             case 146:
-                            {
-                                if (pokemonUpgrades_ == null)
                                 {
-                                    pokemonUpgrades_ =
-                                        new global::PokemonGo.RocketAPI.GeneratedCode.PokemonUpgradeSettings();
+                                    if (pokemonUpgrades_ == null)
+                                    {
+                                        pokemonUpgrades_ =
+                                            new global::PokemonGo.RocketAPI.GeneratedCode.PokemonUpgradeSettings();
+                                    }
+                                    input.ReadMessage(pokemonUpgrades_);
+                                    break;
                                 }
-                                input.ReadMessage(pokemonUpgrades_);
-                                break;
-                            }
                             case 154:
-                            {
-                                if (equippedBadges_ == null)
                                 {
-                                    equippedBadges_ =
-                                        new global::PokemonGo.RocketAPI.GeneratedCode.EquippedBadgeSettings();
+                                    if (equippedBadges_ == null)
+                                    {
+                                        equippedBadges_ =
+                                            new global::PokemonGo.RocketAPI.GeneratedCode.EquippedBadgeSettings();
+                                    }
+                                    input.ReadMessage(equippedBadges_);
+                                    break;
                                 }
-                                input.ReadMessage(equippedBadges_);
-                                break;
-                            }
                         }
                     }
                 }
@@ -14221,7 +14226,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (ItemId != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) ItemId);
+                output.WriteEnum((int)ItemId);
             }
             if (EncounterId != 0UL)
             {
@@ -14240,7 +14245,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (ItemId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ItemId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemId);
             }
             if (EncounterId != 0UL)
             {
@@ -14284,20 +14289,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId)input.ReadEnum();
+                            break;
+                        }
                     case 17:
-                    {
-                        EncounterId = input.ReadFixed64();
-                        break;
-                    }
+                        {
+                            EncounterId = input.ReadFixed64();
+                            break;
+                        }
                     case 26:
-                    {
-                        SpawnPointGuid = input.ReadString();
-                        break;
-                    }
+                        {
+                            SpawnPointGuid = input.ReadString();
+                            break;
+                        }
                 }
             }
         }
@@ -14577,40 +14582,40 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        Success = input.ReadBool();
-                        break;
-                    }
+                        {
+                            Success = input.ReadBool();
+                            break;
+                        }
                     case 17:
-                    {
-                        ItemCaptureMult = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            ItemCaptureMult = input.ReadDouble();
+                            break;
+                        }
                     case 25:
-                    {
-                        ItemFleeMult = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            ItemFleeMult = input.ReadDouble();
+                            break;
+                        }
                     case 32:
-                    {
-                        StopMovement = input.ReadBool();
-                        break;
-                    }
+                        {
+                            StopMovement = input.ReadBool();
+                            break;
+                        }
                     case 40:
-                    {
-                        StopAttack = input.ReadBool();
-                        break;
-                    }
+                        {
+                            StopAttack = input.ReadBool();
+                            break;
+                        }
                     case 48:
-                    {
-                        TargetMax = input.ReadBool();
-                        break;
-                    }
+                        {
+                            TargetMax = input.ReadBool();
+                            break;
+                        }
                     case 56:
-                    {
-                        TargetSlow = input.ReadBool();
-                        break;
-                    }
+                        {
+                            TargetSlow = input.ReadBool();
+                            break;
+                        }
                 }
             }
         }
@@ -14744,10 +14749,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 9:
-                    {
-                        PokemonId = input.ReadFixed64();
-                        break;
-                    }
+                        {
+                            PokemonId = input.ReadFixed64();
+                            break;
+                        }
                 }
             }
         }
@@ -14850,7 +14855,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Result != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) Result);
+                output.WriteEnum((int)Result);
             }
             if (CandyAwarded != 0)
             {
@@ -14864,7 +14869,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (Result != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Result);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Result);
             }
             if (CandyAwarded != 0)
             {
@@ -14900,17 +14905,17 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        result_ =
-                            (global::PokemonGo.RocketAPI.GeneratedCode.ReleasePokemonResponse.Types.Result)
-                                input.ReadEnum();
-                        break;
-                    }
+                        {
+                            result_ =
+                                (global::PokemonGo.RocketAPI.GeneratedCode.ReleasePokemonResponse.Types.Result)
+                                    input.ReadEnum();
+                            break;
+                        }
                     case 16:
-                    {
-                        CandyAwarded = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            CandyAwarded = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -14943,11 +14948,16 @@ namespace PokemonGo.RocketAPI.GeneratedCode
         {
             public enum Result
             {
-                [pbr::OriginalName("UNSET")] Unset = 0,
-                [pbr::OriginalName("SUCCESS")] Success = 1,
-                [pbr::OriginalName("POKEMON_DEPLOYED")] PokemonDeployed = 2,
-                [pbr::OriginalName("FAILED")] Failed = 3,
-                [pbr::OriginalName("ERROR_POKEMON_IS_EGG")] ErrorPokemonIsEgg = 4,
+                [pbr::OriginalName("UNSET")]
+                Unset = 0,
+                [pbr::OriginalName("SUCCESS")]
+                Success = 1,
+                [pbr::OriginalName("POKEMON_DEPLOYED")]
+                PokemonDeployed = 2,
+                [pbr::OriginalName("FAILED")]
+                Failed = 3,
+                [pbr::OriginalName("ERROR_POKEMON_IS_EGG")]
+                ErrorPokemonIsEgg = 4,
             }
         }
 
@@ -15233,34 +15243,34 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        Success = input.ReadBool();
-                        break;
-                    }
+                        {
+                            Success = input.ReadBool();
+                            break;
+                        }
                     case 18:
                     case 16:
-                    {
-                        pokemonId_.AddEntriesFrom(input, _repeated_pokemonId_codec);
-                        break;
-                    }
+                        {
+                            pokemonId_.AddEntriesFrom(input, _repeated_pokemonId_codec);
+                            break;
+                        }
                     case 26:
                     case 24:
-                    {
-                        experienceAwarded_.AddEntriesFrom(input, _repeated_experienceAwarded_codec);
-                        break;
-                    }
+                        {
+                            experienceAwarded_.AddEntriesFrom(input, _repeated_experienceAwarded_codec);
+                            break;
+                        }
                     case 34:
                     case 32:
-                    {
-                        candyAwarded_.AddEntriesFrom(input, _repeated_candyAwarded_codec);
-                        break;
-                    }
+                        {
+                            candyAwarded_.AddEntriesFrom(input, _repeated_candyAwarded_codec);
+                            break;
+                        }
                     case 42:
                     case 40:
-                    {
-                        stardustAwarded_.AddEntriesFrom(input, _repeated_stardustAwarded_codec);
-                        break;
-                    }
+                        {
+                            stardustAwarded_.AddEntriesFrom(input, _repeated_stardustAwarded_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -15492,30 +15502,30 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        FortId = input.ReadString();
-                        break;
-                    }
+                        {
+                            FortId = input.ReadString();
+                            break;
+                        }
                     case 17:
-                    {
-                        PlayerLatitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            PlayerLatitude = input.ReadDouble();
+                            break;
+                        }
                     case 25:
-                    {
-                        PlayerLongitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            PlayerLongitude = input.ReadDouble();
+                            break;
+                        }
                     case 33:
-                    {
-                        FortLatitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            FortLatitude = input.ReadDouble();
+                            break;
+                        }
                     case 41:
-                    {
-                        FortLongitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            FortLongitude = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -15586,7 +15596,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
         private long cooldownCompleteTimestampMs_;
         private int experienceAwarded_;
         private int gemsAwarded_;
-        private global::PokemonGo.RocketAPI.GeneratedCode.PokemonData pokemonDataEgg_;
+        private PokemonData pokemonDataEgg_;
         private global::PokemonGo.RocketAPI.GeneratedCode.FortSearchResponse.Types.Result result_ = 0;
 
         public FortSearchResponse()
@@ -15692,7 +15702,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Result != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) Result);
+                output.WriteEnum((int)Result);
             }
             itemsAwarded_.WriteTo(output, _repeated_itemsAwarded_codec);
             if (GemsAwarded != 0)
@@ -15727,7 +15737,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (Result != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Result);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Result);
             }
             size += itemsAwarded_.CalculateSize(_repeated_itemsAwarded_codec);
             if (GemsAwarded != 0)
@@ -15801,45 +15811,45 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        result_ =
-                            (global::PokemonGo.RocketAPI.GeneratedCode.FortSearchResponse.Types.Result) input.ReadEnum();
-                        break;
-                    }
-                    case 18:
-                    {
-                        itemsAwarded_.AddEntriesFrom(input, _repeated_itemsAwarded_codec);
-                        break;
-                    }
-                    case 24:
-                    {
-                        GemsAwarded = input.ReadInt32();
-                        break;
-                    }
-                    case 34:
-                    {
-                        if (pokemonDataEgg_ == null)
                         {
-                            pokemonDataEgg_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonData();
+                            result_ =
+                                (global::PokemonGo.RocketAPI.GeneratedCode.FortSearchResponse.Types.Result)input.ReadEnum();
+                            break;
                         }
-                        input.ReadMessage(pokemonDataEgg_);
-                        break;
-                    }
+                    case 18:
+                        {
+                            itemsAwarded_.AddEntriesFrom(input, _repeated_itemsAwarded_codec);
+                            break;
+                        }
+                    case 24:
+                        {
+                            GemsAwarded = input.ReadInt32();
+                            break;
+                        }
+                    case 34:
+                        {
+                            if (pokemonDataEgg_ == null)
+                            {
+                                pokemonDataEgg_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonData();
+                            }
+                            input.ReadMessage(pokemonDataEgg_);
+                            break;
+                        }
                     case 40:
-                    {
-                        ExperienceAwarded = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            ExperienceAwarded = input.ReadInt32();
+                            break;
+                        }
                     case 48:
-                    {
-                        CooldownCompleteTimestampMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            CooldownCompleteTimestampMs = input.ReadInt64();
+                            break;
+                        }
                     case 56:
-                    {
-                        ChainHackSequenceNumber = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            ChainHackSequenceNumber = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -15877,11 +15887,16 @@ namespace PokemonGo.RocketAPI.GeneratedCode
         {
             public enum Result
             {
-                [pbr::OriginalName("NO_RESULT_SET")] NoResultSet = 0,
-                [pbr::OriginalName("SUCCESS")] Success = 1,
-                [pbr::OriginalName("OUT_OF_RANGE")] OutOfRange = 2,
-                [pbr::OriginalName("IN_COOLDOWN_PERIOD")] InCooldownPeriod = 3,
-                [pbr::OriginalName("INVENTORY_FULL")] InventoryFull = 4,
+                [pbr::OriginalName("NO_RESULT_SET")]
+                NoResultSet = 0,
+                [pbr::OriginalName("SUCCESS")]
+                Success = 1,
+                [pbr::OriginalName("OUT_OF_RANGE")]
+                OutOfRange = 2,
+                [pbr::OriginalName("IN_COOLDOWN_PERIOD")]
+                InCooldownPeriod = 3,
+                [pbr::OriginalName("INVENTORY_FULL")]
+                InventoryFull = 4,
             }
 
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -15965,7 +15980,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                     if (ItemId != 0)
                     {
                         output.WriteRawTag(8);
-                        output.WriteEnum((int) ItemId);
+                        output.WriteEnum((int)ItemId);
                     }
                     if (ItemCount != 0)
                     {
@@ -15979,7 +15994,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                     var size = 0;
                     if (ItemId != 0)
                     {
-                        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ItemId);
+                        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemId);
                     }
                     if (ItemCount != 0)
                     {
@@ -16015,15 +16030,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                                 input.SkipLastField();
                                 break;
                             case 8:
-                            {
-                                itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId) input.ReadEnum();
-                                break;
-                            }
+                                {
+                                    itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId)input.ReadEnum();
+                                    break;
+                                }
                             case 16:
-                            {
-                                ItemCount = input.ReadInt32();
-                                break;
-                            }
+                                {
+                                    ItemCount = input.ReadInt32();
+                                    break;
+                                }
                         }
                     }
                 }
@@ -16206,20 +16221,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        FortId = input.ReadString();
-                        break;
-                    }
+                        {
+                            FortId = input.ReadString();
+                            break;
+                        }
                     case 17:
-                    {
-                        Latitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Latitude = input.ReadDouble();
+                            break;
+                        }
                     case 25:
-                    {
-                        Longitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Longitude = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -16469,7 +16484,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (TeamColor != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) TeamColor);
+                output.WriteEnum((int)TeamColor);
             }
             if (pokemonData_ != null)
             {
@@ -16500,7 +16515,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Type != 0)
             {
                 output.WriteRawTag(72);
-                output.WriteEnum((int) Type);
+                output.WriteEnum((int)Type);
             }
             if (Latitude != 0D)
             {
@@ -16529,7 +16544,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (TeamColor != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) TeamColor);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)TeamColor);
             }
             if (pokemonData_ != null)
             {
@@ -16554,7 +16569,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (Type != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Type);
             }
             if (Latitude != 0D)
             {
@@ -16641,74 +16656,74 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        FortId = input.ReadString();
-                        break;
-                    }
-                    case 16:
-                    {
-                        teamColor_ = (global::PokemonGo.RocketAPI.GeneratedCode.TeamColor) input.ReadEnum();
-                        break;
-                    }
-                    case 26:
-                    {
-                        if (pokemonData_ == null)
                         {
-                            pokemonData_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonData();
+                            FortId = input.ReadString();
+                            break;
                         }
-                        input.ReadMessage(pokemonData_);
-                        break;
-                    }
+                    case 16:
+                        {
+                            teamColor_ = (global::PokemonGo.RocketAPI.GeneratedCode.TeamColor)input.ReadEnum();
+                            break;
+                        }
+                    case 26:
+                        {
+                            if (pokemonData_ == null)
+                            {
+                                pokemonData_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonData();
+                            }
+                            input.ReadMessage(pokemonData_);
+                            break;
+                        }
                     case 34:
-                    {
-                        Name = input.ReadString();
-                        break;
-                    }
+                        {
+                            Name = input.ReadString();
+                            break;
+                        }
                     case 42:
-                    {
-                        imageUrls_.AddEntriesFrom(input, _repeated_imageUrls_codec);
-                        break;
-                    }
+                        {
+                            imageUrls_.AddEntriesFrom(input, _repeated_imageUrls_codec);
+                            break;
+                        }
                     case 48:
-                    {
-                        Fp = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Fp = input.ReadInt32();
+                            break;
+                        }
                     case 56:
-                    {
-                        Stamina = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Stamina = input.ReadInt32();
+                            break;
+                        }
                     case 64:
-                    {
-                        MaxStamina = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MaxStamina = input.ReadInt32();
+                            break;
+                        }
                     case 72:
-                    {
-                        type_ = (global::PokemonGo.RocketAPI.GeneratedCode.FortType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            type_ = (global::PokemonGo.RocketAPI.GeneratedCode.FortType)input.ReadEnum();
+                            break;
+                        }
                     case 81:
-                    {
-                        Latitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Latitude = input.ReadDouble();
+                            break;
+                        }
                     case 89:
-                    {
-                        Longitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            Longitude = input.ReadDouble();
+                            break;
+                        }
                     case 98:
-                    {
-                        Description = input.ReadString();
-                        break;
-                    }
+                        {
+                            Description = input.ReadString();
+                            break;
+                        }
                     case 106:
-                    {
-                        modifiers_.AddEntriesFrom(input, _repeated_modifiers_codec);
-                        break;
-                    }
+                        {
+                            modifiers_.AddEntriesFrom(input, _repeated_modifiers_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -16835,7 +16850,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (ItemId != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) ItemId);
+                output.WriteEnum((int)ItemId);
             }
             if (ExpirationTimestampMs != 0L)
             {
@@ -16854,7 +16869,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (ItemId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ItemId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemId);
             }
             if (ExpirationTimestampMs != 0L)
             {
@@ -16898,20 +16913,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId)input.ReadEnum();
+                            break;
+                        }
                     case 16:
-                    {
-                        ExpirationTimestampMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            ExpirationTimestampMs = input.ReadInt64();
+                            break;
+                        }
                     case 26:
-                    {
-                        DeployerPlayerCodename = input.ReadString();
-                        break;
-                    }
+                        {
+                            DeployerPlayerCodename = input.ReadString();
+                            break;
+                        }
                 }
             }
         }
@@ -17116,25 +17131,25 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 9:
-                    {
-                        EncounterId = input.ReadFixed64();
-                        break;
-                    }
+                        {
+                            EncounterId = input.ReadFixed64();
+                            break;
+                        }
                     case 18:
-                    {
-                        SpawnpointId = input.ReadString();
-                        break;
-                    }
+                        {
+                            SpawnpointId = input.ReadString();
+                            break;
+                        }
                     case 25:
-                    {
-                        PlayerLatitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            PlayerLatitude = input.ReadDouble();
+                            break;
+                        }
                     case 33:
-                    {
-                        PlayerLongitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            PlayerLongitude = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -17269,12 +17284,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Background != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) Background);
+                output.WriteEnum((int)Background);
             }
             if (Status != 0)
             {
                 output.WriteRawTag(24);
-                output.WriteEnum((int) Status);
+                output.WriteEnum((int)Status);
             }
             if (captureProbability_ != null)
             {
@@ -17292,11 +17307,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (Background != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Background);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Background);
             }
             if (Status != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Status);
             }
             if (captureProbability_ != null)
             {
@@ -17348,36 +17363,36 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        if (wildPokemon_ == null)
                         {
-                            wildPokemon_ = new global::PokemonGo.RocketAPI.GeneratedCode.WildPokemon();
+                            if (wildPokemon_ == null)
+                            {
+                                wildPokemon_ = new global::PokemonGo.RocketAPI.GeneratedCode.WildPokemon();
+                            }
+                            input.ReadMessage(wildPokemon_);
+                            break;
                         }
-                        input.ReadMessage(wildPokemon_);
-                        break;
-                    }
                     case 16:
-                    {
-                        background_ =
-                            (global::PokemonGo.RocketAPI.GeneratedCode.EncounterResponse.Types.Background)
-                                input.ReadEnum();
-                        break;
-                    }
-                    case 24:
-                    {
-                        status_ =
-                            (global::PokemonGo.RocketAPI.GeneratedCode.EncounterResponse.Types.Status) input.ReadEnum();
-                        break;
-                    }
-                    case 34:
-                    {
-                        if (captureProbability_ == null)
                         {
-                            captureProbability_ = new global::PokemonGo.RocketAPI.GeneratedCode.CaptureProbability();
+                            background_ =
+                                (global::PokemonGo.RocketAPI.GeneratedCode.EncounterResponse.Types.Background)
+                                    input.ReadEnum();
+                            break;
                         }
-                        input.ReadMessage(captureProbability_);
-                        break;
-                    }
+                    case 24:
+                        {
+                            status_ =
+                                (global::PokemonGo.RocketAPI.GeneratedCode.EncounterResponse.Types.Status)input.ReadEnum();
+                            break;
+                        }
+                    case 34:
+                        {
+                            if (captureProbability_ == null)
+                            {
+                                captureProbability_ = new global::PokemonGo.RocketAPI.GeneratedCode.CaptureProbability();
+                            }
+                            input.ReadMessage(captureProbability_);
+                            break;
+                        }
                 }
             }
         }
@@ -17412,20 +17427,30 @@ namespace PokemonGo.RocketAPI.GeneratedCode
         {
             public enum Background
             {
-                [pbr::OriginalName("PARK")] Park = 0,
-                [pbr::OriginalName("DESERT")] Desert = 1,
+                [pbr::OriginalName("PARK")]
+                Park = 0,
+                [pbr::OriginalName("DESERT")]
+                Desert = 1,
             }
 
             public enum Status
             {
-                [pbr::OriginalName("ENCOUNTER_ERROR")] EncounterError = 0,
-                [pbr::OriginalName("ENCOUNTER_SUCCESS")] EncounterSuccess = 1,
-                [pbr::OriginalName("ENCOUNTER_NOT_FOUND")] EncounterNotFound = 2,
-                [pbr::OriginalName("ENCOUNTER_CLOSED")] EncounterClosed = 3,
-                [pbr::OriginalName("ENCOUNTER_POKEMON_FLED")] EncounterPokemonFled = 4,
-                [pbr::OriginalName("ENCOUNTER_NOT_IN_RANGE")] EncounterNotInRange = 5,
-                [pbr::OriginalName("ENCOUNTER_ALREADY_HAPPENED")] EncounterAlreadyHappened = 6,
-                [pbr::OriginalName("POKEMON_INVENTORY_FULL")] PokemonInventoryFull = 7,
+                [pbr::OriginalName("ENCOUNTER_ERROR")]
+                EncounterError = 0,
+                [pbr::OriginalName("ENCOUNTER_SUCCESS")]
+                EncounterSuccess = 1,
+                [pbr::OriginalName("ENCOUNTER_NOT_FOUND")]
+                EncounterNotFound = 2,
+                [pbr::OriginalName("ENCOUNTER_CLOSED")]
+                EncounterClosed = 3,
+                [pbr::OriginalName("ENCOUNTER_POKEMON_FLED")]
+                EncounterPokemonFled = 4,
+                [pbr::OriginalName("ENCOUNTER_NOT_IN_RANGE")]
+                EncounterNotInRange = 5,
+                [pbr::OriginalName("ENCOUNTER_ALREADY_HAPPENED")]
+                EncounterAlreadyHappened = 6,
+                [pbr::OriginalName("POKEMON_INVENTORY_FULL")]
+                PokemonInventoryFull = 7,
             }
         }
 
@@ -17449,7 +17474,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
 
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.ItemId>
             _repeated_pokeballType_codec
-                = pb::FieldCodec.ForEnum(10, x => (int) x, x => (global::PokemonGo.RocketAPI.GeneratedCode.ItemId) x);
+                = pb::FieldCodec.ForEnum(10, x => (int)x, x => (global::PokemonGo.RocketAPI.GeneratedCode.ItemId)x);
 
         private static readonly pb::FieldCodec<float> _repeated_captureProbability_codec
             = pb::FieldCodec.ForFloat(18);
@@ -17574,21 +17599,21 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         break;
                     case 10:
                     case 8:
-                    {
-                        pokeballType_.AddEntriesFrom(input, _repeated_pokeballType_codec);
-                        break;
-                    }
+                        {
+                            pokeballType_.AddEntriesFrom(input, _repeated_pokeballType_codec);
+                            break;
+                        }
                     case 18:
                     case 21:
-                    {
-                        captureProbability_.AddEntriesFrom(input, _repeated_captureProbability_codec);
-                        break;
-                    }
+                        {
+                            captureProbability_.AddEntriesFrom(input, _repeated_captureProbability_codec);
+                            break;
+                        }
                     case 97:
-                    {
-                        ReticleDifficultyScale = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            ReticleDifficultyScale = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -17793,25 +17818,25 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 9:
-                    {
-                        EncounterId = input.ReadFixed64();
-                        break;
-                    }
+                        {
+                            EncounterId = input.ReadFixed64();
+                            break;
+                        }
                     case 18:
-                    {
-                        FortId = input.ReadString();
-                        break;
-                    }
+                        {
+                            FortId = input.ReadString();
+                            break;
+                        }
                     case 25:
-                    {
-                        PlayerLatitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            PlayerLatitude = input.ReadDouble();
+                            break;
+                        }
                     case 33:
-                    {
-                        PlayerLongitude = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            PlayerLongitude = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -17929,7 +17954,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Result != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) Result);
+                output.WriteEnum((int)Result);
             }
             if (pokemonData_ != null)
             {
@@ -17948,7 +17973,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (Result != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Result);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Result);
             }
             if (pokemonData_ != null)
             {
@@ -18000,30 +18025,30 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        result_ =
-                            (global::PokemonGo.RocketAPI.GeneratedCode.DiskEncounterResponse.Types.Result)
-                                input.ReadEnum();
-                        break;
-                    }
+                        {
+                            result_ =
+                                (global::PokemonGo.RocketAPI.GeneratedCode.DiskEncounterResponse.Types.Result)
+                                    input.ReadEnum();
+                            break;
+                        }
                     case 18:
-                    {
-                        if (pokemonData_ == null)
                         {
-                            pokemonData_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonData();
+                            if (pokemonData_ == null)
+                            {
+                                pokemonData_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokemonData();
+                            }
+                            input.ReadMessage(pokemonData_);
+                            break;
                         }
-                        input.ReadMessage(pokemonData_);
-                        break;
-                    }
                     case 26:
-                    {
-                        if (captureProbability_ == null)
                         {
-                            captureProbability_ = new global::PokemonGo.RocketAPI.GeneratedCode.CaptureProbability();
+                            if (captureProbability_ == null)
+                            {
+                                captureProbability_ = new global::PokemonGo.RocketAPI.GeneratedCode.CaptureProbability();
+                            }
+                            input.ReadMessage(captureProbability_);
+                            break;
                         }
-                        input.ReadMessage(captureProbability_);
-                        break;
-                    }
                 }
             }
         }
@@ -18057,12 +18082,18 @@ namespace PokemonGo.RocketAPI.GeneratedCode
         {
             public enum Result
             {
-                [pbr::OriginalName("UNKNOWN")] Unknown = 0,
-                [pbr::OriginalName("SUCCESS")] Success = 1,
-                [pbr::OriginalName("NOT_AVAILABLE")] NotAvailable = 2,
-                [pbr::OriginalName("NOT_IN_RANGE")] NotInRange = 3,
-                [pbr::OriginalName("ENCOUNTER_ALREADY_FINISHED")] EncounterAlreadyFinished = 4,
-                [pbr::OriginalName("POKEMON_INVENTORY_FULL")] PokemonInventoryFull = 5,
+                [pbr::OriginalName("UNKNOWN")]
+                Unknown = 0,
+                [pbr::OriginalName("SUCCESS")]
+                Success = 1,
+                [pbr::OriginalName("NOT_AVAILABLE")]
+                NotAvailable = 2,
+                [pbr::OriginalName("NOT_IN_RANGE")]
+                NotInRange = 3,
+                [pbr::OriginalName("ENCOUNTER_ALREADY_FINISHED")]
+                EncounterAlreadyFinished = 4,
+                [pbr::OriginalName("POKEMON_INVENTORY_FULL")]
+                PokemonInventoryFull = 5,
             }
         }
 
@@ -18322,40 +18353,40 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 9:
-                    {
-                        EncounterId = input.ReadFixed64();
-                        break;
-                    }
+                        {
+                            EncounterId = input.ReadFixed64();
+                            break;
+                        }
                     case 16:
-                    {
-                        Pokeball = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Pokeball = input.ReadInt32();
+                            break;
+                        }
                     case 25:
-                    {
-                        NormalizedReticleSize = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            NormalizedReticleSize = input.ReadDouble();
+                            break;
+                        }
                     case 34:
-                    {
-                        SpawnPointGuid = input.ReadString();
-                        break;
-                    }
+                        {
+                            SpawnPointGuid = input.ReadString();
+                            break;
+                        }
                     case 40:
-                    {
-                        HitPokemon = input.ReadBool();
-                        break;
-                    }
+                        {
+                            HitPokemon = input.ReadBool();
+                            break;
+                        }
                     case 49:
-                    {
-                        SpinModifier = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            SpinModifier = input.ReadDouble();
+                            break;
+                        }
                     case 57:
-                    {
-                        NormalizedHitPosition = input.ReadDouble();
-                        break;
-                    }
+                        {
+                            NormalizedHitPosition = input.ReadDouble();
+                            break;
+                        }
                 }
             }
         }
@@ -18488,7 +18519,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Status != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) Status);
+                output.WriteEnum((int)Status);
             }
             if (MissPercent != 0D)
             {
@@ -18512,7 +18543,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (Status != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Status);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Status);
             }
             if (MissPercent != 0D)
             {
@@ -18568,31 +18599,31 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        status_ =
-                            (global::PokemonGo.RocketAPI.GeneratedCode.CatchPokemonResponse.Types.CatchStatus)
-                                input.ReadEnum();
-                        break;
-                    }
-                    case 17:
-                    {
-                        MissPercent = input.ReadDouble();
-                        break;
-                    }
-                    case 24:
-                    {
-                        CapturedPokemonId = input.ReadUInt64();
-                        break;
-                    }
-                    case 34:
-                    {
-                        if (scores_ == null)
                         {
-                            scores_ = new global::PokemonGo.RocketAPI.GeneratedCode.CaptureScore();
+                            status_ =
+                                (global::PokemonGo.RocketAPI.GeneratedCode.CatchPokemonResponse.Types.CatchStatus)
+                                    input.ReadEnum();
+                            break;
                         }
-                        input.ReadMessage(scores_);
-                        break;
-                    }
+                    case 17:
+                        {
+                            MissPercent = input.ReadDouble();
+                            break;
+                        }
+                    case 24:
+                        {
+                            CapturedPokemonId = input.ReadUInt64();
+                            break;
+                        }
+                    case 34:
+                        {
+                            if (scores_ == null)
+                            {
+                                scores_ = new global::PokemonGo.RocketAPI.GeneratedCode.CaptureScore();
+                            }
+                            input.ReadMessage(scores_);
+                            break;
+                        }
                 }
             }
         }
@@ -18627,11 +18658,16 @@ namespace PokemonGo.RocketAPI.GeneratedCode
         {
             public enum CatchStatus
             {
-                [pbr::OriginalName("CATCH_ERROR")] CatchError = 0,
-                [pbr::OriginalName("CATCH_SUCCESS")] CatchSuccess = 1,
-                [pbr::OriginalName("CATCH_ESCAPE")] CatchEscape = 2,
-                [pbr::OriginalName("CATCH_FLEE")] CatchFlee = 3,
-                [pbr::OriginalName("CATCH_MISSED")] CatchMissed = 4,
+                [pbr::OriginalName("CATCH_ERROR")]
+                CatchError = 0,
+                [pbr::OriginalName("CATCH_SUCCESS")]
+                CatchSuccess = 1,
+                [pbr::OriginalName("CATCH_ESCAPE")]
+                CatchEscape = 2,
+                [pbr::OriginalName("CATCH_FLEE")]
+                CatchFlee = 3,
+                [pbr::OriginalName("CATCH_MISSED")]
+                CatchMissed = 4,
             }
         }
 
@@ -18658,8 +18694,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode
 
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.ActivityType>
             _repeated_activityType_codec
-                = pb::FieldCodec.ForEnum(10, x => (int) x,
-                    x => (global::PokemonGo.RocketAPI.GeneratedCode.ActivityType) x);
+                = pb::FieldCodec.ForEnum(10, x => (int)x,
+                    x => (global::PokemonGo.RocketAPI.GeneratedCode.ActivityType)x);
 
         private static readonly pb::FieldCodec<int> _repeated_xp_codec
             = pb::FieldCodec.ForInt32(18);
@@ -18789,28 +18825,28 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         break;
                     case 10:
                     case 8:
-                    {
-                        activityType_.AddEntriesFrom(input, _repeated_activityType_codec);
-                        break;
-                    }
+                        {
+                            activityType_.AddEntriesFrom(input, _repeated_activityType_codec);
+                            break;
+                        }
                     case 18:
                     case 16:
-                    {
-                        xp_.AddEntriesFrom(input, _repeated_xp_codec);
-                        break;
-                    }
+                        {
+                            xp_.AddEntriesFrom(input, _repeated_xp_codec);
+                            break;
+                        }
                     case 26:
                     case 24:
-                    {
-                        candy_.AddEntriesFrom(input, _repeated_candy_codec);
-                        break;
-                    }
+                        {
+                            candy_.AddEntriesFrom(input, _repeated_candy_codec);
+                            break;
+                        }
                     case 34:
                     case 32:
-                    {
-                        stardust_.AddEntriesFrom(input, _repeated_stardust_codec);
-                        break;
-                    }
+                        {
+                            stardust_.AddEntriesFrom(input, _repeated_stardust_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -18961,7 +18997,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
 
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.BadgeType>
             _repeated_awardedBadges_codec
-                = pb::FieldCodec.ForEnum(18, x => (int) x, x => (global::PokemonGo.RocketAPI.GeneratedCode.BadgeType) x);
+                = pb::FieldCodec.ForEnum(18, x => (int)x, x => (global::PokemonGo.RocketAPI.GeneratedCode.BadgeType)x);
 
         private static readonly pb::FieldCodec<int> _repeated_awardedBadgeLevels_codec
             = pb::FieldCodec.ForInt32(26);
@@ -19085,22 +19121,22 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        Success = input.ReadBool();
-                        break;
-                    }
+                        {
+                            Success = input.ReadBool();
+                            break;
+                        }
                     case 18:
                     case 16:
-                    {
-                        awardedBadges_.AddEntriesFrom(input, _repeated_awardedBadges_codec);
-                        break;
-                    }
+                        {
+                            awardedBadges_.AddEntriesFrom(input, _repeated_awardedBadges_codec);
+                            break;
+                        }
                     case 26:
                     case 24:
-                    {
-                        awardedBadgeLevels_.AddEntriesFrom(input, _repeated_awardedBadgeLevels_codec);
-                        break;
-                    }
+                        {
+                            awardedBadgeLevels_.AddEntriesFrom(input, _repeated_awardedBadgeLevels_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -19264,22 +19300,22 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        EquipBadgeCooldownMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            EquipBadgeCooldownMs = input.ReadInt64();
+                            break;
+                        }
                     case 18:
                     case 21:
-                    {
-                        catchProbabilityBonus_.AddEntriesFrom(input, _repeated_catchProbabilityBonus_codec);
-                        break;
-                    }
+                        {
+                            catchProbabilityBonus_.AddEntriesFrom(input, _repeated_catchProbabilityBonus_codec);
+                            break;
+                        }
                     case 26:
                     case 29:
-                    {
-                        fleeProbabilityBonus_.AddEntriesFrom(input, _repeated_fleeProbabilityBonus_codec);
-                        break;
-                    }
+                        {
+                            fleeProbabilityBonus_.AddEntriesFrom(input, _repeated_fleeProbabilityBonus_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -19468,27 +19504,27 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        UpgradesPerLevel = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            UpgradesPerLevel = input.ReadInt32();
+                            break;
+                        }
                     case 16:
-                    {
-                        AllowedLevelsAbovePlayer = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            AllowedLevelsAbovePlayer = input.ReadInt32();
+                            break;
+                        }
                     case 26:
                     case 24:
-                    {
-                        candyCost_.AddEntriesFrom(input, _repeated_candyCost_codec);
-                        break;
-                    }
+                        {
+                            candyCost_.AddEntriesFrom(input, _repeated_candyCost_codec);
+                            break;
+                        }
                     case 34:
                     case 32:
-                    {
-                        stardustCost_.AddEntriesFrom(input, _repeated_stardustCost_codec);
-                        break;
-                    }
+                        {
+                            stardustCost_.AddEntriesFrom(input, _repeated_stardustCost_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -19753,41 +19789,41 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        DailyBonusCoins = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            DailyBonusCoins = input.ReadInt32();
+                            break;
+                        }
                     case 18:
                     case 16:
-                    {
-                        dailyDefenderBonusPerPokemon_.AddEntriesFrom(input, _repeated_dailyDefenderBonusPerPokemon_codec);
-                        break;
-                    }
+                        {
+                            dailyDefenderBonusPerPokemon_.AddEntriesFrom(input, _repeated_dailyDefenderBonusPerPokemon_codec);
+                            break;
+                        }
                     case 24:
-                    {
-                        DailyDefenderBonusMaxDefenders = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            DailyDefenderBonusMaxDefenders = input.ReadInt32();
+                            break;
+                        }
                     case 34:
-                    {
-                        dailyDefenderBonusCurrency_.AddEntriesFrom(input, _repeated_dailyDefenderBonusCurrency_codec);
-                        break;
-                    }
+                        {
+                            dailyDefenderBonusCurrency_.AddEntriesFrom(input, _repeated_dailyDefenderBonusCurrency_codec);
+                            break;
+                        }
                     case 40:
-                    {
-                        MinTimeBetweenClaimsMs = input.ReadInt64();
-                        break;
-                    }
+                        {
+                            MinTimeBetweenClaimsMs = input.ReadInt64();
+                            break;
+                        }
                     case 48:
-                    {
-                        DailyBonusEnabled = input.ReadBool();
-                        break;
-                    }
+                        {
+                            DailyBonusEnabled = input.ReadBool();
+                            break;
+                        }
                     case 56:
-                    {
-                        DailyDefenderBonusEnabled = input.ReadBool();
-                        break;
-                    }
+                        {
+                            DailyDefenderBonusEnabled = input.ReadBool();
+                            break;
+                        }
                 }
             }
         }
@@ -19840,7 +19876,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             new pb::MessageParser<IapItemDisplay>(() => new IapItemDisplay());
 
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.ItemId> _repeated_itemIds_codec
-            = pb::FieldCodec.ForEnum(34, x => (int) x, x => (global::PokemonGo.RocketAPI.GeneratedCode.ItemId) x);
+            = pb::FieldCodec.ForEnum(34, x => (int)x, x => (global::PokemonGo.RocketAPI.GeneratedCode.ItemId)x);
 
         private static readonly pb::FieldCodec<int> _repeated_counts_codec
             = pb::FieldCodec.ForInt32(42);
@@ -19944,7 +19980,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Category != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) Category);
+                output.WriteEnum((int)Category);
             }
             if (SortOrder != 0)
             {
@@ -19964,7 +20000,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (Category != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Category);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Category);
             }
             if (SortOrder != 0)
             {
@@ -20008,32 +20044,32 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        Sku = input.ReadString();
-                        break;
-                    }
+                        {
+                            Sku = input.ReadString();
+                            break;
+                        }
                     case 16:
-                    {
-                        category_ = (global::PokemonGo.RocketAPI.GeneratedCode.HoloIapItemCategory) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            category_ = (global::PokemonGo.RocketAPI.GeneratedCode.HoloIapItemCategory)input.ReadEnum();
+                            break;
+                        }
                     case 24:
-                    {
-                        SortOrder = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            SortOrder = input.ReadInt32();
+                            break;
+                        }
                     case 34:
                     case 32:
-                    {
-                        itemIds_.AddEntriesFrom(input, _repeated_itemIds_codec);
-                        break;
-                    }
+                        {
+                            itemIds_.AddEntriesFrom(input, _repeated_itemIds_codec);
+                            break;
+                        }
                     case 42:
                     case 40:
-                    {
-                        counts_.AddEntriesFrom(input, _repeated_counts_codec);
-                        break;
-                    }
+                        {
+                            counts_.AddEntriesFrom(input, _repeated_counts_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -20265,30 +20301,30 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 13:
-                    {
-                        SpinBonusThreshold = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            SpinBonusThreshold = input.ReadFloat();
+                            break;
+                        }
                     case 21:
-                    {
-                        ExcellentThrowThreshold = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            ExcellentThrowThreshold = input.ReadFloat();
+                            break;
+                        }
                     case 29:
-                    {
-                        GreatThrowThreshold = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            GreatThrowThreshold = input.ReadFloat();
+                            break;
+                        }
                     case 37:
-                    {
-                        NiceThrowThreshold = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            NiceThrowThreshold = input.ReadFloat();
+                            break;
+                        }
                     case 40:
-                    {
-                        MilestoneThreshold = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MilestoneThreshold = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -20745,75 +20781,75 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 13:
-                    {
-                        EnergyPerSec = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            EnergyPerSec = input.ReadFloat();
+                            break;
+                        }
                     case 21:
-                    {
-                        DodgeEnergyCost = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            DodgeEnergyCost = input.ReadFloat();
+                            break;
+                        }
                     case 29:
-                    {
-                        RetargetSeconds = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            RetargetSeconds = input.ReadFloat();
+                            break;
+                        }
                     case 37:
-                    {
-                        EnemyAttackInterval = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            EnemyAttackInterval = input.ReadFloat();
+                            break;
+                        }
                     case 45:
-                    {
-                        AttackServerInterval = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            AttackServerInterval = input.ReadFloat();
+                            break;
+                        }
                     case 53:
-                    {
-                        RoundDurationSeconds = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            RoundDurationSeconds = input.ReadFloat();
+                            break;
+                        }
                     case 61:
-                    {
-                        BonusTimePerAllySeconds = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            BonusTimePerAllySeconds = input.ReadFloat();
+                            break;
+                        }
                     case 64:
-                    {
-                        MaximumAttackersPerBattle = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MaximumAttackersPerBattle = input.ReadInt32();
+                            break;
+                        }
                     case 77:
-                    {
-                        SameTypeAttackBonusMultiplier = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            SameTypeAttackBonusMultiplier = input.ReadFloat();
+                            break;
+                        }
                     case 80:
-                    {
-                        MaximumEnergy = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MaximumEnergy = input.ReadInt32();
+                            break;
+                        }
                     case 93:
-                    {
-                        EnergyDeltaPerHealthLost = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            EnergyDeltaPerHealthLost = input.ReadFloat();
+                            break;
+                        }
                     case 96:
-                    {
-                        DodgeDurationMs = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            DodgeDurationMs = input.ReadInt32();
+                            break;
+                        }
                     case 104:
-                    {
-                        MinimumPlayerLevel = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MinimumPlayerLevel = input.ReadInt32();
+                            break;
+                        }
                     case 112:
-                    {
-                        SwapDurationMs = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            SwapDurationMs = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -20998,28 +21034,28 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         break;
                     case 10:
                     case 8:
-                    {
-                        requiredExperience_.AddEntriesFrom(input, _repeated_requiredExperience_codec);
-                        break;
-                    }
+                        {
+                            requiredExperience_.AddEntriesFrom(input, _repeated_requiredExperience_codec);
+                            break;
+                        }
                     case 18:
                     case 16:
-                    {
-                        leaderSlots_.AddEntriesFrom(input, _repeated_leaderSlots_codec);
-                        break;
-                    }
+                        {
+                            leaderSlots_.AddEntriesFrom(input, _repeated_leaderSlots_codec);
+                            break;
+                        }
                     case 26:
                     case 24:
-                    {
-                        trainerSlots_.AddEntriesFrom(input, _repeated_trainerSlots_codec);
-                        break;
-                    }
+                        {
+                            trainerSlots_.AddEntriesFrom(input, _repeated_trainerSlots_codec);
+                            break;
+                        }
                     case 34:
                     case 32:
-                    {
-                        searchRollBonus_.AddEntriesFrom(input, _repeated_searchRollBonus_codec);
-                        break;
-                    }
+                        {
+                            searchRollBonus_.AddEntriesFrom(input, _repeated_searchRollBonus_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -21227,32 +21263,32 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         break;
                     case 10:
                     case 8:
-                    {
-                        rankNum_.AddEntriesFrom(input, _repeated_rankNum_codec);
-                        break;
-                    }
+                        {
+                            rankNum_.AddEntriesFrom(input, _repeated_rankNum_codec);
+                            break;
+                        }
                     case 18:
                     case 16:
-                    {
-                        requiredExperience_.AddEntriesFrom(input, _repeated_requiredExperience_codec);
-                        break;
-                    }
+                        {
+                            requiredExperience_.AddEntriesFrom(input, _repeated_requiredExperience_codec);
+                            break;
+                        }
                     case 26:
                     case 29:
-                    {
-                        cpMultiplier_.AddEntriesFrom(input, _repeated_cpMultiplier_codec);
-                        break;
-                    }
+                        {
+                            cpMultiplier_.AddEntriesFrom(input, _repeated_cpMultiplier_codec);
+                            break;
+                        }
                     case 32:
-                    {
-                        MaxEggPlayerLevel = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MaxEggPlayerLevel = input.ReadInt32();
+                            break;
+                        }
                     case 40:
-                    {
-                        MaxEncounterPlayerLevel = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MaxEncounterPlayerLevel = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -21337,13 +21373,13 @@ namespace PokemonGo.RocketAPI.GeneratedCode
 
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.CameraInterpolation>
             _repeated_interpolation_codec
-                = pb::FieldCodec.ForEnum(18, x => (int) x,
-                    x => (global::PokemonGo.RocketAPI.GeneratedCode.CameraInterpolation) x);
+                = pb::FieldCodec.ForEnum(18, x => (int)x,
+                    x => (global::PokemonGo.RocketAPI.GeneratedCode.CameraInterpolation)x);
 
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.CameraTarget>
             _repeated_targetType_codec
-                = pb::FieldCodec.ForEnum(26, x => (int) x,
-                    x => (global::PokemonGo.RocketAPI.GeneratedCode.CameraTarget) x);
+                = pb::FieldCodec.ForEnum(26, x => (int)x,
+                    x => (global::PokemonGo.RocketAPI.GeneratedCode.CameraTarget)x);
 
         private static readonly pb::FieldCodec<float> _repeated_easeInSpeed_codec
             = pb::FieldCodec.ForFloat(34);
@@ -21649,100 +21685,100 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        NextCamera = input.ReadString();
-                        break;
-                    }
+                        {
+                            NextCamera = input.ReadString();
+                            break;
+                        }
                     case 18:
                     case 16:
-                    {
-                        interpolation_.AddEntriesFrom(input, _repeated_interpolation_codec);
-                        break;
-                    }
+                        {
+                            interpolation_.AddEntriesFrom(input, _repeated_interpolation_codec);
+                            break;
+                        }
                     case 26:
                     case 24:
-                    {
-                        targetType_.AddEntriesFrom(input, _repeated_targetType_codec);
-                        break;
-                    }
+                        {
+                            targetType_.AddEntriesFrom(input, _repeated_targetType_codec);
+                            break;
+                        }
                     case 34:
                     case 37:
-                    {
-                        easeInSpeed_.AddEntriesFrom(input, _repeated_easeInSpeed_codec);
-                        break;
-                    }
+                        {
+                            easeInSpeed_.AddEntriesFrom(input, _repeated_easeInSpeed_codec);
+                            break;
+                        }
                     case 42:
                     case 45:
-                    {
-                        eastOutSpeed_.AddEntriesFrom(input, _repeated_eastOutSpeed_codec);
-                        break;
-                    }
+                        {
+                            eastOutSpeed_.AddEntriesFrom(input, _repeated_eastOutSpeed_codec);
+                            break;
+                        }
                     case 50:
                     case 53:
-                    {
-                        durationSeconds_.AddEntriesFrom(input, _repeated_durationSeconds_codec);
-                        break;
-                    }
+                        {
+                            durationSeconds_.AddEntriesFrom(input, _repeated_durationSeconds_codec);
+                            break;
+                        }
                     case 58:
                     case 61:
-                    {
-                        waitSeconds_.AddEntriesFrom(input, _repeated_waitSeconds_codec);
-                        break;
-                    }
+                        {
+                            waitSeconds_.AddEntriesFrom(input, _repeated_waitSeconds_codec);
+                            break;
+                        }
                     case 66:
                     case 69:
-                    {
-                        transitionSeconds_.AddEntriesFrom(input, _repeated_transitionSeconds_codec);
-                        break;
-                    }
+                        {
+                            transitionSeconds_.AddEntriesFrom(input, _repeated_transitionSeconds_codec);
+                            break;
+                        }
                     case 74:
                     case 77:
-                    {
-                        angleDegree_.AddEntriesFrom(input, _repeated_angleDegree_codec);
-                        break;
-                    }
+                        {
+                            angleDegree_.AddEntriesFrom(input, _repeated_angleDegree_codec);
+                            break;
+                        }
                     case 82:
                     case 85:
-                    {
-                        angleOffsetDegree_.AddEntriesFrom(input, _repeated_angleOffsetDegree_codec);
-                        break;
-                    }
+                        {
+                            angleOffsetDegree_.AddEntriesFrom(input, _repeated_angleOffsetDegree_codec);
+                            break;
+                        }
                     case 90:
                     case 93:
-                    {
-                        pitchDegree_.AddEntriesFrom(input, _repeated_pitchDegree_codec);
-                        break;
-                    }
+                        {
+                            pitchDegree_.AddEntriesFrom(input, _repeated_pitchDegree_codec);
+                            break;
+                        }
                     case 98:
                     case 101:
-                    {
-                        pitchOffsetDegree_.AddEntriesFrom(input, _repeated_pitchOffsetDegree_codec);
-                        break;
-                    }
+                        {
+                            pitchOffsetDegree_.AddEntriesFrom(input, _repeated_pitchOffsetDegree_codec);
+                            break;
+                        }
                     case 106:
                     case 109:
-                    {
-                        rollDegree_.AddEntriesFrom(input, _repeated_rollDegree_codec);
-                        break;
-                    }
+                        {
+                            rollDegree_.AddEntriesFrom(input, _repeated_rollDegree_codec);
+                            break;
+                        }
                     case 114:
                     case 117:
-                    {
-                        distanceMeters_.AddEntriesFrom(input, _repeated_distanceMeters_codec);
-                        break;
-                    }
+                        {
+                            distanceMeters_.AddEntriesFrom(input, _repeated_distanceMeters_codec);
+                            break;
+                        }
                     case 122:
                     case 125:
-                    {
-                        heightPercent_.AddEntriesFrom(input, _repeated_heightPercent_codec);
-                        break;
-                    }
+                        {
+                            heightPercent_.AddEntriesFrom(input, _repeated_heightPercent_codec);
+                            break;
+                        }
                     case 130:
                     case 133:
-                    {
-                        vertCtrRatio_.AddEntriesFrom(input, _repeated_vertCtrRatio_codec);
-                        break;
-                    }
+                        {
+                            vertCtrRatio_.AddEntriesFrom(input, _repeated_vertCtrRatio_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -21874,7 +21910,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (BadgeType != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) BadgeType);
+                output.WriteEnum((int)BadgeType);
             }
             if (BadgeRank != 0)
             {
@@ -21889,7 +21925,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (BadgeType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) BadgeType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)BadgeType);
             }
             if (BadgeRank != 0)
             {
@@ -21927,21 +21963,21 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        badgeType_ = (global::PokemonGo.RocketAPI.GeneratedCode.BadgeType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            badgeType_ = (global::PokemonGo.RocketAPI.GeneratedCode.BadgeType)input.ReadEnum();
+                            break;
+                        }
                     case 16:
-                    {
-                        BadgeRank = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BadgeRank = input.ReadInt32();
+                            break;
+                        }
                     case 26:
                     case 24:
-                    {
-                        targets_.AddEntriesFrom(input, _repeated_targets_codec);
-                        break;
-                    }
+                        {
+                            targets_.AddEntriesFrom(input, _repeated_targets_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -22049,7 +22085,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (AttackType != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) AttackType);
+                output.WriteEnum((int)AttackType);
             }
         }
 
@@ -22059,7 +22095,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             size += attackScalar_.CalculateSize(_repeated_attackScalar_codec);
             if (AttackType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) AttackType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)AttackType);
             }
             return size;
         }
@@ -22089,15 +22125,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         break;
                     case 10:
                     case 13:
-                    {
-                        attackScalar_.AddEntriesFrom(input, _repeated_attackScalar_codec);
-                        break;
-                    }
+                        {
+                            attackScalar_.AddEntriesFrom(input, _repeated_attackScalar_codec);
+                            break;
+                        }
                     case 16:
-                    {
-                        attackType_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            attackType_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonType)input.ReadEnum();
+                            break;
+                        }
                 }
             }
         }
@@ -22218,10 +22254,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 10:
-                    {
-                        sequence_.AddEntriesFrom(input, _repeated_sequence_codec);
-                        break;
-                    }
+                        {
+                            sequence_.AddEntriesFrom(input, _repeated_sequence_codec);
+                            break;
+                        }
                 }
             }
         }
@@ -22480,7 +22516,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (MovementId != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) MovementId);
+                output.WriteEnum((int)MovementId);
             }
             if (AnimationId != 0)
             {
@@ -22490,7 +22526,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (PokemonType != 0)
             {
                 output.WriteRawTag(24);
-                output.WriteEnum((int) PokemonType);
+                output.WriteEnum((int)PokemonType);
             }
             if (Power != 0F)
             {
@@ -22559,7 +22595,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (MovementId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MovementId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)MovementId);
             }
             if (AnimationId != 0)
             {
@@ -22567,7 +22603,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (PokemonType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) PokemonType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)PokemonType);
             }
             if (Power != 0F)
             {
@@ -22699,80 +22735,80 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        movementId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMovementType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            movementId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMovementType)input.ReadEnum();
+                            break;
+                        }
                     case 16:
-                    {
-                        AnimationId = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            AnimationId = input.ReadInt32();
+                            break;
+                        }
                     case 24:
-                    {
-                        pokemonType_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            pokemonType_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonType)input.ReadEnum();
+                            break;
+                        }
                     case 37:
-                    {
-                        Power = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            Power = input.ReadFloat();
+                            break;
+                        }
                     case 45:
-                    {
-                        AccuracyChance = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            AccuracyChance = input.ReadFloat();
+                            break;
+                        }
                     case 53:
-                    {
-                        CriticalChance = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            CriticalChance = input.ReadFloat();
+                            break;
+                        }
                     case 61:
-                    {
-                        HealScalar = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            HealScalar = input.ReadFloat();
+                            break;
+                        }
                     case 69:
-                    {
-                        StaminaLossScalar = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            StaminaLossScalar = input.ReadFloat();
+                            break;
+                        }
                     case 72:
-                    {
-                        TrainerLevelMin = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            TrainerLevelMin = input.ReadInt32();
+                            break;
+                        }
                     case 80:
-                    {
-                        TrainerLevelMax = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            TrainerLevelMax = input.ReadInt32();
+                            break;
+                        }
                     case 90:
-                    {
-                        VfxName = input.ReadString();
-                        break;
-                    }
+                        {
+                            VfxName = input.ReadString();
+                            break;
+                        }
                     case 96:
-                    {
-                        DurationMs = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            DurationMs = input.ReadInt32();
+                            break;
+                        }
                     case 104:
-                    {
-                        DamageWindowStartMs = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            DamageWindowStartMs = input.ReadInt32();
+                            break;
+                        }
                     case 112:
-                    {
-                        DamageWindowEndMs = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            DamageWindowEndMs = input.ReadInt32();
+                            break;
+                        }
                     case 120:
-                    {
-                        EnergyDelta = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            EnergyDelta = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -22882,20 +22918,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode
 
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove>
             _repeated_quickMoves_codec
-                = pb::FieldCodec.ForEnum(74, x => (int) x,
-                    x => (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove) x);
+                = pb::FieldCodec.ForEnum(74, x => (int)x,
+                    x => (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove)x);
 
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove>
             _repeated_cinematicMoves_codec
-                = pb::FieldCodec.ForEnum(82, x => (int) x,
-                    x => (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove) x);
+                = pb::FieldCodec.ForEnum(82, x => (int)x,
+                    x => (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMove)x);
 
         private static readonly pb::FieldCodec<float> _repeated_animationTime_codec
             = pb::FieldCodec.ForFloat(90);
 
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.PokemonId>
             _repeated_evolutionIds_codec
-                = pb::FieldCodec.ForEnum(98, x => (int) x, x => (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId) x);
+                = pb::FieldCodec.ForEnum(98, x => (int)x, x => (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId)x);
 
         private readonly pbc::RepeatedField<float> animationTime_ = new pbc::RepeatedField<float>();
 
@@ -23137,7 +23173,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (PokemonId != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) PokemonId);
+                output.WriteEnum((int)PokemonId);
             }
             if (ModelScale != 0F)
             {
@@ -23147,12 +23183,12 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Type != 0)
             {
                 output.WriteRawTag(32);
-                output.WriteEnum((int) Type);
+                output.WriteEnum((int)Type);
             }
             if (Type2 != 0)
             {
                 output.WriteRawTag(40);
-                output.WriteEnum((int) Type2);
+                output.WriteEnum((int)Type2);
             }
             if (camera_ != null)
             {
@@ -23181,7 +23217,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Class != 0)
             {
                 output.WriteRawTag(112);
-                output.WriteEnum((int) Class);
+                output.WriteEnum((int)Class);
             }
             if (PokedexHeightM != 0F)
             {
@@ -23196,7 +23232,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (ParentPokemonId != 0)
             {
                 output.WriteRawTag(136, 1);
-                output.WriteEnum((int) ParentPokemonId);
+                output.WriteEnum((int)ParentPokemonId);
             }
             if (HeightStdDev != 0F)
             {
@@ -23216,7 +23252,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (FamilyId != 0)
             {
                 output.WriteRawTag(168, 1);
-                output.WriteEnum((int) FamilyId);
+                output.WriteEnum((int)FamilyId);
             }
             if (CandyToEvolve != 0)
             {
@@ -23230,7 +23266,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (PokemonId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) PokemonId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)PokemonId);
             }
             if (ModelScale != 0F)
             {
@@ -23238,11 +23274,11 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (Type != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Type);
             }
             if (Type2 != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Type2);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Type2);
             }
             if (camera_ != null)
             {
@@ -23266,7 +23302,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (Class != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Class);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Class);
             }
             if (PokedexHeightM != 0F)
             {
@@ -23278,7 +23314,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (ParentPokemonId != 0)
             {
-                size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) ParentPokemonId);
+                size += 2 + pb::CodedOutputStream.ComputeEnumSize((int)ParentPokemonId);
             }
             if (HeightStdDev != 0F)
             {
@@ -23294,7 +23330,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (FamilyId != 0)
             {
-                size += 2 + pb::CodedOutputStream.ComputeEnumSize((int) FamilyId);
+                size += 2 + pb::CodedOutputStream.ComputeEnumSize((int)FamilyId);
             }
             if (CandyToEvolve != 0)
             {
@@ -23406,126 +23442,126 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        pokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            pokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId)input.ReadEnum();
+                            break;
+                        }
                     case 29:
-                    {
-                        ModelScale = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            ModelScale = input.ReadFloat();
+                            break;
+                        }
                     case 32:
-                    {
-                        type_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            type_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonType)input.ReadEnum();
+                            break;
+                        }
                     case 40:
-                    {
-                        type2_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            type2_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonType)input.ReadEnum();
+                            break;
+                        }
                     case 50:
-                    {
-                        if (camera_ == null)
                         {
-                            camera_ = new global::PokemonGo.RocketAPI.GeneratedCode.CameraAttributes();
+                            if (camera_ == null)
+                            {
+                                camera_ = new global::PokemonGo.RocketAPI.GeneratedCode.CameraAttributes();
+                            }
+                            input.ReadMessage(camera_);
+                            break;
                         }
-                        input.ReadMessage(camera_);
-                        break;
-                    }
                     case 58:
-                    {
-                        if (encounter_ == null)
                         {
-                            encounter_ = new global::PokemonGo.RocketAPI.GeneratedCode.EncounterAttributes();
+                            if (encounter_ == null)
+                            {
+                                encounter_ = new global::PokemonGo.RocketAPI.GeneratedCode.EncounterAttributes();
+                            }
+                            input.ReadMessage(encounter_);
+                            break;
                         }
-                        input.ReadMessage(encounter_);
-                        break;
-                    }
                     case 66:
-                    {
-                        if (stats_ == null)
                         {
-                            stats_ = new global::PokemonGo.RocketAPI.GeneratedCode.StatsAttributes();
+                            if (stats_ == null)
+                            {
+                                stats_ = new global::PokemonGo.RocketAPI.GeneratedCode.StatsAttributes();
+                            }
+                            input.ReadMessage(stats_);
+                            break;
                         }
-                        input.ReadMessage(stats_);
-                        break;
-                    }
                     case 74:
                     case 72:
-                    {
-                        quickMoves_.AddEntriesFrom(input, _repeated_quickMoves_codec);
-                        break;
-                    }
+                        {
+                            quickMoves_.AddEntriesFrom(input, _repeated_quickMoves_codec);
+                            break;
+                        }
                     case 82:
                     case 80:
-                    {
-                        cinematicMoves_.AddEntriesFrom(input, _repeated_cinematicMoves_codec);
-                        break;
-                    }
+                        {
+                            cinematicMoves_.AddEntriesFrom(input, _repeated_cinematicMoves_codec);
+                            break;
+                        }
                     case 90:
                     case 93:
-                    {
-                        animationTime_.AddEntriesFrom(input, _repeated_animationTime_codec);
-                        break;
-                    }
+                        {
+                            animationTime_.AddEntriesFrom(input, _repeated_animationTime_codec);
+                            break;
+                        }
                     case 98:
                     case 96:
-                    {
-                        evolutionIds_.AddEntriesFrom(input, _repeated_evolutionIds_codec);
-                        break;
-                    }
+                        {
+                            evolutionIds_.AddEntriesFrom(input, _repeated_evolutionIds_codec);
+                            break;
+                        }
                     case 104:
-                    {
-                        EvolutionPips = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            EvolutionPips = input.ReadInt32();
+                            break;
+                        }
                     case 112:
-                    {
-                        class_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonClass) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            class_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonClass)input.ReadEnum();
+                            break;
+                        }
                     case 125:
-                    {
-                        PokedexHeightM = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            PokedexHeightM = input.ReadFloat();
+                            break;
+                        }
                     case 133:
-                    {
-                        PokedexWeightKg = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            PokedexWeightKg = input.ReadFloat();
+                            break;
+                        }
                     case 136:
-                    {
-                        parentPokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            parentPokemonId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonId)input.ReadEnum();
+                            break;
+                        }
                     case 149:
-                    {
-                        HeightStdDev = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            HeightStdDev = input.ReadFloat();
+                            break;
+                        }
                     case 157:
-                    {
-                        WeightStdDev = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            WeightStdDev = input.ReadFloat();
+                            break;
+                        }
                     case 165:
-                    {
-                        KmDistanceToHatch = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            KmDistanceToHatch = input.ReadFloat();
+                            break;
+                        }
                     case 168:
-                    {
-                        familyId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonFamilyId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            familyId_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonFamilyId)input.ReadEnum();
+                            break;
+                        }
                     case 176:
-                    {
-                        CandyToEvolve = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            CandyToEvolve = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -23773,30 +23809,30 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 13:
-                    {
-                        DiskRadiusM = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            DiskRadiusM = input.ReadFloat();
+                            break;
+                        }
                     case 21:
-                    {
-                        CylinderRadiusM = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            CylinderRadiusM = input.ReadFloat();
+                            break;
+                        }
                     case 29:
-                    {
-                        CylinderHeightM = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            CylinderHeightM = input.ReadFloat();
+                            break;
+                        }
                     case 37:
-                    {
-                        CylinderGroundM = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            CylinderGroundM = input.ReadFloat();
+                            break;
+                        }
                     case 45:
-                    {
-                        ShoulderModeScale = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            ShoulderModeScale = input.ReadFloat();
+                            break;
+                        }
                 }
             }
         }
@@ -24012,7 +24048,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (MovementType != 0)
             {
                 output.WriteRawTag(48);
-                output.WriteEnum((int) MovementType);
+                output.WriteEnum((int)MovementType);
             }
             if (MovementTimerS != 0F)
             {
@@ -24056,7 +24092,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (MovementType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) MovementType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)MovementType);
             }
             if (MovementTimerS != 0F)
             {
@@ -24128,50 +24164,50 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 13:
-                    {
-                        BaseCaptureRate = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            BaseCaptureRate = input.ReadFloat();
+                            break;
+                        }
                     case 21:
-                    {
-                        BaseFleeRate = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            BaseFleeRate = input.ReadFloat();
+                            break;
+                        }
                     case 29:
-                    {
-                        CollisionRadiusM = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            CollisionRadiusM = input.ReadFloat();
+                            break;
+                        }
                     case 37:
-                    {
-                        CollisionHeightM = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            CollisionHeightM = input.ReadFloat();
+                            break;
+                        }
                     case 45:
-                    {
-                        CollisionHeadRadiusM = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            CollisionHeadRadiusM = input.ReadFloat();
+                            break;
+                        }
                     case 48:
-                    {
-                        movementType_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMovementType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            movementType_ = (global::PokemonGo.RocketAPI.GeneratedCode.PokemonMovementType)input.ReadEnum();
+                            break;
+                        }
                     case 61:
-                    {
-                        MovementTimerS = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            MovementTimerS = input.ReadFloat();
+                            break;
+                        }
                     case 69:
-                    {
-                        JumpTimeS = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            JumpTimeS = input.ReadFloat();
+                            break;
+                        }
                     case 77:
-                    {
-                        AttackTimerS = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            AttackTimerS = input.ReadFloat();
+                            break;
+                        }
                 }
             }
         }
@@ -24382,25 +24418,25 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        BaseStamina = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BaseStamina = input.ReadInt32();
+                            break;
+                        }
                     case 16:
-                    {
-                        BaseAttack = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BaseAttack = input.ReadInt32();
+                            break;
+                        }
                     case 24:
-                    {
-                        BaseDefense = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BaseDefense = input.ReadInt32();
+                            break;
+                        }
                     case 64:
-                    {
-                        DodgeEnergyDelta = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            DodgeEnergyDelta = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -24662,17 +24698,17 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (ItemId != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) ItemId);
+                output.WriteEnum((int)ItemId);
             }
             if (ItemType != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) ItemType);
+                output.WriteEnum((int)ItemType);
             }
             if (Category != 0)
             {
                 output.WriteRawTag(24);
-                output.WriteEnum((int) Category);
+                output.WriteEnum((int)Category);
             }
             if (DropFreq != 0F)
             {
@@ -24741,15 +24777,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (ItemId != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ItemId);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemId);
             }
             if (ItemType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ItemType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemType);
             }
             if (Category != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Category);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Category);
             }
             if (DropFreq != 0F)
             {
@@ -24921,121 +24957,121 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId)input.ReadEnum();
+                            break;
+                        }
                     case 16:
-                    {
-                        itemType_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            itemType_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemType)input.ReadEnum();
+                            break;
+                        }
                     case 24:
-                    {
-                        category_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemCategory) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            category_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemCategory)input.ReadEnum();
+                            break;
+                        }
                     case 37:
-                    {
-                        DropFreq = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            DropFreq = input.ReadFloat();
+                            break;
+                        }
                     case 40:
-                    {
-                        DropTrainerLevel = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            DropTrainerLevel = input.ReadInt32();
+                            break;
+                        }
                     case 50:
-                    {
-                        if (pokeball_ == null)
                         {
-                            pokeball_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokeballAttributes();
+                            if (pokeball_ == null)
+                            {
+                                pokeball_ = new global::PokemonGo.RocketAPI.GeneratedCode.PokeballAttributes();
+                            }
+                            input.ReadMessage(pokeball_);
+                            break;
                         }
-                        input.ReadMessage(pokeball_);
-                        break;
-                    }
                     case 58:
-                    {
-                        if (potion_ == null)
                         {
-                            potion_ = new global::PokemonGo.RocketAPI.GeneratedCode.PotionAttributes();
+                            if (potion_ == null)
+                            {
+                                potion_ = new global::PokemonGo.RocketAPI.GeneratedCode.PotionAttributes();
+                            }
+                            input.ReadMessage(potion_);
+                            break;
                         }
-                        input.ReadMessage(potion_);
-                        break;
-                    }
                     case 66:
-                    {
-                        if (revive_ == null)
                         {
-                            revive_ = new global::PokemonGo.RocketAPI.GeneratedCode.ReviveAttributes();
+                            if (revive_ == null)
+                            {
+                                revive_ = new global::PokemonGo.RocketAPI.GeneratedCode.ReviveAttributes();
+                            }
+                            input.ReadMessage(revive_);
+                            break;
                         }
-                        input.ReadMessage(revive_);
-                        break;
-                    }
                     case 74:
-                    {
-                        if (battle_ == null)
                         {
-                            battle_ = new global::PokemonGo.RocketAPI.GeneratedCode.BattleAttributes();
+                            if (battle_ == null)
+                            {
+                                battle_ = new global::PokemonGo.RocketAPI.GeneratedCode.BattleAttributes();
+                            }
+                            input.ReadMessage(battle_);
+                            break;
                         }
-                        input.ReadMessage(battle_);
-                        break;
-                    }
                     case 82:
-                    {
-                        if (food_ == null)
                         {
-                            food_ = new global::PokemonGo.RocketAPI.GeneratedCode.FoodAttributes();
+                            if (food_ == null)
+                            {
+                                food_ = new global::PokemonGo.RocketAPI.GeneratedCode.FoodAttributes();
+                            }
+                            input.ReadMessage(food_);
+                            break;
                         }
-                        input.ReadMessage(food_);
-                        break;
-                    }
                     case 90:
-                    {
-                        if (inventoryUpgrade_ == null)
                         {
-                            inventoryUpgrade_ =
-                                new global::PokemonGo.RocketAPI.GeneratedCode.InventoryUpgradeAttributes();
+                            if (inventoryUpgrade_ == null)
+                            {
+                                inventoryUpgrade_ =
+                                    new global::PokemonGo.RocketAPI.GeneratedCode.InventoryUpgradeAttributes();
+                            }
+                            input.ReadMessage(inventoryUpgrade_);
+                            break;
                         }
-                        input.ReadMessage(inventoryUpgrade_);
-                        break;
-                    }
                     case 98:
-                    {
-                        if (xpBoost_ == null)
                         {
-                            xpBoost_ = new global::PokemonGo.RocketAPI.GeneratedCode.ExperienceBoostAttributes();
+                            if (xpBoost_ == null)
+                            {
+                                xpBoost_ = new global::PokemonGo.RocketAPI.GeneratedCode.ExperienceBoostAttributes();
+                            }
+                            input.ReadMessage(xpBoost_);
+                            break;
                         }
-                        input.ReadMessage(xpBoost_);
-                        break;
-                    }
                     case 106:
-                    {
-                        if (incense_ == null)
                         {
-                            incense_ = new global::PokemonGo.RocketAPI.GeneratedCode.IncenseAttributes();
+                            if (incense_ == null)
+                            {
+                                incense_ = new global::PokemonGo.RocketAPI.GeneratedCode.IncenseAttributes();
+                            }
+                            input.ReadMessage(incense_);
+                            break;
                         }
-                        input.ReadMessage(incense_);
-                        break;
-                    }
                     case 114:
-                    {
-                        if (eggIncubator_ == null)
                         {
-                            eggIncubator_ = new global::PokemonGo.RocketAPI.GeneratedCode.EggIncubatorAttributes();
+                            if (eggIncubator_ == null)
+                            {
+                                eggIncubator_ = new global::PokemonGo.RocketAPI.GeneratedCode.EggIncubatorAttributes();
+                            }
+                            input.ReadMessage(eggIncubator_);
+                            break;
                         }
-                        input.ReadMessage(eggIncubator_);
-                        break;
-                    }
                     case 122:
-                    {
-                        if (fortModifier_ == null)
                         {
-                            fortModifier_ = new global::PokemonGo.RocketAPI.GeneratedCode.FortModifierAttributes();
+                            if (fortModifier_ == null)
+                            {
+                                fortModifier_ = new global::PokemonGo.RocketAPI.GeneratedCode.FortModifierAttributes();
+                            }
+                            input.ReadMessage(fortModifier_);
+                            break;
                         }
-                        input.ReadMessage(fortModifier_);
-                        break;
-                    }
                 }
             }
         }
@@ -25177,10 +25213,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 13:
-                    {
-                        StaPercent = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            StaPercent = input.ReadFloat();
+                            break;
+                        }
                 }
             }
         }
@@ -25295,7 +25331,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (IncubatorType != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) IncubatorType);
+                output.WriteEnum((int)IncubatorType);
             }
             if (Uses != 0)
             {
@@ -25314,7 +25350,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (IncubatorType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) IncubatorType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)IncubatorType);
             }
             if (Uses != 0)
             {
@@ -25358,20 +25394,20 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        incubatorType_ = (global::PokemonGo.RocketAPI.GeneratedCode.EggIncubatorType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            incubatorType_ = (global::PokemonGo.RocketAPI.GeneratedCode.EggIncubatorType)input.ReadEnum();
+                            break;
+                        }
                     case 16:
-                    {
-                        Uses = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Uses = input.ReadInt32();
+                            break;
+                        }
                     case 29:
-                    {
-                        DistanceMultiplier = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            DistanceMultiplier = input.ReadFloat();
+                            break;
+                        }
                 }
             }
         }
@@ -25526,15 +25562,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 13:
-                    {
-                        XpMultiplier = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            XpMultiplier = input.ReadFloat();
+                            break;
+                        }
                     case 16:
-                    {
-                        BoostDurationMs = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            BoostDurationMs = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -25577,7 +25613,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
 
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.ItemEffect>
             _repeated_itemEffect_codec
-                = pb::FieldCodec.ForEnum(10, x => (int) x, x => (global::PokemonGo.RocketAPI.GeneratedCode.ItemEffect) x);
+                = pb::FieldCodec.ForEnum(10, x => (int)x, x => (global::PokemonGo.RocketAPI.GeneratedCode.ItemEffect)x);
 
         private static readonly pb::FieldCodec<float> _repeated_itemEffectPercent_codec
             = pb::FieldCodec.ForFloat(18);
@@ -25701,21 +25737,21 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         break;
                     case 10:
                     case 8:
-                    {
-                        itemEffect_.AddEntriesFrom(input, _repeated_itemEffect_codec);
-                        break;
-                    }
+                        {
+                            itemEffect_.AddEntriesFrom(input, _repeated_itemEffect_codec);
+                            break;
+                        }
                     case 18:
                     case 21:
-                    {
-                        itemEffectPercent_.AddEntriesFrom(input, _repeated_itemEffectPercent_codec);
-                        break;
-                    }
+                        {
+                            itemEffectPercent_.AddEntriesFrom(input, _repeated_itemEffectPercent_codec);
+                            break;
+                        }
                     case 29:
-                    {
-                        GrowthPercent = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            GrowthPercent = input.ReadFloat();
+                            break;
+                        }
                 }
             }
         }
@@ -25870,15 +25906,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        ModifierLifetimeSeconds = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            ModifierLifetimeSeconds = input.ReadInt32();
+                            break;
+                        }
                     case 16:
-                    {
-                        TroyDiskNumPokemonSpawned = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            TroyDiskNumPokemonSpawned = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -25933,8 +25969,8 @@ namespace PokemonGo.RocketAPI.GeneratedCode
 
         private static readonly pb::FieldCodec<global::PokemonGo.RocketAPI.GeneratedCode.PokemonType>
             _repeated_pokemonType_codec
-                = pb::FieldCodec.ForEnum(18, x => (int) x,
-                    x => (global::PokemonGo.RocketAPI.GeneratedCode.PokemonType) x);
+                = pb::FieldCodec.ForEnum(18, x => (int)x,
+                    x => (global::PokemonGo.RocketAPI.GeneratedCode.PokemonType)x);
 
         private readonly pbc::RepeatedField<global::PokemonGo.RocketAPI.GeneratedCode.PokemonType> pokemonType_ =
             new pbc::RepeatedField<global::PokemonGo.RocketAPI.GeneratedCode.PokemonType>();
@@ -26154,41 +26190,41 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        IncenseLifetimeSeconds = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            IncenseLifetimeSeconds = input.ReadInt32();
+                            break;
+                        }
                     case 18:
                     case 16:
-                    {
-                        pokemonType_.AddEntriesFrom(input, _repeated_pokemonType_codec);
-                        break;
-                    }
+                        {
+                            pokemonType_.AddEntriesFrom(input, _repeated_pokemonType_codec);
+                            break;
+                        }
                     case 29:
-                    {
-                        PokemonIncenseTypeProbability = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            PokemonIncenseTypeProbability = input.ReadFloat();
+                            break;
+                        }
                     case 32:
-                    {
-                        StandingTimeBetweenEncountersSeconds = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            StandingTimeBetweenEncountersSeconds = input.ReadInt32();
+                            break;
+                        }
                     case 40:
-                    {
-                        MovingTimeBetweenEncounterSeconds = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            MovingTimeBetweenEncounterSeconds = input.ReadInt32();
+                            break;
+                        }
                     case 48:
-                    {
-                        DistanceRequiredForShorterIntervalMeters = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            DistanceRequiredForShorterIntervalMeters = input.ReadInt32();
+                            break;
+                        }
                     case 56:
-                    {
-                        PokemonAttractedLengthSec = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            PokemonAttractedLengthSec = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -26303,7 +26339,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (UpgradeType != 0)
             {
                 output.WriteRawTag(16);
-                output.WriteEnum((int) UpgradeType);
+                output.WriteEnum((int)UpgradeType);
             }
         }
 
@@ -26316,7 +26352,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             }
             if (UpgradeType != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) UpgradeType);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)UpgradeType);
             }
             return size;
         }
@@ -26348,15 +26384,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        AdditionalStorage = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            AdditionalStorage = input.ReadInt32();
+                            break;
+                        }
                     case 16:
-                    {
-                        upgradeType_ = (global::PokemonGo.RocketAPI.GeneratedCode.InventoryUpgradeType) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            upgradeType_ = (global::PokemonGo.RocketAPI.GeneratedCode.InventoryUpgradeType)input.ReadEnum();
+                            break;
+                        }
                 }
             }
         }
@@ -26484,7 +26520,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (ItemEffect != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) ItemEffect);
+                output.WriteEnum((int)ItemEffect);
             }
             if (CaptureMulti != 0F)
             {
@@ -26508,7 +26544,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (ItemEffect != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ItemEffect);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemEffect);
             }
             if (CaptureMulti != 0F)
             {
@@ -26560,25 +26596,25 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        itemEffect_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemEffect) input.ReadEnum();
-                        break;
-                    }
+                        {
+                            itemEffect_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemEffect)input.ReadEnum();
+                            break;
+                        }
                     case 21:
-                    {
-                        CaptureMulti = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            CaptureMulti = input.ReadFloat();
+                            break;
+                        }
                     case 29:
-                    {
-                        CaptureMultiEffect = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            CaptureMultiEffect = input.ReadFloat();
+                            break;
+                        }
                     case 37:
-                    {
-                        ItemEffectMod = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            ItemEffectMod = input.ReadFloat();
+                            break;
+                        }
                 }
             }
         }
@@ -26734,15 +26770,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 13:
-                    {
-                        StaPercent = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            StaPercent = input.ReadFloat();
+                            break;
+                        }
                     case 16:
-                    {
-                        StaAmount = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            StaAmount = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -26871,10 +26907,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 13:
-                    {
-                        StaPercent = input.ReadFloat();
-                        break;
-                    }
+                        {
+                            StaPercent = input.ReadFloat();
+                            break;
+                        }
                 }
             }
         }
@@ -27005,10 +27041,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 9:
-                    {
-                        PokemonId = input.ReadFixed64();
-                        break;
-                    }
+                        {
+                            PokemonId = input.ReadFixed64();
+                            break;
+                        }
                 }
             }
         }
@@ -27161,15 +27197,15 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        Status = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            Status = input.ReadInt32();
+                            break;
+                        }
                     case 16:
-                    {
-                        CandyAwarded = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            CandyAwarded = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -27301,10 +27337,10 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 9:
-                    {
-                        PokemonId = input.ReadFixed64();
-                        break;
-                    }
+                        {
+                            PokemonId = input.ReadFixed64();
+                            break;
+                        }
                 }
             }
         }
@@ -27431,7 +27467,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             if (Result != 0)
             {
                 output.WriteRawTag(8);
-                output.WriteEnum((int) Result);
+                output.WriteEnum((int)Result);
             }
             if (evolvedPokemon_ != null)
             {
@@ -27455,7 +27491,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode
             var size = 0;
             if (Result != 0)
             {
-                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) Result);
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)Result);
             }
             if (evolvedPokemon_ != null)
             {
@@ -27511,31 +27547,31 @@ namespace PokemonGo.RocketAPI.GeneratedCode
                         input.SkipLastField();
                         break;
                     case 8:
-                    {
-                        result_ =
-                            (global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemonOut.Types.EvolvePokemonStatus)
-                                input.ReadEnum();
-                        break;
-                    }
-                    case 18:
-                    {
-                        if (evolvedPokemon_ == null)
                         {
-                            evolvedPokemon_ = new global::PokemonGo.RocketAPI.GeneratedCode.Pokemon();
+                            result_ =
+                                (global::PokemonGo.RocketAPI.GeneratedCode.EvolvePokemonOut.Types.EvolvePokemonStatus)
+                                    input.ReadEnum();
+                            break;
                         }
-                        input.ReadMessage(evolvedPokemon_);
-                        break;
-                    }
+                    case 18:
+                        {
+                            if (evolvedPokemon_ == null)
+                            {
+                                evolvedPokemon_ = new global::PokemonGo.RocketAPI.GeneratedCode.Pokemon();
+                            }
+                            input.ReadMessage(evolvedPokemon_);
+                            break;
+                        }
                     case 24:
-                    {
-                        ExpAwarded = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            ExpAwarded = input.ReadInt32();
+                            break;
+                        }
                     case 32:
-                    {
-                        CandyAwarded = input.ReadInt32();
-                        break;
-                    }
+                        {
+                            CandyAwarded = input.ReadInt32();
+                            break;
+                        }
                 }
             }
         }
@@ -27570,12 +27606,18 @@ namespace PokemonGo.RocketAPI.GeneratedCode
         {
             public enum EvolvePokemonStatus
             {
-                [pbr::OriginalName("POKEMON_EVOLVED_UNSET")] PokemonEvolvedUnset = 0,
-                [pbr::OriginalName("POKEMON_EVOLVED_SUCCESS")] PokemonEvolvedSuccess = 1,
-                [pbr::OriginalName("FAILED_POKEMON_MISSING")] FailedPokemonMissing = 2,
-                [pbr::OriginalName("FAILED_INSUFFICIENT_RESOURCES")] FailedInsufficientResources = 3,
-                [pbr::OriginalName("FAILED_POKEMON_CANNOT_EVOLVE")] FailedPokemonCannotEvolve = 4,
-                [pbr::OriginalName("FAILED_POKEMON_IS_DEPLOYED")] FailedPokemonIsDeployed = 5,
+                [pbr::OriginalName("POKEMON_EVOLVED_UNSET")]
+                PokemonEvolvedUnset = 0,
+                [pbr::OriginalName("POKEMON_EVOLVED_SUCCESS")]
+                PokemonEvolvedSuccess = 1,
+                [pbr::OriginalName("FAILED_POKEMON_MISSING")]
+                FailedPokemonMissing = 2,
+                [pbr::OriginalName("FAILED_INSUFFICIENT_RESOURCES")]
+                FailedInsufficientResources = 3,
+                [pbr::OriginalName("FAILED_POKEMON_CANNOT_EVOLVE")]
+                FailedPokemonCannotEvolve = 4,
+                [pbr::OriginalName("FAILED_POKEMON_IS_DEPLOYED")]
+                FailedPokemonIsDeployed = 5,
             }
         }
 

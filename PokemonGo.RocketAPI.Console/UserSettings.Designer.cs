@@ -170,12 +170,12 @@ namespace PokemonGo.RocketAPI.Console {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5000")]
-        public int DelayBetweenMove {
+        public int DelayBetweenPokemonCatch {
             get {
-                return ((int)(this["DelayBetweenMove"]));
+                return ((int)(this["DelayBetweenPokemonCatch"]));
             }
             set {
-                this["DelayBetweenMove"] = value;
+                this["DelayBetweenPokemonCatch"] = value;
             }
         }
         
@@ -193,13 +193,25 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1000")]
-        public int MaxTravelDistanceInMeters {
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int KeepMinDuplicatePokemon {
             get {
-                return ((int)(this["MaxTravelDistanceInMeters"]));
+                return ((int)(this["KeepMinDuplicatePokemon"]));
             }
             set {
-                this["MaxTravelDistanceInMeters"] = value;
+                this["KeepMinDuplicatePokemon"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool PrioritizeIVOverCP {
+            get {
+                return ((bool)(this["PrioritizeIVOverCP"]));
+            }
+            set {
+                this["PrioritizeIVOverCP"] = value;
             }
         }
     }
