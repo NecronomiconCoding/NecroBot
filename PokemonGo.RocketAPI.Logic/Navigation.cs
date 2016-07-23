@@ -50,8 +50,6 @@ namespace PokemonGo.RocketAPI.Logic
                 await
                     _client.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude, _client.Settings.DefaultAltitude);
 
-            if (functionExecutedWhileWalking != null)
-                await functionExecutedWhileWalking();
             do
             {
                 var millisecondsUntilGetUpdatePlayerLocationResponse =
@@ -79,6 +77,8 @@ namespace PokemonGo.RocketAPI.Logic
                     await
                         _client.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                             _client.Settings.DefaultAltitude);
+                if (functionExecutedWhileWalking != null) 
+                    await functionExecutedWhileWalking();// look for pokemon
                 await Task.Delay(Math.Min((int) (distanceToTarget/speedInMetersPerSecond*1000), 3000));
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
