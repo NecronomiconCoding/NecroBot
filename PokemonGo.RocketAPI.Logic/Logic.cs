@@ -646,13 +646,7 @@ namespace PokemonGo.RocketAPI.Logic
 
             if (allItems.Count() >= recycleThreshold)
             {
-<<<<<<< HEAD
-                var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
-                Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
-                _stats.AddItemsRemoved(item.Count);
-                _stats.UpdateConsoleTitle(_inventory);
-                await Task.Delay(500);
-=======
+
                 var items = await _inventory.GetItemsToRecycle(_clientSettings);
 
                 foreach (var item in items)
@@ -663,7 +657,7 @@ namespace PokemonGo.RocketAPI.Logic
                     _stats.UpdateConsoleTitle(_inventory);
                     await Task.Delay(500);
                 }
->>>>>>> refs/remotes/NecronomiconCoding/master
+
             }
         }
 
