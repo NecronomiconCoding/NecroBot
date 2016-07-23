@@ -297,7 +297,7 @@ namespace PokemonGo.RocketAPI.Logic
                 else
                     Logger.Write($"Encounter problem: {encounter.Status}");
             }
-            
+
             await Task.Delay(_clientSettings.DelayBetweenMove);
         }
 
@@ -327,35 +327,36 @@ namespace PokemonGo.RocketAPI.Logic
 
             if (pokeStops.Count() > 0)
             {
-            foreach (var pokeStop in pokeStops)
-            {
+                foreach (var pokeStop in pokeStops)
+                {
                     var playerToStopDist = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
                     pokeStop.Latitude, pokeStop.Longitude);
                     var startToStopDist = Navigation.DistanceBetween2Coordinates(_clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
                         pokeStop.Latitude, pokeStop.Longitude); // This can be removed after debugging.
 
-                var update =
-                    await
-                        _navigation.HumanLikeWalking(new Navigation.Location(pokeStop.Latitude, pokeStop.Longitude),
-                            _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+                    var update =
+                        await
+                            _navigation.HumanLikeWalking(new Navigation.Location(pokeStop.Latitude, pokeStop.Longitude),
+                                _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
 
-                var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                     Logger.Write($"{fortInfo.Name} in ({Math.Round(playerToStopDist)}m) at ({pokeStop.Latitude},{pokeStop.Longitude}) ({Math.Round(startToStopDist)}m from start)", LogLevel.Info, ConsoleColor.DarkRed);
-                if (fortSearch.ExperienceAwarded > 0)
-                {
-                    Logger.Write(
-                        $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
-                        LogLevel.Pokestop);
-                    await DisplayPlayerLevelInTitle(true);
-                }
 
-                await Task.Delay(1000);
-                await RecycleItems();
-                await ExecuteCatchAllNearbyPokemons();
-                if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                    if (fortSearch.ExperienceAwarded > 0)
+                    {
+                        Logger.Write(
+                            $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
+                            LogLevel.Pokestop);
+                        await DisplayPlayerLevelInTitle(true);
+                    }
+
+                    await Task.Delay(1000);
+                    await RecycleItems();
+                    await ExecuteCatchAllNearbyPokemons();
+                    if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                }
             }
-        }
             else
             {
                 Logger.Write($"No PokeStops found!", LogLevel.Warning, ConsoleColor.Yellow);
@@ -421,25 +422,25 @@ namespace PokemonGo.RocketAPI.Logic
         {
             while (true)
             {
-                    _playerProfile = await _client.GetProfile();
-                    await DisplayPlayerLevelInTitle();
-                    if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
-                        await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
-                    if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
-                    await DisplayHighests();
-                    await RecycleItems();
-                    await ExecuteFarmingPokestopsAndPokemons();
+                _playerProfile = await _client.GetProfile();
+                await DisplayPlayerLevelInTitle();
+                if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
+                    await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
+                if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                await DisplayHighests();
+                await RecycleItems();
+                await ExecuteFarmingPokestopsAndPokemons();
 
-                    /*
-            * Example calls below
-            *
-            var profile = await _client.GetProfile();
-            var settings = await _client.GetSettings();
-            var mapObjects = await _client.GetMapObjects();
-            var inventory = await _client.GetInventory();
-            var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
-            */
-               
+                /*
+        * Example calls below
+        *
+        var profile = await _client.GetProfile();
+        var settings = await _client.GetSettings();
+        var mapObjects = await _client.GetMapObjects();
+        var inventory = await _client.GetInventory();
+        var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
+        */
+
                 await Task.Delay(10000);
             }
         }
@@ -450,7 +451,7 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var item in items)
             {
-                var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
+                var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
                 Logger.Write($"{item.Count}x {item.Item_}", LogLevel.Recycling);
                 await Task.Delay(500);
             }
