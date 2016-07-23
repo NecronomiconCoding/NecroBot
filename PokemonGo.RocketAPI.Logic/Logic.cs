@@ -39,7 +39,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             CatchPokemonResponse caughtPokemonResponse;
             do
-            {
+            {//test
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
                 
 
