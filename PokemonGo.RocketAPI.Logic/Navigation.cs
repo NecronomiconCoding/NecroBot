@@ -20,10 +20,9 @@ namespace PokemonGo.RocketAPI.Logic
             _client = client;
         }
 
-        public async Task<PlayerUpdateResponse> HumanLikeWalking(GeoCoordinate targetLocation,
-            double walkingSpeedInKilometersPerHour, Func<Task> functionExecutedWhileWalking)
+        public async Task<PlayerUpdateResponse> HumanLikeWalking(GeoCoordinate targetLocation, Func<Task> functionExecutedWhileWalking = null)
         {
-            var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
+            var speedInMetersPerSecond = _client.Settings.WalkingSpeedInKilometerPerHour / 3.6;
 
             var sourceLocation = new GeoCoordinate(_client.CurrentLat, _client.CurrentLng);
             var distanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
@@ -68,7 +67,7 @@ namespace PokemonGo.RocketAPI.Logic
                             _client.Settings.DefaultAltitude);
                 if (functionExecutedWhileWalking != null) 
                     await functionExecutedWhileWalking();// look for pokemon
-                await Task.Delay(Math.Min((int) (distanceToTarget/speedInMetersPerSecond*1000), 3000));
+                await Task.Delay(Math.Min((int) (distanceToTarget/speedInMetersPerSecond*1000), 4000));
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
             return result;
