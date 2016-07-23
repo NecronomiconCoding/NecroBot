@@ -104,6 +104,7 @@
     <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
     <Compile Include="Helpers\RequestBuilder.cs" />
+    <Compile Include="PokemonInfo.cs" />
     <Compile Include="Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

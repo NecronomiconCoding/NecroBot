@@ -3,12 +3,11 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Exceptions;
 
 #endregion
 
-namespace PokemonGo.NecroBot.CLI
+namespace PokemonGo.RocketAPI.Console
 {
     internal class Program
     {
@@ -20,7 +19,7 @@ namespace PokemonGo.NecroBot.CLI
             {
                 try
                 {
-                    new NecroBot.Logic.Logic(new Settings()).Execute().Wait();
+                    new Logic.Logic(new Settings()).Execute().Wait();
                 }
                 catch (PtcOfflineException)
                 {
@@ -28,7 +27,7 @@ namespace PokemonGo.NecroBot.CLI
                         LogLevel.Error);
                     Logger.Write("Trying again in 20 seconds...");
                     Thread.Sleep(20000);
-                    new NecroBot.Logic.Logic(new Settings()).Execute().Wait();
+                    new Logic.Logic(new Settings()).Execute().Wait();
                 }
                 catch (AccountNotVerifiedException)
                 {
@@ -38,7 +37,7 @@ namespace PokemonGo.NecroBot.CLI
                 catch (Exception ex)
                 {
                     Logger.Write($"Unhandled exception: {ex}", LogLevel.Error);
-                    new NecroBot.Logic.Logic(new Settings()).Execute().Wait();
+                    new Logic.Logic(new Settings()).Execute().Wait();
                 }
             });
             System.Console.ReadLine();

@@ -3,13 +3,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
 
 #endregion
 
-namespace PokemonGo.NecroBot.CLI
+namespace PokemonGo.RocketAPI.Console
 {
     public class Settings : ISettings
     {

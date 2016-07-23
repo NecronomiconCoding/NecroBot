@@ -6,7 +6,7 @@ using PokemonGo.RocketAPI.GeneratedCode;
 
 #endregion
 
-namespace PokemonGo.NecroBot.Logic.Utils
+namespace PokemonGo.RocketAPI.Logic.Utils
 {
     public static class StringUtils
     {

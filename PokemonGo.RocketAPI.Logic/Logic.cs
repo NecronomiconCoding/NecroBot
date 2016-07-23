@@ -10,13 +10,12 @@ using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Helpers;
+using PokemonGo.RocketAPI.Logic.Utils;
 using System.Device.Location;
-using PokemonGo.NecroBot.Logic.Utils;
-using PokemonGo.RocketAPI;
 
 #endregion
 
-namespace PokemonGo.NecroBot.Logic
+namespace PokemonGo.RocketAPI.Logic
 {
     public class Logic
     {

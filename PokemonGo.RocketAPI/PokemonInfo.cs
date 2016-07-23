@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using PokemonGo.RocketAPI.GeneratedCode;
 
-namespace PokemonGo.NecroBot.Logic
+namespace PokemonGo.RocketAPI
 {
     public struct BaseStats
     {
