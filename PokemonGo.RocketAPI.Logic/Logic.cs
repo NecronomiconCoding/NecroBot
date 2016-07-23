@@ -441,10 +441,10 @@ namespace PokemonGo.RocketAPI.Logic
             }
         }
 
+        HashSet<string> hsGonaLocations = new HashSet<string>();
 
         private async Task ExeCuteMyFarm()
-        {
-            HashSet<string> hsGonaLocations = new HashSet<string>();
+        {        
             var vrList = fucnReturnLocs();
             Logger.Write("Location found count " + vrList.Count, LogLevel.Self, ConsoleColor.DarkGray);
             int irLoop = 1;
@@ -452,6 +452,11 @@ namespace PokemonGo.RocketAPI.Logic
             double dblMinDistLat = 0;
             double dblMinDistLng = 0;
             string srMinDistLoc = "na";
+
+            if(hsGonaLocations.Count>vrList.Count-10)
+            {
+                hsGonaLocations = new HashSet<string>();
+            }
 
             for (int i = 0; i < vrList.Count; i++)
             {
@@ -725,7 +730,7 @@ _navigation.HumanLikeWalking(new GeoCoordinate(Client.dblGlobalLat, Client.dblGl
             var berries = inventoryBalls.Where(p => (ItemId)p.Item_ == ItemId.ItemRazzBerry);
             var berry = berries.FirstOrDefault();
 
-            if (berry == null)
+            if (berry == null || berry.Count <= 0)
                 return;
 
             var useRaspberry = await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
