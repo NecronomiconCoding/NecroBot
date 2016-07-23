@@ -61,18 +61,6 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string GoogleRefreshToken {
-            get {
-                return ((string)(this["GoogleRefreshToken"]));
-            }
-            set {
-                this["GoogleRefreshToken"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("52.379189")]
         public double DefaultLatitude {
             get {

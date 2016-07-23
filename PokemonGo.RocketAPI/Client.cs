@@ -123,10 +123,16 @@ namespace PokemonGo.RocketAPI
         {
             _authType = AuthType.Google;
 
-            GoogleLogin.TokenResponseModel tokenResponse;
-            if (Settings.GoogleRefreshToken != string.Empty)
+            string googleRefreshToken = string.Empty;
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\GoogleAuth.ini"))
             {
-                tokenResponse = await GoogleLogin.GetAccessToken(Settings.GoogleRefreshToken);
+                googleRefreshToken = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\GoogleAuth.ini");
+            }
+
+            GoogleLogin.TokenResponseModel tokenResponse;
+            if (googleRefreshToken != string.Empty)
+            {
+                tokenResponse = await GoogleLogin.GetAccessToken(googleRefreshToken);
                 AccessToken = tokenResponse?.id_token;
             }
 
@@ -134,7 +140,8 @@ namespace PokemonGo.RocketAPI
             {
                 var deviceCode = await GoogleLogin.GetDeviceCode();
                 tokenResponse = await GoogleLogin.GetAccessToken(deviceCode);
-                Settings.GoogleRefreshToken = tokenResponse?.refresh_token;
+                googleRefreshToken = tokenResponse?.refresh_token;
+                File.WriteAllText(Directory.GetCurrentDirectory() + "\\Configs\\GoogleAuth.ini", googleRefreshToken);
                 Logger.Write("Refreshtoken " + tokenResponse?.refresh_token + " saved");
                 AccessToken = tokenResponse?.id_token;
             }
