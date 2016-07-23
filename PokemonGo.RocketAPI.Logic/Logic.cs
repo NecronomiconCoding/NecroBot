@@ -363,9 +363,9 @@ namespace PokemonGo.RocketAPI.Logic
                 {
                     _stats.AddExperience(fortSearch.ExperienceAwarded);
                     _stats.UpdateConsoleTitle(_inventory);
-
+                    //todo: fix egg crash
                     Logger.Write(
-                        $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
+                        $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
                         LogLevel.Pokestop);
                 }
 
