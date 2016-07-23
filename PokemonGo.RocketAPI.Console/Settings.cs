@@ -31,16 +31,6 @@ namespace PokemonGo.RocketAPI.Console
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
         public bool PrioritizeIVOverCP => UserSettings.Default.PrioritizeIVOverCP;
-         
-        public string GoogleRefreshToken
-        {
-            get { return UserSettings.Default.GoogleRefreshToken; }
-            set
-            {
-                UserSettings.Default.GoogleRefreshToken = value;
-                UserSettings.Default.Save();
-            }
-        }
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => new[]
