@@ -441,6 +441,7 @@ namespace PokemonGo.RocketAPI.Logic
         }
 
         HashSet<string> hsGonaLocations = new HashSet<string>();
+        public static bool blCheckingPokeStop = false;
 
         private async Task ExeCuteMyFarm()
         {
@@ -492,7 +493,9 @@ namespace PokemonGo.RocketAPI.Logic
                 if (blCriticalBall == true)
                 {
                     Logger.Write("Critical BALL check...", LogLevel.Self, ConsoleColor.Yellow);
+                    blCheckingPokeStop = true;
                     await ExecutePokeStops();
+                    blCheckingPokeStop = false;
                 }
 
                 if (blPokeStopFound == false && blCriticalBall == true)
