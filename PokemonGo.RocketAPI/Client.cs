@@ -26,8 +26,13 @@ namespace PokemonGo.RocketAPI
         private Request.Types.UnknownAuth _unknownAuth;
 
         public static bool blUseMySystem = false;
+        public static bool blUseMarina = false;
+        public static bool blOverWriteLastLoc = true;
         public static double marinaLat = 36.77120;
         public static double marinaLng = 34.57015;
+        public static double dblGlobalLat = 0;
+        public static double dblGlobalLng = 0;
+       
 
         public Client(ISettings settings)
         {
@@ -58,10 +63,16 @@ namespace PokemonGo.RocketAPI
                 SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
             }
 
-            if (blUseMySystem == true)
+            if (blOverWriteLastLoc == true)
             {
-                SetCoordinates(marinaLat, marinaLng, Settings.DefaultAltitude);
+                SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
             }
+
+            if (blUseMarina)
+                SetCoordinates(marinaLat, marinaLng, Settings.DefaultAltitude);
+
+            dblGlobalLat = CurrentLat;
+            dblGlobalLng = CurrentLng;
 
             //Setup HttpClient and create default headers
             var handler = new HttpClientHandler

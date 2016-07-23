@@ -384,12 +384,22 @@ namespace PokemonGo.RocketAPI.Logic
                                 new Navigation.Location(_client.CurrentLat, _client.CurrentLng),
                                 new Navigation.Location(i.Latitude, i.Longitude)));
 
+            bool blFound = false;
             foreach (var pokeStop in pokeStops)
             {
                 var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
                     pokeStop.Latitude, pokeStop.Longitude);
 
                 Logger.Write($"(POKESTOP): lure info {pokeStop?.LureInfo} lat {pokeStop.Latitude} lng {pokeStop.Longitude} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkYellow);
+                blFound = true;
+            }
+
+            if (blFound == false)
+            {
+                var update =
+                await
+                    _navigation.HumanLikeWalking(new Navigation.Location(Settings., pokeStop.Longitude),
+                        _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
             }
 
             foreach (var pokeStop in pokeStops)
@@ -588,25 +598,26 @@ await
         {
             while (true)
             {
-                    _playerProfile = await _client.GetProfile();
-                    await DisplayPlayerLevelInTitle();
-                    if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
-                        await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
-                    if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
-                    await DisplayHighests();
-                    await RecycleItems();
-                    await ExecuteFarmingPokestopsAndPokemons();
+                _playerProfile = await _client.GetProfile();
+                await DisplayPlayerLevelInTitle();
+                if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
+                    await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
+                if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                await DisplayHighests();
+                await RecycleItems();
 
-                    /*
-            * Example calls below
-            *
-            var profile = await _client.GetProfile();
-            var settings = await _client.GetSettings();
-            var mapObjects = await _client.GetMapObjects();
-            var inventory = await _client.GetInventory();
-            var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
-            */
-               
+                await ExecuteFarmingPokestopsAndPokemons();
+
+                /*
+        * Example calls below
+        *
+        var profile = await _client.GetProfile();
+        var settings = await _client.GetSettings();
+        var mapObjects = await _client.GetMapObjects();
+        var inventory = await _client.GetInventory();
+        var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
+        */
+
                 await Task.Delay(10000);
             }
         }
