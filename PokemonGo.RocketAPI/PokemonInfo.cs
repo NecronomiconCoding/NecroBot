@@ -234,6 +234,7 @@ namespace PokemonGo.RocketAPI
 
             switch ((int)((poke.CpMultiplier + poke.AdditionalCpMultiplier) * 1000.0))
             {
+                case 93: // 0.094 * 1000 = 93.99999678134
                 case 94: return 1;
                 case 135: return 1.5;
                 case 166: return 2;
