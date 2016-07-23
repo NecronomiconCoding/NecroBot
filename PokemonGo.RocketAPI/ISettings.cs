@@ -24,8 +24,6 @@ namespace PokemonGo.RocketAPI
         int DelayBetweenPokemonCatch { get; }
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
-        bool EvolveAllPokemonAboveIV { get; }
-        float EvolveAboveIVValue { get; }
         bool PrioritizeIVOverCP {get; }
         int MaxTravelDistanceInMeters { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }

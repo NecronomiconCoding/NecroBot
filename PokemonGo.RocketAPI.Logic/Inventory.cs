@@ -216,19 +216,8 @@ namespace PokemonGo.RocketAPI.Logic
                     pokemonToEvolve.Count(
                         p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId) *
                     settings.CandyToEvolve;
-
-                if (_client.Settings.EvolveAllPokemonAboveIV)
-                    if (PokemonInfo.CalculatePokemonPerfection(pokemon) >= _client.Settings.EvolveAboveIVValue && familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
-                    {
-                        pokemonToEvolve.Add(pokemon);
-                    } else { continue; }
-                else
-                {
-                    if (familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
-                    {
-                        pokemonToEvolve.Add(pokemon);
-                    } else { continue; }
-                }
+                if (familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
+                    pokemonToEvolve.Add(pokemon);
             }
 
             return pokemonToEvolve;

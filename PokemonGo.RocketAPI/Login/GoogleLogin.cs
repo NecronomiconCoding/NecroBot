@@ -34,8 +34,6 @@ namespace PokemonGo.RocketAPI.Login
                 tokenResponse = await PollSubmittedToken(deviceCode.device_code);
             } while (tokenResponse.access_token == null || tokenResponse.refresh_token == null);
 
-            Logger.Write($"Save the refresh token in your settings: {tokenResponse.refresh_token}", LogLevel.None);
-
             return tokenResponse;
         }
 
@@ -53,14 +51,13 @@ namespace PokemonGo.RocketAPI.Login
         public static async Task<DeviceCodeModel> GetDeviceCode()
         {
             var deviceCode = await HttpClientHelper.PostFormEncodedAsync<DeviceCodeModel>(OauthEndpoint,
-                new KeyValuePair<string, string>("client_id", ClientId),
-                new KeyValuePair<string, string>("scope", "openid email https://www.googleapis.com/auth/userinfo.email"));
+            new KeyValuePair<string, string>("client_id", ClientId),
+            new KeyValuePair<string, string>("scope", "openid email https://www.googleapis.com/auth/userinfo.email"));
 
-            Logger.Write($"Please visit {deviceCode.verification_url} and enter {deviceCode.user_code}", LogLevel.None);
-
-            await Task.Delay(2000);
             try
             {
+                Logger.Write("Google Device Code copied to clipboard");
+                Thread.Sleep(2000);
                 Process.Start(@"http://www.google.com/device");
                 var thread = new Thread(() => Clipboard.SetText(deviceCode.user_code)); //Copy device code
                 thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
