@@ -354,18 +354,11 @@ namespace PokemonGo.RocketAPI.Logic
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                     await CatchEncounter(encounter, pokemon);
                 else
-<<<<<<< HEAD
                     Logger.Write($"Encounter problem: {encounter?.Status}");
 
                 Logger.Write($"Encounter problem: new wild pokemon good work");
             }
-=======
-                    Logger.Write($"Encounter problem: {encounter.Status}");
-            }
 
-            await Task.Delay(_clientSettings.DelayBetweenMove);
-        }
->>>>>>> refs/remotes/NecronomiconCoding/master
 
             //  await Task.Delay(_clientSettings.DelayBetweenMove);
 
@@ -407,8 +400,9 @@ namespace PokemonGo.RocketAPI.Logic
             {
                 var update =
                 await
-                    _navigation.HumanLikeWalking(new Navigation.Location(Settings., pokeStop.Longitude),
+                    _navigation.HumanLikeWalking(new Navigation.Location(Client.dblGlobalLat, Client.dblGlobalLng),
                         _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+                return;
             }
 
             foreach (var pokeStop in pokeStops)
@@ -614,20 +608,6 @@ await
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
                 await DisplayHighests();
                 await RecycleItems();
-<<<<<<< HEAD
-
-                await ExecuteFarmingPokestopsAndPokemons();
-
-                /*
-        * Example calls below
-        *
-        var profile = await _client.GetProfile();
-        var settings = await _client.GetSettings();
-        var mapObjects = await _client.GetMapObjects();
-        var inventory = await _client.GetInventory();
-        var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
-        */
-=======
                 await ExecuteFarmingPokestopsAndPokemons();
 
                 /*
@@ -639,7 +619,6 @@ await
             var inventory = await _client.GetInventory();
             var pokemons = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon).Where(p => p != null && p?.PokemonId > 0);
             */
->>>>>>> refs/remotes/NecronomiconCoding/master
 
                 await Task.Delay(10000);
             }
@@ -771,10 +750,6 @@ await
                     LogLevel.Info, ConsoleColor.Yellow);
             }
         }
-<<<<<<< HEAD
 
-
-=======
->>>>>>> refs/remotes/NecronomiconCoding/master
     }
 }
