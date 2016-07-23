@@ -78,14 +78,6 @@
       <Name>PokemonGo.RocketAPI</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Configs\ConfigPokemonsToEvolve.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configs\ConfigPokemonsToKeep.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>IF NOT EXIST "$(OutDir)Configs\ConfigPokemonsNotToCatch.txt" (
