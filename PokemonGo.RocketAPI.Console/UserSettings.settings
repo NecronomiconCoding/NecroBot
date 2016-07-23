@@ -44,6 +44,12 @@
     <Setting Name="KeepMinDuplicatePokemon" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
+    <Setting Name="EvolveAllPokemonAboveIV" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EvolveAboveIVValue" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">90</Value>
+    </Setting>
     <Setting Name="PrioritizeIVOverCP" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
