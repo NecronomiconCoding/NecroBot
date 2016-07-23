@@ -1,4 +1,4 @@
-﻿#region
+#region
 
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace PokemonGo.RocketAPI.Logic
         }
 
         public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer(
-            bool keepPokemonsThatCanEvolve = false, IEnumerable<PokemonId> filter = null)
+            bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCP = false, IEnumerable<PokemonId> filter = null)
         {
             var myPokemon = await GetPokemons();
 
@@ -54,18 +54,41 @@ namespace PokemonGo.RocketAPI.Logic
                         continue;
 
                     var amountToSkip = familyCandy.Candy / settings.CandyToEvolve;
-
-                    results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
-                        .OrderByDescending(x => x.Cp)
-                        .ThenBy(n => n.StaminaMax)
-                        .Skip(amountToSkip)
-                        .ToList());
+                    if (prioritizeIVoverCP)
+                    {
+                        results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
+                            .OrderByDescending(x => x.CalculateIV())
+                            .ThenBy(n => n.StaminaMax)
+                            .Skip(amountToSkip)
+                            .ToList());
+                    }
+                    else
+                    {
+                        results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
+                            .OrderByDescending(x => x.Cp)
+                            .ThenBy(n => n.StaminaMax)
+                            .Skip(amountToSkip)
+                            .ToList());
+                    }
                 }
 
                 return results;
             }
-
-            return pokemonList
+            if (prioritizeIVoverCP)
+            {
+                return pokemonList
+                .GroupBy(p => p.PokemonId)
+                .Where(x => x.Count() > 1)
+                .SelectMany(
+                    p =>
+                        p.OrderByDescending(x => x.CalculateIV())
+                            .ThenBy(n => n.StaminaMax)
+                            .Skip(_client.Settings.KeepMinDuplicatePokemon)
+                            .ToList());
+            }
+            else
+            {
+                return pokemonList
                 .GroupBy(p => p.PokemonId)
                 .Where(x => x.Count() > 1)
                 .SelectMany(
@@ -74,6 +97,7 @@ namespace PokemonGo.RocketAPI.Logic
                             .ThenBy(n => n.StaminaMax)
                             .Skip(_client.Settings.KeepMinDuplicatePokemon)
                             .ToList());
+            }
         }
 
         public async Task<IEnumerable<PokemonData>> GetHighestsCP(int limit)

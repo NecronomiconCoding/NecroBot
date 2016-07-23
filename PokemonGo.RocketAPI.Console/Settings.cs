@@ -32,7 +32,8 @@ namespace PokemonGo.RocketAPI.Console
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
         public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
         public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
-
+        public bool PrioritizeIVOverCP => UserSettings.Default.PrioritizeIVOverCP;
+         
         public string GoogleRefreshToken
         {
             get { return UserSettings.Default.GoogleRefreshToken; }

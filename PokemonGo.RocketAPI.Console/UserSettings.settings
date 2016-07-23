@@ -53,5 +53,8 @@
     <Setting Name="EvolveAboveIVValue" Type="System.Single" Scope="User">
       <Value Profile="(Default)">90</Value>
     </Setting>
+    <Setting Name="PrioritizeIVOverCP" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

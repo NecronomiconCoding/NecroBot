@@ -206,6 +206,7 @@ namespace PokemonGo.RocketAPI.Console {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
+
         public bool EvolveAllPokemonAboveIV {
             get {
                 return ((bool)(this["EvolveAllPokemonAboveIV"]));
@@ -224,6 +225,13 @@ namespace PokemonGo.RocketAPI.Console {
             }
             set {
                 this["EvolveAboveIVValue"] = value;
+
+        public bool PrioritizeIVOverCP {
+            get {
+                return ((bool)(this["PrioritizeIVOverCP"]));
+            }
+            set {
+                this["PrioritizeIVOverCP"] = value;
             }
         }
     }
