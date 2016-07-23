@@ -40,26 +40,34 @@ Feel free to buy us all a beer, by using PayPal:
 
 <h6><em>[ all PayPal donations are distributed amongst our most active collaborators ]</em></h6><br/>
 
-<a name="btc">Donate Bitcoins to FeroxRev (the API library developer): *1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e*</a><br/>
+<br/>
+
+<a name="btc">Or donate bitcoins:</a><br/>
+
+<strong><img src="http://i.imgur.com/NNcGs1n.png" alt="BTC_logo"/> 1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e</strong>
+ 
+<br/>
+
+<h6><em>[ all Bitcoin donations are sent to Ferox only ]</em></h6>
 
 <hr/>
 
 <h2><a name="features">Features</a></h2>
 
- - [PTC Login / Google](#)
- - [Get Map Objects and Inventory](#)
- - [Search for gyms/pokestops/spawns](#)
- - [Farm pokestops](#)
- - [Farm all Pokemon in neighbourhood](#)
- - [Throw Berries/use best pokeball](#)
- - [Transfers duplicate pokemons](#)
- - [Evolve all pokemons](#)
- - [Throws away unneeded items](#)
- - [Humanlike Walking](#)
+ - [PTC Login / Google]
+ - [Get Map Objects and Inventory]
+ - [Search for gyms/pokestops/spawns]
+ - [Farm pokestops]
+ - [Farm all Pokemon in neighbourhood]
+ - [Throw Berries/use best pokeball]
+ - [Transfers duplicate pokemons]
+ - [Evolve all pokemons]
+ - [Throws away unneeded items]
+ - [Humanlike Walking]
 
 <br/>
 <h2><a name="screenshots">Screenshots</a></h2><br/>
-- coming soon -<br/>
+coming soon<br/>
 <hr/>
 
 <h2><a name="getting-started">Getting Started</a></h2>
