@@ -822,7 +822,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
     [pbr::OriginalName("MACHAMP")] Machamp = 68,
     [pbr::OriginalName("BELLSPROUT")] Bellsprout = 69,
     [pbr::OriginalName("WEEPINBELL")] Weepinbell = 70,
-    [pbr::OriginalName("VICTREEBELL")] Victreebell = 71,
+    [pbr::OriginalName("VICTREEBEL")] Victreebel = 71,
     [pbr::OriginalName("TENTACOOL")] Tentacool = 72,
     [pbr::OriginalName("TENTACRUEL")] Tentacruel = 73,
     [pbr::OriginalName("GEODUDE")] Geodude = 74,
@@ -907,7 +907,7 @@ namespace PokemonGo.RocketAPI.GeneratedCode {
 
   public enum FortSponsor {
     [pbr::OriginalName("UNSET_SPONSOR")] UnsetSponsor = 0,
-    [pbr::OriginalName("MCDONALDS")] Mcdonalds = 1,
+    [pbr::OriginalName("MCDONALDS")] McDonalds = 1,
     [pbr::OriginalName("POKEMON_STORE")] PokemonStore = 2,
   }
 
