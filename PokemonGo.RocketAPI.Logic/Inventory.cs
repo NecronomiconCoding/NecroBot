@@ -29,7 +29,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             var myPokemon = await GetPokemons();
 
-            var pokemonList = myPokemon.Where(p => p.DeployedFortId == 0 && p.Favorite == 0).ToList(); //Don't evolve pokemon in gyms
+            var pokemonList = myPokemon.Where(p => p.DeployedFortId == 0 && p.Favorite == 0 && p.Cp < _client.Settings.KeepMinCP).ToList(); //Don't evolve pokemon in gyms
             if (filter != null)
             {
                 pokemonList = pokemonList.Where(p => !filter.Contains(p.PokemonId)).ToList();
@@ -216,19 +216,8 @@ namespace PokemonGo.RocketAPI.Logic
                     pokemonToEvolve.Count(
                         p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId) *
                     settings.CandyToEvolve;
-
-                if (_client.Settings.EvolveAllPokemonAboveIV)
-                    if (PokemonInfo.CalculatePokemonPerfection(pokemon) >= _client.Settings.EvolveAboveIVValue && familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
-                    {
-                        pokemonToEvolve.Add(pokemon);
-                    } else { continue; }
-                else
-                {
-                    if (familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
-                    {
-                        pokemonToEvolve.Add(pokemon);
-                    } else { continue; }
-                }
+                if (familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
+                    pokemonToEvolve.Add(pokemon);
             }
 
             return pokemonToEvolve;
