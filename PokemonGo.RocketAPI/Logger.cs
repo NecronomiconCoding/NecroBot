@@ -55,6 +55,7 @@ namespace PokemonGo.RocketAPI
 
     public enum LogLevel
     {
+        Self = -1,
         None = 0,
         Error = 1,
         Warning = 2,
@@ -67,5 +68,6 @@ namespace PokemonGo.RocketAPI
         Evolve = 9,
         Info = 10,
         Debug = 11
+
     }
 }
