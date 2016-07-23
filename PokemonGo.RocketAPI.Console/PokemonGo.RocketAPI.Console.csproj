@@ -80,16 +80,16 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF NOT EXIST "$(OutDir)Configs\ConfigPokemonsNotToCatch.txt" (
-xcopy "$(ProjectDir)Configs\ConfigPokemonsNotToCatch.txt" "$(OutDir)Configs\" /Y
+    <PostBuildEvent>IF NOT EXIST "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsNotToCatch.txt" (
+COPY "$(ProjectDir)Configs\ConfigPokemonsNotToCatch.txt" "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsNotToCatch.txt" /Y
 )
 
-IF NOT EXIST "$(OutDir)Configs\ConfigPokemonsToEvolve.txt" (
-xcopy "$(ProjectDir)Configs\ConfigPokemonsToEvolve.txt" "$(OutDir)Configs\" /Y
+IF NOT EXIST "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsToEvolve.txt" (
+COPY "$(ProjectDir)Configs\ConfigPokemonsToEvolve.txt" "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsToEvolve.txt" /Y
 )
 
-IF NOT EXIST "$(OutDir)Configs\ConfigPokemonsToKeep.txt" (
-xcopy "$(ProjectDir)Configs\ConfigPokemonsToKeep.txt" "$(OutDir)Configs\" /Y
+IF NOT EXIST "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsToKeep.txt" (
+COPY "$(ProjectDir)Configs\ConfigPokemonsToKeep.txt" "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsToKeep.txt" /Y
 )</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
