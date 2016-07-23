@@ -40,15 +40,7 @@ Feel free to buy us all a beer, by using PayPal:
 
 <h6><em>[ all PayPal donations are distributed amongst our most active collaborators ]</em></h6><br/>
 
-<br/>
-
-<a name="btc">Or donate bitcoins:</a><br/>
-
- ![alt text][1.2] 1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e
- 
-<br/>
-
-<h6><em>[ all Bitcoin donations are sent to Ferox only ]</em></h6>
+<a name="btc">Donate Bitcoins to FeroxRev (the API library developer): *1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e*</a><br/>
 
 <hr/>
 
