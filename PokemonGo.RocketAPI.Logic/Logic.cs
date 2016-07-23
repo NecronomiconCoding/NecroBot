@@ -28,7 +28,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             _clientSettings = clientSettings;
             _client = new Client(_clientSettings);
-            _inventory = new Inventory(_clientSettings, _client);
+            _inventory = new Inventory(_client);
             _navigation = new Navigation(_client);
         }
 
