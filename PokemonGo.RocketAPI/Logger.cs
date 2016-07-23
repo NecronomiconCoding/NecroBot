@@ -39,7 +39,7 @@ namespace PokemonGo.RocketAPI
             if (_logger == null)
                 return;
             _logger.Write(message, level, color);
-            Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
+            Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss.fff")}] ", message));
         }
 
         private static void Log(string message)
