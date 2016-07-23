@@ -248,10 +248,9 @@ namespace PokemonGo.RocketAPI.Logic
                     Logger.Write("ArgumentNullException - Restarting", LogLevel.Error);
                     await Execute();
                 }
-                catch (NullReferenceException e)
+                catch (NullReferenceException)
                 {
                     Logger.Write("NullReferenceException - Restarting", LogLevel.Error);
-                    Logger.Write($"NullReferenceException - Restarting, {e.StackTrace}", LogLevel.Error);
                     await Execute();
                 }
                 catch (InvalidResponseException e)
@@ -338,9 +337,7 @@ namespace PokemonGo.RocketAPI.Logic
                 var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
                     pokeStop.Latitude, pokeStop.Longitude);
 
-                var update =
-                    await
-                        _navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude), ExecuteCatchAllNearbyPokemons);
+                var update = await _navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude), ExecuteCatchAllNearbyPokemons);
 
                 var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                 var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
@@ -348,8 +345,7 @@ namespace PokemonGo.RocketAPI.Logic
                 if (fortSearch.ExperienceAwarded > 0)
                 {
                     Logger.Write(
-                        $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
-                        LogLevel.Pokestop);
+                        $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Eggs: {fortSearch.PokemonDataEgg} Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}", LogLevel.Pokestop);
                     await DisplayPlayerLevelInTitle(true);
                 }
 
