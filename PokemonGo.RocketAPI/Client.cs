@@ -42,16 +42,28 @@ namespace PokemonGo.RocketAPI
             {
                 var latlngFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Coords.txt");
                 var latlng = latlngFromFile.Split(':');
-                if (latlng[0].Length != 0 && latlng[1].Length != 0 && latlng[0] != "NaN" && latlng[1] != "NaN")
+                if (latlng[0].Length != 0 && latlng[1].Length != 0)
                 {
                     try
                     {
-                        SetCoordinates(Convert.ToDouble(latlng[0]), Convert.ToDouble(latlng[1]),
+                        double temp_lat = Convert.ToDouble(latlng[0]);
+                        double temp_long = Convert.ToDouble(latlng[1]);
+
+                        if(temp_lat >= -90 && temp_lat <= 90 && temp_long >= -180 && temp_long <= 180)
+                        {
+                            SetCoordinates(Convert.ToDouble(latlng[0]), Convert.ToDouble(latlng[1]),
                             Settings.DefaultAltitude);
+                        }
+                        else
+                        {
+                            Logger.Write("Coordinates in \"Coords.txt\" file are invalid, using the default coordinates ",
+                            LogLevel.Warning);
+                            SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
+                        }
                     }
                     catch (FormatException)
                     {
-                        Logger.Write("Coordinates in \"Coords.txt\" file is invalid, using the default coordinates ",
+                        Logger.Write("Coordinates in \"Coords.txt\" file are invalid, using the default coordinates ",
                             LogLevel.Warning);
                         SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
                     }
@@ -362,6 +374,8 @@ namespace PokemonGo.RocketAPI
 
         private void SetCoordinates(double lat, double lng, double altitude)
         {
+            if (double.IsNaN(lat) || double.IsNaN(lng)) return;
+
             CurrentLat = lat;
             CurrentLng = lng;
             CurrentAltitude = altitude;
