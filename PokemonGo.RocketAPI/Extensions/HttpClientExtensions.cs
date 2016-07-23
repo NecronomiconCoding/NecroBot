@@ -1,4 +1,4 @@
-﻿#region Usings
+﻿#region
 
 using System.Net.Http;
 using System.Threading.Tasks;
