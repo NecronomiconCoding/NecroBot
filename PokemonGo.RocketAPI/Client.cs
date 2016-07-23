@@ -33,27 +33,22 @@ namespace PokemonGo.RocketAPI
             {
                 var latlngFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Coords.txt");
                 var latlng = latlngFromFile.Split(':');
-                if (latlng[0].Length != 0 && latlng[1].Length != 0 && latlng[0] != "NaN" && latlng[1] != "NaN")
+                double longitude, latitude;
+
+                if ((latlng[0].Length > 0 && double.TryParse(latlng[0], out latitude) && latitude >= -90.0 && latitude <= 90.0) && (latlng[1].Length > 0 && double.TryParse(latlng[1], out longitude) && longitude >= -180.0 && longitude <= 180.0))
                 {
-                    try
-                    {
-                        SetCoordinates(Convert.ToDouble(latlng[0]), Convert.ToDouble(latlng[1]),
-                            Settings.DefaultAltitude);
-                    }
-                    catch (FormatException)
-                    {
-                        Logger.Write("Coordinates in \"Coords.txt\" file is invalid, using the default coordinates ",
-                            LogLevel.Warning);
-                        SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
-                    }
+                    SetCoordinates(latitude, longitude, Settings.DefaultAltitude);
                 }
                 else
                 {
-                    SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
+                    Logger.Write($"Coordinates in \"Coords.txt\" file is invalid VALID COORDINATES: (-90 to 90, -180 to 180) exiting....", LogLevel.Error);
+                    System.Threading.Thread.Sleep(5000);
+                    Environment.Exit(1);
                 }
             }
             else
             {
+                Logger.Write("Missing \"Coords.txt\" using default settings for coordinates.", LogLevel.Info);
                 SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
             }
 
