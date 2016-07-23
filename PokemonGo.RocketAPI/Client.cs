@@ -33,22 +33,39 @@ namespace PokemonGo.RocketAPI
             {
                 var latlngFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Coords.txt");
                 var latlng = latlngFromFile.Split(':');
-                double latitude, longitude;
-
-                if ((latlng[0].Length > 0 && double.TryParse(latlng[0], out latitude) && latitude >= -90.0 && latitude <= 90.0) && (latlng[1].Length > 0 && double.TryParse(latlng[1], out longitude) && longitude >= -180.0 && longitude <= 180.0))
+                if (latlng[0].Length != 0 && latlng[1].Length != 0)
                 {
-                    SetCoordinates(latitude, longitude, Settings.DefaultAltitude);
+                    try
+                    {
+                        double temp_lat = Convert.ToDouble(latlng[0]);
+                        double temp_long = Convert.ToDouble(latlng[1]);
+
+                        if(temp_lat >= -90 && temp_lat <= 90 && temp_long >= -180 && temp_long <= 180)
+                        {
+                            SetCoordinates(Convert.ToDouble(latlng[0]), Convert.ToDouble(latlng[1]),
+                            Settings.DefaultAltitude);
+                        }
+                        else
+                        {
+                            Logger.Write("Coordinates in \"Coords.txt\" file are invalid, using the default coordinates ",
+                            LogLevel.Warning);
+                            SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        Logger.Write("Coordinates in \"Coords.txt\" file are invalid, using the default coordinates ",
+                            LogLevel.Warning);
+                        SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
+                    }
                 }
                 else
                 {
-                    Logger.Write($"Coordinates in \"Coords.txt\" file is invalid VALID COORDINATES: (-90 to 90, -180 to 180) exiting....", LogLevel.Error);
-                    System.Threading.Thread.Sleep(5000);
-                    Environment.Exit(1);
+                    SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
                 }
             }
             else
             {
-                Logger.Write("Missing \"Coords.txt\" using default settings for coordinates.", LogLevel.Info);
                 SetCoordinates(Settings.DefaultLatitude, Settings.DefaultLongitude, Settings.DefaultAltitude);
             }
 
@@ -330,6 +347,8 @@ namespace PokemonGo.RocketAPI
 
         private void SetCoordinates(double lat, double lng, double altitude)
         {
+            if (double.IsNaN(lat) || double.IsNaN(lng)) return;
+
             CurrentLat = lat;
             CurrentLng = lng;
             CurrentAltitude = altitude;

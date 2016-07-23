@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
-using System.Text.RegularExpressions;
 
 #endregion
 
@@ -28,7 +27,7 @@ namespace PokemonGo.RocketAPI.Console
         public double WalkingSpeedInKilometerPerHour => UserSettings.Default.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => UserSettings.Default.EvolveAllPokemonWithEnoughCandy;
         public bool TransferDuplicatePokemon => UserSettings.Default.TransferDuplicatePokemon;
-        public int DelayBetweenMove => UserSettings.Default.DelayBetweenMove;
+        public int DelayBetweenPokemonCatch => UserSettings.Default.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
 
@@ -82,8 +81,7 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Type of pokemons to evolve
-                var defaultText = new string[] {"Zubat","Pidgey","Ratata" };
-                _pokemonsToEvolve = _pokemonsToEvolve ?? LoadPokemonList("Configs\\ConfigPokemonsToEvolve.txt", defaultText);
+                _pokemonsToEvolve = _pokemonsToEvolve ?? LoadPokemonList("Configs\\ConfigPokemonsToEvolve.txt");
                 return _pokemonsToEvolve;
             }
         }
@@ -93,8 +91,7 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Type of pokemons not to transfer
-                var defaultText = new string[] {"Dragonite", "Charizard", "Zapdos", "Snorlax", "Alakhazam", "Mew", "Mewtwo" };
-                _pokemonsNotToTransfer = _pokemonsNotToTransfer ?? LoadPokemonList("Configs\\ConfigPokemonsToKeep.txt",defaultText);
+                _pokemonsNotToTransfer = _pokemonsNotToTransfer ?? LoadPokemonList("Configs\\ConfigPokemonsToKeep.txt");
                 return _pokemonsNotToTransfer;
             }
         }
@@ -105,44 +102,25 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Type of pokemons not to catch
-                var defaultText = new string[] {"Zubat","Pidgey","Ratata" };
-                _pokemonsNotToCatch = _pokemonsNotToCatch ?? LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.txt", defaultText);
+                _pokemonsNotToCatch = _pokemonsNotToCatch ?? LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.txt");
                 return _pokemonsNotToCatch;
             }
         }
 
-        private static ICollection<PokemonId> LoadPokemonList(string filename,string[] defaultContent)
+        private static ICollection<PokemonId> LoadPokemonList(string filename)
         {
             ICollection<PokemonId> result = new List<PokemonId>();
-            Func<string, ICollection<PokemonId>> addPokemonToResult = delegate (string pokemonName) {
-                PokemonId pokemon;
-                if(Enum.TryParse<PokemonId>(pokemonName, out pokemon))
-                {
-                    result.Add((PokemonId)pokemon);
-                }
-                return result;
-            };
 
             if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
             {
                 Logger.Write($"Loading File: {filename}");
+                TextReader tr = File.OpenText(filename);
 
-                var content = string.Empty;
-                using (StreamReader reader = new StreamReader(filename))
-                {
-                    content = reader.ReadToEnd();
-                    reader.Close();
-                }
-
-                content = Regex.Replace(content, @"\\/\*(.|\n)*?\*\/", "");
-
-                
-                StringReader tr = new StringReader(content);
-            
                 var pokemonName = tr.ReadLine();
                 while (pokemonName != null)
                 {
-                    addPokemonToResult(pokemonName);
+                    var pokemon = Enum.Parse(typeof(PokemonId), pokemonName, true);
+                    if (pokemon != null) result.Add((PokemonId) pokemon);
                     pokemonName = tr.ReadLine();
                 }
             }
@@ -151,11 +129,11 @@ namespace PokemonGo.RocketAPI.Console
                 Logger.Write($"File: {filename} not found, creating new...", LogLevel.Error);
                 using (var w = File.AppendText(Directory.GetCurrentDirectory() + "\\" + filename))
                 {
-                    Array.ForEach(defaultContent, x => w.WriteLine(x));
-                    Array.ForEach(defaultContent, x => addPokemonToResult(x));
-                    w.Close();
+                    w.WriteLine(PokemonId.Mewtwo.ToString());
                 }
             }
+
+
             return result;
         }
     }

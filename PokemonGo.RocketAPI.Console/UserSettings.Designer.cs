@@ -170,12 +170,12 @@ namespace PokemonGo.RocketAPI.Console {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5000")]
-        public int DelayBetweenMove {
+        public int DelayBetweenPokemonCatch {
             get {
-                return ((int)(this["DelayBetweenMove"]));
+                return ((int)(this["DelayBetweenPokemonCatch"]));
             }
             set {
-                this["DelayBetweenMove"] = value;
+                this["DelayBetweenPokemonCatch"] = value;
             }
         }
         
