@@ -57,7 +57,7 @@ namespace PokemonGo.RocketAPI.Console
             new KeyValuePair<ItemId, int>(ItemId.ItemXAttack, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemXDefense, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemXMiracle, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 200),
+            new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 40),
             new KeyValuePair<ItemId, int>(ItemId.ItemBlukBerry, 10),
             new KeyValuePair<ItemId, int>(ItemId.ItemNanabBerry, 10),
             new KeyValuePair<ItemId, int>(ItemId.ItemWeparBerry, 30),
