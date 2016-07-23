@@ -31,7 +31,8 @@ namespace PokemonGo.RocketAPI.Console
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
         public bool PrioritizeIVOverCP => UserSettings.Default.PrioritizeIVOverCP;
-         
+        public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
+
         public string GoogleRefreshToken
         {
             get { return UserSettings.Default.GoogleRefreshToken; }
@@ -101,7 +102,7 @@ namespace PokemonGo.RocketAPI.Console
         public ICollection<PokemonId> PokemonsNotToCatch
         {
             get
-            {
+        {
                 //Type of pokemons not to catch
                 _pokemonsNotToCatch = _pokemonsNotToCatch ?? LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.txt");
                 return _pokemonsNotToCatch;
