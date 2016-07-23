@@ -330,13 +330,24 @@ namespace PokemonGo.RocketAPI.Logic
                     .Where(
                         i =>
                             i.Type == FortType.Checkpoint &&
-                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
-                    .OrderBy(
-                        i =>
-                            LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,i.Latitude, i.Longitude));
+                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime());
 
-            foreach (var pokeStop in pokeStops)
+
+            var pokestopList = pokeStops.ToList();
+
+            while (pokestopList.Any())
             {
+                //resort
+                pokestopList =
+                    pokestopList.OrderBy(
+                        i =>
+                            LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude,
+                                i.Longitude)).ToList();
+
+                var pokeStop = pokestopList[0];
+                pokestopList.RemoveAt(0);
+
+
                 var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
                     pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
