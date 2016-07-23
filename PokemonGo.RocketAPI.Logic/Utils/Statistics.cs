@@ -171,7 +171,7 @@ namespace PokemonGo.RocketAPI.Logic.Utils
         {
             return
                 string.Format(
-                    "{0} - Runtime {1} - Lvl: {2:0} | EXP/H: {3:0.0} | P/H: {4:0.0} | Stardust: {5:0} | Transfered: {6:0} | Items Recycled: {7:0}",
+                    "{0} - Runtime {1} - Lvl: {2:0} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transfered: {6:0} | Items Recycled: {7:0}",
                     PlayerName, _getSessionRuntimeInTimeFormat(), CurrentLevelInfos, TotalExperience/_getSessionRuntime(),
                     TotalPokemons/_getSessionRuntime(), TotalStardust, TotalPokemonsTransfered, TotalItemsRemoved);
         }
