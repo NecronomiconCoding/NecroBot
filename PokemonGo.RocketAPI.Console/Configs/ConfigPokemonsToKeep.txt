@@ -2,12 +2,6 @@ Dragonite
 Charizard
 Zapdos
 Snorlax
-Alakazam
+Alakhazam
 Mew
 Mewtwo
-Ninetales
-Venusaur
-Gyarados
-Arcanine
-Raichu
-Blastoise
