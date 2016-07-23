@@ -1,4 +1,4 @@
-﻿#region
+﻿#region Usings
 
 using System;
 using System.Threading;
@@ -23,8 +23,7 @@ namespace PokemonGo.RocketAPI.Console
                 }
                 catch (PtcOfflineException)
                 {
-                    Logger.Write("PTC Servers are probably down OR your credentials are wrong. Try google",
-                        LogLevel.Error);
+                    Logger.Write("PTC Servers are probably down OR your credentials are wrong. Try google", LogLevel.Error);
                     Logger.Write("Trying again in 20 seconds...");
                     Thread.Sleep(20000);
                     new Logic.Logic(new Settings()).Execute().Wait();
