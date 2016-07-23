@@ -202,5 +202,17 @@ namespace PokemonGo.RocketAPI.Console {
                 this["KeepMinDuplicatePokemon"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool KeepMoreItems {
+            get {
+                return ((bool)(this["KeepMoreItems"]));
+            }
+            set {
+                this["KeepMoreItems"] = value;
+            }
+        }
     }
 }
