@@ -59,7 +59,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                 return results;
             }
-
+            Logger.Write($"{_client.Settings.KeepMinDuplicatePokemon}");
             return pokemonList
                 .GroupBy(p => p.PokemonId)
                 .Where(x => x.Count() > 1)
@@ -68,7 +68,7 @@ namespace PokemonGo.RocketAPI.Logic
                         p.Where(x => x.Favorite == 0)
                             .OrderByDescending(x => x.Cp)
                             .ThenBy(n => n.StaminaMax)
-                            .Skip(1)
+                            .Skip(_client.Settings.KeepMinDuplicatePokemon)
                             .ToList());
         }
 
@@ -83,7 +83,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             var myPokemon = await GetPokemons();
             var pokemons = myPokemon.ToList();
-            return pokemons.OrderByDescending(Logic.CalculatePokemonPerfection).Take(limit);
+            return pokemons.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(limit);
         }
 
         public async Task<PokemonData> GetHighestPokemonOfTypeByCP(PokemonData pokemon)

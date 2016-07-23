@@ -28,6 +28,7 @@ namespace PokemonGo.RocketAPI.Console
         public bool TransferDuplicatePokemon => UserSettings.Default.TransferDuplicatePokemon;
         public int DelayBetweenMove => UserSettings.Default.DelayBetweenMove;
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
+        public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
 
         public string GoogleRefreshToken
         {
