@@ -79,7 +79,7 @@ namespace PokemonGo.RocketAPI.Logic
             {
                 var xpDifference = GetXPDiff(playerStat.Level);
                 var message =
-                    $"{playerName} | Level {playerStat.Level}: {playerStat.Experience - playerStat.PrevLevelXp - xpDifference}/{playerStat.NextLevelXp - playerStat.PrevLevelXp - xpDifference}XP";
+                     $"{playerName} | Level {playerStat.Level}: {playerStat.Experience - playerStat.PrevLevelXp - xpDifference}/{playerStat.NextLevelXp - playerStat.PrevLevelXp - xpDifference}XP";
                 Console.Title = message;
                 if (updateOnly == false)
                     Logger.Write(message);
@@ -296,9 +296,15 @@ namespace PokemonGo.RocketAPI.Logic
                     await CatchEncounter(encounter, pokemon);
                 else
                     Logger.Write($"Encounter problem: {encounter.Status}");
+                if (pokemons.ElementAtOrDefault(pokemons.Count() - 1) != pokemon) // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
+                {
+                    Logger.Write("There's more pokemon here",LogLevel.Info);
+                    await Task.Delay(_clientSettings.DelayBetweenPokemonCatch);
+                }
+
             }
 
-            await Task.Delay(_clientSettings.DelayBetweenMove);
+
         }
 
 
@@ -341,7 +347,6 @@ namespace PokemonGo.RocketAPI.Logic
 
                 await Task.Delay(1000);
                 await RecycleItems();
-                await ExecuteCatchAllNearbyPokemons();
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
             }
         }
