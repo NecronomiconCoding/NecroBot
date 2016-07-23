@@ -1,5 +1,6 @@
-# Pokemon Go API Client Library #
+# Pokemon Go Bot based on FeroxRevs API #
 
+This is only for educational use and a proof of concept. 
 
 ## About
 
