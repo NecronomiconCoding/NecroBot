@@ -11,6 +11,7 @@ using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Logic.Utils;
+using System.Device.Location;
 
 #endregion
 
@@ -52,7 +53,7 @@ namespace PokemonGo.RocketAPI.Logic
                 }
 
                 var pokeball = await GetBestBall(encounter?.WildPokemon);
-                var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
+                var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
                     pokemon.Latitude, pokemon.Longitude);
                 caughtPokemonResponse =
                     await
@@ -272,9 +273,7 @@ namespace PokemonGo.RocketAPI.Logic
                 mapObjects.MapCells.SelectMany(i => i.CatchablePokemons)
                     .OrderBy(
                         i =>
-                            LocationUtils.CalculateDistanceInMeters(
-                                new Navigation.Location(_client.CurrentLat, _client.CurrentLng),
-                                new Navigation.Location(i.Latitude, i.Longitude)));
+                            LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,i.Latitude, i.Longitude));
 
             foreach (var pokemon in pokemons)
             {
@@ -286,7 +285,7 @@ namespace PokemonGo.RocketAPI.Logic
                     continue;
                 }
 
-                var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
+                var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
                     pokemon.Latitude, pokemon.Longitude);
                 await Task.Delay(distance > 100 ? 15000 : 500);
 
@@ -314,18 +313,16 @@ namespace PokemonGo.RocketAPI.Logic
                             i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime())
                     .OrderBy(
                         i =>
-                            LocationUtils.CalculateDistanceInMeters(
-                                new Navigation.Location(_client.CurrentLat, _client.CurrentLng),
-                                new Navigation.Location(i.Latitude, i.Longitude)));
+                            LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,i.Latitude, i.Longitude));
 
             foreach (var pokeStop in pokeStops)
             {
-                var distance = Navigation.DistanceBetween2Coordinates(_client.CurrentLat, _client.CurrentLng,
+                var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
                     pokeStop.Latitude, pokeStop.Longitude);
 
                 var update =
                     await
-                        _navigation.HumanLikeWalking(new Navigation.Location(pokeStop.Latitude, pokeStop.Longitude),
+                        _navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
                             _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
 
                 var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
