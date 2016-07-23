@@ -30,6 +30,7 @@ namespace PokemonGo.RocketAPI.Console
         public int DelayBetweenPokemonCatch => UserSettings.Default.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
+        public bool UseRandomDelay => UserSettings.Default.UseRandomDelay;
 
         public string GoogleRefreshToken
         {
