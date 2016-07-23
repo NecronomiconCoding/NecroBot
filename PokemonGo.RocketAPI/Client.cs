@@ -24,6 +24,7 @@ namespace PokemonGo.RocketAPI
         private string _apiUrl;
         private AuthType _authType = AuthType.Google;
         private Request.Types.UnknownAuth _unknownAuth;
+        Random rand = null;
 
         public Client(ISettings settings)
         {
@@ -345,15 +346,42 @@ namespace PokemonGo.RocketAPI
             _authType = type;
         }
 
+        private void CalcNoisedCoordinates(double lat, double lng, out double latNoise, out double lngNoise)
+        {
+            double mean = 0.0;// just for fun
+            double stdDev = 2.09513120352; //-> so 50% of the noised coordinates will have a maximal distance of 4 m to orginal ones
+
+            if (rand == null)
+            {
+                rand = new Random();
+            }
+            double u1 = rand.NextDouble();
+            double u2 = rand.NextDouble();
+            double u3 = rand.NextDouble();
+            double u4 = rand.NextDouble();
+
+            double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+            double randNormal = mean + stdDev * randStdNormal;
+            double randStdNormal2 = Math.Sqrt(-2.0 * Math.Log(u3)) * Math.Sin(2.0 * Math.PI * u4);
+            double randNormal2 = mean + stdDev * randStdNormal2;
+
+            latNoise = lat + randNormal / 100000.0;
+            lngNoise = lng + randNormal2 / 100000.0;
+        }
+
         private void SetCoordinates(double lat, double lng, double altitude)
         {
             if (double.IsNaN(lat) || double.IsNaN(lng)) return;
 
-            CurrentLat = lat;
-            CurrentLng = lng;
+            double latNoised = 0.0;
+            double lngNoised = 0.0;
+            CalcNoisedCoordinates(lat, lng, out latNoised, out lngNoised);
+            CurrentLat = latNoised;
+            CurrentLng = lngNoised;
             CurrentAltitude = altitude;
             SaveLatLng(lat, lng);
         }
+
 
         public async Task SetServer()
         {
