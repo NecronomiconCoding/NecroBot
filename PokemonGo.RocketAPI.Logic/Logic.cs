@@ -53,7 +53,7 @@ namespace PokemonGo.RocketAPI.Logic
             do
             {
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
-                
+
 
                 var pokeball = await GetBestBall(encounter?.WildPokemon);
                 if (pokeball == MiscEnums.Item.ITEM_UNKNOWN)
@@ -570,7 +570,7 @@ namespace PokemonGo.RocketAPI.Logic
             var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
             var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
 
-            Logger.Write($"poke ball ({pokeBallsCount}) , great ball ({greatBallsCount}) , ultra ball ({ultraBallsCount}) , master ball ({masterBallsCount}) ", LogLevel.Self,ConsoleColor.White);
+            Logger.Write($"poke ball ({pokeBallsCount}) , great ball ({greatBallsCount}) , ultra ball ({ultraBallsCount}) , master ball ({masterBallsCount}) ", LogLevel.Self, ConsoleColor.White);
 
             if ((pokeBallsCount + greatBallsCount + ultraBallsCount) < 25)
             {
@@ -667,6 +667,9 @@ namespace PokemonGo.RocketAPI.Logic
                 await action();
         }
 
+
+        private static HashSet<string> hsTransfered = new HashSet<string>();
+
         private async Task TransferDuplicatePokemon(bool keepPokemonsThatCanEvolve = false)
         {
             var duplicatePokemons =
@@ -674,11 +677,17 @@ namespace PokemonGo.RocketAPI.Logic
                     _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve,
                         _clientSettings.PokemonsNotToTransfer);
 
+
             foreach (var duplicatePokemon in duplicatePokemons)
             {
                 if (PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >= _clientSettings.KeepMinIVPercentage ||
                     duplicatePokemon.Cp > _clientSettings.KeepMinCP)
                     continue;
+
+                if (hsTransfered.Contains(duplicatePokemon.Id.ToString()))
+                    continue;
+
+                hsTransfered.Add(duplicatePokemon.Id.ToString());
 
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
                 _stats.IncreasePokemonsTransfered();
