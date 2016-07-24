@@ -6,7 +6,7 @@
 <br/>
 <!-- disclaimer -->
 ![alt text][1.1] <strong><em> The contents of this repo are a proof of concept and are for educational use only </em></strong> ![alt text][1.1]
-
+![](https://cdn.discordapp.com/attachments/206065299236061184/206797652724154369/banner-v7_c.png)
 Chatting about this Repository can be done on our Discord: https://discord.gg/VsVrjgr <br/>
 <br/>
 <h2><a name="donating">Donating</a></h2>
