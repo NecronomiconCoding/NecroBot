@@ -42,11 +42,11 @@ namespace PokemonGo.RocketAPI.Console
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ERROR) {message}");
                     break;
                 case LogLevel.Warning:
-                    System.Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    System.Console.ForegroundColor = ConsoleColor.Red;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ATTENTION) {message}");
                     break;
                 case LogLevel.Info:
-                    System.Console.ForegroundColor = ConsoleColor.DarkCyan;
+                    System.Console.ForegroundColor = ConsoleColor.Red;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (INFO) {message}");
                     break;
                 case LogLevel.Pokestop:
@@ -94,11 +94,11 @@ namespace PokemonGo.RocketAPI.Console
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (BERRY) {message}");
                     break;
                 case LogLevel.Debug:
-                    System.Console.ForegroundColor = ConsoleColor.Gray;
+                    System.Console.ForegroundColor = ConsoleColor.Red;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (DEBUG) {message}");
                     break;
                 default:
-                    System.Console.ForegroundColor = ConsoleColor.White;
+                    System.Console.ForegroundColor = ConsoleColor.Red;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ERROR) {message}");
                     break;
             }

@@ -37,8 +37,8 @@ namespace PokemonGo.RocketAPI.Logic.Utils
                 var ep = stat.NextLevelXp - stat.PrevLevelXp - (stat.Experience - stat.PrevLevelXp);
                 var hours = Math.Round(ep/(TotalExperience/_getSessionRuntime()), 2);
 
-                output =
-                    $"{stat.Level} (Level {hours}h | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
+                //output = string.Format("{0:n0} (lvl in {1}h | {2:n0}/{3:n0} XP)", stat.Level, stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level), stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level));
+                output = $"{stat.Level} (Level {hours}h | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
                 //output = $"{stat.Level} (LvLUp in {_hours}hours // EXP required: {_ep})";
             }
             return output;
@@ -191,7 +191,7 @@ namespace PokemonGo.RocketAPI.Logic.Utils
         {
             return
                 string.Format(
-                    "{0} - {1} - Lvl: {2:0} | EXP/H: {3:0} | P/H: {4:0} | StarD: {5:0} | Balls: {6:0}p, {7:0}g, {8:0}u, {9:0}m | Trans: {10:0} | Recyc: {11:0}",
+                    "{0} - {1} - Lvl: {2:n0} | EXP/H: {3:n0} | P/H: {4:n0} | StarD: {5:n0} | Balls: {6:n0}p, {7:n0}g, {8:n0}u, {9:n0}m | Trans: {10:n0} | Recyc: {11:n0}",
                     PlayerName, _getSessionRuntimeInTimeFormat(), CurrentLevelInfos, TotalExperience/_getSessionRuntime(),
                     TotalPokemons/_getSessionRuntime(), TotalStardust, TotalPokeBall, TotalGreatBall, TotalUltraBall, TotalMasterBall, TotalPokemonsTransfered, TotalItemsRemoved);
         }

@@ -27,6 +27,7 @@ namespace PokemonGo.RocketAPI.Logic
         private GetPlayerResponse _playerProfile;
         private readonly Statistics _stats;
         private int pokestopCounter, pokestopCounterFull;
+        private int pokemonCounter;
 
         public Logic(ISettings clientSettings)
         {
@@ -85,6 +86,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                 if (encounter?.CaptureProbability?.CaptureProbability_ != null)
                 {
+                    pokemonCounter++;
                     string attempts = attemptCounter > 1 ? $" ({attemptCounter} attempts)" : "";
                     if (caughtPokemonResponse.Status.ToString() == "CatchSuccess")
                     {
@@ -93,11 +95,11 @@ namespace PokemonGo.RocketAPI.Logic
                         if (cp >= 1250) lvl = LogLevel.CaughtMaster;
                         else if (cp >= 850) lvl = LogLevel.CaughtUltra;
                         else if(cp >= 500) lvl = LogLevel.CaughtGreat;
-                        Logger.Write($"Caught: {pokemon.PokemonId} @ {encounter?.WildPokemon?.PokemonData?.Cp} CP{attempts}", lvl);
+                        Logger.Write($"#{pokemonCounter} | Caught: {pokemon.PokemonId} @ {encounter?.WildPokemon?.PokemonData?.Cp} CP{attempts}", lvl);
                     }
                     else if (caughtPokemonResponse.Status.ToString() == "CatchFail")
                     {
-                        Logger.Write($"Escaped: {pokemon.PokemonId} @ {encounter?.WildPokemon?.PokemonData?.Cp} CP{attempts}", LogLevel.CatchFail);
+                        Logger.Write($"#{pokemonCounter} | Escaped: {pokemon.PokemonId} @ {encounter?.WildPokemon?.PokemonData?.Cp} CP{attempts}", LogLevel.CatchFail);
                     }
                 }
                 attemptCounter++;
@@ -220,28 +222,31 @@ namespace PokemonGo.RocketAPI.Logic
             var pokemonToEvolve = await _inventory.GetPokemonToEvolve(filter);
             foreach (var pokemon in pokemonToEvolve)
             {
-                var evolvePokemonOutProto = await _client.EvolvePokemon(pokemon.Id);
-
-                if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
+                if (pokemon.Favorite == 0)
                 {
-                    Logger.Write($"{pokemon.PokemonId}, acquiring {evolvePokemonOutProto.ExpAwarded}xp",
-                        LogLevel.Evolve);
-                }
-                else
-                    Logger.Write(
-                        $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
-                        LogLevel.Evolve);
+                    var evolvePokemonOutProto = await _client.EvolvePokemon(pokemon.Id);
 
-                await Task.Delay(3000);
+                    if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
+                    {
+                        Logger.Write($"{pokemon.PokemonId} ({pokemon.Cp} CP) evolved! {evolvePokemonOutProto.EvolvedPokemon.Cp} CP ({evolvePokemonOutProto.ExpAwarded}xp)",
+                            LogLevel.Evolve);
+                    }
+                    else
+                        Logger.Write(
+                            $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
+                            LogLevel.Evolve);
+
+                    await Task.Delay(3000);
+                }
             }
         }
 
         public async Task Execute()
         {
-            Git.CheckVersion();
-            Logger.Write(
+            //Git.CheckVersion();
+            /*Logger.Write(
                 $"Make sure Lat & Lng is right. Exit Program if not! Lat: {_client.CurrentLat} Lng: {_client.CurrentLng}",
-                LogLevel.Warning);
+                LogLevel.Warning);*/
             Thread.Sleep(3000);
             Logger.Write($"Logging in via: {_clientSettings.AuthType}");
 

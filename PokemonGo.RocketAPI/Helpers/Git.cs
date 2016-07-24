@@ -27,16 +27,16 @@ namespace PokemonGo.RocketAPI.Helpers
                         $"{match.Groups[1]}.{match.Groups[2]}.{match.Groups[3]}.{match.Groups[4]}");
                 if (gitVersion <= Assembly.GetExecutingAssembly().GetName().Version)
                 {
-                    Logger.Write(
-                        "Awesome! You have already got the newest version! " +
-                        Assembly.GetExecutingAssembly().GetName().Version);
+                    /*Logger.Write(
+                    "Awesome! You have already got the newest version! " +
+                    Assembly.GetExecutingAssembly().GetName().Version);*/
                     return;
                 }
 
 
-                Logger.Write(
+                /*Logger.Write(
                     "There is a new Version available: https://github.com/NecronomiconCoding/Pokemon-Go-Bot",
-                    LogLevel.Warning);
+                    LogLevel.Warning);*/
                 Thread.Sleep(1000);
             }
             catch (Exception)
