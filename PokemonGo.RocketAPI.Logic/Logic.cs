@@ -332,7 +332,7 @@ namespace PokemonGo.RocketAPI.Logic
                                 break;
                             }
 
-                            Logger.Write($"Your desired destination is {nextPoint.Lat}, your location is {nextPoint.Lon} {_client.CurrentLat}, {_client.CurrentLng}", LogLevel.Warning);
+                            Logger.Write($"Your desired destination is {nextPoint.Lat}, {nextPoint.Lon} your location is {_client.CurrentLat}, {_client.CurrentLng}", LogLevel.Warning);
 
                             // Wasn't sure how to make this pretty. Edit as needed.
                             var pokeStops =
