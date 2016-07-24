@@ -181,13 +181,13 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
-        public int KeepMinDuplicatePokemon {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool KeepMoreItems {
             get {
-                return ((int)(this["KeepMinDuplicatePokemon"]));
+                return ((bool)(this["KeepMoreItems"]));
             }
             set {
-                this["KeepMinDuplicatePokemon"] = value;
+                this["KeepMoreItems"] = value;
             }
         }
         
@@ -217,13 +217,13 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool KeepMoreItems {
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int KeepMinDuplicatePokemon {
             get {
-                return ((bool)(this["KeepMoreItems"]));
+                return ((int)(this["KeepMinDuplicatePokemon"]));
             }
             set {
-                this["KeepMoreItems"] = value;
+                this["KeepMinDuplicatePokemon"] = value;
             }
         }
     }
