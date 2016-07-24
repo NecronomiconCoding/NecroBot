@@ -228,7 +228,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                     if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
                     {
-                        Logger.Write($"{pokemon.PokemonId} ({pokemon.Cp} CP) evolved! {evolvePokemonOutProto.EvolvedPokemon.Cp} CP ({evolvePokemonOutProto.ExpAwarded}xp)",
+                        Logger.Write($"{pokemon.PokemonId} evolved! {pokemon.Cp} CP -> {evolvePokemonOutProto.EvolvedPokemon.Cp} CP ({evolvePokemonOutProto.ExpAwarded}xp)",
                             LogLevel.Evolve);
                     }
                     else
