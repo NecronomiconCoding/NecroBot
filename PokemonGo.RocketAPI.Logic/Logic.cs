@@ -49,9 +49,9 @@ namespace PokemonGo.RocketAPI.Logic
                     Logger.Write($"No Pokeballs - We missed a {pokemon.PokemonId} with CP {encounter?.WildPokemon?.PokemonData?.Cp}", LogLevel.Caught);
                     return;
                 }
-                if ((probability.HasValue && probability.Value < 0.35 && encounter.WildPokemon?.PokemonData?.Cp > 400) ||
+                if ((probability.HasValue && probability.Value < 0.35 && encounter.WildPokemon?.PokemonData?.Cp > 600) ||
                     PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >=
-                    _clientSettings.KeepMinIVPercentage)
+                   85 && encounter.WildPokemon?.PokemonData?.Cp > 200)
                 {
                     await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
                 }
@@ -560,12 +560,12 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
-                if (duplicatePokemon.Cp >= _clientSettings.KeepMinCP || PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) > _clientSettings.KeepMinIVPercentage)
+                var bestPokemonOfType = await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
+                if (duplicatePokemon.Cp * PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) / PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType)  >= bestPokemonOfType.Cp || duplicatePokemon.Cp >= _clientSettings.KeepMinCP)
                     continue;
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
                 _stats.IncreasePokemonsTransfered();
                 _stats.UpdateConsoleTitle(_inventory);
-                var bestPokemonOfType = await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
                 Logger.Write($"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({PokemonInfo.CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")} % perfect) CP (Best: {bestPokemonOfType.Cp} | ({PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")} % perfect))", LogLevel.Transfer);
                 await Task.Delay(500);
             }
