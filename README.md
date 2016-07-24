@@ -35,10 +35,7 @@ Chatting about this Repository can be done on our Discord: https://discord.gg/Vs
 <h2><a name="getting-started">Getting Started</a></h2>
 Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.
 <br/>
-
-
 <h2><a name="credits">Credits</a></h2><br/>
 Thanks to Feroxs' hard work on the API & Console we are able to manage something like this.<br/>
 Without him, this would not have been available. <3
-<br/>
 Thanks to everyone who voluntaired by contributing to the Pull Requests!
