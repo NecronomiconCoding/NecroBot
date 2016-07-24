@@ -54,6 +54,7 @@ namespace PokemonGo.RocketAPI.Logic
                         continue;
 
                     var amountToSkip = familyCandy.Candy / settings.CandyToEvolve;
+                    amountToSkip = amountToSkip > _client.Settings.KeepMinDuplicatePokemon ? amountToSkip : _client.Settings.KeepMinDuplicatePokemon;
                     if (prioritizeIVoverCP)
                     {
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
