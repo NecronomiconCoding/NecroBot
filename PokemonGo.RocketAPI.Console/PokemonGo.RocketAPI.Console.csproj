@@ -80,7 +80,11 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF NOT EXIST "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsNotToCatch.txt" (
+    <PostBuildEvent>IF NOT EXIST "$(ProjectDir)\bin\Debug\Configs" (
+MKDIR "$(ProjectDir)\bin\Debug\Configs"
+)
+
+IF NOT EXIST "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsNotToCatch.txt" (
 COPY "$(ProjectDir)Configs\ConfigPokemonsNotToCatch.txt" "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsNotToCatch.txt" /Y
 )
 
