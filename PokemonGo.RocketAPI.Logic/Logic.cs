@@ -427,6 +427,13 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
+                if (duplicatePokemon.Cp < _clientSettings.KeepMinCP || PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) < _clientSettings.KeepMinIVPercentage)
+                {
+                    //PocketMobsters 7/23/2016 8:30PM local time
+                    //We are not transfering, adding an output here for debugging
+                    Logger.Write($"Skipped transfer of {duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({PokemonInfo.CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")} % perfect) CP", LogLevel.Info);
+                    continue;
+                }
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
                 _stats.IncreasePokemonsTransfered();
                 _stats.UpdateConsoleTitle(_inventory);
