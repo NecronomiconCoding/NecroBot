@@ -51,7 +51,7 @@ namespace PokemonGo.RocketAPI
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Logs");
 
          
-            using (var log = File.AppendText(Directory.GetCurrentDirectory() + $"\\Logs\\NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH-mm")}.txt"))
+            using (var log = File.AppendText(Directory.GetCurrentDirectory() + $"\\Logs\\NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt"))
             {
                 log.WriteLine(message);
                 log.Flush();
@@ -72,7 +72,8 @@ namespace PokemonGo.RocketAPI
         Caught = 7,
         Transfer = 8,
         Evolve = 9,
-        Info = 10,
-        Debug = 11
+        Egg = 10,
+        Info = 11,
+        Debug = 12
     }
 }
