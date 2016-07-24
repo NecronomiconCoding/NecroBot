@@ -56,5 +56,8 @@
     <Setting Name="GPXFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">GPXFile.GPX</Value>
     </Setting>
+    <Setting Name="useLuckyEggsWhileEvolving" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

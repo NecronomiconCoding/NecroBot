@@ -207,7 +207,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             if (_clientSettings.useLuckyEggsWhileEvolving)
             {
-                popLuckyEgg(_client);
+                await popLuckyEgg(_client);
             }
             var pokemonToEvolve = await _inventory.GetPokemonToEvolve(filter);
             foreach (var pokemon in pokemonToEvolve)
@@ -269,7 +269,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             Logger.Write("POPPIN AN EGG", LogLevel.Evolve);
             await Task.Delay(1000);
-            UseLuckyEgg(client);
+            await UseLuckyEgg(client);
             await Task.Delay(1000);
             Logger.Write("POPPED AN EGG", LogLevel.Evolve);
             await Task.Delay(1800000);
@@ -312,7 +312,6 @@ namespace PokemonGo.RocketAPI.Logic
                 await ExecuteFarmingPokestopsAndPokemons();
             else
             {
-                bool onTrack = true;
                 List<GPXReader.trk> Tracks = GetGPXTracks(_clientSettings.GPXFile);
                 int curTrkPt = 0;
                 int maxTrkPt = 0;

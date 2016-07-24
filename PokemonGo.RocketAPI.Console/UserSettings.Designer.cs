@@ -226,7 +226,7 @@ namespace PokemonGo.RocketAPI.Console {
                 this["UseGPXPathing"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("GPXFile.GPX")]
@@ -238,17 +238,15 @@ namespace PokemonGo.RocketAPI.Console {
                 this["GPXFile"] = value;
             }
         }
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool useLuckyEggsWhileEvolving
-        {
-            get
-            {
+        public bool useLuckyEggsWhileEvolving {
+            get {
                 return ((bool)(this["useLuckyEggsWhileEvolving"]));
             }
-            set
-            {
+            set {
                 this["useLuckyEggsWhileEvolving"] = value;
             }
         }
