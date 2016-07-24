@@ -63,7 +63,7 @@ Please keep your conversations in the designated channels.
 <hr/>
 
 <h2><a name="getting-started">Getting Started</a></h2>
-Note: You will need some basic Computer Expierience.<br/>
+Note: You will need some basic Computer Experience.<br/>
 Need help? <a name="chat">Join the Chat!</a> **The Issue Tracker is not for help!**<br/>
 <br/>
 <h2><a name="install-config">Installation & Configuration</a></h2><br/>
