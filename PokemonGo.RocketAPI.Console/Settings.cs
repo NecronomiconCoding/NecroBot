@@ -77,7 +77,7 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Type of pokemons to evolve
-                var defaultText = new string[] { "Zubat", "Pidgey", "Ratata" };
+                var defaultText = new string[] { "Zubat", "Pidgey", "Rattata" };
                 _pokemonsToEvolve = _pokemonsToEvolve ?? LoadPokemonList("Configs\\ConfigPokemonsToEvolve.txt", defaultText);
                 return _pokemonsToEvolve;
             }
@@ -100,7 +100,7 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Type of pokemons not to catch
-                var defaultText = new string[] { "Zubat", "Pidgey", "Ratata" };
+                var defaultText = new string[] { "Zubat", "Pidgey", "Rattata" };
                 _pokemonsNotToCatch = _pokemonsNotToCatch ?? LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.txt", defaultText);
                 return _pokemonsNotToCatch;
             }
