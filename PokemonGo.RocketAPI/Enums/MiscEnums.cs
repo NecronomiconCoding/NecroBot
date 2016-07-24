@@ -6,7 +6,6 @@
         {
             GYM = 0,
             CHECKPOINT = 1,
-            Checkpoint = 2
         }
 
         public enum Item
