@@ -28,6 +28,7 @@ namespace PokemonGo.RocketAPI
         int MaxTravelDistanceInMeters { get; }
         bool UseGPXPathing { get; }
         string GPXFile { get; }
+        bool useLuckyEggsWhileEvolving { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
