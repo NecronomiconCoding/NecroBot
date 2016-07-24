@@ -29,6 +29,9 @@ namespace PokemonGo.RocketAPI
         public Client(ISettings settings)
         {
             Settings = settings;
+
+            DirectoryInfo di = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
+
             if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini") &&
                 File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini").Contains(":"))
             {
