@@ -59,7 +59,7 @@ namespace PokemonGo.RocketAPI.Logic
             }
             else
             {
-                Logger.Write("Kilometers Per Hour to reach default location since last run: " + kmph + ", not realistic. Continuing from last known location: " + _client.CurrentLat + ", " + _client.CurrentLng, LogLevel.Info);
+                Logger.Write("Kilometers Per Hour to reach default location since last run: " + kmph + ", not realistic. Continuing from last known location: " + latLngFromFile.Item1 + ", " + latLngFromFile.Item2, LogLevel.Info);
             }
         }
 

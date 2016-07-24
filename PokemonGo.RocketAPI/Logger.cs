@@ -47,7 +47,8 @@ namespace PokemonGo.RocketAPI
         {
             // maybe do a new log rather than appending?
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Logs");
-            using (var log = File.AppendText(Directory.GetCurrentDirectory() + $"\\Logs\\NecroBot-{DateTime.Today.ToShortDateString()}-{DateTime.Now.ToString("HH-mm")}.txt"))
+            string logPath = Directory.GetCurrentDirectory() + $"\\Logs\\NecroBot-{DateTime.Today.ToString("yyyy-dd")}-{DateTime.Now.ToString("HH-mm")}.txt";
+            using (var log = File.AppendText(logPath))
             {
                 log.WriteLine(message);
                 log.Flush();
