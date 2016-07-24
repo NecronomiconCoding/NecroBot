@@ -39,7 +39,9 @@ namespace PokemonGo.RocketAPI.Logic
             _stats = new Statistics();
         }
 
-        // Resets coords if someone could realistically get back to the default coords points since they were last updated (program was last run)
+        /// <summary>
+        /// Resets coords if someone could realistically get back to the default coords points since they were last updated (program was last run)
+        /// </summary>
         private void ResetCoords()
         {
             string coordsPath = Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini";

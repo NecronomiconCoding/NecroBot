@@ -56,6 +56,10 @@ namespace PokemonGo.RocketAPI
                 "application/x-www-form-urlencoded");
         }
 
+        /// <summary>
+        /// Gets the lat LNG from file.
+        /// </summary>
+        /// <returns>Tuple&lt;System.Double, System.Double&gt;.</returns>
         public static Tuple<double, double> GetLatLngFromFile()
         {
             if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini") &&
