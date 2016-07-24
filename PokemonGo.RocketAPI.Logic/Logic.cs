@@ -151,6 +151,11 @@ namespace PokemonGo.RocketAPI.Logic
                     $"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'",
                     LogLevel.Info, ConsoleColor.Yellow);
             }
+            var candyPokemons = await _inventory.GetPokemonFamilies();
+            foreach (var pokemon in candyPokemons.OrderByDescending(t => t.Candy))
+            {
+                Logger.Write($"Pokemon Name: {pokemon.FamilyId} Candy: {pokemon.Candy}", LogLevel.Info, ConsoleColor.Yellow);
+            }
         }
 
         private async Task EvolveAllPokemonWithEnoughCandy(IEnumerable<PokemonId> filter = null)
