@@ -337,6 +337,7 @@ namespace PokemonGo.RocketAPI.Logic
                                 await Task.Delay(1000);
                                 await RecycleItems();
                                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                                await _inventory.SaveProfilePokemons(_playerProfile.Profile);
                             }
 
                                 await
@@ -437,7 +438,6 @@ namespace PokemonGo.RocketAPI.Logic
                         LogLevel.Pokestop);
                 }
 
-                await _inventory.SaveProfilePokemons(_playerProfile.Profile);
 
                 await Task.Delay(1000);
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
@@ -447,6 +447,7 @@ namespace PokemonGo.RocketAPI.Logic
                     if (_clientSettings.EvolveAllPokemonWithEnoughCandy || _clientSettings.EvolveAllPokemonAboveIV)
                         await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                     if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                    await _inventory.SaveProfilePokemons(_playerProfile.Profile);
                 }
             }
         }
@@ -677,6 +678,7 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var item in items)
             {
+
                 await _client.RecycleItem((ItemId) item.Item_, item.Count);
                 Logger.Write($"{item.Count}x {(ItemId) item.Item_}", LogLevel.Recycling);
                 _stats.AddItemsRemoved(item.Count);

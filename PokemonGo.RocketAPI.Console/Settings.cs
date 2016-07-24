@@ -48,13 +48,13 @@ namespace PokemonGo.RocketAPI.Console
             {
                 //Type of pokemons to evolve
                 var defaultItems = new List<KeyValuePair<ItemId, int>> {
-                    new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 1),
             new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
             new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
             new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 75),
             new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 25),
+            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 1),
+            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 1),
             new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 50),
             new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
             new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
@@ -114,7 +114,7 @@ namespace PokemonGo.RocketAPI.Console
                     string[] itemInfoArray = itemInfo.Split(' ');
                     string itemName = itemInfoArray.Length > 1 ? itemInfoArray[0] : "";
                     int itemAmount = 0;
-                    if (Int32.TryParse(itemInfoArray.Length > 1 ? itemInfoArray[1] : "100", out itemAmount)) itemAmount = 100;
+                    if (!Int32.TryParse(itemInfoArray.Length > 1 ? itemInfoArray[1] : "100", out itemAmount)) itemAmount = 100;
 
                     ItemId item;
                     if (Enum.TryParse<ItemId>(itemName, out item))
