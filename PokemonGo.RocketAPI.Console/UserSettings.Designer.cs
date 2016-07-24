@@ -250,5 +250,29 @@ namespace PokemonGo.RocketAPI.Console {
                 this["useLuckyEggsWhileEvolving"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EvolveAllPokemonAboveIV {
+            get {
+                return ((bool)(this["EvolveAllPokemonAboveIV"]));
+            }
+            set {
+                this["EvolveAllPokemonAboveIV"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("95")]
+        public int EvolveAboveIVValue {
+            get {
+                return ((int)(this["EvolveAboveIVValue"]));
+            }
+            set {
+                this["EvolveAboveIVValue"] = value;
+            }
+        }
     }
 }

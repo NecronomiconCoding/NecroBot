@@ -468,7 +468,7 @@ namespace PokemonGo.RocketAPI.Logic
                 {
                     stopsHit = 0;
                     await RecycleItems();
-                    if (_clientSettings.EvolveAllPokemonWithEnoughCandy) await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
+                    if (_clientSettings.EvolveAllPokemonWithEnoughCandy || _clientSettings.EvolveAllPokemonAboveIV) await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                     if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
                 }
             }
@@ -518,7 +518,7 @@ namespace PokemonGo.RocketAPI.Logic
             {
                 _playerProfile = await _client.GetProfile();
                 _stats.SetUsername(_playerProfile);
-                if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
+                if (_clientSettings.EvolveAllPokemonWithEnoughCandy || _clientSettings.EvolveAllPokemonAboveIV)
                     await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
                 await DisplayHighests();

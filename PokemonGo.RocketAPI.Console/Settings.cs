@@ -36,6 +36,8 @@ namespace PokemonGo.RocketAPI.Console
         public string GPXFile => UserSettings.Default.GPXFile;
         public bool UseGPXPathing => UserSettings.Default.UseGPXPathing;
         public bool useLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
+        public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
+        public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => new[]
