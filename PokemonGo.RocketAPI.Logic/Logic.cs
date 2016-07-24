@@ -14,6 +14,7 @@ using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Logic.Utils;
 // ReSharper disable CyclomaticComplexity
 // ReSharper disable FunctionNeverReturns
+using System.IO;
 
 #endregion
 
@@ -31,10 +32,37 @@ namespace PokemonGo.RocketAPI.Logic
         public Logic(ISettings clientSettings)
         {
             _clientSettings = clientSettings;
+            ResetCoords();
             _client = new Client(_clientSettings);
             _inventory = new Inventory(_client);
             _navigation = new Navigation(_client);
             _stats = new Statistics();
+        }
+
+        /// <summary>
+        /// Resets coords if someone could realistically get back to the default coords points since they were last updated (program was last run)
+        /// </summary>
+        private void ResetCoords()
+        {
+            string coordsPath = Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini";
+            if (!File.Exists(coordsPath)) return;
+            Tuple<double, double> latLngFromFile = Client.GetLatLngFromFile();
+            if (latLngFromFile == null) return;
+            double distance = LocationUtils.CalculateDistanceInMeters(latLngFromFile.Item1, latLngFromFile.Item2, _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude);
+            DateTime? lastModified = File.Exists(coordsPath) ? (DateTime?)File.GetLastWriteTime(coordsPath) : null;
+            if (lastModified == null) return;
+            double? hoursSinceModified = (DateTime.Now - lastModified).HasValue ? (double?)((DateTime.Now - lastModified).Value.Minutes / 60.0) : null;
+            if (hoursSinceModified == null || hoursSinceModified == 0) return; // Shouldn't really be null, but can be 0 and that's bad for division.
+            double kmph = (distance / 1000) / (hoursSinceModified ?? .1);
+            if (kmph < 80) // If speed required to get to the default location is < 80km/hr
+            {
+                File.Delete(coordsPath);
+                Logger.Write("Kilometers Per Hour to reach default location since last run: " + kmph + ", realistic. Resetting coords to default.", LogLevel.Info);
+            }
+            else
+            {
+                Logger.Write("Kilometers Per Hour to reach default location since last run: " + kmph + ", not realistic. Continuing from last known location: " + latLngFromFile.Item1 + ", " + latLngFromFile.Item2, LogLevel.Info);
+            }
         }
 
         private async Task CatchEncounter(EncounterResponse encounter, MapPokemon pokemon)
