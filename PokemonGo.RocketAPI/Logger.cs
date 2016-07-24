@@ -16,7 +16,6 @@ namespace PokemonGo.RocketAPI
     public static class Logger
     {
         private static ILogger _logger;
-
         /// <summary>
         ///     Set the logger. All future requests to <see cref="Write(string,LogLevel,ConsoleColor)" /> will use that logger, any
         ///     old will be
@@ -47,7 +46,9 @@ namespace PokemonGo.RocketAPI
         {
             // maybe do a new log rather than appending?
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Logs");
-            using (var log = File.AppendText(Directory.GetCurrentDirectory() + $"\\Logs\\NecroBot-{DateTime.Today.ToShortDateString()}-{DateTime.Now.ToString("HH-mm")}.txt"))
+
+         
+            using (var log = File.AppendText(Directory.GetCurrentDirectory() + $"\\Logs\\NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH-mm")}.txt"))
             {
                 log.WriteLine(message);
                 log.Flush();
