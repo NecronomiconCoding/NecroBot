@@ -12,10 +12,10 @@
       <Value Profile="(Default)">pw</Value>
     </Setting>
     <Setting Name="DefaultLatitude" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">52.379189</Value>
+      <Value Profile="(Default)">34.007825</Value>
     </Setting>
     <Setting Name="DefaultLongitude" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">4.899431</Value>
+      <Value Profile="(Default)">-118.498184</Value>
     </Setting>
     <Setting Name="DefaultAltitude" Type="System.Double" Scope="User">
       <Value Profile="(Default)">10</Value>
@@ -45,7 +45,7 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="PrioritizeIVOverCP" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="MaxTravelDistanceInMeters" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>

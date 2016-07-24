@@ -2,10 +2,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Text.RegularExpressions;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
-using System.Text.RegularExpressions;
 
 #endregion
 
@@ -13,9 +14,17 @@ namespace PokemonGo.RocketAPI.Console
 {
     public class Settings : ISettings
     {
-        private ICollection<PokemonId> _pokemonsNotToTransfer;
-        private ICollection<PokemonId> _pokemonsToEvolve;
-        private ICollection<PokemonId> _pokemonsNotToCatch;
+        private const string PathItemsToKeep = "Configs\\ItemsToKeep.txt";
+        private const string PathPokemonToIgnore = "Configs\\PokemonToIgnore.txt";
+        private const string PathPokemonToEvolve = "Configs\\PokemonToEvolve.txt";
+        private const string PathPokemonToKeep = "Configs\\PokemonToKeep.txt";
+
+        private static readonly string[] DefaultPokemon =
+        {
+            "Zubat",
+            "Pidgey",
+            "Ratata"
+        };
 
         public AuthType AuthType => (AuthType) Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         public string PtcUsername => UserSettings.Default.PtcUsername;
@@ -33,96 +42,70 @@ namespace PokemonGo.RocketAPI.Console
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
         public bool PrioritizeIVOverCP => UserSettings.Default.PrioritizeIVOverCP;
         public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
-         
-        //Type and amount to keep
-        public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => new[]
-        {
-            new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 20),
-            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 20),
-            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 20),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseCool, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseFloral, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemTroyDisk, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXAttack, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXDefense, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXMiracle, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 200),
-            new KeyValuePair<ItemId, int>(ItemId.ItemBlukBerry, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemNanabBerry, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemWeparBerry, 30),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPinapBerry, 30),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSpecialCamera, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasicUnlimited, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasic, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokemonStorageUpgrade, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
-        };
 
-        public ICollection<PokemonId> PokemonsToEvolve
+        public ICollection<KeyValuePair<ItemId, int>> ItemsToKeep => this.LoadItemsList(PathItemsToKeep);
+
+        public ICollection<PokemonId> PokemonToEvolve => LoadPokemonList(PathPokemonToEvolve, DefaultPokemon);
+        public ICollection<PokemonId> PokemonToKeep => LoadPokemonList(PathPokemonToKeep, DefaultPokemon);
+        public ICollection<PokemonId> PokemonToIgnore => LoadPokemonList(PathPokemonToIgnore, DefaultPokemon);
+
+        private ICollection<KeyValuePair<ItemId, int>> LoadItemsList(string filename)
         {
-            get
+            var collection = new Collection<KeyValuePair<ItemId, int>>();
+
+            try
             {
-                //Type of pokemons to evolve
-                var defaultText = new string[] { "Zubat", "Pidgey", "Ratata" };
-                _pokemonsToEvolve = _pokemonsToEvolve ?? LoadPokemonList("Configs\\ConfigPokemonsToEvolve.txt", defaultText);
-                return _pokemonsToEvolve;
+                var lines = File.ReadAllLines(filename);
+                var lineNum = 0;
+                foreach(var line in lines)
+                {
+                    var split = line.Split(',');
+                    ItemId itemID;
+                    int itemAmount;
+
+                    if(Enum.TryParse(split[0], out itemID) || !int.TryParse(split[1], out itemAmount))
+                    {
+                        collection.Add(new KeyValuePair<ItemId, int>());
+                    }
+                    else
+                    {
+                        Logger.Write($"There was an error while loading the items list. Invalid at line {lineNum}", LogLevel.Error);
+                    }
+
+                    lineNum++;
+                }
+                Logger.Write("Loaded the items-to-keep list!");
             }
+            catch(Exception e)
+            {
+                Logger.Write(e.Message, LogLevel.Error);
+            }
+
+            return collection;
         }
 
-        public ICollection<PokemonId> PokemonsNotToTransfer
-        {
-            get
-            {
-                //Type of pokemons not to transfer
-                var defaultText = new string[] { "Dragonite", "Charizard", "Zapdos", "Snorlax", "Alakhazam", "Mew", "Mewtwo" };
-                _pokemonsNotToTransfer = _pokemonsNotToTransfer ?? LoadPokemonList("Configs\\ConfigPokemonsToKeep.txt", defaultText);
-                return _pokemonsNotToTransfer;
-            }
-        }
-
-        //Do not catch those
-        public ICollection<PokemonId> PokemonsNotToCatch
-        {
-            get
-            {
-                //Type of pokemons not to catch
-                var defaultText = new string[] { "Zubat", "Pidgey", "Ratata" };
-                _pokemonsNotToCatch = _pokemonsNotToCatch ?? LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.txt", defaultText);
-                return _pokemonsNotToCatch;
-            }
-        }
 
         private static ICollection<PokemonId> LoadPokemonList(string filename, string[] defaultContent)
         {
             ICollection<PokemonId> result = new List<PokemonId>();
-            Func<string, ICollection<PokemonId>> addPokemonToResult = delegate (string pokemonName) {
+            Func<string, ICollection<PokemonId>> addPokemonToResult = delegate(string pokemonName)
+            {
                 PokemonId pokemon;
-                if (Enum.TryParse<PokemonId>(pokemonName, out pokemon))
+                if(Enum.TryParse(pokemonName, out pokemon))
                 {
-                    result.Add((PokemonId)pokemon);
+                    result.Add(pokemon);
                 }
                 return result;
             };
 
-            DirectoryInfo di = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
 
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
+            if(File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
             {
                 Logger.Write($"Loading File: {filename}");
 
                 var content = string.Empty;
-                using (StreamReader reader = new StreamReader(filename))
+                using(var reader = new StreamReader(filename))
                 {
                     content = reader.ReadToEnd();
                     reader.Close();
@@ -130,11 +113,10 @@ namespace PokemonGo.RocketAPI.Console
 
                 content = Regex.Replace(content, @"\\/\*(.|\n)*?\*\/", ""); //todo: supposed to remove comment blocks
 
-
-                StringReader tr = new StringReader(content);
+                var tr = new StringReader(content);
 
                 var pokemonName = tr.ReadLine();
-                while (pokemonName != null)
+                while(pokemonName != null)
                 {
                     addPokemonToResult(pokemonName);
                     pokemonName = tr.ReadLine();
@@ -143,7 +125,7 @@ namespace PokemonGo.RocketAPI.Console
             else
             {
                 Logger.Write($"File: {filename} not found, creating new...", LogLevel.Warning);
-                using (var w = File.AppendText(Directory.GetCurrentDirectory() + "\\" + filename))
+                using(var w = File.AppendText(Directory.GetCurrentDirectory() + "\\" + filename))
                 {
                     Array.ForEach(defaultContent, x => w.WriteLine(x));
                     Array.ForEach(defaultContent, x => addPokemonToResult(x));

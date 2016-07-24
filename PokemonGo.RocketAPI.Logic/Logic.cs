@@ -264,7 +264,7 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var pokemon in pokemons)
             {
-                if (_clientSettings.UsePokemonToNotCatchFilter && pokemon.PokemonId.Equals(_clientSettings.PokemonsNotToCatch.FirstOrDefault(i => i == pokemon.PokemonId)))
+                if (_clientSettings.UsePokemonToNotCatchFilter && pokemon.PokemonId.Equals(_clientSettings.PokemonToIgnore.FirstOrDefault(i => i == pokemon.PokemonId)))
                 {
                     Logger.Write("Skipped " + pokemon.PokemonId);
                     continue;
@@ -380,7 +380,7 @@ namespace PokemonGo.RocketAPI.Logic
                 _playerProfile = await _client.GetProfile();
                 _stats.SetUsername(_playerProfile);
                 if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
-                    await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
+                    await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonToEvolve);
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
                 await DisplayHighests();
                 _stats.UpdateConsoleTitle(_inventory);
@@ -423,7 +423,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task TransferDuplicatePokemon(bool keepPokemonsThatCanEvolve = false)
         {
-            var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve, _clientSettings.PrioritizeIVOverCP,_clientSettings.PokemonsNotToTransfer);
+            var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve, _clientSettings.PrioritizeIVOverCP,_clientSettings.PokemonToKeep);
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
