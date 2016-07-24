@@ -564,7 +564,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             string logFile = "allpokeslog.txt";
             Logger.Log($"====== LogAllPokemon ======", logFile);
-            var myPokemons = await _inventory.GetPokemons();
+            var myPokemons = await _inventory.GetPokemons(true);
             var pokemons = myPokemons.ToList().OrderBy(x => x.PokemonId.ToString());
 
             foreach (var pokemon in pokemons)
