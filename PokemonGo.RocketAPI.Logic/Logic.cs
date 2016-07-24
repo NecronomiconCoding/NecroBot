@@ -53,15 +53,15 @@ namespace PokemonGo.RocketAPI.Logic
             if (lastModified == null) return;
             double? hoursSinceModified = (DateTime.Now - lastModified).HasValue ? (double?)((DateTime.Now - lastModified).Value.Minutes / 60.0) : null;
             if (hoursSinceModified == null || hoursSinceModified == 0) return; // Shouldn't really be null, but can be 0 and that's bad for division.
-            double kmph = (distance / 1000) / (hoursSinceModified ?? .1);
+            var kmph = (distance / 1000) / (hoursSinceModified ?? .1);
             if (kmph < 80) // If speed required to get to the default location is < 80km/hr
             {
                 File.Delete(coordsPath);
-                Logger.Write("Kilometers Per Hour to reach default location since last run: " + kmph + ", realistic. Resetting coords to default.", LogLevel.Info);
+                Logger.Write("Detected realistic Traveling , using UserSettings.settings", LogLevel.Warning);
             }
             else
             {
-                Logger.Write("Kilometers Per Hour to reach default location since last run: " + kmph + ", not realistic. Continuing from last known location: " + latLngFromFile.Item1 + ", " + latLngFromFile.Item2, LogLevel.Info);
+                Logger.Write("Not realistic Traveling at " + kmph + ", using last saved Coords.ini", LogLevel.Warning);
             }
         }
 
@@ -71,7 +71,6 @@ namespace PokemonGo.RocketAPI.Logic
             var attemptCounter = 1;
             do
             {
-//test
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
 
                 var pokeball = await GetBestBall(encounter);
