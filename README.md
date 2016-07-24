@@ -1,11 +1,15 @@
 <!-- define warning icon -->
 [1.1]: http://i.imgur.com/M4fJ65n.png (ATTENTION)
-[1.2]: http://i.imgur.com/NNcGs1n.png (BTC)
+[1.2]: http://i.imgur.com/dUvMfwn.png (NECROBOT_BANNER.PNG)
+
+<!-- banner -->
+![alt text][1.2]
+
 <!-- title -->
-<h1>Pokemon Go Bot based on FeroxRevs API</h1>
+<h1 align="center">Pokemon Go Bot based on FeroxRevs API</h1>
 <br/>
 <!-- disclaimer -->
-![alt text][1.1] <strong><em> The contents of this repo are a proof of concept and are for educational use only </em></strong> ![alt text][1.1]
+![alt text][1.1] <p align="center"><strong><em> The contents of this repo are a proof of concept and are for educational use only </em></strong></p> ![alt text][1.1]
 <br/>
 <br/>
 
