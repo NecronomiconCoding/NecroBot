@@ -123,6 +123,15 @@ namespace PokemonGo.RocketAPI.Logic
                 .FirstOrDefault();
         }
 
+        public async Task<PokemonData> GetHighestPokemonOfTypeByIV(PokemonData pokemon)
+        {
+            var myPokemon = await GetPokemons();
+            var pokemons = myPokemon.ToList();
+            return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
+                .OrderByDescending(x => PokemonInfo.CalculatePokemonPerfection(x))
+                .FirstOrDefault();
+        }
+
         public async Task<int> GetItemAmountByType(MiscEnums.Item type)
         {
             var pokeballs = await GetItems();
