@@ -69,12 +69,11 @@ namespace PokemonGo.RocketAPI.Console
                     }
                     else
                     {
-                        Logger.Write($"There was an error while loading the items list. Invalid at line {lineNum}", LogLevel.Error);
+                        Logger.Write($"There was an error while loading an item in the items list. Invalid at line {lineNum}", LogLevel.Error);
                     }
 
                     lineNum++;
                 }
-                Logger.Write("Loaded the items-to-keep list!");
             }
             catch(Exception e)
             {
