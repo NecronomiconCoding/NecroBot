@@ -56,7 +56,6 @@ Please keep your conversations in the designated channels.
  - [Evolve all pokemons]
  - [Throws away unneeded items]
  - [Humanlike Walking]
- - [Configurable Custom Pathing]
 
 <br/>
 <h2><a name="screenshots">Screenshots</a></h2><br/>
@@ -64,7 +63,7 @@ Please keep your conversations in the designated channels.
 <hr/>
 
 <h2><a name="getting-started">Getting Started</a></h2>
-Note: You will need some basic Computer Experience.<br/>
+Note: You will need some basic Computer Expierience.<br/>
 Need help? <a name="chat">Join the Chat!</a> **The Issue Tracker is not for help!**<br/>
 <br/>
 <h2><a name="install-config">Installation & Configuration</a></h2><br/>
@@ -89,21 +88,6 @@ Need help? <a name="chat">Join the Chat!</a> **The Issue Tracker is not for help
 
 <hr/>
 <br/>
-
-<h2><a name="gpx-setup">GPX Pathing Setup</a></h2><br/>
-
-1. Go to [WTracks](https://wtracks.appspot.com/)
-2. Create your path by right clicking on the map. Use as many points as you'd like! It is recommended to have the path end near the beginning of the path so it can loop.
-3. Save without changing default settings.
-4. Remove the [highlighted block of data](http://i.imgur.com/Px6Ba22.png) from the .gpx file using NotePad++ or NotePad.
-5. Save the .gpx wherever your .exe is.
-6. In the config set UseGPXPathing to True and GPXFile to "X.gpx" where "X" is your filename.
-7. Set your default coordinates near the start of your path to begin pathing.
-8. Launch the program! (If it's still not working and you've followed these instructions to a 't', including triple checking your GPX file and removing the highlighted text, please change all periods to commas.)
-
-<hr/>
-<br/>
-
 <h2><a name="license">License</a></h2><br/>
 This Project is licensed as GNU (GNU GENERAL PUBLIC LICENSE v3) 
 <br/>
