@@ -80,6 +80,10 @@ namespace PokemonGo.RocketAPI.Console
                     System.Console.ForegroundColor = ConsoleColor.DarkYellow;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (BERRY) {message}");
                     break;
+                case LogLevel.Egg:
+                    System.Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (EGG) {message}");
+                    break;
                 case LogLevel.Debug:
                     System.Console.ForegroundColor = ConsoleColor.Gray;
                     System.Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (DEBUG) {message}");
