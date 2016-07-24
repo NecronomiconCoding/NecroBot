@@ -383,6 +383,7 @@ namespace PokemonGo.RocketAPI.Logic
                     await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
                 await DisplayHighests();
+                await DisplayPokemonWorthKeeping();
                 _stats.UpdateConsoleTitle(_inventory);
                 await RecycleItems();
                 await ExecuteFarmingPokestopsAndPokemons();
