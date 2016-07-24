@@ -523,6 +523,7 @@ namespace PokemonGo.RocketAPI.Logic
                 if (duplicatePokemon.Cp >= _clientSettings.KeepMinCP || PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) > _clientSettings.KeepMinIVPercentage)
                     continue;
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
+                _inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
                 _stats.IncreasePokemonsTransfered();
                 _stats.UpdateConsoleTitle(_inventory);
                 var bestPokemonOfType = await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
