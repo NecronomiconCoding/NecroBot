@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PokemonGo.RocketAPI.Logic.Event;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

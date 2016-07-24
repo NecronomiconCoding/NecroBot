@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PokemonGo.RocketAPI.Logic.State
+namespace PokemonGo.RocketAPI.Logic.Event
 {
-    public interface IEvent
+    public class UseLuckyEggEvent : IEvent
     {
+        public int Count;
     }
 }

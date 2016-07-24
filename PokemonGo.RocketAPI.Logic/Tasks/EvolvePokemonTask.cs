@@ -1,4 +1,6 @@
 ﻿using PokemonGo.RocketAPI.GeneratedCode;
+using PokemonGo.RocketAPI.Logic.Event;
+using PokemonGo.RocketAPI.Logic.State;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +8,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PokemonGo.RocketAPI.Logic.State
+namespace PokemonGo.RocketAPI.Logic.Tasks
 {
-    public class EvolvePokemonState : IState
+    public class EvolvePokemonTask
     {
-        public void UseLuckyEgg(Client client, Inventory inventory, StateMachine machine)
+        public static void UseLuckyEgg(Client client, Inventory inventory, StateMachine machine)
         {
             var inventoryTask = inventory.GetItems();
             inventoryTask.Wait();
@@ -30,7 +32,7 @@ namespace PokemonGo.RocketAPI.Logic.State
             Thread.Sleep(3000);
         }
 
-        public IState Execute(Context ctx, StateMachine machine)
+        public static void Execute(Context ctx, StateMachine machine)
         {
             if(ctx.Settings.useLuckyEggsWhileEvolving)
             {
@@ -52,8 +54,6 @@ namespace PokemonGo.RocketAPI.Logic.State
 
                 Thread.Sleep(3000);
             }
-
-            return null;
         }
     }
 }

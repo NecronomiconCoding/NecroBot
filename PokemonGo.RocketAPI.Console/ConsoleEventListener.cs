@@ -1,4 +1,5 @@
 ﻿using PokemonGo.RocketAPI.GeneratedCode;
+using PokemonGo.RocketAPI.Logic.Event;
 using PokemonGo.RocketAPI.Logic.State;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,16 @@ namespace PokemonGo.RocketAPI.Console
                         ? $"{evt.Id} successfully for {evt.Exp}xp"
                         : $"Failed {evt.Id}. EvolvePokemonOutProto.Result was {evt.Result}, stopping evolving {evt.Id}",
                     LogLevel.Evolve);
+        }
+
+        public void HandleEvent(TransferPokemonEvent evt)
+        {
+            Logger.Write($"{evt.Id} with {evt.Cp} ({evt.Perfection.ToString("0.00")} % perfect) CP (Best: {evt.BestCp} | ({evt.BestPerfection.ToString("0.00")} % perfect))", LogLevel.Transfer);
+        }
+
+        public void HandleEvent(ItemRecycledEvent evt)
+        {
+            Logger.Write($"{evt.Count}x {(ItemId)evt.Id}", LogLevel.Recycling);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
+using PokemonGo.RocketAPI.Logic.Event;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,12 +50,7 @@ namespace PokemonGo.RocketAPI.Logic.State
 
             DownloadProfile(ctx);
 
-            if(ctx.Settings.EvolveAllPokemonWithEnoughCandy || ctx.Settings.EvolveAllPokemonAboveIV)
-            {
-                return new EvolvePokemonState();
-            }
-
-            return null;
+            return new FarmState();
         }
 
         public void DownloadProfile(Context ctx)

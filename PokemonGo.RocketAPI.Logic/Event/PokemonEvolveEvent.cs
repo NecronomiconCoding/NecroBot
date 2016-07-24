@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PokemonGo.RocketAPI.Logic.State
+namespace PokemonGo.RocketAPI.Logic.Event
 {
     public class PokemonEvolveEvent : IEvent
     {
