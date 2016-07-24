@@ -35,6 +35,7 @@ namespace PokemonGo.RocketAPI.Console
         public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
         public string GPXFile => UserSettings.Default.GPXFile;
         public bool UseGPXPathing => UserSettings.Default.UseGPXPathing;
+        public bool useLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => new[]

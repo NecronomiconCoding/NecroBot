@@ -14330,6 +14330,300 @@ namespace PokemonGo.RocketAPI.GeneratedCode
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class UseItemRequest : pb::IMessage<UseItemRequest>
+    {
+        /// <summary>Field number for the "item_id" field.</summary>
+        public const int ItemIdFieldNumber = 1;
+
+        private static readonly pb::MessageParser<UseItemRequest> _parser =
+            new pb::MessageParser<UseItemRequest>(() => new UseItemRequest());
+
+        private global::PokemonGo.RocketAPI.GeneratedCode.ItemId itemId_ = 0;
+
+        public UseItemRequest()
+        {
+            OnConstruction();
+        }
+
+        public UseItemRequest(UseItemRequest other) : this()
+        {
+            itemId_ = other.itemId_;
+        }
+
+        public static pb::MessageParser<UseItemRequest> Parser
+        {
+            get { return _parser; }
+        }
+
+        public static pbr::MessageDescriptor Descriptor
+        {
+            get { return global::PokemonGo.RocketAPI.GeneratedCode.PayloadsReflection.Descriptor.MessageTypes[45]; }
+        }
+
+        public global::PokemonGo.RocketAPI.GeneratedCode.ItemId ItemId
+        {
+            get { return itemId_; }
+            set { itemId_ = value; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor
+        {
+            get { return Descriptor; }
+        }
+
+        public UseItemRequest Clone()
+        {
+            return new UseItemRequest(this);
+        }
+
+        public bool Equals(UseItemRequest other)
+        {
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(other, this))
+            {
+                return true;
+            }
+            if (ItemId != other.ItemId) return false;
+            return true;
+        }
+
+        public void WriteTo(pb::CodedOutputStream output)
+        {
+            if (ItemId != 0)
+            {
+                output.WriteRawTag(8);
+                output.WriteEnum((int)ItemId);
+            }
+        }
+
+        public int CalculateSize()
+        {
+            var size = 0;
+            if (ItemId != 0)
+            {
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemId);
+            }
+            return size;
+        }
+
+        public void MergeFrom(UseItemRequest other)
+        {
+            if (other == null)
+            {
+                return;
+            }
+            if (other.ItemId != 0)
+            {
+                ItemId = other.ItemId;
+            }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input)
+        {
+            uint tag;
+            while ((tag = input.ReadTag()) != 0)
+            {
+                switch (tag)
+                {
+                    default:
+                        input.SkipLastField();
+                        break;
+                    case 8:
+                        {
+                            itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId)input.ReadEnum();
+                            break;
+                        }
+                }
+            }
+        }
+
+        public override bool Equals(object other)
+        {
+            return Equals(other as UseItemRequest);
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = 1;
+            if (ItemId != 0) hash ^= ItemId.GetHashCode();
+            return hash;
+        }
+
+        partial void OnConstruction();
+
+        public override string ToString()
+        {
+            return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class UseIncubatorRequest : pb::IMessage<UseIncubatorRequest>
+    {
+        /// <summary>Field number for the "item_id" field.</summary>
+        public const int ItemIdFieldNumber = 1;
+
+        /// <summary>Field number for the "pokemon_id" field.</summary>
+        public const int PokemonFieldNumber = 2;
+
+        private static readonly pb::MessageParser<UseIncubatorRequest> _parser =
+            new pb::MessageParser<UseIncubatorRequest>(() => new UseIncubatorRequest());
+
+        private ulong pokemonId_;
+        private global::PokemonGo.RocketAPI.GeneratedCode.ItemId itemId_ = 0;
+
+        public UseIncubatorRequest()
+        {
+            OnConstruction();
+        }
+
+        public UseIncubatorRequest(UseIncubatorRequest other) : this()
+        {
+            itemId_ = other.itemId_;
+            pokemonId_ = other.pokemonId_;
+        }
+
+        public static pb::MessageParser<UseIncubatorRequest> Parser
+        {
+            get { return _parser; }
+        }
+
+        public static pbr::MessageDescriptor Descriptor
+        {
+            get { return global::PokemonGo.RocketAPI.GeneratedCode.PayloadsReflection.Descriptor.MessageTypes[45]; }
+        }
+
+        public global::PokemonGo.RocketAPI.GeneratedCode.ItemId ItemId
+        {
+            get { return itemId_; }
+            set { itemId_ = value; }
+        }
+
+        public ulong PokemonId
+        {
+            get { return pokemonId_; }
+            set { pokemonId_ = value; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor
+        {
+            get { return Descriptor; }
+        }
+
+        public UseIncubatorRequest Clone()
+        {
+            return new UseIncubatorRequest(this);
+        }
+
+        public bool Equals(UseIncubatorRequest other)
+        {
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(other, this))
+            {
+                return true;
+            }
+            if (ItemId != other.ItemId) return false;
+            if (PokemonId != other.PokemonId) return false;
+            return true;
+        }
+
+        public void WriteTo(pb::CodedOutputStream output)
+        {
+            if (ItemId != 0)
+            {
+                output.WriteRawTag(8);
+                output.WriteEnum((int)ItemId);
+            }
+            if (PokemonId != 0UL)
+            {
+                output.WriteRawTag(17);
+                output.WriteFixed64(PokemonId);
+            }
+        }
+
+        public int CalculateSize()
+        {
+            var size = 0;
+            if (ItemId != 0)
+            {
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemId);
+            }
+            if (PokemonId != 0UL)
+            {
+                size += 1 + 8;
+            }
+            return size;
+        }
+
+        public void MergeFrom(UseIncubatorRequest other)
+        {
+            if (other == null)
+            {
+                return;
+            }
+            if (other.ItemId != 0)
+            {
+                ItemId = other.ItemId;
+            }
+            if (other.PokemonId != 0UL)
+            {
+                PokemonId = other.PokemonId;
+            }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input)
+        {
+            uint tag;
+            while ((tag = input.ReadTag()) != 0)
+            {
+                switch (tag)
+                {
+                    default:
+                        input.SkipLastField();
+                        break;
+                    case 8:
+                        {
+                            itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId)input.ReadEnum();
+                            break;
+                        }
+                    case 17:
+                        {
+                            PokemonId = input.ReadFixed64();
+                            break;
+                        }
+                }
+            }
+        }
+
+        public override bool Equals(object other)
+        {
+            return Equals(other as UseIncubatorRequest);
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = 1;
+            if (ItemId != 0) hash ^= ItemId.GetHashCode();
+            if (PokemonId != 0UL) hash ^= PokemonId.GetHashCode();
+            return hash;
+        }
+
+        partial void OnConstruction();
+
+        public override string ToString()
+        {
+            return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+    }
+
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     public sealed partial class UseItemCaptureResponse : pb::IMessage<UseItemCaptureResponse>
     {
         /// <summary>Field number for the "success" field.</summary>

@@ -195,6 +195,10 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task EvolveAllPokemonWithEnoughCandy(IEnumerable<PokemonId> filter = null)
         {
+            if (_clientSettings.useLuckyEggsWhileEvolving)
+            {
+                popLuckyEgg(_client);
+            }
             var pokemonToEvolve = await _inventory.GetPokemonToEvolve(filter);
             foreach (var pokemon in pokemonToEvolve)
             {
@@ -253,6 +257,16 @@ namespace PokemonGo.RocketAPI.Logic
                 }
                 await Task.Delay(10000);
             }
+        }
+
+        private async Task popLuckyEgg(Client client)
+        {
+            Logger.Write("POPPIN AN EGG", LogLevel.Evolve);
+            await Task.Delay(1000);
+            UseLuckyEgg(client);
+            await Task.Delay(1000);
+            Logger.Write("POPPED AN EGG", LogLevel.Evolve);
+            await Task.Delay(1800000);
         }
 
         private async Task ExecuteCatchAllNearbyPokemons()
@@ -542,6 +556,20 @@ namespace PokemonGo.RocketAPI.Logic
 
             var useRaspberry = await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             Logger.Write($"Used, remaining: {berry.Count}", LogLevel.Berry);
+            await Task.Delay(3000);
+        }
+
+        public async Task UseLuckyEgg(Client client)
+        {
+            var inventory = await _inventory.GetItems();
+            var LuckyEggs = inventory.Where(p => (ItemId)p.Item_ == ItemId.ItemLuckyEgg);
+            var luckyEgg = LuckyEggs.FirstOrDefault();
+
+            if (luckyEgg == null || luckyEgg.Count <= 0)
+                return;
+
+            var useLuckyEgg = await _client.UseItemXpBoost(ItemId.ItemLuckyEgg);
+            Logger.Write($"Used Lucky Egg, remaining: {luckyEgg.Count - 1}", LogLevel.Debug);
             await Task.Delay(3000);
         }
 
