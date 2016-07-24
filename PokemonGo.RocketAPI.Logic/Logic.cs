@@ -467,14 +467,17 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task LogAllPokemon()
         {
-            Logger.Log($"====== DisplayAllPokemon ======");
+            string logFile = "allpokeslog.txt";
+            Logger.Log($"====== LogAllPokemon ======", logFile);
             var myPokemons = await _inventory.GetPokemons();
             var pokemons = myPokemons.ToList().OrderBy(x => x.PokemonId.ToString());
 
             foreach (var pokemon in pokemons)
             {
-                Logger.Log($"# {pokemon.PokemonId.ToString().PadRight(15, ' ')} | Lvl {PokemonInfo.GetLevel(pokemon),2:#0} | CP {pokemon.Cp,4:###0}/{PokemonInfo.CalculateMaxCP(pokemon),4:###0} | IV {PokemonInfo.CalculatePokemonPerfection(pokemon),6:##0.00}% [{pokemon.IndividualAttack,2:#0}/{pokemon.IndividualDefense,2:#0}/{pokemon.IndividualStamina,2:#0}]");
+                Logger.Log($"# {pokemon.PokemonId.ToString().PadRight(15, ' ')} | Lvl {PokemonInfo.GetLevel(pokemon),2:#0} | CP {pokemon.Cp,4:###0}/{PokemonInfo.CalculateMaxCP(pokemon),4:###0} | IV {PokemonInfo.CalculatePokemonPerfection(pokemon),6:##0.00}% [{pokemon.IndividualAttack,2:#0}/{pokemon.IndividualDefense,2:#0}/{pokemon.IndividualStamina,2:#0}]",
+                    logFile);
             }
+            Logger.Write($"All Pokemon stats written to {logFile}", LogLevel.Info);
         }
     }
 }
