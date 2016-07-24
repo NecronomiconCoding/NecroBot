@@ -319,7 +319,7 @@ namespace PokemonGo.RocketAPI.Logic
                                     i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
                                     ( // Make sure PokeStop is within 40 meters, otherwise we cannot hit them.
                                     LocationUtils.CalculateDistanceInMeters(
-                                        _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
+                                        _client.CurrentLat, _client.CurrentLng,
                                             i.Latitude, i.Longitude) < 40)
                                     );
 

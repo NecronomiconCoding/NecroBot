@@ -675,7 +675,7 @@ namespace PokemonGo.RocketAPI.Logic.Utils
             public string Lat = "";
             public string Lon = "";
             public string Sym = "";
-            public string Ele = "";
+            public string Ele = "0";
             public string Time = "";
             public string Cmt = "";
             public string Name = "";
