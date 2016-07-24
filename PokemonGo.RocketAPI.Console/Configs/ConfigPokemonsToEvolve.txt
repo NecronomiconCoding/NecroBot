@@ -64,7 +64,7 @@ Kangaskhan
 Kadabra
 Porygon
 Beedrill
-Mr. Mime
+MrMime
 Electabuzz
 Magneton
 Pinsir
@@ -118,11 +118,11 @@ Krabby
 Machop
 Squirtle
 Tentacool
-NidoranF
-Farfetch'd
+NidoranFemale
+Farfetchd
 Onix
 Voltorb
-NidoranM
+NidoranMale
 Ekans
 Rhyhorn
 Vulpix
