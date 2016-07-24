@@ -36,7 +36,7 @@ Thanks to everyone who volunteered by contributing via Pull Requests!
 <a name="paypal">Feel free to buy us all a beer, by using PayPal:</a><br/>
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=farhaninoor1%40gmail%2ecom&lc=GB&item_name=POGO%20Bot%20Donations&item_number=POGO&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)<br/>
 
-<h6><em>[ all PayPal donations are distributed amongst our most active collaborators ]</em></h6><br/>
+<h6><em>[ All PayPal donations are distributed amongst our most active collaborators. ]</em></h6><br/>
 <a name="btc">Donate Bitcoins to FeroxRev (the API library developer): *1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e*</a><br/>
 
 <hr/>
