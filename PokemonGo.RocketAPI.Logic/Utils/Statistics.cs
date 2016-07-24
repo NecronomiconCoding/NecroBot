@@ -172,12 +172,11 @@ namespace PokemonGo.RocketAPI.Logic.Utils
         {
             TotalPokemonsTransfered += 1;
         }
-
-        public void SetUsername(GetPlayerResponse profile)
+        
+        public void SetUsername(string profile)
         {
-            PlayerName = profile.Profile.Username ?? "";
+            PlayerName = profile ?? "";
         }
-
         public override string ToString()
         {
             return
