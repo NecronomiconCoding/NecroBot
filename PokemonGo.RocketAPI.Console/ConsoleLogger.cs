@@ -32,6 +32,8 @@ namespace PokemonGo.RocketAPI.Console
         /// <param name="color">Optional. Default is auotmatic</param>
         public void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black)
         {
+            //Remember to change to a font that supports your language, otherwise it'll still show as ???
+            System.Console.OutputEncoding = System.Text.Encoding.Unicode;
             if (level > _maxLogLevel)
                 return;
 
