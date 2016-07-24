@@ -38,21 +38,22 @@ namespace PokemonGo.RocketAPI.Console
         public bool useLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
         public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
         public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
+        public int InventoryCapacity => UserSettings.Default.InventoryCapacity;
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => new[]
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 75),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
+            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 75*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 25*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 50*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50*(InventoryCapacity/350)),
             new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
@@ -62,11 +63,11 @@ namespace PokemonGo.RocketAPI.Console
             new KeyValuePair<ItemId, int>(ItemId.ItemXAttack, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemXDefense, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemXMiracle, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemBlukBerry, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemNanabBerry, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemWeparBerry, 30),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPinapBerry, 30),
+            new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 50*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemBlukBerry, 10*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemNanabBerry, 10*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemWeparBerry, 30*(InventoryCapacity/350)),
+            new KeyValuePair<ItemId, int>(ItemId.ItemPinapBerry, 30*(InventoryCapacity/350)),
             new KeyValuePair<ItemId, int>(ItemId.ItemSpecialCamera, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasicUnlimited, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasic, 100),
