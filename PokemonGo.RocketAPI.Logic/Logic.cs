@@ -178,6 +178,8 @@ namespace PokemonGo.RocketAPI.Logic
         public async Task Execute()
         {
             Git.CheckVersion();
+            DirectoryInfo diConfigs = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs"); //create config folder if not exist for those who can't build
+            DirectoryInfo diLogs = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Logs");
             Logger.Write(
                 $"Make sure Lat & Lng is right. Exit Program if not! Lat: {_client.CurrentLat} Lng: {_client.CurrentLng}",
                 LogLevel.Warning);
@@ -276,7 +278,6 @@ namespace PokemonGo.RocketAPI.Logic
                     {
                         var trackPoints = track.Segments.ElementAt(0).TrackPoints;
                         var maxTrkPt = trackPoints.Count - 1;
-                        var mapObjects = await _client.GetMapObjects();
                         while (curTrkPt <= maxTrkPt)
                         {
                             var nextPoint = trackPoints.ElementAt(curTrkPt);
@@ -295,6 +296,7 @@ namespace PokemonGo.RocketAPI.Logic
                                 LogLevel.Warning);
 
                             // Wasn't sure how to make this pretty. Edit as needed.
+                            var mapObjects = await _client.GetMapObjects();
                             var pokeStops =
                                 mapObjects.MapCells.SelectMany(i => i.Forts)
                                     .Where(
