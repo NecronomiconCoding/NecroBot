@@ -300,13 +300,20 @@ namespace PokemonGo.RocketAPI.Logic
                             i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
                             ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
                             LocationUtils.CalculateDistanceInMeters(
-                                _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
+                                _client.CurrentLat, _client.CurrentLng,
                                     i.Latitude, i.Longitude) < _clientSettings.MaxTravelDistanceInMeters) ||
                                         _clientSettings.MaxTravelDistanceInMeters == 0
                             );
 
 
             var pokestopList = pokeStops.ToList();
+            if (pokestopList.Count <= 0)
+            {
+                Logger.Write($"No PokeStops within {_clientSettings.MaxTravelDistanceInMeters}m. Choose a different GPS location or increase MaxTravelDistanceInMeters.", LogLevel.Error);
+                return;
+            }
+            else
+                Logger.Write($"{pokestopList.Count} PokeStops found. Begin farming...");
 
             while (pokestopList.Any())
             {
