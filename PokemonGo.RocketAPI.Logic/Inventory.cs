@@ -29,7 +29,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             var myPokemon = await GetPokemons();
 
-            var pokemonList = myPokemon.Where(p => p.DeployedFortId == 0 && p.Favorite == 0 && p.Cp < _client.Settings.KeepMinCP).ToList(); //Don't evolve pokemon in gyms
+            var pokemonList = myPokemon.Where(p => p.DeployedFortId == 0 && p.Favorite == 0 && p.Cp < _client.Settings.KeepMinCP).ToList();
             if (filter != null)
             {
                 pokemonList = pokemonList.Where(p => !filter.Contains(p.PokemonId)).ToList();
@@ -57,7 +57,7 @@ namespace PokemonGo.RocketAPI.Logic
                     if (prioritizeIVoverCP)
                     {
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
-                            .OrderByDescending(x => x.CalculateIV())
+                            .OrderByDescending(x => PokemonInfo.CalculatePokemonPerfection(x))
                             .ThenBy(n => n.StaminaMax)
                             .Skip(amountToSkip)
                             .ToList());
@@ -81,7 +81,7 @@ namespace PokemonGo.RocketAPI.Logic
                 .Where(x => x.Count() > 1)
                 .SelectMany(
                     p =>
-                        p.OrderByDescending(x => x.CalculateIV())
+                        p.OrderByDescending(x => PokemonInfo.CalculatePokemonPerfection(x))
                             .ThenBy(n => n.StaminaMax)
                             .Skip(_client.Settings.KeepMinDuplicatePokemon)
                             .ToList());
