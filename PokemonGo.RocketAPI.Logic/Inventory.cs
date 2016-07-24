@@ -195,7 +195,6 @@ namespace PokemonGo.RocketAPI.Logic
                     .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
         }
 
-
         public async Task<IEnumerable<PokemonData>> GetPokemonToEvolve(IEnumerable<PokemonId> filter = null)
         {
             var myPokemons = await GetPokemons();
@@ -233,7 +232,6 @@ namespace PokemonGo.RocketAPI.Logic
             return pokemonToEvolve;
         }
 
-
         private async Task<GetInventoryResponse> getCachedInventory()
         {
             var now = DateTime.UtcNow;
@@ -258,6 +256,14 @@ namespace PokemonGo.RocketAPI.Logic
                 }
             }
            
+        }
+
+        public async void DeletePokemonFromInvById(ulong Id)
+        {
+            var inventory = await getCachedInventory();
+            InventoryItem pokemon = inventory.InventoryDelta.InventoryItems.FirstOrDefault(i => i.InventoryItemData.Pokemon != null && i.InventoryItemData.Pokemon.Id == Id);
+            if (pokemon != null)
+                inventory.InventoryDelta.InventoryItems.Remove(pokemon);
         }
     }
 }
