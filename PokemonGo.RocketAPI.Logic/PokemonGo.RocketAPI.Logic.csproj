@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Event\FortUsedEvent.cs" />
     <Compile Include="Event\ItemRecycledEvent.cs" />
     <Compile Include="Event\TransferPokemonEvent.cs" />
     <Compile Include="Inventory.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Event\PokemonEvolveEvent.cs" />
     <Compile Include="State\PositionCheckState.cs" />
     <Compile Include="State\StateMachine.cs" />
+    <Compile Include="Tasks\FarmPokestopsTask.cs" />
     <Compile Include="Tasks\RecycleItemsTask.cs" />
     <Compile Include="Tasks\TransferDuplicatePokemonTask.cs" />
     <Compile Include="Event\UseLuckyEggEvent.cs" />

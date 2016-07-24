@@ -5,7 +5,8 @@
         public enum FortType
         {
             GYM = 0,
-            CHECKPOINT = 1
+            CHECKPOINT = 1,
+            Checkpoint = 2
         }
 
         public enum Item

@@ -20,6 +20,7 @@ namespace PokemonGo.RocketAPI.Logic.State
         public Inventory Inventory {  get { return _inventory; } }
         public Client Client { get { return _client; } }
         public GetPlayerResponse Profile {get;set;}
+        public Navigation Navigation { get { return _navigation; } }
 
         public Context(ISettings settings)
         {

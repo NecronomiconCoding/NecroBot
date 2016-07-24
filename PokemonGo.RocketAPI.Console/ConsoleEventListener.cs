@@ -55,5 +55,15 @@ namespace PokemonGo.RocketAPI.Console
         {
             Logger.Write($"{evt.Count}x {(ItemId)evt.Id}", LogLevel.Recycling);
         }
+
+        public void HandleEvent(FortUsedEvent evt)
+        {
+            Logger.Write($"XP: {evt.Exp}, Gems: {evt.Gems}, Items: {evt.Items}", LogLevel.Pokestop);
+        }
+
+        public void HandleEvent(FortTargetEvent evt)
+        {
+            Logger.Write($"{evt.Name} in ({Math.Round(evt.Distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
+        }
     }
 }
