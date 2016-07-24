@@ -56,6 +56,7 @@ Please keep your conversations in the designated channels.
  - [Evolve all pokemons]
  - [Throws away unneeded items]
  - [Humanlike Walking]
+ - [Configurable Custom Pathing]
 
 <br/>
 <h2><a name="screenshots">Screenshots</a></h2><br/>
