@@ -12,6 +12,7 @@ using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.GeneratedCode;
+using System.IO;
 
 namespace PokemonGo.NecroBot.Logic
 {
@@ -50,6 +51,10 @@ namespace PokemonGo.NecroBot.Logic
                             await _client.DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
                             break;
                         case AuthType.Google:
+                            if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\GoogleAuth.ini"))
+                            {
+                                _client.googleRefreshToken = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\GoogleAuth.ini");
+                            }
                             await _client.DoGoogleLogin();
                             break;
                         default:
@@ -79,6 +84,9 @@ namespace PokemonGo.NecroBot.Logic
 
         public async Task PostLoginExecute()
         {
+            if (_clientSettings.AuthType == AuthType.Google) {
+                File.WriteAllText(Directory.GetCurrentDirectory() + "\\Configs\\GoogleAuth.ini", _client.googleRefreshToken);
+            }
             while (true)
             {
                 _playerProfile = await _client.GetProfile();
