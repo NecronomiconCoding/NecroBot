@@ -169,9 +169,9 @@ namespace PokemonGo.RocketAPI.Logic
                     .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
         }
 
-        public async Task<IEnumerable<PokemonData>> GetPokemons()
+        public async Task<IEnumerable<PokemonData>> GetPokemons(bool forceRefresh = false)
         {
-            var inventory = await getCachedInventory();
+            var inventory = await getCachedInventory(forceRefresh);
             return
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon)
                     .Where(p => p != null && p.PokemonId > 0);
@@ -224,12 +224,12 @@ namespace PokemonGo.RocketAPI.Logic
         }
 
 
-        private async Task<GetInventoryResponse> getCachedInventory()
+        private async Task<GetInventoryResponse> getCachedInventory(bool forceRefresh = false)
         {
             var now = DateTime.UtcNow;
             SemaphoreSlim ss = new SemaphoreSlim(10);
 
-            if (_lastRefresh != null && _lastRefresh.AddSeconds(30).Ticks > now.Ticks)
+            if (!forceRefresh && _lastRefresh != null && _lastRefresh.AddSeconds(30).Ticks > now.Ticks)
             {
                 return _cachedInventory;
             }
