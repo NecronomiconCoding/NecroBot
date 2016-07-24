@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
+using System.IO;
 
 #endregion
 
@@ -218,6 +219,54 @@ namespace PokemonGo.RocketAPI.Logic
             return
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon)
                     .Where(p => p != null && p.PokemonId > 0);
+        }
+
+        public async Task<string> SaveProfilePokemons(Profile player)
+        {
+            Logger.Write($"Saving Pokemon Profile for: {player.Username}", LogLevel.Info);
+
+            if (player == null)
+            {
+                Logger.Write("Player Profile is null.", LogLevel.Warning);
+                return "";
+            }
+            var pokemons = await GetPokemons();
+            pokemons = pokemons.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax);
+
+            var stats = await GetPlayerStats();
+            var stat = stats.FirstOrDefault();
+            if (stat == null)
+            {
+                Logger.Write("Player Stats not updated.", LogLevel.Warning);
+                return "";
+            }
+
+            DirectoryInfo diProfile = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\" + $"Profile_{player.Username}");
+
+            int trainerLevel = stat.Level;
+            int[] exp_req = new[] { 0, 1000, 3000, 6000, 10000, 15000, 21000, 28000, 36000, 45000, 55000, 65000, 75000, 85000, 100000, 120000, 140000, 160000, 185000, 210000, 260000, 335000, 435000, 560000, 710000, 900000, 1100000, 1350000, 1650000, 2000000, 2500000, 3000000, 3750000, 4750000, 6000000, 7500000, 9500000, 12000000, 15000000, 20000000 };
+            int exp_req_at_level = exp_req[stat.Level - 1];
+
+            File.WriteAllText(Directory.GetCurrentDirectory() + "\\" + $"Profile_{player.Username}" + "\\Pokemon.csv", $"PokemonID,NickName,CP,Perfection,Move 1, Move 2,HP,Attk,Def,Stamina,previewLink");
+
+            using (var w = File.AppendText(Directory.GetCurrentDirectory() + "\\" + $"Profile_{player.Username}" + "\\Pokemon.csv"))
+            {
+                w.WriteLine("");
+                foreach (var pokemon in pokemons)
+                {
+                   
+                    string toEncode = $"{(int)pokemon.PokemonId}" + "," + trainerLevel + "," + PokemonInfo.GetLevel(pokemon) + "," + pokemon.Cp + "," + pokemon.Stamina;
+
+                    //Generate base64 code to make it viewable here https://jackhumbert.github.io/poke-rater/#MTUwLDIzLDE3LDE5MDIsMTE4
+                    var encoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(toEncode));
+                    w.WriteLine($"{pokemon.PokemonId},{pokemon.Nickname},{pokemon.Cp},{PokemonInfo.CalculatePokemonPerfection(pokemon)},{pokemon.Move1},{pokemon.Move2},{pokemon.Stamina},{pokemon.IndividualAttack},{pokemon.IndividualDefense},{pokemon.IndividualStamina},https://jackhumbert.github.io/poke-rater/#{encoded}");
+                }  
+                w.Close();
+            }
+
+
+            return $"Profile_{player.Username}";
+
         }
 
         public async Task<IEnumerable<PokemonSettings>> GetPokemonSettings()

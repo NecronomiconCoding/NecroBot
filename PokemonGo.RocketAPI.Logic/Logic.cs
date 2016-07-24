@@ -410,6 +410,8 @@ namespace PokemonGo.RocketAPI.Logic
                         LogLevel.Pokestop);
                 }
 
+                await _inventory.SaveProfilePokemons(_playerProfile.Profile);
+
                 await Task.Delay(1000);
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
