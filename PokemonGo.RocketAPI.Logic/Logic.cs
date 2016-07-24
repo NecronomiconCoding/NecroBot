@@ -617,7 +617,8 @@ namespace PokemonGo.RocketAPI.Logic
             while (true)
             {
                 _playerProfile = await _client.GetProfile();
-                _stats.SetUsername(_playerProfile);
+                if (_clientSettings.AuthType == AuthType.Google) { _stats.SetUsername(_playerProfile.Profile.Username); }
+                else if (_clientSettings.AuthType == AuthType.Ptc) { _stats.SetUsername(_clientSettings.PtcUsername); }
                 if (_clientSettings.EvolveAllPokemonWithEnoughCandy || _clientSettings.EvolveAllPokemonAboveIV)
                     await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
