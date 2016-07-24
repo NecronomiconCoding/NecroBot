@@ -198,6 +198,16 @@ namespace PokemonGo.RocketAPI.Logic
             var pokemonToEvolve = await _inventory.GetPokemonToEvolve(filter);
             foreach (var pokemon in pokemonToEvolve)
             {
+                BaseStats baseStats = PokemonInfo.GetBaseStats(pokemon.PokemonId);
+                var max_cp = PokemonInfo.CalculateMaxCPMultiplier(pokemon);
+                var min_cp = PokemonInfo.CalculateMinCPMultiplier(pokemon);
+                var cur_cp = PokemonInfo.CalculateCPMultiplier(pokemon);
+
+
+                var maxCPPercent = ((cur_cp - min_cp) / (max_cp - min_cp)) * 100.0;
+
+                if (PokemonInfo.CalculatePokemonPerfection(pokemon) >= _clientSettings.KeepMinIVPercentage && (pokemon.Cp > _clientSettings.KeepMinCP && maxCPPercent >= 0.99))
+                    continue;
                 var evolvePokemonOutProto = await _client.EvolvePokemon(pokemon.Id);
 
                 if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
