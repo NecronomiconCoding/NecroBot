@@ -604,12 +604,9 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task PopLuckyEgg(Client client)
         {
-            Logger.Write("POPPIN AN EGG", LogLevel.Evolve);
             await Task.Delay(1000);
             await UseLuckyEgg(client);
             await Task.Delay(1000);
-            Logger.Write("POPPED AN EGG", LogLevel.Evolve);
-            await Task.Delay(1800000);
         }
 
         public async Task PostLoginExecute()
@@ -710,7 +707,7 @@ namespace PokemonGo.RocketAPI.Logic
                 return;
 
             await _client.UseItemXpBoost(ItemId.ItemLuckyEgg);
-            Logger.Write($"Used Lucky Egg, remaining: {luckyEgg.Count - 1}", LogLevel.Debug);
+            Logger.Write($"Used Lucky Egg, remaining: {luckyEgg.Count - 1}", LogLevel.Egg);
             await Task.Delay(3000);
         }
     }
