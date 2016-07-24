@@ -288,14 +288,20 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task ExecuteFarmingPokestopsAndPokemons()
         {
-            // Edge case for when the client somehow ends up outside the defined radius
-            if (LocationUtils.CalculateDistanceInMeters(
+            var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
                 _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
-                    _client.CurrentLat, _client.CurrentLng) > _clientSettings.MaxTravelDistanceInMeters)
+                    _client.CurrentLat, _client.CurrentLng);
+
+            // Edge case for when the client somehow ends up outside the defined radius
+            if (_clientSettings.MaxTravelDistanceInMeters != 0 && 
+                distanceFromStart > _clientSettings.MaxTravelDistanceInMeters)
             {
                 Logger.Write($"You're outside of your defined radius! Walking to start in 5 seconds...", LogLevel.Warning);
                 await Task.Delay(5000);
-                await MoveToStartLocation();
+                Logger.Write($"Moving to start location now. ({distanceFromStart}m)");
+                var update = await _navigation.HumanLikeWalking(
+                    new GeoCoordinate(_clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude),
+                        _clientSettings.WalkingSpeedInKilometerPerHour, null);
             }
 
             var mapObjects = await _client.GetMapObjects();
@@ -349,15 +355,7 @@ namespace PokemonGo.RocketAPI.Logic
             }
         }
 
-        private async Task MoveToStartLocation()
-        {
-            Logger.Write($"Moving to start location ({_clientSettings.DefaultLatitude}, {_clientSettings.DefaultLongitude})...", LogLevel.Info);
-            var update = await _navigation.HumanLikeWalking(
-                new GeoCoordinate(_clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude),
-                    _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
-            await Task.Delay(1000);
-            await ExecuteCatchAllNearbyPokemons();
-        }
+
 
         private async Task<MiscEnums.Item> GetBestBall(WildPokemon pokemon)
         {
