@@ -42,7 +42,6 @@ namespace PokemonGo.RocketAPI.Logic
             do
             {//test
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
-                
 
                 var pokeball = await GetBestBall(encounter?.WildPokemon);
                 if (pokeball == MiscEnums.Item.ITEM_UNKNOWN)
@@ -230,10 +229,10 @@ namespace PokemonGo.RocketAPI.Logic
                     switch (_clientSettings.AuthType)
                     {
                         case AuthType.Ptc:
-                        await _client.DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
+                            await _client.DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
                             break;
                         case AuthType.Google:
-                        await _client.DoGoogleLogin();
+                            await _client.DoGoogleLogin();
                             break;
                         default:
                             Logger.Write("wrong AuthType");
@@ -282,13 +281,23 @@ namespace PokemonGo.RocketAPI.Logic
                 if (pokemons.ElementAtOrDefault(pokemons.Count() - 1) != pokemon) // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
                 {
                     await Task.Delay(_clientSettings.DelayBetweenPokemonCatch);
+                }
             }
-        }
         }
 
 
         private async Task ExecuteFarmingPokestopsAndPokemons()
         {
+            // Edge case for when the client somehow ends up outside the defined radius
+            if (LocationUtils.CalculateDistanceInMeters(
+                _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
+                    _client.CurrentLat, _client.CurrentLng) > _clientSettings.MaxTravelDistanceInMeters)
+            {
+                Logger.Write($"You're outside of your defined radius! Walking to start in 5 seconds...", LogLevel.Warning);
+                await Task.Delay(5000);
+                await MoveToStartLocation();
+            }
+
             var mapObjects = await _client.GetMapObjects();
 
             // Wasn't sure how to make this pretty. Edit as needed.
@@ -307,6 +316,9 @@ namespace PokemonGo.RocketAPI.Logic
 
 
             var pokestopList = pokeStops.ToList();
+
+            if (pokestopList.Count <= 0)
+                Logger.Write("No usable PokeStops found in your area. Is your maximum distance too small?", LogLevel.Warning);
 
             while (pokestopList.Any())
             {
@@ -335,6 +347,16 @@ namespace PokemonGo.RocketAPI.Logic
                 await RecycleItems();
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
             }
+        }
+
+        private async Task MoveToStartLocation()
+        {
+            Logger.Write($"Moving to start location ({_clientSettings.DefaultLatitude}, {_clientSettings.DefaultLongitude})...", LogLevel.Info);
+            var update = await _navigation.HumanLikeWalking(
+                new GeoCoordinate(_clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude),
+                    _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+            await Task.Delay(1000);
+            await ExecuteCatchAllNearbyPokemons();
         }
 
         private async Task<MiscEnums.Item> GetBestBall(WildPokemon pokemon)
@@ -407,8 +429,8 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var item in items)
             {
-                var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                Logger.Write($"{item.Count}x {(ItemId) item.Item_}", LogLevel.Recycling);
+                var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
+                Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
                 _stats.AddItemsRemoved(item.Count);
                 _stats.UpdateConsoleTitle(_inventory);
                 await Task.Delay(500);
@@ -423,7 +445,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task TransferDuplicatePokemon(bool keepPokemonsThatCanEvolve = false)
         {
-            var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve, _clientSettings.PrioritizeIVOverCP,_clientSettings.PokemonsNotToTransfer);
+            var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve, _clientSettings.PrioritizeIVOverCP, _clientSettings.PokemonsNotToTransfer);
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
