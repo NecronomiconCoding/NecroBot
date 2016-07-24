@@ -74,7 +74,7 @@ namespace PokemonGo.RocketAPI.Logic
 //test
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
 
-                var pokeball = await GetBestBall(encounter?.WildPokemon);
+                var pokeball = await GetBestBall(encounter);
                 if (pokeball == MiscEnums.Item.ITEM_UNKNOWN)
                 {
                     Logger.Write(
@@ -451,25 +451,28 @@ namespace PokemonGo.RocketAPI.Logic
         }
 
 
-        private async Task<MiscEnums.Item> GetBestBall(WildPokemon pokemon)
+        private async Task<MiscEnums.Item> GetBestBall(EncounterResponse encounter)
         {
-            var pokemonCp = pokemon?.PokemonData?.Cp;
+            var pokemonCp = encounter?.WildPokemon?.PokemonData?.Cp;
+            var iV = Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData));
+            var proba = encounter?.CaptureProbability?.CaptureProbability_.First();
 
             var pokeBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_POKE_BALL);
             var greatBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_GREAT_BALL);
             var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
             var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
 
-            if (masterBallsCount > 0 && pokemonCp >= 2000)
+            if (masterBallsCount > 0 && pokemonCp >= 1200)
                 return MiscEnums.Item.ITEM_MASTER_BALL;
-            if (ultraBallsCount > 0 && pokemonCp >= 2000)
-                return MiscEnums.Item.ITEM_ULTRA_BALL;
-            if (greatBallsCount > 0 && pokemonCp >= 2000)
-                return MiscEnums.Item.ITEM_GREAT_BALL;
-
             if (ultraBallsCount > 0 && pokemonCp >= 1000)
                 return MiscEnums.Item.ITEM_ULTRA_BALL;
-            if (greatBallsCount > 0 && pokemonCp >= 1000)
+            if (greatBallsCount > 0 && pokemonCp >= 750)
+                return MiscEnums.Item.ITEM_GREAT_BALL;
+
+            if (ultraBallsCount > 0 && iV >= _clientSettings.KeepMinIVPercentage && proba < 0.40)
+                return MiscEnums.Item.ITEM_ULTRA_BALL;
+
+            if (greatBallsCount > 0 && iV >= _clientSettings.KeepMinIVPercentage && proba < 0.50)
                 return MiscEnums.Item.ITEM_GREAT_BALL;
 
             if (greatBallsCount > 0 && pokemonCp >= 300)
