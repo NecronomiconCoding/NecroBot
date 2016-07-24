@@ -32,6 +32,8 @@ namespace PokemonGo.RocketAPI.Console
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
         public bool PrioritizeIVOverCP => UserSettings.Default.PrioritizeIVOverCP;
+        public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
+        public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
         public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
         public string GPXFile => UserSettings.Default.GPXFile;
         public bool UseGPXPathing => UserSettings.Default.UseGPXPathing;
