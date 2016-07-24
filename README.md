@@ -100,6 +100,7 @@ Need help? <a name="chat">Join the Chat!</a> **The Issue Tracker is not for help
 6. In the config set UseGPXPathing to True and GPXFile to "X.gpx" where "X" is your filename.
 7. Set your default coordinates near the start of your path to begin pathing.
 8. Launch the program!
+8.1 If it's still not working and you've followed these instructions to a 't', including triple checking your GPX file and removing the highlighted text, please change all periods to commas.
 
 <hr/>
 <br/>
