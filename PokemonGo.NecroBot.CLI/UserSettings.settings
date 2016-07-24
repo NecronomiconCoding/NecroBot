@@ -2,6 +2,9 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PokemonGo.RocketAPI.Console" GeneratedClassName="UserSettings">
   <Profiles />
   <Settings>
+    <Setting Name="AuthType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Google</Value>
+    </Setting>
     <Setting Name="PtcUsername" Type="System.String" Scope="User">
       <Value Profile="(Default)">username</Value>
     </Setting>
@@ -46,9 +49,6 @@
     </Setting>
     <Setting Name="MaxTravelDistanceInMeters" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
-    </Setting>
-    <Setting Name="AuthType" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Ptc</Value>
     </Setting>
     <Setting Name="EnableHighestPokemonInfo" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
