@@ -318,6 +318,7 @@ namespace PokemonGo.RocketAPI
         public void SaveLatLng(double lat, double lng)
         {
             var latlng = lat + ":" + lng;
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
             File.WriteAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini", latlng);
         }
 
