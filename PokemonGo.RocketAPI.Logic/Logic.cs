@@ -474,5 +474,37 @@ namespace PokemonGo.RocketAPI.Logic
                 Logger.Write($"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
             }
         }
+        
+         private async Task DisplayPokemonWorthKeeping()
+        {
+            Logger.Write($"====== POKEMON WORTH KEEPING ======", LogLevel.Info, ConsoleColor.White);
+            var myPokemons = await _inventory.GetPokemons();
+            //var pokemonFamilies = myPokemons.GroupBy(p => p.PokemonId).ToList();
+            //var countPokemonFamilites = pokemonFamilies.Count();
+            var pokemons = myPokemons.OrderBy(x => x.PokemonId.ToString())
+                .ThenByDescending(PokemonInfo.CalculatePokemonPerfection).Take(151)
+                .ToList();
+
+
+            foreach (var pokemon in pokemons)
+            {
+                
+                
+                    BaseStats baseStats = PokemonInfo.GetBaseStats(pokemon.PokemonId);
+                    var max_cp = PokemonInfo.CalculateMaxCPMultiplier(pokemon);
+                    var min_cp = PokemonInfo.CalculateMinCPMultiplier(pokemon);
+                    var cur_cp = PokemonInfo.CalculateCPMultiplier(pokemon);
+
+
+                    var maxCPPercent = ((cur_cp - min_cp) / (max_cp - min_cp)) * 100.0;
+
+                    if (PokemonInfo.CalculatePokemonPerfection(pokemon) >= _clientSettings.KeepMinIVPercentage && maxCPPercent >= 0.8)
+
+                        Logger.Write(
+                            $"# {pokemon.PokemonId.ToString().PadRight(15, ' ')} | Lvl {PokemonInfo.GetLevel(pokemon),2:#0} | CP {pokemon.Cp,4:###0}/{PokemonInfo.CalculateMaxCP(pokemon),4:###0} | Max CP%: {maxCPPercent} | IV {PokemonInfo.CalculatePokemonPerfection(pokemon),6:##0.00}% [{pokemon.IndividualAttack,2:#0}/{pokemon.IndividualDefense,2:#0}/{pokemon.IndividualStamina,2:#0}]",
+                            LogLevel.Info, ConsoleColor.White);
+                
+            }
+        }
     }
 }
