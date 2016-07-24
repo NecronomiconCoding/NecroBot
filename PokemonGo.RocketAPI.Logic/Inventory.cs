@@ -142,13 +142,13 @@ namespace PokemonGo.RocketAPI.Logic
             var myItems = await GetItems();
 
             return myItems
-                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == (ItemId)x.Item_ && x.Count > f.Value))
+                .Where(x => settings.ItemRecycleFilter.ContainsKey((ItemId)x.Item_) && x.Count > settings.ItemRecycleFilter[(ItemId)x.Item_])
                 .Select(
                     x =>
                         new Item
                         {
                             Item_ = x.Item_,
-                            Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == (ItemId)x.Item_).Value,
+                            Count = x.Count - settings.ItemRecycleFilter[(ItemId)x.Item_],
                             Unseen = x.Unseen
                         });
         }
