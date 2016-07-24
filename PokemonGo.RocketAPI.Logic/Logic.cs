@@ -65,19 +65,20 @@ namespace PokemonGo.RocketAPI.Logic
             }
         }
 
-        private async Task CatchEncounter(EncounterResponse encounter, MapPokemon pokemon)
+                private async Task CatchEncounter(EncounterResponse encounter, MapPokemon pokemon2)
         {
             CatchPokemonResponse caughtPokemonResponse;
             var attemptCounter = 1;
             do
             {
+                //test
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
 
                 var pokeball = await GetBestBall(encounter);
                 if (pokeball == MiscEnums.Item.ITEM_UNKNOWN)
                 {
                     Logger.Write(
-                        $"No Pokeballs - We missed a {pokemon.PokemonId} with CP {encounter?.WildPokemon?.PokemonData?.Cp}",
+                        $"No Pokeballs - We missed a {pokemon2.PokemonId} with CP {encounter?.WildPokemon?.PokemonData?.Cp}",
                         LogLevel.Caught);
                     return;
                 }
@@ -85,15 +86,15 @@ namespace PokemonGo.RocketAPI.Logic
                     PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >=
                     _clientSettings.KeepMinIVPercentage)
                 {
-                    await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
+                    await UseBerry(pokemon2.EncounterId, pokemon2.SpawnpointId);
                 }
 
                 var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
-                    pokemon.Latitude, pokemon.Longitude);
+                    pokemon2.Latitude, pokemon2.Longitude);
                 caughtPokemonResponse =
                     await
-                        _client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude,
-                            pokemon.Longitude, pokeball);
+                        _client.CatchPokemon(pokemon2.EncounterId, pokemon2.SpawnpointId, pokemon2.Latitude,
+                            pokemon2.Longitude, pokeball);
                 if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
                 {
                     foreach (var xp in caughtPokemonResponse.Scores.Xp)
@@ -111,7 +112,7 @@ namespace PokemonGo.RocketAPI.Logic
                         switch (a)
                         {
                             case MiscEnums.Item.ITEM_POKE_BALL:
-                                return "Poke";
+                                return "Normal";
                             case MiscEnums.Item.ITEM_GREAT_BALL:
                                 return "Great";
                             case MiscEnums.Item.ITEM_ULTRA_BALL:
@@ -122,12 +123,21 @@ namespace PokemonGo.RocketAPI.Logic
                                 return "Unknown";
                         }
                     };
+                    var families = await _inventory.GetPokemonFamilies();
+                    int familyCandy = 0;
+                    foreach (PokemonFamily pokemon in families)
+                    {
+                        if (pokemon.FamilyId.ToString() == "Family" + pokemon2.PokemonId)
+                        {
+                            Logger.Write($"Found a match at {pokemon.FamilyId.ToString()}");
+                            familyCandy = pokemon.Candy+3;
+                        }
+                    }
                     var catchStatus = attemptCounter > 1
                         ? $"{caughtPokemonResponse.Status} Attempt #{attemptCounter}"
                         : $"{caughtPokemonResponse.Status}";
                     Logger.Write(
-                        $"({catchStatus}) | {pokemon.PokemonId} Lvl {PokemonInfo.GetLevel(encounter.WildPokemon?.PokemonData)} ({encounter.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {Math.Round(Convert.ToDouble(encounter.CaptureProbability?.CaptureProbability_.First())*100, 2)}% | {Math.Round(distance)}m dist | with a {returnRealBallName(pokeball)}Ball.",
-                        LogLevel.Caught);
+                        $"({catchStatus}) | {pokemon2.PokemonId} Lvl {PokemonInfo.GetLevel(encounter.WildPokemon?.PokemonData)} ({encounter.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {Math.Round(Convert.ToDouble(encounter.CaptureProbability?.CaptureProbability_.First()) * 100, 2)}% | {Math.Round(distance)}m dist | with a {returnRealBallName(pokeball)} ball. Family Candies: {familyCandy}", LogLevel.Caught);
                 }
                 attemptCounter++;
                 await Task.Delay(2000);
@@ -717,8 +727,8 @@ namespace PokemonGo.RocketAPI.Logic
 
         public async Task UseBerry(ulong encounterId, string spawnPointId)
         {
-            var inventoryBalls = await _inventory.GetItems();
-            var berries = inventoryBalls.Where(p => (ItemId) p.Item_ == ItemId.ItemRazzBerry);
+            var inventory = await _inventory.GetItems();
+            var berries = inventory.Where(p => (ItemId) p.Item_ == ItemId.ItemRazzBerry);
             var berry = berries.FirstOrDefault();
 
             if (berry == null || berry.Count <= 0)
