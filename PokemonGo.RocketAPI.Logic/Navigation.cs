@@ -129,8 +129,6 @@ namespace PokemonGo.RocketAPI.Logic
                 await Task.Delay(Math.Min((int)(distanceToTarget / speedInMetersPerSecond * 1000), 3000));
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
-            return result;
-
             await Task.Delay(0);
 
             return result;

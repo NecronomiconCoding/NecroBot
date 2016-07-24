@@ -292,6 +292,12 @@ namespace PokemonGo.RocketAPI.Logic
                 await ExecuteFarmingPokestopsAndPokemons();
             else
             {
+                if (Statistics.Currentlevel >= _clientSettings.StopAtLevel)
+                {
+                    Logger.Write($"Current level {Statistics.Currentlevel}, StopAtLevel set to {_clientSettings.StopAtLevel}, exiting", LogLevel.Info, ConsoleColor.Red);
+                    Environment.Exit(0);
+                }
+
                 bool onTrack = true;
                 List<GPXReader.trk> Tracks = GetGPXTracks(_clientSettings.GPXFile);
                 int curTrkPt = 0;
@@ -313,13 +319,14 @@ namespace PokemonGo.RocketAPI.Logic
                         while (curTrkPt <= maxTrkPt)
                         {
                             GPXReader.trkpt nextPoint = TrackPoints.ElementAt(curTrkPt);
-                            if (LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon)) > 5000)
+                            var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon));
+                            if (distance > 5000)
                             {
-                                Logger.Write($"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {_client.CurrentLat}, {_client.CurrentLng}", LogLevel.Error);
+                                Logger.Write($"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {_client.CurrentLat}, {_client.CurrentLng} ({distance}m away)", LogLevel.Error);
                                 break;
                             }
 
-                            Logger.Write($"Your desired destination is {nextPoint.Lat}, your location is {nextPoint.Lon} {_client.CurrentLat}, {_client.CurrentLng}", LogLevel.Warning);
+                            Logger.Write($"Your desired destination is {nextPoint.Lat}, your location is {nextPoint.Lon} {_client.CurrentLat}, {_client.CurrentLng} ({distance}m away)", LogLevel.Warning);
 
                             // Wasn't sure how to make this pretty. Edit as needed.
                             var pokeStops =
@@ -380,53 +387,80 @@ namespace PokemonGo.RocketAPI.Logic
                 }//end tracks
             }
         }
+
         private async Task ExecuteFarmingPokestopsAndPokemons()
         {
+            if (Statistics.Currentlevel >= _clientSettings.StopAtLevel)
+            {
+                Logger.Write($"Current level {Statistics.Currentlevel}, StopAtLevel set to {_clientSettings.StopAtLevel}, exiting", LogLevel.Info, ConsoleColor.Red);
+                Environment.Exit(0);
+            }
+
             var mapObjects = await _client.GetMapObjects();
+            IEnumerable<FortData> pokeStops;
 
-            // Wasn't sure how to make this pretty. Edit as needed.
-            var pokeStops =
-                mapObjects.MapCells.SelectMany(i => i.Forts)
-                    .Where(
-                        i =>
-                            i.Type == FortType.Checkpoint &&
-                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
-                            ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
-                            LocationUtils.CalculateDistanceInMeters(
-                                _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
-                                    i.Latitude, i.Longitude) < _clientSettings.MaxTravelDistanceInMeters) ||
-                                        _clientSettings.MaxTravelDistanceInMeters == 0
-                            );
-
+            // im sure this could be efficient and neat if someone has better sqlfu
+            if (_clientSettings.WalkingSpeedInKilometerPerHour > 0)
+            {
+                pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts).Where(
+                    i => i.Type == FortType.Checkpoint &&
+                    i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
+                    // Make sure PokeStop is within max travel distance, unless it's set to 0.
+                    (LocationUtils.CalculateDistanceInMeters(_clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude, i.Latitude, i.Longitude) < _clientSettings.MaxTravelDistanceInMeters) || _clientSettings.MaxTravelDistanceInMeters == 0);
+            }
+            else
+            {
+                pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts).Where(
+                    i => i.Type == FortType.Checkpoint &&
+                    i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
+                    // 70m for radius of players ring (pokestop reach range)?
+                    LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude, i.Longitude) <= 70);
+            }
 
             var pokestopList = pokeStops.ToList();
 
-            while (pokestopList.Any())
+            if (pokestopList.Count == 0)
             {
-                //resort
-                pokestopList = pokestopList.OrderBy(i => LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude, i.Longitude)).ToList();
-                var pokeStop = pokestopList[0];
-                pokestopList.RemoveAt(0);
-
-
-                var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, pokeStop.Latitude, pokeStop.Longitude);
-                var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-
-                Logger.Write($"{fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
-                var update = await _navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude), _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
-
-                var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                if (fortSearch.ExperienceAwarded > 0)
-                {
-                    _stats.AddExperience(fortSearch.ExperienceAwarded);
-                    _stats.UpdateConsoleTitle(_inventory);
-                    //todo: fix egg crash
-                    Logger.Write($"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}", LogLevel.Pokestop);
-                }
-
-                await Task.Delay(1000);
+                await ExecuteCatchAllNearbyPokemons();
                 await RecycleItems();
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+            }
+            else
+            {
+                while (pokestopList.Any())
+                {
+                    //resort
+                    pokestopList = pokestopList.OrderBy(i => LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude, i.Longitude)).ToList();
+                    var pokeStop = pokestopList[0];
+                    pokestopList.RemoveAt(0);
+
+
+                    var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, pokeStop.Latitude, pokeStop.Longitude);
+                    var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    if (_clientSettings.WalkingSpeedInKilometerPerHour > 0)
+                    {
+                        Logger.Write($"{fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
+                        var update = await _navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude), _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+                    }
+                    else
+                    {
+                        // Add this here to prioritize catching pokemon over searching pokestops
+                        await ExecuteCatchAllNearbyPokemons();
+                    }
+
+                    var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    if (fortSearch.ExperienceAwarded > 0)
+                    {
+                        _stats.AddExperience(fortSearch.ExperienceAwarded);
+                        _stats.UpdateConsoleTitle(_inventory);
+                        //todo: fix egg crash
+                        Logger.Write($"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}", LogLevel.Pokestop);
+                    }
+
+                    await Task.Delay(1000);
+                    await RecycleItems();
+                    if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                }
             }
         }
 
