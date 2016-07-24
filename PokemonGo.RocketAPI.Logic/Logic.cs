@@ -286,9 +286,14 @@ namespace PokemonGo.RocketAPI.Logic
         }
         }
 
-
         private async Task ExecuteFarmingPokestopsAndPokemons()
         {
+            if (Statistics.Currentlevel >= _clientSettings.StopAtLevel)
+            {
+                Logger.Write($"Current level {Statistics.Currentlevel}, StopAtLevel set to {_clientSettings.StopAtLevel}, exiting", LogLevel.Info, ConsoleColor.Red);
+                Environment.Exit(0);
+            }
+
             var mapObjects = await _client.GetMapObjects();
 
             // Wasn't sure how to make this pretty. Edit as needed.

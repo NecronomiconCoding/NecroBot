@@ -214,5 +214,17 @@ namespace PokemonGo.RocketAPI.Console {
                 this["MaxTravelDistanceInMeters"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("99")]
+        public int StopAtLevel {
+            get {
+                return ((int)(this["StopAtLevel"]));
+            }
+            set {
+                this["StopAtLevel"] = value;
+            }
+        }
     }
 }
