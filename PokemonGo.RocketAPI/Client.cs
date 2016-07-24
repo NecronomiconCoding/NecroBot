@@ -472,7 +472,7 @@ namespace PokemonGo.RocketAPI
                         useItemRequest);
         }
 
-        public async Task<UseItemRequest> UseItem(ItemId itemId)
+        public async Task<UseItemRequest> UseItemXpBoost(ItemId itemId) //changed from UseItem to UseItemXpBoost because of the RequestType
         {
             var customRequest = new UseItemRequest
             {

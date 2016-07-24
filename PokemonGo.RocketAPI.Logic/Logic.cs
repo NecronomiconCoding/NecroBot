@@ -195,7 +195,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task EvolveAllPokemonWithEnoughCandy(IEnumerable<PokemonId> filter = null)
         {
-            if (_clientSettings.useLuckyEggsWhileEvolving == true)
+            if (_clientSettings.useLuckyEggsWhileEvolving)
             {
                 popLuckyEgg(_client);
             }
@@ -568,7 +568,7 @@ namespace PokemonGo.RocketAPI.Logic
             if (luckyEgg == null || luckyEgg.Count <= 0)
                 return;
 
-            var useLuckyEgg = await _client.UseItem(ItemId.ItemLuckyEgg);
+            var useLuckyEgg = await _client.UseItemXpBoost(ItemId.ItemLuckyEgg);
             Logger.Write($"Used Lucky Egg, remaining: {luckyEgg.Count - 1}", LogLevel.Debug);
             await Task.Delay(3000);
         }
