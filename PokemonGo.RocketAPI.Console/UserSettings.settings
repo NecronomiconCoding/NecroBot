@@ -59,5 +59,11 @@
     <Setting Name="useLuckyEggsWhileEvolving" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="EvolveAllPokemonAboveIV" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EvolveAboveIVValue" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">95</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

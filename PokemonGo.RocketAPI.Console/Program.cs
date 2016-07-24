@@ -1,4 +1,4 @@
-﻿#region
+﻿#region using directives
 
 using System;
 using System.Threading;
@@ -11,7 +11,7 @@ namespace PokemonGo.RocketAPI.Console
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static void Main()
         {
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
 

@@ -1,11 +1,11 @@
-﻿#region
+﻿#region using directives
 
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text.RegularExpressions;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
-using System.Text.RegularExpressions;
 
 #endregion
 
@@ -13,9 +13,9 @@ namespace PokemonGo.RocketAPI.Console
 {
     public class Settings : ISettings
     {
+        private ICollection<PokemonId> _pokemonsNotToCatch;
         private ICollection<PokemonId> _pokemonsNotToTransfer;
         private ICollection<PokemonId> _pokemonsToEvolve;
-        private ICollection<PokemonId> _pokemonsNotToCatch;
 
         public AuthType AuthType => (AuthType) Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         public string PtcUsername => UserSettings.Default.PtcUsername;
@@ -36,6 +36,8 @@ namespace PokemonGo.RocketAPI.Console
         public string GPXFile => UserSettings.Default.GPXFile;
         public bool UseGPXPathing => UserSettings.Default.UseGPXPathing;
         public bool useLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
+        public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
+        public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => new[]
@@ -77,8 +79,9 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Type of pokemons to evolve
-                var defaultText = new string[] { "Zubat", "Pidgey", "Rattata" };
-                _pokemonsToEvolve = _pokemonsToEvolve ?? LoadPokemonList("Configs\\ConfigPokemonsToEvolve.txt", defaultText);
+                var defaultText = new[] {"Zubat", "Pidgey", "Rattata"};
+                _pokemonsToEvolve = _pokemonsToEvolve ??
+                                    LoadPokemonList("Configs\\ConfigPokemonsToEvolve.txt", defaultText);
                 return _pokemonsToEvolve;
             }
         }
@@ -88,8 +91,9 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Type of pokemons not to transfer
-                var defaultText = new string[] { "Dragonite", "Charizard", "Zapdos", "Snorlax", "Alakhazam", "Mew", "Mewtwo" };
-                _pokemonsNotToTransfer = _pokemonsNotToTransfer ?? LoadPokemonList("Configs\\ConfigPokemonsToKeep.txt", defaultText);
+                var defaultText = new[] {"Dragonite", "Charizard", "Zapdos", "Snorlax", "Alakhazam", "Mew", "Mewtwo"};
+                _pokemonsNotToTransfer = _pokemonsNotToTransfer ??
+                                         LoadPokemonList("Configs\\ConfigPokemonsToKeep.txt", defaultText);
                 return _pokemonsNotToTransfer;
             }
         }
@@ -100,8 +104,9 @@ namespace PokemonGo.RocketAPI.Console
             get
             {
                 //Type of pokemons not to catch
-                var defaultText = new string[] { "Zubat", "Pidgey", "Rattata" };
-                _pokemonsNotToCatch = _pokemonsNotToCatch ?? LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.txt", defaultText);
+                var defaultText = new[] {"Zubat", "Pidgey", "Rattata"};
+                _pokemonsNotToCatch = _pokemonsNotToCatch ??
+                                      LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.txt", defaultText);
                 return _pokemonsNotToCatch;
             }
         }
@@ -109,23 +114,24 @@ namespace PokemonGo.RocketAPI.Console
         private static ICollection<PokemonId> LoadPokemonList(string filename, string[] defaultContent)
         {
             ICollection<PokemonId> result = new List<PokemonId>();
-            Func<string, ICollection<PokemonId>> addPokemonToResult = delegate (string pokemonName) {
+            Func<string, ICollection<PokemonId>> addPokemonToResult = delegate(string pokemonName)
+            {
                 PokemonId pokemon;
-                if (Enum.TryParse<PokemonId>(pokemonName, out pokemon))
+                if (Enum.TryParse(pokemonName, out pokemon))
                 {
-                    result.Add((PokemonId)pokemon);
+                    result.Add(pokemon);
                 }
                 return result;
             };
 
-            DirectoryInfo di = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
 
             if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
             {
                 Logger.Write($"Loading File: {filename}");
 
-                var content = string.Empty;
-                using (StreamReader reader = new StreamReader(filename))
+                string content;
+                using (var reader = new StreamReader(filename))
                 {
                     content = reader.ReadToEnd();
                     reader.Close();
@@ -134,7 +140,7 @@ namespace PokemonGo.RocketAPI.Console
                 content = Regex.Replace(content, @"\\/\*(.|\n)*?\*\/", ""); //todo: supposed to remove comment blocks
 
 
-                StringReader tr = new StringReader(content);
+                var tr = new StringReader(content);
 
                 var pokemonName = tr.ReadLine();
                 while (pokemonName != null)

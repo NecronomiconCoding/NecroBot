@@ -1,6 +1,7 @@
-﻿#region
+﻿#region using directives
 
 using System;
+using System.Text;
 using PokemonGo.RocketAPI.Logging;
 
 #endregion
@@ -33,7 +34,7 @@ namespace PokemonGo.RocketAPI.Console
         public void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black)
         {
             //Remember to change to a font that supports your language, otherwise it'll still show as ???
-            System.Console.OutputEncoding = System.Text.Encoding.Unicode;
+            System.Console.OutputEncoding = Encoding.Unicode;
             if (level > _maxLogLevel)
                 return;
 
