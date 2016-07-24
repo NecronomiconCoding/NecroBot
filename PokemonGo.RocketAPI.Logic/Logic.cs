@@ -717,8 +717,8 @@ namespace PokemonGo.RocketAPI.Logic
 
         public async Task UseBerry(ulong encounterId, string spawnPointId)
         {
-            var inventoryBalls = await _inventory.GetItems();
-            var berries = inventoryBalls.Where(p => (ItemId) p.Item_ == ItemId.ItemRazzBerry);
+            var inventoryBerry = await _inventory.GetItems();
+            var berries = inventoryBerry.Where(p => (ItemId) p.Item_ == ItemId.ItemRazzBerry);
             var berry = berries.FirstOrDefault();
 
             if (berry == null || berry.Count <= 0)
