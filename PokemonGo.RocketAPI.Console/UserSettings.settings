@@ -53,5 +53,11 @@
     <Setting Name="StopAtLevel" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">99</Value>
     </Setting>
+    <Setting Name="UseGPXPathing" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="GPXFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GPXFile.GPX</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -34,7 +34,9 @@ namespace PokemonGo.RocketAPI.Console
         public bool PrioritizeIVOverCP => UserSettings.Default.PrioritizeIVOverCP;
         public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
         public int StopAtLevel => UserSettings.Default.StopAtLevel;
-         
+        public string GPXFile => UserSettings.Default.GPXFile;
+        public bool UseGPXPathing => UserSettings.Default.UseGPXPathing;
+
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => new[]
         {
