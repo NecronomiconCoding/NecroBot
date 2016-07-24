@@ -80,9 +80,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
+<<<<<<< HEAD
     <PostBuildEvent>IF NOT EXIST "$(TargetDir)\Configs" (
 md "$(TargetDir)\Configs"
 )
+=======
+    <PostBuildEvent>md "$(TargetDir)\Configs"
+>>>>>>> 3289b6689ca2451b70d8efb3181bdad8748bfac1
 
 IF NOT EXIST "$(TargetDir)\Configs\ConfigPokemonsNotToCatch.txt" (
 COPY "$(ProjectDir)Configs\ConfigPokemonsNotToCatch.txt" "$(TargetDir)\Configs\ConfigPokemonsNotToCatch.txt" /Y
