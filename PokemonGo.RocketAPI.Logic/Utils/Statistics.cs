@@ -31,14 +31,18 @@ namespace PokemonGo.RocketAPI.Logic.Utils
             if (stat != null)
             {
                 var ep = stat.NextLevelXp - stat.PrevLevelXp - (stat.Experience - stat.PrevLevelXp);
-                var hours = Math.Round(ep/(TotalExperience/_getSessionRuntime()), 2);
-                if (Double.IsInfinity(hours) == false && hours > 0)
+                var time = Math.Round(ep/(TotalExperience /_getSessionRuntime()), 2);
+                var hours = 0.00;
+                var minutes = 0.00;
+                if (Double.IsInfinity(time) == false && time > 0)
                 {
-                    hours = Convert.ToDouble(TimeSpan.FromHours(hours).ToString("h\\.mm")) / 100;
+                    time = Convert.ToDouble(TimeSpan.FromHours(time).ToString("h\\.mm")) / 100;
+                    hours = Math.Truncate(time);
+                    minutes = Math.Round((time - hours) * 100);
                 }
 
                 output =
-                    $"{stat.Level} (next level in {hours}h | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
+                    $"{stat.Level} (next level in {hours}h {minutes}m | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
                 //output = $"{stat.Level} (LvLUp in {_hours}hours // EXP required: {_ep})";
             }
             return output;
