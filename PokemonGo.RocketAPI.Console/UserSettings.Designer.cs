@@ -219,11 +219,15 @@ namespace PokemonGo.RocketAPI.Console {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public float EvolveAboveIVValue {
-            get {
+            get
+            {
                 return ((float)(this["EvolveAboveIVValue"]));
             }
-            set {
+            set
+            {
                 this["EvolveAboveIVValue"] = value;
+            }
+        }
 
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -234,7 +238,6 @@ namespace PokemonGo.RocketAPI.Console {
             }
             set {
                 this["MaxTravelDistanceInMeters"] = value;
-
             }
         }
     }
