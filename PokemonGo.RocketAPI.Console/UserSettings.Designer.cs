@@ -240,5 +240,29 @@ namespace PokemonGo.RocketAPI.Console {
                 this["MaxTravelDistanceInMeters"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseGPXPathing {
+            get {
+                return ((bool)(this["UseGPXPathing"]));
+            }
+            set {
+                this["UseGPXPathing"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("GPXFile.GPX")]
+        public string GPXFile {
+            get {
+                return ((string)(this["GPXFile"]));
+            }
+            set {
+                this["GPXFile"] = value;
+            }
+        }
     }
 }

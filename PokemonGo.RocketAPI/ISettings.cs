@@ -28,6 +28,8 @@ namespace PokemonGo.RocketAPI
         bool EvolveAllPokemonAboveIV { get; }
         float EvolveAboveIVValue { get; }
         int MaxTravelDistanceInMeters { get; }
+        bool UseGPXPathing { get; }
+        string GPXFile { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 

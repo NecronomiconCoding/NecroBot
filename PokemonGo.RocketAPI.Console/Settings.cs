@@ -35,7 +35,9 @@ namespace PokemonGo.RocketAPI.Console
         public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
         public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
         public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
-         
+        public string GPXFile => UserSettings.Default.GPXFile;
+        public bool UseGPXPathing => UserSettings.Default.UseGPXPathing;
+
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => new[]
         {

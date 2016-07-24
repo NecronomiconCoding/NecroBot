@@ -49,6 +49,7 @@
     <Compile Include="Logic.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\GPXReader.cs" />
     <Compile Include="Utils\LocationUtils.cs" />
     <Compile Include="Utils\Statistics.cs" />
     <Compile Include="Utils\StringUtils.cs" />
