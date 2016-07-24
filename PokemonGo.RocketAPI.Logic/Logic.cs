@@ -427,6 +427,17 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
+                BaseStats baseStats = PokemonInfo.GetBaseStats(duplicatePokemon.PokemonId);
+                var max_cp = PokemonInfo.CalculateMaxCPMultiplier(duplicatePokemon);
+                var min_cp = PokemonInfo.CalculateMinCPMultiplier(duplicatePokemon);
+                var cur_cp = PokemonInfo.CalculateCPMultiplier(duplicatePokemon);
+
+
+                var maxCPPercent = ((cur_cp - min_cp) / (max_cp - min_cp)) * 100.0;
+
+                if (PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >= _clientSettings.KeepMinIVPercentage || (duplicatePokemon.Cp > _clientSettings.KeepMinCP && maxCPPercent >= 0.8))
+                    continue;
+                    
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
                 _stats.IncreasePokemonsTransfered();
                 _stats.UpdateConsoleTitle(_inventory);
