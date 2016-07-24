@@ -432,7 +432,7 @@ namespace PokemonGo.RocketAPI.Logic
                 var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
                 _stats.IncreasePokemonsTransfered();
                 _stats.UpdateConsoleTitle(_inventory);
-                var bestPokemonOfType = await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
+                var bestPokemonOfType = _client.Settings.PrioritizeIVOverCP ? await _inventory.GetHighestPokemonOfTypeByIV(duplicatePokemon) : await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
                 Logger.Write($"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({PokemonInfo.CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")} % perfect) CP (Best: {bestPokemonOfType.Cp} | ({PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")} % perfect))", LogLevel.Transfer);
                 await Task.Delay(500);
             }
@@ -455,11 +455,11 @@ namespace PokemonGo.RocketAPI.Logic
         private async Task DisplayHighests()
         {
             Logger.Write($"====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
-            var highestsPokemonCP = await _inventory.GetHighestsCP(20);
+            var highestsPokemonCP = await _inventory.GetHighestsCP(_client.Settings.NumberOfTopCP);
             foreach (var pokemon in highestsPokemonCP)
                 Logger.Write($"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
             Logger.Write($"====== DisplayHighestsPerfect ======", LogLevel.Info, ConsoleColor.Yellow);
-            var highestsPokemonPerfect = await _inventory.GetHighestsPerfect(10);
+            var highestsPokemonPerfect = await _inventory.GetHighestsPerfect(_client.Settings.NumberOfTopIV);
             foreach (var pokemon in highestsPokemonPerfect)
             {
                 Logger.Write($"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
