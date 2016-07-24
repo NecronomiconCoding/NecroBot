@@ -4,6 +4,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using PokemonGo.RocketAPI.Exceptions;
+using PokemonGo.RocketAPI.Logic.State;
 
 #endregion
 
@@ -15,7 +16,14 @@ namespace PokemonGo.RocketAPI.Console
         {
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
 
-            Task.Run(() =>
+            StateMachine machine = new StateMachine();
+            ConsoleEventListener listener = new ConsoleEventListener();
+
+            machine.EventListener += listener.Listen;
+            machine.SetFailureState(new LoginState());
+            machine.AsyncStart(new VersionCheckState(), new Context(new Settings()));
+
+            /*Task.Run(() =>
             {
                 try
                 {
@@ -39,7 +47,7 @@ namespace PokemonGo.RocketAPI.Console
                     Logger.Write($"Unhandled exception: {ex}", LogLevel.Error);
                     new Logic.Logic(new Settings()).Execute().Wait();
                 }
-            });
+            });*/
             System.Console.ReadLine();
         }
     }

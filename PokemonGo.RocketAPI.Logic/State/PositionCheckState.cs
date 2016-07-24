@@ -8,9 +8,9 @@ namespace PokemonGo.RocketAPI.Logic.State
 {
     public class PositionCheckState : IState
     {
-        public IState Execute(Context ctx)
+        public IState Execute(Context ctx, StateMachine machine)
         {
-
+            return this;
         }
     }
 }

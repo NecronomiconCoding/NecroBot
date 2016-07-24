@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PokemonGo.RocketAPI.Logic.State
 {
-    public interface IState
+    public class UseLuckyEggEvent : IEvent
     {
-        IState Execute(Context ctx, StateMachine machine);
+        public int Count;
     }
 }

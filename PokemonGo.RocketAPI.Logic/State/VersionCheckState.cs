@@ -15,17 +15,15 @@ namespace PokemonGo.RocketAPI.Logic.State
     {
         public static string _versionUri = "https://raw.githubusercontent.com/NecronomiconCoding/Pokemon-Go-Bot/master/PokemonGo.RocketAPI/Properties/AssemblyInfo.cs";
 
-        public IState Execute(Context ctx)
+        public IState Execute(Context ctx, StateMachine machine)
         {
-            bool latest = Git.IsLatest();
-            if (latest)
+            if (IsLatest())
             {
-                Logger.Write("Awesome! You have already got the newest version! " + Assembly.GetExecutingAssembly().GetName().Version);
+                machine.Fire(new NoticeEvent { Message = "Awesome! You have already got the newest version! " + Assembly.GetExecutingAssembly().GetName().Version } );
             }
             else
             {
-                Logger.Write("There is a new Version available: https://github.com/NecronomiconCoding/Pokemon-Go-Bot", LogLevel.Warning);
-                Thread.Sleep(1000);
+                machine.Fire(new WarnEvent { Message = "There is a new Version available: https://github.com/NecronomiconCoding/Pokemon-Go-Bot" });
             }
 
             return new LoginState();

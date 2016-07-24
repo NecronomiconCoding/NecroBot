@@ -14,8 +14,12 @@ namespace PokemonGo.RocketAPI.Logic.State
         private readonly ISettings _clientSettings;
         private Inventory _inventory;
         private Navigation _navigation;
-        private GetPlayerResponse _playerProfile;
         private readonly Statistics _stats;
+
+        public ISettings Settings { get { return _clientSettings; } }
+        public Inventory Inventory {  get { return _inventory; } }
+        public Client Client { get { return _client; } }
+        public GetPlayerResponse Profile {get;set;}
 
         public Context(ISettings settings)
         {

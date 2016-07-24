@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace PokemonGo.RocketAPI.Logic.State
 {
-    public interface IState
+    public class NoticeEvent : IEvent
     {
-        IState Execute(Context ctx, StateMachine machine);
+        public string Message = "";
+        public override string ToString()
+        {
+            return Message;
+        }
     }
 }

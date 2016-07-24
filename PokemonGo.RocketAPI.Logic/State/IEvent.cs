@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace PokemonGo.RocketAPI.Logic.State
 {
-    public interface IState
+    public interface IEvent
     {
-        IState Execute(Context ctx, StateMachine machine);
     }
 }
