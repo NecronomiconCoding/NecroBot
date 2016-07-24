@@ -42,7 +42,7 @@ namespace PokemonGo.RocketAPI
             Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
         }
 
-        private static void Log(string message)
+        public static void Log(string message)
         {
             // maybe do a new log rather than appending?
             using (var log = File.AppendText("log.txt"))

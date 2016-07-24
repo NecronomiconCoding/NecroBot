@@ -383,6 +383,7 @@ namespace PokemonGo.RocketAPI.Logic
                     await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
                 await DisplayHighests();
+                await LogAllPokemon();
                 _stats.UpdateConsoleTitle(_inventory);
                 await RecycleItems();
                 await ExecuteFarmingPokestopsAndPokemons();
@@ -461,6 +462,18 @@ namespace PokemonGo.RocketAPI.Logic
             foreach (var pokemon in highestsPokemonPerfect)
             {
                 Logger.Write($"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
+            }
+        }
+
+        private async Task LogAllPokemon()
+        {
+            Logger.Log($"====== DisplayAllPokemon ======");
+            var myPokemons = await _inventory.GetPokemons();
+            var pokemons = myPokemons.ToList().OrderBy(x => x.PokemonId.ToString());
+
+            foreach (var pokemon in pokemons)
+            {
+                Logger.Log($"# {pokemon.PokemonId.ToString().PadRight(15, ' ')} | Lvl {PokemonInfo.GetLevel(pokemon),2:#0} | CP {pokemon.Cp,4:###0}/{PokemonInfo.CalculateMaxCP(pokemon),4:###0} | IV {PokemonInfo.CalculatePokemonPerfection(pokemon),6:##0.00}% [{pokemon.IndividualAttack,2:#0}/{pokemon.IndividualDefense,2:#0}/{pokemon.IndividualStamina,2:#0}]");
             }
         }
     }
