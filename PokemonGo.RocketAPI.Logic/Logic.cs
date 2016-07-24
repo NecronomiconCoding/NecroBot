@@ -296,9 +296,9 @@ namespace PokemonGo.RocketAPI.Logic
             if (_clientSettings.MaxTravelDistanceInMeters != 0 && 
                 distanceFromStart > _clientSettings.MaxTravelDistanceInMeters)
             {
-                Logger.Write($"You're outside of your defined radius! Walking to start in 5 seconds...", LogLevel.Warning);
+                Logger.Write($"You're outside of your defined radius! Walking to start ({distanceFromStart}m away) in 5 seconds. Is your Coords.ini file correct?", LogLevel.Warning);
                 await Task.Delay(5000);
-                Logger.Write($"Moving to start location now. ({distanceFromStart}m)");
+                Logger.Write($"Moving to start location now.");
                 var update = await _navigation.HumanLikeWalking(
                     new GeoCoordinate(_clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude),
                         _clientSettings.WalkingSpeedInKilometerPerHour, null);
