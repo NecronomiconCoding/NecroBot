@@ -200,15 +200,11 @@ namespace PokemonGo.RocketAPI.Logic
             {
                 var evolvePokemonOutProto = await _client.EvolvePokemon(pokemon.Id);
 
-                if (evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess)
-                {
-                    Logger.Write($"{pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp",
-                        LogLevel.Evolve);
-                }
-                else
-                    Logger.Write(
-                        $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
-                        LogLevel.Evolve);
+                Logger.Write(
+                    evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess
+                        ? $"{pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp"
+                        : $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
+                    LogLevel.Evolve);
 
                 await Task.Delay(3000);
             }
