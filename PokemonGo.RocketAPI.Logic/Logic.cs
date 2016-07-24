@@ -75,11 +75,14 @@ namespace PokemonGo.RocketAPI.Logic
             var playerName = _playerProfile.Profile.Username ?? "";
             var playerStats = await _inventory.GetPlayerStats();
             var playerStat = playerStats.FirstOrDefault();
+			var inventory = await _client.GetInventory();
+            var pokedex = inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokedexEntry).Where(x => x != null && x.TimesCaptured >= 1).OrderBy(k => k.PokedexEntryNumber).ToArray().Length;
+
             if (playerStat != null)
             {
                 var xpDifference = GetXPDiff(playerStat.Level);
                 var message =
-                    $"{playerName} | Level {playerStat.Level}: {playerStat.Experience - playerStat.PrevLevelXp - xpDifference}/{playerStat.NextLevelXp - playerStat.PrevLevelXp - xpDifference}XP";
+                    $"{playerName} | Level {playerStat.Level}: {playerStat.Experience - playerStat.PrevLevelXp - xpDifference}/{playerStat.NextLevelXp - playerStat.PrevLevelXp - xpDifference}XP - Pokedex: {pokedex}/147";
                 Console.Title = message;
                 if (updateOnly == false)
                     Logger.Write(message);
