@@ -3,7 +3,6 @@
 using System;
 using System.Globalization;
 using System.IO;
-using System.Threading;
 using PokemonGo.RocketAPI.Logging;
 
 #endregion
@@ -47,8 +46,6 @@ namespace PokemonGo.RocketAPI
         private static void Log(string message)
         {
             // maybe do a new log rather than appending?
-            CultureInfo originalCulture = Thread.CurrentThread.CurrentCulture;
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("nl-NL");
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Logs");
             string logPath = Directory.GetCurrentDirectory() + $"\\Logs\\NecroBot-{DateTime.Today.ToString("yyyy-dd")}-{DateTime.Now.ToString("HH-mm")}.txt";
             using (var log = File.AppendText(logPath))
@@ -56,7 +53,6 @@ namespace PokemonGo.RocketAPI
                 log.WriteLine(message);
                 log.Flush();
             }
-            Thread.CurrentThread.CurrentCulture = originalCulture;
         }
     }
 
