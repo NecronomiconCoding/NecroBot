@@ -292,6 +292,12 @@ namespace PokemonGo.RocketAPI.Logic
                 await ExecuteFarmingPokestopsAndPokemons();
             else
             {
+                if (Statistics.Currentlevel >= _clientSettings.StopAtLevel)
+                {
+                    Logger.Write($"Current level {Statistics.Currentlevel}, StopAtLevel set to {_clientSettings.StopAtLevel}, exiting", LogLevel.Info, ConsoleColor.Red);
+                    Environment.Exit(0);
+                }
+
                 bool onTrack = true;
                 List<GPXReader.trk> Tracks = GetGPXTracks(_clientSettings.GPXFile);
                 int curTrkPt = 0;
@@ -313,13 +319,14 @@ namespace PokemonGo.RocketAPI.Logic
                         while (curTrkPt <= maxTrkPt)
                         {
                             GPXReader.trkpt nextPoint = TrackPoints.ElementAt(curTrkPt);
-                            if (LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon)) > 5000)
+                            var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon));
+                            if (distance > 5000)
                             {
-                                Logger.Write($"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {_client.CurrentLat}, {_client.CurrentLng}", LogLevel.Error);
+                                Logger.Write($"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {_client.CurrentLat}, {_client.CurrentLng} ({distance}m away)", LogLevel.Error);
                                 break;
                             }
 
-                            Logger.Write($"Your desired destination is {nextPoint.Lat}, your location is {nextPoint.Lon} {_client.CurrentLat}, {_client.CurrentLng}", LogLevel.Warning);
+                            Logger.Write($"Your desired destination is {nextPoint.Lat}, your location is {nextPoint.Lon} {_client.CurrentLat}, {_client.CurrentLng} ({distance}m away)", LogLevel.Warning);
 
                             // Wasn't sure how to make this pretty. Edit as needed.
                             var pokeStops =
