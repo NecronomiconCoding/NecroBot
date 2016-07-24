@@ -1,17 +1,19 @@
-#region
+#region using directives
 
 using System;
 using System.Collections.Generic;
+using System.Device.Location;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Logic.Utils;
-using System.Device.Location;
+// ReSharper disable CyclomaticComplexity
+// ReSharper disable FunctionNeverReturns
 
 #endregion
 
@@ -23,8 +25,8 @@ namespace PokemonGo.RocketAPI.Logic
         private readonly ISettings _clientSettings;
         private readonly Inventory _inventory;
         private readonly Navigation _navigation;
-        private GetPlayerResponse _playerProfile;
         private readonly Statistics _stats;
+        private GetPlayerResponse _playerProfile;
 
         public Logic(ISettings clientSettings)
         {
@@ -38,15 +40,18 @@ namespace PokemonGo.RocketAPI.Logic
         private async Task CatchEncounter(EncounterResponse encounter, MapPokemon pokemon)
         {
             CatchPokemonResponse caughtPokemonResponse;
-            int attemptCounter = 1;
+            var attemptCounter = 1;
             do
-            {//test
+            {
+//test
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
 
                 var pokeball = await GetBestBall(encounter?.WildPokemon);
                 if (pokeball == MiscEnums.Item.ITEM_UNKNOWN)
                 {
-                    Logger.Write($"No Pokeballs - We missed a {pokemon.PokemonId} with CP {encounter?.WildPokemon?.PokemonData?.Cp}", LogLevel.Caught);
+                    Logger.Write(
+                        $"No Pokeballs - We missed a {pokemon.PokemonId} with CP {encounter?.WildPokemon?.PokemonData?.Cp}",
+                        LogLevel.Caught);
                     return;
                 }
                 if ((probability.HasValue && probability.Value < 0.35 && encounter.WildPokemon?.PokemonData?.Cp > 400) ||
@@ -64,7 +69,7 @@ namespace PokemonGo.RocketAPI.Logic
                             pokemon.Longitude, pokeball);
                 if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
                 {
-                    foreach (int xp in caughtPokemonResponse.Scores.Xp)
+                    foreach (var xp in caughtPokemonResponse.Scores.Xp)
                         _stats.AddExperience(xp);
                     _stats.IncreasePokemons();
                     var profile = await _client.GetProfile();
@@ -78,20 +83,395 @@ namespace PokemonGo.RocketAPI.Logic
                     {
                         switch (a)
                         {
-                            case MiscEnums.Item.ITEM_POKE_BALL: return "Normal";
-                            case MiscEnums.Item.ITEM_GREAT_BALL: return "Great";
-                            case MiscEnums.Item.ITEM_ULTRA_BALL: return "Ultra";
-                            case MiscEnums.Item.ITEM_MASTER_BALL: return "Master";
-                            default: return "Unknown";
+                            case MiscEnums.Item.ITEM_POKE_BALL:
+                                return "Normal";
+                            case MiscEnums.Item.ITEM_GREAT_BALL:
+                                return "Great";
+                            case MiscEnums.Item.ITEM_ULTRA_BALL:
+                                return "Ultra";
+                            case MiscEnums.Item.ITEM_MASTER_BALL:
+                                return "Master";
+                            default:
+                                return "Unknown";
                         }
                     };
-                    string catchStatus = attemptCounter > 1 ? $"{caughtPokemonResponse.Status} Attempt #{attemptCounter}" : $"{caughtPokemonResponse.Status}";
-                    Logger.Write($"({catchStatus}) | {pokemon.PokemonId} Lvl {PokemonInfo.GetLevel(encounter?.WildPokemon?.PokemonData)} ({encounter?.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter?.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {Math.Round(Convert.ToDouble(encounter?.CaptureProbability?.CaptureProbability_.First()) * 100, 2)}% | {Math.Round(distance)}m dist | with a {returnRealBallName(pokeball)} ball.", LogLevel.Caught);
+                    var catchStatus = attemptCounter > 1
+                        ? $"{caughtPokemonResponse.Status} Attempt #{attemptCounter}"
+                        : $"{caughtPokemonResponse.Status}";
+                    Logger.Write(
+                        $"({catchStatus}) | {pokemon.PokemonId} Lvl {PokemonInfo.GetLevel(encounter.WildPokemon?.PokemonData)} ({encounter.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {Math.Round(Convert.ToDouble(encounter.CaptureProbability?.CaptureProbability_.First())*100, 2)}% | {Math.Round(distance)}m dist | with a {returnRealBallName(pokeball)} ball.",
+                        LogLevel.Caught);
                 }
                 attemptCounter++;
                 await Task.Delay(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
+        }
+
+        private async Task DisplayHighests()
+        {
+            Logger.Write("====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
+            var highestsPokemonCp = await _inventory.GetHighestsCp(20);
+            foreach (var pokemon in highestsPokemonCp)
+                Logger.Write(
+                    $"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'",
+                    LogLevel.Info, ConsoleColor.Yellow);
+            Logger.Write("====== DisplayHighestsPerfect ======", LogLevel.Info, ConsoleColor.Yellow);
+            var highestsPokemonPerfect = await _inventory.GetHighestsPerfect(10);
+            foreach (var pokemon in highestsPokemonPerfect)
+            {
+                Logger.Write(
+                    $"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'",
+                    LogLevel.Info, ConsoleColor.Yellow);
+            }
+        }
+
+        private async Task EvolveAllPokemonWithEnoughCandy(IEnumerable<PokemonId> filter = null)
+        {
+            if (_clientSettings.useLuckyEggsWhileEvolving)
+            {
+                await PopLuckyEgg(_client);
+            }
+            var pokemonToEvolve = await _inventory.GetPokemonToEvolve(filter);
+            foreach (var pokemon in pokemonToEvolve)
+            {
+                var evolvePokemonOutProto = await _client.EvolvePokemon(pokemon.Id);
+
+                Logger.Write(
+                    evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess
+                        ? $"{pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp"
+                        : $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
+                    LogLevel.Evolve);
+
+                await Task.Delay(3000);
+            }
+        }
+
+        public async Task Execute()
+        {
+            Git.CheckVersion();
+            Logger.Write(
+                $"Make sure Lat & Lng is right. Exit Program if not! Lat: {_client.CurrentLat} Lng: {_client.CurrentLng}",
+                LogLevel.Warning);
+            Thread.Sleep(3000);
+            Logger.Write($"Logging in via: {_clientSettings.AuthType}");
+
+            while (true)
+            {
+                try
+                {
+                    switch (_clientSettings.AuthType)
+                    {
+                        case AuthType.Ptc:
+                            await _client.DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
+                            break;
+                        case AuthType.Google:
+                            await _client.DoGoogleLogin();
+                            break;
+                        default:
+                            Logger.Write("wrong AuthType");
+                            Environment.Exit(0);
+                            break;
+                    }
+
+                    await _client.SetServer();
+
+                    await PostLoginExecute();
+                }
+                catch (Exception e)
+                {
+                    Logger.Write(e.Message + " from " + e.Source);
+                    Logger.Write("Got an exception, trying automatic restart..", LogLevel.Error);
+                    await Execute();
+                }
+                await Task.Delay(10000);
+            }
+        }
+
+        private async Task ExecuteCatchAllNearbyPokemons()
+        {
+            Logger.Write("Looking for pokemon..", LogLevel.Debug);
+            var mapObjects = await _client.GetMapObjects();
+
+            var pokemons =
+                mapObjects.MapCells.SelectMany(i => i.CatchablePokemons)
+                    .OrderBy(
+                        i =>
+                            LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude,
+                                i.Longitude));
+
+            foreach (var pokemon in pokemons)
+            {
+                if (_clientSettings.UsePokemonToNotCatchFilter &&
+                    pokemon.PokemonId.Equals(
+                        _clientSettings.PokemonsNotToCatch.FirstOrDefault(i => i == pokemon.PokemonId)))
+                {
+                    Logger.Write("Skipped " + pokemon.PokemonId);
+                    continue;
+                }
+
+                var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
+                    pokemon.Latitude, pokemon.Longitude);
+                await Task.Delay(distance > 100 ? 15000 : 500);
+
+                var encounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
+
+                if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
+                    await CatchEncounter(encounter, pokemon);
+                else
+                    Logger.Write($"Encounter problem: {encounter.Status}");
+                if (!Equals(pokemons.ElementAtOrDefault(pokemons.Count() - 1), pokemon))
+                    // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
+                {
+                    await Task.Delay(_clientSettings.DelayBetweenPokemonCatch);
+                }
+            }
+        }
+
+        private async Task ExecuteFarmingPokestopsAndPokemons(bool path)
+        {
+            if (!path)
+                await ExecuteFarmingPokestopsAndPokemons();
+            else
+            {
+                var tracks = GetGpxTracks();
+                var curTrkPt = 0;
+                var curTrk = 0;
+                var maxTrk = tracks.Count - 1;
+                var curTrkSeg = 0;
+                while (curTrk <= maxTrk)
+                {
+                    var track = tracks.ElementAt(curTrk);
+                    var trackSegments = track.Segments;
+                    var maxTrkSeg = trackSegments.Count - 1;
+                    while (curTrkSeg <= maxTrkSeg)
+                    {
+                        var trackPoints = track.Segments.ElementAt(0).TrackPoints;
+                        var maxTrkPt = trackPoints.Count - 1;
+                        var mapObjects = await _client.GetMapObjects();
+                        while (curTrkPt <= maxTrkPt)
+                        {
+                            var nextPoint = trackPoints.ElementAt(curTrkPt);
+                            if (
+                                LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
+                                    Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon)) > 5000)
+                            {
+                                Logger.Write(
+                                    $"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {_client.CurrentLat}, {_client.CurrentLng}",
+                                    LogLevel.Error);
+                                break;
+                            }
+
+                            Logger.Write(
+                                $"Your desired destination is {nextPoint.Lat}, {nextPoint.Lon} your location is {_client.CurrentLat}, {_client.CurrentLng}",
+                                LogLevel.Warning);
+
+                            // Wasn't sure how to make this pretty. Edit as needed.
+                            var pokeStops =
+                                mapObjects.MapCells.SelectMany(i => i.Forts)
+                                    .Where(
+                                        i =>
+                                            i.Type == FortType.Checkpoint &&
+                                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
+                                            ( // Make sure PokeStop is within 40 meters, otherwise we cannot hit them.
+                                                LocationUtils.CalculateDistanceInMeters(
+                                                    _client.CurrentLat, _client.CurrentLng,
+                                                    i.Latitude, i.Longitude) < 40)
+                                    );
+
+                            var pokestopList = pokeStops.ToList();
+
+                            while (pokestopList.Any())
+                            {
+                                pokestopList =
+                                    pokestopList.OrderBy(
+                                        i =>
+                                            LocationUtils.CalculateDistanceInMeters(_client.CurrentLat,
+                                                _client.CurrentLng, i.Latitude, i.Longitude)).ToList();
+                                var pokeStop = pokestopList[0];
+                                pokestopList.RemoveAt(0);
+
+                                await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+
+                                var fortSearch =
+                                    await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                                if (fortSearch.ExperienceAwarded > 0)
+                                {
+                                    _stats.AddExperience(fortSearch.ExperienceAwarded);
+                                    _stats.UpdateConsoleTitle(_inventory);
+                                    //todo: fix egg crash
+                                    Logger.Write(
+                                        $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
+                                        LogLevel.Pokestop);
+                                }
+
+                                await Task.Delay(1000);
+                                await RecycleItems();
+                                if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                            }
+
+                                await
+                                    _navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
+                                        _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+
+                            if (curTrkPt >= maxTrkPt)
+                                curTrkPt = 0;
+                            else
+                                curTrkPt++;
+                        } //end trkpts
+                        if (curTrkSeg >= maxTrkSeg)
+                            curTrkSeg = 0;
+                        else
+                            curTrkSeg++;
+                    } //end trksegs
+                    if (curTrk >= maxTrkSeg)
+                        curTrk = 0;
+                    else
+                        curTrk++;
+                } //end tracks
+            }
+        }
+
+        private async Task ExecuteFarmingPokestopsAndPokemons()
+        {
+            var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
+                _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
+                _client.CurrentLat, _client.CurrentLng);
+
+            // Edge case for when the client somehow ends up outside the defined radius
+            if (_clientSettings.MaxTravelDistanceInMeters != 0 &&
+                distanceFromStart > _clientSettings.MaxTravelDistanceInMeters)
+            {
+                Logger.Write(
+                    $"You're outside of your defined radius! Walking to start ({distanceFromStart}m away) in 5 seconds. Is your Coords.ini file correct?",
+                    LogLevel.Warning);
+                await Task.Delay(5000);
+                Logger.Write("Moving to start location now.");
+                await _navigation.HumanLikeWalking(
+                    new GeoCoordinate(_clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude),
+                    _clientSettings.WalkingSpeedInKilometerPerHour, null);
+            }
+
+            var mapObjects = await _client.GetMapObjects();
+
+            // Wasn't sure how to make this pretty. Edit as needed.
+            var pokeStops =
+                mapObjects.MapCells.SelectMany(i => i.Forts)
+                    .Where(
+                        i =>
+                            i.Type == FortType.Checkpoint &&
+                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
+                            ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
+                                LocationUtils.CalculateDistanceInMeters(
+                                    _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
+                                    i.Latitude, i.Longitude) < _clientSettings.MaxTravelDistanceInMeters) ||
+                            _clientSettings.MaxTravelDistanceInMeters == 0
+                    );
+
+
+            var pokestopList = pokeStops.ToList();
+            var stopsHit = 0;
+
+            if (pokestopList.Count <= 0)
+                Logger.Write("No usable PokeStops found in your area. Is your maximum distance too small?",
+                    LogLevel.Warning);
+
+            while (pokestopList.Any())
+            {
+                //resort
+                pokestopList =
+                    pokestopList.OrderBy(
+                        i =>
+                            LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude,
+                                i.Longitude)).ToList();
+                var pokeStop = pokestopList[0];
+                pokestopList.RemoveAt(0);
+
+
+                var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
+                    pokeStop.Latitude, pokeStop.Longitude);
+                var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+
+                Logger.Write($"{fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
+                    await
+                        _navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
+                            _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+
+                var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                if (fortSearch.ExperienceAwarded > 0)
+                {
+                    _stats.AddExperience(fortSearch.ExperienceAwarded);
+                    _stats.UpdateConsoleTitle(_inventory);
+                    //todo: fix egg crash
+                    Logger.Write(
+                        $"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}",
+                        LogLevel.Pokestop);
+                }
+
+                await Task.Delay(1000);
+                if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
+                {
+                    stopsHit = 0;
+                    await RecycleItems();
+                    if (_clientSettings.EvolveAllPokemonWithEnoughCandy || _clientSettings.EvolveAllPokemonAboveIV)
+                        await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
+                    if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                }
+            }
+        }
+
+
+        private async Task<MiscEnums.Item> GetBestBall(WildPokemon pokemon)
+        {
+            var pokemonCp = pokemon?.PokemonData?.Cp;
+
+            var pokeBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_POKE_BALL);
+            var greatBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_GREAT_BALL);
+            var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
+            var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
+
+            if (masterBallsCount > 0 && pokemonCp >= 2000)
+                return MiscEnums.Item.ITEM_MASTER_BALL;
+            if (ultraBallsCount > 0 && pokemonCp >= 2000)
+                return MiscEnums.Item.ITEM_ULTRA_BALL;
+            if (greatBallsCount > 0 && pokemonCp >= 2000)
+                return MiscEnums.Item.ITEM_GREAT_BALL;
+
+            if (ultraBallsCount > 0 && pokemonCp >= 1000)
+                return MiscEnums.Item.ITEM_ULTRA_BALL;
+            if (greatBallsCount > 0 && pokemonCp >= 1000)
+                return MiscEnums.Item.ITEM_GREAT_BALL;
+
+            if (greatBallsCount > 0 && pokemonCp >= 300)
+                return MiscEnums.Item.ITEM_GREAT_BALL;
+
+            if (pokeBallsCount > 0)
+                return MiscEnums.Item.ITEM_POKE_BALL;
+            if (greatBallsCount > 0)
+                return MiscEnums.Item.ITEM_GREAT_BALL;
+            if (ultraBallsCount > 0)
+                return MiscEnums.Item.ITEM_ULTRA_BALL;
+            if (masterBallsCount > 0)
+                return MiscEnums.Item.ITEM_MASTER_BALL;
+
+            return MiscEnums.Item.ITEM_UNKNOWN;
+        }
+
+
+/*
+        private GpxReader.Trk GetGpxTrack(string gpxFile)
+        {
+            var xmlString = File.ReadAllText(_clientSettings.GPXFile);
+            var readgpx = new GpxReader(xmlString);
+            return readgpx.Tracks.ElementAt(0);
+        }
+*/
+
+        private List<GpxReader.Trk> GetGpxTracks()
+        {
+            var xmlString = File.ReadAllText(_clientSettings.GPXFile);
+            var readgpx = new GpxReader(xmlString);
+            return readgpx.Tracks;
         }
 
         /*
@@ -115,7 +495,7 @@ namespace PokemonGo.RocketAPI.Logic
         }
         */
 
-        public static int GetXPDiff(int level)
+        public static int GetXpDiff(int level)
         {
             switch (level)
             {
@@ -203,69 +583,26 @@ namespace PokemonGo.RocketAPI.Logic
             return 0;
         }
 
-        private async Task EvolveAllPokemonWithEnoughCandy(IEnumerable<PokemonId> filter = null)
+/*
+        private async Task LoadAndDisplayGpxFile()
         {
-            if (_clientSettings.useLuckyEggsWhileEvolving)
+            var xmlString = File.ReadAllText(_clientSettings.GPXFile);
+            var readgpx = new GpxReader(xmlString);
+            foreach (var trk in readgpx.Tracks)
             {
-                await popLuckyEgg(_client);
-            }
-            var pokemonToEvolve = await _inventory.GetPokemonToEvolve(filter);
-            foreach (var pokemon in pokemonToEvolve)
-            {
-                var evolvePokemonOutProto = await _client.EvolvePokemon(pokemon.Id);
-
-                Logger.Write(
-                    evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess
-                        ? $"{pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp"
-                        : $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
-                    LogLevel.Evolve);
-
-                await Task.Delay(3000);
-            }
-        }
-
-        public async Task Execute()
-        {
-            Git.CheckVersion();
-            Logger.Write(
-                $"Make sure Lat & Lng is right. Exit Program if not! Lat: {_client.CurrentLat} Lng: {_client.CurrentLng}",
-                LogLevel.Warning);
-            Thread.Sleep(3000);
-            Logger.Write($"Logging in via: {_clientSettings.AuthType}");
-
-            while (true)
-            {
-                try
+                foreach (var trkseg in trk.Segments)
                 {
-                    switch (_clientSettings.AuthType)
+                    foreach (var trpkt in trkseg.TrackPoints)
                     {
-                        case AuthType.Ptc:
-                            await _client.DoPtcLogin(_clientSettings.PtcUsername, _clientSettings.PtcPassword);
-                            break;
-                        case AuthType.Google:
-                            await _client.DoGoogleLogin();
-                            break;
-                        default:
-                            Logger.Write("wrong AuthType");
-                            Environment.Exit(0);
-                            break;
+                        Console.WriteLine(trpkt.ToString());
                     }
-
-                    await _client.SetServer();
-
-                    await PostLoginExecute();
                 }
-                catch (Exception e)
-                {
-                    Logger.Write(e.Message + " from " + e.Source);
-                    Logger.Write("Got an exception, trying automatic restart..", LogLevel.Error);
-                    await Execute();
-                }
-                await Task.Delay(10000);
             }
+            await Task.Delay(0);
         }
+*/
 
-        private async Task popLuckyEgg(Client client)
+        private async Task PopLuckyEgg(Client client)
         {
             Logger.Write("POPPIN AN EGG", LogLevel.Evolve);
             await Task.Delay(1000);
@@ -273,243 +610,6 @@ namespace PokemonGo.RocketAPI.Logic
             await Task.Delay(1000);
             Logger.Write("POPPED AN EGG", LogLevel.Evolve);
             await Task.Delay(1800000);
-        }
-
-        private async Task ExecuteCatchAllNearbyPokemons()
-        {
-            Logger.Write("Looking for pokemon..", LogLevel.Debug);
-            var mapObjects = await _client.GetMapObjects();
-
-            var pokemons = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons).OrderBy(i => LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude, i.Longitude));
-
-            foreach (var pokemon in pokemons)
-            {
-                if (_clientSettings.UsePokemonToNotCatchFilter && pokemon.PokemonId.Equals(_clientSettings.PokemonsNotToCatch.FirstOrDefault(i => i == pokemon.PokemonId)))
-                {
-                    Logger.Write("Skipped " + pokemon.PokemonId);
-                    continue;
-                }
-
-                var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, pokemon.Latitude, pokemon.Longitude);
-                await Task.Delay(distance > 100 ? 15000 : 500);
-
-                var encounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
-
-                if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
-                    await CatchEncounter(encounter, pokemon);
-                else
-                    Logger.Write($"Encounter problem: {encounter.Status}");
-                if (pokemons.ElementAtOrDefault(pokemons.Count() - 1) != pokemon) // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
-                {
-                    await Task.Delay(_clientSettings.DelayBetweenPokemonCatch);
-                }
-            }
-        }
-
-        private async Task ExecuteFarmingPokestopsAndPokemons(bool path)
-        {
-            if (!path)
-                await ExecuteFarmingPokestopsAndPokemons();
-            else
-            {
-                List<GPXReader.trk> Tracks = GetGPXTracks(_clientSettings.GPXFile);
-                int curTrkPt = 0;
-                int maxTrkPt = 0;
-                int curTrk = 0;
-                int maxTrk = Tracks.Count - 1;
-                int curTrkSeg = 0;
-                int maxTrkSeg = 0;
-                while (curTrk <= maxTrk)
-                {
-                    var Track = Tracks.ElementAt(curTrk);
-                    var trackSegments = Track.Segments;
-                    maxTrkSeg = trackSegments.Count - 1;
-                    while (curTrkSeg <= maxTrkSeg)
-                    {
-                        List<GPXReader.trkpt> TrackPoints = Track.Segments.ElementAt(0).TrackPoints;
-                        maxTrkPt = TrackPoints.Count - 1;
-                        var mapObjects = await _client.GetMapObjects();
-                        while (curTrkPt <= maxTrkPt)
-                        {
-                            GPXReader.trkpt nextPoint = TrackPoints.ElementAt(curTrkPt);
-                            if (LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon)) > 5000)
-                            {
-                                Logger.Write($"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {_client.CurrentLat}, {_client.CurrentLng}", LogLevel.Error);
-                                break;
-                            }
-
-                            Logger.Write($"Your desired destination is {nextPoint.Lat}, {nextPoint.Lon} your location is {_client.CurrentLat}, {_client.CurrentLng}", LogLevel.Warning);
-
-                            // Wasn't sure how to make this pretty. Edit as needed.
-                            var pokeStops =
-                                mapObjects.MapCells.SelectMany(i => i.Forts)
-                                    .Where(
-                                        i =>
-                                            i.Type == FortType.Checkpoint &&
-                                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
-                                            ( // Make sure PokeStop is within 40 meters, otherwise we cannot hit them.
-                                            LocationUtils.CalculateDistanceInMeters(
-                                                _client.CurrentLat, _client.CurrentLng,
-                                                    i.Latitude, i.Longitude) < 40)
-                                            );
-
-                            var pokestopList = pokeStops.ToList();
-
-                            while (pokestopList.Any())
-                            {
-                                pokestopList = pokestopList.OrderBy(i => LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude, i.Longitude)).ToList();
-                                var pokeStop = pokestopList[0];
-                                pokestopList.RemoveAt(0);
-
-                                var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-
-                                var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                                if (fortSearch.ExperienceAwarded > 0)
-                                {
-                                    _stats.AddExperience(fortSearch.ExperienceAwarded);
-                                    _stats.UpdateConsoleTitle(_inventory);
-                                    //todo: fix egg crash
-                                    Logger.Write($"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}", LogLevel.Pokestop);
-                                }
-
-                                await Task.Delay(1000);
-                                await RecycleItems();
-                                if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
-
-
-                            }
-
-                            var update = await _navigation.HumanPathWalking(TrackPoints.ElementAt(curTrkPt), _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
-
-                            if (curTrkPt >= maxTrkPt)
-                                curTrkPt = 0;
-                            else
-                                curTrkPt++;
-
-                        }//end trkpts
-                        if (curTrkSeg >= maxTrkSeg)
-                            curTrkSeg = 0;
-                        else
-                            curTrkSeg++;
-                    }//end trksegs
-                    if (curTrk >= maxTrkSeg)
-                        curTrk = 0;
-                    else
-                        curTrk++;
-                }//end tracks
-            }
-        }
-        private async Task ExecuteFarmingPokestopsAndPokemons()
-        {
-            var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
-                _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
-                    _client.CurrentLat, _client.CurrentLng);
-
-            // Edge case for when the client somehow ends up outside the defined radius
-            if (_clientSettings.MaxTravelDistanceInMeters != 0 && 
-                distanceFromStart > _clientSettings.MaxTravelDistanceInMeters)
-            {
-                Logger.Write($"You're outside of your defined radius! Walking to start ({distanceFromStart}m away) in 5 seconds. Is your Coords.ini file correct?", LogLevel.Warning);
-                await Task.Delay(5000);
-                Logger.Write($"Moving to start location now.");
-                var update = await _navigation.HumanLikeWalking(
-                    new GeoCoordinate(_clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude),
-                        _clientSettings.WalkingSpeedInKilometerPerHour, null);
-            }
-
-            var mapObjects = await _client.GetMapObjects();
-
-            // Wasn't sure how to make this pretty. Edit as needed.
-            var pokeStops =
-                mapObjects.MapCells.SelectMany(i => i.Forts)
-                    .Where(
-                        i =>
-                            i.Type == FortType.Checkpoint &&
-                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
-                            ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
-                            LocationUtils.CalculateDistanceInMeters(
-                                _clientSettings.DefaultLatitude, _clientSettings.DefaultLongitude,
-                                    i.Latitude, i.Longitude) < _clientSettings.MaxTravelDistanceInMeters) ||
-                                        _clientSettings.MaxTravelDistanceInMeters == 0
-                            );
-
-
-            var pokestopList = pokeStops.ToList();
-            var stopsHit = 0;
-
-            if (pokestopList.Count <= 0)
-                Logger.Write("No usable PokeStops found in your area. Is your maximum distance too small?", LogLevel.Warning);
-
-            while (pokestopList.Any())
-            {
-                //resort
-                pokestopList = pokestopList.OrderBy(i => LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude, i.Longitude)).ToList();
-                var pokeStop = pokestopList[0];
-                pokestopList.RemoveAt(0);
-
-
-                var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, pokeStop.Latitude, pokeStop.Longitude);
-                var fortInfo = await _client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-
-                Logger.Write($"{fortInfo.Name} in ({Math.Round(distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
-                var update = await _navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude), _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
-
-                var fortSearch = await _client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                if (fortSearch.ExperienceAwarded > 0)
-                {
-                    _stats.AddExperience(fortSearch.ExperienceAwarded);
-                    _stats.UpdateConsoleTitle(_inventory);
-                    //todo: fix egg crash
-                    Logger.Write($"XP: {fortSearch.ExperienceAwarded}, Gems: {fortSearch.GemsAwarded}, Items: {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)}", LogLevel.Pokestop);
-                }
-
-                await Task.Delay(1000);
-                if(++stopsHit % 5 == 0) //TODO: OR item/pokemon bag is full
-                {
-                    stopsHit = 0;
-                    await RecycleItems();
-                    if (_clientSettings.EvolveAllPokemonWithEnoughCandy || _clientSettings.EvolveAllPokemonAboveIV) await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
-                    if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
-                }
-            }
-        }
-
-
-
-        private async Task<MiscEnums.Item> GetBestBall(WildPokemon pokemon)
-        {
-            var pokemonCp = pokemon?.PokemonData?.Cp;
-
-            var pokeBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_POKE_BALL);
-            var greatBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_GREAT_BALL);
-            var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
-            var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
-
-            if (masterBallsCount > 0 && pokemonCp >= 2000)
-                return MiscEnums.Item.ITEM_MASTER_BALL;
-            if (ultraBallsCount > 0 && pokemonCp >= 2000)
-                return MiscEnums.Item.ITEM_ULTRA_BALL;
-            if (greatBallsCount > 0 && pokemonCp >= 2000)
-                return MiscEnums.Item.ITEM_GREAT_BALL;
-
-            if (ultraBallsCount > 0 && pokemonCp >= 1000)
-                return MiscEnums.Item.ITEM_ULTRA_BALL;
-            if (greatBallsCount > 0 && pokemonCp >= 1000)
-                return MiscEnums.Item.ITEM_GREAT_BALL;
-
-            if (greatBallsCount > 0 && pokemonCp >= 300)
-                return MiscEnums.Item.ITEM_GREAT_BALL;
-
-            if (pokeBallsCount > 0)
-                return MiscEnums.Item.ITEM_POKE_BALL;
-            if (greatBallsCount > 0)
-                return MiscEnums.Item.ITEM_GREAT_BALL;
-            if (ultraBallsCount > 0)
-                return MiscEnums.Item.ITEM_ULTRA_BALL;
-            if (masterBallsCount > 0)
-                return MiscEnums.Item.ITEM_MASTER_BALL;
-
-            return MiscEnums.Item.ITEM_UNKNOWN;
         }
 
         public async Task PostLoginExecute()
@@ -546,8 +646,8 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var item in items)
             {
-                var transfer = await _client.RecycleItem((ItemId)item.Item_, item.Count);
-                Logger.Write($"{item.Count}x {(ItemId)item.Item_}", LogLevel.Recycling);
+                await _client.RecycleItem((ItemId) item.Item_, item.Count);
+                Logger.Write($"{item.Count}x {(ItemId) item.Item_}", LogLevel.Recycling);
                 _stats.AddItemsRemoved(item.Count);
                 _stats.UpdateConsoleTitle(_inventory);
                 await Task.Delay(500);
@@ -562,18 +662,26 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task TransferDuplicatePokemon(bool keepPokemonsThatCanEvolve = false)
         {
-            var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve, _clientSettings.PrioritizeIVOverCP, _clientSettings.PokemonsNotToTransfer);
+            var duplicatePokemons =
+                await
+                    _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve,
+                        _clientSettings.PrioritizeIVOverCP, _clientSettings.PokemonsNotToTransfer);
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
-                if (duplicatePokemon.Cp >= _clientSettings.KeepMinCP || PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) > _clientSettings.KeepMinIVPercentage)
+                if (duplicatePokemon.Cp >= _clientSettings.KeepMinCP ||
+                    PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) > _clientSettings.KeepMinIVPercentage)
                     continue;
-                var transfer = await _client.TransferPokemon(duplicatePokemon.Id);
+                await _client.TransferPokemon(duplicatePokemon.Id);
                 _inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
                 _stats.IncreasePokemonsTransfered();
                 _stats.UpdateConsoleTitle(_inventory);
-                var bestPokemonOfType = _client.Settings.PrioritizeIVOverCP ? await _inventory.GetHighestPokemonOfTypeByIV(duplicatePokemon) : await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
-                Logger.Write($"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({PokemonInfo.CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")} % perfect) CP (Best: {bestPokemonOfType.Cp} | ({PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")} % perfect))", LogLevel.Transfer);
+                var bestPokemonOfType = _client.Settings.PrioritizeIVOverCP
+                    ? await _inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon)
+                    : await _inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon);
+                Logger.Write(
+                    $"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({PokemonInfo.CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")} % perfect) CP (Best: {bestPokemonOfType.Cp} | ({PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")} % perfect))",
+                    LogLevel.Transfer);
                 await Task.Delay(500);
             }
         }
@@ -581,13 +689,13 @@ namespace PokemonGo.RocketAPI.Logic
         public async Task UseBerry(ulong encounterId, string spawnPointId)
         {
             var inventoryBalls = await _inventory.GetItems();
-            var berries = inventoryBalls.Where(p => (ItemId)p.Item_ == ItemId.ItemRazzBerry);
+            var berries = inventoryBalls.Where(p => (ItemId) p.Item_ == ItemId.ItemRazzBerry);
             var berry = berries.FirstOrDefault();
 
             if (berry == null || berry.Count <= 0)
                 return;
 
-            var useRaspberry = await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
+            await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             Logger.Write($"Used, remaining: {berry.Count}", LogLevel.Berry);
             await Task.Delay(3000);
         }
@@ -595,61 +703,15 @@ namespace PokemonGo.RocketAPI.Logic
         public async Task UseLuckyEgg(Client client)
         {
             var inventory = await _inventory.GetItems();
-            var LuckyEggs = inventory.Where(p => (ItemId)p.Item_ == ItemId.ItemLuckyEgg);
-            var luckyEgg = LuckyEggs.FirstOrDefault();
+            var luckyEggs = inventory.Where(p => (ItemId) p.Item_ == ItemId.ItemLuckyEgg);
+            var luckyEgg = luckyEggs.FirstOrDefault();
 
             if (luckyEgg == null || luckyEgg.Count <= 0)
                 return;
 
-            var useLuckyEgg = await _client.UseItemXpBoost(ItemId.ItemLuckyEgg);
+            await _client.UseItemXpBoost(ItemId.ItemLuckyEgg);
             Logger.Write($"Used Lucky Egg, remaining: {luckyEgg.Count - 1}", LogLevel.Debug);
             await Task.Delay(3000);
-        }
-
-        private async Task DisplayHighests()
-        {
-            Logger.Write($"====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
-            var highestsPokemonCP = await _inventory.GetHighestsCP(20);
-            foreach (var pokemon in highestsPokemonCP)
-                Logger.Write($"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
-            Logger.Write($"====== DisplayHighestsPerfect ======", LogLevel.Info, ConsoleColor.Yellow);
-            var highestsPokemonPerfect = await _inventory.GetHighestsPerfect(10);
-            foreach (var pokemon in highestsPokemonPerfect)
-            {
-                Logger.Write($"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'", LogLevel.Info, ConsoleColor.Yellow);
-            }
-        }
-
-        private async Task LoadAndDisplayGPXFile()
-        {
-            string xmlString = System.IO.File.ReadAllText(_clientSettings.GPXFile);
-            GPXReader Readgpx = new GPXReader(xmlString);
-            foreach (GPXReader.trk trk in Readgpx.Tracks)
-            {
-                foreach (GPXReader.trkseg trkseg in trk.Segments)
-                {
-                    foreach (GPXReader.trkpt trpkt in trkseg.TrackPoints)
-                    {
-                        Console.WriteLine(trpkt.ToString());
-                    }
-                }
-            }
-            await Task.Delay(0);
-        }
-
-
-        private GPXReader.trk GetGPXTrack(string gpxFile)
-        {
-            string xmlString = System.IO.File.ReadAllText(_clientSettings.GPXFile);
-            GPXReader Readgpx = new GPXReader(xmlString);
-            return Readgpx.Tracks.ElementAt(0);
-        }
-
-        private List<GPXReader.trk> GetGPXTracks(string gpxFile)
-        {
-            string xmlString = System.IO.File.ReadAllText(_clientSettings.GPXFile);
-            GPXReader Readgpx = new GPXReader(xmlString);
-            return Readgpx.Tracks;
         }
     }
 }

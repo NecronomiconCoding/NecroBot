@@ -1,311 +1,310 @@
-﻿using System;
+﻿#region using directives
+
+using System;
 using System.Collections.Generic;
 using System.Xml;
+// ReSharper disable All
+
+#endregion
+
 namespace PokemonGo.RocketAPI.Logic.Utils
 {
-    public class GPXReader
+    public class GpxReader
     {
-        private XmlDocument _GPX = new XmlDocument();
+        private readonly XmlDocument _gpx = new XmlDocument();
 
-        private string _Name = "";
-
-        public string Name
-        {
-            get { return _Name; }
-            set { _Name = value; }
-        }
+        public string Author = "";
+        public GpsBoundary Bounds = new GpsBoundary();
 
         public string Description = "";
-        public string Author = "";
         public string EMail = "";
-        public string Time = "";
         public string KeyWords = "";
-        public string URL = "";
-        public string URLName = "";
-        public GPSBoundary Bounds = new GPSBoundary();
-        public List<wpt> WayPoints = new List<wpt>();
-        public List<rte> Routes = new List<rte>();
-        public List<trk> Tracks = new List<trk>();
+        public List<Rte> Routes = new List<Rte>();
+        public string Time = "";
+        public List<Trk> Tracks = new List<Trk>();
+        public string Url = "";
+        public string UrlName = "";
+        public List<Wpt> WayPoints = new List<Wpt>();
 
-        public GPXReader(string XML)
+        public GpxReader(string xml)
         {
-            if (!XML.Equals(""))
+            if (xml.Equals("")) return;
+            _gpx.LoadXml(xml);
+            if (_gpx.DocumentElement == null || !_gpx.DocumentElement.Name.Equals("gpx")) return;
+            var gpxNodes = _gpx.GetElementsByTagName("gpx")[0].ChildNodes;
+            foreach (XmlNode node in gpxNodes)
             {
-                _GPX.LoadXml(XML);
-                if ((_GPX.DocumentElement).Name.Equals("gpx"))
+                switch (node.Name)
                 {
-                    XmlNodeList GPXNodes = ((_GPX.GetElementsByTagName("gpx"))[0]).ChildNodes;
-                    foreach (XmlNode Node in GPXNodes)
-                    {
-
-                        switch (Node.Name)
-                        {
-                            case "name":
-                                Name = Node.InnerText;
-                                break;
-                            case "desc":
-                                Description = Node.InnerText;
-                                break;
-                            case "author":
-                                Author = Node.InnerText;
-                                break;
-                            case "email":
-                                EMail = Node.InnerText;
-                                break;
-                            case "time":
-                                Time = Node.InnerText;
-                                break;
-                            case "keywords":
-                                KeyWords = Node.InnerText;
-                                break;
-                            case "bounds":
-                                Bounds = new GPSBoundary();
-                                foreach (XmlAttribute Att in (Node).Attributes)
+                    case "name":
+                        Name = node.InnerText;
+                        break;
+                    case "desc":
+                        Description = node.InnerText;
+                        break;
+                    case "author":
+                        Author = node.InnerText;
+                        break;
+                    case "email":
+                        EMail = node.InnerText;
+                        break;
+                    case "time":
+                        Time = node.InnerText;
+                        break;
+                    case "keywords":
+                        KeyWords = node.InnerText;
+                        break;
+                    case "bounds":
+                        Bounds = new GpsBoundary();
+                        if (node.Attributes != null)
+                            foreach (XmlAttribute att in node.Attributes)
+                            {
+                                switch (att.Name)
                                 {
-                                    switch (Att.Name)
-                                    {
-                                        case "minlat":
-                                            Bounds.Min.lat = Att.Value;
-                                            break;
-                                        case "minlon":
-                                            Bounds.Min.lon = Att.Value;
-                                            break;
-                                        case "maxlat":
-                                            Bounds.Max.lat = Att.Value;
-                                            break;
-                                        case "maxlon":
-                                            Bounds.Max.lon = Att.Value;
-                                            break;
-                                    }
+                                    case "minlat":
+                                        Bounds.Min.Lat = att.Value;
+                                        break;
+                                    case "minlon":
+                                        Bounds.Min.Lon = att.Value;
+                                        break;
+                                    case "maxlat":
+                                        Bounds.Max.Lat = att.Value;
+                                        break;
+                                    case "maxlon":
+                                        Bounds.Max.Lon = att.Value;
+                                        break;
                                 }
-                                break;
-                            case "wpt":
-                                wpt NewWayPoint = new wpt(Node);
-                                WayPoints.Add(NewWayPoint);
-                                break;
-                            case "rte":
-                                rte NewRoute = new rte(Node);
-                                Routes.Add(NewRoute);
-                                break;
-                            case "trk":
-                                trk Track = new trk(Node);
-                                Tracks.Add(Track);
-                                break;
-                            case "url":
-                                URL = Node.InnerText;
-                                break;
-                            case "urlname":
-                                URLName = Node.InnerText;
-                                break;
-                            case "topografix:active_point":
-                            case "topografix:map":
-                                break;
-                            default:
-                                Logger.Write("Unhandled data in GPX file, attempting to skip.", LogLevel.Info);
-                                break;
-                        }
-                    }
+                            }
+                        break;
+                    case "wpt":
+                        var newWayPoint = new Wpt(node);
+                        WayPoints.Add(newWayPoint);
+                        break;
+                    case "rte":
+                        var newRoute = new Rte(node);
+                        Routes.Add(newRoute);
+                        break;
+                    case "trk":
+                        var track = new Trk(node);
+                        Tracks.Add(track);
+                        break;
+                    case "url":
+                        Url = node.InnerText;
+                        break;
+                    case "urlname":
+                        UrlName = node.InnerText;
+                        break;
+                    case "topografix:active_point":
+                    case "topografix:map":
+                        break;
+                    default:
+                        Logger.Write("Unhandled data in GPX file, attempting to skip.", LogLevel.Info);
+                        break;
                 }
             }
         }
 
-        public class travelbug
-        {
-            public string ID = "";
-            public string Reference = "";
-            public string Groundspeak_Name = "";
+        public string Name { get; set; } = "";
 
-            public travelbug(XmlNode TravelBugNode)
+        public class Travelbug
+        {
+            public string GroundspeakName = "";
+            public string Id;
+            public string Reference;
+
+            public Travelbug(XmlNode travelBugNode)
             {
-                ID = TravelBugNode.Attributes["id"].Value.ToString();
-                Reference = TravelBugNode.Attributes["ref"].Value.ToString();
-                foreach (XmlNode TBChildNode in TravelBugNode.ChildNodes)
+                Id = travelBugNode.Attributes?["id"].Value;
+                Reference = travelBugNode.Attributes?["ref"].Value;
+                foreach (XmlNode tbChildNode in travelBugNode.ChildNodes)
                 {
-                    switch (TBChildNode.Name)
+                    switch (tbChildNode.Name)
                     {
                         case "groundspeak:name":
-                            Groundspeak_Name = TBChildNode.InnerText;
+                            GroundspeakName = tbChildNode.InnerText;
                             break;
                         default:
-                            throw new Exception("Unhandled Child Node: " + TBChildNode.Name);
+                            throw new Exception("Unhandled Child Node: " + tbChildNode.Name);
                     }
                 }
             }
         }
 
-        public class cachelog
+        public class Cachelog
         {
-            public string ID = "";
-            public string Groundspeak_Date = "";
-            public string Groundspeak_Type = "";
-            public string Groundspeak_Finder = "";
-            public string Groundspeak_FinderID = "";
-            public string Groundspeak_Text = "";
-            public string Groundspeak_TextEncoded = "";
-            public GPSCoordinates Groundspeak_LogWayPoint = new GPSCoordinates();
+            public string GroundspeakDate = "";
+            public string GroundspeakFinder = "";
+            public string GroundspeakFinderId = "";
+            public GpsCoordinates GroundspeakLogWayPoint = new GpsCoordinates();
+            public string GroundspeakText = "";
+            public string GroundspeakTextEncoded = "";
+            public string GroundspeakType = "";
+            public string Id;
 
-            public cachelog(XmlNode ChildNode)
+            public Cachelog(XmlNode childNode)
             {
-                ID = ChildNode.Attributes["id"].Value.ToString();
-                foreach (XmlNode Node in ChildNode.ChildNodes)
+                Id = childNode.Attributes?["id"].Value;
+                foreach (XmlNode node in childNode.ChildNodes)
                 {
-                    switch (Node.Name)
+                    switch (node.Name)
                     {
                         case "groundspeak:date":
-                            Groundspeak_Date = Node.InnerText;
+                            GroundspeakDate = node.InnerText;
                             break;
                         case "groundspeak:type":
-                            Groundspeak_Type = Node.InnerText;
+                            GroundspeakType = node.InnerText;
                             break;
                         case "groundspeak:finder":
-                            Groundspeak_Finder = Node.InnerText;
-                            Groundspeak_FinderID = Node.Attributes["id"].Value.ToString();
+                            GroundspeakFinder = node.InnerText;
+                            GroundspeakFinderId = node.Attributes?["id"].Value;
                             break;
                         case "groundspeak:text":
-                            Groundspeak_Text = Node.InnerText;
-                            Groundspeak_TextEncoded = Node.Attributes["encoded"].Value.ToString();
+                            GroundspeakText = node.InnerText;
+                            GroundspeakTextEncoded = node.Attributes?["encoded"].Value;
                             break;
                         case "groundspeak:log_wpt":
-                            Groundspeak_LogWayPoint.lat = Node.Attributes["lat"].Value.ToString();
-                            Groundspeak_LogWayPoint.lon = Node.Attributes["lon"].Value.ToString();
+                            GroundspeakLogWayPoint.Lat = node.Attributes?["lat"].Value;
+                            GroundspeakLogWayPoint.Lon = node.Attributes?["lon"].Value;
                             break;
                         default:
-                            throw new Exception("Unhandled Child Node: " + Node.Name);
+                            throw new Exception("Unhandled Child Node: " + node.Name);
                     }
                 }
             }
         }
 
-        public class cache
+        public class Cache
         {
-            public string ID = "";
-            public string Available = "";
             public string Archived = "";
+            public string Available = "";
+            public List<Attribute> GroundspeakAttributes = new List<Attribute>();
+            public string GroundspeakContainer = "";
+            public string GroundspeakCountry = "";
+            public string GroundspeakDifficulty = "";
+            public string GroundspeakEncodedHint = "";
+
+            public List<Cachelog> GroundspeakLogs = new List<Cachelog>();
+            public string GroundspeakLongDescription = "";
+            public bool GroundspeakLongDescriptionIsHtml;
+
+            public string GroundspeakName = "";
+            public string GroundspeakOwner = "";
+            public string GroundspeakOwnerId = "";
+            public string GroundspeakPlacedBy = "";
+            public string GroundspeakShortDescription = "";
+            public bool GroundspeakShortDescriptionIsHtml;
+            public string GroundspeakState = "";
+            public string GroundspeakTerrain = "";
+            public List<Travelbug> GroundspeakTravelbugs = new List<Travelbug>();
+            public string GroundspeakType = "";
+            public string Id = "";
             public string Xmlns = "";
 
-            public string Groundspeak_Name = "";
-            public string Groundspeak_PlacedBy = "";
-            public string Groundspeak_Owner = "";
-            public string Groundspeak_OwnerID = "";
-            public string Groundspeak_Type = "";
-            public string Groundspeak_Container = "";
-            public string Groundspeak_Difficulty = "";
-            public string Groundspeak_Terrain = "";
-            public string Groundspeak_Country = "";
-            public string Groundspeak_State = "";
-            public string Groundspeak_ShortDescription = "";
-            public bool Groundspeak_ShortDescriptionIsHTML = false;
-            public string Groundspeak_LongDescription = "";
-            public bool Groundspeak_LongDescriptionIsHTML = false;
-            public string Groundspeak_EncodedHint = "";
-
-            public List<cachelog> Groundspeak_Logs = new List<cachelog>();
-            public List<travelbug> Groundspeak_Travelbugs = new List<travelbug>();
-            public List<Attribute> Groundspeak_Attributes = new List<Attribute>();
-
-            public cache(XmlNode Node)
+            public Cache(XmlNode node)
             {
                 #region Attributes
 
-                foreach (XmlAttribute Attribute in Node.Attributes)
+                if (node.Attributes == null) return;
+                foreach (XmlAttribute attribute in node.Attributes)
                 {
-                    switch (Attribute.Name)
+                    switch (attribute.Name)
                     {
                         case "id":
-                            ID = Attribute.Value;
+                            Id = attribute.Value;
                             break;
                         case "available":
-                            Available = Attribute.Value;
+                            Available = attribute.Value;
                             break;
                         case "archived":
-                            Archived = Attribute.Value;
+                            Archived = attribute.Value;
                             break;
                         case "xmlns:groundspeak":
-                            Xmlns = Attribute.Value;
+                            Xmlns = attribute.Value;
                             break;
                         default:
-                            throw new Exception("Unhandled Attribute: " + Attribute.Name);
+                            throw new Exception("Unhandled Attribute: " + attribute.Name);
                     }
                 }
+
                 #endregion Attributes
 
-                foreach (XmlNode ChildNode in Node.ChildNodes)
+                foreach (XmlNode childNode in node.ChildNodes)
                 {
-                    switch (ChildNode.Name)
+                    switch (childNode.Name)
                     {
                         case "groundspeak:name":
-                            Groundspeak_Name = ChildNode.InnerText;
+                            GroundspeakName = childNode.InnerText;
                             break;
                         case "groundspeak:placed_by":
-                            Groundspeak_PlacedBy = ChildNode.InnerText;
+                            GroundspeakPlacedBy = childNode.InnerText;
                             break;
                         case "groundspeak:owner":
-                            Groundspeak_Owner = ChildNode.InnerText;
-                            Groundspeak_OwnerID = ChildNode.Attributes["id"].Value.ToString();
+                            GroundspeakOwner = childNode.InnerText;
+                            GroundspeakOwnerId = childNode.Attributes?["id"].Value;
                             break;
                         case "groundspeak:type":
-                            Groundspeak_Type = ChildNode.InnerText;
+                            GroundspeakType = childNode.InnerText;
                             break;
                         case "groundspeak:container":
-                            Groundspeak_Container = ChildNode.InnerText;
+                            GroundspeakContainer = childNode.InnerText;
                             break;
                         case "groundspeak:difficulty":
-                            Groundspeak_Difficulty = ChildNode.InnerText;
+                            GroundspeakDifficulty = childNode.InnerText;
                             break;
                         case "groundspeak:terrain":
-                            Groundspeak_Terrain = ChildNode.InnerText;
+                            GroundspeakTerrain = childNode.InnerText;
                             break;
                         case "groundspeak:country":
-                            Groundspeak_Country = ChildNode.InnerText;
+                            GroundspeakCountry = childNode.InnerText;
                             break;
                         case "groundspeak:state":
-                            Groundspeak_State = ChildNode.InnerText;
+                            GroundspeakState = childNode.InnerText;
                             break;
                         case "groundspeak:short_description":
-                            Groundspeak_ShortDescription = ChildNode.InnerText;
-                            if (ChildNode.Attributes["html"].Value.Equals("True"))
+                            GroundspeakShortDescription = childNode.InnerText;
+                            if (childNode.Attributes != null && childNode.Attributes["html"].Value.Equals("True"))
                             {
-                                Groundspeak_ShortDescriptionIsHTML = true;
+                                GroundspeakShortDescriptionIsHtml = true;
                             }
                             break;
                         case "groundspeak:long_description":
-                            Groundspeak_LongDescription = ChildNode.InnerText;
-                            if (ChildNode.Attributes["html"].Value.Equals("True"))
+                            GroundspeakLongDescription = childNode.InnerText;
+                            if (childNode.Attributes != null && childNode.Attributes["html"].Value.Equals("True"))
                             {
-                                Groundspeak_LongDescriptionIsHTML = true;
+                                GroundspeakLongDescriptionIsHtml = true;
                             }
                             break;
                         case "groundspeak:encoded_hints":
-                            Groundspeak_EncodedHint = ChildNode.InnerText;
+                            GroundspeakEncodedHint = childNode.InnerText;
                             break;
                         case "groundspeak:logs":
-                            foreach (XmlNode LogNode in ChildNode.ChildNodes)
+                            foreach (XmlNode logNode in childNode.ChildNodes)
                             {
-                                cachelog Groundspeak_LogEntry = new cachelog(LogNode);
-                                Groundspeak_Logs.Add(Groundspeak_LogEntry);
+                                var groundspeakLogEntry = new Cachelog(logNode);
+                                GroundspeakLogs.Add(groundspeakLogEntry);
                             }
                             break;
                         case "groundspeak:travelbugs":
-                            foreach (XmlNode TravelBugNode in ChildNode.ChildNodes)
+                            foreach (XmlNode travelBugNode in childNode.ChildNodes)
                             {
-                                travelbug Travelbug = new travelbug(TravelBugNode);
-                                Groundspeak_Travelbugs.Add(Travelbug);
+                                var travelbug = new Travelbug(travelBugNode);
+                                GroundspeakTravelbugs.Add(travelbug);
                             }
                             break;
                         case "groundspeak:attributes":
-                            foreach (XmlNode AttributeNode in ChildNode.ChildNodes)
+                            foreach (XmlNode attributeNode in childNode.ChildNodes)
                             {
-                                Attribute CacheAttribute = new Attribute(AttributeNode);
-                                Groundspeak_Attributes.Add(CacheAttribute);
+                                var cacheAttribute = new Attribute(attributeNode);
+                                GroundspeakAttributes.Add(cacheAttribute);
                             }
                             break;
                         default:
-                            throw new Exception("Unhandled Child Node: " + ChildNode.Name);
+                            throw new Exception("Unhandled Child Node: " + childNode.Name);
                     }
                 }
             }
 
-            public cache()
+            public Cache()
             {
             }
         }
@@ -313,180 +312,175 @@ namespace PokemonGo.RocketAPI.Logic.Utils
 
         //WayPoint contains Caches and other Objects
 
-        public class wpt
+        public class Wpt
         {
-            public GPSCoordinates Coordinates = new GPSCoordinates();
-            public string Name = "";
-            public string Desc = "";
-            public string Time = "";
-            public string URLName = "";
-            public string URL = "";
-            public string Sym = "";
-            public string Type = "";
-            public string Ele = "";
             public string Cmt = "";
-            public string Opencaching_Awesomeness = "";
-            public string Opencaching_Difficulty = "";
-            public string Opencaching_Terrain = "";
-            public string Opencaching_Size = "";
-            public string Opencaching_VerificationPhrase = "";
-            public string Opencaching_VerificationNumber = "";
-            public string Opencaching_VerificationQR = "";
-            public string Opencaching_VerificationChirp = "";
-            public string Opencaching_SeriesID = "";
-            public string Opencaching_SeriesName = "";
-            public List<string> Opencaching_Tags = new List<string>();
+            public GpsCoordinates Coordinates = new GpsCoordinates();
+            public string Desc = "";
+            public string Ele = "";
 
-            public cache Groundspeak_Cache = new cache();
+            public Cache GroundspeakCache = new Cache();
+            public string Name = "";
+            public string OpencachingAwesomeness = "";
+            public string OpencachingDifficulty = "";
+            public string OpencachingSeriesId = "";
+            public string OpencachingSeriesName = "";
+            public string OpencachingSize = "";
+            public List<string> OpencachingTags = new List<string>();
+            public string OpencachingTerrain = "";
+            public string OpencachingVerificationChirp = "";
+            public string OpencachingVerificationNumber = "";
+            public string OpencachingVerificationPhrase = "";
+            public string OpencachingVerificationQr = "";
+            public string Sym = "";
+            public string Time = "";
+            public string Type = "";
+            public string Url = "";
+            public string UrlName = "";
 
-            public wpt(XmlNode Node)
+            public Wpt(XmlNode node)
             {
-                Coordinates.lat = Node.Attributes["lat"].Value.ToString();
-                Coordinates.lon = Node.Attributes["lon"].Value.ToString();
-                foreach (XmlNode ChildNode in Node.ChildNodes)
+                Coordinates.Lat = node.Attributes?["lat"].Value;
+                Coordinates.Lon = node.Attributes?["lon"].Value;
+                foreach (XmlNode childNode in node.ChildNodes)
                 {
-                    switch (ChildNode.Name)
+                    switch (childNode.Name)
                     {
                         case "time":
-                            Time = ChildNode.InnerText;
+                            Time = childNode.InnerText;
                             break;
                         case "name":
-                            Name = ChildNode.InnerText;
+                            Name = childNode.InnerText;
                             break;
                         case "desc":
-                            Desc = ChildNode.InnerText;
+                            Desc = childNode.InnerText;
                             break;
                         case "url":
-                            URL = ChildNode.InnerText;
+                            Url = childNode.InnerText;
                             break;
                         case "urlname":
-                            URLName = ChildNode.InnerText;
+                            UrlName = childNode.InnerText;
                             break;
                         case "sym":
-                            Sym = ChildNode.InnerText;
+                            Sym = childNode.InnerText;
                             break;
                         case "type":
-                            Type = ChildNode.InnerText;
+                            Type = childNode.InnerText;
                             break;
                         case "ele":
-                            Ele = ChildNode.InnerText;
+                            Ele = childNode.InnerText;
                             break;
                         case "cmt":
-                            Cmt = ChildNode.InnerText;
+                            Cmt = childNode.InnerText;
                             break;
                         case "groundspeak:cache":
-                            Groundspeak_Cache = new cache(ChildNode);
+                            GroundspeakCache = new Cache(childNode);
                             break;
                         case "ox:opencaching":
-                            foreach (XmlNode OpenCachingChildNode in ChildNode.ChildNodes)
+                            foreach (XmlNode openCachingChildNode in childNode.ChildNodes)
                             {
-                                switch (OpenCachingChildNode.Name)
+                                switch (openCachingChildNode.Name)
                                 {
                                     case "ox:ratings":
-                                        foreach (XmlNode OpenCachingRatingsChildNode in OpenCachingChildNode.ChildNodes)
+                                        foreach (XmlNode openCachingRatingsChildNode in openCachingChildNode.ChildNodes)
                                         {
-                                            switch (OpenCachingRatingsChildNode.Name)
+                                            switch (openCachingRatingsChildNode.Name)
                                             {
                                                 case "ox:awesomeness":
-                                                    Opencaching_Awesomeness = (OpenCachingRatingsChildNode).InnerText;
+                                                    OpencachingAwesomeness = openCachingRatingsChildNode.InnerText;
                                                     break;
                                                 case "ox:difficulty":
-                                                    Opencaching_Difficulty = (OpenCachingRatingsChildNode).InnerText;
+                                                    OpencachingDifficulty = openCachingRatingsChildNode.InnerText;
                                                     break;
                                                 case "ox:terrain":
-                                                    Opencaching_Terrain = (OpenCachingRatingsChildNode).InnerText;
+                                                    OpencachingTerrain = openCachingRatingsChildNode.InnerText;
                                                     break;
                                                 case "ox:size":
-                                                    Opencaching_Size = (OpenCachingRatingsChildNode).InnerText;
+                                                    OpencachingSize = openCachingRatingsChildNode.InnerText;
                                                     break;
                                                 default:
-                                                    throw new Exception("Unhandled for Child Object: " + OpenCachingRatingsChildNode.Name);
+                                                    throw new Exception("Unhandled for Child Object: " +
+                                                                        openCachingRatingsChildNode.Name);
                                             }
                                         }
                                         break;
                                     case "ox:tags":
-                                        foreach (XmlNode OpenCachingTagNode in OpenCachingChildNode.ChildNodes)
+                                        foreach (XmlNode openCachingTagNode in openCachingChildNode.ChildNodes)
                                         {
-                                            switch (OpenCachingTagNode.Name)
+                                            switch (openCachingTagNode.Name)
                                             {
                                                 case "ox:tag":
-                                                    Opencaching_Tags.Add((OpenCachingTagNode).InnerXml);
+                                                    OpencachingTags.Add(openCachingTagNode.InnerXml);
                                                     break;
                                                 default:
-                                                    throw new Exception("Unhandled for Child Object: " + OpenCachingTagNode.Name);
+                                                    throw new Exception("Unhandled for Child Object: " +
+                                                                        openCachingTagNode.Name);
                                             }
                                         }
 
                                         break;
                                     case "ox:verification":
-                                        foreach (XmlNode OpenCachingVerificationNode in OpenCachingChildNode.ChildNodes)
+                                        foreach (XmlNode openCachingVerificationNode in openCachingChildNode.ChildNodes)
                                         {
-                                            switch (OpenCachingVerificationNode.Name)
+                                            switch (openCachingVerificationNode.Name)
                                             {
                                                 case "ox:phrase":
-                                                    Opencaching_VerificationPhrase = OpenCachingChildNode.InnerText;
+                                                    OpencachingVerificationPhrase = openCachingChildNode.InnerText;
                                                     break;
                                                 case "ox:number":
-                                                    Opencaching_VerificationNumber = OpenCachingChildNode.InnerText;
+                                                    OpencachingVerificationNumber = openCachingChildNode.InnerText;
                                                     break;
                                                 case "ox:QR":
-                                                    Opencaching_VerificationQR = OpenCachingChildNode.InnerText;
+                                                    OpencachingVerificationQr = openCachingChildNode.InnerText;
                                                     break;
                                                 case "ox:chirp":
-                                                    Opencaching_VerificationChirp = OpenCachingChildNode.InnerText;
+                                                    OpencachingVerificationChirp = openCachingChildNode.InnerText;
                                                     break;
                                                 default:
-                                                    throw new Exception("Unhandled for Child Object: " + OpenCachingVerificationNode.Name);
+                                                    throw new Exception("Unhandled for Child Object: " +
+                                                                        openCachingVerificationNode.Name);
                                             }
                                         }
                                         break;
                                     case "ox:series":
-                                        Opencaching_SeriesName = OpenCachingChildNode.InnerText;
-                                        Opencaching_SeriesID = (OpenCachingChildNode).Attributes["id"].Value.ToString();
+                                        OpencachingSeriesName = openCachingChildNode.InnerText;
+                                        OpencachingSeriesId = openCachingChildNode.Attributes?["id"].Value;
                                         break;
                                     default:
-                                        throw new Exception("Unhandled for Child Object: " + OpenCachingChildNode.Name);
+                                        throw new Exception("Unhandled for Child Object: " + openCachingChildNode.Name);
                                 }
                             }
                             break;
                         default:
-                            throw new Exception("Unhandled for Child Object: " + ChildNode.Name);
+                            throw new Exception("Unhandled for Child Object: " + childNode.Name);
                     }
                 }
             }
         }
 
-        public class GPSBoundary
+        public class GpsBoundary
         {
-            public GPSCoordinates Min = new GPSCoordinates();
-            public GPSCoordinates Max = new GPSCoordinates();
-
-            public GPSBoundary()
-            {
-            }
+            public GpsCoordinates Max = new GpsCoordinates();
+            public GpsCoordinates Min = new GpsCoordinates();
         }
 
-        public class GPSCoordinates
+        public class GpsCoordinates
         {
-            public string lat = "";
-            public string lon = "";
-
-            public GPSCoordinates()
-            {
-            }
+            public string Lat = "";
+            public string Lon = "";
         }
 
         public class Attribute : IComparable<Attribute>
         {
-            public string ID = "";
-            public string Inc = "";
             public string Description = "";
+            public string Id = "";
+            public string Inc = "";
 
-            public Attribute(XmlNode AttributeNode)
+            public Attribute(XmlNode attributeNode)
             {
-                ID = AttributeNode.Attributes["id"].Value.ToString();
-                Inc = AttributeNode.Attributes["inc"].Value.ToString();
-                Description = AttributeNode.InnerText;
+                Id = attributeNode.Attributes?["id"].Value;
+                Inc = attributeNode.Attributes?["inc"].Value;
+                Description = attributeNode.InnerText;
             }
 
             public Attribute()
@@ -496,109 +490,108 @@ namespace PokemonGo.RocketAPI.Logic.Utils
 
             public int CompareTo(Attribute other)
             {
-                return this.Description.CompareTo(other.Description);
-
+                return string.Compare(Description, other.Description, StringComparison.Ordinal);
             }
         }
 
         //Route ans Route Points
 
-        public class rte
+        public class Rte
         {
-            public string Name = "";
             public string Desc = "";
+            public string Name = "";
             public string Number = "";
-            public string URL = "";
-            public string URLName = "";
-            List<rtept> RoutePoints = new List<rtept>();
+           // private readonly List<Rtept> _routePoints = new List<Rtept>();
+            public string Url = "";
+            public string UrlName = "";
 
-            public rte(XmlNode Node)
+            public Rte(XmlNode node)
             {
-                foreach (XmlNode ChildNode in Node.ChildNodes)
+                foreach (XmlNode childNode in node.ChildNodes)
                 {
-                    switch (ChildNode.Name)
+                    switch (childNode.Name)
                     {
                         case "name":
-                            Name = ChildNode.InnerText;
+                            Name = childNode.InnerText;
                             break;
                         case "desc":
-                            Desc = ChildNode.InnerText;
+                            Desc = childNode.InnerText;
                             break;
                         case "number":
-                            Number = ChildNode.InnerText;
+                            Number = childNode.InnerText;
                             break;
                         case "rtept":
-                            rtept RoutePoint = new rtept(ChildNode);
-                            RoutePoints.Add(RoutePoint);
+                            //var routePoint = new Rtept(childNode);
+                            //_routePoints.Add(routePoint);
                             break;
                         case "url":
-                            URL = ChildNode.InnerText;
+                            Url = childNode.InnerText;
                             break;
                         case "urlname":
-                            URLName = ChildNode.InnerText;
+                            UrlName = childNode.InnerText;
                             break;
                         case "topografix:color":
                             break;
                         default:
-                            throw new Exception("Unhandled for Child Object: " + ChildNode.Name);
+                            throw new Exception("Unhandled for Child Object: " + childNode.Name);
                     }
                 }
             }
         }
 
-        public class rtept
+        public class Rtept
         {
-            public string Lat = "";
-            public string Lon = "";
-            public string Ele = "";
-            public string Time = "";
-            public string Name = "";
             public string Cmt = "";
             public string Desc = "";
+            public string Ele = "";
+            public string Lat;
+            public string Lon;
+            public string Name = "";
             public string Sym = "";
+            public string Time = "";
             public string Type = "";
-            public string URL = "";
-            public string URLName = "";
+            public string Url = "";
+            public string UrlName = "";
 
-            public rtept(XmlNode Node)
+            public Rtept(XmlNode node)
             {
-                Lat = Node.Attributes["lat"].Value.ToString();
-                Lon = Node.Attributes["lon"].Value.ToString();
-                foreach (XmlNode ChildNode in Node.ChildNodes)
+                Lat = node.Attributes?["lat"].Value;
+                Lon = node.Attributes?["lon"].Value;
+                foreach (XmlNode childNode in node.ChildNodes)
                 {
-                    switch (ChildNode.Name)
+                    switch (childNode.Name)
                     {
                         case "ele":
-                            Ele = ChildNode.InnerText;
+                            Ele = childNode.InnerText;
                             break;
                         case "time":
-                            Time = ChildNode.InnerText;
+                            Time = childNode.InnerText;
                             break;
                         case "name":
-                            Name = ChildNode.InnerText;
+                            Name = childNode.InnerText;
                             break;
                         case "cmt":
-                            Cmt = ChildNode.InnerText;
+                            Cmt = childNode.InnerText;
                             break;
                         case "desc":
-                            Desc = ChildNode.InnerText;
+                            Desc = childNode.InnerText;
                             break;
                         case "sym":
-                            Sym = ChildNode.InnerText;
+                            Sym = childNode.InnerText;
                             break;
                         case "type":
-                            Type = ChildNode.InnerText;
+                            Type = childNode.InnerText;
                             break;
                         case "url":
-                            URL = ChildNode.InnerText;
+                            Url = childNode.InnerText;
                             break;
                         case "urlname":
-                            URLName = ChildNode.InnerText;
+                            UrlName = childNode.InnerText;
                             break;
                         case "topografix:leg":
                             break;
                         default:
-                            throw new Exception("Unhandled for Child Object: " + ChildNode.Name);
+                            throw new Exception("Unhandled for Child Object: " + childNode.Name);
                     }
                 }
             }
@@ -606,109 +599,109 @@ namespace PokemonGo.RocketAPI.Logic.Utils
 
         //Tracks
 
-        public class trk
+        public class Trk
         {
-            public string Name = "";
             public string Desc = "";
+            public string Name = "";
             public string Number = "";
-            public string URL = "";
-            public string URLName = "";
-            public List<trkseg> Segments = new List<trkseg>();
+            public List<Trkseg> Segments = new List<Trkseg>();
+            public string Url = "";
+            public string UrlName = "";
 
-            public trk(XmlNode Node)
+            public Trk(XmlNode node)
             {
-                foreach (XmlNode ChildNode in Node)
+                foreach (XmlNode childNode in node)
                 {
-                    switch (ChildNode.Name)
+                    switch (childNode.Name)
                     {
                         case "name":
-                            Name = ChildNode.InnerText;
+                            Name = childNode.InnerText;
                             break;
                         case "desc":
-                            Desc = ChildNode.InnerText;
+                            Desc = childNode.InnerText;
                             break;
                         case "number":
-                            Number = ChildNode.InnerText;
+                            Number = childNode.InnerText;
                             break;
                         case "trkseg":
-                            trkseg Segment = new trkseg(ChildNode);
-                            Segments.Add(Segment);
+                            var segment = new Trkseg(childNode);
+                            Segments.Add(segment);
                             break;
                         case "url":
-                            URL = ChildNode.InnerText;
+                            Url = childNode.InnerText;
                             break;
                         case "urlname":
-                            URLName = ChildNode.InnerText;
+                            UrlName = childNode.InnerText;
                             break;
                         case "topografix:color":
                             break;
                         default:
-                            throw new Exception("Unhandled for Child Object: " + ChildNode.Name);
+                            throw new Exception("Unhandled for Child Object: " + childNode.Name);
                     }
                 }
             }
         }
 
-        public class trkseg
+        public class Trkseg
         {
-            public List<trkpt> TrackPoints = new List<trkpt>();
+            public List<Trkpt> TrackPoints = new List<Trkpt>();
 
-            public trkseg(XmlNode Node)
+            public Trkseg(XmlNode node)
             {
-                foreach (XmlNode ChildNode in Node)
+                foreach (XmlNode childNode in node)
                 {
-                    switch (ChildNode.Name)
+                    switch (childNode.Name)
                     {
                         case "trkpt":
-                            trkpt TrackPoint = new trkpt(ChildNode);
-                            TrackPoints.Add(TrackPoint);
+                            var trackPoint = new Trkpt(childNode);
+                            TrackPoints.Add(trackPoint);
                             break;
                         default:
-                            throw new Exception("Unhandled for Child Object: " + ChildNode.Name);
+                            throw new Exception("Unhandled for Child Object: " + childNode.Name);
                     }
                 }
             }
         }
 
-        public class trkpt
+        public class Trkpt
         {
-            public string Lat = "";
-            public string Lon = "";
-            public string Sym = "";
-            public string Ele = "0";
-            public string Time = "";
-            public string Cmt = "";
-            public string Name = "";
-            public string Desc = "";
+            public string Cmt;
+            public string Desc;
+            public string Ele;
+            public string Lat;
+            public string Lon;
+            public string Name ;
+            public string Sym;
+            public string Time;
 
-            public trkpt(XmlNode Node)
+            public Trkpt(XmlNode node)
             {
-                Lat = Node.Attributes["lat"].Value.ToString();
-                Lon = Node.Attributes["lon"].Value.ToString();
-                foreach (XmlNode ChildNode in Node)
+                Lat = node.Attributes?["lat"].Value;
+                Lon = node.Attributes?["lon"].Value;
+                foreach (XmlNode childNode in node)
                 {
-                    switch (ChildNode.Name)
+                    switch (childNode.Name)
                     {
                         case "sym":
-                            Sym = ChildNode.InnerText;
+                            Sym = childNode.InnerText;
                             break;
                         case "ele":
-                            Ele = ChildNode.InnerText;
+                            Ele = childNode.InnerText;
                             break;
                         case "time":
-                            Time = ChildNode.InnerText;
+                            Time = childNode.InnerText;
                             break;
                         case "cmt":
-                            Cmt = ChildNode.InnerText;
+                            Cmt = childNode.InnerText;
                             break;
                         case "name":
-                            Name = ChildNode.InnerText;
+                            Name = childNode.InnerText;
                             break;
                         case "desc":
-                            Desc = ChildNode.InnerText;
+                            Desc = childNode.InnerText;
                             break;
                         default:
-                            throw new Exception("Unhandled for Child Object: " + ChildNode.Name);
+                            throw new Exception("Unhandled for Child Object: " + childNode.Name);
                     }
                 }
             }
