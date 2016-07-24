@@ -78,15 +78,20 @@
       <Name>PokemonGo.RocketAPI</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Configs\ConfigPokemonsToEvolve.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Configs\ConfigPokemonsToKeep.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>IF NOT EXIST "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsNotToCatch.txt" (
+COPY "$(ProjectDir)Configs\ConfigPokemonsNotToCatch.txt" "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsNotToCatch.txt" /Y
+)
+
+IF NOT EXIST "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsToEvolve.txt" (
+COPY "$(ProjectDir)Configs\ConfigPokemonsToEvolve.txt" "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsToEvolve.txt" /Y
+)
+
+IF NOT EXIST "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsToKeep.txt" (
+COPY "$(ProjectDir)Configs\ConfigPokemonsToKeep.txt" "$(ProjectDir)\bin\Debug\Configs\ConfigPokemonsToKeep.txt" /Y
+)</PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
