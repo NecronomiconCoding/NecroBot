@@ -708,6 +708,8 @@ namespace PokemonGo.RocketAPI.Logic
                 var bestPokemonOfType = _client.Settings.PrioritizeIVOverCP
                     ? await _inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon)
                     : await _inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon);
+                if (bestPokemonOfType == null)
+                    bestPokemonOfType = duplicatePokemon;
                 Logger.Write(
                     $"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({PokemonInfo.CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")} % perfect) CP (Best: {bestPokemonOfType.Cp} | ({PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")} % perfect))",
                     LogLevel.Transfer);
