@@ -391,25 +391,16 @@ namespace PokemonGo.RocketAPI
 			return await AwaitableOnResponseFor<PlayerUpdateMessage, PlayerUpdateResponse>(playerUpdateMessage, RequestType.PlayerUpdate);
         }
 
-        public async Task<UseItemCaptureRequest> UseCaptureItem(ulong encounterId, ItemId itemId, string spawnPointGuid)
+        public async Task<UseItemCaptureResponse> UseCaptureItem(ulong encounterId, ItemId itemId, string spawnPointGuid)
         {
-            var customRequest = new UseItemCaptureRequest
+			UseItemCaptureMessage useItemCaptureMessage = new UseItemCaptureMessage()
             {
                 EncounterId = encounterId,
                 ItemId = itemId,
                 SpawnPointGuid = spawnPointGuid
             };
 
-            var useItemRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                new Request.Types.Requests
-                {
-                    Type = (int) RequestType.USE_ITEM_CAPTURE,
-                    Message = customRequest.ToByteString()
-                });
-            return
-                await
-                    _httpClient.PostProtoPayload<Request, UseItemCaptureRequest>($"https://{_apiUrl}/rpc",
-                        useItemRequest);
+			return await AwaitableOnResponseFor<UseItemCaptureMessage, UseItemCaptureResponse>(useItemCaptureMessage, RequestType.UseItemCapture);
         }
 
         public async Task<UseItemRequest> UseItemXpBoost(ItemId itemId) //changed from UseItem to UseItemXpBoost because of the RequestType
