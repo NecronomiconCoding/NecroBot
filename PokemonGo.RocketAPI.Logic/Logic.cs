@@ -639,10 +639,15 @@ namespace PokemonGo.RocketAPI.Logic
                     _inventory.GetDuplicatePokemonToTransfer(_clientSettings.KeepPokemonsThatCanEvolve,
                         _clientSettings.PrioritizeIVOverCP, _clientSettings.PokemonsNotToTransfer);
 
-            foreach (var duplicatePokemon in duplicatePokemons)
-            {
-                if (duplicatePokemon.Cp >= _clientSettings.KeepMinCP ||
-                    PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) > _clientSettings.KeepMinIVPercentage)
+            BaseStats baseStats = PokemonInfo.GetBaseStats(duplicatePokemon.PokemonId);
+                var max_cp = PokemonInfo.CalculateMaxCPMultiplier(duplicatePokemon);
+                var min_cp = PokemonInfo.CalculateMinCPMultiplier(duplicatePokemon);
+                var cur_cp = PokemonInfo.CalculateCPMultiplier(duplicatePokemon);
+
+                var maxCPPercent = ((cur_cp - min_cp) / (max_cp - min_cp)) * 100.0;
+
+                if ((duplicatePokemon.CalculateIV() >= _clientSettings.KeepMinIVPercentage) ||
+                      (duplicatePokemon.Cp >= _clientSettings.KeepMinCP) || (maxCPPercent >= _clientSettings.MaxCpPercent))
                     continue;
                 await _client.TransferPokemon(duplicatePokemon.Id);
                 _inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
