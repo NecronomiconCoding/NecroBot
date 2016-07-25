@@ -46,6 +46,8 @@ namespace PokemonGo.RocketAPI.Console
         public int MaxCpPercent => UserSettings.Default.MaxCpPercent;
         public int MinPokemonReqToEvolveWithLuckyEgg => UserSettings.Default.MinPokemonReqToEvolveWithLuckyEgg;
         public int MinPokemonToStartEvolving => UserSettings.Default.MinPokemonToStartEvolving;
+        public bool KeepPokemonsThatCanEvolve => UserSettings.Default.KeepPokemonsThatCanEvolve;
+        
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
         {
