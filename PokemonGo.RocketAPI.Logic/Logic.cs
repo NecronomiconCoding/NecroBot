@@ -15,6 +15,7 @@ using PokemonGo.RocketAPI.Logic.Utils;
 // ReSharper disable CyclomaticComplexity
 // ReSharper disable FunctionNeverReturns
 using System.IO;
+using System.Globalization;
 
 #endregion
 
@@ -126,7 +127,7 @@ namespace PokemonGo.RocketAPI.Logic
                         ? $"{caughtPokemonResponse.Status} Attempt #{attemptCounter}"
                         : $"{caughtPokemonResponse.Status}";
                     Logger.Write(
-                        $"({catchStatus}) | {pokemon.PokemonId} Lvl {PokemonInfo.GetLevel(encounter.WildPokemon?.PokemonData)} ({encounter.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {Math.Round(Convert.ToDouble(encounter.CaptureProbability?.CaptureProbability_.First())*100, 2)}% | {Math.Round(distance)}m dist | with a {returnRealBallName(pokeball)}Ball.",
+                        $"({catchStatus}) | {pokemon.PokemonId} Lvl {PokemonInfo.GetLevel(encounter.WildPokemon?.PokemonData)} ({encounter.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {Math.Round(Convert.ToDouble(encounter.CaptureProbability?.CaptureProbability_.First()) *100, 2)}% | {Math.Round(distance)}m dist | with a {returnRealBallName(pokeball)}Ball.",
                         LogLevel.Caught);
                 }
                 attemptCounter++;
@@ -282,7 +283,7 @@ namespace PokemonGo.RocketAPI.Logic
                             var nextPoint = trackPoints.ElementAt(curTrkPt);
                             if (
                                 LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
-                                    Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon)) > 5000)
+                                    Convert.ToDouble(nextPoint.Lat, CultureInfo.InvariantCulture), Convert.ToDouble(nextPoint.Lon, CultureInfo.InvariantCulture)) > 5000)
                             {
                                 Logger.Write(
                                     $"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {_client.CurrentLat}, {_client.CurrentLng}",

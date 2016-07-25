@@ -38,7 +38,7 @@ namespace PokemonGo.RocketAPI.Logic.Utils
                 var minutes = 0.00;
                 if (double.IsInfinity(time) == false && time > 0)
                 {
-                    time = Convert.ToDouble(TimeSpan.FromHours(time).ToString("h\\.mm"), CultureInfo.InvariantCulture);
+                    time = Convert.ToDouble(TimeSpan.FromHours(time).ToString("h\\.mm"));
                     hours = Math.Truncate(time);
                     minutes = Math.Round((time - hours)*100);
                 }
