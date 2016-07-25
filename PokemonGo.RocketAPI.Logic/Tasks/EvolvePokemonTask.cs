@@ -29,7 +29,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
             machine.Fire(new UseLuckyEggEvent { Count = luckyEgg.Count - 1 });
 
-            Thread.Sleep(3000);
+            Thread.Sleep(2000);
         }
 
         public static void Execute(Context ctx, StateMachine machine)
