@@ -14,10 +14,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
     {
         public static void UseLuckyEgg(Client client, Inventory inventory, StateMachine machine)
         {
-            var inventoryTask = inventory.GetItems();
-            inventoryTask.Wait();
-
-            var inventoryContent = inventoryTask.Result;
+            var inventoryContent = inventory.GetItems().Result;
 
             var luckyEggs = inventoryContent.Where(p => (ItemId)p.Item_ == ItemId.ItemLuckyEgg);
             var luckyEgg = luckyEggs.FirstOrDefault();
@@ -27,7 +24,8 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
             client.UseItemXpBoost(ItemId.ItemLuckyEgg).Wait();
 
-            machine.Fire(new UseLuckyEggEvent { Count = luckyEgg.Count - 1 });
+            luckyEgg.Count -= 1;
+            machine.Fire(new UseLuckyEggEvent { Count = luckyEgg.Count });
 
             Thread.Sleep(2000);
         }
