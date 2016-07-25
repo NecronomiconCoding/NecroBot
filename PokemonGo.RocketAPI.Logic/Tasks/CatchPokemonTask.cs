@@ -1,14 +1,12 @@
-﻿using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.GeneratedCode;
+﻿using POGOProtos.Inventory.Item;
+using POGOProtos.Map.Pokemon;
+using POGOProtos.Networking.Responses;
 using PokemonGo.RocketAPI.Logic.Event;
 using PokemonGo.RocketAPI.Logic.State;
 using PokemonGo.RocketAPI.Logic.Utils;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace PokemonGo.RocketAPI.Logic.Tasks
 {
@@ -17,55 +15,55 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
         private static void UseBerry(Context ctx, ulong encounterId, string spawnPointId)
         {
             var inventoryBalls = ctx.Inventory.GetItems().Result;
-            var berries = inventoryBalls.Where(p => (ItemId)p.Item_ == ItemId.ItemRazzBerry);
+            var berries = inventoryBalls.Where(p => (ItemId)p.ItemId == ItemId.ItemRazzBerry);
             var berry = berries.FirstOrDefault();
 
             if (berry == null || berry.Count <= 0)
                 return;
 
-            ctx.Client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId).Wait();
+            ctx.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId).Wait();
             berry.Count -= 1;
             Logger.Write($"Used, remaining: {berry.Count}", LogLevel.Berry);
             Thread.Sleep(1500);
         }
 
-        private static MiscEnums.Item GetBestBall(Context ctx, EncounterResponse encounter)
+        private static ItemId GetBestBall(Context ctx, EncounterResponse encounter)
         {
             var pokemonCp = encounter?.WildPokemon?.PokemonData?.Cp;
             var iV = Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData));
             var proba = encounter?.CaptureProbability?.CaptureProbability_.First();
 
-            var pokeBallsCount = ctx.Inventory.GetItemAmountByType(MiscEnums.Item.ITEM_POKE_BALL).Result;
-            var greatBallsCount = ctx.Inventory.GetItemAmountByType(MiscEnums.Item.ITEM_GREAT_BALL).Result;
-            var ultraBallsCount = ctx.Inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL).Result;
-            var masterBallsCount = ctx.Inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL).Result;
+            var pokeBallsCount = ctx.Inventory.GetItemAmountByType(ItemId.ItemPokeBall).Result;
+            var greatBallsCount = ctx.Inventory.GetItemAmountByType(ItemId.ItemGreatBall).Result;
+            var ultraBallsCount = ctx.Inventory.GetItemAmountByType(ItemId.ItemUltraBall).Result;
+            var masterBallsCount = ctx.Inventory.GetItemAmountByType(ItemId.ItemMasterBall).Result;
 
             if (masterBallsCount > 0 && pokemonCp >= 1200)
-                return MiscEnums.Item.ITEM_MASTER_BALL;
+                return ItemId.ItemMasterBall;
             if (ultraBallsCount > 0 && pokemonCp >= 1000)
-                return MiscEnums.Item.ITEM_ULTRA_BALL;
+                return ItemId.ItemUltraBall;
             if (greatBallsCount > 0 && pokemonCp >= 750)
-                return MiscEnums.Item.ITEM_GREAT_BALL;
+                return ItemId.ItemGreatBall;
 
             if (ultraBallsCount > 0 && iV >= ctx.Settings.KeepMinIVPercentage && proba < 0.40)
-                return MiscEnums.Item.ITEM_ULTRA_BALL;
+                return ItemId.ItemUltraBall;
 
             if (greatBallsCount > 0 && iV >= ctx.Settings.KeepMinIVPercentage && proba < 0.50)
-                return MiscEnums.Item.ITEM_GREAT_BALL;
+                return ItemId.ItemGreatBall;
 
             if (greatBallsCount > 0 && pokemonCp >= 300)
-                return MiscEnums.Item.ITEM_GREAT_BALL;
+                return ItemId.ItemGreatBall;
 
             if (pokeBallsCount > 0)
-                return MiscEnums.Item.ITEM_POKE_BALL;
+                return ItemId.ItemPokeBall;
             if (greatBallsCount > 0)
-                return MiscEnums.Item.ITEM_GREAT_BALL;
+                return ItemId.ItemGreatBall;
             if (ultraBallsCount > 0)
-                return MiscEnums.Item.ITEM_ULTRA_BALL;
+                return ItemId.ItemUltraBall;
             if (masterBallsCount > 0)
-                return MiscEnums.Item.ITEM_MASTER_BALL;
+                return ItemId.ItemMasterBall;
 
-            return MiscEnums.Item.ITEM_UNKNOWN;
+            return ItemId.ItemUnknown;
         }
 
         public static void Execute(Context ctx, StateMachine machine, EncounterResponse encounter, MapPokemon pokemon)
@@ -77,7 +75,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
 
                 var pokeball = GetBestBall(ctx, encounter);
-                if (pokeball == MiscEnums.Item.ITEM_UNKNOWN)
+                if (pokeball == ItemId.ItemUnknown)
                 {
                     machine.Fire(new NoPokeballEvent { Id = pokemon.PokemonId, Cp = encounter?.WildPokemon?.PokemonData?.Cp ?? 0 });
                     return;
@@ -89,12 +87,12 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                 if ((isLowProbability && isHighCp) || isHighPerfection)
                 {
-                    UseBerry(ctx, pokemon.EncounterId, pokemon.SpawnpointId);
+                    UseBerry(ctx, pokemon.EncounterId, pokemon.SpawnPointId);
                 }
 
                 var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLat, ctx.Client.CurrentLng, pokemon.Latitude, pokemon.Longitude);
 
-                caughtPokemonResponse = ctx.Client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude, pokemon.Longitude, pokeball).Result;
+                caughtPokemonResponse = ctx.Client.Encounter.CatchPokemon(pokemon.EncounterId, pokemon.SpawnPointId, pokemon.Latitude, pokemon.Longitude, pokeball).Result;
 
                 PokemonCaptureEvent evt = new PokemonCaptureEvent();
                 evt.Status = caughtPokemonResponse.Status;

@@ -1,6 +1,5 @@
-﻿using PokemonGo.RocketAPI.Enums;
+﻿using POGOProtos.Map.Fort;
 using PokemonGo.RocketAPI.Extensions;
-using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Logic.Event;
 using PokemonGo.RocketAPI.Logic.State;
 using PokemonGo.RocketAPI.Logic.Utils;
@@ -8,10 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using static PokemonGo.RocketAPI.Enums.MiscEnums;
 
 namespace PokemonGo.RocketAPI.Logic.Tasks
 {
@@ -19,13 +15,13 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
     {
         private static List<FortData> GetPokeStops(Context ctx)
         {
-            var mapObjects = ctx.Client.GetMapObjects().Result;
+            var mapObjects = ctx.Client.Map.GetMapObjects().Result;
 
             // Wasn't sure how to make this pretty. Edit as needed.
             var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
                     .Where(
                         i =>
-                            i.Type == GeneratedCode.FortType.Checkpoint &&
+                            i.Type == FortType.Checkpoint &&
                             i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
                             ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
                                 LocationUtils.CalculateDistanceInMeters(
@@ -74,7 +70,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                 pokestopList.RemoveAt(0);
 
                 var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLat, ctx.Client.CurrentLng, pokeStop.Latitude, pokeStop.Longitude);
-                var fortInfo = ctx.Client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
+                var fortInfo = ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
 
                 machine.Fire(new FortTargetEvent { Name= fortInfo.Name, Distance = distance });
 
@@ -85,7 +81,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                         return true;
                     }).Wait();
 
-                var fortSearch = ctx.Client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
+                var fortSearch = ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
                 if (fortSearch.ExperienceAwarded > 0)
                 {
                     machine.Fire(new FortUsedEvent { Exp = fortSearch.ExperienceAwarded, Gems = fortSearch.GemsAwarded, Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded) });

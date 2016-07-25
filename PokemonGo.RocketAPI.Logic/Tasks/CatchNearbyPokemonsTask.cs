@@ -1,12 +1,9 @@
-﻿using PokemonGo.RocketAPI.GeneratedCode;
+﻿using POGOProtos.Map.Pokemon;
+using POGOProtos.Networking.Responses;
 using PokemonGo.RocketAPI.Logic.State;
 using PokemonGo.RocketAPI.Logic.Utils;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace PokemonGo.RocketAPI.Logic.Tasks
 {
@@ -14,7 +11,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
     {
         private static IOrderedEnumerable<MapPokemon> GetNearbyPokemons(Context ctx)
         {
-            var mapObjects = ctx.Client.GetMapObjects().Result;
+            var mapObjects = ctx.Client.Map.GetMapObjects().Result;
 
             var pokemons = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons)
                     .OrderBy(i => LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLat, ctx.Client.CurrentLng, i.Latitude, i.Longitude));
@@ -39,7 +36,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                 var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLat, ctx.Client.CurrentLng, pokemon.Latitude, pokemon.Longitude);
                 Thread.Sleep(distance > 100 ? 15000 : 500);
 
-                var encounter = ctx.Client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId).Result;
+                var encounter = ctx.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
 
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                 {

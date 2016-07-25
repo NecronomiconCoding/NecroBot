@@ -1,5 +1,5 @@
-﻿using PokemonGo.RocketAPI.Extensions;
-using PokemonGo.RocketAPI.GeneratedCode;
+﻿using POGOProtos.Map.Fort;
+using PokemonGo.RocketAPI.Extensions;
 using PokemonGo.RocketAPI.Logic.Event;
 using PokemonGo.RocketAPI.Logic.State;
 using PokemonGo.RocketAPI.Logic.Utils;
@@ -7,9 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace PokemonGo.RocketAPI.Logic.Tasks
 {
@@ -17,13 +15,13 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
     {
         private static List<FortData> GetPokeStops(Context ctx)
         {
-            var mapObjects = ctx.Client.GetMapObjects().Result;
+            var mapObjects = ctx.Client.Map.GetMapObjects().Result;
 
             // Wasn't sure how to make this pretty. Edit as needed.
             var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
                     .Where(
                         i =>
-                            i.Type == GeneratedCode.FortType.Checkpoint &&
+                            i.Type == FortType.Checkpoint &&
                             i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
                             ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
                                 LocationUtils.CalculateDistanceInMeters(
