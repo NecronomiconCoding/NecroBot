@@ -122,7 +122,7 @@ namespace PokemonGo.RocketAPI
                 NormalizedHitPosition = Utils.FloatAsUlong(1)
             };
 
-            var catchPokemonRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var catchPokemonRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
                     Type = (int) RequestType.CATCH_POKEMON,
@@ -178,7 +178,7 @@ namespace PokemonGo.RocketAPI
                 PlayerLngDegrees = Utils.FloatAsUlong(CurrentLng)
             };
 
-            var encounterResponse = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var encounterResponse = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
                     Type = (int) RequestType.ENCOUNTER,
@@ -196,7 +196,7 @@ namespace PokemonGo.RocketAPI
                 PokemonId = pokemonId
             };
 
-            var releasePokemonRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var releasePokemonRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
                     Type = (int) RequestType.EVOLVE_POKEMON,
@@ -217,7 +217,7 @@ namespace PokemonGo.RocketAPI
                 Longitude = Utils.FloatAsUlong(fortLng)
             };
 
-            var fortDetailRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var fortDetailRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
                     Type = (int) RequestType.FORT_DETAILS,
@@ -231,7 +231,7 @@ namespace PokemonGo.RocketAPI
 
         public async Task<GetInventoryResponse> GetInventory()
         {
-            var inventoryRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var inventoryRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 RequestType.GET_INVENTORY);
             return
                 await
@@ -241,7 +241,7 @@ namespace PokemonGo.RocketAPI
 
         public async Task<DownloadItemTemplatesResponse> GetItemTemplates()
         {
-            var settingsRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var settingsRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 RequestType.DOWNLOAD_ITEM_TEMPLATES);
             return
                 await
@@ -263,7 +263,7 @@ namespace PokemonGo.RocketAPI
                 Unknown14 = ByteString.CopyFromUtf8("\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
             };
 
-            var mapRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var mapRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
                     Type = (int) RequestType.GET_MAP_OBJECTS,
@@ -292,7 +292,7 @@ namespace PokemonGo.RocketAPI
 
         public async Task<GetPlayerResponse> GetProfile()
         {
-            var profileRequest = RequestBuilder.GetInitialRequest(AccessToken, _authType, CurrentLat, CurrentLng,
+            var profileRequest = RequestEnvelopeBuilder.GetInitialRequest(AccessToken, _authType, CurrentLat, CurrentLng,
                 CurrentAltitude,
                 new Request.Types.Requests {Type = (int) RequestType.GET_PLAYER});
             return
@@ -301,7 +301,7 @@ namespace PokemonGo.RocketAPI
 
         public async Task<DownloadSettingsResponse> GetSettings()
         {
-            var settingsRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var settingsRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 RequestType.DOWNLOAD_SETTINGS);
             return
                 await
@@ -317,7 +317,7 @@ namespace PokemonGo.RocketAPI
                 Count = amount
             };
 
-            var releasePokemonRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var releasePokemonRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
                     Type = (int) RequestType.RECYCLE_INVENTORY_ITEM,
@@ -348,7 +348,7 @@ namespace PokemonGo.RocketAPI
                 PlayerLngDegrees = Utils.FloatAsUlong(CurrentLng)
             };
 
-            var fortDetailRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var fortDetailRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
                     Type = (int) RequestType.FORT_SEARCH,
@@ -408,7 +408,7 @@ namespace PokemonGo.RocketAPI
 
         public async Task SetServer()
         {
-            var serverRequest = RequestBuilder.GetInitialRequest(AccessToken, _authType, CurrentLat, CurrentLng,
+            var serverRequest = RequestEnvelopeBuilder.GetInitialRequest(AccessToken, _authType, CurrentLat, CurrentLng,
                 CurrentAltitude,
                 RequestType.GET_PLAYER, RequestType.GET_HATCHED_OBJECTS, RequestType.GET_INVENTORY,
                 RequestType.CHECK_AWARDED_BADGES, RequestType.DOWNLOAD_SETTINGS);
@@ -434,7 +434,7 @@ namespace PokemonGo.RocketAPI
                 PokemonId = pokemonId
             };
 
-            var releasePokemonRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var releasePokemonRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
                     Type = (int) RequestType.RELEASE_POKEMON,
@@ -455,7 +455,7 @@ namespace PokemonGo.RocketAPI
                 Lng = Utils.FloatAsUlong(CurrentLng)
             };
 
-            var updateRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var updateRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
                     Type = (int) RequestType.PLAYER_UPDATE,
@@ -476,7 +476,7 @@ namespace PokemonGo.RocketAPI
                 SpawnPointGuid = spawnPointGuid
             };
 
-            var useItemRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var useItemRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
                     Type = (int) RequestType.USE_ITEM_CAPTURE,
@@ -495,7 +495,7 @@ namespace PokemonGo.RocketAPI
                 ItemId = itemId,
             };
 
-            var useItemRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var useItemRequest = RequestEnvelopeBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
                     Type = (int)RequestType.USE_ITEM_XP_BOOST,
