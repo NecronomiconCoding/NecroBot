@@ -369,44 +369,26 @@ namespace PokemonGo.RocketAPI
             _apiUrl = serverResponse.ApiUrl;
         }
 
-        public async Task<TransferPokemonOut> TransferPokemon(ulong pokemonId)
+        public async Task<ReleasePokemonResponse> TransferPokemon(ulong pokemonId)
         {
-            var customRequest = new TransferPokemon
+            ReleasePokemonMessage releasePokemonMessage = new ReleasePokemonMessage()
             {
                 PokemonId = pokemonId
             };
 
-            var releasePokemonRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                new Request.Types.Requests
-                {
-                    Type = (int) RequestType.RELEASE_POKEMON,
-                    Message = customRequest.ToByteString()
-                });
-            return
-                await
-                    _httpClient.PostProtoPayload<Request, TransferPokemonOut>($"https://{_apiUrl}/rpc",
-                        releasePokemonRequest);
+            return await AwaitableOnResponseFor<ReleasePokemonMessage, ReleasePokemonResponse>(releasePokemonMessage, RequestType.ReleasePokemon);
         }
 
         public async Task<PlayerUpdateResponse> UpdatePlayerLocation(double lat, double lng, double alt)
         {
             SetCoordinates(lat, lng, alt);
-            var customRequest = new Request.Types.PlayerUpdateProto
+			PlayerUpdateMessage playerUpdateMessage = new PlayerUpdateMessage()
             {
-                Lat = Utils.FloatAsUlong(CurrentLat),
-                Lng = Utils.FloatAsUlong(CurrentLng)
+                Latitude = CurrentLat,
+                Longitude = CurrentLng
             };
 
-            var updateRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                new Request.Types.Requests
-                {
-                    Type = (int) RequestType.PLAYER_UPDATE,
-                    Message = customRequest.ToByteString()
-                });
-            var updateResponse =
-                await
-                    _httpClient.PostProtoPayload<Request, PlayerUpdateResponse>($"https://{_apiUrl}/rpc", updateRequest);
-            return updateResponse;
+			return await AwaitableOnResponseFor<PlayerUpdateMessage, PlayerUpdateResponse>(playerUpdateMessage, RequestType.PlayerUpdate);
         }
 
         public async Task<UseItemCaptureRequest> UseCaptureItem(ulong encounterId, ItemId itemId, string spawnPointGuid)
