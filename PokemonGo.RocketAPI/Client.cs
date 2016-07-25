@@ -111,27 +111,37 @@ namespace PokemonGo.RocketAPI
         public async Task<CatchPokemonResponse> CatchPokemon(ulong encounterId, string spawnPointGuid, double pokemonLat,
             double pokemonLng, ItemId pokeball)
         {
-			CatchPokemonMessage catchPokemon = new CatchPokemonMessage()
-			{
-				EncounterId = encounterId,
-				Pokeball = pokeball,
-				SpawnPointId = spawnPointGuid,
-				HitPokemon = true,
-				NormalizedReticleSize = 1.950,
-				SpinModifier = 1,
-				NormalizedHitPosition = 1
-			};
+            CatchPokemonMessage catchPokemon = new CatchPokemonMessage()
+            {
+                EncounterId = encounterId,
+                Pokeball = pokeball,
+                SpawnPointId = spawnPointGuid,
+                HitPokemon = true,
+                NormalizedReticleSize = 1.950,
+                SpinModifier = 1,
+                NormalizedHitPosition = 1
+            };
 
-			var catchPokemonRequest = RequestEnvelopeBuilder.GetRequestEnvelope(_authTicket, CurrentLat, CurrentLng, CurrentAltitude)
-				.WithMessage(new Request()
-			   {
-				   RequestType = RequestType.CatchPokemon,
-				   RequestMessage = catchPokemon.ToByteString()
-			   });
+            return await AwaitableOnResponseFor<CatchPokemonMessage, CatchPokemonResponse>(catchPokemon, RequestType.CatchPokemon);
+        }
+
+        private async Task<TResponseTypeMessage> AwaitableOnResponseFor<TRequestMessageType, TResponseTypeMessage>(TRequestMessageType requestMessage, RequestType requestType)
+            where TRequestMessageType : IRequestMessage, IMessage
+            where TResponseTypeMessage : IResponseMessage, IMessage, IMessage<TResponseTypeMessage>, new()
+        {
+            //builds the general envelope with the provided request
+            var requestEnvelope = RequestEnvelopeBuilder.GetRequestEnvelope(_authTicket, CurrentLat, CurrentLng, CurrentAltitude)
+                .WithMessage(new Request()
+                {
+                    RequestType = requestType,
+                    RequestMessage = requestMessage.ToByteString()
+                });
+
+            //awaits for the IResponseMessage
             return
                 await
-                    _httpClient.PostProtoPayload<CatchPokemonResponse>($"https://{_apiUrl}/rpc",
-                        catchPokemonRequest);
+                    _httpClient.PostProtoPayload<TResponseTypeMessage>($"https://{_apiUrl}/rpc",
+                        requestEnvelope);
         }
 
         public async Task DoGoogleLogin()
@@ -165,47 +175,30 @@ namespace PokemonGo.RocketAPI
         public async Task DoPtcLogin(string username, string password)
         {
             AccessToken = await PtcLogin.GetAccessToken(username, password);
-			_authType = AuthType.PTC;
+            _authType = AuthType.PTC;
         }
 
         public async Task<EncounterResponse> EncounterPokemon(ulong encounterId, string spawnPointGuid)
         {
-			EncounterMessage encounterPokemonMessage = new EncounterMessage()
+            EncounterMessage encounterPokemonMessage = new EncounterMessage()
             {
                 EncounterId = encounterId,
                 SpawnPointId = spawnPointGuid,
-				PlayerLatitude = CurrentLat,
-				PlayerLongitude = CurrentLng,
+                PlayerLatitude = CurrentLat,
+                PlayerLongitude = CurrentLng,
             };
 
-            var encounterRequestEnvelope = RequestEnvelopeBuilder.GetRequestEnvelope(_authTicket, CurrentLat, CurrentLng, CurrentAltitude)
-			   .WithMessage(new Request()
-			   {
-				   RequestType = RequestType.Encounter,
-				   RequestMessage = encounterPokemonMessage.ToByteString()
-			   });
-			return
-                await
-                    _httpClient.PostProtoPayload<EncounterResponse>($"https://{_apiUrl}/rpc", encounterRequestEnvelope);
+            return await AwaitableOnResponseFor<EncounterMessage, EncounterResponse>(encounterPokemonMessage, RequestType.Encounter);
         }
 
-        public async Task<EvolvePokemonOut> EvolvePokemon(ulong pokemonId)
+        public async Task<EvolvePokemonResponse> EvolvePokemon(ulong pokemonId)
         {
-            var customRequest = new EvolvePokemon
+            EvolvePokemonMessage evolvePokemonMessage = new EvolvePokemonMessage
             {
                 PokemonId = pokemonId
             };
 
-            var releasePokemonRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                new Request.Types.Requests
-                {
-                    Type = (int) RequestType.EVOLVE_POKEMON,
-                    Message = customRequest.ToByteString()
-                });
-            return
-                await
-                    _httpClient.PostProtoPayload<Request, EvolvePokemonOut>($"https://{_apiUrl}/rpc",
-                        releasePokemonRequest);
+            return await AwaitableOnResponseFor<EvolvePokemonMessage, EvolvePokemonResponse>(evolvePokemonMessage, RequestType.Encounter);
         }
 
         public async Task<FortDetailsResponse> GetFort(string fortId, double fortLat, double fortLng)
