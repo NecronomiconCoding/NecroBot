@@ -22,12 +22,12 @@ namespace PokemonGo.RocketAPI.Logic.State
                 {
                     try
                     {
-                        double temp_lat = Convert.ToDouble(latlng[0]);
-                        double temp_long = Convert.ToDouble(latlng[1]);
+                        double latitude = Convert.ToDouble(latlng[0]);
+                        double longitude = Convert.ToDouble(latlng[1]);
 
-                        if (temp_lat >= -90 && temp_lat <= 90 && temp_long >= -180 && temp_long <= 180)
+                        if (Math.Abs(latitude) <= 90 && Math.Abs(longitude) <= 180)
                         {
-                            return new Tuple<double, double>(temp_lat, temp_long);
+                            return new Tuple<double, double>(latitude, longitude);
                         }
                         else
                         {
@@ -79,7 +79,9 @@ namespace PokemonGo.RocketAPI.Logic.State
                 }
             }
 
-            Logger.Write($"Make sure Lat & Lng is right. Exit Program if not! Lat: {ctx.Client.CurrentLatitude} Lng: {ctx.Client.CurrentLongitude}", LogLevel.Warning);
+            Logger.Write($"Make sure Lat & Lng are right. Exit Program if not! Lat: {ctx.Client.CurrentLatitude} Lng: {ctx.Client.CurrentLongitude}", LogLevel.Warning);
+
+            machine.RequestDelay(3000);
 
             return new FarmState();
         }
