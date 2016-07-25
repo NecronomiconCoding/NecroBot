@@ -1,14 +1,9 @@
-﻿using PokemonGo.RocketAPI.Logic.Utils;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PokemonGo.RocketAPI.Logic.Logging;
-using PokemonGo.RocketAPI.Logic.Event;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Utils;
 
-namespace PokemonGo.RocketAPI.Logic.State
+namespace PoGo.NecroBot.Logic.State
 {
     public class PositionCheckState : IState
     {

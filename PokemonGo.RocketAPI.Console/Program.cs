@@ -1,17 +1,13 @@
 ﻿#region using directives
 
-using System;
-using System.Threading;
-using System.Threading.Tasks;
-using PokemonGo.RocketAPI.Exceptions;
-using PokemonGo.RocketAPI.Logic.State;
-using PokemonGo.RocketAPI.Logic.Logging;
-using PokemonGo.RocketAPI.Logic.Utils;
-using PokemonGo.RocketAPI.Logic;
+using PoGo.NecroBot.Logic;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Console
+namespace PoGo.NecroBot.CLI
 {
     internal class Program
     {

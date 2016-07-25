@@ -7,8 +7,8 @@
     <ProjectGuid>{1FEA147E-F704-497B-A538-00B053B5F672}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PokemonGo.RocketAPI.Console</RootNamespace>
-    <AssemblyName>PokemonGo.RocketAPI.Console</AssemblyName>
+    <RootNamespace>PoGo.NecroBot.CLI</RootNamespace>
+    <AssemblyName>PoGo.NecroBot.CLI</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -101,9 +101,9 @@
       <Project>{05D2DA44-1B8E-4CF7-94ED-4D52451CD095}</Project>
       <Name>PokemonGo.RocketAPI</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PokemonGo.RocketAPI.Logic\PokemonGo.RocketAPI.Logic.csproj">
+    <ProjectReference Include="..\PokemonGo.RocketAPI.Logic\PoGo.NecroBot.Logic.csproj">
       <Project>{0739E40D-C589-4AEB-93E5-EE8CD6773C60}</Project>
-      <Name>PokemonGo.RocketAPI.Logic</Name>
+      <Name>PoGo.NecroBot.Logic</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

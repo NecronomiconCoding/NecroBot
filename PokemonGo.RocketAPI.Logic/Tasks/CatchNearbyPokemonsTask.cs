@@ -1,13 +1,13 @@
-﻿using POGOProtos.Map.Pokemon;
-using POGOProtos.Networking.Responses;
-using PokemonGo.RocketAPI.Logic.State;
-using PokemonGo.RocketAPI.Logic.Utils;
-using PokemonGo.RocketAPI.Logic.Logging;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
-using PokemonGo.RocketAPI.Logic.Event;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
+using POGOProtos.Map.Pokemon;
+using POGOProtos.Networking.Responses;
 
-namespace PokemonGo.RocketAPI.Logic.Tasks
+namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchNearbyPokemonsTask
     {

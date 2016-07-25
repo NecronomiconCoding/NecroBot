@@ -1,12 +1,8 @@
-
+using PoGo.NecroBot.Logic.Utils;
+using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
-using PokemonGo.RocketAPI.Logic.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-namespace PokemonGo.RocketAPI.Logic.State
+
+namespace PoGo.NecroBot.Logic.State
 {
     public class Context
     {

@@ -1,13 +1,8 @@
-﻿using PokemonGo.RocketAPI.Logic.Event;
-using PokemonGo.RocketAPI.Logic.State;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.PoGoUtils;
+using PoGo.NecroBot.Logic.State;
 
-namespace PokemonGo.RocketAPI.Logic.Tasks
+namespace PoGo.NecroBot.Logic.Tasks
 {
     public class TransferDuplicatePokemonTask
     {

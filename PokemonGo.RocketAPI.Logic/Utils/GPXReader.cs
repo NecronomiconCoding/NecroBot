@@ -3,12 +3,13 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
-using PokemonGo.RocketAPI.Logic.Logging;
+using PoGo.NecroBot.Logic.Logging;
+
 // ReSharper disable All
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Logic.Utils
+namespace PoGo.NecroBot.Logic.Utils
 {
     public class GpxReader
     {

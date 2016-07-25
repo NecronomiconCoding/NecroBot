@@ -1,15 +1,10 @@
-﻿using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.Logic.Event;
-using PokemonGo.RocketAPI.Logic.State;
-using PokemonGo.RocketAPI.Logic.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
 
-namespace PokemonGo.RocketAPI.Console
+namespace PoGo.NecroBot.CLI
 {
     public class ConsoleEventListener
     {

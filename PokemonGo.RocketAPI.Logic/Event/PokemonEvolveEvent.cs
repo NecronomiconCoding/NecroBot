@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using POGOProtos.Enums;
 using POGOProtos.Networking.Responses;
-using POGOProtos.Data;
-using POGOProtos.Enums;
-using POGOProtos.Settings.Master;
-using POGOProtos.Inventory;
-using POGOProtos.Inventory.Item;
-using POGOProtos.Data.Player;
-using PokemonGo.RocketAPI.Logic.Event;
-namespace PokemonGo.RocketAPI.Logic.Event
+
+namespace PoGo.NecroBot.Logic.Event
 {
     public class PokemonEvolveEvent : IEvent
     {

@@ -1,12 +1,11 @@
 ﻿#region using directives
 
-using POGOProtos.Networking.Responses;
 using System.Collections.Generic;
 using System.Linq;
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Logic.Utils
+namespace PoGo.NecroBot.Logic.Utils
 {
     public static class StringUtils
     {

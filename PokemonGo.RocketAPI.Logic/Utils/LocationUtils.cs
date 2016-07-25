@@ -5,7 +5,7 @@ using System.Device.Location;
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Logic.Utils
+namespace PoGo.NecroBot.Logic.Utils
 {
     public static class LocationUtils
     {

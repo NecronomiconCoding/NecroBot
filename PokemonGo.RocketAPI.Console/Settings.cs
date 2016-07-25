@@ -4,14 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
-using POGOProtos.Enums;
+using PoGo.NecroBot.Logic;
+using PoGo.NecroBot.Logic.Logging;
+using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
+using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-using PokemonGo.RocketAPI.Logic.Logging;
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Console
+namespace PoGo.NecroBot.CLI
 {
     public class GetClientSettings : ISettings
     {
@@ -25,7 +27,7 @@ namespace PokemonGo.RocketAPI.Console
         public string GoogleRefreshToken { get; set; }
     }
 
-    public class GetLogicSettings : Logic.LogicSettings
+    public class GetLogicSettings : LogicSettings
     {
 
         private ICollection<PokemonId> _pokemonsNotToTransfer;

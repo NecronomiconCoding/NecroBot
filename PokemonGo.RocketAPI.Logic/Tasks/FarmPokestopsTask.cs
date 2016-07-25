@@ -1,16 +1,16 @@
-﻿using POGOProtos.Map.Fort;
-using PokemonGo.RocketAPI.Extensions;
-using PokemonGo.RocketAPI.Logic.Event;
-using PokemonGo.RocketAPI.Logic.State;
-using PokemonGo.RocketAPI.Logic.Utils;
-using PokemonGo.RocketAPI.Logic.Logging;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Linq;
 using System.Threading;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
+using PokemonGo.RocketAPI.Extensions;
+using POGOProtos.Map.Fort;
 
-namespace PokemonGo.RocketAPI.Logic.Tasks
+namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsTask
     {
