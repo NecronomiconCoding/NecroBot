@@ -203,24 +203,15 @@ namespace PokemonGo.RocketAPI
 
         public async Task<FortDetailsResponse> GetFort(string fortId, double fortLat, double fortLng)
         {
-            var customRequest = new Request.Types.FortDetailsRequest
+			FortDetailsMessage fortDetailsMessage = new FortDetailsMessage
             {
-                Id = ByteString.CopyFromUtf8(fortId),
-                Latitude = Utils.FloatAsUlong(fortLat),
-                Longitude = Utils.FloatAsUlong(fortLng)
+                FortId = fortId,
+                Latitude = fortLat,
+                Longitude = fortLng
             };
 
-            var fortDetailRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                new Request.Types.Requests
-                {
-                    Type = (int) RequestType.FORT_DETAILS,
-                    Message = customRequest.ToByteString()
-                });
-            return
-                await
-                    _httpClient.PostProtoPayload<Request, FortDetailsResponse>($"https://{_apiUrl}/rpc",
-                        fortDetailRequest);
-        }
+			return await AwaitableOnResponseFor<FortDetailsMessage, FortDetailsResponse>(fortDetailsMessage, RequestType.Encounter);
+		}
 
         public async Task<GetInventoryResponse> GetInventory()
         {
