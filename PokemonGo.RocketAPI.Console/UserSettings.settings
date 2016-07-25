@@ -65,5 +65,11 @@
     <Setting Name="EvolveAboveIVValue" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">95</Value>
     </Setting>
+    <Setting Name="EvolveAboveIVValue" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">95</Value>
+    </Setting>
+    <Setting Name="EvolveAboveIVValue" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">95</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
