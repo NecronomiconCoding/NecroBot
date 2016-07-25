@@ -27,7 +27,7 @@ namespace PokemonGo.RocketAPI.Logic
             var inventory = await GetCachedInventory();
             var pokemon =
                 inventory.InventoryDelta.InventoryItems.FirstOrDefault(
-                    i => i.InventoryItemData.PokemonData != null && i.InventoryItemData.PokemonData.Id == id);
+                    i => i.InventoryItemData?.PokemonData != null && i.InventoryItemData.PokemonData.Id == id);
             if (pokemon != null)
                 inventory.InventoryDelta.InventoryItems.Remove(pokemon);
         }
