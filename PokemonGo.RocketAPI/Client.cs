@@ -228,66 +228,40 @@ namespace PokemonGo.RocketAPI
 
         public async Task<GetInventoryResponse> GetInventory()
         {
-            var inventoryRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                RequestType.GET_INVENTORY);
-            return
-                await
-                    _httpClient.PostProtoPayload<Request, GetInventoryResponse>($"https://{_apiUrl}/rpc",
-                        inventoryRequest);
+			return await AwaitableOnResponseFor<GetInventoryResponse>(RequestType.GetInventory);
         }
 
         public async Task<DownloadItemTemplatesResponse> GetItemTemplates()
         {
-            var settingsRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                RequestType.DOWNLOAD_ITEM_TEMPLATES);
-            return
-                await
-                    _httpClient.PostProtoPayload<Request, DownloadItemTemplatesResponse>($"https://{_apiUrl}/rpc",
-                        settingsRequest);
+			return await AwaitableOnResponseFor<DownloadItemTemplatesResponse>(RequestType.DownloadItemTemplates);
         }
 
+		public async Task<GetMapObjectsResponse> GetMapObjects()
+		{
+			GetMapObjectsMessage mapObjectMessage = new GetMapObjectsMessage()
+			{
+				Latitude = CurrentLat,
+				Longitude = CurrentLng,
+			};
 
-        public async Task<GetMapObjectsResponse> GetMapObjects()
-        {
-            var customRequest = new Request.Types.MapObjectsRequest
-            {
-                CellIds =
-                    ByteString.CopyFrom(
-                        ProtoHelper.EncodeUlongList(S2Helper.GetNearbyCellIds(CurrentLng,
-                            CurrentLat))),
-                Latitude = Utils.FloatAsUlong(CurrentLat),
-                Longitude = Utils.FloatAsUlong(CurrentLng),
-                Unknown14 = ByteString.CopyFromUtf8("\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0")
-            };
+			mapObjectMessage.SinceTimestampMs.Add(new long[21]);
+			mapObjectMessage.CellId.Add(S2Helper.GetNearbyCellIds(CurrentLng,
+							CurrentLat));
 
-            var mapRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                new Request.Types.Requests
-                {
-                    Type = (int) RequestType.GET_MAP_OBJECTS,
-                    Message = customRequest.ToByteString()
-                },
-                new Request.Types.Requests {Type = (int) RequestType.GET_HATCHED_OBJECTS},
-                new Request.Types.Requests
-                {
-                    Type = (int) RequestType.GET_INVENTORY,
-                    Message = new Request.Types.Time {Time_ = DateTime.UtcNow.ToUnixTime()}.ToByteString()
-                },
-                new Request.Types.Requests {Type = (int) RequestType.CHECK_AWARDED_BADGES},
-                new Request.Types.Requests
-                {
-                    Type = (int) RequestType.DOWNLOAD_SETTINGS,
-                    Message =
-                        new Request.Types.SettingsGuid
-                        {
-                            Guid = ByteString.CopyFromUtf8("4a2e9bc330dae60e7b74fc85b98868ab4700802e")
-                        }.ToByteString()
-                });
+			RequestEnvelope envelope = RequestEnvelopeBuilder.GetRequestEnvelope(_authTicket, CurrentLat, CurrentLng, CurrentAltitude);
+
+			envelope.WithMessage(new Request() { RequestMessage = mapObjectMessage.ToByteString(), RequestType = RequestType.GetMapObjects })
+				.WithMessage(new Request() { RequestType = RequestType.GetHatchedEggs })
+				.WithMessage(new Request() { RequestType = RequestType.GetInventory, RequestMessage = new GetInventoryMessage() { LastTimestampMs = DateTime.UtcNow.ToUnixTime() }.ToByteString() })
+				.WithMessage(new Request() { RequestType = RequestType.CheckAwardedBadges })
+				.WithMessage(new Request() { RequestType = RequestType.DownloadSettings, RequestMessage = new DownloadSettingsMessage() { Hash = "4a2e9bc330dae60e7b74fc85b98868ab4700802e" }.ToByteString() });
+	
 
             return
-                await _httpClient.PostProtoPayload<Request, GetMapObjectsResponse>($"https://{_apiUrl}/rpc", mapRequest);
-        }
+                await _httpClient.PostProtoPayload<GetMapObjectsResponse>($"https://{_apiUrl}/rpc", envelope);
+		}
 
-        public async Task<GetPlayerResponse> GetProfile()
+		public async Task<GetPlayerResponse> GetProfile()
         {
             var profileRequest = RequestEnvelopeBuilder.GetInitialRequest(AccessToken, _authType, CurrentLat, CurrentLng,
                 CurrentAltitude,
