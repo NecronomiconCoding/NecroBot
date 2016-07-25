@@ -362,7 +362,7 @@ namespace PokemonGo.RocketAPI
             var serverResponse = await _httpClient.PostProto(Resources.RpcUrl, serverRequest);
 
             if (serverResponse.AuthTicket == null)
-                throw new AccessTokenExpiredException();
+                throw new AccessTokenExpiredException(serverResponse.Error);
 
             _authTicket = serverResponse.AuthTicket;
 
