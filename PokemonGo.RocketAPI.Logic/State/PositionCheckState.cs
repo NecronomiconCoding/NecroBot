@@ -6,12 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PokemonGo.RocketAPI.Logic.Logging;
+using PokemonGo.RocketAPI.Logic.Event;
 
 namespace PokemonGo.RocketAPI.Logic.State
 {
     public class PositionCheckState : IState
     {
-        private static Tuple<double, double> GetLatLngFromFile()
+        private static Tuple<double, double> LoadPositionFromDisk(StateMachine machine)
         {
             if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini") &&
                 File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini").Contains(":"))
@@ -22,24 +23,22 @@ namespace PokemonGo.RocketAPI.Logic.State
                 {
                     try
                     {
-                        double temp_lat = Convert.ToDouble(latlng[0]);
-                        double temp_long = Convert.ToDouble(latlng[1]);
+                        double latitude = Convert.ToDouble(latlng[0]);
+                        double longitude = Convert.ToDouble(latlng[1]);
 
-                        if (temp_lat >= -90 && temp_lat <= 90 && temp_long >= -180 && temp_long <= 180)
+                        if (Math.Abs(latitude) <= 90 && Math.Abs(longitude) <= 180)
                         {
-                            return new Tuple<double, double>(temp_lat, temp_long);
+                            return new Tuple<double, double>(latitude, longitude);
                         }
                         else
                         {
-                            Logger.Write("Coordinates in \"Coords.ini\" file are invalid, using the default coordinates ",
-                            LogLevel.Warning);
+                            machine.Fire(new WarnEvent { Message = "Coordinates in \"Coords.ini\" file are invalid, using the default coordinates" });
                             return null;
                         }
                     }
                     catch (FormatException)
-                    {
-                        Logger.Write("Coordinates in \"Coords.ini\" file are invalid, using the default coordinates ",
-                            LogLevel.Warning);
+                    {      
+                        machine.Fire(new WarnEvent { Message = "Coordinates in \"Coords.ini\" file are invalid, using the default coordinates" });
                         return null;
                     }
                 }
@@ -54,7 +53,7 @@ namespace PokemonGo.RocketAPI.Logic.State
             string coordsPath = Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini";
             if (File.Exists(coordsPath))
             {
-                Tuple<double, double> latLngFromFile = GetLatLngFromFile();
+                Tuple<double, double> latLngFromFile = LoadPositionFromDisk(machine);
                 if (latLngFromFile != null)
                 {
                     double distance = LocationUtils.CalculateDistanceInMeters(latLngFromFile.Item1, latLngFromFile.Item2, ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude);
@@ -68,18 +67,20 @@ namespace PokemonGo.RocketAPI.Logic.State
                             if (kmph < 80) // If speed required to get to the default location is < 80km/hr
                             {
                                 File.Delete(coordsPath);
-                                Logger.Write("Detected realistic Traveling , using UserSettings.settings", LogLevel.Warning);
+                                machine.Fire(new WarnEvent { Message = "Detected realistic Traveling , using UserSettings.settings" });
                             }
                             else
                             {
-                                Logger.Write("Not realistic Traveling at " + kmph + ", using last saved Coords.ini", LogLevel.Warning);
+                                machine.Fire(new WarnEvent { Message = "Not realistic Traveling at " + kmph + ", using last saved Coords.ini" });
                             }
                         }
                     }
                 }
             }
 
-            Logger.Write($"Make sure Lat & Lng is right. Exit Program if not! Lat: {ctx.Client.CurrentLatitude} Lng: {ctx.Client.CurrentLongitude}", LogLevel.Warning);
+            machine.Fire(new WarnEvent { Message = $"Make sure Lat & Lng are right. Exit Program if not! Lat: {ctx.Client.CurrentLatitude} Lng: {ctx.Client.CurrentLongitude}" });
+
+            machine.RequestDelay(3000);
 
             return new FarmState();
         }

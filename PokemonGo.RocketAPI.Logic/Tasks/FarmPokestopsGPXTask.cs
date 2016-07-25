@@ -64,12 +64,13 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                         if (distance > 5000)
                         {
-                            Logger.Write($"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}", LogLevel.Error);
+                            machine.Fire(new ErrorEvent
+                            {
+                                Message =
+                                $"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}"
+                            });
                             break;
                         }
-
-                        Logger.Write($"Your desired destination is {nextPoint.Lat}, {nextPoint.Lon} your location is {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}", LogLevel.Warning);
-
                         var pokestopList = GetPokeStops(ctx);
 
                         while (pokestopList.Any())
@@ -80,7 +81,8 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                             ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Wait();
 
-                            var fortSearch = ctx.LogicClient.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
+                            var fortSearch = ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
+
                             if (fortSearch.ExperienceAwarded > 0)
                             {
                                 machine.Fire(new FortUsedEvent { Exp = fortSearch.ExperienceAwarded, Gems = fortSearch.GemsAwarded, Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded) });

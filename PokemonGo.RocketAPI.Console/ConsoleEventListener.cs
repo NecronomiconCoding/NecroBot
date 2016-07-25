@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using POGOProtos.Inventory.Item;
+
 namespace PokemonGo.RocketAPI.Console
 {
     public class ConsoleEventListener
@@ -21,7 +22,7 @@ namespace PokemonGo.RocketAPI.Console
 
         public void HandleEvent(ProfileEvent evt, Context ctx)
         {
-            Logger.Write($"Playing as {evt.Profile.Profile.Username ?? ""}");
+            Logger.Write($"Playing as {evt.Profile.PlayerData.Username ?? ""}");
         }
 
         public void HandleEvent(ErrorEvent evt, Context ctx)
@@ -46,7 +47,7 @@ namespace PokemonGo.RocketAPI.Console
 
         public void HandleEvent(PokemonEvolveEvent evt, Context ctx)
         {
-            Logger.Write(evt.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess
+            Logger.Write(evt.Result == POGOProtos.Networking.Responses.EvolvePokemonResponse.Types.Result.Success
                         ? $"{evt.Id} successfully for {evt.Exp}xp"
                         : $"Failed {evt.Id}. EvolvePokemonOutProto.Result was {evt.Result}, stopping evolving {evt.Id}",
                     LogLevel.Evolve);
@@ -59,7 +60,7 @@ namespace PokemonGo.RocketAPI.Console
 
         public void HandleEvent(ItemRecycledEvent evt, Context ctx)
         {
-            Logger.Write($"{evt.Count}x {(ItemId)evt.Id}", LogLevel.Recycling);
+            Logger.Write($"{evt.Count}x {evt.Id}", LogLevel.Recycling);
         }
 
         public void HandleEvent(FortUsedEvent evt, Context ctx)
@@ -74,17 +75,17 @@ namespace PokemonGo.RocketAPI.Console
 
         public void HandleEvent(PokemonCaptureEvent evt, Context ctx)
         {
-            Func<MiscEnums.Item, string> returnRealBallName = a =>
+            Func<ItemId, string> returnRealBallName = a =>
             {
                 switch (a)
                 {
-                    case MiscEnums.Item.ITEM_POKE_BALL:
+                    case ItemId.ItemPokeBall:
                         return "Poke";
-                    case MiscEnums.Item.ITEM_GREAT_BALL:
+                    case ItemId.ItemGreatBall:
                         return "Great";
-                    case MiscEnums.Item.ITEM_ULTRA_BALL:
+                    case ItemId.ItemUltraBall:
                         return "Ultra";
-                    case MiscEnums.Item.ITEM_MASTER_BALL:
+                    case ItemId.ItemMasterBall:
                         return "Master";
                     default:
                         return "Unknown";
@@ -102,6 +103,11 @@ namespace PokemonGo.RocketAPI.Console
         public void HandleEvent(NoPokeballEvent evt, Context ctx)
         {
             Logger.Write($"No Pokeballs - We missed a {evt.Id} with CP {evt.Cp}", LogLevel.Caught);
+        }
+
+        public void HandleEvent(UseBerryEvent evt, Context ctx)
+        {
+            Logger.Write($"Used, remaining: {evt.Count}", LogLevel.Berry);
         }
     }
 }

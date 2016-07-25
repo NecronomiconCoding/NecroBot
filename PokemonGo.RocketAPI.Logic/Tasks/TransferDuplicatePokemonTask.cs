@@ -1,5 +1,4 @@
-﻿using PokemonGo.RocketAPI.GeneratedCode;
-using PokemonGo.RocketAPI.Logic.Event;
+﻿using PokemonGo.RocketAPI.Logic.Event;
 using PokemonGo.RocketAPI.Logic.State;
 using System;
 using System.Collections.Generic;
@@ -14,20 +13,20 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
     {
         public static void Execute(Context ctx, StateMachine machine)
         {
-            var duplicatePokemons =  ctx.Inventory.GetDuplicatePokemonToTransfer(false, ctx.Settings.PrioritizeIVOverCP, ctx.Settings.PokemonsNotToTransfer).Result;
+            var duplicatePokemons =  ctx.Inventory.GetDuplicatePokemonToTransfer(false, ctx.LogicSettings.PrioritizeIVOverCP, ctx.LogicSettings.PokemonsNotToTransfer).Result;
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
-                if (duplicatePokemon.Cp >= ctx.Settings.KeepMinCP ||
-                    PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) > ctx.Settings.KeepMinIVPercentage)
+                if (duplicatePokemon.Cp >= ctx.LogicSettings.KeepMinCP ||
+                    PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) > ctx.LogicSettings.KeepMinIVPercentage)
                 {
                     continue;
                 }
 
-                ctx.Client.TransferPokemon(duplicatePokemon.Id).Wait();
+                ctx.Client.Inventory.TransferPokemon(duplicatePokemon.Id).Wait();
                 ctx.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
 
-                var bestPokemonOfType = ctx.Settings.PrioritizeIVOverCP
+                var bestPokemonOfType = ctx.LogicSettings.PrioritizeIVOverCP
                     ? ctx.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon).Result
                     : ctx.Inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon).Result;
 

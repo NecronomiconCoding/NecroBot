@@ -17,6 +17,6 @@ namespace PokemonGo.RocketAPI.Logic.Event
     {
         public PokemonId Id;
         public int Exp;
-        public EvolvePokemonOut.Types.EvolvePokemonStatus Result;
+        public EvolvePokemonResponse.Types.Result Result;
     }
 }

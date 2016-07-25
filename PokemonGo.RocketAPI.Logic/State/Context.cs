@@ -1,11 +1,11 @@
-﻿
+
+using POGOProtos.Networking.Responses;
 using PokemonGo.RocketAPI.Logic.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using POGOProtos.Networking.Responses;
 namespace PokemonGo.RocketAPI.Logic.State
 {
     public class Context

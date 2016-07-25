@@ -5,6 +5,7 @@ using PokemonGo.RocketAPI.Logic.Utils;
 using PokemonGo.RocketAPI.Logic.Logging;
 using System.Linq;
 using System.Threading;
+using PokemonGo.RocketAPI.Logic.Event;
 
 namespace PokemonGo.RocketAPI.Logic.Tasks
 {
@@ -45,7 +46,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                 }
                 else
                 {
-                    Logger.Write($"Encounter problem: {encounter.Status}");
+                    machine.Fire(new WarnEvent { Message = $"Encounter problem: {encounter.Status}" });
                 }
 
                 // If pokemon is not last pokemon in list, create delay between catches, else keep moving.

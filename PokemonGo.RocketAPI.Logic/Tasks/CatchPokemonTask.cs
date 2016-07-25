@@ -13,7 +13,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 {
     public static class CatchPokemonTask
     {
-        private static void UseBerry(Context ctx, ulong encounterId, string spawnPointId)
+        private static void UseBerry(Context ctx, StateMachine machine, ulong encounterId, string spawnPointId)
         {
             var inventoryBalls = ctx.Inventory.GetItems().Result;
             var berries = inventoryBalls.Where(p => (ItemId)p.ItemId == ItemId.ItemRazzBerry);
@@ -24,7 +24,8 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
             ctx.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId).Wait();
             berry.Count -= 1;
-            Logger.Write($"Used, remaining: {berry.Count}", LogLevel.Berry);
+            machine.Fire(new UseBerryEvent { Count = berry.Count }); 
+
             Thread.Sleep(1500);
         }
 
@@ -88,7 +89,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                 if ((isLowProbability && isHighCp) || isHighPerfection)
                 {
-                    UseBerry(ctx, pokemon.EncounterId, pokemon.SpawnPointId);
+                    UseBerry(ctx, machine, pokemon.EncounterId, pokemon.SpawnPointId);
                 }
 
                 var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
