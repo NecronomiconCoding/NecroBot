@@ -5,6 +5,11 @@ using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
+using System.Threading;
+using System.Diagnostics;
+using System.Windows.Forms;
+using PokemonGo.RocketAPI.Rpc;
+using PokemonGo.RocketAPI;
 
 #endregion
 
@@ -12,6 +17,23 @@ namespace PoGo.NecroBot.CLI
 {
     internal class Program
     {
+        public static void LoginWithGoogle(string usercode, string uri)
+        {
+            try
+            {
+                Logger.Write("Google Device Code copied to clipboard");
+                Thread.Sleep(2000);
+                Process.Start(@uri);
+                Clipboard.SetText(usercode);
+
+            }
+            catch (Exception)
+            {
+                Logger.Write("Couldnt copy to clipboard, do it manually", LogLevel.Error);
+                Logger.Write($"Goto: {uri} & enter {usercode}", LogLevel.Error);
+            }
+        }
+
         private static void Main()
         {
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
@@ -28,8 +50,10 @@ namespace PoGo.NecroBot.CLI
 
             machine.SetFailureState(new LoginState());
 
+            var context = new Context(new GetClientSettings(), new GetLogicSettings());
+            context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
 
-            machine.AsyncStart(new VersionCheckState(), new Context(new GetClientSettings(), new GetLogicSettings()));
+            machine.AsyncStart(new VersionCheckState(), context);
 
             Console.ReadLine();
         }
