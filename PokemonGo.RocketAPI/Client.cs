@@ -165,28 +165,28 @@ namespace PokemonGo.RocketAPI
         public async Task DoPtcLogin(string username, string password)
         {
             AccessToken = await PtcLogin.GetAccessToken(username, password);
-            _authType = AuthType.Ptc;
+			_authType = AuthType.PTC;
         }
 
         public async Task<EncounterResponse> EncounterPokemon(ulong encounterId, string spawnPointGuid)
         {
-            var customRequest = new Request.Types.EncounterRequest
+			EncounterMessage encounterPokemonMessage = new EncounterMessage()
             {
                 EncounterId = encounterId,
-                SpawnpointId = spawnPointGuid,
-                PlayerLatDegrees = Utils.FloatAsUlong(CurrentLat),
-                PlayerLngDegrees = Utils.FloatAsUlong(CurrentLng)
+                SpawnPointId = spawnPointGuid,
+				PlayerLatitude = CurrentLat,
+				PlayerLongitude = CurrentLng,
             };
 
-            var encounterResponse = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                new Request.Types.Requests
-                {
-                    Type = (int) RequestType.ENCOUNTER,
-                    Message = customRequest.ToByteString()
-                });
-            return
+            var encounterRequestEnvelope = RequestEnvelopeBuilder.GetRequestEnvelope(_authTicket, CurrentLat, CurrentLng, CurrentAltitude)
+			   .WithMessage(new Request()
+			   {
+				   RequestType = RequestType.Encounter,
+				   RequestMessage = encounterPokemonMessage.ToByteString()
+			   });
+			return
                 await
-                    _httpClient.PostProtoPayload<Request, EncounterResponse>($"https://{_apiUrl}/rpc", encounterResponse);
+                    _httpClient.PostProtoPayload<EncounterResponse>($"https://{_apiUrl}/rpc", encounterRequestEnvelope);
         }
 
         public async Task<EvolvePokemonOut> EvolvePokemon(ulong pokemonId)
