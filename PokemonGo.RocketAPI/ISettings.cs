@@ -1,8 +1,8 @@
 ﻿#region
 
 using System.Collections.Generic;
-using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.GeneratedCode;
+using PokemonGoDesktop.API.Proto;
+using PokemonGoDesktop.API.Common;
 
 #endregion
 
