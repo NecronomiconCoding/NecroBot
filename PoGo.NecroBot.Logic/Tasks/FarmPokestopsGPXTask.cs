@@ -91,9 +91,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
 
                                 CatchNearbyPokemonsTask.Execute(ctx, machine);
-                                return true;
-                            }, () =>
-                            {
                                 UseNearbyPokestopsTask.Execute(ctx, machine);
                                 return true;
                             }

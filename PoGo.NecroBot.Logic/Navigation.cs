@@ -84,7 +84,7 @@ namespace PoGo.NecroBot.Logic
         }
 
         public async Task<PlayerUpdateResponse> HumanPathWalking(GpxReader.Trkpt trk,
-            double walkingSpeedInKilometersPerHour, Func<bool> functionExecutedWhileWalking, Func<bool> function2ExecutedWhileWalking)
+            double walkingSpeedInKilometersPerHour, Func<bool> functionExecutedWhileWalking)
         {
             //PlayerUpdateResponse result = null;
 
@@ -136,8 +136,7 @@ namespace PoGo.NecroBot.Logic
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                             waypoint.Altitude);
 
-                functionExecutedWhileWalking?.Invoke(); // look for pokemon
-                function2ExecutedWhileWalking?.Invoke(); //check pokestops
+                functionExecutedWhileWalking?.Invoke(); // look for pokemon & hit stops
 
                 await Task.Delay(Math.Min((int)(distanceToTarget / speedInMetersPerSecond * 1000), 3000));
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
