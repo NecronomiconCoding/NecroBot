@@ -4,7 +4,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using PokemonGo.RocketAPI.Exceptions;
-using PokemonGo.RocketAPI.GeneratedCode;
 using System.Linq;
 using System.Collections.Generic;
 using PokemonGoDesktop.API.Proto;
