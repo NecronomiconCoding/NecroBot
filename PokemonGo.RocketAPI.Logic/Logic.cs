@@ -509,6 +509,7 @@ namespace PokemonGo.RocketAPI.Logic
                 return;
 
             var useRaspberry = await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
+            berry.Count--;
             await Task.Delay(1000);
         }
 
