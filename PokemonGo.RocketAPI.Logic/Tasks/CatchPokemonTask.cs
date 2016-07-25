@@ -4,6 +4,7 @@ using POGOProtos.Networking.Responses;
 using PokemonGo.RocketAPI.Logic.Event;
 using PokemonGo.RocketAPI.Logic.State;
 using PokemonGo.RocketAPI.Logic.Utils;
+using PokemonGo.RocketAPI.Logic.Logging;
 using System;
 using System.Linq;
 using System.Threading;

@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using POGOProtos.Enums;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Inventory.Item;
+using PokemonGo.RocketAPI.Logic.Logging;
 
 #endregion
 

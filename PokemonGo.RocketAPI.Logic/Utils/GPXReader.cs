@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using PokemonGo.RocketAPI.Logic.Logging;
 // ReSharper disable All
 
 #endregion

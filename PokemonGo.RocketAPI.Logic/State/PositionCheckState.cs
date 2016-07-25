@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PokemonGo.RocketAPI.Logic.Logging;
 
 namespace PokemonGo.RocketAPI.Logic.State
 {

@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo.RocketAPI.Logic.State;
+using PokemonGo.RocketAPI.Logic.Logging;
 using PokemonGo.RocketAPI.Logic.Utils;
 using PokemonGo.RocketAPI.Logic;
 
