@@ -264,7 +264,7 @@ namespace PokemonGo.RocketAPI
         public async Task<GetPlayerResponse> GetProfile()
         {
             var profileRequest = RequestEnvelopeBuilder.GetInitialRequestEnvelope(AccessToken, _authType, CurrentLat, CurrentLng, CurrentAltitude)
-                .WithMessage(new Request() { RequestType = RequestType.GetPlayerProfile });
+                .WithMessage(new Request() { RequestType = RequestType.GetPlayer });
             return
                 await _httpClient.PostProtoPayload<GetPlayerResponse>($"https://{_apiUrl}/rpc", profileRequest);
         }

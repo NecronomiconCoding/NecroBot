@@ -175,7 +175,7 @@ namespace PokemonGo.RocketAPI.Logic.Utils
 
         public void SetUsername(GetPlayerResponse profile)
         {
-            PlayerName = profile.PlayerData.Username ?? "";
+            PlayerName = profile.PlayerData?.Username ?? "";
         }
 
         public override string ToString()
