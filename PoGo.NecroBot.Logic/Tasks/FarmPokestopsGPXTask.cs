@@ -10,6 +10,7 @@ using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
+using System.Globalization;
 
 #endregion
 
@@ -37,8 +38,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         var nextPoint = trackPoints.ElementAt(curTrkPt);
                         var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
-                            ctx.Client.CurrentLongitude, Convert.ToDouble(nextPoint.Lat),
-                            Convert.ToDouble(nextPoint.Lon));
+                            ctx.Client.CurrentLongitude, Convert.ToDouble(nextPoint.Lat, CultureInfo.InvariantCulture),
+                            Convert.ToDouble(nextPoint.Lon, CultureInfo.InvariantCulture));
 
                         if (distance > 5000)
                         {
