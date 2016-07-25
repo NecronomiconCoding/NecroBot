@@ -1,10 +1,13 @@
 ﻿#region using directives
 
 using System;
+using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -14,6 +17,8 @@ namespace PoGo.NecroBot.Logic.State
     {
         public static string VersionUri =
             "https://raw.githubusercontent.com/NecronomiconCoding/Pokemon-Go-Bot/master/PokemonGo.RocketAPI/Properties/AssemblyInfo.cs";
+
+        public static bool AutoUpdate = true; //TODO: read from clientsettings
 
         public IState Execute(Context ctx, StateMachine machine)
         {
@@ -28,13 +33,59 @@ namespace PoGo.NecroBot.Logic.State
             }
             else
             {
+                var msg = AutoUpdate
+                    ? "Updating to newest Version...."
+                    : "There is a new Version available: https://github.com/NecronomiconCoding/Pokemon-Go-Bot";
                 machine.Fire(new WarnEvent
                 {
-                    Message = "There is a new Version available: https://github.com/NecronomiconCoding/Pokemon-Go-Bot"
+                    Message = msg
                 });
-            }
 
+
+                const string url = "https://github.com/NecronomiconCoding/NecroBot/archive/master.zip";
+                const string zipName = "update.zip";
+                var baseDir = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent?.Parent?.Parent;
+                var downloadedFilePath = baseDir + "/tmp/";
+                var wrongProjectFilePath = baseDir + "NecroBot-master/";
+
+                //Download Repo , unpack it and move it
+                if (DownloadFile(url, downloadedFilePath + zipName))
+                {
+                    if (UnpackFile(downloadedFilePath, baseDir?.ToString(), zipName))
+                    {
+                        if (MoveAllFiles(wrongProjectFilePath, baseDir?.ToString()))
+                        {
+                            Logger.Write("Error moving Files inside " + wrongProjectFilePath);
+                        }
+                    }
+                    else
+                    {
+                        Logger.Write("Error Unpacking update. Located in /tmp/");
+                    }
+                }
+                else
+                {
+                    Logger.Write("Error Downloading Update, please download from:");
+                    Logger.Write(url);
+                }
+            }
             return new LoginState();
+        }
+
+        public static bool DownloadFile(string url, string dest)
+        {
+            using (var client = new WebClient())
+            {
+                try
+                {
+                    client.DownloadFile(url, Directory.GetCurrentDirectory() + dest);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+                return true;
+            }
         }
 
         private static string DownloadServerVersion()
@@ -68,6 +119,55 @@ namespace PoGo.NecroBot.Logic.State
             }
 
             return false;
+        }
+
+        public static bool MoveAllFiles(string sourceFolder, string destFolder)
+        {
+            if (!Directory.Exists(destFolder))
+                Directory.CreateDirectory(destFolder);
+
+            try
+            {
+                var files = Directory.GetFiles(sourceFolder);
+                foreach (var file in files)
+                {
+                    var name = Path.GetFileName(file);
+                    if (name == null) continue;
+                    var dest = Path.Combine(destFolder, name);
+                    File.Copy(file, dest, true);
+                }
+
+                var folders = Directory.GetDirectories(sourceFolder);
+
+                foreach (var folder in folders)
+                {
+                    var name = Path.GetFileName(folder);
+                    if (name == null) continue;
+                    var dest = Path.Combine(destFolder, name);
+                    MoveAllFiles(folder, dest);
+                }
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool UnpackFile(string sourcePath, string destPath, string fileName)
+        {
+            var source = Directory.GetCurrentDirectory() + sourcePath + fileName;
+            var dest = Directory.GetCurrentDirectory() + destPath + fileName;
+            if (Directory.Exists(source)) return false;
+            try
+            {
+                ZipFile.ExtractToDirectory(source, dest);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
