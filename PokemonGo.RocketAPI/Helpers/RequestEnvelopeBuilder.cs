@@ -66,5 +66,24 @@ namespace PokemonGo.RocketAPI.Helpers
 
             return envelope;
         }
+
+        public static RequestEnvelope GetRequestEnvelope(AuthTicket authTicket, double lat, double lng, double altitude, RequestType requestType)
+        {
+            RequestEnvelope envelope = new RequestEnvelope();
+
+            //These requests are sent with our issued AuthTicket
+            envelope.WithAltitude(altitude)
+                .WithLatitude(lat)
+                .WithLongitude(lng)
+                .WithRequestID() //RPC ID?
+                .WithAuthTicket(authTicket);
+
+            //add just the request type
+            Request request = new Request();
+            request.RequestType = requestType;
+            envelope.WithMessage(request);
+
+            return envelope;
+        }
     }
 }
