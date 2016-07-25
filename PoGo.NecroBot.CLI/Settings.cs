@@ -45,6 +45,7 @@ namespace PoGo.NecroBot.CLI
         public int KeepMinCp => UserSettings.Default.KeepMinCP;
         public double WalkingSpeedInKilometerPerHour => UserSettings.Default.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => UserSettings.Default.EvolveAllPokemonWithEnoughCandy;
+        public bool KeepPokemonsThatCanEvolve => UserSettings.Default.KeepPokemonsThatCanEvolve;
         public bool TransferDuplicatePokemon => UserSettings.Default.TransferDuplicatePokemon;
         public int DelayBetweenPokemonCatch => UserSettings.Default.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
