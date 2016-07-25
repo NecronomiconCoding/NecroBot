@@ -39,10 +39,10 @@ namespace PokemonGo.RocketAPI.Console
         public bool useLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
         public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
         public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
-        public int MaxPokeBalls => 100;
-        public int MaxPotions => 25;
-        public int MaxBerries => 50;
-        public int MaxRevives => 25;
+        public int MaxPokeBalls => UserSettings.Default.MaxPokeBalls;
+        public int MaxPotions => UserSettings.Default.MaxPotions;
+        public int MaxBerries => UserSettings.Default.MaxBerries;
+        public int MaxRevives => UserSettings.Default.MaxRevives;
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
