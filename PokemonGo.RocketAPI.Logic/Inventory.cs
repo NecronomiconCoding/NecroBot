@@ -18,6 +18,37 @@ namespace PokemonGo.RocketAPI.Logic
         private GetInventoryResponse _cachedInventory;
         private DateTime _lastRefresh;
 
+        private readonly ItemId[] PokeBallTypes = new[] 
+        {
+            ItemId.ItemPokeBall,
+            ItemId.ItemGreatBall,
+            ItemId.ItemUltraBall,
+            ItemId.ItemMasterBall
+        };
+
+        private readonly ItemId[] PotionTypes = new[]
+        {
+            ItemId.ItemPotion,
+            ItemId.ItemSuperPotion,
+            ItemId.ItemHyperPotion,
+            ItemId.ItemMaxPotion
+        };
+
+        private readonly ItemId[] BerryTypes = new[]
+        {
+            ItemId.ItemRazzBerry,
+            ItemId.ItemBlukBerry,
+            ItemId.ItemNanabBerry,
+            ItemId.ItemWeparBerry,
+            ItemId.ItemPinapBerry
+        };
+
+        private readonly ItemId[] ReviveTypes = new[]
+        {
+            ItemId.ItemRevive,
+            ItemId.ItemMaxRevive
+        };
+
         public Inventory(Client client)
         {
             _client = client;
@@ -183,17 +214,42 @@ namespace PokemonGo.RocketAPI.Logic
         public async Task<IEnumerable<Item>> GetItemsToRecycle(ISettings settings)
         {
             var myItems = await GetItems();
-
-            return myItems
-                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == (ItemId) x.Item_ && x.Count > f.Value))
-                .Select(
-                    x =>
+            var balls = GetGroupedItemsToRecycle(PokeBallTypes, myItems, settings.MaxPokeBalls);
+            var potions = GetGroupedItemsToRecycle(PotionTypes, myItems, settings.MaxPotions);
+            var berries = GetGroupedItemsToRecycle(BerryTypes, myItems, settings.MaxBerries);
+            var revives = GetGroupedItemsToRecycle(ReviveTypes, myItems, settings.MaxRevives);
+            var other = myItems
+                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == (ItemId)x.Item_ && x.Count > f.Value))
+                .Select(x =>
                         new Item
                         {
                             Item_ = x.Item_,
-                            Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == (ItemId) x.Item_).Value,
+                            Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == (ItemId)x.Item_).Value,
                             Unseen = x.Unseen
                         });
+            return other.Concat(balls).Concat(potions).Concat(berries).Concat(revives);
+        }
+
+        private IEnumerable<Item> GetGroupedItemsToRecycle(ItemId[] groupItemTypes, IEnumerable<Item> allItems, int maxItems)
+        {
+            var groupedItems = allItems.Where(i => groupItemTypes.Contains((ItemId)i.Item_)).OrderBy(i => (ItemId)i.Item_);
+            int count = groupedItems.Sum(b => b.Count);
+
+            var toRecycle = new List<Item>();
+            foreach (var currentType in groupedItems)
+            {
+                if (count <= maxItems)
+                    break;
+
+                if (currentType.Count == 0)
+                    continue;
+
+                int reduction = Math.Min(count - maxItems, currentType.Count);
+                count -= reduction;
+                toRecycle.Add(new Item { Item_ = currentType.Item_, Count = reduction, Unseen = currentType.Unseen });
+            }
+
+            return toRecycle;
         }
 
         public async Task<IEnumerable<PlayerStats>> GetPlayerStats()

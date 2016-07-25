@@ -274,5 +274,53 @@ namespace PokemonGo.RocketAPI.Console {
                 this["EvolveAboveIVValue"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int MaxPokeBalls {
+            get {
+                return ((int)(this["MaxPokeBalls"]));
+            }
+            set {
+                this["MaxPokeBalls"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int MaxPotions {
+            get {
+                return ((int)(this["MaxPotions"]));
+            }
+            set {
+                this["MaxPotions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int MaxBerries {
+            get {
+                return ((int)(this["MaxBerries"]));
+            }
+            set {
+                this["MaxBerries"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int MaxRevives {
+            get {
+                return ((int)(this["MaxRevives"]));
+            }
+            set {
+                this["MaxRevives"] = value;
+            }
+        }
     }
 }
