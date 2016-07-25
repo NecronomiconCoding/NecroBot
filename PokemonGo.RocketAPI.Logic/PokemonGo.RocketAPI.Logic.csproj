@@ -68,6 +68,7 @@
     <Compile Include="Event\PokemonEvolveEvent.cs" />
     <Compile Include="State\PositionCheckState.cs" />
     <Compile Include="State\StateMachine.cs" />
+    <Compile Include="Tasks\FarmPokestopsGPXTask.cs" />
     <Compile Include="Tasks\FarmPokestopsTask.cs" />
     <Compile Include="Tasks\RecycleItemsTask.cs" />
     <Compile Include="Tasks\TransferDuplicatePokemonTask.cs" />

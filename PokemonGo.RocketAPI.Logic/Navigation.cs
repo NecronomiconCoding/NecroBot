@@ -77,7 +77,7 @@ namespace PokemonGo.RocketAPI.Logic
         }
 
         public async Task<PlayerUpdateResponse> HumanPathWalking(GpxReader.Trkpt trk,
-            double walkingSpeedInKilometersPerHour, Func<Task> functionExecutedWhileWalking)
+            double walkingSpeedInKilometersPerHour, Func<bool> functionExecutedWhileWalking)
         {
             //PlayerUpdateResponse result = null;
 
@@ -128,8 +128,9 @@ namespace PokemonGo.RocketAPI.Logic
                     await
                         _client.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                             waypoint.Altitude);
-                if (functionExecutedWhileWalking != null)
-                    await functionExecutedWhileWalking(); // look for pokemon
+
+                functionExecutedWhileWalking?.Invoke(); // look for pokemon
+
                 await Task.Delay(Math.Min((int) (distanceToTarget/speedInMetersPerSecond*1000), 3000));
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 

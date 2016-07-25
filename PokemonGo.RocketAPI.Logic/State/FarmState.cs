@@ -24,7 +24,7 @@ namespace PokemonGo.RocketAPI.Logic.State
 
             if(ctx.Settings.UseGPXPathing)
             {
-
+                Tasks.FarmPokestopsGPXTask.Execute(ctx, machine);
             }
             else
             {

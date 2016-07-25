@@ -338,7 +338,7 @@ namespace PokemonGo.RocketAPI.Logic
 
                                 await
                                     _navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
-                                        _clientSettings.WalkingSpeedInKilometerPerHour, ExecuteCatchAllNearbyPokemons);
+                                        _clientSettings.WalkingSpeedInKilometerPerHour, null);
 
                             if (curTrkPt >= maxTrkPt)
                                 curTrkPt = 0;
