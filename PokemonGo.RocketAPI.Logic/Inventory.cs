@@ -230,7 +230,7 @@ namespace PokemonGo.RocketAPI.Logic
         public async Task<IEnumerable<PokemonData>> GetPokemonToEvolve(IEnumerable<PokemonId> filter = null)
         {
             var myPokemons = await GetPokemons();
-            myPokemons = myPokemons.Where(p => p.DeployedFortId == null).OrderByDescending(p => p.Cp);
+            myPokemons = myPokemons.Where(p => String.IsNullOrEmpty(p.DeployedFortId)).OrderByDescending(p => p.Cp);
                 //Don't evolve pokemon in gyms
             if (filter != null)
             {
