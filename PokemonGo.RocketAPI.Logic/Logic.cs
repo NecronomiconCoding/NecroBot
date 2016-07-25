@@ -151,6 +151,14 @@ namespace PokemonGo.RocketAPI.Logic
                     $"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'",
                     LogLevel.Info, ConsoleColor.Yellow);
             }
+            Logger.Write("====== DisplayHighestsBattleRating ======", LogLevel.Info, ConsoleColor.Yellow);
+            var highestsPokemonBR = await _inventory.GetHighestsBR(10);
+            foreach (var pokemon in highestsPokemonBR)
+            {
+                Logger.Write(
+                    $"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | (Battle Rating:{PokemonInfo.CalculatePokemonBattleRating(pokemon,_client.Settings.BattleRatingIVPercentage).ToString("0.00")}%)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'",
+                    LogLevel.Info, ConsoleColor.Yellow);
+            }
         }
 
         private async Task EvolveAllPokemonWithEnoughCandy(IEnumerable<PokemonId> filter = null)
@@ -337,6 +345,7 @@ namespace PokemonGo.RocketAPI.Logic
                                 await Task.Delay(1000);
                                 await RecycleItems();
                                 if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                                await _inventory.SaveProfilePokemons(_playerProfile.Profile);
                             }
 
                                 await
@@ -437,6 +446,7 @@ namespace PokemonGo.RocketAPI.Logic
                         LogLevel.Pokestop);
                 }
 
+
                 await Task.Delay(1000);
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
@@ -445,6 +455,7 @@ namespace PokemonGo.RocketAPI.Logic
                     if (_clientSettings.EvolveAllPokemonWithEnoughCandy || _clientSettings.EvolveAllPokemonAboveIV)
                         await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                     if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                    await _inventory.SaveProfilePokemons(_playerProfile.Profile);
                 }
             }
         }
@@ -675,6 +686,7 @@ namespace PokemonGo.RocketAPI.Logic
 
             foreach (var item in items)
             {
+
                 await _client.RecycleItem((ItemId) item.Item_, item.Count);
                 Logger.Write($"{item.Count}x {(ItemId) item.Item_}", LogLevel.Recycling);
                 _stats.AddItemsRemoved(item.Count);
@@ -694,7 +706,7 @@ namespace PokemonGo.RocketAPI.Logic
             var duplicatePokemons =
                 await
                     _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve,
-                        _clientSettings.PrioritizeIVOverCP, _clientSettings.PokemonsNotToTransfer);
+                        _client.Settings.PokemonSelector, _client.Settings.PokemonsNotToTransfer);
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
@@ -705,9 +717,9 @@ namespace PokemonGo.RocketAPI.Logic
                 _inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
                 _stats.IncreasePokemonsTransfered();
                 _stats.UpdateConsoleTitle(_inventory);
-                var bestPokemonOfType = _client.Settings.PrioritizeIVOverCP
-                    ? await _inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon)
-                    : await _inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon);
+
+                var bestPokemonOfType = await _inventory.GetHighestPokemonOfTypeBySelector(duplicatePokemon,_client.Settings.PokemonSelector);
+
                 Logger.Write(
                     $"{duplicatePokemon.PokemonId} with {duplicatePokemon.Cp} ({PokemonInfo.CalculatePokemonPerfection(duplicatePokemon).ToString("0.00")} % perfect) CP (Best: {bestPokemonOfType.Cp} | ({PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType).ToString("0.00")} % perfect))",
                     LogLevel.Transfer);

@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
+using System.IO;
 
 #endregion
 
@@ -54,9 +55,16 @@ namespace PokemonGo.RocketAPI.Logic
                 ss.Release();
             }
         }
-
+        public async Task<PokemonData> GetHighestPokemonOfTypeBySelector(PokemonData pokemon, Func<PokemonData, double> keySelector)
+        {
+            var myPokemon = await GetPokemons();
+            var pokemons = myPokemon.ToList();
+            return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
+                .OrderByDescending(keySelector)
+                .FirstOrDefault();
+        }
         public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer(
-            bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCp = false,
+            bool keepPokemonsThatCanEvolve = false, Func<PokemonData, double> keySelector = null,
             IEnumerable<PokemonId> filter = null)
         {
             var myPokemon = await GetPokemons();
@@ -91,65 +99,26 @@ namespace PokemonGo.RocketAPI.Logic
                     amountToSkip = amountToSkip > _client.Settings.KeepMinDuplicatePokemon
                         ? amountToSkip
                         : _client.Settings.KeepMinDuplicatePokemon;
-                    if (prioritizeIVoverCp)
-                    {
+                    
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
-                            .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
+                            .OrderByDescending(keySelector != null ? keySelector : PokemonInfo.CalculateCP)
                             .ThenBy(n => n.StaminaMax)
                             .Skip(amountToSkip)
                             .ToList());
-                    }
-                    else
-                    {
-                        results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
-                            .OrderByDescending(x => x.Cp)
-                            .ThenBy(n => n.StaminaMax)
-                            .Skip(amountToSkip)
-                            .ToList());
-                    }
+                 
                 }
 
                 return results;
-            }
-            if (prioritizeIVoverCp)
-            {
-                return pokemonList
-                    .GroupBy(p => p.PokemonId)
-                    .Where(x => x.Count() > 1)
-                    .SelectMany(
-                        p =>
-                            p.OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                                .ThenBy(n => n.StaminaMax)
-                                .Skip(_client.Settings.KeepMinDuplicatePokemon)
-                                .ToList());
             }
             return pokemonList
                 .GroupBy(p => p.PokemonId)
                 .Where(x => x.Count() > 1)
                 .SelectMany(
                     p =>
-                        p.OrderByDescending(x => x.Cp)
+                        p.OrderByDescending(keySelector)
                             .ThenBy(n => n.StaminaMax)
                             .Skip(_client.Settings.KeepMinDuplicatePokemon)
                             .ToList());
-        }
-
-        public async Task<PokemonData> GetHighestPokemonOfTypeByCp(PokemonData pokemon)
-        {
-            var myPokemon = await GetPokemons();
-            var pokemons = myPokemon.ToList();
-            return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
-                .OrderByDescending(x => x.Cp)
-                .FirstOrDefault();
-        }
-
-        public async Task<PokemonData> GetHighestPokemonOfTypeByIv(PokemonData pokemon)
-        {
-            var myPokemon = await GetPokemons();
-            var pokemons = myPokemon.ToList();
-            return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
-                .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                .FirstOrDefault();
         }
 
         public async Task<IEnumerable<PokemonData>> GetHighestsCp(int limit)
@@ -164,6 +133,13 @@ namespace PokemonGo.RocketAPI.Logic
             var myPokemon = await GetPokemons();
             var pokemons = myPokemon.ToList();
             return pokemons.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(limit);
+        }
+
+        public async Task<IEnumerable<PokemonData>> GetHighestsBR(int limit)
+        {
+            var myPokemon = await GetPokemons();
+            var pokemons = myPokemon.ToList();
+            return pokemons.OrderByDescending(p=>PokemonInfo.CalculatePokemonBattleRating(p,0.5)).Take(limit);
         }
 
         public async Task<int> GetItemAmountByType(MiscEnums.Item type)
@@ -220,6 +196,67 @@ namespace PokemonGo.RocketAPI.Logic
                     .Where(p => p != null && p.PokemonId > 0);
         }
 
+        public async Task<string> SaveProfilePokemons(Profile player)
+        {
+            Logger.Write($"Saving Pokemon Profile for: {player.Username}", LogLevel.Info);
+
+            if (player == null)
+            {
+                Logger.Write("Player Profile is null.", LogLevel.Warning);
+                return "";
+            }
+            var pokemons = await GetPokemons();
+            pokemons = pokemons.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax);
+
+            var stats = await GetPlayerStats();
+            var stat = stats.FirstOrDefault();
+            if (stat == null)
+            {
+                Logger.Write("Player Stats not updated.", LogLevel.Warning);
+                return "";
+            }
+
+            DirectoryInfo diProfile = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\" + $"Profile_{player.Username}");
+
+            int trainerLevel = stat.Level;
+            int[] exp_req = new[] { 0, 1000, 3000, 6000, 10000, 15000, 21000, 28000, 36000, 45000, 55000, 65000, 75000, 85000, 100000, 120000, 140000, 160000, 185000, 210000, 260000, 335000, 435000, 560000, 710000, 900000, 1100000, 1350000, 1650000, 2000000, 2500000, 3000000, 3750000, 4750000, 6000000, 7500000, 9500000, 12000000, 15000000, 20000000 };
+            int exp_req_at_level = exp_req[stat.Level - 1];
+
+            File.WriteAllText(Directory.GetCurrentDirectory() + "\\" + $"Profile_{player.Username}" + "\\" + $"Pokemon-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.csv", $"PokemonID,NickName,CP,Max CP,Lvl,Battle Rating,Perfection,Move 1, Move 2,HP,Attk,Def,Stamina,Candies, previewLink ----");
+
+            using (var w = File.AppendText(Directory.GetCurrentDirectory() + "\\" + $"Profile_{player.Username}" + "\\" + $"Pokemon-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.csv"))
+            {
+                w.WriteLine("");
+
+                var myPokemonSettings = await GetPokemonSettings();
+                var pokemonSettings = myPokemonSettings.ToList();
+
+                var myPokemonFamilies = await GetPokemonFamilies();
+                var pokemonFamilies = myPokemonFamilies.ToArray();
+
+                foreach (var pokemon in pokemons)
+                {
+
+
+                    var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
+                    var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
+
+
+                    string toEncode = $"{(int)pokemon.PokemonId}" + "," + trainerLevel + "," + PokemonInfo.GetLevel(pokemon) + "," + pokemon.Cp + "," + pokemon.Stamina;
+
+                    //Generate base64 code to make it viewable here https://jackhumbert.github.io/poke-rater/#MTUwLDIzLDE3LDE5MDIsMTE4
+                    var encoded = System.Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(toEncode));
+                    
+                    w.WriteLine($"{pokemon.PokemonId},{pokemon.Nickname},{pokemon.Cp},{PokemonInfo.CalculateMaxCP(pokemon)},{PokemonInfo.GetLevel(pokemon)},{Math.Round(PokemonInfo.CalculatePokemonBattleRating(pokemon,_client.Settings.BattleRatingIVPercentage)*10)/10},{Math.Round(PokemonInfo.CalculatePokemonPerfection(pokemon)*10)/10},{pokemon.Move1},{pokemon.Move2},{pokemon.Stamina},{pokemon.IndividualAttack},{pokemon.IndividualDefense},{pokemon.IndividualStamina},{familyCandy.Candy},https://jackhumbert.github.io/poke-rater/#{encoded}");
+                }  
+                w.Close();
+            }
+
+
+            return $"Profile_{player.Username}";
+
+        }
+
         public async Task<IEnumerable<PokemonSettings>> GetPokemonSettings()
         {
             var templates = await _client.GetItemTemplates();
@@ -228,6 +265,7 @@ namespace PokemonGo.RocketAPI.Logic
                     .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
         }
 
+   
         public async Task<IEnumerable<PokemonData>> GetPokemonToEvolve(IEnumerable<PokemonId> filter = null)
         {
             var myPokemons = await GetPokemons();

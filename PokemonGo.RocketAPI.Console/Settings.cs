@@ -32,13 +32,35 @@ namespace PokemonGo.RocketAPI.Console
         public int DelayBetweenPokemonCatch => UserSettings.Default.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
-        public bool PrioritizeIVOverCP => UserSettings.Default.PrioritizeIVOverCP;
+        
         public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
         public string GPXFile => UserSettings.Default.GPXFile;
         public bool UseGPXPathing => UserSettings.Default.UseGPXPathing;
         public bool useLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
         public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
         public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
+        public double BattleRatingIVPercentage => UserSettings.Default.BattleRatingIVPercentage;
+
+        public Func<PokemonData,double> PokemonSelector {
+            get
+            {
+                switch (UserSettings.Default.PokemonSelectorCPorIVorBR.ToUpper())
+                {
+                    case "IV":
+                        return PokemonInfo.CalculatePokemonPerfection;
+
+                    case "CP":
+                        return PokemonInfo.CalculateCP;
+                    case "BR":
+                        return p=> PokemonInfo.CalculatePokemonBattleRating(p,0.5);
+                    default:
+                        return PokemonInfo.CalculateCP;
+
+                }
+
+            }
+        } 
+
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
@@ -48,13 +70,13 @@ namespace PokemonGo.RocketAPI.Console
             {
                 //Type of pokemons to evolve
                 var defaultItems = new List<KeyValuePair<ItemId, int>> {
-                    new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 1),
             new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
             new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
             new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 75),
             new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 25),
+            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 1),
+            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 1),
             new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 50),
             new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
             new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),

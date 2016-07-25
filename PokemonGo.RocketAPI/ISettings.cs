@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.GeneratedCode;
+using System;
 
 #endregion
 
@@ -24,13 +25,14 @@ namespace PokemonGo.RocketAPI
         int DelayBetweenPokemonCatch { get; }
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
-        bool PrioritizeIVOverCP {get; }
+        Func<PokemonData, double> PokemonSelector {get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGPXPathing { get; }
         string GPXFile { get; }
         bool useLuckyEggsWhileEvolving { get; }
         bool EvolveAllPokemonAboveIV { get; }
         float EvolveAboveIVValue { get; }
+        double BattleRatingIVPercentage { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
