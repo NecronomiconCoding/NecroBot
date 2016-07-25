@@ -211,20 +211,20 @@ namespace PokemonGo.RocketAPI
                 PokemonId = pokemonId
             };
 
-            return await AwaitableOnResponseFor<EvolvePokemonMessage, EvolvePokemonResponse>(evolvePokemonMessage, RequestType.Encounter);
+            return await AwaitableOnResponseFor<EvolvePokemonMessage, EvolvePokemonResponse>(evolvePokemonMessage, RequestType.EvolvePokemon);
         }
 
-        public async Task<FortDetailsResponse> GetFort(string fortId, double fortLat, double fortLng)
-        {
-            FortDetailsMessage fortDetailsMessage = new FortDetailsMessage
-            {
-                FortId = fortId,
-                Latitude = fortLat,
-                Longitude = fortLng
-            };
+		public async Task<FortDetailsResponse> GetFort(string fortId, double fortLat, double fortLng)
+		{
+			FortDetailsMessage fortDetailsMessage = new FortDetailsMessage
+			{
+				FortId = fortId,
+				Latitude = fortLat,
+				Longitude = fortLng
+			};
 
-            return await AwaitableOnResponseFor<FortDetailsMessage, FortDetailsResponse>(fortDetailsMessage, RequestType.FortDetails);
-        }
+			return await AwaitableOnResponseFor<FortDetailsMessage, FortDetailsResponse>(fortDetailsMessage, RequestType.FortDetails);
+		}
 
         public async Task<GetInventoryResponse> GetInventory()
         {
