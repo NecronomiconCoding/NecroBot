@@ -65,11 +65,29 @@
     <Setting Name="EvolveAboveIVValue" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">95</Value>
     </Setting>
-    <Setting Name="EvolveAboveIVValue" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">95</Value>
+    <Setting Name="MaxCpPercent" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">80</Value>
     </Setting>
-    <Setting Name="EvolveAboveIVValue" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">95</Value>
+    <Setting Name="MaxPokeBalls" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">200</Value>
+    </Setting>
+    <Setting Name="MaxPotions" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="MaxBerries" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">150</Value>
+    </Setting>
+    <Setting Name="MaxRevives" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="MinPokemonReqToEvolveWithLuckyEgg" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="MinPokemonToStartEvolving" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="KeepPokemonsThatCanEvolve" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
