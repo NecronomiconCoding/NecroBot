@@ -90,9 +90,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                         ctx.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
                             ctx.LogicSettings.WalkingSpeedInKilometerPerHour, () =>
                             {
+
                                 CatchNearbyPokemonsTask.Execute(ctx, machine);
                                 return true;
-                            }).Wait();
+                            }, () =>
+                            {
+                                UseNearbyPokestopsTask.Execute(ctx, machine);
+                                return true;
+                            }
+                            ).Wait();
 
                         if (curTrkPt >= maxTrkPt)
                             curTrkPt = 0;
@@ -117,7 +123,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             var readgpx = new GpxReader(xmlString);
             return readgpx.Tracks;
         }
-
+        //Please do not change GetPokeStops() in this file, it's specifically set
+        //to only find stops within 40 meters
+        //this is for gpx pathing, we are not going to the pokestops,
+        //so do not make it more than 40 because it will never get close to those stops.
         private static List<FortData> GetPokeStops(Context ctx)
         {
             var mapObjects = ctx.Client.Map.GetMapObjects().Result;
@@ -128,10 +137,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     i =>
                         i.Type == FortType.Checkpoint &&
                         i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
-                        ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
+                        ( // Make sure PokeStop is within 40 meters or else it is pointless to hit it
                             LocationUtils.CalculateDistanceInMeters(
                                 ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude,
-                                i.Latitude, i.Longitude) < ctx.LogicSettings.MaxTravelDistanceInMeters) ||
+                                i.Latitude, i.Longitude) < 40) ||
                         ctx.LogicSettings.MaxTravelDistanceInMeters == 0
                 );
 
