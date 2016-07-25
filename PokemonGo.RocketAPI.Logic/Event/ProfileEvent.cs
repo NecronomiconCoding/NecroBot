@@ -1,4 +1,4 @@
-﻿using PokemonGo.RocketAPI.GeneratedCode;
+﻿using POGOProtos.Networking.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;

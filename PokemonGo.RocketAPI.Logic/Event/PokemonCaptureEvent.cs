@@ -1,5 +1,7 @@
-﻿using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.GeneratedCode;
+﻿using POGOProtos.Enums;
+using POGOProtos.Inventory.Item;
+using POGOProtos.Networking.Responses;
+using PokemonGo.RocketAPI.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,7 @@ namespace PokemonGo.RocketAPI.Logic.Event
         public double Perfection;
         public double Probability;
         public double Distance;
-        public MiscEnums.Item Pokeball;
+        public ItemType Pokeball;
         public int Attempt;
     }
 }

@@ -3,15 +3,16 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.GeneratedCode;
 using System.Text.RegularExpressions;
+using POGOProtos.Enums;
+using PokemonGo.RocketAPI.Enums;
+using POGOProtos.Inventory.Item;
 
 #endregion
 
 namespace PokemonGo.RocketAPI.Console
 {
-    public class Settings : ISettings
+    public class Settings
     {
         private ICollection<PokemonId> _pokemonsNotToTransfer;
         private ICollection<PokemonId> _pokemonsToEvolve;
@@ -49,35 +50,35 @@ namespace PokemonGo.RocketAPI.Console
                 //Type of pokemons to evolve
                 var defaultItems = new List<KeyValuePair<ItemId, int>> {
                     new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 75),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseCool, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseFloral, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemTroyDisk, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXAttack, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXDefense, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXMiracle, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemBlukBerry, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemNanabBerry, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemWeparBerry, 30),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPinapBerry, 30),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSpecialCamera, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasicUnlimited, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasic, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokemonStorageUpgrade, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
+                    new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 75),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 25),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 50),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemIncenseCool, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemIncenseFloral, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemTroyDisk, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemXAttack, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemXDefense, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemXMiracle, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemRazzBerry, 50),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemBlukBerry, 10),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemNanabBerry, 10),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemWeparBerry, 30),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemPinapBerry, 30),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemSpecialCamera, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasicUnlimited, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasic, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemPokemonStorageUpgrade, 100),
+                    new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
                 };
                 _itemRecycleFilter = _itemRecycleFilter ?? LoadItemList("Configs\\ConfigItemList.ini", defaultItems);
                 return _itemRecycleFilter;

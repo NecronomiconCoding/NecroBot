@@ -1,4 +1,4 @@
-﻿using PokemonGo.RocketAPI.GeneratedCode;
+﻿using POGOProtos.Inventory.Item;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace PokemonGo.RocketAPI.Logic.Event
 {
     public class ItemRecycledEvent : IEvent
     {
-        public ItemType Id;
+        public ItemId Id;
         public int Count;
     }
 }
