@@ -27,6 +27,7 @@ namespace PokemonGo.RocketAPI.Logic
         public Inventory(Client client, LogicClient logicClient)
         {
             _client = client;
+            _logicClient = logicClient;
         }
 
         public async void DeletePokemonFromInvById(ulong id)

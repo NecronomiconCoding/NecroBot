@@ -33,12 +33,13 @@ namespace PokemonGo.RocketAPI.Logic.State
             _logicSettings = logicSettings;
             _stats = new Statistics();
 
-            Reset(settings);
+            Reset(settings, _logicSettings);
         }
 
-        public void Reset(ISettings settings)
+        public void Reset(ISettings settings, LogicSettings logicSettings)
         {
             _client = new Client(_clientSettings);
+            _logicClient = new LogicClient(_logicSettings);
             _inventory = new Inventory(_client, _logicClient);
             _navigation = new Navigation(_client);
         }
