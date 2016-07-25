@@ -506,5 +506,44 @@ namespace PokemonGo.RocketAPI
                     _httpClient.PostProtoPayload<Request, UseItemRequest>($"https://{_apiUrl}/rpc",
                         useItemRequest);
         }
+
+        public async Task<UseItemRequest> UseItemIncense(ItemId itemId)
+        {
+            var customRequest = new UseItemRequest
+            {
+                ItemId = itemId,
+            };
+
+            var useItemRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+                new Request.Types.Requests
+                {
+                    Type = (int)RequestType.USE_INCENSE,    //this should work for any incense they add as long as you pass the right itemId
+                    Message = customRequest.ToByteString()
+                });
+            return
+                await
+                    _httpClient.PostProtoPayload<Request, UseItemRequest>($"https://{_apiUrl}/rpc",
+                        useItemRequest);
+        }
+
+        public async Task<GetIncensePokemonRequest> getIncensedPokemon(ulong Lat, ulong Long)
+        {
+            var customRequest = new GetIncensePokemonRequest
+            {
+                player_latitude = Lat,
+                player_longitude = Long
+            };
+            var sendRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+                new Request.Types.Requests
+                {
+                    Type = (int)RequestType.GET_INCENSE_POKEMON,
+                    Message = customRequest.ToByteString()
+                });
+            return
+                await
+                _httpClient.PostProtoPayload<Request, GetIncensePokemonRequest>($"https://{_apiUrl}/rpc",
+                sendRequest);
+
+        }
     }
 }

@@ -14460,6 +14460,661 @@ namespace PokemonGo.RocketAPI.GeneratedCode
         }
     }
 
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class UseIncubatorRequest : pb::IMessage<UseIncubatorRequest>
+    {
+        /// <summary>Field number for the "item_id" field.</summary>
+        public const int ItemIdFieldNumber = 1;
+
+        /// <summary>Field number for the "pokemon_id" field.</summary>
+        public const int PokemonFieldNumber = 2;
+
+        private static readonly pb::MessageParser<UseIncubatorRequest> _parser =
+            new pb::MessageParser<UseIncubatorRequest>(() => new UseIncubatorRequest());
+
+        private ulong pokemonId_;
+        private global::PokemonGo.RocketAPI.GeneratedCode.ItemId itemId_ = 0;
+
+        public UseIncubatorRequest()
+        {
+            OnConstruction();
+        }
+
+        public UseIncubatorRequest(UseIncubatorRequest other) : this()
+        {
+            itemId_ = other.itemId_;
+            pokemonId_ = other.pokemonId_;
+        }
+
+        public static pb::MessageParser<UseIncubatorRequest> Parser
+        {
+            get { return _parser; }
+        }
+
+        public static pbr::MessageDescriptor Descriptor
+        {
+            get { return global::PokemonGo.RocketAPI.GeneratedCode.PayloadsReflection.Descriptor.MessageTypes[45]; }
+        }
+
+        public global::PokemonGo.RocketAPI.GeneratedCode.ItemId ItemId
+        {
+            get { return itemId_; }
+            set { itemId_ = value; }
+        }
+
+        public ulong PokemonId
+        {
+            get { return pokemonId_; }
+            set { pokemonId_ = value; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor
+        {
+            get { return Descriptor; }
+        }
+
+        public UseIncubatorRequest Clone()
+        {
+            return new UseIncubatorRequest(this);
+        }
+
+        public bool Equals(UseIncubatorRequest other)
+        {
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(other, this))
+            {
+                return true;
+            }
+            if (ItemId != other.ItemId) return false;
+            if (PokemonId != other.PokemonId) return false;
+            return true;
+        }
+
+        public void WriteTo(pb::CodedOutputStream output)
+        {
+            if (ItemId != 0)
+            {
+                output.WriteRawTag(8);
+                output.WriteEnum((int)ItemId);
+            }
+            if (PokemonId != 0UL)
+            {
+                output.WriteRawTag(17);
+                output.WriteFixed64(PokemonId);
+            }
+        }
+
+        public int CalculateSize()
+        {
+            var size = 0;
+            if (ItemId != 0)
+            {
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)ItemId);
+            }
+            if (PokemonId != 0UL)
+            {
+                size += 1 + 8;
+            }
+            return size;
+        }
+
+        public void MergeFrom(UseIncubatorRequest other)
+        {
+            if (other == null)
+            {
+                return;
+            }
+            if (other.ItemId != 0)
+            {
+                ItemId = other.ItemId;
+            }
+            if (other.PokemonId != 0UL)
+            {
+                PokemonId = other.PokemonId;
+            }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input)
+        {
+            uint tag;
+            while ((tag = input.ReadTag()) != 0)
+            {
+                switch (tag)
+                {
+                    default:
+                        input.SkipLastField();
+                        break;
+                    case 8:
+                        {
+                            itemId_ = (global::PokemonGo.RocketAPI.GeneratedCode.ItemId)input.ReadEnum();
+                            break;
+                        }
+                    case 17:
+                        {
+                            PokemonId = input.ReadFixed64();
+                            break;
+                        }
+                }
+            }
+        }
+
+        public override bool Equals(object other)
+        {
+            return Equals(other as UseIncubatorRequest);
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = 1;
+            if (ItemId != 0) hash ^= ItemId.GetHashCode();
+            if (PokemonId != 0UL) hash ^= PokemonId.GetHashCode();
+            return hash;
+        }
+
+        partial void OnConstruction();
+
+        public override string ToString()
+        {
+            return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class GetIncensePokemonRequest : pb::IMessage<GetIncensePokemonRequest>
+    {
+        /// <summary>Field number for the "player_latitude" field.</summary>
+        public const int PlayerLatitudeFieldNumber = 1;
+
+        /// <summary>Field number for the "player.longitude" field.</summary>
+        public const int PlayerLongitudeFieldNumber = 2;
+
+        private static readonly pb::MessageParser<GetIncensePokemonRequest> _parser =
+            new pb::MessageParser<GetIncensePokemonRequest>(() => new GetIncensePokemonRequest());
+
+        private ulong player_latitude_;
+        private ulong player_longitude_;
+
+        public GetIncensePokemonRequest()
+        {
+            OnConstruction();
+        }
+
+        public GetIncensePokemonRequest(GetIncensePokemonRequest other) : this()
+        {
+            player_latitude_ = other.player_latitude_;
+            player_longitude_ = other.player_longitude_;
+        }
+
+        public static pb::MessageParser<GetIncensePokemonRequest> Parser
+        {
+            get { return _parser; }
+        }
+
+        public static pbr::MessageDescriptor Descriptor
+        {
+            get { return global::PokemonGo.RocketAPI.GeneratedCode.PayloadsReflection.Descriptor.MessageTypes[45]; }
+        }
+
+        public ulong player_latitude
+        {
+            get { return player_latitude_; }
+            set { player_latitude_ = value; }
+        }
+
+        public ulong player_longitude
+        {
+            get { return player_longitude_; }
+            set { player_longitude_ = value; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor
+        {
+            get { return Descriptor; }
+        }
+
+        public GetIncensePokemonRequest Clone()
+        {
+            return new GetIncensePokemonRequest(this);
+        }
+
+        public bool Equals(GetIncensePokemonRequest other)
+        {
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(other, this))
+            {
+                return true;
+            }
+            if (player_latitude != other.player_latitude) return false;
+            if (player_longitude != other.player_longitude) return false;
+            return true;
+        }
+
+        public void WriteTo(pb::CodedOutputStream output)
+        {
+            if (player_latitude != 0)
+            {
+                output.WriteRawTag(8);
+                output.WriteFixed64(player_latitude);
+            }
+            if (player_longitude != 0)
+            {
+                output.WriteRawTag(17);
+                output.WriteFixed64(player_longitude);
+            }
+        }
+
+        public int CalculateSize()
+        {
+            var size = 0;
+            if (player_latitude != 0)
+            {
+                size += 1 + 8;
+            }
+            if (player_longitude != 0)
+            {
+                size += 1 + 8;
+            }
+            return size;
+        }
+
+        public void MergeFrom(GetIncensePokemonRequest other)
+        {
+            if (other == null)
+            {
+                return;
+            }
+            if (other.player_latitude != 0)
+            {
+                player_latitude = other.player_latitude;
+            }
+            if (other.player_longitude != 0)
+            {
+                player_longitude = other.player_longitude;
+            }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input)
+        {
+            uint tag;
+            while ((tag = input.ReadTag()) != 0)
+            {
+                switch (tag)
+                {
+                    default:
+                        input.SkipLastField();
+                        break;
+                    case 8:
+                        {
+                            player_latitude_ = input.ReadFixed64();
+                            break;
+                        }
+                    case 17:
+                        {
+                            player_longitude = input.ReadFixed64();
+                            break;
+                        }
+                }
+            }
+        }
+
+        public override bool Equals(object other)
+        {
+            return Equals(other as GetIncensePokemonRequest);
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = 1;
+            if (player_latitude != 0) hash ^= player_latitude.GetHashCode();
+            if (player_longitude != 0) hash ^= player_longitude.GetHashCode();
+            return hash;
+        }
+
+        partial void OnConstruction();
+
+        public override string ToString()
+        {
+            return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+    public sealed partial class GetIncensePokemonResponse : pb::IMessage<GetIncensePokemonResponse>
+    {
+        /// <summary>Field number for the "result" field.</summary>
+        public const int resultFieldNumber = 1;
+
+        /// <summary>Field number for the "pokemon_id" field.</summary>
+        public const int pokemonIDFieldNumber = 2;
+
+        /// <summary>Field number for the "pokemon_latitude" field.</summary>
+        public const int pokemonLatitudeFieldNumber = 3;
+
+        /// <summary>Field number for the "pokemon_longitude" field.</summary>
+        public const int pokemonLongitudeFieldNumber = 4;
+
+        /// <summary>Field number for the "encounter_location" field.</summary>
+        public const int encounterLocationFieldNumber = 5;
+
+        /// <summary>Field number for the "encounter_id" field.</summary>
+        public const int encounterIDFieldNumber = 6;
+
+        /// <summary>Field number for the "disappear_timestamp" field.</summary>
+        public const int disappearTimeFieldNumber = 7;
+
+        private static readonly pb::MessageParser<GetIncensePokemonResponse> _parser =
+            new pb::MessageParser<GetIncensePokemonResponse>(() => new GetIncensePokemonResponse());
+
+        private global::PokemonGo.RocketAPI.GeneratedCode.GetIncensePokemonResponse.Types.Result result_;
+        private int pokemonID_;
+        private double pokemonLatitude_;
+        private double pokemonLongitude_;
+        private string encounterLocation_;
+        private ulong encounterID_;
+        private long disappearTime_;
+
+        public GetIncensePokemonResponse()
+        {
+            OnConstruction();
+        }
+
+        public GetIncensePokemonResponse(GetIncensePokemonResponse other) : this()
+        {
+            result_ = other.result_;
+            pokemonID_ = other.pokemonID_;
+            pokemonLatitude_ = other.pokemonLatitude_;
+            pokemonLongitude_ = other.pokemonLongitude_;
+            encounterLocation_ = other.encounterLocation_;
+            encounterID_ = other.encounterID_;
+            disappearTime_ = other.disappearTime_;
+        }
+
+        public static pb::MessageParser<GetIncensePokemonResponse> Parser
+        {
+            get { return _parser; }
+        }
+
+        public static pbr::MessageDescriptor Descriptor
+        {
+            get { return global::PokemonGo.RocketAPI.GeneratedCode.PayloadsReflection.Descriptor.MessageTypes[46]; }
+        }
+
+        public global::PokemonGo.RocketAPI.GeneratedCode.GetIncensePokemonResponse.Types.Result result
+        {
+            get { return result_; }
+            set { result_ = value; }
+        }
+
+        public int pokemonID
+        {
+            get { return pokemonID_; }
+            set { pokemonID_ = value; }
+        }
+
+        public double pokemonLatitude
+        {
+            get { return pokemonLatitude_; }
+            set { pokemonLatitude_ = value; }
+        }
+
+        public double pokemonLongitude
+        {
+            get { return pokemonLongitude_; }
+            set { pokemonLongitude_ = value; }
+        }
+
+        public string encounterLocation
+        {
+            get { return encounterLocation_; }
+            set { encounterLocation_ = value; }
+        }
+
+        public ulong encounterID
+        {
+            get { return encounterID_; }
+            set { encounterID_ = value; }
+        }
+
+        public long disappearTime
+        {
+            get { return disappearTime_; }
+            set { disappearTime_ = value; }
+        }
+
+        pbr::MessageDescriptor pb::IMessage.Descriptor
+        {
+            get { return Descriptor; }
+        }
+
+        public GetIncensePokemonResponse Clone()
+        {
+            return new GetIncensePokemonResponse(this);
+        }
+
+        public bool Equals(GetIncensePokemonResponse other)
+        {
+            if (ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (ReferenceEquals(other, this))
+            {
+                return true;
+            }
+            if (result != other.result) return false;
+            if (pokemonID != other.pokemonID) return false;
+            if (pokemonLatitude != other.pokemonLatitude) return false;
+            if (pokemonLongitude != other.pokemonLongitude) return false;
+            if (encounterLocation != other.encounterLocation) return false;
+            if (encounterID != other.encounterID) return false;
+            if (disappearTime != other.disappearTime) return false;
+            return true;
+        }
+
+        public void WriteTo(pb::CodedOutputStream output)
+        {
+            if (result != 0)
+            {
+                output.WriteRawTag(8);
+                output.WriteEnum((int)result);
+            }
+            if (pokemonID != 0)
+            {
+                output.WriteRawTag(17);
+                output.WriteInt32(pokemonID);
+            }
+            if (pokemonLatitude != 0D)
+            {
+                output.WriteRawTag(25);
+                output.WriteDouble(pokemonLatitude);
+            }
+            if (pokemonLongitude != 0D)
+            {
+                output.WriteRawTag(32);
+                output.WriteDouble(pokemonLongitude);
+            }
+            if (encounterLocation.Length != 0)
+            {
+                output.WriteRawTag(40);
+                output.WriteString(encounterLocation);
+            }
+            if (encounterID != 0UL)
+            {
+                output.WriteRawTag(48);
+                output.WriteFixed64(encounterID);
+            }
+            if (disappearTime != 0L)
+            {
+                output.WriteRawTag(56);
+                output.WriteInt64(disappearTime);
+            }
+        }
+
+        public int CalculateSize()
+        {
+            var size = 0;
+            if (result != 0)
+            {
+                size += 1 + pb::CodedOutputStream.ComputeEnumSize((int)result);
+            }
+            if (pokemonID != 0)
+            {
+                size += 1 + pb::CodedOutputStream.ComputeInt32Size(pokemonID);
+            }
+            if (pokemonLatitude != 0D)
+            {
+                size += 1 + 8;
+            }
+            if (pokemonLongitude != 0D)
+            {
+                size += 1 + 8;
+            }
+            if (encounterLocation.Length != 0)
+            {
+                size += 1 + pb::CodedOutputStream.ComputeStringSize(encounterLocation);
+            }
+            if (encounterID != 0UL)
+            {
+                size += 1 + 8;
+            }
+            if (disappearTime != 0L)
+            {
+                size += 1 + pb::CodedOutputStream.ComputeInt64Size(disappearTime);
+            }
+            return size;
+        }
+
+        public void MergeFrom(GetIncensePokemonResponse other)
+        {
+            if (other == null)
+            {
+                return;
+            }
+            if (other.result != 0)
+            {
+                result = other.result;
+            }
+            if (other.pokemonID != 0)
+            {
+                pokemonID = other.pokemonID;
+            }
+            if (other.pokemonLatitude != 0D)
+            {
+                pokemonLatitude = other.pokemonLatitude;
+            }
+            if (other.pokemonLongitude != 0D)
+            {
+                pokemonLongitude = other.pokemonLongitude;
+            }
+            if (other.encounterLocation.Length != 0)
+            {
+                encounterLocation = other.encounterLocation;
+            }
+            if (other.encounterID != 0UL)
+            {
+                encounterID = other.encounterID;
+            }
+            if (other.disappearTime != 0L)
+            {
+                disappearTime = other.disappearTime;
+            }
+        }
+
+        public void MergeFrom(pb::CodedInputStream input)
+        {
+            uint tag;
+            while ((tag = input.ReadTag()) != 0)
+            {
+                switch (tag)
+                {
+                    default:
+                        input.SkipLastField();
+                        break;
+                    case 8:
+                        {
+                            result = (global::PokemonGo.RocketAPI.GeneratedCode.GetIncensePokemonResponse.Types.Result)
+                                    input.ReadEnum();
+                            break;
+                        }
+                    case 16:
+                        {
+                            pokemonID = input.ReadInt32();
+                            break;
+                        }
+                    case 24:
+                        {
+                            pokemonLatitude = input.ReadDouble();
+                            break;
+                        }
+                    case 32:
+                        {
+                            pokemonLongitude = input.ReadDouble();
+                            break;
+                        }
+                    case 40:
+                        {
+                            encounterLocation = input.ReadString();
+                            break;
+                        }
+                    case 48:
+                        {
+                            encounterID = input.ReadUInt64();
+                            break;
+                        }
+                    case 56:
+                        {
+                            disappearTime = input.ReadUInt32();
+                            break;
+                        }
+                }
+            }
+        }
+
+        public override bool Equals(object other)
+        {
+            return Equals(other as GetIncensePokemonResponse);
+        }
+
+        public override int GetHashCode()
+        {
+            var hash = 1;
+            if (result != 0) hash ^= result.GetHashCode();
+            if (pokemonID != 0) hash ^= pokemonID.GetHashCode();
+            if (pokemonLatitude != 0D) hash ^= pokemonLatitude.GetHashCode();
+            if (pokemonLongitude != 0D) hash ^= pokemonLongitude.GetHashCode();
+            if (encounterLocation.Length != 0) hash ^= encounterLocation.GetHashCode();
+            if (encounterID != 0UL) hash ^= encounterID.GetHashCode();
+            if (disappearTime != 0L) hash ^= disappearTime.GetHashCode();
+            return hash;
+        }
+
+        partial void OnConstruction();
+
+        public override string ToString()
+        {
+            return pb::JsonFormatter.ToDiagnosticString(this);
+        }
+
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public static partial class Types
+        {
+            public enum Result
+            {
+                [pbr::OriginalName("INCENSE_ENCOUNTER_UNKNOWN")]
+                Unknown = 0,
+                [pbr::OriginalName("INCENSE_ENCOUNTER_AVAILABLE")]
+                Available = 1,
+                [pbr::OriginalName("INCENSE_ENCOUNTER_NOT_AVAILABLE")]
+                NotAvailable = 2,
+            }
+        }
+    }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     public sealed partial class UseItemCaptureResponse : pb::IMessage<UseItemCaptureResponse>

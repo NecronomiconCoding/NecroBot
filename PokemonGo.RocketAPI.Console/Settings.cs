@@ -39,6 +39,7 @@ namespace PokemonGo.RocketAPI.Console
         public bool useLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
         public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
         public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
+        public bool useIncense=> UserSettings.Default.useIncense;
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter

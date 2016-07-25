@@ -135,6 +135,77 @@ namespace PokemonGo.RocketAPI.Logic
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
+        private async Task CatchWildEncounter(EncounterResponse encounter, WildPokemon pokemon)
+        {
+            CatchPokemonResponse caughtPokemonResponse;
+            var attemptCounter = 1;
+            do
+            {
+                //test
+                var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
+
+                var pokeball = await GetBestBall(encounter);
+                if (pokeball == MiscEnums.Item.ITEM_UNKNOWN)
+                {
+                    Logger.Write(
+                        $"No Pokeballs - We missed a {encounter?.WildPokemon?.PokemonData?.PokemonId} with CP {encounter?.WildPokemon?.PokemonData?.Cp}",
+                        LogLevel.Caught);
+                    return;
+                }
+                if ((probability.HasValue && probability.Value < 0.35 && encounter.WildPokemon?.PokemonData?.Cp > 400) ||
+                    PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >=
+                    _clientSettings.KeepMinIVPercentage)
+                {
+                    await UseBerry(pokemon.EncounterId, pokemon.SpawnpointId);
+                }
+
+                var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
+                    pokemon.Latitude, pokemon.Longitude);
+                caughtPokemonResponse =
+                    await
+                        _client.CatchPokemon(pokemon.EncounterId, pokemon.SpawnpointId, pokemon.Latitude,
+                            pokemon.Longitude, pokeball);
+                if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
+                {
+                    foreach (var xp in caughtPokemonResponse.Scores.Xp)
+                        _stats.AddExperience(xp);
+                    _stats.IncreasePokemons();
+                    var profile = await _client.GetProfile();
+                    _stats.GetStardust(profile.Profile.Currency.ToArray()[1].Amount);
+                }
+                _stats.UpdateConsoleTitle(_inventory);
+
+                if (encounter?.CaptureProbability?.CaptureProbability_ != null)
+                {
+                    Func<MiscEnums.Item, string> returnRealBallName = a =>
+                    {
+                        switch (a)
+                        {
+                            case MiscEnums.Item.ITEM_POKE_BALL:
+                                return "Poke";
+                            case MiscEnums.Item.ITEM_GREAT_BALL:
+                                return "Great";
+                            case MiscEnums.Item.ITEM_ULTRA_BALL:
+                                return "Ultra";
+                            case MiscEnums.Item.ITEM_MASTER_BALL:
+                                return "Master";
+                            default:
+                                return "Unknown";
+                        }
+                    };
+                    var catchStatus = attemptCounter > 1
+                        ? $"{caughtPokemonResponse.Status} Attempt #{attemptCounter}"
+                        : $"{caughtPokemonResponse.Status}";
+                    Logger.Write(
+                        $"({catchStatus}) | {encounter?.WildPokemon?.PokemonData?.PokemonId} Lvl {PokemonInfo.GetLevel(encounter.WildPokemon?.PokemonData)} ({encounter.WildPokemon?.PokemonData?.Cp}/{PokemonInfo.CalculateMaxCP(encounter.WildPokemon?.PokemonData)} CP) ({Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter.WildPokemon?.PokemonData)).ToString("0.00")}% perfect) | Chance: {Math.Round(Convert.ToDouble(encounter.CaptureProbability?.CaptureProbability_.First()) * 100, 2)}% | {Math.Round(distance)}m dist | with a {returnRealBallName(pokeball)}Ball.",
+                        LogLevel.Caught);
+                }
+                attemptCounter++;
+                await Task.Delay(2000);
+            } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
+                     caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
+        }
+
         private async Task DisplayHighests()
         {
             Logger.Write("====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
@@ -180,7 +251,7 @@ namespace PokemonGo.RocketAPI.Logic
             DirectoryInfo diConfigs = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs"); //create config folder if not exist for those who can't build
             DirectoryInfo diLogs = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Logs");
             Logger.Write(
-                $"Make sure Lat & Lng is right. Exit Program if not! Lat: {_client.CurrentLat} Lng: {_client.CurrentLng}",
+                $"Make sure Lat & Lng is right. Exit Program if not!\n Lat: {_client.CurrentLat} Lng: {_client.CurrentLng}",
                 LogLevel.Warning);
             Thread.Sleep(3000);
             Logger.Write($"Logging in via: {_clientSettings.AuthType}");
@@ -219,7 +290,16 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task ExecuteCatchAllNearbyPokemons()
         {
-            Logger.Write("Looking for pokemon..", LogLevel.Debug);
+        //    if (_clientSettings.useIncense)
+        //    {
+        //        await PopIncense(_client);
+        //        ulong currentLat = Convert.ToUInt32(_client.CurrentLat);
+        //        ulong currentLong = Convert.ToUInt32(_client.CurrentLng);
+        //        var response = await _client.getIncensedPokemon(currentLat, currentLong);
+        //        Logger.Write($"{response}", LogLevel.Debug);
+        //    }
+
+            Logger.Write("Looking for catchable pokemon..", LogLevel.Debug);
             var mapObjects = await _client.GetMapObjects();
 
             var pokemons =
@@ -228,7 +308,7 @@ namespace PokemonGo.RocketAPI.Logic
                         i =>
                             LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude,
                                 i.Longitude));
-
+            Logger.Write($"Found {pokemons.Count()} catchable pokemon.", LogLevel.Debug);
             foreach (var pokemon in pokemons)
             {
                 if (_clientSettings.UsePokemonToNotCatchFilter &&
@@ -251,6 +331,50 @@ namespace PokemonGo.RocketAPI.Logic
                     Logger.Write($"Encounter problem: {encounter.Status}");
                 if (!Equals(pokemons.ElementAtOrDefault(pokemons.Count() - 1), pokemon))
                     // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
+                {
+                    await Task.Delay(_clientSettings.DelayBetweenPokemonCatch);
+                }
+            }
+            await ExecuteCatchAllWildPokemons();
+        }
+
+        private async Task ExecuteCatchAllWildPokemons()
+        {
+            Logger.Write("Looking for wild pokemon..", LogLevel.Debug);
+            var mapObjects = await _client.GetMapObjects();
+
+            var pokemons =
+                mapObjects.MapCells.SelectMany(i => i.WildPokemons)
+                    .OrderBy(
+                        i =>
+                            LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng, i.Latitude,
+                                i.Longitude));
+            Logger.Write($"Found {pokemons.Count()} wild pokemon.", LogLevel.Debug);
+            foreach (var pokemon in pokemons)
+            {
+                var encounter = await _client.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnpointId);
+
+                if (_clientSettings.UsePokemonToNotCatchFilter &&
+                   // pokemon.PokemonId.Equals(
+                   encounter.WildPokemon.PokemonData.PokemonId.Equals(
+                        _clientSettings.PokemonsNotToCatch.FirstOrDefault(i => i == encounter.WildPokemon.PokemonData.PokemonId)))
+                {
+                    Logger.Write("Skipped " + encounter.WildPokemon.PokemonData.PokemonId);
+                    continue;
+                }
+
+                var distance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
+                    pokemon.Latitude, pokemon.Longitude);
+                await Task.Delay(distance > 100 ? 15000 : 500);
+
+                
+
+                if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
+                    await CatchWildEncounter(encounter, pokemon);
+                else
+                    Logger.Write($"Encounter problem: {encounter.Status}");
+                if (!Equals(pokemons.ElementAtOrDefault(pokemons.Count() - 1), pokemon))
+                // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
                 {
                     await Task.Delay(_clientSettings.DelayBetweenPokemonCatch);
                 }
@@ -641,6 +765,13 @@ namespace PokemonGo.RocketAPI.Logic
             await Task.Delay(1000);
         }
 
+        private async Task PopIncense(Client client)
+        {
+            await Task.Delay(1000);
+            await UseIncense(client);
+            await Task.Delay(1000);
+        }
+
         public async Task PostLoginExecute()
         {
             while (true)
@@ -742,6 +873,29 @@ namespace PokemonGo.RocketAPI.Logic
             await _client.UseItemXpBoost(ItemId.ItemLuckyEgg);
             Logger.Write($"Used Lucky Egg, remaining: {luckyEgg.Count - 1}", LogLevel.Egg);
             await Task.Delay(3000);
+        }
+
+        public async Task UseIncense(Client client)
+        {
+            var inventory = await _inventory.GetItems();
+            var incenses = inventory.Where(p => (ItemId)p.Item_ == ItemId.ItemIncenseOrdinary);
+            var incense = incenses.FirstOrDefault();
+
+            if (incense == null || incense.Count <= 0)
+                return;
+
+            await _client.UseItemIncense(ItemId.ItemIncenseOrdinary);
+            Logger.Write($"Used incense, remaining: {incense.Count - 1}", LogLevel.Info);
+            await Task.Delay(3000);
+        }
+
+        private async Task UseAllIncubators()
+        {
+            var inventory = await _inventory.GetItems();
+            var incubators = inventory.Where(p => (ItemId)p.Item_ == ItemId.ItemIncubatorBasic || (ItemId)p.Item_ == ItemId.ItemIncubatorBasicUnlimited).ToList();
+            var incubator = incubators.FirstOrDefault();
+
+
         }
     }
 }
