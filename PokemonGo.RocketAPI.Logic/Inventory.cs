@@ -11,6 +11,8 @@ using POGOProtos.Networking.Responses;
 using POGOProtos.Data;
 using POGOProtos.Enums;
 using POGOProtos.Settings.Master;
+using POGOProtos.Inventory;
+using POGOProtos.Inventory.Item;
 
 #endregion
 
@@ -183,7 +185,7 @@ namespace PokemonGo.RocketAPI.Logic
             return pokeballs.FirstOrDefault(i => (MiscEnums.Item) i.Item_ == type)?.Count ?? 0;
         }
 
-        public async Task<IEnumerable<Item>> GetItems()
+        public async Task<IEnumerable<ItemData>> GetItems()
         {
             var inventory = await GetCachedInventory();
             return inventory.InventoryDelta.InventoryItems
@@ -191,18 +193,18 @@ namespace PokemonGo.RocketAPI.Logic
                 .Where(p => p != null);
         }
 
-        public async Task<IEnumerable<Item>> GetItemsToRecycle(ISettings settings)
+        public async Task<IEnumerable<ItemData>> GetItemsToRecycle(ISettings settings)
         {
             var myItems = await GetItems();
 
             return myItems
-                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == (ItemId) x.Item_ && x.Count > f.Value))
+                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
                 .Select(
                     x =>
-                        new Item
+                        new ItemData
                         {
-                            Item_ = x.Item_,
-                            Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == (ItemId) x.Item_).Value,
+                            ItemId = x.ItemId,
+                            Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
         }

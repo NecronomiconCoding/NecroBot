@@ -1,4 +1,5 @@
-﻿using PokemonGo.RocketAPI.GeneratedCode;
+﻿using POGOProtos.Inventory.Item;
+using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Logic.Event;
 using PokemonGo.RocketAPI.Logic.State;
 using System;
@@ -18,7 +19,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
             foreach (var item in items)
             {
-                ctx.Client.RecycleItem((ItemId)item.Item_, item.Count).Wait();
+                ctx.Client.Inventory.RecycleItem((ItemId)item.Item_, item.Count).Wait();
 
                 machine.Fire(new ItemRecycledEvent { Id = item.Item_, Count = item.Count });
 

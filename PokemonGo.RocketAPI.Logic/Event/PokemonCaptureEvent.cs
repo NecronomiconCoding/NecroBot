@@ -22,7 +22,7 @@ namespace PokemonGo.RocketAPI.Logic.Event
         public double Perfection;
         public double Probability;
         public double Distance;
-        public ItemType Pokeball;
+        public ItemId Pokeball;
         public int Attempt;
     }
 }
