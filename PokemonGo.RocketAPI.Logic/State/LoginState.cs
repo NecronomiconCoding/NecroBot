@@ -43,17 +43,15 @@ namespace PokemonGo.RocketAPI.Logic.State
                 return null;
             }
 
-            DownloadProfile(ctx);
+            DownloadProfile(ctx, machine);
 
             return new PositionCheckState();
         }
 
-        public void DownloadProfile(Context ctx)
+        public void DownloadProfile(Context ctx, StateMachine machine)
         {
-            var profileGetter = ctx.Client.GetProfile();
-            profileGetter.Wait();
-
-            ctx.Profile = profileGetter.Result;
+            ctx.Profile = ctx.Client.GetProfile().Result;
+            machine.Fire(new ProfileEvent { Profile = ctx.Profile });
         }
     }
 }

@@ -11,29 +11,30 @@ using PokemonGo.RocketAPI.GeneratedCode;
 
 namespace PokemonGo.RocketAPI.Logic.Utils
 {
-    internal class Statistics
+    public delegate void StatisticsDirtyDelegate();
+    public class Statistics
     {
-        public static int TotalExperience;
-        public static int TotalPokemons;
-        public static int TotalItemsRemoved;
-        public static int TotalPokemonsTransfered;
-        public static int TotalStardust;
-        public static string CurrentLevelInfos;
-        public static int Currentlevel = -1;
-        public static string PlayerName;
+        public int TotalExperience;
+        public int TotalPokemons;
+        public int TotalItemsRemoved;
+        public int TotalPokemonsTransfered;
+        public int TotalStardust;
+  
+        public event StatisticsDirtyDelegate DirtyEvent;
 
-        public static DateTime InitSessionDateTime = DateTime.Now;
-        public static TimeSpan Duration = DateTime.Now - InitSessionDateTime;
+        private string CurrentLevelInfos;
+        private string PlayerName;
+        private DateTime InitSessionDateTime = DateTime.Now;
 
-        public static async Task<string> _getcurrentLevelInfos(Inventory inventory)
+        public string GetCurrentInfo(Inventory inventory)
         {
-            var stats = await inventory.GetPlayerStats();
+            var stats = inventory.GetPlayerStats().Result;
             var output = string.Empty;
             var stat = stats.FirstOrDefault();
             if (stat != null)
             {
                 var ep = stat.NextLevelXp - stat.PrevLevelXp - (stat.Experience - stat.PrevLevelXp);
-                var time = Math.Round(ep/(TotalExperience/_getSessionRuntime()), 2);
+                var time = Math.Round(ep/(TotalExperience/GetRuntime()), 2);
                 var hours = 0.00;
                 var minutes = 0.00;
                 if (double.IsInfinity(time) == false && time > 0)
@@ -43,36 +44,25 @@ namespace PokemonGo.RocketAPI.Logic.Utils
                     minutes = Math.Round((time - hours)*100);
                 }
 
-                output =
-                    $"{stat.Level} (next level in {hours}h {minutes}m | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
-                //output = $"{stat.Level} (LvLUp in {_hours}hours // EXP required: {_ep})";
+                output = $"{stat.Level} (next level in {hours}h {minutes}m | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
             }
             return output;
         }
 
-        public static double _getSessionRuntime()
+        public double GetRuntime()
         {
             return (DateTime.Now - InitSessionDateTime).TotalSeconds/3600;
         }
 
-        public static string _getSessionRuntimeInTimeFormat()
+        private string FormatRuntime()
         {
             return (DateTime.Now - InitSessionDateTime).ToString(@"dd\.hh\:mm\:ss");
         }
 
-        public void AddExperience(int xp)
+        public void Dirty(Inventory inventory)
         {
-            TotalExperience += xp;
-        }
-
-        public void AddItemsRemoved(int count)
-        {
-            TotalItemsRemoved += count;
-        }
-
-        public void GetStardust(int stardust)
-        {
-            TotalStardust = stardust;
+            CurrentLevelInfos = GetCurrentInfo(inventory);
+            DirtyEvent?.Invoke();
         }
 
         public static int GetXpDiff(int level)
@@ -163,16 +153,6 @@ namespace PokemonGo.RocketAPI.Logic.Utils
             return 0;
         }
 
-        public void IncreasePokemons()
-        {
-            TotalPokemons += 1;
-        }
-
-        public void IncreasePokemonsTransfered()
-        {
-            TotalPokemonsTransfered += 1;
-        }
-
         public void SetUsername(GetPlayerResponse profile)
         {
             PlayerName = profile.Profile.Username ?? "";
@@ -180,14 +160,7 @@ namespace PokemonGo.RocketAPI.Logic.Utils
 
         public override string ToString()
         {
-            return
-                $"{PlayerName} - Runtime {_getSessionRuntimeInTimeFormat()} - Lvl: {CurrentLevelInfos} | EXP/H: {TotalExperience/_getSessionRuntime():0} | P/H: {TotalPokemons/_getSessionRuntime():0} | Stardust: {TotalStardust:0} | Transfered: {TotalPokemonsTransfered:0} | Items Recycled: {TotalItemsRemoved:0}";
-        }
-
-        public async void UpdateConsoleTitle(Inventory inventory)
-        {
-            CurrentLevelInfos = await _getcurrentLevelInfos(inventory);
-            Console.Title = ToString();
+            return $"{PlayerName} - Runtime {FormatRuntime()} - Lvl: {CurrentLevelInfos} | EXP/H: {TotalExperience/GetRuntime():0} | P/H: {TotalPokemons/GetRuntime():0} | Stardust: {TotalStardust:0} | Transfered: {TotalPokemonsTransfered:0} | Items Recycled: {TotalItemsRemoved:0}";
         }
     }
 }

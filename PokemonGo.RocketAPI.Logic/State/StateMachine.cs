@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace PokemonGo.RocketAPI.Logic.State
 {
-    public delegate void StateMachineEventDeletate(IEvent evt);
+    public delegate void StateMachineEventDeletate(IEvent evt, Context ctx);
     public class StateMachine
     {
         public event StateMachineEventDeletate EventListener;
         private IState _initialState;
         private int _delay;
+        private Context _ctx;
+
         public StateMachine()
         {
         }
@@ -30,7 +32,7 @@ namespace PokemonGo.RocketAPI.Logic.State
 
         public void Fire(IEvent evt)
         {
-            EventListener?.Invoke(evt);
+            EventListener?.Invoke(evt, _ctx);
         }
 
         public Task AsyncStart(IState initialState, Context ctx)
@@ -40,6 +42,7 @@ namespace PokemonGo.RocketAPI.Logic.State
 
         public void Start(IState initialState, Context ctx)
         {
+            _ctx = ctx;
             IState state = initialState;
             do
             {
