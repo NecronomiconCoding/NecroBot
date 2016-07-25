@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.GeneratedCode;
+using PokemonGoDesktop.API.Proto;
 
 #endregion
 
@@ -28,7 +27,7 @@ namespace PokemonGo.RocketAPI.Logic
             var inventory = await GetCachedInventory();
             var pokemon =
                 inventory.InventoryDelta.InventoryItems.FirstOrDefault(
-                    i => i.InventoryItemData.Pokemon != null && i.InventoryItemData.Pokemon.Id == id);
+                    i => i.InventoryItemData?.PokemonData != null && i.InventoryItemData.PokemonData.Id == id);
             if (pokemon != null)
                 inventory.InventoryDelta.InventoryItems.Remove(pokemon);
         }
@@ -62,7 +61,7 @@ namespace PokemonGo.RocketAPI.Logic
             var myPokemon = await GetPokemons();
 
             var pokemonList =
-                myPokemon.Where(p => p.DeployedFortId == 0 && p.Favorite == 0 && p.Cp < _client.Settings.KeepMinCP)
+                myPokemon.Where(p => String.IsNullOrEmpty(p.DeployedFortId) && p.Favorite == 0 && p.Cp < _client.Settings.KeepMinCP)
                     .ToList();
             if (filter != null)
             {
@@ -166,13 +165,13 @@ namespace PokemonGo.RocketAPI.Logic
             return pokemons.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(limit);
         }
 
-        public async Task<int> GetItemAmountByType(MiscEnums.Item type)
+        public async Task<int> GetItemAmountByType(ItemId type)
         {
             var pokeballs = await GetItems();
-            return pokeballs.FirstOrDefault(i => (MiscEnums.Item) i.Item_ == type)?.Count ?? 0;
+            return pokeballs.FirstOrDefault(i => i.ItemId == type)?.Count ?? 0;
         }
 
-        public async Task<IEnumerable<Item>> GetItems()
+        public async Task<IEnumerable<ItemData>> GetItems()
         {
             var inventory = await GetCachedInventory();
             return inventory.InventoryDelta.InventoryItems
@@ -180,18 +179,18 @@ namespace PokemonGo.RocketAPI.Logic
                 .Where(p => p != null);
         }
 
-        public async Task<IEnumerable<Item>> GetItemsToRecycle(ISettings settings)
+        public async Task<IEnumerable<ItemData>> GetItemsToRecycle(ISettings settings)
         {
             var myItems = await GetItems();
 
             return myItems
-                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == (ItemId) x.Item_ && x.Count > f.Value))
+                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
                 .Select(
                     x =>
-                        new Item
+                        new ItemData()
                         {
-                            Item_ = x.Item_,
-                            Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == (ItemId) x.Item_).Value,
+                            ItemId = x.ItemId,
+                            Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
         }
@@ -216,7 +215,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             var inventory = await GetCachedInventory();
             return
-                inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.Pokemon)
+                inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonData)
                     .Where(p => p != null && p.PokemonId > 0);
         }
 
@@ -231,7 +230,7 @@ namespace PokemonGo.RocketAPI.Logic
         public async Task<IEnumerable<PokemonData>> GetPokemonToEvolve(IEnumerable<PokemonId> filter = null)
         {
             var myPokemons = await GetPokemons();
-            myPokemons = myPokemons.Where(p => p.DeployedFortId == 0).OrderByDescending(p => p.Cp);
+            myPokemons = myPokemons.Where(p => String.IsNullOrEmpty(p.DeployedFortId)).OrderByDescending(p => p.Cp);
                 //Don't evolve pokemon in gyms
             if (filter != null)
             {

@@ -34,8 +34,12 @@
       <HintPath>..\packages\C5.2.2.5073.27396\lib\portable-net40+sl50+wp80+win\C5.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Google.Protobuf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.0.0-beta3\lib\dotnet\Google.Protobuf.dll</HintPath>
+    <Reference Include="Easyception, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Easyception.2.0.0\lib\net35\Easyception.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PokemonGoDesktop.API.Proto.Services.1.0.16\lib\net35\Google.Protobuf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.TransientFaultHandling, Version=6.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -48,6 +52,18 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PokemonGoDesktop.API.Common, Version=1.0.16.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PokemonGoDesktop.API.Common.1.0.16\lib\net35\PokemonGoDesktop.API.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PokemonGoDesktop.API.Proto, Version=1.0.16.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PokemonGoDesktop.API.Proto.1.0.16\lib\net35\PokemonGoDesktop.API.Proto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PokemonGoDesktop.API.Proto.Services, Version=1.0.16.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PokemonGoDesktop.API.Proto.Services.1.0.16\lib\net35\PokemonGoDesktop.API.Proto.Services.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="S2Geometry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -75,18 +91,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\AuthType.cs" />
-    <Compile Include="Enums\MiscEnums.cs" />
-    <Compile Include="Enums\RequestType.cs" />
     <Compile Include="Exceptions\AccessTokenExpiredException.cs" />
     <Compile Include="Exceptions\AccountNotVerifiedException.cs" />
     <Compile Include="Exceptions\InvalidResponseException.cs" />
     <Compile Include="Exceptions\PtcOfflineException.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
-    <Compile Include="GeneratedCode\AllEnum.cs" />
-    <Compile Include="GeneratedCode\Payloads.cs" />
-    <Compile Include="GeneratedCode\Request.cs" />
-    <Compile Include="GeneratedCode\Response.cs" />
     <Compile Include="Helpers\Git.cs" />
     <Compile Include="Helpers\HttpClientHelper.cs" />
     <Compile Include="Helpers\JsonHelper.cs" />
@@ -103,17 +112,13 @@
     <Compile Include="Client.cs" />
     <Compile Include="Extensions\HttpClientExtensions.cs" />
     <Compile Include="Helpers\RandomHelper.cs" />
-    <Compile Include="Helpers\RequestBuilder.cs" />
+    <Compile Include="Helpers\RequestEnvelopeBuilder.cs" />
     <Compile Include="PokemonInfo.cs" />
     <Compile Include="Resources.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Proto\AllEnum.proto" />
-    <None Include="Proto\Payloads.proto" />
-    <None Include="Proto\Response.proto" />
-    <None Include="Proto\Request.proto" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -32,8 +32,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.Protobuf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.0.0-beta3\lib\dotnet\Google.Protobuf.dll</HintPath>
+    <Reference Include="Easyception, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Easyception.2.0.0\lib\net35\Easyception.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Google.Protobuf, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PokemonGoDesktop.API.Proto.Services.1.0.16\lib\net35\Google.Protobuf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PokemonGoDesktop.API.Common, Version=1.0.16.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PokemonGoDesktop.API.Common.1.0.16\lib\net35\PokemonGoDesktop.API.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PokemonGoDesktop.API.Proto, Version=1.0.16.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PokemonGoDesktop.API.Proto.1.0.16\lib\net35\PokemonGoDesktop.API.Proto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PokemonGoDesktop.API.Proto.Services, Version=1.0.16.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PokemonGoDesktop.API.Proto.Services.1.0.16\lib\net35\PokemonGoDesktop.API.Proto.Services.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
