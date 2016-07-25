@@ -241,6 +241,9 @@ namespace PokemonGo.RocketAPI.Logic
                 if (count <= maxItems)
                     break;
 
+                if (currentType.Count == 0)
+                    continue;
+
                 int reduction = Math.Min(count - maxItems, currentType.Count);
                 count -= reduction;
                 toRecycle.Add(new Item { Item_ = currentType.Item_, Count = reduction, Unseen = currentType.Unseen });
