@@ -24,8 +24,10 @@ namespace PoGo.NecroBot.CLI
                 Logger.Write("Google Device Code copied to clipboard");
                 Thread.Sleep(2000);
                 Process.Start(@uri);
-                Clipboard.SetText(usercode);
-
+                var thread = new Thread(() => Clipboard.SetText(usercode)); //Copy device code
+                thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
+                thread.Start();
+                thread.Join();
             }
             catch (Exception)
             {
