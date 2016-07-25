@@ -2,7 +2,7 @@
 
 using System;
 using System.Text;
-using PokemonGo.RocketAPI.Logging;
+using PokemonGo.RocketAPI.Logic.Logging;
 
 #endregion
 

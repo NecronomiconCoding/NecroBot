@@ -61,7 +61,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="POGOProtos">
-      <HintPath>..\FeroxRev\PokemonGo.RocketAPI\bin\Debug\POGOProtos.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\POGOProtos.1.2.0\lib\net45\POGOProtos.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
