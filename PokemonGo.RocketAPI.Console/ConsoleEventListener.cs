@@ -104,5 +104,10 @@ namespace PokemonGo.RocketAPI.Console
         {
             Logger.Write($"No Pokeballs - We missed a {evt.Id} with CP {evt.Cp}", LogLevel.Caught);
         }
+
+        public void HandleEvent(UseBerryEvent evt, Context ctx)
+        {
+            Logger.Write($"Used, remaining: {evt.Count}", LogLevel.Berry);
+        }
     }
 }

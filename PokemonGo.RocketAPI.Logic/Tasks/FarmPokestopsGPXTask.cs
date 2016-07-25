@@ -64,12 +64,13 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                         if (distance > 5000)
                         {
-                            Logger.Write($"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}", LogLevel.Error);
+                            machine.Fire(new ErrorEvent
+                            {
+                                Message =
+                                $"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}"
+                            });
                             break;
                         }
-
-                        Logger.Write($"Your desired destination is {nextPoint.Lat}, {nextPoint.Lon} your location is {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}", LogLevel.Warning);
-
                         var pokestopList = GetPokeStops(ctx);
 
                         while (pokestopList.Any())

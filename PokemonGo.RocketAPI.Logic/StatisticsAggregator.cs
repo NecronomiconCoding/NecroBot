@@ -89,5 +89,9 @@ namespace PokemonGo.RocketAPI.Logic
         public void HandleEvent(NoPokeballEvent evt, Context ctx)
         {
         }
+
+        public void HandleEvent(UseBerryEvent evt, Context ctx)
+        {
+        }
     }
 }

@@ -50,7 +50,6 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                 Thread.Sleep(5000);
 
-                Logger.Write("Moving to start location now.");
                 ctx.Navigation.HumanLikeWalking(new GeoCoordinate(ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude),
                     ctx.Settings.WalkingSpeedInKilometerPerHour, null).Wait();
             }
