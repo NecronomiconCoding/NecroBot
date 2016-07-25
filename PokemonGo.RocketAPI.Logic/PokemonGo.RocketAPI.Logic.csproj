@@ -83,8 +83,11 @@
     <Compile Include="State\VersionCheckState.cs" />
     <Compile Include="Event\WarnEvent.cs" />
     <Compile Include="Utils\GPXReader.cs" />
+<<<<<<< HEAD
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Utils\JitterUtils.cs" />
+=======
+>>>>>>> origin/development
     <Compile Include="Utils\LocationUtils.cs" />
     <Compile Include="Utils\Statistics.cs" />
     <Compile Include="Utils\StringUtils.cs" />
