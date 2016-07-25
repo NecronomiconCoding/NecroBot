@@ -18,6 +18,13 @@ namespace PokemonGo.RocketAPI.Logic
         private GetInventoryResponse _cachedInventory;
         private DateTime _lastRefresh;
 
+        private readonly ItemId[] PokeBallTypes = new[] {
+            ItemId.ItemPokeBall,
+            ItemId.ItemGreatBall,
+            ItemId.ItemUltraBall,
+            ItemId.ItemMasterBall
+        };
+
         public Inventory(Client client)
         {
             _client = client;
@@ -183,6 +190,7 @@ namespace PokemonGo.RocketAPI.Logic
         public async Task<IEnumerable<Item>> GetItemsToRecycle(ISettings settings)
         {
             var myItems = await GetItems();
+            var balls = GetGroupedItemsToRecycle(PokeBallTypes, myItems, settings.MaxPokeBalls);
 
             return myItems
                 .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == (ItemId) x.Item_ && x.Count > f.Value))
@@ -193,7 +201,26 @@ namespace PokemonGo.RocketAPI.Logic
                             Item_ = x.Item_,
                             Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == (ItemId) x.Item_).Value,
                             Unseen = x.Unseen
-                        });
+                        }).Concat(balls);
+        }
+
+        private IEnumerable<Item> GetGroupedItemsToRecycle(ItemId[] groupItemTypes, IEnumerable<Item> allItems, int maxItems)
+        {
+            var groupedItems = allItems.Where(i => groupItemTypes.Contains((ItemId)i.Item_)).OrderBy(i => (MiscEnums.Item)i.Item_);
+            int count = groupedItems.Sum(b => b.Count);
+
+            var toRecycle = new List<Item>();
+            foreach (var currentType in groupedItems)
+            {
+                if (count <= maxItems)
+                    break;
+
+                int reduction = Math.Min(count - maxItems, currentType.Count);
+                count -= reduction;
+                toRecycle.Add(new Item { Item_ = currentType.Item_, Count = reduction, Unseen = currentType.Unseen });
+            }
+
+            return toRecycle;
         }
 
         public async Task<IEnumerable<PlayerStats>> GetPlayerStats()
