@@ -144,7 +144,7 @@ namespace PokemonGo.RocketAPI.Logic
                     $"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCP(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'",
                     LogLevel.Info, ConsoleColor.Yellow);
             Logger.Write("====== DisplayHighestsPerfect ======", LogLevel.Info, ConsoleColor.Yellow);
-            var highestsPokemonPerfect = await _inventory.GetHighestsPerfect(10);
+            var highestsPokemonPerfect = await _inventory.GetHighestsPerfect(20);
             foreach (var pokemon in highestsPokemonPerfect)
             {
                 Logger.Write(
@@ -155,23 +155,41 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task EvolveAllPokemonWithEnoughCandy(IEnumerable<PokemonId> filter = null)
         {
-            if (_clientSettings.useLuckyEggsWhileEvolving)
-            {
-                await PopLuckyEgg(_client);
-            }
+
+
             var pokemonToEvolve = await _inventory.GetPokemonToEvolve(filter);
-            foreach (var pokemon in pokemonToEvolve)
+            var pokemonToEvolveCount = pokemonToEvolve.Count();
+            if ((_clientSettings.useLuckyEggsWhileEvolving) && (pokemonToEvolveCount >= _clientSettings.MinPokemonReqToEvolveWithLuckyEgg))
             {
-                var evolvePokemonOutProto = await _client.EvolvePokemon(pokemon.Id);
+                {
+                    await PopLuckyEgg(_client);
+                }
+                foreach (var pokemon in pokemonToEvolve)
+                {
+                    var evolvePokemonOutProto = await _client.EvolvePokemon(pokemon.Id);
 
-                Logger.Write(
-                    evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess
-                        ? $"{pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp"
-                        : $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
-                    LogLevel.Evolve);
+                    Logger.Write(
+                        evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess
+                            ? $"{pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp"
+                            : $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
+                        LogLevel.Evolve);
 
-                await Task.Delay(3000);
+                    await Task.Delay(3000);
+                }
             }
+            else if (pokemonToEvolveCount >= _clientSettings.MinPokemonToStartEvolving)
+                foreach (var pokemon in pokemonToEvolve)
+                {
+                    var evolvePokemonOutProto = await _client.EvolvePokemon(pokemon.Id);
+
+                    Logger.Write(
+                        evolvePokemonOutProto.Result == EvolvePokemonOut.Types.EvolvePokemonStatus.PokemonEvolvedSuccess
+                            ? $"{pokemon.PokemonId} successfully for {evolvePokemonOutProto.ExpAwarded}xp"
+                            : $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
+                        LogLevel.Evolve);
+
+                    await Task.Delay(3000);
+                }
         }
 
         public async Task Execute()
@@ -529,88 +547,13 @@ namespace PokemonGo.RocketAPI.Logic
 
         public static int GetXpDiff(int level)
         {
-            switch (level)
+            if (level > 0 && level <= 40)
             {
-                case 1:
-                    return 0;
-                case 2:
-                    return 1000;
-                case 3:
-                    return 2000;
-                case 4:
-                    return 3000;
-                case 5:
-                    return 4000;
-                case 6:
-                    return 5000;
-                case 7:
-                    return 6000;
-                case 8:
-                    return 7000;
-                case 9:
-                    return 8000;
-                case 10:
-                    return 9000;
-                case 11:
-                    return 10000;
-                case 12:
-                    return 10000;
-                case 13:
-                    return 10000;
-                case 14:
-                    return 10000;
-                case 15:
-                    return 15000;
-                case 16:
-                    return 20000;
-                case 17:
-                    return 20000;
-                case 18:
-                    return 20000;
-                case 19:
-                    return 25000;
-                case 20:
-                    return 25000;
-                case 21:
-                    return 50000;
-                case 22:
-                    return 75000;
-                case 23:
-                    return 100000;
-                case 24:
-                    return 125000;
-                case 25:
-                    return 150000;
-                case 26:
-                    return 190000;
-                case 27:
-                    return 200000;
-                case 28:
-                    return 250000;
-                case 29:
-                    return 300000;
-                case 30:
-                    return 350000;
-                case 31:
-                    return 500000;
-                case 32:
-                    return 500000;
-                case 33:
-                    return 750000;
-                case 34:
-                    return 1000000;
-                case 35:
-                    return 1250000;
-                case 36:
-                    return 1500000;
-                case 37:
-                    return 2000000;
-                case 38:
-                    return 2500000;
-                case 39:
-                    return 1000000;
-                case 40:
-                    return 1000000;
+                int[] xpTable = { 0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
+                    10000, 10000, 10000, 10000, 15000, 20000, 20000, 20000, 25000, 25000,
+                    50000, 75000, 100000, 125000, 150000, 190000, 200000, 250000, 300000, 350000,
+                    500000, 500000, 750000, 1000000, 1250000, 1500000, 2000000, 2500000, 1000000, 1000000};
+                return xpTable[level - 1];
             }
             return 0;
         }
@@ -689,11 +632,11 @@ namespace PokemonGo.RocketAPI.Logic
                 await action();
         }
 
-        private async Task TransferDuplicatePokemon(bool keepPokemonsThatCanEvolve = false)
+        private async Task TransferDuplicatePokemon()
         {
             var duplicatePokemons =
                 await
-                    _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve,
+                    _inventory.GetDuplicatePokemonToTransfer(_clientSettings.KeepPokemonsThatCanEvolve,
                         _clientSettings.PrioritizeIVOverCP, _clientSettings.PokemonsNotToTransfer);
 
             foreach (var duplicatePokemon in duplicatePokemons)
@@ -717,8 +660,8 @@ namespace PokemonGo.RocketAPI.Logic
 
         public async Task UseBerry(ulong encounterId, string spawnPointId)
         {
-            var inventoryBalls = await _inventory.GetItems();
-            var berries = inventoryBalls.Where(p => (ItemId) p.Item_ == ItemId.ItemRazzBerry);
+            var inventoryItems = await _inventory.GetItems();
+            var berries = inventoryItems.Where(p => (ItemId)p.Item_ == ItemId.ItemRazzBerry);
             var berry = berries.FirstOrDefault();
 
             if (berry == null || berry.Count <= 0)
