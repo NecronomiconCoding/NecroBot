@@ -274,5 +274,101 @@ namespace PokemonGo.RocketAPI.Console {
                 this["EvolveAboveIVValue"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool KeepPokemonsThatCanEvolve {
+            get {
+                return ((bool)(this["KeepPokemonsThatCanEvolve"]));
+            }
+            set {
+                this["KeepPokemonsThatCanEvolve"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
+        public int MaxCpPercent {
+            get {
+                return ((int)(this["MaxCpPercent"]));
+            }
+            set {
+                this["MaxCpPercent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("200")]
+        public int MaxPokeBalls {
+            get {
+                return ((int)(this["MaxPokeBalls"]));
+            }
+            set {
+                this["MaxPokeBalls"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public int MaxPotions {
+            get {
+                return ((int)(this["MaxPotions"]));
+            }
+            set {
+                this["MaxPotions"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("150")]
+        public int MaxBerries {
+            get {
+                return ((int)(this["MaxBerries"]));
+            }
+            set {
+                this["MaxBerries"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public int MaxRevives {
+            get {
+                return ((int)(this["MaxRevives"]));
+            }
+            set {
+                this["MaxRevives"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int MinPokemonReqToEvolveWithLuckyEgg {
+            get {
+                return ((int)(this["MinPokemonReqToEvolveWithLuckyEgg"]));
+            }
+            set {
+                this["MinPokemonReqToEvolveWithLuckyEgg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int MinPokemonToStartEvolving {
+            get {
+                return ((int)(this["MinPokemonToStartEvolving"]));
+            }
+            set {
+                this["MinPokemonToStartEvolving"] = value;
+            }
+        }
     }
 }
