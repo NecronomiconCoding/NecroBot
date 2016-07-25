@@ -263,41 +263,26 @@ namespace PokemonGo.RocketAPI
 
 		public async Task<GetPlayerResponse> GetProfile()
         {
-            var profileRequest = RequestEnvelopeBuilder.GetInitialRequest(AccessToken, _authType, CurrentLat, CurrentLng,
-                CurrentAltitude,
-                new Request.Types.Requests {Type = (int) RequestType.GET_PLAYER});
+            var profileRequest = RequestEnvelopeBuilder.GetInitialRequestEnvelope(AccessToken, _authType, CurrentLat, CurrentLng, CurrentAltitude)
+				.WithMessage(new Request() { RequestType = RequestType.GetPlayerProfile });
             return
-                await _httpClient.PostProtoPayload<Request, GetPlayerResponse>($"https://{_apiUrl}/rpc", profileRequest);
+                await _httpClient.PostProtoPayload<GetPlayerResponse>($"https://{_apiUrl}/rpc", profileRequest);
         }
 
         public async Task<DownloadSettingsResponse> GetSettings()
         {
-            var settingsRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                RequestType.DOWNLOAD_SETTINGS);
-            return
-                await
-                    _httpClient.PostProtoPayload<Request, DownloadSettingsResponse>($"https://{_apiUrl}/rpc",
-                        settingsRequest);
-        }
+			return await AwaitableOnResponseFor<DownloadSettingsResponse>(RequestType.DownloadSettings);
+		}
 
         public async Task<RecycleInventoryItemResponse> RecycleItem(ItemId itemId, int amount)
         {
-            var customRequest = new RecycleInventoryItem
+			RecycleInventoryItemMessage recycleObjectMessage = new RecycleInventoryItemMessage
             {
                 ItemId = (ItemId) Enum.Parse(typeof(ItemId), itemId.ToString()),
                 Count = amount
             };
 
-            var releasePokemonRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                new Request.Types.Requests
-                {
-                    Type = (int) RequestType.RECYCLE_INVENTORY_ITEM,
-                    Message = customRequest.ToByteString()
-                });
-            return
-                await
-                    _httpClient.PostProtoPayload<Request, RecycleInventoryItemResponse>($"https://{_apiUrl}/rpc",
-                        releasePokemonRequest);
+			return await AwaitableOnResponseFor<RecycleInventoryItemMessage, RecycleInventoryItemResponse>(recycleObjectMessage, RequestType.RecycleInventoryItem);
         }
 
 

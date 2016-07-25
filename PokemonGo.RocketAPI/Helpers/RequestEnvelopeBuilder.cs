@@ -30,6 +30,20 @@ namespace PokemonGo.RocketAPI.Helpers
             return envelope;
         }
 
+        public static RequestEnvelope GetInitialRequestEnvelope(string authToken, AuthType authType, double lat, double lng, double altitude)
+        {
+            RequestEnvelope envelope = new RequestEnvelope();
+
+            //Provide the auth type and the oAuth token issued
+            envelope.WithAltitude(altitude)
+                .WithLatitude(lat)
+                .WithLongitude(lng)
+                .WithRequestID() //RPC ID?
+                .WithAuthenticationMessage(authType, authToken);
+
+            return envelope;
+        }
+
         public static RequestEnvelope GetInitialRequestEnvelope(string authToken, AuthType authType, double lat, double lng,
             double altitude, params RequestType[] requestTypeIds)
         {
