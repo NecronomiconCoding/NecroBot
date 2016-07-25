@@ -11,11 +11,6 @@ namespace PokemonGo.RocketAPI.Logic.State
 {
     public class LoginState : IState
     {
-        public LoginState()
-        {
-
-        }
-
         public IState Execute(Context ctx, StateMachine machine)
         {
             try
@@ -50,7 +45,7 @@ namespace PokemonGo.RocketAPI.Logic.State
 
             DownloadProfile(ctx);
 
-            return new FarmState();
+            return new PositionCheckState();
         }
 
         public void DownloadProfile(Context ctx)

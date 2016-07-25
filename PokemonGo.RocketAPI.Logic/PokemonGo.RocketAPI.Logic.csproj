@@ -48,6 +48,8 @@
     <Compile Include="Event\FortTargetEvent.cs" />
     <Compile Include="Event\FortUsedEvent.cs" />
     <Compile Include="Event\ItemRecycledEvent.cs" />
+    <Compile Include="Event\NoPokeballEvent.cs" />
+    <Compile Include="Event\PokemonCaptureEvent.cs" />
     <Compile Include="Event\TransferPokemonEvent.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Logic.cs" />
@@ -56,6 +58,8 @@
     <Compile Include="State\Context.cs" />
     <Compile Include="Event\ErrorEvent.cs" />
     <Compile Include="State\FarmState.cs" />
+    <Compile Include="Tasks\CatchNearbyPokemonsTask.cs" />
+    <Compile Include="Tasks\CatchPokemonTask.cs" />
     <Compile Include="Tasks\EvolvePokemonTask.cs" />
     <Compile Include="Event\IEvent.cs" />
     <Compile Include="State\IState.cs" />

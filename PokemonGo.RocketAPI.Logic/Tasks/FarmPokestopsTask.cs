@@ -1,5 +1,6 @@
 ﻿using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Extensions;
+using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Logic.Event;
 using PokemonGo.RocketAPI.Logic.State;
 using PokemonGo.RocketAPI.Logic.Utils;
@@ -16,6 +17,26 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 {
     public static class FarmPokestopsTask
     {
+        private static List<FortData> GetPokeStops(Context ctx)
+        {
+            var mapObjects = ctx.Client.GetMapObjects().Result;
+
+            // Wasn't sure how to make this pretty. Edit as needed.
+            var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
+                    .Where(
+                        i =>
+                            i.Type == GeneratedCode.FortType.Checkpoint &&
+                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
+                            ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
+                                LocationUtils.CalculateDistanceInMeters(
+                                    ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude,
+                                    i.Latitude, i.Longitude) < ctx.Settings.MaxTravelDistanceInMeters) ||
+                            ctx.Settings.MaxTravelDistanceInMeters == 0
+                    );
+
+            return pokeStops.ToList();
+        }
+
         public static void Execute(Context ctx, StateMachine machine)
         {
             var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
@@ -37,23 +58,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                     ctx.Settings.WalkingSpeedInKilometerPerHour, null).Wait();
             }
 
-            var mapObjects = ctx.Client.GetMapObjects().Result;
-
-            // Wasn't sure how to make this pretty. Edit as needed.
-            var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
-                    .Where(
-                        i =>
-                            i.Type == GeneratedCode.FortType.Checkpoint &&
-                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
-                            ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
-                                LocationUtils.CalculateDistanceInMeters(
-                                    ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude,
-                                    i.Latitude, i.Longitude) < ctx.Settings.MaxTravelDistanceInMeters) ||
-                            ctx.Settings.MaxTravelDistanceInMeters == 0
-                    );
-
-
-            var pokestopList = pokeStops.ToList();
+            var pokestopList = GetPokeStops(ctx);
             var stopsHit = 0;
 
             if (pokestopList.Count <= 0)
@@ -72,8 +77,13 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                 var fortInfo = ctx.Client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
 
                 machine.Fire(new FortTargetEvent { Name= fortInfo.Name, Distance = distance });
-                
-                ctx.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude), ctx.Settings.WalkingSpeedInKilometerPerHour, null).Wait();
+
+                ctx.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude), ctx.Settings.WalkingSpeedInKilometerPerHour, 
+                    () =>
+                    {
+                        CatchNearbyPokemonsTask.Execute(ctx, machine);
+                        return true;
+                    }).Wait();
 
                 var fortSearch = ctx.Client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
                 if (fortSearch.ExperienceAwarded > 0)

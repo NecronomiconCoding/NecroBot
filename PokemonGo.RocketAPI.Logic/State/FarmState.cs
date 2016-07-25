@@ -28,7 +28,7 @@ namespace PokemonGo.RocketAPI.Logic.State
             }
             else
             {
-
+                Tasks.FarmPokestopsTask.Execute(ctx, machine);
             }
 
             machine.RequestDelay(10000);

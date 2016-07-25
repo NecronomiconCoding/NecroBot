@@ -1,4 +1,5 @@
-﻿using PokemonGo.RocketAPI.GeneratedCode;
+﻿using PokemonGo.RocketAPI.Enums;
+using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Logic.Event;
 using PokemonGo.RocketAPI.Logic.State;
 using System;
@@ -64,6 +65,38 @@ namespace PokemonGo.RocketAPI.Console
         public void HandleEvent(FortTargetEvent evt)
         {
             Logger.Write($"{evt.Name} in ({Math.Round(evt.Distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
+        }
+
+        public void HandleEvent(PokemonCaptureEvent evt)
+        {
+            Func<MiscEnums.Item, string> returnRealBallName = a =>
+            {
+                switch (a)
+                {
+                    case MiscEnums.Item.ITEM_POKE_BALL:
+                        return "Poke";
+                    case MiscEnums.Item.ITEM_GREAT_BALL:
+                        return "Great";
+                    case MiscEnums.Item.ITEM_ULTRA_BALL:
+                        return "Ultra";
+                    case MiscEnums.Item.ITEM_MASTER_BALL:
+                        return "Master";
+                    default:
+                        return "Unknown";
+                }
+            };
+
+            var catchStatus = evt.Attempt > 1
+                        ? $"{evt.Status} Attempt #{evt.Attempt}"
+                        : $"{evt.Status}";
+
+            Logger.Write($"({catchStatus}) | {evt.Id} Lvl {evt.Level} ({evt.Cp}/{evt.MaxCp} CP) ({evt.Perfection.ToString("0.00")}% perfect) | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball.",
+                LogLevel.Caught);
+        }
+
+        public void HandleEvent(NoPokeballEvent evt)
+        {
+            Logger.Write($"No Pokeballs - We missed a {evt.Id} with CP {evt.Cp}", LogLevel.Caught);
         }
     }
 }
