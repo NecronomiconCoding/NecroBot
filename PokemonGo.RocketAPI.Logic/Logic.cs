@@ -98,7 +98,7 @@ namespace PokemonGo.RocketAPI.Logic
                     foreach (var xp in caughtPokemonResponse.CaptureAward.Xp)
                         _stats.AddExperience(xp);
                     _stats.IncreasePokemons();
-                    var profile = await _client.GetProfile();
+                    var profile = await _client.GetPlayer();
                     _stats.GetStardust(profile.PlayerData.Currencies.ToArray()[1].Amount);
                 }
                 _stats.UpdateConsoleTitle(_inventory);
@@ -644,7 +644,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             while (true)
             {
-                _playerProfile = await _client.GetProfile();
+                _playerProfile = await _client.GetPlayer();
                 _stats.SetUsername(_playerProfile);
                 if (_clientSettings.EvolveAllPokemonWithEnoughCandy || _clientSettings.EvolveAllPokemonAboveIV)
                     await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
