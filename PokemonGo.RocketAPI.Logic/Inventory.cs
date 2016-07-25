@@ -84,13 +84,11 @@ namespace PokemonGo.RocketAPI.Logic
                 {
                     var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
                     var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
-                    if (settings.CandyToEvolve == 0)
-                        continue;
+                    var amountToSkip = _client.Settings.KeepMinDuplicatePokemon;
 
-                    var amountToSkip = familyCandy.Candy/settings.CandyToEvolve;
-                    amountToSkip = amountToSkip > _client.Settings.KeepMinDuplicatePokemon
-                        ? amountToSkip
-                        : _client.Settings.KeepMinDuplicatePokemon;
+                    if (settings.CandyToEvolve > 0 && familyCandy.Candy / settings.CandyToEvolve > amountToSkip)
+                        amountToSkip = familyCandy.Candy / settings.CandyToEvolve;
+                    
                     if (prioritizeIVoverCp)
                     {
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)

@@ -145,6 +145,18 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool KeepPokemonsThatCanEvolve {
+            get {
+                return ((bool)(this["KeepPokemonsThatCanEvolve"]));
+            }
+            set {
+                this["KeepPokemonsThatCanEvolve"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool TransferDuplicatePokemon {
             get {

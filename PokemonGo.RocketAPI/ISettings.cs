@@ -20,6 +20,7 @@ namespace PokemonGo.RocketAPI
         int KeepMinCP { get; }
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
+        bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
         int DelayBetweenPokemonCatch { get; }
         bool UsePokemonToNotCatchFilter { get; }
