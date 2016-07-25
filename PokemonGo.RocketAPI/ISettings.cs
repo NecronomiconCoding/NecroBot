@@ -38,6 +38,7 @@ namespace PokemonGo.RocketAPI
         int MaxCpPercent { get; }
         int MinPokemonReqToEvolveWithLuckyEgg { get; }
         int MinPokemonToStartEvolving { get; }
+        bool KeepPokemonsThatCanEvolve { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
