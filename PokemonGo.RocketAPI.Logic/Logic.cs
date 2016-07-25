@@ -76,11 +76,13 @@ namespace PokemonGo.RocketAPI.Logic
                     var greatBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_GREAT_BALL);
                     var ultraBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_ULTRA_BALL);
                     var masterBallsCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_MASTER_BALL);
+                    var berryCount = await _inventory.GetItemAmountByType(MiscEnums.Item.ITEM_RAZZ_BERRY);
                     _stats.GetStardust(profile.Profile.Currency.ToArray()[1].Amount);
                     _stats.GetPokeBall(pokeBallsCount);
                     _stats.GetGreatBall(greatBallsCount);
                     _stats.GetUltraBall(ultraBallsCount);
                     _stats.GetMasterBall(masterBallsCount);
+                    _stats.GetBerries(berryCount);
                 }
                 _stats.UpdateConsoleTitle(_inventory);
 
@@ -372,12 +374,12 @@ namespace PokemonGo.RocketAPI.Logic
                         if (_clientSettings.EvolveAllPokemonWithEnoughCandy)
                             await EvolveAllPokemonWithEnoughCandy(_clientSettings.PokemonsToEvolve);
                         if (_clientSettings.TransferDuplicatePokemon) await TransferDuplicatePokemon();
+                        await RecycleItems();
                         pokestopCounter = 0;
                     }
                 }
 
-                await Task.Delay(1000);
-                await RecycleItems();
+                await Task.Delay(500);
             }
         }
 
@@ -452,7 +454,8 @@ namespace PokemonGo.RocketAPI.Logic
             foreach (var item in items)
             {
                 var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
-                RecycleOutput.Write($"{(ItemId) item.Item_} (x{item.Count}) ");
+                string label = ((ItemId)item.Item_).ToString();
+                RecycleOutput.Write($"{(label.Length > 5 ? label.Substring(4, label.Length - 4) : label)} (x{item.Count}) ");
                 _stats.AddItemsRemoved(item.Count);
                 _stats.UpdateConsoleTitle(_inventory);
                 await Task.Delay(500);
@@ -469,6 +472,20 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task TransferDuplicatePokemon(bool keepPokemonsThatCanEvolve = false)
         {
+            var unwantedPokemons = await _inventory.GetPokemons();
+            string[] unwantedTypes = new string[] { "Abra", "Bellsprout", "Caterpie", "Clefable", "Clefairy", "Cubone", "Diglett", "Dodrio", "Doduo", "Dugtrio", "Ekans", "Electabuzz", "Exeggcute", "Gastly", "Geodude", "Gloom", "Golbat", "Goldeen", "Golduck", "Golem", "Graveler", "Hitmonchan", "Hitmonlee", "Horsea", "Jigglypuff", "Kabuto", "Kabutops", "Kadabra", "Kakuna", "Kingler", "Krabby", "Machoke", "Machop", "Magmar", "Magnemite", "Magneton", "Mankey", "Metapod", "NidoranMale", "NidoranFemale", "Nidorina", "Nidorino", "Oddish", "Omanyte", "Omastar", "Onix", "Paras", "Parasect", "Pidgeotto", "Pidgey", "Pinsir", "Poliwag", "Poliwhirl", "Primeape", "Psyduck", "Raticate", "Rattata", "Rhyhorn", "Sandshrew", "Sandslash", "Seel", "Shellder", "Spearow", "Staryu", "Tentacool", "Venomoth", "Venonat", "Voltorb", "Weedle", "Weepinbell", "Wigglypuff", "Zubat", };
+            foreach (var unwantedPokemon in unwantedPokemons)
+            {
+                if (unwantedTypes.Contains(unwantedPokemon.PokemonId.ToString()))
+                {
+                    var transfer = await _client.TransferPokemon(unwantedPokemon.Id);
+                    _stats.IncreasePokemonsTransfered();
+                    _stats.UpdateConsoleTitle(_inventory);
+                    Logger.Write($"{unwantedPokemon.PokemonId} @ {unwantedPokemon.Cp} CP (Unwanted)", LogLevel.Transfer);
+                    await Task.Delay(500);
+                }
+            }
+
             var duplicatePokemons = await _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve, _clientSettings.PrioritizeIVOverCP,_clientSettings.PokemonsNotToTransfer);
 
             foreach (var duplicatePokemon in duplicatePokemons)
@@ -492,8 +509,7 @@ namespace PokemonGo.RocketAPI.Logic
                 return;
 
             var useRaspberry = await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
-            Logger.Write($"{berry.Count} Remaining", LogLevel.Berry);
-            await Task.Delay(3000);
+            await Task.Delay(1000);
         }
 
         /*private async Task DisplayHighests()

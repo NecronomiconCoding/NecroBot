@@ -119,7 +119,7 @@ namespace PokemonGo.RocketAPI.Console
 
             if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
             {
-                Logger.Write($"Loading File: {filename}");
+                //Logger.Write($"Loading File: {filename}");
 
                 var content = string.Empty;
                 using (StreamReader reader = new StreamReader(filename))

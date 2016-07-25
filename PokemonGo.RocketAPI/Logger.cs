@@ -61,7 +61,6 @@ namespace PokemonGo.RocketAPI
         Pokestop,
         Farming,
         Recycling,
-        Berry,
         Caught,
         CaughtGreat,
         CaughtUltra,

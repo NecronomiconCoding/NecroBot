@@ -20,6 +20,7 @@ namespace PokemonGo.RocketAPI.Logic.Utils
         public static int TotalGreatBall;
         public static int TotalUltraBall;
         public static int TotalMasterBall;
+        public static int TotalBerries;
         public static string CurrentLevelInfos;
         public static int Currentlevel = -1;
         public static string PlayerName;
@@ -38,7 +39,7 @@ namespace PokemonGo.RocketAPI.Logic.Utils
                 var hours = Math.Round(ep/(TotalExperience/_getSessionRuntime()), 2);
 
                 //output = string.Format("{0:n0} (lvl in {1}h | {2:n0}/{3:n0} XP)", stat.Level, stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level), stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level));
-                output = $"{stat.Level} (Level {hours}h | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
+                output = $"{stat.Level} (Level Up in {hours}h | {stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level) - stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP Needed)";
                 //output = $"{stat.Level} (LvLUp in {_hours}hours // EXP required: {_ep})";
             }
             return output;
@@ -87,6 +88,10 @@ namespace PokemonGo.RocketAPI.Logic.Utils
         public void GetMasterBall(int val)
         {
             TotalMasterBall = val;
+        }
+        public void GetBerries(int val)
+        {
+            TotalBerries = val;
         }
 
         public static int GetXpDiff(int level)
@@ -191,9 +196,9 @@ namespace PokemonGo.RocketAPI.Logic.Utils
         {
             return
                 string.Format(
-                    "{0} - {1} - Lvl: {2:n0} | EXP/H: {3:n0} | P/H: {4:n0} | StarD: {5:n0} | Balls: {6:n0}p, {7:n0}g, {8:n0}u, {9:n0}m | Trans: {10:n0} | Recyc: {11:n0}",
+                    "{0} - {1} - Lvl {2:n0} | XP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Balls: {6:n0}p, {7:n0}g, {8:n0}u, {9:n0}m | Berries: {10:n0} | Transfers: {11:n0} | Recycles: {12:n0}",
                     PlayerName, _getSessionRuntimeInTimeFormat(), CurrentLevelInfos, TotalExperience/_getSessionRuntime(),
-                    TotalPokemons/_getSessionRuntime(), TotalStardust, TotalPokeBall, TotalGreatBall, TotalUltraBall, TotalMasterBall, TotalPokemonsTransfered, TotalItemsRemoved);
+                    TotalPokemons/_getSessionRuntime(), TotalStardust, TotalPokeBall, TotalGreatBall, TotalUltraBall, TotalMasterBall, TotalBerries, TotalPokemonsTransfered, TotalItemsRemoved);
         }
 
         public async void UpdateConsoleTitle(Inventory inventory)

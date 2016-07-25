@@ -20,7 +20,7 @@ namespace PokemonGo.RocketAPI.Logic.Utils
             return
                 enumerable.GroupBy(i => i.ItemId)
                     .Select(kvp => new {ItemName = kvp.Key.ToString(), Amount = kvp.Sum(x => x.ItemCount)})
-                    .Select(y => $"{y.ItemName} (x{y.Amount})")
+                    .Select(y => $"{(y.ItemName.Length > 5 ? y.ItemName.Substring(4, y.ItemName.Length - 4) : y.ItemName)} (x{y.Amount})")
                     .Aggregate((a, b) => $"{a}, {b}");
         }
     }
