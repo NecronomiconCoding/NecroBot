@@ -615,11 +615,11 @@ namespace PokemonGo.RocketAPI.Logic
                 await action();
         }
 
-        private async Task TransferDuplicatePokemon(bool keepPokemonsThatCanEvolve = false)
+        private async Task TransferDuplicatePokemon()
         {
             var duplicatePokemons =
                 await
-                    _inventory.GetDuplicatePokemonToTransfer(keepPokemonsThatCanEvolve,
+                    _inventory.GetDuplicatePokemonToTransfer(_clientSettings.KeepPokemonsThatCanEvolve,
                         _clientSettings.PrioritizeIVOverCP, _clientSettings.PokemonsNotToTransfer);
 
             foreach (var duplicatePokemon in duplicatePokemons)
