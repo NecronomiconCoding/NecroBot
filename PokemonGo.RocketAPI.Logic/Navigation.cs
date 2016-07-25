@@ -5,6 +5,7 @@ using System.Device.Location;
 using System.Threading.Tasks;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Logic.Utils;
+using System.Globalization;
 // ReSharper disable RedundantAssignment
 
 #endregion
@@ -80,7 +81,7 @@ namespace PokemonGo.RocketAPI.Logic
         {
             //PlayerUpdateResponse result = null;
 
-            var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat), Convert.ToDouble(trk.Lon));
+            var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat, CultureInfo.InvariantCulture), Convert.ToDouble(trk.Lon, CultureInfo.InvariantCulture));
 
             var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
 
@@ -91,7 +92,7 @@ namespace PokemonGo.RocketAPI.Logic
             var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
             var nextWaypointDistance = speedInMetersPerSecond;
             var waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing,
-                Convert.ToDouble(trk.Ele));
+                Convert.ToDouble(trk.Ele, CultureInfo.InvariantCulture));
 
             //Initial walking
 
