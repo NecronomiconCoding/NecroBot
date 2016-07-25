@@ -1,43 +1,41 @@
-using PoGo.NecroBot.Logic.Utils;
+#region using directives
+
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.State
 {
     public class Context
     {
-        private Client _client;
-        private readonly ISettings _clientSettings;
-        private LogicClient _logicClient;
-        private readonly LogicSettings _logicSettings;
-        private Inventory _inventory;
-        private Navigation _navigation;
-        private readonly Statistics _stats;
-
-        public ISettings Settings { get { return _clientSettings; } }
-        public Inventory Inventory {  get { return _inventory; } }
-        public Client Client { get { return _client; } }
-        public GetPlayerResponse Profile {get;set;}
-        public Navigation Navigation { get { return _navigation; } }
-
-        public LogicSettings LogicSettings { get { return _logicSettings; } }
-        public LogicClient LogicClient { get { return _logicClient; } }
-
-        public Context(ISettings settings, LogicSettings logicSettings)
+        public Context(ISettings settings, ILogicSettings logicSettings)
         {
-            _clientSettings = settings;
-            _logicSettings = logicSettings;
-            _stats = new Statistics();
+            Settings = settings;
+            LogicSettings = logicSettings;
 
-            Reset(settings, _logicSettings);
+            Reset(settings, LogicSettings);
         }
 
-        public void Reset(ISettings settings, LogicSettings logicSettings)
+        public ISettings Settings { get; }
+
+        public Inventory Inventory { get; private set; }
+
+        public Client Client { get; private set; }
+
+        public GetPlayerResponse Profile { get; set; }
+        public Navigation Navigation { get; private set; }
+
+        public ILogicSettings LogicSettings { get; }
+
+        public LogicClient LogicClient { get; private set; }
+
+        public void Reset(ISettings settings, ILogicSettings logicSettings)
         {
-            _client = new Client(_clientSettings);
-            _logicClient = new LogicClient(_logicSettings);
-            _inventory = new Inventory(_client, _logicClient);
-            _navigation = new Navigation(_client);
+            Client = new Client(Settings);
+            LogicClient = new LogicClient(LogicSettings);
+            Inventory = new Inventory(Client, LogicClient);
+            Navigation = new Navigation(Client);
         }
     }
 }

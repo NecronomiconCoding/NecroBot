@@ -61,7 +61,7 @@
     <Compile Include="Inventory.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="LogicClient.cs" />
-    <Compile Include="LogicSettings.cs" />
+    <Compile Include="ILogicSettings.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="PoGoUtils\PokemonInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

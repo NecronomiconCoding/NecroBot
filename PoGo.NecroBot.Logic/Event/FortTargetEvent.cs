@@ -2,7 +2,7 @@
 {
     public class FortTargetEvent : IEvent
     {
-        public string Name;
         public double Distance;
+        public string Name;
     }
 }

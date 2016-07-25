@@ -1,26 +1,30 @@
-﻿using System.Collections.Generic;
+﻿#region using directives
+
+using System.Collections.Generic;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 
+#endregion
+
 namespace PoGo.NecroBot.Logic
 {
-    public interface LogicSettings
+    public interface ILogicSettings
     {
-        float KeepMinIVPercentage { get; }
-        int KeepMinCP { get; }
+        float KeepMinIvPercentage { get; }
+        int KeepMinCp { get; }
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool TransferDuplicatePokemon { get; }
         int DelayBetweenPokemonCatch { get; }
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
-        bool PrioritizeIVOverCP { get; }
+        bool PrioritizeIvOverCp { get; }
         int MaxTravelDistanceInMeters { get; }
-        bool UseGPXPathing { get; }
-        string GPXFile { get; }
-        bool useLuckyEggsWhileEvolving { get; }
-        bool EvolveAllPokemonAboveIV { get; }
-        float EvolveAboveIVValue { get; }
+        bool UseGpxPathing { get; }
+        string GpxFile { get; }
+        bool UseLuckyEggsWhileEvolving { get; }
+        bool EvolveAllPokemonAboveIv { get; }
+        float EvolveAboveIvValue { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 

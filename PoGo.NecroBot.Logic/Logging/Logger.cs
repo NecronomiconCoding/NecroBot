@@ -1,11 +1,33 @@
-﻿using System;
+﻿#region using directives
+
+using System;
 using System.IO;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Logging
 {
     public static class Logger
     {
         private static ILogger _logger;
+
+        private static void Log(string message)
+        {
+            // maybe do a new log rather than appending?
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Logs");
+
+
+            using (
+                var log =
+                    File.AppendText(Directory.GetCurrentDirectory() +
+                                    $"\\Logs\\NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt")
+                )
+            {
+                log.WriteLine(message);
+                log.Flush();
+            }
+        }
+
         /// <summary>
         ///     Set the logger. All future requests to <see cref="Write(string,LogLevel,ConsoleColor)" /> will use that logger, any
         ///     old will be
@@ -30,19 +52,6 @@ namespace PoGo.NecroBot.Logic.Logging
                 return;
             _logger.Write(message, level, color);
             Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
-        }
-
-        private static void Log(string message)
-        {
-            // maybe do a new log rather than appending?
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Logs");
-
-
-            using (var log = File.AppendText(Directory.GetCurrentDirectory() + $"\\Logs\\NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt"))
-            {
-                log.WriteLine(message);
-                log.Flush();
-            }
         }
     }
 

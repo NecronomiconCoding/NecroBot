@@ -1,9 +1,13 @@
 ﻿#region using directives
 
+#region using directives
+
 using System;
 using System.Globalization;
 using System.Linq;
 using POGOProtos.Networking.Responses;
+
+#endregion
 
 // ReSharper disable CyclomaticComplexity
 
@@ -12,19 +16,31 @@ using POGOProtos.Networking.Responses;
 namespace PoGo.NecroBot.Logic.Utils
 {
     public delegate void StatisticsDirtyDelegate();
+
     public class Statistics
     {
+        private readonly DateTime _initSessionDateTime = DateTime.Now;
+
+        private string _currentLevelInfos;
+        private string _playerName;
         public int TotalExperience;
-        public int TotalPokemons;
         public int TotalItemsRemoved;
+        public int TotalPokemons;
         public int TotalPokemonsTransfered;
         public int TotalStardust;
-  
+
+        public void Dirty(Inventory inventory)
+        {
+            _currentLevelInfos = GetCurrentInfo(inventory);
+            DirtyEvent?.Invoke();
+        }
+
         public event StatisticsDirtyDelegate DirtyEvent;
 
-        private string CurrentLevelInfos;
-        private string PlayerName;
-        private DateTime InitSessionDateTime = DateTime.Now;
+        private string FormatRuntime()
+        {
+            return (DateTime.Now - _initSessionDateTime).ToString(@"dd\.hh\:mm\:ss");
+        }
 
         public string GetCurrentInfo(Inventory inventory)
         {
@@ -44,25 +60,15 @@ namespace PoGo.NecroBot.Logic.Utils
                     minutes = Math.Round((time - hours)*100);
                 }
 
-                output = $"{stat.Level} (next level in {hours}h {minutes}m | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
+                output =
+                    $"{stat.Level} (next level in {hours}h {minutes}m | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
             }
             return output;
         }
 
         public double GetRuntime()
         {
-            return (DateTime.Now - InitSessionDateTime).TotalSeconds/3600;
-        }
-
-        private string FormatRuntime()
-        {
-            return (DateTime.Now - InitSessionDateTime).ToString(@"dd\.hh\:mm\:ss");
-        }
-
-        public void Dirty(Inventory inventory)
-        {
-            CurrentLevelInfos = GetCurrentInfo(inventory);
-            DirtyEvent?.Invoke();
+            return (DateTime.Now - _initSessionDateTime).TotalSeconds/3600;
         }
 
         public static int GetXpDiff(int level)
@@ -155,12 +161,13 @@ namespace PoGo.NecroBot.Logic.Utils
 
         public void SetUsername(GetPlayerResponse profile)
         {
-            PlayerName = profile.PlayerData.Username ?? "";
+            _playerName = profile.PlayerData.Username ?? "";
         }
 
         public override string ToString()
         {
-            return $"{PlayerName} - Runtime {FormatRuntime()} - Lvl: {CurrentLevelInfos} | EXP/H: {TotalExperience/GetRuntime():0} | P/H: {TotalPokemons/GetRuntime():0} | Stardust: {TotalStardust:0} | Transfered: {TotalPokemonsTransfered:0} | Items Recycled: {TotalItemsRemoved:0}";
+            return
+                $"{_playerName} - Runtime {FormatRuntime()} - Lvl: {_currentLevelInfos} | EXP/H: {TotalExperience/GetRuntime():0} | P/H: {TotalPokemons/GetRuntime():0} | Stardust: {TotalStardust:0} | Transfered: {TotalPokemonsTransfered:0} | Items Recycled: {TotalItemsRemoved:0}";
         }
     }
 }

@@ -1,28 +1,34 @@
-﻿namespace PoGo.NecroBot.Logic.State
+﻿#region using directives
+
+using PoGo.NecroBot.Logic.Tasks;
+
+#endregion
+
+namespace PoGo.NecroBot.Logic.State
 {
     public class FarmState : IState
     {
         public IState Execute(Context ctx, StateMachine machine)
         {
-            if(ctx.LogicSettings.EvolveAllPokemonAboveIV || ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy)
+            if (ctx.LogicSettings.EvolveAllPokemonAboveIv || ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
-                Tasks.EvolvePokemonTask.Execute(ctx, machine);
+                EvolvePokemonTask.Execute(ctx, machine);
             }
 
-            if(ctx.LogicSettings.TransferDuplicatePokemon)
+            if (ctx.LogicSettings.TransferDuplicatePokemon)
             {
-                Tasks.TransferDuplicatePokemonTask.Execute(ctx, machine);
+                TransferDuplicatePokemonTask.Execute(ctx, machine);
             }
 
-            Tasks.RecycleItemsTask.Execute(ctx, machine);
+            RecycleItemsTask.Execute(ctx, machine);
 
-            if(ctx.LogicSettings.UseGPXPathing)
+            if (ctx.LogicSettings.UseGpxPathing)
             {
-                Tasks.FarmPokestopsGPXTask.Execute(ctx, machine);
+                FarmPokestopsGpxTask.Execute(ctx, machine);
             }
             else
             {
-                Tasks.FarmPokestopsTask.Execute(ctx, machine);
+                FarmPokestopsTask.Execute(ctx, machine);
             }
 
             machine.RequestDelay(10000);

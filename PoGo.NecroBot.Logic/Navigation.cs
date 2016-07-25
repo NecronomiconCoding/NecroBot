@@ -1,11 +1,15 @@
 ﻿#region using directives
 
+#region using directives
+
 using System;
 using System.Device.Location;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
+
+#endregion
 
 // ReSharper disable RedundantAssignment
 
@@ -40,7 +44,8 @@ namespace PoGo.NecroBot.Logic
             var requestSendDateTime = DateTime.Now;
             var result =
                 await
-                    _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude, _client.Settings.DefaultAltitude);
+                    _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
+                        _client.Settings.DefaultAltitude);
 
             do
             {

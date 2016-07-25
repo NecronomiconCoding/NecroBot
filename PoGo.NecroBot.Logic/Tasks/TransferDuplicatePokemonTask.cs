@@ -1,6 +1,10 @@
-﻿using PoGo.NecroBot.Logic.Event;
+﻿#region using directives
+
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -8,12 +12,14 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static void Execute(Context ctx, StateMachine machine)
         {
-            var duplicatePokemons =  ctx.Inventory.GetDuplicatePokemonToTransfer(false, ctx.LogicSettings.PrioritizeIVOverCP, ctx.LogicSettings.PokemonsNotToTransfer).Result;
+            var duplicatePokemons =
+                ctx.Inventory.GetDuplicatePokemonToTransfer(false, ctx.LogicSettings.PrioritizeIvOverCp,
+                    ctx.LogicSettings.PokemonsNotToTransfer).Result;
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
-                if (duplicatePokemon.Cp >= ctx.LogicSettings.KeepMinCP ||
-                    PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) > ctx.LogicSettings.KeepMinIVPercentage)
+                if (duplicatePokemon.Cp >= ctx.LogicSettings.KeepMinCp ||
+                    PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) > ctx.LogicSettings.KeepMinIvPercentage)
                 {
                     continue;
                 }
@@ -21,7 +27,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 ctx.Client.Inventory.TransferPokemon(duplicatePokemon.Id).Wait();
                 ctx.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
 
-                var bestPokemonOfType = ctx.LogicSettings.PrioritizeIVOverCP
+                var bestPokemonOfType = ctx.LogicSettings.PrioritizeIvOverCp
                     ? ctx.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon).Result
                     : ctx.Inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon).Result;
 
@@ -33,9 +39,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     BestCp = bestPokemonOfType.Cp,
                     BestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType)
                 });
-                
-                
-               
             }
         }
     }

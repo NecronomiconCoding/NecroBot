@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿#region using directives
+
+using System.Linq;
 using System.Threading;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
@@ -7,20 +9,12 @@ using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
 
+#endregion
+
 namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchNearbyPokemonsTask
     {
-        private static IOrderedEnumerable<MapPokemon> GetNearbyPokemons(Context ctx)
-        {
-            var mapObjects = ctx.Client.Map.GetMapObjects().Result;
-
-            var pokemons = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons)
-                    .OrderBy(i => LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, i.Latitude, i.Longitude));
-
-            return pokemons;
-        }
-
         public static void Execute(Context ctx, StateMachine machine)
         {
             Logger.Write("Looking for pokemon..", LogLevel.Debug);
@@ -35,7 +29,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     continue;
                 }
 
-                var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
+                var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
+                    ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
                 Thread.Sleep(distance > 100 ? 15000 : 500);
 
                 var encounter = ctx.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
@@ -46,7 +41,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else
                 {
-                    machine.Fire(new WarnEvent { Message = $"Encounter problem: {encounter.Status}" });
+                    machine.Fire(new WarnEvent {Message = $"Encounter problem: {encounter.Status}"});
                 }
 
                 // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
@@ -55,6 +50,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Thread.Sleep(ctx.LogicSettings.DelayBetweenPokemonCatch);
                 }
             }
+        }
+
+        private static IOrderedEnumerable<MapPokemon> GetNearbyPokemons(Context ctx)
+        {
+            var mapObjects = ctx.Client.Map.GetMapObjects().Result;
+
+            var pokemons = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons)
+                .OrderBy(
+                    i =>
+                        LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude,
+                            i.Latitude, i.Longitude));
+
+            return pokemons;
         }
     }
 }

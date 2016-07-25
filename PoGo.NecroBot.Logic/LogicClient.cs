@@ -2,8 +2,9 @@
 {
     public class LogicClient
     {
-        public LogicSettings Settings;
-        public LogicClient(LogicSettings settings)
+        public ILogicSettings Settings;
+
+        public LogicClient(ILogicSettings settings)
         {
             Settings = settings;
         }

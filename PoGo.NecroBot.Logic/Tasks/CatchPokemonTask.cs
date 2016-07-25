@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region using directives
+
+using System;
 using System.Linq;
 using System.Threading;
 using PoGo.NecroBot.Logic.Event;
@@ -9,24 +11,84 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
 
+#endregion
+
 namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchPokemonTask
     {
-        private static void UseBerry(Context ctx, StateMachine machine, ulong encounterId, string spawnPointId)
+        public static void Execute(Context ctx, StateMachine machine, EncounterResponse encounter, MapPokemon pokemon)
         {
-            var inventoryBalls = ctx.Inventory.GetItems().Result;
-            var berries = inventoryBalls.Where(p => (ItemId)p.ItemId == ItemId.ItemRazzBerry);
-            var berry = berries.FirstOrDefault();
+            CatchPokemonResponse caughtPokemonResponse;
+            var attemptCounter = 1;
+            do
+            {
+                var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
 
-            if (berry == null || berry.Count <= 0)
-                return;
+                var pokeball = GetBestBall(ctx, encounter);
+                if (pokeball == ItemId.ItemUnknown)
+                {
+                    machine.Fire(new NoPokeballEvent
+                    {
+                        Id = pokemon.PokemonId,
+                        Cp = encounter?.WildPokemon?.PokemonData?.Cp ?? 0
+                    });
+                    return;
+                }
 
-            ctx.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId).Wait();
-            berry.Count -= 1;
-            machine.Fire(new UseBerryEvent { Count = berry.Count }); 
+                var isLowProbability = probability.HasValue && probability.Value < 0.35;
+                var isHighCp = encounter != null && encounter.WildPokemon?.PokemonData?.Cp > 400;
+                var isHighPerfection = PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >=
+                                       ctx.LogicSettings.KeepMinIvPercentage;
 
-            Thread.Sleep(1500);
+                if ((isLowProbability && isHighCp) || isHighPerfection)
+                {
+                    UseBerry(ctx, machine, pokemon.EncounterId, pokemon.SpawnPointId);
+                }
+
+                var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
+                    ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
+
+                caughtPokemonResponse =
+                    ctx.Client.Encounter.CatchPokemon(pokemon.EncounterId, pokemon.SpawnPointId, pokeball).Result;
+
+                var evt = new PokemonCaptureEvent {Status = caughtPokemonResponse.Status};
+
+                if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
+                {
+                    var totalExp = 0;
+
+                    foreach (var xp in caughtPokemonResponse.CaptureAward.Xp)
+                    {
+                        totalExp += xp;
+                    }
+                    var profile = ctx.Client.Player.GetPlayer().Result;
+
+                    evt.Exp = totalExp;
+                    evt.Stardust = profile.PlayerData.Currencies.ToArray()[1].Amount;
+                }
+
+
+                if (encounter?.CaptureProbability?.CaptureProbability_ != null)
+                {
+                    evt.Id = pokemon.PokemonId;
+                    evt.Level = PokemonInfo.GetLevel(encounter.WildPokemon?.PokemonData);
+                    evt.Cp = encounter.WildPokemon?.PokemonData?.Cp ?? 0;
+                    evt.MaxCp = PokemonInfo.CalculateMaxCp(encounter.WildPokemon?.PokemonData);
+                    evt.Perfection =
+                        Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter.WildPokemon?.PokemonData));
+                    evt.Probability =
+                        Math.Round(Convert.ToDouble(encounter.CaptureProbability?.CaptureProbability_.First())*100, 2);
+                    evt.Distance = distance;
+                    evt.Pokeball = pokeball;
+                    evt.Attempt = attemptCounter;
+
+                    machine.Fire(evt);
+                }
+                attemptCounter++;
+                Thread.Sleep(2000);
+            } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
+                     caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
         private static ItemId GetBestBall(Context ctx, EncounterResponse encounter)
@@ -47,10 +109,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (greatBallsCount > 0 && pokemonCp >= 750)
                 return ItemId.ItemGreatBall;
 
-            if (ultraBallsCount > 0 && iV >= ctx.LogicSettings.KeepMinIVPercentage && proba < 0.40)
+            if (ultraBallsCount > 0 && iV >= ctx.LogicSettings.KeepMinIvPercentage && proba < 0.40)
                 return ItemId.ItemUltraBall;
 
-            if (greatBallsCount > 0 && iV >= ctx.LogicSettings.KeepMinIVPercentage && proba < 0.50)
+            if (greatBallsCount > 0 && iV >= ctx.LogicSettings.KeepMinIvPercentage && proba < 0.50)
                 return ItemId.ItemGreatBall;
 
             if (greatBallsCount > 0 && pokemonCp >= 300)
@@ -68,71 +130,20 @@ namespace PoGo.NecroBot.Logic.Tasks
             return ItemId.ItemUnknown;
         }
 
-        public static void Execute(Context ctx, StateMachine machine, EncounterResponse encounter, MapPokemon pokemon)
+        private static void UseBerry(Context ctx, StateMachine machine, ulong encounterId, string spawnPointId)
         {
-            CatchPokemonResponse caughtPokemonResponse;
-            var attemptCounter = 1;
-            do
-            {
-                var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
+            var inventoryBalls = ctx.Inventory.GetItems().Result;
+            var berries = inventoryBalls.Where(p => p.ItemId == ItemId.ItemRazzBerry);
+            var berry = berries.FirstOrDefault();
 
-                var pokeball = GetBestBall(ctx, encounter);
-                if (pokeball == ItemId.ItemUnknown)
-                {
-                    machine.Fire(new NoPokeballEvent { Id = pokemon.PokemonId, Cp = encounter?.WildPokemon?.PokemonData?.Cp ?? 0 });
-                    return;
-                }
+            if (berry == null || berry.Count <= 0)
+                return;
 
-                bool isLowProbability = probability.HasValue && probability.Value < 0.35;
-                bool isHighCp = encounter.WildPokemon?.PokemonData?.Cp > 400;
-                bool isHighPerfection = PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >= ctx.LogicSettings.KeepMinIVPercentage;
+            ctx.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId).Wait();
+            berry.Count -= 1;
+            machine.Fire(new UseBerryEvent {Count = berry.Count});
 
-                if ((isLowProbability && isHighCp) || isHighPerfection)
-                {
-                    UseBerry(ctx, machine, pokemon.EncounterId, pokemon.SpawnPointId);
-                }
-
-                var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
-
-                caughtPokemonResponse = ctx.Client.Encounter.CatchPokemon(pokemon.EncounterId, pokemon.SpawnPointId, pokeball).Result;
-
-                PokemonCaptureEvent evt = new PokemonCaptureEvent();
-                evt.Status = caughtPokemonResponse.Status;
-
-                if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
-                {
-                    int totalExp = 0;
-
-                    foreach (var xp in caughtPokemonResponse.CaptureAward.Xp)
-                    {
-                        totalExp += xp;
-                    }
-                    var profile = ctx.Client.Player.GetPlayer().Result;
-
-                    evt.Exp = totalExp;
-                    evt.Stardust = profile.PlayerData.Currencies.ToArray()[1].Amount;
-                }
-
-
-                if (encounter?.CaptureProbability?.CaptureProbability_ != null)
-                {
-                    evt.Id = pokemon.PokemonId;
-                    evt.Level = PokemonInfo.GetLevel(encounter.WildPokemon?.PokemonData);
-                    evt.Cp = encounter.WildPokemon?.PokemonData?.Cp ?? 0;
-                    evt.MaxCp = PokemonInfo.CalculateMaxCP(encounter.WildPokemon?.PokemonData);
-                    evt.Perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter.WildPokemon?.PokemonData));
-                    evt.Probability = Math.Round(Convert.ToDouble(encounter.CaptureProbability?.CaptureProbability_.First()) * 100, 2);
-                    evt.Distance = distance;
-                    evt.Pokeball = pokeball;
-                    evt.Attempt = attemptCounter;
-
-                    machine.Fire(evt);                
-                }
-                attemptCounter++;
-                Thread.Sleep(2000);
-
-            } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
-                     caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
-        } 
+            Thread.Sleep(1500);
+        }
     }
 }

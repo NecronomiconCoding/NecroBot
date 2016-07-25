@@ -2,6 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using POGOProtos.Inventory.Item;
 
 #endregion
 
@@ -9,9 +10,9 @@ namespace PoGo.NecroBot.Logic.Utils
 {
     public static class StringUtils
     {
-        public static string GetSummedFriendlyNameOfItemAwardList(IEnumerable<POGOProtos.Inventory.Item.ItemAward> items)
+        public static string GetSummedFriendlyNameOfItemAwardList(IEnumerable<ItemAward> items)
         {
-            var enumerable = items as IList<POGOProtos.Inventory.Item.ItemAward> ?? items.ToList();
+            var enumerable = items as IList<ItemAward> ?? items.ToList();
 
             if (!enumerable.Any())
                 return string.Empty;

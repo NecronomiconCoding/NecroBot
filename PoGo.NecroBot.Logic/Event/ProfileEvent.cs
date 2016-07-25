@@ -1,4 +1,8 @@
-﻿using POGOProtos.Networking.Responses;
+﻿#region using directives
+
+using POGOProtos.Networking.Responses;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Event
 {

@@ -1,4 +1,8 @@
-﻿using System;
+﻿#region using directives
+
+using System;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Logging
 {

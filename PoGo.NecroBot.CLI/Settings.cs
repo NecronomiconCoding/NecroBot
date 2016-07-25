@@ -1,4 +1,4 @@
-﻿#region
+﻿#region using directives
 
 using System;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace PoGo.NecroBot.CLI
 {
     public class GetClientSettings : ISettings
     {
-        public AuthType AuthType => (AuthType)Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
+        public AuthType AuthType => (AuthType) Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         public string PtcUsername => UserSettings.Default.PtcUsername;
         public string PtcPassword => UserSettings.Default.PtcPassword;
         public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
@@ -27,13 +27,13 @@ namespace PoGo.NecroBot.CLI
         public string GoogleRefreshToken { get; set; }
     }
 
-    public class GetLogicSettings : LogicSettings
+    public class GetLogicSettings : ILogicSettings
     {
+        private ICollection<KeyValuePair<ItemId, int>> _itemRecycleFilter;
+        private ICollection<PokemonId> _pokemonsNotToCatch;
 
         private ICollection<PokemonId> _pokemonsNotToTransfer;
         private ICollection<PokemonId> _pokemonsToEvolve;
-        private ICollection<PokemonId> _pokemonsNotToCatch;
-        private ICollection<KeyValuePair<ItemId, int>> _itemRecycleFilter;
 
         //public AuthType AuthType => (AuthType)Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         //public string PtcUsername => UserSettings.Default.PtcUsername;
@@ -41,30 +41,30 @@ namespace PoGo.NecroBot.CLI
         //public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
         //public double DefaultLongitude => UserSettings.Default.DefaultLongitude;
         //public double DefaultAltitude => UserSettings.Default.DefaultAltitude;
-        public float KeepMinIVPercentage => UserSettings.Default.KeepMinIVPercentage;
-        public int KeepMinCP => UserSettings.Default.KeepMinCP;
+        public float KeepMinIvPercentage => UserSettings.Default.KeepMinIVPercentage;
+        public int KeepMinCp => UserSettings.Default.KeepMinCP;
         public double WalkingSpeedInKilometerPerHour => UserSettings.Default.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => UserSettings.Default.EvolveAllPokemonWithEnoughCandy;
         public bool TransferDuplicatePokemon => UserSettings.Default.TransferDuplicatePokemon;
         public int DelayBetweenPokemonCatch => UserSettings.Default.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
-        public bool PrioritizeIVOverCP => UserSettings.Default.PrioritizeIVOverCP;
+        public bool PrioritizeIvOverCp => UserSettings.Default.PrioritizeIVOverCP;
         public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
-        public string GPXFile => UserSettings.Default.GPXFile;
-        public bool UseGPXPathing => UserSettings.Default.UseGPXPathing;
-        public bool useLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
-        public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
-        public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
+        public string GpxFile => UserSettings.Default.GPXFile;
+        public bool UseGpxPathing => UserSettings.Default.UseGPXPathing;
+        public bool UseLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
+        public bool EvolveAllPokemonAboveIv => UserSettings.Default.EvolveAllPokemonAboveIV;
+        public float EvolveAboveIvValue => UserSettings.Default.EvolveAboveIVValue;
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
         {
-
             get
             {
                 //Type of pokemons to evolve
-                var defaultItems = new List<KeyValuePair<ItemId, int>> {
+                var defaultItems = new List<KeyValuePair<ItemId, int>>
+                {
                     new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
                     new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
                     new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
@@ -99,22 +99,78 @@ namespace PoGo.NecroBot.CLI
                 _itemRecycleFilter = _itemRecycleFilter ?? LoadItemList("Configs\\ConfigItemList.ini", defaultItems);
                 return _itemRecycleFilter;
             }
-
-
         }
 
-        public ICollection<KeyValuePair<ItemId, int>> LoadItemList(string filename, List<KeyValuePair<ItemId, int>> defaultItems)
+
+        public ICollection<PokemonId> PokemonsToEvolve
+        {
+            get
+            {
+                //Type of pokemons to evolve
+                var defaultPokemon = new List<PokemonId>
+                {
+                    PokemonId.Zubat,
+                    PokemonId.Pidgey,
+                    PokemonId.Rattata
+                };
+                _pokemonsToEvolve = _pokemonsToEvolve ??
+                                    LoadPokemonList("Configs\\ConfigPokemonsToEvolve.ini", defaultPokemon);
+                return _pokemonsToEvolve;
+            }
+        }
+
+        public ICollection<PokemonId> PokemonsNotToTransfer
+        {
+            get
+            {
+                //Type of pokemons not to transfer
+                var defaultPokemon = new List<PokemonId>
+                {
+                    PokemonId.Dragonite,
+                    PokemonId.Charizard,
+                    PokemonId.Zapdos,
+                    PokemonId.Snorlax,
+                    PokemonId.Alakazam,
+                    PokemonId.Mew,
+                    PokemonId.Mewtwo
+                };
+                _pokemonsNotToTransfer = _pokemonsNotToTransfer ??
+                                         LoadPokemonList("Configs\\ConfigPokemonsToKeep.ini", defaultPokemon);
+                return _pokemonsNotToTransfer;
+            }
+        }
+
+        //Do not catch those
+        public ICollection<PokemonId> PokemonsNotToCatch
+        {
+            get
+            {
+                //Type of pokemons not to catch
+                var defaultPokemon = new List<PokemonId>
+                {
+                    PokemonId.Zubat,
+                    PokemonId.Pidgey,
+                    PokemonId.Rattata
+                };
+                _pokemonsNotToCatch = _pokemonsNotToCatch ??
+                                      LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.ini", defaultPokemon);
+                return _pokemonsNotToCatch;
+            }
+        }
+
+        public ICollection<KeyValuePair<ItemId, int>> LoadItemList(string filename,
+            List<KeyValuePair<ItemId, int>> defaultItems)
         {
             ICollection<KeyValuePair<ItemId, int>> result = new List<KeyValuePair<ItemId, int>>();
 
-            DirectoryInfo di = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
 
             if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
             {
                 Logger.Write($"Loading File: {filename}");
 
-                var content = string.Empty;
-                using (StreamReader reader = new StreamReader(filename))
+                string content;
+                using (var reader = new StreamReader(filename))
                 {
                     content = reader.ReadToEnd();
                     reader.Close();
@@ -123,18 +179,19 @@ namespace PoGo.NecroBot.CLI
                 content = Regex.Replace(content, @"\\/\*(.|\n)*?\*\/", ""); //todo: supposed to remove comment blocks
 
 
-                StringReader tr = new StringReader(content);
+                var tr = new StringReader(content);
 
                 var itemInfo = tr.ReadLine();
                 while (itemInfo != null)
                 {
-                    string[] itemInfoArray = itemInfo.Split(' ');
-                    string itemName = itemInfoArray.Length > 1 ? itemInfoArray[0] : "";
-                    int itemAmount = 0;
-                    if (!Int32.TryParse(itemInfoArray.Length > 1 ? itemInfoArray[1] : "100", out itemAmount)) itemAmount = 100;
+                    var itemInfoArray = itemInfo.Split(' ');
+                    var itemName = itemInfoArray.Length > 1 ? itemInfoArray[0] : "";
+                    int itemAmount;
+                    if (!int.TryParse(itemInfoArray.Length > 1 ? itemInfoArray[1] : "100", out itemAmount))
+                        itemAmount = 100;
 
                     ItemId item;
-                    if (Enum.TryParse<ItemId>(itemName, out item))
+                    if (Enum.TryParse(itemName, out item))
                     {
                         result.Add(new KeyValuePair<ItemId, int>(item, itemAmount));
                     }
@@ -154,59 +211,18 @@ namespace PoGo.NecroBot.CLI
             return result;
         }
 
-
-        public ICollection<PokemonId> PokemonsToEvolve
-        {
-            get
-            {
-                //Type of pokemons to evolve
-                List<PokemonId> defaultPokemon = new List<PokemonId> {
-                    PokemonId.Zubat, PokemonId.Pidgey, PokemonId.Rattata
-                };
-                _pokemonsToEvolve = _pokemonsToEvolve ?? LoadPokemonList("Configs\\ConfigPokemonsToEvolve.ini", defaultPokemon);
-                return _pokemonsToEvolve;
-            }
-        }
-
-        public ICollection<PokemonId> PokemonsNotToTransfer
-        {
-            get
-            {
-                //Type of pokemons not to transfer
-                List<PokemonId> defaultPokemon = new List<PokemonId> {
-                    PokemonId.Dragonite, PokemonId.Charizard, PokemonId.Zapdos, PokemonId.Snorlax, PokemonId.Alakazam, PokemonId.Mew, PokemonId.Mewtwo
-                };
-                _pokemonsNotToTransfer = _pokemonsNotToTransfer ?? LoadPokemonList("Configs\\ConfigPokemonsToKeep.ini", defaultPokemon);
-                return _pokemonsNotToTransfer;
-            }
-        }
-
-        //Do not catch those
-        public ICollection<PokemonId> PokemonsNotToCatch
-        {
-            get
-            {
-                //Type of pokemons not to catch
-                List<PokemonId> defaultPokemon = new List<PokemonId> {
-                    PokemonId.Zubat, PokemonId.Pidgey, PokemonId.Rattata
-                };
-                _pokemonsNotToCatch = _pokemonsNotToCatch ?? LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.ini", defaultPokemon);
-                return _pokemonsNotToCatch;
-            }
-        }
-
         private static ICollection<PokemonId> LoadPokemonList(string filename, List<PokemonId> defaultPokemon)
         {
             ICollection<PokemonId> result = new List<PokemonId>();
 
-            DirectoryInfo di = Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
 
             if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
             {
                 Logger.Write($"Loading File: {filename}");
 
-                var content = string.Empty;
-                using (StreamReader reader = new StreamReader(filename))
+                string content;
+                using (var reader = new StreamReader(filename))
                 {
                     content = reader.ReadToEnd();
                     reader.Close();
@@ -215,15 +231,15 @@ namespace PoGo.NecroBot.CLI
                 content = Regex.Replace(content, @"\\/\*(.|\n)*?\*\/", ""); //todo: supposed to remove comment blocks
 
 
-                StringReader tr = new StringReader(content);
+                var tr = new StringReader(content);
 
                 var pokemonName = tr.ReadLine();
                 while (pokemonName != null)
                 {
                     PokemonId pokemon;
-                    if (Enum.TryParse<PokemonId>(pokemonName, out pokemon))
+                    if (Enum.TryParse(pokemonName, out pokemon))
                     {
-                        result.Add((PokemonId)pokemon);
+                        result.Add(pokemon);
                     }
                     pokemonName = tr.ReadLine();
                 }
@@ -234,7 +250,7 @@ namespace PoGo.NecroBot.CLI
                 using (var w = File.AppendText(Directory.GetCurrentDirectory() + "\\" + filename))
                 {
                     defaultPokemon.ForEach(pokemon => w.WriteLine(pokemon.ToString()));
-                    defaultPokemon.ForEach(pokemon => result.Add((PokemonId)pokemon));
+                    defaultPokemon.ForEach(pokemon => result.Add(pokemon));
                     w.Close();
                 }
             }

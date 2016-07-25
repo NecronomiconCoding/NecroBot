@@ -53,24 +53,6 @@ namespace PoGo.NecroBot.Logic
             return await RefreshCachedInventory();
         }
 
-        public async Task<GetInventoryResponse> RefreshCachedInventory()
-        {
-            var now = DateTime.UtcNow;
-            var ss = new SemaphoreSlim(10);
-
-            await ss.WaitAsync();
-            try
-            {
-                _lastRefresh = now;
-                _cachedInventory = await _client.Inventory.GetInventory();
-                return _cachedInventory;
-            }
-            finally
-            {
-                ss.Release();
-            }
-        }
-
         public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer(
             bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCp = false,
             IEnumerable<PokemonId> filter = null)
@@ -78,7 +60,8 @@ namespace PoGo.NecroBot.Logic
             var myPokemon = await GetPokemons();
 
             var pokemonList =
-                myPokemon.Where(p => p.DeployedFortId == string.Empty && p.Favorite == 0 && p.Cp < _logicClient.Settings.KeepMinCP)
+                myPokemon.Where(
+                    p => p.DeployedFortId == string.Empty && p.Favorite == 0 && p.Cp < _logicClient.Settings.KeepMinCp)
                     .ToList();
             if (filter != null)
             {
@@ -185,7 +168,7 @@ namespace PoGo.NecroBot.Logic
         public async Task<int> GetItemAmountByType(ItemId type)
         {
             var pokeballs = await GetItems();
-            return pokeballs.FirstOrDefault(i => (ItemId) i.ItemId == type)?.Count ?? 0;
+            return pokeballs.FirstOrDefault(i => i.ItemId == type)?.Count ?? 0;
         }
 
         public async Task<IEnumerable<ItemData>> GetItems()
@@ -207,7 +190,8 @@ namespace PoGo.NecroBot.Logic
                         new ItemData
                         {
                             ItemId = x.ItemId,
-                            Count = x.Count - _logicClient.Settings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
+                            Count =
+                                x.Count - _logicClient.Settings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
         }
@@ -248,7 +232,7 @@ namespace PoGo.NecroBot.Logic
         {
             var myPokemons = await GetPokemons();
             myPokemons = myPokemons.Where(p => p.DeployedFortId == string.Empty).OrderByDescending(p => p.Cp);
-                //Don't evolve pokemon in gyms
+            //Don't evolve pokemon in gyms
             if (filter != null)
             {
                 myPokemons = myPokemons.Where(p => filter.Contains(p.PokemonId));
@@ -276,9 +260,9 @@ namespace PoGo.NecroBot.Logic
                         p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId)*
                     settings.CandyToEvolve;
 
-                if (_logicClient.Settings.EvolveAllPokemonAboveIV)
+                if (_logicClient.Settings.EvolveAllPokemonAboveIv)
                 {
-                    if (PokemonInfo.CalculatePokemonPerfection(pokemon) >= _logicClient.Settings.EvolveAboveIVValue &&
+                    if (PokemonInfo.CalculatePokemonPerfection(pokemon) >= _logicClient.Settings.EvolveAboveIvValue &&
                         familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
                     {
                         pokemonToEvolve.Add(pokemon);
@@ -294,6 +278,24 @@ namespace PoGo.NecroBot.Logic
             }
 
             return pokemonToEvolve;
+        }
+
+        public async Task<GetInventoryResponse> RefreshCachedInventory()
+        {
+            var now = DateTime.UtcNow;
+            var ss = new SemaphoreSlim(10);
+
+            await ss.WaitAsync();
+            try
+            {
+                _lastRefresh = now;
+                _cachedInventory = await _client.Inventory.GetInventory();
+                return _cachedInventory;
+            }
+            finally
+            {
+                ss.Release();
+            }
         }
     }
 }

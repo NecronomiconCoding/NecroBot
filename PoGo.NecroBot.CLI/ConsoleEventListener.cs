@@ -1,20 +1,18 @@
-﻿using System;
+﻿#region using directives
+
+using System;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
+using POGOProtos.Networking.Responses;
+
+#endregion
 
 namespace PoGo.NecroBot.CLI
 {
     public class ConsoleEventListener
     {
-        public void Listen(IEvent evt, Context ctx)
-        {
-            dynamic eve = evt;
-
-            HandleEvent(eve, ctx);
-        }
-
         public void HandleEvent(ProfileEvent evt, Context ctx)
         {
             Logger.Write($"Playing as {evt.Profile.PlayerData.Username ?? ""}");
@@ -42,15 +40,17 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(PokemonEvolveEvent evt, Context ctx)
         {
-            Logger.Write(evt.Result == POGOProtos.Networking.Responses.EvolvePokemonResponse.Types.Result.Success
-                        ? $"{evt.Id} successfully for {evt.Exp}xp"
-                        : $"Failed {evt.Id}. EvolvePokemonOutProto.Result was {evt.Result}, stopping evolving {evt.Id}",
-                    LogLevel.Evolve);
+            Logger.Write(evt.Result == EvolvePokemonResponse.Types.Result.Success
+                ? $"{evt.Id} successfully for {evt.Exp}xp"
+                : $"Failed {evt.Id}. EvolvePokemonOutProto.Result was {evt.Result}, stopping evolving {evt.Id}",
+                LogLevel.Evolve);
         }
 
         public void HandleEvent(TransferPokemonEvent evt, Context ctx)
         {
-            Logger.Write($"{evt.Id} with {evt.Cp} ({evt.Perfection.ToString("0.00")} % perfect) CP (Best: {evt.BestCp} | ({evt.BestPerfection.ToString("0.00")} % perfect))", LogLevel.Transfer);
+            Logger.Write(
+                $"{evt.Id} with {evt.Cp} ({evt.Perfection.ToString("0.00")} % perfect) CP (Best: {evt.BestCp} | ({evt.BestPerfection.ToString("0.00")} % perfect))",
+                LogLevel.Transfer);
         }
 
         public void HandleEvent(ItemRecycledEvent evt, Context ctx)
@@ -88,10 +88,11 @@ namespace PoGo.NecroBot.CLI
             };
 
             var catchStatus = evt.Attempt > 1
-                        ? $"{evt.Status} Attempt #{evt.Attempt}"
-                        : $"{evt.Status}";
+                ? $"{evt.Status} Attempt #{evt.Attempt}"
+                : $"{evt.Status}";
 
-            Logger.Write($"({catchStatus}) | {evt.Id} Lvl {evt.Level} ({evt.Cp}/{evt.MaxCp} CP) ({evt.Perfection.ToString("0.00")}% perfect) | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball.",
+            Logger.Write(
+                $"({catchStatus}) | {evt.Id} Lvl {evt.Level} ({evt.Cp}/{evt.MaxCp} CP) ({evt.Perfection.ToString("0.00")}% perfect) | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball.",
                 LogLevel.Caught);
         }
 
@@ -103,6 +104,13 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(UseBerryEvent evt, Context ctx)
         {
             Logger.Write($"Used, remaining: {evt.Count}", LogLevel.Berry);
+        }
+
+        public void Listen(IEvent evt, Context ctx)
+        {
+            dynamic eve = evt;
+
+            HandleEvent(eve, ctx);
         }
     }
 }

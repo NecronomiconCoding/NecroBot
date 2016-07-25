@@ -1,9 +1,13 @@
 ﻿#region using directives
 
+#region using directives
+
 using System;
 using System.Collections.Generic;
 using System.Xml;
 using PoGo.NecroBot.Logic.Logging;
+
+#endregion
 
 // ReSharper disable All
 
@@ -503,7 +507,7 @@ namespace PoGo.NecroBot.Logic.Utils
             public string Desc = "";
             public string Name = "";
             public string Number = "";
-           // private readonly List<Rtept> _routePoints = new List<Rtept>();
+            // private readonly List<Rtept> _routePoints = new List<Rtept>();
             public string Url = "";
             public string UrlName = "";
 
@@ -672,7 +676,7 @@ namespace PoGo.NecroBot.Logic.Utils
             public string Ele;
             public string Lat;
             public string Lon;
-            public string Name ;
+            public string Name;
             public string Sym;
             public string Time;
 

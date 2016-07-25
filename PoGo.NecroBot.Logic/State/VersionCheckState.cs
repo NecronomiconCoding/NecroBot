@@ -1,35 +1,54 @@
-﻿using System;
+﻿#region using directives
+
+using System;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using PoGo.NecroBot.Logic.Event;
 
+#endregion
+
 namespace PoGo.NecroBot.Logic.State
 {
     public class VersionCheckState : IState
     {
-        public static string _versionUri = "https://raw.githubusercontent.com/NecronomiconCoding/Pokemon-Go-Bot/master/PokemonGo.RocketAPI/Properties/AssemblyInfo.cs";
+        public static string VersionUri =
+            "https://raw.githubusercontent.com/NecronomiconCoding/Pokemon-Go-Bot/master/PokemonGo.RocketAPI/Properties/AssemblyInfo.cs";
 
         public IState Execute(Context ctx, StateMachine machine)
         {
             if (IsLatest())
             {
-                machine.Fire(new NoticeEvent { Message = "Awesome! You have already got the newest version! " + Assembly.GetExecutingAssembly().GetName().Version } );
+                machine.Fire(new NoticeEvent
+                {
+                    Message =
+                        "Awesome! You have already got the newest version! " +
+                        Assembly.GetExecutingAssembly().GetName().Version
+                });
             }
             else
             {
-                machine.Fire(new WarnEvent { Message = "There is a new Version available: https://github.com/NecronomiconCoding/Pokemon-Go-Bot" });
+                machine.Fire(new WarnEvent
+                {
+                    Message = "There is a new Version available: https://github.com/NecronomiconCoding/Pokemon-Go-Bot"
+                });
             }
 
             return new LoginState();
+        }
+
+        private static string DownloadServerVersion()
+        {
+            using (var wC = new WebClient())
+            {
+                return wC.DownloadString(VersionUri);
+            }
         }
 
         public bool IsLatest()
         {
             try
             {
-                string gitAssemblyInfo = DownloadServerVersion();
-
                 var regex = new Regex(@"\[assembly\: AssemblyVersion\(""(\d{1,})\.(\d{1,})\.(\d{1,})\.(\d{1,})""\)\]");
                 var match = regex.Match(DownloadServerVersion());
 
@@ -45,18 +64,10 @@ namespace PoGo.NecroBot.Logic.State
             }
             catch (Exception)
             {
-                // ignored
+                return true; //better than just doing nothing when git server down
             }
 
             return false;
-        }
-
-        private static string DownloadServerVersion()
-        {
-            using (var wC = new WebClient())
-            {
-                return wC.DownloadString(_versionUri);
-            }
         }
     }
 }

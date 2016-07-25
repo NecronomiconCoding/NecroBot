@@ -1,12 +1,16 @@
-﻿using POGOProtos.Enums;
+﻿#region using directives
+
+using POGOProtos.Enums;
 using POGOProtos.Networking.Responses;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Event
 {
     public class PokemonEvolveEvent : IEvent
     {
-        public PokemonId Id;
         public int Exp;
+        public PokemonId Id;
         public EvolvePokemonResponse.Types.Result Result;
     }
 }

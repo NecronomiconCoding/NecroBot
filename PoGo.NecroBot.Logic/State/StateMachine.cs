@@ -1,25 +1,32 @@
-﻿using System;
+﻿#region using directives
+
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 
+#endregion
+
 namespace PoGo.NecroBot.Logic.State
 {
     public delegate void StateMachineEventDeletate(IEvent evt, Context ctx);
+
     public class StateMachine
     {
-        public event StateMachineEventDeletate EventListener;
-        private IState _initialState;
-        private int _delay;
         private Context _ctx;
+        private int _delay;
+        private IState _initialState;
 
-        public StateMachine()
+        public Task AsyncStart(IState initialState, Context ctx)
         {
+            return Task.Run(() => Start(initialState, ctx));
         }
 
-        public void SetFailureState(IState state)
+        public event StateMachineEventDeletate EventListener;
+
+        public void Fire(IEvent evt)
         {
-            _initialState = state;
+            EventListener?.Invoke(evt, _ctx);
         }
 
         public void RequestDelay(int delay)
@@ -27,20 +34,15 @@ namespace PoGo.NecroBot.Logic.State
             _delay = delay;
         }
 
-        public void Fire(IEvent evt)
+        public void SetFailureState(IState state)
         {
-            EventListener?.Invoke(evt, _ctx);
-        }
-
-        public Task AsyncStart(IState initialState, Context ctx)
-        {
-            return Task.Run(() => Start(initialState, ctx));
+            _initialState = state;
         }
 
         public void Start(IState initialState, Context ctx)
         {
             _ctx = ctx;
-            IState state = initialState;
+            var state = initialState;
             do
             {
                 try
@@ -49,9 +51,9 @@ namespace PoGo.NecroBot.Logic.State
                     Thread.Sleep(_delay);
                     _delay = 0;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    Fire(new ErrorEvent { Message = ex.ToString() });
+                    Fire(new ErrorEvent {Message = ex.ToString()});
                     state = _initialState;
                 }
             } while (state != null);

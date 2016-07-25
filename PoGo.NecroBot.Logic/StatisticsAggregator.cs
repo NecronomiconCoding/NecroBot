@@ -1,6 +1,11 @@
-﻿using PoGo.NecroBot.Logic.Event;
+﻿#region using directives
+
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
+using POGOProtos.Networking.Responses;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic
 {
@@ -11,13 +16,6 @@ namespace PoGo.NecroBot.Logic
         public StatisticsAggregator(Statistics stats)
         {
             _stats = stats;
-        }
-
-        public void Listen(IEvent evt, Context ctx)
-        {
-            dynamic eve = evt;
-
-            HandleEvent(eve, ctx);
         }
 
         public void HandleEvent(ProfileEvent evt, Context ctx)
@@ -72,7 +70,7 @@ namespace PoGo.NecroBot.Logic
 
         public void HandleEvent(PokemonCaptureEvent evt, Context ctx)
         {
-            if (evt.Status == POGOProtos.Networking.Responses.CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
+            if (evt.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
             {
                 _stats.TotalExperience += evt.Exp;
                 _stats.TotalPokemons++;
@@ -87,6 +85,13 @@ namespace PoGo.NecroBot.Logic
 
         public void HandleEvent(UseBerryEvent evt, Context ctx)
         {
+        }
+
+        public void Listen(IEvent evt, Context ctx)
+        {
+            dynamic eve = evt;
+
+            HandleEvent(eve, ctx);
         }
     }
 }

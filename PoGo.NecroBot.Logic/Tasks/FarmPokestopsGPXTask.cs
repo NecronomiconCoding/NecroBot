@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region using directives
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,37 +11,12 @@ using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
 
+#endregion
+
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    public static class FarmPokestopsGPXTask
+    public static class FarmPokestopsGpxTask
     {
-        private static List<FortData> GetPokeStops(Context ctx)
-        {
-            var mapObjects = ctx.Client.Map.GetMapObjects().Result;
-
-            // Wasn't sure how to make this pretty. Edit as needed.
-            var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
-                    .Where(
-                        i =>
-                            i.Type == FortType.Checkpoint &&
-                            i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
-                            ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
-                                LocationUtils.CalculateDistanceInMeters(
-                                    ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude,
-                                    i.Latitude, i.Longitude) < ctx.LogicSettings.MaxTravelDistanceInMeters) ||
-                            ctx.LogicSettings.MaxTravelDistanceInMeters == 0
-                    );
-
-            return pokeStops.ToList();
-        }
-
-        private static List<GpxReader.Trk> GetGpxTracks(Context ctx)
-        {
-            var xmlString = File.ReadAllText(ctx.LogicSettings.GPXFile);
-            var readgpx = new GpxReader(xmlString);
-            return readgpx.Tracks;
-        }
-
         public static void Execute(Context ctx, StateMachine machine)
         {
             var tracks = GetGpxTracks(ctx);
@@ -59,14 +36,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                     while (curTrkPt <= maxTrkPt)
                     {
                         var nextPoint = trackPoints.ElementAt(curTrkPt);
-                        var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon));
+                        var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
+                            ctx.Client.CurrentLongitude, Convert.ToDouble(nextPoint.Lat),
+                            Convert.ToDouble(nextPoint.Lon));
 
                         if (distance > 5000)
                         {
                             machine.Fire(new ErrorEvent
                             {
                                 Message =
-                                $"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}"
+                                    $"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}"
                             });
                             break;
                         }
@@ -74,18 +53,27 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         while (pokestopList.Any())
                         {
-                            pokestopList = pokestopList.OrderBy(i => LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
+                            pokestopList =
+                                pokestopList.OrderBy(
+                                    i =>
+                                        LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
+                                            ctx.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
                             var pokeStop = pokestopList[0];
                             pokestopList.RemoveAt(0);
 
                             ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Wait();
 
-                            var fortSearch = ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
+                            var fortSearch =
+                                ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
 
                             if (fortSearch.ExperienceAwarded > 0)
                             {
-                                machine.Fire(new FortUsedEvent { Exp = fortSearch.ExperienceAwarded, Gems = fortSearch.GemsAwarded, Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded) });
-
+                                machine.Fire(new FortUsedEvent
+                                {
+                                    Exp = fortSearch.ExperienceAwarded,
+                                    Gems = fortSearch.GemsAwarded,
+                                    Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
+                                });
                             }
 
                             Thread.Sleep(1000);
@@ -98,11 +86,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                             }
                         }
 
-                        ctx.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt), ctx.LogicSettings.WalkingSpeedInKilometerPerHour, () =>
-                        {
-                            CatchNearbyPokemonsTask.Execute(ctx, machine);
-                            return true;
-                        }).Wait();
+                        ctx.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
+                            ctx.LogicSettings.WalkingSpeedInKilometerPerHour, () =>
+                            {
+                                CatchNearbyPokemonsTask.Execute(ctx, machine);
+                                return true;
+                            }).Wait();
 
                         if (curTrkPt >= maxTrkPt)
                             curTrkPt = 0;
@@ -119,6 +108,33 @@ namespace PoGo.NecroBot.Logic.Tasks
                 else
                     curTrk++;
             } //end tracks
+        }
+
+        private static List<GpxReader.Trk> GetGpxTracks(Context ctx)
+        {
+            var xmlString = File.ReadAllText(ctx.LogicSettings.GpxFile);
+            var readgpx = new GpxReader(xmlString);
+            return readgpx.Tracks;
+        }
+
+        private static List<FortData> GetPokeStops(Context ctx)
+        {
+            var mapObjects = ctx.Client.Map.GetMapObjects().Result;
+
+            // Wasn't sure how to make this pretty. Edit as needed.
+            var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
+                .Where(
+                    i =>
+                        i.Type == FortType.Checkpoint &&
+                        i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
+                        ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
+                            LocationUtils.CalculateDistanceInMeters(
+                                ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude,
+                                i.Latitude, i.Longitude) < ctx.LogicSettings.MaxTravelDistanceInMeters) ||
+                        ctx.LogicSettings.MaxTravelDistanceInMeters == 0
+                );
+
+            return pokeStops.ToList();
         }
     }
 }

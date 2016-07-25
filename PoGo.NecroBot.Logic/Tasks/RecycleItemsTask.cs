@@ -1,6 +1,10 @@
-﻿using System.Threading;
+﻿#region using directives
+
+using System.Threading;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -14,7 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 ctx.Client.Inventory.RecycleItem(item.ItemId, item.Count).Wait();
 
-                machine.Fire(new ItemRecycledEvent { Id = item.ItemId, Count = item.Count });
+                machine.Fire(new ItemRecycledEvent {Id = item.ItemId, Count = item.Count});
 
                 Thread.Sleep(500);
             }
