@@ -403,23 +403,14 @@ namespace PokemonGo.RocketAPI
 			return await AwaitableOnResponseFor<UseItemCaptureMessage, UseItemCaptureResponse>(useItemCaptureMessage, RequestType.UseItemCapture);
         }
 
-        public async Task<UseItemRequest> UseItemXpBoost(ItemId itemId) //changed from UseItem to UseItemXpBoost because of the RequestType
+        public async Task<UseItemXpBoostResponse> UseItemXpBoost(ItemId itemId) //changed from UseItem to UseItemXpBoost because of the RequestType
         {
-            var customRequest = new UseItemRequest
+			UseItemXpBoostMessage useXpBoostMessage = new UseItemXpBoostMessage()
             {
                 ItemId = itemId,
             };
 
-            var useItemRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                new Request.Types.Requests
-                {
-                    Type = (int)RequestType.USE_ITEM_XP_BOOST,
-                    Message = customRequest.ToByteString()
-                });
-            return
-                await
-                    _httpClient.PostProtoPayload<Request, UseItemRequest>($"https://{_apiUrl}/rpc",
-                        useItemRequest);
+			return await AwaitableOnResponseFor<UseItemXpBoostMessage, UseItemXpBoostResponse>(useXpBoostMessage, RequestType.UseItemXpBoost);
         }
     }
 }
