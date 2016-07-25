@@ -30,8 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Google.Protobuf">
-      <HintPath>..\packages\Google.Protobuf.3.0.0-beta3\lib\dotnet\Google.Protobuf.dll</HintPath>
+    <Reference Include="Google.Protobuf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.0.0-beta4\lib\net45\Google.Protobuf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="POGOProtos, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\POGOProtos.1.2.0\lib\net45\POGOProtos.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -83,17 +88,17 @@
     <Compile Include="Utils\StringUtils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PokemonGo.RocketAPI\PokemonGo.RocketAPI.csproj">
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FeroxRev\PokemonGo.RocketAPI\PokemonGo.RocketAPI.csproj">
       <Project>{05d2da44-1b8e-4cf7-94ed-4d52451cd095}</Project>
       <Name>PokemonGo.RocketAPI</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
