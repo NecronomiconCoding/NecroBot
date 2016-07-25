@@ -193,13 +193,13 @@ namespace PokemonGo.RocketAPI.Console {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool PrioritizeIVOverCP {
+        [global::System.Configuration.DefaultSettingValueAttribute("CP")]
+        public string PokemonSelectorCPorIVorBR {
             get {
-                return ((bool)(this["PrioritizeIVOverCP"]));
+                return ((string)(this["PokemonSelectorCPorIVorBR"]));
             }
             set {
-                this["PrioritizeIVOverCP"] = value;
+                this["PokemonSelectorCPorIVorBR"] = value;
             }
         }
         
@@ -272,6 +272,18 @@ namespace PokemonGo.RocketAPI.Console {
             }
             set {
                 this["EvolveAboveIVValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public double BattleRatingIVPercentage {
+            get {
+                return ((double)(this["BattleRatingIVPercentage"]));
+            }
+            set {
+                this["BattleRatingIVPercentage"] = value;
             }
         }
     }

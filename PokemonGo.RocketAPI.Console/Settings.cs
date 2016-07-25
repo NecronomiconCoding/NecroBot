@@ -32,13 +32,35 @@ namespace PokemonGo.RocketAPI.Console
         public int DelayBetweenPokemonCatch => UserSettings.Default.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
-        public bool PrioritizeIVOverCP => UserSettings.Default.PrioritizeIVOverCP;
+        
         public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
         public string GPXFile => UserSettings.Default.GPXFile;
         public bool UseGPXPathing => UserSettings.Default.UseGPXPathing;
         public bool useLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
         public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
         public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
+        public double BattleRatingIVPercentage => UserSettings.Default.BattleRatingIVPercentage;
+
+        public Func<PokemonData,double> PokemonSelector {
+            get
+            {
+                switch (UserSettings.Default.PokemonSelectorCPorIVorBR.ToUpper())
+                {
+                    case "IV":
+                        return PokemonInfo.CalculatePokemonPerfection;
+
+                    case "CP":
+                        return PokemonInfo.CalculateCP;
+                    case "BR":
+                        return p=> PokemonInfo.CalculatePokemonBattleRating(p,0.5);
+                    default:
+                        return PokemonInfo.CalculateCP;
+
+                }
+
+            }
+        } 
+
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter

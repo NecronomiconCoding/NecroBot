@@ -44,8 +44,8 @@
     <Setting Name="KeepMinDuplicatePokemon" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="PrioritizeIVOverCP" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+    <Setting Name="PokemonSelectorCPorIVorBR" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CP</Value>
     </Setting>
     <Setting Name="MaxTravelDistanceInMeters" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1000</Value>
@@ -64,6 +64,9 @@
     </Setting>
     <Setting Name="EvolveAboveIVValue" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">95</Value>
+    </Setting>
+    <Setting Name="BattleRatingIVPercentage" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">50</Value>
     </Setting>
   </Settings>
 </SettingsFile>
