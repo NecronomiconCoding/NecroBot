@@ -40,6 +40,7 @@ namespace PokemonGo.RocketAPI.Console
         public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
         public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
         public int MaxPokeBalls => 100;
+        public int MaxPotions => 25;
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
@@ -50,10 +51,6 @@ namespace PokemonGo.RocketAPI.Console
                 //Type of pokemons to evolve
                 var defaultItems = new List<KeyValuePair<ItemId, int>> {
                     new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
             new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
             new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
             new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),

@@ -18,11 +18,20 @@ namespace PokemonGo.RocketAPI.Logic
         private GetInventoryResponse _cachedInventory;
         private DateTime _lastRefresh;
 
-        private readonly ItemId[] PokeBallTypes = new[] {
+        private readonly ItemId[] PokeBallTypes = new[] 
+        {
             ItemId.ItemPokeBall,
             ItemId.ItemGreatBall,
             ItemId.ItemUltraBall,
             ItemId.ItemMasterBall
+        };
+
+        private readonly ItemId[] PotionTypes = new[]
+        {
+            ItemId.ItemPotion,
+            ItemId.ItemSuperPotion,
+            ItemId.ItemHyperPotion,
+            ItemId.ItemMaxPotion
         };
 
         public Inventory(Client client)
@@ -191,17 +200,17 @@ namespace PokemonGo.RocketAPI.Logic
         {
             var myItems = await GetItems();
             var balls = GetGroupedItemsToRecycle(PokeBallTypes, myItems, settings.MaxPokeBalls);
-
-            return myItems
-                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == (ItemId) x.Item_ && x.Count > f.Value))
-                .Select(
-                    x =>
+            var potions = GetGroupedItemsToRecycle(PotionTypes, myItems, settings.MaxPotions);
+            var other = myItems
+                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == (ItemId)x.Item_ && x.Count > f.Value))
+                .Select(x =>
                         new Item
                         {
                             Item_ = x.Item_,
-                            Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == (ItemId) x.Item_).Value,
+                            Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == (ItemId)x.Item_).Value,
                             Unseen = x.Unseen
-                        }).Concat(balls);
+                        });
+            return other.Concat(balls).Concat(potions);
         }
 
         private IEnumerable<Item> GetGroupedItemsToRecycle(ItemId[] groupItemTypes, IEnumerable<Item> allItems, int maxItems)
