@@ -206,7 +206,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         private IEnumerable<Item> GetGroupedItemsToRecycle(ItemId[] groupItemTypes, IEnumerable<Item> allItems, int maxItems)
         {
-            var groupedItems = allItems.Where(i => groupItemTypes.Contains((ItemId)i.Item_)).OrderBy(i => (MiscEnums.Item)i.Item_);
+            var groupedItems = allItems.Where(i => groupItemTypes.Contains((ItemId)i.Item_)).OrderBy(i => (ItemId)i.Item_);
             int count = groupedItems.Sum(b => b.Count);
 
             var toRecycle = new List<Item>();
