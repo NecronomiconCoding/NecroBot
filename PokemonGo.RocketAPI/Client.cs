@@ -382,35 +382,35 @@ namespace PokemonGo.RocketAPI
         public async Task<PlayerUpdateResponse> UpdatePlayerLocation(double lat, double lng, double alt)
         {
             SetCoordinates(lat, lng, alt);
-			PlayerUpdateMessage playerUpdateMessage = new PlayerUpdateMessage()
+            PlayerUpdateMessage playerUpdateMessage = new PlayerUpdateMessage()
             {
                 Latitude = CurrentLat,
                 Longitude = CurrentLng
             };
 
-			return await AwaitableOnResponseFor<PlayerUpdateMessage, PlayerUpdateResponse>(playerUpdateMessage, RequestType.PlayerUpdate);
+            return await AwaitableOnResponseFor<PlayerUpdateMessage, PlayerUpdateResponse>(playerUpdateMessage, RequestType.PlayerUpdate);
         }
 
         public async Task<UseItemCaptureResponse> UseCaptureItem(ulong encounterId, ItemId itemId, string spawnPointGuid)
         {
-			UseItemCaptureMessage useItemCaptureMessage = new UseItemCaptureMessage()
+            UseItemCaptureMessage useItemCaptureMessage = new UseItemCaptureMessage()
             {
                 EncounterId = encounterId,
                 ItemId = itemId,
                 SpawnPointGuid = spawnPointGuid
             };
 
-			return await AwaitableOnResponseFor<UseItemCaptureMessage, UseItemCaptureResponse>(useItemCaptureMessage, RequestType.UseItemCapture);
+            return await AwaitableOnResponseFor<UseItemCaptureMessage, UseItemCaptureResponse>(useItemCaptureMessage, RequestType.UseItemCapture);
         }
 
         public async Task<UseItemXpBoostResponse> UseItemXpBoost(ItemId itemId) //changed from UseItem to UseItemXpBoost because of the RequestType
         {
-			UseItemXpBoostMessage useXpBoostMessage = new UseItemXpBoostMessage()
+            UseItemXpBoostMessage useXpBoostMessage = new UseItemXpBoostMessage()
             {
                 ItemId = itemId,
             };
 
-			return await AwaitableOnResponseFor<UseItemXpBoostMessage, UseItemXpBoostResponse>(useXpBoostMessage, RequestType.UseItemXpBoost);
+            return await AwaitableOnResponseFor<UseItemXpBoostMessage, UseItemXpBoostResponse>(useXpBoostMessage, RequestType.UseItemXpBoost);
         }
     }
 }

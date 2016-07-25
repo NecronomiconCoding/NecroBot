@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using PokemonGo.RocketAPI.GeneratedCode;
+using PokemonGoDesktop.API.Proto;
 
 #endregion
 
@@ -10,9 +10,9 @@ namespace PokemonGo.RocketAPI.Logic.Utils
 {
     public static class StringUtils
     {
-        public static string GetSummedFriendlyNameOfItemAwardList(IEnumerable<FortSearchResponse.Types.ItemAward> items)
+        public static string GetSummedFriendlyNameOfItemAwardList(IEnumerable<ItemAward> items)
         {
-            var enumerable = items as IList<FortSearchResponse.Types.ItemAward> ?? items.ToList();
+            var enumerable = items as IList<ItemAward> ?? items.ToList();
 
             if (!enumerable.Any())
                 return string.Empty;
