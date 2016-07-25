@@ -31,6 +31,13 @@ namespace PokemonGo.RocketAPI
         bool useLuckyEggsWhileEvolving { get; }
         bool EvolveAllPokemonAboveIV { get; }
         float EvolveAboveIVValue { get; }
+        int MaxPokeBalls { get; }
+        int MaxPotions { get; }
+        int MaxBerries { get; }
+        int MaxRevives { get; }
+        int MaxCpPercent { get; }
+        int MinPokemonReqToEvolveWithLuckyEgg { get; }
+        int MinPokemonToStartEvolving { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
