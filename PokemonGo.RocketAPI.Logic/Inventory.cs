@@ -36,12 +36,19 @@ namespace PokemonGo.RocketAPI.Logic
         private async Task<GetInventoryResponse> GetCachedInventory()
         {
             var now = DateTime.UtcNow;
-            var ss = new SemaphoreSlim(10);
 
             if (_lastRefresh.AddSeconds(30).Ticks > now.Ticks)
             {
                 return _cachedInventory;
             }
+            return await RefreshCachedInventory();
+        }
+
+        public async Task<GetInventoryResponse> RefreshCachedInventory()
+        {
+            var now = DateTime.UtcNow;
+            var ss = new SemaphoreSlim(10);
+
             await ss.WaitAsync();
             try
             {

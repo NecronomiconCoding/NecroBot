@@ -24,6 +24,8 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                 Thread.Sleep(500);
             }
+
+            ctx.Inventory.RefreshCachedInventory().Wait();
         }
     }
 }
