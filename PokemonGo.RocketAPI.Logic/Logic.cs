@@ -14,7 +14,6 @@ using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Logic.Utils;
 // ReSharper disable CyclomaticComplexity
 // ReSharper disable FunctionNeverReturns
-using System.IO;
 
 #endregion
 
