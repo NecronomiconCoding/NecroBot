@@ -20,10 +20,11 @@ namespace PokemonGo.RocketAPI.Logic
     public class Inventory
     {
         private readonly Client _client;
+        private readonly LogicClient _logicClient;
         private GetInventoryResponse _cachedInventory;
         private DateTime _lastRefresh;
 
-        public Inventory(Client client)
+        public Inventory(Client client, LogicClient logicClient)
         {
             _client = client;
         }
@@ -74,7 +75,7 @@ namespace PokemonGo.RocketAPI.Logic
             var myPokemon = await GetPokemons();
 
             var pokemonList =
-                myPokemon.Where(p => p.DeployedFortId == string.Empty && p.Favorite == 0 && p.Cp < _client.Settings.KeepMinCP)
+                myPokemon.Where(p => p.DeployedFortId == string.Empty && p.Favorite == 0 && p.Cp < _logicClient.Settings.KeepMinCP)
                     .ToList();
             if (filter != null)
             {
@@ -100,9 +101,9 @@ namespace PokemonGo.RocketAPI.Logic
                         continue;
 
                     var amountToSkip = familyCandy.Candy/settings.CandyToEvolve;
-                    amountToSkip = amountToSkip > _client.Settings.KeepMinDuplicatePokemon
+                    amountToSkip = amountToSkip > _logicClient.Settings.KeepMinDuplicatePokemon
                         ? amountToSkip
-                        : _client.Settings.KeepMinDuplicatePokemon;
+                        : _logicClient.Settings.KeepMinDuplicatePokemon;
                     if (prioritizeIVoverCp)
                     {
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
@@ -132,7 +133,7 @@ namespace PokemonGo.RocketAPI.Logic
                         p =>
                             p.OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
                                 .ThenBy(n => n.StaminaMax)
-                                .Skip(_client.Settings.KeepMinDuplicatePokemon)
+                                .Skip(_logicClient.Settings.KeepMinDuplicatePokemon)
                                 .ToList());
             }
             return pokemonList
@@ -142,7 +143,7 @@ namespace PokemonGo.RocketAPI.Logic
                     p =>
                         p.OrderByDescending(x => x.Cp)
                             .ThenBy(n => n.StaminaMax)
-                            .Skip(_client.Settings.KeepMinDuplicatePokemon)
+                            .Skip(_logicClient.Settings.KeepMinDuplicatePokemon)
                             .ToList());
         }
 
@@ -197,13 +198,13 @@ namespace PokemonGo.RocketAPI.Logic
             var myItems = await GetItems();
 
             return myItems
-                .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
+                .Where(x => _logicClient.Settings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
                 .Select(
                     x =>
                         new ItemData
                         {
                             ItemId = x.ItemId,
-                            Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
+                            Count = x.Count - _logicClient.Settings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
         }
@@ -272,9 +273,9 @@ namespace PokemonGo.RocketAPI.Logic
                         p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId)*
                     settings.CandyToEvolve;
 
-                if (_client.Settings.EvolveAllPokemonAboveIV)
+                if (_logicClient.Settings.EvolveAllPokemonAboveIV)
                 {
-                    if (PokemonInfo.CalculatePokemonPerfection(pokemon) >= _client.Settings.EvolveAboveIVValue &&
+                    if (PokemonInfo.CalculatePokemonPerfection(pokemon) >= _logicClient.Settings.EvolveAboveIVValue &&
                         familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
                     {
                         pokemonToEvolve.Add(pokemon);

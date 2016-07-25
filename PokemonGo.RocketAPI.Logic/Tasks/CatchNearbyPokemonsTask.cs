@@ -27,8 +27,8 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
             var pokemons = GetNearbyPokemons(ctx);
             foreach (var pokemon in pokemons)
             {
-                if (ctx.Settings.UsePokemonToNotCatchFilter &&
-                    ctx.Settings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
+                if (ctx.LogicSettings.UsePokemonToNotCatchFilter &&
+                    ctx.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
                 {
                     Logger.Write("Skipped " + pokemon.PokemonId);
                     continue;
@@ -51,7 +51,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                 // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
                 if (!Equals(pokemons.ElementAtOrDefault(pokemons.Count() - 1), pokemon))
                 {
-                    Thread.Sleep(ctx.Settings.DelayBetweenPokemonCatch);
+                    Thread.Sleep(ctx.LogicSettings.DelayBetweenPokemonCatch);
                 }
             }
         }

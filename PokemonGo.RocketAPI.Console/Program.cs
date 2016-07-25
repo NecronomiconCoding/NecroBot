@@ -30,7 +30,9 @@ namespace PokemonGo.RocketAPI.Console
             machine.EventListener += aggregator.Listen;
 
             machine.SetFailureState(new LoginState());
-            machine.AsyncStart(new VersionCheckState(), new Context(new Settings()));
+
+
+            machine.AsyncStart(new VersionCheckState(), new Context(new GetClientSettings(), new GetLogicSettings()));
 
             System.Console.ReadLine();
         }

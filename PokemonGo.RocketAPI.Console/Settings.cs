@@ -13,19 +13,32 @@ using PokemonGo.RocketAPI.Logic.Logging;
 
 namespace PokemonGo.RocketAPI.Console
 {
-    public class Settings
+    public class GetClientSettings : ISettings
     {
-        private ICollection<PokemonId> _pokemonsNotToTransfer;
-        private ICollection<PokemonId> _pokemonsToEvolve;
-        private ICollection<PokemonId> _pokemonsNotToCatch;
-        private ICollection<KeyValuePair<ItemId, int>> _itemRecycleFilter;
-
         public AuthType AuthType => (AuthType)Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         public string PtcUsername => UserSettings.Default.PtcUsername;
         public string PtcPassword => UserSettings.Default.PtcPassword;
         public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
         public double DefaultLongitude => UserSettings.Default.DefaultLongitude;
         public double DefaultAltitude => UserSettings.Default.DefaultAltitude;
+
+        public string GoogleRefreshToken { get; set; }
+    }
+
+    public class GetLogicSettings : Logic.LogicSettings
+    {
+
+        private ICollection<PokemonId> _pokemonsNotToTransfer;
+        private ICollection<PokemonId> _pokemonsToEvolve;
+        private ICollection<PokemonId> _pokemonsNotToCatch;
+        private ICollection<KeyValuePair<ItemId, int>> _itemRecycleFilter;
+
+        //public AuthType AuthType => (AuthType)Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
+        //public string PtcUsername => UserSettings.Default.PtcUsername;
+        //public string PtcPassword => UserSettings.Default.PtcPassword;
+        //public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
+        //public double DefaultLongitude => UserSettings.Default.DefaultLongitude;
+        //public double DefaultAltitude => UserSettings.Default.DefaultAltitude;
         public float KeepMinIVPercentage => UserSettings.Default.KeepMinIVPercentage;
         public int KeepMinCP => UserSettings.Default.KeepMinCP;
         public double WalkingSpeedInKilometerPerHour => UserSettings.Default.WalkingSpeedInKilometerPerHour;
@@ -225,7 +238,5 @@ namespace PokemonGo.RocketAPI.Console
             }
             return result;
         }
-
-
     }
 }

@@ -10,19 +10,19 @@ namespace PokemonGo.RocketAPI.Logic.State
     {
         public IState Execute(Context ctx, StateMachine machine)
         {
-            if(ctx.Settings.EvolveAllPokemonAboveIV || ctx.Settings.EvolveAllPokemonWithEnoughCandy)
+            if(ctx.LogicSettings.EvolveAllPokemonAboveIV || ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
                 Tasks.EvolvePokemonTask.Execute(ctx, machine);
             }
 
-            if(ctx.Settings.TransferDuplicatePokemon)
+            if(ctx.LogicSettings.TransferDuplicatePokemon)
             {
                 Tasks.TransferDuplicatePokemonTask.Execute(ctx, machine);
             }
 
             Tasks.RecycleItemsTask.Execute(ctx, machine);
 
-            if(ctx.Settings.UseGPXPathing)
+            if(ctx.LogicSettings.UseGPXPathing)
             {
                 Tasks.FarmPokestopsGPXTask.Execute(ctx, machine);
             }

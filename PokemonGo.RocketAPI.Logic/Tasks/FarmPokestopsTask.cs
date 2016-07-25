@@ -27,8 +27,8 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                             ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
                                 LocationUtils.CalculateDistanceInMeters(
                                     ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude,
-                                    i.Latitude, i.Longitude) < ctx.Settings.MaxTravelDistanceInMeters) ||
-                            ctx.Settings.MaxTravelDistanceInMeters == 0
+                                    i.Latitude, i.Longitude) < ctx.LogicSettings.MaxTravelDistanceInMeters) ||
+                            ctx.LogicSettings.MaxTravelDistanceInMeters == 0
                     );
 
             return pokeStops.ToList();
@@ -41,8 +41,8 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                 ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude);
 
             // Edge case for when the client somehow ends up outside the defined radius
-            if (ctx.Settings.MaxTravelDistanceInMeters != 0 &&
-                distanceFromStart > ctx.Settings.MaxTravelDistanceInMeters)
+            if (ctx.LogicSettings.MaxTravelDistanceInMeters != 0 &&
+                distanceFromStart > ctx.LogicSettings.MaxTravelDistanceInMeters)
             {
                 Logger.Write(
                     $"You're outside of your defined radius! Walking to start ({distanceFromStart}m away) in 5 seconds. Is your Coords.ini file correct?",
@@ -52,7 +52,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                 Logger.Write("Moving to start location now.");
                 ctx.Navigation.HumanLikeWalking(new GeoCoordinate(ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude),
-                    ctx.Settings.WalkingSpeedInKilometerPerHour, null).Wait();
+                    ctx.LogicSettings.WalkingSpeedInKilometerPerHour, null).Wait();
             }
 
             var pokestopList = GetPokeStops(ctx);
@@ -75,7 +75,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                 machine.Fire(new FortTargetEvent { Name= fortInfo.Name, Distance = distance });
 
-                ctx.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude), ctx.Settings.WalkingSpeedInKilometerPerHour, 
+                ctx.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude), ctx.LogicSettings.WalkingSpeedInKilometerPerHour, 
                     () =>
                     {
                         CatchNearbyPokemonsTask.Execute(ctx, machine);
@@ -93,11 +93,11 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                 {
                     stopsHit = 0;
                     RecycleItemsTask.Execute(ctx, machine);
-                    if (ctx.Settings.EvolveAllPokemonWithEnoughCandy || ctx.Settings.EvolveAllPokemonAboveIV)
+                    if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonAboveIV)
                     {
                         EvolvePokemonTask.Execute(ctx, machine);
                     }
-                    if (ctx.Settings.TransferDuplicatePokemon)
+                    if (ctx.LogicSettings.TransferDuplicatePokemon)
                     {
                         TransferDuplicatePokemonTask.Execute(ctx, machine);
                     }

@@ -46,10 +46,10 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
             if (greatBallsCount > 0 && pokemonCp >= 750)
                 return ItemId.ItemGreatBall;
 
-            if (ultraBallsCount > 0 && iV >= ctx.Settings.KeepMinIVPercentage && proba < 0.40)
+            if (ultraBallsCount > 0 && iV >= ctx.LogicSettings.KeepMinIVPercentage && proba < 0.40)
                 return ItemId.ItemUltraBall;
 
-            if (greatBallsCount > 0 && iV >= ctx.Settings.KeepMinIVPercentage && proba < 0.50)
+            if (greatBallsCount > 0 && iV >= ctx.LogicSettings.KeepMinIVPercentage && proba < 0.50)
                 return ItemId.ItemGreatBall;
 
             if (greatBallsCount > 0 && pokemonCp >= 300)
@@ -84,7 +84,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                 bool isLowProbability = probability.HasValue && probability.Value < 0.35;
                 bool isHighCp = encounter.WildPokemon?.PokemonData?.Cp > 400;
-                bool isHighPerfection = PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >= ctx.Settings.KeepMinIVPercentage;
+                bool isHighPerfection = PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData) >= ctx.LogicSettings.KeepMinIVPercentage;
 
                 if ((isLowProbability && isHighCp) || isHighPerfection)
                 {

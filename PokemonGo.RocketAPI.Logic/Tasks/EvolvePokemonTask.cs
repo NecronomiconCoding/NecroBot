@@ -28,12 +28,12 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
         public static void Execute(Context ctx, StateMachine machine)
         {
-            if(ctx.Settings.useLuckyEggsWhileEvolving)
+            if(ctx.LogicSettings.useLuckyEggsWhileEvolving)
             {
                 UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
             }
 
-            var pokemonToEvolveTask = ctx.Inventory.GetPokemonToEvolve(ctx.Settings.PokemonsToEvolve);
+            var pokemonToEvolveTask = ctx.Inventory.GetPokemonToEvolve(ctx.LogicSettings.PokemonsToEvolve);
             pokemonToEvolveTask.Wait();
 
             var pokemonToEvolve = pokemonToEvolveTask.Result;

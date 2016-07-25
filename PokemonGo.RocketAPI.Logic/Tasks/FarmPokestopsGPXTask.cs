@@ -27,8 +27,8 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                             ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
                                 LocationUtils.CalculateDistanceInMeters(
                                     ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude,
-                                    i.Latitude, i.Longitude) < ctx.Settings.MaxTravelDistanceInMeters) ||
-                            ctx.Settings.MaxTravelDistanceInMeters == 0
+                                    i.Latitude, i.Longitude) < ctx.LogicSettings.MaxTravelDistanceInMeters) ||
+                            ctx.LogicSettings.MaxTravelDistanceInMeters == 0
                     );
 
             return pokeStops.ToList();
@@ -36,7 +36,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
         private static List<GpxReader.Trk> GetGpxTracks(Context ctx)
         {
-            var xmlString = File.ReadAllText(ctx.Settings.GPXFile);
+            var xmlString = File.ReadAllText(ctx.LogicSettings.GPXFile);
             var readgpx = new GpxReader(xmlString);
             return readgpx.Tracks;
         }
@@ -80,7 +80,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                             ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Wait();
 
-                            var fortSearch = ctx.Client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
+                            var fortSearch = ctx.LogicClient.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
                             if (fortSearch.ExperienceAwarded > 0)
                             {
                                 machine.Fire(new FortUsedEvent { Exp = fortSearch.ExperienceAwarded, Gems = fortSearch.GemsAwarded, Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded) });
@@ -91,13 +91,13 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                             RecycleItemsTask.Execute(ctx, machine);
 
-                            if (ctx.Settings.TransferDuplicatePokemon)
+                            if (ctx.LogicSettings.TransferDuplicatePokemon)
                             {
                                 TransferDuplicatePokemonTask.Execute(ctx, machine);
                             }
                         }
 
-                        ctx.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt), ctx.Settings.WalkingSpeedInKilometerPerHour, () =>
+                        ctx.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt), ctx.LogicSettings.WalkingSpeedInKilometerPerHour, () =>
                         {
                             CatchNearbyPokemonsTask.Execute(ctx, machine);
                             return true;
