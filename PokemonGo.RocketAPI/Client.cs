@@ -144,20 +144,20 @@ namespace PokemonGo.RocketAPI
                         requestEnvelope);
         }
 
-		private async Task<TResponseTypeMessage> AwaitableOnResponseFor<TResponseTypeMessage>(RequestType requestType)
-			where TResponseTypeMessage : IResponseMessage, IMessage, IMessage<TResponseTypeMessage>, new()
-		{
-			//builds the general envelope with only the request ID
-			var requestEnvelope = RequestEnvelopeBuilder.GetRequestEnvelope(_authTicket, CurrentLat, CurrentLng, CurrentAltitude, requestType);
+        private async Task<TResponseTypeMessage> AwaitableOnResponseFor<TResponseTypeMessage>(RequestType requestType)
+            where TResponseTypeMessage : IResponseMessage, IMessage, IMessage<TResponseTypeMessage>, new()
+        {
+            //builds the general envelope with only the request ID
+            var requestEnvelope = RequestEnvelopeBuilder.GetRequestEnvelope(_authTicket, CurrentLat, CurrentLng, CurrentAltitude, requestType);
 
-			//awaits for the IResponseMessage
-			return
-				await
-					_httpClient.PostProtoPayload<TResponseTypeMessage>($"https://{_apiUrl}/rpc",
-						requestEnvelope);
-		}
+            //awaits for the IResponseMessage
+            return
+                await
+                    _httpClient.PostProtoPayload<TResponseTypeMessage>($"https://{_apiUrl}/rpc",
+                        requestEnvelope);
+        }
 
-		public async Task DoGoogleLogin()
+        public async Task DoGoogleLogin()
         {
             _authType = AuthType.Google;
 
@@ -216,75 +216,74 @@ namespace PokemonGo.RocketAPI
 
         public async Task<FortDetailsResponse> GetFort(string fortId, double fortLat, double fortLng)
         {
-			FortDetailsMessage fortDetailsMessage = new FortDetailsMessage
+            FortDetailsMessage fortDetailsMessage = new FortDetailsMessage
             {
                 FortId = fortId,
                 Latitude = fortLat,
                 Longitude = fortLng
             };
 
-			return await AwaitableOnResponseFor<FortDetailsMessage, FortDetailsResponse>(fortDetailsMessage, RequestType.Encounter);
-		}
+            return await AwaitableOnResponseFor<FortDetailsMessage, FortDetailsResponse>(fortDetailsMessage, RequestType.Encounter);
+        }
 
         public async Task<GetInventoryResponse> GetInventory()
         {
-			return await AwaitableOnResponseFor<GetInventoryResponse>(RequestType.GetInventory);
+            return await AwaitableOnResponseFor<GetInventoryResponse>(RequestType.GetInventory);
         }
 
         public async Task<DownloadItemTemplatesResponse> GetItemTemplates()
         {
-			return await AwaitableOnResponseFor<DownloadItemTemplatesResponse>(RequestType.DownloadItemTemplates);
+            return await AwaitableOnResponseFor<DownloadItemTemplatesResponse>(RequestType.DownloadItemTemplates);
         }
 
-		public async Task<GetMapObjectsResponse> GetMapObjects()
-		{
-			GetMapObjectsMessage mapObjectMessage = new GetMapObjectsMessage()
-			{
-				Latitude = CurrentLat,
-				Longitude = CurrentLng,
-			};
+        public async Task<GetMapObjectsResponse> GetMapObjects()
+        {
+            GetMapObjectsMessage mapObjectMessage = new GetMapObjectsMessage()
+            {
+                Latitude = CurrentLat,
+                Longitude = CurrentLng,
+            };
 
-			mapObjectMessage.SinceTimestampMs.Add(new long[21]);
-			mapObjectMessage.CellId.Add(S2Helper.GetNearbyCellIds(CurrentLng,
-							CurrentLat));
+            mapObjectMessage.SinceTimestampMs.Add(new long[21]);
+            mapObjectMessage.CellId.Add(S2Helper.GetNearbyCellIds(CurrentLng,
+                            CurrentLat));
 
-			RequestEnvelope envelope = RequestEnvelopeBuilder.GetRequestEnvelope(_authTicket, CurrentLat, CurrentLng, CurrentAltitude);
+            RequestEnvelope envelope = RequestEnvelopeBuilder.GetRequestEnvelope(_authTicket, CurrentLat, CurrentLng, CurrentAltitude);
 
-			envelope.WithMessage(new Request() { RequestMessage = mapObjectMessage.ToByteString(), RequestType = RequestType.GetMapObjects })
-				.WithMessage(new Request() { RequestType = RequestType.GetHatchedEggs })
-				.WithMessage(new Request() { RequestType = RequestType.GetInventory, RequestMessage = new GetInventoryMessage() { LastTimestampMs = DateTime.UtcNow.ToUnixTime() }.ToByteString() })
-				.WithMessage(new Request() { RequestType = RequestType.CheckAwardedBadges })
-				.WithMessage(new Request() { RequestType = RequestType.DownloadSettings, RequestMessage = new DownloadSettingsMessage() { Hash = "4a2e9bc330dae60e7b74fc85b98868ab4700802e" }.ToByteString() });
-	
+            envelope.WithMessage(new Request() { RequestMessage = mapObjectMessage.ToByteString(), RequestType = RequestType.GetMapObjects })
+                .WithMessage(new Request() { RequestType = RequestType.GetHatchedEggs })
+                .WithMessage(new Request() { RequestType = RequestType.GetInventory, RequestMessage = new GetInventoryMessage() { LastTimestampMs = DateTime.UtcNow.ToUnixTime() }.ToByteString() })
+                .WithMessage(new Request() { RequestType = RequestType.CheckAwardedBadges })
+                .WithMessage(new Request() { RequestType = RequestType.DownloadSettings, RequestMessage = new DownloadSettingsMessage() { Hash = "4a2e9bc330dae60e7b74fc85b98868ab4700802e" }.ToByteString() });
+    
 
             return
                 await _httpClient.PostProtoPayload<GetMapObjectsResponse>($"https://{_apiUrl}/rpc", envelope);
-		}
+        }
 
-		public async Task<GetPlayerResponse> GetProfile()
+        public async Task<GetPlayerResponse> GetProfile()
         {
             var profileRequest = RequestEnvelopeBuilder.GetInitialRequestEnvelope(AccessToken, _authType, CurrentLat, CurrentLng, CurrentAltitude)
-				.WithMessage(new Request() { RequestType = RequestType.GetPlayerProfile });
+                .WithMessage(new Request() { RequestType = RequestType.GetPlayerProfile });
             return
                 await _httpClient.PostProtoPayload<GetPlayerResponse>($"https://{_apiUrl}/rpc", profileRequest);
         }
 
         public async Task<DownloadSettingsResponse> GetSettings()
         {
-			return await AwaitableOnResponseFor<DownloadSettingsResponse>(RequestType.DownloadSettings);
-		}
+            return await AwaitableOnResponseFor<DownloadSettingsResponse>(RequestType.DownloadSettings);
+        }
 
         public async Task<RecycleInventoryItemResponse> RecycleItem(ItemId itemId, int amount)
         {
-			RecycleInventoryItemMessage recycleObjectMessage = new RecycleInventoryItemMessage
+            RecycleInventoryItemMessage recycleObjectMessage = new RecycleInventoryItemMessage
             {
                 ItemId = (ItemId) Enum.Parse(typeof(ItemId), itemId.ToString()),
                 Count = amount
             };
 
-			return await AwaitableOnResponseFor<RecycleInventoryItemMessage, RecycleInventoryItemResponse>(recycleObjectMessage, RequestType.RecycleInventoryItem);
+            return await AwaitableOnResponseFor<RecycleInventoryItemMessage, RecycleInventoryItemResponse>(recycleObjectMessage, RequestType.RecycleInventoryItem);
         }
-
 
         public void SaveLatLng(double lat, double lng)
         {
@@ -295,25 +294,16 @@ namespace PokemonGo.RocketAPI
 
         public async Task<FortSearchResponse> SearchFort(string fortId, double fortLat, double fortLng)
         {
-            var customRequest = new Request.Types.FortSearchRequest
-            {
-                Id = ByteString.CopyFromUtf8(fortId),
-                FortLatDegrees = Utils.FloatAsUlong(fortLat),
-                FortLngDegrees = Utils.FloatAsUlong(fortLng),
-                PlayerLatDegrees = Utils.FloatAsUlong(CurrentLat),
-                PlayerLngDegrees = Utils.FloatAsUlong(CurrentLng)
+            FortSearchMessage fortSearchMessage = new FortSearchMessage()
+            {	
+                FortId = fortId,
+                FortLatitude = fortLat,
+                FortLongitude = fortLng,
+                PlayerLatitude = CurrentLat,
+                PlayerLongitude = CurrentLng
             };
 
-            var fortDetailRequest = RequestEnvelopeBuilder.GetRequest(_authTicket, CurrentLat, CurrentLng, CurrentAltitude,
-                new Request.Types.Requests
-                {
-                    Type = (int) RequestType.FORT_SEARCH,
-                    Message = customRequest.ToByteString()
-                });
-            return
-                await
-                    _httpClient.PostProtoPayload<Request, FortSearchResponse>($"https://{_apiUrl}/rpc",
-                        fortDetailRequest);
+            return await AwaitableOnResponseFor<FortSearchMessage, FortSearchResponse>(fortSearchMessage, RequestType.FortSearch);
         }
 
         /// <summary>
@@ -364,21 +354,17 @@ namespace PokemonGo.RocketAPI
 
         public async Task SetServer()
         {
-            var serverRequest = RequestEnvelopeBuilder.GetInitialRequest(AccessToken, _authType, CurrentLat, CurrentLng,
+            var serverRequest = RequestEnvelopeBuilder.GetInitialRequestEnvelope(AccessToken, _authType, CurrentLat, CurrentLng,
                 CurrentAltitude,
-                RequestType.GET_PLAYER, RequestType.GET_HATCHED_OBJECTS, RequestType.GET_INVENTORY,
-                RequestType.CHECK_AWARDED_BADGES, RequestType.DOWNLOAD_SETTINGS);
+                RequestType.GetPlayerProfile, RequestType.GetHatchedEggs, RequestType.GetInventory,
+                RequestType.CheckAwardedBadges, RequestType.DownloadSettings);
+
             var serverResponse = await _httpClient.PostProto(Resources.RpcUrl, serverRequest);
 
-            if (serverResponse.Auth == null)
+            if (serverResponse.AuthTicket == null)
                 throw new AccessTokenExpiredException();
 
-            _authTicket = new Request.Types.UnknownAuth
-            {
-                Unknown71 = serverResponse.Auth.Unknown71,
-                Timestamp = serverResponse.Auth.Timestamp,
-                Unknown73 = serverResponse.Auth.Unknown73
-            };
+            _authTicket = serverResponse.AuthTicket;
 
             _apiUrl = serverResponse.ApiUrl;
         }
