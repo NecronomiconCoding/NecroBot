@@ -61,7 +61,7 @@ namespace PokemonGo.RocketAPI.Logic
             var myPokemon = await GetPokemons();
 
             var pokemonList =
-                myPokemon.Where(p => p.DeployedFortId == null && p.Favorite == 0 && p.Cp < _client.Settings.KeepMinCP)
+                myPokemon.Where(p => String.IsNullOrEmpty(p.DeployedFortId) && p.Favorite == 0 && p.Cp < _client.Settings.KeepMinCP)
                     .ToList();
             if (filter != null)
             {
