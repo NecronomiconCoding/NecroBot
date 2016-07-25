@@ -6,6 +6,7 @@ using System.IO.Compression;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 
@@ -22,6 +23,7 @@ namespace PoGo.NecroBot.Logic.State
 
         public IState Execute(Context ctx, StateMachine machine)
         {
+            if (File.Exists(Assembly.GetExecutingAssembly().Location + ".old")) File.Delete(Assembly.GetExecutingAssembly().Location + ".old"); // delete old update files
             if (IsLatest())
             {
                 machine.Fire(new NoticeEvent
@@ -46,14 +48,23 @@ namespace PoGo.NecroBot.Logic.State
                 const string zipName = "update.zip";
                 var baseDir = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent?.Parent?.Parent;
                 var downloadedFilePath = baseDir + "/tmp/";
-                var wrongProjectFilePath = baseDir + "NecroBot-master/";
-
-                //Download Repo , unpack it and move it
+                var wrongProjectFilePath = baseDir + "NecroBot-master/"; //TODO:change
+                
+                //Download binary , unpack it and move it
                 if (DownloadFile(url, downloadedFilePath + zipName))
                 {
                     if (UnpackFile(downloadedFilePath, baseDir?.ToString(), zipName))
                     {
+                        var curFile = Assembly.GetExecutingAssembly().Location;
+                        File.Move(curFile, curFile + ".old"); //renames current exe to .exe.old
                         if (MoveAllFiles(wrongProjectFilePath, baseDir?.ToString()))
+                        {
+                            Logger.Write("Update finished... restarting"); //after moving the new .exe restart
+                            Thread.Sleep(2000);
+                            System.Diagnostics.Process.Start(curFile); 
+                            Environment.Exit(0);
+                        }
+                        else
                         {
                             Logger.Write("Error moving Files inside " + wrongProjectFilePath);
                         }
