@@ -39,7 +39,13 @@ namespace PokemonGo.RocketAPI.Console
         public bool useLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
         public bool EvolveAllPokemonAboveIV => UserSettings.Default.EvolveAllPokemonAboveIV;
         public float EvolveAboveIVValue => UserSettings.Default.EvolveAboveIVValue;
-
+        public int MaxPokeBalls => UserSettings.Default.MaxPokeBalls;
+        public int MaxPotions => UserSettings.Default.MaxPotions;
+        public int MaxBerries => UserSettings.Default.MaxBerries;
+        public int MaxRevives => UserSettings.Default.MaxRevives;
+        public int MaxCpPercent => UserSettings.Default.MaxCpPercent;
+        public int MinPokemonReqToEvolveWithLuckyEgg => UserSettings.Default.MinPokemonReqToEvolveWithLuckyEgg;
+        public int MinPokemonToStartEvolving => UserSettings.Default.MinPokemonToStartEvolving;
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
         {
@@ -144,7 +150,7 @@ namespace PokemonGo.RocketAPI.Console
             {
                 //Type of pokemons to evolve
                 List<PokemonId> defaultPokemon = new List<PokemonId> {
-                    PokemonId.Zubat, PokemonId.Pidgey, PokemonId.Rattata
+                    PokemonId.Zubat, PokemonId.Pidgey, PokemonId.Rattata, PokemonId.Weedle, PokemonId.Caterpie
                 };
                 _pokemonsToEvolve = _pokemonsToEvolve ?? LoadPokemonList("Configs\\ConfigPokemonsToEvolve.ini", defaultPokemon);
                 return _pokemonsToEvolve;
@@ -171,7 +177,7 @@ namespace PokemonGo.RocketAPI.Console
             {
                 //Type of pokemons not to catch
                 List<PokemonId> defaultPokemon = new List<PokemonId> {
-                    PokemonId.Zubat, PokemonId.Pidgey, PokemonId.Rattata
+                    
                 };
                 _pokemonsNotToCatch = _pokemonsNotToCatch ?? LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.ini", defaultPokemon);
                 return _pokemonsNotToCatch;
