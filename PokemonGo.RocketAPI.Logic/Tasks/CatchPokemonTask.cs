@@ -24,7 +24,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                 return;
 
             ctx.Client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId).Wait();
-            Logger.Write($"Used, remaining: {berry.Count}", LogLevel.Berry);
+            Logger.Write($"Used, remaining: {berry.Count - 1}", LogLevel.Berry);
             Thread.Sleep(1500);
         }
 
