@@ -144,7 +144,20 @@ namespace PokemonGo.RocketAPI
                         requestEnvelope);
         }
 
-        public async Task DoGoogleLogin()
+		private async Task<TResponseTypeMessage> AwaitableOnResponseFor<TResponseTypeMessage>(RequestType requestType)
+			where TResponseTypeMessage : IResponseMessage, IMessage, IMessage<TResponseTypeMessage>, new()
+		{
+			//builds the general envelope with only the request ID
+			var requestEnvelope = RequestEnvelopeBuilder.GetRequestEnvelope(_authTicket, CurrentLat, CurrentLng, CurrentAltitude, requestType);
+
+			//awaits for the IResponseMessage
+			return
+				await
+					_httpClient.PostProtoPayload<TResponseTypeMessage>($"https://{_apiUrl}/rpc",
+						requestEnvelope);
+		}
+
+		public async Task DoGoogleLogin()
         {
             _authType = AuthType.Google;
 
