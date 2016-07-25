@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using POGOProtos.Inventory.Item;
-using POGOProtos.Map.Pokemon;
+﻿using System.Collections.Generic;
 using POGOProtos.Enums;
-namespace PokemonGo.RocketAPI.Logic
+using POGOProtos.Inventory.Item;
+
+namespace PoGo.NecroBot.Logic
 {
     public interface LogicSettings
     {

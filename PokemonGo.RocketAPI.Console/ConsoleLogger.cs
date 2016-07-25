@@ -2,11 +2,11 @@
 
 using System;
 using System.Text;
-using PokemonGo.RocketAPI.Logic.Logging;
+using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Console
+namespace PoGo.NecroBot.CLI
 {
     /// <summary>
     ///     The ConsoleLogger is a simple logger which writes all logs to the Console.

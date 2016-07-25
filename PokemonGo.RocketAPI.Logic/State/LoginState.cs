@@ -1,13 +1,8 @@
-﻿using PokemonGo.RocketAPI.Enums;
+﻿using PoGo.NecroBot.Logic.Event;
+using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
-using PokemonGo.RocketAPI.Logic.Event;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PokemonGo.RocketAPI.Logic.State
+namespace PoGo.NecroBot.Logic.State
 {
     public class LoginState : IState
     {

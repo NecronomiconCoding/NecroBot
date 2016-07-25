@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using POGOProtos;
-using POGOProtos.Enums;
 using POGOProtos.Data;
-namespace PokemonGo.RocketAPI
+using POGOProtos.Enums;
+
+namespace PoGo.NecroBot.Logic.PoGoUtils
 {
     public struct BaseStats
     {

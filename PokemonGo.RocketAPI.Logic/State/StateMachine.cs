@@ -1,12 +1,9 @@
-﻿using PokemonGo.RocketAPI.Logic.Event;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Event;
 
-namespace PokemonGo.RocketAPI.Logic.State
+namespace PoGo.NecroBot.Logic.State
 {
     public delegate void StateMachineEventDeletate(IEvent evt, Context ctx);
     public class StateMachine

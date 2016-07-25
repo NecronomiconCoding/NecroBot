@@ -1,14 +1,15 @@
 ﻿#region using directives
 
-using POGOProtos.Networking.Responses;
 using System;
 using System.Globalization;
 using System.Linq;
+using POGOProtos.Networking.Responses;
+
 // ReSharper disable CyclomaticComplexity
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Logic.Utils
+namespace PoGo.NecroBot.Logic.Utils
 {
     public delegate void StatisticsDirtyDelegate();
     public class Statistics

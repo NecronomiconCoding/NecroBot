@@ -1,10 +1,11 @@
-﻿using POGOProtos.Inventory.Item;
-using PokemonGo.RocketAPI.Logic.Event;
-using PokemonGo.RocketAPI.Logic.State;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.State;
+using PokemonGo.RocketAPI;
+using POGOProtos.Inventory.Item;
 
-namespace PokemonGo.RocketAPI.Logic.Tasks
+namespace PoGo.NecroBot.Logic.Tasks
 {
     public class EvolvePokemonTask
     {

@@ -1,13 +1,8 @@
-﻿using PokemonGo.RocketAPI.Logic.Event;
-using PokemonGo.RocketAPI.Logic.State;
-using PokemonGo.RocketAPI.Logic.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 
-namespace PokemonGo.RocketAPI.Logic
+namespace PoGo.NecroBot.Logic
 {
     public class StatisticsAggregator
     {

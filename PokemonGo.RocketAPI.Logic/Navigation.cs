@@ -3,13 +3,15 @@
 using System;
 using System.Device.Location;
 using System.Threading.Tasks;
-using PokemonGo.RocketAPI.Logic.Utils;
+using PoGo.NecroBot.Logic.Utils;
+using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
+
 // ReSharper disable RedundantAssignment
 
 #endregion
 
-namespace PokemonGo.RocketAPI.Logic
+namespace PoGo.NecroBot.Logic
 {
     public class Navigation
     {
