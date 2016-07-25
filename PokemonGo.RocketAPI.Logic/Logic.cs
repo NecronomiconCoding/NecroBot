@@ -280,9 +280,12 @@ namespace PokemonGo.RocketAPI.Logic
                         while (curTrkPt <= maxTrkPt)
                         {
                             var nextPoint = trackPoints.ElementAt(curTrkPt);
-                            if (
-                                LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
-                                    Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon)) > 5000)
+                            var nextPointDistance = LocationUtils.CalculateDistanceInMeters(_client.CurrentLat, _client.CurrentLng,
+                                    Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon));
+                            var sourceLocation = new GeoCoordinate(_client.CurrentLat, _client.CurrentLng);
+                            var DestinationLocation = new GeoCoordinate(Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon));
+                            var nextPointBearing = LocationUtils.DegreeBearing(sourceLocation, DestinationLocation);
+                            if ( nextPointDistance > 5000)
                             {
                                 Logger.Write(
                                     $"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {_client.CurrentLat}, {_client.CurrentLng}",
@@ -291,7 +294,7 @@ namespace PokemonGo.RocketAPI.Logic
                             }
 
                             Logger.Write(
-                                $"Your desired destination is {nextPoint.Lat}, {nextPoint.Lon} your location is {_client.CurrentLat}, {_client.CurrentLng}",
+                                $"Your desired destination is {nextPoint.Lat}, {nextPoint.Lon} your location is {_client.CurrentLat}, {_client.CurrentLng} ({Math.Round(nextPointDistance)}m bearing {Math.Round(nextPointBearing)} degrees.)",
                                 LogLevel.Warning);
 
                             // Wasn't sure how to make this pretty. Edit as needed.
