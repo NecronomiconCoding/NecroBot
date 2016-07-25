@@ -526,24 +526,24 @@ namespace PokemonGo.RocketAPI
                         useItemRequest);
         }
 
-        public async Task<UseIncubatorRequest> UseItemIncubator(ItemId itemId, ulong pokemonId)
+        public async Task<GetIncensePokemonRequest> getIncensedPokemon(ulong Lat, ulong Long)
         {
-            var customRequest = new UseIncubatorRequest
+            var customRequest = new GetIncensePokemonRequest
             {
-                ItemId = itemId,
-                PokemonId = pokemonId
+                player_latitude = Lat,
+                player_longitude = Long
             };
-
-            var useIncubatorRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
+            var sendRequest = RequestBuilder.GetRequest(_unknownAuth, CurrentLat, CurrentLng, CurrentAltitude,
                 new Request.Types.Requests
                 {
-                    Type = (int)RequestType.USE_ITEM_EGG_INCUBATOR,
+                    Type = (int)RequestType.GET_INCENSE_POKEMON,
                     Message = customRequest.ToByteString()
                 });
             return
                 await
-                    _httpClient.PostProtoPayload<Request, UseIncubatorRequest>($"https://{_apiUrl}/rpc",
-                        useIncubatorRequest);
+                _httpClient.PostProtoPayload<Request, GetIncensePokemonRequest>($"https://{_apiUrl}/rpc",
+                sendRequest);
+
         }
     }
 }

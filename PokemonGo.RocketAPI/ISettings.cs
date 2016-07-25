@@ -31,6 +31,7 @@ namespace PokemonGo.RocketAPI
         bool useLuckyEggsWhileEvolving { get; }
         bool EvolveAllPokemonAboveIV { get; }
         float EvolveAboveIVValue { get; }
+        bool useIncense { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 

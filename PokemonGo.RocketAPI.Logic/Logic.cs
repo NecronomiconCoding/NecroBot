@@ -290,6 +290,15 @@ namespace PokemonGo.RocketAPI.Logic
 
         private async Task ExecuteCatchAllNearbyPokemons()
         {
+        //    if (_clientSettings.useIncense)
+        //    {
+        //        await PopIncense(_client);
+        //        ulong currentLat = Convert.ToUInt32(_client.CurrentLat);
+        //        ulong currentLong = Convert.ToUInt32(_client.CurrentLng);
+        //        var response = await _client.getIncensedPokemon(currentLat, currentLong);
+        //        Logger.Write($"{response}", LogLevel.Debug);
+        //    }
+
             Logger.Write("Looking for catchable pokemon..", LogLevel.Debug);
             var mapObjects = await _client.GetMapObjects();
 
@@ -756,6 +765,13 @@ namespace PokemonGo.RocketAPI.Logic
             await Task.Delay(1000);
         }
 
+        private async Task PopIncense(Client client)
+        {
+            await Task.Delay(1000);
+            await UseIncense(client);
+            await Task.Delay(1000);
+        }
+
         public async Task PostLoginExecute()
         {
             while (true)
@@ -856,6 +872,29 @@ namespace PokemonGo.RocketAPI.Logic
             await _client.UseItemXpBoost(ItemId.ItemLuckyEgg);
             Logger.Write($"Used Lucky Egg, remaining: {luckyEgg.Count - 1}", LogLevel.Egg);
             await Task.Delay(3000);
+        }
+
+        public async Task UseIncense(Client client)
+        {
+            var inventory = await _inventory.GetItems();
+            var incenses = inventory.Where(p => (ItemId)p.Item_ == ItemId.ItemIncenseOrdinary);
+            var incense = incenses.FirstOrDefault();
+
+            if (incense == null || incense.Count <= 0)
+                return;
+
+            await _client.UseItemIncense(ItemId.ItemIncenseOrdinary);
+            Logger.Write($"Used incense, remaining: {incense.Count - 1}", LogLevel.Info);
+            await Task.Delay(3000);
+        }
+
+        private async Task UseAllIncubators()
+        {
+            var inventory = await _inventory.GetItems();
+            var incubators = inventory.Where(p => (ItemId)p.Item_ == ItemId.ItemIncubatorBasic || (ItemId)p.Item_ == ItemId.ItemIncubatorBasicUnlimited).ToList();
+            var incubator = incubators.FirstOrDefault();
+
+
         }
     }
 }

@@ -274,5 +274,20 @@ namespace PokemonGo.RocketAPI.Console {
                 this["EvolveAboveIVValue"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("false")]
+        public bool useIncense
+        {
+            get
+            {
+                return ((bool)(this["useIncense"]));
+            }
+            set
+            {
+                this["useIncense"] = value;
+            }
+        }
     }
 }
