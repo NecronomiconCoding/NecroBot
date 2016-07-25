@@ -223,7 +223,7 @@ namespace PokemonGo.RocketAPI
                 Longitude = fortLng
             };
 
-            return await AwaitableOnResponseFor<FortDetailsMessage, FortDetailsResponse>(fortDetailsMessage, RequestType.Encounter);
+            return await AwaitableOnResponseFor<FortDetailsMessage, FortDetailsResponse>(fortDetailsMessage, RequestType.FortDetails);
         }
 
         public async Task<GetInventoryResponse> GetInventory()
