@@ -278,7 +278,7 @@ namespace PokemonGo.RocketAPI
         {
             RecycleInventoryItemMessage recycleObjectMessage = new RecycleInventoryItemMessage
             {
-                ItemId = (ItemId) Enum.Parse(typeof(ItemId), itemId.ToString()),
+                ItemId = itemId,
                 Count = amount
             };
 
