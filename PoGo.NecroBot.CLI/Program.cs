@@ -50,7 +50,7 @@ namespace PoGo.NecroBot.CLI
 
             machine.SetFailureState(new LoginState());
 
-            var context = new Context(new GetClientSettings(), new GetLogicSettings());
+            var context = new Context(new ClientSettings(), new LogicSettings());
             context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
 
             machine.AsyncStart(new VersionCheckState(), context);

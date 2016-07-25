@@ -15,7 +15,7 @@ using POGOProtos.Inventory.Item;
 
 namespace PoGo.NecroBot.CLI
 {
-    public class GetClientSettings : ISettings
+    public class ClientSettings : ISettings
     {
         public AuthType AuthType => (AuthType) Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         public string PtcUsername => UserSettings.Default.PtcUsername;
@@ -27,7 +27,7 @@ namespace PoGo.NecroBot.CLI
         public string GoogleRefreshToken { get; set; }
     }
 
-    public class GetLogicSettings : ILogicSettings
+    public class LogicSettings : ILogicSettings
     {
         private ICollection<KeyValuePair<ItemId, int>> _itemRecycleFilter;
         private ICollection<PokemonId> _pokemonsNotToCatch;
