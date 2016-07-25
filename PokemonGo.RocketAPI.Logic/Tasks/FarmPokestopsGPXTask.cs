@@ -60,25 +60,25 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                     while (curTrkPt <= maxTrkPt)
                     {
                         var nextPoint = trackPoints.ElementAt(curTrkPt);
-                        var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLat, ctx.Client.CurrentLng, Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon));
+                        var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, Convert.ToDouble(nextPoint.Lat), Convert.ToDouble(nextPoint.Lon));
 
                         if (distance > 5000)
                         {
-                            Logger.Write($"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {ctx.Client.CurrentLat}, {ctx.Client.CurrentLng}", LogLevel.Error);
+                            Logger.Write($"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}", LogLevel.Error);
                             break;
                         }
 
-                        Logger.Write($"Your desired destination is {nextPoint.Lat}, {nextPoint.Lon} your location is {ctx.Client.CurrentLat}, {ctx.Client.CurrentLng}", LogLevel.Warning);
+                        Logger.Write($"Your desired destination is {nextPoint.Lat}, {nextPoint.Lon} your location is {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}", LogLevel.Warning);
 
                         var pokestopList = GetPokeStops(ctx);
 
                         while (pokestopList.Any())
                         {
-                            pokestopList = pokestopList.OrderBy(i => LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLat, ctx.Client.CurrentLng, i.Latitude, i.Longitude)).ToList();
+                            pokestopList = pokestopList.OrderBy(i => LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
                             var pokeStop = pokestopList[0];
                             pokestopList.RemoveAt(0);
 
-                            ctx.Client.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Wait();
+                            ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Wait();
 
                             var fortSearch = ctx.Client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
                             if (fortSearch.ExperienceAwarded > 0)

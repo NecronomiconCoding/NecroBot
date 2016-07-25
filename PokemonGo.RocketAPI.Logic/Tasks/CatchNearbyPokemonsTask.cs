@@ -15,7 +15,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
             var mapObjects = ctx.Client.Map.GetMapObjects().Result;
 
             var pokemons = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons)
-                    .OrderBy(i => LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLat, ctx.Client.CurrentLng, i.Latitude, i.Longitude));
+                    .OrderBy(i => LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, i.Latitude, i.Longitude));
 
             return pokemons;
         }
@@ -34,7 +34,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                     continue;
                 }
 
-                var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLat, ctx.Client.CurrentLng, pokemon.Latitude, pokemon.Longitude);
+                var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
                 Thread.Sleep(distance > 100 ? 15000 : 500);
 
                 var encounter = ctx.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;

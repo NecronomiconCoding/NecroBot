@@ -243,7 +243,7 @@ namespace PokemonGo.RocketAPI.Logic
         public async Task<IEnumerable<PokemonData>> GetPokemonToEvolve(IEnumerable<PokemonId> filter = null)
         {
             var myPokemons = await GetPokemons();
-            myPokemons = myPokemons.Where(p => p.DeployedFortId == 0).OrderByDescending(p => p.Cp);
+            myPokemons = myPokemons.Where(p => p.DeployedFortId == string.Empty).OrderByDescending(p => p.Cp);
                 //Don't evolve pokemon in gyms
             if (filter != null)
             {
@@ -273,14 +273,13 @@ namespace PokemonGo.RocketAPI.Logic
                     settings.CandyToEvolve;
 
                 if (_client.Settings.EvolveAllPokemonAboveIV)
+                {
                     if (PokemonInfo.CalculatePokemonPerfection(pokemon) >= _client.Settings.EvolveAboveIVValue &&
                         familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
                     {
                         pokemonToEvolve.Add(pokemon);
                     }
-                    else
-                    {
-                    }
+                }
                 else
                 {
                     if (familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)

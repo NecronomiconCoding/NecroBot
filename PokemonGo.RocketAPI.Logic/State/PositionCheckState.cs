@@ -11,12 +11,50 @@ namespace PokemonGo.RocketAPI.Logic.State
 {
     public class PositionCheckState : IState
     {
+        private static Tuple<double, double> GetLatLngFromFile()
+        {
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini") &&
+                File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini").Contains(":"))
+            {
+                var latlngFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini");
+                var latlng = latlngFromFile.Split(':');
+                if (latlng[0].Length != 0 && latlng[1].Length != 0)
+                {
+                    try
+                    {
+                        double temp_lat = Convert.ToDouble(latlng[0]);
+                        double temp_long = Convert.ToDouble(latlng[1]);
+
+                        if (temp_lat >= -90 && temp_lat <= 90 && temp_long >= -180 && temp_long <= 180)
+                        {
+                            return new Tuple<double, double>(temp_lat, temp_long);
+                        }
+                        else
+                        {
+                            Logger.Write("Coordinates in \"Coords.ini\" file are invalid, using the default coordinates ",
+                            LogLevel.Warning);
+                            return null;
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        Logger.Write("Coordinates in \"Coords.ini\" file are invalid, using the default coordinates ",
+                            LogLevel.Warning);
+                        return null;
+                    }
+                }
+
+            }
+
+            return null;
+        }
+
         public IState Execute(Context ctx, StateMachine machine)
         {
             string coordsPath = Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini";
             if (File.Exists(coordsPath))
             {
-                Tuple<double, double> latLngFromFile = Client.GetLatLngFromFile();
+                Tuple<double, double> latLngFromFile = GetLatLngFromFile();
                 if (latLngFromFile != null)
                 {
                     double distance = LocationUtils.CalculateDistanceInMeters(latLngFromFile.Item1, latLngFromFile.Item2, ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude);
@@ -41,7 +79,7 @@ namespace PokemonGo.RocketAPI.Logic.State
                 }
             }
 
-            Logger.Write($"Make sure Lat & Lng is right. Exit Program if not! Lat: {ctx.Client.CurrentLat} Lng: {ctx.Client.CurrentLng}", LogLevel.Warning);
+            Logger.Write($"Make sure Lat & Lng is right. Exit Program if not! Lat: {ctx.Client.CurrentLatitude} Lng: {ctx.Client.CurrentLongitude}", LogLevel.Warning);
 
             return new FarmState();
         }

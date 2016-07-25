@@ -91,9 +91,9 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                     UseBerry(ctx, pokemon.EncounterId, pokemon.SpawnPointId);
                 }
 
-                var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLat, ctx.Client.CurrentLng, pokemon.Latitude, pokemon.Longitude);
+                var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
 
-                caughtPokemonResponse = ctx.Client.Encounter.CatchPokemon(pokemon.EncounterId, pokemon.SpawnPointId, pokemon.Latitude, pokemon.Longitude, pokeball).Result;
+                caughtPokemonResponse = ctx.Client.Encounter.CatchPokemon(pokemon.EncounterId, pokemon.SpawnPointId, pokeball).Result;
 
                 PokemonCaptureEvent evt = new PokemonCaptureEvent();
                 evt.Status = caughtPokemonResponse.Status;
@@ -102,14 +102,14 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                 {
                     int totalExp = 0;
 
-                    foreach (var xp in caughtPokemonResponse.Scores.Xp)
+                    foreach (var xp in caughtPokemonResponse.CaptureAward.Xp)
                     {
                         totalExp += xp;
                     }
-                    var profile = ctx.Client.GetProfile().Result;
+                    var profile = ctx.Client.Player.GetPlayer().Result;
 
                     evt.Exp = totalExp;
-                    evt.Stardust = profile.Profile.Currency.ToArray()[1].Amount;
+                    evt.Stardust = profile.PlayerData.Currencies.ToArray()[1].Amount;
                 }
 
 

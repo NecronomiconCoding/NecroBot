@@ -18,7 +18,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
             if (luckyEgg == null || luckyEgg.Count <= 0)
                 return;
 
-            client.Inventory.UseItemXpBoost(ItemId.ItemLuckyEgg).Wait();
+            client.Inventory.UseItemXpBoost().Wait();
 
             luckyEgg.Count -= 1;
             machine.Fire(new UseLuckyEggEvent { Count = luckyEgg.Count });
@@ -39,12 +39,12 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
             var pokemonToEvolve = pokemonToEvolveTask.Result;
             foreach (var pokemon in pokemonToEvolve)
             {
-                var evolveTask = ctx.Client.EvolvePokemon(pokemon.Id);
+                var evolveTask = ctx.Client.Inventory.EvolvePokemon(pokemon.Id);
                 evolveTask.Wait();
 
                 var evolvePokemonOutProto = evolveTask.Result;
 
-                machine.Fire(new PokemonEvolveEvent { Id = pokemon.PokemonId, Exp = evolvePokemonOutProto.ExpAwarded, Result = evolvePokemonOutProto.Result });
+                machine.Fire(new PokemonEvolveEvent { Id = pokemon.PokemonId, Exp = evolvePokemonOutProto.ExperienceAwarded, Result = evolvePokemonOutProto.Result });
 
                 Thread.Sleep(3000);
             }

@@ -18,17 +18,15 @@ namespace PokemonGo.RocketAPI.Logic.State
                 switch (ctx.Settings.AuthType)
                 {
                     case AuthType.Ptc:
-                        ctx.Client.DoPtcLogin(ctx.Settings.PtcUsername, ctx.Settings.PtcPassword).Wait();
+                        ctx.Client.Login.DoPtcLogin(ctx.Settings.PtcUsername, ctx.Settings.PtcPassword).Wait();
                         break;
                     case AuthType.Google:
-                        ctx.Client.DoGoogleLogin().Wait();
+                        ctx.Client.Login.DoGoogleLogin().Wait();
                         break;
                     default:
                         machine.Fire(new ErrorEvent { Message= "wrong AuthType" });
                         return null;
                 }
-
-                ctx.Client.SetServer().Wait();
             }
             catch (PtcOfflineException)
             {
@@ -50,7 +48,7 @@ namespace PokemonGo.RocketAPI.Logic.State
 
         public void DownloadProfile(Context ctx, StateMachine machine)
         {
-            ctx.Profile = ctx.Client.GetProfile().Result;
+            ctx.Profile = ctx.Client.Player.GetPlayer().Result;
             machine.Fire(new ProfileEvent { Profile = ctx.Profile });
         }
     }

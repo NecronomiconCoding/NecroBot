@@ -38,7 +38,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
         {
             var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
                 ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude,
-                ctx.Client.CurrentLat, ctx.Client.CurrentLng);
+                ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude);
 
             // Edge case for when the client somehow ends up outside the defined radius
             if (ctx.Settings.MaxTravelDistanceInMeters != 0 &&
@@ -66,11 +66,11 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
             while (pokestopList.Any())
             {
                 //resort
-                pokestopList = pokestopList.OrderBy(i => LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLat, ctx.Client.CurrentLng, i.Latitude, i.Longitude)).ToList();
+                pokestopList = pokestopList.OrderBy(i => LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
                 var pokeStop = pokestopList[0];
                 pokestopList.RemoveAt(0);
 
-                var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLat, ctx.Client.CurrentLng, pokeStop.Latitude, pokeStop.Longitude);
+                var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
 
                 machine.Fire(new FortTargetEvent { Name= fortInfo.Name, Distance = distance });
