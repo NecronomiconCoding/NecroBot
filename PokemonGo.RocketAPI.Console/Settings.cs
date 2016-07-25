@@ -42,6 +42,7 @@ namespace PokemonGo.RocketAPI.Console
         public int MaxPokeBalls => 100;
         public int MaxPotions => 25;
         public int MaxBerries => 50;
+        public int MaxRevives => 25;
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
@@ -52,8 +53,6 @@ namespace PokemonGo.RocketAPI.Console
                 //Type of pokemons to evolve
                 var defaultItems = new List<KeyValuePair<ItemId, int>> {
                     new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
             new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),

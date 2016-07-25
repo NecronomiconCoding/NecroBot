@@ -34,6 +34,7 @@ namespace PokemonGo.RocketAPI
         int MaxPokeBalls { get; }
         int MaxPotions { get; }
         int MaxBerries { get; }
+        int MaxRevives { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
