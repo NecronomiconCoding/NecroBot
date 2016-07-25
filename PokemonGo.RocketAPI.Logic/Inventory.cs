@@ -34,6 +34,15 @@ namespace PokemonGo.RocketAPI.Logic
             ItemId.ItemMaxPotion
         };
 
+        private readonly ItemId[] BerryTypes = new[]
+        {
+            ItemId.ItemRazzBerry,
+            ItemId.ItemBlukBerry,
+            ItemId.ItemNanabBerry,
+            ItemId.ItemWeparBerry,
+            ItemId.ItemPinapBerry
+        };
+
         public Inventory(Client client)
         {
             _client = client;
@@ -201,6 +210,7 @@ namespace PokemonGo.RocketAPI.Logic
             var myItems = await GetItems();
             var balls = GetGroupedItemsToRecycle(PokeBallTypes, myItems, settings.MaxPokeBalls);
             var potions = GetGroupedItemsToRecycle(PotionTypes, myItems, settings.MaxPotions);
+            var berries = GetGroupedItemsToRecycle(BerryTypes, myItems, settings.MaxBerries);
             var other = myItems
                 .Where(x => settings.ItemRecycleFilter.Any(f => f.Key == (ItemId)x.Item_ && x.Count > f.Value))
                 .Select(x =>
@@ -210,7 +220,7 @@ namespace PokemonGo.RocketAPI.Logic
                             Count = x.Count - settings.ItemRecycleFilter.Single(f => f.Key == (ItemId)x.Item_).Value,
                             Unseen = x.Unseen
                         });
-            return other.Concat(balls).Concat(potions);
+            return other.Concat(balls).Concat(potions).Concat(berries);
         }
 
         private IEnumerable<Item> GetGroupedItemsToRecycle(ItemId[] groupItemTypes, IEnumerable<Item> allItems, int maxItems)

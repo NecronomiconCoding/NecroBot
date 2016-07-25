@@ -33,6 +33,7 @@ namespace PokemonGo.RocketAPI
         float EvolveAboveIVValue { get; }
         int MaxPokeBalls { get; }
         int MaxPotions { get; }
+        int MaxBerries { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
