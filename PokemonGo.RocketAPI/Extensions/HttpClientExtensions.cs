@@ -7,6 +7,7 @@ using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo.RocketAPI.GeneratedCode;
 using System.Linq;
 using System.Collections.Generic;
+using PokemonGoDesktop.API.Proto;
 
 #endregion
 
@@ -14,8 +15,7 @@ namespace PokemonGo.RocketAPI.Extensions
 {
     public static class HttpClientExtensions
     {
-        public static async Task<Response> PostProto<TRequest>(this HttpClient client, string url, TRequest request)
-            where TRequest : IMessage<TRequest>
+        public static async Task<ResponseEnvelope> PostProto(this HttpClient client, string url, IMessage request)
         {
             //Encode payload and put in envelop, then send
             var data = request.ToByteString();
@@ -24,42 +24,40 @@ namespace PokemonGo.RocketAPI.Extensions
             //Decode message
             var responseData = await result.Content.ReadAsByteArrayAsync();
             var codedStream = new CodedInputStream(responseData);
-            var decodedResponse = new Response();
+            var decodedResponse = new ResponseEnvelope();
             decodedResponse.MergeFrom(codedStream);
 
             return decodedResponse;
         }
 
-        public static async Task<TResponsePayload> PostProtoPayload<TRequest, TResponsePayload>(this HttpClient client,
-            string url, TRequest request) where TRequest : IMessage<TRequest>
-            where TResponsePayload : IMessage<TResponsePayload>, new()
+        public static async Task<TResponsePayload> PostProtoPayload<TResponsePayload>(this HttpClient client, string url, IMessage request)
+            where TResponsePayload : IResponseMessage, IMessage<TResponsePayload>, new()
         {
             Logger.Write($"Requesting {typeof(TResponsePayload).Name}", LogLevel.Debug);
             var response = await PostProto(client, url, request);
 
-            if (response.Payload.Count == 0)
+            if (response.Returns.Count == 0)
                 throw new InvalidResponseException();
 
             //Decode payload
-            var payload = response.Payload[0];
+            var payload = response.Returns.First();
             var parsedPayload = new TResponsePayload();
             parsedPayload.MergeFrom(payload);
 
             return parsedPayload;
         }
 
-        public static async Task<IEnumerable<TResponsePayload>> PostProtoPayloadExpectMultiple<TRequest, TResponsePayload>(this HttpClient client,
-            string url, TRequest request) where TRequest : IMessage<TRequest>
-            where TResponsePayload : IMessage<TResponsePayload>, new()
+        public static async Task<IEnumerable<TResponsePayload>> PostProtoPayloadExpectMultiple<TResponsePayload>(this HttpClient client, string url, IMessage request)
+            where TResponsePayload : IResponseMessage, IMessage<TResponsePayload>, new()
         {
             Logger.Write($"Requesting multiple {typeof(TResponsePayload).Name}", LogLevel.Debug);
             var response = await PostProto(client, url, request);
 
-            if (response.Payload.Count == 0)
+            if (response.Returns.Count == 0)
                 throw new InvalidResponseException();
 
             //Decode payload
-            return response.Payload.Select(sb =>
+            return response.Returns.Select(sb =>
             {
                 TResponsePayload responsePayload = new TResponsePayload(); //this is slowish. Compiler emits IL for Activator.CreateNew on generic new() constraint. Consider compiled lambda in the future.
                 responsePayload.MergeFrom(sb);
