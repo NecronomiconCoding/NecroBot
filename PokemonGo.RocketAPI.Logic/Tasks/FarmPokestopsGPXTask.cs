@@ -80,7 +80,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
 
                             ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Wait();
 
-                            var fortSearch = ctx.Client.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
+                            var fortSearch = ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
                             if (fortSearch.ExperienceAwarded > 0)
                             {
                                 machine.Fire(new FortUsedEvent { Exp = fortSearch.ExperienceAwarded, Gems = fortSearch.GemsAwarded, Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded) });

@@ -10,9 +10,9 @@ namespace PokemonGo.RocketAPI.Logic.Utils
 {
     public static class StringUtils
     {
-        public static string GetSummedFriendlyNameOfItemAwardList(IEnumerable<FortSearchResponse.Types.Result> items)
+        public static string GetSummedFriendlyNameOfItemAwardList(IEnumerable<POGOProtos.Inventory.Item.ItemAward> items)
         {
-            var enumerable = items as IList<FortSearchResponse.Types.Result> ?? items.ToList();
+            var enumerable = items as IList<POGOProtos.Inventory.Item.ItemAward> ?? items.ToList();
 
             if (!enumerable.Any())
                 return string.Empty;

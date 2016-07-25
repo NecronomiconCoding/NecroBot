@@ -77,7 +77,7 @@ namespace PokemonGo.RocketAPI.Logic
 
         public void HandleEvent(PokemonCaptureEvent evt, Context ctx)
         {
-            if (evt.Status == GeneratedCode.CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
+            if (evt.Status == POGOProtos.Networking.Responses.CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
             {
                 _stats.TotalExperience += evt.Exp;
                 _stats.TotalPokemons++;

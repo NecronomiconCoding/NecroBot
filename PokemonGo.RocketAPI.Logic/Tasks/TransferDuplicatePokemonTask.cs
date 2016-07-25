@@ -1,5 +1,4 @@
-﻿using PokemonGo.RocketAPI.GeneratedCode;
-using PokemonGo.RocketAPI.Logic.Event;
+﻿using PokemonGo.RocketAPI.Logic.Event;
 using PokemonGo.RocketAPI.Logic.State;
 using System;
 using System.Collections.Generic;
@@ -24,7 +23,7 @@ namespace PokemonGo.RocketAPI.Logic.Tasks
                     continue;
                 }
 
-                ctx.Client.TransferPokemon(duplicatePokemon.Id).Wait();
+                ctx.Client.Inventory.TransferPokemon(duplicatePokemon.Id).Wait();
                 ctx.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
 
                 var bestPokemonOfType = ctx.Settings.PrioritizeIVOverCP
