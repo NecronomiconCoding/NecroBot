@@ -1,8 +1,6 @@
 ﻿#region
 
 using System.Linq;
-using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGoDesktop.API.Proto;
 using PokemonGoDesktop.API.Proto.Services;
 using PokemonGoDesktop.API.Common;
