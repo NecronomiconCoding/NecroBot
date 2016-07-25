@@ -725,6 +725,7 @@ namespace PokemonGo.RocketAPI.Logic
                 return;
 
             await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
+            berry.Count--;
             Logger.Write($"Used, remaining: {berry.Count}", LogLevel.Berry);
             await Task.Delay(3000);
         }
