@@ -5,14 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using PokemonGo.RocketAPI.Enums;
-using PokemonGo.RocketAPI.GeneratedCode;
 using POGOProtos.Networking.Responses;
 using POGOProtos.Data;
 using POGOProtos.Enums;
 using POGOProtos.Settings.Master;
 using POGOProtos.Inventory;
 using POGOProtos.Inventory.Item;
+using POGOProtos.Data.Player;
 
 #endregion
 
@@ -179,10 +178,10 @@ namespace PokemonGo.RocketAPI.Logic
             return pokemons.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(limit);
         }
 
-        public async Task<int> GetItemAmountByType(MiscEnums.Item type)
+        public async Task<int> GetItemAmountByType(ItemId type)
         {
             var pokeballs = await GetItems();
-            return pokeballs.FirstOrDefault(i => (MiscEnums.Item) i.Item_ == type)?.Count ?? 0;
+            return pokeballs.FirstOrDefault(i => (ItemId) i.ItemId == type)?.Count ?? 0;
         }
 
         public async Task<IEnumerable<ItemData>> GetItems()
