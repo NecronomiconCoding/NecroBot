@@ -106,6 +106,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
 
                                 CatchNearbyPokemonsTask.Execute(ctx, machine);
+                                //Catch Incense Pokemon
+                                CatchIncensePokemonsTask.Execute(ctx, machine);
                                 UseNearbyPokestopsTask.Execute(ctx, machine);
                                 return true;
                             }
