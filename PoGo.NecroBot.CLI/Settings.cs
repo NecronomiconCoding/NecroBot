@@ -100,7 +100,6 @@ namespace PoGo.NecroBot.CLI
             {
                 settings = new GlobalSettings();
             }
-            Logger.Write($"nigger {fullPath} {ConfigPath} {ProfilePath}");
             settings.Save(fullPath);
             settings.Auth.Load(ConfigPath + "\\auth.json");
 
