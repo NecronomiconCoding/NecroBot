@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.Logic.State
         {
             await RenamePokemonTask.Execute(ctx, machine);
 
-            DisplayPokemonStatsTask.Execute(ctx, machine);
+            await DisplayPokemonStatsTask.Execute(ctx, machine);
 
             if (ctx.LogicSettings.EvolveAllPokemonAboveIv || ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
