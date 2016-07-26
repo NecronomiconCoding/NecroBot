@@ -19,22 +19,22 @@ namespace PoGo.NecroBot.CLI
 {
     internal class AuthSettings
     {
-        //Default Auth Settings
         public AuthType AuthType = AuthType.Google;
         public string GoogleRefreshToken = "";
         public string PtcPassword = "username2";
         public string PtcUsername = "pw";
 
         [JsonIgnore]
-        private string _filePath;
+        private string FilePath;
 
         public void Load(string path)
         {
-            _filePath = path;
+            FilePath = path;
 
-            if (File.Exists(_filePath))
+            if (File.Exists(FilePath))
             {
-                var input = File.ReadAllText(_filePath);
+                //if the file exists, load the settings
+                var input = File.ReadAllText(FilePath);
 
                 JsonSerializerSettings settings = new JsonSerializerSettings();
                 settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
@@ -43,7 +43,7 @@ namespace PoGo.NecroBot.CLI
             }
             else
             {
-                Save(_filePath);
+                Save(FilePath);
             }
         }
 
@@ -62,9 +62,9 @@ namespace PoGo.NecroBot.CLI
 
         public void Save()
         {
-            if(!string.IsNullOrEmpty(_filePath))
+            if(!string.IsNullOrEmpty(FilePath))
             {
-                Save(_filePath);
+                Save(FilePath);
             }
         }
     }
@@ -72,9 +72,6 @@ namespace PoGo.NecroBot.CLI
     public class GlobalSettings
     {
         public static GlobalSettings Default => new GlobalSettings();
-
-        [JsonIgnore]
-        internal AuthSettings Auth = new AuthSettings();
 
         private static string GetAuthPath(string path)
         {
@@ -92,6 +89,7 @@ namespace PoGo.NecroBot.CLI
             GlobalSettings settings = null;
             if (File.Exists(fullPath))
             {
+                //if the file exists, load the settings
                 var input = File.ReadAllText(fullPath);
 
                 JsonSerializerSettings jsonSettings = new JsonSerializerSettings();
@@ -125,7 +123,6 @@ namespace PoGo.NecroBot.CLI
             File.WriteAllText(fullPath, output);
         }
 
-        //Default Global Settings
         public double DefaultAltitude = 10;
         public double DefaultLatitude = 52.379189;
         public double DefaultLongitude = 4.899431;
@@ -146,6 +143,9 @@ namespace PoGo.NecroBot.CLI
         public bool UsePokemonToNotCatchFilter = false;
         public double WalkingSpeedInKilometerPerHour = 50;
         public bool RenameAboveIv = false;
+        
+        [JsonIgnore]
+        internal AuthSettings Auth = new AuthSettings();
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
                 {
@@ -209,7 +209,7 @@ namespace PoGo.NecroBot.CLI
 
     public class ClientSettings : ISettings
     {
-        private readonly GlobalSettings _settings;
+        private GlobalSettings _settings;
 
         public ClientSettings(GlobalSettings settings)
         {
@@ -239,7 +239,7 @@ namespace PoGo.NecroBot.CLI
 
     public class LogicSettings : ILogicSettings
     {
-        private readonly GlobalSettings _settings;
+        private GlobalSettings _settings;
 
         public LogicSettings(GlobalSettings settings)
         {

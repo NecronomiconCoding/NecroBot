@@ -70,12 +70,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var pokemonSettings = ctx.Inventory.GetPokemonSettings().Result;
                     var pokemonFamilies = ctx.Inventory.GetPokemonFamilies().Result;
 
-                    var setting = pokemonSettings.Single(q => q.PokemonId == pokemon.PokemonId);
-                    var family = pokemonFamilies.First(q => q.FamilyId == setting.FamilyId);
+                    var setting = pokemonSettings.FirstOrDefault(q => q.PokemonId == pokemon.PokemonId);
+                    var family = pokemonFamilies.FirstOrDefault(q => q.FamilyId == setting.FamilyId);
 
-                    family.Candy += 3;
+                    if (family != null)
+                    {
+                        family.Candy += caughtPokemonResponse.CaptureAward.Candy.Sum();
 
-                    evt.FamilyCandies = family.Candy;
+                        evt.FamilyCandies = family.Candy;
+                    }
+                    else
+                    {
+                        evt.FamilyCandies = caughtPokemonResponse.CaptureAward.Candy.Sum();
+                    }
                 }
 
 
