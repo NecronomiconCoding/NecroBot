@@ -8,6 +8,7 @@ using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
+using PoGo.NecroBot.Logic.Event;
 
 #endregion
 
@@ -58,8 +59,10 @@ namespace PoGo.NecroBot.CLI
             
             machine.SetFailureState(new LoginState());
 
-
             var context = new Context(new ClientSettings(settings), new LogicSettings(settings));
+
+            context.Navigation.UpdatePositionEvent += (lat, lng) => machine.Fire(new UpdatePositionEvent { Latitude = lat, Longitude = lng });
+
             context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
 
             machine.AsyncStart(new VersionCheckState(), context);
