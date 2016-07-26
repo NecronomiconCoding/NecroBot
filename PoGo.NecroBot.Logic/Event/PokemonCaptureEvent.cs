@@ -23,5 +23,6 @@ namespace PoGo.NecroBot.Logic.Event
         public int Stardust;
         public CatchPokemonResponse.Types.CatchStatus Status;
         public int FamilyCandies;
+        public int BallAmount;
     }
 }
