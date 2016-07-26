@@ -10,7 +10,8 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using PokemonGo.RocketAPI.Rpc;
 using PokemonGo.RocketAPI;
-
+using System.IO;
+using Newtonsoft.Json;
 #endregion
 
 namespace PoGo.NecroBot.CLI
@@ -51,6 +52,9 @@ namespace PoGo.NecroBot.CLI
             machine.EventListener += aggregator.Listen;
 
             machine.SetFailureState(new LoginState());
+
+
+            SettingsUtil.Load();
 
             var context = new Context(new ClientSettings(), new LogicSettings());
             context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
