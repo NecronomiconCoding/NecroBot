@@ -1,17 +1,14 @@
 ﻿#region using directives
 
 using System;
+using System.Diagnostics;
+using System.Threading;
+using System.Windows.Forms;
 using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
-using System.Threading;
-using System.Diagnostics;
-using System.Windows.Forms;
-using PokemonGo.RocketAPI.Rpc;
-using PokemonGo.RocketAPI;
-using System.IO;
-using Newtonsoft.Json;
+
 #endregion
 
 namespace PoGo.NecroBot.CLI
@@ -24,7 +21,7 @@ namespace PoGo.NecroBot.CLI
             {
                 Logger.Write("Google Device Code copied to clipboard");
                 Thread.Sleep(2000);
-                Process.Start(@uri);
+                Process.Start(uri);
                 var thread = new Thread(() => Clipboard.SetText(usercode)); //Copy device code
                 thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
                 thread.Start();
@@ -55,7 +52,7 @@ namespace PoGo.NecroBot.CLI
 
 
             SettingsUtil.Load();
-            
+
             var context = new Context(new ClientSettings(), new LogicSettings());
             context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
 

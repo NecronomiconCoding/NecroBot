@@ -4,27 +4,26 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Logging;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-using Newtonsoft.Json;
 
 #endregion
 
 namespace PoGo.NecroBot.CLI
 {
-
     public static class SettingsUtil
     {
-        public static GlobalSettingsStub settingsToWrite = new GlobalSettingsStub();
+        public static GlobalSettingsStub SettingsToWrite = new GlobalSettingsStub();
 
         public static void Save(string fileName)
         {
             GrabGlobalSettings();
-            string output = JsonConvert.SerializeObject(settingsToWrite, Formatting.Indented);
+            var output = JsonConvert.SerializeObject(SettingsToWrite, Formatting.Indented);
 
             //make configs, always call this function with just "Settings.ini"
             //If someone wants they could just hardcode that here instead of as a param
@@ -36,68 +35,70 @@ namespace PoGo.NecroBot.CLI
         public static void Load()
         {
             if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\Settings.ini"))
-            {//if the file exists, load the settings
+            {
+//if the file exists, load the settings
                 var input = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Settings.ini");
-                GlobalSettingsStub settings = JsonConvert.DeserializeObject<GlobalSettingsStub>(input);
-                SettingsUtil.settingsToWrite = settings;
-                SettingsUtil.WriteGlobalSettings();
-                Logger.Write("Successfully loaded your Settings.ini file", LogLevel.Info);
+                var settings = JsonConvert.DeserializeObject<GlobalSettingsStub>(input);
+                SettingsToWrite = settings;
+                WriteGlobalSettings();
+                Logger.Write("Successfully loaded your Settings.ini file");
             }
             else
             {
-                SettingsUtil.Save("Settings.ini");
-                Logger.Write("Successfully created your Settings.ini file", LogLevel.Info);
+                Save("Settings.ini");
+                Logger.Write("Successfully created your Settings.ini file");
             }
         }
 
-        public static  void WriteGlobalSettings()
+        public static void WriteGlobalSettings()
         {
-            GlobalSettings.AuthType = settingsToWrite.AuthType;
-            GlobalSettings.DefaultAltitude = settingsToWrite.DefaultAltitude;
-            GlobalSettings.DefaultLatitude = settingsToWrite.DefaultLatitude;
-            GlobalSettings.DefaultLongitude = settingsToWrite.DefaultLongitude;
-            GlobalSettings.DelayBetweenPokemonCatch = settingsToWrite.DelayBetweenPokemonCatch;
-            GlobalSettings.EvolveAboveIvValue = settingsToWrite.EvolveAboveIvValue;
-            GlobalSettings.EvolveAllPokemonAboveIv = settingsToWrite.EvolveAllPokemonAboveIv;
-            GlobalSettings.EvolveAllPokemonWithEnoughCandy = settingsToWrite.EvolveAllPokemonWithEnoughCandy;
-            GlobalSettings.GpxFile = settingsToWrite.GpxFile;
-            GlobalSettings.KeepMinCp = settingsToWrite.KeepMinCp;
-            GlobalSettings.KeepMinDuplicatePokemon = settingsToWrite.KeepMinDuplicatePokemon;
-            GlobalSettings.KeepMinIvPercentage = settingsToWrite.KeepMinIvPercentage;
-            GlobalSettings.KeepPokemonsThatCanEvolve =  settingsToWrite.KeepPokemonsThatCanEvolve;
-            GlobalSettings.MaxTravelDistanceInMeters = settingsToWrite.MaxTravelDistanceInMeters;
-            GlobalSettings.PrioritizeIvOverCp = settingsToWrite.PrioritizeIvOverCp;
-            GlobalSettings.PtcPassword = settingsToWrite.PtcPassword;
-            GlobalSettings.PtcUsername = settingsToWrite.PtcUsername;
-            GlobalSettings.TransferDuplicatePokemon = settingsToWrite.TransferDuplicatePokemon;
-            GlobalSettings.UseGpxPathing = settingsToWrite.UseGpxPathing;
-            GlobalSettings.UseLuckyEggsWhileEvolving = settingsToWrite.UseLuckyEggsWhileEvolving;
-            GlobalSettings.UsePokemonToNotCatchFilter = settingsToWrite.UsePokemonToNotCatchFilter;
-            GlobalSettings.WalkingSpeedInKilometerPerHour = settingsToWrite.WalkingSpeedInKilometerPerHour;
+            GlobalSettings.AuthType = SettingsToWrite.AuthType;
+            GlobalSettings.DefaultAltitude = SettingsToWrite.DefaultAltitude;
+            GlobalSettings.DefaultLatitude = SettingsToWrite.DefaultLatitude;
+            GlobalSettings.DefaultLongitude = SettingsToWrite.DefaultLongitude;
+            GlobalSettings.DelayBetweenPokemonCatch = SettingsToWrite.DelayBetweenPokemonCatch;
+            GlobalSettings.EvolveAboveIvValue = SettingsToWrite.EvolveAboveIvValue;
+            GlobalSettings.EvolveAllPokemonAboveIv = SettingsToWrite.EvolveAllPokemonAboveIv;
+            GlobalSettings.EvolveAllPokemonWithEnoughCandy = SettingsToWrite.EvolveAllPokemonWithEnoughCandy;
+            GlobalSettings.GpxFile = SettingsToWrite.GpxFile;
+            GlobalSettings.KeepMinCp = SettingsToWrite.KeepMinCp;
+            GlobalSettings.KeepMinDuplicatePokemon = SettingsToWrite.KeepMinDuplicatePokemon;
+            GlobalSettings.KeepMinIvPercentage = SettingsToWrite.KeepMinIvPercentage;
+            GlobalSettings.KeepPokemonsThatCanEvolve = SettingsToWrite.KeepPokemonsThatCanEvolve;
+            GlobalSettings.MaxTravelDistanceInMeters = SettingsToWrite.MaxTravelDistanceInMeters;
+            GlobalSettings.PrioritizeIvOverCp = SettingsToWrite.PrioritizeIvOverCp;
+            GlobalSettings.PtcPassword = SettingsToWrite.PtcPassword;
+            GlobalSettings.PtcUsername = SettingsToWrite.PtcUsername;
+            GlobalSettings.TransferDuplicatePokemon = SettingsToWrite.TransferDuplicatePokemon;
+            GlobalSettings.UseGpxPathing = SettingsToWrite.UseGpxPathing;
+            GlobalSettings.UseLuckyEggsWhileEvolving = SettingsToWrite.UseLuckyEggsWhileEvolving;
+            GlobalSettings.UsePokemonToNotCatchFilter = SettingsToWrite.UsePokemonToNotCatchFilter;
+            GlobalSettings.WalkingSpeedInKilometerPerHour = SettingsToWrite.WalkingSpeedInKilometerPerHour;
         }
+
         public static void GrabGlobalSettings()
         {
-            settingsToWrite.AuthType = GlobalSettings.AuthType;
-            settingsToWrite.DefaultAltitude = GlobalSettings.DefaultAltitude;
-            settingsToWrite.DefaultLatitude = GlobalSettings.DefaultLatitude;
-            settingsToWrite.DefaultLongitude = GlobalSettings.DefaultLongitude;
-            settingsToWrite.DelayBetweenPokemonCatch = GlobalSettings.DelayBetweenPokemonCatch;
-            settingsToWrite.EvolveAboveIvValue = GlobalSettings.EvolveAboveIvValue;
-            settingsToWrite.EvolveAllPokemonAboveIv = GlobalSettings.EvolveAllPokemonAboveIv;
-            settingsToWrite.EvolveAllPokemonWithEnoughCandy = GlobalSettings.EvolveAllPokemonWithEnoughCandy;
-            settingsToWrite.GpxFile = GlobalSettings.GpxFile;
-            settingsToWrite.KeepMinCp = GlobalSettings.KeepMinCp;
-            settingsToWrite.KeepMinDuplicatePokemon = GlobalSettings.KeepMinDuplicatePokemon;
-            settingsToWrite.KeepMinIvPercentage = GlobalSettings.KeepMinIvPercentage;
-            settingsToWrite.KeepPokemonsThatCanEvolve = GlobalSettings.KeepPokemonsThatCanEvolve;
-            settingsToWrite.MaxTravelDistanceInMeters = GlobalSettings.MaxTravelDistanceInMeters;
-            settingsToWrite.PrioritizeIvOverCp = GlobalSettings.PrioritizeIvOverCp;
-            settingsToWrite.PtcPassword = GlobalSettings.PtcPassword;
-            settingsToWrite.PtcUsername = GlobalSettings.PtcUsername;
-            settingsToWrite.TransferDuplicatePokemon = GlobalSettings.TransferDuplicatePokemon;
-            settingsToWrite.UseLuckyEggsWhileEvolving = GlobalSettings.UseLuckyEggsWhileEvolving;
-            settingsToWrite.UsePokemonToNotCatchFilter = GlobalSettings.UsePokemonToNotCatchFilter;
-            settingsToWrite.WalkingSpeedInKilometerPerHour = GlobalSettings.WalkingSpeedInKilometerPerHour;
+            SettingsToWrite.AuthType = GlobalSettings.AuthType;
+            SettingsToWrite.DefaultAltitude = GlobalSettings.DefaultAltitude;
+            SettingsToWrite.DefaultLatitude = GlobalSettings.DefaultLatitude;
+            SettingsToWrite.DefaultLongitude = GlobalSettings.DefaultLongitude;
+            SettingsToWrite.DelayBetweenPokemonCatch = GlobalSettings.DelayBetweenPokemonCatch;
+            SettingsToWrite.EvolveAboveIvValue = GlobalSettings.EvolveAboveIvValue;
+            SettingsToWrite.EvolveAllPokemonAboveIv = GlobalSettings.EvolveAllPokemonAboveIv;
+            SettingsToWrite.EvolveAllPokemonWithEnoughCandy = GlobalSettings.EvolveAllPokemonWithEnoughCandy;
+            SettingsToWrite.GpxFile = GlobalSettings.GpxFile;
+            SettingsToWrite.KeepMinCp = GlobalSettings.KeepMinCp;
+            SettingsToWrite.KeepMinDuplicatePokemon = GlobalSettings.KeepMinDuplicatePokemon;
+            SettingsToWrite.KeepMinIvPercentage = GlobalSettings.KeepMinIvPercentage;
+            SettingsToWrite.KeepPokemonsThatCanEvolve = GlobalSettings.KeepPokemonsThatCanEvolve;
+            SettingsToWrite.MaxTravelDistanceInMeters = GlobalSettings.MaxTravelDistanceInMeters;
+            SettingsToWrite.PrioritizeIvOverCp = GlobalSettings.PrioritizeIvOverCp;
+            SettingsToWrite.PtcPassword = GlobalSettings.PtcPassword;
+            SettingsToWrite.PtcUsername = GlobalSettings.PtcUsername;
+            SettingsToWrite.TransferDuplicatePokemon = GlobalSettings.TransferDuplicatePokemon;
+            SettingsToWrite.UseLuckyEggsWhileEvolving = GlobalSettings.UseLuckyEggsWhileEvolving;
+            SettingsToWrite.UsePokemonToNotCatchFilter = GlobalSettings.UsePokemonToNotCatchFilter;
+            SettingsToWrite.WalkingSpeedInKilometerPerHour = GlobalSettings.WalkingSpeedInKilometerPerHour;
         }
     }
 
@@ -112,49 +113,50 @@ namespace PoGo.NecroBot.CLI
         public static float KeepMinIvPercentage = 85;
         public static int KeepMinCp = 1000;
         public static double WalkingSpeedInKilometerPerHour = 50;
-        public static bool EvolveAllPokemonWithEnoughCandy = false;
-        public static bool KeepPokemonsThatCanEvolve = false;
+        public static bool EvolveAllPokemonWithEnoughCandy;
+        public static bool KeepPokemonsThatCanEvolve;
         public static bool TransferDuplicatePokemon = true;
         public static int DelayBetweenPokemonCatch = 5000;
-        public static bool UsePokemonToNotCatchFilter = false;
+        public static bool UsePokemonToNotCatchFilter;
         public static int KeepMinDuplicatePokemon = 1;
-        public static bool PrioritizeIvOverCp = false;
+        public static bool PrioritizeIvOverCp;
         public static int MaxTravelDistanceInMeters = 1000;
         public static string GpxFile = "GPXFile.GPX";
-        public static bool UseGpxPathing = false;
-        public static bool UseLuckyEggsWhileEvolving = false;
-        public static bool EvolveAllPokemonAboveIv = false;
+        public static bool UseGpxPathing;
+        public static bool UseLuckyEggsWhileEvolving;
+        public static bool EvolveAllPokemonAboveIv;
         public static float EvolveAboveIvValue = 95;
     }
 
     public class GlobalSettingsStub
     {
         public AuthType AuthType;
-        public string PtcUsername;
-        public string PtcPassword;
+        public double DefaultAltitude;
         public double DefaultLatitude;
         public double DefaultLongitude;
-        public double DefaultAltitude;
-        public float KeepMinIvPercentage;
-        public int KeepMinCp;
-        public double WalkingSpeedInKilometerPerHour;
-        public bool EvolveAllPokemonWithEnoughCandy;
-        public bool KeepPokemonsThatCanEvolve;
-        public bool TransferDuplicatePokemon;
         public int DelayBetweenPokemonCatch;
-        public bool UsePokemonToNotCatchFilter;
-        public int KeepMinDuplicatePokemon;
-        public bool PrioritizeIvOverCp;
-        public int MaxTravelDistanceInMeters;
+        public float EvolveAboveIvValue;
+        public bool EvolveAllPokemonAboveIv;
+        public bool EvolveAllPokemonWithEnoughCandy;
         public string GpxFile;
+        public int KeepMinCp;
+        public int KeepMinDuplicatePokemon;
+        public float KeepMinIvPercentage;
+        public bool KeepPokemonsThatCanEvolve;
+        public int MaxTravelDistanceInMeters;
+        public bool PrioritizeIvOverCp;
+        public string PtcPassword;
+        public string PtcUsername;
+        public bool TransferDuplicatePokemon;
         public bool UseGpxPathing;
         public bool UseLuckyEggsWhileEvolving;
-        public bool EvolveAllPokemonAboveIv;
-        public float EvolveAboveIvValue;
+        public bool UsePokemonToNotCatchFilter;
+        public double WalkingSpeedInKilometerPerHour;
     }
 
     public class ClientSettings : ISettings
     {
+        private string _googleRefreshToken;
         public AuthType AuthType => GlobalSettings.AuthType;
         public string PtcUsername => GlobalSettings.PtcUsername;
         public string PtcPassword => GlobalSettings.PtcPassword;
@@ -162,7 +164,6 @@ namespace PoGo.NecroBot.CLI
         public double DefaultLongitude => GlobalSettings.DefaultLongitude;
         public double DefaultAltitude => GlobalSettings.DefaultAltitude;
 
-        private string _googleRefreshToken;
         public string GoogleRefreshToken
         {
             get
@@ -405,5 +406,4 @@ namespace PoGo.NecroBot.CLI
             return result;
         }
     }
-
 }
