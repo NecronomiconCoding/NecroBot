@@ -28,7 +28,7 @@ namespace PoGo.NecroBot.Logic.State
 
         public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
-            AutoUpdate = ctx.Settings.AutoUpdate;
+            AutoUpdate = ctx.LogicSettings.AutoUpdate;
             CleanupOldFiles();
             var needupdate = IsLatest();
             if (!needupdate || !AutoUpdate)
