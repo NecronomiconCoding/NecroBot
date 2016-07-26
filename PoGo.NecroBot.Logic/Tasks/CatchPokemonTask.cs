@@ -86,7 +86,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var pokemonSettings = await ctx.Inventory.GetPokemonSettings();
                     var pokemonFamilies = await ctx.Inventory.GetPokemonFamilies();
 
-                    var setting = pokemonSettings.FirstOrDefault(q => q.PokemonId == pokemon.PokemonId);
+                    var setting =
+                        pokemonSettings.FirstOrDefault(
+                            q =>
+                                q.PokemonId ==
+                                (encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId));
                     var family = pokemonFamilies.FirstOrDefault(q => q.FamilyId == setting.FamilyId);
 
                     if (family != null)
