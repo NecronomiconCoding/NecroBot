@@ -13,6 +13,7 @@ using PokemonGo.RocketAPI.Helpers;
 using PokemonGo.RocketAPI.Logic.Utils;
 using System.Device.Location;
 using System.IO;
+using PokemonGo.RocketAPI.Callbacks;
 
 #endregion
 
@@ -28,14 +29,15 @@ namespace PokemonGo.RocketAPI.Logic
         private readonly Statistics _stats;
         private int pokestopCounter, pokestopCounterFull;
         private int pokemonCounter;
-
-        public Logic(ISettings clientSettings)
+        private IPokeCallBack _callback;
+        public Logic(ISettings clientSettings, IPokeCallBack callback)
         {
             _clientSettings = clientSettings;
             _client = new Client(_clientSettings);
             _inventory = new Inventory(_client);
             _navigation = new Navigation(_client);
             _stats = new Statistics();
+            _callback = callback;
         }
 
         private async Task CatchEncounter(EncounterResponse encounter, MapPokemon pokemon)
@@ -51,6 +53,7 @@ namespace PokemonGo.RocketAPI.Logic
                 if (pokeball == MiscEnums.Item.ITEM_UNKNOWN)
                 {
                     Logger.Write($"No Pokeballs - We missed a {pokemon.PokemonId} with CP {encounter?.WildPokemon?.PokemonData?.Cp}", LogLevel.Caught);
+                    _callback.OnNoPokeBalls(pokemon, encounter?.WildPokemon?.PokemonData);
                     return;
                 }
                 if ((probability.HasValue && probability.Value < 0.35 && encounter.WildPokemon?.PokemonData?.Cp > 400) ||
@@ -98,10 +101,12 @@ namespace PokemonGo.RocketAPI.Logic
                         else if (cp >= 850) lvl = LogLevel.CaughtUltra;
                         else if(cp >= 500) lvl = LogLevel.CaughtGreat;
                         Logger.Write($"#{pokemonCounter} | Caught: {pokemon.PokemonId} @ {encounter?.WildPokemon?.PokemonData?.Cp} CP{attempts}", lvl);
+                        _callback.OnCaught(pokemonCounter, pokemon, encounter?.WildPokemon?.PokemonData, attempts);
                     }
                     else if (caughtPokemonResponse.Status.ToString() == "CatchFail")
                     {
                         Logger.Write($"#{pokemonCounter} | Escaped: {pokemon.PokemonId} @ {encounter?.WildPokemon?.PokemonData?.Cp} CP{attempts}", LogLevel.CatchFail);
+                        _callback.OnCatchFailed(pokemonCounter, pokemon, encounter?.WildPokemon?.PokemonData, attempts);
                     }
                 }
                 attemptCounter++;
@@ -232,12 +237,13 @@ namespace PokemonGo.RocketAPI.Logic
                     {
                         Logger.Write($"{pokemon.PokemonId} evolved! {pokemon.Cp} CP -> {evolvePokemonOutProto.EvolvedPokemon.Cp} CP ({evolvePokemonOutProto.ExpAwarded}xp)",
                             LogLevel.Evolve);
+                        _callback.OnEvolved(pokemon, evolvePokemonOutProto);
                     }
                     else
                         Logger.Write(
                             $"Failed {pokemon.PokemonId}. EvolvePokemonOutProto.Result was {evolvePokemonOutProto.Result}, stopping evolving {pokemon.PokemonId}",
                             LogLevel.Evolve);
-
+                    _callback.OnEvolvedFailed(pokemon, evolvePokemonOutProto);
                     await Task.Delay(3000);
                 }
             }
@@ -364,7 +370,10 @@ namespace PokemonGo.RocketAPI.Logic
                     if (fortSearch.GemsAwarded != 0)
                         PokeStopOutput.Write($", Gems: {fortSearch.GemsAwarded}");
                     if (fortSearch.PokemonDataEgg != null)
+                    {
                         PokeStopOutput.Write($", Egg Found!");
+                        _callback.OnEggFound();
+                    }
                     if (StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded) != string.Empty)
                         PokeStopOutput.Write($", {StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)} ");
                     Logger.Write(PokeStopOutput.ToString(), LogLevel.Pokestop);
@@ -456,6 +465,7 @@ namespace PokemonGo.RocketAPI.Logic
                 var transfer = await _client.RecycleItem((ItemId) item.Item_, item.Count);
                 string label = ((ItemId)item.Item_).ToString();
                 RecycleOutput.Write($"{(label.Length > 5 ? label.Substring(4, label.Length - 4) : label)} (x{item.Count}) ");
+                _callback.OnRecycled(item);
                 _stats.AddItemsRemoved(item.Count);
                 _stats.UpdateConsoleTitle(_inventory);
                 await Task.Delay(500);
@@ -482,6 +492,7 @@ namespace PokemonGo.RocketAPI.Logic
                     _stats.IncreasePokemonsTransfered();
                     _stats.UpdateConsoleTitle(_inventory);
                     Logger.Write($"{unwantedPokemon.PokemonId} @ {unwantedPokemon.Cp} CP (Unwanted)", LogLevel.Transfer);
+                    _callback.OnTransfer(unwantedPokemon);
                     await Task.Delay(500);
                 }
             }
@@ -495,6 +506,7 @@ namespace PokemonGo.RocketAPI.Logic
                 _stats.UpdateConsoleTitle(_inventory);
                 var bestPokemonOfType = await _inventory.GetHighestPokemonOfTypeByCP(duplicatePokemon);
                 Logger.Write($"{duplicatePokemon.PokemonId} @ {duplicatePokemon.Cp} CP (Best: {bestPokemonOfType.Cp} CP)", LogLevel.Transfer);
+                _callback.OnTransfer(duplicatePokemon);
                 await Task.Delay(500);
             }
         }
@@ -510,6 +522,7 @@ namespace PokemonGo.RocketAPI.Logic
 
             var useRaspberry = await _client.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count--;
+            _callback.OnBerryUsed(berry);
             await Task.Delay(1000);
         }
 

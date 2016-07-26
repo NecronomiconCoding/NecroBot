@@ -8,6 +8,8 @@ using System.Net.Sockets;
 using Newtonsoft.Json.Linq;
 using PokemonGo.RocketAPI.Console.Server.Models.Common;
 using PokemonGo.RocketAPI.Console.Server.Models.Constants;
+using PokemonGo.RocketAPI.Console.Server.Models;
+using PokemonGo.RocketAPI.GeneratedCode;
 
 namespace PokemonGo.RocketAPI.Console.Server
 {
@@ -94,11 +96,21 @@ namespace PokemonGo.RocketAPI.Console.Server
         /// <param name="message"></param>
         void IServerCallBack.OnClientMessageRecieved(TcpClient client, string message)
         {
-
             foreach (IServerCallBack cb in callbacks)
             {
                 cb.OnClientMessageRecieved(client, message);
             }
+        }
+
+        public void sendData<T>(ResponseModel<T> model)
+        {
+            devices.ForEach(a =>
+            {
+                if (a.client.Connected)
+                {
+                    base.sendData<T>(a.client, model);
+                }
+            });
         }
 
         #endregion

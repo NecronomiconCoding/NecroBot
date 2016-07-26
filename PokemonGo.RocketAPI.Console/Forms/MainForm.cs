@@ -12,13 +12,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PokemonGo.RocketAPI.GeneratedCode;
 using PokemonGo.RocketAPI.Console.Server;
+using PokemonGo.RocketAPI.Console.Server.Models;
+using PokemonGo.RocketAPI.Console.Server.Models.Constants;
 
 namespace PokemonGo.RocketAPI.Console.Forms
 {
     public partial class MainForm : Form, IPokeCallBack
     {
-        private Thread pokeThread;
         private Settings settings = null;
+        private IPokeCallBack callback;
         private PokeServer pokeServer = new PokeServer(4711);
         public MainForm()
         {
@@ -36,8 +38,7 @@ namespace PokemonGo.RocketAPI.Console.Forms
                     AuthTypeComboBox.SelectedIndex = 1;
                     break;
             }
-
-            pokeThread = new Thread(new ThreadStart(OnStart));
+            this.callback = this;
         }
 
         public void OnStart()
@@ -46,7 +47,7 @@ namespace PokemonGo.RocketAPI.Console.Forms
             {
                 try
                 {
-                    new Logic.Logic(settings).Execute().Wait();
+                    new Logic.Logic(settings, callback).Execute().Wait();
                 }
                 catch (PtcOfflineException ptc)
                 {
@@ -54,7 +55,7 @@ namespace PokemonGo.RocketAPI.Console.Forms
                         LogLevel.Error);
                     Logger.Write("Trying again in 20 seconds...");
                     Thread.Sleep(20000);
-                    new Logic.Logic(settings).Execute().Wait();
+                    new Logic.Logic(settings,callback).Execute().Wait();
                 }
                 catch (AccountNotVerifiedException anv)
                 {
@@ -64,7 +65,7 @@ namespace PokemonGo.RocketAPI.Console.Forms
                 catch (Exception ex)
                 {
                     Logger.Write($"Unhandled exception: {ex}", LogLevel.Error);
-                    new Logic.Logic(settings).Execute().Wait();
+                    new Logic.Logic(settings, callback).Execute().Wait();
                 }
             });
 
@@ -123,52 +124,76 @@ namespace PokemonGo.RocketAPI.Console.Forms
                 UserSettings.Default.AuthType = "Ptc";
                 UserSettings.Default.PtcPassword = AuthPasswordTxtBox.Text;
             }
-            pokeThread.Start();
+            OnStart();
         }
 
         void IPokeCallBack.OnBerryUsed(Item item)
         {
-            throw new NotImplementedException();
+            ResponseModel<Item> model = ResponseModel<Item>.Factory(item);
+            model.message = "Berry Used";
+            model.status = Constants.BERRY_USED;
+            pokeServer.sendData(model);
         }
 
         void IPokeCallBack.OnCatchFailed(int counter, MapPokemon pkmnId, PokemonData data, string attempts)
         {
-            throw new NotImplementedException();
+
         }
 
         void IPokeCallBack.OnCaught(int counter, MapPokemon pkmnId, PokemonData data, string attempts)
         {
-            throw new NotImplementedException();
+
         }
 
         void IPokeCallBack.OnEggFound()
         {
-            throw new NotImplementedException();
+
         }
 
         void IPokeCallBack.OnEvolved(PokemonData data, EvolvePokemonOut evolvedPokemon)
         {
-            throw new NotImplementedException();
+
         }
 
         void IPokeCallBack.OnEvolvedFailed(PokemonData data, EvolvePokemonOut evolvedPokemon)
         {
-            throw new NotImplementedException();
+
         }
 
         void IPokeCallBack.OnNoPokeBalls(MapPokemon pkmnId, PokemonData data)
         {
-            throw new NotImplementedException();
+
         }
 
         void IPokeCallBack.OnRecycled(Item item)
         {
-            throw new NotImplementedException();
+            
         }
 
         void IPokeCallBack.OnTransfer(PokemonData pokemonData)
         {
-            throw new NotImplementedException();
+
+        }
+
+        private void AuthTypeComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            switch (AuthTypeComboBox.SelectedIndex)
+            {
+                case 0:
+                    AuthPasswordTxtBox.Enabled = false;
+                    AuthUserNameTxtBox.Enabled = false;
+                    break;
+                case 1:
+                    AuthPasswordTxtBox.Enabled = true;
+                    AuthUserNameTxtBox.Enabled = true;
+                    break;
+            }
+            
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            pokeServer.endServer();
         }
     }
 }
