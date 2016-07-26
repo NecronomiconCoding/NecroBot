@@ -11,10 +11,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class DisplayPokemonStatsTask
     {
-        public static void Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Context ctx, StateMachine machine)
         {
             Logger.Write("====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
-            var highestsPokemonCp = ctx.Inventory.GetHighestsCp(20).Result;
+            var highestsPokemonCp = await ctx.Inventory.GetHighestsCp(20);
             foreach (var pokemon in highestsPokemonCp)
                 Logger.Write(
                     $"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCp(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'",
