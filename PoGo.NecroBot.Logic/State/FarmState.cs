@@ -31,6 +31,11 @@ namespace PoGo.NecroBot.Logic.State
                 FarmPokestopsTask.Execute(ctx, machine);
             }
 
+            if (true)//ctx.LogicSettings.DumpPokemonStats)
+            {
+                DumpPokemonStatsTask.Execute(ctx, machine);
+            }
+
             machine.RequestDelay(10000);
 
             return this;

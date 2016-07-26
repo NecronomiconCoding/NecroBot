@@ -286,5 +286,17 @@ namespace PoGo.NecroBot.CLI {
                 this["EvolveAboveIVValue"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DumpPokemonStats {
+            get {
+                return ((bool)(this["DumpPokemonStats"]));
+            }
+            set {
+                this["DumpPokemonStats"] = value;
+            }
+        }
     }
 }

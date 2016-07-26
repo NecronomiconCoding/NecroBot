@@ -13,9 +13,7 @@ namespace PoGo.NecroBot.Logic.Logging
 
         private static void Log(string message)
         {
-            // maybe do a new log rather than appending?
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Logs");
-
 
             using (
                 var log =
@@ -25,6 +23,33 @@ namespace PoGo.NecroBot.Logic.Logging
             {
                 log.WriteLine(message);
                 log.Flush();
+            }
+        }
+
+        /// <summary>
+        ///     This is used for dumping contents to a file stored in the Logs folder.
+        /// </summary>
+        /// <param name="data">Dumps the string data to the file</param>
+        /// <param name="filename">Filename to be used for naming the file.</param>
+        /// <param name="overwrite">Optional Default is to append</param>
+        public static void Dump(string data, string filename, bool overwrite)
+        {
+            string path = Directory.GetCurrentDirectory() + $"\\Logs\\DataDump-{filename}.txt";
+
+            // Clears all contents of a file first if overwrite is true
+            if (!File.Exists(path) || overwrite)
+            {
+                File.WriteAllText(path, string.Empty);
+            }
+
+            using (
+                var dumpFile =
+                    File.AppendText(Directory.GetCurrentDirectory() +
+                                    $"\\Logs\\DataDump-{filename}.txt")
+                )
+            {
+                dumpFile.WriteLine(data);
+                dumpFile.Flush();
             }
         }
 

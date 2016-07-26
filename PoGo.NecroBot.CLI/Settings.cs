@@ -74,6 +74,7 @@ namespace PoGo.NecroBot.CLI
             GlobalSettings.UseLuckyEggsWhileEvolving = settingsToWrite.UseLuckyEggsWhileEvolving;
             GlobalSettings.UsePokemonToNotCatchFilter = settingsToWrite.UsePokemonToNotCatchFilter;
             GlobalSettings.WalkingSpeedInKilometerPerHour = settingsToWrite.WalkingSpeedInKilometerPerHour;
+            GlobalSettings.DumpPokemonStats = settingsToWrite.DumpPokemonStats;
         }
         public static void GrabGlobalSettings()
         {
@@ -98,6 +99,7 @@ namespace PoGo.NecroBot.CLI
             settingsToWrite.UseLuckyEggsWhileEvolving = GlobalSettings.UseLuckyEggsWhileEvolving;
             settingsToWrite.UsePokemonToNotCatchFilter = GlobalSettings.UsePokemonToNotCatchFilter;
             settingsToWrite.WalkingSpeedInKilometerPerHour = GlobalSettings.WalkingSpeedInKilometerPerHour;
+            settingsToWrite.DumpPokemonStats = GlobalSettings.DumpPokemonStats;
         }
     }
 
@@ -125,6 +127,7 @@ namespace PoGo.NecroBot.CLI
         public static bool UseLuckyEggsWhileEvolving = false;
         public static bool EvolveAllPokemonAboveIv = false;
         public static float EvolveAboveIvValue = 95;
+        public static bool DumpPokemonStats = false;
     }
 
     public class GlobalSettingsStub
@@ -151,6 +154,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseLuckyEggsWhileEvolving;
         public bool EvolveAllPokemonAboveIv;
         public float EvolveAboveIvValue;
+        public bool DumpPokemonStats;
     }
 
     public class ClientSettings : ISettings
@@ -205,6 +209,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseLuckyEggsWhileEvolving => GlobalSettings.UseLuckyEggsWhileEvolving;
         public bool EvolveAllPokemonAboveIv => GlobalSettings.EvolveAllPokemonAboveIv;
         public float EvolveAboveIvValue => GlobalSettings.EvolveAboveIvValue;
+        public bool DumpPokemonStats => GlobalSettings.DumpPokemonStats;
 
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
         {

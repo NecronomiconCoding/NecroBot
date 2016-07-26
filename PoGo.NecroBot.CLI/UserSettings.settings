@@ -68,5 +68,8 @@
     <Setting Name="EvolveAboveIVValue" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">95</Value>
     </Setting>
+    <Setting Name="DumpPokemonStats" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
