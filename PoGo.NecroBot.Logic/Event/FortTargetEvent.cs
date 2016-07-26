@@ -4,5 +4,7 @@
     {
         public double Distance;
         public string Name;
+        public double Latitude;
+        public double Longitude;
     }
 }
