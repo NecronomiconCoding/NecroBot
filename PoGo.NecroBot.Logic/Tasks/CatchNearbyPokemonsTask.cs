@@ -6,6 +6,7 @@ using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
+using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
 
@@ -17,6 +18,18 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static void Execute(Context ctx, StateMachine machine)
         {
+            var invResp = ctx.Client.Inventory.GetInventory();
+            var invRespRes = invResp.Result;
+            if (invRespRes.Success)
+            {
+                var items = invResp.Result.InventoryDelta.InventoryItems;
+                if (items.Select(rawItem => rawItem.InventoryItemData.Item).Any(item => (item.ItemId == ItemId.ItemPokeBall || item.ItemId == ItemId.ItemGreatBall || item.ItemId == ItemId.ItemUltraBall || item.ItemId == ItemId.ItemMasterBall) && item.Count == 0))
+                {
+                    machine.Fire(new WarnEvent {Message = "NO pokeballs, ignoring pokemon encounters"});
+                    return;
+                }
+            }
+
             Logger.Write("Looking for pokemon..", LogLevel.Debug);
 
             var pokemons = GetNearbyPokemons(ctx);
