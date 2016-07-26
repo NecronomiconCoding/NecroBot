@@ -18,7 +18,9 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
             {
                 UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+                UseIncense(ctx.Client, ctx.Inventory, machine);
             }
+
 
             var pokemonToEvolveTask = ctx.Inventory.GetPokemonToEvolve(ctx.LogicSettings.PokemonsToEvolve);
             pokemonToEvolveTask.Wait();
@@ -55,7 +57,25 @@ namespace PoGo.NecroBot.Logic.Tasks
             client.Inventory.UseItemXpBoost().Wait();
 
             luckyEgg.Count -= 1;
-            machine.Fire(new UseLuckyEggEvent {Count = luckyEgg.Count});
+            machine.Fire(new UseLuckyEggEvent { Count = luckyEgg.Count });
+
+            Thread.Sleep(2000);
+        }
+
+        public static void UseIncense(Client client, Inventory inventory, StateMachine machine)
+        {
+            var inventoryContent = inventory.GetItems().Result;
+
+            var Incense = inventoryContent.Where(p => p.ItemId == ItemId.ItemIncenseOrdinary);
+            var Incenses = Incense.FirstOrDefault();
+
+            if (Incenses == null || Incenses.Count <= 0)
+                return;
+
+            client.Inventory.UseIncense(ItemId.ItemIncenseOrdinary).Wait();
+
+            Incenses.Count -= 1;
+            machine.Fire(new UseincenseEvent { Count = Incenses.Count });
 
             Thread.Sleep(2000);
         }

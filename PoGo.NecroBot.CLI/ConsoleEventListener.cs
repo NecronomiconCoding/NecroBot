@@ -38,6 +38,11 @@ namespace PoGo.NecroBot.CLI
             Logger.Write($"Used Lucky Egg, remaining: {evt.Count}", LogLevel.Egg);
         }
 
+        public void HandleEvent(UseincenseEvent evt, Context ctx)
+        {
+            Logger.Write($"Used Incense, remaining: {evt.Count}", LogLevel.Egg);
+        }
+
         public void HandleEvent(PokemonEvolveEvent evt, Context ctx)
         {
             Logger.Write(evt.Result == EvolvePokemonResponse.Types.Result.Success
