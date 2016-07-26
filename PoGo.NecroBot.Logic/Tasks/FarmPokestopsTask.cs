@@ -11,6 +11,7 @@ using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
+using POGOProtos.Networking.Responses;
 
 #endregion
 
@@ -86,6 +87,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
 
                 Thread.Sleep(1000);
+
+                CatchLuredPokemonTask.Execute(ctx, machine, pokeStop);
+
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;
