@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
@@ -63,7 +64,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         totalExp += xp;
                     }
                     var profile = ctx.Client.Player.GetPlayer().Result;
-
+                    
                     evt.Exp = totalExp;
                     evt.Stardust = profile.PlayerData.Currencies.ToArray()[1].Amount;
 
@@ -99,7 +100,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     evt.Distance = distance;
                     evt.Pokeball = pokeball;
                     evt.Attempt = attemptCounter;
-
+                    ctx.Inventory.RefreshCachedInventory().Wait();
+                    evt.BallAmount = ctx.Inventory.GetItemAmountByType(pokeball).Result;
                     machine.Fire(evt);
                 }
                 attemptCounter++;
