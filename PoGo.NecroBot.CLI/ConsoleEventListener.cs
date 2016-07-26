@@ -125,7 +125,11 @@ namespace PoGo.NecroBot.CLI
         {
             dynamic eve = evt;
 
-            HandleEvent(eve, ctx);
+            try
+            {
+                HandleEvent(eve, ctx);
+            }
+            catch { }
         }
     }
 }

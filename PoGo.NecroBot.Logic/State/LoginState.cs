@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.Logic.State
 
             await DownloadProfile(ctx, machine);
 
-            return new InfoState();
+            return new PositionCheckState();
         }
 
         public async Task DownloadProfile(Context ctx, StateMachine machine)
