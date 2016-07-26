@@ -87,12 +87,14 @@ namespace PoGo.NecroBot.CLI
                 }
             };
 
+            var catchType = evt.CatchType;
+
             var catchStatus = evt.Attempt > 1
                 ? $"{evt.Status} Attempt #{evt.Attempt}"
                 : $"{evt.Status}";
 
             Logger.Write(
-                $"({catchStatus}) | {evt.Id} Lvl {evt.Level} ({evt.Cp}/{evt.MaxCp} CP) ({evt.Perfection.ToString("0.00")}% perfect) | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball.",
+                $"({catchStatus}) | ({catchType}) {evt.Id} Lvl {evt.Level} ({evt.Cp}/{evt.MaxCp} CP) ({evt.Perfection.ToString("0.00")}% perfect) | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball.",
                 LogLevel.Caught);
         }
 

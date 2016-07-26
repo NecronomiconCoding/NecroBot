@@ -69,6 +69,8 @@
     <Compile Include="Event\ErrorEvent.cs" />
     <Compile Include="State\FarmState.cs" />
     <Compile Include="StatisticsAggregator.cs" />
+    <Compile Include="Tasks\CatchIncensePokemonsTask.cs" />
+    <Compile Include="Tasks\CatchLurePokemonsTask.cs" />
     <Compile Include="Tasks\CatchNearbyPokemonsTask.cs" />
     <Compile Include="Tasks\CatchPokemonTask.cs" />
     <Compile Include="Tasks\EvolvePokemonTask.cs" />
