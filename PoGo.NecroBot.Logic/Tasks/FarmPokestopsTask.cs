@@ -84,10 +84,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
+
                 Thread.Sleep(1000);
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;
+                    if (fortSearch.ItemsAwarded.Count > 0)
+                    {
+                        var refreshCachedInventory = ctx.Inventory.RefreshCachedInventory();
+                    }
                     RenamePokemonTask.Execute(ctx, machine);
                     RecycleItemsTask.Execute(ctx, machine);
                     if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonAboveIv)

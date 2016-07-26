@@ -76,6 +76,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
                                 });
                             }
+                            if (fortSearch.ItemsAwarded.Count > 0)
+                            {
+                                var refreshCachedInventory = ctx.Inventory.RefreshCachedInventory();
+                            }
 
                             Thread.Sleep(1000);
 
