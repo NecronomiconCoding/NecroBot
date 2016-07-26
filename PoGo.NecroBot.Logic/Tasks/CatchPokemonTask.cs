@@ -25,7 +25,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (invRespRes.Success)
             {
                 var items = invResp.Result.InventoryDelta.InventoryItems;
-                if (items.Select(rawItem => rawItem.InventoryItemData.Item).Where(item => item.ItemId == ItemId.ItemPokeBall || item.ItemId == ItemId.ItemGreatBall || item.ItemId == ItemId.ItemUltraBall || item.ItemId == ItemId.ItemMasterBall).All(item => item.Count == 0))
+                if(items.Select(rawItem => rawItem.InventoryItemData.Item).Any(item => (item.ItemId == ItemId.ItemPokeBall || item.ItemId == ItemId.ItemGreatBall || item.ItemId == ItemId.ItemUltraBall || item.ItemId == ItemId.ItemMasterBall) && item.Count == 0))
                 {
                     Logger.Write("Encountered a pokemon, but there are no pokeballs!", LogLevel.Warning);
                     return;
