@@ -209,9 +209,19 @@ namespace PoGo.NecroBot.Logic
         public async Task<IEnumerable<PokemonFamily>> GetPokemonFamilies()
         {
             var inventory = await GetCachedInventory();
-            return
-                inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonFamily)
-                    .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
+
+            var families = from item in inventory.InventoryDelta.InventoryItems
+            where item.InventoryItemData?.PokemonFamily != null
+            where item.InventoryItemData?.PokemonFamily.FamilyId != PokemonFamilyId.FamilyUnset
+            group item by item.InventoryItemData?.PokemonFamily.FamilyId into family
+            select new PokemonFamily
+            {
+                FamilyId = family.First().InventoryItemData.PokemonFamily.FamilyId,
+                Candy = family.First().InventoryItemData.PokemonFamily.Candy
+            };
+
+
+            return families;
         }
 
         public async Task<IEnumerable<PokemonData>> GetPokemons()

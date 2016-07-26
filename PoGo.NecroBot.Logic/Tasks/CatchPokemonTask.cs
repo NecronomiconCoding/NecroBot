@@ -73,7 +73,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var setting = pokemonSettings.Single(q => q.PokemonId == pokemon.PokemonId);
                     var family = pokemonFamilies.First(q => q.FamilyId == setting.FamilyId);
 
-                    family.Candy += 3;
+                    family.Candy += caughtPokemonResponse.CaptureAward.Candy.Sum();
 
                     evt.FamilyCandies = family.Candy;
                 }
