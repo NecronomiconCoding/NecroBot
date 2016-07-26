@@ -65,7 +65,7 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(FortTargetEvent evt, Context ctx)
         {
-            Logger.Write($"{evt.Name} in ({Math.Round(evt.Distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
+            Logger.Write($"{evt.Name} in ({Math.Round(evt.Distance)}m) located at {evt.Latitude}, {evt.Longitude}", LogLevel.Info, ConsoleColor.DarkRed);
         }
 
         public void HandleEvent(PokemonCaptureEvent evt, Context ctx)
