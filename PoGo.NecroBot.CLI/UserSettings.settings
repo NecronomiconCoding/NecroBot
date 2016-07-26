@@ -1,7 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)"
-              GeneratedClassNamespace="PokemonGo.RocketAPI.Console" GeneratedClassName="UserSettings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PoGo.NecroBot.CLI" GeneratedClassName="UserSettings">
   <Profiles />
   <Settings>
     <Setting Name="AuthType" Type="System.String" Scope="User">
@@ -32,6 +30,9 @@
       <Value Profile="(Default)">50</Value>
     </Setting>
     <Setting Name="EvolveAllPokemonWithEnoughCandy" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="KeepPokemonsThatCanEvolve" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="TransferDuplicatePokemon" Type="System.Boolean" Scope="User">
