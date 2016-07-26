@@ -112,8 +112,8 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(DisplayHighestsPokemonEvent evt, Context ctx)
         {
-            Logger.Write($"====== DisplayHighests{evt.sortetBy} ======", LogLevel.Info, ConsoleColor.Yellow);
-            foreach (var pokemon in evt.pokemonList)
+            Logger.Write($"====== DisplayHighests{evt.SortetBy} ======", LogLevel.Info, ConsoleColor.Yellow);
+            foreach (var pokemon in evt.PokemonList)
                     Logger.Write(
                         $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% perfect)\t| Lvl {pokemon.Item4.ToString("00")}\t NAME: '{pokemon.Item1.PokemonId}'",
                         LogLevel.Info, ConsoleColor.Yellow);
