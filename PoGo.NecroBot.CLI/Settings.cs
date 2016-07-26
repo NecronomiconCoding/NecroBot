@@ -17,14 +17,30 @@ namespace PoGo.NecroBot.CLI
 {
     public class ClientSettings : ISettings
     {
-        public AuthType AuthType => (AuthType) Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
+        public AuthType AuthType => (AuthType)Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
         public string PtcUsername => UserSettings.Default.PtcUsername;
         public string PtcPassword => UserSettings.Default.PtcPassword;
         public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
         public double DefaultLongitude => UserSettings.Default.DefaultLongitude;
         public double DefaultAltitude => UserSettings.Default.DefaultAltitude;
 
-        public string GoogleRefreshToken { get; set; }
+        private string _googleRefreshToken;
+        public string GoogleRefreshToken
+        {
+            get
+            {
+                if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\GoogleAuth.ini"))
+                    _googleRefreshToken = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\GoogleAuth.ini");
+                return _googleRefreshToken;
+            }
+            set
+            {
+                if (!File.Exists(Directory.GetCurrentDirectory() + "\\Configs"))
+                    Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
+                File.WriteAllText(Directory.GetCurrentDirectory() + "\\Configs\\GoogleAuth.ini", value);
+                _googleRefreshToken = value;
+            }
+        }
     }
 
     public class LogicSettings : ILogicSettings
