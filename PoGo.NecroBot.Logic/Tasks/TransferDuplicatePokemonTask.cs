@@ -40,7 +40,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     bestPokemonOfType = duplicatePokemon;
 
                 var setting = pokemonSettings.Single(q => q.PokemonId == duplicatePokemon.PokemonId);
-                var family = pokemonFamilies.Single(q => q.FamilyId == setting.FamilyId);
+                var family = pokemonFamilies.First(q => q.FamilyId == setting.FamilyId);
 
                 family.Candy++;
 
