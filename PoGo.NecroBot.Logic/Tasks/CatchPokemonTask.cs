@@ -66,6 +66,23 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     evt.Exp = totalExp;
                     evt.Stardust = profile.PlayerData.Currencies.ToArray()[1].Amount;
+
+                    var pokemonSettings = ctx.Inventory.GetPokemonSettings().Result;
+                    var pokemonFamilies = ctx.Inventory.GetPokemonFamilies().Result;
+
+                    var setting = pokemonSettings.FirstOrDefault(q => q.PokemonId == pokemon.PokemonId);
+                    var family = pokemonFamilies.FirstOrDefault(q => q.FamilyId == setting.FamilyId);
+
+                    if (family != null)
+                    {
+                        family.Candy += caughtPokemonResponse.CaptureAward.Candy.Sum();
+
+                        evt.FamilyCandies = family.Candy;
+                    }
+                    else
+                    {
+                        evt.FamilyCandies = caughtPokemonResponse.CaptureAward.Candy.Sum();
+                    }
                 }
 
 

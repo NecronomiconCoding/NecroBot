@@ -18,13 +18,17 @@ namespace PoGo.NecroBot.Logic
         int DelayBetweenPokemonCatch { get; }
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
-        bool PrioritizeIvOverCp { get; }
+        string PokemonPrioritization { get; }
+        float PokemonBrPrioritizationIVWeightPercentage { get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }
         string GpxFile { get; }
         bool UseLuckyEggsWhileEvolving { get; }
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
+        bool RenameAboveIv { get; }
+        int AmountOfPokemonToDisplayOnStart { get; }
+        bool ExportPokemonToCSV { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
@@ -33,5 +37,10 @@ namespace PoGo.NecroBot.Logic
         ICollection<PokemonId> PokemonsNotToTransfer { get; }
 
         ICollection<PokemonId> PokemonsNotToCatch { get; }
+
+        System.Func<POGOProtos.Data.PokemonData, double> PokemonSelector
+        {
+            get;
+        }
     }
 }

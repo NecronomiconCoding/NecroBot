@@ -27,13 +27,19 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
 
     public static class PokemonInfo
     {
-        public static int CalculateCp(PokemonData poke)
+        public static double CalculateCp(PokemonData poke)
         {
             return
                 Math.Max(
                     (int)
                         Math.Floor(0.1*CalculateCpMultiplier(poke)*
                                    Math.Pow(poke.CpMultiplier + poke.AdditionalCpMultiplier, 2)), 10);
+        }
+
+        public static double CalculatePokemonBattleRating(PokemonData poke, float battleRatingIVPercentage = 50, int referenceTrainerLevel = 40)
+        {
+            var maxCPatTrainerLevel = PokemonInfo.GetMaxCpAtTrainerLevel(poke, referenceTrainerLevel);
+            return ((poke.Cp / maxCPatTrainerLevel) * (1 - (battleRatingIVPercentage / 100))) + (CalculatePokemonPerfection(poke) * (battleRatingIVPercentage / 100));
         }
 
         public static double CalculateCpMultiplier(PokemonData poke)
@@ -87,6 +93,60 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
 
             return (curCp - minCp)/(maxCp - minCp)*100.0;
         }
+
+
+        public static int CalculateMinHP(PokemonData poke)
+        {
+            return Math.Max((int)Math.Floor((GetBaseStats(poke.PokemonId).BaseStamina) * CpMultiplier[(int)PokemonInfo.GetLevel(poke) * 2 - 2]), 10);
+        }
+        public static int CalculateMaxHP(PokemonData poke)
+        {
+            return Math.Max((int)Math.Floor((GetBaseStats(poke.PokemonId).BaseStamina + 15) * CpMultiplier[(int)PokemonInfo.GetLevel(poke) * 2 - 2]), 10);
+        }
+        public static double CalculateMinEstTotalStamina(PokemonData poke)
+        {
+            return (poke.Stamina) / CpMultiplier[(int)PokemonInfo.GetLevel(poke) * 2 - 2];
+        }
+        public static double CalculateEstTotalStamina(PokemonData poke)
+        {
+            return (poke.Stamina + 0.5) / CpMultiplier[(int)PokemonInfo.GetLevel(poke) * 2 - 2];
+            // est_ind_stamina = CalculateEstTotalStamina(pokemon) - GetBaseStats(pokemon.PokemonId).BaseStamina;
+        }
+        public static double CalculateMaxEstTotalStamina(PokemonData poke)
+        {
+            return (poke.Stamina + 1) / CpMultiplier[(int)PokemonInfo.GetLevel(poke) * 2 - 2];
+        }
+
+        public static double CalculateDeltaCP(PokemonData poke)
+        {
+            return (-1 + (poke.Cp + 0.5) / ((GetBaseStats(poke.PokemonId).BaseAttack + 7.5) * Math.Sqrt(GetBaseStats(poke.PokemonId).BaseDefense + 7.5) * Math.Sqrt(GetBaseStats(poke.PokemonId).BaseStamina + 7.5) * Math.Pow(CpMultiplier[(int)PokemonInfo.GetLevel(poke) * 2 - 2], 2) / 10)) * 100;
+        }
+        public static double CalculateDeltaSta(PokemonData poke)
+        {
+            return (-1 + (poke.Stamina + 0.5) / ((GetBaseStats(poke.PokemonId).BaseStamina + 7.5) * CpMultiplier[(int)PokemonInfo.GetLevel(poke) * 2 - 2])) * 100;
+        }
+
+        public static double CalculateDeltaBR(PokemonData poke)
+        {
+            return (-1 + (poke.Cp + 0.5) / ((GetBaseStats(poke.PokemonId).BaseAttack + 7.5) * Math.Sqrt(GetBaseStats(poke.PokemonId).BaseDefense + 7.5) * Math.Sqrt(CalculateEstTotalStamina(poke)) * Math.Pow(CpMultiplier[(int)PokemonInfo.GetLevel(poke) * 2 - 2], 2) / 10)) * 100;
+        }
+
+        public static double CalculatePokemonRatingCP(PokemonData poke)
+        {
+            return (poke.Cp - CalculateMinCp(poke)) / (CalculateMaxCp(poke) - CalculateMinCp(poke)) * 100;
+        }
+        public static double CalculatePokemonRatingSta(PokemonData poke)
+        {
+            return (poke.Stamina - CalculateMinHP(poke)) / (CalculateMaxHP(poke) - CalculateMinHP(poke)) * 100;
+        }
+        public static double[] CpMultiplier
+        {
+            get
+            {
+                return new double[] { 0.094, 0.1351374, 0.1663979, 0.1926509, 0.2157325, 0.2365727, 0.2557201, 0.2735304, 0.2902499, 0.3060574, 0.3210876, 0.335445, 0.3492127, 0.3624578, 0.3752356, 0.3875924, 0.3995673, 0.4111936, 0.4225, 0.4335117, 0.4431076, 0.45306, 0.4627984, 0.4723361, 0.481685, 0.4908558, 0.4998584, 0.5087018, 0.517394, 0.5259425, 0.5343543, 0.5426358, 0.5507927, 0.5588306, 0.5667545, 0.5745692, 0.5822789, 0.5898879, 0.5974, 0.6048188, 0.6121573, 0.6194041, 0.6265671, 0.6336492, 0.640653, 0.647581, 0.6544356, 0.6612193, 0.667934, 0.6745819, 0.6811649, 0.6876849, 0.6941437, 0.7005429, 0.7068842, 0.7131691, 0.7193991, 0.7255756, 0.7317, 0.734741, 0.7377695, 0.7407856, 0.7437894, 0.7467812, 0.749761, 0.7527291, 0.7556855, 0.7586304, 0.7615638, 0.7644861, 0.7673972, 0.7702973, 0.7731865, 0.776065, 0.7789328, 0.7817901, 0.784637, 0.7874736, 0.7903, 0.7931164 };
+            }
+        }
+
 
         public static BaseStats GetBaseStats(PokemonId id)
         {
@@ -399,172 +459,32 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
             }
         }
 
+
+
         public static double GetLevel(PokemonData poke)
         {
-            switch ((int) ((poke.CpMultiplier + poke.AdditionalCpMultiplier)*1000.0))
+            var i = 0;
+            double cpm = (poke.CpMultiplier + poke.AdditionalCpMultiplier);
+            while (cpm > CpMultiplier[i])
             {
-                case 93: // 0.094 * 1000 = 93.99999678134
-                case 94:
-                    return 1;
-                case 135:
-                    return 1.5;
-                case 166:
-                    return 2;
-                case 192:
-                    return 2.5;
-                case 215:
-                    return 3;
-                case 236:
-                    return 3.5;
-                case 255:
-                    return 4;
-                case 273:
-                    return 4.5;
-                case 290:
-                    return 5;
-                case 306:
-                    return 5.5;
-                case 321:
-                    return 6;
-                case 335:
-                    return 6.5;
-                case 349:
-                    return 7;
-                case 362:
-                    return 7.5;
-                case 375:
-                    return 8;
-                case 387:
-                    return 8.5;
-                case 399:
-                    return 9;
-                case 411:
-                    return 9.5;
-                case 422:
-                    return 10;
-                case 432:
-                    return 15;
-                case 443:
-                    return 11;
-                case 453:
-                    return 11.5;
-                case 462:
-                    return 12;
-                case 472:
-                    return 12.5;
-                case 481:
-                    return 13;
-                case 490:
-                    return 13.5;
-                case 499:
-                    return 14;
-                case 508:
-                    return 14.5;
-                case 517:
-                    return 15;
-                case 525:
-                    return 15.5;
-                case 534:
-                    return 16;
-                case 542:
-                    return 16.5;
-                case 550:
-                    return 17;
-                case 558:
-                    return 17.5;
-                case 566:
-                    return 18;
-                case 574:
-                    return 18.5;
-                case 582:
-                    return 19;
-                case 589:
-                    return 19.5;
-                case 597:
-                    return 20;
-                case 604:
-                    return 25;
-                case 612:
-                    return 21;
-                case 619:
-                    return 21.5;
-                case 626:
-                    return 22;
-                case 633:
-                    return 22.5;
-                case 640:
-                    return 23;
-                case 647:
-                    return 23.5;
-                case 654:
-                    return 24;
-                case 661:
-                    return 24.5;
-                case 667:
-                    return 25;
-                case 674:
-                    return 25.5;
-                case 681:
-                    return 26;
-                case 687:
-                    return 26.5;
-                case 694:
-                    return 27;
-                case 700:
-                    return 27.5;
-                case 706:
-                    return 28;
-                case 713:
-                    return 28.5;
-                case 719:
-                    return 29;
-                case 725:
-                    return 29.5;
-                case 731:
-                    return 30;
-                case 734:
-                    return 35;
-                case 737:
-                    return 31;
-                case 740:
-                    return 31.5;
-                case 743:
-                    return 32;
-                case 746:
-                    return 32.5;
-                case 749:
-                    return 33;
-                case 752:
-                    return 33.5;
-                case 755:
-                    return 34;
-                case 758:
-                    return 34.5;
-                case 761:
-                    return 35;
-                case 764:
-                    return 35.5;
-                case 767:
-                    return 36;
-                case 770:
-                    return 36.5;
-                case 773:
-                    return 37;
-                case 776:
-                    return 37.5;
-                case 778:
-                    return 38;
-                case 781:
-                    return 38.5;
-                case 784:
-                    return 39;
-                case 787:
-                    return 39.5;
-                case 790:
-                    return 40;
-                default:
-                    return 0;
+                i++;
             }
+            var level = 1 + 0.5 * (double)i;
+            return level;
+        }
+        public static double GetMaxCpAtTrainerLevel(PokemonData poke, int trainerLevel)
+        {
+            double pokemonMaxLevel = (double)(Math.Min(trainerLevel,40)) + 1.5;
+            double cpm = CpMultiplier[Math.Min((int)(pokemonMaxLevel * 2 - 2),CpMultiplier.Length-1)];
+
+            var maxAttackNoCpM = (GetBaseStats(poke.PokemonId).BaseAttack + poke.IndividualAttack);
+            var maxDefenseNoCpM = (GetBaseStats(poke.PokemonId).BaseDefense + poke.IndividualDefense);
+            var maxStaminaNoCpM = (GetBaseStats(poke.PokemonId).BaseStamina + poke.IndividualStamina);
+
+            var maxCPatLevel = maxAttackNoCpM * Math.Sqrt(maxDefenseNoCpM) * Math.Sqrt(maxStaminaNoCpM) * Math.Pow(cpm, 2) / 10;
+
+            return maxCPatLevel;
+
         }
 
         public static int GetPowerUpLevel(PokemonData poke)

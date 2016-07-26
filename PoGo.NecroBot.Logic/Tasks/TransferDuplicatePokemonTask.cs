@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System.Linq;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
@@ -13,8 +14,11 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static void Execute(Context ctx, StateMachine machine)
         {
             var duplicatePokemons =
-                ctx.Inventory.GetDuplicatePokemonToTransfer(false, ctx.LogicSettings.PrioritizeIvOverCp,
+                ctx.Inventory.GetDuplicatePokemonToTransfer(false, ctx.LogicSettings.PokemonSelector,
                     ctx.LogicSettings.PokemonsNotToTransfer).Result;
+
+            var pokemonSettings = ctx.Inventory.GetPokemonSettings().Result;
+            var pokemonFamilies = ctx.Inventory.GetPokemonFamilies().Result;
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
@@ -27,12 +31,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                 ctx.Client.Inventory.TransferPokemon(duplicatePokemon.Id).Wait();
                 ctx.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
 
-                var bestPokemonOfType = ctx.LogicSettings.PrioritizeIvOverCp
-                    ? ctx.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon).Result
-                    : ctx.Inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon).Result;
-
+                var bestPokemonOfType = ctx.Inventory.GetHighestPokemonOfTypeBySelector(duplicatePokemon, ctx.LogicSettings.PokemonSelector).Result;
+                 
                 if (bestPokemonOfType == null)
                     bestPokemonOfType = duplicatePokemon;
+
+                var setting = pokemonSettings.Single(q => q.PokemonId == duplicatePokemon.PokemonId);
+                var family = pokemonFamilies.Single(q => q.FamilyId == setting.FamilyId);
+
+                family.Candy++;
 
                 machine.Fire(new TransferPokemonEvent
                 {
@@ -40,7 +47,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Perfection = PokemonInfo.CalculatePokemonPerfection(duplicatePokemon),
                     Cp = duplicatePokemon.Cp,
                     BestCp = bestPokemonOfType.Cp,
-                    BestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType)
+                    BestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType),
+                    FamilyCandies = family.Candy
                 });
             }
         }

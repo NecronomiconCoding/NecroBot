@@ -136,7 +136,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
                         ( // Make sure PokeStop is within 40 meters or else it is pointless to hit it
                             LocationUtils.CalculateDistanceInMeters(
-                                ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude,
+                                ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude,
                                 i.Latitude, i.Longitude) < 40) ||
                         ctx.LogicSettings.MaxTravelDistanceInMeters == 0
                 );
