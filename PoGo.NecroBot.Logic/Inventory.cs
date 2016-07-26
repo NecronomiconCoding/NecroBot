@@ -31,6 +31,21 @@ namespace PoGo.NecroBot.Logic
             _client = client;
             _logicClient = logicClient;
         }
+        public async Task<IEnumerable<PokemonData>> GetEggs()
+        {
+            var inventory = await GetCachedInventory();
+            return
+                inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonData)
+                    .Where(p => p != null && p.IsEgg);
+        }
+        public async Task<IEnumerable<EggIncubator>> GetIncubators()
+        {
+            var inventory = await GetCachedInventory();
+            return inventory.InventoryDelta.InventoryItems
+                .Where(x => x.InventoryItemData.EggIncubators != null)
+                .SelectMany(i => i.InventoryItemData?.EggIncubators?.EggIncubator)
+                    .Where(i => i != null);
+        }
 
         public async void DeletePokemonFromInvById(ulong id)
         {
