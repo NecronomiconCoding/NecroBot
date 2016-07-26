@@ -15,8 +15,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class LogBestPokemonTask
     {
-        public static void Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Context ctx, StateMachine machine)
         {
+<<<<<<< HEAD
             var stats = ctx.Inventory.GetPlayerStats().Result;
             var stat = stats.FirstOrDefault();
           
@@ -24,11 +25,15 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var highestsPokemonCp = ctx.Inventory.GetHighestsCp(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart).Result;
             List<Tuple<PokemonData, int, double,double, double>> pokemonPairedWithStatsCP = new List<Tuple<PokemonData, int, double,double, double>>() ;
+=======
+            var highestsPokemonCp = await ctx.Inventory.GetHighestsCp(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart);
+            List<Tuple<PokemonData, int, double,double>> pokemonPairedWithStatsCP = new List<Tuple<PokemonData, int, double,double>>() ;
+>>>>>>> refs/remotes/NecronomiconCoding/master
            
             foreach (var pokemon in highestsPokemonCp)
                 pokemonPairedWithStatsCP.Add(Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.CalculatePokemonBattleRating(pokemon, ctx.LogicSettings.PokemonBrPrioritizationIVWeightPercentage), PokemonInfo.GetLevel(pokemon)));
 
-            var highestsPokemonPerfect = ctx.Inventory.GetHighestsPerfect(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart).Result;
+            var highestsPokemonPerfect = await ctx.Inventory.GetHighestsPerfect(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart);
 
             List<Tuple<PokemonData, int, double, double, double>> pokemonPairedWithStatsIV = new List<Tuple<PokemonData, int, double, double, double>>();
             foreach (var pokemon in highestsPokemonPerfect)
@@ -41,14 +46,28 @@ namespace PoGo.NecroBot.Logic.Tasks
                 pokemonPairedWithStatsBR.Add(Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.CalculatePokemonBattleRating(pokemon, ctx.LogicSettings.PokemonBrPrioritizationIVWeightPercentage,trainerLevel), PokemonInfo.GetLevel(pokemon)));
 
 
+<<<<<<< HEAD
 
             machine.Fire(               
+=======
+            machine.Fire(               
+                new DisplayHighestsPokemonEvent
+                {
+                    SortedBy = "Cp",
+                    PokemonList = pokemonPairedWithStatsCP
+                });
+
+            await Task.Delay(500);
+
+            machine.Fire(
+>>>>>>> refs/remotes/NecronomiconCoding/master
                     new DisplayHighestsPokemonEvent
                     {
-                        SortedBy = "Cp",
-                        PokemonList = pokemonPairedWithStatsCP
+                        SortedBy = "Iv",
+                        PokemonList = pokemonPairedWithStatsIV
                     });
  
+<<<<<<< HEAD
                 Thread.Sleep(500);
      
 
@@ -70,6 +89,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             Thread.Sleep(500);
 
+=======
+            await Task.Delay(500);
+>>>>>>> refs/remotes/NecronomiconCoding/master
         }
     }
 }

@@ -19,10 +19,39 @@ namespace PoGo.NecroBot.CLI
 {
     internal class AuthSettings
     {
-        public AuthType AuthType = AuthType.Google;
-        public string GoogleRefreshToken = "";
-        public string PtcUsername = "username2";
-        public string PtcPassword = "pw";
+        public AuthSettings()
+        {
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\config\\auth.json")) return;
+            string type;
+            do
+            {
+                Console.WriteLine("Please choose your AuthType");
+                Console.WriteLine("(0) for Google Authentication");
+                Console.WriteLine("(1) for Pokemon Trainer Club");
+                type = Console.ReadLine();
+            } while (type != "1" && type != "0");
+            AuthType = type.Equals("0") ? AuthType.Google : AuthType.Ptc;
+            if (AuthType == AuthType.Google)
+            {
+                Console.Clear();
+                return;
+            }               
+            do
+            {
+                Console.WriteLine("Username:");
+                PtcUsername = Console.ReadLine();
+            } while (string.IsNullOrEmpty(PtcUsername));
+            do
+            {
+                Console.WriteLine("Password:");
+                PtcPassword = Console.ReadLine();
+            } while (string.IsNullOrEmpty(PtcPassword));
+            Console.Clear();
+        }
+        public AuthType AuthType;
+        public string GoogleRefreshToken;
+        public string PtcUsername;
+        public string PtcPassword;
         
 
         [JsonIgnore]
@@ -73,19 +102,15 @@ namespace PoGo.NecroBot.CLI
     public class GlobalSettings
     {
         public static GlobalSettings Default => new GlobalSettings();
-
-        private static string GetAuthPath(string path)
-        {
-            var fullPath = Directory.GetCurrentDirectory() + path;
-            string folder = Path.GetDirectoryName(fullPath);
-            folder += "\\auth.json";
-
-            return folder;
-        }
+        public static string ProfilePath;
+        public static string ConfigPath;
 
         public static GlobalSettings Load(string path)
         {
-            var fullPath = Directory.GetCurrentDirectory() + path;
+            ProfilePath = Directory.GetCurrentDirectory() + path;
+            ConfigPath = ProfilePath + "\\config";
+
+            var fullPath = ConfigPath + "\\config.json";
 
             GlobalSettings settings = null;
             if (File.Exists(fullPath))
@@ -105,17 +130,21 @@ namespace PoGo.NecroBot.CLI
                 settings = new GlobalSettings();
             }
 
-            settings.Save(path);
-            settings.Auth.Load(GetAuthPath(path));
+            if(settings.WebSocketPort == 0)
+            {
+                settings.WebSocketPort = 14251;
+            }
+
+            settings.Save(fullPath);
+            settings.Auth.Load(ConfigPath + "\\auth.json");
 
             return settings;
         }
 
-        public void Save(string path)
+        public void Save(string fullPath)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented, new StringEnumConverter { CamelCaseText = true });
 
-            var fullPath = Directory.GetCurrentDirectory() + path;
             string folder = Path.GetDirectoryName(fullPath);
             if (!Directory.Exists(folder))
             {
@@ -125,6 +154,7 @@ namespace PoGo.NecroBot.CLI
             File.WriteAllText(fullPath, output);
         }
 
+        public bool AutoUpdate = false;
         public double DefaultAltitude = 10;
         public double DefaultLatitude = 52.379189;
         public double DefaultLongitude = 4.899431;
@@ -148,8 +178,7 @@ namespace PoGo.NecroBot.CLI
         public int AmountOfPokemonToDisplayOnStart = 10;
         public bool ExportPokemonToCSV = true;
         public bool RenameAboveIv = false;
-        public bool EnableWebSocket = false;
-        public int WebSocketPort = 14561;
+        public int WebSocketPort = 14251;
         
         [JsonIgnore]
         internal AuthSettings Auth = new AuthSettings();
@@ -252,7 +281,7 @@ namespace PoGo.NecroBot.CLI
         {
             _settings = settings;
         }
-
+        public bool AutoUpdate => _settings.AutoUpdate;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
