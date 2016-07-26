@@ -27,7 +27,13 @@ namespace PoGo.NecroBot.Logic.Tasks
             var fortId = currentFortData.Id;
 
             var pokemonId = currentFortData.LureInfo.ActivePokemonId;
-            if (pokemonId != PokemonId.Missingno)
+
+            if (ctx.LogicSettings.UsePokemonToNotCatchFilter &&
+                ctx.LogicSettings.PokemonsNotToCatch.Contains(pokemonId))
+            {
+                machine.Fire(new NoticeEvent() { Message = $"Skipped {pokemonId}" });
+            }
+            else
             {
                 var encounterId = currentFortData.LureInfo.EncounterId;
                 var encounter = ctx.Client.Encounter.EncounterLurePokemon(encounterId, fortId).Result;

@@ -69,14 +69,20 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ctx.LogicSettings.WalkingSpeedInKilometerPerHour,
                     () =>
                     {
+                        // Catch normal map Pokemon
                         CatchNearbyPokemonsTask.Execute(ctx, machine);
+                        //Catch Incense Pokemon
+                        CatchIncensePokemonsTask.Execute(ctx, machine);
                         return true;
                     }).Wait();
 
+                //Catch Lure Pokemon
                 if (pokeStop.LureInfo != null)
                 {
                     CatchLurePokemonsTask.Execute(ctx, machine, pokeStop);
                 }
+
+                
 
                 var fortSearch = ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
                 if (fortSearch.ExperienceAwarded > 0)

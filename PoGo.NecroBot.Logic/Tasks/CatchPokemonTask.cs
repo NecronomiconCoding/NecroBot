@@ -35,7 +35,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     machine.Fire(new NoPokeballEvent
                     {
-                        Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId,
+                        Id = encounter is EncounterResponse  ? pokemon.PokemonId : encounter?.PokemonData.PokemonId,
                         Cp = (encounter is EncounterResponse ? encounter?.WildPokemon?.PokemonData?.Cp : encounter?.PokemonData?.Cp) ?? 0
                     });
                     return;

@@ -97,13 +97,7 @@ namespace PoGo.NecroBot.CLI
                 ? $"Candies: {evt.FamilyCandies}"
                 : "";
 
-            Logger.Write(
-<<<<<<< HEAD
-                $"({catchStatus}) | ({catchType}) {evt.Id} Lvl {evt.Level} ({evt.Cp}/{evt.MaxCp} CP) ({evt.Perfection.ToString("0.00")}% perfect) | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball.",
-=======
-                $"({catchStatus}) {evt.Id} Lvl: {evt.Level} CP: ({evt.Cp}/{evt.MaxCp}) IV: {evt.Perfection.ToString("0.00")}% | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball. | {familyCandies}",
->>>>>>> d1be6c33ee5228c2b997f50e4792c3ebd90695e5
-                LogLevel.Caught);
+            Logger.Write($"({catchStatus}) | ({catchType}) {evt.Id} Lvl {evt.Level} ({evt.Cp}/{evt.MaxCp} CP) ({evt.Perfection.ToString("0.00")}% perfect) | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball.", LogLevel.Caught);
         }
 
         public void HandleEvent(NoPokeballEvent evt, Context ctx)
