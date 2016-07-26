@@ -21,8 +21,9 @@ namespace PoGo.NecroBot.CLI
     {
         public AuthType AuthType = AuthType.Google;
         public string GoogleRefreshToken = "";
-        public string PtcPassword = "username2";
-        public string PtcUsername = "pw";
+        public string PtcUsername = "username2";
+        public string PtcPassword = "pw";
+        
 
         [JsonIgnore]
         private string FilePath;
