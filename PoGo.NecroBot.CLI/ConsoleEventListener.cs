@@ -121,6 +121,11 @@ namespace PoGo.NecroBot.CLI
                         LogLevel.Info, ConsoleColor.Yellow);
         }
 
+        public void HandleEvent(UpdateEvent evt, Context ctx)
+        {
+            Logger.Write(evt.ToString(), LogLevel.Update);
+        }
+
         public void Listen(IEvent evt, Context ctx)
         {
             dynamic eve = evt;
