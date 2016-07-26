@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System.Linq;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
@@ -15,6 +16,9 @@ namespace PoGo.NecroBot.Logic.Tasks
             var duplicatePokemons =
                 ctx.Inventory.GetDuplicatePokemonToTransfer(ctx.LogicSettings.KeepPokemonsThatCanEvolve, ctx.LogicSettings.PrioritizeIvOverCp,
                     ctx.LogicSettings.PokemonsNotToTransfer).Result;
+
+            var pokemonSettings = ctx.Inventory.GetPokemonSettings().Result;
+            var pokemonFamilies = ctx.Inventory.GetPokemonFamilies().Result;
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
@@ -34,13 +38,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (bestPokemonOfType == null)
                     bestPokemonOfType = duplicatePokemon;
 
+                var setting = pokemonSettings.Single(q => q.PokemonId == duplicatePokemon.PokemonId);
+                var family = pokemonFamilies.Single(q => q.FamilyId == setting.FamilyId);
+
+                family.Candy++;
+
                 machine.Fire(new TransferPokemonEvent
                 {
                     Id = duplicatePokemon.PokemonId,
                     Perfection = PokemonInfo.CalculatePokemonPerfection(duplicatePokemon),
                     Cp = duplicatePokemon.Cp,
                     BestCp = bestPokemonOfType.Cp,
-                    BestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType)
+                    BestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType),
+                    FamilyCandies = family.Candy
                 });
             }
         }
