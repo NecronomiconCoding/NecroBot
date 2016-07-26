@@ -280,7 +280,6 @@ namespace PoGo.NecroBot.CLI
             _settings = settings;
         }
         public bool AutoUpdate => _settings.AutoUpdate;
-        public bool AutoUpdate => _settings.AutoUpdate;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
