@@ -94,7 +94,7 @@ namespace PoGo.NecroBot.CLI
             settingsToWrite.PrioritizeIvOverCp = GlobalSettings.PrioritizeIvOverCp;
             settingsToWrite.PtcPassword = GlobalSettings.PtcPassword;
             settingsToWrite.PtcUsername = GlobalSettings.PtcUsername;
-            settingsToWrite.TransferDuplicatePokemon = GlobalSettings.UseGpxPathing;
+            settingsToWrite.TransferDuplicatePokemon = GlobalSettings.TransferDuplicatePokemon;
             settingsToWrite.UseLuckyEggsWhileEvolving = GlobalSettings.UseLuckyEggsWhileEvolving;
             settingsToWrite.UsePokemonToNotCatchFilter = GlobalSettings.UsePokemonToNotCatchFilter;
             settingsToWrite.WalkingSpeedInKilometerPerHour = GlobalSettings.WalkingSpeedInKilometerPerHour;
