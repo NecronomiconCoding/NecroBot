@@ -33,6 +33,23 @@ namespace PoGo.NecroBot.CLI
             File.WriteAllText(Directory.GetCurrentDirectory() + "\\Configs\\" + fileName, output);
         }
 
+        public static void Load()
+        {
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\Settings.ini"))
+            {//if the file exists, load the settings
+                var input = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Settings.ini");
+                GlobalSettingsStub settings = JsonConvert.DeserializeObject<GlobalSettingsStub>(input);
+                SettingsUtil.settingsToWrite = settings;
+                SettingsUtil.WriteGlobalSettings();
+                Logger.Write("Successfully loaded your Settings.ini file", LogLevel.Info);
+            }
+            else
+            {
+                SettingsUtil.Save("Settings.ini");
+                Logger.Write("Successfully created your Settings.ini file", LogLevel.Info);
+            }
+        }
+
         public static  void WriteGlobalSettings()
         {
             GlobalSettings.AuthType = settingsToWrite.AuthType;
