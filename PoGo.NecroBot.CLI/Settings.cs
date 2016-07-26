@@ -19,10 +19,39 @@ namespace PoGo.NecroBot.CLI
 {
     internal class AuthSettings
     {
-        public AuthType AuthType = AuthType.Google;
-        public string GoogleRefreshToken = "";
-        public string PtcUsername = "username2";
-        public string PtcPassword = "pw";
+        public AuthSettings()
+        {
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\config\\auth.json")) return;
+            string type;
+            do
+            {
+                Console.WriteLine("Please choose your AuthType");
+                Console.WriteLine("(0) for Google Authentication");
+                Console.WriteLine("(1) for Pokemon Trainer Club");
+                type = Console.ReadLine();
+            } while (type != "1" && type != "0");
+            AuthType = type.Equals("0") ? AuthType.Google : AuthType.Ptc;
+            if (AuthType == AuthType.Google)
+            {
+                Console.Clear();
+                return;
+            }               
+            do
+            {
+                Console.WriteLine("Username:");
+                PtcUsername = Console.ReadLine();
+            } while (string.IsNullOrEmpty(PtcUsername));
+            do
+            {
+                Console.WriteLine("Password:");
+                PtcPassword = Console.ReadLine();
+            } while (string.IsNullOrEmpty(PtcPassword));
+            Console.Clear();
+        }
+        public AuthType AuthType;
+        public string GoogleRefreshToken;
+        public string PtcUsername;
+        public string PtcPassword;
         
 
         [JsonIgnore]
