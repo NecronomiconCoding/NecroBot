@@ -10,7 +10,8 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using PokemonGo.RocketAPI.Rpc;
 using PokemonGo.RocketAPI;
-
+using System.IO;
+using Newtonsoft.Json;
 #endregion
 
 namespace PoGo.NecroBot.CLI
@@ -52,6 +53,18 @@ namespace PoGo.NecroBot.CLI
 
             machine.SetFailureState(new LoginState());
 
+            
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\Settings.ini"))
+            {//if the file exists, load the settings
+                var input = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Settings.ini");
+                GlobalSettingsStub settings = JsonConvert.DeserializeObject<GlobalSettingsStub>(input);
+                SettingsUtil.settingsToWrite = settings;
+                SettingsUtil.WriteGlobalSettings();
+                Logger.Write("Successfully loaded your Settings.ini file", LogLevel.Info);
+            }
+            
+            SettingsUtil.Save("Settings.ini");
+            
             var context = new Context(new ClientSettings(), new LogicSettings());
             context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
 
