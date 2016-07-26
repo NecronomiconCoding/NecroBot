@@ -51,6 +51,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dumper\IDumper.cs" />
+    <Compile Include="Dumper\Dumper.cs" />
     <Compile Include="Event\DisplayHighestsPokemonEvent.cs" />
     <Compile Include="Event\FortTargetEvent.cs" />
     <Compile Include="Event\FortUsedEvent.cs" />
