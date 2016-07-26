@@ -22,7 +22,11 @@ namespace PoGo.NecroBot.Logic.Utils
         private readonly DateTime _initSessionDateTime = DateTime.Now;
 
         private string _currentLevelInfos;
-        private string _playerName;
+        public string PlayerName;
+        public int CurrentLevel;
+        public long CurrentLevelExperience;
+        public long NextLevelExperience;
+        public TimeSpan NextLevelEta;
         public int TotalExperience;
         public int TotalItemsRemoved;
         public int TotalPokemons;
@@ -37,7 +41,7 @@ namespace PoGo.NecroBot.Logic.Utils
 
         public event StatisticsDirtyDelegate DirtyEvent;
 
-        private string FormatRuntime()
+        public string GetFormattedRuntime()
         {
             return (DateTime.Now - _initSessionDateTime).ToString(@"dd\.hh\:mm\:ss");
         }
@@ -49,19 +53,18 @@ namespace PoGo.NecroBot.Logic.Utils
             var stat = stats.FirstOrDefault();
             if (stat != null)
             {
+                CurrentLevel = stat.Level;
                 var ep = stat.NextLevelXp - stat.PrevLevelXp - (stat.Experience - stat.PrevLevelXp);
                 var time = Math.Round(ep/(TotalExperience/GetRuntime()), 2);
-                var hours = 0.00;
-                var minutes = 0.00;
                 if (double.IsInfinity(time) == false && time > 0)
-                {
-                    time = Convert.ToDouble(TimeSpan.FromHours(time).ToString("h\\.mm"), CultureInfo.InvariantCulture);
-                    hours = Math.Truncate(time);
-                    minutes = Math.Round((time - hours)*100);
-                }
+                    NextLevelEta = TimeSpan.FromHours(time);
+                else
+                    NextLevelEta = TimeSpan.MaxValue;
 
+                CurrentLevelExperience = stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level);
+                NextLevelExperience = stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level);
                 output =
-                    $"{stat.Level} (next level in {hours}h {minutes}m | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
+                    $"{CurrentLevel} (next level in {NextLevelEta} | {CurrentLevelExperience}/{NextLevelExperience} XP)";
             }
             return output;
         }
@@ -86,13 +89,13 @@ namespace PoGo.NecroBot.Logic.Utils
 
         public void SetUsername(GetPlayerResponse profile)
         {
-            _playerName = profile.PlayerData.Username ?? "";
+            PlayerName = profile.PlayerData.Username ?? "";
         }
 
         public override string ToString()
         {
             return
-                $"{_playerName} - Runtime {FormatRuntime()} - Lvl: {_currentLevelInfos} | EXP/H: {TotalExperience/GetRuntime():0} | P/H: {TotalPokemons/GetRuntime():0} | Stardust: {TotalStardust:0} | Transfered: {TotalPokemonsTransfered:0} | Items Recycled: {TotalItemsRemoved:0}";
+                $"{PlayerName} - Runtime {GetFormattedRuntime()} - Lvl: {_currentLevelInfos} | EXP/H: {TotalExperience/GetRuntime():0} | P/H: {TotalPokemons/GetRuntime():0} | Stardust: {TotalStardust:0} | Transfered: {TotalPokemonsTransfered:0} | Items Recycled: {TotalItemsRemoved:0}";
         }
     }
 }
