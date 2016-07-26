@@ -190,22 +190,22 @@ namespace PoGo.NecroBot.CLI
         private ICollection<PokemonId> _pokemonsNotToTransfer;
         private ICollection<PokemonId> _pokemonsToEvolve;
 
-        public float KeepMinIvPercentage => GlobalSettings.KeepMinIvPercentage;
-        public int KeepMinCp => GlobalSettings.KeepMinCp;
-        public double WalkingSpeedInKilometerPerHour => GlobalSettings.WalkingSpeedInKilometerPerHour;
-        public bool EvolveAllPokemonWithEnoughCandy => GlobalSettings.EvolveAllPokemonWithEnoughCandy;
-        public bool KeepPokemonsThatCanEvolve => GlobalSettings.KeepPokemonsThatCanEvolve;
-        public bool TransferDuplicatePokemon => GlobalSettings.TransferDuplicatePokemon;
-        public int DelayBetweenPokemonCatch => GlobalSettings.DelayBetweenPokemonCatch;
-        public bool UsePokemonToNotCatchFilter => GlobalSettings.UsePokemonToNotCatchFilter;
-        public int KeepMinDuplicatePokemon => GlobalSettings.KeepMinDuplicatePokemon;
-        public bool PrioritizeIvOverCp => GlobalSettings.PrioritizeIvOverCp;
-        public int MaxTravelDistanceInMeters => GlobalSettings.MaxTravelDistanceInMeters;
-        public string GpxFile => GlobalSettings.GpxFile;
-        public bool UseGpxPathing => GlobalSettings.UseGpxPathing;
-        public bool UseLuckyEggsWhileEvolving => GlobalSettings.UseLuckyEggsWhileEvolving;
-        public bool EvolveAllPokemonAboveIv => GlobalSettings.EvolveAllPokemonAboveIv;
-        public float EvolveAboveIvValue => GlobalSettings.EvolveAboveIvValue;
+        public float KeepMinIvPercentage => UserSettings.Default.KeepMinIVPercentage;
+        public int KeepMinCp => UserSettings.Default.KeepMinCP;
+        public double WalkingSpeedInKilometerPerHour => UserSettings.Default.WalkingSpeedInKilometerPerHour;
+        public bool EvolveAllPokemonWithEnoughCandy => UserSettings.Default.EvolveAllPokemonWithEnoughCandy;
+        public bool TransferDuplicatePokemon => UserSettings.Default.TransferDuplicatePokemon;
+        public int DelayBetweenPokemonCatch => UserSettings.Default.DelayBetweenPokemonCatch;
+        public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
+        public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
+        public bool PrioritizeIvOverCp => UserSettings.Default.PrioritizeIVOverCP;
+        public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
+        public string GpxFile => UserSettings.Default.GPXFile;
+        public bool UseGpxPathing => UserSettings.Default.UseGPXPathing;
+        public bool UseLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
+        public bool EvolveAllPokemonAboveIv => UserSettings.Default.EvolveAllPokemonAboveIV;
+        public float EvolveAboveIvValue => UserSettings.Default.EvolveAboveIVValue;
+        public int MaxCandyToEvolve => UserSettings.Default.MaxCandyToEvolve;
 
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
         {

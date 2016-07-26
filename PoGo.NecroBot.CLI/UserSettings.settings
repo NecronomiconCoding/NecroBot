@@ -68,5 +68,8 @@
     <Setting Name="EvolveAboveIVValue" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">95</Value>
     </Setting>
+    <Setting Name="MaxCandyToEvolve" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">12</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

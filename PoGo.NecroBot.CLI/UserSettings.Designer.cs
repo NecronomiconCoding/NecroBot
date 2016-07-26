@@ -286,5 +286,17 @@ namespace PoGo.NecroBot.CLI {
                 this["EvolveAboveIVValue"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("12")]
+        public int MaxCandyToEvolve {
+            get {
+                return ((int)(this["MaxCandyToEvolve"]));
+            }
+            set {
+                this["MaxCandyToEvolve"] = value;
+            }
+        }
     }
 }
