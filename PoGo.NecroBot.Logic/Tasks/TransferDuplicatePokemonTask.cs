@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static void Execute(Context ctx, StateMachine machine)
         {
             var duplicatePokemons =
-                ctx.Inventory.GetDuplicatePokemonToTransfer(false, ctx.LogicSettings.PrioritizeIvOverCp,
+                ctx.Inventory.GetDuplicatePokemonToTransfer(ctx.LogicSettings.KeepPokemonsThatCanEvolve, ctx.LogicSettings.PrioritizeIvOverCp,
                     ctx.LogicSettings.PokemonsNotToTransfer).Result;
 
             foreach (var duplicatePokemon in duplicatePokemons)
@@ -30,6 +30,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var bestPokemonOfType = ctx.LogicSettings.PrioritizeIvOverCp
                     ? ctx.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon).Result
                     : ctx.Inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon).Result;
+
+                if (bestPokemonOfType == null)
+                    bestPokemonOfType = duplicatePokemon;
 
                 machine.Fire(new TransferPokemonEvent
                 {
