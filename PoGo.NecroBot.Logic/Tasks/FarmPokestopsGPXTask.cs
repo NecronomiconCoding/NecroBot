@@ -11,6 +11,8 @@ using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
 using System.Globalization;
+using PoGo.NecroBot.Logic.Logging;
+using POGOProtos.Networking.Responses;
 
 #endregion
 
@@ -82,6 +84,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             }
 
                             Thread.Sleep(1000);
+
+                            CatchLuredPokemonTask.Execute(ctx, machine, pokeStop);
 
                             RecycleItemsTask.Execute(ctx, machine);
 

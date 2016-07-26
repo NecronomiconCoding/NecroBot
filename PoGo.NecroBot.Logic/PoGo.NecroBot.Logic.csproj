@@ -73,6 +73,7 @@
     <Compile Include="StatisticsAggregator.cs" />
     <Compile Include="Tasks\CatchNearbyPokemonsTask.cs" />
     <Compile Include="Tasks\CatchPokemonTask.cs" />
+    <Compile Include="Tasks\CatchLuredPokemonTask.cs" />
     <Compile Include="Tasks\DisplayPokemonStatsTask.cs" />
     <Compile Include="Tasks\EvolvePokemonTask.cs" />
     <Compile Include="Event\IEvent.cs" />
