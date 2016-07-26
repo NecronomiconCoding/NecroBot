@@ -11,9 +11,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class RenamePokemonTask
     {
-        public static void Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Context ctx, StateMachine machine)
         {
-            var pokemons = ctx.Inventory.GetPokemons().Result;
+            var pokemons = await ctx.Inventory.GetPokemons();
 
             foreach (var pokemon in pokemons)
             {
@@ -27,7 +27,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (perfection > ctx.LogicSettings.KeepMinIvPercentage && newNickname != pokemon.Nickname && ctx.LogicSettings.RenameAboveIv)
                 {
-                    var result = ctx.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname).Result;
+                    var result = await ctx.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
 
                     machine.Fire(new NoticeEvent
                     {
@@ -36,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else if (newNickname == pokemon.Nickname && !ctx.LogicSettings.RenameAboveIv)
                 {
-                    var result = ctx.Client.Inventory.NicknamePokemon(pokemon.Id, pokemon.PokemonId.ToString());
+                    var result = await ctx.Client.Inventory.NicknamePokemon(pokemon.Id, pokemon.PokemonId.ToString());
 
                     machine.Fire(new NoticeEvent
                     {

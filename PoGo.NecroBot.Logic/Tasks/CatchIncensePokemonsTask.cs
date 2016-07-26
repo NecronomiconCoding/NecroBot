@@ -1,4 +1,5 @@
 ﻿using System.Threading;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
@@ -11,12 +12,12 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchIncensePokemonsTask
     {
-        public static void Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Context ctx, StateMachine machine)
         {
             Logger.Write("Looking for incense pokemon..", LogLevel.Debug);
 
 
-            var incensePokemon = ctx.Client.Map.GetIncensePokemons().Result;
+            var incensePokemon = await ctx.Client.Map.GetIncensePokemons();
             if (incensePokemon.Result == GetIncensePokemonResponse.Types.Result.IncenseEncounterAvailable)
             {
                 var pokemon = new MapPokemon
@@ -38,15 +39,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
                         ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
-                    Thread.Sleep(distance > 100 ? 15000 : 500);
+                    await Task.Delay(distance > 100 ? 15000 : 500);
 
                     var encounter =
-                        ctx.Client.Encounter.EncounterIncensePokemon((long) pokemon.EncounterId, pokemon.SpawnPointId)
-                            .Result;
+                        await ctx.Client.Encounter.EncounterIncensePokemon((long) pokemon.EncounterId, pokemon.SpawnPointId);
 
                     if (encounter.Result == IncenseEncounterResponse.Types.Result.IncenseEncounterSuccess)
                     {
-                        CatchPokemonTask.Execute(ctx, machine, encounter, pokemon);
+                        await CatchPokemonTask.Execute(ctx, machine, encounter, pokemon);
                     }
                     else
                     {
