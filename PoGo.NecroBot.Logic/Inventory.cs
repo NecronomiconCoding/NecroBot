@@ -61,7 +61,8 @@ namespace PoGo.NecroBot.Logic
 
             var pokemonList =
                 myPokemon.Where(
-                    p => p.DeployedFortId == string.Empty && p.Favorite == 0 && p.Cp < _logicClient.Settings.KeepMinCp)
+                    p => p.DeployedFortId == string.Empty && PokemonInfo.CalculatePokemonPerfection(p) < 100 &&
+                         (p.Favorite == 0 && p.Cp < _logicClient.Settings.KeepMinCp || PokemonInfo.CalculatePokemonPerfection(p) < _logicClient.Settings.KeepMinIvPercentage))
                     .ToList();
             if (filter != null)
             {
