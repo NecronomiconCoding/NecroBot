@@ -10,6 +10,8 @@ namespace PoGo.NecroBot.Logic.State
     {
         public IState Execute(Context ctx, StateMachine machine)
         {
+            RenamePokemonTask.Execute(ctx, machine);
+
             if (ctx.LogicSettings.EvolveAllPokemonAboveIv || ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
                 EvolvePokemonTask.Execute(ctx, machine);

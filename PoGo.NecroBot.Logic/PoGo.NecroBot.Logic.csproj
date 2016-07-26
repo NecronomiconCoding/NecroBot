@@ -34,8 +34,8 @@
       <HintPath>..\packages\Google.Protobuf.3.0.0-beta4\lib\net45\Google.Protobuf.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="POGOProtos, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\POGOProtos.1.2.0\lib\net45\POGOProtos.dll</HintPath>
+    <Reference Include="POGOProtos, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\POGOProtos.1.3.0\lib\net45\POGOProtos.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Event\DisplayHighestsPokemonEvent.cs" />
     <Compile Include="Event\FortTargetEvent.cs" />
     <Compile Include="Event\FortUsedEvent.cs" />
     <Compile Include="Event\ItemRecycledEvent.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="State\Context.cs" />
     <Compile Include="Event\ErrorEvent.cs" />
     <Compile Include="State\FarmState.cs" />
+    <Compile Include="State\InfoState.cs" />
     <Compile Include="StatisticsAggregator.cs" />
     <Compile Include="Tasks\CatchNearbyPokemonsTask.cs" />
     <Compile Include="Tasks\CatchPokemonTask.cs" />
@@ -81,7 +83,9 @@
     <Compile Include="State\StateMachine.cs" />
     <Compile Include="Tasks\FarmPokestopsGPXTask.cs" />
     <Compile Include="Tasks\FarmPokestopsTask.cs" />
+    <Compile Include="Tasks\LogBestPokemonTask.cs" />
     <Compile Include="Tasks\RecycleItemsTask.cs" />
+    <Compile Include="Tasks\RenamePokemonTask.cs" />
     <Compile Include="Tasks\TransferDuplicatePokemonTask.cs" />
     <Compile Include="Event\UseLuckyEggEvent.cs" />
     <Compile Include="State\VersionCheckState.cs" />

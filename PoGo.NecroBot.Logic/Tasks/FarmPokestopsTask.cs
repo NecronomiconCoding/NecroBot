@@ -88,6 +88,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;
+                    RenamePokemonTask.Execute(ctx, machine);
                     RecycleItemsTask.Execute(ctx, machine);
                     if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonAboveIv)
                     {

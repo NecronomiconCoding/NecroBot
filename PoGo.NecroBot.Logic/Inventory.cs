@@ -61,7 +61,8 @@ namespace PoGo.NecroBot.Logic
 
             var pokemonList =
                 myPokemon.Where(
-                    p => p.DeployedFortId == string.Empty && p.Favorite == 0 && p.Cp < _logicClient.Settings.KeepMinCp)
+                    p => p.DeployedFortId == string.Empty && PokemonInfo.CalculatePokemonPerfection(p) < 100 &&
+                         (p.Favorite == 0 && p.Cp < _logicClient.Settings.KeepMinCp || PokemonInfo.CalculatePokemonPerfection(p) < _logicClient.Settings.KeepMinIvPercentage))
                     .ToList();
             if (filter != null)
             {
@@ -84,10 +85,13 @@ namespace PoGo.NecroBot.Logic
                     var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
                     var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
                     var amountToSkip = _logicClient.Settings.KeepMinDuplicatePokemon;
-                    var amountPossible = familyCandy.Candy / settings.CandyToEvolve;
 
-                    if (settings.CandyToEvolve > 0 && amountPossible > amountToSkip)
-                        amountToSkip = amountPossible;
+                    if (settings.CandyToEvolve > 0)
+                    {
+                        var amountPossible = familyCandy.Candy / settings.CandyToEvolve;
+                        if (amountPossible > amountToSkip)
+                            amountToSkip = amountPossible;
+                    }
 
                     if (prioritizeIVoverCp)
                     {
@@ -189,8 +193,7 @@ namespace PoGo.NecroBot.Logic
                         new ItemData
                         {
                             ItemId = x.ItemId,
-                            Count =
-                                x.Count - _logicClient.Settings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
+                            Count = x.Count - _logicClient.Settings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
         }
@@ -206,9 +209,19 @@ namespace PoGo.NecroBot.Logic
         public async Task<IEnumerable<PokemonFamily>> GetPokemonFamilies()
         {
             var inventory = await GetCachedInventory();
-            return
-                inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonFamily)
-                    .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
+
+            var families = from item in inventory.InventoryDelta.InventoryItems
+            where item.InventoryItemData?.PokemonFamily != null
+            where item.InventoryItemData?.PokemonFamily.FamilyId != PokemonFamilyId.FamilyUnset
+            group item by item.InventoryItemData?.PokemonFamily.FamilyId into family
+            select new PokemonFamily
+            {
+                FamilyId = family.First().InventoryItemData.PokemonFamily.FamilyId,
+                Candy = family.First().InventoryItemData.PokemonFamily.Candy
+            };
+
+
+            return families;
         }
 
         public async Task<IEnumerable<PokemonData>> GetPokemons()
