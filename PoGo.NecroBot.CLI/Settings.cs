@@ -35,7 +35,7 @@ namespace PoGo.NecroBot.CLI
             {
                 Console.Clear();
                 return;
-            }               
+            }
             do
             {
                 Console.WriteLine("Username:");
@@ -52,7 +52,7 @@ namespace PoGo.NecroBot.CLI
         public string GoogleRefreshToken;
         public string PtcUsername;
         public string PtcPassword;
-        
+
 
         [JsonIgnore]
         private string FilePath;
@@ -92,7 +92,7 @@ namespace PoGo.NecroBot.CLI
 
         public void Save()
         {
-            if(!string.IsNullOrEmpty(FilePath))
+            if (!string.IsNullOrEmpty(FilePath))
             {
                 Save(FilePath);
             }
@@ -130,7 +130,7 @@ namespace PoGo.NecroBot.CLI
                 settings = new GlobalSettings();
             }
 
-            if(settings.WebSocketPort == 0)
+            if (settings.WebSocketPort == 0)
             {
                 settings.WebSocketPort = 14251;
             }
@@ -155,6 +155,7 @@ namespace PoGo.NecroBot.CLI
         }
 
         public bool AutoUpdate = false;
+        public string TranslationLanguageCode = "en";
         public double DefaultAltitude = 10;
         public double DefaultLatitude = 52.379189;
         public double DefaultLongitude = 4.899431;
@@ -177,7 +178,7 @@ namespace PoGo.NecroBot.CLI
         public int AmountOfPokemonToDisplayOnStart = 10;
         public bool RenameAboveIv = false;
         public int WebSocketPort = 14251;
-        
+
         [JsonIgnore]
         internal AuthSettings Auth = new AuthSettings();
 
@@ -298,6 +299,7 @@ namespace PoGo.NecroBot.CLI
         public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
         public bool RenameAboveIv => _settings.RenameAboveIv;
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
+        public string TranslationLanguageCode => _settings.TranslationLanguageCode;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
