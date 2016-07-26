@@ -119,7 +119,7 @@ namespace PoGo.NecroBot.Logic.State
                     return true;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return true; //better than just doing nothing when git server down
             }
