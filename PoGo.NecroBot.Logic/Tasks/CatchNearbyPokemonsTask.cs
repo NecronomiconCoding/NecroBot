@@ -29,6 +29,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                     continue;
                 }
 
+                if (ctx.Inventory.GetPokemons().Result.Any(p => p.PokemonId == pokemon.PokemonId) && ctx.LogicSettings.DontCatchDuplicatedPokemon)
+                {
+                    Logger.Write("Already Have " + pokemon.PokemonId + " Skipped");
+                    continue;
+                }
+
                 var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
                     ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
                 Thread.Sleep(distance > 100 ? 15000 : 500);

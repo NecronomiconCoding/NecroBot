@@ -138,6 +138,7 @@ namespace PoGo.NecroBot.CLI
         public bool KeepPokemonsThatCanEvolve = true;
         public int MaxTravelDistanceInMeters = 1000;
         public bool PrioritizeIvOverCp = true;
+        public bool DontCatchDuplicatedPokemon = false;
         public bool TransferDuplicatePokemon = true;
         public bool UseGpxPathing = false;
         public bool UseLuckyEggsWhileEvolving = false;
@@ -252,6 +253,7 @@ namespace PoGo.NecroBot.CLI
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
+        public bool DontCatchDuplicatedPokemon => _settings.DontCatchDuplicatedPokemon;
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
