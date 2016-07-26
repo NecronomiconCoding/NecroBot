@@ -57,7 +57,7 @@ namespace PoGo.NecroBot.Logic.Logging
         {
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + "\\Dumps");
 
-            string path = Directory.GetCurrentDirectory() + _subPath + $"\\Dumps\\NecroBot-{filename}.txt";
+            string path = Directory.GetCurrentDirectory() + _subPath + $"\\Dumps\\NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt";
 
             // Clears all contents of a file first if overwrite is true
             File.WriteAllText(path, string.Empty);
