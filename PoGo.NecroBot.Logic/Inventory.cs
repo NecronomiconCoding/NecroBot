@@ -206,7 +206,7 @@ namespace PoGo.NecroBot.Logic
                 .Where(p => p != null);
         }
 
-        public async Task<IEnumerable<PokemonFamily>> GetPokemonFamilies()
+        public async Task<List<PokemonFamily>> GetPokemonFamilies()
         {
             var inventory = await GetCachedInventory();
 
@@ -221,7 +221,7 @@ namespace PoGo.NecroBot.Logic
             };
 
 
-            return families;
+            return families.ToList();
         }
 
         public async Task<IEnumerable<PokemonData>> GetPokemons()
