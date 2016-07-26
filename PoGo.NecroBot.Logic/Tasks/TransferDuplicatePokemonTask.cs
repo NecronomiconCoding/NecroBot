@@ -31,6 +31,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ? ctx.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon).Result
                     : ctx.Inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon).Result;
 
+                if (bestPokemonOfType == null)
+                    bestPokemonOfType = duplicatePokemon;
+
                 machine.Fire(new TransferPokemonEvent
                 {
                     Id = duplicatePokemon.PokemonId,
