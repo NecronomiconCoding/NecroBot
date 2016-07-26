@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -10,7 +11,6 @@ using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
-using System.Globalization;
 
 #endregion
 
@@ -64,6 +64,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Wait();
 
+                            if (pokeStop.LureInfo != null)
+                            {
+                                CatchLurePokemonsTask.Execute(ctx, machine, pokeStop);
+                            }
+
                             var fortSearch =
                                 ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
 
@@ -85,7 +90,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             RecycleItemsTask.Execute(ctx, machine);
 
-                            if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonAboveIv)
+                            if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
+                                ctx.LogicSettings.EvolveAllPokemonAboveIv)
                             {
                                 EvolvePokemonTask.Execute(ctx, machine);
                             }
@@ -99,8 +105,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         ctx.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
                             ctx.LogicSettings.WalkingSpeedInKilometerPerHour, () =>
                             {
-
                                 CatchNearbyPokemonsTask.Execute(ctx, machine);
+                                //Catch Incense Pokemon
+                                CatchIncensePokemonsTask.Execute(ctx, machine);
                                 UseNearbyPokestopsTask.Execute(ctx, machine);
                                 return true;
                             }
@@ -129,6 +136,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var readgpx = new GpxReader(xmlString);
             return readgpx.Tracks;
         }
+
         //Please do not change GetPokeStops() in this file, it's specifically set
         //to only find stops within 40 meters
         //this is for gpx pathing, we are not going to the pokestops,
