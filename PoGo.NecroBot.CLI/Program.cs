@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System;
+using System.IO;
 using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
@@ -39,7 +40,7 @@ namespace PoGo.NecroBot.CLI
         {
             string subPath = "";
             if (args.Length > 0)
-                subPath = "\\" + args[0];
+                subPath = Path.DirectorySeparatorChar + args[0];
 
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
 
