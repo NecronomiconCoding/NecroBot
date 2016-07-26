@@ -260,6 +260,11 @@ namespace PoGo.NecroBot.Logic
                         p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId)*
                     settings.CandyToEvolve;
 
+                // Don't evolve anything over our max candy setting (default to 12 to stick to pidgey/caterpie/weedle)
+                // Save candy for powering up everything else
+                if (settings.CandyToEvolve > _logicClient.Settings.MaxCandyToEvolve)
+                    continue;
+
                 if (_logicClient.Settings.EvolveAllPokemonAboveIv)
                 {
                     if (PokemonInfo.CalculatePokemonPerfection(pokemon) >= _logicClient.Settings.EvolveAboveIvValue &&

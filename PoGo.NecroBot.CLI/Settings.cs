@@ -56,6 +56,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
         public bool EvolveAllPokemonAboveIv => UserSettings.Default.EvolveAllPokemonAboveIV;
         public float EvolveAboveIvValue => UserSettings.Default.EvolveAboveIVValue;
+        public int MaxCandyToEvolve => UserSettings.Default.MaxCandyToEvolve;
 
         //Type and amount to keep
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter

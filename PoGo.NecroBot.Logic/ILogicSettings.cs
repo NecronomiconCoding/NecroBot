@@ -25,6 +25,7 @@ namespace PoGo.NecroBot.Logic
         bool UseLuckyEggsWhileEvolving { get; }
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
+        int MaxCandyToEvolve { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
