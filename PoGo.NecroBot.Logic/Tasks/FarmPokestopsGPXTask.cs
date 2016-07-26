@@ -50,7 +50,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                             });
                             break;
                         }
+
                         var pokestopList = await GetPokeStops(ctx);
+                        machine.Fire(new PokeStopListEvent { Forts = pokestopList });
 
                         while (pokestopList.Any())
                         {

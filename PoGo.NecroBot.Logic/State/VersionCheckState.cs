@@ -22,13 +22,11 @@ namespace PoGo.NecroBot.Logic.State
         public static string LatestReleaseApi =
             "https://api.github.com/repos/NecronomiconCoding/NecroBot/releases/latest";
 
-        public static bool AutoUpdate;
-
         public static Version RemoteVersion;
 
         public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
-            AutoUpdate = ctx.LogicSettings.AutoUpdate;
+            bool AutoUpdate = ctx.LogicSettings.AutoUpdate;
             CleanupOldFiles();
             var needupdate = IsLatest();
             if (!needupdate || !AutoUpdate)

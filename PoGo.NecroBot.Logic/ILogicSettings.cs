@@ -29,6 +29,7 @@ namespace PoGo.NecroBot.Logic
         float EvolveAboveIvValue { get; }
         bool RenameAboveIv { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
+        bool AutoUpdate { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
