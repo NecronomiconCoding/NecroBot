@@ -49,7 +49,7 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(TransferPokemonEvent evt, Context ctx)
         {
             Logger.Write(
-                $"{evt.Id}\t- CP: {evt.Cp}  IV: {evt.Perfection.ToString("0.00")}%   [Best CP: {evt.BestCp}  IV: {evt.BestPerfection.ToString("0.00")}%]",
+                $"{evt.Id}\t- CP: {evt.Cp}  IV: {evt.Perfection.ToString("0.00")}%   [Best CP: {evt.BestCp}  IV: {evt.BestPerfection.ToString("0.00")}%] (Candies: {evt.FamilyCandies}) ",
                 LogLevel.Transfer);
         }
 
@@ -91,8 +91,12 @@ namespace PoGo.NecroBot.CLI
                 ? $"{evt.Status} Attempt #{evt.Attempt}"
                 : $"{evt.Status}";
 
+            var familyCandies = evt.FamilyCandies > 0
+                ? $" | Family Candies: {evt.FamilyCandies}"
+                : "";
+
             Logger.Write(
-                $"({catchStatus}) {evt.Id} Lvl: {evt.Level} CP: ({evt.Cp}/{evt.MaxCp}) IV: {evt.Perfection.ToString("0.00")}% | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball.",
+                $"({catchStatus}) {evt.Id} Lvl: {evt.Level} CP: ({evt.Cp}/{evt.MaxCp}) IV: {evt.Perfection.ToString("0.00")}% | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball. Candies: {familyCandies}",
                 LogLevel.Caught);
         }
 
