@@ -101,7 +101,6 @@ namespace PoGo.NecroBot.Logic.Logging
         public static void Dump(string data, string filename)
         {
             string uniqueFileName = $"{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}";
-            //ClearDumpFile(uniqueFileName);
             // Dump with file overwrite
             DumpToFile(data, uniqueFileName);
         }

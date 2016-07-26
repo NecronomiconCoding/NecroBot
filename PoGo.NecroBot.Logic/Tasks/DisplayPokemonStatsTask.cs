@@ -28,7 +28,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     LogLevel.Info, ConsoleColor.Yellow);
             }
 
-            Logger.Write($"WTF IS GOING ON {ctx.LogicSettings.DumpPokemonStats}", LogLevel.Info);
             if (ctx.LogicSettings.DumpPokemonStats)
             {
                 // Maximum pokebag is limited to 1000
