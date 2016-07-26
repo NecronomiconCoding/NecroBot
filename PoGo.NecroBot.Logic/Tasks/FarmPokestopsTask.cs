@@ -6,6 +6,7 @@ using System.Device.Location;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
@@ -29,9 +30,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (ctx.LogicSettings.MaxTravelDistanceInMeters != 0 &&
                 distanceFromStart > ctx.LogicSettings.MaxTravelDistanceInMeters)
             {
-                Logger.Write(
-                    $"You're outside of your defined radius! Walking to start ({distanceFromStart}m away) in 5 seconds. Is your Coords.ini file correct?",
-                    LogLevel.Warning);
+                Logger.Write(ctx.Translations.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart), LogLevel.Warning);
 
                 await Task.Delay(5000);
 
@@ -45,7 +44,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokestopList.Count <= 0)
             {
-                machine.Fire(new WarnEvent { Message = "No usable PokeStops found in your area. Is your maximum distance too small?" });
+                machine.Fire(new WarnEvent { Message = ctx.Translations.GetTranslation(TranslationString.FarmPokestopsNoUsableFound) });
             }
 
             machine.Fire(new PokeStopListEvent { Forts = pokestopList });
@@ -65,7 +64,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ctx.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
-                machine.Fire(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
+                machine.Fire(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
 
                 await ctx.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
                     ctx.LogicSettings.WalkingSpeedInKilometerPerHour,
@@ -97,7 +96,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
 
                 await Task.Delay(1000);
-                if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
+                if (++stopsHit % 5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;
                     if (fortSearch.ItemsAwarded.Count > 0)
