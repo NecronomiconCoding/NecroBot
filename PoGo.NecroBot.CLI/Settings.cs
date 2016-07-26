@@ -145,7 +145,8 @@ namespace PoGo.NecroBot.CLI
         public bool UseLuckyEggsWhileEvolving = false;
         public bool UsePokemonToNotCatchFilter = false;
         public double WalkingSpeedInKilometerPerHour = 50;
-        
+        public bool RenameAboveIv = false;
+
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
                 {
                     new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
@@ -261,6 +262,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseLuckyEggsWhileEvolving => _settings.UseLuckyEggsWhileEvolving;
         public bool EvolveAllPokemonAboveIv => _settings.EvolveAllPokemonAboveIv;
         public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
+        public bool RenameAboveIv => _settings.RenameAboveIv;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
