@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
@@ -10,17 +11,24 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class LoginState : IState
     {
-        public IState Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
             try
             {
                 switch (ctx.Settings.AuthType)
                 {
                     case AuthType.Ptc:
-                        ctx.Client.Login.DoPtcLogin(ctx.Settings.PtcUsername, ctx.Settings.PtcPassword).Wait();
+                        try
+                        {
+                            await ctx.Client.Login.DoPtcLogin(ctx.Settings.PtcUsername, ctx.Settings.PtcPassword);
+                        }
+                        catch (System.AggregateException ae)
+                        {
+                            throw ae.Flatten().InnerException;
+                        }
                         break;
                     case AuthType.Google:
-                        ctx.Client.Login.DoGoogleLogin().Wait();
+                        await ctx.Client.Login.DoGoogleLogin();
                         break;
                     default:
                         machine.Fire(new ErrorEvent {Message = "wrong AuthType"});
@@ -34,7 +42,7 @@ namespace PoGo.NecroBot.Logic.State
                     Message = "PTC Servers are probably down OR your credentials are wrong. Try google"
                 });
                 machine.Fire(new NoticeEvent {Message = "Trying again in 20 seconds..."});
-                machine.RequestDelay(20000);
+                await Task.Delay(20000);
                 return this;
             }
             catch (AccountNotVerifiedException)
@@ -43,14 +51,14 @@ namespace PoGo.NecroBot.Logic.State
                 return null;
             }
 
-            DownloadProfile(ctx, machine);
+            await DownloadProfile(ctx, machine);
 
-            return new PositionCheckState();
+            return new InfoState();
         }
 
-        public void DownloadProfile(Context ctx, StateMachine machine)
+        public async Task DownloadProfile(Context ctx, StateMachine machine)
         {
-            ctx.Profile = ctx.Client.Player.GetPlayer().Result;
+            ctx.Profile = await ctx.Client.Player.GetPlayer();
             machine.Fire(new ProfileEvent {Profile = ctx.Profile});
         }
     }

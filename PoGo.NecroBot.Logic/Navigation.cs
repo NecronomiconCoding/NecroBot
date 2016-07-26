@@ -29,7 +29,7 @@ namespace PoGo.NecroBot.Logic
         }
 
         public async Task<PlayerUpdateResponse> HumanLikeWalking(GeoCoordinate targetLocation,
-            double walkingSpeedInKilometersPerHour, Func<bool> functionExecutedWhileWalking)
+            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking)
         {
             var speedInMetersPerSecond = walkingSpeedInKilometersPerHour / 3.6;
 
@@ -76,7 +76,8 @@ namespace PoGo.NecroBot.Logic
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                             _client.Settings.DefaultAltitude);
 
-                functionExecutedWhileWalking?.Invoke(); // look for pokemon
+                if (functionExecutedWhileWalking != null)
+                    await functionExecutedWhileWalking(); // look for pokemon
 
                 await Task.Delay(Math.Min((int)(distanceToTarget / speedInMetersPerSecond * 1000), 3000));
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
@@ -85,7 +86,7 @@ namespace PoGo.NecroBot.Logic
         }
 
         public async Task<PlayerUpdateResponse> HumanPathWalking(GpxReader.Trkpt trk,
-            double walkingSpeedInKilometersPerHour, Func<bool> functionExecutedWhileWalking)
+            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking)
         {
             //PlayerUpdateResponse result = null;
 
@@ -137,7 +138,8 @@ namespace PoGo.NecroBot.Logic
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                             waypoint.Altitude);
 
-                functionExecutedWhileWalking?.Invoke(); // look for pokemon & hit stops
+                if (functionExecutedWhileWalking != null)
+                    await functionExecutedWhileWalking(); // look for pokemon & hit stops
 
                 await Task.Delay(Math.Min((int)(distanceToTarget / speedInMetersPerSecond * 1000), 3000));
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);

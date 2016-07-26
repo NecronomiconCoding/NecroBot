@@ -10,14 +10,16 @@ namespace PoGo.NecroBot.Logic.Logging
     public static class Logger
     {
         private static ILogger _logger;
+        private static string _subPath;
 
         private static void Log(string message)
         {
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Logs");
+            // maybe do a new log rather than appending?
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + "\\Logs");
 
             using (
                 var log =
-                    File.AppendText(Directory.GetCurrentDirectory() +
+                    File.AppendText(Directory.GetCurrentDirectory() + _subPath +
                                     $"\\Logs\\NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt")
                 )
             {
@@ -34,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Logging
         /// <param name="overwrite">Optional Default is to append</param>
         public static void Dump(string data, string filename, bool overwrite)
         {
-            string path = Directory.GetCurrentDirectory() + $"\\Logs\\DataDump-{filename}.txt";
+            string path = Directory.GetCurrentDirectory() + _subPath + $"\\Logs\\DataDump-{filename}.txt";
 
             // Clears all contents of a file first if overwrite is true
             if (!File.Exists(path) || overwrite)
@@ -44,8 +46,7 @@ namespace PoGo.NecroBot.Logic.Logging
 
             using (
                 var dumpFile =
-                    File.AppendText(Directory.GetCurrentDirectory() +
-                                    $"\\Logs\\DataDump-{filename}.txt")
+                    File.AppendText(path)
                 )
             {
                 dumpFile.WriteLine(data);
@@ -59,9 +60,10 @@ namespace PoGo.NecroBot.Logic.Logging
         ///     unset.
         /// </summary>
         /// <param name="logger"></param>
-        public static void SetLogger(ILogger logger)
+        public static void SetLogger(ILogger logger, string subPath = "")
         {
             _logger = logger;
+            _subPath = subPath;
             Log($"Initializing Rocket logger at time {DateTime.Now}...");
         }
 
