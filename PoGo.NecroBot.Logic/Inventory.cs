@@ -54,7 +54,7 @@ namespace PoGo.NecroBot.Logic
         }
 
         public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer(
-            bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCp = false,
+            bool keepPokemonsThatCanEvolve = false, Func<PokemonData, double> keySelector = null,
             IEnumerable<PokemonId> filter = null)
         {
             var myPokemon = await GetPokemons();
@@ -93,67 +93,37 @@ namespace PoGo.NecroBot.Logic
                             amountToSkip = amountPossible;
                     }
 
-                    if (prioritizeIVoverCp)
-                    {
-                        results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
-                            .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                            .ThenBy(n => n.StaminaMax)
-                            .Skip(amountToSkip)
-                            .ToList());
-                    }
-                    else
-                    {
-                        results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
-                            .OrderByDescending(x => x.Cp)
-                            .ThenBy(n => n.StaminaMax)
-                            .Skip(amountToSkip)
-                            .ToList());
-                    }
+                    results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
+                           .OrderByDescending(keySelector != null ? keySelector : PokemonInfo.CalculateCp)
+                           .ThenBy(n => n.StaminaMax)
+                           .Skip(amountToSkip)
+                           .ToList());
                 }
 
                 return results;
             }
-            if (prioritizeIVoverCp)
-            {
-                return pokemonList
-                    .GroupBy(p => p.PokemonId)
-                    .Where(x => x.Count() > 0)
-                    .SelectMany(
-                        p =>
-                            p.OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                                .ThenBy(n => n.StaminaMax)
-                                .Skip(_logicClient.Settings.KeepMinDuplicatePokemon)
-                                .ToList());
-            }
             return pokemonList
-                .GroupBy(p => p.PokemonId)
-                .Where(x => x.Count() > 0)
-                .SelectMany(
-                    p =>
-                        p.OrderByDescending(x => x.Cp)
-                            .ThenBy(n => n.StaminaMax)
-                            .Skip(_logicClient.Settings.KeepMinDuplicatePokemon)
-                            .ToList());
+          .GroupBy(p => p.PokemonId)
+          .Where(x => x.Count() > 1)
+          .SelectMany(
+              p =>
+                  p.OrderByDescending(keySelector)
+                      .ThenBy(n => n.StaminaMax)
+                      .Skip(_logicClient.Settings.KeepMinDuplicatePokemon)
+                      .ToList());
+         
         }
 
-        public async Task<PokemonData> GetHighestPokemonOfTypeByCp(PokemonData pokemon)
+        public async Task<PokemonData> GetHighestPokemonOfTypeBySelector(PokemonData pokemon, Func<PokemonData, double> keySelector)
         {
             var myPokemon = await GetPokemons();
             var pokemons = myPokemon.ToList();
             return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
-                .OrderByDescending(x => x.Cp)
+                .OrderByDescending(keySelector)
                 .FirstOrDefault();
         }
 
-        public async Task<PokemonData> GetHighestPokemonOfTypeByIv(PokemonData pokemon)
-        {
-            var myPokemon = await GetPokemons();
-            var pokemons = myPokemon.ToList();
-            return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
-                .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                .FirstOrDefault();
-        }
-
+     
         public async Task<IEnumerable<PokemonData>> GetHighestsCp(int limit)
         {
             var myPokemon = await GetPokemons();
@@ -166,6 +136,17 @@ namespace PoGo.NecroBot.Logic
             var myPokemon = await GetPokemons();
             var pokemons = myPokemon.ToList();
             return pokemons.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(limit);
+        }
+
+        public async Task<IEnumerable<PokemonData>> GetHighestsBR(int limit)
+        {
+            var myPokemon = await GetPokemons();
+            var pokemons = myPokemon.ToList();
+            var stats = await GetPlayerStats();
+
+            var stat = stats.FirstOrDefault();
+
+            return pokemons.OrderByDescending(p => PokemonInfo.CalculatePokemonBattleRating(p, _logicClient.Settings.PokemonBrPrioritizationIVWeightPercentage, stat!=null ? stat.Level : 30)).Take(limit);
         }
 
         public async Task<int> GetItemAmountByType(ItemId type)
@@ -231,7 +212,7 @@ namespace PoGo.NecroBot.Logic
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonData)
                     .Where(p => p != null && p.PokemonId > 0);
         }
-
+        
         public async Task<IEnumerable<PokemonSettings>> GetPokemonSettings()
         {
             var templates = await _client.Download.GetItemTemplates();

@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.Logic.Event
 {
-    public class DisplayHighestsPokemonEvent : IEvent
+    public class ExportListPokemonEvent : IEvent
     {
         public String SortedBy;
         //PokemonData | CP | IV | Level
-        public List<Tuple<PokemonData,int,double,double,double>> PokemonList;
-
+        public bool ExportSuccessful;
+        public int PokemonCount;
+        public String Path;
+        public String Message;
     }
 }

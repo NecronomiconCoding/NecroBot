@@ -91,6 +91,9 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
+        public void HandleEvent(ExportListPokemonEvent evt, Context ctx)
+        {
+        }
         public void Listen(IEvent evt, Context ctx)
         {
             dynamic eve = evt;

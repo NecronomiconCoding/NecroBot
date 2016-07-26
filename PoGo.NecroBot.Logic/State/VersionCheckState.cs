@@ -1,13 +1,21 @@
 ﻿#region using directives
 
 using System;
+<<<<<<< HEAD
+=======
 using System.Diagnostics;
+>>>>>>> refs/remotes/NecronomiconCoding/master
 using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
+<<<<<<< HEAD
+using System.Threading;
+using PoGo.NecroBot.Logic.Event;
+=======
 using System.Threading.Tasks;
+>>>>>>> refs/remotes/NecronomiconCoding/master
 using PoGo.NecroBot.Logic.Logging;
 
 #endregion
@@ -19,6 +27,14 @@ namespace PoGo.NecroBot.Logic.State
         public static string VersionUri =
             "https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/PoGo.NecroBot.Logic/Properties/AssemblyInfo.cs";
 
+<<<<<<< HEAD
+        public static bool AutoUpdate = true; //TODO: read from clientsettings
+
+        public IState Execute(Context ctx, StateMachine machine)
+        {
+            if (File.Exists(Assembly.GetExecutingAssembly().Location + ".old")) File.Delete(Assembly.GetExecutingAssembly().Location + ".old"); // delete old update files
+            if (IsLatest())
+=======
         public static string LatestReleaseApi =
             "https://api.github.com/repos/NecronomiconCoding/NecroBot/releases/latest";
 
@@ -30,6 +46,7 @@ namespace PoGo.NecroBot.Logic.State
             CleanupOldFiles();
             var needupdate = IsLatest();
             if (!needupdate || !AutoUpdate)
+>>>>>>> refs/remotes/NecronomiconCoding/master
             {
                 if (!AutoUpdate)
                 {
@@ -79,6 +96,54 @@ namespace PoGo.NecroBot.Logic.State
         {
             using (var client = new WebClient())
             {
+<<<<<<< HEAD
+                var msg = AutoUpdate
+                    ? "Updating to newest Version...."
+                    : "There is a new Version available: https://github.com/NecronomiconCoding/Pokemon-Go-Bot";
+                machine.Fire(new WarnEvent
+                {
+                    Message = msg
+                });
+
+
+                const string url = "https://github.com/NecronomiconCoding/NecroBot/archive/master.zip";
+                const string zipName = "update.zip";
+                var baseDir = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent?.Parent?.Parent;
+                var downloadedFilePath = baseDir + "/tmp/";
+                var wrongProjectFilePath = baseDir + "NecroBot-master/"; //TODO:change
+                
+                //Download binary , unpack it and move it
+                if (DownloadFile(url, downloadedFilePath + zipName))
+                {
+                    if (UnpackFile(downloadedFilePath, baseDir?.ToString(), zipName))
+                    {
+                        var curFile = Assembly.GetExecutingAssembly().Location;
+                        File.Move(curFile, curFile + ".old"); //renames current exe to .exe.old
+                        if (MoveAllFiles(wrongProjectFilePath, baseDir?.ToString()))
+                        {
+                            Logger.Write("Update finished... restarting"); //after moving the new .exe restart
+                            Thread.Sleep(2000);
+                            System.Diagnostics.Process.Start(curFile); 
+                            Environment.Exit(0);
+                        }
+                        else
+                        {
+                            Logger.Write("Error moving Files inside " + wrongProjectFilePath);
+                        }
+                    }
+                    else
+                    {
+                        Logger.Write("Error Unpacking update. Located in /tmp/");
+                    }
+                }
+                else
+                {
+                    Logger.Write("Error Downloading Update, please download from:");
+                    Logger.Write(url);
+                }
+            }
+            return new LoginState();
+=======
                 try
                 {
                     client.DownloadFile(url, dest);
@@ -86,6 +151,23 @@ namespace PoGo.NecroBot.Logic.State
                 catch
                 {
                     // ignored
+                }
+                return true;
+            }
+>>>>>>> refs/remotes/NecronomiconCoding/master
+        }
+
+        public static bool DownloadFile(string url, string dest)
+        {
+            using (var client = new WebClient())
+            {
+                try
+                {
+                    client.DownloadFile(url, Directory.GetCurrentDirectory() + dest);
+                }
+                catch (Exception)
+                {
+                    return false;
                 }
                 return true;
             }
@@ -130,6 +212,8 @@ namespace PoGo.NecroBot.Logic.State
             if (!Directory.Exists(destFolder))
                 Directory.CreateDirectory(destFolder);
 
+<<<<<<< HEAD
+=======
             var oldfiles = Directory.GetFiles(destFolder);
             foreach (var old in oldfiles)
             {
@@ -137,13 +221,19 @@ namespace PoGo.NecroBot.Logic.State
                 File.Move(old, old + ".old");
             }
 
+>>>>>>> refs/remotes/NecronomiconCoding/master
             try
             {
                 var files = Directory.GetFiles(sourceFolder);
                 foreach (var file in files)
                 {
+<<<<<<< HEAD
+                    var name = Path.GetFileName(file);
+                    if (name == null) continue;
+=======
                     if (file.Contains("vshost")) continue;
                     var name = Path.GetFileName(file);
+>>>>>>> refs/remotes/NecronomiconCoding/master
                     var dest = Path.Combine(destFolder, name);
                     File.Copy(file, dest, true);
                 }
@@ -165,10 +255,18 @@ namespace PoGo.NecroBot.Logic.State
             return true;
         }
 
+<<<<<<< HEAD
+        public static bool UnpackFile(string sourcePath, string destPath, string fileName)
+        {
+            var source = Directory.GetCurrentDirectory() + sourcePath + fileName;
+            var dest = Directory.GetCurrentDirectory() + destPath + fileName;
+            if (Directory.Exists(source)) return false;
+=======
         public static bool UnpackFile(string sourceTarget, string destPath)
         {
             var source = sourceTarget;
             var dest = destPath;
+>>>>>>> refs/remotes/NecronomiconCoding/master
             try
             {
                 ZipFile.ExtractToDirectory(source, dest);

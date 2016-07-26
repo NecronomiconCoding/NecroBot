@@ -168,13 +168,15 @@ namespace PoGo.NecroBot.CLI
         public float KeepMinIvPercentage = 85;
         public bool KeepPokemonsThatCanEvolve = true;
         public int MaxTravelDistanceInMeters = 1000;
-        public bool PrioritizeIvOverCp = true;
+        public string PokemonPrioritization = "Cp";
+        public float PokemonBrPrioritizationIVImportancePercentage = 50;
         public bool TransferDuplicatePokemon = true;
         public bool UseGpxPathing = false;
         public bool UseLuckyEggsWhileEvolving = false;
         public bool UsePokemonToNotCatchFilter = false;
         public double WalkingSpeedInKilometerPerHour = 50;
         public int AmountOfPokemonToDisplayOnStart = 10;
+        public bool ExportPokemonToCSV = true;
         public bool RenameAboveIv = false;
         public int WebSocketPort = 14251;
         
@@ -289,7 +291,8 @@ namespace PoGo.NecroBot.CLI
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => _settings.KeepMinDuplicatePokemon;
-        public bool PrioritizeIvOverCp => _settings.PrioritizeIvOverCp;
+        public string PokemonPrioritization => _settings.PokemonPrioritization;
+        public float PokemonBrPrioritizationIVWeightPercentage => _settings.PokemonBrPrioritizationIVImportancePercentage;
         public int MaxTravelDistanceInMeters => _settings.MaxTravelDistanceInMeters;
         public string GpxFile => _settings.GpxFile;
         public bool UseGpxPathing => _settings.UseGpxPathing;
@@ -298,9 +301,32 @@ namespace PoGo.NecroBot.CLI
         public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
         public bool RenameAboveIv => _settings.RenameAboveIv;
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
+        public bool ExportPokemonToCSV => _settings.ExportPokemonToCSV;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
+
+        public System.Func<POGOProtos.Data.PokemonData, double> PokemonSelector
+        {
+            get
+            {
+                switch (_settings.PokemonPrioritization.ToUpper())
+                {
+                    case "IV":
+                        return Logic.PoGoUtils.PokemonInfo.CalculatePokemonPerfection;
+
+                    case "CP":
+                        return Logic.PoGoUtils.PokemonInfo.CalculateCp;
+                    case "BR":
+                        return p => Logic.PoGoUtils.PokemonInfo.CalculatePokemonBattleRating(p, _settings.PokemonBrPrioritizationIVImportancePercentage);
+                    default:
+                        return Logic.PoGoUtils.PokemonInfo.CalculateCp;
+
+                }
+
+            }
+        }
+
     }
 }

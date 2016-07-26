@@ -117,9 +117,16 @@ namespace PoGo.NecroBot.CLI
             Logger.Write($"====== DisplayHighests{evt.SortedBy} ======", LogLevel.Info, ConsoleColor.Yellow);
             foreach (var pokemon in evt.PokemonList)
                     Logger.Write(
-                        $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% perfect)\t| Lvl {pokemon.Item4.ToString("00")}\t NAME: '{pokemon.Item1.PokemonId}'",
+                        $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% perfect)\t| ({pokemon.Item4.ToString("0.00")}% Rating)\t| Lvl {pokemon.Item5.ToString("00")}\t NAME: '{pokemon.Item1.PokemonId}'",
                         LogLevel.Info, ConsoleColor.Yellow);
         }
+
+        public void HandleEvent(ExportListPokemonEvent evt, Context ctx)
+        {
+            Logger.Write($"{evt.Message}", evt.ExportSuccessful ? LogLevel.Info : LogLevel.Error, evt.ExportSuccessful ? ConsoleColor.Yellow : ConsoleColor.Red);
+
+        }
+
 
         public void Listen(IEvent evt, Context ctx)
         {
