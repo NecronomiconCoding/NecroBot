@@ -50,7 +50,7 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        public static void WriteGlobalSettings()
+        public static  void WriteGlobalSettings()
         {
             GlobalSettings.AuthType = settingsToWrite.AuthType;
             GlobalSettings.DefaultAltitude = settingsToWrite.DefaultAltitude;
@@ -64,7 +64,7 @@ namespace PoGo.NecroBot.CLI
             GlobalSettings.KeepMinCp = settingsToWrite.KeepMinCp;
             GlobalSettings.KeepMinDuplicatePokemon = settingsToWrite.KeepMinDuplicatePokemon;
             GlobalSettings.KeepMinIvPercentage = settingsToWrite.KeepMinIvPercentage;
-            GlobalSettings.KeepPokemonsThatCanEvolve = settingsToWrite.KeepPokemonsThatCanEvolve;
+            GlobalSettings.KeepPokemonsThatCanEvolve =  settingsToWrite.KeepPokemonsThatCanEvolve;
             GlobalSettings.MaxTravelDistanceInMeters = settingsToWrite.MaxTravelDistanceInMeters;
             GlobalSettings.PrioritizeIvOverCp = settingsToWrite.PrioritizeIvOverCp;
             GlobalSettings.PtcPassword = settingsToWrite.PtcPassword;
