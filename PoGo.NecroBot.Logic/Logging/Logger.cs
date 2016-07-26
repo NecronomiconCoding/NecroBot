@@ -29,41 +29,6 @@ namespace PoGo.NecroBot.Logic.Logging
         }
 
         /// <summary>
-        ///     This is used for dumping contents to a file stored in the Logs folder.
-        /// </summary>
-        /// <param name="data">Dumps the string data to the file</param>
-        /// <param name="filename">Filename to be used for naming the file.</param>
-        private static void DumpToFile(string data, string filename)
-        {
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + "\\Dumps");
-
-            string path = Directory.GetCurrentDirectory() + _subPath + $"\\Dumps\\NecroBot-{filename}.txt";
-
-            using (
-                var dumpFile =
-                    File.AppendText(path)
-                )
-            {
-                dumpFile.WriteLine(data);
-                dumpFile.Flush();
-            }
-        }
-
-        /// <summary>
-        ///     Clears the specified dumpfile.
-        /// </summary>
-        /// <param name="filename">File to clear/param>
-        public static void ClearDumpFile(string filename)
-        {
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + "\\Dumps");
-
-            string path = Directory.GetCurrentDirectory() + _subPath + $"\\Dumps\\NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt";
-
-            // Clears all contents of a file first if overwrite is true
-            File.WriteAllText(path, string.Empty);
-        }
-
-        /// <summary>
         ///     Set the logger. All future requests to <see cref="Write(string,LogLevel,ConsoleColor)" /> will use that logger, any
         ///     old will be
         ///     unset.
@@ -90,17 +55,6 @@ namespace PoGo.NecroBot.Logic.Logging
             Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
         }
 
-        /// <summary>
-        ///     Dumps data to a file
-        /// </summary>
-        /// <param name="data">Dumps the string data to the file</param>
-        /// <param name="filename">Filename to be used for naming the file.</param>
-        public static void Dump(string data, string filename)
-        {
-            string uniqueFileName = $"{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}";
-
-            DumpToFile(data, uniqueFileName);
-        }
     }
 
     public enum LogLevel
