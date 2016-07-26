@@ -1,5 +1,8 @@
 ﻿#region using directives
 
+using PoGo.NecroBot.Logic.Logging;
+using PokemonGo.RocketAPI.Helpers;
+
 #region using directives
 
 using System;
@@ -21,21 +24,24 @@ namespace PoGo.NecroBot.Logic
     public class Navigation
     {
         private const double SpeedDownTo = 10 / 3.6;
+        private const int SpeedJitter = 2;
         private readonly Client _client;
+        private readonly RandomHelper _rand;
 
         public Navigation(Client client)
         {
             _client = client;
+            _rand = new RandomHelper();
         }
 
         public async Task<PlayerUpdateResponse> HumanLikeWalking(GeoCoordinate targetLocation,
             double walkingSpeedInKilometersPerHour, Func<bool> functionExecutedWhileWalking)
         {
-            var speedInMetersPerSecond = walkingSpeedInKilometersPerHour / 3.6;
+            var speedInMetersPerSecond = (walkingSpeedInKilometersPerHour + _rand.GetLongRandom(-SpeedJitter, SpeedJitter))/3.6;
 
             var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
             var distanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
-            // Logger.Write($"Distance to target location: {distanceToTarget:0.##} meters. Will take {distanceToTarget/speedInMetersPerSecond:0.##} seconds!", LogLevel.Info);
+            Logger.Write($"Distance to target location: {distanceToTarget:0.##} meters. Will take {distanceToTarget / speedInMetersPerSecond:0.##} seconds!", LogLevel.Debug);
 
             var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
             var nextWaypointDistance = speedInMetersPerSecond;
@@ -90,12 +96,13 @@ namespace PoGo.NecroBot.Logic
             //PlayerUpdateResponse result = null;
 
             var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat, CultureInfo.InvariantCulture), Convert.ToDouble(trk.Lon, CultureInfo.InvariantCulture));
-
-            var speedInMetersPerSecond = walkingSpeedInKilometersPerHour / 3.6;
+            Logger.Write($"Heading to next spot ({targetLocation.Latitude}, {targetLocation.Longitude})",LogLevel.Debug);
+            
+            var speedInMetersPerSecond = (walkingSpeedInKilometersPerHour + _rand.GetLongRandom(-SpeedJitter, SpeedJitter))/3.6;
 
             var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
             var distanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
-            // Logger.Write($"Distance to target location: {distanceToTarget:0.##} meters. Will take {distanceToTarget/speedInMetersPerSecond:0.##} seconds!", LogLevel.Info);
+            Logger.Write($"Distance to target location: {distanceToTarget:0.##} meters. Will take {distanceToTarget/speedInMetersPerSecond:0.##} seconds!", LogLevel.Debug);
 
             var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
             var nextWaypointDistance = speedInMetersPerSecond;
@@ -117,15 +124,6 @@ namespace PoGo.NecroBot.Logic
                 sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
                 var currentDistanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
 
-                //if (currentDistanceToTarget < 40)
-                //{
-                //    if (speedInMetersPerSecond > SpeedDownTo)
-                //    {
-                //        //Logger.Write("We are within 40 meters of the target. Speeding down to 10 km/h to not pass the target.", LogLevel.Info);
-                //        speedInMetersPerSecond = SpeedDownTo;
-                //    }
-                //}
-
                 nextWaypointDistance = Math.Min(currentDistanceToTarget,
                     millisecondsUntilGetUpdatePlayerLocationResponse / 1000 * speedInMetersPerSecond);
                 nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
@@ -136,7 +134,7 @@ namespace PoGo.NecroBot.Logic
                     await
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                             waypoint.Altitude);
-
+                Logger.Write($"Your location is {waypoint.Latitude}, {waypoint.Longitude}, {currentDistanceToTarget:0.##} meters from target.", LogLevel.Debug);
                 functionExecutedWhileWalking?.Invoke(); // look for pokemon & hit stops
 
                 await Task.Delay(Math.Min((int)(distanceToTarget / speedInMetersPerSecond * 1000), 3000));
