@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Event\DisplayHighestsPokemonEvent.cs" />
     <Compile Include="Event\FortTargetEvent.cs" />
     <Compile Include="Event\FortUsedEvent.cs" />
     <Compile Include="Event\ItemRecycledEvent.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="State\Context.cs" />
     <Compile Include="Event\ErrorEvent.cs" />
     <Compile Include="State\FarmState.cs" />
+    <Compile Include="State\InfoState.cs" />
     <Compile Include="StatisticsAggregator.cs" />
     <Compile Include="Tasks\CatchNearbyPokemonsTask.cs" />
     <Compile Include="Tasks\CatchPokemonTask.cs" />
@@ -81,6 +83,7 @@
     <Compile Include="State\StateMachine.cs" />
     <Compile Include="Tasks\FarmPokestopsGPXTask.cs" />
     <Compile Include="Tasks\FarmPokestopsTask.cs" />
+    <Compile Include="Tasks\LogBestPokemonTask.cs" />
     <Compile Include="Tasks\RecycleItemsTask.cs" />
     <Compile Include="Tasks\RenamePokemonTask.cs" />
     <Compile Include="Tasks\TransferDuplicatePokemonTask.cs" />
