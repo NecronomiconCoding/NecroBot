@@ -33,16 +33,11 @@ namespace PoGo.NecroBot.Logic.Logging
         /// </summary>
         /// <param name="data">Dumps the string data to the file</param>
         /// <param name="filename">Filename to be used for naming the file.</param>
-        /// <param name="overwrite">Optional Default is to append</param>
-        public static void Dump(string data, string filename, bool overwrite)
+        private static void DumpToFile(string data, string filename)
         {
-            string path = Directory.GetCurrentDirectory() + _subPath + $"\\Logs\\DataDump-{filename}.txt";
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + "\\Dumps");
 
-            // Clears all contents of a file first if overwrite is true
-            if (!File.Exists(path) || overwrite)
-            {
-                File.WriteAllText(path, string.Empty);
-            }
+            string path = Directory.GetCurrentDirectory() + _subPath + $"\\Dumps\\NecroBot-{filename}.txt";
 
             using (
                 var dumpFile =
@@ -51,6 +46,23 @@ namespace PoGo.NecroBot.Logic.Logging
             {
                 dumpFile.WriteLine(data);
                 dumpFile.Flush();
+            }
+        }
+
+        /// <summary>
+        ///     Clears the specified dumpfile.
+        /// </summary>
+        /// <param name="filename">File to clear/param>
+        private static void ClearDumpFile(string filename)
+        {
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + "\\Dumps");
+
+            string path = Directory.GetCurrentDirectory() + _subPath + $"\\Dumps\\NecroBot-{filename}.txt";
+
+            // Clears all contents of a file first if overwrite is true
+            if (!File.Exists(path))
+            {
+                File.WriteAllText(path, string.Empty);
             }
         }
 
@@ -79,6 +91,19 @@ namespace PoGo.NecroBot.Logic.Logging
                 return;
             _logger.Write(message, level, color);
             Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
+        }
+
+        /// <summary>
+        ///     Dumps data to a file
+        /// </summary>
+        /// <param name="data">Dumps the string data to the file</param>
+        /// <param name="filename">Filename to be used for naming the file.</param>
+        public static void Dump(string data, string filename)
+        {
+            string uniqueFileName = $"{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}";
+            //ClearDumpFile(uniqueFileName);
+            // Dump with file overwrite
+            DumpToFile(data, uniqueFileName);
         }
     }
 

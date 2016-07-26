@@ -79,31 +79,6 @@ namespace PoGo.NecroBot.CLI
 
         public void Save(string path)
         {
-<<<<<<< HEAD
-            GlobalSettings.AuthType = settingsToWrite.AuthType;
-            GlobalSettings.DefaultAltitude = settingsToWrite.DefaultAltitude;
-            GlobalSettings.DefaultLatitude = settingsToWrite.DefaultLatitude;
-            GlobalSettings.DefaultLongitude = settingsToWrite.DefaultLongitude;
-            GlobalSettings.DelayBetweenPokemonCatch = settingsToWrite.DelayBetweenPokemonCatch;
-            GlobalSettings.EvolveAboveIvValue = settingsToWrite.EvolveAboveIvValue;
-            GlobalSettings.EvolveAllPokemonAboveIv = settingsToWrite.EvolveAllPokemonAboveIv;
-            GlobalSettings.EvolveAllPokemonWithEnoughCandy = settingsToWrite.EvolveAllPokemonWithEnoughCandy;
-            GlobalSettings.GpxFile = settingsToWrite.GpxFile;
-            GlobalSettings.KeepMinCp = settingsToWrite.KeepMinCp;
-            GlobalSettings.KeepMinDuplicatePokemon = settingsToWrite.KeepMinDuplicatePokemon;
-            GlobalSettings.KeepMinIvPercentage = settingsToWrite.KeepMinIvPercentage;
-            GlobalSettings.KeepPokemonsThatCanEvolve =  settingsToWrite.KeepPokemonsThatCanEvolve;
-            GlobalSettings.MaxTravelDistanceInMeters = settingsToWrite.MaxTravelDistanceInMeters;
-            GlobalSettings.PrioritizeIvOverCp = settingsToWrite.PrioritizeIvOverCp;
-            GlobalSettings.PtcPassword = settingsToWrite.PtcPassword;
-            GlobalSettings.PtcUsername = settingsToWrite.PtcUsername;
-            GlobalSettings.TransferDuplicatePokemon = settingsToWrite.TransferDuplicatePokemon;
-            GlobalSettings.UseGpxPathing = settingsToWrite.UseGpxPathing;
-            GlobalSettings.UseLuckyEggsWhileEvolving = settingsToWrite.UseLuckyEggsWhileEvolving;
-            GlobalSettings.UsePokemonToNotCatchFilter = settingsToWrite.UsePokemonToNotCatchFilter;
-            GlobalSettings.WalkingSpeedInKilometerPerHour = settingsToWrite.WalkingSpeedInKilometerPerHour;
-            GlobalSettings.DumpPokemonStats = settingsToWrite.DumpPokemonStats;
-=======
             var output = JsonConvert.SerializeObject(this, Formatting.Indented, new StringEnumConverter { CamelCaseText = true });
 
             string folder = Path.GetDirectoryName(path);
@@ -113,91 +88,10 @@ namespace PoGo.NecroBot.CLI
             }
 
             File.WriteAllText(path, output);
->>>>>>> master
         }
 
         public void Save()
         {
-<<<<<<< HEAD
-            settingsToWrite.AuthType = GlobalSettings.AuthType;
-            settingsToWrite.DefaultAltitude = GlobalSettings.DefaultAltitude;
-            settingsToWrite.DefaultLatitude = GlobalSettings.DefaultLatitude;
-            settingsToWrite.DefaultLongitude = GlobalSettings.DefaultLongitude;
-            settingsToWrite.DelayBetweenPokemonCatch = GlobalSettings.DelayBetweenPokemonCatch;
-            settingsToWrite.EvolveAboveIvValue = GlobalSettings.EvolveAboveIvValue;
-            settingsToWrite.EvolveAllPokemonAboveIv = GlobalSettings.EvolveAllPokemonAboveIv;
-            settingsToWrite.EvolveAllPokemonWithEnoughCandy = GlobalSettings.EvolveAllPokemonWithEnoughCandy;
-            settingsToWrite.GpxFile = GlobalSettings.GpxFile;
-            settingsToWrite.KeepMinCp = GlobalSettings.KeepMinCp;
-            settingsToWrite.KeepMinDuplicatePokemon = GlobalSettings.KeepMinDuplicatePokemon;
-            settingsToWrite.KeepMinIvPercentage = GlobalSettings.KeepMinIvPercentage;
-            settingsToWrite.KeepPokemonsThatCanEvolve = GlobalSettings.KeepPokemonsThatCanEvolve;
-            settingsToWrite.MaxTravelDistanceInMeters = GlobalSettings.MaxTravelDistanceInMeters;
-            settingsToWrite.PrioritizeIvOverCp = GlobalSettings.PrioritizeIvOverCp;
-            settingsToWrite.PtcPassword = GlobalSettings.PtcPassword;
-            settingsToWrite.PtcUsername = GlobalSettings.PtcUsername;
-            settingsToWrite.TransferDuplicatePokemon = GlobalSettings.TransferDuplicatePokemon;
-            settingsToWrite.UseLuckyEggsWhileEvolving = GlobalSettings.UseLuckyEggsWhileEvolving;
-            settingsToWrite.UsePokemonToNotCatchFilter = GlobalSettings.UsePokemonToNotCatchFilter;
-            settingsToWrite.WalkingSpeedInKilometerPerHour = GlobalSettings.WalkingSpeedInKilometerPerHour;
-            settingsToWrite.DumpPokemonStats = GlobalSettings.DumpPokemonStats;
-        }
-    }
-
-    public static class GlobalSettings
-    {
-        public static AuthType AuthType = AuthType.Google;
-        public static string PtcUsername = "username2";
-        public static string PtcPassword = "pw";
-        public static double DefaultLatitude = 52.379189;
-        public static double DefaultLongitude = 4.899431;
-        public static double DefaultAltitude = 10;
-        public static float KeepMinIvPercentage = 85;
-        public static int KeepMinCp = 1000;
-        public static double WalkingSpeedInKilometerPerHour = 50;
-        public static bool EvolveAllPokemonWithEnoughCandy = false;
-        public static bool KeepPokemonsThatCanEvolve = false;
-        public static bool TransferDuplicatePokemon = true;
-        public static int DelayBetweenPokemonCatch = 5000;
-        public static bool UsePokemonToNotCatchFilter = false;
-        public static int KeepMinDuplicatePokemon = 1;
-        public static bool PrioritizeIvOverCp = false;
-        public static int MaxTravelDistanceInMeters = 1000;
-        public static string GpxFile = "GPXFile.GPX";
-        public static bool UseGpxPathing = false;
-        public static bool UseLuckyEggsWhileEvolving = false;
-        public static bool EvolveAllPokemonAboveIv = false;
-        public static float EvolveAboveIvValue = 95;
-        public static bool DumpPokemonStats = false;
-    }
-
-    public class GlobalSettingsStub
-    {
-        public AuthType AuthType;
-        public string PtcUsername;
-        public string PtcPassword;
-        public double DefaultLatitude;
-        public double DefaultLongitude;
-        public double DefaultAltitude;
-        public float KeepMinIvPercentage;
-        public int KeepMinCp;
-        public double WalkingSpeedInKilometerPerHour;
-        public bool EvolveAllPokemonWithEnoughCandy;
-        public bool KeepPokemonsThatCanEvolve;
-        public bool TransferDuplicatePokemon;
-        public int DelayBetweenPokemonCatch;
-        public bool UsePokemonToNotCatchFilter;
-        public int KeepMinDuplicatePokemon;
-        public bool PrioritizeIvOverCp;
-        public int MaxTravelDistanceInMeters;
-        public string GpxFile;
-        public bool UseGpxPathing;
-        public bool UseLuckyEggsWhileEvolving;
-        public bool EvolveAllPokemonAboveIv;
-        public float EvolveAboveIvValue;
-        public bool DumpPokemonStats;
-    }
-=======
             if(!string.IsNullOrEmpty(FilePath))
             {
                 Save(FilePath);
@@ -210,7 +104,6 @@ namespace PoGo.NecroBot.CLI
         public static GlobalSettings Default => new GlobalSettings();
         public static string ProfilePath;
         public static string ConfigPath;
->>>>>>> master
 
         public static GlobalSettings Load(string path)
         {
@@ -242,37 +135,7 @@ namespace PoGo.NecroBot.CLI
             return settings;
         }
 
-<<<<<<< HEAD
-    public class LogicSettings : ILogicSettings
-    {
-        private ICollection<KeyValuePair<ItemId, int>> _itemRecycleFilter;
-        private ICollection<PokemonId> _pokemonsNotToCatch;
-
-        private ICollection<PokemonId> _pokemonsNotToTransfer;
-        private ICollection<PokemonId> _pokemonsToEvolve;
-
-        public float KeepMinIvPercentage => GlobalSettings.KeepMinIvPercentage;
-        public int KeepMinCp => GlobalSettings.KeepMinCp;
-        public double WalkingSpeedInKilometerPerHour => GlobalSettings.WalkingSpeedInKilometerPerHour;
-        public bool EvolveAllPokemonWithEnoughCandy => GlobalSettings.EvolveAllPokemonWithEnoughCandy;
-        public bool KeepPokemonsThatCanEvolve => GlobalSettings.KeepPokemonsThatCanEvolve;
-        public bool TransferDuplicatePokemon => GlobalSettings.TransferDuplicatePokemon;
-        public int DelayBetweenPokemonCatch => GlobalSettings.DelayBetweenPokemonCatch;
-        public bool UsePokemonToNotCatchFilter => GlobalSettings.UsePokemonToNotCatchFilter;
-        public int KeepMinDuplicatePokemon => GlobalSettings.KeepMinDuplicatePokemon;
-        public bool PrioritizeIvOverCp => GlobalSettings.PrioritizeIvOverCp;
-        public int MaxTravelDistanceInMeters => GlobalSettings.MaxTravelDistanceInMeters;
-        public string GpxFile => GlobalSettings.GpxFile;
-        public bool UseGpxPathing => GlobalSettings.UseGpxPathing;
-        public bool UseLuckyEggsWhileEvolving => GlobalSettings.UseLuckyEggsWhileEvolving;
-        public bool EvolveAllPokemonAboveIv => GlobalSettings.EvolveAllPokemonAboveIv;
-        public float EvolveAboveIvValue => GlobalSettings.EvolveAboveIvValue;
-        public bool DumpPokemonStats => GlobalSettings.DumpPokemonStats;
-
-        public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
-=======
         public void Save(string fullPath)
->>>>>>> master
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented, new StringEnumConverter { CamelCaseText = true });
 
@@ -308,7 +171,8 @@ namespace PoGo.NecroBot.CLI
         public bool RenameAboveIv = false;
         public bool EnableWebSocket = false;
         public int WebSocketPort = 14561;
-        
+        public bool DumpPokemonStats = false;
+
         [JsonIgnore]
         internal AuthSettings Auth = new AuthSettings();
 
@@ -429,6 +293,7 @@ namespace PoGo.NecroBot.CLI
         public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
         public bool RenameAboveIv => _settings.RenameAboveIv;
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
+        public bool DumpPokemonStats => _settings.DumpPokemonStats;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;

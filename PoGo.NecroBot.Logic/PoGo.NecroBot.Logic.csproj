@@ -85,7 +85,6 @@
     <Compile Include="State\PositionCheckState.cs" />
     <Compile Include="State\StateMachine.cs" />
     <Compile Include="Tasks\FarmPokestopsGPXTask.cs" />
-    <Compile Include="Tasks\DumpPokemonStatsTask.cs" />
     <Compile Include="Tasks\FarmPokestopsTask.cs" />
     <Compile Include="Tasks\LogBestPokemonTask.cs" />
     <Compile Include="Tasks\RecycleItemsTask.cs" />

@@ -27,6 +27,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                     $"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCp(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'",
                     LogLevel.Info, ConsoleColor.Yellow);
             }
+
+            Logger.Write($"WTF IS GOING ON {ctx.LogicSettings.DumpPokemonStats}", LogLevel.Info);
+            if (ctx.LogicSettings.DumpPokemonStats)
+            {
+                // Maximum pokebag is limited to 1000
+                var allPokemonInBag = ctx.LogicSettings.PrioritizeIvOverCp ? await ctx.Inventory.GetHighestsPerfect(1000) : await ctx.Inventory.GetHighestsCp(1000);
+                string dumpFileName = "PokeBagStats";
+                // Converts the list of pokemon into a string array to be dumped ordered by IV/CP depending on setting
+                foreach (var pokemon in allPokemonInBag)
+                {
+                    Logger.Dump($"NAME: {pokemon.PokemonId} Lvl: { PokemonInfo.GetLevel(pokemon).ToString("00").PadLeft(4, ' ')} CP: { pokemon.Cp.ToString().PadLeft(4, ' ')} IV: { PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}", dumpFileName);
+                }
+            }
         }
     }
 }
