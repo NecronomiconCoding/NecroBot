@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PokemonGo.RocketAPI.GeneratedCode;
+using PokemonGo.RocketAPI.Console.Server;
 
 namespace PokemonGo.RocketAPI.Console.Forms
 {
@@ -18,6 +19,7 @@ namespace PokemonGo.RocketAPI.Console.Forms
     {
         private Thread pokeThread;
         private Settings settings = null;
+        private PokeServer pokeServer = new PokeServer(4711);
         public MainForm()
         {
             InitializeComponent();
