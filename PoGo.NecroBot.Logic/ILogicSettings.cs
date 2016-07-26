@@ -10,6 +10,7 @@ namespace PoGo.NecroBot.Logic
 {
     public interface ILogicSettings
     {
+        bool AutoUpdate { get; }
         float KeepMinIvPercentage { get; }
         int KeepMinCp { get; }
         double WalkingSpeedInKilometerPerHour { get; }
@@ -26,6 +27,8 @@ namespace PoGo.NecroBot.Logic
         bool UseLuckyEggsWhileEvolving { get; }
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
+        bool RenameAboveIv { get; }
+        int AmountOfPokemonToDisplayOnStart { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 

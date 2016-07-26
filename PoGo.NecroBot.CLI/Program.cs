@@ -34,9 +34,15 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        private static void Main()
+        private static void Main(string[] args)
         {
+            string subPath = "";
+            if (args.Length > 0)
+                subPath = "\\" + args[0];
+
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
+
+            GlobalSettings settings = GlobalSettings.Load(subPath);
 
             var machine = new StateMachine();
             var stats = new Statistics();
@@ -44,16 +50,16 @@ namespace PoGo.NecroBot.CLI
 
             var aggregator = new StatisticsAggregator(stats);
             var listener = new ConsoleEventListener();
+            var websocket = new WebSocketInterface(settings.WebSocketPort);
 
             machine.EventListener += listener.Listen;
             machine.EventListener += aggregator.Listen;
-
+            machine.EventListener += websocket.Listen;
+            
             machine.SetFailureState(new LoginState());
 
 
-            SettingsUtil.Load();
-
-            var context = new Context(new ClientSettings(), new LogicSettings());
+            var context = new Context(new ClientSettings(settings), new LogicSettings(settings));
             context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
 
             machine.AsyncStart(new VersionCheckState(), context);

@@ -87,6 +87,8 @@ namespace PoGo.NecroBot.CLI
                 }
             };
 
+            var catchType = evt.CatchType;
+
             var catchStatus = evt.Attempt > 1
                 ? $"{evt.Status} Attempt #{evt.Attempt}"
                 : $"{evt.Status}";
@@ -96,7 +98,7 @@ namespace PoGo.NecroBot.CLI
                 : "";
 
             Logger.Write(
-                $"({catchStatus}) {evt.Id} Lvl: {evt.Level} CP: ({evt.Cp}/{evt.MaxCp}) IV: {evt.Perfection.ToString("0.00")}% | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball. | {familyCandies}",
+                $"({catchStatus}) | ({catchType}) {evt.Id} Lvl: {evt.Level} CP: ({evt.Cp}/{evt.MaxCp}) IV: {evt.Perfection.ToString("0.00")}% | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball ({evt.BallAmount} left). | {familyCandies}",
                 LogLevel.Caught);
         }
 
@@ -110,11 +112,24 @@ namespace PoGo.NecroBot.CLI
             Logger.Write($"Used, remaining: {evt.Count}", LogLevel.Berry);
         }
 
+        public void HandleEvent(DisplayHighestsPokemonEvent evt, Context ctx)
+        {
+            Logger.Write($"====== DisplayHighests{evt.SortedBy} ======", LogLevel.Info, ConsoleColor.Yellow);
+            foreach (var pokemon in evt.PokemonList)
+                    Logger.Write(
+                        $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% perfect)\t| Lvl {pokemon.Item4.ToString("00")}\t NAME: '{pokemon.Item1.PokemonId}'",
+                        LogLevel.Info, ConsoleColor.Yellow);
+        }
+
         public void Listen(IEvent evt, Context ctx)
         {
             dynamic eve = evt;
 
-            HandleEvent(eve, ctx);
+            try
+            {
+                HandleEvent(eve, ctx);
+            }
+            catch { }
         }
     }
 }

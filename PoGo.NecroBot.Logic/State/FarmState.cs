@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Tasks;
 
 #endregion
@@ -8,30 +9,34 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class FarmState : IState
     {
-        public IState Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
+            await RenamePokemonTask.Execute(ctx, machine);
+
+            await DisplayPokemonStatsTask.Execute(ctx, machine);
+
             if (ctx.LogicSettings.EvolveAllPokemonAboveIv || ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
-                EvolvePokemonTask.Execute(ctx, machine);
+                await EvolvePokemonTask.Execute(ctx, machine);
             }
 
             if (ctx.LogicSettings.TransferDuplicatePokemon)
             {
-                TransferDuplicatePokemonTask.Execute(ctx, machine);
+                await TransferDuplicatePokemonTask.Execute(ctx, machine);
             }
 
-            RecycleItemsTask.Execute(ctx, machine);
+            await RecycleItemsTask.Execute(ctx, machine);
 
             if (ctx.LogicSettings.UseGpxPathing)
             {
-                FarmPokestopsGpxTask.Execute(ctx, machine);
+                await FarmPokestopsGpxTask.Execute(ctx, machine);
             }
             else
             {
-                FarmPokestopsTask.Execute(ctx, machine);
+                await FarmPokestopsTask.Execute(ctx, machine);
             }
 
-            machine.RequestDelay(10000);
+            await Task.Delay(10000);
 
             return this;
         }
