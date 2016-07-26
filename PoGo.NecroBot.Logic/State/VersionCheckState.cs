@@ -4,7 +4,6 @@ using System;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 
 #endregion
@@ -16,9 +15,9 @@ namespace PoGo.NecroBot.Logic.State
         public static string VersionUri =
             "https://raw.githubusercontent.com/NecronomiconCoding/Pokemon-Go-Bot/master/PokemonGo.RocketAPI/Properties/AssemblyInfo.cs";
 
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public IState Execute(Context ctx, StateMachine machine)
         {
-            if (await IsLatest())
+            if (IsLatest())
             {
                 machine.Fire(new NoticeEvent
                 {
@@ -38,20 +37,20 @@ namespace PoGo.NecroBot.Logic.State
             return new LoginState();
         }
 
-        private static async Task<string> DownloadServerVersion()
+        private static string DownloadServerVersion()
         {
             using (var wC = new WebClient())
             {
-                return await wC.DownloadStringTaskAsync(VersionUri);
+                return wC.DownloadString(VersionUri);
             }
         }
 
-        public async Task<bool> IsLatest()
+        public bool IsLatest()
         {
             try
             {
                 var regex = new Regex(@"\[assembly\: AssemblyVersion\(""(\d{1,})\.(\d{1,})\.(\d{1,})\.(\d{1,})""\)\]");
-                var match = regex.Match(await DownloadServerVersion());
+                var match = regex.Match(DownloadServerVersion());
 
                 if (!match.Success)
                     return false;
