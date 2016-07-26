@@ -17,7 +17,14 @@ namespace PoGo.NecroBot.Logic.State
                 switch (ctx.Settings.AuthType)
                 {
                     case AuthType.Ptc:
-                        ctx.Client.Login.DoPtcLogin(ctx.Settings.PtcUsername, ctx.Settings.PtcPassword).Wait();
+                        try
+                        {
+                            ctx.Client.Login.DoPtcLogin(ctx.Settings.PtcUsername, ctx.Settings.PtcPassword).Wait();
+                        }
+                        catch (System.AggregateException ae)
+                        {
+                            throw ae.Flatten().InnerException;
+                        }
                         break;
                     case AuthType.Google:
                         ctx.Client.Login.DoGoogleLogin().Wait();
