@@ -11,6 +11,7 @@ using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
 using System.Globalization;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -18,7 +19,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsGpxTask
     {
-        public static void Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Context ctx, StateMachine machine)
         {
             var tracks = GetGpxTracks(ctx);
             var curTrkPt = 0;
@@ -50,7 +51,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             });
                             break;
                         }
-                        var pokestopList = GetPokeStops(ctx);
+                        var pokestopList = await GetPokeStops(ctx);
 
                         while (pokestopList.Any())
                         {
@@ -63,7 +64,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             pokestopList.RemoveAt(0);
 
                             var fortSearch =
-                                ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
+                                await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                             if (fortSearch.ExperienceAwarded > 0)
                             {
@@ -75,25 +76,24 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 });
                             }
 
-                            Thread.Sleep(1000);
+                            await Task.Delay(1000);
 
-                            RecycleItemsTask.Execute(ctx, machine);
+                            await RecycleItemsTask.Execute(ctx, machine);
 
                             if (ctx.LogicSettings.TransferDuplicatePokemon)
                             {
-                                TransferDuplicatePokemonTask.Execute(ctx, machine);
+                                await TransferDuplicatePokemonTask.Execute(ctx, machine);
                             }
                         }
 
-                        ctx.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
-                            ctx.LogicSettings.WalkingSpeedInKilometerPerHour, () =>
+                        await ctx.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
+                            ctx.LogicSettings.WalkingSpeedInKilometerPerHour, async () =>
                             {
-
-                                CatchNearbyPokemonsTask.Execute(ctx, machine);
-                                UseNearbyPokestopsTask.Execute(ctx, machine);
+                                await CatchNearbyPokemonsTask.Execute(ctx, machine);
+                                await UseNearbyPokestopsTask.Execute(ctx, machine);
                                 return true;
                             }
-                            ).Wait();
+                            );
 
                         if (curTrkPt >= maxTrkPt)
                             curTrkPt = 0;
@@ -122,9 +122,9 @@ namespace PoGo.NecroBot.Logic.Tasks
         //to only find stops within 40 meters
         //this is for gpx pathing, we are not going to the pokestops,
         //so do not make it more than 40 because it will never get close to those stops.
-        private static List<FortData> GetPokeStops(Context ctx)
+        private static async Task<List<FortData>> GetPokeStops(Context ctx)
         {
-            var mapObjects = ctx.Client.Map.GetMapObjects().Result;
+            var mapObjects = await ctx.Client.Map.GetMapObjects();
 
             // Wasn't sure how to make this pretty. Edit as needed.
             var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)

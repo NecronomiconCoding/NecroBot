@@ -9,10 +9,9 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class InfoState : IState
     {
-        public IState Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
-
-            LogBestPokemonTask.Execute(ctx,machine);
+            await LogBestPokemonTask.Execute(ctx,machine);
 
             return new PositionCheckState();
         }

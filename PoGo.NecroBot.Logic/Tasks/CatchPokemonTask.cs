@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
@@ -17,7 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchPokemonTask
     {
-        public static void Execute(Context ctx, StateMachine machine, EncounterResponse encounter, MapPokemon pokemon)
+        public static async Task Execute(Context ctx, StateMachine machine, EncounterResponse encounter, MapPokemon pokemon)
         {
             CatchPokemonResponse caughtPokemonResponse;
             var attemptCounter = 1;
@@ -25,7 +26,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 var probability = encounter?.CaptureProbability?.CaptureProbability_?.FirstOrDefault();
 
-                var pokeball = GetBestBall(ctx, encounter);
+                var pokeball = await GetBestBall(ctx, encounter);
                 if (pokeball == ItemId.ItemUnknown)
                 {
                     machine.Fire(new NoPokeballEvent
@@ -43,14 +44,14 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if ((isLowProbability && isHighCp) || isHighPerfection)
                 {
-                    UseBerry(ctx, machine, pokemon.EncounterId, pokemon.SpawnPointId);
+                    await UseBerry(ctx, machine, pokemon.EncounterId, pokemon.SpawnPointId);
                 }
 
                 var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
                     ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
 
                 caughtPokemonResponse =
-                    ctx.Client.Encounter.CatchPokemon(pokemon.EncounterId, pokemon.SpawnPointId, pokeball).Result;
+                    await ctx.Client.Encounter.CatchPokemon(pokemon.EncounterId, pokemon.SpawnPointId, pokeball);
 
                 var evt = new PokemonCaptureEvent {Status = caughtPokemonResponse.Status};
 
@@ -62,13 +63,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         totalExp += xp;
                     }
-                    var profile = ctx.Client.Player.GetPlayer().Result;
+                    var profile = await ctx.Client.Player.GetPlayer();
 
                     evt.Exp = totalExp;
                     evt.Stardust = profile.PlayerData.Currencies.ToArray()[1].Amount;
 
-                    var pokemonSettings = ctx.Inventory.GetPokemonSettings().Result;
-                    var pokemonFamilies = ctx.Inventory.GetPokemonFamilies().Result;
+                    var pokemonSettings = await ctx.Inventory.GetPokemonSettings();
+                    var pokemonFamilies = await ctx.Inventory.GetPokemonFamilies();
 
                     var setting = pokemonSettings.FirstOrDefault(q => q.PokemonId == pokemon.PokemonId);
                     var family = pokemonFamilies.FirstOrDefault(q => q.FamilyId == setting.FamilyId);
@@ -103,21 +104,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                     machine.Fire(evt);
                 }
                 attemptCounter++;
-                Thread.Sleep(2000);
+                await Task.Delay(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
-        private static ItemId GetBestBall(Context ctx, EncounterResponse encounter)
+        private static async Task<ItemId> GetBestBall(Context ctx, EncounterResponse encounter)
         {
             var pokemonCp = encounter?.WildPokemon?.PokemonData?.Cp;
             var iV = Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter?.WildPokemon?.PokemonData));
             var proba = encounter?.CaptureProbability?.CaptureProbability_.First();
 
-            var pokeBallsCount = ctx.Inventory.GetItemAmountByType(ItemId.ItemPokeBall).Result;
-            var greatBallsCount = ctx.Inventory.GetItemAmountByType(ItemId.ItemGreatBall).Result;
-            var ultraBallsCount = ctx.Inventory.GetItemAmountByType(ItemId.ItemUltraBall).Result;
-            var masterBallsCount = ctx.Inventory.GetItemAmountByType(ItemId.ItemMasterBall).Result;
+            var pokeBallsCount = await ctx.Inventory.GetItemAmountByType(ItemId.ItemPokeBall);
+            var greatBallsCount = await ctx.Inventory.GetItemAmountByType(ItemId.ItemGreatBall);
+            var ultraBallsCount = await ctx.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
+            var masterBallsCount = await ctx.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
             if (masterBallsCount > 0 && pokemonCp >= 1200)
                 return ItemId.ItemMasterBall;
@@ -147,20 +148,20 @@ namespace PoGo.NecroBot.Logic.Tasks
             return ItemId.ItemUnknown;
         }
 
-        private static void UseBerry(Context ctx, StateMachine machine, ulong encounterId, string spawnPointId)
+        private static async Task UseBerry(Context ctx, StateMachine machine, ulong encounterId, string spawnPointId)
         {
-            var inventoryBalls = ctx.Inventory.GetItems().Result;
+            var inventoryBalls = await ctx.Inventory.GetItems();
             var berries = inventoryBalls.Where(p => p.ItemId == ItemId.ItemRazzBerry);
             var berry = berries.FirstOrDefault();
 
             if (berry == null || berry.Count <= 0)
                 return;
 
-            ctx.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId).Wait();
+            await ctx.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
             machine.Fire(new UseBerryEvent {Count = berry.Count});
 
-            Thread.Sleep(1500);
+            await Task.Delay(1500);
         }
     }
 }

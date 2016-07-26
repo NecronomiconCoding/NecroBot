@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic
             _logicClient = logicClient;
         }
 
-        public async void DeletePokemonFromInvById(ulong id)
+        public async Task DeletePokemonFromInvById(ulong id)
         {
             var inventory = await GetCachedInventory();
             var pokemon =
