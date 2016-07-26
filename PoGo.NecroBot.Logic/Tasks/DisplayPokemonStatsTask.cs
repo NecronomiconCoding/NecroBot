@@ -37,7 +37,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 // Converts the list of pokemon into a string array to be dumped ordered by IV/CP depending on setting
                 foreach (var pokemon in allPokemonInBag)
                 {
-                    Logger.Dump($"NAME: {pokemon.PokemonId} Lvl: { PokemonInfo.GetLevel(pokemon).ToString("00").PadLeft(4, ' ')} CP: { pokemon.Cp.ToString().PadLeft(4, ' ')} IV: { PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}", dumpFileName);
+                    Logger.Dump($"NAME: {pokemon.PokemonId}\tLvl: { PokemonInfo.GetLevel(pokemon).ToString("00")}\tCP: { pokemon.Cp.ToString()}\tIV: { PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}", dumpFileName);
                 }
             }
         }
