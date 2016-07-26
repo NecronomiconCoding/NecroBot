@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Utils;
 
@@ -11,7 +12,7 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class PositionCheckState : IState
     {
-        public IState Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
             var coordsPath = Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini";
             if (File.Exists(coordsPath))
@@ -56,7 +57,7 @@ namespace PoGo.NecroBot.Logic.State
                     $"Make sure Lat & Lng are right. Exit Program if not! Lat: {ctx.Client.CurrentLatitude} Lng: {ctx.Client.CurrentLongitude}"
             });
 
-            machine.RequestDelay(3000);
+            await Task.Delay(3000);
 
             return new FarmState();
         }

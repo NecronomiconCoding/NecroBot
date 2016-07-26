@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System.Linq;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
@@ -11,14 +12,14 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class TransferDuplicatePokemonTask
     {
-        public static void Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Context ctx, StateMachine machine)
         {
             var duplicatePokemons =
-                ctx.Inventory.GetDuplicatePokemonToTransfer(ctx.LogicSettings.KeepPokemonsThatCanEvolve, ctx.LogicSettings.PrioritizeIvOverCp,
-                    ctx.LogicSettings.PokemonsNotToTransfer).Result;
+                await ctx.Inventory.GetDuplicatePokemonToTransfer(ctx.LogicSettings.KeepPokemonsThatCanEvolve, ctx.LogicSettings.PrioritizeIvOverCp,
+                    ctx.LogicSettings.PokemonsNotToTransfer);
 
-            var pokemonSettings = ctx.Inventory.GetPokemonSettings().Result;
-            var pokemonFamilies = ctx.Inventory.GetPokemonFamilies().Result;
+            var pokemonSettings = await ctx.Inventory.GetPokemonSettings();
+            var pokemonFamilies = await ctx.Inventory.GetPokemonFamilies();
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
@@ -28,12 +29,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                     continue;
                 }
 
-                ctx.Client.Inventory.TransferPokemon(duplicatePokemon.Id).Wait();
-                ctx.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
+                await ctx.Client.Inventory.TransferPokemon(duplicatePokemon.Id);
+                await ctx.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
 
                 var bestPokemonOfType = ctx.LogicSettings.PrioritizeIvOverCp
-                    ? ctx.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon).Result
-                    : ctx.Inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon).Result;
+                    ? await ctx.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon)
+                    : await ctx.Inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon);
 
                 if (bestPokemonOfType == null)
                     bestPokemonOfType = duplicatePokemon;

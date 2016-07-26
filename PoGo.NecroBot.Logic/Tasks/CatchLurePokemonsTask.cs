@@ -1,4 +1,5 @@
-﻿using PoGo.NecroBot.Logic.Event;
+﻿using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Map.Fort;
@@ -8,7 +9,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchLurePokemonsTask
     {
-        public static void Execute(Context ctx, StateMachine machine, FortData currentFortData)
+        public static async Task Execute(Context ctx, StateMachine machine, FortData currentFortData)
         {
             Logger.Write("Looking for lure pokemon..", LogLevel.Debug);
 
@@ -24,11 +25,11 @@ namespace PoGo.NecroBot.Logic.Tasks
             else
             {
                 var encounterId = currentFortData.LureInfo.EncounterId;
-                var encounter = ctx.Client.Encounter.EncounterLurePokemon(encounterId, fortId).Result;
+                var encounter = await ctx.Client.Encounter.EncounterLurePokemon(encounterId, fortId);
 
                 if (encounter.Result == DiskEncounterResponse.Types.Result.Success)
                 {
-                    CatchPokemonTask.Execute(ctx, machine, encounter, null, currentFortData, encounterId);
+                    await CatchPokemonTask.Execute(ctx, machine, encounter, null, currentFortData, encounterId);
                 }
                 else
                 {

@@ -1,7 +1,9 @@
-﻿namespace PoGo.NecroBot.Logic.State
+﻿using System.Threading.Tasks;
+
+namespace PoGo.NecroBot.Logic.State
 {
     public interface IState
     {
-        IState Execute(Context ctx, StateMachine machine);
+        Task<IState> Execute(Context ctx, StateMachine machine);
     }
 }
