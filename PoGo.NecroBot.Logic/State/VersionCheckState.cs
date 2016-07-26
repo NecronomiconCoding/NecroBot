@@ -5,6 +5,7 @@ using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using PoGo.NecroBot.Logic.Event;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -15,7 +16,7 @@ namespace PoGo.NecroBot.Logic.State
         public static string VersionUri =
             "https://raw.githubusercontent.com/NecronomiconCoding/Pokemon-Go-Bot/master/PokemonGo.RocketAPI/Properties/AssemblyInfo.cs";
 
-        public IState Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
             if (IsLatest())
             {
