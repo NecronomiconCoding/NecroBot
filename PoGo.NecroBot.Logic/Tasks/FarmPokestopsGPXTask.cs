@@ -62,8 +62,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                             var pokeStop = pokestopList[0];
                             pokestopList.RemoveAt(0);
 
-                            ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Wait();
-
                             var fortSearch =
                                 ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
 
