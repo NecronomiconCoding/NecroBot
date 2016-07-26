@@ -85,6 +85,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             RecycleItemsTask.Execute(ctx, machine);
 
+                            if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonAboveIv)
+                            {
+                                EvolvePokemonTask.Execute(ctx, machine);
+                            }
+
                             if (ctx.LogicSettings.TransferDuplicatePokemon)
                             {
                                 TransferDuplicatePokemonTask.Execute(ctx, machine);
