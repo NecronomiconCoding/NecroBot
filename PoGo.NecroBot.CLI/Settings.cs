@@ -96,15 +96,16 @@ namespace PoGo.NecroBot.CLI
                 JsonSerializerSettings jsonSettings = new JsonSerializerSettings();
                 jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                 jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
+                jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
                 settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
             }
             else
             {
                 settings = new GlobalSettings();
-                settings.Save(path);
             }
 
+            settings.Save(path);
             settings.Auth.Load(GetAuthPath(path));
 
             return settings;
@@ -144,6 +145,8 @@ namespace PoGo.NecroBot.CLI
         public bool UsePokemonToNotCatchFilter = false;
         public double WalkingSpeedInKilometerPerHour = 50;
         public bool RenameAboveIv = false;
+        public bool EnableWebSocket = false;
+        public int WebSocketPort = 14561;
         
         [JsonIgnore]
         internal AuthSettings Auth = new AuthSettings();
