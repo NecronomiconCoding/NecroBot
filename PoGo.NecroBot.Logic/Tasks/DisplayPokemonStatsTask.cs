@@ -1,5 +1,5 @@
 ﻿using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.Logic.Dumper;
+using PoGo.NecroBot.Logic.DataDumper;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using System;
