@@ -14,6 +14,7 @@ namespace PoGo.NecroBot.Logic
         int KeepMinCp { get; }
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
+        bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
         int DelayBetweenPokemonCatch { get; }
         bool UsePokemonToNotCatchFilter { get; }
@@ -25,6 +26,8 @@ namespace PoGo.NecroBot.Logic
         bool UseLuckyEggsWhileEvolving { get; }
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
+        bool RenameAboveIv { get; }
+        int AmountOfPokemonToDisplayOnStart { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 

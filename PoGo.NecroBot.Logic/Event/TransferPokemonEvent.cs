@@ -13,5 +13,6 @@ namespace PoGo.NecroBot.Logic.Event
         public int Cp;
         public PokemonId Id;
         public double Perfection;
+        public int FamilyCandies;
     }
 }

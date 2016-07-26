@@ -4,66 +4,155 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.RegularExpressions;
+using Newtonsoft.Json;
 using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Logging;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
+using Newtonsoft.Json.Converters;
 
 #endregion
 
 namespace PoGo.NecroBot.CLI
 {
-    public class ClientSettings : ISettings
+    internal class AuthSettings
     {
-        public AuthType AuthType => (AuthType) Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
-        public string PtcUsername => UserSettings.Default.PtcUsername;
-        public string PtcPassword => UserSettings.Default.PtcPassword;
-        public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
-        public double DefaultLongitude => UserSettings.Default.DefaultLongitude;
-        public double DefaultAltitude => UserSettings.Default.DefaultAltitude;
+        public AuthType AuthType = AuthType.Google;
+        public string GoogleRefreshToken = "";
+        public string PtcUsername = "username2";
+        public string PtcPassword = "pw";
+        
 
-        public string GoogleRefreshToken { get; set; }
+        [JsonIgnore]
+        private string FilePath;
+
+        public void Load(string path)
+        {
+            FilePath = path;
+
+            if (File.Exists(FilePath))
+            {
+                //if the file exists, load the settings
+                var input = File.ReadAllText(FilePath);
+
+                JsonSerializerSettings settings = new JsonSerializerSettings();
+                settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+
+                JsonConvert.PopulateObject(input, this, settings);
+            }
+            else
+            {
+                Save(FilePath);
+            }
+        }
+
+        public void Save(string path)
+        {
+            var output = JsonConvert.SerializeObject(this, Formatting.Indented, new StringEnumConverter { CamelCaseText = true });
+
+            string folder = Path.GetDirectoryName(path);
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            File.WriteAllText(path, output);
+        }
+
+        public void Save()
+        {
+            if(!string.IsNullOrEmpty(FilePath))
+            {
+                Save(FilePath);
+            }
+        }
     }
 
-    public class LogicSettings : ILogicSettings
+    public class GlobalSettings
     {
-        private ICollection<KeyValuePair<ItemId, int>> _itemRecycleFilter;
-        private ICollection<PokemonId> _pokemonsNotToCatch;
+        public static GlobalSettings Default => new GlobalSettings();
 
-        private ICollection<PokemonId> _pokemonsNotToTransfer;
-        private ICollection<PokemonId> _pokemonsToEvolve;
-
-        //public AuthType AuthType => (AuthType)Enum.Parse(typeof(AuthType), UserSettings.Default.AuthType, true);
-        //public string PtcUsername => UserSettings.Default.PtcUsername;
-        //public string PtcPassword => UserSettings.Default.PtcPassword;
-        //public double DefaultLatitude => UserSettings.Default.DefaultLatitude;
-        //public double DefaultLongitude => UserSettings.Default.DefaultLongitude;
-        //public double DefaultAltitude => UserSettings.Default.DefaultAltitude;
-        public float KeepMinIvPercentage => UserSettings.Default.KeepMinIVPercentage;
-        public int KeepMinCp => UserSettings.Default.KeepMinCP;
-        public double WalkingSpeedInKilometerPerHour => UserSettings.Default.WalkingSpeedInKilometerPerHour;
-        public bool EvolveAllPokemonWithEnoughCandy => UserSettings.Default.EvolveAllPokemonWithEnoughCandy;
-        public bool TransferDuplicatePokemon => UserSettings.Default.TransferDuplicatePokemon;
-        public int DelayBetweenPokemonCatch => UserSettings.Default.DelayBetweenPokemonCatch;
-        public bool UsePokemonToNotCatchFilter => UserSettings.Default.UsePokemonToNotCatchFilter;
-        public int KeepMinDuplicatePokemon => UserSettings.Default.KeepMinDuplicatePokemon;
-        public bool PrioritizeIvOverCp => UserSettings.Default.PrioritizeIVOverCP;
-        public int MaxTravelDistanceInMeters => UserSettings.Default.MaxTravelDistanceInMeters;
-        public string GpxFile => UserSettings.Default.GPXFile;
-        public bool UseGpxPathing => UserSettings.Default.UseGPXPathing;
-        public bool UseLuckyEggsWhileEvolving => UserSettings.Default.useLuckyEggsWhileEvolving;
-        public bool EvolveAllPokemonAboveIv => UserSettings.Default.EvolveAllPokemonAboveIV;
-        public float EvolveAboveIvValue => UserSettings.Default.EvolveAboveIVValue;
-
-        //Type and amount to keep
-        public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter
+        private static string GetAuthPath(string path)
         {
-            get
+            var fullPath = Directory.GetCurrentDirectory() + path;
+            string folder = Path.GetDirectoryName(fullPath);
+            folder += "\\auth.json";
+
+            return folder;
+        }
+
+        public static GlobalSettings Load(string path)
+        {
+            var fullPath = Directory.GetCurrentDirectory() + path;
+
+            GlobalSettings settings = null;
+            if (File.Exists(fullPath))
             {
-                //Type of pokemons to evolve
-                var defaultItems = new List<KeyValuePair<ItemId, int>>
+                //if the file exists, load the settings
+                var input = File.ReadAllText(fullPath);
+
+                JsonSerializerSettings jsonSettings = new JsonSerializerSettings();
+                jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
+                jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
+
+                settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+            }
+            else
+            {
+                settings = new GlobalSettings();
+            }
+
+            settings.Save(path);
+            settings.Auth.Load(GetAuthPath(path));
+
+            return settings;
+        }
+
+        public void Save(string path)
+        {
+            var output = JsonConvert.SerializeObject(this, Formatting.Indented, new StringEnumConverter { CamelCaseText = true });
+
+            var fullPath = Directory.GetCurrentDirectory() + path;
+            string folder = Path.GetDirectoryName(fullPath);
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            File.WriteAllText(fullPath, output);
+        }
+
+        public double DefaultAltitude = 10;
+        public double DefaultLatitude = 52.379189;
+        public double DefaultLongitude = 4.899431;
+        public int DelayBetweenPokemonCatch = 2000;
+        public float EvolveAboveIvValue = 95;
+        public bool EvolveAllPokemonAboveIv = false;
+        public bool EvolveAllPokemonWithEnoughCandy = false;
+        public string GpxFile = "GPXPath.GPX";
+        public int KeepMinCp = 1000;
+        public int KeepMinDuplicatePokemon = 1;
+        public float KeepMinIvPercentage = 85;
+        public bool KeepPokemonsThatCanEvolve = true;
+        public int MaxTravelDistanceInMeters = 1000;
+        public bool PrioritizeIvOverCp = true;
+        public bool TransferDuplicatePokemon = true;
+        public bool UseGpxPathing = false;
+        public bool UseLuckyEggsWhileEvolving = false;
+        public bool UsePokemonToNotCatchFilter = false;
+        public double WalkingSpeedInKilometerPerHour = 50;
+        public int AmountOfPokemonToDisplayOnStart = 10;
+        public bool RenameAboveIv = false;
+        public bool EnableWebSocket = false;
+        public int WebSocketPort = 14561;
+        
+        [JsonIgnore]
+        internal AuthSettings Auth = new AuthSettings();
+
+        public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
                 {
                     new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
                     new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
@@ -96,35 +185,15 @@ namespace PoGo.NecroBot.CLI
                     new KeyValuePair<ItemId, int>(ItemId.ItemPokemonStorageUpgrade, 100),
                     new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
                 };
-                _itemRecycleFilter = _itemRecycleFilter ?? LoadItemList("Configs\\ConfigItemList.ini", defaultItems);
-                return _itemRecycleFilter;
-            }
-        }
 
-
-        public ICollection<PokemonId> PokemonsToEvolve
-        {
-            get
-            {
-                //Type of pokemons to evolve
-                var defaultPokemon = new List<PokemonId>
+        public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
                 {
                     PokemonId.Zubat,
                     PokemonId.Pidgey,
                     PokemonId.Rattata
                 };
-                _pokemonsToEvolve = _pokemonsToEvolve ??
-                                    LoadPokemonList("Configs\\ConfigPokemonsToEvolve.ini", defaultPokemon);
-                return _pokemonsToEvolve;
-            }
-        }
 
-        public ICollection<PokemonId> PokemonsNotToTransfer
-        {
-            get
-            {
-                //Type of pokemons not to transfer
-                var defaultPokemon = new List<PokemonId>
+        public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
                 {
                     PokemonId.Dragonite,
                     PokemonId.Charizard,
@@ -134,127 +203,75 @@ namespace PoGo.NecroBot.CLI
                     PokemonId.Mew,
                     PokemonId.Mewtwo
                 };
-                _pokemonsNotToTransfer = _pokemonsNotToTransfer ??
-                                         LoadPokemonList("Configs\\ConfigPokemonsToKeep.ini", defaultPokemon);
-                return _pokemonsNotToTransfer;
-            }
-        }
 
-        //Do not catch those
-        public ICollection<PokemonId> PokemonsNotToCatch
-        {
-            get
-            {
-                //Type of pokemons not to catch
-                var defaultPokemon = new List<PokemonId>
+        public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
                 {
                     PokemonId.Zubat,
                     PokemonId.Pidgey,
                     PokemonId.Rattata
                 };
-                _pokemonsNotToCatch = _pokemonsNotToCatch ??
-                                      LoadPokemonList("Configs\\ConfigPokemonsNotToCatch.ini", defaultPokemon);
-                return _pokemonsNotToCatch;
-            }
-        }
+    }
 
-        public ICollection<KeyValuePair<ItemId, int>> LoadItemList(string filename,
-            List<KeyValuePair<ItemId, int>> defaultItems)
+    public class ClientSettings : ISettings
+    {
+        private GlobalSettings _settings;
+
+        public ClientSettings(GlobalSettings settings)
         {
-            ICollection<KeyValuePair<ItemId, int>> result = new List<KeyValuePair<ItemId, int>>();
-
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
-
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
-            {
-                Logger.Write($"Loading File: {filename}");
-
-                string content;
-                using (var reader = new StreamReader(filename))
-                {
-                    content = reader.ReadToEnd();
-                    reader.Close();
-                }
-
-                content = Regex.Replace(content, @"\\/\*(.|\n)*?\*\/", ""); //todo: supposed to remove comment blocks
-
-
-                var tr = new StringReader(content);
-
-                var itemInfo = tr.ReadLine();
-                while (itemInfo != null)
-                {
-                    var itemInfoArray = itemInfo.Split(' ');
-                    var itemName = itemInfoArray.Length > 1 ? itemInfoArray[0] : "";
-                    int itemAmount;
-                    if (!int.TryParse(itemInfoArray.Length > 1 ? itemInfoArray[1] : "100", out itemAmount))
-                        itemAmount = 100;
-
-                    ItemId item;
-                    if (Enum.TryParse(itemName, out item))
-                    {
-                        result.Add(new KeyValuePair<ItemId, int>(item, itemAmount));
-                    }
-                    itemInfo = tr.ReadLine();
-                }
-            }
-            else
-            {
-                Logger.Write($"File: {filename} not found, creating new...", LogLevel.Warning);
-                using (var w = File.AppendText(Directory.GetCurrentDirectory() + "\\" + filename))
-                {
-                    defaultItems.ForEach(itemInfo => w.WriteLine($"{itemInfo.Key} {itemInfo.Value}"));
-                    defaultItems.ForEach(itemInfo => result.Add(itemInfo));
-                    w.Close();
-                }
-            }
-            return result;
+            _settings = settings;
         }
 
-        private static ICollection<PokemonId> LoadPokemonList(string filename, List<PokemonId> defaultPokemon)
+        public AuthType AuthType => _settings.Auth.AuthType;
+        public string PtcUsername => _settings.Auth.PtcUsername;
+        public string PtcPassword => _settings.Auth.PtcPassword;
+        public double DefaultLatitude => _settings.DefaultLatitude;
+        public double DefaultLongitude => _settings.DefaultLongitude;
+        public double DefaultAltitude => _settings.DefaultAltitude;
+
+        public string GoogleRefreshToken
         {
-            ICollection<PokemonId> result = new List<PokemonId>();
-
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Configs");
-
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\" + filename))
+            get
             {
-                Logger.Write($"Loading File: {filename}");
-
-                string content;
-                using (var reader = new StreamReader(filename))
-                {
-                    content = reader.ReadToEnd();
-                    reader.Close();
-                }
-
-                content = Regex.Replace(content, @"\\/\*(.|\n)*?\*\/", ""); //todo: supposed to remove comment blocks
-
-
-                var tr = new StringReader(content);
-
-                var pokemonName = tr.ReadLine();
-                while (pokemonName != null)
-                {
-                    PokemonId pokemon;
-                    if (Enum.TryParse(pokemonName, out pokemon))
-                    {
-                        result.Add(pokemon);
-                    }
-                    pokemonName = tr.ReadLine();
-                }
+                return _settings.Auth.GoogleRefreshToken;
             }
-            else
+            set
             {
-                Logger.Write($"File: {filename} not found, creating new...", LogLevel.Warning);
-                using (var w = File.AppendText(Directory.GetCurrentDirectory() + "\\" + filename))
-                {
-                    defaultPokemon.ForEach(pokemon => w.WriteLine(pokemon.ToString()));
-                    defaultPokemon.ForEach(pokemon => result.Add(pokemon));
-                    w.Close();
-                }
+                _settings.Auth.GoogleRefreshToken = value;
+                _settings.Auth.Save();
             }
-            return result;
         }
+    }
+
+    public class LogicSettings : ILogicSettings
+    {
+        private GlobalSettings _settings;
+
+        public LogicSettings(GlobalSettings settings)
+        {
+            _settings = settings;
+        }
+
+        public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
+        public int KeepMinCp => _settings.KeepMinCp;
+        public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
+        public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
+        public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
+        public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
+        public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
+        public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
+        public int KeepMinDuplicatePokemon => _settings.KeepMinDuplicatePokemon;
+        public bool PrioritizeIvOverCp => _settings.PrioritizeIvOverCp;
+        public int MaxTravelDistanceInMeters => _settings.MaxTravelDistanceInMeters;
+        public string GpxFile => _settings.GpxFile;
+        public bool UseGpxPathing => _settings.UseGpxPathing;
+        public bool UseLuckyEggsWhileEvolving => _settings.UseLuckyEggsWhileEvolving;
+        public bool EvolveAllPokemonAboveIv => _settings.EvolveAllPokemonAboveIv;
+        public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
+        public bool RenameAboveIv => _settings.RenameAboveIv;
+        public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
+        public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
+        public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
+        public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
+        public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
     }
 }

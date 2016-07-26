@@ -1,12 +1,13 @@
 <!-- define warning icon -->
 [1.1]: http://i.imgur.com/M4fJ65n.png (ATTENTION)
-[1.2]: http://i.imgur.com/NNcGs1n.png (BTC)
+[1.2]: http://i.imgur.com/067uOVo.png (NECROBOT_HEADER)
 <!-- title -->
 <h1>A Pokemon Go Bot based on FeroxRevs API</h1>
 <!-- disclaimer -->
-![alt text][1.1] <strong><em> The contents of this repo are a proof of concept and are for educational use only </em></strong>![alt text][1.1]<br/>
-![](http://i.imgur.com/NwUlZC3.png)
+![alt text][1.1] <strong><em> The contents of this repo are a proof of concept and are for educational use only </em></strong>![alt text][1.1]<br/><br/>
+![alt text][1.2] <br/><br/>
 Chatting about this Repository can be done on our Discord: https://discord.gg/VsVrjgr <br/>
+The NecroBot Website can be found at <a href="http://necrobot.net">necrobot.net</a>
 <br/>
 
 <h2><a name="features">Features</a></h2>
