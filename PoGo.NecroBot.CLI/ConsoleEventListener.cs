@@ -92,11 +92,11 @@ namespace PoGo.NecroBot.CLI
                 : $"{evt.Status}";
 
             var familyCandies = evt.FamilyCandies > 0
-                ? $" | Family Candies: {evt.FamilyCandies}"
+                ? $"Candies: {evt.FamilyCandies}"
                 : "";
 
             Logger.Write(
-                $"({catchStatus}) {evt.Id} Lvl: {evt.Level} CP: ({evt.Cp}/{evt.MaxCp}) IV: {evt.Perfection.ToString("0.00")}% | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball. Candies: {familyCandies}",
+                $"({catchStatus}) {evt.Id} Lvl: {evt.Level} CP: ({evt.Cp}/{evt.MaxCp}) IV: {evt.Perfection.ToString("0.00")}% | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball. | {familyCandies}",
                 LogLevel.Caught);
         }
 
