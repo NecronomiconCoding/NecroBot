@@ -61,7 +61,8 @@ namespace PoGo.NecroBot.Logic
 
             var pokemonList =
                 myPokemon.Where(
-                    p => p.DeployedFortId == string.Empty && p.Favorite == 0 && p.Cp < _logicClient.Settings.KeepMinCp)
+                    p => p.DeployedFortId == string.Empty && PokemonInfo.CalculatePokemonPerfection(p) < 100 &&
+                         (p.Favorite == 0 && p.Cp < _logicClient.Settings.KeepMinCp || PokemonInfo.CalculatePokemonPerfection(p) < _logicClient.Settings.KeepMinIvPercentage))
                     .ToList();
             if (filter != null)
             {
@@ -71,7 +72,7 @@ namespace PoGo.NecroBot.Logic
             {
                 var results = new List<PokemonData>();
                 var pokemonsThatCanBeTransfered = pokemonList.GroupBy(p => p.PokemonId)
-                    .Where(x => x.Count() > 2).ToList();
+                    .Where(x => x.Count() > _logicClient.Settings.KeepMinDuplicatePokemon).ToList();
 
                 var myPokemonSettings = await GetPokemonSettings();
                 var pokemonSettings = myPokemonSettings.ToList();
@@ -83,13 +84,15 @@ namespace PoGo.NecroBot.Logic
                 {
                     var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
                     var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
-                    if (settings.CandyToEvolve == 0)
-                        continue;
+                    var amountToSkip = _logicClient.Settings.KeepMinDuplicatePokemon;
 
-                    var amountToSkip = familyCandy.Candy/settings.CandyToEvolve;
-                    amountToSkip = amountToSkip > _logicClient.Settings.KeepMinDuplicatePokemon
-                        ? amountToSkip
-                        : _logicClient.Settings.KeepMinDuplicatePokemon;
+                    if (settings.CandyToEvolve > 0)
+                    {
+                        var amountPossible = familyCandy.Candy / settings.CandyToEvolve;
+                        if (amountPossible > amountToSkip)
+                            amountToSkip = amountPossible;
+                    }
+
                     if (prioritizeIVoverCp)
                     {
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
@@ -114,7 +117,7 @@ namespace PoGo.NecroBot.Logic
             {
                 return pokemonList
                     .GroupBy(p => p.PokemonId)
-                    .Where(x => x.Count() > 1)
+                    .Where(x => x.Count() > 0)
                     .SelectMany(
                         p =>
                             p.OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
@@ -124,7 +127,7 @@ namespace PoGo.NecroBot.Logic
             }
             return pokemonList
                 .GroupBy(p => p.PokemonId)
-                .Where(x => x.Count() > 1)
+                .Where(x => x.Count() > 0)
                 .SelectMany(
                     p =>
                         p.OrderByDescending(x => x.Cp)
@@ -190,8 +193,7 @@ namespace PoGo.NecroBot.Logic
                         new ItemData
                         {
                             ItemId = x.ItemId,
-                            Count =
-                                x.Count - _logicClient.Settings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
+                            Count = x.Count - _logicClient.Settings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
         }
