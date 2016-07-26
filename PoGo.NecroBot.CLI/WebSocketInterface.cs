@@ -51,58 +51,6 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        public void HandleEvent(ProfileEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(ErrorEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(NoticeEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(WarnEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(UseLuckyEggEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(PokemonEvolveEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(TransferPokemonEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(ItemRecycledEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(FortUsedEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(FortTargetEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(PokemonCaptureEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(NoPokeballEvent evt, Context ctx)
-        {
-        }
-
-        public void HandleEvent(UseBerryEvent evt, Context ctx)
-        {
-        }
-
         public void Listen(IEvent evt, Context ctx)
         {
             dynamic eve = evt;
@@ -113,8 +61,6 @@ namespace PoGo.NecroBot.CLI
             };
 
             Broadcast(JsonConvert.SerializeObject(eve, Formatting.None, jsonSerializerSettings));
-
-            HandleEvent(eve, ctx);
         }
     }
 }
