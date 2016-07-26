@@ -38,8 +38,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 machine.Fire(               
                     new DisplayHighestsPokemonEvent
                     {
-                        sortetBy = "Cp",
-                        pokemonList = pokemonPairedWithStatsCP
+                        SortetBy = "Cp",
+                        PokemonList = pokemonPairedWithStatsCP
                     });
             }
             catch (RuntimeBinderException e)
@@ -52,8 +52,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 machine.Fire(
                        new DisplayHighestsPokemonEvent
                        {
-                           sortetBy = "Iv",
-                           pokemonList = pokemonPairedWithStatsIV
+                           SortetBy = "Iv",
+                           PokemonList = pokemonPairedWithStatsIV
                        });
             }
             catch (RuntimeBinderException e)

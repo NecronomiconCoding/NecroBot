@@ -9,9 +9,9 @@ namespace PoGo.NecroBot.Logic.Event
 {
     public class DisplayHighestsPokemonEvent : IEvent
     {
-        public String sortetBy;
+        public String SortetBy;
         //PokemonData | CP | IV | Level
-        public List<Tuple<PokemonData,int,double,double>> pokemonList;
+        public List<Tuple<PokemonData,int,double,double>> PokemonList;
 
     }
 }
