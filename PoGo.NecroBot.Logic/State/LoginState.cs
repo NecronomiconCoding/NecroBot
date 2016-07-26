@@ -20,7 +20,7 @@ namespace PoGo.NecroBot.Logic.State
                     case AuthType.Ptc:
                         try
                         {
-                            await ctx.Client.Login.DoPtcLogin(ctx.Settings.PtcUsername, ctx.Settings.PtcPassword);
+                            await ctx.Client.Login.DoPtcLogin();
                         }
                         catch (System.AggregateException ae)
                         {
