@@ -52,7 +52,7 @@ namespace PoGo.NecroBot.Logic.State
 
             DownloadProfile(ctx, machine);
 
-            return new PositionCheckState();
+            return new InfoState();
         }
 
         public void DownloadProfile(Context ctx, StateMachine machine)

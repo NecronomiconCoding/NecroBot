@@ -91,6 +91,10 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
+        public void HandleEvent(DisplayHighestsPokemonEvent evt,Context ctx)
+        {
+        }
+
         public void Listen(IEvent evt, Context ctx)
         {
             dynamic eve = evt;

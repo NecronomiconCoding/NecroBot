@@ -38,6 +38,8 @@ namespace PoGo.NecroBot.CLI
         {
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
 
+            GlobalSettings settings = GlobalSettings.Load("\\config\\config.json");
+
             var machine = new StateMachine();
             var stats = new Statistics();
             stats.DirtyEvent += () => Console.Title = stats.ToString();
@@ -48,9 +50,14 @@ namespace PoGo.NecroBot.CLI
             machine.EventListener += listener.Listen;
             machine.EventListener += aggregator.Listen;
 
+            if (settings.EnableWebSocket)
+            {
+                var websocket = new WebSocketInterface(settings.WebSocketPort);
+                machine.EventListener += websocket.Listen;
+            }
+
             machine.SetFailureState(new LoginState());
 
-            GlobalSettings settings = GlobalSettings.Load("\\config\\config.json");
 
             var context = new Context(new ClientSettings(settings), new LogicSettings(settings));
             context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
