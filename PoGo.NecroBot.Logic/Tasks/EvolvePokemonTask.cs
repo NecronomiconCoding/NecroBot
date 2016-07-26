@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System;
 using System.Linq;
 using System.Threading;
 using PoGo.NecroBot.Logic.Event;
@@ -13,6 +14,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class EvolvePokemonTask
     {
+        private static DateTime _lastLuckyEggTime;
         public static void Execute(Context ctx, StateMachine machine)
         {
             if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
@@ -44,19 +46,19 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public static void UseLuckyEgg(Client client, Inventory inventory, StateMachine machine)
         {
+
             var inventoryContent = inventory.GetItems().Result;
 
             var luckyEggs = inventoryContent.Where(p => p.ItemId == ItemId.ItemLuckyEgg);
             var luckyEgg = luckyEggs.FirstOrDefault();
 
-            if (luckyEgg == null || luckyEgg.Count <= 0)
+            if (luckyEgg == null || luckyEgg.Count <= 0 || _lastLuckyEggTime.AddMinutes(30).Ticks > DateTime.Now.Ticks)
                 return;
 
+            _lastLuckyEggTime = DateTime.Now;
             client.Inventory.UseItemXpBoost().Wait();
-
-            luckyEgg.Count -= 1;
+            var refreshCachedInventory = inventory.RefreshCachedInventory();
             machine.Fire(new UseLuckyEggEvent {Count = luckyEgg.Count});
-
             Thread.Sleep(2000);
         }
     }
