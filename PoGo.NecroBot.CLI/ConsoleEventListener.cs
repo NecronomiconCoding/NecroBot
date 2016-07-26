@@ -58,6 +58,14 @@ namespace PoGo.NecroBot.CLI
             Logger.Write($"{evt.Count}x {evt.Id}", LogLevel.Recycling);
         }
 
+        public void HandleEvent(EggIncubatorStatusEvent evt, Context ctx)
+        {
+            if (evt.WasAddedNow)
+                Logger.Write($"Putting egg in incubator: {evt.KmRemaining:0.00}km left");
+            else
+                Logger.Write($"Incubator status update: {evt.KmRemaining:0.00}km left");
+        }
+
         public void HandleEvent(FortUsedEvent evt, Context ctx)
         {
             Logger.Write($"XP: {evt.Exp}, Gems: {evt.Gems}, Items: {evt.Items}", LogLevel.Pokestop);

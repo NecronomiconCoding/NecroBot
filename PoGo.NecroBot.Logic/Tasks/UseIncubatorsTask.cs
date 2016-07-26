@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
@@ -42,14 +43,28 @@ namespace PoGo.NecroBot.Logic.Tasks
                         continue;
 
                     var response = await ctx.Client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);
-                    Logger.Write($"Putting egg in incubator ({response.EggIncubator.TargetKmWalked - kmWalked:0.00}km left)");
-
                     unusedEggs.Remove(egg);
+
+                    machine.Fire(new EggIncubatorStatusEvent
+                    {
+                        IncubatorId = incubator.Id,
+                        WasAddedNow = true,
+                        PokemonId = egg.Id,
+                        KmToWalk = egg.EggKmWalkedTarget,
+                        KmRemaining = response.EggIncubator.TargetKmWalked - kmWalked
+                    });
+
                     await Task.Delay(500);
                 }
                 else
                 {
-                    Logger.Write($"Incubator status update: {incubator.TargetKmWalked - kmWalked:0.00}km left");
+                    machine.Fire(new EggIncubatorStatusEvent
+                    {
+                        IncubatorId = incubator.Id,
+                        PokemonId = incubator.PokemonId,
+                        KmToWalk = incubator.TargetKmWalked - incubator.StartKmWalked,
+                        KmRemaining = incubator.TargetKmWalked - kmWalked
+                    });
                 }
             }
         }

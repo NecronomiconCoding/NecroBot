@@ -61,6 +61,7 @@
     <Compile Include="Event\ProfileEvent.cs" />
     <Compile Include="Event\TransferPokemonEvent.cs" />
     <Compile Include="Event\UseBerryEvent.cs" />
+    <Compile Include="Event\EggIncubatorStatusEvent.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="LogicClient.cs" />
