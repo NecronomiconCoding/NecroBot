@@ -71,7 +71,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var pokemonFamilies = ctx.Inventory.GetPokemonFamilies().Result;
 
                     var setting = pokemonSettings.Single(q => q.PokemonId == pokemon.PokemonId);
-                    var family = pokemonFamilies.Single(q => q.FamilyId == setting.FamilyId);
+                    var family = pokemonFamilies.First(q => q.FamilyId == setting.FamilyId);
 
                     family.Candy += 3;
 
