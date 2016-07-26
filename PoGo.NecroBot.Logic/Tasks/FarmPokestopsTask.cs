@@ -82,7 +82,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     CatchLurePokemonsTask.Execute(ctx, machine, pokeStop);
                 }
 
-                
 
                 var fortSearch = ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude).Result;
                 if (fortSearch.ExperienceAwarded > 0)
