@@ -233,12 +233,18 @@ namespace PoGo.NecroBot.CLI
                     PokemonId.Mewtwo
                 };
 
-        public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
+        public List<PokemonId> PokemonsToImmediatelyTransfer = new List<PokemonId>
+                {
+                    PokemonId.Pinsir
+                };
+
+    public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
                 {
                     PokemonId.Zubat,
                     PokemonId.Pidgey,
                     PokemonId.Rattata
                 };
+
     }
 
     public class ClientSettings : ISettings
@@ -302,5 +308,6 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
+        public ICollection<PokemonId> PokemonsToImmediatelyTransfer => _settings.PokemonsToImmediatelyTransfer;
     }
 }

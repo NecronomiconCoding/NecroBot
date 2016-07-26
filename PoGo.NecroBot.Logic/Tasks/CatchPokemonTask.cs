@@ -104,7 +104,41 @@ namespace PoGo.NecroBot.Logic.Tasks
                     evt.BallAmount = ctx.Inventory.GetItemAmountByType(pokeball).Result;
                     machine.Fire(evt);
                 }
-                attemptCounter++;
+
+                if ((caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess) &&
+                    (ctx.LogicSettings.PokemonsToImmediatelyTransfer.Contains(pokemon.PokemonId)))
+                {
+                    Thread.Sleep(2000);
+
+                    if ((encounter.WildPokemon != null) &&
+                        (encounter.WildPokemon.PokemonData != null))
+                    {
+                        ctx.Client.Inventory.TransferPokemon(encounter.WildPokemon.PokemonData.Id).Wait();
+                        ctx.Inventory.DeletePokemonFromInvById(encounter.WildPokemon.PokemonData.Id);
+
+                        var bestPokemonOfType = ctx.LogicSettings.PrioritizeIvOverCp
+                            ? ctx.Inventory.GetHighestPokemonOfTypeByIv(encounter.WildPokemon.PokemonData).Result
+                            : ctx.Inventory.GetHighestPokemonOfTypeByCp(encounter.WildPokemon.PokemonData).Result;
+
+                        var pokemonSettings = ctx.Inventory.GetPokemonSettings().Result;
+                        var pokemonFamilies = ctx.Inventory.GetPokemonFamilies().Result;
+
+                        var setting = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
+                        var family = pokemonFamilies.Single(x => x.FamilyId == setting.FamilyId);
+
+                        machine.Fire(new TransferPokemonEvent
+                        {
+                            Id = pokemon.PokemonId,
+                            Perfection = PokemonInfo.CalculatePokemonPerfection(encounter.WildPokemon.PokemonData),
+                            Cp = encounter.WildPokemon.PokemonData.Cp,
+                            BestCp = bestPokemonOfType.Cp,
+                            BestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType),
+                            FamilyCandies = family.Candy
+                        });
+                    }
+                }
+
+                    attemptCounter++;
                 Thread.Sleep(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
