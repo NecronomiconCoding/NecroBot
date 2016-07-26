@@ -73,19 +73,15 @@ namespace PoGo.NecroBot.CLI
     public class GlobalSettings
     {
         public static GlobalSettings Default => new GlobalSettings();
-
-        private static string GetAuthPath(string path)
-        {
-            var fullPath = Directory.GetCurrentDirectory() + path;
-            string folder = Path.GetDirectoryName(fullPath);
-            folder += "\\auth.json";
-
-            return folder;
-        }
+        public static string ProfilePath;
+        public static string ConfigPath;
 
         public static GlobalSettings Load(string path)
         {
-            var fullPath = Directory.GetCurrentDirectory() + path;
+            ProfilePath = Directory.GetCurrentDirectory() + path;
+            ConfigPath = ProfilePath + "\\config";
+
+            var fullPath = ConfigPath + "\\config.json";
 
             GlobalSettings settings = null;
             if (File.Exists(fullPath))
@@ -104,18 +100,17 @@ namespace PoGo.NecroBot.CLI
             {
                 settings = new GlobalSettings();
             }
-
-            settings.Save(path);
-            settings.Auth.Load(GetAuthPath(path));
+            Logger.Write($"nigger {fullPath} {ConfigPath} {ProfilePath}");
+            settings.Save(fullPath);
+            settings.Auth.Load(ConfigPath + "\\auth.json");
 
             return settings;
         }
 
-        public void Save(string path)
+        public void Save(string fullPath)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented, new StringEnumConverter { CamelCaseText = true });
 
-            var fullPath = Directory.GetCurrentDirectory() + path;
             string folder = Path.GetDirectoryName(fullPath);
             if (!Directory.Exists(folder))
             {

@@ -34,11 +34,15 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        private static void Main()
+        private static void Main(string[] args)
         {
-            Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
+            string subPath = "";
+            if (args.Length > 0)
+                subPath = "\\" + args[0];
 
-            GlobalSettings settings = GlobalSettings.Load("\\config\\config.json");
+            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
+
+            GlobalSettings settings = GlobalSettings.Load(subPath);
 
             var machine = new StateMachine();
             var stats = new Statistics();
