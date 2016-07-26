@@ -20,18 +20,6 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static void Execute(Context ctx, StateMachine machine, EncounterResponse encounter, MapPokemon pokemon)
         {
-            var invResp = ctx.Client.Inventory.GetInventory();
-            var invRespRes = invResp.Result;
-            if (invRespRes.Success)
-            {
-                var items = invResp.Result.InventoryDelta.InventoryItems;
-                if(items.Select(rawItem => rawItem.InventoryItemData.Item).Any(item => (item.ItemId == ItemId.ItemPokeBall || item.ItemId == ItemId.ItemGreatBall || item.ItemId == ItemId.ItemUltraBall || item.ItemId == ItemId.ItemMasterBall) && item.Count == 0))
-                {
-                    Logger.Write("Encountered a pokemon, but there are no pokeballs!", LogLevel.Warning);
-                    return;
-                }
-            }
-
             CatchPokemonResponse caughtPokemonResponse;
             var attemptCounter = 1;
             do
