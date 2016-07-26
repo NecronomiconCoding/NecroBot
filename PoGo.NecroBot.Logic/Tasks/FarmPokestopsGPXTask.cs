@@ -76,10 +76,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
                                 });
                             }
+                            if (fortSearch.ItemsAwarded.Count > 0)
+                            {
+                                var refreshCachedInventory = ctx.Inventory.RefreshCachedInventory();
+                            }
 
                             Thread.Sleep(1000);
 
                             RecycleItemsTask.Execute(ctx, machine);
+
+                            if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonAboveIv)
+                            {
+                                EvolvePokemonTask.Execute(ctx, machine);
+                            }
 
                             if (ctx.LogicSettings.TransferDuplicatePokemon)
                             {

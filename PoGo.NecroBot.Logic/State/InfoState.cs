@@ -11,8 +11,8 @@ namespace PoGo.NecroBot.Logic.State
     {
         public IState Execute(Context ctx, StateMachine machine)
         {
-
-            LogBestPokemonTask.Execute(ctx,machine);
+            if(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart > 0)
+                LogBestPokemonTask.Execute(ctx,machine);
 
             return new PositionCheckState();
         }
