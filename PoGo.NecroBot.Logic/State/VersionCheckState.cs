@@ -7,6 +7,7 @@ using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Collections.Generic;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 
@@ -17,70 +18,80 @@ namespace PoGo.NecroBot.Logic.State
     public class VersionCheckState : IState
     {
         public static string VersionUri =
-            "https://raw.githubusercontent.com/NecronomiconCoding/Pokemon-Go-Bot/master/PokemonGo.RocketAPI/Properties/AssemblyInfo.cs";
+            "https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/PoGo.NecroBot.Logic/Properties/AssemblyInfo.cs";
+        public static string latestReleaseAPI = "https://api.github.com/repos/NecronomiconCoding/NecroBot/releases/latest";
 
         public static bool AutoUpdate = true; //TODO: read from clientsettings
 
         public IState Execute(Context ctx, StateMachine machine)
         {
-            if (File.Exists(Assembly.GetExecutingAssembly().Location + ".old")) File.Delete(Assembly.GetExecutingAssembly().Location + ".old"); // delete old update files
-            if (IsLatest())
-            {
-                machine.Fire(new NoticeEvent
-                {
-                    Message =
-                        "Awesome! You have already got the newest version! " +
-                        Assembly.GetExecutingAssembly().GetName().Version
-                });
-            }
-            else
-            {
-                var msg = AutoUpdate
-                    ? "Updating to newest Version...."
-                    : "There is a new Version available: https://github.com/NecronomiconCoding/Pokemon-Go-Bot";
-                machine.Fire(new WarnEvent
-                {
-                    Message = msg
-                });
+            cleanupOldFiles();
 
-
-                const string url = "https://github.com/NecronomiconCoding/NecroBot/archive/master.zip";
-                const string zipName = "update.zip";
-                var baseDir = new DirectoryInfo(Directory.GetCurrentDirectory()).Parent?.Parent?.Parent;
-                var downloadedFilePath = baseDir + "/tmp/";
-                var wrongProjectFilePath = baseDir + "NecroBot-master/"; //TODO:change
-                
-                //Download binary , unpack it and move it
-                if (DownloadFile(url, downloadedFilePath + zipName))
-                {
-                    if (UnpackFile(downloadedFilePath, baseDir?.ToString(), zipName))
-                    {
-                        var curFile = Assembly.GetExecutingAssembly().Location;
-                        File.Move(curFile, curFile + ".old"); //renames current exe to .exe.old
-                        if (MoveAllFiles(wrongProjectFilePath, baseDir?.ToString()))
-                        {
-                            Logger.Write("Update finished... restarting"); //after moving the new .exe restart
-                            Thread.Sleep(2000);
-                            System.Diagnostics.Process.Start(curFile); 
-                            Environment.Exit(0);
-                        }
-                        else
-                        {
-                            Logger.Write("Error moving Files inside " + wrongProjectFilePath);
-                        }
-                    }
-                    else
-                    {
-                        Logger.Write("Error Unpacking update. Located in /tmp/");
-                    }
-                }
-                else
-                {
-                    Logger.Write("Error Downloading Update, please download from:");
-                    Logger.Write(url);
-                }
+            if (IsLatest()) //has the newest version NOTE: NOT YET IMPLEMENTED. rest of the code works, just need to check current version against latest
+            {
+                Logger.Write("Using newest Release of NecroBot");
+                return new LoginState();
             }
-            return new LoginState();
+            else            //doesnt have the newest version
+            {
+                if (AutoUpdate) //wants the newest version
+                {
+                    Logger.Write("AutoUpdate is enabled, please wait for the bot to begin updating.");
+                }
+                else            //doesnt want the newest version
+                {
+                    Logger.Write("AutoUpdate is disabled. Get the latest release from:\n https://github.com/NecronomiconCoding/NecroBot/releases");
+                }
+
+                //TODO: change constant URL to latest Release url provided by the API page (see latestReleaseAPI a few lines up)
+                const string url = "https://github.com/NecronomiconCoding/NecroBot/releases/download/v0.1.5/";
+                const string zipName = "Release.zip";
+                string downloadLink = url + zipName;
+                //Logger.Write($"\nDEBUG: Download link is: \n{downloadLink}");
+                var baseDir = new DirectoryInfo(Directory.GetCurrentDirectory());
+                var downloadFilePath = baseDir + "\\" + zipName;
+                var tempPath = baseDir + "\\tmp";
+
+                //download
+                //Logger.Write($"\nDEBUG: Attempting to download file \n{downloadLink}");
+                if (DownloadFile(downloadLink, downloadFilePath))
+                {
+                //Logger.Write($"\nDEBUG: Downloaded file is at: \n{downloadFilePath}");
+                }
+
+                //extract
+                //Logger.Write($"\nDEBUG: Attempting to extract to temp path: \n{tempPath}");
+                if (UnpackFile(downloadFilePath, tempPath))
+                {
+                //Logger.Write($"\nDEBUG: Successfully extracted zip to \n{tempPath}\\{zipName}");
+                }
+
+                //replace
+                var extractedDir = tempPath + "\\Release";
+                var destinationDir = baseDir + "\\";
+                //Logger.Write($"\nDEBUG: Attempting to replace old files with files from:\n {extractedDir}");
+                if (MoveAllFiles(extractedDir, destinationDir))
+                {
+                //Logger.Write($"\nDEBUG: Successfully replaced old and busted with new hotness.");
+                }
+
+                cleanupOldFiles();  //cleansup most of the .old files that were created when the bot updated
+                Environment.Exit(0);
+            }
+            return null;
+        }
+        
+        public static void cleanupOldFiles()
+        {
+            DirectoryInfo di = new DirectoryInfo(Directory.GetCurrentDirectory());
+            FileInfo[] files = di.GetFiles("*.old");
+            foreach (FileInfo file in files)
+                try
+                {
+                    //Logger.Write($"\nDEBUG: Old file found: {file.FullName}");
+                    File.Delete(file.FullName);
+                }
+                catch { }
         }
 
         public static bool DownloadFile(string url, string dest)
@@ -89,7 +100,7 @@ namespace PoGo.NecroBot.Logic.State
             {
                 try
                 {
-                    client.DownloadFile(url, Directory.GetCurrentDirectory() + dest);
+                    client.DownloadFile(url, dest);
                 }
                 catch (Exception)
                 {
@@ -107,7 +118,8 @@ namespace PoGo.NecroBot.Logic.State
             }
         }
 
-        public bool IsLatest()
+        
+        public bool IsLatest()     //TODO: actually use this function
         {
             try
             {
@@ -137,6 +149,13 @@ namespace PoGo.NecroBot.Logic.State
             if (!Directory.Exists(destFolder))
                 Directory.CreateDirectory(destFolder);
 
+            var oldfiles = Directory.GetFiles(destFolder);
+            foreach (var old in oldfiles)
+            {
+                //Logger.Write($"\nDEBUG: Trying to rename {old}");
+                File.Move(old, old + ".old");
+            }
+
             try
             {
                 var files = Directory.GetFiles(sourceFolder);
@@ -160,22 +179,23 @@ namespace PoGo.NecroBot.Logic.State
             }
             catch (Exception)
             {
+                Logger.Write("\nDEBUG: Something bad happened during replacement");
                 return false;
             }
             return true;
         }
 
-        public static bool UnpackFile(string sourcePath, string destPath, string fileName)
+        public static bool UnpackFile(string sourceTarget, string destPath)
         {
-            var source = Directory.GetCurrentDirectory() + sourcePath + fileName;
-            var dest = Directory.GetCurrentDirectory() + destPath + fileName;
-            if (Directory.Exists(source)) return false;
+            var source = sourceTarget;
+            var dest = destPath;
             try
             {
                 ZipFile.ExtractToDirectory(source, dest);
             }
             catch (Exception)
             {
+                Logger.Write("\nDEBUG: Something went wrong during extraction. Check file integrity");
                 return false;
             }
             return true;
