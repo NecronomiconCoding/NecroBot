@@ -129,6 +129,12 @@ namespace PoGo.NecroBot.CLI
             {
                 settings = new GlobalSettings();
             }
+
+            if(settings.WebSocketPort == 0)
+            {
+                settings.WebSocketPort = 14251;
+            }
+
             settings.Save(fullPath);
             settings.Auth.Load(ConfigPath + "\\auth.json");
 
@@ -148,6 +154,7 @@ namespace PoGo.NecroBot.CLI
             File.WriteAllText(fullPath, output);
         }
 
+        public bool AutoUpdate = false;
         public double DefaultAltitude = 10;
         public double DefaultLatitude = 52.379189;
         public double DefaultLongitude = 4.899431;
@@ -169,8 +176,7 @@ namespace PoGo.NecroBot.CLI
         public double WalkingSpeedInKilometerPerHour = 50;
         public int AmountOfPokemonToDisplayOnStart = 10;
         public bool RenameAboveIv = false;
-        public bool EnableWebSocket = false;
-        public int WebSocketPort = 14561;
+        public int WebSocketPort = 14251;
         public bool DumpPokemonStats = false;
 
         [JsonIgnore]
@@ -274,7 +280,7 @@ namespace PoGo.NecroBot.CLI
         {
             _settings = settings;
         }
-
+        public bool AutoUpdate => _settings.AutoUpdate;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;

@@ -53,17 +53,14 @@ namespace PoGo.NecroBot.Logic.Logging
         ///     Clears the specified dumpfile.
         /// </summary>
         /// <param name="filename">File to clear/param>
-        private static void ClearDumpFile(string filename)
+        public static void ClearDumpFile(string filename)
         {
             Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + "\\Dumps");
 
             string path = Directory.GetCurrentDirectory() + _subPath + $"\\Dumps\\NecroBot-{filename}.txt";
 
             // Clears all contents of a file first if overwrite is true
-            if (!File.Exists(path))
-            {
-                File.WriteAllText(path, string.Empty);
-            }
+            File.WriteAllText(path, string.Empty);
         }
 
         /// <summary>
@@ -101,7 +98,7 @@ namespace PoGo.NecroBot.Logic.Logging
         public static void Dump(string data, string filename)
         {
             string uniqueFileName = $"{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}";
-            // Dump with file overwrite
+
             DumpToFile(data, uniqueFileName);
         }
     }

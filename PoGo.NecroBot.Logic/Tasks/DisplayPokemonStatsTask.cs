@@ -30,9 +30,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (ctx.LogicSettings.DumpPokemonStats)
             {
+                string dumpFileName = "PokeBagStats";
+                Logger.ClearDumpFile(dumpFileName);
                 // Maximum pokebag is limited to 1000
                 var allPokemonInBag = ctx.LogicSettings.PrioritizeIvOverCp ? await ctx.Inventory.GetHighestsPerfect(1000) : await ctx.Inventory.GetHighestsCp(1000);
-                string dumpFileName = "PokeBagStats";
+                
                 // Converts the list of pokemon into a string array to be dumped ordered by IV/CP depending on setting
                 foreach (var pokemon in allPokemonInBag)
                 {

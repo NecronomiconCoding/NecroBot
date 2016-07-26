@@ -2,6 +2,7 @@
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.SocketBase;
+using SuperSocket.SocketBase.Config;
 using SuperSocket.WebSocket;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,21 @@ namespace PoGo.NecroBot.CLI
         public WebSocketInterface(int port)
         {
             _server = new WebSocketServer();
-            if(_server.Setup(port) == false)
+            bool setupComplete = _server.Setup(new ServerConfig
+            {
+                Name = "NecroWebSocket",
+                Ip = "Any",
+                Port = port,
+                Mode = SocketMode.Tcp,
+                Security = "tls",
+                Certificate = new CertificateConfig
+                {
+                    FilePath = @"cert.pfx",
+                    Password = "necro"
+                }
+            });
+
+            if(setupComplete == false)
             {
                 Logic.Logging.Logger.Write($"Failed to start WebSocketServer on port : {port}", Logic.Logging.LogLevel.Error);
                 return;

@@ -45,9 +45,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokestopList.Count <= 0)
             {
-                Logger.Write("No usable PokeStops found in your area. Is your maximum distance too small?",
-                    LogLevel.Warning);
+                machine.Fire(new WarnEvent { Message = "No usable PokeStops found in your area. Is your maximum distance too small?" });
             }
+
+            machine.Fire(new PokeStopListEvent { Forts = pokestopList });
 
             while (pokestopList.Any())
             {
