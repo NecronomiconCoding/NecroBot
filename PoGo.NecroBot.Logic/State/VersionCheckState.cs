@@ -8,6 +8,7 @@ using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 
 #endregion
@@ -16,44 +17,54 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class VersionCheckState : IState
     {
-        public static string VersionUri =
+        public const string VersionUri =
             "https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/PoGo.NecroBot.Logic/Properties/AssemblyInfo.cs";
 
-        public static string LatestReleaseApi =
+        public const string LatestReleaseApi =
             "https://api.github.com/repos/NecronomiconCoding/NecroBot/releases/latest";
+
+        private const string LatestRelease = 
+            "https://github.com/NecronomiconCoding/NecroBot/releases";
+
+        private readonly string _remoteReleaseUrl =
+            $"https://github.com/NecronomiconCoding/NecroBot/releases/download/v{RemoteVersion}/";
 
         public static Version RemoteVersion;
 
         public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
-            bool AutoUpdate = ctx.LogicSettings.AutoUpdate;
+            var autoUpdate = ctx.LogicSettings.AutoUpdate;
             CleanupOldFiles();
             var needupdate = IsLatest();
-            if (!needupdate || !AutoUpdate)
+            if (!needupdate || !autoUpdate)
             {
-                if (!AutoUpdate)
+                if (!autoUpdate)
                 {
-                    Logger.Write(
-                        "AutoUpdate is disabled. Get the latest release from:\n https://github.com/NecronomiconCoding/NecroBot/releases");
+                    machine.Fire(new UpdateEvent
+                    {
+                        Message =
+                            $"AutoUpdater is disabled. Get the latest release from: {LatestRelease}\n "
+                    });
                 }
                 return new LoginState();
             }
 
-            Logger.Write("AutoUpdate is enabled, please wait for the bot to begin updating.");
+            machine.Fire(new UpdateEvent {Message = "Downloading and apply Update...."});
             const string zipName = "Release.zip";
-            var url = $"https://github.com/NecronomiconCoding/NecroBot/releases/download/v{RemoteVersion}/";
-            var downloadLink = url + zipName;
+            var downloadLink = _remoteReleaseUrl + zipName;
             var baseDir = new DirectoryInfo(Directory.GetCurrentDirectory());
             var downloadFilePath = baseDir + "\\" + zipName;
             var tempPath = baseDir + "\\tmp";
             var extractedDir = tempPath + "\\Release";
             var destinationDir = baseDir + "\\";
             if (!DownloadFile(downloadLink, downloadFilePath)) return new LoginState();
+            machine.Fire(new UpdateEvent { Message = "Finished downloading newest Release..." });
             if (!UnpackFile(downloadFilePath, tempPath)) return new LoginState();
+            machine.Fire(new UpdateEvent { Message = "Finished unpacking files..." });
             if (!MoveAllFiles(extractedDir, destinationDir)) return new LoginState();
-            Console.WriteLine("Update finished, restarting..");
+            machine.Fire(new UpdateEvent {Message = "Update finished, you can close this window now."});
             Process.Start(Assembly.GetEntryAssembly().Location);
-            Environment.Exit(0);
+            Environment.Exit(-1);
             return null;
         }
 
