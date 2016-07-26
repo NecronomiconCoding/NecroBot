@@ -29,38 +29,25 @@ namespace PoGo.NecroBot.Logic.Tasks
             foreach (var pokemon in highestsPokemonPerfect)
                 pokemonPairedWithStatsIV.Add(Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon)));
 
-
-
-            // --------------I know this is ugly AF will refactor this asap-----------------
-            try
-            {
-
                 machine.Fire(               
                     new DisplayHighestsPokemonEvent
                     {
                         SortetBy = "Cp",
                         PokemonList = pokemonPairedWithStatsCP
                     });
-            }
-            catch (RuntimeBinderException e)
-            {
+ 
                 Thread.Sleep(500);
-            }
+     
 
-            try
-            {
                 machine.Fire(
                        new DisplayHighestsPokemonEvent
                        {
                            SortetBy = "Iv",
                            PokemonList = pokemonPairedWithStatsIV
                        });
-            }
-            catch (RuntimeBinderException e)
-            {
+ 
                 Thread.Sleep(500);
-            }
-
+    
 
         }
     }
