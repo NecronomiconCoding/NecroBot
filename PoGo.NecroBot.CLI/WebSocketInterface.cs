@@ -15,6 +15,8 @@ namespace PoGo.NecroBot.CLI
     public class WebSocketInterface
     {
         private WebSocketServer _server;
+        private PokeStopListEvent _lastPokeStopList = null;
+        private ProfileEvent _lastProfile = null;
 
         public WebSocketInterface(int port)
         {
@@ -52,6 +54,11 @@ namespace PoGo.NecroBot.CLI
 
         private void HandleSession(WebSocketSession session)
         {
+            if(_lastProfile != null)
+                session.Send(Serialize(_lastProfile));
+
+            if(_lastPokeStopList != null)
+                session.Send(Serialize(_lastPokeStopList));
         }
 
         private void Broadcast(string message)
@@ -66,16 +73,37 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        public void Listen(IEvent evt, Context ctx)
+        private void HandleEvent(PokeStopListEvent evt)
         {
-            dynamic eve = evt;
+            _lastPokeStopList = evt;
+        }
 
+        private void HandleEvent(ProfileEvent evt)
+        {
+            _lastProfile = evt;
+        }
+
+        private string Serialize(dynamic evt)
+        {
             var jsonSerializerSettings = new JsonSerializerSettings()
             {
                 TypeNameHandling = TypeNameHandling.All
             };
 
-            Broadcast(JsonConvert.SerializeObject(eve, Formatting.None, jsonSerializerSettings));
+            return JsonConvert.SerializeObject(evt, Formatting.None, jsonSerializerSettings);
+        }
+
+        public void Listen(IEvent evt, Context ctx)
+        {
+            dynamic eve = evt;
+
+            try
+            {
+                HandleEvent(eve);
+            }
+            catch { }
+
+            Broadcast(Serialize(eve));
         }
     }
 }

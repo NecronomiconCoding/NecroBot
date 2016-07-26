@@ -18,10 +18,13 @@ using System.Globalization;
 
 namespace PoGo.NecroBot.Logic
 {
+    public delegate void UpdatePositionDelegate(double lat, double lng);
     public class Navigation
     {
         private const double SpeedDownTo = 10 / 3.6;
         private readonly Client _client;
+
+        public event UpdatePositionDelegate UpdatePositionEvent;
 
         public Navigation(Client client)
         {
@@ -47,6 +50,8 @@ namespace PoGo.NecroBot.Logic
                 await
                     _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                         _client.Settings.DefaultAltitude);
+
+            UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
             do
             {
@@ -75,6 +80,9 @@ namespace PoGo.NecroBot.Logic
                     await
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                             _client.Settings.DefaultAltitude);
+
+                UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
+
 
                 if (functionExecutedWhileWalking != null)
                     await functionExecutedWhileWalking(); // look for pokemon
@@ -110,6 +118,8 @@ namespace PoGo.NecroBot.Logic
                 await
                     _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude, waypoint.Altitude);
 
+            UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
+
             do
             {
                 var millisecondsUntilGetUpdatePlayerLocationResponse =
@@ -137,6 +147,8 @@ namespace PoGo.NecroBot.Logic
                     await
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                             waypoint.Altitude);
+
+                UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
                 if (functionExecutedWhileWalking != null)
                     await functionExecutedWhileWalking(); // look for pokemon & hit stops

@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
@@ -15,7 +16,7 @@ namespace PoGo.NecroBot.CLI
     {
         public void HandleEvent(ProfileEvent evt, Context ctx)
         {
-            Logger.Write($"Playing as {evt.Profile.PlayerData.Username ?? ""}");
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventFortUsed, evt.Profile.PlayerData.Username ?? ""));
         }
 
         public void HandleEvent(ErrorEvent evt, Context ctx)
@@ -35,37 +36,35 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(UseLuckyEggEvent evt, Context ctx)
         {
-            Logger.Write($"Used Lucky Egg, remaining: {evt.Count}", LogLevel.Egg);
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventUsedLuckyEgg, evt.Count), LogLevel.Egg);
         }
 
         public void HandleEvent(PokemonEvolveEvent evt, Context ctx)
         {
             Logger.Write(evt.Result == EvolvePokemonResponse.Types.Result.Success
-                ? $"{evt.Id} successfully for {evt.Exp}xp"
-                : $"Failed {evt.Id}. EvolvePokemonOutProto.Result was {evt.Result}, stopping evolving {evt.Id}",
+                ? ctx.Translations.GetTranslation(TranslationString.EventPokemonEvolvedSuccess, evt.Id, evt.Exp)
+                : ctx.Translations.GetTranslation(TranslationString.EventPokemonEvolvedFailed, evt.Id, evt.Result, evt.Id),
                 LogLevel.Evolve);
         }
 
         public void HandleEvent(TransferPokemonEvent evt, Context ctx)
         {
-            Logger.Write(
-                $"{evt.Id}\t- CP: {evt.Cp}  IV: {evt.Perfection.ToString("0.00")}%   [Best CP: {evt.BestCp}  IV: {evt.BestPerfection.ToString("0.00")}%] (Candies: {evt.FamilyCandies}) ",
-                LogLevel.Transfer);
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventPokemonTransferred, evt.Id, evt.Cp, evt.Perfection.ToString("0.00"), evt.BestCp, evt.BestPerfection.ToString("0.00"), evt.FamilyCandies), LogLevel.Transfer);
         }
 
         public void HandleEvent(ItemRecycledEvent evt, Context ctx)
         {
-            Logger.Write($"{evt.Count}x {evt.Id}", LogLevel.Recycling);
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventItemRecycled, evt.Count, evt.Id), LogLevel.Recycling);
         }
 
         public void HandleEvent(FortUsedEvent evt, Context ctx)
         {
-            Logger.Write($"XP: {evt.Exp}, Gems: {evt.Gems}, Items: {evt.Items}", LogLevel.Pokestop);
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventFortUsed, evt.Exp, evt.Gems, evt.Items), LogLevel.Pokestop);
         }
 
         public void HandleEvent(FortTargetEvent evt, Context ctx)
         {
-            Logger.Write($"{evt.Name} in ({Math.Round(evt.Distance)}m)", LogLevel.Info, ConsoleColor.DarkRed);
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventFortTargeted, evt.Name, Math.Round(evt.Distance)), LogLevel.Info, ConsoleColor.DarkRed);
         }
 
         public void HandleEvent(PokemonCaptureEvent evt, Context ctx)
@@ -75,13 +74,13 @@ namespace PoGo.NecroBot.CLI
                 switch (a)
                 {
                     case ItemId.ItemPokeBall:
-                        return "Poke";
+                        return ctx.Translations.GetTranslation(TranslationString.Pokeball);
                     case ItemId.ItemGreatBall:
-                        return "Great";
+                        return ctx.Translations.GetTranslation(TranslationString.GreatPokeball);
                     case ItemId.ItemUltraBall:
-                        return "Ultra";
+                        return ctx.Translations.GetTranslation(TranslationString.UltraPokeball);
                     case ItemId.ItemMasterBall:
-                        return "Master";
+                        return ctx.Translations.GetTranslation(TranslationString.MasterPokeball);
                     default:
                         return "Unknown";
                 }
@@ -90,35 +89,40 @@ namespace PoGo.NecroBot.CLI
             var catchType = evt.CatchType;
 
             var catchStatus = evt.Attempt > 1
-                ? $"{evt.Status} Attempt #{evt.Attempt}"
-                : $"{evt.Status}";
+                ? ctx.Translations.GetTranslation(TranslationString.CatchStatusAttempt, evt.Status, evt.Attempt)
+                : ctx.Translations.GetTranslation(TranslationString.CatchStatus, evt.Status);
 
             var familyCandies = evt.FamilyCandies > 0
-                ? $"Candies: {evt.FamilyCandies}"
+                ? ctx.Translations.GetTranslation(TranslationString.Candies)
                 : "";
 
-            Logger.Write(
-                $"({catchStatus}) | ({catchType}) {evt.Id} Lvl: {evt.Level} CP: ({evt.Cp}/{evt.MaxCp}) IV: {evt.Perfection.ToString("0.00")}% | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball ({evt.BallAmount} left). | {familyCandies}",
-                LogLevel.Caught);
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventPokemonCapture, catchStatus, catchType, evt.Id,
+                evt.Level, evt.Cp, evt.MaxCp, evt.Perfection.ToString("0.00"), evt.Probability, evt.Distance,
+                returnRealBallName(evt.Pokeball), evt.BallAmount, familyCandies), LogLevel.Caught);
         }
 
         public void HandleEvent(NoPokeballEvent evt, Context ctx)
         {
-            Logger.Write($"No Pokeballs - We missed a {evt.Id} with CP {evt.Cp}", LogLevel.Caught);
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventNoPokeballs, evt.Id, evt.Cp), LogLevel.Caught);
         }
 
         public void HandleEvent(UseBerryEvent evt, Context ctx)
         {
-            Logger.Write($"Used, remaining: {evt.Count}", LogLevel.Berry);
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventNoPokeballs, evt.Count), LogLevel.Berry);
         }
 
         public void HandleEvent(DisplayHighestsPokemonEvent evt, Context ctx)
         {
             Logger.Write($"====== DisplayHighests{evt.SortedBy} ======", LogLevel.Info, ConsoleColor.Yellow);
             foreach (var pokemon in evt.PokemonList)
-                    Logger.Write(
-                        $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% perfect)\t| Lvl {pokemon.Item4.ToString("00")}\t NAME: '{pokemon.Item1.PokemonId}'",
-                        LogLevel.Info, ConsoleColor.Yellow);
+                Logger.Write(
+                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% perfect)\t| Lvl {pokemon.Item4.ToString("00")}\t NAME: '{pokemon.Item1.PokemonId}'",
+                    LogLevel.Info, ConsoleColor.Yellow);
+        }
+
+        public void HandleEvent(UpdateEvent evt, Context ctx)
+        {
+            Logger.Write(evt.ToString(), LogLevel.Update);
         }
 
         public void Listen(IEvent evt, Context ctx)

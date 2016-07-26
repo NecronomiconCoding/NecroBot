@@ -48,6 +48,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         await CatchPokemonTask.Execute(ctx, machine, encounter, pokemon);
                     }
+                    else if (encounter.Result == IncenseEncounterResponse.Types.Result.PokemonInventoryFull)
+                    {
+                        if (ctx.LogicClient.Settings.TransferDuplicatePokemon)
+                        {
+                            machine.Fire(new WarnEvent { Message = $"PokemonInventory is Full.Transferring pokemons..." });
+                            await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                        }
+                        else
+                            machine.Fire(new WarnEvent { Message = $"PokemonInventory is Full.Please Transfer pokemon manually or set TransferDuplicatePokemon to true in settings..." });
+
+                    }
                     else
                     {
                         machine.Fire(new WarnEvent {Message = $"Encounter problem: {encounter.Result}"});
