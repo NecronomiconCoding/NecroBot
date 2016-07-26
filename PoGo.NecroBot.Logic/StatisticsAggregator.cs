@@ -40,6 +40,10 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
+        public void HandleEvent(UseincenseEvent evt, Context ctx)
+        {
+        }
+
         public void HandleEvent(PokemonEvolveEvent evt, Context ctx)
         {
             _stats.TotalExperience += evt.Exp;
