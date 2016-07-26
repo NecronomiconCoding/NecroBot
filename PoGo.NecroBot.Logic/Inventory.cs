@@ -61,7 +61,8 @@ namespace PoGo.NecroBot.Logic
 
             var pokemonList =
                 myPokemon.Where(
-                    p => p.DeployedFortId == string.Empty && p.Favorite == 0 && p.Cp < _logicClient.Settings.KeepMinCp)
+                    p => p.DeployedFortId == string.Empty && PokemonInfo.CalculatePokemonPerfection(p) < 100 &&
+                         (p.Favorite == 0 && p.Cp < _logicClient.Settings.KeepMinCp || PokemonInfo.CalculatePokemonPerfection(p) < _logicClient.Settings.KeepMinIvPercentage))
                     .ToList();
             if (filter != null)
             {
@@ -84,10 +85,13 @@ namespace PoGo.NecroBot.Logic
                     var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
                     var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
                     var amountToSkip = _logicClient.Settings.KeepMinDuplicatePokemon;
-                    var amountPossible = familyCandy.Candy / settings.CandyToEvolve;
 
-                    if (settings.CandyToEvolve > 0 && amountPossible > amountToSkip)
-                        amountToSkip = amountPossible;
+                    if (settings.CandyToEvolve > 0)
+                    {
+                        var amountPossible = familyCandy.Candy / settings.CandyToEvolve;
+                        if (amountPossible > amountToSkip)
+                            amountToSkip = amountPossible;
+                    }
 
                     if (prioritizeIVoverCp)
                     {
