@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static void Execute(Context ctx, StateMachine machine)
         {
             var duplicatePokemons =
-                ctx.Inventory.GetDuplicatePokemonToTransfer(false, ctx.LogicSettings.PrioritizeIvOverCp,
+                ctx.Inventory.GetDuplicatePokemonToTransfer(ctx.LogicSettings.KeepPokemonsThatCanEvolve, ctx.LogicSettings.PrioritizeIvOverCp,
                     ctx.LogicSettings.PokemonsNotToTransfer).Result;
 
             foreach (var duplicatePokemon in duplicatePokemons)
