@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0739E40D-C589-4AEB-93E5-EE8CD6773C60}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PoGo.NecroBot.Logic</RootNamespace>
+    <AssemblyName>PoGo.NecroBot.Logic</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Google.Protobuf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Protobuf.3.0.0-beta4\lib\net45\Google.Protobuf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="POGOProtos, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\POGOProtos.1.3.0\lib\net45\POGOProtos.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Event\DisplayHighestsPokemonEvent.cs" />
+    <Compile Include="Event\FortTargetEvent.cs" />
+    <Compile Include="Event\FortUsedEvent.cs" />
+    <Compile Include="Event\ItemRecycledEvent.cs" />
+    <Compile Include="Event\NoPokeballEvent.cs" />
+    <Compile Include="Event\PokemonCaptureEvent.cs" />
+    <Compile Include="Event\ProfileEvent.cs" />
+    <Compile Include="Event\TransferPokemonEvent.cs" />
+    <Compile Include="Event\UseBerryEvent.cs" />
+    <Compile Include="Inventory.cs" />
+    <Compile Include="Logging\Logger.cs" />
+    <Compile Include="LogicClient.cs" />
+    <Compile Include="ILogicSettings.cs" />
+    <Compile Include="Navigation.cs" />
+    <Compile Include="PoGoUtils\PokemonInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="State\Context.cs" />
+    <Compile Include="Event\ErrorEvent.cs" />
+    <Compile Include="State\FarmState.cs" />
+    <Compile Include="State\InfoState.cs" />
+    <Compile Include="StatisticsAggregator.cs" />
+    <Compile Include="Tasks\CatchIncensePokemonsTask.cs" />
+    <Compile Include="Tasks\CatchLurePokemonsTask.cs" />
+    <Compile Include="Tasks\CatchNearbyPokemonsTask.cs" />
+    <Compile Include="Tasks\CatchPokemonTask.cs" />
+    <Compile Include="Tasks\DisplayPokemonStatsTask.cs" />
+    <Compile Include="Tasks\EvolvePokemonTask.cs" />
+    <Compile Include="Event\IEvent.cs" />
+    <Compile Include="State\IState.cs" />
+    <Compile Include="State\LoginState.cs" />
+    <Compile Include="Event\NoticeEvent.cs" />
+    <Compile Include="Event\PokemonEvolveEvent.cs" />
+    <Compile Include="State\PositionCheckState.cs" />
+    <Compile Include="State\StateMachine.cs" />
+    <Compile Include="Tasks\FarmPokestopsGPXTask.cs" />
+    <Compile Include="Tasks\FarmPokestopsTask.cs" />
+    <Compile Include="Tasks\LogBestPokemonTask.cs" />
+    <Compile Include="Tasks\RecycleItemsTask.cs" />
+    <Compile Include="Tasks\RenamePokemonTask.cs" />
+    <Compile Include="Tasks\TransferDuplicatePokemonTask.cs" />
+    <Compile Include="Event\UseLuckyEggEvent.cs" />
+    <Compile Include="State\VersionCheckState.cs" />
+    <Compile Include="Event\WarnEvent.cs" />
+    <Compile Include="Tasks\UseNearbyPokestopsTask.cs" />
+    <Compile Include="Utils\GPXReader.cs" />
+    <Compile Include="Logging\ILogger.cs" />
+    <Compile Include="Utils\JitterUtils.cs" />
+    <Compile Include="Utils\LocationUtils.cs" />
+    <Compile Include="Utils\Statistics.cs" />
+    <Compile Include="Utils\StringUtils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FeroxRev\PokemonGo.RocketAPI\PokemonGo.RocketAPI.csproj">
+      <Project>{05d2da44-1b8e-4cf7-94ed-4d52451cd095}</Project>
+      <Name>PokemonGo.RocketAPI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
