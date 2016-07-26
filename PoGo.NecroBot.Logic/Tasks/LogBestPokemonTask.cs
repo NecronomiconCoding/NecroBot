@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 machine.Fire(               
                     new DisplayHighestsPokemonEvent
                     {
-                        SortetBy = "Cp",
+                        SortedBy = "Cp",
                         PokemonList = pokemonPairedWithStatsCP
                     });
  
@@ -42,7 +42,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 machine.Fire(
                        new DisplayHighestsPokemonEvent
                        {
-                           SortetBy = "Iv",
+                           SortedBy = "Iv",
                            PokemonList = pokemonPairedWithStatsIV
                        });
  
