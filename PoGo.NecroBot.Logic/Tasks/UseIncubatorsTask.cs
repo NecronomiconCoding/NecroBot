@@ -1,0 +1,134 @@
+﻿#region using directives
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Newtonsoft.Json;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.State;
+using POGOProtos.Inventory.Item;
+
+#endregion
+
+namespace PoGo.NecroBot.Logic.Tasks
+{
+    internal class UseIncubatorsTask
+    {
+        public static async Task Execute(Context ctx, StateMachine machine)
+        {
+            // Refresh inventory so that the player stats are fresh
+            await ctx.Inventory.RefreshCachedInventory();
+
+            var playerStats = (await ctx.Inventory.GetPlayerStats()).FirstOrDefault();
+            if (playerStats == null)
+                return;
+
+            var kmWalked = playerStats.KmWalked;
+
+            var incubators = (await ctx.Inventory.GetEggIncubators())
+                .Where(x => x.UsesRemaining > 0 || x.ItemId == ItemId.ItemIncubatorBasicUnlimited)
+                .OrderByDescending(x => x.ItemId == ItemId.ItemIncubatorBasicUnlimited)
+                .ToList();
+
+            var unusedEggs = (await ctx.Inventory.GetEggs())
+                .Where(x => string.IsNullOrEmpty(x.EggIncubatorId))
+                .OrderBy(x => x.EggKmWalkedTarget - x.EggKmWalkedStart)
+                .ToList();
+
+            var rememberedIncubatorsFilePath = Path.Combine(ctx.LogicSettings.ProfilePath, "temp", "incubators.json");
+            var rememberedIncubators = GetRememberedIncubators(rememberedIncubatorsFilePath);
+            var pokemons = (await ctx.Inventory.GetPokemons()).ToList();
+
+            // Check if eggs in remembered incubator usages have since hatched
+            // (instead of calling ctx.Client.Inventory.GetHatchedEgg(), which doesn't seem to work properly)
+            foreach (var incubator in rememberedIncubators)
+            {
+                var hatched = pokemons.FirstOrDefault(x => !x.IsEgg && x.Id == incubator.PokemonId);
+                if (hatched == null) continue;
+
+                machine.Fire(new EggHatchedEvent
+                {
+                    Id = hatched.Id,
+                    PokemonId = hatched.PokemonId
+                });
+            }
+
+            var newRememberedIncubators = new List<IncubatorUsage>();
+
+            foreach (var incubator in incubators)
+            {
+                if (incubator.PokemonId == 0)
+                {
+                    // Unlimited incubators prefer short eggs, limited incubators prefer long eggs
+                    var egg = incubator.ItemId == ItemId.ItemIncubatorBasicUnlimited
+                        ? unusedEggs.FirstOrDefault()
+                        : unusedEggs.LastOrDefault();
+
+                    if (egg == null)
+                        continue;
+
+                    var response = await ctx.Client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);
+                    unusedEggs.Remove(egg);
+
+                    newRememberedIncubators.Add(new IncubatorUsage { IncubatorId = incubator.Id, PokemonId = egg.Id });
+
+                    machine.Fire(new EggIncubatorStatusEvent
+                    {
+                        IncubatorId = incubator.Id,
+                        WasAddedNow = true,
+                        PokemonId = egg.Id,
+                        KmToWalk = egg.EggKmWalkedTarget,
+                        KmRemaining = response.EggIncubator.TargetKmWalked - kmWalked
+                    });
+
+                }
+                else
+                {
+                    newRememberedIncubators.Add(new IncubatorUsage { IncubatorId = incubator.Id, PokemonId = incubator.PokemonId });
+
+                    machine.Fire(new EggIncubatorStatusEvent
+                    {
+                        IncubatorId = incubator.Id,
+                        PokemonId = incubator.PokemonId,
+                        KmToWalk = incubator.TargetKmWalked - incubator.StartKmWalked,
+                        KmRemaining = incubator.TargetKmWalked - kmWalked
+                    });
+                }
+            }
+
+            if (!newRememberedIncubators.SequenceEqual(rememberedIncubators))
+                SaveRememberedIncubators(newRememberedIncubators, rememberedIncubatorsFilePath);
+        }
+
+        private class IncubatorUsage : IEquatable<IncubatorUsage>
+        {
+            public string IncubatorId;
+            public ulong PokemonId;
+
+            public bool Equals(IncubatorUsage other)
+            {
+                return other != null && other.IncubatorId == IncubatorId && other.PokemonId == PokemonId;
+            }
+        }
+
+        private static List<IncubatorUsage> GetRememberedIncubators(string filePath)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+            if (File.Exists(filePath))
+                return JsonConvert.DeserializeObject<List<IncubatorUsage>>(File.ReadAllText(filePath, Encoding.UTF8));
+
+            return new List<IncubatorUsage>(0);
+        }
+
+        private static void SaveRememberedIncubators(List<IncubatorUsage> incubators, string filePath)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+            File.WriteAllText(filePath, JsonConvert.SerializeObject(incubators), Encoding.UTF8);
+        }
+    }
+}

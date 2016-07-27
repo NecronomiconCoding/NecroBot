@@ -3,8 +3,9 @@
 #region using directives
 
 using System;
-using System.Device.Location;
+using System.Globalization;
 using System.Threading.Tasks;
+using GeoCoordinatePortable;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
@@ -17,6 +18,8 @@ using POGOProtos.Networking.Responses;
 
 namespace PoGo.NecroBot.Logic
 {
+    public delegate void UpdatePositionDelegate(double lat, double lng);
+
     public class Navigation
     {
         private const double SpeedDownTo = 10/3.6;
@@ -28,7 +31,7 @@ namespace PoGo.NecroBot.Logic
         }
 
         public async Task<PlayerUpdateResponse> HumanLikeWalking(GeoCoordinate targetLocation,
-            double walkingSpeedInKilometersPerHour, Func<bool> functionExecutedWhileWalking)
+            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking)
         {
             var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
 
@@ -46,6 +49,8 @@ namespace PoGo.NecroBot.Logic
                 await
                     _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                         _client.Settings.DefaultAltitude);
+
+            UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
             do
             {
@@ -75,20 +80,24 @@ namespace PoGo.NecroBot.Logic
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                             _client.Settings.DefaultAltitude);
 
-                functionExecutedWhileWalking?.Invoke(); // look for pokemon
+                UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
-                await Task.Delay(Math.Min((int) (distanceToTarget/speedInMetersPerSecond*1000), 3000));
+
+                if (functionExecutedWhileWalking != null)
+                    await functionExecutedWhileWalking(); // look for pokemon
+                await Task.Delay(500);
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
             return result;
         }
 
         public async Task<PlayerUpdateResponse> HumanPathWalking(GpxReader.Trkpt trk,
-            double walkingSpeedInKilometersPerHour, Func<bool> functionExecutedWhileWalking)
+            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking)
         {
             //PlayerUpdateResponse result = null;
 
-            var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat), Convert.ToDouble(trk.Lon));
+            var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat, CultureInfo.InvariantCulture),
+                Convert.ToDouble(trk.Lon, CultureInfo.InvariantCulture));
 
             var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
 
@@ -99,7 +108,7 @@ namespace PoGo.NecroBot.Logic
             var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
             var nextWaypointDistance = speedInMetersPerSecond;
             var waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing,
-                Convert.ToDouble(trk.Ele));
+                Convert.ToDouble(trk.Ele, CultureInfo.InvariantCulture));
 
             //Initial walking
 
@@ -107,6 +116,8 @@ namespace PoGo.NecroBot.Logic
             var result =
                 await
                     _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude, waypoint.Altitude);
+
+            UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
             do
             {
@@ -136,12 +147,17 @@ namespace PoGo.NecroBot.Logic
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                             waypoint.Altitude);
 
-                functionExecutedWhileWalking?.Invoke(); // look for pokemon
+                UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
-                await Task.Delay(Math.Min((int) (distanceToTarget/speedInMetersPerSecond*1000), 3000));
+                if (functionExecutedWhileWalking != null)
+                    await functionExecutedWhileWalking(); // look for pokemon & hit stops
+
+                await Task.Delay(500);
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
             return result;
         }
+
+        public event UpdatePositionDelegate UpdatePositionEvent;
     }
 }

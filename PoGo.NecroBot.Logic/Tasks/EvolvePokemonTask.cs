@@ -1,7 +1,8 @@
 ﻿#region using directives
 
+using System;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PokemonGo.RocketAPI;
@@ -13,51 +14,57 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class EvolvePokemonTask
     {
-        public static void Execute(Context ctx, StateMachine machine)
+        private static DateTime _lastLuckyEggTime;
+
+        public static async Task Execute(Context ctx, StateMachine machine)
         {
-            if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
+            var pokemonToEvolveTask = await ctx.Inventory.GetPokemonToEvolve(ctx.LogicSettings.PokemonsToEvolve);
+            var pokemonToEvolve = pokemonToEvolveTask.ToList();
+
+            if (pokemonToEvolve.Any())
             {
-                UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
-            }
-
-            var pokemonToEvolveTask = ctx.Inventory.GetPokemonToEvolve(ctx.LogicSettings.PokemonsToEvolve);
-            pokemonToEvolveTask.Wait();
-
-            var pokemonToEvolve = pokemonToEvolveTask.Result;
-            foreach (var pokemon in pokemonToEvolve)
-            {
-                var evolveTask = ctx.Client.Inventory.EvolvePokemon(pokemon.Id);
-                evolveTask.Wait();
-
-                var evolvePokemonOutProto = evolveTask.Result;
-
-                machine.Fire(new PokemonEvolveEvent
+                if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
                 {
-                    Id = pokemon.PokemonId,
-                    Exp = evolvePokemonOutProto.ExperienceAwarded,
-                    Result = evolvePokemonOutProto.Result
-                });
+                    if (pokemonToEvolve.Count >= ctx.LogicSettings.UseLuckyEggsMinPokemonAmount)
+                    {
+                        await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+                    }
+                    else
+                    {
+                        // Wait until we have enough pokemon
+                        return;
+                    }
+                }
 
-                Thread.Sleep(3000);
+                foreach (var pokemon in pokemonToEvolve)
+                {
+                    var evolveResponse = await ctx.Client.Inventory.EvolvePokemon(pokemon.Id);
+
+                    machine.Fire(new PokemonEvolveEvent
+                    {
+                        Id = pokemon.PokemonId,
+                        Exp = evolveResponse.ExperienceAwarded,
+                        Result = evolveResponse.Result
+                    });
+                }
             }
         }
 
-        public static void UseLuckyEgg(Client client, Inventory inventory, StateMachine machine)
+        public static async Task UseLuckyEgg(Client client, Inventory inventory, StateMachine machine)
         {
-            var inventoryContent = inventory.GetItems().Result;
+            var inventoryContent = await inventory.GetItems();
 
             var luckyEggs = inventoryContent.Where(p => p.ItemId == ItemId.ItemLuckyEgg);
             var luckyEgg = luckyEggs.FirstOrDefault();
 
-            if (luckyEgg == null || luckyEgg.Count <= 0)
+            if (luckyEgg == null || luckyEgg.Count <= 0 || _lastLuckyEggTime.AddMinutes(30).Ticks > DateTime.Now.Ticks)
                 return;
 
-            client.Inventory.UseItemXpBoost().Wait();
-
-            luckyEgg.Count -= 1;
+            _lastLuckyEggTime = DateTime.Now;
+            await client.Inventory.UseItemXpBoost();
+            await inventory.RefreshCachedInventory();
             machine.Fire(new UseLuckyEggEvent {Count = luckyEgg.Count});
-
-            Thread.Sleep(2000);
+            await Task.Delay(2000);
         }
     }
 }

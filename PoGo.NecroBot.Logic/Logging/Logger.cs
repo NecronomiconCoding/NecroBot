@@ -1,5 +1,6 @@
-﻿#region using directives
+#region using directives
 
+using PoGo.NecroBot.Logic.State;
 using System;
 using System.IO;
 
@@ -10,17 +11,14 @@ namespace PoGo.NecroBot.Logic.Logging
     public static class Logger
     {
         private static ILogger _logger;
+        private static string _path;
 
         private static void Log(string message)
         {
             // maybe do a new log rather than appending?
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\Logs");
-
-
             using (
                 var log =
-                    File.AppendText(Directory.GetCurrentDirectory() +
-                                    $"\\Logs\\NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt")
+                    File.AppendText(Path.Combine(_path, $"NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt"))
                 )
             {
                 log.WriteLine(message);
@@ -34,10 +32,22 @@ namespace PoGo.NecroBot.Logic.Logging
         ///     unset.
         /// </summary>
         /// <param name="logger"></param>
-        public static void SetLogger(ILogger logger)
+        public static void SetLogger(ILogger logger, string subPath = "")
         {
             _logger = logger;
+            _path = Path.Combine(Directory.GetCurrentDirectory(), subPath, "Logs");
+            Directory.CreateDirectory(_path);
             Log($"Initializing Rocket logger at time {DateTime.Now}...");
+        }
+
+        /// <summary>
+        ///     Sets Context for the logger 
+        /// </summary>
+        /// <param name="ctx">Context</param>
+        public static void SetLoggerContext(Context ctx)
+        {
+            if (_logger != null)
+                _logger.SetContext(ctx);
         }
 
         /// <summary>
@@ -68,7 +78,9 @@ namespace PoGo.NecroBot.Logic.Logging
         Transfer = 8,
         Evolve = 9,
         Egg = 10,
-        Info = 11,
-        Debug = 12
+        Update = 11,
+        Info = 12,
+        Debug = 13,
+        
     }
 }

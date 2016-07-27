@@ -1,0 +1,128 @@
+﻿{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "MegaBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "UltraBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "AuthType sconosciuto in config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value": "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file Coords.ini e' corretto?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Nessun PokeStop disponibile trovato nella tua area. Distanza massima troppo piccola?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "PE: {0}, Gemme: {1}, Oggetti: {2}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Raccolta oggetti fallita, possibile softban. Tentativo: {0}/40"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} in ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Giocando come {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Usato Fortunuovo, rimanenti: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} con successo per {1}pe"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Fallita {0}. Il risultato e' stato {1}, evoluzione di {2} interrotta"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- PL: {1}  IV: {2}%   [Miglior PL: {3}  IV: {4}%] (Caramelle: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Probabilita': {7}% | distanza {8}m | con una {9} ({10} rimanenti). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Nessuna Pokeball - Perso {0} con PL {1}"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Tentativo #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Caramelle: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Dati non gestiti nel file GPX, verra' ignorato."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemon"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfetto"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "nome"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "MostraPLPiu'Alti"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "MostraPerfettiPiu'Alti"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "MostraLivelliPiu'Alti"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Controlla che Lat & Lng siano corretti. Chiudi il Programma se non lo sono! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Inserimento uovo nell'incubatrice: {0:0.00}km rimanenti"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Aggiornamento stato incubatrice: {0:0.00}km rimanenti"
+    }
+  ]
+}

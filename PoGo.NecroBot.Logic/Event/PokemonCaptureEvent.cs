@@ -11,9 +11,12 @@ namespace PoGo.NecroBot.Logic.Event
     public class PokemonCaptureEvent : IEvent
     {
         public int Attempt;
+        public int BallAmount;
+        public string CatchType;
         public int Cp;
         public double Distance;
         public int Exp;
+        public int FamilyCandies;
         public PokemonId Id;
         public double Level;
         public int MaxCp;

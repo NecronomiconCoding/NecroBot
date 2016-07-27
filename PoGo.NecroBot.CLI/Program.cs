@@ -1,15 +1,15 @@
 ﻿#region using directives
 
 using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 using PoGo.NecroBot.Logic;
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
-using System.Threading;
-using System.Diagnostics;
-using System.Windows.Forms;
-using PokemonGo.RocketAPI.Rpc;
-using PokemonGo.RocketAPI;
 
 #endregion
 
@@ -17,28 +17,15 @@ namespace PoGo.NecroBot.CLI
 {
     internal class Program
     {
-        public static void LoginWithGoogle(string usercode, string uri)
+        private static void Main(string[] args)
         {
-            try
-            {
-                Logger.Write("Google Device Code copied to clipboard");
-                Thread.Sleep(2000);
-                Process.Start(@uri);
-                var thread = new Thread(() => Clipboard.SetText(usercode)); //Copy device code
-                thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
-                thread.Start();
-                thread.Join();
-            }
-            catch (Exception)
-            {
-                Logger.Write("Couldnt copy to clipboard, do it manually", LogLevel.Error);
-                Logger.Write($"Goto: {uri} & enter {usercode}", LogLevel.Error);
-            }
-        }
+            var subPath = "";
+            if (args.Length > 0)
+                subPath = args[0];
 
-        private static void Main()
-        {
-            Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
+            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
+
+            var settings = GlobalSettings.Load(subPath);
 
             var machine = new StateMachine();
             var stats = new Statistics();
@@ -46,14 +33,38 @@ namespace PoGo.NecroBot.CLI
 
             var aggregator = new StatisticsAggregator(stats);
             var listener = new ConsoleEventListener();
+            var websocket = new WebSocketInterface(settings.WebSocketPort);
 
             machine.EventListener += listener.Listen;
             machine.EventListener += aggregator.Listen;
+            machine.EventListener += websocket.Listen;
 
             machine.SetFailureState(new LoginState());
 
-            var context = new Context(new ClientSettings(), new LogicSettings());
-            context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
+            var context = new Context(new ClientSettings(settings), new LogicSettings(settings));
+            Logger.SetLoggerContext(context);
+
+            context.Navigation.UpdatePositionEvent +=
+                (lat, lng) => machine.Fire(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
+
+            context.Client.Login.GoogleDeviceCodeEvent += (usercode, uri) =>
+            {
+                try
+                {
+                    Logger.Write(context.Translations.GetTranslation(Logic.Common.TranslationString.OpeningGoogleDevicePage), LogLevel.Warning);
+                    Thread.Sleep(5000);
+                    Process.Start(uri);
+                    var thread = new Thread(() => Clipboard.SetText(usercode)); //Copy device code
+                    thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
+                    thread.Start();
+                    thread.Join();
+                }
+                catch (Exception)
+                {
+                    Logger.Write(context.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard), LogLevel.Error);
+                    Logger.Write(context.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard2, uri, usercode), LogLevel.Error);
+                }
+            };
 
             machine.AsyncStart(new VersionCheckState(), context);
 
