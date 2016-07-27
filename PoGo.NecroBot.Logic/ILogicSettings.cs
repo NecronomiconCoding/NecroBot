@@ -10,19 +10,22 @@ namespace PoGo.NecroBot.Logic
 {
     public class TransferFilter
     {
-        public TransferFilter() { }
+        public TransferFilter()
+        {
+        }
 
         public TransferFilter(int keepMinCp, float keepMinIvPercentage, int keepMinDuplicatePokemon)
         {
-            this.KeepMinCp = keepMinCp;
-            this.KeepMinIvPercentage = keepMinIvPercentage;
-            this.KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
+            KeepMinCp = keepMinCp;
+            KeepMinIvPercentage = keepMinIvPercentage;
+            KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
         }
 
         public int KeepMinCp { get; set; }
         public float KeepMinIvPercentage { get; set; }
         public int KeepMinDuplicatePokemon { get; set; }
-    };
+    }
+
     public interface ILogicSettings
     {
         bool AutoUpdate { get; }

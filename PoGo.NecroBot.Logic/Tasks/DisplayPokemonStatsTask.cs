@@ -1,10 +1,13 @@
-﻿using PoGo.NecroBot.Logic.Event;
+﻿#region using directives
+
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
-using POGOProtos.Data;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -13,32 +16,28 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(Context ctx, StateMachine machine)
         {
             var highestsPokemonCp = await ctx.Inventory.GetHighestsCp(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart);
-            List<Tuple<PokemonData, int, double, double>> pokemonPairedWithStatsCP = new List<Tuple<PokemonData, int, double, double>>();
+            var pokemonPairedWithStatsCp = highestsPokemonCp.Select(pokemon => Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon))).ToList();
 
-            foreach (var pokemon in highestsPokemonCp)
-                pokemonPairedWithStatsCP.Add(Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon)));
+            var highestsPokemonPerfect =
+                await ctx.Inventory.GetHighestsPerfect(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart);
 
-            var highestsPokemonPerfect = await ctx.Inventory.GetHighestsPerfect(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart);
-
-            List<Tuple<PokemonData, int, double, double>> pokemonPairedWithStatsIV = new List<Tuple<PokemonData, int, double, double>>();
-            foreach (var pokemon in highestsPokemonPerfect)
-                pokemonPairedWithStatsIV.Add(Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon)));
+            var pokemonPairedWithStatsIv = highestsPokemonPerfect.Select(pokemon => Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon))).ToList();
 
             machine.Fire(
                 new DisplayHighestsPokemonEvent
                 {
                     SortedBy = "CP",
-                    PokemonList = pokemonPairedWithStatsCP
+                    PokemonList = pokemonPairedWithStatsCp
                 });
 
             await Task.Delay(500);
 
             machine.Fire(
-                    new DisplayHighestsPokemonEvent
-                    {
-                        SortedBy = "IV",
-                        PokemonList = pokemonPairedWithStatsIV
-                    });
+                new DisplayHighestsPokemonEvent
+                {
+                    SortedBy = "IV",
+                    PokemonList = pokemonPairedWithStatsIv
+                });
 
             await Task.Delay(500);
         }
