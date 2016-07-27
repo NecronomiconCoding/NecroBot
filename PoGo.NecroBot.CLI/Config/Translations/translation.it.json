@@ -1,0 +1,86 @@
+{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "MegaBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "UltraBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "AuthType sconosciuto in config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value":
+        "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file Coords.ini è corretto?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Nessun PokeStop disponibile trovato nella tua area. Distanza massima troppo piccola?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "XP: {0}, Gems: {1}, Oggetti: {2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} in ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Giocando come {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Usato Fortunuovo, rimanenti: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} con successo per {1}xp"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Fallita {0}. Il risultato è stato {1}, evoluzione di {2} interrotta"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Miglior CP: {3}  IV: {4}%] (Caramelle: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Probabilità: {7}% | distanza {8}m | con una {9} ({10} rimanenti). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Nessuna Pokeball - perso {0} con CP {1}"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Tentativo #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Caramelle: {0}"
+    }
+  ]
+}
