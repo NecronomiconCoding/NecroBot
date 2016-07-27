@@ -55,18 +55,14 @@ namespace PoGo.NecroBot.Logic.Common
 
         public string GetTranslation(TranslationString translationString, params object[] data)
         {
-            string translation = TranslationStrings.FirstOrDefault(t => t.Key.Equals(translationString)).Value;
-            if (translation != default(string))
-                return string.Format(translation, data);
-            return $"Translation for {translationString} is missing";
+            var translation = TranslationStrings.FirstOrDefault(t => t.Key.Equals(translationString)).Value;
+            return translation != default(string) ? string.Format(translation, data) : $"Translation for {translationString} is missing";
         }
 
         public string GetTranslation(TranslationString translationString)
         {
-            string translation = TranslationStrings.FirstOrDefault(t => t.Key.Equals(translationString)).Value;
-            if (translation != default(string))
-                return translation;
-            return $"Translation for {translationString} is missing";
+            var translation = TranslationStrings.FirstOrDefault(t => t.Key.Equals(translationString)).Value;
+            return translation != default(string) ? translation : $"Translation for {translationString} is missing";
         }
 
         //Default Translations (ENGLISH)
