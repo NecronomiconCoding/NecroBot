@@ -176,6 +176,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseEggIncubators = true;
         public bool UseGpxPathing = false;
         public bool UseLuckyEggsWhileEvolving = false;
+        public int UseLuckyEggsMinPokemonAmount = 30;
         public bool UsePokemonToNotCatchFilter = false;
         public double WalkingSpeedInKilometerPerHour = 50;
         public int AmountOfPokemonToDisplayOnStart = 10;
@@ -299,6 +300,7 @@ namespace PoGo.NecroBot.CLI
         public string GpxFile => _settings.GpxFile;
         public bool UseGpxPathing => _settings.UseGpxPathing;
         public bool UseLuckyEggsWhileEvolving => _settings.UseLuckyEggsWhileEvolving;
+        public int UseLuckyEggsMinPokemonAmount => _settings.UseLuckyEggsMinPokemonAmount;
         public bool EvolveAllPokemonAboveIv => _settings.EvolveAllPokemonAboveIv;
         public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
         public bool RenameAboveIv => _settings.RenameAboveIv;
