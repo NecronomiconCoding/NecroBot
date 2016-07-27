@@ -116,7 +116,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     var random = new Random();
                     await Task.Delay(500 + random.Next(0, 200)); //Randomized pause
-                } while (fortRetry < 40);
+                } while (fortRetry < 50);
                     //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
                 await Task.Delay(1000);
