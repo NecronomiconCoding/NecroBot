@@ -85,7 +85,8 @@ namespace PoGo.NecroBot.Logic.State
             }
 
             var di = new DirectoryInfo(Directory.GetCurrentDirectory());
-            var files = di.GetFiles("*.old");
+            var diRecurisve = di.GetDirectories();
+            var files = di.GetFiles("*.old", SearchOption.AllDirectories);
 
             foreach (var file in files)
             {
