@@ -2,7 +2,6 @@
 
 using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
@@ -36,7 +35,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId,
                         Cp =
                             (encounter is EncounterResponse
-                                ? encounter?.WildPokemon?.PokemonData?.Cp
+                                ? encounter.WildPokemon?.PokemonData?.Cp
                                 : encounter?.PokemonData?.Cp) ?? 0
                     });
                     return;
@@ -49,7 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                    : encounter.PokemonData?.Cp) > 400;
                 var isHighPerfection =
                     PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
-                        ? encounter?.WildPokemon?.PokemonData
+                        ? encounter.WildPokemon?.PokemonData
                         : encounter?.PokemonData) >= ctx.LogicSettings.KeepMinIvPercentage;
 
                 if ((isLowProbability && isHighCp) || isHighPerfection)
@@ -86,7 +85,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var pokemonSettings = await ctx.Inventory.GetPokemonSettings();
                     var pokemonFamilies = await ctx.Inventory.GetPokemonFamilies();
 
-                    var setting = pokemonSettings.FirstOrDefault(q => pokemon != null && q.PokemonId == pokemon.PokemonId);
+                    var setting =
+                        pokemonSettings.FirstOrDefault(q => pokemon != null && q.PokemonId == pokemon.PokemonId);
                     var family = pokemonFamilies.FirstOrDefault(q => setting != null && q.FamilyId == setting.FamilyId);
 
                     if (family != null)
@@ -141,12 +141,12 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static async Task<ItemId> GetBestBall(Context ctx, dynamic encounter, float probability)
         {
             var pokemonCp = encounter is EncounterResponse
-                ? encounter?.WildPokemon?.PokemonData?.Cp
+                ? encounter.WildPokemon?.PokemonData?.Cp
                 : encounter?.PokemonData?.Cp;
             var iV =
                 Math.Round(
                     PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
-                        ? encounter?.WildPokemon?.PokemonData
+                        ? encounter.WildPokemon?.PokemonData
                         : encounter?.PokemonData));
 
             var pokeBallsCount = await ctx.Inventory.GetItemAmountByType(ItemId.ItemPokeBall);

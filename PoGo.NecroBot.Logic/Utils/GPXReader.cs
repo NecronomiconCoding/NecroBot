@@ -5,7 +5,9 @@
 using System;
 using System.Collections.Generic;
 using System.Xml;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
@@ -18,6 +20,8 @@ namespace PoGo.NecroBot.Logic.Utils
     public class GpxReader
     {
         private readonly XmlDocument _gpx = new XmlDocument();
+
+        private Context _ctx;
 
         public string Author = "";
         public GpsBoundary Bounds = new GpsBoundary();
@@ -32,8 +36,9 @@ namespace PoGo.NecroBot.Logic.Utils
         public string UrlName = "";
         public List<Wpt> WayPoints = new List<Wpt>();
 
-        public GpxReader(string xml)
+        public GpxReader(string xml, Context ctx)
         {
+            _ctx = ctx;
             if (xml.Equals("")) return;
             _gpx.LoadXml(xml);
             if (_gpx.DocumentElement == null || !_gpx.DocumentElement.Name.Equals("gpx")) return;
@@ -104,7 +109,7 @@ namespace PoGo.NecroBot.Logic.Utils
                     case "topografix:map":
                         break;
                     default:
-                        Logger.Write("Unhandled data in GPX file, attempting to skip.", LogLevel.Info);
+                        Logger.Write(ctx.Translations.GetTranslation(TranslationString.UnhandledGpxData), LogLevel.Info);
                         break;
                 }
             }
