@@ -40,7 +40,7 @@ namespace PoGo.NecroBot.CLI
         {
             var subPath = "";
             if (args.Length > 0)
-                subPath = Path.DirectorySeparatorChar + args[0];
+                subPath = args[0];
 
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
