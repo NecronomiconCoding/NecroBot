@@ -53,22 +53,20 @@ namespace PoGo.NecroBot.CLI
                     type = Console.ReadLine();
                 } while (type != "1" && type != "0");
                 AuthType = type.Equals("0") ? AuthType.Google : AuthType.Ptc;
-                if (AuthType == AuthType.Google)
+                if (AuthType == AuthType.Ptc)
                 {
-                    Console.Clear();
-                    return;
+                    do
+                    {
+                        Console.WriteLine("Username:");
+                        PtcUsername = Console.ReadLine();
+                    } while (string.IsNullOrEmpty(PtcUsername));
+                    do
+                    {
+                        Console.WriteLine("Password:");
+                        PtcPassword = Console.ReadLine();
+                    } while (string.IsNullOrEmpty(PtcPassword));        
                 }
-                do
-                {
-                    Console.WriteLine("Username:");
-                    PtcUsername = Console.ReadLine();
-                } while (string.IsNullOrEmpty(PtcUsername));
-                do
-                {
-                    Console.WriteLine("Password:");
-                    PtcPassword = Console.ReadLine();
-                } while (string.IsNullOrEmpty(PtcPassword));
-                Console.Clear();
+                
 
                 Save(FilePath);
             }
@@ -102,10 +100,10 @@ namespace PoGo.NecroBot.CLI
 
         public static GlobalSettings Load(string path)
         {
-            GlobalSettings settings = new GlobalSettings {ProfilePath = Directory.GetCurrentDirectory() + path};
-            settings.ConfigPath = settings.ProfilePath + Path.DirectorySeparatorChar + "config";
-
-            var fullPath = settings.ConfigPath + Path.DirectorySeparatorChar + "config.json";
+            GlobalSettings settings;
+            var profilePath = Directory.GetCurrentDirectory() + path;
+            var configPath = Path.Combine(profilePath  + "config");
+            var fullPath = Path.Combine(configPath + "config.json");
 
             if (File.Exists(fullPath))
             {
@@ -128,7 +126,8 @@ namespace PoGo.NecroBot.CLI
             {
                 settings.WebSocketPort = 14251;
             }
-
+            settings.ProfilePath = profilePath;
+            settings.ConfigPath = configPath;
             settings.Save(fullPath);
             settings.Auth.Load(settings.ConfigPath + Path.DirectorySeparatorChar + "auth.json");
 
