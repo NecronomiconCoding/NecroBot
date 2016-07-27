@@ -11,6 +11,7 @@ namespace PoGo.NecroBot.Logic.DataDumper
     public static class Dumper
     {
         private static IDumper _dumper;
+        private static string _subPath;
 
         /// <summary>
         ///     This is used for dumping contents to a file stored in the Logs folder.
@@ -19,9 +20,10 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <param name="filename">Filename to be used for naming the file.</param>
         private static void DumpToFile(Context ctx, string data, string filename)
         {
-            Directory.CreateDirectory(ctx.Settings.ProfilePath + $"{Path.DirectorySeparatorChar}Dumps");
+            // ctx is passed in for future use of ProfilePath when it is unlocked from ferox's api
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + $"{Path.DirectorySeparatorChar}Dumps");
 
-            string path = ctx.Settings.ProfilePath + $"{Path.DirectorySeparatorChar}Dumps{Path.DirectorySeparatorChar}NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt";
+            string path = Directory.GetCurrentDirectory() + _subPath + $"{Path.DirectorySeparatorChar}Dumps{Path.DirectorySeparatorChar}NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt";
 
             using (
                 var dumpFile =
@@ -37,9 +39,10 @@ namespace PoGo.NecroBot.Logic.DataDumper
         ///     Set the dumper.
         /// </summary>
         /// <param name="dumper"></param>
-        public static void SetDumper(IDumper dumper)
+        public static void SetDumper(IDumper dumper, string subPath = "")
         {
             _dumper = dumper;
+            _subPath = subPath;
         }
 
         /// <summary>
@@ -48,9 +51,10 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <param name="filename">File to clear/param>
         public static void ClearDumpFile(Context ctx, string filename)
         {
-            Directory.CreateDirectory(ctx.Settings.ProfilePath + $"{Path.DirectorySeparatorChar}Dumps");
+            // ctx is passed in for future use of ProfilePath when it is unlocked from ferox's api
+            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + $"{Path.DirectorySeparatorChar}Dumps");
 
-            string path = ctx.Client.Settings.ProfilePath + $"{Path.DirectorySeparatorChar}Dumps{Path.DirectorySeparatorChar}NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt";
+            string path = Directory.GetCurrentDirectory() + _subPath + $"{Path.DirectorySeparatorChar}Dumps{Path.DirectorySeparatorChar}NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt";
 
             // Clears all contents of a file first if overwrite is true
             File.WriteAllText(path, string.Empty);
