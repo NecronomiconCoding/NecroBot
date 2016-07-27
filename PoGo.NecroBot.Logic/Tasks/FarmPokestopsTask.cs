@@ -21,7 +21,6 @@ namespace PoGo.NecroBot.Logic.Tasks
     public static class FarmPokestopsTask
     {
         public static int TimesZeroXPawarded;
-
         public static async Task Execute(Context ctx, StateMachine machine)
         {
             var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
@@ -96,7 +95,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     fortSearch = await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                     if (fortSearch.ExperienceAwarded == 0) TimesZeroXPawarded++;
-                    if (TimesZeroXPawarded > 5)
+                    if (fortSearch.ExperienceAwarded > 0 && TimesZeroXPawarded > 0) TimesZeroXPawarded = 0;
+                    if (TimesZeroXPawarded <= 5)
                     {
                         machine.Fire(new FortUsedEvent
                         {
@@ -116,7 +116,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     var random = new Random();
                     await Task.Delay(500 + random.Next(0, 200)); //Randomized pause
-                } while (fortRetry < 40);
+                } while (fortRetry < 50);
                     //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
                 await Task.Delay(1000);
