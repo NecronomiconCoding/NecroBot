@@ -10,6 +10,7 @@ namespace PoGo.NecroBot.Logic.Event
 {
     public class PokemonCaptureEvent : IEvent
     {
+        public string CatchType;
         public int Attempt;
         public int Cp;
         public double Distance;
@@ -22,5 +23,7 @@ namespace PoGo.NecroBot.Logic.Event
         public double Probability;
         public int Stardust;
         public CatchPokemonResponse.Types.CatchStatus Status;
+        public int FamilyCandies;
+        public int BallAmount;
     }
 }

@@ -49,7 +49,7 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(TransferPokemonEvent evt, Context ctx)
         {
             Logger.Write(
-                $"{evt.Id} with {evt.Cp} ({evt.Perfection.ToString("0.00")} % perfect) CP (Best: {evt.BestCp} | ({evt.BestPerfection.ToString("0.00")} % perfect))",
+                $"{evt.Id}\t- CP: {evt.Cp}  IV: {evt.Perfection.ToString("0.00")}%   [Best CP: {evt.BestCp}  IV: {evt.BestPerfection.ToString("0.00")}%] (Candies: {evt.FamilyCandies}) ",
                 LogLevel.Transfer);
         }
 
@@ -87,12 +87,18 @@ namespace PoGo.NecroBot.CLI
                 }
             };
 
+            var catchType = evt.CatchType;
+
             var catchStatus = evt.Attempt > 1
                 ? $"{evt.Status} Attempt #{evt.Attempt}"
                 : $"{evt.Status}";
 
+            var familyCandies = evt.FamilyCandies > 0
+                ? $"Candies: {evt.FamilyCandies}"
+                : "";
+
             Logger.Write(
-                $"({catchStatus}) | {evt.Id} Lvl {evt.Level} ({evt.Cp}/{evt.MaxCp} CP) ({evt.Perfection.ToString("0.00")}% perfect) | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball.",
+                $"({catchStatus}) | ({catchType}) {evt.Id} Lvl: {evt.Level} CP: ({evt.Cp}/{evt.MaxCp}) IV: {evt.Perfection.ToString("0.00")}% | Chance: {evt.Probability}% | {Math.Round(evt.Distance)}m dist | with a {returnRealBallName(evt.Pokeball)}Ball ({evt.BallAmount} left). | {familyCandies}",
                 LogLevel.Caught);
         }
 
@@ -104,6 +110,15 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(UseBerryEvent evt, Context ctx)
         {
             Logger.Write($"Used, remaining: {evt.Count}", LogLevel.Berry);
+        }
+
+        public void HandleEvent(DisplayHighestsPokemonEvent evt, Context ctx)
+        {
+            Logger.Write($"====== DisplayHighests{evt.SortedBy} ======", LogLevel.Info, ConsoleColor.Yellow);
+            foreach (var pokemon in evt.PokemonList)
+                    Logger.Write(
+                        $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% perfect)\t| Lvl {pokemon.Item4.ToString("00")}\t NAME: '{pokemon.Item1.PokemonId}'",
+                        LogLevel.Info, ConsoleColor.Yellow);
         }
 
         public void Listen(IEvent evt, Context ctx)
