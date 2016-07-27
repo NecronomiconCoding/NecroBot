@@ -1,15 +1,15 @@
 ﻿#region using directives
 
 using System;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using PoGo.NecroBot.Logic;
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
-using PoGo.NecroBot.Logic.Event;
 
 #endregion
 
@@ -44,7 +44,7 @@ namespace PoGo.NecroBot.CLI
 
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
-            GlobalSettings settings = GlobalSettings.Load(subPath);
+            var settings = GlobalSettings.Load(subPath);
 
             var machine = new StateMachine();
             var stats = new Statistics();
@@ -57,12 +57,13 @@ namespace PoGo.NecroBot.CLI
             machine.EventListener += listener.Listen;
             machine.EventListener += aggregator.Listen;
             machine.EventListener += websocket.Listen;
-            
+
             machine.SetFailureState(new LoginState());
 
             var context = new Context(new ClientSettings(settings), new LogicSettings(settings));
 
-            context.Navigation.UpdatePositionEvent += (lat, lng) => machine.Fire(new UpdatePositionEvent { Latitude = lat, Longitude = lng });
+            context.Navigation.UpdatePositionEvent +=
+                (lat, lng) => machine.Fire(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
 
             context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
 

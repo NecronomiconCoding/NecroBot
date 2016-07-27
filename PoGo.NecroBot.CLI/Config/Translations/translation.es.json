@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,11 +22,13 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "¡Estas fuera del radio definido! Andando a la posición inicial (a {0}m) en 5 segundos. ¿Es correcto tu archivo Coords.ini?"
+      "Value":
+        "¡Estas fuera del radio definido! Andando a la posición inicial (a {0}m) en 5 segundos. ¿Es correcto tu archivo Coords.ini?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "No se encontraron pokeparadas disponibles en tu area. ¿Has configurado una distancia máxima demasiado pequeña?"
+      "Value":
+        "No se encontraron pokeparadas disponibles en tu area. ¿Has configurado una distancia máxima demasiado pequeña?"
     },
     {
       "Key": "eventFortUsed",
@@ -62,7 +64,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
