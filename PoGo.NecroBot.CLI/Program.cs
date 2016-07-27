@@ -17,25 +17,6 @@ namespace PoGo.NecroBot.CLI
 {
     internal class Program
     {
-        public static void LoginWithGoogle(string usercode, string uri)
-        {
-            try
-            {
-                Logger.Write("Opening Google Device page. Please paste the code using CTRL+V", LogLevel.Warning);
-                Thread.Sleep(5000);
-                Process.Start(uri);
-                var thread = new Thread(() => Clipboard.SetText(usercode)); //Copy device code
-                thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
-                thread.Start();
-                thread.Join();
-            }
-            catch (Exception)
-            {
-                Logger.Write("Couldnt copy to clipboard, do it manually", LogLevel.Error);
-                Logger.Write($"Goto: {uri} & enter {usercode}", LogLevel.Error);
-            }
-        }
-
         private static void Main(string[] args)
         {
             var subPath = "";
@@ -66,7 +47,24 @@ namespace PoGo.NecroBot.CLI
             context.Navigation.UpdatePositionEvent +=
                 (lat, lng) => machine.Fire(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
 
-            context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
+            context.Client.Login.GoogleDeviceCodeEvent += (usercode, uri) =>
+            {
+                try
+                {
+                    Logger.Write(context.Translations.GetTranslation(Logic.Common.TranslationString.OpeningGoogleDevicePage), LogLevel.Warning);
+                    Thread.Sleep(5000);
+                    Process.Start(uri);
+                    var thread = new Thread(() => Clipboard.SetText(usercode)); //Copy device code
+                    thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
+                    thread.Start();
+                    thread.Join();
+                }
+                catch (Exception)
+                {
+                    Logger.Write(context.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard), LogLevel.Error);
+                    Logger.Write(context.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard2, uri, usercode), LogLevel.Error);
+                }
+            };
 
             machine.AsyncStart(new VersionCheckState(), context);
 

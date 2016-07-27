@@ -56,6 +56,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestsHeader, "Pokemons"),
             new KeyValuePair<TranslationString, string>(TranslationString.CommonWordPerfect, "perfect"),
             new KeyValuePair<TranslationString, string>(TranslationString.CommonWordName, "name"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CommonWordUnknown, "Unknown"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestsCpHeader, "DisplayHighestsCP"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestsPerfectHeader,
                 "DisplayHighestsPerfect"),
@@ -84,6 +85,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.PtcOffline, "PTC Servers are probably down OR your credentials are wrong. Try google"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.TryingAgainIn, "Trying again in {0} seconds..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.AccountNotVerified, "Account not verified! Exiting..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.OpeningGoogleDevicePage,"Opening Google Device page. Please paste the code using CTRL+V"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CouldntCopyToClipboard, "Couldnt copy to clipboard, do it manually"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CouldntCopyToClipboard2, "Goto: {0} & enter {1}"),
         };
 
         public static Translations Default => new Translations();
@@ -197,5 +201,9 @@ namespace PoGo.NecroBot.Logic.Common
         PtcOffline,
         TryingAgainIn,
         AccountNotVerified,
+        CommonWordUnknown,
+        OpeningGoogleDevicePage,
+        CouldntCopyToClipboard,
+        CouldntCopyToClipboard2,
     }
 }

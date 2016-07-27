@@ -190,6 +190,18 @@
     {
       "Key": "accountNotVerified",
       "Value": "Аккаунт не верифицирован! Выходим..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Открываем страницу Google Device. Пожалуйста вставьте код используя CTRL+V"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Не удалось скопировать код в буфер обмена, сделайте это вручную"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Пройдите по ссылке: {0} и введите {1}"
     }
   ]
 }
