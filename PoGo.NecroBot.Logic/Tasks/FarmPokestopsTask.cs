@@ -21,6 +21,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     public static class FarmPokestopsTask
     {
         public static int TimesZeroXPawarded;
+
         public static async Task Execute(Context ctx, StateMachine machine)
         {
             var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
@@ -90,14 +91,35 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
 
                 FortSearchResponse fortSearch;
-                var fortRetry = 0;
-                do
-                {
+                var fortRetry = 0;      //Current check
+                const int retryNumber = 50; //How many times it needs to check to clear softban
+                const int zeroCheck = 5; //How many times it checks fort before it thinks it's softban
+                do {
                     fortSearch = await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                    if (fortSearch.ExperienceAwarded == 0) TimesZeroXPawarded++;
                     if (fortSearch.ExperienceAwarded > 0 && TimesZeroXPawarded > 0) TimesZeroXPawarded = 0;
-                    if (TimesZeroXPawarded <= 5)
+                    if (fortSearch.ExperienceAwarded == 0)
                     {
+                        TimesZeroXPawarded++;
+
+                        if (TimesZeroXPawarded > zeroCheck)
+                        {
+                            if ((int)fortSearch.CooldownCompleteTimestampMs != 0)
+                            {
+                                break; // Check if successfully looted, if so program can continue as this was "false alarm".
+                            }
+
+                            fortRetry += 1;
+
+                            machine.Fire(new FortFailedEvent
+                            {
+                                Retry = fortRetry,
+                                Max = retryNumber - zeroCheck
+                            });
+
+                            Random random = new Random();
+                            await Task.Delay(200 + random.Next(0, 200));  //Randomized pause
+                        }
+                    } else {
                         machine.Fire(new FortUsedEvent
                         {
                             Exp = fortSearch.ExperienceAwarded,
@@ -106,18 +128,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         });
 
                         break; //Continue with program as loot was succesfull.
-                    } //If fort gave 0 experience, retry 40 times to clear softban.
-                    fortRetry += 1;
-
-                    machine.Fire(new FortFailedEvent
-                    {
-                        Retry = fortRetry
-                    });
-
-                    var random = new Random();
-                    await Task.Delay(500 + random.Next(0, 200)); //Randomized pause
-                } while (fortRetry < 50);
-                    //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
+                    }
+                    } while (fortRetry < retryNumber - zeroCheck); //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
                 await Task.Delay(1000);
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full

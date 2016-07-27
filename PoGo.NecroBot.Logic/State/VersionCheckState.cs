@@ -35,23 +35,21 @@ namespace PoGo.NecroBot.Logic.State
             var needupdate =  IsLatest();
             if (!needupdate || !autoUpdate)
             {
-                if (!autoUpdate)
-                {
-                    
-                    machine.Fire(new UpdateEvent
-                    {
-                        Message =
-                            $"AutoUpdater is disabled. Get the latest release from: {LatestRelease}\n "
-                    });
-                }
                 if (!needupdate)
                 {
                     machine.Fire(new UpdateEvent
                     {
-                        Message = 
+                        Message =
                             $"Perfect! You already have the newest Version {RemoteVersion}"
                     });
+                    return new LoginState();
                 }
+                machine.Fire(new UpdateEvent
+                {
+                    Message =
+                        $"AutoUpdater is disabled. Get the latest release from: {LatestRelease}\n "
+                });
+
                 return new LoginState();
             }
             machine.Fire(new UpdateEvent {Message = "Downloading and apply Update...."});
