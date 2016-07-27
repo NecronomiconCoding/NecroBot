@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Вы находитесь вне указанного радиуса! Идем кк точке старта ({0}m away) через 5 сек. Ваш Coords.ini файл корректен?"
+        "Вы находитесь вне указанного радиуса! Идем к точке старта ({0}m away) через 5 сек. Ваш Coords.ini файл корректен?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
