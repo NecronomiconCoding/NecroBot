@@ -96,7 +96,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     fortSearch = await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                     if (fortSearch.ExperienceAwarded == 0) TimesZeroXPawarded++;
-                    if (TimesZeroXPawarded > 5)
+                    if (TimesZeroXPawarded <= 5)
                     {
                         machine.Fire(new FortUsedEvent
                         {
