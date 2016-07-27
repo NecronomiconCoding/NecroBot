@@ -226,7 +226,7 @@ namespace PoGo.NecroBot.CLI
             {PokemonId.Pidgeotto, new TransferFilter(1500, 90, 1)},
             {PokemonId.Fearow, new TransferFilter(1500, 90, 2)},
             {PokemonId.Golbat, new TransferFilter(1500, 90, 2)},
-            {PokemonId.Eevee, new TransferFilter(600, 800, 2)},
+            {PokemonId.Eevee, new TransferFilter(600, 80, 2)},
             {PokemonId.Mew, new TransferFilter(0, 0, 10)}
         };
 
