@@ -202,6 +202,86 @@
     {
       "Key": "couldntCopyToClipboard2",
       "Value": "Пройдите по ссылке: {0} и введите {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Обнаружено реалистичное перемещение, используем UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Не реалистичное перемещение в {0}, используем последний файл Coords.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Координаты в файле \"Coords.ini\" неверны, используем координаты по умолчанию"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Отлично! У вас уже установлена последняя версия {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "AАвтообновление отключено. Последний релиз можно скачать с: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Скачиваем и устанавливаем обновление..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Завершено скачивание нового релиза..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Завершена распаковка файлов..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Обновление завершено, теперь вы можете закрыть это окно."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Ищем покемона на пряности..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Ищем покемона..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Ищем приманенного покемона..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Пропущен {0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Инвентарь полон. Передаем покемонов профессору..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "Инвентарь полон. Вручную передайте покемона профессору или установите настройку TransferDuplicatePokemon в true ..."
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Проблема с поимкой: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Проблема с поимкой: Приманенный покемон {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Указанное местоназначение {0}, {1} слишком далеко от текущей позиции {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Покемон {0} ({1}) переименован из {2} в {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Фильтр игнора покемонов] - Игнорируем {0} как указано в настройках"
     }
   ]
 }
