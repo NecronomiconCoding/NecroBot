@@ -33,7 +33,7 @@ namespace PoGo.NecroBot.Logic.Common
                 "XP: {0}, Gems: {1}, Items: {2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortFailed,
                 "Looting failed, possible softban. Retry: {0}/40"),
-            new KeyValuePair<TranslationString, string>(TranslationString.EventFortTargeted, "{0} in ({1}m)"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventFortTargeted, "{0} in ({1}m) ~{2} seconds. Current walking speed is {3}m/s."),
             new KeyValuePair<TranslationString, string>(TranslationString.EventProfileLogin, "Playing as {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventUsedLuckyEgg,
                 "Used Lucky Egg, remaining: {0}"),

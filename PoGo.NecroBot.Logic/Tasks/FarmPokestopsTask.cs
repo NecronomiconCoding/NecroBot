@@ -98,8 +98,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 do
                 {
                     fortSearch = await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                    if (fortSearch.ExperienceAwarded > 0) TimesZeroXPawarded++;
-                    if (TimesZeroXPawarded > 5)
+                    if (fortSearch.ExperienceAwarded > 0)
                     {
                         machine.Fire(new FortUsedEvent
                         {
@@ -108,17 +107,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
                         });
 
-                        break; //Continue with program as loot was succesfull.
-                    } //If fort gave 0 experience, retry 40 times to clear softban.
-                    fortRetry += 1;
+                    }
+                    else
+                    {  //If fort gave 0 experience, retry 40 times to clear softban.
+                        fortRetry += 1;
 
-                    machine.Fire(new FortFailedEvent
-                    {
-                        Retry = fortRetry
-                    });
+                        machine.Fire(new FortFailedEvent
+                        {
+                            Retry = fortRetry
+                        });
 
-                    await Task.Delay(500 + LogicClient.variation("0,200")); //Randomized pause
-                } while (fortRetry < 40);
+                        await Task.Delay(500 + LogicClient.variation("0,200")); //Randomized pause
+                    }
+                } while (!(fortSearch.ExperienceAwarded > 0) && fortRetry < 40);
                 //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
                 //TODO improve check to accomodate upgrades...
