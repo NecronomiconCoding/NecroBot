@@ -22,7 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Du bist ausserhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sin die Koordinaten in der Settings.ini-Datei korrekt?"
+      "Value": "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der Settings.ini korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
