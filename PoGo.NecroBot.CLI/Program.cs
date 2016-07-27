@@ -42,7 +42,7 @@ namespace PoGo.NecroBot.CLI
             if (args.Length > 0)
                 subPath = Path.DirectorySeparatorChar + args[0];
 
-            Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
+            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
             GlobalSettings settings = GlobalSettings.Load(subPath);
 
