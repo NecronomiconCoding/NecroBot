@@ -36,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ctx.Translations.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
 
-                await Task.Delay(5000);
+                await Task.Delay(1000);
 
                 await ctx.Navigation.HumanLikeWalking(
                     new GeoCoordinate(ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude),
