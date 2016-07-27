@@ -62,10 +62,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                     encounter is EncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
                     encounter is EncounterResponse ? pokemon.Longitude : currentFortData.Longitude);
 
+                var hit = Randomizer.GetNext(1, 100) <= 80;
                 caughtPokemonResponse =
                     await ctx.Client.Encounter.CatchPokemon(
                         encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
-                        encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData.Id, pokeball);
+                        encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData.Id,
+                        pokeball,
+                        //hitPokemon: hit,
+                        normalizedRecticleSize: 1.95,
+                        spinModifier: Math.Round((double)Randomizer.GetNext(850, 1000) / 1000d, 3),
+                        normalizedHitPos: hit ? 1 : 0);
 
                 var evt = new PokemonCaptureEvent {Status = caughtPokemonResponse.Status};
 
@@ -133,7 +139,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 machine.Fire(evt);
 
                 attemptCounter++;
-                await Task.Delay(2000);
+                await Randomizer.Sleep(2500, 0.3);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
@@ -195,7 +201,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             berry.Count -= 1;
             machine.Fire(new UseBerryEvent {Count = berry.Count});
 
-            await Task.Delay(1500);
+            await Randomizer.Sleep(1800, 0.2);
         }
     }
 }

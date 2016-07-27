@@ -20,6 +20,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsTask
     {
+        private static int _counter = 0;
         public static int TimesZeroXPawarded;
 
         public static async Task Execute(Context ctx, StateMachine machine)
@@ -36,7 +37,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ctx.Translations.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
 
-                await Task.Delay(5000);
+                await Randomizer.Sleep(5000);
 
                 await ctx.Navigation.HumanLikeWalking(
                     new GeoCoordinate(ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude),
@@ -64,8 +65,28 @@ namespace PoGo.NecroBot.Logic.Tasks
                         i =>
                             LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
                                 ctx.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
-                var pokeStop = pokestopList[0];
-                pokestopList.RemoveAt(0);
+
+                var idx = 0;
+
+                if (_counter > 1)
+                {
+                    // pick random Nth stop of the closest 3 stops
+                    idx = Randomizer.GetNext(0, Math.Min(pokestopList.Count - 1, 2));
+                }
+                else if (_counter > 0)
+                {
+                    // pick random second stop of the closest 4 stops
+                    idx = Randomizer.GetNext(0, Math.Min(pokestopList.Count - 1, 3));
+                }
+                else
+                {
+                    // pick random first stop of the closest 5 stops
+                    idx = Randomizer.GetNext(0, Math.Min(pokestopList.Count - 1, 4));
+                }
+
+                var pokeStop = pokestopList[idx];
+                pokestopList.RemoveAt(idx);
+                _counter++;
 
                 var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
                     ctx.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
@@ -131,8 +152,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     } while (fortRetry < retryNumber - zeroCheck); //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
-                await Task.Delay(1000);
-                if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
+
+                await Randomizer.Sleep(1000, 0.3);
+                var limit = Randomizer.GetNamed($"{nameof(FarmPokestopsTask)}_stopsHitLimit", 3, 6, 600);
+                if (++stopsHit % limit == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;
                     if (fortSearch.ItemsAwarded.Count > 0)

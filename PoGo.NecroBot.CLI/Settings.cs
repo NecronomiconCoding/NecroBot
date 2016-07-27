@@ -243,6 +243,7 @@ namespace PoGo.NecroBot.CLI
         public double WalkingSpeedInKilometerPerHour = 50;
         public int WebSocketPort = 14251;
         public static GlobalSettings Default => new GlobalSettings();
+        public int RecycleAboveItemCount = 50;
 
         public static GlobalSettings Load(string path)
         {
@@ -358,6 +359,7 @@ namespace PoGo.NecroBot.CLI
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
+        public int RecycleAboveItemCount => _settings.RecycleAboveItemCount;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;

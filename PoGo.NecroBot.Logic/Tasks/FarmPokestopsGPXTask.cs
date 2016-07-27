@@ -88,7 +88,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await ctx.Inventory.RefreshCachedInventory();
                             }
 
-                            await Task.Delay(1000);
+                            await Randomizer.Sleep(1000);
 
                             await RecycleItemsTask.Execute(ctx, machine);
 

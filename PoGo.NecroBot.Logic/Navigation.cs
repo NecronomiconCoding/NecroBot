@@ -24,16 +24,56 @@ namespace PoGo.NecroBot.Logic
     {
         private const double SpeedDownTo = 10/3.6;
         private readonly Client _client;
+        private DateTime _lastRest = DateTime.Now; 
+        private DateTime _lastShortStop = DateTime.Now; 
 
         public Navigation(Client client)
         {
             _client = client;
         }
 
+        private double GetSpeed(double walkingSpeedInKilometersPerHour)
+        {
+            var speed = walkingSpeedInKilometersPerHour / 3.6d * 100.0d / Randomizer.GetNext(95, 105);
+            if (_lastRest.AddMinutes(15) < DateTime.Now) speed = speed * 0.95;
+            if (_lastRest.AddMinutes(30) < DateTime.Now) speed = speed * 0.90;
+            if (_lastRest.AddMinutes(45) < DateTime.Now) speed = speed * 0.85;
+            if (Randomizer.GetNext(1, 100) < 5) speed = speed * 0.1;
+            return speed;
+        }
+
+        private async Task RestIfNecessary()
+        {
+            var limit = Randomizer.GetNamed($"{nameof(RestIfNecessary)}", 15 * 60, 45 * 60, 30 * 60);
+            if (_lastRest.AddSeconds(limit) < DateTime.Now)
+            {
+                var amount = Randomizer.GetNext(60, 240);
+                Console.WriteLine("resting " + amount + " seconds");
+                await Randomizer.Sleep(amount * 1000);
+                _lastRest = DateTime.Now;
+            } 
+        }
+
+        private async Task ShortStopIfNecessary()
+        {
+            var limit = Randomizer.GetNamed($"{nameof(ShortStopIfNecessary)}", 2 * 60, 5 * 60, 3 * 60);
+            if (_lastShortStop.AddSeconds(limit) < DateTime.Now)
+            {
+                var amount = Randomizer.GetNext(5, 15);
+                Console.WriteLine("short stop for " + amount + " seconds");
+                await Randomizer.Sleep(amount * 1000);
+                _lastShortStop = DateTime.Now;
+            } 
+        }
+
         public async Task<PlayerUpdateResponse> HumanLikeWalking(GeoCoordinate targetLocation,
             double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking)
         {
-            var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
+            walkingSpeedInKilometersPerHour = walkingSpeedInKilometersPerHour * 100d / Randomizer.GetNext(80, 120);
+
+            await RestIfNecessary();
+
+            var speedInMetersPerSecond = GetSpeed(walkingSpeedInKilometersPerHour);
 
             var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
             var distanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
@@ -68,11 +108,24 @@ namespace PoGo.NecroBot.Logic
                         speedInMetersPerSecond = SpeedDownTo;
                     }
                 }
+                else speedInMetersPerSecond = GetSpeed(walkingSpeedInKilometersPerHour);
+
+                await ShortStopIfNecessary();
 
                 nextWaypointDistance = Math.Min(currentDistanceToTarget,
                     millisecondsUntilGetUpdatePlayerLocationResponse/1000*speedInMetersPerSecond);
                 nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
                 waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
+
+                var randomBearing = 0.0d;
+                if (currentDistanceToTarget > 50)
+                {
+                    var n = Convert.ToInt32(currentDistanceToTarget);
+                    randomBearing = (double)Randomizer.GetNext(-n, n) / 20.0d;
+                    nextWaypointBearing += randomBearing;
+                }
+
+                Console.WriteLine("walking to target with speed: " + speedInMetersPerSecond.ToString("F2", CultureInfo.InvariantCulture) + ", distance: " + currentDistanceToTarget.ToString("F2", CultureInfo.InvariantCulture) + ", bearing: " + nextWaypointBearing.ToString("F2", CultureInfo.InvariantCulture) + ", rndBearing: " + randomBearing.ToString("F2", CultureInfo.InvariantCulture));
 
                 requestSendDateTime = DateTime.Now;
                 result =
@@ -82,11 +135,10 @@ namespace PoGo.NecroBot.Logic
 
                 UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
-
                 if (functionExecutedWhileWalking != null)
                     await functionExecutedWhileWalking(); // look for pokemon
 
-                await Task.Delay(Math.Min((int) (distanceToTarget/speedInMetersPerSecond*1000), 3000));
+                await Randomizer.Sleep(Math.Min((int)(distanceToTarget / speedInMetersPerSecond * 1000), 3400), 0.1);
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
             return result;
@@ -95,12 +147,13 @@ namespace PoGo.NecroBot.Logic
         public async Task<PlayerUpdateResponse> HumanPathWalking(GpxReader.Trkpt trk,
             double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking)
         {
+            walkingSpeedInKilometersPerHour = walkingSpeedInKilometersPerHour * 100d / Randomizer.GetNext(80, 120);
             //PlayerUpdateResponse result = null;
 
             var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat, CultureInfo.InvariantCulture),
                 Convert.ToDouble(trk.Lon, CultureInfo.InvariantCulture));
 
-            var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
+            var speedInMetersPerSecond = GetSpeed(walkingSpeedInKilometersPerHour);
 
             var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
             var distanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
@@ -136,6 +189,9 @@ namespace PoGo.NecroBot.Logic
                 //        speedInMetersPerSecond = SpeedDownTo;
                 //    }
                 //}
+                speedInMetersPerSecond = GetSpeed(walkingSpeedInKilometersPerHour);
+
+                Console.WriteLine("walking to target with speed: " + speedInMetersPerSecond.ToString("F1", CultureInfo.InvariantCulture) + ", distance: " + currentDistanceToTarget.ToString("F1", CultureInfo.InvariantCulture));
 
                 nextWaypointDistance = Math.Min(currentDistanceToTarget,
                     millisecondsUntilGetUpdatePlayerLocationResponse/1000*speedInMetersPerSecond);
@@ -153,7 +209,7 @@ namespace PoGo.NecroBot.Logic
                 if (functionExecutedWhileWalking != null)
                     await functionExecutedWhileWalking(); // look for pokemon & hit stops
 
-                await Task.Delay(Math.Min((int) (distanceToTarget/speedInMetersPerSecond*1000), 3000));
+                await Randomizer.Sleep(Math.Min((int)(distanceToTarget / speedInMetersPerSecond * 1000), 4000), 0.1);
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
             return result;

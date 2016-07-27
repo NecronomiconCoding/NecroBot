@@ -7,6 +7,7 @@ using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PokemonGo.RocketAPI;
 using POGOProtos.Inventory.Item;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -47,7 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Result = evolveResponse.Result
                     });
 
-                    await Task.Delay(3000);
+                    await Randomizer.Sleep(4000, 0.3);
                 }
             }
         }
@@ -66,7 +67,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             await client.Inventory.UseItemXpBoost();
             await inventory.RefreshCachedInventory();
             machine.Fire(new UseLuckyEggEvent {Count = luckyEgg.Count});
-            await Task.Delay(2000);
+            await Randomizer.Sleep(2500, 0.2);
         }
     }
 }

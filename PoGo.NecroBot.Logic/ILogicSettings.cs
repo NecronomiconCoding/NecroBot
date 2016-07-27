@@ -54,6 +54,7 @@ namespace PoGo.NecroBot.Logic
         string ConfigPath { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
+        int RecycleAboveItemCount { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
 
