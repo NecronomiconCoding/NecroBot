@@ -89,7 +89,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchStatus, "{0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.Candies, "Candies: {0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.UnhandledGPXData, "Unhandled data in GPX file, attempting to skip."),
-            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestsHeader, "DisplayHighests"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestsHeader, "Pokemons"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CommonWordPerfect, "perfect"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CommonWordName, "name"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestsCPHeader, "DisplayHighestsCP"),
