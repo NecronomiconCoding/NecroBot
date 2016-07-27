@@ -79,7 +79,7 @@ namespace PoGo.NecroBot.CLI
             // InvokeRequired required compares the thread ID of the
             // calling thread to the thread ID of the creating thread.
             // If these threads are different, it returns true.
-            if (this.PlayerInfoBox.InvokeRequired)
+            if (this.DebugTextBox.InvokeRequired)
             {
                 SetTextCallback d = new SetTextCallback(AppendDebugMessage);
                 this.Invoke(d, new object[] { message, level, color });
@@ -155,8 +155,8 @@ namespace PoGo.NecroBot.CLI
                         this.DebugTextBox.SelectionColor = System.Drawing.Color.White;
                         break;
                 }
+                this.DebugTextBox.Select(this.DebugTextBox.Text.Length, 0);
             }
-            this.DebugTextBox.Select(this.DebugTextBox.Text.Length, 0);
         }
 
         public void UpdatePlayerDetails(string text)
