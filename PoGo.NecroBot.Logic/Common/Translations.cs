@@ -87,7 +87,17 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.EventNoPokeballs, "No Pokeballs - We missed a {0} with CP {1}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchStatusAttempt, "{0} Attempt #{1}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchStatus, "{0}"),
-            new KeyValuePair<TranslationString, string>(Common.TranslationString.Candies, "Candies: {0}")
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.Candies, "Candies: {0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.UnhandledGPXData, "Unhandled data in GPX file, attempting to skip."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestsHeader, "DisplayHighests"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CommonWordPerfect, "perfect"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CommonWordName, "name"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestsCPHeader, "DisplayHighestsCP"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestsPerfectHeader, "DisplayHighestsPerfect"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestsLevelHeader, "DisplayHighestsLevel"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.WelcomeWarning, "Make sure Lat & Lng are right. Exit Program if not! Lat: {0} Lng: {1}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.IncubatorPuttingEgg, "Putting egg in incubator: {0:0.00}km left"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.IncubatorStatusUpdate, "Incubator status update: {0:0.00}km left"),
         };
     }
 
@@ -115,5 +125,15 @@ namespace PoGo.NecroBot.Logic.Common
         CatchStatusAttempt,
         CatchStatus,
         Candies,
+        UnhandledGPXData,
+        DisplayHighestsHeader,
+        CommonWordPerfect,
+        CommonWordName,
+        DisplayHighestsCPHeader,
+        DisplayHighestsPerfectHeader,
+        WelcomeWarning,
+        IncubatorPuttingEgg,
+        IncubatorStatusUpdate,
+        DisplayHighestsLevelHeader,
     }
 }
