@@ -109,6 +109,9 @@ namespace PoGo.NecroBot.CLI
         public bool EvolveAllPokemonAboveIv = false;
         public bool EvolveAllPokemonWithEnoughCandy = false;
         public string GpxFile = "GPXPath.GPX";
+        public bool UseRandomDelay = false;
+        public int RandomDelayMinValue = 0;
+        public int RandomDelayMaxValue = 500;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -340,6 +343,9 @@ namespace PoGo.NecroBot.CLI
         public int KeepMinCp => _settings.KeepMinCp;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
+        public bool UseRandomDelay => _settings.UseRandomDelay;
+        public int RandomDelayMinValue => _settings.RandomDelayMinValue;
+        public int RandomDelayMaxValue => _settings.RandomDelayMaxValue;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool UseEggIncubators => _settings.UseEggIncubators;

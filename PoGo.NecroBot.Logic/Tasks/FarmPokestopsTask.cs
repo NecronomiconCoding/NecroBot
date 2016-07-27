@@ -36,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ctx.Translations.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
 
-                await Task.Delay(5000);
+                await Utils.Statistics.Delay(5000);
 
                 await ctx.Navigation.HumanLikeWalking(
                     new GeoCoordinate(ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude),
@@ -117,7 +117,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             });
 
                             Random random = new Random();
-                            await Task.Delay(200 + random.Next(0, 200));  //Randomized pause
+                            await Utils.Statistics.Delay(200 + random.Next(0, 200));  //Randomized pause
                         }
                     } else {
                         machine.Fire(new FortUsedEvent
@@ -131,7 +131,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     } while (fortRetry < retryNumber - zeroCheck); //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
-                await Task.Delay(1000);
+                await Utils.Statistics.Delay(1000);
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;

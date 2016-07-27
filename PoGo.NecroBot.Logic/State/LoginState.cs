@@ -44,7 +44,7 @@ namespace PoGo.NecroBot.Logic.State
                     Message = "PTC Servers are probably down OR your credentials are wrong. Try google"
                 });
                 machine.Fire(new NoticeEvent {Message = "Trying again in 20 seconds..."});
-                await Task.Delay(20000);
+                await Utils.Statistics.Delay(20000);
                 return this;
             }
             catch (AccountNotVerifiedException)

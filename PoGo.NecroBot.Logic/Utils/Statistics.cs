@@ -6,6 +6,8 @@ using System;
 using System.Globalization;
 using System.Linq;
 using POGOProtos.Networking.Responses;
+using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
@@ -33,6 +35,27 @@ namespace PoGo.NecroBot.Logic.Utils
         {
             _currentLevelInfos = GetCurrentInfo(inventory);
             DirtyEvent?.Invoke();
+        }
+
+        private static Random random = new Random(Guid.NewGuid().GetHashCode());
+
+        private static ILogicSettings LogicSettings;
+
+        public static void LoadSetting(ILogicSettings logicSettings)
+        {
+            LogicSettings = logicSettings;
+        }
+
+        public static async Task Delay(int millisecondsDelay)
+        {
+            if (LogicSettings.UseRandomDelay)
+            {
+                await Task.Delay(millisecondsDelay + random.Next(LogicSettings.RandomDelayMinValue, LogicSettings.RandomDelayMaxValue));
+            }
+            else
+            {
+                await Task.Delay(millisecondsDelay);
+            }
         }
 
         public event StatisticsDirtyDelegate DirtyEvent;

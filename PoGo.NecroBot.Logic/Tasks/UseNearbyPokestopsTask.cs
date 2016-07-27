@@ -49,7 +49,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
-                await Task.Delay(1000);
+                await Utils.Statistics.Delay(1000);
 
                 await RecycleItemsTask.Execute(ctx, machine);
 

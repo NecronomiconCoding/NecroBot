@@ -60,7 +60,7 @@ namespace PoGo.NecroBot.Logic.State
                         ctx.Client.CurrentLongitude)
             });
 
-            await Task.Delay(3000);
+            await Utils.Statistics.Delay(3000);
 
             return new InfoState();
         }
