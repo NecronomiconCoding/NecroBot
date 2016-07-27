@@ -274,7 +274,14 @@ namespace PoGo.NecroBot.CLI
             }
             settings.ProfilePath = profilePath;
             settings.ConfigPath = configPath;
-            settings.Save(fullPath);
+
+            if (!File.Exists(fullPath))
+            {
+                settings.Save(fullPath);
+                return null;
+            }
+            
+
             settings.Auth.Load(Path.Combine(configPath, "auth.json"));
 
             return settings;
