@@ -242,7 +242,9 @@ namespace PoGo.NecroBot.CLI
                 {
                     PokemonId.Zubat,
                     PokemonId.Pidgey,
-                    PokemonId.Rattata
+                    PokemonId.Rattata,
+                    PokemonId.Caterpie,
+                    PokemonId.Weedle
                 };
     }
 
