@@ -122,6 +122,86 @@
     {
       "Key": "displayHighestsLevelHeader",
       "Value": "ТОП по уровню"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "ОШИБКА"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "ВНИМАНИЕ"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "ИНФО"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "ФАРМ"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "ПЕРЕРАБОТКА"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "ПОКЕМОН"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "ПЕРЕДАЧА"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "ЭВОЛЮЦИЯ"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "ЯГОДА"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "ЯЙЦО"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "ОТЛАДКА"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "ОБНОВЛЕНИЕ"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Логинимся под юзером {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "PTC сервера возможно не работают ИЛИ неверно указаны данные учетной записи. Попробуйте логин через Google"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Пробуем снова через {0} сек..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Аккаунт не верифицирован! Выходим..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Открываем страницу Google Device. Пожалуйста вставьте код используя CTRL+V"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Не удалось скопировать код в буфер обмена, сделайте это вручную"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Пройдите по ссылке: {0} и введите {1}"
     }
   ]
 }

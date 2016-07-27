@@ -17,7 +17,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(Context ctx, StateMachine machine)
         {
-            Logger.Write("Looking for incense pokemon..", LogLevel.Debug);
+            Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.LookingForIncensePokemon), LogLevel.Debug);
 
 
             var incensePokemon = await ctx.Client.Map.GetIncensePokemons();
@@ -36,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (ctx.LogicSettings.UsePokemonToNotCatchFilter &&
                     ctx.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
                 {
-                    Logger.Write("[Pokemon ignore filter] - Ignoring " + pokemon.PokemonId + " as defined in settings");
+                    Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.PokemonIgnoreFilter, pokemon.PokemonId));
                 }
                 else
                 {
@@ -57,19 +57,18 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         if (ctx.LogicClient.Settings.TransferDuplicatePokemon)
                         {
-                            machine.Fire(new WarnEvent {Message = "PokemonInventory is Full.Transferring pokemons..."});
+                            machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.InvFullTransferring)});
                             await TransferDuplicatePokemonTask.Execute(ctx, machine);
                         }
                         else
                             machine.Fire(new WarnEvent
                             {
-                                Message =
-                                    "PokemonInventory is Full.Please Transfer pokemon manually or set TransferDuplicatePokemon to true in settings..."
+                                Message = ctx.Translations.GetTranslation(Common.TranslationString.InvFullTransferManually)
                             });
                     }
                     else
                     {
-                        machine.Fire(new WarnEvent {Message = $"Encounter problem: {encounter.Result}"});
+                        machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Result)});
                     }
                 }
             }

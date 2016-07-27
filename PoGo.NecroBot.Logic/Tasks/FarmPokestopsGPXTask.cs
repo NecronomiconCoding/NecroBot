@@ -45,8 +45,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             machine.Fire(new ErrorEvent
                             {
-                                Message =
-                                    $"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}"
+                                Message = ctx.Translations.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude)
                             });
                             break;
                         }

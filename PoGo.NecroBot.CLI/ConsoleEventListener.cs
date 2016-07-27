@@ -110,7 +110,7 @@ namespace PoGo.NecroBot.CLI
                     case ItemId.ItemMasterBall:
                         return ctx.Translations.GetTranslation(TranslationString.MasterPokeball);
                     default:
-                        return "Unknown";
+                        return ctx.Translations.GetTranslation(TranslationString.CommonWordUnknown);
                 }
             };
 

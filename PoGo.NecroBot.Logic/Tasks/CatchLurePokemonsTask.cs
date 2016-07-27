@@ -15,7 +15,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(Context ctx, StateMachine machine, FortData currentFortData)
         {
-            Logger.Write("Looking for lure pokemon..", LogLevel.Debug);
+            Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.LookingForLurePokemon), LogLevel.Debug);
 
             var fortId = currentFortData.Id;
 
@@ -24,7 +24,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (ctx.LogicSettings.UsePokemonToNotCatchFilter &&
                 ctx.LogicSettings.PokemonsNotToCatch.Contains(pokemonId))
             {
-                machine.Fire(new NoticeEvent {Message = $"Skipped {pokemonId}"});
+                machine.Fire(new NoticeEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.PokemonSkipped, pokemonId)});
             }
             else
             {
@@ -39,20 +39,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     if (ctx.LogicClient.Settings.TransferDuplicatePokemon)
                     {
-                        machine.Fire(new WarnEvent {Message = "PokemonInventory is Full.Transferring pokemons..."});
+                        machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.InvFullTransferring) });
                         await TransferDuplicatePokemonTask.Execute(ctx, machine);
                     }
                     else
                         machine.Fire(new WarnEvent
                         {
-                            Message =
-                                "PokemonInventory is Full.Please Transfer pokemon manually or set TransferDuplicatePokemon to true in settings..."
+                            Message = ctx.Translations.GetTranslation(Common.TranslationString.InvFullTransferManually)
                         });
                 }
                 else
                 {
                     if (encounter.Result.ToString().Contains("NotAvailable")) return;
-                    machine.Fire(new WarnEvent {Message = $"Encounter problem: Lure Pokemon {encounter.Result}"});
+                    machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.EncounterProblemLurePokemon, encounter.Result)});
                 }
             }
         }
