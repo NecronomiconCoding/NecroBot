@@ -61,8 +61,6 @@ namespace PoGo.NecroBot.Logic
 
         ICollection<PokemonId> PokemonsNotToCatch { get; }
 
-        ICollection<PokemonId> PokemonsToImmediatelyTransfer { get; } 
-
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
     }
 }

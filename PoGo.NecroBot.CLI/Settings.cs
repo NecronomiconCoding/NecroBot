@@ -1,4 +1,4 @@
-#region using directives
+﻿#region using directives
 
 using System;
 using System.Collections.Generic;
@@ -361,7 +361,6 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
-        public ICollection<PokemonId> PokemonsToImmediatelyTransfer => _settings.PokemonsToImmediatelyTransfer;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
     }
 }
