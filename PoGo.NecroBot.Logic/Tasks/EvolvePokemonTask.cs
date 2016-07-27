@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             _lastLuckyEggTime = DateTime.Now;
             await client.Inventory.UseItemXpBoost();
-            var refreshCachedInventory = await inventory.RefreshCachedInventory();
+            await inventory.RefreshCachedInventory();
             machine.Fire(new UseLuckyEggEvent {Count = luckyEgg.Count});
             await Task.Delay(2000);
         }

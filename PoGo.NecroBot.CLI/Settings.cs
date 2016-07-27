@@ -3,10 +3,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using PoGo.NecroBot.Logic;
-using PoGo.NecroBot.Logic.Logging;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
@@ -57,16 +55,16 @@ namespace PoGo.NecroBot.CLI
 
 
         [JsonIgnore]
-        private string FilePath;
+        private string _filePath;
 
         public void Load(string path)
         {
-            FilePath = path;
+            _filePath = path;
 
-            if (File.Exists(FilePath))
+            if (File.Exists(_filePath))
             {
                 //if the file exists, load the settings
-                var input = File.ReadAllText(FilePath);
+                var input = File.ReadAllText(_filePath);
 
                 JsonSerializerSettings settings = new JsonSerializerSettings();
                 settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
@@ -75,7 +73,7 @@ namespace PoGo.NecroBot.CLI
             }
             else
             {
-                Save(FilePath);
+                Save(_filePath);
             }
         }
 
@@ -83,8 +81,8 @@ namespace PoGo.NecroBot.CLI
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented, new StringEnumConverter { CamelCaseText = true });
 
-            string folder = Path.GetDirectoryName(path);
-            if (!Directory.Exists(folder))
+            var folder = Path.GetDirectoryName(path);
+            if (folder != null && !Directory.Exists(folder))
             {
                 Directory.CreateDirectory(folder);
             }
@@ -94,9 +92,9 @@ namespace PoGo.NecroBot.CLI
 
         public void Save()
         {
-            if (!string.IsNullOrEmpty(FilePath))
+            if (!string.IsNullOrEmpty(_filePath))
             {
-                Save(FilePath);
+                Save(_filePath);
             }
         }
     }
@@ -114,7 +112,7 @@ namespace PoGo.NecroBot.CLI
 
             var fullPath = ConfigPath + Path.DirectorySeparatorChar + "config.json";
 
-            GlobalSettings settings = null;
+            GlobalSettings settings;
             if (File.Exists(fullPath))
             {
                 //if the file exists, load the settings
@@ -148,7 +146,7 @@ namespace PoGo.NecroBot.CLI
             var output = JsonConvert.SerializeObject(this, Formatting.Indented, new StringEnumConverter { CamelCaseText = true });
 
             string folder = Path.GetDirectoryName(fullPath);
-            if (!Directory.Exists(folder))
+            if (folder != null && !Directory.Exists(folder))
             {
                 Directory.CreateDirectory(folder);
             }

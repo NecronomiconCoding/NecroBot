@@ -4,24 +4,19 @@ using PoGo.NecroBot.Logic.State;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Config;
 using SuperSocket.WebSocket;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI
 {
     public class WebSocketInterface
     {
-        private WebSocketServer _server;
-        private PokeStopListEvent _lastPokeStopList = null;
-        private ProfileEvent _lastProfile = null;
+        private readonly WebSocketServer _server;
+        private PokeStopListEvent _lastPokeStopList;
+        private ProfileEvent _lastProfile;
 
         public WebSocketInterface(int port)
         {
             _server = new WebSocketServer();
-            bool setupComplete = _server.Setup(new ServerConfig
+            var setupComplete = _server.Setup(new ServerConfig
             {
                 Name = "NecroWebSocket",
                 Ip = "Any",
@@ -69,7 +64,10 @@ namespace PoGo.NecroBot.CLI
                 {
                     session.Send(message);
                 }
-                catch { }
+                catch
+                {
+                    // ignored
+                }
             }
         }
 
@@ -101,7 +99,10 @@ namespace PoGo.NecroBot.CLI
             {
                 HandleEvent(eve);
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
 
             Broadcast(Serialize(eve));
         }

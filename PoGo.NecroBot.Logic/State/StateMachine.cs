@@ -1,7 +1,6 @@
 ﻿#region using directives
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 
@@ -16,10 +15,7 @@ namespace PoGo.NecroBot.Logic.State
         private Context _ctx;
         private IState _initialState;
 
-        public Task AsyncStart(IState initialState, Context ctx)
-        {
-            return Task.Run(() => Start(initialState, ctx));
-        }
+        public Task AsyncStart(IState initialState, Context ctx) => Task.Run(() => Start(initialState, ctx));
 
         public event StateMachineEventDeletate EventListener;
 
