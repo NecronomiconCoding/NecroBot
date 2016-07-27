@@ -116,9 +116,32 @@ namespace PoGo.NecroBot.CLI
 
             var catchType = evt.CatchType;
 
+            string strStatus;
+            switch (evt.Status)
+            {
+                case CatchPokemonResponse.Types.CatchStatus.CatchError:
+                    strStatus = session.Translations.GetTranslation(TranslationString.CatchStatusError);
+                    break;
+                case CatchPokemonResponse.Types.CatchStatus.CatchEscape:
+                    strStatus = session.Translations.GetTranslation(TranslationString.CatchStatusEscape);
+                    break;
+                case CatchPokemonResponse.Types.CatchStatus.CatchFlee:
+                    strStatus = session.Translations.GetTranslation(TranslationString.CatchStatusFlee);
+                    break;
+                case CatchPokemonResponse.Types.CatchStatus.CatchMissed:
+                    strStatus = session.Translations.GetTranslation(TranslationString.CatchStatusMissed);
+                    break;
+                case CatchPokemonResponse.Types.CatchStatus.CatchSuccess:
+                    strStatus = session.Translations.GetTranslation(TranslationString.CatchStatusSuccess);
+                    break;
+                default:
+                    strStatus = evt.Status.ToString();
+                    break;
+            }
+
             var catchStatus = evt.Attempt > 1
-                ? session.Translations.GetTranslation(TranslationString.CatchStatusAttempt, evt.Status, evt.Attempt)
-                : session.Translations.GetTranslation(TranslationString.CatchStatus, evt.Status);
+                ? session.Translations.GetTranslation(TranslationString.CatchStatusAttempt, strStatus, evt.Attempt)
+                : session.Translations.GetTranslation(TranslationString.CatchStatus, strStatus);
 
             var familyCandies = evt.FamilyCandies > 0
                 ? session.Translations.GetTranslation(TranslationString.Candies, evt.FamilyCandies)
