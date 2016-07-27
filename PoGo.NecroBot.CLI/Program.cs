@@ -1,22 +1,31 @@
-﻿#region using directives
-
-using System;
-using System.IO;
-using System.Diagnostics;
-using System.Threading;
-using System.Windows.Forms;
-using PoGo.NecroBot.Logic;
+﻿using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
-using PoGo.NecroBot.Logic.Event;
-
-#endregion
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PoGo.NecroBot.CLI
 {
-    internal class Program
+    public partial class Program : Form
     {
+        delegate void SetTextCallback(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black);
+        delegate void SetLighTextCallback(string message);
+        public static Program window;
+        public Program()
+        {
+            InitializeComponent();
+        }
+
         public static void LoginWithGoogle(string usercode, string uri)
         {
             try
@@ -36,39 +45,30 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        private static void Main(string[] args)
+        private static void Main()
         {
-            string subPath = "";
-            if (args.Length > 0)
-                subPath = Path.DirectorySeparatorChar + args[0];
-
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            window = new Program();
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
-
-            GlobalSettings settings = GlobalSettings.Load(subPath);
-
-            var machine = new StateMachine();
             var stats = new Statistics();
-            stats.DirtyEvent += () => Console.Title = stats.ToString();
-
+            stats.DirtyEvent += () => window.UpdatePlayerDetails(stats.ToString());
+            var machine = new StateMachine();
             var aggregator = new StatisticsAggregator(stats);
             var listener = new ConsoleEventListener();
-            var websocket = new WebSocketInterface(settings.WebSocketPort);
 
             machine.EventListener += listener.Listen;
             machine.EventListener += aggregator.Listen;
-            machine.EventListener += websocket.Listen;
-            
+
             machine.SetFailureState(new LoginState());
 
+            GlobalSettings settings = GlobalSettings.Load();
+
             var context = new Context(new ClientSettings(settings), new LogicSettings(settings));
-
-            context.Navigation.UpdatePositionEvent += (lat, lng) => machine.Fire(new UpdatePositionEvent { Latitude = lat, Longitude = lng });
-
             context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
 
             machine.AsyncStart(new VersionCheckState(), context);
-
-            Console.ReadLine();
+            Application.Run(window);
         }
     }
 }

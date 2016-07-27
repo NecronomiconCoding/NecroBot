@@ -86,13 +86,6 @@ namespace PoGo.NecroBot.Logic
                     var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
                     var amountToSkip = _logicClient.Settings.KeepMinDuplicatePokemon;
 
-                    if (settings.CandyToEvolve > 0)
-                    {
-                        var amountPossible = familyCandy.Candy / settings.CandyToEvolve;
-                        if (amountPossible > amountToSkip)
-                            amountToSkip = amountPossible;
-                    }
-
                     if (prioritizeIVoverCp)
                     {
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
