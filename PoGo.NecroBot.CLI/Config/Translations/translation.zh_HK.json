@@ -22,7 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "你已經走出範圍！5秒後返回起點（距離{0}米），請確認座標設置是否正確？"
+      "Value": "你已經走出範圍！5秒後返回起點(距離{0}米)，請確認座標設置是否正確？"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "發現 {0} （距離{1}米）"
+      "Value": "發現 {0} (距離{1}米)"
     },
     {
       "Key": "eventProfileLogin",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP：{1}  IV：{2}%  [已擁有最佳 CP值：{3}  IV：{4}%] （還有{5}顆糖果）"
+      "Value": "{0}\t- CP：{1}  IV：{2}%  [已擁有最佳 CP值：{3}  IV：{4}%] (還有{5}顆糖果)"
     },
     {
       "Key": "eventItemRecycled",
