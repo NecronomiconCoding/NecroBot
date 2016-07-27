@@ -55,13 +55,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if ((isLowProbability && isHighCp) || isHighPerfection)
                 {
                     await UseBerry(ctx, machine, encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
-                        encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData?.Id);
+                        encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.SpawnPointId : currentFortData?.Id);
                 }
 
                 var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
                     ctx.Client.CurrentLongitude,
-                    encounter is EncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
-                    encounter is EncounterResponse ? pokemon.Longitude : currentFortData.Longitude);
+                    encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
+                    encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.Longitude : currentFortData.Longitude);
 
                 caughtPokemonResponse =
                     await ctx.Client.Encounter.CatchPokemon(
