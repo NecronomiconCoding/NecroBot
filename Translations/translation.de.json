@@ -18,7 +18,7 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Unbekannter AuthType in config.json festgelegt"
+      "Value": "Unbekannte Authentifizierungsart in der config.json festgelegt"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
