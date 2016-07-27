@@ -10,6 +10,9 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Services;
+using PokemonGo.RocketAPI.Enums;
+using PoGo.NecroBot.Logic.Player;
 
 #endregion
 
@@ -46,7 +49,16 @@ namespace PoGo.NecroBot.CLI
 
             GlobalSettings settings = GlobalSettings.Load(subPath);
 
-            var machine = new StateMachine();
+            var eventHandler = new SimpleEventHandler();
+            SimpleSession session = new SimpleSession(new ClientSettings(settings), new LogicSettings(settings), eventHandler);
+
+            ILoginService loginService = settings.Auth.AuthType == AuthType.Google ? 
+                (ILoginService) new GoogleLoginService(session) :
+                (ILoginService) new PtcLoginService(session);
+
+            loginService.Login();
+
+            /*var machine = new StateMachine();
             var stats = new Statistics();
             stats.DirtyEvent += () => Console.Title = stats.ToString();
 
@@ -66,7 +78,7 @@ namespace PoGo.NecroBot.CLI
 
             context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
 
-            machine.AsyncStart(new VersionCheckState(), context);
+            machine.AsyncStart(new VersionCheckState(), context);*/
 
             Console.ReadLine();
         }

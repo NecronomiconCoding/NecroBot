@@ -9,46 +9,36 @@ using PoGo.NecroBot.Logic.Event;
 
 namespace PoGo.NecroBot.Logic.State
 {
-    public delegate void StateMachineEventDeletate(IEvent evt, Context ctx);
-
     public class StateMachine
     {
-        private Context _ctx;
-        private IState _initialState;
-
-        public Task AsyncStart(IState initialState, Context ctx)
+        public async Task Start(IState rootState)
         {
-            return Task.Run(() => Start(initialState, ctx));
-        }
-
-        public event StateMachineEventDeletate EventListener;
-
-        public void Fire(IEvent evt)
-        {
-            EventListener?.Invoke(evt, _ctx);
-        }
-
-        public void SetFailureState(IState state)
-        {
-            _initialState = state;
-        }
-
-        public async Task Start(IState initialState, Context ctx)
-        {
-            _ctx = ctx;
-            var state = initialState;
+            var currentState = rootState;
+            var previousState = currentState;
             do
             {
+                if(previousState != currentState)
+                {
+                    await previousState.OnExit();
+
+                    previousState = currentState;
+                    currentState = await currentState.OnEnter();
+
+                    if (previousState != currentState)
+                    {
+                        continue;
+                    }
+                }
+
                 try
                 {
-                    state = await state.Execute(ctx, this);
+                    currentState = await currentState.Run();
                 }
                 catch (Exception ex)
                 {
-                    Fire(new ErrorEvent {Message = ex.ToString()});
-                    state = _initialState;
+                    currentState = await currentState.OnError(ex);
                 }
-            } while (state != null);
+            } while (currentState != null);
         }
     }
 }
