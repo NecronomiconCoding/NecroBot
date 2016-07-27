@@ -168,10 +168,10 @@ namespace PoGo.NecroBot.CLI
         public string GpxFile = "GPXPath.GPX";
         public int KeepMinCp = 1000;
         public int KeepMinDuplicatePokemon = 1;
-        public float KeepMinIvPercentage = 85;
-        public bool KeepPokemonsThatCanEvolve = true;
+        public float KeepMinIvPercentage = 95;
+        public bool KeepPokemonsThatCanEvolve = false;
         public int MaxTravelDistanceInMeters = 1000;
-        public bool PrioritizeIvOverCp = true;
+        public bool PrioritizeIvOverCp = false;
         public bool TransferDuplicatePokemon = true;
         public bool UseEggIncubators = true;
         public bool UseGpxPathing = false;
