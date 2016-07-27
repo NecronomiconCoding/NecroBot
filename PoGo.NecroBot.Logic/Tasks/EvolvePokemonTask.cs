@@ -26,6 +26,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
                 }
+                else
+                {
+                    // Wait until we have enough pokemon
+                    return;
+                }
             }
 
             foreach (var pokemon in pokemonToEvolve)
