@@ -55,6 +55,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     await TransferDuplicatePokemonTask.Execute(ctx, machine);
                 }
+                await ToTransferPokemonTask.Execute(ctx, machine);
             }
         }
 

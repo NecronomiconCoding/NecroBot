@@ -343,5 +343,21 @@ namespace PoGo.NecroBot.Logic
                 ss.Release();
             }
         }
+
+        public async Task<IEnumerable<PokemonData>> GetPokemonToTransfer(IEnumerable<PokemonId> filter)
+        {
+            var myPokemons = await GetPokemons();
+            myPokemons = myPokemons.Where(p => p.DeployedFortId == string.Empty).
+                                    Where(p => filter.Contains(p.PokemonId)).
+                                    OrderByDescending(p => p.PokemonId);
+            // Don't transfer pokemon in gyms
+            IEnumerable<PokemonId> pokemonIds = filter as PokemonId[] ?? filter.ToArray();
+            if (pokemonIds.Any())
+            {
+                myPokemons = myPokemons.Where(p => pokemonIds.Contains(p.PokemonId));
+            }
+            var pokemonToTransfer = myPokemons.ToList();
+            return pokemonToTransfer;
+        }
     }
 }
