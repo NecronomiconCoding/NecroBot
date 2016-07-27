@@ -13,6 +13,7 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
+            machine.Fire(new NoticeEvent {Message = $"Logging in using {ctx.Settings.AuthType}"});
             try
             {
                 switch (ctx.Settings.AuthType)
