@@ -68,6 +68,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData.Id, pokeball);
 
                 var evt = new PokemonCaptureEvent {Status = caughtPokemonResponse.Status};
+                evt.Exp = 0;
 
                 if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
                 {
