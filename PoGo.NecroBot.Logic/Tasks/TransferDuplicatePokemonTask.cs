@@ -23,8 +23,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
-                if (duplicatePokemon.Cp >= ctx.LogicSettings.KeepMinCp ||
-                    PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) > ctx.LogicSettings.KeepMinIvPercentage)
+                if (duplicatePokemon.Cp >= ctx.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinCp ||
+                    PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) > ctx.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinIvPercentage)
                 {
                     continue;
                 }

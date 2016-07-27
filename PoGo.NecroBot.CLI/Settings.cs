@@ -238,6 +238,15 @@ namespace PoGo.NecroBot.CLI
                     PokemonId.Pidgey,
                     PokemonId.Rattata
                 };
+
+        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
+                {
+                    { PokemonId.Pidgeotto, new TransferFilter(1500, 90, 1)},
+                    { PokemonId.Fearow, new TransferFilter(1500, 90, 2)},
+                    { PokemonId.Golbat, new TransferFilter(1500, 90, 2)},
+                    { PokemonId.Eevee, new TransferFilter(600, 800, 2)},
+                    { PokemonId.Mew, new TransferFilter(0, 0, 10)}
+                };
     }
 
     public class ClientSettings : ISettings
@@ -303,5 +312,6 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
+        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
     }
 }
