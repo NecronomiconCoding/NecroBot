@@ -94,8 +94,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
+                DelayingUtils.Delay(ctx.LogicSettings.DelayBetweenPlayerActions, 1000);
 
-                Thread.Sleep(1000);
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;

@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
@@ -132,7 +133,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 machine.Fire(evt);
 
                 attemptCounter++;
-                Thread.Sleep(2000);
+
+                DelayingUtils.Delay(ctx.LogicSettings.DelayBetweenPlayerActions, 2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }

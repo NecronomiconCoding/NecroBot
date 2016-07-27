@@ -2,7 +2,9 @@
 
 using System.Threading;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -20,7 +22,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 machine.Fire(new ItemRecycledEvent {Id = item.ItemId, Count = item.Count});
 
-                Thread.Sleep(500);
+                DelayingUtils.Delay(ctx.LogicSettings.DelayBetweenPlayerActions, 500);              
             }
 
             ctx.Inventory.RefreshCachedInventory().Wait();

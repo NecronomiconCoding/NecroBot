@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -33,6 +36,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         Message = $"Pokemon {pokemon.PokemonId} ({pokemon.Id}) renamed from {pokemon.Nickname} to {newNickname}."
                     });
+
+                    DelayingUtils.Delay(ctx.LogicSettings.DelayBetweenPlayerActions, 0);
                 }
                 else if (newNickname == pokemon.Nickname && !ctx.LogicSettings.RenameAboveIv)
                 {
@@ -42,6 +47,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         Message = $"Pokemon {pokemon.PokemonId} ({pokemon.Id}) renamed from {pokemon.Nickname} to {pokemon.PokemonId}."
                     });
+
+                    DelayingUtils.Delay(ctx.LogicSettings.DelayBetweenPlayerActions, 0);
                 }
             }
 

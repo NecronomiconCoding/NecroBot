@@ -86,7 +86,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 var refreshCachedInventory = ctx.Inventory.RefreshCachedInventory();
                             }
 
-                            Thread.Sleep(1000);
+                            DelayingUtils.Delay(ctx.LogicSettings.DelayBetweenPlayerActions, 1000);
 
                             RecycleItemsTask.Execute(ctx, machine);
 

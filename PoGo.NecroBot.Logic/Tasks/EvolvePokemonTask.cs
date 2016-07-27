@@ -4,7 +4,9 @@ using System;
 using System.Linq;
 using System.Threading;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Inventory.Item;
 
@@ -19,7 +21,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
             {
-                UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+                UseLuckyEgg(ctx, machine);
             }
 
             var pokemonToEvolveTask = ctx.Inventory.GetPokemonToEvolve(ctx.LogicSettings.PokemonsToEvolve);
@@ -40,14 +42,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Result = evolvePokemonOutProto.Result
                 });
 
-                Thread.Sleep(3000);
+                DelayingUtils.Delay(ctx.LogicSettings.DelayBetweenPlayerActions, 3000);
             }
         }
 
-        public static void UseLuckyEgg(Client client, Inventory inventory, StateMachine machine)
+        public static void UseLuckyEgg(Context ctx, StateMachine machine)
         {
 
-            var inventoryContent = inventory.GetItems().Result;
+            var inventoryContent = ctx.Inventory.GetItems().Result;
 
             var luckyEggs = inventoryContent.Where(p => p.ItemId == ItemId.ItemLuckyEgg);
             var luckyEgg = luckyEggs.FirstOrDefault();
@@ -56,10 +58,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 return;
 
             _lastLuckyEggTime = DateTime.Now;
-            client.Inventory.UseItemXpBoost().Wait();
-            var refreshCachedInventory = inventory.RefreshCachedInventory();
+            ctx.Client.Inventory.UseItemXpBoost().Wait();
+            var refreshCachedInventory = ctx.Inventory.RefreshCachedInventory();
             machine.Fire(new UseLuckyEggEvent {Count = luckyEgg.Count});
-            Thread.Sleep(2000);
+            
+            DelayingUtils.Delay(ctx.LogicSettings.DelayBetweenPlayerActions, 2000);
         }
     }
 }
