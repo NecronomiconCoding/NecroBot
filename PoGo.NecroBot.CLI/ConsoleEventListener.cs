@@ -121,11 +121,27 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(DisplayHighestsPokemonEvent evt, Context ctx)
         {
-            var strHeader = ctx.Translations.GetTranslation(TranslationString.DisplayHighestsHeader);
+            string strHeader;
+            //PokemonData | CP | IV | Level
+            switch (evt.SortedBy)
+            {
+                case "Level":
+                    strHeader = ctx.Translations.GetTranslation(TranslationString.DisplayHighestsLevelHeader);
+                    break;
+                case "IV":
+                    strHeader = ctx.Translations.GetTranslation(TranslationString.DisplayHighestsPerfectHeader);
+                    break;
+                case "CP":
+                    strHeader = ctx.Translations.GetTranslation(TranslationString.DisplayHighestsCPHeader);
+                    break;
+                default:
+                    strHeader = ctx.Translations.GetTranslation(TranslationString.DisplayHighestsHeader);
+                    break;
+            }
             var strPerfect = ctx.Translations.GetTranslation(TranslationString.CommonWordPerfect);
             var strName = ctx.Translations.GetTranslation(TranslationString.CommonWordName).ToUpper();
 
-            Logger.Write($"====== {strHeader}{evt.SortedBy} ======", LogLevel.Info, ConsoleColor.Yellow);
+            Logger.Write($"====== {strHeader} ======", LogLevel.Info, ConsoleColor.Yellow);
             foreach (var pokemon in evt.PokemonList)
                 Logger.Write(
                     $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: '{pokemon.Item1.PokemonId}'",

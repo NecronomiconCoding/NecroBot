@@ -115,6 +115,10 @@
     {
       "Key": "incubatorStatusUpdate",
       "Value": "Статус инкубатора: {0:0.00}км осталось"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "ТОП по уровню"
     }
   ]
 }
