@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Collections.Generic;
@@ -69,7 +69,7 @@ namespace PoGo.NecroBot.CLI
                     PtcPassword = Console.ReadLine();
                 } while (string.IsNullOrEmpty(PtcPassword));
                 Console.Clear();
-                
+
                 Save(FilePath);
             }
         }
@@ -99,17 +99,16 @@ namespace PoGo.NecroBot.CLI
     public class GlobalSettings
     {
         public static GlobalSettings Default => new GlobalSettings();
-        public static string ProfilePath;
-        public static string ConfigPath;
 
         public static GlobalSettings Load(string path)
         {
-            ProfilePath = Directory.GetCurrentDirectory() + path;
-            ConfigPath = ProfilePath + Path.DirectorySeparatorChar + "config";
-
-            var fullPath = ConfigPath + Path.DirectorySeparatorChar + "config.json";
-
             GlobalSettings settings = null;
+
+            settings.ProfilePath = Directory.GetCurrentDirectory() + path;
+            settings.ConfigPath = settings.ProfilePath + Path.DirectorySeparatorChar + "config";
+
+            var fullPath = settings.ConfigPath + Path.DirectorySeparatorChar + "config.json";
+
             if (File.Exists(fullPath))
             {
                 //if the file exists, load the settings
@@ -133,7 +132,7 @@ namespace PoGo.NecroBot.CLI
             }
 
             settings.Save(fullPath);
-            settings.Auth.Load(ConfigPath + Path.DirectorySeparatorChar + "auth.json");
+            settings.Auth.Load(settings.ConfigPath + Path.DirectorySeparatorChar + "auth.json");
 
             return settings;
         }
@@ -176,6 +175,8 @@ namespace PoGo.NecroBot.CLI
         public int AmountOfPokemonToDisplayOnStart = 10;
         public bool RenameAboveIv = false;
         public int WebSocketPort = 14251;
+        public string ProfilePath;
+        public string ConfigPath;
 
         [JsonIgnore]
         internal AuthSettings Auth = new AuthSettings();
@@ -264,6 +265,8 @@ namespace PoGo.NecroBot.CLI
         public double DefaultLatitude => _settings.DefaultLatitude;
         public double DefaultLongitude => _settings.DefaultLongitude;
         public double DefaultAltitude => _settings.DefaultAltitude;
+        public string ProfilePath => _settings.ProfilePath;
+        public string ConfigPath => _settings.ConfigPath;
 
         public string GoogleRefreshToken
         {
