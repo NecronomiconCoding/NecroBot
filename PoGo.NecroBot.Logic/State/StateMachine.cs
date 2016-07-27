@@ -15,6 +15,8 @@ namespace PoGo.NecroBot.Logic.State
     {
         private Context _ctx;
         private IState _initialState;
+        private CancellationTokenSource _tokenSource;
+        
 
         public Task AsyncStart(IState initialState, Context ctx)
         {
@@ -33,6 +35,13 @@ namespace PoGo.NecroBot.Logic.State
             _initialState = state;
         }
 
+        public void Stop() {
+            if (_tokenSource != null) {
+                _tokenSource.Cancel();
+            }
+
+        }
+
         public async Task Start(IState initialState, Context ctx)
         {
             _ctx = ctx;
@@ -41,7 +50,12 @@ namespace PoGo.NecroBot.Logic.State
             {
                 try
                 {
+                    _tokenSource = new CancellationTokenSource();
                     state = await state.Execute(ctx, this);
+                }
+                catch (OperationCanceledException) {
+                    state = null;
+                    break;
                 }
                 catch (Exception ex)
                 {
