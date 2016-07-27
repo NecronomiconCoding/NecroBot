@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Вы находитесь вне указанного радиуса! Идем к точке старта ({0}m away) через 5 сек. Ваш Coords.ini файл корректен?"
+        "Вы находитесь вне указанного радиуса! Идем к точке старта (дистанция {0}м) через 5 сек. Ваш Coords.ini файл корректен?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -32,11 +32,15 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "XP: {0}, Gems: {1}, Предметов: {2}"
+      "Value": "Название: {0} XP: {1}, Gems: {2}, Предметов: {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Название: {0} ИНФО: Не удалось полутать, возможно софтбан. Разбан через: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} через ({1}m)"
+      "Value": "Прибываем к {0} через ({1}м)"
     },
     {
       "Key": "eventProfileLogin",
@@ -56,7 +60,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Лучший CP: {3}  IV: {4}%] (Конфеток: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Лучший CP: {3}  IV: {4}%] (Конфет: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -65,7 +69,7 @@
     {
       "Key": "eventPokemonCapture",
       "Value":
-        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Шанс: {7}% | {8}m дист | исп. {9} ({10} осталось). | {11}"
+        "({0}) | ({1}) {2} Ур: {3} CP: ({4}/{5}) IV: {6}% | Шанс: {7}% | на {8}м | исп. {9} ({10} осталось). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -81,7 +85,7 @@
     },
     {
       "Key": "candies",
-      "Value": "Конфеток: {0}"
+      "Value": "Конфет: {0}"
     },
     {
       "Key": "unhandledGPXData",
@@ -221,7 +225,7 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "AАвтообновление отключено. Последний релиз можно скачать с: {0}\n "
+      "Value": "Автообновление отключено. Последний релиз можно скачать с: {0}\n "
     },
     {
       "Key": "downloadingUpdate",
@@ -241,7 +245,7 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Ищем покемона на пряности..."
+      "Value": "Ищем покемона с пряностями..."
     },
     {
       "Key": "lookingForPokemon",
@@ -249,7 +253,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Ищем приманенного покемона..."
+      "Value": "Ищем покемона с приманкой..."
     },
     {
       "Key": "pokemonSkipped",
@@ -282,6 +286,47 @@
     {
       "Key": "pokemonIgnoreFilter",
       "Value": "[Фильтр игнора покемонов] - Игнорируем {0} как указано в настройках"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "ПОПЫТКА"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "ОШИБКА"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "ВЫРВАЛСЯ"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "СБЕЖАЛ"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "ПРОПУЩЕН"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "УСПЕХ"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Из яйца в инкубаторе вылупился: {0}"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "ОБЫЧНЫЙ"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "ПРИМАНКА"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "ПРЯНОСТЬ"
     }
+
   ]
 }

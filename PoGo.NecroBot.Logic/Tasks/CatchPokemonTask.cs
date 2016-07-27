@@ -103,8 +103,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
 
                 evt.CatchType = encounter is EncounterResponse
-                    ? "Normal"
-                    : encounter is DiskEncounterResponse ? "Lure" : "Incense";
+                    ? ctx.Translations.GetTranslation(Common.TranslationString.CatchTypeNormal)
+                    : encounter is DiskEncounterResponse ? ctx.Translations.GetTranslation(Common.TranslationString.CatchTypeLure) : ctx.Translations.GetTranslation(Common.TranslationString.CatchTypeIncense);
                 evt.Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
                 evt.Level =
                     PokemonInfo.GetLevel(encounter is EncounterResponse

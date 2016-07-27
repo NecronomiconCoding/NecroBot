@@ -110,6 +110,15 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.DesiredDestTooFar, "Your desired destination of {0}, {1} is too far from your current position of {2}, {3}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.PokemonRename, "Pokemon {0} ({1}) renamed from {2} to {3}."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.PokemonIgnoreFilter, "[Pokemon ignore filter] - Ignoring {0} as defined in settings"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchStatusAttempt, "CatchAttempt"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchStatusError, "CatchError"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchStatusEscape, "CatchEscape"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchStatusFlee, "CatchFlee"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchStatusMissed, "CatchMissed"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchStatusSuccess, "CatchSuccess"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchTypeNormal, "Normal"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchTypeLure, "Lure"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchTypeIncense, "Incense"),
 
         };
 
@@ -249,5 +258,13 @@ namespace PoGo.NecroBot.Logic.Common
         DesiredDestTooFar,
         PokemonRename,
         PokemonIgnoreFilter,
+        CatchStatusError,
+        CatchStatusEscape,
+        CatchStatusFlee,
+        CatchStatusMissed,
+        CatchStatusSuccess,
+        CatchTypeNormal,
+        CatchTypeLure,
+        CatchTypeIncense,
     }
 }
