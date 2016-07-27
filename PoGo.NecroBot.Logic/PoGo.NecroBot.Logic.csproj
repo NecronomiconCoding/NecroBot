@@ -68,6 +68,7 @@
     <Compile Include="Event\TransferPokemonEvent.cs" />
     <Compile Include="Event\UpdatePositionEvent.cs" />
     <Compile Include="Event\UseBerryEvent.cs" />
+    <Compile Include="Event\EggIncubatorStatusEvent.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="LogicClient.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Event\UseLuckyEggEvent.cs" />
     <Compile Include="State\VersionCheckState.cs" />
     <Compile Include="Event\WarnEvent.cs" />
+    <Compile Include="Tasks\UseIncubatorsTask.cs" />
     <Compile Include="Tasks\UseNearbyPokestopsTask.cs" />
     <Compile Include="Utils\GPXReader.cs" />
     <Compile Include="Logging\ILogger.cs" />
