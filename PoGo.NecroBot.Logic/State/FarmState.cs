@@ -42,8 +42,6 @@ namespace PoGo.NecroBot.Logic.State
                 await FarmPokestopsTask.Execute(ctx, machine);
             }
 
-            await Task.Delay(5000);
-
             return this;
         }
     }

@@ -31,7 +31,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
                     ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
-                await Task.Delay(distance > 100 ? 5000 : 500);
+                await Task.Delay(distance > 100 ? 3000 : 500);
 
                 var encounter = await ctx.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId);
 
