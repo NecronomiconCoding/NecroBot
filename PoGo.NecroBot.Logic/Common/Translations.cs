@@ -103,12 +103,13 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LookingForPokemon, "Looking for pokemon..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LookingForLurePokemon, "Looking for lure pokemon..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.PokemonSkipped, "Skipped {0}"),
-            new KeyValuePair<TranslationString, string>(Common.TranslationString.InvFullTransferring, "PokemonInventory is Full.Transferring pokemons..."),
+        new KeyValuePair<TranslationString, string>(Common.TranslationString.InvFullTransferring, "PokemonInventory is Full.Transferring pokemons..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.InvFullTransferManually, "PokemonInventory is Full.Please Transfer pokemon manually or set TransferDuplicatePokemon to true in settings..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.EncounterProblem, "Encounter problem: {0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.EncounterProblemLurePokemon, "Encounter problem: Lure pokemon {0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.DesiredDestTooFar, "Your desired destination of {0}, {1} is too far from your current position of {2}, {3}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.PokemonRename, "Pokemon {0} ({1}) renamed from {2} to {3}."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.PokemonIgnoreFilter, "[Pokemon ignore filter] - Ignoring {0} as defined in settings"),
 
         };
 
@@ -247,5 +248,6 @@ namespace PoGo.NecroBot.Logic.Common
         LookingForLurePokemon,
         DesiredDestTooFar,
         PokemonRename,
+        PokemonIgnoreFilter,
     }
 }
