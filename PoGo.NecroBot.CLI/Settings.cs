@@ -239,6 +239,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseGpxPathing = false;
         public int UseLuckyEggsMinPokemonAmount = 30;
         public bool UseLuckyEggsWhileEvolving = false;
+	public bool UseConstantLuckyEgg = true;
         public bool UsePokemonToNotCatchFilter = false;
         public double WalkingSpeedInKilometerPerHour = 50;
         public int WebSocketPort = 14251;
@@ -347,6 +348,7 @@ namespace PoGo.NecroBot.CLI
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => _settings.KeepMinDuplicatePokemon;
         public bool PrioritizeIvOverCp => _settings.PrioritizeIvOverCp;
+  	public bool UseConstantLuckyEgg => _settings.UseConstantLuckyEgg;
         public int MaxTravelDistanceInMeters => _settings.MaxTravelDistanceInMeters;
         public string GpxFile => _settings.GpxFile;
         public bool UseGpxPathing => _settings.UseGpxPathing;

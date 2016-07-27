@@ -41,6 +41,10 @@ namespace PoGo.NecroBot.Logic.State
             {
                 await FarmPokestopsTask.Execute(ctx, machine);
             }
+ 	    if (ctx.LogicSettings.UseConstantLuckyEgg)
+            {
+                await UseLuckyEgg.Execute(ctx, machine);
+            }
 
             await Task.Delay(10000);
 
