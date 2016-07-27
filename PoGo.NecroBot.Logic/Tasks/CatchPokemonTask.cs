@@ -132,41 +132,23 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 machine.Fire(evt);
 
-                attemptCounter++;
-                await Task.Delay(2000);
-                if (encounter?.CaptureProbability?.CaptureProbability_ != null)
-                {
-                    evt.Id = pokemon.PokemonId;
-                    evt.Level = PokemonInfo.GetLevel(encounter.WildPokemon?.PokemonData);
-                    evt.Cp = encounter.WildPokemon?.PokemonData?.Cp ?? 0;
-                    evt.MaxCp = PokemonInfo.CalculateMaxCp(encounter.WildPokemon?.PokemonData);
-                    evt.Perfection =
-                        Math.Round(PokemonInfo.CalculatePokemonPerfection(encounter.WildPokemon?.PokemonData));
-                    evt.Probability =
-                        Math.Round(Convert.ToDouble(encounter.CaptureProbability?.CaptureProbability_.First())*100, 2);
-                    evt.Distance = distance;
-                    evt.Pokeball = pokeball;
-                    evt.Attempt = attemptCounter;
-                    ctx.Inventory.RefreshCachedInventory().Wait();
-                   
-
                 if ((caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess) &&
                     (ctx.LogicSettings.PokemonsToImmediatelyTransfer.Contains(pokemon.PokemonId)))
                 {
-                    Thread.Sleep(2000);
-
                     if ((encounter.WildPokemon != null) &&
                         (encounter.WildPokemon.PokemonData != null))
                     {
-                        ctx.Client.Inventory.TransferPokemon(encounter.WildPokemon.PokemonData.Id).Wait();
+                        await Task.Delay(2000);
+
+                        await ctx.Client.Inventory.TransferPokemon(encounter.WildPokemon.PokemonData.Id);
                         ctx.Inventory.DeletePokemonFromInvById(encounter.WildPokemon.PokemonData.Id);
 
                         var bestPokemonOfType = ctx.LogicSettings.PrioritizeIvOverCp
-                            ? ctx.Inventory.GetHighestPokemonOfTypeByIv(encounter.WildPokemon.PokemonData).Result
-                            : ctx.Inventory.GetHighestPokemonOfTypeByCp(encounter.WildPokemon.PokemonData).Result;
+                            ? await ctx.Inventory.GetHighestPokemonOfTypeByIv(encounter.WildPokemon.PokemonData)
+                            : await ctx.Inventory.GetHighestPokemonOfTypeByCp(encounter.WildPokemon.PokemonData);
 
-                        var pokemonSettings = ctx.Inventory.GetPokemonSettings().Result;
-                        var pokemonFamilies = ctx.Inventory.GetPokemonFamilies().Result;
+                        var pokemonSettings = await ctx.Inventory.GetPokemonSettings();
+                        var pokemonFamilies = await ctx.Inventory.GetPokemonFamilies();
 
                         var setting = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
                         var family = pokemonFamilies.Single(x => x.FamilyId == setting.FamilyId);
@@ -183,8 +165,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                 }
 
-                    attemptCounter++;
-                Thread.Sleep(2000);
+                attemptCounter++;
+                await Task.Delay(2000);
+
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
