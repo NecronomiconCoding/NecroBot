@@ -92,6 +92,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             await RecycleItemsTask.Execute(ctx, machine);
 
+                            if (ctx.LogicSettings.UseEggIncubators)
+                            {
+                                await UseIncubatorsTask.Execute(ctx, machine);
+                            }
+
                             if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                                 ctx.LogicSettings.EvolveAllPokemonAboveIv)
                             {

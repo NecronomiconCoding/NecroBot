@@ -47,7 +47,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Exp = evolveResponse.ExperienceAwarded,
                         Result = evolveResponse.Result
                     });
-
                     await Randomizer.Sleep(4000, 0.3);
                 }
             }
