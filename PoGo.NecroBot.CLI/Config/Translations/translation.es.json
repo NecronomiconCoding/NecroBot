@@ -101,19 +101,19 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "Mostrando mayor CP"
+      "Value": "Mostrando los de mayor CP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Mostrando mayor Perfección"
+      "Value": "Mostrando los demayor Perfección"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Mostrando mayor Nivel"
+      "Value": "Mostrando los de mayor Nivel"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Asegurate de que Lat y Lng son correctos, el programa se cerrará en caso contrario! Lat: {0} Lng: {1}"
+      "Value": "Asegurate de que Lat y Lng son correctos, en caso contrario cierre el programa! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
