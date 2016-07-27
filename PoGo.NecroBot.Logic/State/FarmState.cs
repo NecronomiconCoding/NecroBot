@@ -27,6 +27,11 @@ namespace PoGo.NecroBot.Logic.State
 
             await RecycleItemsTask.Execute(ctx, machine);
 
+            if (ctx.LogicSettings.UseEggIncubators)
+            {
+                await UseIncubatorsTask.Execute(ctx, machine);
+            }
+
             if (ctx.LogicSettings.UseGpxPathing)
             {
                 await FarmPokestopsGpxTask.Execute(ctx, machine);

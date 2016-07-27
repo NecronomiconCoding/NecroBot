@@ -168,6 +168,24 @@ namespace PoGo.NecroBot.Logic
             return pokemons.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(limit);
         }
 
+        public async Task<IEnumerable<PokemonData>> GetEggs()
+        {
+            var inventory = await GetCachedInventory();
+            return
+                inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonData)
+                    .Where(p => p != null && p.IsEgg);
+        }
+
+        public async Task<IEnumerable<EggIncubator>> GetEggIncubators()
+        {
+            var inventory = await GetCachedInventory();
+            return
+                inventory.InventoryDelta.InventoryItems
+                .Where(x => x.InventoryItemData.EggIncubators != null)
+                .SelectMany(i => i.InventoryItemData.EggIncubators.EggIncubator)
+                .Where(i => i != null);
+        }
+
         public async Task<int> GetItemAmountByType(ItemId type)
         {
             var pokeballs = await GetItems();
@@ -206,7 +224,7 @@ namespace PoGo.NecroBot.Logic
                 .Where(p => p != null);
         }
 
-        public async Task<IEnumerable<PokemonFamily>> GetPokemonFamilies()
+        public async Task<List<PokemonFamily>> GetPokemonFamilies()
         {
             var inventory = await GetCachedInventory();
 
@@ -221,7 +239,7 @@ namespace PoGo.NecroBot.Logic
             };
 
 
-            return families;
+            return families.ToList();
         }
 
         public async Task<IEnumerable<PokemonData>> GetPokemons()

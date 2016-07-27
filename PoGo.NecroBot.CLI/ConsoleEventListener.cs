@@ -57,6 +57,14 @@ namespace PoGo.NecroBot.CLI
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventItemRecycled, evt.Count, evt.Id), LogLevel.Recycling);
         }
 
+        public void HandleEvent(EggIncubatorStatusEvent evt, Context ctx)
+        {
+            if (evt.WasAddedNow)
+                Logger.Write($"Putting egg in incubator: {evt.KmRemaining:0.00}km left");
+            else
+                Logger.Write($"Incubator status update: {evt.KmRemaining:0.00}km left");
+        }
+
         public void HandleEvent(FortUsedEvent evt, Context ctx)
         {
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventFortUsed, evt.Exp, evt.Gems, evt.Items), LogLevel.Pokestop);
@@ -93,7 +101,7 @@ namespace PoGo.NecroBot.CLI
                 : ctx.Translations.GetTranslation(TranslationString.CatchStatus, evt.Status);
 
             var familyCandies = evt.FamilyCandies > 0
-                ? ctx.Translations.GetTranslation(TranslationString.Candies)
+                ? ctx.Translations.GetTranslation(TranslationString.Candies, evt.FamilyCandies)
                 : "";
 
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventPokemonCapture, catchStatus, catchType, evt.Id,
