@@ -18,14 +18,16 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static DateTime _lastLuckyEggTime;
         public static async Task Execute(Context ctx, StateMachine machine)
         {
+            var pokemonToEvolveTask = await ctx.Inventory.GetPokemonToEvolve(ctx.LogicSettings.PokemonsToEvolve);
+            var pokemonToEvolve = pokemonToEvolveTask;
             if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
             {
-                await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+                if (pokemonToEvolve.Count() >= ctx.LogicSettings.UseLuckyEggsMinPokemonAmount)
+                {
+                    await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+                }
             }
 
-            var pokemonToEvolveTask = await ctx.Inventory.GetPokemonToEvolve(ctx.LogicSettings.PokemonsToEvolve);
-
-            var pokemonToEvolve = pokemonToEvolveTask;
             foreach (var pokemon in pokemonToEvolve)
             {
                 var evolveResponse = await ctx.Client.Inventory.EvolvePokemon(pokemon.Id);
