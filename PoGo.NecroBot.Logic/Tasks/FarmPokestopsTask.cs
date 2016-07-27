@@ -84,7 +84,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
 
                 POGOProtos.Networking.Responses.FortSearchResponse fortSearch;
-                var fortSearched = false;
                 var fortRetry = 0;
                 do
                 {
@@ -99,7 +98,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
                         });
 
-                        fortSearched = true;
+                        break; //Continue with program as loot was succesfull.
                     } else { //If fort gave 0 experience, retry 40 times to clear softban.
                         fortRetry += 1;
 
@@ -112,7 +111,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         await Task.Delay(500 + random.Next(0, 200));  //Randomized pause
                     }
 
-                    } while ((fortSearched == false) || fortRetry >= 40); //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
+                    } while (fortRetry < 40); //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
                     await Task.Delay(1000);
                 if (++stopsHit % 5 == 0) //TODO: OR item/pokemon bag is full
