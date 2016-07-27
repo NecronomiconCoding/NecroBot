@@ -22,8 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
+      "Value": "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -32,6 +31,10 @@
     {
       "Key": "eventFortUsed",
       "Value": "EP: {0}, Gems: {1}, Items: {2}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Loot sammeln fehlgeschlagen, eventueller Softban. Unban in: {0}/{1}"
     },
     {
       "Key": "eventFortTargeted",
@@ -63,12 +66,11 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value":
-        "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernung | mit einem {9} ({10} verbleibend). | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernung | mit einem {9} ({10} verbleibend). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Keine Pokébälle mehr! - Wir haben ein {0} mit WP {1} verpasst!"
+      "Value": "Keine Pokébälle mehr! - Wir haben ein {0} mit {1} WP verpasst!"
     },
     {
       "Key": "catchStatusAttempt",
@@ -83,7 +85,7 @@
       "Value": "Bonbons: {0}"
     },
     {
-      "Key": "unhandledGPXData",
+      "Key": "unhandledGpxData",
       "Value": "Unerwartete Daten in GPX Datei, versuche zu überspringen."
     },
     {
@@ -99,7 +101,7 @@
       "Value": "Name"
     },
     {
-      "Key": "displayHighestsCPHeader",
+      "Key": "displayHighestsCpHeader",
       "Value": "ZeigeHöchsteWP"
     },
     {
@@ -121,6 +123,10 @@
     {
       "Key": "incubatorStatusUpdate",
       "Value": "Ei-Brutmaschine Status Update: {0:0.00}km verbleibend"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Ei ist geschlüpft: {0}"
     }
   ]
 }
