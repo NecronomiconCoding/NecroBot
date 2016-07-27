@@ -10,6 +10,9 @@ using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
+using PoGo.NecroBot.Logic.Localization;
+using PoGo.NecroBot.Logic.Service;
+using PoGo.NecroBot.Logic.Tasks;
 
 #endregion
 
@@ -26,6 +29,22 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
             var settings = GlobalSettings.Load(subPath);
+
+            /*SimpleSession session = new SimpleSession
+            {
+                _client = new PokemonGo.RocketAPI.Client(new ClientSettings(settings)),
+                _dispatcher = new EventDispatcher(),
+                _localizer = new Localizer()
+            };
+
+            BotService service = new BotService
+            {
+                _session = session,
+                _loginTask = new Login(session)
+            };
+
+            service.Run();
+            */
 
             var machine = new StateMachine();
             var stats = new Statistics();

@@ -1,4 +1,10 @@
-﻿using System;
+﻿using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Service;
+using PokemonGo.RocketAPI;
+using PokemonGo.RocketAPI.Enums;
+using PokemonGo.RocketAPI.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +18,43 @@ namespace PoGo.NecroBot.Logic.Tasks
     }
     public class Login : ILogin
     {
-        private readonly PokemonGo.RocketAPI.Rpc.Login _loginApi;
-        public Login(PokemonGo.RocketAPI.Rpc.Login loginApi)
+        private readonly ISession _session;
+
+        public Login(ISession session)
         {
-            _loginApi = loginApi;
+            _session = session;
         }
 
         public void DoLogin()
         {
-
+            try
+            {
+                if (_session.Client.AuthType == AuthType.Ptc)
+                {
+                    try
+                    {
+                        _session.Client.Login.DoPtcLogin().Wait();
+                    }
+                    catch (AggregateException ae)
+                    {
+                        throw ae.Flatten().InnerException;
+                    }
+                }
+                else
+                {
+                    _session.Client.Login.DoGoogleLogin().Wait();
+                }
+            }
+            catch (PtcOfflineException)
+            {
+                _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Localizer.GetFormat(TranslationString.PtcOffline) });
+                _session.EventDispatcher.Send(new NoticeEvent { Message = _session.Localizer.GetFormat(TranslationString.TryingAgainIn, 20) });
+                
+            }
+            catch (AccountNotVerifiedException)
+            {
+                _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Localizer.GetFormat(TranslationString.AccountNotVerified) });
+            }
         }
     }
 }
