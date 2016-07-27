@@ -1,0 +1,84 @@
+{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "SuperBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "HyperBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MeisterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "unbekannte Authentifizierung in config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value": "Du bist ausserhalb des definierten Radius! Laufe zum Start ({0}m entfernt) in 5 Sekunden. Ist deine Coords.ini korrekt?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Keine nutzbaren Pokestops im Umfeld. Ist dein Radius zu klein?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "XP: {0}, Coins: {1}, Items: {2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} in ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Eingeloggt als {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Benutze Gluecksei, {0} verbleibend"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} erfolgreich fuer {1}xp"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "{0} fehlgeschlagen. Das Ergebnis war {1}, stoppe Entwicklung {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Bester CP: {3}  IV: {4}%] (Bonbons: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} gefangen ({10} verbleibend). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Keine Baelle - Wir haben ein {0} mit {1} CP verpasst."
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Versuch #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Bonbons: {0}"
+    }
+  ]
+}
