@@ -125,6 +125,9 @@
     </None>
     <None Include="Config\log4net.config" />
     <None Include="Config\log4net.unix.config" />
+    <None Include="Config\Translations\translation.ru_RU.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="cert.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
