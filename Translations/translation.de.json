@@ -2,7 +2,7 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "Pokeball"
+      "Value": "Pokéball"
     },
     {
       "Key": "greatPokeball",
@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Keine Pokebälle mehr! - Wir haben ein {0} mit WP {1} verpasst!"
+      "Value": "Keine Pokébälle mehr! - Wir haben ein {0} mit WP {1} verpasst!"
     },
     {
       "Key": "catchStatusAttempt",
