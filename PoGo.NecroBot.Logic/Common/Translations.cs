@@ -97,6 +97,10 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.FinishedDownloadingRelease, "Finished downloading newest Release..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.FinishedUnpackingFiles, "Finished unpacking files..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.UpdateFinished, "Update finished, you can close this window now."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LookingForIncensePokemon, "Looking for incense pokemon..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.PokemonSkipped, "Skipped {0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.InvFullTransferring, "PokemonInventory is Full.Transferring pokemons..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.InvFullTransferManually, "PokemonInventory is Full.Please Transfer pokemon manually or set TransferDuplicatePokemon to true in settings..."),
         };
 
         public static Translations Default => new Translations();
@@ -223,5 +227,9 @@ namespace PoGo.NecroBot.Logic.Common
         FinishedDownloadingRelease,
         FinishedUnpackingFiles,
         UpdateFinished,
+        LookingForIncensePokemon,
+        PokemonSkipped,
+        InvFullTransferring,
+        InvFullTransferManually,
     }
 }
