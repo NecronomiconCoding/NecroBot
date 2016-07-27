@@ -91,6 +91,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
 
                 FortSearchResponse fortSearch;
+                var TimesZeroXPawarded = 0;
                 var fortRetry = 0;      //Current check
                 var retryNumber = 40;   //How many times it needs to check to clear softban
                 var zeroCheck = 5;      //How many times it checks fort before it thinks it's softban
