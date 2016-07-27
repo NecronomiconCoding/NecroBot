@@ -278,11 +278,47 @@
     },
     {
       "Key": "pokemonRename",
-      "Value": "Pkemon {0} ({1}) renomé de {2} vers {3}."
+      "Value": "Pokemon {0} ({1}) renomé de {2} vers {3}."
     },
     {
       "Key": "pokemonIgnoreFilter",
       "Value": "[Pokemon ignoré par le filtre] - Ignore {0} comme défini dans la configuration"
+    },    
+    {
+      "Key": "CatchStatusAttempt",
+      "Value": "CaptureTentative"
+    },
+    {
+      "Key": "CatchStatusError",
+      "Value": "CaptureErreur"
+    },
+    {
+      "Key": "CatchStatusEscape",
+      "Value": "CaptureEchapé"
+    },
+    {
+      "Key": "CatchStatusFlee",
+      "Value": "CaptureEnvolé"
+    },
+    {
+      "Key": "CatchStatusMissed",
+      "Value": "CaptureEchoué"
+    },
+    {
+      "Key": "CatchStatusSuccess",
+      "Value": "CaptureRéussie"
+    },
+    {
+      "Key": "CatchTypeNormal",
+      "Value": "Normal"
+    },
+    {
+      "Key": "CatchTypeLure",
+      "Value": "Lure"
+    },
+    {
+      "Key": "CatchTypeIncense",
+      "Value": "Incense"
     }
   ]
 }
