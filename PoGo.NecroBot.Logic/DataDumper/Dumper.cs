@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
@@ -10,18 +11,17 @@ namespace PoGo.NecroBot.Logic.DataDumper
     public static class Dumper
     {
         private static IDumper _dumper;
-        private static string _subPath;
 
         /// <summary>
         ///     This is used for dumping contents to a file stored in the Logs folder.
         /// </summary>
         /// <param name="data">Dumps the string data to the file</param>
         /// <param name="filename">Filename to be used for naming the file.</param>
-        private static void DumpToFile(string data, string filename)
+        private static void DumpToFile(Context ctx, string data, string filename)
         {
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + "\\Dumps");
+            Directory.CreateDirectory(ctx.Settings.ProfilePath + $"{Path.DirectorySeparatorChar}Dumps");
 
-            string path = Directory.GetCurrentDirectory() + _subPath + $"\\Dumps\\NecroBot-{filename}.txt";
+            string path = ctx.Settings.ProfilePath + $"{Path.DirectorySeparatorChar}Dumps{Path.DirectorySeparatorChar}NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt";
 
             using (
                 var dumpFile =
@@ -34,24 +34,23 @@ namespace PoGo.NecroBot.Logic.DataDumper
         }
 
         /// <summary>
-        ///     Set the Dumper.
+        ///     Set the dumper.
         /// </summary>
-        /// <param name="logger"></param>
-        public static void SetDumper(IDumper dumper, string subPath = "")
+        /// <param name="dumper"></param>
+        public static void SetDumper(IDumper dumper)
         {
             _dumper = dumper;
-            _subPath = subPath;
         }
 
         /// <summary>
         ///     Clears the specified dumpfile.
         /// </summary>
         /// <param name="filename">File to clear/param>
-        public static void ClearDumpFile(string filename)
+        public static void ClearDumpFile(Context ctx, string filename)
         {
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + "\\Dumps");
+            Directory.CreateDirectory(ctx.Settings.ProfilePath + $"{Path.DirectorySeparatorChar}Dumps");
 
-            string path = Directory.GetCurrentDirectory() + _subPath + $"\\Dumps\\NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt";
+            string path = ctx.Client.Settings.ProfilePath + $"{Path.DirectorySeparatorChar}Dumps{Path.DirectorySeparatorChar}NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt";
 
             // Clears all contents of a file first if overwrite is true
             File.WriteAllText(path, string.Empty);
@@ -62,11 +61,11 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// </summary>
         /// <param name="data">Dumps the string data to the file</param>
         /// <param name="filename">Filename to be used for naming the file.</param>
-        public static void Dump(string data, string filename)
+        public static void Dump(Context ctx, string data, string filename)
         {
-            string uniqueFileName = $"{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}";
+            string uniqueFileName = $"{filename}";
 
-            DumpToFile(data, uniqueFileName);
+            DumpToFile(ctx, data, uniqueFileName);
         }
     }
 }

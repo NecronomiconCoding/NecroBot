@@ -261,6 +261,7 @@ namespace PoGo.NecroBot.CLI
         public double DefaultLatitude => _settings.DefaultLatitude;
         public double DefaultLongitude => _settings.DefaultLongitude;
         public double DefaultAltitude => _settings.DefaultAltitude;
+        public string ProfilePath => GlobalSettings.ProfilePath;
 
         public string GoogleRefreshToken
         {
