@@ -21,7 +21,6 @@ namespace PoGo.NecroBot.Logic.Tasks
     public static class FarmPokestopsTask
     {
         public static int TimesZeroXPawarded;
-
         public static async Task Execute(Context ctx, StateMachine machine)
         {
             var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
@@ -96,6 +95,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     fortSearch = await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                     if (fortSearch.ExperienceAwarded == 0) TimesZeroXPawarded++;
+                    if (fortSearch.ExperienceAwarded > 0 && TimesZeroXPawarded > 0) TimesZeroXPawarded = 0;
                     if (TimesZeroXPawarded <= 5)
                     {
                         machine.Fire(new FortUsedEvent
