@@ -282,7 +282,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Pokemon ignoré par le filtre] - Ignore{0} comme défini dans la configuration"
+      "Value": "[Pokemon ignoré par le filtre] - Ignore {0} comme défini dans la configuration"
     }
   ]
 }
