@@ -26,7 +26,6 @@ namespace PoGo.NecroBot.CLI
         public string PtcPassword;
         public string PtcUsername;
 
-
         public void Load(string path)
         {
             _filePath = path;
@@ -43,7 +42,6 @@ namespace PoGo.NecroBot.CLI
             }
             else
             {
-                Console.WriteLine("file not found=" + path);
                 string type;
                 do
                 {
@@ -104,8 +102,8 @@ namespace PoGo.NecroBot.CLI
         public bool AutoUpdate = true;
         public string ConfigPath;
         public double DefaultAltitude = 10;
-        public double DefaultLatitude = 40.73748216170345;
-        public double DefaultLongitude = -74.00781154632568;
+        public double DefaultLatitude = 52.379189;
+        public double DefaultLongitude = 4.899431;
         public int DelayBetweenPokemonCatch = 2000;
         public float EvolveAboveIvValue = 95;
         public bool EvolveAllPokemonAboveIv = false;
@@ -259,7 +257,7 @@ namespace PoGo.NecroBot.CLI
                 var input = File.ReadAllText(fullPath);
 
                 var jsonSettings = new JsonSerializerSettings();
-                jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
                 jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                 jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
@@ -277,24 +275,9 @@ namespace PoGo.NecroBot.CLI
             settings.ProfilePath = profilePath;
             settings.ConfigPath = configPath;
             settings.Save(fullPath);
-            settings.Auth.Load(Path.Combine(configPath, AdjustAuthFile()));
-            return settings;
-        }
+            settings.Auth.Load(Path.Combine(configPath, "auth.json"));
 
-        private static string AdjustAuthFile()
-        {
-            var authId = "auth.json";
-            var args = Environment.GetCommandLineArgs();
-            foreach (var item in args)
-            {
-                Console.WriteLine(item);
-                if (item.Contains(@"/authFile="))
-                {
-                    authId = item.Replace(@"/authFile=", "");
-                }
-            }
-            Console.WriteLine("authId=" + authId);
-            return authId;
+            return settings;
         }
 
         public void Save(string fullPath)
