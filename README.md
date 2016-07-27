@@ -22,6 +22,13 @@ Chatting about this Repository can be done on our Discord: https://discord.gg/Vs
  - [Throws away unneeded items]
  - [Humanlike Walking]
  - [Configurable Custom Pathing]
+ - [Softban bypass]
+ - [AutoUpdate / VersionCheck]
+ - [Multilanguage Support]
+ - [Use lucky egg while evolve]
+ - [Egg Hatching Automatically]
+ - [Custom GPX path]
+ - [Multi bot support]
 
 <h2><a name="getting-started">Getting Started</a></h2>
 Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.
