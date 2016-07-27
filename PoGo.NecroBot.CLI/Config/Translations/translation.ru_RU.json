@@ -1,0 +1,124 @@
+﻿{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "GreatBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "UltraBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "Неизвестный AuthType в config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value": "Вы находитесь вне указанного радиуса! Идем кк точке старта ({0}m away) через 5 сек. Ваш Coords.ini файл корректен?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Не найдено активных PokeStops в вашей зоне. Может указана слишком мальенькая максимальная дистанция поиска в настройках?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "XP: {0}, Gems: {1}, Предметов: {2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} через ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Играем за {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Использовано Lucky Egg, осталось: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} успешно за {1}xp"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Не удалось {0}. Результат: {1}, прекращаем эволюционирование {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Лучший CP: {3}  IV: {4}%] (Конфеток: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Шанс: {7}% | {8}m дист | с {9} ({10} осталось). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Нет Pokeball'ов - Мы упустили {0} с CP {1}"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Попытка #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Конфеток: {0}"
+    },
+    {
+      "Key": "unhandledGPXData",
+      "Value": "Неизвестные данные в GPX файле, пробуем пропустить."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "ТОП покемонов"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "идеальный"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "имя"
+    },
+    {
+      "Key": "displayHighestsCPHeader",
+      "Value": "ТОП по CP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "ТОП по идеальным статам"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Убедитесь, что Широта и Долгота верны! Закройте программу если это не так! Широта: {0} Долгота: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Кладем яйцо в инкубатор: {0:0.00}км осталось"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Статус инкубатора: {0:0.00}км осталось"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "ТОП по уровню"
+    }
+  ]
+}

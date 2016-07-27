@@ -140,7 +140,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static List<GpxReader.Trk> GetGpxTracks(Context ctx)
         {
             var xmlString = File.ReadAllText(ctx.LogicSettings.GpxFile);
-            var readgpx = new GpxReader(xmlString);
+            var readgpx = new GpxReader(xmlString, ctx);
             return readgpx.Tracks;
         }
 
