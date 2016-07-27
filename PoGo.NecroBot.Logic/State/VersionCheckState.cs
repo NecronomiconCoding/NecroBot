@@ -40,19 +40,18 @@ namespace PoGo.NecroBot.Logic.State
                     machine.Fire(new UpdateEvent
                     {
                         Message =
-                            $"Perfect! You already have the newest Version {RemoteVersion}"
+                            ctx.Translations.GetTranslation(Common.TranslationString.GotUpToDateVersion, RemoteVersion)
                     });
                     return new LoginState();
                 }
                 machine.Fire(new UpdateEvent
                 {
-                    Message =
-                        $"AutoUpdater is disabled. Get the latest release from: {LatestRelease}\n "
+                    Message = ctx.Translations.GetTranslation(Common.TranslationString.AutoUpdaterDisabled, LatestRelease)                  
                 });
 
                 return new LoginState();
             }
-            machine.Fire(new UpdateEvent {Message = "Downloading and apply Update...."});
+            machine.Fire(new UpdateEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.DownloadingUpdate)});
             var remoteReleaseUrl =
             $"https://github.com/NecronomiconCoding/NecroBot/releases/download/v{RemoteVersion}/";
             const string zipName = "Release.zip";
@@ -64,12 +63,12 @@ namespace PoGo.NecroBot.Logic.State
             var destinationDir = baseDir + Path.DirectorySeparatorChar;
             Console.WriteLine(downloadLink);
             if (!DownloadFile(downloadLink, downloadFilePath)) return new LoginState();
-            machine.Fire(new UpdateEvent {Message = "Finished downloading newest Release..."});
+            machine.Fire(new UpdateEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.FinishedDownloadingRelease});
             if (!UnpackFile(downloadFilePath, tempPath)) return new LoginState();
-            machine.Fire(new UpdateEvent {Message = "Finished unpacking files..."});
+            machine.Fire(new UpdateEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.FinishedUnpackingFiles)});
 
             if (!MoveAllFiles(extractedDir, destinationDir)) return new LoginState();
-            machine.Fire(new UpdateEvent {Message = "Update finished, you can close this window now."});
+            machine.Fire(new UpdateEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.UpdateFinished)});
 
             Process.Start(Assembly.GetEntryAssembly().Location);
             Environment.Exit(-1);

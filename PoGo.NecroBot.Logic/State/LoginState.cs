@@ -14,7 +14,7 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
-            machine.Fire(new NoticeEvent {Message = $"Logging in using {ctx.Settings.AuthType}"});
+            machine.Fire(new NoticeEvent { Message = ctx.Translations.GetTranslation(Common.TranslationString.LoggingIn, ctx.Settings.AuthType) });
             try
             {
                 switch (ctx.Settings.AuthType)
@@ -33,7 +33,7 @@ namespace PoGo.NecroBot.Logic.State
                         await ctx.Client.Login.DoGoogleLogin();
                         break;
                     default:
-                        machine.Fire(new ErrorEvent {Message = "wrong AuthType"});
+                        machine.Fire(new ErrorEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.WrongAuthType)});
                         return null;
                 }
             }
@@ -41,15 +41,15 @@ namespace PoGo.NecroBot.Logic.State
             {
                 machine.Fire(new ErrorEvent
                 {
-                    Message = "PTC Servers are probably down OR your credentials are wrong. Try google"
+                    Message = ctx.Translations.GetTranslation(Common.TranslationString.PtcOffline)
                 });
-                machine.Fire(new NoticeEvent {Message = "Trying again in 20 seconds..."});
+                machine.Fire(new NoticeEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.TryingAgainIn, 20)});
                 await Task.Delay(20000);
                 return this;
             }
             catch (AccountNotVerifiedException)
             {
-                machine.Fire(new ErrorEvent {Message = "Account not verified. - Exiting"});
+                machine.Fire(new ErrorEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.AccountNotVerified)});
                 return null;
             }
 
