@@ -2,7 +2,8 @@
 {
     public class FortFailedEvent : IEvent
     {
-        public int Retry;
+        public string Name;
+        public int Try;
         public int Max;
     }
 }

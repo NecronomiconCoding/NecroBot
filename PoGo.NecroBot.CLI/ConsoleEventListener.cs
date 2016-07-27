@@ -78,13 +78,13 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(FortUsedEvent evt, Context ctx)
         {
             Logger.Write(
-                ctx.Translations.GetTranslation(TranslationString.EventFortUsed, evt.Exp, evt.Gems, evt.Items),
+                ctx.Translations.GetTranslation(TranslationString.EventFortUsed, evt.Name, evt.Exp, evt.Gems, evt.Items),
                 LogLevel.Pokestop);
         }
 
         public void HandleEvent(FortFailedEvent evt, Context ctx)
         {
-            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventFortFailed, evt.Retry, evt.Max),
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventFortFailed, evt.Name, evt.Try, evt.Max),
                 LogLevel.Pokestop, ConsoleColor.DarkRed);
         }
 
