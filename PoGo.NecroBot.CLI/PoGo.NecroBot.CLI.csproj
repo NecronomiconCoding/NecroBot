@@ -133,6 +133,7 @@
     <None Include="supersocket.sh" />
     <None Include="Translations\translation.es.json" />
     <None Include="Translations\translation.it.json" />
+    <None Include="Translations\translation.nl.json" />
     <None Include="Translations\translation.pl.json" />
     <None Include="Translations\translation.zh_CN.json" />
   </ItemGroup>
