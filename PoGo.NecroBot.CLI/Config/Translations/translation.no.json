@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,7 +22,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Du er utenfor din definerte radius! Går tilbake til start ({0}m borte) om 5 sekund. Er Coords.ini filen korrekt?"
+      "Value":
+        "Du er utenfor din definerte radius! Går tilbake til start ({0}m borte) om 5 sekund. Er Coords.ini filen korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -62,7 +63,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11}"
     },
     {
       "Key": "eventNoPokeballs",

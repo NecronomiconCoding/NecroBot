@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI.Enums;
@@ -23,7 +24,7 @@ namespace PoGo.NecroBot.Logic.State
                         {
                             await ctx.Client.Login.DoPtcLogin();
                         }
-                        catch (System.AggregateException ae)
+                        catch (AggregateException ae)
                         {
                             throw ae.Flatten().InnerException;
                         }

@@ -23,59 +23,62 @@ namespace PoGo.NecroBot.Logic.State
         public const string LatestReleaseApi =
             "https://api.github.com/repos/NecronomiconCoding/NecroBot/releases/latest";
 
-        private const string LatestRelease = 
+        private const string LatestRelease =
             "https://github.com/NecronomiconCoding/NecroBot/releases";
-
-        private readonly string _remoteReleaseUrl =
-            $"https://github.com/NecronomiconCoding/NecroBot/releases/download/v{RemoteVersion}/";
 
         public static Version RemoteVersion;
 
         public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
+            await CleanupOldFiles();
             var autoUpdate = ctx.LogicSettings.AutoUpdate;
-            CleanupOldFiles();
-            var needupdate = IsLatest();
+            var needupdate =  IsLatest();
             if (!needupdate || !autoUpdate)
             {
-                if (!autoUpdate)
+                if (!needupdate)
                 {
                     machine.Fire(new UpdateEvent
                     {
                         Message =
-                            $"AutoUpdater is disabled. Get the latest release from: {LatestRelease}\n "
+                            $"Perfect! You already have the newest Version {RemoteVersion}"
                     });
+                    return new LoginState();
                 }
+                machine.Fire(new UpdateEvent
+                {
+                    Message =
+                        $"AutoUpdater is disabled. Get the latest release from: {LatestRelease}\n "
+                });
+
                 return new LoginState();
             }
-
             machine.Fire(new UpdateEvent {Message = "Downloading and apply Update...."});
-
+            var remoteReleaseUrl =
+            $"https://github.com/NecronomiconCoding/NecroBot/releases/download/v{RemoteVersion}/";
             const string zipName = "Release.zip";
-            var downloadLink = _remoteReleaseUrl + zipName;
+            var downloadLink = remoteReleaseUrl + zipName;
             var baseDir = Directory.GetCurrentDirectory();
             var downloadFilePath = Path.Combine(baseDir, zipName);
             var tempPath = Path.Combine(baseDir, "tmp");
             var extractedDir = Path.Combine(tempPath, "Release");
             var destinationDir = baseDir + Path.DirectorySeparatorChar;
-
+            Console.WriteLine(downloadLink);
             if (!DownloadFile(downloadLink, downloadFilePath)) return new LoginState();
-                machine.Fire(new UpdateEvent { Message = "Finished downloading newest Release..." });
-
+            machine.Fire(new UpdateEvent {Message = "Finished downloading newest Release..."});
             if (!UnpackFile(downloadFilePath, tempPath)) return new LoginState();
-                machine.Fire(new UpdateEvent { Message = "Finished unpacking files..." });
+            machine.Fire(new UpdateEvent {Message = "Finished unpacking files..."});
 
             if (!MoveAllFiles(extractedDir, destinationDir)) return new LoginState();
-                machine.Fire(new UpdateEvent {Message = "Update finished, you can close this window now."});
+            machine.Fire(new UpdateEvent {Message = "Update finished, you can close this window now."});
 
             Process.Start(Assembly.GetEntryAssembly().Location);
             Environment.Exit(-1);
             return null;
         }
 
-        public static void CleanupOldFiles()
+        public static async Task CleanupOldFiles()
         {
-            string tmpDir = Path.Combine(Directory.GetCurrentDirectory(), "tmp");
+            var tmpDir = Path.Combine(Directory.GetCurrentDirectory(), "tmp");
 
             if (Directory.Exists(tmpDir))
             {
@@ -107,6 +110,7 @@ namespace PoGo.NecroBot.Logic.State
                 try
                 {
                     client.DownloadFile(url, dest);
+                    Console.WriteLine(dest);
                 }
                 catch
                 {

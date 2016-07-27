@@ -1,8 +1,8 @@
-﻿{
+{
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "PokéBall"
+      "Value": "PokeBall"
     },
     {
       "Key": "greatPokeball",
@@ -10,7 +10,7 @@
     },
     {
       "Key": "ultraPokeball",
-      "Value": "UltraBall"
+      "Value": "HyperBall"
     },
     {
       "Key": "masterPokeball",
@@ -18,45 +18,43 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "AuthType desconocido en config.json"
+      "Value": "Type d'authentification inconnu dans le fichier config.json"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "¡Estas fuera del radio definido! Andando a la posición inicial (a {0}m) en 5 segundos. ¿Es correcto tu archivo Coords.ini?"
+      "Value": "VOus êtes en dehors de votre radius défini! Début de la marche ({0}m de distance) dans 5 secondes. Est-ce que le fichier Coords.ini est correct?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value":
-        "No se encontraron pokeparadas disponibles en tu area. ¿Has configurado una distancia máxima demasiado pequeña?"
+      "Value": "Aucun PokeStop trouvé dans votre zone. Est-ce que votre distance maximale est trop petite?"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "PX: {0}, Gemas: {1}, Objetos: {2}"
+      "Value": "XP: {0}, Gems: {1}, Objets: {2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} en ({1}m)"
+      "Value": "{0} à ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Jugando como {0}"
+      "Value": "Connecté en tant que {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Huevo Suerte usado. Te quedan {0}"
+      "Value": "Utilisation d'un Oeuf Chance, restant(s): {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0}, obtienes {1}px"
+      "Value": "{0} avec succès pour {1} XP"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Fallado {0}. El resultado fue {1}, parando de evolucionar {2}"
+      "Value": "{0} Échouée. Le résultat était {1}, arrêt de l'évolution {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- PC: {1}  IV: {2}%   [Mejor PC: {3}  IV: {4}%] (Caramelos: {5})"
+      "Value": "{0}\t- PC: {1}  IV: {2}%   [Meilleur PC: {3}  IV: {4}%] (Bonbons: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -64,16 +62,15 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value":
-        "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} restante(s)). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "¡Sin Pokéballs! - Hemos perdido un {0} con {1} PC :("
+      "Value": "Pas de Pokeball - {0} Manqué avec {1} PC"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} Intento #{1}"
+      "Value": "{0} Essai #{1}"
     },
     {
       "Key": "catchStatus",
@@ -81,7 +78,7 @@
     },
     {
       "Key": "candies",
-      "Value": "Caramelos: {0}"
+      "Value": "Bonbons: {0}"
     }
   ]
 }
