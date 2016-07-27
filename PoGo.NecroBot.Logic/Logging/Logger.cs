@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using PoGo.NecroBot.Logic.State;
 using System;
 using System.IO;
 
@@ -40,6 +41,12 @@ namespace PoGo.NecroBot.Logic.Logging
             _logger = logger;
             _subPath = subPath;
             Log($"Initializing Rocket logger at time {DateTime.Now}...");
+        }
+
+        public static void SetLoggerContext(Context ctx)
+        {
+            if (_logger != null)
+                _logger.SetContext(ctx);
         }
 
         /// <summary>

@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
@@ -15,5 +16,6 @@ namespace PoGo.NecroBot.Logic.Logging
         /// <param name="level">Optional. Default <see cref="LogLevel.Info" />.</param>
         /// <param name="color">Optional. Default automatic color.</param>
         void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black);
+        void SetContext(Context ctx);
     }
 }

@@ -119,6 +119,58 @@
     {
       "Key": "displayHighestsLevelHeader",
       "Value": "ТОП по уровню"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "ОШИБКА"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "ВНИМАНИЕ"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "ИНФО"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "ФАРМ"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "ПЕРЕРАБОТКА"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "ПОКЕМОН"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "ПЕРЕДАЧА"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "ЭВОЛЮЦИЯ"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "ЯГОДА"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "ЯЙЦО"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "ОТЛАДКА"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "ОБНОВЛЕНИЕ"
     }
   ]
 }

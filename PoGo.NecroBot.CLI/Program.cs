@@ -61,6 +61,7 @@ namespace PoGo.NecroBot.CLI
             machine.SetFailureState(new LoginState());
 
             var context = new Context(new ClientSettings(settings), new LogicSettings(settings));
+            Logger.SetLoggerContext(context);
 
             context.Navigation.UpdatePositionEvent += (lat, lng) => machine.Fire(new UpdatePositionEvent { Latitude = lat, Longitude = lng });
 

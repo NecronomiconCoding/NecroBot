@@ -98,6 +98,19 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.WelcomeWarning, "Make sure Lat & Lng are right. Exit Program if not! Lat: {0} Lng: {1}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.IncubatorPuttingEgg, "Putting egg in incubator: {0:0.00}km left"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.IncubatorStatusUpdate, "Incubator status update: {0:0.00}km left"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryError, "ERROR"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryAttention, "ATTENTION"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryInfo, "INFO"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryPokestop, "POKESTOP"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryFarming, "FARMING"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryRecycling, "RECYCLING"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryPKMN, "PKMN"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryTransfered, "TRANSFERED"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryEvolved, "EVOLVED"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryBerry, "BERRY"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryEgg, "EGG"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryDebug, "DEBUG"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryUpdate, "UPDATE"),
         };
     }
 
@@ -135,5 +148,18 @@ namespace PoGo.NecroBot.Logic.Common
         IncubatorPuttingEgg,
         IncubatorStatusUpdate,
         DisplayHighestsLevelHeader,
+        LogEntryError,
+        LogEntryAttention,
+        LogEntryInfo,
+        LogEntryPokestop,
+        LogEntryFarming,
+        LogEntryRecycling,
+        LogEntryPKMN,
+        LogEntryTransfered,
+        LogEntryEvolved,
+        LogEntryBerry,
+        LogEntryEgg,
+        LogEntryDebug,
+        LogEntryUpdate,
     }
 }
