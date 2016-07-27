@@ -92,10 +92,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 FortSearchResponse fortSearch;
                 var fortRetry = 0;      //Current check
-                var retryNumber = 40;   //How many times it needs to check to clear softban
-                var zeroCheck = 5;      //How many times it checks fort before it thinks it's softban
+                const int retryNumber = 50; //How many times it needs to check to clear softban
+                const int zeroCheck = 5; //How many times it checks fort before it thinks it's softban
                 do {
                     fortSearch = await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    if (fortSearch.ExperienceAwarded > 0 && TimesZeroXPawarded > 0) TimesZeroXPawarded = 0;
                     if (fortSearch.ExperienceAwarded == 0)
                     {
                         TimesZeroXPawarded++;
