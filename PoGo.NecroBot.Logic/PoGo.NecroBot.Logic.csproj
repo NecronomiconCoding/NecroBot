@@ -111,6 +111,7 @@
     <Compile Include="State\VersionCheckState.cs" />
     <Compile Include="Event\WarnEvent.cs" />
     <Compile Include="Tasks\UseIncubatorsTask.cs" />
+    <Compile Include="Tasks\UseLuckyEgg.cs" />
     <Compile Include="Tasks\UseNearbyPokestopsTask.cs" />
     <Compile Include="Utils\GPXReader.cs" />
     <Compile Include="Logging\ILogger.cs" />

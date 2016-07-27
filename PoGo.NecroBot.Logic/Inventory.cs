@@ -31,7 +31,12 @@ namespace PoGo.NecroBot.Logic
             _client = client;
             _logicClient = logicClient;
         }
+        public async Task<UseItemXpBoostResponse> UseLuckyEggConstantly()
+        {
+            var Result = await _client.Inventory.UseItemXpBoost();
+            return Result;
 
+        }
         public async Task DeletePokemonFromInvById(ulong id)
         {
             var inventory = await GetCachedInventory();

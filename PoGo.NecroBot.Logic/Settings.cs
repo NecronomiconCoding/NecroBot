@@ -240,6 +240,7 @@ namespace PoGo.NecroBot.CLI
         public int UseLuckyEggsMinPokemonAmount = 30;
         public bool UseLuckyEggsWhileEvolving = true;
         public bool UsePokemonToNotCatchFilter = false;
+        public bool UseLuckyEgg = true;
         public double WalkingSpeedInKilometerPerHour = 50;
         public int WebSocketPort = 14251;
         public static GlobalSettings Default => new GlobalSettings();
@@ -345,6 +346,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseEggIncubators => _settings.UseEggIncubators;
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
+        public bool UseLuckyEgg => _settings.UseLuckyEgg;
         public int KeepMinDuplicatePokemon => _settings.KeepMinDuplicatePokemon;
         public bool PrioritizeIvOverCp => _settings.PrioritizeIvOverCp;
         public int MaxTravelDistanceInMeters => _settings.MaxTravelDistanceInMeters;
