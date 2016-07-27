@@ -38,7 +38,7 @@ namespace PoGo.NecroBot.CLI
 
         private static void Main(string[] args)
         {
-            string subPath = "";
+            var subPath = "";
             if (args.Length > 0)
                 subPath = Path.DirectorySeparatorChar + args[0];
 
