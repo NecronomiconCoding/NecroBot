@@ -22,7 +22,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file Coords.ini è corretto?"
+      "Value":
+        "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file Coords.ini è corretto?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -62,7 +63,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Probabilità: {7}% | distanza {8}m | con una {9} ({10} rimanenti). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Probabilità: {7}% | distanza {8}m | con una {9} ({10} rimanenti). | {11}"
     },
     {
       "Key": "eventNoPokeballs",

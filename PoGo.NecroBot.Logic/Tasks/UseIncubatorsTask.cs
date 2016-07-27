@@ -1,13 +1,16 @@
-﻿using System.Linq;
+﻿#region using directives
+
+using System.Linq;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
 
+#endregion
+
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    class UseIncubatorsTask
+    internal class UseIncubatorsTask
     {
         public static async Task Execute(Context ctx, StateMachine machine)
         {

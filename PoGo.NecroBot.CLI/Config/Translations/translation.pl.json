@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,7 +22,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Znajdujesz się poza zdefiniowanym rejonem! Wracam się na początek ({0}m away) za 5 sekund. Czy twój plik Coords.ini się zgadza?"
+      "Value":
+        "Znajdujesz się poza zdefiniowanym rejonem! Wracam się na początek ({0}m away) za 5 sekund. Czy twój plik Coords.ini się zgadza?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -62,7 +63,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Poziom: {3} CP: ({4}/{5}) IV: {6}% | Szansa: {7}% | {8}m odległość | przy użyciu {9} ({10} zostało). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Poziom: {3} CP: ({4}/{5}) IV: {6}% | Szansa: {7}% | {8}m odległość | przy użyciu {9} ({10} zostało). | {11}"
     },
     {
       "Key": "eventNoPokeballs",

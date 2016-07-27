@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
-using System.Threading.Tasks;
+
 #endregion
 
 namespace PoGo.NecroBot.Logic.Tasks
@@ -52,7 +52,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         }
 
                         var pokestopList = await GetPokeStops(ctx);
-                        machine.Fire(new PokeStopListEvent { Forts = pokestopList });
+                        machine.Fire(new PokeStopListEvent {Forts = pokestopList});
 
                         while (pokestopList.Any())
                         {
@@ -85,7 +85,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             }
                             if (fortSearch.ItemsAwarded.Count > 0)
                             {
-                                var refreshCachedInventory = ctx.Inventory.RefreshCachedInventory();
+                                await ctx.Inventory.RefreshCachedInventory();
                             }
 
                             await Task.Delay(1000);
