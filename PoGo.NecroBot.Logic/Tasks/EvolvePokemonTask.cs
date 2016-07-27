@@ -19,32 +19,36 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(Context ctx, StateMachine machine)
         {
             var pokemonToEvolveTask = await ctx.Inventory.GetPokemonToEvolve(ctx.LogicSettings.PokemonsToEvolve);
-            var pokemonToEvolve = pokemonToEvolveTask;
-            if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
+            var pokemonToEvolve = pokemonToEvolveTask.ToList();
+
+            if (pokemonToEvolve.Any())
             {
-                if (pokemonToEvolve.Count() >= ctx.LogicSettings.UseLuckyEggsMinPokemonAmount)
+                if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
                 {
-                    await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+                    if (pokemonToEvolve.Count() >= ctx.LogicSettings.UseLuckyEggsMinPokemonAmount)
+                    {
+                        await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+                    }
+                    else
+                    {
+                        // Wait until we have enough pokemon
+                        return;
+                    }
                 }
-                else
+
+                foreach (var pokemon in pokemonToEvolve)
                 {
-                    // Wait until we have enough pokemon
-                    return;
+                    var evolveResponse = await ctx.Client.Inventory.EvolvePokemon(pokemon.Id);
+
+                    machine.Fire(new PokemonEvolveEvent
+                    {
+                        Id = pokemon.PokemonId,
+                        Exp = evolveResponse.ExperienceAwarded,
+                        Result = evolveResponse.Result
+                    });
+
+                    await Task.Delay(3000);
                 }
-            }
-
-            foreach (var pokemon in pokemonToEvolve)
-            {
-                var evolveResponse = await ctx.Client.Inventory.EvolvePokemon(pokemon.Id);
-
-                machine.Fire(new PokemonEvolveEvent
-                {
-                    Id = pokemon.PokemonId,
-                    Exp = evolveResponse.ExperienceAwarded,
-                    Result = evolveResponse.Result
-                });
-
-                await Task.Delay(3000);
             }
         }
 

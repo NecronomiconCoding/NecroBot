@@ -3,7 +3,7 @@
 #region using directives
 
 using System;
-using System.Device.Location;
+using GeoCoordinatePortable;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;

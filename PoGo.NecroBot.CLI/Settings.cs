@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Collections.Generic;
@@ -19,37 +19,6 @@ namespace PoGo.NecroBot.CLI
 {
     internal class AuthSettings
     {
-        public AuthSettings()
-        {
-            if (File.Exists(Directory.GetCurrentDirectory() 
-                + Path.DirectorySeparatorChar +"config"
-                + Path.DirectorySeparatorChar + "auth.json")) return;
-            string type;
-            do
-            {
-                Console.WriteLine("Please choose your AuthType");
-                Console.WriteLine("(0) for Google Authentication");
-                Console.WriteLine("(1) for Pokemon Trainer Club");
-                type = Console.ReadLine();
-            } while (type != "1" && type != "0");
-            AuthType = type.Equals("0") ? AuthType.Google : AuthType.Ptc;
-            if (AuthType == AuthType.Google)
-            {
-                Console.Clear();
-                return;
-            }
-            do
-            {
-                Console.WriteLine("Username:");
-                PtcUsername = Console.ReadLine();
-            } while (string.IsNullOrEmpty(PtcUsername));
-            do
-            {
-                Console.WriteLine("Password:");
-                PtcPassword = Console.ReadLine();
-            } while (string.IsNullOrEmpty(PtcPassword));
-            Console.Clear();
-        }
         public AuthType AuthType;
         public string GoogleRefreshToken;
         public string PtcUsername;
@@ -75,6 +44,32 @@ namespace PoGo.NecroBot.CLI
             }
             else
             {
+                string type;
+                do
+                {
+                    Console.WriteLine($"Please choose your AuthType");
+                    Console.WriteLine("(0) for Google Authentication");
+                    Console.WriteLine("(1) for Pokemon Trainer Club");
+                    type = Console.ReadLine();
+                } while (type != "1" && type != "0");
+                AuthType = type.Equals("0") ? AuthType.Google : AuthType.Ptc;
+                if (AuthType == AuthType.Google)
+                {
+                    Console.Clear();
+                    return;
+                }
+                do
+                {
+                    Console.WriteLine("Username:");
+                    PtcUsername = Console.ReadLine();
+                } while (string.IsNullOrEmpty(PtcUsername));
+                do
+                {
+                    Console.WriteLine("Password:");
+                    PtcPassword = Console.ReadLine();
+                } while (string.IsNullOrEmpty(PtcPassword));
+                Console.Clear();
+
                 Save(FilePath);
             }
         }
@@ -104,17 +99,14 @@ namespace PoGo.NecroBot.CLI
     public class GlobalSettings
     {
         public static GlobalSettings Default => new GlobalSettings();
-        public static string ProfilePath;
-        public static string ConfigPath;
 
         public static GlobalSettings Load(string path)
         {
-            ProfilePath = Directory.GetCurrentDirectory() + path;
-            ConfigPath = ProfilePath + Path.DirectorySeparatorChar + "config";
+            GlobalSettings settings = new GlobalSettings {ProfilePath = Directory.GetCurrentDirectory() + path};
+            settings.ConfigPath = settings.ProfilePath + Path.DirectorySeparatorChar + "config";
 
-            var fullPath = ConfigPath + Path.DirectorySeparatorChar + "config.json";
+            var fullPath = settings.ConfigPath + Path.DirectorySeparatorChar + "config.json";
 
-            GlobalSettings settings = null;
             if (File.Exists(fullPath))
             {
                 //if the file exists, load the settings
@@ -138,7 +130,7 @@ namespace PoGo.NecroBot.CLI
             }
 
             settings.Save(fullPath);
-            settings.Auth.Load(ConfigPath + Path.DirectorySeparatorChar + "auth.json");
+            settings.Auth.Load(settings.ConfigPath + Path.DirectorySeparatorChar + "auth.json");
 
             return settings;
         }
@@ -182,6 +174,8 @@ namespace PoGo.NecroBot.CLI
         public int AmountOfPokemonToDisplayOnStart = 10;
         public bool RenameAboveIv = false;
         public int WebSocketPort = 14251;
+        public string ProfilePath;
+        public string ConfigPath;
 
         [JsonIgnore]
         internal AuthSettings Auth = new AuthSettings();
@@ -290,6 +284,15 @@ namespace PoGo.NecroBot.CLI
                     //PokemonId.Eevee,
                     //PokemonId.Dratini
                 };
+
+        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
+                {
+                    { PokemonId.Pidgeotto, new TransferFilter(1500, 90, 1)},
+                    { PokemonId.Fearow, new TransferFilter(1500, 90, 2)},
+                    { PokemonId.Golbat, new TransferFilter(1500, 90, 2)},
+                    { PokemonId.Eevee, new TransferFilter(600, 800, 2)},
+                    { PokemonId.Mew, new TransferFilter(0, 0, 10)}
+                };
     }
 
     public class ClientSettings : ISettings
@@ -307,6 +310,7 @@ namespace PoGo.NecroBot.CLI
         public double DefaultLatitude => _settings.DefaultLatitude;
         public double DefaultLongitude => _settings.DefaultLongitude;
         public double DefaultAltitude => _settings.DefaultAltitude;
+        public bool AutoUpdate => _settings.AutoUpdate;
 
         public string GoogleRefreshToken
         {
@@ -330,6 +334,8 @@ namespace PoGo.NecroBot.CLI
         {
             _settings = settings;
         }
+        public string ProfilePath => _settings.ProfilePath;
+        public string ConfigPath => _settings.ConfigPath;
         public bool AutoUpdate => _settings.AutoUpdate;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
@@ -356,5 +362,6 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
+        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
     }
 }
