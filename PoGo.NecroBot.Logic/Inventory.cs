@@ -275,9 +275,16 @@ namespace PoGo.NecroBot.Logic
             var myPokemons = await GetPokemons();
             myPokemons = myPokemons.Where(p => p.DeployedFortId == string.Empty).OrderByDescending(p => p.Cp);
             //Don't evolve pokemon in gyms
-            if (filter != null)
+            if (filter.Any())
             {
-                myPokemons = myPokemons.Where(p => filter.Contains(p.PokemonId));
+                myPokemons =
+                    myPokemons.Where(
+                        p => (_logicClient.Settings.EvolveAllPokemonWithEnoughCandy && filter.Contains(p.PokemonId)) ||
+                             (_logicClient.Settings.EvolveAllPokemonAboveIv && (PokemonInfo.CalculatePokemonPerfection(p) >= _logicClient.Settings.EvolveAboveIvValue)));
+            }
+            else if (_logicClient.Settings.EvolveAllPokemonAboveIv)
+            {
+                myPokemons = myPokemons.Where(p => PokemonInfo.CalculatePokemonPerfection(p) >= _logicClient.Settings.EvolveAboveIvValue);
             }
             var pokemons = myPokemons.ToList();
 
@@ -302,20 +309,9 @@ namespace PoGo.NecroBot.Logic
                         p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId)*
                     settings.CandyToEvolve;
 
-                if (_logicClient.Settings.EvolveAllPokemonAboveIv)
+                if (familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
                 {
-                    if (PokemonInfo.CalculatePokemonPerfection(pokemon) >= _logicClient.Settings.EvolveAboveIvValue &&
-                        familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
-                    {
-                        pokemonToEvolve.Add(pokemon);
-                    }
-                }
-                else
-                {
-                    if (familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
-                    {
-                        pokemonToEvolve.Add(pokemon);
-                    }
+                    pokemonToEvolve.Add(pokemon);
                 }
             }
 
