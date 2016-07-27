@@ -51,10 +51,14 @@ namespace PoGo.NecroBot.Logic.State
                 }
             }
 
+            var location = LocationUtils.ReverseGeoLocationName(ctx.Client.CurrentLongitude.ToString(), ctx.Client.CurrentLatitude.ToString());
+
             machine.Fire(new WarnEvent
             {
                 Message =
-                    $"Make sure Lat & Lng are right. Exit Program if not! Lat: {ctx.Client.CurrentLatitude} Lng: {ctx.Client.CurrentLongitude}"
+                    $"Make sure Lat & Lng are right. Exit Program if not!\n" +
+                    $"Lat: {ctx.Client.CurrentLatitude}, Lng: {ctx.Client.CurrentLongitude}\n" +
+                    $"{location}"
             });
 
             await Task.Delay(3000);
