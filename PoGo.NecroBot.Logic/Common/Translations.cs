@@ -68,6 +68,8 @@ namespace PoGo.NecroBot.Logic.Common
                 "Putting egg in incubator: {0:0.00}km left"),
             new KeyValuePair<TranslationString, string>(TranslationString.IncubatorStatusUpdate,
                 "Incubator status update: {0:0.00}km left"),
+            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorEggHatched,
+                "Incubated egg has hatched: {0}")
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryError, "ERROR"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryAttention, "ATTENTION"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryInfo, "INFO"),
@@ -98,9 +100,16 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.FinishedUnpackingFiles, "Finished unpacking files..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.UpdateFinished, "Update finished, you can close this window now."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LookingForIncensePokemon, "Looking for incense pokemon..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LookingForPokemon, "Looking for pokemon..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LookingForLurePokemon, "Looking for lure pokemon..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.PokemonSkipped, "Skipped {0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.InvFullTransferring, "PokemonInventory is Full.Transferring pokemons..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.InvFullTransferManually, "PokemonInventory is Full.Please Transfer pokemon manually or set TransferDuplicatePokemon to true in settings..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.EncounterProblem, "Encounter problem: {0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.EncounterProblemLurePokemon, "Encounter problem: Lure pokemon {0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DesiredDestTooFar, "Your desired destination of {0}, {1} is too far from your current position of {2}, {3}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.PokemonRename, "Pokemon {0} ({1}) renamed from {2} to {3}."),
+
         };
 
         public static Translations Default => new Translations();
@@ -231,5 +240,12 @@ namespace PoGo.NecroBot.Logic.Common
         PokemonSkipped,
         InvFullTransferring,
         InvFullTransferManually,
+        IncubatorEggHatched,
+        EncounterProblem,
+        EncounterProblemLurePokemon,
+        LookingForPokemon,
+        LookingForLurePokemon,
+        DesiredDestTooFar,
+        PokemonRename,
     }
 }

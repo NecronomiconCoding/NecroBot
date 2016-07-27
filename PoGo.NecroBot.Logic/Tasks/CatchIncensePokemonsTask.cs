@@ -68,7 +68,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     else
                     {
-                        machine.Fire(new WarnEvent {Message = $"Encounter problem: {encounter.Result}"});
+                        machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Result)});
                     }
                 }
             }

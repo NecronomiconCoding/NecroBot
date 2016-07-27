@@ -34,8 +34,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     machine.Fire(new NoticeEvent
                     {
-                        Message =
-                            $"Pokemon {pokemon.PokemonId} ({pokemon.Id}) renamed from {pokemon.Nickname} to {newNickname}."
+                        Message = ctx.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, newNickname)
                     });
                 }
                 else if (newNickname == pokemon.Nickname && !ctx.LogicSettings.RenameAboveIv)
@@ -44,8 +43,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     machine.Fire(new NoticeEvent
                     {
-                        Message =
-                            $"Pokemon {pokemon.PokemonId} ({pokemon.Id}) renamed from {pokemon.Nickname} to {pokemon.PokemonId}."
+                        Message = ctx.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, pokemon.PokemonId)
                     });
                 }
             }

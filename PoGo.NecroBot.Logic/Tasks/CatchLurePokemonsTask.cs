@@ -15,7 +15,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(Context ctx, StateMachine machine, FortData currentFortData)
         {
-            Logger.Write("Looking for lure pokemon..", LogLevel.Debug);
+            Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.LookingForLurePokemon), LogLevel.Debug);
 
             var fortId = currentFortData.Id;
 
@@ -24,7 +24,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (ctx.LogicSettings.UsePokemonToNotCatchFilter &&
                 ctx.LogicSettings.PokemonsNotToCatch.Contains(pokemonId))
             {
-                machine.Fire(new NoticeEvent {Message = $"Skipped {pokemonId}"});
+                machine.Fire(new NoticeEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.PokemonSkipped, pokemonId)});
             }
             else
             {
@@ -51,7 +51,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 else
                 {
                     if (encounter.Result.ToString().Contains("NotAvailable")) return;
-                    machine.Fire(new WarnEvent {Message = $"Encounter problem: Lure Pokemon {encounter.Result}"});
+                    machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.EncounterProblemLurePokemon, encounter.Result)});
                 }
             }
         }

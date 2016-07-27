@@ -17,7 +17,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(Context ctx, StateMachine machine)
         {
-            Logger.Write("Looking for pokemon..", LogLevel.Debug);
+            Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.LookingForPokemon), LogLevel.Debug);
 
             var pokemons = await GetNearbyPokemons(ctx);
             foreach (var pokemon in pokemons)
@@ -25,7 +25,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (ctx.LogicSettings.UsePokemonToNotCatchFilter &&
                     ctx.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
                 {
-                    Logger.Write("Skipped " + pokemon.PokemonId);
+                    Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.PokemonSkipped, pokemon.PokemonId));
                     continue;
                 }
 
@@ -54,7 +54,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else
                 {
-                    machine.Fire(new WarnEvent {Message = $"Encounter problem: {encounter.Status}"});
+                    machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Status)});
                 }
 
                 // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
