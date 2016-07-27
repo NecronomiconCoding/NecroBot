@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic.State
             {
                 await UseIncubatorsTask.Execute(ctx, machine);
             }
-
+	  
             if (ctx.LogicSettings.UseGpxPathing)
             {
                 await FarmPokestopsGpxTask.Execute(ctx, machine);
@@ -40,6 +40,10 @@ namespace PoGo.NecroBot.Logic.State
             else
             {
                 await FarmPokestopsTask.Execute(ctx, machine);
+            }
+ 	    if (ctx.LogicSettings.UseConstantLuckyEgg)
+            {
+                await UseLuckyEgg.Execute(ctx, machine);
             }
 
             await Task.Delay(5000);

@@ -42,6 +42,12 @@ namespace PoGo.NecroBot.Logic
                 inventory.InventoryDelta.InventoryItems.Remove(pokemon);
         }
 
+ 	public async Task<UseItemXpBoostResponse> UseLuckyEggConstantly()
+        {
+            var Result = await _client.Inventory.UseItemXpBoost();
+            return Result;
+
+        }
         private async Task<GetInventoryResponse> GetCachedInventory()
         {
             var now = DateTime.UtcNow;
