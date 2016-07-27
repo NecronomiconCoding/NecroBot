@@ -36,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (ctx.LogicSettings.UsePokemonToNotCatchFilter &&
                     ctx.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
                 {
-                    Logger.Write("Skipped " + pokemon.PokemonId);
+                    Logger.Write("[Pokemon ignore filter] - Ignoring " + pokemon.PokemonId + " as defined in settings");
                 }
                 else
                 {
