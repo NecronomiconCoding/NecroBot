@@ -25,7 +25,7 @@ namespace PoGo.NecroBot.Logic.State
             {
                 await RenamePokemonTask.Execute(ctx, machine);
             }
-
+            await ToTransferPokemonTask.Execute(ctx, machine);
             await RecycleItemsTask.Execute(ctx, machine);
 
             if (ctx.LogicSettings.UseEggIncubators)

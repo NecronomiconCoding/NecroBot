@@ -221,6 +221,11 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Doduo
         };
 
+        public List<PokemonId> PokemonsToTransfer = new List<PokemonId>
+        {
+            PokemonId.Pinsir
+        };
+
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
         {
             {PokemonId.Pidgeotto, new TransferFilter(1500, 90, 1)},
@@ -360,6 +365,7 @@ namespace PoGo.NecroBot.CLI
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
+        public ICollection<PokemonId> PokemonsToTransfer => _settings.PokemonsToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
     }

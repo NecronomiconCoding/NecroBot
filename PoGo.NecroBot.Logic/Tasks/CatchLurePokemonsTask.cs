@@ -37,9 +37,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else if (encounter.Result == DiskEncounterResponse.Types.Result.PokemonInventoryFull)
                 {
+                    machine.Fire(new WarnEvent { Message = "PokemonInventory is Full.Transferring pokemons..." });
+                    await ToTransferPokemonTask.Execute(ctx, machine);
                     if (ctx.LogicClient.Settings.TransferDuplicatePokemon)
                     {
-                        machine.Fire(new WarnEvent {Message = "PokemonInventory is Full.Transferring pokemons..."});
+                        machine.Fire(new WarnEvent {Message = "PokemonInventory is Full.Transferring duplicate pokemons..."});
                         await TransferDuplicatePokemonTask.Execute(ctx, machine);
                     }
                     else
