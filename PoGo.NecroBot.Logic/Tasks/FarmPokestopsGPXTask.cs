@@ -102,6 +102,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 await TransferDuplicatePokemonTask.Execute(ctx, machine);
                             }
+
+                            if (ctx.LogicSettings.RenameAboveIv)
+                            {
+                                await RenamePokemonTask.Execute(ctx, machine);
+                            }
                         }
 
                         await ctx.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
@@ -135,7 +140,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static List<GpxReader.Trk> GetGpxTracks(Context ctx)
         {
             var xmlString = File.ReadAllText(ctx.LogicSettings.GpxFile);
-            var readgpx = new GpxReader(xmlString);
+            var readgpx = new GpxReader(xmlString, ctx);
             return readgpx.Tracks;
         }
 

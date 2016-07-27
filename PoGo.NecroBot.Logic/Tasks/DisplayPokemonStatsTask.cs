@@ -1,10 +1,9 @@
-﻿using PoGo.NecroBot.Logic.Logging;
+﻿using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
+using POGOProtos.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.Logic.Tasks
@@ -13,20 +12,35 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(Context ctx, StateMachine machine)
         {
-            Logger.Write("====== DisplayHighestsCP ======", LogLevel.Info, ConsoleColor.Yellow);
-            var highestsPokemonCp = await ctx.Inventory.GetHighestsCp(20);
+            var highestsPokemonCp = await ctx.Inventory.GetHighestsCp(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart);
+            List<Tuple<PokemonData, int, double, double>> pokemonPairedWithStatsCP = new List<Tuple<PokemonData, int, double, double>>();
+
             foreach (var pokemon in highestsPokemonCp)
-                Logger.Write(
-                    $"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCp(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'",
-                    LogLevel.Info, ConsoleColor.Yellow);
-            Logger.Write("====== DisplayHighestsPerfect ======", LogLevel.Info, ConsoleColor.Yellow);
-            var highestsPokemonPerfect = await ctx.Inventory.GetHighestsPerfect(20);
+                pokemonPairedWithStatsCP.Add(Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon)));
+
+            var highestsPokemonPerfect = await ctx.Inventory.GetHighestsPerfect(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart);
+
+            List<Tuple<PokemonData, int, double, double>> pokemonPairedWithStatsIV = new List<Tuple<PokemonData, int, double, double>>();
             foreach (var pokemon in highestsPokemonPerfect)
-            {
-                Logger.Write(
-                    $"# CP {pokemon.Cp.ToString().PadLeft(4, ' ')}/{PokemonInfo.CalculateMaxCp(pokemon).ToString().PadLeft(4, ' ')} | ({PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}% perfect)\t| Lvl {PokemonInfo.GetLevel(pokemon).ToString("00")}\t NAME: '{pokemon.PokemonId}'",
-                    LogLevel.Info, ConsoleColor.Yellow);
-            }
+                pokemonPairedWithStatsIV.Add(Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon)));
+
+            machine.Fire(
+                new DisplayHighestsPokemonEvent
+                {
+                    SortedBy = "CP",
+                    PokemonList = pokemonPairedWithStatsCP
+                });
+
+            await Task.Delay(500);
+
+            machine.Fire(
+                    new DisplayHighestsPokemonEvent
+                    {
+                        SortedBy = "IV",
+                        PokemonList = pokemonPairedWithStatsIV
+                    });
+
+            await Task.Delay(500);
         }
     }
 }

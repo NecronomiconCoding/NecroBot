@@ -60,14 +60,19 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(EggIncubatorStatusEvent evt, Context ctx)
         {
             if (evt.WasAddedNow)
-                Logger.Write($"Putting egg in incubator: {evt.KmRemaining:0.00}km left");
+                Logger.Write(ctx.Translations.GetTranslation(TranslationString.IncubatorPuttingEgg, evt.KmRemaining));
             else
-                Logger.Write($"Incubator status update: {evt.KmRemaining:0.00}km left");
+                Logger.Write(ctx.Translations.GetTranslation(TranslationString.IncubatorStatusUpdate, evt.KmRemaining));
         }
 
         public void HandleEvent(FortUsedEvent evt, Context ctx)
         {
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventFortUsed, evt.Exp, evt.Gems, evt.Items), LogLevel.Pokestop);
+        }
+
+        public void HandleEvent(FortFailedEvent evt, Context ctx)
+        {
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventFortFailed, evt.Retry), LogLevel.Pokestop, ConsoleColor.DarkRed);
         }
 
         public void HandleEvent(FortTargetEvent evt, Context ctx)
@@ -121,10 +126,30 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(DisplayHighestsPokemonEvent evt, Context ctx)
         {
-            Logger.Write($"====== DisplayHighests{evt.SortedBy} ======", LogLevel.Info, ConsoleColor.Yellow);
+            string strHeader;
+            //PokemonData | CP | IV | Level
+            switch (evt.SortedBy)
+            {
+                case "Level":
+                    strHeader = ctx.Translations.GetTranslation(TranslationString.DisplayHighestsLevelHeader);
+                    break;
+                case "IV":
+                    strHeader = ctx.Translations.GetTranslation(TranslationString.DisplayHighestsPerfectHeader);
+                    break;
+                case "CP":
+                    strHeader = ctx.Translations.GetTranslation(TranslationString.DisplayHighestsCPHeader);
+                    break;
+                default:
+                    strHeader = ctx.Translations.GetTranslation(TranslationString.DisplayHighestsHeader);
+                    break;
+            }
+            var strPerfect = ctx.Translations.GetTranslation(TranslationString.CommonWordPerfect);
+            var strName = ctx.Translations.GetTranslation(TranslationString.CommonWordName).ToUpper();
+
+            Logger.Write($"====== {strHeader} ======", LogLevel.Info, ConsoleColor.Yellow);
             foreach (var pokemon in evt.PokemonList)
                 Logger.Write(
-                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% perfect)\t| Lvl {pokemon.Item4.ToString("00")}\t NAME: '{pokemon.Item1.PokemonId}'",
+                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: '{pokemon.Item1.PokemonId}'",
                     LogLevel.Info, ConsoleColor.Yellow);
         }
 

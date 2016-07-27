@@ -2,7 +2,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Device.Location;
+using GeoCoordinatePortable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -20,6 +20,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsTask
     {
+        public static int TimesZeroXPawarded;
         public static async Task Execute(Context ctx, StateMachine machine)
         {
             var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
@@ -83,19 +84,37 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await CatchLurePokemonsTask.Execute(ctx, machine, pokeStop);
                 }
 
-
-                var fortSearch = await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                if (fortSearch.ExperienceAwarded > 0)
+                POGOProtos.Networking.Responses.FortSearchResponse fortSearch;
+                var fortRetry = 0;
+                do
                 {
-                    machine.Fire(new FortUsedEvent
+                    fortSearch = await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    if (fortSearch.ExperienceAwarded > 0) TimesZeroXPawarded++;
+                    if (TimesZeroXPawarded > 5)
                     {
-                        Exp = fortSearch.ExperienceAwarded,
-                        Gems = fortSearch.GemsAwarded,
-                        Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
-                    });
-                }
+                        machine.Fire(new FortUsedEvent
+                        {
+                            Exp = fortSearch.ExperienceAwarded,
+                            Gems = fortSearch.GemsAwarded,
+                            Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
+                        });
 
-                await Task.Delay(1000);
+                        break; //Continue with program as loot was succesfull.
+                    } else { //If fort gave 0 experience, retry 40 times to clear softban.
+                        fortRetry += 1;
+
+                        machine.Fire(new FortFailedEvent
+                        {
+                            Retry = fortRetry
+                        });
+
+                        Random random = new Random();
+                        await Task.Delay(500 + random.Next(0, 200));  //Randomized pause
+                    }
+
+                    } while (fortRetry < 40); //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
+
+                    await Task.Delay(1000);
                 if (++stopsHit % 5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;
@@ -103,7 +122,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         var refreshCachedInventory = await ctx.Inventory.RefreshCachedInventory();
                     }
-                    await RenamePokemonTask.Execute(ctx, machine);
                     await RecycleItemsTask.Execute(ctx, machine);
                     if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonAboveIv)
                     {
@@ -112,6 +130,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (ctx.LogicSettings.TransferDuplicatePokemon)
                     {
                         await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                    }
+                    if (ctx.LogicSettings.RenameAboveIv)
+                    {
+                        await RenamePokemonTask.Execute(ctx, machine);
                     }
                 }
             }

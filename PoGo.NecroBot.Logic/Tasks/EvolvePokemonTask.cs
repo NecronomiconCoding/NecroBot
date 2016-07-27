@@ -18,26 +18,37 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static DateTime _lastLuckyEggTime;
         public static async Task Execute(Context ctx, StateMachine machine)
         {
-            if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
-            {
-                await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
-            }
-
             var pokemonToEvolveTask = await ctx.Inventory.GetPokemonToEvolve(ctx.LogicSettings.PokemonsToEvolve);
+            var pokemonToEvolve = pokemonToEvolveTask.ToList();
 
-            var pokemonToEvolve = pokemonToEvolveTask;
-            foreach (var pokemon in pokemonToEvolve)
+            if (pokemonToEvolve.Any())
             {
-                var evolveResponse = await ctx.Client.Inventory.EvolvePokemon(pokemon.Id);
-
-                machine.Fire(new PokemonEvolveEvent
+                if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
                 {
-                    Id = pokemon.PokemonId,
-                    Exp = evolveResponse.ExperienceAwarded,
-                    Result = evolveResponse.Result
-                });
+                    if (pokemonToEvolve.Count() >= ctx.LogicSettings.UseLuckyEggsMinPokemonAmount)
+                    {
+                        await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+                    }
+                    else
+                    {
+                        // Wait until we have enough pokemon
+                        return;
+                    }
+                }
 
-                await Task.Delay(3000);
+                foreach (var pokemon in pokemonToEvolve)
+                {
+                    var evolveResponse = await ctx.Client.Inventory.EvolvePokemon(pokemon.Id);
+
+                    machine.Fire(new PokemonEvolveEvent
+                    {
+                        Id = pokemon.PokemonId,
+                        Exp = evolveResponse.ExperienceAwarded,
+                        Result = evolveResponse.Result
+                    });
+
+                    await Task.Delay(3000);
+                }
             }
         }
 

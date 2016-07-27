@@ -15,9 +15,9 @@ namespace PoGo.NecroBot.Logic.Common
         public static Translations Load(string translationsLanguageCode)
         {
             ProfilePath = Directory.GetCurrentDirectory();
-            ConfigPath = ProfilePath + "\\config\\translations";
+            ConfigPath = Path.Combine(ProfilePath, "config", "translations");
 
-            var fullPath = ConfigPath + "\\translation." + translationsLanguageCode + ".json";
+            var fullPath = Path.Combine(ConfigPath, "translation." + translationsLanguageCode + ".json");
 
             Translations translations = null;
             if (File.Exists(fullPath))
@@ -35,7 +35,7 @@ namespace PoGo.NecroBot.Logic.Common
             else
             {
                 translations = new Translations();
-                translations.Save(ConfigPath + "\\translation.en.json");
+                translations.Save(Path.Combine(ConfigPath, "translation.en.json"));
             }
             return translations;
         }
@@ -55,18 +55,14 @@ namespace PoGo.NecroBot.Logic.Common
 
         public string GetTranslation(TranslationString translationString, params object[] data)
         {
-            string translation = TranslationStrings.FirstOrDefault(t => t.Key.Equals(translationString)).Value;
-            if (translation != default(string))
-                return string.Format(translation, data);
-            return $"Translation for {translationString} is missing";
+            var translation = TranslationStrings.FirstOrDefault(t => t.Key.Equals(translationString)).Value;
+            return translation != default(string) ? string.Format(translation, data) : $"Translation for {translationString} is missing";
         }
 
         public string GetTranslation(TranslationString translationString)
         {
-            string translation = TranslationStrings.FirstOrDefault(t => t.Key.Equals(translationString)).Value;
-            if (translation != default(string))
-                return translation;
-            return $"Translation for {translationString} is missing";
+            var translation = TranslationStrings.FirstOrDefault(t => t.Key.Equals(translationString)).Value;
+            return translation != default(string) ? translation : $"Translation for {translationString} is missing";
         }
 
         //Default Translations (ENGLISH)
@@ -80,6 +76,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.FarmPokestopsOutsideRadius, "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your Coords.ini file correct?"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.FarmPokestopsNoUsableFound, "No usable PokeStops found in your area. Is your maximum distance too small?"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.EventFortUsed, "XP: {0}, Gems: {1}, Items: {2}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.EventFortFailed, "Looting failed, possible softban. Retry: {0}/40"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.EventFortTargeted, "{0} in ({1}m)"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.EventProfileLogin, "Playing as {0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.EventUsedLuckyEgg, "Used Lucky Egg, remaining: {0}"),
@@ -91,7 +88,17 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.EventNoPokeballs, "No Pokeballs - We missed a {0} with CP {1}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchStatusAttempt, "{0} Attempt #{1}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchStatus, "{0}"),
-            new KeyValuePair<TranslationString, string>(Common.TranslationString.Candies, "Candies: {0}")
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.Candies, "Candies: {0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.UnhandledGPXData, "Unhandled data in GPX file, attempting to skip."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestsHeader, "Pokemons"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CommonWordPerfect, "perfect"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CommonWordName, "name"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestsCPHeader, "DisplayHighestsCP"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestsPerfectHeader, "DisplayHighestsPerfect"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestsLevelHeader, "DisplayHighestsLevel"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.WelcomeWarning, "Make sure Lat & Lng are right. Exit Program if not! Lat: {0} Lng: {1}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.IncubatorPuttingEgg, "Putting egg in incubator: {0:0.00}km left"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.IncubatorStatusUpdate, "Incubator status update: {0:0.00}km left"),
         };
     }
 
@@ -107,6 +114,7 @@ namespace PoGo.NecroBot.Logic.Common
         FarmPokestopsOutsideRadius,
         FarmPokestopsNoUsableFound,
         EventFortUsed,
+        EventFortFailed,
         EventFortTargeted,
         EventProfileLogin,
         EventUsedLuckyEgg,
@@ -119,5 +127,15 @@ namespace PoGo.NecroBot.Logic.Common
         CatchStatusAttempt,
         CatchStatus,
         Candies,
+        UnhandledGPXData,
+        DisplayHighestsHeader,
+        CommonWordPerfect,
+        CommonWordName,
+        DisplayHighestsCPHeader,
+        DisplayHighestsPerfectHeader,
+        WelcomeWarning,
+        IncubatorPuttingEgg,
+        IncubatorStatusUpdate,
+        DisplayHighestsLevelHeader,
     }
 }

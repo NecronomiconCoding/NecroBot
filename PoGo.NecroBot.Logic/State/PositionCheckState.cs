@@ -53,13 +53,12 @@ namespace PoGo.NecroBot.Logic.State
 
             machine.Fire(new WarnEvent
             {
-                Message =
-                    $"Make sure Lat & Lng are right. Exit Program if not! Lat: {ctx.Client.CurrentLatitude} Lng: {ctx.Client.CurrentLongitude}"
+                Message = ctx.Translations.GetTranslation(Common.TranslationString.WelcomeWarning, ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude)
             });
 
             await Task.Delay(3000);
 
-            return new FarmState();
+            return new InfoState();
         }
 
         private static Tuple<double, double> LoadPositionFromDisk(StateMachine machine)
