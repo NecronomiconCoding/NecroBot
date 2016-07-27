@@ -1,7 +1,12 @@
 ﻿#region using directives
 
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
@@ -33,6 +38,26 @@ namespace PoGo.NecroBot.Logic.Tasks
                 .OrderBy(x => x.EggKmWalkedTarget - x.EggKmWalkedStart)
                 .ToList();
 
+            var rememberedIncubatorsFilePath = Path.Combine(ctx.LogicSettings.ProfilePath, "temp", "incubators.json");
+            var rememberedIncubators = GetRememberedIncubators(rememberedIncubatorsFilePath);
+            var pokemons = (await ctx.Inventory.GetPokemons()).ToList();
+
+            // Check if eggs in remembered incubator usages have since hatched
+            // (instead of calling ctx.Client.Inventory.GetHatchedEgg(), which doesn't seem to work properly)
+            foreach (var incubator in rememberedIncubators)
+            {
+                var hatched = pokemons.FirstOrDefault(x => !x.IsEgg && x.Id == incubator.PokemonId);
+                if (hatched == null) continue;
+
+                machine.Fire(new EggHatchedEvent
+                {
+                    Id = hatched.Id,
+                    PokemonId = hatched.PokemonId
+                });
+            }
+
+            var newRememberedIncubators = new List<IncubatorUsage>();
+
             foreach (var incubator in incubators)
             {
                 if (incubator.PokemonId == 0)
@@ -48,6 +73,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var response = await ctx.Client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);
                     unusedEggs.Remove(egg);
 
+                    newRememberedIncubators.Add(new IncubatorUsage { IncubatorId = incubator.Id, PokemonId = egg.Id });
+
                     machine.Fire(new EggIncubatorStatusEvent
                     {
                         IncubatorId = incubator.Id,
@@ -60,6 +87,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else
                 {
+                    newRememberedIncubators.Add(new IncubatorUsage { IncubatorId = incubator.Id, PokemonId = incubator.PokemonId });
+
                     machine.Fire(new EggIncubatorStatusEvent
                     {
                         IncubatorId = incubator.Id,
@@ -69,6 +98,37 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
             }
+
+            if (!newRememberedIncubators.SequenceEqual(rememberedIncubators))
+                SaveRememberedIncubators(newRememberedIncubators, rememberedIncubatorsFilePath);
+        }
+
+        private class IncubatorUsage : IEquatable<IncubatorUsage>
+        {
+            public string IncubatorId;
+            public ulong PokemonId;
+
+            public bool Equals(IncubatorUsage other)
+            {
+                return other != null && other.IncubatorId == IncubatorId && other.PokemonId == PokemonId;
+            }
+        }
+
+        private static List<IncubatorUsage> GetRememberedIncubators(string filePath)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+            if (File.Exists(filePath))
+                return JsonConvert.DeserializeObject<List<IncubatorUsage>>(File.ReadAllText(filePath, Encoding.UTF8));
+
+            return new List<IncubatorUsage>(0);
+        }
+
+        private static void SaveRememberedIncubators(List<IncubatorUsage> incubators, string filePath)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+
+            File.WriteAllText(filePath, JsonConvert.SerializeObject(incubators), Encoding.UTF8);
         }
     }
 }
