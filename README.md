@@ -7,7 +7,6 @@
 ![alt text][1.1] <strong><em> The contents of this repo are a proof of concept and are for educational use only </em></strong>![alt text][1.1]<br/><br/>
 ![alt text][1.2] <br/><br/>
 Chatting about this Repository can be done on our Discord: https://discord.gg/VsVrjgr <br/>
-The NecroBot Website can be found at <a href="http://necrobot.net">necrobot.net</a>
 <br/>
 
 <h2><a name="features">Features</a></h2>

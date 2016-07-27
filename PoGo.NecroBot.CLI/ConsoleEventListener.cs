@@ -105,7 +105,7 @@ namespace PoGo.NecroBot.CLI
                 : "";
 
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventPokemonCapture, catchStatus, catchType, evt.Id,
-                evt.Level, evt.Cp, evt.MaxCp, evt.Perfection.ToString("0.00"), evt.Probability, evt.Distance,
+                evt.Level, evt.Cp, evt.MaxCp, evt.Perfection.ToString("0.00"), evt.Probability, evt.Distance.ToString("F2"),
                 returnRealBallName(evt.Pokeball), evt.BallAmount, familyCandies), LogLevel.Caught);
         }
 
