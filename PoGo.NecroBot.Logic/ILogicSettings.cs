@@ -45,8 +45,8 @@ namespace PoGo.NecroBot.Logic
         string GpxFile { get; }
         bool UseLuckyEggsWhileEvolving { get; }
         int UseLuckyEggsMinPokemonAmount { get; }
-        bool EvolveAllPokemonAboveIv { get; }
-        float EvolveAboveIvValue { get; }
+        bool EvolveAllPokemonBelowIv { get; }
+        float EvolveBelowIvValue { get; }
         bool RenameAboveIv { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }

@@ -149,7 +149,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         await UseIncubatorsTask.Execute(ctx, machine);
                     }
-                    if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonAboveIv)
+                    if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonBelowIv)
                     {
                         await EvolvePokemonTask.Execute(ctx, machine);
                     }

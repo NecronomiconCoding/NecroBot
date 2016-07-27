@@ -105,8 +105,8 @@ namespace PoGo.NecroBot.CLI
         public double DefaultLatitude = 52.379189;
         public double DefaultLongitude = 4.899431;
         public int DelayBetweenPokemonCatch = 2000;
-        public float EvolveAboveIvValue = 95;
-        public bool EvolveAllPokemonAboveIv = false;
+        public float EvolveBelowIvValue = 95;
+        public bool EvolveAllPokemonBelowIv = false;
         public bool EvolveAllPokemonWithEnoughCandy = false;
         public string GpxFile = "GPXPath.GPX";
 
@@ -352,8 +352,8 @@ namespace PoGo.NecroBot.CLI
         public bool UseGpxPathing => _settings.UseGpxPathing;
         public bool UseLuckyEggsWhileEvolving => _settings.UseLuckyEggsWhileEvolving;
         public int UseLuckyEggsMinPokemonAmount => _settings.UseLuckyEggsMinPokemonAmount;
-        public bool EvolveAllPokemonAboveIv => _settings.EvolveAllPokemonAboveIv;
-        public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
+        public bool EvolveAllPokemonBelowIv => _settings.EvolveAllPokemonBelowIv;
+        public float EvolveBelowIvValue => _settings.EvolveBelowIvValue;
         public bool RenameAboveIv => _settings.RenameAboveIv;
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
