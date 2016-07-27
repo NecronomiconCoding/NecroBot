@@ -21,7 +21,7 @@ namespace PoGo.NecroBot.CLI
     {
         public AuthSettings()
         {
-            if (File.Exists(Directory.GetCurrentDirectory() 
+            if (File.Exists(GlobalSettings.ConfigPath 
                 + Path.DirectorySeparatorChar +"config"
                 + Path.DirectorySeparatorChar + "auth.json")) return;
             string type;
