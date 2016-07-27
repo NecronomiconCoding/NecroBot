@@ -66,7 +66,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.IncubatorPuttingEgg,
                 "Putting egg in incubator: {0:0.00}km left"),
             new KeyValuePair<TranslationString, string>(TranslationString.IncubatorStatusUpdate,
-                "Incubator status update: {0:0.00}km left")
+                "Incubator status update: {0:0.00}km left"),
+            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorEggHatched,
+                "Incubated egg has hatched: {0}")
         };
 
         public static Translations Default => new Translations();
@@ -162,6 +164,7 @@ namespace PoGo.NecroBot.Logic.Common
         WelcomeWarning,
         IncubatorPuttingEgg,
         IncubatorStatusUpdate,
+        IncubatorEggHatched,
         DisplayHighestsLevelHeader
     }
 }
