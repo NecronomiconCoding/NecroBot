@@ -63,7 +63,7 @@ namespace PoGo.NecroBot.Logic.State
             var destinationDir = baseDir + Path.DirectorySeparatorChar;
             Console.WriteLine(downloadLink);
             if (!DownloadFile(downloadLink, downloadFilePath)) return new LoginState();
-            machine.Fire(new UpdateEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.FinishedDownloadingRelease});
+            machine.Fire(new UpdateEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.FinishedDownloadingRelease)});
             if (!UnpackFile(downloadFilePath, tempPath)) return new LoginState();
             machine.Fire(new UpdateEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.FinishedUnpackingFiles)});
 
