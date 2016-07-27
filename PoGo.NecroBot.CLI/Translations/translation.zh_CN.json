@@ -30,7 +30,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "经验值: {0}, Gems: {1}, 道具: {2}"
+      "Value": "经验值: {0}, 金币: {1}, 道具: {2}"
     },
     {
       "Key": "eventFortTargeted",
