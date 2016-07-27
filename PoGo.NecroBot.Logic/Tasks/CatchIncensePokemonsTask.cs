@@ -42,7 +42,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
                         ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
-                    await Task.Delay(distance > 100 ? 15000 : 500);
+                    distance = distance > 41 ? (distance - LogicClient.variation("25,40")) : distance;
+                    double walking_speed = ctx.LogicSettings.WalkingSpeedInKilometerPerHour;
+
+                    double cws_in_kps = (((walking_speed / 60) / 60));
+                    double time_to_next = (distance / cws_in_kps);
+                    //TODO:update to propper Event Fire with translate...
+                    Logger.Write($"Next pokemon ({System.Math.Round(distance)}m), ~{System.Math.Round(time_to_next / 1000)} seconds. Current walking speed is {System.Math.Round((cws_in_kps * 1000), 3)}m/s.", LogLevel.Info);
+                    await Task.Delay((int)time_to_next);
 
                     var encounter =
                         await

@@ -104,7 +104,8 @@ namespace PoGo.NecroBot.CLI
         public double DefaultAltitude = 10;
         public double DefaultLatitude = 52.379189;
         public double DefaultLongitude = 4.899431;
-        public int DelayBetweenPokemonCatch = 2000;
+        //depricated
+        //public int DelayBetweenPokemonCatch = 2000;
         public float EvolveAboveIvValue = 95;
         public bool EvolveAllPokemonAboveIv = false;
         public bool EvolveAllPokemonWithEnoughCandy = false;
@@ -146,9 +147,9 @@ namespace PoGo.NecroBot.CLI
 
         public int KeepMinCp = 1000;
         public int KeepMinDuplicatePokemon = 1;
-        public float KeepMinIvPercentage = 95;
-        public bool KeepPokemonsThatCanEvolve = false;
-        public int MaxTravelDistanceInMeters = 1000;
+        public float KeepMinIvPercentage = 85;
+        public bool KeepPokemonsThatCanEvolve = true;
+        public int MaxTravelDistanceInMeters = 2000;
 
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
@@ -194,11 +195,11 @@ namespace PoGo.NecroBot.CLI
             //12 candies
             PokemonId.Caterpie,
             PokemonId.Weedle,
-            PokemonId.Pidgey
+            PokemonId.Pidgey,
             //25 candies
-            //PokemonId.Rattata,
-            //PokemonId.NidoranFemale,
-            //PokemonId.NidoranMale,
+            PokemonId.Rattata,
+            PokemonId.NidoranFemale,
+            PokemonId.NidoranMale,
             //PokemonId.Oddish,
             //PokemonId.Poliwag,
             //PokemonId.Abra,
@@ -206,7 +207,7 @@ namespace PoGo.NecroBot.CLI
             //PokemonId.Bellsprout,
             //PokemonId.Geodude,
             //PokemonId.Gastly,
-            //PokemonId.Eevee,
+            PokemonId.Eevee
             //PokemonId.Dratini
         };
 
@@ -309,8 +310,8 @@ namespace PoGo.NecroBot.CLI
         public AuthType AuthType => _settings.Auth.AuthType;
         public string PtcUsername => _settings.Auth.PtcUsername;
         public string PtcPassword => _settings.Auth.PtcPassword;
-        public double DefaultLatitude => _settings.DefaultLatitude;
-        public double DefaultLongitude => _settings.DefaultLongitude;
+        public double DefaultLatitude => _settings.DefaultLatitude + (double)(((double)(LogicClient.variation("5,21")) / 1000000.0));
+        public double DefaultLongitude => _settings.DefaultLongitude + (double)(((double)(LogicClient.variation("5,21")) / 1000000.0));
         public double DefaultAltitude => _settings.DefaultAltitude;
 
         public string GoogleRefreshToken
@@ -338,16 +339,17 @@ namespace PoGo.NecroBot.CLI
         public bool AutoUpdate => _settings.AutoUpdate;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
-        public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
+        public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour +LogicClient.variation("xsm");
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool UseEggIncubators => _settings.UseEggIncubators;
-        public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
+        //depricated
+        //public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => _settings.KeepMinDuplicatePokemon;
         public bool PrioritizeIvOverCp => _settings.PrioritizeIvOverCp;
-        public int MaxTravelDistanceInMeters => _settings.MaxTravelDistanceInMeters;
+        public int MaxTravelDistanceInMeters => _settings.MaxTravelDistanceInMeters + LogicClient.variation("med");
         public string GpxFile => _settings.GpxFile;
         public bool UseGpxPathing => _settings.UseGpxPathing;
         public bool UseLuckyEggsWhileEvolving => _settings.UseLuckyEggsWhileEvolving;

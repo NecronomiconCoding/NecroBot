@@ -86,7 +86,7 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(FortTargetEvent evt, Context ctx)
         {
             Logger.Write(
-                ctx.Translations.GetTranslation(TranslationString.EventFortTargeted, evt.Name, Math.Round(evt.Distance)),
+                ctx.Translations.GetTranslation(TranslationString.EventFortTargeted, evt.Name, Math.Round(evt.Distance), Math.Round((evt.Distance / evt.Speed) / 1000), Math.Round((evt.Speed * 1000), 3)),
                 LogLevel.Info, ConsoleColor.DarkRed);
         }
 

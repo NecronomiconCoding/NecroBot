@@ -71,10 +71,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ctx.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
-                machine.Fire(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
+                double walking_speed = ctx.LogicSettings.WalkingSpeedInKilometerPerHour;
+                double cws_in_kps = (((walking_speed / 60) / 60));
+
+                machine.Fire(new FortTargetEvent {Name = fortInfo.Name, Distance = distance, Speed = cws_in_kps});
 
                 await ctx.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
-                    ctx.LogicSettings.WalkingSpeedInKilometerPerHour,
+                    walking_speed,
                     async () =>
                     {
                         // Catch normal map Pokemon
@@ -114,13 +117,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Retry = fortRetry
                     });
 
-                    var random = new Random();
-                    await Task.Delay(500 + random.Next(0, 200)); //Randomized pause
+                    await Task.Delay(500 + LogicClient.variation("0,200")); //Randomized pause
                 } while (fortRetry < 40);
-                    //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
+                //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
-                await Task.Delay(1000);
-                if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
+                //TODO improve check to accomodate upgrades...
+                var inv = ctx.Inventory.GetItems().Result;
+                var pokes = ctx.Inventory.GetPokemons().Result;
+                bool inv_high = (inv.Count() > 200 ? true : (pokes.Count() > 300 ? true : false));
+                await Task.Delay(400);
+                if (++stopsHit % 5 == 0 || inv_high)
                 {
                     stopsHit = 0;
                     if (fortSearch.ItemsAwarded.Count > 0)

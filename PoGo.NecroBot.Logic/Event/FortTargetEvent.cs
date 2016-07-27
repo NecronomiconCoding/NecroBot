@@ -4,5 +4,6 @@
     {
         public double Distance;
         public string Name;
+        public double Speed;
     }
 }

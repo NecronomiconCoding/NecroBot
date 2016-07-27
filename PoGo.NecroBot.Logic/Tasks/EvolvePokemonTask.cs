@@ -23,31 +23,24 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokemonToEvolve.Any())
             {
-                if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
+                //TODO: add setting for evolve with egg only
+                if (ctx.LogicSettings.UseLuckyEggsWhileEvolving && pokemonToEvolve.Count() >= ctx.LogicSettings.UseLuckyEggsMinPokemonAmount)
                 {
-                    if (pokemonToEvolve.Count >= ctx.LogicSettings.UseLuckyEggsMinPokemonAmount)
+                    await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+
+                    foreach (var pokemon in pokemonToEvolve)
                     {
-                        await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+                        var evolveResponse = await ctx.Client.Inventory.EvolvePokemon(pokemon.Id);
+
+                        machine.Fire(new PokemonEvolveEvent
+                        {
+                            Id = pokemon.PokemonId,
+                            Exp = evolveResponse.ExperienceAwarded,
+                            Result = evolveResponse.Result
+                        });
+
+                        await Task.Delay(1200 + LogicClient.variation("med"));
                     }
-                    else
-                    {
-                        // Wait until we have enough pokemon
-                        return;
-                    }
-                }
-
-                foreach (var pokemon in pokemonToEvolve)
-                {
-                    var evolveResponse = await ctx.Client.Inventory.EvolvePokemon(pokemon.Id);
-
-                    machine.Fire(new PokemonEvolveEvent
-                    {
-                        Id = pokemon.PokemonId,
-                        Exp = evolveResponse.ExperienceAwarded,
-                        Result = evolveResponse.Result
-                    });
-
-                    await Task.Delay(3000);
                 }
             }
         }
