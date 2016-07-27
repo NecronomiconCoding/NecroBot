@@ -79,6 +79,210 @@
     {
       "Key": "candies",
       "Value": "Bonbons: {0}"
+    },
+    {
+      "Key": "unhandledGPXData",
+      "Value": "Données non gérées dans le fichier GPX, ignorées.."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokémons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "parfait"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "Nom"
+    },
+    {
+      "Key": "displayHighestsCPHeader",
+      "Value": "Montrer Meilleurs PC"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Montrer Meilleurs Parfaits"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Montrer Meilleurs Level"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Assuez-vous que la Lat & la Lng de départ sont correctes. Fermez le programme si ça ne l'est pas! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Mise d'un oeuf dans l'incubateur: {0:0.00}km restant(s)"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Mise à jour du statut de l'incubation: {0:0.00}km restant(s)"
+    },
+    {
+      "Key": "IncubatorEggHatched",
+      "Value": "L'oeuf dans l'incubateur à éclot: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "ERREUR"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "ATTENTION"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMING"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "JETTE"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "TRANSFERT"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "EVOLUE"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "BAIE"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "OEUF"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "MAJ"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Connexion en tant que {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "Les serveurs PTC sont probablement hors ligne OU vos informations sont éronées. Essayez google"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Nouvel essaie dans {0} seconde(s)..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Compte non vérifié! Existe..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Ouverture de la page de connexion d'appareil de Google. Veuillez coller le code en utilisant CTRL+V"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Impossible de copier dans le presse-papier, faites le manuelement"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Allez à: {0} et saisissez {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Déplacement réaliste détécté, utilisation de UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Pas de déplacement réaliste à {0}, utilisation de la dernière dans Coords.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Coordonées dans le fichier \"Coords.ini\" invalides, utilisation des coordonées par défaut"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Parfait! Vous possédez déjà la dernière Version {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "AutoUpdater est désactivé. Récuperez la dernière version ici : {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Téléchargement et mise à jour..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Téléchargement de la nouvelle version terminé..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Décompression terminée..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Mise à jour terminée, vous pouvez maintenant fermer cette fenêtre."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Recherche de Pokémon incense..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Recherche de Pokemon..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Recherche de Pokémon lure..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Sauté {0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "L'inventaire Pokemon est complet. Transfert des Pokemons..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "L'inventaire Pokemon est complet. Veuillez transferer les pokemons manuellement ou changer TransferDuplicatePokemon en true ..."
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Problème lors de la rencontre: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Problème lors de la rencontre: Pokemon Lure {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "La destination désirée de {0}, {1} est trop loin de votre position actuel de {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pkemon {0} ({1}) renomé de {2} vers {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Pokemon ignoré par le filtre] - Ignore{0} comme défini dans la configuration"
     }
   ]
 }
