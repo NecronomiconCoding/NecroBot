@@ -80,6 +80,10 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryEgg, "EGG"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryDebug, "DEBUG"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryUpdate, "UPDATE"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.LoggingIn, "Logging in using {0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.PtcOffline, "PTC Servers are probably down OR your credentials are wrong. Try google"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.TryingAgainIn, "Trying again in {0} seconds..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.AccountNotVerified, "Account not verified! Exiting..."),
         };
 
         public static Translations Default => new Translations();
@@ -189,5 +193,9 @@ namespace PoGo.NecroBot.Logic.Common
         LogEntryEgg,
         LogEntryDebug,
         LogEntryUpdate,
+        LoggingIn,
+        PtcOffline,
+        TryingAgainIn,
+        AccountNotVerified,
     }
 }
