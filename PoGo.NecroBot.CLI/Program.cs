@@ -29,6 +29,17 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
             var settings = GlobalSettings.Load(subPath);
+
+            if (settings == null)
+            {
+                Logger.Write("This is your first start and the bot will use the default config!", LogLevel.Warning);
+                Logger.Write("Continue? (y/n)", LogLevel.Warning);
+
+                if (!Console.ReadLine().ToUpper().Equals("Y"))
+                    return;
+                settings = GlobalSettings.Load(subPath);
+            }
+
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
 
 
@@ -47,17 +58,6 @@ namespace PoGo.NecroBot.CLI
 
             service.Run();
             */
-
-            if (settings == null)
-            {
-                settings = GlobalSettings.Load(subPath);
-                Logger.Write("This is your first start and the bot will use the default config!", LogLevel.Warning);
-                Logger.Write("Continue? (y/n)", LogLevel.Warning);
-
-                if (!Console.ReadLine().ToUpper().Equals("Y"))
-                    return;
-            }
-
 
             var machine = new StateMachine();
             var stats = new Statistics();
