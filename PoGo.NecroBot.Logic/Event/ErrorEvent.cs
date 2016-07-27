@@ -4,9 +4,6 @@
     {
         public string Message = "";
 
-        public override string ToString()
-        {
-            return Message;
-        }
+        public override string ToString() => Message;
     }
 }

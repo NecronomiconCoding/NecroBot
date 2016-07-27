@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using GeoCoordinatePortable;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
@@ -101,7 +100,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     stopsHit = 0;
                     if (fortSearch.ItemsAwarded.Count > 0)
                     {
-                        var refreshCachedInventory = await ctx.Inventory.RefreshCachedInventory();
+                        await ctx.Inventory.RefreshCachedInventory();
                     }
                     await RenamePokemonTask.Execute(ctx, machine);
                     await RecycleItemsTask.Execute(ctx, machine);

@@ -19,22 +19,15 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
             BaseStamina = baseStamina;
         }
 
-        public override string ToString()
-        {
-            return $"({BaseAttack} atk,{BaseDefense} def,{BaseStamina} sta)";
-        }
+        public override string ToString() => $"({BaseAttack} atk,{BaseDefense} def,{BaseStamina} sta)";
     }
 
     public static class PokemonInfo
     {
-        public static int CalculateCp(PokemonData poke)
-        {
-            return
-                Math.Max(
-                    (int)
-                        Math.Floor(0.1*CalculateCpMultiplier(poke)*
-                                   Math.Pow(poke.CpMultiplier + poke.AdditionalCpMultiplier, 2)), 10);
-        }
+        public static int CalculateCp(PokemonData poke) => Math.Max(
+            (int)
+                Math.Floor(0.1*CalculateCpMultiplier(poke)*
+                           Math.Pow(poke.CpMultiplier + poke.AdditionalCpMultiplier, 2)), 10);
 
         public static double CalculateCpMultiplier(PokemonData poke)
         {
@@ -44,14 +37,10 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
                    Math.Sqrt(baseStats.BaseStamina + poke.IndividualStamina);
         }
 
-        public static int CalculateMaxCp(PokemonData poke)
-        {
-            return
-                Math.Max(
-                    (int)
-                        Math.Floor(0.1*CalculateMaxCpMultiplier(poke)*
-                                   Math.Pow(poke.CpMultiplier + poke.AdditionalCpMultiplier, 2)), 10);
-        }
+        public static int CalculateMaxCp(PokemonData poke) => Math.Max(
+            (int)
+                Math.Floor(0.1*CalculateMaxCpMultiplier(poke)*
+                           Math.Pow(poke.CpMultiplier + poke.AdditionalCpMultiplier, 2)), 10);
 
         public static double CalculateMaxCpMultiplier(PokemonData poke)
         {
@@ -60,14 +49,10 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
                    Math.Sqrt(baseStats.BaseStamina + 15);
         }
 
-        public static int CalculateMinCp(PokemonData poke)
-        {
-            return
-                Math.Max(
-                    (int)
-                        Math.Floor(0.1*CalculateMinCpMultiplier(poke)*
-                                   Math.Pow(poke.CpMultiplier + poke.AdditionalCpMultiplier, 2)), 10);
-        }
+        public static int CalculateMinCp(PokemonData poke) => Math.Max(
+            (int)
+                Math.Floor(0.1*CalculateMinCpMultiplier(poke)*
+                           Math.Pow(poke.CpMultiplier + poke.AdditionalCpMultiplier, 2)), 10);
 
         public static double CalculateMinCpMultiplier(PokemonData poke)
         {
@@ -567,9 +552,6 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
             }
         }
 
-        public static int GetPowerUpLevel(PokemonData poke)
-        {
-            return (int) (GetLevel(poke)*2.0);
-        }
+        public static int GetPowerUpLevel(PokemonData poke) => (int) (GetLevel(poke)*2.0);
     }
 }

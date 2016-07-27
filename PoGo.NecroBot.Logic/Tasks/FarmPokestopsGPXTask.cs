@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
@@ -85,7 +84,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             }
                             if (fortSearch.ItemsAwarded.Count > 0)
                             {
-                                var refreshCachedInventory = ctx.Inventory.RefreshCachedInventory();
+                                await ctx.Inventory.RefreshCachedInventory();
                             }
 
                             await Task.Delay(1000);

@@ -141,7 +141,10 @@ namespace PoGo.NecroBot.CLI
             {
                 HandleEvent(eve, ctx);
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
         }
     }
 }
