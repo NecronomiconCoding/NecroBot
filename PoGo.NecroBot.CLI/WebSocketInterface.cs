@@ -29,10 +29,10 @@ namespace PoGo.NecroBot.CLI
                 Mode = SocketMode.Tcp,
                 Security = "tls",
                 Certificate = new CertificateConfig
-                {
-                    FilePath = @"cert.pfx",
-                    Password = "necro"
-                }
+                 {
+                   FilePath = @"cert.pfx",
+                   Password = "necro"
+                 }
             });
 
             if (setupComplete == false)

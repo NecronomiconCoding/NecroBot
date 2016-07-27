@@ -4,6 +4,8 @@
     {
         public int Exp;
         public int Gems;
+        public double Latitude;
+        public double Longitude;
         public string Items;
     }
 }
