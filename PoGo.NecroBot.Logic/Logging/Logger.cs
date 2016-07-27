@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.IO;
@@ -10,18 +10,14 @@ namespace PoGo.NecroBot.Logic.Logging
     public static class Logger
     {
         private static ILogger _logger;
-        private static string _subPath;
+        private static string _path;
 
         private static void Log(string message)
         {
             // maybe do a new log rather than appending?
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + Path.DirectorySeparatorChar + "Logs");
-
-
             using (
                 var log =
-                    File.AppendText(Directory.GetCurrentDirectory() + _subPath +
-                                    $"{Path.DirectorySeparatorChar}Logs{Path.DirectorySeparatorChar}NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt")
+                    File.AppendText(Path.Combine(_path, $"NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt"))
                 )
             {
                 log.WriteLine(message);
@@ -38,7 +34,8 @@ namespace PoGo.NecroBot.Logic.Logging
         public static void SetLogger(ILogger logger, string subPath = "")
         {
             _logger = logger;
-            _subPath = subPath;
+            _path = Path.Combine(Directory.GetCurrentDirectory(), subPath, "Logs");
+            Directory.CreateDirectory(_path);
             Log($"Initializing Rocket logger at time {DateTime.Now}...");
         }
 
