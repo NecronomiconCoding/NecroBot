@@ -215,29 +215,73 @@ namespace PoGo.NecroBot.CLI
 
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
                 {
-                    PokemonId.Zubat,
+                    PokemonId.Caterpie,
+                    PokemonId.Weedle,
                     PokemonId.Pidgey,
-                    PokemonId.Rattata
+                    PokemonId.Rattata,
+                    PokemonId.Spearow,
+                    PokemonId.Zubat,
+                    PokemonId.Doduo
                 };
 
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
                 {
-                    PokemonId.Dragonite,
+                    PokemonId.Venusaur,
                     PokemonId.Charizard,
-                    PokemonId.Zapdos,
+                    PokemonId.Blastoise,
+                    PokemonId.Nidoqueen,
+                    PokemonId.Nidoking,
+                    PokemonId.Clefable,
+                    PokemonId.Vileplume,
+                    PokemonId.Golduck,
+                    PokemonId.Arcanine,
+                    PokemonId.Poliwrath,
+                    PokemonId.Machamp,
+                    PokemonId.Victreebel,
+                    PokemonId.Golem,
+                    PokemonId.Slowbro,
+                    PokemonId.Farfetchd,
+                    PokemonId.Muk,
+                    PokemonId.Exeggutor,
+                    PokemonId.Lickitung,
+                    PokemonId.Chansey,
+                    PokemonId.Kangaskhan,
+                    PokemonId.MrMime,
+                    PokemonId.Gyarados,
+                    PokemonId.Lapras,
+                    PokemonId.Ditto,
+                    PokemonId.Vaporeon,
+                    PokemonId.Jolteon,
+                    PokemonId.Flareon,
+                    PokemonId.Porygon,
                     PokemonId.Snorlax,
-                    PokemonId.Alakazam,
-                    PokemonId.Mew,
-                    PokemonId.Mewtwo
+                    PokemonId.Articuno,
+                    PokemonId.Zapdos,
+                    PokemonId.Moltres,
+                    PokemonId.Dragonite,
+                    PokemonId.Mewtwo,
+                    PokemonId.Mew
                 };
 
         public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
                 {
-                    PokemonId.Zubat,
-                    PokemonId.Pidgey,
-                    PokemonId.Rattata,
+                    //12 candies
                     PokemonId.Caterpie,
-                    PokemonId.Weedle
+                    PokemonId.Weedle,
+                    PokemonId.Pidgey,
+                    //25 candies
+                    //PokemonId.Rattata,
+                    //PokemonId.NidoranFemale,
+                    //PokemonId.NidoranMale,
+                    //PokemonId.Oddish,
+                    //PokemonId.Poliwag,
+                    //PokemonId.Abra,
+                    //PokemonId.Machop,
+                    //PokemonId.Bellsprout,
+                    //PokemonId.Geodude,
+                    //PokemonId.Gastly,
+                    //PokemonId.Eevee,
+                    //PokemonId.Dratini
                 };
 
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
