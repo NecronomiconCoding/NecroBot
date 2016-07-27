@@ -109,11 +109,11 @@
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Mostrando mayor nivel"
+      "Value": "Mostrando mayor Nivel"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Asegurate de que Lat y Lng son correctos, el programa se cerrara en caso contrario! Lat: {0} Lng: {1}"
+      "Value": "Asegurate de que Lat y Lng son correctos, el programa se cerrará en caso contrario! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
