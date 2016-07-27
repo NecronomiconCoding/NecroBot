@@ -124,6 +124,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             Exp = fortSearch.ExperienceAwarded,
                             Gems = fortSearch.GemsAwarded,
+                            Latitude = pokeStop.Latitude,
+                            Longitude = pokeStop.Longitude,
                             Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
                         });
 
