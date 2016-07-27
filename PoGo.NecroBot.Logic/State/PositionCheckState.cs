@@ -59,7 +59,7 @@ namespace PoGo.NecroBot.Logic.State
 
             await Task.Delay(3000);
 
-            return new FarmState();
+            return new InfoState();
         }
 
         private static Tuple<double, double> LoadPositionFromDisk(StateMachine machine)

@@ -12,8 +12,6 @@ namespace PoGo.NecroBot.Logic.State
         public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
 
-            await DisplayPokemonStatsTask.Execute(ctx, machine);
-
             if (ctx.LogicSettings.EvolveAllPokemonAboveIv || ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
                 await EvolvePokemonTask.Execute(ctx, machine);
