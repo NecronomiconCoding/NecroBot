@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Gücks-Ei benutzt, verbleibend: {0}"
+      "Value": "Glücks-Ei benutzt, verbleibend: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
