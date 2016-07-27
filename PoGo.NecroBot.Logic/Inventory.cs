@@ -274,14 +274,14 @@ namespace PoGo.NecroBot.Logic
                 myPokemons =
                     myPokemons.Where(
                         p => (_logicClient.Settings.EvolveAllPokemonWithEnoughCandy && pokemonIds.Contains(p.PokemonId)) ||
-                             (_logicClient.Settings.EvolveAllPokemonAboveIv &&
-                              (PokemonInfo.CalculatePokemonPerfection(p) >= _logicClient.Settings.EvolveAboveIvValue)));
+                             (_logicClient.Settings.EvolveAllPokemonBelowIv &&
+                              (PokemonInfo.CalculatePokemonPerfection(p) <= _logicClient.Settings.EvolveBelowIvValue)));
             }
-            else if (_logicClient.Settings.EvolveAllPokemonAboveIv)
+            else if (_logicClient.Settings.EvolveAllPokemonBelowIv)
             {
                 myPokemons =
                     myPokemons.Where(
-                        p => PokemonInfo.CalculatePokemonPerfection(p) >= _logicClient.Settings.EvolveAboveIvValue);
+                        p => PokemonInfo.CalculatePokemonPerfection(p) <= _logicClient.Settings.EvolveBelowIvValue);
             }
             var pokemons = myPokemons.ToList();
 

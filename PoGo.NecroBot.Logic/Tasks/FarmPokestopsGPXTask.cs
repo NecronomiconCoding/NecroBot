@@ -97,7 +97,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             }
 
                             if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
-                                ctx.LogicSettings.EvolveAllPokemonAboveIv)
+                                ctx.LogicSettings.EvolveAllPokemonBelowIv)
                             {
                                 await EvolvePokemonTask.Execute(ctx, machine);
                             }
