@@ -70,8 +70,9 @@ namespace PoGo.NecroBot.Logic.Logging
         Transfer = 8,
         Evolve = 9,
         Egg = 10,
-        Info = 11,
-        Debug = 12,
-        Update = 13
+        Update = 11,
+        Info = 12,
+        Debug = 13,
+        
     }
 }
