@@ -30,15 +30,15 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "XP: {0}, Gems: {1}, Items: {2}"
+      "Value": "İsim: {0}, XP: {1}, Gems: {2}, Items: {3}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Eşya toplama başarısız, softban ihtimali yüksek. Deneme: {0}/40"
+      "Value": "İsim: {0}, BİLGİ: Eşya toplama başarısız, softban yemiş olabilirsin. Ban açılmasına: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "({1}m) içinde {0}"
+      "Value": "({1}m) içinde \"{0}\" PokeStop una ulaşılacak."
     },
     {
       "Key": "eventProfileLogin",
@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Şanslı yumurta(Lucky Egg) kullanıldı, kalan: {0}"
+      "Value": "Şanslı Yumurta(Lucky Egg) kullanıldı, kalan: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -70,7 +70,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Pokeball yok - Yakalanamayan pokemon: {0} (Savaş Puanı(CP): {1})"
+      "Value": "Pokeball yok - Kaçırılan pokemon: {0} (Savaş Puanı(CP): {1})"
     },
     {
       "Key": "catchStatusAttempt",
@@ -86,7 +86,7 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "GPX dosyasında işlenemeyen veri, göz ardı ediliyor."
+      "Value": "GPX dosyasında işlenemeyen veri, atlanıyor."
     },
     {
       "Key": "displayHighestsHeader",
@@ -123,6 +123,170 @@
     {
       "Key": "incubatorStatusUpdate",
       "Value": "Kuluçka makinesi(Incubator) durum güncellemesi: {0:0.00}km kaldı"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Kuluçka makinesindeki(Incubator) yumurta çatladı: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "HATA"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "DİKKAT"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "BİLGİ"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "GENEL"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "ÇÖP"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "AKTARILDI"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "GELİŞTİRİLDİ"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "BÖĞÜRTLEN"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "YUMURTA"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "GÜNCELLEME"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "{0} kullanılarak oturum açılıyor..."
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "PTC sunucuları yanıt vermiyor ya da bilgilerin yanlış olabilir. Google ile dene."
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "{0} saniye içinde tekrar deneniyor..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Hesap doğrulanmamış! Kapatılıyor..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Google Device penceresi açılıyor. CTRL+V kullanarak kodu yapıştırabilirsin."
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Doğrulama kodu panoya kopyalanamadı, senin yazman gerekecek."
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Bu adrese git: {0} ve şu kodu gir: {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Gerçekçi gezinme algılandı, UserSettings.settings kullanılıyor."
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "{0} da gerçekçi gezinme yok, son kaydedilen Coords.ini kullanılıyor."
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "\"Coords.ini\" dosyasındaki koordinatlar geçersiz, varsayılan koordinatlar kullanılıyor."
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Harika! Son sürüme sahipsin {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "Otomatik güncelleme kapalı. Son sürüm için: {0}\n"
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Güncelleme indiriliyor..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "İndirme tamamlandı, paket açılıyor..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Paket açıldı."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Güncelleme tamamlandı, bu pencereyi kapatabilirsin."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Tütsü(Incense) pokemonu aranıyor..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Pokemon aranıyor..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Yem(Lure) pokemonu aranıyor..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Atlandı: {0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Pokemon envanteri dolu. Pokemonlar aktarılıyor..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "Pokemon envanteri dolu. Pokemonları aktararak yer açın veya ayarlarda \"TransferDuplicatePokemon\" değerini \"true\" atayın."
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Pokemonla karşılaşmada sorun: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Pokemonla karşılaşmada sorun: Yem(Lure) pokemonu {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Hedef koordinat ({0}, {1}), geçerli konumuna ({2}, {3}) çok uzak."
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pokemon {0} ({1}) ismi değiştirildi. ({2} -> {3})"
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Pokemon Yoksayma Filtresi] - {0} ayarlarda belirtildiği üzere yoksayıldı."
     }
   ]
 }
