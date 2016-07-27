@@ -131,6 +131,10 @@
     </None>
     <None Include="supersocket.cmd" />
     <None Include="supersocket.sh" />
+    <None Include="Translations\translation.es.json" />
+    <None Include="Translations\translation.it.json" />
+    <None Include="Translations\translation.pl.json" />
+    <None Include="Translations\translation.zh_CN.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FeroxRev\PokemonGo.RocketAPI\PokemonGo.RocketAPI.csproj">
@@ -145,6 +149,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
