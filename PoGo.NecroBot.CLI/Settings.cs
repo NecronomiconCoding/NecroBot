@@ -102,9 +102,7 @@ namespace PoGo.NecroBot.CLI
 
         public static GlobalSettings Load(string path)
         {
-            GlobalSettings settings = null;
-
-            settings.ProfilePath = Directory.GetCurrentDirectory() + path;
+            GlobalSettings settings = new GlobalSettings {ProfilePath = Directory.GetCurrentDirectory() + path};
             settings.ConfigPath = settings.ProfilePath + Path.DirectorySeparatorChar + "config";
 
             var fullPath = settings.ConfigPath + Path.DirectorySeparatorChar + "config.json";
@@ -268,6 +266,7 @@ namespace PoGo.NecroBot.CLI
         public double DefaultLatitude => _settings.DefaultLatitude;
         public double DefaultLongitude => _settings.DefaultLongitude;
         public double DefaultAltitude => _settings.DefaultAltitude;
+        public bool AutoUpdate => _settings.AutoUpdate;
 
         public string GoogleRefreshToken
         {

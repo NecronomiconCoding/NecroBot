@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Ingen Pokeballs - Vi gikk glipp av {0} with CP {1}"
+      "Value": "Ingen Pokeballs - Vi gikk glipp av {0} med CP {1}"
     },
     {
       "Key": "catchStatusAttempt",
