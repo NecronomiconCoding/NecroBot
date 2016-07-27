@@ -22,7 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "VOus êtes en dehors de votre radius défini! Début de la marche ({0}m de distance) dans 5 secondes. Est-ce que le fichier Coords.ini est correct?"
+      "Value": "Vous êtes en dehors de votre rayon défini! Début de la marche ({0}m de distance) dans 5 secondes. Est-ce que le fichier Coords.ini est correct?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -79,6 +79,46 @@
     {
       "Key": "candies",
       "Value": "Bonbons: {0}"
+    },
+    {
+      "Key": "unhandledGPXData",
+      "Value": "Données non gérées dans le fichier GPX, ignorées.."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokémons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "parfait"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "Nom"
+    },
+    {
+      "Key": "displayHighestsCPHeader",
+      "Value": "Montrer Meilleurs PC"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Montrer Meilleurs Parfaits"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Montrer Meilleurs Level"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Assuez-vous que la Lat & la Lng de départ sont correctes. Fermez le programme si ça ne l'est pas! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Mise d'un oeuf dans l'incubateur: {0:0.00}km restant(s)"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Mise à jour du statut de l'incubation: {0:0.00}km restant(s)"
     }
   ]
 }
