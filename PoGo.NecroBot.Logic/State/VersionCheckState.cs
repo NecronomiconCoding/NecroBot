@@ -23,13 +23,13 @@ namespace PoGo.NecroBot.Logic.State
         public const string LatestReleaseApi =
             "https://api.github.com/repos/NecronomiconCoding/NecroBot/releases/latest";
 
-        private const string LatestRelease = 
+        private const string LatestRelease =
             "https://github.com/NecronomiconCoding/NecroBot/releases";
+
+        public static Version RemoteVersion;
 
         private readonly string _remoteReleaseUrl =
             $"https://github.com/NecronomiconCoding/NecroBot/releases/download/v{RemoteVersion}/";
-
-        public static Version RemoteVersion;
 
         public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
@@ -60,13 +60,13 @@ namespace PoGo.NecroBot.Logic.State
             var destinationDir = baseDir + Path.DirectorySeparatorChar;
 
             if (!DownloadFile(downloadLink, downloadFilePath)) return new LoginState();
-                machine.Fire(new UpdateEvent { Message = "Finished downloading newest Release..." });
+            machine.Fire(new UpdateEvent {Message = "Finished downloading newest Release..."});
 
             if (!UnpackFile(downloadFilePath, tempPath)) return new LoginState();
-                machine.Fire(new UpdateEvent { Message = "Finished unpacking files..." });
+            machine.Fire(new UpdateEvent {Message = "Finished unpacking files..."});
 
             if (!MoveAllFiles(extractedDir, destinationDir)) return new LoginState();
-                machine.Fire(new UpdateEvent {Message = "Update finished, you can close this window now."});
+            machine.Fire(new UpdateEvent {Message = "Update finished, you can close this window now."});
 
             Process.Start(Assembly.GetEntryAssembly().Location);
             Environment.Exit(-1);
@@ -75,7 +75,7 @@ namespace PoGo.NecroBot.Logic.State
 
         public static void CleanupOldFiles()
         {
-            string tmpDir = Path.Combine(Directory.GetCurrentDirectory(), "tmp");
+            var tmpDir = Path.Combine(Directory.GetCurrentDirectory(), "tmp");
 
             if (Directory.Exists(tmpDir))
             {
