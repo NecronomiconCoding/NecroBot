@@ -88,6 +88,15 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.OpeningGoogleDevicePage,"Opening Google Device page. Please paste the code using CTRL+V"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CouldntCopyToClipboard, "Couldnt copy to clipboard, do it manually"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CouldntCopyToClipboard2, "Goto: {0} & enter {1}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.RealisticTravelDetected, "Detected realistic Traveling , using UserSettings.settings"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.NotRealisticTravel, "Not realistic Traveling at {0}, using last saved Coords.ini"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.CoordinatesAreInvalid, "Coordinates in \"Coords.ini\" file are invalid, using the default coordinates"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.GotUpToDateVersion,"Perfect! You already have the newest Version {0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.AutoUpdaterDisabled, "AutoUpdater is disabled. Get the latest release from: {0}\n "),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DownloadingUpdate, "Downloading and apply Update...."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.FinishedDownloadingRelease, "Finished downloading newest Release..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.FinishedUnpackingFiles, "Finished unpacking files..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.UpdateFinished, "Update finished, you can close this window now."),
         };
 
         public static Translations Default => new Translations();
@@ -205,5 +214,14 @@ namespace PoGo.NecroBot.Logic.Common
         OpeningGoogleDevicePage,
         CouldntCopyToClipboard,
         CouldntCopyToClipboard2,
+        RealisticTravelDetected,
+        NotRealisticTravel,
+        CoordinatesAreInvalid,
+        GotUpToDateVersion,
+        AutoUpdaterDisabled,
+        DownloadingUpdate,
+        FinishedDownloadingRelease,
+        FinishedUnpackingFiles,
+        UpdateFinished,
     }
 }

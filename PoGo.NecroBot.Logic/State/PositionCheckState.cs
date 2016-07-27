@@ -19,7 +19,7 @@ namespace PoGo.NecroBot.Logic.State
                              Path.DirectorySeparatorChar + "Coords.ini";
             if (File.Exists(coordsPath))
             {
-                var latLngFromFile = LoadPositionFromDisk(machine);
+                var latLngFromFile = LoadPositionFromDisk(machine, ctx);
                 if (latLngFromFile != null)
                 {
                     var distance = LocationUtils.CalculateDistanceInMeters(latLngFromFile.Item1, latLngFromFile.Item2,
@@ -38,14 +38,14 @@ namespace PoGo.NecroBot.Logic.State
                                 File.Delete(coordsPath);
                                 machine.Fire(new WarnEvent
                                 {
-                                    Message = "Detected realistic Traveling , using UserSettings.settings"
+                                    Message = ctx.Translations.GetTranslation(TranslationString.RealisticTravelDetected)
                                 });
                             }
                             else
                             {
                                 machine.Fire(new WarnEvent
                                 {
-                                    Message = "Not realistic Traveling at " + kmph + ", using last saved Coords.ini"
+                                    Message =ctx.Translations.GetTranslation(TranslationString.NotRealisticTravel, kmph)
                                 });
                             }
                         }
@@ -65,7 +65,7 @@ namespace PoGo.NecroBot.Logic.State
             return new InfoState();
         }
 
-        private static Tuple<double, double> LoadPositionFromDisk(StateMachine machine)
+        private static Tuple<double, double> LoadPositionFromDisk(StateMachine machine, Context ctx)
         {
             if (
                 File.Exists(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
@@ -90,7 +90,7 @@ namespace PoGo.NecroBot.Logic.State
                         }
                         machine.Fire(new WarnEvent
                         {
-                            Message = "Coordinates in \"Coords.ini\" file are invalid, using the default coordinates"
+                            Message = ctx.Translations.GetTranslation(TranslationString.CoordinatesAreInvalid)
                         });
                         return null;
                     }
@@ -98,7 +98,7 @@ namespace PoGo.NecroBot.Logic.State
                     {
                         machine.Fire(new WarnEvent
                         {
-                            Message = "Coordinates in \"Coords.ini\" file are invalid, using the default coordinates"
+                            Message = ctx.Translations.GetTranslation(TranslationString.CoordinatesAreInvalid)
                         });
                         return null;
                     }
