@@ -99,7 +99,7 @@ namespace PoGo.NecroBot.CLI
 
         [JsonIgnore] internal AuthSettings Auth = new AuthSettings();
 
-        public bool AutoUpdate = false;
+        public bool AutoUpdate = true;
         public string ConfigPath;
         public double DefaultAltitude = 10;
         public double DefaultLatitude = 52.379189;

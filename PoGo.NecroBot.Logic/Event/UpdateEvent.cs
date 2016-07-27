@@ -1,4 +1,6 @@
-﻿namespace PoGo.NecroBot.Logic.Event
+﻿using System;
+
+namespace PoGo.NecroBot.Logic.Event
 {
     public class UpdateEvent : IEvent
     {
