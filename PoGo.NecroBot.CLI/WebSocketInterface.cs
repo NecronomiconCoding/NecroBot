@@ -26,7 +26,13 @@ namespace PoGo.NecroBot.CLI
                 Name = "NecroWebSocket",
                 Ip = "Any",
                 Port = port,
-                Mode = SocketMode.Tcp
+                Mode = SocketMode.Tcp,
+                Security = "tls",
+                Certificate = new CertificateConfig
+                 {
+                   FilePath = @"cert.pfx",
+                   Password = "necro"
+                 }
             });
 
             if (setupComplete == false)
