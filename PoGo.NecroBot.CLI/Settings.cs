@@ -64,9 +64,9 @@ namespace PoGo.NecroBot.CLI
                     {
                         Console.WriteLine("Password:");
                         PtcPassword = Console.ReadLine();
-                    } while (string.IsNullOrEmpty(PtcPassword));        
+                    } while (string.IsNullOrEmpty(PtcPassword));
                 }
-                
+
 
                 Save(FilePath);
             }
@@ -101,9 +101,9 @@ namespace PoGo.NecroBot.CLI
         public static GlobalSettings Load(string path)
         {
             GlobalSettings settings;
-            var profilePath = Directory.GetCurrentDirectory() + path;
-            var configPath = Path.Combine(profilePath  + "config");
-            var fullPath = Path.Combine(configPath + "config.json");
+            var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
+            var configPath = Path.Combine(profilePath, "config");
+            var fullPath = Path.Combine(configPath, "config.json");
 
             if (File.Exists(fullPath))
             {
@@ -129,7 +129,7 @@ namespace PoGo.NecroBot.CLI
             settings.ProfilePath = profilePath;
             settings.ConfigPath = configPath;
             settings.Save(fullPath);
-            settings.Auth.Load(settings.ConfigPath + Path.DirectorySeparatorChar + "auth.json");
+            settings.Auth.Load(Path.Combine(configPath, "auth.json"));
 
             return settings;
         }
