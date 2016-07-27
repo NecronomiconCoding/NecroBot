@@ -107,9 +107,9 @@ namespace PoGo.NecroBot.CLI
         public static string ProfilePath;
         public static string ConfigPath;
 
-        public static GlobalSettings Load(string path)
+        public static GlobalSettings Load()
         {
-            ProfilePath = Directory.GetCurrentDirectory() + path;
+            ProfilePath = Directory.GetCurrentDirectory();
             ConfigPath = ProfilePath + Path.DirectorySeparatorChar + "config";
 
             var fullPath = ConfigPath + Path.DirectorySeparatorChar + "config.json";
