@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
 
@@ -54,7 +53,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         KmRemaining = response.EggIncubator.TargetKmWalked - kmWalked
                     });
 
-                    await Task.Delay(500);
+                    await Utils.Statistics.RandomDelay(500);
                 }
                 else
                 {

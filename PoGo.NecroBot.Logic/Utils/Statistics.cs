@@ -6,6 +6,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using POGOProtos.Networking.Responses;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -69,6 +70,14 @@ namespace PoGo.NecroBot.Logic.Utils
         public double GetRuntime()
         {
             return (DateTime.Now - _initSessionDateTime).TotalSeconds/3600;
+        }
+
+        private static Random random = new Random();
+
+        public static Task RandomDelay(int millisecondsDelay)
+        {
+            millisecondsDelay += random.Next(0, 500);
+            return Task.Delay(millisecondsDelay);
         }
 
         public static int GetXpDiff(int level)

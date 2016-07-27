@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
@@ -46,7 +44,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
-                await Task.Delay(1000);
+                await Utils.Statistics.RandomDelay(1000);
 
                 await RecycleItemsTask.Execute(ctx, machine);
 
