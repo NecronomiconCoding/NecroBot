@@ -108,6 +108,7 @@ namespace PoGo.NecroBot.CLI
         public float EvolveAboveIvValue = 95;
         public bool EvolveAllPokemonAboveIv = false;
         public bool EvolveAllPokemonWithEnoughCandy = false;
+        public bool DumpPokemonStats = false;
         public string GpxFile = "GPXPath.GPX";
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
