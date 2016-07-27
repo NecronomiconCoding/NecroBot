@@ -41,26 +41,6 @@
     <ManifestKeyFile>PoGo.NecroBot.CLI_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CodeProse.Pogo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\pogo.0.0.3\lib\CodeProse.Pogo.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="DotNetOpenAuth, Version=4.0.0.11165, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
-      <HintPath>..\packages\pogo.0.0.3\lib\DotNetOpenAuth.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis, Version=1.3.0.15233, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\pogo.0.0.3\lib\Google.Apis.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis.Authentication.OAuth2, Version=1.2.4737.25313, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\pogo.0.0.3\lib\Google.Apis.Authentication.OAuth2.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Google.Apis.Datastore.v1beta1, Version=1.3.0.15233, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\pogo.0.0.3\lib\Google.Apis.Datastore.v1beta1.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Google.Protobuf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Protobuf.3.0.0-beta3\lib\dotnet\Google.Protobuf.dll</HintPath>
       <Private>True</Private>
@@ -134,21 +114,6 @@
     </None>
     <None Include="supersocket.cmd" />
     <None Include="supersocket.sh" />
-    <None Include="Config\Translations\translation.es.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Config\Translations\translation.it.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Config\Translations\translation.nl.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Config\Translations\translation.pl.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Config\Translations\translation.zh_CN.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FeroxRev\PokemonGo.RocketAPI\PokemonGo.RocketAPI.csproj">
@@ -169,7 +134,7 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

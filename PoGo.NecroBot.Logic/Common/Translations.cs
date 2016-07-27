@@ -15,9 +15,9 @@ namespace PoGo.NecroBot.Logic.Common
         public static Translations Load(string translationsLanguageCode)
         {
             ProfilePath = Directory.GetCurrentDirectory();
-            ConfigPath = ProfilePath + "\\config\\translations";
+            ConfigPath = Path.Combine(ProfilePath, "config", "translations");
 
-            var fullPath = ConfigPath + "\\translation." + translationsLanguageCode + ".json";
+            var fullPath = Path.Combine(ConfigPath, "translation." + translationsLanguageCode + ".json");
 
             Translations translations = null;
             if (File.Exists(fullPath))
@@ -35,7 +35,7 @@ namespace PoGo.NecroBot.Logic.Common
             else
             {
                 translations = new Translations();
-                translations.Save(ConfigPath + "\\translation.en.json");
+                translations.Save(Path.Combine(ConfigPath, "translation.en.json"));
             }
             return translations;
         }

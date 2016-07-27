@@ -102,6 +102,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 await TransferDuplicatePokemonTask.Execute(ctx, machine);
                             }
+
+                            if (ctx.LogicSettings.RenameAboveIv)
+                            {
+                                await RenamePokemonTask.Execute(ctx, machine);
+                            }
                         }
 
                         await ctx.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),

@@ -1,7 +1,7 @@
 ﻿#region using directives
 
 using System;
-using System.Device.Location;
+using GeoCoordinatePortable;
 
 #endregion
 
