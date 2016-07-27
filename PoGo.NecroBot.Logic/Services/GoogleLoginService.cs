@@ -12,6 +12,10 @@ namespace PoGo.NecroBot.Logic.Services
     {
         private ISession _session;
 
+        public GoogleLoginService()
+        {
+        }
+
         public GoogleLoginService(ISession session)
         {
             _session = session;
