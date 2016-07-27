@@ -46,15 +46,15 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "成功数 {0} 获取 {1} 经验值"
+      "Value": "成功进化 {0} 获取 {1} 经验值"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "失败数 {0}. 结果总数 {1}, 停止进化 {2}"
+      "Value": "进化失败 {0}. 结果是 {1}, 停止进化 {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP:{1}  完美度:{2}%  [最高 CP: {3}  完美度: {4}%] (共有{5}个糖果)"
+      "Value": "{0}\t- CP:{1}  完美度:{2}%  [最高 CP: {3}  完美度: {4}%] (共有{5}颗糖果)"
     },
     {
       "Key": "eventItemRecycled",
@@ -70,7 +70,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} 尝试 #{1}"
+      "Value": "{0} 重试 #{1}"
     },
     {
       "Key": "catchStatus",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "candies",
-      "Value": "使用{0}个糖果"
+      "Value": "共有{0}颗糖果"
     }
   ]
 }
