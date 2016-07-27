@@ -43,8 +43,8 @@ namespace PoGo.NecroBot.Logic.State
                 {
                     Message = ctx.Translations.GetTranslation(Common.TranslationString.PtcOffline)
                 });
-                machine.Fire(new NoticeEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.TryingAgainIn, 20)});
-                await Task.Delay(20000);
+                machine.Fire(new NoticeEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.TryingAgainIn, ctx.LogicSettings.DelayRetryLogin / 1000) });
+                await Task.Delay(ctx.LogicSettings.DelayRetryLogin);
                 return this;
             }
             catch (AccountNotVerifiedException)

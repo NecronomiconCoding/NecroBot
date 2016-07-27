@@ -133,7 +133,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 machine.Fire(evt);
 
                 attemptCounter++;
-                await Task.Delay(2000);
+                await Task.Delay(ctx.LogicSettings.DelayBetweenCatchAttempts);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
@@ -194,6 +194,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             await ctx.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
             machine.Fire(new UseBerryEvent {Count = berry.Count});
+            await Task.Delay(ctx.LogicSettings.DelayAfterBerryIsUsed);
         }
     }
 }

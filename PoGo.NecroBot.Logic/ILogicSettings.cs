@@ -62,5 +62,20 @@ namespace PoGo.NecroBot.Logic
         ICollection<PokemonId> PokemonsNotToCatch { get; }
 
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
+
+        int DelayHumanLikeWalkingCicle { get; } 
+        int DelayRetryLogin { get; } 
+        int DelayCatchFarPokemons { get; }  
+        int DelayCatchClosePokemons { get; }  
+        int DelayBetweenCatchAttempts { get; }  
+        int DelayAfterBerryIsUsed { get; }  
+        int DelayAfterPokemonIsEvolved { get; }  
+        int DelayAfterLuckyEggIsUsed { get; }  
+        int DelayAfterPokeStopIsFarmed { get; }  
+        int DelayAfterGoingOutOfRadius { get; }  
+        int DelayDisplayHighestPokemons { get; }  
+        int DelayAfterItemIsRecycled { get; }  
+        int DelayAfterIncubatorIsUsed { get; }
+
     }
 }

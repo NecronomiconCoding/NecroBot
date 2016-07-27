@@ -36,11 +36,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ctx.Translations.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
 
-                await Task.Delay(1000);
+                await Task.Delay(ctx.LogicSettings.DelayAfterGoingOutOfRadius);
 
                 await ctx.Navigation.HumanLikeWalking(
                     new GeoCoordinate(ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude),
-                    ctx.LogicSettings.WalkingSpeedInKilometerPerHour, null);
+                    ctx.LogicSettings.WalkingSpeedInKilometerPerHour, null, ctx.LogicSettings.DelayHumanLikeWalkingCicle);
             }
 
             var pokestopList = await GetPokeStops(ctx);
@@ -82,7 +82,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         //Catch Incense Pokemon
                         await CatchIncensePokemonsTask.Execute(ctx, machine);
                         return true;
-                    });
+                    },
+                     ctx.LogicSettings.DelayHumanLikeWalkingCicle);
 
                 //Catch Lure Pokemon
                 if (pokeStop.LureInfo != null)
@@ -136,7 +137,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     } while (fortTry < retryNumber - zeroCheck); //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
-                await Task.Delay(1000);
+                await Task.Delay(ctx.LogicSettings.DelayAfterPokeStopIsFarmed);
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;

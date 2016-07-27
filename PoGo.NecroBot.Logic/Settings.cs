@@ -243,6 +243,20 @@ namespace PoGo.NecroBot.CLI
         public double WalkingSpeedInKilometerPerHour = 50;
         public int WebSocketPort = 14251;
         public static GlobalSettings Default => new GlobalSettings();
+        public int DelayHumanLikeWalkingCicle = 500;  
+        public int DelayRetryLogin = 20000;  
+        public int DelayCatchFarPokemons = 15000;  
+        public int DelayCatchClosePokemons = 500;  
+        public int DelayBetweenCatchAttempts = 2000;  
+        public int DelayAfterBerryIsUsed = 1500;  
+        public int DelayAfterPokemonIsEvolved = 3000;  
+        public int DelayAfterLuckyEggIsUsed = 2000;  
+        public int DelayAfterPokeStopIsFarmed = 1000;  
+        public int DelayAfterGoingOutOfRadius = 5000;  
+        public int DelayDisplayHighestPokemons = 500;  
+        public int DelayAfterItemIsRecycled = 500;  
+        public int DelayAfterIncubatorIsUsed = 500;
+
 
         public static GlobalSettings Load(string path)
         {
@@ -362,5 +376,19 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
+        public int DelayHumanLikeWalkingCicle => _settings.DelayHumanLikeWalkingCicle;
+        public int DelayRetryLogin => _settings.DelayRetryLogin;  
+        public int DelayCatchFarPokemons => _settings.DelayCatchFarPokemons;  
+        public int DelayCatchClosePokemons => _settings.DelayCatchClosePokemons;  
+        public int DelayBetweenCatchAttempts => _settings.DelayBetweenCatchAttempts;  
+        public int DelayAfterBerryIsUsed => _settings.DelayAfterBerryIsUsed;  
+        public int DelayAfterPokemonIsEvolved => _settings.DelayAfterPokemonIsEvolved;  
+        public int DelayAfterLuckyEggIsUsed => _settings.DelayAfterLuckyEggIsUsed;  
+        public int DelayAfterPokeStopIsFarmed => _settings.DelayAfterPokeStopIsFarmed;  
+        public int DelayAfterGoingOutOfRadius => _settings.DelayAfterGoingOutOfRadius;  
+        public int DelayDisplayHighestPokemons => _settings.DelayDisplayHighestPokemons;  
+        public int DelayAfterItemIsRecycled => _settings.DelayAfterItemIsRecycled;  
+        public int DelayAfterIncubatorIsUsed => _settings.DelayAfterIncubatorIsUsed;
+
     }
 }

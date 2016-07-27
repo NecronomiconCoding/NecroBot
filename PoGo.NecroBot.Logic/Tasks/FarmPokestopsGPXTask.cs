@@ -121,7 +121,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await CatchIncensePokemonsTask.Execute(ctx, machine);
                                 await UseNearbyPokestopsTask.Execute(ctx, machine);
                                 return true;
-                            }
+                            },
+                            ctx.LogicSettings.DelayHumanLikeWalkingCicle
                             );
 
                         if (curTrkPt >= maxTrkPt)
