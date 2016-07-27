@@ -48,6 +48,17 @@ namespace PoGo.NecroBot.CLI
             service.Run();
             */
 
+            if (settings == null)
+            {
+                settings = GlobalSettings.Load(subPath);
+                Logger.Write("This is your first start and the bot will use the default config!", LogLevel.Warning);
+                Logger.Write("Continue? (y/n)", LogLevel.Warning);
+
+                if (!Console.ReadLine().ToUpper().Equals("Y"))
+                    return;
+            }
+
+
             var machine = new StateMachine();
             var stats = new Statistics();
             stats.DirtyEvent += () => Console.Title = stats.ToString();
