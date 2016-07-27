@@ -1,4 +1,4 @@
-﻿{
+{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,17 +22,19 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "¡Estas fuera del radio definido! Andando a la posición inicial (a {0}m) en 5 segundos. ¿Es correcto tu archivo Coords.ini?"
+      "Value": "¡Estás fuera del radio definido! Andando a la posición inicial (a {0}m) en 5 segundos. ¿Es correcto tu archivo Coords.ini?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value":
-        "No se encontraron pokeparadas disponibles en tu area. ¿Has configurado una distancia máxima demasiado pequeña?"
+      "Value": "No se encontraron pokeparadas disponibles en tu área. ¿Has configurado una distancia máxima demasiado pequeña?"
     },
     {
       "Key": "eventFortUsed",
       "Value": "PX: {0}, Gemas: {1}, Objetos: {2}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "El avance falló, posible softban. Eliminar softban en: {0}/{1}"
     },
     {
       "Key": "eventFortTargeted",
@@ -64,8 +66,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value":
-        "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -82,6 +83,46 @@
     {
       "Key": "candies",
       "Value": "Caramelos: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "No controlados los datos en el archivo GPX, intentar omitir."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfecto"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "nombre"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "DisplayHighestsCP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "DisplayHighestsPerfect"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "DisplayHighestsLevel"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Asegúrese de que la Latitud y Longitud son las correctas.. Salir del Programa si no! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Poner el huevo en la incubadora: {0:0.00}km left"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Actualizar estado de la incubadora: {0:0.00}km left"
     }
   ]
 }
