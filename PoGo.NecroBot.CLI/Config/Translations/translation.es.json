@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Probabilidad: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -86,7 +86,7 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "No controlados los datos en el archivo GPX, intentar omitir."
+      "Value": "Error: No controlados los datos en el archivo GPX, intentar omitir."
     },
     {
       "Key": "displayHighestsHeader",
@@ -102,27 +102,27 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "DisplayHighestsCP"
+      "Value": "Pokemons con mayor CP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "DisplayHighestsPerfect"
+      "Value": "Pokemons con mayor Perfección"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "DisplayHighestsLevel"
+      "Value": "Pokemons con mayor Nivel"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Asegúrese de que la Latitud y Longitud son las correctas.. Salir del Programa si no! Lat: {0} Lng: {1}"
+      "Value": "Asegúrese de que la Latitud y Longitud son las correctas. Salga del Programa si no es así! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Poner el huevo en la incubadora: {0:0.00}km left"
+      "Value": "Añadiendo huevo a la incubadora: {0:0.00}km restantes"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Actualizar estado de la incubadora: {0:0.00}km left"
+      "Value": "Actualizando el estado de la incubadora: {0:0.00}km restantes"
     }
   ]
 }
