@@ -27,45 +27,57 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 float probability = encounter?.CaptureProbability?.CaptureProbability_[0];
 
+                if (!(encounter is DiskEncounterResponse))
+                    encounterId = pokemon.EncounterId;
+
+                var spawnPointId = encounter is DiskEncounterResponse
+                    ? currentFortData?.Id
+                    : pokemon.SpawnPointId;
+                var latitude = encounter is DiskEncounterResponse
+                    ? currentFortData.Latitude
+                    : pokemon.Latitude;
+                var longitude = encounter is DiskEncounterResponse
+                    ? currentFortData.Longitude
+                    : pokemon.Longitude;
+                var pokemonData = encounter is EncounterResponse
+                    ? encounter?.WildPokemon?.PokemonData
+                    : encounter?.PokemonData;
+                var pokemonId = encounter is EncounterResponse
+                    ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
+
+                var Cp = pokemonData?.Cp ?? 0;
+                var perfection =
+                    PokemonInfo.CalculatePokemonPerfection(pokemonData);
+
                 var pokeball = await GetBestBall(ctx, encounter, probability);
                 if (pokeball == ItemId.ItemUnknown)
                 {
                     machine.Fire(new NoPokeballEvent
                     {
-                        Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId,
-                        Cp =
-                            (encounter is EncounterResponse
-                                ? encounter.WildPokemon?.PokemonData?.Cp
-                                : encounter?.PokemonData?.Cp) ?? 0
+                        Id = pokemonId,
+                        Cp = Cp
                     });
                     return;
                 }
 
                 var isLowProbability = probability < 0.35;
-                var isHighCp = encounter != null &&
-                               (encounter is EncounterResponse
-                                   ? encounter.WildPokemon?.PokemonData?.Cp
-                                   : encounter.PokemonData?.Cp) > 400;
-                var isHighPerfection =
-                    PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
-                        ? encounter.WildPokemon?.PokemonData
-                        : encounter?.PokemonData) >= ctx.LogicSettings.KeepMinIvPercentage;
+                var isHighCp = encounter != null && Cp > 400;
+                var isHighPerfection = perfection >= ctx.LogicSettings.KeepMinIvPercentage;
 
                 if ((isLowProbability && isHighCp) || isHighPerfection)
                 {
-                    await UseBerry(ctx, machine, encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
-                        encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData?.Id);
+                    await UseBerry(ctx,machine, encounterId, spawnPointId);
                 }
 
                 var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
                     ctx.Client.CurrentLongitude,
-                    encounter is EncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
-                    encounter is EncounterResponse ? pokemon.Longitude : currentFortData.Longitude);
+                    latitude, 
+                    longitude);
 
                 caughtPokemonResponse =
-                    await ctx.Client.Encounter.CatchPokemon(
-                        encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
-                        encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData.Id, pokeball);
+                    await ctx.Client.Encounter.CatchPokemon(encounterId,
+                        spawnPointId,
+                        pokeball);
 
                 var evt = new PokemonCaptureEvent {Status = caughtPokemonResponse.Status};
                 evt.Exp = 0;
@@ -106,23 +118,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                 evt.CatchType = encounter is EncounterResponse
                     ? "Normal"
                     : encounter is DiskEncounterResponse ? "Lure" : "Incense";
-                evt.Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
+                evt.Id = pokemonId;
                 evt.Level =
-                    PokemonInfo.GetLevel(encounter is EncounterResponse
-                        ? encounter.WildPokemon?.PokemonData
-                        : encounter?.PokemonData);
+                    PokemonInfo.GetLevel(pokemonData);
                 evt.Cp = encounter is EncounterResponse
                     ? encounter.WildPokemon?.PokemonData?.Cp
                     : encounter?.PokemonData?.Cp ?? 0;
                 evt.MaxCp =
-                    PokemonInfo.CalculateMaxCp(encounter is EncounterResponse
-                        ? encounter.WildPokemon?.PokemonData
-                        : encounter?.PokemonData);
+                    PokemonInfo.CalculateMaxCp(pokemonData);
                 evt.Perfection =
                     Math.Round(
-                        PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
-                            ? encounter.WildPokemon?.PokemonData
-                            : encounter?.PokemonData));
+                        PokemonInfo.CalculatePokemonPerfection(pokemonData));
                 evt.Probability =
                     Math.Round(probability*100, 2);
                 evt.Distance = distance;
