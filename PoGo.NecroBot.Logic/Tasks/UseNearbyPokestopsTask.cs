@@ -46,7 +46,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
-                await Task.Delay(1000);
+                await Task.Delay(ctx.LogicSettings.DelayAfterPokeStopIsFarmed);
 
                 await RecycleItemsTask.Execute(ctx, machine);
 

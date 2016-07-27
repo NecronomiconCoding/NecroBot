@@ -88,7 +88,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 var refreshCachedInventory = ctx.Inventory.RefreshCachedInventory();
                             }
 
-                            await Task.Delay(1000);
+                            await Task.Delay(ctx.LogicSettings.DelayAfterPokeStopIsFarmed);
 
                             await RecycleItemsTask.Execute(ctx, machine);
 
@@ -117,7 +117,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await CatchIncensePokemonsTask.Execute(ctx, machine);
                                 await UseNearbyPokestopsTask.Execute(ctx, machine);
                                 return true;
-                            }
+                            },
+                            ctx.LogicSettings.DelayHumanLikeWalkingCicleMin
                             );
 
                         if (curTrkPt >= maxTrkPt)

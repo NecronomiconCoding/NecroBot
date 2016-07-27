@@ -21,7 +21,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 machine.Fire(new ItemRecycledEvent {Id = item.ItemId, Count = item.Count});
 
-                await Task.Delay(500);
+                await Task.Delay(ctx.LogicSettings.DelayAfterItemIsRecycled);
             }
 
             await ctx.Inventory.RefreshCachedInventory();

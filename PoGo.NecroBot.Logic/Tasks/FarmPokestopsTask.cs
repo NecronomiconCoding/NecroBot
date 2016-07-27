@@ -32,11 +32,11 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 Logger.Write(ctx.Translations.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart), LogLevel.Warning);
 
-                await Task.Delay(5000);
+                await Task.Delay(ctx.LogicSettings.DelayAfterGoingOutOfRadius);
 
                 await ctx.Navigation.HumanLikeWalking(
                     new GeoCoordinate(ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude),
-                    ctx.LogicSettings.WalkingSpeedInKilometerPerHour, null);
+                    ctx.LogicSettings.WalkingSpeedInKilometerPerHour, null, ctx.LogicSettings.DelayHumanLikeWalkingCicleMin);
             }
 
             var pokestopList = await GetPokeStops(ctx);
@@ -75,7 +75,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         //Catch Incense Pokemon
                         await CatchIncensePokemonsTask.Execute(ctx, machine);
                         return true;
-                    });
+                    }, ctx.LogicSettings.DelayHumanLikeWalkingCicleMin);
 
                 //Catch Lure Pokemon
                 if (pokeStop.LureInfo != null)
@@ -95,7 +95,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
-                await Task.Delay(1000);
+                await Task.Delay(ctx.LogicSettings.DelayAfterPokeStopIsFarmed);
                 if (++stopsHit % 5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;

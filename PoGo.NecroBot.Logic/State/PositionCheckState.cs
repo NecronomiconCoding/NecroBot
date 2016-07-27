@@ -57,7 +57,7 @@ namespace PoGo.NecroBot.Logic.State
                     $"Make sure Lat & Lng are right. Exit Program if not! Lat: {ctx.Client.CurrentLatitude} Lng: {ctx.Client.CurrentLongitude}"
             });
 
-            await Task.Delay(3000);
+            await Task.Delay(ctx.LogicSettings.DelayPositionCheckState);
 
             return new InfoState();
         }

@@ -31,7 +31,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     PokemonList = pokemonPairedWithStatsCP
                 });
 
-            await Task.Delay(500);
+            await Task.Delay(ctx.LogicSettings.DelayDisplayHighestPokemons);
 
             machine.Fire(
                     new DisplayHighestsPokemonEvent
@@ -40,7 +40,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         PokemonList = pokemonPairedWithStatsIV
                     });
 
-            await Task.Delay(500);
+            await Task.Delay(ctx.LogicSettings.DelayDisplayHighestPokemons);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     if (pokemonToEvolve.Count() >= ctx.LogicSettings.UseLuckyEggsMinPokemonAmount)
                     {
-                        await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+                        await UseLuckyEgg(ctx.Client, ctx.Inventory, machine, ctx.LogicSettings.DelayAfterLuckyEggIsUsed);
                     }
                     else
                     {
@@ -47,12 +47,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Result = evolveResponse.Result
                     });
 
-                    await Task.Delay(3000);
+                    await Task.Delay(ctx.LogicSettings.DelayAfterPokemonIsEvolved);
                 }
             }
         }
 
-        public static async Task UseLuckyEgg(Client client, Inventory inventory, StateMachine machine)
+        public static async Task UseLuckyEgg(Client client, Inventory inventory, StateMachine machine, int DelayAfterLuckyEggIsUsed)
         {
             var inventoryContent = await inventory.GetItems();
 
@@ -66,7 +66,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             await client.Inventory.UseItemXpBoost();
             var refreshCachedInventory = await inventory.RefreshCachedInventory();
             machine.Fire(new UseLuckyEggEvent {Count = luckyEgg.Count});
-            await Task.Delay(2000);
+            await Task.Delay(DelayAfterLuckyEggIsUsed);
         }
     }
 }

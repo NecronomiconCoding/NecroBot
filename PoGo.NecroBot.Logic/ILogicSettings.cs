@@ -49,6 +49,21 @@ namespace PoGo.NecroBot.Logic
         string TranslationLanguageCode { get; }
         string ProfilePath { get; }
         string ConfigPath { get; }
+        int DelayHumanLikeWalkingCicleMin { get; }
+        int DelayFarmState { get; }
+        int DelayRetryLogin { get; }
+        int DelayPositionCheckState { get; }
+        int DelayCatchFarPokemons { get; }
+        int DelayCatchClosePokemons { get; }
+        int DelayBetweenCatchAttempts { get; }
+        int DelayAfterBerryIsUsed { get; }
+        int DelayAfterPokemonIsEvolved { get; }
+        int DelayAfterLuckyEggIsUsed { get; }
+        int DelayAfterPokeStopIsFarmed { get; }
+        int DelayAfterGoingOutOfRadius { get; }
+        int DelayDisplayHighestPokemons { get; }
+        int DelayAfterItemIsRecycled { get; }
+        int DelayAfterIncubatorIsUsed { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
