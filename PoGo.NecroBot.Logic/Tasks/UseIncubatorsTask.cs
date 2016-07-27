@@ -17,8 +17,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     internal class UseIncubatorsTask
     {
-        private static readonly string IncubatorUsagePath = Path.Combine(Directory.GetCurrentDirectory(), "Temp", "Incubators.json");
-
         public static async Task Execute(Context ctx, StateMachine machine)
         {
             // Refresh inventory so that the player stats are fresh
@@ -40,7 +38,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 .OrderBy(x => x.EggKmWalkedTarget - x.EggKmWalkedStart)
                 .ToList();
 
-            var rememberedIncubators = GetRememberedIncubators();
+            var rememberedIncubatorsFilePath = Path.Combine(ctx.LogicSettings.ProfilePath, "temp", "incubators.json");
+            var rememberedIncubators = GetRememberedIncubators(rememberedIncubatorsFilePath);
             var pokemons = (await ctx.Inventory.GetPokemons()).ToList();
 
             // Check if eggs in remembered incubator usages have since hatched
@@ -102,7 +101,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
 
             if (!newRememberedIncubators.SequenceEqual(rememberedIncubators))
-                SaveRememberedIncubators(newRememberedIncubators);
+                SaveRememberedIncubators(newRememberedIncubators, rememberedIncubatorsFilePath);
         }
 
         private class IncubatorUsage : IEquatable<IncubatorUsage>
@@ -116,21 +115,21 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-        private static List<IncubatorUsage> GetRememberedIncubators()
+        private static List<IncubatorUsage> GetRememberedIncubators(string filePath)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(IncubatorUsagePath));
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
 
-            if (File.Exists(IncubatorUsagePath))
-                return JsonConvert.DeserializeObject<List<IncubatorUsage>>(File.ReadAllText(IncubatorUsagePath, Encoding.UTF8));
+            if (File.Exists(filePath))
+                return JsonConvert.DeserializeObject<List<IncubatorUsage>>(File.ReadAllText(filePath, Encoding.UTF8));
 
             return new List<IncubatorUsage>(0);
         }
 
-        private static void SaveRememberedIncubators(List<IncubatorUsage> incubators)
+        private static void SaveRememberedIncubators(List<IncubatorUsage> incubators, string filePath)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(IncubatorUsagePath));
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
 
-            File.WriteAllText(IncubatorUsagePath, JsonConvert.SerializeObject(incubators), Encoding.UTF8);
+            File.WriteAllText(filePath, JsonConvert.SerializeObject(incubators), Encoding.UTF8);
         }
     }
 }
