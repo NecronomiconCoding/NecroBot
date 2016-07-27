@@ -43,6 +43,10 @@ namespace PoGo.NecroBot.Logic.Logging
             Log($"Initializing Rocket logger at time {DateTime.Now}...");
         }
 
+        /// <summary>
+        ///     Sets Context for the logger 
+        /// </summary>
+        /// <param name="ctx">Context</param>
         public static void SetLoggerContext(Context ctx)
         {
             if (_logger != null)
