@@ -33,6 +33,9 @@ namespace PoGo.NecroBot.Logic
         int KeepMinCp { get; }
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
+        bool UseRandomDelay { get; }
+        int RandomDelayMinValue { get; }
+        int RandomDelayMaxValue { get; }
         bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
         bool UseEggIncubators { get; }

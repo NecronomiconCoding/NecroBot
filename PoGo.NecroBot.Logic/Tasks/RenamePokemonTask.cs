@@ -48,6 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             $"Pokemon {pokemon.PokemonId} ({pokemon.Id}) renamed from {pokemon.Nickname} to {pokemon.PokemonId}."
                     });
                 }
+                await Utils.Statistics.Delay(0);
             }
         }
     }

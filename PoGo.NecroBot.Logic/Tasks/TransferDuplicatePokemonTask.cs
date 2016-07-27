@@ -53,6 +53,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     BestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType),
                     FamilyCandies = family.Candy
                 });
+                await Utils.Statistics.Delay(0);
             }
         }
     }
