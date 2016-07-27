@@ -263,12 +263,16 @@ namespace PoGo.NecroBot.Logic
             var myPokemons = await GetPokemons();
             myPokemons = myPokemons.Where(p => p.DeployedFortId == string.Empty).OrderByDescending(p => p.Cp);
             //Don't evolve pokemon in gyms
-            if (filter != null)
+            if (filter.Any())
             {
                 myPokemons =
                     myPokemons.Where(
                         p => (_logicClient.Settings.EvolveAllPokemonWithEnoughCandy && filter.Contains(p.PokemonId)) ||
                              (_logicClient.Settings.EvolveAllPokemonAboveIv && (PokemonInfo.CalculatePokemonPerfection(p) >= _logicClient.Settings.EvolveAboveIvValue)));
+            }
+            else if (_logicClient.Settings.EvolveAllPokemonAboveIv)
+            {
+                myPokemons = myPokemons.Where(p => PokemonInfo.CalculatePokemonPerfection(p) >= _logicClient.Settings.EvolveAboveIvValue);
             }
             var pokemons = myPokemons.ToList();
 
