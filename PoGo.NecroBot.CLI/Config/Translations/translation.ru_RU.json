@@ -65,7 +65,7 @@
     {
       "Key": "eventPokemonCapture",
       "Value":
-        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Шанс: {7}% | {8}m дист | с {9} ({10} осталось). | {11}"
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Шанс: {7}% | {8}m дист | исп. {9} ({10} осталось). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -93,7 +93,7 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "идеальный"
+      "Value": "идеала"
     },
     {
       "Key": "commonWordName",

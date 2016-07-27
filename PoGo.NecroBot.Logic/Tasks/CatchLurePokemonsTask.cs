@@ -50,6 +50,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else
                 {
+                    if (encounter.Result.ToString().Contains("NotAvailable")) return;
                     machine.Fire(new WarnEvent {Message = $"Encounter problem: Lure Pokemon {encounter.Result}"});
                 }
             }

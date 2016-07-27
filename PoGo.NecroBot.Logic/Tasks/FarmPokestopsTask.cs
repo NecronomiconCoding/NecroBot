@@ -36,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ctx.Translations.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
 
-                await Task.Delay(5000);
+                await Task.Delay(1000);
 
                 await ctx.Navigation.HumanLikeWalking(
                     new GeoCoordinate(ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude),
@@ -140,6 +140,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                         await ctx.Inventory.RefreshCachedInventory();
                     }
                     await RecycleItemsTask.Execute(ctx, machine);
+                    if (ctx.LogicSettings.UseEggIncubators)
+                    {
+                        await UseIncubatorsTask.Execute(ctx, machine);
+                    }
                     if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonAboveIv)
                     {
                         await EvolvePokemonTask.Execute(ctx, machine);

@@ -70,6 +70,11 @@ namespace PoGo.NecroBot.CLI
                 : ctx.Translations.GetTranslation(TranslationString.IncubatorStatusUpdate, evt.KmRemaining));
         }
 
+        public void HandleEvent(EggHatchedEvent evt, Context ctx)
+        {
+            Logger.Write(ctx.Translations.GetTranslation(TranslationString.IncubatorEggHatched, evt.PokemonId.ToString()));
+        }
+
         public void HandleEvent(FortUsedEvent evt, Context ctx)
         {
             Logger.Write(
