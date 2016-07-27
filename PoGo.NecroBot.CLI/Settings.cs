@@ -104,10 +104,10 @@ namespace PoGo.NecroBot.CLI
         {
             GlobalSettings settings = null;
 
-            settings.ProfilePath = Directory.GetCurrentDirectory() + path;
-            settings.ConfigPath = settings.ProfilePath + Path.DirectorySeparatorChar + "config";
+            var ProfilePath = Directory.GetCurrentDirectory() + path;
+            var ConfigPath = ProfilePath + Path.DirectorySeparatorChar + "config";
 
-            var fullPath = settings.ConfigPath + Path.DirectorySeparatorChar + "config.json";
+            var fullPath = ConfigPath + Path.DirectorySeparatorChar + "config.json";
 
             if (File.Exists(fullPath))
             {
@@ -130,6 +130,9 @@ namespace PoGo.NecroBot.CLI
             {
                 settings.WebSocketPort = 14251;
             }
+
+            settings.ProfilePath = ProfilePath;
+            settings.ConfigPath = ConfigPath;
 
             settings.Save(fullPath);
             settings.Auth.Load(settings.ConfigPath + Path.DirectorySeparatorChar + "auth.json");
