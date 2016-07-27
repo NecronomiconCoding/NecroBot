@@ -103,7 +103,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         var refreshCachedInventory = await ctx.Inventory.RefreshCachedInventory();
                     }
-                    await RenamePokemonTask.Execute(ctx, machine);
                     await RecycleItemsTask.Execute(ctx, machine);
                     if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonAboveIv)
                     {
@@ -112,6 +111,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (ctx.LogicSettings.TransferDuplicatePokemon)
                     {
                         await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                    }
+                    if (ctx.LogicSettings.RenameAboveIv)
+                    {
+                        await RenamePokemonTask.Execute(ctx, machine);
                     }
                 }
             }
