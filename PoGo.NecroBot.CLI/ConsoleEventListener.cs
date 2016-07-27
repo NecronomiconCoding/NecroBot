@@ -93,7 +93,7 @@ namespace PoGo.NecroBot.CLI
                 : ctx.Translations.GetTranslation(TranslationString.CatchStatus, evt.Status);
 
             var familyCandies = evt.FamilyCandies > 0
-                ? ctx.Translations.GetTranslation(TranslationString.Candies)
+                ? ctx.Translations.GetTranslation(TranslationString.Candies, evt.FamilyCandies)
                 : "";
 
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventPokemonCapture, catchStatus, catchType, evt.Id,
