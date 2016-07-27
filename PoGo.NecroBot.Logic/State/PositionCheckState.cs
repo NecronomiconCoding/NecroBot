@@ -36,14 +36,14 @@ namespace PoGo.NecroBot.Logic.State
                             if (kmph < 80) // If speed required to get to the default location is < 80km/hr
                             {
                                 File.Delete(coordsPath);
-                                machine.Fire(new WarnEvent
+                                session.EventDispatcher.Send(new WarnEvent
                                 {
                                     Message = session.Translations.GetTranslation(TranslationString.RealisticTravelDetected)
                                 });
                             }
                             else
                             {
-                                machine.Fire(new WarnEvent
+                                session.EventDispatcher.Send(new WarnEvent
                                 {
                                     Message =session.Translations.GetTranslation(TranslationString.NotRealisticTravel, kmph)
                                 });
@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.Logic.State
                 }
             }
 
-            machine.Fire(new WarnEvent
+            session.EventDispatcher.Send(new WarnEvent
             {
                 Message =
                     session.Translations.GetTranslation(TranslationString.WelcomeWarning, session.Client.CurrentLatitude,
@@ -86,7 +86,7 @@ namespace PoGo.NecroBot.Logic.State
                         {
                             return new Tuple<double, double>(latitude, longitude);
                         }
-                        machine.Fire(new WarnEvent
+                        session.EventDispatcher.Send(new WarnEvent
                         {
                             Message = session.Translations.GetTranslation(TranslationString.CoordinatesAreInvalid)
                         });
@@ -94,7 +94,7 @@ namespace PoGo.NecroBot.Logic.State
                     }
                     catch (FormatException)
                     {
-                        machine.Fire(new WarnEvent
+                        session.EventDispatcher.Send(new WarnEvent
                         {
                             Message = session.Translations.GetTranslation(TranslationString.CoordinatesAreInvalid)
                         });

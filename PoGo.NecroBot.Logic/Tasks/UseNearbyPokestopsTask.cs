@@ -41,7 +41,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (fortSearch.ExperienceAwarded > 0)
                 {
-                    machine.Fire(new FortUsedEvent
+                    session.EventDispatcher.Send(new FortUsedEvent
                     {
                         Exp = fortSearch.ExperienceAwarded,
                         Gems = fortSearch.GemsAwarded,

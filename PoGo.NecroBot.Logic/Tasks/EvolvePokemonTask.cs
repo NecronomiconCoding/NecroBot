@@ -16,7 +16,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         private static DateTime _lastLuckyEggTime;
 
-        public static async Task Execute(Session session, StateMachine machine)
+        public static async Task Execute(ISession session, StateMachine machine)
         {
             var pokemonToEvolveTask = await session.Inventory.GetPokemonToEvolve(session.LogicSettings.PokemonsToEvolve);
             var pokemonToEvolve = pokemonToEvolveTask.ToList();
@@ -27,7 +27,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     if (pokemonToEvolve.Count >= session.LogicSettings.UseLuckyEggsMinPokemonAmount)
                     {
-                        await UseLuckyEgg(session.Client, session.Inventory, machine);
+                        await UseLuckyEgg(session);
                     }
                     else
                     {
@@ -40,7 +40,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     var evolveResponse = await session.Client.Inventory.EvolvePokemon(pokemon.Id);
 
-                    machine.Fire(new PokemonEvolveEvent
+                    session.EventDispatcher.Send(new PokemonEvolveEvent
                     {
                         Id = pokemon.PokemonId,
                         Exp = evolveResponse.ExperienceAwarded,
@@ -50,9 +50,9 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-        public static async Task UseLuckyEgg(Client client, Inventory inventory, StateMachine machine)
+        public static async Task UseLuckyEgg(ISession session)
         {
-            var inventoryContent = await inventory.GetItems();
+            var inventoryContent = await session.Inventory.GetItems();
 
             var luckyEggs = inventoryContent.Where(p => p.ItemId == ItemId.ItemLuckyEgg);
             var luckyEgg = luckyEggs.FirstOrDefault();
@@ -61,9 +61,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 return;
 
             _lastLuckyEggTime = DateTime.Now;
-            await client.Inventory.UseItemXpBoost();
-            await inventory.RefreshCachedInventory();
-            machine.Fire(new UseLuckyEggEvent {Count = luckyEgg.Count});
+            await session.Client.Inventory.UseItemXpBoost();
+            await session.Inventory.RefreshCachedInventory();
+            session.EventDispatcher.Send(new UseLuckyEggEvent {Count = luckyEgg.Count});
             await Task.Delay(2000);
         }
     }

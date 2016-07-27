@@ -30,7 +30,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var pokeball = await GetBestBall(session, encounter, probability);
                 if (pokeball == ItemId.ItemUnknown)
                 {
-                    machine.Fire(new NoPokeballEvent
+                    session.EventDispatcher.Send(new NoPokeballEvent
                     {
                         Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId,
                         Cp =
@@ -130,7 +130,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 await session.Inventory.RefreshCachedInventory();
                 evt.BallAmount = await session.Inventory.GetItemAmountByType(pokeball);
 
-                machine.Fire(evt);
+                session.EventDispatcher.Send(evt);
 
                 attemptCounter++;
                 await Task.Delay(2000);
@@ -193,7 +193,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
-            machine.Fire(new UseBerryEvent {Count = berry.Count});
+            session.EventDispatcher.Send(new UseBerryEvent {Count = berry.Count});
         }
     }
 }

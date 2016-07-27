@@ -14,7 +14,7 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(Session session, StateMachine machine)
         {
-            machine.Fire(new NoticeEvent { Message = session.Translations.GetTranslation(Common.TranslationString.LoggingIn, session.Settings.AuthType) });
+            session.EventDispatcher.Send(new NoticeEvent { Message = session.Translations.GetTranslation(Common.TranslationString.LoggingIn, session.Settings.AuthType) });
             try
             {
                 switch (session.Settings.AuthType)
@@ -33,23 +33,23 @@ namespace PoGo.NecroBot.Logic.State
                         await session.Client.Login.DoGoogleLogin();
                         break;
                     default:
-                        machine.Fire(new ErrorEvent {Message = session.Translations.GetTranslation(Common.TranslationString.WrongAuthType)});
+                        session.EventDispatcher.Send(new ErrorEvent {Message = session.Translations.GetTranslation(Common.TranslationString.WrongAuthType)});
                         return null;
                 }
             }
             catch (PtcOfflineException)
             {
-                machine.Fire(new ErrorEvent
+                session.EventDispatcher.Send(new ErrorEvent
                 {
                     Message = session.Translations.GetTranslation(Common.TranslationString.PtcOffline)
                 });
-                machine.Fire(new NoticeEvent {Message = session.Translations.GetTranslation(Common.TranslationString.TryingAgainIn, 20)});
+                session.EventDispatcher.Send(new NoticeEvent {Message = session.Translations.GetTranslation(Common.TranslationString.TryingAgainIn, 20)});
                 await Task.Delay(20000);
                 return this;
             }
             catch (AccountNotVerifiedException)
             {
-                machine.Fire(new ErrorEvent {Message = session.Translations.GetTranslation(Common.TranslationString.AccountNotVerified)});
+                session.EventDispatcher.Send(new ErrorEvent {Message = session.Translations.GetTranslation(Common.TranslationString.AccountNotVerified)});
                 return null;
             }
 
@@ -61,7 +61,7 @@ namespace PoGo.NecroBot.Logic.State
         public async Task DownloadProfile(Session session, StateMachine machine)
         {
             session.Profile = await session.Client.Player.GetPlayer();
-            machine.Fire(new ProfileEvent {Profile = session.Profile});
+            session.EventDispatcher.Send(new ProfileEvent {Profile = session.Profile});
         }
     }
 }

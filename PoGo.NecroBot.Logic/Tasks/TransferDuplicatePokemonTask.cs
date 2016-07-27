@@ -44,7 +44,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 family.Candy++;
 
-                machine.Fire(new TransferPokemonEvent
+                session.EventDispatcher.Send(new TransferPokemonEvent
                 {
                     Id = duplicatePokemon.PokemonId,
                     Perfection = PokemonInfo.CalculatePokemonPerfection(duplicatePokemon),

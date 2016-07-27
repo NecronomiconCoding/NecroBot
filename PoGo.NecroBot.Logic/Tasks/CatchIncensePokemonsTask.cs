@@ -57,18 +57,18 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         if (session.LogicSettings.TransferDuplicatePokemon)
                         {
-                            machine.Fire(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferring)});
+                            session.EventDispatcher.Send(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferring)});
                             await TransferDuplicatePokemonTask.Execute(session, machine);
                         }
                         else
-                            machine.Fire(new WarnEvent
+                            session.EventDispatcher.Send(new WarnEvent
                             {
                                 Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferManually)
                             });
                     }
                     else
                     {
-                        machine.Fire(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Result)});
+                        session.EventDispatcher.Send(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Result)});
                     }
                 }
             }

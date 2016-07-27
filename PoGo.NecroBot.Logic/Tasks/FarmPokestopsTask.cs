@@ -48,13 +48,13 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokestopList.Count <= 0)
             {
-                machine.Fire(new WarnEvent
+                session.EventDispatcher.Send(new WarnEvent
                 {
                     Message = session.Translations.GetTranslation(TranslationString.FarmPokestopsNoUsableFound)
                 });
             }
 
-            machine.Fire(new PokeStopListEvent {Forts = pokestopList});
+            session.EventDispatcher.Send(new PokeStopListEvent {Forts = pokestopList});
 
             while (pokestopList.Any())
             {
@@ -71,7 +71,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
-                machine.Fire(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
+                session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
 
                 await session.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour,
@@ -111,7 +111,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             fortTry += 1;
 
-                            machine.Fire(new FortFailedEvent
+                            session.EventDispatcher.Send(new FortFailedEvent
                             {
                                 Name = fortInfo.Name,
                                 Try = fortTry,
@@ -122,7 +122,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             await Task.Delay(200 + random.Next(0, 200));  //Randomized pause
                         }
                     } else {
-                        machine.Fire(new FortUsedEvent
+                        session.EventDispatcher.Send(new FortUsedEvent
                         {
                             Name = fortInfo.Name,
                             Exp = fortSearch.ExperienceAwarded,

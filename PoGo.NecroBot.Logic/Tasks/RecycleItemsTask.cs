@@ -18,7 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 await session.Client.Inventory.RecycleItem(item.ItemId, item.Count);
 
-                machine.Fire(new ItemRecycledEvent {Id = item.ItemId, Count = item.Count});
+                session.EventDispatcher.Send(new ItemRecycledEvent {Id = item.ItemId, Count = item.Count});
 
                 await Task.Delay(500);
             }

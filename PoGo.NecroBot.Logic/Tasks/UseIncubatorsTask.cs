@@ -49,7 +49,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var hatched = pokemons.FirstOrDefault(x => !x.IsEgg && x.Id == incubator.PokemonId);
                 if (hatched == null) continue;
 
-                machine.Fire(new EggHatchedEvent
+                session.EventDispatcher.Send(new EggHatchedEvent
                 {
                     Id = hatched.Id,
                     PokemonId = hatched.PokemonId
@@ -75,7 +75,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     newRememberedIncubators.Add(new IncubatorUsage { IncubatorId = incubator.Id, PokemonId = egg.Id });
 
-                    machine.Fire(new EggIncubatorStatusEvent
+                    session.EventDispatcher.Send(new EggIncubatorStatusEvent
                     {
                         IncubatorId = incubator.Id,
                         WasAddedNow = true,
@@ -89,7 +89,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     newRememberedIncubators.Add(new IncubatorUsage { IncubatorId = incubator.Id, PokemonId = incubator.PokemonId });
 
-                    machine.Fire(new EggIncubatorStatusEvent
+                    session.EventDispatcher.Send(new EggIncubatorStatusEvent
                     {
                         IncubatorId = incubator.Id,
                         PokemonId = incubator.PokemonId,

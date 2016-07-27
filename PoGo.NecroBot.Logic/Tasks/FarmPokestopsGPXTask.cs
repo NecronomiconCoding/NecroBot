@@ -43,7 +43,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         if (distance > 5000)
                         {
-                            machine.Fire(new ErrorEvent
+                            session.EventDispatcher.Send(new ErrorEvent
                             {
                                 Message = session.Translations.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude, session.Client.CurrentLongitude)
                             });
@@ -51,7 +51,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         }
 
                         var pokestopList = await GetPokeStops(session);
-                        machine.Fire(new PokeStopListEvent {Forts = pokestopList});
+                        session.EventDispatcher.Send(new PokeStopListEvent {Forts = pokestopList});
 
                         while (pokestopList.Any())
                         {
@@ -75,7 +75,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             if (fortSearch.ExperienceAwarded > 0)
                             {
-                                machine.Fire(new FortUsedEvent
+                                session.EventDispatcher.Send(new FortUsedEvent
                                 {
                                     Exp = fortSearch.ExperienceAwarded,
                                     Gems = fortSearch.GemsAwarded,

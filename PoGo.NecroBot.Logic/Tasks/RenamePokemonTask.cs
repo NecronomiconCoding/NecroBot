@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
 
-                    machine.Fire(new NoticeEvent
+                    session.EventDispatcher.Send(new NoticeEvent
                     {
                         Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, newNickname)
                     });
@@ -41,7 +41,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, pokemon.PokemonId.ToString());
 
-                    machine.Fire(new NoticeEvent
+                    session.EventDispatcher.Send(new NoticeEvent
                     {
                         Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, pokemon.PokemonId)
                     });

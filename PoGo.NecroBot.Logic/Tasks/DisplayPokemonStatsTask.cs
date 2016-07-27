@@ -23,7 +23,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var pokemonPairedWithStatsIv = highestsPokemonPerfect.Select(pokemon => Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon))).ToList();
 
-            machine.Fire(
+            session.EventDispatcher.Send(
                 new DisplayHighestsPokemonEvent
                 {
                     SortedBy = "CP",
@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             await Task.Delay(500);
 
-            machine.Fire(
+            session.EventDispatcher.Send(
                 new DisplayHighestsPokemonEvent
                 {
                     SortedBy = "IV",

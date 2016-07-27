@@ -24,7 +24,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (session.LogicSettings.UsePokemonToNotCatchFilter &&
                 session.LogicSettings.PokemonsNotToCatch.Contains(pokemonId))
             {
-                machine.Fire(new NoticeEvent {Message = session.Translations.GetTranslation(Common.TranslationString.PokemonSkipped, pokemonId)});
+                session.EventDispatcher.Send(new NoticeEvent {Message = session.Translations.GetTranslation(Common.TranslationString.PokemonSkipped, pokemonId)});
             }
             else
             {
@@ -39,11 +39,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     if (session.LogicSettings.TransferDuplicatePokemon)
                     {
-                        machine.Fire(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferring) });
+                        session.EventDispatcher.Send(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferring) });
                         await TransferDuplicatePokemonTask.Execute(session, machine);
                     }
                     else
-                        machine.Fire(new WarnEvent
+                        session.EventDispatcher.Send(new WarnEvent
                         {
                             Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferManually)
                         });
@@ -51,7 +51,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 else
                 {
                     if (encounter.Result.ToString().Contains("NotAvailable")) return;
-                    machine.Fire(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.EncounterProblemLurePokemon, encounter.Result)});
+                    session.EventDispatcher.Send(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.EncounterProblemLurePokemon, encounter.Result)});
                 }
             }
         }
