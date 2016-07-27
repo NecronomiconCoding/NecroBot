@@ -27,7 +27,6 @@ Chatting about this Repository can be done on our Discord: https://discord.gg/Vs
  - [Multilanguage Support]
  - [Use lucky egg while evolve]
  - [Egg Hatching Automatically]
- - [Custom GPX path]
  - [Multi bot support]
 
 <h2><a name="getting-started">Getting Started</a></h2>
