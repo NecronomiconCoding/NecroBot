@@ -71,21 +71,26 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await CatchLurePokemonsTask.Execute(ctx, machine, pokeStop);
                             }
 
-                            var fortSearch =
-                                await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                            // Dirty hack for pokeball quantity, needs to be pulled out to a isStopNeeded() method to expand other preferences like other minimal items quantity
+                            if (!ctx.LogicSettings.MinimalStops || (ctx.LogicSettings.MinimalStops && (
+                                25 > ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemPokeBall).Result + ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemGreatBall).Result + ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemUltraBall).Result
+                            )))
+                            {
+                                var fortSearch = await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
-                            if (fortSearch.ExperienceAwarded > 0)
-                            {
-                                machine.Fire(new FortUsedEvent
+                                if (fortSearch.ExperienceAwarded > 0)
                                 {
-                                    Exp = fortSearch.ExperienceAwarded,
-                                    Gems = fortSearch.GemsAwarded,
-                                    Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
-                                });
-                            }
-                            if (fortSearch.ItemsAwarded.Count > 0)
-                            {
-                                var refreshCachedInventory = ctx.Inventory.RefreshCachedInventory();
+                                    machine.Fire(new FortUsedEvent
+                                    {
+                                        Exp = fortSearch.ExperienceAwarded,
+                                        Gems = fortSearch.GemsAwarded,
+                                        Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
+                                    });
+                                }
+                                if (fortSearch.ItemsAwarded.Count > 0)
+                                {
+                                    var refreshCachedInventory = ctx.Inventory.RefreshCachedInventory();
+                                }
                             }
 
                             await Task.Delay(1000);
@@ -110,7 +115,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await CatchNearbyPokemonsTask.Execute(ctx, machine);
                                 //Catch Incense Pokemon
                                 await CatchIncensePokemonsTask.Execute(ctx, machine);
-                                await UseNearbyPokestopsTask.Execute(ctx, machine);
+
+                                // Dirty hack for pokeball quantity, needs to be pulled out to a isStopNeeded() method to expand other preferences like other minimal items quantity
+                                if (!ctx.LogicSettings.MinimalStops || (ctx.LogicSettings.MinimalStops && (
+                                    25 > ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemPokeBall).Result + ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemGreatBall).Result + ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemUltraBall).Result
+                                )))
+                                {
+                                    await UseNearbyPokestopsTask.Execute(ctx, machine);
+                                }
+
                                 return true;
                             }
                             );

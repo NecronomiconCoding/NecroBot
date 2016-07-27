@@ -64,7 +64,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ctx.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
-                machine.Fire(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
+                // Dirty hack for pokeball quantity, needs to be pulled out to a isStopNeeded() method to expand other preferences like other minimal items quantity
+                if (!ctx.LogicSettings.MinimalStops || (ctx.LogicSettings.MinimalStops && (
+                    25 > ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemPokeBall).Result + ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemGreatBall).Result + ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemUltraBall).Result
+                )))
+                {
+                    machine.Fire(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
+                }
 
                 await ctx.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
                     ctx.LogicSettings.WalkingSpeedInKilometerPerHour,
@@ -83,26 +89,32 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await CatchLurePokemonsTask.Execute(ctx, machine, pokeStop);
                 }
 
-
-                var fortSearch = await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                if (fortSearch.ExperienceAwarded > 0)
-                {
-                    machine.Fire(new FortUsedEvent
+                // Dirty hack for pokeball quantity, needs to be pulled out to a isStopNeeded() method to expand other preferences like other minimal items quantity
+                if (!ctx.LogicSettings.MinimalStops || (ctx.LogicSettings.MinimalStops && (
+                    25 > ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemPokeBall).Result + ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemGreatBall).Result + ctx.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemUltraBall).Result
+                ))) {
+                    var fortSearch = await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    if (fortSearch.ExperienceAwarded > 0)
                     {
-                        Exp = fortSearch.ExperienceAwarded,
-                        Gems = fortSearch.GemsAwarded,
-                        Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
-                    });
-                }
-
-                await Task.Delay(1000);
-                if (++stopsHit % 5 == 0) //TODO: OR item/pokemon bag is full
-                {
-                    stopsHit = 0;
-                    if (fortSearch.ItemsAwarded.Count > 0)
+                        machine.Fire(new FortUsedEvent
+                        {
+                            Exp = fortSearch.ExperienceAwarded,
+                            Gems = fortSearch.GemsAwarded,
+                            Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
+                        });
+                    }
+                    if (++stopsHit % 5 == 0 && fortSearch.ItemsAwarded.Count > 0)
                     {
                         var refreshCachedInventory = await ctx.Inventory.RefreshCachedInventory();
                     }
+                } else {
+                    Logger.Write("Skipped " + fortInfo.Name);
+                }
+
+                await Task.Delay(1000);
+                if (stopsHit % 5 == 0) //TODO: OR item/pokemon bag is full
+                {
+                    stopsHit = 0;
                     await RenamePokemonTask.Execute(ctx, machine);
                     await RecycleItemsTask.Execute(ctx, machine);
                     if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy || ctx.LogicSettings.EvolveAllPokemonAboveIv)
