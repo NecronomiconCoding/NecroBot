@@ -2,6 +2,7 @@
 
 using System;
 using System.Device.Location;
+using System.Xml;
 
 #endregion
 
@@ -9,6 +10,30 @@ namespace PoGo.NecroBot.Logic.Utils
 {
     public static class LocationUtils
     {
+        // http://code.google.com/apis/maps/documentation/geocoding/#ReverseGeocoding
+        public static string ReverseGeoLocationName(string longitude, string latitude)
+        {
+            XmlDocument doc = new XmlDocument();
+
+            try
+            {
+                doc.Load("http://maps.googleapis.com/maps/api/geocode/xml?latlng=" + latitude + "," + longitude + "&sensor=false");
+                XmlNode element = doc.SelectSingleNode("//GeocodeResponse/status");
+                if (element.InnerText != "ZERO_RESULTS")
+                {
+                    element = doc.SelectSingleNode("//GeocodeResponse/result/formatted_address");
+                    return (element.InnerText);
+                }
+
+                return ("No data available for the specified location");
+
+            }
+            catch (Exception ex)
+            {
+                return ("Address lookup failed: " + ex.Message);
+            }
+        }
+        
         public static double CalculateDistanceInMeters(double sourceLat, double sourceLng, double destLat,
             double destLng)
             // from http://stackoverflow.com/questions/6366408/calculating-distance-between-two-latitude-and-longitude-geocoordinates
