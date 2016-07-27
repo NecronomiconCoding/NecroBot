@@ -22,7 +22,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static int TimesZeroXPawarded;
 
-        public static async Task Execute(Session session, StateMachine machine)
+        public static async Task Execute(ISession session)
         {
             var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
                 session.Settings.DefaultLatitude, session.Settings.DefaultLongitude,
@@ -78,16 +78,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                     async () =>
                     {
                         // Catch normal map Pokemon
-                        await CatchNearbyPokemonsTask.Execute(session, machine);
+                        await CatchNearbyPokemonsTask.Execute(session);
                         //Catch Incense Pokemon
-                        await CatchIncensePokemonsTask.Execute(session, machine);
+                        await CatchIncensePokemonsTask.Execute(session);
                         return true;
                     });
 
                 //Catch Lure Pokemon
                 if (pokeStop.LureInfo != null)
                 {
-                    await CatchLurePokemonsTask.Execute(session, machine, pokeStop);
+                    await CatchLurePokemonsTask.Execute(session, pokeStop);
                 }
 
                 FortSearchResponse fortSearch;
@@ -144,28 +144,28 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         await session.Inventory.RefreshCachedInventory();
                     }
-                    await RecycleItemsTask.Execute(session, machine);
+                    await RecycleItemsTask.Execute(session);
                     if (session.LogicSettings.UseEggIncubators)
                     {
-                        await UseIncubatorsTask.Execute(session, machine);
+                        await UseIncubatorsTask.Execute(session);
                     }
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
                     {
-                        await EvolvePokemonTask.Execute(session, machine);
+                        await EvolvePokemonTask.Execute(session);
                     }
                     if (session.LogicSettings.TransferDuplicatePokemon)
                     {
-                        await TransferDuplicatePokemonTask.Execute(session, machine);
+                        await TransferDuplicatePokemonTask.Execute(session);
                     }
                     if (session.LogicSettings.RenameAboveIv)
                     {
-                        await RenamePokemonTask.Execute(session, machine);
+                        await RenamePokemonTask.Execute(session);
                     }
                 }
             }
         }
 
-        private static async Task<List<FortData>> GetPokeStops(Session session)
+        private static async Task<List<FortData>> GetPokeStops(ISession session)
         {
             var mapObjects = await session.Client.Map.GetMapObjects();
 

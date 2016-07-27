@@ -9,37 +9,37 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class FarmState : IState
     {
-        public async Task<IState> Execute(Session session, StateMachine machine)
+        public async Task<IState> Execute(ISession session)
         {
             if (session.LogicSettings.EvolveAllPokemonAboveIv || session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
-                await EvolvePokemonTask.Execute(session, machine);
+                await EvolvePokemonTask.Execute(session);
             }
 
             if (session.LogicSettings.TransferDuplicatePokemon)
             {
-                await TransferDuplicatePokemonTask.Execute(session, machine);
+                await TransferDuplicatePokemonTask.Execute(session);
             }
 
             if (session.LogicSettings.RenameAboveIv)
             {
-                await RenamePokemonTask.Execute(session, machine);
+                await RenamePokemonTask.Execute(session);
             }
 
-            await RecycleItemsTask.Execute(session, machine);
+            await RecycleItemsTask.Execute(session);
 
             if (session.LogicSettings.UseEggIncubators)
             {
-                await UseIncubatorsTask.Execute(session, machine);
+                await UseIncubatorsTask.Execute(session);
             }
 
             if (session.LogicSettings.UseGpxPathing)
             {
-                await FarmPokestopsGpxTask.Execute(session, machine);
+                await FarmPokestopsGpxTask.Execute(session);
             }
             else
             {
-                await FarmPokestopsTask.Execute(session, machine);
+                await FarmPokestopsTask.Execute(session);
             }
 
             return this;

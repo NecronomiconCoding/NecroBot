@@ -10,7 +10,7 @@ using PokemonGo.RocketAPI;
 
 namespace PoGo.NecroBot.CLI
 {
-    public class SimpleSession : ISession
+    /*public class SimpleSession : ISession
     {
         public Client _client;
         public IEventDispatcher _dispatcher;
@@ -39,5 +39,5 @@ namespace PoGo.NecroBot.CLI
                 return _localizer;
             }
         }
-    }
+    }*/
 }

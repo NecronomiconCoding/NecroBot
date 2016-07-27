@@ -12,7 +12,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class TransferDuplicatePokemonTask
     {
-        public static async Task Execute(Session session, StateMachine machine)
+        public static async Task Execute(ISession session)
         {
             var duplicatePokemons =
                 await

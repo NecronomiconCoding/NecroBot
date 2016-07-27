@@ -1,4 +1,5 @@
-﻿using PoGo.NecroBot.Logic.Tasks;
+﻿using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace PoGo.NecroBot.Logic.Service
         public void Run()
         {
             _loginTask.DoLogin();
+
         }
     }
 }

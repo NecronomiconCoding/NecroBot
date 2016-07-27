@@ -80,7 +80,7 @@
     <Compile Include="PoGoUtils\PokemonInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BotService.cs" />
-    <Compile Include="Service\Session.cs" />
+    <Compile Include="Tasks\Farm.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="State\Session.cs" />
     <Compile Include="Event\ErrorEvent.cs" />

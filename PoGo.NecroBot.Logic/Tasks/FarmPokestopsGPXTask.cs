@@ -18,7 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsGpxTask
     {
-        public static async Task Execute(Session session, StateMachine machine)
+        public static async Task Execute(ISession session)
         {
             var tracks = GetGpxTracks(session);
             var curTrkPt = 0;
@@ -67,7 +67,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             if (pokeStop.LureInfo != null)
                             {
-                                await CatchLurePokemonsTask.Execute(session, machine, pokeStop);
+                                await CatchLurePokemonsTask.Execute(session, pokeStop);
                             }
 
                             var fortSearch =
@@ -89,37 +89,37 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await session.Inventory.RefreshCachedInventory();
                             }
 
-                            await RecycleItemsTask.Execute(session, machine);
+                            await RecycleItemsTask.Execute(session);
 
                             if (session.LogicSettings.UseEggIncubators)
                             {
-                                await UseIncubatorsTask.Execute(session, machine);
+                                await UseIncubatorsTask.Execute(session);
                             }
 
                             if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                                 session.LogicSettings.EvolveAllPokemonAboveIv)
                             {
-                                await EvolvePokemonTask.Execute(session, machine);
+                                await EvolvePokemonTask.Execute(session);
                             }
 
                             if (session.LogicSettings.TransferDuplicatePokemon)
                             {
-                                await TransferDuplicatePokemonTask.Execute(session, machine);
+                                await TransferDuplicatePokemonTask.Execute(session);
                             }
 
                             if (session.LogicSettings.RenameAboveIv)
                             {
-                                await RenamePokemonTask.Execute(session, machine);
+                                await RenamePokemonTask.Execute(session);
                             }
                         }
 
                         await session.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
                             session.LogicSettings.WalkingSpeedInKilometerPerHour, async () =>
                             {
-                                await CatchNearbyPokemonsTask.Execute(session, machine);
+                                await CatchNearbyPokemonsTask.Execute(session);
                                 //Catch Incense Pokemon
-                                await CatchIncensePokemonsTask.Execute(session, machine);
-                                await UseNearbyPokestopsTask.Execute(session, machine);
+                                await CatchIncensePokemonsTask.Execute(session);
+                                await UseNearbyPokestopsTask.Execute(session);
                                 return true;
                             }
                             );
@@ -141,7 +141,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             } //end tracks
         }
 
-        private static List<GpxReader.Trk> GetGpxTracks(Session session)
+        private static List<GpxReader.Trk> GetGpxTracks(ISession session)
         {
             var xmlString = File.ReadAllText(session.LogicSettings.GpxFile);
             var readgpx = new GpxReader(xmlString, session);
@@ -152,7 +152,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         //to only find stops within 40 meters
         //this is for gpx pathing, we are not going to the pokestops,
         //so do not make it more than 40 because it will never get close to those stops.
-        private static async Task<List<FortData>> GetPokeStops(Session session)
+        private static async Task<List<FortData>> GetPokeStops(ISession session)
         {
             var mapObjects = await session.Client.Map.GetMapObjects();
 

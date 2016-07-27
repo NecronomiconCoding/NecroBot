@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchLurePokemonsTask
     {
-        public static async Task Execute(Session session, StateMachine machine, FortData currentFortData)
+        public static async Task Execute(ISession session, FortData currentFortData)
         {
             Logger.Write(session.Translations.GetTranslation(Common.TranslationString.LookingForLurePokemon), LogLevel.Debug);
 
@@ -33,14 +33,14 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (encounter.Result == DiskEncounterResponse.Types.Result.Success)
                 {
-                    await CatchPokemonTask.Execute(session, machine, encounter, null, currentFortData, encounterId);
+                    await CatchPokemonTask.Execute(session, encounter, null, currentFortData, encounterId);
                 }
                 else if (encounter.Result == DiskEncounterResponse.Types.Result.PokemonInventoryFull)
                 {
                     if (session.LogicSettings.TransferDuplicatePokemon)
                     {
                         session.EventDispatcher.Send(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferring) });
-                        await TransferDuplicatePokemonTask.Execute(session, machine);
+                        await TransferDuplicatePokemonTask.Execute(session);
                     }
                     else
                         session.EventDispatcher.Send(new WarnEvent

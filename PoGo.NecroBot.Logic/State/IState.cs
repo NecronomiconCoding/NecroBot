@@ -8,6 +8,6 @@ namespace PoGo.NecroBot.Logic.State
 {
     public interface IState
     {
-        Task<IState> Execute(Session session, StateMachine machine);
+        Task<IState> Execute(ISession session);
     }
 }

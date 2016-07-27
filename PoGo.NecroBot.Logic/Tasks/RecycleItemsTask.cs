@@ -10,7 +10,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class RecycleItemsTask
     {
-        public static async Task Execute(Session session, StateMachine machine)
+        public static async Task Execute(ISession session)
         {
             var items = await session.Inventory.GetItemsToRecycle(session.Settings);
 

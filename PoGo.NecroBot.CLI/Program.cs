@@ -31,7 +31,6 @@ namespace PoGo.NecroBot.CLI
             var settings = GlobalSettings.Load(subPath);
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
 
-
             /*SimpleSession session = new SimpleSession
             {
                 _client = new PokemonGo.RocketAPI.Client(new ClientSettings(settings)),

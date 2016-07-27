@@ -31,7 +31,7 @@ namespace PoGo.NecroBot.Logic.State
             {
                 try
                 {
-                    state = await state.Execute(session, this);
+                    state = await state.Execute(session);
                 }
                 catch (Exception ex)
                 {

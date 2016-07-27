@@ -16,7 +16,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         private static DateTime _lastLuckyEggTime;
 
-        public static async Task Execute(ISession session, StateMachine machine)
+        public static async Task Execute(ISession session)
         {
             var pokemonToEvolveTask = await session.Inventory.GetPokemonToEvolve(session.LogicSettings.PokemonsToEvolve);
             var pokemonToEvolve = pokemonToEvolveTask.ToList();

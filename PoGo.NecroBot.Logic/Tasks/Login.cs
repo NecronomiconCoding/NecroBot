@@ -1,6 +1,7 @@
 ﻿using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Service;
+using PoGo.NecroBot.Logic.State;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
@@ -47,13 +48,13 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             catch (PtcOfflineException)
             {
-                _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Localizer.GetFormat(TranslationString.PtcOffline) });
-                _session.EventDispatcher.Send(new NoticeEvent { Message = _session.Localizer.GetFormat(TranslationString.TryingAgainIn, 20) });
+              //  _session.EventDispatcher.Send(new ErrorEvent { Message = _session..GetFormat(TranslationString.PtcOffline) });
+              //  _session.EventDispatcher.Send(new NoticeEvent { Message = _session.Localizer.GetFormat(TranslationString.TryingAgainIn, 20) });
                 
             }
             catch (AccountNotVerifiedException)
             {
-                _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Localizer.GetFormat(TranslationString.AccountNotVerified) });
+              //  _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Localizer.GetFormat(TranslationString.AccountNotVerified) });
             }
         }
     }

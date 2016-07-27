@@ -20,7 +20,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         //to only find stops within 40 meters
         //this is for gpx pathing, we are not going to the pokestops,
         //so do not make it more than 40 because it will never get close to those stops.
-        public static async Task Execute(Session session, StateMachine machine)
+        public static async Task Execute(ISession session)
         {
             var pokestopList = await GetPokeStops(session);
 
@@ -51,17 +51,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
-                await RecycleItemsTask.Execute(session, machine);
+                await RecycleItemsTask.Execute(session);
 
                 if (session.LogicSettings.TransferDuplicatePokemon)
                 {
-                    await TransferDuplicatePokemonTask.Execute(session, machine);
+                    await TransferDuplicatePokemonTask.Execute(session);
                 }
             }
         }
 
 
-        private static async Task<List<FortData>> GetPokeStops(Session session)
+        private static async Task<List<FortData>> GetPokeStops(ISession session)
         {
             var mapObjects = await session.Client.Map.GetMapObjects();
 
