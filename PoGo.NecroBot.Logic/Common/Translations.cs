@@ -119,6 +119,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchTypeNormal, "Normal"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchTypeLure, "Lure"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchTypeIncense, "Incense"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.WebSocketFailStart, "Failed to start WebSocketServer on port : {0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsTemplateString, "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transfered: {6:0} | Items Recycled: {7:0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsXpTemplateString, "{0} (next level in {1}h {2}m | {3}/{4} XP)"),
 
         };
 
@@ -266,5 +269,8 @@ namespace PoGo.NecroBot.Logic.Common
         CatchTypeNormal,
         CatchTypeLure,
         CatchTypeIncense,
+        WebSocketFailStart,
+        StatsTemplateString,
+        StatsXpTemplateString,
     }
 }

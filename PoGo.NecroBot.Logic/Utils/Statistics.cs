@@ -21,7 +21,7 @@ namespace PoGo.NecroBot.Logic.Utils
     {
         private readonly DateTime _initSessionDateTime = DateTime.Now;
 
-        private string _currentLevelInfos;
+        private object[] _currentLevelInfos;
         private string _playerName;
         public int TotalExperience;
         public int TotalItemsRemoved;
@@ -42,10 +42,10 @@ namespace PoGo.NecroBot.Logic.Utils
             return (DateTime.Now - _initSessionDateTime).ToString(@"dd\.hh\:mm\:ss");
         }
 
-        public string GetCurrentInfo(Inventory inventory)
+        public object[] GetCurrentInfo(Inventory inventory)
         {
             var stats = inventory.GetPlayerStats().Result;
-            var output = string.Empty;
+            object[] output = null;
             var stat = stats.FirstOrDefault();
             if (stat != null)
             {
@@ -60,10 +60,22 @@ namespace PoGo.NecroBot.Logic.Utils
                     minutes = Math.Round((time - hours)*100);
                 }
 
-                output =
-                    $"{stat.Level} (next level in {hours}h {minutes}m | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
+                output = new object[]
+                {
+                    stat.Level,
+                    hours,
+                    minutes,
+                    stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level),
+                    stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)
+                };
             }
             return output;
+        }
+
+        public string GetTemplatedStats(string template, string xpTemplate)
+        {
+            var xpStats = string.Format(xpTemplate, _currentLevelInfos);
+            return string.Format(template, _playerName, FormatRuntime(), xpStats, TotalExperience / GetRuntime(), TotalPokemons / GetRuntime(), TotalStardust, TotalPokemonsTransfered, TotalItemsRemoved);
         }
 
         public double GetRuntime()
@@ -92,10 +104,10 @@ namespace PoGo.NecroBot.Logic.Utils
             _playerName = profile.PlayerData.Username ?? "";
         }
 
-        public override string ToString()
+        /*public override string ToString()
         {
             return
                 $"{_playerName} - Runtime {FormatRuntime()} - Lvl: {_currentLevelInfos} | EXP/H: {TotalExperience/GetRuntime():0} | P/H: {TotalPokemons/GetRuntime():0} | Stardust: {TotalStardust:0} | Transfered: {TotalPokemonsTransfered:0} | Items Recycled: {TotalItemsRemoved:0}";
-        }
+        }*/
     }
 }
