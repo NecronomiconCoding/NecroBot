@@ -43,11 +43,11 @@ namespace PoGo.NecroBot.Logic.Logging
         /// <summary>
         ///     Sets Context for the logger 
         /// </summary>
-        /// <param name="ctx">Context</param>
-        public static void SetLoggerContext(Context ctx)
+        /// <param name="session">Context</param>
+        public static void SetLoggerContext(Session session)
         {
             if (_logger != null)
-                _logger.SetContext(ctx);
+                _logger.SetContext(session);
         }
 
         /// <summary>

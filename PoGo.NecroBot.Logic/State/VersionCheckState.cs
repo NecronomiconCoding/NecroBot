@@ -28,30 +28,30 @@ namespace PoGo.NecroBot.Logic.State
 
         public static Version RemoteVersion;
 
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(Session session, StateMachine machine)
         {
             await CleanupOldFiles();
-            var autoUpdate = ctx.LogicSettings.AutoUpdate;
+            var autoUpdate = session.LogicSettings.AutoUpdate;
             var needupdate =  IsLatest();
             if (!needupdate || !autoUpdate)
             {
                 if (!needupdate)
                 {
-                    machine.Fire(new UpdateEvent
+                    session.EventDispatcher.Send(new UpdateEvent
                     {
                         Message =
-                            ctx.Translations.GetTranslation(Common.TranslationString.GotUpToDateVersion, RemoteVersion)
+                            session.Translations.GetTranslation(Common.TranslationString.GotUpToDateVersion, RemoteVersion)
                     });
                     return new LoginState();
                 }
-                machine.Fire(new UpdateEvent
+                session.EventDispatcher.Send(new UpdateEvent
                 {
-                    Message = ctx.Translations.GetTranslation(Common.TranslationString.AutoUpdaterDisabled, LatestRelease)                  
+                    Message = session.Translations.GetTranslation(Common.TranslationString.AutoUpdaterDisabled, LatestRelease)                  
                 });
 
                 return new LoginState();
             }
-            machine.Fire(new UpdateEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.DownloadingUpdate)});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.DownloadingUpdate)});
             var remoteReleaseUrl =
             $"https://github.com/NecronomiconCoding/NecroBot/releases/download/v{RemoteVersion}/";
             const string zipName = "Release.zip";
@@ -63,12 +63,12 @@ namespace PoGo.NecroBot.Logic.State
             var destinationDir = baseDir + Path.DirectorySeparatorChar;
             Console.WriteLine(downloadLink);
             if (!DownloadFile(downloadLink, downloadFilePath)) return new LoginState();
-            machine.Fire(new UpdateEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.FinishedDownloadingRelease)});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.FinishedDownloadingRelease)});
             if (!UnpackFile(downloadFilePath, tempPath)) return new LoginState();
-            machine.Fire(new UpdateEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.FinishedUnpackingFiles)});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.FinishedUnpackingFiles)});
 
             if (!MoveAllFiles(extractedDir, destinationDir)) return new LoginState();
-            machine.Fire(new UpdateEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.UpdateFinished)});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.UpdateFinished)});
 
             Process.Start(Assembly.GetEntryAssembly().Location);
             Environment.Exit(-1);

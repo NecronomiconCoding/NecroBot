@@ -12,17 +12,17 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class LoginState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(Session session, StateMachine machine)
         {
-            machine.Fire(new NoticeEvent { Message = ctx.Translations.GetTranslation(Common.TranslationString.LoggingIn, ctx.Settings.AuthType) });
+            session.EventDispatcher.Send(new NoticeEvent { Message = session.Translations.GetTranslation(Common.TranslationString.LoggingIn, session.Settings.AuthType) });
             try
             {
-                switch (ctx.Settings.AuthType)
+                switch (session.Settings.AuthType)
                 {
                     case AuthType.Ptc:
                         try
                         {
-                            await ctx.Client.Login.DoPtcLogin();
+                            await session.Client.Login.DoPtcLogin();
                         }
                         catch (AggregateException ae)
                         {
@@ -30,38 +30,38 @@ namespace PoGo.NecroBot.Logic.State
                         }
                         break;
                     case AuthType.Google:
-                        await ctx.Client.Login.DoGoogleLogin();
+                        await session.Client.Login.DoGoogleLogin();
                         break;
                     default:
-                        machine.Fire(new ErrorEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.WrongAuthType)});
+                        session.EventDispatcher.Send(new ErrorEvent {Message = session.Translations.GetTranslation(Common.TranslationString.WrongAuthType)});
                         return null;
                 }
             }
             catch (PtcOfflineException)
             {
-                machine.Fire(new ErrorEvent
+                session.EventDispatcher.Send(new ErrorEvent
                 {
-                    Message = ctx.Translations.GetTranslation(Common.TranslationString.PtcOffline)
+                    Message = session.Translations.GetTranslation(Common.TranslationString.PtcOffline)
                 });
-                machine.Fire(new NoticeEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.TryingAgainIn, 20)});
+                session.EventDispatcher.Send(new NoticeEvent {Message = session.Translations.GetTranslation(Common.TranslationString.TryingAgainIn, 20)});
                 await Task.Delay(20000);
                 return this;
             }
             catch (AccountNotVerifiedException)
             {
-                machine.Fire(new ErrorEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.AccountNotVerified)});
+                session.EventDispatcher.Send(new ErrorEvent {Message = session.Translations.GetTranslation(Common.TranslationString.AccountNotVerified)});
                 return null;
             }
 
-            await DownloadProfile(ctx, machine);
+            await DownloadProfile(session, machine);
 
             return new PositionCheckState();
         }
 
-        public async Task DownloadProfile(Context ctx, StateMachine machine)
+        public async Task DownloadProfile(Session session, StateMachine machine)
         {
-            ctx.Profile = await ctx.Client.Player.GetPlayer();
-            machine.Fire(new ProfileEvent {Profile = ctx.Profile});
+            session.Profile = await session.Client.Player.GetPlayer();
+            session.EventDispatcher.Send(new ProfileEvent {Profile = session.Profile});
         }
     }
 }

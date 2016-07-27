@@ -10,6 +10,9 @@ using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
+using PoGo.NecroBot.Logic.Localization;
+using PoGo.NecroBot.Logic.Service;
+using PoGo.NecroBot.Logic.Tasks;
 
 #endregion
 
@@ -26,6 +29,24 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
             var settings = GlobalSettings.Load(subPath);
+            var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
+
+
+            /*SimpleSession session = new SimpleSession
+            {
+                _client = new PokemonGo.RocketAPI.Client(new ClientSettings(settings)),
+                _dispatcher = new EventDispatcher(),
+                _localizer = new Localizer()
+            };
+
+            BotService service = new BotService
+            {
+                _session = session,
+                _loginTask = new Login(session)
+            };
+
+            service.Run();
+            */
 
             var machine = new StateMachine();
             var stats = new Statistics();
@@ -35,23 +56,22 @@ namespace PoGo.NecroBot.CLI
             var listener = new ConsoleEventListener();
             var websocket = new WebSocketInterface(settings.WebSocketPort);
 
-            machine.EventListener += listener.Listen;
-            machine.EventListener += aggregator.Listen;
-            machine.EventListener += websocket.Listen;
+            session.EventDispatcher.EventReceived += (IEvent evt) => listener.Listen(evt, session);
+            session.EventDispatcher.EventReceived += (IEvent evt) => aggregator.Listen(evt, session);
+            session.EventDispatcher.EventReceived += (IEvent evt) => websocket.Listen(evt, session);
 
             machine.SetFailureState(new LoginState());
 
-            var context = new Context(new ClientSettings(settings), new LogicSettings(settings));
-            Logger.SetLoggerContext(context);
+            Logger.SetLoggerContext(session);
 
-            context.Navigation.UpdatePositionEvent +=
-                (lat, lng) => machine.Fire(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
+            session.Navigation.UpdatePositionEvent +=
+                (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
 
-            context.Client.Login.GoogleDeviceCodeEvent += (usercode, uri) =>
+            session.Client.Login.GoogleDeviceCodeEvent += (usercode, uri) =>
             {
                 try
                 {
-                    Logger.Write(context.Translations.GetTranslation(Logic.Common.TranslationString.OpeningGoogleDevicePage), LogLevel.Warning);
+                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.OpeningGoogleDevicePage), LogLevel.Warning);
                     Thread.Sleep(5000);
                     Process.Start(uri);
                     var thread = new Thread(() => Clipboard.SetText(usercode)); //Copy device code
@@ -61,12 +81,12 @@ namespace PoGo.NecroBot.CLI
                 }
                 catch (Exception)
                 {
-                    Logger.Write(context.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard), LogLevel.Error);
-                    Logger.Write(context.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard2, uri, usercode), LogLevel.Error);
+                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard), LogLevel.Error);
+                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard2, uri, usercode), LogLevel.Error);
                 }
             };
 
-            machine.AsyncStart(new VersionCheckState(), context);
+            machine.AsyncStart(new VersionCheckState(), session);
 
             Console.ReadLine();
         }

@@ -15,12 +15,12 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchIncensePokemonsTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Session session, StateMachine machine)
         {
-            Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.LookingForIncensePokemon), LogLevel.Debug);
+            Logger.Write(session.Translations.GetTranslation(Common.TranslationString.LookingForIncensePokemon), LogLevel.Debug);
 
 
-            var incensePokemon = await ctx.Client.Map.GetIncensePokemons();
+            var incensePokemon = await session.Client.Map.GetIncensePokemons();
             if (incensePokemon.Result == GetIncensePokemonResponse.Types.Result.IncenseEncounterAvailable)
             {
                 var pokemon = new MapPokemon
@@ -33,42 +33,42 @@ namespace PoGo.NecroBot.Logic.Tasks
                     SpawnPointId = incensePokemon.EncounterLocation
                 };
 
-                if (ctx.LogicSettings.UsePokemonToNotCatchFilter &&
-                    ctx.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
+                if (session.LogicSettings.UsePokemonToNotCatchFilter &&
+                    session.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
                 {
-                    Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.PokemonIgnoreFilter, pokemon.PokemonId));
+                    Logger.Write(session.Translations.GetTranslation(Common.TranslationString.PokemonIgnoreFilter, pokemon.PokemonId));
                 }
                 else
                 {
-                    var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
-                        ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
+                    var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                        session.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
                     await Task.Delay(distance > 100 ? 3000 : 500);
 
                     var encounter =
                         await
-                            ctx.Client.Encounter.EncounterIncensePokemon((long) pokemon.EncounterId,
+                            session.Client.Encounter.EncounterIncensePokemon((long) pokemon.EncounterId,
                                 pokemon.SpawnPointId);
 
                     if (encounter.Result == IncenseEncounterResponse.Types.Result.IncenseEncounterSuccess)
                     {
-                        await CatchPokemonTask.Execute(ctx, machine, encounter, pokemon);
+                        await CatchPokemonTask.Execute(session, machine, encounter, pokemon);
                     }
                     else if (encounter.Result == IncenseEncounterResponse.Types.Result.PokemonInventoryFull)
                     {
-                        if (ctx.LogicClient.Settings.TransferDuplicatePokemon)
+                        if (session.LogicSettings.TransferDuplicatePokemon)
                         {
-                            machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.InvFullTransferring)});
-                            await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                            session.EventDispatcher.Send(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferring)});
+                            await TransferDuplicatePokemonTask.Execute(session, machine);
                         }
                         else
-                            machine.Fire(new WarnEvent
+                            session.EventDispatcher.Send(new WarnEvent
                             {
-                                Message = ctx.Translations.GetTranslation(Common.TranslationString.InvFullTransferManually)
+                                Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferManually)
                             });
                     }
                     else
                     {
-                        machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Result)});
+                        session.EventDispatcher.Send(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Result)});
                     }
                 }
             }
