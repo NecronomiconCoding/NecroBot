@@ -1,7 +1,6 @@
 ﻿#region using directives
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 
@@ -14,7 +13,6 @@ namespace PoGo.NecroBot.Logic.State
     public class StateMachine
     {
         private Context _ctx;
-        private int _delay;
         private IState _initialState;
 
         public Task AsyncStart(IState initialState, Context ctx)
@@ -29,17 +27,12 @@ namespace PoGo.NecroBot.Logic.State
             EventListener?.Invoke(evt, _ctx);
         }
 
-        public void RequestDelay(int delay)
-        {
-            _delay = delay;
-        }
-
         public void SetFailureState(IState state)
         {
             _initialState = state;
         }
 
-        public void Start(IState initialState, Context ctx)
+        public async Task Start(IState initialState, Context ctx)
         {
             _ctx = ctx;
             var state = initialState;
@@ -47,9 +40,7 @@ namespace PoGo.NecroBot.Logic.State
             {
                 try
                 {
-                    state = state.Execute(ctx, this);
-                    Thread.Sleep(_delay);
-                    _delay = 0;
+                    state = await state.Execute(ctx, this);
                 }
                 catch (Exception ex)
                 {

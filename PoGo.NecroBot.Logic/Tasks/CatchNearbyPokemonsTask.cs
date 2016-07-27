@@ -1,7 +1,7 @@
 ﻿#region using directives
 
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
@@ -15,11 +15,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchNearbyPokemonsTask
     {
-        public static void Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Context ctx, StateMachine machine)
         {
             Logger.Write("Looking for pokemon..", LogLevel.Debug);
 
-            var pokemons = GetNearbyPokemons(ctx);
+            var pokemons = await GetNearbyPokemons(ctx);
             foreach (var pokemon in pokemons)
             {
                 if (ctx.LogicSettings.UsePokemonToNotCatchFilter &&
@@ -31,13 +31,27 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
                     ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
-                Thread.Sleep(distance > 100 ? 15000 : 500);
+                await Task.Delay(distance > 100 ? 15000 : 500);
 
-                var encounter = ctx.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
+                var encounter = await ctx.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId);
 
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                 {
-                    CatchPokemonTask.Execute(ctx, machine, encounter, pokemon);
+                    await CatchPokemonTask.Execute(ctx, machine, encounter, pokemon);
+                }
+                else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
+                {
+                    if (ctx.LogicClient.Settings.TransferDuplicatePokemon)
+                    {
+                        machine.Fire(new WarnEvent {Message = "PokemonInventory is Full.Transferring pokemons..."});
+                        await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                    }
+                    else
+                        machine.Fire(new WarnEvent
+                        {
+                            Message =
+                                "PokemonInventory is Full.Please Transfer pokemon manually or set TransferDuplicatePokemon to true in settings..."
+                        });
                 }
                 else
                 {
@@ -47,14 +61,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                 // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
                 if (!Equals(pokemons.ElementAtOrDefault(pokemons.Count() - 1), pokemon))
                 {
-                    Thread.Sleep(ctx.LogicSettings.DelayBetweenPokemonCatch);
+                    await Task.Delay(ctx.LogicSettings.DelayBetweenPokemonCatch);
                 }
             }
         }
 
-        private static IOrderedEnumerable<MapPokemon> GetNearbyPokemons(Context ctx)
+        private static async Task<IOrderedEnumerable<MapPokemon>> GetNearbyPokemons(Context ctx)
         {
-            var mapObjects = ctx.Client.Map.GetMapObjects().Result;
+            var mapObjects = await ctx.Client.Map.GetMapObjects();
 
             var pokemons = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons)
                 .OrderBy(

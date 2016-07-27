@@ -87,7 +87,7 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
-        public void HandleEvent(DisplayHighestsPokemonEvent evt,Context ctx)
+        public void HandleEvent(DisplayHighestsPokemonEvent evt, Context ctx)
         {
         }
 
@@ -95,7 +95,14 @@ namespace PoGo.NecroBot.Logic
         {
             dynamic eve = evt;
 
-            HandleEvent(eve, ctx);
+            try
+            {
+                HandleEvent(eve, ctx);
+            }
+            catch
+            {
+                // ignored
+            }
         }
     }
 }

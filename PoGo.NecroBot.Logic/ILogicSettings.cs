@@ -8,14 +8,34 @@ using POGOProtos.Inventory.Item;
 
 namespace PoGo.NecroBot.Logic
 {
+    public class TransferFilter
+    {
+        public TransferFilter()
+        {
+        }
+
+        public TransferFilter(int keepMinCp, float keepMinIvPercentage, int keepMinDuplicatePokemon)
+        {
+            KeepMinCp = keepMinCp;
+            KeepMinIvPercentage = keepMinIvPercentage;
+            KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
+        }
+
+        public int KeepMinCp { get; set; }
+        public float KeepMinIvPercentage { get; set; }
+        public int KeepMinDuplicatePokemon { get; set; }
+    }
+
     public interface ILogicSettings
     {
+        bool AutoUpdate { get; }
         float KeepMinIvPercentage { get; }
         int KeepMinCp { get; }
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
+        bool UseEggIncubators { get; }
         int DelayBetweenPokemonCatch { get; }
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
@@ -24,10 +44,14 @@ namespace PoGo.NecroBot.Logic
         bool UseGpxPathing { get; }
         string GpxFile { get; }
         bool UseLuckyEggsWhileEvolving { get; }
+        int UseLuckyEggsMinPokemonAmount { get; }
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
         bool RenameAboveIv { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
+        string TranslationLanguageCode { get; }
+        string ProfilePath { get; }
+        string ConfigPath { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
@@ -38,5 +62,7 @@ namespace PoGo.NecroBot.Logic
         ICollection<PokemonId> PokemonsNotToCatch { get; }
 
         ICollection<PokemonId> PokemonsToImmediatelyTransfer { get; } 
+
+        Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
     }
 }
