@@ -12,7 +12,7 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class LoginState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(Session ctx, StateMachine machine)
         {
             machine.Fire(new NoticeEvent { Message = ctx.Translations.GetTranslation(Common.TranslationString.LoggingIn, ctx.Settings.AuthType) });
             try
@@ -58,7 +58,7 @@ namespace PoGo.NecroBot.Logic.State
             return new PositionCheckState();
         }
 
-        public async Task DownloadProfile(Context ctx, StateMachine machine)
+        public async Task DownloadProfile(Session ctx, StateMachine machine)
         {
             ctx.Profile = await ctx.Client.Player.GetPlayer();
             machine.Fire(new ProfileEvent {Profile = ctx.Profile});

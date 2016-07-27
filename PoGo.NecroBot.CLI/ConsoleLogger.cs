@@ -15,7 +15,7 @@ namespace PoGo.NecroBot.CLI
     public class ConsoleLogger : ILogger
     {
         private readonly LogLevel _maxLogLevel;
-        private Context _ctx;
+        private Session _ctx;
 
         /// <summary>
         ///     To create a ConsoleLogger, we must define a maximum log level.
@@ -132,7 +132,7 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        public void SetContext(Context ctx)
+        public void SetContext(Session ctx)
         {
             _ctx = ctx;
         }

@@ -9,7 +9,7 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class FarmState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(Session ctx, StateMachine machine)
         {
             if (ctx.LogicSettings.EvolveAllPokemonAboveIv || ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {

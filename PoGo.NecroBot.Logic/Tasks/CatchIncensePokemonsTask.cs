@@ -15,7 +15,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchIncensePokemonsTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Session ctx, StateMachine machine)
         {
             Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.LookingForIncensePokemon), LogLevel.Debug);
 
@@ -55,7 +55,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     else if (encounter.Result == IncenseEncounterResponse.Types.Result.PokemonInventoryFull)
                     {
-                        if (ctx.LogicClient.Settings.TransferDuplicatePokemon)
+                        if (ctx.LogicSettings.TransferDuplicatePokemon)
                         {
                             machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.InvFullTransferring)});
                             await TransferDuplicatePokemonTask.Execute(ctx, machine);

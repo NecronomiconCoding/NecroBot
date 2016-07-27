@@ -18,57 +18,57 @@ namespace PoGo.NecroBot.Logic
             _stats = stats;
         }
 
-        public void HandleEvent(ProfileEvent evt, Context ctx)
+        public void HandleEvent(ProfileEvent evt, Session ctx)
         {
             _stats.SetUsername(evt.Profile);
             _stats.Dirty(ctx.Inventory);
         }
 
-        public void HandleEvent(ErrorEvent evt, Context ctx)
+        public void HandleEvent(ErrorEvent evt, Session ctx)
         {
         }
 
-        public void HandleEvent(NoticeEvent evt, Context ctx)
+        public void HandleEvent(NoticeEvent evt, Session ctx)
         {
         }
 
-        public void HandleEvent(WarnEvent evt, Context ctx)
+        public void HandleEvent(WarnEvent evt, Session ctx)
         {
         }
 
-        public void HandleEvent(UseLuckyEggEvent evt, Context ctx)
+        public void HandleEvent(UseLuckyEggEvent evt, Session ctx)
         {
         }
 
-        public void HandleEvent(PokemonEvolveEvent evt, Context ctx)
+        public void HandleEvent(PokemonEvolveEvent evt, Session ctx)
         {
             _stats.TotalExperience += evt.Exp;
             _stats.Dirty(ctx.Inventory);
         }
 
-        public void HandleEvent(TransferPokemonEvent evt, Context ctx)
+        public void HandleEvent(TransferPokemonEvent evt, Session ctx)
         {
             _stats.TotalPokemonsTransfered++;
             _stats.Dirty(ctx.Inventory);
         }
 
-        public void HandleEvent(ItemRecycledEvent evt, Context ctx)
+        public void HandleEvent(ItemRecycledEvent evt, Session ctx)
         {
             _stats.TotalItemsRemoved++;
             _stats.Dirty(ctx.Inventory);
         }
 
-        public void HandleEvent(FortUsedEvent evt, Context ctx)
+        public void HandleEvent(FortUsedEvent evt, Session ctx)
         {
             _stats.TotalExperience += evt.Exp;
             _stats.Dirty(ctx.Inventory);
         }
 
-        public void HandleEvent(FortTargetEvent evt, Context ctx)
+        public void HandleEvent(FortTargetEvent evt, Session ctx)
         {
         }
 
-        public void HandleEvent(PokemonCaptureEvent evt, Context ctx)
+        public void HandleEvent(PokemonCaptureEvent evt, Session ctx)
         {
             if (evt.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
             {
@@ -79,19 +79,19 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
-        public void HandleEvent(NoPokeballEvent evt, Context ctx)
+        public void HandleEvent(NoPokeballEvent evt, Session ctx)
         {
         }
 
-        public void HandleEvent(UseBerryEvent evt, Context ctx)
+        public void HandleEvent(UseBerryEvent evt, Session ctx)
         {
         }
 
-        public void HandleEvent(DisplayHighestsPokemonEvent evt, Context ctx)
+        public void HandleEvent(DisplayHighestsPokemonEvent evt, Session ctx)
         {
         }
 
-        public void Listen(IEvent evt, Context ctx)
+        public void Listen(IEvent evt, Session ctx)
         {
             dynamic eve = evt;
 

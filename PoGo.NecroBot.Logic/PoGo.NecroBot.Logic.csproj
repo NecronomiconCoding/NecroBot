@@ -75,7 +75,6 @@
     <Compile Include="Inventory.cs" />
     <Compile Include="Localization\Localizer.cs" />
     <Compile Include="Logging\Logger.cs" />
-    <Compile Include="LogicClient.cs" />
     <Compile Include="ILogicSettings.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="PoGoUtils\PokemonInfo.cs" />
@@ -83,7 +82,7 @@
     <Compile Include="Service\BotService.cs" />
     <Compile Include="Service\Session.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="State\Context.cs" />
+    <Compile Include="State\Session.cs" />
     <Compile Include="Event\ErrorEvent.cs" />
     <Compile Include="State\FarmState.cs" />
     <Compile Include="State\InfoState.cs" />

@@ -14,33 +14,33 @@ namespace PoGo.NecroBot.CLI
 {
     public class ConsoleEventListener
     {
-        public void HandleEvent(ProfileEvent evt, Context ctx)
+        public void HandleEvent(ProfileEvent evt, Session ctx)
         {
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventFortUsed,
                 evt.Profile.PlayerData.Username ?? ""));
         }
 
-        public void HandleEvent(ErrorEvent evt, Context ctx)
+        public void HandleEvent(ErrorEvent evt, Session ctx)
         {
             Logger.Write(evt.ToString(), LogLevel.Error);
         }
 
-        public void HandleEvent(NoticeEvent evt, Context ctx)
+        public void HandleEvent(NoticeEvent evt, Session ctx)
         {
             Logger.Write(evt.ToString());
         }
 
-        public void HandleEvent(WarnEvent evt, Context ctx)
+        public void HandleEvent(WarnEvent evt, Session ctx)
         {
             Logger.Write(evt.ToString(), LogLevel.Warning);
         }
 
-        public void HandleEvent(UseLuckyEggEvent evt, Context ctx)
+        public void HandleEvent(UseLuckyEggEvent evt, Session ctx)
         {
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventUsedLuckyEgg, evt.Count), LogLevel.Egg);
         }
 
-        public void HandleEvent(PokemonEvolveEvent evt, Context ctx)
+        public void HandleEvent(PokemonEvolveEvent evt, Session ctx)
         {
             Logger.Write(evt.Result == EvolvePokemonResponse.Types.Result.Success
                 ? ctx.Translations.GetTranslation(TranslationString.EventPokemonEvolvedSuccess, evt.Id, evt.Exp)
@@ -49,7 +49,7 @@ namespace PoGo.NecroBot.CLI
                 LogLevel.Evolve);
         }
 
-        public void HandleEvent(TransferPokemonEvent evt, Context ctx)
+        public void HandleEvent(TransferPokemonEvent evt, Session ctx)
         {
             Logger.Write(
                 ctx.Translations.GetTranslation(TranslationString.EventPokemonTransferred, evt.Id, evt.Cp,
@@ -57,45 +57,45 @@ namespace PoGo.NecroBot.CLI
                 LogLevel.Transfer);
         }
 
-        public void HandleEvent(ItemRecycledEvent evt, Context ctx)
+        public void HandleEvent(ItemRecycledEvent evt, Session ctx)
         {
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventItemRecycled, evt.Count, evt.Id),
                 LogLevel.Recycling);
         }
 
-        public void HandleEvent(EggIncubatorStatusEvent evt, Context ctx)
+        public void HandleEvent(EggIncubatorStatusEvent evt, Session ctx)
         {
             Logger.Write(evt.WasAddedNow
                 ? ctx.Translations.GetTranslation(TranslationString.IncubatorPuttingEgg, evt.KmRemaining)
                 : ctx.Translations.GetTranslation(TranslationString.IncubatorStatusUpdate, evt.KmRemaining));
         }
 
-        public void HandleEvent(EggHatchedEvent evt, Context ctx)
+        public void HandleEvent(EggHatchedEvent evt, Session ctx)
         {
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.IncubatorEggHatched, evt.PokemonId.ToString()));
         }
 
-        public void HandleEvent(FortUsedEvent evt, Context ctx)
+        public void HandleEvent(FortUsedEvent evt, Session ctx)
         {
             Logger.Write(
                 ctx.Translations.GetTranslation(TranslationString.EventFortUsed, evt.Name, evt.Exp, evt.Gems, evt.Items),
                 LogLevel.Pokestop);
         }
 
-        public void HandleEvent(FortFailedEvent evt, Context ctx)
+        public void HandleEvent(FortFailedEvent evt, Session ctx)
         {
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventFortFailed, evt.Name, evt.Try, evt.Max),
                 LogLevel.Pokestop, ConsoleColor.DarkRed);
         }
 
-        public void HandleEvent(FortTargetEvent evt, Context ctx)
+        public void HandleEvent(FortTargetEvent evt, Session ctx)
         {
             Logger.Write(
                 ctx.Translations.GetTranslation(TranslationString.EventFortTargeted, evt.Name, Math.Round(evt.Distance)),
                 LogLevel.Info, ConsoleColor.DarkRed);
         }
 
-        public void HandleEvent(PokemonCaptureEvent evt, Context ctx)
+        public void HandleEvent(PokemonCaptureEvent evt, Session ctx)
         {
             Func<ItemId, string> returnRealBallName = a =>
             {
@@ -131,18 +131,18 @@ namespace PoGo.NecroBot.CLI
                     returnRealBallName(evt.Pokeball), evt.BallAmount, familyCandies), LogLevel.Caught);
         }
 
-        public void HandleEvent(NoPokeballEvent evt, Context ctx)
+        public void HandleEvent(NoPokeballEvent evt, Session ctx)
         {
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventNoPokeballs, evt.Id, evt.Cp),
                 LogLevel.Caught);
         }
 
-        public void HandleEvent(UseBerryEvent evt, Context ctx)
+        public void HandleEvent(UseBerryEvent evt, Session ctx)
         {
             Logger.Write(ctx.Translations.GetTranslation(TranslationString.EventNoPokeballs, evt.Count), LogLevel.Berry);
         }
 
-        public void HandleEvent(DisplayHighestsPokemonEvent evt, Context ctx)
+        public void HandleEvent(DisplayHighestsPokemonEvent evt, Session ctx)
         {
             string strHeader;
             //PokemonData | CP | IV | Level
@@ -171,12 +171,12 @@ namespace PoGo.NecroBot.CLI
                     LogLevel.Info, ConsoleColor.Yellow);
         }
 
-        public void HandleEvent(UpdateEvent evt, Context ctx)
+        public void HandleEvent(UpdateEvent evt, Session ctx)
         {
             Logger.Write(evt.ToString(), LogLevel.Update);
         }
 
-        public void Listen(IEvent evt, Context ctx)
+        public void Listen(IEvent evt, Session ctx)
         {
             dynamic eve = evt;
 

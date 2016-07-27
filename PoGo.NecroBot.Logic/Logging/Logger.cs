@@ -44,7 +44,7 @@ namespace PoGo.NecroBot.Logic.Logging
         ///     Sets Context for the logger 
         /// </summary>
         /// <param name="ctx">Context</param>
-        public static void SetLoggerContext(Context ctx)
+        public static void SetLoggerContext(Session ctx)
         {
             if (_logger != null)
                 _logger.SetContext(ctx);

@@ -18,7 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchPokemonTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine, dynamic encounter, MapPokemon pokemon,
+        public static async Task Execute(Session ctx, StateMachine machine, dynamic encounter, MapPokemon pokemon,
             FortData currentFortData = null, ulong encounterId = 0)
         {
             CatchPokemonResponse caughtPokemonResponse;
@@ -138,7 +138,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
-        private static async Task<ItemId> GetBestBall(Context ctx, dynamic encounter, float probability)
+        private static async Task<ItemId> GetBestBall(Session ctx, dynamic encounter, float probability)
         {
             var pokemonCp = encounter is EncounterResponse
                 ? encounter.WildPokemon?.PokemonData?.Cp
@@ -182,7 +182,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             return ItemId.ItemUnknown;
         }
 
-        private static async Task UseBerry(Context ctx, StateMachine machine, ulong encounterId, string spawnPointId)
+        private static async Task UseBerry(Session ctx, StateMachine machine, ulong encounterId, string spawnPointId)
         {
             var inventoryBalls = await ctx.Inventory.GetItems();
             var berries = inventoryBalls.Where(p => p.ItemId == ItemId.ItemRazzBerry);

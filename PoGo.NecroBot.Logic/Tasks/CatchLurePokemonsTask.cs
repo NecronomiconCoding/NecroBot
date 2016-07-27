@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchLurePokemonsTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine, FortData currentFortData)
+        public static async Task Execute(Session ctx, StateMachine machine, FortData currentFortData)
         {
             Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.LookingForLurePokemon), LogLevel.Debug);
 
@@ -37,7 +37,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else if (encounter.Result == DiskEncounterResponse.Types.Result.PokemonInventoryFull)
                 {
-                    if (ctx.LogicClient.Settings.TransferDuplicatePokemon)
+                    if (ctx.LogicSettings.TransferDuplicatePokemon)
                     {
                         machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.InvFullTransferring) });
                         await TransferDuplicatePokemonTask.Execute(ctx, machine);

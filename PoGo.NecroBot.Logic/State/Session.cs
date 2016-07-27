@@ -8,9 +8,26 @@ using POGOProtos.Networking.Responses;
 
 namespace PoGo.NecroBot.Logic.State
 {
-    public class Context
+    public interface ISession
     {
-        public Context(ISettings settings, ILogicSettings logicSettings)
+        ISettings Settings { get; }
+
+        Inventory Inventory { get; }
+
+        Client Client { get;  }
+
+        GetPlayerResponse Profile { get; set; }
+        Navigation Navigation { get;  }
+
+        ILogicSettings LogicSettings { get; }
+
+        Translations Translations { get; }
+    }
+
+
+    public class Session : ISession
+    {
+        public Session(ISettings settings, ILogicSettings logicSettings)
         {
             Settings = settings;
             LogicSettings = logicSettings;
@@ -29,15 +46,12 @@ namespace PoGo.NecroBot.Logic.State
 
         public ILogicSettings LogicSettings { get; }
 
-        public LogicClient LogicClient { get; private set; }
-
         public Translations Translations { get; private set; }
 
         public void Reset(ISettings settings, ILogicSettings logicSettings)
         {
             Client = new Client(Settings);
-            LogicClient = new LogicClient(LogicSettings);
-            Inventory = new Inventory(Client, LogicClient);
+            Inventory = new Inventory(Client, logicSettings);
             Navigation = new Navigation(Client);
         }
     }

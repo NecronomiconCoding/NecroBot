@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class RenamePokemonTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Session ctx, StateMachine machine)
         {
             var pokemons = await ctx.Inventory.GetPokemons();
 

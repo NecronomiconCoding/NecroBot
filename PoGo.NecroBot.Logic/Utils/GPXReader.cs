@@ -21,7 +21,7 @@ namespace PoGo.NecroBot.Logic.Utils
     {
         private readonly XmlDocument _gpx = new XmlDocument();
 
-        private Context _ctx;
+        private Session _ctx;
 
         public string Author = "";
         public GpsBoundary Bounds = new GpsBoundary();
@@ -36,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Utils
         public string UrlName = "";
         public List<Wpt> WayPoints = new List<Wpt>();
 
-        public GpxReader(string xml, Context ctx)
+        public GpxReader(string xml, Session ctx)
         {
             _ctx = ctx;
             if (xml.Equals("")) return;

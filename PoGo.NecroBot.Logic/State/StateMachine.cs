@@ -8,14 +8,14 @@ using PoGo.NecroBot.Logic.Event;
 
 namespace PoGo.NecroBot.Logic.State
 {
-    public delegate void StateMachineEventDeletate(IEvent evt, Context ctx);
+    public delegate void StateMachineEventDeletate(IEvent evt, Session ctx);
 
     public class StateMachine
     {
-        private Context _ctx;
+        private Session _ctx;
         private IState _initialState;
 
-        public Task AsyncStart(IState initialState, Context ctx)
+        public Task AsyncStart(IState initialState, Session ctx)
         {
             return Task.Run(() => Start(initialState, ctx));
         }
@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic.State
             _initialState = state;
         }
 
-        public async Task Start(IState initialState, Context ctx)
+        public async Task Start(IState initialState, Session ctx)
         {
             _ctx = ctx;
             var state = initialState;

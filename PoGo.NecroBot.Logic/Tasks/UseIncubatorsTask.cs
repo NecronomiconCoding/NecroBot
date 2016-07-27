@@ -17,7 +17,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     internal class UseIncubatorsTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Session ctx, StateMachine machine)
         {
             // Refresh inventory so that the player stats are fresh
             await ctx.Inventory.RefreshCachedInventory();

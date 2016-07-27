@@ -18,7 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsGpxTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Session ctx, StateMachine machine)
         {
             var tracks = GetGpxTracks(ctx);
             var curTrkPt = 0;
@@ -141,7 +141,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             } //end tracks
         }
 
-        private static List<GpxReader.Trk> GetGpxTracks(Context ctx)
+        private static List<GpxReader.Trk> GetGpxTracks(Session ctx)
         {
             var xmlString = File.ReadAllText(ctx.LogicSettings.GpxFile);
             var readgpx = new GpxReader(xmlString, ctx);
@@ -152,7 +152,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         //to only find stops within 40 meters
         //this is for gpx pathing, we are not going to the pokestops,
         //so do not make it more than 40 because it will never get close to those stops.
-        private static async Task<List<FortData>> GetPokeStops(Context ctx)
+        private static async Task<List<FortData>> GetPokeStops(Session ctx)
         {
             var mapObjects = await ctx.Client.Map.GetMapObjects();
 

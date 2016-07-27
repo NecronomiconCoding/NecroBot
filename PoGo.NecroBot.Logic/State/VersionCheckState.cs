@@ -28,7 +28,7 @@ namespace PoGo.NecroBot.Logic.State
 
         public static Version RemoteVersion;
 
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(Session ctx, StateMachine machine)
         {
             await CleanupOldFiles();
             var autoUpdate = ctx.LogicSettings.AutoUpdate;

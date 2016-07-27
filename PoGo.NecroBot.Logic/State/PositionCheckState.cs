@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class PositionCheckState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(Session ctx, StateMachine machine)
         {
             var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
                              Path.DirectorySeparatorChar + "Coords.ini";
@@ -63,7 +63,7 @@ namespace PoGo.NecroBot.Logic.State
             return new InfoState();
         }
 
-        private static Tuple<double, double> LoadPositionFromDisk(StateMachine machine, Context ctx)
+        private static Tuple<double, double> LoadPositionFromDisk(StateMachine machine, Session ctx)
         {
             if (
                 File.Exists(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +

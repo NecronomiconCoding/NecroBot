@@ -20,7 +20,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         //to only find stops within 40 meters
         //this is for gpx pathing, we are not going to the pokestops,
         //so do not make it more than 40 because it will never get close to those stops.
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Session ctx, StateMachine machine)
         {
             var pokestopList = await GetPokeStops(ctx);
 
@@ -61,7 +61,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         }
 
 
-        private static async Task<List<FortData>> GetPokeStops(Context ctx)
+        private static async Task<List<FortData>> GetPokeStops(Session ctx)
         {
             var mapObjects = await ctx.Client.Map.GetMapObjects();
 

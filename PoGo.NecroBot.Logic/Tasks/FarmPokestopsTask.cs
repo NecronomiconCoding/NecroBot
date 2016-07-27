@@ -22,7 +22,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static int TimesZeroXPawarded;
 
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Session ctx, StateMachine machine)
         {
             var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
                 ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude,
@@ -165,7 +165,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-        private static async Task<List<FortData>> GetPokeStops(Context ctx)
+        private static async Task<List<FortData>> GetPokeStops(Session ctx)
         {
             var mapObjects = await ctx.Client.Map.GetMapObjects();
 

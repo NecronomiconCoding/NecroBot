@@ -15,7 +15,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchNearbyPokemonsTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(Session ctx, StateMachine machine)
         {
             Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.LookingForPokemon), LogLevel.Debug);
 
@@ -41,7 +41,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                 {
-                    if (ctx.LogicClient.Settings.TransferDuplicatePokemon)
+                    if (ctx.LogicSettings.TransferDuplicatePokemon)
                     {
                         machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.InvFullTransferring)});
                         await TransferDuplicatePokemonTask.Execute(ctx, machine);
@@ -65,7 +65,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-        private static async Task<IOrderedEnumerable<MapPokemon>> GetNearbyPokemons(Context ctx)
+        private static async Task<IOrderedEnumerable<MapPokemon>> GetNearbyPokemons(Session ctx)
         {
             var mapObjects = await ctx.Client.Map.GetMapObjects();
 
