@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Device.Location;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
@@ -32,7 +31,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 Logger.Write(ctx.Translations.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart), LogLevel.Warning);
 
-                await Task.Delay(5000);
+                await Utils.Statistics.RandomDelay(5000);
 
                 await ctx.Navigation.HumanLikeWalking(
                     new GeoCoordinate(ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude),
@@ -95,7 +94,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
-                await Task.Delay(1000);
+                await Utils.Statistics.RandomDelay(1000);
                 if (++stopsHit % 5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;

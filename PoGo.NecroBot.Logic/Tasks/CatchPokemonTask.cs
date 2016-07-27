@@ -2,7 +2,6 @@
 
 using System;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
@@ -133,7 +132,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 machine.Fire(evt);
 
                 attemptCounter++;
-                await Task.Delay(2000);
+                await Utils.Statistics.RandomDelay(2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
@@ -195,7 +194,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             berry.Count -= 1;
             machine.Fire(new UseBerryEvent {Count = berry.Count});
 
-            await Task.Delay(1500);
+            await Utils.Statistics.RandomDelay(1500);
         }
     }
 }

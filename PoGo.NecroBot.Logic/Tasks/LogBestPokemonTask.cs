@@ -1,14 +1,9 @@
-﻿using Microsoft.CSharp.RuntimeBinder;
-using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Logging;
+﻿using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Data;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.Logic.Tasks
@@ -36,7 +31,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     PokemonList = pokemonPairedWithStatsCP
                 });
 
-            await Task.Delay(500);
+            await Utils.Statistics.RandomDelay(500);
 
             machine.Fire(
                     new DisplayHighestsPokemonEvent
@@ -45,7 +40,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         PokemonList = pokemonPairedWithStatsIV
                     });
  
-            await Task.Delay(500);
+            await Utils.Statistics.RandomDelay(500);
         }
     }
 }
