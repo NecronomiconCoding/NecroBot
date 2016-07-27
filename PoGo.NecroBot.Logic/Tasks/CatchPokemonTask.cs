@@ -194,8 +194,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             await ctx.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
             machine.Fire(new UseBerryEvent {Count = berry.Count});
-
-            await Task.Delay(1500);
         }
     }
 }

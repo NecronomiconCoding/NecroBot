@@ -49,8 +49,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
-                await Task.Delay(1000);
-
                 await RecycleItemsTask.Execute(ctx, machine);
 
                 if (ctx.LogicSettings.TransferDuplicatePokemon)

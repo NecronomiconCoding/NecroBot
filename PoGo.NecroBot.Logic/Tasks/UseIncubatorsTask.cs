@@ -57,7 +57,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                         KmRemaining = response.EggIncubator.TargetKmWalked - kmWalked
                     });
 
-                    await Task.Delay(500);
                 }
                 else
                 {
