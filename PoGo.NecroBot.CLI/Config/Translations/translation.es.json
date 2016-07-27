@@ -65,7 +65,7 @@
     {
       "Key": "eventPokemonCapture",
       "Value":
-        "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
+        "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Probabilidad: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -82,6 +82,46 @@
     {
       "Key": "candies",
       "Value": "Caramelos: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Error no controlado en el archivo GPX, intentando saltar."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfecto"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "nombre"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "Mostrando mayor CP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Mostrando mayor Perfección"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Mostrando mayor nivel"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Asegurate de que Lat y Lng son correctos, el programa se cerrara en caso contrario! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Añadiendo huevo a incubadora: {0:0.00}km restantes"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Estado de la incubadora: {0:0.00}km restantes"
     }
   ]
 }
