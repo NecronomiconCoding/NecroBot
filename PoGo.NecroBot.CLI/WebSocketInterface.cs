@@ -85,7 +85,7 @@ namespace PoGo.NecroBot.CLI
                 session.Send(Serialize(_lastPokeStopList));
         }
 
-        public void Listen(IEvent evt, Session ctx)
+        public void Listen(IEvent evt, Session session)
         {
             dynamic eve = evt;
 

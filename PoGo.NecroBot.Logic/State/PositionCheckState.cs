@@ -13,17 +13,17 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class PositionCheckState : IState
     {
-        public async Task<IState> Execute(Session ctx, StateMachine machine)
+        public async Task<IState> Execute(Session session, StateMachine machine)
         {
             var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
                              Path.DirectorySeparatorChar + "Coords.ini";
             if (File.Exists(coordsPath))
             {
-                var latLngFromFile = LoadPositionFromDisk(machine, ctx);
+                var latLngFromFile = LoadPositionFromDisk(machine, session);
                 if (latLngFromFile != null)
                 {
                     var distance = LocationUtils.CalculateDistanceInMeters(latLngFromFile.Item1, latLngFromFile.Item2,
-                        ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude);
+                        session.Settings.DefaultLatitude, session.Settings.DefaultLongitude);
                     var lastModified = File.Exists(coordsPath) ? (DateTime?) File.GetLastWriteTime(coordsPath) : null;
                     if (lastModified != null)
                     {
@@ -38,14 +38,14 @@ namespace PoGo.NecroBot.Logic.State
                                 File.Delete(coordsPath);
                                 machine.Fire(new WarnEvent
                                 {
-                                    Message = ctx.Translations.GetTranslation(TranslationString.RealisticTravelDetected)
+                                    Message = session.Translations.GetTranslation(TranslationString.RealisticTravelDetected)
                                 });
                             }
                             else
                             {
                                 machine.Fire(new WarnEvent
                                 {
-                                    Message =ctx.Translations.GetTranslation(TranslationString.NotRealisticTravel, kmph)
+                                    Message =session.Translations.GetTranslation(TranslationString.NotRealisticTravel, kmph)
                                 });
                             }
                         }
@@ -56,14 +56,14 @@ namespace PoGo.NecroBot.Logic.State
             machine.Fire(new WarnEvent
             {
                 Message =
-                    ctx.Translations.GetTranslation(TranslationString.WelcomeWarning, ctx.Client.CurrentLatitude,
-                        ctx.Client.CurrentLongitude)
+                    session.Translations.GetTranslation(TranslationString.WelcomeWarning, session.Client.CurrentLatitude,
+                        session.Client.CurrentLongitude)
             });
 
             return new InfoState();
         }
 
-        private static Tuple<double, double> LoadPositionFromDisk(StateMachine machine, Session ctx)
+        private static Tuple<double, double> LoadPositionFromDisk(StateMachine machine, Session session)
         {
             if (
                 File.Exists(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
@@ -88,7 +88,7 @@ namespace PoGo.NecroBot.Logic.State
                         }
                         machine.Fire(new WarnEvent
                         {
-                            Message = ctx.Translations.GetTranslation(TranslationString.CoordinatesAreInvalid)
+                            Message = session.Translations.GetTranslation(TranslationString.CoordinatesAreInvalid)
                         });
                         return null;
                     }
@@ -96,7 +96,7 @@ namespace PoGo.NecroBot.Logic.State
                     {
                         machine.Fire(new WarnEvent
                         {
-                            Message = ctx.Translations.GetTranslation(TranslationString.CoordinatesAreInvalid)
+                            Message = session.Translations.GetTranslation(TranslationString.CoordinatesAreInvalid)
                         });
                         return null;
                     }

@@ -36,9 +36,9 @@ namespace PoGo.NecroBot.Logic.Utils
         public string UrlName = "";
         public List<Wpt> WayPoints = new List<Wpt>();
 
-        public GpxReader(string xml, Session ctx)
+        public GpxReader(string xml, Session session)
         {
-            _ctx = ctx;
+            _ctx = session;
             if (xml.Equals("")) return;
             _gpx.LoadXml(xml);
             if (_gpx.DocumentElement == null || !_gpx.DocumentElement.Name.Equals("gpx")) return;
@@ -109,7 +109,7 @@ namespace PoGo.NecroBot.Logic.Utils
                     case "topografix:map":
                         break;
                     default:
-                        Logger.Write(ctx.Translations.GetTranslation(TranslationString.UnhandledGpxData), LogLevel.Info);
+                        Logger.Write(session.Translations.GetTranslation(TranslationString.UnhandledGpxData), LogLevel.Info);
                         break;
                 }
             }

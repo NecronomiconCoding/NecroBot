@@ -132,9 +132,9 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        public void SetContext(Session ctx)
+        public void SetContext(Session session)
         {
-            _ctx = ctx;
+            _ctx = session;
         }
     }
 }

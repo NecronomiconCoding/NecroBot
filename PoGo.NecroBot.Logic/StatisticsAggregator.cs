@@ -18,86 +18,86 @@ namespace PoGo.NecroBot.Logic
             _stats = stats;
         }
 
-        public void HandleEvent(ProfileEvent evt, Session ctx)
+        public void HandleEvent(ProfileEvent evt, Session session)
         {
             _stats.SetUsername(evt.Profile);
-            _stats.Dirty(ctx.Inventory);
+            _stats.Dirty(session.Inventory);
         }
 
-        public void HandleEvent(ErrorEvent evt, Session ctx)
+        public void HandleEvent(ErrorEvent evt, Session session)
         {
         }
 
-        public void HandleEvent(NoticeEvent evt, Session ctx)
+        public void HandleEvent(NoticeEvent evt, Session session)
         {
         }
 
-        public void HandleEvent(WarnEvent evt, Session ctx)
+        public void HandleEvent(WarnEvent evt, Session session)
         {
         }
 
-        public void HandleEvent(UseLuckyEggEvent evt, Session ctx)
+        public void HandleEvent(UseLuckyEggEvent evt, Session session)
         {
         }
 
-        public void HandleEvent(PokemonEvolveEvent evt, Session ctx)
+        public void HandleEvent(PokemonEvolveEvent evt, Session session)
         {
             _stats.TotalExperience += evt.Exp;
-            _stats.Dirty(ctx.Inventory);
+            _stats.Dirty(session.Inventory);
         }
 
-        public void HandleEvent(TransferPokemonEvent evt, Session ctx)
+        public void HandleEvent(TransferPokemonEvent evt, Session session)
         {
             _stats.TotalPokemonsTransfered++;
-            _stats.Dirty(ctx.Inventory);
+            _stats.Dirty(session.Inventory);
         }
 
-        public void HandleEvent(ItemRecycledEvent evt, Session ctx)
+        public void HandleEvent(ItemRecycledEvent evt, Session session)
         {
             _stats.TotalItemsRemoved++;
-            _stats.Dirty(ctx.Inventory);
+            _stats.Dirty(session.Inventory);
         }
 
-        public void HandleEvent(FortUsedEvent evt, Session ctx)
+        public void HandleEvent(FortUsedEvent evt, Session session)
         {
             _stats.TotalExperience += evt.Exp;
-            _stats.Dirty(ctx.Inventory);
+            _stats.Dirty(session.Inventory);
         }
 
-        public void HandleEvent(FortTargetEvent evt, Session ctx)
+        public void HandleEvent(FortTargetEvent evt, Session session)
         {
         }
 
-        public void HandleEvent(PokemonCaptureEvent evt, Session ctx)
+        public void HandleEvent(PokemonCaptureEvent evt, Session session)
         {
             if (evt.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
             {
                 _stats.TotalExperience += evt.Exp;
                 _stats.TotalPokemons++;
                 _stats.TotalStardust = evt.Stardust;
-                _stats.Dirty(ctx.Inventory);
+                _stats.Dirty(session.Inventory);
             }
         }
 
-        public void HandleEvent(NoPokeballEvent evt, Session ctx)
+        public void HandleEvent(NoPokeballEvent evt, Session session)
         {
         }
 
-        public void HandleEvent(UseBerryEvent evt, Session ctx)
+        public void HandleEvent(UseBerryEvent evt, Session session)
         {
         }
 
-        public void HandleEvent(DisplayHighestsPokemonEvent evt, Session ctx)
+        public void HandleEvent(DisplayHighestsPokemonEvent evt, Session session)
         {
         }
 
-        public void Listen(IEvent evt, Session ctx)
+        public void Listen(IEvent evt, Session session)
         {
             dynamic eve = evt;
 
             try
             {
-                HandleEvent(eve, ctx);
+                HandleEvent(eve, session);
             }
             catch
             {

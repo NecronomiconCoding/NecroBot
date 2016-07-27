@@ -13,45 +13,45 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchLurePokemonsTask
     {
-        public static async Task Execute(Session ctx, StateMachine machine, FortData currentFortData)
+        public static async Task Execute(Session session, StateMachine machine, FortData currentFortData)
         {
-            Logger.Write(ctx.Translations.GetTranslation(Common.TranslationString.LookingForLurePokemon), LogLevel.Debug);
+            Logger.Write(session.Translations.GetTranslation(Common.TranslationString.LookingForLurePokemon), LogLevel.Debug);
 
             var fortId = currentFortData.Id;
 
             var pokemonId = currentFortData.LureInfo.ActivePokemonId;
 
-            if (ctx.LogicSettings.UsePokemonToNotCatchFilter &&
-                ctx.LogicSettings.PokemonsNotToCatch.Contains(pokemonId))
+            if (session.LogicSettings.UsePokemonToNotCatchFilter &&
+                session.LogicSettings.PokemonsNotToCatch.Contains(pokemonId))
             {
-                machine.Fire(new NoticeEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.PokemonSkipped, pokemonId)});
+                machine.Fire(new NoticeEvent {Message = session.Translations.GetTranslation(Common.TranslationString.PokemonSkipped, pokemonId)});
             }
             else
             {
                 var encounterId = currentFortData.LureInfo.EncounterId;
-                var encounter = await ctx.Client.Encounter.EncounterLurePokemon(encounterId, fortId);
+                var encounter = await session.Client.Encounter.EncounterLurePokemon(encounterId, fortId);
 
                 if (encounter.Result == DiskEncounterResponse.Types.Result.Success)
                 {
-                    await CatchPokemonTask.Execute(ctx, machine, encounter, null, currentFortData, encounterId);
+                    await CatchPokemonTask.Execute(session, machine, encounter, null, currentFortData, encounterId);
                 }
                 else if (encounter.Result == DiskEncounterResponse.Types.Result.PokemonInventoryFull)
                 {
-                    if (ctx.LogicSettings.TransferDuplicatePokemon)
+                    if (session.LogicSettings.TransferDuplicatePokemon)
                     {
-                        machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.InvFullTransferring) });
-                        await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                        machine.Fire(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferring) });
+                        await TransferDuplicatePokemonTask.Execute(session, machine);
                     }
                     else
                         machine.Fire(new WarnEvent
                         {
-                            Message = ctx.Translations.GetTranslation(Common.TranslationString.InvFullTransferManually)
+                            Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferManually)
                         });
                 }
                 else
                 {
                     if (encounter.Result.ToString().Contains("NotAvailable")) return;
-                    machine.Fire(new WarnEvent {Message = ctx.Translations.GetTranslation(Common.TranslationString.EncounterProblemLurePokemon, encounter.Result)});
+                    machine.Fire(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.EncounterProblemLurePokemon, encounter.Result)});
                 }
             }
         }

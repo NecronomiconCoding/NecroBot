@@ -20,24 +20,24 @@ namespace PoGo.NecroBot.Logic.Tasks
         //to only find stops within 40 meters
         //this is for gpx pathing, we are not going to the pokestops,
         //so do not make it more than 40 because it will never get close to those stops.
-        public static async Task Execute(Session ctx, StateMachine machine)
+        public static async Task Execute(Session session, StateMachine machine)
         {
-            var pokestopList = await GetPokeStops(ctx);
+            var pokestopList = await GetPokeStops(session);
 
             while (pokestopList.Any())
             {
                 pokestopList =
                     pokestopList.OrderBy(
                         i =>
-                            LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
-                                ctx.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
+                            LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                                session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
                 var pokeStop = pokestopList[0];
                 pokestopList.RemoveAt(0);
 
-                await ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                 var fortSearch =
-                    await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    await session.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                 if (fortSearch.ExperienceAwarded > 0)
                 {
@@ -51,19 +51,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
-                await RecycleItemsTask.Execute(ctx, machine);
+                await RecycleItemsTask.Execute(session, machine);
 
-                if (ctx.LogicSettings.TransferDuplicatePokemon)
+                if (session.LogicSettings.TransferDuplicatePokemon)
                 {
-                    await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                    await TransferDuplicatePokemonTask.Execute(session, machine);
                 }
             }
         }
 
 
-        private static async Task<List<FortData>> GetPokeStops(Session ctx)
+        private static async Task<List<FortData>> GetPokeStops(Session session)
         {
-            var mapObjects = await ctx.Client.Map.GetMapObjects();
+            var mapObjects = await session.Client.Map.GetMapObjects();
 
             // Wasn't sure how to make this pretty. Edit as needed.
             var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
@@ -73,9 +73,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
                         ( // Make sure PokeStop is within 40 meters or else it is pointless to hit it
                             LocationUtils.CalculateDistanceInMeters(
-                                ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude,
+                                session.Client.CurrentLatitude, session.Client.CurrentLongitude,
                                 i.Latitude, i.Longitude) < 40) ||
-                        ctx.LogicSettings.MaxTravelDistanceInMeters == 0
+                        session.LogicSettings.MaxTravelDistanceInMeters == 0
                 );
 
             return pokeStops.ToList();

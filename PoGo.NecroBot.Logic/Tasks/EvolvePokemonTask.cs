@@ -16,18 +16,18 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         private static DateTime _lastLuckyEggTime;
 
-        public static async Task Execute(Session ctx, StateMachine machine)
+        public static async Task Execute(Session session, StateMachine machine)
         {
-            var pokemonToEvolveTask = await ctx.Inventory.GetPokemonToEvolve(ctx.LogicSettings.PokemonsToEvolve);
+            var pokemonToEvolveTask = await session.Inventory.GetPokemonToEvolve(session.LogicSettings.PokemonsToEvolve);
             var pokemonToEvolve = pokemonToEvolveTask.ToList();
 
             if (pokemonToEvolve.Any())
             {
-                if (ctx.LogicSettings.UseLuckyEggsWhileEvolving)
+                if (session.LogicSettings.UseLuckyEggsWhileEvolving)
                 {
-                    if (pokemonToEvolve.Count >= ctx.LogicSettings.UseLuckyEggsMinPokemonAmount)
+                    if (pokemonToEvolve.Count >= session.LogicSettings.UseLuckyEggsMinPokemonAmount)
                     {
-                        await UseLuckyEgg(ctx.Client, ctx.Inventory, machine);
+                        await UseLuckyEgg(session.Client, session.Inventory, machine);
                     }
                     else
                     {
@@ -38,7 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 foreach (var pokemon in pokemonToEvolve)
                 {
-                    var evolveResponse = await ctx.Client.Inventory.EvolvePokemon(pokemon.Id);
+                    var evolveResponse = await session.Client.Inventory.EvolvePokemon(pokemon.Id);
 
                     machine.Fire(new PokemonEvolveEvent
                     {
