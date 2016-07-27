@@ -1,9 +1,9 @@
-﻿using PoGo.NecroBot.Logic.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region using directives
+
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Tasks;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.State
 {
@@ -11,10 +11,10 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
-            if(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart > 0)
-                await LogBestPokemonTask.Execute(ctx,machine);
+            if (ctx.LogicSettings.AmountOfPokemonToDisplayOnStart > 0)
+                await DisplayPokemonStatsTask.Execute(ctx, machine);
 
-            return new PositionCheckState();
+            return new FarmState();
         }
     }
 }

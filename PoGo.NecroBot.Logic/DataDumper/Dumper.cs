@@ -20,10 +20,7 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <param name="filename">Filename to be used for naming the file.</param>
         private static void DumpToFile(Context ctx, string data, string filename)
         {
-            // ctx is passed in for future use of ProfilePath when it is unlocked from ferox's api
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + $"{Path.DirectorySeparatorChar}Dumps");
-
-            string path = Directory.GetCurrentDirectory() + _subPath + $"{Path.DirectorySeparatorChar}Dumps{Path.DirectorySeparatorChar}NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt";
+            string path = Path.Combine(ctx.Settings.ProfilePath,"Dumps",$"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
 
             using (
                 var dumpFile =
@@ -51,11 +48,7 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <param name="filename">File to clear/param>
         public static void ClearDumpFile(Context ctx, string filename)
         {
-            // ctx is passed in for future use of ProfilePath when it is unlocked from ferox's api
-            Directory.CreateDirectory(Directory.GetCurrentDirectory() + _subPath + $"{Path.DirectorySeparatorChar}Dumps");
-
-            string path = Directory.GetCurrentDirectory() + _subPath + $"{Path.DirectorySeparatorChar}Dumps{Path.DirectorySeparatorChar}NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt";
-
+            string path = Path.Combine(ctx.Settings.ProfilePath,"Dumps",$"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
             // Clears all contents of a file first if overwrite is true
             File.WriteAllText(path, string.Empty);
         }

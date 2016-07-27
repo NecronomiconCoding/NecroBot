@@ -11,10 +11,6 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
-            await RenamePokemonTask.Execute(ctx, machine);
-
-            await DisplayPokemonStatsTask.Execute(ctx, machine);
-
             if (ctx.LogicSettings.EvolveAllPokemonAboveIv || ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
                 await EvolvePokemonTask.Execute(ctx, machine);
@@ -23,6 +19,11 @@ namespace PoGo.NecroBot.Logic.State
             if (ctx.LogicSettings.TransferDuplicatePokemon)
             {
                 await TransferDuplicatePokemonTask.Execute(ctx, machine);
+            }
+
+            if (ctx.LogicSettings.RenameAboveIv)
+            {
+                await RenamePokemonTask.Execute(ctx, machine);
             }
 
             await RecycleItemsTask.Execute(ctx, machine);

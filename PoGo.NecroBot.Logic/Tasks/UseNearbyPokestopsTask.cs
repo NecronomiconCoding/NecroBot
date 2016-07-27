@@ -1,17 +1,20 @@
-﻿using System;
+﻿#region using directives
+
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
+
+#endregion
+
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    class UseNearbyPokestopsTask
+    internal class UseNearbyPokestopsTask
     {
         //Please do not change GetPokeStops() in this file, it's specifically set
         //to only find stops within 40 meters
@@ -70,7 +73,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
                         ( // Make sure PokeStop is within 40 meters or else it is pointless to hit it
                             LocationUtils.CalculateDistanceInMeters(
-                                ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude,
+                                ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude,
                                 i.Latitude, i.Longitude) < 40) ||
                         ctx.LogicSettings.MaxTravelDistanceInMeters == 0
                 );
@@ -78,6 +81,4 @@ namespace PoGo.NecroBot.Logic.Tasks
             return pokeStops.ToList();
         }
     }
-
-
 }
