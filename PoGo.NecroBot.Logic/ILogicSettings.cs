@@ -46,6 +46,8 @@ namespace PoGo.NecroBot.Logic
         bool RenameAboveIv { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }
+        string ProfilePath { get; }
+        string ConfigPath { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
