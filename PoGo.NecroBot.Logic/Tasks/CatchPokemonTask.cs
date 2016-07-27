@@ -132,8 +132,42 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 machine.Fire(evt);
 
+                if ((caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess) &&
+                    (ctx.LogicSettings.PokemonsToImmediatelyTransfer.Contains(pokemon.PokemonId)))
+                {
+                    if ((encounter.WildPokemon != null) &&
+                        (encounter.WildPokemon.PokemonData != null))
+                    {
+                        await Task.Delay(2000);
+
+                        await ctx.Client.Inventory.TransferPokemon(encounter.WildPokemon.PokemonData.Id);
+                        ctx.Inventory.DeletePokemonFromInvById(encounter.WildPokemon.PokemonData.Id);
+
+                        var bestPokemonOfType = ctx.LogicSettings.PrioritizeIvOverCp
+                            ? await ctx.Inventory.GetHighestPokemonOfTypeByIv(encounter.WildPokemon.PokemonData)
+                            : await ctx.Inventory.GetHighestPokemonOfTypeByCp(encounter.WildPokemon.PokemonData);
+
+                        var pokemonSettings = await ctx.Inventory.GetPokemonSettings();
+                        var pokemonFamilies = await ctx.Inventory.GetPokemonFamilies();
+
+                        var setting = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
+                        var family = pokemonFamilies.Single(x => x.FamilyId == setting.FamilyId);
+
+                        machine.Fire(new TransferPokemonEvent
+                        {
+                            Id = pokemon.PokemonId,
+                            Perfection = PokemonInfo.CalculatePokemonPerfection(encounter.WildPokemon.PokemonData),
+                            Cp = encounter.WildPokemon.PokemonData.Cp,
+                            BestCp = bestPokemonOfType.Cp,
+                            BestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType),
+                            FamilyCandies = family.Candy
+                        });
+                    }
+                }
+
                 attemptCounter++;
                 await Task.Delay(2000);
+
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
