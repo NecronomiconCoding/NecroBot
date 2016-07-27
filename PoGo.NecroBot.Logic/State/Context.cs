@@ -1,5 +1,6 @@
 #region using directives
 
+using PoGo.NecroBot.Logic.Common;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
 
@@ -13,7 +14,7 @@ namespace PoGo.NecroBot.Logic.State
         {
             Settings = settings;
             LogicSettings = logicSettings;
-
+            Translations = Translations.Load(logicSettings.TranslationLanguageCode);
             Reset(settings, LogicSettings);
         }
 
@@ -29,6 +30,8 @@ namespace PoGo.NecroBot.Logic.State
         public ILogicSettings LogicSettings { get; }
 
         public LogicClient LogicClient { get; private set; }
+
+        public Translations Translations { get; private set; }
 
         public void Reset(ISettings settings, ILogicSettings logicSettings)
         {

@@ -3,6 +3,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Utils;
 
@@ -14,7 +15,8 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(Context ctx, StateMachine machine)
         {
-            var coordsPath = Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini";
+            var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
+                             Path.DirectorySeparatorChar + "Coords.ini";
             if (File.Exists(coordsPath))
             {
                 var latLngFromFile = LoadPositionFromDisk(machine);
@@ -54,20 +56,26 @@ namespace PoGo.NecroBot.Logic.State
             machine.Fire(new WarnEvent
             {
                 Message =
-                    $"Make sure Lat & Lng are right. Exit Program if not! Lat: {ctx.Client.CurrentLatitude} Lng: {ctx.Client.CurrentLongitude}"
+                    ctx.Translations.GetTranslation(TranslationString.WelcomeWarning, ctx.Client.CurrentLatitude,
+                        ctx.Client.CurrentLongitude)
             });
 
             await Task.Delay(3000);
 
-            return new FarmState();
+            return new InfoState();
         }
 
         private static Tuple<double, double> LoadPositionFromDisk(StateMachine machine)
         {
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini") &&
-                File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini").Contains(":"))
+            if (
+                File.Exists(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
+                            Path.DirectorySeparatorChar + "Coords.ini") &&
+                File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
+                                 Path.DirectorySeparatorChar + "Coords.ini").Contains(":"))
             {
-                var latlngFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini");
+                var latlngFromFile =
+                    File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
+                                     Path.DirectorySeparatorChar + "Coords.ini");
                 var latlng = latlngFromFile.Split(':');
                 if (latlng[0].Length != 0 && latlng[1].Length != 0)
                 {

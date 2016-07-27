@@ -1,0 +1,86 @@
+﻿{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "GreatBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "UltraBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "ชนิดการยืนยัน (AuthType) ใน config.json ไม่ถูกต้อง"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value":
+        "คุณอยู่นอกเหนือระยะทำการ กำลังเดินกลับจุดเริ่มต้น ({0} เมตร) ใน 5 วินาที จุดพิกัดใน Coords.ini ถูกต้องหรือเปล่า?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "ไม่พบ Pokestop ที่สามารถใช้งานได้ในพื้นที่ ระยะทางสูงสุดที่ตั้งไว้น้อยไปหรือเปล่า?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "ค่าประสบการณ์: {0}, อัญมณี: {1}, ไอเทม: {2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} ใน ({1}เมตร)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "กำลังเล่นโดย {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "ใช้งาน Lucky Egg, จำนวนคงเหลือ: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} สำเร็จ ได้รับค่าประสปการณ์ {1}หน่วย"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "ล้มเหลว {0} ผลลัพธ์ {1}  หยุดการอีโว {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [CP ที่ดีที่สุด: {3}  IV: {4}%] (ลูกอม: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value":
+        "({0}) | ({1}) {2} เลเวล: {3} CP: ({4}/{5}) IV: {6}% | โอกาส: {7}% |  ระยะทาง {8} เมตร | โดยมี {9} (คงเหลืออยู่ {10}). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "ไม่มี Pokeballs - เราพลาดที่จะจับ {0} ซึ่งมี CP {1}"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} พยายามครั้งที่ #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "ลูกอม: {0}"
+    }
+  ]
+}

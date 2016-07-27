@@ -1,7 +1,6 @@
 ﻿#region using directives
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 

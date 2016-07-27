@@ -2,9 +2,11 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using PoGo.NecroBot.Logic;
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
@@ -19,8 +21,8 @@ namespace PoGo.NecroBot.CLI
         {
             try
             {
-                Logger.Write("Google Device Code copied to clipboard");
-                Thread.Sleep(2000);
+                Logger.Write("Opening Google Device page. Please paste the code using CTRL+V", LogLevel.Warning);
+                Thread.Sleep(5000);
                 Process.Start(uri);
                 var thread = new Thread(() => Clipboard.SetText(usercode)); //Copy device code
                 thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
@@ -36,13 +38,13 @@ namespace PoGo.NecroBot.CLI
 
         private static void Main(string[] args)
         {
-            string subPath = "";
+            var subPath = "";
             if (args.Length > 0)
-                subPath = "\\" + args[0];
+                subPath = Path.DirectorySeparatorChar + args[0];
 
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
-            GlobalSettings settings = GlobalSettings.Load(subPath);
+            var settings = GlobalSettings.Load(subPath);
 
             var machine = new StateMachine();
             var stats = new Statistics();
@@ -50,20 +52,19 @@ namespace PoGo.NecroBot.CLI
 
             var aggregator = new StatisticsAggregator(stats);
             var listener = new ConsoleEventListener();
+            var websocket = new WebSocketInterface(settings.WebSocketPort);
 
             machine.EventListener += listener.Listen;
             machine.EventListener += aggregator.Listen;
-
-            if (settings.EnableWebSocket)
-            {
-                var websocket = new WebSocketInterface(settings.WebSocketPort);
-                machine.EventListener += websocket.Listen;
-            }
+            machine.EventListener += websocket.Listen;
 
             machine.SetFailureState(new LoginState());
 
-
             var context = new Context(new ClientSettings(settings), new LogicSettings(settings));
+
+            context.Navigation.UpdatePositionEvent +=
+                (lat, lng) => machine.Fire(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
+
             context.Client.Login.GoogleDeviceCodeEvent += LoginWithGoogle;
 
             machine.AsyncStart(new VersionCheckState(), context);

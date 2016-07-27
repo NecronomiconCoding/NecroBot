@@ -1,0 +1,126 @@
+﻿{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "Pokéball"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "Superball"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "Hyperball"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "Meisterball"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "Unbekannte Authentifizierungsart in der config.json festgelegt"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value":
+        "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Keine nutzbaren Pokestops in deiner Gegend gefunden. Ist die maximale Distanz zu klein?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "EP: {0}, Gems: {1}, Items: {2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} in ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Spiele als {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Glücks-Ei benutzt, verbleibend: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} wurde für {1}EP entwickelt!"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Fehlgeschlagen {0}. Resultat: {1}, stoppe die Entwicklung {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- WP: {1}  IV: {2}%   [Beste WP: {3}  IV: {4}%] (Bonbons: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernung | mit einem {9} ({10} verbleibend). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Keine Pokébälle mehr! - Wir haben ein {0} mit WP {1} verpasst!"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Versuch #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Bonbons: {0}"
+    },
+    {
+      "Key": "unhandledGPXData",
+      "Value": "Unerwartete Daten in GPX Datei, versuche zu überspringen."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokémons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfekt"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "Name"
+    },
+    {
+      "Key": "displayHighestsCPHeader",
+      "Value": "ZeigeHöchsteWP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "ZeigeHöchstesPerfektes"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "ZeigeHöchstesLevel"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Gehe sicher, dass Lat & Lng richtig sind. Schließe das Programm falls nicht! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Lege Ei in die Ei-Brutmaschine: {0:0.00}km verbleibend"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Ei-Brutmaschine Status Update: {0:0.00}km verbleibend"
+    }
+  ]
+}

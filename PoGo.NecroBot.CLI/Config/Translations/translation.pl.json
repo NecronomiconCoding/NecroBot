@@ -1,0 +1,86 @@
+﻿{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "GreatBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "UltraBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "Nieznany tryb logowania w config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value":
+        "Znajdujesz się poza zdefiniowanym rejonem! Wracam się na początek ({0}m away) za 5 sekund. Czy twój plik Coords.ini się zgadza?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Brak PokeStopów w twoim rejonie. Czyżby twój zasięg był za mały?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "XP: {0}, Kryształy: {1}, Przedmioty: {2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} w odległości ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Gramy jako {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Użyto Jajka Szczęścia, pozostało: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} z powodzeniem za {1}xp"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Porażka {0}. Rezultatem był {1}, koniec ewolucji {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepszy poziom CP: {3}  IV: {4}%] (Cukierki: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value":
+        "({0}) | ({1}) {2} Poziom: {3} CP: ({4}/{5}) IV: {6}% | Szansa: {7}% | {8}m odległość | przy użyciu {9} ({10} zostało). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Brak Pokeballs - Uciekł nam {0} na poziomie CP {1}"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Próba #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Cukierki: {0}"
+    }
+  ]
+}
