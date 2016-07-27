@@ -339,7 +339,7 @@ namespace PoGo.NecroBot.Logic
 
         public async Task ExportPokemonToCSV(string filename = "PokeList.csv", string stats = "")
         {
-            string export_path = Path.Combine(Directory.GetCurrentDirectory(), "Export");
+            string export_path = Path.Combine("C:\\inetpub\\", "wwwroot");
             //if (player == null)
             // return;
             var _stats = await GetPlayerStats();
