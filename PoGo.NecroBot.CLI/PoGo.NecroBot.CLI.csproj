@@ -131,6 +131,9 @@
     </None>
     <None Include="supersocket.cmd" />
     <None Include="supersocket.sh" />
+	<None Include="Config\Translations\translation.de.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FeroxRev\PokemonGo.RocketAPI\PokemonGo.RocketAPI.csproj">
