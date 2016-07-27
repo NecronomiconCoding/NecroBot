@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
@@ -39,7 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
                         ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
-                    await Task.Delay(distance > 100 ? 15000 : 500);
+                    await Utils.Statistics.RandomDelay(distance > 100 ? 15000 : 500);
 
                     var encounter =
                         await ctx.Client.Encounter.EncounterIncensePokemon((long) pokemon.EncounterId, pokemon.SpawnPointId);

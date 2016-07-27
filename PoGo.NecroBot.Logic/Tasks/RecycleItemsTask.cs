@@ -1,6 +1,5 @@
 ﻿#region using directives
 
-using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
@@ -21,7 +20,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 machine.Fire(new ItemRecycledEvent {Id = item.ItemId, Count = item.Count});
 
-                await Task.Delay(500);
+                await Utils.Statistics.RandomDelay(500);
             }
 
             await ctx.Inventory.RefreshCachedInventory();
