@@ -22,7 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "VOus êtes en dehors de votre radius défini! Début de la marche ({0}m de distance) dans 5 secondes. Est-ce que le fichier Coords.ini est correct?"
+      "Value": "Vous êtes en dehors de votre rayon défini! Début de la marche ({0}m de distance) dans 5 secondes. Est-ce que le fichier Coords.ini est correct?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
