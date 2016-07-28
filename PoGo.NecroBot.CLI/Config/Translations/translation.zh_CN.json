@@ -150,11 +150,11 @@
     },
     {
       "Key": "logEntryFarming",
-      "Value": "农场"
+      "Value": "开刷"
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "回收"
+      "Value": "删除"
     },
     {
       "Key": "logEntryPKMN",
