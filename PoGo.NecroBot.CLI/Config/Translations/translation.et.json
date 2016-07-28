@@ -40,7 +40,7 @@
         "Value": "Vale AuthType auth.json failis."
     }, {
         "Key": "farmPokestopsOutsideRadius",
-        "Value": "Oled seadistatud raadiusest väljas! Liigun alguspunkti ({0}m kaugusel) tagasi 5 sekundi pärast. Kas koordinaadid config.json'is on õiged?"
+        "Value": "Oled seadistatud raadiusest väljas! Liigun alguspunkti ({0} m kaugusel) tagasi 5 sekundi pärast. Kas koordinaadid config.json'is on õiged?"
     }, {
         "Key": "farmPokestopsNoUsableFound",
         "Value": "Sinu piirkonnas ei leidu PokeStop'e. Kas maksimaalne raadius on liiga väike?"
@@ -52,7 +52,7 @@
         "Value": "Name: {0} INFO: Esemete vastuvõtmine ebaõnnestus, võimalik softban. Katse: {1}/{2}"
     }, {
         "Key": "eventFortTargeted",
-        "Value": "{0} ({1}m pärast)"
+        "Value": "{0} ({1} m pärast)"
     }, {
         "Key": "eventProfileLogin",
         "Value": "Mängin {0}'na"
@@ -61,19 +61,19 @@
         "Value": "Kasutasin Lucky Egg'i, veel alles: {0}"
     }, {
         "Key": "eventPokemonEvolvedSuccess",
-        "Value": "{0} arendati {1}XP eest!"
+        "Value": "{0} evolve'iti {1} XP eest!"
     }, {
         "Key": "eventPokemonEvolvedFailed",
-        "Value": "Viga {0}'ga. Tulemus: {1}, lõpetan arendamise: {2}"
+        "Value": "Viga {0}'ga. Tulemus: {1}, lõpetan evolve'imise: {2}"
     }, {
         "Key": "eventPokemonTransferred",
-        "Value": "{0}\t- CP: {1}  IV: {2}%   [Parim CP: {3}  IV: {4}%] (Candy't: {5})"
+        "Value": "{0}\t- CP: {1}  IV: {2}% [Parim CP: {3}  IV: {4}%] (Candy't: {5})"
     }, {
         "Key": "eventItemRecycled",
         "Value": "{0}x {1}"
     }, {
         "Key": "eventPokemonCapture",
-        "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | võimalus: {7}% | {8}m kaugusel | {9}'ga ({10} veel alles). | {11}"
+        "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | võimalus: {7}% | {8} m kaugusel | {9}'iga ({10} veel alles). | {11}"
     }, {
         "Key": "eventNoPokeballs",
         "Value": "Pokéball'id otsas! - Jäin ilma {0}'st {1} CP'ga!"
@@ -148,7 +148,7 @@
         "Value": "TRANSFER"
     }, {
         "Key": "logEntryEvolved",
-        "Value": "ARENDATUD"
+        "Value": "EVOLVE"
     }, {
         "Key": "logEntryBerry",
         "Value": "BERRY"
