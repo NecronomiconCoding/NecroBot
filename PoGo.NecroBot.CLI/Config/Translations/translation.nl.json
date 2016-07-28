@@ -70,7 +70,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Geen Pokeballs resterend - Een {0} met CP: {1} misgelopen "
+      "Value": "Geen Pokeballs resterend - Een {0} met CP {1} misgelopen "
     },
     {
       "Key": "catchStatusAttempt",
@@ -114,15 +114,15 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Controleer dat Lat & Lng kloppen. Sluit programma als dat niet zo is! Lat: {0} Lng: {1}"
+      "Value": "Controleer of Lat & Lng kloppen. Sluit programma als dat niet zo is! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Ei in broedmachine stoppen: {0:0.00}km over"
+      "Value": "Ei in broedmachine stoppen: {0:0.00}km resterend"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Broedmachine status update: {0:0.00}km over"
+      "Value": "Broedmachine status update: {0:0.00}km resterend"
     }
   ]
 }
