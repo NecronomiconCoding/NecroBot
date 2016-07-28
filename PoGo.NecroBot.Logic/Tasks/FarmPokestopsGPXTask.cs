@@ -74,6 +74,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                             var fortSearch =
                                 await session.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
+                            var TimesZeroXPawarded = 0;
+                            var fortTry = 0;      //Current check
+                            const int retryNumber = 50; //How many times it needs to check to clear softban
+                            const int zeroCheck = 5; //How many times it checks fort before it thinks it's softban
+
                             if (fortSearch.ExperienceAwarded > 0)
                             {
                                 session.EventDispatcher.Send(new FortUsedEvent
@@ -87,6 +92,40 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     Longitude = pokeStop.Longitude
                                 });
                             }
+                            if (fortSearch.ExperienceAwarded == 0)
+                            {
+                                do
+                                {
+                                    fortSearch = await session.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude); // because its hard to find pokestop while using GPX, when we meet one try to spin until get unbanned
+
+                                    if (fortSearch.ExperienceAwarded > 0)
+                                    {
+                                        break; // Check if successfully looted, if so program can continue as this was "false alarm".
+                                    }
+                                    TimesZeroXPawarded++;
+
+                                    if (TimesZeroXPawarded > zeroCheck)
+                                    {
+
+                                        if ((int)fortSearch.CooldownCompleteTimestampMs != 0)
+                                        {
+                                            break; // Check if successfully looted, if so program can continue as this was "false alarm".
+                                        }
+
+                                        fortTry += 1;
+
+                                        session.EventDispatcher.Send(new FortFailedEvent
+                                        {
+                                            Name = fortInfo.Name,
+                                            Try = fortTry,
+                                            Max = retryNumber - zeroCheck
+                                        });
+
+                                        DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 400);
+                                    }
+                                } while (fortTry < retryNumber - zeroCheck);
+                            }
+
                             if (fortSearch.ItemsAwarded.Count > 0)
                             {
                                 await session.Inventory.RefreshCachedInventory();
