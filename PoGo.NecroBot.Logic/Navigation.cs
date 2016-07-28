@@ -25,49 +25,63 @@ namespace PoGo.NecroBot.Logic
         private const double SpeedDownTo = 10/3.6;
         private readonly Client _client;
         private DateTime _lastRest = DateTime.Now; 
-        private DateTime _lastShortStop = DateTime.Now; 
+        private DateTime _lastShortStop = DateTime.Now;
+        private ILogicSettings _logicSettings; 
 
-        public Navigation(Client client)
+        public Navigation(Client client, ILogicSettings logicSettings)
         {
             _client = client;
+            _logicSettings = logicSettings;
         }
 
         private double GetSpeed(double walkingSpeedInKilometersPerHour)
         {
-            var speed = walkingSpeedInKilometersPerHour / 3.6d * 100.0d / Randomizer.GetNext(95, 105);
-            if (_lastRest.AddMinutes(15) < DateTime.Now) speed = speed * 0.95;
-            if (_lastRest.AddMinutes(30) < DateTime.Now) speed = speed * 0.90;
-            if (_lastRest.AddMinutes(45) < DateTime.Now) speed = speed * 0.85;
-            if (Randomizer.GetNext(1, 100) < 5) speed = speed * 0.1;
+            var speed = walkingSpeedInKilometersPerHour / 3.6d;
+            if (_logicSettings.RandomizeSpeedPercentage > 0)
+            {
+                speed = speed * 100.0d / Randomizer.GetNext(100 - _logicSettings.RandomizeSpeedPercentage, 100 + _logicSettings.RandomizeSpeedPercentage);
+                if (_lastRest.AddMinutes(15) < DateTime.Now) speed = speed * 0.95;
+                if (_lastRest.AddMinutes(30) < DateTime.Now) speed = speed * 0.90;
+                if (_lastRest.AddMinutes(45) < DateTime.Now) speed = speed * 0.85;
+            }
+            if (_logicSettings.ArtificialSlowDownPercentage > 0)
+            {
+                if (Randomizer.GetNext(1, 100) < _logicSettings.ArtificialSlowDownPercentage) speed = speed * 0.1;
+            }
             return speed;
         }
 
         private async Task RestIfNecessary()
         {
-            // rest in 15..45 minutes (reconsider this decision after 30 minutes)
-            var limit = Randomizer.GetNamed($"{nameof(RestIfNecessary)}", 15 * 60, 45 * 60, 30 * 60);
-            if (_lastRest.AddSeconds(limit) < DateTime.Now)
+            if (_logicSettings.RestAfterMinutesMinimum > 0 && _logicSettings.RestAfterMinutesMaximum >= _logicSettings.RestAfterMinutesMinimum)
             {
-                var amount = Randomizer.GetNext(60, 240);
-                // todo: add logging
-                // Console.WriteLine("resting " + amount + " seconds");
-                await Randomizer.Sleep(amount * 1000);
-                _lastRest = DateTime.Now;
-            } 
+                var limit = Randomizer.GetNamed($"{nameof(RestIfNecessary)}", _logicSettings.RestAfterMinutesMinimum * 60, _logicSettings.RestAfterMinutesMaximum * 60, (_logicSettings.RestAfterMinutesMaximum - 1) * 60);
+                if (_lastRest.AddSeconds(limit) < DateTime.Now)
+                {
+                    var amount = Randomizer.GetNext(_logicSettings.RestMinutesMinimum * 60, _logicSettings.RestMinuesMaximum * 60);
+                    // todo: add logging
+                    // Console.WriteLine("resting " + amount + " seconds");
+                    await Randomizer.Sleep(amount * 1000);
+                    _lastRest = DateTime.Now;
+                }
+            }
         }
 
         private async Task ShortStopIfNecessary()
         {
-            // take a short stop in 2..5 minutes (reconsider this decision after 3 minutes)
-            var limit = Randomizer.GetNamed($"{nameof(ShortStopIfNecessary)}", 2 * 60, 5 * 60, 3 * 60);
-            if (_lastShortStop.AddSeconds(limit) < DateTime.Now)
+            if (_logicSettings.StopAfterMinutesMinimum > 0 && _logicSettings.StopAfterMinutesMaximum >= _logicSettings.StopAfterMinutesMinimum)
             {
-                var amount = Randomizer.GetNext(5, 15);
-                // todo: add logging
-                // Console.WriteLine("short stop for " + amount + " seconds");
-                await Randomizer.Sleep(amount * 1000);
-                _lastShortStop = DateTime.Now;
-            } 
+                // take a short stop in 2..5 minutes (reconsider this decision after 3 minutes)
+                var limit = Randomizer.GetNamed($"{nameof(ShortStopIfNecessary)}", _logicSettings.StopAfterMinutesMinimum * 60, _logicSettings.StopAfterMinutesMaximum * 60, (_logicSettings.StopAfterMinutesMaximum - 1) * 60);
+                if (_lastShortStop.AddSeconds(limit) < DateTime.Now)
+                {
+                    var amount = Randomizer.GetNext(_logicSettings.StopSecondsMinimum, _logicSettings.StopSecondsMaximum);
+                    // todo: add logging
+                    // Console.WriteLine("short stop for " + amount + " seconds");
+                    await Randomizer.Sleep(amount * 1000);
+                    _lastShortStop = DateTime.Now;
+                }
+            }
         }
 
         public async Task<PlayerUpdateResponse> HumanLikeWalking(GeoCoordinate targetLocation,
@@ -119,15 +133,18 @@ namespace PoGo.NecroBot.Logic
                 nextWaypointDistance = Math.Min(currentDistanceToTarget,
                     millisecondsUntilGetUpdatePlayerLocationResponse/1000*speedInMetersPerSecond);
                 nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
-                waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
 
-                var randomBearing = 0.0d;
-                if (currentDistanceToTarget > 50)
+                if (_logicSettings.RandomizeBearing)
                 {
-                    var n = Convert.ToInt32(currentDistanceToTarget);
-                    randomBearing = (double)Randomizer.GetNext(-n, n) / 20.0d;
-                    nextWaypointBearing += randomBearing;
+                    if (currentDistanceToTarget > 50)
+                    {
+                        var n = Convert.ToInt32(currentDistanceToTarget);
+                        var randomBearing = (double)Randomizer.GetNext(-n, n) / 20.0d;
+                        nextWaypointBearing += randomBearing;
+                    }
                 }
+
+                waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
 
                 // todo: add logging
                 // Console.WriteLine("walking to target with speed: " + speedInMetersPerSecond.ToString("F2", CultureInfo.InvariantCulture) + "m/sec, distance: " + currentDistanceToTarget.ToString("F2", CultureInfo.InvariantCulture) + "m, bearing: " + nextWaypointBearing.ToString("F2", CultureInfo.InvariantCulture) + ", rndBearing: " + randomBearing.ToString("F2", CultureInfo.InvariantCulture));
@@ -204,7 +221,28 @@ namespace PoGo.NecroBot.Logic
                 nextWaypointDistance = Math.Min(currentDistanceToTarget,
                     millisecondsUntilGetUpdatePlayerLocationResponse/1000*speedInMetersPerSecond);
                 nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
+
+                if (_logicSettings.RandomizeBearing)
+                {
+                    if (currentDistanceToTarget > 50)
+                    {
+                        var n = Convert.ToInt32(currentDistanceToTarget);
+                        var randomBearing = (double)Randomizer.GetNext(-n, n) / 20.0d;
+                        nextWaypointBearing += randomBearing;
+                    }
+                }
+
                 waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
+
+                if (_logicSettings.RandomizeBearing)
+                {
+                    if (currentDistanceToTarget > 50)
+                    {
+                        var n = Convert.ToInt32(currentDistanceToTarget);
+                        var randomBearing = (double)Randomizer.GetNext(-n, n) / 20.0d;
+                        nextWaypointBearing += randomBearing;
+                    }
+                }
 
                 requestSendDateTime = DateTime.Now;
                 result =
