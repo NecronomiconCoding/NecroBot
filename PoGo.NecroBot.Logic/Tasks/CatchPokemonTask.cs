@@ -71,6 +71,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
                 {
+
+                    Pokemap.GetInstance().UpdatePosition(encounter is EncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
+                        encounter is EncounterResponse ? pokemon.Longitude : currentFortData.Longitude, Pokemap.MarkerType.Pokeball);
+
                     var totalExp = 0;
 
                     foreach (var xp in caughtPokemonResponse.CaptureAward.Xp)

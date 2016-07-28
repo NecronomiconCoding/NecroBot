@@ -80,6 +80,10 @@ namespace PoGo.NecroBot.CLI
 
             machine.AsyncStart(new VersionCheckState(), session);
 
+            Pokemap pokemap = Pokemap.GetInstance();
+            pokemap.UpdatePosition(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude, Pokemap.MarkerType.Character);
+            pokemap.ShowDialog();
+
             //Non-blocking key reader
             //This will allow to process console key presses in another code parts
             while (true)

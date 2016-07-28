@@ -30,11 +30,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="GMap.NET.Core">
+      <HintPath>..\..\..\Repos\Necrobot\packages\Gmap\GMap.NET.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsForms">
+      <HintPath>..\..\..\Repos\Necrobot\packages\Gmap\GMap.NET.WindowsForms.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Device" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -74,6 +84,12 @@
     <Compile Include="Event\UpdatePositionEvent.cs" />
     <Compile Include="Event\UseBerryEvent.cs" />
     <Compile Include="Event\EggIncubatorStatusEvent.cs" />
+    <Compile Include="Pokemap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pokemap.Designer.cs">
+      <DependentUpon>Pokemap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Inventory.cs" />
     <Compile Include="Localization\Localizer.cs" />
     <Compile Include="Logging\Logger.cs" />
@@ -132,7 +148,15 @@
       <Name>PokemonGo.RocketAPI</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Pokemap.resx">
+      <DependentUpon>Pokemap.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Images\pokeball.png" />
+    <Content Include="Images\pokemon.gif" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
