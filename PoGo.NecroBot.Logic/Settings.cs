@@ -197,6 +197,8 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Weedle,
             PokemonId.Pidgey
             //25 candies
+            //PokemonId.Charmander,
+            //PokemonId.Squirtle,
             //PokemonId.Rattata,
             //PokemonId.NidoranFemale,
             //PokemonId.NidoranMale,
@@ -208,7 +210,18 @@ namespace PoGo.NecroBot.CLI
             //PokemonId.Geodude,
             //PokemonId.Gastly,
             //PokemonId.Eevee,
+            //PokemonId.Gastly,
             //PokemonId.Dratini
+            //50 candies
+            //PokemonId.Zubat,
+            //PokemonId.Venonat,
+            //PokemonId.Tentacool,
+            //PokemonId.Staryu,
+            //PokemonId.Slowpoke,
+            //PokemonId.Shellder,
+            //PokemonId.Psyduck,
+            //PokemonId.Jigglypuff
+            //100 candies
         };
 
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
@@ -236,7 +249,7 @@ namespace PoGo.NecroBot.CLI
         public bool RenameAboveIv = false;
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
-        public bool UseEggIncubators = true;
+        public bool UseEggIncubators = true; // Walking speed should be 20 or under for best effect.
         public bool UseGpxPathing = false;
         public int UseLuckyEggsMinPokemonAmount = 30;
         public bool UseLuckyEggsWhileEvolving = true;
