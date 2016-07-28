@@ -113,6 +113,7 @@
     <Compile Include="Event\WarnEvent.cs" />
     <Compile Include="Tasks\UseIncubatorsTask.cs" />
     <Compile Include="Tasks\UseNearbyPokestopsTask.cs" />
+    <Compile Include="Utils\EggWalker.cs" />
     <Compile Include="Utils\GPXReader.cs" />
     <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Utils\JitterUtils.cs" />
