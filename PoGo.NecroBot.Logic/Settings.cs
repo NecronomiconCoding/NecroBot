@@ -25,8 +25,6 @@ namespace PoGo.NecroBot.CLI
         public string GoogleRefreshToken;
         public string PtcUsername;
         public string PtcPassword;
-        public string GoogleUsername;
-        public string GooglePassword;
 
         public void Load(string path)
         {
@@ -239,8 +237,14 @@ namespace PoGo.NecroBot.CLI
         {
             {PokemonId.Pidgeotto, new TransferFilter(1500, 90, 1)},
             {PokemonId.Fearow, new TransferFilter(1500, 90, 2)},
+            {PokemonId.Zubat, new TransferFilter(500, 90, 2)},
             {PokemonId.Golbat, new TransferFilter(1500, 90, 2)},
-            {PokemonId.Eevee, new TransferFilter(600, 90, 2)},
+            {PokemonId.Pinsir, new TransferFilter(1500, 95, 2)},
+            {PokemonId.Golduck, new TransferFilter(1350, 95, 2)},
+            {PokemonId.Tentacruel, new TransferFilter(1350, 95, 2)},
+            {PokemonId.Starmie, new TransferFilter(1350, 95, 2)},
+            {PokemonId.Eevee, new TransferFilter(750, 92.5, 2)},
+            {PokemonId.Gyarados, new TransferFilter(1200, 90, 5)}
             {PokemonId.Mew, new TransferFilter(0, 0, 10)}
         };
 
@@ -323,15 +327,20 @@ namespace PoGo.NecroBot.CLI
                     return retVal;
                 };
 
-                var defLat = setLatLong("Latitude");
+                var defLat = setLatLong(
+                    "Latitude");
 
                 if (defLat != 0)
                     settings.DefaultLatitude = defLat;
 
-                var defLong = setLatLong("Longitude");
+                var defLong = setLatLong(
+                    "Longitude");
 
                 if (defLong != 0)
                     settings.DefaultLongitude = defLong;
+
+
+
             }
 
             if (settings.WebSocketPort == 0)
@@ -377,9 +386,14 @@ namespace PoGo.NecroBot.CLI
             _settings = settings;
         }
 
+        public bool AutoUpdate => _settings.AutoUpdate;
 
-        public string GoogleUsername => _settings.Auth.GoogleUsername;
-        public string GooglePassword => _settings.Auth.GooglePassword;
+        public AuthType AuthType => _settings.Auth.AuthType;
+        public string PtcUsername => _settings.Auth.PtcUsername;
+        public string PtcPassword => _settings.Auth.PtcPassword;
+        public double DefaultLatitude => _settings.DefaultLatitude;
+        public double DefaultLongitude => _settings.DefaultLongitude;
+        public double DefaultAltitude => _settings.DefaultAltitude;
 
         public string GoogleRefreshToken
         {
@@ -388,109 +402,6 @@ namespace PoGo.NecroBot.CLI
             {
                 _settings.Auth.GoogleRefreshToken = value;
                 _settings.Auth.Save();
-            }
-        }
-
-        AuthType ISettings.AuthType
-        {
-            get
-            {
-                return _settings.Auth.AuthType;
-            }
-
-            set
-            {
-                _settings.Auth.AuthType = value;
-            }
-        }
-
-        double ISettings.DefaultLatitude
-        {
-            get
-            {
-                return _settings.DefaultLatitude;
-            }
-
-            set
-            {
-                _settings.DefaultLatitude = value;
-            }
-        }
-
-        double ISettings.DefaultLongitude
-        {
-            get
-            {
-                return _settings.DefaultLongitude;
-            }
-
-            set
-            {
-                _settings.DefaultLongitude = value;
-            }
-        }
-
-        double ISettings.DefaultAltitude
-        {
-            get
-            {
-                return _settings.DefaultAltitude;
-            }
-
-            set
-            {
-                _settings.DefaultAltitude = value;
-            }
-        }
-
-        string ISettings.PtcPassword
-        {
-            get
-            {
-                return _settings.Auth.PtcPassword;
-            }
-
-            set
-            {
-                _settings.Auth.PtcPassword = value;
-            }
-        }
-
-        string ISettings.PtcUsername
-        {
-            get
-            {
-                return _settings.Auth.PtcUsername;
-            }
-
-            set
-            {
-                _settings.Auth.PtcUsername = value;
-            }
-        }
-
-        string ISettings.GoogleUsername
-        {
-            get
-            {
-                return _settings.Auth.GoogleUsername;
-            }
-
-            set
-            {
-                _settings.Auth.GoogleUsername = value;
-            }
-        }
-        string ISettings.GooglePassword
-        {
-            get
-            {
-                return _settings.Auth.GooglePassword;
-            }
-
-            set
-            {
-                _settings.Auth.GooglePassword = value;
             }
         }
     }
