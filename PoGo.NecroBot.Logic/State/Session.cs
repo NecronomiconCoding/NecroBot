@@ -21,10 +21,7 @@ namespace PoGo.NecroBot.Logic.State
         Navigation Navigation { get;  }
         ITranslation Translation { get; }
         IEventDispatcher EventDispatcher { get; }
-        IConfigurationSettings LogicSettings { get; }
         ISettings Settings { get; }
-
-        string ProfilePath { get; }
     }
 
     public class Session : ISession
@@ -44,8 +41,6 @@ namespace PoGo.NecroBot.Logic.State
         public ITranslation Translation { get; private set; }
         public IEventDispatcher EventDispatcher{ get; private set; }
         public ISettings Settings { get { return (ISettings)BotProfile; } }
-        public IConfigurationSettings LogicSettings => BotProfile.Settings.Bot;
-        public string ProfilePath => BotProfile.FilePath;
 
         public void Reset(IConfigurationSettings logicSettings)
         {

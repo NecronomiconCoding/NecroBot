@@ -11,6 +11,8 @@ namespace PoGo.NecroBot.Logic.Settings {
         private string _googleRefreshToken;
         private string _ptcUsername;
         private string _ptcPassword;
+        private string _googleUsername;
+        private string _googlePassword;
 
         public AuthType AuthenticationType
         {
@@ -56,6 +58,30 @@ namespace PoGo.NecroBot.Logic.Settings {
                 if (_ptcPassword != value) {
                     _ptcPassword = value;
                     NotifyPropertyDidChange("PtcPassword");
+                }
+            }
+        }
+
+        public string GoogleUsername
+        {
+            get { return _googleUsername; }
+            set
+            {
+                if (_googleUsername != value) {
+                    _googleUsername = value;
+                    NotifyPropertyDidChange("GoogleUsername");
+                }
+            }
+        }
+
+        public string GooglePassword
+        {
+            get { return _googlePassword; }
+            set
+            {
+                if (_googlePassword != value) {
+                    _googlePassword = value;
+                    NotifyPropertyDidChange("GooglePassword");
                 }
             }
         }

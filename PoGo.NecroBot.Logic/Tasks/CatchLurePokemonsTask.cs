@@ -21,8 +21,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var pokemonId = currentFortData.LureInfo.ActivePokemonId;
 
-            if (session.LogicSettings.UsePokemonToNotCatchFilter &&
-                session.LogicSettings.PokemonsNotToCatch.Contains(pokemonId))
+            if (session.BotProfile.Settings.Bot.UsePokemonToNotCatchFilter &&
+                session.BotProfile.Settings.Bot.PokemonsNotToCatch.Contains(pokemonId))
             {
                 session.EventDispatcher.Send(new NoticeEvent {Message = session.Translation.GetTranslation(Common.TranslationString.PokemonSkipped, pokemonId)});
             }
@@ -37,7 +37,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else if (encounter.Result == DiskEncounterResponse.Types.Result.PokemonInventoryFull)
                 {
-                    if (session.LogicSettings.TransferDuplicatePokemon)
+                    if (session.BotProfile.Settings.Bot.TransferDuplicatePokemon)
                     {
                         session.EventDispatcher.Send(new WarnEvent {Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferring) });
                         await TransferDuplicatePokemonTask.Execute(session);

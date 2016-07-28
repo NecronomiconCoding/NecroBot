@@ -92,25 +92,25 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             await RecycleItemsTask.Execute(session);
 
-                            if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
-                                session.LogicSettings.EvolveAllPokemonAboveIv)
+                            if (session.BotProfile.Settings.Bot.EvolveAllPokemonWithEnoughCandy ||
+                                session.BotProfile.Settings.Bot.EvolveAllPokemonAboveIv)
                             {
                                 await EvolvePokemonTask.Execute(session);
                             }
 
-                            if (session.LogicSettings.TransferDuplicatePokemon)
+                            if (session.BotProfile.Settings.Bot.TransferDuplicatePokemon)
                             {
                                 await TransferDuplicatePokemonTask.Execute(session);
                             }
 
-                            if (session.LogicSettings.RenameAboveIv)
+                            if (session.BotProfile.Settings.Bot.RenameAboveIv)
                             {
                                 await RenamePokemonTask.Execute(session);
                             }
                         }
 
                         await session.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
-                            session.LogicSettings.WalkingSpeedInKilometerPerHour, async () =>
+                            session.BotProfile.Settings.Bot.WalkingSpeedInKilometerPerHour, async () =>
                             {
                                 await CatchNearbyPokemonsTask.Execute(session);
                                 //Catch Incense Pokemon
@@ -141,7 +141,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         private static List<GpxReader.Trk> GetGpxTracks(ISession session)
         {
-            var xmlString = File.ReadAllText(session.LogicSettings.GpxFile);
+            var xmlString = File.ReadAllText(session.BotProfile.Settings.Bot.GpxFile);
             var readgpx = new GpxReader(xmlString, session);
             return readgpx.Tracks;
         }
@@ -164,7 +164,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             LocationUtils.CalculateDistanceInMeters(
                                 session.Client.CurrentLatitude, session.Client.CurrentLongitude,
                                 i.Latitude, i.Longitude) < 40) ||
-                        session.LogicSettings.MaxTravelDistanceInMeters == 0
+                        session.BotProfile.Settings.Bot.MaxTravelDistanceInMeters == 0
                 );
 
             return pokeStops.ToList();

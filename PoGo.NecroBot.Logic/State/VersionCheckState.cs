@@ -31,7 +31,7 @@ namespace PoGo.NecroBot.Logic.State
         public async Task<IState> Execute(ISession session)
         {
             await CleanupOldFiles();
-            var autoUpdate = session.LogicSettings.AutoUpdate;
+            var autoUpdate = session.BotProfile.Settings.Bot.AutoUpdate;
             var needupdate =  IsLatest();
             if (!needupdate || !autoUpdate)
             {

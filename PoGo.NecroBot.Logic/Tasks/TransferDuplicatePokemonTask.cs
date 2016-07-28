@@ -16,9 +16,9 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             var duplicatePokemons =
                 await
-                    session.Inventory.GetDuplicatePokemonToTransfer(session.LogicSettings.KeepPokemonsThatCanEvolve,
-                        session.LogicSettings.PrioritizeIvOverCp,
-                        session.LogicSettings.PokemonsNotToTransfer);
+                    session.Inventory.GetDuplicatePokemonToTransfer(session.BotProfile.Settings.Bot.KeepPokemonsThatCanEvolve,
+                        session.BotProfile.Settings.Bot.PrioritizeIvOverCp,
+                        session.BotProfile.Settings.Bot.PokemonsNotToTransfer);
 
             var pokemonSettings = await session.Inventory.GetPokemonSettings();
             var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
@@ -35,7 +35,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 await session.Client.Inventory.TransferPokemon(duplicatePokemon.Id);
                 await session.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
 
-                var bestPokemonOfType = (session.LogicSettings.PrioritizeIvOverCp
+                var bestPokemonOfType = (session.BotProfile.Settings.Bot.PrioritizeIvOverCp
                     ? await session.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon)
                     : await session.Inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon)) ?? duplicatePokemon;
 

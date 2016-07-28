@@ -38,7 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 .OrderBy(x => x.EggKmWalkedTarget - x.EggKmWalkedStart)
                 .ToList();
 
-            var rememberedIncubatorsFilePath = Path.Combine(session.ProfilePath, "temp", "incubators.json");
+            var rememberedIncubatorsFilePath = Path.Combine(session.BotProfile.FilePath, "temp", "incubators.json");
             var rememberedIncubators = GetRememberedIncubators(rememberedIncubatorsFilePath);
             var pokemons = (await session.Inventory.GetPokemons()).ToList();
 

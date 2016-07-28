@@ -58,7 +58,7 @@ namespace PoGo.NecroBot.Logic.State
                 Message =
                     session.Translation.GetTranslation(TranslationString.WelcomeWarning, session.Client.CurrentLatitude,
                         session.Client.CurrentLongitude),
-                RequireInput = session.LogicSettings.StartupWelcomeDelay
+                RequireInput = session.BotProfile.Settings.Bot.StartupWelcomeDelay
             });
 
             return new InfoState();

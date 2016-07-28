@@ -24,29 +24,29 @@ namespace PoGo.NecroBot.Logic.Service
 
         public void Run()
         {
-            if (_session.LogicSettings.EvolveAllPokemonAboveIv || _session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
+            if (_session.BotProfile.Settings.Bot.EvolveAllPokemonAboveIv || _session.BotProfile.Settings.Bot.EvolveAllPokemonWithEnoughCandy)
             {
                 EvolvePokemonTask.Execute(_session).Wait();
             }
 
-            if (_session.LogicSettings.TransferDuplicatePokemon)
+            if (_session.BotProfile.Settings.Bot.TransferDuplicatePokemon)
             {
                 TransferDuplicatePokemonTask.Execute(_session).Wait();
             }
 
-            if (_session.LogicSettings.RenameAboveIv)
+            if (_session.BotProfile.Settings.Bot.RenameAboveIv)
             {
                 RenamePokemonTask.Execute(_session).Wait();
             }
 
             RecycleItemsTask.Execute(_session).Wait();
 
-            if (_session.LogicSettings.UseEggIncubators)
+            if (_session.BotProfile.Settings.Bot.UseEggIncubators)
             {
                 UseIncubatorsTask.Execute(_session).Wait();
             }
 
-            if (_session.LogicSettings.UseGpxPathing)
+            if (_session.BotProfile.Settings.Bot.UseGpxPathing)
             {
                 FarmPokestopsGpxTask.Execute(_session).Wait();
             }

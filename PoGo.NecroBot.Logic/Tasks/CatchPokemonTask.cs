@@ -49,7 +49,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var isHighPerfection =
                     PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
                         ? encounter.WildPokemon?.PokemonData
-                        : encounter?.PokemonData) >= session.LogicSettings.KeepMinIvPercentage;
+                        : encounter?.PokemonData) >= session.BotProfile.Settings.Bot.KeepMinIvPercentage;
 
                 if ((isLowProbability && isHighCp) || isHighPerfection)
                 {
@@ -161,10 +161,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (greatBallsCount > 0 && pokemonCp >= 750)
                 return ItemId.ItemGreatBall;
 
-            if (ultraBallsCount > 0 && iV >= session.LogicSettings.KeepMinIvPercentage && probability < 0.40)
+            if (ultraBallsCount > 0 && iV >= session.BotProfile.Settings.Bot.KeepMinIvPercentage && probability < 0.40)
                 return ItemId.ItemUltraBall;
 
-            if (greatBallsCount > 0 && iV >= session.LogicSettings.KeepMinIvPercentage && probability < 0.50)
+            if (greatBallsCount > 0 && iV >= session.BotProfile.Settings.Bot.KeepMinIvPercentage && probability < 0.50)
                 return ItemId.ItemGreatBall;
 
             if (greatBallsCount > 0 && pokemonCp >= 300)

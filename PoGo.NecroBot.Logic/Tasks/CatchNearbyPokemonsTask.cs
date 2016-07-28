@@ -22,8 +22,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemons = await GetNearbyPokemons(session);
             foreach (var pokemon in pokemons)
             {
-                if (session.LogicSettings.UsePokemonToNotCatchFilter &&
-                    session.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
+                if (session.BotProfile.Settings.Bot.UsePokemonToNotCatchFilter &&
+                    session.BotProfile.Settings.Bot.PokemonsNotToCatch.Contains(pokemon.PokemonId))
                 {
                     Logger.Write(session.Translation.GetTranslation(Common.TranslationString.PokemonSkipped, pokemon.PokemonId));
                     continue;
@@ -41,7 +41,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                 {
-                    if (session.LogicSettings.TransferDuplicatePokemon)
+                    if (session.BotProfile.Settings.Bot.TransferDuplicatePokemon)
                     {
                         session.EventDispatcher.Send(new WarnEvent {Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferring)});
                         await TransferDuplicatePokemonTask.Execute(session);
@@ -60,7 +60,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
                 if (!Equals(pokemons.ElementAtOrDefault(pokemons.Count() - 1), pokemon))
                 {
-                    await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch);
+                    await Task.Delay(session.BotProfile.Settings.Bot.DelayBetweenPokemonCatch);
                 }
             }
         }

@@ -92,8 +92,8 @@
     <Compile Include="Settings\IProfileSettings.cs" />
     <Compile Include="Settings\ProfileSettings.cs" />
     <Compile Include="Settings\SettingsFile.cs" />
+    <Compile Include="Settings\WebSocketSettings.cs" />
     <Compile Include="Tasks\Farm.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="State\Session.cs" />
     <Compile Include="Event\ErrorEvent.cs" />
     <Compile Include="State\FarmState.cs" />

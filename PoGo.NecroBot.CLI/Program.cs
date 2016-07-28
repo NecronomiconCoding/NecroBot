@@ -14,15 +14,23 @@ using PoGo.NecroBot.Logic.Utils;
 using PoGo.NecroBot.Logic.Localization;
 using PoGo.NecroBot.Logic.Service;
 using PoGo.NecroBot.Logic.Tasks;
+using PoGo.NecroBot.Logic.Settings;
 using PoGo.NecroBot.Logic.Profiles;
 using PokemonGo.RocketAPI.Enums;
+
+using Newtonsoft.Json;
+
 #endregion
 
 namespace PoGo.NecroBot.CLI
 {
     internal class Program
     {
+        static bool IsNewProfile = false;
+
         private static void Main(string[] args) {
+            Logger.SetLogger(new ConsoleLogger(LogLevel.Info));
+
             List<IProfile> profiles = LoadProfiles(args);
             List<Session> sessions = new List<Logic.State.Session>();
 
@@ -30,8 +38,17 @@ namespace PoGo.NecroBot.CLI
                 sessions.Add(new Session(profile));
             }
 
-            foreach(var session in sessions) {
-                StartSessionAsync(session);    
+            if (IsNewProfile) {
+                Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
+                Logger.Write("We will now shutdown to let you configure the bot and then launch it again.", LogLevel.Warning);
+                Logger.Write("Press Enter to continue...");
+                Console.ReadLine();
+                return;
+            }
+            WebSocketInterface server = new WebSocketInterface();
+
+            foreach (var session in sessions) {
+                StartSessionAsync(session, server);    
             }
 
             while (true) {
@@ -44,13 +61,13 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        static async Task StartSessionAsync(Session session) {
-            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), session.ProfilePath);
+        static async Task StartSessionAsync(Session session, WebSocketInterface ws) {
+            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), session.BotProfile.FilePath);
 
             var machine = new StateMachine();
             var stats = new Statistics();
-            //stats.DirtyEvent += () => Console.Title = stats.GetTemplatedStats(session.Translation.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
-            //    session.Translation.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
+            stats.DirtyEvent += () => Console.Title = stats.GetTemplatedStats(session.Translation.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
+                session.Translation.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
 
             var aggregator = new StatisticsAggregator(stats);
             var listener = new ConsoleEventListener();
@@ -58,10 +75,9 @@ namespace PoGo.NecroBot.CLI
 
             session.EventDispatcher.EventReceived += (IEvent evt) => listener.Listen(evt, session);
             session.EventDispatcher.EventReceived += (IEvent evt) => aggregator.Listen(evt, session);
-            //session.EventDispatcher.EventReceived += (IEvent evt) => websocket.Listen(evt, session);
+            session.EventDispatcher.EventReceived += (IEvent evt) => ws.Listen(evt, session);
 
             machine.SetFailureState(new LoginState());
-
             Logger.SetLoggerContext(session);
 
             session.Navigation.UpdatePositionEvent +=
@@ -130,6 +146,8 @@ namespace PoGo.NecroBot.CLI
                     }
                 }
             } while (profile == null);
+
+            IsNewProfile = true;
             return profile;
         }
 

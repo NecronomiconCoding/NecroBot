@@ -29,8 +29,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.Client.CurrentLatitude, session.Client.CurrentLongitude);
 
             // Edge case for when the client somehow ends up outside the defined radius
-            if (session.LogicSettings.MaxTravelDistanceInMeters != 0 &&
-                distanceFromStart > session.LogicSettings.MaxTravelDistanceInMeters)
+            if (session.BotProfile.Settings.Bot.MaxTravelDistanceInMeters != 0 &&
+                distanceFromStart > session.BotProfile.Settings.Bot.MaxTravelDistanceInMeters)
             {
                 Logger.Write(
                     session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
@@ -40,7 +40,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 await session.Navigation.HumanLikeWalking(
                     new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude),
-                    session.LogicSettings.WalkingSpeedInKilometerPerHour, null);
+                    session.BotProfile.Settings.Bot.WalkingSpeedInKilometerPerHour, null);
             }
 
             var pokestopList = await GetPokeStops(session);
@@ -75,7 +75,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
 
                 await session.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
-                    session.LogicSettings.WalkingSpeedInKilometerPerHour,
+                    session.BotProfile.Settings.Bot.WalkingSpeedInKilometerPerHour,
                     async () =>
                     {
                         // Catch normal map Pokemon
@@ -150,15 +150,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                         await session.Inventory.RefreshCachedInventory();
                     }
                     await RecycleItemsTask.Execute(session);
-                    if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
+                    if (session.BotProfile.Settings.Bot.EvolveAllPokemonWithEnoughCandy || session.BotProfile.Settings.Bot.EvolveAllPokemonAboveIv)
                     {
                         await EvolvePokemonTask.Execute(session);
                     }
-                    if (session.LogicSettings.TransferDuplicatePokemon)
+                    if (session.BotProfile.Settings.Bot.TransferDuplicatePokemon)
                     {
                         await TransferDuplicatePokemonTask.Execute(session);
                     }
-                    if (session.LogicSettings.RenameAboveIv)
+                    if (session.BotProfile.Settings.Bot.RenameAboveIv)
                     {
                         await RenamePokemonTask.Execute(session);
                     }
@@ -179,8 +179,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
                             LocationUtils.CalculateDistanceInMeters(
                                 session.Settings.DefaultLatitude, session.Settings.DefaultLongitude,
-                                i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters) ||
-                        session.LogicSettings.MaxTravelDistanceInMeters == 0
+                                i.Latitude, i.Longitude) < session.BotProfile.Settings.Bot.MaxTravelDistanceInMeters) ||
+                        session.BotProfile.Settings.Bot.MaxTravelDistanceInMeters == 0
                 );
 
             return pokeStops.ToList();

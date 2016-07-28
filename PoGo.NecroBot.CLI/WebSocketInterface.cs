@@ -1,13 +1,21 @@
 ﻿#region using directives
 
+using System.Collections.Generic;
+
 using Newtonsoft.Json;
-using PoGo.NecroBot.Logic.Common;
+using Newtonsoft.Json.Converters;
+using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.Settings;
+using PoGo.NecroBot.Logic.Profiles;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Config;
 using SuperSocket.WebSocket;
+
+
 
 #endregion
 
@@ -15,101 +23,111 @@ namespace PoGo.NecroBot.CLI
 {
     public class WebSocketInterface
     {
-        private PokeStopListEvent _lastPokeStopList;
-        private ProfileEvent _lastProfile;
-        private readonly WebSocketServer _server;
+        protected ITranslation I18n { get; set; }
+        protected WebSocketSettings Settings { get; set; }
+        protected SuperSocket.WebSocket.WebSocketServer Server { get; set; }
+        protected Dictionary<Session, SocketMessage> LastPokestopCache { get; set; }
+        protected Dictionary<Session, SocketMessage> LastProfileCache { get; set; }
 
-        public WebSocketInterface(int port, ITranslation translations)
-        {
-            _server = new WebSocketServer();
-            var setupComplete = _server.Setup(new ServerConfig
-            {
+        private Dictionary<string, SocketMessageType> EventTypeMap = new Dictionary<string, SocketMessageType> {
+            {"PokeStepListEvent", SocketMessageType.ReceivedPokestopList },
+            {"ProfileEvent", SocketMessageType.ReceivedPlayerData }
+        };
+
+        public WebSocketInterface() {
+            LastPokestopCache = new Dictionary<Session, SocketMessage>();
+            LastProfileCache = new Dictionary<Session, SocketMessage>();
+
+            Settings = new WebSocketSettings();
+            I18n = Translation.Load(Settings.Locale);
+            Server = new SuperSocket.WebSocket.WebSocketServer();
+
+            var complete = Server.Setup(new ServerConfig {
                 Name = "NecroWebSocket",
                 Ip = "Any",
-                Port = port,
+                Port = Settings.WebSocketPort,
                 Mode = SocketMode.Tcp,
                 Security = "tls",
-                Certificate = new CertificateConfig
-                {
+                Certificate = new CertificateConfig {
                     FilePath = @"cert.pfx",
                     Password = "necro"
                 }
             });
 
-            if (setupComplete == false)
-            {
-                Logger.Write(translations.GetTranslation(TranslationString.WebSocketFailStart, port), LogLevel.Error);
+            if (!complete) {
+                Logger.Write(I18n.GetTranslation(TranslationString.WebSocketFailStart, Settings.WebSocketPort), LogLevel.Error);
                 return;
             }
 
-            _server.NewMessageReceived += HandleMessage;
-            _server.NewSessionConnected += HandleSession;
-
-            _server.Start();
+            Server.Start();
         }
 
-        private void Broadcast(string message)
-        {
-            foreach (var session in _server.GetAllSessions())
-            {
-                try
-                {
-                    session.Send(message);
-                }
-                catch
-                {
-                    // ignored
-                }
+        private void Broadcast(string msg) {
+            foreach(var s in Server.GetAllSessions()) {
+                try {
+                    s.Send(msg);
+                } catch { }
             }
         }
 
-        private void HandleEvent(PokeStopListEvent evt)
-        {
-            _lastPokeStopList = evt;
+        private void HandleEvent(Session s, PokeStopListEvent e, SocketMessage msg) {
+            LastPokestopCache[s] = msg;
         }
 
-        private void HandleEvent(ProfileEvent evt)
-        {
-            _lastProfile = evt;
+        private void HandleEvent(Session s, ProfileEvent e, SocketMessage msg) {
+            LastProfileCache[s] = msg;
         }
 
-        private void HandleMessage(WebSocketSession session, string message)
-        {
+        public void Listen(IEvent evt, Session session) {
+            dynamic e = evt;
+            var typeName = evt.GetType().Name;
+            if (!EventTypeMap.ContainsKey(typeName))
+                return;
+
+            var msgType = EventTypeMap[typeName];
+            var msg = new SocketMessage(msgType, session, e);
+            try { HandleEvent(session, e, msg); } catch { }
+
+            Broadcast(msg.Serialize());
         }
 
-        private void HandleSession(WebSocketSession session)
-        {
-            if (_lastProfile != null)
-                session.Send(Serialize(_lastProfile));
-
-            if (_lastPokeStopList != null)
-                session.Send(Serialize(_lastPokeStopList));
-        }
-
-        public void Listen(IEvent evt, Session session)
-        {
-            dynamic eve = evt;
-
-            try
-            {
-                HandleEvent(eve);
-            }
-            catch
-            {
-                // ignored
+        #region "Message Handling"
+        private void SessionDidConnect(WebSocketSession session) {
+            foreach(var key in LastPokestopCache.Keys) {
+                session.Send(LastPokestopCache[key].Serialize());
             }
 
-            Broadcast(Serialize(eve));
+            foreach(var key in LastProfileCache.Keys) {
+                session.Send(LastProfileCache[key].Serialize());
+            }
         }
 
-        private string Serialize(dynamic evt)
-        {
-            var jsonSerializerSettings = new JsonSerializerSettings
-            {
-                TypeNameHandling = TypeNameHandling.All
-            };
+        private void DidReceiveMessage(WebSocketSession session, string message) {
+        }
+        #endregion
+    }
 
-            return JsonConvert.SerializeObject(evt, Formatting.None, jsonSerializerSettings);
+    public enum SocketMessageType {
+        ReceivedPlayerData,
+        ReceivedPokestopList
+    }
+
+    public class SocketMessage {
+        public string SessionID { get; set; }
+        public SocketMessageType Type { get; set; }
+        public IEvent Data { get; set; }
+
+        public SocketMessage() { }
+        public SocketMessage(SocketMessageType type, Session session, IEvent data) {
+            SessionID = session.BotProfile.Name;
+            Type = type;
+            Data = data;
+        }
+
+        public string Serialize() {
+            var settings = new JsonSerializerSettings();
+            settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+            return JsonConvert.SerializeObject(this, Formatting.None, settings);
         }
     }
 }

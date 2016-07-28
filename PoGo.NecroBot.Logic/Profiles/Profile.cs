@@ -65,8 +65,17 @@ namespace PoGo.NecroBot.Logic.Profiles {
             get { return Settings.Account.PtcPassword; }
             set { Settings.Account.PtcPassword = value; }
         }
-        public string GoogleUsername { get; set; }
-        public string GooglePassword { get; set; }
+        public string GoogleUsername
+        {
+            get { return Settings.Account.GoogleUsername; }
+            set { Settings.Account.GoogleUsername = value; }
+        }
+
+        public string GooglePassword
+        {
+            get { return Settings.Account.GooglePassword; }
+            set { Settings.Account.GooglePassword = value; }
+        }
         #endregion
 
         public static string BasePath

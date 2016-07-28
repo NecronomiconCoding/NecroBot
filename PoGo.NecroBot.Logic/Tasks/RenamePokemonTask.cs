@@ -27,8 +27,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 var newNickname = $"{pokemonName}_{perfection}";
 
-                if (perfection > session.LogicSettings.KeepMinIvPercentage && newNickname != pokemon.Nickname &&
-                    session.LogicSettings.RenameAboveIv)
+                if (perfection > session.BotProfile.Settings.Bot.KeepMinIvPercentage && newNickname != pokemon.Nickname &&
+                    session.BotProfile.Settings.Bot.RenameAboveIv)
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
 
@@ -37,7 +37,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Message = session.Translation.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, newNickname)
                     });
                 }
-                else if (newNickname == pokemon.Nickname && !session.LogicSettings.RenameAboveIv)
+                else if (newNickname == pokemon.Nickname && !session.BotProfile.Settings.Bot.RenameAboveIv)
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, pokemon.PokemonId.ToString());
 

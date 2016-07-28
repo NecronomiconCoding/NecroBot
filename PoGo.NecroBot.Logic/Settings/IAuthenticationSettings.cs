@@ -11,5 +11,7 @@ namespace PoGo.NecroBot.Logic.Settings {
         string PtcUsername { get; set; }
         string PtcPassword { get; set; }
         string GoogleRefreshToken { get; set; }
+        string GoogleUsername { get; set; }
+        string GooglePassword { get; set; }
     }
 }

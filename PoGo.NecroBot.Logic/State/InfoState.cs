@@ -11,7 +11,7 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(ISession session)
         {
-            if (session.LogicSettings.AmountOfPokemonToDisplayOnStart > 0)
+            if (session.BotProfile.Settings.Bot.AmountOfPokemonToDisplayOnStart > 0)
                 await DisplayPokemonStatsTask.Execute(session);
 
             return new FarmState();

@@ -11,29 +11,29 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(ISession session)
         {
-            if (session.LogicSettings.EvolveAllPokemonAboveIv || session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
+            if (session.BotProfile.Settings.Bot.EvolveAllPokemonAboveIv || session.BotProfile.Settings.Bot.EvolveAllPokemonWithEnoughCandy)
             {
                 await EvolvePokemonTask.Execute(session);
             }
 
-            if (session.LogicSettings.TransferDuplicatePokemon)
+            if (session.BotProfile.Settings.Bot.TransferDuplicatePokemon)
             {
                 await TransferDuplicatePokemonTask.Execute(session);
             }
 
-            if (session.LogicSettings.RenameAboveIv)
+            if (session.BotProfile.Settings.Bot.RenameAboveIv)
             {
                 await RenamePokemonTask.Execute(session);
             }
 
             await RecycleItemsTask.Execute(session);
 
-            if (session.LogicSettings.UseEggIncubators)
+            if (session.BotProfile.Settings.Bot.UseEggIncubators)
             {
                 await UseIncubatorsTask.Execute(session);
             }
 
-            if (session.LogicSettings.UseGpxPathing)
+            if (session.BotProfile.Settings.Bot.UseGpxPathing)
             {
                 await FarmPokestopsGpxTask.Execute(session);
             }

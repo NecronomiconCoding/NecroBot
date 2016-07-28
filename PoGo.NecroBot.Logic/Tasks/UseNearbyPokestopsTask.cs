@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 await RecycleItemsTask.Execute(session);
 
-                if (session.LogicSettings.TransferDuplicatePokemon)
+                if (session.BotProfile.Settings.Bot.TransferDuplicatePokemon)
                 {
                     await TransferDuplicatePokemonTask.Execute(session);
                 }
@@ -75,7 +75,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             LocationUtils.CalculateDistanceInMeters(
                                 session.Client.CurrentLatitude, session.Client.CurrentLongitude,
                                 i.Latitude, i.Longitude) < 40) ||
-                        session.LogicSettings.MaxTravelDistanceInMeters == 0
+                        session.BotProfile.Settings.Bot.MaxTravelDistanceInMeters == 0
                 );
 
             return pokeStops.ToList();

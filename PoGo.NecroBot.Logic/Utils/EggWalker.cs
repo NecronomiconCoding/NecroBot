@@ -19,7 +19,7 @@ namespace PoGo.NecroBot.Logic.Utils
 
         public async Task ApplyDistance(double distanceTraveled)
         {
-            if (!_session.LogicSettings.UseEggIncubators)
+            if (!_session.BotProfile.Settings.Bot.UseEggIncubators)
                 return;
 
             _distanceTraveled += distanceTraveled;
