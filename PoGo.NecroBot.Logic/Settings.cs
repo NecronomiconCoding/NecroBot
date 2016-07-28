@@ -213,9 +213,13 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Spearow,
             PokemonId.Zubat,
             PokemonId.Doduo
-            //PokemonId.Staryu
-            //PokemonId.Psyduck
-            //PokemonId.Krabby
+            PokemonId.Goldeen
+            PokemonId.Paras
+            PokemonId.Ekans
+            PokemonId.Staryu
+            PokemonId.Psyduck
+            PokemonId.Krabby
+            PokemonId.Venonat
         };
 
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
