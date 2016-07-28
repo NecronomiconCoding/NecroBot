@@ -23,7 +23,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 string pokemonName = pokemon.PokemonId.ToString();
                 // iv number + templating part + pokemonName <= 12
                 int nameLength = 12 - (perfection.ToString(CultureInfo.InvariantCulture).Length + session.LogicSettings.RenameTemplate.Length - 6);
-                if (pokemonName.nameLength > nameLenght)
+                if (pokemonName.Length > nameLength)
                 {
                     pokemonName = pokemonName.Substring(0, nameLength);
                 }
