@@ -107,6 +107,9 @@ namespace PoGo.NecroBot.Logic.Common
         StatsTemplateString,
         StatsXpTemplateString,
         RequireInputText,
+        GoogleTwoFactorAuth,
+        GoogleTwoFactorAuthExplanation,
+        GoogleError
     }
 
     public class Translation : ITranslation
@@ -220,6 +223,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsTemplateString, "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transfered: {6:0} | Recycled: {7:0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsXpTemplateString, "{0} (next level in {1}h {2}m | {3}/{4} XP)"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.RequireInputText, "Program will continue after the key press..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.GoogleTwoFactorAuth, "As you have Google Two Factor Auth enabled, you will need to insert an App Specific Password into the auth.json"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.GoogleTwoFactorAuthExplanation, "Opening Google App-Passwords. Please make a new App Password (use Other as Device)"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.GoogleError, "Make sure you have entered the right Email & Password.")
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)

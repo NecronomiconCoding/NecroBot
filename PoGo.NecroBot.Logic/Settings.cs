@@ -66,6 +66,19 @@ namespace PoGo.NecroBot.CLI
                         PtcPassword = Console.ReadLine();
                     } while (string.IsNullOrEmpty(PtcPassword));
                 }
+                else
+                {
+                    do
+                    {
+                        Console.WriteLine("Email:");
+                        GoogleUsername = Console.ReadLine();
+                    } while (string.IsNullOrEmpty(GoogleUsername));
+                    do
+                    {
+                        Console.WriteLine("Password:");
+                        GooglePassword = Console.ReadLine();
+                    } while (string.IsNullOrEmpty(GooglePassword));
+                }
 
 
                 Save(_filePath);

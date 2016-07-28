@@ -34,7 +34,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     try
                     {
-                        _session.Client.Login.DoPtcLogin(_session.Settings.PtcUsername, _session.Settings.PtcPassword).Wait();
+                        _session.Client.Login.DoPtcLogin(_session.Settings.PtcUsername, _session.Settings.PtcPassword)
+                            .Wait();
                     }
                     catch (AggregateException ae)
                     {
@@ -43,18 +44,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else
                 {
-                    _session.Client.Login.DoGoogleLogin(_session.Settings.GoogleUsername, _session.Settings.GooglePassword).Wait();
+                    _session.Client.Login.DoGoogleLogin(_session.Settings.GoogleUsername,
+                        _session.Settings.GooglePassword).Wait();
                 }
             }
             catch (PtcOfflineException)
             {
-              //  _session.EventDispatcher.Send(new ErrorEvent { Message = _session..GetFormat(TranslationString.PtcOffline) });
-              //  _session.EventDispatcher.Send(new NoticeEvent { Message = _session.Localizer.GetFormat(TranslationString.TryingAgainIn, 20) });
-                
+                  _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Translation.GetTranslation(TranslationString.PtcOffline) });
+                  _session.EventDispatcher.Send(new NoticeEvent { Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20) });
+
             }
             catch (AccountNotVerifiedException)
             {
-              //  _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Localizer.GetFormat(TranslationString.AccountNotVerified) });
+                  _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Translation.GetTranslation(TranslationString.AccountNotVerified) });
             }
         }
     }
