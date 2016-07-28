@@ -1,0 +1,126 @@
+﻿{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "GreatBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "UltraBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "Ukjent AuthType i config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value":
+        "Du er utenfor din definerte radius! Går tilbake til start ({0}m borte) om 5 sekund. Er Coords.ini filen korrekt?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Fant ingen PokeStops i området. Er maximum distance satt for lavt?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "XP: {0}, Gems: {1}, Items: {2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} in ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Spiller som {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Bruker Lucky Egg, gjenstående egg: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} Suksess for {1}xp"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Failed {0}. Resultat ble {1}, stopper evolving {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Ingen Pokeballs - Vi gikk glipp av {0} med CP {1}"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Forsøk #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Candies: {0}"
+    }
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Ubehandlet data i GPX fila, forsøker å hoppe over."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfect"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "name"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "DisplayHighestsCP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "DisplayHighestsPerfect"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "DisplayHighestsLevel"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Vær sikker på at Lat & Lng er korrekt. Exit programmet hvis ikke! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Putter egg i incubator: {0:0.00}km igjen"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Incubator oppdatering: {0:0.00}km igjen"
+    }
+  ]
+}

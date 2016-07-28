@@ -1,0 +1,87 @@
+﻿{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "GreatBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "UltraBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "Άγνωστο AuthType στο config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value":
+        "Έχεις ξεφύγει απο την ορισμένη εμβέλεια! Περπατάω για να ξεκινήσω ({0}m μακρυά) σε 5 δευτερόλεπτα. Έχεις ρυθμίσει το αρχείο Coords.ini σωστά;"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value":
+        "Δεν βρεθηκαν λειτουργικά PokeStops στην περιοχή σου. Μήπως εχεις ορίσει την μέγιστη εμβέλεια πολυ χαμήλα;"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "XP: {0}, Πετράδια: {1}, Αντικείμενα: {2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} in ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Συνδεδεμένος ως {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "χρησιμοποιήθηκε Lucky Egg, απομένουν: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} εξελίχθηκε επιτυχώς για {1}xp"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Απέτυχε {0}. Το αποτέλεσμα ήταν {1}, που σταμάτησε την εξέλιξη {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Καλύτερο CP: {3}  IV: {4}%] (Candies: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Πιθανότητα Επιτυχίας: {7}% | {8}m απόσταση | με {9} ({10} απομένουν). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Ξεμείναμε απο Pokeballs - Μας ξέφυγε ένα {0} με {1} CP"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Προσπάθεια #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Candies: {0}"
+    }
+  ]
+}

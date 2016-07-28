@@ -1,0 +1,344 @@
+{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "GreatBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "UltraBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "config.json içinde bilinmeyen değer: AuthType"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value": "Tanımlanan yarıçap dışındasın! 5 saniye içinde ({0}m uzağa) yürümeye başlanacak. Coords.ini dosyası doğru yapılandırılmış mı?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Bu alanda uygun PokeStop bulunamadı. Tanımladığın en fazla mesafe değeri doğru mu?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "İsim: {0} XP: {1}, Gems: {2}, Items: {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "İsim: {0} BİLGİ: Eşya toplama başarısız, softban yemiş olabilirsin. Ban açılmasına: {1}/{2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "({1}m) içinde \"{0}\" PokeStop una ulaşılacak."
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "{0} olarak oynanıyor."
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Şanslı Yumurta(Lucky Egg) kullanıldı, kalan: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} başarılı, {1}xp kazanıldı."
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "{0} başarısız. Sonuç {1}, geliştirme(evolve) durduruluyor {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- Savaş Puanı(CP): {1}  Mükemmellik: {2}%   [En iyi Savaş Puanı(CP): {3}  Mükemmellik: {4}%] (Şekerler(Candy): {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value": "({0}) | ({1}) {2} Seviye: {3} Savaş Puanı(CP): ({4}/{5}) Mükemmellik: {6}% | Başarı şansı: {7}% | {8}m mesafeden | {9} ile ({10} adet kaldı). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Pokeball yok - Kaçırılan pokemon: {0} (Savaş Puanı(CP): {1})"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Deneme #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Şekerler(Candy): {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "GPX dosyasında işlenemeyen veri, atlanıyor."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemonlar"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "mükemmel"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "isim"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "En Yüksek Savaş Puanına(CP) Sahip Olanlar"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "En Mükemmeller"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "En Yüksek Seviyeliler"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Lat & Lng değerlerinin doğrulundan emin ol. Değilse programı kapat! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Kuluçka makinesine(Incubator) yumurta(Egg) yerleştirildi: {0:0.00}km kaldı"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Kuluçka makinesi(Incubator) durum güncellemesi: {0:0.00}km kaldı"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Kuluçka makinesindeki(Incubator) yumurta çatladı: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "HATA"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "DİKKAT"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "BİLGİ"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "GENEL"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "ÇÖP"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "AKTARILDI"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "GELİŞTİRİLDİ"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "BÖĞÜRTLEN"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "YUMURTA"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "GÜNCELLEME"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "{0} kullanılarak oturum açılıyor..."
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "PTC sunucuları yanıt vermiyor ya da bilgilerin yanlış olabilir. Google ile dene."
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "{0} saniye içinde tekrar deneniyor..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Hesap doğrulanmamış! Kapatılıyor..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Google Device penceresi açılıyor. CTRL+V kullanarak kodu yapıştırabilirsin."
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Doğrulama kodu panoya kopyalanamadı, senin yazman gerekecek."
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Bu adrese git: {0} ve şu kodu gir: {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Gerçekçi gezinme algılandı, UserSettings.settings kullanılıyor."
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "{0} da gerçekçi gezinme yok, son kaydedilen Coords.ini kullanılıyor."
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "\"Coords.ini\" dosyasındaki koordinatlar geçersiz, varsayılan koordinatlar kullanılıyor."
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Harika! Son sürüme sahipsin {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "Otomatik güncelleme kapalı. Son sürüm için: {0}\n"
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Güncelleme indiriliyor..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "İndirme tamamlandı, paket açılıyor..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Paket açıldı."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Güncelleme tamamlandı, bu pencereyi kapatabilirsin."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Tütsü(Incense) pokemonu aranıyor..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Pokemon aranıyor..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Yem(Lure) pokemonu aranıyor..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Atlandı: {0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Pokemon envanteri dolu. Pokemonlar aktarılıyor..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "Pokemon envanteri dolu. Pokemonları aktararak yer açın veya ayarlarda \"TransferDuplicatePokemon\" değerini \"true\" atayın."
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Pokemonla karşılaşmada sorun: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Pokemonla karşılaşmada sorun: Yem(Lure) pokemonu {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Hedef koordinat ({0}, {1}), geçerli konumuna ({2}, {3}) çok uzak."
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pokemon {0} ({1}) ismi değiştirildi. ({2} -> {3})"
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Pokemon Yoksayma Filtresi] - {0} ayarlarda belirtildiği üzere yoksayıldı."
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "Yakalama: Deneme"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "Yakalama: Hata"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "Yakalama: Toptan Kaçış"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "Yakalama: Kaçış"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "Yakalama: Iska"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "Yakalama: Başarılı"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "Normal"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Yem(Lure)"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Tütsü(Incense)"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "webSocketServer {0} portunda çalıştırılamadı."
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - Çalışıyor {1} - Seviye: {2} | XP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Aktarılan: {6:0} | Çöp Eşya: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (sonraki seviye {1}h {2}m | {3}/{4} XP)"
+    },
+    {
+      "Key": "welcomeDelayText",
+      "Value": "Devam etmek için bir tuşa bas..."
+    }
+  ]
+}

@@ -1,7 +1,6 @@
 ﻿#region using directives
 
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 
@@ -9,25 +8,16 @@ using PoGo.NecroBot.Logic.Event;
 
 namespace PoGo.NecroBot.Logic.State
 {
-    public delegate void StateMachineEventDeletate(IEvent evt, Context ctx);
-
     public class StateMachine
     {
-        private Context _ctx;
+        private ISession _ctx;
         private IState _initialState;
         private CancellationTokenSource _tokenSource;
         
 
-        public Task AsyncStart(IState initialState, Context ctx)
+        public Task AsyncStart(IState initialState, Session session)
         {
-            return Task.Run(() => Start(initialState, ctx));
-        }
-
-        public event StateMachineEventDeletate EventListener;
-
-        public void Fire(IEvent evt)
-        {
-            EventListener?.Invoke(evt, _ctx);
+            return Task.Run(() => Start(initialState, session));
         }
 
         public void SetFailureState(IState state)
@@ -42,16 +32,16 @@ namespace PoGo.NecroBot.Logic.State
 
         }
 
-        public async Task Start(IState initialState, Context ctx)
+        public async Task Start(IState initialState, Session session)
         {
-            _ctx = ctx;
+            _ctx = session;
             var state = initialState;
             do
             {
                 try
                 {
                     _tokenSource = new CancellationTokenSource();
-                    state = await state.Execute(ctx, this);
+                    state = await state.Execute(session);
                 }
                 catch (OperationCanceledException) {
                     state = null;
@@ -59,7 +49,7 @@ namespace PoGo.NecroBot.Logic.State
                 }
                 catch (Exception ex)
                 {
-                    Fire(new ErrorEvent {Message = ex.ToString()});
+                    session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
                     state = _initialState;
                 }
             } while (state != null);

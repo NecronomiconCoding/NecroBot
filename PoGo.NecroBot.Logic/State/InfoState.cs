@@ -1,20 +1,20 @@
-﻿using PoGo.NecroBot.Logic.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿#region using directives
+
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Tasks;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.State
 {
     public class InfoState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(ISession session)
         {
-            if(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart > 0)
-                await LogBestPokemonTask.Execute(ctx,machine);
+            if (session.LogicSettings.AmountOfPokemonToDisplayOnStart > 0)
+                await DisplayPokemonStatsTask.Execute(session);
 
-            return new PositionCheckState();
+            return new FarmState();
         }
     }
 }

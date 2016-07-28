@@ -18,84 +18,91 @@ namespace PoGo.NecroBot.Logic
             _stats = stats;
         }
 
-        public void HandleEvent(ProfileEvent evt, Context ctx)
+        public void HandleEvent(ProfileEvent evt, ISession ISession)
         {
             _stats.SetUsername(evt.Profile);
-            _stats.Dirty(ctx.Inventory);
+            _stats.Dirty(ISession.Inventory);
         }
 
-        public void HandleEvent(ErrorEvent evt, Context ctx)
+        public void HandleEvent(ErrorEvent evt, ISession ISession)
         {
         }
 
-        public void HandleEvent(NoticeEvent evt, Context ctx)
+        public void HandleEvent(NoticeEvent evt, ISession ISession)
         {
         }
 
-        public void HandleEvent(WarnEvent evt, Context ctx)
+        public void HandleEvent(WarnEvent evt, ISession ISession)
         {
         }
 
-        public void HandleEvent(UseLuckyEggEvent evt, Context ctx)
+        public void HandleEvent(UseLuckyEggEvent evt, ISession ISession)
         {
         }
 
-        public void HandleEvent(PokemonEvolveEvent evt, Context ctx)
+        public void HandleEvent(PokemonEvolveEvent evt, ISession ISession)
         {
             _stats.TotalExperience += evt.Exp;
-            _stats.Dirty(ctx.Inventory);
+            _stats.Dirty(ISession.Inventory);
         }
 
-        public void HandleEvent(TransferPokemonEvent evt, Context ctx)
+        public void HandleEvent(TransferPokemonEvent evt, ISession ISession)
         {
             _stats.TotalPokemonsTransfered++;
-            _stats.Dirty(ctx.Inventory);
+            _stats.Dirty(ISession.Inventory);
         }
 
-        public void HandleEvent(ItemRecycledEvent evt, Context ctx)
+        public void HandleEvent(ItemRecycledEvent evt, ISession ISession)
         {
             _stats.TotalItemsRemoved++;
-            _stats.Dirty(ctx.Inventory);
+            _stats.Dirty(ISession.Inventory);
         }
 
-        public void HandleEvent(FortUsedEvent evt, Context ctx)
+        public void HandleEvent(FortUsedEvent evt, ISession ISession)
         {
             _stats.TotalExperience += evt.Exp;
-            _stats.Dirty(ctx.Inventory);
+            _stats.Dirty(ISession.Inventory);
         }
 
-        public void HandleEvent(FortTargetEvent evt, Context ctx)
+        public void HandleEvent(FortTargetEvent evt, ISession ISession)
         {
         }
 
-        public void HandleEvent(PokemonCaptureEvent evt, Context ctx)
+        public void HandleEvent(PokemonCaptureEvent evt, ISession ISession)
         {
             if (evt.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
             {
                 _stats.TotalExperience += evt.Exp;
                 _stats.TotalPokemons++;
                 _stats.TotalStardust = evt.Stardust;
-                _stats.Dirty(ctx.Inventory);
+                _stats.Dirty(ISession.Inventory);
             }
         }
 
-        public void HandleEvent(NoPokeballEvent evt, Context ctx)
+        public void HandleEvent(NoPokeballEvent evt, ISession ISession)
         {
         }
 
-        public void HandleEvent(UseBerryEvent evt, Context ctx)
+        public void HandleEvent(UseBerryEvent evt, ISession ISession)
         {
         }
 
-        public void HandleEvent(DisplayHighestsPokemonEvent evt,Context ctx)
+        public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession ISession)
         {
         }
 
-        public void Listen(IEvent evt, Context ctx)
+        public void Listen(IEvent evt, ISession ISession)
         {
             dynamic eve = evt;
 
-            HandleEvent(eve, ctx);
+            try
+            {
+                HandleEvent(eve, ISession);
+            }
+            catch
+            {
+                // ignored
+            }
         }
     }
 }

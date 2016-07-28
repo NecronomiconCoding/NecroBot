@@ -5,26 +5,27 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Threading;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
-using System.Threading.Tasks;
+
 #endregion
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsGpxTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(ISession session)
         {
-            var tracks = GetGpxTracks(ctx);
+            var tracks = GetGpxTracks(session);
             var curTrkPt = 0;
             var curTrk = 0;
             var maxTrk = tracks.Count - 1;
             var curTrkSeg = 0;
+            var eggWalker = new EggWalker(1000, session);
             while (curTrk <= maxTrk)
             {
                 var track = tracks.ElementAt(curTrk);
@@ -37,81 +38,89 @@ namespace PoGo.NecroBot.Logic.Tasks
                     while (curTrkPt <= maxTrkPt)
                     {
                         var nextPoint = trackPoints.ElementAt(curTrkPt);
-                        var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
-                            ctx.Client.CurrentLongitude, Convert.ToDouble(nextPoint.Lat, CultureInfo.InvariantCulture),
+                        var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                            session.Client.CurrentLongitude, Convert.ToDouble(nextPoint.Lat, CultureInfo.InvariantCulture),
                             Convert.ToDouble(nextPoint.Lon, CultureInfo.InvariantCulture));
 
                         if (distance > 5000)
                         {
-                            machine.Fire(new ErrorEvent
+                            session.EventDispatcher.Send(new ErrorEvent
                             {
-                                Message =
-                                    $"Your desired destination of {nextPoint.Lat}, {nextPoint.Lon} is too far from your current position of {ctx.Client.CurrentLatitude}, {ctx.Client.CurrentLongitude}"
+                                Message = session.Translation.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude, session.Client.CurrentLongitude)
                             });
                             break;
                         }
-                        var pokestopList = await GetPokeStops(ctx);
+
+                        var pokestopList = await GetPokeStops(session);
+                        session.EventDispatcher.Send(new PokeStopListEvent {Forts = pokestopList});
 
                         while (pokestopList.Any())
                         {
                             pokestopList =
                                 pokestopList.OrderBy(
                                     i =>
-                                        LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
-                                            ctx.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
+                                        LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                                            session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
                             var pokeStop = pokestopList[0];
                             pokestopList.RemoveAt(0);
 
-                            await ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                            await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                             if (pokeStop.LureInfo != null)
                             {
-                                await CatchLurePokemonsTask.Execute(ctx, machine, pokeStop);
+                                await CatchLurePokemonsTask.Execute(session, pokeStop);
                             }
 
                             var fortSearch =
-                                await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                                await session.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                             if (fortSearch.ExperienceAwarded > 0)
                             {
-                                machine.Fire(new FortUsedEvent
+                                session.EventDispatcher.Send(new FortUsedEvent
                                 {
                                     Exp = fortSearch.ExperienceAwarded,
                                     Gems = fortSearch.GemsAwarded,
-                                    Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
+                                    Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded),
+                                    Latitude = pokeStop.Latitude,
+                                    Longitude = pokeStop.Longitude
                                 });
                             }
                             if (fortSearch.ItemsAwarded.Count > 0)
                             {
-                                var refreshCachedInventory = ctx.Inventory.RefreshCachedInventory();
+                                await session.Inventory.RefreshCachedInventory();
                             }
 
-                            await Task.Delay(1000);
+                            await RecycleItemsTask.Execute(session);
 
-                            await RecycleItemsTask.Execute(ctx, machine);
-
-                            if (ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
-                                ctx.LogicSettings.EvolveAllPokemonAboveIv)
+                            if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
+                                session.LogicSettings.EvolveAllPokemonAboveIv)
                             {
-                                await EvolvePokemonTask.Execute(ctx, machine);
+                                await EvolvePokemonTask.Execute(session);
                             }
 
-                            if (ctx.LogicSettings.TransferDuplicatePokemon)
+                            if (session.LogicSettings.TransferDuplicatePokemon)
                             {
-                                await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                                await TransferDuplicatePokemonTask.Execute(session);
+                            }
+
+                            if (session.LogicSettings.RenameAboveIv)
+                            {
+                                await RenamePokemonTask.Execute(session);
                             }
                         }
 
-                        await ctx.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
-                            ctx.LogicSettings.WalkingSpeedInKilometerPerHour, async () =>
+                        await session.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
+                            session.LogicSettings.WalkingSpeedInKilometerPerHour, async () =>
                             {
-                                await CatchNearbyPokemonsTask.Execute(ctx, machine);
+                                await CatchNearbyPokemonsTask.Execute(session);
                                 //Catch Incense Pokemon
-                                await CatchIncensePokemonsTask.Execute(ctx, machine);
-                                await UseNearbyPokestopsTask.Execute(ctx, machine);
+                                await CatchIncensePokemonsTask.Execute(session);
+                                await UseNearbyPokestopsTask.Execute(session);
                                 return true;
                             }
                             );
+
+                        await eggWalker.ApplyDistance(distance);
 
                         if (curTrkPt >= maxTrkPt)
                             curTrkPt = 0;
@@ -130,10 +139,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             } //end tracks
         }
 
-        private static List<GpxReader.Trk> GetGpxTracks(Context ctx)
+        private static List<GpxReader.Trk> GetGpxTracks(ISession session)
         {
-            var xmlString = File.ReadAllText(ctx.LogicSettings.GpxFile);
-            var readgpx = new GpxReader(xmlString);
+            var xmlString = File.ReadAllText(session.LogicSettings.GpxFile);
+            var readgpx = new GpxReader(xmlString, session);
             return readgpx.Tracks;
         }
 
@@ -141,9 +150,9 @@ namespace PoGo.NecroBot.Logic.Tasks
         //to only find stops within 40 meters
         //this is for gpx pathing, we are not going to the pokestops,
         //so do not make it more than 40 because it will never get close to those stops.
-        private static async Task<List<FortData>> GetPokeStops(Context ctx)
+        private static async Task<List<FortData>> GetPokeStops(ISession session)
         {
-            var mapObjects = await ctx.Client.Map.GetMapObjects();
+            var mapObjects = await session.Client.Map.GetMapObjects();
 
             // Wasn't sure how to make this pretty. Edit as needed.
             var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
@@ -153,9 +162,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
                         ( // Make sure PokeStop is within 40 meters or else it is pointless to hit it
                             LocationUtils.CalculateDistanceInMeters(
-                                ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude,
+                                session.Client.CurrentLatitude, session.Client.CurrentLongitude,
                                 i.Latitude, i.Longitude) < 40) ||
-                        ctx.LogicSettings.MaxTravelDistanceInMeters == 0
+                        session.LogicSettings.MaxTravelDistanceInMeters == 0
                 );
 
             return pokeStops.ToList();

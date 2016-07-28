@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI.Enums;
@@ -11,55 +12,56 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class LoginState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(ISession session)
         {
+            session.EventDispatcher.Send(new NoticeEvent { Message = session.Translation.GetTranslation(Common.TranslationString.LoggingIn, session.Settings.AuthType) });
             try
             {
-                switch (ctx.Settings.AuthType)
+                switch (session.Settings.AuthType)
                 {
                     case AuthType.Ptc:
                         try
                         {
-                            await ctx.Client.Login.DoPtcLogin();
+                            await session.Client.Login.DoPtcLogin(session.Settings.PtcUsername, session.Settings.PtcPassword);
                         }
-                        catch (System.AggregateException ae)
+                        catch (AggregateException ae)
                         {
                             throw ae.Flatten().InnerException;
                         }
                         break;
                     case AuthType.Google:
-                        await ctx.Client.Login.DoGoogleLogin();
+                        await session.Client.Login.DoGoogleLogin(session.Settings.GoogleUsername, session.Settings.GooglePassword);
                         break;
                     default:
-                        machine.Fire(new ErrorEvent {Message = "wrong AuthType"});
+                        session.EventDispatcher.Send(new ErrorEvent {Message = session.Translation.GetTranslation(Common.TranslationString.WrongAuthType)});
                         return null;
                 }
             }
             catch (PtcOfflineException)
             {
-                machine.Fire(new ErrorEvent
+                session.EventDispatcher.Send(new ErrorEvent
                 {
-                    Message = "PTC Servers are probably down OR your credentials are wrong. Try google"
+                    Message = session.Translation.GetTranslation(Common.TranslationString.PtcOffline)
                 });
-                machine.Fire(new NoticeEvent {Message = "Trying again in 20 seconds..."});
+                session.EventDispatcher.Send(new NoticeEvent {Message = session.Translation.GetTranslation(Common.TranslationString.TryingAgainIn, 20)});
                 await Task.Delay(20000);
                 return this;
             }
             catch (AccountNotVerifiedException)
             {
-                machine.Fire(new ErrorEvent {Message = "Account not verified. - Exiting"});
+                session.EventDispatcher.Send(new ErrorEvent {Message = session.Translation.GetTranslation(Common.TranslationString.AccountNotVerified)});
                 return null;
             }
 
-            await DownloadProfile(ctx, machine);
+            await DownloadProfile(session);
 
             return new PositionCheckState();
         }
 
-        public async Task DownloadProfile(Context ctx, StateMachine machine)
+        public async Task DownloadProfile(ISession session)
         {
-            ctx.Profile = await ctx.Client.Player.GetPlayer();
-            machine.Fire(new ProfileEvent {Profile = ctx.Profile});
+            session.Profile = await session.Client.Player.GetPlayer();
+            session.EventDispatcher.Send(new ProfileEvent {Profile = session.Profile});
         }
     }
 }

@@ -3,6 +3,7 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Utils;
 
@@ -12,16 +13,17 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class PositionCheckState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(ISession session)
         {
-            var coordsPath = Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini";
+            var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
+                             Path.DirectorySeparatorChar + "Coords.ini";
             if (File.Exists(coordsPath))
             {
-                var latLngFromFile = LoadPositionFromDisk(machine);
+                var latLngFromFile = LoadPositionFromDisk(session);
                 if (latLngFromFile != null)
                 {
                     var distance = LocationUtils.CalculateDistanceInMeters(latLngFromFile.Item1, latLngFromFile.Item2,
-                        ctx.Settings.DefaultLatitude, ctx.Settings.DefaultLongitude);
+                        session.Settings.DefaultLatitude, session.Settings.DefaultLongitude);
                     var lastModified = File.Exists(coordsPath) ? (DateTime?) File.GetLastWriteTime(coordsPath) : null;
                     if (lastModified != null)
                     {
@@ -34,16 +36,16 @@ namespace PoGo.NecroBot.Logic.State
                             if (kmph < 80) // If speed required to get to the default location is < 80km/hr
                             {
                                 File.Delete(coordsPath);
-                                machine.Fire(new WarnEvent
+                                session.EventDispatcher.Send(new WarnEvent
                                 {
-                                    Message = "Detected realistic Traveling , using UserSettings.settings"
+                                    Message = session.Translation.GetTranslation(TranslationString.RealisticTravelDetected)
                                 });
                             }
                             else
                             {
-                                machine.Fire(new WarnEvent
+                                session.EventDispatcher.Send(new WarnEvent
                                 {
-                                    Message = "Not realistic Traveling at " + kmph + ", using last saved Coords.ini"
+                                    Message =session.Translation.GetTranslation(TranslationString.NotRealisticTravel, kmph)
                                 });
                             }
                         }
@@ -51,23 +53,28 @@ namespace PoGo.NecroBot.Logic.State
                 }
             }
 
-            machine.Fire(new WarnEvent
+            session.EventDispatcher.Send(new WarnEvent
             {
                 Message =
-                    $"Make sure Lat & Lng are right. Exit Program if not! Lat: {ctx.Client.CurrentLatitude} Lng: {ctx.Client.CurrentLongitude}"
+                    session.Translation.GetTranslation(TranslationString.WelcomeWarning, session.Client.CurrentLatitude,
+                        session.Client.CurrentLongitude),
+                RequireInput = session.LogicSettings.StartupWelcomeDelay
             });
 
-            await Task.Delay(3000);
-
-            return new FarmState();
+            return new InfoState();
         }
 
-        private static Tuple<double, double> LoadPositionFromDisk(StateMachine machine)
+        private static Tuple<double, double> LoadPositionFromDisk(ISession session)
         {
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini") &&
-                File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini").Contains(":"))
+            if (
+                File.Exists(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
+                            Path.DirectorySeparatorChar + "Coords.ini") &&
+                File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
+                                 Path.DirectorySeparatorChar + "Coords.ini").Contains(":"))
             {
-                var latlngFromFile = File.ReadAllText(Directory.GetCurrentDirectory() + "\\Configs\\Coords.ini");
+                var latlngFromFile =
+                    File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
+                                     Path.DirectorySeparatorChar + "Coords.ini");
                 var latlng = latlngFromFile.Split(':');
                 if (latlng[0].Length != 0 && latlng[1].Length != 0)
                 {
@@ -80,17 +87,17 @@ namespace PoGo.NecroBot.Logic.State
                         {
                             return new Tuple<double, double>(latitude, longitude);
                         }
-                        machine.Fire(new WarnEvent
+                        session.EventDispatcher.Send(new WarnEvent
                         {
-                            Message = "Coordinates in \"Coords.ini\" file are invalid, using the default coordinates"
+                            Message = session.Translation.GetTranslation(TranslationString.CoordinatesAreInvalid)
                         });
                         return null;
                     }
                     catch (FormatException)
                     {
-                        machine.Fire(new WarnEvent
+                        session.EventDispatcher.Send(new WarnEvent
                         {
-                            Message = "Coordinates in \"Coords.ini\" file are invalid, using the default coordinates"
+                            Message = session.Translation.GetTranslation(TranslationString.CoordinatesAreInvalid)
                         });
                         return null;
                     }
