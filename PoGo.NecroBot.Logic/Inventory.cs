@@ -317,10 +317,9 @@ namespace PoGo.NecroBot.Logic
 
         public TransferFilter GetPokemonTransferFilter(PokemonId pokemon)
         {
-            if (_logicSettings.PokemonsTransferFilter != null)
+            if (_logicSettings.PokemonsTransferFilter != null && _logicSettings.PokemonsTransferFilter.ContainsKey(pokemon))
             {
-                if (_logicSettings.PokemonsTransferFilter.ContainsKey(pokemon))
-                    return _logicSettings.PokemonsTransferFilter[pokemon];
+                return _logicSettings.PokemonsTransferFilter[pokemon];
             }
             return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinIvPercentage,
                 _logicSettings.KeepMinDuplicatePokemon);
