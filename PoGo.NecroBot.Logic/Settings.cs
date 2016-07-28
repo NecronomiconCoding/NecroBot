@@ -108,6 +108,7 @@ namespace PoGo.NecroBot.CLI
         public float EvolveAboveIvValue = 90;
         public bool EvolveAllPokemonAboveIv = true;
         public bool EvolveAllPokemonWithEnoughCandy = false;
+        public bool DumpPokemonStats = false;
         public string GpxFile = "GPXPath.GPX";
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
@@ -363,6 +364,7 @@ namespace PoGo.NecroBot.CLI
         public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
         public bool RenameAboveIv => _settings.RenameAboveIv;
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
+        public bool DumpPokemonStats => _settings.DumpPokemonStats;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;

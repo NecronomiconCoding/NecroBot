@@ -63,6 +63,7 @@ namespace PoGo.NecroBot.Logic.Logging
             _logger.Write(message, level, color);
             Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
         }
+
     }
 
     public enum LogLevel
