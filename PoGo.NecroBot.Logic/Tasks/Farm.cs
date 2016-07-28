@@ -19,7 +19,7 @@ namespace PoGo.NecroBot.Logic.Service
 
         public Farm(ISession session)
         {
-            session = _session;
+            _session = session;
         }
 
         public void Run()
