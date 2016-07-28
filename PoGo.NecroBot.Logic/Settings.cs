@@ -302,10 +302,12 @@ namespace PoGo.NecroBot.CLI
             var firstRun = !File.Exists(configFile);
 
             settings.Save(configFile);
-
-            if (firstRun) return null;
-
             settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
+
+            if (firstRun)
+            {
+                return null;
+            }
 
             return settings;
         }
