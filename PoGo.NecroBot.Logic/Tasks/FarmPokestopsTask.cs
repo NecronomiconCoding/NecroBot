@@ -130,7 +130,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Gems = fortSearch.GemsAwarded,
                             Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded),
                             Latitude = pokeStop.Latitude,
-                            Longitude = pokeStop.Longitude
+                            Longitude = pokeStop.Longitude,
+                            inventoryFull = (fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull)
                         });
 
                         break; //Continue with program as loot was succesfull.
