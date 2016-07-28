@@ -52,6 +52,8 @@ namespace PoGo.NecroBot.Logic
 
             UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
+            Pokemap.GetInstance().UpdatePosition(waypoint.Latitude, waypoint.Longitude, Pokemap.MarkerType.Character);
+
             do
             {
                 var millisecondsUntilGetUpdatePlayerLocationResponse =
