@@ -85,6 +85,7 @@ namespace PoGo.NecroBot.CLI
         public double DefaultLatitude = 40.785091;
         public double DefaultLongitude = -73.968285;
         public int DelayBetweenPokemonCatch = 2000;
+        public int DelayBetweenPlayerActions = 5000;
         public float EvolveAboveIvValue = 90;
         public bool EvolveAllPokemonAboveIv = false;
         public bool EvolveAllPokemonWithEnoughCandy = true;

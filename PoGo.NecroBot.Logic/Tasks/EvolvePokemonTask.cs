@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Inventory.Item;
 
@@ -64,7 +65,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             await session.Client.Inventory.UseItemXpBoost();
             await session.Inventory.RefreshCachedInventory();
             session.EventDispatcher.Send(new UseLuckyEggEvent {Count = luckyEgg.Count});
-            await Task.Delay(2000);
+            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
         }
     }
 }
