@@ -34,9 +34,6 @@ namespace PoGo.NecroBot.Logic
 
         private Pokemap()
         {
-            Console.WriteLine(Directory.GetCurrentDirectory());
-            Console.WriteLine("C:\\Users\\adrie\\Source\\Bot\\NecroBot\\PoGo.NecroBot.Logic\\Images");
-
             this.markerPath.Add(MarkerType.Character, "..\\..\\..\\PoGo.NecroBot.Logic\\Images\\pokemon.gif");
             this.markerPath.Add(MarkerType.Pokeball, "..\\..\\..\\PoGo.NecroBot.Logic\\Images\\pokeball.png");
 
