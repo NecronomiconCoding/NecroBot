@@ -182,7 +182,7 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(SnipeScanEvent evt, ISession session)
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScan, evt.Pokemon, $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
+            Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScan, $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
         }
 
         public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession session)

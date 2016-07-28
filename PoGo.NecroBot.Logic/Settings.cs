@@ -247,15 +247,15 @@ namespace PoGo.NecroBot.CLI
             {PokemonId.Mew, new TransferFilter(0, 0, 10)}
         };
 
-        public List<SnipeSettings> PokemonToSnipe = new List<SnipeSettings>
+        public SnipeSettings PokemonToSnipe = new SnipeSettings
         {
-            new SnipeSettings
+            Locations = new List<Location>
             {
-                Locations = new List<Location>
-                {
-                    new Location(38.55680748646112, -121.2383794784546)
-                },
-                Pokemon = PokemonId.Dratini.ToString()
+                new Location(38.55680748646112, -121.2383794784546)
+            },
+            Pokemon = new List<string>()
+            {
+                PokemonId.Dratini.ToString()
             }
         };
 
@@ -495,6 +495,6 @@ namespace PoGo.NecroBot.CLI
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
-        public ICollection<SnipeSettings> PokemonToSnipe => _settings.PokemonToSnipe;
+        public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
     }
 }

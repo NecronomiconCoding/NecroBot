@@ -58,109 +58,105 @@ namespace PoGo.NecroBot.Logic.Tasks
                 TimeSpan t = (DateTime.Now.ToUniversalTime() - st);
                 var currentTimestamp = t.TotalMilliseconds;
 
-                foreach (var snipeSettings in session.LogicSettings.PokemonToSnipe)
+                foreach (var location in session.LogicSettings.PokemonToSnipe.Locations)
                 {
-                    var pokemonName = snipeSettings.Pokemon;
-                    PokemonId pokemonId = Enum.Parse(typeof(PokemonId), pokemonName) as PokemonId? ??
-                                          PokemonId.Missingno;
+                    session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = location });
 
-                    foreach (var location in snipeSettings.Locations)
+                    var scanResult = SnipeScanForPokemon(location);
+
+                    var pokemonIds =
+                        session.LogicSettings.PokemonToSnipe.Pokemon.Select(
+                            q => Enum.Parse(typeof(PokemonId), q) as PokemonId? ?? PokemonId.Missingno).Select(q => (int)q);
+
+
+                    var locationsToSnipe = scanResult.pokemon.Where(q =>
+                        pokemonIds.Contains(q.pokemonId)
+                        && !locsVisited.Contains(q)
+                        && q.expiration_time < currentTimestamp
+                        && q.is_alive).ToList();
+
+                    if (locationsToSnipe.Any())
                     {
-                        session.EventDispatcher.Send(new SnipeScanEvent()
+                        foreach (var pokemonLocation in locationsToSnipe)
                         {
-                            Bounds = location,
-                            Pokemon = pokemonName
-                        });
+                            locsVisited.Add(pokemonLocation);
 
-                        var scanResult = SnipeScanForPokemon(location);
+                            var currentLatitude = session.Client.CurrentLatitude;
+                            var currentLongitude = session.Client.CurrentLongitude;
 
-                        var locationsToSnipe = scanResult.pokemon.Where(q =>
-                            q.pokemonId == (int)pokemonId
-                            && !locsVisited.Contains(q)
-                            && q.expiration_time < currentTimestamp
-                            && q.is_alive).ToList();
+                            await
+                                session.Client.Player.UpdatePlayerLocation(pokemonLocation.latitude,
+                                    pokemonLocation.longitude, session.Client.CurrentAltitude);
 
-                        if (locationsToSnipe.Any())
-                        {
-                            foreach (var pokemonLocation in locationsToSnipe)
+                            session.EventDispatcher.Send(new UpdatePositionEvent()
                             {
-                                locsVisited.Add(pokemonLocation);
+                                Longitude = pokemonLocation.longitude,
+                                Latitude = pokemonLocation.latitude
+                            });
 
-                                var currentLatitude = session.Client.CurrentLatitude;
-                                var currentLongitude = session.Client.CurrentLongitude;
+                            var mapObjects = session.Client.Map.GetMapObjects().Result;
+                            var catchablePokemon =
+                                mapObjects.MapCells.SelectMany(q => q.CatchablePokemons)
+                                    .Where(q => pokemonIds.Contains((int)q.PokemonId))
+                                    .ToList();
 
-                                await
-                                    session.Client.Player.UpdatePlayerLocation(pokemonLocation.latitude,
-                                        pokemonLocation.longitude, session.Client.CurrentAltitude);
+                            await session.Client.Player.UpdatePlayerLocation(currentLatitude, currentLongitude,
+                                        session.Client.CurrentAltitude);
 
-                                session.EventDispatcher.Send(new UpdatePositionEvent()
+                            foreach (var pokemon in catchablePokemon)
+                            {
+                                await session.Client.Player.UpdatePlayerLocation(pokemonLocation.latitude, pokemonLocation.longitude, session.Client.CurrentAltitude);
+
+                                var encounter = session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
+
+                                await session.Client.Player.UpdatePlayerLocation(currentLatitude, currentLongitude, session.Client.CurrentAltitude);
+
+                                if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                                 {
-                                    Longitude = pokemonLocation.longitude,
-                                    Latitude = pokemonLocation.latitude
-                                });
+                                    session.EventDispatcher.Send(new UpdatePositionEvent()
+                                    {
+                                        Latitude = currentLatitude,
+                                        Longitude = currentLongitude
+                                    });
 
-                                var mapObjects = session.Client.Map.GetMapObjects().Result;
-                                var catchablePokemon =
-                                    mapObjects.MapCells.SelectMany(q => q.CatchablePokemons)
-                                        .Where(q => q.PokemonId == pokemonId)
-                                        .ToList();
-
-                                var pokemon = catchablePokemon.FirstOrDefault();
-
-                                if (pokemon != null)
+                                    await CatchPokemonTask.Execute(session, encounter, pokemon);
+                                }
+                                else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                                 {
-                                    var encounter =
-                                        session.Client.Encounter.EncounterPokemon(pokemon.EncounterId,
-                                            pokemon.SpawnPointId).Result;
-                                    await
-                                        session.Client.Player.UpdatePlayerLocation(currentLatitude, currentLongitude,
-                                            session.Client.CurrentAltitude);
-
-                                    if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
+                                    session.EventDispatcher.Send(new WarnEvent
                                     {
-                                        session.EventDispatcher.Send(new UpdatePositionEvent()
-                                        {
-                                            Latitude = currentLatitude,
-                                            Longitude = currentLongitude
-                                        });
-
-                                        await CatchPokemonTask.Execute(session, encounter, pokemon);
-                                    }
-                                    else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
-                                    {
-                                        session.EventDispatcher.Send(new WarnEvent
-                                        {
-                                            Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferManually)
-                                        });
-                                    }
-                                    else
-                                    {
-                                        session.EventDispatcher.Send(new WarnEvent
-                                        {
-                                            Message = session.Translation.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Status)
-                                        });
-                                    }
-
-                                    if (!Equals(catchablePokemon.ElementAtOrDefault(catchablePokemon.Count() - 1), pokemon))
-                                    {
-                                        await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch);
-                                    }
+                                        Message =
+                                            session.Translation.GetTranslation(
+                                                Common.TranslationString.InvFullTransferManually)
+                                    });
                                 }
                                 else
                                 {
-                                    await session.Client.Player.UpdatePlayerLocation(currentLatitude, currentLongitude, session.Client.CurrentAltitude);
+                                    session.EventDispatcher.Send(new WarnEvent
+                                    {
+                                        Message =
+                                            session.Translation.GetTranslation(
+                                                Common.TranslationString.EncounterProblem, encounter.Status)
+                                    });
                                 }
 
-                                await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions);
+                                if (
+                                    !Equals(catchablePokemon.ElementAtOrDefault(catchablePokemon.Count() - 1),
+                                        pokemon))
+                                {
+                                    await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch);
+                                }
                             }
+
+                            await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions);
                         }
-                        else
+                    }
+                    else
+                    {
+                        session.EventDispatcher.Send(new NoticeEvent()
                         {
-                            session.EventDispatcher.Send(new NoticeEvent()
-                            {
-                                Message = session.Translation.GetTranslation(Common.TranslationString.NoPokemonToSnipe)
-                            });
-                        }
+                            Message = session.Translation.GetTranslation(Common.TranslationString.NoPokemonToSnipe)
+                        });
                     }
                 }
             }
@@ -191,6 +187,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                 };
             }
             return scanResult;
-        } 
+        }
     }
 }

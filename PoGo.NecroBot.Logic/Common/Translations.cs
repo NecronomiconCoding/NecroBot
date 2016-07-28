@@ -233,7 +233,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.GoogleError, "Make sure you have entered the right Email & Password."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsGoogle, "You need to fill out GoogleUsername and GooglePassword in auth.json!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsPtc, "You need to fill out PtcUsername and PtcPassword in auth.json!"),
-            new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScan, "[Sniper] Scanning for {0} at {1}..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScan, "[Sniper] Scanning for Snipeable Pokemon at {0}..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.NoPokemonToSnipe, "[Sniper] No Pokemon found to snipe!"),
         };
 
