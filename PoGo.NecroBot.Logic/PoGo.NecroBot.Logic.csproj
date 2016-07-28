@@ -82,6 +82,7 @@
     <Compile Include="PoGoUtils\PokemonInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BotService.cs" />
+    <Compile Include="State\PauseState.cs" />
     <Compile Include="Tasks\Farm.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="State\Session.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Tasks\FarmPokestopsGPXTask.cs" />
     <Compile Include="Tasks\FarmPokestopsTask.cs" />
     <Compile Include="Tasks\Login.cs" />
+    <Compile Include="Tasks\PauseTask.cs" />
     <Compile Include="Tasks\RecycleItemsTask.cs" />
     <Compile Include="Tasks\RenamePokemonTask.cs" />
     <Compile Include="Tasks\TransferDuplicatePokemonTask.cs" />

@@ -60,7 +60,7 @@ namespace PoGo.NecroBot.Logic.State
                         session.Client.CurrentLongitude)
             });
 
-            return new InfoState();
+            return new PauseState();
         }
 
         private static Tuple<double, double> LoadPositionFromDisk(ISession session)

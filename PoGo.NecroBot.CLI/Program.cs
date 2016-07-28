@@ -97,8 +97,8 @@ namespace PoGo.NecroBot.CLI
             };
 
             machine.AsyncStart(new VersionCheckState(), session);
-
-            Console.ReadLine();
+            
+            while (Console.ReadKey().Key != ConsoleKey.Q) { }
         }
     }
 }
