@@ -39,7 +39,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 await session.Client.Inventory.TransferPokemon(duplicatePokemon.Id);
                 await session.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
 
-                await Randomizer.Sleep(2500);
+                await Randomizer.Sleep(2500, 0.3);
+
                 var bestPokemonOfType = (session.LogicSettings.PrioritizeIvOverCp
                     ? await session.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon)
                     : await session.Inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon)) ?? duplicatePokemon;

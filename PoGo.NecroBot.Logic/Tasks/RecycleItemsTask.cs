@@ -16,8 +16,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public static async Task Execute(ISession session)
         {
-            var limit = Randomizer.GetNamed($"{nameof(RecycleItemsTask)}_limit", 5, 10, 300);
-            if (_lastRecycleTime.AddMinutes(limit).Ticks > DateTime.Now.Ticks)
+            // only recycle once in 5..10 minutes (reconsider this decision after 8 minutes)
+            var limit = Randomizer.GetNamed($"{nameof(RecycleItemsTask)}_limit", 5 * 60, 10 * 60, 8 * 60);
+            if (_lastRecycleTime.AddSeconds(limit).Ticks > DateTime.Now.Ticks)
                 return;
 
             var items = await session.Inventory.GetItemsToRecycle(session.Settings);

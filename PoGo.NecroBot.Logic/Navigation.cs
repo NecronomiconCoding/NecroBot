@@ -44,6 +44,7 @@ namespace PoGo.NecroBot.Logic
 
         private async Task RestIfNecessary()
         {
+            // rest in 15..45 minutes (reconsider this decision after 30 minutes)
             var limit = Randomizer.GetNamed($"{nameof(RestIfNecessary)}", 15 * 60, 45 * 60, 30 * 60);
             if (_lastRest.AddSeconds(limit) < DateTime.Now)
             {
@@ -57,6 +58,7 @@ namespace PoGo.NecroBot.Logic
 
         private async Task ShortStopIfNecessary()
         {
+            // take a short stop in 2..5 minutes (reconsider this decision after 3 minutes)
             var limit = Randomizer.GetNamed($"{nameof(ShortStopIfNecessary)}", 2 * 60, 5 * 60, 3 * 60);
             if (_lastShortStop.AddSeconds(limit) < DateTime.Now)
             {
@@ -141,8 +143,8 @@ namespace PoGo.NecroBot.Logic
                 if (functionExecutedWhileWalking != null)
                     await functionExecutedWhileWalking(); // look for pokemon
 
-                await Randomizer.Sleep(Math.Min((int)(distanceToTarget / speedInMetersPerSecond * 1000), 3400), 0.1);
-                //await Randomizer.Sleep(500); // this is wrong because we should not send too many position updates to the server
+                //await Task.Delay(500); // this is wrong because we should not send too many position updates to the server
+                await Randomizer.Sleep(3400, 0.2);
 
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
@@ -215,8 +217,8 @@ namespace PoGo.NecroBot.Logic
                 if (functionExecutedWhileWalking != null)
                     await functionExecutedWhileWalking(); // look for pokemon & hit stops
 
-                await Randomizer.Sleep(Math.Min((int)(distanceToTarget / speedInMetersPerSecond * 1000), 3400), 0.1);
-                //await Randomizer.Sleep(500); // this is wrong because we should not send too many position updates to the server
+                //await Task.Delay(500); // this is wrong because we should not send too many position updates to the server
+                await Randomizer.Sleep(3400, 0.2);
 
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 

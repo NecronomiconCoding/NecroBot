@@ -55,6 +55,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     await UseBerry(session, encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
                         encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData?.Id);
+
+                    await Randomizer.Sleep(1500, 0.3);
                 }
 
                 var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
@@ -62,7 +64,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                     encounter is EncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
                     encounter is EncounterResponse ? pokemon.Longitude : currentFortData.Longitude);
 
-                var hit = Randomizer.GetNext(1, 100) <= 80;
+                // todo: add hitPokemon parameter to CatchPokemon method
+                // todo: add parameters in config file to allow the randomization of the throws
+                var hit = true; //Randomizer.GetNext(1, 100) <= 80;
                 caughtPokemonResponse =
                     await session.Client.Encounter.CatchPokemon(
                         encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
@@ -200,8 +204,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
             session.EventDispatcher.Send(new UseBerryEvent {Count = berry.Count});
-
-            await Randomizer.Sleep(1800, 0.2);
         }
     }
 }
