@@ -195,7 +195,7 @@ namespace PoGo.NecroBot.CLI
             //12 candies
             PokemonId.Caterpie,
             PokemonId.Weedle,
-            PokemonId.Pidgey
+            PokemonId.Pidgey,
             //25 candies
             PokemonId.Rattata,
             //PokemonId.NidoranFemale,
@@ -212,13 +212,13 @@ namespace PoGo.NecroBot.CLI
             //50 candies
             PokemonId.Spearow,
             PokemonId.Zubat,
-            PokemonId.Doduo
-            PokemonId.Goldeen
-            PokemonId.Paras
-            PokemonId.Ekans
-            PokemonId.Staryu
-            PokemonId.Psyduck
-            PokemonId.Krabby
+            PokemonId.Doduo,
+            PokemonId.Goldeen,
+            PokemonId.Paras,
+            PokemonId.Ekans,
+            PokemonId.Staryu,
+            PokemonId.Psyduck,
+            PokemonId.Krabby,
             PokemonId.Venonat
         };
 
