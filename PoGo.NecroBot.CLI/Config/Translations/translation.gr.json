@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,19 +22,25 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Έχεις ξεφύγει απο την ορισμένη εμβέλεια! Περπατάω για να ξεκινήσω ({0}m μακρυά) σε 5 δευτερόλεπτα. Έχεις ρυθμίσει το αρχείο Coords.ini σωστά;"
+      "Value":
+        "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your Coords.ini file correct?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Δεν βρεθηκαν λειτουργικά PokeStops στην περιοχή σου. Μήπως εχεις ορίσει την μέγιστη εμβέλεια πολυ χαμήλα;"
+      "Value":
+        "Δεν βρεθηκαν λειτουργικά PokeStops στην περιοχή σου. Μήπως εχεις ορίσει την μέγιστη εμβέλεια πολυ χαμήλα;"
     },
     {
       "Key": "eventFortUsed",
       "Value": "XP: {0}, Πετράδια: {1}, Αντικείμενα: {2}"
     },
     {
+      "Key": "eventFortFailed",
+      "Αποτυχία χρήσης Pokestop, υπαρχει πιθανότητα softban. Unban σε: {0}/{1}"
+    },
+    {
       "Key": "eventFortTargeted",
-      "Value": "{0} in ({1}m)"
+      "Value": "{0} σε απόσταση ({1}μέτρων)"
     },
     {
       "Key": "eventProfileLogin",
@@ -42,7 +48,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "χρησιμοποιήθηκε Lucky Egg, απομένουν: {0}"
+      "Value": "χρησιμοποιήθηκε ένα Lucky Egg, απομένουν: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -50,7 +56,7 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Απέτυχε {0}. Το αποτέλεσμα ήταν {1}, που σταμάτησε την εξέλιξη {2}"
+      "Value": "Η εξέλιξη απέτυχε {0}. Ως αποτέλεσμα {1}, δεν εξελίχθηκε {2}"
     },
     {
       "Key": "eventPokemonTransferred",
@@ -62,7 +68,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Πιθανότητα Επιτυχίας: {7}% | {8}m απόσταση | με {9} ({10} απομένουν). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Πιθανότητα Πιασίματος: {7}% | {8}m απόσταση | με {9} ({10} απομένουν). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -80,5 +87,45 @@
       "Key": "candies",
       "Value": "Candies: {0}"
     }
-  ]
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Αδιάβαστα δεδομένα στο αρχείο GPX, απόπειρα παραλειψής."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "τέλεια"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "όνομα"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "ΕμφάνισηΜεγαλύτερουCP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "ΕμφάνισηΜεγαλύτερουΤέλειου"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Βεβαιώσου οτι οι συντεταγμένες ειναι σωστές. Αλλιώς κλείσε το πρόγραμμα Γ.Πλάτος: {0} Γ.Μήκος: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Ένα αυγό μπαίνει στο εκκολαπτήριο: {0:0.00}km απομένουν"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Ενημέρωστη κατάστασης εκκολαπτήριου: {0:0.00}km απομένουν"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Το εκκολαπτήριο	εκκόλαψε ενα αυγό: {0}"
+    }
+	]
 }
