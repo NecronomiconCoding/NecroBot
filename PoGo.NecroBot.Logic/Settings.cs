@@ -301,6 +301,11 @@ namespace PoGo.NecroBot.CLI
                 settings.PokemonToSnipe = Default.PokemonToSnipe;
             }
 
+            if(settings.RenameTemplate == null)
+            {
+                settings.RenameTemplate = Default.RenameTemplate;
+            }
+
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
