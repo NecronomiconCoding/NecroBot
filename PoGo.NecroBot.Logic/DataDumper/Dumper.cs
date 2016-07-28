@@ -19,7 +19,7 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// </summary>
         /// <param name="data">Dumps the string data to the file</param>
         /// <param name="filename">Filename to be used for naming the file.</param>
-        private static void DumpToFile(Context ctx, string data, string filename)
+        private static void DumpToFile(Session ctx, string data, string filename)
         {
             string path = Path.Combine(ctx.LogicSettings.ProfilePath,"Dumps",$"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
 
@@ -47,7 +47,7 @@ namespace PoGo.NecroBot.Logic.DataDumper
         ///     Clears the specified dumpfile.
         /// </summary>
         /// <param name="filename">File to clear/param>
-        public static void ClearDumpFile(Context ctx, string filename)
+        public static void ClearDumpFile(Session ctx, string filename)
         {
             string path = Path.Combine(ctx.LogicSettings.ProfilePath,"Dumps",$"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
             // Clears all contents of a file first if overwrite is true
@@ -59,7 +59,7 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// </summary>
         /// <param name="data">Dumps the string data to the file</param>
         /// <param name="filename">Filename to be used for naming the file.</param>
-        public static void Dump(Context ctx, string data, string filename)
+        public static void Dump(Session ctx, string data, string filename)
         {
             string uniqueFileName = $"{filename}";
 
