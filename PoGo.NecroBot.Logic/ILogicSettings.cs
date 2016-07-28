@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System;
 using System.Collections.Generic;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
@@ -62,5 +63,7 @@ namespace PoGo.NecroBot.Logic
         ICollection<PokemonId> PokemonsNotToCatch { get; }
 
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
+
+        int StartupWelcomeDelay { get; }
     }
 }

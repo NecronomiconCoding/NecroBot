@@ -22,6 +22,7 @@ namespace PoGo.NecroBot.Logic.Utils
         private readonly DateTime _initSessionDateTime = DateTime.Now;
 
         private object[] _currentLevelInfos;
+        private object[] _pokemonCountStats;
         private string _playerName;
         public int TotalExperience;
         public int TotalItemsRemoved;
@@ -31,6 +32,13 @@ namespace PoGo.NecroBot.Logic.Utils
 
         public void Dirty(Inventory inventory)
         {
+            var stats = inventory.GetPlayerStats().Result;
+            var stat = stats.FirstOrDefault();
+            _pokemonCountStats = new object[] 
+            {
+                stat.PokemonsCaptured,
+                146 //TODO max avaiable pokemons, do we have var for this?
+            };
             _currentLevelInfos = GetCurrentInfo(inventory);
             DirtyEvent?.Invoke();
         }
@@ -66,7 +74,7 @@ namespace PoGo.NecroBot.Logic.Utils
                     hours,
                     minutes,
                     stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level),
-                    stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)
+                    stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level),
                 };
             }
             return output;
@@ -75,7 +83,8 @@ namespace PoGo.NecroBot.Logic.Utils
         public string GetTemplatedStats(string template, string xpTemplate)
         {
             var xpStats = string.Format(xpTemplate, _currentLevelInfos);
-            return string.Format(template, _playerName, FormatRuntime(), xpStats, TotalExperience / GetRuntime(), TotalPokemons / GetRuntime(), TotalStardust, TotalPokemonsTransfered, TotalItemsRemoved);
+            return string.Format(template, _playerName, FormatRuntime(), xpStats, TotalExperience / GetRuntime(), TotalPokemons / GetRuntime(), 
+                TotalStardust, TotalPokemonsTransfered, TotalItemsRemoved, _pokemonCountStats[0], _pokemonCountStats[1]);
         }
 
         public double GetRuntime()
