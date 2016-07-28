@@ -23,8 +23,8 @@ namespace PoGo.NecroBot.CLI
         [JsonIgnore] private string _filePath;
 
         public string GoogleRefreshToken;
-        public string PtcPassword;
         public string PtcUsername;
+        public string PtcPassword;
 
         public void Load(string path)
         {
