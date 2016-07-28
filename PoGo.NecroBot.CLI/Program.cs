@@ -32,12 +32,11 @@ namespace PoGo.NecroBot.CLI
 
             if (settings == null)
             {
-                Logger.Write("This is your first start and the bot will use the default config!", LogLevel.Warning);
-                Logger.Write("Continue? (y/n)", LogLevel.Warning);
-
-                if (!Console.ReadLine().ToUpper().Equals("Y"))
-                    return;
-                settings = GlobalSettings.Load(subPath);
+                Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
+                Logger.Write("We will now shutdown to let you configure the bot and then launch it again.", LogLevel.Warning);
+                Logger.Write("Press Enter to continue...");
+                Console.ReadLine();
+                return;
             }
 
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
