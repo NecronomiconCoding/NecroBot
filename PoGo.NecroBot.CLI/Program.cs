@@ -32,11 +32,12 @@ namespace PoGo.NecroBot.CLI
 
             if (settings == null)
             {
-                Logger.Write("This is your first start and the bot will use the default config!", LogLevel.Warning);
-                Logger.Write("Continue? (y/n)", LogLevel.Warning);
+                Logger.Write("First start conditions detected! A default config.json has been generated for you.", LogLevel.Warning);
+                Logger.Write("This warning will not appear again. Continue with default settings? (y/n)", LogLevel.Warning);
 
                 if (!Console.ReadLine().ToUpper().Equals("Y"))
                     return;
+
                 settings = GlobalSettings.Load(subPath);
             }
 

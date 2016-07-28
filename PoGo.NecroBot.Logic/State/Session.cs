@@ -30,7 +30,7 @@ namespace PoGo.NecroBot.Logic.State
             Settings = settings;
             LogicSettings = logicSettings;
             EventDispatcher = new EventDispatcher();
-            Translations = Translations.Load(logicSettings.TranslationLanguageCode);
+            Translations = Translations.Load(logicSettings);
             Reset(settings, LogicSettings);
         }
 

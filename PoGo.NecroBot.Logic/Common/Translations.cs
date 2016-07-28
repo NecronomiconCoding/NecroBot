@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
@@ -12,9 +13,6 @@ namespace PoGo.NecroBot.Logic.Common
 {
     public class Translations
     {
-        public static string ProfilePath;
-        public static string ConfigPath;
-
         //Default Translations (ENGLISH)
         public List<KeyValuePair<TranslationString, string>> TranslationStrings = new List
             <KeyValuePair<TranslationString, string>>
@@ -138,12 +136,11 @@ namespace PoGo.NecroBot.Logic.Common
             return translation != default(string) ? translation : $"Translation for {translationString} is missing";
         }
 
-        public static Translations Load(string translationsLanguageCode)
+        public static Translations Load(ILogicSettings logicSettings)
         {
-            ProfilePath = Directory.GetCurrentDirectory();
-            ConfigPath = Path.Combine(ProfilePath, "config", "translations");
-
-            var fullPath = Path.Combine(ConfigPath, "translation." + translationsLanguageCode + ".json");
+            string translationsLanguageCode = logicSettings.TranslationLanguageCode;
+            var translationPath = Path.Combine(logicSettings.GeneralConfigPath, "translations");
+            var fullPath = Path.Combine(translationPath, "translation." + translationsLanguageCode + ".json");
 
             Translations translations;
             if (File.Exists(fullPath))
@@ -161,7 +158,7 @@ namespace PoGo.NecroBot.Logic.Common
             else
             {
                 translations = new Translations();
-                translations.Save(Path.Combine(ConfigPath, "translation.en.json"));
+                translations.Save(Path.Combine(translationPath, "translation.en.json"));
             }
             return translations;
         }

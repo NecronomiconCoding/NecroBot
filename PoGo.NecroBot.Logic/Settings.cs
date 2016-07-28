@@ -99,8 +99,11 @@ namespace PoGo.NecroBot.CLI
 
         [JsonIgnore] internal AuthSettings Auth = new AuthSettings();
 
+        [JsonIgnore] public string ProfilePath;
+        [JsonIgnore] public string ProfileConfigPath;
+        [JsonIgnore] public string GeneralConfigPath;
+
         public bool AutoUpdate = true;
-        public string ConfigPath;
         public double DefaultAltitude = 10;
         public double DefaultLatitude = 40.785091;
         public double DefaultLongitude = -73.968285;
@@ -232,7 +235,6 @@ namespace PoGo.NecroBot.CLI
         };
 
         public bool PrioritizeIvOverCp = false;
-        public string ProfilePath;
         public bool RenameAboveIv = false;
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
@@ -249,13 +251,13 @@ namespace PoGo.NecroBot.CLI
         {
             GlobalSettings settings;
             var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
-            var configPath = Path.Combine(profilePath, "config");
-            var fullPath = Path.Combine(configPath, "config.json");
+            var profileConfigPath = Path.Combine(profilePath, "config");
+            var configFile = Path.Combine(profileConfigPath, "config.json");
 
-            if (File.Exists(fullPath))
+            if (File.Exists(configFile))
             {
                 //if the file exists, load the settings
-                var input = File.ReadAllText(fullPath);
+                var input = File.ReadAllText(configFile);
 
                 var jsonSettings = new JsonSerializerSettings();
                 jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
@@ -274,16 +276,18 @@ namespace PoGo.NecroBot.CLI
                 settings.WebSocketPort = 14251;
             }
             settings.ProfilePath = profilePath;
-            settings.ConfigPath = configPath;
 
-            if (!File.Exists(fullPath))
-            {
-                settings.Save(fullPath);
-                return null;
-            }
-            
+            settings.ProfileConfigPath = profileConfigPath;
+            settings.GeneralConfigPath = Directory.GetCurrentDirectory();
 
-            settings.Auth.Load(Path.Combine(configPath, "auth.json"));
+
+            var firstRun = !File.Exists(configFile);
+
+            settings.Save(configFile);
+
+            if (firstRun) return null;
+
+            settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
 
             return settings;
         }
@@ -342,7 +346,8 @@ namespace PoGo.NecroBot.CLI
         }
 
         public string ProfilePath => _settings.ProfilePath;
-        public string ConfigPath => _settings.ConfigPath;
+        public string ProfileConfigPath => _settings.ProfileConfigPath;
+        public string GeneralConfigPath => _settings.GeneralConfigPath;
         public bool AutoUpdate => _settings.AutoUpdate;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
