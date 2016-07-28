@@ -67,7 +67,7 @@
         "Value": "Viga {0}'ga. Tulemus: {1}, lõpetan evolve'imise: {2}"
     }, {
         "Key": "eventPokemonTransferred",
-        "Value": "{0}\t- CP: {1}  IV: {2}%   [Parim CP: {3}  IV: {4}%] (Candy't: {5})"
+        "Value": "{0}\t- CP: {1}  IV: {2}% [Parim CP: {3}  IV: {4}%] (Candy't: {5})"
     }, {
         "Key": "eventItemRecycled",
         "Value": "{0}x {1}"
