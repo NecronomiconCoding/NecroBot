@@ -90,7 +90,6 @@ namespace PoGo.NecroBot.Logic
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }
         string ProfilePath { get; }
-        string ConfigPath { get; }
         string ProfileConfigPath { get; }
         string GeneralConfigPath { get; }
         bool SnipeAtPokestops { get; }
