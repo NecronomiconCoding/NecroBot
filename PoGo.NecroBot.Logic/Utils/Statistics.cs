@@ -33,6 +33,7 @@ namespace PoGo.NecroBot.Logic.Utils
         {
             _exportStats = GetCurrentInfo(inventory);
             DirtyEvent?.Invoke();
+            inventory.ExportPokemonToCSV($"PokeList_{_playerName}.csv", ToString());
         }
 
         public event StatisticsDirtyDelegate DirtyEvent;

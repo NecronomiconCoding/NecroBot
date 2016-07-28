@@ -1,6 +1,7 @@
 #region using directives
 
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -339,6 +340,66 @@ namespace PoGo.NecroBot.Logic
             finally
             {
                 ss.Release();
+            }
+        }
+
+        public async Task ExportPokemonToCSV(string filename = "PokeList.csv", string stats = "")
+        {
+            string export_path = Path.Combine(Directory.GetCurrentDirectory(), "Export");
+            //if (player == null)
+            // return;
+            var _stats = await GetPlayerStats();
+            var stat = _stats.FirstOrDefault();
+            if (stat == null)
+                return;
+
+            if (!Directory.Exists(export_path))
+                Directory.CreateDirectory(export_path);
+            if (Directory.Exists(export_path))
+            {
+                try
+                {
+                    string pokelist_file = Path.Combine(export_path, filename);
+                    if (File.Exists(pokelist_file))
+                        File.Delete(pokelist_file);
+                    string ls = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
+                    File.WriteAllText(pokelist_file, $"{stats.Replace(",", $"{ls}")}");
+                    string header = "PokemonID,Name,NickName,CP,MaxCP,Perfection,Attack 1,Attack 2,HP,Attk,Def,Stamina,Familie Candies";
+                    using (var f = File.AppendText(pokelist_file))
+                    {
+                        f.WriteLine("");
+                        f.WriteLine($"{ $"{header.Replace(",", $"{ls}")}"}");
+                    }
+                    var AllPokemon = await GetPokemons();
+                    AllPokemon = AllPokemon.Where(p => p.DeployedFortId == string.Empty).OrderByDescending(p => p.PokemonId);
+                    var myPokemonSettings = await GetPokemonSettings();
+                    var pokemonSettings = myPokemonSettings.ToList();
+                    var myPokemonFamilies = await GetPokemonFamilies();
+                    var pokemonFamilies = myPokemonFamilies.ToArray();
+ 
+                    using (var w = File.AppendText(pokelist_file))
+                    {
+                        w.WriteLine("");
+                        foreach (var pokemon in AllPokemon)
+                        {
+                            var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
+                            var familiecandies = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId).Candy;
+                            string perfection = $"{ PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00") }%";
+                            perfection = perfection.Replace(",", ls == "," ? "." : ",");
+                            string content_part1 = $"{(int)pokemon.PokemonId},{pokemon.PokemonId},{pokemon.Nickname},{pokemon.Cp},{PokemonInfo.CalculateMaxCp(pokemon).ToString().PadLeft(4, ' ')},";
+                            string content_part2 = $",{pokemon.Move1},{pokemon.Move2},{pokemon.Stamina},{pokemon.IndividualAttack},{pokemon.IndividualDefense},{pokemon.IndividualStamina},{familiecandies}";
+                            string content = $"{content_part1.Replace(",", $"{ls}")}{perfection}{content_part2.Replace(",", $"{ls}")}";
+                            w.WriteLine($"{content}");
+
+                        }
+                        w.Close();
+                    }
+
+                }
+                catch
+                {
+
+                }
             }
         }
     }
