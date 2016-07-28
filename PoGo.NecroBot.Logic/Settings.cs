@@ -76,9 +76,11 @@ namespace PoGo.NecroBot.CLI
         public int AmountOfPokemonToDisplayOnStart = 10;
 
         [JsonIgnore] internal AuthSettings Auth = new AuthSettings();
+        [JsonIgnore] public string ProfilePath;
+        [JsonIgnore] public string ProfileConfigPath;
+        [JsonIgnore] public string GeneralConfigPath;
 
         public bool AutoUpdate = true;
-        public string ConfigPath;
         public double DefaultAltitude = 10;
         public double DefaultLatitude = 40.785091;
         public double DefaultLongitude = -73.968285;
@@ -86,8 +88,25 @@ namespace PoGo.NecroBot.CLI
         public float EvolveAboveIvValue = 90;
         public bool EvolveAllPokemonAboveIv = false;
         public bool EvolveAllPokemonWithEnoughCandy = true;
+        public int UseLuckyEggsMinPokemonAmount = 30;
+        public bool UseLuckyEggsWhileEvolving = false;
+        public bool UseEggIncubators = true;
         public bool DumpPokemonStats = false;
         public string GpxFile = "GPXPath.GPX";
+        public bool UseGpxPathing = false;
+        public double WalkingSpeedInKilometerPerHour = 15.0;
+        public int MaxTravelDistanceInMeters = 1000;
+        public int KeepMinCp = 1250;
+        public int KeepMinDuplicatePokemon = 1;
+        public float KeepMinIvPercentage = 95;
+        public bool KeepPokemonsThatCanEvolve = false;
+        public bool PrioritizeIvOverCp = true;
+        public bool RenameAboveIv = true;
+        public bool TransferDuplicatePokemon = true;
+        public string TranslationLanguageCode = "en";
+        public bool UsePokemonToNotCatchFilter = false;
+        public int WebSocketPort = 14251;
+        public bool StartupWelcomeDelay = true;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -123,14 +142,9 @@ namespace PoGo.NecroBot.CLI
             new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
         };
 
-        public int KeepMinCp = 1250;
-        public int KeepMinDuplicatePokemon = 1;
-        public float KeepMinIvPercentage = 95;
-        public bool KeepPokemonsThatCanEvolve = false;
-        public int MaxTravelDistanceInMeters = 1000;
-
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
+            PokemonId.Aerodactyl,
             PokemonId.Venusaur,
             PokemonId.Charizard,
             PokemonId.Blastoise,
@@ -225,33 +239,19 @@ namespace PoGo.NecroBot.CLI
             {PokemonId.Gyarados, new TransferFilter(1200, 90, 5)},
             {PokemonId.Mew, new TransferFilter(0, 0, 10)}
         };
-
-        public bool PrioritizeIvOverCp = true;
-        public string ProfilePath;
-        public bool RenameAboveIv = true;
-        public bool TransferDuplicatePokemon = true;
-        public string TranslationLanguageCode = "en";
-        public bool UseEggIncubators = true;
-        public bool UseGpxPathing = false;
-        public int UseLuckyEggsMinPokemonAmount = 30;
-        public bool UseLuckyEggsWhileEvolving = false;
-        public bool UsePokemonToNotCatchFilter = false;
-        public double WalkingSpeedInKilometerPerHour = 15.0;
-        public int WebSocketPort = 14251;
         public static GlobalSettings Default => new GlobalSettings();
-        public bool StartupWelcomeDelay = true;
 
         public static GlobalSettings Load(string path)
         {
             GlobalSettings settings;
             var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
-            var configPath = Path.Combine(profilePath, "config");
-            var fullPath = Path.Combine(configPath, "config.json");
+            var profileConfigPath = Path.Combine(profilePath, "config");
+            var configFile = Path.Combine(profileConfigPath, "config.json");
 
-            if (File.Exists(fullPath))
+            if (File.Exists(configFile))
             {
                 //if the file exists, load the settings
-                var input = File.ReadAllText(fullPath);
+                var input = File.ReadAllText(configFile);
 
                 var jsonSettings = new JsonSerializerSettings();
                 jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
@@ -271,17 +271,16 @@ namespace PoGo.NecroBot.CLI
             }
 
             settings.ProfilePath = profilePath;
-            settings.ConfigPath = configPath;
+            settings.ProfileConfigPath = profileConfigPath;
+            settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
 
-            if (!File.Exists(fullPath))
-            {
-                settings.Save(fullPath);
-                return null;
-            }
+            var firstRun = !File.Exists(configFile);
 
-            settings.Save(fullPath);
+            settings.Save(configFile);
 
-            settings.Auth.Load(Path.Combine(configPath, "auth.json"));
+            if (firstRun) return null;
+
+            settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
 
             return settings;
         }
@@ -438,7 +437,8 @@ namespace PoGo.NecroBot.CLI
         }
 
         public string ProfilePath => _settings.ProfilePath;
-        public string ConfigPath => _settings.ConfigPath;
+        public string ProfileConfigPath => _settings.ProfileConfigPath;
+        public string GeneralConfigPath => _settings.GeneralConfigPath;
         public bool AutoUpdate => _settings.AutoUpdate;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
