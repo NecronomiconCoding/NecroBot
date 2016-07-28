@@ -2,7 +2,10 @@
 {
     public class WarnEvent : IEvent
     {
-        public bool CanBeDelayed;
+        /// <summary>
+        /// This event requires handler to perform input 
+        /// </summary>
+        public bool RequireInput;
         public string Message = "";
 
         public override string ToString()

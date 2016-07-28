@@ -336,7 +336,7 @@
       "Value": "{0} (след. ур. через {1}ч {2}м | {3}/{4} XP)"
     },
     {
-      "Key": "welcomeDelayText",
+      "Key": "requireInputText",
       "Value": "Нажмите любую кнопку для продолжения..."
     }
 

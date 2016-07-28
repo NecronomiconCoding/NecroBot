@@ -35,9 +35,9 @@ namespace PoGo.NecroBot.CLI
         {
             Logger.Write(evt.ToString(), LogLevel.Warning);
 
-            if (evt.CanBeDelayed && session.LogicSettings.StartupWelcomeDelay)
+            if (evt.RequireInput)
             {
-                Logger.Write(session.Translations.GetTranslation(TranslationString.WelcomeDelayText));
+                Logger.Write(session.Translations.GetTranslation(TranslationString.RequireInputText));
                 Console.ReadKey();
             }
 
