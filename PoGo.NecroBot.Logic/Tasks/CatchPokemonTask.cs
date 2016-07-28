@@ -18,7 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchPokemonTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine, dynamic encounter, MapPokemon pokemon,
+        public static async Task Execute(ISession session, dynamic encounter, MapPokemon pokemon,
             FortData currentFortData = null, ulong encounterId = 0)
         {
             CatchPokemonResponse caughtPokemonResponse;
@@ -27,10 +27,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 float probability = encounter?.CaptureProbability?.CaptureProbability_[0];
 
-                var pokeball = await GetBestBall(ctx, encounter, probability);
+                var pokeball = await GetBestBall(session, encounter, probability);
                 if (pokeball == ItemId.ItemUnknown)
                 {
-                    machine.Fire(new NoPokeballEvent
+                    session.EventDispatcher.Send(new NoPokeballEvent
                     {
                         Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId,
                         Cp =
@@ -49,22 +49,22 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var isHighPerfection =
                     PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
                         ? encounter.WildPokemon?.PokemonData
-                        : encounter?.PokemonData) >= ctx.LogicSettings.KeepMinIvPercentage;
+                        : encounter?.PokemonData) >= session.LogicSettings.KeepMinIvPercentage;
 
                 if ((isLowProbability && isHighCp) || isHighPerfection)
                 {
-                    await UseBerry(ctx, machine, encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
+                    await UseBerry(session, encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
                         encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData?.Id);
                 }
 
-                var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
-                    ctx.Client.CurrentLongitude,
+                var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                    session.Client.CurrentLongitude,
                     encounter is EncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
                     encounter is EncounterResponse ? pokemon.Longitude : currentFortData.Longitude);
 
                 var hit = Randomizer.GetNext(1, 100) <= 80;
                 caughtPokemonResponse =
-                    await ctx.Client.Encounter.CatchPokemon(
+                    await session.Client.Encounter.CatchPokemon(
                         encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
                         encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData.Id,
                         pokeball,
@@ -83,13 +83,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         totalExp += xp;
                     }
-                    var profile = await ctx.Client.Player.GetPlayer();
+                    var profile = await session.Client.Player.GetPlayer();
 
                     evt.Exp = totalExp;
                     evt.Stardust = profile.PlayerData.Currencies.ToArray()[1].Amount;
 
-                    var pokemonSettings = await ctx.Inventory.GetPokemonSettings();
-                    var pokemonFamilies = await ctx.Inventory.GetPokemonFamilies();
+                    var pokemonSettings = await session.Inventory.GetPokemonSettings();
+                    var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
 
                     var setting =
                         pokemonSettings.FirstOrDefault(q => pokemon != null && q.PokemonId == pokemon.PokemonId);
@@ -109,8 +109,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
 
                 evt.CatchType = encounter is EncounterResponse
-                    ? "Normal"
-                    : encounter is DiskEncounterResponse ? "Lure" : "Incense";
+                    ? session.Translations.GetTranslation(Common.TranslationString.CatchTypeNormal)
+                    : encounter is DiskEncounterResponse ? session.Translations.GetTranslation(Common.TranslationString.CatchTypeLure) : session.Translations.GetTranslation(Common.TranslationString.CatchTypeIncense);
                 evt.Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
                 evt.Level =
                     PokemonInfo.GetLevel(encounter is EncounterResponse
@@ -133,10 +133,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                 evt.Distance = distance;
                 evt.Pokeball = pokeball;
                 evt.Attempt = attemptCounter;
-                await ctx.Inventory.RefreshCachedInventory();
-                evt.BallAmount = await ctx.Inventory.GetItemAmountByType(pokeball);
+                await session.Inventory.RefreshCachedInventory();
+                evt.BallAmount = await session.Inventory.GetItemAmountByType(pokeball);
 
-                machine.Fire(evt);
+                session.EventDispatcher.Send(evt);
 
                 attemptCounter++;
                 await Randomizer.Sleep(2500, 0.3);
@@ -144,7 +144,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
-        private static async Task<ItemId> GetBestBall(Context ctx, dynamic encounter, float probability)
+        private static async Task<ItemId> GetBestBall(ISession session, dynamic encounter, float probability)
         {
             var pokemonCp = encounter is EncounterResponse
                 ? encounter.WildPokemon?.PokemonData?.Cp
@@ -155,10 +155,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                         ? encounter.WildPokemon?.PokemonData
                         : encounter?.PokemonData));
 
-            var pokeBallsCount = await ctx.Inventory.GetItemAmountByType(ItemId.ItemPokeBall);
-            var greatBallsCount = await ctx.Inventory.GetItemAmountByType(ItemId.ItemGreatBall);
-            var ultraBallsCount = await ctx.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
-            var masterBallsCount = await ctx.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
+            var pokeBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemPokeBall);
+            var greatBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemGreatBall);
+            var ultraBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
+            var masterBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
             if (masterBallsCount > 0 && pokemonCp >= 1200)
                 return ItemId.ItemMasterBall;
@@ -167,10 +167,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (greatBallsCount > 0 && pokemonCp >= 750)
                 return ItemId.ItemGreatBall;
 
-            if (ultraBallsCount > 0 && iV >= ctx.LogicSettings.KeepMinIvPercentage && probability < 0.40)
+            if (ultraBallsCount > 0 && iV >= session.LogicSettings.KeepMinIvPercentage && probability < 0.40)
                 return ItemId.ItemUltraBall;
 
-            if (greatBallsCount > 0 && iV >= ctx.LogicSettings.KeepMinIvPercentage && probability < 0.50)
+            if (greatBallsCount > 0 && iV >= session.LogicSettings.KeepMinIvPercentage && probability < 0.50)
                 return ItemId.ItemGreatBall;
 
             if (greatBallsCount > 0 && pokemonCp >= 300)
@@ -188,18 +188,18 @@ namespace PoGo.NecroBot.Logic.Tasks
             return ItemId.ItemUnknown;
         }
 
-        private static async Task UseBerry(Context ctx, StateMachine machine, ulong encounterId, string spawnPointId)
+        private static async Task UseBerry(ISession session, ulong encounterId, string spawnPointId)
         {
-            var inventoryBalls = await ctx.Inventory.GetItems();
+            var inventoryBalls = await session.Inventory.GetItems();
             var berries = inventoryBalls.Where(p => p.ItemId == ItemId.ItemRazzBerry);
             var berry = berries.FirstOrDefault();
 
             if (berry == null || berry.Count <= 0)
                 return;
 
-            await ctx.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
+            await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
-            machine.Fire(new UseBerryEvent {Count = berry.Count});
+            session.EventDispatcher.Send(new UseBerryEvent {Count = berry.Count});
 
             await Randomizer.Sleep(1800, 0.2);
         }

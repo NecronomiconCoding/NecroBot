@@ -28,31 +28,30 @@ namespace PoGo.NecroBot.Logic.State
 
         public static Version RemoteVersion;
 
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(ISession session)
         {
             await CleanupOldFiles();
-            var autoUpdate = ctx.LogicSettings.AutoUpdate;
+            var autoUpdate = session.LogicSettings.AutoUpdate;
             var needupdate =  IsLatest();
             if (!needupdate || !autoUpdate)
             {
                 if (!needupdate)
                 {
-                    machine.Fire(new UpdateEvent
+                    session.EventDispatcher.Send(new UpdateEvent
                     {
                         Message =
-                            $"Perfect! You already have the newest Version {RemoteVersion}"
+                            session.Translations.GetTranslation(Common.TranslationString.GotUpToDateVersion, RemoteVersion)
                     });
                     return new LoginState();
                 }
-                machine.Fire(new UpdateEvent
+                session.EventDispatcher.Send(new UpdateEvent
                 {
-                    Message =
-                        $"AutoUpdater is disabled. Get the latest release from: {LatestRelease}\n "
+                    Message = session.Translations.GetTranslation(Common.TranslationString.AutoUpdaterDisabled, LatestRelease)                  
                 });
 
                 return new LoginState();
             }
-            machine.Fire(new UpdateEvent {Message = "Downloading and apply Update...."});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.DownloadingUpdate)});
             var remoteReleaseUrl =
             $"https://github.com/NecronomiconCoding/NecroBot/releases/download/v{RemoteVersion}/";
             const string zipName = "Release.zip";
@@ -64,12 +63,12 @@ namespace PoGo.NecroBot.Logic.State
             var destinationDir = baseDir + Path.DirectorySeparatorChar;
             Console.WriteLine(downloadLink);
             if (!DownloadFile(downloadLink, downloadFilePath)) return new LoginState();
-            machine.Fire(new UpdateEvent {Message = "Finished downloading newest Release..."});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.FinishedDownloadingRelease)});
             if (!UnpackFile(downloadFilePath, tempPath)) return new LoginState();
-            machine.Fire(new UpdateEvent {Message = "Finished unpacking files..."});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.FinishedUnpackingFiles)});
 
             if (!MoveAllFiles(extractedDir, destinationDir)) return new LoginState();
-            machine.Fire(new UpdateEvent {Message = "Update finished, you can close this window now."});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.UpdateFinished)});
 
             Process.Start(Assembly.GetEntryAssembly().Location);
             Environment.Exit(-1);
@@ -86,7 +85,8 @@ namespace PoGo.NecroBot.Logic.State
             }
 
             var di = new DirectoryInfo(Directory.GetCurrentDirectory());
-            var files = di.GetFiles("*.old");
+            var diRecurisve = di.GetDirectories();
+            var files = di.GetFiles("*.old", SearchOption.AllDirectories);
 
             foreach (var file in files)
             {

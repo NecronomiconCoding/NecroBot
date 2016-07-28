@@ -9,10 +9,10 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class InfoState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(ISession session)
         {
-            if (ctx.LogicSettings.AmountOfPokemonToDisplayOnStart > 0)
-                await DisplayPokemonStatsTask.Execute(ctx, machine);
+            if (session.LogicSettings.AmountOfPokemonToDisplayOnStart > 0)
+                await DisplayPokemonStatsTask.Execute(session);
 
             return new FarmState();
         }

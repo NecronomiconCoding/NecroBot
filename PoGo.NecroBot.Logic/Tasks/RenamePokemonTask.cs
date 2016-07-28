@@ -13,9 +13,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class RenamePokemonTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(ISession session)
         {
-            var pokemons = await ctx.Inventory.GetPokemons();
+            var pokemons = await session.Inventory.GetPokemons();
 
             foreach (var pokemon in pokemons)
             {
@@ -27,25 +27,23 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 var newNickname = $"{pokemonName}_{perfection}";
 
-                if (perfection > ctx.LogicSettings.KeepMinIvPercentage && newNickname != pokemon.Nickname &&
-                    ctx.LogicSettings.RenameAboveIv)
+                if (perfection > session.LogicSettings.KeepMinIvPercentage && newNickname != pokemon.Nickname &&
+                    session.LogicSettings.RenameAboveIv)
                 {
-                    await ctx.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
+                    await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
 
-                    machine.Fire(new NoticeEvent
+                    session.EventDispatcher.Send(new NoticeEvent
                     {
-                        Message =
-                            $"Pokemon {pokemon.PokemonId} ({pokemon.Id}) renamed from {pokemon.Nickname} to {newNickname}."
+                        Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, newNickname)
                     });
                 }
-                else if (newNickname == pokemon.Nickname && !ctx.LogicSettings.RenameAboveIv)
+                else if (newNickname == pokemon.Nickname && !session.LogicSettings.RenameAboveIv)
                 {
-                    await ctx.Client.Inventory.NicknamePokemon(pokemon.Id, pokemon.PokemonId.ToString());
+                    await session.Client.Inventory.NicknamePokemon(pokemon.Id, pokemon.PokemonId.ToString());
 
-                    machine.Fire(new NoticeEvent
+                    session.EventDispatcher.Send(new NoticeEvent
                     {
-                        Message =
-                            $"Pokemon {pokemon.PokemonId} ({pokemon.Id}) renamed from {pokemon.Nickname} to {pokemon.PokemonId}."
+                        Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, pokemon.PokemonId)
                     });
                 }
             }

@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Вы находитесь вне указанного радиуса! Идем к точке старта ({0}m away) через 5 сек. Ваш Coords.ini файл корректен?"
+        "Вы находитесь вне указанного радиуса! Идем к точке старта (дистанция {0}м) через 5 сек. Ваш Coords.ini файл корректен?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -32,11 +32,15 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "XP: {0}, Gems: {1}, Предметов: {2}"
+      "Value": "Название: {0} XP: {1}, Gems: {2}, Предметов: {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Название: {0} ИНФО: Не удалось полутать, возможно софтбан. Разбан через: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} через ({1}m)"
+      "Value": "Прибываем к {0} через ({1}м)"
     },
     {
       "Key": "eventProfileLogin",
@@ -56,7 +60,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Лучший CP: {3}  IV: {4}%] (Конфеток: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Лучший CP: {3}  IV: {4}%] (Конфет: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -65,7 +69,7 @@
     {
       "Key": "eventPokemonCapture",
       "Value":
-        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Шанс: {7}% | {8}m дист | исп. {9} ({10} осталось). | {11}"
+        "({0}) | ({1}) {2} Ур: {3} CP: ({4}/{5}) IV: {6}% | Шанс: {7}% | на {8}м | исп. {9} ({10} осталось). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -81,7 +85,7 @@
     },
     {
       "Key": "candies",
-      "Value": "Конфеток: {0}"
+      "Value": "Конфет: {0}"
     },
     {
       "Key": "unhandledGPXData",
@@ -122,6 +126,207 @@
     {
       "Key": "displayHighestsLevelHeader",
       "Value": "ТОП по уровню"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "ОШИБКА"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "ВНИМАНИЕ"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "ИНФО"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "ФАРМ"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "ПЕРЕРАБОТКА"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "ПОКЕМОН"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "ПЕРЕДАЧА"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "ЭВОЛЮЦИЯ"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "ЯГОДА"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "ЯЙЦО"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "ОТЛАДКА"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "ОБНОВЛЕНИЕ"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Логинимся под юзером {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "PTC сервера возможно не работают ИЛИ неверно указаны данные учетной записи. Попробуйте логин через Google"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Пробуем снова через {0} сек..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Аккаунт не верифицирован! Выходим..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Открываем страницу Google Device. Пожалуйста вставьте код используя CTRL+V"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Не удалось скопировать код в буфер обмена, сделайте это вручную"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Пройдите по ссылке: {0} и введите {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Обнаружено реалистичное перемещение, используем UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Не реалистичное перемещение в {0}, используем последний файл Coords.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Координаты в файле \"Coords.ini\" неверны, используем координаты по умолчанию"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Отлично! У вас уже установлена последняя версия {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "Автообновление отключено. Последний релиз можно скачать с: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Скачиваем и устанавливаем обновление..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Завершено скачивание нового релиза..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Завершена распаковка файлов..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Обновление завершено, теперь вы можете закрыть это окно."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Ищем покемона с пряностями..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Ищем покемона..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Ищем покемона с приманкой..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Пропущен {0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Инвентарь полон. Передаем покемонов профессору..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "Инвентарь полон. Вручную передайте покемона профессору или установите настройку TransferDuplicatePokemon в true ..."
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Проблема с поимкой: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Проблема с поимкой: Приманенный покемон {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Указанное местоназначение {0}, {1} слишком далеко от текущей позиции {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Покемон {0} ({1}) переименован из {2} в {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Фильтр игнора покемонов] - Игнорируем {0} как указано в настройках"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "ПОПЫТКА"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "ОШИБКА"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "ВЫРВАЛСЯ"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "СБЕЖАЛ"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "ПРОПУЩЕН"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "УСПЕХ"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Из яйца в инкубаторе вылупился: {0}"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "ОБЫЧНЫЙ"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "ПРИМАНКА"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "ПРЯНОСТЬ"
     }
+
   ]
 }

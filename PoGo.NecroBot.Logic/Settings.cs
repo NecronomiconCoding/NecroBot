@@ -102,11 +102,11 @@ namespace PoGo.NecroBot.CLI
         public bool AutoUpdate = true;
         public string ConfigPath;
         public double DefaultAltitude = 10;
-        public double DefaultLatitude = 52.379189;
-        public double DefaultLongitude = 4.899431;
+        public double DefaultLatitude = 40.785091;
+        public double DefaultLongitude = -73.968285;
         public int DelayBetweenPokemonCatch = 2000;
-        public float EvolveAboveIvValue = 95;
-        public bool EvolveAllPokemonAboveIv = false;
+        public float EvolveAboveIvValue = 90;
+        public bool EvolveAllPokemonAboveIv = true;
         public bool EvolveAllPokemonWithEnoughCandy = false;
         public string GpxFile = "GPXPath.GPX";
 
@@ -238,7 +238,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseEggIncubators = true;
         public bool UseGpxPathing = false;
         public int UseLuckyEggsMinPokemonAmount = 30;
-        public bool UseLuckyEggsWhileEvolving = false;
+        public bool UseLuckyEggsWhileEvolving = true;
         public bool UsePokemonToNotCatchFilter = false;
         public double WalkingSpeedInKilometerPerHour = 50;
         public int WebSocketPort = 14251;
@@ -275,7 +275,14 @@ namespace PoGo.NecroBot.CLI
             }
             settings.ProfilePath = profilePath;
             settings.ConfigPath = configPath;
-            settings.Save(fullPath);
+
+            if (!File.Exists(fullPath))
+            {
+                settings.Save(fullPath);
+                return null;
+            }
+            
+
             settings.Auth.Load(Path.Combine(configPath, "auth.json"));
 
             return settings;

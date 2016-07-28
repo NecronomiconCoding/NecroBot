@@ -3,6 +3,7 @@
 using System;
 using System.Text;
 using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
@@ -14,6 +15,7 @@ namespace PoGo.NecroBot.CLI
     public class ConsoleLogger : ILogger
     {
         private readonly LogLevel _maxLogLevel;
+        private Session _ctx;
 
         /// <summary>
         ///     To create a ConsoleLogger, we must define a maximum log level.
@@ -38,65 +40,101 @@ namespace PoGo.NecroBot.CLI
             if (level > _maxLogLevel)
                 return;
 
+            var strError = "ERROR";
+            var strAttention = "ATTENTION";
+            var strInfo = "INFO";
+            var strPokestop = "POKESTOP";
+            var strFarming = "FARMING";
+            var strRecycling = "RECYCLING";
+            var strPKMN = "PKMN";
+            var strTransfered = "TRANSFERED"; 
+            var strEvolved = "EVOLVED";
+            var strBerry = "BERRY";
+            var strEgg = "EGG";
+            var strDebug = "DEBUG";
+            var strUpdate = "UPDATE";
+
+            if(_ctx != null)
+            {
+                strError     = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryError);
+                strAttention = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryAttention);
+                strInfo      = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryInfo);
+                strPokestop  = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryPokestop);
+                strFarming   = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryFarming);
+                strRecycling = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryRecycling);
+                strPKMN      = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryPKMN);
+                strTransfered= _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryTransfered);
+                strEvolved   = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryEvolved);
+                strBerry     = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryBerry); 
+                strEgg       = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryEgg); 
+                strDebug     = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryDebug);
+                strUpdate = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryUpdate);
+            }
+
             switch (level)
             {
                 case LogLevel.Error:
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ERROR) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strError}) {message}");
                     break;
                 case LogLevel.Warning:
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ATTENTION) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strAttention}) {message}");
                     break;
                 case LogLevel.Info:
                     Console.ForegroundColor = ConsoleColor.DarkCyan;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (INFO) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strInfo}) {message}");
                     break;
                 case LogLevel.Pokestop:
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (POKESTOP) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strPokestop}) {message}");
                     break;
                 case LogLevel.Farming:
                     Console.ForegroundColor = ConsoleColor.Magenta;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (FARMING) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strFarming}) {message}");
                     break;
                 case LogLevel.Recycling:
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (RECYCLING) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strRecycling}) {message}");
                     break;
                 case LogLevel.Caught:
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (PKMN) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strPKMN}) {message}");
                     break;
                 case LogLevel.Transfer:
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (TRANSFERED) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strTransfered}) {message}");
                     break;
                 case LogLevel.Evolve:
                     Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (EVOLVED) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strEvolved}) {message}");
                     break;
                 case LogLevel.Berry:
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (BERRY) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strBerry}) {message}");
                     break;
                 case LogLevel.Egg:
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (EGG) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strEgg}) {message}");
                     break;
                 case LogLevel.Debug:
                     Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (DEBUG) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strDebug}) {message}");
                     break;
                 case LogLevel.Update:
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (UPDATE) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strUpdate}) {message}");
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] (ERROR) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strError}) {message}");
                     break;
             }
+        }
+
+        public void SetContext(Session session)
+        {
+            _ctx = session;
         }
     }
 }
