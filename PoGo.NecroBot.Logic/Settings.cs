@@ -292,17 +292,7 @@ namespace PoGo.NecroBot.CLI
 
             if (settings.PokemonToSnipe == null)
             {
-                settings.PokemonToSnipe = new List<SnipeSettings>
-                {
-                    new SnipeSettings
-                    {
-                        Locations = new List<Location>
-                        {
-                            new Location(38.55680748646112, -121.2383794784546)
-                        },
-                        Pokemon = PokemonId.Dratini.ToString()
-                    }
-                };
+                settings.PokemonToSnipe = Default.PokemonToSnipe;
             }
 
             settings.ProfilePath = profilePath;
