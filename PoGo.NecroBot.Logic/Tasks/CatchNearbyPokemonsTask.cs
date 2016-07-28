@@ -22,6 +22,14 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemons = await GetNearbyPokemons(session);
             foreach (var pokemon in pokemons)
             {
+                var pokeBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemPokeBall);
+                var greatBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemGreatBall);
+                var ultraBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemUltraBall);
+                var masterBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemMasterBall);
+
+                if (pokeBallsCount + greatBallsCount + ultraBallsCount + masterBallsCount == 0)
+                    return;
+                    
                 if (session.LogicSettings.UsePokemonToNotCatchFilter &&
                     session.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
                 {
