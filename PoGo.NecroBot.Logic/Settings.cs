@@ -348,7 +348,7 @@ namespace PoGo.NecroBot.CLI
                 settings.Save(fullPath);
                 return null;
             }
-            
+            settings.Save(fullPath);
 
             settings.Auth.Load(Path.Combine(configPath, "auth.json"));
 
