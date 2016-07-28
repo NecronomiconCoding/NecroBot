@@ -55,6 +55,7 @@ namespace PoGo.NecroBot.Logic.State
             catch (AccountNotVerifiedException)
             {
                 session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.AccountNotVerified) });
+                await Task.Delay(2000);
                 Environment.Exit(0);
             }
             catch (GoogleException e)
@@ -75,6 +76,7 @@ namespace PoGo.NecroBot.Logic.State
                     }
                 }
                 session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleError) });
+                await Task.Delay(2000);
                 Environment.Exit(0);
             }
 
@@ -92,7 +94,7 @@ namespace PoGo.NecroBot.Logic.State
                 {
                     Message = session.Translation.GetTranslation(TranslationString.MissingCredentialsGoogle)
                 });
-                await Task.Delay(1000);
+                await Task.Delay(2000);
                 Environment.Exit(0);
             }
             else if (session.Client.AuthType == AuthType.Ptc &&
@@ -102,7 +104,7 @@ namespace PoGo.NecroBot.Logic.State
                 {
                     Message = session.Translation.GetTranslation(TranslationString.MissingCredentialsPtc)
                 });
-                await Task.Delay(1000);
+                await Task.Delay(2000);
                 Environment.Exit(0);
             }
         }
