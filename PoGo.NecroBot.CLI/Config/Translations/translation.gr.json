@@ -1,4 +1,4 @@
-﻿{
+{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,13 +22,11 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your Coords.ini file correct?"
+      "Value": "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your Coords.ini file correct?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value":
-        "Δεν βρεθηκαν λειτουργικά PokeStops στην περιοχή σου. Μήπως εχεις ορίσει την μέγιστη εμβέλεια πολυ χαμήλα;"
+      "Value": "Δεν βρεθηκαν λειτουργικά PokeStops στην περιοχή σου. Μήπως εχεις ορίσει την μέγιστη εμβέλεια πολυ χαμήλα;"
     },
     {
       "Key": "eventFortUsed",
@@ -36,7 +34,7 @@
     },
     {
       "Key": "eventFortFailed",
-      "Αποτυχία χρήσης Pokestop, υπαρχει πιθανότητα softban. Unban σε: {0}/{1}"
+      "Value": "Αποτυχία χρήσης Pokestop, υπαρχει πιθανότητα softban. Unban σε: {0}/{1}"
     },
     {
       "Key": "eventFortTargeted",
@@ -68,8 +66,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value":
-        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Πιθανότητα Πιασίματος: {7}% | {8}m απόσταση | με {9} ({10} απομένουν). | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Πιθανότητα Πιασίματος: {7}% | {8}m απόσταση | με {9} ({10} απομένουν). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -86,7 +83,7 @@
     {
       "Key": "candies",
       "Value": "Candies: {0}"
-    }
+    },
     {
       "Key": "unhandledGpxData",
       "Value": "Αδιάβαστα δεδομένα στο αρχείο GPX, απόπειρα παραλειψής."
@@ -125,7 +122,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Το εκκολαπτήριο	εκκόλαψε ενα αυγό: {0}"
+      "Value": "Το εκκολαπτήριο εκκόλαψε ενα αυγό: {0}"
     }
-	]
+  ]
 }
