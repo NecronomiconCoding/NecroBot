@@ -170,16 +170,26 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static ScanResult SnipeScanForPokemon(Location location)
         {
             var uri = $"https://pokevision.com/map/data/{location.Latitude}/{location.Longitude}";
+            ScanResult scanResult;
+            try
+            {
+                var request = WebRequest.CreateHttp(uri);
+                request.Accept = "application/json";
+                request.Method = "GET";
 
-            var request = WebRequest.CreateHttp(uri);
-            request.Accept = "application/json";
-            request.Method = "GET";
+                var resp = request.GetResponse();
+                var reader = new StreamReader(resp.GetResponseStream());
 
-            var resp = request.GetResponse();
-            var reader = new StreamReader(resp.GetResponseStream());
-
-            var scanResult = JsonConvert.DeserializeObject<ScanResult>(reader.ReadToEnd());
-
+                scanResult = JsonConvert.DeserializeObject<ScanResult>(reader.ReadToEnd());
+            }
+            catch (Exception e)
+            {
+                scanResult = new ScanResult()
+                {
+                    status = "fail",
+                    pokemon = new List<PokemonLocation>()
+                };
+            }
             return scanResult;
         } 
     }
