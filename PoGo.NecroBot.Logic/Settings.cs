@@ -249,14 +249,15 @@ namespace PoGo.NecroBot.CLI
         };
 
         public SnipeSettings PokemonToSnipe = new SnipeSettings(
-            new List<Location>()
+            Locations = new List<Location>
             {
                 new Location(38.55680748646112, -121.2383794784546), //Dratini Spot
                 new Location(-33.85901900, 151.21309800), //Magikarp Spot
                 new Location(47.5014969, -122.0959568), //Eevee Spot
                 new Location(51.5025343,-0.2055027) //Charmender Spot
+
             },
-            new List<string>()
+            Pokemon = new List<string>()
             {
                 PokemonId.Dratini.ToString(),
                 PokemonId.Magikarp.ToString(),
