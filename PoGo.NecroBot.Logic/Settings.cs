@@ -10,7 +10,7 @@ using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-
+using PoGo.NecroBot.Logic.Settings;
 #endregion
 
 namespace PoGo.NecroBot.CLI

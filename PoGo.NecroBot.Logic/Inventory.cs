@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Settings;
 using PoGo.NecroBot.Logic.PoGoUtils;
+using PoGo.NecroBot.Logic.Filters;
 using PokemonGo.RocketAPI;
 using POGOProtos.Data;
 using POGOProtos.Data.Player;
@@ -14,7 +16,6 @@ using POGOProtos.Inventory;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Networking.Responses;
 using POGOProtos.Settings.Master;
-
 #endregion
 
 namespace PoGo.NecroBot.Logic
@@ -22,11 +23,11 @@ namespace PoGo.NecroBot.Logic
     public class Inventory
     {
         private readonly Client _client;
-        private readonly ILogicSettings _logicSettings;
+        private readonly IConfigurationSettings _logicSettings;
         private GetInventoryResponse _cachedInventory;
         private DateTime _lastRefresh;
 
-        public Inventory(Client client, ILogicSettings logicSettings)
+        public Inventory(Client client, IConfigurationSettings logicSettings)
         {
             _client = client;
             _logicSettings = logicSettings;
@@ -314,13 +315,13 @@ namespace PoGo.NecroBot.Logic
             return pokemonToEvolve;
         }
 
-        public TransferFilter GetPokemonTransferFilter(PokemonId pokemon)
+        public PokemonTransferFilter GetPokemonTransferFilter(PokemonId pokemon)
         {
             if (_logicSettings.PokemonsTransferFilter != null && _logicSettings.PokemonsTransferFilter.ContainsKey(pokemon))
             {
                 return _logicSettings.PokemonsTransferFilter[pokemon];
             }
-            return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinIvPercentage,
+            return new PokemonTransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinIvPercentage,
                 _logicSettings.KeepMinDuplicatePokemon);
         }
 
