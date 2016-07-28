@@ -28,24 +28,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                     pokemonName = pokemonName.Substring(0, nameLength);
                 }
                 string newNickname = String.Format(session.LogicSettings.RenameTemplate, pokemonName, perfection);
+                string oldNickname = (pokemon.Nickname.Length != 0 ) ? pokemon.Nickname : pokemon.PokemonId.ToString();
 
-                if (perfection >= session.LogicSettings.KeepMinIvPercentage && newNickname != pokemon.Nickname &&
+                if (perfection >= session.LogicSettings.KeepMinIvPercentage && newNickname != oldNickname &&
                     session.LogicSettings.RenameAboveIv)
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
 
                     session.EventDispatcher.Send(new NoticeEvent
                     {
-                        Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, newNickname)
-                    });
-                }
-                else if (newNickname == pokemon.Nickname && !session.LogicSettings.RenameAboveIv)
-                {
-                    await session.Client.Inventory.NicknamePokemon(pokemon.Id, pokemon.PokemonId.ToString());
-
-                    session.EventDispatcher.Send(new NoticeEvent
-                    {
-                        Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, pokemon.PokemonId)
+                        Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, oldNickname, newNickname)
                     });
                 }
             }
