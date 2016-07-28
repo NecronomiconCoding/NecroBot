@@ -9,40 +9,38 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class FarmState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(ISession session)
         {
-            if (ctx.LogicSettings.EvolveAllPokemonAboveIv || ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy)
+            if (session.LogicSettings.EvolveAllPokemonAboveIv || session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
-                await EvolvePokemonTask.Execute(ctx, machine);
+                await EvolvePokemonTask.Execute(session);
             }
 
-            if (ctx.LogicSettings.TransferDuplicatePokemon)
+            if (session.LogicSettings.TransferDuplicatePokemon)
             {
-                await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                await TransferDuplicatePokemonTask.Execute(session);
             }
 
-            if (ctx.LogicSettings.RenameAboveIv)
+            if (session.LogicSettings.RenameAboveIv)
             {
-                await RenamePokemonTask.Execute(ctx, machine);
+                await RenamePokemonTask.Execute(session);
             }
 
-            await RecycleItemsTask.Execute(ctx, machine);
+            await RecycleItemsTask.Execute(session);
 
-            if (ctx.LogicSettings.UseEggIncubators)
+            if (session.LogicSettings.UseEggIncubators)
             {
-                await UseIncubatorsTask.Execute(ctx, machine);
+                await UseIncubatorsTask.Execute(session);
             }
 
-            if (ctx.LogicSettings.UseGpxPathing)
+            if (session.LogicSettings.UseGpxPathing)
             {
-                await FarmPokestopsGpxTask.Execute(ctx, machine);
+                await FarmPokestopsGpxTask.Execute(session);
             }
             else
             {
-                await FarmPokestopsTask.Execute(ctx, machine);
+                await FarmPokestopsTask.Execute(session);
             }
-
-            await Task.Delay(10000);
 
             return this;
         }

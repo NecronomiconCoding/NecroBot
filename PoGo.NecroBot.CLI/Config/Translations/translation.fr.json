@@ -1,0 +1,124 @@
+{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "SuperBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "HyperBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "Type d'authentification inconnu dans le fichier config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value": "Vous êtes en dehors de votre rayon défini! Début de la marche ({0}m de distance) dans 5 secondes. Est-ce que le fichier Coords.ini est correct?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Aucun PokeStop trouvé dans votre zone. Est-ce que votre distance maximale est trop petite?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "XP: {0}, Gems: {1}, Objets: {2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} à ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Connecté en tant que {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Utilisation d'un Oeuf Chance, restant(s): {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} avec succès pour {1} XP"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "{0} Échouée. Le résultat était {1}, arrêt de l'évolution {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- PC: {1}  IV: {2}%   [Meilleur PC: {3}  IV: {4}%] (Bonbons: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} restante(s)). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Pas de Pokeball - {0} Manqué avec {1} PC"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Essai #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Bonbons: {0}"
+    },
+    {
+      "Key": "unhandledGPXData",
+      "Value": "Données non gérées dans le fichier GPX, ignorées.."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokémons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "parfait"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "Nom"
+    },
+    {
+      "Key": "displayHighestsCPHeader",
+      "Value": "Montrer Meilleurs PC"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Montrer Meilleurs Parfaits"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Montrer Meilleurs Level"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Assuez-vous que la Lat & la Lng de départ sont correctes. Fermez le programme si ça ne l'est pas! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Mise d'un oeuf dans l'incubateur: {0:0.00}km restant(s)"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Mise à jour du statut de l'incubation: {0:0.00}km restant(s)"
+    }
+  ]
+}

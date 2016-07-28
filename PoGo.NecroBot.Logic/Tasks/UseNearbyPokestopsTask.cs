@@ -20,50 +20,50 @@ namespace PoGo.NecroBot.Logic.Tasks
         //to only find stops within 40 meters
         //this is for gpx pathing, we are not going to the pokestops,
         //so do not make it more than 40 because it will never get close to those stops.
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(ISession session)
         {
-            var pokestopList = await GetPokeStops(ctx);
+            var pokestopList = await GetPokeStops(session);
 
             while (pokestopList.Any())
             {
                 pokestopList =
                     pokestopList.OrderBy(
                         i =>
-                            LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
-                                ctx.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
+                            LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                                session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
                 var pokeStop = pokestopList[0];
                 pokestopList.RemoveAt(0);
 
-                await ctx.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                 var fortSearch =
-                    await ctx.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    await session.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                 if (fortSearch.ExperienceAwarded > 0)
                 {
-                    machine.Fire(new FortUsedEvent
+                    session.EventDispatcher.Send(new FortUsedEvent
                     {
                         Exp = fortSearch.ExperienceAwarded,
                         Gems = fortSearch.GemsAwarded,
-                        Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded)
+                        Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded),
+                        Latitude = pokeStop.Latitude,
+                        Longitude = pokeStop.Longitude
                     });
                 }
 
-                await Task.Delay(1000);
+                await RecycleItemsTask.Execute(session);
 
-                await RecycleItemsTask.Execute(ctx, machine);
-
-                if (ctx.LogicSettings.TransferDuplicatePokemon)
+                if (session.LogicSettings.TransferDuplicatePokemon)
                 {
-                    await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                    await TransferDuplicatePokemonTask.Execute(session);
                 }
             }
         }
 
 
-        private static async Task<List<FortData>> GetPokeStops(Context ctx)
+        private static async Task<List<FortData>> GetPokeStops(ISession session)
         {
-            var mapObjects = await ctx.Client.Map.GetMapObjects();
+            var mapObjects = await session.Client.Map.GetMapObjects();
 
             // Wasn't sure how to make this pretty. Edit as needed.
             var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
@@ -73,9 +73,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
                         ( // Make sure PokeStop is within 40 meters or else it is pointless to hit it
                             LocationUtils.CalculateDistanceInMeters(
-                                ctx.Client.CurrentLatitude, ctx.Client.CurrentLongitude,
+                                session.Client.CurrentLatitude, session.Client.CurrentLongitude,
                                 i.Latitude, i.Longitude) < 40) ||
-                        ctx.LogicSettings.MaxTravelDistanceInMeters == 0
+                        session.LogicSettings.MaxTravelDistanceInMeters == 0
                 );
 
             return pokeStops.ToList();

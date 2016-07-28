@@ -13,17 +13,17 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class DisplayPokemonStatsTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(ISession session)
         {
-            var highestsPokemonCp = await ctx.Inventory.GetHighestsCp(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart);
+            var highestsPokemonCp = await session.Inventory.GetHighestsCp(session.LogicSettings.AmountOfPokemonToDisplayOnStart);
             var pokemonPairedWithStatsCp = highestsPokemonCp.Select(pokemon => Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon))).ToList();
 
             var highestsPokemonPerfect =
-                await ctx.Inventory.GetHighestsPerfect(ctx.LogicSettings.AmountOfPokemonToDisplayOnStart);
+                await session.Inventory.GetHighestsPerfect(session.LogicSettings.AmountOfPokemonToDisplayOnStart);
 
             var pokemonPairedWithStatsIv = highestsPokemonPerfect.Select(pokemon => Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon), PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon))).ToList();
 
-            machine.Fire(
+            session.EventDispatcher.Send(
                 new DisplayHighestsPokemonEvent
                 {
                     SortedBy = "CP",
@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             await Task.Delay(500);
 
-            machine.Fire(
+            session.EventDispatcher.Send(
                 new DisplayHighestsPokemonEvent
                 {
                     SortedBy = "IV",

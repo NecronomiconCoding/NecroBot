@@ -82,5 +82,45 @@
       "Key": "candies",
       "Value": "Candies: {0}"
     }
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Ubehandlet data i GPX fila, forsøker å hoppe over."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfect"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "name"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "DisplayHighestsCP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "DisplayHighestsPerfect"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "DisplayHighestsLevel"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Vær sikker på at Lat & Lng er korrekt. Exit programmet hvis ikke! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Putter egg i incubator: {0:0.00}km igjen"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Incubator oppdatering: {0:0.00}km igjen"
+    }
   ]
 }

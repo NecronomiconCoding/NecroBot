@@ -94,9 +94,9 @@
   <ItemGroup>
     <Compile Include="ConsoleEventListener.cs" />
     <Compile Include="ConsoleLogger.cs" />
+    <Compile Include="SimpleSession.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="WebSocketInterface.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -136,10 +136,19 @@
     <None Include="Config\Translations\translation.th.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Config\Translations\translation.tr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Config\Translations\translation.zh_CN.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Config\Translations\translation.pt-br.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Translations\translation.fr.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\Translations\translation.pt-pt.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
