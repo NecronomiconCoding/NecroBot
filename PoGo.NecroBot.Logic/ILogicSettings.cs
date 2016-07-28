@@ -40,8 +40,6 @@ namespace PoGo.NecroBot.Logic
         int DelayBetweenPokemonCatch { get; }
         int DelayBetweenPlayerActions { get; }
         bool UsePokemonToNotCatchFilter { get; }
-        bool UseLuckyEggConstantly { get; }
-        bool UseIncenseConstantly { get; }
         int KeepMinDuplicatePokemon { get; }
         bool PrioritizeIvOverCp { get; }
         int MaxTravelDistanceInMeters { get; }

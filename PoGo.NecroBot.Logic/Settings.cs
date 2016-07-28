@@ -98,9 +98,6 @@ namespace PoGo.NecroBot.CLI
         public double WalkingSpeedInKilometerPerHour = 15.0;
         public int MaxTravelDistanceInMeters = 1000;
         public int KeepMinCp = 1250;
-        public bool UseLuckyEggConstantly = true;
-        public bool UseIncenseConstantly = true;
-
         public int KeepMinDuplicatePokemon = 1;
         public float KeepMinIvPercentage = 95;
         public bool KeepPokemonsThatCanEvolve = false;
@@ -452,8 +449,6 @@ namespace PoGo.NecroBot.CLI
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool UseEggIncubators => _settings.UseEggIncubators;
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
-        public bool UseLuckyEggConstantly => _settings.UseLuckyEggConstantly;
-        public bool UseIncenseConstantly => _settings.UseIncenseConstantly;
         public int DelayBetweenPlayerActions => _settings.DelayBetweenPlayerActions;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => _settings.KeepMinDuplicatePokemon;

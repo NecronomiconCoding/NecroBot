@@ -107,7 +107,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             if ((int)fortSearch.CooldownCompleteTimestampMs != 0)
                             {
-                              
                                 break; // Check if successfully looted, if so program can continue as this was "false alarm".
                             }
 
@@ -133,16 +132,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Longitude = pokeStop.Longitude,
                             inventoryFull = (fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull)
                         });
-                        if (session.LogicSettings.UseIncenseConstantly)
-                        {
-                            await UseIncense.Execute(session);
-                        }
-                        if (session.LogicSettings.UseLuckyEggConstantly)
-                        {
-                            await UseLuckyEgg.Execute(session);
-                        }
-                       
-                       
+
                         break; //Continue with program as loot was succesfull.
                     }
                     } while (fortTry < retryNumber - zeroCheck); //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.

@@ -13,15 +13,21 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         private static ISession ctx2;
 
-        public static async Task Execute(ISession Session)
+        public static async Task Execute(ISession ctx)
         {
-            var UseEgg =await Session.Inventory.UseLuckyEggConstantly();
-            if (UseEgg.Result.ToString().ToLower().Contains("errornoitemsremaining"))
+
+            Timer t = new Timer(TimerCallback, null, 0, 300000);
+            ctx2 = ctx;
+        }
+        private static void TimerCallback(Object o)
+        {
+            var UseEgg = ctx2.Inventory.UseLuckyEggConstantly();
+            if (UseEgg.Result.Result.ToString().ToLower().Contains("errornoitemsremaining"))
             {
                 Logging.Logger.Write("No Eggs Available");
 
             }
-            else if (UseEgg.Result.ToString().Contains("AlreadyActive"))
+            else if (UseEgg.Result.Result.ToString().Contains("AlreadyActive"))
             {
                 Logging.Logger.Write("Lucky Egg Already Active");
             }
@@ -29,7 +35,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 Logging.Logger.Write("Used a Lucky Egg");
             }
+
         }
-      
     }
 }
