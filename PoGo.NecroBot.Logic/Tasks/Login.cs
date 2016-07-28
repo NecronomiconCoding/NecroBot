@@ -34,7 +34,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     try
                     {
-                        _session.Client.Login.DoPtcLogin().Wait();
+                        _session.Client.Login.DoPtcLogin(_session.Settings.PtcUsername, _session.Settings.PtcPassword).Wait();
                     }
                     catch (AggregateException ae)
                     {
@@ -43,7 +43,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else
                 {
-                    _session.Client.Login.DoGoogleLogin().Wait();
+                    _session.Client.Login.DoGoogleLogin(_session.Settings.GoogleUsername, _session.Settings.GooglePassword).Wait();
                 }
             }
             catch (PtcOfflineException)

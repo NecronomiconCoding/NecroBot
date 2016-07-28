@@ -78,25 +78,6 @@ namespace PoGo.NecroBot.CLI
             session.Navigation.UpdatePositionEvent +=
                 (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
 
-            session.Client.Login.GoogleDeviceCodeEvent += (usercode, uri) =>
-            {
-                try
-                {
-                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.OpeningGoogleDevicePage), LogLevel.Warning);
-                    Thread.Sleep(5000);
-                    Process.Start(uri);
-                    var thread = new Thread(() => Clipboard.SetText(usercode)); //Copy device code
-                    thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
-                    thread.Start();
-                    thread.Join();
-                }
-                catch (Exception)
-                {
-                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard), LogLevel.Error);
-                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard2, uri, usercode), LogLevel.Error);
-                }
-            };
-
             machine.AsyncStart(new VersionCheckState(), session);
 
             //Non-blocking key reader

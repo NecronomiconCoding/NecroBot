@@ -25,6 +25,8 @@ namespace PoGo.NecroBot.CLI
         public string GoogleRefreshToken;
         public string PtcUsername;
         public string PtcPassword;
+        public string GoogleUsername;
+        public string GooglePassword;
 
         public void Load(string path)
         {
@@ -321,20 +323,15 @@ namespace PoGo.NecroBot.CLI
                     return retVal;
                 };
 
-                var defLat = setLatLong(
-                    "Latitude");
+                var defLat = setLatLong("Latitude");
 
                 if (defLat != 0)
                     settings.DefaultLatitude = defLat;
 
-                var defLong = setLatLong(
-                    "Longitude");
+                var defLong = setLatLong("Longitude");
 
                 if (defLong != 0)
                     settings.DefaultLongitude = defLong;
-
-
-
             }
 
             if (settings.WebSocketPort == 0)
@@ -380,14 +377,9 @@ namespace PoGo.NecroBot.CLI
             _settings = settings;
         }
 
-        public bool AutoUpdate => _settings.AutoUpdate;
 
-        public AuthType AuthType => _settings.Auth.AuthType;
-        public string PtcUsername => _settings.Auth.PtcUsername;
-        public string PtcPassword => _settings.Auth.PtcPassword;
-        public double DefaultLatitude => _settings.DefaultLatitude;
-        public double DefaultLongitude => _settings.DefaultLongitude;
-        public double DefaultAltitude => _settings.DefaultAltitude;
+        public string GoogleUsername => _settings.Auth.GoogleUsername;
+        public string GooglePassword => _settings.Auth.GooglePassword;
 
         public string GoogleRefreshToken
         {
@@ -396,6 +388,109 @@ namespace PoGo.NecroBot.CLI
             {
                 _settings.Auth.GoogleRefreshToken = value;
                 _settings.Auth.Save();
+            }
+        }
+
+        AuthType ISettings.AuthType
+        {
+            get
+            {
+                return _settings.Auth.AuthType;
+            }
+
+            set
+            {
+                _settings.Auth.AuthType = value;
+            }
+        }
+
+        double ISettings.DefaultLatitude
+        {
+            get
+            {
+                return _settings.DefaultLatitude;
+            }
+
+            set
+            {
+                _settings.DefaultLatitude = value;
+            }
+        }
+
+        double ISettings.DefaultLongitude
+        {
+            get
+            {
+                return _settings.DefaultLongitude;
+            }
+
+            set
+            {
+                _settings.DefaultLongitude = value;
+            }
+        }
+
+        double ISettings.DefaultAltitude
+        {
+            get
+            {
+                return _settings.DefaultAltitude;
+            }
+
+            set
+            {
+                _settings.DefaultAltitude = value;
+            }
+        }
+
+        string ISettings.PtcPassword
+        {
+            get
+            {
+                return _settings.Auth.PtcPassword;
+            }
+
+            set
+            {
+                _settings.Auth.PtcPassword = value;
+            }
+        }
+
+        string ISettings.PtcUsername
+        {
+            get
+            {
+                return _settings.Auth.PtcUsername;
+            }
+
+            set
+            {
+                _settings.Auth.PtcUsername = value;
+            }
+        }
+
+        string ISettings.GoogleUsername
+        {
+            get
+            {
+                return _settings.Auth.GoogleUsername;
+            }
+
+            set
+            {
+                _settings.Auth.GoogleUsername = value;
+            }
+        }
+        string ISettings.GooglePassword
+        {
+            get
+            {
+                return _settings.Auth.GooglePassword;
+            }
+
+            set
+            {
+                _settings.Auth.GooglePassword = value;
             }
         }
     }
