@@ -113,6 +113,7 @@ namespace PoGo.NecroBot.Logic.Common
         GoogleError,
         MissingCredentialsGoogle,
         MissingCredentialsPtc
+        SnipeScan
     }
 
     public class Translation : ITranslation
@@ -232,6 +233,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsGoogle, "You need to fill out GoogleUsername and GooglePassword in auth.json!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsPtc, "You need to fill out PtcUsername and PtcPassword in auth.json!")
 
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScan, "[Sniper] Scanning for {0} at {1} to {2}..."),
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)

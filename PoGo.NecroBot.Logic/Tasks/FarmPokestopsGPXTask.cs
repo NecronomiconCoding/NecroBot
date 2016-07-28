@@ -94,6 +94,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             await RecycleItemsTask.Execute(session);
 
+                            if (session.LogicSettings.SnipeAtPokestops)
+                            {
+                                await SnipePokemonTask.Execute(session);
+                            }
+
                             if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                                 session.LogicSettings.EvolveAllPokemonAboveIv)
                             {

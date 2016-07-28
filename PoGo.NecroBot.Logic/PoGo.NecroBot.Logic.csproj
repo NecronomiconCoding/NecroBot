@@ -66,6 +66,7 @@
     <Compile Include="Event\FortUsedEvent.cs" />
     <Compile Include="Event\ItemRecycledEvent.cs" />
     <Compile Include="Event\NoPokeballEvent.cs" />
+    <Compile Include="Event\SnipeScanEvent.cs" />
     <Compile Include="Event\UpdateEvent.cs" />
     <Compile Include="Event\PokemonCaptureEvent.cs" />
     <Compile Include="Event\PokeStopListEvent.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Tasks\Login.cs" />
     <Compile Include="Tasks\RecycleItemsTask.cs" />
     <Compile Include="Tasks\RenamePokemonTask.cs" />
+    <Compile Include="Tasks\SnipePokemonTask.cs" />
     <Compile Include="Tasks\TransferDuplicatePokemonTask.cs" />
     <Compile Include="Event\UseLuckyEggEvent.cs" />
     <Compile Include="State\VersionCheckState.cs" />
