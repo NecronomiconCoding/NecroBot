@@ -45,6 +45,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var pokestopList = await GetPokeStops(session);
             var stopsHit = 0;
+            var eggWalker = new EggWalker(1000, session);
 
             if (pokestopList.Count <= 0)
             {
@@ -137,6 +138,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                     } while (fortTry < retryNumber - zeroCheck); //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
                 await Task.Delay(1000);
+
+                await eggWalker.ApplyDistance(distance);
+
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;
@@ -145,10 +149,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                         await session.Inventory.RefreshCachedInventory();
                     }
                     await RecycleItemsTask.Execute(session);
-                    if (session.LogicSettings.UseEggIncubators)
-                    {
-                        await UseIncubatorsTask.Execute(session);
-                    }
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
                     {
                         await EvolvePokemonTask.Execute(session);
