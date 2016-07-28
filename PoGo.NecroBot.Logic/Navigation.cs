@@ -48,7 +48,8 @@ namespace PoGo.NecroBot.Logic
             if (_lastRest.AddSeconds(limit) < DateTime.Now)
             {
                 var amount = Randomizer.GetNext(60, 240);
-                Console.WriteLine("resting " + amount + " seconds");
+                // todo: add logging
+                // Console.WriteLine("resting " + amount + " seconds");
                 await Randomizer.Sleep(amount * 1000);
                 _lastRest = DateTime.Now;
             } 
@@ -60,7 +61,8 @@ namespace PoGo.NecroBot.Logic
             if (_lastShortStop.AddSeconds(limit) < DateTime.Now)
             {
                 var amount = Randomizer.GetNext(5, 15);
-                Console.WriteLine("short stop for " + amount + " seconds");
+                // todo: add logging
+                // Console.WriteLine("short stop for " + amount + " seconds");
                 await Randomizer.Sleep(amount * 1000);
                 _lastShortStop = DateTime.Now;
             } 
@@ -125,7 +127,8 @@ namespace PoGo.NecroBot.Logic
                     nextWaypointBearing += randomBearing;
                 }
 
-                Console.WriteLine("walking to target with speed: " + speedInMetersPerSecond.ToString("F2", CultureInfo.InvariantCulture) + ", distance: " + currentDistanceToTarget.ToString("F2", CultureInfo.InvariantCulture) + ", bearing: " + nextWaypointBearing.ToString("F2", CultureInfo.InvariantCulture) + ", rndBearing: " + randomBearing.ToString("F2", CultureInfo.InvariantCulture));
+                // todo: add logging
+                // Console.WriteLine("walking to target with speed: " + speedInMetersPerSecond.ToString("F2", CultureInfo.InvariantCulture) + "m/sec, distance: " + currentDistanceToTarget.ToString("F2", CultureInfo.InvariantCulture) + "m, bearing: " + nextWaypointBearing.ToString("F2", CultureInfo.InvariantCulture) + ", rndBearing: " + randomBearing.ToString("F2", CultureInfo.InvariantCulture));
 
                 requestSendDateTime = DateTime.Now;
                 result =
@@ -139,7 +142,7 @@ namespace PoGo.NecroBot.Logic
                     await functionExecutedWhileWalking(); // look for pokemon
 
                 await Randomizer.Sleep(Math.Min((int)(distanceToTarget / speedInMetersPerSecond * 1000), 3400), 0.1);
-                //await Randomizer.Sleep(500);
+                //await Randomizer.Sleep(500); // this is wrong because we should not send too many position updates to the server
 
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
@@ -193,7 +196,8 @@ namespace PoGo.NecroBot.Logic
                 //}
                 speedInMetersPerSecond = GetSpeed(walkingSpeedInKilometersPerHour);
 
-                Console.WriteLine("walking to target with speed: " + speedInMetersPerSecond.ToString("F1", CultureInfo.InvariantCulture) + ", distance: " + currentDistanceToTarget.ToString("F1", CultureInfo.InvariantCulture));
+                // todo: add logging
+                // Console.WriteLine("walking to target with speed: " + speedInMetersPerSecond.ToString("F1", CultureInfo.InvariantCulture) + "m/sec, distance: " + currentDistanceToTarget.ToString("F1", CultureInfo.InvariantCulture) + "m");
 
                 nextWaypointDistance = Math.Min(currentDistanceToTarget,
                     millisecondsUntilGetUpdatePlayerLocationResponse/1000*speedInMetersPerSecond);
@@ -212,7 +216,7 @@ namespace PoGo.NecroBot.Logic
                     await functionExecutedWhileWalking(); // look for pokemon & hit stops
 
                 await Randomizer.Sleep(Math.Min((int)(distanceToTarget / speedInMetersPerSecond * 1000), 3400), 0.1);
-                //await Randomizer.Sleep(500);
+                //await Randomizer.Sleep(500); // this is wrong because we should not send too many position updates to the server
 
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
