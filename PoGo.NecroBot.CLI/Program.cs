@@ -29,6 +29,7 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
             var settings = GlobalSettings.Load(subPath);
+            var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
 
             if (settings == null)
             {
@@ -38,7 +39,7 @@ namespace PoGo.NecroBot.CLI
                 return;
             }
 
-            var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
+            
 
             /*SimpleSession session = new SimpleSession
             {
