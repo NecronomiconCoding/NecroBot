@@ -85,8 +85,15 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(FortUsedEvent evt, Session session)
         {
-            Logger.Write(
-                session.Translations.GetTranslation(TranslationString.EventFortUsed, evt.Name, evt.Exp, evt.Gems, evt.Items),
+            string itemString;
+            if (evt.inventoryFull)
+            {
+                itemString = session.Translations.GetTranslation(TranslationString.InvFullPokestopLooting);
+            } else {
+                itemString = evt.Items;
+            }
+                Logger.Write(
+                session.Translations.GetTranslation(TranslationString.EventFortUsed, evt.Name, evt.Exp, evt.Gems, itemString),
                 LogLevel.Pokestop);
         }
 

@@ -48,6 +48,7 @@ namespace PoGo.NecroBot.Logic
         int UseLuckyEggsMinPokemonAmount { get; }
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
+        bool DumpPokemonStats { get; }
         bool RenameAboveIv { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }

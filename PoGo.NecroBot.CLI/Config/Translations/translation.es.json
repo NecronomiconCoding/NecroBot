@@ -2,19 +2,19 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "PokéBall"
+      "Value": "Poké Ball"
     },
     {
       "Key": "greatPokeball",
-      "Value": "SuperBall"
+      "Value": "Super Ball"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "UltraBall"
+      "Value": "Ultra Ball"
     },
     {
       "Key": "masterPokeball",
-      "Value": "MasterBall"
+      "Value": "Master Ball"
     },
     {
       "Key": "wrongAuthType",

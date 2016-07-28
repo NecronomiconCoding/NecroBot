@@ -135,7 +135,6 @@ namespace PoGo.NecroBot.Logic
                         p.OrderByDescending(x => x.Cp)
                             .ThenBy(n => n.StaminaMax)
                             .Skip(GetPokemonTransferFilter(p.Key).KeepMinDuplicatePokemon)
-                            .Skip(_logicSettings.KeepMinDuplicatePokemon)
                             .ToList());
         }
 
@@ -317,10 +316,9 @@ namespace PoGo.NecroBot.Logic
 
         public TransferFilter GetPokemonTransferFilter(PokemonId pokemon)
         {
-            if (_logicSettings.PokemonsTransferFilter != null)
+            if (_logicSettings.PokemonsTransferFilter != null && _logicSettings.PokemonsTransferFilter.ContainsKey(pokemon))
             {
-                if (_logicSettings.PokemonsTransferFilter.ContainsKey(pokemon))
-                    return _logicSettings.PokemonsTransferFilter[pokemon];
+                return _logicSettings.PokemonsTransferFilter[pokemon];
             }
             return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinIvPercentage,
                 _logicSettings.KeepMinDuplicatePokemon);
