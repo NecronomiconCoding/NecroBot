@@ -114,7 +114,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Check dat Lat & Lng kloppen. Sluit programma als dat niet zo is! Lat: {0} Lng: {1}"
+      "Value": "Controleer dat Lat & Lng kloppen. Sluit programma als dat niet zo is! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
