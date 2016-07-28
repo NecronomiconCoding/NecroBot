@@ -18,7 +18,7 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "错误的登录信息"
+      "Value": "错误的认证信息"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
@@ -30,11 +30,15 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "获得经验值：{0}，金币：{1}，道具：{2}"
+      "Value": "名称：{0} 经验值：{1}, 金币：{2}, 物品：{3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "名称：{0} 信息：操作失败，可能被封禁。正在解封：{1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "发现 {0} （距离{1}米）"
+      "Value": "前往补给站：{0} （距离{1}米）"
     },
     {
       "Key": "eventProfileLogin",
@@ -54,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP值：{1}  完美度：{2}%  [已拥有 CP值：{3}  完美度：{4}%] （还有{5}颗糖果）"
+      "Value": "{0}\t- CP值：{1}  完美度：{2}%   [已拥有 CP值：{3}  完美度：{4}%] （还有{5}颗该种类的糖果）"
     },
     {
       "Key": "eventItemRecycled",
@@ -78,7 +82,251 @@
     },
     {
       "Key": "candies",
-      "Value": "还有{0}颗糖果"
+      "Value": "还有{0}颗该种类的糖果"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "在GPX文件中发现异常数据，试图跳过。"
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "宠物小精灵"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "完美度"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "名称"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "未知"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "展示最高CP值"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "展示最高完美度"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "展示最高等级"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "确认经纬度是否正确，如果错误将会退出程序！ 纬度：{0} 经度：{1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "正在将宠物蛋放入孵化器中：剩余{0:0.00}千米"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "更新孵化器状态：剩余{0:0.00}千米"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "孵化器已经孵出：{0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "错误"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "注意"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "提醒"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "补给站"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "农场"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "回收"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "捕获"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "传送"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "进化"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "浆果"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "宠物蛋"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "调试"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "更新"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "正在登录{0}账号"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "PTC服务器可能关闭或您的帐号错误错误，请尝试谷歌帐号登录"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "将在 {0} 秒后重试..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "帐号或密码错误！退出..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "正在打开 Google Device 网页，请用CTRL+V粘贴验证码"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "无法将验证码复制到剪贴板，请手动复制"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "打开：{0} 后输入 {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "检测到真实的旅行，使用用户配置"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "未检测到真实的旅行 {0}, 使用上一次保存的配置"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "无效的坐标文件，使用默认坐标"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "恭喜！你已经更新至最新版本：{0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "自动更新已禁用，获取到最新的版本为：{0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "正在下载安装更新..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "成功下载新版本..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "成功解包..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "更新完成，您现在可以关闭这个窗口。"
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "正在搜索熏香引来的精灵..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "正在搜索宠物小精灵..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "正在搜索诱饵吸引来的精灵..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "跳过：{0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "包裹满了，正在传输精灵..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "包裹满了，请手动传输精灵或者修改TransferDuplicatePokemon 为 true..."
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "发生错误：{0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "发生错误：诱饵吸引来的精灵 {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "您要去的地方 {0}, {1} 距离您现在的位置太远了 {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "正在将精灵 {0} ({1}) 从 {2} 重命名为 {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[精灵忽略过滤器] - 在设置中定义忽略 {0} "
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "尝试捕获"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "捕获错误"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "捕获失败"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "捕获消失"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "错过捕获"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "捕获成功"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "普通"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "诱饵"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "熏香"
     }
   ]
 }
