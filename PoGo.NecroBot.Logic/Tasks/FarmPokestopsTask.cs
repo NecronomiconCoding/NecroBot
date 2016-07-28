@@ -119,7 +119,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 Max = retryNumber - zeroCheck
                             });
 
-                            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 400);
+                            await DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 400);
                         }
                     } else {
                         session.EventDispatcher.Send(new FortUsedEvent
