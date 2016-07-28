@@ -178,7 +178,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 scanResult = JsonConvert.DeserializeObject<ScanResult>(reader.ReadToEnd());
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 scanResult = new ScanResult()
                 {
