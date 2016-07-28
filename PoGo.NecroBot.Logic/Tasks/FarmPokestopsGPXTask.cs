@@ -64,7 +64,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             var pokeStop = pokestopList[0];
                             pokestopList.RemoveAt(0);
 
-                            await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                            var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                             if (pokeStop.LureInfo != null)
                             {
@@ -78,6 +78,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 session.EventDispatcher.Send(new FortUsedEvent
                                 {
+                                    Id = pokeStop.Id,
+                                    Name = fortInfo.Name,
                                     Exp = fortSearch.ExperienceAwarded,
                                     Gems = fortSearch.GemsAwarded,
                                     Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded),
