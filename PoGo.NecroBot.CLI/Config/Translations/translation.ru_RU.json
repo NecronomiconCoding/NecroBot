@@ -338,6 +338,34 @@
     {
       "Key": "requireInputText",
       "Value": "Нажмите любую кнопку для продолжения..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "Т.к. у вас включена двуфакторная аутентификация Google, вам нужно поместить пароль Приложения Google в файл auth.json"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "Открываем пароли Google App. Пожалуйста, создайте новый пароль приложения (выберите Other(Другое) в качестве устройства)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "Убедитесь, что вы ввели верные почту и пароль!"
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "Вам нужно заполнить настройки GoogleUsername и GooglePassword в auth.json!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "Вам нужно заполнить настройки PtcUsername и PtcPassword в auth.json!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[Снайпер] Ищем покемона для отлова в локации {0}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Снайпер] Покемона для отлова не обнаружено!"
     }
 
   ]
