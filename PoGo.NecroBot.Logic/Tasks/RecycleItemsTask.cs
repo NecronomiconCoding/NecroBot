@@ -3,6 +3,7 @@
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -20,7 +21,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 session.EventDispatcher.Send(new ItemRecycledEvent {Id = item.ItemId, Count = item.Count});
 
-                await Task.Delay(500);
+                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
             }
 
             await session.Inventory.RefreshCachedInventory();

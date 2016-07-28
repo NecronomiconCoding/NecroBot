@@ -38,6 +38,7 @@ namespace PoGo.NecroBot.Logic
         bool TransferDuplicatePokemon { get; }
         bool UseEggIncubators { get; }
         int DelayBetweenPokemonCatch { get; }
+        int DelayBetweenPlayerActions { get; }
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
         bool PrioritizeIvOverCp { get; }
