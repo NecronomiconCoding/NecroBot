@@ -19,31 +19,25 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var pokemon in pokemons)
             {
-                var perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(pokemon));
-                var pokemonName = pokemon.PokemonId.ToString();
-                if (pokemonName.Length > 10 - perfection.ToString(CultureInfo.InvariantCulture).Length)
+                double perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(pokemon));
+                string pokemonName = pokemon.PokemonId.ToString();
+                // iv number + templating part + pokemonName <= 12
+                int nameLength = 12 - (perfection.ToString(CultureInfo.InvariantCulture).Length + session.LogicSettings.RenameTemplate.Length - 6);
+                if (pokemonName.Length > nameLength)
                 {
-                    pokemonName = pokemonName.Substring(0, 10 - perfection.ToString(CultureInfo.InvariantCulture).Length);
+                    pokemonName = pokemonName.Substring(0, nameLength);
                 }
-                var newNickname = $"{pokemonName}_{perfection}";
+                string newNickname = String.Format(session.LogicSettings.RenameTemplate, pokemonName, perfection);
+                string oldNickname = (pokemon.Nickname.Length != 0 ) ? pokemon.Nickname : pokemon.PokemonId.ToString();
 
-                if (perfection > session.LogicSettings.KeepMinIvPercentage && newNickname != pokemon.Nickname &&
+                if (perfection >= session.LogicSettings.KeepMinIvPercentage && newNickname != oldNickname &&
                     session.LogicSettings.RenameAboveIv)
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
 
                     session.EventDispatcher.Send(new NoticeEvent
                     {
-                        Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, newNickname)
-                    });
-                }
-                else if (newNickname == pokemon.Nickname && !session.LogicSettings.RenameAboveIv)
-                {
-                    await session.Client.Inventory.NicknamePokemon(pokemon.Id, pokemon.PokemonId.ToString());
-
-                    session.EventDispatcher.Send(new NoticeEvent
-                    {
-                        Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, pokemon.PokemonId)
+                        Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, oldNickname, newNickname)
                     });
                 }
             }
