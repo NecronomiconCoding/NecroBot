@@ -20,6 +20,6 @@ namespace PoGo.NecroBot.Logic.Logging
         /// Set Context for a logger to be able to use translations and settings
         /// </summary>
         /// <param name="session">Context</param>
-        void SetContext(Session session);
+        void SetSession(ISession session);
     }
 }

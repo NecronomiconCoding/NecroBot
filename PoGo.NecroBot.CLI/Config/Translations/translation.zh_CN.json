@@ -327,6 +327,42 @@
     {
       "Key": "catchTypeIncense",
       "Value": "熏香"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "无法启动WebSocket服务器的端口：{0}"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - 运行时间 {1} - 等级: {2} | 经验/小时: {3:0} | 捕获/小时: {4:0} | 星尘: {5:0} | 传送: {6:0} | 丢弃: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (预计升到下一级别需要 {1}小时 {2}分钟 | {3}/{4}经验 )"
+    },
+    {
+      "Key": "RequireInputText",
+      "Value": "按任意键继续..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "当您启用了谷歌的两步验证后，需要在auth.json中输入应用专用密码"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "打开 Google App - 登陆与安全设置 - 密码和登录方法 - 应用专用密码，请设置一个新的应用专用密码(使用其它设备)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "请确认输入了正确的邮箱地址和密码。"
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "您需要在auth.json中填写谷歌账户和密码！"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "您需要在auth.json中填写Ptc账户和密码！"
     }
   ]
 }
