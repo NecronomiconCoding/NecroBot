@@ -119,7 +119,8 @@ namespace PoGo.NecroBot.Logic.Common
 
     public class Translation : ITranslation
     {
-        //Default Translations (ENGLISH)
+        [JsonProperty("TranslationStrings", ItemTypeNameHandling = TypeNameHandling.Arrays, ItemConverterType = typeof(KeyValuePairConverter))]
+        //Default Translations (ENGLISH)        
         private List<KeyValuePair<TranslationString, string>> TranslationStrings = new List
             <KeyValuePair<TranslationString, string>>
         {
@@ -262,12 +263,10 @@ namespace PoGo.NecroBot.Logic.Common
                 var input = File.ReadAllText(fullPath);
 
                 var jsonSettings = new JsonSerializerSettings();
-                jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                //jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
                 jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                 jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
-
                 translations = JsonConvert.DeserializeObject<Translation>(input, jsonSettings);
-                translations.Save(fullPath);
             }
             else
             {

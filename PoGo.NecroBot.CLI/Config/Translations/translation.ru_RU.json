@@ -341,7 +341,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Т.к. у вас включена двуфакторная аутентификация Google, вам нужно поместить пароль Приложения Google в файл auth.json"
+      "Value": "Т.к. у вас включена двухфакторная аутентификация Google, вам нужно поместить пароль Приложения Google в файл auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
