@@ -31,7 +31,18 @@ namespace PoGo.NecroBot.Logic
             _client = client;
             _logicSettings = logicSettings;
         }
-
+        public async Task<LevelUpRewardsResponse> GetLevelUpRewards()
+         {
+             var GetData = await _client.Player.GetPlayer();
+             
+            
+ 
+             var ClientLevel = await _client.Player.GetPlayerProfile(GetData.PlayerData.Username);
+             var Rewards = await _client.Player.GetLevelUpRewards(PoGo.NecroBot.Logic.Utils.Statistics.LevelForRewards);
+ 
+             return Rewards;
+ 
+         }
         public async Task DeletePokemonFromInvById(ulong id)
         {
             var inventory = await GetCachedInventory();
