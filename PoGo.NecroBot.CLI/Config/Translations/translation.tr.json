@@ -30,11 +30,11 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "İsim: {0}, XP: {1}, Gems: {2}, Items: {3}"
+      "Value": "İsim: {0} XP: {1}, Gems: {2}, Items: {3}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "İsim: {0}, BİLGİ: Eşya toplama başarısız, softban yemiş olabilirsin. Ban açılmasına: {1}/{2}"
+      "Value": "İsim: {0} BİLGİ: Eşya toplama başarısız, softban yemiş olabilirsin. Ban açılmasına: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -287,6 +287,54 @@
     {
       "Key": "pokemonIgnoreFilter",
       "Value": "[Pokemon Yoksayma Filtresi] - {0} ayarlarda belirtildiği üzere yoksayıldı."
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "Yakalama: Deneme"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "Yakalama: Hata"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "Yakalama: Toptan Kaçış"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "Yakalama: Kaçış"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "Yakalama: Iska"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "Yakalama: Başarılı"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "Normal"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Yem(Lure)"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Tütsü(Incense)"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "webSocketServer {0} portunda çalıştırılamadı."
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - Çalışıyor {1} - Seviye: {2} | XP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Aktarılan: {6:0} | Çöp Eşya: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (sonraki seviye {1}h {2}m | {3}/{4} XP)"
     }
   ]
 }
