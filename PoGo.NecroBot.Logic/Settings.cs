@@ -284,7 +284,7 @@ namespace PoGo.NecroBot.CLI
                 {
                     double retVal = 0;
 
-                    Console.WriteLine("Set the default {0}? (y/n)", latLong);
+                    Console.WriteLine("Choose your own {0}? (y/n)", latLong);
                     var setLat = Console.ReadLine();
 
                     if (setLat.ToUpper() == "Y")
