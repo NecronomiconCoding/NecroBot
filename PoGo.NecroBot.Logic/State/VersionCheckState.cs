@@ -101,6 +101,7 @@ namespace PoGo.NecroBot.Logic.State
                     Logger.Write(e.ToString());
                 }
             }
+            await Task.Delay(200);
         }
 
         public static bool DownloadFile(string url, string dest)
