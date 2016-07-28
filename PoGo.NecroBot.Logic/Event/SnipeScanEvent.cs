@@ -9,6 +9,6 @@ namespace PoGo.NecroBot.Logic.Event
     public class SnipeScanEvent : IEvent
     {
         public string Pokemon { get; set; }
-        public Bounds Bounds { get; set; }
+        public Location Bounds { get; set; }
     }
 }

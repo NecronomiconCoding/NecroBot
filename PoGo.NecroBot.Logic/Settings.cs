@@ -20,7 +20,8 @@ namespace PoGo.NecroBot.CLI
         public AuthType AuthType;
 
 
-        [JsonIgnore] private string _filePath;
+        [JsonIgnore]
+        private string _filePath;
 
         public string GoogleRefreshToken;
         public string PtcUsername;
@@ -38,7 +39,7 @@ namespace PoGo.NecroBot.CLI
                 var input = File.ReadAllText(_filePath);
 
                 var settings = new JsonSerializerSettings();
-                settings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
 
                 JsonConvert.PopulateObject(input, this, settings);
             }
@@ -51,7 +52,7 @@ namespace PoGo.NecroBot.CLI
         public void Save(string path)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented,
-                new StringEnumConverter {CamelCaseText = true});
+                new StringEnumConverter { CamelCaseText = true });
 
             var folder = Path.GetDirectoryName(path);
             if (folder != null && !Directory.Exists(folder))
@@ -75,10 +76,14 @@ namespace PoGo.NecroBot.CLI
     {
         public int AmountOfPokemonToDisplayOnStart = 10;
 
-        [JsonIgnore] internal AuthSettings Auth = new AuthSettings();
-        [JsonIgnore] public string ProfilePath;
-        [JsonIgnore] public string ProfileConfigPath;
-        [JsonIgnore] public string GeneralConfigPath;
+        [JsonIgnore]
+        internal AuthSettings Auth = new AuthSettings();
+        [JsonIgnore]
+        public string ProfilePath;
+        [JsonIgnore]
+        public string ProfileConfigPath;
+        [JsonIgnore]
+        public string GeneralConfigPath;
 
         public bool AutoUpdate = true;
         public double DefaultAltitude = 10;
@@ -246,13 +251,14 @@ namespace PoGo.NecroBot.CLI
         {
             new SnipeSettings
             {
-                Locations = new List<Bounds>
+                Locations = new List<Location>
                 {
-                    new Bounds(38.535914,-121.300379,38.570683,-121.135584)
+                    new Location(38.55680748646112, -121.2383794784546)
                 },
                 Pokemon = PokemonId.Dratini.ToString()
             }
         };
+
         public static GlobalSettings Default => new GlobalSettings();
 
         public static GlobalSettings Load(string path)
@@ -268,7 +274,7 @@ namespace PoGo.NecroBot.CLI
                 var input = File.ReadAllText(configFile);
 
                 var jsonSettings = new JsonSerializerSettings();
-                jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                 jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                 jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
@@ -282,6 +288,21 @@ namespace PoGo.NecroBot.CLI
             if (settings.WebSocketPort == 0)
             {
                 settings.WebSocketPort = 14251;
+            }
+
+            if (settings.PokemonToSnipe == null)
+            {
+                settings.PokemonToSnipe = new List<SnipeSettings>
+                {
+                    new SnipeSettings
+                    {
+                        Locations = new List<Location>
+                        {
+                            new Location(38.55680748646112, -121.2383794784546)
+                        },
+                        Pokemon = PokemonId.Dratini.ToString()
+                    }
+                };
             }
 
             settings.ProfilePath = profilePath;
@@ -302,7 +323,7 @@ namespace PoGo.NecroBot.CLI
         public void Save(string fullPath)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented,
-                new StringEnumConverter {CamelCaseText = true});
+                new StringEnumConverter { CamelCaseText = true });
 
             var folder = Path.GetDirectoryName(fullPath);
             if (folder != null && !Directory.Exists(folder))
