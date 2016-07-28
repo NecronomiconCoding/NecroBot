@@ -17,11 +17,12 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <summary>
         ///     This is used for dumping contents to a file stored in the Logs folder.
         /// </summary>
+        /// <param name="session"></param>
         /// <param name="data">Dumps the string data to the file</param>
         /// <param name="filename">Filename to be used for naming the file.</param>
-        private static void DumpToFile(Session ctx, string data, string filename)
+        private static void DumpToFile(ISession session, string data, string filename)
         {
-            string path = Path.Combine(ctx.LogicSettings.ProfilePath,"Dumps",$"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
+            var path = Path.Combine(session.LogicSettings.ProfilePath,"Dumps",$"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
 
             using (
                 var dumpFile =
@@ -37,6 +38,7 @@ namespace PoGo.NecroBot.Logic.DataDumper
         ///     Set the dumper.
         /// </summary>
         /// <param name="dumper"></param>
+        /// <param name="subPath"></param>
         public static void SetDumper(IDumper dumper, string subPath = "")
         {
             _dumper = dumper;
@@ -46,24 +48,29 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <summary>
         ///     Clears the specified dumpfile.
         /// </summary>
-        /// <param name="filename">File to clear/param>
-        public static void ClearDumpFile(Session ctx, string filename)
+        /// <param name="session"></param>
+        /// <param name="filename"/>File to clear/param>
+        public static void ClearDumpFile(ISession session, string filename)
         {
-            string path = Path.Combine(ctx.LogicSettings.ProfilePath,"Dumps",$"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
+            var path = Path.Combine(session.LogicSettings.ProfilePath, "Dumps");
+            var file = Path.Combine(path, $"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            
             // Clears all contents of a file first if overwrite is true
-            File.WriteAllText(path, string.Empty);
+            File.WriteAllText(file, string.Empty);
         }
 
         /// <summary>
         ///     Dumps data to a file
         /// </summary>
+        /// <param name="session"></param>
         /// <param name="data">Dumps the string data to the file</param>
         /// <param name="filename">Filename to be used for naming the file.</param>
-        public static void Dump(Session ctx, string data, string filename)
+        public static void Dump(ISession session, string data, string filename)
         {
             string uniqueFileName = $"{filename}";
 
-            DumpToFile(ctx, data, uniqueFileName);
+            DumpToFile(session, data, uniqueFileName);
         }
     }
 }
