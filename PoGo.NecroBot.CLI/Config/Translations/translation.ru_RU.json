@@ -334,6 +334,10 @@
     {
       "Key": "statsXpTemplateString",
       "Value": "{0} (след. ур. через {1}ч {2}м | {3}/{4} XP)"
+    },
+    {
+      "Key": "welcomeDelayText",
+      "Value": "Нажмите любую кнопку для продолжения..."
     }
 
   ]

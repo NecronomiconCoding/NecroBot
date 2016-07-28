@@ -99,7 +99,18 @@ namespace PoGo.NecroBot.CLI
 
             machine.AsyncStart(new VersionCheckState(), session);
 
-            Console.ReadLine();
+            //Non-blocking key reader
+            //This will allow to process console key presses in another code parts
+            while (true)
+            {
+                if (Console.KeyAvailable)
+                {
+                    var info = Console.ReadKey();
+                    if (info.Key == ConsoleKey.Enter)
+                        break;
+                }
+                Thread.Sleep(5);
+            }
         }
     }
 }

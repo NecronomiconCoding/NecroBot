@@ -7,6 +7,7 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Networking.Responses;
+using System.Threading;
 
 #endregion
 
@@ -33,6 +34,13 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(WarnEvent evt, Session session)
         {
             Logger.Write(evt.ToString(), LogLevel.Warning);
+
+            if (evt.CanBeDelayed && session.LogicSettings.StartupWelcomeDelay)
+            {
+                Logger.Write(session.Translations.GetTranslation(TranslationString.WelcomeDelayText));
+                Console.ReadKey();
+            }
+
         }
 
         public void HandleEvent(UseLuckyEggEvent evt, Session session)
