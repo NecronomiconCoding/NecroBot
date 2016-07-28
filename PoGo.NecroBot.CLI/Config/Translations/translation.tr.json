@@ -337,8 +337,28 @@
       "Value": "{0} (sonraki seviye {1}h {2}m | {3}/{4} XP)"
     },
     {
-      "Key": "welcomeDelayText",
+      "Key": "requireInputText",
       "Value": "Devam etmek için bir tuşa bas..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "\"Google İki Aşamalı Doğrulama\"yı etkinleştirmiş olduğun için, uygulamaya özel şifreni auth.json dosyasına eklemen gerek."
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "\"Google Uygulama Şifreleri\" sayfası açılıyor. Lütfen yeni bir uygulama şifresi oluştur. (Aygıt olarak \"Diğer\" seçeneğini seç.)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "Doğru \"mail & şifre\" kombinasyonu girdiğinden emin ol."
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "\"auth.json\" dosyasına GoogleUsername ve GooglePassword değerlerini girmen gerek!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "\"auth.json\" dosyasına PtcUsername ve PtcPassword değerlerini girmen gerek!"
     }
   ]
 }
