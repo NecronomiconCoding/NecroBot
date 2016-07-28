@@ -221,8 +221,8 @@ namespace PoGo.NecroBot.CLI
             {PokemonId.Golduck, new TransferFilter(1350, 95, 2)},
             {PokemonId.Tentacruel, new TransferFilter(1350, 95, 2)},
             {PokemonId.Starmie, new TransferFilter(1350, 95, 2)},
-            {PokemonId.Eevee, new TransferFilter(750, 92.5, 2)},
-            {PokemonId.Gyarados, new TransferFilter(1200, 90, 5)}
+            {PokemonId.Eevee, new TransferFilter(750, 92, 2)},
+            {PokemonId.Gyarados, new TransferFilter(1200, 90, 5)},
             {PokemonId.Mew, new TransferFilter(0, 0, 10)}
         };
 
