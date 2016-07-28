@@ -41,6 +41,16 @@ namespace PoGo.NecroBot.Logic
             if (pokemon != null)
                 inventory.InventoryDelta.InventoryItems.Remove(pokemon);
         }
+        public async Task<UseIncenseResponse> UseIncenseConstantly()
+        {
+            var Result = await _client.Inventory.UseIncense(ItemId.ItemIncenseOrdinary);
+            return Result;
+        }
+        public async Task<UseItemXpBoostResponse> UseLuckyEggConstantly()
+        {
+            var Result = await _client.Inventory.UseItemXpBoost();
+            return Result;
+        }
 
         private async Task<GetInventoryResponse> GetCachedInventory()
         {
