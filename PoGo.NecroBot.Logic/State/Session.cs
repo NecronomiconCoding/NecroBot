@@ -52,6 +52,7 @@ namespace PoGo.NecroBot.Logic.State
         public void Reset(ISettings settings, ILogicSettings logicSettings)
         {
             Client = new Client(Settings);
+            Client.AuthType = settings.AuthType; // ferox wants us to set this manually
             Inventory = new Inventory(Client, logicSettings);
             Navigation = new Navigation(Client);
         }
