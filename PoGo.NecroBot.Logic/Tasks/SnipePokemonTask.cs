@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Enums;
 using POGOProtos.Networking.Responses;
 
@@ -85,9 +86,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 locsVisited.Add(pokemonLocation);
 
+                                var currentLatitude = session.Client.CurrentLatitude;
+                                var currentLongitude = session.Client.CurrentLongitude;
+
                                 await
                                     session.Client.Player.UpdatePlayerLocation(pokemonLocation.latitude,
-                                        pokemonLocation.longitude, session.Settings.DefaultAltitude);
+                                        pokemonLocation.longitude, session.Client.CurrentAltitude);
 
                                 session.EventDispatcher.Send(new UpdatePositionEvent()
                                 {
@@ -101,54 +105,53 @@ namespace PoGo.NecroBot.Logic.Tasks
                                         .Where(q => q.PokemonId == pokemonId)
                                         .ToList();
 
-                                foreach (var pokemon in catchablePokemon)
+                                var pokemon = catchablePokemon.FirstOrDefault();
+
+                                if (pokemon != null)
                                 {
                                     var encounter =
                                         session.Client.Encounter.EncounterPokemon(pokemon.EncounterId,
                                             pokemon.SpawnPointId).Result;
+                                    await
+                                        session.Client.Player.UpdatePlayerLocation(currentLatitude, currentLongitude,
+                                            session.Client.CurrentAltitude);
 
                                     if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                                     {
+                                        session.EventDispatcher.Send(new UpdatePositionEvent()
+                                        {
+                                            Latitude = currentLatitude,
+                                            Longitude = currentLongitude
+                                        });
+
                                         await CatchPokemonTask.Execute(session, encounter, pokemon);
                                     }
                                     else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                                     {
                                         session.EventDispatcher.Send(new WarnEvent
                                         {
-                                            Message =
-                                                session.Translation.GetTranslation(
-                                                    Common.TranslationString.InvFullTransferManually)
+                                            Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferManually)
                                         });
                                     }
                                     else
                                     {
                                         session.EventDispatcher.Send(new WarnEvent
                                         {
-                                            Message =
-                                                session.Translation.GetTranslation(
-                                                    Common.TranslationString.EncounterProblem, encounter.Status)
+                                            Message = session.Translation.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Status)
                                         });
                                     }
 
-                                    if (
-                                        !Equals(catchablePokemon.ElementAtOrDefault(catchablePokemon.Count() - 1),
-                                            pokemon))
+                                    if (!Equals(catchablePokemon.ElementAtOrDefault(catchablePokemon.Count() - 1), pokemon))
                                     {
-                                        await Task.Delay(5000);
+                                        await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch);
                                     }
                                 }
-
-                                await
-                                    session.Client.Player.UpdatePlayerLocation(session.Settings.DefaultLatitude,
-                                        session.Settings.DefaultLongitude, session.Settings.DefaultAltitude);
-
-                                session.EventDispatcher.Send(new UpdatePositionEvent()
+                                else
                                 {
-                                    Latitude = session.Settings.DefaultLatitude,
-                                    Longitude = session.Settings.DefaultLongitude
-                                });
+                                    await session.Client.Player.UpdatePlayerLocation(currentLatitude, currentLongitude, session.Client.CurrentAltitude);
+                                }
 
-                                await Task.Delay(1000);
+                                await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions);
                             }
                         }
                         else
