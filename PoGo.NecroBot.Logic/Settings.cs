@@ -278,6 +278,62 @@ namespace PoGo.NecroBot.CLI
             else
             {
                 settings = new GlobalSettings();
+
+                Func<string, double> setLatLong = (latLong) =>
+                {
+                    double retVal = 0;
+
+                    Console.WriteLine("Set the default {0}? (y/n)", latLong);
+                    var setLat = Console.ReadLine();
+
+                    if (setLat.ToUpper() == "Y")
+                    {
+                        var go = true;
+                        do
+                        {
+                            Console.WriteLine(
+                                "Enter the Default {0}:", latLong);
+
+                            var defVal = Console.ReadLine();
+
+                            double outVar;
+
+                            if (double.TryParse(
+                                defVal,
+                                out outVar))
+                            {
+                                retVal = outVar;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid {0}, Try again? (y/n)", latLong);
+                                var goAgain = Console.ReadLine();
+
+                                if (goAgain.ToUpper() != "Y")
+                                {
+                                    go = false;
+                                }
+                            }
+                        } while (!go);
+                    }
+
+                    return retVal;
+                };
+
+                var defLat = setLatLong(
+                    "Latitude");
+
+                if (defLat != 0)
+                    settings.DefaultLatitude = defLat;
+
+                var defLong = setLatLong(
+                    "Longitude");
+
+                if (defLong != 0)
+                    settings.DefaultLongitude = defLong;
+
+
+
             }
 
             if (settings.WebSocketPort == 0)
