@@ -27,7 +27,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 var newNickname = $"{pokemonName}_{perfection}";
 
-                if (perfection > session.LogicSettings.KeepMinIvPercentage && newNickname != pokemon.Nickname &&
+                if (perfection >= session.LogicSettings.KeepMinIvPercentage && newNickname != pokemon.Nickname &&
                     session.LogicSettings.RenameAboveIv)
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
