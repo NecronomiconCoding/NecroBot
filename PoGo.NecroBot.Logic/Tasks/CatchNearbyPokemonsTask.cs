@@ -31,7 +31,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                     session.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
-                await Task.Delay(distance > 100 ? 3000 : 500);
+
+                await Randomizer.Sleep(distance > 100 ? 3000 : 500);
 
                 var encounter = await session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId);
 
@@ -60,7 +61,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
                 if (!Equals(pokemons.ElementAtOrDefault(pokemons.Count() - 1), pokemon))
                 {
-                    await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch);
+                    await Randomizer.Sleep(session.LogicSettings.DelayBetweenPokemonCatch, 0.3f);
                 }
             }
         }

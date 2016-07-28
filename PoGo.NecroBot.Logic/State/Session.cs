@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.Logic.State
         {
             Client = new Client(Settings);
             Inventory = new Inventory(Client, logicSettings);
-            Navigation = new Navigation(Client);
+            Navigation = new Navigation(Client, logicSettings);
         }
     }
 }

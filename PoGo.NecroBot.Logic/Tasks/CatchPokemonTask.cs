@@ -55,6 +55,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     await UseBerry(session, encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
                         encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData?.Id);
+
+                    await Randomizer.Sleep(1500, 0.3);
                 }
 
                 var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
@@ -62,10 +64,18 @@ namespace PoGo.NecroBot.Logic.Tasks
                     encounter is EncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
                     encounter is EncounterResponse ? pokemon.Longitude : currentFortData.Longitude);
 
+                // todo: add hitPokemon parameter to CatchPokemon method
+                // todo: add parameters in config file to allow the randomization of the throws
+                var hit = true; //Randomizer.GetNext(1, 100) <= 80;
                 caughtPokemonResponse =
                     await session.Client.Encounter.CatchPokemon(
                         encounter is EncounterResponse ? pokemon.EncounterId : encounterId,
-                        encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData.Id, pokeball);
+                        encounter is EncounterResponse ? pokemon.SpawnPointId : currentFortData.Id,
+                        pokeball,
+                        //hitPokemon: hit,
+                        normalizedRecticleSize: 1.95,
+                        spinModifier: Math.Round((double)Randomizer.GetNext(850, 1000) / 1000d, 3),
+                        normalizedHitPos: hit ? 1 : 0);
 
                 var evt = new PokemonCaptureEvent {Status = caughtPokemonResponse.Status};
 
@@ -133,7 +143,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(evt);
 
                 attemptCounter++;
-                await Task.Delay(2000);
+                await Randomizer.Sleep(2500, 0.3);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }

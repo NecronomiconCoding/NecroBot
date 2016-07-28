@@ -53,8 +53,20 @@ namespace PoGo.NecroBot.Logic
         string TranslationLanguageCode { get; }
         string ProfilePath { get; }
         string ConfigPath { get; }
+        bool RandomizeBearing { get; }
+        int RandomizeSpeedPercentage { get; }
+        int ArtificialSlowDownPercentage { get; }
+        int RestAfterMinutesMinimum { get; }
+        int RestAfterMinutesMaximum { get; }
+        int RestMinutesMinimum { get; }
+        int RestMinuesMaximum { get; }
+        int StopAfterMinutesMinimum { get; }
+        int StopAfterMinutesMaximum { get; }
+        int StopSecondsMinimum { get; }
+        int StopSecondsMaximum { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
+        int RecycleAboveItemCount { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
 

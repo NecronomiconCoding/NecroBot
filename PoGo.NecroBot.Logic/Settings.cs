@@ -255,6 +255,18 @@ namespace PoGo.NecroBot.CLI
         public double WalkingSpeedInKilometerPerHour = 15.0;
         public int WebSocketPort = 14251;
         public static GlobalSettings Default => new GlobalSettings();
+        public int RecycleAboveItemCount = 50;
+        public bool RandomizeBearing = true;
+        public int RandomizeSpeedPercentage = 5;
+        public int ArtificialSlowDownPercentage = 5;
+        public int RestAfterMinutesMinimum = 15;
+        public int RestAfterMinutesMaximum = 45;
+        public int RestMinutesMinimum = 1;
+        public int RestMinuesMaximum = 4;
+        public int StopAfterMinutesMinimum = 2;
+        public int StopAfterMinutesMaximum = 5;
+        public int StopSecondsMinimum = 5;
+        public int StopSecondsMaximum = 15;
 
         public static GlobalSettings Load(string path)
         {
@@ -378,9 +390,21 @@ namespace PoGo.NecroBot.CLI
         public bool DumpPokemonStats => _settings.DumpPokemonStats;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
+        public int RecycleAboveItemCount => _settings.RecycleAboveItemCount;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
+        public bool RandomizeBearing => _settings.RandomizeBearing;
+        public int RandomizeSpeedPercentage => _settings.RandomizeSpeedPercentage;
+        public int ArtificialSlowDownPercentage => _settings.ArtificialSlowDownPercentage;
+        public int RestAfterMinutesMinimum => _settings.RestAfterMinutesMinimum;
+        public int RestAfterMinutesMaximum => _settings.RestAfterMinutesMaximum;
+        public int RestMinutesMinimum => _settings.RestMinutesMinimum;
+        public int RestMinuesMaximum => _settings.RestMinuesMaximum;
+        public int StopAfterMinutesMinimum => _settings.StopAfterMinutesMinimum;
+        public int StopAfterMinutesMaximum => _settings.StopAfterMinutesMaximum;
+        public int StopSecondsMinimum => _settings.StopSecondsMinimum;
+        public int StopSecondsMaximum => _settings.StopSecondsMaximum;
     }
 }

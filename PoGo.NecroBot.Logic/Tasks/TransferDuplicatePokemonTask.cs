@@ -1,10 +1,12 @@
 ﻿#region using directives
 
-using System.Linq;
-using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -23,6 +25,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemonSettings = await session.Inventory.GetPokemonSettings();
             var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
 
+            var random = new Random();
+
             foreach (var duplicatePokemon in duplicatePokemons)
             {
                 if (duplicatePokemon.Cp >= session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinCp ||
@@ -34,6 +38,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 await session.Client.Inventory.TransferPokemon(duplicatePokemon.Id);
                 await session.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
+
+                await Randomizer.Sleep(2500, 0.3);
 
                 var bestPokemonOfType = (session.LogicSettings.PrioritizeIvOverCp
                     ? await session.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon)
