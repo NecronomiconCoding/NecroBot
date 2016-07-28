@@ -85,6 +85,7 @@ namespace PoGo.NecroBot.CLI
         public double DefaultLatitude = 40.785091;
         public double DefaultLongitude = -73.968285;
         public int DelayBetweenPokemonCatch = 2000;
+        public int DelayBetweenPlayerActions = 5000;
         public float EvolveAboveIvValue = 90;
         public bool EvolveAllPokemonAboveIv = false;
         public bool EvolveAllPokemonWithEnoughCandy = true;
@@ -448,6 +449,7 @@ namespace PoGo.NecroBot.CLI
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool UseEggIncubators => _settings.UseEggIncubators;
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
+        public int DelayBetweenPlayerActions => _settings.DelayBetweenPlayerActions;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
         public int KeepMinDuplicatePokemon => _settings.KeepMinDuplicatePokemon;
         public bool PrioritizeIvOverCp => _settings.PrioritizeIvOverCp;
