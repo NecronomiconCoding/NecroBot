@@ -1,0 +1,128 @@
+{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "GreatBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "UltraBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "config.json içinde bilinmeyen değer: AuthType"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value": "Tanımlanan yarıçap dışındasın! 5 saniye içinde ({0}m uzağa) yürümeye başlanacak. Coords.ini dosyası doğru yapılandırılmış mı?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Bu alanda uygun PokeStop bulunamadı. Tanımladığın en fazla mesafe değeri doğru mu?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "XP: {0}, Gems: {1}, Items: {2}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Eşya toplama başarısız, softban ihtimali yüksek. Deneme: {0}/40"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "({1}m) içinde {0}"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "{0} olarak oynanıyor."
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Şanslı yumurta(Lucky Egg) kullanıldı, kalan: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} başarılı, {1}xp kazanıldı."
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "{0} başarısız. Sonuç {1}, geliştirme(evolve) durduruluyor {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- Savaş Puanı(CP): {1}  Mükemmellik: {2}%   [En iyi Savaş Puanı(CP): {3}  Mükemmellik: {4}%] (Şekerler(Candy): {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value": "({0}) | ({1}) {2} Seviye: {3} Savaş Puanı(CP): ({4}/{5}) Mükemmellik: {6}% | Başarı şansı: {7}% | {8}m mesafeden | {9} ile ({10} adet kaldı). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Pokeball yok - Yakalanamayan pokemon: {0} (Savaş Puanı(CP): {1})"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Deneme #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Şekerler(Candy): {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "GPX dosyasında işlenemeyen veri, göz ardı ediliyor."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemonlar"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "mükemmel"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "isim"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "En Yüksek Savaş Puanına(CP) Sahip Olanlar"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "En Mükemmeller"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "En Yüksek Seviyeliler"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Lat & Lng değerlerinin doğrulundan emin ol. Değilse programı kapat! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Kuluçka makinesine(Incubator) yumurta(Egg) yerleştirildi: {0:0.00}km kaldı"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Kuluçka makinesi(Incubator) durum güncellemesi: {0:0.00}km kaldı"
+    }
+  ]
+}

@@ -57,6 +57,8 @@
   <ItemGroup>
     <Compile Include="Common\Translations.cs" />
     <Compile Include="Event\DisplayHighestsPokemonEvent.cs" />
+    <Compile Include="Event\EggHatchedEvent.cs" />
+    <Compile Include="Event\EventDispatcher.cs" />
     <Compile Include="Event\FortTargetEvent.cs" />
     <Compile Include="Event\FortFailedEvent.cs" />
     <Compile Include="Event\FortUsedEvent.cs" />
@@ -71,13 +73,16 @@
     <Compile Include="Event\UseBerryEvent.cs" />
     <Compile Include="Event\EggIncubatorStatusEvent.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="Localization\Localizer.cs" />
     <Compile Include="Logging\Logger.cs" />
-    <Compile Include="LogicClient.cs" />
     <Compile Include="ILogicSettings.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="PoGoUtils\PokemonInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="State\Context.cs" />
+    <Compile Include="Service\BotService.cs" />
+    <Compile Include="Tasks\Farm.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="State\Session.cs" />
     <Compile Include="Event\ErrorEvent.cs" />
     <Compile Include="State\FarmState.cs" />
     <Compile Include="State\InfoState.cs" />
@@ -97,6 +102,7 @@
     <Compile Include="State\StateMachine.cs" />
     <Compile Include="Tasks\FarmPokestopsGPXTask.cs" />
     <Compile Include="Tasks\FarmPokestopsTask.cs" />
+    <Compile Include="Tasks\Login.cs" />
     <Compile Include="Tasks\RecycleItemsTask.cs" />
     <Compile Include="Tasks\RenamePokemonTask.cs" />
     <Compile Include="Tasks\TransferDuplicatePokemonTask.cs" />

@@ -22,14 +22,14 @@ namespace PoGo.NecroBot.Logic
     public class Inventory
     {
         private readonly Client _client;
-        private readonly LogicClient _logicClient;
+        private readonly ILogicSettings _logicSettings;
         private GetInventoryResponse _cachedInventory;
         private DateTime _lastRefresh;
 
-        public Inventory(Client client, LogicClient logicClient)
+        public Inventory(Client client, ILogicSettings logicSettings)
         {
             _client = client;
-            _logicClient = logicClient;
+            _logicSettings = logicSettings;
         }
 
         public async Task DeletePokemonFromInvById(ulong id)
@@ -135,7 +135,7 @@ namespace PoGo.NecroBot.Logic
                         p.OrderByDescending(x => x.Cp)
                             .ThenBy(n => n.StaminaMax)
                             .Skip(GetPokemonTransferFilter(p.Key).KeepMinDuplicatePokemon)
-                            .Skip(_logicClient.Settings.KeepMinDuplicatePokemon)
+                            .Skip(_logicSettings.KeepMinDuplicatePokemon)
                             .ToList());
         }
 
@@ -208,14 +208,14 @@ namespace PoGo.NecroBot.Logic
             var myItems = await GetItems();
 
             return myItems
-                .Where(x => _logicClient.Settings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
+                .Where(x => _logicSettings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
                 .Select(
                     x =>
                         new ItemData
                         {
                             ItemId = x.ItemId,
                             Count =
-                                x.Count - _logicClient.Settings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
+                                x.Count - _logicSettings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
         }
@@ -273,15 +273,15 @@ namespace PoGo.NecroBot.Logic
             {
                 myPokemons =
                     myPokemons.Where(
-                        p => (_logicClient.Settings.EvolveAllPokemonWithEnoughCandy && pokemonIds.Contains(p.PokemonId)) ||
-                             (_logicClient.Settings.EvolveAllPokemonAboveIv &&
-                              (PokemonInfo.CalculatePokemonPerfection(p) >= _logicClient.Settings.EvolveAboveIvValue)));
+                        p => (_logicSettings.EvolveAllPokemonWithEnoughCandy && pokemonIds.Contains(p.PokemonId)) ||
+                             (_logicSettings.EvolveAllPokemonAboveIv &&
+                              (PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.EvolveAboveIvValue)));
             }
-            else if (_logicClient.Settings.EvolveAllPokemonAboveIv)
+            else if (_logicSettings.EvolveAllPokemonAboveIv)
             {
                 myPokemons =
                     myPokemons.Where(
-                        p => PokemonInfo.CalculatePokemonPerfection(p) >= _logicClient.Settings.EvolveAboveIvValue);
+                        p => PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.EvolveAboveIvValue);
             }
             var pokemons = myPokemons.ToList();
 
@@ -317,13 +317,13 @@ namespace PoGo.NecroBot.Logic
 
         public TransferFilter GetPokemonTransferFilter(PokemonId pokemon)
         {
-            if (_logicClient.Settings.PokemonsTransferFilter != null)
+            if (_logicSettings.PokemonsTransferFilter != null)
             {
-                if (_logicClient.Settings.PokemonsTransferFilter.ContainsKey(pokemon))
-                    return _logicClient.Settings.PokemonsTransferFilter[pokemon];
+                if (_logicSettings.PokemonsTransferFilter.ContainsKey(pokemon))
+                    return _logicSettings.PokemonsTransferFilter[pokemon];
             }
-            return new TransferFilter(_logicClient.Settings.KeepMinCp, _logicClient.Settings.KeepMinIvPercentage,
-                _logicClient.Settings.KeepMinDuplicatePokemon);
+            return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinIvPercentage,
+                _logicSettings.KeepMinDuplicatePokemon);
         }
 
         public async Task<GetInventoryResponse> RefreshCachedInventory()
