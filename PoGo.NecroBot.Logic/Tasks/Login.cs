@@ -34,7 +34,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     try
                     {
-                        _session.Client.Login.DoPtcLogin(_session.Client.Settings.PtcUsername,_session.Client.Settings.PtcPassword).Wait();
+                        _session.Client.Login.DoPtcLogin().Wait();
                     }
                     catch (AggregateException ae)
                     {
