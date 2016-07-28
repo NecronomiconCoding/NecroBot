@@ -16,6 +16,38 @@
       "Key": "masterPokeball",
       "Value": "Meisterball"
     },
+    	{
+      "Key": "CatchStatusSuccess",
+      "Value": "Gefangen"
+    },
+	{
+      "Key": "CatchStatusError",
+      "Value": "Fehler beim Fangen"
+    },
+	{
+      "Key": "CatchStatusEscape",
+      "Value": "Entkommen"
+    },
+	{
+      "Key": "CatchStatusFlee",
+      "Value": "Geflüchtet"
+    },
+{
+      "Key": "CatchStatusMissed",
+      "Value": "Verfehlt"
+    },
+	 {
+      "Key": "CatchTypeIncense",
+      "Value": "Rauch"
+    },
+	 {
+      "Key": "CatchTypeLure",
+      "Value": "Lockmodul"
+    },
+	 {
+      "Key": "CatchTypeNormal",
+      "Value": "Wild"
+    },
     {
       "Key": "wrongAuthType",
       "Value": "Unbekannte Authentifizierungsart in der config.json festgelegt"

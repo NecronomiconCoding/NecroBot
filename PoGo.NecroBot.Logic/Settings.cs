@@ -23,8 +23,8 @@ namespace PoGo.NecroBot.CLI
         [JsonIgnore] private string _filePath;
 
         public string GoogleRefreshToken;
-        public string PtcPassword;
         public string PtcUsername;
+        public string PtcPassword;
 
         public void Load(string path)
         {
@@ -106,8 +106,9 @@ namespace PoGo.NecroBot.CLI
         public double DefaultLongitude = -73.968285;
         public int DelayBetweenPokemonCatch = 2000;
         public float EvolveAboveIvValue = 90;
-        public bool EvolveAllPokemonAboveIv = true;
-        public bool EvolveAllPokemonWithEnoughCandy = false;
+        public bool EvolveAllPokemonAboveIv = false;
+        public bool EvolveAllPokemonWithEnoughCandy = true;
+        public bool DumpPokemonStats = false;
         public string GpxFile = "GPXPath.GPX";
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
@@ -115,11 +116,11 @@ namespace PoGo.NecroBot.CLI
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
             new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
             new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 75),
+            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 50),
+            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 10),
+            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 40),
             new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
             new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
             new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
@@ -144,7 +145,7 @@ namespace PoGo.NecroBot.CLI
             new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
         };
 
-        public int KeepMinCp = 1000;
+        public int KeepMinCp = 1250;
         public int KeepMinDuplicatePokemon = 1;
         public float KeepMinIvPercentage = 95;
         public bool KeepPokemonsThatCanEvolve = false;
@@ -159,7 +160,6 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Nidoking,
             PokemonId.Clefable,
             PokemonId.Vileplume,
-            PokemonId.Golduck,
             PokemonId.Arcanine,
             PokemonId.Poliwrath,
             PokemonId.Machamp,
@@ -187,6 +187,7 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Dragonite,
             PokemonId.Mewtwo,
             PokemonId.Mew
+             //PokemonId.Golduck,
         };
 
         public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
@@ -194,9 +195,9 @@ namespace PoGo.NecroBot.CLI
             //12 candies
             PokemonId.Caterpie,
             PokemonId.Weedle,
-            PokemonId.Pidgey
+            PokemonId.Pidgey,
             //25 candies
-            //PokemonId.Rattata,
+            PokemonId.Rattata,
             //PokemonId.NidoranFemale,
             //PokemonId.NidoranMale,
             //PokemonId.Oddish,
@@ -208,6 +209,17 @@ namespace PoGo.NecroBot.CLI
             //PokemonId.Gastly,
             //PokemonId.Eevee,
             //PokemonId.Dratini
+            //50 candies
+            PokemonId.Spearow,
+            PokemonId.Zubat,
+            PokemonId.Doduo,
+            PokemonId.Goldeen,
+            PokemonId.Paras,
+            PokemonId.Ekans,
+            PokemonId.Staryu,
+            PokemonId.Psyduck,
+            PokemonId.Krabby,
+            PokemonId.Venonat
         };
 
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
@@ -226,23 +238,24 @@ namespace PoGo.NecroBot.CLI
             {PokemonId.Pidgeotto, new TransferFilter(1500, 90, 1)},
             {PokemonId.Fearow, new TransferFilter(1500, 90, 2)},
             {PokemonId.Golbat, new TransferFilter(1500, 90, 2)},
-            {PokemonId.Eevee, new TransferFilter(600, 80, 2)},
+            {PokemonId.Eevee, new TransferFilter(600, 90, 2)},
             {PokemonId.Mew, new TransferFilter(0, 0, 10)}
         };
 
-        public bool PrioritizeIvOverCp = false;
+        public bool PrioritizeIvOverCp = true;
         public string ProfilePath;
-        public bool RenameAboveIv = false;
+        public bool RenameAboveIv = true;
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
         public bool UseEggIncubators = true;
         public bool UseGpxPathing = false;
         public int UseLuckyEggsMinPokemonAmount = 30;
-        public bool UseLuckyEggsWhileEvolving = true;
+        public bool UseLuckyEggsWhileEvolving = false;
         public bool UsePokemonToNotCatchFilter = false;
-        public double WalkingSpeedInKilometerPerHour = 50;
+        public double WalkingSpeedInKilometerPerHour = 15.0;
         public int WebSocketPort = 14251;
         public static GlobalSettings Default => new GlobalSettings();
+        public bool StartupWelcomeDelay = true;
 
         public static GlobalSettings Load(string path)
         {
@@ -266,6 +279,62 @@ namespace PoGo.NecroBot.CLI
             else
             {
                 settings = new GlobalSettings();
+
+                Func<string, double> setLatLong = (latLong) =>
+                {
+                    double retVal = 0;
+
+                    Console.WriteLine("Choose your own {0}? (y/n)", latLong);
+                    var setLat = Console.ReadLine();
+
+                    if (setLat.ToUpper() == "Y")
+                    {
+                        var go = true;
+                        do
+                        {
+                            Console.WriteLine(
+                                "Enter the Default {0}:", latLong);
+
+                            var defVal = Console.ReadLine();
+
+                            double outVar;
+
+                            if (double.TryParse(
+                                defVal,
+                                out outVar))
+                            {
+                                retVal = outVar;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid {0}, Try again? (y/n)", latLong);
+                                var goAgain = Console.ReadLine();
+
+                                if (goAgain.ToUpper() != "Y")
+                                {
+                                    go = false;
+                                }
+                            }
+                        } while (!go);
+                    }
+
+                    return retVal;
+                };
+
+                var defLat = setLatLong(
+                    "Latitude");
+
+                if (defLat != 0)
+                    settings.DefaultLatitude = defLat;
+
+                var defLong = setLatLong(
+                    "Longitude");
+
+                if (defLong != 0)
+                    settings.DefaultLongitude = defLong;
+
+
+
             }
 
             if (settings.WebSocketPort == 0)
@@ -280,7 +349,7 @@ namespace PoGo.NecroBot.CLI
                 settings.Save(fullPath);
                 return null;
             }
-            
+            settings.Save(fullPath);
 
             settings.Auth.Load(Path.Combine(configPath, "auth.json"));
 
@@ -363,11 +432,13 @@ namespace PoGo.NecroBot.CLI
         public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
         public bool RenameAboveIv => _settings.RenameAboveIv;
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
+        public bool DumpPokemonStats => _settings.DumpPokemonStats;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
+        public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
     }
 }

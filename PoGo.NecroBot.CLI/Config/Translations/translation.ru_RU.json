@@ -141,7 +141,7 @@
     },
     {
       "Key": "logEntryPokestop",
-      "Value": "POKESTOP"
+      "Value": "ОСТАНОВКА"
     },
     {
       "Key": "logEntryFarming",
@@ -326,6 +326,18 @@
     {
       "Key": "catchTypeIncense",
       "Value": "ПРЯНОСТЬ"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - Онлайн {1} - Ур: {2} | EXP/час: {3:0} | П/час: {4:0} | Пыль: {5:0} | Передано: {6:0} | Переработано: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (след. ур. через {1}ч {2}м | {3}/{4} XP)"
+    },
+    {
+      "Key": "requireInputText",
+      "Value": "Нажмите любую кнопку для продолжения..."
     }
 
   ]

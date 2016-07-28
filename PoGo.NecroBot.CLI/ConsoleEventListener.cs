@@ -7,6 +7,7 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Networking.Responses;
+using System.Threading;
 
 #endregion
 
@@ -16,7 +17,7 @@ namespace PoGo.NecroBot.CLI
     {
         public void HandleEvent(ProfileEvent evt, Session session)
         {
-            Logger.Write(session.Translations.GetTranslation(TranslationString.EventFortUsed,
+            Logger.Write(session.Translations.GetTranslation(TranslationString.EventProfileLogin,
                 evt.Profile.PlayerData.Username ?? ""));
         }
 
@@ -33,6 +34,13 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(WarnEvent evt, Session session)
         {
             Logger.Write(evt.ToString(), LogLevel.Warning);
+
+            if (evt.RequireInput)
+            {
+                Logger.Write(session.Translations.GetTranslation(TranslationString.RequireInputText));
+                Console.ReadKey();
+            }
+
         }
 
         public void HandleEvent(UseLuckyEggEvent evt, Session session)
@@ -77,8 +85,15 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(FortUsedEvent evt, Session session)
         {
-            Logger.Write(
-                session.Translations.GetTranslation(TranslationString.EventFortUsed, evt.Name, evt.Exp, evt.Gems, evt.Items),
+            string itemString;
+            if (evt.inventoryFull)
+            {
+                itemString = session.Translations.GetTranslation(TranslationString.InvFullPokestopLooting);
+            } else {
+                itemString = evt.Items;
+            }
+                Logger.Write(
+                session.Translations.GetTranslation(TranslationString.EventFortUsed, evt.Name, evt.Exp, evt.Gems, itemString),
                 LogLevel.Pokestop);
         }
 

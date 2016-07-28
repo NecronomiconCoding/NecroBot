@@ -105,6 +105,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.PokemonSkipped, "Skipped {0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.InvFullTransferring, "PokemonInventory is Full.Transferring pokemons..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.InvFullTransferManually, "PokemonInventory is Full.Please Transfer pokemon manually or set TransferDuplicatePokemon to true in settings..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.InvFullPokestopLooting, "Inventory is full, no items looted!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.EncounterProblem, "Encounter problem: {0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.EncounterProblemLurePokemon, "Encounter problem: Lure pokemon {0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.DesiredDestTooFar, "Your desired destination of {0}, {1} is too far from your current position of {2}, {3}"),
@@ -119,7 +120,10 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchTypeNormal, "Normal"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchTypeLure, "Lure"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchTypeIncense, "Incense"),
-
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.WebSocketFailStart, "Failed to start WebSocketServer on port : {0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsTemplateString, "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transfered: {6:0} | Recycled: {7:0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsXpTemplateString, "{0} (next level in {1}h {2}m | {3}/{4} XP)"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.RequireInputText, "Program will continue after the key press..."),
         };
 
         public static Translations Default => new Translations();
@@ -250,6 +254,7 @@ namespace PoGo.NecroBot.Logic.Common
         PokemonSkipped,
         InvFullTransferring,
         InvFullTransferManually,
+        InvFullPokestopLooting,
         IncubatorEggHatched,
         EncounterProblem,
         EncounterProblemLurePokemon,
@@ -266,5 +271,9 @@ namespace PoGo.NecroBot.Logic.Common
         CatchTypeNormal,
         CatchTypeLure,
         CatchTypeIncense,
+        WebSocketFailStart,
+        StatsTemplateString,
+        StatsXpTemplateString,
+        RequireInputText,
     }
 }

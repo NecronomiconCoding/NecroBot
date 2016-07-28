@@ -8,5 +8,6 @@
         public string Items;
         public double Latitude;
         public double Longitude;
+        public bool inventoryFull;
     }
 }

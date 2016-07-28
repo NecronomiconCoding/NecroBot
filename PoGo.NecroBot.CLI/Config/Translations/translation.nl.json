@@ -22,8 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Buiten het ingestelde bereik beland! Terug naar beginpunt ({0}m away) in 5 seconden. Klopt je Coords.ini bestand?"
+      "Value": "Buiten het ingestelde bereik beland! Terug naar beginpunt ({0}m away) in 5 seconden. Klopt je Coords.ini bestand?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -34,12 +33,16 @@
       "Value": "XP: {0}, Gems: {1}, Items: {2}"
     },
     {
+      "Key": "eventFortFailed",
+      "Value": "Buitmaken mislukt, mogelijke softban. Opnieuw proberen: {0}/40"
+    },
+    {
       "Key": "eventFortTargeted",
-      "Value": "{0} in ({1}m)"
+      "Value": "{0} na ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Ingelogd als: {0}"
+      "Value": "Ingelogd als {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
@@ -63,12 +66,11 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value":
-        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kans: {7}% | Afstand: {8}m | gevangen met een {9} ({10} resterend). | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kans: {7}% | Afstand: {8}m | gevangen met een {9} ({10} resterend). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Geen Pokeballs resterend - Een {0} misgelopen met CP: {1}"
+      "Value": "Geen Pokeballs resterend - Een {0} met CP {1} misgelopen "
     },
     {
       "Key": "catchStatusAttempt",
@@ -81,6 +83,46 @@
     {
       "Key": "candies",
       "Value": "Candies: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Ongehanteerde data in GPX bestand, poging tot overslaan."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfect"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "naam"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "ToonHoogsteCP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "ToonHoogstePerfect"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "ToonHoogsteLevel"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Controleer of Lat & Lng kloppen. Sluit programma als dat niet zo is! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Ei in broedmachine stoppen: {0:0.00}km resterend"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Broedmachine status update: {0:0.00}km resterend"
     }
   ]
 }

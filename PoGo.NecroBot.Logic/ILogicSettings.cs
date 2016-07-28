@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System;
 using System.Collections.Generic;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
@@ -47,6 +48,7 @@ namespace PoGo.NecroBot.Logic
         int UseLuckyEggsMinPokemonAmount { get; }
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
+        bool DumpPokemonStats { get; }
         bool RenameAboveIv { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }
@@ -62,5 +64,7 @@ namespace PoGo.NecroBot.Logic
         ICollection<PokemonId> PokemonsNotToCatch { get; }
 
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
+
+        bool StartupWelcomeDelay { get; }
     }
 }
