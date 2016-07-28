@@ -59,13 +59,23 @@ namespace PoGo.NecroBot.Logic.Utils
                     hours = Math.Truncate(time);
                     minutes = Math.Round((time - hours)*100);
                 }
-
+                var Result = Execute(ctx);
+           
+                if (Result.Result.ToString().ToLower().Contains("success"))
+                {
+                    string[] tokens = Result.Result.ToString().Split(new[] { "itemId" }, StringSplitOptions.None);
+                    Logging.Logger.Write("Items Awarded:"+ Result.Result.ItemsAwarded.ToString());
+                }
                 output =
                     $"{stat.Level} (next level in {hours}h {minutes}m | {stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level)}/{stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)} XP)";
             }
             return output;
         }
-
+        public async Task<LevelUpRewardsResponse> Execute(Context ctx)
+        {
+            var Result = await ctx.Inventory.GetLevelUpRewards();
+            return Result;
+        }
         public double GetRuntime()
         {
             return (DateTime.Now - _initSessionDateTime).TotalSeconds/3600;
