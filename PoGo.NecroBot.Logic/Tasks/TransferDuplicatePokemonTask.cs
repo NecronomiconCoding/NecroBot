@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -53,6 +54,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     BestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType),
                     FamilyCandies = family.Candy
                 });
+
+                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
             }
         }
     }

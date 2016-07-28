@@ -38,6 +38,7 @@ namespace PoGo.NecroBot.Logic
         bool TransferDuplicatePokemon { get; }
         bool UseEggIncubators { get; }
         int DelayBetweenPokemonCatch { get; }
+        int DelayBetweenPlayerActions { get; }
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
         bool PrioritizeIvOverCp { get; }
@@ -53,7 +54,8 @@ namespace PoGo.NecroBot.Logic
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }
         string ProfilePath { get; }
-        string ConfigPath { get; }
+        string ProfileConfigPath { get; }
+        string GeneralConfigPath { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 

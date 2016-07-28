@@ -46,7 +46,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             session.EventDispatcher.Send(new ErrorEvent
                             {
-                                Message = session.Translations.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude, session.Client.CurrentLongitude)
+                                Message = session.Translation.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude, session.Client.CurrentLongitude)
                             });
                             break;
                         }

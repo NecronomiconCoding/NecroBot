@@ -29,18 +29,18 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
             var settings = GlobalSettings.Load(subPath);
+           
 
             if (settings == null)
             {
-                Logger.Write("This is your first start and the bot will use the default config!", LogLevel.Warning);
-                Logger.Write("Continue? (y/n)", LogLevel.Warning);
-
-                if (!Console.ReadLine().ToUpper().Equals("Y"))
-                    return;
-                settings = GlobalSettings.Load(subPath);
+                Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
+                Logger.Write("We will now shutdown to let you configure the bot and then launch it again.", LogLevel.Warning);
+                Thread.Sleep(2000);
+                Environment.Exit(0);
+                return;
             }
-
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
+
 
             /*SimpleSession session = new SimpleSession
             {
@@ -60,12 +60,12 @@ namespace PoGo.NecroBot.CLI
 
             var machine = new StateMachine();
             var stats = new Statistics();
-            stats.DirtyEvent += () => Console.Title = stats.GetTemplatedStats(session.Translations.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
-                session.Translations.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
+            stats.DirtyEvent += () => Console.Title = stats.GetTemplatedStats(session.Translation.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
+                session.Translation.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
 
             var aggregator = new StatisticsAggregator(stats);
             var listener = new ConsoleEventListener();
-            var websocket = new WebSocketInterface(settings.WebSocketPort, session.Translations);
+            var websocket = new WebSocketInterface(settings.WebSocketPort, session.Translation);
 
             session.EventDispatcher.EventReceived += (IEvent evt) => listener.Listen(evt, session);
             session.EventDispatcher.EventReceived += (IEvent evt) => aggregator.Listen(evt, session);
@@ -77,25 +77,6 @@ namespace PoGo.NecroBot.CLI
 
             session.Navigation.UpdatePositionEvent +=
                 (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
-
-            session.Client.Login.GoogleDeviceCodeEvent += (usercode, uri) =>
-            {
-                try
-                {
-                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.OpeningGoogleDevicePage), LogLevel.Warning);
-                    Thread.Sleep(5000);
-                    Process.Start(uri);
-                    var thread = new Thread(() => Clipboard.SetText(usercode)); //Copy device code
-                    thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
-                    thread.Start();
-                    thread.Join();
-                }
-                catch (Exception)
-                {
-                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard), LogLevel.Error);
-                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard2, uri, usercode), LogLevel.Error);
-                }
-            };
 
             machine.AsyncStart(new VersionCheckState(), session);
 

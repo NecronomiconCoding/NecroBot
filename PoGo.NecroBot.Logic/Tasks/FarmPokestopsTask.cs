@@ -33,7 +33,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 distanceFromStart > session.LogicSettings.MaxTravelDistanceInMeters)
             {
                 Logger.Write(
-                    session.Translations.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
+                    session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
 
                 await Task.Delay(1000);
@@ -51,7 +51,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 session.EventDispatcher.Send(new WarnEvent
                 {
-                    Message = session.Translations.GetTranslation(TranslationString.FarmPokestopsNoUsableFound)
+                    Message = session.Translation.GetTranslation(TranslationString.FarmPokestopsNoUsableFound)
                 });
             }
 
@@ -119,8 +119,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 Max = retryNumber - zeroCheck
                             });
 
-                            Random random = new Random();
-                            await Task.Delay(200 + random.Next(0, 200));  //Randomized pause
+                            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 400);
                         }
                     } else {
                         session.EventDispatcher.Send(new FortUsedEvent
