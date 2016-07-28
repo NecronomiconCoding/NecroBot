@@ -19,15 +19,17 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var pokemon in pokemons)
             {
-                var perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(pokemon));
-                var pokemonName = pokemon.PokemonId.ToString();
-                if (pokemonName.Length > 10 - perfection.ToString(CultureInfo.InvariantCulture).Length)
+                double perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(pokemon));
+                string pokemonName = pokemon.PokemonId.ToString();
+                // iv number + templating part + pokemonName <= 12
+                int nameLength = 12 - (perfection.ToString(CultureInfo.InvariantCulture).Length + session.LogicSettings.RenameTemplate.Length - 6);
+                if (pokemonName.nameLength > nameLenght)
                 {
-                    pokemonName = pokemonName.Substring(0, 10 - perfection.ToString(CultureInfo.InvariantCulture).Length);
+                    pokemonName = pokemonName.Substring(0, nameLength);
                 }
-                var newNickname = $"{pokemonName}_{perfection}";
+                string newNickname = String.Format(session.LogicSettings.RenameTemplate, pokemonName, perfection);
 
-                if (perfection > session.LogicSettings.KeepMinIvPercentage && newNickname != pokemon.Nickname &&
+                if (perfection >= session.LogicSettings.KeepMinIvPercentage && newNickname != pokemon.Nickname &&
                     session.LogicSettings.RenameAboveIv)
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
