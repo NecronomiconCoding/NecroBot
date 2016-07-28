@@ -108,6 +108,7 @@ namespace PoGo.NecroBot.CLI
         public bool UsePokemonToNotCatchFilter = false;
         public int WebSocketPort = 14251;
         public bool StartupWelcomeDelay = true;
+        public bool SnipeAtPokestops = true;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -239,6 +240,18 @@ namespace PoGo.NecroBot.CLI
             {PokemonId.Eevee, new TransferFilter(750, 92, 2)},
             {PokemonId.Gyarados, new TransferFilter(1200, 90, 5)},
             {PokemonId.Mew, new TransferFilter(0, 0, 10)}
+        };
+
+        public List<SnipeSettings> PokemonToSnipe = new List<SnipeSettings>
+        {
+            new SnipeSettings
+            {
+                Locations = new List<Bounds>
+                {
+                    new Bounds(38.535914,-121.300379,38.570683,-121.135584)
+                },
+                Pokemon = PokemonId.Dratini.ToString()
+            }
         };
         public static GlobalSettings Default => new GlobalSettings();
 
@@ -470,5 +483,7 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
+        public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
+        public ICollection<SnipeSettings> PokemonToSnipe => _settings.PokemonToSnipe;
     }
 }

@@ -9,6 +9,42 @@ using POGOProtos.Inventory.Item;
 
 namespace PoGo.NecroBot.Logic
 {
+    public class Bounds
+    {
+        public Bounds()
+        {
+        }
+
+        public Bounds(double latStart, double longStart, double latEnd, double longEnd)
+        {
+            LatStart = latStart;
+            LatEnd = latEnd;
+            LongStart = longStart;
+            LongEnd = longEnd;
+        }
+
+        public double LatStart { get; set; }
+        public double LatEnd { get; set; }
+        public double LongStart { get; set; }
+        public double LongEnd { get; set; }
+    }
+
+    public class SnipeSettings
+    {
+        public SnipeSettings()
+        {
+        }
+
+        public SnipeSettings(List<Bounds> locations, string pokemon)
+        {
+            Locations = locations;
+            Pokemon = pokemon;
+        }
+
+        public List<Bounds> Locations { get; set; }
+        public string Pokemon { get; set; }
+    }
+
     public class TransferFilter
     {
         public TransferFilter()
@@ -54,8 +90,10 @@ namespace PoGo.NecroBot.Logic
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }
         string ProfilePath { get; }
+        string ConfigPath { get; }
         string ProfileConfigPath { get; }
         string GeneralConfigPath { get; }
+        bool SnipeAtPokestops { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
@@ -66,6 +104,7 @@ namespace PoGo.NecroBot.Logic
         ICollection<PokemonId> PokemonsNotToCatch { get; }
 
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
+        ICollection<SnipeSettings> PokemonToSnipe { get; } 
 
         bool StartupWelcomeDelay { get; }
     }
