@@ -243,7 +243,7 @@ namespace PoGo.NecroBot.CLI
         public double WalkingSpeedInKilometerPerHour = 50;
         public int WebSocketPort = 14251;
         public static GlobalSettings Default => new GlobalSettings();
-        public int StartupWelcomeDelay = 5000;
+        public bool StartupWelcomeDelay = true;
 
         public static GlobalSettings Load(string path)
         {
@@ -370,6 +370,6 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
-        public int StartupWelcomeDelay => _settings.StartupWelcomeDelay;
+        public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
     }
 }

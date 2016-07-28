@@ -63,7 +63,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestsLevelHeader,
                 "DisplayHighestsLevel"),
             new KeyValuePair<TranslationString, string>(TranslationString.WelcomeWarning,
-                "Make sure Lat & Lng are right. Exit Program if not! Lat: {0} Lng: {1}\nProgram will continue in {2} sec..."),
+                "Make sure Lat & Lng are right. Exit Program if not! Lat: {0} Lng: {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.IncubatorPuttingEgg,
                 "Putting egg in incubator: {0:0.00}km left"),
             new KeyValuePair<TranslationString, string>(TranslationString.IncubatorStatusUpdate,
@@ -122,7 +122,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.WebSocketFailStart, "Failed to start WebSocketServer on port : {0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsTemplateString, "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transfered: {6:0} | Recycled: {7:0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsXpTemplateString, "{0} (next level in {1}h {2}m | {3}/{4} XP)"),
-
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.WelcomeDelayText, "Program will continue after the key press..."),
         };
 
         public static Translations Default => new Translations();
@@ -272,5 +272,6 @@ namespace PoGo.NecroBot.Logic.Common
         WebSocketFailStart,
         StatsTemplateString,
         StatsXpTemplateString,
+        WelcomeDelayText,
     }
 }

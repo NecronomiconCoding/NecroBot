@@ -64,6 +64,6 @@ namespace PoGo.NecroBot.Logic
 
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
 
-        int StartupWelcomeDelay { get; }
+        bool StartupWelcomeDelay { get; }
     }
 }

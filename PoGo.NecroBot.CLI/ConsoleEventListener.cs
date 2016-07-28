@@ -16,7 +16,7 @@ namespace PoGo.NecroBot.CLI
     {
         public void HandleEvent(ProfileEvent evt, Session session)
         {
-            Logger.Write(session.Translations.GetTranslation(TranslationString.EventFortUsed,
+            Logger.Write(session.Translations.GetTranslation(TranslationString.EventProfileLogin,
                 evt.Profile.PlayerData.Username ?? ""));
         }
 
