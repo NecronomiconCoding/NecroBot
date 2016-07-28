@@ -25,6 +25,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var curTrk = 0;
             var maxTrk = tracks.Count - 1;
             var curTrkSeg = 0;
+            var eggWalker = new EggWalker(1000, session);
             while (curTrk <= maxTrk)
             {
                 var track = tracks.ElementAt(curTrk);
@@ -45,7 +46,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             session.EventDispatcher.Send(new ErrorEvent
                             {
-                                Message = session.Translations.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude, session.Client.CurrentLongitude)
+                                Message = session.Translation.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude, session.Client.CurrentLongitude)
                             });
                             break;
                         }
@@ -91,11 +92,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             await RecycleItemsTask.Execute(session);
 
-                            if (session.LogicSettings.UseEggIncubators)
-                            {
-                                await UseIncubatorsTask.Execute(session);
-                            }
-
                             if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                                 session.LogicSettings.EvolveAllPokemonAboveIv)
                             {
@@ -123,6 +119,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 return true;
                             }
                             );
+
+                        await eggWalker.ApplyDistance(distance);
 
                         if (curTrkPt >= maxTrkPt)
                             curTrkPt = 0;

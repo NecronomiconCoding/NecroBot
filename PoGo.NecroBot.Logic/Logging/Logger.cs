@@ -44,10 +44,10 @@ namespace PoGo.NecroBot.Logic.Logging
         ///     Sets Context for the logger 
         /// </summary>
         /// <param name="session">Context</param>
-        public static void SetLoggerContext(Session session)
+        public static void SetLoggerContext(ISession session)
         {
             if (_logger != null)
-                _logger.SetContext(session);
+                _logger.SetSession(session);
         }
 
         /// <summary>
@@ -63,6 +63,7 @@ namespace PoGo.NecroBot.Logic.Logging
             _logger.Write(message, level, color);
             Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
         }
+
     }
 
     public enum LogLevel
