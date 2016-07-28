@@ -72,6 +72,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                 machine.Fire(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
+                Logger.Write("Next Pokestop location Latitude:" + pokeStop.Latitude + ":Longitude: " + pokeStop.Longitude + ":Altitude:" + session.Client.CurrentAltitude + " :info:" + fortInfo.Name, LogLevel.Pokestop);
 
                 await session.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour,
@@ -119,7 +120,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             });
 
                             Random random = new Random();
-                            await Task.Delay(200 + random.Next(0, 200));  //Randomized pause
+                            await Task.Delay(400 + random.Next(0, 400));  //Randomized pause
                         }
                     } else {
                         machine.Fire(new FortUsedEvent
@@ -131,6 +132,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Latitude = pokeStop.Latitude,
                             Longitude = pokeStop.Longitude
                         });
+                        Logger.Write("visited Pokestop location Latitude:" + pokeStop.Latitude + ":Longitude: " + pokeStop.Longitude + ":Altitude:" + session.Client.CurrentAltitude + " :info:" + fortInfo.Name, LogLevel.Pokestop);
+
 
                         break; //Continue with program as loot was succesfull.
                     }

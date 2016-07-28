@@ -18,6 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(Session session, StateMachine machine)
         {
             Logger.Write(session.Translations.GetTranslation(Common.TranslationString.LookingForPokemon), LogLevel.Debug);
+            Logger.Write("Current Player location Latitude:" + session.Client.CurrentLatitude + ":CurrentLng: " + session.Client.CurrentLongitude + ":Altitude:" + session.Client.CurrentAltitude, LogLevel.Info);
 
             var pokemons = await GetNearbyPokemons(session);
             foreach (var pokemon in pokemons)
@@ -38,6 +39,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                 {
                     await CatchPokemonTask.Execute(session, machine, encounter, pokemon);
+                    Logger.Write("Pokemon Found location Latitude:" + pokemon.Latitude + ":Longitude: " + pokemon.Longitude + ":Altitude:" + session.Client.CurrentAltitude + " :info:" + pokemon, LogLevel.Farming);
+
                 }
                 else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                 {
