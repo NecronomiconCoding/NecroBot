@@ -17,7 +17,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(ISession session)
         {
-            Logger.Write(session.Translations.GetTranslation(Common.TranslationString.LookingForPokemon), LogLevel.Debug);
+            Logger.Write(session.Translation.GetTranslation(Common.TranslationString.LookingForPokemon), LogLevel.Debug);
 
             var pokemons = await GetNearbyPokemons(session);
             foreach (var pokemon in pokemons)
@@ -25,7 +25,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (session.LogicSettings.UsePokemonToNotCatchFilter &&
                     session.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
                 {
-                    Logger.Write(session.Translations.GetTranslation(Common.TranslationString.PokemonSkipped, pokemon.PokemonId));
+                    Logger.Write(session.Translation.GetTranslation(Common.TranslationString.PokemonSkipped, pokemon.PokemonId));
                     continue;
                 }
 
@@ -43,18 +43,18 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     if (session.LogicSettings.TransferDuplicatePokemon)
                     {
-                        session.EventDispatcher.Send(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferring)});
+                        session.EventDispatcher.Send(new WarnEvent {Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferring)});
                         await TransferDuplicatePokemonTask.Execute(session);
                     }
                     else
                         session.EventDispatcher.Send(new WarnEvent
                         {
-                            Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferManually)
+                            Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferManually)
                         });
                 }
                 else
                 {
-                    session.EventDispatcher.Send(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Status)});
+                    session.EventDispatcher.Send(new WarnEvent {Message = session.Translation.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Status)});
                 }
 
                 // If pokemon is not last pokemon in list, create delay between catches, else keep moving.

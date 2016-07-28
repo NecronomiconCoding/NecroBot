@@ -10,13 +10,109 @@ using Newtonsoft.Json.Converters;
 
 namespace PoGo.NecroBot.Logic.Common
 {
-    public class Translations
+    public interface ITranslation
     {
-        public static string ProfilePath;
-        public static string ConfigPath;
+        string GetTranslation(TranslationString translationString, params object[] data);
 
+        string GetTranslation(TranslationString translationString);
+    }
+
+    public enum TranslationString
+    {
+        Pokeball,
+        GreatPokeball,
+        UltraPokeball,
+        MasterPokeball,
+        LogLevelDebug,
+        LogLevelPokestop,
+        WrongAuthType,
+        FarmPokestopsOutsideRadius,
+        FarmPokestopsNoUsableFound,
+        EventFortUsed,
+        EventFortFailed,
+        EventFortTargeted,
+        EventProfileLogin,
+        EventUsedLuckyEgg,
+        EventPokemonEvolvedSuccess,
+        EventPokemonEvolvedFailed,
+        EventPokemonTransferred,
+        EventItemRecycled,
+        EventPokemonCapture,
+        EventNoPokeballs,
+        CatchStatusAttempt,
+        CatchStatus,
+        Candies,
+        UnhandledGpxData,
+        DisplayHighestsHeader,
+        CommonWordPerfect,
+        CommonWordName,
+        DisplayHighestsCpHeader,
+        DisplayHighestsPerfectHeader,
+        WelcomeWarning,
+        IncubatorPuttingEgg,
+        IncubatorStatusUpdate,
+        DisplayHighestsLevelHeader,
+        LogEntryError,
+        LogEntryAttention,
+        LogEntryInfo,
+        LogEntryPokestop,
+        LogEntryFarming,
+        LogEntryRecycling,
+        LogEntryPKMN,
+        LogEntryTransfered,
+        LogEntryEvolved,
+        LogEntryBerry,
+        LogEntryEgg,
+        LogEntryDebug,
+        LogEntryUpdate,
+        LoggingIn,
+        PtcOffline,
+        TryingAgainIn,
+        AccountNotVerified,
+        CommonWordUnknown,
+        OpeningGoogleDevicePage,
+        CouldntCopyToClipboard,
+        CouldntCopyToClipboard2,
+        RealisticTravelDetected,
+        NotRealisticTravel,
+        CoordinatesAreInvalid,
+        GotUpToDateVersion,
+        AutoUpdaterDisabled,
+        DownloadingUpdate,
+        FinishedDownloadingRelease,
+        FinishedUnpackingFiles,
+        UpdateFinished,
+        LookingForIncensePokemon,
+        PokemonSkipped,
+        InvFullTransferring,
+        InvFullTransferManually,
+        InvFullPokestopLooting,
+        IncubatorEggHatched,
+        EncounterProblem,
+        EncounterProblemLurePokemon,
+        LookingForPokemon,
+        LookingForLurePokemon,
+        DesiredDestTooFar,
+        PokemonRename,
+        PokemonIgnoreFilter,
+        CatchStatusError,
+        CatchStatusEscape,
+        CatchStatusFlee,
+        CatchStatusMissed,
+        CatchStatusSuccess,
+        CatchTypeNormal,
+        CatchTypeLure,
+        CatchTypeIncense,
+        WebSocketFailStart,
+        StatsTemplateString,
+        StatsXpTemplateString,
+        RequireInputText,
+    }
+
+    public class Translation : ITranslation
+    {
         //Default Translations (ENGLISH)
-        public List<KeyValuePair<TranslationString, string>> TranslationStrings = new List
+        private List<KeyValuePair<TranslationString, string>> TranslationStrings = new List
             <KeyValuePair<TranslationString, string>>
         {
             new KeyValuePair<TranslationString, string>(TranslationString.Pokeball, "PokeBall"),
@@ -126,8 +222,6 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.RequireInputText, "Program will continue after the key press..."),
         };
 
-        public static Translations Default => new Translations();
-
         public string GetTranslation(TranslationString translationString, params object[] data)
         {
             var translation = TranslationStrings.FirstOrDefault(t => t.Key.Equals(translationString)).Value;
@@ -142,14 +236,14 @@ namespace PoGo.NecroBot.Logic.Common
             return translation != default(string) ? translation : $"Translation for {translationString} is missing";
         }
 
-        public static Translations Load(string translationsLanguageCode)
+        public static Translation Load(string translationsLanguageCode)
         {
-            ProfilePath = Directory.GetCurrentDirectory();
-            ConfigPath = Path.Combine(ProfilePath, "config", "translations");
+            string profilePath = Directory.GetCurrentDirectory();
+            string configPath = Path.Combine(profilePath, "config", "translations");
 
-            var fullPath = Path.Combine(ConfigPath, "translation." + translationsLanguageCode + ".json");
+            var fullPath = Path.Combine(configPath, "translation." + translationsLanguageCode + ".json");
 
-            Translations translations;
+            Translation translations;
             if (File.Exists(fullPath))
             {
                 var input = File.ReadAllText(fullPath);
@@ -159,13 +253,13 @@ namespace PoGo.NecroBot.Logic.Common
                 jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                 jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
-                translations = JsonConvert.DeserializeObject<Translations>(input, jsonSettings);
+                translations = JsonConvert.DeserializeObject<Translation>(input, jsonSettings);
                 translations.Save(fullPath);
             }
             else
             {
-                translations = new Translations();
-                translations.Save(Path.Combine(ConfigPath, "translation.en.json"));
+                translations = new Translation();
+                translations.Save(Path.Combine(configPath, "translation.en.json"));
             }
             return translations;
         }
@@ -183,97 +277,5 @@ namespace PoGo.NecroBot.Logic.Common
 
             File.WriteAllText(fullPath, output);
         }
-    }
-
-    public enum TranslationString
-    {
-        Pokeball,
-        GreatPokeball,
-        UltraPokeball,
-        MasterPokeball,
-        LogLevelDebug,
-        LogLevelPokestop,
-        WrongAuthType,
-        FarmPokestopsOutsideRadius,
-        FarmPokestopsNoUsableFound,
-        EventFortUsed,
-        EventFortFailed,
-        EventFortTargeted,
-        EventProfileLogin,
-        EventUsedLuckyEgg,
-        EventPokemonEvolvedSuccess,
-        EventPokemonEvolvedFailed,
-        EventPokemonTransferred,
-        EventItemRecycled,
-        EventPokemonCapture,
-        EventNoPokeballs,
-        CatchStatusAttempt,
-        CatchStatus,
-        Candies,
-        UnhandledGpxData,
-        DisplayHighestsHeader,
-        CommonWordPerfect,
-        CommonWordName,
-        DisplayHighestsCpHeader,
-        DisplayHighestsPerfectHeader,
-        WelcomeWarning,
-        IncubatorPuttingEgg,
-        IncubatorStatusUpdate,
-        DisplayHighestsLevelHeader,
-        LogEntryError,
-        LogEntryAttention,
-        LogEntryInfo,
-        LogEntryPokestop,
-        LogEntryFarming,
-        LogEntryRecycling,
-        LogEntryPKMN,
-        LogEntryTransfered,
-        LogEntryEvolved,
-        LogEntryBerry,
-        LogEntryEgg,
-        LogEntryDebug,
-        LogEntryUpdate,
-        LoggingIn,
-        PtcOffline,
-        TryingAgainIn,
-        AccountNotVerified,
-        CommonWordUnknown,
-        OpeningGoogleDevicePage,
-        CouldntCopyToClipboard,
-        CouldntCopyToClipboard2,
-        RealisticTravelDetected,
-        NotRealisticTravel,
-        CoordinatesAreInvalid,
-        GotUpToDateVersion,
-        AutoUpdaterDisabled,
-        DownloadingUpdate,
-        FinishedDownloadingRelease,
-        FinishedUnpackingFiles,
-        UpdateFinished,
-        LookingForIncensePokemon,
-        PokemonSkipped,
-        InvFullTransferring,
-        InvFullTransferManually,
-        InvFullPokestopLooting,
-        IncubatorEggHatched,
-        EncounterProblem,
-        EncounterProblemLurePokemon,
-        LookingForPokemon,
-        LookingForLurePokemon,
-        DesiredDestTooFar,
-        PokemonRename,
-        PokemonIgnoreFilter,
-        CatchStatusError,
-        CatchStatusEscape,
-        CatchStatusFlee,
-        CatchStatusMissed,
-        CatchStatusSuccess,
-        CatchTypeNormal,
-        CatchTypeLure,
-        CatchTypeIncense,
-        WebSocketFailStart,
-        StatsTemplateString,
-        StatsXpTemplateString,
-        RequireInputText,
     }
 }

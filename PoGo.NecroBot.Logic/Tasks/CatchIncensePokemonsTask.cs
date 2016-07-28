@@ -17,7 +17,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(ISession session)
         {
-            Logger.Write(session.Translations.GetTranslation(Common.TranslationString.LookingForIncensePokemon), LogLevel.Debug);
+            Logger.Write(session.Translation.GetTranslation(Common.TranslationString.LookingForIncensePokemon), LogLevel.Debug);
 
 
             var incensePokemon = await session.Client.Map.GetIncensePokemons();
@@ -36,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (session.LogicSettings.UsePokemonToNotCatchFilter &&
                     session.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
                 {
-                    Logger.Write(session.Translations.GetTranslation(Common.TranslationString.PokemonIgnoreFilter, pokemon.PokemonId));
+                    Logger.Write(session.Translation.GetTranslation(Common.TranslationString.PokemonIgnoreFilter, pokemon.PokemonId));
                 }
                 else
                 {
@@ -57,18 +57,18 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         if (session.LogicSettings.TransferDuplicatePokemon)
                         {
-                            session.EventDispatcher.Send(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferring)});
+                            session.EventDispatcher.Send(new WarnEvent {Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferring)});
                             await TransferDuplicatePokemonTask.Execute(session);
                         }
                         else
                             session.EventDispatcher.Send(new WarnEvent
                             {
-                                Message = session.Translations.GetTranslation(Common.TranslationString.InvFullTransferManually)
+                                Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferManually)
                             });
                     }
                     else
                     {
-                        session.EventDispatcher.Send(new WarnEvent {Message = session.Translations.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Result)});
+                        session.EventDispatcher.Send(new WarnEvent {Message = session.Translation.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Result)});
                     }
                 }
             }

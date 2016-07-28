@@ -14,7 +14,7 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(ISession session)
         {
-            session.EventDispatcher.Send(new NoticeEvent { Message = session.Translations.GetTranslation(Common.TranslationString.LoggingIn, session.Settings.AuthType) });
+            session.EventDispatcher.Send(new NoticeEvent { Message = session.Translation.GetTranslation(Common.TranslationString.LoggingIn, session.Settings.AuthType) });
             try
             {
                 switch (session.Settings.AuthType)
@@ -33,7 +33,7 @@ namespace PoGo.NecroBot.Logic.State
                         await session.Client.Login.DoGoogleLogin(session.Settings.GoogleUsername, session.Settings.GooglePassword);
                         break;
                     default:
-                        session.EventDispatcher.Send(new ErrorEvent {Message = session.Translations.GetTranslation(Common.TranslationString.WrongAuthType)});
+                        session.EventDispatcher.Send(new ErrorEvent {Message = session.Translation.GetTranslation(Common.TranslationString.WrongAuthType)});
                         return null;
                 }
             }
@@ -41,15 +41,15 @@ namespace PoGo.NecroBot.Logic.State
             {
                 session.EventDispatcher.Send(new ErrorEvent
                 {
-                    Message = session.Translations.GetTranslation(Common.TranslationString.PtcOffline)
+                    Message = session.Translation.GetTranslation(Common.TranslationString.PtcOffline)
                 });
-                session.EventDispatcher.Send(new NoticeEvent {Message = session.Translations.GetTranslation(Common.TranslationString.TryingAgainIn, 20)});
+                session.EventDispatcher.Send(new NoticeEvent {Message = session.Translation.GetTranslation(Common.TranslationString.TryingAgainIn, 20)});
                 await Task.Delay(20000);
                 return this;
             }
             catch (AccountNotVerifiedException)
             {
-                session.EventDispatcher.Send(new ErrorEvent {Message = session.Translations.GetTranslation(Common.TranslationString.AccountNotVerified)});
+                session.EventDispatcher.Send(new ErrorEvent {Message = session.Translation.GetTranslation(Common.TranslationString.AccountNotVerified)});
                 return null;
             }
 

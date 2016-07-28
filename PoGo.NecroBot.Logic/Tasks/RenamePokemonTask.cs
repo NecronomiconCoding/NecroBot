@@ -34,7 +34,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     session.EventDispatcher.Send(new NoticeEvent
                     {
-                        Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, newNickname)
+                        Message = session.Translation.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, newNickname)
                     });
                 }
                 else if (newNickname == pokemon.Nickname && !session.LogicSettings.RenameAboveIv)
@@ -43,7 +43,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     session.EventDispatcher.Send(new NoticeEvent
                     {
-                        Message = session.Translations.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, pokemon.PokemonId)
+                        Message = session.Translation.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, pokemon.Nickname, pokemon.PokemonId)
                     });
                 }
             }

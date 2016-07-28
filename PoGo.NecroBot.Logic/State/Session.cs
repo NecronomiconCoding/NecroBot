@@ -18,7 +18,7 @@ namespace PoGo.NecroBot.Logic.State
         GetPlayerResponse Profile { get; set; }
         Navigation Navigation { get;  }
         ILogicSettings LogicSettings { get; }
-        Translations Translations { get; }
+        ITranslation Translation { get; }
         IEventDispatcher EventDispatcher { get; }
     }
 
@@ -30,7 +30,7 @@ namespace PoGo.NecroBot.Logic.State
             Settings = settings;
             LogicSettings = logicSettings;
             EventDispatcher = new EventDispatcher();
-            Translations = Translations.Load(logicSettings.TranslationLanguageCode);
+            Translation = Common.Translation.Load(logicSettings.TranslationLanguageCode);
             Reset(settings, LogicSettings);
         }
 
@@ -45,7 +45,7 @@ namespace PoGo.NecroBot.Logic.State
 
         public ILogicSettings LogicSettings { get; }
 
-        public Translations Translations { get; private set; }
+        public ITranslation Translation { get; private set; }
 
         public IEventDispatcher EventDispatcher{ get; private set; }
 
