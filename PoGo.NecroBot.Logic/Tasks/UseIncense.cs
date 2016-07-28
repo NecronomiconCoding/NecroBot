@@ -11,26 +11,18 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     class UseIncense
     {
-        private static ISession ctx2;
+      
 
         public static async Task Execute(ISession Session)
         {
+            var UseEgg =await Session.Inventory.UseIncenseConstantly();
 
-            Timer t = new Timer(TimerCallback, null, 0, 300000);
-            ctx2 = Session;
-        }
-        private static void TimerCallback(Object o)
-        {
-           
-           
-            var UseEgg = ctx2.Inventory.UseIncenseConstantly();
-        
-            if (UseEgg.Result.Result.ToString().ToLower().Contains("errornoitemsremaining"))
+            if (UseEgg.Result.ToString().Contains("NoneInInventory"))
             {
                 Logging.Logger.Write("No Incense Available");
 
             }
-            else if (UseEgg.Result.Result.ToString().Contains("IncenseAlreadyActive"))
+            else if (UseEgg.Result.ToString().Contains("IncenseAlreadyActive"))
             {
                 Logging.Logger.Write("Incense Already Active");
             }
@@ -40,5 +32,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
 
         }
+ 
     }
 }

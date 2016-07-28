@@ -20,8 +20,7 @@ namespace PoGo.NecroBot.Logic.State
             {
                 await TransferDuplicatePokemonTask.Execute(session);
             }
-            await UseLuckyEgg.Execute(session);
-            await UseIncense.Execute(session);
+            
             if (session.LogicSettings.RenameAboveIv)
             {
                 await RenamePokemonTask.Execute(session);
