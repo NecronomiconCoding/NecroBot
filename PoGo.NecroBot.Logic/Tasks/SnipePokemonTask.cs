@@ -69,7 +69,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             q => Enum.Parse(typeof(PokemonId), q) as PokemonId? ?? PokemonId.Missingno).Select(q => (int)q);
 
 
-                    var locationsToSnipe = scanResult.pokemon.Where(q =>
+                    var locationsToSnipe = scanResult.pokemon == null ? new List<PokemonLocation>() : scanResult.pokemon.Where(q =>
                         pokemonIds.Contains(q.pokemonId)
                         && !locsVisited.Contains(q)
                         && q.expiration_time < currentTimestamp
