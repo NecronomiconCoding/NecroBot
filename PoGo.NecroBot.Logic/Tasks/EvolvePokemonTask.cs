@@ -72,7 +72,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             await session.Client.Inventory.UseItemXpBoost();
             await session.Inventory.RefreshCachedInventory();
             session.EventDispatcher.Send(new UseLuckyEggEvent {Count = luckyEgg.Count});
-            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
+            await DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
         }
     }
 }
