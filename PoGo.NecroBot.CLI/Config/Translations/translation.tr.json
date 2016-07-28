@@ -359,6 +359,14 @@
     {
       "Key": "missingCredentialsPtc",
       "Value": "\"auth.json\" dosyasına PtcUsername ve PtcPassword değerlerini girmen gerek!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[Keskin Nişancı] {0} da nişan alınacak pokemon aranıyor..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Keskin Nişancı] Nişan alınacak pokemon bulunamadı."
     }
   ]
 }
