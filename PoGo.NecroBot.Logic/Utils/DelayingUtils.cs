@@ -12,8 +12,8 @@ namespace PoGo.NecroBot.Logic.Utils
             if (delay > 0)
             {
                 float randomFactor = 0.3f;
-                int randomMin = delay * (1 - randomFactor);
-                int randomMax = delay * (1 + randomFactor);
+                int randomMin = (int)(delay * (1 - randomFactor));
+                int randomMax = (int)(delay * (1 + randomFactor));
                 int randomizedDelay = RandomDevice.Next(randomMin, randomMax);
 
                 await Task.Delay(randomizedDelay);
