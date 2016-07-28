@@ -15,7 +15,7 @@ namespace PoGo.NecroBot.CLI
     public class ConsoleLogger : ILogger
     {
         private readonly LogLevel _maxLogLevel;
-        private Session _ctx;
+        private ISession _session;
 
         /// <summary>
         ///     To create a ConsoleLogger, we must define a maximum log level.
@@ -54,21 +54,21 @@ namespace PoGo.NecroBot.CLI
             var strDebug = "DEBUG";
             var strUpdate = "UPDATE";
 
-            if(_ctx != null)
+            if(_session != null)
             {
-                strError     = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryError);
-                strAttention = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryAttention);
-                strInfo      = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryInfo);
-                strPokestop  = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryPokestop);
-                strFarming   = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryFarming);
-                strRecycling = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryRecycling);
-                strPKMN      = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryPKMN);
-                strTransfered= _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryTransfered);
-                strEvolved   = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryEvolved);
-                strBerry     = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryBerry); 
-                strEgg       = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryEgg); 
-                strDebug     = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryDebug);
-                strUpdate = _ctx.Translations.GetTranslation(Logic.Common.TranslationString.LogEntryUpdate);
+                strError     = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryError);
+                strAttention = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryAttention);
+                strInfo      = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryInfo);
+                strPokestop  = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryPokestop);
+                strFarming   = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryFarming);
+                strRecycling = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryRecycling);
+                strPKMN      = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryPKMN);
+                strTransfered= _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryTransfered);
+                strEvolved   = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryEvolved);
+                strBerry     = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryBerry); 
+                strEgg       = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryEgg); 
+                strDebug     = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryDebug);
+                strUpdate = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryUpdate);
             }
 
             switch (level)
@@ -132,9 +132,9 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        public void SetContext(Session session)
+        public void SetSession(ISession session)
         {
-            _ctx = session;
+            _session = session;
         }
     }
 }

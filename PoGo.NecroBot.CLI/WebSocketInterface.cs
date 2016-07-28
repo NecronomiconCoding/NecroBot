@@ -19,7 +19,7 @@ namespace PoGo.NecroBot.CLI
         private ProfileEvent _lastProfile;
         private readonly WebSocketServer _server;
 
-        public WebSocketInterface(int port, Translations translations)
+        public WebSocketInterface(int port, ITranslation translations)
         {
             _server = new WebSocketServer();
             var setupComplete = _server.Setup(new ServerConfig

@@ -40,18 +40,18 @@ namespace PoGo.NecroBot.Logic.State
                     session.EventDispatcher.Send(new UpdateEvent
                     {
                         Message =
-                            session.Translations.GetTranslation(Common.TranslationString.GotUpToDateVersion, RemoteVersion)
+                            session.Translation.GetTranslation(Common.TranslationString.GotUpToDateVersion, RemoteVersion)
                     });
                     return new LoginState();
                 }
                 session.EventDispatcher.Send(new UpdateEvent
                 {
-                    Message = session.Translations.GetTranslation(Common.TranslationString.AutoUpdaterDisabled, LatestRelease)                  
+                    Message = session.Translation.GetTranslation(Common.TranslationString.AutoUpdaterDisabled, LatestRelease)                  
                 });
 
                 return new LoginState();
             }
-            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.DownloadingUpdate)});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translation.GetTranslation(Common.TranslationString.DownloadingUpdate)});
             var remoteReleaseUrl =
             $"https://github.com/NecronomiconCoding/NecroBot/releases/download/v{RemoteVersion}/";
             const string zipName = "Release.zip";
@@ -63,12 +63,12 @@ namespace PoGo.NecroBot.Logic.State
             var destinationDir = baseDir + Path.DirectorySeparatorChar;
             Console.WriteLine(downloadLink);
             if (!DownloadFile(downloadLink, downloadFilePath)) return new LoginState();
-            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.FinishedDownloadingRelease)});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translation.GetTranslation(Common.TranslationString.FinishedDownloadingRelease)});
             if (!UnpackFile(downloadFilePath, tempPath)) return new LoginState();
-            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.FinishedUnpackingFiles)});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translation.GetTranslation(Common.TranslationString.FinishedUnpackingFiles)});
 
             if (!MoveAllFiles(extractedDir, destinationDir)) return new LoginState();
-            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translations.GetTranslation(Common.TranslationString.UpdateFinished)});
+            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translation.GetTranslation(Common.TranslationString.UpdateFinished)});
 
             Process.Start(Assembly.GetEntryAssembly().Location);
             Environment.Exit(-1);
@@ -101,6 +101,7 @@ namespace PoGo.NecroBot.Logic.State
                     Logger.Write(e.ToString());
                 }
             }
+            await Task.Delay(200);
         }
 
         public static bool DownloadFile(string url, string dest)

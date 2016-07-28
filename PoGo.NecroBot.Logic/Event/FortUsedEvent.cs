@@ -2,6 +2,7 @@
 {
     public class FortUsedEvent : IEvent
     {
+        public string Id;
         public string Name;
         public int Exp;
         public int Gems;

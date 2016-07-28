@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Inventory.Item;
 
@@ -23,7 +24,14 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokemonToEvolve.Any())
             {
-                if (session.LogicSettings.UseLuckyEggsWhileEvolving)
+                var inventoryContent = await session.Inventory.GetItems();
+
+                var luckyEggs = inventoryContent.Where(p => p.ItemId == ItemId.ItemLuckyEgg);
+                var luckyEgg = luckyEggs.FirstOrDefault();
+                
+                //maybe there can be a warning message as an else condition of luckyEgg checks, like; 
+                //"There is no Lucky Egg, so, your UseLuckyEggsMinPokemonAmount setting bypassed."
+                if (session.LogicSettings.UseLuckyEggsWhileEvolving && luckyEgg != null && luckyEgg.Count > 0)
                 {
                     if (pokemonToEvolve.Count >= session.LogicSettings.UseLuckyEggsMinPokemonAmount)
                     {
@@ -57,14 +65,14 @@ namespace PoGo.NecroBot.Logic.Tasks
             var luckyEggs = inventoryContent.Where(p => p.ItemId == ItemId.ItemLuckyEgg);
             var luckyEgg = luckyEggs.FirstOrDefault();
 
-            if (luckyEgg == null || luckyEgg.Count <= 0 || _lastLuckyEggTime.AddMinutes(30).Ticks > DateTime.Now.Ticks)
+            if (_lastLuckyEggTime.AddMinutes(30).Ticks > DateTime.Now.Ticks)
                 return;
 
             _lastLuckyEggTime = DateTime.Now;
             await session.Client.Inventory.UseItemXpBoost();
             await session.Inventory.RefreshCachedInventory();
             session.EventDispatcher.Send(new UseLuckyEggEvent {Count = luckyEgg.Count});
-            await Task.Delay(2000);
+            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
         }
     }
 }

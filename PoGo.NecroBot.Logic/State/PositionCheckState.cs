@@ -38,17 +38,18 @@ namespace PoGo.NecroBot.Logic.State
                                 File.Delete(coordsPath);
                                 session.EventDispatcher.Send(new WarnEvent
                                 {
-                                    Message = session.Translations.GetTranslation(TranslationString.RealisticTravelDetected)
+                                    Message = session.Translation.GetTranslation(TranslationString.RealisticTravelDetected)
                                 });
                             }
                             else
                             {
                                 session.EventDispatcher.Send(new WarnEvent
                                 {
-                                    Message =session.Translations.GetTranslation(TranslationString.NotRealisticTravel, kmph)
+                                    Message =session.Translation.GetTranslation(TranslationString.NotRealisticTravel, kmph)
                                 });
                             }
                         }
+                        await Task.Delay(200);
                     }
                 }
             }
@@ -56,7 +57,7 @@ namespace PoGo.NecroBot.Logic.State
             session.EventDispatcher.Send(new WarnEvent
             {
                 Message =
-                    session.Translations.GetTranslation(TranslationString.WelcomeWarning, session.Client.CurrentLatitude,
+                    session.Translation.GetTranslation(TranslationString.WelcomeWarning, session.Client.CurrentLatitude,
                         session.Client.CurrentLongitude),
                 RequireInput = session.LogicSettings.StartupWelcomeDelay
             });
@@ -89,7 +90,7 @@ namespace PoGo.NecroBot.Logic.State
                         }
                         session.EventDispatcher.Send(new WarnEvent
                         {
-                            Message = session.Translations.GetTranslation(TranslationString.CoordinatesAreInvalid)
+                            Message = session.Translation.GetTranslation(TranslationString.CoordinatesAreInvalid)
                         });
                         return null;
                     }
@@ -97,7 +98,7 @@ namespace PoGo.NecroBot.Logic.State
                     {
                         session.EventDispatcher.Send(new WarnEvent
                         {
-                            Message = session.Translations.GetTranslation(TranslationString.CoordinatesAreInvalid)
+                            Message = session.Translation.GetTranslation(TranslationString.CoordinatesAreInvalid)
                         });
                         return null;
                     }

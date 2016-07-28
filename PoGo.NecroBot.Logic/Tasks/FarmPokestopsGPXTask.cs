@@ -46,7 +46,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             session.EventDispatcher.Send(new ErrorEvent
                             {
-                                Message = session.Translations.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude, session.Client.CurrentLongitude)
+                                Message = session.Translation.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude, session.Client.CurrentLongitude)
                             });
                             break;
                         }
@@ -64,7 +64,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             var pokeStop = pokestopList[0];
                             pokestopList.RemoveAt(0);
 
-                            await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                            var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                             if (pokeStop.LureInfo != null)
                             {
@@ -78,6 +78,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 session.EventDispatcher.Send(new FortUsedEvent
                                 {
+                                    Id = pokeStop.Id,
+                                    Name = fortInfo.Name,
                                     Exp = fortSearch.ExperienceAwarded,
                                     Gems = fortSearch.GemsAwarded,
                                     Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded),
@@ -91,6 +93,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                             }
 
                             await RecycleItemsTask.Execute(session);
+
+                            if (session.LogicSettings.SnipeAtPokestops)
+                            {
+                                await SnipePokemonTask.Execute(session);
+                            }
 
                             if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                                 session.LogicSettings.EvolveAllPokemonAboveIv)
