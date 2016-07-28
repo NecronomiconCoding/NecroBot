@@ -44,43 +44,6 @@ namespace PoGo.NecroBot.CLI
             }
             else
             {
-                string type;
-                do
-                {
-                    Console.WriteLine("Please choose your AuthType");
-                    Console.WriteLine("(0) for Google Authentication");
-                    Console.WriteLine("(1) for Pokemon Trainer Club");
-                    type = Console.ReadLine();
-                } while (type != "1" && type != "0");
-                AuthType = type.Equals("0") ? AuthType.Google : AuthType.Ptc;
-                if (AuthType == AuthType.Ptc)
-                {
-                    do
-                    {
-                        Console.WriteLine("Username:");
-                        PtcUsername = Console.ReadLine();
-                    } while (string.IsNullOrEmpty(PtcUsername));
-                    do
-                    {
-                        Console.WriteLine("Password:");
-                        PtcPassword = Console.ReadLine();
-                    } while (string.IsNullOrEmpty(PtcPassword));
-                }
-                else
-                {
-                    do
-                    {
-                        Console.WriteLine("Email:");
-                        GoogleUsername = Console.ReadLine();
-                    } while (string.IsNullOrEmpty(GoogleUsername));
-                    do
-                    {
-                        Console.WriteLine("Password:");
-                        GooglePassword = Console.ReadLine();
-                    } while (string.IsNullOrEmpty(GooglePassword));
-                }
-
-
                 Save(_filePath);
             }
         }
