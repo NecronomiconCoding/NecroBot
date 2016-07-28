@@ -104,12 +104,20 @@
       "Value": "имя"
     },
     {
+      "Key": "commonWordUnknown",
+      "Value": "Неизвестный"
+    },
+    {
       "Key": "displayHighestsCPHeader",
       "Value": "ТОП по CP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
       "Value": "ТОП по идеальным статам"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "ТОП по уровню"
     },
     {
       "Key": "welcomeWarning",
@@ -124,8 +132,8 @@
       "Value": "Статус инкубатора: {0:0.00}км осталось"
     },
     {
-      "Key": "displayHighestsLevelHeader",
-      "Value": "ТОП по уровню"
+      "Key": "incubatorEggHatched",
+      "Value": "Из яйца вылупился: {0}"
     },
     {
       "Key": "logEntryError",
@@ -268,6 +276,10 @@
       "Value": "Инвентарь полон. Вручную передайте покемона профессору или установите настройку TransferDuplicatePokemon в true ..."
     },
     {
+      "Key": "invFullPokestopLooting",
+      "Value": "Инвентарь полон, предметы не полутаны!"
+    },
+    {
       "Key": "encounterProblem",
       "Value": "Проблема с поимкой: {0}"
     },
@@ -312,10 +324,6 @@
       "Value": "УСПЕХ"
     },
     {
-      "Key": "incubatorEggHatched",
-      "Value": "Из яйца в инкубаторе вылупился: {0}"
-    },
-    {
       "Key": "catchTypeNormal",
       "Value": "ОБЫЧНЫЙ"
     },
@@ -326,6 +334,10 @@
     {
       "Key": "catchTypeIncense",
       "Value": "ПРЯНОСТЬ"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "Не удалось запустить WebSocketServer через порт : {0}"
     },
     {
       "Key": "statsTemplateString",
