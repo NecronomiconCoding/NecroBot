@@ -135,7 +135,6 @@ namespace PoGo.NecroBot.Logic
                         p.OrderByDescending(x => x.Cp)
                             .ThenBy(n => n.StaminaMax)
                             .Skip(GetPokemonTransferFilter(p.Key).KeepMinDuplicatePokemon)
-                            .Skip(_logicSettings.KeepMinDuplicatePokemon)
                             .ToList());
         }
 
