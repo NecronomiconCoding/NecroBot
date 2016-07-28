@@ -180,11 +180,6 @@ namespace PoGo.NecroBot.CLI
             Logger.Write(session.Translation.GetTranslation(TranslationString.EventNoPokeballs, evt.Count), LogLevel.Berry);
         }
 
-        public void HandleEvent(SnipeScanEvent evt, ISession session)
-        {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScan, evt.Pokemon, $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
-        }
-
         public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession session)
         {
             string strHeader;
