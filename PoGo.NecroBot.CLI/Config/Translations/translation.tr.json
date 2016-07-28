@@ -335,6 +335,10 @@
     {
       "Key": "statsXpTemplateString",
       "Value": "{0} (sonraki seviye {1}h {2}m | {3}/{4} XP)"
+    },
+    {
+      "Key": "welcomeDelayText",
+      "Value": "Devam etmek için bir tuşa bas..."
     }
   ]
 }
