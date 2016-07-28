@@ -9,24 +9,20 @@ using POGOProtos.Inventory.Item;
 
 namespace PoGo.NecroBot.Logic
 {
-    public class Bounds
+    public class Location
     {
-        public Bounds()
+        public Location()
         {
         }
 
-        public Bounds(double latStart, double longStart, double latEnd, double longEnd)
+        public Location(double latitude, double longitude)
         {
-            LatStart = latStart;
-            LatEnd = latEnd;
-            LongStart = longStart;
-            LongEnd = longEnd;
+            Latitude = latitude;
+            Longitude = longitude;
         }
 
-        public double LatStart { get; set; }
-        public double LatEnd { get; set; }
-        public double LongStart { get; set; }
-        public double LongEnd { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 
     public class SnipeSettings
@@ -35,13 +31,13 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
-        public SnipeSettings(List<Bounds> locations, string pokemon)
+        public SnipeSettings(List<Location> locations, string pokemon)
         {
             Locations = locations;
             Pokemon = pokemon;
         }
 
-        public List<Bounds> Locations { get; set; }
+        public List<Location> Locations { get; set; }
         public string Pokemon { get; set; }
     }
 
