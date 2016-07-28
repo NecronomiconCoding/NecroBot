@@ -114,12 +114,16 @@ namespace PoGo.NecroBot.Logic.Common
         MissingCredentialsGoogle,
         MissingCredentialsPtc,
         SnipeScan,
-        NoPokemonToSnipe
+        NoPokemonToSnipe,
     }
 
     public class Translation : ITranslation
     {
-        [JsonProperty("TranslationStrings", ItemTypeNameHandling = TypeNameHandling.Arrays, ItemConverterType = typeof(KeyValuePairConverter))]
+        [JsonProperty("TranslationStrings", 
+            ItemTypeNameHandling = TypeNameHandling.Arrays, 
+            ItemConverterType = typeof(KeyValuePairConverter),
+            ObjectCreationHandling = ObjectCreationHandling.Replace,
+            DefaultValueHandling = DefaultValueHandling.Populate)]
         //Default Translations (ENGLISH)        
         private List<KeyValuePair<TranslationString, string>> TranslationStrings = new List
             <KeyValuePair<TranslationString, string>>
@@ -263,10 +267,14 @@ namespace PoGo.NecroBot.Logic.Common
                 var input = File.ReadAllText(fullPath);
 
                 var jsonSettings = new JsonSerializerSettings();
-                //jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
                 jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                 jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
                 translations = JsonConvert.DeserializeObject<Translation>(input, jsonSettings);
+                //TODO make json to fill default values as it won't do it now
+                new Translation().TranslationStrings.Where(item => !translations.TranslationStrings.Any(a => a.Key == item.Key))
+                    .ToList()
+                    .ForEach(translations.TranslationStrings.Add);
             }
             else
             {
