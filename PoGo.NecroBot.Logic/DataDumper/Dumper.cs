@@ -52,9 +52,12 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <param name="filename"/>File to clear/param>
         public static void ClearDumpFile(ISession session, string filename)
         {
-            var path = Path.Combine(session.LogicSettings.ProfilePath,"Dumps",$"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
+            var path = Path.Combine(session.LogicSettings.ProfilePath, "Dumps");
+            var file = Path.Combine(path, $"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            
             // Clears all contents of a file first if overwrite is true
-            File.WriteAllText(path, string.Empty);
+            File.WriteAllText(file, string.Empty);
         }
 
         /// <summary>
