@@ -47,16 +47,18 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
-        public TransferFilter(int keepMinCp, float keepMinIvPercentage, int keepMinDuplicatePokemon)
+        public TransferFilter(int keepMinCp, float keepMinIvPercentage, int keepMinDuplicatePokemon, int keepEvolvedDuplicates)
         {
             KeepMinCp = keepMinCp;
             KeepMinIvPercentage = keepMinIvPercentage;
             KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
+            KeepEvolvedDuplicates = keepEvolvedDuplicates;
         }
 
         public int KeepMinCp { get; set; }
         public float KeepMinIvPercentage { get; set; }
         public int KeepMinDuplicatePokemon { get; set; }
+        public int KeepEvolvedDuplicates { get; set; }
     }
 
     public interface ILogicSettings
@@ -73,6 +75,8 @@ namespace PoGo.NecroBot.Logic
         int DelayBetweenPlayerActions { get; }
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
+        int KeepEvolvedDuplicates { get; }
+        bool TransferDuplicateEvolvedPokemon { get; }
         bool PrioritizeIvOverCp { get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }

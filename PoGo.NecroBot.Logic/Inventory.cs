@@ -55,7 +55,7 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer(
             bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCp = false,
-            IEnumerable<PokemonId> filter = null)
+            IEnumerable<PokemonId> filter = null, bool transferDuplicateEvolved = true)
         {
             var myPokemon = await GetPokemons();
 
@@ -70,6 +70,25 @@ namespace PoGo.NecroBot.Logic
             {
                 pokemonList = pokemonList.Where(p => !filter.Contains(p.PokemonId)).ToList();
             }
+
+            if(transferDuplicateEvolved)
+            {
+                var results = new List<PokemonData>();
+                var myPokemonSettings = await GetPokemonSettings();
+                var pokemonSettings = myPokemonSettings.ToList();
+
+                var notEvolvable = myPokemon.Where(p =>
+                {
+                    var settings = pokemonSettings.Single(x => x.PokemonId == p.PokemonId);
+                    return settings.CandyToEvolve == 0;
+                }).GroupBy(p => p.PokemonId).Where(g => g.Count() > GetPokemonTransferFilter(g.Key).KeepEvolvedDuplicates).ToList();
+
+                notEvolvable.ForEach(g => results.AddRange(g.OrderBy(o => o.Cp).Take(g.Count() - GetPokemonTransferFilter(g.Key).KeepEvolvedDuplicates)));
+
+                pokemonList.AddRange(results);
+                pokemonList = pokemonList.Distinct().ToList();
+            }
+
             if (keepPokemonsThatCanEvolve)
             {
                 var results = new List<PokemonData>();
@@ -321,7 +340,7 @@ namespace PoGo.NecroBot.Logic
                 return _logicSettings.PokemonsTransferFilter[pokemon];
             }
             return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinIvPercentage,
-                _logicSettings.KeepMinDuplicatePokemon);
+                _logicSettings.KeepMinDuplicatePokemon, _logicSettings.KeepEvolvedDuplicates);
         }
 
         public async Task<GetInventoryResponse> RefreshCachedInventory()
