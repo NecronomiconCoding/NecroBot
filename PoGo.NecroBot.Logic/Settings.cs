@@ -248,7 +248,8 @@ namespace PoGo.NecroBot.CLI
             {PokemonId.Mew, new TransferFilter(0, 0, 10)}
         };
 
-        public SnipeSettings PokemonToSnipe = new SnipeSettings(
+        public SnipeSettings PokemonToSnipe = new SnipeSettings
+        {
             Locations = new List<Location>
             {
                 new Location(38.55680748646112, -121.2383794784546), //Dratini Spot
@@ -264,7 +265,7 @@ namespace PoGo.NecroBot.CLI
                 PokemonId.Eevee.ToString(),
                 PokemonId.Charmander.ToString()
             }
-        );
+        };
 
         public static GlobalSettings Default => new GlobalSettings();
 
