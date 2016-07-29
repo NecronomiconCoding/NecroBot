@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PoGo.NecroBot.Logic.Event;
@@ -17,8 +18,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     internal class UseIncubatorsTask
     {
-        public static async Task Execute(ISession session)
+        public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             // Refresh inventory so that the player stats are fresh
             await session.Inventory.RefreshCachedInventory();
 
@@ -60,6 +63,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var incubator in incubators)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 if (incubator.PokemonId == 0)
                 {
                     // Unlimited incubators prefer short eggs, limited incubators prefer long eggs

@@ -22,7 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Tanımlanan yarıçap dışındasın! 5 saniye içinde ({0}m uzağa) yürümeye başlanacak. Coords.ini dosyası doğru yapılandırılmış mı?"
+      "Value": "Tanımlanan yarıçap dışındasın! 5 saniye sonra ({0}m uzağa) yürümeye başlanacak. Coords.ini dosyası doğru yapılandırılmış mı?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -30,7 +30,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "İsim: {0} XP: {1}, Gems: {2}, Items: {3}"
+      "Value": "İsim: {0} XP: {1}, Gems: {2}, Eşyalar: {3}"
     },
     {
       "Key": "eventFortFailed",
@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "({1}m) içinde \"{0}\" PokeStop una ulaşılacak."
+      "Value": "({1}m) sonra \"{0}\" PokeStop una ulaşılacak."
     },
     {
       "Key": "eventProfileLogin",
@@ -190,7 +190,7 @@
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "{0} saniye içinde tekrar deneniyor..."
+      "Value": "{0} saniye sonra tekrar denenecek..."
     },
     {
       "Key": "accountNotVerified",
@@ -241,6 +241,10 @@
       "Value": "Paket açıldı."
     },
     {
+      "Key": "FinishedTransferringConfig",
+      "Value": "Yeni sürüme yapılandırma aktarılması bitirdi..."
+    },
+    {
       "Key": "updateFinished",
       "Value": "Güncelleme tamamlandı, bu pencereyi kapatabilirsin."
     },
@@ -267,6 +271,10 @@
     {
       "Key": "invFullTransferManually",
       "Value": "Pokemon envanteri dolu. Pokemonları aktararak yer açın veya ayarlarda \"TransferDuplicatePokemon\" değerini \"true\" atayın."
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "Envanter dolu, hiç bir eşya alınamadı!"
     },
     {
       "Key": "encounterProblem",
@@ -298,15 +306,15 @@
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Yakalama: Toptan Kaçış"
+      "Value": "Yakalama: Toptan Çıktı"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "Yakalama: Kaçış"
+      "Value": "Yakalama: Kaçtı"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "Yakalama: Iska"
+      "Value": "Yakalama: Iskalandı"
     },
     {
       "Key": "catchStatusSuccess",

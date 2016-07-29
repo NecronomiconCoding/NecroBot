@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
@@ -13,8 +14,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchLurePokemonsTask
     {
-        public static async Task Execute(ISession session, FortData currentFortData)
+        public static async Task Execute(ISession session, FortData currentFortData, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             Logger.Write(session.Translation.GetTranslation(Common.TranslationString.LookingForLurePokemon), LogLevel.Debug);
 
             var fortId = currentFortData.Id;
@@ -24,7 +27,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (session.LogicSettings.UsePokemonToNotCatchFilter &&
                 session.LogicSettings.PokemonsNotToCatch.Contains(pokemonId))
             {
-                session.EventDispatcher.Send(new NoticeEvent {Message = session.Translation.GetTranslation(Common.TranslationString.PokemonSkipped, pokemonId)});
+                session.EventDispatcher.Send(new NoticeEvent { Message = session.Translation.GetTranslation(Common.TranslationString.PokemonSkipped, pokemonId) });
             }
             else
             {
@@ -39,8 +42,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     if (session.LogicSettings.TransferDuplicatePokemon)
                     {
-                        session.EventDispatcher.Send(new WarnEvent {Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferring) });
-                        await TransferDuplicatePokemonTask.Execute(session);
+                        session.EventDispatcher.Send(new WarnEvent { Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferring) });
+                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                     }
                     else
                         session.EventDispatcher.Send(new WarnEvent
@@ -51,7 +54,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 else
                 {
                     if (encounter.Result.ToString().Contains("NotAvailable")) return;
-                    session.EventDispatcher.Send(new WarnEvent {Message = session.Translation.GetTranslation(Common.TranslationString.EncounterProblemLurePokemon, encounter.Result)});
+                    session.EventDispatcher.Send(new WarnEvent { Message = session.Translation.GetTranslation(Common.TranslationString.EncounterProblemLurePokemon, encounter.Result) });
                 }
             }
         }

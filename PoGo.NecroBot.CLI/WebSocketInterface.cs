@@ -18,9 +18,12 @@ namespace PoGo.NecroBot.CLI
         private PokeStopListEvent _lastPokeStopList;
         private ProfileEvent _lastProfile;
         private readonly WebSocketServer _server;
+        private Session _session;
 
-        public WebSocketInterface(int port, ITranslation translations)
+        public WebSocketInterface(int port, Session session)
         {
+            _session = session;
+            var translations = session.Translation;
             _server = new WebSocketServer();
             var setupComplete = _server.Setup(new ServerConfig
             {
@@ -73,8 +76,9 @@ namespace PoGo.NecroBot.CLI
             _lastProfile = evt;
         }
 
-        private void HandleMessage(WebSocketSession session, string message)
+        private async void HandleMessage(WebSocketSession session, string message)
         {
+            if (message == "PokemonList") await Logic.Tasks.PokemonListTask.Execute(_session);
         }
 
         private void HandleSession(WebSocketSession session)

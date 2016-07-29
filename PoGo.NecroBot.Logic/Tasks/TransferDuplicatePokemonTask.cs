@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
@@ -13,8 +14,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class TransferDuplicatePokemonTask
     {
-        public static async Task Execute(ISession session)
+        public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             var duplicatePokemons =
                 await
                     session.Inventory.GetDuplicatePokemonToTransfer(session.LogicSettings.KeepPokemonsThatCanEvolve,
@@ -26,6 +29,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 if (duplicatePokemon.Cp >= session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinCp ||
                     PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >
                     session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinIvPercentage)
@@ -43,7 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var setting = pokemonSettings.Single(q => q.PokemonId == duplicatePokemon.PokemonId);
                 var family = pokemonFamilies.First(q => q.FamilyId == setting.FamilyId);
 
-                family.Candy++;
+                family.Candy_++;
 
                 session.EventDispatcher.Send(new TransferPokemonEvent
                 {
@@ -52,7 +57,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Cp = duplicatePokemon.Cp,
                     BestCp = bestPokemonOfType.Cp,
                     BestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType),
-                    FamilyCandies = family.Candy
+                    FamilyCandies = family.Candy_
                 });
 
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);

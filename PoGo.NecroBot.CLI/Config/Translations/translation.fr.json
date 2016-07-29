@@ -237,6 +237,10 @@
       "Value": "La décompression de la mise à jour est terminée..."
     },
     {
+      "Key": "FinishedTransferringConfig",
+      "Value": "Fini le transfert de votre config à la nouvelle version..."
+    },
+    {
       "Key": "updateFinished",
       "Value": "La mise à jour est terminée! Vous pouvez fermer la fenêtre."
     },
@@ -284,7 +288,6 @@
       "Key": "pokemonIgnoreFilter",
       "Value": "[Pokémon-Ignore-Filter] - {0} ignoré comme défini dans les options!"
     },
-    ,
     {
       "Key": "catchStatusAttempt",
       "Value": "Capture"

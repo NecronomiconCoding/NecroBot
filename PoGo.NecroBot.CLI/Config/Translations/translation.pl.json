@@ -1,4 +1,4 @@
-﻿{
+{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,28 +22,31 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Znajdujesz się poza zdefiniowanym rejonem! Wracam się na początek ({0}m away) za 5 sekund. Czy twój plik Coords.ini się zgadza?"
+      "Value": "Znajdujesz się poza swoim zdefiniowanym zasięgiem! Przemieszczam się na start odległy o ({0}m) za 5 sekund. Czy twój plik Coords.ini jest poprawny?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Brak PokeStopów w twoim rejonie. Czyżby twój zasięg był za mały?"
+      "Value": "Nie znaleziono PokeStopów w twojej okolicy. Czy twój maksymalny zasięg jest za mały?"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "XP: {0}, Kryształy: {1}, Przedmioty: {2}"
+      "Value": "Nazwa: {0} XP: {1}, Kamienie: {2}, Przedmioty: {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Nazwa: {0} INFO: Zbieranie przedmiotów nie udane, prawdopodobny softban. Odbanowanie za: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} w odległości ({1}m)"
+      "Value": "Dotarcie do PokeStopu: {0} za ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Gramy jako {0}"
+      "Value": "Grasz jako {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Użyto Jajka Szczęścia, pozostało: {0}"
+      "Value": "Użyto Szczęśliwego Jajka, pozostało: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -51,11 +54,11 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Porażka {0}. Rezultatem był {1}, koniec ewolucji {2}"
+      "Value": "Niepowodzenie {0}. Rezultatem jest {1}, przestaję ewoluować {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepszy poziom CP: {3}  IV: {4}%] (Cukierki: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepszy CP: {3}  IV: {4}%] (Cukierki: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -63,12 +66,11 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value":
-        "({0}) | ({1}) {2} Poziom: {3} CP: ({4}/{5}) IV: {6}% | Szansa: {7}% | {8}m odległość | przy użyciu {9} ({10} zostało). | {11}"
+      "Value": "({0}) | ({1}) {2} Poziom: {3} CP: ({4}/{5}) IV: {6}% | Szansa: {7}% | odległy o {8}m | przy użyciu {9} ({10} pozostało). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Brak Pokeballs - Uciekł nam {0} na poziomie CP {1}"
+      "Value": "Brak Pokeballi - Uciekł nam {0} z CP {1}"
     },
     {
       "Key": "catchStatusAttempt",
@@ -81,6 +83,298 @@
     {
       "Key": "candies",
       "Value": "Cukierki: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Niepowodzenie przetwarzania pliku GPX, próbuję ominąć ten krok."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemony"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "Doskonały"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "Nazwa"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "Nieznany"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "Najwyższy Poziom CP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Najwyższy Poziom doskonałości"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Najwyższy Poziom"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Upewnij się, że szerokość i długość geograficzna są poprawne. Jeżeli nie to zamknij program! Szerokość: {0} Długość: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Wkładam jajko do inkubatora: pozostało {0:0.00}km"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Aktualizacja inkubatora: pozostało {0:0.00}km"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Wykluło się jajko z inkubatora: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "BŁĄD"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "UWAGA"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMIENIE"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "USUWANIE"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "POKEMON"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "PRZESŁANO"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "WYEWOLUOWAL"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "MALINA"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "JAJKO"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "AKTUALIZACJA"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Logowanie się używając {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "Serwery PTC najprawdopodobniej nie działają albo twoje dane są błędne. Spróbuj konta Google."
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Ponawiam próbę za {0} sekund..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Konto niezweryfikowane, zamykam..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Otwieram stronę Urządzenia Google. Proszę wkleić kod używając CTRL+V"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Błąd kopiowania, zrób to ręcznie"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Udaj się do: {0} i wprowadź {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Wykryto realistyczne podróżowanie , przy użyciu UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Nie realistyczne podróżowanie na {0}, używam ostatnich ustawień z Coords.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Współrzędne w pliku \"Coords.ini\" są niepoprawne, używam współrzędnych domyślnych "
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Wspaniale! Posiadasz najnowszą wersję programu {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "Automatyczna aktualizacja jest wyłączona. Pobierz najnowszą wersję z: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Pobieranie i instalacja aktualizacji..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Ukończono pobieranie najnowszej wersji..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Zakończono wypakowywanie plików..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Aktualizacja zakończona, możesz teraz zamknąć okno."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Poszukuję zwabionych Pokemonów... (kadzidło)"
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Poszukuje Pokemonów..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Poszukuję zwabionych Pokemonów... (przynęta)"
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Pominięto {0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Inwentarz jest pełny. Przesyłam Pokemony..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "Inwentarz jest pełny. Proszę ręcznie przesłać Pokemony albo ustawić TransferDuplicatePokemon na true w ustawieniach..."
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "Inwentarz jest pełny, nie zebrałem przedmiotów!"
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Napotkano problem: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Napotkano problem: Przynęta Pokemonów {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Twój punkt docelowy {0}, {1} jest zbyt daleko od twojej obecnej pozycji {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Zmieniono nazwę Pokemona {0} z {2} na {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Filtr Ignorowania Pokemonów] - Ignoruję {0} według twoich ustawień"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "Próba Złapania"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "Błąd Złapania"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "Ucieczka"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "Ucieczka"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "Chybiono"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "Łapanie"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "Normalny"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Przynęta"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Kadzidło"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "Niepowodzenie uruchomienia WebSocketServer na porcie : {0}"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - Czas działania {1} - Poziom: {2} | XP / godzinę: {3:0} | Pokemony / godzinę: {4:0} | Stardust: {5:0} | Przesłano: {6:0} | Usunięto: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (następny poziom za {1}h {2}m | {3}/{4} XP)"
+    },
+    {
+      "Key": "requireInputText",
+      "Value": "Wznowienie programu po naciśnieciu klawisza..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "Jako, że masz podwójną weryfikacje konta Google, będziesz musial wstawić hasło aplikacji do auth.json"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "Otwieram hasła aplikacji Google. Proszę utworzyć nowe hasło aplikacji (inne niż hasło urządzenia)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "Upewnij się, że podałeś poprawny login i hasło."
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "Proszę wypełnić GoogleUsername oraz GooglePassword w auth.json!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "Proszę wypełnić PtcUsername oraz PtcPassword w auth.json!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[Snajper] Skanuję w poszukiwaniu Pokemona w {0}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Snajper] Nie znaleziono żadnego Pokemona!"
     }
   ]
 }

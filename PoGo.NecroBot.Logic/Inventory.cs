@@ -26,6 +26,10 @@ namespace PoGo.NecroBot.Logic
         private GetInventoryResponse _cachedInventory;
         private DateTime _lastRefresh;
 
+        private List<ItemId> Pokeballs = new List<ItemId> { ItemId.ItemPokeBall, ItemId.ItemGreatBall, ItemId.ItemUltraBall, ItemId.ItemMasterBall };
+        private List<ItemId> Potions = new List<ItemId> { ItemId.ItemPotion, ItemId.ItemSuperPotion, ItemId.ItemHyperPotion, ItemId.ItemMaxPotion };
+        private List<ItemId> Revives = new List<ItemId> { ItemId.ItemRevive, ItemId.ItemMaxRevive };
+
         public Inventory(Client client, ILogicSettings logicSettings)
         {
             _client = client;
@@ -90,7 +94,7 @@ namespace PoGo.NecroBot.Logic
 
                     if (settings.CandyToEvolve > 0)
                     {
-                        var amountPossible = familyCandy.Candy/settings.CandyToEvolve;
+                        var amountPossible = familyCandy.Candy_ / settings.CandyToEvolve;
                         if (amountPossible > amountToSkip)
                             amountToSkip = amountPossible;
                     }
@@ -204,19 +208,130 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<IEnumerable<ItemData>> GetItemsToRecycle(ISettings settings)
         {
-            var myItems = await GetItems();
+            var itemsToRecylce = new List<ItemData>();
+            var myItems = (await GetItems()).ToList();
 
-            return myItems
+
+            if (!_logicSettings.ItemRecycleFilter.Any(s => Pokeballs.Contains(s.Key)))
+            {
+                var pokeballsToRecycle = GetPokeballsToRecycle(settings, myItems);
+                itemsToRecylce.AddRange(pokeballsToRecycle);
+            }
+            else
+            {
+                Logging.Logger.Write("Using ItemRecycleFilter for pokeballs", Logging.LogLevel.Info, ConsoleColor.Yellow);
+            }
+
+            if (!_logicSettings.ItemRecycleFilter.Any(s => Potions.Contains(s.Key)))
+            {
+                var potionsToRecycle = GetPotionsToRecycle(settings, myItems);
+                itemsToRecylce.AddRange(potionsToRecycle);
+            }
+            else
+            {
+                Logging.Logger.Write("Using ItemRecycleFilter for potions", Logging.LogLevel.Info, ConsoleColor.Yellow);
+            }
+
+            if (!_logicSettings.ItemRecycleFilter.Any(s => Revives.Contains(s.Key)))
+            {
+                var revivesToRecycle = GetRevivesToRecycle(settings, myItems);
+                itemsToRecylce.AddRange(revivesToRecycle);
+            }
+            else
+            {
+                Logging.Logger.Write("Using ItemRecycleFilter for revives", Logging.LogLevel.Info, ConsoleColor.Yellow);
+            }
+
+            var otherItemsToRecylce = myItems
                 .Where(x => _logicSettings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
                 .Select(
                     x =>
                         new ItemData
                         {
                             ItemId = x.ItemId,
-                            Count =
-                                x.Count - _logicSettings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
+                            Count = x.Count - _logicSettings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
+            
+            itemsToRecylce.AddRange(otherItemsToRecylce);
+
+            return itemsToRecylce;
+        }
+
+        private List<ItemData> GetPokeballsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        {
+            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
+            if (amountOfPokeballsToKeep < 1)
+            {
+                Logging.Logger.Write("TotalAmountOfPokebalsToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                return new List<ItemData>();
+            }
+
+            var allPokeballs = myItems.Where(s => Pokeballs.Contains(s.ItemId)).ToList();
+            allPokeballs.Sort((ball1, ball2) => ((int)ball1.ItemId).CompareTo((int)ball2.ItemId));
+
+            return TakeAmountOfItems(allPokeballs, amountOfPokeballsToKeep).ToList();
+        }
+
+        private List<ItemData> GetPotionsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        {
+            var amountOfPotionsToKeep = _logicSettings.TotalAmountOfPotionsToKeep;
+            if (amountOfPotionsToKeep < 1)
+            {
+                Logging.Logger.Write("TotalAmountOfPotionsToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                return new List<ItemData>();
+            }
+
+            var allPotions = myItems.Where(s => Potions.Contains(s.ItemId)).ToList();
+            allPotions.Sort((i1, i2) => ((int)i1.ItemId).CompareTo((int)i2.ItemId));
+
+            return TakeAmountOfItems(allPotions, amountOfPotionsToKeep).ToList();
+        }
+
+        private List<ItemData> GetRevivesToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        {
+            var amountOfRevivesToKeep = _logicSettings.TotalAmountOfRevivesToKeep;
+            if (amountOfRevivesToKeep < 1)
+            {
+                Logging.Logger.Write("TotalAmountOfRevivesToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                return new List<ItemData>();
+            }
+
+            var allRevives = myItems.Where(s => Revives.Contains(s.ItemId)).ToList();
+            allRevives.Sort((i1, i2) => ((int)i1.ItemId).CompareTo((int)i2.ItemId));
+
+            return TakeAmountOfItems(allRevives, amountOfRevivesToKeep).ToList();
+        }
+
+        private IEnumerable<ItemData> TakeAmountOfItems(IReadOnlyList<ItemData> items, int ammountToLeave)
+        {
+            var itemsAvailable = 0;
+            foreach (var item in items)
+            {
+                itemsAvailable += item.Count;
+            }
+
+            int itemsToRemove = itemsAvailable - ammountToLeave;
+
+            foreach (var item in items)
+            {
+                if (itemsToRemove > 0 && item.Count > 0)
+                {
+                    if (item.Count < itemsToRemove)
+                    {
+                        // Recylce all of this type
+                        itemsToRemove -= item.Count;
+                        yield return item;
+                    }
+                    else
+                    {
+                        // Recycle remaining amount
+                        var count = itemsToRemove;
+                        itemsToRemove = 0;
+                        yield return new ItemData { ItemId = item.ItemId, Count = count };
+                    }
+                }
+            }
         }
 
         public async Task<IEnumerable<PlayerStats>> GetPlayerStats()
@@ -227,20 +342,20 @@ namespace PoGo.NecroBot.Logic
                 .Where(p => p != null);
         }
 
-        public async Task<List<PokemonFamily>> GetPokemonFamilies()
+        public async Task<List<Candy>> GetPokemonFamilies()
         {
             var inventory = await GetCachedInventory();
 
             var families = from item in inventory.InventoryDelta.InventoryItems
-                where item.InventoryItemData?.PokemonFamily != null
-                where item.InventoryItemData?.PokemonFamily.FamilyId != PokemonFamilyId.FamilyUnset
-                group item by item.InventoryItemData?.PokemonFamily.FamilyId
+                           where item.InventoryItemData?.Candy != null
+                           where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
+                           group item by item.InventoryItemData?.Candy.FamilyId
                 into family
-                select new PokemonFamily
-                {
-                    FamilyId = family.First().InventoryItemData.PokemonFamily.FamilyId,
-                    Candy = family.First().InventoryItemData.PokemonFamily.Candy
-                };
+                           select new Candy
+                           {
+                               FamilyId = family.First().InventoryItemData.Candy.FamilyId,
+                               Candy_ = family.First().InventoryItemData.Candy.Candy_
+                           };
 
 
             return families.ToList();
@@ -302,10 +417,10 @@ namespace PoGo.NecroBot.Logic
 
                 var pokemonCandyNeededAlready =
                     pokemonToEvolve.Count(
-                        p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId)*
+                        p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId) *
                     settings.CandyToEvolve;
 
-                if (familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
+                if (familyCandy.Candy_ - pokemonCandyNeededAlready > settings.CandyToEvolve)
                 {
                     pokemonToEvolve.Add(pokemon);
                 }

@@ -31,14 +31,14 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
-        public SnipeSettings(List<Location> locations, List<string> pokemon)
+        public SnipeSettings(List<Location> locations, List<PokemonId> pokemon)
         {
             Locations = locations;
             Pokemon = pokemon;
         }
 
         public List<Location> Locations { get; set; }
-        public List<string> Pokemon { get; set; }
+        public List<PokemonId> Pokemon { get; set; }
     }
 
     public class TransferFilter
@@ -62,6 +62,7 @@ namespace PoGo.NecroBot.Logic
     public interface ILogicSettings
     {
         bool AutoUpdate { get; }
+        bool TransferConfigAndAuthOnUpdate { get; }
         float KeepMinIvPercentage { get; }
         int KeepMinCp { get; }
         double WalkingSpeedInKilometerPerHour { get; }
@@ -90,6 +91,16 @@ namespace PoGo.NecroBot.Logic
         string ProfileConfigPath { get; }
         string GeneralConfigPath { get; }
         bool SnipeAtPokestops { get; }
+        int MinPokeballsToSnipe { get; }
+        string SnipeLocationServer { get; }
+        int SnipeLocationServerPort { get; }
+        bool UseSnipeLocationServer { get; }
+        bool UseTransferIVForSnipe { get; }
+        bool SnipeIgnoreUnknownIV { get; }
+        int MinDelayBetweenSnipes { get; }
+        int TotalAmountOfPokebalsToKeep { get; }
+        int TotalAmountOfPotionsToKeep { get; }
+        int TotalAmountOfRevivesToKeep { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
