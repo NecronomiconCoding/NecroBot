@@ -90,11 +90,15 @@ namespace PoGo.NecroBot.Logic
         string ProfileConfigPath { get; }
         string GeneralConfigPath { get; }
         bool SnipeAtPokestops { get; }
+<<<<<<< 4c04585dc1983923a2e4013474b5c8da0998b3ba
         string SnipeLocationServer { get; }
         int SnipeLocationServerPort { get; }
         bool UseSnipeLocationServer { get; }
         bool UseTransferIVForSnipe { get; }
         int MinDelayBetweenSnipes { get; }
+=======
+        int MinPokeballsToSnipe { get; }
+>>>>>>> Disabling Sniping by default. This should NOT be on. Also added config to stop sniping if pokeballs fall below configured amount (default 15)
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
