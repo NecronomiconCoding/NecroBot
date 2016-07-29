@@ -52,9 +52,9 @@ namespace PoGo.NecroBot.Logic.Tasks
             return uid;
         }
 
-        public override bool Equals(object obj)
+        public bool Equals(PokemonLocation obj)
         {
-            return this.ToString().Equals(obj.ToString());
+            return latitude == obj.latitude && longitude == obj.longitude;
         }
     }
 
@@ -203,7 +203,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         !locsVisited.Contains(new PokemonLocation(q.latitude, q.longitude))
                         && !(q.timeStamp != default(DateTime) &&
                                 q.timeStamp > new DateTime(2016) && // make absolutely sure that the server sent a correct datetime
-                                q.timeStamp < DateTime.Now)).ToList();
+                                q.timeStamp < DateTime.Now) && (q.id == PokemonId.Missingno || pokemonIds.Contains((int)q.id))).ToList();
 
                     if (locationsToSnipe.Any())
                     {
