@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-	  "Value": "{0} sikeresen, jutalmad {1}xp"
+	  "Value": "{0} fejlődése sikeres, jutalmad {1}xp"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
