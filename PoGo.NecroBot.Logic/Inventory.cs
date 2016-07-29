@@ -81,7 +81,11 @@ namespace PoGo.NecroBot.Logic
                 {
                     var settings = pokemonSettings.Single(x => x.PokemonId == p.PokemonId);
                     return settings.CandyToEvolve == 0;
-                }).GroupBy(p => p.PokemonId).Where(g => g.Count() > GetPokemonTransferFilter(g.Key).KeepEvolvedDuplicates).ToList();
+                }).GroupBy(p => p.PokemonId).Where(g =>
+                {
+                    int keepDups = GetPokemonTransferFilter(g.Key).KeepEvolvedDuplicates;
+                    return keepDups > 0 && g.Count() > keepDups;
+                }).ToList();
 
                 notEvolvable.ForEach(g => results.AddRange(g.OrderBy(o => o.Cp).Take(g.Count() - GetPokemonTransferFilter(g.Key).KeepEvolvedDuplicates)));
 
