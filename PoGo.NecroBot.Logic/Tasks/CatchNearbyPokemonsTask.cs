@@ -20,6 +20,13 @@ namespace PoGo.NecroBot.Logic.Tasks
             Logger.Write(session.Translation.GetTranslation(Common.TranslationString.LookingForPokemon), LogLevel.Debug);
 
             var pokemons = await GetNearbyPokemons(session);
+            if (pokemons.Count() > 0) { 
+                Logger.Write($"Found {pokemons.Count().ToString()} nearby pokemons!");
+            } else
+            {
+                Logger.Write($"Found {pokemons.Count().ToString()} nearby pokemons!", LogLevel.Debug);
+            }
+
             foreach (var pokemon in pokemons)
             {
                 var pokeBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemPokeBall);

@@ -33,6 +33,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (encounter.Result == DiskEncounterResponse.Types.Result.Success)
                 {
+                    Logger.Write($"Found a pokemon with lure: {encounter.PokemonData.Nickname.ToString()}");
                     await CatchPokemonTask.Execute(session, encounter, null, currentFortData, encounterId);
                 }
                 else if (encounter.Result == DiskEncounterResponse.Types.Result.PokemonInventoryFull)
