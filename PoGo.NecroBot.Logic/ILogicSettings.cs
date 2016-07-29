@@ -31,14 +31,14 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
-        public SnipeSettings(List<Location> locations, List<string> pokemon)
+        public SnipeSettings(List<Location> locations, List<PokemonId> pokemon)
         {
             Locations = locations;
             Pokemon = pokemon;
         }
 
         public List<Location> Locations { get; set; }
-        public List<string> Pokemon { get; set; }
+        public List<PokemonId> Pokemon { get; set; }
     }
 
     public class TransferFilter
