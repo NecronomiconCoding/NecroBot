@@ -22,11 +22,11 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Você está fora do seu raio definido! Caminhando para o início ({0}m) em 5 segundos. Suas coordenadas em Coords.ini estão corretas?"
+      "Value": "Você está fora do seu raio definido! Caminhando para o início ({0}m de distância) em 5 segundos. Suas coordenadas em Coords.ini estão corretas?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Não foram encontradas PokeStops na sua área. Sua distância máxima não é muito pequena?"
+      "Value": "Não foram encontradas PokeStops na sua área. Sua distância máxima de caminhada não está muito curta?"
     },
     {
       "Key": "eventFortUsed",
@@ -186,7 +186,7 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "Entrando utilizando {0}"
+      "Value": "Entrando com o usuário {0}"
     },
     {
       "Key": "ptcOffline",
@@ -230,7 +230,7 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "Atualizações automáticas desativadas. Obtenha a última versão em: {0}\n "
+      "Value": "Atualizações Automáticas estão desativadas. Obtenha a última versão em: {0}\n "
     },
     {
       "Key": "downloadingUpdate",
@@ -270,7 +270,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "O inventário de Pokémons está cheio. Transfira seus pokémons manualmente altere TransferDuplicatePokemon para true nas configurações..."
+      "Value": "O inventário de Pokémons está cheio. Por favor transfira seus pokémons manualmente ou altere a propriedade TransferDuplicatePokemon para true nas configurações..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -346,11 +346,11 @@
     },
     {
       "Key": "requireInputText",
-      "Value": "Pressione enter para dar início ao bot..."
+      "Value": "Pressione qualquer tecla para continuar..."
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Como você possui o Google Two Factor Auth ativado, você precisará informar o App Specific Password no arquivo auth.json"
+      "Value": "Como você possui a Verificação em duas etapas do Google ativada, você precisará informar a senha específica do aplicativo no arquivo auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -358,7 +358,7 @@
     },
     {
       "Key": "googleError",
-      "Value": "Verifique se você informou um e-mail e uma senha correta."
+      "Value": "Verifique se você informou o e-mail e a senha corretamente."
     },
     {
       "Key": "missingCredentialsGoogle",
