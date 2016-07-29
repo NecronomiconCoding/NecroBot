@@ -114,17 +114,13 @@ namespace PoGo.NecroBot.CLI
         public bool UsePokemonToNotCatchFilter = false;
         public int WebSocketPort = 14251;
         public bool StartupWelcomeDelay = true;
-<<<<<<< 4c04585dc1983923a2e4013474b5c8da0998b3ba
-        public bool SnipeAtPokestops = true;
+        public bool SnipeAtPokestops = false;
+        public int MinPokeballsToSnipe = 15;
         public string SnipeLocationServer = "localhost";
         public int SnipeLocationServerPort = 16969;
         public bool UseSnipeLocationServer = false;
         public bool UseTransferIVForSnipe = false;
         public int MinDelayBetweenSnipes = 20000;
-=======
-        public bool SnipeAtPokestops = false;
-        public int MinPokeballsToSnipe = 15;
->>>>>>> Disabling Sniping by default. This should NOT be on. Also added config to stop sniping if pokeballs fall below configured amount (default 15)
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -528,14 +524,11 @@ namespace PoGo.NecroBot.CLI
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
-<<<<<<< 4c04585dc1983923a2e4013474b5c8da0998b3ba
+        public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
         public bool UseSnipeLocationServer=> _settings.UseSnipeLocationServer;
         public bool UseTransferIVForSnipe => _settings.UseTransferIVForSnipe;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
-=======
-        public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
->>>>>>> Disabling Sniping by default. This should NOT be on. Also added config to stop sniping if pokeballs fall below configured amount (default 15)
     }
 }
