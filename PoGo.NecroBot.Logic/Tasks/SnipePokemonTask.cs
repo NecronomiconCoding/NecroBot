@@ -115,7 +115,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-        private static async Task snipe(ISession session, IEnumerable<int> pokemonIds, double latitude, double longitude)
+        private static async Task snipe(ISession session, IEnumerable<PokemonId> pokemonIds, double latitude, double longitude)
         {
             var currentLatitude = session.Client.CurrentLatitude;
             var currentLongitude = session.Client.CurrentLongitude;
@@ -133,7 +133,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var mapObjects = session.Client.Map.GetMapObjects().Result;
             var catchablePokemon =
                 mapObjects.MapCells.SelectMany(q => q.CatchablePokemons)
-                    .Where(q => pokemonIds.Contains((int)q.PokemonId))
+                    .Where(q => pokemonIds.Contains(q.PokemonId))
                     .ToList();
 
             await session.Client.Player.UpdatePlayerLocation(currentLatitude, currentLongitude,
@@ -198,9 +198,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 TimeSpan t = (DateTime.Now.ToUniversalTime() - st);
                 var currentTimestamp = t.TotalMilliseconds;
 
-                var pokemonIds =
-                    session.LogicSettings.PokemonToSnipe.Pokemon.Select(
-                        q => Enum.Parse(typeof(PokemonId), q) as PokemonId? ?? PokemonId.Missingno).Select(q => (int)q);
+                var pokemonIds = session.LogicSettings.PokemonToSnipe.Pokemon;
                 
                 if (session.LogicSettings.UseSnipeLocationServer)
                 {
@@ -208,7 +206,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         !locsVisited.Contains(new PokemonLocation(q.latitude, q.longitude))
                         && !(q.timeStamp != default(DateTime) &&
                                 q.timeStamp > new DateTime(2016) && // make absolutely sure that the server sent a correct datetime
-                                q.timeStamp < DateTime.Now) && (q.id == PokemonId.Missingno || pokemonIds.Contains((int)q.id))).ToList();
+                                q.timeStamp < DateTime.Now) && (q.id == PokemonId.Missingno || pokemonIds.Contains(q.id))).ToList();
 
                     if (locationsToSnipe.Any())
                     {
@@ -230,7 +228,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var scanResult = SnipeScanForPokemon(location);
 
                     var locationsToSnipe = scanResult.pokemon == null ? new List<PokemonLocation>() : scanResult.pokemon.Where(q =>
-                        pokemonIds.Contains(q.pokemonId)
+                        pokemonIds.Contains((PokemonId)q.pokemonId)
                         && !locsVisited.Contains(q)
                         && q.expiration_time < currentTimestamp
                         && q.is_alive).ToList();
