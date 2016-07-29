@@ -122,13 +122,12 @@ namespace PoGo.NecroBot.CLI
         public int MinDelayBetweenSnipes = 20000;
         public int TotalAmountOfPokebalsToKeep = 150;
         public int TotalAmountOfPotionsToKeep = 100;
+        public int TotalAmountOfRevivesToKeep = 50;
 
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
             new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
@@ -525,5 +524,6 @@ namespace PoGo.NecroBot.CLI
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
         public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
+        public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
     }
 }

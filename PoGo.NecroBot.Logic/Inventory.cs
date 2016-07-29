@@ -26,6 +26,10 @@ namespace PoGo.NecroBot.Logic
         private GetInventoryResponse _cachedInventory;
         private DateTime _lastRefresh;
 
+        private List<ItemId> Pokeballs = new List<ItemId> { ItemId.ItemPokeBall, ItemId.ItemGreatBall, ItemId.ItemUltraBall, ItemId.ItemMasterBall };
+        private List<ItemId> Potions = new List<ItemId> { ItemId.ItemPotion, ItemId.ItemSuperPotion, ItemId.ItemHyperPotion, ItemId.ItemMaxPotion };
+        private List<ItemId> Revives = new List<ItemId> { ItemId.ItemRevive, ItemId.ItemMaxRevive };
+
         public Inventory(Client client, ILogicSettings logicSettings)
         {
             _client = client;
@@ -228,6 +232,16 @@ namespace PoGo.NecroBot.Logic
                 Logging.Logger.Write("Using ItemRecycleFilter for potions", Logging.LogLevel.Info, ConsoleColor.Yellow);
             }
 
+            if (!_logicSettings.ItemRecycleFilter.Any(s => Revives.Contains(s.Key)))
+            {
+                var revivesToRecycle = GetRevivesToRecycle(settings, myItems);
+                itemsToRecylce.AddRange(revivesToRecycle);
+            }
+            else
+            {
+                Logging.Logger.Write("Using ItemRecycleFilter for revives", Logging.LogLevel.Info, ConsoleColor.Yellow);
+            }
+
             var otherItemsToRecylce = myItems
                 .Where(x => _logicSettings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
                 .Select(
@@ -243,9 +257,6 @@ namespace PoGo.NecroBot.Logic
 
             return itemsToRecylce;
         }
-
-        private List<ItemId> Pokeballs = new List<ItemId> { ItemId.ItemPokeBall, ItemId.ItemGreatBall, ItemId.ItemUltraBall, ItemId.ItemMasterBall };
-        private List<ItemId> Potions = new List<ItemId> { ItemId.ItemPotion, ItemId.ItemSuperPotion, ItemId.ItemHyperPotion, ItemId.ItemMaxPotion };
 
         private List<ItemData> GetPokeballsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
         {
@@ -275,6 +286,21 @@ namespace PoGo.NecroBot.Logic
             allPotions.Sort((i1, i2) => ((int)i1.ItemId).CompareTo((int)i2.ItemId));
 
             return TakeAmountOfItems(allPotions, amountOfPotionsToKeep).ToList();
+        }
+
+        private List<ItemData> GetRevivesToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        {
+            var amountOfRevivesToKeep = _logicSettings.TotalAmountOfRevivesToKeep;
+            if (amountOfRevivesToKeep < 1)
+            {
+                Logging.Logger.Write("TotalAmountOfRevivesToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                return new List<ItemData>();
+            }
+
+            var allRevives = myItems.Where(s => Revives.Contains(s.ItemId)).ToList();
+            allRevives.Sort((i1, i2) => ((int)i1.ItemId).CompareTo((int)i2.ItemId));
+
+            return TakeAmountOfItems(allRevives, amountOfRevivesToKeep).ToList();
         }
 
         private IEnumerable<ItemData> TakeAmountOfItems(IReadOnlyList<ItemData> items, int ammountToLeave)
