@@ -104,7 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Config\Translations\translation.zh_tw.json" />
+    <None Include="Config\Translations\translation.zh_tw.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Config\log4net.config" />
     <None Include="Config\log4net.unix.config" />
