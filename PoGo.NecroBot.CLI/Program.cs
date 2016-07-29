@@ -21,28 +21,10 @@ namespace PoGo.NecroBot.CLI
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static StateMachine Run(GlobalSettings settings)
         {
-            var subPath = "";
-            if (args.Length > 0)
-                subPath = args[0];
-
-            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
-
-            var settings = GlobalSettings.Load(subPath);
-           
-
-            if (settings == null)
-            {
-                Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
-                Logger.Write("We will now shutdown to let you configure the bot and then launch it again.", LogLevel.Warning);
-                Thread.Sleep(2000);
-                Environment.Exit(0);
-                return;
-            }
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
             session.Client.ApiFailure = new ApiFailureStrategy(session);
-
 
             /*SimpleSession session = new SimpleSession
             {
@@ -78,21 +60,59 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLoggerContext(session);
 
             session.Navigation.UpdatePositionEvent +=
-                (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
+                (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent { Latitude = lat, Longitude = lng });
 
             machine.AsyncStart(new VersionCheckState(), session);
+            return machine;
+        }
 
-            //Non-blocking key reader
-            //This will allow to process console key presses in another code parts
+        private static void Main(string[] args)
+        {
+            var subPath = "";
+            if (args.Length > 0)
+                subPath = args[0];
+
+            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
+
+            var settings = GlobalSettings.Load(subPath);
+
+            if (settings == null)
+            {
+                Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
+                Logger.Write("We will now shutdown to let you configure the bot and then launch it again.", LogLevel.Warning);
+                Thread.Sleep(2000);
+                Environment.Exit(0);
+                return;
+            }
+
+            DateTime start = DateTime.Now;
+
             while (true)
             {
-                if (Console.KeyAvailable)
+                var machine = Run(settings);
+
+                if (machine == null)
+                    return;
+
+                //Non-blocking key reader
+                //This will allow to process console key presses in another code parts
+                while (true)
                 {
-                    var info = Console.ReadKey();
-                    if (info.Key == ConsoleKey.Enter)
+                    if (Console.KeyAvailable)
+                    {
+                        var info = Console.ReadKey();
+                        if (info.Key == ConsoleKey.Enter)
+                            return;
+                    }
+                    Thread.Sleep(5);
+
+                    if (settings.RestartTimeInMinutes != 0 && (DateTime.Now - start).Minutes >= settings.RestartTimeInMinutes)
+                    {
                         break;
+                    }
                 }
-                Thread.Sleep(5);
+                start = DateTime.Now;
+                machine.Stop();
             }
         }
     }

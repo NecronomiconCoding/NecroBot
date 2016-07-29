@@ -115,6 +115,7 @@ namespace PoGo.NecroBot.CLI
         public int WebSocketPort = 14251;
         public bool StartupWelcomeDelay = true;
         public bool SnipeAtPokestops = true;
+        public int RestartTimeInMinutes = 0;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
