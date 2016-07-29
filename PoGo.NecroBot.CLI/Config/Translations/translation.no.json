@@ -81,7 +81,7 @@
     {
       "Key": "candies",
       "Value": "Candies: {0}"
-    }
+    },
     {
       "Key": "unhandledGpxData",
       "Value": "Ubehandlet data i GPX fila, forsøker å hoppe over."
