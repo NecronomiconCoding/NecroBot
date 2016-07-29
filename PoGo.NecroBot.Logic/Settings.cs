@@ -104,6 +104,8 @@ namespace PoGo.NecroBot.CLI
         public int MaxTravelDistanceInMeters = 1000;
         public int KeepMinCp = 1250;
         public int KeepMinDuplicatePokemon = 1;
+        public int KeepEvolvedDuplicates = 2;
+        public bool TransferDuplicateEvolvedPokemon = false;
         public float KeepMinIvPercentage = 95;
         public bool KeepPokemonsThatCanEvolve = false;
         public bool PrioritizeIvOverCp = true;
@@ -235,17 +237,17 @@ namespace PoGo.NecroBot.CLI
 
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
         {
-            {PokemonId.Pidgeotto, new TransferFilter(1500, 90, 1)},
-            {PokemonId.Fearow, new TransferFilter(1500, 90, 2)},
-            {PokemonId.Zubat, new TransferFilter(500, 90, 2)},
-            {PokemonId.Golbat, new TransferFilter(1500, 90, 2)},
-            {PokemonId.Pinsir, new TransferFilter(1500, 95, 2)},
-            {PokemonId.Golduck, new TransferFilter(1350, 95, 2)},
-            {PokemonId.Tentacruel, new TransferFilter(1350, 95, 2)},
-            {PokemonId.Starmie, new TransferFilter(1350, 95, 2)},
-            {PokemonId.Eevee, new TransferFilter(750, 92, 2)},
-            {PokemonId.Gyarados, new TransferFilter(1200, 90, 5)},
-            {PokemonId.Mew, new TransferFilter(0, 0, 10)}
+            {PokemonId.Pidgeotto, new TransferFilter(1500, 90, 1, 2)},
+            {PokemonId.Fearow, new TransferFilter(1500, 90, 2, 2)},
+            {PokemonId.Zubat, new TransferFilter(500, 90, 2, 2)},
+            {PokemonId.Golbat, new TransferFilter(1500, 90, 2, 2)},
+            {PokemonId.Pinsir, new TransferFilter(1500, 95, 2, 2)},
+            {PokemonId.Golduck, new TransferFilter(1350, 95, 2, 2)},
+            {PokemonId.Tentacruel, new TransferFilter(1350, 95, 2, 2)},
+            {PokemonId.Starmie, new TransferFilter(1350, 95, 2, 2)},
+            {PokemonId.Eevee, new TransferFilter(750, 92, 2, 2)},
+            {PokemonId.Gyarados, new TransferFilter(1200, 90, 5, 2)},
+            {PokemonId.Mew, new TransferFilter(0, 0, 10, 2)}
         };
 
         public SnipeSettings PokemonToSnipe = new SnipeSettings
@@ -512,5 +514,7 @@ namespace PoGo.NecroBot.CLI
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
+        public int KeepEvolvedDuplicates => _settings.KeepEvolvedDuplicates;
+        public bool TransferDuplicateEvolvedPokemon => _settings.TransferDuplicateEvolvedPokemon;
     }
 }

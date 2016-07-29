@@ -19,16 +19,24 @@ namespace PoGo.NecroBot.Logic.Tasks
                 await
                     session.Inventory.GetDuplicatePokemonToTransfer(session.LogicSettings.KeepPokemonsThatCanEvolve,
                         session.LogicSettings.PrioritizeIvOverCp,
-                        session.LogicSettings.PokemonsNotToTransfer);
+                        session.LogicSettings.PokemonsNotToTransfer,
+                        session.LogicSettings.TransferDuplicateEvolvedPokemon);
 
             var pokemonSettings = await session.Inventory.GetPokemonSettings();
             var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
+            var pokemonsIE = await session.Inventory.GetPokemons();
+            var pokemons = pokemonsIE.ToList();
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
-                if (duplicatePokemon.Cp >= session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinCp ||
+                bool lessEvolved = session.LogicSettings.TransferDuplicateEvolvedPokemon && duplicatePokemons.Where(p => p.PokemonId == duplicatePokemon.PokemonId).Count() <= (pokemons.Where(ip => ip.PokemonId == duplicatePokemon.PokemonId).Count() - session.LogicSettings.KeepEvolvedDuplicates);
+                bool lowerEvolvedCp = session.LogicSettings.TransferDuplicateEvolvedPokemon && pokemons.Where(p => p.PokemonId == duplicatePokemon.PokemonId).OrderByDescending(p => p.Cp).ElementAt(session.LogicSettings.KeepEvolvedDuplicates - 1).Cp > duplicatePokemon.Cp;
+                if ((duplicatePokemon.Cp >= session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinCp ||
                     PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >
-                    session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinIvPercentage)
+                    session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinIvPercentage) &&
+                    (!session.LogicSettings.TransferDuplicateEvolvedPokemon ||
+                        (!lessEvolved &&
+                        !lowerEvolvedCp)))
                 {
                     continue;
                 }
