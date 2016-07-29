@@ -284,8 +284,8 @@ namespace PoGo.NecroBot.CLI
                 PokemonId.Vaporeon.ToString(),
                 PokemonId.Electabuzz.ToString(),
                 PokemonId.Magmar.ToString(),
-                // PokemonId.Farfetch'd.ToString(),
-                // PokemonId.Mr. Mime.ToString(),
+                PokemonId.Farfetchd.ToString(),
+                PokemonId.MrMime.ToString(),
             }
         };
 
