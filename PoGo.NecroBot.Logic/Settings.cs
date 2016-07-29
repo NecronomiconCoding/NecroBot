@@ -136,6 +136,7 @@ namespace PoGo.NecroBot.CLI
         public int SnipeLocationServerPort = 16969;
         public bool UseSnipeLocationServer = false;
         public bool UseTransferIVForSnipe = false;
+        public bool SnipeIgnoreUnknownIV = false;
         public int MinDelayBetweenSnipes = 20000;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
@@ -553,6 +554,7 @@ namespace PoGo.NecroBot.CLI
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
         public bool UseSnipeLocationServer=> _settings.UseSnipeLocationServer;
         public bool UseTransferIVForSnipe => _settings.UseTransferIVForSnipe;
+        public bool SnipeIgnoreUnknownIV => _settings.SnipeIgnoreUnknownIV;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
     }
 }
