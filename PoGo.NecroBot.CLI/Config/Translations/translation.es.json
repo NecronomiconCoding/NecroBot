@@ -370,7 +370,7 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Sniper] Escanando en busca de Pokemons en {0}..."
+      "Value": "[Sniper] Escaneando en busca de Pokemons en {0}..."
     },
     {
       "Key": "noPokemonToSnipe",
