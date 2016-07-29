@@ -523,5 +523,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIVForSnipe => _settings.UseTransferIVForSnipe;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
+        public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
+        public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
     }
 }
