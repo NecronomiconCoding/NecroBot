@@ -94,11 +94,9 @@ namespace PoGo.NecroBot.CLI
             //This will allow to process console key presses in another code parts
             while (true)
             {
-                if (Console.KeyAvailable)
+                if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)
                 {
-                    var info = Console.ReadKey();
-                    if (info.Key == ConsoleKey.Enter)
-                        break;
+                    break;
                 }
                 Thread.Sleep(5);
             }
