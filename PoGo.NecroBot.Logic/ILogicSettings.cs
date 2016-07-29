@@ -99,6 +99,8 @@ namespace PoGo.NecroBot.Logic
 
         ICollection<PokemonId> PokemonsNotToCatch { get; }
 
+        ICollection<PokemonId> PokemonToUseMasterball { get; }
+
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
         SnipeSettings PokemonToSnipe { get; } 
 

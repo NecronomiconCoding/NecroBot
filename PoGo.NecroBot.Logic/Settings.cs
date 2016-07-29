@@ -233,6 +233,15 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Doduo
         };
 
+        public List<PokemonId> PokemonToUseMasterball = new List<PokemonId>
+        {
+            PokemonId.Articuno,
+            PokemonId.Zapdos,
+            PokemonId.Moltres,
+            PokemonId.Mew,
+            PokemonId.Mewtwo
+        };
+
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
         {
             {PokemonId.Pidgeotto, new TransferFilter(1500, 90, 1)},
@@ -508,6 +517,7 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
+        public ICollection<PokemonId> PokemonToUseMasterball => _settings.PokemonToUseMasterball;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
