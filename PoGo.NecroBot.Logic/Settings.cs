@@ -114,7 +114,8 @@ namespace PoGo.NecroBot.CLI
         public bool UsePokemonToNotCatchFilter = false;
         public int WebSocketPort = 14251;
         public bool StartupWelcomeDelay = true;
-        public bool SnipeAtPokestops = true;
+        public bool SnipeAtPokestops = false;
+        public int MinPokeballsToSnipe = 15;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -512,5 +513,6 @@ namespace PoGo.NecroBot.CLI
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
+        public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
     }
 }
