@@ -80,7 +80,9 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(EggHatchedEvent evt, ISession session)
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.IncubatorEggHatched, evt.PokemonId.ToString()));
+            Logger.Write(session.Translation.GetTranslation(TranslationString.IncubatorEggHatched, 
+                evt.PokemonId.ToString(), evt.Level, evt.Cp, evt.MaxCp, evt.Perfection),
+                LogLevel.Egg, ConsoleColor.DarkYellow);
         }
 
         public void HandleEvent(FortUsedEvent evt, ISession session)
