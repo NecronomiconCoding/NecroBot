@@ -264,6 +264,7 @@ namespace PoGo.NecroBot.CLI
                 PokemonId.Dratini.ToString(),
                 PokemonId.Magikarp.ToString(),
                 PokemonId.Eevee.ToString(),
+                PokemonId.Charmander.ToString(),
                 PokemonId.Snorlax.ToString()
                 PokemonId.Tauros.ToString()
                 PokemonId.Dragonite.ToString()
