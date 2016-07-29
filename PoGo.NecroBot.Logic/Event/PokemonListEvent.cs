@@ -10,6 +10,6 @@ namespace PoGo.NecroBot.Logic.Event
 {
     public class PokemonListEvent : IEvent
     {
-        public List<PokemonData> PokemonList;
+        public List<Tuple<PokemonData, double>> PokemonList;
     }
 }
