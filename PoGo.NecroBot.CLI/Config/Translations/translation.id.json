@@ -30,7 +30,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "XP: {0}, Gem: {1}, Item: {2}"
+      "Value": "Nama: {0} XP: {1}, Gems: {2}, item: {3}"
     },
     {
       "Key": "eventFortFailed",
@@ -94,11 +94,11 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "sempurna"
+      "Value": "Sempurna"
     },
     {
       "Key": "commonWordName",
-      "Value": "nama"
+      "Value": "Nama"
     },
     {
       "Key": "displayHighestsCpHeader",
