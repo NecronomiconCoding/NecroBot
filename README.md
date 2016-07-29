@@ -1,9 +1,11 @@
 <!-- define warning icon -->
-[1.2]: http://necrobot.io/img/mainlogo.png (NECROBOT_HEADER)
+[1.1]: http://necrobot.io/img/mainlogo.png (NECROBOT_HEADER)
+<!-- header -->
+![alt text][1.1] <br/><br/>
+
 <!-- title -->
 <h1>NecroBot - a Pokemon Go Bot based on RocketAPI</h1>
-<!-- header -->
-![alt text][1.2] <br/><br/>
+Visit our new Website! : http://necrobot.io
 
 Chatting about this Repository can be done on our Discord: https://discord.gg/VsVrjgr <br/>
 <br/>
