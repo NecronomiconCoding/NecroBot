@@ -114,6 +114,8 @@ namespace PoGo.NecroBot.CLI
         public bool UsePokemonToNotCatchFilter = false;
         public int WebSocketPort = 14251;
         public bool StartupWelcomeDelay = true;
+        public bool UseTelegramAPI = false;
+        public string TelegramAPIKey = "ENTER KEY HERE";
         public bool SnipeAtPokestops = true;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
@@ -510,6 +512,8 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
+        public bool UseTelegramAPI => _settings.UseTelegramAPI;
+        public string TelegramAPIKey => _settings.TelegramAPIKey;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
     }

@@ -5,6 +5,7 @@ using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
 using PoGo.NecroBot.Logic.Event;
 using System;
+using PoGo.NecroBot.Logic.Service;
 
 #endregion
 
@@ -20,6 +21,7 @@ namespace PoGo.NecroBot.Logic.State
         ILogicSettings LogicSettings { get; }
         ITranslation Translation { get; }
         IEventDispatcher EventDispatcher { get; }
+        TelegramService Telegram { get; set;  }
     }
 
 
@@ -48,6 +50,8 @@ namespace PoGo.NecroBot.Logic.State
         public ITranslation Translation { get; private set; }
 
         public IEventDispatcher EventDispatcher{ get; private set; }
+
+        public TelegramService Telegram { get; set; }
 
         public void Reset(ISettings settings, ILogicSettings logicSettings)
         {

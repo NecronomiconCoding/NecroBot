@@ -80,6 +80,10 @@ namespace PoGo.NecroBot.CLI
 
             machine.AsyncStart(new VersionCheckState(), session);
 
+            if (settings.UseTelegramAPI) {
+                session.Telegram = new TelegramService(settings.TelegramAPIKey, session);
+            }
+
             //Non-blocking key reader
             //This will allow to process console key presses in another code parts
             while (true)
