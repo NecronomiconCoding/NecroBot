@@ -269,8 +269,8 @@ namespace PoGo.NecroBot.CLI
             Pokemon = new List<string>()
             {
                 PokemonId.Dratini.ToString(),
-                PokemonId.Magikarp.ToString(),
-                PokemonId.Eevee.ToString(),
+                //PokemonId.Magikarp.ToString(),
+                //PokemonId.Eevee.ToString(),
                 PokemonId.Charmander.ToString(),
                 PokemonId.Snorlax.ToString(),
                 PokemonId.Kangaskhan.ToString(),
