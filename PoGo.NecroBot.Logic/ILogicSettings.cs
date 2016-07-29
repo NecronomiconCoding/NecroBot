@@ -111,6 +111,9 @@ namespace PoGo.NecroBot.Logic
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
 
+        bool LogInventory { get; }
+        int LogInventoryDelaySeconds { get; }
+
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }

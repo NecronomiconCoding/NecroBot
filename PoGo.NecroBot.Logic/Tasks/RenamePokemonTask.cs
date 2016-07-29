@@ -44,7 +44,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     newNickname != oldNickname && pokemon.Favorite == 0)
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
-
+                    await Statistics.LogInventory(session);
                     session.EventDispatcher.Send(new NoticeEvent
                     {
                         Message =

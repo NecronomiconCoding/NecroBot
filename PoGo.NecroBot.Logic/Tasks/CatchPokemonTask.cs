@@ -118,6 +118,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         evt.FamilyCandies = caughtPokemonResponse.CaptureAward.Candy.Sum();
                     }
+                    
+                    await Statistics.LogInventory(session);
                 }
 
 
