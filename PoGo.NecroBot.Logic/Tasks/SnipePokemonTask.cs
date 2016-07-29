@@ -260,7 +260,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             lastSnipe = DateTime.Now;
                             foreach (var pokemonLocation in locationsToSnipe)
                             {
-                                if (!await CheckPokeballsToSnipe(1, session, cancellationToken))
+                                if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                     return;
 
                                 locsVisited.Add(pokemonLocation);
