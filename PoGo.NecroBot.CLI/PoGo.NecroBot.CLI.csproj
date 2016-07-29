@@ -104,7 +104,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Config\Translations\translation.sv.json" />
     <None Include="packages.config" />
     <None Include="Config\log4net.config" />
     <None Include="Config\log4net.unix.config" />
@@ -160,6 +159,9 @@
     </None>
     <None Include="Config\Translations\translation.et.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+	<None Include="Config\Translations\translation.sv.json">
+		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
