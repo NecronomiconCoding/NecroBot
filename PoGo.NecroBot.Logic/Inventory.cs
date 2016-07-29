@@ -90,7 +90,7 @@ namespace PoGo.NecroBot.Logic
 
                     if (settings.CandyToEvolve > 0)
                     {
-                        var amountPossible = familyCandy.Candy_ /settings.CandyToEvolve;
+                        var amountPossible = familyCandy.Candy_ / settings.CandyToEvolve;
                         if (amountPossible > amountToSkip)
                             amountToSkip = amountPossible;
                     }
@@ -207,9 +207,26 @@ namespace PoGo.NecroBot.Logic
             var itemsToRecylce = new List<ItemData>();
             var myItems = (await GetItems()).ToList();
 
-            var pokeballsToRecycle = GetPokeballsToRecycle(settings, myItems);
-            var potionsToRecycle = GetPotionsToRecycle(settings, myItems);
 
+            if (!_logicSettings.ItemRecycleFilter.Any(s => Pokeballs.Contains(s.Key)))
+            {
+                var pokeballsToRecycle = GetPokeballsToRecycle(settings, myItems);
+                itemsToRecylce.AddRange(pokeballsToRecycle);
+            }
+            else
+            {
+                Logging.Logger.Write("Using ItemRecycleFilter for pokeballs", Logging.LogLevel.Info, ConsoleColor.Yellow);
+            }
+
+            if (!_logicSettings.ItemRecycleFilter.Any(s => Potions.Contains(s.Key)))
+            {
+                var potionsToRecycle = GetPotionsToRecycle(settings, myItems);
+                itemsToRecylce.AddRange(potionsToRecycle);
+            }
+            else
+            {
+                Logging.Logger.Write("Using ItemRecycleFilter for potions", Logging.LogLevel.Info, ConsoleColor.Yellow);
+            }
 
             var otherItemsToRecylce = myItems
                 .Where(x => _logicSettings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
@@ -221,13 +238,14 @@ namespace PoGo.NecroBot.Logic
                             Count = x.Count - _logicSettings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
-
-            itemsToRecylce.AddRange(pokeballsToRecycle);
-            itemsToRecylce.AddRange(potionsToRecycle);
+            
             itemsToRecylce.AddRange(otherItemsToRecylce);
 
             return itemsToRecylce;
         }
+
+        private List<ItemId> Pokeballs = new List<ItemId> { ItemId.ItemPokeBall, ItemId.ItemGreatBall, ItemId.ItemUltraBall, ItemId.ItemMasterBall };
+        private List<ItemId> Potions = new List<ItemId> { ItemId.ItemPotion, ItemId.ItemSuperPotion, ItemId.ItemHyperPotion, ItemId.ItemMaxPotion };
 
         private List<ItemData> GetPokeballsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
         {
@@ -238,7 +256,7 @@ namespace PoGo.NecroBot.Logic
                 return new List<ItemData>();
             }
 
-            var allPokeballs = myItems.Where(s => s.ItemId == ItemId.ItemPokeBall || s.ItemId == ItemId.ItemGreatBall || s.ItemId == ItemId.ItemUltraBall || s.ItemId == ItemId.ItemMasterBall).ToList();
+            var allPokeballs = myItems.Where(s => Pokeballs.Contains(s.ItemId)).ToList();
             allPokeballs.Sort((ball1, ball2) => ((int)ball1.ItemId).CompareTo((int)ball2.ItemId));
 
             return TakeAmountOfItems(allPokeballs, amountOfPokeballsToKeep).ToList();
@@ -253,7 +271,7 @@ namespace PoGo.NecroBot.Logic
                 return new List<ItemData>();
             }
 
-            var allPotions = myItems.Where(s => s.ItemId == ItemId.ItemPotion || s.ItemId == ItemId.ItemSuperPotion || s.ItemId == ItemId.ItemHyperPotion || s.ItemId == ItemId.ItemMaxPotion).ToList();
+            var allPotions = myItems.Where(s => Potions.Contains(s.ItemId)).ToList();
             allPotions.Sort((i1, i2) => ((int)i1.ItemId).CompareTo((int)i2.ItemId));
 
             return TakeAmountOfItems(allPotions, amountOfPotionsToKeep).ToList();
@@ -373,7 +391,7 @@ namespace PoGo.NecroBot.Logic
 
                 var pokemonCandyNeededAlready =
                     pokemonToEvolve.Count(
-                        p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId)*
+                        p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId) *
                     settings.CandyToEvolve;
 
                 if (familyCandy.Candy_ - pokemonCandyNeededAlready > settings.CandyToEvolve)
