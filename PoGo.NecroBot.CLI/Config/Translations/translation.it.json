@@ -30,7 +30,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "PE: {0}, Gemme: {1}, Oggetti: {2}"
+      "Value": "Nome {0} PE: {1}, Gemme: {2}, Oggetti: {3}"
     },
     {
       "Key": "eventFortFailed",
