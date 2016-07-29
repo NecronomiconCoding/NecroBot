@@ -86,6 +86,8 @@ namespace PoGo.NecroBot.Logic.State
             if (TransferConfig(baseDir, session))
                 session.EventDispatcher.Send(new UpdateEvent { Message = session.Translation.GetTranslation(Common.TranslationString.FinishedTransferringConfig) });
 
+            await Task.Delay(2000);
+
             Process.Start(Assembly.GetEntryAssembly().Location);
             Environment.Exit(-1);
             return null;
