@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace PoGo.NecroBot.Logic.Utils
 {
@@ -7,7 +7,7 @@ namespace PoGo.NecroBot.Logic.Utils
     {
         private static readonly Random RandomDevice = new Random();
 
-        public static async void Delay(int delay, int defdelay)
+        public static void Delay(int delay, int defdelay)
         {
             if (delay > 0)
             {
@@ -16,11 +16,11 @@ namespace PoGo.NecroBot.Logic.Utils
                 int randomMax = (int)(delay * (1 + randomFactor));
                 int randomizedDelay = RandomDevice.Next(randomMin, randomMax);
 
-                await Task.Delay(randomizedDelay);
+                Thread.Sleep(randomizedDelay);
             }
             else if (defdelay > 0)
             {
-                await Task.Delay(defdelay);
+                Thread.Sleep(defdelay);
             }
 
         }

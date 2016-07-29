@@ -3,6 +3,7 @@
 using System;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
+using PokemonGo.RocketAPI.Exceptions;
 
 #endregion
 
@@ -32,6 +33,10 @@ namespace PoGo.NecroBot.Logic.State
                 try
                 {
                     state = await state.Execute(session);
+                }
+                catch(InvalidResponseException)
+                {
+                    session.EventDispatcher.Send(new ErrorEvent { Message = "The PokemonGo servers are having a bad time, chill." });
                 }
                 catch (Exception ex)
                 {
