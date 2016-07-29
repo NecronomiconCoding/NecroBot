@@ -253,10 +253,10 @@ namespace PoGo.NecroBot.CLI
             Locations = new List<Location>
             {
                 new Location(38.55680748646112, -121.2383794784546), //Dratini Spot
-                new Location(41.679197333597, -71.164485830158) // Dratini Spot2
+                new Location(41.679197333597, -71.164485830158), // Dratini Spot2
                 new Location(-33.85901900, 151.21309800), //Magikarp Spot
                 new Location(47.5014969, -122.0959568), //Eevee Spot
-                new Location(51.5025343, -0.2055027) //Charmender Spot
+                new Location(51.5025343, -0.2055027), //Charmender Spot
                 new Location(35.668465050004, 139.70481913813) // Tokyo Spot
             },
             Pokemon = new List<string>()
@@ -265,13 +265,13 @@ namespace PoGo.NecroBot.CLI
                 PokemonId.Magikarp.ToString(),
                 PokemonId.Eevee.ToString(),
                 PokemonId.Charmander.ToString(),
-                PokemonId.Snorlax.ToString()
-                PokemonId.Tauros.ToString()
-                PokemonId.Dragonite.ToString()
-                PokemonId.Chansey.ToString()
-                PokemonId.Porygon.ToString()
-                PokemonId.Aerodactyl.ToString()
-                PokemonId.Lapras.ToString()
+                PokemonId.Snorlax.ToString(),
+                PokemonId.Tauros.ToString(),
+                PokemonId.Dragonite.ToString(),
+                PokemonId.Chansey.ToString(),
+                PokemonId.Porygon.ToString(),
+                PokemonId.Aerodactyl.ToString(),
+                PokemonId.Lapras.ToString(),
                 PokemonId.Vaporeon.ToString()
             }
         };
