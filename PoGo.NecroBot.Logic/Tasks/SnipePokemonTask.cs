@@ -287,8 +287,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         private static ScanResult SnipeScanForPokemon(Location location)
         {
-            var formatter = new System.Globalization.NumberFormatInfo();
-            formatter.NumberDecimalSeparator = ".";
+            var formatter = new System.Globalization.NumberFormatInfo() { NumberDecimalSeparator = "." };
             var uri = $"https://pokevision.com/map/data/{location.Latitude.ToString(formatter)}/{location.Longitude.ToString(formatter)}";
 
             ScanResult scanResult;
