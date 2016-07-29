@@ -284,7 +284,6 @@
       "Key": "pokemonIgnoreFilter",
       "Value": "[Pokémon-Ignore-Filter] - {0} ignoré comme défini dans les options!"
     },
-    ,
     {
       "Key": "catchStatusAttempt",
       "Value": "Capture"
