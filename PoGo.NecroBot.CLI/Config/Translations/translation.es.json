@@ -34,7 +34,7 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "El avance falló, posible softban. Eliminar softban en: {0}/{1}"
+      "Value": "El avance falló, posible SoftBan. Eliminar SoftBan en: {0}/{1}"
     },
     {
       "Key": "eventFortTargeted",
@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Probabilidad: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -190,7 +190,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "Servidores de PTC probablemente estén caídos o sus datos de acceso son incorrectos. Prueba con Google"
+      "Value": "Servidores de PTC probablemente estén caídos o sus datos de acceso son incorrectos. Prueba con Google."
     },
     {
       "Key": "tryingAgainIn",
@@ -202,11 +202,11 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Abriendo la página de Google Device. Por favor, pegue el código usando CTRL+V"
+      "Value": "Abriendo la página de Google Device. Por favor, pegue el código usando CTRL+V."
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "No se puede copiar al portapapeles, hágalo de manualmente por favor"
+      "Value": "No se pudo copiar al portapapeles, por favor, hágalo manualmente."
     },
     {
       "Key": "couldntCopyToClipboard2",
@@ -218,7 +218,7 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Vieaje no realista en {0}, utilizando el último Coords.ini memorizado"
+      "Value": "Viaje no realista en {0}, utilizando el último Coords.ini memorizado"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -254,7 +254,7 @@
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Looking for pokemon..."
+      "Value": "Buscando Pokemon..."
     },
     {
       "Key": "lookingForLurePokemon",
@@ -274,15 +274,15 @@
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "El inventario está lleno, no pudimos pillar nada!"
+      "Value": "El inventario está lleno, no pudimos pillar nada :("
     },
     {
       "Key": "encounterProblem",
-      "Value": "Encontrado un problema: {0}"
+      "Value": "Se encontró un problema: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Encontrado un problema: Cebo pokemon {0}"
+      "Value": "Se encontró un problema: Cebo pokemon {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -302,15 +302,15 @@
     },
     {
       "Key": "catchStatusError",
-      "Value": "Error de captura"
+      "Value": "Error de Captura"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Captura fallida"
+      "Value": "Captura Fallida"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "CatchFlee"
+      "Value": "Huida"
     },
     {
       "Key": "catchStatusMissed",
@@ -350,7 +350,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Como tiene habilitado Google autenticación de dos factores, tendrá que insertar una contraseña específica de la APP en el auth.json"
+      "Value": "Como tiene habilitado Google autenticación de 2 factores, tendrá que insertar una contraseña específica de la APP en el auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -374,7 +374,7 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] No se encontraron Pokemons!"
+      "Value": "[Sniper] No se encontraron Pokemons :("
     }
   ]
 }
