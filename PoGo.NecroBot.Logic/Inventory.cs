@@ -204,19 +204,90 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<IEnumerable<ItemData>> GetItemsToRecycle(ISettings settings)
         {
-            var myItems = await GetItems();
+            var itemsToRecylce = new List<ItemData>();
+            var myItems = (await GetItems()).ToList();
 
-            return myItems
+            var pokeballsToRecycle = GetPokeballsToRecycle(settings, myItems);
+            var potionsToRecycle = GetPotionsToRecycle(settings, myItems);
+
+
+            var otherItemsToRecylce = myItems
                 .Where(x => _logicSettings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
                 .Select(
                     x =>
                         new ItemData
                         {
                             ItemId = x.ItemId,
-                            Count =
-                                x.Count - _logicSettings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
+                            Count = x.Count - _logicSettings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
+
+            itemsToRecylce.AddRange(pokeballsToRecycle);
+            itemsToRecylce.AddRange(potionsToRecycle);
+            itemsToRecylce.AddRange(otherItemsToRecylce);
+
+            return itemsToRecylce;
+        }
+
+        private List<ItemData> GetPokeballsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        {
+            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
+            if (amountOfPokeballsToKeep < 1)
+            {
+                Logging.Logger.Write("TotalAmountOfPokebalsToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                return new List<ItemData>();
+            }
+
+            var allPokeballs = myItems.Where(s => s.ItemId == ItemId.ItemPokeBall || s.ItemId == ItemId.ItemGreatBall || s.ItemId == ItemId.ItemUltraBall || s.ItemId == ItemId.ItemMasterBall).ToList();
+            allPokeballs.Sort((ball1, ball2) => ((int)ball1.ItemId).CompareTo((int)ball2.ItemId));
+
+            return TakeAmountOfItems(allPokeballs, amountOfPokeballsToKeep).ToList();
+        }
+
+        private List<ItemData> GetPotionsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        {
+            var amountOfPotionsToKeep = _logicSettings.TotalAmountOfPotionsToKeep;
+            if (amountOfPotionsToKeep < 1)
+            {
+                Logging.Logger.Write("TotalAmountOfPotionsToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                return new List<ItemData>();
+            }
+
+            var allPotions = myItems.Where(s => s.ItemId == ItemId.ItemPotion || s.ItemId == ItemId.ItemSuperPotion || s.ItemId == ItemId.ItemHyperPotion || s.ItemId == ItemId.ItemMaxPotion).ToList();
+            allPotions.Sort((i1, i2) => ((int)i1.ItemId).CompareTo((int)i2.ItemId));
+
+            return TakeAmountOfItems(allPotions, amountOfPotionsToKeep).ToList();
+        }
+
+        private IEnumerable<ItemData> TakeAmountOfItems(IReadOnlyList<ItemData> items, int ammountToLeave)
+        {
+            var itemsAvailable = 0;
+            foreach (var item in items)
+            {
+                itemsAvailable += item.Count;
+            }
+
+            int itemsToRemove = itemsAvailable - ammountToLeave;
+
+            foreach (var item in items)
+            {
+                if (itemsToRemove > 0 && item.Count > 0)
+                {
+                    if (item.Count < itemsToRemove)
+                    {
+                        // Recylce all of this type
+                        itemsToRemove -= item.Count;
+                        yield return item;
+                    }
+                    else
+                    {
+                        // Recycle remaining amount
+                        var count = itemsToRemove;
+                        itemsToRemove = 0;
+                        yield return new ItemData { ItemId = item.ItemId, Count = count };
+                    }
+                }
+            }
         }
 
         public async Task<IEnumerable<PlayerStats>> GetPlayerStats()
@@ -232,15 +303,15 @@ namespace PoGo.NecroBot.Logic
             var inventory = await GetCachedInventory();
 
             var families = from item in inventory.InventoryDelta.InventoryItems
-                where item.InventoryItemData?.Candy != null
-                where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
-                group item by item.InventoryItemData?.Candy.FamilyId
+                           where item.InventoryItemData?.Candy != null
+                           where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
+                           group item by item.InventoryItemData?.Candy.FamilyId
                 into family
-                select new Candy
-                {
-                    FamilyId = family.First().InventoryItemData.Candy.FamilyId,
-                    Candy_ = family.First().InventoryItemData.Candy.Candy_
-                };
+                           select new Candy
+                           {
+                               FamilyId = family.First().InventoryItemData.Candy.FamilyId,
+                               Candy_ = family.First().InventoryItemData.Candy.Candy_
+                           };
 
 
             return families.ToList();

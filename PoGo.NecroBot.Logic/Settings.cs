@@ -115,18 +115,13 @@ namespace PoGo.NecroBot.CLI
         public int WebSocketPort = 14251;
         public bool StartupWelcomeDelay = true;
         public bool SnipeAtPokestops = true;
+        public int TotalAmountOfPokebalsToKeep = 150;
+        public int TotalAmountOfPotionsToKeep = 100;
+
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 40),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
             new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
             new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
             new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
@@ -512,5 +507,7 @@ namespace PoGo.NecroBot.CLI
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
+        public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
+        public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
     }
 }

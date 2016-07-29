@@ -90,6 +90,8 @@ namespace PoGo.NecroBot.Logic
         string ProfileConfigPath { get; }
         string GeneralConfigPath { get; }
         bool SnipeAtPokestops { get; }
+        int TotalAmountOfPokebalsToKeep { get; }
+        int TotalAmountOfPotionsToKeep { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
