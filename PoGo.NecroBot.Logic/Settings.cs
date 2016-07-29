@@ -254,10 +254,17 @@ namespace PoGo.NecroBot.CLI
             {
                 new Location(38.55680748646112, -121.2383794784546), //Dratini Spot
                 new Location(41.679197333597, -71.164485830158), // Dratini Spot2
+                new Location(41.37890171139444,2.1871590614318848), // Dratini Spot3
                 new Location(-33.85901900, 151.21309800), //Magikarp Spot
                 new Location(47.5014969, -122.0959568), //Eevee Spot
                 new Location(51.5025343, -0.2055027), //Charmender Spot
-                new Location(35.668465050004, 139.70481913813) // Tokyo Spot
+                new Location(41.36844336104341,2.121219635009765), // Electabuzz Spot
+                new Location(41.366374034753804,2.1161770820617676), // Magmar Spot
+                new Location(41.39560823419379,2.1591943502426147), // Pikachu Spot
+                new Location(41.43288157977508,2.1677345037460327), // Jynx Spot
+                new Location(35.668465050004, 139.70481913813), // Tokyo - Popular Spot with good Pokemons
+                new Location(40.4167209,-3.6844265), // Madrid - Popular Spot with good Pokemons
+                new Location(41.3869759,2.1850711), // Barcelona - Popular Spot with good Pokemons
             },
             Pokemon = new List<string>()
             {
@@ -266,13 +273,19 @@ namespace PoGo.NecroBot.CLI
                 PokemonId.Eevee.ToString(),
                 PokemonId.Charmander.ToString(),
                 PokemonId.Snorlax.ToString(),
+                PokemonId.Kangaskhan.ToString(),
+                PokemonId.Jynx.ToString(),
                 PokemonId.Tauros.ToString(),
                 PokemonId.Dragonite.ToString(),
                 PokemonId.Chansey.ToString(),
                 PokemonId.Porygon.ToString(),
                 PokemonId.Aerodactyl.ToString(),
                 PokemonId.Lapras.ToString(),
-                PokemonId.Vaporeon.ToString()
+                PokemonId.Vaporeon.ToString(),
+                PokemonId.Electabuzz.ToString(),
+                PokemonId.Magmar.ToString(),
+                // PokemonId.Farfetch'd.ToString(),
+                // PokemonId.Mr. Mime.ToString(),
             }
         };
 
