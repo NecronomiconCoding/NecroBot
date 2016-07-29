@@ -91,6 +91,7 @@ namespace PoGo.NecroBot.CLI
     public class GlobalSettings
     {
         public int AmountOfPokemonToDisplayOnStart = 10;
+        public bool TransferConfigAndAuthOnUpdate = false;
 
         [JsonIgnore]
         internal AuthSettings Auth = new AuthSettings();
@@ -516,6 +517,7 @@ namespace PoGo.NecroBot.CLI
         public string ProfileConfigPath => _settings.ProfileConfigPath;
         public string GeneralConfigPath => _settings.GeneralConfigPath;
         public bool AutoUpdate => _settings.AutoUpdate;
+        public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;

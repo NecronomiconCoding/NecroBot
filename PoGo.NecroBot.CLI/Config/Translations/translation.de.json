@@ -277,6 +277,10 @@
       "Value": "Entpacken der Dateien abgeschlossen..."
     },
     {
+      "Key": "FinishedTransferringConfig",
+      "Value": "Beendet Ihre Konfiguration auf die neue Version übertragen..."
+    },
+    {
       "Key": "updateFinished",
       "Value": "Update abgeschlossen! Du kannst dieses Fenster nun schließen."
     },
