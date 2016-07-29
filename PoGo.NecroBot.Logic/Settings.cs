@@ -122,6 +122,7 @@ namespace PoGo.NecroBot.CLI
         public int KeepMinDuplicatePokemon = 1;
         public float KeepMinIvPercentage = 95;
         public bool KeepPokemonsThatCanEvolve = false;
+        public bool KeepEvolvablesOnlyIfOnEvolutionList = false;
         public bool PrioritizeIvOverCp = true;
         public bool RenameAboveIv = true;
         public string RenameTemplate = "{1}_{0}";
@@ -521,6 +522,7 @@ namespace PoGo.NecroBot.CLI
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
+        public bool KeepEvolvablesOnlyIfOnEvolutionList => _settings.KeepEvolvablesOnlyIfOnEvolutionList;
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool UseEggIncubators => _settings.UseEggIncubators;
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
