@@ -102,7 +102,7 @@
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "Unknown"
+      "Value": "Desconocido"
     },
     {
       "Key": "displayHighestsCpHeader",
@@ -130,7 +130,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Incubated egg has hatched: {0}"
+      "Value": "Huevo incubado ha eclosionado: {0}"
     },
     {
       "Key": "logEntryError",
