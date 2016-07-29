@@ -33,7 +33,6 @@ namespace PoGo.NecroBot.Logic.State
             LogicSettings = logicSettings;
             EventDispatcher = new EventDispatcher();
             Translation = Common.Translation.Load(logicSettings);
-            Telegram = new TelegramService(logicSettings.TelegramAPIKey, this);
             Reset(settings, LogicSettings);
         }
 

@@ -20,15 +20,15 @@ namespace PoGo.NecroBot.Logic.Service
 
         public TelegramService(string apiKey, ISession session)
         {
-            if (session.LogicSettings.UseTelegramAPI)
-            {
-                this.bot = new TelegramBotClient(apiKey);
-                this.session = session;
+            this.bot = new TelegramBotClient(apiKey);
+            this.session = session;
 
-                bot.OnMessage += OnTelegramMessageReceived;
-                bot.StartReceiving();
-                
-            }
+            var me = bot.GetMeAsync().Result;
+
+            bot.OnMessage += OnTelegramMessageReceived;
+            bot.StartReceiving();
+
+            Logger.Write("Using TelegramAPI with " + me.Username);
         }
 
         private async void OnTelegramMessageReceived(object sender, MessageEventArgs messageEventArgs)
