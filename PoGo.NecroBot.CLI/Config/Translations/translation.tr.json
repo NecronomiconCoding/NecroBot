@@ -22,7 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Tanımlanan yarıçap dışındasın! 5 saniye içinde ({0}m uzağa) yürümeye başlanacak. Coords.ini dosyası doğru yapılandırılmış mı?"
+      "Value": "Tanımlanan yarıçap dışındasın! 5 saniye sonra ({0}m uzağa) yürümeye başlanacak. Coords.ini dosyası doğru yapılandırılmış mı?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "({1}m) içinde \"{0}\" PokeStop una ulaşılacak."
+      "Value": "({1}m) sonra \"{0}\" PokeStop una ulaşılacak."
     },
     {
       "Key": "eventProfileLogin",
@@ -190,7 +190,7 @@
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "{0} saniye içinde tekrar deneniyor..."
+      "Value": "{0} saniye sonra tekrar denenecek..."
     },
     {
       "Key": "accountNotVerified",
