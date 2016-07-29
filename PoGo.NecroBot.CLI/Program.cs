@@ -67,7 +67,7 @@ namespace PoGo.NecroBot.CLI
 
             var aggregator = new StatisticsAggregator(stats);
             var listener = new ConsoleEventListener();
-            var websocket = new WebSocketInterface(settings.WebSocketPort, session.Translation);
+            var websocket = new WebSocketInterface(settings.WebSocketPort, session);
 
             session.EventDispatcher.EventReceived += (IEvent evt) => listener.Listen(evt, session);
             session.EventDispatcher.EventReceived += (IEvent evt) => aggregator.Listen(evt, session);
@@ -81,6 +81,8 @@ namespace PoGo.NecroBot.CLI
                 (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
 
             machine.AsyncStart(new VersionCheckState(), session);
+            if(session.LogicSettings.UseSnipeLocationServer)
+                SnipePokemonTask.AsyncStart(session);
 
             //Non-blocking key reader
             //This will allow to process console key presses in another code parts

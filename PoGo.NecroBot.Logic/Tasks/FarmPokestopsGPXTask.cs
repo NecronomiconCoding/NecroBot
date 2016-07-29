@@ -35,13 +35,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     var trackPoints = track.Segments.ElementAt(0).TrackPoints;
                     var maxTrkPt = trackPoints.Count - 1;
+
                     while (curTrkPt <= maxTrkPt)
                     {
                         var nextPoint = trackPoints.ElementAt(curTrkPt);
                         var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                             session.Client.CurrentLongitude, Convert.ToDouble(nextPoint.Lat, CultureInfo.InvariantCulture),
                             Convert.ToDouble(nextPoint.Lon, CultureInfo.InvariantCulture));
-
+                        
                         if (distance > 5000)
                         {
                             session.EventDispatcher.Send(new ErrorEvent
@@ -94,11 +95,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             await RecycleItemsTask.Execute(session);
 
-                            if (session.LogicSettings.SnipeAtPokestops)
-                            {
-                                await SnipePokemonTask.Execute(session);
-                            }
-
                             if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                                 session.LogicSettings.EvolveAllPokemonAboveIv)
                             {
@@ -114,6 +110,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 await RenamePokemonTask.Execute(session);
                             }
+                        }
+
+                        if (session.LogicSettings.SnipeAtPokestops)
+                        {
+                            await SnipePokemonTask.Execute(session);
                         }
 
                         await session.Navigation.HumanPathWalking(trackPoints.ElementAt(curTrkPt),
