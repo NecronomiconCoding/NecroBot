@@ -115,6 +115,11 @@ namespace PoGo.NecroBot.CLI
         public int WebSocketPort = 14251;
         public bool StartupWelcomeDelay = true;
         public bool SnipeAtPokestops = true;
+        public string SnipeLocationServer = "localhost";
+        public int SnipeLocationServerPort = 16969;
+        public bool UseSnipeLocationServer = false;
+        public bool UseTransferIVForSnipe = false;
+        public int MinDelayBetweenSnipes = 20000;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -258,12 +263,13 @@ namespace PoGo.NecroBot.CLI
                 new Location(51.5025343,-0.2055027) //Charmender Spot
 
             },
-            Pokemon = new List<string>()
+            Pokemon = new List<PokemonId>()
             {
-                PokemonId.Dratini.ToString(),
-                PokemonId.Magikarp.ToString(),
-                PokemonId.Eevee.ToString(),
-                PokemonId.Charmander.ToString()
+                PokemonId.Dratini,
+                PokemonId.Magikarp,
+                PokemonId.Eevee,
+                PokemonId.Snorlax,
+                PokemonId.Dragonair,
             }
         };
 
@@ -306,6 +312,11 @@ namespace PoGo.NecroBot.CLI
             if(settings.RenameTemplate == null)
             {
                 settings.RenameTemplate = Default.RenameTemplate;
+            }
+
+            if(settings.SnipeLocationServer == null)
+            {
+                settings.SnipeLocationServer = Default.SnipeLocationServer;
             }
 
             settings.ProfilePath = profilePath;
@@ -512,5 +523,10 @@ namespace PoGo.NecroBot.CLI
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
+        public string SnipeLocationServer => _settings.SnipeLocationServer;
+        public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
+        public bool UseSnipeLocationServer=> _settings.UseSnipeLocationServer;
+        public bool UseTransferIVForSnipe => _settings.UseTransferIVForSnipe;
+        public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
     }
 }
