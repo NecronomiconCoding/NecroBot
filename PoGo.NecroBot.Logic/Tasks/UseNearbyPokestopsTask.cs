@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
@@ -20,12 +21,16 @@ namespace PoGo.NecroBot.Logic.Tasks
         //to only find stops within 40 meters
         //this is for gpx pathing, we are not going to the pokestops,
         //so do not make it more than 40 because it will never get close to those stops.
-        public static async Task Execute(ISession session)
+        public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             var pokestopList = await GetPokeStops(session);
 
             while (pokestopList.Any())
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 pokestopList =
                     pokestopList.OrderBy(
                         i =>
@@ -53,11 +58,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
-                await RecycleItemsTask.Execute(session);
+                await RecycleItemsTask.Execute(session, cancellationToken);
 
                 if (session.LogicSettings.TransferDuplicatePokemon)
                 {
-                    await TransferDuplicatePokemonTask.Execute(session);
+                    await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                 }
             }
         }
