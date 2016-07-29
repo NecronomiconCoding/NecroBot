@@ -78,7 +78,7 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
         public static double CalculatePokemonPerfection(PokemonData poke)
         {
             if (Math.Abs(poke.CpMultiplier + poke.AdditionalCpMultiplier) <= 0)
-                return (poke.IndividualAttack*2 + poke.IndividualDefense + poke.IndividualStamina)/(4.0*15.0)*100.0;
+                return (poke.IndividualAttack + poke.IndividualDefense + poke.IndividualStamina)/(45.0)*100.0;
 
             GetBaseStats(poke.PokemonId);
             var maxCp = CalculateMaxCpMultiplier(poke);

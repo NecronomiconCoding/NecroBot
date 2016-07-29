@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Collections.Generic;
@@ -19,6 +19,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsGpxTask
     {
+        static DateTime lastTasksCall = DateTime.Now;
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             var tracks = GetGpxTracks(session);
@@ -27,6 +28,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var maxTrk = tracks.Count - 1;
             var curTrkSeg = 0;
             var eggWalker = new EggWalker(1000, session);
+
             while (curTrk <= maxTrk)
             {
                 cancellationToken.ThrowIfCancellationRequested();
@@ -61,7 +63,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         var pokestopList = await GetPokeStops(session);
                         session.EventDispatcher.Send(new PokeStopListEvent { Forts = pokestopList });
 
-                        while (pokestopList.Any())
+                        while (pokestopList.Any()) // warning: this is never entered due to ps cooldowns from UseNearbyPokestopsTask 
                         {
                             cancellationToken.ThrowIfCancellationRequested();
 
@@ -100,6 +102,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 await session.Inventory.RefreshCachedInventory();
                             }
+                        }
+
+                        if(DateTime.Now > lastTasksCall)
+                        {
+                            lastTasksCall = DateTime.Now.AddMilliseconds(Math.Min(session.LogicSettings.DelayBetweenPlayerActions, 3000));
 
                             await RecycleItemsTask.Execute(session, cancellationToken);
 
