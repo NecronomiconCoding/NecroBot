@@ -23,24 +23,24 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Вы находитесь вне указанного радиуса! Идем к точке старта (дистанция {0}м) через 5 сек. Ваш Coords.ini файл корректен?"
+        "Вы находитесь вне указанного радиуса! Возвращаемся к точке старта (дистанция {0}м) через 5 сек. Ваш Coords.ini файл корректен?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
       "Value":
-        "Не найдено активных PokeStops в вашей зоне. Может указана слишком мальенькая максимальная дистанция поиска в настройках?"
+        "Не найдено активных PokeStop'ов в вашей зоне. Возможно указана слишком маленькая максимальная дистанция поиска в настройках?"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Название: {0} XP: {1}, Gems: {2}, Предметов: {3}"
+      "Value": "<{0}> XP:{1}, Gems:{2}, Итемов: {3}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Название: {0} ИНФО: Не удалось полутать, возможно софтбан. Разбан через: {1}/{2}"
+      "Value": "Название: {0} ИНФО: Не удалось получить предметы, возможно софтбан. Разбан через: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Прибываем к {0} через ({1}м)"
+      "Value": "Направляемся к <{0}>, дистанция ({1}м)"
     },
     {
       "Key": "eventProfileLogin",
@@ -48,19 +48,19 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Использовано Lucky Egg, осталось: {0}"
+      "Value": "Использовано Lucky Egg, их осталось: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} успешно за {1}xp"
+      "Value": "{0} успешно, получено {1}xp"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Не удалось {0}. Результат: {1}, прекращаем эволюционирование {2}"
+      "Value": "Неудачно: {0}. Успешно: {1}. Прекращено: {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Лучший CP: {3}  IV: {4}%] (Конфет: {5})"
+      "Value": "{0}\t (CP:{1}|IV:{2}%) [у Лучшего (CP:{3}|IV:{4}%)] Конфет: {5}"
     },
     {
       "Key": "eventItemRecycled",
@@ -69,15 +69,15 @@
     {
       "Key": "eventPokemonCapture",
       "Value":
-        "({0}) | ({1}) {2} Ур: {3} CP: ({4}/{5}) IV: {6}% | Шанс: {7}% | на {8}м | исп. {9} ({10} осталось). | {11}"
+        "=>({0})({1}) {2} {3}-УР (CР:{4}/{5}|VI:{6}%) c {7}% шансом на {8}м исп. {9} ({10} осталось) {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Нет Pokeball'ов - Мы упустили {0} с CP {1}"
+      "Value": "Нет Pokeball'ов - Мы упустили {0} (CP:{1})"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} Попытка #{1}"
+      "Value": "{0}, попытка #{1}"
     },
     {
       "Key": "catchStatus",
@@ -97,7 +97,7 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "идеала"
+      "Value": "- IV"
     },
     {
       "Key": "commonWordName",
@@ -113,15 +113,15 @@
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "ТОП по идеальным статам"
+      "Value": "ТОП по IV"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "ТОП по уровню"
+      "Value": "ТОП по LV"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Убедитесь, что Широта и Долгота верны! Закройте программу если это не так! Широта: {0} Долгота: {1}"
+      "Value": "Убедитесь, что Широта и Долгота верны! Закройте программу, если это не так! Широта: {0} Долгота: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -133,7 +133,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Из яйца вылупился: {0}"
+      "Value": "Из Яйца получили: {0}"
     },
     {
       "Key": "logEntryError",
@@ -149,7 +149,7 @@
     },
     {
       "Key": "logEntryPokestop",
-      "Value": "ОСТАНОВКА"
+      "Value": "POKESTOP"
     },
     {
       "Key": "logEntryFarming",
@@ -157,15 +157,15 @@
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "ПЕРЕРАБОТКА"
+      "Value": "УДАЛЯЕМ"
     },
     {
       "Key": "logEntryPKMN",
-      "Value": "ПОКЕМОН"
+      "Value": "ЛОВИМ"
     },
     {
       "Key": "logEntryTransfered",
-      "Value": "ПЕРЕДАЧА"
+      "Value": "ОБМЕНИВАЕМ"
     },
     {
       "Key": "logEntryEvolved",
@@ -189,11 +189,11 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "Логинимся через {0}"
+      "Value": "Логинимся под аккаунтом {0}"
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC сервера возможно не работают ИЛИ неверно указаны данные учетной записи. Попробуйте логин через Google"
+      "Value": "PTC сервера возможно не работают ИЛИ неверно указаны данные учетной записи. Попробуйте использовать логин от Google аккаунта"
     },
     {
       "Key": "tryingAgainIn",
@@ -205,7 +205,7 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Открываем страницу Google Device. Пожалуйста вставьте код используя CTRL+V"
+      "Value": "Открываем страницу Google Device. Пожалуйста, вставьте код используя CTRL+V"
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -229,7 +229,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Отлично! У вас уже установлена последняя версия {0}"
+      "Value": "Отлично! У Вас уже установлена последняя версия {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -253,7 +253,7 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Ищем покемона с пряностями..."
+      "Value": "Ищем покемона привлеченного Ладаном..."
     },
     {
       "Key": "lookingForPokemon",
@@ -261,7 +261,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Ищем покемона с приманкой..."
+      "Value": "Ищем покемона привлеченного ЛюрМодулем..."
     },
     {
       "Key": "pokemonSkipped",
@@ -269,23 +269,23 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Инвентарь полон. Передаем покемонов профессору..."
+      "Value": "Инвентарь полон. Передайте покемонов Профессору..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Инвентарь полон. Вручную передайте покемона профессору или установите настройку TransferDuplicatePokemon в true ..."
+      "Value": "Инвентарь полон. Вручную передайте покемона Профессору или установите настройку TransferDuplicatePokemon как true ... "
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Инвентарь полон, предметы не полутаны!"
+      "Value": "Инвентарь полон, не можем взять предметы!"
     },
     {
       "Key": "encounterProblem",
-      "Value": "Проблема с поимкой: {0}"
+      "Value": "Проблема с отловом: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Проблема с поимкой: Приманенный покемон {0}"
+      "Value": "Проблема с отловом: Приманенный ЛюрМодулем покемон {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -301,7 +301,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "ПОПЫТКА"
+      "Value": "попытка"
     },
     {
       "Key": "catchStatusError",
@@ -309,7 +309,7 @@
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "ВЫРВАЛСЯ"
+      "Value": "ВЫБРАЛСЯ"
     },
     {
       "Key": "catchStatusFlee",
@@ -317,23 +317,23 @@
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "ПРОПУЩЕН"
+      "Value": "УПУСТИЛИ"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "УСПЕХ"
+      "Value": "УДАЧНО"
     },
     {
       "Key": "catchTypeNormal",
-      "Value": "ОБЫЧНЫЙ"
+      "Value": "Обычный"
     },
     {
       "Key": "catchTypeLure",
-      "Value": "ПРИМАНКА"
+      "Value": "на ЛюрМодуль"
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "ПРЯНОСТЬ"
+      "Value": "на Ладан"
     },
     {
       "Key": "webSocketFailStart",
@@ -341,19 +341,19 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Онлайн {1} - Ур: {2} | EXP/час: {3:0} | П/час: {4:0} | Пыль: {5:0} | Передано: {6:0} | Переработано: {7:0}"
+      "Value": "{0}-Онлайн {1}, Ур:{2}|XP/ч:{3:0}|П/ч:{4:0}|Пыль:{5:0}|Обменено:{6:0}|Удалено:{7:0}"
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (след. ур. через {1}ч {2}м | {3}/{4} XP)"
+      "Value": "{0} (след.через {1}ч{2}м|{3}/{4} XP)"
     },
     {
       "Key": "requireInputText",
-      "Value": "Нажмите любую кнопку для продолжения..."
+      "Value": "Нажмите любую клавишу для продолжения..."
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Т.к. у вас включена двухфакторная аутентификация Google, вам нужно поместить пароль Приложения Google в файл auth.json"
+      "Value": "Т.к. у Вас включена двухфакторная аутентификация Google, Вам нужно поместить пароль Приложения Google в файл auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -361,7 +361,7 @@
     },
     {
       "Key": "googleError",
-      "Value": "Убедитесь, что вы ввели верные почту и пароль!"
+      "Value": "Убедитесь, что Вы ввели верные E-mail и Пароль от аккаунта!"
     },
     {
       "Key": "missingCredentialsGoogle",
