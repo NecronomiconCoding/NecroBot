@@ -314,6 +314,11 @@ namespace PoGo.NecroBot.CLI
                 settings.RenameTemplate = Default.RenameTemplate;
             }
 
+            if(settings.SnipeLocationServer == null)
+            {
+                settings.SnipeLocationServer = Default.SnipeLocationServer;
+            }
+
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
