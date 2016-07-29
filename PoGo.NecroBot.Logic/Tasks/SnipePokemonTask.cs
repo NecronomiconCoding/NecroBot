@@ -223,7 +223,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     var locationsToSnipe = snipeLocations == null ? new List<SniperInfo>() : snipeLocations.Where(q =>
                         // when UseTransferIVForSnipe=true skip pokemons with unknown iv or if they don't match the TransferFilter/default MinIV
-                        (!session.LogicSettings.UseTransferIVForSnipe || (q.iv > 0 && q.iv < session.Inventory.GetPokemonTransferFilter(q.id).KeepMinIvPercentage)) &&
+                        (!session.LogicSettings.UseTransferIVForSnipe || (q.iv > 0 && q.iv >= session.Inventory.GetPokemonTransferFilter(q.id).KeepMinIvPercentage)) &&
                         !locsVisited.Contains(new PokemonLocation(q.latitude, q.longitude))
                         && !(q.timeStamp != default(DateTime) &&
                                 q.timeStamp > new DateTime(2016) && // make absolutely sure that the server sent a correct datetime
@@ -234,6 +234,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                         lastSnipe = DateTime.Now;
                         foreach (var location in locationsToSnipe)
                         {
+                            var pokeBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemPokeBall);
+                            var greatBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemGreatBall);
+                            var ultraBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemUltraBall);
+                            var masterBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemMasterBall);
+
+                            if (pokeBallsCount + greatBallsCount + ultraBallsCount + masterBallsCount < session.LogicSettings.MinPokeballsToSnipe)
+                                return;
+                                    
                             session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = new Location(location.latitude, location.longitude) });
 
                             await snipe(session, pokemonIds, location.latitude, location.longitude, cancellationToken);
