@@ -115,6 +115,9 @@ namespace PoGo.NecroBot.CLI
         public int WebSocketPort = 14251;
         public bool StartupWelcomeDelay = true;
         public bool SnipeAtPokestops = true;
+        public string SnipeLocationServer = "localhost";
+        public int SnipeLocationServerPort = 16969;
+        public bool UseSnipeLocationServer = false;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -512,5 +515,8 @@ namespace PoGo.NecroBot.CLI
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
+        public string SnipeLocationServer => _settings.SnipeLocationServer;
+        public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
+        public bool UseSnipeLocationServer=> _settings.UseSnipeLocationServer;
     }
 }
