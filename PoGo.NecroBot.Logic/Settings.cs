@@ -91,7 +91,7 @@ namespace PoGo.NecroBot.CLI
     public class GlobalSettings
     {
         public int AmountOfPokemonToDisplayOnStart = 10;
-        public bool TransferConfigAndAuthOnUpdate = false;
+        public bool TransferConfigAndAuthOnUpdate = true;
 
         [JsonIgnore]
         internal AuthSettings Auth = new AuthSettings();

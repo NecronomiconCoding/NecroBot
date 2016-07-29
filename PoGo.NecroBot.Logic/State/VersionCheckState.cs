@@ -175,8 +175,8 @@ namespace PoGo.NecroBot.Logic.State
 
         private static bool TransferConfig(string baseDir, ISession session)
         {
-            //if (!session.LogicSettings.TransferConfigAndAuthOnUpdate)
-            //    return false;
+            if (!session.LogicSettings.TransferConfigAndAuthOnUpdate)
+                return false;
 
             var configDir = Path.Combine(baseDir, "Config");
             if (!Directory.Exists(configDir))
