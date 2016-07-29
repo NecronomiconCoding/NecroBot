@@ -30,7 +30,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "İsim: {0} XP: {1}, Gems: {2}, Items: {3}"
+      "Value": "İsim: {0} XP: {1}, Gems: {2}, Eşyalar: {3}"
     },
     {
       "Key": "eventFortFailed",
@@ -269,6 +269,10 @@
       "Value": "Pokemon envanteri dolu. Pokemonları aktararak yer açın veya ayarlarda \"TransferDuplicatePokemon\" değerini \"true\" atayın."
     },
     {
+      "Key": "invFullPokestopLooting",
+      "Value": "Envanter dolu, hiç bir eşya alınamadı!"
+    },
+    {
       "Key": "encounterProblem",
       "Value": "Pokemonla karşılaşmada sorun: {0}"
     },
@@ -298,15 +302,15 @@
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Yakalama: Toptan Kaçış"
+      "Value": "Yakalama: Toptan Çıktı"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "Yakalama: Kaçış"
+      "Value": "Yakalama: Kaçtı"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "Yakalama: Iska"
+      "Value": "Yakalama: Iskalandı"
     },
     {
       "Key": "catchStatusSuccess",
