@@ -68,6 +68,7 @@ namespace PoGo.NecroBot.Logic
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }
+        bool KeepEvolvablesOnlyIfOnEvolutionList { get; }
         bool TransferDuplicatePokemon { get; }
         bool UseEggIncubators { get; }
         int DelayBetweenPokemonCatch { get; }

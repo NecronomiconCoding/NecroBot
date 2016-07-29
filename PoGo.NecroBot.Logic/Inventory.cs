@@ -91,8 +91,16 @@ namespace PoGo.NecroBot.Logic
                     if (settings.CandyToEvolve > 0)
                     {
                         var amountPossible = familyCandy.Candy_ /settings.CandyToEvolve;
-                        if (amountPossible > amountToSkip)
-                            amountToSkip = amountPossible;
+                        if (_logicSettings.KeepEvolvablesOnlyIfOnEvolutionList)
+                        {
+                            if (amountPossible > amountToSkip && _logicSettings.PokemonsToEvolve.Contains(pokemon.Key))
+                                amountToSkip = amountPossible;
+                        }
+                        else
+                        {
+                            if (amountPossible > amountToSkip)
+                                amountToSkip = amountPossible;
+                        }
                     }
 
                     if (prioritizeIVoverCp)
