@@ -1,0 +1,368 @@
+{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "精靈球"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "高級精靈球"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "超級精靈球"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "大師精靈球"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "錯誤的認證信息"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value": "您已經走出範圍！5秒後返回起點（距離{0}米），請確認系統設置是否正確？"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "您附近沒有任何可用的補給站，請確認系統設置是否正確？"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "名稱：{0} 經驗值：{1}, 金幣：{2}, 物品：{3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "名稱：{0} 信息：操作失敗，可能被封禁。正在解封：{1}/{2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "前往補給站：{0} （距離{1}米）"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "登陸賬號 {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "使用幸運蛋，剩餘數量：{0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "成功進化 {0} 獲得 {1} 經驗值"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": " {0} 進化失敗，原因是 {1}，已取消進化 {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP值：{1}  完美度：{2}%   [已擁有 CP值：{3}  完美度：{4}%] （還有{5}顆該種類的糖果）"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value": "({0}) | ({1}) {2} 等級：{3}  CP值：({4}/{5}) 完美度：{6}%| 捕獲機率：{7}%| 距離{8}米 | 剩餘{10}個{9} | {11} "
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "沒有精靈球了，我們錯過了一隻 CP值為 {1} 的 {0} "
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} 重試 #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "還有{0}顆該種類的糖果"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "在GPX文件中發現異常數據，試圖跳過。"
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "寵物小精靈"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "完美度"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "名稱"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "未知"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "展示最高CP值"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "展示最高完美度"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "展示最高等級"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "確認經緯度是否正確，如果錯誤將會退出程序！ 緯度：{0} 經度：{1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "正在將寵物蛋放入孵化器中：剩餘{0:0.00}千米"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "更新孵化器狀態：剩餘{0:0.00}千米"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "孵化器已經孵出：{0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "錯誤"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "注意"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "提醒"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "補給站"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "開刷"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "刪除"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "捕獲"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "傳送"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "進化"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "漿果"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "寵物蛋"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "調試"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "更新"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "正在登錄{0}賬號"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "PTC服務器可能關閉或您的帳號錯誤錯誤，請嘗試谷歌帳號登錄"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "將在 {0} 秒後重試..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "帳號或密碼錯誤！退出..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "正在打開 Google Device 網頁，請用CTRL+V粘貼驗證碼"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "無法將驗證碼複製到剪貼板，請手動複製"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "打開：{0} 後輸入 {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "檢測到真實的旅行，使用用戶配置"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "未檢測到真實的旅行 {0}, 使用上一次保存的配置"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "無效的座標文件，使用默認座標"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "恭喜！你已經更新至最新版本：{0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "自動更新已禁用，獲取到最新的版本為：{0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "正在下載安裝更新..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "成功下載新版本..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "成功解包..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "更新完成，您現在可以關閉這個窗口。"
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "正在搜索薰香引來的精靈..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "正在搜索寵物小精靈..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "正在搜索誘餌吸引來的精靈..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "跳過：{0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "包裹滿了，正在傳輸精靈..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "包裹滿了，請手動傳輸精靈或者修改TransferDuplicatePokemon 為 true..."
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "發生錯誤：{0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "發生錯誤：誘餌吸引來的精靈 {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "您要去的地方 {0}, {1} 距離您現在的位置太遠了 {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "正在將精靈 {0} ({1}) 從 {2} 重命名為 {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[精靈忽略過濾器] - 在設置中定義忽略 {0} "
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "嘗試捕獲"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "捕獲錯誤"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "捕獲失敗"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "捕獲消失"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "錯過捕獲"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "捕獲成功"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "普通"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "誘餌"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "薰香"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "無法啟動WebSocket服務器的端口：{0}"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - 運行時間 {1} - 等級: {2} | 經驗/小時: {3:0} | 捕獲/小時: {4:0} | 星塵: {5:0} | 傳送: {6:0} | 丟棄: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (預計升到下一級別需要 {1}小時 {2}分鐘 | {3}/{4}經驗 )"
+    },
+    {
+      "Key": "RequireInputText",
+      "Value": "按任意鍵繼續..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "當您啟用了谷歌的兩步驗證後，需要在auth.json中輸入應用專用密碼"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "打開 Google App - 登陸與安全設置 - 密碼和登錄方法 - 應用專用密碼，請設置一個新的應用專用密碼(使用其它設備)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "請確認輸入了正確的郵箱地址和密碼。"
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "您需要在auth.json中填寫谷歌賬戶和密碼！"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "您需要在auth.json中填寫Ptc賬戶和密碼！"
+    }
+  ]
+}
