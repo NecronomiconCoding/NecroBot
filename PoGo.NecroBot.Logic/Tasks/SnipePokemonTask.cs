@@ -169,7 +169,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             ScanResult scanResult;
             try
             {
-                var request = WebRequest.CreateHttp(uri);
+                var request = WebRequest.CreateHttp(uri.Replace(',', '.'));
                 request.Accept = "application/json";
                 request.Method = "GET";
 
