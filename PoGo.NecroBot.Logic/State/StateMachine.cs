@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI.Exceptions;
@@ -13,6 +14,9 @@ namespace PoGo.NecroBot.Logic.State
     {
         private ISession _ctx;
         private IState _initialState;
+        private CancellationTokenSource _ts;
+        private CancellationToken _ct;
+
 
         public Task AsyncStart(IState initialState, Session session)
         {
@@ -24,8 +28,15 @@ namespace PoGo.NecroBot.Logic.State
             _initialState = state;
         }
 
+        public void Stop()
+        {
+            _ts.Cancel();
+        }
+
         public async Task Start(IState initialState, Session session)
         {
+            _ts = new CancellationTokenSource();
+            _ct = _ts.Token;
             _ctx = session;
             var state = initialState;
             do
@@ -43,7 +54,7 @@ namespace PoGo.NecroBot.Logic.State
                     session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
                     state = _initialState;
                 }
-            } while (state != null);
+            } while (state != null && _ct.IsCancellationRequested == false);
         }
     }
 }
