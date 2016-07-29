@@ -166,6 +166,12 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static ScanResult SnipeScanForPokemon(Location location)
         {
             var uri = $"https://pokevision.com/map/data/{location.Latitude}/{location.Longitude}";
+            if (System.Globalization.CultureInfo.CurrentCulture.NumberFormat.CurrencyDecimalSeparator == ",")
+            {
+                var pokevisionLatitude = location.Latitude.ToString().Replace(',', '.');
+                var pokevisionLongitude = location.Longitude.ToString().Replace(',', '.');
+                uri = $"https://pokevision.com/map/data/{pokevisionLatitude}/{pokevisionLongitude}";
+            }
             ScanResult scanResult;
             try
             {
