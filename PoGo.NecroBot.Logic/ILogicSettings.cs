@@ -83,6 +83,7 @@ namespace PoGo.NecroBot.Logic
         float EvolveAboveIvValue { get; }
         bool DumpPokemonStats { get; }
         bool RenameAboveIv { get; }
+        bool RenameAllIv { get; }
         string RenameTemplate { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }
