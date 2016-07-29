@@ -218,11 +218,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Bukan Perjalanan Realistis di {0}, menggunakan Coords.ini terakhir disimpan."
+      "Value": "Bukan Perjalanan Realistis di {0}, menggunakan Coords.ini yang terakhir disimpan."
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinat di file \"Coords.ini\" cacat, menggunakan koordinat dasar."
+      "Value": "Koordinat di file \"Coords.ini\" cacat, menggunakan koordinat default."
     },
     {
       "Key": "gotUpToDateVersion",
@@ -294,7 +294,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Pokemon ignore filter] - Mengacuhkan {0} seperti dijelaskan di settings"
+      "Value": "[Pokemon ignore filter] - Mengacuhkan {0} seperti dijelaskan di setting"
     },
     {
       "Key": "catchStatusAttempt",
@@ -346,11 +346,11 @@
     },
     {
       "Key": "requireInputText",
-      "Value": "Program akan berlanjut setelah and menekan tombol..."
+      "Value": "Program akan berlanjut setelah anda menekan tombol..."
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Karena anda menggunakan Google Two Factor Auth, and perlu memasukkan Password khusus App di auth.json"
+      "Value": "Karena anda menggunakan Google Two Factor Auth, anda perlu memasukkan Password khusus App di auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
