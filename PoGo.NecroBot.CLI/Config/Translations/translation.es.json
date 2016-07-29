@@ -270,7 +270,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "El inventario de pokemons está lleno. Por favor transferencia los pokemons manualmente o active (true) TransferDuplicatePokemon en el archivo de opciones..."
+      "Value": "El inventario de pokemons está lleno. Por favor transfiera los pokemons manualmente o active (true) TransferDuplicatePokemon en el archivo de opciones..."
     },
     {
       "Key": "invFullPokestopLooting",
