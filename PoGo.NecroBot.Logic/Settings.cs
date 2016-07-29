@@ -118,6 +118,7 @@ namespace PoGo.NecroBot.CLI
         public string SnipeLocationServer = "localhost";
         public int SnipeLocationServerPort = 16969;
         public bool UseSnipeLocationServer = false;
+        public int MinDelayBetweenSnipes = 20000;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -518,5 +519,6 @@ namespace PoGo.NecroBot.CLI
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
         public bool UseSnipeLocationServer=> _settings.UseSnipeLocationServer;
+        public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
     }
 }

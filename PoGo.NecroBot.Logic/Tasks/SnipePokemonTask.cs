@@ -24,8 +24,6 @@ namespace PoGo.NecroBot.Logic.Tasks
         public PokemonId id { get; set; }
         [JsonIgnore]
         public DateTime timeStampAdded { get; set; } = DateTime.Now;
-        [JsonIgnore]
-        public bool caught { get; set; } = false;
     }
 
     public class PokemonLocation
@@ -37,6 +35,12 @@ namespace PoGo.NecroBot.Logic.Tasks
         public string uid { get; set; }
         public bool is_alive { get; set; }
         public int pokemonId { get; set; }
+
+        public PokemonLocation(double _latitude, double _longitude)
+        {
+            latitude = _latitude;
+            longitude = _longitude;
+        }
 
         public override int GetHashCode()
         {
@@ -64,6 +68,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static List<PokemonLocation> locsVisited = new List<PokemonLocation>();
         private static List<SniperInfo> snipeLocations = new List<SniperInfo>();
+        private static DateTime lastSnipe = DateTime.Now;
 
         public static Task AsyncStart(Session session)
         {
@@ -86,10 +91,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                             throw new Exception("Unable to ReadLine from sniper socket");
 
                         var info = JsonConvert.DeserializeObject<SniperInfo>(line);
+
                         if (snipeLocations.Any(x => 
                                 Math.Abs(x.latitude - info.latitude) < 0.0001 && 
                                 Math.Abs(x.longitude - info.longitude) < 0.0001)) // we might have different precisions from other sources
                             continue;
+
                         snipeLocations.RemoveAll(x => DateTime.Now > x.timeStampAdded.AddMinutes(15));
                         snipeLocations.Add(info);
                     }
@@ -177,6 +184,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public static async Task Execute(ISession session)
         {
+            if (lastSnipe.AddMilliseconds(session.LogicSettings.MinDelayBetweenSnipes) > DateTime.Now)
+                return;
+
             if (session.LogicSettings.PokemonToSnipe != null)
             {
                 DateTime st = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -186,20 +196,25 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var pokemonIds =
                     session.LogicSettings.PokemonToSnipe.Pokemon.Select(
                         q => Enum.Parse(typeof(PokemonId), q) as PokemonId? ?? PokemonId.Missingno).Select(q => (int)q);
-
-                if(session.LogicSettings.UseSnipeLocationServer)
+                
+                if (session.LogicSettings.UseSnipeLocationServer)
                 {
-                    foreach(var location in snipeLocations)
+                    var locationsToSnipe = snipeLocations == null ? new List<SniperInfo>() : snipeLocations.Where(q =>
+                        !locsVisited.Contains(new PokemonLocation(q.latitude, q.longitude))
+                        && !(q.timeStamp != default(DateTime) &&
+                                q.timeStamp > new DateTime(2016) && // make absolutely sure that the server sent a correct datetime
+                                q.timeStamp < DateTime.Now)).ToList();
+
+                    if (locationsToSnipe.Any())
                     {
-                        if (location.caught == true || (location.timeStamp != default(DateTime) &&
-                            location.timeStamp > new DateTime(2016) && // make absolutely sure that the server sent a correct datetime
-                            location.timeStamp < DateTime.Now))
-                            continue; // expired
+                        lastSnipe = DateTime.Now;
+                        foreach (var location in locationsToSnipe)
+                        {
+                            session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = new Location(location.latitude, location.longitude) });
 
-                        session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = new Location(location.latitude, location.longitude) });
-
-                        await snipe(session, pokemonIds, location.latitude, location.longitude);
-                        location.caught = true;
+                            await snipe(session, pokemonIds, location.latitude, location.longitude);
+                            locsVisited.Add(new PokemonLocation(location.latitude, location.longitude));
+                        }
                     }
                 } else
 
@@ -217,6 +232,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (locationsToSnipe.Any())
                     {
+                        lastSnipe = DateTime.Now;
                         foreach (var pokemonLocation in locationsToSnipe)
                         {
                             locsVisited.Add(pokemonLocation);
