@@ -30,7 +30,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "XP: {0}, Gemas: {1}, Itens: {2}"
+      "Value": "{0}, XP: {1}, Gemas: {2}, Itens: {3}"
     },
     {
       "Key": "eventFortTargeted",
