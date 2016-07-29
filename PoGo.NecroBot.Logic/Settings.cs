@@ -121,6 +121,8 @@ namespace PoGo.NecroBot.CLI
         public bool UseSnipeLocationServer = false;
         public bool UseTransferIVForSnipe = false;
         public int MinDelayBetweenSnipes = 20000;
+        public bool LogInventory = false;
+        public int LogInventoryDelaySeconds = 30;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -530,5 +532,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseSnipeLocationServer=> _settings.UseSnipeLocationServer;
         public bool UseTransferIVForSnipe => _settings.UseTransferIVForSnipe;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
+        public bool LogInventory => _settings.LogInventory;
+        public int LogInventoryDelaySeconds => _settings.LogInventoryDelaySeconds;
     }
 }

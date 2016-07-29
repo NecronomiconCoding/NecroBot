@@ -35,7 +35,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.LogicSettings.RenameAboveIv)
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
-
+                    await Statistics.LogInventory(session);
                     session.EventDispatcher.Send(new NoticeEvent
                     {
                         Message = session.Translation.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, oldNickname, newNickname)

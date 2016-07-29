@@ -25,6 +25,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
 
             await session.Inventory.RefreshCachedInventory();
+            await Statistics.LogInventory(session);
         }
     }
 }

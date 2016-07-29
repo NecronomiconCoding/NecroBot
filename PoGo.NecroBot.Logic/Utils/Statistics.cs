@@ -22,7 +22,8 @@ namespace PoGo.NecroBot.Logic.Utils
         private readonly DateTime _initSessionDateTime = DateTime.Now;
 
         private StatsExport _exportStats;
-        private string _playerName;
+        private static string _playerName;
+        private static DateTime _lastRefresh;
         public int TotalExperience;
         public int TotalItemsRemoved;
         public int TotalPokemons;
@@ -103,6 +104,21 @@ namespace PoGo.NecroBot.Logic.Utils
         public void SetUsername(GetPlayerResponse profile)
         {
             _playerName = profile.PlayerData.Username ?? "";
+        }
+
+        public static async System.Threading.Tasks.Task LogInventory(PoGo.NecroBot.Logic.State.ISession session)
+        {
+            if (session.LogicSettings.LogInventory)
+            {
+                GetInventoryResponse inventory = await session.Inventory.GetCachedInventory();
+                var now = DateTime.UtcNow;
+
+                if (now.Ticks > _lastRefresh.AddSeconds(session.LogicSettings.LogInventoryDelaySeconds).Ticks)
+                {
+                    System.IO.File.WriteAllText(_playerName + ".json", inventory.InventoryDelta.InventoryItems.ToString());
+                    _lastRefresh = now;
+                }
+            }
         }
     }
 

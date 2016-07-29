@@ -97,6 +97,9 @@ namespace PoGo.NecroBot.Logic
         bool UseTransferIVForSnipe { get; }
         int MinDelayBetweenSnipes { get; }
 
+        bool LogInventory { get; }
+        int LogInventoryDelaySeconds { get; }
+
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
