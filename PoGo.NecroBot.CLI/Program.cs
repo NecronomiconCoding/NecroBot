@@ -81,6 +81,8 @@ namespace PoGo.NecroBot.CLI
                 (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
 
             machine.AsyncStart(new VersionCheckState(), session);
+            if(session.LogicSettings.UseSnipeLocationServer)
+                SnipePokemonTask.AsyncStart(session);
 
             //Non-blocking key reader
             //This will allow to process console key presses in another code parts
