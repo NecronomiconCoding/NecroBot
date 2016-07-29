@@ -512,12 +512,9 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
-<<<<<<< HEAD
         public bool UseTelegramAPI => _settings.UseTelegramAPI;
         public string TelegramAPIKey => _settings.TelegramAPIKey;
-=======
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
->>>>>>> 26e57d9feac57ab372ac466ef6cd66218faa475c
     }
 }
