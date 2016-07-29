@@ -29,13 +29,21 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
             var settings = GlobalSettings.Load(subPath);
-           
+
 
             if (settings == null)
             {
                 Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
+
+                var profilePath = Path.Combine(Directory.GetCurrentDirectory(), subPath);
+                var profileConfigPath = Path.Combine(profilePath, "config");
+                var configFile = Path.Combine(profileConfigPath, "config.json");
+                Logger.Write($"config file location: {configFile}", LogLevel.Warning);
+                           
                 Logger.Write("We will now shutdown to let you configure the bot and then launch it again.", LogLevel.Warning);
                 Thread.Sleep(2000);
+                if (Environment.OSVersion.Platform.ToString().StartsWith("win32", StringComparison.InvariantCultureIgnoreCase))
+                    Process.Start("notepad.exe", configFile);
                 Environment.Exit(0);
                 return;
             }
@@ -76,7 +84,7 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLoggerContext(session);
 
             session.Navigation.UpdatePositionEvent +=
-                (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
+                (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent { Latitude = lat, Longitude = lng });
 
             machine.AsyncStart(new VersionCheckState(), session);
 
