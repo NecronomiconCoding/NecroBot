@@ -155,11 +155,11 @@ namespace PoGo.NecroBot.Logic.Tasks
             var ultraBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
             var masterBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
-            if (masterBallsCount > 0 && pokemonCp >= sessionLogicSettings.UseMasterBallAboveCP)
+            if (masterBallsCount > 0 && pokemonCp >= session.LogicSettings.UseMasterBallAboveCP)
                 return ItemId.ItemMasterBall;
-            if (ultraBallsCount > 0 && pokemonCp >= sessionLogicSettings.UseUltraBallAboveCP)
+            if (ultraBallsCount > 0 && pokemonCp >= session.LogicSettings.UseUltraBallAboveCP)
                 return ItemId.ItemUltraBall;
-            if (greatBallsCount > 0 && pokemonCp >= sessionLogicSettings.UseGreatBallAboveCP)
+            if (greatBallsCount > 0 && pokemonCp >= session.LogicSettings.UseGreatBallAboveCP)
                 return ItemId.ItemGreatBall;
 
             if (ultraBallsCount > 0 && iV >= session.LogicSettings.KeepMinIvPercentage && probability < 0.40)
