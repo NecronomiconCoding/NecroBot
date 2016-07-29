@@ -34,7 +34,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     PokemonId = (PokemonId)incensePokemon.PokemonId,
                     SpawnPointId = incensePokemon.EncounterLocation
                 };
-
+                Logger.Write($"Found a pokemon with incense: {pokemon.PokemonId.ToString()}");
                 if (session.LogicSettings.UsePokemonToNotCatchFilter &&
                     session.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
                 {
