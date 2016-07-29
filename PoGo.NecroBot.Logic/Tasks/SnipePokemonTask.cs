@@ -54,6 +54,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public bool Equals(PokemonLocation obj)
         {
+            Logging.Logger.Write($"Equals check: {latitude}= {obj.latitude} && {longitude} ={obj.longitude}");
             return latitude == obj.latitude && longitude == obj.longitude;
         }
     }
@@ -93,9 +94,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                         var info = JsonConvert.DeserializeObject<SniperInfo>(line);
 
                         if (snipeLocations.Any(x => 
-                                Math.Abs(x.latitude - info.latitude) < 0.0001 && 
-                                Math.Abs(x.longitude - info.longitude) < 0.0001)) // we might have different precisions from other sources
+                                Math.Abs(x.latitude - info.latitude) < 0.001 && 
+                                Math.Abs(x.longitude - info.longitude) < 0.001)) // we might have different precisions from other sources
+                        {
+                            Logging.Logger.Write($"Equal coords:  {info.latitude} && {info.longitude}");
                             continue;
+                        }
 
                         snipeLocations.RemoveAll(x => DateTime.Now > x.timeStampAdded.AddMinutes(15));
                         snipeLocations.Add(info);
