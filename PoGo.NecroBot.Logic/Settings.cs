@@ -114,7 +114,8 @@ namespace PoGo.NecroBot.CLI
         public bool UsePokemonToNotCatchFilter = false;
         public int WebSocketPort = 14251;
         public bool StartupWelcomeDelay = true;
-        public bool SnipeAtPokestops = true;
+        public bool SnipeAtPokestops = false;
+        public int MinPokeballsToSnipe = 20;
         public string SnipeLocationServer = "localhost";
         public int SnipeLocationServerPort = 16969;
         public bool UseSnipeLocationServer = false;
@@ -522,6 +523,7 @@ namespace PoGo.NecroBot.CLI
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
+        public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
