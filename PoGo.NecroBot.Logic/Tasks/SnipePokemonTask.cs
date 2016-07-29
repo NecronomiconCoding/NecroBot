@@ -85,14 +85,15 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static List<SniperInfo> snipeLocations = new List<SniperInfo>();
         private static DateTime lastSnipe = DateTime.Now;
 
-        public static Task AsyncStart(Session session)
+        public static Task AsyncStart(Session session, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return Task.Run(() => Start(session));
+            return Task.Run(() => Start(session, cancellationToken), cancellationToken);
         }
-        public static async Task Start(Session session)
+        public static async Task Start(Session session, CancellationToken cancellationToken)
         {
             while (true)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 try
                 {
                     TcpClient lClient = new TcpClient();
@@ -127,11 +128,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.EventDispatcher.Send(new ErrorEvent { Message = ex.ToString() });
                 }
 
-                await Task.Delay(5000);
+                await Task.Delay(5000, cancellationToken);
             }
         }
 
-        private static async Task snipe(ISession session, IEnumerable<PokemonId> pokemonIds, double latitude, double longitude)
+        private static async Task snipe(ISession session, IEnumerable<PokemonId> pokemonIds, double latitude, double longitude, CancellationToken cancellationToken)
         {
             var currentLatitude = session.Client.CurrentLatitude;
             var currentLongitude = session.Client.CurrentLongitude;
@@ -157,6 +158,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var pokemon in catchablePokemon)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 await session.Client.Player.UpdatePlayerLocation(latitude, longitude, session.Client.CurrentAltitude);
 
                 var encounter = session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
@@ -196,11 +199,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     !Equals(catchablePokemon.ElementAtOrDefault(catchablePokemon.Count() - 1),
                         pokemon))
                 {
-                    await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch);
+                    await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch, cancellationToken);
                 }
             }
 
-            await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions);
+            await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);
         }
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
@@ -233,7 +236,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = new Location(location.latitude, location.longitude) });
 
-                            await snipe(session, pokemonIds, location.latitude, location.longitude);
+                            await snipe(session, pokemonIds, location.latitude, location.longitude, cancellationToken);
                             locsVisited.Add(new PokemonLocation(location.latitude, location.longitude));
                         }
                     }
@@ -259,7 +262,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 locsVisited.Add(pokemonLocation);
 
-                                await snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude);
+                                await snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude, cancellationToken);
                             }
                         }
                         else
