@@ -41,7 +41,28 @@ namespace PoGo.NecroBot.Logic
             if (pokemon != null)
                 inventory.InventoryDelta.InventoryItems.Remove(pokemon);
         }
-
+        public async Task<UseIncenseResponse> UseIncenseConstantly()
+        {
+            var Result = await _client.Inventory.UseIncense(ItemId.ItemIncenseOrdinary);
+            return Result;
+        }
+        public async Task<UseItemXpBoostResponse> UseLuckyEggConstantly()
+        {
+            var Result = await _client.Inventory.UseItemXpBoost();
+            return Result;
+        }
+          public async Task<LevelUpRewardsResponse> GetLevelUpRewards()
+         {
+             var GetData = await _client.Player.GetPlayer();
+             
+            
+ 
+             var ClientLevel = await _client.Player.GetPlayerProfile(GetData.PlayerData.Username);
+             var Rewards = await _client.Player.GetLevelUpRewards(PoGo.NecroBot.Logic.Utils.Statistics.LevelForRewards);
+ 
+             return Rewards;
+ 
+         }
         private async Task<GetInventoryResponse> GetCachedInventory()
         {
             var now = DateTime.UtcNow;

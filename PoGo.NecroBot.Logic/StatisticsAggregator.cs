@@ -21,7 +21,7 @@ namespace PoGo.NecroBot.Logic
         public void HandleEvent(ProfileEvent evt, ISession ISession)
         {
             _stats.SetUsername(evt.Profile);
-            _stats.Dirty(ISession.Inventory);
+            _stats.Dirty(ISession.Inventory,ISession);
         }
 
         public void HandleEvent(ErrorEvent evt, ISession ISession)
@@ -43,25 +43,25 @@ namespace PoGo.NecroBot.Logic
         public void HandleEvent(PokemonEvolveEvent evt, ISession ISession)
         {
             _stats.TotalExperience += evt.Exp;
-            _stats.Dirty(ISession.Inventory);
+            _stats.Dirty(ISession.Inventory, ISession);
         }
 
         public void HandleEvent(TransferPokemonEvent evt, ISession ISession)
         {
             _stats.TotalPokemonsTransfered++;
-            _stats.Dirty(ISession.Inventory);
+            _stats.Dirty(ISession.Inventory, ISession);
         }
 
         public void HandleEvent(ItemRecycledEvent evt, ISession ISession)
         {
             _stats.TotalItemsRemoved++;
-            _stats.Dirty(ISession.Inventory);
+            _stats.Dirty(ISession.Inventory, ISession);
         }
 
         public void HandleEvent(FortUsedEvent evt, ISession ISession)
         {
             _stats.TotalExperience += evt.Exp;
-            _stats.Dirty(ISession.Inventory);
+            _stats.Dirty(ISession.Inventory, ISession);
         }
 
         public void HandleEvent(FortTargetEvent evt, ISession ISession)
@@ -75,7 +75,7 @@ namespace PoGo.NecroBot.Logic
                 _stats.TotalExperience += evt.Exp;
                 _stats.TotalPokemons++;
                 _stats.TotalStardust = evt.Stardust;
-                _stats.Dirty(ISession.Inventory);
+                _stats.Dirty(ISession.Inventory, ISession);
             }
         }
 
