@@ -49,12 +49,26 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public override string ToString()
         {
-            return uid;
+            return latitude.ToString("0.0000") + ", " + latitude.ToString("0.0000");
         }
 
         public bool Equals(PokemonLocation obj)
         {
-            return latitude == obj.latitude && longitude == obj.longitude;
+            return Math.Abs(latitude - obj.latitude) < 0.0001 && Math.Abs(longitude - obj.longitude) < 0.0001;
+        }
+
+        public override bool Equals(Object obj) // contains calls this here
+        {
+            if (obj == null)
+                return false;
+            
+            PokemonLocation p = obj as PokemonLocation;
+            if ((System.Object)p == null) // no cast available
+            {
+                return false;
+            }
+
+            return Math.Abs(latitude - p.latitude) < 0.0001 && Math.Abs(longitude - p.longitude) < 0.0001;
         }
     }
 
