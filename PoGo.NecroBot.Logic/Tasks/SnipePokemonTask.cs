@@ -1,16 +1,17 @@
-﻿using System;
+﻿#region using directives
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
-using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Enums;
-using POGOProtos.Networking.Responses;
+using POGOProtos.Networking.Responses; 
+#endregion
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -50,8 +51,10 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static List<PokemonLocation> locsVisited = new List<PokemonLocation>();
 
-        public static async Task Execute(ISession session)
+        public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             if (session.LogicSettings.PokemonToSnipe != null)
             {
                 DateTime st = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
@@ -60,6 +63,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 foreach (var location in session.LogicSettings.PokemonToSnipe.Locations)
                 {
+                    cancellationToken.ThrowIfCancellationRequested();
+
                     session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = location });
 
                     var scanResult = SnipeScanForPokemon(location);
@@ -79,6 +84,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         foreach (var pokemonLocation in locationsToSnipe)
                         {
+                            cancellationToken.ThrowIfCancellationRequested();
+
                             locsVisited.Add(pokemonLocation);
 
                             var currentLatitude = session.Client.CurrentLatitude;
@@ -105,6 +112,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             foreach (var pokemon in catchablePokemon)
                             {
+                                cancellationToken.ThrowIfCancellationRequested();
+
                                 await session.Client.Player.UpdatePlayerLocation(pokemonLocation.latitude, pokemonLocation.longitude, session.Client.CurrentAltitude);
 
                                 var encounter = session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
@@ -144,11 +153,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     !Equals(catchablePokemon.ElementAtOrDefault(catchablePokemon.Count() - 1),
                                         pokemon))
                                 {
-                                    await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch);
+                                    await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch, cancellationToken);
                                 }
                             }
 
-                            await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions);
+                            await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);
                         }
                     }
                     else

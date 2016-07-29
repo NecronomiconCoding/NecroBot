@@ -2,6 +2,7 @@
 
 using System;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
@@ -13,8 +14,10 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class PositionCheckState : IState
     {
-        public async Task<IState> Execute(ISession session)
+        public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
                              Path.DirectorySeparatorChar + "Coords.ini";
             if (File.Exists(coordsPath))
@@ -49,7 +52,7 @@ namespace PoGo.NecroBot.Logic.State
                                 });
                             }
                         }
-                        await Task.Delay(200);
+                        await Task.Delay(200, cancellationToken);
                     }
                 }
             }

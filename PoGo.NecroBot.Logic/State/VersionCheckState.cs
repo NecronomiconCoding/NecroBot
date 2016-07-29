@@ -7,6 +7,7 @@ using System.IO.Compression;
 using System.Net;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
@@ -28,8 +29,10 @@ namespace PoGo.NecroBot.Logic.State
 
         public static Version RemoteVersion;
 
-        public async Task<IState> Execute(ISession session)
+        public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             await CleanupOldFiles();
             var autoUpdate = session.LogicSettings.AutoUpdate;
             var needupdate =  IsLatest();

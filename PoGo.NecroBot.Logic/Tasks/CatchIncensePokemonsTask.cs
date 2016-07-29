@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
@@ -15,10 +16,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchIncensePokemonsTask
     {
-        public static async Task Execute(ISession session)
+        public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            Logger.Write(session.Translation.GetTranslation(Common.TranslationString.LookingForIncensePokemon), LogLevel.Debug);
+            cancellationToken.ThrowIfCancellationRequested();
 
+            Logger.Write(session.Translation.GetTranslation(Common.TranslationString.LookingForIncensePokemon), LogLevel.Debug);
 
             var incensePokemon = await session.Client.Map.GetIncensePokemons();
             if (incensePokemon.Result == GetIncensePokemonResponse.Types.Result.IncenseEncounterAvailable)
@@ -29,7 +31,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ExpirationTimestampMs = incensePokemon.DisappearTimestampMs,
                     Latitude = incensePokemon.Latitude,
                     Longitude = incensePokemon.Longitude,
-                    PokemonId = (PokemonId) incensePokemon.PokemonId,
+                    PokemonId = (PokemonId)incensePokemon.PokemonId,
                     SpawnPointId = incensePokemon.EncounterLocation
                 };
 
@@ -46,7 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     var encounter =
                         await
-                            session.Client.Encounter.EncounterIncensePokemon((long) pokemon.EncounterId,
+                            session.Client.Encounter.EncounterIncensePokemon((long)pokemon.EncounterId,
                                 pokemon.SpawnPointId);
 
                     if (encounter.Result == IncenseEncounterResponse.Types.Result.IncenseEncounterSuccess)
@@ -57,8 +59,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         if (session.LogicSettings.TransferDuplicatePokemon)
                         {
-                            session.EventDispatcher.Send(new WarnEvent {Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferring)});
-                            await TransferDuplicatePokemonTask.Execute(session);
+                            session.EventDispatcher.Send(new WarnEvent { Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferring) });
+                            await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                         }
                         else
                             session.EventDispatcher.Send(new WarnEvent
@@ -68,7 +70,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     else
                     {
-                        session.EventDispatcher.Send(new WarnEvent {Message = session.Translation.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Result)});
+                        session.EventDispatcher.Send(new WarnEvent { Message = session.Translation.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Result) });
                     }
                 }
             }

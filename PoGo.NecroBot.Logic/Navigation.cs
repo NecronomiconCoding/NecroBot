@@ -4,6 +4,7 @@
 
 using System;
 using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using GeoCoordinatePortable;
 using PoGo.NecroBot.Logic.Utils;
@@ -30,9 +31,10 @@ namespace PoGo.NecroBot.Logic
             _client = client;
         }
 
-        public async Task<PlayerUpdateResponse> HumanLikeWalking(GeoCoordinate targetLocation,
-            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking)
+        public async Task<PlayerUpdateResponse> HumanLikeWalking(GeoCoordinate targetLocation, double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
 
             var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
@@ -54,6 +56,8 @@ namespace PoGo.NecroBot.Logic
 
             do
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 var millisecondsUntilGetUpdatePlayerLocationResponse =
                     (DateTime.Now - requestSendDateTime).TotalMilliseconds;
 
@@ -85,15 +89,17 @@ namespace PoGo.NecroBot.Logic
 
                 if (functionExecutedWhileWalking != null)
                     await functionExecutedWhileWalking(); // look for pokemon
-                await Task.Delay(500);
+                await Task.Delay(500, cancellationToken);
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
             return result;
         }
 
         public async Task<PlayerUpdateResponse> HumanPathWalking(GpxReader.Trkpt trk,
-            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking)
+            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             //PlayerUpdateResponse result = null;
 
             var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat, CultureInfo.InvariantCulture),
@@ -121,6 +127,8 @@ namespace PoGo.NecroBot.Logic
 
             do
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 var millisecondsUntilGetUpdatePlayerLocationResponse =
                     (DateTime.Now - requestSendDateTime).TotalMilliseconds;
 
@@ -152,7 +160,7 @@ namespace PoGo.NecroBot.Logic
                 if (functionExecutedWhileWalking != null)
                     await functionExecutedWhileWalking(); // look for pokemon & hit stops
 
-                await Task.Delay(500);
+                await Task.Delay(500, cancellationToken);
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
             return result;
