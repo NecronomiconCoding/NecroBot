@@ -13,6 +13,7 @@ using PoGo.NecroBot.Logic.Utils;
 using PoGo.NecroBot.Logic.Localization;
 using PoGo.NecroBot.Logic.Service;
 using PoGo.NecroBot.Logic.Tasks;
+using PoGo.NecroBot.Logic.Common;
 
 #endregion
 
@@ -40,6 +41,7 @@ namespace PoGo.NecroBot.CLI
                 return;
             }
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
+            session.Client.ApiFailure = new ApiFailureStrategy(session);
 
 
             /*SimpleSession session = new SimpleSession
