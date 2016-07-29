@@ -10,7 +10,7 @@ using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-
+using PoGo.NecroBot.Logic.Logging;
 #endregion
 
 namespace PoGo.NecroBot.CLI
@@ -31,21 +31,37 @@ namespace PoGo.NecroBot.CLI
 
         public void Load(string path)
         {
-            _filePath = path;
-
-            if (File.Exists(_filePath))
+            try
             {
-                //if the file exists, load the settings
-                var input = File.ReadAllText(_filePath);
+                _filePath = path;
 
-                var settings = new JsonSerializerSettings();
-                settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                if (File.Exists(_filePath))
+                {
+                    //if the file exists, load the settings
+                    var input = File.ReadAllText(_filePath);
 
-                JsonConvert.PopulateObject(input, this, settings);
+                    var settings = new JsonSerializerSettings();
+                    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+
+                    JsonConvert.PopulateObject(input, this, settings);
+                }
+                else
+                {
+                    Save(_filePath);
+                }
             }
-            else
+            catch(Newtonsoft.Json.JsonReaderException exception)
             {
-                Save(_filePath);
+                if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcUsername"))
+                    Logger.Write("JSON Exception: You need to properly configure your PtcUsername using quotations.", LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcPassword"))
+                    Logger.Write("JSON Exception: You need to properly configure your PtcPassword using quotations.", LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("GoogleUsername"))
+                    Logger.Write("JSON Exception: You need to properly configure your GoogleUsername using quotations.", LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("GooglePassword"))
+                    Logger.Write("JSON Exception: You need to properly configure your GooglePassword using quotations.", LogLevel.Error);
+                else
+                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
             }
         }
 
@@ -108,7 +124,7 @@ namespace PoGo.NecroBot.CLI
         public bool KeepPokemonsThatCanEvolve = false;
         public bool PrioritizeIvOverCp = true;
         public bool RenameAboveIv = true;
-        public string RenameTemplate = "{0}_{1}";
+        public string RenameTemplate = "{1}_{0}";
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
         public bool UsePokemonToNotCatchFilter = false;
@@ -285,15 +301,23 @@ namespace PoGo.NecroBot.CLI
 
             if (File.Exists(configFile))
             {
-                //if the file exists, load the settings
-                var input = File.ReadAllText(configFile);
+                try
+                {
+                    //if the file exists, load the settings
+                    var input = File.ReadAllText(configFile);
 
-                var jsonSettings = new JsonSerializerSettings();
-                jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-                jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
-                jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
+                    var jsonSettings = new JsonSerializerSettings();
+                    jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                    jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
+                    jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
-                settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                    settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                }
+                catch (Newtonsoft.Json.JsonReaderException exception)
+                {
+                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+                    return null;
+                }
             }
             else
             {

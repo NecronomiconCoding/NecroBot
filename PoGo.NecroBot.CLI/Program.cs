@@ -2,6 +2,7 @@
 
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
@@ -23,6 +24,11 @@ namespace PoGo.NecroBot.CLI
     {
         private static void Main(string[] args)
         {
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
+			
             var subPath = "";
             if (args.Length > 0)
                 subPath = args[0];

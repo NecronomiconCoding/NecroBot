@@ -22,27 +22,31 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Estás fora do raio definido! A caminhar para o início ({0}m) em 5 segundos. As tuas coordenadas em Coords.ini estão correctas?"
+      "Value": "Você está fora do seu raio definido! Caminhando para o início ({0}m) em 5 segundos. Suas coordenadas em Coords.ini estão corretas?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Não foram encontradas PokeStops na tua área. A distância máxima definida é muito pequena?"
+      "Value": "Não foram encontradas PokeStops na sua área. Sua distância máxima não é muito pequena?"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "XP: {0}, Gemas: {1}, Itens: {2}"
+      "Value": "Nome: {0} XP: {1}, Gemas: {2}, Itens: {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Nome: {0} INFO: O saque falhou, possível softban. Desbanindo em: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} em ({1}m)"
+      "Value": "Chegando ao Pokestop: {0} em ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "A jogar com {0}"
+      "Value": "Jogando como {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Ovo da Sorte utilizado, restantes: {0}"
+      "Value": "Ovo da Sorte utilizado, restando: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -50,7 +54,7 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Falhou {0}. O resultado foi {1}, evolução interrompida {2}"
+      "Value": "Falhou {0}. O resultado foi {1}, parando evolução {2}"
     },
     {
       "Key": "eventPokemonTransferred",
@@ -62,11 +66,11 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m de distância | com uma {9} (restantes {10}). | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m de distância | com uma {9} (restando {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Sem Pokebolas - Perdemos um(a) {0} com {1} de CP"
+      "Value": "Sem Pokébolas - Nós perdemos um(a) {0} com {1} de CP"
     },
     {
       "Key": "catchStatusAttempt",
@@ -78,7 +82,299 @@
     },
     {
       "Key": "candies",
-      "Value": "(Doces: {5})"
+      "Value": "Doces: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Dados não processados ​​no arquivo GPX, tentando ignorar."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokémons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfeito"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "nome"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "Desconhecido"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "Exibir maior CP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Exibir os mais perfeitos"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Exibir os com level mais alto"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Verifique se a Lat & Lng estão corretas. O bot irá fechar caso contrário! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Colocando ovo na incubadora: restando {0:0.00}km"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Status da incubadora atualizado: restando {0:0.00}km"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "O ovo que estava na incubadora chocou: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "ERRO"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "ATENÇÃO"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMANDO"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "RECICLANDO"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "POKÉMON"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "TRANSFERIDO"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "EVOLUÍDO"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "FRUTA"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "OVO"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "ATUALIZAÇÃO"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Entrando utilizando {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "Os Servidores PTC provavelmente estão offline ou suas credenciais são inválidas. Tente o Google."
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Tentando novamente em {0} segundos..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Conta não verificada! Saindo..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Abrindo a página de aparelhos Google. Cole o código utilizando CTRL+V"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Não foi possível copiar para área de transferência, faça isso manualmente"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Vá para: {0} & e informe {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Movimentos realistas detectados, utilizando UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Sem movimentos realista em {0}, utilizando ultimas configurações salvas em Coords.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "As coodernadas no arquivo \"Coords.ini\" são inválidas, utilizando as coordenadas padrão"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Perfeito! Você já possui a última Versão {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "Atualizações automáticas desativadas. Obtenha a última versão em: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Baixando e aplicando atualização..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Finalizando o download da última versão..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Terminando de descompactar arquivos..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Atualização concluída, você já pode fechar essa janela."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Procurando por incenso de pokémon..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Procurando por pokémon..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Procurando por atrator de pokémons..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "{0} Ignorado"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Inventário de Pokémons cheio. Transferindo pokémons..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "O inventário de Pokémons está cheio. Transfira seus pokémons manualmente altere TransferDuplicatePokemon para true nas configurações..."
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "O inventório está cheio, nenhum item saqueado!"
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Problema encontrado: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Problema encontrado: Atraindo pokémon {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Seu destino desejado de {0}, {1} é muito longe de sua posição atual {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pokémon {0} ({1}) renomeado de {2} para {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Lista de pokémons ignorados] - Ignorando {0} como definido nas configurações"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "Tentativa de Captura"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "Erro de Captura"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "Escapou"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "Fugiu"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "Falhou"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "Capturado"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "Normal"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Atrair"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Incenso"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "Falha ao iniciar WebSocketServer na porta : {0}"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - Sessão {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transferidos: {6:0} | Reciclados: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (próximo nível em {1}h {2}m | {3}/{4} XP)"
+    },
+    {
+      "Key": "requireInputText",
+      "Value": "Pressione enter para dar início ao bot..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "Como você possui o Google Two Factor Auth ativado, você precisará informar o App Specific Password no arquivo auth.json"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "Abrindo Google App-Passwords. Faça um novo App Password (utilize Outro como Aparelho)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "Verifique se você informou um e-mail e uma senha correta."
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "Você precisa informar o GoogleUsername e GooglePassword no arquivo auth.json!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "Você precisa informar o PtcUsername e PtcPassword no arquivo auth.json!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[Sniper] Verificando por Snipeable Pokémon em {0}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Sniper] Nenhum Pokémon encontrado!"
     }
   ]
 }

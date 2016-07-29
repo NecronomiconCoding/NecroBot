@@ -30,15 +30,15 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "PE: {0}, Gemme: {1}, Oggetti: {2}"
+      "Value": "Nome {0} PE: {1}, Gemme: {2}, Oggetti: {3}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Raccolta oggetti fallita, possibile softban. Tentativo: {0}/40"
+      "Value": "Raccolta oggetti fallita, possibile softban. Unban in: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} in ({1}m)"
+      "Value": "Arrivo al Pokestop: {0} in ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
@@ -272,6 +272,10 @@
       "Key": "invFullTransferManually",
       "Value": "Inventario Pokemon pieno. Trasferisci i Pokemon manualmente o setta TransferDuplicatePokemon su 'true' nelle impostazioni..."
     },
+{
+      "Key": "invFullPokestopLooting",
+      "Value": "Inventario pieno, nessun oggetto raccolto!"
+    },
     {
       "Key": "encounterProblem",
       "Value": "Problema Incontro: {0}"
@@ -327,6 +331,50 @@
     {
       "Key": "catchTypeIncense",
       "Value": "Aroma"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "Avvio del Server WebSocket fallito sulla porta : {0}"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - Tempo di Esecuzione {1} - Lvl: {2} | PE/H: {3:0} | PKMN/H: {4:0} | Polvere di Stella: {5:0} | Trasferiti: {6:0} | Riciclati: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (prossimo lvl in {1}h {2}m | {3}/{4} PE)"
+    },
+    {
+      "Key": "requireInputText",
+      "Value": "Premi un tasto per continuare..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "Dato che hai la Verifica in Due Passaggi di Google attivata, devi inserire una Password Specifica per l'App nel file auth.json "
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "Apertura di Google App-Password. Crea una nuova Password App (usa Altro come Dispositivo)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "Controlla di aver inserito Email e Password correttamente"
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "Devi riempire i campi GoogleUsername e GooglePassword  nel file auth.json!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "Devi riempire i campi PtcUsername e PtcPassword nel file auth.json!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[Sniper] Scanning for Snipeable Pokemon at {0}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Sniper] No Pokemon found to snipe!"
     }
   ]
 }
