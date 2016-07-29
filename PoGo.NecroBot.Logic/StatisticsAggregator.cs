@@ -1,108 +1,132 @@
-﻿#region using directives
+#region using directives
 
-using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.State;
-using PoGo.NecroBot.Logic.Utils;
+#region using directives
+
+using System;
+using System.Globalization;
+using System.Linq;
 using POGOProtos.Networking.Responses;
+using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
-namespace PoGo.NecroBot.Logic
+// ReSharper disable CyclomaticComplexity
+
+#endregion
+
+namespace PoGo.NecroBot.Logic.Utils
 {
-    public class StatisticsAggregator
+    public delegate void StatisticsDirtyDelegate();
+
+    public class Statistics
     {
-        private readonly Statistics _stats;
+        private readonly DateTime _initSessionDateTime = DateTime.Now;
 
-        public StatisticsAggregator(Statistics stats)
+        private StatsExport _exportStats;
+        private string _playerName;
+        public int TotalExperience;
+        public int TotalItemsRemoved;
+        public int TotalPokemons;
+        public int TotalPokemonsTransfered;
+        public int TotalStardust;
+        public static int LevelForRewards;
+
+        public void Dirty(Inventory inventory,ISession Session)
         {
-            _stats = stats;
+            _exportStats = GetCurrentInfo(inventory,Session);
+            DirtyEvent?.Invoke();
         }
 
-        public void HandleEvent(ProfileEvent evt, ISession ISession)
+        public event StatisticsDirtyDelegate DirtyEvent;
+
+        private string FormatRuntime()
         {
-            _stats.SetUsername(evt.Profile);
-            _stats.Dirty(ISession.Inventory);
+            return (DateTime.Now - _initSessionDateTime).ToString(@"dd\.hh\:mm\:ss");
         }
 
-        public void HandleEvent(ErrorEvent evt, ISession ISession)
+        public StatsExport GetCurrentInfo(Inventory inventory,ISession Session)
         {
-        }
-
-        public void HandleEvent(NoticeEvent evt, ISession ISession)
-        {
-        }
-
-        public void HandleEvent(WarnEvent evt, ISession ISession)
-        {
-        }
-
-        public void HandleEvent(UseLuckyEggEvent evt, ISession ISession)
-        {
-        }
-
-        public void HandleEvent(PokemonEvolveEvent evt, ISession ISession)
-        {
-            _stats.TotalExperience += evt.Exp;
-            _stats.Dirty(ISession.Inventory);
-        }
-
-        public void HandleEvent(TransferPokemonEvent evt, ISession ISession)
-        {
-            _stats.TotalPokemonsTransfered++;
-            _stats.Dirty(ISession.Inventory);
-        }
-
-        public void HandleEvent(ItemRecycledEvent evt, ISession ISession)
-        {
-            _stats.TotalItemsRemoved++;
-            _stats.Dirty(ISession.Inventory);
-        }
-
-        public void HandleEvent(FortUsedEvent evt, ISession ISession)
-        {
-            _stats.TotalExperience += evt.Exp;
-            _stats.Dirty(ISession.Inventory);
-        }
-
-        public void HandleEvent(FortTargetEvent evt, ISession ISession)
-        {
-        }
-
-        public void HandleEvent(PokemonCaptureEvent evt, ISession ISession)
-        {
-            if (evt.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
+            var stats = inventory.GetPlayerStats().Result;
+            StatsExport output = null;
+            var stat = stats.FirstOrDefault();
+            if (stat != null)
             {
-                _stats.TotalExperience += evt.Exp;
-                _stats.TotalPokemons++;
-                _stats.TotalStardust = evt.Stardust;
-                _stats.Dirty(ISession.Inventory);
+                var ep = stat.NextLevelXp - stat.PrevLevelXp - (stat.Experience - stat.PrevLevelXp);
+                var time = Math.Round(ep/(TotalExperience/GetRuntime()), 2);
+                var hours = 0.00;
+                var minutes = 0.00;
+                if (double.IsInfinity(time) == false && time > 0)
+                {
+                    time = Convert.ToDouble(TimeSpan.FromHours(time).ToString("h\\.mm"), CultureInfo.InvariantCulture);
+                    hours = Math.Truncate(time);
+                    minutes = Math.Round((time - hours)*100);
+                }
+                var Result = Execute(Session);
+
+                if (Result.Result.ToString().ToLower().Contains("success"))
+                {
+                    string[] tokens = Result.Result.ToString().Split(new[] { "itemId" }, StringSplitOptions.None);
+                    Logging.Logger.Write("Items Awarded:" + Result.Result.ItemsAwarded.ToString());
+                }
+                LevelForRewards = stat.Level;
+                output = new StatsExport
+                {
+                    Level = stat.Level,
+                    HoursUntilLvl = hours,
+                    MinutesUntilLevel = minutes,
+                    CurrentXp = stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level),
+                    LevelupXp = stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level),
+                };
             }
+            return output;
+        }
+        public async Task<LevelUpRewardsResponse> Execute(ISession Session)
+        {
+            var Result = await Session.Inventory.GetLevelUpRewards();
+            return Result;
         }
 
-        public void HandleEvent(NoPokeballEvent evt, ISession ISession)
+        public string GetTemplatedStats(string template, string xpTemplate)
         {
+            var xpStats = string.Format(xpTemplate, _exportStats.Level, _exportStats.HoursUntilLvl, _exportStats.MinutesUntilLevel, _exportStats.CurrentXp, _exportStats.LevelupXp);
+            return string.Format(template, _playerName, FormatRuntime(), xpStats, TotalExperience / GetRuntime(), TotalPokemons / GetRuntime(), 
+                TotalStardust, TotalPokemonsTransfered, TotalItemsRemoved);
         }
 
-        public void HandleEvent(UseBerryEvent evt, ISession ISession)
+        public double GetRuntime()
         {
+            return (DateTime.Now - _initSessionDateTime).TotalSeconds/3600;
         }
 
-        public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession ISession)
+        public static int GetXpDiff(int level)
         {
-        }
-
-        public void Listen(IEvent evt, ISession ISession)
-        {
-            dynamic eve = evt;
-
-            try
+            if (level > 0 && level <= 40)
             {
-                HandleEvent(eve, ISession);
+                int[] xpTable =
+                {
+                    0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
+                    10000, 10000, 10000, 10000, 15000, 20000, 20000, 20000, 25000, 25000,
+                    50000, 75000, 100000, 125000, 150000, 190000, 200000, 250000, 300000, 350000,
+                    500000, 500000, 750000, 1000000, 1250000, 1500000, 2000000, 2500000, 1000000, 1000000
+                };
+                return xpTable[level - 1];
             }
-            catch
-            {
-                // ignored
-            }
+            return 0;
         }
+
+        public void SetUsername(GetPlayerResponse profile)
+        {
+            _playerName = profile.PlayerData.Username ?? "";
+        }
+    }
+
+    public class StatsExport
+    {
+        public long CurrentXp;
+        public double HoursUntilLvl;
+        public double MinutesUntilLevel;
+        public int Level;
+        public long LevelupXp;
     }
 }

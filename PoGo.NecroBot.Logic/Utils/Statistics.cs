@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 #region using directives
 
@@ -6,6 +6,8 @@ using System;
 using System.Globalization;
 using System.Linq;
 using POGOProtos.Networking.Responses;
+using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
@@ -28,10 +30,11 @@ namespace PoGo.NecroBot.Logic.Utils
         public int TotalPokemons;
         public int TotalPokemonsTransfered;
         public int TotalStardust;
+        public static int LevelForRewards;
 
-        public void Dirty(Inventory inventory)
+        public void Dirty(Inventory inventory,ISession Session)
         {
-            _exportStats = GetCurrentInfo(inventory);
+            _exportStats = GetCurrentInfo(inventory,Session);
             DirtyEvent?.Invoke();
         }
 
@@ -42,7 +45,7 @@ namespace PoGo.NecroBot.Logic.Utils
             return (DateTime.Now - _initSessionDateTime).ToString(@"dd\.hh\:mm\:ss");
         }
 
-        public StatsExport GetCurrentInfo(Inventory inventory)
+        public StatsExport GetCurrentInfo(Inventory inventory,ISession Session)
         {
             var stats = inventory.GetPlayerStats().Result;
             StatsExport output = null;
@@ -59,7 +62,14 @@ namespace PoGo.NecroBot.Logic.Utils
                     hours = Math.Truncate(time);
                     minutes = Math.Round((time - hours)*100);
                 }
+                var Result = Execute(Session);
 
+                if (Result.Result.ToString().ToLower().Contains("success"))
+                {
+                    string[] tokens = Result.Result.ToString().Split(new[] { "itemId" }, StringSplitOptions.None);
+                    Logging.Logger.Write("Items Awarded:" + Result.Result.ItemsAwarded.ToString());
+                }
+                LevelForRewards = stat.Level;
                 output = new StatsExport
                 {
                     Level = stat.Level,
@@ -70,6 +80,11 @@ namespace PoGo.NecroBot.Logic.Utils
                 };
             }
             return output;
+        }
+        public async Task<LevelUpRewardsResponse> Execute(ISession Session)
+        {
+            var Result = await Session.Inventory.GetLevelUpRewards();
+            return Result;
         }
 
         public string GetTemplatedStats(string template, string xpTemplate)
