@@ -223,7 +223,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     var locationsToSnipe = snipeLocations == null ? new List<SniperInfo>() : snipeLocations.Where(q =>
                         // when UseTransferIVForSnipe=true skip pokemons with unknown iv or if they don't match the TransferFilter/default MinIV
-                        (!session.LogicSettings.UseTransferIVForSnipe || (q.iv > 0 && q.iv < session.Inventory.GetPokemonTransferFilter(q.id).KeepMinIvPercentage)) &&
+                        (!session.LogicSettings.UseTransferIVForSnipe || (q.iv > 0 && q.iv >= session.Inventory.GetPokemonTransferFilter(q.id).KeepMinIvPercentage)) &&
                         !locsVisited.Contains(new PokemonLocation(q.latitude, q.longitude))
                         && !(q.timeStamp != default(DateTime) &&
                                 q.timeStamp > new DateTime(2016) && // make absolutely sure that the server sent a correct datetime
