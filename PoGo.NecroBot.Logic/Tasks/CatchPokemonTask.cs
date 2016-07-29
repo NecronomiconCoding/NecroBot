@@ -91,9 +91,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (family != null)
                     {
-                        family.Candy += caughtPokemonResponse.CaptureAward.Candy.Sum();
+                        family.Candy_ += caughtPokemonResponse.CaptureAward.Candy.Sum();
 
-                        evt.FamilyCandies = family.Candy;
+                        evt.FamilyCandies = family.Candy_;
                     }
                     else
                     {

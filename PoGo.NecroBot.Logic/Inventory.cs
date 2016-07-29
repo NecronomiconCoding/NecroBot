@@ -90,7 +90,7 @@ namespace PoGo.NecroBot.Logic
 
                     if (settings.CandyToEvolve > 0)
                     {
-                        var amountPossible = familyCandy.Candy/settings.CandyToEvolve;
+                        var amountPossible = familyCandy.Candy_ /settings.CandyToEvolve;
                         if (amountPossible > amountToSkip)
                             amountToSkip = amountPossible;
                     }
@@ -227,19 +227,19 @@ namespace PoGo.NecroBot.Logic
                 .Where(p => p != null);
         }
 
-        public async Task<List<PokemonFamily>> GetPokemonFamilies()
+        public async Task<List<Candy>> GetPokemonFamilies()
         {
             var inventory = await GetCachedInventory();
 
             var families = from item in inventory.InventoryDelta.InventoryItems
-                where item.InventoryItemData?.PokemonFamily != null
-                where item.InventoryItemData?.PokemonFamily.FamilyId != PokemonFamilyId.FamilyUnset
-                group item by item.InventoryItemData?.PokemonFamily.FamilyId
+                where item.InventoryItemData?.Candy != null
+                where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
+                group item by item.InventoryItemData?.Candy.FamilyId
                 into family
-                select new PokemonFamily
+                select new Candy
                 {
-                    FamilyId = family.First().InventoryItemData.PokemonFamily.FamilyId,
-                    Candy = family.First().InventoryItemData.PokemonFamily.Candy
+                    FamilyId = family.First().InventoryItemData.Candy.FamilyId,
+                    Candy_ = family.First().InventoryItemData.Candy.Candy_
                 };
 
 
@@ -305,7 +305,7 @@ namespace PoGo.NecroBot.Logic
                         p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId)*
                     settings.CandyToEvolve;
 
-                if (familyCandy.Candy - pokemonCandyNeededAlready > settings.CandyToEvolve)
+                if (familyCandy.Candy_ - pokemonCandyNeededAlready > settings.CandyToEvolve)
                 {
                     pokemonToEvolve.Add(pokemon);
                 }
