@@ -139,20 +139,14 @@ namespace PoGo.NecroBot.CLI
         public bool UseTransferIVForSnipe = false;
         public bool SnipeIgnoreUnknownIV = false;
         public int MinDelayBetweenSnipes = 20000;
+        public int TotalAmountOfPokebalsToKeep = 150;
+        public int TotalAmountOfPotionsToKeep = 100;
+        public int TotalAmountOfRevivesToKeep = 50;
+
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 40),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
             new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
@@ -604,9 +598,12 @@ namespace PoGo.NecroBot.CLI
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
-        public bool UseSnipeLocationServer=> _settings.UseSnipeLocationServer;
+        public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIVForSnipe => _settings.UseTransferIVForSnipe;
         public bool SnipeIgnoreUnknownIV => _settings.SnipeIgnoreUnknownIV;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
+        public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
+        public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
+        public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
     }
 }
