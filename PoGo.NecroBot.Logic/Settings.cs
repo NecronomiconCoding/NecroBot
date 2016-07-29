@@ -518,5 +518,10 @@ namespace PoGo.NecroBot.CLI
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
+        public string SnipeLocationServer => _settings.SnipeLocationServer;
+        public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
+        public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
+        public bool UseTransferIVForSnipe => _settings.UseTransferIVForSnipe;
+        public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
     }
 }
