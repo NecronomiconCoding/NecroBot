@@ -241,6 +241,10 @@
       "Value": "成功下载新版本..."
     },
     {
+      "Key": "FinishedTransferringConfig",
+      "Value":  "完成你的配置转移到新版本..."
+    },
+    {
       "Key": "finishedUnpackingFiles",
       "Value": "成功解包..."
     },
