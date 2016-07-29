@@ -258,12 +258,12 @@ namespace PoGo.NecroBot.CLI
                 new Location(51.5025343,-0.2055027) //Charmender Spot
 
             },
-            Pokemon = new List<string>()
+            Pokemon = new List<PokemonId>()
             {
-                PokemonId.Dratini.ToString(),
-                PokemonId.Magikarp.ToString(),
-                PokemonId.Eevee.ToString(),
-                PokemonId.Charmander.ToString()
+                PokemonId.Dratini,
+                PokemonId.Magikarp,
+                PokemonId.Eevee,
+                PokemonId.Charmander
             }
         };
 

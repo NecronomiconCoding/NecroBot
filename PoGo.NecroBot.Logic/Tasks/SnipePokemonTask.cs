@@ -57,6 +57,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 DateTime st = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
                 TimeSpan t = (DateTime.Now.ToUniversalTime() - st);
                 var currentTimestamp = t.TotalMilliseconds;
+                var pokemonIds = session.LogicSettings.PokemonToSnipe.Pokemon;
 
                 foreach (var location in session.LogicSettings.PokemonToSnipe.Locations)
                 {
@@ -64,13 +65,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     var scanResult = SnipeScanForPokemon(location);
 
-                    var pokemonIds =
-                        session.LogicSettings.PokemonToSnipe.Pokemon.Select(
-                            q => Enum.Parse(typeof(PokemonId), q) as PokemonId? ?? PokemonId.Missingno).Select(q => (int)q);
-
-
                     var locationsToSnipe = scanResult.pokemon == null ? new List<PokemonLocation>() : scanResult.pokemon.Where(q =>
-                        pokemonIds.Contains(q.pokemonId)
+                        pokemonIds.Contains((PokemonId)q.pokemonId)
                         && !locsVisited.Contains(q)
                         && q.expiration_time < currentTimestamp
                         && q.is_alive).ToList();
@@ -97,7 +93,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             var mapObjects = session.Client.Map.GetMapObjects().Result;
                             var catchablePokemon =
                                 mapObjects.MapCells.SelectMany(q => q.CatchablePokemons)
-                                    .Where(q => pokemonIds.Contains((int)q.PokemonId))
+                                    .Where(q => pokemonIds.Contains(q.PokemonId))
                                     .ToList();
 
                             await session.Client.Player.UpdatePlayerLocation(currentLatitude, currentLongitude,
