@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl {3} [({4}/{5})/{6}%] {7}% Chance | {8}m dist | {10} {9} restant | {11}"
+      "Value": "({0}) | ({1}) {2} Lv {3} {6} ({4}/{5}) | {7}% Chance sur {8}m | {10} {9} restant, {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -74,7 +74,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Tentative#{1} - {0}"
+      "Value": #{1} - {0}"
     },
     {
       "Key": "catchStatus",
