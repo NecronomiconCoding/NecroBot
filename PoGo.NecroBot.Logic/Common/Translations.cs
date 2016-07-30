@@ -164,7 +164,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.WelcomeWarning, "Make sure Lat & Lng are right. Exit Program if not! Lat: {0} Lng: {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.IncubatorPuttingEgg, "Putting egg in incubator: {0:0.00}km left"),
             new KeyValuePair<TranslationString, string>(TranslationString.IncubatorStatusUpdate, "Incubator status update: {0:0.00}km left"),
-            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorEggHatched, "Incubated egg has hatched: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorEggHatched, "Incubated egg has hatched: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryError, "ERROR"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryAttention, "ATTENTION"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryInfo, "INFO"),
