@@ -141,6 +141,9 @@ namespace PoGo.NecroBot.CLI
         public int MinDelayBetweenSnipes = 20000;
         public bool LogInventory = false;
         public int LogInventoryDelaySeconds = 30;
+        public int TotalAmountOfPokebalsToKeep = 150;
+        public int TotalAmountOfPotionsToKeep = 100;
+        public int TotalAmountOfRevivesToKeep = 50;
 
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
