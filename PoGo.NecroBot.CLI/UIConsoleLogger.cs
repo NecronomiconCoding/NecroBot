@@ -66,7 +66,7 @@ namespace PoGo.NecroBot.CLI
                 strPokestop = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryPokestop);
                 strFarming = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryFarming);
                 strRecycling = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryRecycling);
-                strPKMN = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryPKMN);
+                strPKMN = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryPkmn);
                 strTransfered = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryTransfered);
                 strEvolved = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryEvolved);
                 strBerry = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryBerry);

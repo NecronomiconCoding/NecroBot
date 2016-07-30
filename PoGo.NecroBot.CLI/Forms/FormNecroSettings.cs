@@ -57,7 +57,7 @@ namespace PoGo.NecroBot.CLI.Forms
             keepMinIVPerc.Text = _globalSettings.KeepMinIvPercentage.ToString();
             transferDuplicate.Checked = _globalSettings.TransferDuplicatePokemon;
             IVPrio.Checked = _globalSettings.PrioritizeIvOverCp;
-            renameAboveIV.Checked = _globalSettings.RenameAboveIv;
+            renameAboveIV.Checked = _globalSettings.RenameOnlyAboveIv;
             renameTemplate.Text = _globalSettings.RenameTemplate;
             notCatchFilter.Checked = _globalSettings.UsePokemonToNotCatchFilter;
             useEggIncubators.Checked = _globalSettings.UseEggIncubators;
@@ -73,8 +73,8 @@ namespace PoGo.NecroBot.CLI.Forms
 
             pokeballstoSnipe.Text = _globalSettings.MinPokeballsToSnipe.ToString();
             snipePokestops.Checked = _globalSettings.SnipeAtPokestops;
-            transferIVSnipe.Checked = _globalSettings.UseTransferIVForSnipe;
-            ignoreUnknownIV.Checked = _globalSettings.SnipeIgnoreUnknownIV;
+            transferIVSnipe.Checked = _globalSettings.UseTransferIvForSnipe;
+            ignoreUnknownIV.Checked = _globalSettings.SnipeIgnoreUnknownIv;
             snipeDelay.Text = _globalSettings.MinDelayBetweenSnipes.ToString();
             useSnipeServer.Checked = _globalSettings.UseSnipeLocationServer;
             srvSnipe.Text = _globalSettings.SnipeLocationServer;
@@ -127,7 +127,7 @@ namespace PoGo.NecroBot.CLI.Forms
             _globalSettings.KeepMinIvPercentage = Convert.ToSingle(keepMinIVPerc.Text);
             _globalSettings.TransferDuplicatePokemon = transferDuplicate.Checked;
             _globalSettings.PrioritizeIvOverCp = IVPrio.Checked;
-            _globalSettings.RenameAboveIv = renameAboveIV.Checked;
+            _globalSettings.RenameOnlyAboveIv = renameAboveIV.Checked;
             _globalSettings.RenameTemplate = renameTemplate.Text;
             _globalSettings.UsePokemonToNotCatchFilter = notCatchFilter.Checked;
             _globalSettings.UseEggIncubators = useEggIncubators.Checked;
@@ -142,8 +142,8 @@ namespace PoGo.NecroBot.CLI.Forms
 
             _globalSettings.MinPokeballsToSnipe = Convert.ToInt32(pokeballstoSnipe.Text);
             _globalSettings.SnipeAtPokestops = snipePokestops.Checked;
-            _globalSettings.UseTransferIVForSnipe = transferIVSnipe.Checked;
-            _globalSettings.SnipeIgnoreUnknownIV = ignoreUnknownIV.Checked;
+            _globalSettings.UseTransferIvForSnipe = transferIVSnipe.Checked;
+            _globalSettings.SnipeIgnoreUnknownIv = ignoreUnknownIV.Checked;
             _globalSettings.MinDelayBetweenSnipes = Convert.ToInt32(snipeDelay.Text);
             _globalSettings.UseSnipeLocationServer = useSnipeServer.Checked;
             _globalSettings.SnipeLocationServer = srvSnipe.Text;

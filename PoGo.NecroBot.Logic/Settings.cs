@@ -15,7 +15,7 @@ using POGOProtos.Inventory.Item;
 
 namespace PoGo.NecroBot.Logic
 {
-    internal class AuthSettings
+    public class AuthSettings
     {
         [JsonIgnore] private string _filePath;
 
@@ -99,7 +99,7 @@ namespace PoGo.NecroBot.Logic
     {
         public int AmountOfPokemonToDisplayOnStart = 10;
 
-        [JsonIgnore] internal AuthSettings Auth = new AuthSettings();
+        [JsonIgnore] public AuthSettings Auth = new AuthSettings();
 
         public bool AutomaticallyLevelUpPokemon = false;
 
@@ -448,7 +448,7 @@ namespace PoGo.NecroBot.Logic
 
             var firstRun = !File.Exists(configFile);
 
-            settings.Save(configFile);
+            settings.Save(path);
             settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
 
             if (firstRun)
@@ -459,18 +459,22 @@ namespace PoGo.NecroBot.Logic
             return settings;
         }
 
-        public void Save(string fullPath)
+        public void Save(string path)
         {
+            var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
+            var profileConfigPath = Path.Combine(profilePath, "config");
+            var configFile = Path.Combine(profileConfigPath, "config.json");
+
             var output = JsonConvert.SerializeObject(this, Formatting.Indented,
                 new StringEnumConverter {CamelCaseText = true});
 
-            var folder = Path.GetDirectoryName(fullPath);
+            var folder = Path.GetDirectoryName(configFile);
             if (folder != null && !Directory.Exists(folder))
             {
                 Directory.CreateDirectory(folder);
             }
-
-            File.WriteAllText(fullPath, output);
+            Auth.Save();
+            File.WriteAllText(configFile, output);
         }
     }
 
