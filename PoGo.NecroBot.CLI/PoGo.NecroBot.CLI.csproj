@@ -113,6 +113,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Config\Translations\translation.uk_UA.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Config\Translations\translation.zh_tw.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
