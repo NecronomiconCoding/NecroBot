@@ -188,7 +188,11 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             else
             {
-                // Always attempt to use atleast one pokebal
+                // If pokemon qualifies for ultraball, give him a greatball instead
+                if (attempts <= 1 && greatBallsCount > 0 && 
+                    (pokemonCp >= session.LogicSettings.UseUltraBallAboveCp || iV >= session.LogicSettings.KeepMinIvPercentage))
+                    return ItemId.ItemGreatBall;
+                // Always attempt to use atleast one pokeball
                 if (attempts <= 1 && pokeBallsCount > 0)
                     return ItemId.ItemPokeBall;
             }
