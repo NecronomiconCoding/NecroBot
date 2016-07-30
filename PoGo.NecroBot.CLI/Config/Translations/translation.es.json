@@ -74,7 +74,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} Intento #{1}"
+      "Value": "{0} | Intentos #{1}"
     },
     {
       "Key": "catchStatus",
