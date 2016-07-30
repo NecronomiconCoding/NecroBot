@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -16,35 +16,35 @@
       "Key": "masterPokeball",
       "Value": "Masterball"
     },
-    	{
+    {
       "Key": "CatchStatusSuccess",
       "Value": "Fanget"
     },
-	{
+    {
       "Key": "CatchStatusError",
       "Value": "Fejl"
     },
-	{
+    {
       "Key": "CatchStatusEscape",
       "Value": "Undsluppet"
     },
-	{
+    {
       "Key": "CatchStatusFlee",
       "Value": "Flygtet"
     },
-{
+    {
       "Key": "CatchStatusMissed",
       "Value": "Missed"
     },
-	 {
+    {
       "Key": "CatchTypeIncense",
       "Value": "Røgmodul"
     },
-	 {
+    {
       "Key": "CatchTypeLure",
       "Value": "Luremodul"
     },
-	 {
+    {
       "Key": "CatchTypeNormal",
       "Value": "Wild"
     },
@@ -54,7 +54,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Du er ikke inden for den angivne radius, går tilbage til begyndelsen ({0}m væk). Er koordinaterne i config.json korrekte?"
+      "Value":
+        "Du er ikke inden for den angivne radius, går tilbage til begyndelsen ({0}m væk). Er koordinaterne i config.json korrekte?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -98,7 +99,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m | med {9} ({10} tilbage). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m | med {9} ({10} tilbage). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -302,7 +304,8 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "PokémonInventar er fuld. Smid venligst Pokémons ud manuelt eller sæt \"TransferDuplicatePokemon\" i indstillingerne til \"true\"..."
+      "Value":
+        "PokémonInventar er fuld. Smid venligst Pokémons ud manuelt eller sæt \"TransferDuplicatePokemon\" i indstillingerne til \"true\"..."
     },
     {
       "Key": "encounterProblem",

@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,7 +22,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Znajdujesz się poza swoim zdefiniowanym zasięgiem! Przemieszczam się na start odległy o ({0}m) za 5 sekund. Czy twój plik Coords.ini jest poprawny?"
+      "Value":
+        "Znajdujesz się poza swoim zdefiniowanym zasięgiem! Przemieszczam się na start odległy o ({0}m) za 5 sekund. Czy twój plik Coords.ini jest poprawny?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -66,7 +67,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Poziom: {3} CP: ({4}/{5}) IV: {6}% | Szansa: {7}% | odległy o {8}m | przy użyciu {9} ({10} pozostało). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Poziom: {3} CP: ({4}/{5}) IV: {6}% | Szansa: {7}% | odległy o {8}m | przy użyciu {9} ({10} pozostało). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -118,7 +120,8 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Upewnij się, że szerokość i długość geograficzna są poprawne. Jeżeli nie to zamknij program! Szerokość: {0} Długość: {1}"
+      "Value":
+        "Upewnij się, że szerokość i długość geograficzna są poprawne. Jeżeli nie to zamknij program! Szerokość: {0} Długość: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -270,7 +273,8 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Inwentarz jest pełny. Proszę ręcznie przesłać Pokemony albo ustawić TransferDuplicatePokemon na true w ustawieniach..."
+      "Value":
+        "Inwentarz jest pełny. Proszę ręcznie przesłać Pokemony albo ustawić TransferDuplicatePokemon na true w ustawieniach..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -338,7 +342,8 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Czas działania {1} - Poziom: {2} | XP / godzinę: {3:0} | Pokemony / godzinę: {4:0} | Stardust: {5:0} | Przesłano: {6:0} | Usunięto: {7:0}"
+      "Value":
+        "{0} - Czas działania {1} - Poziom: {2} | XP / godzinę: {3:0} | Pokemony / godzinę: {4:0} | Stardust: {5:0} | Przesłano: {6:0} | Usunięto: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",

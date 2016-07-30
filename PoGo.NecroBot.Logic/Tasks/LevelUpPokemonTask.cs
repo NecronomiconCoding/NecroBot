@@ -1,64 +1,68 @@
-﻿using PoGo.NecroBot.Logic.State;
+﻿#region using directives
+
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using POGOProtos.Enums;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.State;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    class LevelUpPokemonTask
+    internal class LevelUpPokemonTask
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            if (DisplayPokemonStatsTask.PokemonID.Count == 0 || DisplayPokemonStatsTask.PokemonIDCP.Count == 0)
+            if (DisplayPokemonStatsTask.PokemonId.Count == 0 || DisplayPokemonStatsTask.PokemonIdcp.Count == 0)
             {
                 return;
             }
-            if (session.LogicSettings.LevelUpByCPorIV.ToLower().Contains(("iv")))
+            if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("iv"))
             {
-                Random rand = new Random();
-                int RandomNumber = rand.Next(0, DisplayPokemonStatsTask.PokemonID.Count-1);
-                
-                var UpgradeResult = await session.Inventory.UpgradePokemon(DisplayPokemonStatsTask.PokemonID[RandomNumber]);
-                if (UpgradeResult.Result.ToString().ToLower().Contains("success"))
-                {
-                    Logging.Logger.Write("Pokemon Upgraded:" + UpgradeResult.UpgradedPokemon.PokemonId + ":" + UpgradeResult.UpgradedPokemon.Cp);
-                }
-                else if (UpgradeResult.Result.ToString().ToLower().Contains("insufficient"))
-                {
-                    Logging.Logger.Write("Pokemon Upgrade Failed Not Enough Resources");
+                var rand = new Random();
+                var randomNumber = rand.Next(0, DisplayPokemonStatsTask.PokemonId.Count - 1);
 
+                var upgradeResult =
+                    await session.Inventory.UpgradePokemon(DisplayPokemonStatsTask.PokemonId[randomNumber]);
+                if (upgradeResult.Result.ToString().ToLower().Contains("success"))
+                {
+                    Logger.Write("Pokemon Upgraded:" + upgradeResult.UpgradedPokemon.PokemonId + ":" +
+                                 upgradeResult.UpgradedPokemon.Cp);
+                }
+                else if (upgradeResult.Result.ToString().ToLower().Contains("insufficient"))
+                {
+                    Logger.Write("Pokemon Upgrade Failed Not Enough Resources");
                 }
                 else
                 {
-                    Logging.Logger.Write("Pokemon Upgrade Failed Unknown Error, Pokemon Could Be Max Level For Your Level The Pokemon That Caused Issue Was:"+UpgradeResult.UpgradedPokemon.PokemonId);
+                    Logger.Write(
+                        "Pokemon Upgrade Failed Unknown Error, Pokemon Could Be Max Level For Your Level The Pokemon That Caused Issue Was:" +
+                        upgradeResult.UpgradedPokemon.PokemonId);
                 }
             }
-            else if (session.LogicSettings.LevelUpByCPorIV.ToLower().Contains(("cp")))
+            else if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("cp"))
             {
-
-                Random rand = new Random();
-                int RandomNumber = rand.Next(0, DisplayPokemonStatsTask.PokemonIDCP.Count-1);
-                var UpgradeResult = await session.Inventory.UpgradePokemon(DisplayPokemonStatsTask.PokemonIDCP[RandomNumber]);
-                if (UpgradeResult.Result.ToString().ToLower().Contains("success"))
+                var rand = new Random();
+                var randomNumber = rand.Next(0, DisplayPokemonStatsTask.PokemonIdcp.Count - 1);
+                var upgradeResult =
+                    await session.Inventory.UpgradePokemon(DisplayPokemonStatsTask.PokemonIdcp[randomNumber]);
+                if (upgradeResult.Result.ToString().ToLower().Contains("success"))
                 {
-                    Logging.Logger.Write("Pokemon Upgraded:" + UpgradeResult.UpgradedPokemon.PokemonId + ":" + UpgradeResult.UpgradedPokemon.Cp);
+                    Logger.Write("Pokemon Upgraded:" + upgradeResult.UpgradedPokemon.PokemonId + ":" +
+                                 upgradeResult.UpgradedPokemon.Cp);
                 }
-                else if (UpgradeResult.Result.ToString().ToLower().Contains("insufficient"))
+                else if (upgradeResult.Result.ToString().ToLower().Contains("insufficient"))
                 {
-                    Logging.Logger.Write("Pokemon Upgrade Failed Not Enough Resources");
-
+                    Logger.Write("Pokemon Upgrade Failed Not Enough Resources");
                 }
                 else
                 {
-                    Logging.Logger.Write("Pokemon Upgrade Failed Unknown Error, Pokemon Could Be Max Level For Your Level The Pokemon That Caused Issue Was:" + UpgradeResult.UpgradedPokemon.PokemonId);
+                    Logger.Write(
+                        "Pokemon Upgrade Failed Unknown Error, Pokemon Could Be Max Level For Your Level The Pokemon That Caused Issue Was:" +
+                        upgradeResult.UpgradedPokemon.PokemonId);
                 }
             }
-
-
         }
     }
 }

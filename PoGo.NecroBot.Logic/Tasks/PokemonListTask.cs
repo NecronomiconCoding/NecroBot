@@ -3,7 +3,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using PoGo.NecroBot.Logic.DataDumper;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
@@ -17,11 +16,11 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session)
         {
             var allPokemonInBag = await session.Inventory.GetHighestsCp(1000);
-            var pkmWithIV = allPokemonInBag.Select(p => Tuple.Create(p, PokemonInfo.CalculatePokemonPerfection(p)));
+            var pkmWithIv = allPokemonInBag.Select(p => Tuple.Create(p, PokemonInfo.CalculatePokemonPerfection(p)));
             session.EventDispatcher.Send(
                 new PokemonListEvent
                 {
-                    PokemonList = pkmWithIV.ToList()
+                    PokemonList = pkmWithIv.ToList()
                 });
             await Task.Delay(500);
         }

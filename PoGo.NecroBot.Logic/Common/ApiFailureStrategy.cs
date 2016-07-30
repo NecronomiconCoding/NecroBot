@@ -1,20 +1,20 @@
-﻿using PoGo.NecroBot.Logic.Event;
+﻿#region using directives
+
+using System;
+using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
-using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Common
 {
     public class ApiFailureStrategy : IApiFailureStrategy
     {
-        private int _retryCount = 0;
-        private ISession _session;
+        private readonly ISession _session;
+        private int _retryCount;
 
         public ApiFailureStrategy(ISession session)
         {
@@ -29,7 +29,7 @@ namespace PoGo.NecroBot.Logic.Common
             await Task.Delay(500);
             _retryCount++;
 
-            if (_retryCount % 5 == 0)
+            if (_retryCount%5 == 0)
             {
                 DoLogin();
             }
@@ -49,7 +49,9 @@ namespace PoGo.NecroBot.Logic.Common
                 case AuthType.Ptc:
                     try
                     {
-                        await _session.Client.Login.DoPtcLogin(_session.Settings.PtcUsername, _session.Settings.PtcPassword);
+                        await
+                            _session.Client.Login.DoPtcLogin(_session.Settings.PtcUsername,
+                                _session.Settings.PtcPassword);
                     }
                     catch (AggregateException ae)
                     {
@@ -57,10 +59,15 @@ namespace PoGo.NecroBot.Logic.Common
                     }
                     break;
                 case AuthType.Google:
-                    await _session.Client.Login.DoGoogleLogin(_session.Settings.GoogleUsername, _session.Settings.GooglePassword);
+                    await
+                        _session.Client.Login.DoGoogleLogin(_session.Settings.GoogleUsername,
+                            _session.Settings.GooglePassword);
                     break;
                 default:
-                    _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Translation.GetTranslation(Common.TranslationString.WrongAuthType) });
+                    _session.EventDispatcher.Send(new ErrorEvent
+                    {
+                        Message = _session.Translation.GetTranslation(TranslationString.WrongAuthType)
+                    });
                     break;
             }
         }
