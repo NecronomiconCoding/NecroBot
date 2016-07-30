@@ -503,7 +503,7 @@ namespace PoGo.NecroBot.CLI
         {
             get
             {
-                return _settings.DefaultLatitude + _rand.NextDouble() * (_settings.MaxSpawnLocationOffset / 111111);
+                return _settings.DefaultLatitude + _rand.NextDouble() * ((double)_settings.MaxSpawnLocationOffset / 111111);
             }
 
             set
@@ -516,7 +516,7 @@ namespace PoGo.NecroBot.CLI
         {
             get
             {
-                return _settings.DefaultLongitude + _rand.NextDouble() * (_settings.MaxSpawnLocationOffset / 111111 / Math.Cos(_settings.DefaultLatitude));
+                return _settings.DefaultLongitude + _rand.NextDouble() * ((double)_settings.MaxSpawnLocationOffset / 111111 / Math.Cos(_settings.DefaultLatitude));
             }
 
             set
