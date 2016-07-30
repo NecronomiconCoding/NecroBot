@@ -546,6 +546,12 @@ namespace PoGo.NecroBot.CLI
         {
             get
             {
+                if (_settings.Auth.PtcPassword == null
+                    || _settings.Auth.PtcPassword.Trim() == "")
+                {
+                    Console.WriteLine("Enter PTC Password:");
+                    _settings.Auth.PtcPassword = GetPasswordInput();
+                }
                 return _settings.Auth.PtcPassword;
             }
 
@@ -559,6 +565,12 @@ namespace PoGo.NecroBot.CLI
         {
             get
             {
+                if (_settings.Auth.PtcUsername == null
+                    || _settings.Auth.PtcUsername.Trim() == "")
+                {
+                    Console.WriteLine("Enter PTC UserName:");
+                    _settings.Auth.PtcUsername = Console.ReadLine();
+                }
                 return _settings.Auth.PtcUsername;
             }
 
@@ -572,6 +584,12 @@ namespace PoGo.NecroBot.CLI
         {
             get
             {
+                if (_settings.Auth.GoogleUsername == null
+                    || _settings.Auth.GoogleUsername.Trim() == "")
+                {
+                    Console.WriteLine("Enter Google UserName:");
+                    _settings.Auth.GoogleUsername = Console.ReadLine();
+                }
                 return _settings.Auth.GoogleUsername;
             }
 
@@ -584,6 +602,12 @@ namespace PoGo.NecroBot.CLI
         {
             get
             {
+                if (_settings.Auth.GooglePassword == null
+                    || _settings.Auth.GooglePassword.Trim() == "")
+                {
+                    Console.WriteLine("Enter Google Password:");
+                    _settings.Auth.GooglePassword = GetPasswordInput();
+                }
                 return _settings.Auth.GooglePassword;
             }
 
@@ -591,6 +615,37 @@ namespace PoGo.NecroBot.CLI
             {
                 _settings.Auth.GooglePassword = value;
             }
+        }
+
+        public static string GetPasswordInput()
+        {
+            string pass = "";
+            ConsoleKeyInfo key;
+
+            do
+            {
+                key = Console.ReadKey(true);
+
+                // Backspace Should Not Work
+                if (key.Key != ConsoleKey.Backspace && key.Key != ConsoleKey.Enter)
+                {
+                    pass += key.KeyChar;
+                    Console.Write("*");
+                }
+                else
+                {
+                    if (key.Key == ConsoleKey.Backspace && pass.Length > 0)
+                    {
+                        pass = pass.Substring(0, (pass.Length - 1));
+                        Console.Write("\b \b");
+                    }
+                }
+            }
+            // Stops Receving Keys Once Enter is Pressed
+            while (key.Key != ConsoleKey.Enter);
+            Console.Write("\n");
+
+            return pass;
         }
     }
 
