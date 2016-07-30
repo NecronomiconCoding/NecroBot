@@ -196,16 +196,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     pokemonCp >= session.LogicSettings.UseGreatBallAboveCp ||
                     iV >= session.LogicSettings.UseGreatBallAboveIv ||
                     probability < session.LogicSettings.UseGreatBallBelowCatchProbability))
-                return ItemId.ItemUltraBall;
+                return ItemId.ItemGreatBall;
 
             if (pokeBallsCount > 0)
                 return ItemId.ItemPokeBall;
-            if (greatBallsCount > 0)
-                return ItemId.ItemGreatBall;
-            if (ultraBallsCount > 0)
-                return ItemId.ItemUltraBall;
-            if (masterBallsCount > 0 && !session.LogicSettings.PokemonToUseMasterball.Any())
-                return ItemId.ItemMasterBall;
 
             return ItemId.ItemUnknown;
         }
