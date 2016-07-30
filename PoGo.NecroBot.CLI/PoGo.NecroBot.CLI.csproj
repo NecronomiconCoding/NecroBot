@@ -170,8 +170,8 @@
     <None Include="Config\Translations\translation.et.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-	<None Include="Config\Translations\translation.sv.json">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Include="Config\Translations\translation.sv.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +195,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
