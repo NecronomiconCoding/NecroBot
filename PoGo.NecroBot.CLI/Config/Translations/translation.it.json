@@ -245,6 +245,10 @@
       "Value": "Estrazione file completata."
     },
     {
+      "Key": "FinishedTransferringConfig",
+      "Value": "Finito il trasferimento vostro config alla nuova versione..."
+    },
+    {
       "Key": "updateFinished",
       "Value": "Aggiornamento completato, ora puoi chiudere questa finestra."
     },

@@ -91,6 +91,7 @@ namespace PoGo.NecroBot.CLI
     public class GlobalSettings
     {
         public int AmountOfPokemonToDisplayOnStart = 10;
+        public bool TransferConfigAndAuthOnUpdate = true;
 
         [JsonIgnore]
         internal AuthSettings Auth = new AuthSettings();
@@ -136,21 +137,16 @@ namespace PoGo.NecroBot.CLI
         public int SnipeLocationServerPort = 16969;
         public bool UseSnipeLocationServer = false;
         public bool UseTransferIVForSnipe = false;
+        public bool SnipeIgnoreUnknownIV = false;
         public int MinDelayBetweenSnipes = 20000;
+        public int TotalAmountOfPokebalsToKeep = 150;
+        public int TotalAmountOfPotionsToKeep = 100;
+        public int TotalAmountOfRevivesToKeep = 50;
+
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 40),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
             new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
@@ -282,11 +278,61 @@ namespace PoGo.NecroBot.CLI
             },
             Pokemon = new List<PokemonId>()
             {
-                PokemonId.Dratini,
-                PokemonId.Magikarp,
-                PokemonId.Eevee,
+                PokemonId.Venusaur,
+                PokemonId.Charizard,
+                PokemonId.Blastoise,
+                PokemonId.Beedrill,
+                PokemonId.Raichu,
+                PokemonId.Sandslash,
+                PokemonId.Nidoking,
+                PokemonId.Nidoqueen,
+                PokemonId.Clefable,
+                PokemonId.Ninetales,
+                PokemonId.Golbat,
+                PokemonId.Vileplume,
+                PokemonId.Golduck,
+                PokemonId.Primeape,
+                PokemonId.Arcanine,
+                PokemonId.Poliwrath,
+                PokemonId.Alakazam,
+                PokemonId.Machamp,
+                PokemonId.Golem,
+                PokemonId.Rapidash,
+                PokemonId.Slowbro,
+                PokemonId.Farfetchd,
+                PokemonId.Muk,
+                PokemonId.Cloyster,
+                PokemonId.Gengar,
+                PokemonId.Exeggutor,
+                PokemonId.Marowak,
+                PokemonId.Hitmonchan,
+                PokemonId.Lickitung,
+                PokemonId.Rhydon,
+                PokemonId.Chansey,
+                PokemonId.Kangaskhan,
+                PokemonId.Starmie,
+                PokemonId.MrMime,
+                PokemonId.Scyther,
+                PokemonId.Magmar,
+                PokemonId.Electabuzz,
+                PokemonId.Magmar,
+                PokemonId.Jynx,
+                PokemonId.Gyarados,
+                PokemonId.Lapras,
+                PokemonId.Ditto,
+                PokemonId.Vaporeon,
+                PokemonId.Jolteon,
+                PokemonId.Flareon,
+                PokemonId.Porygon,
+                PokemonId.Kabutops,
+                PokemonId.Aerodactyl,
                 PokemonId.Snorlax,
-                PokemonId.Dragonair,
+                PokemonId.Articuno,
+                PokemonId.Zapdos,
+                PokemonId.Moltres,
+                PokemonId.Dragonite,
+                PokemonId.Mewtwo,
+                PokemonId.Mew    
             }
         };
 
@@ -516,6 +562,7 @@ namespace PoGo.NecroBot.CLI
         public string ProfileConfigPath => _settings.ProfileConfigPath;
         public string GeneralConfigPath => _settings.GeneralConfigPath;
         public bool AutoUpdate => _settings.AutoUpdate;
+        public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
@@ -551,8 +598,12 @@ namespace PoGo.NecroBot.CLI
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
-        public bool UseSnipeLocationServer=> _settings.UseSnipeLocationServer;
+        public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIVForSnipe => _settings.UseTransferIVForSnipe;
+        public bool SnipeIgnoreUnknownIV => _settings.SnipeIgnoreUnknownIV;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
+        public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
+        public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
+        public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
     }
 }
