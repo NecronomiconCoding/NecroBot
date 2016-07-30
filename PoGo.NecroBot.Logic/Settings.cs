@@ -141,7 +141,7 @@ namespace PoGo.NecroBot.CLI
         public bool AutomaticallyLevelUpPokemon = true;
         public string LevelUpByCPorIV = "iv";
         public float UpgradePokemonIVMinimum = 95;
-        public float UpgradePokemonCPMinimum = 95;
+        public float UpgradePokemonCPMinimum = 1000;
         public bool UseTransferIVForSnipe = false;
         public bool SnipeIgnoreUnknownIV = false;
         public int MinDelayBetweenSnipes = 20000;

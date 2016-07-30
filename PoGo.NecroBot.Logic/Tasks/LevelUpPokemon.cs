@@ -16,7 +16,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (session.LogicSettings.LevelUpByCPorIV.ToLower().Contains(("iv")))
             {
                 Random rand = new Random();
-                int RandomNumber = rand.Next(1, DisplayPokemonStatsTask.PokemonID.Count);
+                int RandomNumber = rand.Next(0, DisplayPokemonStatsTask.PokemonID.Count);
                 
                 var UpgradeResult = await session.Inventory.UpgradePokemon(DisplayPokemonStatsTask.PokemonID[RandomNumber]);
                 if (UpgradeResult.Result.ToString().ToLower().Contains("success"))
@@ -37,7 +37,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
 
                 Random rand = new Random();
-                int RandomNumber = rand.Next(1, DisplayPokemonStatsTask.PokemonIDCP.Count);
+                int RandomNumber = rand.Next(0, DisplayPokemonStatsTask.PokemonIDCP.Count);
                 var UpgradeResult = await session.Inventory.UpgradePokemon(DisplayPokemonStatsTask.PokemonIDCP[RandomNumber]);
                 if (UpgradeResult.Result.ToString().ToLower().Contains("success"))
                 {
