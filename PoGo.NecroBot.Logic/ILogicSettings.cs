@@ -83,7 +83,8 @@ namespace PoGo.NecroBot.Logic
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
         bool DumpPokemonStats { get; }
-        bool RenameAboveIv { get; }
+        bool RenamePokemon { get; }
+        bool RenameOnlyAboveIv { get; }
         string RenameTemplate { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }
@@ -110,6 +111,8 @@ namespace PoGo.NecroBot.Logic
         ICollection<PokemonId> PokemonsNotToTransfer { get; }
 
         ICollection<PokemonId> PokemonsNotToCatch { get; }
+
+        ICollection<PokemonId> PokemonToUseMasterball { get; }
 
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
         SnipeSettings PokemonToSnipe { get; } 

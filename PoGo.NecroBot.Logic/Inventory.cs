@@ -217,29 +217,17 @@ namespace PoGo.NecroBot.Logic
                 var pokeballsToRecycle = GetPokeballsToRecycle(settings, myItems);
                 itemsToRecylce.AddRange(pokeballsToRecycle);
             }
-            else
-            {
-                Logging.Logger.Write("Using ItemRecycleFilter for pokeballs", Logging.LogLevel.Info, ConsoleColor.Yellow);
-            }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Potions.Contains(s.Key)))
             {
                 var potionsToRecycle = GetPotionsToRecycle(settings, myItems);
                 itemsToRecylce.AddRange(potionsToRecycle);
             }
-            else
-            {
-                Logging.Logger.Write("Using ItemRecycleFilter for potions", Logging.LogLevel.Info, ConsoleColor.Yellow);
-            }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Revives.Contains(s.Key)))
             {
                 var revivesToRecycle = GetRevivesToRecycle(settings, myItems);
                 itemsToRecylce.AddRange(revivesToRecycle);
-            }
-            else
-            {
-                Logging.Logger.Write("Using ItemRecycleFilter for revives", Logging.LogLevel.Info, ConsoleColor.Yellow);
             }
 
             var otherItemsToRecylce = myItems

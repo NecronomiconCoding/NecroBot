@@ -75,12 +75,15 @@ namespace PoGo.NecroBot.CLI
         {
             Logger.Write(evt.WasAddedNow
                 ? session.Translation.GetTranslation(TranslationString.IncubatorPuttingEgg, evt.KmRemaining)
-                : session.Translation.GetTranslation(TranslationString.IncubatorStatusUpdate, evt.KmRemaining));
+                : session.Translation.GetTranslation(TranslationString.IncubatorStatusUpdate, evt.KmRemaining),
+                LogLevel.Egg);
         }
 
         public void HandleEvent(EggHatchedEvent evt, ISession session)
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.IncubatorEggHatched, evt.PokemonId.ToString()));
+            Logger.Write(session.Translation.GetTranslation(TranslationString.IncubatorEggHatched, 
+                evt.PokemonId.ToString(), evt.Level, evt.Cp, evt.MaxCp, evt.Perfection),
+                LogLevel.Egg);
         }
 
         public void HandleEvent(FortUsedEvent evt, ISession session)
@@ -182,13 +185,16 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(SnipeScanEvent evt, ISession session)
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScan, $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
+            if(evt.PokemonId == POGOProtos.Enums.PokemonId.Missingno)
+                Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScan, $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
+            else
+                Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScanEx, evt.PokemonId, (evt.iv > 0) ? evt.iv.ToString() : "unknown", $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
         }
 
         public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession session)
         {
             string strHeader;
-            //PokemonData | CP | IV | Level
+            //PokemonData | CP | IV | Level | MOVE1 | MOVE2
             switch (evt.SortedBy)
             {
                 case "Level":
@@ -200,6 +206,12 @@ namespace PoGo.NecroBot.CLI
                 case "CP":
                     strHeader = session.Translation.GetTranslation(TranslationString.DisplayHighestsCpHeader);
                     break;
+                case "MOVE1":
+                    strHeader = session.Translation.GetTranslation(TranslationString.DisplayHighestMOVE1Header);
+                    break;
+                case "MOVE2":
+                    strHeader = session.Translation.GetTranslation(TranslationString.DisplayHighestMOVE2Header);
+                    break;
                 default:
                     strHeader = session.Translation.GetTranslation(TranslationString.DisplayHighestsHeader);
                     break;
@@ -210,7 +222,7 @@ namespace PoGo.NecroBot.CLI
             Logger.Write($"====== {strHeader} ======", LogLevel.Info, ConsoleColor.Yellow);
             foreach (var pokemon in evt.PokemonList)
                 Logger.Write(
-                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: '{pokemon.Item1.PokemonId}'",
+                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: {pokemon.Item1.PokemonId.ToString().PadRight(10, ' ')}\t MOVE1: {pokemon.Item5.ToString().PadRight(20, ' ')} MOVE2: {pokemon.Item6.ToString()}",
                     LogLevel.Info, ConsoleColor.Yellow);
         }
 

@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
+using PoGo.NecroBot.Logic.PoGoUtils;
 
 #endregion
 
@@ -55,7 +56,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(new EggHatchedEvent
                 {
                     Id = hatched.Id,
-                    PokemonId = hatched.PokemonId
+                    PokemonId = hatched.PokemonId,
+                    Level = PokemonInfo.GetLevel(hatched),
+                    Cp = hatched.Cp,
+                    MaxCp = PokemonInfo.CalculateMaxCp(hatched),
+                    Perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(hatched), 2)
                 });
             }
 

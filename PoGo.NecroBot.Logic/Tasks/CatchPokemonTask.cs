@@ -144,6 +144,9 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemonCp = encounter is EncounterResponse
                 ? encounter.WildPokemon?.PokemonData?.Cp
                 : encounter?.PokemonData?.Cp;
+            var pokemonId = encounter is EncounterResponse
+                ? encounter.WildPokemon?.PokemonData?.PokemonId
+                : encounter?.PokemonData?.PokemonId;
             var iV =
                 Math.Round(
                     PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
@@ -155,7 +158,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var ultraBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
             var masterBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
-            if (masterBallsCount > 0 && pokemonCp >= 1200)
+            if (masterBallsCount > 0 && ((pokemonCp >= 1200 && !session.LogicSettings.PokemonToUseMasterball.Any()) || session.LogicSettings.PokemonToUseMasterball.Contains(pokemonId)))
                 return ItemId.ItemMasterBall;
             if (ultraBallsCount > 0 && pokemonCp >= 1000)
                 return ItemId.ItemUltraBall;
@@ -177,7 +180,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 return ItemId.ItemGreatBall;
             if (ultraBallsCount > 0)
                 return ItemId.ItemUltraBall;
-            if (masterBallsCount > 0)
+            if (masterBallsCount > 0 && !session.LogicSettings.PokemonToUseMasterball.Any())
                 return ItemId.ItemMasterBall;
 
             return ItemId.ItemUnknown;

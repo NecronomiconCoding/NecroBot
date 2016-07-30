@@ -125,8 +125,7 @@
       "Value": "Añadiendo huevo a la incubadora: {0:0.00}km restantes"
     },
     {
-      "Key": "incubatorStatus
-        ",
+      "Key": "incubatorStatus",
       "Value": "Actualizando el estado de la incubadora: {0:0.00}km restantes"
     },
     {

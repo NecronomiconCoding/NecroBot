@@ -68,6 +68,7 @@
     <Compile Include="Event\FortUsedEvent.cs" />
     <Compile Include="Event\ItemRecycledEvent.cs" />
     <Compile Include="Event\NoPokeballEvent.cs" />
+    <Compile Include="Event\SnipeModeEvent.cs" />
     <Compile Include="Event\PokemonListEvent.cs" />
     <Compile Include="Event\SnipeScanEvent.cs" />
     <Compile Include="Event\UpdateEvent.cs" />

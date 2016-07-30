@@ -115,8 +115,11 @@ namespace PoGo.NecroBot.Logic.Common
         MissingCredentialsGoogle,
         MissingCredentialsPtc,
         SnipeScan,
+        SnipeScanEx,
         NoPokemonToSnipe,
         NotEnoughPokeballsToSnipe,
+        DisplayHighestMOVE1Header,
+        DisplayHighestMOVE2Header
     }
 
     public class Translation : ITranslation
@@ -162,7 +165,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.WelcomeWarning, "Make sure Lat & Lng are right. Exit Program if not! Lat: {0} Lng: {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.IncubatorPuttingEgg, "Putting egg in incubator: {0:0.00}km left"),
             new KeyValuePair<TranslationString, string>(TranslationString.IncubatorStatusUpdate, "Incubator status update: {0:0.00}km left"),
-            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorEggHatched, "Incubated egg has hatched: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorEggHatched, "Incubated egg has hatched: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryError, "ERROR"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryAttention, "ATTENTION"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryInfo, "INFO"),
@@ -224,8 +227,11 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsGoogle, "You need to fill out GoogleUsername and GooglePassword in auth.json!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsPtc, "You need to fill out PtcUsername and PtcPassword in auth.json!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScan, "[Sniper] Scanning for Snipeable Pokemon at {0}..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScanEx, "[Sniper] Sniping a {0} with {1} IV at {2}..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.NoPokemonToSnipe, "[Sniper] No Pokemon found to snipe!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.NotEnoughPokeballsToSnipe, "Not enough Pokeballs to start sniping! ({0}/{1})"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestMOVE1Header, "MOVE1"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestMOVE2Header, "MOVE2"),
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)

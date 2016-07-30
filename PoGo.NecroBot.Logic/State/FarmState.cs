@@ -22,7 +22,7 @@ namespace PoGo.NecroBot.Logic.State
                 await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
             }
 
-            if (session.LogicSettings.RenameAboveIv)
+            if (session.LogicSettings.RenamePokemon)
             {
                 await RenamePokemonTask.Execute(session, cancellationToken);
             }

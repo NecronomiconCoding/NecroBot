@@ -23,26 +23,20 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             var tracks = GetGpxTracks(session);
-            var curTrkPt = 0;
-            var curTrk = 0;
-            var maxTrk = tracks.Count - 1;
-            var curTrkSeg = 0;
             var eggWalker = new EggWalker(1000, session);
 
-            while (curTrk <= maxTrk)
+            for (int curTrk = 0; curTrk < tracks.Count; curTrk++)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var track = tracks.ElementAt(curTrk);
                 var trackSegments = track.Segments;
-                var maxTrkSeg = trackSegments.Count - 1;
-                while (curTrkSeg <= maxTrkSeg)
+                for (int curTrkSeg = 0; curTrkSeg < trackSegments.Count; curTrkSeg++)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
                     var trackPoints = track.Segments.ElementAt(0).TrackPoints;
-                    var maxTrkPt = trackPoints.Count - 1;
-                    while (curTrkPt <= maxTrkPt)
+                    for (int curTrkPt = 0; curTrkPt < trackPoints.Count; curTrkPt++)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
@@ -110,7 +104,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             await RecycleItemsTask.Execute(session, cancellationToken);
 
-                            if (session.LogicSettings.SnipeAtPokestops)
+                            if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
                             {
                                 await SnipePokemonTask.Execute(session, cancellationToken);
                             }
@@ -126,7 +120,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                             }
 
-                            if (session.LogicSettings.RenameAboveIv)
+                            if (session.LogicSettings.RenamePokemon)
                             {
                                 await RenamePokemonTask.Execute(session, cancellationToken);
                             }
@@ -148,20 +142,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         await eggWalker.ApplyDistance(distance, cancellationToken);
 
-                        if (curTrkPt >= maxTrkPt)
-                            curTrkPt = 0;
-                        else
-                            curTrkPt++;
                     } //end trkpts
-                    if (curTrkSeg >= maxTrkSeg)
-                        curTrkSeg = 0;
-                    else
-                        curTrkSeg++;
                 } //end trksegs
-                if (curTrk >= maxTrkSeg)
-                    curTrk = 0;
-                else
-                    curTrk++;
             } //end tracks
         }
 
