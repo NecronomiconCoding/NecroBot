@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Logging;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
@@ -14,7 +13,7 @@ using POGOProtos.Inventory.Item;
 
 #endregion
 
-namespace PoGo.NecroBot.CLI
+namespace PoGo.NecroBot.Logic
 {
     internal class AuthSettings
     {
@@ -152,7 +151,7 @@ namespace PoGo.NecroBot.CLI
         public int MaxPokeballsPerPokemon = 6;
         public int MaxSpawnLocationOffset = 10;
         public int MaxTravelDistanceInMeters = 1000;
-        public int MinDelayBetweenSnipes = 20000;
+        public int MinDelayBetweenSnipes = 60000;
         public int MinPokeballsToSnipe = 20;
         public int MinPokeballsWhileSnipe = 0;
 
