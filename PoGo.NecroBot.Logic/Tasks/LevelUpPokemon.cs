@@ -30,7 +30,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else
                 {
-                    Logging.Logger.Write("Pokemon Upgrade Failed Unknown Error");
+                    Logging.Logger.Write("Pokemon Upgrade Failed Unknown Error, Pokemon Could Be Max Level For Your Level The Pokemon That Caused Issue Was:"+UpgradeResult.UpgradedPokemon.PokemonId);
                 }
             }
             else if (session.LogicSettings.LevelUpByCPorIV.ToLower().Contains(("cp")))
