@@ -70,7 +70,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "¡Sin Pokéballs! - Hemos perdido un {0} con {1} PC :("
+      "Value": "¡Sin Poké Ball! - Hemos perdido un {0} con {1} PC :("
     },
     {
       "Key": "catchStatusAttempt",
@@ -270,11 +270,11 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "No tienes pokeballs en el inventario, no podemos atrapar más Pokemon por ahora :("
+      "Value": "No tienes Poké Ball en el inventario, no podemos atrapar más Pokemon por ahora :("
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Inventario actual] Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
+      "Value": "[Inventario actual] Poké Ball: {0} | Super Ball: {1} | Ultra Ball: {2} | Master Ball: {3}"
     },
     {
       "Key": "checkingForBallsToRecycle",
@@ -418,7 +418,7 @@
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "No hay suficientes Pokeballs para iniciar Sniping! ({0}/{1})"
+      "Value": "No hay suficientes Poké Balls para iniciar Sniping! ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
