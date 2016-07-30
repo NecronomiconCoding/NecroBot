@@ -9,6 +9,18 @@ using POGOProtos.Inventory.Item;
 
 namespace PoGo.NecroBot.Logic
 {
+	public class GPXSettings
+    {
+        public bool OutputTrackPathData { get; set; }
+        public bool OutputTrackPointPathData { get; set; }
+
+        public bool InfiniteLoopOver { get; set; }
+
+        public bool OutputLoopData { get; set; }
+
+        public int LoopNumber { get; set; }
+    }
+	
     public class Location
     {
         public Location()
@@ -81,6 +93,7 @@ namespace PoGo.NecroBot.Logic
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }
         string GpxFile { get; }
+		GPXSettings GpxSettings { get; }
         bool UseLuckyEggsWhileEvolving { get; }
         int UseLuckyEggsMinPokemonAmount { get; }
         bool EvolveAllPokemonAboveIv { get; }
