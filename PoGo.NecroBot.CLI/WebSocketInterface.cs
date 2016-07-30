@@ -81,15 +81,23 @@ namespace PoGo.NecroBot.CLI
             _lastProfile = evt;
         }
 
-        private void HandleMessage(WebSocketSession session, string message)
+        private async void HandleMessage(WebSocketSession session, string message)
         {
-
+            switch(message)
+            {
+                case "PokemonList":
+                    await PokemonListTask.Execute(_session);
+                    break;
+                case "EggsList":
+                    await EggsListTask.Execute(_session);
+                    break;
+            }
 
             // Setup to only send data back to the session that requested it. 
             try
             {
                 dynamic decodedMessage = JObject.Parse(message);
-                _websocketHandler?.Handle(_session, session, decodedMessage);
+                await _websocketHandler?.Handle(_session, session, decodedMessage);
             }
             catch (JsonException ex)
             {
