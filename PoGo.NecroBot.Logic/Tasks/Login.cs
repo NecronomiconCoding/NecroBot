@@ -1,15 +1,13 @@
-﻿using PoGo.NecroBot.Logic.Common;
+﻿#region using directives
+
+using System;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Service;
 using PoGo.NecroBot.Logic.State;
-using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -17,6 +15,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         void DoLogin();
     }
+
     public class Login : ILogin
     {
         private readonly ISession _session;
@@ -50,13 +49,21 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             catch (PtcOfflineException)
             {
-                  _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Translation.GetTranslation(TranslationString.PtcOffline) });
-                  _session.EventDispatcher.Send(new NoticeEvent { Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20) });
-
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.PtcOffline)
+                });
+                _session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20)
+                });
             }
             catch (AccountNotVerifiedException)
             {
-                  _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Translation.GetTranslation(TranslationString.AccountNotVerified) });
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.AccountNotVerified)
+                });
             }
         }
     }

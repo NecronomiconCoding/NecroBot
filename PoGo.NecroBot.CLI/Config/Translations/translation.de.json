@@ -16,35 +16,35 @@
       "Key": "masterPokeball",
       "Value": "Meisterball"
     },
-    	{
+    {
       "Key": "CatchStatusSuccess",
       "Value": "Gefangen"
     },
-	{
+    {
       "Key": "CatchStatusError",
       "Value": "Fehler beim Fangen"
     },
-	{
+    {
       "Key": "CatchStatusEscape",
       "Value": "Entkommen"
     },
-	{
+    {
       "Key": "CatchStatusFlee",
       "Value": "Geflüchtet"
     },
-{
+    {
       "Key": "CatchStatusMissed",
       "Value": "Verfehlt"
     },
-	 {
+    {
       "Key": "CatchTypeIncense",
       "Value": "Rauch"
     },
-	 {
+    {
       "Key": "CatchTypeLure",
       "Value": "Lockmodul"
     },
-	 {
+    {
       "Key": "CatchTypeNormal",
       "Value": "Wild"
     },
@@ -54,7 +54,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
+      "Value":
+        "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -98,7 +99,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -162,7 +164,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Ei ist geschlüpft: {0}"
+      "Value": "Ei ist geschlüpft: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -233,18 +235,6 @@
       "Value": "Account nicht bestätigt! Stoppe..."
     },
     {
-      "Key": "openingGoogleDevicePage",
-      "Value": "Öffne Google Device Seite. Bitte füge den Code mit CTRL+V ein."
-    },
-    {
-      "Key": "couldntCopyToClipboard",
-      "Value": "Code konnte nicht in die Zwischenablage gelegt werden. Versuch es manuell."
-    },
-    {
-      "Key": "couldntCopyToClipboard2",
-      "Value": "Gehe auf: {0} & trage {1} ein."
-    },
-    {
       "Key": "realisticTravelDetected",
       "Value": "Realistische Bewegung gefunden. Benutze UserSettings.settings"
     },
@@ -277,6 +267,10 @@
       "Value": "Entpacken der Dateien abgeschlossen..."
     },
     {
+      "Key": "FinishedTransferringConfig",
+      "Value": "Beendet Ihre Konfiguration auf die neue Version übertragen..."
+    },
+    {
       "Key": "updateFinished",
       "Value": "Update abgeschlossen! Du kannst dieses Fenster nun schließen."
     },
@@ -302,7 +296,8 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "PokémonInventar ist voll. Bitte verschicke Pokémon manuell oder setze \"TransferDuplicatePokemon\" in den Einstellungen auf \"true\"..."
+      "Value":
+        "PokémonInventar ist voll. Bitte verschicke Pokémon manuell oder setze \"TransferDuplicatePokemon\" in den Einstellungen auf \"true\"..."
     },
     {
       "Key": "encounterProblem",
