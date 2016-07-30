@@ -362,11 +362,11 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "\"auth.json\" dosyasına GoogleUsername ve GooglePassword değerlerini girmen gerek!"
+      "Value": "\"auth.json\" dosyasına Username ve Password değerlerini girmen gerek!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "\"auth.json\" dosyasına PtcUsername ve PtcPassword değerlerini girmen gerek!"
+      "Value": "\"auth.json\" dosyasına Username ve Password değerlerini girmen gerek!"
     },
     {
       "Key": "snipeScan",

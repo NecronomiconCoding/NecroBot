@@ -363,11 +363,11 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Es necesario rellenar GoogleUsername y GooglePassword en auth.json!"
+      "Value": "Es necesario rellenar Username y Password en auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Es necesario rellenar PtcUsername y PtcPassword en auth.json!"
+      "Value": "Es necesario rellenar Username y Password en auth.json!"
     },
     {
       "Key": "snipeScan",

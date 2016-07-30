@@ -220,8 +220,8 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.GoogleTwoFactorAuth, "As you have Google Two Factor Auth enabled, you will need to insert an App Specific Password into the auth.json"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.GoogleTwoFactorAuthExplanation, "Opening Google App-Passwords. Please make a new App Password (use Other as Device)"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.GoogleError, "Make sure you have entered the right Email & Password."),
-            new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsGoogle, "You need to fill out GoogleUsername and GooglePassword in auth.json!"),
-            new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsPtc, "You need to fill out PtcUsername and PtcPassword in auth.json!"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsGoogle, "You need to fill out Username and Password in auth.json!"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsPtc, "You need to fill out Username and Password in auth.json!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScan, "[Sniper] Scanning for Snipeable Pokemon at {0}..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.NoPokemonToSnipe, "[Sniper] No Pokemon found to snipe!"),
         };

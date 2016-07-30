@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic.State
                     case AuthType.Ptc:
                         try
                         {
-                            await session.Client.Login.DoPtcLogin(session.Settings.PtcUsername, session.Settings.PtcPassword);
+                            await session.Client.Login.DoPtcLogin(session.Settings.Username, session.Settings.Password);
                         }
                         catch (AggregateException ae)
                         {
@@ -40,7 +40,7 @@ namespace PoGo.NecroBot.Logic.State
                         }
                         break;
                     case AuthType.Google:
-                        await session.Client.Login.DoGoogleLogin(session.Settings.GoogleUsername, session.Settings.GooglePassword);
+                        await session.Client.Login.DoGoogleLogin(session.Settings.Username, session.Settings.Password);
                         break;
                     default:
                         session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(Common.TranslationString.WrongAuthType) });
@@ -95,7 +95,7 @@ namespace PoGo.NecroBot.Logic.State
             cancellationToken.ThrowIfCancellationRequested();
 
             if (session.Settings.AuthType == AuthType.Google &&
-                            (session.Settings.GoogleUsername == null || session.Settings.GooglePassword == null))
+                            (session.Settings.Username == null || session.Settings.Password == null))
             {
                 session.EventDispatcher.Send(new ErrorEvent
                 {
@@ -105,7 +105,7 @@ namespace PoGo.NecroBot.Logic.State
                 Environment.Exit(0);
             }
             else if (session.Settings.AuthType == AuthType.Ptc &&
-                     (session.Settings.PtcUsername == null || session.Settings.PtcPassword == null))
+                     (session.Settings.Username == null || session.Settings.Password == null))
             {
                 session.EventDispatcher.Send(new ErrorEvent
                 {

@@ -366,11 +366,11 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Devi riempire i campi GoogleUsername e GooglePassword  nel file auth.json!"
+      "Value": "Devi riempire i campi Username e Password  nel file auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Devi riempire i campi PtcUsername e PtcPassword nel file auth.json!"
+      "Value": "Devi riempire i campi Username e Password nel file auth.json!"
     },
     {
       "Key": "snipeScan",

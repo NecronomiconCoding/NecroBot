@@ -369,11 +369,11 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Вам нужно заполнить настройки GoogleUsername и GooglePassword в auth.json!"
+      "Value": "Вам нужно заполнить настройки Username и Password в auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Вам нужно заполнить настройки PtcUsername и PtcPassword в auth.json!"
+      "Value": "Вам нужно заполнить настройки Username и Password в auth.json!"
     },
     {
       "Key": "snipeScan",

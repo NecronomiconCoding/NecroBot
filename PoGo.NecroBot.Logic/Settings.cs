@@ -24,10 +24,8 @@ namespace PoGo.NecroBot.CLI
         private string _filePath;
 
         public string GoogleRefreshToken;
-        public string PtcUsername;
-        public string PtcPassword;
-        public string GoogleUsername;
-        public string GooglePassword;
+        public string Username;
+        public string Password;
 
         public void Load(string path)
         {
@@ -52,14 +50,10 @@ namespace PoGo.NecroBot.CLI
             }
             catch(Newtonsoft.Json.JsonReaderException exception)
             {
-                if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcUsername"))
-                    Logger.Write("JSON Exception: You need to properly configure your PtcUsername using quotations.", LogLevel.Error);
-                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcPassword"))
-                    Logger.Write("JSON Exception: You need to properly configure your PtcPassword using quotations.", LogLevel.Error);
-                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("GoogleUsername"))
-                    Logger.Write("JSON Exception: You need to properly configure your GoogleUsername using quotations.", LogLevel.Error);
-                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("GooglePassword"))
-                    Logger.Write("JSON Exception: You need to properly configure your GooglePassword using quotations.", LogLevel.Error);
+                if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("Username"))
+                    Logger.Write("JSON Exception: You need to properly configure your Username using quotations.", LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("Password"))
+                    Logger.Write("JSON Exception: You need to properly configure your Password using quotations.", LogLevel.Error);
                 else
                     Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
             }
@@ -432,8 +426,8 @@ namespace PoGo.NecroBot.CLI
         }
 
 
-        public string GoogleUsername => _settings.Auth.GoogleUsername;
-        public string GooglePassword => _settings.Auth.GooglePassword;
+        public string Username => _settings.Auth.Username;
+        public string Password => _settings.Auth.Password;
 
         public string GoogleRefreshToken
         {
@@ -497,54 +491,28 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        string ISettings.PtcPassword
+        string ISettings.Username
         {
             get
             {
-                return _settings.Auth.PtcPassword;
+                return _settings.Auth.Username;
             }
 
             set
             {
-                _settings.Auth.PtcPassword = value;
+                _settings.Auth.Username = value;
             }
         }
-
-        string ISettings.PtcUsername
+        string ISettings.Password
         {
             get
             {
-                return _settings.Auth.PtcUsername;
+                return _settings.Auth.Password;
             }
 
             set
             {
-                _settings.Auth.PtcUsername = value;
-            }
-        }
-
-        string ISettings.GoogleUsername
-        {
-            get
-            {
-                return _settings.Auth.GoogleUsername;
-            }
-
-            set
-            {
-                _settings.Auth.GoogleUsername = value;
-            }
-        }
-        string ISettings.GooglePassword
-        {
-            get
-            {
-                return _settings.Auth.GooglePassword;
-            }
-
-            set
-            {
-                _settings.Auth.GooglePassword = value;
+                _settings.Auth.Password = value;
             }
         }
     }

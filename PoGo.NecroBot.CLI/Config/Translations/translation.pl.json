@@ -362,11 +362,11 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Proszę wypełnić GoogleUsername oraz GooglePassword w auth.json!"
+      "Value": "Proszę wypełnić Username oraz Password w auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Proszę wypełnić PtcUsername oraz PtcPassword w auth.json!"
+      "Value": "Proszę wypełnić Username oraz Password w auth.json!"
     },
     {
       "Key": "snipeScan",
