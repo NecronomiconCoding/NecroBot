@@ -70,31 +70,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     PokemonList = pokemonPairedWithStatsIv
                 });
 
-            foreach (var pokemon in pokemonPairedWithStatsIvForUpgrade)
-            {
-                var dgdfs = pokemon.ToString();
-
-                var tokens = dgdfs.Split(new[] {"id"}, StringSplitOptions.None);
-                var splitone = tokens[1].Split('"');
-                var iv = session.Inventory.GetPerfect(pokemon.Item1);
-                if (iv >= session.LogicSettings.UpgradePokemonIvMinimum)
-                {
-                    PokemonId.Add(ulong.Parse(splitone[2]));
-                }
-            }
-            foreach (var t in pokemonPairedWithStatsCpForUpgrade)
-            {
-                var dgdfs = t.ToString();
-                var tokens = dgdfs.Split(new[] {"id"}, StringSplitOptions.None);
-                var splitone = tokens[1].Split('"');
-                var tokensSplit = tokens[1].Split(new[] {"cp"}, StringSplitOptions.None);
-                var tokenSplitAgain = tokensSplit[1].Split(' ');
-                var tokenSplitAgain2 = tokenSplitAgain[1].Split(',');
-                if (float.Parse(tokenSplitAgain2[0]) >= session.LogicSettings.UpgradePokemonCpMinimum)
-                {
-                    PokemonIdcp.Add(ulong.Parse(splitone[2]));
-                }
-            }
             var allPokemonInBag = session.LogicSettings.PrioritizeIvOverCp
                 ? await session.Inventory.GetHighestsPerfect(1000)
                 : await session.Inventory.GetHighestsCp(1000);

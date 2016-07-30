@@ -48,6 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var pokestopList = await GetPokeStops(session);
             var stopsHit = 0;
+            var displayStatsHit = 0;
             var eggWalker = new EggWalker(1000, session);
 
             if (pokestopList.Count <= 0)
@@ -179,6 +180,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (session.LogicSettings.RenamePokemon)
                     {
                         await RenamePokemonTask.Execute(session, cancellationToken);
+                    }
+                    if (++displayStatsHit >= 4)
+                    {
+                        await DisplayPokemonStatsTask.Execute(session);
+                        displayStatsHit = 0;
                     }
                 }
 
