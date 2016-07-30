@@ -23,11 +23,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var pokemon in pokemons)
             {
-<<<<<<< HEAD
                 cancellationToken.ThrowIfCancellationRequested();
-=======
                 if (pokemon.Nickname.Length != 0) continue;
->>>>>>> 37bdcde70412e85354a0f23458f69c9617c5ac99
 
                 double perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(pokemon));
                 string pokemonName = pokemon.PokemonId.ToString();

@@ -125,11 +125,8 @@ namespace PoGo.NecroBot.CLI
         public bool KeepPokemonsThatCanEvolve = false;
         public bool PrioritizeIvOverCp = true;
         public bool RenameAboveIv = true;
-<<<<<<< HEAD
         public string RenameTemplate = "{1}_{0}";
-=======
         public bool RenameAllIv = false;
->>>>>>> 37bdcde70412e85354a0f23458f69c9617c5ac99
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
         public bool UsePokemonToNotCatchFilter = false;
