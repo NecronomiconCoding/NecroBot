@@ -242,6 +242,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = new Location(location.latitude, location.longitude), PokemonId = location.id, iv = location.iv });
 
+                                if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
+                                    return;
+
                                 await snipe(session, pokemonIds, location.latitude, location.longitude, cancellationToken);
                                 locsVisited.Add(new PokemonLocation(location.latitude, location.longitude));
                             }
