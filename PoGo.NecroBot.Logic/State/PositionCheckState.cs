@@ -57,6 +57,12 @@ namespace PoGo.NecroBot.Logic.State
                 }
             }
 
+            session.EventDispatcher.Send(new UpdatePositionEvent()
+            {
+                Latitude = session.Client.CurrentLatitude,
+                Longitude = session.Client.CurrentLongitude
+            });
+
             session.EventDispatcher.Send(new WarnEvent
             {
                 Message =
@@ -64,7 +70,7 @@ namespace PoGo.NecroBot.Logic.State
                         session.Client.CurrentLongitude),
                 RequireInput = session.LogicSettings.StartupWelcomeDelay
             });
-
+            
             return new InfoState();
         }
 
