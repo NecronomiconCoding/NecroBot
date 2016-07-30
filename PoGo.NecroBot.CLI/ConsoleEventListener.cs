@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using PoGo.NecroBot.Logic.Common;
@@ -182,7 +182,13 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(SnipeScanEvent evt, ISession session)
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScan, $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
+            if (evt.Bounds.Name.Length > 0)
+            {
+                Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScan, $"{evt.Bounds.Name} - {evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
+            }
+            else {
+                Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScan, $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
+            }
         }
 
         public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession session)
