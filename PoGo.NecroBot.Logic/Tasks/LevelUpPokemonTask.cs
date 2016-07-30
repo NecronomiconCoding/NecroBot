@@ -25,6 +25,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 pokemonIdsToLevelUp.AddRange(
                     session.Inventory.GetPokemons().Result
                         .Where(pokemonData => PokemonInfo.CalculatePokemonPerfection(pokemonData) >= session.LogicSettings.KeepMinIvPercentage && session.LogicSettings.PokemonsToLevelUp.Contains(pokemonData.PokemonId))
+                        .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
                         .Select(p => p.Id)
                         .ToList());
             }
@@ -34,6 +35,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 pokemonIdsToLevelUp.AddRange(
                     session.Inventory.GetPokemons().Result
                         .Where(pokemonData => pokemonData.Cp > session.LogicSettings.KeepMinCp && session.LogicSettings.PokemonsToLevelUp.Contains(pokemonData.PokemonId))
+                        .OrderByDescending(pokemonData => pokemonData.Cp)
                         .Select(p => p.Id)
                         .ToList());
             }
