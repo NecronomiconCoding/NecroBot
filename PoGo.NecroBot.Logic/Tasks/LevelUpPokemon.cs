@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            if (session.LogicSettings.LevelUpByCPorIV.Contains(("iv")))
+            if (session.LogicSettings.LevelUpByCPorIV.ToLower().Contains(("iv")))
             {
                 Random rand = new Random();
                 int RandomNumber = rand.Next(1, DisplayPokemonStatsTask.PokemonID.Count);
@@ -33,7 +33,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Logging.Logger.Write("Pokemon Upgrade Failed Unknown Error");
                 }
             }
-            else if (session.LogicSettings.LevelUpByCPorIV.Contains(("cp")))
+            else if (session.LogicSettings.LevelUpByCPorIV.ToLower().Contains(("cp")))
             {
 
                 Random rand = new Random();
