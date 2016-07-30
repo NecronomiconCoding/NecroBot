@@ -78,7 +78,7 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
         public static double CalculatePokemonPerfection(PokemonData poke)
         {
             if (Math.Abs(poke.CpMultiplier + poke.AdditionalCpMultiplier) <= 0)
-                return (poke.IndividualAttack + poke.IndividualDefense + poke.IndividualStamina)/(45.0)*100.0;
+                return (poke.IndividualAttack + poke.IndividualDefense + poke.IndividualStamina)/45.0*100.0;
 
             GetBaseStats(poke.PokemonId);
             var maxCp = CalculateMaxCpMultiplier(poke);
@@ -565,6 +565,18 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
                 default:
                     return 0;
             }
+        }
+
+        public static PokemonMove GetPokemonMove1(PokemonData poke)
+        {
+            var move1 = poke.Move1;
+            return move1;
+        }
+
+        public static PokemonMove GetPokemonMove2(PokemonData poke)
+        {
+            var move2 = poke.Move2;
+            return move2;
         }
 
         public static int GetPowerUpLevel(PokemonData poke)

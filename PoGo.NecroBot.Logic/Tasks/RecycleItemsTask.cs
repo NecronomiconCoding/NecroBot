@@ -16,7 +16,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var items = await session.Inventory.GetItemsToRecycle(session.Settings);
+            var items = await session.Inventory.GetItemsToRecycle(session);
 
             foreach (var item in items)
             {

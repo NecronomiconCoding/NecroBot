@@ -193,7 +193,8 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC servrarna är förmodligen frånanslutna ELLER så är dina inloggningsuppgifter felaktiga. Försök med Google."
+      "Value":
+        "PTC servrarna är förmodligen frånanslutna ELLER så är dina inloggningsuppgifter felaktiga. Försök med Google."
     },
     {
       "Key": "tryingAgainIn",
@@ -273,7 +274,8 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Pokemonväskan är full överför pkemons manuellt eller sätt TransferDuplicatePokemon till true i inställningar ..."
+      "Value":
+        "Pokemonväskan är full överför pkemons manuellt eller sätt TransferDuplicatePokemon till true i inställningar ..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -341,7 +343,8 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Körtid {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stjärnstoff: {5:0} | Överförd: {6:0} | Återvunnet: {7:0}"
+      "Value":
+        "{0} - Körtid {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stjärnstoff: {5:0} | Överförd: {6:0} | Återvunnet: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -353,7 +356,8 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Du har Googles två-stegs autentisering atkiverad, du kommer behöva ange ett app-specifikt lösenord in i filen auth.json"
+      "Value":
+        "Du har Googles två-stegs autentisering atkiverad, du kommer behöva ange ett app-specifikt lösenord in i filen auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -379,6 +383,5 @@
       "Key": "noPokemonToSnipe",
       "Value": "[Krypskytt] Inga Pokemons funna!"
     }
-
   ]
 }
