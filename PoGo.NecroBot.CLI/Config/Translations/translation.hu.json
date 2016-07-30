@@ -1,0 +1,380 @@
+{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "Poké labda"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "Nagy ladba"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "Ultra labda"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "Mester labda"
+    },
+    {
+      "Key": "wrongAuthType",
+	  "Value": "Ismeretlen AuthType a config.json fájlban"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+	  "Value": "A megadott távolságon kívül vagy! Gyaloglás ({0} méterre) 5 másodperc múlva. Jól van beállítva a Coords.ini fájl?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+	  "Value": "Nincs használható PokéStop a közelben. Túl kicsi maximum távolságot adtál meg?"
+    },
+    {
+      "Key": "eventFortUsed",
+	  "Value": "Név: {0}, XP: {1}, Drágakő: {2}, Tárgy: {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+	  "Value": "Név: {0} INFO: Zsákmányolás sikertelen, lehet hogy ideiglenesen bannoltak. Unbannolás: {1}/{2} másodperc"
+    },
+    {
+      "Key": "eventFortTargeted",
+	  "Value": "Következő PokéStop: {0} (távolság {1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Bejelentkezve mint {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+	  "Value": "Szerencse tojás felhasználva, maradt: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+	  "Value": "{0} fejlődése sikeres, jutalmad {1}xp"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+	  "Value": "Sikertelen {0}. Az eredmény {1}, {2} fejlődésének megállítása"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+	  "Value": "{0}\t- CP: {1}  IV: {2}%   [Legmagasabb CP: {3}  IV: {4}%] (Édesség: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+	  "Value": "({0}) | ({1}) {2} | Szint: {3} | CP: ({4}/{5}) | IV: {6}% | Esély: {7}% | {8} méter távolság | {9} ({10} maradt). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Kifogytál a Poké labdákból - Ezért nem lehetett elkapni egy {0} Pokémont {1} CP-vel"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} {1}. próbálkozás"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Édesség: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+	  "Value": "Le nem kezeld adat van a GPX fájlban, kihagyás megkísérlése."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokémonok"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "tökéletes"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "név"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "Ismeretlen"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "Legmagasabb CP mutatása"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Legtökéletesebb mutatása"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Legmagasabb szintű mutatása"
+    },
+    {
+      "Key": "welcomeWarning",
+	  "Value": "Ellenőrizd, hogy a Lat (Szélesség) és Lng (Hosszúság) paraméter megfelelő. Zárd be a programot, ha nem! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Tojás inkubátorba helyezve: {0:0.00}km van hátra"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Inkubátor státusz: {0:0.00}km van hátra"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Kikelt egy tojás az inkubátorból: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "HIBA"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "FIGYELEM"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKÉSTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMOLÁS"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "ÚJRAHASZNOSÍTÁS"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "ÁTHELYEZVE"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "FEJLŐDÉS"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "BOGYÓ"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "TOJÁS"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "FRISSÍTÉS"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Bejelentkezési fiók típus: {0}"
+    },
+    {
+      "Key": "ptcOffline",
+	  "Value": "PTC szerverek valószínűleg leálltak VAGY rossz bejelentkezési adatot adtál meg. Próbáld a Google bejelentkezést"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Újra próbálkozás {0} másodperc múlva..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Fiók nincs megerősítve! Kilépés..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+	  "Value": "Google Device oldal megnyitása. Kérlek illeszd be a kódot a CTRL+V gombok megnyomásával"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+	  "Value": "Vágólapra másolás nem sikerült, próbáld manuálisan"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Menj: {0} és írd be, hogy {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+	  "Value": "Valósághű mozgás érzékelve , UserSettings.settings használata"
+    },
+    {
+      "Key": "notRealisticTravel",
+	  "Value": "Nem valósághű mozgás a {0} ponton, legutóbbi elmentett érték használata a Coords.ini fájlból"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "A koordináták a \"Coords.ini\" fájlban érvénytelenek, alapértelmezett koordináták használata"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+	  "Value": "Kiváló! A legújabb verzióval rendelkezel: {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+	  "Value": "Automatikus frissítés kikapcsolva. Szerezd be a legújabb verziót innen: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+	  "Value": "Frissítés letöltése és alkalmazása..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Legújabb kiadás letöltve..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Fájlok kicsomagolva..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Frissítés kész. Bezárhatod ezt az ablakot."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": " Tüzelő pokémonok keresése..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Pokémonok keresése..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Pokémon csali keresése..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "{0} kihagyva"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Táska tele van. Pokémonok áthelyezése..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "Táska tele van. Kérlek helyezd át a pokémonokat manuálisan vagy állítsd át a TransferDuplicatePokemon paramétert true értékre a config.json fájlban..."
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "Táska tele van. Nem zsákmányoltál semmit!"
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Összecsapás hiba: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Összecsapás hiba: Pokémon csali {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+	  "Value": "A kívánt távolság ({0}, {1}) túl messze van a jelenlegi pozíciódtól ({2}, {3})"
+    },
+    {
+      "Key": "pokemonRename",
+	  "Value": "Pokémon {0} ({1}) átnevezve {2} névről {3} névre."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+	  "Value": "[Pokémon figyelmen kívül hagyási lista] - {0} figyelmen kívül hagyása, ahogy az meg lett adva."
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "Elkapási kísérlet"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "Elkapási hiba"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "Labdából kijött"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "Elkapási menekülés"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "Elkapás mellé"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "Elkapva!"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "Normál"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Csali"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Tüzelés"
+    },
+    {
+      "Key": "webSocketFailStart",
+	  "Value": "Nem sikerült elindítani a WebSocketServert a {0} porton"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - Futási idő {1} - Szint: {2} | XP/Óra: {3:0} | Pokémon/óra: {4:0} | Csillagpor: {5:0} | Áthelyezve: {6:0} | Újrahasznosítva: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+	  "Value": "{0} (Szintlépés {1} óra {2} perc múlva | {3}/{4} XP)"
+    },
+    {
+      "Key": "requireInputText",
+	  "Value": "Nyomj meg egy gombot a folytatáshoz..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+	  "Value": "Mivel be van állítva Google kettős bejelentkezés, az auth.json fájlba be kell írnod az App Specific jelszavadat."
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+	  "Value": "Google App-Jelszavak megnyitása. Kérlek hozz létre egy új App Jelszavat (használd a Más opciót az Eszköz paraméternél)"
+    },
+    {
+      "Key": "googleError",
+	  "Value": "Ellenőrizd, hogy jó Email címet és Jelszavat adtál meg."
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+	  "Value": "Töltsd ki a GoogleUsername és GooglePassword paramétert az auth.json fájlban!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+	  "Value": "Töltsd ki a PtcUsername és PtcPassword paramétert az auth.json fájlban!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[Sniper] Pokémon keresése a következő ponton: {0}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Sniper] Nem található itt Pokémon!"
+    }
+  ]
+}
