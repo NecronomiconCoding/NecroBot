@@ -77,7 +77,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var tokens = dgdfs.Split(new[] {"id"}, StringSplitOptions.None);
                 var splitone = tokens[1].Split('"');
                 var iv = session.Inventory.GetPerfect(pokemon.Item1);
-                if (iv > session.LogicSettings.UpgradePokemonIvMinimum)
+                if (iv >= session.LogicSettings.UpgradePokemonIvMinimum)
                 {
                     PokemonId.Add(ulong.Parse(splitone[2]));
                 }
@@ -90,7 +90,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var tokensSplit = tokens[1].Split(new[] {"cp"}, StringSplitOptions.None);
                 var tokenSplitAgain = tokensSplit[1].Split(' ');
                 var tokenSplitAgain2 = tokenSplitAgain[1].Split(',');
-                if (float.Parse(tokenSplitAgain2[0]) > session.LogicSettings.UpgradePokemonCpMinimum)
+                if (float.Parse(tokenSplitAgain2[0]) >= session.LogicSettings.UpgradePokemonCpMinimum)
                 {
                     PokemonIdcp.Add(ulong.Parse(splitone[2]));
                 }
