@@ -18,11 +18,14 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchPokemonTask
     {
+        private static readonly Random RandomDevice = new Random();
+
         public static async Task Execute(ISession session, dynamic encounter, MapPokemon pokemon,
             FortData currentFortData = null, ulong encounterId = 0)
         {
             CatchPokemonResponse caughtPokemonResponse;
             var attemptCounter = 1;
+
             do
             {
                 float probability = encounter?.CaptureProbability?.CaptureProbability_[0];
@@ -62,10 +65,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                     encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
                     encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.Longitude : currentFortData.Longitude);
 
+                var minAcc = session.LogicSettings.ThrowMinAccuracy;
+                var maxAcc = session.LogicSettings.ThrowMaxAccuracy;
                 caughtPokemonResponse =
                     await session.Client.Encounter.CatchPokemon(
                         encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.EncounterId : encounterId,
-                        encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.SpawnPointId : currentFortData.Id, pokeball);
+                        encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.SpawnPointId : currentFortData.Id, pokeball,
+                        RandomDevice.NextDouble() * (maxAcc - minAcc) + minAcc,
+                        RandomDevice.NextDouble() <= session.LogicSettings.ThrowSpinRatio ? 1 : 0);
 
                 var evt = new PokemonCaptureEvent {Status = caughtPokemonResponse.Status};
 
