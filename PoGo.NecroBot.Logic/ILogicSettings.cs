@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Collections.Generic;
@@ -21,8 +21,16 @@ namespace PoGo.NecroBot.Logic
             Longitude = longitude;
         }
 
+        public Location(double latitude, double longitude, string name)
+        {
+            Latitude = latitude;
+            Longitude = longitude;
+            Name = name;
+        }
+
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        public string Name { get; set; }
     }
 
     public class SnipeSettings

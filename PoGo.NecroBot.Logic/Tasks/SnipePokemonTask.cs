@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,6 +23,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public double iv { get; set; }
         public DateTime timeStamp { get; set; }
         public PokemonId id { get; set; }
+        public string NameLocation { get; set; }
         [JsonIgnore]
         public DateTime timeStampAdded { get; set; } = DateTime.Now;
     }
@@ -82,6 +83,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static List<PokemonLocation> locsVisited = new List<PokemonLocation>();
         private static List<SniperInfo> snipeLocations = new List<SniperInfo>();
         private static DateTime lastSnipe = DateTime.Now;
+        private static List<Location> nestLocations = new List<Location>();
 
         public static Task AsyncStart(Session session, CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -242,8 +244,62 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                 }
                 else
+                {
+                    if (!nestLocations.Any())
+                    {
+                        if (session.LogicSettings.PokemonToSnipe.Locations.Count() > 0)
+                        {
+                            nestLocations = session.LogicSettings.PokemonToSnipe.Locations;
+                        }
+                        else
+                        {
+                            try
+                            {
 
-                    foreach (var location in session.LogicSettings.PokemonToSnipe.Locations)
+                                var url = "http://pkmngotrading.com/wiki/Nests"; //todo make variable ?
+                                var client = new WebClient();
+                                using (var stream = client.OpenRead(url))
+                                using (var reader = new StreamReader(stream))
+                                {
+                                    string line;
+                                    while ((line = reader.ReadLine()) != null)
+                                    {
+                                        if (line.Contains("<th>"))
+                                        {
+                                            string latitudeIndicator = "Latitude smwtype_wpg";
+                                            string longitudeIndicator = "Longitude smwtype_wpg";
+
+                                            while (line.Contains(latitudeIndicator))
+                                            {
+                                                string name = line.Substring(line.IndexOf("title") + "title".Length + 2).Substring(0, line.Substring(line.IndexOf("title") + "title".Length + 2).IndexOf('>') - 1);
+                                                line = line.Substring(line.IndexOf(latitudeIndicator) + latitudeIndicator.Length + 2);
+                                                double latitudeCoord = Convert.ToDouble(line.Substring(0, line.IndexOf("</td>")));
+                                                if (line.Contains(longitudeIndicator))
+                                                {
+                                                    line = line.Substring(line.IndexOf(longitudeIndicator) + longitudeIndicator.Length + 2);
+                                                    double longitudeCoord = Convert.ToDouble(line.Substring(0, line.IndexOf("</td>")));
+                                                    nestLocations.Add(new Location(latitudeCoord, longitudeCoord, name));
+                                                }
+                                            }
+                                            session.EventDispatcher.Send(new NoticeEvent()
+                                            {
+                                                Message = string.Format("{0} locations from nest webpage found", nestLocations.Count())
+                                            });
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                session.EventDispatcher.Send(new NoticeEvent()
+                                {
+                                    Message = "Error reading nests on webpage"
+                                });
+                            }
+                        }
+                    }
+                    foreach (var location in nestLocations)
                     {
                         session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = location });
 
@@ -285,8 +341,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             });
                         }
                     }
+                }
             }
-
         }
 
         private static ScanResult SnipeScanForPokemon(Location location)
