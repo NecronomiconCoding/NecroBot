@@ -229,7 +229,7 @@ namespace PoGo.NecroBot.Logic
             }
             else
             {
-                Logging.Logger.Write($"Using ItemRecycleFilter for pokeballs, keeping {amountOfPokeballsToKeep}", Logging.LogLevel.Info, ConsoleColor.Yellow);
+                Logging.Logger.Write("Using ItemRecycleFilter for pokeballs", Logging.LogLevel.Info, ConsoleColor.Yellow);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Potions.Contains(s.Key)))
@@ -239,7 +239,7 @@ namespace PoGo.NecroBot.Logic
             }
             else
             {
-                Logging.Logger.Write($"Using ItemRecycleFilter for potions, keeping {amountOfPotionsToKeep}", Logging.LogLevel.Info, ConsoleColor.Yellow);
+                Logging.Logger.Write("Using ItemRecycleFilter for potions", Logging.LogLevel.Info, ConsoleColor.Yellow);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Revives.Contains(s.Key)))
@@ -249,7 +249,7 @@ namespace PoGo.NecroBot.Logic
             }
             else
             {
-                Logging.Logger.Write($"Using ItemRecycleFilter for revives, keeping {amountOfRevivesToKeep}", Logging.LogLevel.Info, ConsoleColor.Yellow);
+                Logging.Logger.Write("Using ItemRecycleFilter for revives", Logging.LogLevel.Info, ConsoleColor.Yellow);
             }
 
             var otherItemsToRecylce = myItems

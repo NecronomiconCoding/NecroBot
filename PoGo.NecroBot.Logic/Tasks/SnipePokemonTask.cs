@@ -135,6 +135,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentLatitude = session.Client.CurrentLatitude;
             var currentLongitude = session.Client.CurrentLongitude;
 
+            session.EventDispatcher.Send(new SnipeModeEvent() { Active = true });
+
             await
                 session.Client.Player.UpdatePlayerLocation(latitude,
                     longitude, session.Client.CurrentAltitude);
@@ -201,6 +203,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
             }
 
+            session.EventDispatcher.Send(new SnipeModeEvent() { Active = false });
+
             await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);
         }
 
@@ -222,7 +226,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var locationsToSnipe = snipeLocations == null ? new List<SniperInfo>() : snipeLocations.Where(q =>
                         (!session.LogicSettings.UseTransferIVForSnipe || (
                             (q.iv == 0 && !session.LogicSettings.SnipeIgnoreUnknownIV) ||
-                            (q.iv > session.Inventory.GetPokemonTransferFilter(q.id).KeepMinIvPercentage)
+                            (q.iv >= session.Inventory.GetPokemonTransferFilter(q.id).KeepMinIvPercentage)
                             )) &&
                         !locsVisited.Contains(new PokemonLocation(q.latitude, q.longitude))
                         && !(q.timeStamp != default(DateTime) &&
@@ -234,7 +238,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         lastSnipe = DateTime.Now;
                         foreach (var location in locationsToSnipe)
                         {
-                            session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = new Location(location.latitude, location.longitude) });
+                            session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = new Location(location.latitude, location.longitude), PokemonId = location.id, iv = location.iv });
 
                             await snipe(session, pokemonIds, location.latitude, location.longitude, cancellationToken);
                             locsVisited.Add(new PokemonLocation(location.latitude, location.longitude));
@@ -245,7 +249,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     foreach (var location in session.LogicSettings.PokemonToSnipe.Locations)
                     {
-                        session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = location });
+                        session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = location, PokemonId = PokemonId.Missingno });
 
                         var scanResult = SnipeScanForPokemon(location);
 

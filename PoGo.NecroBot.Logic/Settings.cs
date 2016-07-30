@@ -108,7 +108,7 @@ namespace PoGo.NecroBot.CLI
         public double DefaultLongitude = -73.968285;
         public int DelayBetweenPokemonCatch = 2000;
         public int DelayBetweenPlayerActions = 5000;
-        public float EvolveAboveIvValue = 90;
+        public float EvolveAboveIvValue = 95;
         public bool EvolveAllPokemonAboveIv = false;
         public bool EvolveAllPokemonWithEnoughCandy = true;
         public int UseLuckyEggsMinPokemonAmount = 30;
@@ -121,10 +121,11 @@ namespace PoGo.NecroBot.CLI
         public int MaxTravelDistanceInMeters = 1000;
         public int KeepMinCp = 1250;
         public int KeepMinDuplicatePokemon = 1;
-        public float KeepMinIvPercentage = 95;
+        public float KeepMinIvPercentage = 90;
         public bool KeepPokemonsThatCanEvolve = false;
         public bool PrioritizeIvOverCp = true;
-        public bool RenameAboveIv = true;
+        public bool RenamePokemon = false;
+        public bool RenameOnlyAboveIv = true;
         public string RenameTemplate = "{1}_{0}";
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
@@ -139,9 +140,9 @@ namespace PoGo.NecroBot.CLI
         public bool UseTransferIVForSnipe = false;
         public bool SnipeIgnoreUnknownIV = false;
         public int MinDelayBetweenSnipes = 20000;
-        public int TotalAmountOfPokebalsToKeep = 150;
-        public int TotalAmountOfPotionsToKeep = 100;
-        public int TotalAmountOfRevivesToKeep = 50;
+        public int TotalAmountOfPokebalsToKeep = 120;
+        public int TotalAmountOfPotionsToKeep = 80;
+        public int TotalAmountOfRevivesToKeep = 60;
 
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
@@ -170,7 +171,7 @@ namespace PoGo.NecroBot.CLI
 
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
-            PokemonId.Aerodactyl,
+            //criteria: from SS Tier to A Tier + Regional Exclusive
             PokemonId.Venusaur,
             PokemonId.Charizard,
             PokemonId.Blastoise,
@@ -178,6 +179,7 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Nidoking,
             PokemonId.Clefable,
             PokemonId.Vileplume,
+            //PokemonId.Golduck,
             PokemonId.Arcanine,
             PokemonId.Poliwrath,
             PokemonId.Machamp,
@@ -205,17 +207,20 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Dragonite,
             PokemonId.Mewtwo,
             PokemonId.Mew
-             //PokemonId.Golduck,
         };
 
         public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
         {
-            //12 candies
+            /*NOTE: keep all the end-of-line commas exept for the last one or an exception will be thrown!
+            criteria: 12 candies*/
             PokemonId.Caterpie,
             PokemonId.Weedle,
             PokemonId.Pidgey,
-            //25 candies
-            PokemonId.Rattata,
+            /*criteria: 25 candies*/
+            //PokemonId.Bulbasaur,
+            //PokemonId.Charmander,
+            //PokemonId.Squirtle,
+            PokemonId.Rattata
             //PokemonId.NidoranFemale,
             //PokemonId.NidoranMale,
             //PokemonId.Oddish,
@@ -226,22 +231,26 @@ namespace PoGo.NecroBot.CLI
             //PokemonId.Geodude,
             //PokemonId.Gastly,
             //PokemonId.Eevee,
-            //PokemonId.Dratini
-            //50 candies
-            PokemonId.Spearow,
-            PokemonId.Zubat,
-            PokemonId.Doduo,
-            PokemonId.Goldeen,
-            PokemonId.Paras,
-            PokemonId.Ekans,
-            PokemonId.Staryu,
-            PokemonId.Psyduck,
-            PokemonId.Krabby,
-            PokemonId.Venonat
+            //PokemonId.Dratini,
+            /*criteria: 50 candies commons*/
+            //PokemonId.Spearow,
+            //PokemonId.Ekans,
+            //PokemonId.Zubat,
+            //PokemonId.Paras,
+            //PokemonId.Venonat,
+            //PokemonId.Psyduck,
+            //PokemonId.Slowpoke,
+            //PokemonId.Doduo,
+            //PokemonId.Drowzee,
+            //PokemonId.Krabby,
+            //PokemonId.Horsea,
+            //PokemonId.Goldeen,
+            //PokemonId.Staryu
         };
 
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
         {
+            //criteria: most common
             PokemonId.Caterpie,
             PokemonId.Weedle,
             PokemonId.Pidgey,
@@ -251,19 +260,26 @@ namespace PoGo.NecroBot.CLI
             PokemonId.Doduo
         };
 
+        public List<PokemonId> PokemonToUseMasterball = new List<PokemonId>
+        {
+            PokemonId.Articuno,
+            PokemonId.Zapdos,
+            PokemonId.Moltres,
+            PokemonId.Mew,
+            PokemonId.Mewtwo
+        };
+
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
         {
-            {PokemonId.Pidgeotto, new TransferFilter(1500, 90, 1)},
-            {PokemonId.Fearow, new TransferFilter(1500, 90, 2)},
-            {PokemonId.Zubat, new TransferFilter(500, 90, 2)},
-            {PokemonId.Golbat, new TransferFilter(1500, 90, 2)},
-            {PokemonId.Pinsir, new TransferFilter(1500, 95, 2)},
-            {PokemonId.Golduck, new TransferFilter(1350, 95, 2)},
-            {PokemonId.Tentacruel, new TransferFilter(1350, 95, 2)},
-            {PokemonId.Starmie, new TransferFilter(1350, 95, 2)},
-            {PokemonId.Eevee, new TransferFilter(750, 92, 2)},
-            {PokemonId.Gyarados, new TransferFilter(1200, 90, 5)},
-            {PokemonId.Mew, new TransferFilter(0, 0, 10)}
+            //criteria: based on NY Central Park and Tokyo variety (will be constantly updated)
+            {PokemonId.Golduck, new TransferFilter(1800, 95, 1)},
+            {PokemonId.Krabby, new TransferFilter(1250, 95, 1)},
+            {PokemonId.Horsea, new TransferFilter(1250, 95, 1)},
+            {PokemonId.Staryu, new TransferFilter(1250, 95, 1)},
+            {PokemonId.Jynx, new TransferFilter(1250, 95, 1)},
+            {PokemonId.Pinsir, new TransferFilter(1700, 95, 1)},
+            {PokemonId.Magikarp, new TransferFilter(1250, 95, 1)},
+            {PokemonId.Eevee, new TransferFilter(1250, 95, 1)}
         };
 
         public SnipeSettings PokemonToSnipe = new SnipeSettings
@@ -380,7 +396,7 @@ namespace PoGo.NecroBot.CLI
                 settings.PokemonToSnipe = Default.PokemonToSnipe;
             }
 
-            if(settings.RenameTemplate == null)
+            if (settings.RenameTemplate == null)
             {
                 settings.RenameTemplate = Default.RenameTemplate;
             }
@@ -458,11 +474,14 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
+        // Never spawn at the same position.
+        private readonly Random _rand = new Random();
+
         double ISettings.DefaultLatitude
         {
             get
             {
-                return _settings.DefaultLatitude;
+                return _settings.DefaultLatitude + _rand.NextDouble() * (0.2 - 0.01) + 0.01;
             }
 
             set
@@ -475,7 +494,7 @@ namespace PoGo.NecroBot.CLI
         {
             get
             {
-                return _settings.DefaultLongitude;
+                return _settings.DefaultLongitude + _rand.NextDouble() * (0.2 - 0.01) + 0.01;
             }
 
             set
@@ -582,7 +601,8 @@ namespace PoGo.NecroBot.CLI
         public int UseLuckyEggsMinPokemonAmount => _settings.UseLuckyEggsMinPokemonAmount;
         public bool EvolveAllPokemonAboveIv => _settings.EvolveAllPokemonAboveIv;
         public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
-        public bool RenameAboveIv => _settings.RenameAboveIv;
+        public bool RenamePokemon => _settings.RenamePokemon;
+        public bool RenameOnlyAboveIv => _settings.RenameOnlyAboveIv;
         public string RenameTemplate => _settings.RenameTemplate;
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
         public bool DumpPokemonStats => _settings.DumpPokemonStats;
@@ -591,6 +611,7 @@ namespace PoGo.NecroBot.CLI
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
+        public ICollection<PokemonId> PokemonToUseMasterball => _settings.PokemonToUseMasterball;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
