@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Diagnostics;
@@ -13,6 +13,7 @@ using PoGo.NecroBot.Logic.Utils;
 using PoGo.NecroBot.Logic.Localization;
 using PoGo.NecroBot.Logic.Service;
 using PoGo.NecroBot.Logic.Tasks;
+using PoGo.NecroBot.Logic.Common;
 
 #endregion
 
@@ -20,6 +21,7 @@ namespace PoGo.NecroBot.CLI
 {
     internal class Program
     {
+        static int lastStartDustCount = 0;
         private static void Main(string[] args)
         {
             var subPath = "";
@@ -30,17 +32,18 @@ namespace PoGo.NecroBot.CLI
 
             var settings = GlobalSettings.Load(subPath);
 
+
             if (settings == null)
             {
-                Logger.Write("This is your first start and the bot will use the default config!", LogLevel.Warning);
-                Logger.Write("Continue? (y/n)", LogLevel.Warning);
-
-                if (!Console.ReadLine().ToUpper().Equals("Y"))
-                    return;
-                settings = GlobalSettings.Load(subPath);
+                Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
+                Logger.Write("We will now shutdown to let you configure the bot and then launch it again.", LogLevel.Warning);
+                Thread.Sleep(2000);
+                Environment.Exit(0);
+                return;
             }
-
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
+            //session.Client.ApiFailure = new ApiFailureStrategy(session);
+
 
             /*SimpleSession session = new SimpleSession
             {
@@ -60,12 +63,16 @@ namespace PoGo.NecroBot.CLI
 
             var machine = new StateMachine();
             var stats = new Statistics();
-            stats.DirtyEvent += () => Console.Title = stats.GetTemplatedStats(session.Translations.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
-                session.Translations.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
+            stats.DirtyEvent += () =>
+            {
+                Console.Title = stats.GetTemplatedStats(session.Translation.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
+session.Translation.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
+                lastStartDustCount = stats.TotalStardust;
+            };
 
             var aggregator = new StatisticsAggregator(stats);
             var listener = new ConsoleEventListener();
-            var websocket = new WebSocketInterface(settings.WebSocketPort, session.Translations);
+            var websocket = new WebSocketInterface(settings.WebSocketPort, session.Translation);
 
             session.EventDispatcher.EventReceived += (IEvent evt) => listener.Listen(evt, session);
             session.EventDispatcher.EventReceived += (IEvent evt) => aggregator.Listen(evt, session);
@@ -76,26 +83,7 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLoggerContext(session);
 
             session.Navigation.UpdatePositionEvent +=
-                (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
-
-            session.Client.Login.GoogleDeviceCodeEvent += (usercode, uri) =>
-            {
-                try
-                {
-                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.OpeningGoogleDevicePage), LogLevel.Warning);
-                    Thread.Sleep(5000);
-                    Process.Start(uri);
-                    var thread = new Thread(() => Clipboard.SetText(usercode)); //Copy device code
-                    thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
-                    thread.Start();
-                    thread.Join();
-                }
-                catch (Exception)
-                {
-                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard), LogLevel.Error);
-                    Logger.Write(session.Translations.GetTranslation(Logic.Common.TranslationString.CouldntCopyToClipboard2, uri, usercode), LogLevel.Error);
-                }
-            };
+                (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent { Latitude = lat, Longitude = lng });
 
             machine.AsyncStart(new VersionCheckState(), session);
 
@@ -108,6 +96,53 @@ namespace PoGo.NecroBot.CLI
                     var info = Console.ReadKey();
                     if (info.Key == ConsoleKey.Enter)
                         break;
+                    else if (info.Key == ConsoleKey.F1)
+                    {
+                        var pokemons = session.Inventory.GetPokemonsOrderByCP().Result;
+                        var i = 0;
+                        foreach (var item in pokemons)
+                        {
+                            i++;
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("Name: " + item.PokemonId + " - Cp: " + item.Cp + " - Hp: " + item.Stamina);
+                        }
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Total Count: " + i);
+                    }
+                    else if (info.Key == ConsoleKey.F2)
+                    {
+                        var items = session.Inventory.GetItems().Result;
+                        foreach (var item in items)
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("Name: " + (item.ItemId.ToString().Substring(0, 4).Equals("Item") ? item.ItemId.ToString().Substring(4) : item.ItemId.ToString()) + " - Count: " + item.Count);
+                        }
+                    }
+                    else if (info.Key == ConsoleKey.F3)
+                    {
+                        var playerStats = session.Inventory.GetPlayerStats().Result;
+                        foreach (var item in playerStats)
+                        {
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.WriteLine("Level: " + item.Level);
+                            Console.WriteLine("Exp: " + item.Experience + "/" + item.NextLevelXp);
+                            Console.WriteLine("Thrown PokeBall: " + item.PokeballsThrown);
+                            Console.WriteLine("Deployed Pokemon: " + item.PokemonDeployed);
+                            Console.WriteLine("Captured Pokemon: " + item.PokemonsCaptured);
+                            Console.WriteLine("Visited Pokestop: " + item.PokeStopVisits);
+                            Console.WriteLine("Encountered Pokemon: " + item.PokemonsEncountered);
+                            Console.WriteLine("Total Battle Attack: " + item.BattleAttackTotal);
+                            Console.WriteLine("Total Battle Attack Won: " + item.BattleAttackWon);
+                            Console.WriteLine("Total Battle Defend Won: " + item.BattleDefendedWon);
+                            Console.WriteLine("Total Battle Training: " + item.BattleTrainingTotal);
+                            Console.WriteLine("Total Battle Training Won: " + item.BattleTrainingWon);
+                            Console.WriteLine("Hatched Eggs: " + item.EggsHatched);
+                            Console.WriteLine("Evolutions: " + item.Evolutions);
+                            Console.WriteLine("Total Walked: " + item.KmWalked + " km");
+                            Console.WriteLine("Unique Pokedex Entries: " + item.UniquePokedexEntries);
+                            Console.WriteLine("Total Stardust: " + (lastStartDustCount != 0 ? lastStartDustCount.ToString() : "getting..."));
+                        }
+                    }
                 }
                 Thread.Sleep(5);
             }
