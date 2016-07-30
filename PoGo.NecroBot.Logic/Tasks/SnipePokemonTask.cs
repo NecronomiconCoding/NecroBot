@@ -33,8 +33,6 @@ namespace PoGo.NecroBot.Logic.Tasks
         public double expiration_time { get; set; }
         public double latitude { get; set; }
         public double longitude { get; set; }
-        public string uid { get; set; }
-        public bool is_alive { get; set; }
         public int pokemonId { get; set; }
 
         public PokemonLocation(double _latitude, double _longitude)
@@ -50,7 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public override string ToString()
         {
-            return latitude.ToString("0.0000") + ", " + latitude.ToString("0.0000");
+            return latitude.ToString("0.0000") + ", " + longitude.ToString("0.0000");
         }
 
         public bool Equals(PokemonLocation obj)
@@ -222,8 +220,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (session.LogicSettings.UseSnipeLocationServer)
                 {
                     var locationsToSnipe = snipeLocations == null ? new List<SniperInfo>() : snipeLocations.Where(q =>
-                        // when UseTransferIVForSnipe=true skip pokemons with unknown iv or if they don't match the TransferFilter/default MinIV
-                        (!session.LogicSettings.UseTransferIVForSnipe || (q.iv > 0 && q.iv < session.Inventory.GetPokemonTransferFilter(q.id).KeepMinIvPercentage)) &&
+                        (!session.LogicSettings.UseTransferIVForSnipe || (
+                            (q.iv == 0 && !session.LogicSettings.SnipeIgnoreUnknownIV) ||
+                            (q.iv > session.Inventory.GetPokemonTransferFilter(q.id).KeepMinIvPercentage)
+                            )) &&
                         !locsVisited.Contains(new PokemonLocation(q.latitude, q.longitude))
                         && !(q.timeStamp != default(DateTime) &&
                                 q.timeStamp > new DateTime(2016) && // make absolutely sure that the server sent a correct datetime
@@ -249,11 +249,15 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         var scanResult = SnipeScanForPokemon(location);
 
-                        var locationsToSnipe = scanResult.pokemon == null ? new List<PokemonLocation>() : scanResult.pokemon.Where(q =>
-                            pokemonIds.Contains((PokemonId)q.pokemonId)
-                            && !locsVisited.Contains(q)
-                            && q.expiration_time < currentTimestamp
-                            && q.is_alive).ToList();
+                        var locationsToSnipe = new List<PokemonLocation>();
+                        if (scanResult.pokemon != null)
+                        {
+                            var filteredPokemon = scanResult.pokemon.Where(q => pokemonIds.Contains((PokemonId)q.pokemonId));
+                            var notVisitedPokemon = filteredPokemon.Where(q => !locsVisited.Contains(q));
+                            var notExpiredPokemon = notVisitedPokemon.Where(q => q.expiration_time < currentTimestamp);
+
+                            locationsToSnipe.AddRange(notExpiredPokemon);
+                        }
 
                         if (locationsToSnipe.Any())
                         {
