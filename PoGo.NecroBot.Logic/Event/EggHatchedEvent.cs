@@ -6,5 +6,9 @@ namespace PoGo.NecroBot.Logic.Event
     {
         public ulong Id;
         public PokemonId PokemonId;
+        public double Level;
+        public int Cp;
+        public int MaxCp;
+        public double Perfection;
     }
 }

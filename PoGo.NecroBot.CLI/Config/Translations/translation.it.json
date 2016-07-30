@@ -374,11 +374,11 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Sniper] Scanning for Snipeable Pokemon at {0}..."
+      "Value": "[Sniper] Scansione Pokémon per lo snipe a {0}.."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] No Pokemon found to snipe!"
+      "Value": "[Sniper] Nessun Pokémon trovato per lo snipe!"
     }
   ]
 }

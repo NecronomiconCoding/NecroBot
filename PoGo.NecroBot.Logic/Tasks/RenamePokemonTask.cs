@@ -36,8 +36,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 string newNickname = String.Format(session.LogicSettings.RenameTemplate, pokemonName, perfection);
                 string oldNickname = (pokemon.Nickname.Length != 0) ? pokemon.Nickname : pokemon.PokemonId.ToString();
 
-                if (perfection >= session.LogicSettings.KeepMinIvPercentage && newNickname != oldNickname &&
-                    session.LogicSettings.RenameAboveIv)
+                // If "RenameOnlyAboveIv" = true only rename pokemon with IV over "KeepMinIvPercentage"
+                // Favorites will be skipped
+                if ((!session.LogicSettings.RenameOnlyAboveIv || perfection >= session.LogicSettings.KeepMinIvPercentage) && newNickname != oldNickname && pokemon.Favorite == 0)
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
 
