@@ -35,9 +35,42 @@ namespace PoGo.NecroBot.CLI.Forms
             this.args = args;
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void startNecroBot()
         {
+            globalSettings = GlobalSettings.Load(subPath); // Load settings again in case of changes.
 
+            var session = new Session(new ClientSettings(globalSettings), new LogicSettings(globalSettings));
+            session.Client.ApiFailure = new ApiFailureStrategy(session);
+
+            var machine = new StateMachine();
+            var stats = new Statistics();
+
+            stats.DirtyEvent += () =>  Invoke((MethodInvoker)delegate {
+                labelBotInfo.Text = stats.GetTemplatedStats(session.Translation.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
+              session.Translation.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
+            });
+
+            var aggregator = new StatisticsAggregator(stats);
+            var listener = new ConsoleEventListener();
+            var websocket = new WebSocketInterface(globalSettings.WebSocketPort, session);
+
+            session.EventDispatcher.EventReceived += (IEvent evt) => listener.Listen(evt, session);
+            session.EventDispatcher.EventReceived += (IEvent evt) => aggregator.Listen(evt, session);
+            session.EventDispatcher.EventReceived += (IEvent evt) => websocket.Listen(evt, session);
+
+            machine.SetFailureState(new LoginState());
+
+            Logger.SetLoggerContext(session);
+
+            session.Navigation.UpdatePositionEvent +=
+                (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent { Latitude = lat, Longitude = lng });
+
+            machine.AsyncStart(new VersionCheckState(), session);
+            if (session.LogicSettings.UseSnipeLocationServer)
+                SnipePokemonTask.AsyncStart(session);
+
+            //labelBotStatus.Text = "Bot Status: RUNNING";
+            //labelBotStatus.ForeColor = Color.ForestGreen;
         }
 
         private void FormNecroMain_Load(object sender, EventArgs e)
@@ -64,35 +97,7 @@ namespace PoGo.NecroBot.CLI.Forms
 
         private void startMenuItem_Click(object sender, EventArgs e)
         {
-            globalSettings = GlobalSettings.Load(subPath); // Load settings again in case of changes.
-
-            var session = new Session(new ClientSettings(globalSettings), new LogicSettings(globalSettings));
-            session.Client.ApiFailure = new ApiFailureStrategy(session);
-
-            var machine = new StateMachine();
-            var stats = new Statistics();
-         
-            stats.DirtyEvent += () => labelBotInfo.Text = stats.GetTemplatedStats(session.Translation.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
-             session.Translation.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
-
-            var aggregator = new StatisticsAggregator(stats);
-            var listener = new ConsoleEventListener();
-            var websocket = new WebSocketInterface(globalSettings.WebSocketPort, session);
-
-            session.EventDispatcher.EventReceived += (IEvent evt) => listener.Listen(evt, session);
-            session.EventDispatcher.EventReceived += (IEvent evt) => aggregator.Listen(evt, session);
-            session.EventDispatcher.EventReceived += (IEvent evt) => websocket.Listen(evt, session);
-
-            machine.SetFailureState(new LoginState());
-
-            Logger.SetLoggerContext(session);
-
-            session.Navigation.UpdatePositionEvent +=
-                (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent { Latitude = lat, Longitude = lng });
-
-            machine.AsyncStart(new VersionCheckState(), session);
-            if (session.LogicSettings.UseSnipeLocationServer)
-                SnipePokemonTask.AsyncStart(session);
+            startNecroBot();
         }
 
         private void settingsMenuItem_Click(object sender, EventArgs e)
@@ -105,5 +110,6 @@ namespace PoGo.NecroBot.CLI.Forms
         {
             Application.Exit();
         }
+
     }
 }
