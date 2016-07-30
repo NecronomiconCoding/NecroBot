@@ -224,7 +224,7 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "As coodernadas no ficheiro \"Coords.ini\" sãp inválidas, utilizando as coordenadas por defeito"
+      "Value": "As coodernadas no ficheiro \"Coords.ini\" são inválidas, utilizando as coordenadas por defeito"
     },
     {
       "Key": "gotUpToDateVersion",
