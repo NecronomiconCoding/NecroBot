@@ -135,6 +135,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentLatitude = session.Client.CurrentLatitude;
             var currentLongitude = session.Client.CurrentLongitude;
 
+            session.EventDispatcher.Send(new SnipeModeEvent() { Active = true });
+
             await
                 session.Client.Player.UpdatePlayerLocation(latitude,
                     longitude, session.Client.CurrentAltitude);
@@ -200,6 +202,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch, cancellationToken);
                 }
             }
+
+            session.EventDispatcher.Send(new SnipeModeEvent() { Active = false });
 
             await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);
         }
