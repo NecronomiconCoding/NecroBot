@@ -41,14 +41,16 @@ namespace PoGo.NecroBot.Logic.State
                                 File.Delete(coordsPath);
                                 session.EventDispatcher.Send(new WarnEvent
                                 {
-                                    Message = session.Translation.GetTranslation(TranslationString.RealisticTravelDetected)
+                                    Message =
+                                        session.Translation.GetTranslation(TranslationString.RealisticTravelDetected)
                                 });
                             }
                             else
                             {
                                 session.EventDispatcher.Send(new WarnEvent
                                 {
-                                    Message =session.Translation.GetTranslation(TranslationString.NotRealisticTravel, kmph)
+                                    Message =
+                                        session.Translation.GetTranslation(TranslationString.NotRealisticTravel, kmph)
                                 });
                             }
                         }
@@ -56,6 +58,12 @@ namespace PoGo.NecroBot.Logic.State
                     }
                 }
             }
+
+            session.EventDispatcher.Send(new UpdatePositionEvent
+            {
+                Latitude = session.Client.CurrentLatitude,
+                Longitude = session.Client.CurrentLongitude
+            });
 
             session.EventDispatcher.Send(new WarnEvent
             {

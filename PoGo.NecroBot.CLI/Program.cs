@@ -1,20 +1,15 @@
 ﻿#region using directives
 
 using System;
-using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Threading;
-using System.Windows.Forms;
 using PoGo.NecroBot.Logic;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
-using PoGo.NecroBot.Logic.Utils;
-using PoGo.NecroBot.Logic.Localization;
-using PoGo.NecroBot.Logic.Service;
 using PoGo.NecroBot.Logic.Tasks;
-using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -24,11 +19,11 @@ namespace PoGo.NecroBot.CLI
     {
         private static void Main(string[] args)
         {
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+            var culture = CultureInfo.CreateSpecificCulture("en-US");
 
             CultureInfo.DefaultThreadCurrentCulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;
-			
+
             var subPath = "";
             if (args.Length > 0)
                 subPath = args[0];
@@ -36,15 +31,15 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
             var settings = GlobalSettings.Load(subPath);
-           
+
 
             if (settings == null)
             {
                 Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
-                Logger.Write("We will now shutdown to let you configure the bot and then launch it again.", LogLevel.Warning);
+                Logger.Write("We will now shutdown to let you configure the bot and then launch it again.",
+                    LogLevel.Warning);
                 Thread.Sleep(2000);
                 Environment.Exit(0);
-                return;
             }
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
             session.Client.ApiFailure = new ApiFailureStrategy(session);
@@ -68,16 +63,20 @@ namespace PoGo.NecroBot.CLI
 
             var machine = new StateMachine();
             var stats = new Statistics();
-            stats.DirtyEvent += () => Console.Title = stats.GetTemplatedStats(session.Translation.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
-                session.Translation.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
+            stats.DirtyEvent +=
+                () =>
+                    Console.Title =
+                        stats.GetTemplatedStats(
+                            session.Translation.GetTranslation(TranslationString.StatsTemplateString),
+                            session.Translation.GetTranslation(TranslationString.StatsXpTemplateString));
 
             var aggregator = new StatisticsAggregator(stats);
             var listener = new ConsoleEventListener();
             var websocket = new WebSocketInterface(settings.WebSocketPort, session);
 
-            session.EventDispatcher.EventReceived += (IEvent evt) => listener.Listen(evt, session);
-            session.EventDispatcher.EventReceived += (IEvent evt) => aggregator.Listen(evt, session);
-            session.EventDispatcher.EventReceived += (IEvent evt) => websocket.Listen(evt, session);
+            session.EventDispatcher.EventReceived += evt => listener.Listen(evt, session);
+            session.EventDispatcher.EventReceived += evt => aggregator.Listen(evt, session);
+            session.EventDispatcher.EventReceived += evt => websocket.Listen(evt, session);
 
             machine.SetFailureState(new LoginState());
 
@@ -87,7 +86,7 @@ namespace PoGo.NecroBot.CLI
                 (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
 
             machine.AsyncStart(new VersionCheckState(), session);
-            if(session.LogicSettings.UseSnipeLocationServer)
+            if (session.LogicSettings.UseSnipeLocationServer)
                 SnipePokemonTask.AsyncStart(session);
 
             //Non-blocking key reader

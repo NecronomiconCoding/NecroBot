@@ -1,6 +1,5 @@
 ﻿#region using directives
 
-using System;
 using System.Collections.Generic;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
@@ -70,7 +69,14 @@ namespace PoGo.NecroBot.Logic
         bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
         bool UseEggIncubators { get; }
+        int UseGreatBallAboveCp { get; }
+        int UseUltraBallAboveCp { get; }
+        int UseMasterBallAboveCp { get; }
         int DelayBetweenPokemonCatch { get; }
+        bool AutomaticallyLevelUpPokemon { get; }
+        string LevelUpByCPorIv { get; }
+        float UpgradePokemonCpMinimum { get; }
+        float UpgradePokemonIvMinimum { get; }
         int DelayBetweenPlayerActions { get; }
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
@@ -83,7 +89,8 @@ namespace PoGo.NecroBot.Logic
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
         bool DumpPokemonStats { get; }
-        bool RenameAboveIv { get; }
+        bool RenamePokemon { get; }
+        bool RenameOnlyAboveIv { get; }
         string RenameTemplate { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }
@@ -92,11 +99,13 @@ namespace PoGo.NecroBot.Logic
         string GeneralConfigPath { get; }
         bool SnipeAtPokestops { get; }
         int MinPokeballsToSnipe { get; }
+        int MinPokeballsWhileSnipe { get; }
+        int MaxPokeballsPerPokemon { get; }
         string SnipeLocationServer { get; }
         int SnipeLocationServerPort { get; }
         bool UseSnipeLocationServer { get; }
-        bool UseTransferIVForSnipe { get; }
-        bool SnipeIgnoreUnknownIV { get; }
+        bool UseTransferIvForSnipe { get; }
+        bool SnipeIgnoreUnknownIv { get; }
         int MinDelayBetweenSnipes { get; }
         int TotalAmountOfPokebalsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
@@ -110,8 +119,10 @@ namespace PoGo.NecroBot.Logic
 
         ICollection<PokemonId> PokemonsNotToCatch { get; }
 
+        ICollection<PokemonId> PokemonToUseMasterball { get; }
+
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
-        SnipeSettings PokemonToSnipe { get; } 
+        SnipeSettings PokemonToSnipe { get; }
 
         bool StartupWelcomeDelay { get; }
     }
