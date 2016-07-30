@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Data;
@@ -206,8 +209,9 @@ namespace PoGo.NecroBot.Logic
                 .Where(p => p != null);
         }
 
-        public async Task<IEnumerable<ItemData>> GetItemsToRecycle(ISettings settings)
+        public async Task<IEnumerable<ItemData>> GetItemsToRecycle(ISession session)
         {
+            var settings = session.Settings;
             var itemsToRecylce = new List<ItemData>();
             var myItems = (await GetItems()).ToList();
 
@@ -220,25 +224,25 @@ namespace PoGo.NecroBot.Logic
             int currentAmountOfUltraballs = await GetItemAmountByType(ItemId.ItemUltraBall);
             int currentAmountOfMasterballs = await GetItemAmountByType(ItemId.ItemMasterBall);
 
-            Logging.Logger.Write($"[Current Inventory] Pokeballs: {currentAmountOfPokeballs} | Greatballs: {currentAmountOfGreatballs} | Ultraballs: {currentAmountOfUltraballs} | Masterballs: {currentAmountOfMasterballs}", Logging.LogLevel.Info, ConsoleColor.Yellow);
+            Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.CurrentPokeballInv, currentAmountOfPokeballs, currentAmountOfGreatballs, currentAmountOfUltraballs, currentAmountOfMasterballs));
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Pokeballs.Contains(s.Key)))
             {
-                Logging.Logger.Write($"Checking for balls to recycle, keeping {amountOfPokeballsToKeep}", Logging.LogLevel.Info, ConsoleColor.Yellow);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.CheckingForBallsToRecycle, amountOfPokeballsToKeep));
                 var pokeballsToRecycle = GetPokeballsToRecycle(settings, myItems);
                 itemsToRecylce.AddRange(pokeballsToRecycle);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Potions.Contains(s.Key)))
             {
-                Logging.Logger.Write($"Checking for potions to recycle, keeping {amountOfPotionsToKeep}", Logging.LogLevel.Info, ConsoleColor.Yellow);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.CheckingForPotionsToRecycle, amountOfPotionsToKeep));
                 var potionsToRecycle = GetPotionsToRecycle(settings, myItems);
                 itemsToRecylce.AddRange(potionsToRecycle);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Revives.Contains(s.Key)))
             {
-                Logging.Logger.Write($"Checking for revives to recycle, keeping {amountOfRevivesToKeep}", Logging.LogLevel.Info, ConsoleColor.Yellow);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.CheckingForRevivesToRecycle, amountOfRevivesToKeep));
                 var revivesToRecycle = GetRevivesToRecycle(settings, myItems);
                 itemsToRecylce.AddRange(revivesToRecycle);
             }
