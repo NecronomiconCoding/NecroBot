@@ -12,6 +12,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     internal class LevelUpPokemonTask
     {
+        private static readonly Random rand = new Random();
+
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             if (DisplayPokemonStatsTask.PokemonId.Count == 0 || DisplayPokemonStatsTask.PokemonIdcp.Count == 0)
@@ -20,7 +22,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("iv"))
             {
-                var rand = new Random();
                 var randomNumber = rand.Next(0, DisplayPokemonStatsTask.PokemonId.Count - 1);
 
                 var upgradeResult =
