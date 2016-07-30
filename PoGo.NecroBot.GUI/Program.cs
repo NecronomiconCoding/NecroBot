@@ -43,8 +43,8 @@ namespace PoGo.NecroBot.GUI
 
             var machine = new StateMachine();
             var stats = new Statistics();
-            stats.DirtyEvent += () => Console.Title = stats.GetTemplatedStats(session.Translation.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
-                session.Translation.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
+            stats.DirtyEvent += () => gui.UpdatePlayerDetails(stats.GetTemplatedStats(session.Translation.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
+                session.Translation.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString)));
 
             var aggregator = new StatisticsAggregator(stats);
             var listener = new FormEventListener();
