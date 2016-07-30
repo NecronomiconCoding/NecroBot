@@ -92,6 +92,7 @@ namespace PoGo.NecroBot.Logic
         string GeneralConfigPath { get; }
         bool SnipeAtPokestops { get; }
         int MinPokeballsToSnipe { get; }
+        int MaxPokeballsPerPokemon { get; }
         string SnipeLocationServer { get; }
         int SnipeLocationServerPort { get; }
         bool UseSnipeLocationServer { get; }

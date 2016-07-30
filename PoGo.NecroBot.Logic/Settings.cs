@@ -138,6 +138,7 @@ namespace PoGo.NecroBot.CLI
         public bool UseSnipeLocationServer = false;
         public bool UseTransferIVForSnipe = false;
         public bool SnipeIgnoreUnknownIV = false;
+        public int MaxPokeballsPerPokemon = 5;
         public int MinDelayBetweenSnipes = 20000;
         public int TotalAmountOfPokebalsToKeep = 150;
         public int TotalAmountOfPotionsToKeep = 100;
@@ -594,6 +595,7 @@ namespace PoGo.NecroBot.CLI
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
+        public int MaxPokeballsPerPokemon => _settings.MaxPokeballsPerPokemon;
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;
