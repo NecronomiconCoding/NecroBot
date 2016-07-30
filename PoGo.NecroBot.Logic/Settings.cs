@@ -14,7 +14,7 @@ using POGOProtos.Inventory.Item;
 
 #endregion
 
-namespace PoGo.NecroBot.CLI
+namespace PoGo.NecroBot.Logic
 {
     internal class AuthSettings
     {
