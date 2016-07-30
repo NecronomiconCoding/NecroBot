@@ -179,17 +179,24 @@ namespace PoGo.NecroBot.Logic.Tasks
             var ultraBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
             var masterBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
-            if (masterBallsCount > 0 &&
-                ((!session.LogicSettings.PokemonToUseMasterball.Any() &&
-                  (pokemonCp >= session.LogicSettings.UseMasterBallAboveCp || probability < session.LogicSettings.UseMasterBallBelowCatchProbability)) ||
-                 session.LogicSettings.PokemonToUseMasterball.Contains(pokemonId)))
+            if (masterBallsCount > 0 && (
+                    (!session.LogicSettings.PokemonToUseMasterball.Any() && (
+                        pokemonCp >= session.LogicSettings.UseMasterBallAboveCp ||
+                        probability < session.LogicSettings.UseMasterBallBelowCatchProbability)) ||
+                    session.LogicSettings.PokemonToUseMasterball.Contains(pokemonId)))
                 return ItemId.ItemMasterBall;
-            if (ultraBallsCount > 0 &&
-                  (pokemonCp >= session.LogicSettings.UseUltraBallAboveCp || probability < session.LogicSettings.UseUltraBallBelowCatchProbability))
+
+            if (ultraBallsCount > 0 && (
+                    pokemonCp >= session.LogicSettings.UseUltraBallAboveCp ||
+                    iV >= session.LogicSettings.UseUltraBallAboveIv ||
+                    probability < session.LogicSettings.UseUltraBallBelowCatchProbability))
                 return ItemId.ItemUltraBall;
-            if (greatBallsCount > 0 &&
-                  (pokemonCp >= session.LogicSettings.UseGreatBallAboveCp || probability < session.LogicSettings.UseGreatBallBelowCatchProbability))
-                return ItemId.ItemGreatBall;
+
+            if (greatBallsCount > 0 && (
+                    pokemonCp >= session.LogicSettings.UseGreatBallAboveCp ||
+                    iV >= session.LogicSettings.UseGreatBallAboveIv ||
+                    probability < session.LogicSettings.UseGreatBallBelowCatchProbability))
+                return ItemId.ItemUltraBall;
 
             if (pokeBallsCount > 0)
                 return ItemId.ItemPokeBall;
