@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Tasks;
 
@@ -9,10 +10,12 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class InfoState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
-            if (ctx.LogicSettings.AmountOfPokemonToDisplayOnStart > 0)
-                await DisplayPokemonStatsTask.Execute(ctx, machine);
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (session.LogicSettings.AmountOfPokemonToDisplayOnStart > 0)
+                await DisplayPokemonStatsTask.Execute(session);
 
             return new FarmState();
         }

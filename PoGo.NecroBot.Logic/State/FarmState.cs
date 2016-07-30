@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Tasks;
 
@@ -9,40 +10,38 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class FarmState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
-            if (ctx.LogicSettings.EvolveAllPokemonAboveIv || ctx.LogicSettings.EvolveAllPokemonWithEnoughCandy)
+            if (session.LogicSettings.EvolveAllPokemonAboveIv || session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
-                await EvolvePokemonTask.Execute(ctx, machine);
+                await EvolvePokemonTask.Execute(session, cancellationToken);
             }
 
-            if (ctx.LogicSettings.TransferDuplicatePokemon)
+            if (session.LogicSettings.TransferDuplicatePokemon)
             {
-                await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
             }
 
-            if (ctx.LogicSettings.RenameAboveIv)
+            if (session.LogicSettings.RenameAboveIv)
             {
-                await RenamePokemonTask.Execute(ctx, machine);
+                await RenamePokemonTask.Execute(session, cancellationToken);
             }
 
-            await RecycleItemsTask.Execute(ctx, machine);
+            await RecycleItemsTask.Execute(session, cancellationToken);
 
-            if (ctx.LogicSettings.UseEggIncubators)
+            if (session.LogicSettings.UseEggIncubators)
             {
-                await UseIncubatorsTask.Execute(ctx, machine);
+                await UseIncubatorsTask.Execute(session, cancellationToken);
             }
 
-            if (ctx.LogicSettings.UseGpxPathing)
+            if (session.LogicSettings.UseGpxPathing)
             {
-                await FarmPokestopsGpxTask.Execute(ctx, machine);
+                await FarmPokestopsGpxTask.Execute(session, cancellationToken);
             }
             else
             {
-                await FarmPokestopsTask.Execute(ctx, machine);
+                await FarmPokestopsTask.Execute(session, cancellationToken);
             }
-
-            await Task.Delay(10000);
 
             return this;
         }

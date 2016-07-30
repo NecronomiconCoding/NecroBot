@@ -1,7 +1,9 @@
 ﻿#region using directives
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
@@ -12,17 +14,25 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class LoginState : IState
     {
-        public async Task<IState> Execute(Context ctx, StateMachine machine)
+        public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
-            machine.Fire(new NoticeEvent {Message = $"Logging in using {ctx.Settings.AuthType}"});
+            cancellationToken.ThrowIfCancellationRequested();
+
+            session.EventDispatcher.Send(new NoticeEvent
+            {
+                Message = session.Translation.GetTranslation(TranslationString.LoggingIn, session.Settings.AuthType)
+            });
+
+            await CheckLogin(session, cancellationToken);
+
             try
             {
-                switch (ctx.Settings.AuthType)
+                switch (session.Settings.AuthType)
                 {
                     case AuthType.Ptc:
                         try
                         {
-                            await ctx.Client.Login.DoPtcLogin();
+                            await session.Client.Login.DoPtcLogin(session.Settings.PtcUsername, session.Settings.PtcPassword);
                         }
                         catch (AggregateException ae)
                         {
@@ -30,38 +40,86 @@ namespace PoGo.NecroBot.Logic.State
                         }
                         break;
                     case AuthType.Google:
-                        await ctx.Client.Login.DoGoogleLogin();
+                        await session.Client.Login.DoGoogleLogin(session.Settings.GoogleUsername, session.Settings.GooglePassword);
                         break;
                     default:
-                        machine.Fire(new ErrorEvent {Message = "wrong AuthType"});
+                        session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(Common.TranslationString.WrongAuthType) });
                         return null;
                 }
             }
             catch (PtcOfflineException)
             {
-                machine.Fire(new ErrorEvent
+                session.EventDispatcher.Send(new ErrorEvent
                 {
-                    Message = "PTC Servers are probably down OR your credentials are wrong. Try google"
+                    Message = session.Translation.GetTranslation(TranslationString.PtcOffline)
                 });
-                machine.Fire(new NoticeEvent {Message = "Trying again in 20 seconds..."});
+                session.EventDispatcher.Send(new NoticeEvent { Message = session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20) });
                 await Task.Delay(20000);
                 return this;
             }
             catch (AccountNotVerifiedException)
             {
-                machine.Fire(new ErrorEvent {Message = "Account not verified. - Exiting"});
-                return null;
+                session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.AccountNotVerified) });
+                await Task.Delay(2000);
+                Environment.Exit(0);
+            }
+            catch (GoogleException e)
+            {
+                if (e.Message.Contains("NeedsBrowser"))
+                {
+                    session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleTwoFactorAuth) });
+                    session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleTwoFactorAuthExplanation) });
+                    await Task.Delay(7000, cancellationToken);
+                    try
+                    {
+                        System.Diagnostics.Process.Start("https://security.google.com/settings/security/apppasswords");
+                    }
+                    catch (Exception)
+                    {
+                        session.EventDispatcher.Send(new ErrorEvent { Message = "https://security.google.com/settings/security/apppasswords" });
+                        throw;
+                    }
+                }
+                session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleError) });
+                await Task.Delay(2000, cancellationToken);
+                Environment.Exit(0);
             }
 
-            await DownloadProfile(ctx, machine);
+            await DownloadProfile(session);
 
             return new PositionCheckState();
         }
 
-        public async Task DownloadProfile(Context ctx, StateMachine machine)
+        private static async Task CheckLogin(ISession session, CancellationToken cancellationToken)
         {
-            ctx.Profile = await ctx.Client.Player.GetPlayer();
-            machine.Fire(new ProfileEvent {Profile = ctx.Profile});
+            cancellationToken.ThrowIfCancellationRequested();
+
+            if (session.Settings.AuthType == AuthType.Google &&
+                            (session.Settings.GoogleUsername == null || session.Settings.GooglePassword == null))
+            {
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.MissingCredentialsGoogle)
+                });
+                await Task.Delay(2000, cancellationToken);
+                Environment.Exit(0);
+            }
+            else if (session.Settings.AuthType == AuthType.Ptc &&
+                     (session.Settings.PtcUsername == null || session.Settings.PtcPassword == null))
+            {
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.MissingCredentialsPtc)
+                });
+                await Task.Delay(2000, cancellationToken);
+                Environment.Exit(0);
+            }
+        }
+
+        public async Task DownloadProfile(ISession session)
+        {
+            session.Profile = await session.Client.Player.GetPlayer();
+            session.EventDispatcher.Send(new ProfileEvent { Profile = session.Profile });
         }
     }
 }

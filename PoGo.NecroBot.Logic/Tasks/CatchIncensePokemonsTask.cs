@@ -1,5 +1,6 @@
 ﻿#region using directives
 
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
@@ -15,12 +16,13 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchIncensePokemonsTask
     {
-        public static async Task Execute(Context ctx, StateMachine machine)
+        public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            Logger.Write("Looking for incense pokemon..", LogLevel.Debug);
+            cancellationToken.ThrowIfCancellationRequested();
 
+            Logger.Write(session.Translation.GetTranslation(Common.TranslationString.LookingForIncensePokemon), LogLevel.Debug);
 
-            var incensePokemon = await ctx.Client.Map.GetIncensePokemons();
+            var incensePokemon = await session.Client.Map.GetIncensePokemons();
             if (incensePokemon.Result == GetIncensePokemonResponse.Types.Result.IncenseEncounterAvailable)
             {
                 var pokemon = new MapPokemon
@@ -29,47 +31,46 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ExpirationTimestampMs = incensePokemon.DisappearTimestampMs,
                     Latitude = incensePokemon.Latitude,
                     Longitude = incensePokemon.Longitude,
-                    PokemonId = (PokemonId) incensePokemon.PokemonTypeId,
+                    PokemonId = (PokemonId)incensePokemon.PokemonId,
                     SpawnPointId = incensePokemon.EncounterLocation
                 };
 
-                if (ctx.LogicSettings.UsePokemonToNotCatchFilter &&
-                    ctx.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
+                if (session.LogicSettings.UsePokemonToNotCatchFilter &&
+                    session.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))
                 {
-                    Logger.Write("Skipped " + pokemon.PokemonId);
+                    Logger.Write(session.Translation.GetTranslation(Common.TranslationString.PokemonIgnoreFilter, pokemon.PokemonId));
                 }
                 else
                 {
-                    var distance = LocationUtils.CalculateDistanceInMeters(ctx.Client.CurrentLatitude,
-                        ctx.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
-                    await Task.Delay(distance > 100 ? 15000 : 500);
+                    var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                        session.Client.CurrentLongitude, pokemon.Latitude, pokemon.Longitude);
+                    await Task.Delay(distance > 100 ? 3000 : 500);
 
                     var encounter =
                         await
-                            ctx.Client.Encounter.EncounterIncensePokemon((long) pokemon.EncounterId,
+                            session.Client.Encounter.EncounterIncensePokemon((long)pokemon.EncounterId,
                                 pokemon.SpawnPointId);
 
                     if (encounter.Result == IncenseEncounterResponse.Types.Result.IncenseEncounterSuccess)
                     {
-                        await CatchPokemonTask.Execute(ctx, machine, encounter, pokemon);
+                        await CatchPokemonTask.Execute(session, encounter, pokemon);
                     }
                     else if (encounter.Result == IncenseEncounterResponse.Types.Result.PokemonInventoryFull)
                     {
-                        if (ctx.LogicClient.Settings.TransferDuplicatePokemon)
+                        if (session.LogicSettings.TransferDuplicatePokemon)
                         {
-                            machine.Fire(new WarnEvent {Message = "PokemonInventory is Full.Transferring pokemons..."});
-                            await TransferDuplicatePokemonTask.Execute(ctx, machine);
+                            session.EventDispatcher.Send(new WarnEvent { Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferring) });
+                            await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                         }
                         else
-                            machine.Fire(new WarnEvent
+                            session.EventDispatcher.Send(new WarnEvent
                             {
-                                Message =
-                                    "PokemonInventory is Full.Please Transfer pokemon manually or set TransferDuplicatePokemon to true in settings..."
+                                Message = session.Translation.GetTranslation(Common.TranslationString.InvFullTransferManually)
                             });
                     }
                     else
                     {
-                        machine.Fire(new WarnEvent {Message = $"Encounter problem: {encounter.Result}"});
+                        session.EventDispatcher.Send(new WarnEvent { Message = session.Translation.GetTranslation(Common.TranslationString.EncounterProblem, encounter.Result) });
                     }
                 }
             }

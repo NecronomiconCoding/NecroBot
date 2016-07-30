@@ -22,7 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "VOus êtes en dehors de votre radius défini! Début de la marche ({0}m de distance) dans 5 secondes. Est-ce que le fichier Coords.ini est correct?"
+      "Value": "Vous êtes en dehors de votre rayon défini! Début de la marche ({0}m de distance) dans 5 secondes. Est-ce que le fichier Coords.ini est correct?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -79,6 +79,262 @@
     {
       "Key": "candies",
       "Value": "Bonbons: {0}"
+    },
+    {
+      "Key": "unhandledGPXData",
+      "Value": "Données non gérées dans le fichier GPX, ignorées.."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokémons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "parfait"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "Nom"
+    },
+    {
+      "Key": "displayHighestsCPHeader",
+      "Value": "Montrer Meilleurs PC"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Montrer Meilleurs Parfaits"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Montrer Meilleurs Level"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Assuez-vous que la Lat & la Lng de départ sont correctes. Fermez le programme si ça ne l'est pas! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Mise d'un oeuf dans l'incubateur: {0:0.00}km restant(s)"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Mise à jour du statut de l'incubation: {0:0.00}km restant(s)"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "L'oeuf en incubation a éclos: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "ERREUR"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "ATTENTION"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMING"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "REÇYCLAGE"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "POKEMON"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "TRANSFERT"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "EVOLUTION"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "BAIE"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "OEUF"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "UPDATE"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Connexion via {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "Les serveurs PTC semblent hors-ligne ou vos identifiants PTC sont incorrects. Merci d'essayer via Google."
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Nouvel essai dans {0} seconde(s)..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Le compte n'est pas vérifié! Arrêt..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Ouverture de la page Google Device. Merci de copier/coller le code avec CTRL+C/CTRL+V."
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Impossible de copier le code, merci de le faire manuellement."
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Merci de se rendre sur: {0} & d'entrer {1}."
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Chemin réaliste détecté, utilisation du fichier UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Chemin irréaliste détecté à {0}, utilisation des coordonnées sauvegardées dans le fichier Coords.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Les coordonnées définies dans le fichier \"Coords.ini\" sont invalides, utilisation des coordonées par défaut"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Parfait! Vous avez la dernière version: {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "L'auto-Updater est désactivé. Version actuelle: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Téléchargement et décompression de la mise à jour..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Le téléchargement de la mise à jour est terminé..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "La décompression de la mise à jour est terminée..."
+    },
+    {
+      "Key": "FinishedTransferringConfig",
+      "Value": "Fini le transfert de votre config à la nouvelle version..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "La mise à jour est terminée! Vous pouvez fermer la fenêtre."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Recherche d'encens..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Recherche de pokémon..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Recherche de leurre..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "{0} ignoré"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "L'inventaire de pokémon est plein. Transfert de quelque(s) pokémon(s)..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "L'inventaire de pokémon est plein. Merci de transférer manuellement ou de changer la valeur de \"TransferDuplicatePokemon\" en \"true\"..."
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Un problème est survenue: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Un problème est survenue avec le leurre {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Votre destination désirée {0}, {1} est plus éloigné que votre position actuelle {2}, {3}."
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "{0} ({1}) a été renommé de {2} à {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Pokémon-Ignore-Filter] - {0} ignoré comme défini dans les options!"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "Capture"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "Echec"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "Échappé"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "Fuite"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "Manqué"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "Capturé"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "Normal"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Leurre"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Encens"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Poussières: {5:0} | Transférés: {6:0} | Reçyclés: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (prochain level dans {1}h {2}m | {3}/{4} XP)"
+    },
+    {
+      "Key": "requireInputText",
+      "Value": "Le Programme va continuer après avoir appuyé sur un touche..."
     }
   ]
 }

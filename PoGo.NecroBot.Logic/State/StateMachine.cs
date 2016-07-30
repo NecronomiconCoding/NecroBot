@@ -1,30 +1,23 @@
 ﻿#region using directives
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
+using PokemonGo.RocketAPI.Exceptions;
 
 #endregion
 
 namespace PoGo.NecroBot.Logic.State
 {
-    public delegate void StateMachineEventDeletate(IEvent evt, Context ctx);
-
     public class StateMachine
     {
-        private Context _ctx;
+        private ISession _ctx;
         private IState _initialState;
 
-        public Task AsyncStart(IState initialState, Context ctx)
+        public Task AsyncStart(IState initialState, Session session, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return Task.Run(() => Start(initialState, ctx));
-        }
-
-        public event StateMachineEventDeletate EventListener;
-
-        public void Fire(IEvent evt)
-        {
-            EventListener?.Invoke(evt, _ctx);
+            return Task.Run(() => Start(initialState, session, cancellationToken), cancellationToken);
         }
 
         public void SetFailureState(IState state)
@@ -32,19 +25,28 @@ namespace PoGo.NecroBot.Logic.State
             _initialState = state;
         }
 
-        public async Task Start(IState initialState, Context ctx)
+        public async Task Start(IState initialState, Session session, CancellationToken cancellationToken = default(CancellationToken))
         {
-            _ctx = ctx;
+            _ctx = session;
             var state = initialState;
             do
             {
                 try
                 {
-                    state = await state.Execute(ctx, this);
+                    state = await state.Execute(session, cancellationToken);
+                }
+                catch (InvalidResponseException)
+                {
+                    session.EventDispatcher.Send(new ErrorEvent { Message = "Niantic Servers unstable, throttling API Calls." });
+                }
+                catch (OperationCanceledException)
+                {
+                    session.EventDispatcher.Send(new ErrorEvent { Message = "Current Operation was canceled." });
+                    state = _initialState;
                 }
                 catch (Exception ex)
                 {
-                    Fire(new ErrorEvent {Message = ex.ToString()});
+                    session.EventDispatcher.Send(new ErrorEvent { Message = ex.ToString() });
                     state = _initialState;
                 }
             } while (state != null);
