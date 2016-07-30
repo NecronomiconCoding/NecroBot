@@ -180,22 +180,15 @@ namespace PoGo.NecroBot.Logic.Tasks
             var masterBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
             if (masterBallsCount > 0 &&
-                ((pokemonCp >= session.LogicSettings.UseMasterBallAboveCp &&
-                  !session.LogicSettings.PokemonToUseMasterball.Any()) ||
+                ((!session.LogicSettings.PokemonToUseMasterball.Any() &&
+                  (pokemonCp >= session.LogicSettings.UseMasterBallAboveCp || probability < session.LogicSettings.UseMasterBallBelowCatchProbability)) ||
                  session.LogicSettings.PokemonToUseMasterball.Contains(pokemonId)))
                 return ItemId.ItemMasterBall;
-            if (ultraBallsCount > 0 && pokemonCp >= session.LogicSettings.UseUltraBallAboveCp)
+            if (ultraBallsCount > 0 &&
+                  (pokemonCp >= session.LogicSettings.UseUltraBallAboveCp || probability < session.LogicSettings.UseUltraBallBelowCatchProbability))
                 return ItemId.ItemUltraBall;
-            if (greatBallsCount > 0 && pokemonCp >= session.LogicSettings.UseGreatBallAboveCp)
-                return ItemId.ItemGreatBall;
-
-            if (ultraBallsCount > 0 && iV >= session.LogicSettings.KeepMinIvPercentage && probability < 0.40)
-                return ItemId.ItemUltraBall;
-
-            if (greatBallsCount > 0 && iV >= session.LogicSettings.KeepMinIvPercentage && probability < 0.50)
-                return ItemId.ItemGreatBall;
-
-            if (greatBallsCount > 0 && pokemonCp >= 300)
+            if (greatBallsCount > 0 &&
+                  (pokemonCp >= session.LogicSettings.UseGreatBallAboveCp || probability < session.LogicSettings.UseGreatBallBelowCatchProbability))
                 return ItemId.ItemGreatBall;
 
             if (pokeBallsCount > 0)
