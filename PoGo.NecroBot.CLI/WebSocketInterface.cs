@@ -24,6 +24,7 @@ namespace PoGo.NecroBot.CLI
         {
             _session = session;
             var translations = session.Translation;
+
             _server = new WebSocketServer();
             var setupComplete = _server.Setup(new ServerConfig
             {
@@ -78,7 +79,15 @@ namespace PoGo.NecroBot.CLI
 
         private async void HandleMessage(WebSocketSession session, string message)
         {
-            if (message == "PokemonList") await Logic.Tasks.PokemonListTask.Execute(_session);
+            switch(message)
+            {
+                case "PokemonList":
+                    await Logic.Tasks.PokemonListTask.Execute(_session);
+                    break;
+                case "EggsList":
+                    await Logic.Tasks.EggsListTask.Execute(_session);
+                    break;
+            }
         }
 
         private void HandleSession(WebSocketSession session)
