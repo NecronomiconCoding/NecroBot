@@ -25,6 +25,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             var attemptCounter = 1;
             do
             {
+                if (session.LogicSettings.MaxPokeballsPerPokemon > 0 && 
+                    attemptCounter > session.LogicSettings.MaxPokeballsPerPokemon)
+                    break;
+
                 float probability = encounter?.CaptureProbability?.CaptureProbability_[0];
 
                 var pokeball = await GetBestBall(session, encounter, probability);
