@@ -5,7 +5,7 @@ using PoGo.NecroBot.Logic.Tasks;
 
 namespace PoGo.NecroBot.Logic.Utils
 {
-    internal class EggWalker
+    public class EggWalker
     {
         private readonly double _checkInterval;
         private readonly ISession _session;

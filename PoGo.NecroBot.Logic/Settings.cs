@@ -117,6 +117,14 @@ namespace PoGo.NecroBot.CLI
         public bool DumpPokemonStats = false;
         public string GpxFile = "GPXPath.GPX";
         public bool UseGpxPathing = false;
+        public GPXSettings GpxSettings = new GPXSettings
+        {
+            OutputTrackPathData = false,
+            OutputTrackPointPathData = false,
+            InfiniteLoopOver = true,
+            OutputLoopData = false,
+            LoopNumber = 0        
+        };        
         public double WalkingSpeedInKilometerPerHour = 15.0;
         public int MaxTravelDistanceInMeters = 1000;
         public int KeepMinCp = 1250;
@@ -577,6 +585,7 @@ namespace PoGo.NecroBot.CLI
         public bool PrioritizeIvOverCp => _settings.PrioritizeIvOverCp;
         public int MaxTravelDistanceInMeters => _settings.MaxTravelDistanceInMeters;
         public string GpxFile => _settings.GpxFile;
+        public GPXSettings GpxSettings => _settings.GpxSettings;
         public bool UseGpxPathing => _settings.UseGpxPathing;
         public bool UseLuckyEggsWhileEvolving => _settings.UseLuckyEggsWhileEvolving;
         public int UseLuckyEggsMinPokemonAmount => _settings.UseLuckyEggsMinPokemonAmount;
