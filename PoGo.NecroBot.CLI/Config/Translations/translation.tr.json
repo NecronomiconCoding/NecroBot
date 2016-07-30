@@ -242,7 +242,7 @@
     },
     {
       "Key": "FinishedTransferringConfig",
-      "Value": "Yeni sürüme yapılandırma aktarılması bitirdi..."
+      "Value": "Var olan ayar dosyası, yeni sürüme aktarıldı."
     },
     {
       "Key": "updateFinished",
@@ -370,11 +370,23 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Keskin Nişancı] {0} da nişan alınacak pokemon aranıyor..."
+      "Value": "[Keskin Nişancı] {0} noktasında nişan alınacak pokemon aranıyor..."
+    },
+    {
+      "Key": "snipeScanEx",
+      "Value": "[Keskin Nişancı] {1} mükemmellikte bir {0} pokemonuna, {2} noktasında nişan alındı..."
     },
     {
       "Key": "noPokemonToSnipe",
       "Value": "[Keskin Nişancı] Nişan alınacak pokemon bulunamadı."
+    },
+    {
+      "Key": "displayHighestMOVE1Header",
+      "Value": "Vuruş1"
+    },
+    {
+      "Key": "displayHighestMOVE2Header",
+      "Value": "Vuruş2"
     }
   ]
 }
