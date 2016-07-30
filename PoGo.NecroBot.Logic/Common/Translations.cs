@@ -116,7 +116,6 @@ namespace PoGo.NecroBot.Logic.Common
         MissingCredentialsPtc,
         SnipeScan,
         NoPokemonToSnipe,
-        NotEnoughPokeballsToSnipe,
     }
 
     public class Translation : ITranslation
@@ -225,7 +224,6 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsPtc, "You need to fill out PtcUsername and PtcPassword in auth.json!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScan, "[Sniper] Scanning for Snipeable Pokemon at {0}..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.NoPokemonToSnipe, "[Sniper] No Pokemon found to snipe!"),
-            new KeyValuePair<TranslationString, string>(Common.TranslationString.NotEnoughPokeballsToSnipe, "Not enough Pokeballs to start sniping! ({0}/{1})"),
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)
