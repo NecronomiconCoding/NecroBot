@@ -164,7 +164,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         await EvolvePokemonTask.Execute(session, cancellationToken);
                     }
-                    if (session.LogicSettings.LevelUpPokemonFromIV)
+                    if (session.LogicSettings.AutomaticallyLevelUpPokemon)
                     {
                         await LevelUpPokemon.Execute(session, cancellationToken);
                     }

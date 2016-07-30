@@ -71,7 +71,7 @@ namespace PoGo.NecroBot.Logic
         bool TransferDuplicatePokemon { get; }
         bool UseEggIncubators { get; }
         int DelayBetweenPokemonCatch { get; }
-        bool LevelUpPokemonFromIV { get; }
+        bool AutomaticallyLevelUpPokemon { get; }
         string LevelUpByCPorIV { get; }
         float UpgradePokemonCPMinimum { get; }
         float UpgradePokemonIVMinimum { get; }

@@ -24,7 +24,7 @@ namespace PoGo.NecroBot.Logic.Service
             {
                 EvolvePokemonTask.Execute(_session, cancellationToken).Wait();
             }
-            if (_session.LogicSettings.LevelUpPokemonFromIV)
+            if (_session.LogicSettings.AutomaticallyLevelUpPokemon)
             {
                 LevelUpPokemon.Execute(_session, cancellationToken).Wait();
             }

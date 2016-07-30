@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using POGOProtos.Enums;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -16,6 +17,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 Random rand = new Random();
                 int RandomNumber = rand.Next(1, DisplayPokemonStatsTask.PokemonID.Count);
+                
                 var UpgradeResult = await session.Inventory.UpgradePokemon(DisplayPokemonStatsTask.PokemonID[RandomNumber]);
                 if (UpgradeResult.Result.ToString().ToLower().Contains("success"))
                 {
