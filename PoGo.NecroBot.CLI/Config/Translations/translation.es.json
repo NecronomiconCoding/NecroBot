@@ -1,4 +1,4 @@
-﻿{
+{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,21 +22,19 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "¡Estás fuera del radio definido! Andando a la posición inicial (a {0}m) en 5 segundos. ¿Es correcto tu archivo Coords.ini?"
+      "Value": "¡Estás fuera del radio definido! Andando a la posición inicial (a {0}m) en 5 segundos. ¿Es correcto tu archivo Coords.ini?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value":
-        "No se encontraron pokeparadas disponibles en tu área. ¿Has configurado una distancia máxima demasiado pequeña?"
+      "Value": "No se encontraron pokeparadas disponibles en tu área. ¿Has configurado una distancia máxima demasiado pequeña?"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "PX: {0}, Gemas: {1}, Objetos: {2}"
+      "Value": "Name: {0} PX: {1}, Gemas: {2}, Objetos: {3}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "El avance falló, posible SoftBan. Eliminar SoftBan en: {0}/{1}"
+      "Value": "Name: {0} INFO: El avance falló, posible SoftBan. Eliminar SoftBan en: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -68,8 +66,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value":
-        "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -121,8 +118,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value":
-        "Asegúrese de que la Latitud y Longitud son las correctas. Salga del Programa si no es así! Lat: {0} Lng: {1}"
+      "Value": "Asegúrese de que la Latitud y Longitud son las correctas. Salga del Programa si no es así! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -134,7 +130,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Huevo incubado ha eclosionado: {0}"
+      "Value": "Huevo incubado ha eclosionado: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -273,13 +269,44 @@
       "Value": "Omitido {0}"
     },
     {
+      "Key": "zeroPokeballInv",
+      "Value": "No tienes pokeballs en el inventario, no podemos atrapar más Pokemon por ahora :("
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "[Inventario actual] Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
+    },
+    {
+      "Key": "checkingForBallsToRecycle",
+      "Value": "Comprobación de las bolas a reciclar, manteniendo {0}"
+    },
+    {
+      "Key": "checkingForPotionsToRecycle",
+      "Value": "Comprobación de las pociones a reciclar, manteniendo {0}"
+    },
+    {
+      "Key": "checkingForRevivesToRecycle",
+      "Value": "Comprobación de los revivir a reciclar, manteniendo {0}"
+    },
+    {
+      "Key": "pokeballsToKeepIncorrect",
+      "Value": "TotalAmountOfPokebalsToKeep está configurado incorrectamente. El número es más pequeño que 1."
+    },
+    {
+      "Key": "potionsToKeepIncorrect",
+      "Value": "TotalAmountOfPotionsToKeep está configurado incorrectamente. El número es más pequeño que 1."
+    },
+    {
+      "Key": "revivesToKeepIncorrect",
+      "Value": "TotalAmountOfRevivesToKeep está configurado incorrectamente. El número es más pequeño que 1."
+    },
+    {
       "Key": "invFullTransferring",
       "Value": "El inventario de pokemons está lleno. Transferir pokemons..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "El inventario de pokemons está lleno. Por favor transfiera los pokemons manualmente o active (true) TransferDuplicatePokemon en el archivo de opciones..."
+      "Value": "El inventario de pokemons está lleno. Por favor transfiera los pokemons manualmente o active (true) TransferDuplicatePokemon en el archivo de opciones..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -347,8 +374,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value":
-        "{0} - Activo {1} - Nivel: {2} | EXP/H: {3:0} | P/H: {4:0} | P.Estelar: {5:0} | Transferido: {6:0} | Reciclado: {7:0}"
+      "Value": "{0} - Activo {1} - Nivel: {2} | EXP/H: {3:n0} | P/H: {4:n0} | P.Estelar: {5:n0} | Transferido: {6:n0} | Reciclado: {7:n0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -360,13 +386,11 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value":
-        "Como tiene habilitado Google autenticación de 2 factores, tendrá que insertar una contraseña específica de la APP en el auth.json"
+      "Value": "Como tiene habilitado Google autenticación de 2 factores, tendrá que insertar una contraseña específica de la APP en el auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value":
-        "Abriendo Google App-Passwords. Por favor, cree una nueva contraseña en la APP (utilizar en otro dispositivo)"
+      "Value": "Abriendo Google App-Passwords. Por favor, cree una nueva contraseña en la APP (utilizar en otro dispositivo)"
     },
     {
       "Key": "googleError",
@@ -397,11 +421,11 @@
       "Value": "No hay suficientes Pokeballs para iniciar Sniping! ({0}/{1})"
     },
     {
-      "Key": "displayHighestMOVE1Header",
+      "Key": "displayHighestMove1Header",
       "Value": "MOVIMIENTO1"
     },
     {
-      "Key": "displayHighestMOVE2Header",
+      "Key": "displayHighestMove2Header",
       "Value": "MOVIMIENTO2"
     }
   ]
