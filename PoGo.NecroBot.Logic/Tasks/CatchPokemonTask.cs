@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 float probability = encounter?.CaptureProbability?.CaptureProbability_[0];
 
-                var pokeball = await GetBestBall(session, encounter, probability);
+                var pokeball = await GetBestBall(session, encounter, probability, attemptCounter);
                 if (pokeball == ItemId.ItemUnknown)
                 {
                     session.EventDispatcher.Send(new NoPokeballEvent
@@ -160,7 +160,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
-        private static async Task<ItemId> GetBestBall(ISession session, dynamic encounter, float probability)
+        private static async Task<ItemId> GetBestBall(ISession session, dynamic encounter, float probability, int attempts)
         {
             var pokemonCp = encounter is EncounterResponse
                 ? encounter.WildPokemon?.PokemonData?.Cp
@@ -179,33 +179,40 @@ namespace PoGo.NecroBot.Logic.Tasks
             var ultraBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
             var masterBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
+            if ((session.LogicSettings.PokemonsToPokeball != null && session.LogicSettings.PokemonsToPokeball.Count > 0)
+                && session.LogicSettings.PokemonsToPokeball.Contains(pokemonId))
+            {
+                if (pokeBallsCount > 0)
+                    return ItemId.ItemPokeBall;
+                return ItemId.ItemUnknown;
+            }
+            else
+            {
+                // Always attempt to use atleast one pokebal
+                if (attempts <= 1 && pokeBallsCount > 0)
+                    return ItemId.ItemPokeBall;
+            }
+
             if (masterBallsCount > 0 &&
                 ((pokemonCp >= session.LogicSettings.UseMasterBallAboveCp &&
                   !session.LogicSettings.PokemonToUseMasterball.Any()) ||
                  session.LogicSettings.PokemonToUseMasterball.Contains(pokemonId)))
                 return ItemId.ItemMasterBall;
+
             if (ultraBallsCount > 0 && pokemonCp >= session.LogicSettings.UseUltraBallAboveCp)
                 return ItemId.ItemUltraBall;
+
             if (greatBallsCount > 0 && pokemonCp >= session.LogicSettings.UseGreatBallAboveCp)
                 return ItemId.ItemGreatBall;
 
-            if (ultraBallsCount > 0 && iV >= session.LogicSettings.KeepMinIvPercentage && probability < 0.40)
+            if (ultraBallsCount > 0 && (iV >= session.LogicSettings.KeepMinIvPercentage || pokemonCp >= session.LogicSettings.KeepMinCp))
                 return ItemId.ItemUltraBall;
 
-            if (greatBallsCount > 0 && iV >= session.LogicSettings.KeepMinIvPercentage && probability < 0.50)
-                return ItemId.ItemGreatBall;
-
-            if (greatBallsCount > 0 && pokemonCp >= 300)
+            if (greatBallsCount > 0 && (iV >= session.LogicSettings.KeepMinIvPercentage || pokemonCp >= session.LogicSettings.KeepMinCp))
                 return ItemId.ItemGreatBall;
 
             if (pokeBallsCount > 0)
                 return ItemId.ItemPokeBall;
-            if (greatBallsCount > 0)
-                return ItemId.ItemGreatBall;
-            if (ultraBallsCount > 0)
-                return ItemId.ItemUltraBall;
-            if (masterBallsCount > 0 && !session.LogicSettings.PokemonToUseMasterball.Any())
-                return ItemId.ItemMasterBall;
 
             return ItemId.ItemUnknown;
         }

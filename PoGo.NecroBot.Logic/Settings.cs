@@ -196,6 +196,15 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Mew
         };
 
+        public List<PokemonId> PokemonsToPokeball = new List<PokemonId>
+        {
+            PokemonId.Rattata,
+            PokemonId.Zubat,
+            PokemonId.Pidgey,
+            PokemonId.Spearow,
+            PokemonId.Krabby
+        };
+
         public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
         {
             /*NOTE: keep all the end-of-line commas exept for the last one or an exception will be thrown!
@@ -611,6 +620,7 @@ namespace PoGo.NecroBot.Logic
         public bool DumpPokemonStats => _settings.DumpPokemonStats;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
+        public ICollection<PokemonId> PokemonsToPokeball => _settings.PokemonsToPokeball;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;

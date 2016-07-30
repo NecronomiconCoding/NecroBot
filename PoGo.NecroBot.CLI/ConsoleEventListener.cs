@@ -109,7 +109,7 @@ namespace PoGo.NecroBot.CLI
         {
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortTargeted, evt.Name,
-                    Math.Round(evt.Distance), evt.Lat, evt.Lng),
+                    Math.Round(evt.Distance), evt.Latitude, evt.Longitude),
                 LogLevel.Info, ConsoleColor.DarkRed);
         }
 
