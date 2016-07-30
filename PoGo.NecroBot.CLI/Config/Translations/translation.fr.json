@@ -30,7 +30,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "{0} | {1}XP, Gems: {2}, Objets: {3}"
+      "Value": "Nom : {0} | {1}XP, Gems : {2}, Objets : {3}"
     },
     {
       "Key": "eventFortFailed",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- {1}/{2}%   [Meilleur {3}/{4}%] ({5} Bonbons)"
+      "Value": "{0}\t- PC: {1} - IV: {2}%   [Maximum PC:{3} IV: {4}%] ({5} Bonbons)"
     },
     {
       "Key": "eventItemRecycled",
@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl {3} PC({4}/{5}) {6}%IV | {7}% Chance | {8}m dist | {10} {9} restant | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl {3} [({4}/{5})/{6}%] {7}% Chance | {8}m dist | {10} {9} restant | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -199,10 +199,6 @@
     {
       "Key": "accountNotVerified",
       "Value": "Le compte n'est pas vérifié ! Arrêt en cours..."
-    },
-    {
-      "Key": "openingGoogleDevicePage",
-      "Value": "Ouverture de la page Google Device. Merci de copier/coller le code avec CTRL+C/CTRL+V"
     },
     {
       "Key": "realisticTravelDetected",
@@ -370,7 +366,7 @@
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (Prochain level dans {1}h {2}m | {3}/{4} XP)"
+      "Value": "{0} (Prochain niveau dans {1}h {2}m | {3}/{4} XP)"
     },
     {
       "Key": "requireInputText",
