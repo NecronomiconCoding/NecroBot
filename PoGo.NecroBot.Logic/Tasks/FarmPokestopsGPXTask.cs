@@ -110,7 +110,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             await RecycleItemsTask.Execute(session, cancellationToken);
 
-                            if (session.LogicSettings.SnipeAtPokestops)
+                            if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
                             {
                                 await SnipePokemonTask.Execute(session, cancellationToken);
                             }

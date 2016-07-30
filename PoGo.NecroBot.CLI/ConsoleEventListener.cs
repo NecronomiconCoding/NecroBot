@@ -182,7 +182,10 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(SnipeScanEvent evt, ISession session)
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScan, $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
+            if(evt.PokemonId == POGOProtos.Enums.PokemonId.Missingno)
+                Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScan, $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
+            else
+                Logger.Write(session.Translation.GetTranslation(TranslationString.SnipeScanEx, evt.PokemonId, (evt.iv > 0) ? evt.iv.ToString() : "unknown", $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
         }
 
         public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession session)

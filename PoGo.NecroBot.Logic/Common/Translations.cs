@@ -115,6 +115,7 @@ namespace PoGo.NecroBot.Logic.Common
         MissingCredentialsGoogle,
         MissingCredentialsPtc,
         SnipeScan,
+        SnipeScanEx,
         NoPokemonToSnipe,
         DisplayHighestMOVE1Header,
         DisplayHighestMOVE2Header
@@ -225,6 +226,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsGoogle, "You need to fill out GoogleUsername and GooglePassword in auth.json!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsPtc, "You need to fill out PtcUsername and PtcPassword in auth.json!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScan, "[Sniper] Scanning for Snipeable Pokemon at {0}..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScanEx, "[Sniper] Sniping a {0} with {1} IV at {2}..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.NoPokemonToSnipe, "[Sniper] No Pokemon found to snipe!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestMOVE1Header, "MOVE1"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestMOVE2Header, "MOVE2"),
