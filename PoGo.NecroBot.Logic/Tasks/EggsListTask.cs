@@ -1,11 +1,8 @@
 ﻿#region using directives
 
-using System;
 using System.Linq;
 using System.Threading.Tasks;
-using PoGo.NecroBot.Logic.DataDumper;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
 

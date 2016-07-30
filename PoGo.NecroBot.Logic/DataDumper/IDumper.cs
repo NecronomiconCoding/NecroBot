@@ -1,10 +1,4 @@
-﻿#region using directives
-
-using System;
-
-#endregion
-
-namespace PoGo.NecroBot.Logic.DataDumper
+﻿namespace PoGo.NecroBot.Logic.DataDumper
 {
     public interface IDumper
     {

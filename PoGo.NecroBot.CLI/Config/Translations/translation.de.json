@@ -16,35 +16,35 @@
       "Key": "masterPokeball",
       "Value": "Meisterball"
     },
-    	{
+    {
       "Key": "CatchStatusSuccess",
       "Value": "Gefangen"
     },
-	{
+    {
       "Key": "CatchStatusError",
       "Value": "Fehler beim Fangen"
     },
-	{
+    {
       "Key": "CatchStatusEscape",
       "Value": "Entkommen"
     },
-	{
+    {
       "Key": "CatchStatusFlee",
       "Value": "Geflüchtet"
     },
-{
+    {
       "Key": "CatchStatusMissed",
       "Value": "Verfehlt"
     },
-	 {
+    {
       "Key": "CatchTypeIncense",
       "Value": "Rauch"
     },
-	 {
+    {
       "Key": "CatchTypeLure",
       "Value": "Lockmodul"
     },
-	 {
+    {
       "Key": "CatchTypeNormal",
       "Value": "Wild"
     },
@@ -54,7 +54,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
+      "Value":
+        "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -98,7 +99,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -294,7 +296,8 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "PokémonInventar ist voll. Bitte verschicke Pokémon manuell oder setze \"TransferDuplicatePokemon\" in den Einstellungen auf \"true\"..."
+      "Value":
+        "PokémonInventar ist voll. Bitte verschicke Pokémon manuell oder setze \"TransferDuplicatePokemon\" in den Einstellungen auf \"true\"..."
     },
     {
       "Key": "encounterProblem",

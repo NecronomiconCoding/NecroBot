@@ -1,7 +1,11 @@
-﻿using System.Threading;
+﻿#region using directives
+
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Tasks;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Utils
 {

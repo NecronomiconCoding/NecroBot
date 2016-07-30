@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -190,7 +190,8 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "Les serveurs PTC semblent hors-ligne ou vos identifiants PTC sont incorrects. Merci d'essayer via Google."
+      "Value":
+        "Les serveurs PTC semblent hors-ligne ou vos identifiants PTC sont incorrects. Merci d'essayer via Google."
     },
     {
       "Key": "tryingAgainIn",
@@ -222,7 +223,8 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Les coordonnées définies dans le fichier \"Coords.ini\" sont invalides, utilisation des coordonnées par défaut."
+      "Value":
+        "Les coordonnées définies dans le fichier \"Coords.ini\" sont invalides, utilisation des coordonnées par défaut."
     },
     {
       "Key": "gotUpToDateVersion",
@@ -274,7 +276,8 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "L'inventaire de pokémon est plein. Merci de transférer manuellement ou de changer la valeur de \"TransferDuplicatePokemon\" en \"true\"..."
+      "Value":
+        "L'inventaire de pokémon est plein. Merci de transférer manuellement ou de changer la valeur de \"TransferDuplicatePokemon\" en \"true\"..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -342,7 +345,8 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Poussières: {5:0} | Transférés: {6:0} | Reçyclés: {7:0}"
+      "Value":
+        "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Poussières: {5:0} | Transférés: {6:0} | Reçyclés: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -354,11 +358,13 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "La validation en deux étapes de votre compte Google est activé, vous devez insérer un mot de passe spécifique à l'application dans auth.json"
+      "Value":
+        "La validation en deux étapes de votre compte Google est activé, vous devez insérer un mot de passe spécifique à l'application dans auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "Ouverture de la page Mots de passe d'application. Merci de générer un nouveau mot de passe spécifique à l'application. (use Other as Device)"
+      "Value":
+        "Ouverture de la page Mots de passe d'application. Merci de générer un nouveau mot de passe spécifique à l'application. (use Other as Device)"
     },
     {
       "Key": "googleError",
@@ -377,8 +383,8 @@
       "Value": "[Sniper] Scan en cours sur {0}..."
     },
     {
-       "Key": "noPokemonToSnipe",
-       "Value": "[Sniper] Echec du scan. Aucun pokémon trouvé."
-     }
+      "Key": "noPokemonToSnipe",
+      "Value": "[Sniper] Echec du scan. Aucun pokémon trouvé."
+    }
   ]
 }
