@@ -233,18 +233,6 @@
       "Value": "Account nicht bestätigt! Stoppe..."
     },
     {
-      "Key": "openingGoogleDevicePage",
-      "Value": "Öffne Google Device Seite. Bitte füge den Code mit CTRL+V ein."
-    },
-    {
-      "Key": "couldntCopyToClipboard",
-      "Value": "Code konnte nicht in die Zwischenablage gelegt werden. Versuch es manuell."
-    },
-    {
-      "Key": "couldntCopyToClipboard2",
-      "Value": "Gehe auf: {0} & trage {1} ein."
-    },
-    {
       "Key": "realisticTravelDetected",
       "Value": "Realistische Bewegung gefunden. Benutze UserSettings.settings"
     },

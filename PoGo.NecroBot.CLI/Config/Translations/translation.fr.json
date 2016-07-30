@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} à ({1}m)"
+      "Value": "{0} ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- PC{1}/{2}%IV   [Meilleur PC{3}/{4}%IV] ({5} Bonbons)"
+      "Value": "{0}\t- {1}/{2}%   [Meilleur {3}/{4}%] ({5} Bonbons)"
     },
     {
       "Key": "eventItemRecycled",
@@ -66,11 +66,11 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl{3} PC({4}/{5}) {6}%IV | {7}% Chance | {8}m dist | {10} {9} restante(s) | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl {3} PC({4}/{5}) {6}%IV | {7}% Chance | {8}m dist | {10} {9} restant | {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Plus de Pokeball - {0} Manqué avec PC{1}"
+      "Value": "Plus de Pokeball - {0} PC{1} manqué"
     },
     {
       "Key": "catchStatusAttempt",
@@ -122,11 +122,11 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Incubation d'un oeuf : {0:0.00}km restant(s)"
+      "Value": "Incubation d'un oeuf : {0:0.00}km restant"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Incubation en cours : {0:0.00}km restant(s)"
+      "Value": "Incubation en cours : {0:0.00}km restant"
     },
     {
       "Key": "incubatorEggHatched",
@@ -206,11 +206,11 @@
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Impossible de copier le code, merci de le faire manuellement."
+      "Value": "Entrez le code {1} sur {0}"
     },
     {
       "Key": "couldntCopyToClipboard2",
-      "Value": "Rendez-vous sur: {0} & d'entrer {1}."
+      "Value": "Entrez le code {1} sur {0}"
     },
     {
       "Key": "realisticTravelDetected",
@@ -222,11 +222,11 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Les coordonnées définies dans le fichier \"Coords.ini\" sont invalides, utilisation des coordonées par défaut."
+      "Value": "Les coordonnées définies dans le fichier \"Coords.ini\" sont invalides, utilisation des coordonnées par défaut."
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Aucune mise à jour disponible."
+      "Value": "NecroBot v{0} est à jour."
     },
     {
       "Key": "autoUpdaterDisabled",
