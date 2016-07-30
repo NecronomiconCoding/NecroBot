@@ -116,6 +116,14 @@ namespace PoGo.NecroBot.Logic.Common
         MissingCredentialsPtc,
         SnipeScan,
         NoPokemonToSnipe,
+
+        GpxStartTrack,
+        GpxEndTrack,        
+        GpxStartPoint,
+        GpxEndPoint,
+        GpxStartLoop,
+        GpxEndLoop,
+        GpxCompleted
     }
 
     public class Translation : ITranslation
@@ -224,6 +232,13 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.MissingCredentialsPtc, "You need to fill out PtcUsername and PtcPassword in auth.json!"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScan, "[Sniper] Scanning for Snipeable Pokemon at {0}..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.NoPokemonToSnipe, "[Sniper] No Pokemon found to snipe!"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.GpxStartTrack, "[gpx] has now started the '{0}' track"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.GpxEndTrack, "[gpx] has now completed the '{0}' track"),            
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.GpxStartPoint, "[gpx] has now started 'Segment: {0}, TrackPoint: {1}'"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.GpxEndPoint, "[gpx] has now completed 'Segment: {0}, TrackPoint: {1}'"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.GpxStartLoop, "[gpx] has now started loop: {0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.GpxEndLoop, "[gpx] has now completed loop: {0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.GpxCompleted, "[gpx] has now fully completed the loops"),
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)
