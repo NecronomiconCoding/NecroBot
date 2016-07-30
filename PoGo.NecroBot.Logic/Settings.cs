@@ -387,6 +387,8 @@ namespace PoGo.NecroBot.Logic
         public int UseUltraBallAboveCp = 1000;
         public double WalkingSpeedInKilometerPerHour = 15.0;
         public int WebSocketPort = 14251;
+        public bool LogInventory = false;
+        public int LogInventoryDelaySeconds = 30;
 
         public static GlobalSettings Default => new GlobalSettings();
 
@@ -632,5 +634,8 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
+
+        public bool LogInventory => _settings.LogInventory;
+        public int LogInventoryDelaySeconds => _settings.LogInventoryDelaySeconds;
     }
 }

@@ -63,7 +63,7 @@ namespace PoGo.NecroBot.Logic
                 inventory.InventoryDelta.InventoryItems.Remove(pokemon);
         }
 
-        private async Task<GetInventoryResponse> GetCachedInventory()
+        public async Task<GetInventoryResponse> GetCachedInventory()
         {
             var now = DateTime.UtcNow;
 
