@@ -71,8 +71,9 @@ namespace PoGo.NecroBot.CLI.Forms
 
             var machine = new StateMachine();
             var stats = new Statistics();
-            //stats.DirtyEvent += () => Console.Title = stats.GetTemplatedStats(session.Translation.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
-               // session.Translation.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
+         
+            stats.DirtyEvent += () => labelBotInfo.Text = stats.GetTemplatedStats(session.Translation.GetTranslation(Logic.Common.TranslationString.StatsTemplateString),
+             session.Translation.GetTranslation(Logic.Common.TranslationString.StatsXpTemplateString));
 
             var aggregator = new StatisticsAggregator(stats);
             var listener = new ConsoleEventListener();
@@ -92,6 +93,17 @@ namespace PoGo.NecroBot.CLI.Forms
             machine.AsyncStart(new VersionCheckState(), session);
             if (session.LogicSettings.UseSnipeLocationServer)
                 SnipePokemonTask.AsyncStart(session);
+        }
+
+        private void settingsMenuItem_Click(object sender, EventArgs e)
+        {
+            FormNecroSettings settings = new FormNecroSettings(subPath);
+            settings.Show();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

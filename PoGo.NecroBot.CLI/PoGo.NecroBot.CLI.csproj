@@ -110,6 +110,12 @@
     <Compile Include="Forms\FormNecroMain.Designer.cs">
       <DependentUpon>FormNecroMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormNecroSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormNecroSettings.Designer.cs">
+      <DependentUpon>FormNecroSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -205,6 +211,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Forms\FormNecroMain.resx">
       <DependentUpon>FormNecroMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormNecroSettings.resx">
+      <DependentUpon>FormNecroSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

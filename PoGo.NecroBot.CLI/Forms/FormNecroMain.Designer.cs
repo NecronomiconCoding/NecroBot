@@ -39,6 +39,8 @@
             this.startMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.stopMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.labelBotInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox1.SuspendLayout();
             this.footerStrip.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -73,7 +75,8 @@
             // footerStrip
             // 
             this.footerStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.labelBotStatus});
+            this.labelBotStatus,
+            this.labelBotInfo});
             this.footerStrip.Location = new System.Drawing.Point(0, 443);
             this.footerStrip.Name = "footerStrip";
             this.footerStrip.Size = new System.Drawing.Size(800, 22);
@@ -101,7 +104,8 @@
             this.menuHeader.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsMenuItem,
             this.startMenuItem,
-            this.stopMenuItem});
+            this.stopMenuItem,
+            this.exitToolStripMenuItem});
             this.menuHeader.Name = "menuHeader";
             this.menuHeader.Size = new System.Drawing.Size(50, 20);
             this.menuHeader.Text = "Menu";
@@ -111,6 +115,7 @@
             this.settingsMenuItem.Name = "settingsMenuItem";
             this.settingsMenuItem.Size = new System.Drawing.Size(152, 22);
             this.settingsMenuItem.Text = "Settings";
+            this.settingsMenuItem.Click += new System.EventHandler(this.settingsMenuItem_Click);
             // 
             // startMenuItem
             // 
@@ -129,6 +134,20 @@
             // 
             this.columnHeader1.Text = "Log";
             this.columnHeader1.Width = 954;
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // labelBotInfo
+            // 
+            this.labelBotInfo.ForeColor = System.Drawing.Color.DarkRed;
+            this.labelBotInfo.Name = "labelBotInfo";
+            this.labelBotInfo.Size = new System.Drawing.Size(12, 17);
+            this.labelBotInfo.Text = "-";
             // 
             // FormNecroMain
             // 
@@ -165,5 +184,7 @@
         private System.Windows.Forms.ToolStripMenuItem startMenuItem;
         private System.Windows.Forms.ToolStripMenuItem stopMenuItem;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel labelBotInfo;
     }
 }
