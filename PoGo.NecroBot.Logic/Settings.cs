@@ -586,7 +586,7 @@ namespace PoGo.NecroBot.CLI
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
 
-        public int MinPokeballsWhileSnipe => _settings.MinPokeballsToSnipe;
+       
 
         public bool LevelUpPokemonFromIV => _settings.LevelUpPokemonFromIV;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
