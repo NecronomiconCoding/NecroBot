@@ -147,6 +147,7 @@ namespace PoGo.NecroBot.Logic
         public int KeepMinDuplicatePokemon = 1;
         public float KeepMinIvPercentage = 90;
         public bool KeepPokemonsThatCanEvolve = false;
+        public bool KeepEvolvablesOnlyIfOnEvolutionList = false;
         public string LevelUpByCPorIv = "iv";
         public int MaxPokeballsPerPokemon = 6;
         public int MaxSpawnLocationOffset = 10;
@@ -587,6 +588,7 @@ namespace PoGo.NecroBot.Logic
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
+        public bool KeepEvolvablesOnlyIfOnEvolutionList => _settings.KeepEvolvablesOnlyIfOnEvolutionList;
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool UseEggIncubators => _settings.UseEggIncubators;
         public int UseGreatBallAboveCp => _settings.UseGreatBallAboveCp;
