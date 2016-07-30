@@ -74,6 +74,10 @@ namespace PoGo.NecroBot.Logic
         int UseUltraBallAboveCP { get; }
         int UseMasterBallAboveCP { get; }
         int DelayBetweenPokemonCatch { get; }
+        bool AutomaticallyLevelUpPokemon { get; }
+        string LevelUpByCPorIV { get; }
+        float UpgradePokemonCPMinimum { get; }
+        float UpgradePokemonIVMinimum { get; }
         int DelayBetweenPlayerActions { get; }
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }

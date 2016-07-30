@@ -45,7 +45,29 @@ namespace PoGo.NecroBot.Logic
             if (pokemon != null)
                 inventory.InventoryDelta.InventoryItems.Remove(pokemon);
         }
-
+       public async Task<int> GetPokedexCount()
+         {
+             int Amount = 0;
+             var hfgds = await _client.Inventory.GetInventory();
+             for (int i = 0; i<hfgds.InventoryDelta.InventoryItems.Count; i++)
+             {
+                 if (hfgds.InventoryDelta.InventoryItems[i].ToString().ToLower().Contains("pokedex"))
+                 {
+                     Amount++;
+                }
+             }
+ 
+             return Amount;
+ 
+ 
+         }
+ 
+ 
+         public async Task<UpgradePokemonResponse> UpgradePokemon(ulong pokemonid)
+         {
+             var UpgradeResult = await _client.Inventory.UpgradePokemon(pokemonid);
+             return UpgradeResult;
+         }
         private async Task<GetInventoryResponse> GetCachedInventory()
         {
             var now = DateTime.UtcNow;
@@ -191,6 +213,13 @@ namespace PoGo.NecroBot.Logic
             var pokemons = myPokemon.ToList();
             return pokemons.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(limit);
         }
+
+        public async Task<double> GetPerfect(PokemonData Poke)
+        {
+           var result = PokemonInfo.CalculatePokemonPerfection(Poke);
+            return result;
+        }
+
 
         public async Task<int> GetItemAmountByType(ItemId type)
         {
