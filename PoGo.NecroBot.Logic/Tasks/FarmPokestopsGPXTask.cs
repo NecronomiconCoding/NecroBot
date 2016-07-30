@@ -19,7 +19,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsGpxTask
     {
-        static DateTime lastTasksCall = DateTime.Now;
+        private static DateTime _lastTasksCall = DateTime.Now;
 
         //This function deals with the main gps logic from point to point
         private static async Task GpxTrackPointProcess(ISession session, CancellationToken cancellationToken, EggWalker eggWalker, GpxReader.Trkpt trackPoint)
@@ -40,7 +40,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var pokestopList = await GetPokeStops(session);
                 session.EventDispatcher.Send(new PokeStopListEvent { Forts = pokestopList });
 
-                while (pokestopList.Any()) // warning: this is never entered due to ps cooldowns from UseNearbyPokestopsTask 
+                while (pokestopList.Any())
+                // warning: this is never entered due to ps cooldowns from UseNearbyPokestopsTask 
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
@@ -52,7 +53,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var pokeStop = pokestopList[0];
                     pokestopList.RemoveAt(0);
 
-                    var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    var fortInfo =
+                        await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                     if (pokeStop.LureInfo != null)
                     {
@@ -81,13 +83,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                 }
 
-                if (DateTime.Now > lastTasksCall)
+                if (DateTime.Now > _lastTasksCall)
                 {
-                    lastTasksCall = DateTime.Now.AddMilliseconds(Math.Min(session.LogicSettings.DelayBetweenPlayerActions, 3000));
+                    _lastTasksCall =
+                        DateTime.Now.AddMilliseconds(Math.Min(session.LogicSettings.DelayBetweenPlayerActions,
+                            3000));
 
                     await RecycleItemsTask.Execute(session, cancellationToken);
 
-                    if (session.LogicSettings.SnipeAtPokestops)
+                    if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
                     {
                         await SnipePokemonTask.Execute(session, cancellationToken);
                     }
@@ -110,44 +114,44 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
 
                 await session.Navigation.HumanPathWalking(
-                        trackPoint,
-                        session.LogicSettings.WalkingSpeedInKilometerPerHour,
-                        async () =>
-                        {
-                            await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
-                        //Catch Incense Pokemon
-                        await CatchIncensePokemonsTask.Execute(session, cancellationToken);
-                            await UseNearbyPokestopsTask.Execute(session, cancellationToken);
-                            return true;
-                        },
-                        cancellationToken
+                    trackPoint,
+                    session.LogicSettings.WalkingSpeedInKilometerPerHour,
+                    async () =>
+                    {
+                        await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
+                                //Catch Incense Pokemon
+                                await CatchIncensePokemonsTask.Execute(session, cancellationToken);
+                        await UseNearbyPokestopsTask.Execute(session, cancellationToken);
+                        return true;
+                    },
+                    cancellationToken
                     );
 
                 await eggWalker.ApplyDistance(distance, cancellationToken);
             }
         }
-        
+
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             //Gets all the gpx track elements
-            var tracks = GetGpxTracks(session);     
-            
+            var tracks = GetGpxTracks(session);
+
             //Sets up the eggWalker object                   
             var eggWalker = new EggWalker(1000, session);
-            
+
             //Loops over all the track elements
-            for(int curTrk = 0; curTrk < tracks.Count; curTrk++)
+            for (int curTrk = 0; curTrk < tracks.Count; curTrk++)
             {
                 //Checks if a cancellation operation has been performed
                 cancellationToken.ThrowIfCancellationRequested();
 
                 //Gets the current track
                 var track = tracks.ElementAt(curTrk);
-                
+
                 //If config is to display gpx track output information
                 string trackNameOutput = "";//Used to hold the name of the tracker for output *if any*
                 if (session.LogicSettings.GpxSettings.OutputTrackPathData)
-                {   
+                {
                     //Note: checks if name is populated if not, desc if not uses element count number
                     trackNameOutput = (!string.IsNullOrWhiteSpace(track.Name)) ? track.Name : (!string.IsNullOrWhiteSpace(track.Desc)) ? track.Desc : string.Format("track number: {0}", curTrk);
                     session.EventDispatcher.Send(new NoticeEvent
@@ -158,9 +162,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 //Gets the segment elements from the current track
                 var trackSegments = track.Segments;
-                
+
                 //Loops over the track segment elements
-                for(int curTrkSeg = 0; curTrkSeg < trackSegments.Count; curTrkSeg++)
+                for (int curTrkSeg = 0; curTrkSeg < trackSegments.Count; curTrkSeg++)
                 {
                     //Checks if a cancellation operation has been performed
                     cancellationToken.ThrowIfCancellationRequested();
@@ -172,7 +176,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var trackPoints = segment.TrackPoints;
 
                     //Loops through the indivudual track points within the segment
-                    for (int curTrkPt=0; curTrkPt < trackPoints.Count; curTrkPt++)
+                    for (int curTrkPt = 0; curTrkPt < trackPoints.Count; curTrkPt++)
                     {
                         //Checks if a cancellation operation has been performed
                         cancellationToken.ThrowIfCancellationRequested();
@@ -183,7 +187,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         //If config is to display gpx track output information
                         string trackPointNameOutput = "";//Used to hold the name of the tracker point for output *if any*
                         if (session.LogicSettings.GpxSettings.OutputTrackPointPathData)
-                        {   
+                        {
                             //Note: checks if name is populated if not, desc if not uses element count number
                             trackPointNameOutput = (!string.IsNullOrWhiteSpace(trackPoint.Name)) ? trackPoint.Name : (!string.IsNullOrWhiteSpace(trackPoint.Desc)) ? trackPoint.Desc : string.Format("element number {0}", curTrkPt);
                             session.EventDispatcher.Send(new NoticeEvent
@@ -197,7 +201,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         //If config is to display gpx track output information
                         if (session.LogicSettings.GpxSettings.OutputTrackPointPathData)
-                        {   
+                        {
                             session.EventDispatcher.Send(new NoticeEvent
                             {
                                 Message = session.Translation.GetTranslation(Common.TranslationString.GpxEndPoint, curTrkSeg, trackPointNameOutput)
@@ -209,7 +213,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 //If config is to display gpx track output information
                 if (session.LogicSettings.GpxSettings.OutputTrackPathData)
-                {   
+                {
                     session.EventDispatcher.Send(new NoticeEvent
                     {
                         Message = session.Translation.GetTranslation(Common.TranslationString.GpxEndTrack, trackNameOutput)
@@ -251,3 +255,4 @@ namespace PoGo.NecroBot.Logic.Tasks
         }
     }
 }
+
