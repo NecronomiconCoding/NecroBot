@@ -245,8 +245,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         }
                     }
                 }
-                else
-
+                else if (await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsToSnipe, session, cancellationToken))
+                {
                     foreach (var location in session.LogicSettings.PokemonToSnipe.Locations)
                     {
                         session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = location, PokemonId = PokemonId.Missingno });
@@ -268,12 +268,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             lastSnipe = DateTime.Now;
                             foreach (var pokemonLocation in locationsToSnipe)
                             {
-                                var pokeBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemPokeBall);
-                                var greatBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemGreatBall);
-                                var ultraBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemUltraBall);
-                                var masterBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemMasterBall);
-
-                                if (pokeBallsCount + greatBallsCount + ultraBallsCount + masterBallsCount < session.LogicSettings.MinPokeballsToSnipe)
+                                if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                     return;
 
                                 locsVisited.Add(pokemonLocation);
@@ -289,6 +284,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             });
                         }
                     }
+                }
             }
 
         }
@@ -320,6 +316,25 @@ namespace PoGo.NecroBot.Logic.Tasks
                 };
             }
             return scanResult;
+        }
+
+        public static async Task<bool> CheckPokeballsToSnipe(int minPokeballs, ISession session, CancellationToken cancellationToken)
+        {
+            var pokeBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemPokeBall);
+            pokeBallsCount += await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemGreatBall);
+            pokeBallsCount += await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemUltraBall);
+            pokeBallsCount += await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemMasterBall);
+
+            if (pokeBallsCount < minPokeballs)
+            {
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(Common.TranslationString.NotEnoughPokeballsToSnipe, pokeBallsCount, minPokeballs)
+                });
+                return false;
+            }
+
+            return true;
         }
     }
 }

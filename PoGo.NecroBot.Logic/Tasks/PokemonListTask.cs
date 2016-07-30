@@ -17,10 +17,11 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session)
         {
             var allPokemonInBag = await session.Inventory.GetHighestsCp(1000);
+            var pkmWithIV = allPokemonInBag.Select(p => Tuple.Create(p, PokemonInfo.CalculatePokemonPerfection(p)));
             session.EventDispatcher.Send(
                 new PokemonListEvent
                 {
-                    PokemonList = allPokemonInBag.ToList()
+                    PokemonList = pkmWithIV.ToList()
                 });
             await Task.Delay(500);
         }
