@@ -4,10 +4,10 @@ using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
-using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -25,25 +25,31 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                double perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(pokemon));
-                string pokemonName = pokemon.PokemonId.ToString();
+                var perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(pokemon));
+                var pokemonName = pokemon.PokemonId.ToString();
                 // iv number + templating part + pokemonName <= 12
-                int nameLength = 12 - (perfection.ToString(CultureInfo.InvariantCulture).Length + session.LogicSettings.RenameTemplate.Length - 6);
+                var nameLength = 12 -
+                                 (perfection.ToString(CultureInfo.InvariantCulture).Length +
+                                  session.LogicSettings.RenameTemplate.Length - 6);
                 if (pokemonName.Length > nameLength)
                 {
                     pokemonName = pokemonName.Substring(0, nameLength);
                 }
-                string newNickname = String.Format(session.LogicSettings.RenameTemplate, pokemonName, perfection);
-                string oldNickname = (pokemon.Nickname.Length != 0) ? pokemon.Nickname : pokemon.PokemonId.ToString();
+                var newNickname = string.Format(session.LogicSettings.RenameTemplate, pokemonName, perfection);
+                var oldNickname = pokemon.Nickname.Length != 0 ? pokemon.Nickname : pokemon.PokemonId.ToString();
 
-                if (perfection >= session.LogicSettings.KeepMinIvPercentage && newNickname != oldNickname &&
-                    session.LogicSettings.RenameAboveIv)
+                // If "RenameOnlyAboveIv" = true only rename pokemon with IV over "KeepMinIvPercentage"
+                // Favorites will be skipped
+                if ((!session.LogicSettings.RenameOnlyAboveIv || perfection >= session.LogicSettings.KeepMinIvPercentage) &&
+                    newNickname != oldNickname && pokemon.Favorite == 0)
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
 
                     session.EventDispatcher.Send(new NoticeEvent
                     {
-                        Message = session.Translation.GetTranslation(Common.TranslationString.PokemonRename, pokemon.PokemonId, pokemon.Id, oldNickname, newNickname)
+                        Message =
+                            session.Translation.GetTranslation(TranslationString.PokemonRename, pokemon.PokemonId,
+                                pokemon.Id, oldNickname, newNickname)
                     });
                 }
             }

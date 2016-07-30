@@ -5,6 +5,7 @@ using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Tasks;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Config;
 using SuperSocket.WebSocket;
@@ -15,10 +16,10 @@ namespace PoGo.NecroBot.CLI
 {
     public class WebSocketInterface
     {
+        private readonly WebSocketServer _server;
+        private readonly Session _session;
         private PokeStopListEvent _lastPokeStopList;
         private ProfileEvent _lastProfile;
-        private readonly WebSocketServer _server;
-        private Session _session;
 
         public WebSocketInterface(int port, Session session)
         {
@@ -78,7 +79,15 @@ namespace PoGo.NecroBot.CLI
 
         private async void HandleMessage(WebSocketSession session, string message)
         {
-            if (message == "PokemonList") await Logic.Tasks.PokemonListTask.Execute(_session);
+            switch (message)
+            {
+                case "PokemonList":
+                    await PokemonListTask.Execute(_session);
+                    break;
+                case "EggsList":
+                    await EggsListTask.Execute(_session);
+                    break;
+            }
         }
 
         private void HandleSession(WebSocketSession session)

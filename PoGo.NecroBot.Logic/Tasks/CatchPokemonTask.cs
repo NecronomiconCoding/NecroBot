@@ -3,6 +3,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
@@ -25,6 +26,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             var attemptCounter = 1;
             do
             {
+                if (session.LogicSettings.MaxPokeballsPerPokemon > 0 &&
+                    attemptCounter > session.LogicSettings.MaxPokeballsPerPokemon)
+                    break;
+
                 float probability = encounter?.CaptureProbability?.CaptureProbability_[0];
 
                 var pokeball = await GetBestBall(session, encounter, probability);
@@ -53,19 +58,33 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if ((isLowProbability && isHighCp) || isHighPerfection)
                 {
-                    await UseBerry(session, encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.EncounterId : encounterId,
-                        encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.SpawnPointId : currentFortData?.Id);
+                    await
+                        UseBerry(session,
+                            encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                                ? pokemon.EncounterId
+                                : encounterId,
+                            encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                                ? pokemon.SpawnPointId
+                                : currentFortData?.Id);
                 }
 
                 var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                     session.Client.CurrentLongitude,
-                    encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.Latitude : currentFortData.Latitude,
-                    encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.Longitude : currentFortData.Longitude);
+                    encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                        ? pokemon.Latitude
+                        : currentFortData.Latitude,
+                    encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                        ? pokemon.Longitude
+                        : currentFortData.Longitude);
 
                 caughtPokemonResponse =
                     await session.Client.Encounter.CatchPokemon(
-                        encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.EncounterId : encounterId,
-                        encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.SpawnPointId : currentFortData.Id, pokeball);
+                        encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                            ? pokemon.EncounterId
+                            : encounterId,
+                        encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                            ? pokemon.SpawnPointId
+                            : currentFortData.Id, pokeball);
 
                 var evt = new PokemonCaptureEvent {Status = caughtPokemonResponse.Status};
 
@@ -103,8 +122,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 
 
                 evt.CatchType = encounter is EncounterResponse
-                    ? session.Translation.GetTranslation(Common.TranslationString.CatchTypeNormal)
-                    : encounter is DiskEncounterResponse ? session.Translation.GetTranslation(Common.TranslationString.CatchTypeLure) : session.Translation.GetTranslation(Common.TranslationString.CatchTypeIncense);
+                    ? session.Translation.GetTranslation(TranslationString.CatchTypeNormal)
+                    : encounter is DiskEncounterResponse
+                        ? session.Translation.GetTranslation(TranslationString.CatchTypeLure)
+                        : session.Translation.GetTranslation(TranslationString.CatchTypeIncense);
                 evt.Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
                 evt.Level =
                     PokemonInfo.GetLevel(encounter is EncounterResponse
@@ -133,7 +154,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(evt);
 
                 attemptCounter++;
-                
+
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
@@ -144,6 +165,9 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemonCp = encounter is EncounterResponse
                 ? encounter.WildPokemon?.PokemonData?.Cp
                 : encounter?.PokemonData?.Cp;
+            var pokemonId = encounter is EncounterResponse
+                ? encounter.WildPokemon?.PokemonData?.PokemonId
+                : encounter?.PokemonData?.PokemonId;
             var iV =
                 Math.Round(
                     PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
@@ -155,11 +179,14 @@ namespace PoGo.NecroBot.Logic.Tasks
             var ultraBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
             var masterBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
-            if (masterBallsCount > 0 && pokemonCp >= 1200)
+            if (masterBallsCount > 0 &&
+                ((pokemonCp >= session.LogicSettings.UseMasterBallAboveCp &&
+                  !session.LogicSettings.PokemonToUseMasterball.Any()) ||
+                 session.LogicSettings.PokemonToUseMasterball.Contains(pokemonId)))
                 return ItemId.ItemMasterBall;
-            if (ultraBallsCount > 0 && pokemonCp >= 1000)
+            if (ultraBallsCount > 0 && pokemonCp >= session.LogicSettings.UseUltraBallAboveCp)
                 return ItemId.ItemUltraBall;
-            if (greatBallsCount > 0 && pokemonCp >= 750)
+            if (greatBallsCount > 0 && pokemonCp >= session.LogicSettings.UseGreatBallAboveCp)
                 return ItemId.ItemGreatBall;
 
             if (ultraBallsCount > 0 && iV >= session.LogicSettings.KeepMinIvPercentage && probability < 0.40)
@@ -177,7 +204,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 return ItemId.ItemGreatBall;
             if (ultraBallsCount > 0)
                 return ItemId.ItemUltraBall;
-            if (masterBallsCount > 0)
+            if (masterBallsCount > 0 && !session.LogicSettings.PokemonToUseMasterball.Any())
                 return ItemId.ItemMasterBall;
 
             return ItemId.ItemUnknown;
