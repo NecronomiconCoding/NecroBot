@@ -142,6 +142,9 @@ namespace PoGo.NecroBot.CLI
         public int TotalAmountOfPokebalsToKeep = 150;
         public int TotalAmountOfPotionsToKeep = 100;
         public int TotalAmountOfRevivesToKeep = 50;
+        public double ThrowMaxAccuracy = 1.95;
+        public double ThrowMinAccuracy = 0.1;
+        public double ThrowSpinRatio = 0.3;
 
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
@@ -390,6 +393,21 @@ namespace PoGo.NecroBot.CLI
                 settings.SnipeLocationServer = Default.SnipeLocationServer;
             }
 
+            if (settings.ThrowMaxAccuracy == 0.0)
+            {
+                settings.ThrowMaxAccuracy = 1.95;
+            }
+
+            if (settings.ThrowMinAccuracy == 0.0)
+            {
+                settings.ThrowMinAccuracy = 0.5;
+            }
+
+            if (settings.ThrowSpinRatio == 0.0)
+            {
+                settings.ThrowSpinRatio = 0.5;
+            }
+
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
@@ -605,5 +623,8 @@ namespace PoGo.NecroBot.CLI
         public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
+        public double ThrowMaxAccuracy => _settings.ThrowMaxAccuracy;
+        public double ThrowMinAccuracy => _settings.ThrowMinAccuracy;
+        public double ThrowSpinRatio => _settings.ThrowSpinRatio;
     }
 }
