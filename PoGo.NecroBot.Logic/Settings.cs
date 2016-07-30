@@ -447,6 +447,11 @@ namespace PoGo.NecroBot.Logic
             {
                 settings.SnipeLocationServer = Default.SnipeLocationServer;
             }
+            
+            if (settings.PokemonsToLevelUp == null)
+            {
+                settings.PokemonsToLevelUp = Default.PokemonsToLevelUp;
+            }
 
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
