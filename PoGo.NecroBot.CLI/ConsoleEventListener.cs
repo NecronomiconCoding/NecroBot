@@ -75,14 +75,15 @@ namespace PoGo.NecroBot.CLI
         {
             Logger.Write(evt.WasAddedNow
                 ? session.Translation.GetTranslation(TranslationString.IncubatorPuttingEgg, evt.KmRemaining)
-                : session.Translation.GetTranslation(TranslationString.IncubatorStatusUpdate, evt.KmRemaining));
+                : session.Translation.GetTranslation(TranslationString.IncubatorStatusUpdate, evt.KmRemaining),
+                LogLevel.Egg);
         }
 
         public void HandleEvent(EggHatchedEvent evt, ISession session)
         {
             Logger.Write(session.Translation.GetTranslation(TranslationString.IncubatorEggHatched, 
                 evt.PokemonId.ToString(), evt.Level, evt.Cp, evt.MaxCp, evt.Perfection),
-                LogLevel.Egg, ConsoleColor.DarkYellow);
+                LogLevel.Egg);
         }
 
         public void HandleEvent(FortUsedEvent evt, ISession session)
