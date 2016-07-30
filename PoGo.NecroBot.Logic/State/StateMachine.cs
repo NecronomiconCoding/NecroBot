@@ -37,7 +37,6 @@ namespace PoGo.NecroBot.Logic.State
                 }
                 catch (InvalidResponseException)
                 {
-
                     session.EventDispatcher.Send(new ErrorEvent { Message = "The PokemonGo servers are having a bad time, chill." });
                 }
                 catch (OperationCanceledException)

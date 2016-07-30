@@ -1,4 +1,5 @@
 ﻿#region using directives
+
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -31,6 +32,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
             }
+
             lastRecycle = DateTime.Now;
             await session.Inventory.RefreshCachedInventory();
         }
