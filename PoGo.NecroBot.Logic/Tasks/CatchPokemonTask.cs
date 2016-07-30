@@ -71,7 +71,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                         encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.EncounterId : encounterId,
                         encounter is EncounterResponse || encounter is IncenseEncounterResponse ? pokemon.SpawnPointId : currentFortData.Id, pokeball);
 
-                var evt = new PokemonCaptureEvent {Status = caughtPokemonResponse.Status};
+                var evt = new PokemonCaptureEvent {
+                    Status = caughtPokemonResponse.Status,
+                    Latitude = pokemon.Latitude,
+                    Longitude = pokemon.Longitude
+                };
 
                 if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
                 {
