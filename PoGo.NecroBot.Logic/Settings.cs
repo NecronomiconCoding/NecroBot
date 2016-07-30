@@ -102,6 +102,7 @@ namespace PoGo.NecroBot.Logic
         [JsonIgnore] internal AuthSettings Auth = new AuthSettings();
 
         public bool AutomaticallyLevelUpPokemon = false;
+        public int AmountOfTimesToUpgradeLoop = 5;
 
         public bool AutoUpdate = true;
         public double DefaultAltitude = 10;
@@ -581,6 +582,7 @@ namespace PoGo.NecroBot.Logic
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
         public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;
+        public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;
         public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;
         public float UpgradePokemonIvMinimum => _settings.UpgradePokemonIvMinimum;
         public float UpgradePokemonCpMinimum => _settings.UpgradePokemonCpMinimum;
