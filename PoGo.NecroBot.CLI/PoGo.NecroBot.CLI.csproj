@@ -124,6 +124,9 @@
     </None>
     <None Include="supersocket.cmd" />
     <None Include="supersocket.sh" />
+    <None Include="Config\Translations\translation.da.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Config\Translations\translation.de.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
