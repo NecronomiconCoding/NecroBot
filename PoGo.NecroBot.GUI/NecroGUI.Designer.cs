@@ -38,7 +38,8 @@ namespace PoGo.NecroBot.GUI
             // 
             // PlayerInfoBox
             // 
-            this.PlayerInfoBox.Location = new System.Drawing.Point(0, 5);
+            this.PlayerInfoBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.PlayerInfoBox.Location = new System.Drawing.Point(0, 0);
             this.PlayerInfoBox.Name = "PlayerInfoBox";
             this.PlayerInfoBox.ReadOnly = true;
             this.PlayerInfoBox.Size = new System.Drawing.Size(590, 20);
@@ -47,10 +48,11 @@ namespace PoGo.NecroBot.GUI
             // DebugTextBox
             // 
             this.DebugTextBox.BackColor = System.Drawing.SystemColors.ControlText;
+            this.DebugTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DebugTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.DebugTextBox.Location = new System.Drawing.Point(0, 31);
+            this.DebugTextBox.Location = new System.Drawing.Point(0, 20);
             this.DebugTextBox.Name = "DebugTextBox";
-            this.DebugTextBox.Size = new System.Drawing.Size(590, 219);
+            this.DebugTextBox.Size = new System.Drawing.Size(590, 242);
             this.DebugTextBox.TabIndex = 2;
             this.DebugTextBox.Text = "";
             // 
