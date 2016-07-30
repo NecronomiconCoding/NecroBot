@@ -6,6 +6,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using POGOProtos.Networking.Responses;
+using System.IO;
 
 #endregion
 
@@ -117,7 +118,11 @@ namespace PoGo.NecroBot.Logic.Utils
 
                 if (now.Ticks > _lastRefresh.AddSeconds(session.LogicSettings.LogInventoryDelaySeconds).Ticks)
                 {
-                    System.IO.File.WriteAllText(_playerName + ".json", inventory.InventoryDelta.InventoryItems.ToString());
+                    string tmpDir = Path.Combine(session.LogicSettings.ProfilePath, "temp");
+                    Directory.CreateDirectory(tmpDir);
+                    string strPath = Path.Combine(session.LogicSettings.ProfilePath, "temp", _playerName + ".inventory.json");
+
+                    System.IO.File.WriteAllText(strPath, inventory.InventoryDelta.InventoryItems.ToString());
                     _lastRefresh = now;
                 }
             }
