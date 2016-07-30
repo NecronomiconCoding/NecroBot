@@ -87,6 +87,9 @@ namespace PoGo.NecroBot.CLI
                 case "EggsList":
                     await EggsListTask.Execute(_session);
                     break;
+                case "InventoryList":
+                    await InventoryListTask.Execute(_session);
+                    break;
             }
         }
 
