@@ -458,11 +458,14 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
+        // Never spawn at the same position.
+        private readonly Random _rand = new Random();
+
         double ISettings.DefaultLatitude
         {
             get
             {
-                return _settings.DefaultLatitude;
+                return _settings.DefaultLatitude + _rand.NextDouble() * (0.2 - 0.01) + 0.01;
             }
 
             set
@@ -475,7 +478,7 @@ namespace PoGo.NecroBot.CLI
         {
             get
             {
-                return _settings.DefaultLongitude;
+                return _settings.DefaultLongitude + _rand.NextDouble() * (0.2 - 0.01) + 0.01;
             }
 
             set
