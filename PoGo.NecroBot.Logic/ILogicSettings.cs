@@ -62,6 +62,7 @@ namespace PoGo.NecroBot.Logic
     public interface ILogicSettings
     {
         bool AutoUpdate { get; }
+        bool TransferConfigAndAuthOnUpdate { get; }
         float KeepMinIvPercentage { get; }
         int KeepMinCp { get; }
         double WalkingSpeedInKilometerPerHour { get; }
@@ -95,7 +96,11 @@ namespace PoGo.NecroBot.Logic
         int SnipeLocationServerPort { get; }
         bool UseSnipeLocationServer { get; }
         bool UseTransferIVForSnipe { get; }
+        bool SnipeIgnoreUnknownIV { get; }
         int MinDelayBetweenSnipes { get; }
+        int TotalAmountOfPokebalsToKeep { get; }
+        int TotalAmountOfPotionsToKeep { get; }
+        int TotalAmountOfRevivesToKeep { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 

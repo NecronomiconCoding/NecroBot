@@ -37,12 +37,12 @@ namespace PoGo.NecroBot.Logic.State
                 }
                 catch (InvalidResponseException)
                 {
-                    session.EventDispatcher.Send(new ErrorEvent { Message = "The PokemonGo servers are having a bad time, chill." });
+                    session.EventDispatcher.Send(new ErrorEvent { Message = "Niantic Servers unstable, throttling API Calls." });
                 }
                 catch (OperationCanceledException)
                 {
-                    session.EventDispatcher.Send(new ErrorEvent { Message = "The bot was stopped." });
-                    return;
+                    session.EventDispatcher.Send(new ErrorEvent { Message = "Current Operation was canceled." });
+                    state = _initialState;
                 }
                 catch (Exception ex)
                 {
