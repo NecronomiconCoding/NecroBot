@@ -245,6 +245,10 @@
       "Value": "Terminada la desempaquetación de los archivos..."
     },
     {
+      "Key": "finishedTransferringConfig",
+      "Value": "Terminado de transferir su configuración a la nueva versión..."
+    },
+    {
       "Key": "updateFinished",
       "Value": "Actualización terminada, puede cerrar esta ventana ahora."
     },
@@ -373,8 +377,24 @@
       "Value": "[Sniper] Escaneando en busca de Pokemons en {0}..."
     },
     {
+      "Key": "snipeScanEx",
+      "Value": "[Sniper] Sniping a {0} con {1} IV en {2}..."
+    },
+    {
       "Key": "noPokemonToSnipe",
       "Value": "[Sniper] No se encontraron Pokemons :("
+    },
+    {
+      "Key": "notEnoughPokeballsToSnipe",
+      "Value": "No hay suficientes Pokeballs para iniciar Sniping! ({0}/{1})"
+    },
+    {
+      "Key": "displayHighestMOVE1Header",
+      "Value": "MOVIMIENTO1"
+    },
+    {
+      "Key": "displayHighestMOVE2Header",
+      "Value": "MOVIMIENTO2"
     }
   ]
 }
