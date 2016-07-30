@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandlers
+namespace PoGo.NecroBot.CLI.WebSocketHandler
 {
     interface IWebSocketResponce
     {

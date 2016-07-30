@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
 {
-    class PokemonExtendedListTask
+    class GetPokemonListTask
     {
     
         public static async Task Execute(ISession session, WebSocketSession webSocketSession)
@@ -17,7 +17,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
             var allPokemonInBag = await session.Inventory.GetHighestsCp(1000);
             var list = new List<PokemonListWeb>();
             allPokemonInBag.ToList().ForEach(o => list.Add(new PokemonListWeb(o)));
-            webSocketSession.Send(EncodingHelper.Serialize(new PokemonListExtendedResponce(list)));
+            webSocketSession.Send(EncodingHelper.Serialize(new PokemonListResponce(list)));
             
             await Task.Delay(500);
         }

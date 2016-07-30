@@ -8,7 +8,7 @@ using PoGo.NecroBot.Logic.Tasks;
 using System.Reflection;
 using PoGo.NecroBot.Logic.State;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandlers
+namespace PoGo.NecroBot.CLI.WebSocketHandler
 {
     class WebSocketEventManager
     {
@@ -34,11 +34,8 @@ namespace PoGo.NecroBot.CLI.WebSocketHandlers
             }
             else
             {
-
-
-
+                // Unknown command.
             }
-
         }
 
         // Registers all IWebSocketRequestHandler's automatically. 

@@ -9,11 +9,11 @@ using PoGo.NecroBot.Logic.State;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands
 {
-    public class PokemonListHandler : IWebSocketRequestHandler
+    public class GetPokemonListHandler : IWebSocketRequestHandler
     {
         public string Command { get; private set;}
 
-        public PokemonListHandler()
+        public GetPokemonListHandler()
         {
             Command = "GetPokemonList";
         }
