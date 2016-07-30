@@ -10,6 +10,7 @@ using POGOProtos.Settings.Master;
 using POGOProtos.Data;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.PoGoUtils;
 
 #endregion
 
@@ -84,20 +85,24 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             var upgradeResult = await session.Inventory.UpgradePokemon(pokemon.Id);
 
-            if (upgradeResult.Result.ToString().ToLower().Contains("success"))
+            if (upgradeResult.Result == POGOProtos.Networking.Responses.UpgradePokemonResponse.Types.Result.Success)
             {
                 Logger.Write("Pokemon Upgraded:" + upgradeResult.UpgradedPokemon.PokemonId + ":" +
                                 upgradeResult.UpgradedPokemon.Cp);
             }
-            else if (upgradeResult.Result.ToString().ToLower().Contains("insufficient"))
+            else if (upgradeResult.Result == POGOProtos.Networking.Responses.UpgradePokemonResponse.Types.Result.ErrorInsufficientResources)
             {
                 Logger.Write("Pokemon Upgrade Failed Not Enough Resources");
+            }
+            else if (upgradeResult.Result == POGOProtos.Networking.Responses.UpgradePokemonResponse.Types.Result.ErrorUpgradeNotAvailable)
+            {
+                Logger.Write("Pokemon upgrade unavailable for: " + pokemon.PokemonId + ":" + pokemon.Cp + "/" + PokemonInfo.CalculateMaxCp(pokemon));
             }
             else
             {
                 Logger.Write(
                     "Pokemon Upgrade Failed Unknown Error, Pokemon Could Be Max Level For Your Level The Pokemon That Caused Issue Was:" +
-                    upgradeResult.UpgradedPokemon.PokemonId);
+                    pokemon.PokemonId);
             }
         }
     }
