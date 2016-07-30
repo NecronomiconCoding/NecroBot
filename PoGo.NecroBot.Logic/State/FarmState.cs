@@ -23,7 +23,7 @@ namespace PoGo.NecroBot.Logic.State
             }
             if (session.LogicSettings.AutomaticallyLevelUpPokemon)
             {
-                await LevelUpPokemon.Execute(session, cancellationToken);
+                await LevelUpPokemonTask.Execute(session, cancellationToken);
             }
             if (session.LogicSettings.RenamePokemon)
             {

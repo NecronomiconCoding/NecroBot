@@ -9,14 +9,18 @@ using POGOProtos.Enums;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    class LevelUpPokemon
+    class LevelUpPokemonTask
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
+            if (DisplayPokemonStatsTask.PokemonID.Count == 0 || DisplayPokemonStatsTask.PokemonIDCP.Count == 0)
+            {
+                return;
+            }
             if (session.LogicSettings.LevelUpByCPorIV.ToLower().Contains(("iv")))
             {
                 Random rand = new Random();
-                int RandomNumber = rand.Next(0, DisplayPokemonStatsTask.PokemonID.Count);
+                int RandomNumber = rand.Next(0, DisplayPokemonStatsTask.PokemonID.Count-1);
                 
                 var UpgradeResult = await session.Inventory.UpgradePokemon(DisplayPokemonStatsTask.PokemonID[RandomNumber]);
                 if (UpgradeResult.Result.ToString().ToLower().Contains("success"))
@@ -37,7 +41,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
 
                 Random rand = new Random();
-                int RandomNumber = rand.Next(0, DisplayPokemonStatsTask.PokemonIDCP.Count);
+                int RandomNumber = rand.Next(0, DisplayPokemonStatsTask.PokemonIDCP.Count-1);
                 var UpgradeResult = await session.Inventory.UpgradePokemon(DisplayPokemonStatsTask.PokemonIDCP[RandomNumber]);
                 if (UpgradeResult.Result.ToString().ToLower().Contains("success"))
                 {

@@ -166,7 +166,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     if (session.LogicSettings.AutomaticallyLevelUpPokemon)
                     {
-                        await LevelUpPokemon.Execute(session, cancellationToken);
+                        await LevelUpPokemonTask.Execute(session, cancellationToken);
                     }
                     if (session.LogicSettings.TransferDuplicatePokemon)
                     {

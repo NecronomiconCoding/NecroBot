@@ -26,7 +26,7 @@ namespace PoGo.NecroBot.Logic.Service
             }
             if (_session.LogicSettings.AutomaticallyLevelUpPokemon)
             {
-                LevelUpPokemon.Execute(_session, cancellationToken).Wait();
+                LevelUpPokemonTask.Execute(_session, cancellationToken).Wait();
             }
             if (_session.LogicSettings.TransferDuplicatePokemon)
             {
