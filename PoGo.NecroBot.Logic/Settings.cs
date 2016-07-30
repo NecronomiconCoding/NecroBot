@@ -366,7 +366,7 @@ namespace PoGo.NecroBot.Logic
         public bool SnipeIgnoreUnknownIv = false;
         public string SnipeLocationServer = "localhost";
         public int SnipeLocationServerPort = 16969;
-        public bool StartupWelcomeDelay = true;
+        public bool StartupWelcomeDelay = false;
         public int TotalAmountOfPokebalsToKeep = 120;
         public int TotalAmountOfPotionsToKeep = 80;
         public int TotalAmountOfRevivesToKeep = 60;
