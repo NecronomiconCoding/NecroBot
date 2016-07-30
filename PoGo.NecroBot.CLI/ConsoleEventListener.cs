@@ -188,7 +188,7 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession session)
         {
             string strHeader;
-            //PokemonData | CP | IV | Level
+            //PokemonData | CP | IV | Level | MOVE1 | MOVE2
             switch (evt.SortedBy)
             {
                 case "Level":
@@ -200,6 +200,12 @@ namespace PoGo.NecroBot.CLI
                 case "CP":
                     strHeader = session.Translation.GetTranslation(TranslationString.DisplayHighestsCpHeader);
                     break;
+                case "MOVE1":
+                    strHeader = session.Translation.GetTranslation(TranslationString.DisplayHighestMOVE1Header);
+                    break;
+                case "MOVE2":
+                    strHeader = session.Translation.GetTranslation(TranslationString.DisplayHighestMOVE2Header);
+                    break;
                 default:
                     strHeader = session.Translation.GetTranslation(TranslationString.DisplayHighestsHeader);
                     break;
@@ -210,7 +216,7 @@ namespace PoGo.NecroBot.CLI
             Logger.Write($"====== {strHeader} ======", LogLevel.Info, ConsoleColor.Yellow);
             foreach (var pokemon in evt.PokemonList)
                 Logger.Write(
-                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: '{pokemon.Item1.PokemonId}'",
+                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: {pokemon.Item1.PokemonId.ToString().PadRight(10, ' ')}\t MOVE1: {pokemon.Item5.ToString().PadRight(20, ' ')} MOVE2: {pokemon.Item6.ToString()}",
                     LogLevel.Info, ConsoleColor.Yellow);
         }
 

@@ -53,6 +53,18 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
                                    Math.Pow(poke.CpMultiplier + poke.AdditionalCpMultiplier, 2)), 10);
         }
 
+        public static PokemonMove GetPokemonMove1(PokemonData poke)
+        {
+            var move1 = poke.Move1;
+            return move1;
+        }
+
+        public static PokemonMove GetPokemonMove2(PokemonData poke)
+        {
+            var move2 = poke.Move2;
+            return move2;
+        }
+
         public static double CalculateMaxCpMultiplier(PokemonData poke)
         {
             var baseStats = GetBaseStats(poke.PokemonId);
