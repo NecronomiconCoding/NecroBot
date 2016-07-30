@@ -139,6 +139,7 @@ namespace PoGo.NecroBot.CLI
         public int SnipeLocationServerPort = 16969;
         public bool UseSnipeLocationServer = false;
         public bool LevelUpPokemonFromIV = true;
+        public string LevelUpByCPorIV = "cp";
         public bool UseTransferIVForSnipe = false;
         public bool SnipeIgnoreUnknownIV = false;
         public int MinDelayBetweenSnipes = 20000;
@@ -587,6 +588,7 @@ namespace PoGo.NecroBot.CLI
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
         public bool LevelUpPokemonFromIV => _settings.LevelUpPokemonFromIV;
+        public string LevelUpByCPorIV => _settings.LevelUpByCPorIV;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
