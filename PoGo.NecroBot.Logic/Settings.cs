@@ -102,7 +102,7 @@ namespace PoGo.NecroBot.CLI
 
         [JsonIgnore] internal AuthSettings Auth = new AuthSettings();
 
-        public bool AutomaticallyLevelUpPokemon = true;
+        public bool AutomaticallyLevelUpPokemon = false;
 
         public bool AutoUpdate = true;
         public double DefaultAltitude = 10;
