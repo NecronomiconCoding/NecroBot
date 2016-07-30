@@ -49,7 +49,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public override string ToString()
         {
-            return latitude.ToString("0.0000") + ", " + latitude.ToString("0.0000");
+            return latitude.ToString("0.0000") + ", " + longitude.ToString("0.0000");
         }
 
         public bool Equals(PokemonLocation obj)
@@ -246,6 +246,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     if (!nestLocations.Any())
                     {
+                        if (session.LogicSettings.PokemonToSnipe.Locations.Count()>0)
+                        { 
+                            nestLocations = session.LogicSettings.PokemonToSnipe.Locations;
+                        } else { 
                         try
                         {
 
@@ -289,8 +293,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 Message = "Error reading nests on webpage"
                             });
-                            nestLocations = session.LogicSettings.PokemonToSnipe.Locations;
                         }
+                    }
                     }
                     foreach (var location in nestLocations)
                     {
