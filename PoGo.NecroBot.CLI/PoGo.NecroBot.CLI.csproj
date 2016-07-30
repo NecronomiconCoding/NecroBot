@@ -109,6 +109,14 @@
     <Compile Include="SimpleSession.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebSocketHandlers\Encoding.cs" />
+    <Compile Include="WebSocketHandlers\IWebSocketResponce.cs" />
+    <Compile Include="WebSocketHandlers\IWebSocketRequestHandler.cs" />
+    <Compile Include="WebSocketHandlers\PokemonListExtended\Events\PokemonListExtendedResponce.cs" />
+    <Compile Include="WebSocketHandlers\PokemonListExtended\Helpers\PokemonDataExtended.cs" />
+    <Compile Include="WebSocketHandlers\PokemonListExtended\PokemonListExtendedHandler.cs" />
+    <Compile Include="WebSocketHandlers\PokemonListExtended\Tasks\PokemonExtendedListTask.cs" />
+    <Compile Include="WebSocketHandlers\WebSocketEventManager.cs" />
     <Compile Include="WebSocketInterface.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +212,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
@@ -227,8 +236,7 @@
       <Using xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Namespace="System" />
       <Using xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Namespace="System.IO" />
       <Using xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Namespace="System.Xml.Linq" />
-      <Code xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Type="Fragment" Language="cs">
-<![CDATA[
+      <Code xmlns="http://schemas.microsoft.com/developer/msbuild/2003" Type="Fragment" Language="cs"><![CDATA[
 var config = XElement.Load(Config.ItemSpec).Elements("Costura").FirstOrDefault();
 
 if (config == null) return true;
@@ -247,8 +255,8 @@ var filesToCleanup = Files.Select(f => f.ItemSpec).Where(f => !excludedAssemblie
 
 foreach (var item in filesToCleanup)
   File.Delete(item);
-]]>
-      </Code></Task>
+]]></Code>
+    </Task>
   </UsingTask>
   <Target Name="CleanReferenceCopyLocalPaths" AfterTargets="AfterBuild;NonWinFodyTarget">
     <CosturaCleanup Config="FodyWeavers.xml" Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
