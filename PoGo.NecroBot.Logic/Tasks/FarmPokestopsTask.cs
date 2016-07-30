@@ -168,6 +168,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                     }
+                    if (session.LogicSettings.LevelUpPokemonFromIV)
+                    {
+                        await LevelUpPokemon.Execute(session, cancellationToken);
+                    }
                     if (session.LogicSettings.RenamePokemon)
                     {
                         await RenamePokemonTask.Execute(session, cancellationToken);

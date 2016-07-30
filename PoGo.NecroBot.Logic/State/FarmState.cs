@@ -16,7 +16,10 @@ namespace PoGo.NecroBot.Logic.State
             {
                 await EvolvePokemonTask.Execute(session, cancellationToken);
             }
-
+            if (session.LogicSettings.LevelUpPokemonFromIV)
+            {
+                await LevelUpPokemon.Execute(session, cancellationToken);
+            }
             if (session.LogicSettings.TransferDuplicatePokemon)
             {
                 await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
