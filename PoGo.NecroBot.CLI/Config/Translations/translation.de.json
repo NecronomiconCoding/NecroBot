@@ -233,10 +233,6 @@
       "Value": "Account nicht bestätigt! Stoppe..."
     },
     {
-      "Key": "couldntCopyToClipboard2",
-      "Value": "Gehe auf: {0} & trage {1} ein."
-    },
-    {
       "Key": "realisticTravelDetected",
       "Value": "Realistische Bewegung gefunden. Benutze UserSettings.settings"
     },
