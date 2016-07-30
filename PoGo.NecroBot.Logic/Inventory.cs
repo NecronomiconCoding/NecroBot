@@ -211,21 +211,34 @@ namespace PoGo.NecroBot.Logic
             var itemsToRecylce = new List<ItemData>();
             var myItems = (await GetItems()).ToList();
 
+            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
+            var amountOfPotionsToKeep = _logicSettings.TotalAmountOfPotionsToKeep;
+            var amountOfRevivesToKeep = _logicSettings.TotalAmountOfRevivesToKeep;
+
+            int currentAmountOfPokeballs = await GetItemAmountByType(ItemId.ItemPokeBall);
+            int currentAmountOfGreatballs = await GetItemAmountByType(ItemId.ItemGreatBall);
+            int currentAmountOfUltraballs = await GetItemAmountByType(ItemId.ItemUltraBall);
+            int currentAmountOfMasterballs = await GetItemAmountByType(ItemId.ItemMasterBall);
+
+            Logging.Logger.Write($"[Current Inventory] Pokeballs: {currentAmountOfPokeballs} | Greatballs: {currentAmountOfGreatballs} | Ultraballs: {currentAmountOfUltraballs} | Masterballs: {currentAmountOfMasterballs}", Logging.LogLevel.Info, ConsoleColor.Yellow);
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Pokeballs.Contains(s.Key)))
             {
+                Logging.Logger.Write($"Checking for balls to recycle, keeping {amountOfPokeballsToKeep}", Logging.LogLevel.Info, ConsoleColor.Yellow);
                 var pokeballsToRecycle = GetPokeballsToRecycle(settings, myItems);
                 itemsToRecylce.AddRange(pokeballsToRecycle);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Potions.Contains(s.Key)))
             {
+                Logging.Logger.Write($"Checking for potions to recycle, keeping {amountOfPotionsToKeep}", Logging.LogLevel.Info, ConsoleColor.Yellow);
                 var potionsToRecycle = GetPotionsToRecycle(settings, myItems);
                 itemsToRecylce.AddRange(potionsToRecycle);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Revives.Contains(s.Key)))
             {
+                Logging.Logger.Write($"Checking for revives to recycle, keeping {amountOfRevivesToKeep}", Logging.LogLevel.Info, ConsoleColor.Yellow);
                 var revivesToRecycle = GetRevivesToRecycle(settings, myItems);
                 itemsToRecylce.AddRange(revivesToRecycle);
             }
@@ -240,7 +253,7 @@ namespace PoGo.NecroBot.Logic
                             Count = x.Count - _logicSettings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
-            
+
             itemsToRecylce.AddRange(otherItemsToRecylce);
 
             return itemsToRecylce;
@@ -251,7 +264,7 @@ namespace PoGo.NecroBot.Logic
             var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
             if (amountOfPokeballsToKeep < 1)
             {
-                Logging.Logger.Write("TotalAmountOfPokebalsToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                Logging.Logger.Write("TotalAmountOfPokebalsToKeep is configured incorrectly. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
                 return new List<ItemData>();
             }
 
@@ -266,7 +279,7 @@ namespace PoGo.NecroBot.Logic
             var amountOfPotionsToKeep = _logicSettings.TotalAmountOfPotionsToKeep;
             if (amountOfPotionsToKeep < 1)
             {
-                Logging.Logger.Write("TotalAmountOfPotionsToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                Logging.Logger.Write("TotalAmountOfPotionsToKeep is configured incorrectly. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
                 return new List<ItemData>();
             }
 
