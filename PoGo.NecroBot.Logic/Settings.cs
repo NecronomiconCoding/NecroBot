@@ -133,6 +133,7 @@ namespace PoGo.NecroBot.CLI
         public bool StartupWelcomeDelay = true;
         public bool SnipeAtPokestops = false;
         public int MinPokeballsToSnipe = 20;
+        public int MinPokeballsWhileSnipe = 0;
         public string SnipeLocationServer = "localhost";
         public int SnipeLocationServerPort = 16969;
         public bool UseSnipeLocationServer = false;
@@ -595,6 +596,7 @@ namespace PoGo.NecroBot.CLI
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
+        public int MinPokeballsWhileSnipe => _settings.MinPokeballsWhileSnipe;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
