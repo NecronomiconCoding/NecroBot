@@ -30,7 +30,7 @@
     },
 	{
       "Key": "CatchStatusFlee",
-      "Value": "Geflüchtet"
+      "Value": "Gefluechtet"
     },
 {
       "Key": "CatchStatusMissed",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Glücks-Ei benutzt, verbleibend: {0}"
+      "Value": "Gluecks-Ei benutzt, verbleibend: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -102,7 +102,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Keine Pokébälle mehr! - Wir haben ein {0} mit {1} WP verpasst!"
+      "Value": "Keine Pokébaelle mehr! - Wir haben ein {0} mit {1} WP verpasst!"
     },
     {
       "Key": "catchStatusAttempt",
@@ -138,15 +138,15 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "ZeigeHöchsteWP"
+      "Value": "ZeigeHoechsteWP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "ZeigeHöchstesPerfektes"
+      "Value": "ZeigeHoechstesPerfektes"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "ZeigeHöchstesLevel"
+      "Value": "ZeigeHoechstesLevel"
     },
     {
       "Key": "welcomeWarning",
@@ -162,7 +162,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Ei ist geschlüpft: {0}"
+      "Value": "Ei ist geschluepft: {0}"
     },
     {
       "Key": "logEntryError",
@@ -230,11 +230,11 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Account nicht bestätigt! Stoppe..."
+      "Value": "Account nicht bestaetigt! Stoppe..."
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Öffne Google Device Seite. Bitte füge den Code mit CTRL+V ein."
+      "Value": "Oeffne Google Device Seite. Bitte füge den Code mit CTRL+V ein."
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -254,7 +254,7 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinaten in \"Coords.ini\" sind ungültig! Benutze standart Koordinaten."
+      "Value": "Koordinaten in \"Coords.ini\" sind ungueltig! Benutze standart Koordinaten."
     },
     {
       "Key": "gotUpToDateVersion",
@@ -294,7 +294,7 @@
     },
     {
       "Key": "pokemonSkipped",
-      "Value": "Übersprungen {0}"
+      "Value": "Uebersprungen {0}"
     },
     {
       "Key": "invFullTransferring",
@@ -314,7 +314,7 @@
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Das gewünschte Ziel ({0}, {1}), ist zu weit von deiner aktuellen Position ({2}, {3}) entfernt."
+      "Value": "Das gewuenschte Ziel ({0}, {1}), ist zu weit von deiner aktuellen Position ({2}, {3}) entfernt."
     },
     {
       "Key": "pokemonRename",
