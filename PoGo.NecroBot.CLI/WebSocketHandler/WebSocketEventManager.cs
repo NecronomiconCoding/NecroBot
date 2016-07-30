@@ -26,11 +26,11 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler
             } 
         }
 
-        public void Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
+        public  async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
             if (_registerdHandlers.ContainsKey((string)message.Command))
             {
-                _registerdHandlers[(string)message.Command].Handle(session, webSocketSession, message);
+               await _registerdHandlers[(string)message.Command].Handle(session, webSocketSession, message);
             }
             else
             {
