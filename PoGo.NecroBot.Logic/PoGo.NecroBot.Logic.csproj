@@ -62,6 +62,7 @@
     <Compile Include="Common\Translations.cs" />
     <Compile Include="Event\DisplayHighestsPokemonEvent.cs" />
     <Compile Include="Event\EggHatchedEvent.cs" />
+    <Compile Include="Event\EggsListEvent.cs" />
     <Compile Include="Event\EventDispatcher.cs" />
     <Compile Include="Event\FortTargetEvent.cs" />
     <Compile Include="Event\FortFailedEvent.cs" />
