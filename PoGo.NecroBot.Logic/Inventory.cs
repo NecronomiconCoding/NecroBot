@@ -214,6 +214,13 @@ namespace PoGo.NecroBot.Logic
             return pokemons.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(limit);
         }
 
+        public async Task<double> GetPerfect(PokemonData Poke)
+        {
+           var result = PokemonInfo.CalculatePokemonPerfection(Poke);
+            return result;
+        }
+
+
         public async Task<int> GetItemAmountByType(ItemId type)
         {
             var pokeballs = await GetItems();
