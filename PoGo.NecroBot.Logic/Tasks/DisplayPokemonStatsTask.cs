@@ -7,6 +7,7 @@ using PoGo.NecroBot.Logic.DataDumper;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
+using System.Collections.Generic;
 
 #endregion
 
@@ -14,6 +15,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class DisplayPokemonStatsTask
     {
+        public static List<ulong> PokemonID = new List<ulong>();
+        public static List<ulong> PokemonIDCP = new List<ulong>();
+
         public static async Task Execute(ISession session)
         {
             var highestsPokemonCp = await session.Inventory.GetHighestsCp(session.LogicSettings.AmountOfPokemonToDisplayOnStart);
@@ -39,7 +43,20 @@ namespace PoGo.NecroBot.Logic.Tasks
                     SortedBy = "IV",
                     PokemonList = pokemonPairedWithStatsIv
                 });
-
+            for (int i = 0; i < pokemonPairedWithStatsIv.Count; i++)
+            {
+                var dgdfs = pokemonPairedWithStatsIv[i].ToString();
+                string[] tokens = dgdfs.Split(new[] { "id" }, StringSplitOptions.None);
+                string[] splitone = tokens[1].Split('"');
+                PokemonID.Add(ulong.Parse(splitone[2]));
+            }
+            for (int i = 0; i < pokemonPairedWithStatsCp.Count; i++)
+            {
+                var dgdfs = pokemonPairedWithStatsIv[i].ToString();
+                string[] tokens = dgdfs.Split(new[] { "id" }, StringSplitOptions.None);
+                string[] splitone = tokens[1].Split('"');
+                PokemonIDCP.Add(ulong.Parse(splitone[2]));
+            }
             var allPokemonInBag = session.LogicSettings.PrioritizeIvOverCp ? await session.Inventory.GetHighestsPerfect(1000) : await session.Inventory.GetHighestsCp(1000);
             if (session.LogicSettings.DumpPokemonStats)
             {

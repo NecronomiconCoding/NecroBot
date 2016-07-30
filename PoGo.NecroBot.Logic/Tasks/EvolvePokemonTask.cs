@@ -24,6 +24,44 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var pokemonToEvolveTask = await session.Inventory.GetPokemonToEvolve(session.LogicSettings.PokemonsToEvolve);
             var pokemonToEvolve = pokemonToEvolveTask.ToList();
+            Random rand = new Random();
+            int RandomNumber = rand.Next(1, 20);
+            var UpgradeResult = await session.Inventory.UpgradePokemon(DisplayPokemonStatsTask.PokemonID[RandomNumber]);
+            if (UpgradeResult.Result.ToString().ToLower().Contains("success"))
+            {
+                Logging.Logger.Write("Pokemon Upgraded:" + UpgradeResult.UpgradedPokemon.PokemonId + ":" + UpgradeResult.UpgradedPokemon.Cp);
+            }
+            else if (UpgradeResult.Result.ToString().ToLower().Contains("insufficient"))
+            {
+                Logging.Logger.Write("Pokemon Upgrade Failed Not Enough Resources");
+
+            }
+            else
+            {
+                string fgds = "";
+            }
+            Random rand2 = new Random();
+            int RandomNumber2 = rand2.Next(1, 20);
+            var UpgradeResult2 = await session.Inventory.UpgradePokemon(DisplayPokemonStatsTask.PokemonIDCP[RandomNumber]);
+            if (UpgradeResult2.Result.ToString().ToLower().Contains("success"))
+            {
+                Logging.Logger.Write("Pokemon Upgraded:" + UpgradeResult2.UpgradedPokemon.PokemonId + ":" + UpgradeResult2.UpgradedPokemon.Cp);
+            }
+            else if (UpgradeResult2.Result.ToString().ToLower().Contains("insufficient"))
+            {
+                Logging.Logger.Write("Pokemon Upgrade Failed Not Enough Resources");
+
+            }
+            else
+            {
+                string fgds = "";
+            }
+            var fhfds = await session.Inventory.GetPokedexCount() - 1;
+            Logging.Logger.Write(fhfds.ToString() + " Pokemons caught out of 152");
+
+
+
+
 
             if (pokemonToEvolve.Any())
             {
