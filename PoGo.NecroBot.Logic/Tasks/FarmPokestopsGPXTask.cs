@@ -126,7 +126,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                             }
 
-                            if (session.LogicSettings.RenameAboveIv)
+                            if (session.LogicSettings.RenameAboveIv || session.LogicSettings.RenameAllIv)
                             {
                                 await RenamePokemonTask.Execute(session, cancellationToken);
                             }
