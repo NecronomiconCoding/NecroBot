@@ -54,7 +54,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
+      "Value": "Du bist auserhalb des festgelegten Radius! Laufe zurck zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -82,7 +82,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} wurde für {1}EP entwickelt!"
+      "Value": "{0} wurde fuer {1}EP entwickelt!"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -118,7 +118,7 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Unerwartete Daten in GPX Datei, versuche zu überspringen."
+      "Value": "Unerwartete Daten in GPX Datei, versuche zu ueberspringen."
     },
     {
       "Key": "displayHighestsHeader",
@@ -150,7 +150,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Gehe sicher, dass Lat & Lng richtig sind. Schließe das Programm falls nicht! Lat: {0} Lng: {1}"
+      "Value": "Gehe sicher, dass Lat & Lng richtig sind. Schliese das Programm falls nicht! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -234,7 +234,7 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Oeffne Google Device Seite. Bitte füge den Code mit CTRL+V ein."
+      "Value": "Oeffne Google Device Seite. Bitte fuege den Code mit CTRL+V ein."
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -278,7 +278,7 @@
     },
     {
       "Key": "updateFinished",
-      "Value": "Update abgeschlossen! Du kannst dieses Fenster nun schließen."
+      "Value": "Update abgeschlossen! Du kannst dieses Fenster nun schliesen."
     },
     {
       "Key": "lookingForIncensePokemon",
