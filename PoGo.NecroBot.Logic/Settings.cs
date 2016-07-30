@@ -114,6 +114,9 @@ namespace PoGo.NecroBot.CLI
         public int UseLuckyEggsMinPokemonAmount = 30;
         public bool UseLuckyEggsWhileEvolving = false;
         public bool UseEggIncubators = true;
+        public int UseGreatBallAboveCP = 750;
+        public int UseUltraBallAboveCP = 1000;
+        public int UseMasterBallAboveCP = 1500;
         public bool DumpPokemonStats = false;
         public string GpxFile = "GPXPath.GPX";
         public bool UseGpxPathing = false;
@@ -589,6 +592,9 @@ namespace PoGo.NecroBot.CLI
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool UseEggIncubators => _settings.UseEggIncubators;
+        public int UseGreatBallAboveCP => _settings.UseGreatBallAboveCP;
+        public int UseUltraBallAboveCP => _settings.UseUltraBallAboveCP;
+        public int UseMasterBallAboveCP => _settings.UseMasterBallAboveCP;
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
         public int DelayBetweenPlayerActions => _settings.DelayBetweenPlayerActions;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
