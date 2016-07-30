@@ -74,9 +74,7 @@
             this.renameTemplate = new System.Windows.Forms.TextBox();
             this.IVPrio = new System.Windows.Forms.CheckBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.keepMinIVPerc = new System.Windows.Forms.TextBox();
             this.keepMinDuplicate = new System.Windows.Forms.TextBox();
             this.transferDuplicate = new System.Windows.Forms.CheckBox();
@@ -87,8 +85,6 @@
             this.luckyeggPokemon = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.luckyeggEvolve = new System.Windows.Forms.CheckBox();
-            this.btnOpenEvolveList = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.evolvecandy = new System.Windows.Forms.CheckBox();
             this.evolvealliv = new System.Windows.Forms.CheckBox();
             this.evolveaboveiv = new System.Windows.Forms.TextBox();
@@ -501,9 +497,7 @@
             this.groupBox4.Controls.Add(this.renameTemplate);
             this.groupBox4.Controls.Add(this.IVPrio);
             this.groupBox4.Controls.Add(this.label11);
-            this.groupBox4.Controls.Add(this.button1);
             this.groupBox4.Controls.Add(this.label12);
-            this.groupBox4.Controls.Add(this.label8);
             this.groupBox4.Controls.Add(this.keepMinIVPerc);
             this.groupBox4.Controls.Add(this.keepMinDuplicate);
             this.groupBox4.Controls.Add(this.transferDuplicate);
@@ -582,15 +576,6 @@
             this.label11.TabIndex = 16;
             this.label11.Text = "Keep min IV%:";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(19, 385);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(169, 23);
-            this.button1.TabIndex = 7;
-            this.button1.Text = "Manage Pokemon evolve list";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -599,15 +584,6 @@
             this.label12.Size = new System.Drawing.Size(102, 13);
             this.label12.TabIndex = 14;
             this.label12.Text = "Keep min Duplicate:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(51, 369);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(103, 13);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Pokemon to Evolve:";
             // 
             // keepMinIVPerc
             // 
@@ -664,8 +640,6 @@
             this.groupBox3.Controls.Add(this.luckyeggPokemon);
             this.groupBox3.Controls.Add(this.label14);
             this.groupBox3.Controls.Add(this.luckyeggEvolve);
-            this.groupBox3.Controls.Add(this.btnOpenEvolveList);
-            this.groupBox3.Controls.Add(this.label4);
             this.groupBox3.Controls.Add(this.evolvecandy);
             this.groupBox3.Controls.Add(this.evolvealliv);
             this.groupBox3.Controls.Add(this.evolveaboveiv);
@@ -702,24 +676,6 @@
             this.luckyeggEvolve.TabIndex = 9;
             this.luckyeggEvolve.Text = "Use Luckyegg while Evolving?";
             this.luckyeggEvolve.UseVisualStyleBackColor = true;
-            // 
-            // btnOpenEvolveList
-            // 
-            this.btnOpenEvolveList.Location = new System.Drawing.Point(19, 230);
-            this.btnOpenEvolveList.Name = "btnOpenEvolveList";
-            this.btnOpenEvolveList.Size = new System.Drawing.Size(169, 23);
-            this.btnOpenEvolveList.TabIndex = 7;
-            this.btnOpenEvolveList.Text = "Manage Pokemon evolve list";
-            this.btnOpenEvolveList.UseVisualStyleBackColor = true;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(47, 214);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(103, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Pokemon to Evolve:";
             // 
             // evolvecandy
             // 
@@ -1097,8 +1053,6 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button btnOpenEvolveList;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox evolvecandy;
         private System.Windows.Forms.CheckBox evolvealliv;
         private System.Windows.Forms.TextBox evolveaboveiv;
@@ -1116,9 +1070,7 @@
         private System.Windows.Forms.TextBox renameTemplate;
         private System.Windows.Forms.CheckBox IVPrio;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox keepMinIVPerc;
         private System.Windows.Forms.TextBox keepMinDuplicate;
         private System.Windows.Forms.CheckBox transferDuplicate;
