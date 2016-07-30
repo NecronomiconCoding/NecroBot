@@ -362,11 +362,11 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Anda perlu mengisi GoogleUsername dan GooglePassword di auth.json!"
+      "Value": "Anda perlu mengisi Username dan Password di auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Anda perlu mengisi PtcUsername dan PtcPassword di auth.json!"
+      "Value": "Anda perlu mengisi Username dan Password di auth.json!"
     },
     {
       "Key": "snipeScan",
