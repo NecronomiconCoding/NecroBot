@@ -2,6 +2,7 @@
 
 using System;
 using System.Text;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 
@@ -46,29 +47,29 @@ namespace PoGo.NecroBot.CLI
             var strPokestop = "POKESTOP";
             var strFarming = "FARMING";
             var strRecycling = "RECYCLING";
-            var strPKMN = "PKMN";
-            var strTransfered = "TRANSFERED"; 
+            var strPkmn = "PKMN";
+            var strTransfered = "TRANSFERED";
             var strEvolved = "EVOLVED";
             var strBerry = "BERRY";
             var strEgg = "EGG";
             var strDebug = "DEBUG";
             var strUpdate = "UPDATE";
 
-            if(_session != null)
+            if (_session != null)
             {
-                strError     = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryError);
-                strAttention = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryAttention);
-                strInfo      = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryInfo);
-                strPokestop  = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryPokestop);
-                strFarming   = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryFarming);
-                strRecycling = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryRecycling);
-                strPKMN      = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryPKMN);
-                strTransfered= _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryTransfered);
-                strEvolved   = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryEvolved);
-                strBerry     = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryBerry); 
-                strEgg       = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryEgg); 
-                strDebug     = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryDebug);
-                strUpdate = _session.Translation.GetTranslation(Logic.Common.TranslationString.LogEntryUpdate);
+                strError = _session.Translation.GetTranslation(TranslationString.LogEntryError);
+                strAttention = _session.Translation.GetTranslation(TranslationString.LogEntryAttention);
+                strInfo = _session.Translation.GetTranslation(TranslationString.LogEntryInfo);
+                strPokestop = _session.Translation.GetTranslation(TranslationString.LogEntryPokestop);
+                strFarming = _session.Translation.GetTranslation(TranslationString.LogEntryFarming);
+                strRecycling = _session.Translation.GetTranslation(TranslationString.LogEntryRecycling);
+                strPkmn = _session.Translation.GetTranslation(TranslationString.LogEntryPkmn);
+                strTransfered = _session.Translation.GetTranslation(TranslationString.LogEntryTransfered);
+                strEvolved = _session.Translation.GetTranslation(TranslationString.LogEntryEvolved);
+                strBerry = _session.Translation.GetTranslation(TranslationString.LogEntryBerry);
+                strEgg = _session.Translation.GetTranslation(TranslationString.LogEntryEgg);
+                strDebug = _session.Translation.GetTranslation(TranslationString.LogEntryDebug);
+                strUpdate = _session.Translation.GetTranslation(TranslationString.LogEntryUpdate);
             }
 
             switch (level)
@@ -99,7 +100,7 @@ namespace PoGo.NecroBot.CLI
                     break;
                 case LogLevel.Caught:
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strPKMN}) {message}");
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strPkmn}) {message}");
                     break;
                 case LogLevel.Transfer:
                     Console.ForegroundColor = ConsoleColor.DarkGreen;

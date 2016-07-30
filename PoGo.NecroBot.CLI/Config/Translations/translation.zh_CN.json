@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -242,7 +242,7 @@
     },
     {
       "Key": "FinishedTransferringConfig",
-      "Value":  "完成你的配置转移到新版本..."
+      "Value": "完成你的配置转移到新版本..."
     },
     {
       "Key": "finishedUnpackingFiles",

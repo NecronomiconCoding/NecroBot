@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,11 +22,13 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "¡Estás fuera del radio definido! Andando a la posición inicial (a {0}m) en 5 segundos. ¿Es correcto tu archivo Coords.ini?"
+      "Value":
+        "¡Estás fuera del radio definido! Andando a la posición inicial (a {0}m) en 5 segundos. ¿Es correcto tu archivo Coords.ini?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "No se encontraron pokeparadas disponibles en tu área. ¿Has configurado una distancia máxima demasiado pequeña?"
+      "Value":
+        "No se encontraron pokeparadas disponibles en tu área. ¿Has configurado una distancia máxima demasiado pequeña?"
     },
     {
       "Key": "eventFortUsed",
@@ -66,7 +68,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -118,15 +121,15 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Asegúrese de que la Latitud y Longitud son las correctas. Salga del Programa si no es así! Lat: {0} Lng: {1}"
+      "Value":
+        "Asegúrese de que la Latitud y Longitud son las correctas. Salga del Programa si no es así! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
       "Value": "Añadiendo huevo a la incubadora: {0:0.00}km restantes"
     },
     {
-      "Key": "incubatorStatus
-        ",
+      "Key": "incubatorStatusUpdate",
       "Value": "Actualizando el estado de la incubadora: {0:0.00}km restantes"
     },
     {
@@ -246,6 +249,10 @@
       "Value": "Terminada la desempaquetación de los archivos..."
     },
     {
+      "Key": "finishedTransferringConfig",
+      "Value": "Terminado de transferir su configuración a la nueva versión..."
+    },
+    {
       "Key": "updateFinished",
       "Value": "Actualización terminada, puede cerrar esta ventana ahora."
     },
@@ -271,7 +278,8 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "El inventario de pokemons está lleno. Por favor transfiera los pokemons manualmente o active (true) TransferDuplicatePokemon en el archivo de opciones..."
+      "Value":
+        "El inventario de pokemons está lleno. Por favor transfiera los pokemons manualmente o active (true) TransferDuplicatePokemon en el archivo de opciones..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -339,7 +347,8 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Activo {1} - Nivel: {2} | EXP/H: {3:0} | P/H: {4:0} | P.Estelar: {5:0} | Transferido: {6:0} | Reciclado: {7:0}"
+      "Value":
+        "{0} - Activo {1} - Nivel: {2} | EXP/H: {3:0} | P/H: {4:0} | P.Estelar: {5:0} | Transferido: {6:0} | Reciclado: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -351,11 +360,13 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Como tiene habilitado Google autenticación de 2 factores, tendrá que insertar una contraseña específica de la APP en el auth.json"
+      "Value":
+        "Como tiene habilitado Google autenticación de 2 factores, tendrá que insertar una contraseña específica de la APP en el auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "Abriendo Google App-Passwords. Por favor, cree una nueva contraseña en la APP (utilizar en otro dispositivo)"
+      "Value":
+        "Abriendo Google App-Passwords. Por favor, cree una nueva contraseña en la APP (utilizar en otro dispositivo)"
     },
     {
       "Key": "googleError",
@@ -374,8 +385,24 @@
       "Value": "[Sniper] Escaneando en busca de Pokemons en {0}..."
     },
     {
+      "Key": "snipeScanEx",
+      "Value": "[Sniper] Sniping a {0} con {1} IV en {2}..."
+    },
+    {
       "Key": "noPokemonToSnipe",
       "Value": "[Sniper] No se encontraron Pokemons :("
+    },
+    {
+      "Key": "notEnoughPokeballsToSnipe",
+      "Value": "No hay suficientes Pokeballs para iniciar Sniping! ({0}/{1})"
+    },
+    {
+      "Key": "displayHighestMOVE1Header",
+      "Value": "MOVIMIENTO1"
+    },
+    {
+      "Key": "displayHighestMOVE2Header",
+      "Value": "MOVIMIENTO2"
     }
   ]
 }
