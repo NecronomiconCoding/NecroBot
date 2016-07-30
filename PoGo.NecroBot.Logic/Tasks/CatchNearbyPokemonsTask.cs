@@ -33,7 +33,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var masterBallsCount = await session.Inventory.GetItemAmountByType(POGOProtos.Inventory.Item.ItemId.ItemMasterBall);
 
                 if (pokeBallsCount + greatBallsCount + ultraBallsCount + masterBallsCount == 0)
+                {
+                    Logger.Write(session.Translation.GetTranslation(Common.TranslationString.ZeroPokeballInv));
                     return;
+                }
 
                 if (session.LogicSettings.UsePokemonToNotCatchFilter &&
                     session.LogicSettings.PokemonsNotToCatch.Contains(pokemon.PokemonId))

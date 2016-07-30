@@ -5,6 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Data;
@@ -235,27 +238,41 @@ namespace PoGo.NecroBot.Logic
                 .Where(p => p != null);
         }
 
-        public async Task<IEnumerable<ItemData>> GetItemsToRecycle(ISettings settings)
+        public async Task<IEnumerable<ItemData>> GetItemsToRecycle(ISession session)
         {
+            var settings = session.Settings;
             var itemsToRecylce = new List<ItemData>();
             var myItems = (await GetItems()).ToList();
 
+            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
+            var amountOfPotionsToKeep = _logicSettings.TotalAmountOfPotionsToKeep;
+            var amountOfRevivesToKeep = _logicSettings.TotalAmountOfRevivesToKeep;
+
+            int currentAmountOfPokeballs = await GetItemAmountByType(ItemId.ItemPokeBall);
+            int currentAmountOfGreatballs = await GetItemAmountByType(ItemId.ItemGreatBall);
+            int currentAmountOfUltraballs = await GetItemAmountByType(ItemId.ItemUltraBall);
+            int currentAmountOfMasterballs = await GetItemAmountByType(ItemId.ItemMasterBall);
+
+            Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.CurrentPokeballInv, currentAmountOfPokeballs, currentAmountOfGreatballs, currentAmountOfUltraballs, currentAmountOfMasterballs));
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Pokeballs.Contains(s.Key)))
             {
-                var pokeballsToRecycle = GetPokeballsToRecycle(settings, myItems);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.CheckingForBallsToRecycle, amountOfPokeballsToKeep));
+                var pokeballsToRecycle = GetPokeballsToRecycle(session, myItems);
                 itemsToRecylce.AddRange(pokeballsToRecycle);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Potions.Contains(s.Key)))
             {
-                var potionsToRecycle = GetPotionsToRecycle(settings, myItems);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.CheckingForPotionsToRecycle, amountOfPotionsToKeep));
+                var potionsToRecycle = GetPotionsToRecycle(session, myItems);
                 itemsToRecylce.AddRange(potionsToRecycle);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Revives.Contains(s.Key)))
             {
-                var revivesToRecycle = GetRevivesToRecycle(settings, myItems);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.CheckingForRevivesToRecycle, amountOfRevivesToKeep));
+                var revivesToRecycle = GetRevivesToRecycle(session, myItems);
                 itemsToRecylce.AddRange(revivesToRecycle);
             }
 
@@ -269,18 +286,19 @@ namespace PoGo.NecroBot.Logic
                             Count = x.Count - _logicSettings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
                             Unseen = x.Unseen
                         });
-            
+
             itemsToRecylce.AddRange(otherItemsToRecylce);
 
             return itemsToRecylce;
         }
 
-        private List<ItemData> GetPokeballsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        private List<ItemData> GetPokeballsToRecycle(ISession session, IReadOnlyList<ItemData> myItems)
         {
+            var settings = session.Settings;
             var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
             if (amountOfPokeballsToKeep < 1)
             {
-                Logging.Logger.Write("TotalAmountOfPokebalsToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.PokeballsToKeepIncorrect), Logging.LogLevel.Error, ConsoleColor.Red);
                 return new List<ItemData>();
             }
 
@@ -290,12 +308,13 @@ namespace PoGo.NecroBot.Logic
             return TakeAmountOfItems(allPokeballs, amountOfPokeballsToKeep).ToList();
         }
 
-        private List<ItemData> GetPotionsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        private List<ItemData> GetPotionsToRecycle(ISession session, IReadOnlyList<ItemData> myItems)
         {
+            var settings = session.Settings;
             var amountOfPotionsToKeep = _logicSettings.TotalAmountOfPotionsToKeep;
             if (amountOfPotionsToKeep < 1)
             {
-                Logging.Logger.Write("TotalAmountOfPotionsToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.PotionsToKeepIncorrect), Logging.LogLevel.Error, ConsoleColor.Red);
                 return new List<ItemData>();
             }
 
@@ -305,12 +324,13 @@ namespace PoGo.NecroBot.Logic
             return TakeAmountOfItems(allPotions, amountOfPotionsToKeep).ToList();
         }
 
-        private List<ItemData> GetRevivesToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        private List<ItemData> GetRevivesToRecycle(ISession session, IReadOnlyList<ItemData> myItems)
         {
+            var settings = session.Settings;
             var amountOfRevivesToKeep = _logicSettings.TotalAmountOfRevivesToKeep;
             if (amountOfRevivesToKeep < 1)
             {
-                Logging.Logger.Write("TotalAmountOfRevivesToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.RevivesToKeepIncorrect), Logging.LogLevel.Error, ConsoleColor.Red);
                 return new List<ItemData>();
             }
 
