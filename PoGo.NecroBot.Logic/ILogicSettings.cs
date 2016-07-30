@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System.Collections.Generic;
 using POGOProtos.Enums;
@@ -110,6 +110,7 @@ namespace PoGo.NecroBot.Logic
         int TotalAmountOfPokebalsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
+        bool SkipPokeStopHit { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
