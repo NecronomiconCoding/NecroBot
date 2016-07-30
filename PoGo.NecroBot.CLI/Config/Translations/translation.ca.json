@@ -1,0 +1,434 @@
+﻿{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "Poké Ball"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "Super Ball"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "Ultra Ball"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "Master Ball"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "AuthType desconegut dins de config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value": "Ets fora del radi definit! Caminant cap a la posició inicial (a {0}m) en 5 segons. És correcte el teu arxiu Coords.ini?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "No s'han trobat pokeparades disponibles dins la teva àrea. Has configurat una distància màxima massa petita?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "PX: {0}, Gemmes: {1}, Objectes: {2}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "El desplaçament ha fallat, possible SoftBan. Eliminar SoftBan en: {0}/{1}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} en ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Jugant com a {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "S'ha fet servir un Ou de la Sort. Te'n queden {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0}, obtens {1}px"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Fallit {0}. El resultat ha estat {1}, parant d'evolucionar {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- PC: {1}  IV: {2}%   [Millor PC: {3}  IV: {4}%] (Caramels: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | amb {9} (queden {10}). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Sense Pokéballs! - Hem perdut un {0} amb {1} PC :("
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Intent #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Caramels: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Error: Dades de l'arxiu GPX no controlades, intentar ometre."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemon"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfecte"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "nom"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "Desconegut"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "Pokemon amb més PC"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Pokemon amb més Perfecció"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Pokemon amb més Nivell"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Asegura't que la Latitud i la Longitud són correctes. Surt del programa si no és així! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Afegint ou a la incubadora: {0:0.00}km restants"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Actualitzant l'estat de la incubadora: {0:0.00}km restants"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "L'ou incubat ha eclosionat! : {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "ERROR"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "ATENCIÓ"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKEPARADA"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMING"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "RECICLATGE"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "TRANSFERIT"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "EVOLUCIONAR"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "BAIA"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "OU"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "ACTUALITZAR"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Connectat fent servir {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "Els servidors de PTC probablement han caigut o les teves dades d'accés són incorrectes. Prova amb Google."
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Intentar de nou en {0} segons..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Compte no verificat! Sortint..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Obrint la pàgina de Google Device. Si us plau, enganxa el codi fent servir CTRL+V."
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "No s'ha pogut copiar al portpapers, si us plau, fes-ho manualment."
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Anar: {0} & introduïr {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Detectat viatge realista, utilitzant UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Viatge no realista en {0}, utilitzant l'últim Coords.ini memoritzat"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Les coordenades de \"Coords.ini\" no són correctes, utilizant les coordenades predeterminades"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Perfecte! Ja tens la versió més recent del programa {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "L'AutoUpdater està desactivat. Obtén l'última versió a: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Descarregant i aplicant l'actualització..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Acabada la descàrrega de l'última actualització..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Acabat el desempaquetament dels arxius..."
+    },
+    {
+      "Key": "finishedTransferringConfig",
+      "Value": "S'ha acabat de transferir la teva configuració a la nova versió..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Actualització acabada, ja pots tancar aquesta finestra."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Buscant encens per a pokemon..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Buscant Pokemon..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Buscant Esquers pokemon..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Omès {0}"
+    },
+	{
+      "Key": "zeroPokeballInv",
+      "Value": "No tens pokeballs en el teu inventori, no es poden capturar més Pokemon."
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "[Inventori Actual] Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
+    },
+    {
+      "Key": "checkingForBallsToRecycle",
+      "Value": "Comprovant si hi ha boles per reciclar, guardant-ne {0}"
+    },
+    {
+      "Key": "checkingForPotionsToRecycle",
+      "Value": "Comprovant si hi ha pocions per reciclar, guardant-ne {0}"
+    },
+    {
+      "Key": "checkingForRevivesToRecycle",
+      "Value": "Comprovant si hi ha reviures per reciclar, guardant-ne {0}"
+    },
+    {
+      "Key": "pokeballsToKeepIncorrect",
+      "Value": "L'opció TotalAmountOfPokebalsToKeep ha estat configurada incorrectament. El nombre és menor que 1."
+    },
+    {
+      "Key": "potionsToKeepIncorrect",
+      "Value": "L'opció TotalAmountOfPotionsToKeep ha estat configurada incorrectament. El nombre és menor que 1"
+    },
+    {
+      "Key": "revivesToKeepIncorrect",
+      "Value": "L'opció TotalAmountOfRevivesToKeep ha estat configurada incorrectament. El nombre és menor que 1"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "L'inventari de pokemons està ple. Transferir pokemons..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "L'inventari de pokemons està ple. Si us plau, transfereix els pokemons manualment o activa l'opció TransferDuplicatePokemon dins l'arxiu de Configuració posant-la com a (True)..."
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "L'inventari està ple, no s'ha pogut lootejar res :("
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "S'ha trobat un nou problema: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "S'ha trobat un problema: Esquer pokemon {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "La destinació desitjada {0}, {1} està massa lluny de la teva posició actual {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pokemon {0} ({1}) reanomenat de {2} a {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Filtre de Pokemons Ignorats] - Ignorant {0} tal i com s'ha definit en la configuració actual."
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "Intent de Captura"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "Error de Captura"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "Captura Fallida"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "Fugida"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "Captures Perdudes"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "Captura Exitosa"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "Normal"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Esquer"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Encens"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "No s'ha pogut iniciar WebSocketServer en el port: {0}"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value":
+        "{0} - Actiu {1} - Nivell: {2} | EXP/H: {3:0} | P/H: {4:0} | P.Estel·lar: {5:0} | Transferit: {6:0} | Reciclat: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (proper nivell en {1}h {2}m | {3}/{4} XP)"
+    },
+    {
+      "Key": "requireInputText",
+      "Value": "El programa continuarà després de premer una tecla..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "Com tens habilitada l'autenticació de Google en 2 passos, hauràs d'inserir una contrasenya específica de l'APP dins de l'arxiu auth.json"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "Obrint Google App-Passwords. Si us plau, crea una nova contrasenya en l'APP (utilitzar en un altre dispositiu)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "Assegura't d'haver introduit el correu electrònic i contrasenya correctes."
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "És necessari omplir els camps GoogleUsername i GooglePassword a l'arxiu auth.json!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "És necessari omplir els camps PtcUsername i PtcPassword a l'arxiu auth.json!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[Sniper] Escanejant {0} en busca de Pokemons..."
+    },
+    {
+      "Key": "snipeScanEx",
+      "Value": "[Sniper] Snipejant a {0} amb {1} IV a {2}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Sniper] No s'han trobat Pokemons :("
+    },
+    {
+      "Key": "notEnoughPokeballsToSnipe",
+      "Value": "No hi ha suficients Pokeballs per a iniciar l'Sniping! ({0}/{1})"
+    },
+    {
+      "Key": "displayHighestMOVE1Header",
+      "Value": "MOVIMENT1"
+    },
+    {
+      "Key": "displayHighestMOVE2Header",
+      "Value": "MOVIMENT2"
+    }
+  ]
+}
