@@ -83,7 +83,8 @@ namespace PoGo.NecroBot.Logic
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
         bool DumpPokemonStats { get; }
-        bool RenameAboveIv { get; }
+        bool RenamePokemon { get; }
+        bool RenameOnlyAboveIv { get; }
         string RenameTemplate { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }
@@ -92,6 +93,7 @@ namespace PoGo.NecroBot.Logic
         string GeneralConfigPath { get; }
         bool SnipeAtPokestops { get; }
         int MinPokeballsToSnipe { get; }
+        int MinPokeballsWhileSnipe { get; }
         string SnipeLocationServer { get; }
         int SnipeLocationServerPort { get; }
         bool UseSnipeLocationServer { get; }
