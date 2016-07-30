@@ -13,7 +13,7 @@ using POGOProtos.Inventory.Item;
 using PoGo.NecroBot.Logic.Logging;
 #endregion
 
-namespace PoGo.NecroBot.CLI
+namespace PoGo.NecroBot.Logic
 {
     internal class AuthSettings
     {
