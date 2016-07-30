@@ -113,6 +113,8 @@ namespace PoGo.NecroBot.Logic
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
+        ICollection<PokemonId> PokemonsToPokeball { get; }
+
         ICollection<PokemonId> PokemonsToEvolve { get; }
 
         ICollection<PokemonId> PokemonsNotToTransfer { get; }
