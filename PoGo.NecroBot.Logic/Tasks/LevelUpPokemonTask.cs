@@ -46,7 +46,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var allPokemon = await session.Inventory.GetHighestsPerfect(session.Profile.PlayerData.MaxPokemonStorage);
 
                 // get everything that is higher than the iv min
-                foreach (var pokemon in allPokemon.Where(p => session.Inventory.GetPerfect(p) >= session.LogicSettings.UpgradePokemonIvMinimum))
+                foreach (var pokemon in allPokemon.Where(p => session.Inventory.GetPerfect(p) >= session.LogicSettings.UpgradePokemonCpMinimum))
                 {
                     var currentPokemonSettings = pokemonSettings.FirstOrDefault(q => pokemon != null && q.PokemonId.Equals(pokemon.PokemonId));
                     var family = pokemonFamilies.FirstOrDefault(q => currentPokemonSettings != null && q.FamilyId.Equals(currentPokemonSettings.FamilyId));
@@ -94,6 +94,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 Logger.Write("Pokemon Upgrade Failed Not Enough Resources");
             }
+            // pokemon near its max, cant upgrade at the moment
             else if (upgradeResult.Result == POGOProtos.Networking.Responses.UpgradePokemonResponse.Types.Result.ErrorUpgradeNotAvailable)
             {
                 Logger.Write("Pokemon upgrade unavailable for: " + pokemon.PokemonId + ":" + pokemon.Cp + "/" + PokemonInfo.CalculateMaxCp(pokemon));
