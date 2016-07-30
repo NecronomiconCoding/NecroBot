@@ -1,5 +1,5 @@
 ﻿#region using directives
-
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
@@ -12,8 +12,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class RecycleItemsTask
     {
+        private static DateTime lastRecycle = DateTime.Now;
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
+            if (lastRecycle.AddMilliseconds(session.LogicSettings.MinDelayBetweenRecycle) > DateTime.Now)
+                return;
             cancellationToken.ThrowIfCancellationRequested();
 
             var items = await session.Inventory.GetItemsToRecycle(session.Settings);
@@ -28,7 +31,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
             }
-
+            lastRecycle = DateTime.Now;
             await session.Inventory.RefreshCachedInventory();
         }
     }
