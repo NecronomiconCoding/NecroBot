@@ -30,6 +30,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
             }
 
+            if (session.LogicSettings.TotalAmountOfPokebalsToKeep != 0)
+            {
+                await OptimizedRecycleBalls(session, cancellationToken);
+            }
+
+            await session.Inventory.RefreshCachedInventory();
+        }
+
+        private static async Task OptimizedRecycleBalls(ISession session, CancellationToken cancellationToken)
+        {
             var pokeBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemPokeBall);
             var greatBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemGreatBall);
             var ultraBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
@@ -41,7 +51,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             int masterBallsToRecycle = 0;
 
             int totalBallsCount = pokeBallsCount + greatBallsCount + ultraBallsCount + masterBallsCount;
-            if(totalBallsCount>session.LogicSettings.TotalAmountOfPokebalsToKeep)
+            if (totalBallsCount > session.LogicSettings.TotalAmountOfPokebalsToKeep)
             {
                 int diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokebalsToKeep;
                 if (diff > 0)
@@ -60,7 +70,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                 }
 
-                if (diff>0)
+                if (diff > 0)
                 {
                     int greatBallsToKeep = greatBallsCount - diff;
                     if (greatBallsToKeep < 0)
@@ -109,11 +119,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemMasterBall, Count = masterBallsToRecycle });
                     DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                 }
-                */   
+                */
             }
-
-
-            await session.Inventory.RefreshCachedInventory();
         }
     }
 }
