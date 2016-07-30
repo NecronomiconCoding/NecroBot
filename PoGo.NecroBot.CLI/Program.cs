@@ -24,20 +24,12 @@ namespace PoGo.NecroBot.CLI
     {
         private static void Main(string[] args)
         {
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Forms.FormNecroMain(args));
 
-            CultureInfo.DefaultThreadCurrentCulture = culture;
-            Thread.CurrentThread.CurrentCulture = culture;
-			
-            var subPath = "";
-            if (args.Length > 0)
-                subPath = args[0];
 
-            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
-
-            var settings = GlobalSettings.Load(subPath);
-           
-
+            /*
             if (settings == null)
             {
                 Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
@@ -50,21 +42,7 @@ namespace PoGo.NecroBot.CLI
             session.Client.ApiFailure = new ApiFailureStrategy(session);
 
 
-            /*SimpleSession session = new SimpleSession
-            {
-                _client = new PokemonGo.RocketAPI.Client(new ClientSettings(settings)),
-                _dispatcher = new EventDispatcher(),
-                _localizer = new Localizer()
-            };
-
-            BotService service = new BotService
-            {
-                _session = session,
-                _loginTask = new Login(session)
-            };
-
-            service.Run();
-            */
+          
 
             var machine = new StateMachine();
             var stats = new Statistics();
@@ -100,6 +78,7 @@ namespace PoGo.NecroBot.CLI
                 }
                 Thread.Sleep(5);
             }
+            */
         }
     }
 }

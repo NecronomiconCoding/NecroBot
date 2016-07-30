@@ -38,7 +38,7 @@ namespace PoGo.NecroBot.CLI
             if (evt.RequireInput)
             {
                 Logger.Write(session.Translation.GetTranslation(TranslationString.RequireInputText));
-                Console.ReadKey();
+                //Console.ReadKey();
             }
 
         }

@@ -61,7 +61,7 @@ namespace PoGo.NecroBot.Logic.State
             {
                 session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.AccountNotVerified) });
                 await Task.Delay(2000);
-                Environment.Exit(0);
+                //Environment.Exit(0);
             }
             catch (GoogleException e)
             {
