@@ -62,6 +62,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
             }
+
+            await Statistics.LogInventory(session);
         }
     }
 }

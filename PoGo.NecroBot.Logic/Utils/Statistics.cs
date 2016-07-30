@@ -6,6 +6,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using POGOProtos.Networking.Responses;
+using System.IO;
 
 #endregion
 
@@ -22,7 +23,8 @@ namespace PoGo.NecroBot.Logic.Utils
         private readonly DateTime _initSessionDateTime = DateTime.Now;
 
         private StatsExport _exportStats;
-        private string _playerName;
+        private static string _playerName;
+        private static DateTime _lastRefresh;
         public int TotalExperience;
         public int TotalItemsRemoved;
         public int TotalPokemons;
@@ -103,6 +105,25 @@ namespace PoGo.NecroBot.Logic.Utils
         public void SetUsername(GetPlayerResponse profile)
         {
             _playerName = profile.PlayerData.Username ?? "";
+        }
+
+        public static async System.Threading.Tasks.Task LogInventory(PoGo.NecroBot.Logic.State.ISession session)
+        {
+            if (session.LogicSettings.LogInventory)
+            {
+                GetInventoryResponse inventory = await session.Inventory.GetCachedInventory();
+                var now = DateTime.UtcNow;
+
+                if (now.Ticks > _lastRefresh.AddSeconds(session.LogicSettings.LogInventoryDelaySeconds).Ticks)
+                {
+                    string tmpDir = Path.Combine(session.LogicSettings.ProfilePath, "temp");
+                    Directory.CreateDirectory(tmpDir);
+                    string strPath = Path.Combine(session.LogicSettings.ProfilePath, "temp", _playerName + ".inventory.json");
+
+                    System.IO.File.WriteAllText(strPath, inventory.InventoryDelta.InventoryItems.ToString());
+                    _lastRefresh = now;
+                }
+            }
         }
     }
 
