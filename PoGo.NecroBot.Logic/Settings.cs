@@ -426,8 +426,10 @@ namespace PoGo.NecroBot.CLI
         }
 
 
-        public string Username => _settings.Auth.Username;
-        public string Password => _settings.Auth.Password;
+        public string PtcUsername => _settings.Auth.Username;
+        public string PtcPassword => _settings.Auth.Password;
+        public string GoogleUsername => _settings.Auth.Username;
+        public string GooglePassword => _settings.Auth.Password;
 
         public string GoogleRefreshToken
         {
@@ -491,7 +493,7 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        string ISettings.Username
+        string ISettings.PtcUsername
         {
             get
             {
@@ -503,7 +505,31 @@ namespace PoGo.NecroBot.CLI
                 _settings.Auth.Username = value;
             }
         }
-        string ISettings.Password
+        string ISettings.PtcPassword
+        {
+            get
+            {
+                return _settings.Auth.Password;
+            }
+
+            set
+            {
+                _settings.Auth.Password = value;
+            }
+        }
+        string ISettings.GoogleUsername
+        {
+            get
+            {
+                return _settings.Auth.Username;
+            }
+
+            set
+            {
+                _settings.Auth.Username = value;
+            }
+        }
+        string ISettings.GooglePassword
         {
             get
             {

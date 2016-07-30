@@ -94,22 +94,13 @@ namespace PoGo.NecroBot.Logic.State
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            if (session.Settings.AuthType == AuthType.Google &&
-                            (session.Settings.Username == null || session.Settings.Password == null))
+            if (
+                (session.Settings.AuthType == AuthType.Google || session.Settings.AuthType == AuthType.Ptc) &&
+                (session.Settings.Username == null || session.Settings.Password == null) )
             {
                 session.EventDispatcher.Send(new ErrorEvent
                 {
-                    Message = session.Translation.GetTranslation(TranslationString.MissingCredentialsGoogle)
-                });
-                await Task.Delay(2000, cancellationToken);
-                Environment.Exit(0);
-            }
-            else if (session.Settings.AuthType == AuthType.Ptc &&
-                     (session.Settings.Username == null || session.Settings.Password == null))
-            {
-                session.EventDispatcher.Send(new ErrorEvent
-                {
-                    Message = session.Translation.GetTranslation(TranslationString.MissingCredentialsPtc)
+                    Message = session.Translation.GetTranslation(TranslationString.MissingCredentials)
                 });
                 await Task.Delay(2000, cancellationToken);
                 Environment.Exit(0);
