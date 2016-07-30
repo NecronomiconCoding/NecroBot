@@ -14,28 +14,26 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            var pokemonIdsToEvolve = new List<ulong>();
+            var pokemonIdsToLevelUp = new List<ulong>();
 
             if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("iv"))
             {
-                pokemonIdsToEvolve =
-                    session.Inventory.GetPokemons()
-                        .Result.Where(
-                            pokemonData =>
-                                PokemonInfo.CalculatePokemonPerfection(pokemonData) >=
-                                session.LogicSettings.KeepMinIvPercentage)
+                pokemonIdsToLevelUp =
+                    session.Inventory.GetPokemons().Result
+                        .Where(pokemonData => PokemonInfo.CalculatePokemonPerfection(pokemonData) >= session.LogicSettings.KeepMinIvPercentage && session.LogicSettings.PokemonsToLevelUp.Contains(pokemonData.PokemonId))
                         .Select(p => p.Id)
                         .ToList();
             }
             else if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("cp"))
             {
-                pokemonIdsToEvolve =
-                    session.Inventory.GetPokemons()
-                        .Result.Where(pokemonData => pokemonData.Cp > session.LogicSettings.KeepMinCp)
-                        .Select(p => p.Id).ToList();
+                pokemonIdsToLevelUp =
+                    session.Inventory.GetPokemons().Result
+                        .Where(pokemonData => pokemonData.Cp > session.LogicSettings.KeepMinCp && session.LogicSettings.PokemonsToLevelUp.Contains(pokemonData.PokemonId))
+                        .Select(p => p.Id)
+                        .ToList();
             }
 
-            foreach (var pokeId in pokemonIdsToEvolve)
+            foreach (var pokeId in pokemonIdsToLevelUp)
             {
                 while (true)
                 {
