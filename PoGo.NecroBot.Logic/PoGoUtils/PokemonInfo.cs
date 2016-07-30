@@ -3,6 +3,11 @@
 using System;
 using POGOProtos.Data;
 using POGOProtos.Enums;
+using PoGo.NecroBot.Logic.State;
+using POGOProtos.Settings.Master;
+using System.Collections.Generic;
+using POGOProtos.Inventory;
+using System.Linq;
 
 #endregion
 
@@ -63,6 +68,15 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
         {
             var move2 = poke.Move2;
             return move2;
+        }
+
+        public static int GetCandy(PokemonData pokemon, List<Candy> PokemonFamilies, IEnumerable<PokemonSettings> PokemonSettings)
+        {
+            var setting = PokemonSettings.FirstOrDefault(q => pokemon != null && q.PokemonId.Equals(pokemon.PokemonId));
+            var family = PokemonFamilies.FirstOrDefault(q => setting != null && q.FamilyId.Equals(setting.FamilyId));
+            
+            return family.Candy_;
+              
         }
 
         public static double CalculateMaxCpMultiplier(PokemonData poke)
