@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Tasks;
 
@@ -17,15 +18,17 @@ namespace PoGo.NecroBot.Logic.Utils
             _session = session;
         }
 
-        public async Task ApplyDistance(double distanceTraveled)
+        public async Task ApplyDistance(double distanceTraveled, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             if (!_session.LogicSettings.UseEggIncubators)
                 return;
 
             _distanceTraveled += distanceTraveled;
             if (_distanceTraveled > _checkInterval)
             {
-                await UseIncubatorsTask.Execute(_session);
+                await UseIncubatorsTask.Execute(_session, cancellationToken);
                 _distanceTraveled = 0;
             }
         }

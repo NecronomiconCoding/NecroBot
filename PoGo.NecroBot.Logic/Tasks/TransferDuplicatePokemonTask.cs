@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
@@ -13,8 +14,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class TransferDuplicatePokemonTask
     {
-        public static async Task Execute(ISession session)
+        public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             var duplicatePokemons =
                 await
                     session.Inventory.GetDuplicatePokemonToTransfer(session.LogicSettings.KeepPokemonsThatCanEvolve,
@@ -26,6 +29,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var duplicatePokemon in duplicatePokemons)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 if (duplicatePokemon.Cp >= session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinCp ||
                     PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >
                     session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinIvPercentage)

@@ -2,6 +2,7 @@
 
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
@@ -17,8 +18,10 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         private static DateTime _lastLuckyEggTime;
 
-        public static async Task Execute(ISession session)
+        public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             var pokemonToEvolveTask = await session.Inventory.GetPokemonToEvolve(session.LogicSettings.PokemonsToEvolve);
             var pokemonToEvolve = pokemonToEvolveTask.ToList();
 
@@ -46,6 +49,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 foreach (var pokemon in pokemonToEvolve)
                 {
+                    // no cancellationToken.ThrowIfCancellationRequested here, otherwise the lucky egg would be wasted.
                     var evolveResponse = await session.Client.Inventory.EvolvePokemon(pokemon.Id);
 
                     session.EventDispatcher.Send(new PokemonEvolveEvent

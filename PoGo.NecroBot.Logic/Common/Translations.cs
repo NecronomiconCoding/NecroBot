@@ -82,6 +82,7 @@ namespace PoGo.NecroBot.Logic.Common
         DownloadingUpdate,
         FinishedDownloadingRelease,
         FinishedUnpackingFiles,
+        FinishedTransferringConfig,
         UpdateFinished,
         LookingForIncensePokemon,
         PokemonSkipped,
@@ -119,8 +120,8 @@ namespace PoGo.NecroBot.Logic.Common
 
     public class Translation : ITranslation
     {
-        [JsonProperty("TranslationStrings", 
-            ItemTypeNameHandling = TypeNameHandling.Arrays, 
+        [JsonProperty("TranslationStrings",
+            ItemTypeNameHandling = TypeNameHandling.Arrays,
             ItemConverterType = typeof(KeyValuePairConverter),
             ObjectCreationHandling = ObjectCreationHandling.Replace,
             DefaultValueHandling = DefaultValueHandling.Populate)]
@@ -132,53 +133,35 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.GreatPokeball, "GreatBall"),
             new KeyValuePair<TranslationString, string>(TranslationString.UltraPokeball, "UltraBall"),
             new KeyValuePair<TranslationString, string>(TranslationString.MasterPokeball, "MasterBall"),
-            new KeyValuePair<TranslationString, string>(TranslationString.WrongAuthType,
-                "Unknown AuthType in config.json"),
-            new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsOutsideRadius,
-                "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your Coords.ini file correct?"),
-            new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsNoUsableFound,
-                "No usable PokeStops found in your area. Is your maximum distance too small?"),
-            new KeyValuePair<TranslationString, string>(TranslationString.EventFortUsed,
-                "Name: {0} XP: {1}, Gems: {2}, Items: {3}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.EventFortFailed,
-                "Name: {0} INFO: Looting failed, possible softban. Unban in: {1}/{2}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.WrongAuthType, "Unknown AuthType in config.json"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsOutsideRadius, "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your Coords.ini file correct?"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsNoUsableFound, "No usable PokeStops found in your area. Is your maximum distance too small?"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventFortUsed, "Name: {0} XP: {1}, Gems: {2}, Items: {3}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventFortFailed, "Name: {0} INFO: Looting failed, possible softban. Unban in: {1}/{2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortTargeted, "Arriving to Pokestop: {0} in ({1}m)"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventProfileLogin, "Playing as {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.EventUsedLuckyEgg,
-                "Used Lucky Egg, remaining: {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonEvolvedSuccess,
-                "{0} successfully for {1}xp"),
-            new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonEvolvedFailed,
-                "Failed {0}. Result was {1}, stopping evolving {2}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonTransferred,
-                "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventUsedLuckyEgg, "Used Lucky Egg, remaining: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonEvolvedSuccess, "{0} successfully for {1}xp"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonEvolvedFailed, "Failed {0}. Result was {1}, stopping evolving {2}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonTransferred, "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventItemRecycled, "{0}x {1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCapture,
-                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
-                "No Pokeballs - We missed a {0} with CP {1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCapture, "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs, "No Pokeballs - We missed a {0} with CP {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchStatusAttempt, "{0} Attempt #{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchStatus, "{0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.Candies, "Candies: {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.UnhandledGpxData,
-                "Unhandled data in GPX file, attempting to skip."),
+            new KeyValuePair<TranslationString, string>(TranslationString.UnhandledGpxData, "Unhandled data in GPX file, attempting to skip."),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestsHeader, "Pokemons"),
             new KeyValuePair<TranslationString, string>(TranslationString.CommonWordPerfect, "perfect"),
             new KeyValuePair<TranslationString, string>(TranslationString.CommonWordName, "name"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CommonWordUnknown, "Unknown"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestsCpHeader, "DisplayHighestsCP"),
-            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestsPerfectHeader,
-                "DisplayHighestsPerfect"),
-            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestsLevelHeader,
-                "DisplayHighestsLevel"),
-            new KeyValuePair<TranslationString, string>(TranslationString.WelcomeWarning,
-                "Make sure Lat & Lng are right. Exit Program if not! Lat: {0} Lng: {1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorPuttingEgg,
-                "Putting egg in incubator: {0:0.00}km left"),
-            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorStatusUpdate,
-                "Incubator status update: {0:0.00}km left"),
-            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorEggHatched,
-                "Incubated egg has hatched: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestsPerfectHeader, "DisplayHighestsPerfect"),
+            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestsLevelHeader, "DisplayHighestsLevel"),
+            new KeyValuePair<TranslationString, string>(TranslationString.WelcomeWarning, "Make sure Lat & Lng are right. Exit Program if not! Lat: {0} Lng: {1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorPuttingEgg, "Putting egg in incubator: {0:0.00}km left"),
+            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorStatusUpdate, "Incubator status update: {0:0.00}km left"),
+            new KeyValuePair<TranslationString, string>(TranslationString.IncubatorEggHatched, "Incubated egg has hatched: {0}"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryError, "ERROR"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryAttention, "ATTENTION"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LogEntryInfo, "INFO"),
@@ -207,6 +190,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.DownloadingUpdate, "Downloading and apply Update..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.FinishedDownloadingRelease, "Finished downloading newest Release..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.FinishedUnpackingFiles, "Finished unpacking files..."),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.FinishedTransferringConfig, "Finished transferring your config to the new version..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.UpdateFinished, "Update finished, you can close this window now."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LookingForIncensePokemon, "Looking for incense pokemon..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.LookingForPokemon, "Looking for pokemon..."),
@@ -230,8 +214,8 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchTypeLure, "Lure"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.CatchTypeIncense, "Incense"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.WebSocketFailStart, "Failed to start WebSocketServer on port : {0}"),
-            new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsTemplateString, "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transfered: {6:0} | Recycled: {7:0}"),
-            new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsXpTemplateString, "{0} (next level in {1}h {2}m | {3}/{4} XP)"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsTemplateString, "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Transfered: {6:n0} | Recycled: {7:n0}"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.StatsXpTemplateString, "{0} (Advance in {1}h {2}m | {3:n0}/{4:n0} XP)"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.RequireInputText, "Program will continue after the key press..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.GoogleTwoFactorAuth, "As you have Google Two Factor Auth enabled, you will need to insert an App Specific Password into the auth.json"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.GoogleTwoFactorAuthExplanation, "Opening Google App-Passwords. Please make a new App Password (use Other as Device)"),
@@ -267,7 +251,7 @@ namespace PoGo.NecroBot.Logic.Common
                 var input = File.ReadAllText(fullPath);
 
                 var jsonSettings = new JsonSerializerSettings();
-                jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                 jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                 jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
                 translations = JsonConvert.DeserializeObject<Translation>(input, jsonSettings);
@@ -287,7 +271,7 @@ namespace PoGo.NecroBot.Logic.Common
         public void Save(string fullPath)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented,
-                new StringEnumConverter {CamelCaseText = true});
+                new StringEnumConverter { CamelCaseText = true });
 
             var folder = Path.GetDirectoryName(fullPath);
             if (folder != null && !Directory.Exists(folder))

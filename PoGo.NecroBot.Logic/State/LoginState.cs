@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
@@ -13,13 +14,17 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class LoginState : IState
     {
-        public async Task<IState> Execute(ISession session)
+        public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             session.EventDispatcher.Send(new NoticeEvent
             {
                 Message = session.Translation.GetTranslation(TranslationString.LoggingIn, session.Settings.AuthType)
             });
-            await CheckLogin(session);
+
+            await CheckLogin(session, cancellationToken);
+
             try
             {
                 switch (session.Settings.AuthType)
@@ -64,7 +69,7 @@ namespace PoGo.NecroBot.Logic.State
                 {
                     session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleTwoFactorAuth) });
                     session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleTwoFactorAuthExplanation) });
-                    await Task.Delay(7000);
+                    await Task.Delay(7000, cancellationToken);
                     try
                     {
                         System.Diagnostics.Process.Start("https://security.google.com/settings/security/apppasswords");
@@ -76,7 +81,7 @@ namespace PoGo.NecroBot.Logic.State
                     }
                 }
                 session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleError) });
-                await Task.Delay(2000);
+                await Task.Delay(2000, cancellationToken);
                 Environment.Exit(0);
             }
 
@@ -85,8 +90,10 @@ namespace PoGo.NecroBot.Logic.State
             return new PositionCheckState();
         }
 
-        private static async Task CheckLogin(ISession session)
+        private static async Task CheckLogin(ISession session, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
             if (session.Settings.AuthType == AuthType.Google &&
                             (session.Settings.GoogleUsername == null || session.Settings.GooglePassword == null))
             {
@@ -94,7 +101,7 @@ namespace PoGo.NecroBot.Logic.State
                 {
                     Message = session.Translation.GetTranslation(TranslationString.MissingCredentialsGoogle)
                 });
-                await Task.Delay(2000);
+                await Task.Delay(2000, cancellationToken);
                 Environment.Exit(0);
             }
             else if (session.Settings.AuthType == AuthType.Ptc &&
@@ -104,7 +111,7 @@ namespace PoGo.NecroBot.Logic.State
                 {
                     Message = session.Translation.GetTranslation(TranslationString.MissingCredentialsPtc)
                 });
-                await Task.Delay(2000);
+                await Task.Delay(2000, cancellationToken);
                 Environment.Exit(0);
             }
         }
@@ -112,7 +119,7 @@ namespace PoGo.NecroBot.Logic.State
         public async Task DownloadProfile(ISession session)
         {
             session.Profile = await session.Client.Player.GetPlayer();
-            session.EventDispatcher.Send(new ProfileEvent {Profile = session.Profile});
+            session.EventDispatcher.Send(new ProfileEvent { Profile = session.Profile });
         }
     }
 }

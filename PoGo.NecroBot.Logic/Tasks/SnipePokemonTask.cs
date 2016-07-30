@@ -12,6 +12,7 @@ using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Enums;
 using POGOProtos.Networking.Responses;
 using System.Net.Sockets;
+using System.Threading;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -32,8 +33,6 @@ namespace PoGo.NecroBot.Logic.Tasks
         public double expiration_time { get; set; }
         public double latitude { get; set; }
         public double longitude { get; set; }
-        public string uid { get; set; }
-        public bool is_alive { get; set; }
         public int pokemonId { get; set; }
 
         public PokemonLocation(double _latitude, double _longitude)
@@ -49,7 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public override string ToString()
         {
-            return latitude.ToString("0.0000") + ", " + latitude.ToString("0.0000");
+            return latitude.ToString("0.0000") + ", " + longitude.ToString("0.0000");
         }
 
         public bool Equals(PokemonLocation obj)
@@ -84,14 +83,15 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static List<SniperInfo> snipeLocations = new List<SniperInfo>();
         private static DateTime lastSnipe = DateTime.Now;
 
-        public static Task AsyncStart(Session session)
+        public static Task AsyncStart(Session session, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return Task.Run(() => Start(session));
+            return Task.Run(() => Start(session, cancellationToken), cancellationToken);
         }
-        public static async Task Start(Session session)
+        public static async Task Start(Session session, CancellationToken cancellationToken)
         {
             while (true)
             {
+                cancellationToken.ThrowIfCancellationRequested();
                 try
                 {
                     TcpClient lClient = new TcpClient();
@@ -126,11 +126,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.EventDispatcher.Send(new ErrorEvent { Message = ex.ToString() });
                 }
 
-                await Task.Delay(5000);
+                await Task.Delay(5000, cancellationToken);
             }
         }
 
-        private static async Task snipe(ISession session, IEnumerable<PokemonId> pokemonIds, double latitude, double longitude)
+        private static async Task snipe(ISession session, IEnumerable<PokemonId> pokemonIds, double latitude, double longitude, CancellationToken cancellationToken)
         {
             var currentLatitude = session.Client.CurrentLatitude;
             var currentLongitude = session.Client.CurrentLongitude;
@@ -156,6 +156,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var pokemon in catchablePokemon)
             {
+                cancellationToken.ThrowIfCancellationRequested();
+
                 await session.Client.Player.UpdatePlayerLocation(latitude, longitude, session.Client.CurrentAltitude);
 
                 var encounter = session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
@@ -195,14 +197,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                     !Equals(catchablePokemon.ElementAtOrDefault(catchablePokemon.Count() - 1),
                         pokemon))
                 {
-                    await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch);
+                    await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch, cancellationToken);
                 }
             }
 
-            await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions);
+            await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);
         }
 
-        public static async Task Execute(ISession session)
+        public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             if (lastSnipe.AddMilliseconds(session.LogicSettings.MinDelayBetweenSnipes) > DateTime.Now)
                 return;
@@ -218,8 +220,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (session.LogicSettings.UseSnipeLocationServer)
                 {
                     var locationsToSnipe = snipeLocations == null ? new List<SniperInfo>() : snipeLocations.Where(q =>
-                        // when UseTransferIVForSnipe=true skip pokemons with unknown iv or if they don't match the TransferFilter/default MinIV
-                        (!session.LogicSettings.UseTransferIVForSnipe || (q.iv > 0 && q.iv < session.Inventory.GetPokemonTransferFilter(q.id).KeepMinIvPercentage)) &&
+                        (!session.LogicSettings.UseTransferIVForSnipe || (
+                            (q.iv == 0 && !session.LogicSettings.SnipeIgnoreUnknownIV) ||
+                            (q.iv > session.Inventory.GetPokemonTransferFilter(q.id).KeepMinIvPercentage)
+                            )) &&
                         !locsVisited.Contains(new PokemonLocation(q.latitude, q.longitude))
                         && !(q.timeStamp != default(DateTime) &&
                                 q.timeStamp > new DateTime(2016) && // make absolutely sure that the server sent a correct datetime
@@ -232,7 +236,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             session.EventDispatcher.Send(new SnipeScanEvent() { Bounds = new Location(location.latitude, location.longitude) });
 
-                            await snipe(session, pokemonIds, location.latitude, location.longitude);
+                            await snipe(session, pokemonIds, location.latitude, location.longitude, cancellationToken);
                             locsVisited.Add(new PokemonLocation(location.latitude, location.longitude));
                         }
                     }
@@ -245,11 +249,15 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         var scanResult = SnipeScanForPokemon(location);
 
-                        var locationsToSnipe = scanResult.pokemon == null ? new List<PokemonLocation>() : scanResult.pokemon.Where(q =>
-                            pokemonIds.Contains((PokemonId)q.pokemonId)
-                            && !locsVisited.Contains(q)
-                            && q.expiration_time < currentTimestamp
-                            && q.is_alive).ToList();
+                        var locationsToSnipe = new List<PokemonLocation>();
+                        if (scanResult.pokemon != null)
+                        {
+                            var filteredPokemon = scanResult.pokemon.Where(q => pokemonIds.Contains((PokemonId)q.pokemonId));
+                            var notVisitedPokemon = filteredPokemon.Where(q => !locsVisited.Contains(q));
+                            var notExpiredPokemon = notVisitedPokemon.Where(q => q.expiration_time < currentTimestamp);
+
+                            locationsToSnipe.AddRange(notExpiredPokemon);
+                        }
 
                         if (locationsToSnipe.Any())
                         {
@@ -266,7 +274,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                 locsVisited.Add(pokemonLocation);
 
-                                await snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude);
+                                await snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude, cancellationToken);
                             }
                         }
                         else
@@ -283,8 +291,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         private static ScanResult SnipeScanForPokemon(Location location)
         {
-            var formatter = new System.Globalization.NumberFormatInfo();
-            formatter.NumberDecimalSeparator = ".";
+            var formatter = new System.Globalization.NumberFormatInfo() { NumberDecimalSeparator = "." };
             var uri = $"https://pokevision.com/map/data/{location.Latitude.ToString(formatter)}/{location.Longitude.ToString(formatter)}";
 
             ScanResult scanResult;

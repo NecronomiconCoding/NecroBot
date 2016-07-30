@@ -1,16 +1,12 @@
 ﻿using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace PoGo.NecroBot.Logic.Service
 {
     public interface IFarm
     {
-        void Run();
+        void Run(CancellationToken cancellationToken);
     }
 
     public class Farm : IFarm
@@ -22,37 +18,37 @@ namespace PoGo.NecroBot.Logic.Service
             _session = session;
         }
 
-        public void Run()
+        public void Run(CancellationToken cancellationToken)
         {
             if (_session.LogicSettings.EvolveAllPokemonAboveIv || _session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
-                EvolvePokemonTask.Execute(_session).Wait();
+                EvolvePokemonTask.Execute(_session, cancellationToken).Wait();
             }
 
             if (_session.LogicSettings.TransferDuplicatePokemon)
             {
-                TransferDuplicatePokemonTask.Execute(_session).Wait();
+                TransferDuplicatePokemonTask.Execute(_session, cancellationToken).Wait();
             }
 
             if (_session.LogicSettings.RenameAboveIv)
             {
-                RenamePokemonTask.Execute(_session).Wait();
+                RenamePokemonTask.Execute(_session, cancellationToken).Wait();
             }
 
-            RecycleItemsTask.Execute(_session).Wait();
+            RecycleItemsTask.Execute(_session, cancellationToken).Wait();
 
             if (_session.LogicSettings.UseEggIncubators)
             {
-                UseIncubatorsTask.Execute(_session).Wait();
+                UseIncubatorsTask.Execute(_session, cancellationToken).Wait();
             }
 
             if (_session.LogicSettings.UseGpxPathing)
             {
-                FarmPokestopsGpxTask.Execute(_session).Wait();
+                FarmPokestopsGpxTask.Execute(_session, cancellationToken).Wait();
             }
             else
             {
-                FarmPokestopsTask.Execute(_session).Wait();
+                FarmPokestopsTask.Execute(_session, cancellationToken).Wait();
             }
         }
     }

@@ -10,7 +10,7 @@ using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-
+using PoGo.NecroBot.Logic.Logging;
 #endregion
 
 namespace PoGo.NecroBot.CLI
@@ -31,21 +31,37 @@ namespace PoGo.NecroBot.CLI
 
         public void Load(string path)
         {
-            _filePath = path;
-
-            if (File.Exists(_filePath))
+            try
             {
-                //if the file exists, load the settings
-                var input = File.ReadAllText(_filePath);
+                _filePath = path;
 
-                var settings = new JsonSerializerSettings();
-                settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                if (File.Exists(_filePath))
+                {
+                    //if the file exists, load the settings
+                    var input = File.ReadAllText(_filePath);
 
-                JsonConvert.PopulateObject(input, this, settings);
+                    var settings = new JsonSerializerSettings();
+                    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+
+                    JsonConvert.PopulateObject(input, this, settings);
+                }
+                else
+                {
+                    Save(_filePath);
+                }
             }
-            else
+            catch(Newtonsoft.Json.JsonReaderException exception)
             {
-                Save(_filePath);
+                if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcUsername"))
+                    Logger.Write("JSON Exception: You need to properly configure your PtcUsername using quotations.", LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcPassword"))
+                    Logger.Write("JSON Exception: You need to properly configure your PtcPassword using quotations.", LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("GoogleUsername"))
+                    Logger.Write("JSON Exception: You need to properly configure your GoogleUsername using quotations.", LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("GooglePassword"))
+                    Logger.Write("JSON Exception: You need to properly configure your GooglePassword using quotations.", LogLevel.Error);
+                else
+                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
             }
         }
 
@@ -75,6 +91,7 @@ namespace PoGo.NecroBot.CLI
     public class GlobalSettings
     {
         public int AmountOfPokemonToDisplayOnStart = 10;
+        public bool TransferConfigAndAuthOnUpdate = true;
 
         [JsonIgnore]
         internal AuthSettings Auth = new AuthSettings();
@@ -108,7 +125,7 @@ namespace PoGo.NecroBot.CLI
         public bool KeepPokemonsThatCanEvolve = false;
         public bool PrioritizeIvOverCp = true;
         public bool RenameAboveIv = true;
-        public string RenameTemplate = "{0}_{1}";
+        public string RenameTemplate = "{1}_{0}";
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
         public bool UsePokemonToNotCatchFilter = false;
@@ -120,23 +137,15 @@ namespace PoGo.NecroBot.CLI
         public int SnipeLocationServerPort = 16969;
         public bool UseSnipeLocationServer = false;
         public bool UseTransferIVForSnipe = false;
+        public bool SnipeIgnoreUnknownIV = false;
         public int MinDelayBetweenSnipes = 20000;
         public bool LogInventory = false;
         public int LogInventoryDelaySeconds = 30;
 
+
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 50),
-            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 10),
-            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 40),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 75),
-            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 25),
-            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 50),
             new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
@@ -268,11 +277,61 @@ namespace PoGo.NecroBot.CLI
             },
             Pokemon = new List<PokemonId>()
             {
-                PokemonId.Dratini,
-                PokemonId.Magikarp,
-                PokemonId.Eevee,
+                PokemonId.Venusaur,
+                PokemonId.Charizard,
+                PokemonId.Blastoise,
+                PokemonId.Beedrill,
+                PokemonId.Raichu,
+                PokemonId.Sandslash,
+                PokemonId.Nidoking,
+                PokemonId.Nidoqueen,
+                PokemonId.Clefable,
+                PokemonId.Ninetales,
+                PokemonId.Golbat,
+                PokemonId.Vileplume,
+                PokemonId.Golduck,
+                PokemonId.Primeape,
+                PokemonId.Arcanine,
+                PokemonId.Poliwrath,
+                PokemonId.Alakazam,
+                PokemonId.Machamp,
+                PokemonId.Golem,
+                PokemonId.Rapidash,
+                PokemonId.Slowbro,
+                PokemonId.Farfetchd,
+                PokemonId.Muk,
+                PokemonId.Cloyster,
+                PokemonId.Gengar,
+                PokemonId.Exeggutor,
+                PokemonId.Marowak,
+                PokemonId.Hitmonchan,
+                PokemonId.Lickitung,
+                PokemonId.Rhydon,
+                PokemonId.Chansey,
+                PokemonId.Kangaskhan,
+                PokemonId.Starmie,
+                PokemonId.MrMime,
+                PokemonId.Scyther,
+                PokemonId.Magmar,
+                PokemonId.Electabuzz,
+                PokemonId.Magmar,
+                PokemonId.Jynx,
+                PokemonId.Gyarados,
+                PokemonId.Lapras,
+                PokemonId.Ditto,
+                PokemonId.Vaporeon,
+                PokemonId.Jolteon,
+                PokemonId.Flareon,
+                PokemonId.Porygon,
+                PokemonId.Kabutops,
+                PokemonId.Aerodactyl,
                 PokemonId.Snorlax,
-                PokemonId.Dragonair,
+                PokemonId.Articuno,
+                PokemonId.Zapdos,
+                PokemonId.Moltres,
+                PokemonId.Dragonite,
+                PokemonId.Mewtwo,
+                PokemonId.Mew    
             }
         };
 
@@ -287,15 +346,23 @@ namespace PoGo.NecroBot.CLI
 
             if (File.Exists(configFile))
             {
-                //if the file exists, load the settings
-                var input = File.ReadAllText(configFile);
+                try
+                {
+                    //if the file exists, load the settings
+                    var input = File.ReadAllText(configFile);
 
-                var jsonSettings = new JsonSerializerSettings();
-                jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-                jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
-                jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
+                    var jsonSettings = new JsonSerializerSettings();
+                    jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                    jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
+                    jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
-                settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                    settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                }
+                catch (Newtonsoft.Json.JsonReaderException exception)
+                {
+                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+                    return null;
+                }
             }
             else
             {
@@ -494,6 +561,7 @@ namespace PoGo.NecroBot.CLI
         public string ProfileConfigPath => _settings.ProfileConfigPath;
         public string GeneralConfigPath => _settings.GeneralConfigPath;
         public bool AutoUpdate => _settings.AutoUpdate;
+        public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
@@ -529,9 +597,13 @@ namespace PoGo.NecroBot.CLI
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
-        public bool UseSnipeLocationServer=> _settings.UseSnipeLocationServer;
+        public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIVForSnipe => _settings.UseTransferIVForSnipe;
+        public bool SnipeIgnoreUnknownIV => _settings.SnipeIgnoreUnknownIV;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
+        public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
+        public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
+        public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
         public bool LogInventory => _settings.LogInventory;
         public int LogInventoryDelaySeconds => _settings.LogInventoryDelaySeconds;
     }

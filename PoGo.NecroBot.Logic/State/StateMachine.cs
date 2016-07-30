@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI.Exceptions;
@@ -14,9 +15,9 @@ namespace PoGo.NecroBot.Logic.State
         private ISession _ctx;
         private IState _initialState;
 
-        public Task AsyncStart(IState initialState, Session session)
+        public Task AsyncStart(IState initialState, Session session, CancellationToken cancellationToken = default(CancellationToken))
         {
-            return Task.Run(() => Start(initialState, session));
+            return Task.Run(() => Start(initialState, session, cancellationToken), cancellationToken);
         }
 
         public void SetFailureState(IState state)
@@ -24,7 +25,7 @@ namespace PoGo.NecroBot.Logic.State
             _initialState = state;
         }
 
-        public async Task Start(IState initialState, Session session)
+        public async Task Start(IState initialState, Session session, CancellationToken cancellationToken = default(CancellationToken))
         {
             _ctx = session;
             var state = initialState;
@@ -32,15 +33,20 @@ namespace PoGo.NecroBot.Logic.State
             {
                 try
                 {
-                    state = await state.Execute(session);
+                    state = await state.Execute(session, cancellationToken);
                 }
-                catch(InvalidResponseException)
+                catch (InvalidResponseException)
                 {
-                    session.EventDispatcher.Send(new ErrorEvent { Message = "The PokemonGo servers are having a bad time, chill." });
+                    session.EventDispatcher.Send(new ErrorEvent { Message = "Niantic Servers unstable, throttling API Calls." });
+                }
+                catch (OperationCanceledException)
+                {
+                    session.EventDispatcher.Send(new ErrorEvent { Message = "Current Operation was canceled." });
+                    state = _initialState;
                 }
                 catch (Exception ex)
                 {
-                    session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
+                    session.EventDispatcher.Send(new ErrorEvent { Message = ex.ToString() });
                     state = _initialState;
                 }
             } while (state != null);

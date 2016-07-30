@@ -6,7 +6,7 @@
     },
     {
       "Key": "greatPokeball",
-      "Value": "GreatBall"
+      "Value": "SuperBall"
     },
     {
       "Key": "ultraPokeball",
@@ -14,15 +14,15 @@
     },
     {
       "Key": "masterPokeball",
-      "Value": "MasterBall"
+      "Value": "MeesterBall"
     },
     {
       "Key": "wrongAuthType",
-      "Value": "AuthType in config.json is onbekend."
+      "Value": "Authenticatie type is onbekend."
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Buiten het ingestelde bereik beland! Terug naar beginpunt ({0}m away) in 5 seconden. Klopt je Coords.ini bestand?"
+      "Value": "Buiten het ingestelde bereik beland! Terug naar beginpunt ({0}m weg) in 5 seconden. Klopt je Coords.ini bestand?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Beste CP: {3}  IV: {4}%] (Candies: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Beste CP: {3}  IV: {4}%] (Snoepjes: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -70,7 +70,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Geen Pokeballs resterend - Een {0} met CP {1} misgelopen "
+      "Value": "Geen ballen meer - Een {0} met CP {1} misgelopen "
     },
     {
       "Key": "catchStatusAttempt",
@@ -82,7 +82,7 @@
     },
     {
       "Key": "candies",
-      "Value": "Candies: {0}"
+      "Value": "Snoepjes: {0}"
     },
     {
       "Key": "unhandledGpxData",
