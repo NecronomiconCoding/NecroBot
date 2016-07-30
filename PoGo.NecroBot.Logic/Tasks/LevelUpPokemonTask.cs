@@ -22,19 +22,20 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("iv"))
             {
-                pokemonIdsToLevelUp =
+                pokemonIdsToLevelUp.AddRange(
                     session.Inventory.GetPokemons().Result
                         .Where(pokemonData => PokemonInfo.CalculatePokemonPerfection(pokemonData) >= session.LogicSettings.KeepMinIvPercentage && session.LogicSettings.PokemonsToLevelUp.Contains(pokemonData.PokemonId))
                         .Select(p => p.Id)
-                        .ToList();
+                        .ToList());
             }
-            else if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("cp"))
+
+            if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("cp"))
             {
-                pokemonIdsToLevelUp =
+                pokemonIdsToLevelUp.AddRange(
                     session.Inventory.GetPokemons().Result
                         .Where(pokemonData => pokemonData.Cp > session.LogicSettings.KeepMinCp && session.LogicSettings.PokemonsToLevelUp.Contains(pokemonData.PokemonId))
                         .Select(p => p.Id)
-                        .ToList();
+                        .ToList());
             }
 
             foreach (var pokeId in pokemonIdsToLevelUp)
