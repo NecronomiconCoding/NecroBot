@@ -117,6 +117,7 @@ namespace PoGo.NecroBot.Logic.Common
         SnipeScan,
         SnipeScanEx,
         NoPokemonToSnipe,
+        NotEnoughPokeballsToSnipe,
         DisplayHighestMOVE1Header,
         DisplayHighestMOVE2Header
     }
@@ -228,9 +229,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScan, "[Sniper] Scanning for Snipeable Pokemon at {0}..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.SnipeScanEx, "[Sniper] Sniping a {0} with {1} IV at {2}..."),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.NoPokemonToSnipe, "[Sniper] No Pokemon found to snipe!"),
+            new KeyValuePair<TranslationString, string>(Common.TranslationString.NotEnoughPokeballsToSnipe, "Not enough Pokeballs to start sniping! ({0}/{1})"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestMOVE1Header, "MOVE1"),
             new KeyValuePair<TranslationString, string>(Common.TranslationString.DisplayHighestMOVE2Header, "MOVE2"),
-
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)
