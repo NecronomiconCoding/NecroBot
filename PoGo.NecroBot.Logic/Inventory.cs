@@ -229,21 +229,21 @@ namespace PoGo.NecroBot.Logic
             if (!_logicSettings.ItemRecycleFilter.Any(s => Pokeballs.Contains(s.Key)))
             {
                 Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.CheckingForBallsToRecycle, amountOfPokeballsToKeep));
-                var pokeballsToRecycle = GetPokeballsToRecycle(settings, myItems);
+                var pokeballsToRecycle = GetPokeballsToRecycle(session, myItems);
                 itemsToRecylce.AddRange(pokeballsToRecycle);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Potions.Contains(s.Key)))
             {
                 Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.CheckingForPotionsToRecycle, amountOfPotionsToKeep));
-                var potionsToRecycle = GetPotionsToRecycle(settings, myItems);
+                var potionsToRecycle = GetPotionsToRecycle(session, myItems);
                 itemsToRecylce.AddRange(potionsToRecycle);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => Revives.Contains(s.Key)))
             {
                 Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.CheckingForRevivesToRecycle, amountOfRevivesToKeep));
-                var revivesToRecycle = GetRevivesToRecycle(settings, myItems);
+                var revivesToRecycle = GetRevivesToRecycle(session, myItems);
                 itemsToRecylce.AddRange(revivesToRecycle);
             }
 
@@ -263,12 +263,13 @@ namespace PoGo.NecroBot.Logic
             return itemsToRecylce;
         }
 
-        private List<ItemData> GetPokeballsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        private List<ItemData> GetPokeballsToRecycle(ISession session, IReadOnlyList<ItemData> myItems)
         {
+            var settings = session.Settings;
             var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
             if (amountOfPokeballsToKeep < 1)
             {
-                Logging.Logger.Write("TotalAmountOfPokebalsToKeep is configured incorrectly. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.PokeballsToKeepIncorrect), Logging.LogLevel.Error, ConsoleColor.Red);
                 return new List<ItemData>();
             }
 
@@ -278,12 +279,13 @@ namespace PoGo.NecroBot.Logic
             return TakeAmountOfItems(allPokeballs, amountOfPokeballsToKeep).ToList();
         }
 
-        private List<ItemData> GetPotionsToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        private List<ItemData> GetPotionsToRecycle(ISession session, IReadOnlyList<ItemData> myItems)
         {
+            var settings = session.Settings;
             var amountOfPotionsToKeep = _logicSettings.TotalAmountOfPotionsToKeep;
             if (amountOfPotionsToKeep < 1)
             {
-                Logging.Logger.Write("TotalAmountOfPotionsToKeep is configured incorrectly. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.PotionsToKeepIncorrect), Logging.LogLevel.Error, ConsoleColor.Red);
                 return new List<ItemData>();
             }
 
@@ -293,12 +295,13 @@ namespace PoGo.NecroBot.Logic
             return TakeAmountOfItems(allPotions, amountOfPotionsToKeep).ToList();
         }
 
-        private List<ItemData> GetRevivesToRecycle(ISettings settings, IReadOnlyList<ItemData> myItems)
+        private List<ItemData> GetRevivesToRecycle(ISession session, IReadOnlyList<ItemData> myItems)
         {
+            var settings = session.Settings;
             var amountOfRevivesToKeep = _logicSettings.TotalAmountOfRevivesToKeep;
             if (amountOfRevivesToKeep < 1)
             {
-                Logging.Logger.Write("TotalAmountOfRevivesToKeep is wrong configured. The number is smaller than 1.", Logging.LogLevel.Error, ConsoleColor.Red);
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.RevivesToKeepIncorrect), Logging.LogLevel.Error, ConsoleColor.Red);
                 return new List<ItemData>();
             }
 
