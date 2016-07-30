@@ -34,7 +34,7 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Collecte/Capture impossible, tentative dans : Unban dans : {1}/{2}"
+      "Value": "Collecte/Capture impossible, tentative dans : {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -98,7 +98,7 @@
     },
     {
       "Key": "commonWordName",
-      "Value": "nom"
+      "Value": "Nom"
     },
     {
       "Key": "commonWordUnknown",
@@ -203,14 +203,6 @@
     {
       "Key": "openingGoogleDevicePage",
       "Value": "Ouverture de la page Google Device. Merci de copier/coller le code avec CTRL+C/CTRL+V"
-    },
-    {
-      "Key": "couldntCopyToClipboard",
-      "Value": "Impossible de copier dans le presse-papier. Faites le manuellement"
-    },
-    {
-      "Key": "couldntCopyToClipboard2",
-      "Value": "Entrez le code {1} sur {0}"
     },
     {
       "Key": "realisticTravelDetected",
