@@ -38,18 +38,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                 while (true)
                 {
                     var upgradeResult = await session.Inventory.UpgradePokemon(pokeId);
-                    if (upgradeResult.Result.ToString().ToLower().Contains("success"))
+                    upgradeResult.Result == UpgradePokemonResponse.Types.Result.ErrorPokemonIsDeployed
+                    if (upgradeResult.Result == UpgradePokemonResponse.Types.Result.Success)
                     {
-                        Logger.Write("Pokemon Upgraded:" + upgradeResult.UpgradedPokemon.PokemonId + ":" +
-                                     upgradeResult.UpgradedPokemon.Cp);
+                        Logger.Write("Pokemon Upgraded:" + upgradeResult.UpgradedPokemon.PokemonId + ":" + upgradeResult.UpgradedPokemon.Cp);
                     }
-                    else if (upgradeResult.Result.ToString().ToLower().Contains("insufficient"))
+                    else 
                     {
-                        Logger.Write("Pokemon Upgrade Failed Not Enough Resources");
-                        break;
-                    }
-                    else
-                    {
+                        if (upgradeResult.Result == UpgradePokemonResponse.Types.Result.ErrorInsufficientResources)
+                            Logger.Write("Pokemon Upgrade Failed: Not enough candies");
+                        if (upgradeResult.Result == UpgradePokemonResponse.Types.Result.ErrorUpgradeNotAvailable)
+                            Logger.Write("Pokemon Upgrade Failed: Upgrade not available");
+                        if (upgradeResult.Result == UpgradePokemonResponse.Types.Result.ErrorPokemonIsDeployed)
+                            Logger.Write("Pokemon Upgrade Failed: Pokemon is defending gym");
+                        if (upgradeResult.Result == UpgradePokemonResponse.Types.Result.ErrorPokemonNotFound)
+                            Logger.Write("Pokemon Upgrade Failed: Something bad happened to your pokemon");
                         break;
                     }
                 }
