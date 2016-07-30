@@ -23,7 +23,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var pokemon in pokemons)
             {
+<<<<<<< HEAD
                 cancellationToken.ThrowIfCancellationRequested();
+=======
+                if (pokemon.Nickname.Length != 0) continue;
+>>>>>>> 37bdcde70412e85354a0f23458f69c9617c5ac99
 
                 double perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(pokemon));
                 string pokemonName = pokemon.PokemonId.ToString();
@@ -36,8 +40,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                 string newNickname = String.Format(session.LogicSettings.RenameTemplate, pokemonName, perfection);
                 string oldNickname = (pokemon.Nickname.Length != 0) ? pokemon.Nickname : pokemon.PokemonId.ToString();
 
-                if (perfection >= session.LogicSettings.KeepMinIvPercentage && newNickname != oldNickname &&
-                    session.LogicSettings.RenameAboveIv)
+                if (newNickname != oldNickname &&
+                    (
+                        (session.LogicSettings.RenameAboveIv && perfection >= session.LogicSettings.KeepMinIvPercentage) ||
+                        session.LogicSettings.RenameAllIv
+                    )
+                )
                 {
                     await session.Client.Inventory.NicknamePokemon(pokemon.Id, newNickname);
 

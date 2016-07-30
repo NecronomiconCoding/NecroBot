@@ -30,7 +30,7 @@ namespace PoGo.NecroBot.Logic.Service
                 TransferDuplicatePokemonTask.Execute(_session, cancellationToken).Wait();
             }
 
-            if (_session.LogicSettings.RenameAboveIv)
+            if (_session.LogicSettings.RenameAboveIv || _session.LogicSettings.RenameAllIv)
             {
                 RenamePokemonTask.Execute(_session, cancellationToken).Wait();
             }
