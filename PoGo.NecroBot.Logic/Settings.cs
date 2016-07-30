@@ -106,6 +106,7 @@ namespace PoGo.NecroBot.CLI
         public double DefaultAltitude = 10;
         public double DefaultLatitude = 40.785091;
         public double DefaultLongitude = -73.968285;
+        public double MaxSpawnLocationOffset = 0.0005;
         public int DelayBetweenPokemonCatch = 2000;
         public int DelayBetweenPlayerActions = 5000;
         public float EvolveAboveIvValue = 95;
@@ -482,7 +483,7 @@ namespace PoGo.NecroBot.CLI
         {
             get
             {
-                return _settings.DefaultLatitude + _rand.NextDouble() * (0.2 - 0.01) + 0.01;
+                return _settings.DefaultLatitude + _rand.NextDouble() * (_settings.MaxSpawnLocationOffset);
             }
 
             set
@@ -495,7 +496,7 @@ namespace PoGo.NecroBot.CLI
         {
             get
             {
-                return _settings.DefaultLongitude + _rand.NextDouble() * (0.2 - 0.01) + 0.01;
+                return _settings.DefaultLongitude + _rand.NextDouble() * (_settings.MaxSpawnLocationOffset);
             }
 
             set
