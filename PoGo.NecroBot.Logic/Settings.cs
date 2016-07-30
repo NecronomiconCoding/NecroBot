@@ -246,6 +246,12 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Zubat,
             PokemonId.Doduo
         };
+        
+        public List<PokemonId> PokemonsToLevelUp = new List<PokemonId>
+        {
+            PokemonId.Dragonite,
+            PokemonId.Gyarados
+        };
 
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
         {
@@ -615,6 +621,7 @@ namespace PoGo.NecroBot.Logic
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public ICollection<PokemonId> PokemonToUseMasterball => _settings.PokemonToUseMasterball;
+        public ICollection<PokemonId> PokemonsToLevelUp => _settings.PokemonsToLevelUp;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
