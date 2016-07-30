@@ -29,6 +29,8 @@ Chatting about this Repository can be done on our Discord: https://discord.gg/Vs
  - [Use lucky egg while evolve]
  - [Egg Hatching Automatically]
  - [Multi bot support]
+ - [Snipe pokemon]
+ - [Power-Up pokemon]
 
 <h2><a name="getting-started">Getting Started</a></h2>
 Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.
