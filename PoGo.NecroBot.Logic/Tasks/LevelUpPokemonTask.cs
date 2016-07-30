@@ -38,7 +38,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                 while (true)
                 {
                     var upgradeResult = await session.Inventory.UpgradePokemon(pokeId);
-                    upgradeResult.Result == UpgradePokemonResponse.Types.Result.ErrorPokemonIsDeployed
                     if (upgradeResult.Result == UpgradePokemonResponse.Types.Result.Success)
                     {
                         Logger.Write("Pokemon Upgraded:" + upgradeResult.UpgradedPokemon.PokemonId + ":" + upgradeResult.UpgradedPokemon.Cp);
