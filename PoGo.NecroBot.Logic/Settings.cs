@@ -151,6 +151,8 @@ namespace PoGo.NecroBot.Logic
         public float KeepMinIvPercentage = 90;
         public bool KeepPokemonsThatCanEvolve = false;
         public string LevelUpByCPorIv = "iv";
+        public bool UseLuckyEggConstantly = true;
+        public bool UseIncenseConstantly = true;
         public int MaxPokeballsPerPokemon = 6;
         public int MaxSpawnLocationOffset = 10;
         public int MaxTravelDistanceInMeters = 1000;
@@ -592,6 +594,9 @@ namespace PoGo.NecroBot.Logic
         public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;
         public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;
         public int GetMinStarDustForLevelUp => _settings.GetMinStarDustForLevelUp;
+        public bool UseLuckyEggConstantly => _settings.UseLuckyEggConstantly;
+
+        public bool UseIncenseConstantly => _settings.UseIncenseConstantly;
         public float UpgradePokemonIvMinimum => _settings.UpgradePokemonIvMinimum;
         public float UpgradePokemonCpMinimum => _settings.UpgradePokemonCpMinimum;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
