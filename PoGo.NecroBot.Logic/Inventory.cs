@@ -185,6 +185,14 @@ namespace PoGo.NecroBot.Logic
                 .OrderByDescending(x => x.Cp)
                 .FirstOrDefault();
         }
+        public async Task<int> GetStarDust()
+        {
+            var StarDust =await  _client.Player.GetPlayer();
+            var gdrfds = StarDust.PlayerData.Currencies;
+            var SplitStar = gdrfds[1].Amount;
+            return SplitStar;
+
+        }
 
         public async Task<PokemonData> GetHighestPokemonOfTypeByIv(PokemonData pokemon)
         {
@@ -201,7 +209,7 @@ namespace PoGo.NecroBot.Logic
             var pokemons = myPokemon.ToList();
             return pokemons.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax).Take(limit);
         }
-
+     
         public async Task<IEnumerable<PokemonData>> GetHighestsPerfect(int limit)
         {
             var myPokemon = await GetPokemons();
@@ -254,7 +262,7 @@ namespace PoGo.NecroBot.Logic
             if (!_logicSettings.ItemRecycleFilter.Any(s => _pokeballs.Contains(s.Key)))
             {
                 if (session.LogicSettings.VerboseRecycling)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForBallsToRecycle, amountOfPokeballsToKeep));
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForBallsToRecycle, amountOfPokeballsToKeep), LogLevel.Recycling);
                 var pokeballsToRecycle = GetPokeballsToRecycle(session, myItems);
                 itemsToRecylce.AddRange(pokeballsToRecycle);
             }
@@ -262,7 +270,7 @@ namespace PoGo.NecroBot.Logic
             if (!_logicSettings.ItemRecycleFilter.Any(s => _potions.Contains(s.Key)))
             {
                 if (session.LogicSettings.VerboseRecycling)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForPotionsToRecycle, amountOfPotionsToKeep));
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForPotionsToRecycle, amountOfPotionsToKeep), LogLevel.Recycling);
                 var potionsToRecycle = GetPotionsToRecycle(session, myItems);
                 itemsToRecylce.AddRange(potionsToRecycle);
             }
@@ -270,7 +278,7 @@ namespace PoGo.NecroBot.Logic
             if (!_logicSettings.ItemRecycleFilter.Any(s => _revives.Contains(s.Key)))
             {
                 if (session.LogicSettings.VerboseRecycling)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForRevivesToRecycle, amountOfRevivesToKeep));
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForRevivesToRecycle, amountOfRevivesToKeep), LogLevel.Recycling);
                 var revivesToRecycle = GetRevivesToRecycle(session, myItems);
                 itemsToRecylce.AddRange(revivesToRecycle);
             }
@@ -321,11 +329,21 @@ namespace PoGo.NecroBot.Logic
             return TakeAmountOfItems(allPokeballs, amountOfPokeballsToKeep).ToList();
         }
 
-        public async Task<int> GetPokedexCount()
+        public async Task<List<InventoryItem>> GetPokeDexItems()
         {
+            List<InventoryItem> PokeDex = new List<InventoryItem>();
             var hfgds = await _client.Inventory.GetInventory();
+            for (int i = 0; i < hfgds.InventoryDelta.InventoryItems.Count; i++)
+            {
+                if (hfgds.InventoryDelta.InventoryItems[i].ToString().ToLower().Contains("pokedex") && hfgds.InventoryDelta.InventoryItems[i].ToString().ToLower().Contains("timescaptured"))
+                {
+                    PokeDex.Add(hfgds.InventoryDelta.InventoryItems[i]);
+                }
 
-            return hfgds.InventoryDelta.InventoryItems.Count(t => t.ToString().ToLower().Contains("pokedex"));
+
+            }
+            return PokeDex;
+
         }
 
         public async Task<List<Candy>> GetPokemonFamilies()

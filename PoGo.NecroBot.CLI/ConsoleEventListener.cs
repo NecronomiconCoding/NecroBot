@@ -197,7 +197,7 @@ namespace PoGo.NecroBot.CLI
         public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession session)
         {
             string strHeader;
-            //PokemonData | CP | IV | Level | MOVE1 | MOVE2
+            //PokemonData | CP | IV | Level | MOVE1 | MOVE2 | Candy
             switch (evt.SortedBy)
             {
                 case "Level":
@@ -215,6 +215,9 @@ namespace PoGo.NecroBot.CLI
                 case "MOVE2":
                     strHeader = session.Translation.GetTranslation(TranslationString.DisplayHighestMove2Header);
                     break;
+                case "Candy":
+                    strHeader = session.Translation.GetTranslation(TranslationString.DisplayHighestCandy);
+                    break;
                 default:
                     strHeader = session.Translation.GetTranslation(TranslationString.DisplayHighestsHeader);
                     break;
@@ -225,8 +228,13 @@ namespace PoGo.NecroBot.CLI
             Logger.Write($"====== {strHeader} ======", LogLevel.Info, ConsoleColor.Yellow);
             foreach (var pokemon in evt.PokemonList)
                 Logger.Write(
-                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: {pokemon.Item1.PokemonId.ToString().PadRight(10, ' ')}\t MOVE1: {pokemon.Item5.ToString().PadRight(20, ' ')} MOVE2: {pokemon.Item6}",
+                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: {pokemon.Item1.PokemonId.ToString().PadRight(10, ' ')}\t MOVE1: {pokemon.Item5.ToString().PadRight(20, ' ')} MOVE2: {pokemon.Item6.ToString().PadRight(20, ' ')} Candy: {pokemon.Item7}",
                     LogLevel.Info, ConsoleColor.Yellow);
+        }
+
+        public void HandleEvent( EvolveCountEvent evt, ISession session )
+        {
+            Logger.Write( "[Evolves] Potential Evolves: " + evt.Evolves, LogLevel.Update, ConsoleColor.White );
         }
 
         public void HandleEvent(UpdateEvent evt, ISession session)

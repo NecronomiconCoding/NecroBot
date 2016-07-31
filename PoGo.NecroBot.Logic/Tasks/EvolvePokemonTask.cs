@@ -24,6 +24,11 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemonToEvolveTask = await session.Inventory.GetPokemonToEvolve(session.LogicSettings.PokemonsToEvolve);
             var pokemonToEvolve = pokemonToEvolveTask.ToList();
 
+            session.EventDispatcher.Send( new EvolveCountEvent
+            {
+                Evolves = pokemonToEvolve.Count
+            } );
+
             if (pokemonToEvolve.Any())
             {
                 var inventoryContent = await session.Inventory.GetItems();

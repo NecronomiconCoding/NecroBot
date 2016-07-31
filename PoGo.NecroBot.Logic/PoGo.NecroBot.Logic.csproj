@@ -64,6 +64,7 @@
     <Compile Include="Event\EggHatchedEvent.cs" />
     <Compile Include="Event\EggsListEvent.cs" />
     <Compile Include="Event\EventDispatcher.cs" />
+    <Compile Include="Event\EvolveCountEvent.cs" />
     <Compile Include="Event\FortTargetEvent.cs" />
     <Compile Include="Event\FortFailedEvent.cs" />
     <Compile Include="Event\FortUsedEvent.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Service\BotService.cs" />
     <Compile Include="Tasks\EggsListTask.cs" />
     <Compile Include="Tasks\FavoritePokemonTask.cs" />
+    <Compile Include="Tasks\GetPokeDexCount.cs" />
     <Compile Include="Tasks\InventoryListTask.cs" />
     <Compile Include="Tasks\LevelUpPokemonTask.cs" />
     <Compile Include="Tasks\PokemonListTask.cs" />
