@@ -41,9 +41,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 await Task.Delay(1000, cancellationToken);
 
-                await session.Navigation.HumanLikeWalking(
+                await session.Navigation.Move(
                     new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude),
-                    session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken);
+                    session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken, session.LogicSettings.DisableHumanWalking);
             }
 
             var pokestopList = await GetPokeStops(session);
@@ -79,7 +79,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
 
-                await session.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
+                    await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour,
                     async () =>
                     {
@@ -88,7 +88,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         //Catch Incense Pokemon
                         await CatchIncensePokemonsTask.Execute(session, cancellationToken);
                         return true;
-                    }, cancellationToken);
+                    }, cancellationToken, session.LogicSettings.DisableHumanWalking);
 
                 //Catch Lure Pokemon
                 if (pokeStop.LureInfo != null)
@@ -162,23 +162,41 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         await session.Inventory.RefreshCachedInventory();
                     }
+
                     await RecycleItemsTask.Execute(session, cancellationToken);
+
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                         session.LogicSettings.EvolveAllPokemonAboveIv)
                     {
                         await EvolvePokemonTask.Execute(session, cancellationToken);
                     }
+                    await GetPokeDexCount.Execute(session, cancellationToken);
+
                     if (session.LogicSettings.AutomaticallyLevelUpPokemon)
                     {
                         await LevelUpPokemonTask.Execute(session, cancellationToken);
+                    }
+                    if (session.LogicSettings.UseLuckyEggConstantly)
+                    {
+                        await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                    }
+                    if (session.LogicSettings.UseIncenseConstantly)
+                    {
+                        await UseIncenseConstantlyTask.Execute(session, cancellationToken);
                     }
                     if (session.LogicSettings.TransferDuplicatePokemon)
                     {
                         await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                     }
+
                     if (session.LogicSettings.RenamePokemon)
                     {
                         await RenamePokemonTask.Execute(session, cancellationToken);
+                    }
+
+                    if (session.LogicSettings.AutoFavoritePokemon)
+                    {
+                        await FavoritePokemonTask.Execute(session, cancellationToken);
                     }
                 }
 

@@ -91,6 +91,9 @@ namespace PoGo.NecroBot.CLI
                 case "EggsList":
                     await EggsListTask.Execute(_session);
                     break;
+                case "InventoryList":
+                    await InventoryListTask.Execute(_session);
+                    break;
             }
 
             // Setup to only send data back to the session that requested it. 
@@ -99,10 +102,23 @@ namespace PoGo.NecroBot.CLI
                 dynamic decodedMessage = JObject.Parse(message);
                 await _websocketHandler?.Handle(_session, session, decodedMessage);
             }
-            catch (JsonException ex)
+            catch (JsonException)
             {
 
 
+            }
+
+            // Setup to only send data back to the session that requested it. 
+            try
+            {
+                dynamic decodedMessage = JObject.Parse(message);
+                var handle = _websocketHandler?.Handle(_session, session, decodedMessage);
+                if (handle != null)
+                    await handle;
+            }
+            catch
+            {
+                // ignored
             }
         }
 
@@ -113,6 +129,16 @@ namespace PoGo.NecroBot.CLI
 
             if (_lastPokeStopList != null)
                 session.Send(Serialize(_lastPokeStopList));
+
+            try
+            {
+                session.Send(Serialize(new UpdatePositionEvent()
+                {
+                    Latitude = _session.Client.CurrentLatitude,
+                    Longitude = _session.Client.CurrentLongitude
+                }));
+            }
+            catch { }
         }
 
         public void Listen(IEvent evt, Session session)

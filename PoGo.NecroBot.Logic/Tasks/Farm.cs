@@ -32,6 +32,15 @@ namespace PoGo.NecroBot.Logic.Service
             {
                 LevelUpPokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
             }
+            if (_session.LogicSettings.UseLuckyEggConstantly)
+            {
+                UseLuckyEggConstantlyTask.Execute(_session, cancellationToken).Wait(cancellationToken);
+            }
+            if (_session.LogicSettings.UseIncenseConstantly)
+            {
+                UseIncenseConstantlyTask.Execute(_session, cancellationToken).Wait(cancellationToken);
+            }
+            GetPokeDexCount.Execute(_session, cancellationToken).Wait(cancellationToken);
             if (_session.LogicSettings.TransferDuplicatePokemon)
             {
                 TransferDuplicatePokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
@@ -40,6 +49,11 @@ namespace PoGo.NecroBot.Logic.Service
             if (_session.LogicSettings.RenamePokemon)
             {
                 RenamePokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
+            }
+
+            if (_session.LogicSettings.AutoFavoritePokemon)
+            {
+                FavoritePokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
             }
 
             RecycleItemsTask.Execute(_session, cancellationToken).Wait(cancellationToken);

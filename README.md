@@ -7,7 +7,7 @@
 <h1>NecroBot - a Pokemon Go Bot based on RocketAPI</h1>
 Visit our new Website! : http://necrobot.io
 
-Chatting about this Repository can be done on our Discord: https://discord.gg/VsVrjgr <br/>
+Chatting about this Repository can be done on our Discord: https://discord.gg/VXKxNFr <br/>
 <br/>
 
 <h2><a name="features">Features</a></h2>

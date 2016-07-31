@@ -1,5 +1,4 @@
-﻿using PoGo.NecroBot.Logic.Event;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Events
 {
-    public class PokemonListResponce : IWebSocketResponce, IEvent
+    class ItemListResponce : IWebSocketResponce
     {
-        public PokemonListResponce(dynamic data, string requestID)
+        public ItemListResponce(dynamic data,string requestID)
         {
-            Command = "PokemonListWeb";
+            Command = "ItemListWeb";
             Data = data;
             RequestID = requestID;
         }
