@@ -240,25 +240,18 @@ namespace PoGo.NecroBot.Logic
             return myItemCount;
         }
 
-        public async Task<IEnumerable<ItemData>> GetItemsToRecycle(ISession session)
+        public async Task<IEnumerable<ItemData>> GetItemsToRecycle()
         {
-            var itemsToRecylce = new List<ItemData>();
-            var myItems = (await GetItems()).ToList();
-
-            var otherItemsToRecylce = myItems
-                .Where(x => _logicSettings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
-                .Select(
-                    x =>
-                        new ItemData
-                        {
-                            ItemId = x.ItemId,
-                            Count = x.Count - _logicSettings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
-                            Unseen = x.Unseen
-                        });
-
-            itemsToRecylce.AddRange(otherItemsToRecylce);
-
-            return itemsToRecylce;
+            var myItems = await GetItems();
+            return myItems.Where(x => _logicSettings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
+                  .Select(
+                      x =>
+                          new ItemData
+                          {
+                              ItemId = x.ItemId,
+                              Count = x.Count - _logicSettings.ItemRecycleFilter.Single(f => f.Key == x.ItemId).Value,
+                              Unseen = x.Unseen
+                          });
         }
 
         public double GetPerfect(PokemonData poke)
@@ -273,22 +266,6 @@ namespace PoGo.NecroBot.Logic
             return inventory.InventoryDelta.InventoryItems
                 .Select(i => i.InventoryItemData?.PlayerStats)
                 .Where(p => p != null);
-        }
-
-        private List<ItemData> GetPokeballsToRecycle(ISession session, IReadOnlyList<ItemData> myItems)
-        {
-            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokeballsToKeep;
-            if (amountOfPokeballsToKeep < 1)
-            {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.PokeballsToKeepIncorrect),
-                    LogLevel.Error, ConsoleColor.Red);
-                return new List<ItemData>();
-            }
-
-            var allPokeballs = myItems.Where(s => _pokeballs.Contains(s.ItemId)).ToList();
-            allPokeballs.Sort((ball1, ball2) => ((int) ball1.ItemId).CompareTo((int) ball2.ItemId));
-
-            return TakeAmountOfItems(allPokeballs, amountOfPokeballsToKeep).ToList();
         }
 
         public async Task<UseItemXpBoostResponse> UseLuckyEggConstantly()
@@ -415,38 +392,6 @@ namespace PoGo.NecroBot.Logic
             }
             return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinIvPercentage,
                 _logicSettings.KeepMinDuplicatePokemon);
-        }
-
-        private List<ItemData> GetPotionsToRecycle(ISession session, IReadOnlyList<ItemData> myItems)
-        {
-            var amountOfPotionsToKeep = _logicSettings.TotalAmountOfPotionsToKeep;
-            if (amountOfPotionsToKeep < 1)
-            {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.PotionsToKeepIncorrect),
-                    LogLevel.Error, ConsoleColor.Red);
-                return new List<ItemData>();
-            }
-
-            var allPotions = myItems.Where(s => _potions.Contains(s.ItemId)).ToList();
-            allPotions.Sort((i1, i2) => ((int) i1.ItemId).CompareTo((int) i2.ItemId));
-
-            return TakeAmountOfItems(allPotions, amountOfPotionsToKeep).ToList();
-        }
-
-        private List<ItemData> GetRevivesToRecycle(ISession session, IReadOnlyList<ItemData> myItems)
-        {
-            var amountOfRevivesToKeep = _logicSettings.TotalAmountOfRevivesToKeep;
-            if (amountOfRevivesToKeep < 1)
-            {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.RevivesToKeepIncorrect),
-                    LogLevel.Error, ConsoleColor.Red);
-                return new List<ItemData>();
-            }
-
-            var allRevives = myItems.Where(s => _revives.Contains(s.ItemId)).ToList();
-            allRevives.Sort((i1, i2) => ((int) i1.ItemId).CompareTo((int) i2.ItemId));
-
-            return TakeAmountOfItems(allRevives, amountOfRevivesToKeep).ToList();
         }
 
         public async Task<GetInventoryResponse> RefreshCachedInventory()
