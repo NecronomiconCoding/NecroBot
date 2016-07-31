@@ -18,8 +18,14 @@ namespace PoGo.NecroBot.CLI
 {
     internal class Program
     {
+        static ManualResetEvent _quitEvent = new ManualResetEvent(false);
         private static void Main(string[] args)
         {
+            Console.CancelKeyPress += (sender, eArgs) =>
+            {
+                _quitEvent.Set();
+                eArgs.Cancel = true;
+            };
             var culture = CultureInfo.CreateSpecificCulture("en-US");
 
             CultureInfo.DefaultThreadCurrentCulture = culture;
@@ -31,7 +37,7 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
             var settings = GlobalSettings.Load(subPath);
-
+                
 
             if (settings == null)
             {
@@ -89,16 +95,7 @@ namespace PoGo.NecroBot.CLI
             if (session.LogicSettings.UseSnipeLocationServer)
                 SnipePokemonTask.AsyncStart(session);
 
-            //Non-blocking key reader
-            //This will allow to process console key presses in another code parts
-            while (true)
-            {
-                if (Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.Enter)
-                {
-                    break;
-                }
-                Thread.Sleep(5);
-            }
+            _quitEvent.WaitOne();
         }
 
         private static void Navigation_UpdatePositionEvent(double lat, double lng)
@@ -111,7 +108,7 @@ namespace PoGo.NecroBot.CLI
             var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
                              Path.DirectorySeparatorChar + "LastPos.ini";
 
-            File.WriteAllText(coordsPath, String.Format("{0}:{1}", lat, lng));
+            File.WriteAllText(coordsPath, $"{lat}:{lng}");
         }
     }
 }
