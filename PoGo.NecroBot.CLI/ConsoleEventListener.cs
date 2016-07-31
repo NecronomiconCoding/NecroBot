@@ -184,6 +184,11 @@ namespace PoGo.NecroBot.CLI
                 LogLevel.Berry);
         }
 
+        public void HandleEvent(SnipeEvent evt, ISession session)
+        {
+            Logger.Write(evt.ToString(), LogLevel.Sniper);
+        }
+
         public void HandleEvent(SnipeScanEvent evt, ISession session)
         {
             Logger.Write(evt.PokemonId == PokemonId.Missingno
