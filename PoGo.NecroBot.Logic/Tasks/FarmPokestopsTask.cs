@@ -48,6 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var pokestopList = await GetPokeStops(session);
             var stopsHit = 0;
+            var displayStatsHit = 0;
             var eggWalker = new EggWalker(1000, session);
 
             if (pokestopList.Count <= 0)
@@ -158,6 +159,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;
+
+                    await DownloadProfile(session);
+
                     if (fortSearch.ItemsAwarded.Count > 0)
                     {
                         await session.Inventory.RefreshCachedInventory();
@@ -179,6 +183,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (session.LogicSettings.RenamePokemon)
                     {
                         await RenamePokemonTask.Execute(session, cancellationToken);
+                    }
+                    if (++displayStatsHit >= 4)
+                    {
+                        await DisplayPokemonStatsTask.Execute(session);
+                        displayStatsHit = 0;
                     }
                 }
 
@@ -207,6 +216,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                 );
 
             return pokeStops.ToList();
+        }
+
+        private static async Task DownloadProfile(ISession session)
+        {
+            session.Profile = await session.Client.Player.GetPlayer();
+            session.EventDispatcher.Send(new ProfileEvent
+            {
+                Profile = session.Profile
+            });
         }
     }
 }
