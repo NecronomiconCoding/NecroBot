@@ -182,7 +182,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                             List<PokemonLocation> locationsToSnipe = new List<PokemonLocation>();
                             if (scanResult.pokemons != null)
                             {
-                                var testpoke = scanResult.pokemons.Where(q => pokemonIds.Contains(q.pokemon_name));
                                 var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains((PokemonId) q.pokemon_name));
                                 var notVisitedPokemon = filteredPokemon.Where(q => !LocsVisited.Contains(q));
                                 var notExpiredPokemon = notVisitedPokemon.Where(q => q.expires < currentTimestamp);
