@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using Google.Protobuf;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI.Enums;
@@ -106,6 +107,15 @@ namespace PoGo.NecroBot.Logic.State
                 session.EventDispatcher.Send(new ErrorEvent
                 {
                     Message = session.Translation.GetTranslation(TranslationString.GoogleError)
+                });
+                await Task.Delay(2000, cancellationToken);
+                Environment.Exit(0);
+            }
+            catch (InvalidProtocolBufferException ex) when (ex.Message.Contains("SkipLastField"))
+            {
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.IPBannedError)
                 });
                 await Task.Delay(2000, cancellationToken);
                 Environment.Exit(0);
