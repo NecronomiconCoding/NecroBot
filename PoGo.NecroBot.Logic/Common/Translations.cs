@@ -131,6 +131,7 @@ namespace PoGo.NecroBot.Logic.Common
         DisplayHighestMove1Header,
         DisplayHighestMove2Header,
         DisplayHighestCandy,
+        IPBannedError
         NoEggsAvailable,
         UseLuckyEggActive,
         NoIncenseAvailable,
@@ -328,6 +329,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy"),
+            new KeyValuePair<TranslationString, string>(TranslationString.IPBannedError, "Connection refused. Your IP might have been Blacklisted by Niantic. Exiting.."),
             new KeyValuePair<TranslationString, string>(TranslationString.NoEggsAvailable, "No Eggs Available"),
             new KeyValuePair<TranslationString, string>(TranslationString.UseLuckyEggActive, "Lucky Egg Already Active"),
             new KeyValuePair<TranslationString, string>(TranslationString.NoIncenseAvailable, "No Incense Available"),
