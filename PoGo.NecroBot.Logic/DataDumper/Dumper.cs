@@ -16,11 +16,11 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <param name="session"></param>
         /// <param name="filename" />
         /// File to clear/param>
-        public static void ClearDumpFile(ISession session, string filename)
+        public static void ClearDumpFile(ISession session, string filename, string extension = "csv")
         {
             var path = Path.Combine(session.LogicSettings.ProfilePath, "Dumps");
             var file = Path.Combine(path,
-                $"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
+                $"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.{extension}");
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
             // Clears all contents of a file first if overwrite is true
@@ -33,11 +33,12 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <param name="session"></param>
         /// <param name="data">Dumps the string data to the file</param>
         /// <param name="filename">Filename to be used for naming the file.</param>
-        public static void Dump(ISession session, string data, string filename)
+        /// <param name="extension">FileExt.</param>
+        public static void Dump(ISession session, string data, string filename, string extension = "csv")
         {
             string uniqueFileName = $"{filename}";
 
-            DumpToFile(session, data, uniqueFileName);
+            DumpToFile(session, data, uniqueFileName, extension);
         }
 
         /// <summary>
@@ -46,10 +47,10 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <param name="session"></param>
         /// <param name="data">Dumps the string data to the file</param>
         /// <param name="filename">Filename to be used for naming the file.</param>
-        private static void DumpToFile(ISession session, string data, string filename)
+        private static void DumpToFile(ISession session, string data, string filename, string extension = "csv")
         {
             var path = Path.Combine(session.LogicSettings.ProfilePath, "Dumps",
-                $"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt");
+                $"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.{extension}");
 
             using (
                 var dumpFile =
