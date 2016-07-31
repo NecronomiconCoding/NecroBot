@@ -415,10 +415,38 @@
     {
       "Key": "displayHighestMove2Header",
       "Value": "Attaque 2"
-    }
+    },
     {
       "Key": "DisplayHighestCandy",
       "Value": "Bonbons"
+    },
+    {
+      "Key": "NoEggsAvailable",
+      "Value": "Aucun oeuf de disponible"
+    },
+    {
+      "Key": "UseLuckyEggActive",
+      "Value": "Oeuf Chance déjà activé"
+    },
+    {
+      "Key": "NoIncenseAvailable",
+      "Value": "Aucun encens de disponible"
+    },
+    {
+      "Key": "UseIncenseActive",
+      "Value": "Encens déjà activé"
+    },
+    {
+      "Key": "AmountPkmSeenCaught",
+      "Value": "Total de pokémon vu : {}/151, Total de pokémon capturé : {}/151"
+    },
+    {
+      "Key": "EventEvolveCount",
+      "Value": "[Evolution] Total envisageable : {}"
+    },
+    {
+      "Key": "PkmNotEnoughRessources",
+      "Value": "Echec. Ressources insuffisantes pour l'évolution"
     }
   ]
 }
