@@ -129,7 +129,8 @@ namespace PoGo.NecroBot.Logic.Common
         NoPokemonToSnipe,
         NotEnoughPokeballsToSnipe,
         DisplayHighestMove1Header,
-        DisplayHighestMove2Header
+        DisplayHighestMove2Header,
+        DisplayHighestCandy
     }
 
     public class Translation : ITranslation
@@ -318,7 +319,8 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.NotEnoughPokeballsToSnipe,
                 "Not enough Pokeballs to start sniping! ({0}/{1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
-            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2")
+            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2"),
+            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy")
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)
