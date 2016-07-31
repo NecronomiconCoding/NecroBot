@@ -5,6 +5,7 @@ using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
 
@@ -20,7 +21,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentAmountOfLuckyEggs = await session.Inventory.GetItemAmountByType(ItemId.ItemLuckyEgg);
             if (currentAmountOfLuckyEggs == 0)
             {
-                Logging.Logger.Write("No Eggs Available");
+                Logging.Logger.Write(session.Translation.GetTranslation(TranslationString.NoEggsAvailable));
                 return;
             }
 
@@ -28,15 +29,15 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (UseEgg.Result.ToString().Contains("Success"))
             {
-                Logging.Logger.Write("Used a Lucky Egg");
+                Logging.Logger.Write(session.Translation.GetTranslation(TranslationString.EventUsedLuckyEgg));
             }
             else if (UseEgg.Result.ToString().ToLower().Contains("errornoitemsremaining"))
             {
-                Logging.Logger.Write("No Eggs Available");
+                Logging.Logger.Write(session.Translation.GetTranslation(TranslationString.NoEggsAvailable));
             }
             else if (UseEgg.Result.ToString().Contains("AlreadyActive") || (UseEgg.AppliedItems == null))
             {
-                Logging.Logger.Write("Lucky Egg Already Active");
+                Logging.Logger.Write(session.Translation.GetTranslation(TranslationString.UseLuckyEggActive));
             }
         }
        
