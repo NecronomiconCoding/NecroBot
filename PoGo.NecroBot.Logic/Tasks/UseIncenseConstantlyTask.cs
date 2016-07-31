@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using POGOProtos.Inventory.Item;
+using PoGo.NecroBot.Logic.Common;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -19,7 +20,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentAmountOfIncense = await session.Inventory.GetItemAmountByType(ItemId.ItemIncenseOrdinary);
             if (currentAmountOfIncense == 0)
             {
-                Logging.Logger.Write("No Incense Available");
+                Logging.Logger.Write(session.Translation.GetTranslation(TranslationString.NoIncenseAvailable));
                 return;
             }
 
@@ -27,16 +28,16 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (UseIncense.Result.ToString().Contains("Success"))
             {
-                Logging.Logger.Write("Used an Incense");
+                Logging.Logger.Write(session.Translation.GetTranslation(TranslationString.UseIncenseActive));
             }
             else if (UseIncense.Result.ToString().ToLower().Contains("errornoitemsremaining") ||
                 UseIncense.Result.ToString().ToLower().Contains("noneininventory"))
             {
-                Logging.Logger.Write("No Incense Available");
+                Logging.Logger.Write(session.Translation.GetTranslation(TranslationString.NoIncenseAvailable));
             }
             else if (UseIncense.Result.ToString().Contains("AlreadyActive") || (UseIncense.AppliedIncense == null))
             {
-                Logging.Logger.Write("Incense Already Active");
+                Logging.Logger.Write(session.Translation.GetTranslation(TranslationString.UseIncenseActive));
             }
         }
     }
