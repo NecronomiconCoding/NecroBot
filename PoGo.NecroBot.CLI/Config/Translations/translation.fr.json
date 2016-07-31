@@ -1,8 +1,8 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "PokeBall"
+      "Value": "PokéBall"
     },
     {
       "Key": "greatPokeball",
@@ -30,7 +30,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nom : {0} | {1}XP, Gems : {2}, Objets : {3}"
+      "Value": "{0} | {1}XP, Objets: {3} | {2}"
     },
     {
       "Key": "eventFortFailed",
@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Arrivée au Pokestop : {0} dans ({1}m)"
+      "Value": "{0} dans {1}m"
     },
     {
       "Key": "eventProfileLogin",
@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Utilisation d'un Oeuf Chance, temps restant : {0}"
+      "Value": "Bonus Oeuf Chance : {0}min restant"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- PC: {1} - IV: {2}%   [Maximum PC:{3} IV: {4}%] ({5} Bonbons)"
+      "Value": "{0}\t- {1} / {2}%   [Maximum  {3} / {4}%] ({5} Bonbons)"
     },
     {
       "Key": "eventItemRecycled",
@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lv {3} {6} ({4}/{5}) | {7}% Chance sur {8}m | {10} {9} restant, {11}"
+      "Value": "({0}) |{1}-{2} Lv {3} {6}% {4}/{5} | {7}% Chance sur {8}m | {10} {9} restant, {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -82,7 +82,7 @@
     },
     {
       "Key": "candies",
-      "Value": "{0}Bonbons"
+      "Value": "{0} Bonbons"
     },
     {
       "Key": "unhandledGPXData",
@@ -254,7 +254,7 @@
     },
     {
       "Key": "pokemonSkipped",
-      "Value": "{0} ignoré"
+      "Value": "{0} est ignoré"
     },
 	{
       "Key": "zeroPokeballInv",
@@ -262,11 +262,11 @@
     },
 	{
       "Key": "currentPokeballInv",
-      "Value": "[Inventaire] Pokeballs: {0} | Superballs: {1} | Hyperballs: {2} | Masterballs: {3}"
+      "Value": "[Inventaire] Pokéballs: {0} | Superballs: {1} | Hyperballs: {2} | Masterballs: {3}"
     },
 	{
       "Key": "checkingForBallsToRecycle",
-      "Value": "Recherche de PokeBalls à supprimer. En garder {0}"
+      "Value": "Recherche de PokéBalls à supprimer. En garder {0}"
     },
     {
       "Key": "checkingForPotionsToRecycle",
@@ -278,7 +278,7 @@
     },
 	{
       "Key": "pokeballsToKeepIncorrect",
-      "Value": "TotalAmountOfPokebalsToKeep est mal configuré. Le nombre est inférieur à 1."
+      "Value": "TotalAmountOfPokeballsToKeep est mal configuré. Le nombre est inférieur à 1."
     },
     {
       "Key": "potionsToKeepIncorrect",
@@ -410,11 +410,15 @@
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "ATTAQUE1"
+      "Value": "Attaque 1"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "ATTAQUE2"
+      "Value": "Attaque 2"
+    }
+    {
+      "Key": "DisplayHighestCandy",
+      "Value": "Bonbons"
     }
   ]
 }

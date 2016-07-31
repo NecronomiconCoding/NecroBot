@@ -90,6 +90,8 @@ namespace PoGo.NecroBot.Logic
         int AmountOfTimesToUpgradeLoop { get; }
 
         int GetMinStarDustForLevelUp { get; }
+        bool UseLuckyEggConstantly { get; }
+        bool UseIncenseConstantly { get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }
         string GpxFile { get; }
@@ -120,7 +122,7 @@ namespace PoGo.NecroBot.Logic
         bool SnipeIgnoreUnknownIv { get; }
         int MinDelayBetweenSnipes { get; }
         double SnipingScanOffset { get; }
-        int TotalAmountOfPokebalsToKeep { get; }
+        int TotalAmountOfPokeballsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
 

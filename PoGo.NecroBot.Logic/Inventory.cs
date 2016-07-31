@@ -111,7 +111,7 @@ namespace PoGo.NecroBot.Logic
 
                     if (settings.CandyToEvolve > 0)
                     {
-                        var amountPossible = familyCandy.Candy_ / (settings.CandyToEvolve - 2);
+                        var amountPossible = (familyCandy.Candy_ - 1) / (settings.CandyToEvolve - 1);
                         if (amountPossible > amountToSkip)
                             amountToSkip = amountPossible;
                     }
@@ -245,7 +245,7 @@ namespace PoGo.NecroBot.Logic
             var itemsToRecylce = new List<ItemData>();
             var myItems = (await GetItems()).ToList();
 
-            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
+            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokeballsToKeep;
             var amountOfPotionsToKeep = _logicSettings.TotalAmountOfPotionsToKeep;
             var amountOfRevivesToKeep = _logicSettings.TotalAmountOfRevivesToKeep;
 
@@ -315,7 +315,7 @@ namespace PoGo.NecroBot.Logic
 
         private List<ItemData> GetPokeballsToRecycle(ISession session, IReadOnlyList<ItemData> myItems)
         {
-            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
+            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokeballsToKeep;
             if (amountOfPokeballsToKeep < 1)
             {
                 Logger.Write(session.Translation.GetTranslation(TranslationString.PokeballsToKeepIncorrect),
@@ -327,6 +327,17 @@ namespace PoGo.NecroBot.Logic
             allPokeballs.Sort((ball1, ball2) => ((int) ball1.ItemId).CompareTo((int) ball2.ItemId));
 
             return TakeAmountOfItems(allPokeballs, amountOfPokeballsToKeep).ToList();
+        }
+
+        public async Task<UseItemXpBoostResponse> UseLuckyEggConstantly()
+        {
+            var UseLuckyEgg = await _client.Inventory.UseItemXpBoost();
+            return UseLuckyEgg;
+        }
+        public async Task<UseIncenseResponse> UseIncenseConstantly()
+        {
+            var UseIncense = await _client.Inventory.UseIncense(ItemId.ItemIncenseOrdinary);
+            return UseIncense;
         }
 
         public async Task<List<InventoryItem>> GetPokeDexItems()
