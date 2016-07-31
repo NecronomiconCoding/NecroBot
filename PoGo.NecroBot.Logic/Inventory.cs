@@ -262,7 +262,7 @@ namespace PoGo.NecroBot.Logic
             if (!_logicSettings.ItemRecycleFilter.Any(s => _pokeballs.Contains(s.Key)))
             {
                 if (session.LogicSettings.VerboseRecycling)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForBallsToRecycle, amountOfPokeballsToKeep));
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForBallsToRecycle, amountOfPokeballsToKeep), LogLevel.Recycling);
                 var pokeballsToRecycle = GetPokeballsToRecycle(session, myItems);
                 itemsToRecylce.AddRange(pokeballsToRecycle);
             }
@@ -270,7 +270,7 @@ namespace PoGo.NecroBot.Logic
             if (!_logicSettings.ItemRecycleFilter.Any(s => _potions.Contains(s.Key)))
             {
                 if (session.LogicSettings.VerboseRecycling)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForPotionsToRecycle, amountOfPotionsToKeep));
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForPotionsToRecycle, amountOfPotionsToKeep), LogLevel.Recycling);
                 var potionsToRecycle = GetPotionsToRecycle(session, myItems);
                 itemsToRecylce.AddRange(potionsToRecycle);
             }
@@ -278,7 +278,7 @@ namespace PoGo.NecroBot.Logic
             if (!_logicSettings.ItemRecycleFilter.Any(s => _revives.Contains(s.Key)))
             {
                 if (session.LogicSettings.VerboseRecycling)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForRevivesToRecycle, amountOfRevivesToKeep));
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForRevivesToRecycle, amountOfRevivesToKeep)LogLevel.Recycling);
                 var revivesToRecycle = GetRevivesToRecycle(session, myItems);
                 itemsToRecylce.AddRange(revivesToRecycle);
             }
