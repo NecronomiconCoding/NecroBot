@@ -40,7 +40,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
             }
 
-            if (session.LogicSettings.TotalAmountOfPokebalsToKeep != 0)
+            if (session.LogicSettings.TotalAmountOfPokeballsToKeep != 0)
             {
                 await OptimizedRecycleBalls(session, cancellationToken);
             }
@@ -71,9 +71,9 @@ namespace PoGo.NecroBot.Logic.Tasks
             */
 
             int totalBallsCount = pokeBallsCount + greatBallsCount + ultraBallsCount + masterBallsCount;
-            if (totalBallsCount > session.LogicSettings.TotalAmountOfPokebalsToKeep)
+            if (totalBallsCount > session.LogicSettings.TotalAmountOfPokeballsToKeep)
             {
-                int diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokebalsToKeep;
+                int diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep;
                 if (diff > 0)
                 {
                     int pokeBallsToKeep = pokeBallsCount - diff;

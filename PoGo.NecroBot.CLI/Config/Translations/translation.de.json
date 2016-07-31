@@ -312,7 +312,7 @@
     },
     {
       "Key": "PokeballsToKeepIncorrect",
-      "Value": "TotalAmountOfPokebalsToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
+      "Value": "TotalAmountOfPokeballsToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
     },
     {
       "Key": "PotionsToKeepIncorrect",

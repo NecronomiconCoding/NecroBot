@@ -11,10 +11,10 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
 {
     class GetItemListTask
     {
-        public static async Task Execute(ISession session, WebSocketSession webSocketSession)
+        public static async Task Execute(ISession session, WebSocketSession webSocketSession, string requestID)
         {
             var allItems = await session.Inventory.GetItems();
-            webSocketSession.Send(EncodingHelper.Serialize(new ItemListResponce(allItems)));
+            webSocketSession.Send(EncodingHelper.Serialize(new ItemListResponce(allItems, requestID)));
             await Task.Delay(500);
         }
     }

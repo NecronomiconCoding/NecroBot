@@ -14,6 +14,14 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(ISession session)
         {
+            await session.Inventory.RefreshCachedInventory();
+
+            var playerStats = (await session.Inventory.GetPlayerStats()).FirstOrDefault();
+            if (playerStats == null)
+                return;
+
+            var kmWalked = playerStats.KmWalked;
+
             var incubators = (await session.Inventory.GetEggIncubators())
                 .Where(x => x.UsesRemaining > 0 || x.ItemId == ItemId.ItemIncubatorBasicUnlimited)
                 .OrderByDescending(x => x.ItemId == ItemId.ItemIncubatorBasicUnlimited)
@@ -27,6 +35,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             session.EventDispatcher.Send(
                 new EggsListEvent
                 {
+                    PlayerKmWalked = kmWalked,
                     Incubators = incubators,
                     UnusedEggs = unusedEggs
                 });
