@@ -86,7 +86,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                             ? pokemon.SpawnPointId
                             : currentFortData.Id, pokeball);
 
-                var evt = new PokemonCaptureEvent {Status = caughtPokemonResponse.Status};
+                var lat = encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                             ? pokemon.Latitude : currentFortData.Latitude;
+                var lng = encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                            ? pokemon.Longitude : currentFortData.Longitude;
+                var evt = new PokemonCaptureEvent()
+                {
+                    Status = caughtPokemonResponse.Status,
+                    Latitude = lat,
+                    Longitude = lng
+                };
+
 
                 if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
                 {
@@ -144,7 +154,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             ? encounter.WildPokemon?.PokemonData
                             : encounter?.PokemonData));
                 evt.Probability =
-                    Math.Round(probability*100, 2);
+                    Math.Round(probability * 100, 2);
                 evt.Distance = distance;
                 evt.Pokeball = pokeball;
                 evt.Attempt = attemptCounter;
