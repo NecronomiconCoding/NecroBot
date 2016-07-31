@@ -103,16 +103,16 @@ namespace PoGo.NecroBot.Logic
 
         public bool AutomaticallyLevelUpPokemon = false;
 
-        public bool AutoUpdate = true;
+        public bool AutoUpdate = false;
         public double DefaultAltitude = 10;
-        public double DefaultLatitude = 40.785091;
-        public double DefaultLongitude = -73.968285;
-        public int DelayBetweenPlayerActions = 5000;
+        public double DefaultLatitude = 55.617537;
+        public double DefaultLongitude = 37.676300;
+        public int DelayBetweenPlayerActions = 2000;
         public int DelayBetweenPokemonCatch = 2000;
         public bool DumpPokemonStats = false;
         public float EvolveAboveIvValue = 95;
         public bool EvolveAllPokemonAboveIv = false;
-        public bool EvolveAllPokemonWithEnoughCandy = true;
+        public bool EvolveAllPokemonWithEnoughCandy = false;
 
         [JsonIgnore] public string GeneralConfigPath;
 
@@ -144,13 +144,13 @@ namespace PoGo.NecroBot.Logic
         };
 
         public int KeepMinCp = 1250;
-        public int KeepMinDuplicatePokemon = 1;
+        public int KeepMinDuplicatePokemon = 3;
         public float KeepMinIvPercentage = 90;
         public bool KeepPokemonsThatCanEvolve = false;
         public string LevelUpByCPorIv = "iv";
         public int MaxPokeballsPerPokemon = 6;
         public int MaxSpawnLocationOffset = 10;
-        public int MaxTravelDistanceInMeters = 1000;
+        public int MaxTravelDistanceInMeters = 3000;
         public int MinDelayBetweenSnipes = 60000;
         public int MinPokeballsToSnipe = 20;
         public int MinPokeballsWhileSnipe = 0;
@@ -353,13 +353,13 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Mewtwo
         };
 
-        public bool PrioritizeIvOverCp = true;
+        public bool PrioritizeIvOverCp = false;
 
         [JsonIgnore] public string ProfileConfigPath;
 
         [JsonIgnore] public string ProfilePath;
 
-        public bool RenameOnlyAboveIv = true;
+        public bool RenameOnlyAboveIv = false;
         public bool RenamePokemon = false;
         public string RenameTemplate = "{1}_{0}";
         public bool SnipeAtPokestops = false;
@@ -385,7 +385,7 @@ namespace PoGo.NecroBot.Logic
         public bool UseSnipeLocationServer = false;
         public bool UseTransferIvForSnipe = false;
         public int UseUltraBallAboveCp = 1000;
-        public double WalkingSpeedInKilometerPerHour = 15.0;
+        public double WalkingSpeedInKilometerPerHour = 16.0;
         public int WebSocketPort = 14251;
 
         public static GlobalSettings Default => new GlobalSettings();
