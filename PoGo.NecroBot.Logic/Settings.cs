@@ -370,6 +370,7 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPokebalsToKeep = 120;
         public int TotalAmountOfPotionsToKeep = 80;
         public int TotalAmountOfRevivesToKeep = 60;
+        public int MinimumAvailableInvetorySpaceBeforeRecycling = 20;
         public bool TransferConfigAndAuthOnUpdate = true;
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
@@ -621,6 +622,7 @@ namespace PoGo.NecroBot.Logic
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
         public int MinPokeballsWhileSnipe => _settings.MinPokeballsWhileSnipe;
         public int MaxPokeballsPerPokemon => _settings.MaxPokeballsPerPokemon;
+        public int MinimumAvailableInvetorySpaceBeforeRecycling => _settings.MinimumAvailableInvetorySpaceBeforeRecycling;
 
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;

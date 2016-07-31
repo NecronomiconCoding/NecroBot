@@ -110,6 +110,7 @@ namespace PoGo.NecroBot.Logic
         int TotalAmountOfPokebalsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
+        int MinimumAvailableInvetorySpaceBeforeRecycling { get; }
 
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
