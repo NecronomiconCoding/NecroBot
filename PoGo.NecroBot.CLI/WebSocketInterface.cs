@@ -83,13 +83,16 @@ namespace PoGo.NecroBot.CLI
 
         private async void HandleMessage(WebSocketSession session, string message)
         {
-            switch(message)
+            switch (message)
             {
                 case "PokemonList":
                     await PokemonListTask.Execute(_session);
                     break;
                 case "EggsList":
                     await EggsListTask.Execute(_session);
+                    break;
+                case "InventoryList":
+                    await InventoryListTask.Execute(_session);
                     break;
             }
 
