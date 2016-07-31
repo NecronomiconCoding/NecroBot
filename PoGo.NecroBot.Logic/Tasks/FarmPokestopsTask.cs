@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Collections.Generic;
@@ -46,7 +46,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken);
             }
 
-            var pokestopList = await GetPokeStops(session);
+            //var pokestopList = await GetPokeStops(session);
+            var pokestopList = await UseNearbyPokestopsTask.GetPokeStopsNoGPX(session);
             var stopsHit = 0;
             var eggWalker = new EggWalker(1000, session);
 
@@ -60,9 +61,13 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             session.EventDispatcher.Send(new PokeStopListEvent {Forts = pokestopList});
 
+            int PokeStopsTotal = pokestopList.Count();
+            int CurrentPokeStopNumber = 0;
+
             while (pokestopList.Any())
             {
                 cancellationToken.ThrowIfCancellationRequested();
+                CurrentPokeStopNumber++;
 
                 //resort
                 pokestopList =
@@ -76,6 +81,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                     session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+
+                Logger.Write("Traveling to PokeStop " + CurrentPokeStopNumber + " / " + PokeStopsTotal + ": " + fortInfo.Name + ", will take about " + Math.Round((distance / (session.LogicSettings.WalkingSpeedInKilometerPerHour / 3.6)),0)  + " seconds.", LogLevel.Info);
 
                 session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
 
@@ -199,26 +206,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await SnipePokemonTask.Execute(session, cancellationToken);
                 }
             }
-        }
-
-        private static async Task<List<FortData>> GetPokeStops(ISession session)
-        {
-            var mapObjects = await session.Client.Map.GetMapObjects();
-
-            // Wasn't sure how to make this pretty. Edit as needed.
-            var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
-                .Where(
-                    i =>
-                        i.Type == FortType.Checkpoint &&
-                        i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
-                        ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
-                            LocationUtils.CalculateDistanceInMeters(
-                                session.Settings.DefaultLatitude, session.Settings.DefaultLongitude,
-                                i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters) ||
-                        session.LogicSettings.MaxTravelDistanceInMeters == 0
-                );
-
-            return pokeStops.ToList();
         }
     }
 }
