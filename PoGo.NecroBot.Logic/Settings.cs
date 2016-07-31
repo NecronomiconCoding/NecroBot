@@ -392,6 +392,7 @@ namespace PoGo.NecroBot.Logic
         public bool UseTransferIvForSnipe = false;
         public double WalkingSpeedInKilometerPerHour = 15.0;
         public int WebSocketPort = 14251;
+        public bool UseSnipeOnlineLocationServer = true;
 
         public static GlobalSettings Default => new GlobalSettings();
 
@@ -636,6 +637,7 @@ namespace PoGo.NecroBot.Logic
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
+        public bool UseSnipeOnlineLocationServer => _settings.UseSnipeOnlineLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;

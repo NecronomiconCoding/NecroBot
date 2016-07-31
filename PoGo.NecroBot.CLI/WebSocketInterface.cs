@@ -1,6 +1,8 @@
 ﻿#region using directives
 
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using PoGo.NecroBot.CLI.WebSocketHandler;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
@@ -20,12 +22,14 @@ namespace PoGo.NecroBot.CLI
         private readonly Session _session;
         private PokeStopListEvent _lastPokeStopList;
         private ProfileEvent _lastProfile;
+        private WebSocketEventManager _websocketHandler;
 
         public WebSocketInterface(int port, Session session)
         {
             _session = session;
             var translations = session.Translation;
             _server = new WebSocketServer();
+            _websocketHandler = WebSocketEventManager.CreateInstance();
             var setupComplete = _server.Setup(new ServerConfig
             {
                 Name = "NecroWebSocket",
@@ -79,7 +83,7 @@ namespace PoGo.NecroBot.CLI
 
         private async void HandleMessage(WebSocketSession session, string message)
         {
-            switch (message)
+            switch(message)
             {
                 case "PokemonList":
                     await PokemonListTask.Execute(_session);
@@ -87,6 +91,18 @@ namespace PoGo.NecroBot.CLI
                 case "EggsList":
                     await EggsListTask.Execute(_session);
                     break;
+            }
+
+            // Setup to only send data back to the session that requested it. 
+            try
+            {
+                dynamic decodedMessage = JObject.Parse(message);
+                await _websocketHandler?.Handle(_session, session, decodedMessage);
+            }
+            catch (JsonException ex)
+            {
+
+
             }
         }
 
