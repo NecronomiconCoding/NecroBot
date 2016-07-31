@@ -2,6 +2,8 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
@@ -21,6 +23,9 @@ namespace PoGo.NecroBot.Logic.Tasks
             if ((session.Profile.PlayerData.MaxItemStorage * session.LogicSettings.RecycleInventoryAtUsagePercentage) > currentTotalItems)
                 return;
 
+            if (!session.LogicSettings.VerboseRecycling)
+                Logger.Write(session.Translation.GetTranslation(TranslationString.RecyclingQuietly));
+
             var items = await session.Inventory.GetItemsToRecycle(session);
 
             foreach (var item in items)
@@ -29,7 +34,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 await session.Client.Inventory.RecycleItem(item.ItemId, item.Count);
 
-                session.EventDispatcher.Send(new ItemRecycledEvent {Id = item.ItemId, Count = item.Count});
+                if (session.LogicSettings.VerboseRecycling)
+                    session.EventDispatcher.Send(new ItemRecycledEvent {Id = item.ItemId, Count = item.Count});
 
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
             }
@@ -72,17 +78,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     int pokeBallsToKeep = pokeBallsCount - diff;
                     if (pokeBallsToKeep < 0)
-                    {
                         pokeBallsToKeep = 0;
-                    }
+
                     pokeBallsToRecycle = pokeBallsCount - pokeBallsToKeep;
                     
                     if (pokeBallsToRecycle != 0)
                     {
                         diff -= pokeBallsToRecycle;
+
                         cancellationToken.ThrowIfCancellationRequested();
+
                         await session.Client.Inventory.RecycleItem(ItemId.ItemPokeBall, pokeBallsToRecycle);
-                        session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemPokeBall, Count = pokeBallsToRecycle });
+
+                        if (session.LogicSettings.VerboseRecycling)
+                            session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemPokeBall, Count = pokeBallsToRecycle });
+
                         DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                     }
                 }
@@ -91,17 +101,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     int greatBallsToKeep = greatBallsCount - diff;
                     if (greatBallsToKeep < 0)
-                    {
                         greatBallsToKeep = 0;
-                    }
+
                     greatBallsToRecycle = greatBallsCount - greatBallsToKeep;
                     
                     if (greatBallsToRecycle != 0)
                     {
                         diff -= greatBallsToRecycle;
+
                         cancellationToken.ThrowIfCancellationRequested();
+
                         await session.Client.Inventory.RecycleItem(ItemId.ItemGreatBall, greatBallsToRecycle);
-                        session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemGreatBall, Count = greatBallsToRecycle });
+
+                        if (session.LogicSettings.VerboseRecycling)
+                            session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemGreatBall, Count = greatBallsToRecycle });
+
                         DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                     }
                 }
@@ -112,17 +126,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     int ultraBallsToKeep = ultraBallsCount - diff;
                     if (ultraBallsToKeep < 0)
-                    {
                         ultraBallsToKeep = 0;
-                    }
+
                     ultraBallsToRecycle = ultraBallsCount - ultraBallsToKeep;
 
                     if (ultraBallsToRecycle != 0)
                     {
                         diff -= ultraBallsToRecycle;
+                        
                         cancellationToken.ThrowIfCancellationRequested();
+
                         await session.Client.Inventory.RecycleItem(ItemId.ItemUltraBall, ultraBallsToRecycle);
-                        session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemUltraBall, Count = ultraBallsToRecycle });
+
+                        if (session.LogicSettings.VerboseRecycling)
+                            session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemUltraBall, Count = ultraBallsToRecycle });
+
                         DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                     }
                 }
@@ -134,17 +152,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     int masterBallsToKeep = masterBallsCount - diff;
                     if (masterBallsToKeep < 0)
-                    {
                         masterBallsToKeep = 0;
-                    }
+
                     masterBallsToRecycle = masterBallsCount - masterBallsToKeep;
 
                     if (masterBallsToRecycle != 0)
                     {
                         diff -= masterBallsToRecycle;
+
                         cancellationToken.ThrowIfCancellationRequested();
+
                         await session.Client.Inventory.RecycleItem(ItemId.ItemMasterBall, masterBallsToRecycle);
-                        session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemMasterBall, Count = masterBallsToRecycle });
+
+                        if (session.LogicSettings.VerboseRecycling)
+                            session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemMasterBall, Count = masterBallsToRecycle });
+
                         DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                     }
                 }
@@ -172,17 +194,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     int potionsToKeep = potionCount - diff;
                     if (potionsToKeep < 0)
-                    {
                         potionsToKeep = 0;
-                    }
+
                     potionsToRecycle = potionCount - potionsToKeep;
 
                     if (potionsToRecycle != 0)
                     {
                         diff -= potionsToRecycle;
+
                         cancellationToken.ThrowIfCancellationRequested();
+
                         await session.Client.Inventory.RecycleItem(ItemId.ItemPotion, potionsToRecycle);
-                        session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemPotion, Count = potionsToRecycle });
+
+                        if (session.LogicSettings.VerboseRecycling)
+                            session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemPotion, Count = potionsToRecycle });
+
                         DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                     }
                 }
@@ -191,17 +217,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     int superPotionsToKeep = superPotionCount - diff;
                     if (superPotionsToKeep < 0)
-                    {
                         superPotionsToKeep = 0;
-                    }
+
                     superPotionsToRecycle = superPotionCount - superPotionsToKeep;
 
                     if (superPotionsToRecycle != 0)
                     {
                         diff -= superPotionsToRecycle;
+
                         cancellationToken.ThrowIfCancellationRequested();
+
                         await session.Client.Inventory.RecycleItem(ItemId.ItemSuperPotion, superPotionsToRecycle);
-                        session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemSuperPotion, Count = superPotionsToRecycle });
+
+                        if (session.LogicSettings.VerboseRecycling)
+                            session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemSuperPotion, Count = superPotionsToRecycle });
+
                         DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                     }
                 }
@@ -210,17 +240,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     int hyperPotionsToKeep = hyperPotionsCount - diff;
                     if (hyperPotionsToKeep < 0)
-                    {
                         hyperPotionsToKeep = 0;
-                    }
+
                     hyperPotionsToRecycle = hyperPotionsCount - hyperPotionsToKeep;
 
                     if (hyperPotionsToRecycle != 0)
                     {
                         diff -= hyperPotionsToRecycle;
+
                         cancellationToken.ThrowIfCancellationRequested();
+
                         await session.Client.Inventory.RecycleItem(ItemId.ItemHyperPotion, hyperPotionsToRecycle);
-                        session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemHyperPotion, Count = hyperPotionsToRecycle });
+
+                        if (session.LogicSettings.VerboseRecycling)
+                            session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemHyperPotion, Count = hyperPotionsToRecycle });
+
                         DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                     }
                 }
@@ -229,17 +263,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     int maxPotionsToKeep = maxPotionCount - diff;
                     if (maxPotionsToKeep < 0)
-                    {
                         maxPotionsToKeep = 0;
-                    }
+
                     maxPotionsToRecycle = maxPotionCount - maxPotionsToKeep;
 
                     if (maxPotionsToRecycle != 0)
                     {
                         diff -= maxPotionsToRecycle;
+
                         cancellationToken.ThrowIfCancellationRequested();
+
                         await session.Client.Inventory.RecycleItem(ItemId.ItemMaxPotion, maxPotionsToRecycle);
-                        session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemMaxPotion, Count = maxPotionsToRecycle });
+
+                        if (session.LogicSettings.VerboseRecycling)
+                            session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemMaxPotion, Count = maxPotionsToRecycle });
+
                         DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                     }
                 }
@@ -262,17 +300,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     int revivesToKeep = reviveCount - diff;
                     if (revivesToKeep < 0)
-                    {
                         revivesToKeep = 0;
-                    }
+
                     revivesToRecycle = reviveCount - revivesToKeep;
 
                     if (revivesToRecycle != 0)
                     {
                         diff -= revivesToRecycle;
+
                         cancellationToken.ThrowIfCancellationRequested();
+
                         await session.Client.Inventory.RecycleItem(ItemId.ItemRevive, revivesToRecycle);
-                        session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemRevive, Count = revivesToRecycle });
+
+                        if (session.LogicSettings.VerboseRecycling)
+                            session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemRevive, Count = revivesToRecycle });
+
                         DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                     }
                 }
@@ -281,17 +323,21 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     int maxRevivesToKeep = maxReviveCount - diff;
                     if (maxRevivesToKeep < 0)
-                    {
                         maxRevivesToKeep = 0;
-                    }
+
                     maxRevivesToRecycle = maxReviveCount - maxRevivesToKeep;
 
                     if (maxRevivesToRecycle != 0)
                     {
                         diff -= maxRevivesToRecycle;
+
                         cancellationToken.ThrowIfCancellationRequested();
+
                         await session.Client.Inventory.RecycleItem(ItemId.ItemMaxRevive, maxRevivesToRecycle);
-                        session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemMaxRevive, Count = maxRevivesToRecycle });
+
+                        if (session.LogicSettings.VerboseRecycling)
+                            session.EventDispatcher.Send(new ItemRecycledEvent { Id = ItemId.ItemMaxRevive, Count = maxRevivesToRecycle });
+
                         DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
                     }
                 }
