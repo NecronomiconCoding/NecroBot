@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -290,7 +290,7 @@
     },
     {
       "Key": "pokeballsToKeepIncorrect",
-      "Value": "TotalAmountOfPokebalsToKeep está configurado incorrectamente. El número es más pequeño que 1."
+      "Value": "TotalAmountOfPokeballsToKeep está configurado incorrectamente. El número es más pequeño que 1."
     },
     {
       "Key": "potionsToKeepIncorrect",
