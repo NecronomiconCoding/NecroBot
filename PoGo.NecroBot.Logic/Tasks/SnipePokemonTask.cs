@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
@@ -243,6 +244,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var catchablePokemon =
                 mapObjects.MapCells.SelectMany(q => q.CatchablePokemons)
                     .Where(q => pokemonIds.Contains(q.PokemonId))
+                    .OrderByDescending(pokemon => PokemonInfo.CalculateMaxCpMultiplier(pokemon.PokemonId))
                     .ToList();
 
             await session.Client.Player.UpdatePlayerLocation(CurrentLatitude, CurrentLongitude,
@@ -252,14 +254,20 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                await session.Client.Player.UpdatePlayerLocation(latitude, longitude, session.Client.CurrentAltitude);
+                EncounterResponse encounter;
+                try
+                {
+                    await
+                        session.Client.Player.UpdatePlayerLocation(latitude, longitude, session.Client.CurrentAltitude);
 
-                var encounter =
-                    session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
-
-                await
-                    session.Client.Player.UpdatePlayerLocation(CurrentLatitude, CurrentLongitude,
-                        session.Client.CurrentAltitude);
+                    encounter =
+                        session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
+                }
+                finally
+                {
+                    await
+                        session.Client.Player.UpdatePlayerLocation(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude);
+                }
 
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                 {

@@ -122,6 +122,7 @@ namespace PoGo.NecroBot.Logic
         public bool ShowPokeballCountsBeforeRecycle = true;
         public bool VerboseRecycling = true;
         public double RecycleInventoryAtUsagePercentage = 0.90;
+        public double EvolveKeptPokemonsAtStorageUsagePercentage = 0.90;
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
@@ -475,8 +476,14 @@ namespace PoGo.NecroBot.Logic
 
         public void Save(string fullPath)
         {
-            var output = JsonConvert.SerializeObject(this, Formatting.Indented,
-                new StringEnumConverter {CamelCaseText = true});
+            var jsonSerializeSettings = new JsonSerializerSettings
+            {
+                DefaultValueHandling = DefaultValueHandling.Include,
+                Formatting = Formatting.Indented,
+                Converters = new JsonConverter[] {new StringEnumConverter {CamelCaseText = true}}
+            };
+
+            var output = JsonConvert.SerializeObject(this, jsonSerializeSettings);
 
             var folder = Path.GetDirectoryName(fullPath);
             if (folder != null && !Directory.Exists(folder))
@@ -635,6 +642,7 @@ namespace PoGo.NecroBot.Logic
         public bool ShowPokeballCountsBeforeRecycle => _settings.ShowPokeballCountsBeforeRecycle;
         public bool VerboseRecycling => _settings.VerboseRecycling;
         public double RecycleInventoryAtUsagePercentage => _settings.RecycleInventoryAtUsagePercentage;
+        public double EvolveKeptPokemonsAtStorageUsagePercentage => _settings.EvolveKeptPokemonsAtStorageUsagePercentage;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
