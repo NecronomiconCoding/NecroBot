@@ -72,14 +72,15 @@ namespace PoGo.NecroBot.Logic.Logging
         Warning = 2,
         Pokestop = 3,
         Farming = 4,
-        Recycling = 5,
-        Berry = 6,
-        Caught = 7,
-        Transfer = 8,
-        Evolve = 9,
-        Egg = 10,
-        Update = 11,
-        Info = 12,
-        Debug = 13
+        Sniper = 5,
+        Recycling = 6,
+        Berry = 7,
+        Caught = 8,
+        Transfer = 9,
+        Evolve = 10,
+        Egg = 11,
+        Update = 12,
+        Info = 13,
+        Debug = 14
     }
 }
