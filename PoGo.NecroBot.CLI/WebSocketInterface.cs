@@ -96,7 +96,6 @@ namespace PoGo.NecroBot.CLI
                     break;
             }
 
-
             // Setup to only send data back to the session that requested it. 
             try
             {

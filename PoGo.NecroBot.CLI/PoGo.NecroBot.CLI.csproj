@@ -116,6 +116,7 @@
     <Compile Include="WebSocketHandler\BasicGetCommands\GetItemsListHandler.cs" />
     <Compile Include="WebSocketHandler\BasicGetCommands\GetTrainerProfileHandler.cs" />
     <Compile Include="WebSocketHandler\BasicGetCommands\Helpers\EggListWeb.cs" />
+    <Compile Include="WebSocketHandler\BasicGetCommands\Helpers\TrainerProfileWeb.cs" />
     <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\GetEggListTask.cs" />
     <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\GetItemListTask.cs" />
     <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\GetTrainerProfileTask.cs" />
