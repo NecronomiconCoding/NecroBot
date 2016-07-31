@@ -422,11 +422,11 @@
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "RUCH1"
+      "Value": "ATAK1"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "RUCH2"
+      "Value": "ATAK2"
     }
   ]
 }
