@@ -231,7 +231,10 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent( EvolveCountEvent evt, ISession session )
         {
-            Logger.Write( "[Evolves] Potential Evolves: " + evt.Evolves, LogLevel.Update, ConsoleColor.White );
+            Logger.Write( $"[Evolves] Potential Evolves: {evt.Evolves}" + 
+                ( session.LogicSettings.UseLuckyEggsWhileEvolving ? 
+                    $" | {session.LogicSettings.UseLuckyEggsMinPokemonAmount} required for mass evolving" 
+                    : "" ), LogLevel.Update, ConsoleColor.White );
         }
 
         public void HandleEvent(UpdateEvent evt, ISession session)
