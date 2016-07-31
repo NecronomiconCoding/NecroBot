@@ -111,7 +111,7 @@ namespace PoGo.NecroBot.Logic
 
                     if (settings.CandyToEvolve > 0)
                     {
-                        var amountPossible = familyCandy.Candy_/settings.CandyToEvolve;
+                        var amountPossible = familyCandy.Candy_ / (settings.CandyToEvolve - 2);
                         if (amountPossible > amountToSkip)
                             amountToSkip = amountPossible;
                     }
