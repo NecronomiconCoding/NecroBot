@@ -246,30 +246,31 @@ namespace PoGo.NecroBot.Logic
             var currentAmountOfUltraballs = await GetItemAmountByType(ItemId.ItemUltraBall);
             var currentAmountOfMasterballs = await GetItemAmountByType(ItemId.ItemMasterBall);
 
-            Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
-                currentAmountOfPokeballs, currentAmountOfGreatballs, currentAmountOfUltraballs,
-                currentAmountOfMasterballs));
+            if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
+                Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
+                    currentAmountOfPokeballs, currentAmountOfGreatballs, currentAmountOfUltraballs,
+                    currentAmountOfMasterballs));
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => _pokeballs.Contains(s.Key)))
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForBallsToRecycle,
-                    amountOfPokeballsToKeep));
+                if (session.LogicSettings.VerboseRecycling)
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForBallsToRecycle, amountOfPokeballsToKeep));
                 var pokeballsToRecycle = GetPokeballsToRecycle(session, myItems);
                 itemsToRecylce.AddRange(pokeballsToRecycle);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => _potions.Contains(s.Key)))
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForPotionsToRecycle,
-                    amountOfPotionsToKeep));
+                if (session.LogicSettings.VerboseRecycling)
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForPotionsToRecycle, amountOfPotionsToKeep));
                 var potionsToRecycle = GetPotionsToRecycle(session, myItems);
                 itemsToRecylce.AddRange(potionsToRecycle);
             }
 
             if (!_logicSettings.ItemRecycleFilter.Any(s => _revives.Contains(s.Key)))
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForRevivesToRecycle,
-                    amountOfRevivesToKeep));
+                if (session.LogicSettings.VerboseRecycling)
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForRevivesToRecycle, amountOfRevivesToKeep));
                 var revivesToRecycle = GetRevivesToRecycle(session, myItems);
                 itemsToRecylce.AddRange(revivesToRecycle);
             }

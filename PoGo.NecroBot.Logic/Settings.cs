@@ -100,6 +100,7 @@ namespace PoGo.NecroBot.Logic
         [JsonIgnore] internal AuthSettings Auth = new AuthSettings();
 
         public bool AutomaticallyLevelUpPokemon = false;
+        public int AmountOfTimesToUpgradeLoop = 5;
 
         public bool AutoUpdate = true;
         public double DefaultAltitude = 10;
@@ -117,6 +118,8 @@ namespace PoGo.NecroBot.Logic
 
         public string GpxFile = "GPXPath.GPX";
 
+        public bool ShowPokeballCountsBeforeRecycle = true;
+        public bool VerboseRecycling = true;
         public double RecycleInventoryAtUsagePercentage = 0.90;
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -584,6 +587,7 @@ namespace PoGo.NecroBot.Logic
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
         public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;
+        public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;
         public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;
         public float UpgradePokemonIvMinimum => _settings.UpgradePokemonIvMinimum;
         public float UpgradePokemonCpMinimum => _settings.UpgradePokemonCpMinimum;
@@ -620,6 +624,8 @@ namespace PoGo.NecroBot.Logic
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
         public bool DumpPokemonStats => _settings.DumpPokemonStats;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
+        public bool ShowPokeballCountsBeforeRecycle => _settings.ShowPokeballCountsBeforeRecycle;
+        public bool VerboseRecycling => _settings.VerboseRecycling;
         public double RecycleInventoryAtUsagePercentage => _settings.RecycleInventoryAtUsagePercentage;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
