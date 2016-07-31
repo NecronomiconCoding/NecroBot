@@ -72,6 +72,11 @@ namespace PoGo.NecroBot.Logic
         int UseGreatBallAboveCp { get; }
         int UseUltraBallAboveCp { get; }
         int UseMasterBallAboveCp { get; }
+        int UseGreatBallAboveIv { get; }
+        int UseUltraBallAboveIv { get; }
+        double UseMasterBallBelowCatchProbability { get; }
+        double UseUltraBallBelowCatchProbability { get; }
+        double UseGreatBallBelowCatchProbability { get; }
         int DelayBetweenPokemonCatch { get; }
         bool AutomaticallyLevelUpPokemon { get; }
         string LevelUpByCPorIv { get; }
@@ -104,6 +109,7 @@ namespace PoGo.NecroBot.Logic
         string SnipeLocationServer { get; }
         int SnipeLocationServerPort { get; }
         bool UseSnipeLocationServer { get; }
+        bool UseSnipeOnlineLocationServer { get; }
         bool UseTransferIvForSnipe { get; }
         bool SnipeIgnoreUnknownIv { get; }
         int MinDelayBetweenSnipes { get; }

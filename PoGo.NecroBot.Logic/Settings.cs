@@ -377,16 +377,22 @@ namespace PoGo.NecroBot.Logic
         public float UpgradePokemonIvMinimum = 95;
         public bool UseEggIncubators = true;
         public bool UseGpxPathing = false;
-        public int UseGreatBallAboveCp = 750;
         public int UseLuckyEggsMinPokemonAmount = 30;
         public bool UseLuckyEggsWhileEvolving = false;
+        public int UseGreatBallAboveCp = 750;
+        public int UseUltraBallAboveCp = 1000;
         public int UseMasterBallAboveCp = 1500;
+        public int UseGreatBallAboveIv = 80;
+        public int UseUltraBallAboveIv = 90;
+        public double UseGreatBallBelowCatchProbability = 0.5;
+        public double UseUltraBallBelowCatchProbability = 0.4;
+        public double UseMasterBallBelowCatchProbability = 0.05; 
         public bool UsePokemonToNotCatchFilter = false;
         public bool UseSnipeLocationServer = false;
         public bool UseTransferIvForSnipe = false;
-        public int UseUltraBallAboveCp = 1000;
         public double WalkingSpeedInKilometerPerHour = 15.0;
         public int WebSocketPort = 14251;
+        public bool UseSnipeOnlineLocationServer = true;
 
         public static GlobalSettings Default => new GlobalSettings();
 
@@ -592,6 +598,11 @@ namespace PoGo.NecroBot.Logic
         public int UseGreatBallAboveCp => _settings.UseGreatBallAboveCp;
         public int UseUltraBallAboveCp => _settings.UseUltraBallAboveCp;
         public int UseMasterBallAboveCp => _settings.UseMasterBallAboveCp;
+        public int UseGreatBallAboveIv => _settings.UseGreatBallAboveIv;
+        public int UseUltraBallAboveIv => _settings.UseUltraBallAboveIv;
+        public double UseMasterBallBelowCatchProbability => _settings.UseMasterBallBelowCatchProbability;
+        public double UseUltraBallBelowCatchProbability => _settings.UseUltraBallBelowCatchProbability;
+        public double UseGreatBallBelowCatchProbability => _settings.UseGreatBallBelowCatchProbability;
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
         public int DelayBetweenPlayerActions => _settings.DelayBetweenPlayerActions;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
@@ -626,6 +637,7 @@ namespace PoGo.NecroBot.Logic
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
+        public bool UseSnipeOnlineLocationServer => _settings.UseSnipeOnlineLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
