@@ -583,5 +583,698 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
         {
             return (int) (GetLevel(poke)*2.0);
         }
+		
+		public static double CalculateDPSMove1(PokemonData poke)
+        {
+
+
+            switch (poke.Move1)
+            {
+                case PokemonMove.ThunderShock: return 8.33;
+                case PokemonMove.QuickAttack: return 7.52;
+                case PokemonMove.Scratch: return 12.00;
+                case PokemonMove.Ember: return 9.52;
+                case PokemonMove.VineWhip: return 10.77;
+                case PokemonMove.Tackle: return 10.91;
+                case PokemonMove.RazorLeaf: return 10.34;
+                case PokemonMove.TakeDown: return 666;
+                case PokemonMove.WaterGun: return 12;
+                case PokemonMove.Bite: return 12;
+                case PokemonMove.Pound: return 12.96;
+
+                case PokemonMove.DoubleSlap: return 666;
+                case PokemonMove.Wrap: return 6.25;
+                case PokemonMove.HyperBeam: return 24;
+                case PokemonMove.Lick: return 10;
+                case PokemonMove.DarkPulse: return 12.86;
+                case PokemonMove.Smog: return 666;
+                case PokemonMove.Sludge: return 11.54;
+                case PokemonMove.MetalClaw: return 12.7;
+                case PokemonMove.ViceGrip: return 11.9;
+                case PokemonMove.FlameWheel: return 8.7;
+                case PokemonMove.Megahorn: return 25;
+                case PokemonMove.WingAttack: return 12;
+                case PokemonMove.Flamethrower:
+                    return 18.97;
+                case PokemonMove.SuckerPunch:
+                    return 10;
+                case PokemonMove.Dig:
+                    return 12.07;
+                case PokemonMove.LowKick:
+                    return 8.33;
+                case PokemonMove.CrossChop:
+                    return 30;
+                case PokemonMove.PsychoCut:
+                    return 12.28;
+                case PokemonMove.Psybeam:
+                    return 10.53;
+                case PokemonMove.Earthquake:
+                    return 23.81;
+                case PokemonMove.StoneEdge:
+                    return 25.81;
+                case PokemonMove.IcePunch:
+                    return 12.86;
+                case PokemonMove.HeartStamp:
+                    return 9.8;
+                case PokemonMove.Discharge:
+                    return 14;
+                case PokemonMove.FlashCannon:
+                    return 15.38;
+                case PokemonMove.Peck:
+                    return 8.7;
+                case PokemonMove.DrillPeck:
+                    return 14.81;
+                case PokemonMove.IceBeam:
+                    return 17.81;
+                case PokemonMove.Blizzard:
+                    return 25.64;
+                case PokemonMove.AirSlash:
+                    return 666;
+                case PokemonMove.HeatWave:
+                    return 21.05;
+                case PokemonMove.Twineedle:
+                    return 666;
+                case PokemonMove.PoisonJab:
+                    return 11.43;
+                case PokemonMove.AerialAce:
+                    return 10.34;
+                case PokemonMove.DrillRun:
+                    return 14.71;
+                case PokemonMove.PetalBlizzard:
+                    return 20.31;
+                case PokemonMove.MegaDrain:
+                    return 7.81;
+                case PokemonMove.BugBuzz:
+                    return 17.65;
+                case PokemonMove.PoisonFang:
+                    return 10.42;
+                case PokemonMove.NightSlash:
+                    return 11.11;
+                case PokemonMove.Slash:
+                    return 666;
+                case PokemonMove.BubbleBeam:
+                    return 10.34;
+                case PokemonMove.Submission:
+                    return 14.29;
+                case PokemonMove.KarateChop:
+                    return 7.5;
+                case PokemonMove.LowSweep:
+                    return 13.33;
+                case PokemonMove.AquaJet:
+                    return 10.64;
+                case PokemonMove.AquaTail:
+                    return 19.15;
+                case PokemonMove.SeedBomb:
+                    return 16.67;
+                case PokemonMove.Psyshock:
+                    return 14.81;
+                case PokemonMove.RockThrow:
+                    return 8.82;
+                case PokemonMove.AncientPower:
+                    return 9.72;
+                case PokemonMove.RockTomb:
+                    return 8.82;
+                case PokemonMove.RockSlide:
+                    return 15.63;
+                case PokemonMove.PowerGem:
+                    return 13.79;
+                case PokemonMove.ShadowSneak:
+                    return 8.06;
+                case PokemonMove.ShadowPunch:
+                    return 11.9;
+                case PokemonMove.ShadowClaw:
+                    return 11.58;
+                case PokemonMove.OminousWind:
+                    return 9.68;
+                case PokemonMove.ShadowBall:
+                    return 14.61;
+                case PokemonMove.BulletPunch:
+                    return 8.33;
+                case PokemonMove.MagnetBomb:
+                    return 10.71;
+                case PokemonMove.SteelWing:
+                    return 11.28;
+                case PokemonMove.IronHead:
+                    return 15;
+                case PokemonMove.ParabolicCharge:
+                    return 11.9;
+                case PokemonMove.Spark:
+                    return 10;
+                case PokemonMove.ThunderPunch:
+                    return 16.67;
+                case PokemonMove.Thunder:
+                    return 23.26;
+                case PokemonMove.Thunderbolt:
+                    return 20.37;
+                case PokemonMove.Twister:
+                    return 9.26;
+                case PokemonMove.DragonBreath:
+                    return 12;
+                case PokemonMove.DragonPulse:
+                    return 18.06;
+                case PokemonMove.DragonClaw:
+                    return 23.33;
+                case PokemonMove.DisarmingVoice:
+                    return 6.41;
+                case PokemonMove.DrainingKiss:
+                    return 8.93;
+                case PokemonMove.DazzlingGleam:
+                    return 13.1;
+                case PokemonMove.Moonblast:
+                    return 20.73;
+                case PokemonMove.PlayRough:
+                    return 18.97;
+                case PokemonMove.CrossPoison:
+                    return 16.67;
+                case PokemonMove.SludgeBomb:
+                    return 21.15;
+                case PokemonMove.SludgeWave:
+                    return 20.59;
+                case PokemonMove.GunkShot:
+                    return 21.67;
+                case PokemonMove.MudShot:
+                    return 10.91;
+                case PokemonMove.BoneClub:
+                    return 15.63;
+                case PokemonMove.Bulldoze:
+                    return 10.29;
+                case PokemonMove.MudBomb:
+                    return 11.54;
+                case PokemonMove.FuryCutter:
+                    return 7.5;
+                case PokemonMove.BugBite:
+                    return 11.11;
+                case PokemonMove.SignalBeam:
+                    return 14.52;
+                case PokemonMove.XScissor:
+                    return 16.67;
+                case PokemonMove.FlameCharge:
+                    return 8.06;
+                case PokemonMove.FlameBurst:
+                    return 14.29;
+                case PokemonMove.FireBlast:
+                    return 24.39;
+                case PokemonMove.Brine:
+                    return 10.42;
+                case PokemonMove.WaterPulse:
+                    return 10.61;
+                case PokemonMove.Scald:
+                    return 13.75;
+                case PokemonMove.HydroPump:
+                    return 23.68;
+                case PokemonMove.Psychic:
+                    return 19.64;
+                case PokemonMove.Psystrike:
+                    return 19.61;
+                case PokemonMove.IceShard:
+                    return 10.71;
+                case PokemonMove.IcyWind:
+                    return 6.58;
+                case PokemonMove.FrostBreath:
+                    return 11.11;
+                case PokemonMove.Absorb:
+                    return 666;
+                case PokemonMove.GigaDrain:
+                    return 13.89;
+                case PokemonMove.FirePunch:
+                    return 14.29;
+                case PokemonMove.SolarBeam:
+                    return 24.49;
+                case PokemonMove.LeafBlade:
+                    return 19.64;
+                case PokemonMove.PowerWhip:
+                    return 25;
+                case PokemonMove.Splash:
+                    return 0;
+                case PokemonMove.Acid:
+                    return 9.52;
+                case PokemonMove.AirCutter:
+                    return 9.09;
+                case PokemonMove.Hurricane:
+                    return 25;
+                case PokemonMove.BrickBreak:
+                    return 18.75;
+                case PokemonMove.Cut:
+                    return 10.62;
+                case PokemonMove.Swift:
+                    return 10;
+                case PokemonMove.HornAttack:
+                    return 11.36;
+                case PokemonMove.Stomp:
+                    return 14.29;
+                case PokemonMove.Headbutt:
+                    return 11.43;
+                case PokemonMove.HyperFang:
+                    return 16.67;
+                case PokemonMove.Slam:
+                    return 666;
+                case PokemonMove.BodySlam:
+                    return 25.64;
+                case PokemonMove.Rest:
+                    return 16.13;
+                case PokemonMove.Struggle:
+                    return 8.85;
+                case PokemonMove.ScaldBlastoise:
+                    return 12.5;
+                case PokemonMove.HydroPumpBlastoise:
+                    return 23.68;
+                case PokemonMove.WrapGreen:
+                    return 6.76;
+                case PokemonMove.WrapPink:
+                    return 6.76;
+                case PokemonMove.FuryCutterFast:
+                    return 7.5;
+                case PokemonMove.BugBiteFast:
+                    return 11.11;
+                case PokemonMove.BiteFast:
+                    return 12;
+                case PokemonMove.SuckerPunchFast:
+                    return 10;
+                case PokemonMove.DragonBreathFast:
+                    return 12;
+                case PokemonMove.ThunderShockFast:
+                    return 8.33;
+                case PokemonMove.SparkFast:
+                    return 10;
+                case PokemonMove.LowKickFast:
+                    return 8.33;
+                case PokemonMove.KarateChopFast:
+                    return 7.5;
+                case PokemonMove.EmberFast:
+                    return 9.52;
+                case PokemonMove.WingAttackFast:
+                    return 12;
+                case PokemonMove.PeckFast:
+                    return 8.7;
+                case PokemonMove.LickFast:
+                    return 10;
+                case PokemonMove.ShadowClawFast:
+                    return 11.58;
+                case PokemonMove.VineWhipFast:
+                    return 10.77;
+                case PokemonMove.RazorLeafFast:
+                    return 10.34;
+                case PokemonMove.MudShotFast:
+                    return 10.91;
+                case PokemonMove.IceShardFast:
+                    return 10.71;
+                case PokemonMove.FrostBreathFast:
+                    return 11.11;
+                case PokemonMove.QuickAttackFast:
+                    return 7.52;
+                case PokemonMove.ScratchFast:
+                    return 12;
+                case PokemonMove.TackleFast:
+                    return 10.91;
+                case PokemonMove.PoundFast:
+                    return 12.96;
+                case PokemonMove.CutFast:
+                    return 10.62;
+                case PokemonMove.PoisonJabFast:
+                    return 11.43;
+                case PokemonMove.AcidFast:
+                    return 9.52;
+                case PokemonMove.PsychoCutFast:
+                    return 12.28;
+                case PokemonMove.RockThrowFast:
+                    return 8.82;
+                case PokemonMove.MetalClawFast:
+                    return 12.7;
+                case PokemonMove.BulletPunchFast:
+                    return 8.33;
+                case PokemonMove.WaterGunFast:
+                    return 12;
+                case PokemonMove.SplashFast:
+                    return 0;
+                case PokemonMove.WaterGunFastBlastoise:
+                    return 12;
+                case PokemonMove.MudSlapFast:
+                    return 11.11;
+                case PokemonMove.ZenHeadbuttFast:
+                    return 11.43;
+                case PokemonMove.ConfusionFast:
+                    return 9.93;
+                case PokemonMove.PoisonStingFast:
+                    return 10.43;
+                case PokemonMove.BubbleFast:
+                    return 10.87;
+                case PokemonMove.FeintAttackFast:
+                    return 11.54;
+                case PokemonMove.SteelWingFast:
+                    return 11.28;
+                case PokemonMove.FireFangFast:
+                    return 11.9;
+                case PokemonMove.RockSmashFast:
+                    return 10.64;
+                default: return 666;
+            }
+        }
+
+        public static double CalculateDPSMove2(PokemonData poke)
+        {
+
+
+            switch (poke.Move1)
+            {
+                case PokemonMove.ThunderShock: return 8.33;
+                case PokemonMove.QuickAttack: return 7.52;
+                case PokemonMove.Scratch: return 12.00;
+                case PokemonMove.Ember: return 9.52;
+                case PokemonMove.VineWhip: return 10.77;
+                case PokemonMove.Tackle: return 10.91;
+                case PokemonMove.RazorLeaf: return 10.34;
+                case PokemonMove.TakeDown: return 666;
+                case PokemonMove.WaterGun: return 12;
+                case PokemonMove.Bite: return 12;
+                case PokemonMove.Pound: return 12.96;
+
+                case PokemonMove.DoubleSlap: return 666;
+                case PokemonMove.Wrap: return 6.25;
+                case PokemonMove.HyperBeam: return 24;
+                case PokemonMove.Lick: return 10;
+                case PokemonMove.DarkPulse: return 12.86;
+                case PokemonMove.Smog: return 666;
+                case PokemonMove.Sludge: return 11.54;
+                case PokemonMove.MetalClaw: return 12.7;
+                case PokemonMove.ViceGrip: return 11.9;
+                case PokemonMove.FlameWheel: return 8.7;
+                case PokemonMove.Megahorn: return 25;
+                case PokemonMove.WingAttack: return 12;
+                case PokemonMove.Flamethrower:
+                    return 18.97;
+                case PokemonMove.SuckerPunch:
+                    return 10;
+                case PokemonMove.Dig:
+                    return 12.07;
+                case PokemonMove.LowKick:
+                    return 8.33;
+                case PokemonMove.CrossChop:
+                    return 30;
+                case PokemonMove.PsychoCut:
+                    return 12.28;
+                case PokemonMove.Psybeam:
+                    return 10.53;
+                case PokemonMove.Earthquake:
+                    return 23.81;
+                case PokemonMove.StoneEdge:
+                    return 25.81;
+                case PokemonMove.IcePunch:
+                    return 12.86;
+                case PokemonMove.HeartStamp:
+                    return 9.8;
+                case PokemonMove.Discharge:
+                    return 14;
+                case PokemonMove.FlashCannon:
+                    return 15.38;
+                case PokemonMove.Peck:
+                    return 8.7;
+                case PokemonMove.DrillPeck:
+                    return 14.81;
+                case PokemonMove.IceBeam:
+                    return 17.81;
+                case PokemonMove.Blizzard:
+                    return 25.64;
+                case PokemonMove.AirSlash:
+                    return 666;
+                case PokemonMove.HeatWave:
+                    return 21.05;
+                case PokemonMove.Twineedle:
+                    return 666;
+                case PokemonMove.PoisonJab:
+                    return 11.43;
+                case PokemonMove.AerialAce:
+                    return 10.34;
+                case PokemonMove.DrillRun:
+                    return 14.71;
+                case PokemonMove.PetalBlizzard:
+                    return 20.31;
+                case PokemonMove.MegaDrain:
+                    return 7.81;
+                case PokemonMove.BugBuzz:
+                    return 17.65;
+                case PokemonMove.PoisonFang:
+                    return 10.42;
+                case PokemonMove.NightSlash:
+                    return 11.11;
+                case PokemonMove.Slash:
+                    return 666;
+                case PokemonMove.BubbleBeam:
+                    return 10.34;
+                case PokemonMove.Submission:
+                    return 14.29;
+                case PokemonMove.KarateChop:
+                    return 7.5;
+                case PokemonMove.LowSweep:
+                    return 13.33;
+                case PokemonMove.AquaJet:
+                    return 10.64;
+                case PokemonMove.AquaTail:
+                    return 19.15;
+                case PokemonMove.SeedBomb:
+                    return 16.67;
+                case PokemonMove.Psyshock:
+                    return 14.81;
+                case PokemonMove.RockThrow:
+                    return 8.82;
+                case PokemonMove.AncientPower:
+                    return 9.72;
+                case PokemonMove.RockTomb:
+                    return 8.82;
+                case PokemonMove.RockSlide:
+                    return 15.63;
+                case PokemonMove.PowerGem:
+                    return 13.79;
+                case PokemonMove.ShadowSneak:
+                    return 8.06;
+                case PokemonMove.ShadowPunch:
+                    return 11.9;
+                case PokemonMove.ShadowClaw:
+                    return 11.58;
+                case PokemonMove.OminousWind:
+                    return 9.68;
+                case PokemonMove.ShadowBall:
+                    return 14.61;
+                case PokemonMove.BulletPunch:
+                    return 8.33;
+                case PokemonMove.MagnetBomb:
+                    return 10.71;
+                case PokemonMove.SteelWing:
+                    return 11.28;
+                case PokemonMove.IronHead:
+                    return 15;
+                case PokemonMove.ParabolicCharge:
+                    return 11.9;
+                case PokemonMove.Spark:
+                    return 10;
+                case PokemonMove.ThunderPunch:
+                    return 16.67;
+                case PokemonMove.Thunder:
+                    return 23.26;
+                case PokemonMove.Thunderbolt:
+                    return 20.37;
+                case PokemonMove.Twister:
+                    return 9.26;
+                case PokemonMove.DragonBreath:
+                    return 12;
+                case PokemonMove.DragonPulse:
+                    return 18.06;
+                case PokemonMove.DragonClaw:
+                    return 23.33;
+                case PokemonMove.DisarmingVoice:
+                    return 6.41;
+                case PokemonMove.DrainingKiss:
+                    return 8.93;
+                case PokemonMove.DazzlingGleam:
+                    return 13.1;
+                case PokemonMove.Moonblast:
+                    return 20.73;
+                case PokemonMove.PlayRough:
+                    return 18.97;
+                case PokemonMove.CrossPoison:
+                    return 16.67;
+                case PokemonMove.SludgeBomb:
+                    return 21.15;
+                case PokemonMove.SludgeWave:
+                    return 20.59;
+                case PokemonMove.GunkShot:
+                    return 21.67;
+                case PokemonMove.MudShot:
+                    return 10.91;
+                case PokemonMove.BoneClub:
+                    return 15.63;
+                case PokemonMove.Bulldoze:
+                    return 10.29;
+                case PokemonMove.MudBomb:
+                    return 11.54;
+                case PokemonMove.FuryCutter:
+                    return 7.5;
+                case PokemonMove.BugBite:
+                    return 11.11;
+                case PokemonMove.SignalBeam:
+                    return 14.52;
+                case PokemonMove.XScissor:
+                    return 16.67;
+                case PokemonMove.FlameCharge:
+                    return 8.06;
+                case PokemonMove.FlameBurst:
+                    return 14.29;
+                case PokemonMove.FireBlast:
+                    return 24.39;
+                case PokemonMove.Brine:
+                    return 10.42;
+                case PokemonMove.WaterPulse:
+                    return 10.61;
+                case PokemonMove.Scald:
+                    return 13.75;
+                case PokemonMove.HydroPump:
+                    return 23.68;
+                case PokemonMove.Psychic:
+                    return 19.64;
+                case PokemonMove.Psystrike:
+                    return 19.61;
+                case PokemonMove.IceShard:
+                    return 10.71;
+                case PokemonMove.IcyWind:
+                    return 6.58;
+                case PokemonMove.FrostBreath:
+                    return 11.11;
+                case PokemonMove.Absorb:
+                    return 666;
+                case PokemonMove.GigaDrain:
+                    return 13.89;
+                case PokemonMove.FirePunch:
+                    return 14.29;
+                case PokemonMove.SolarBeam:
+                    return 24.49;
+                case PokemonMove.LeafBlade:
+                    return 19.64;
+                case PokemonMove.PowerWhip:
+                    return 25;
+                case PokemonMove.Splash:
+                    return 0;
+                case PokemonMove.Acid:
+                    return 9.52;
+                case PokemonMove.AirCutter:
+                    return 9.09;
+                case PokemonMove.Hurricane:
+                    return 25;
+                case PokemonMove.BrickBreak:
+                    return 18.75;
+                case PokemonMove.Cut:
+                    return 10.62;
+                case PokemonMove.Swift:
+                    return 10;
+                case PokemonMove.HornAttack:
+                    return 11.36;
+                case PokemonMove.Stomp:
+                    return 14.29;
+                case PokemonMove.Headbutt:
+                    return 11.43;
+                case PokemonMove.HyperFang:
+                    return 16.67;
+                case PokemonMove.Slam:
+                    return 666;
+                case PokemonMove.BodySlam:
+                    return 25.64;
+                case PokemonMove.Rest:
+                    return 16.13;
+                case PokemonMove.Struggle:
+                    return 8.85;
+                case PokemonMove.ScaldBlastoise:
+                    return 12.5;
+                case PokemonMove.HydroPumpBlastoise:
+                    return 23.68;
+                case PokemonMove.WrapGreen:
+                    return 6.76;
+                case PokemonMove.WrapPink:
+                    return 6.76;
+                case PokemonMove.FuryCutterFast:
+                    return 7.5;
+                case PokemonMove.BugBiteFast:
+                    return 11.11;
+                case PokemonMove.BiteFast:
+                    return 12;
+                case PokemonMove.SuckerPunchFast:
+                    return 10;
+                case PokemonMove.DragonBreathFast:
+                    return 12;
+                case PokemonMove.ThunderShockFast:
+                    return 8.33;
+                case PokemonMove.SparkFast:
+                    return 10;
+                case PokemonMove.LowKickFast:
+                    return 8.33;
+                case PokemonMove.KarateChopFast:
+                    return 7.5;
+                case PokemonMove.EmberFast:
+                    return 9.52;
+                case PokemonMove.WingAttackFast:
+                    return 12;
+                case PokemonMove.PeckFast:
+                    return 8.7;
+                case PokemonMove.LickFast:
+                    return 10;
+                case PokemonMove.ShadowClawFast:
+                    return 11.58;
+                case PokemonMove.VineWhipFast:
+                    return 10.77;
+                case PokemonMove.RazorLeafFast:
+                    return 10.34;
+                case PokemonMove.MudShotFast:
+                    return 10.91;
+                case PokemonMove.IceShardFast:
+                    return 10.71;
+                case PokemonMove.FrostBreathFast:
+                    return 11.11;
+                case PokemonMove.QuickAttackFast:
+                    return 7.52;
+                case PokemonMove.ScratchFast:
+                    return 12;
+                case PokemonMove.TackleFast:
+                    return 10.91;
+                case PokemonMove.PoundFast:
+                    return 12.96;
+                case PokemonMove.CutFast:
+                    return 10.62;
+                case PokemonMove.PoisonJabFast:
+                    return 11.43;
+                case PokemonMove.AcidFast:
+                    return 9.52;
+                case PokemonMove.PsychoCutFast:
+                    return 12.28;
+                case PokemonMove.RockThrowFast:
+                    return 8.82;
+                case PokemonMove.MetalClawFast:
+                    return 12.7;
+                case PokemonMove.BulletPunchFast:
+                    return 8.33;
+                case PokemonMove.WaterGunFast:
+                    return 12;
+                case PokemonMove.SplashFast:
+                    return 0;
+                case PokemonMove.WaterGunFastBlastoise:
+                    return 12;
+                case PokemonMove.MudSlapFast:
+                    return 11.11;
+                case PokemonMove.ZenHeadbuttFast:
+                    return 11.43;
+                case PokemonMove.ConfusionFast:
+                    return 9.93;
+                case PokemonMove.PoisonStingFast:
+                    return 10.43;
+                case PokemonMove.BubbleFast:
+                    return 10.87;
+                case PokemonMove.FeintAttackFast:
+                    return 11.54;
+                case PokemonMove.SteelWingFast:
+                    return 11.28;
+                case PokemonMove.FireFangFast:
+                    return 11.9;
+                case PokemonMove.RockSmashFast:
+                    return 10.64;
+                default: return 666;
+            }
+        }
+ 
     }
 }
