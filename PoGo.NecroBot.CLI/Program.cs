@@ -39,6 +39,7 @@ namespace PoGo.NecroBot.CLI
                 Logger.Write("Press a Key to continue...",
                     LogLevel.Warning);
                 Console.ReadKey();
+                return;
             }
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
             session.Client.ApiFailure = new ApiFailureStrategy(session);
