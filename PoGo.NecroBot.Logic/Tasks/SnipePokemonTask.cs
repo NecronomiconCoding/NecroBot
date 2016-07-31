@@ -84,7 +84,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static List<PokemonLocation> LocsVisited = new List<PokemonLocation>();
         private static readonly List<SniperInfo> SnipeLocations = new List<SniperInfo>();
-        private static DateTime _lastSnipe = DateTime.Now;
+        private static DateTime _lastSnipe = DateTime.MinValue;
 
         public static Task AsyncStart(Session session, CancellationToken cancellationToken = default(CancellationToken))
         {
@@ -191,7 +191,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             if (locationsToSnipe.Any())
                             {
-                                _lastSnipe = DateTime.Now;
                                 foreach (var pokemonLocation in locationsToSnipe)
                                 {
                                     if (
@@ -214,6 +213,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
                                 });
                             }
+
+                            _lastSnipe = DateTime.Now;
                         }
                     }
                 }
@@ -298,7 +299,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
 
             session.EventDispatcher.Send(new SnipeModeEvent {Active = false});
-
             await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);
         }
 
@@ -372,7 +372,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     // most likely System.IO.IOException
                     session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
                 }
-
                 await Task.Delay(5000, cancellationToken);
             }
         }

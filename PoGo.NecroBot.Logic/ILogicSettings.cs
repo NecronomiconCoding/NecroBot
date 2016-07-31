@@ -60,6 +60,7 @@ namespace PoGo.NecroBot.Logic
 
     public interface ILogicSettings
     {
+        bool DisableHumanWalking { get; }
         bool AutoUpdate { get; }
         bool TransferConfigAndAuthOnUpdate { get; }
         float KeepMinIvPercentage { get; }
@@ -72,6 +73,11 @@ namespace PoGo.NecroBot.Logic
         int UseGreatBallAboveCp { get; }
         int UseUltraBallAboveCp { get; }
         int UseMasterBallAboveCp { get; }
+        int UseGreatBallAboveIv { get; }
+        int UseUltraBallAboveIv { get; }
+        double UseMasterBallBelowCatchProbability { get; }
+        double UseUltraBallBelowCatchProbability { get; }
+        double UseGreatBallBelowCatchProbability { get; }
         int DelayBetweenPokemonCatch { get; }
         bool AutomaticallyLevelUpPokemon { get; }
         string LevelUpByCPorIv { get; }
@@ -81,6 +87,9 @@ namespace PoGo.NecroBot.Logic
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
         bool PrioritizeIvOverCp { get; }
+        int AmountOfTimesToUpgradeLoop { get; }
+
+        int GetMinStarDustForLevelUp { get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }
         string GpxFile { get; }
@@ -91,6 +100,8 @@ namespace PoGo.NecroBot.Logic
         bool DumpPokemonStats { get; }
         bool RenamePokemon { get; }
         bool RenameOnlyAboveIv { get; }
+        float FavoriteMinIvPercentage { get; }
+        bool AutoFavoritePokemon { get; }
         string RenameTemplate { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }
@@ -104,6 +115,7 @@ namespace PoGo.NecroBot.Logic
         string SnipeLocationServer { get; }
         int SnipeLocationServerPort { get; }
         bool UseSnipeLocationServer { get; }
+        bool UseSnipeOnlineLocationServer { get; }
         bool UseTransferIvForSnipe { get; }
         bool SnipeIgnoreUnknownIv { get; }
         int MinDelayBetweenSnipes { get; }
@@ -111,6 +123,9 @@ namespace PoGo.NecroBot.Logic
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
 
+        bool ShowPokeballCountsBeforeRecycle { get; }
+        bool VerboseRecycling { get; }
+        double RecycleInventoryAtUsagePercentage { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
