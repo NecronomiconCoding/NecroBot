@@ -126,7 +126,9 @@
     <Compile Include="Event\UseLuckyEggEvent.cs" />
     <Compile Include="State\VersionCheckState.cs" />
     <Compile Include="Event\WarnEvent.cs" />
+    <Compile Include="Tasks\UseIncenseConstantlyTask.cs" />
     <Compile Include="Tasks\UseIncubatorsTask.cs" />
+    <Compile Include="Tasks\UseLuckyEggConstantlyTask.cs" />
     <Compile Include="Tasks\UseNearbyPokestopsTask.cs" />
     <Compile Include="Utils\DelayingUtils.cs" />
     <Compile Include="Utils\EggWalker.cs" />
