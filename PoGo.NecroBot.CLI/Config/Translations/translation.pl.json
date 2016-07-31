@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepsze CP: {3},  IV: {4}%] (Cukierki: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepsze CP: {3},  IV: {4}%] (Posiadane Cukierki: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -110,7 +110,7 @@
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Najwyższy Poziom Doskonałości"
+      "Value": "Najwyższy Poziom IV"
     },
     {
       "Key": "displayHighestsLevelHeader",
@@ -122,11 +122,11 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Wkładam jajko do inkubatora: pozostało {0:0.00}km"
+      "Value": "Wkładam jajko do inkubatora: Pozostało {0:0.00}km"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Aktualizacja inkubatora: pozostało {0:0.00}km"
+      "Value": "[Aktualizacja inkubatora] Pozostało {0:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",
@@ -278,7 +278,7 @@
     },
     {
       "Key": "checkingForBallsToRecycle",
-      "Value": "Sprawdzanie ilości Pokeballi, pozostawiając {0}"
+      "Value": "Sprawdzanie sumy Pokeballi, pozostawiając {0}"
     },
     {
       "Key": "checkingForPotionsToRecycle",
