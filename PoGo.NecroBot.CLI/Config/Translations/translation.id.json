@@ -6,7 +6,7 @@
     },
     {
       "Key": "greatPokeball",
-      "Value": "GreatBall"
+      "Value": "Great Ball"
     },
     {
       "Key": "ultraPokeball",
@@ -110,7 +110,7 @@
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Menampilkan yang terbaik di kelasnya"
+      "Value": "Menampilkan IV terbesar"
     },
     {
       "Key": "displayHighestsLevelHeader",
@@ -244,6 +244,10 @@
       "Key": "finishedUnpackingFiles",
       "Value": "Selesai mengbongkar file - file..."
     },
+	{
+      "Key": "finishedTransferringConfig",
+      "Value": "Selesai memindah config anda ke versi baru..."
+    },
     {
       "Key": "updateFinished",
       "Value": "Update telah selesai, anda dapat menutup window ini sekarang."
@@ -263,6 +267,38 @@
     {
       "Key": "pokemonSkipped",
       "Value": "Lewatkan {0}"
+    },
+	{
+      "Key": "zeroPokeballInv",
+      "Value": "Anda tidak mempunyai pokeball di inventorimu, tidak ada lagi pokemon yang dapat ditangkap!"
+    },
+	{
+      "Key": "currentPokeballInv",
+      "Value": "[Current Inventory] Pokeball: {0} | Greatball: {1} | Ultraball: {2} | Masterball: {3}"
+    },
+	{
+      "Key": "checkingForBallsToRecycle",
+      "Value": "Memeriksa pokeball untuk dibuang, menyimpan {0}"
+    },
+	{
+      "Key": "checkingForPotionsToRecycle",
+      "Value": "Memeriksa potion untuk dibuang, menyimpan {0}"
+    },
+    {
+      "Key": "checkingForRevivesToRecycle",
+      "Value": "Memeriksa Revive untuk dibuang, menyimpan {0}"
+    },
+    {
+      "Key": "pokeballsToKeepIncorrect",
+      "Value": "Salah konfigurasi pada TotalAmountOfPokebalsToKeep. Angka lebih kecil daripada 1."
+    },
+    {
+      "Key": "potionsToKeepIncorrect",
+      "Value": "Salah konfigurasi pada TotalAmountOfPotionsToKeep. Angka lebih kecil daripada 1."
+    },
+	{
+      "Key": "revivesToKeepIncorrect",
+      "Value": "Salah konfigurasi TotalAmountOfRevivesToKeep. Angka lebih kecil daripada 1."
     },
     {
       "Key": "invFullTransferring",
@@ -372,9 +408,25 @@
       "Key": "snipeScan",
       "Value": "[Sniper] Mencari Pokemon untuk disnipe di {0}..."
     },
+	{
+      "Key": "snipeScanEx",
+      "Value": "[Sniper] Mensnipe  {0} dengan {1} IV di {2}..."
+    },
     {
       "Key": "noPokemonToSnipe",
       "Value": "[Sniper] Tidak ditemukan Pokemon untuk di Snipe!"
+    },
+	{
+      "Key": "notEnoughPokeballsToSnipe",
+      "Value": "Pokeball tidak cukup untuk mulai sniping! ({0}/{1})"
+    },
+    {
+      "Key": "displayHighestMove1Header",
+      "Value": "GERAKAN1"
+    },
+    {
+      "Key": "displayHighestMove2Header",
+      "Value": "GERAKAN2"
     }
   ]
 }
