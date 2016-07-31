@@ -291,8 +291,44 @@
       "Value": "Übersprungen {0}"
     },
     {
+      "Key": "zeroPokeballInv",
+      "Value": "Du hast keine Pokébälle im Inventar, es können keine Pokémon gefangen werden!"
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "[Aktuelles Inventar] Pokéball: {0} | Superball: {1} | Hyperball: {2} | Meisterball: {3}"
+    },
+    {
+      "Key": "CheckingForBallsToRecycle",
+      "Value": "Prüfe Bälle zu recyceln, behalten wurden {0}"
+    },
+    {
+      "Key": "CheckingForPotionsToRecycle",
+      "Value": "Prüfe Tränke zu recyceln, behalten wurden {0}"
+    },
+    {
+      "Key": "CheckingForRevivesToRecycle",
+      "Value": "Prüfe Beleber zu recyceln, behalten wurden {0}"
+    },
+    {
+      "Key": "PokeballsToKeepIncorrect",
+      "Value": "TotalAmountOfPokebalsToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
+    },
+    {
+      "Key": "PotionsToKeepIncorrect",
+      "Value": "TotalAmountOfPotionsToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
+    },
+    {
+      "Key": "RevivesToKeepIncorrect",
+      "Value": "TotalAmountOfRevivesToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
+    },
+    {
       "Key": "invFullTransferring",
       "Value": "Das PokémonInventar ist voll. Verschicke Pokémon..."
+    },
+    {
+      "Key": "InvFullPokestopLooting",
+      "Value": "Das Inventar ist voll. Es können keine Gegenstände mehr eingesammelt werden."
     },
     {
       "Key": "invFullTransferManually",
@@ -314,6 +350,10 @@
     {
       "Key": "pokemonRename",
       "Value": "Pokémon {0} ({1}) wurde von {2} zu {3} umbenannt."
+    },
+    {
+      "Key": "PokemonFavorite",
+      "Value": "{0}% perfekt {1} (CP {2}) *Favorit*."
     },
     {
       "Key": "pokemonIgnoreFilter",
