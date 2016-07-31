@@ -455,6 +455,14 @@
     {
       "Key": "PkmNotEnoughRessources",
       "Value": "Echec. Ressources insuffisantes pour l'évolution"
+    },
+    {
+       "Key": "eventUseBerry",
+       "Value": "{0} utilisé, {1} restant"
+    },
+    {
+    	"Key": "itemRazzBerry",
+    	"Value": "Baie Framby"
     }
   ]
 }
