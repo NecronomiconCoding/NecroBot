@@ -82,6 +82,8 @@ namespace PoGo.NecroBot.Logic
         int KeepMinDuplicatePokemon { get; }
         bool PrioritizeIvOverCp { get; }
         int AmountOfTimesToUpgradeLoop { get; }
+
+        int GetMinStarDustForLevelUp { get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }
         string GpxFile { get; }
