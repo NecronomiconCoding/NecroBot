@@ -108,7 +108,7 @@ namespace PoGo.NecroBot.CLI
         private static void SaveLocationToDisk(double lat, double lng)
         {
             var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
-                             Path.DirectorySeparatorChar + "Coords.ini";
+                             Path.DirectorySeparatorChar + "LastPos.ini";
 
             File.WriteAllText(coordsPath, String.Format("{0}:{1}", lat, lng));
         }

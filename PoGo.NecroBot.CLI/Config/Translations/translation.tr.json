@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Tanımlanan yarıçap dışındasın! 5 saniye sonra ({0}m uzağa) yürümeye başlanacak. Coords.ini dosyası doğru yapılandırılmış mı?"
+        "Tanımlanan yarıçap dışındasın! 5 saniye sonra ({0}m uzağa) yürümeye başlanacak. LastPos.ini dosyası doğru yapılandırılmış mı?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -217,11 +217,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "{0} da gerçekçi gezinme yok, son kaydedilen Coords.ini kullanılıyor."
+      "Value": "{0} da gerçekçi gezinme yok, son kaydedilen LastPos.ini kullanılıyor."
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "\"Coords.ini\" dosyasındaki koordinatlar geçersiz, varsayılan koordinatlar kullanılıyor."
+      "Value": "\"LastPos.ini\" dosyasındaki koordinatlar geçersiz, varsayılan koordinatlar kullanılıyor."
     },
     {
       "Key": "gotUpToDateVersion",

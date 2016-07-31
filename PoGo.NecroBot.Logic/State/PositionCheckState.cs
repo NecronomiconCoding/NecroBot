@@ -19,7 +19,7 @@ namespace PoGo.NecroBot.Logic.State
             cancellationToken.ThrowIfCancellationRequested();
 
             var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
-                             Path.DirectorySeparatorChar + "Coords.ini";
+                             Path.DirectorySeparatorChar + "LastPos.ini";
             if (File.Exists(coordsPath))
             {
                 var latLngFromFile = LoadPositionFromDisk(session);
@@ -80,13 +80,13 @@ namespace PoGo.NecroBot.Logic.State
         {
             if (
                 File.Exists(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
-                            Path.DirectorySeparatorChar + "Coords.ini") &&
+                            Path.DirectorySeparatorChar + "LastPos.ini") &&
                 File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
-                                 Path.DirectorySeparatorChar + "Coords.ini").Contains(":"))
+                                 Path.DirectorySeparatorChar + "LastPos.ini").Contains(":"))
             {
                 var latlngFromFile =
                     File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
-                                     Path.DirectorySeparatorChar + "Coords.ini");
+                                     Path.DirectorySeparatorChar + "LastPos.ini");
                 var latlng = latlngFromFile.Split(':');
                 if (latlng[0].Length != 0 && latlng[1].Length != 0)
                 {
