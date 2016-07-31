@@ -46,6 +46,7 @@ namespace PoGo.NecroBot.CLI
             var strInfo = "INFO";
             var strPokestop = "POKESTOP";
             var strFarming = "FARMING";
+            var strSniper = "SNIPER";
             var strRecycling = "RECYCLING";
             var strPkmn = "PKMN";
             var strTransfered = "TRANSFERED";
@@ -62,6 +63,7 @@ namespace PoGo.NecroBot.CLI
                 strInfo = _session.Translation.GetTranslation(TranslationString.LogEntryInfo);
                 strPokestop = _session.Translation.GetTranslation(TranslationString.LogEntryPokestop);
                 strFarming = _session.Translation.GetTranslation(TranslationString.LogEntryFarming);
+                strSniper = _session.Translation.GetTranslation(TranslationString.LogEntrySniper);
                 strRecycling = _session.Translation.GetTranslation(TranslationString.LogEntryRecycling);
                 strPkmn = _session.Translation.GetTranslation(TranslationString.LogEntryPkmn);
                 strTransfered = _session.Translation.GetTranslation(TranslationString.LogEntryTransfered);
@@ -93,6 +95,10 @@ namespace PoGo.NecroBot.CLI
                 case LogLevel.Farming:
                     Console.ForegroundColor = ConsoleColor.Magenta;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strFarming}) {message}");
+                    break;
+                case LogLevel.Sniper:
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({strSniper}) {message}");
                     break;
                 case LogLevel.Recycling:
                     Console.ForegroundColor = ConsoleColor.DarkMagenta;
