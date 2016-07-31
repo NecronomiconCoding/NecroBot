@@ -155,6 +155,7 @@ namespace PoGo.NecroBot.Logic
         public int MaxSpawnLocationOffset = 10;
         public int MaxTravelDistanceInMeters = 1000;
         public int MinDelayBetweenSnipes = 60000;
+        public double SnipingScanOffset = 0.003;
         public int MinPokeballsToSnipe = 20;
         public int MinPokeballsWhileSnipe = 0;
 
@@ -649,6 +650,7 @@ namespace PoGo.NecroBot.Logic
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
+        public int SnipingScanOffset => _settings.SnipingScanOffset;
         public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;

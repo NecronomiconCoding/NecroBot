@@ -305,12 +305,26 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static ScanResult SnipeScanForPokemon(ISession session, Location location)
         {
             var formatter = new NumberFormatInfo {NumberDecimalSeparator = "."};
+
+            var offset = session.LogicSettings.SnipingScanOffset;
+            // 0.003 = half a mile; maximum 0.06 is 10 miles
+            if (offset<0.001 || offset>0.06) offset=0.003;
+
+            var bound_lower_left_lat = location.Latitude - offset;
+            var bound_lower_left_lng = location.Longitude - offset;
+            var bound_upper_right_lat = location.Latitude + offset;
+            var bound_upper_right_lng = location.Longitude + offset;
+
             var uri =
+                $"http://skiplagged.com/api/pokemon.php?bounds={bound_lower_left_lat.ToString(formatter)},{bound_lower_left_lng.ToString(formatter)},{bound_upper_right_lat.ToString(formatter)},{bound_upper_right_lng.ToString(formatter)}";
+            /*var uri =
                 $"http://skiplagged.com/api/pokemon.php?address={location.Latitude.ToString(formatter)},{location.Longitude.ToString(formatter)}";
+                */
             /*
              * http://skiplagged.com/api/pokemon.php?bounds=40.76356269219236,-73.98657795715332,40.7854671345488,-73.95812508392333
              * bounds = bound_lower_left_lat,bound_lower_left_lng,bound_upper_right_lat,bound_upper_right_lng
              */
+
             ScanResult scanResult;
             try
             {
@@ -322,8 +336,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 var resp = request.GetResponse();
                 var reader = new StreamReader(resp.GetResponseStream());
+                var fullresp = reader.ReadToEnd().Replace(" M", "Male").Replace(" F", "Female");
 
-                scanResult = JsonConvert.DeserializeObject<ScanResult>(reader.ReadToEnd());
+                scanResult = JsonConvert.DeserializeObject<ScanResult>(fullresp);
             }
             catch (Exception ex)
             {
