@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 float probability = encounter?.CaptureProbability?.CaptureProbability_[0];
 
-                var pokeball = await GetBestBall(session, encounter, probability);
+                var pokeball = await GetBestBall(session, encounter, probability, attemptCounter);
                 if (pokeball == ItemId.ItemUnknown)
                 {
                     session.EventDispatcher.Send(new NoPokeballEvent
@@ -170,7 +170,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
 
-        private static async Task<ItemId> GetBestBall(ISession session, dynamic encounter, float probability)
+        private static async Task<ItemId> GetBestBall(ISession session, dynamic encounter, float probability, int attempts)
         {
             var pokemonCp = encounter is EncounterResponse
                 ? encounter.WildPokemon?.PokemonData?.Cp
@@ -188,6 +188,23 @@ namespace PoGo.NecroBot.Logic.Tasks
             var greatBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemGreatBall);
             var ultraBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
             var masterBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
+
+            if ((session.LogicSettings.PokemonToUsePokeball != null && session.LogicSettings.PokemonToUsePokeball.Count > 0) &&
+                session.LogicSettings.PokemonToUsePokeball.Contains(pokemonId))
+            {
+                if (pokeBallsCount > 0)
+                    return ItemId.ItemPokeBall;
+            }
+            else if (session.LogicSettings.ThrowLuckyBallFirst)
+            {
+                if (attempts <= 1 && greatBallsCount > 0 &&
+                    (pokemonCp >= session.LogicSettings.UseUltraBallAboveCp ||
+                     iV >= session.LogicSettings.UseUltraBallAboveIv))
+                    return ItemId.ItemGreatBall;
+
+                if (attempts <= 1 && pokeBallsCount > 0)
+                    return ItemId.ItemPokeBall;
+            }
 
             if (masterBallsCount > 0 && (
                     (!session.LogicSettings.PokemonToUseMasterball.Any() && (
@@ -210,13 +227,17 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokeBallsCount > 0)
                 return ItemId.ItemPokeBall;
-            if (greatBallsCount > 0)
-                return ItemId.ItemGreatBall;
-            if (ultraBallsCount > 0)
-                return ItemId.ItemUltraBall;
-            if (masterBallsCount > 0 && !session.LogicSettings.PokemonToUseMasterball.Any())
-                return ItemId.ItemMasterBall;
 
+            if (!session.LogicSettings.StrictPokeballUse)
+            {
+                if (greatBallsCount > 0)
+                    return ItemId.ItemGreatBall;
+                if (ultraBallsCount > 0)
+                    return ItemId.ItemUltraBall;
+                if (masterBallsCount > 0 && !session.LogicSettings.PokemonToUseMasterball.Any())
+                    return ItemId.ItemMasterBall;
+            }
+            
             return ItemId.ItemUnknown;
         }
 

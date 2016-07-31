@@ -359,6 +359,19 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Mewtwo
         };
 
+        public List<PokemonId> PokemonToUsePokeball = new List<PokemonId>
+        {
+            PokemonId.Rattata,
+            PokemonId.Zubat,
+            PokemonId.Pidgey,
+            PokemonId.Spearow,
+            PokemonId.Krabby,
+            PokemonId.Drowzee,
+            PokemonId.Weedle
+        };
+
+        public bool ThrowLuckyBallFirst = false;
+        public bool StrictPokeballUse = false;
         public bool PrioritizeIvOverCp = true;
 
         [JsonIgnore] public string ProfileConfigPath;
@@ -640,7 +653,10 @@ namespace PoGo.NecroBot.Logic
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public ICollection<PokemonId> PokemonToUseMasterball => _settings.PokemonToUseMasterball;
+        public ICollection<PokemonId> PokemonToUsePokeball => _settings.PokemonToUsePokeball;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
+        public bool ThrowLuckyBallFirst => _settings.ThrowLuckyBallFirst;
+        public bool StrictPokeballUse => _settings.StrictPokeballUse;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
