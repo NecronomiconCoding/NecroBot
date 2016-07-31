@@ -10,6 +10,7 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Tasks;
 using PoGo.NecroBot.Logic.Utils;
+using System.IO;
 
 #endregion
 
@@ -83,7 +84,7 @@ namespace PoGo.NecroBot.CLI
 
             session.Navigation.UpdatePositionEvent +=
                 (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
-
+            session.Navigation.UpdatePositionEvent += Navigation_UpdatePositionEvent;
             machine.AsyncStart(new VersionCheckState(), session);
             if (session.LogicSettings.UseSnipeLocationServer)
                 SnipePokemonTask.AsyncStart(session);
@@ -98,6 +99,19 @@ namespace PoGo.NecroBot.CLI
                 }
                 Thread.Sleep(5);
             }
+        }
+
+        private static void Navigation_UpdatePositionEvent(double lat, double lng)
+        {
+            SaveLocationToDisk(lat, lng);
+        }
+
+        private static void SaveLocationToDisk(double lat, double lng)
+        {
+            var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
+                             Path.DirectorySeparatorChar + "LastPos.ini";
+
+            File.WriteAllText(coordsPath, String.Format("{0}:{1}", lat, lng));
         }
     }
 }

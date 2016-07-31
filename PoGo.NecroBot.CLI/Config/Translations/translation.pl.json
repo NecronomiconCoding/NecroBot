@@ -22,7 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Znajdujesz się poza swoim zdefiniowanym zasięgiem! Przemieszczam Cię na start odległy o ({0}m) za 5 sekund. Sprawdź, czy Twój plik \"Coords.ini\" jest poprawny!"
+      "Value": "Znajdujesz się poza swoim zdefiniowanym zasięgiem! Przemieszczam Cię na start odległy o ({0}m) za 5 sekund. Sprawdź, czy Twój plik \"LastPos.ini\" jest poprawny!"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -218,11 +218,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Nie realistyczne podróżowanie na {0}, używam ostatnich ustawień z \"Coords.ini\""
+      "Value": "Nie realistyczne podróżowanie na {0}, używam ostatnich ustawień z \"LastPos.ini\""
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Współrzędne w pliku \"Coords.ini\" są niepoprawne, używam domyślnych współrzędnych"
+      "Value": "Współrzędne w pliku \"LastPos.ini\" są niepoprawne, używam domyślnych współrzędnych"
     },
     {
       "Key": "gotUpToDateVersion",

@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file Coords.ini e' corretto?"
+        "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file LastPos.ini e' corretto?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -220,11 +220,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Spostamenti non Realistici in {0}, verra' usato l'ultimo salvataggio del file Coords.ini"
+      "Value": "Spostamenti non Realistici in {0}, verra' usato l'ultimo salvataggio del file LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Le coordinate nel file \"Coords.ini\" non sono valide, verranno usate le coordinate di default"
+      "Value": "Le coordinate nel file \"LastPos.ini\" non sono valide, verranno usate le coordinate di default"
     },
     {
       "Key": "gotUpToDateVersion",
