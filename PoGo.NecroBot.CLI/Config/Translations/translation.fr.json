@@ -317,6 +317,10 @@
       "Value": "{0} ({1}) a été renommé de {2} en {3}."
     },
     {
+      "Key": "pokemonFavorite",
+      "Value": "{0}%IV {1} (CP {2}) *Favoris*."
+    },
+    {
       "Key": "pokemonIgnoreFilter",
       "Value": "[Pokémon-Ignore-Filter] - {0} ignoré comme défini dans les options !"
     },
