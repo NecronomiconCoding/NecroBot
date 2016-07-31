@@ -425,6 +425,10 @@
       "Value": "Bonbons"
     },
     {
+      "Key": "IPBannedError",
+      "Value": "Connexion refusée. Votre IP a sans doute été bloquée par Niantic. Arrêt en cours..."
+    },
+    {
       "Key": "NoEggsAvailable",
       "Value": "Aucun oeuf de disponible"
     },
