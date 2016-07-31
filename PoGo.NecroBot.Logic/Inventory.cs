@@ -329,6 +329,17 @@ namespace PoGo.NecroBot.Logic
             return TakeAmountOfItems(allPokeballs, amountOfPokeballsToKeep).ToList();
         }
 
+        public async Task<UseItemXpBoostResponse> UseLuckyEggConstantly()
+        {
+            var UseLuckyEgg = await _client.Inventory.UseItemXpBoost();
+            return UseLuckyEgg;
+        }
+        public async Task<UseIncenseResponse> UseIncenseConstantly()
+        {
+            var UseIncense = await _client.Inventory.UseIncense(ItemId.ItemIncenseOrdinary);
+            return UseIncense;
+        }
+
         public async Task<List<InventoryItem>> GetPokeDexItems()
         {
             List<InventoryItem> PokeDex = new List<InventoryItem>();
