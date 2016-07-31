@@ -159,6 +159,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;
+                    // need updated stardust information for upgrading, so refresh your profile now
+                    await DownloadProfile(session);
+
                     if (fortSearch.ItemsAwarded.Count > 0)
                     {
                         await session.Inventory.RefreshCachedInventory();
@@ -213,6 +216,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                 );
 
             return pokeStops.ToList();
+        }
+
+        // static copy of download profile, to update stardust more accurately
+        private static async Task DownloadProfile(ISession session)
+        {
+            session.Profile = await session.Client.Player.GetPlayer();
+            session.EventDispatcher.Send(new ProfileEvent { Profile = session.Profile });
         }
     }
 }

@@ -23,6 +23,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             // get the families and the pokemons settings to do some actual smart stuff like checking if you have enough candy in the first place
             var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
             var pokemonSettings = await session.Inventory.GetPokemonSettings();
+            var pokemonUpgradeSettings = await session.Inventory.GetPokemonUpgradeSettings();
+            var playerLevel = await session.Inventory.GetPlayerStats();
 
             if (session.LogicSettings.LevelUpByCPorIv?.ToLower() == "iv")
             {
@@ -31,11 +33,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                 // get everything that is higher than the iv min
                 foreach (var pokemon in allPokemon.Where(p => session.Inventory.GetPerfect(p) >= session.LogicSettings.UpgradePokemonIvMinimum))
                 {
+                    int pokeLevel = (int)PokemonInfo.GetLevel(pokemon);
                     var currentPokemonSettings = pokemonSettings.FirstOrDefault(q => pokemon != null && q.PokemonId.Equals(pokemon.PokemonId));
                     var family = pokemonFamilies.FirstOrDefault(q => currentPokemonSettings != null && q.FamilyId.Equals(currentPokemonSettings.FamilyId));
                     int candyToEvolveTotal = GetCandyMinToKeep(pokemonSettings, currentPokemonSettings);
 
-                    if (family.Candy_ > 0 && family.Candy_ >= candyToEvolveTotal)
+                    // you can upgrade up to player level+2 right now
+                    // may need translation for stardust???
+                    if (pokeLevel < playerLevel?.FirstOrDefault().Level + pokemonUpgradeSettings.FirstOrDefault().AllowedLevelsAbovePlayer
+                        && family.Candy_ > pokemonUpgradeSettings.FirstOrDefault()?.CandyCost[pokeLevel] 
+                        && family.Candy_ >= candyToEvolveTotal 
+                        && session.Profile.PlayerData.Currencies.FirstOrDefault(c => c.Name.ToLower().Contains("stardust")).Amount >= pokemonUpgradeSettings.FirstOrDefault()?.StardustCost[pokeLevel])
                     {
                         await DoUpgrade(session, pokemon);
                     }
@@ -45,14 +53,18 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 var allPokemon = await session.Inventory.GetHighestsPerfect(session.Profile.PlayerData.MaxPokemonStorage);
 
-                // get everything that is higher than the iv min
+                // get everything that is higher than the cp min
                 foreach (var pokemon in allPokemon.Where(p => session.Inventory.GetPerfect(p) >= session.LogicSettings.UpgradePokemonCpMinimum))
                 {
+                    int pokeLevel = (int)PokemonInfo.GetLevel(pokemon);
                     var currentPokemonSettings = pokemonSettings.FirstOrDefault(q => pokemon != null && q.PokemonId.Equals(pokemon.PokemonId));
                     var family = pokemonFamilies.FirstOrDefault(q => currentPokemonSettings != null && q.FamilyId.Equals(currentPokemonSettings.FamilyId));
                     int candyToEvolveTotal = GetCandyMinToKeep(pokemonSettings, currentPokemonSettings);
 
-                    if (family.Candy_ > 0 && family.Candy_ >= candyToEvolveTotal)
+                    if (pokeLevel < playerLevel?.FirstOrDefault().Level + pokemonUpgradeSettings.FirstOrDefault().AllowedLevelsAbovePlayer
+                        && family.Candy_ > pokemonUpgradeSettings.FirstOrDefault()?.CandyCost[pokeLevel]
+                        && family.Candy_ >= candyToEvolveTotal
+                        && session.Profile.PlayerData.Currencies.FirstOrDefault(c => c.Name.ToLower().Contains("stardust")).Amount >= pokemonUpgradeSettings.FirstOrDefault()?.StardustCost[pokeLevel])
                     {
                         await DoUpgrade(session, pokemon);
                     }
@@ -94,7 +106,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 Logger.Write("Pokemon Upgrade Failed Not Enough Resources");
             }
-            // pokemon near its max, cant upgrade at the moment
+            // pokemon max level
             else if (upgradeResult.Result == POGOProtos.Networking.Responses.UpgradePokemonResponse.Types.Result.ErrorUpgradeNotAvailable)
             {
                 Logger.Write("Pokemon upgrade unavailable for: " + pokemon.PokemonId + ":" + pokemon.Cp + "/" + PokemonInfo.CalculateMaxCp(pokemon));
