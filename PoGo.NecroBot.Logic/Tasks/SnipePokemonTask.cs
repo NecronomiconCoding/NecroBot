@@ -102,7 +102,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokeBallsCount < minPokeballs)
             {
-                session.EventDispatcher.Send(new NoticeEvent
+                session.EventDispatcher.Send(new SnipeEvent
                 {
                     Message =
                         session.Translation.GetTranslation(TranslationString.NotEnoughPokeballsToSnipe, pokeBallsCount,
@@ -208,7 +208,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             }
                             else
                             {
-                                session.EventDispatcher.Send(new NoticeEvent
+                                session.EventDispatcher.Send(new SnipeEvent
                                 {
                                     Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
                                 });
