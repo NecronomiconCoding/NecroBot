@@ -53,7 +53,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             else if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("cp") && DisplayPokemonStatsTask.PokemonIdcp.Count != 0)
             {
-
                 for (int i = 0; i < session.LogicSettings.AmountOfTimesToUpgradeLoop; i++)
                 {
                     var rand = new Random();
