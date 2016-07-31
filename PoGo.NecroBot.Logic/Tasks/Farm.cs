@@ -42,6 +42,11 @@ namespace PoGo.NecroBot.Logic.Service
                 RenamePokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
             }
 
+            if (_session.LogicSettings.AutoFavoritePokemon)
+            {
+                FavoritePokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
+            }
+
             RecycleItemsTask.Execute(_session, cancellationToken).Wait(cancellationToken);
 
             if (_session.LogicSettings.UseEggIncubators)
