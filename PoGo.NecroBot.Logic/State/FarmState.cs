@@ -26,6 +26,14 @@ namespace PoGo.NecroBot.Logic.State
             {
                 await LevelUpPokemonTask.Execute(session, cancellationToken);
             }
+            if (session.LogicSettings.UseLuckyEggConstantly)
+            {
+                await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+            }
+            if (session.LogicSettings.UseIncenseConstantly)
+            {
+                await UseIncenseConstantlyTask.Execute(session, cancellationToken);
+            }
             await GetPokeDexCount.Execute(session, cancellationToken);
             if (session.LogicSettings.RenamePokemon)
             {
