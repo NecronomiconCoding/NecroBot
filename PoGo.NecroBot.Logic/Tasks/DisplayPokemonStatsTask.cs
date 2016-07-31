@@ -22,6 +22,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public static async Task Execute(ISession session)
         {
+            var myPokemonFamilies = await session.Inventory.GetPokemonFamilies();
+            var myPokeSettings = await session.Inventory.GetPokemonSettings();
+
             var highestsPokemonCp =
                 await session.Inventory.GetHighestsCp(session.LogicSettings.AmountOfPokemonToDisplayOnStart);
             var highestsPokemonCpForUpgrade = await session.Inventory.GetHighestsCp(50);
@@ -31,7 +34,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     pokemon =>
                         Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon),
                             PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon),
-                            PokemonInfo.GetPokemonMove1(pokemon), PokemonInfo.GetPokemonMove2(pokemon))).ToList();
+                            PokemonInfo.GetPokemonMove1(pokemon), PokemonInfo.GetPokemonMove2(pokemon),
+                            PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings))).ToList();
             var pokemonPairedWithStatsCpForUpgrade =
                 highestsPokemonCpForUpgrade.Select(
                     pokemon =>
@@ -46,7 +50,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     pokemon =>
                         Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon),
                             PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon),
-                            PokemonInfo.GetPokemonMove1(pokemon), PokemonInfo.GetPokemonMove2(pokemon))).ToList();
+                            PokemonInfo.GetPokemonMove1(pokemon), PokemonInfo.GetPokemonMove2(pokemon),
+                            PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings))).ToList();
             var pokemonPairedWithStatsIvForUpgrade =
                 highestsPokemonIvForUpgrade.Select(
                     pokemon =>
@@ -104,8 +109,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 Dumper.ClearDumpFile(session, dumpFileName);
                 foreach (var pokemon in allPokemonInBag)
                 {
+                    int candy = PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings);
                     Dumper.Dump(session,
-                        $"NAME: {pokemon.PokemonId.ToString().PadRight(16, ' ')}Lvl: {PokemonInfo.GetLevel(pokemon).ToString("00")}\t\tCP: {pokemon.Cp.ToString().PadRight(8, ' ')}\t\t IV: {PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}%\t\t\tMOVE1: {pokemon.Move1}\t\t\tMOVE2: {pokemon.Move2}",
+                        $"NAME: {pokemon.PokemonId.ToString().PadRight(16, ' ')}Lvl: {PokemonInfo.GetLevel(pokemon).ToString("00")}\t\tCP: {pokemon.Cp.ToString().PadRight(8, ' ')}\t\t IV: {PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}%\t\t\tMOVE1: {pokemon.Move1}\t\t\tMOVE2: {pokemon.Move2} \t\tCandy: {candy}",
                         dumpFileName);
                 }
             }
