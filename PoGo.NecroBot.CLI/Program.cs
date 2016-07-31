@@ -1,7 +1,9 @@
 ﻿#region using directives
 
 using System;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Threading;
 using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Common;
@@ -31,13 +33,23 @@ namespace PoGo.NecroBot.CLI
 
             var settings = GlobalSettings.Load(subPath);
 
-
             if (settings == null)
             {
+                var configPath = Path.Combine(Path.Combine(Directory.GetCurrentDirectory(), subPath), "config");
+
                 Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
-                Logger.Write("Press a Key to continue...",
-                    LogLevel.Warning);
+                Logger.Write("check it/provide your specific data", LogLevel.Warning);
+
+                Process.Start(configPath);
+
+                Logger.Write("Press a Key to continue...", LogLevel.Warning);
+
                 Console.ReadKey();
+
+                settings = GlobalSettings.Load(subPath);
+
+                if (settings == null)
+                    return;
             }
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
             session.Client.ApiFailure = new ApiFailureStrategy(session);
