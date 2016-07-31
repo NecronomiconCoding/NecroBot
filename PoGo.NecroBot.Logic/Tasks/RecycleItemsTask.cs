@@ -47,7 +47,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var updatedListOfItems = (await session.Inventory.GetItems()).ToList();
 
             var newItemsCount = updatedListOfItems.Sum(s => s.Count);
-            Logging.Logger.Write($"Inventory space: {newItemsCount}/{maxItemsCount}");
+            Logging.Logger.Write($"Inventory space: {newItemsCount}/{maxItemsCount}", Logging.LogLevel.Recycling);
         }
     }
 }
