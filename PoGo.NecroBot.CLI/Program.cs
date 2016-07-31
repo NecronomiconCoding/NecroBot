@@ -23,7 +23,6 @@ namespace PoGo.NecroBot.CLI
 
             CultureInfo.DefaultThreadCurrentCulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;
-
             var subPath = "";
             if (args.Length > 0)
                 subPath = args[0];

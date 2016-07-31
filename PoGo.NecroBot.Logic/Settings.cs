@@ -20,10 +20,8 @@ namespace PoGo.NecroBot.Logic
         [JsonIgnore] private string _filePath;
 
         public AuthType AuthType;
-        public string GooglePassword;
-
-        public string GoogleRefreshToken;
         public string GoogleUsername;
+        public string GooglePassword;
         public string PtcPassword;
         public string PtcUsername;
 
@@ -109,6 +107,7 @@ namespace PoGo.NecroBot.Logic
         public double DefaultLongitude = -73.968285;
         public int DelayBetweenPlayerActions = 5000;
         public int DelayBetweenPokemonCatch = 2000;
+        public bool DisableHumanWalking = false;
         public bool DumpPokemonStats = false;
         public float EvolveAboveIvValue = 95;
         public bool EvolveAllPokemonAboveIv = false;
@@ -497,15 +496,6 @@ namespace PoGo.NecroBot.Logic
         public string GoogleUsername => _settings.Auth.GoogleUsername;
         public string GooglePassword => _settings.Auth.GooglePassword;
 
-        public string GoogleRefreshToken
-        {
-            get { return _settings.Auth.GoogleRefreshToken; }
-            set
-            {
-                _settings.Auth.GoogleRefreshToken = value;
-                _settings.Auth.Save();
-            }
-        }
 
         AuthType ISettings.AuthType
         {
@@ -586,6 +576,7 @@ namespace PoGo.NecroBot.Logic
         public string GeneralConfigPath => _settings.GeneralConfigPath;
         public bool AutoUpdate => _settings.AutoUpdate;
         public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
+        public bool DisableHumanWalking => _settings.DisableHumanWalking;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public int KeepMinCp => _settings.KeepMinCp;
         public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;

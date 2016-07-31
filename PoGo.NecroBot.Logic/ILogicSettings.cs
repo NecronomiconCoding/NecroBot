@@ -60,6 +60,7 @@ namespace PoGo.NecroBot.Logic
 
     public interface ILogicSettings
     {
+        bool DisableHumanWalking { get; }
         bool AutoUpdate { get; }
         bool TransferConfigAndAuthOnUpdate { get; }
         float KeepMinIvPercentage { get; }
