@@ -16,6 +16,10 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            var currentTotalItems = await session.Inventory.GetTotalItemCount();
+            if ((session.Profile.PlayerData.MaxItemStorage*.95) > currentTotalItems)
+                return;
+
             var items = await session.Inventory.GetItemsToRecycle(session);
 
             foreach (var item in items)
