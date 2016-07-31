@@ -180,8 +180,24 @@ namespace PoGo.NecroBot.CLI
 
         public void HandleEvent(UseBerryEvent evt, ISession session)
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.EventNoPokeballs, evt.Count),
+            string strBerry;
+            switch (evt.BerryType)
+            {
+                case ItemId.ItemRazzBerry:
+                    strBerry = session.Translation.GetTranslation(TranslationString.ItemRazzBerry);
+                    break;
+                default:
+                    strBerry = evt.BerryType.ToString();
+                    break;
+            }
+
+            Logger.Write(session.Translation.GetTranslation(TranslationString.EventUseBerry, strBerry, evt.Count),
                 LogLevel.Berry);
+        }
+
+        public void HandleEvent(SnipeEvent evt, ISession session)
+        {
+            Logger.Write(evt.ToString(), LogLevel.Sniper);
         }
 
         public void HandleEvent(SnipeScanEvent evt, ISession session)

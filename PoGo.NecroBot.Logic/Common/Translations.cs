@@ -39,6 +39,8 @@ namespace PoGo.NecroBot.Logic.Common
         EventItemRecycled,
         EventPokemonCapture,
         EventNoPokeballs,
+        EventUseBerry,
+        ItemRazzBerry,
         CatchStatusAttempt,
         CatchStatus,
         Candies,
@@ -130,7 +132,8 @@ namespace PoGo.NecroBot.Logic.Common
         NotEnoughPokeballsToSnipe,
         DisplayHighestMove1Header,
         DisplayHighestMove2Header,
-        DisplayHighestCandy
+        DisplayHighestCandy,
+        IPBannedError
     }
 
     public class Translation : ITranslation
@@ -174,6 +177,8 @@ namespace PoGo.NecroBot.Logic.Common
                 "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
                 "No Pokeballs - We missed a {0} with CP {1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventUseBerry, "Used {0} | {1} remaining"),
+            new KeyValuePair<TranslationString, string>(TranslationString.ItemRazzBerry, "Razz Berry"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchStatusAttempt, "{0} Attempt #{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchStatus, "{0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.Candies, "Candies: {0}"),
@@ -261,7 +266,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.CheckingForRevivesToRecycle,
                 "Checking for revives to recycle, keeping {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.PokeballsToKeepIncorrect,
-                "TotalAmountOfPokebalsToKeep is configured incorrectly. The number is smaller than 1."),
+                "TotalAmountOfPokeballsToKeep is configured incorrectly. The number is smaller than 1."),
             new KeyValuePair<TranslationString, string>(TranslationString.PotionsToKeepIncorrect,
                 "TotalAmountOfPotionsToKeep is configured incorrectly. The number is smaller than 1."),
             new KeyValuePair<TranslationString, string>(TranslationString.RevivesToKeepIncorrect,
@@ -320,7 +325,8 @@ namespace PoGo.NecroBot.Logic.Common
                 "Not enough Pokeballs to start sniping! ({0}/{1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2"),
-            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy")
+            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy"),
+            new KeyValuePair<TranslationString, string>(TranslationString.IPBannedError, "Connection refused. Your IP might have been Blacklisted by Niantic. Exiting..")
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)

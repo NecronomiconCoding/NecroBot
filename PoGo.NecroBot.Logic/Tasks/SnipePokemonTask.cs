@@ -103,7 +103,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokeBallsCount < minPokeballs)
             {
-                session.EventDispatcher.Send(new NoticeEvent
+                session.EventDispatcher.Send(new SnipeEvent
                 {
                     Message =
                         session.Translation.GetTranslation(TranslationString.NotEnoughPokeballsToSnipe, pokeBallsCount,
@@ -209,7 +209,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             }
                             else
                             {
-                                session.EventDispatcher.Send(new NoticeEvent
+                                session.EventDispatcher.Send(new SnipeEvent
                                 {
                                     Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
                                 });
@@ -316,15 +316,16 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var offset = session.LogicSettings.SnipingScanOffset;
             // 0.003 = half a mile; maximum 0.06 is 10 miles
-            if (offset<0.001 || offset>0.06) offset=0.003;
+            if (offset<0.001) offset=0.003;
+            if (offset>0.06) offset = 0.06;
 
-            var bound_lower_left_lat = location.Latitude - offset;
-            var bound_lower_left_lng = location.Longitude - offset;
-            var bound_upper_right_lat = location.Latitude + offset;
-            var bound_upper_right_lng = location.Longitude + offset;
+            var boundLowerLeftLat = location.Latitude - offset;
+            var boundLowerLeftLng = location.Longitude - offset;
+            var boundUpperRightLat = location.Latitude + offset;
+            var boundUpperRightLng = location.Longitude + offset;
 
             var uri =
-                $"http://skiplagged.com/api/pokemon.php?bounds={bound_lower_left_lat.ToString(formatter)},{bound_lower_left_lng.ToString(formatter)},{bound_upper_right_lat.ToString(formatter)},{bound_upper_right_lng.ToString(formatter)}";
+                $"http://skiplagged.com/api/pokemon.php?bounds={boundLowerLeftLat.ToString(formatter)},{boundLowerLeftLng.ToString(formatter)},{boundUpperRightLat.ToString(formatter)},{boundUpperRightLng.ToString(formatter)}";
             /*var uri =
                 $"http://skiplagged.com/api/pokemon.php?address={location.Latitude.ToString(formatter)},{location.Longitude.ToString(formatter)}";
                 */
