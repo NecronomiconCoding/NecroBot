@@ -104,8 +104,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                 Dumper.ClearDumpFile(session, dumpFileName);
                 foreach (var pokemon in allPokemonInBag)
                 {
+                    string pokeName = "";
+                    if (pokemon.Favorite == 1)
+                    {
+                        pokeName += "*";
+                    }
+                    pokeName += pokemon.PokemonId.ToString();
+                    if (!string.IsNullOrEmpty(pokemon.Nickname.ToString()))
+                    {
+                        pokeName += " (" + pokemon.Nickname.ToString() + ")";
+                    }
+
                     Dumper.Dump(session,
-                        $"NAME: {pokemon.PokemonId.ToString().PadRight(16, ' ')}Lvl: {PokemonInfo.GetLevel(pokemon).ToString("00")}\t\tCP: {pokemon.Cp.ToString().PadRight(8, ' ')}\t\t IV: {PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}%\t\t\tMOVE1: {pokemon.Move1}\t\t\tMOVE2: {pokemon.Move2}",
+                        string.Format($"NAME: {pokeName, -25} LVL: {PokemonInfo.GetLevel(pokemon).ToString("00"), -7} CP: {pokemon.Cp.ToString() + " / " + PokemonInfo.CalculateMaxCp(pokemon).ToString(), -15} IV: {PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"), -10} MOVE1: {pokemon.Move1, -20} MOVE2: {pokemon.Move2}"),
                         dumpFileName);
                 }
             }
