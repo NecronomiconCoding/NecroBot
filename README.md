@@ -1,2 +1,3 @@
-NecroBot is dead.
-Only cunts advertise for other shit. Stop doing this.
+NecroBot project is closed.
+
+New project is at https://github.com/PocketMobsters/PokeMobBot
