@@ -103,7 +103,7 @@ namespace PoGo.NecroBot.Logic
 
         public bool AutomaticallyLevelUpPokemon = false;
 
-        public bool AutoUpdate = false;
+        public bool AutoUpdate = true;
         public double DefaultAltitude = 10;
         public double DefaultLatitude = 40.785091;
         public double DefaultLongitude = -73.968285;
