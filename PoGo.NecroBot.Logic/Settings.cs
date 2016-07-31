@@ -361,6 +361,8 @@ namespace PoGo.NecroBot.Logic
 
         public bool RenameOnlyAboveIv = true;
         public bool RenamePokemon = false;
+        public float FavoriteMinIvPercentage = 95;
+        public bool AutoFavoritePokemon = false;
         public string RenameTemplate = "{1}_{0}";
         public bool SnipeAtPokestops = false;
         public bool SnipeIgnoreUnknownIv = false;
@@ -617,6 +619,8 @@ namespace PoGo.NecroBot.Logic
         public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
         public bool RenamePokemon => _settings.RenamePokemon;
         public bool RenameOnlyAboveIv => _settings.RenameOnlyAboveIv;
+        public float FavoriteMinIvPercentage => _settings.FavoriteMinIvPercentage;
+        public bool AutoFavoritePokemon => _settings.AutoFavoritePokemon;
         public string RenameTemplate => _settings.RenameTemplate;
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
         public bool DumpPokemonStats => _settings.DumpPokemonStats;

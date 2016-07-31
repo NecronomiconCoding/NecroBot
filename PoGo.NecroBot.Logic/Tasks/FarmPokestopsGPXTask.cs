@@ -134,6 +134,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 await RenamePokemonTask.Execute(session, cancellationToken);
                             }
+
+                            if (session.LogicSettings.AutoFavoritePokemon)
+                            {
+                                await FavoritePokemonTask.Execute(session, cancellationToken);
+                            }
                         }
 
                         await session.Navigation.HumanPathWalking(

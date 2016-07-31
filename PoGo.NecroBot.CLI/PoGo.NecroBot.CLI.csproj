@@ -109,13 +109,6 @@
     <Compile Include="SimpleSession.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Events\EggListResponce.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Events\ItemListResponce.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\GetEggListHandler.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\GetItemsListHandler.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Helpers\EggListWeb.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\GetEggListTask.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\GetItemListTask.cs" />
     <Compile Include="WebSocketHandler\EncodingHelper.cs" />
     <Compile Include="WebSocketHandler\IWebSocketResponce.cs" />
     <Compile Include="WebSocketHandler\IWebSocketRequestHandler.cs" />
