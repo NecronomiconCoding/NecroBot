@@ -104,12 +104,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 Dumper.ClearDumpFile(session, dumpFileName);
                 foreach (var pokemon in allPokemonInBag)
                 {
-                    Dumper.Dump(session,
-                        $"NAME: {pokemon.PokemonId.ToString().PadRight(16, ' ')}Lvl: {PokemonInfo.GetLevel(pokemon).ToString("00")}\t\tCP: {pokemon.Cp.ToString().PadRight(8, ' ')}\t\t IV: {PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}%\t\t\tMOVE1: {pokemon.Move1}\t\t\tMOVE2: {pokemon.Move2}",
-                        dumpFileName);
+                                        Dumper.Dump(session,$"NAME: {pokemon.PokemonId.ToString().PadRight(16, ' ')}\t\t IV: { PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}%\t\t DPS{(PokemonInfo.CalculateDPSMove1(pokemon)+PokemonInfo.CalculateDPSMove2(pokemon)).ToString()}", dumpFileName);
                 }
             }
             await Task.Delay(500);
         }
-    }
+		
+		   }
 }
