@@ -165,7 +165,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 attemptCounter++;
 
-                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
+                await DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
@@ -231,7 +231,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
-            session.EventDispatcher.Send(new UseBerryEvent {Count = berry.Count});
+            session.EventDispatcher.Send(new UseBerryEvent { Count = berry.Count });
         }
     }
 }
