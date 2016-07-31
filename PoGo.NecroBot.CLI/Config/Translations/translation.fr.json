@@ -317,6 +317,10 @@
       "Value": "{0} ({1}) a été renommé de {2} en {3}."
     },
     {
+      "Key": "pokemonFavorite",
+      "Value": "{0}%IV {1} (CP {2}) *Favoris*."
+    },
+    {
       "Key": "pokemonIgnoreFilter",
       "Value": "[Pokémon-Ignore-Filter] - {0} ignoré comme défini dans les options !"
     },
@@ -396,7 +400,7 @@
       "Key": "snipeScan",
       "Value": "[Sniper] Scan en cours sur {0}..."
     },
-	{
+    {
       "Key": "snipeScanEx",
       "Value": "[Sniper] Scan de {0} avec {1} IV à {2}..."
     },
@@ -404,7 +408,7 @@
       "Key": "noPokemonToSnipe",
       "Value": "[Sniper] Echec du scan. Aucun pokémon trouvé."
     },
-	{
+    {
       "Key": "notEnoughPokeballsToSnipe",
       "Value": "Pas assez de Pokeballs pour commencer un snipping! ({0}/{1})"
     },
@@ -415,10 +419,50 @@
     {
       "Key": "displayHighestMove2Header",
       "Value": "Attaque 2"
-    }
+    },
     {
       "Key": "DisplayHighestCandy",
       "Value": "Bonbons"
+    },
+    {
+      "Key": "IPBannedError",
+      "Value": "Connexion refusée. Votre IP a sans doute été bloquée par Niantic. Arrêt en cours..."
+    },
+    {
+      "Key": "NoEggsAvailable",
+      "Value": "Aucun oeuf de disponible"
+    },
+    {
+      "Key": "UseLuckyEggActive",
+      "Value": "Oeuf Chance déjà activé"
+    },
+    {
+      "Key": "NoIncenseAvailable",
+      "Value": "Aucun encens de disponible"
+    },
+    {
+      "Key": "UseIncenseActive",
+      "Value": "Encens déjà activé"
+    },
+    {
+      "Key": "AmountPkmSeenCaught",
+      "Value": "Total de pokémon vu : {}/151, Total de pokémon capturé : {}/151"
+    },
+    {
+      "Key": "EventEvolveCount",
+      "Value": "[Evolution] Total envisageable : {}"
+    },
+    {
+      "Key": "PkmNotEnoughRessources",
+      "Value": "Echec. Ressources insuffisantes pour évoluer le pokémon"
+    },
+    {
+       "Key": "eventUseBerry",
+       "Value": "{0} utilisé, {1} restant"
+    },
+    {
+       "Key": "itemRazzBerry", 
+       "Value": "Baie Framby"
     }
   ]
 }
