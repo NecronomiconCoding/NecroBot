@@ -370,6 +370,7 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPokebalsToKeep = 120;
         public int TotalAmountOfPotionsToKeep = 80;
         public int TotalAmountOfRevivesToKeep = 60;
+        public bool SkipPokeStopHit = false;
         public bool TransferConfigAndAuthOnUpdate = true;
         public bool TransferDuplicatePokemon = true;
         public string TranslationLanguageCode = "en";
@@ -632,5 +633,6 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
+        public bool SkipPokeStopHit => _settings.SkipPokeStopHit;
     }
 }

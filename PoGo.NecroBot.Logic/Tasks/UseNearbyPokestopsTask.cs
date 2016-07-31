@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Collections.Generic;
@@ -68,7 +68,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         }
 
 
-        private static async Task<List<FortData>> GetPokeStops(ISession session)
+        public static async Task<List<FortData>> GetPokeStops(ISession session)
         {
             var mapObjects = await session.Client.Map.GetMapObjects();
 
@@ -86,6 +86,53 @@ namespace PoGo.NecroBot.Logic.Tasks
                 );
 
             return pokeStops.ToList();
+        }
+
+
+        public static async Task<List<FortData>> GetPokeStopsNoGPX(ISession session)
+        {
+            var mapObjects = await session.Client.Map.GetMapObjects();
+
+            // Wasn't sure how to make this pretty. Edit as needed.
+            var pokeStops =
+                pathByNearestNeighbour(
+                mapObjects.MapCells.SelectMany(i => i.Forts)
+                .Where(
+                    i =>
+                        i.Type == FortType.Checkpoint &&
+                        i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
+                            (session.LogicSettings.MaxTravelDistanceInMeters == 0 ||
+                            LocationUtils.CalculateDistanceInMeters(
+                                session.Client.CurrentLatitude, session.Client.CurrentLongitude,
+                                i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters))
+                .ToArray());
+
+            return pokeStops.ToList();
+        }
+
+        private static FortData[] pathByNearestNeighbour(FortData[] pokeStops)
+        {
+            for (var i = 1; i < pokeStops.Length - 1; i++)
+            {
+                var closest = i + 1;
+                var cloestDist = LocationUtils.CalculateDistanceInMeters(pokeStops[i].Latitude, pokeStops[i].Longitude, pokeStops[closest].Latitude, pokeStops[closest].Longitude);
+                for (var j = closest; j < pokeStops.Length; j++)
+                {
+                    var initialDist = cloestDist;
+                    var newDist = LocationUtils.CalculateDistanceInMeters(pokeStops[i].Latitude, pokeStops[i].Longitude, pokeStops[j].Latitude, pokeStops[j].Longitude);
+                    if (initialDist > newDist)
+                    {
+                        cloestDist = newDist;
+                        closest = j;
+                    }
+
+                }
+                var tmpPok = pokeStops[closest];
+                pokeStops[closest] = pokeStops[i + 1];
+                pokeStops[i + 1] = tmpPok;
+            }
+
+            return pokeStops;
         }
     }
 }
