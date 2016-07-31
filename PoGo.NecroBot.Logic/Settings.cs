@@ -496,7 +496,11 @@ namespace PoGo.NecroBot.Logic
         public string GoogleUsername => _settings.Auth.GoogleUsername;
         public string GooglePassword => _settings.Auth.GooglePassword;
 
-
+        public string GoogleRefreshToken
+        {
+            get { return null; }
+            set { GoogleRefreshToken = null; }
+        }
         AuthType ISettings.AuthType
         {
             get { return _settings.Auth.AuthType; }
