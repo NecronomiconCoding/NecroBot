@@ -193,6 +193,9 @@
     <None Include="Config\Translations\translation.et.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Config\Translations\translation.hu.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Config\Translations\translation.sv.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

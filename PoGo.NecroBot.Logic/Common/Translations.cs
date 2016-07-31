@@ -57,6 +57,7 @@ namespace PoGo.NecroBot.Logic.Common
         LogEntryInfo,
         LogEntryPokestop,
         LogEntryFarming,
+        LogEntrySniper,
         LogEntryRecycling,
         LogEntryPkmn,
         LogEntryTransfered,
@@ -87,6 +88,7 @@ namespace PoGo.NecroBot.Logic.Common
         PokemonSkipped,
         ZeroPokeballInv,
         CurrentPokeballInv,
+        RecyclingQuietly,
         CheckingForBallsToRecycle,
         CheckingForPotionsToRecycle,
         CheckingForRevivesToRecycle,
@@ -127,7 +129,8 @@ namespace PoGo.NecroBot.Logic.Common
         NoPokemonToSnipe,
         NotEnoughPokeballsToSnipe,
         DisplayHighestMove1Header,
-        DisplayHighestMove2Header
+        DisplayHighestMove2Header,
+        DisplayHighestCandy
     }
 
     public class Translation : ITranslation
@@ -198,6 +201,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryInfo, "INFO"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryPokestop, "POKESTOP"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryFarming, "FARMING"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LogEntrySniper, "SNIPER"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryRecycling, "RECYCLING"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryPkmn, "PKMN"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryTransfered, "TRANSFERED"),
@@ -249,6 +253,7 @@ namespace PoGo.NecroBot.Logic.Common
                 "You have no pokeballs in your inventory, no more Pokemon can be caught!"),
             new KeyValuePair<TranslationString, string>(TranslationString.CurrentPokeballInv,
                 "[Current Inventory] Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.RecyclingQuietly, "Recycling Quietly..."),
             new KeyValuePair<TranslationString, string>(TranslationString.CheckingForBallsToRecycle,
                 "Checking for balls to recycle, keeping {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CheckingForPotionsToRecycle,
@@ -306,15 +311,16 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.MissingCredentialsPtc,
                 "You need to fill out PtcUsername and PtcPassword in auth.json!"),
             new KeyValuePair<TranslationString, string>(TranslationString.SnipeScan,
-                "[Sniper] Scanning for Snipeable Pokemon at {0}..."),
+                "Scanning for Snipeable Pokemon at {0}..."),
             new KeyValuePair<TranslationString, string>(TranslationString.SnipeScanEx,
-                "[Sniper] Sniping a {0} with {1} IV at {2}..."),
+                "Sniping a {0} with {1} IV at {2}..."),
             new KeyValuePair<TranslationString, string>(TranslationString.NoPokemonToSnipe,
-                "[Sniper] No Pokemon found to snipe!"),
+                "No Pokemon found to snipe!"),
             new KeyValuePair<TranslationString, string>(TranslationString.NotEnoughPokeballsToSnipe,
                 "Not enough Pokeballs to start sniping! ({0}/{1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
-            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2")
+            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2"),
+            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy")
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)
