@@ -20,9 +20,9 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler
             {
                 _registerdHandlers.Add(actionName,action);
             }
-            catch(Exception ex)
+            catch
             {
-                // todo
+                // ignore
             } 
         }
 

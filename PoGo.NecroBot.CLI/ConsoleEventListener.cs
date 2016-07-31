@@ -191,7 +191,7 @@ namespace PoGo.NecroBot.CLI
                     $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}")
                 : session.Translation.GetTranslation(TranslationString.SnipeScanEx, evt.PokemonId,
                     evt.Iv > 0 ? evt.Iv.ToString(CultureInfo.InvariantCulture) : "unknown",
-                    $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"));
+                    $"{evt.Bounds.Latitude},{evt.Bounds.Longitude}"), LogLevel.Sniper);
         }
 
         public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession session)
