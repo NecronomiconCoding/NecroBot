@@ -232,6 +232,11 @@ namespace PoGo.NecroBot.CLI
                     LogLevel.Info, ConsoleColor.Yellow);
         }
 
+        public void HandleEvent( EvolveCountEvent evt, ISession session )
+        {
+            Logger.Write( "[Evolves] Potential Evolves: " + evt.Evolves, LogLevel.Update, ConsoleColor.White );
+        }
+
         public void HandleEvent(UpdateEvent evt, ISession session)
         {
             Logger.Write(evt.ToString(), LogLevel.Update);
