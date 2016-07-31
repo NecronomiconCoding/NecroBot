@@ -243,18 +243,18 @@ namespace PoGo.NecroBot.Logic
             //PokemonId.Kangaskhan,
             //PokemonId.MrMime,
             //PokemonId.Tauros,
-            //PokemonId.Gyarados,
+            PokemonId.Gyarados,
             //PokemonId.Lapras,
             PokemonId.Ditto,
             //PokemonId.Vaporeon,
             //PokemonId.Jolteon,
             //PokemonId.Flareon,
             //PokemonId.Porygon,
-            //PokemonId.Snorlax,
+            PokemonId.Snorlax,
             PokemonId.Articuno,
             PokemonId.Zapdos,
             PokemonId.Moltres,
-            //PokemonId.Dragonite,
+            PokemonId.Dragonite,
             PokemonId.Mewtwo,
             PokemonId.Mew
         };
@@ -473,17 +473,17 @@ namespace PoGo.NecroBot.Logic
                 settings = new GlobalSettings();
             }
 
-            if (settings.DefaultAltitude <= 0)
+            if (settings.DefaultAltitude == 0)
             {
                 settings.DefaultAltitude = Default.DefaultAltitude;
             }
 
-            if (settings.DefaultLatitude <= 0)
+            if (settings.DefaultLatitude == 0)
             {
                 settings.DefaultLatitude = Default.DefaultLatitude;
             }
 
-            if (settings.DefaultLongitude <= 0)
+            if (settings.DefaultLongitude == 0)
             {
                 settings.DefaultLongitude = Default.DefaultLongitude;
             }

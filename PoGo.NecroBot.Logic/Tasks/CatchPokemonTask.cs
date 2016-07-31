@@ -231,7 +231,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
-            session.EventDispatcher.Send(new UseBerryEvent {Count = berry.Count});
+            session.EventDispatcher.Send(new UseBerryEvent {BerryType = ItemId.ItemRazzBerry, Count = berry.Count});
         }
     }
 }
