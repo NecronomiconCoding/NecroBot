@@ -224,6 +224,14 @@ namespace PoGo.NecroBot.Logic
                 .Where(p => p != null);
         }
 
+        public async Task<int> GetTotalItemCount()
+        {
+            var myItems = (await GetItems()).ToList();
+            int myItemCount = 0;
+            foreach (var myItem in myItems) myItemCount += myItem.Count;
+            return myItemCount;
+        }
+
         public async Task<IEnumerable<ItemData>> GetItemsToRecycle(ISession session)
         {
             var itemsToRecylce = new List<ItemData>();

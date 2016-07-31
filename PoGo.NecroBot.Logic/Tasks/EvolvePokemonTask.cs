@@ -42,6 +42,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     else
                     {
                         // Wait until we have enough pokemon
+                        session.EventDispatcher.Send(new NoticeEvent()
+                        {
+                            Message = $"Not enough Pokemons to trigger a lucky  egg. Waiting for {session.LogicSettings.UseLuckyEggsMinPokemonAmount - pokemonToEvolve.Count} more ({ pokemonToEvolve.Count}/{session.LogicSettings.UseLuckyEggsMinPokemonAmount})"
+                        });
                         return;
                     }
                 }
