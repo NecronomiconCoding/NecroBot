@@ -10,6 +10,9 @@ using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
+using System.ComponentModel;
+using System.Reflection;
+using System.Collections;
 
 #endregion
 
@@ -95,6 +98,8 @@ namespace PoGo.NecroBot.Logic
 
     public class GlobalSettings
     {
+
+        
         public int AmountOfPokemonToDisplayOnStart = 10;
 
         [JsonIgnore] internal AuthSettings Auth = new AuthSettings();
@@ -422,6 +427,27 @@ namespace PoGo.NecroBot.Logic
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
                     settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+
+                    // One day we might be able to better do this so its automatic
+                    /*
+                    FieldInfo[] fi = typeof(GlobalSettings).GetFields(BindingFlags.Public | BindingFlags.Instance);
+                    foreach (FieldInfo info in fi)
+                    {
+                        if (info.GetValue(Default) is int || info.GetValue(Default) is bool ||
+                            info.GetValue(Default) is float)
+                        {
+                            
+                        }
+                        if (info.GetValue(Default) is double)
+                        {
+                            Logger.Write($"{info.Name}={info.GetValue(Default)}", LogLevel.Error);
+
+                            Type type = settings.GetType();
+                            PropertyInfo propertyInfo = type.GetProperty(info.Name, BindingFlags.Instance | BindingFlags.Public);
+                            propertyInfo.SetValue(settings, info.GetValue(Default));
+                        }
+                    }
+                    */
                 }
                 catch (JsonReaderException exception)
                 {
@@ -432,6 +458,21 @@ namespace PoGo.NecroBot.Logic
             else
             {
                 settings = new GlobalSettings();
+            }
+
+            if (settings.DefaultAltitude <= 0)
+            {
+                settings.DefaultAltitude = Default.DefaultAltitude;
+            }
+
+            if (settings.DefaultLatitude <= 0)
+            {
+                settings.DefaultLatitude = Default.DefaultLatitude;
+            }
+
+            if (settings.DefaultLongitude <= 0)
+            {
+                settings.DefaultLongitude = Default.DefaultLongitude;
             }
 
             if (settings.WebSocketPort == 0)
@@ -452,6 +493,21 @@ namespace PoGo.NecroBot.Logic
             if (settings.SnipeLocationServer == null)
             {
                 settings.SnipeLocationServer = Default.SnipeLocationServer;
+            }
+
+            if (settings.SnipingScanOffset <= 0)
+            {
+                settings.SnipingScanOffset = Default.SnipingScanOffset;
+            }
+
+            if (settings.RecycleInventoryAtUsagePercentage <= 0)
+            {
+                settings.RecycleInventoryAtUsagePercentage = Default.RecycleInventoryAtUsagePercentage;
+            }
+
+            if (settings.WalkingSpeedInKilometerPerHour <= 0)
+            {
+                settings.WalkingSpeedInKilometerPerHour = Default.WalkingSpeedInKilometerPerHour;
             }
 
             settings.ProfilePath = profilePath;

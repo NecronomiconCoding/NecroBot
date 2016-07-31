@@ -308,7 +308,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var offset = session.LogicSettings.SnipingScanOffset;
             // 0.003 = half a mile; maximum 0.06 is 10 miles
-            if (offset<0.001 || offset>0.06) offset=0.003;
+            if (offset<0.001) offset=0.003;
+            if (offset>0.06) offset = 0.06;
 
             var bound_lower_left_lat = location.Latitude - offset;
             var bound_lower_left_lng = location.Longitude - offset;
