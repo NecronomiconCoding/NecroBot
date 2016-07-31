@@ -91,6 +91,9 @@ namespace PoGo.NecroBot.CLI
                 case "EggsList":
                     await EggsListTask.Execute(_session);
                     break;
+                case "InventoryList":
+                    await InventoryListTask.Execute(_session);
+                    break;
             }
 
             // Setup to only send data back to the session that requested it. 
