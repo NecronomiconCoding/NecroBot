@@ -24,7 +24,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 return;
 
             if (!session.LogicSettings.VerboseRecycling)
-                Logger.Write(session.Translation.GetTranslation(TranslationString.RecyclingQuietly));
+                Logger.Write(session.Translation.GetTranslation(TranslationString.RecyclingQuietly), LogLevel.Recycling);
 
             var items = await session.Inventory.GetItemsToRecycle(session);
 
