@@ -30,11 +30,11 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "PX: {0}, Gemas: {1}, Objetos: {2}"
+      "Value": "Nombre: {0} PX: {1}, Gemas: {2}, Objetos: {3}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "El avance falló, posible SoftBan. Eliminar SoftBan en: {0}/{1}"
+      "Value": "Nombre: {0} INFO: El avance falló, posible SoftBan. Eliminar SoftBan en: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -70,11 +70,11 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "¡Sin Pokéballs! - Hemos perdido un {0} con {1} PC :("
+      "Value": "¡Sin Poké Balls! - Hemos perdido un {0} con {1} PC :("
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} Intento #{1}"
+      "Value": "{0} | Intentos #{1}"
     },
     {
       "Key": "catchStatus",
@@ -125,13 +125,12 @@
       "Value": "Añadiendo huevo a la incubadora: {0:0.00}km restantes"
     },
     {
-      "Key": "incubatorStatus
-        ",
+      "Key": "incubatorStatusUpdate",
       "Value": "Actualizando el estado de la incubadora: {0:0.00}km restantes"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Huevo incubado ha eclosionado: {0}"
+      "Value": "Huevo incubado ha eclosionado: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -246,6 +245,10 @@
       "Value": "Terminada la desempaquetación de los archivos..."
     },
     {
+      "Key": "finishedTransferringConfig",
+      "Value": "Terminado de transferir su configuración a la nueva versión..."
+    },
+    {
       "Key": "updateFinished",
       "Value": "Actualización terminada, puede cerrar esta ventana ahora."
     },
@@ -264,6 +267,38 @@
     {
       "Key": "pokemonSkipped",
       "Value": "Omitido {0}"
+    },
+    {
+      "Key": "zeroPokeballInv",
+      "Value": "No tienes Poké Ball en el inventario, no podemos atrapar más Pokemon por ahora :("
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "[Inventario actual] Poké Balls: {0} | Super Balls: {1} | Ultra Balls: {2} | Master Balls: {3}"
+    },
+    {
+      "Key": "checkingForBallsToRecycle",
+      "Value": "Comprobación de las bolas a reciclar, manteniendo {0}"
+    },
+    {
+      "Key": "checkingForPotionsToRecycle",
+      "Value": "Comprobación de las pociones a reciclar, manteniendo {0}"
+    },
+    {
+      "Key": "checkingForRevivesToRecycle",
+      "Value": "Comprobación de los revivir a reciclar, manteniendo {0}"
+    },
+    {
+      "Key": "pokeballsToKeepIncorrect",
+      "Value": "TotalAmountOfPokebalsToKeep está configurado incorrectamente. El número es más pequeño que 1."
+    },
+    {
+      "Key": "potionsToKeepIncorrect",
+      "Value": "TotalAmountOfPotionsToKeep está configurado incorrectamente. El número es más pequeño que 1."
+    },
+    {
+      "Key": "revivesToKeepIncorrect",
+      "Value": "TotalAmountOfRevivesToKeep está configurado incorrectamente. El número es más pequeño que 1."
     },
     {
       "Key": "invFullTransferring",
@@ -339,7 +374,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Activo {1} - Nivel: {2} | EXP/H: {3:0} | P/H: {4:0} | P.Estelar: {5:0} | Transferido: {6:0} | Reciclado: {7:0}"
+      "Value": "{0} - Activo {1} - Nivel: {2} | EXP/H: {3:n0} | P/H: {4:n0} | P.Estelar: {5:n0} | Transferido: {6:n0} | Reciclado: {7:n0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -374,8 +409,24 @@
       "Value": "[Sniper] Escaneando en busca de Pokemons en {0}..."
     },
     {
+      "Key": "snipeScanEx",
+      "Value": "[Sniper] Sniping a {0} con {1} IV en {2}..."
+    },
+    {
       "Key": "noPokemonToSnipe",
       "Value": "[Sniper] No se encontraron Pokemons :("
+    },
+    {
+      "Key": "notEnoughPokeballsToSnipe",
+      "Value": "No hay suficientes Poké Balls para iniciar Sniping! ({0}/{1})"
+    },
+    {
+      "Key": "displayHighestMove1Header",
+      "Value": "ATAQUE1"
+    },
+    {
+      "Key": "displayHighestMove2Header",
+      "Value": "ATAQUE2"
     }
   ]
 }

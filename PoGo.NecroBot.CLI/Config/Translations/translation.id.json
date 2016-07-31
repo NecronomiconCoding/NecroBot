@@ -22,7 +22,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Kamu di luar dari radius yang kamu tentukan! Jalan ke tempat awal (sekitar {0}m) dalam 5 detik. Apakah file Coords.ini kamu benar?"
+      "Value":
+        "Kamu di luar dari radius yang kamu tentukan! Jalan ke tempat awal (sekitar {0}m) dalam 5 detik. Apakah file Coords.ini kamu benar?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -66,11 +67,12 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8}m | dengan sebuah {9} (tersisa {10}). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8}m | dengan sebuah {9} (tersisa {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Pokeballs habis - {0} dengan CP {1} tidak dapat ditangkap"
+      "Value": "Pokeball habis - {0} dengan CP {1} tidak dapat ditangkap"
     },
     {
       "Key": "catchStatusAttempt",
@@ -166,7 +168,7 @@
     },
     {
       "Key": "logEntryEvolved",
-      "Value": "EVOLVED"
+      "Value": "EVOLUSI"
     },
     {
       "Key": "logEntryBerry",
@@ -174,7 +176,7 @@
     },
     {
       "Key": "logEntryEgg",
-      "Value": "EGG"
+      "Value": "TELUR"
     },
     {
       "Key": "logEntryDebug",
@@ -182,15 +184,15 @@
     },
     {
       "Key": "logEntryUpdate",
-      "Value": "UPDATE"
+      "Value": "PEMBARUAN"
     },
     {
       "Key": "loggingIn",
-      "Value": "Masuk menggunakan {0}"
+      "Value": "Masuk sebagai {0}"
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC Server mungkin sedang mati atau credensial anda salah. Coba google"
+      "Value": "Server PTC mungkin sedang turun ATAU kredensial anda salah. Coba google"
     },
     {
       "Key": "tryingAgainIn",
@@ -206,11 +208,11 @@
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Tidak dapat copy ke clipboard, lakukan secara manual"
+      "Value": "Tidak dapat mengcopy ke clipboard, lakukan secara manual"
     },
     {
       "Key": "couldntCopyToClipboard2",
-      "Value": "Ke: {0} & masukkan {1}"
+      "Value": "Pergi ke: {0} & masukkan {1}"
     },
     {
       "Key": "realisticTravelDetected",
@@ -218,19 +220,19 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Bukan Perjalanan Realistis di {0}, menggunakan Coords.ini yang terakhir disimpan."
+      "Value": "Bukan Perjalanan Realistis {0}, menggunakan Coords.ini yang terakhir disimpan"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinat di file \"Coords.ini\" cacat, menggunakan koordinat default."
+      "Value": "Koordinat di file \"Coords.ini\" cacat, menggunakan koordinat default"
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Sempurna! Anda telah mempunyai Versi terbaru  {0}"
+      "Value": "Sempurna! Anda telah mempunyai Versi terbaru {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "AutoUpdater dimatikan. Dapatkan release terbaru dari: {0}\n "
+      "Value": "AutoUpdater dimatikan. Dapatkan release terakhir dari : {0}\n "
     },
     {
       "Key": "downloadingUpdate",
@@ -270,7 +272,8 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "PokemonInventori penuh. Mohon Transfer pokemon secara manual atau set TransferDuplicatePokemon menjadi true di setting..."
+      "Value":
+        "PokemonInventori penuh. Mohon Transfer pokemon secara manual atau set TransferDuplicatePokemon menjadi true di setting..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -298,27 +301,27 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "UsahaMenangkap"
+      "Value": "Status Tangkapan"
     },
     {
       "Key": "catchStatusError",
-      "Value": "TangkapanError"
+      "Value": "Tangkapan Error"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "TangkapanLari"
+      "Value": "Tangkapan Lari"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "TangkapanKabur"
+      "Value": "Tangkapan Kabur"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "GagalMenangkap"
+      "Value": "Gagal Menangkap"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "BerhasilMenangkap"
+      "Value": "Berhasil Menangkap"
     },
     {
       "Key": "catchTypeNormal",
@@ -338,7 +341,8 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Waktu aktif {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Ditransfer: {6:0} | Didaur ulang: {7:0}"
+      "Value":
+        "{0} - Waktu aktif {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Ditransfer: {6:0} | Didaur ulang: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",

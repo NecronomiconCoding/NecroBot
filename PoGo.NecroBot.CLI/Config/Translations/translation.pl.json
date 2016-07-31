@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepszy CP: {3}  IV: {4}%] (Cukierki: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepsze CP: {3}  IV: {4}%] (Cukierki: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -66,15 +66,15 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Poziom: {3} CP: ({4}/{5}) IV: {6}% | Szansa: {7}% | odległy o {8}m | przy użyciu {9} ({10} pozostało). | {11}"
+      "Value": "({0}) | ({1}) {2} Poziom: {3} CP: ({4}/{5}) IV: {6}% | Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Brak Pokeballi - Uciekł nam {0} z CP {1}"
+      "Value": "Brak Pokeballi - Uciekł {0} z CP {1}"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} Próba #{1}"
+      "Value": "{0} - Próba #{1}"
     },
     {
       "Key": "catchStatus",
@@ -86,7 +86,7 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Niepowodzenie przetwarzania pliku GPX, próbuję ominąć ten krok."
+      "Value": "Przetwarzanie pliku GPX zakończone niepowodzeniem, próbuję ominąć ten krok."
     },
     {
       "Key": "displayHighestsHeader",
@@ -110,7 +110,7 @@
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Najwyższy Poziom doskonałości"
+      "Value": "Najwyższy Poziom Doskonałości"
     },
     {
       "Key": "displayHighestsLevelHeader",
@@ -186,7 +186,7 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "Logowanie się używając {0}"
+      "Value": "Logowanie się przy użyciu konta {0}"
     },
     {
       "Key": "ptcOffline",
@@ -198,7 +198,7 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Konto niezweryfikowane, zamykam..."
+      "Value": "Konto niezweryfikowane, zamykam program..."
     },
     {
       "Key": "openingGoogleDevicePage",
@@ -214,7 +214,7 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Wykryto realistyczne podróżowanie , przy użyciu UserSettings.settings"
+      "Value": "Wykryto realistyczne podróżowanie, przy użyciu UserSettings.settings"
     },
     {
       "Key": "notRealisticTravel",
@@ -270,11 +270,11 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Inwentarz jest pełny. Proszę ręcznie przesłać Pokemony albo ustawić TransferDuplicatePokemon na true w ustawieniach..."
+      "Value": "Inwentarz jest pełny. Proszę ręcznie przesłać Pokemony albo w ustawieniach mienić wartość TransferDuplicatePokemon na true..."
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Inwentarz jest pełny, nie zebrałem przedmiotów!"
+      "Value": "Inwentarz jest pełny, nie zebrano przedmiotów!"
     },
     {
       "Key": "encounterProblem",
@@ -338,11 +338,11 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Czas działania {1} - Poziom: {2} | XP / godzinę: {3:0} | Pokemony / godzinę: {4:0} | Stardust: {5:0} | Przesłano: {6:0} | Usunięto: {7:0}"
+      "Value": "{0} - Czas działania {1} - Poziom: {2} | XP na godzinę: {3:0} | Pokemony na godzinę: {4:0} | Stardust: {5:0} | Przesłano: {6:0} | Usunięto: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (następny poziom za {1}h {2}m | {3}/{4} XP)"
+      "Value": "{0} (następny poziom za {1}h {2}m) | {3}/{4} XP)"
     },
     {
       "Key": "requireInputText",
@@ -350,7 +350,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Jako, że masz podwójną weryfikacje konta Google, będziesz musial wstawić hasło aplikacji do auth.json"
+      "Value": "Na twoim koncie Google aktywna jest weryfikacja dwuetapowa, będziesz musial wstawić hasło do aplikacji w \"auth.json\" "
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -362,11 +362,11 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Proszę wypełnić GoogleUsername oraz GooglePassword w auth.json!"
+      "Value": "Proszę wypełnić GoogleUsername oraz GooglePassword w \"auth.json\" "
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Proszę wypełnić PtcUsername oraz PtcPassword w auth.json!"
+      "Value": "Proszę wypełnić PtcUsername oraz PtcPassword w \"auth.json\" "
     },
     {
       "Key": "snipeScan",

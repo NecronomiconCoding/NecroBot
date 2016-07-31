@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
@@ -32,7 +33,9 @@ namespace PoGo.NecroBot.Logic.State
                     case AuthType.Ptc:
                         try
                         {
-                            await session.Client.Login.DoPtcLogin(session.Settings.PtcUsername, session.Settings.PtcPassword);
+                            await
+                                session.Client.Login.DoPtcLogin(session.Settings.PtcUsername,
+                                    session.Settings.PtcPassword);
                         }
                         catch (AggregateException ae)
                         {
@@ -40,10 +43,15 @@ namespace PoGo.NecroBot.Logic.State
                         }
                         break;
                     case AuthType.Google:
-                        await session.Client.Login.DoGoogleLogin(session.Settings.GoogleUsername, session.Settings.GooglePassword);
+                        await
+                            session.Client.Login.DoGoogleLogin(session.Settings.GoogleUsername,
+                                session.Settings.GooglePassword);
                         break;
                     default:
-                        session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(Common.TranslationString.WrongAuthType) });
+                        session.EventDispatcher.Send(new ErrorEvent
+                        {
+                            Message = session.Translation.GetTranslation(TranslationString.WrongAuthType)
+                        });
                         return null;
                 }
             }
@@ -53,34 +61,65 @@ namespace PoGo.NecroBot.Logic.State
                 {
                     Message = session.Translation.GetTranslation(TranslationString.PtcOffline)
                 });
-                session.EventDispatcher.Send(new NoticeEvent { Message = session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20) });
-                await Task.Delay(20000);
+                session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20)
+                });
+                await Task.Delay(20000, cancellationToken);
+                return this;
+            }
+            catch (AccessTokenExpiredException)
+            {
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.PtcOffline) // use ptcoffline for now.
+                });
+                session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20)
+                });
+                await Task.Delay(20000, cancellationToken);
                 return this;
             }
             catch (AccountNotVerifiedException)
             {
-                session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.AccountNotVerified) });
-                await Task.Delay(2000);
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.AccountNotVerified)
+                });
+                await Task.Delay(2000, cancellationToken);
                 Environment.Exit(0);
             }
             catch (GoogleException e)
             {
                 if (e.Message.Contains("NeedsBrowser"))
                 {
-                    session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleTwoFactorAuth) });
-                    session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleTwoFactorAuthExplanation) });
+                    session.EventDispatcher.Send(new ErrorEvent
+                    {
+                        Message = session.Translation.GetTranslation(TranslationString.GoogleTwoFactorAuth)
+                    });
+                    session.EventDispatcher.Send(new ErrorEvent
+                    {
+                        Message = session.Translation.GetTranslation(TranslationString.GoogleTwoFactorAuthExplanation)
+                    });
                     await Task.Delay(7000, cancellationToken);
                     try
                     {
-                        System.Diagnostics.Process.Start("https://security.google.com/settings/security/apppasswords");
+                        Process.Start("https://security.google.com/settings/security/apppasswords");
                     }
                     catch (Exception)
                     {
-                        session.EventDispatcher.Send(new ErrorEvent { Message = "https://security.google.com/settings/security/apppasswords" });
+                        session.EventDispatcher.Send(new ErrorEvent
+                        {
+                            Message = "https://security.google.com/settings/security/apppasswords"
+                        });
                         throw;
                     }
                 }
-                session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.GoogleError) });
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.GoogleError)
+                });
                 await Task.Delay(2000, cancellationToken);
                 Environment.Exit(0);
             }
@@ -95,7 +134,7 @@ namespace PoGo.NecroBot.Logic.State
             cancellationToken.ThrowIfCancellationRequested();
 
             if (session.Settings.AuthType == AuthType.Google &&
-                            (session.Settings.GoogleUsername == null || session.Settings.GooglePassword == null))
+                (session.Settings.GoogleUsername == null || session.Settings.GooglePassword == null))
             {
                 session.EventDispatcher.Send(new ErrorEvent
                 {
@@ -119,7 +158,7 @@ namespace PoGo.NecroBot.Logic.State
         public async Task DownloadProfile(ISession session)
         {
             session.Profile = await session.Client.Player.GetPlayer();
-            session.EventDispatcher.Send(new ProfileEvent { Profile = session.Profile });
+            session.EventDispatcher.Send(new ProfileEvent {Profile = session.Profile});
         }
     }
 }

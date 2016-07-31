@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,7 +22,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file Coords.ini e' corretto?"
+      "Value":
+        "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file Coords.ini e' corretto?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -66,7 +67,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Probabilita': {7}% | distanza {8}m | con una {9} ({10} rimanenti). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Probabilita': {7}% | distanza {8}m | con una {9} ({10} rimanenti). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -157,7 +159,7 @@
       "Value": "RICICLO"
     },
     {
-      "Key": "logEntryPKMN",
+      "Key": "logEntryPkmn",
       "Value": "PKMN"
     },
     {
@@ -274,9 +276,10 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Inventario Pokemon pieno. Trasferisci i Pokemon manualmente o setta TransferDuplicatePokemon su 'true' nelle impostazioni..."
+      "Value":
+        "Inventario Pokemon pieno. Trasferisci i Pokemon manualmente o setta TransferDuplicatePokemon su 'true' nelle impostazioni..."
     },
-{
+    {
       "Key": "invFullPokestopLooting",
       "Value": "Inventario pieno, nessun oggetto raccolto!"
     },
@@ -342,7 +345,8 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Tempo di Esecuzione {1} - Lvl: {2} | PE/H: {3:0} | PKMN/H: {4:0} | Polvere di Stella: {5:0} | Trasferiti: {6:0} | Riciclati: {7:0}"
+      "Value":
+        "{0} - Tempo di Esecuzione {1} - Lvl: {2} | PE/H: {3:0} | PKMN/H: {4:0} | Polvere di Stella: {5:0} | Trasferiti: {6:0} | Riciclati: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -354,7 +358,8 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Dato che hai la Verifica in Due Passaggi di Google attivata, devi inserire una Password Specifica per l'App nel file auth.json "
+      "Value":
+        "Dato che hai la Verifica in Due Passaggi di Google attivata, devi inserire una Password Specifica per l'App nel file auth.json "
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -374,11 +379,23 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Sniper] Scanning for Snipeable Pokemon at {0}..."
+      "Value": "[Sniper] Scansione Pokémon per lo snipe a {0}.."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] No Pokemon found to snipe!"
+      "Value": "[Sniper] Nessun Pokémon trovato per lo snipe!"
+    },
+    {
+      "Key": "DisplayHighestMove1Header",
+      "Value": "Mossa1"
+    },
+    {
+      "Key": "DisplayHighestMove2Header",
+      "Value": "Mossa2"
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Sniper] Nessun Pokémon trovato per lo snipe!"
     }
   ]
 }

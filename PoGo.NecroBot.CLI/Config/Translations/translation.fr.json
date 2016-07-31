@@ -18,23 +18,27 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Type d'authentification inconnu dans le fichier config.json"
+      "Value": "Vérifiez le champs AuthType dans auth.json"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Vous êtes en dehors de votre rayon défini! Début de la marche ({0}m de distance) dans 5 secondes. Est-ce que le fichier Coords.ini est correct?"
+      "Value": "Vous êtes en dehors de votre rayon défini! Début de la marche ({0}m de distance) dans 5 secondes."
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Aucun PokeStop trouvé dans votre zone. Est-ce que votre distance maximale est trop petite?"
+      "Value": "Impossible de trouver un PokeStop. Modifiez la valeur de MaxTravelDistanceInMeters dans config.json"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "XP: {0}, Gems: {1}, Objets: {2}"
+      "Value": "Nom : {0} | {1}XP, Gems : {2}, Objets : {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Collecte/Capture impossible, tentative dans : {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} à ({1}m)"
+      "Value": "Arrivée au Pokestop : {0} dans ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
@@ -42,35 +46,35 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Utilisation d'un Oeuf Chance, restant(s): {0}"
+      "Value": "Utilisation d'un Oeuf Chance, temps restant : {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} avec succès pour {1} XP"
+      "Value": "{0} +{1}XP"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "{0} Échouée. Le résultat était {1}, arrêt de l'évolution {2}"
+      "Value": "{0} Echec. Le résultat était {1}, arrêt de l'évolution {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- PC: {1}  IV: {2}%   [Meilleur PC: {3}  IV: {4}%] (Bonbons: {5})"
+      "Value": "{0}\t- PC: {1} - IV: {2}%   [Maximum PC:{3} IV: {4}%] ({5} Bonbons)"
     },
     {
       "Key": "eventItemRecycled",
-      "Value": "{0}x {1}"
+      "Value": "{1} x{0}"
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} restante(s)). | {11}"
+      "Value": "({0}) | ({1}) {2} Lv {3} {6} ({4}/{5}) | {7}% Chance sur {8}m | {10} {9} restant, {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Pas de Pokeball - {0} Manqué avec {1} PC"
+      "Value": "Plus de Pokeball - {0} PC{1} manqué"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} Essai #{1}"
+      "Value": #{1} - {0}"
     },
     {
       "Key": "catchStatus",
@@ -78,11 +82,11 @@
     },
     {
       "Key": "candies",
-      "Value": "Bonbons: {0}"
+      "Value": "{0}Bonbons"
     },
     {
       "Key": "unhandledGPXData",
-      "Value": "Données non gérées dans le fichier GPX, ignorées.."
+      "Value": "Données non gérées dans le fichier GPX, ignorées."
     },
     {
       "Key": "displayHighestsHeader",
@@ -90,39 +94,43 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "parfait"
+      "Value": "IV"
     },
     {
       "Key": "commonWordName",
       "Value": "Nom"
     },
     {
+      "Key": "commonWordUnknown",
+      "Value": "Inconnu"
+    },
+    {
       "Key": "displayHighestsCPHeader",
-      "Value": "Montrer Meilleurs PC"
+      "Value": "Classement par PC"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Montrer Meilleurs Parfaits"
+      "Value": "Classement par IV"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Montrer Meilleurs Level"
+      "Value": "Classement par Level"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Assuez-vous que la Lat & la Lng de départ sont correctes. Fermez le programme si ça ne l'est pas! Lat: {0} Lng: {1}"
+      "Value": "Assuez vous que les coordonnées soient les bonnes. Lat: {0} Lng: {1}. Quittez le programme sinon"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Mise d'un oeuf dans l'incubateur: {0:0.00}km restant(s)"
+      "Value": "Incubation d'un oeuf : {0:0.00}km restant"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Mise à jour du statut de l'incubation: {0:0.00}km restant(s)"
+      "Value": "Incubation en cours : {0:0.00}km restant"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "L'oeuf en incubation a éclos: {0}"
+      "Value": "Eclosion de l'oeuf : {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -142,7 +150,7 @@
     },
     {
       "Key": "logEntryFarming",
-      "Value": "FARMING"
+      "Value": "COLLECTE"
     },
     {
       "Key": "logEntryRecycling",
@@ -190,19 +198,7 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Le compte n'est pas vérifié! Arrêt..."
-    },
-    {
-      "Key": "openingGoogleDevicePage",
-      "Value": "Ouverture de la page Google Device. Merci de copier/coller le code avec CTRL+C/CTRL+V."
-    },
-    {
-      "Key": "couldntCopyToClipboard",
-      "Value": "Impossible de copier le code, merci de le faire manuellement."
-    },
-    {
-      "Key": "couldntCopyToClipboard2",
-      "Value": "Merci de se rendre sur: {0} & d'entrer {1}."
+      "Value": "Le compte n'est pas vérifié ! Arrêt en cours..."
     },
     {
       "Key": "realisticTravelDetected",
@@ -214,19 +210,19 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Les coordonnées définies dans le fichier \"Coords.ini\" sont invalides, utilisation des coordonées par défaut"
+      "Value": "Les coordonnées définies dans le fichier \"Coords.ini\" sont invalides, utilisation des coordonnées par défaut."
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Parfait! Vous avez la dernière version: {0}"
+      "Value": "NecroBot v{0} est à jour."
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "L'auto-Updater est désactivé. Version actuelle: {0}\n "
+      "Value": "La mise à jour automatique est désactivée. Rendez-vous sur : {0}\n "
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Téléchargement et décompression de la mise à jour..."
+      "Value": "Téléchargement de la mise à jour..."
     },
     {
       "Key": "finishedDownloadingRelease",
@@ -238,7 +234,7 @@
     },
     {
       "Key": "FinishedTransferringConfig",
-      "Value": "Fini le transfert de votre config à la nouvelle version..."
+      "Value": "Le transfert de vos fichiers config a bien été effectué..."
     },
     {
       "Key": "updateFinished",
@@ -260,33 +256,69 @@
       "Key": "pokemonSkipped",
       "Value": "{0} ignoré"
     },
+	{
+      "Key": "zeroPokeballInv",
+      "Value": "Vous n'avez plus de pokéballs, capture de pokémons impossible !"
+    },
+	{
+      "Key": "currentPokeballInv",
+      "Value": "[Inventaire] Pokeballs: {0} | Superballs: {1} | Hyperballs: {2} | Masterballs: {3}"
+    },
+	{
+      "Key": "checkingForBallsToRecycle",
+      "Value": "Recherche de PokeBalls à supprimer. En garder {0}"
+    },
+    {
+      "Key": "checkingForPotionsToRecycle",
+      "Value": "Recherche de Potions à supprimer. En garder {0}"
+    },
+	{
+      "Key": "checkingForRevivesToRecycle",
+      "Value": "Recherche de Rappels à supprimer. En garder {0}"
+    },
+	{
+      "Key": "pokeballsToKeepIncorrect",
+      "Value": "TotalAmountOfPokebalsToKeep est mal configuré. Le nombre est inférieur à 1."
+    },
+    {
+      "Key": "potionsToKeepIncorrect",
+      "Value": "TotalAmountOfPotionsToKeep est mal configuré. Le nombre est inférieur à 1."
+    },
+    {
+      "Key": "revivesToKeepIncorrect",
+      "Value": "TotalAmountOfRevivesToKeep est mal configuré. Le nombre est inférieur à 1."
+    },
     {
       "Key": "invFullTransferring",
-      "Value": "L'inventaire de pokémon est plein. Transfert de quelque(s) pokémon(s)..."
+      "Value": "L'inventaire de pokémon est plein. Transfert en cours..."
     },
     {
       "Key": "invFullTransferManually",
       "Value": "L'inventaire de pokémon est plein. Merci de transférer manuellement ou de changer la valeur de \"TransferDuplicatePokemon\" en \"true\"..."
     },
     {
+      "Key": "invFullPokestopLooting",
+      "Value": "L'inventaire des objets est plein. Aucun objet n'a pu être récolté!"
+    },
+    {
       "Key": "encounterProblem",
-      "Value": "Un problème est survenue: {0}"
+      "Value": "Un problème est survenu: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Un problème est survenue avec le leurre {0}"
+      "Value": "Un problème est survenu avec le leurre {0}"
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Votre destination désirée {0}, {1} est plus éloigné que votre position actuelle {2}, {3}."
+      "Value": "Votre destination désirée {0}, {1} est trop éloignée de votre position actuelle {2}, {3}."
     },
     {
       "Key": "pokemonRename",
-      "Value": "{0} ({1}) a été renommé de {2} à {3}."
+      "Value": "{0} ({1}) a été renommé de {2} en {3}."
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Pokémon-Ignore-Filter] - {0} ignoré comme défini dans les options!"
+      "Value": "[Pokémon-Ignore-Filter] - {0} ignoré comme défini dans les options !"
     },
     {
       "Key": "catchStatusAttempt",
@@ -325,16 +357,64 @@
       "Value": "Encens"
     },
     {
+      "Key": "webSocketFailStart",
+      "Value": "Impossible de démarrer le serveur WebSocket sur le port : {0}"
+    },
+    {
       "Key": "statsTemplateString",
       "Value": "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Poussières: {5:0} | Transférés: {6:0} | Reçyclés: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (prochain level dans {1}h {2}m | {3}/{4} XP)"
+      "Value": "{0} (Prochain niveau dans {1}h {2}m | {3}/{4} XP)"
     },
     {
       "Key": "requireInputText",
-      "Value": "Le Programme va continuer après avoir appuyé sur un touche..."
+      "Value": "Appuyez sur une touche pour continuer..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "La validation en deux étapes de votre compte Google est activée, vous devez insérer un mot de passe spécifique à l'application dans auth.json"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "Ouverture de la page Mots de passe d'application. Merci de générer un nouveau mot de passe spécifique à l'application. (use Other as Device)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "Veuillez vérifier vos identifiants GoogleUsername et GooglePassword dans auth.json!"
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "Vous devez remplir les champs GoogleUsername et GooglePassword dans auth.json!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "Vous devez remplir les champs PtcUsername et PtcPassword dans auth.json!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[Sniper] Scan en cours sur {0}..."
+    },
+	{
+      "Key": "snipeScanEx",
+      "Value": "[Sniper] Scan de {0} avec {1} IV à {2}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Sniper] Echec du scan. Aucun pokémon trouvé."
+    },
+	{
+      "Key": "notEnoughPokeballsToSnipe",
+      "Value": "Pas assez de Pokeballs pour commencer un snipping! ({0}/{1})"
+    },
+    {
+      "Key": "displayHighestMove1Header",
+      "Value": "ATTAQUE1"
+    },
+    {
+      "Key": "displayHighestMove2Header",
+      "Value": "ATTAQUE2"
     }
   ]
 }

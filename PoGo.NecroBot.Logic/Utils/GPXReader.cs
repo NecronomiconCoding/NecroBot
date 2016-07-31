@@ -109,7 +109,8 @@ namespace PoGo.NecroBot.Logic.Utils
                     case "topografix:map":
                         break;
                     default:
-                        Logger.Write(session.Translation.GetTranslation(TranslationString.UnhandledGpxData), LogLevel.Info);
+                        Logger.Write(session.Translation.GetTranslation(TranslationString.UnhandledGpxData),
+                            LogLevel.Info);
                         break;
                 }
             }

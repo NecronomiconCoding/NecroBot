@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
@@ -19,51 +20,51 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsGpxTask
     {
-        static DateTime lastTasksCall = DateTime.Now;
+        private static DateTime _lastTasksCall = DateTime.Now;
+
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             var tracks = GetGpxTracks(session);
-            var curTrkPt = 0;
-            var curTrk = 0;
-            var maxTrk = tracks.Count - 1;
-            var curTrkSeg = 0;
             var eggWalker = new EggWalker(1000, session);
 
-            while (curTrk <= maxTrk)
+            for (var curTrk = 0; curTrk < tracks.Count; curTrk++)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var track = tracks.ElementAt(curTrk);
                 var trackSegments = track.Segments;
-                var maxTrkSeg = trackSegments.Count - 1;
-                while (curTrkSeg <= maxTrkSeg)
+                for (var curTrkSeg = 0; curTrkSeg < trackSegments.Count; curTrkSeg++)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
                     var trackPoints = track.Segments.ElementAt(0).TrackPoints;
-                    var maxTrkPt = trackPoints.Count - 1;
-                    while (curTrkPt <= maxTrkPt)
+                    for (var curTrkPt = 0; curTrkPt < trackPoints.Count; curTrkPt++)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
                         var nextPoint = trackPoints.ElementAt(curTrkPt);
                         var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
-                            session.Client.CurrentLongitude, Convert.ToDouble(nextPoint.Lat, CultureInfo.InvariantCulture),
+                            session.Client.CurrentLongitude,
+                            Convert.ToDouble(nextPoint.Lat, CultureInfo.InvariantCulture),
                             Convert.ToDouble(nextPoint.Lon, CultureInfo.InvariantCulture));
 
                         if (distance > 5000)
                         {
                             session.EventDispatcher.Send(new ErrorEvent
                             {
-                                Message = session.Translation.GetTranslation(Common.TranslationString.DesiredDestTooFar, nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude, session.Client.CurrentLongitude)
+                                Message =
+                                    session.Translation.GetTranslation(TranslationString.DesiredDestTooFar,
+                                        nextPoint.Lat, nextPoint.Lon, session.Client.CurrentLatitude,
+                                        session.Client.CurrentLongitude)
                             });
                             break;
                         }
 
                         var pokestopList = await GetPokeStops(session);
-                        session.EventDispatcher.Send(new PokeStopListEvent { Forts = pokestopList });
+                        session.EventDispatcher.Send(new PokeStopListEvent {Forts = pokestopList});
 
-                        while (pokestopList.Any()) // warning: this is never entered due to ps cooldowns from UseNearbyPokestopsTask 
+                        while (pokestopList.Any())
+                            // warning: this is never entered due to ps cooldowns from UseNearbyPokestopsTask 
                         {
                             cancellationToken.ThrowIfCancellationRequested();
 
@@ -75,7 +76,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             var pokeStop = pokestopList[0];
                             pokestopList.RemoveAt(0);
 
-                            var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                            var fortInfo =
+                                await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
                             if (pokeStop.LureInfo != null)
                             {
@@ -104,13 +106,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                             }
                         }
 
-                        if(DateTime.Now > lastTasksCall)
+                        if (DateTime.Now > _lastTasksCall)
                         {
-                            lastTasksCall = DateTime.Now.AddMilliseconds(Math.Min(session.LogicSettings.DelayBetweenPlayerActions, 3000));
+                            _lastTasksCall =
+                                DateTime.Now.AddMilliseconds(Math.Min(session.LogicSettings.DelayBetweenPlayerActions,
+                                    3000));
 
                             await RecycleItemsTask.Execute(session, cancellationToken);
 
-                            if (session.LogicSettings.SnipeAtPokestops)
+                            if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
                             {
                                 await SnipePokemonTask.Execute(session, cancellationToken);
                             }
@@ -126,42 +130,34 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                             }
 
-                            if (session.LogicSettings.RenameAboveIv)
+                            if (session.LogicSettings.RenamePokemon)
                             {
                                 await RenamePokemonTask.Execute(session, cancellationToken);
+                            }
+
+                            if (session.LogicSettings.AutoFavoritePokemon)
+                            {
+                                await FavoritePokemonTask.Execute(session, cancellationToken);
                             }
                         }
 
                         await session.Navigation.HumanPathWalking(
-                                trackPoints.ElementAt(curTrkPt),
-                                session.LogicSettings.WalkingSpeedInKilometerPerHour,
-                                async () =>
-                                {
-                                    await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
-                                    //Catch Incense Pokemon
-                                    await CatchIncensePokemonsTask.Execute(session, cancellationToken);
-                                    await UseNearbyPokestopsTask.Execute(session, cancellationToken);
-                                    return true;
-                                },
-                                cancellationToken
+                            trackPoints.ElementAt(curTrkPt),
+                            session.LogicSettings.WalkingSpeedInKilometerPerHour,
+                            async () =>
+                            {
+                                await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
+                                //Catch Incense Pokemon
+                                await CatchIncensePokemonsTask.Execute(session, cancellationToken);
+                                await UseNearbyPokestopsTask.Execute(session, cancellationToken);
+                                return true;
+                            },
+                            cancellationToken
                             );
 
                         await eggWalker.ApplyDistance(distance, cancellationToken);
-
-                        if (curTrkPt >= maxTrkPt)
-                            curTrkPt = 0;
-                        else
-                            curTrkPt++;
                     } //end trkpts
-                    if (curTrkSeg >= maxTrkSeg)
-                        curTrkSeg = 0;
-                    else
-                        curTrkSeg++;
                 } //end trksegs
-                if (curTrk >= maxTrkSeg)
-                    curTrk = 0;
-                else
-                    curTrk++;
             } //end tracks
         }
 
