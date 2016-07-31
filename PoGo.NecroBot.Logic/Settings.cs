@@ -137,6 +137,7 @@ namespace PoGo.NecroBot.Logic
         public bool EvolveAllPokemonAboveIv = false;
         public bool EvolveAllPokemonWithEnoughCandy = true;
         public bool KeepPokemonsThatCanEvolve = false;
+        public double EvolveKeptPokemonsAtStorageUsagePercentage = 0.90;
         //gpx
         public bool UseGpxPathing = false;
         public string GpxFile = "GPXPath.GPX";
@@ -386,7 +387,6 @@ namespace PoGo.NecroBot.Logic
                 PokemonId.Scyther,
                 PokemonId.Magmar,
                 PokemonId.Electabuzz,
-                PokemonId.Magmar,
                 PokemonId.Jynx,
                 PokemonId.Gyarados,
                 PokemonId.Lapras,
@@ -523,6 +523,11 @@ namespace PoGo.NecroBot.Logic
                 settings.WalkingSpeedInKilometerPerHour = Default.WalkingSpeedInKilometerPerHour;
             }
 
+            if (settings.EvolveKeptPokemonsAtStorageUsagePercentage <= 0)
+            {
+                settings.EvolveKeptPokemonsAtStorageUsagePercentage = Default.EvolveKeptPokemonsAtStorageUsagePercentage;
+            }
+            
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
@@ -537,8 +542,14 @@ namespace PoGo.NecroBot.Logic
 
         public void Save(string fullPath)
         {
-            var output = JsonConvert.SerializeObject(this, Formatting.Indented,
-                new StringEnumConverter {CamelCaseText = true});
+            var jsonSerializeSettings = new JsonSerializerSettings
+            {
+                DefaultValueHandling = DefaultValueHandling.Include,
+                Formatting = Formatting.Indented,
+                Converters = new JsonConverter[] { new StringEnumConverter { CamelCaseText = true } }
+            };
+
+            var output = JsonConvert.SerializeObject(this, jsonSerializeSettings);
 
             var folder = Path.GetDirectoryName(fullPath);
             if (folder != null && !Directory.Exists(folder))
@@ -697,6 +708,7 @@ namespace PoGo.NecroBot.Logic
         public bool ShowPokeballCountsBeforeRecycle => _settings.ShowPokeballCountsBeforeRecycle;
         public bool VerboseRecycling => _settings.VerboseRecycling;
         public double RecycleInventoryAtUsagePercentage => _settings.RecycleInventoryAtUsagePercentage;
+        public double EvolveKeptPokemonsAtStorageUsagePercentage => _settings.EvolveKeptPokemonsAtStorageUsagePercentage;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;

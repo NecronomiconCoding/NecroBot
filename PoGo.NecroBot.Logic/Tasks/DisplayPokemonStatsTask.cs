@@ -106,7 +106,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (session.LogicSettings.DumpPokemonStats)
             {
                 const string dumpFileName = "PokeBagStats";
-                Dumper.ClearDumpFile(session, dumpFileName);
+                Dumper.ClearDumpFile(session, dumpFileName, "csv");
                 foreach (var pokemon in allPokemonInBag)
                 {
                     int candy = PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings);
@@ -123,7 +123,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     Dumper.Dump(session,
                         string.Format($"NAME: {pokeName, -25} LVL: {PokemonInfo.GetLevel(pokemon).ToString("00"), -7} CP: {pokemon.Cp.ToString() + " / " + PokemonInfo.CalculateMaxCp(pokemon).ToString(), -15} IV: {PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"), -10} MOVE1: {pokemon.Move1, -20} MOVE2: {pokemon.Move2, -20} Candies: {candy}"),
-                        dumpFileName);
+                        dumpFileName, "csv");
                 }
             }
             await Task.Delay(500);

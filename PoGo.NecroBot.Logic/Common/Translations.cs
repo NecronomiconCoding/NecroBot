@@ -133,7 +133,14 @@ namespace PoGo.NecroBot.Logic.Common
         DisplayHighestMove1Header,
         DisplayHighestMove2Header,
         DisplayHighestCandy,
-        IPBannedError
+        IPBannedError,
+        NoEggsAvailable,
+        UseLuckyEggActive,
+        NoIncenseAvailable,
+        UseIncenseActive,
+        AmountPkmSeenCaught,
+        PkmPotentialEvolveCount,
+        PkmNotEnoughRessources
     }
 
     public class Translation : ITranslation
@@ -154,7 +161,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.WrongAuthType,
                 "Unknown AuthType in config.json"),
             new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsOutsideRadius,
-                "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your Coords.ini file correct?"),
+                "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your LastPos.ini file correct?"),
             new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsNoUsableFound,
                 "No usable PokeStops found in your area. Is your maximum distance too small?"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortUsed,
@@ -231,9 +238,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.RealisticTravelDetected,
                 "Detected realistic Traveling , using UserSettings.settings"),
             new KeyValuePair<TranslationString, string>(TranslationString.NotRealisticTravel,
-                "Not realistic Traveling at {0}, using last saved Coords.ini"),
+                "Not realistic Traveling at {0}, using last saved LastPos.ini"),
             new KeyValuePair<TranslationString, string>(TranslationString.CoordinatesAreInvalid,
-                "Coordinates in \"Coords.ini\" file are invalid, using the default coordinates"),
+                "Coordinates in \"LastPos.ini\" file are invalid, using the default coordinates"),
             new KeyValuePair<TranslationString, string>(TranslationString.GotUpToDateVersion,
                 "Perfect! You already have the newest Version {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.AutoUpdaterDisabled,
@@ -326,7 +333,18 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy"),
-            new KeyValuePair<TranslationString, string>(TranslationString.IPBannedError, "Connection refused. Your IP might have been Blacklisted by Niantic. Exiting..")
+            new KeyValuePair<TranslationString, string>(TranslationString.IPBannedError, 
+                "Connection refused. Your IP might have been Blacklisted by Niantic. Exiting.."),
+            new KeyValuePair<TranslationString, string>(TranslationString.NoEggsAvailable, "No Eggs Available"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UseLuckyEggActive, "Lucky Egg Already Active"),
+            new KeyValuePair<TranslationString, string>(TranslationString.NoIncenseAvailable, "No Incense Available"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UseIncenseActive, "Incense Already Active"),
+            new KeyValuePair<TranslationString, string>(TranslationString.AmountPkmSeenCaught, 
+                "Amount of Pokemon Seen:{}:151, Amount of Pokemon Caught:{}:151"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PkmPotentialEvolveCount, 
+                "[Evolves] Potential Evolves: {}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PkmNotEnoughRessources, 
+                "Pokemon Upgrade Failed Not Enough Resources")
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)
