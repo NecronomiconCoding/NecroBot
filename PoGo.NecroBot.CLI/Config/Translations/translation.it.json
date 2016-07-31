@@ -159,7 +159,7 @@
       "Value": "RICICLO"
     },
     {
-      "Key": "logEntryPKMN",
+      "Key": "logEntryPkmn",
       "Value": "PKMN"
     },
     {
@@ -380,6 +380,18 @@
     {
       "Key": "snipeScan",
       "Value": "[Sniper] Scansione Pokémon per lo snipe a {0}.."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Sniper] Nessun Pokémon trovato per lo snipe!"
+    },
+    {
+      "Key": "DisplayHighestMove1Header",
+      "Value": "Mossa1"
+    },
+    {
+      "Key": "DisplayHighestMove2Header",
+      "Value": "Mossa2"
     },
     {
       "Key": "noPokemonToSnipe",
