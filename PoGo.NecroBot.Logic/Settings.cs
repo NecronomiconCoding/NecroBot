@@ -118,6 +118,8 @@ namespace PoGo.NecroBot.Logic
 
         public string GpxFile = "GPXPath.GPX";
 
+        public bool ShowPokeballCountsBeforeRecycle = true;
+        public bool VerboseRecycling = true;
         public double RecycleInventoryAtUsagePercentage = 0.90;
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -622,6 +624,8 @@ namespace PoGo.NecroBot.Logic
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
         public bool DumpPokemonStats => _settings.DumpPokemonStats;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
+        public bool ShowPokeballCountsBeforeRecycle => _settings.ShowPokeballCountsBeforeRecycle;
+        public bool VerboseRecycling => _settings.VerboseRecycling;
         public double RecycleInventoryAtUsagePercentage => _settings.RecycleInventoryAtUsagePercentage;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
