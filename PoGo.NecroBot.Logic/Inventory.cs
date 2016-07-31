@@ -278,7 +278,7 @@ namespace PoGo.NecroBot.Logic
             if (!_logicSettings.ItemRecycleFilter.Any(s => _revives.Contains(s.Key)))
             {
                 if (session.LogicSettings.VerboseRecycling)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForRevivesToRecycle, amountOfRevivesToKeep)LogLevel.Recycling);
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForRevivesToRecycle, amountOfRevivesToKeep), LogLevel.Recycling);
                 var revivesToRecycle = GetRevivesToRecycle(session, myItems);
                 itemsToRecylce.AddRange(revivesToRecycle);
             }
