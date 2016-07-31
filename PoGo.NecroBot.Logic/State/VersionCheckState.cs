@@ -69,7 +69,7 @@ namespace PoGo.NecroBot.Logic.State
             var tempPath = Path.Combine(baseDir, "tmp");
             var extractedDir = Path.Combine(tempPath, "Release");
             var destinationDir = baseDir + Path.DirectorySeparatorChar;
-            Console.WriteLine(downloadLink);
+            Logger.Write(downloadLink);
 
             if (!DownloadFile(downloadLink, downloadFilePath))
                 return new LoginState();
@@ -143,7 +143,7 @@ namespace PoGo.NecroBot.Logic.State
                 try
                 {
                     client.DownloadFile(url, dest);
-                    Console.WriteLine(dest);
+                    Logger.Write(dest);
                 }
                 catch
                 {
