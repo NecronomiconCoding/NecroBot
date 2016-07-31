@@ -523,6 +523,11 @@ namespace PoGo.NecroBot.Logic
                 settings.WalkingSpeedInKilometerPerHour = Default.WalkingSpeedInKilometerPerHour;
             }
 
+            if (settings.EvolveKeptPokemonsAtStorageUsagePercentage <= 0)
+            {
+                settings.EvolveKeptPokemonsAtStorageUsagePercentage = Default.EvolveKeptPokemonsAtStorageUsagePercentage;
+            }
+            
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
