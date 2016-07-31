@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using POGOProtos.Inventory.Item;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -12,20 +13,30 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            var UseEgg = await session.Inventory.UseIncenseConstantly();
+            if (!session.LogicSettings.UseIncenseConstantly)
+                return;
 
-            if (UseEgg.Result.ToString().ToLower().Contains("noneininventory"))
+            var currentAmountOfIncense = await session.Inventory.GetItemAmountByType(ItemId.ItemIncenseOrdinary);
+            if (currentAmountOfIncense == 0)
             {
                 Logging.Logger.Write("No Incense Available");
+                return;
+            }
 
-            }
-            else if (UseEgg.Result.ToString().Contains("IncenseAlreadyActive"))
-            {
-                Logging.Logger.Write("Incense Already Active");
-            }
-            else
+            var UseIncense = await session.Inventory.UseIncenseConstantly();
+
+            if (UseIncense.Result.ToString().Contains("Success"))
             {
                 Logging.Logger.Write("Used an Incense");
+            }
+            else if (UseIncense.Result.ToString().ToLower().Contains("errornoitemsremaining") ||
+                UseIncense.Result.ToString().ToLower().Contains("noneininventory"))
+            {
+                Logging.Logger.Write("No Incense Available");
+            }
+            else if (UseIncense.Result.ToString().Contains("AlreadyActive") || (UseIncense.AppliedIncense == null))
+            {
+                Logging.Logger.Write("Incense Already Active");
             }
         }
     }
