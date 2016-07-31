@@ -354,6 +354,12 @@ namespace PoGo.NecroBot.Logic
                     .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
         }
 
+        public async Task<IEnumerable<PokemonUpgradeSettings>> GetPokemonUpgradeSettings()
+        {
+            var templates = await _client.Download.GetItemTemplates();
+            return templates.ItemTemplates.Select(i => i.PokemonUpgrades).Where(p => p != null);
+        }
+
         public async Task<IEnumerable<PokemonData>> GetPokemonToEvolve(IEnumerable<PokemonId> filter = null)
         {
             var myPokemons = await GetPokemons();
