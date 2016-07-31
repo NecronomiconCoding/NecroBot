@@ -130,7 +130,8 @@ namespace PoGo.NecroBot.Logic.Common
         NotEnoughPokeballsToSnipe,
         DisplayHighestMove1Header,
         DisplayHighestMove2Header,
-        DisplayHighestCandy
+        DisplayHighestCandy,
+        IPBannedError
     }
 
     public class Translation : ITranslation
@@ -320,7 +321,8 @@ namespace PoGo.NecroBot.Logic.Common
                 "Not enough Pokeballs to start sniping! ({0}/{1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2"),
-            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy")
+            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy"),
+            new KeyValuePair<TranslationString, string>(TranslationString.IPBannedError, "Connection refused. Your IP might have been Blacklisted by Niantic. Exiting..")
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)
