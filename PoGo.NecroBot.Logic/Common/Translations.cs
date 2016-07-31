@@ -130,7 +130,14 @@ namespace PoGo.NecroBot.Logic.Common
         NotEnoughPokeballsToSnipe,
         DisplayHighestMove1Header,
         DisplayHighestMove2Header,
-        DisplayHighestCandy
+        DisplayHighestCandy,
+        NoEggsAvailable,
+        UseLuckyEggActive,
+        NoIncenseAvailable,
+        UseIncenseActive,
+        AmountPkmSeenCaught,
+        PkmPotentialEvolveCount,
+        PkmNotEnoughRessources
     }
 
     public class Translation : ITranslation
@@ -320,7 +327,17 @@ namespace PoGo.NecroBot.Logic.Common
                 "Not enough Pokeballs to start sniping! ({0}/{1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2"),
-            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy")
+            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy"),
+            new KeyValuePair<TranslationString, string>(TranslationString.NoEggsAvailable, "No Eggs Available"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UseLuckyEggActive, "Lucky Egg Already Active"),
+            new KeyValuePair<TranslationString, string>(TranslationString.NoIncenseAvailable, "No Incense Available"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UseIncenseActive, "Incense Already Active"),
+            new KeyValuePair<TranslationString, string>(TranslationString.AmountPkmSeenCaught, 
+                "Amount of Pokemon Seen:{}:151, Amount of Pokemon Caught:{}:151"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PkmPotentialEvolveCount, 
+                "[Evolves] Potential Evolves: {}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PkmNotEnoughRessources, 
+                "Pokemon Upgrade Failed Not Enough Resources")
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)
