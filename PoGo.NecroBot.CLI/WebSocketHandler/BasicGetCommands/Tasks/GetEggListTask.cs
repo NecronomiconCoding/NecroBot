@@ -14,7 +14,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
     class GetEggListTask
     {
 
-        public static async Task Execute(ISession session, WebSocketSession webSocketSession)
+        public static async Task Execute(ISession session, WebSocketSession webSocketSession, string requestID)
         {
             var incubators = (await session.Inventory.GetEggIncubators())
                 .Where(x => x.UsesRemaining > 0 || x.ItemId == ItemId.ItemIncubatorBasicUnlimited)
@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
                  Incubators = incubators,
                  UnusedEggs = unusedEggs
              };
-            webSocketSession.Send(EncodingHelper.Serialize(new EggListResponce(list)));
+            webSocketSession.Send(EncodingHelper.Serialize(new EggListResponce(list,requestID)));
 
             await Task.Delay(500);
         }
