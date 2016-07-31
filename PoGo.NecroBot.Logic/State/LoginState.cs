@@ -68,6 +68,19 @@ namespace PoGo.NecroBot.Logic.State
                 await Task.Delay(20000, cancellationToken);
                 return this;
             }
+            catch (AccessTokenExpiredException)
+            {
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.PtcOffline) // use ptcoffline for now.
+                });
+                session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20)
+                });
+                await Task.Delay(20000, cancellationToken);
+                return this;
+            }
             catch (AccountNotVerifiedException)
             {
                 session.EventDispatcher.Send(new ErrorEvent
