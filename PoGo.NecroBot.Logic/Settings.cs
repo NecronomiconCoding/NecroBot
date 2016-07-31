@@ -17,7 +17,8 @@ namespace PoGo.NecroBot.Logic
 {
     internal class AuthSettings
     {
-        [JsonIgnore] private string _filePath;
+        [JsonIgnore]
+        private string _filePath;
 
         public AuthType AuthType;
         public string GoogleUsername;
@@ -37,7 +38,7 @@ namespace PoGo.NecroBot.Logic
                     var input = File.ReadAllText(_filePath);
 
                     var settings = new JsonSerializerSettings();
-                    settings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
 
                     JsonConvert.PopulateObject(input, this, settings);
                 }
@@ -73,7 +74,7 @@ namespace PoGo.NecroBot.Logic
         public void Save(string path)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented,
-                new StringEnumConverter {CamelCaseText = true});
+                new StringEnumConverter { CamelCaseText = true });
 
             var folder = Path.GetDirectoryName(path);
             if (folder != null && !Directory.Exists(folder))
@@ -95,33 +96,106 @@ namespace PoGo.NecroBot.Logic
 
     public class GlobalSettings
     {
+
+        [JsonIgnore]
+        internal AuthSettings Auth = new AuthSettings();
+        [JsonIgnore]
+        public string GeneralConfigPath;
+        [JsonIgnore]
+        public string ProfileConfigPath;
+        [JsonIgnore]
+        public string ProfilePath;
+
+        public string TranslationLanguageCode = "en";
+        //autoupdate
+        public bool AutoUpdate = true;
+        public bool TransferConfigAndAuthOnUpdate = true;
+        //pressakeyshit
+        public bool StartupWelcomeDelay = true;
+        //console options
         public int AmountOfPokemonToDisplayOnStart = 10;
-
-        [JsonIgnore] internal AuthSettings Auth = new AuthSettings();
-
+        public bool ShowPokeballCountsBeforeRecycle = true;
+        //powerup
         public bool AutomaticallyLevelUpPokemon = false;
         public int AmountOfTimesToUpgradeLoop = 5;
         public int GetMinStarDustForLevelUp = 5000;
-
-        public bool AutoUpdate = true;
+        public string LevelUpByCPorIv = "iv";
+        public float UpgradePokemonCpMinimum = 1000;
+        public float UpgradePokemonIvMinimum = 95;
+        //position
+        public bool DisableHumanWalking = false;
         public double DefaultAltitude = 10;
         public double DefaultLatitude = 40.785091;
         public double DefaultLongitude = -73.968285;
+        public double WalkingSpeedInKilometerPerHour = 15.0;
+        public int MaxSpawnLocationOffset = 10;
+        //delays
         public int DelayBetweenPlayerActions = 5000;
         public int DelayBetweenPokemonCatch = 2000;
-        public bool DisableHumanWalking = false;
+        //dump stats
         public bool DumpPokemonStats = false;
+        //evolve
         public float EvolveAboveIvValue = 95;
         public bool EvolveAllPokemonAboveIv = false;
         public bool EvolveAllPokemonWithEnoughCandy = true;
-
-        [JsonIgnore] public string GeneralConfigPath;
-
+        public bool KeepPokemonsThatCanEvolve = false;
+        //gpx
+        public bool UseGpxPathing = false;
         public string GpxFile = "GPXPath.GPX";
-
-        public bool ShowPokeballCountsBeforeRecycle = true;
+        //recycle
         public bool VerboseRecycling = true;
         public double RecycleInventoryAtUsagePercentage = 0.90;
+        //keeping
+        public int KeepMinCp = 1250;
+        public int KeepMinDuplicatePokemon = 1;
+        public float KeepMinIvPercentage = 90;
+        public bool PrioritizeIvOverCp = false;
+        //luckyandincense
+        public bool UseEggIncubators = true;
+        public bool UseLuckyEggConstantly = true;
+        public int UseLuckyEggsMinPokemonAmount = 30;
+        public bool UseLuckyEggsWhileEvolving = false;
+        public bool UseIncenseConstantly = true;
+        //snipe
+        public bool UseSnipeOnlineLocationServer = true;
+        public bool UseSnipeLocationServer = false;
+        public string SnipeLocationServer = "localhost";
+        public int SnipeLocationServerPort = 16969;
+        public int MinPokeballsToSnipe = 20;
+        public int MinPokeballsWhileSnipe = 0;
+        public int MinDelayBetweenSnipes = 60000;
+        public double SnipingScanOffset = 0.003;
+        public bool SnipeAtPokestops = false;
+        public bool SnipeIgnoreUnknownIv = false;
+        public bool UseTransferIvForSnipe = false;
+        //rename
+        public bool RenamePokemon = false;
+        public bool RenameOnlyAboveIv = true;
+        public string RenameTemplate = "{1}_{0}";
+        //amounts
+        public int MaxPokeballsPerPokemon = 6;
+        public int MaxTravelDistanceInMeters = 1000;
+        public int TotalAmountOfPokebalsToKeep = 120;
+        public int TotalAmountOfPotionsToKeep = 80;
+        public int TotalAmountOfRevivesToKeep = 60;
+        //balls
+        public int UseGreatBallAboveCp = 750;
+        public int UseUltraBallAboveCp = 1000;
+        public int UseMasterBallAboveCp = 1500;
+        public int UseGreatBallAboveIv = 80;
+        public int UseUltraBallAboveIv = 90;
+        public double UseGreatBallBelowCatchProbability = 0.5;
+        public double UseUltraBallBelowCatchProbability = 0.4;
+        public double UseMasterBallBelowCatchProbability = 0.05;
+        //transfer
+        public bool TransferDuplicatePokemon = true;
+        //favorite
+        public float FavoriteMinIvPercentage = 95;
+        public bool AutoFavoritePokemon = false;
+        //notcatch
+        public bool UsePokemonToNotCatchFilter = false;
+        public int WebSocketPort = 14251;
+
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
@@ -145,21 +219,6 @@ namespace PoGo.NecroBot.Logic
             new KeyValuePair<ItemId, int>(ItemId.ItemPokemonStorageUpgrade, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
         };
-
-        public int KeepMinCp = 1250;
-        public int KeepMinDuplicatePokemon = 1;
-        public float KeepMinIvPercentage = 90;
-        public bool KeepPokemonsThatCanEvolve = false;
-        public string LevelUpByCPorIv = "iv";
-        public bool UseLuckyEggConstantly = true;
-        public bool UseIncenseConstantly = true;
-        public int MaxPokeballsPerPokemon = 6;
-        public int MaxSpawnLocationOffset = 10;
-        public int MaxTravelDistanceInMeters = 1000;
-        public int MinDelayBetweenSnipes = 60000;
-        public double SnipingScanOffset = 0.003;
-        public int MinPokeballsToSnipe = 20;
-        public int MinPokeballsWhileSnipe = 0;
 
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
@@ -369,51 +428,8 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Drowzee,
             PokemonId.Weedle
         };
-
         public bool ThrowLuckyBallFirst = false;
         public bool StrictPokeballUse = false;
-        public bool PrioritizeIvOverCp = true;
-
-        [JsonIgnore] public string ProfileConfigPath;
-
-        [JsonIgnore] public string ProfilePath;
-
-        public bool RenameOnlyAboveIv = true;
-        public bool RenamePokemon = false;
-        public float FavoriteMinIvPercentage = 95;
-        public bool AutoFavoritePokemon = false;
-        public string RenameTemplate = "{1}_{0}";
-        public bool SnipeAtPokestops = false;
-        public bool SnipeIgnoreUnknownIv = false;
-        public string SnipeLocationServer = "localhost";
-        public int SnipeLocationServerPort = 16969;
-        public bool StartupWelcomeDelay = true;
-        public int TotalAmountOfPokebalsToKeep = 120;
-        public int TotalAmountOfPotionsToKeep = 80;
-        public int TotalAmountOfRevivesToKeep = 60;
-        public bool TransferConfigAndAuthOnUpdate = true;
-        public bool TransferDuplicatePokemon = true;
-        public string TranslationLanguageCode = "en";
-        public float UpgradePokemonCpMinimum = 1000;
-        public float UpgradePokemonIvMinimum = 95;
-        public bool UseEggIncubators = true;
-        public bool UseGpxPathing = false;
-        public int UseLuckyEggsMinPokemonAmount = 30;
-        public bool UseLuckyEggsWhileEvolving = false;
-        public int UseGreatBallAboveCp = 750;
-        public int UseUltraBallAboveCp = 1000;
-        public int UseMasterBallAboveCp = 1500;
-        public int UseGreatBallAboveIv = 80;
-        public int UseUltraBallAboveIv = 90;
-        public double UseGreatBallBelowCatchProbability = 0.5;
-        public double UseUltraBallBelowCatchProbability = 0.4;
-        public double UseMasterBallBelowCatchProbability = 0.05; 
-        public bool UsePokemonToNotCatchFilter = false;
-        public bool UseSnipeLocationServer = false;
-        public bool UseTransferIvForSnipe = false;
-        public double WalkingSpeedInKilometerPerHour = 15.0;
-        public int WebSocketPort = 14251;
-        public bool UseSnipeOnlineLocationServer = true;
 
         public static GlobalSettings Default => new GlobalSettings();
 
@@ -432,7 +448,7 @@ namespace PoGo.NecroBot.Logic
                     var input = File.ReadAllText(configFile);
 
                     var jsonSettings = new JsonSerializerSettings();
-                    jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                    jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                     jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
@@ -478,18 +494,13 @@ namespace PoGo.NecroBot.Logic
             settings.Save(configFile);
             settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
 
-            if (firstRun)
-            {
-                return null;
-            }
-
-            return settings;
+            return firstRun ? null : settings;
         }
 
         public void Save(string fullPath)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented,
-                new StringEnumConverter {CamelCaseText = true});
+                new StringEnumConverter { CamelCaseText = true });
 
             var folder = Path.GetDirectoryName(fullPath);
             if (folder != null && !Directory.Exists(folder))
@@ -532,7 +543,7 @@ namespace PoGo.NecroBot.Logic
         {
             get
             {
-                return _settings.DefaultLatitude + _rand.NextDouble()*((double) _settings.MaxSpawnLocationOffset/111111);
+                return _settings.DefaultLatitude + _rand.NextDouble() * ((double)_settings.MaxSpawnLocationOffset / 111111);
             }
 
             set { _settings.DefaultLatitude = value; }
@@ -543,8 +554,8 @@ namespace PoGo.NecroBot.Logic
             get
             {
                 return _settings.DefaultLongitude +
-                       _rand.NextDouble()*
-                       ((double) _settings.MaxSpawnLocationOffset/111111/Math.Cos(_settings.DefaultLatitude));
+                       _rand.NextDouble() *
+                       ((double)_settings.MaxSpawnLocationOffset / 111111 / Math.Cos(_settings.DefaultLatitude));
             }
 
             set { _settings.DefaultLongitude = value; }
@@ -654,9 +665,9 @@ namespace PoGo.NecroBot.Logic
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public ICollection<PokemonId> PokemonToUseMasterball => _settings.PokemonToUseMasterball;
         public ICollection<PokemonId> PokemonToUsePokeball => _settings.PokemonToUsePokeball;
-        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool ThrowLuckyBallFirst => _settings.ThrowLuckyBallFirst;
         public bool StrictPokeballUse => _settings.StrictPokeballUse;
+        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
@@ -672,7 +683,7 @@ namespace PoGo.NecroBot.Logic
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
         public double SnipingScanOffset => _settings.SnipingScanOffset;
-        public int TotalAmountOfPokebalsToKeep => _settings.TotalAmountOfPokebalsToKeep;
+        public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokebalsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
     }
