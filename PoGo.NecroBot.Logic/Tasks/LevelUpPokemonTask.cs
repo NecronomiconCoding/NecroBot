@@ -14,15 +14,11 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            if (DisplayPokemonStatsTask.PokemonId.Count == 0 || DisplayPokemonStatsTask.PokemonIdcp.Count == 0)
-            {
-                return;
-            }
             if (await session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
             {
                 return;
             }
-            if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("iv"))
+            if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("iv") && DisplayPokemonStatsTask.PokemonId.Count != 0)
             {
                 for (int i = 0; i < session.LogicSettings.AmountOfTimesToUpgradeLoop; i++)
                 {
@@ -53,11 +49,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                         break;
                     }
                 }
-               
+
             }
-            else if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("cp"))
+            else if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("cp") && DisplayPokemonStatsTask.PokemonIdcp.Count != 0)
             {
-               
+
                 for (int i = 0; i < session.LogicSettings.AmountOfTimesToUpgradeLoop; i++)
                 {
                     var rand = new Random();
@@ -87,7 +83,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         break;
                     }
                 }
-                
+
             }
         }
     }
