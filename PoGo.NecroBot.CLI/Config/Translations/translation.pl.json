@@ -30,7 +30,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nazwa: {0} XP: {1}, Kamienie: {2}, Przedmioty: {3}"
+      "Value": "Nazwa: {0}  | XP: {1}, Kamienie: {2}, Przedmioty: {3}"
     },
     {
       "Key": "eventFortFailed",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepsze CP: {3}  IV: {4}%] (Cukierki: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepsze CP: {3},  IV: {4}%] (Cukierki: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -94,7 +94,7 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "Doskonały"
+      "Value": "IV"
     },
     {
       "Key": "commonWordName",
@@ -226,7 +226,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Wspaniale! Posiadasz najnowszą wersję programu {0}"
+      "Value": "Wspaniale! Posiadasz najnowszą wersję programu NecroBot v{0}"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -278,15 +278,15 @@
     },
     {
       "Key": "checkingForBallsToRecycle",
-      "Value": "Sprawdzanie ilości Pokeballi, zostawiając {0}"
+      "Value": "Sprawdzanie ilości Pokeballi, pozostawiając {0}"
     },
     {
       "Key": "checkingForPotionsToRecycle",
-      "Value": "Sprawdzanie ilości Eliksirów, zostawiając {0}"
+      "Value": "Sprawdzanie ilości Eliksirów, pozostawiając {0}"
     },
     {
       "Key": "checkingForRevivesToRecycle",
-      "Value": "Sprawdzanie ilości Uzdrowień, zostawiając {0}"
+      "Value": "Sprawdzanie ilości Uzdrowień, pozostawiając {0}"
     },
     {
       "Key": "pokeballsToKeepIncorrect",
@@ -342,19 +342,19 @@
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Ucieczka"
+      "Value": "Uciekł"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "Ucieczka"
+      "Value": "Uciekł"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "Chybiono"
+      "Value": "Chybiony"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "Złapano"
+      "Value": "Złapany"
     },
     {
       "Key": "catchTypeNormal",
