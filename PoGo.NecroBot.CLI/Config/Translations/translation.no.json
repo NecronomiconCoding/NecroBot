@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Du er utenfor din definerte radius! Går tilbake til start ({0}m borte) om 5 sekund. Er Coords.ini filen korrekt?"
+        "Du er utenfor din definerte radius! Går tilbake til start ({0}m borte) om 5 sekund. Er LastPos.ini filen korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",

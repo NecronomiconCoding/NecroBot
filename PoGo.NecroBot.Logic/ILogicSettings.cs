@@ -129,6 +129,7 @@ namespace PoGo.NecroBot.Logic
         bool ShowPokeballCountsBeforeRecycle { get; }
         bool VerboseRecycling { get; }
         double RecycleInventoryAtUsagePercentage { get; }
+        double EvolveKeptPokemonsAtStorageUsagePercentage { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
