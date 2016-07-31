@@ -40,7 +40,6 @@ namespace PoGo.NecroBot.CLI
                 Console.ReadKey();
             }
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
-            session.Client.ApiFailure = new ApiFailureStrategy(session);
 
 
             /*SimpleSession session = new SimpleSession
