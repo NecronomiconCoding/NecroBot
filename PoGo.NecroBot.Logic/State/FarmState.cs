@@ -26,7 +26,7 @@ namespace PoGo.NecroBot.Logic.State
             {
                 await LevelUpPokemonTask.Execute(session, cancellationToken);
             }
-
+            await GetPokeDexCount.Execute(session, cancellationToken);
             if (session.LogicSettings.RenamePokemon)
             {
                 await RenamePokemonTask.Execute(session, cancellationToken);

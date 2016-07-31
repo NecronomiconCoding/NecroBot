@@ -32,6 +32,7 @@ namespace PoGo.NecroBot.Logic.Service
             {
                 LevelUpPokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
             }
+            GetPokeDexCount.Execute(_session, cancellationToken).Wait(cancellationToken);
             if (_session.LogicSettings.TransferDuplicatePokemon)
             {
                 TransferDuplicatePokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
