@@ -190,7 +190,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
 	<None Include="Config\Translations\translation.sv.json">
-		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
