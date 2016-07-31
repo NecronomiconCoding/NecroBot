@@ -119,6 +119,7 @@ namespace PoGo.NecroBot.Logic
         bool UseTransferIvForSnipe { get; }
         bool SnipeIgnoreUnknownIv { get; }
         int MinDelayBetweenSnipes { get; }
+        double SnipingScanOffset { get; }
         int TotalAmountOfPokebalsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
