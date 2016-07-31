@@ -163,22 +163,31 @@ namespace PoGo.NecroBot.Logic.Tasks
                         await session.Inventory.RefreshCachedInventory();
                     }
                     await RecycleItemsTask.Execute(session, cancellationToken);
+
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                         session.LogicSettings.EvolveAllPokemonAboveIv)
                     {
                         await EvolvePokemonTask.Execute(session, cancellationToken);
                     }
+
                     if (session.LogicSettings.AutomaticallyLevelUpPokemon)
                     {
                         await LevelUpPokemonTask.Execute(session, cancellationToken);
                     }
+
                     if (session.LogicSettings.TransferDuplicatePokemon)
                     {
                         await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                     }
+
                     if (session.LogicSettings.RenamePokemon)
                     {
                         await RenamePokemonTask.Execute(session, cancellationToken);
+                    }
+
+                    if (session.LogicSettings.AutoFavoritePokemon)
+                    {
+                        await FavoritePokemonTask.Execute(session, cancellationToken);
                     }
                 }
 
