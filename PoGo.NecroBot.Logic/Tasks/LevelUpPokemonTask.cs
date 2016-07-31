@@ -18,6 +18,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 return;
             }
+            if (await session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
+            {
+                return;
+            }
             if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("iv"))
             {
                 for (int i = 0; i < session.LogicSettings.AmountOfTimesToUpgradeLoop; i++)
@@ -39,7 +43,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     else if (upgradeResult.Result.ToString().Contains("ErrorUpgradeNotAvailable"))
                     {
-                        Logging.Logger.Write("Pokemon Is At Max Level For Your Level");
+                        Logger.Write("Pokemon Is At Max Level For Your Level");
                         break;
                     }
                     else
@@ -53,6 +57,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             else if (session.LogicSettings.LevelUpByCPorIv.ToLower().Contains("cp"))
             {
+               
                 for (int i = 0; i < session.LogicSettings.AmountOfTimesToUpgradeLoop; i++)
                 {
                     var rand = new Random();
@@ -71,7 +76,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     else if (upgradeResult.Result.ToString().Contains("ErrorUpgradeNotAvailable"))
                     {
-                        Logging.Logger.Write("Pokemon Is At Max Level For Your Level");
+                        Logger.Write("Pokemon Is At Max Level For Your Level");
                         break;
                     }
                     else

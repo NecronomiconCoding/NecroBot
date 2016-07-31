@@ -101,6 +101,7 @@ namespace PoGo.NecroBot.Logic
 
         public bool AutomaticallyLevelUpPokemon = false;
         public int AmountOfTimesToUpgradeLoop = 5;
+        public int GetMinStarDustForLevelUp = 5000;
 
         public bool AutoUpdate = true;
         public double DefaultAltitude = 10;
@@ -589,6 +590,7 @@ namespace PoGo.NecroBot.Logic
         public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;
         public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;
         public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;
+        public int GetMinStarDustForLevelUp => _settings.GetMinStarDustForLevelUp;
         public float UpgradePokemonIvMinimum => _settings.UpgradePokemonIvMinimum;
         public float UpgradePokemonCpMinimum => _settings.UpgradePokemonCpMinimum;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;

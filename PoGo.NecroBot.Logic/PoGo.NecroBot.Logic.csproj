@@ -91,6 +91,7 @@
     <Compile Include="Service\BotService.cs" />
     <Compile Include="Tasks\EggsListTask.cs" />
     <Compile Include="Tasks\FavoritePokemonTask.cs" />
+    <Compile Include="Tasks\GetPokeDexCount.cs" />
     <Compile Include="Tasks\InventoryListTask.cs" />
     <Compile Include="Tasks\LevelUpPokemonTask.cs" />
     <Compile Include="Tasks\PokemonListTask.cs" />
