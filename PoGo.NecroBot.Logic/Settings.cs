@@ -173,9 +173,6 @@ namespace PoGo.NecroBot.Logic
         //amounts
         public int MaxPokeballsPerPokemon = 6;
         public int MaxTravelDistanceInMeters = 1000;
-        public int TotalAmountOfPokebalsToKeep = 120;
-        public int TotalAmountOfPotionsToKeep = 80;
-        public int TotalAmountOfRevivesToKeep = 60;
         //balls
         public int UseGreatBallAboveCp = 750;
         public int UseUltraBallAboveCp = 1000;
@@ -196,7 +193,16 @@ namespace PoGo.NecroBot.Logic
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
-            new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
+            new KeyValuePair<ItemId, int>(ItemId.ItemPokeBall, 80),
+            new KeyValuePair<ItemId, int>(ItemId.ItemGreatBall, 100),
+            new KeyValuePair<ItemId, int>(ItemId.ItemUltraBall, 100),
+            new KeyValuePair<ItemId, int>(ItemId.ItemMasterBall, 100),
+            new KeyValuePair<ItemId, int>(ItemId.ItemPotion, 10),
+            new KeyValuePair<ItemId, int>(ItemId.ItemSuperPotion, 10),
+            new KeyValuePair<ItemId, int>(ItemId.ItemHyperPotion, 10),
+            new KeyValuePair<ItemId, int>(ItemId.ItemMaxPotion, 10),
+            new KeyValuePair<ItemId, int>(ItemId.ItemRevive, 10),
+            new KeyValuePair<ItemId, int>(ItemId.ItemMaxRevive, 10),
             new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
             new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
@@ -718,8 +724,5 @@ namespace PoGo.NecroBot.Logic
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
         public double SnipingScanOffset => _settings.SnipingScanOffset;
-        public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokebalsToKeep;
-        public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
-        public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
     }
 }
