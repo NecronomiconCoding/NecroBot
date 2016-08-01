@@ -37,7 +37,6 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
             var settings = GlobalSettings.Load(subPath);
-                
 
             if (settings == null)
             {
@@ -48,7 +47,7 @@ namespace PoGo.NecroBot.CLI
                 return;
             }
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
-            //session.Client.ApiFailure = new ApiFailureStrategy(session);
+            session.Client.ApiFailure = new ApiFailureStrategy(session);
 
             /*SimpleSession session = new SimpleSession
             {
