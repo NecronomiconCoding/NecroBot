@@ -1,4 +1,6 @@
 [![Stories in Ready](https://badge.waffle.io/NecronomiconCoding/NecroBot.png?label=ready&title=Ready)](https://waffle.io/NecronomiconCoding/NecroBot)
+[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg?maxAge=2592000)]()
+
 <!-- define warning icon -->
 [1.1]: http://necrobot.io/img/mainlogo.png (NECROBOT_HEADER)
 <!-- header -->
