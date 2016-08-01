@@ -34,8 +34,23 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (session.LogicSettings.KeepPokemonsThatCanEvolve)
                 {
                     var myPokemons = await session.Inventory.GetPokemons();
-                    if (session.Profile.PlayerData.MaxPokemonStorage * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage > myPokemons.Count())
+                    var needPokemonToStartEvolve = Math.Max(0,
+                        Math.Min(session.Profile.PlayerData.MaxPokemonStorage*
+                                 session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage,
+                            session.Profile.PlayerData.MaxPokemonStorage));
+
+                    var deltaCount = needPokemonToStartEvolve - myPokemons.Count();
+
+                    if (deltaCount > 0)
+                    {
+                        session.EventDispatcher.Send(new NoticeEvent()
+                        {
+                            Message = $"Not enough Pokemons to start evlove. Waiting for {deltaCount} " +
+                                      $"more ({ pokemonToEvolve.Count}/{deltaCount + pokemonToEvolve.Count})"
+                        });
+
                         return;
+                    }
                 }
 
                 var inventoryContent = await session.Inventory.GetItems();
@@ -43,8 +58,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var luckyEggs = inventoryContent.Where(p => p.ItemId == ItemId.ItemLuckyEgg);
                 var luckyEgg = luckyEggs.FirstOrDefault();
 
-                //maybe there can be a warning message as an else condition of luckyEgg checks, like; 
-                //"There is no Lucky Egg, so, your UseLuckyEggsMinPokemonAmount setting bypassed."
                 if (session.LogicSettings.UseLuckyEggsWhileEvolving && luckyEgg != null && luckyEgg.Count > 0)
                 {
                     if (pokemonToEvolve.Count >= session.LogicSettings.UseLuckyEggsMinPokemonAmount)
@@ -53,12 +66,31 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     else
                     {
-                        // Wait until we have enough pokemon
-                        session.EventDispatcher.Send(new NoticeEvent()
+                        var myPokemons = await session.Inventory.GetPokemons();
+
+                        var deltaPokemonsToUseLuckyEgg = session.LogicSettings.UseLuckyEggsMinPokemonAmount -
+                                                                   pokemonToEvolve.Count;
+
+                        var availableSpace = session.Profile.PlayerData.MaxPokemonStorage - myPokemons.Count();
+
+                        if (deltaPokemonsToUseLuckyEgg > availableSpace)
                         {
-                            Message = $"Not enough Pokemons to trigger a lucky  egg. Waiting for {session.LogicSettings.UseLuckyEggsMinPokemonAmount - pokemonToEvolve.Count} more ({ pokemonToEvolve.Count}/{session.LogicSettings.UseLuckyEggsMinPokemonAmount})"
-                        });
-                        return;
+                            var possibleLimitInThisIteration = pokemonToEvolve.Count + availableSpace;
+
+                            session.EventDispatcher.Send(new NoticeEvent()
+                            {
+                                Message = $"Use lucky egg impossible with UseLuckyEggsMinPokemonAmount = {session.LogicSettings.UseLuckyEggsMinPokemonAmount} " +
+                                          Environment.NewLine +
+                                          $"set value <= {possibleLimitInThisIteration} instead"
+                            });
+                        }
+                        else
+                        {
+                            session.EventDispatcher.Send(new NoticeEvent()
+                            {
+                                Message = $"Not enough Pokemons to trigger a lucky egg. Were needed {deltaPokemonsToUseLuckyEgg} more"
+                            });
+                        }
                     }
                 }
 
