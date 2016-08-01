@@ -112,6 +112,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (fortSearch.ExperienceAwarded > 0 && timesZeroXPawarded > 0) timesZeroXPawarded = 0;
                     if (fortSearch.ExperienceAwarded == 0)
                     {
+                        await RecycleItemsTask.Execute(session, cancellationToken);
+
                         timesZeroXPawarded++;
 
                         if (timesZeroXPawarded > zeroCheck)
@@ -147,7 +149,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Longitude = pokeStop.Longitude,
                             InventoryFull = fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull
                         });
-                        await RecycleItemsTask.Execute(session, cancellationToken);
 
                         break; //Continue with program as loot was succesfull.
                     }
