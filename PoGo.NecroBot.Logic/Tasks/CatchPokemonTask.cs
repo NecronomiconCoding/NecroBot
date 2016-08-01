@@ -46,17 +46,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                     return;
                 }
 
-                var isLowProbability = probability < 0.35;
+                var isLowProbability = probability < session.LogicSettings.UseUltraBallBelowCatchProbability;
                 var isHighCp = encounter != null &&
                                (encounter is EncounterResponse
                                    ? encounter.WildPokemon?.PokemonData?.Cp
-                                   : encounter.PokemonData?.Cp) > 400;
+                                   : encounter.PokemonData?.Cp) > session.LogicSettings.UseUltraBallAboveCp;
                 var isHighPerfection =
                     PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
                         ? encounter.WildPokemon?.PokemonData
-                        : encounter?.PokemonData) >= session.LogicSettings.KeepMinIvPercentage;
+                        : encounter?.PokemonData) >= session.LogicSettings.UseUltraBallAboveIv;
 
-                if ((isLowProbability && isHighCp) || isHighPerfection)
+                if (isLowProbability || isHighCp || isHighPerfection)
                 {
                     await
                         UseBerry(session,
