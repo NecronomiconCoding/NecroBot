@@ -269,6 +269,10 @@
     	"Value": "[Configuration Invalide] Vos objets consommables (Pokéballs+Potions+Rappels={0}) dépasse le seuil de votre inventaire ({1})"
     },
     {
+      "Key": "RecyclingQuietly",
+      "Value": "Recyclage rapide en cours..."
+    },
+    {
       "Key": "checkingForBallsToRecycle",
       "Value": "Recherche de PokéBalls à supprimer. En garder {0}"
     },
