@@ -178,7 +178,7 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPotionsToKeep = 80;
         public int TotalAmountOfRevivesToKeep = 60;
         //balls
-        public int UseGreatBallAboveCp = 100;
+        public int UseGreatBallAboveCp = 1000;
         public int UseUltraBallAboveCp = 1250;
         public int UseMasterBallAboveCp = 1500;
         public int UseGreatBallAboveIv = 85;
