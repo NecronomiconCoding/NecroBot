@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PC: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
+      "Value": "({0}) | ({1}) {2} Nivel: {3} PC: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | con {9} (quedan {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -114,7 +114,7 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "Pokémons con mayor CP"
+      "Value": "Pokémons con mayor PC"
     },
     {
       "Key": "displayHighestsPerfectHeader",
@@ -126,7 +126,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Asegúrese de que la Latitud y Longitud son las correctas. Salga del Programa si no es así! Lat: {0} Lng: {1}"
+      "Value": "Asegúrese de que la Latitud y Longitud son las correctas. Salga del Programa si no es así! Lat: {0} Long: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -138,7 +138,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Huevo incubado ha eclosionado: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "Huevo incubado ha eclosionado: {0} | Nivel: {1} PC: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -326,7 +326,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "El inventario de pokémons está lleno. Por favor transfiera los pokémons manualmente o active (true) TransferDuplicatePokemon en el archivo de opciones..."
+      "Value": "El inventario de pokémons está lleno. Transfiera los pokémons manualmente o active (true) TransferDuplicatePokemon en config.json..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -458,7 +458,7 @@
     },
     {
       "Key": "ipBannedError",
-      "Value": "Conexión denegada. Su IP podría haber sido añadida a la Lista Negra de Niantic.. Saliendo.."
+      "Value": "Conexión denegada. Su IP podría haber sido añadida a la Lista Negra de Niantic. Saliendo..."
     },
     {
       "Key": "noEggsAvailable",
@@ -482,7 +482,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "[Evoluciona] Potencial Evolución: {0}"
+      "Value": "[Evoluciona] Evoluciones potenciales: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
