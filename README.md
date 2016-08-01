@@ -1,18 +1,14 @@
+[![Discord](https://img.shields.io/badge/discord-NECROBOT.IO-blue.svg)](https://discord.gg/VXKxNFr)
 [![Build status](https://ci.appveyor.com/api/projects/status/4eoclxw6ee53fouu?svg=true)](https://ci.appveyor.com/project/NecronomiconCoding/necrobot)
 [![Stories in Ready](https://badge.waffle.io/NecronomiconCoding/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NecronomiconCoding/NecroBot)
 [![Stories in Progress](https://badge.waffle.io/NecronomiconCoding/NecroBot.svg?label=waffle%3Ain%20progress&title=In%20Progress)](https://waffle.io/NecronomiconCoding/NecroBot)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/LICENSE.md)
 
-<!-- define warning icon -->
-[1.1]: http://necrobot.io/img/mainlogo.png (NECROBOT_HEADER)
-<!-- header -->
-![alt text][1.1] <br/><br/>
-
 <!-- title -->
 <h1>NecroBot - a Pokemon Go Bot based on RocketAPI</h1>
-Visit our new Website! : http://necrobot.io
+Official Website  http://necrobot.io
 
-Chatting about this Repository can be done on our Discord: https://discord.gg/VXKxNFr <br/>
+Discord (Chat & Get Help!): https://discord.gg/VXKxNFr <br/>
 <br/>
 
 <h2><a name="features">Features</a></h2>
