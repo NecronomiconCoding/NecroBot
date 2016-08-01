@@ -210,7 +210,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         private static async Task<List<FortData>> GetPokeStops(ISession session)
         {
-            var mapObjects = await session.Client.Map.GetMapObjects();
+            var mapObjects = await session.Navigation.GetMapObjects();
 
             // Wasn't sure how to make this pretty. Edit as needed.
             var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
@@ -221,8 +221,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
                             LocationUtils.CalculateDistanceInMeters(
                                 session.Settings.DefaultLatitude, session.Settings.DefaultLongitude,
-                                i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters) ||
-                        session.LogicSettings.MaxTravelDistanceInMeters == 0
+                                i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters ||
+                        session.LogicSettings.MaxTravelDistanceInMeters == 0) 
                 );
 
             return pokeStops.ToList();

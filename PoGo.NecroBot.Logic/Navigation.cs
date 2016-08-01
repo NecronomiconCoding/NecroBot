@@ -10,6 +10,7 @@ using GeoCoordinatePortable;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
+using System.Linq;
 
 #endregion
 
@@ -25,6 +26,9 @@ namespace PoGo.NecroBot.Logic
     {
         private const double SpeedDownTo = 10/3.6;
         private readonly Client _client;
+        private DateTime _LastScanTS;
+        private GetMapObjectsResponse _LastMOResponse;
+
         public Navigation(Client client)
         {
             _client = client;
@@ -182,6 +186,19 @@ namespace PoGo.NecroBot.Logic
             return result;
         }
 
+        public async Task<GetMapObjectsResponse> GetMapObjects()
+        {
+            if (DateTime.Now >= _LastScanTS.AddSeconds(30) || _LastScanTS == null)
+            {
+                _LastScanTS = DateTime.Now;
+                _LastMOResponse = await _client.Map.GetMapObjects();
+            }
+
+            return _LastMOResponse;
+        }
+
         public event UpdatePositionDelegate UpdatePositionEvent;
     }
+
+    
 }
