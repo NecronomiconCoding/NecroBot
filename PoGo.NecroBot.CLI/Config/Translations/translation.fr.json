@@ -445,6 +445,14 @@
       "Value": "Oeuf Chance déjà activé"
     },
     {
+      "Key": "UsedLuckyEgg",
+      "Value": "Oeuf Chance utilisé"
+    },
+    {
+      "Key": "UseLuckyEggAmount",
+      "Value": "[Inventaire] Oeuf Chance : {0}"
+    },
+    {
       "Key": "NoIncenseAvailable",
       "Value": "Aucun encens de disponible"
     },
