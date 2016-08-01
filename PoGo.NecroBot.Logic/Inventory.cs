@@ -305,15 +305,11 @@ namespace PoGo.NecroBot.Logic
         public async Task<List<InventoryItem>> GetPokeDexItems()
         {
             List<InventoryItem> PokeDex = new List<InventoryItem>();
-            var hfgds = await _client.Inventory.GetInventory();
-            for (int i = 0; i < hfgds.InventoryDelta.InventoryItems.Count; i++)
-            {
-                if (hfgds.InventoryDelta.InventoryItems[i].ToString().ToLower().Contains("pokedex") && hfgds.InventoryDelta.InventoryItems[i].ToString().ToLower().Contains("timesencountered"))
-                {
-                    PokeDex.Add(hfgds.InventoryDelta.InventoryItems[i]);
-                }
-            }
-            return PokeDex;
+            var inventory = await _client.Inventory.GetInventory();
+
+            return (from items in inventory.InventoryDelta.InventoryItems
+                   where items.InventoryItemData?.PokedexEntry != null
+                   select items).ToList();
         }
 
         public async Task<List<Candy>> GetPokemonFamilies()
