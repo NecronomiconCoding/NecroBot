@@ -256,15 +256,19 @@
       "Key": "pokemonSkipped",
       "Value": "{0} est ignoré"
     },
-	{
+    {
       "Key": "zeroPokeballInv",
-      "Value": "Vous n'avez plus de pokéballs, capture de pokémons impossible !"
+      "Value": "Vous n'avez plus de pokéballs, la capture de pokémons est impossible !"
     },
-	{
+    {
       "Key": "currentPokeballInv",
       "Value": "[Inventaire] Pokéballs: {0} | Superballs: {1} | Hyperballs: {2} | Masterballs: {3}"
     },
-	{
+    {
+    	"Key": "MaxItemsCombinedOverMaxItemStorage",
+    	"Value": "[Configuration Invalide] Vos objets consommables (Pokéballs+Potions+Rappels={0}) dépasse le seuil de votre inventaire ({1})"
+    },
+    {
       "Key": "checkingForBallsToRecycle",
       "Value": "Recherche de PokéBalls à supprimer. En garder {0}"
     },
@@ -272,11 +276,11 @@
       "Key": "checkingForPotionsToRecycle",
       "Value": "Recherche de Potions à supprimer. En garder {0}"
     },
-	{
+    {
       "Key": "checkingForRevivesToRecycle",
       "Value": "Recherche de Rappels à supprimer. En garder {0}"
     },
-	{
+    {
       "Key": "pokeballsToKeepIncorrect",
       "Value": "TotalAmountOfPokeballsToKeep est mal configuré. Le nombre est inférieur à 1."
     },
