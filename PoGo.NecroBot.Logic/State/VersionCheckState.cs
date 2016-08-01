@@ -21,13 +21,13 @@ namespace PoGo.NecroBot.Logic.State
     public class VersionCheckState : IState
     {
         public const string VersionUri =
-            "https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/PoGo.NecroBot.Logic/Properties/AssemblyInfo.cs";
+            "https://cdn.rawgit.com/NECROBOTIO/NecroBot/master/PoGo.NecroBot.Logic/Properties/AssemblyInfo.cs";
 
         public const string LatestReleaseApi =
-            "https://api.github.com/repos/NecronomiconCoding/NecroBot/releases/latest";
+            "https://api.github.com/repos/NECROBOTIO/NecroBot/releases/latest";
 
         private const string LatestRelease =
-            "https://github.com/NecronomiconCoding/NecroBot/releases";
+            "https://github.com/NECROBOTIO/NecroBot/releases";
 
         public static Version RemoteVersion;
 
@@ -124,7 +124,7 @@ namespace PoGo.NecroBot.Logic.State
             {
                 try
                 {
-                    if (file.Name.Contains("vshost"))
+                    if (file.Name.Contains("vshost") || file.Name.Contains(".gpx.old"))
                         continue;
                     File.Delete(file.FullName);
                 }
@@ -200,7 +200,7 @@ namespace PoGo.NecroBot.Logic.State
             var oldfiles = Directory.GetFiles(destFolder);
             foreach (var old in oldfiles)
             {
-                if (old.Contains("vshost")) continue;
+                if (old.Contains("vshost") || old.Contains(".gpx")) continue;
                 File.Move(old, old + ".old");
             }
 
@@ -209,7 +209,7 @@ namespace PoGo.NecroBot.Logic.State
                 var files = Directory.GetFiles(sourceFolder);
                 foreach (var file in files)
                 {
-                    if (file.Contains("vshost")) continue;
+                    if (file.Contains("vshost") || file.Contains(".gpx")) continue;
                     var name = Path.GetFileName(file);
                     var dest = Path.Combine(destFolder, name);
                     File.Copy(file, dest, true);
@@ -243,7 +243,6 @@ namespace PoGo.NecroBot.Logic.State
 
             var oldConf = GetJObject(Path.Combine(configDir, "config.json.old"));
             var oldAuth = GetJObject(Path.Combine(configDir, "auth.json.old"));
-
             GlobalSettings.Load("");
 
             var newConf = GetJObject(Path.Combine(configDir, "config.json"));
@@ -254,7 +253,6 @@ namespace PoGo.NecroBot.Logic.State
 
             File.WriteAllText(Path.Combine(configDir, "config.json"), newConf.ToString());
             File.WriteAllText(Path.Combine(configDir, "auth.json"), newAuth.ToString());
-
             return true;
         }
 

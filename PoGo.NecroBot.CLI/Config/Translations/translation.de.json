@@ -17,38 +17,6 @@
       "Value": "Meisterball"
     },
     {
-      "Key": "CatchStatusSuccess",
-      "Value": "Gefangen"
-    },
-    {
-      "Key": "CatchStatusError",
-      "Value": "Fehler beim Fangen"
-    },
-    {
-      "Key": "CatchStatusEscape",
-      "Value": "Entkommen"
-    },
-    {
-      "Key": "CatchStatusFlee",
-      "Value": "Geflüchtet"
-    },
-    {
-      "Key": "CatchStatusMissed",
-      "Value": "Verfehlt"
-    },
-    {
-      "Key": "CatchTypeIncense",
-      "Value": "Rauch"
-    },
-    {
-      "Key": "CatchTypeLure",
-      "Value": "Lockmodul"
-    },
-    {
-      "Key": "CatchTypeNormal",
-      "Value": "Wild"
-    },
-    {
       "Key": "wrongAuthType",
       "Value": "Unbekannte Authentifizierungsart in der config.json festgelegt"
     },
@@ -107,8 +75,12 @@
       "Value": "Keine Pokébälle mehr! - Wir haben ein {0} mit {1} WP verpasst!"
     },
     {
-      "Key": "catchStatusAttempt",
-      "Value": "{0} Versuch #{1}"
+      "Key": "eventUseBerry",
+      "Value": "{0} benutzt, {1} verbleibend"
+    },
+    {
+      "Key": "itemRazzBerry",
+      "Value": "Himmihbeere"
     },
     {
       "Key": "catchStatus",
@@ -240,11 +212,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Keine realistische Bewegung bei {0}, benutze zuletzt gespeicherte Daten aus Coords.ini"
+      "Value": "Keine realistische Bewegung bei {0}, benutze zuletzt gespeicherte Daten aus LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinaten in \"Coords.ini\" sind ungültig! Benutze standart Koordinaten."
+      "Value": "Koordinaten in \"LastPos.ini\" sind ungültig! Benutze standart Koordinaten."
     },
     {
       "Key": "gotUpToDateVersion",
@@ -312,7 +284,7 @@
     },
     {
       "Key": "PokeballsToKeepIncorrect",
-      "Value": "TotalAmountOfPokebalsToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
+      "Value": "TotalAmountOfPokeballsToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
     },
     {
       "Key": "PotionsToKeepIncorrect",
@@ -358,6 +330,154 @@
     {
       "Key": "pokemonIgnoreFilter",
       "Value": "[Pokémon-Ignore-Filter] - Ignoriere {0} wie in den Einstellungen angegeben!"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Versuch #{1}"
+    },
+    {
+      "Key": "CatchStatusError",
+      "Value": "Fehler beim Fangen"
+    },
+    {
+      "Key": "CatchStatusEscape",
+      "Value": "Entkommen"
+    },
+    {
+      "Key": "CatchStatusFlee",
+      "Value": "Geflüchtet"
+    },
+    {
+      "Key": "CatchStatusMissed",
+      "Value": "Verfehlt"
+    },
+    {
+      "Key": "CatchStatusSuccess",
+      "Value": "Gefangen"
+    },
+    {
+      "Key": "CatchTypeNormal",
+      "Value": "Wild"
+    },
+    {
+      "Key": "CatchTypeLure",
+      "Value": "Lockmodul"
+    },
+    {
+      "Key": "CatchTypeIncense",
+      "Value": "Rauch"
+    },
+    {
+      "Key": "WebSocketFailStart",
+      "Value": "Fehler beim starten des WebSockets auf Port: {0}"
+    },
+    {
+      "Key": "StatsTemplateString",
+      "Value": "{0} - Laufzeit {1} - Lvl: {2} | EP/H: {3:n0} | P/H: {4:n0} | Sternenstaub: {5:n0} | Übertragen: {6:n0} | Recycelt: {7:n0}"
+    },
+    {
+      "Key": "StatsXpTemplateString",
+      "Value": "{0} (Aufstieg in {1}h {2}m | {3:n0}/{4:n0} EP)"
+    },
+    {
+      "Key": "RequireInputText",
+      "Value": "Program wird nach drücken einer Taste fortgesetzt..."
+    },
+    {
+      "Key": "GoogleTwoFactorAuth",
+      "Value": "Wenn Google-Zwei-Faktor-Authentifizierung aktiviert ist, muss ein App Spezifisches Passwort in die auth.json einfügen werden."
+    },
+    {
+      "Key": "GoogleTwoFactorAuthExplanation",
+      "Value": "Öffne App-Passwörter. Bitte erstelle ein neues Passwort(verwende bei App wählen: Andere)"
+    },
+    {
+      "Key": "GoogleError",
+      "Value": "Stell sicher, dass du die richtige E-Mail & Passwort eingegeben hast."
+    },
+    {
+      "Key": "MissingCredentialsGoogle",
+      "Value": "Es müssen GoogleUsername & GooglePassword in auth.json ausgefüllt werden!"
+    },
+    {
+      "Key": "MissingCredentialsPtc",
+      "Value": "Es müssen PtcUsername & PtcPassword in auth.json ausgefüllt werden!"
+    },
+    {
+      "Key": "SnipeScan",
+      "Value": "Scannen nach Snipeable Pokémon in {0}..."
+    },
+    {
+      "Key": "SnipeScanEx",
+      "Value": "Sniping ein {0} mit {1} IV in {2}..."
+    },
+    {
+      "Key": "NoPokemonToSnipe",
+      "Value": "Kein Pokémon zum Snipen gefunden"
+    },
+    {
+      "Key": "NotEnoughPokeballsToSnipe",
+      "Value": "Nicht genug Pokébälle um Snipen zu starten! ({0}/{1})"
+    },
+    {
+      "Key": "DisplayHighestMove1Header",
+      "Value": "BEWEGUNG1"
+    },
+    {
+      "Key": "DisplayHighestMove2Header",
+      "Value": "BEWEGUNG2"
+    },
+    {
+      "Key": "DisplayHighestCandy",
+      "Value": "Bonbon"
+    },
+    {
+      "Key": "IPBannedError",
+      "Value": "Verbindung nicht möglich. Deine IP könnte von Niantic auf die Blacklist gesetzt wurden sein. Beenden..."
+    },
+    {
+      "Key": "NoEggsAvailable",
+      "Value": "Keine Eier verfügbar"
+    },
+    {
+      "Key": "UseLuckyEggActive",
+      "Value": "Glücksei bereits aktiv"
+    },
+    {
+      "Key": "UsedLuckyEgg",
+      "Value": "Verwende Glücksei"
+    },
+    {
+      "Key": "UseLuckyEggAmount",
+      "Value": "Glückseier im Inventar: {0}"
+    },
+    {
+      "Key": "NoIncenseAvailable",
+      "Value": "Kein Rauch verfügbar"
+    },
+    {
+      "Key": "UseIncenseActive",
+      "Value": "Rauch bereits aktiv"
+    },
+    {
+      "Key": "UseIncenseAmount",
+      "Value": "Rauch im Inventar: {0}"
+    },
+    {
+      "Key": "UsedIncense",
+      "Value": "Verwende Rauch"
+    },
+    {
+      "Key": "AmountPkmSeenCaught",
+      "Value": "Anzahl gesehener Pokémon: {0}/151, Anzahl gefundener Pokémon: {1}/151"
+    },
+    {
+      "Key": "PkmPotentialEvolveCount",
+      "Value": "[Entwicklung] Mögliche Entwicklungen: {0}"
+    },
+    {
+      "Key": "PkmNotEnoughRessources",
+      "Value": "Pokémon Upgrade fehlgeschlagen, nicht genügend Ressourcen"
     }
   ]
 }

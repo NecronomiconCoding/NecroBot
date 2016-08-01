@@ -54,7 +54,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Az meghatározott hatósugáron kívül vagy! Visszamegy a starthoz ({0}m táv) 5 másodpercen belül. Biztos helyes a Coords.ini file-od?"
+      "Value": "Az meghatározott hatósugáron kívül vagy! Visszamegy a starthoz ({0}m táv) 5 másodpercen belül. Biztos helyes a LastPos.ini file-od?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -250,11 +250,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Nincs Realisztikus mozgás a koordonátákhoz itt {0}, a legutóbbi jó koordonátákat használjuk újra a Coords.ini fileból."
+      "Value": "Nincs Realisztikus mozgás a koordonátákhoz itt {0}, a legutóbbi jó koordonátákat használjuk újra a LastPos.ini fileból."
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "A koordonáták a \"Coords.ini\" fileban helytelenek! Standard koordonátákat használunk."
+      "Value": "A koordonáták a \"LastPos.ini\" fileban helytelenek! Standard koordonátákat használunk."
     },
     {
       "Key": "gotUpToDateVersion",

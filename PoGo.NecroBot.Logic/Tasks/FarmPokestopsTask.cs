@@ -22,7 +22,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     public static class FarmPokestopsTask
     {
         public static int TimesZeroXPawarded;
-
+        private static int storeRI;
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -38,9 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 Logger.Write(
                     session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
-
-                await Task.Delay(1000, cancellationToken);
-
+                
                 await session.Navigation.Move(
                     new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken, session.LogicSettings.DisableHumanWalking);
@@ -48,6 +46,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var pokestopList = await GetPokeStops(session);
             var stopsHit = 0;
+            var rc = new Random(); //initialize pokestop random cleanup counter first time
+            storeRI = rc.Next(3, 9);
             var eggWalker = new EggWalker(1000, session);
 
             if (pokestopList.Count <= 0)
@@ -110,6 +110,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (fortSearch.ExperienceAwarded > 0 && timesZeroXPawarded > 0) timesZeroXPawarded = 0;
                     if (fortSearch.ExperienceAwarded == 0)
                     {
+                        await RecycleItemsTask.Execute(session, cancellationToken);
+
                         timesZeroXPawarded++;
 
                         if (timesZeroXPawarded > zeroCheck)
@@ -149,14 +151,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                         break; //Continue with program as loot was succesfull.
                     }
                 } while (fortTry < retryNumber - zeroCheck);
-                    //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
-
-                await Task.Delay(1000, cancellationToken);
+                //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
                 await eggWalker.ApplyDistance(distance, cancellationToken);
 
-                if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
+                if (++stopsHit >= storeRI) //TODO: OR item/pokemon bag is full //check stopsHit against storeRI random without dividing.
                 {
+                    storeRI = rc.Next(2, 8); //set new storeRI for new random value
                     stopsHit = 0;
                     if (fortSearch.ItemsAwarded.Count > 0)
                     {
@@ -209,7 +210,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         private static async Task<List<FortData>> GetPokeStops(ISession session)
         {
-            var mapObjects = await session.Client.Map.GetMapObjects();
+            var mapObjects = await session.Navigation.GetMapObjects();
 
             // Wasn't sure how to make this pretty. Edit as needed.
             var pokeStops = mapObjects.MapCells.SelectMany(i => i.Forts)
@@ -220,8 +221,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         ( // Make sure PokeStop is within max travel distance, unless it's set to 0.
                             LocationUtils.CalculateDistanceInMeters(
                                 session.Settings.DefaultLatitude, session.Settings.DefaultLongitude,
-                                i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters) ||
-                        session.LogicSettings.MaxTravelDistanceInMeters == 0
+                                i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters ||
+                        session.LogicSettings.MaxTravelDistanceInMeters == 0) 
                 );
 
             return pokeStops.ToList();

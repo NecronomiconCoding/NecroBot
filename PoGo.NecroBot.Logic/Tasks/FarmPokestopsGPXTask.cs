@@ -100,6 +100,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     Longitude = pokeStop.Longitude
                                 });
                             }
+                            else
+                            {
+                                await RecycleItemsTask.Execute(session, cancellationToken);
+
+                            }
+
                             if (fortSearch.ItemsAwarded.Count > 0)
                             {
                                 await session.Inventory.RefreshCachedInventory();

@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your Coords.ini file correct?"
+        "Είστε έξω από την καθορισμένη περιοχή! Περπάτημα για ({0}m μακριά) σε 5 δευτερόλεπτα. Είναι το αρχείο LastPos.ini σωστό?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -223,11 +223,11 @@
     {
       "Key": "notRealisticTravel",
       "Value":
-        "Εντοπίστηκαν μη ρεαλιστικες ρυθμίσεις στο {0}, χρήση τελευταίων αποθηκευμένων συντενταγμένων στο Coords.ini"
+        "Εντοπίστηκαν μη ρεαλιστικες ρυθμίσεις στο {0}, χρήση τελευταίων αποθηκευμένων συντενταγμένων στο LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Οι συντεναγμένες στο αρχείο \"Coords.ini\" είναι άκυρες, χρήση αρχικών συντενταγμένων"
+      "Value": "Οι συντεναγμένες στο αρχείο \"LastPos.ini\" είναι άκυρες, χρήση αρχικών συντενταγμένων"
     },
     {
       "Key": "gotUpToDateVersion",

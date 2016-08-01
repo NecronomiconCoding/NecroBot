@@ -82,7 +82,7 @@ namespace PoGo.NecroBot.Logic
 
             var pokemonList =
                 myPokemon.Where(
-                    p => p.DeployedFortId == string.Empty &&
+                    p => p.DeployedFortId == string.Empty && 
                          p.Favorite == 0 && (p.Cp < GetPokemonTransferFilter(p.PokemonId).KeepMinCp ||
                                              PokemonInfo.CalculatePokemonPerfection(p) <
                                              GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage))
@@ -109,9 +109,9 @@ namespace PoGo.NecroBot.Logic
                     var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
                     var amountToSkip = GetPokemonTransferFilter(pokemon.Key).KeepMinDuplicatePokemon;
 
-                    if (settings.CandyToEvolve > 0)
+                    if (settings.CandyToEvolve > 0 && _logicSettings.PokemonsToEvolve.Contains(pokemon.Key))
                     {
-                        var amountPossible = familyCandy.Candy_ / (settings.CandyToEvolve - 2);
+                        var amountPossible = (familyCandy.Candy_ - 1) / (settings.CandyToEvolve - 1);
                         if (amountPossible > amountToSkip)
                             amountToSkip = amountPossible;
                     }
@@ -120,7 +120,7 @@ namespace PoGo.NecroBot.Logic
                     {
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
                             .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                            .ThenBy(n => n.StaminaMax)
+                            .ThenByDescending(n => n.Cp)
                             .Skip(amountToSkip)
                             .ToList());
                     }
@@ -128,7 +128,7 @@ namespace PoGo.NecroBot.Logic
                     {
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
                             .OrderByDescending(x => x.Cp)
-                            .ThenBy(n => n.StaminaMax)
+                            .ThenByDescending(PokemonInfo.CalculatePokemonPerfection)
                             .Skip(amountToSkip)
                             .ToList());
                     }
@@ -245,44 +245,6 @@ namespace PoGo.NecroBot.Logic
             var itemsToRecylce = new List<ItemData>();
             var myItems = (await GetItems()).ToList();
 
-            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
-            var amountOfPotionsToKeep = _logicSettings.TotalAmountOfPotionsToKeep;
-            var amountOfRevivesToKeep = _logicSettings.TotalAmountOfRevivesToKeep;
-
-            var currentAmountOfPokeballs = await GetItemAmountByType(ItemId.ItemPokeBall);
-            var currentAmountOfGreatballs = await GetItemAmountByType(ItemId.ItemGreatBall);
-            var currentAmountOfUltraballs = await GetItemAmountByType(ItemId.ItemUltraBall);
-            var currentAmountOfMasterballs = await GetItemAmountByType(ItemId.ItemMasterBall);
-
-            if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
-                Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
-                    currentAmountOfPokeballs, currentAmountOfGreatballs, currentAmountOfUltraballs,
-                    currentAmountOfMasterballs));
-
-            if (!_logicSettings.ItemRecycleFilter.Any(s => _pokeballs.Contains(s.Key)))
-            {
-                if (session.LogicSettings.VerboseRecycling)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForBallsToRecycle, amountOfPokeballsToKeep), LogLevel.Recycling);
-                var pokeballsToRecycle = GetPokeballsToRecycle(session, myItems);
-                itemsToRecylce.AddRange(pokeballsToRecycle);
-            }
-
-            if (!_logicSettings.ItemRecycleFilter.Any(s => _potions.Contains(s.Key)))
-            {
-                if (session.LogicSettings.VerboseRecycling)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForPotionsToRecycle, amountOfPotionsToKeep), LogLevel.Recycling);
-                var potionsToRecycle = GetPotionsToRecycle(session, myItems);
-                itemsToRecylce.AddRange(potionsToRecycle);
-            }
-
-            if (!_logicSettings.ItemRecycleFilter.Any(s => _revives.Contains(s.Key)))
-            {
-                if (session.LogicSettings.VerboseRecycling)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CheckingForRevivesToRecycle, amountOfRevivesToKeep), LogLevel.Recycling);
-                var revivesToRecycle = GetRevivesToRecycle(session, myItems);
-                itemsToRecylce.AddRange(revivesToRecycle);
-            }
-
             var otherItemsToRecylce = myItems
                 .Where(x => _logicSettings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
                 .Select(
@@ -315,7 +277,7 @@ namespace PoGo.NecroBot.Logic
 
         private List<ItemData> GetPokeballsToRecycle(ISession session, IReadOnlyList<ItemData> myItems)
         {
-            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokebalsToKeep;
+            var amountOfPokeballsToKeep = _logicSettings.TotalAmountOfPokeballsToKeep;
             if (amountOfPokeballsToKeep < 1)
             {
                 Logger.Write(session.Translation.GetTranslation(TranslationString.PokeballsToKeepIncorrect),
@@ -343,18 +305,11 @@ namespace PoGo.NecroBot.Logic
         public async Task<List<InventoryItem>> GetPokeDexItems()
         {
             List<InventoryItem> PokeDex = new List<InventoryItem>();
-            var hfgds = await _client.Inventory.GetInventory();
-            for (int i = 0; i < hfgds.InventoryDelta.InventoryItems.Count; i++)
-            {
-                if (hfgds.InventoryDelta.InventoryItems[i].ToString().ToLower().Contains("pokedex") && hfgds.InventoryDelta.InventoryItems[i].ToString().ToLower().Contains("timescaptured"))
-                {
-                    PokeDex.Add(hfgds.InventoryDelta.InventoryItems[i]);
-                }
+            var inventory = await _client.Inventory.GetInventory();
 
-
-            }
-            return PokeDex;
-
+            return (from items in inventory.InventoryDelta.InventoryItems
+                   where items.InventoryItemData?.PokedexEntry != null
+                   select items).ToList();
         }
 
         public async Task<List<Candy>> GetPokemonFamilies()

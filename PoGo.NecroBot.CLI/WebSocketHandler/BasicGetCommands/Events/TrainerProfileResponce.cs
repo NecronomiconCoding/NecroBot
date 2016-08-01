@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Events
 {
-    public class EggListResponce : IWebSocketResponce
+    class TrainerProfileResponce : IWebSocketResponce
     {
-        public EggListResponce(dynamic data, string requestID)
+        public TrainerProfileResponce(dynamic data, string requestID)
         {
-            Command = "EggListWeb";
+            Command = "TrainerProfile";
             Data = data;
             RequestID = requestID;
         }
         public string RequestID { get; private set; }
         public string Command { get; private set; }
         public dynamic Data { get; private set; }
-        
     }
 }

@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Du är utanför din definierade radius! Återgår till start ({0}m bort) om 5 sekunder. Är din Coords.ini fil korrekt?"
+        "Du är utanför din definierade radius! Återgår till start ({0}m bort) om 5 sekunder. Är din LastPos.ini fil korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -222,11 +222,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Ej realistisk färd vid {0}, använder senaste sparade koordinater i Coords.ini"
+      "Value": "Ej realistisk färd vid {0}, använder senaste sparade koordinater i LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinater i \"Coords.ini\" är ej giltiga, använder ursprungskoordinater"
+      "Value": "Koordinater i \"LastPos.ini\" är ej giltiga, använder ursprungskoordinater"
     },
     {
       "Key": "gotUpToDateVersion",

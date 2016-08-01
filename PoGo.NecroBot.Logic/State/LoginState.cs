@@ -4,10 +4,12 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using Google.Protobuf;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
+using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -31,16 +33,9 @@ namespace PoGo.NecroBot.Logic.State
                 switch (session.Settings.AuthType)
                 {
                     case AuthType.Ptc:
-                        try
-                        {
-                            await
-                                session.Client.Login.DoPtcLogin(session.Settings.PtcUsername,
-                                    session.Settings.PtcPassword);
-                        }
-                        catch (AggregateException ae)
-                        {
-                            throw ae.Flatten().InnerException;
-                        }
+                        await
+                            session.Client.Login.DoPtcLogin(session.Settings.PtcUsername,
+                                session.Settings.PtcPassword);
                         break;
                     case AuthType.Google:
                         await
@@ -54,6 +49,10 @@ namespace PoGo.NecroBot.Logic.State
                         });
                         return null;
                 }
+            }
+            catch (AggregateException ae)
+            {
+                throw ae.Flatten().InnerException;
             }
             catch (Exception ex) when (ex is PtcOfflineException || ex is AccessTokenExpiredException)
             {
@@ -110,6 +109,15 @@ namespace PoGo.NecroBot.Logic.State
                 await Task.Delay(2000, cancellationToken);
                 Environment.Exit(0);
             }
+            catch (InvalidProtocolBufferException ex) when (ex.Message.Contains("SkipLastField"))
+            {
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.IPBannedError)
+                });
+                await Task.Delay(2000, cancellationToken);
+                Environment.Exit(0);
+            }
             catch (Exception)
             {
                 await Task.Delay(20000, cancellationToken);
@@ -117,6 +125,18 @@ namespace PoGo.NecroBot.Logic.State
             }
 
             await DownloadProfile(session);
+
+            int maxTheoreticalItems = session.LogicSettings.TotalAmountOfPokeballsToKeep +
+                session.LogicSettings.TotalAmountOfPotionsToKeep +
+                session.LogicSettings.TotalAmountOfRevivesToKeep;
+
+            if (maxTheoreticalItems > session.Profile.PlayerData.MaxItemStorage)
+            {
+                Logger.Write(session.Translation.GetTranslation(TranslationString.MaxItemsCombinedOverMaxItemStorage, maxTheoreticalItems, session.Profile.PlayerData.MaxItemStorage), LogLevel.Error);
+                Logger.Write("Press any key to exit, then fix your configuration and run the bot again.", LogLevel.Warning);
+                Console.ReadKey();
+                System.Environment.Exit(1);
+            }
 
             return new PositionCheckState();
         }
@@ -150,7 +170,7 @@ namespace PoGo.NecroBot.Logic.State
         public async Task DownloadProfile(ISession session)
         {
             session.Profile = await session.Client.Player.GetPlayer();
-            session.EventDispatcher.Send(new ProfileEvent {Profile = session.Profile});
+            session.EventDispatcher.Send(new ProfileEvent { Profile = session.Profile });
         }
     }
 }

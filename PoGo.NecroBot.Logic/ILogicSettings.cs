@@ -69,6 +69,7 @@ namespace PoGo.NecroBot.Logic
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
+        bool TransferDuplicatePokemonOnCapture { get; }
         bool UseEggIncubators { get; }
         int UseGreatBallAboveCp { get; }
         int UseUltraBallAboveCp { get; }
@@ -92,6 +93,10 @@ namespace PoGo.NecroBot.Logic
         int GetMinStarDustForLevelUp { get; }
         bool UseLuckyEggConstantly { get; }
         bool UseIncenseConstantly { get; }
+        int UseBerriesMinCp { get; }
+        float UseBerriesMinIv { get; }
+        double UseBerriesBelowCatchProbability { get; }
+        string UseBerriesOperator { get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }
         string GpxFile { get; }
@@ -122,13 +127,14 @@ namespace PoGo.NecroBot.Logic
         bool SnipeIgnoreUnknownIv { get; }
         int MinDelayBetweenSnipes { get; }
         double SnipingScanOffset { get; }
-        int TotalAmountOfPokebalsToKeep { get; }
+        int TotalAmountOfPokeballsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
 
         bool ShowPokeballCountsBeforeRecycle { get; }
         bool VerboseRecycling { get; }
         double RecycleInventoryAtUsagePercentage { get; }
+        double EvolveKeptPokemonsAtStorageUsagePercentage { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }

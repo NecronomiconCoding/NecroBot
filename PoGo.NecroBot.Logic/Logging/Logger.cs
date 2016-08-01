@@ -1,6 +1,7 @@
 #region using directives
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using PoGo.NecroBot.Logic.State;
 
@@ -12,18 +13,31 @@ namespace PoGo.NecroBot.Logic.Logging
     {
         private static ILogger _logger;
         private static string _path;
+        private static DateTime _lastLogTime;
+        private static readonly IList<string> LogbufferList = new List<string>();
 
-        private static void Log(string message)
+        private static void Log(string message, bool force = false)
         {
-            // maybe do a new log rather than appending?
-            using (
-                var log =
-                    File.AppendText(Path.Combine(_path,
-                        $"NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt"))
-                )
+            lock (LogbufferList)
             {
-                log.WriteLine(message);
-                log.Flush();
+                if (_lastLogTime.AddSeconds(60) < DateTime.Now && !force)
+                {
+                    LogbufferList.Add(message);
+                    return;
+                }
+                using (
+                    var log =
+                        File.AppendText(Path.Combine(_path,
+                            $"NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt"))
+                    )
+                {
+                    foreach (var line in LogbufferList)
+                    {
+                        log.WriteLine(line);
+                    }
+                    _lastLogTime = DateTime.Now;
+                    log.Flush();
+                }
             }
         }
 
@@ -56,12 +70,12 @@ namespace PoGo.NecroBot.Logic.Logging
         /// <param name="message">The message to log.</param>
         /// <param name="level">Optional level to log. Default <see cref="LogLevel.Info" />.</param>
         /// <param name="color">Optional. Default is automatic color.</param>
-        public static void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black)
+        public static void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black, bool force = false)
         {
             if (_logger == null)
                 return;
             _logger.Write(message, level, color);
-            Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
+            Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message, force));
         }
     }
 

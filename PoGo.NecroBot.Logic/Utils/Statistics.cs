@@ -55,9 +55,8 @@ namespace PoGo.NecroBot.Logic.Utils
                 var minutes = 0.00;
                 if (double.IsInfinity(time) == false && time > 0)
                 {
-                    time = Convert.ToDouble(TimeSpan.FromHours(time).ToString("h\\.mm"), CultureInfo.InvariantCulture);
-                    hours = Math.Truncate(time);
-                    minutes = Math.Round((time - hours)*100);
+                    hours = Math.Truncate(TimeSpan.FromHours(time).TotalHours);
+                    minutes = TimeSpan.FromHours(time).Minutes;
                 }
 
                 output = new StatsExport
@@ -95,7 +94,7 @@ namespace PoGo.NecroBot.Logic.Utils
                     0, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000,
                     10000, 10000, 10000, 10000, 15000, 20000, 20000, 20000, 25000, 25000,
                     50000, 75000, 100000, 125000, 150000, 190000, 200000, 250000, 300000, 350000,
-                    500000, 500000, 750000, 1000000, 1250000, 1500000, 2000000, 2500000, 1000000, 1000000
+                    500000, 500000, 750000, 1000000, 1250000, 1500000, 2000000, 2500000, 3000000, 5000000
                 };
                 return xpTable[level - 1];
             }

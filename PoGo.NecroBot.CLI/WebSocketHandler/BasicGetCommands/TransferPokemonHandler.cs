@@ -9,18 +9,18 @@ using PoGo.NecroBot.Logic.State;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands
 {
-    public class GetPokemonListHandler : IWebSocketRequestHandler
+    public class TransferPokemonHandler : IWebSocketRequestHandler
     {
         public string Command { get; private set;}
 
-        public GetPokemonListHandler()
+        public TransferPokemonHandler()
         {
-            Command = "GetPokemonList";
+            Command = "TransferPokemon";
         }
 
         public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
-            await GetPokemonListTask.Execute(session, webSocketSession, (string)message.RequestID);
+            await TransferPokemonTask.Execute(session, webSocketSession, (ulong)message.PokemonId, (string)message.RequestID);
         }
     }
 }

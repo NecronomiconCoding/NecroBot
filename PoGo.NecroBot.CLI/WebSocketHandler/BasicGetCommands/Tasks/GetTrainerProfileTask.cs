@@ -1,4 +1,5 @@
 ﻿using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Events;
+using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Helpers;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
 using System;
@@ -9,18 +10,16 @@ using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
 {
-    class GetPokemonListTask
+    class GetTrainerProfileTask
     {
-    
         public static async Task Execute(ISession session, WebSocketSession webSocketSession, string requestID)
         {
-            var allPokemonInBag = await session.Inventory.GetHighestsCp(1000);
-            var list = new List<PokemonListWeb>();
-            allPokemonInBag.ToList().ForEach(o => list.Add(new PokemonListWeb(o)));
-            webSocketSession.Send(EncodingHelper.Serialize(new PokemonListResponce(list,requestID)));
-            
+            var playerStats = (await session.Inventory.GetPlayerStats()).FirstOrDefault();
+            if (playerStats == null)
+                return;
+            var tmpData = new TrainerProfileWeb(session.Profile.PlayerData, playerStats);
+            webSocketSession.Send(EncodingHelper.Serialize(new TrainerProfileResponce(tmpData, requestID)));
             await Task.Delay(500);
         }
-
     }
 }

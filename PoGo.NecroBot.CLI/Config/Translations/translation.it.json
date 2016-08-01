@@ -1,4 +1,4 @@
-﻿{
+{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file Coords.ini e' corretto?"
+        "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file LastPos.ini e' corretto?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -73,6 +73,15 @@
     {
       "Key": "eventNoPokeballs",
       "Value": "Nessuna Pokeball - Perso {0} con PL {1}"
+    },
+    {
+      "Key": "eventUseBerry",
+      "Value": "Usata {0} | {1} rimanenti"
+    },
+
+    {
+      "Key": "itemRazzBerry",
+      "Value": "Baccalampon"
     },
     {
       "Key": "catchStatusAttempt",
@@ -155,6 +164,10 @@
       "Value": "FARMING"
     },
     {
+      "Key": "logEntrySniper",
+      "Value": "SNIPER"
+    },
+    {
       "Key": "logEntryRecycling",
       "Value": "RICICLO"
     },
@@ -176,7 +189,7 @@
     },
     {
       "Key": "logEntryEgg",
-      "Value": "UOVO"
+      "Value": "UOVA"
     },
     {
       "Key": "logEntryDebug",
@@ -220,11 +233,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Spostamenti non Realistici in {0}, verra' usato l'ultimo salvataggio del file Coords.ini"
+      "Value": "Spostamenti non Realistici in {0}, verra' usato l'ultimo salvataggio del file LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Le coordinate nel file \"Coords.ini\" non sono valide, verranno usate le coordinate di default"
+      "Value": "Le coordinate nel file \"LastPos.ini\" non sono valide, verranno usate le coordinate di default"
     },
     {
       "Key": "gotUpToDateVersion",
@@ -270,6 +283,52 @@
       "Key": "pokemonSkipped",
       "Value": "Saltato {0}"
     },
+
+
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Saltato {0}"
+    },
+    {
+      "Key": "zeroPokeballInv",
+      "Value": "Non hai piu' Pokeball, impossibile catturare altri Pokemon!"
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "[Inventario Attuale] Pokeball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
+    },
+    {
+      "Key": "maxItemsCombinedOverMaxItemStorage",
+      "Value": "[Configurazione Non Valida] La somma degli oggetti (Pokeball+Pozioni+Revitalizzanti={0}) e' maggiore della capacita' massima dell'inventario ({1})"
+    },
+    {
+      "Key": "recyclingQuietly",
+      "Value": "Riciclo silenzioso..."
+    },
+    {
+      "Key": "checkingForBallsToRecycle",
+      "Value": "Controllo Pokeball da riciclare, ne verranno tenute {0}"
+    },
+    {
+      "Key": "checkingForPotionsToRecycle",
+      "Value": "Controllo Pozioni da riciclare, ne verranno tenute {0}"
+    },
+    {
+      "Key": "checkingForRevivesToRecycle",
+      "Value": "Controllo Revitalizzanti da riciclare, ne verranno tenuti {0}"
+    },
+    {
+      "Key": "pokeballsToKeepIncorrect",
+      "Value": "TotalAmountOfPokeballsToKeep non è configurato correttamente. Il numero e' piu' piccolo di 1."
+    },
+    {
+      "Key": "potionsToKeepIncorrect",
+      "Value": "TotalAmountOfPotionsToKeep non è configurato correttamente. Il numero e' piu' piccolo di 1."
+    },
+    {
+      "Key": "revivesToKeepIncorrect",
+      "Value": "TotalAmountOfRevivesToKeep non è configurato correttamente. Il numero e' piu' piccolo di 1."
+    },
     {
       "Key": "invFullTransferring",
       "Value": "Inventario Pokemon pieno. Trasferimento Pokemon..."
@@ -300,6 +359,10 @@
       "Value": "Pokemon {0} ({1}) rinominato da {2} a {3}."
     },
     {
+      "Key": "pokemonFavorite",
+      "Value": "{0}% perfetto {1} (PL {2}) *tra i preferiti*."
+    },
+    {
       "Key": "pokemonIgnoreFilter",
       "Value": "[Filtro Pokemon da ignorare] - Ignorato {0} come definito nelle impostazioni"
     },
@@ -313,7 +376,7 @@
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Fuga da Cattura"
+      "Value": "Uscito da Pokeball"
     },
     {
       "Key": "catchStatusFlee",
@@ -382,8 +445,16 @@
       "Value": "[Sniper] Scansione Pokémon per lo snipe a {0}.."
     },
     {
+      "Key": "snipeScanEx",
+      "Value": "Sniping un {0} con {1} IV a {2}..."
+    },
+    {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] Nessun Pokémon trovato per lo snipe!"
+      "Value": "Nessun Pokemon trovato per lo sniping!"
+    },
+    {
+      "Key": "notEnoughPokeballsToSnipe",
+      "Value": "Pokeball insufficienti per iniziare lo sniping! ({0}/{1})"
     },
     {
       "Key": "DisplayHighestMove1Header",
@@ -394,8 +465,40 @@
       "Value": "Mossa2"
     },
     {
-      "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] Nessun Pokémon trovato per lo snipe!"
+      "Key": "displayHighestCandy",
+      "Value": "Caramella"
+    },
+    {
+      "Key": "iPBannedError",
+      "Value": "Connessione rifiutata. IP probabilmente bannato da Niantic. Uscita..."
+    },
+    {
+      "Key": "noEggsAvailable",
+      "Value": "Nessun Uovo disponibile"
+    },
+    {
+      "Key": "useLuckyEggActive",
+      "Value": "Fortunuovo gia' attivo"
+    },
+    {
+      "Key": "noIncenseAvailable",
+      "Value": "Nessun Aroma disponibile"
+    },
+    {
+      "Key": "useIncenseActive",
+      "Value": "Aroma gia' attivo"
+    },
+    {
+      "Key": "amountPkmSeenCaught",
+      "Value": "Pokemon Visti: {0}/151, Pokemon Catturati: {1}/151"
+    },
+    {
+      "Key": "pkmPotentialEvolveCount",
+      "Value": "[Evoluzioni] Potenziali Evoluzioni: {}"
+    },
+    {
+      "Key": "pkmNotEnoughRessources",
+      "Value": "Potenziamento Pokemon Fallito: Risorse Insufficienti"
     }
   ]
 }
