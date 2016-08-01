@@ -21,7 +21,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var kmWalked = playerStats.KmWalked;
 
-
             var incubators = (await session.Inventory.GetEggIncubators())
                 .Where(x => x.UsesRemaining > 0 || x.ItemId == ItemId.ItemIncubatorBasicUnlimited)
                 .OrderByDescending(x => x.ItemId == ItemId.ItemIncubatorBasicUnlimited)
