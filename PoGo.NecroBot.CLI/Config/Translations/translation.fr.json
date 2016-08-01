@@ -450,7 +450,7 @@
     },
     {
       "Key": "AmountPkmSeenCaught",
-      "Value": "Deck Pokémon(151) : Rencontré {} | Capturé {}"
+      "Value": "Deck Pokémon(151) : Rencontré {0} | Capturé {1}"
     },
     {
       "Key": "EventEvolveCount",
