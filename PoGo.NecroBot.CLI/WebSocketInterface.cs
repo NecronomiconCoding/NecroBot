@@ -101,18 +101,6 @@ namespace PoGo.NecroBot.CLI
             try
             {
                 dynamic decodedMessage = JObject.Parse(message);
-                await _websocketHandler?.Handle(_session, session, decodedMessage);
-            }
-            catch (JsonException)
-            {
-
-
-            }
-
-            // Setup to only send data back to the session that requested it. 
-            try
-            {
-                dynamic decodedMessage = JObject.Parse(message);
                 var handle = _websocketHandler?.Handle(_session, session, decodedMessage);
                 if (handle != null)
                     await handle;

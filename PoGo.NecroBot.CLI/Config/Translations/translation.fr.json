@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} dans {1}m"
+      "Value": "{0} {1}m"
     },
     {
       "Key": "eventProfileLogin",
@@ -46,7 +46,11 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Activation Bonus d'un oeuf Chance"
+      "Value": "Utilisation d'un oeuf Chance, reste : {0}"
+    },
+    {
+      "Key": "EventUsedIncense",
+      "Value": "Utilisation d'un encens, reste : {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -445,6 +449,14 @@
       "Value": "Oeuf Chance déjà activé"
     },
     {
+      "Key": "UsedLuckyEgg",
+      "Value": "Oeuf Chance utilisé"
+    },
+    {
+      "Key": "UseLuckyEggAmount",
+      "Value": "[Inventaire] Oeuf Chance : {0}"
+    },
+    {
       "Key": "NoIncenseAvailable",
       "Value": "Aucun encens de disponible"
     },
@@ -453,8 +465,12 @@
       "Value": "Encens déjà activé"
     },
     {
-    	"Key": "UseIncenseNew", 
-    	"Value": "Encens utilisé"
+      "Key": "UseIncenseAmount",
+      "Value": "[Inventaire] Encens : {0}"
+    },
+    {
+      "Key": "UsedIncense",
+      "Value": "Encens utilisé"
     },
     {
       "Key": "AmountPkmSeenCaught",

@@ -183,13 +183,13 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPotionsToKeep = 80;
         public int TotalAmountOfRevivesToKeep = 60;
         //balls
-        public int UseGreatBallAboveCp = 1000;
-        public int UseUltraBallAboveCp = 1250;
+        public int UseGreatBallAboveCp = 750;
+        public int UseUltraBallAboveCp = 1000;
         public int UseMasterBallAboveCp = 1500;
         public int UseGreatBallAboveIv = 85;
-        public int UseUltraBallAboveIv = 90;
-        public double UseGreatBallBelowCatchProbability = 0.3;
-        public double UseUltraBallBelowCatchProbability = 0.2;
+        public int UseUltraBallAboveIv = 95;
+        public double UseGreatBallBelowCatchProbability = 0.2;
+        public double UseUltraBallBelowCatchProbability = 0.1;
         public double UseMasterBallBelowCatchProbability = 0.05;
         //transfer
         public bool TransferDuplicatePokemon = true;
@@ -555,6 +555,31 @@ namespace PoGo.NecroBot.Logic
                 settings.UseMasterBallBelowCatchProbability = Default.UseMasterBallBelowCatchProbability;
             }
 
+            if (settings.UseMasterBallAboveCp < 0)
+            {
+                settings.UseMasterBallAboveCp = Default.UseMasterBallAboveCp;
+            }
+
+            if (settings.UseUltraBallAboveCp < 0)
+            {
+                settings.UseUltraBallAboveCp = Default.UseUltraBallAboveCp;
+            }
+
+            if (settings.UseUltraBallAboveIv < 0)
+            {
+                settings.UseUltraBallAboveIv = Default.UseUltraBallAboveCp;
+            }
+
+            if (settings.UseGreatBallAboveCp < 0)
+            {
+                settings.UseGreatBallAboveCp = Default.UseGreatBallAboveCp;
+            }
+
+            if (settings.UseUltraBallAboveIv < 0)
+            {
+                settings.UseGreatBallAboveIv = Default.UseGreatBallAboveIv;
+            }
+
             if (settings.UseBerriesMinCp < 0)
             {
                 settings.UseBerriesMinCp = Default.UseBerriesMinCp;
@@ -565,7 +590,7 @@ namespace PoGo.NecroBot.Logic
                 settings.UseBerriesMinIv = Default.UseBerriesMinIv;
             }
 
-            if (settings.UseBerriesOperator.ToLower().Equals("and") && settings.UseBerriesOperator.ToLower().Equals("or"))
+            if (settings.UseBerriesOperator == null || (!settings.UseBerriesOperator.ToLower().Equals("and") && !settings.UseBerriesOperator.ToLower().Equals("or")))
             {
                 settings.UseBerriesOperator = Default.UseBerriesOperator;
             }

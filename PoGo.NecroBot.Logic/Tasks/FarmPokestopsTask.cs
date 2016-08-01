@@ -38,9 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 Logger.Write(
                     session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
-
-                await Task.Delay(1000, cancellationToken);
-
+                
                 await session.Navigation.Move(
                     new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken, session.LogicSettings.DisableHumanWalking);
@@ -112,6 +110,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (fortSearch.ExperienceAwarded > 0 && timesZeroXPawarded > 0) timesZeroXPawarded = 0;
                     if (fortSearch.ExperienceAwarded == 0)
                     {
+                        await RecycleItemsTask.Execute(session, cancellationToken);
+
                         timesZeroXPawarded++;
 
                         if (timesZeroXPawarded > zeroCheck)
@@ -147,14 +147,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Longitude = pokeStop.Longitude,
                             InventoryFull = fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull
                         });
-                        await RecycleItemsTask.Execute(session, cancellationToken);
 
                         break; //Continue with program as loot was succesfull.
                     }
                 } while (fortTry < retryNumber - zeroCheck);
-                    //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
-
-                //await Task.Delay(1000, cancellationToken);
+                //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
                 await eggWalker.ApplyDistance(distance, cancellationToken);
 

@@ -82,7 +82,7 @@ namespace PoGo.NecroBot.Logic
 
             var pokemonList =
                 myPokemon.Where(
-                    p => p.DeployedFortId == string.Empty &&
+                    p => p.DeployedFortId == string.Empty && 
                          p.Favorite == 0 && (p.Cp < GetPokemonTransferFilter(p.PokemonId).KeepMinCp ||
                                              PokemonInfo.CalculatePokemonPerfection(p) <
                                              GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage))
@@ -120,7 +120,7 @@ namespace PoGo.NecroBot.Logic
                     {
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
                             .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                            .ThenBy(n => n.StaminaMax)
+                            .ThenByDescending(n => n.Cp)
                             .Skip(amountToSkip)
                             .ToList());
                     }
@@ -128,7 +128,7 @@ namespace PoGo.NecroBot.Logic
                     {
                         results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
                             .OrderByDescending(x => x.Cp)
-                            .ThenBy(n => n.StaminaMax)
+                            .ThenByDescending(PokemonInfo.CalculatePokemonPerfection)
                             .Skip(amountToSkip)
                             .ToList());
                     }
