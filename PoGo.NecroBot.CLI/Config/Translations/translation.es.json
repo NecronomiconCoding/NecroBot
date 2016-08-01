@@ -289,6 +289,10 @@
       "Value": "[Inventario actual] Poké Balls: {0} | Super Balls: {1} | Ultra Balls: {2} | Master Balls: {3}"
     },
     {
+      "Key": "maxItemsCombinedOverMaxItemStorage",
+      "Value": "[Configuración Inválida] El Máximo de items combinados (balls+potions+revives={0}) está por encima del almacenamiento máximo ({1})"
+    },
+    {
       "Key": "recyclingQuietly",
       "Value": "Reciclando Tranquilamente..."
     },
