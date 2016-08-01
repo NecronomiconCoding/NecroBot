@@ -181,7 +181,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             var scanResult = SnipeScanForPokemon(session, location);
 
                             var locationsToSnipe = new List<PokemonLocation>();
-                            if (scanResult.pokemons != null)
+                            if (scanResult.pokemons != null && scanResult.Status.Contains("fail"))
                             {
                                 var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains(q.pokemon_name));
                                 var notVisitedPokemon = filteredPokemon.Where(q => !LocsVisited.Contains(q));
@@ -360,6 +360,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var fullresp = reader.ReadToEnd().Replace(" M", "Male").Replace(" F", "Female").Replace("'", "");
 
                 scanResult = JsonConvert.DeserializeObject<ScanResult>(fullresp);
+            }
+            catch (WebException)
+            {
+                session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
+                });
+                scanResult = new ScanResult
+                {
+                    Status = "fail",
+                    pokemons = new List<PokemonLocation>()
+                };
+                return scanResult;
             }
             catch (Exception ex)
             {
