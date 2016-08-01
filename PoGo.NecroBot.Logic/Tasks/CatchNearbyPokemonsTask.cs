@@ -56,7 +56,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                 {
-                    await CatchPokemonTask.Execute(session, encounter, pokemon);
+                    await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon);
                 }
                 else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                 {
