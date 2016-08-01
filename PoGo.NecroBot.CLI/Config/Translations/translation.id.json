@@ -374,11 +374,11 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Sniper] Mencari Pokemon untuk ditembak di {0}..."
+      "Value": "[Sniper] Mencari Pokemon untuk dibidik di {0}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] Tidak ditemukan Pokemon untuk ditembak!"
+      "Value": "[Sniper] Tidak ditemukan Pokemon untuk dibidik!"
     }
   ]
 }
