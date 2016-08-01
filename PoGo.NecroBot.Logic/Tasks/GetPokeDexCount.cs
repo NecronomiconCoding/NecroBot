@@ -18,9 +18,14 @@ namespace PoGo.NecroBot.Logic.Tasks
             var PokeDex = await session.Inventory.GetPokeDexItems();
             for (int i = 0; i < PokeDex.Count; i++)
             {
-                var CaughtPokemon = PokeDex[i].ToString().Split(new[] { "timesCaptured" }, StringSplitOptions.None);
-                var split = CaughtPokemon[1].Split(' ');
-                int Times = int.Parse(split[1]);
+                var CaughtPokemon = PokeDex[i].ToString().Split(new[] {"timesCaptured"}, StringSplitOptions.None);
+                int Times = 0;
+                //TODO: just to prevent exception, may be initial value of Times must be = 1... (and pls use suggested by microsoft name conventions)
+                if (CaughtPokemon.Length > 1)
+                {
+                    var split = CaughtPokemon[1].Split(' ');
+                    Times = int.Parse(split[1]);
+                }
                 if (Times > 0)
                     timesCaptured++;
             }
