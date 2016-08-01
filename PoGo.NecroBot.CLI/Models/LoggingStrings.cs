@@ -27,7 +27,9 @@ namespace PoGo.NecroBot.CLI.Models
 
         internal static string Recycling;
 
-        internal static string Transfered;
+        internal static string Sniper;
+
+        internal static string Transferred;
 
         internal static string Update;
 
@@ -77,7 +79,11 @@ namespace PoGo.NecroBot.CLI.Models
                 session?.Translation.GetTranslation(
                     TranslationString.LogEntryRecycling) ?? "RECYCLING";
 
-            Transfered =
+            Sniper =
+                session?.Translation.GetTranslation(
+                    TranslationString.LogEntrySniper) ?? "SNIPER";
+
+            Transferred =
                 session?.Translation.GetTranslation(
                     TranslationString.LogEntryTransfered) ?? "TRANSFERED";
 
@@ -85,4 +91,5 @@ namespace PoGo.NecroBot.CLI.Models
                 session?.Translation.GetTranslation(
                     TranslationString.LogEntryUpdate) ?? "UPDATE";
         }
+    }
 }
