@@ -31,7 +31,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokemonToEvolve.Any())
             {
-                if (session.LogicSettings.KeepPokemonsThatCanEvolve)
+                if (!session.LogicSettings.KeepPokemonsThatCanEvolve)
                 {
                     var myPokemons = await session.Inventory.GetPokemons();
                     if (session.Profile.PlayerData.MaxPokemonStorage * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage > myPokemons.Count())
