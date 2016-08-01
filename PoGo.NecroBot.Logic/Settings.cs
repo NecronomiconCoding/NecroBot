@@ -540,38 +540,13 @@ namespace PoGo.NecroBot.Logic
                     jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
-<<<<<<< HEAD
                     settings = JsonConvert.DeserializeObject<GlobalSettings>( input, jsonSettings );
-=======
-                    settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
-                    
+
                     //This makes sure that existing config files dont get null values which lead to an exception
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
                     {
                         filter.Value.Moves = new List<PokemonMove>();
                     }
-
-                    // One day we might be able to better do this so its automatic
-                    /*
-                    FieldInfo[] fi = typeof(GlobalSettings).GetFields(BindingFlags.Public | BindingFlags.Instance);
-                    foreach (FieldInfo info in fi)
-                    {
-                        if (info.GetValue(Default) is int || info.GetValue(Default) is bool ||
-                            info.GetValue(Default) is float)
-                        {
-                            
-                        }
-                        if (info.GetValue(Default) is double)
-                        {
-                            Logger.Write($"{info.Name}={info.GetValue(Default)}", LogLevel.Error);
-
-                            Type type = settings.GetType();
-                            PropertyInfo propertyInfo = type.GetProperty(info.Name, BindingFlags.Instance | BindingFlags.Public);
-                            propertyInfo.SetValue(settings, info.GetValue(Default));
-                        }
-                    }
-                    */
->>>>>>> refs/remotes/NECROBOTIO/master
                 }
                 catch( JsonReaderException exception )
                 {
