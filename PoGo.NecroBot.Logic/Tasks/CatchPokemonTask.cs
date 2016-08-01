@@ -56,7 +56,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         ? encounter.WildPokemon?.PokemonData
                         : encounter?.PokemonData) >= session.LogicSettings.KeepMinIvPercentage;
 
-                if ((isLowProbability && isHighCp) || isHighPerfection)
+                if (session.LogicSettings.UseRazzberries && ( ( isLowProbability && isHighCp ) || isHighPerfection ) )
                 {
                     await
                         UseBerry(session,
