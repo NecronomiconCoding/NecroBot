@@ -18,23 +18,26 @@ namespace PoGo.NecroBot.Logic.Logging
 
         private static void Log(string message, bool force = false)
         {
-            if (_lastLogTime.AddSeconds(60) < DateTime.Now && !force)
+            lock (LogbufferList)
             {
-                LogbufferList.Add(message);
-                return;
-            }
-            using (
-                var log =
-                    File.AppendText(Path.Combine(_path,
-                        $"NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt"))
-                )
-            {
-                foreach (var line in LogbufferList)
+                if (_lastLogTime.AddSeconds(60) < DateTime.Now && !force)
                 {
-                    log.WriteLine(line);
+                    LogbufferList.Add(message);
+                    return;
                 }
-                _lastLogTime = DateTime.Now;
-                log.Flush();
+                using (
+                    var log =
+                        File.AppendText(Path.Combine(_path,
+                            $"NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt"))
+                    )
+                {
+                    foreach (var line in LogbufferList)
+                    {
+                        log.WriteLine(line);
+                    }
+                    _lastLogTime = DateTime.Now;
+                    log.Flush();
+                }
             }
         }
 
