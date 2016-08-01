@@ -548,6 +548,31 @@ namespace PoGo.NecroBot.Logic
                 settings.UseMasterBallBelowCatchProbability = Default.UseMasterBallBelowCatchProbability;
             }
 
+            if (settings.UseMasterBallAboveCp < 0)
+            {
+                settings.UseMasterBallAboveCp = Default.UseMasterBallAboveCp;
+            }
+
+            if (settings.UseUltraBallAboveCp < 0)
+            {
+                settings.UseUltraBallAboveCp = Default.UseUltraBallAboveCp;
+            }
+
+            if (settings.UseUltraBallAboveIv < 0)
+            {
+                settings.UseUltraBallAboveIv = Default.UseUltraBallAboveCp;
+            }
+
+            if (settings.UseGreatBallAboveCp < 0)
+            {
+                settings.UseGreatBallAboveCp = Default.UseGreatBallAboveCp;
+            }
+
+            if (settings.UseUltraBallAboveIv < 0)
+            {
+                settings.UseGreatBallAboveIv = Default.UseGreatBallAboveIv;
+            }
+
             if (settings.UseBerriesMinCp < 0)
             {
                 settings.UseBerriesMinCp = Default.UseBerriesMinCp;
