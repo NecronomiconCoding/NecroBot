@@ -137,11 +137,16 @@ namespace PoGo.NecroBot.Logic.Common
         IPBannedError,
         NoEggsAvailable,
         UseLuckyEggActive,
+        UsedLuckyEgg,
+        UseLuckyEggAmount,
         NoIncenseAvailable,
         UseIncenseActive,
+        UseIncenseAmount,
+        UsedIncense,
         AmountPkmSeenCaught,
         PkmPotentialEvolveCount,
-        PkmNotEnoughRessources
+        PkmNotEnoughRessources,
+        EventUsedIncense
     }
 
     public class Translation : ITranslation
@@ -170,8 +175,10 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortFailed,
                 "Name: {0} INFO: Looting failed, possible softban. Unban in: {1}/{2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortTargeted,
-                "Arriving to Pokestop: {0} in ({1}m)"),
+                "Traveling to Pokestop: {0} ({1}m)"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventProfileLogin, "Playing as {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventUsedIncense,
+                "Used Incense, remaining: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventUsedLuckyEgg,
                 "Used Lucky Egg, remaining: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonEvolvedSuccess,
@@ -336,16 +343,20 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy"),
-            new KeyValuePair<TranslationString, string>(TranslationString.IPBannedError, 
+            new KeyValuePair<TranslationString, string>(TranslationString.IPBannedError,
                 "Connection refused. Your IP might have been Blacklisted by Niantic. Exiting.."),
             new KeyValuePair<TranslationString, string>(TranslationString.NoEggsAvailable, "No Eggs Available"),
             new KeyValuePair<TranslationString, string>(TranslationString.UseLuckyEggActive, "Lucky Egg Already Active"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UsedLuckyEgg, "Used Lucky Egg"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UseLuckyEggAmount, "Lucky Eggs in Inventory: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.NoIncenseAvailable, "No Incense Available"),
             new KeyValuePair<TranslationString, string>(TranslationString.UseIncenseActive, "Incense Already Active"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UseIncenseAmount, "Incense in Inventory: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UsedIncense, "Used an Incense"),
             new KeyValuePair<TranslationString, string>(TranslationString.AmountPkmSeenCaught, 
                 "Amount of Pokemon Seen: {0}/151, Amount of Pokemon Caught: {1}/151"),
             new KeyValuePair<TranslationString, string>(TranslationString.PkmPotentialEvolveCount, 
-                "[Evolves] Potential Evolves: {}"),
+                "[Evolves] Potential Evolves: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.PkmNotEnoughRessources, 
                 "Pokemon Upgrade Failed Not Enough Resources")
         };

@@ -22,7 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Vous êtes en dehors de votre rayon défini! Début de la marche ({0}m de distance) dans 5 secondes."
+      "Value": "Vous dépassez votre rayon d'action! Début de la marche ({0}m de distance) dans 5 secondes. Vérifiez votre fichier LastPos.ini"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} dans {1}m"
+      "Value": "{0} {1}m"
     },
     {
       "Key": "eventProfileLogin",
@@ -46,7 +46,11 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Bonus Oeuf Chance : {0}min restant"
+      "Value": "Utilisation d'un oeuf Chance, reste : {0}"
+    },
+    {
+      "Key": "EventUsedIncense",
+      "Value": "Utilisation d'un encens, reste : {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -256,15 +260,23 @@
       "Key": "pokemonSkipped",
       "Value": "{0} est ignoré"
     },
-	{
+    {
       "Key": "zeroPokeballInv",
-      "Value": "Vous n'avez plus de pokéballs, capture de pokémons impossible !"
+      "Value": "Vous n'avez plus de pokéballs, la capture de pokémons est impossible !"
     },
-	{
+    {
       "Key": "currentPokeballInv",
       "Value": "[Inventaire] Pokéballs: {0} | Superballs: {1} | Hyperballs: {2} | Masterballs: {3}"
     },
-	{
+    {
+    	"Key": "MaxItemsCombinedOverMaxItemStorage",
+    	"Value": "[Configuration Invalide] Vos objets consommables (Pokéballs+Potions+Rappels={0}) dépasse le seuil de votre inventaire ({1})"
+    },
+    {
+      "Key": "RecyclingQuietly",
+      "Value": "Recyclage rapide en cours..."
+    },
+    {
       "Key": "checkingForBallsToRecycle",
       "Value": "Recherche de PokéBalls à supprimer. En garder {0}"
     },
@@ -272,11 +284,11 @@
       "Key": "checkingForPotionsToRecycle",
       "Value": "Recherche de Potions à supprimer. En garder {0}"
     },
-	{
+    {
       "Key": "checkingForRevivesToRecycle",
       "Value": "Recherche de Rappels à supprimer. En garder {0}"
     },
-	{
+    {
       "Key": "pokeballsToKeepIncorrect",
       "Value": "TotalAmountOfPokeballsToKeep est mal configuré. Le nombre est inférieur à 1."
     },
@@ -437,6 +449,14 @@
       "Value": "Oeuf Chance déjà activé"
     },
     {
+      "Key": "UsedLuckyEgg",
+      "Value": "Oeuf Chance utilisé"
+    },
+    {
+      "Key": "UseLuckyEggAmount",
+      "Value": "[Inventaire] Oeuf Chance : {0}"
+    },
+    {
       "Key": "NoIncenseAvailable",
       "Value": "Aucun encens de disponible"
     },
@@ -445,12 +465,20 @@
       "Value": "Encens déjà activé"
     },
     {
-      "Key": "AmountPkmSeenCaught",
-      "Value": "Total de pokémon vu : {}/151, Total de pokémon capturé : {}/151"
+      "Key": "UseIncenseAmount",
+      "Value": "[Inventaire] Encens : {0}"
     },
     {
-      "Key": "EventEvolveCount",
-      "Value": "[Evolution] Total envisageable : {}"
+      "Key": "UsedIncense",
+      "Value": "Encens utilisé"
+    },
+    {
+      "Key": "AmountPkmSeenCaught",
+      "Value": "Deck Pokémon(151) : Rencontré {0} | Capturé {1}"
+    },
+    {
+      "Key": "PkmPotentialEvolveCount",
+      "Value": "[Evolution] Total envisageable : {0}"
     },
     {
       "Key": "PkmNotEnoughRessources",

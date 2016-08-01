@@ -181,10 +181,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             var scanResult = SnipeScanForPokemon(session, location);
 
-                            List<PokemonLocation> locationsToSnipe = new List<PokemonLocation>();
+                            var locationsToSnipe = new List<PokemonLocation>();
                             if (scanResult.pokemons != null)
                             {
-                                var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains((PokemonId) q.pokemon_name));
+                                var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains(q.pokemon_name));
                                 var notVisitedPokemon = filteredPokemon.Where(q => !LocsVisited.Contains(q));
                                 var notExpiredPokemon = notVisitedPokemon.Where(q => q.expires < currentTimestamp);
 
@@ -272,7 +272,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 finally
                 {
                     await
-                        session.Client.Player.UpdatePlayerLocation(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude);
+                        session.Client.Player.UpdatePlayerLocation(CurrentLatitude, CurrentLongitude,
+                            session.Client.CurrentAltitude);
                 }
 
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
@@ -283,16 +284,27 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Longitude = CurrentLongitude
                     });
 
-                    await CatchPokemonTask.Execute(session, encounter, pokemon);
+                    await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon);
                 }
                 else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                 {
-                    session.EventDispatcher.Send(new WarnEvent
+                    if (session.LogicSettings.EvolveAllPokemonAboveIv ||
+                        session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
                     {
-                        Message =
-                            session.Translation.GetTranslation(
-                                TranslationString.InvFullTransferManually)
-                    });
+                        await EvolvePokemonTask.Execute(session, cancellationToken);
+                    }
+
+                    if (session.LogicSettings.TransferDuplicatePokemon)
+                    {
+                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                    }
+                    else
+                    {
+                        session.EventDispatcher.Send(new WarnEvent
+                        {
+                            Message = session.Translation.GetTranslation(TranslationString.InvFullTransferManually)
+                        });
+                    }
                 }
                 else
                 {
@@ -322,8 +334,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var offset = session.LogicSettings.SnipingScanOffset;
             // 0.003 = half a mile; maximum 0.06 is 10 miles
-            if (offset<0.001) offset=0.003;
-            if (offset>0.06) offset = 0.06;
+            if (offset < 0.001) offset = 0.003;
+            if (offset > 0.06) offset = 0.06;
 
             var boundLowerLeftLat = location.Latitude - offset;
             var boundLowerLeftLng = location.Longitude - offset;
@@ -346,7 +358,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var request = WebRequest.CreateHttp(uri);
                 request.Accept = "application/json";
                 request.Method = "GET";
-                request.Timeout = 5000;
+                request.Timeout = 10000;
                 request.ReadWriteTimeout = 32000;
 
                 var resp = request.GetResponse();
@@ -358,7 +370,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             catch (Exception ex)
             {
                 // most likely System.IO.IOException
-                session.EventDispatcher.Send(new ErrorEvent { Message = ex.ToString() });
+                session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
                 scanResult = new ScanResult
                 {
                     Status = "fail",

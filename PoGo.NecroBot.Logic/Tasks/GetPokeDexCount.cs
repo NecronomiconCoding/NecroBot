@@ -14,22 +14,12 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            int timesCaptured = 0;
             var PokeDex = await session.Inventory.GetPokeDexItems();
-            for (int i = 0; i < PokeDex.Count; i++)
-            {
-                var CaughtPokemon = PokeDex[i].ToString().Split(new[] {"timesCaptured"}, StringSplitOptions.None);
-                int Times = 0;
-                //TODO: just to prevent exception, may be initial value of Times must be = 1... (and pls use suggested by microsoft name conventions)
-                if (CaughtPokemon.Length > 1)
-                {
-                    var split = CaughtPokemon[1].Split(' ');
-                    Times = int.Parse(split[1]);
-                }
-                if (Times > 0)
-                    timesCaptured++;
-            }
-            Logger.Write(session.Translation.GetTranslation(TranslationString.AmountPkmSeenCaught, PokeDex.Count, timesCaptured));
+            var _totalUniqueEncounters = PokeDex.Select(i => new { Pokemon = i.InventoryItemData.PokedexEntry.PokemonId, Captures = i.InventoryItemData.PokedexEntry.TimesCaptured });
+            var _totalCaptures = _totalUniqueEncounters.Count(i => i.Captures > 0);
+            var _totalData = PokeDex.Count();
+            
+            Logger.Write(session.Translation.GetTranslation(TranslationString.AmountPkmSeenCaught, _totalData, _totalCaptures));
         }
     }
 }

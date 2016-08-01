@@ -30,12 +30,14 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler
         {
             if (_registerdHandlers.ContainsKey((string)message.Command))
             {
-               await _registerdHandlers[(string)message.Command].Handle(session, webSocketSession, message);
+                await _registerdHandlers[(string)message.Command].Handle(session, webSocketSession, message);
             }
             else
             {
                 // Unknown command.
             }
+
+            
         }
 
         // Registers all IWebSocketRequestHandler's automatically. 
