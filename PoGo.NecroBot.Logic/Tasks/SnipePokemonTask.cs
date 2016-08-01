@@ -208,7 +208,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                             cancellationToken);
                                 }
                             }
-                            else if (scanResult.Status.Contains("fail"))
+                            else if (!string.IsNullOrEmpty(scanResult.Status) && scanResult.Status.Contains("fail"))
                             {
                                 session.EventDispatcher.Send(new SnipeEvent
                                 {
