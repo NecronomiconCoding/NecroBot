@@ -106,24 +106,13 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (session.LogicSettings.DumpPokemonStats)
             {
                 const string dumpFileName = "PokeBagStats";
-                Dumper.ClearDumpFile(session, dumpFileName, "csv");
+                Dumper.ClearDumpFile(session, dumpFileName);
+                Dumper.Dump(session, "pokemonid,pokemonlevel,cp,perfection,stamina,staminamax,move1,move2,candy,ownername,origin,heightm,weightkg,individualattack,individualdefense,individualstamina,cpmultiplier,battlesattacked,battlesdefended,creationtimems,numupgrades,additionalcpmultiplier,favorite,nickname", dumpFileName);
                 foreach (var pokemon in allPokemonInBag)
                 {
-                    int candy = PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings);
-                    string pokeName = "";
-                    if (pokemon.Favorite == 1)
-                    {
-                        pokeName += "*";
-                    }
-                    pokeName += pokemon.PokemonId.ToString();
-                    if (!string.IsNullOrEmpty(pokemon.Nickname.ToString()))
-                    {
-                        pokeName += " (" + pokemon.Nickname.ToString() + ")";
-                    }
-
                     Dumper.Dump(session,
-                        string.Format($"NAME: {pokeName, -25} LVL: {PokemonInfo.GetLevel(pokemon).ToString("00"), -7} CP: {pokemon.Cp.ToString() + " / " + PokemonInfo.CalculateMaxCp(pokemon).ToString(), -15} IV: {PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"), -10} MOVE1: {pokemon.Move1, -20} MOVE2: {pokemon.Move2, -20} Candies: {candy}"),
-                        dumpFileName, "csv");
+                        $"{pokemon.PokemonId},{PokemonInfo.GetLevel(pokemon)},{pokemon.Cp},{PokemonInfo.CalculatePokemonPerfection(pokemon)},{pokemon.Stamina},{pokemon.StaminaMax},{pokemon.Move1},{pokemon.Move2},{PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings)},{pokemon.OwnerName},{pokemon.Origin},{pokemon.HeightM},{pokemon.WeightKg},{pokemon.IndividualAttack},{pokemon.IndividualDefense},{pokemon.IndividualStamina},{pokemon.CpMultiplier},{pokemon.BattlesAttacked},{pokemon.BattlesDefended},{pokemon.CreationTimeMs},{pokemon.NumUpgrades},{pokemon.AdditionalCpMultiplier},{pokemon.Favorite},{pokemon.Nickname}",
+                        dumpFileName);
                 }
             }
             await Task.Delay(500);
