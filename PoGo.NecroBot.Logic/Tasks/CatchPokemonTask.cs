@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Linq;
@@ -198,14 +198,12 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (ultraBallsCount > 0 && (
                     pokemonCp >= session.LogicSettings.UseUltraBallAboveCp ||
-                    iV >= session.LogicSettings.UseUltraBallAboveIv ||
-                    probability < session.LogicSettings.UseUltraBallBelowCatchProbability))
+                    iV >= session.LogicSettings.UseUltraBallAboveIv) && probability < session.LogicSettings.UseUltraBallBelowCatchProbability)
                 return ItemId.ItemUltraBall;
 
             if (greatBallsCount > 0 && (
                     pokemonCp >= session.LogicSettings.UseGreatBallAboveCp ||
-                    iV >= session.LogicSettings.UseGreatBallAboveIv ||
-                    probability < session.LogicSettings.UseGreatBallBelowCatchProbability))
+                    iV >= session.LogicSettings.UseGreatBallAboveIv) && probability < session.LogicSettings.UseGreatBallBelowCatchProbability)
                 return ItemId.ItemGreatBall;
 
             if (pokeBallsCount > 0)
