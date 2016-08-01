@@ -182,13 +182,13 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPotionsToKeep = 80;
         public int TotalAmountOfRevivesToKeep = 60;
         //balls
-        public int UseGreatBallAboveCp = 1000;
-        public int UseUltraBallAboveCp = 1250;
+        public int UseGreatBallAboveCp = 750;
+        public int UseUltraBallAboveCp = 1000;
         public int UseMasterBallAboveCp = 1500;
         public int UseGreatBallAboveIv = 85;
-        public int UseUltraBallAboveIv = 90;
-        public double UseGreatBallBelowCatchProbability = 0.3;
-        public double UseUltraBallBelowCatchProbability = 0.2;
+        public int UseUltraBallAboveIv = 95;
+        public double UseGreatBallBelowCatchProbability = 0.2;
+        public double UseUltraBallBelowCatchProbability = 0.1;
         public double UseMasterBallBelowCatchProbability = 0.05;
         //transfer
         public bool TransferDuplicatePokemon = true;
