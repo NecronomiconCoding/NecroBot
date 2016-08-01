@@ -113,6 +113,8 @@
     <Compile Include="WebSocketHandler\BasicGetCommands\Events\ItemListResponce.cs" />
     <Compile Include="WebSocketHandler\BasicGetCommands\GetEggListHandler.cs" />
     <Compile Include="WebSocketHandler\BasicGetCommands\GetItemsListHandler.cs" />
+    <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\TransferPokemonTask.cs" />
+    <Compile Include="WebSocketHandler\BasicGetCommands\TransferPokemonHandler.cs" />
     <Compile Include="WebSocketHandler\BasicGetCommands\Helpers\EggListWeb.cs" />
     <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\GetEggListTask.cs" />
     <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\GetItemListTask.cs" />
