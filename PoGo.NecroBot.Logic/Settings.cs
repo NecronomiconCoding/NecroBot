@@ -151,10 +151,10 @@ namespace PoGo.NecroBot.Logic
         public bool PrioritizeIvOverCp = false;
         //luckyandincense
         public bool UseEggIncubators = true;
-        public bool UseLuckyEggConstantly = true;
+        public bool UseLuckyEggConstantly = false;
         public int UseLuckyEggsMinPokemonAmount = 30;
         public bool UseLuckyEggsWhileEvolving = false;
-        public bool UseIncenseConstantly = true;
+        public bool UseIncenseConstantly = false;
         //snipe
         public bool UseSnipeOnlineLocationServer = true;
         public bool UseSnipeLocationServer = false;
@@ -178,13 +178,13 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPotionsToKeep = 80;
         public int TotalAmountOfRevivesToKeep = 60;
         //balls
-        public int UseGreatBallAboveCp = 750;
-        public int UseUltraBallAboveCp = 1000;
+        public int UseGreatBallAboveCp = 100;
+        public int UseUltraBallAboveCp = 1250;
         public int UseMasterBallAboveCp = 1500;
-        public int UseGreatBallAboveIv = 80;
+        public int UseGreatBallAboveIv = 85;
         public int UseUltraBallAboveIv = 90;
-        public double UseGreatBallBelowCatchProbability = 0.5;
-        public double UseUltraBallBelowCatchProbability = 0.4;
+        public double UseGreatBallBelowCatchProbability = 0.3;
+        public double UseUltraBallBelowCatchProbability = 0.2;
         public double UseMasterBallBelowCatchProbability = 0.05;
         //transfer
         public bool TransferDuplicatePokemon = true;
