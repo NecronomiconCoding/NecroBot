@@ -558,7 +558,7 @@ namespace PoGo.NecroBot.Logic
                 settings.UseBerriesMinIv = Default.UseBerriesMinIv;
             }
 
-            if (settings.UseBerriesOperator.ToLower().Equals("and") && settings.UseBerriesOperator.ToLower().Equals("or"))
+            if (settings.UseBerriesOperator == null || (!settings.UseBerriesOperator.ToLower().Equals("and") && !settings.UseBerriesOperator.ToLower().Equals("or")))
             {
                 settings.UseBerriesOperator = Default.UseBerriesOperator;
             }
