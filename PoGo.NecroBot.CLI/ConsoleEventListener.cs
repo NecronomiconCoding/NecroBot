@@ -117,12 +117,6 @@ namespace PoGo.NecroBot.CLI
             Logger.Write( session.Translation.GetTranslation( TranslationString.EventFortTargeted, fortTargetEvent.Name, Math.Round( fortTargetEvent.Distance ), intTimeForArrival ), LogLevel.Info, ConsoleColor.DarkRed );
         }
 
-        private static void HandleEvent( UseBerryLogEvent evt, ISession session )
-        {
-            // SETUP TRANSLATIONS \\
-            Logger.Write( evt.message, LogLevel.Berry );
-        }
-
         private static void HandleEvent(PokemonCaptureEvent pokemonCaptureEvent, ISession session)
         {
             Func<ItemId, string> returnRealBallName = a =>
