@@ -22,7 +22,6 @@ namespace PoGo.NecroBot.CLI
         private static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionEventHandler;
-            Console.SetWindowSize(165, 30);
             Console.CancelKeyPress += (sender, eArgs) =>
             {
                 QuitEvent.Set();
