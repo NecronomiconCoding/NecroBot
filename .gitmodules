@@ -1,3 +1,4 @@
 [submodule "FeroxRev"]
 	path = FeroxRev
 	url = https://github.com/NecronomiconCoding/NecroBot-Rocket-API
+	branch = master
