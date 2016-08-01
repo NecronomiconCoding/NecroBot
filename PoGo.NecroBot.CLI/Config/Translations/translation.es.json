@@ -26,11 +26,11 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "No se encontraron pokeparadas disponibles en tu área. ¿Has configurado una distancia máxima demasiado pequeña?"
+      "Value": "No se encontraron Poképaradas disponibles en tu área. ¿Has configurado una distancia máxima demasiado pequeña?"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nombre: {0} PX: {1}, Gemas: {2}, Objetos: {3}"
+      "Value": "Nombre: {0} Exp: {1}, Gemas: {2}, Objetos: {3}"
     },
     {
       "Key": "eventFortFailed",
@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Llegando a Pokeparada: {0} en ({1}m)"
+      "Value": "Llegando a Poképarada: {0} en ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0}, obtienes {1}px"
+      "Value": "{0}, obtienes {1} exp"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "itemRazzBerry",
-      "Value": "Baya Razz"
+      "Value": "Baya Frambu"
     },
     {
       "Key": "catchStatusAttempt",
@@ -98,7 +98,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokemons"
+      "Value": "Pokémons"
     },
     {
       "Key": "commonWordPerfect",
@@ -114,19 +114,19 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "Pokemons con mayor CP"
+      "Value": "Pokémons con mayor CP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Pokemons con mayor Perfección"
+      "Value": "Pokémons con mayor Perfección"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Pokemons con mayor Nivel"
+      "Value": "Pokémons con mayor Nivel"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Asegúrese de que la Latitud y Longitud son las correctas. Salga del Programa si no es así! Lat: {0} Lng: {1}"
+      "Value": "Asegúrese de que la Latitud y Longitud son las correctas. Salga del programa si no es así! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -154,7 +154,7 @@
     },
     {
       "Key": "logEntryPokestop",
-      "Value": "POKEPARADA"
+      "Value": "Poképarada"
     },
     {
       "Key": "logEntryFarming",
@@ -238,7 +238,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Perfecto! Ya tienes la versión más reciente {0}"
+      "Value": "¡Perfecto! Ya tienes la versión más reciente {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -254,7 +254,7 @@
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "Terminada la desempaquetación de los archivos..."
+      "Value": "Terminado el desempaquetado de los archivos..."
     },
     {
       "Key": "finishedTransferringConfig",
@@ -266,23 +266,23 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Buscando incienso para pokemon..."
+      "Value": "Buscando incienso para pokémon..."
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Buscando Pokemon..."
+      "Value": "Buscando Pokémon..."
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Buscando Cebos pokemon..."
+      "Value": "Buscando Cebos pokémon..."
     },
     {
-      "Key": "pokemonSkipped",
+      "Key": "pokémonSkipped",
       "Value": "Omitido {0}"
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "No tienes Poké Ball en el inventario, no podemos atrapar más Pokemon por ahora :("
+      "Value": "No tienes Poké Ball en el inventario, no podemos atrapar más Pokémon por ahora :("
     },
     {
       "Key": "currentPokeballInv",
@@ -322,11 +322,11 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "El inventario de pokemons está lleno. Transferir pokemons..."
+      "Value": "El inventario de pokémons está lleno. Transfiriendo pokémons..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "El inventario de pokemons está lleno. Por favor transfiera los pokemons manualmente o active (true) TransferDuplicatePokemon en el archivo de opciones..."
+      "Value": "El inventario de pokémons está lleno. Por favor transfiera los pokémons manualmente o active (true) TransferDuplicatePokemon en el archivo de opciones..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -338,23 +338,23 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Se encontró un problema: Cebo pokemon {0}"
+      "Value": "Se encontró un problema: Cebo pokémon {0}"
     },
     {
       "Key": "desiredDestTooFar",
       "Value": "El destino deseado {0}, {1} está demasiado lejos de su posición actual {2}, {3}"
     },
     {
-      "Key": "pokemonRename",
+      "Key": "pokémonRename",
       "Value": "Pokemon {0} ({1}) renombrado de {2} a {3}."
     },
     {
-      "Key": "pokemonFavorite",
+      "Key": "pokémonFavorite",
       "Value": "{0}% perfecto {1} (PC {2}) *favorito*."
     },
     {
-      "Key": "pokemonIgnoreFilter",
-      "Value": "[Filtro Pokemons Ignorados] - Ignorando {0} tal y como se definió en la configuración actual."
+      "Key": "pokémonIgnoreFilter",
+      "Value": "[Filtro Pokémons Ignorados] - Ignorando {0} tal y como se definió en la configuración actual."
     },
     {
       "Key": "catchStatusAttempt",
@@ -430,7 +430,7 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Sniper] Escaneando en busca de Pokemons en {0}..."
+      "Value": "[Sniper] Escaneando en busca de Pokémons en {0}..."
     },
     {
       "Key": "snipeScanEx",
@@ -438,7 +438,7 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] No se encontraron Pokemons :("
+      "Value": "[Sniper] No se encontraron Pokémons :("
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
@@ -466,7 +466,7 @@
     },
     {
       "Key": "useLuckyEggActive",
-      "Value": "Huevo suerte ya está activo"
+      "Value": "Huevo Suerte ya está activo"
     },
     {
       "Key": "noIncenseAvailable",
@@ -478,7 +478,7 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "Cantidad de Pokemons vistos:{}:151, Cantidad de Pokemons capturados:{}:151"
+      "Value": "Cantidad de Pokémons vistos:{}:151, Cantidad de Pokémons capturados:{}:151"
     },
     {
       "Key": "pkmPotentialEvolveCount",
