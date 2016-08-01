@@ -345,7 +345,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.AmountPkmSeenCaught, 
                 "Amount of Pokemon Seen: {0}/151, Amount of Pokemon Caught: {1}/151"),
             new KeyValuePair<TranslationString, string>(TranslationString.PkmPotentialEvolveCount, 
-                "[Evolves] Potential Evolves: {}"),
+                "[Evolves] Potential Evolves: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.PkmNotEnoughRessources, 
                 "Pokemon Upgrade Failed Not Enough Resources")
         };

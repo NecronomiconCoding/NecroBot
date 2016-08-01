@@ -33,16 +33,9 @@ namespace PoGo.NecroBot.Logic.State
                 switch (session.Settings.AuthType)
                 {
                     case AuthType.Ptc:
-                        try
-                        {
-                            await
-                                session.Client.Login.DoPtcLogin(session.Settings.PtcUsername,
-                                    session.Settings.PtcPassword);
-                        }
-                        catch (AggregateException ae)
-                        {
-                            throw ae.Flatten().InnerException;
-                        }
+                        await
+                            session.Client.Login.DoPtcLogin(session.Settings.PtcUsername,
+                                session.Settings.PtcPassword);
                         break;
                     case AuthType.Google:
                         await
@@ -56,6 +49,10 @@ namespace PoGo.NecroBot.Logic.State
                         });
                         return null;
                 }
+            }
+            catch (AggregateException ae)
+            {
+                throw ae.Flatten().InnerException;
             }
             catch (Exception ex) when (ex is PtcOfflineException || ex is AccessTokenExpiredException)
             {
@@ -173,7 +170,7 @@ namespace PoGo.NecroBot.Logic.State
         public async Task DownloadProfile(ISession session)
         {
             session.Profile = await session.Client.Player.GetPlayer();
-            session.EventDispatcher.Send(new ProfileEvent {Profile = session.Profile});
+            session.EventDispatcher.Send(new ProfileEvent { Profile = session.Profile });
         }
     }
 }
