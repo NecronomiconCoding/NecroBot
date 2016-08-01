@@ -178,7 +178,7 @@ namespace PoGo.NecroBot.Logic
         //amounts
         public int MaxPokeballsPerPokemon = 6;
         public int MaxTravelDistanceInMeters = 1000;
-        public int TotalAmountOfPokebalsToKeep = 120;
+        public int TotalAmountOfPokeballsToKeep = 120;
         public int TotalAmountOfPotionsToKeep = 80;
         public int TotalAmountOfRevivesToKeep = 60;
         //balls
@@ -770,7 +770,7 @@ namespace PoGo.NecroBot.Logic
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
         public double SnipingScanOffset => _settings.SnipingScanOffset;
-        public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokebalsToKeep;
+        public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokeballsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
     }

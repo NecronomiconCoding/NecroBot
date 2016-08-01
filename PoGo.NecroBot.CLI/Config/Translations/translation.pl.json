@@ -306,7 +306,7 @@
     },
     {
       "Key": "pokeballsToKeepIncorrect",
-      "Value": "Wartość TotalAmountOfPokebalsToKeep nie może być mniejsza niż 1. Zmień ją!"
+      "Value": "Wartość TotalAmountOfPokeballsToKeep nie może być mniejsza niż 1. Zmień ją!"
     },
     {
       "Key": "potionsToKeepIncorrect",
