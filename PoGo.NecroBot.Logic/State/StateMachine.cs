@@ -13,6 +13,8 @@ namespace PoGo.NecroBot.Logic.State
     public class StateMachine
     {
         private IState _initialState;
+        private int _crashCount;
+        private DateTime _crashTime;
 
         public Task AsyncStart(IState initialState, Session session,
             CancellationToken cancellationToken = default(CancellationToken))
@@ -23,6 +25,8 @@ namespace PoGo.NecroBot.Logic.State
         public void SetFailureState(IState state)
         {
             _initialState = state;
+            _crashCount = 0;
+            _crashTime = DateTime.Now;
         }
 
         public async Task Start(IState initialState, Session session,
@@ -37,10 +41,20 @@ namespace PoGo.NecroBot.Logic.State
                 }
                 catch (InvalidResponseException)
                 {
-                    session.EventDispatcher.Send(new ErrorEvent
+                    session.EventDispatcher.Send(new ErrorEvent { Message = "Niantic Servers unstable, throttling API Calls." });
+
+                    if(_crashTime.AddSeconds(3).Ticks > DateTime.Now.Ticks)     //if throttling API calls twice in 3s, crash count will increase.
                     {
-                        Message = "Niantic Servers unstable, throttling API Calls."
-                    });
+                        _crashCount++;
+                    }
+
+                    if (_crashCount > 20)       //if server throttling API calls too frequently, let bot relogin.
+                    {
+                        _crashCount = 0;
+                        state = _initialState;
+                    }
+
+                    _crashTime = DateTime.Now;
                 }
                 catch (OperationCanceledException)
                 {
