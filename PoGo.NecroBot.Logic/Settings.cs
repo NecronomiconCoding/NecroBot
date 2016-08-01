@@ -104,6 +104,7 @@ namespace PoGo.NecroBot.Logic
         [JsonIgnore] public string ProfileConfigPath;
         [JsonIgnore] public string ProfilePath;
 
+        [JsonProperty("allowUploading",DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [DefaultValue("en")]
         public string TranslationLanguageCode;
         //autoupdate
@@ -497,8 +498,24 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Mew,
             PokemonId.Mewtwo
         };
-
         
+        public GlobalSettings()
+        {
+            InitializePropertyDefaultValues( this );
+        }
+
+        public void InitializePropertyDefaultValues( object obj )
+        {
+            FieldInfo[] fields = obj.GetType().GetFields();
+
+            foreach( FieldInfo field in fields )
+            {
+                var d = field.GetCustomAttribute<DefaultValueAttribute>();
+
+                if( d != null )
+                    field.SetValue( obj, d.Value );
+            }
+        }
 
         public static GlobalSettings Default => new GlobalSettings();
 
@@ -509,30 +526,30 @@ namespace PoGo.NecroBot.Logic
             var profileConfigPath = Path.Combine(profilePath, "config");
             var configFile = Path.Combine(profileConfigPath, "config.json");
 
-            if (File.Exists(configFile))
+            if( File.Exists( configFile ) )
             {
+
                 try
                 {
                     //if the file exists, load the settings
-                    var input = File.ReadAllText(configFile);
+                    var input = File.ReadAllText( configFile );
 
                     var jsonSettings = new JsonSerializerSettings();
-                    jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                    jsonSettings.Converters.Add( new StringEnumConverter { CamelCaseText = true } );
                     jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
-                    settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                    settings = JsonConvert.DeserializeObject<GlobalSettings>( input, jsonSettings );
                 }
-                catch (JsonReaderException exception)
+                catch( JsonReaderException exception )
                 {
-                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+                    Logger.Write( "JSON Exception: " + exception.Message, LogLevel.Error );
                     return null;
                 }
             }
             else
-            {
                 settings = new GlobalSettings();
-            }
+            
 
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
