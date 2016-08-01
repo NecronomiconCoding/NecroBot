@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
 {
-    class TransferPokemonTask
+    class EvolvePokemonTask
     {
         public static async Task Execute(ISession session, WebSocketSession webSocketSession, ulong pokemonId, string requestID)
         {
-            await Logic.Tasks.TransferPokemonTask.Execute(session, pokemonId);
+            await Logic.Tasks.EvolveSpecificPokemonTask.Execute(session, pokemonId);
         }
     }
 }

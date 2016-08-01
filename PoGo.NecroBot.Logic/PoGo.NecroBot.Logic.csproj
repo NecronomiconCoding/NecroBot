@@ -123,6 +123,8 @@
     <Compile Include="Tasks\RecycleItemsTask.cs" />
     <Compile Include="Tasks\RenamePokemonTask.cs" />
     <Compile Include="Tasks\SnipePokemonTask.cs" />
+    <Compile Include="Tasks\EvolveSpecificPokemonTask.cs" />
+    <Compile Include="Tasks\TransferPokemonTask.cs" />
     <Compile Include="Tasks\TransferDuplicatePokemonTask.cs" />
     <Compile Include="Event\UseLuckyEggEvent.cs" />
     <Compile Include="State\VersionCheckState.cs" />
