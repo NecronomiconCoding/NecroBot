@@ -55,9 +55,8 @@ namespace PoGo.NecroBot.Logic.Utils
                 var minutes = 0.00;
                 if (double.IsInfinity(time) == false && time > 0)
                 {
-                    time = Convert.ToDouble(TimeSpan.FromHours(time).ToString("h\\.mm"), CultureInfo.InvariantCulture);
-                    hours = Math.Truncate(time);
-                    minutes = Math.Round((time - hours)*100);
+                    hours = Math.Truncate(TimeSpan.FromHours(time).TotalHours);
+                    minutes = TimeSpan.FromHours(time).Minutes;
                 }
 
                 output = new StatsExport

@@ -25,7 +25,6 @@ namespace PoGo.NecroBot.Logic
     {
         private const double SpeedDownTo = 10/3.6;
         private readonly Client _client;
-
         public Navigation(Client client)
         {
             _client = client;
@@ -104,6 +103,8 @@ namespace PoGo.NecroBot.Logic
                         await
                             _client.Player.UpdatePlayerLocation(targetLocation.Latitude, targetLocation.Longitude,
                                 _client.Settings.DefaultAltitude);
+                UpdatePositionEvent?.Invoke(targetLocation.Latitude, targetLocation.Longitude);
+
                 return result;
             }
 

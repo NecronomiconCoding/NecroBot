@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Kamu di luar dari radius yang kamu tentukan! Jalan ke tempat awal (sekitar {0}m) dalam 5 detik. Apakah file Coords.ini kamu benar?"
+        "Kamu di luar dari radius yang kamu tentukan! Jalan ke tempat awal (sekitar {0}m) dalam 5 detik. Apakah file LastPos.ini kamu benar?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -220,11 +220,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Bukan Perjalanan Realistis {0}, menggunakan Coords.ini yang terakhir disimpan"
+      "Value": "Bukan Perjalanan Realistis {0}, menggunakan LastPos.ini yang terakhir disimpan"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinat di file \"Coords.ini\" cacat, menggunakan koordinat default"
+      "Value": "Koordinat di file \"LastPos.ini\" cacat, menggunakan koordinat default"
     },
     {
       "Key": "gotUpToDateVersion",

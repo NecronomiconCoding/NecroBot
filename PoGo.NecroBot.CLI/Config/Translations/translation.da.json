@@ -252,11 +252,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Ingen realistisk bevægelse ved {0}, benytter nyligt gemte Data fra Coords.ini"
+      "Value": "Ingen realistisk bevægelse ved {0}, benytter nyligt gemte Data fra LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinater i \"Coords.ini\" er ugyldige! Benytter standard Koordinater."
+      "Value": "Koordinater i \"LastPos.ini\" er ugyldige! Benytter standard Koordinater."
     },
     {
       "Key": "gotUpToDateVersion",

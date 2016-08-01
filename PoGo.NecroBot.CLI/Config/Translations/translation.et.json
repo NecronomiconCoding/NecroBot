@@ -253,11 +253,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Ei leidnud realistlikku liikumist: {0}, kasutan viimati salvestatud andmeid failist Coords.ini"
+      "Value": "Ei leidnud realistlikku liikumist: {0}, kasutan viimati salvestatud andmeid failist LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinaadid failis \"Coords.ini\" ei ole korrektsed! Kasutage standardseid koordinaate."
+      "Value": "Koordinaadid failis \"LastPos.ini\" ei ole korrektsed! Kasutage standardseid koordinaate."
     },
     {
       "Key": "gotUpToDateVersion",

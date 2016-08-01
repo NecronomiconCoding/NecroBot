@@ -39,6 +39,8 @@ namespace PoGo.NecroBot.Logic.Common
         EventItemRecycled,
         EventPokemonCapture,
         EventNoPokeballs,
+        EventUseBerry,
+        ItemRazzBerry,
         CatchStatusAttempt,
         CatchStatus,
         Candies,
@@ -129,7 +131,16 @@ namespace PoGo.NecroBot.Logic.Common
         NoPokemonToSnipe,
         NotEnoughPokeballsToSnipe,
         DisplayHighestMove1Header,
-        DisplayHighestMove2Header
+        DisplayHighestMove2Header,
+        DisplayHighestCandy,
+        IPBannedError,
+        NoEggsAvailable,
+        UseLuckyEggActive,
+        NoIncenseAvailable,
+        UseIncenseActive,
+        AmountPkmSeenCaught,
+        PkmPotentialEvolveCount,
+        PkmNotEnoughRessources
     }
 
     public class Translation : ITranslation
@@ -150,7 +161,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.WrongAuthType,
                 "Unknown AuthType in config.json"),
             new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsOutsideRadius,
-                "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your Coords.ini file correct?"),
+                "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your LastPos.ini file correct?"),
             new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsNoUsableFound,
                 "No usable PokeStops found in your area. Is your maximum distance too small?"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortUsed,
@@ -173,6 +184,8 @@ namespace PoGo.NecroBot.Logic.Common
                 "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
                 "No Pokeballs - We missed a {0} with CP {1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventUseBerry, "Used {0} | {1} remaining"),
+            new KeyValuePair<TranslationString, string>(TranslationString.ItemRazzBerry, "Razz Berry"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchStatusAttempt, "{0} Attempt #{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchStatus, "{0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.Candies, "Candies: {0}"),
@@ -225,9 +238,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.RealisticTravelDetected,
                 "Detected realistic Traveling , using UserSettings.settings"),
             new KeyValuePair<TranslationString, string>(TranslationString.NotRealisticTravel,
-                "Not realistic Traveling at {0}, using last saved Coords.ini"),
+                "Not realistic Traveling at {0}, using last saved LastPos.ini"),
             new KeyValuePair<TranslationString, string>(TranslationString.CoordinatesAreInvalid,
-                "Coordinates in \"Coords.ini\" file are invalid, using the default coordinates"),
+                "Coordinates in \"LastPos.ini\" file are invalid, using the default coordinates"),
             new KeyValuePair<TranslationString, string>(TranslationString.GotUpToDateVersion,
                 "Perfect! You already have the newest Version {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.AutoUpdaterDisabled,
@@ -260,7 +273,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.CheckingForRevivesToRecycle,
                 "Checking for revives to recycle, keeping {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.PokeballsToKeepIncorrect,
-                "TotalAmountOfPokebalsToKeep is configured incorrectly. The number is smaller than 1."),
+                "TotalAmountOfPokeballsToKeep is configured incorrectly. The number is smaller than 1."),
             new KeyValuePair<TranslationString, string>(TranslationString.PotionsToKeepIncorrect,
                 "TotalAmountOfPotionsToKeep is configured incorrectly. The number is smaller than 1."),
             new KeyValuePair<TranslationString, string>(TranslationString.RevivesToKeepIncorrect,
@@ -318,7 +331,20 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.NotEnoughPokeballsToSnipe,
                 "Not enough Pokeballs to start sniping! ({0}/{1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
-            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2")
+            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove2Header, "MOVE2"),
+            new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy"),
+            new KeyValuePair<TranslationString, string>(TranslationString.IPBannedError, 
+                "Connection refused. Your IP might have been Blacklisted by Niantic. Exiting.."),
+            new KeyValuePair<TranslationString, string>(TranslationString.NoEggsAvailable, "No Eggs Available"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UseLuckyEggActive, "Lucky Egg Already Active"),
+            new KeyValuePair<TranslationString, string>(TranslationString.NoIncenseAvailable, "No Incense Available"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UseIncenseActive, "Incense Already Active"),
+            new KeyValuePair<TranslationString, string>(TranslationString.AmountPkmSeenCaught, 
+                "Amount of Pokemon Seen: {0}/151, Amount of Pokemon Caught: {1}/151"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PkmPotentialEvolveCount, 
+                "[Evolves] Potential Evolves: {}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PkmNotEnoughRessources, 
+                "Pokemon Upgrade Failed Not Enough Resources")
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)

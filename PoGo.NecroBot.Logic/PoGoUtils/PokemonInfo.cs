@@ -3,6 +3,10 @@
 using System;
 using POGOProtos.Data;
 using POGOProtos.Enums;
+using POGOProtos.Inventory;
+using System.Collections.Generic;
+using POGOProtos.Settings.Master;
+using System.Linq;
 
 #endregion
 
@@ -49,13 +53,13 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
             return
                 Math.Max(
                     (int)
-                        Math.Floor(0.1*CalculateMaxCpMultiplier(poke)*
+                        Math.Floor(0.1*CalculateMaxCpMultiplier(poke.PokemonId)*
                                    Math.Pow(poke.CpMultiplier + poke.AdditionalCpMultiplier, 2)), 10);
         }
 
-        public static double CalculateMaxCpMultiplier(PokemonData poke)
+        public static double CalculateMaxCpMultiplier(PokemonId pokemonId)
         {
-            var baseStats = GetBaseStats(poke.PokemonId);
+            var baseStats = GetBaseStats(pokemonId);
             return (baseStats.BaseAttack + 15)*Math.Sqrt(baseStats.BaseDefense + 15)*
                    Math.Sqrt(baseStats.BaseStamina + 15);
         }
@@ -80,8 +84,8 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
             if (Math.Abs(poke.CpMultiplier + poke.AdditionalCpMultiplier) <= 0)
                 return (poke.IndividualAttack + poke.IndividualDefense + poke.IndividualStamina)/45.0*100.0;
 
-            GetBaseStats(poke.PokemonId);
-            var maxCp = CalculateMaxCpMultiplier(poke);
+            //GetBaseStats(poke.PokemonId);
+            var maxCp = CalculateMaxCpMultiplier(poke.PokemonId);
             var minCp = CalculateMinCpMultiplier(poke);
             var curCp = CalculateCpMultiplier(poke);
 
@@ -577,6 +581,14 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
         {
             var move2 = poke.Move2;
             return move2;
+        }
+
+        public static int GetCandy(PokemonData pokemon, List<Candy> PokemonFamilies, IEnumerable<PokemonSettings> PokemonSettings)
+        {
+            var setting = PokemonSettings.FirstOrDefault(q => pokemon != null && q.PokemonId.Equals(pokemon.PokemonId));
+            var family = PokemonFamilies.FirstOrDefault(q => setting != null && q.FamilyId.Equals(setting.FamilyId));
+
+            return family.Candy_;
         }
 
         public static int GetPowerUpLevel(PokemonData poke)

@@ -22,6 +22,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public static async Task Execute(ISession session)
         {
+            var myPokemonFamilies = await session.Inventory.GetPokemonFamilies();
+            var myPokeSettings = await session.Inventory.GetPokemonSettings();
+
             var highestsPokemonCp =
                 await session.Inventory.GetHighestsCp(session.LogicSettings.AmountOfPokemonToDisplayOnStart);
             var highestsPokemonCpForUpgrade = await session.Inventory.GetHighestsCp(50);
@@ -31,7 +34,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     pokemon =>
                         Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon),
                             PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon),
-                            PokemonInfo.GetPokemonMove1(pokemon), PokemonInfo.GetPokemonMove2(pokemon))).ToList();
+                            PokemonInfo.GetPokemonMove1(pokemon), PokemonInfo.GetPokemonMove2(pokemon),
+                            PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings))).ToList();
             var pokemonPairedWithStatsCpForUpgrade =
                 highestsPokemonCpForUpgrade.Select(
                     pokemon =>
@@ -46,7 +50,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     pokemon =>
                         Tuple.Create(pokemon, PokemonInfo.CalculateMaxCp(pokemon),
                             PokemonInfo.CalculatePokemonPerfection(pokemon), PokemonInfo.GetLevel(pokemon),
-                            PokemonInfo.GetPokemonMove1(pokemon), PokemonInfo.GetPokemonMove2(pokemon))).ToList();
+                            PokemonInfo.GetPokemonMove1(pokemon), PokemonInfo.GetPokemonMove2(pokemon),
+                            PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings))).ToList();
             var pokemonPairedWithStatsIvForUpgrade =
                 highestsPokemonIvForUpgrade.Select(
                     pokemon =>
@@ -101,12 +106,24 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (session.LogicSettings.DumpPokemonStats)
             {
                 const string dumpFileName = "PokeBagStats";
-                Dumper.ClearDumpFile(session, dumpFileName);
+                Dumper.ClearDumpFile(session, dumpFileName, "csv");
                 foreach (var pokemon in allPokemonInBag)
                 {
+                    int candy = PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings);
+                    string pokeName = "";
+                    if (pokemon.Favorite == 1)
+                    {
+                        pokeName += "*";
+                    }
+                    pokeName += pokemon.PokemonId.ToString();
+                    if (!string.IsNullOrEmpty(pokemon.Nickname.ToString()))
+                    {
+                        pokeName += " (" + pokemon.Nickname.ToString() + ")";
+                    }
+
                     Dumper.Dump(session,
-                        $"NAME: {pokemon.PokemonId.ToString().PadRight(16, ' ')}Lvl: {PokemonInfo.GetLevel(pokemon).ToString("00")}\t\tCP: {pokemon.Cp.ToString().PadRight(8, ' ')}\t\t IV: {PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00")}%\t\t\tMOVE1: {pokemon.Move1}\t\t\tMOVE2: {pokemon.Move2}",
-                        dumpFileName);
+                        string.Format($"NAME: {pokeName, -25} LVL: {PokemonInfo.GetLevel(pokemon).ToString("00"), -7} CP: {pokemon.Cp.ToString() + " / " + PokemonInfo.CalculateMaxCp(pokemon).ToString(), -15} IV: {PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"), -10} MOVE1: {pokemon.Move1, -20} MOVE2: {pokemon.Move2, -20} Candies: {candy}"),
+                        dumpFileName, "csv");
                 }
             }
             await Task.Delay(500);

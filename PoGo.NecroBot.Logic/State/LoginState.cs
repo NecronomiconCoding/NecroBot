@@ -4,6 +4,7 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
+using Google.Protobuf;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI.Enums;
@@ -55,24 +56,11 @@ namespace PoGo.NecroBot.Logic.State
                         return null;
                 }
             }
-            catch (PtcOfflineException)
+            catch (Exception ex) when (ex is PtcOfflineException || ex is AccessTokenExpiredException)
             {
                 session.EventDispatcher.Send(new ErrorEvent
                 {
                     Message = session.Translation.GetTranslation(TranslationString.PtcOffline)
-                });
-                session.EventDispatcher.Send(new NoticeEvent
-                {
-                    Message = session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20)
-                });
-                await Task.Delay(20000, cancellationToken);
-                return this;
-            }
-            catch (AccessTokenExpiredException)
-            {
-                session.EventDispatcher.Send(new ErrorEvent
-                {
-                    Message = session.Translation.GetTranslation(TranslationString.PtcOffline) // use ptcoffline for now.
                 });
                 session.EventDispatcher.Send(new NoticeEvent
                 {
@@ -122,6 +110,20 @@ namespace PoGo.NecroBot.Logic.State
                 });
                 await Task.Delay(2000, cancellationToken);
                 Environment.Exit(0);
+            }
+            catch (InvalidProtocolBufferException ex) when (ex.Message.Contains("SkipLastField"))
+            {
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.IPBannedError)
+                });
+                await Task.Delay(2000, cancellationToken);
+                Environment.Exit(0);
+            }
+            catch (Exception)
+            {
+                await Task.Delay(20000, cancellationToken);
+                return this;
             }
 
             await DownloadProfile(session);

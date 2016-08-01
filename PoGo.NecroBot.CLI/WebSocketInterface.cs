@@ -102,7 +102,7 @@ namespace PoGo.NecroBot.CLI
                 dynamic decodedMessage = JObject.Parse(message);
                 await _websocketHandler?.Handle(_session, session, decodedMessage);
             }
-            catch (JsonException ex)
+            catch (JsonException)
             {
 
 

@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Estás fora do raio definido! A caminhar para o início ({0}m) em 5 segundos. As coordenadas em Coords.ini estão corretas?"
+        "Estás fora do raio definido! A caminhar para o início ({0}m) em 5 segundos. As coordenadas em LastPos.ini estão corretas?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -220,11 +220,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Sem movimentos realistas em {0}, utilizando as ultimas configurações salvas em Coords.ini"
+      "Value": "Sem movimentos realistas em {0}, utilizando as ultimas configurações salvas em LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "As coodernadas no ficheiro \"Coords.ini\" são inválidas, utilizando as coordenadas por defeito"
+      "Value": "As coodernadas no ficheiro \"LastPos.ini\" são inválidas, utilizando as coordenadas por defeito"
     },
     {
       "Key": "gotUpToDateVersion",

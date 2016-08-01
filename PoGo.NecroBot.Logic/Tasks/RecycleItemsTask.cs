@@ -24,7 +24,39 @@ namespace PoGo.NecroBot.Logic.Tasks
                 return;
 
             if (!session.LogicSettings.VerboseRecycling)
-                Logger.Write(session.Translation.GetTranslation(TranslationString.RecyclingQuietly));
+                Logger.Write(session.Translation.GetTranslation(TranslationString.RecyclingQuietly), LogLevel.Recycling);
+
+            if (session.LogicSettings.TotalAmountOfPokeballsToKeep != 0)
+            {
+                var currentAmountOfPokeballs = await session.Inventory.GetItemAmountByType(ItemId.ItemPokeBall);
+                var currentAmountOfGreatballs = await session.Inventory.GetItemAmountByType(ItemId.ItemGreatBall);
+                var currentAmountOfUltraballs = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
+                var currentAmountOfMasterballs = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
+
+                if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
+                        currentAmountOfPokeballs, currentAmountOfGreatballs, currentAmountOfUltraballs,
+                        currentAmountOfMasterballs));
+
+                await OptimizedRecycleBalls(session, cancellationToken);
+            }
+
+            if (session.LogicSettings.TotalAmountOfPotionsToKeep>=0)
+            {
+                await OptimizedRecyclePotions(session, cancellationToken);
+            }
+
+            if (session.LogicSettings.TotalAmountOfRevivesToKeep>=0)
+            {
+                await OptimizedRecycleRevives(session, cancellationToken);
+            }
+
+            currentTotalItems = await session.Inventory.GetTotalItemCount();
+            if ((session.Profile.PlayerData.MaxItemStorage * session.LogicSettings.RecycleInventoryAtUsagePercentage) > currentTotalItems)
+            {
+                await session.Inventory.RefreshCachedInventory();
+                return;
+            }
 
             var items = await session.Inventory.GetItemsToRecycle(session);
 
@@ -35,24 +67,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 await session.Client.Inventory.RecycleItem(item.ItemId, item.Count);
 
                 if (session.LogicSettings.VerboseRecycling)
-                    session.EventDispatcher.Send(new ItemRecycledEvent {Id = item.ItemId, Count = item.Count});
+                    session.EventDispatcher.Send(new ItemRecycledEvent { Id = item.ItemId, Count = item.Count });
 
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
-            }
-
-            if (session.LogicSettings.TotalAmountOfPokebalsToKeep != 0)
-            {
-                await OptimizedRecycleBalls(session, cancellationToken);
-            }
-
-            if (session.LogicSettings.TotalAmountOfPotionsToKeep != 0)
-            {
-                await OptimizedRecyclePotions(session, cancellationToken);
-            }
-
-            if (session.LogicSettings.TotalAmountOfRevivesToKeep != 0)
-            {
-                await OptimizedRecycleRevives(session, cancellationToken);
             }
 
             await session.Inventory.RefreshCachedInventory();
@@ -67,13 +84,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             int pokeBallsToRecycle = 0;
             int greatBallsToRecycle = 0;
-            int ultraBallsToRecycle = 0;
-            int masterBallsToRecycle = 0;
 
             int totalBallsCount = pokeBallsCount + greatBallsCount + ultraBallsCount + masterBallsCount;
-            if (totalBallsCount > session.LogicSettings.TotalAmountOfPokebalsToKeep)
+            if (totalBallsCount > session.LogicSettings.TotalAmountOfPokeballsToKeep)
             {
-                int diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokebalsToKeep;
+                int diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep;
                 if (diff > 0)
                 {
                     int pokeBallsToKeep = pokeBallsCount - diff;
