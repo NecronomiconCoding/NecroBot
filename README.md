@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/NecronomiconCoding/NecroBot.png?label=ready&title=Ready)](https://waffle.io/NecronomiconCoding/NecroBot)
 <!-- define warning icon -->
 [1.1]: http://necrobot.io/img/mainlogo.png (NECROBOT_HEADER)
 <!-- header -->
