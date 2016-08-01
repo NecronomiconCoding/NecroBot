@@ -46,7 +46,11 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Activation Bonus d'un oeuf Chance"
+      "Value": "Utilisation d'un oeuf Chance, reste : {0}"
+    },
+    {
+      "Key": "EventUsedIncense",
+      "Value": "Utilisation d'un encens, reste : {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
