@@ -18,11 +18,14 @@ namespace PoGo.NecroBot.Logic.Tasks
             var PokeDex = await session.Inventory.GetPokeDexItems();
             for (int i = 0; i < PokeDex.Count; i++)
             {
-                var CaughtPokemon = PokeDex[i].ToString().Split(new[] { "timesCaptured" }, StringSplitOptions.None);
-                var split = CaughtPokemon[1].Split(' ');
-                int Times = int.Parse(split[1]);
-                if (Times > 0)
-                    timesCaptured++;
+                if (PokeDex[i].ToString().Contains("timesCaptured"))
+                {
+                    var CaughtPokemon = PokeDex[i].ToString().Split(new[] { "timesCaptured" }, StringSplitOptions.None);
+                    var split = CaughtPokemon[1].Split(' ');
+                    int Times = int.Parse(split[1]);
+                    if (Times > 0)
+                        timesCaptured++;
+                }
             }
             Logger.Write(session.Translation.GetTranslation(TranslationString.AmountPkmSeenCaught, PokeDex.Count, timesCaptured));
         }
