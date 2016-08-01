@@ -22,7 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Vous êtes en dehors de votre rayon défini! Début de la marche ({0}m de distance) dans 5 secondes."
+      "Value": "Vous dépassez votre rayon d'action! Début de la marche ({0}m de distance) dans 5 secondes. Vérifiez votre fichier LastPos.ini"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Bonus Oeuf Chance : {0}min restant"
+      "Value": "Activation Bonus d'un oeuf Chance"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -445,8 +445,12 @@
       "Value": "Encens déjà activé"
     },
     {
+    	"Key": "UseIncenseNew", 
+    	"Value": "Encens utilisé"
+    },
+    {
       "Key": "AmountPkmSeenCaught",
-      "Value": "Total de pokémon vu : {}/151, Total de pokémon capturé : {}/151"
+      "Value": "Deck Pokémon(151) : Rencontré {} | Capturé {}"
     },
     {
       "Key": "EventEvolveCount",
