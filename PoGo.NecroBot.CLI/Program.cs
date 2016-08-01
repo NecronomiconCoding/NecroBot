@@ -18,13 +18,14 @@ namespace PoGo.NecroBot.CLI
 {
     internal class Program
     {
-        static ManualResetEvent _quitEvent = new ManualResetEvent(false);
+        private static readonly ManualResetEvent QuitEvent = new ManualResetEvent(false);
         private static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionEventHandler;
             Console.SetWindowSize(165, 30);
             Console.CancelKeyPress += (sender, eArgs) =>
             {
-                _quitEvent.Set();
+                QuitEvent.Set();
                 eArgs.Cancel = true;
             };
             var culture = CultureInfo.CreateSpecificCulture("en-US");
@@ -94,7 +95,7 @@ namespace PoGo.NecroBot.CLI
             if (session.LogicSettings.UseSnipeLocationServer)
                 SnipePokemonTask.AsyncStart(session);
 
-            _quitEvent.WaitOne();
+            QuitEvent.WaitOne();
         }
 
         private static void Navigation_UpdatePositionEvent(double lat, double lng)
@@ -108,6 +109,12 @@ namespace PoGo.NecroBot.CLI
                              Path.DirectorySeparatorChar + "LastPos.ini";
 
             File.WriteAllText(coordsPath, $"{lat}:{lng}");
+        }
+
+        private static void UnhandledExceptionEventHandler(object obj, UnhandledExceptionEventArgs args)
+        {
+            Logger.Write("Exceptiion caught, writing LogBuffer.", force: true);
+            throw new Exception();
         }
     }
 }
