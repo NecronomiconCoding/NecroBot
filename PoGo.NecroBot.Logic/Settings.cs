@@ -244,33 +244,22 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(60)]
         public int TotalAmountOfRevivesToKeep;
         //balls
-<<<<<<< HEAD
-        [DefaultValue(1000)]
+        [DefaultValue(750)]
         public int UseGreatBallAboveCp;
-        [DefaultValue(1250)]
+        [DefaultValue(1000)]
         public int UseUltraBallAboveCp;
         [DefaultValue(1500)]
         public int UseMasterBallAboveCp;
         [DefaultValue(85)]
         public int UseGreatBallAboveIv;
-        [DefaultValue(90)]
+        [DefaultValue(95)]
         public int UseUltraBallAboveIv;
-        [DefaultValue(0.3)]
-        public double UseGreatBallBelowCatchProbability;
         [DefaultValue(0.2)]
+        public double UseGreatBallBelowCatchProbability;
+        [DefaultValue(0.1)]
         public double UseUltraBallBelowCatchProbability;
         [DefaultValue(0.05)]
         public double UseMasterBallBelowCatchProbability;
-=======
-        public int UseGreatBallAboveCp = 750;
-        public int UseUltraBallAboveCp = 1000;
-        public int UseMasterBallAboveCp = 1500;
-        public int UseGreatBallAboveIv = 85;
-        public int UseUltraBallAboveIv = 95;
-        public double UseGreatBallBelowCatchProbability = 0.2;
-        public double UseUltraBallBelowCatchProbability = 0.1;
-        public double UseMasterBallBelowCatchProbability = 0.05;
->>>>>>> refs/remotes/NECROBOTIO/master
         //transfer
         [DefaultValue(true)]
         public bool TransferDuplicatePokemon;
@@ -545,119 +534,6 @@ namespace PoGo.NecroBot.Logic
                 settings = new GlobalSettings();
             }
 
-<<<<<<< HEAD
-=======
-            if (settings.DefaultAltitude == 0)
-            {
-                settings.DefaultAltitude = Default.DefaultAltitude;
-            }
-
-            if (settings.DefaultLatitude == 0)
-            {
-                settings.DefaultLatitude = Default.DefaultLatitude;
-            }
-
-            if (settings.DefaultLongitude == 0)
-            {
-                settings.DefaultLongitude = Default.DefaultLongitude;
-            }
-
-            if (settings.WebSocketPort == 0)
-            {
-                settings.WebSocketPort = 14251;
-            }
-
-            if (settings.PokemonToSnipe == null)
-            {
-                settings.PokemonToSnipe = Default.PokemonToSnipe;
-            }
-
-            if (settings.RenameTemplate == null)
-            {
-                settings.RenameTemplate = Default.RenameTemplate;
-            }
-
-            if (settings.SnipeLocationServer == null)
-            {
-                settings.SnipeLocationServer = Default.SnipeLocationServer;
-            }
-
-            if (settings.SnipingScanOffset <= 0)
-            {
-                settings.SnipingScanOffset = Default.SnipingScanOffset;
-            }
-
-            if (settings.RecycleInventoryAtUsagePercentage <= 0)
-            {
-                settings.RecycleInventoryAtUsagePercentage = Default.RecycleInventoryAtUsagePercentage;
-            }
-
-            if (settings.WalkingSpeedInKilometerPerHour <= 0)
-            {
-                settings.WalkingSpeedInKilometerPerHour = Default.WalkingSpeedInKilometerPerHour;
-            }
-
-            if (settings.EvolveKeptPokemonsAtStorageUsagePercentage <= 0)
-            {
-                settings.EvolveKeptPokemonsAtStorageUsagePercentage = Default.EvolveKeptPokemonsAtStorageUsagePercentage;
-            }
-
-            if (settings.UseGreatBallBelowCatchProbability < 0)
-            {
-                settings.UseGreatBallBelowCatchProbability = Default.UseGreatBallBelowCatchProbability;
-            }
-
-            if (settings.UseUltraBallBelowCatchProbability < 0)
-            {
-                settings.UseUltraBallBelowCatchProbability = Default.UseUltraBallBelowCatchProbability;
-            }
-
-            if (settings.UseMasterBallBelowCatchProbability < 0)
-            {
-                settings.UseMasterBallBelowCatchProbability = Default.UseMasterBallBelowCatchProbability;
-            }
-
-            if (settings.UseMasterBallAboveCp < 0)
-            {
-                settings.UseMasterBallAboveCp = Default.UseMasterBallAboveCp;
-            }
-
-            if (settings.UseUltraBallAboveCp < 0)
-            {
-                settings.UseUltraBallAboveCp = Default.UseUltraBallAboveCp;
-            }
-
-            if (settings.UseUltraBallAboveIv < 0)
-            {
-                settings.UseUltraBallAboveIv = Default.UseUltraBallAboveCp;
-            }
-
-            if (settings.UseGreatBallAboveCp < 0)
-            {
-                settings.UseGreatBallAboveCp = Default.UseGreatBallAboveCp;
-            }
-
-            if (settings.UseUltraBallAboveIv < 0)
-            {
-                settings.UseGreatBallAboveIv = Default.UseGreatBallAboveIv;
-            }
-
-            if (settings.UseBerriesMinCp < 0)
-            {
-                settings.UseBerriesMinCp = Default.UseBerriesMinCp;
-            }
-
-            if (settings.UseBerriesMinIv < 0)
-            {
-                settings.UseBerriesMinIv = Default.UseBerriesMinIv;
-            }
-
-            if (settings.UseBerriesOperator == null || (!settings.UseBerriesOperator.ToLower().Equals("and") && !settings.UseBerriesOperator.ToLower().Equals("or")))
-            {
-                settings.UseBerriesOperator = Default.UseBerriesOperator;
-            }
-
->>>>>>> refs/remotes/NECROBOTIO/master
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
