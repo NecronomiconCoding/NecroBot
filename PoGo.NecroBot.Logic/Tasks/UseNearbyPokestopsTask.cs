@@ -58,8 +58,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
-                await RecycleItemsTask.Execute(session, cancellationToken);
-
                 if (session.LogicSettings.TransferDuplicatePokemon)
                 {
                     await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
