@@ -69,6 +69,7 @@ namespace PoGo.NecroBot.Logic
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
+        bool TransferDuplicatePokemonOnCapture { get; }
         bool UseEggIncubators { get; }
         int UseGreatBallAboveCp { get; }
         int UseUltraBallAboveCp { get; }
@@ -92,6 +93,10 @@ namespace PoGo.NecroBot.Logic
         int GetMinStarDustForLevelUp { get; }
         bool UseLuckyEggConstantly { get; }
         bool UseIncenseConstantly { get; }
+        int UseBerriesMinCp { get; }
+        float UseBerriesMinIv { get; }
+        double UseBerriesBelowCatchProbability { get; }
+        string UseBerriesOperator { get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }
         string GpxFile { get; }
