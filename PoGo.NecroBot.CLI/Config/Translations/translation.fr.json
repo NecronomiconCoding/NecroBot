@@ -449,7 +449,7 @@
       "Value": "Total de pokémon vu : {}/151, Total de pokémon capturé : {}/151"
     },
     {
-      "Key": "EventEvolveCount",
+      "Key": "PkmPotentialEvolveCount",
       "Value": "[Evolution] Total envisageable : {}"
     },
     {
