@@ -476,6 +476,14 @@
       "Key": "useIncenseActive",
       "Value": "Incienso ya está activo"
     },
+     {
+      "Key": "UseIncenseAmount",
+      "Value": "[Inventario] Incienso : {0}"
+    },
+    {
+      "Key": "UsedIncense",
+      "Value": "Incienso utilizado"
+    },
     {
       "Key": "amountPkmSeenCaught",
       "Value": "Cantidad de Pokémons vistos: {0}/151, Cantidad de Pokémons capturados: {1}/151"
