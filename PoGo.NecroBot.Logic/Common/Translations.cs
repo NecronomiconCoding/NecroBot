@@ -245,7 +245,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.CouldntCopyToClipboard2,
                 "Goto: {0} & enter {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.RealisticTravelDetected,
-                "Detected realistic Traveling , using UserSettings.settings"),
+                "Detected realistic Traveling , using Default Settings inside config.json"),
             new KeyValuePair<TranslationString, string>(TranslationString.NotRealisticTravel,
                 "Not realistic Traveling at {0}, using last saved LastPos.ini"),
             new KeyValuePair<TranslationString, string>(TranslationString.CoordinatesAreInvalid,
