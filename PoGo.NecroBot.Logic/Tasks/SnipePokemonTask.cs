@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Collections.Generic;
@@ -17,6 +17,7 @@ using PoGo.NecroBot.Logic.State;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Networking.Responses;
+using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -132,7 +133,15 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (session.LogicSettings.UseSnipeLocationServer)
                     {
-                        var locationsToSnipe = SnipeLocations?.Where(q =>
+                        var locationsToSnipe = SnipeLocations; // inital
+                        if (session.LogicSettings.UseSnipeOnlineLocationServer)
+                        {
+                            locationsToSnipe = new List<SniperInfo>(SnipeLocations);
+                            locationsToSnipe = locationsToSnipe.Where(q => q.Id == PokemonId.Missingno || pokemonIds.Contains(q.Id)).ToList();
+                        }
+                        else
+                        {
+                            locationsToSnipe = SnipeLocations?.Where(q =>
                             (!session.LogicSettings.UseTransferIvForSnipe ||
                              (q.Iv == 0 && !session.LogicSettings.SnipeIgnoreUnknownIv) ||
                              (q.Iv >= session.Inventory.GetPokemonTransferFilter(q.Id).KeepMinIvPercentage)) &&
@@ -143,6 +152,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                  q.TimeStamp < DateTime.Now) &&
                             (q.Id == PokemonId.Missingno || pokemonIds.Contains(q.Id))).ToList() ??
                                                new List<SniperInfo>();
+                        }
 
                         if (locationsToSnipe.Any())
                         {
@@ -178,9 +188,25 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 PokemonId = PokemonId.Missingno
                             });
 
-                            var scanResult = SnipeScanForPokemon(session, location);
-
+                            var scanResult = SnipeScanForPokemon(session, location); // initialize
                             List<PokemonLocation> locationsToSnipe = new List<PokemonLocation>();
+
+                            if (session.LogicSettings.UseSnipeOnlineLocationServer)
+                            {
+                                OnlineSnipeScanForPokemon(session, location);
+                            }
+                            else {
+                                scanResult = SnipeScanForPokemon(session, location);
+                                if (scanResult.pokemons != null)
+                                {
+                                    var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains((PokemonId)q.pokemon_name));
+                                    var notVisitedPokemon = filteredPokemon.Where(q => !LocsVisited.Contains(q));
+                                    var notExpiredPokemon = notVisitedPokemon.Where(q => q.expires < currentTimestamp);
+
+                                    locationsToSnipe.AddRange(notExpiredPokemon);
+                                }
+                            }
+                            
                             if (scanResult.pokemons != null)
                             {
                                 var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains((PokemonId) q.pokemon_name));
@@ -362,45 +388,165 @@ namespace PoGo.NecroBot.Logic.Tasks
             return scanResult;
         }
 
+        private static ScanResult OnlineSnipeScanForPokemon(ISession session, Location location)
+        {
+            var formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
+
+            var offset = session.LogicSettings.SnipingScanOffset;
+            // 0.003 = half a mile; maximum 0.06 is 10 miles
+            if (offset < 0.001) offset = 0.003;
+            if (offset > 0.06) offset = 0.06;
+
+            var uri =
+                $"http://pokesnipers.com/api/v1/pokemon.json";
+
+            ScanResult scanResult;
+            try
+            {
+                var request = WebRequest.CreateHttp(uri);
+                request.Accept = "application/json";
+                request.Method = "GET";
+                request.Timeout = 5000;
+                request.ReadWriteTimeout = 32000;
+
+                var resp = request.GetResponse();
+                var reader = new StreamReader(resp.GetResponseStream());
+                var fullresp = reader.ReadToEnd().Replace(" M", "Male").Replace(" F", "Female");
+
+                dynamic pokesniper = JsonConvert.DeserializeObject(fullresp);
+                JArray results = pokesniper.results;
+                SnipeLocations.Clear();
+
+                foreach (var result in results)
+                {
+                    PokemonId id;
+                    Enum.TryParse(result.Value<string>("name"), out id);
+                    var a = new SniperInfo
+                    {
+                        Id = id,
+                        Iv = 100,
+                        latitude = Convert.ToDouble(result.Value<string>("coords").Split(',')[0]),
+                        longitude = Convert.ToDouble(result.Value<string>("coords").Split(',')[1]),
+                        TimeStamp = DateTime.Now
+                    };
+                    SnipeLocations.Add(a);
+                }
+            }
+            catch (Exception ex)
+            {
+                // most likely System.IO.IOException
+                session.EventDispatcher.Send(new ErrorEvent { Message = ex.ToString() });
+                scanResult = new ScanResult
+                {
+                    Status = "fail",
+                    pokemons = new List<PokemonLocation>()
+                };
+            }
+            return null;
+        }
+
         public static async Task Start(Session session, CancellationToken cancellationToken)
         {
             while (true)
             {
-                cancellationToken.ThrowIfCancellationRequested();
-                try
+                if (session.LogicSettings.UseSnipeOnlineLocationServer)
                 {
-                    var lClient = new TcpClient();
-                    lClient.Connect(session.LogicSettings.SnipeLocationServer,
-                        session.LogicSettings.SnipeLocationServerPort);
+                    var st = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                    var t = DateTime.Now.ToUniversalTime() - st;
+                    var currentTimestamp = t.TotalMilliseconds;
+                    var pokemonIds = session.LogicSettings.PokemonToSnipe.Pokemon;
 
-                    var sr = new StreamReader(lClient.GetStream());
+                    var formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
 
-                    while (lClient.Connected)
+                    var offset = session.LogicSettings.SnipingScanOffset;
+                    // 0.003 = half a mile; maximum 0.06 is 10 miles
+                    if (offset < 0.001) offset = 0.003;
+                    if (offset > 0.06) offset = 0.06;
+
+                    var uri =
+                        $"http://pokesnipers.com/api/v1/pokemon.json";
+
+                    ScanResult scanResult;
+                    try
                     {
-                        var line = sr.ReadLine();
-                        if (line == null)
-                            throw new Exception("Unable to ReadLine from sniper socket");
+                        var request = WebRequest.CreateHttp(uri);
+                        request.Accept = "application/json";
+                        request.Method = "GET";
+                        request.Timeout = 5000;
+                        request.ReadWriteTimeout = 32000;
 
-                        var info = JsonConvert.DeserializeObject<SniperInfo>(line);
+                        var resp = request.GetResponse();
+                        var reader = new StreamReader(resp.GetResponseStream());
+                        var fullresp = reader.ReadToEnd().Replace(" M", "Male").Replace(" F", "Female");
 
-                        if (SnipeLocations.Any(x =>
-                            Math.Abs(x.latitude - info.latitude) < 0.0001 &&
-                            Math.Abs(x.longitude - info.longitude) < 0.0001))
-                            // we might have different precisions from other sources
-                            continue;
+                        dynamic pokesniper = JsonConvert.DeserializeObject(fullresp);
+                        JArray results = pokesniper.results;
+                        SnipeLocations.Clear();
 
-                        SnipeLocations.RemoveAll(x => DateTime.Now > x.TimeStampAdded.AddMinutes(15));
-                        SnipeLocations.Add(info);
+                        foreach (var result in results)
+                        {
+                            PokemonId id;
+                            Enum.TryParse(result.Value<string>("name"), out id);
+                            var a = new SniperInfo
+                            {
+                                Id = id,
+                                Iv = 100,
+                                latitude = Convert.ToDouble(result.Value<string>("coords").Split(',')[0]),
+                                longitude = Convert.ToDouble(result.Value<string>("coords").Split(',')[1]),
+                                TimeStamp = DateTime.Now
+                            };
+                            SnipeLocations.Add(a);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // most likely System.IO.IOException
+                        session.EventDispatcher.Send(new ErrorEvent { Message = ex.ToString() });
+                        scanResult = new ScanResult
+                        {
+                            Status = "fail",
+                            pokemons = new List<PokemonLocation>()
+                        };
                     }
                 }
-                catch (SocketException)
-                {
-                    // this is spammed to often. Maybe add it to debug log later
-                }
-                catch (Exception ex)
-                {
-                    // most likely System.IO.IOException
-                    session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
+                else {
+
+                    cancellationToken.ThrowIfCancellationRequested();
+                    try
+                    {
+                        var lClient = new TcpClient();
+                        lClient.Connect(session.LogicSettings.SnipeLocationServer,
+                            session.LogicSettings.SnipeLocationServerPort);
+
+                        var sr = new StreamReader(lClient.GetStream());
+
+                        while (lClient.Connected)
+                        {
+                            var line = sr.ReadLine();
+                            if (line == null)
+                                throw new Exception("Unable to ReadLine from sniper socket");
+
+                            var info = JsonConvert.DeserializeObject<SniperInfo>(line);
+
+                            if (SnipeLocations.Any(x =>
+                                Math.Abs(x.latitude - info.latitude) < 0.0001 &&
+                                Math.Abs(x.longitude - info.longitude) < 0.0001))
+                                // we might have different precisions from other sources
+                                continue;
+
+                            SnipeLocations.RemoveAll(x => DateTime.Now > x.TimeStampAdded.AddMinutes(15));
+                            SnipeLocations.Add(info);
+                        }
+                    }
+                    catch (SocketException)
+                    {
+                        // this is spammed to often. Maybe add it to debug log later
+                    }
+                    catch (Exception ex)
+                    {
+                        // most likely System.IO.IOException
+                        session.EventDispatcher.Send(new ErrorEvent { Message = ex.ToString() });
+                    }
                 }
                 await Task.Delay(5000, cancellationToken);
             }
