@@ -455,6 +455,34 @@
     {
       "Key": "ipBannedError",
       "Value": "Conexión denegada. Su IP podría haber sido añadida a la Lista Negra de Niantic.. Saliendo.."
+    },
+    {
+      "Key": "noEggsAvailable",
+      "Value": "No hay huevos disponibles"
+    },
+    {
+      "Key": "useLuckyEggActive",
+      "Value": "Huevo suerte ya está activo"
+    },
+    {
+      "Key": "noIncenseAvailable",
+      "Value": "No hay Incienso disponible"
+    },
+    {
+      "Key": "useIncenseActive",
+      "Value": "Incienso ya está activo"
+    },
+    {
+      "Key": "amountPkmSeenCaught",
+      "Value": "Cantidad de Pokemons vistos:{}:151, Cantidad de Pokemons capturados:{}:151"
+    },
+    {
+      "Key": "pkmPotentialEvolveCount",
+      "Value": "[Evoluciona] Potencial Evolución: {}"
+    },
+    {
+      "Key": "pkmNotEnoughRessources",
+      "Value": "Pokemon actualización fallida: No hay suficientes recursos"
     }
   ]
 }
