@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.CLI
     /// <summary>
     /// The ConsoleLogger is a simple logger which writes all logs to the Console.
     /// </summary>
-    public class ConsoleLogger : ILogger
+    internal class ConsoleLogger : ILogger
     {
         private readonly LogLevel _maxLogLevel;
         private ISession _session;
@@ -23,9 +23,14 @@ namespace PoGo.NecroBot.CLI
         /// All levels above won't be logged.
         /// </summary>
         /// <param name="maxLogLevel"></param>
-        public ConsoleLogger(LogLevel maxLogLevel)
+        internal ConsoleLogger(LogLevel maxLogLevel)
         {
             _maxLogLevel = maxLogLevel;
+        }
+
+        public void SetSession(ISession session)
+        {
+            _session = session;
         }
 
         /// <summary>
@@ -139,9 +144,6 @@ namespace PoGo.NecroBot.CLI
             }
         }
 
-        public void SetSession(ISession session)
-        {
-            _session = session;
-        }
+        
     }
 }
