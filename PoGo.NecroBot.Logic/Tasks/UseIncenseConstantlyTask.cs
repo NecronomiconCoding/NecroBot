@@ -33,7 +33,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                 Logger.Write(session.Translation.GetTranslation(TranslationString.UsedIncense));
             }
             else if (UseIncense.Result == UseIncenseResponse.Types.Result.NoneInInventory)
-                UseIncense.Result.ToString().ToLower().Contains("noneininventory"))
             {
                 Logger.Write(session.Translation.GetTranslation(TranslationString.NoIncenseAvailable));
             }
