@@ -20,7 +20,8 @@ namespace PoGo.NecroBot.Logic
 {
     internal class AuthSettings
     {
-        [JsonIgnore] private string _filePath;
+        [JsonIgnore]
+        private string _filePath;
 
         public AuthType AuthType;
         public string GoogleUsername;
@@ -40,7 +41,7 @@ namespace PoGo.NecroBot.Logic
                     var input = File.ReadAllText(_filePath);
 
                     var settings = new JsonSerializerSettings();
-                    settings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
 
                     JsonConvert.PopulateObject(input, this, settings);
                 }
@@ -76,7 +77,7 @@ namespace PoGo.NecroBot.Logic
         public void Save(string path)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented,
-                new StringEnumConverter {CamelCaseText = true});
+                new StringEnumConverter { CamelCaseText = true });
 
             var folder = Path.GetDirectoryName(path);
             if (folder != null && !Directory.Exists(folder))
@@ -138,6 +139,7 @@ namespace PoGo.NecroBot.Logic
         public bool EvolveAllPokemonWithEnoughCandy = true;
         public bool KeepPokemonsThatCanEvolve = false;
         public double EvolveKeptPokemonsAtStorageUsagePercentage = 0.90;
+
         //gpx
         public bool UseGpxPathing = false;
         public string GpxFile = "GPXPath.GPX";
@@ -155,6 +157,7 @@ namespace PoGo.NecroBot.Logic
         public int UseLuckyEggsMinPokemonAmount = 30;
         public bool UseLuckyEggsWhileEvolving = false;
         public bool UseIncenseConstantly = false;
+
         //snipe
         public bool UseSnipeOnlineLocationServer = true;
         public bool UseSnipeLocationServer = false;
@@ -416,7 +419,18 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Mewtwo
         };
 
-        
+        public List<PokemonId> PokemonToUsePokeball = new List<PokemonId>
+        {
+            PokemonId.Rattata,
+            PokemonId.Zubat,
+            PokemonId.Pidgey,
+            PokemonId.Spearow,
+            PokemonId.Krabby,
+            PokemonId.Drowzee,
+            PokemonId.Weedle
+        };
+        public bool ThrowLuckyBallFirst = false;
+        public bool StrictPokeballUse = false;
 
         public static GlobalSettings Default => new GlobalSettings();
 
@@ -435,7 +449,7 @@ namespace PoGo.NecroBot.Logic
                     var input = File.ReadAllText(configFile);
 
                     var jsonSettings = new JsonSerializerSettings();
-                    jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                    jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                     jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
@@ -592,7 +606,7 @@ namespace PoGo.NecroBot.Logic
         {
             get
             {
-                return _settings.DefaultLatitude + _rand.NextDouble()*((double) _settings.MaxSpawnLocationOffset/111111);
+                return _settings.DefaultLatitude + _rand.NextDouble() * ((double)_settings.MaxSpawnLocationOffset / 111111);
             }
 
             set { _settings.DefaultLatitude = value; }
@@ -603,8 +617,8 @@ namespace PoGo.NecroBot.Logic
             get
             {
                 return _settings.DefaultLongitude +
-                       _rand.NextDouble()*
-                       ((double) _settings.MaxSpawnLocationOffset/111111/Math.Cos(_settings.DefaultLatitude));
+                       _rand.NextDouble() *
+                       ((double)_settings.MaxSpawnLocationOffset / 111111 / Math.Cos(_settings.DefaultLatitude));
             }
 
             set { _settings.DefaultLongitude = value; }
@@ -714,6 +728,9 @@ namespace PoGo.NecroBot.Logic
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public ICollection<PokemonId> PokemonToUseMasterball => _settings.PokemonToUseMasterball;
+        public ICollection<PokemonId> PokemonToUsePokeball => _settings.PokemonToUsePokeball;
+        public bool ThrowLuckyBallFirst => _settings.ThrowLuckyBallFirst;
+        public bool StrictPokeballUse => _settings.StrictPokeballUse;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;

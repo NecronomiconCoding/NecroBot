@@ -140,9 +140,13 @@ namespace PoGo.NecroBot.Logic
 
         ICollection<PokemonId> PokemonToUseMasterball { get; }
 
+        ICollection<PokemonId> PokemonToUsePokeball { get; }
+
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
         SnipeSettings PokemonToSnipe { get; }
 
+        bool ThrowLuckyBallFirst { get; }
+        bool StrictPokeballUse { get; }
         bool StartupWelcomeDelay { get; }
     }
 }
