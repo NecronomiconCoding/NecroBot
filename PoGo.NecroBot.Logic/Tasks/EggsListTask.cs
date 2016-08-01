@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -14,6 +15,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(ISession session)
         {
+            // Refresh inventory so that the player stats are fresh
             await session.Inventory.RefreshCachedInventory();
 
             var playerStats = (await session.Inventory.GetPlayerStats()).FirstOrDefault();
@@ -39,6 +41,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Incubators = incubators,
                     UnusedEggs = unusedEggs
                 });
+
+            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
         }
     }
 }
