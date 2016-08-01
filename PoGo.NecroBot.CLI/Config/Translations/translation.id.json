@@ -39,7 +39,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} dalam ({1}m)"
+      "Value": "Berjalan ke PokeStop: {0} ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
@@ -374,11 +374,79 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Sniper] Mencari Pokemon untuk dibidik di {0}..."
+      "Value": "Mencari Pokemon untuk dibidik di {0}..."
+    },
+    {
+      "Key": "SnipeScanEx",
+      "Value": "Membidik seekor {0} dengan {1} IV di {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] Tidak ditemukan Pokemon untuk dibidik!"
+      "Value": "Tidak ditemukan Pokemon untuk dibidik!"
+    },
+    {
+      "Key": "NotEnoughPokeballsToSnipe",
+      "Value": "Pokeball tidak mencukupi untuk memulai bidikan! ({0}/{1})"
+    },
+    {
+      "Key": "DisplayHighestMove1Header",
+      "Value": "GERAKAN1"
+    },
+    {
+      "Key": "DisplayHighestMove2Header",
+      "Value": "GERAKAN2"
+    },
+    {
+      "Key": "DisplayHighestCandy",
+      "Value": "Permen"
+    },
+    {
+      "Key": "IPBannedError",
+      "Value": "Koneksi ditolak. Alamat IP anda mungkin sudah diblokir oleh Niantic. Keluar.."
+    },
+    {
+      "Key": "NoEggsAvailable",
+      "Value": "Tidak ada telur yang tersedia"
+    },
+    {
+      "Key": "UseLuckyEggActive",
+      "Value": "Telur keberuntungan sudah aktif"
+    },
+    {
+      "Key": "UsedLuckyEgg",
+      "Value": "Sebuah telur keberuntungan terpakai"
+    },
+    {
+      "Key": "UseLuckyEggAmount",
+      "Value": "Telur keberuntungan di inventori: {0}"
+    },
+    {
+      "Key": "NoIncenseAvailable",
+      "Value": "Dupa tidak tersedia"
+    },
+    {
+      "Key": "UseIncenseActive",
+      "Value": "Dupa sudah aktif"
+    },
+    {
+      "Key": "UseIncenseAmount",
+      "Value": "Dupa di inventori: {0}"
+    },
+    {
+      "Key": "UsedIncense",
+      "Value": "Sebuah dupa terpakai"
+    },
+    {
+      "Key": "AmountPkmSeenCaught",
+      "Value": "Jumlah Pokemon yang terlihat: {0}/151, Jumlah Pokemon yang tertangkap: {1}/151"
+    },
+    {
+      "Key": "PkmPotentialEvolveCount",
+      "Value": "[Evolusi] Berpotensi evolusi: {0}"
+    },
+    {
+      "Key": "PkmNotEnoughRessources",
+      "Value": "Peningkatan Pokemon gagal karena tidak cukup bahan"
     }
   ]
 }
