@@ -189,6 +189,8 @@ namespace PoGo.NecroBot.Logic
         public double UseGreatBallBelowCatchProbability = 0.3;
         public double UseUltraBallBelowCatchProbability = 0.2;
         public double UseMasterBallBelowCatchProbability = 0.05;
+        public bool ThrowLuckyBallFirst = false;
+        public bool StrictPokeballUse = false;
         //transfer
         public bool TransferDuplicatePokemon = true;
         //favorite
@@ -429,8 +431,6 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Drowzee,
             PokemonId.Weedle
         };
-        public bool ThrowLuckyBallFirst = false;
-        public bool StrictPokeballUse = false;
 
         public static GlobalSettings Default => new GlobalSettings();
 
