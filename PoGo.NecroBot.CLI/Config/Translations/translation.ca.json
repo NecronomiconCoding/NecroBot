@@ -291,7 +291,7 @@
     },
     {
       "Key": "pokeballsToKeepIncorrect",
-      "Value": "L'opció TotalAmountOfPokebalsToKeep ha estat configurada incorrectament. El nombre és menor que 1."
+      "Value": "L'opció TotalAmountOfPokeballsToKeep ha estat configurada incorrectament. El nombre és menor que 1."
     },
     {
       "Key": "potionsToKeepIncorrect",
