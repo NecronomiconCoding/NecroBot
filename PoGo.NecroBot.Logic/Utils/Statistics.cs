@@ -55,9 +55,8 @@ namespace PoGo.NecroBot.Logic.Utils
                 var minutes = 0.00;
                 if (double.IsInfinity(time) == false && time > 0)
                 {
-                    time = Convert.ToDouble(TimeSpan.FromHours(time).ToString("h\\.mm"), CultureInfo.InvariantCulture);
-                    hours = Math.Truncate(time);
-                    minutes = Math.Round((time - hours)*100);
+                    hours = Math.Truncate(TimeSpan.FromHours(time).TotalHours);
+                    minutes = TimeSpan.FromHours(time).Minutes;
                 }
 
                 output = new StatsExport
@@ -66,22 +65,24 @@ namespace PoGo.NecroBot.Logic.Utils
                     HoursUntilLvl = hours,
                     MinutesUntilLevel = minutes,
                     CurrentXp = stat.Experience - stat.PrevLevelXp - GetXpDiff(stat.Level),
-                    LevelupXp = stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level),
+                    LevelupXp = stat.NextLevelXp - stat.PrevLevelXp - GetXpDiff(stat.Level)
                 };
             }
             return output;
         }
 
-        public string GetTemplatedStats(string template, string xpTemplate)
-        {
-            var xpStats = string.Format(xpTemplate, _exportStats.Level, _exportStats.HoursUntilLvl, _exportStats.MinutesUntilLevel, _exportStats.CurrentXp, _exportStats.LevelupXp);
-            return string.Format(template, _playerName, FormatRuntime(), xpStats, TotalExperience / GetRuntime(), TotalPokemons / GetRuntime(), 
-                TotalStardust, TotalPokemonsTransfered, TotalItemsRemoved);
-        }
-
         public double GetRuntime()
         {
             return (DateTime.Now - _initSessionDateTime).TotalSeconds/3600;
+        }
+
+        public string GetTemplatedStats(string template, string xpTemplate)
+        {
+            var xpStats = string.Format(xpTemplate, _exportStats.Level, _exportStats.HoursUntilLvl,
+                _exportStats.MinutesUntilLevel, _exportStats.CurrentXp, _exportStats.LevelupXp);
+            return string.Format(template, _playerName, FormatRuntime(), xpStats, TotalExperience/GetRuntime(),
+                TotalPokemons/GetRuntime(),
+                TotalStardust, TotalPokemonsTransfered, TotalItemsRemoved);
         }
 
         public static int GetXpDiff(int level)
@@ -110,8 +111,8 @@ namespace PoGo.NecroBot.Logic.Utils
     {
         public long CurrentXp;
         public double HoursUntilLvl;
-        public double MinutesUntilLevel;
         public int Level;
         public long LevelupXp;
+        public double MinutesUntilLevel;
     }
 }

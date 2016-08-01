@@ -22,7 +22,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Buiten het ingestelde bereik beland! Terug naar beginpunt ({0}m weg) in 5 seconden. Klopt je Coords.ini bestand?"
+      "Value":
+        "Buiten het ingestelde bereik beland! Terug naar beginpunt ({0}m weg) in 5 seconden. Klopt je LastPos.ini bestand?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -66,7 +67,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kans: {7}% | Afstand: {8}m | gevangen met een {9} ({10} resterend). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kans: {7}% | Afstand: {8}m | gevangen met een {9} ({10} resterend). | {11}"
     },
     {
       "Key": "eventNoPokeballs",

@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,7 +22,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Você está fora do seu raio definido! Caminhando para o início ({0}m) em 5 segundos. Suas coordenadas em Coords.ini estão corretas?"
+      "Value":
+        "Você está fora do seu raio definido! Caminhando para o início ({0}m) em 5 segundos. Suas coordenadas em LastPos.ini estão corretas?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -66,7 +67,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m de distância | com uma {9} (restando {10}). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m de distância | com uma {9} (restando {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -218,11 +220,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Sem movimentos realista em {0}, utilizando ultimas configurações salvas em Coords.ini"
+      "Value": "Sem movimentos realista em {0}, utilizando ultimas configurações salvas em LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "As coodernadas no arquivo \"Coords.ini\" são inválidas, utilizando as coordenadas padrão"
+      "Value": "As coodernadas no arquivo \"LastPos.ini\" são inválidas, utilizando as coordenadas padrão"
     },
     {
       "Key": "gotUpToDateVersion",
@@ -270,7 +272,8 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "O inventário de Pokémons está cheio. Transfira seus pokémons manualmente altere TransferDuplicatePokemon para true nas configurações..."
+      "Value":
+        "O inventário de Pokémons está cheio. Transfira seus pokémons manualmente altere TransferDuplicatePokemon para true nas configurações..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -338,7 +341,8 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Sessão {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transferidos: {6:0} | Reciclados: {7:0}"
+      "Value":
+        "{0} - Sessão {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transferidos: {6:0} | Reciclados: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -350,7 +354,8 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Como você possui o Google Two Factor Auth ativado, você precisará informar o App Specific Password no arquivo auth.json"
+      "Value":
+        "Como você possui o Google Two Factor Auth ativado, você precisará informar o App Specific Password no arquivo auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",

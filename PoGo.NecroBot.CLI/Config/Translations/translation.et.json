@@ -1,246 +1,336 @@
 ﻿{
-    "TranslationStrings": [{
-        "Key": "pokeball",
-        "Value": "Pokéball"
-    }, {
-        "Key": "greatPokeball",
-        "Value": "Superball"
-    }, {
-        "Key": "ultraPokeball",
-        "Value": "Hyperball"
-    }, {
-        "Key": "masterPokeball",
-        "Value": "Masterball"
-    }, {
-        "Key": "CatchStatusSuccess",
-        "Value": "Käes"
-    }, {
-        "Key": "CatchStatusError",
-        "Value": "Viga püüdmisel"
-    }, {
-        "Key": "CatchStatusEscape",
-        "Value": "Põgenes"
-    }, {
-        "Key": "CatchStatusFlee",
-        "Value": "Põgenes"
-    }, {
-        "Key": "CatchStatusMissed",
-        "Value": "Mööda"
-    }, {
-        "Key": "CatchTypeIncense",
-        "Value": "Incense"
-    }, {
-        "Key": "CatchTypeLure",
-        "Value": "Lure"
-    }, {
-        "Key": "CatchTypeNormal",
-        "Value": "Tavaline"
-    }, {
-        "Key": "wrongAuthType",
-        "Value": "Vale AuthType auth.json failis."
-    }, {
-        "Key": "farmPokestopsOutsideRadius",
-        "Value": "Oled seadistatud raadiusest väljas! Liigun alguspunkti ({0} m kaugusel) tagasi 5 sekundi pärast. Kas koordinaadid config.json'is on õiged?"
-    }, {
-        "Key": "farmPokestopsNoUsableFound",
-        "Value": "Sinu piirkonnas ei leidu PokeStop'e. Kas maksimaalne raadius on liiga väike?"
-    }, {
-        "Key": "eventFortUsed",
-        "Value": "Name: {0} XP: {1}, Gem'e: {2}, Esemeid: {3}"
-    }, {
-        "Key": "eventFortFailed",
-        "Value": "Name: {0} INFO: Esemete vastuvõtmine ebaõnnestus, võimalik softban. Katse: {1}/{2}"
-    }, {
-        "Key": "eventFortTargeted",
-        "Value": "{0} ({1} m pärast)"
-    }, {
-        "Key": "eventProfileLogin",
-        "Value": "Mängin {0}'na"
-    }, {
-        "Key": "eventUsedLuckyEgg",
-        "Value": "Kasutasin Lucky Egg'i, veel alles: {0}"
-    }, {
-        "Key": "eventPokemonEvolvedSuccess",
-        "Value": "{0} evolve'iti {1} XP eest!"
-    }, {
-        "Key": "eventPokemonEvolvedFailed",
-        "Value": "Viga {0}'ga. Tulemus: {1}, lõpetan evolve'imise: {2}"
-    }, {
-        "Key": "eventPokemonTransferred",
-        "Value": "{0}\t- CP: {1}  IV: {2}% [Parim CP: {3}  IV: {4}%] (Candy't: {5})"
-    }, {
-        "Key": "eventItemRecycled",
-        "Value": "{0}x {1}"
-    }, {
-        "Key": "eventPokemonCapture",
-        "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | võimalus: {7}% | {8} m kaugusel | {9}'iga ({10} veel alles). | {11}"
-    }, {
-        "Key": "eventNoPokeballs",
-        "Value": "Pokéball'id otsas! - Jäin ilma {0}'st {1} CP'ga!"
-    }, {
-        "Key": "catchStatusAttempt",
-        "Value": "{0} katse #{1}"
-    }, {
-        "Key": "catchStatus",
-        "Value": "{0}"
-    }, {
-        "Key": "candies",
-        "Value": "Candy't: {0}"
-    }, {
-        "Key": "unhandledGpxData",
-        "Value": "Ebakorrektsed GPX andmed, püüan vahele jätta."
-    }, {
-        "Key": "displayHighestsHeader",
-        "Value": "Pokémon'e"
-    }, {
-        "Key": "commonWordPerfect",
-        "Value": "perfektne"
-    }, {
-        "Key": "commonWordName",
-        "Value": "Nimi"
-    }, {
-        "Key": "commonWordUnknown",
-        "Value": "Tundmatu"
-    }, {
-        "Key": "displayHighestsCpHeader",
-        "Value": "NäitaKõrgeimCP"
-    }, {
-        "Key": "displayHighestsPerfectHeader",
-        "Value": "NäitaKõrgeimPerfektsus"
-    }, {
-        "Key": "displayHighestsLevelHeader",
-        "Value": "NäitaKõrgeimLevel"
-    }, {
-        "Key": "welcomeWarning",
-        "Value": "Veendu, et laius- ja pikkuskraadid on õiged. Kui ei, siis sulge programm! Laiuskraad (Lat): {0}, pikkuskraad (Lng): {1}"
-    }, {
-        "Key": "incubatorPuttingEgg",
-        "Value": "Panen muna inkubaatorisse: {0:0.00} km veel jäänud"
-    }, {
-        "Key": "incubatorStatusUpdate",
-        "Value": "Inkubaatori seis: {0:0.00} km veel jäänud"
-    }, {
-        "Key": "incubatorEggHatched",
-        "Value": "Muna koorus: {0}"
-    }, {
-        "Key": "logEntryError",
-        "Value": "VIGA"
-    }, {
-        "Key": "logEntryAttention",
-        "Value": "TÄHELEPANU"
-    }, {
-        "Key": "logEntryInfo",
-        "Value": "INFO"
-    }, {
-        "Key": "logEntryPokestop",
-        "Value": "POKESTOP"
-    }, {
-        "Key": "logEntryFarming",
-        "Value": "FARMIN"
-    }, {
-        "Key": "logEntryRecycling",
-        "Value": "LOOBUN"
-    }, {
-        "Key": "logEntryPKMN",
-        "Value": "PKMN"
-    }, {
-        "Key": "logEntryTransfered",
-        "Value": "TRANSFER"
-    }, {
-        "Key": "logEntryEvolved",
-        "Value": "EVOLVE"
-    }, {
-        "Key": "logEntryBerry",
-        "Value": "BERRY"
-    }, {
-        "Key": "logEntryEgg",
-        "Value": "MUNA"
-    }, {
-        "Key": "logEntryDebug",
-        "Value": "DEBUG"
-    }, {
-        "Key": "logEntryUpdate",
-        "Value": "UUENDUS"
-    }, {
-        "Key": "loggingIn",
-        "Value": "Login sisse {0}'na"
-    }, {
-        "Key": "ptcOffline",
-        "Value": "PTC server on maas VÕI on kasutajanimi ja parool valed. Proovi Google'iga?"
-    }, {
-        "Key": "tryingAgainIn",
-        "Value": "Järgmine katse {0} sekundi pärast..."
-    }, {
-        "Key": "accountNotVerified",
-        "Value": "Sisselogimine ebaõnnestus! Peatun..."
-    }, {
-        "Key": "openingGoogleDevicePage",
-        "Value": "Avan Google'i Device lehe. Täitke sealne väli CTRL+V abil."
-    }, {
-        "Key": "couldntCopyToClipboard",
-        "Value": "Ei suutnud koodi kopeerida. Proovige käsitsi."
-    }, {
-        "Key": "couldntCopyToClipboard2",
-        "Value": "Minge lehele: {0} & sisestage {1}"
-    }, {
-        "Key": "realisticTravelDetected",
-        "Value": "Realistlik liikumine leitud. Kasutan faili UserSettings.settings"
-    }, {
-        "Key": "notRealisticTravel",
-        "Value": "Ei leidnud realistlikku liikumist: {0}, kasutan viimati salvestatud andmeid failist Coords.ini"
-    }, {
-        "Key": "coordinatesAreInvalid",
-        "Value": "Koordinaadid failis \"Coords.ini\" ei ole korrektsed! Kasutage standardseid koordinaate."
-    }, {
-        "Key": "gotUpToDateVersion",
-        "Value": "Fantastiline! Sul on tarkvarast uusim versioon, {0}"
-    }, {
-        "Key": "autoUpdaterDisabled",
-        "Value": "Automaatne uuendus ei tööta. Uusim versioon oleks: {0}\n "
-    }, {
-        "Key": "downloadingUpdate",
-        "Value": "Laadisin uuenduse alla ja pakkisin lahti..."
-    }, {
-        "Key": "finishedDownloadingRelease",
-        "Value": "Uusima versiooni allalaadimine valmis..."
-    }, {
-        "Key": "finishedUnpackingFiles",
-        "Value": "Andmete lahtipakkimine valmis..."
-    }, {
-        "Key": "updateFinished",
-        "Value": "Uuendus tehtud! Võite selle akna sulgeda."
-    }, {
-        "Key": "lookingForIncensePokemon",
-        "Value": "Otsin Incense'iga meelitatud Pokémon'e..."
-    }, {
-        "Key": "lookingForPokemon",
-        "Value": "Otsin Pokémon'e..."
-    }, {
-        "Key": "lookingForLurePokemon",
-        "Value": "Otsin Lure'iga meelitatud Pokémon'e..."
-    }, {
-        "Key": "pokemonSkipped",
-        "Value": "Jätsin vahele: {0}"
-    }, {
-        "Key": "invFullTransferring",
-        "Value": "Kott on Pokémon'e täis. Transferin Pokémon'id..."
-    }, {
-        "Key": "invFullTransferManually",
-        "Value": "Kott on Pokémon'e täis. Palun transferige Pokémon'id käsitsi või määrake sätte \"TransferDuplicatePokemon\" väärtuseks \"true\"..."
-    }, {
-        "Key": "encounterProblem",
-        "Value": "Probleem kohtumisega: {0}"
-    }, {
-        "Key": "encounterProblemLurePokemon",
-        "Value": "Probleem kohtumisega: lure'itud Pokémon {0}"
-    }, {
-        "Key": "desiredDestTooFar",
-        "Value": "Soovitud sihtkoht ({0}, {1}), on sinu praegusest asukohast ({2}, {3}) liiga kaugel."
-    }, {
-        "Key": "pokemonRename",
-        "Value": "Pokémon {0} ({1}) nimetati ümber {2}'st {3}'ks."
-    }, {
-        "Key": "pokemonIgnoreFilter",
-        "Value": "[Pokémon-Ignore-Filter] - Ignoreerin {0} nagu sätetes määratud!"
-    }]
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "Pokéball"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "Superball"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "Hyperball"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "Masterball"
+    },
+    {
+      "Key": "CatchStatusSuccess",
+      "Value": "Käes"
+    },
+    {
+      "Key": "CatchStatusError",
+      "Value": "Viga püüdmisel"
+    },
+    {
+      "Key": "CatchStatusEscape",
+      "Value": "Põgenes"
+    },
+    {
+      "Key": "CatchStatusFlee",
+      "Value": "Põgenes"
+    },
+    {
+      "Key": "CatchStatusMissed",
+      "Value": "Mööda"
+    },
+    {
+      "Key": "CatchTypeIncense",
+      "Value": "Incense"
+    },
+    {
+      "Key": "CatchTypeLure",
+      "Value": "Lure"
+    },
+    {
+      "Key": "CatchTypeNormal",
+      "Value": "Tavaline"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "Vale AuthType auth.json failis."
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value":
+        "Oled seadistatud raadiusest väljas! Liigun alguspunkti ({0} m kaugusel) tagasi 5 sekundi pärast. Kas koordinaadid config.json'is on õiged?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Sinu piirkonnas ei leidu PokeStop'e. Kas maksimaalne raadius on liiga väike?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "Name: {0} XP: {1}, Gem'e: {2}, Esemeid: {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Name: {0} INFO: Esemete vastuvõtmine ebaõnnestus, võimalik softban. Katse: {1}/{2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} ({1} m pärast)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Mängin {0}'na"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Kasutasin Lucky Egg'i, veel alles: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} evolve'iti {1} XP eest!"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Viga {0}'ga. Tulemus: {1}, lõpetan evolve'imise: {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP: {1}  IV: {2}% [Parim CP: {3}  IV: {4}%] (Candy't: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | võimalus: {7}% | {8} m kaugusel | {9}'iga ({10} veel alles). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Pokéball'id otsas! - Jäin ilma {0}'st {1} CP'ga!"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} katse #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Candy't: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Ebakorrektsed GPX andmed, püüan vahele jätta."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokémon'e"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfektne"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "Nimi"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "Tundmatu"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "NäitaKõrgeimCP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "NäitaKõrgeimPerfektsus"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "NäitaKõrgeimLevel"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value":
+        "Veendu, et laius- ja pikkuskraadid on õiged. Kui ei, siis sulge programm! Laiuskraad (Lat): {0}, pikkuskraad (Lng): {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Panen muna inkubaatorisse: {0:0.00} km veel jäänud"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Inkubaatori seis: {0:0.00} km veel jäänud"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Muna koorus: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "VIGA"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "TÄHELEPANU"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMIN"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "LOOBUN"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "TRANSFER"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "EVOLVE"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "BERRY"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "MUNA"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "UUENDUS"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Login sisse {0}'na"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "PTC server on maas VÕI on kasutajanimi ja parool valed. Proovi Google'iga?"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Järgmine katse {0} sekundi pärast..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Sisselogimine ebaõnnestus! Peatun..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Avan Google'i Device lehe. Täitke sealne väli CTRL+V abil."
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Ei suutnud koodi kopeerida. Proovige käsitsi."
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Minge lehele: {0} & sisestage {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Realistlik liikumine leitud. Kasutan faili UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Ei leidnud realistlikku liikumist: {0}, kasutan viimati salvestatud andmeid failist LastPos.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Koordinaadid failis \"LastPos.ini\" ei ole korrektsed! Kasutage standardseid koordinaate."
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Fantastiline! Sul on tarkvarast uusim versioon, {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "Automaatne uuendus ei tööta. Uusim versioon oleks: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Laadisin uuenduse alla ja pakkisin lahti..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Uusima versiooni allalaadimine valmis..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Andmete lahtipakkimine valmis..."
+    },
+    {
+      "Key": "FinishedTransferringConfig",
+      "Value": "Ülekandmise lõpetanud oma config uue versiooni..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Uuendus tehtud! Võite selle akna sulgeda."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Otsin Incense'iga meelitatud Pokémon'e..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Otsin Pokémon'e..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Otsin Lure'iga meelitatud Pokémon'e..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Jätsin vahele: {0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Kott on Pokémon'e täis. Transferin Pokémon'id..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value":
+        "Kott on Pokémon'e täis. Palun transferige Pokémon'id käsitsi või määrake sätte \"TransferDuplicatePokemon\" väärtuseks \"true\"..."
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Probleem kohtumisega: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Probleem kohtumisega: lure'itud Pokémon {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Soovitud sihtkoht ({0}, {1}), on sinu praegusest asukohast ({2}, {3}) liiga kaugel."
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pokémon {0} ({1}) nimetati ümber {2}'st {3}'ks."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Pokémon-Ignore-Filter] - Ignoreerin {0} nagu sätetes määratud!"
+    }
+  ]
 }

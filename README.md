@@ -7,7 +7,7 @@
 <h1>NecroBot - a Pokemon Go Bot based on RocketAPI</h1>
 Visit our new Website! : http://necrobot.io
 
-Chatting about this Repository can be done on our Discord: https://discord.gg/VsVrjgr <br/>
+Chatting about this Repository can be done on our Discord: https://discord.gg/VXKxNFr <br/>
 <br/>
 
 <h2><a name="features">Features</a></h2>
@@ -29,6 +29,8 @@ Chatting about this Repository can be done on our Discord: https://discord.gg/Vs
  - [Use lucky egg while evolve]
  - [Egg Hatching Automatically]
  - [Multi bot support]
+ - [Snipe pokemon]
+ - [Power-Up pokemon]
 
 <h2><a name="getting-started">Getting Started</a></h2>
 Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.

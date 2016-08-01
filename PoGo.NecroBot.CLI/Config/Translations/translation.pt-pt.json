@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -18,15 +18,16 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Tipo de autenticação desconhecida em config.json"
+      "Value": "Tipo de autenticação desconhecida no ficheiro config.json"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Você está fora do seu raio definido! Caminhando para o início ({0}m) em 5 segundos. Suas coordenadas em Coords.ini estão corretas?"
+      "Value":
+        "Estás fora do raio definido! A caminhar para o início ({0}m) em 5 segundos. As coordenadas em LastPos.ini estão corretas?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Não foram encontradas PokeStops na sua área. Sua distância máxima não é muito pequena?"
+      "Value": "Não foram encontradas PokeStops na tua área. A tua distância máxima não é muito pequena?"
     },
     {
       "Key": "eventFortUsed",
@@ -34,19 +35,19 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Nome: {0} INFO: O saque falhou, possível softban. Desbanindo em: {1}/{2}"
+      "Value": "Nome: {0} INFO: O drop falhou, softban possível. Desbloqueio em: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Chegando ao Pokestop: {0} em ({1}m)"
+      "Value": "A chegar ao Pokestop: {0} em ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Jogando como {0}"
+      "Value": "A jogar como {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Ovo da Sorte utilizado, restando: {0}"
+      "Value": "Ovo da Sorte utilizado, a restar: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -54,7 +55,7 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Falhou {0}. O resultado foi {1}, parando evolução {2}"
+      "Value": "Falhou {0}. O resultado foi {1}, a parar a evolução {2}"
     },
     {
       "Key": "eventPokemonTransferred",
@@ -66,11 +67,12 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m de distância | com uma {9} (restando {10}). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m de distância | com uma {9} (restando {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Sem Pokébolas - Nós perdemos um(a) {0} com {1} de CP"
+      "Value": "Sem Pokébolas - Perdemos um(a) {0} com {1} de CP"
     },
     {
       "Key": "catchStatusAttempt",
@@ -86,7 +88,7 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Dados não processados ​​no arquivo GPX, tentando ignorar."
+      "Value": "Dados não processados ​​no ficheiro GPX, a ignorar."
     },
     {
       "Key": "displayHighestsHeader",
@@ -106,19 +108,19 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "Exibir maior CP"
+      "Value": "Mostrar maior CP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Exibir os mais perfeitos"
+      "Value": "Mostrar os mais perfeitos"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Exibir os com level mais alto"
+      "Value": "Mostrar os com nível mais alto"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Verifique se a Lat & Lng estão corretas. O bot irá fechar caso contrário! Lat: {0} Lng: {1}"
+      "Value": "Verifica se a Lat & Lng estão corretas. O bot fechará caso contrário! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -190,7 +192,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "Os Servidores PTC provavelmente estão offline ou suas credenciais são inválidas. Tente o Google."
+      "Value": "Os Servidores PTC provavelmente estão offline ou as credenciais são inválidas. Experimenta o Google."
     },
     {
       "Key": "tryingAgainIn",
@@ -202,15 +204,15 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Abrindo a página de aparelhos Google. Cole o código utilizando CTRL+V"
+      "Value": "Abrindo a página de dispositivos Google. Cola o código utilizando CTRL+V"
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Não foi possível copiar para área de transferência, faça isso manualmente"
+      "Value": "Não foi possível copiar para área de transferência, faz isso manualmente!"
     },
     {
       "Key": "couldntCopyToClipboard2",
-      "Value": "Vá para: {0} & e informe {1}"
+      "Value": "Vai para: {0} & e informa {1}"
     },
     {
       "Key": "realisticTravelDetected",
@@ -218,15 +220,15 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Sem movimentos realista em {0}, utilizando ultimas configurações salvas em Coords.ini"
+      "Value": "Sem movimentos realistas em {0}, utilizando as ultimas configurações salvas em LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "As coodernadas no arquivo \"Coords.ini\" são inválidas, utilizando as coordenadas padrão"
+      "Value": "As coodernadas no ficheiro \"LastPos.ini\" são inválidas, utilizando as coordenadas por defeito"
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Perfeito! Você já possui a última Versão {0}"
+      "Value": "Perfeito! Já possuis a última Versão {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -234,7 +236,7 @@
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Baixando e aplicando atualização..."
+      "Value": "Transferindo e aplicando a atualização..."
     },
     {
       "Key": "finishedDownloadingRelease",
@@ -242,11 +244,11 @@
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "Terminando de descompactar arquivos..."
+      "Value": "Terminando de descompactar os ficheiros..."
     },
     {
       "Key": "updateFinished",
-      "Value": "Atualização concluída, você já pode fechar essa janela."
+      "Value": "Atualização concluída, já podes fechar esta janela."
     },
     {
       "Key": "lookingForIncensePokemon",
@@ -270,11 +272,12 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "O inventário de Pokémons está cheio. Transfira seus pokémons manualmente altere TransferDuplicatePokemon para true nas configurações..."
+      "Value":
+        "O inventário de Pokémons está cheio. Transfere os pokémons manualmente ou altera TransferDuplicatePokemon para true nas configurações..."
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "O inventório está cheio, nenhum item saqueado!"
+      "Value": "O inventário está cheio, nenhum item dropado!"
     },
     {
       "Key": "encounterProblem",
@@ -286,7 +289,7 @@
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Seu destino desejado de {0}, {1} é muito longe de sua posição atual {2}, {3}"
+      "Value": "O destino desejado de {0}, {1} é muito longe da tua posição atual {2}, {3}"
     },
     {
       "Key": "pokemonRename",
@@ -338,7 +341,8 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Sessão {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transferidos: {6:0} | Reciclados: {7:0}"
+      "Value":
+        "{0} - Sessão {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transferidos: {6:0} | Reciclados: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -346,27 +350,28 @@
     },
     {
       "Key": "requireInputText",
-      "Value": "Pressione enter para dar início ao bot..."
+      "Value": "Pressiona enter para dar início ao bot..."
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Como você possui o Google Two Factor Auth ativado, você precisará informar o App Specific Password no arquivo auth.json"
+      "Value":
+        "Como tens o Google Two Factor Auth ativado, precisarás de definir o App Specific Password no ficheiro auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "Abrindo Google App-Passwords. Faça um novo App Password (utilize Outro como Aparelho)"
+      "Value": "Abrindo Google App-Passwords. Faz um novo App Password (utilize Outro como Dispositivo)"
     },
     {
       "Key": "googleError",
-      "Value": "Verifique se você informou um e-mail e uma senha correta."
+      "Value": "Verifica se definiste um e-mail e uma palavra-passe correta."
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Você precisa informar o GoogleUsername e GooglePassword no arquivo auth.json!"
+      "Value": "Precisas de definir o GoogleUsername e GooglePassword no ficheiro auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Você precisa informar o PtcUsername e PtcPassword no arquivo auth.json!"
+      "Value": "Precisas de definir o PtcUsername e PtcPassword no ficheiro auth.json!"
     },
     {
       "Key": "snipeScan",

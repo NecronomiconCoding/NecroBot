@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -22,7 +22,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Tanımlanan yarıçap dışındasın! 5 saniye sonra ({0}m uzağa) yürümeye başlanacak. Coords.ini dosyası doğru yapılandırılmış mı?"
+      "Value":
+        "Tanımlanan yarıçap dışındasın! 5 saniye sonra ({0}m uzağa) yürümeye başlanacak. LastPos.ini dosyası doğru yapılandırılmış mı?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -58,7 +59,8 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- Savaş Puanı(CP): {1}  Mükemmellik: {2}%   [En iyi Savaş Puanı(CP): {3}  Mükemmellik: {4}%] (Şekerler(Candy): {5})"
+      "Value":
+        "{0}\t- Savaş Puanı(CP): {1}  Mükemmellik: {2}%   [En iyi Savaş Puanı(CP): {3}  Mükemmellik: {4}%] (Şekerler(Candy): {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -66,7 +68,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Seviye: {3} Savaş Puanı(CP): ({4}/{5}) Mükemmellik: {6}% | Başarı şansı: {7}% | {8}m mesafeden | {9} ile ({10} adet kaldı). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Seviye: {3} Savaş Puanı(CP): ({4}/{5}) Mükemmellik: {6}% | Başarı şansı: {7}% | {8}m mesafeden | {9} ile ({10} adet kaldı). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -214,11 +217,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "{0} da gerçekçi gezinme yok, son kaydedilen Coords.ini kullanılıyor."
+      "Value": "{0} da gerçekçi gezinme yok, son kaydedilen LastPos.ini kullanılıyor."
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "\"Coords.ini\" dosyasındaki koordinatlar geçersiz, varsayılan koordinatlar kullanılıyor."
+      "Value": "\"LastPos.ini\" dosyasındaki koordinatlar geçersiz, varsayılan koordinatlar kullanılıyor."
     },
     {
       "Key": "gotUpToDateVersion",
@@ -239,6 +242,10 @@
     {
       "Key": "finishedUnpackingFiles",
       "Value": "Paket açıldı."
+    },
+    {
+      "Key": "FinishedTransferringConfig",
+      "Value": "Var olan ayar dosyası, yeni sürüme aktarıldı."
     },
     {
       "Key": "updateFinished",
@@ -266,7 +273,8 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Pokemon envanteri dolu. Pokemonları aktararak yer açın veya ayarlarda \"TransferDuplicatePokemon\" değerini \"true\" atayın."
+      "Value":
+        "Pokemon envanteri dolu. Pokemonları aktararak yer açın veya ayarlarda \"TransferDuplicatePokemon\" değerini \"true\" atayın."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -334,7 +342,8 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Çalışıyor {1} - Seviye: {2} | XP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Aktarılan: {6:0} | Çöp Eşya: {7:0}"
+      "Value":
+        "{0} - Çalışıyor {1} - Seviye: {2} | XP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Aktarılan: {6:0} | Çöp Eşya: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -346,11 +355,13 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "\"Google İki Aşamalı Doğrulama\"yı etkinleştirmiş olduğun için, uygulamaya özel şifreni auth.json dosyasına eklemen gerek."
+      "Value":
+        "\"Google İki Aşamalı Doğrulama\"yı etkinleştirmiş olduğun için, uygulamaya özel şifreni auth.json dosyasına eklemen gerek."
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "\"Google Uygulama Şifreleri\" sayfası açılıyor. Lütfen yeni bir uygulama şifresi oluştur. (Aygıt olarak \"Diğer\" seçeneğini seç.)"
+      "Value":
+        "\"Google Uygulama Şifreleri\" sayfası açılıyor. Lütfen yeni bir uygulama şifresi oluştur. (Aygıt olarak \"Diğer\" seçeneğini seç.)"
     },
     {
       "Key": "googleError",
@@ -366,11 +377,23 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Keskin Nişancı] {0} da nişan alınacak pokemon aranıyor..."
+      "Value": "[Keskin Nişancı] {0} noktasında nişan alınacak pokemon aranıyor..."
+    },
+    {
+      "Key": "snipeScanEx",
+      "Value": "[Keskin Nişancı] {1} mükemmellikte bir {0} pokemonuna, {2} noktasında nişan alındı..."
     },
     {
       "Key": "noPokemonToSnipe",
       "Value": "[Keskin Nişancı] Nişan alınacak pokemon bulunamadı."
+    },
+    {
+      "Key": "displayHighestMOVE1Header",
+      "Value": "Vuruş1"
+    },
+    {
+      "Key": "displayHighestMOVE2Header",
+      "Value": "Vuruş2"
     }
   ]
 }

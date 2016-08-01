@@ -41,9 +41,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 await Task.Delay(1000, cancellationToken);
 
-                await session.Navigation.HumanLikeWalking(
+                await session.Navigation.Move(
                     new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude),
-                    session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken);
+                    session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken, session.LogicSettings.DisableHumanWalking);
             }
 
             var pokestopList = await GetPokeStops(session);
@@ -58,7 +58,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 });
             }
 
-            session.EventDispatcher.Send(new PokeStopListEvent { Forts = pokestopList });
+            session.EventDispatcher.Send(new PokeStopListEvent {Forts = pokestopList});
 
             while (pokestopList.Any())
             {
@@ -77,9 +77,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
-                session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
+                session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
 
-                await session.Navigation.HumanLikeWalking(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
+                    await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour,
                     async () =>
                     {
@@ -88,7 +88,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         //Catch Incense Pokemon
                         await CatchIncensePokemonsTask.Execute(session, cancellationToken);
                         return true;
-                    }, cancellationToken);
+                    }, cancellationToken, session.LogicSettings.DisableHumanWalking);
 
                 //Catch Lure Pokemon
                 if (pokeStop.LureInfo != null)
@@ -97,25 +97,27 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
 
                 FortSearchResponse fortSearch;
-                var TimesZeroXPawarded = 0;
-                var fortTry = 0;      //Current check
+                var timesZeroXPawarded = 0;
+                var fortTry = 0; //Current check
                 const int retryNumber = 50; //How many times it needs to check to clear softban
                 const int zeroCheck = 5; //How many times it checks fort before it thinks it's softban
                 do
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    fortSearch = await session.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                    if (fortSearch.ExperienceAwarded > 0 && TimesZeroXPawarded > 0) TimesZeroXPawarded = 0;
+                    fortSearch =
+                        await session.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    if (fortSearch.ExperienceAwarded > 0 && timesZeroXPawarded > 0) timesZeroXPawarded = 0;
                     if (fortSearch.ExperienceAwarded == 0)
                     {
-                        TimesZeroXPawarded++;
+                        timesZeroXPawarded++;
 
-                        if (TimesZeroXPawarded > zeroCheck)
+                        if (timesZeroXPawarded > zeroCheck)
                         {
-                            if ((int)fortSearch.CooldownCompleteTimestampMs != 0)
+                            if ((int) fortSearch.CooldownCompleteTimestampMs != 0)
                             {
-                                break; // Check if successfully looted, if so program can continue as this was "false alarm".
+                                break;
+                                    // Check if successfully looted, if so program can continue as this was "false alarm".
                             }
 
                             fortTry += 1;
@@ -141,40 +143,65 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded),
                             Latitude = pokeStop.Latitude,
                             Longitude = pokeStop.Longitude,
-                            inventoryFull = (fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull)
+                            InventoryFull = fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull
                         });
+                        await RecycleItemsTask.Execute(session, cancellationToken);
 
                         break; //Continue with program as loot was succesfull.
                     }
-                } while (fortTry < retryNumber - zeroCheck); //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
+                } while (fortTry < retryNumber - zeroCheck);
+                    //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
-                await Task.Delay(1000, cancellationToken);
+                //await Task.Delay(1000, cancellationToken);
 
                 await eggWalker.ApplyDistance(distance, cancellationToken);
 
-                if (++stopsHit % 5 == 0) //TODO: OR item/pokemon bag is full
+                if (++stopsHit%5 == 0) //TODO: OR item/pokemon bag is full
                 {
                     stopsHit = 0;
                     if (fortSearch.ItemsAwarded.Count > 0)
                     {
                         await session.Inventory.RefreshCachedInventory();
                     }
+
                     await RecycleItemsTask.Execute(session, cancellationToken);
-                    if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
+
+                    if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
+                        session.LogicSettings.EvolveAllPokemonAboveIv)
                     {
                         await EvolvePokemonTask.Execute(session, cancellationToken);
+                    }
+                    await GetPokeDexCount.Execute(session, cancellationToken);
+
+                    if (session.LogicSettings.AutomaticallyLevelUpPokemon)
+                    {
+                        await LevelUpPokemonTask.Execute(session, cancellationToken);
+                    }
+                    if (session.LogicSettings.UseLuckyEggConstantly)
+                    {
+                        await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                    }
+                    if (session.LogicSettings.UseIncenseConstantly)
+                    {
+                        await UseIncenseConstantlyTask.Execute(session, cancellationToken);
                     }
                     if (session.LogicSettings.TransferDuplicatePokemon)
                     {
                         await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                     }
-                    if (session.LogicSettings.RenameAboveIv)
+
+                    if (session.LogicSettings.RenamePokemon)
                     {
                         await RenamePokemonTask.Execute(session, cancellationToken);
                     }
+
+                    if (session.LogicSettings.AutoFavoritePokemon)
+                    {
+                        await FavoritePokemonTask.Execute(session, cancellationToken);
+                    }
                 }
 
-                if (session.LogicSettings.SnipeAtPokestops)
+                if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
                 {
                     await SnipePokemonTask.Execute(session, cancellationToken);
                 }

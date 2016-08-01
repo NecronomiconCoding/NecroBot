@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
-using PokemonGo.RocketAPI;
 using POGOProtos.Inventory.Item;
 
 #endregion
@@ -25,13 +24,25 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemonToEvolveTask = await session.Inventory.GetPokemonToEvolve(session.LogicSettings.PokemonsToEvolve);
             var pokemonToEvolve = pokemonToEvolveTask.ToList();
 
+            session.EventDispatcher.Send( new EvolveCountEvent
+            {
+                Evolves = pokemonToEvolve.Count
+            } );
+
             if (pokemonToEvolve.Any())
             {
+                if (session.LogicSettings.KeepPokemonsThatCanEvolve)
+                {
+                    var myPokemons = await session.Inventory.GetPokemons();
+                    if (session.Profile.PlayerData.MaxPokemonStorage * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage > myPokemons.Count())
+                        return;
+                }
+
                 var inventoryContent = await session.Inventory.GetItems();
 
                 var luckyEggs = inventoryContent.Where(p => p.ItemId == ItemId.ItemLuckyEgg);
                 var luckyEgg = luckyEggs.FirstOrDefault();
-                
+
                 //maybe there can be a warning message as an else condition of luckyEgg checks, like; 
                 //"There is no Lucky Egg, so, your UseLuckyEggsMinPokemonAmount setting bypassed."
                 if (session.LogicSettings.UseLuckyEggsWhileEvolving && luckyEgg != null && luckyEgg.Count > 0)
@@ -43,6 +54,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     else
                     {
                         // Wait until we have enough pokemon
+                        session.EventDispatcher.Send(new NoticeEvent()
+                        {
+                            Message = $"Not enough Pokemons to trigger a lucky  egg. Waiting for {session.LogicSettings.UseLuckyEggsMinPokemonAmount - pokemonToEvolve.Count} more ({ pokemonToEvolve.Count}/{session.LogicSettings.UseLuckyEggsMinPokemonAmount})"
+                        });
                         return;
                     }
                 }
@@ -75,7 +90,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             _lastLuckyEggTime = DateTime.Now;
             await session.Client.Inventory.UseItemXpBoost();
             await session.Inventory.RefreshCachedInventory();
-            session.EventDispatcher.Send(new UseLuckyEggEvent {Count = luckyEgg.Count});
+            if (luckyEgg != null) session.EventDispatcher.Send(new UseLuckyEggEvent {Count = luckyEgg.Count});
             DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
         }
     }

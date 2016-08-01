@@ -1,6 +1,5 @@
 ﻿#region using directives
 
-using System;
 using System.Collections.Generic;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
@@ -61,7 +60,9 @@ namespace PoGo.NecroBot.Logic
 
     public interface ILogicSettings
     {
+        bool DisableHumanWalking { get; }
         bool AutoUpdate { get; }
+        bool TransferConfigAndAuthOnUpdate { get; }
         float KeepMinIvPercentage { get; }
         int KeepMinCp { get; }
         double WalkingSpeedInKilometerPerHour { get; }
@@ -69,11 +70,28 @@ namespace PoGo.NecroBot.Logic
         bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
         bool UseEggIncubators { get; }
+        int UseGreatBallAboveCp { get; }
+        int UseUltraBallAboveCp { get; }
+        int UseMasterBallAboveCp { get; }
+        int UseGreatBallAboveIv { get; }
+        int UseUltraBallAboveIv { get; }
+        double UseMasterBallBelowCatchProbability { get; }
+        double UseUltraBallBelowCatchProbability { get; }
+        double UseGreatBallBelowCatchProbability { get; }
         int DelayBetweenPokemonCatch { get; }
+        bool AutomaticallyLevelUpPokemon { get; }
+        string LevelUpByCPorIv { get; }
+        float UpgradePokemonCpMinimum { get; }
+        float UpgradePokemonIvMinimum { get; }
         int DelayBetweenPlayerActions { get; }
         bool UsePokemonToNotCatchFilter { get; }
         int KeepMinDuplicatePokemon { get; }
         bool PrioritizeIvOverCp { get; }
+        int AmountOfTimesToUpgradeLoop { get; }
+
+        int GetMinStarDustForLevelUp { get; }
+        bool UseLuckyEggConstantly { get; }
+        bool UseIncenseConstantly { get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }
         string GpxFile { get; }
@@ -82,7 +100,10 @@ namespace PoGo.NecroBot.Logic
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
         bool DumpPokemonStats { get; }
-        bool RenameAboveIv { get; }
+        bool RenamePokemon { get; }
+        bool RenameOnlyAboveIv { get; }
+        float FavoriteMinIvPercentage { get; }
+        bool AutoFavoritePokemon { get; }
         string RenameTemplate { get; }
         int AmountOfPokemonToDisplayOnStart { get; }
         string TranslationLanguageCode { get; }
@@ -91,12 +112,24 @@ namespace PoGo.NecroBot.Logic
         string GeneralConfigPath { get; }
         bool SnipeAtPokestops { get; }
         int MinPokeballsToSnipe { get; }
+        int MinPokeballsWhileSnipe { get; }
+        int MaxPokeballsPerPokemon { get; }
         string SnipeLocationServer { get; }
         int SnipeLocationServerPort { get; }
         bool UseSnipeLocationServer { get; }
-        bool UseTransferIVForSnipe { get; }
+        bool UseSnipeOnlineLocationServer { get; }
+        bool UseTransferIvForSnipe { get; }
+        bool SnipeIgnoreUnknownIv { get; }
         int MinDelayBetweenSnipes { get; }
+        double SnipingScanOffset { get; }
+        int TotalAmountOfPokeballsToKeep { get; }
+        int TotalAmountOfPotionsToKeep { get; }
+        int TotalAmountOfRevivesToKeep { get; }
 
+        bool ShowPokeballCountsBeforeRecycle { get; }
+        bool VerboseRecycling { get; }
+        double RecycleInventoryAtUsagePercentage { get; }
+        double EvolveKeptPokemonsAtStorageUsagePercentage { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
@@ -105,8 +138,10 @@ namespace PoGo.NecroBot.Logic
 
         ICollection<PokemonId> PokemonsNotToCatch { get; }
 
+        ICollection<PokemonId> PokemonToUseMasterball { get; }
+
         Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
-        SnipeSettings PokemonToSnipe { get; } 
+        SnipeSettings PokemonToSnipe { get; }
 
         bool StartupWelcomeDelay { get; }
     }

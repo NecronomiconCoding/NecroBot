@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Έχεις ξεφύγει απο την ορισμένη εμβέλεια! Περπατάω για να ξεκινήσω ({0}m μακρυά) σε 5 δευτερόλεπτα. Έχεις ρυθμίσει το αρχείο Coords.ini σωστά;"
+        "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your LastPos.ini file correct?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -35,8 +35,12 @@
       "Value": "XP: {0}, Πετράδια: {1}, Αντικείμενα: {2}"
     },
     {
+      "Key": "eventFortFailed",
+      "Value": "Αποτυχία χρήσης Pokestop, υπαρχει πιθανότητα softban. Unban σε: {0}/{1}"
+    },
+    {
       "Key": "eventFortTargeted",
-      "Value": "{0} in ({1}m)"
+      "Value": "{0} σε απόσταση {1}μέτρων"
     },
     {
       "Key": "eventProfileLogin",
@@ -44,7 +48,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "χρησιμοποιήθηκε Lucky Egg, απομένουν: {0}"
+      "Value": "χρησιμοποιήθηκε ένα Lucky Egg, απομένουν: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -52,7 +56,7 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Απέτυχε {0}. Το αποτέλεσμα ήταν {1}, που σταμάτησε την εξέλιξη {2}"
+      "Value": "Η εξέλιξη απέτυχε {0}. Ως αποτέλεσμα {1}, δεν εξελίχθηκε {2}"
     },
     {
       "Key": "eventPokemonTransferred",
@@ -65,7 +69,7 @@
     {
       "Key": "eventPokemonCapture",
       "Value":
-        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Πιθανότητα Επιτυχίας: {7}% | {8}m απόσταση | με {9} ({10} απομένουν). | {11}"
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Πιθανότητα Πιασίματος: {7}% | {8}m απόσταση | με {9} ({10} απομένουν). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -82,6 +86,304 @@
     {
       "Key": "candies",
       "Value": "Candies: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Αδιάβαστα δεδομένα στο αρχείο GPX, απόπειρα παραλειψής."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "Ποσοστό τελειότητας IV"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "Όνομα"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "Άγνωστο"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "Εμφάνιση Μεγαλύτερου CP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Εμφάνιση Μεγαλύτερου IV"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "DisplayHighestsLevel"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Βεβαιώσου οτι οι συντεταγμένες είναι σωστές. Αλλιώς κλείσε το πρόγραμμα Γ.Πλάτος: {0} Γ.Μήκος: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Ένα αυγό μπαίνει στο εκκολαπτήριο: {0:0.00}km απομένουν"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Ενημέρωστη κατάστασης εκκολαπτήριου: {0:0.00}km απομένουν"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Το εκκολαπτήριο εκκόλαψε ενα αυγό: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "ΣΦΑΛΜΑ"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "ΠΡΟΣΟΧΗ"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "ΠΛΗΡΟΦΟΡΙΑ"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "ΦΑΡΜΑΡΙΣΜΑ"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "ΑΝΑΚΥΚΛΩΣΗ"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "ΜΕΤΑΦΕΡΘΗΚΕ"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "ΕΞΕΛΙΧΗΘΚΕ"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "ΜΟΥΡΟ"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "ΑΥΓΟ"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "Ε.ΣΦΑΛΜΑΤΩΝ"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "ΕΝΗΜΕΡΩΣΗ"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Σύνδεση μέσω {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value":
+        "Οι PTC Servers είναι εκτός λειτουργίας Ή τα στοιχεία σου ειναι λανθασμένα. Προσπάθησε να συνδεθείς μέσω google"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Επόμενη προσπάθεια σε {0}'"
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Ο λογαριασμός δεν είναι ενεργοποιημένος! Κλείσιμο..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Άνοιγμα της σελίδας Συσκευές Google. Παρακαλώ επικόλλησε τον κωδικό με CTRL+V"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Δεν μπόρεσα να αντιγράψω τον κωδικό, κάντο χειροκίνητα"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Πάνε στο: {0} & συμπλήρωσε {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Εντοπίστηκαν ρεαλιστικες ρυθμίσεις, χρήση αρχείου UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value":
+        "Εντοπίστηκαν μη ρεαλιστικες ρυθμίσεις στο {0}, χρήση τελευταίων αποθηκευμένων συντενταγμένων στο LastPos.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Οι συντεναγμένες στο αρχείο \"LastPos.ini\" είναι άκυρες, χρήση αρχικών συντενταγμένων"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Τέλεια! έχεις ήδη την πιο πρόσφατη έκδοση {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "Η αυτόματη ενημέρωση είναι απενεροποιημένη. Κατέβασε την πιο πρόσφατη έκδοση απο εδώ: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Κατέβασμα και εγκατάσταση ενημέρωσης..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Το Κατέβασμα Τελείωσε..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Η αποσυμπίεση αρχείων τελείωσε..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Η ενημέρωση τελείωσε, μπορείς τώρα να κλείσεις αυτο το παράθηρο."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Εύρεση pokemon απο insence..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Εύρεση pokemon..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Εύρεση pokemon απο lure..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "{0} Παραλήφθηκε"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Ο κατάλογος Pokemon είναι γεμάτος.Μεταφόρα pokemon..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value":
+        "Ο κατάλογος Pokemon είναι γεμάτος.Μετέφερε pokemon χειροκίνητα η ενερποίησε την μεταφόρα διπλών pokemon απο τις ρυθμίσεις..."
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "Ο κατάλογος αντικείμενων ειναι γεμάτος, δεν πήραμε αντικείμενα απο το Pokestop!"
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Πρόβλημα αντιμετόπισης pokemon: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Πρόβλημα αντιμετόπισης pokemon απο lure {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Η επιθυμητή σου τοποθεσία: {0}, {1} είναι πολύ μακρύα απο την τωρινή σου τοποθεσία: {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Το {0} ({1}) μετονομάστηκε απο {2} σε {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Φίλτρο αγνόησης Pokemon] - Αγνοω το {0} οπως μου είπες στις ρυθμίσεις"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "Απόπειρα"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "Υπήρξε Error"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "Ξέφυγε"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "Έτρεξε"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "Αστοχία"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "Πιάστηκε"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "Κανονικό"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Lure"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Incense"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "Αποτυχία εκκίνησης του WebSocketServer στην θύρα : {0}"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value":
+        "{0} - Χρόνος λειτουργίας {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Μεταφέρθηκαν: {6:0} | Ανακυκλώθηκαν: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (Επομενο Level σε {1}h {2}m | {3}/{4} XP)"
+    },
+    {
+      "Key": "requireInputText",
+      "Value": "Το πρόγραμμα θα συνεχίσει μετά το πάτημα οποιουδήποτε κουμπιού..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value":
+        "Επειδή χρησημοποιείς το Google Two Factor Auth, θα πρέπει να συμπλήρωσεις έναν κωδικό συγκεκριμένο για αυτό το πρόγραμμα στο auth.json"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value":
+        "Άνοιγμα του Google App-Passwords. Σε παρακαλώ δημιούργησε εναν καινουργιο κωδικό για αυτο το πρόγραμμα (Για συσκευή βάλε Other/Άλλο)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "Βεβαιώσου οτι έχεις συμπληρώσει σωστά τα Email & Password."
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "Πρέπει να συμπλήρωσεις τα GoogleUsername και GooglePassword στο auth.json!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "Πρέπει να συμπλήρωσεις τα PtcUsername και PtcPassword στο auth.json!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[Σναΐπερ] Έρευνα για Pokemon που μπορουν να σναϊπαριστούν στο {0}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Σναΐπερ] Δεν βρέθηκαν Pokemon για σναϊπάρισμα!"
     }
   ]
 }

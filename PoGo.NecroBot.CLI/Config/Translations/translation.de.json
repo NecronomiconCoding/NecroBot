@@ -16,35 +16,35 @@
       "Key": "masterPokeball",
       "Value": "Meisterball"
     },
-    	{
+    {
       "Key": "CatchStatusSuccess",
       "Value": "Gefangen"
     },
-	{
+    {
       "Key": "CatchStatusError",
       "Value": "Fehler beim Fangen"
     },
-	{
+    {
       "Key": "CatchStatusEscape",
       "Value": "Entkommen"
     },
-	{
+    {
       "Key": "CatchStatusFlee",
       "Value": "Geflüchtet"
     },
-{
+    {
       "Key": "CatchStatusMissed",
       "Value": "Verfehlt"
     },
-	 {
+    {
       "Key": "CatchTypeIncense",
       "Value": "Rauch"
     },
-	 {
+    {
       "Key": "CatchTypeLure",
       "Value": "Lockmodul"
     },
-	 {
+    {
       "Key": "CatchTypeNormal",
       "Value": "Wild"
     },
@@ -54,7 +54,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
+      "Value":
+        "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -98,11 +99,20 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
       "Value": "Keine Pokébälle mehr! - Wir haben ein {0} mit {1} WP verpasst!"
+    },
+    {
+      "Key": "eventUseBerry",
+      "Value": "{0} benutzt, {1} verbleibend"
+    },
+    {
+      "Key": "itemRazzBerry",
+      "Value": "Himmihbeere"
     },
     {
       "Key": "catchStatusAttempt",
@@ -162,7 +172,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Ei ist geschlüpft: {0}"
+      "Value": "Ei ist geschlüpft: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -233,28 +243,16 @@
       "Value": "Account nicht bestätigt! Stoppe..."
     },
     {
-      "Key": "openingGoogleDevicePage",
-      "Value": "Öffne Google Device Seite. Bitte füge den Code mit CTRL+V ein."
-    },
-    {
-      "Key": "couldntCopyToClipboard",
-      "Value": "Code konnte nicht in die Zwischenablage gelegt werden. Versuch es manuell."
-    },
-    {
-      "Key": "couldntCopyToClipboard2",
-      "Value": "Gehe auf: {0} & trage {1} ein."
-    },
-    {
       "Key": "realisticTravelDetected",
       "Value": "Realistische Bewegung gefunden. Benutze UserSettings.settings"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Keine realistische Bewegung bei {0}, benutze zuletzt gespeicherte Daten aus Coords.ini"
+      "Value": "Keine realistische Bewegung bei {0}, benutze zuletzt gespeicherte Daten aus LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinaten in \"Coords.ini\" sind ungültig! Benutze standart Koordinaten."
+      "Value": "Koordinaten in \"LastPos.ini\" sind ungültig! Benutze standart Koordinaten."
     },
     {
       "Key": "gotUpToDateVersion",
@@ -277,6 +275,10 @@
       "Value": "Entpacken der Dateien abgeschlossen..."
     },
     {
+      "Key": "FinishedTransferringConfig",
+      "Value": "Beendet Ihre Konfiguration auf die neue Version übertragen..."
+    },
+    {
       "Key": "updateFinished",
       "Value": "Update abgeschlossen! Du kannst dieses Fenster nun schließen."
     },
@@ -297,12 +299,49 @@
       "Value": "Übersprungen {0}"
     },
     {
+      "Key": "zeroPokeballInv",
+      "Value": "Du hast keine Pokébälle im Inventar, es können keine Pokémon gefangen werden!"
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "[Aktuelles Inventar] Pokéball: {0} | Superball: {1} | Hyperball: {2} | Meisterball: {3}"
+    },
+    {
+      "Key": "CheckingForBallsToRecycle",
+      "Value": "Prüfe Bälle zu recyceln, behalten wurden {0}"
+    },
+    {
+      "Key": "CheckingForPotionsToRecycle",
+      "Value": "Prüfe Tränke zu recyceln, behalten wurden {0}"
+    },
+    {
+      "Key": "CheckingForRevivesToRecycle",
+      "Value": "Prüfe Beleber zu recyceln, behalten wurden {0}"
+    },
+    {
+      "Key": "PokeballsToKeepIncorrect",
+      "Value": "TotalAmountOfPokeballsToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
+    },
+    {
+      "Key": "PotionsToKeepIncorrect",
+      "Value": "TotalAmountOfPotionsToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
+    },
+    {
+      "Key": "RevivesToKeepIncorrect",
+      "Value": "TotalAmountOfRevivesToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
+    },
+    {
       "Key": "invFullTransferring",
       "Value": "Das PokémonInventar ist voll. Verschicke Pokémon..."
     },
     {
+      "Key": "InvFullPokestopLooting",
+      "Value": "Das Inventar ist voll. Es können keine Gegenstände mehr eingesammelt werden."
+    },
+    {
       "Key": "invFullTransferManually",
-      "Value": "PokémonInventar ist voll. Bitte verschicke Pokémon manuell oder setze \"TransferDuplicatePokemon\" in den Einstellungen auf \"true\"..."
+      "Value":
+        "PokémonInventar ist voll. Bitte verschicke Pokémon manuell oder setze \"TransferDuplicatePokemon\" in den Einstellungen auf \"true\"..."
     },
     {
       "Key": "encounterProblem",
@@ -319,6 +358,10 @@
     {
       "Key": "pokemonRename",
       "Value": "Pokémon {0} ({1}) wurde von {2} zu {3} umbenannt."
+    },
+    {
+      "Key": "PokemonFavorite",
+      "Value": "{0}% perfekt {1} (CP {2}) *Favorit*."
     },
     {
       "Key": "pokemonIgnoreFilter",

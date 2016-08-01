@@ -22,7 +22,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Kamu di luar dari radius yang kamu tentukan! Jalan ke tempat awal (sekitar {0}m) dalam 5 detik. Apakah file Coords.ini kamu benar?"
+      "Value":
+        "Kamu di luar dari radius yang kamu tentukan! Jalan ke tempat awal (sekitar {0}m) dalam 5 detik. Apakah file LastPos.ini kamu benar?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -30,11 +31,11 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "XP: {0}, Gem: {1}, Item: {2}"
+      "Value": "Name: {0} XP: {1}, Gem: {2}, Item: {3}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Gagal mengambil item, kemungkinan softban. Mengulang: {0}/40"
+      "Value": "Name: {0} INFO: Gagal mengambil item, kemungkinan softban. Mengulang: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -66,11 +67,12 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8}m | dengan sebuah {9} (tersisa {10}). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8}m | dengan sebuah {9} (tersisa {10}). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Pokeballs habis - {0} dengan CP {1} tidak dapat ditangkap"
+      "Value": "Pokeball habis - {0} dengan CP {1} tidak dapat ditangkap"
     },
     {
       "Key": "catchStatusAttempt",
@@ -94,11 +96,15 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "sempurna"
+      "Value": "Sempurna"
     },
     {
       "Key": "commonWordName",
-      "Value": "nama"
+      "Value": "Nama"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "Unknown"
     },
     {
       "Key": "displayHighestsCpHeader",
@@ -123,6 +129,256 @@
     {
       "Key": "incubatorStatusUpdate",
       "Value": "Update status incubator: jarak yang harus ditempuh {0:0.00}km"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Inkubasi telur telah menetas: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "ERROR"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "PERHATIAN"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMING"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "DAURULANG"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "DITRANSFER"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "EVOLUSI"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "BERRY"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "TELUR"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "PEMBARUAN"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Masuk sebagai {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "Server PTC mungkin sedang turun ATAU kredensial anda salah. Coba google"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Coba lagi dalam {0} detik..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Akun tidak terverifikasi! Keluar..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Membuka halaman Google Device. Mohon tempelkan kode menggunakan CTRL+V"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Tidak dapat mengcopy ke clipboard, lakukan secara manual"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Pergi ke: {0} & masukkan {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Mendeteksi Perjalanan realistis, menggunakan UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Bukan Perjalanan Realistis {0}, menggunakan LastPos.ini yang terakhir disimpan"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Koordinat di file \"LastPos.ini\" cacat, menggunakan koordinat default"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Sempurna! Anda telah mempunyai Versi terbaru {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "AutoUpdater dimatikan. Dapatkan release terakhir dari : {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Mengunduh dan menerapkan Update..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Selesai mengunduh Release terbaru..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Selesai mengbongkar file - file..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Update telah selesai, anda dapat menutup window ini sekarang."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Mencari incense pokemon..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Mencari pokemon..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Mencari lure pokemon..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Lewatkan {0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "PokemonInventori penuh.Mentransfer pokemon..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value":
+        "PokemonInventori penuh. Mohon Transfer pokemon secara manual atau set TransferDuplicatePokemon menjadi true di setting..."
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "Inventori penuh, item tidak diambil!"
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Masalah Encounter: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Masalah Encounter: Lure pokemon {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Destinasi tujuan yang anda inginkan {0}, {1} terlalu jauh dari posisi anda saat ini {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pokemon {0} ({1}) berubah nama dari {2} to {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Pokemon ignore filter] - Mengacuhkan {0} seperti dijelaskan di setting"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "Status Tangkapan"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "Tangkapan Error"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "Tangkapan Lari"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "Tangkapan Kabur"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "Gagal Menangkap"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "Berhasil Menangkap"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "Normal"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Lure"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Incense"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "Gagal untuk memulai WebSocketServer di port : {0}"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value":
+        "{0} - Waktu aktif {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Ditransfer: {6:0} | Didaur ulang: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (level berikutnya dalam {1}h {2}m | {3}/{4} XP)"
+    },
+    {
+      "Key": "requireInputText",
+      "Value": "Program akan berlanjut setelah anda menekan tombol..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "Karena anda menggunakan Google Two Factor Auth, anda perlu memasukkan Password khusus App di auth.json"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "Membuka Google App-Passwords. Tolong buat App Password baru (gunakan Other sebagai Device)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "Pastikan anda memasukkan Email & Password yang benar."
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "Anda perlu mengisi GoogleUsername dan GooglePassword di auth.json!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "Anda perlu mengisi PtcUsername dan PtcPassword di auth.json!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[Sniper] Mencari Pokemon untuk disnipe di {0}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Sniper] Tidak ditemukan Pokemon untuk di Snipe!"
     }
   ]
 }

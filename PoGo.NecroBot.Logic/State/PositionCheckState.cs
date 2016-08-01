@@ -18,8 +18,8 @@ namespace PoGo.NecroBot.Logic.State
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
-                             Path.DirectorySeparatorChar + "Coords.ini";
+            var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
+                             Path.DirectorySeparatorChar + "LastPos.ini";
             if (File.Exists(coordsPath))
             {
                 var latLngFromFile = LoadPositionFromDisk(session);
@@ -41,14 +41,16 @@ namespace PoGo.NecroBot.Logic.State
                                 File.Delete(coordsPath);
                                 session.EventDispatcher.Send(new WarnEvent
                                 {
-                                    Message = session.Translation.GetTranslation(TranslationString.RealisticTravelDetected)
+                                    Message =
+                                        session.Translation.GetTranslation(TranslationString.RealisticTravelDetected)
                                 });
                             }
                             else
                             {
                                 session.EventDispatcher.Send(new WarnEvent
                                 {
-                                    Message =session.Translation.GetTranslation(TranslationString.NotRealisticTravel, kmph)
+                                    Message =
+                                        session.Translation.GetTranslation(TranslationString.NotRealisticTravel, kmph)
                                 });
                             }
                         }
@@ -56,6 +58,12 @@ namespace PoGo.NecroBot.Logic.State
                     }
                 }
             }
+
+            session.EventDispatcher.Send(new UpdatePositionEvent
+            {
+                Latitude = session.Client.CurrentLatitude,
+                Longitude = session.Client.CurrentLongitude
+            });
 
             session.EventDispatcher.Send(new WarnEvent
             {
@@ -71,14 +79,14 @@ namespace PoGo.NecroBot.Logic.State
         private static Tuple<double, double> LoadPositionFromDisk(ISession session)
         {
             if (
-                File.Exists(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
-                            Path.DirectorySeparatorChar + "Coords.ini") &&
-                File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
-                                 Path.DirectorySeparatorChar + "Coords.ini").Contains(":"))
+                File.Exists(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
+                            Path.DirectorySeparatorChar + "LastPos.ini") &&
+                File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
+                                 Path.DirectorySeparatorChar + "LastPos.ini").Contains(":"))
             {
                 var latlngFromFile =
-                    File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Configs" +
-                                     Path.DirectorySeparatorChar + "Coords.ini");
+                    File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
+                                     Path.DirectorySeparatorChar + "LastPos.ini");
                 var latlng = latlngFromFile.Split(':');
                 if (latlng[0].Length != 0 && latlng[1].Length != 0)
                 {

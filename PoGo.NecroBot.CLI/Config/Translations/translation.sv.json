@@ -1,0 +1,387 @@
+﻿{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeBall"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "GreatBall"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "UltraBall"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterBall"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "Okänd AuthType i config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value":
+        "Du är utanför din definierade radius! Återgår till start ({0}m bort) om 5 sekunder. Är din LastPos.ini fil korrekt?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value":
+        "Inga oanvända PokeStops går att finna i ditt område. Är din maximala avgränsning satt till ett för litet område?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "Namn: {0} XP: {1}, Juveler: {2}, Föremål: {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Namn: {0} INFO: Ransack misslyckades, eventuellt har du blivit temporärbannad. Ban lyfter om: {1}/{2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "Anländer till Pokestop: {0} om ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Spelar som {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Använde Lucky Egg, {0} stycken kvar"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} utvecklades för {1}xp"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Misslyckades med utvekling {0}. Resultat blev {1}, evolvering stoppad {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Bäst CP: {3}  IV: {4}%] (Godis: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Fångstchans: {7}% | {8}m distans | med {9} ({10} kvar). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Inga pokebollar - Vi missade en {0} med CP {1}"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Försök #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Godis: {0}"
+    },
+    {
+      "Key": "unhandledGPXData",
+      "Value": "Ohanterligt data i GPX filen, försöker bortse."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfekt"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "namn"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "okänd"
+    },
+    {
+      "Key": "displayHighestsCPHeader",
+      "Value": "VisarHögstCP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "VisarHögstPerfekt"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "VisarHögstNivå"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Försäkra dig om att följander korrdinater är korrekta. Avsluta programmet om inte! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Placerar ägg i inkubator: {0:0.00}km kvar"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Inkubator status: {0:0.00}km kvar"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Inkubator ägg har kläkts: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "ERROR"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "OBS"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMAR"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "KASTAR"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "ÖVERFÖRD"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "UTVECKLAD"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "BÄR"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "ÄGG"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "UPPDATERING"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Loggar in med {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value":
+        "PTC servrarna är förmodligen frånanslutna ELLER så är dina inloggningsuppgifter felaktiga. Försök med Google."
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Försöker igen om {0} sekunder..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Kontot är inte verifierat! Avslutar..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Öppnar Googles Enhets sida. Var vänlig klistra in koden med CTRL+V."
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Kunde inte kopiera till utklipp, försök manuellt."
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Gå till: {0} och ange {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Känner av realitisk färd, använder UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Ej realistisk färd vid {0}, använder senaste sparade koordinater i LastPos.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Koordinater i \"LastPos.ini\" är ej giltiga, använder ursprungskoordinater"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Strålande! Du kör redan den senaste versionen {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "Automatisk uppdatering är inaktigverad. Hämta senaste versionen här: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Laddar ned och tillämpar uppdatering..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Nedladdning av senaste version slutförd..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Uppackning av filer slutförd..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Uppdatering slutförd. Stäng fönstret."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Letar efter incence pokemon..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Letar efter pokemon..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Letar efter lurepokemon..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Skipppad {0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Pokemonväskan är full. Överför pokemons..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value":
+        "Pokemonväskan är full överför pkemons manuellt eller sätt TransferDuplicatePokemon till true i inställningar ..."
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "Väskan är full, inga föremål plockade!"
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Stötte på ett problem: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Stötte på ett problem: Lure pokemon {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Din önskade destination {0}, {1} är för långt ifrån din nuvarande destination {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pokemon {0} ({1}) omdöpt från {2} till {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Pokemon ignoreringsfilter] - Ignorerar {0} som definierat i inställningar"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "FångstFörsök"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "FångstError"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "FångstFlykt"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "FångstFlykt"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "FångstMissade"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "FångstLyckades"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "Normal"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Lure"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Incence"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "Misslyckades att starta WebSocketServer på port: {0}"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value":
+        "{0} - Körtid {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stjärnstoff: {5:0} | Överförd: {6:0} | Återvunnet: {7:0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (nästa nivå om {1}h {2}m | {3}/{4} XP)"
+    },
+    {
+      "Key": "requireInputText",
+      "Value": "Tryck på en tangent för att forstätta..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value":
+        "Du har Googles två-stegs autentisering atkiverad, du kommer behöva ange ett app-specifikt lösenord in i filen auth.json"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "Öppnar Googles App-lösenordsida. Vänligen skapa ett nytt applösenord (använd en annan enhet)."
+    },
+    {
+      "Key": "googleError",
+      "Value": "Försäkra dig om att du agivit korrekt epost och lösenord."
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "Du kommer att behöva ange Google-användarnamn och Google-lösenord i filen auth.json"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "Du kommer att behöva ange Ptc-användarnamn and Ptcptc-lösenord i filen auth.json"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[Krypskytt] Letar efter Pokemons på distans{0}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[Krypskytt] Inga Pokemons funna!"
+    }
+  ]
+}

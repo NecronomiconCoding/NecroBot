@@ -1,5 +1,9 @@
-﻿using System;
+﻿#region using directives
+
+using System;
 using System.Threading;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Utils
 {
@@ -9,12 +13,12 @@ namespace PoGo.NecroBot.Logic.Utils
 
         public static void Delay(int delay, int defdelay)
         {
-            if (delay > 0)
+            if (delay > defdelay)
             {
-                float randomFactor = 0.3f;
-                int randomMin = (int)(delay * (1 - randomFactor));
-                int randomMax = (int)(delay * (1 + randomFactor));
-                int randomizedDelay = RandomDevice.Next(randomMin, randomMax);
+                var randomFactor = 0.3f;
+                var randomMin = (int) (delay*(1 - randomFactor));
+                var randomMax = (int) (delay*(1 + randomFactor));
+                var randomizedDelay = RandomDevice.Next(randomMin, randomMax);
 
                 Thread.Sleep(randomizedDelay);
             }
@@ -22,7 +26,6 @@ namespace PoGo.NecroBot.Logic.Utils
             {
                 Thread.Sleep(defdelay);
             }
-
         }
     }
 }

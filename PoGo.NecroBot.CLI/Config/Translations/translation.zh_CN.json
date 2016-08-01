@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -154,7 +154,7 @@
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "删除"
+      "Value": "丢弃"
     },
     {
       "Key": "logEntryPKMN",
@@ -241,6 +241,10 @@
       "Value": "成功下载新版本..."
     },
     {
+      "Key": "FinishedTransferringConfig",
+      "Value": "完成你的配置转移到新版本..."
+    },
+    {
       "Key": "finishedUnpackingFiles",
       "Value": "成功解包..."
     },
@@ -270,7 +274,11 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "包裹满了，请手动传输精灵或者修改TransferDuplicatePokemon 为 true..."
+      "Value": "包裹满了，请手动传输精灵或者修改 TransferDuplicatePokemon 为 true "
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "包裹满了，无法捕获精灵！"
     },
     {
       "Key": "encounterProblem",
@@ -286,11 +294,11 @@
     },
     {
       "Key": "pokemonRename",
-      "Value": "正在将精灵 {0} ({1}) 从 {2} 重命名为 {3}."
+      "Value": "正在将精灵 {0} ({1}) 从 {2} 重命名为 {3}。"
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[精灵忽略过滤器] - 在设置中定义忽略 {0} "
+      "Value": "[精灵忽略过滤器] - 在设置中定义忽略：{0} "
     },
     {
       "Key": "catchStatusAttempt",
@@ -338,10 +346,10 @@
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (预计升到下一级别需要 {1}小时 {2}分钟 | {3}/{4}经验 )"
+      "Value": "{0} (预计升级需要 {1}小时 {2}分钟 | {3}/{4}经验 )"
     },
     {
-      "Key": "RequireInputText",
+      "Key": "requireInputText",
       "Value": "按任意键继续..."
     },
     {
@@ -363,6 +371,14 @@
     {
       "Key": "missingCredentialsPtc",
       "Value": "您需要在auth.json中填写Ptc账户和密码！"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "[狙击手] 正在搜索特殊宠物，坐标：{0}"
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "[狙击手] 没有找到特殊宠物！"
     }
   ]
 }

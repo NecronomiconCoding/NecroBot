@@ -1,0 +1,347 @@
+﻿{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "Pokéball"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "Greatball"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "Ultraball"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "Masterball"
+    },
+    {
+      "Key": "CatchStatusSuccess",
+      "Value": "Fanget"
+    },
+    {
+      "Key": "CatchStatusError",
+      "Value": "Fejl"
+    },
+    {
+      "Key": "CatchStatusEscape",
+      "Value": "Undsluppet"
+    },
+    {
+      "Key": "CatchStatusFlee",
+      "Value": "Flygtet"
+    },
+    {
+      "Key": "CatchStatusMissed",
+      "Value": "Missed"
+    },
+    {
+      "Key": "CatchTypeIncense",
+      "Value": "Røgmodul"
+    },
+    {
+      "Key": "CatchTypeLure",
+      "Value": "Luremodul"
+    },
+    {
+      "Key": "CatchTypeNormal",
+      "Value": "Wild"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "Ukendt autentificering sat i config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value":
+        "Du er ikke inden for den angivne radius, går tilbage til begyndelsen ({0}m væk). Er koordinaterne i config.json korrekte?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Ingen brugbare PokéStops fundet i dit område, er den maksimale afstand for lav?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "Navn: {0} EP: {1}, Gems: {2}, Genstande: {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Navn: {0} INFO: Det lykkedes ikke at samle, måske softban? Unban om: {1}/{2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "{0} om ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Spiller som {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Lucky Egg brugt. Tilbage : {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} succesful udviklet, for at få {1}XP!"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Fejl {0}. Resultat: {1}, stopper udviklingen af {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- WP: {1}  IV: {2}%   [Bedste CP: {3}  IV: {4}%] (Candies: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m | med {9} ({10} tilbage). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Ikke flere PokéBalls! - Vi mistede {0} med {1} CP!"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Prøve #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Candies: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Uventede data i GPX fil forsøger at springe over."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokémon"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "perfekt"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "Navn"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "Ukendt"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "Højeste CP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Højeste IV"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Højeste Level"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Vær sikker på at Lat & Lng er korrekte. Luk programmet hvis de ikke er! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Putter æg i inkubator: {0:0.00}km tilbage"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Ægge inkubator Status: {0:0.00}km tilbage"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Æg udklækket: {0}"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "FEJL"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "ADVARSEL"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "PKSTP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMING"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "RECYCLE"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "TRANSFER"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "UDVIKLET"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "BÆR"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "EI"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "UPDATE"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Logger ind med {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "PTC Servere er sandsynligvis nede ellers er de givne login info ikke korrekte. Forsøg med Google."
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Prøver igen om {0} Sekunder..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Konto ikke bekræftet! Stopper..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Åbner Google Device siden, derefter brug koden derinde ved at trykke på CTRL+V."
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Koden kunne ikke placeres på klippebordet forsøg at skriv den manuelt..."
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Gå til: {0} & brug denne kode: {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Realistisk bevægelse fundet. Benytter UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Ingen realistisk bevægelse ved {0}, benytter nyligt gemte Data fra LastPos.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Koordinater i \"LastPos.ini\" er ugyldige! Benytter standard Koordinater."
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Super! Du har allerede den nyeste version {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "AutoUpdater er deaktiveret. Aktuel Version på: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Download og udpakning af opdatering..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Download af den nyeste version færdig..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Udpakning af filer færdig..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Opdatering afsluttet! Du må nu lukke dette vindue."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Søger efter Incense til at tiltrække Pokémons..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Søger efter Pokémons..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Søger efter Lure til at tiltrække Pokémons..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Sprunget over {0}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Din PokémonInventar er fuld. Gør plads til Pokémons..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value":
+        "PokémonInventar er fuld. Smid venligst Pokémons ud manuelt eller sæt \"TransferDuplicatePokemon\" i indstillingerne til \"true\"..."
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Problem ved træffelse: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Træffelsesproblem: Modul-Pokémon {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Det ønskede mål ({0}, {1}), er for langt væk fra din aktuelle placering ({2}, {3})."
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pokémon {0} ({1}) er blevet omdøbt fra {2} til {3}."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Pokémon-Ignore-Filter] - Ignorerer {0} som angivet i indstillingerne!"
+    },
+    {
+      "Key": "MissingCredentialsGoogle",
+      "Value": "Du er nød til at fylde GoogleUsername og GooglePassword ud i auth.json!"
+    },
+    {
+      "Key": "MissingCredentialsPtc",
+      "Value": "Du er nød til at fylde PtcUsername og PtcPassword ud i auth.json!"
+    },
+    {
+      "Key": "GoogleError",
+      "Value": "Vær sikker på at det er den rigtige Email og det rigtige Password."
+    },
+    {
+      "Key": "RequireInputText",
+      "Value": "Programmet vil fortsætte efter et tryk på en knap..."
+    }
+  ]
+}

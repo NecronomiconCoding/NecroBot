@@ -1,8 +1,8 @@
 #region using directives
 
-using PoGo.NecroBot.Logic.State;
 using System;
 using System.IO;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
@@ -18,7 +18,8 @@ namespace PoGo.NecroBot.Logic.Logging
             // maybe do a new log rather than appending?
             using (
                 var log =
-                    File.AppendText(Path.Combine(_path, $"NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt"))
+                    File.AppendText(Path.Combine(_path,
+                        $"NecroBot-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.txt"))
                 )
             {
                 log.WriteLine(message);
@@ -41,13 +42,12 @@ namespace PoGo.NecroBot.Logic.Logging
         }
 
         /// <summary>
-        ///     Sets Context for the logger 
+        ///     Sets Context for the logger
         /// </summary>
         /// <param name="session">Context</param>
         public static void SetLoggerContext(ISession session)
         {
-            if (_logger != null)
-                _logger.SetSession(session);
+            _logger?.SetSession(session);
         }
 
         /// <summary>
@@ -63,7 +63,6 @@ namespace PoGo.NecroBot.Logic.Logging
             _logger.Write(message, level, color);
             Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message));
         }
-
     }
 
     public enum LogLevel
@@ -73,15 +72,15 @@ namespace PoGo.NecroBot.Logic.Logging
         Warning = 2,
         Pokestop = 3,
         Farming = 4,
-        Recycling = 5,
-        Berry = 6,
-        Caught = 7,
-        Transfer = 8,
-        Evolve = 9,
-        Egg = 10,
-        Update = 11,
-        Info = 12,
-        Debug = 13,
-        
+        Sniper = 5,
+        Recycling = 6,
+        Berry = 7,
+        Caught = 8,
+        Transfer = 9,
+        Evolve = 10,
+        Egg = 11,
+        Update = 12,
+        Info = 13,
+        Debug = 14
     }
 }
