@@ -145,7 +145,8 @@ namespace PoGo.NecroBot.Logic.Common
         UsedIncense,
         AmountPkmSeenCaught,
         PkmPotentialEvolveCount,
-        PkmNotEnoughRessources
+        PkmNotEnoughRessources,
+        EventUsedIncense
     }
 
     public class Translation : ITranslation
@@ -176,6 +177,8 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortTargeted,
                 "Arriving to Pokestop: {0} in ({1}m)"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventProfileLogin, "Playing as {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventUsedIncense,
+                "Used Incense, remaining: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventUsedLuckyEgg,
                 "Used Lucky Egg, remaining: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonEvolvedSuccess,
