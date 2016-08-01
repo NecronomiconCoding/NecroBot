@@ -21,6 +21,7 @@ namespace PoGo.NecroBot.CLI
         static ManualResetEvent _quitEvent = new ManualResetEvent(false);
         private static void Main(string[] args)
         {
+            Console.SetWindowSize(165, 30);
             Console.CancelKeyPress += (sender, eArgs) =>
             {
                 _quitEvent.Set();
