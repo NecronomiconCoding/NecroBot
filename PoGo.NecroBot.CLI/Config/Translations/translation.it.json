@@ -468,27 +468,35 @@
       "Key": "displayHighestCandy",
       "Value": "Caramella"
     },
+    {
       "Key": "iPBannedError",
       "Value": "Connessione rifiutata. IP probabilmente bannato da Niantic. Uscita..."
     },
+    {
       "Key": "noEggsAvailable",
       "Value": "Nessun Uovo disponibile"
     },
+    {
       "Key": "useLuckyEggActive",
       "Value": "Fortunuovo gia' attivo"
     },
+    {
       "Key": "noIncenseAvailable",
       "Value": "Nessun Aroma disponibile"
     },
+    {
       "Key": "useIncenseActive",
       "Value": "Aroma gia' attivo"
     },
+    {
       "Key": "amountPkmSeenCaught",
       "Value": "Pokemon Visti: {0}/151, Pokemon Catturati: {1}/151"
     },
+    {
       "Key": "pkmPotentialEvolveCount",
       "Value": "[Evoluzioni] Potenziali Evoluzioni: {}"
     },
+    {
       "Key": "pkmNotEnoughRessources",
       "Value": "Potenziamento Pokemon Fallito: Risorse Insufficienti"
     }
