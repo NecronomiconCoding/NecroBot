@@ -18,7 +18,7 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Nieznany AuthType w \"config.json\" wpisz Google lub Ptc"
+      "Value": "Nieznany AuthType w \"config.json\" (wpisz Google lub Ptc)."
     },
     {
       "Key": "farmPokestopsOutsideRadius",
@@ -30,11 +30,11 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nazwa: {0}  [XP: {1}, Kamienie: {2}, Przedmioty: {3}]"
+      "Value": "Nazwa: {0}   [XP: {1}, Kamienie: {2}, Przedmioty: {3}]"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Nazwa: {0}  INFO: Zbieranie przedmiotów nie udane, prawdopodobny softban. Odbanowanie za: {1}/{2}"
+      "Value": "Nazwa: {0}   INFO: Zbieranie przedmiotów nie udane, prawdopodobny softban. Odbanowanie za: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -71,6 +71,14 @@
     {
       "Key": "eventNoPokeballs",
       "Value": "Brak Pokeballi - Uciekł {0} z CP {1}"
+    },
+    {
+      "Key": "eventUseBerry",
+      "Value": "Użyto {0} | {1} pozostało"
+    },
+    {
+      "Key": "itemRazzBerry",
+      "Value": "Maliny"
     },
     {
       "Key": "catchStatusAttempt",
@@ -122,11 +130,11 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Wkładam jajko do inkubatora: Pozostało {0:0.00}km"
+      "Value": "Umieszczam Jajko w inkubatorze: Pozostało {0:0.00}km"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "[Aktualizacja inkubatora] Pozostało {0:0.00}km"
+      "Value": "[Aktualizacja inkubatora] Pozostało: {0:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",
@@ -151,6 +159,10 @@
     {
       "Key": "logEntryFarming",
       "Value": "FARMIENIE"
+    },
+    {
+      "Key": "logEntrySniper",
+      "Value": "SNAJPER"
     },
     {
       "Key": "logEntryRecycling",
@@ -214,7 +226,7 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Wykryto realistyczne podróżowanie, przy użyciu UserSettings.settings"
+      "Value": "Wykryto realistyczne podróżowanie, przy użyciu \"UserSettings.settings\""
     },
     {
       "Key": "notRealisticTravel",
@@ -274,7 +286,11 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value":  "[Aktualny Inwentarz] Pokeballe: {0} | Greatballe: {1} | Ultraballe: {2} | Masterballe: {3}"
+      "Value": "[Aktualny Inwentarz] Pokeballe: {0} | Greatballe: {1} | Ultraballe: {2} | Masterballe: {3}"
+    },
+    {
+      "Key": "recyclingQuietly",
+      "Value": "Ciche Przetwarzanie..."
     },
     {
       "Key": "checkingForBallsToRecycle",
@@ -326,7 +342,11 @@
     },
     {
       "Key": "pokemonRename",
-      "Value": "Nazwa Pokemona {0} została zmieniona z {2} na {3}."
+      "Nazwa": "Pokemona {0} została zmieniona z {2} na {3}."
+    },
+    {
+      "Key": "pokemonFavorite",
+      "Value": "{1} [IV: {0}% | CP: {2}] *Został Twoim Ulubieńcem*"
     },
     {
       "Key": "pokemonIgnoreFilter",
@@ -396,7 +416,7 @@
       "Key": "googleError",
       "Value": "Upewnij się, że podałeś poprawny login i hasło."
     },
-    {
+     {
       "Key": "missingCredentialsGoogle",
       "Value": "Proszę wypełnić GoogleUsername oraz GooglePassword w \"auth.json\""
     },
@@ -427,6 +447,42 @@
     {
       "Key": "displayHighestMove2Header",
       "Value": "ATAK2"
+    },
+    {
+      "Key": "displayHighestCandy",
+      "Value": "Cukierek"
+    },
+    {
+      "Key": "ipBannedError",
+      "Value": "Połączenie odrzucone. Twoje IP może być na czarnej liście Niantic. Zamykanie programu!..."
+    },
+    {
+      "Key": "noEggsAvailable",
+      "Value": "Brak dostępnych Jajek"
+    },
+    {
+      "Key": "useLuckyEggActive",
+      "Value": "Szczęśliwe Jajko zostało aktywowane"
+    },
+    {
+      "Key": "noIncenseAvailable",
+      "Value": "Brak dostępnych Kadzideł"
+    },
+    {
+      "Key": "useIncenseActive",
+      "Value": "Kadzidło zostało aktywowane"
+    },
+    {
+      "Key": "amountPkmSeenCaught",
+      "Value": "Ilość widzianych Pokemonów: {} ze 151 | Ilość złapanych Pokemonów: {} ze 151."
+    },
+    {
+      "Key": "pkmPotentialEvolveCount",
+      "Value": "[Ewolucja] Potencjalnych ewolucji: {}"
+    },
+    {
+      "Key": "pkmNotEnoughRessources",
+      "Value": "Ulepszanie Pokemona zakończone niepowodzeniem. Zbyt mało zasobów!"
     }
   ]
 }
