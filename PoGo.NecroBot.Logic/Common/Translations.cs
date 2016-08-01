@@ -90,6 +90,7 @@ namespace PoGo.NecroBot.Logic.Common
         PokemonSkipped,
         ZeroPokeballInv,
         CurrentPokeballInv,
+        MaxItemsCombinedOverMaxItemStorage,
         RecyclingQuietly,
         CheckingForBallsToRecycle,
         CheckingForPotionsToRecycle,
@@ -265,6 +266,8 @@ namespace PoGo.NecroBot.Logic.Common
                 "You have no pokeballs in your inventory, no more Pokemon can be caught!"),
             new KeyValuePair<TranslationString, string>(TranslationString.CurrentPokeballInv,
                 "[Current Inventory] Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.MaxItemsCombinedOverMaxItemStorage,
+                "[Configuration Invalid] Your maximum items combined (balls+potions+revives={0}) is over your max item storage ({1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.RecyclingQuietly, "Recycling Quietly..."),
             new KeyValuePair<TranslationString, string>(TranslationString.CheckingForBallsToRecycle,
                 "Checking for balls to recycle, keeping {0}"),
@@ -340,9 +343,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.NoIncenseAvailable, "No Incense Available"),
             new KeyValuePair<TranslationString, string>(TranslationString.UseIncenseActive, "Incense Already Active"),
             new KeyValuePair<TranslationString, string>(TranslationString.AmountPkmSeenCaught, 
-                "Amount of Pokemon Seen:{}:151, Amount of Pokemon Caught:{}:151"),
+                "Amount of Pokemon Seen: {0}/151, Amount of Pokemon Caught: {1}/151"),
             new KeyValuePair<TranslationString, string>(TranslationString.PkmPotentialEvolveCount, 
-                "[Evolves] Potential Evolves: {}"),
+                "[Evolves] Potential Evolves: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.PkmNotEnoughRessources, 
                 "Pokemon Upgrade Failed Not Enough Resources")
         };

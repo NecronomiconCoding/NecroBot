@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PokemonGo.RocketAPI.Enums;
+using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo.RocketAPI.Extensions;
 
 #endregion
@@ -29,7 +30,7 @@ namespace PoGo.NecroBot.Logic.Common
             await Task.Delay(500);
             _retryCount++;
 
-            if (_retryCount%5 == 0)
+            if (_retryCount % 5 == 0)
             {
                 DoLogin();
             }
@@ -44,32 +45,44 @@ namespace PoGo.NecroBot.Logic.Common
 
         private async void DoLogin()
         {
-            switch (_session.Settings.AuthType)
+            try
             {
-                case AuthType.Ptc:
-                    try
-                    {
+                switch (_session.Settings.AuthType)
+                {
+                    case AuthType.Ptc:
                         await
                             _session.Client.Login.DoPtcLogin(_session.Settings.PtcUsername,
                                 _session.Settings.PtcPassword);
-                    }
-                    catch (AggregateException ae)
-                    {
-                        throw ae.Flatten().InnerException;
-                    }
-                    break;
-                case AuthType.Google:
-                    await
-                        _session.Client.Login.DoGoogleLogin(_session.Settings.GoogleUsername,
-                            _session.Settings.GooglePassword);
-                    break;
-                default:
-                    _session.EventDispatcher.Send(new ErrorEvent
-                    {
-                        Message = _session.Translation.GetTranslation(TranslationString.WrongAuthType)
-                    });
-                    break;
+                        break;
+                    case AuthType.Google:
+                        await
+                            _session.Client.Login.DoGoogleLogin(_session.Settings.GoogleUsername,
+                                _session.Settings.GooglePassword);
+                        break;
+                    default:
+                        _session.EventDispatcher.Send(new ErrorEvent
+                        {
+                            Message = _session.Translation.GetTranslation(TranslationString.WrongAuthType)
+                        });
+                        break;
+                }
             }
+            catch (AggregateException ae)
+            {
+                throw ae.Flatten().InnerException;
+            }
+            catch (Exception ex) when (ex is PtcOfflineException || ex is AccessTokenExpiredException)
+            {
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.PtcOffline)
+                });
+                _session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20)
+                });
+            }
+
         }
     }
 }

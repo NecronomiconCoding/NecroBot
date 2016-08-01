@@ -1,3 +1,7 @@
+[![Stories in Ready](https://img.shields.io/waffle/label/evancohen/smart-mirror/in%20progress.svg?maxAge=2592000)](https://waffle.io/NecronomiconCoding/NecroBot)
+[![Github All Releases](https://img.shields.io/github/downloads/atom/atom/total.svg?maxAge=2592000)]()
+[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/LICENSE.md)
+
 <!-- define warning icon -->
 [1.1]: http://necrobot.io/img/mainlogo.png (NECROBOT_HEADER)
 <!-- header -->

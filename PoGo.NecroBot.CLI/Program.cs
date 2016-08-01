@@ -21,6 +21,7 @@ namespace PoGo.NecroBot.CLI
         static ManualResetEvent _quitEvent = new ManualResetEvent(false);
         private static void Main(string[] args)
         {
+            Console.SetWindowSize(165, 30);
             Console.CancelKeyPress += (sender, eArgs) =>
             {
                 _quitEvent.Set();
@@ -37,7 +38,6 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
 
             var settings = GlobalSettings.Load(subPath);
-                
 
             if (settings == null)
             {
@@ -49,7 +49,6 @@ namespace PoGo.NecroBot.CLI
             }
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
             session.Client.ApiFailure = new ApiFailureStrategy(session);
-
 
             /*SimpleSession session = new SimpleSession
             {
