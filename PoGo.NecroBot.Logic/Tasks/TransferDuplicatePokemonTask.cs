@@ -32,11 +32,14 @@ namespace PoGo.NecroBot.Logic.Tasks
             foreach (var duplicatePokemon in duplicatePokemons)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+                var pokemonTransferFilter = session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId);
 
                 if (duplicatePokemon.Cp >=
-                    session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinCp ||
+                    pokemonTransferFilter.KeepMinCp ||
                     PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >
-                    session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinIvPercentage)
+                    pokemonTransferFilter.KeepMinIvPercentage ||
+                    pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move1) ||
+                    pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move2))
                 {
                     continue;
                 }
