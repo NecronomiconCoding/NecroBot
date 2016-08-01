@@ -281,12 +281,22 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                 {
-                    session.EventDispatcher.Send(new WarnEvent
+                    if (session.LogicSettings.EvolveAllPokemonAboveIv || session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
                     {
-                        Message =
-                            session.Translation.GetTranslation(
-                                TranslationString.InvFullTransferManually)
-                    });
+                        await EvolvePokemonTask.Execute(session, cancellationToken);
+                    }
+
+                    if (session.LogicSettings.TransferDuplicatePokemon)
+                    {
+                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                    }
+                    else
+                    {
+                        session.EventDispatcher.Send(new WarnEvent
+                        {
+                            Message = session.Translation.GetTranslation(TranslationString.InvFullTransferManually)
+                        });
+                    }
                 }
                 else
                 {
