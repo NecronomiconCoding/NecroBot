@@ -478,7 +478,7 @@
     },
      {
       "Key": "UseIncenseAmount",
-      "Value": "[Inventario] Incienso : {0}"
+      "Value": "[Inventario] Incienso: {0}"
     },
     {
       "Key": "UsedIncense",
