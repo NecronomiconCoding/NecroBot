@@ -113,7 +113,5 @@ namespace PoGo.NecroBot.CLI
                     break;
             }
         }
-
-        
     }
 }
