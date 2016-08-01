@@ -198,6 +198,7 @@ namespace PoGo.NecroBot.Logic
         public bool AutoFavoritePokemon = false;
         //notcatch
         public bool UsePokemonToNotCatchFilter = false;
+        public bool UsePokemonSniperFilterOnly = false;
         public int WebSocketPort = 14251;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
@@ -728,6 +729,7 @@ namespace PoGo.NecroBot.Logic
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
         public int DelayBetweenPlayerActions => _settings.DelayBetweenPlayerActions;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
+        public bool UsePokemonSniperFilterOnly => _settings.UsePokemonSniperFilterOnly;
         public int KeepMinDuplicatePokemon => _settings.KeepMinDuplicatePokemon;
         public bool PrioritizeIvOverCp => _settings.PrioritizeIvOverCp;
         public int MaxTravelDistanceInMeters => _settings.MaxTravelDistanceInMeters;
