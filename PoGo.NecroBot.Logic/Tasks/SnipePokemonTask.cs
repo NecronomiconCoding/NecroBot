@@ -208,6 +208,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                                             cancellationToken);
                                 }
                             }
+                            else if (scanResult.Status.Contains("fail"))
+                            {
+                                session.EventDispatcher.Send(new SnipeEvent
+                                {
+                                    Message = session.Translation.GetTranslation(TranslationString.SnipeServerOffline)
+                                });
+                            }
                             else
                             {
                                 session.EventDispatcher.Send(new SnipeEvent
@@ -370,7 +377,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             catch (Exception ex)
             {
                 // most likely System.IO.IOException
-                session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
+                session.EventDispatcher.Send(new ErrorEvent {Message = ex.Message});
                 scanResult = new ScanResult
                 {
                     Status = "fail",

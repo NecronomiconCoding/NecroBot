@@ -146,7 +146,8 @@ namespace PoGo.NecroBot.Logic.Common
         AmountPkmSeenCaught,
         PkmPotentialEvolveCount,
         PkmNotEnoughRessources,
-        EventUsedIncense
+        EventUsedIncense,
+        SnipeServerOffline
     }
 
     public class Translation : ITranslation
@@ -358,7 +359,8 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.PkmPotentialEvolveCount, 
                 "[Evolves] Potential Evolves: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.PkmNotEnoughRessources, 
-                "Pokemon Upgrade Failed Not Enough Resources")
+                "Pokemon Upgrade Failed Not Enough Resources"),
+            new KeyValuePair<TranslationString, string>(TranslationString.SnipeServerOffline, "Sniping server is offline. Skipping...")
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)
