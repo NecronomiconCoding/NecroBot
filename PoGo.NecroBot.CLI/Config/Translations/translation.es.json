@@ -469,6 +469,14 @@
       "Value": "Huevo suerte ya está activo"
     },
     {
+      "Key": "UsedLuckyEgg",
+      "Value": "Huevo suerte utilizado"
+    },
+    {
+      "Key": "UseLuckyEggAmount",
+      "Value": "[Inventario] Huevos suerte: {0}"
+    },
+    {
       "Key": "noIncenseAvailable",
       "Value": "No hay Incienso disponible"
     },
