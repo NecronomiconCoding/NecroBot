@@ -30,7 +30,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nombre: {0} PX: {1}, Gemas: {2}, Objetos: {3}"
+      "Value": "Nombre: {0} Exp: {1}, Gemas: {2}, Objetos: {3}"
     },
     {
       "Key": "eventFortFailed",
@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0}, obtienes {1}px"
+      "Value": "{0}, obtienes {1} exp"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "itemRazzBerry",
-      "Value": "Baya Razz"
+      "Value": "Baya Frambu"
     },
     {
       "Key": "catchStatusAttempt",
@@ -402,7 +402,7 @@
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (Próximo nivel en {1}h {2}m | {3}/{4} XP)"
+      "Value": "{0} (Próximo nivel en {1}h {2}m | {3}/{4} EXP)"
     },
     {
       "Key": "requireInputText",
@@ -478,11 +478,11 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "Cantidad de Pokemons vistos:{}:151, Cantidad de Pokemons capturados:{}:151"
+      "Value": "Cantidad de Pokémons vistos: {0}:151, Cantidad de Pokémons capturados: {1}:151"
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "[Evoluciona] Potencial Evolución: {}"
+      "Value": "[Evoluciona] Potencial Evolución: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
