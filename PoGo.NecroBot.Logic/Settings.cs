@@ -25,8 +25,8 @@ namespace PoGo.NecroBot.Logic
         public AuthType AuthType;
         public string GoogleUsername;
         public string GooglePassword;
-        public string PtcPassword;
         public string PtcUsername;
+        public string PtcPassword;
 
         public void Load(string path)
         {
@@ -617,21 +617,7 @@ namespace PoGo.NecroBot.Logic
 
             set { _settings.DefaultAltitude = value; }
         }
-
-        string ISettings.PtcPassword
-        {
-            get { return _settings.Auth.PtcPassword; }
-
-            set { _settings.Auth.PtcPassword = value; }
-        }
-
-        string ISettings.PtcUsername
-        {
-            get { return _settings.Auth.PtcUsername; }
-
-            set { _settings.Auth.PtcUsername = value; }
-        }
-
+        
         string ISettings.GoogleUsername
         {
             get { return _settings.Auth.GoogleUsername; }
@@ -644,6 +630,20 @@ namespace PoGo.NecroBot.Logic
             get { return _settings.Auth.GooglePassword; }
 
             set { _settings.Auth.GooglePassword = value; }
+        }
+        
+        string ISettings.PtcUsername
+        {
+            get { return _settings.Auth.PtcUsername; }
+
+            set { _settings.Auth.PtcUsername = value; }
+        }
+        
+        string ISettings.PtcPassword
+        {
+            get { return _settings.Auth.PtcPassword; }
+
+            set { _settings.Auth.PtcPassword = value; }
         }
     }
 

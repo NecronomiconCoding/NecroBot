@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your LastPos.ini file correct?"
+        "Είστε έξω από την καθορισμένη περιοχή! Περπάτημα για ({0}m μακριά) σε 5 δευτερόλεπτα. Είναι το αρχείο LastPos.ini σωστό?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
