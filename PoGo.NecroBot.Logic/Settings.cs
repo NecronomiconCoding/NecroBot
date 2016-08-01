@@ -150,12 +150,16 @@ namespace PoGo.NecroBot.Logic
         public int KeepMinDuplicatePokemon = 1;
         public float KeepMinIvPercentage = 90;
         public bool PrioritizeIvOverCp = false;
-        //luckyandincense
+        //lucky, incense and berries
         public bool UseEggIncubators = true;
         public bool UseLuckyEggConstantly = false;
         public int UseLuckyEggsMinPokemonAmount = 30;
         public bool UseLuckyEggsWhileEvolving = false;
         public bool UseIncenseConstantly = false;
+        public int UseBerriesMinCp = 1000;
+        public float UseBerriesMinIv = 90;
+        public double UseBerriesBelowCatchProbability = 0.20;
+        public string UseBerriesOperator = "and";
         //snipe
         public bool UseSnipeOnlineLocationServer = true;
         public bool UseSnipeLocationServer = false;
@@ -189,6 +193,7 @@ namespace PoGo.NecroBot.Logic
         public double UseMasterBallBelowCatchProbability = 0.05;
         //transfer
         public bool TransferDuplicatePokemon = true;
+        public bool TransferDuplicatePokemonOnCapture = true;
         //favorite
         public float FavoriteMinIvPercentage = 95;
         public bool AutoFavoritePokemon = false;
@@ -534,7 +539,37 @@ namespace PoGo.NecroBot.Logic
             {
                 settings.EvolveKeptPokemonsAtStorageUsagePercentage = Default.EvolveKeptPokemonsAtStorageUsagePercentage;
             }
-            
+
+            if (settings.UseGreatBallBelowCatchProbability < 0)
+            {
+                settings.UseGreatBallBelowCatchProbability = Default.UseGreatBallBelowCatchProbability;
+            }
+
+            if (settings.UseUltraBallBelowCatchProbability < 0)
+            {
+                settings.UseUltraBallBelowCatchProbability = Default.UseUltraBallBelowCatchProbability;
+            }
+
+            if (settings.UseMasterBallBelowCatchProbability < 0)
+            {
+                settings.UseMasterBallBelowCatchProbability = Default.UseMasterBallBelowCatchProbability;
+            }
+
+            if (settings.UseBerriesMinCp < 0)
+            {
+                settings.UseBerriesMinCp = Default.UseBerriesMinCp;
+            }
+
+            if (settings.UseBerriesMinIv < 0)
+            {
+                settings.UseBerriesMinIv = Default.UseBerriesMinIv;
+            }
+
+            if (settings.UseBerriesOperator.ToLower().Equals("and") && settings.UseBerriesOperator.ToLower().Equals("or"))
+            {
+                settings.UseBerriesOperator = Default.UseBerriesOperator;
+            }
+
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
@@ -675,14 +710,19 @@ namespace PoGo.NecroBot.Logic
         public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;
         public int GetMinStarDustForLevelUp => _settings.GetMinStarDustForLevelUp;
         public bool UseLuckyEggConstantly => _settings.UseLuckyEggConstantly;
-
         public bool UseIncenseConstantly => _settings.UseIncenseConstantly;
+        public int UseBerriesMinCp => _settings.UseBerriesMinCp;
+        public float UseBerriesMinIv => _settings.UseBerriesMinIv;
+        public double UseBerriesBelowCatchProbability => _settings.UseBerriesBelowCatchProbability;
+        public string UseBerriesOperator => _settings.UseBerriesOperator;
+
         public float UpgradePokemonIvMinimum => _settings.UpgradePokemonIvMinimum;
         public float UpgradePokemonCpMinimum => _settings.UpgradePokemonCpMinimum;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
-        public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
+        public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve; 
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
+        public bool TransferDuplicatePokemonOnCapture => _settings.TransferDuplicatePokemonOnCapture;
         public bool UseEggIncubators => _settings.UseEggIncubators;
         public int UseGreatBallAboveCp => _settings.UseGreatBallAboveCp;
         public int UseUltraBallAboveCp => _settings.UseUltraBallAboveCp;

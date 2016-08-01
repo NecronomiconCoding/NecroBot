@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
+using POGOProtos.Networking.Responses;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -20,23 +21,27 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentAmountOfLuckyEggs = await session.Inventory.GetItemAmountByType(ItemId.ItemLuckyEgg);
             if (currentAmountOfLuckyEggs == 0)
             {
-                Logging.Logger.Write("No Eggs Available");
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.NoEggsAvailable));
                 return;
+            }
+            else
+            {
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.UseLuckyEggAmount, currentAmountOfLuckyEggs));
             }
 
             var UseEgg = await session.Inventory.UseLuckyEggConstantly();
 
-            if (UseEgg.Result.ToString().Contains("Success"))
+            if (UseEgg.Result == UseItemXpBoostResponse.Types.Result.Success)
             {
-                Logging.Logger.Write("Used a Lucky Egg");
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.UsedLuckyEgg));
             }
-            else if (UseEgg.Result.ToString().ToLower().Contains("errornoitemsremaining"))
+            else if (UseEgg.Result == UseItemXpBoostResponse.Types.Result.ErrorNoItemsRemaining)
             {
-                Logging.Logger.Write("No Eggs Available");
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.NoEggsAvailable));
             }
-            else if (UseEgg.Result.ToString().Contains("AlreadyActive") || (UseEgg.AppliedItems == null))
+            else if (UseEgg.Result == UseItemXpBoostResponse.Types.Result.ErrorXpBoostAlreadyActive || (UseEgg.AppliedItems == null))
             {
-                Logging.Logger.Write("Lucky Egg Already Active");
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.UseLuckyEggActive));
             }
         }
        
