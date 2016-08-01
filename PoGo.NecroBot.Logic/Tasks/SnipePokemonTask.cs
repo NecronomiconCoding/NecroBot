@@ -181,7 +181,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             var scanResult = SnipeScanForPokemon(session, location);
 
                             var locationsToSnipe = new List<PokemonLocation>();
-                            if (scanResult.pokemons != null && scanResult.Status.Contains("fail"))
+                            if (scanResult.pokemons != null)
                             {
                                 var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains(q.pokemon_name));
                                 var notVisitedPokemon = filteredPokemon.Where(q => !LocsVisited.Contains(q));
@@ -206,6 +206,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                                         Snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude,
                                             cancellationToken);
                                 }
+                            }
+                            else if (scanResult.Status.Contains("fail"))
+                            {
+                                session.EventDispatcher.Send(new SnipeEvent
+                                {
+                                    Message = session.Translation.GetTranslation(TranslationString.SnipeServerOffline)
+                                });
                             }
                             else
                             {
@@ -361,23 +368,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 scanResult = JsonConvert.DeserializeObject<ScanResult>(fullresp);
             }
-            catch (WebException)
-            {
-                session.EventDispatcher.Send(new NoticeEvent
-                {
-                    Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
-                });
-                scanResult = new ScanResult
-                {
-                    Status = "fail",
-                    pokemons = new List<PokemonLocation>()
-                };
-                return scanResult;
-            }
             catch (Exception ex)
             {
                 // most likely System.IO.IOException
-                session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
+                session.EventDispatcher.Send(new ErrorEvent {Message = ex.Message});
                 scanResult = new ScanResult
                 {
                     Status = "fail",
