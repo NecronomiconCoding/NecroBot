@@ -13,6 +13,7 @@ using POGOProtos.Inventory.Item;
 using System.ComponentModel;
 using System.Reflection;
 using System.Collections;
+using System.Linq;
 
 #endregion
 
@@ -440,6 +441,12 @@ namespace PoGo.NecroBot.Logic
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
                     settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                    
+                    //This makes sure that existing config files dont get null values which lead to an exception
+                    foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
+                    {
+                        filter.Value.Moves = new List<PokemonMove>();
+                    }
 
                     // One day we might be able to better do this so its automatic
                     /*
