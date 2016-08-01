@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Globalization;
@@ -16,7 +16,7 @@ namespace PoGo.NecroBot.CLI
 {
     public class ConsoleEventListener
     {
-        public void HandleEvent(ProfileEvent evt, ISession session)
+        internal void HandleEvent(ProfileEvent evt, ISession session)
         {
             Logger.Write(session.Translation.GetTranslation(TranslationString.EventProfileLogin,
                 evt.Profile.PlayerData.Username ?? ""));
