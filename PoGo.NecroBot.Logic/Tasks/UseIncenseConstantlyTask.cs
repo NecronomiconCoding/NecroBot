@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using POGOProtos.Inventory.Item;
+using POGOProtos.Networking.Responses;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -19,24 +20,27 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentAmountOfIncense = await session.Inventory.GetItemAmountByType(ItemId.ItemIncenseOrdinary);
             if (currentAmountOfIncense == 0)
             {
-                Logging.Logger.Write("No Incense Available");
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.NoIncenseAvailable));
                 return;
+            }
+            else
+            {
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.UseIncenseAmount, currentAmountOfIncense));
             }
 
             var UseIncense = await session.Inventory.UseIncenseConstantly();
 
-            if (UseIncense.Result.ToString().Contains("Success"))
+            if (UseIncense.Result == UseIncenseResponse.Types.Result.Success)
             {
-                Logging.Logger.Write("Used an Incense");
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.UsedIncense));
             }
-            else if (UseIncense.Result.ToString().ToLower().Contains("errornoitemsremaining") ||
-                UseIncense.Result.ToString().ToLower().Contains("noneininventory"))
+            else if (UseIncense.Result == UseIncenseResponse.Types.Result.NoneInInventory)
             {
-                Logging.Logger.Write("No Incense Available");
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.NoIncenseAvailable));
             }
-            else if (UseIncense.Result.ToString().Contains("AlreadyActive") || (UseIncense.AppliedIncense == null))
+            else if (UseIncense.Result == UseIncenseResponse.Types.Result.IncenseAlreadyActive || (UseIncense.AppliedIncense == null))
             {
-                Logging.Logger.Write("Incense Already Active");
+                Logging.Logger.Write(session.Translation.GetTranslation(Common.TranslationString.UseIncenseActive));
             }
         }
     }
