@@ -522,27 +522,6 @@ namespace PoGo.NecroBot.Logic
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
                     settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
-
-                    // One day we might be able to better do this so its automatic
-                    /*
-                    FieldInfo[] fi = typeof(GlobalSettings).GetFields(BindingFlags.Public | BindingFlags.Instance);
-                    foreach (FieldInfo info in fi)
-                    {
-                        if (info.GetValue(Default) is int || info.GetValue(Default) is bool ||
-                            info.GetValue(Default) is float)
-                        {
-                            
-                        }
-                        if (info.GetValue(Default) is double)
-                        {
-                            Logger.Write($"{info.Name}={info.GetValue(Default)}", LogLevel.Error);
-
-                            Type type = settings.GetType();
-                            PropertyInfo propertyInfo = type.GetProperty(info.Name, BindingFlags.Instance | BindingFlags.Public);
-                            propertyInfo.SetValue(settings, info.GetValue(Default));
-                        }
-                    }
-                    */
                 }
                 catch (JsonReaderException exception)
                 {
@@ -553,91 +532,6 @@ namespace PoGo.NecroBot.Logic
             else
             {
                 settings = new GlobalSettings();
-            }
-
-            if (settings.DefaultAltitude == 0)
-            {
-                settings.DefaultAltitude = Default.DefaultAltitude;
-            }
-
-            if (settings.DefaultLatitude == 0)
-            {
-                settings.DefaultLatitude = Default.DefaultLatitude;
-            }
-
-            if (settings.DefaultLongitude == 0)
-            {
-                settings.DefaultLongitude = Default.DefaultLongitude;
-            }
-
-            if (settings.WebSocketPort == 0)
-            {
-                settings.WebSocketPort = 14251;
-            }
-
-            if (settings.PokemonToSnipe == null)
-            {
-                settings.PokemonToSnipe = Default.PokemonToSnipe;
-            }
-
-            if (settings.RenameTemplate == null)
-            {
-                settings.RenameTemplate = Default.RenameTemplate;
-            }
-
-            if (settings.SnipeLocationServer == null)
-            {
-                settings.SnipeLocationServer = Default.SnipeLocationServer;
-            }
-
-            if (settings.SnipingScanOffset <= 0)
-            {
-                settings.SnipingScanOffset = Default.SnipingScanOffset;
-            }
-
-            if (settings.RecycleInventoryAtUsagePercentage <= 0)
-            {
-                settings.RecycleInventoryAtUsagePercentage = Default.RecycleInventoryAtUsagePercentage;
-            }
-
-            if (settings.WalkingSpeedInKilometerPerHour <= 0)
-            {
-                settings.WalkingSpeedInKilometerPerHour = Default.WalkingSpeedInKilometerPerHour;
-            }
-
-            if (settings.EvolveKeptPokemonsAtStorageUsagePercentage <= 0)
-            {
-                settings.EvolveKeptPokemonsAtStorageUsagePercentage = Default.EvolveKeptPokemonsAtStorageUsagePercentage;
-            }
-
-            if (settings.UseGreatBallBelowCatchProbability < 0)
-            {
-                settings.UseGreatBallBelowCatchProbability = Default.UseGreatBallBelowCatchProbability;
-            }
-
-            if (settings.UseUltraBallBelowCatchProbability < 0)
-            {
-                settings.UseUltraBallBelowCatchProbability = Default.UseUltraBallBelowCatchProbability;
-            }
-
-            if (settings.UseMasterBallBelowCatchProbability < 0)
-            {
-                settings.UseMasterBallBelowCatchProbability = Default.UseMasterBallBelowCatchProbability;
-            }
-
-            if (settings.UseBerriesMinCp < 0)
-            {
-                settings.UseBerriesMinCp = Default.UseBerriesMinCp;
-            }
-
-            if (settings.UseBerriesMinIv < 0)
-            {
-                settings.UseBerriesMinIv = Default.UseBerriesMinIv;
-            }
-
-            if (settings.UseBerriesOperator == null || (!settings.UseBerriesOperator.ToLower().Equals("and") && !settings.UseBerriesOperator.ToLower().Equals("or")))
-            {
-                settings.UseBerriesOperator = Default.UseBerriesOperator;
             }
 
             settings.ProfilePath = profilePath;
