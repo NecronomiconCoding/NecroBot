@@ -170,7 +170,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortFailed,
                 "Name: {0} INFO: Looting failed, possible softban. Unban in: {1}/{2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortTargeted,
-                "Arriving to Pokestop: {0} in ({1}m)"),
+                "Traveling to Pokestop: {0} ({1}m)"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventProfileLogin, "Playing as {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventUsedLuckyEgg,
                 "Used Lucky Egg, remaining: {0}"),
