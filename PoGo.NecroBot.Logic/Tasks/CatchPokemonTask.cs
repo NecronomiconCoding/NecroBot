@@ -56,7 +56,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         ? encounter.WildPokemon?.PokemonData
                         : encounter?.PokemonData) >= session.LogicSettings.KeepMinIvPercentage;
 
-                if ((isLowProbability && isHighCp) || isHighPerfection)
+                if (session.LogicSettings.UseRazzberries && ( ( isLowProbability && isHighCp ) || isHighPerfection ) )
                 {
                     await
                         UseBerry(session,
@@ -228,6 +228,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (berry == null || berry.Count <= 0)
                 return;
+
+            session.EventDispatcher.Send( new UseBerryLogEvent
+            {
+                message = "Used Razzberry"
+            } );
 
             await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
