@@ -453,8 +453,12 @@
       "Value": "Encens déjà activé"
     },
     {
-    	"Key": "UseIncenseNew", 
-    	"Value": "Encens utilisé"
+      "Key": "UseIncenseAmount",
+      "Value": "[Inventaire] Encens : {0}"
+    },
+    {
+      "Key": "UsedIncense",
+      "Value": "Encens utilisé"
     },
     {
       "Key": "AmountPkmSeenCaught",
