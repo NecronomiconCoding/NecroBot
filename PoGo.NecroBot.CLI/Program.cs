@@ -50,7 +50,6 @@ namespace PoGo.NecroBot.CLI
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
             session.Client.ApiFailure = new ApiFailureStrategy(session);
 
-
             /*SimpleSession session = new SimpleSession
             {
                 _client = new PokemonGo.RocketAPI.Client(new ClientSettings(settings)),

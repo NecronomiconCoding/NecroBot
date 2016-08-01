@@ -3,6 +3,9 @@
 using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Tasks;
+using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Logging;
+using System;
 
 #endregion
 
@@ -12,6 +15,7 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
+
             if (session.LogicSettings.EvolveAllPokemonAboveIv || session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
                 await EvolvePokemonTask.Execute(session, cancellationToken);
