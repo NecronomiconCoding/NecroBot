@@ -183,7 +183,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             List<PokemonLocation> locationsToSnipe = new List<PokemonLocation>();
                             if (scanResult.pokemons != null)
                             {
-                                var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains((PokemonId) q.pokemon_name));
+                                var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains((PokemonId)q.pokemon_name));
                                 var notVisitedPokemon = filteredPokemon.Where(q => !LocsVisited.Contains(q));
                                 var notExpiredPokemon = notVisitedPokemon.Where(q => q.expires < currentTimestamp);
 
@@ -228,7 +228,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var CurrentLatitude = session.Client.CurrentLatitude;
             var CurrentLongitude = session.Client.CurrentLongitude;
 
-            session.EventDispatcher.Send(new SnipeModeEvent {Active = true});
+            session.EventDispatcher.Send(new SnipeModeEvent { Active = true });
 
             await
                 session.Client.Player.UpdatePlayerLocation(latitude,
@@ -306,18 +306,18 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
             }
 
-            session.EventDispatcher.Send(new SnipeModeEvent {Active = false});
+            session.EventDispatcher.Send(new SnipeModeEvent { Active = false });
             await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);
         }
 
         private static ScanResult SnipeScanForPokemon(ISession session, Location location)
         {
-            var formatter = new NumberFormatInfo {NumberDecimalSeparator = "."};
+            var formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
 
             var offset = session.LogicSettings.SnipingScanOffset;
             // 0.003 = half a mile; maximum 0.06 is 10 miles
-            if (offset<0.001) offset=0.003;
-            if (offset>0.06) offset = 0.06;
+            if (offset < 0.001) offset = 0.003;
+            if (offset > 0.06) offset = 0.06;
 
             var boundLowerLeftLat = location.Latitude - offset;
             var boundLowerLeftLng = location.Longitude - offset;
@@ -400,7 +400,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 catch (Exception ex)
                 {
                     // most likely System.IO.IOException
-                    session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
+                    session.EventDispatcher.Send(new ErrorEvent { Message = ex.ToString() });
                 }
                 await Task.Delay(5000, cancellationToken);
             }
