@@ -118,7 +118,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokémons"
+      "Value": "Pokémon"
     },
     {
       "Key": "commonWordPerfect",
@@ -134,15 +134,15 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "Pokémons con mayor PC"
+      "Value": "Pokémon con mayor PC"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Pokémons con mayor Perfección"
+      "Value": "Pokémon con mayor Perfección"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Pokémons con mayor Nivel"
+      "Value": "Pokémon con mayor Nivel"
     },
     {
       "Key": "welcomeWarning",
@@ -302,7 +302,7 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "No tienes Poké Balls en el inventario, no podemos atrapar más Pokémons por ahora :("
+      "Value": "No tienes Poké Balls en el inventario, no podemos atrapar más Pokémon por ahora :("
     },
     {
       "Key": "currentPokeballInv",
@@ -410,7 +410,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Como tiene habilitada la verificación Google de doble factor, tendrá que insertar una contraseña de la APP específica en el auth.json"
+      "Value": "Como tiene habilitada la autenticación de dos factores de Google, tendrá que insertar una contraseña de la APP específica en el auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
