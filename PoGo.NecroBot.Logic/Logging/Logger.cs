@@ -20,11 +20,11 @@ namespace PoGo.NecroBot.Logic.Logging
         {
             lock (LogbufferList)
             {
+                LogbufferList.Add(message);
+
                 if (_lastLogTime.AddSeconds(60).Ticks > DateTime.Now.Ticks && !force)
-                {
-                    LogbufferList.Add(message);
                     return;
-                }
+
                 using (
                     var log =
                         File.AppendText(Path.Combine(_path,
