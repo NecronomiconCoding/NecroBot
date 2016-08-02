@@ -2,6 +2,9 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -551,16 +554,51 @@ namespace PoGo.NecroBot.Logic.Common
                 jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                 jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                 jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
-                translations = JsonConvert.DeserializeObject<Translation>(input, jsonSettings);
-                //TODO make json to fill default values as it won't do it now
-                new Translation()._translationStrings.Where(
-                    item => translations._translationStrings.All(a => a.Key != item.Key))
-                    .ToList()
-                    .ForEach(translations._translationStrings.Add);
-                new Translation()._pokemonTranslationStrings.Where(
-                    item => translations._pokemonTranslationStrings.All(a => a.Key != item.Key))
-                    .ToList()
-                    .ForEach(translations._pokemonTranslationStrings.Add);
+
+                try
+                {
+                    translations = JsonConvert.DeserializeObject<Translation>( input, jsonSettings );
+                    //TODO make json to fill default values as it won't do it now
+                    new Translation()._translationStrings.Where(
+                        item => translations._translationStrings.All( a => a.Key != item.Key ) )
+                        .ToList()
+                        .ForEach( translations._translationStrings.Add );
+                    new Translation()._pokemonTranslationStrings.Where(
+                        item => translations._pokemonTranslationStrings.All( a => a.Key != item.Key ) )
+                        .ToList()
+                        .ForEach( translations._pokemonTranslationStrings.Add );
+                }
+                catch( JsonException )
+                {
+                    Logger.Write( "[ERROR] Issue loading translations", LogLevel.Error );
+
+                    switch( translationsLanguageCode )
+                    {
+                        case "en":
+                            Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
+
+                            string strInput = Console.ReadLine().ToLower();
+
+                            if( strInput.Equals( "y" ) )
+                            {
+                                // Currently this section can only rebuild the EN translations file \\
+                                // This is because default values cannot be supplied from other languages \\
+                                Logger.Write( "Loading fresh translations and continuing" );
+                                translations = new Translation();
+                                translations.Save( Path.Combine( translationPath, "translation.en.json" ) );
+                            }
+                            else
+                            {
+                                ErrorHandler.ThrowFatalError( null, 3 );
+                                return null;
+                            }
+
+                            break;
+                        default:
+                            ErrorHandler.ThrowFatalError( "[ERROR] No replacement translations: Check appropriate files for typos", 5 );
+                            return null;
+                    }
+                }
             }
             else
             {
