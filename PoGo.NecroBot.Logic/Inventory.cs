@@ -80,25 +80,25 @@ namespace PoGo.NecroBot.Logic
         {
             var myPokemon = await GetPokemons();
 
-            var pokemonList = (_logicSettings.KeepMinOperator.ToLower().Equals("and")) ?
+            var pokemonFiltered = (_logicSettings.KeepMinOperator.ToLower().Equals("and")) ?
                 myPokemon.Where(
                     p => p.DeployedFortId == string.Empty &&
                             p.Favorite == 0 && (p.Cp < GetPokemonTransferFilter(p.PokemonId).KeepMinCp ||
-                                                PokemonInfo.CalculatePokemonPerfection(p) < GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage)).ToList() :
+                                                PokemonInfo.CalculatePokemonPerfection(p) < GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage)) :
                 myPokemon.Where(
                     p => p.DeployedFortId == string.Empty &&
                             p.Favorite == 0 && (p.Cp < GetPokemonTransferFilter(p.PokemonId).KeepMinCp &&
-                                                PokemonInfo.CalculatePokemonPerfection(p) < GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage)).ToList();
+                                                PokemonInfo.CalculatePokemonPerfection(p) < GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage));
 
             if (filter != null)
-            {
-                pokemonList = pokemonList.Where(p => !filter.Contains(p.PokemonId)).ToList();
-            }
+                pokemonFiltered = pokemonFiltered.Where(p => !filter.Contains(p.PokemonId));
+
+            var pokemonList = pokemonFiltered.ToList();
+
             if (keepPokemonsThatCanEvolve)
             {
                 var results = new List<PokemonData>();
-                var pokemonsThatCanBeTransfered = pokemonList.GroupBy(p => p.PokemonId)
-                    .Where(x => x.Count() > GetPokemonTransferFilter(x.Key).KeepMinDuplicatePokemon).ToList();
+                var pokemonsThatCanBeTransfered = pokemonList.GroupBy(p => p.PokemonId).ToList();
 
                 var myPokemonSettings = await GetPokemonSettings();
                 var pokemonSettings = myPokemonSettings.ToList();
@@ -112,11 +112,27 @@ namespace PoGo.NecroBot.Logic
                     var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
                     var amountToSkip = GetPokemonTransferFilter(pokemon.Key).KeepMinDuplicatePokemon;
 
+                    var transferrablePokemonTypeCount = pokemonFiltered.Where(p => p.PokemonId == pokemon.Key).Count();
+                    var currentPokemonTypeCount = myPokemon.Where(p => p.PokemonId == pokemon.Key).Count();
+                    var currentlyKeepingPokemonType = currentPokemonTypeCount - transferrablePokemonTypeCount;
+
+                    if (currentlyKeepingPokemonType > GetPokemonTransferFilter(pokemon.Key).KeepMinDuplicatePokemon)
+                    {
+                        amountToSkip = 0;
+                    }
+                    else if (transferrablePokemonTypeCount > amountToSkip || currentlyKeepingPokemonType > 1)
+                    {
+                        amountToSkip = (amountToSkip - currentlyKeepingPokemonType + 1);
+                    }
+
+                    // Fail safe
+                    if (amountToSkip < 0) amountToSkip = 0;
+
                     if (settings.CandyToEvolve > 0 && _logicSettings.PokemonsToEvolve.Contains(pokemon.Key))
                     {
                         var amountPossible = (familyCandy.Candy_ - 1) / (settings.CandyToEvolve - 1);
                         if (amountPossible > amountToSkip)
-                            amountToSkip = amountPossible;
+                            amountToSkip += amountPossible;
                     }
 
                     if (prioritizeIVoverCp)
@@ -139,9 +155,9 @@ namespace PoGo.NecroBot.Logic
 
                 return results;
             }
+
             if (prioritizeIVoverCp)
             {
-                var skipnum = GetPokemonTransferFilter(PokemonId.Arbok).KeepMinDuplicatePokemon;
                 return pokemonList
                     .GroupBy(p => p.PokemonId)
                     .Where(x => x.Any())
