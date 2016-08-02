@@ -297,30 +297,6 @@
       "Value": "Reciclando Tranquilamente..."
     },
     {
-      "Key": "checkingForBallsToRecycle",
-      "Value": "Comprobación de las bolas a reciclar, manteniendo {0}"
-    },
-    {
-      "Key": "checkingForPotionsToRecycle",
-      "Value": "Comprobación de las pociones a reciclar, manteniendo {0}"
-    },
-    {
-      "Key": "checkingForRevivesToRecycle",
-      "Value": "Comprobación de los revivir a reciclar, manteniendo {0}"
-    },
-    {
-      "Key": "pokeballsToKeepIncorrect",
-      "Value": "TotalAmountOfPokeballsToKeep está configurado incorrectamente. El número es más pequeño que 1."
-    },
-    {
-      "Key": "potionsToKeepIncorrect",
-      "Value": "TotalAmountOfPotionsToKeep está configurado incorrectamente. El número es más pequeño que 1."
-    },
-    {
-      "Key": "revivesToKeepIncorrect",
-      "Value": "TotalAmountOfRevivesToKeep está configurado incorrectamente. El número es más pequeño que 1."
-    },
-    {
       "Key": "invFullTransferring",
       "Value": "El inventario de pokémons está lleno. Transferir pokémons..."
     },

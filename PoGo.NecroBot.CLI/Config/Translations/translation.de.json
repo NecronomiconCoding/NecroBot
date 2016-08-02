@@ -271,30 +271,6 @@
       "Value": "[Aktuelles Inventar] Pokéball: {0} | Superball: {1} | Hyperball: {2} | Meisterball: {3}"
     },
     {
-      "Key": "CheckingForBallsToRecycle",
-      "Value": "Prüfe Bälle zu recyceln, behalten wurden {0}"
-    },
-    {
-      "Key": "CheckingForPotionsToRecycle",
-      "Value": "Prüfe Tränke zu recyceln, behalten wurden {0}"
-    },
-    {
-      "Key": "CheckingForRevivesToRecycle",
-      "Value": "Prüfe Beleber zu recyceln, behalten wurden {0}"
-    },
-    {
-      "Key": "PokeballsToKeepIncorrect",
-      "Value": "TotalAmountOfPokeballsToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
-    },
-    {
-      "Key": "PotionsToKeepIncorrect",
-      "Value": "TotalAmountOfPotionsToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
-    },
-    {
-      "Key": "RevivesToKeepIncorrect",
-      "Value": "TotalAmountOfRevivesToKeep ist falsch konfiguriert. Die Zahl ist kleiner als 1."
-    },
-    {
       "Key": "invFullTransferring",
       "Value": "Das PokémonInventar ist voll. Verschicke Pokémon..."
     },
