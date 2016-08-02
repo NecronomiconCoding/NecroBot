@@ -70,7 +70,7 @@ namespace PoGo.NecroBot.Logic.State
                         session.Client.CurrentLongitude),
                 RequireInput = session.LogicSettings.StartupWelcomeDelay
             });
-
+            await Task.Delay(100, cancellationToken);
             return new InfoState();
         }
 
