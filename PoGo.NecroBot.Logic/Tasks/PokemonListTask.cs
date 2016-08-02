@@ -15,8 +15,23 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(ISession session)
         {
+            var myPokemonSettings = await session.Inventory.GetPokemonSettings();
+            var pokemonSettings = myPokemonSettings.ToList();
+
+            var myPokemonFamilies = await session.Inventory.GetPokemonFamilies();
+            var pokemonFamilies = myPokemonFamilies.ToArray();
+
             var allPokemonInBag = await session.Inventory.GetHighestsCp(1000);
-            var pkmWithIv = allPokemonInBag.Select(p => Tuple.Create(p, PokemonInfo.CalculatePokemonPerfection(p)));
+
+            var pkmWithIv = allPokemonInBag.Select(p => {
+                var settings = pokemonSettings.Single(x => x.PokemonId == p.PokemonId);
+                return Tuple.Create(
+                    p,
+                    PokemonInfo.CalculatePokemonPerfection(p),
+                    pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId).Candy_
+                );
+            });
+
             session.EventDispatcher.Send(
                 new PokemonListEvent
                 {
