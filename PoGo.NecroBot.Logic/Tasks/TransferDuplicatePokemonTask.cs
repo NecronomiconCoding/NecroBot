@@ -24,7 +24,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 await
                     session.Inventory.GetDuplicatePokemonToTransfer(session.LogicSettings.KeepPokemonsThatCanEvolve,
                         session.LogicSettings.PrioritizeIvOverCp,
-                        session.LogicSettings.PokemonsNotToTransfer);
+                        session.LogicSettings.PokemonsNotToTransfer,
+                        session.LogicSettings.PokemonsToEvolve);
 
             var pokemonSettings = await session.Inventory.GetPokemonSettings();
             var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
