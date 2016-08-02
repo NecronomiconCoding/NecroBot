@@ -36,9 +36,8 @@ namespace PoGo.NecroBot.CLI
             if (args.Length > 0)
                 subPath = args[0];
 
-            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
-
-            var settings = GlobalSettings.Load(subPath);
+            var session = new Session();
+            var settings = GlobalSettings.Load(session, subPath);
 
             if (settings == null)
             {
@@ -48,7 +47,7 @@ namespace PoGo.NecroBot.CLI
                 Console.ReadKey();
                 return;
             }
-            var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
+            session.Reset(new ClientSettings(settings), new LogicSettings(settings));
             session.Client.ApiFailure = new ApiFailureStrategy(session);
 
             /*SimpleSession session = new SimpleSession
@@ -112,7 +111,7 @@ namespace PoGo.NecroBot.CLI
 
         private static void UnhandledExceptionEventHandler(object obj, UnhandledExceptionEventArgs args)
         {
-            Logger.Write("Exceptiion caught, writing LogBuffer.", force: true);
+            Logger.Write("Exception caught");
             throw new Exception();
         }
     }

@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -35,7 +34,7 @@ namespace PoGo.NecroBot.Logic.State
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            await CleanupOldFiles();
+            await CleanupOldFiles(session);
             var autoUpdate = session.LogicSettings.AutoUpdate;
             var needupdate = IsLatest();
             if (!needupdate || !autoUpdate)
@@ -108,7 +107,7 @@ namespace PoGo.NecroBot.Logic.State
             return null;
         }
 
-        public static async Task CleanupOldFiles()
+        public static async Task CleanupOldFiles(ISession session)
         {
             var tmpDir = Path.Combine(Directory.GetCurrentDirectory(), "tmp");
 
@@ -130,7 +129,10 @@ namespace PoGo.NecroBot.Logic.State
                 }
                 catch (Exception e)
                 {
-                    Logger.Write(e.ToString());
+                    session.EventDispatcher.Send(new ErrorEvent()
+                    {
+                        Message = e.ToString()
+                    });
                 }
             }
             await Task.Delay(200);
@@ -243,7 +245,7 @@ namespace PoGo.NecroBot.Logic.State
 
             var oldConf = GetJObject(Path.Combine(configDir, "config.json.old"));
             var oldAuth = GetJObject(Path.Combine(configDir, "auth.json.old"));
-            GlobalSettings.Load("");
+            GlobalSettings.Load(session, "");
 
             var newConf = GetJObject(Path.Combine(configDir, "config.json"));
             var newAuth = GetJObject(Path.Combine(configDir, "auth.json"));

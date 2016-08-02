@@ -26,12 +26,17 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(ErrorEvent errorEvent, ISession session)
         {
-            Logger.Write(errorEvent.ToString(), LogLevel.Error, force: true);
+            Logger.Write(errorEvent.ToString(), LogLevel.Error);
         }
 
         private static void HandleEvent(NoticeEvent noticeEvent, ISession session)
         {
             Logger.Write(noticeEvent.ToString());
+        }
+
+        private static void HandleEvent(DebugEvent debugEvent, ISession session)
+        {
+            Logger.Write(debugEvent.ToString(), LogLevel.Debug);
         }
 
         private static void HandleEvent(WarnEvent warnEvent, ISession session)
@@ -108,7 +113,7 @@ namespace PoGo.NecroBot.CLI
         {
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortFailed, fortFailedEvent.Name, fortFailedEvent.Try, fortFailedEvent.Max),
-                LogLevel.Pokestop, ConsoleColor.DarkRed);
+                LogLevel.Pokestop);
         }
 
         private static void HandleEvent(FortTargetEvent fortTargetEvent, ISession session)
@@ -117,8 +122,8 @@ namespace PoGo.NecroBot.CLI
 
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortTargeted, fortTargetEvent.Name,
-                    Math.Round(fortTargetEvent.Distance), intTimeForArrival ),
-                LogLevel.Info, ConsoleColor.DarkRed);
+                Math.Round(fortTargetEvent.Distance), intTimeForArrival ),
+                LogLevel.Info);
         }
 
         private static void HandleEvent(PokemonCaptureEvent pokemonCaptureEvent, ISession session)
@@ -251,16 +256,16 @@ namespace PoGo.NecroBot.CLI
             var strPerfect = session.Translation.GetTranslation(TranslationString.CommonWordPerfect);
             var strName = session.Translation.GetTranslation(TranslationString.CommonWordName).ToUpper();
 
-            Logger.Write($"====== {strHeader} ======", LogLevel.Info, ConsoleColor.Yellow);
+            Logger.Write($"====== {strHeader} ======", LogLevel.Info);
             foreach (var pokemon in displayHighestsPokemonEvent.PokemonList)
                 Logger.Write(
                     $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: {session.Translation.GetPokemonTranslation(pokemon.Item1.PokemonId).PadRight(10, ' ')}\t MOVE1: {pokemon.Item5.ToString().PadRight(20, ' ')} MOVE2: {pokemon.Item6.ToString().PadRight(20, ' ')} Candy: {pokemon.Item7}",
-                    LogLevel.Info, ConsoleColor.Yellow);
+                    LogLevel.Info);
         }
 
         private static void HandleEvent(EvolveCountEvent evolveCountEvent, ISession session )
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.PkmPotentialEvolveCount, evolveCountEvent.Evolves), LogLevel.Update, ConsoleColor.White);
+            Logger.Write(session.Translation.GetTranslation(TranslationString.PkmPotentialEvolveCount, evolveCountEvent.Evolves), LogLevel.Update);
         }
 
         private static void HandleEvent(UpdateEvent updateEvent, ISession session)

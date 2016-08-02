@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.6\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="POGOProtos, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\POGOProtos.1.4.0\lib\net45\POGOProtos.dll</HintPath>
       <Private>True</Private>
@@ -71,6 +75,7 @@
     <Compile Include="Event\InventoryListEvent.cs" />
     <Compile Include="Event\ItemRecycledEvent.cs" />
     <Compile Include="Event\NoPokeballEvent.cs" />
+    <Compile Include="Event\DebugEvent.cs" />
     <Compile Include="Event\SnipeEvent.cs" />
     <Compile Include="Event\SnipeModeEvent.cs" />
     <Compile Include="Event\PokemonListEvent.cs" />
@@ -85,7 +90,6 @@
     <Compile Include="Event\EggIncubatorStatusEvent.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Localization\Localizer.cs" />
-    <Compile Include="Logging\Logger.cs" />
     <Compile Include="ILogicSettings.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="PoGoUtils\PokemonInfo.cs" />
@@ -138,7 +142,6 @@
     <Compile Include="Utils\EggWalker.cs" />
     <Compile Include="Utils\ErrorHandler.cs" />
     <Compile Include="Utils\GPXReader.cs" />
-    <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Utils\JitterUtils.cs" />
     <Compile Include="Utils\LocationUtils.cs" />
     <Compile Include="Utils\Statistics.cs" />

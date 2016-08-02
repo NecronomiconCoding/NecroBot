@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Event;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -18,8 +18,11 @@ namespace PoGo.NecroBot.Logic.Tasks
             var _totalUniqueEncounters = PokeDex.Select(i => new { Pokemon = i.InventoryItemData.PokedexEntry.PokemonId, Captures = i.InventoryItemData.PokedexEntry.TimesCaptured });
             var _totalCaptures = _totalUniqueEncounters.Count(i => i.Captures > 0);
             var _totalData = PokeDex.Count();
-            
-            Logger.Write(session.Translation.GetTranslation(TranslationString.AmountPkmSeenCaught, _totalData, _totalCaptures));
+
+            session.EventDispatcher.Send(new NoticeEvent()
+            {
+                Message = session.Translation.GetTranslation(TranslationString.AmountPkmSeenCaught, _totalData, _totalCaptures)
+            });
         }
     }
 }

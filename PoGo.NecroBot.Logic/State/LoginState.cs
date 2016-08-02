@@ -9,7 +9,6 @@ using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
-using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -131,8 +130,14 @@ namespace PoGo.NecroBot.Logic.State
 
             if (maxTheoreticalItems > session.Profile.PlayerData.MaxItemStorage)
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.MaxItemsCombinedOverMaxItemStorage, maxTheoreticalItems, session.Profile.PlayerData.MaxItemStorage), LogLevel.Error);
-                Logger.Write("Press any key to exit, then fix your configuration and run the bot again.", LogLevel.Warning);
+                session.EventDispatcher.Send(new ErrorEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.MaxItemsCombinedOverMaxItemStorage, maxTheoreticalItems, session.Profile.PlayerData.MaxItemStorage)
+                });
+                session.EventDispatcher.Send(new WarnEvent()
+                {
+                    Message = "Press any key to exit, then fix your configuration and run the bot again."
+                });
                 Console.ReadKey();
                 System.Environment.Exit(1);
             }

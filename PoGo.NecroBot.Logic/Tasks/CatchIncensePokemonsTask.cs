@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Map.Pokemon;
@@ -20,7 +19,10 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            Logger.Write(session.Translation.GetTranslation(TranslationString.LookingForIncensePokemon), LogLevel.Debug);
+            session.EventDispatcher.Send(new DebugEvent()
+            {
+                Message = session.Translation.GetTranslation(TranslationString.LookingForIncensePokemon)
+            });
 
             var incensePokemon = await session.Client.Map.GetIncensePokemons();
             if (incensePokemon.Result == GetIncensePokemonResponse.Types.Result.IncenseEncounterAvailable)
@@ -38,8 +40,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if( ( session.LogicSettings.UsePokemonSniperFilterOnly && !session.LogicSettings.PokemonToSnipe.Pokemon.Contains( pokemon.PokemonId ) ) ||
                     ( session.LogicSettings.UsePokemonToNotCatchFilter && session.LogicSettings.PokemonsNotToCatch.Contains( pokemon.PokemonId ) ) )
                 {
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.PokemonIgnoreFilter,
-                        session.Translation.GetPokemonTranslation(pokemon.PokemonId)));
+                    session.EventDispatcher.Send(new NoticeEvent()
+                    {
+                        Message = session.Translation.GetTranslation(TranslationString.PokemonIgnoreFilter,
+                            session.Translation.GetPokemonTranslation(pokemon.PokemonId))
+                    });
                 }
                 else
                 {

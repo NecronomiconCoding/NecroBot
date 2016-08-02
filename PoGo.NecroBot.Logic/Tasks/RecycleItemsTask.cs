@@ -2,7 +2,6 @@
 
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Inventory.Item;
@@ -26,7 +25,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                 return;
 
             if (!session.LogicSettings.VerboseRecycling)
-                Logger.Write(session.Translation.GetTranslation(TranslationString.RecyclingQuietly), LogLevel.Recycling);
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.RecyclingQuietly)
+                });
 
             if (session.LogicSettings.TotalAmountOfPokeballsToKeep != 0)
             {
@@ -36,9 +38,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var currentAmountOfMasterballs = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
                 if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
+                    session.EventDispatcher.Send(new NoticeEvent()
+                    {
+                        Message = session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
                         currentAmountOfPokeballs, currentAmountOfGreatballs, currentAmountOfUltraballs,
-                        currentAmountOfMasterballs));
+                        currentAmountOfMasterballs)
+                    });
 
                 await OptimizedRecycleBalls(session, cancellationToken);
             }

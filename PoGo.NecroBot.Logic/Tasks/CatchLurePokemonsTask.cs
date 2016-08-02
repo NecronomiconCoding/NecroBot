@@ -4,7 +4,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Responses;
@@ -19,7 +18,10 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            Logger.Write(session.Translation.GetTranslation(TranslationString.LookingForLurePokemon), LogLevel.Debug);
+            session.EventDispatcher.Send(new DebugEvent()
+            {
+                Message = session.Translation.GetTranslation(TranslationString.LookingForLurePokemon)
+            });
 
             var fortId = currentFortData.Id;
 

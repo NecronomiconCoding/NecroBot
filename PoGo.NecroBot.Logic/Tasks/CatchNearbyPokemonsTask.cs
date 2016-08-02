@@ -5,7 +5,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Inventory.Item;
@@ -22,7 +21,10 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            Logger.Write(session.Translation.GetTranslation(TranslationString.LookingForPokemon), LogLevel.Debug);
+            session.EventDispatcher.Send(new DebugEvent()
+            {
+                Message = session.Translation.GetTranslation(TranslationString.LookingForPokemon)
+            });
 
             var pokemons = await GetNearbyPokemons(session);
             foreach (var pokemon in pokemons)
@@ -36,14 +38,20 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (pokeBallsCount + greatBallsCount + ultraBallsCount + masterBallsCount == 0)
                 {
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.ZeroPokeballInv));
+                    session.EventDispatcher.Send(new NoticeEvent()
+                    {
+                        Message = session.Translation.GetTranslation(TranslationString.ZeroPokeballInv)
+                    });
                     return;
                 }
 
                 if( ( session.LogicSettings.UsePokemonSniperFilterOnly && !session.LogicSettings.PokemonToSnipe.Pokemon.Contains( pokemon.PokemonId ) ) ||
                     ( session.LogicSettings.UsePokemonToNotCatchFilter && session.LogicSettings.PokemonsNotToCatch.Contains( pokemon.PokemonId ) ) )
                 {
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.PokemonSkipped, session.Translation.GetPokemonTranslation(pokemon.PokemonId)));
+                    session.EventDispatcher.Send(new NoticeEvent()
+                    {
+                        Message = session.Translation.GetTranslation(TranslationString.PokemonSkipped, session.Translation.GetPokemonTranslation(pokemon.PokemonId))
+                    });
                     continue;
                 }
 

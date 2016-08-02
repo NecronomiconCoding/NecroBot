@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using PoGo.NecroBot.Logic.Common;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Event;
 
 #endregion
 
@@ -109,8 +109,10 @@ namespace PoGo.NecroBot.Logic.Utils
                     case "topografix:map":
                         break;
                     default:
-                        Logger.Write(session.Translation.GetTranslation(TranslationString.UnhandledGpxData),
-                            LogLevel.Info);
+                        session.EventDispatcher.Send(new NoticeEvent()
+                        {
+                            Message = session.Translation.GetTranslation(TranslationString.UnhandledGpxData)
+                        });
                         break;
                 }
             }
