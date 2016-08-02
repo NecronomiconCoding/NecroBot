@@ -360,6 +360,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             try
             {
                 var request = WebRequest.CreateHttp(uri);
+                request.UserAgent = "Mozilla/5.0";
                 request.Accept = "application/json";
                 request.UserAgent =
                     "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36\r\n";
