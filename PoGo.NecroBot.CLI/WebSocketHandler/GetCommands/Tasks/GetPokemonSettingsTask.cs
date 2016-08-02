@@ -21,8 +21,6 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
                 Data = settings,
                 RequestID = requestID
             }));
-
-            await Task.Delay(500);
         }
 
     }

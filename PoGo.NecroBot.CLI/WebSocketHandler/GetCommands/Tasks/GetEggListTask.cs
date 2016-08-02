@@ -33,8 +33,6 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
                  UnusedEggs = unusedEggs
              };
             webSocketSession.Send(EncodingHelper.Serialize(new EggListResponce(list,requestID)));
-
-            await Task.Delay(500);
         }
     }
 }
