@@ -9,10 +9,10 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.CLI;
-using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -21,13 +21,13 @@ namespace PoGo.NecroBot.Logic.State
     public class VersionCheckState : IState
     {
         public const string VersionUri =
-            "https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/PoGo.NecroBot.Logic/Properties/AssemblyInfo.cs";
+            "https://cdn.rawgit.com/NECROBOTIO/NecroBot/master/PoGo.NecroBot.Logic/Properties/AssemblyInfo.cs";
 
         public const string LatestReleaseApi =
-            "https://api.github.com/repos/NecronomiconCoding/NecroBot/releases/latest";
+            "https://api.github.com/repos/NECROBOTIO/NecroBot/releases/latest";
 
         private const string LatestRelease =
-            "https://github.com/NecronomiconCoding/NecroBot/releases";
+            "https://github.com/NECROBOTIO/NecroBot/releases";
 
         public static Version RemoteVersion;
 
@@ -37,7 +37,7 @@ namespace PoGo.NecroBot.Logic.State
 
             await CleanupOldFiles();
             var autoUpdate = session.LogicSettings.AutoUpdate;
-            var needupdate =  IsLatest();
+            var needupdate = IsLatest();
             if (!needupdate || !autoUpdate)
             {
                 if (!needupdate)
@@ -45,20 +45,23 @@ namespace PoGo.NecroBot.Logic.State
                     session.EventDispatcher.Send(new UpdateEvent
                     {
                         Message =
-                            session.Translation.GetTranslation(Common.TranslationString.GotUpToDateVersion, RemoteVersion)
+                            session.Translation.GetTranslation(TranslationString.GotUpToDateVersion, RemoteVersion)
                     });
                     return new LoginState();
                 }
                 session.EventDispatcher.Send(new UpdateEvent
                 {
-                    Message = session.Translation.GetTranslation(Common.TranslationString.AutoUpdaterDisabled, LatestRelease)                  
+                    Message = session.Translation.GetTranslation(TranslationString.AutoUpdaterDisabled, LatestRelease)
                 });
 
                 return new LoginState();
             }
-            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translation.GetTranslation(Common.TranslationString.DownloadingUpdate)});
+            session.EventDispatcher.Send(new UpdateEvent
+            {
+                Message = session.Translation.GetTranslation(TranslationString.DownloadingUpdate)
+            });
             var remoteReleaseUrl =
-            $"https://github.com/NecronomiconCoding/NecroBot/releases/download/v{RemoteVersion}/";
+                $"https://github.com/NecronomiconCoding/NecroBot/releases/download/v{RemoteVersion}/";
             const string zipName = "Release.zip";
             var downloadLink = remoteReleaseUrl + zipName;
             var baseDir = Directory.GetCurrentDirectory();
@@ -71,22 +74,34 @@ namespace PoGo.NecroBot.Logic.State
             if (!DownloadFile(downloadLink, downloadFilePath))
                 return new LoginState();
 
-            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translation.GetTranslation(Common.TranslationString.FinishedDownloadingRelease)});
+            session.EventDispatcher.Send(new UpdateEvent
+            {
+                Message = session.Translation.GetTranslation(TranslationString.FinishedDownloadingRelease)
+            });
 
             if (!UnpackFile(downloadFilePath, tempPath))
                 return new LoginState();
 
-            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translation.GetTranslation(Common.TranslationString.FinishedUnpackingFiles)});
-            
+            session.EventDispatcher.Send(new UpdateEvent
+            {
+                Message = session.Translation.GetTranslation(TranslationString.FinishedUnpackingFiles)
+            });
+
             if (!MoveAllFiles(extractedDir, destinationDir))
                 return new LoginState();
 
-            session.EventDispatcher.Send(new UpdateEvent {Message = session.Translation.GetTranslation(Common.TranslationString.UpdateFinished)});
+            session.EventDispatcher.Send(new UpdateEvent
+            {
+                Message = session.Translation.GetTranslation(TranslationString.UpdateFinished)
+            });
 
             if (TransferConfig(baseDir, session))
-                session.EventDispatcher.Send(new UpdateEvent { Message = session.Translation.GetTranslation(Common.TranslationString.FinishedTransferringConfig) });
+                session.EventDispatcher.Send(new UpdateEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.FinishedTransferringConfig)
+                });
 
-            await Task.Delay(2000);
+            await Task.Delay(2000, cancellationToken);
 
             Process.Start(Assembly.GetEntryAssembly().Location);
             Environment.Exit(-1);
@@ -103,14 +118,13 @@ namespace PoGo.NecroBot.Logic.State
             }
 
             var di = new DirectoryInfo(Directory.GetCurrentDirectory());
-            var diRecurisve = di.GetDirectories();
             var files = di.GetFiles("*.old", SearchOption.AllDirectories);
 
             foreach (var file in files)
             {
                 try
                 {
-                    if (file.Name.Contains("vshost"))
+                    if (file.Name.Contains("vshost") || file.Name.Contains(".gpx.old"))
                         continue;
                     File.Delete(file.FullName);
                 }
@@ -147,6 +161,11 @@ namespace PoGo.NecroBot.Logic.State
             }
         }
 
+        private static JObject GetJObject(string filePath)
+        {
+            return JObject.Parse(File.ReadAllText(filePath));
+        }
+
 
         public bool IsLatest()
         {
@@ -173,57 +192,6 @@ namespace PoGo.NecroBot.Logic.State
             return false;
         }
 
-        private static bool TransferConfig(string baseDir, ISession session)
-        {
-            if (!session.LogicSettings.TransferConfigAndAuthOnUpdate)
-                return false;
-
-            var configDir = Path.Combine(baseDir, "Config");
-            if (!Directory.Exists(configDir))
-                return false;
-
-            var oldConf = GetJObject(Path.Combine(configDir, "config.json.old"));
-            var oldAuth = GetJObject(Path.Combine(configDir, "auth.json.old"));
-
-            GlobalSettings.Load("");
-
-            var newConf = GetJObject(Path.Combine(configDir, "config.json"));
-            var newAuth = GetJObject(Path.Combine(configDir, "auth.json"));
-
-            TransferJSON(oldConf, newConf);
-            TransferJSON(oldAuth, newAuth);
-
-            File.WriteAllText(Path.Combine(configDir, "config.json"), newConf.ToString());
-            File.WriteAllText(Path.Combine(configDir, "auth.json"), newAuth.ToString());
-
-            return true;
-        }
-
-        private static JObject GetJObject(string filePath)
-        {
-            return JObject.Parse(File.ReadAllText(filePath));
-        }
-
-        private static bool TransferJSON(JObject oldFile, JObject newFile)
-        {
-            try
-            {
-                foreach (var newProperty in newFile.Properties())
-                    foreach (var oldProperty in oldFile.Properties())
-                        if (newProperty.Name.Equals(oldProperty.Name))
-                        {
-                            newFile[newProperty.Name] = oldProperty.Value;
-                            break;
-                        }
-
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
         public static bool MoveAllFiles(string sourceFolder, string destFolder)
         {
             if (!Directory.Exists(destFolder))
@@ -232,7 +200,7 @@ namespace PoGo.NecroBot.Logic.State
             var oldfiles = Directory.GetFiles(destFolder);
             foreach (var old in oldfiles)
             {
-                if (old.Contains("vshost")) continue;
+                if (old.Contains("vshost") || old.Contains(".gpx")) continue;
                 File.Move(old, old + ".old");
             }
 
@@ -241,7 +209,7 @@ namespace PoGo.NecroBot.Logic.State
                 var files = Directory.GetFiles(sourceFolder);
                 foreach (var file in files)
                 {
-                    if (file.Contains("vshost")) continue;
+                    if (file.Contains("vshost") || file.Contains(".gpx")) continue;
                     var name = Path.GetFileName(file);
                     var dest = Path.Combine(destFolder, name);
                     File.Copy(file, dest, true);
@@ -262,6 +230,48 @@ namespace PoGo.NecroBot.Logic.State
                 return false;
             }
             return true;
+        }
+
+        private static bool TransferConfig(string baseDir, ISession session)
+        {
+            if (!session.LogicSettings.TransferConfigAndAuthOnUpdate)
+                return false;
+
+            var configDir = Path.Combine(baseDir, "Config");
+            if (!Directory.Exists(configDir))
+                return false;
+
+            var oldConf = GetJObject(Path.Combine(configDir, "config.json.old"));
+            var oldAuth = GetJObject(Path.Combine(configDir, "auth.json.old"));
+            GlobalSettings.Load("");
+
+            var newConf = GetJObject(Path.Combine(configDir, "config.json"));
+            var newAuth = GetJObject(Path.Combine(configDir, "auth.json"));
+
+            TransferJson(oldConf, newConf);
+            TransferJson(oldAuth, newAuth);
+
+            File.WriteAllText(Path.Combine(configDir, "config.json"), newConf.ToString());
+            File.WriteAllText(Path.Combine(configDir, "auth.json"), newAuth.ToString());
+            return true;
+        }
+
+        private static void TransferJson(JObject oldFile, JObject newFile)
+        {
+            try
+            {
+                foreach (var newProperty in newFile.Properties())
+                    foreach (var oldProperty in oldFile.Properties())
+                        if (newProperty.Name.Equals(oldProperty.Name))
+                        {
+                            newFile[newProperty.Name] = oldProperty.Value;
+                            break;
+                        }
+            }
+            catch
+            {
+                // ignored
+            }
         }
 
         public static bool UnpackFile(string sourceTarget, string destPath)

@@ -22,11 +22,11 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Você está fora do seu raio definido! Caminhando para o início ({0}m) em 5 segundos. Suas coordenadas em Coords.ini estão corretas?"
+      "Value": "Você está fora do seu raio definido! Caminhando para o início ({0}m de distância) em 5 segundos. Suas coordenadas em LastPos.ini estão corretas?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Não foram encontradas PokeStops na sua área. Sua distância máxima não é muito pequena?"
+      "Value": "Não foram encontradas PokeStops na sua área. Sua distância máxima de caminhada não está muito pequena?"
     },
     {
       "Key": "eventFortUsed",
@@ -218,11 +218,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Sem movimentos realista em {0}, utilizando ultimas configurações salvas em Coords.ini"
+      "Value": "Sem movimentos realista em {0}, utilizando ultimas configurações salvas em LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "As coodernadas no arquivo \"Coords.ini\" são inválidas, utilizando as coordenadas padrão"
+      "Value": "As coodernadas no arquivo \"LastPos.ini\" são inválidas, utilizando as coordenadas padrão"
     },
     {
       "Key": "gotUpToDateVersion",
@@ -270,7 +270,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "O inventário de Pokémons está cheio. Transfira seus pokémons manualmente altere TransferDuplicatePokemon para true nas configurações..."
+      "Value": "O inventário de Pokémons está cheio. Por favor transfira seus pokémons manualmente altere TransferDuplicatePokemon para true nas configurações..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -358,7 +358,7 @@
     },
     {
       "Key": "googleError",
-      "Value": "Verifique se você informou um e-mail e uma senha correta."
+      "Value": "Verifique se você informou o e-mail e senha corretamente."
     },
     {
       "Key": "missingCredentialsGoogle",
@@ -373,8 +373,65 @@
       "Value": "[Sniper] Verificando por Snipeable Pokémon em {0}..."
     },
     {
+      "Key": "snipeScanEx",
+      "Value": "[Sniper] Mirando um {0} com {1} IV em {2}..."
+    },
+    {
       "Key": "noPokemonToSnipe",
       "Value": "[Sniper] Nenhum Pokémon encontrado!"
+    },
+    {
+      "Key": "notEnoughPokeballsToSnipe",
+      "Value": "Sem pokébolas suficientes para começar o sniping! ({0}/{1})"
+    },
+    {
+      "Key": "iPBannedError",
+      "Value": "Conexão recusada. Seu IP pode estar na lista negra da Niantic. Saindo.."
+    },
+    {
+      "Key": "noEggsAvailable",
+      "Value": "Sem ovos disponíveis"
+    },
+    {
+      "Key": "useLuckyEggActive",
+      "Value": "Ovo da Sorte já está ativo"
+    },
+    {
+      "Key": "usedLuckyEgg",
+      "Value": "Ovo da Sorte utilizado"
+    },
+    {
+      "Key": "useLuckyEggAmount",
+      "Value": "Ovos da sorte no inventário: {0}"
+    },
+    {
+      "Key": "noIncenseAvailable",
+      "Value": "Sem incenso disponível"
+    },
+    {
+      "Key": "useIncenseActive",
+      "Value": "Incenso já ativo"
+    },
+    {
+      "Key": "useIncenseAmount",
+      "Value": "Incenso no Inventário: {0}"
+    },
+    {
+      "Key": "usedIncense",
+      "Value": "Utilizado um Incenso"
+    },
+    {
+      "Key": "amountPkmSeenCaught",
+      "Value": "Quantidade de Pokemons Vistos: {0}/151, Quantidade de Pokemons Capturados: {1}/151"
+    },
+    {
+      "Key": "pkmPotentialEvolveCount",
+      "Value": "[Evoluções] Possíveis Evoluções: {0}"
+    },
+    {
+      "Key": "pkmNotEnoughRessources",
+      "Value": "Fortalecimento do Pokemon falhado, sem recursos suficientes."
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

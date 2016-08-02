@@ -54,7 +54,8 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Oled seadistatud raadiusest väljas! Liigun alguspunkti ({0} m kaugusel) tagasi 5 sekundi pärast. Kas koordinaadid config.json'is on õiged?"
+      "Value":
+        "Oled seadistatud raadiusest väljas! Liigun alguspunkti ({0} m kaugusel) tagasi 5 sekundi pärast. Kas koordinaadid config.json'is on õiged?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -98,7 +99,8 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | võimalus: {7}% | {8} m kaugusel | {9}'iga ({10} veel alles). | {11}"
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | võimalus: {7}% | {8} m kaugusel | {9}'iga ({10} veel alles). | {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -150,7 +152,8 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Veendu, et laius- ja pikkuskraadid on õiged. Kui ei, siis sulge programm! Laiuskraad (Lat): {0}, pikkuskraad (Lng): {1}"
+      "Value":
+        "Veendu, et laius- ja pikkuskraadid on õiged. Kui ei, siis sulge programm! Laiuskraad (Lat): {0}, pikkuskraad (Lng): {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -250,11 +253,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Ei leidnud realistlikku liikumist: {0}, kasutan viimati salvestatud andmeid failist Coords.ini"
+      "Value": "Ei leidnud realistlikku liikumist: {0}, kasutan viimati salvestatud andmeid failist LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinaadid failis \"Coords.ini\" ei ole korrektsed! Kasutage standardseid koordinaate."
+      "Value": "Koordinaadid failis \"LastPos.ini\" ei ole korrektsed! Kasutage standardseid koordinaate."
     },
     {
       "Key": "gotUpToDateVersion",
@@ -306,7 +309,8 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Kott on Pokémon'e täis. Palun transferige Pokémon'id käsitsi või määrake sätte \"TransferDuplicatePokemon\" väärtuseks \"true\"..."
+      "Value":
+        "Kott on Pokémon'e täis. Palun transferige Pokémon'id käsitsi või määrake sätte \"TransferDuplicatePokemon\" väärtuseks \"true\"..."
     },
     {
       "Key": "encounterProblem",
@@ -328,5 +332,6 @@
       "Key": "pokemonIgnoreFilter",
       "Value": "[Pokémon-Ignore-Filter] - Ignoreerin {0} nagu sätetes määratud!"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

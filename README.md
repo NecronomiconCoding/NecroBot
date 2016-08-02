@@ -1,13 +1,14 @@
-<!-- define warning icon -->
-[1.1]: http://necrobot.io/img/mainlogo.png (NECROBOT_HEADER)
-<!-- header -->
-![alt text][1.1] <br/><br/>
+[![Discord](https://img.shields.io/badge/discord-NECROBOT.IO-blue.svg)](https://discord.gg/VXKxNFr)
+[![Build status](https://ci.appveyor.com/api/projects/status/8ijvvr6b7fe2h0w2?svg=true)](https://ci.appveyor.com/project/NecronomiconCoding/necrobot)
+[![Stories in Ready](https://badge.waffle.io/NECROBOTIO/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NecronomiconCoding/NecroBot)
+[![Stories in Progress](https://badge.waffle.io/NECROBOTIO/NecroBot.svg?label=waffle%3Ain%20progress&title=In%20Progress)](https://waffle.io/NecronomiconCoding/NecroBot)
+[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/LICENSE.md)
 
 <!-- title -->
 <h1>NecroBot - a Pokemon Go Bot based on RocketAPI</h1>
-Visit our new Website! : http://necrobot.io
+Official Website  http://necrobot.io
 
-Chatting about this Repository can be done on our Discord: https://discord.gg/VsVrjgr <br/>
+Discord (Chat & Get Help!): https://discord.gg/VXKxNFr <br/>
 <br/>
 
 <h2><a name="features">Features</a></h2>
@@ -29,6 +30,8 @@ Chatting about this Repository can be done on our Discord: https://discord.gg/Vs
  - [Use lucky egg while evolve]
  - [Egg Hatching Automatically]
  - [Multi bot support]
+ - [Snipe pokemon]
+ - [Power-Up pokemon]
 
 <h2><a name="getting-started">Getting Started</a></h2>
 Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.

@@ -1,15 +1,13 @@
-﻿using PoGo.NecroBot.Logic.Common;
+﻿#region using directives
+
+using System;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Service;
 using PoGo.NecroBot.Logic.State;
-using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -17,6 +15,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         void DoLogin();
     }
+
     public class Login : ILogin
     {
         private readonly ISession _session;
@@ -26,37 +25,61 @@ namespace PoGo.NecroBot.Logic.Tasks
             _session = session;
         }
 
-        public void DoLogin()
+        public async void DoLogin()
         {
             try
             {
-                if (_session.Client.AuthType == AuthType.Ptc)
+                if (_session.Settings.AuthType != AuthType.Google || _session.Settings.AuthType != AuthType.Ptc)
                 {
-                    try
-                    {
-                        _session.Client.Login.DoPtcLogin(_session.Settings.PtcUsername, _session.Settings.PtcPassword)
-                            .Wait();
-                    }
-                    catch (AggregateException ae)
-                    {
-                        throw ae.Flatten().InnerException;
-                    }
+                    await _session.Client.Login.DoLogin();
                 }
                 else
                 {
-                    _session.Client.Login.DoGoogleLogin(_session.Settings.GoogleUsername,
-                        _session.Settings.GooglePassword).Wait();
+                    _session.EventDispatcher.Send(new ErrorEvent
+                    {
+                        Message = _session.Translation.GetTranslation(TranslationString.WrongAuthType)
+                    });
                 }
+            }
+            catch (AggregateException ae)
+            {
+                throw ae.Flatten().InnerException;
+            }
+            catch(LoginFailedException)
+            {
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.LoginInvalid)
+                });
+            }
+            catch (Exception ex) when (ex is PtcOfflineException || ex is AccessTokenExpiredException)
+            {
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.PtcOffline)
+                });
+                _session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20)
+                });
             }
             catch (PtcOfflineException)
             {
-                  _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Translation.GetTranslation(TranslationString.PtcOffline) });
-                  _session.EventDispatcher.Send(new NoticeEvent { Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20) });
-
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.PtcOffline)
+                });
+                _session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20)
+                });
             }
             catch (AccountNotVerifiedException)
             {
-                  _session.EventDispatcher.Send(new ErrorEvent { Message = _session.Translation.GetTranslation(TranslationString.AccountNotVerified) });
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.AccountNotVerified)
+                });
             }
         }
     }
