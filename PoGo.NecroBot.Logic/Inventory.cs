@@ -119,7 +119,7 @@ namespace PoGo.NecroBot.Logic
                 var transferrablePokemonTypeCount = pokemonFiltered.Where(p => p.PokemonId == pokemon.Key).Count();
                 var currentPokemonTypeCount = myPokemon.Where(p => p.PokemonId == pokemon.Key).Count();
                 var currentlyKeepingPokemonType = currentPokemonTypeCount - transferrablePokemonTypeCount;
-
+                
                 if (currentlyKeepingPokemonType > GetPokemonTransferFilter(pokemon.Key).KeepMinDuplicatePokemon)
                 {
                     amountToSkip = 0;
