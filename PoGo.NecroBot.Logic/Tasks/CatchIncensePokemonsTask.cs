@@ -39,7 +39,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ( session.LogicSettings.UsePokemonToNotCatchFilter && session.LogicSettings.PokemonsNotToCatch.Contains( pokemon.PokemonId ) ) )
                 {
                     Logger.Write(session.Translation.GetTranslation(TranslationString.PokemonIgnoreFilter,
-                        pokemon.PokemonId));
+                        session.Translation.GetPokemonTranslation(pokemon.PokemonId)));
                 }
                 else
                 {

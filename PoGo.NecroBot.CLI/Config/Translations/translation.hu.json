@@ -364,5 +364,6 @@
       "Key": "NoPokemonToSnipe",
       "Value": "[Sniper] Nincs pokemon snipe-olni!"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

@@ -355,21 +355,16 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var uri =
                 $"http://skiplagged.com/api/pokemon.php?bounds={boundLowerLeftLat.ToString(formatter)},{boundLowerLeftLng.ToString(formatter)},{boundUpperRightLat.ToString(formatter)},{boundUpperRightLng.ToString(formatter)}";
-            /*var uri =
-                $"http://skiplagged.com/api/pokemon.php?address={location.Latitude.ToString(formatter)},{location.Longitude.ToString(formatter)}";
-                */
-            /*
-             * http://skiplagged.com/api/pokemon.php?bounds=40.76356269219236,-73.98657795715332,40.7854671345488,-73.95812508392333
-             * bounds = bound_lower_left_lat,bound_lower_left_lng,bound_upper_right_lat,bound_upper_right_lng
-             */
 
             ScanResult scanResult;
             try
             {
                 var request = WebRequest.CreateHttp(uri);
                 request.Accept = "application/json";
+                request.UserAgent =
+                    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36\r\n";
                 request.Method = "GET";
-                request.Timeout = 10000;
+                request.Timeout = 15000;
                 request.ReadWriteTimeout = 32000;
 
                 var resp = request.GetResponse();
@@ -431,7 +426,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     // most likely System.IO.IOException
                     session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
                 }
-                await Task.Delay(5000, cancellationToken);
             }
         }
     }

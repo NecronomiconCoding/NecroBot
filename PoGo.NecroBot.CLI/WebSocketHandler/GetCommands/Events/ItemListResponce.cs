@@ -4,19 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Events
+namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events
 {
-    public class EggListResponce : IWebSocketResponce
+    class ItemListResponce : IWebSocketResponce
     {
-        public EggListResponce(dynamic data, string requestID)
+        public ItemListResponce(dynamic data,string requestID)
         {
-            Command = "EggListWeb";
+            Command = "ItemListWeb";
             Data = data;
             RequestID = requestID;
         }
         public string RequestID { get; private set; }
         public string Command { get; private set; }
         public dynamic Data { get; private set; }
-        
     }
 }

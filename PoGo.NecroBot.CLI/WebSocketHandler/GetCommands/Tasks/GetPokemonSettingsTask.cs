@@ -1,4 +1,4 @@
-﻿using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Events;
+﻿using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
+namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
 {
     class GetPokemonSettingsTask
     {
@@ -21,8 +21,6 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
                 Data = settings,
                 RequestID = requestID
             }));
-
-            await Task.Delay(500);
         }
 
     }

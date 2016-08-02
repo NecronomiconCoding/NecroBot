@@ -1,5 +1,5 @@
-﻿using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Events;
-using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Helpers;
+﻿using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events;
+using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Helpers;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
+namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
 {
     class GetTrainerProfileTask
     {
@@ -19,7 +19,6 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
                 return;
             var tmpData = new TrainerProfileWeb(session.Profile.PlayerData, playerStats);
             webSocketSession.Send(EncodingHelper.Serialize(new TrainerProfileResponce(tmpData, requestID)));
-            await Task.Delay(500);
         }
     }
 }

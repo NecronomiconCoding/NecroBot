@@ -24,7 +24,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 await
                     session.Inventory.GetDuplicatePokemonToTransfer(session.LogicSettings.KeepPokemonsThatCanEvolve,
                         session.LogicSettings.PrioritizeIvOverCp,
-                        session.LogicSettings.PokemonsNotToTransfer);
+                        session.LogicSettings.PokemonsNotToTransfer,
+                        session.LogicSettings.PokemonsToEvolve);
 
             var pokemonSettings = await session.Inventory.GetPokemonSettings();
             var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
@@ -48,8 +49,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 else if(pokemonTransferFilter != null)
                 {
                     if (duplicatePokemon.Cp >= pokemonTransferFilter.KeepMinCp ||
-                            PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >
-                            pokemonTransferFilter.KeepMinIvPercentage ||
+                            PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >= pokemonTransferFilter.KeepMinIvPercentage ||
                             pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move1) ||
                             pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move2))
                     {
