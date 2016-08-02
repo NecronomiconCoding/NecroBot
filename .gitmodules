@@ -1,4 +1,0 @@
-[submodule "FeroxRev"]
-	path = FeroxRev
-	url = https://github.com/FeroxRev/Pokemon-Go-Rocket-API
-	branch = master
