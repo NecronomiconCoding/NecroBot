@@ -367,6 +367,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             try
             {
                 var request = WebRequest.CreateHttp(uri);
+                request.UserAgent = "Mozilla/5.0";
                 request.Accept = "application/json";
                 request.Method = "GET";
                 request.Timeout = 10000;
