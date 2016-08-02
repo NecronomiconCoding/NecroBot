@@ -29,23 +29,15 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             try
             {
-                if (_session.Client.AuthType == AuthType.Ptc)
-                {
                     try
                     {
-                        _session.Client.Login.DoPtcLogin(_session.Settings.PtcUsername, _session.Settings.PtcPassword)
+                        _session.Client.Login.DoLogin()
                             .Wait();
                     }
                     catch (AggregateException ae)
                     {
                         throw ae.Flatten().InnerException;
                     }
-                }
-                else
-                {
-                    _session.Client.Login.DoGoogleLogin(_session.Settings.GoogleUsername,
-                        _session.Settings.GooglePassword).Wait();
-                }
             }
             catch (PtcOfflineException)
             {

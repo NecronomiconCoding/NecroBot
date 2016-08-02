@@ -47,25 +47,7 @@ namespace PoGo.NecroBot.Logic.Common
         {
             try
             {
-                switch (_session.Settings.AuthType)
-                {
-                    case AuthType.Ptc:
-                        await
-                            _session.Client.Login.DoPtcLogin(_session.Settings.PtcUsername,
-                                _session.Settings.PtcPassword);
-                        break;
-                    case AuthType.Google:
-                        await
-                            _session.Client.Login.DoGoogleLogin(_session.Settings.GoogleUsername,
-                                _session.Settings.GooglePassword);
-                        break;
-                    default:
-                        _session.EventDispatcher.Send(new ErrorEvent
-                        {
-                            Message = _session.Translation.GetTranslation(TranslationString.WrongAuthType)
-                        });
-                        break;
-                }
+                await _session.Client.Login.DoLogin();
             }
             catch (AggregateException ae)
             {
