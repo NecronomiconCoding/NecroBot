@@ -36,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     var totalPokemon = await session.Inventory.GetPokemons();
 
-                    var pokemonNeededInInventory = session.Profile.PlayerData.MaxPokemonStorage * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage;
+                    var pokemonNeededInInventory = session.Profile.PlayerData.MaxPokemonStorage * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage/100.0f;
                     var needPokemonToStartEvolve = Math.Round(
                         Math.Max(0, 
                             Math.Min(pokemonNeededInInventory, session.Profile.PlayerData.MaxPokemonStorage)));
@@ -48,7 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         session.EventDispatcher.Send(new NoticeEvent()
                         {
                             Message = session.Translation.GetTranslation(TranslationString.WaitingForMorePokemonToEvolve,
-                                pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage)
+                                pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage/100.0f)
                         });
 
                         return;
