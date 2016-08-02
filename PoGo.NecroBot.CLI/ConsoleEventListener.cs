@@ -173,12 +173,13 @@ namespace PoGo.NecroBot.CLI
             var familyCandies = pokemonCaptureEvent.FamilyCandies > 0
                 ? session.Translation.GetTranslation(TranslationString.Candies, pokemonCaptureEvent.FamilyCandies)
                 : "";
-
-            Logger.Write(
-                session.Translation.GetTranslation(TranslationString.EventPokemonCapture, catchStatus, catchType, session.Translation.GetPokemonTranslation(pokemonCaptureEvent.Id),
+            
+            var message = session.Translation.GetTranslation(TranslationString.EventPokemonCapture, catchStatus, catchType, session.Translation.GetPokemonTranslation(pokemonCaptureEvent.Id),
                     pokemonCaptureEvent.Level, pokemonCaptureEvent.Cp, pokemonCaptureEvent.MaxCp, pokemonCaptureEvent.Perfection.ToString("0.00"), pokemonCaptureEvent.Probability,
                     pokemonCaptureEvent.Distance.ToString("F2"),
-                    returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount, familyCandies), LogLevel.Caught);
+                    returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount, familyCandies, pokemonCaptureEvent.Latitude, pokemonCaptureEvent.Longitude);
+
+            Logger.Write(message, LogLevel.Caught);
         }
 
         private static void HandleEvent(NoPokeballEvent noPokeballEvent, ISession session)
