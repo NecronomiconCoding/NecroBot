@@ -554,17 +554,19 @@ namespace PoGo.NecroBot.Logic.Common
                 jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                 jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                 jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
-<<<<<<< HEAD
 
                 try
                 {
                     translations = JsonConvert.DeserializeObject<Translation>( input, jsonSettings );
-
                     //TODO make json to fill default values as it won't do it now
                     new Translation()._translationStrings.Where(
                         item => translations._translationStrings.All( a => a.Key != item.Key ) )
                         .ToList()
                         .ForEach( translations._translationStrings.Add );
+                    new Translation()._pokemonTranslationStrings.Where(
+                        item => translations._pokemonTranslationStrings.All( a => a.Key != item.Key ) )
+                        .ToList()
+                        .ForEach( translations._pokemonTranslationStrings.Add );
                 }
                 catch( JsonSerializationException )
                 {
@@ -596,19 +598,7 @@ namespace PoGo.NecroBot.Logic.Common
                             ErrorHandler.ThrowFatalError( "[ERROR] No replacement translations: Check appropriate files for typos", 5 );
                             return null;
                     }
-                }                
-=======
-                translations = JsonConvert.DeserializeObject<Translation>(input, jsonSettings);
-                //TODO make json to fill default values as it won't do it now
-                new Translation()._translationStrings.Where(
-                    item => translations._translationStrings.All(a => a.Key != item.Key))
-                    .ToList()
-                    .ForEach(translations._translationStrings.Add);
-                new Translation()._pokemonTranslationStrings.Where(
-                    item => translations._pokemonTranslationStrings.All(a => a.Key != item.Key))
-                    .ToList()
-                    .ForEach(translations._pokemonTranslationStrings.Add);
->>>>>>> refs/remotes/NECROBOTIO/master
+                }
             }
             else
             {
