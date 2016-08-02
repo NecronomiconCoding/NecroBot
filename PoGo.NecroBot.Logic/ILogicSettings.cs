@@ -1,9 +1,8 @@
 ﻿#region using directives
 
-using System.Collections.Generic;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-using POGOProtos.Settings.Master.Item;
+using System.Collections.Generic;
 
 #endregion
 
@@ -69,6 +68,7 @@ namespace PoGo.NecroBot.Logic
         bool TransferConfigAndAuthOnUpdate { get; }
         float KeepMinIvPercentage { get; }
         int KeepMinCp { get; }
+        string KeepMinOperator { get; }
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }
@@ -102,6 +102,7 @@ namespace PoGo.NecroBot.Logic
         float UseBerriesMinIv { get; }
         double UseBerriesBelowCatchProbability { get; }
         string UseBerriesOperator { get; }
+        string UpgradePokemonMinimumStatsOperator { get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }
         string GpxFile { get; }
@@ -135,6 +136,7 @@ namespace PoGo.NecroBot.Logic
         int TotalAmountOfPokeballsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
+        int TotalAmountOfBerriesToKeep { get; }
 
         bool ShowPokeballCountsBeforeRecycle { get; }
         bool VerboseRecycling { get; }

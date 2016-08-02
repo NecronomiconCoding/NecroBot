@@ -1,10 +1,10 @@
 ﻿#region using directives
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 #endregion
 
@@ -39,6 +39,9 @@ namespace PoGo.NecroBot.Logic.Common
         EventItemRecycled,
         EventPokemonCapture,
         EventNoPokeballs,
+        WaitingForMorePokemonToEvolve,
+        UseLuckyEggsMinPokemonAmountTooHigh,
+        CatchMorePokemonToUseLuckyEgg,
         EventUseBerry,
         ItemRazzBerry,
         CatchStatusAttempt,
@@ -92,12 +95,6 @@ namespace PoGo.NecroBot.Logic.Common
         CurrentPokeballInv,
         MaxItemsCombinedOverMaxItemStorage,
         RecyclingQuietly,
-        CheckingForBallsToRecycle,
-        CheckingForPotionsToRecycle,
-        CheckingForRevivesToRecycle,
-        PokeballsToKeepIncorrect,
-        PotionsToKeepIncorrect,
-        RevivesToKeepIncorrect,
         InvFullTransferring,
         InvFullTransferManually,
         InvFullPokestopLooting,
@@ -193,6 +190,12 @@ namespace PoGo.NecroBot.Logic.Common
                 "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
                 "No Pokeballs - We missed a {0} with CP {1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.WaitingForMorePokemonToEvolve,
+                "Waiting to evolve {0} Pokemon once {1} more are caught! ({2}/{3} for {4}% inventory)"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UseLuckyEggsMinPokemonAmountTooHigh,
+                "Lucky eggs will never be used with UseLuckyEggsMinPokemonAmount set to {0}, use <= {1} instead"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchMorePokemonToUseLuckyEgg,
+                "Catch {0} more Pokemon to use a Lucky Egg!"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventUseBerry, "Used {0} | {1} remaining"),
             new KeyValuePair<TranslationString, string>(TranslationString.ItemRazzBerry, "Razz Berry"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchStatusAttempt, "{0} Attempt #{1}"),
@@ -277,18 +280,6 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.MaxItemsCombinedOverMaxItemStorage,
                 "[Configuration Invalid] Your maximum items combined (balls+potions+revives={0}) is over your max item storage ({1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.RecyclingQuietly, "Recycling Quietly..."),
-            new KeyValuePair<TranslationString, string>(TranslationString.CheckingForBallsToRecycle,
-                "Checking for balls to recycle, keeping {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CheckingForPotionsToRecycle,
-                "Checking for potions to recycle, keeping {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CheckingForRevivesToRecycle,
-                "Checking for revives to recycle, keeping {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.PokeballsToKeepIncorrect,
-                "TotalAmountOfPokeballsToKeep is configured incorrectly. The number is smaller than 1."),
-            new KeyValuePair<TranslationString, string>(TranslationString.PotionsToKeepIncorrect,
-                "TotalAmountOfPotionsToKeep is configured incorrectly. The number is smaller than 1."),
-            new KeyValuePair<TranslationString, string>(TranslationString.RevivesToKeepIncorrect,
-                "TotalAmountOfRevivesToKeep is configured incorrectly. The number is smaller than 1."),
             new KeyValuePair<TranslationString, string>(TranslationString.InvFullTransferring,
                 "Pokemon Inventory is full, transferring Pokemon..."),
             new KeyValuePair<TranslationString, string>(TranslationString.InvFullTransferManually,

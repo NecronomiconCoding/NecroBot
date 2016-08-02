@@ -297,30 +297,6 @@
       "Value": "Išmetama tyliai..."
     },
     {
-      "Key": "checkingForBallsToRecycle",
-      "Value": "Tikrinami kamuoliai išmetimui, paliekama {0}"
-    },
-    {
-      "Key": "checkingForPotionsToRecycle",
-      "Value": "Tikrinami gėrimai išmetimui, paliekama {0}"
-    },
-    {
-      "Key": "checkingForRevivesToRecycle",
-      "Value": "Tikrinami prikėlimai išmetimui, paliekama {0}"
-    },
-    {
-      "Key": "pokeballsToKeepIncorrect",
-      "Value": "TotalAmountOfPokeballsToKeep sukonfigūruota neteisingai. Skaičius mažesnis už 1."
-    },
-    {
-      "Key": "potionsToKeepIncorrect",
-      "Value": "TotalAmountOfPotionsToKeep sukonfigūruota neteisingai. Skaičius mažesnis už 1."
-    },
-    {
-      "Key": "revivesToKeepIncorrect",
-      "Value": "TotalAmountOfRevivesToKeep sukonfigūruota neteisingai. Skaičius mažesnis už 1."
-    },
-    {
       "Key": "invFullTransferring",
       "Value": "Pokemonų inventorius pilnas, atiduodami Pokemonai..."
     },

@@ -8,6 +8,7 @@ using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Inventory.Item;
+using PoGo.NecroBot.Logic.Common;
 
 #endregion
 
@@ -33,20 +34,21 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 if (session.LogicSettings.KeepPokemonsThatCanEvolve)
                 {
-                    var myPokemons = await session.Inventory.GetPokemons();
-                    var needPokemonToStartEvolve = Math.Max(0,
-                        Math.Min(session.Profile.PlayerData.MaxPokemonStorage*
-                                 session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage,
-                            session.Profile.PlayerData.MaxPokemonStorage));
+                    var totalPokemon = await session.Inventory.GetPokemons();
 
-                    var deltaCount = needPokemonToStartEvolve - myPokemons.Count();
+                    var pokemonNeededInInventory = session.Profile.PlayerData.MaxPokemonStorage * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage/100.0f;
+                    var needPokemonToStartEvolve = Math.Round(
+                        Math.Max(0, 
+                            Math.Min(pokemonNeededInInventory, session.Profile.PlayerData.MaxPokemonStorage)));
+                    
+                    var deltaCount = needPokemonToStartEvolve - totalPokemon.Count();
 
                     if (deltaCount > 0)
                     {
                         session.EventDispatcher.Send(new NoticeEvent()
                         {
-                            Message = $"Not enough Pokemons to start evlove. Waiting for {deltaCount} " +
-                                      $"more ({ pokemonToEvolve.Count}/{deltaCount + pokemonToEvolve.Count})"
+                            Message = session.Translation.GetTranslation(TranslationString.WaitingForMorePokemonToEvolve,
+                                pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage)
                         });
 
                         return;
@@ -66,29 +68,29 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     else
                     {
-                        var myPokemons = await session.Inventory.GetPokemons();
+                        var evolvablePokemon = await session.Inventory.GetPokemons();
 
-                        var deltaPokemonsToUseLuckyEgg = session.LogicSettings.UseLuckyEggsMinPokemonAmount -
+                        var deltaPokemonToUseLuckyEgg = session.LogicSettings.UseLuckyEggsMinPokemonAmount -
                                                                    pokemonToEvolve.Count;
 
-                        var availableSpace = session.Profile.PlayerData.MaxPokemonStorage - myPokemons.Count();
+                        var availableSpace = session.Profile.PlayerData.MaxPokemonStorage - evolvablePokemon.Count();
 
-                        if (deltaPokemonsToUseLuckyEgg > availableSpace)
+                        if (deltaPokemonToUseLuckyEgg > availableSpace)
                         {
                             var possibleLimitInThisIteration = pokemonToEvolve.Count + availableSpace;
 
                             session.EventDispatcher.Send(new NoticeEvent()
                             {
-                                Message = $"Use lucky egg impossible with UseLuckyEggsMinPokemonAmount = {session.LogicSettings.UseLuckyEggsMinPokemonAmount} " +
-                                          Environment.NewLine +
-                                          $"set value <= {possibleLimitInThisIteration} instead"
+                                Message = session.Translation.GetTranslation(TranslationString.UseLuckyEggsMinPokemonAmountTooHigh,
+                                    session.LogicSettings.UseLuckyEggsMinPokemonAmount, possibleLimitInThisIteration)
                             });
                         }
                         else
                         {
                             session.EventDispatcher.Send(new NoticeEvent()
                             {
-                                Message = $"Not enough Pokemons to trigger a lucky egg. Were needed {deltaPokemonsToUseLuckyEgg} more"
+                                Message = session.Translation.GetTranslation(TranslationString.CatchMorePokemonToUseLuckyEgg,
+                                    deltaPokemonToUseLuckyEgg)
                             });
                         }
                     }
