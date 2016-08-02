@@ -26,7 +26,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "No se encontraron poképaradas disponibles en tu área. ¿Has configurado una distancia máxima demasiado pequeña?"
+      "Value": "No se encontraron Poképaradas disponibles en tu área. ¿Has configurado una distancia máxima demasiado pequeña?"
     },
     {
       "Key": "eventFortUsed",
@@ -198,7 +198,7 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "Sesión iniciada como {0}"
+      "Value": "Autenticando con {0}"
     },
     {
       "Key": "ptcOffline",
@@ -206,11 +206,11 @@
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "Intentar de nuevo en {0} segundos..."
+      "Value": "Intentando de nuevo en {0} segundos..."
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Cuenta no verificada! Saliendo..."
+      "Value": "¡Cuenta no verificada! Saliendo..."
     },
     {
       "Key": "openingGoogleDevicePage",
@@ -238,7 +238,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Perfecto! Ya tienes la versión más reciente {0}"
+      "Value": "¡Perfecto! Ya tienes la versión más reciente {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -266,7 +266,7 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Buscando incienso para pokémon..."
+      "Value": "Buscando incienso para Pokémon..."
     },
     {
       "Key": "lookingForPokemon",
@@ -274,7 +274,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Buscando Cebos pokémon..."
+      "Value": "Buscando Cebos Pokémon..."
     },
     {
       "Key": "pokemonSkipped",
@@ -314,7 +314,7 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Se encontró un problema: Cebo pokémon {0}"
+      "Value": "Se encontró un problema: Cebo Pokémon {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -386,7 +386,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Como tiene habilitada la verificación en dos pasos de Google, tendrá que insertar una contraseña específica de la APP en el auth.json"
+      "Value": "Como tiene habilitada la verificación en dos pasos de Google, tendrá que insertar una contraseña de aplicación específica en el auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
