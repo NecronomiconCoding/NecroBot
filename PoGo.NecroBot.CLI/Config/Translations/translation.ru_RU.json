@@ -387,5 +387,6 @@
       "Key": "noPokemonToSnipe",
       "Value": "[Снайпер] Покемона для отлова не обнаружено!"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

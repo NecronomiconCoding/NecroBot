@@ -2,6 +2,9 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,6 +18,8 @@ namespace PoGo.NecroBot.Logic.Common
         string GetTranslation(TranslationString translationString, params object[] data);
 
         string GetTranslation(TranslationString translationString);
+
+        string GetPokemonTranslation(POGOProtos.Enums.PokemonId id);
     }
 
     public enum TranslationString
@@ -26,6 +31,7 @@ namespace PoGo.NecroBot.Logic.Common
         LogLevelDebug,
         LogLevelPokestop,
         WrongAuthType,
+        LoginInvalid,
         FarmPokestopsOutsideRadius,
         FarmPokestopsNoUsableFound,
         EventFortUsed,
@@ -144,7 +150,7 @@ namespace PoGo.NecroBot.Logic.Common
         PkmPotentialEvolveCount,
         PkmNotEnoughRessources,
         EventUsedIncense,
-        SnipeServerOffline
+        SnipeServerOffline,
     }
 
     public class Translation : ITranslation
@@ -164,12 +170,13 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.MasterPokeball, "MasterBall"),
             new KeyValuePair<TranslationString, string>(TranslationString.WrongAuthType,
                 "Unknown AuthType in config.json"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LoginInvalid, "User credentials are invalid and login failed."),
             new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsOutsideRadius,
                 "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your LastPos.ini file correct?"),
             new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsNoUsableFound,
                 "No usable PokeStops found in your area. Is your maximum distance too small?"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortUsed,
-                "Name: {0} XP: {1}, Gems: {2}, Items: {3}"),
+                "Name: {0} XP: {1}, Gems: {2}, Items: {3}, Lat: {4}, Long: {5}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortFailed,
                 "Name: {0} INFO: Looting failed, possible softban. Unban in: {1}/{2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortTargeted,
@@ -187,7 +194,7 @@ namespace PoGo.NecroBot.Logic.Common
                 "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventItemRecycled, "{0}x {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCapture,
-                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11}"),
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} | lat: {12} long: {13}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
                 "No Pokeballs - We missed a {0} with CP {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.WaitingForMorePokemonToEvolve,
@@ -345,13 +352,173 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.UseIncenseActive, "Incense Already Active"),
             new KeyValuePair<TranslationString, string>(TranslationString.UseIncenseAmount, "Incense in Inventory: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.UsedIncense, "Used an Incense"),
-            new KeyValuePair<TranslationString, string>(TranslationString.AmountPkmSeenCaught, 
+            new KeyValuePair<TranslationString, string>(TranslationString.AmountPkmSeenCaught,
                 "Amount of Pokemon Seen: {0}/151, Amount of Pokemon Caught: {1}/151"),
-            new KeyValuePair<TranslationString, string>(TranslationString.PkmPotentialEvolveCount, 
+            new KeyValuePair<TranslationString, string>(TranslationString.PkmPotentialEvolveCount,
                 "[Evolves] Potential Evolves: {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.PkmNotEnoughRessources, 
+            new KeyValuePair<TranslationString, string>(TranslationString.PkmNotEnoughRessources,
                 "Pokemon Upgrade Failed Not Enough Resources"),
             new KeyValuePair<TranslationString, string>(TranslationString.SnipeServerOffline, "Sniping server is offline. Skipping...")
+        };
+
+        [JsonProperty("PokemonStrings",
+            ItemTypeNameHandling = TypeNameHandling.Arrays,
+            ItemConverterType = typeof(KeyValuePairConverter),
+            ObjectCreationHandling = ObjectCreationHandling.Replace,
+            DefaultValueHandling = DefaultValueHandling.Populate)]
+        private readonly List<KeyValuePair<POGOProtos.Enums.PokemonId, string>> _pokemonTranslationStrings = new List<KeyValuePair<POGOProtos.Enums.PokemonId, string>>()
+        {
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)001,"Bulbasaur"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)002,"Ivysaur"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)003,"Venusaur"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)004,"Charmander"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)005,"Charmeleon"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)006,"Charizard"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)007,"Squirtle"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)008,"Wartortle"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)009,"Blastoise"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)010,"Caterpie"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)011,"Metapod"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)012,"Butterfree"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)013,"Weedle"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)014,"Kakuna"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)015,"Beedrill"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)016,"Pidgey"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)017,"Pidgeotto"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)018,"Pidgeot"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)019,"Rattata"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)020,"Raticate"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)021,"Spearow"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)022,"Fearow"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)023,"Ekans"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)024,"Arbok"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)025,"Pikachu"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)026,"Raichu"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)027,"Sandshrew"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)028,"Sandslash"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)029,"NidoranF"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)030,"Nidorina"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)031,"Nidoqueen"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)032,"NidoranM"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)033,"Nidorino"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)034,"Nidoking"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)035,"Clefairy"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)036,"Clefable"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)037,"Vulpix"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)038,"Ninetales"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)039,"Jigglypuff"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)040,"Wigglytuff"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)041,"Zubat"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)042,"Golbat"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)043,"Oddish"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)044,"Gloom"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)045,"Vileplume"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)046,"Paras"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)047,"Parasect"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)048,"Venonat"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)049,"Venomoth"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)050,"Diglett"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)051,"Dugtrio"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)052,"Meowth"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)053,"Persian"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)054,"Psyduck"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)055,"Golduck"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)056,"Mankey"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)057,"Primeape"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)058,"Growlithe"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)059,"Arcanine"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)060,"Poliwag"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)061,"Poliwhirl"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)062,"Poliwrath"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)063,"Abra"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)064,"Kadabra"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)065,"Alakazam"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)066,"Machop"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)067,"Machoke"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)068,"Machamp"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)069,"Bellsprout"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)070,"Weepinbell"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)071,"Victreebel"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)072,"Tentacool"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)073,"Tentacruel"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)074,"Geodude"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)075,"Graveler"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)076,"Golem"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)077,"Ponyta"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)078,"Rapidash"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)079,"Slowpoke"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)080,"Slowbro"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)081,"Magnemite"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)082,"Magneton"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)083,"Farfetchd"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)084,"Doduo"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)085,"Dodrio"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)086,"Seel"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)087,"Dewgong"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)088,"Grimer"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)089,"Muk"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)090,"Shellder"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)091,"Cloyster"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)092,"Gastly"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)093,"Haunter"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)094,"Gengar"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)095,"Onix"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)096,"Drowzee"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)097,"Hypno"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)098,"Krabby"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)099,"Kingler"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)100,"Voltorb"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)101,"Electrode"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)102,"Exeggcute"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)103,"Exeggutor"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)104,"Cubone"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)105,"Marowak"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)106,"Hitmonlee"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)107,"Hitmonchan"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)108,"Lickitung"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)109,"Koffing"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)110,"Weezing"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)111,"Rhyhorn"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)112,"Rhydon"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)113,"Chansey"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)114,"Tangela"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)115,"Kangaskhan"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)116,"Horsea"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)117,"Seadra"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)118,"Goldeen"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)119,"Seaking"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)120,"Staryu"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)121,"Starmie"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)122,"Mr. Mime"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)123,"Scyther"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)124,"Jynx"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)125,"Electabuzz"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)126,"Magmar"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)127,"Pinsir"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)128,"Tauros"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)129,"Magikarp"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)130,"Gyarados"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)131,"Lapras"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)132,"Ditto"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)133,"Eevee"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)134,"Vaporeon"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)135,"Jolteon"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)136,"Flareon"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)137,"Porygon"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)138,"Omanyte"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)139,"Omastar"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)140,"Kabuto"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)141,"Kabutops"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)142,"Aerodactyl"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)143,"Snorlax"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)144,"Articuno"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)145,"Zapdos"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)146,"Moltres"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)147,"Dratini"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)148,"Dragonair"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)149,"Dragonite"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)150,"Mewtwo"),
+            new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)151,"Mew"),
         };
 
         public string GetTranslation(TranslationString translationString, params object[] data)
@@ -368,6 +535,12 @@ namespace PoGo.NecroBot.Logic.Common
             return translation != default(string) ? translation : $"Translation for {translationString} is missing";
         }
 
+        public string GetPokemonTranslation(POGOProtos.Enums.PokemonId id)
+        {
+            var translation = _pokemonTranslationStrings.FirstOrDefault(t => t.Key.Equals(id)).Value;
+            return translation != default(string) ? translation : $"Translation for pokemon {id} is missing";
+        }
+
         public static Translation Load(ILogicSettings logicSettings)
         {
             var translationsLanguageCode = logicSettings.TranslationLanguageCode;
@@ -380,28 +553,68 @@ namespace PoGo.NecroBot.Logic.Common
                 var input = File.ReadAllText(fullPath);
 
                 var jsonSettings = new JsonSerializerSettings();
-                jsonSettings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
+                jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
                 jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                 jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
-                translations = JsonConvert.DeserializeObject<Translation>(input, jsonSettings);
-                //TODO make json to fill default values as it won't do it now
-                new Translation()._translationStrings.Where(
-                    item => translations._translationStrings.All(a => a.Key != item.Key))
-                    .ToList()
-                    .ForEach(translations._translationStrings.Add);
+
+                try
+                {
+                    translations = JsonConvert.DeserializeObject<Translation>( input, jsonSettings );
+                    //TODO make json to fill default values as it won't do it now
+                    new Translation()._translationStrings.Where(
+                        item => translations._translationStrings.All( a => a.Key != item.Key ) )
+                        .ToList()
+                        .ForEach( translations._translationStrings.Add );
+                    new Translation()._pokemonTranslationStrings.Where(
+                        item => translations._pokemonTranslationStrings.All( a => a.Key != item.Key ) )
+                        .ToList()
+                        .ForEach( translations._pokemonTranslationStrings.Add );
+                }
+                catch( JsonException )
+                {
+                    Logger.Write( "[ERROR] Issue loading translations", LogLevel.Error );
+
+                    switch( translationsLanguageCode )
+                    {
+                        case "en":
+                            Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
+
+                            string strInput = Console.ReadLine().ToLower();
+
+                            if( strInput.Equals( "y" ) )
+                            {
+                                // Currently this section can only rebuild the EN translations file \\
+                                // This is because default values cannot be supplied from other languages \\
+                                Logger.Write( "Loading fresh translations and continuing" );
+                                translations = new Translation();
+                                translations.Save( Path.Combine( translationPath, "translation.en.json" ) );
+                            }
+                            else
+                            {
+                                ErrorHandler.ThrowFatalError( null, 3 );
+                                return null;
+                            }
+
+                            break;
+                        default:
+                            ErrorHandler.ThrowFatalError( "[ERROR] No replacement translations: Check appropriate files for typos", 5 );
+                            return null;
+                    }
+                }
             }
             else
             {
                 translations = new Translation();
                 translations.Save(Path.Combine(translationPath, "translation.en.json"));
             }
+
             return translations;
         }
 
         public void Save(string fullPath)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented,
-                new StringEnumConverter {CamelCaseText = true});
+                new StringEnumConverter { CamelCaseText = true });
 
             var folder = Path.GetDirectoryName(fullPath);
             if (folder != null && !Directory.Exists(folder))

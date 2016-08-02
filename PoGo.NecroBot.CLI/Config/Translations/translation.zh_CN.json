@@ -380,5 +380,6 @@
       "Key": "noPokemonToSnipe",
       "Value": "[狙击手] 没有找到特殊宠物！"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

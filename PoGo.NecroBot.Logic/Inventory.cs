@@ -74,7 +74,7 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer(
             bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCp = false,
-            IEnumerable<PokemonId> filter = null)
+            IEnumerable<PokemonId> filter = null, IEnumerable<PokemonId> evolultionFilter = null)
         {
             var myPokemon = await GetPokemons();
 
@@ -91,6 +91,9 @@ namespace PoGo.NecroBot.Logic
             if (filter != null)
                 pokemonFiltered = pokemonFiltered.Where(p => !filter.Contains(p.PokemonId));
 
+            if (evolultionFilter != null && keepPokemonsThatCanEvolve)
+                pokemonFiltered = pokemonFiltered.Where(p => !evolultionFilter.Contains(p.PokemonId));
+
             var pokemonList = pokemonFiltered.ToList();
 
             var results = new List<PokemonData>();
@@ -106,6 +109,7 @@ namespace PoGo.NecroBot.Logic
             {
                 var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
                 var amountToSkip = GetPokemonTransferFilter(pokemon.Key).KeepMinDuplicatePokemon;
+                var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
 
                 var transferrablePokemonTypeCount = pokemonFiltered.Where(p => p.PokemonId == pokemon.Key).Count();
                 var currentPokemonTypeCount = myPokemon.Where(p => p.PokemonId == pokemon.Key).Count();
@@ -122,10 +126,14 @@ namespace PoGo.NecroBot.Logic
 
                 // Fail safe
                 if (amountToSkip < 0) amountToSkip = 0;
-                    
-                // Don't get rid of it if we can evolve it
-                if (keepPokemonsThatCanEvolve && settings.EvolutionIds.Count != 0)
-                    continue;
+
+                // Check if we want to evolve this type of Pokemon before we transfer it
+                if (settings.EvolutionIds.Count != 0 && settings.CandyToEvolve > 0 && _logicSettings.PokemonsToEvolve.Contains(pokemon.Key))
+                {
+                    var amountPossible = (familyCandy.Candy_ - 1) / (settings.CandyToEvolve - 1);
+                    if (amountPossible > amountToSkip)
+                        amountToSkip = amountPossible+1;
+                }
 
                 if (prioritizeIVoverCp)
                 {
@@ -232,10 +240,10 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<IEnumerable<ItemData>> GetItemsToRecycle(ISession session)
         {
-            var itemsToRecylce = new List<ItemData>();
+            var itemsToRecycle = new List<ItemData>();
             var myItems = (await GetItems()).ToList();
 
-            var otherItemsToRecylce = myItems
+            var otherItemsToRecycle = myItems
                 .Where(x => _logicSettings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
                 .Select(
                     x =>
@@ -246,9 +254,9 @@ namespace PoGo.NecroBot.Logic
                             Unseen = x.Unseen
                         });
 
-            itemsToRecylce.AddRange(otherItemsToRecylce);
+            itemsToRecycle.AddRange(otherItemsToRecycle);
 
-            return itemsToRecylce;
+            return itemsToRecycle;
         }
 
         public double GetPerfect(PokemonData poke)
