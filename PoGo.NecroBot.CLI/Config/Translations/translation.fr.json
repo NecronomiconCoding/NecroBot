@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} {1}m"
+      "Value": "{0} {1}m | {2}s"
     },
     {
       "Key": "eventProfileLogin",
@@ -51,6 +51,10 @@
     {
       "Key": "EventUsedIncense",
       "Value": "Utilisation d'un encens, reste : {0}"
+    },
+    {
+      "Key": "SnipeServerOffline",
+      "Value": "[Sniper] Le serveur est inaccessible." 
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -75,6 +79,18 @@
     {
       "Key": "eventNoPokeballs",
       "Value": "Plus de Pokeball - {0} PC{1} manqué"
+    },
+    {
+      "Key": "WaitingForMorePokemonToEvolve",
+      "Value": "Encore {1} Pokemon à capturer pour en évoluer {0} d'un coup ! ({2}/{3} pour {4}% de votre inventaire)"
+    },
+    {
+      "Key": "UseLuckyEggsMinPokemonAmountTooHigh",
+      "Value": "Un Oeuf Chance ne peut être utiliser avec UseLuckyEggsMinPokemonAmount = {0}, utilisez plutôt une valeur <= à {1}"
+    },
+    {
+      "Key": "CatchMorePokemonToUseLuckyEgg",
+      "Value": "Encore {0} Pokemon à capturer pour pouvoir utiliser un Oeuf Chance!"
     },
     {
       "Key": "catchStatusAttempt",
@@ -202,11 +218,11 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Le compte n'est pas vérifié ! Arrêt en cours..."
+      "Value": "Votre compte n'est pas vérifié ! Arrêt en cours..."
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Chemin réaliste détecté, utilisation du fichier UserSettings.settings"
+      "Value": "Detected realistic Traveling, using Default Settings inside config.json"
     },
     {
       "Key": "notRealisticTravel",
@@ -226,7 +242,7 @@
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Téléchargement de la mise à jour..."
+      "Value": "Téléchargement d'une nouvelle mise à jour en cours..."
     },
     {
       "Key": "finishedDownloadingRelease",
