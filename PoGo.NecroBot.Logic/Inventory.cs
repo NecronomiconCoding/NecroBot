@@ -416,7 +416,7 @@ namespace PoGo.NecroBot.Logic
                 return _logicSettings.PokemonsTransferFilter[pokemon];
             }
             return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinIvPercentage,
-                _logicSettings.KeepMinDuplicatePokemon);
+                _logicSettings.KeepMinOperator, _logicSettings.KeepMinDuplicatePokemon);
         }
 
         public async Task<GetInventoryResponse> RefreshCachedInventory()

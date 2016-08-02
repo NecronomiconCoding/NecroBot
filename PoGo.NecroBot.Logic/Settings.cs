@@ -399,29 +399,29 @@ namespace PoGo.NecroBot.Logic
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
         {
             //criteria: based on NY Central Park and Tokyo variety + sniping optimization
-            {PokemonId.Golduck, new TransferFilter(1800, 95, 1)},
-            {PokemonId.Farfetchd, new TransferFilter(1250, 80, 1)},
-            {PokemonId.Krabby, new TransferFilter(1250, 95, 1)},
-            {PokemonId.Kangaskhan, new TransferFilter(1500, 60, 1)},
-            {PokemonId.Horsea, new TransferFilter(1250, 95, 1)},
-            {PokemonId.Staryu, new TransferFilter(1250, 95, 1)},
-            {PokemonId.MrMime, new TransferFilter(1250, 40, 1)},
-            {PokemonId.Scyther, new TransferFilter(1800, 80, 1)},
-            {PokemonId.Jynx, new TransferFilter(1250, 95, 1)},
-            {PokemonId.Electabuzz, new TransferFilter(1250, 80, 1)},
-            {PokemonId.Magmar, new TransferFilter(1500, 80, 1)},
-            {PokemonId.Pinsir, new TransferFilter(1800, 95, 1)},
-            {PokemonId.Tauros, new TransferFilter(1250, 90, 1)},
-            {PokemonId.Magikarp, new TransferFilter(200, 95, 1)},
-            {PokemonId.Gyarados, new TransferFilter(1250, 90, 1)},
-            {PokemonId.Lapras, new TransferFilter(1800, 80, 1)},
-            {PokemonId.Eevee, new TransferFilter(1250, 95, 1)},
-            {PokemonId.Vaporeon, new TransferFilter(1500, 90, 1)},
-            {PokemonId.Jolteon, new TransferFilter(1500, 90, 1)},
-            {PokemonId.Flareon, new TransferFilter(1500, 90, 1)},
-            {PokemonId.Porygon, new TransferFilter(1250, 60, 1)},
-            {PokemonId.Snorlax, new TransferFilter(2600, 90, 1)},
-            {PokemonId.Dragonite, new TransferFilter(2600, 90, 1)}
+            {PokemonId.Golduck, new TransferFilter(1800, 95, "or", 1)},
+            {PokemonId.Farfetchd, new TransferFilter(1250, 80, "or", 1)},
+            {PokemonId.Krabby, new TransferFilter(1250, 95, "or", 1)},
+            {PokemonId.Kangaskhan, new TransferFilter(1500, 60, "or", 1)},
+            {PokemonId.Horsea, new TransferFilter(1250, 95, "or", 1)},
+            {PokemonId.Staryu, new TransferFilter(1250, 95, "or", 1)},
+            {PokemonId.MrMime, new TransferFilter(1250, 40, "or", 1)},
+            {PokemonId.Scyther, new TransferFilter(1800, 80, "or", 1)},
+            {PokemonId.Jynx, new TransferFilter(1250, 95, "or", 1)},
+            {PokemonId.Electabuzz, new TransferFilter(1250, 80, "or", 1)},
+            {PokemonId.Magmar, new TransferFilter(1500, 80, "or", 1)},
+            {PokemonId.Pinsir, new TransferFilter(1800, 95, "or", 1)},
+            {PokemonId.Tauros, new TransferFilter(1250, 90, "or", 1)},
+            {PokemonId.Magikarp, new TransferFilter(200, 95, "or", 1)},
+            {PokemonId.Gyarados, new TransferFilter(1250, 90, "or", 1)},
+            {PokemonId.Lapras, new TransferFilter(1800, 80, "or", 1)},
+            {PokemonId.Eevee, new TransferFilter(1250, 95, "or", 1)},
+            {PokemonId.Vaporeon, new TransferFilter(1500, 90, "or", 1)},
+            {PokemonId.Jolteon, new TransferFilter(1500, 90, "or", 1)},
+            {PokemonId.Flareon, new TransferFilter(1500, 90, "or", 1)},
+            {PokemonId.Porygon, new TransferFilter(1250, 60, "or", 1)},
+            {PokemonId.Snorlax, new TransferFilter(2600, 90, "or", 1)},
+            {PokemonId.Dragonite, new TransferFilter(2600, 90, "or", 1)}
         };
 
         public SnipeSettings PokemonToSnipe = new SnipeSettings
@@ -544,6 +544,10 @@ namespace PoGo.NecroBot.Logic
                     settings = JsonConvert.DeserializeObject<GlobalSettings>( input, jsonSettings );
 
                     //This makes sure that existing config files dont get null values which lead to an exception
+                    foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.KeepMinOperator == null))
+                    {
+                        filter.Value.KeepMinOperator = "or";
+                    }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
                     {
                         filter.Value.Moves = new List<PokemonMove>();
