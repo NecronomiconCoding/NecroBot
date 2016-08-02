@@ -112,7 +112,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(true)]
         public bool TransferConfigAndAuthOnUpdate;
         //pressakeyshit
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool StartupWelcomeDelay;
         //console options
         [DefaultValue(10)]
@@ -143,7 +143,7 @@ namespace PoGo.NecroBot.Logic
         public double DefaultLatitude;
         [DefaultValue(-73.968285)]
         public double DefaultLongitude;
-        [DefaultValue(15.0)]
+        [DefaultValue(31.0)]
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
@@ -250,9 +250,9 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(50)]
         public int TotalAmountOfBerriesToKeep;
         //balls
-        [DefaultValue(750)]
-        public int UseGreatBallAboveCp;
         [DefaultValue(1000)]
+        public int UseGreatBallAboveCp;
+        [DefaultValue(1250)]
         public int UseUltraBallAboveCp;
         [DefaultValue(1500)]
         public int UseMasterBallAboveCp;
@@ -308,21 +308,21 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Venusaur,
             PokemonId.Charizard,
             PokemonId.Blastoise,
-            PokemonId.Nidoqueen,
-            PokemonId.Nidoking,
+            //PokemonId.Nidoqueen,
+            //PokemonId.Nidoking,
             PokemonId.Clefable,
-            PokemonId.Vileplume,
+            //PokemonId.Vileplume,
             //PokemonId.Golduck,
-            PokemonId.Arcanine,
-            PokemonId.Poliwrath,
-            PokemonId.Machamp,
-            PokemonId.Victreebel,
-            PokemonId.Golem,
-            PokemonId.Slowbro,
+            //PokemonId.Arcanine,
+            //PokemonId.Poliwrath,
+            //PokemonId.Machamp,
+            //PokemonId.Victreebel,
+            //PokemonId.Golem,
+            //PokemonId.Slowbro,
             //PokemonId.Farfetchd,
             PokemonId.Muk,
-            PokemonId.Exeggutor,
-            PokemonId.Lickitung,
+            //PokemonId.Exeggutor,
+            //PokemonId.Lickitung,
             PokemonId.Chansey,
             //PokemonId.Kangaskhan,
             //PokemonId.MrMime,
@@ -410,7 +410,7 @@ namespace PoGo.NecroBot.Logic
             {PokemonId.Magmar, new TransferFilter(1500, 80, 1)},
             {PokemonId.Pinsir, new TransferFilter(1800, 95, 1)},
             {PokemonId.Tauros, new TransferFilter(1250, 90, 1)},
-            {PokemonId.Magikarp, new TransferFilter(1250, 95, 1)},
+            {PokemonId.Magikarp, new TransferFilter(200, 95, 1)},
             {PokemonId.Gyarados, new TransferFilter(1250, 90, 1)},
             {PokemonId.Lapras, new TransferFilter(1800, 80, 1)},
             {PokemonId.Eevee, new TransferFilter(1250, 95, 1)},
