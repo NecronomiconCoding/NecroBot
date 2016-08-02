@@ -96,7 +96,6 @@ namespace PoGo.NecroBot.Logic
 
                     if (functionExecutedWhileWalking != null)
                         await functionExecutedWhileWalking(); // look for pokemon
-                    await Task.Delay(500, cancellationToken);
                 } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
                 return result;
@@ -180,7 +179,6 @@ namespace PoGo.NecroBot.Logic
                 if (functionExecutedWhileWalking != null)
                     await functionExecutedWhileWalking(); // look for pokemon & hit stops
 
-                await Task.Delay(500, cancellationToken);
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
             return result;
