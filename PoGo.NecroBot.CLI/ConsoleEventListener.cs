@@ -113,9 +113,11 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(FortTargetEvent fortTargetEvent, ISession session)
         {
+            int intTimeForArrival = (int) ( fortTargetEvent.Distance / ( session.LogicSettings.WalkingSpeedInKilometerPerHour * 0.277778 ) );
+
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortTargeted, fortTargetEvent.Name,
-                    Math.Round(fortTargetEvent.Distance)),
+                    Math.Round(fortTargetEvent.Distance), intTimeForArrival ),
                 LogLevel.Info, ConsoleColor.DarkRed);
         }
 
@@ -257,10 +259,7 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(EvolveCountEvent evolveCountEvent, ISession session )
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.PkmPotentialEvolveCount, evolveCountEvent.Evolves) + 
-                ( session.LogicSettings.UseLuckyEggsWhileEvolving ? 
-                    $" | {session.LogicSettings.UseLuckyEggsMinPokemonAmount} required for mass evolving" 
-                    : "" ), LogLevel.Update, ConsoleColor.White );
+            Logger.Write(session.Translation.GetTranslation(TranslationString.PkmPotentialEvolveCount, evolveCountEvent.Evolves), LogLevel.Update, ConsoleColor.White);
         }
 
         private static void HandleEvent(UpdateEvent updateEvent, ISession session)
