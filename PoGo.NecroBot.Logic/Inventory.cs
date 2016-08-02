@@ -331,25 +331,25 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<IEnumerable<PokemonData>> GetPokemonToEvolve(IEnumerable<PokemonId> filter = null)
         {
-            var myPokemons = await GetPokemons();
-            myPokemons = myPokemons.Where(p => p.DeployedFortId == string.Empty).OrderByDescending(p => p.Cp);
+            var myPokemon = await GetPokemons();
+            myPokemon = myPokemon.Where(p => p.DeployedFortId == string.Empty).OrderByDescending(p => p.Cp);
             //Don't evolve pokemon in gyms
             IEnumerable<PokemonId> pokemonIds = filter as PokemonId[] ?? filter.ToArray();
             if (pokemonIds.Any())
             {
-                myPokemons =
-                    myPokemons.Where(
+                myPokemon =
+                    myPokemon.Where(
                         p => (_logicSettings.EvolveAllPokemonWithEnoughCandy && pokemonIds.Contains(p.PokemonId)) ||
                              (_logicSettings.EvolveAllPokemonAboveIv &&
                               (PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.EvolveAboveIvValue)));
             }
             else if (_logicSettings.EvolveAllPokemonAboveIv)
             {
-                myPokemons =
-                    myPokemons.Where(
+                myPokemon =
+                    myPokemon.Where(
                         p => PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.EvolveAboveIvValue);
             }
-            var pokemons = myPokemons.ToList();
+            var pokemons = myPokemon.ToList();
 
             var myPokemonSettings = await GetPokemonSettings();
             var pokemonSettings = myPokemonSettings.ToList();
@@ -379,6 +379,29 @@ namespace PoGo.NecroBot.Logic
             }
 
             return pokemonToEvolve;
+        }
+
+        public async Task<List<PokemonData>> GetPokemonToUpgrade()
+        {
+            var upgradePokemon = new List<PokemonData>();
+
+            if (!_logicSettings.AutomaticallyLevelUpPokemon)
+                return upgradePokemon;
+
+            var myPokemon = await GetPokemons();
+            myPokemon = myPokemon.Where(p => p.DeployedFortId == string.Empty);
+
+            IEnumerable<PokemonData> highestPokemonForUpgrade = (_logicSettings.UpgradePokemonMinimumStatsOperator.ToLower().Equals("and")) ?
+                myPokemon.Where(
+                        p => (p.Cp >= _logicSettings.UpgradePokemonCpMinimum &&
+                            PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.UpgradePokemonIvMinimum)).OrderByDescending(p => p.Cp).ToList() :
+                myPokemon.Where(
+                    p => (p.Cp >= _logicSettings.UpgradePokemonCpMinimum ||
+                        PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.UpgradePokemonIvMinimum)).OrderByDescending(p => p.Cp).ToList();
+
+            return upgradePokemon = (_logicSettings.LevelUpByCPorIv.ToLower().Equals("iv")) ?
+                    highestPokemonForUpgrade.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(_logicSettings.AmountOfTimesToUpgradeLoop).ToList() :
+                    highestPokemonForUpgrade.Take(_logicSettings.AmountOfTimesToUpgradeLoop).ToList();
         }
 
         public TransferFilter GetPokemonTransferFilter(PokemonId pokemon)
