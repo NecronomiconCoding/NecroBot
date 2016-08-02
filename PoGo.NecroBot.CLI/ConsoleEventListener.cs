@@ -52,10 +52,11 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(PokemonEvolveEvent pokemonEvolveEvent, ISession session)
         {
+            string strPokemon = session.Translation.GetPokemonTranslation(pokemonEvolveEvent.Id);
             Logger.Write(pokemonEvolveEvent.Result == EvolvePokemonResponse.Types.Result.Success
-                ? session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedSuccess, pokemonEvolveEvent.Id, pokemonEvolveEvent.Exp)
+                ? session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedSuccess, strPokemon, pokemonEvolveEvent.Exp)
                 : session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedFailed, pokemonEvolveEvent.Id, pokemonEvolveEvent.Result,
-                    session.Translation.GetPokemonTranslation(pokemonEvolveEvent.Id)),
+                    strPokemon),
                 LogLevel.Evolve);
         }
 
