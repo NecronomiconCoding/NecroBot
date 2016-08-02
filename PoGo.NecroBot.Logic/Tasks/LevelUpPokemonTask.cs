@@ -7,6 +7,7 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using System.Collections.Generic;
 using POGOProtos.Enums;
+using PoGo.NecroBot.Logic.Event;
 
 #endregion
 
@@ -28,24 +29,35 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var upgradeResult = await session.Inventory.UpgradePokemon(pokemon.Id);
                 if (upgradeResult.Result.ToString().ToLower().Contains("success"))
                 {
-                    Logger.Write("Pokemon Upgraded:" + session.Translation.GetPokemonTranslation(upgradeResult.UpgradedPokemon.PokemonId) + ":" +
-                                    upgradeResult.UpgradedPokemon.Cp);
+                    session.EventDispatcher.Send(new NoticeEvent()
+                    {
+                        Message = "Pokemon Upgraded:" + session.Translation.GetPokemonTranslation(upgradeResult.UpgradedPokemon.PokemonId) + ":" +
+                                    upgradeResult.UpgradedPokemon.Cp
+                    });
                 }
                 else if (upgradeResult.Result.ToString().ToLower().Contains("insufficient"))
                 {
-                    Logger.Write("Pokemon Upgrade Failed Not Enough Resources");
+                    session.EventDispatcher.Send(new NoticeEvent()
+                    {
+                        Message = "Pokemon Upgrade Failed Not Enough Resources"
+                    });
                     break;
                 }
                 else if (upgradeResult.Result.ToString().Contains("ErrorUpgradeNotAvailable"))
                 {
-                    Logger.Write("Pokemon Is At Max Level For Your Level");
+                    session.EventDispatcher.Send(new NoticeEvent()
+                    {
+                        Message = "Pokemon Is At Max Level For Your Level"
+                    });
                     break;
                 }
                 else
                 {
-                    Logger.Write(
-                        "Pokemon Upgrade Failed Unknown Error, Pokemon Could Be Max Level For Your Level The Pokemon That Caused Issue Was:" +
-                        session.Translation.GetPokemonTranslation(upgradeResult.UpgradedPokemon.PokemonId));
+                    session.EventDispatcher.Send(new NoticeEvent()
+                    {
+                        Message = "Pokemon Upgrade Failed Unknown Error, Pokemon Could Be Max Level For Your Level The Pokemon That Caused Issue Was:" +
+                        session.Translation.GetPokemonTranslation(upgradeResult.UpgradedPokemon.PokemonId)
+                    });
                     break;
                 }
             }

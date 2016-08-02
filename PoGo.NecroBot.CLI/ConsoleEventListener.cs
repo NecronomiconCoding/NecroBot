@@ -34,6 +34,11 @@ namespace PoGo.NecroBot.CLI
             Logger.Write(noticeEvent.ToString());
         }
 
+        private static void HandleEvent(DebugEvent debugEvent, ISession session)
+        {
+            Logger.Write(debugEvent.ToString(), LogLevel.Debug);
+        }
+
         private static void HandleEvent(WarnEvent warnEvent, ISession session)
         {
             Logger.Write(warnEvent.ToString(), LogLevel.Warning);

@@ -5,6 +5,7 @@ using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
 using POGOProtos.Networking.Responses;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Event;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -18,27 +19,42 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentAmountOfIncense = await session.Inventory.GetItemAmountByType(ItemId.ItemIncenseOrdinary);
             if (currentAmountOfIncense == 0)
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.NoIncenseAvailable));
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.NoIncenseAvailable)
+                });
                 return;
             }
             else
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.UseIncenseAmount, currentAmountOfIncense));
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.UseIncenseAmount, currentAmountOfIncense)
+                });
             }
 
             var UseIncense = await session.Inventory.UseIncenseConstantly();
 
             if (UseIncense.Result == UseIncenseResponse.Types.Result.Success)
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.UsedIncense));
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.UsedIncense)
+                });
             }
             else if (UseIncense.Result == UseIncenseResponse.Types.Result.NoneInInventory)
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.NoIncenseAvailable));
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.NoIncenseAvailable)
+                });
             }
             else if (UseIncense.Result == UseIncenseResponse.Types.Result.IncenseAlreadyActive || (UseIncense.AppliedIncense == null))
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.UseIncenseActive));
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.UseIncenseActive)
+                });
             }
         }
     }

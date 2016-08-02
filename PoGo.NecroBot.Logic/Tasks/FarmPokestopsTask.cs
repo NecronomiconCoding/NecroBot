@@ -35,9 +35,11 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (session.LogicSettings.MaxTravelDistanceInMeters != 0 &&
                 distanceFromStart > session.LogicSettings.MaxTravelDistanceInMeters)
             {
-                Logger.Write(
-                    session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
-                    LogLevel.Warning);
+                session.EventDispatcher.Send(new WarnEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
+                    RequireInput = false
+                });
                 
                 await session.Navigation.Move(
                     new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude),

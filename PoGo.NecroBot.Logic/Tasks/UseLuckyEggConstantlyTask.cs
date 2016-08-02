@@ -5,6 +5,7 @@ using POGOProtos.Inventory.Item;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.Common;
 using POGOProtos.Networking.Responses;
+using PoGo.NecroBot.Logic.Event;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -18,7 +19,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentAmountOfLuckyEggs = await session.Inventory.GetItemAmountByType(ItemId.ItemLuckyEgg);
             if (currentAmountOfLuckyEggs == 0)
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.NoEggsAvailable));
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.NoEggsAvailable)
+                });
                 return;
             }
             else
@@ -30,15 +34,24 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (UseEgg.Result == UseItemXpBoostResponse.Types.Result.Success)
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.UsedLuckyEgg));
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.UsedLuckyEgg)
+                });
             }
             else if (UseEgg.Result == UseItemXpBoostResponse.Types.Result.ErrorNoItemsRemaining)
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.NoEggsAvailable));
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.NoEggsAvailable)
+                });
             }
             else if (UseEgg.Result == UseItemXpBoostResponse.Types.Result.ErrorXpBoostAlreadyActive || (UseEgg.AppliedItems == null))
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.UseLuckyEggActive));
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.UseLuckyEggActive)
+                });
             }
         }
        

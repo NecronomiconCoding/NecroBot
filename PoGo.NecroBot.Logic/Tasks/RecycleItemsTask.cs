@@ -36,9 +36,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var currentAmountOfMasterballs = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
                 if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
+                    session.EventDispatcher.Send(new NoticeEvent()
+                    {
+                        Message = session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
                         currentAmountOfPokeballs, currentAmountOfGreatballs, currentAmountOfUltraballs,
-                        currentAmountOfMasterballs));
+                        currentAmountOfMasterballs)
+                    });
 
                 await OptimizedRecycleBalls(session, cancellationToken);
             }
