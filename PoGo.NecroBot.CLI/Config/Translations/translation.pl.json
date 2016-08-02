@@ -74,11 +74,11 @@
     },
     {
       "Key": "eventUseBerry",
-      "Value": "Użyto {0} | {1} pozostało"
+      "Value": "Użyto {0} | Pozostało {1}"
     },
     {
       "Key": "itemRazzBerry",
-      "Value": "Malina"
+      "Value": "Maliny"
     },
     {
       "Key": "catchStatusAttempt",
