@@ -61,6 +61,16 @@ namespace PoGo.NecroBot.Logic
                 inventory.InventoryDelta.InventoryItems.Remove(pokemon);
         }
 
+        public async Task<LevelUpRewardsResponse> GetLevelUpRewards(Inventory inv )
+        {
+            var GetData = await _client.Player.GetPlayer(); 
+
+            var ClientLevel = await _client.Player.GetPlayerProfile( GetData.PlayerData.Username );
+            var Rewards = await _client.Player.GetLevelUpRewards( inv.GetPlayerStats().Result.FirstOrDefault().Level );
+
+            return Rewards;
+
+        }
         private async Task<GetInventoryResponse> GetCachedInventory()
         {
             var now = DateTime.UtcNow;
