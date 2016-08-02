@@ -335,6 +335,10 @@
       "Value": "Pokemon {0} ({1}) berubah nama dari {2} to {3}."
     },
     {
+      "Key": "pokemonFavorite",
+      "Value": "{0}% sempurna {1} (CP {2}) *difavoritkan*."
+    },
+    {
       "Key": "pokemonIgnoreFilter",
       "Value": "[Pokemon ignore filter] - Mengacuhkan {0} seperti dijelaskan di pengaturan"
     },
