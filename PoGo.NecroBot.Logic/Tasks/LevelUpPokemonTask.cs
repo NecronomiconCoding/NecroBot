@@ -7,6 +7,7 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using System.Collections.Generic;
 using POGOProtos.Enums;
+using PoGo.NecroBot.Logic.PoGoUtils;
 
 #endregion
 
@@ -23,8 +24,19 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (upgradablePokemon.Count == 0)
                 return;
 
+            var myPokemonSettings = await session.Inventory.GetPokemonSettings();
+            var pokemonSettings = myPokemonSettings.ToList();
+
+            var myPokemonFamilies = await session.Inventory.GetPokemonFamilies();
+            var pokemonFamilies = myPokemonFamilies.ToArray();
+
             foreach (var pokemon in upgradablePokemon)
             {
+                if (PokemonInfo.CalculateMaxCp(pokemon) == pokemon.Cp) continue;
+
+                var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
+                var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
+
                 var upgradeResult = await session.Inventory.UpgradePokemon(pokemon.Id);
                 if (upgradeResult.Result.ToString().ToLower().Contains("success"))
                 {

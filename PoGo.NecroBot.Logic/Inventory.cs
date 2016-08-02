@@ -390,7 +390,7 @@ namespace PoGo.NecroBot.Logic
 
             var myPokemon = await GetPokemons();
             myPokemon = myPokemon.Where(p => p.DeployedFortId == string.Empty);
-
+            
             IEnumerable<PokemonData> highestPokemonForUpgrade = (_logicSettings.UpgradePokemonMinimumStatsOperator.ToLower().Equals("and")) ?
                 myPokemon.Where(
                         p => (p.Cp >= _logicSettings.UpgradePokemonCpMinimum &&
@@ -400,12 +400,13 @@ namespace PoGo.NecroBot.Logic
                         PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.UpgradePokemonIvMinimum)).OrderByDescending(p => p.Cp).ToList();
             /**
              * @todo make sure theres enough candy (see line 109)
-             * @todo make sure max cp hasnt been reached
              * @todo remove _logicSettings.AmountOfTimesToUpgradeLoop and use it as a count limitation in levelup loop for successes  instead
              * */
             return upgradePokemon = (_logicSettings.LevelUpByCPorIv.ToLower().Equals("iv")) ?
-                    highestPokemonForUpgrade.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(_logicSettings.AmountOfTimesToUpgradeLoop).ToList() :
-                    highestPokemonForUpgrade.Take(_logicSettings.AmountOfTimesToUpgradeLoop).ToList();
+                    highestPokemonForUpgrade.Where(p => (p.Cp < PokemonInfo.CalculateMaxCp(p)))
+                        .OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(_logicSettings.AmountOfTimesToUpgradeLoop).ToList() :
+                    highestPokemonForUpgrade.Where(p => (p.Cp < PokemonInfo.CalculateMaxCp(p)))
+                        .Take(_logicSettings.AmountOfTimesToUpgradeLoop).ToList();
         }
 
         public TransferFilter GetPokemonTransferFilter(PokemonId pokemon)
