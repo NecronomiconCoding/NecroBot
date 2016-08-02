@@ -30,24 +30,16 @@ namespace PoGo.NecroBot.Logic.State
 
             try
             {
-                switch (session.Settings.AuthType)
+                if (session.Settings.AuthType != AuthType.Google || session.Settings.AuthType != AuthType.Ptc)
                 {
-                    case AuthType.Ptc:
-                        await
-                            session.Client.Login.DoPtcLogin(session.Settings.PtcUsername,
-                                session.Settings.PtcPassword);
-                        break;
-                    case AuthType.Google:
-                        await
-                            session.Client.Login.DoGoogleLogin(session.Settings.GoogleUsername,
-                                session.Settings.GooglePassword);
-                        break;
-                    default:
-                        session.EventDispatcher.Send(new ErrorEvent
-                        {
-                            Message = session.Translation.GetTranslation(TranslationString.WrongAuthType)
-                        });
-                        return null;
+                    await session.Client.Login.DoLogin();
+                }
+                else
+                {
+                    session.EventDispatcher.Send(new ErrorEvent
+                    {
+                        Message = session.Translation.GetTranslation(TranslationString.WrongAuthType)
+                    });
                 }
             }
             catch (AggregateException ae)
@@ -64,8 +56,6 @@ namespace PoGo.NecroBot.Logic.State
                 {
                     Message = session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20)
                 });
-                await Task.Delay(20000, cancellationToken);
-                return this;
             }
             catch (AccountNotVerifiedException)
             {
