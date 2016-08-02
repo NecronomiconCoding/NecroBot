@@ -30,7 +30,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "{0} | {1}XP, Objets: {3} | {2}"
+      "Value": "{0} | {1}XP | {2} | Objets: {3} | Lat: {4}, Long: {5}"
     },
     {
       "Key": "eventFortFailed",
@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) |{1}-{2} | Lv {3} {6}% {4}/{5} | {7}% Chance sur {8}m | {10} {9} restant, {11}"
+      "Value": "({0}) |{1}-{2}| Lv {3} {6}% {4}/{5} | {7}% dist {8}m | {10} {9} restant | {11} | lat: {12} long: {13}""
     },
     {
       "Key": "eventNoPokeballs",

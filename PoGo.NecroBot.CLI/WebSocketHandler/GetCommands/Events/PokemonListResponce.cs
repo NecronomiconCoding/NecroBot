@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Events
+namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events
 {
     public class PokemonListResponce : IWebSocketResponce, IEvent
     {
