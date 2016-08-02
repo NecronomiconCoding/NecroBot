@@ -15,7 +15,6 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
         {
             var allItems = await session.Inventory.GetItems();
             webSocketSession.Send(EncodingHelper.Serialize(new ItemListResponce(allItems, requestID)));
-            await Task.Delay(500);
         }
     }
 }

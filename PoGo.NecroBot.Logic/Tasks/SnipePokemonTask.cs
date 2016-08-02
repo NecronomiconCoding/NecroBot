@@ -426,7 +426,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     // most likely System.IO.IOException
                     session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
                 }
-                await Task.Delay(5000, cancellationToken);
             }
         }
     }

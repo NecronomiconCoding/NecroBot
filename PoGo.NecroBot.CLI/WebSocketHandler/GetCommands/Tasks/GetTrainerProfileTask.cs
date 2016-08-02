@@ -19,7 +19,6 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
                 return;
             var tmpData = new TrainerProfileWeb(session.Profile.PlayerData, playerStats);
             webSocketSession.Send(EncodingHelper.Serialize(new TrainerProfileResponce(tmpData, requestID)));
-            await Task.Delay(500);
         }
     }
 }
