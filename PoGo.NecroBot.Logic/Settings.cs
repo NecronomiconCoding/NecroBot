@@ -1,19 +1,18 @@
 #region using directives
 
-using System;
-using System.Collections.Generic;
-using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using PoGo.NecroBot.Logic.Logging;
-using PokemonGo.RocketAPI;
-using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
+using PokemonGo.RocketAPI;
+using PokemonGo.RocketAPI.Enums;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Reflection;
-using System.Collections;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 
 #endregion
 
@@ -244,6 +243,8 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPotionsToKeep;
         [DefaultValue(60)]
         public int TotalAmountOfRevivesToKeep;
+        [DefaultValue(50)]
+        public int TotalAmountOfBerriesToKeep;
         //balls
         [DefaultValue(750)]
         public int UseGreatBallAboveCp;
@@ -768,5 +769,6 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokebalsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
+        public int TotalAmountOfBerriesToKeep => _settings.TotalAmountOfBerriesToKeep;
     }
 }

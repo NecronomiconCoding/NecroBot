@@ -1,9 +1,8 @@
 ﻿#region using directives
 
-using System.Collections.Generic;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-using POGOProtos.Settings.Master.Item;
+using System.Collections.Generic;
 
 #endregion
 
@@ -135,6 +134,7 @@ namespace PoGo.NecroBot.Logic
         int TotalAmountOfPokeballsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
+        int TotalAmountOfBerriesToKeep { get; }
 
         bool ShowPokeballCountsBeforeRecycle { get; }
         bool VerboseRecycling { get; }
