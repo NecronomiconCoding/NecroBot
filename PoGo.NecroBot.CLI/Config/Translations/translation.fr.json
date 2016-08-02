@@ -21,6 +21,10 @@
       "Value": "Vérifiez le champs AuthType dans auth.json"
     },
     {
+      "Key": "LoginInvalid",
+      "Value": "Vos identifiants Google ou Ptc sont invalides. Echec de connexion."
+    },
+    {
       "Key": "farmPokestopsOutsideRadius",
       "Value": "Vous dépassez votre rayon d'action! Début de la marche ({0}m de distance) dans 5 secondes. Vérifiez votre fichier LastPos.ini"
     },
@@ -283,6 +287,10 @@
     {
       "Key": "currentPokeballInv",
       "Value": "[Inventaire] Poké Balls: {0} | Super Balls: {1} | Hyper Balls: {2} | Master Balls: {3}"
+    },
+    {
+      "Key": "CurrentItemInv",
+      "Value": "[Inventaire] Potions: {0} | Rappels: {1} | Baies: {2} | Encens: {3} | Oeuf Chance: {4} | Leurres: {5}"
     },
     {
     	"Key": "MaxItemsCombinedOverMaxItemStorage",
