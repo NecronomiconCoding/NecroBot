@@ -73,7 +73,7 @@ namespace PoGo.NecroBot.Logic.Utils
 
                     if( Result.ToString().ToLower().Contains( "success" ) )
                     {
-                        Logger.Write( "Levelled up: " + stat.Level, LogLevel.Info );
+                        Logger.Write( "Leveled up: " + stat.Level, LogLevel.Info );
 
                         RepeatedField<ItemAward> items = Result.ItemsAwarded;
 
