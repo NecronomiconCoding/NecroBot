@@ -162,7 +162,7 @@ namespace PoGo.NecroBot.Logic
         public bool EvolveAllPokemonAboveIv;
         [DefaultValue(true)]
         public bool EvolveAllPokemonWithEnoughCandy;
-        [DefaultValue(0.90)]
+        [DefaultValue(90.0)]
         public double EvolveKeptPokemonsAtStorageUsagePercentage;
         [DefaultValue(false)]
         public bool KeepPokemonsThatCanEvolve;
@@ -185,7 +185,7 @@ namespace PoGo.NecroBot.Logic
         //recycle
         [DefaultValue(true)]
         public bool VerboseRecycling;
-        [DefaultValue(0.90)]
+        [DefaultValue(90.0)]
         public double RecycleInventoryAtUsagePercentage;
         //lucky, incense and berries
         [DefaultValue(true)]
@@ -563,10 +563,27 @@ namespace PoGo.NecroBot.Logic
 
             var firstRun = !File.Exists(configFile);
 
+            settings.migratePercentages();
+
             settings.Save(configFile);
             settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
 
             return firstRun ? null : settings;
+        }
+
+        /// <summary>
+        /// Method for issue #1966
+        /// </summary>
+        private void migratePercentages()
+        {
+            if (EvolveKeptPokemonsAtStorageUsagePercentage <= 1.0)
+            {
+                EvolveKeptPokemonsAtStorageUsagePercentage *= 100.0f;
+            }
+            if (RecycleInventoryAtUsagePercentage <= 1.0)
+            {
+                RecycleInventoryAtUsagePercentage *= 100.0f;
+            }
         }
 
         public void Save(string fullPath)
