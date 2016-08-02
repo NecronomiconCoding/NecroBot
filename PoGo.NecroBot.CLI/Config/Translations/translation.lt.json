@@ -1,0 +1,492 @@
+{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "PokeRutulys"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "DidysisRutulys"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "UltraRutulys"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "MasterRutulys"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "Nežinomas AuthType faile config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value": "Jūs esate už savo nustatyto spindulio! Einama į pradžią (už {0}m) po 5 sekundžių. Ar jūsų LastPos.ini failas teisingas?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Nerasta naudotinų PokeStotelių jūsų zonoje. Gal jūsų maksimalus atstumas per mažas?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "Pavadinimas: {0} XP: {1}, Gems: {2}, Daiktai: {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Pavadinimas: {0} INFO: Paėmimas nepavyko, įmanomas softban. Atblokuojama po: {1}/{2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "Atvykstama į Pokestotelę: {0} už ({1}m)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Žaidžiama už {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Panaudotas laimės kiaušinis, liko: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} sėkmingai už {1}xp"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Nepavyko {0}. Rezultatas buvo {1}, stabdoma evoliucionuoti {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Geriausias CP: {3}  IV: {4}%] (Saldainiai: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Šansas: {7}% | {8}m atst. | su {9} ({10} liko). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Nelikę Pokerutulių - Praleidom {0} su {1} CP"
+    },
+    {
+      "Key": "eventUseBerry",
+      "Value": "Panaudota {0} | {1} liko"
+    },
+    {
+      "Key": "itemRazzBerry",
+      "Value": "Razz Berry"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} Mėginimas #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Saldainiai: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Nenumatyti duomenys GPX faile, bandoma praleisti."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemonai"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "tobula"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "vardas"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "Nežinoma"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "Aukščiausi CP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Aukščiausi IV"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Aukščiausias lygis"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Įsitikinkite kad platuma ir plokštuma teisingos. Išjunkite programą jeigu ne! Platuma: {0} Plokštuma: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Dedamas kiaušinis į inkubatorių: {0:0.00}km liko"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Inkubatoriaus atnaujinimas: {0:0.00}km liko"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Inkubuotas kiaušinis išsirito: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "KLAIDA"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "DĖMESIO"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOTELĖ"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FERMINIMAS"
+    },
+    {
+      "Key": "logEntrySniper",
+      "Value": "SNAIPERIS"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "IŠMETIMAS"
+    },
+    {
+      "Key": "logEntryPkmn",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "ATIDUOTA"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "EVOLIUCIONUOTA"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "UOGA"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "KIAUŠINIS"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "ATNAUJINIMAS"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Jungiamasi naudojant {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "PTC serveriai tikriausiai nusmigę ARBA jūsų prisijungimo duomenys neteisingi. Pabandykite google"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Bandoma dar kartą po {0} sekundžių..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Paskyra nepatvirtinta! Uždaroma..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "Atidaromas Google Device puslapis. Prašome įterpti kodą naudodami CTRL+V"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "Nepavyko nukopijuoti į iškarpinę, padarykite tai rankiniu būdu"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "Eikit į: {0} ir įveskite {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Aptiktas realistiškas keliavimas, naudojama UserSettings.settings"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Nerealistiškas keliavimas {0}, naudojama paskutinę išsaugotą LastPos.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Koordinatės faile \"LastPos.ini\" klaidingos, naudojamos numatytosios koordinatės"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Puiku! Jūs jau turite naujausią versiją {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "Automatiniai atnaujinimai išjungti. Atsisiųskite naujausią versiją iš: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Parsiunčiamas ir taikomas atnaujinimas..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Baigė siųsti naujausia Release versija..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Baigė išpakuoti failus..."
+    },
+    {
+      "Key": "finishedTransferringConfig",
+      "Value": "Baigė perkelti jūsų konfigūraciją į naują versiją..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Atnaujinimas baigtas, dabar galite uždaryti šį langą."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Ieškoma smilkalų Pokemonų..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Ieškoma Pokemonų..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Ieškoma priviliotų Pokemonų..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Praleista {0}"
+    },
+    {
+      "Key": "zeroPokeballInv",
+      "Value": "Jūs neturite PokeRutulių inventoriuje, nebeįmanoma pagauti Pokemonų!"
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "[Dabartinis Inventorius] PokeRutuliai: {0} | DidiejiRutuliai: {1} | UltraRutuliai: {2} | MasterRutuliai: {3}"
+    },
+    {
+      "Key": "maxItemsCombinedOverMaxItemStorage",
+      "Value": "[Konfigūracija neteisinga] Jūsų maksimalūs daiktai (rutuliai+gėrimai+prikėlimai={0}) viršija jūsų saugyklą ({1})"
+    },
+    {
+      "Key": "recyclingQuietly",
+      "Value": "Išmetama tyliai..."
+    },
+    {
+      "Key": "checkingForBallsToRecycle",
+      "Value": "Tikrinami kamuoliai išmetimui, paliekama {0}"
+    },
+    {
+      "Key": "checkingForPotionsToRecycle",
+      "Value": "Tikrinami gėrimai išmetimui, paliekama {0}"
+    },
+    {
+      "Key": "checkingForRevivesToRecycle",
+      "Value": "Tikrinami prikėlimai išmetimui, paliekama {0}"
+    },
+    {
+      "Key": "pokeballsToKeepIncorrect",
+      "Value": "TotalAmountOfPokeballsToKeep sukonfigūruota neteisingai. Skaičius mažesnis už 1."
+    },
+    {
+      "Key": "potionsToKeepIncorrect",
+      "Value": "TotalAmountOfPotionsToKeep sukonfigūruota neteisingai. Skaičius mažesnis už 1."
+    },
+    {
+      "Key": "revivesToKeepIncorrect",
+      "Value": "TotalAmountOfRevivesToKeep sukonfigūruota neteisingai. Skaičius mažesnis už 1."
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Pokemonų inventorius pilnas, atiduodami Pokemonai..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "Pokemonų inventorius pilnas! Prašome atiduoti Pokemonus rankiniu būdu arba nustatyti TransferDuplicatePokemon į true nustatymuose..."
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "Inventorius pilnas, nepaimta jokių daiktų!"
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Susitikimo problema: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Susitikimo problema: Priviliotas Pokemonas {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Jūsų norimas tikslas {0}, {1} yra per toli nuo jūsų dabartinės pozicijos {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pokemonas {0} ({1}) pervadintas iš {2} į {3}."
+    },
+    {
+      "Key": "pokemonFavorite",
+      "Value": "{0}% tobulas {1} (CP {2}) *pažymėtas*."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Pokemonų ignoravimo filtras] - Ignoruojama {0}, kaip nustatyta nustatymuose"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "GaudymoBandymas"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "GaudymoKlaida"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "GaudymasIštrūko"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "GaudymasPaspruko"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "GaudymasNepataikyta"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "GaudymasPavyko"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "Normalus"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Priviliotas"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Smilkalų"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "Nepavyko paleisti WebSocketServer ant port'o : {0}"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - trukmė {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Dulkės: {5:n0} | Atiduota: {6:n0} | Išmesta: {7:n0}"
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (Pakils už {1}h {2}m | {3:n0}/{4:n0} XP)"
+    },
+    {
+      "Key": "requireInputText",
+      "Value": "Programa tęs darbą po mygtuko paspaudimo..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "Kadangi jūs įjungę Google Two Factor Auth, jums reikės nurodyti aplikacijai specifinį slaptažodį faile auth.json"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "Atidaroma Google aplikacijų slaptažodžiai. Sukurkite naują aplikacijos slaptažodį (naudokite Other kaip Device)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "Įsitikinkite kad įvedėte teisingą Email ir Slaptažodį."
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "Jums reikia užpildyti GoogleUsername ir GooglePassword faile auth.json!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "Jums reikia užpildyti PtcUsername ir PtcPassword faile auth.json!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "Skenuojama snaipinami Pokemonai taške {0}..."
+    },
+    {
+      "Key": "snipeScanEx",
+      "Value": "Snaipinamas {0} su {1} IV taške {2}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "Nerasta pokemonų snaipinimui!"
+    },
+    {
+      "Key": "notEnoughPokeballsToSnipe",
+      "Value": "Nepakanka pokerutulių kad pradėt snaipinti! ({0}/{1})"
+    },
+    {
+      "Key": "displayHighestMove1Header",
+      "Value": "MOVE1"
+    },
+    {
+      "Key": "displayHighestMove2Header",
+      "Value": "MOVE2"
+    },
+    {
+      "Key": "displayHighestCandy",
+      "Value": "Saldainiai"
+    },
+    {
+      "Key": "ipBannedError",
+      "Value": "Prisijungimas atmestas. Įmanoma, jog Niantic užblokavo jūsų IP. Išjungiama.."
+    },
+    {
+      "Key": "noEggsAvailable",
+      "Value": "Nėra kiaušinių"
+    },
+    {
+      "Key": "useLuckyEggActive",
+      "Value": "Laimės kiaušinis jau aktyvus"
+    },
+    {
+      "Key": "noIncenseAvailable",
+      "Value": "Nėra smilkalų"
+    },
+    {
+      "Key": "useIncenseActive",
+      "Value": "Smilkalai jau aktyvūs"
+    },
+    {
+      "Key": "amountPkmSeenCaught",
+      "Value": "Pokemonų matyta: {0}/151, Pokemonų pagauta: {1}/151"
+    },
+    {
+      "Key": "pkmPotentialEvolveCount",
+      "Value": "[Evoliucijos] Potencialios evoliucijos: {0}"
+    },
+    {
+      "Key": "pkmNotEnoughRessources",
+      "Value": "Pokemono pagerinimas nepavyko - nepakanka resursų"
+    }
+  ]
+}
