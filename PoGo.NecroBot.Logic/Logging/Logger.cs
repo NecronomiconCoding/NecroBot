@@ -37,6 +37,7 @@ namespace PoGo.NecroBot.Logic.Logging
                     }
                     _lastLogTime = DateTime.Now;
                     log.Flush();
+                    LogbufferList.Clear();
                 }
             }
         }
