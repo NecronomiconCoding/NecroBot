@@ -2,7 +2,8 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.State;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using PokemonGo.RocketAPI;
@@ -28,7 +29,7 @@ namespace PoGo.NecroBot.Logic
         public string PtcUsername;
         public string PtcPassword;
 
-        public void Load(string path)
+        public void Load(ISession session, string path)
         {
             try
             {
@@ -51,25 +52,25 @@ namespace PoGo.NecroBot.Logic
             }
             catch (JsonReaderException exception)
             {
+                string message;
+
                 if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcUsername"))
-                    Logger.Write("JSON Exception: You need to properly configure your PtcUsername using quotations.",
-                        LogLevel.Error);
+                    message = "JSON Exception: You need to properly configure your PtcUsername using quotations.";
                 else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcPassword"))
-                    Logger.Write(
-                        "JSON Exception: You need to properly configure your PtcPassword using quotations.",
-                        LogLevel.Error);
+                    message = "JSON Exception: You need to properly configure your PtcPassword using quotations.";
                 else if (exception.Message.Contains("Unexpected character") &&
                          exception.Message.Contains("GoogleUsername"))
-                    Logger.Write(
-                        "JSON Exception: You need to properly configure your GoogleUsername using quotations.",
-                        LogLevel.Error);
+                    message = "JSON Exception: You need to properly configure your GoogleUsername using quotations.";
                 else if (exception.Message.Contains("Unexpected character") &&
                          exception.Message.Contains("GooglePassword"))
-                    Logger.Write(
-                        "JSON Exception: You need to properly configure your GooglePassword using quotations.",
-                        LogLevel.Error);
+                    message = "JSON Exception: You need to properly configure your GooglePassword using quotations.";
                 else
-                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+                    message = "JSON Exception: " + exception.Message;
+
+                session.EventDispatcher.Send(new ErrorEvent()
+                {
+                    Message = message
+                });
             }
         }
 
@@ -519,7 +520,7 @@ namespace PoGo.NecroBot.Logic
 
         public static GlobalSettings Default => new GlobalSettings();
 
-        public static GlobalSettings Load(string path)
+        public static GlobalSettings Load(ISession session, string path)
         {
             GlobalSettings settings;
             var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
@@ -549,7 +550,10 @@ namespace PoGo.NecroBot.Logic
                 }
                 catch( JsonReaderException exception )
                 {
-                    Logger.Write( "JSON Exception: " + exception.Message, LogLevel.Error );
+                    session.EventDispatcher.Send(new ErrorEvent()
+                    {
+                        Message = "JSON Exception: " + exception.Message
+                    });
                     return null;
                 }
             }
@@ -566,7 +570,7 @@ namespace PoGo.NecroBot.Logic
             settings.migratePercentages();
 
             settings.Save(configFile);
-            settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
+            settings.Auth.Load(session, Path.Combine(profileConfigPath, "auth.json"));
 
             return firstRun ? null : settings;
         }

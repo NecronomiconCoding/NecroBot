@@ -243,7 +243,7 @@ namespace PoGo.NecroBot.Logic.State
 
             var oldConf = GetJObject(Path.Combine(configDir, "config.json.old"));
             var oldAuth = GetJObject(Path.Combine(configDir, "auth.json.old"));
-            GlobalSettings.Load("");
+            GlobalSettings.Load(session, "");
 
             var newConf = GetJObject(Path.Combine(configDir, "config.json"));
             var newAuth = GetJObject(Path.Combine(configDir, "auth.json"));

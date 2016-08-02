@@ -140,7 +140,6 @@
     <Compile Include="Utils\DelayingUtils.cs" />
     <Compile Include="Utils\EggWalker.cs" />
     <Compile Include="Utils\GPXReader.cs" />
-    <Compile Include="Logging\ILogger.cs" />
     <Compile Include="Utils\JitterUtils.cs" />
     <Compile Include="Utils\LocationUtils.cs" />
     <Compile Include="Utils\Statistics.cs" />

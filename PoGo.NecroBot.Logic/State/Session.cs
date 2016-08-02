@@ -24,16 +24,12 @@ namespace PoGo.NecroBot.Logic.State
 
     public class Session : ISession
     {
-        public Session(ISettings settings, ILogicSettings logicSettings)
+        public Session()
         {
-            Settings = settings;
-            LogicSettings = logicSettings;
             EventDispatcher = new EventDispatcher();
-            Translation = Common.Translation.Load(logicSettings);
-            Reset(settings, LogicSettings);
         }
 
-        public ISettings Settings { get; }
+        public ISettings Settings { get; private set; }
 
         public Inventory Inventory { get; private set; }
 
@@ -42,14 +38,18 @@ namespace PoGo.NecroBot.Logic.State
         public GetPlayerResponse Profile { get; set; }
         public Navigation Navigation { get; private set; }
 
-        public ILogicSettings LogicSettings { get; }
+        public ILogicSettings LogicSettings { get; private set; }
 
-        public ITranslation Translation { get; }
+        public ITranslation Translation { get; private set; }
 
         public IEventDispatcher EventDispatcher { get; }
 
         public void Reset(ISettings settings, ILogicSettings logicSettings)
         {
+            Settings = settings;
+            LogicSettings = logicSettings;
+            Translation = Common.Translation.Load(logicSettings);
+
             Client = new Client(Settings) {AuthType = settings.AuthType};
             // ferox wants us to set this manually
             Inventory = new Inventory(Client, logicSettings);
