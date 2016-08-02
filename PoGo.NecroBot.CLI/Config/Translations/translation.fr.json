@@ -494,7 +494,7 @@
     },
     {
       "Key": "PkmPotentialEvolveCount",
-      "Value": "[Evolution] Total envisageable : {0}"
+      "Value": "[Evolution] Disponible : {0}"
     },
     {
       "Key": "PkmNotEnoughRessources",
