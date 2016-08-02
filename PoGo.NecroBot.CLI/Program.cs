@@ -19,7 +19,7 @@ namespace PoGo.NecroBot.CLI
     internal class Program
     {
         private static readonly ManualResetEvent QuitEvent = new ManualResetEvent(false);
-        private static var subPath = "";
+        private static string subPath = "";
         private static void Main(string[] args)
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionEventHandler;
