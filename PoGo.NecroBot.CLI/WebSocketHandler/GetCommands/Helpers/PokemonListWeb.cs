@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands
+namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
 {
     public class PokemonListWeb
     {
