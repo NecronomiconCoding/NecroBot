@@ -282,7 +282,7 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Inventaire] Pokéballs: {0} | Superballs: {1} | Hyperballs: {2} | Masterballs: {3}"
+      "Value": "[Inventaire] Poké Balls: {0} | Super Balls: {1} | Hyper Balls: {2} | Master Balls: {3}"
     },
     {
     	"Key": "MaxItemsCombinedOverMaxItemStorage",
@@ -429,7 +429,7 @@
       "Value": "[Sniper] Scan en cours sur {0}..."
     },
     {
-      "Key": "snipeScanEx",
+      "Key": "snipeScanEx"
       "Value": "[Sniper] Scan de {0} avec {1} IV à {2}..."
     },
     {
