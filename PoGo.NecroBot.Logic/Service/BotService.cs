@@ -1,22 +1,20 @@
-﻿using PoGo.NecroBot.Logic.State;
+﻿#region using directives
+
+using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Tasks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#endregion
 
 namespace PoGo.NecroBot.Logic.Service
 {
     public class BotService
     {
-        public ISession _session;
-        public ILogin _loginTask;
+        public ILogin LoginTask;
+        public ISession Session;
 
         public void Run()
         {
-            _loginTask.DoLogin();
-
+            LoginTask.DoLogin();
         }
     }
 }

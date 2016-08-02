@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
 
@@ -55,7 +56,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(new EggHatchedEvent
                 {
                     Id = hatched.Id,
-                    PokemonId = hatched.PokemonId
+                    PokemonId = hatched.PokemonId,
+                    Level = PokemonInfo.GetLevel(hatched),
+                    Cp = hatched.Cp,
+                    MaxCp = PokemonInfo.CalculateMaxCp(hatched),
+                    Perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(hatched), 2)
                 });
             }
 
@@ -78,7 +83,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var response = await session.Client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);
                     unusedEggs.Remove(egg);
 
-                    newRememberedIncubators.Add(new IncubatorUsage { IncubatorId = incubator.Id, PokemonId = egg.Id });
+                    newRememberedIncubators.Add(new IncubatorUsage {IncubatorId = incubator.Id, PokemonId = egg.Id});
 
                     session.EventDispatcher.Send(new EggIncubatorStatusEvent
                     {
@@ -88,11 +93,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                         KmToWalk = egg.EggKmWalkedTarget,
                         KmRemaining = response.EggIncubator.TargetKmWalked - kmWalked
                     });
-
                 }
                 else
                 {
-                    newRememberedIncubators.Add(new IncubatorUsage { IncubatorId = incubator.Id, PokemonId = incubator.PokemonId });
+                    newRememberedIncubators.Add(new IncubatorUsage
+                    {
+                        IncubatorId = incubator.Id,
+                        PokemonId = incubator.PokemonId
+                    });
 
                     session.EventDispatcher.Send(new EggIncubatorStatusEvent
                     {
@@ -106,17 +114,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (!newRememberedIncubators.SequenceEqual(rememberedIncubators))
                 SaveRememberedIncubators(newRememberedIncubators, rememberedIncubatorsFilePath);
-        }
-
-        private class IncubatorUsage : IEquatable<IncubatorUsage>
-        {
-            public string IncubatorId;
-            public ulong PokemonId;
-
-            public bool Equals(IncubatorUsage other)
-            {
-                return other != null && other.IncubatorId == IncubatorId && other.PokemonId == PokemonId;
-            }
         }
 
         private static List<IncubatorUsage> GetRememberedIncubators(string filePath)
@@ -134,6 +131,17 @@ namespace PoGo.NecroBot.Logic.Tasks
             Directory.CreateDirectory(Path.GetDirectoryName(filePath));
 
             File.WriteAllText(filePath, JsonConvert.SerializeObject(incubators), Encoding.UTF8);
+        }
+
+        private class IncubatorUsage : IEquatable<IncubatorUsage>
+        {
+            public string IncubatorId;
+            public ulong PokemonId;
+
+            public bool Equals(IncubatorUsage other)
+            {
+                return other != null && other.IncubatorId == IncubatorId && other.PokemonId == PokemonId;
+            }
         }
     }
 }

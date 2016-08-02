@@ -1,10 +1,9 @@
 #region using directives
 
 using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
-using PoGo.NecroBot.Logic.Event;
-using System;
 
 #endregion
 
@@ -14,9 +13,9 @@ namespace PoGo.NecroBot.Logic.State
     {
         ISettings Settings { get; }
         Inventory Inventory { get; }
-        Client Client { get;  }
+        Client Client { get; }
         GetPlayerResponse Profile { get; set; }
-        Navigation Navigation { get;  }
+        Navigation Navigation { get; }
         ILogicSettings LogicSettings { get; }
         ITranslation Translation { get; }
         IEventDispatcher EventDispatcher { get; }
@@ -45,14 +44,14 @@ namespace PoGo.NecroBot.Logic.State
 
         public ILogicSettings LogicSettings { get; }
 
-        public ITranslation Translation { get; private set; }
+        public ITranslation Translation { get; }
 
-        public IEventDispatcher EventDispatcher{ get; private set; }
+        public IEventDispatcher EventDispatcher { get; }
 
         public void Reset(ISettings settings, ILogicSettings logicSettings)
         {
-            Client = new Client(Settings);
-            Client.AuthType = settings.AuthType; // ferox wants us to set this manually
+            Client = new Client(Settings) {AuthType = settings.AuthType};
+            // ferox wants us to set this manually
             Inventory = new Inventory(Client, logicSettings);
             Navigation = new Navigation(Client);
         }
