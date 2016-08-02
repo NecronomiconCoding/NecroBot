@@ -568,7 +568,7 @@ namespace PoGo.NecroBot.Logic.Common
                         .ToList()
                         .ForEach( translations._pokemonTranslationStrings.Add );
                 }
-                catch( JsonSerializationException )
+                catch( JsonException )
                 {
                     Logger.Write( "[ERROR] Issue loading translations", LogLevel.Error );
 
