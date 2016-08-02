@@ -332,5 +332,6 @@
       "Key": "pokemonIgnoreFilter",
       "Value": "[Pokémon-Ignore-Filter] - Ignoreerin {0} nagu sätetes määratud!"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

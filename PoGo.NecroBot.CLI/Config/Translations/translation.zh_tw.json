@@ -364,5 +364,6 @@
       "Key": "missingCredentialsPtc",
       "Value": "您需要在auth.json中填寫Ptc賬戶和密碼！"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }
