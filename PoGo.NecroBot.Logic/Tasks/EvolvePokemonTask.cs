@@ -34,23 +34,26 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokemonToEvolve.Any())
             {
-                var totalPokemon = await session.Inventory.GetPokemons();
-
-                var pokemonNeededInInventory = session.Profile.PlayerData.MaxPokemonStorage * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage / 100.0f;
-                var needPokemonToStartEvolve = Math.Round(
-                    Math.Max(0,
-                        Math.Min(pokemonNeededInInventory, session.Profile.PlayerData.MaxPokemonStorage)));
-
-                var deltaCount = needPokemonToStartEvolve - totalPokemon.Count();
-
-                if (deltaCount > 0)
+                if (session.LogicSettings.KeepPokemonsThatCanEvolve)
                 {
-                    session.EventDispatcher.Send(new NoticeEvent()
+                    var totalPokemon = await session.Inventory.GetPokemons();
+
+                    var pokemonNeededInInventory = session.Profile.PlayerData.MaxPokemonStorage * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage / 100.0f;
+                    var needPokemonToStartEvolve = Math.Round(
+                        Math.Max(0,
+                            Math.Min(pokemonNeededInInventory, session.Profile.PlayerData.MaxPokemonStorage)));
+
+                    var deltaCount = needPokemonToStartEvolve - totalPokemon.Count();
+
+                    if (deltaCount > 0)
                     {
-                        Message = session.Translation.GetTranslation(TranslationString.WaitingForMorePokemonToEvolve,
-                            pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage)
-                    });
-                    return;
+                        session.EventDispatcher.Send(new NoticeEvent()
+                        {
+                            Message = session.Translation.GetTranslation(TranslationString.WaitingForMorePokemonToEvolve,
+                                pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage)
+                        });
+                        return;
+                    }
                 }
 
                 if (await shouldUseLuckyEgg(session, pokemonToEvolve))
