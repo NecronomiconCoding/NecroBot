@@ -127,7 +127,8 @@ namespace PoGo.NecroBot.Logic.State
 
             int maxTheoreticalItems = session.LogicSettings.TotalAmountOfPokeballsToKeep +
                 session.LogicSettings.TotalAmountOfPotionsToKeep +
-                session.LogicSettings.TotalAmountOfRevivesToKeep;
+                session.LogicSettings.TotalAmountOfRevivesToKeep +
+                session.LogicSettings.TotalAmountOfBerriesToKeep;
 
             if (maxTheoreticalItems > session.Profile.PlayerData.MaxItemStorage)
             {
