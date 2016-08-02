@@ -20,7 +20,7 @@ namespace PoGo.NecroBot.Logic.Logging
         {
             lock (LogbufferList)
             {
-                if (_lastLogTime.AddSeconds(60) < DateTime.Now && !force)
+                if (_lastLogTime.AddSeconds(60).Ticks > DateTime.Now.Ticks && !force)
                 {
                     LogbufferList.Add(message);
                     return;
@@ -52,7 +52,7 @@ namespace PoGo.NecroBot.Logic.Logging
             _logger = logger;
             _path = Path.Combine(Directory.GetCurrentDirectory(), subPath, "Logs");
             Directory.CreateDirectory(_path);
-            Log($"Initializing Rocket logger at time {DateTime.Now}...");
+            Log($"Initializing NecroBot logger at time {DateTime.Now}...");
         }
 
         /// <summary>
