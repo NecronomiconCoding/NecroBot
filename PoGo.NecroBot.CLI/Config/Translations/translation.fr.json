@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) |{1}-{2} Lv {3} {6}% {4}/{5} | {7}% Chance sur {8}m | {10} {9} restant, {11}"
+      "Value": "({0}) |{1}-{2} | Lv {3} {6}% {4}/{5} | {7}% Chance sur {8}m | {10} {9} restant, {11}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -82,7 +82,7 @@
     },
     {
       "Key": "WaitingForMorePokemonToEvolve",
-      "Value": "Encore {1} Pokemon à capturer pour en évoluer {0} d'un coup ! ({2}/{3} pour {4}% de votre inventaire)"
+      "Value": "Encore {1} Pokémon à capturer pour en évoluer {0} d'un coup ! ({2}/{3} pour {4}% de votre inventaire)"
     },
     {
       "Key": "UseLuckyEggsMinPokemonAmountTooHigh",
@@ -90,7 +90,7 @@
     },
     {
       "Key": "CatchMorePokemonToUseLuckyEgg",
-      "Value": "Encore {0} Pokemon à capturer pour pouvoir utiliser un Oeuf Chance!"
+      "Value": "Encore {0} Pokémon à capturer pour pouvoir utiliser un Oeuf Chance!"
     },
     {
       "Key": "catchStatusAttempt",
@@ -110,7 +110,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokémons"
+      "Value": "Pokémon"
     },
     {
       "Key": "commonWordPerfect",
@@ -266,7 +266,7 @@
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Recherche de pokémon..."
+      "Value": "Recherche de Pokémon..."
     },
     {
       "Key": "lookingForLurePokemon",
@@ -278,7 +278,7 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Vous n'avez plus de pokéballs, la capture de pokémons est impossible !"
+      "Value": "Vous n'avez plus de pokéballs, la capture de Pokémon est impossible !"
     },
     {
       "Key": "currentPokeballInv",
@@ -318,11 +318,11 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "L'inventaire de pokémon est plein. Transfert en cours..."
+      "Value": "L'inventaire de Pokémon est plein. Transfert en cours..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "L'inventaire de pokémon est plein. Merci de transférer manuellement ou de changer la valeur de \"TransferDuplicatePokemon\" en \"true\"..."
+      "Value": "L'inventaire de Pokémon est plein. Merci de transférer manuellement ou de changer la valeur de \"TransferDuplicatePokemon\" en \"true\"..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -434,7 +434,7 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] Echec du scan. Aucun pokémon trouvé."
+      "Value": "[Sniper] Echec du scan. Aucun Pokémon trouvé."
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
@@ -498,7 +498,7 @@
     },
     {
       "Key": "PkmNotEnoughRessources",
-      "Value": "Echec. Ressources insuffisantes pour évoluer le pokémon"
+      "Value": "Echec. Ressources insuffisantes pour évoluer ce Pokémon"
     },
     {
        "Key": "eventUseBerry",
