@@ -438,7 +438,7 @@
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Pas assez de Pokeballs pour commencer un snipping! ({0}/{1})"
+      "Value": "[Sniper] Pas assez de pokéballs ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
