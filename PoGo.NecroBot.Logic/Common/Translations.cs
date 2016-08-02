@@ -1,10 +1,10 @@
 ﻿#region using directives
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 #endregion
 
@@ -95,12 +95,6 @@ namespace PoGo.NecroBot.Logic.Common
         CurrentPokeballInv,
         MaxItemsCombinedOverMaxItemStorage,
         RecyclingQuietly,
-        CheckingForBallsToRecycle,
-        CheckingForPotionsToRecycle,
-        CheckingForRevivesToRecycle,
-        PokeballsToKeepIncorrect,
-        PotionsToKeepIncorrect,
-        RevivesToKeepIncorrect,
         InvFullTransferring,
         InvFullTransferManually,
         InvFullPokestopLooting,
@@ -286,18 +280,6 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.MaxItemsCombinedOverMaxItemStorage,
                 "[Configuration Invalid] Your maximum items combined (balls+potions+revives={0}) is over your max item storage ({1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.RecyclingQuietly, "Recycling Quietly..."),
-            new KeyValuePair<TranslationString, string>(TranslationString.CheckingForBallsToRecycle,
-                "Checking for balls to recycle, keeping {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CheckingForPotionsToRecycle,
-                "Checking for potions to recycle, keeping {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CheckingForRevivesToRecycle,
-                "Checking for revives to recycle, keeping {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.PokeballsToKeepIncorrect,
-                "TotalAmountOfPokeballsToKeep is configured incorrectly. The number is smaller than 1."),
-            new KeyValuePair<TranslationString, string>(TranslationString.PotionsToKeepIncorrect,
-                "TotalAmountOfPotionsToKeep is configured incorrectly. The number is smaller than 1."),
-            new KeyValuePair<TranslationString, string>(TranslationString.RevivesToKeepIncorrect,
-                "TotalAmountOfRevivesToKeep is configured incorrectly. The number is smaller than 1."),
             new KeyValuePair<TranslationString, string>(TranslationString.InvFullTransferring,
                 "Pokemon Inventory is full, transferring Pokemon..."),
             new KeyValuePair<TranslationString, string>(TranslationString.InvFullTransferManually,
