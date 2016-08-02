@@ -34,13 +34,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokemonToEvolve.Any())
             {
-                if (session.LogicSettings.AlwaysEvolveWithLuckyEggWhenMinPokemonAmountOccurs && await shouldUseLuckyEgg(session, pokemonToEvolve))
-                {
-                    await UseLuckyEgg(session);
-                    await evolve(session, pokemonToEvolve);
-                    return;
-                }
-                else if (session.LogicSettings.KeepPokemonsThatCanEvolve)
+                if (session.LogicSettings.KeepPokemonsThatCanEvolve)
                 {
                     var totalPokemon = await session.Inventory.GetPokemons();
 

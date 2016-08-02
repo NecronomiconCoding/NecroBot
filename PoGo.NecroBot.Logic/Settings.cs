@@ -194,8 +194,6 @@ namespace PoGo.NecroBot.Logic
         public bool UseLuckyEggConstantly;
         [DefaultValue(30)]
         public int UseLuckyEggsMinPokemonAmount;
-        [DefaultValue(true)]
-        public Boolean AlwaysEvolveWithLuckyEggWhenMinPokemonAmountOccurs;
         [DefaultValue(false)]
         public bool UseLuckyEggsWhileEvolving;
         [DefaultValue(false)]
@@ -751,7 +749,6 @@ namespace PoGo.NecroBot.Logic
         public bool UseGpxPathing => _settings.UseGpxPathing;
         public bool UseLuckyEggsWhileEvolving => _settings.UseLuckyEggsWhileEvolving;
         public int UseLuckyEggsMinPokemonAmount => _settings.UseLuckyEggsMinPokemonAmount;
-        public bool AlwaysEvolveWithLuckyEggWhenMinPokemonAmountOccurs => _settings.AlwaysEvolveWithLuckyEggWhenMinPokemonAmountOccurs;
         public bool EvolveAllPokemonAboveIv => _settings.EvolveAllPokemonAboveIv;
         public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
         public bool RenamePokemon => _settings.RenamePokemon;
