@@ -90,7 +90,6 @@
     <Compile Include="Event\EggIncubatorStatusEvent.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="Localization\Localizer.cs" />
-    <Compile Include="Logging\Logger.cs" />
     <Compile Include="ILogicSettings.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="PoGoUtils\PokemonInfo.cs" />

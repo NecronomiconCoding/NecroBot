@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Xml;
 using PoGo.NecroBot.Logic.Common;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Event;
 

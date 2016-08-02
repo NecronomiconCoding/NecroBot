@@ -2,7 +2,8 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using System;
 using System.Collections.Generic;
@@ -541,7 +542,7 @@ namespace PoGo.NecroBot.Logic.Common
             return translation != default(string) ? translation : $"Translation for pokemon {id} is missing";
         }
 
-        public static Translation Load(ILogicSettings logicSettings)
+        public static Translation Load(ISession session, ILogicSettings logicSettings)
         {
             var translationsLanguageCode = logicSettings.TranslationLanguageCode;
             var translationPath = Path.Combine(logicSettings.GeneralConfigPath, "translations");
@@ -572,12 +573,18 @@ namespace PoGo.NecroBot.Logic.Common
                 }
                 catch( JsonException )
                 {
-                    Logger.Write( "[ERROR] Issue loading translations", LogLevel.Error );
+                    session.EventDispatcher.Send(new ErrorEvent()
+                    {
+                        Message = "Issue loading translations"
+                    });
 
                     switch( translationsLanguageCode )
                     {
                         case "en":
-                            Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
+                            session.EventDispatcher.Send(new NoticeEvent()
+                            {
+                                Message = "[Request] Rebuild the translations folder? Y/N"
+                            });
 
                             string strInput = Console.ReadLine().ToLower();
 
@@ -585,19 +592,22 @@ namespace PoGo.NecroBot.Logic.Common
                             {
                                 // Currently this section can only rebuild the EN translations file \\
                                 // This is because default values cannot be supplied from other languages \\
-                                Logger.Write( "Loading fresh translations and continuing" );
+                                session.EventDispatcher.Send(new NoticeEvent()
+                                {
+                                    Message = "Loading fresh translations and continuing"
+                                });
                                 translations = new Translation();
                                 translations.Save( Path.Combine( translationPath, "translation.en.json" ) );
                             }
                             else
                             {
-                                ErrorHandler.ThrowFatalError( null, 3 );
+                                ErrorHandler.ThrowFatalError(session, null, 3 );
                                 return null;
                             }
 
                             break;
                         default:
-                            ErrorHandler.ThrowFatalError( "[ERROR] No replacement translations: Check appropriate files for typos", 5 );
+                            ErrorHandler.ThrowFatalError(session, "No replacement translations: Check appropriate files for typos", 5 );
                             return null;
                     }
                 }

@@ -48,7 +48,7 @@ namespace PoGo.NecroBot.Logic.State
         {
             Settings = settings;
             LogicSettings = logicSettings;
-            Translation = Common.Translation.Load(logicSettings);
+            Translation = Common.Translation.Load(this, logicSettings);
             ApiFailureStrategy _apiStrategy = new ApiFailureStrategy(this);
             Client = new Client(Settings, _apiStrategy);
             // ferox wants us to set this manually

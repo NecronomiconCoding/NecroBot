@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.Common;
 using POGOProtos.Networking.Responses;
 using PoGo.NecroBot.Logic.Event;
@@ -27,7 +26,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             else
             {
-                Logger.Write(session.Translation.GetTranslation(TranslationString.UseLuckyEggAmount, currentAmountOfLuckyEggs));
+                session.EventDispatcher.Send(new NoticeEvent()
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.UseLuckyEggAmount, currentAmountOfLuckyEggs)
+                });
             }
 
             var UseEgg = await session.Inventory.UseLuckyEggConstantly();

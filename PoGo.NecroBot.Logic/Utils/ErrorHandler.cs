@@ -1,9 +1,6 @@
-﻿using PoGo.NecroBot.Logic.Logging;
+﻿using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.State;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.Logic.Utils
 {
@@ -14,12 +11,19 @@ namespace PoGo.NecroBot.Logic.Utils
         /// </summary>
         /// <param name="strMessage">Optional message to display - Leave NULL to exclude message</param>
         /// <param name="timeout">The total seconds the messag will display before shutting down</param>
-        public static void ThrowFatalError( string strMessage, int timeout )
+        public static void ThrowFatalError(ISession session, string strMessage, int timeout )
         {
-            Logger.Write( "[ERROR] Fatal Error", LogLevel.Error );
+            session.EventDispatcher.Send(new ErrorEvent()
+            {
+                Message = "Fatal Error"
+            });
 
             if( strMessage != null )
-                Console.WriteLine( strMessage );
+                session.EventDispatcher.Send(new ErrorEvent()
+                {
+                    Message = strMessage
+                });
+
 
             Console.Write( "Ending Application... " );
 

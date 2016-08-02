@@ -3,10 +3,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
-using System.Collections.Generic;
-using POGOProtos.Enums;
 using PoGo.NecroBot.Logic.Event;
 
 #endregion
