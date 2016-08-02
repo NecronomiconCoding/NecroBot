@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using System.Collections.Generic;
+using PoGo.NecroBot.Logic.PoGoUtils;
 using POGOProtos.Enums;
 
 #endregion
@@ -22,9 +23,9 @@ namespace PoGo.NecroBot.Logic.Tasks
             var upgradablePokemon = await session.Inventory.GetPokemonToUpgrade();
             if (upgradablePokemon.Count == 0)
                 return;
-
             foreach (var pokemon in upgradablePokemon)
             {
+                if (PokemonInfo.CalculateMaxCp(pokemon) == pokemon.Cp) continue;
                 var upgradeResult = await session.Inventory.UpgradePokemon(pokemon.Id);
                 if (upgradeResult.Result.ToString().ToLower().Contains("success"))
                 {
