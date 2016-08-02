@@ -429,8 +429,8 @@
       "Value": "[Sniper] Scan en cours sur {0}..."
     },
     {
-      "Key": "snipeScanEx"
-      "Value": "[Sniper] Scan de {0} avec {1} IV à {2}..."
+      "Key": "SnipeScanEx",
+      "Value": "[Sniper] Scan d'un {0} avec {1} IV à {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
