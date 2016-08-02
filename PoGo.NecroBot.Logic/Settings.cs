@@ -163,10 +163,21 @@ namespace PoGo.NecroBot.Logic
         public bool EvolveAllPokemonAboveIv;
         [DefaultValue(true)]
         public bool EvolveAllPokemonWithEnoughCandy;
-        [DefaultValue(false)]
-        public bool KeepPokemonsThatCanEvolve;
         [DefaultValue(0.90)]
         public double EvolveKeptPokemonsAtStorageUsagePercentage;
+        [DefaultValue(false)]
+        public bool KeepPokemonsThatCanEvolve;
+        //keeping
+        [DefaultValue(1250)]
+        public int KeepMinCp;
+        [DefaultValue(90)]
+        public float KeepMinIvPercentage;
+        [DefaultValue("and")]
+        public string KeepMinOperator;
+        [DefaultValue(false)]
+        public bool PrioritizeIvOverCp;
+        [DefaultValue(1)]
+        public int KeepMinDuplicatePokemon;
         //gpx
         [DefaultValue(false)]
         public bool UseGpxPathing;
@@ -177,15 +188,6 @@ namespace PoGo.NecroBot.Logic
         public bool VerboseRecycling;
         [DefaultValue(0.90)]
         public double RecycleInventoryAtUsagePercentage;
-        //keeping
-        [DefaultValue(1250)]
-        public int KeepMinCp;
-        [DefaultValue(1)]
-        public int KeepMinDuplicatePokemon;
-        [DefaultValue(90)]
-        public float KeepMinIvPercentage;
-        [DefaultValue(false)]
-        public bool PrioritizeIvOverCp;
         //lucky, incense and berries
         [DefaultValue(true)]
         public bool UseEggIncubators;
@@ -692,7 +694,8 @@ namespace PoGo.NecroBot.Logic
         public bool AutoUpdate => _settings.AutoUpdate;
         public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
         public bool DisableHumanWalking => _settings.DisableHumanWalking;
-        public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
+        public float KeepMinIvPercentage => _settings.KeepMinIvPercentage; 
+        public string KeepMinOperator => _settings.KeepMinOperator;
         public int KeepMinCp => _settings.KeepMinCp;
         public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;
         public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;

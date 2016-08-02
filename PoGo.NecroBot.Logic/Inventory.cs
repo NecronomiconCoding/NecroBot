@@ -80,13 +80,16 @@ namespace PoGo.NecroBot.Logic
         {
             var myPokemon = await GetPokemons();
 
-            var pokemonList =
+            var pokemonList = (_logicSettings.KeepMinOperator.ToLower().Equals("and")) ?
                 myPokemon.Where(
-                    p => p.DeployedFortId == string.Empty && 
-                         p.Favorite == 0 && (p.Cp < GetPokemonTransferFilter(p.PokemonId).KeepMinCp ||
-                                             PokemonInfo.CalculatePokemonPerfection(p) <
-                                             GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage))
-                    .ToList();
+                    p => p.DeployedFortId == string.Empty &&
+                            p.Favorite == 0 && (p.Cp < GetPokemonTransferFilter(p.PokemonId).KeepMinCp ||
+                                                PokemonInfo.CalculatePokemonPerfection(p) < GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage)).ToList() :
+                myPokemon.Where(
+                    p => p.DeployedFortId == string.Empty &&
+                            p.Favorite == 0 && (p.Cp < GetPokemonTransferFilter(p.PokemonId).KeepMinCp &&
+                                                PokemonInfo.CalculatePokemonPerfection(p) < GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage)).ToList();
+
             if (filter != null)
             {
                 pokemonList = pokemonList.Where(p => !filter.Contains(p.PokemonId)).ToList();
@@ -138,6 +141,7 @@ namespace PoGo.NecroBot.Logic
             }
             if (prioritizeIVoverCp)
             {
+                var skipnum = GetPokemonTransferFilter(PokemonId.Arbok).KeepMinDuplicatePokemon;
                 return pokemonList
                     .GroupBy(p => p.PokemonId)
                     .Where(x => x.Any())
@@ -416,7 +420,11 @@ namespace PoGo.NecroBot.Logic
                 myPokemon.Where(
                     p => (p.Cp >= _logicSettings.UpgradePokemonCpMinimum ||
                         PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.UpgradePokemonIvMinimum)).OrderByDescending(p => p.Cp).ToList();
-
+            /**
+             * @todo make sure theres enough candy (see line 109)
+             * @todo make sure max cp hasnt been reached
+             * @todo remove _logicSettings.AmountOfTimesToUpgradeLoop and use it as a count limitation in levelup loop for successes  instead
+             * */
             return upgradePokemon = (_logicSettings.LevelUpByCPorIv.ToLower().Equals("iv")) ?
                     highestPokemonForUpgrade.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(_logicSettings.AmountOfTimesToUpgradeLoop).ToList() :
                     highestPokemonForUpgrade.Take(_logicSettings.AmountOfTimesToUpgradeLoop).ToList();
