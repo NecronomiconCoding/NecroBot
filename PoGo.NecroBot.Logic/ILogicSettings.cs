@@ -102,6 +102,7 @@ namespace PoGo.NecroBot.Logic
         float UseBerriesMinIv { get; }
         double UseBerriesBelowCatchProbability { get; }
         string UseBerriesOperator { get; }
+        string UpgradePokemonMinimumStatsOperator { get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }
         string GpxFile { get; }
