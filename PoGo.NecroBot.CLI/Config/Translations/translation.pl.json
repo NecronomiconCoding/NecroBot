@@ -293,30 +293,6 @@
       "Value": "Ciche Przetwarzanie..."
     },
     {
-      "Key": "checkingForBallsToRecycle",
-      "Value": "Sprawdzanie sumy Pokeballi, pozostawiając: {0}"
-    },
-    {
-      "Key": "checkingForPotionsToRecycle",
-      "Value": "Sprawdzanie ilości Eliksirów, pozostawiając: {0}"
-    },
-    {
-      "Key": "checkingForRevivesToRecycle",
-      "Value": "Sprawdzanie ilości Uzdrowień, pozostawiając: {0}"
-    },
-    {
-      "Key": "pokeballsToKeepIncorrect",
-      "Value": "Wartość TotalAmountOfPokebalsToKeep nie może być mniejsza niż 1. Zmień ją!"
-    },
-    {
-      "Key": "potionsToKeepIncorrect",
-      "Value": "Wartość TotalAmountOfPotionsToKeep nie może być mniejsza niż 1. Zmień ją!"
-    },
-    {
-      "Key": "revivesToKeepIncorrect",
-      "Value": "Wartość TotalAmountOfRevivesToKeep nie może być mniejsza niż 1. Zmień ją!"
-    },
-    {
       "Key": "invFullTransferring",
       "Value": "Inwentarz jest pełny. Przesyłam Pokemony..."
     },

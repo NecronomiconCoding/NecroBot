@@ -128,6 +128,10 @@ namespace PoGo.NecroBot.Logic.Logging
 
             switch (level)
             {
+                case LogLevel.Debug:
+                    logger.Debug("{0} {1}", loggerLevelName, message);
+                    break;
+
                 case LogLevel.Warning:
                     logger.Warn("{0} {1}", loggerLevelName, message);
                     break;

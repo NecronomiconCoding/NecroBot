@@ -306,30 +306,6 @@
       "Value": "Riciclo silenzioso..."
     },
     {
-      "Key": "checkingForBallsToRecycle",
-      "Value": "Controllo Pokeball da riciclare, ne verranno tenute {0}"
-    },
-    {
-      "Key": "checkingForPotionsToRecycle",
-      "Value": "Controllo Pozioni da riciclare, ne verranno tenute {0}"
-    },
-    {
-      "Key": "checkingForRevivesToRecycle",
-      "Value": "Controllo Revitalizzanti da riciclare, ne verranno tenuti {0}"
-    },
-    {
-      "Key": "pokeballsToKeepIncorrect",
-      "Value": "TotalAmountOfPokeballsToKeep non è configurato correttamente. Il numero e' piu' piccolo di 1."
-    },
-    {
-      "Key": "potionsToKeepIncorrect",
-      "Value": "TotalAmountOfPotionsToKeep non è configurato correttamente. Il numero e' piu' piccolo di 1."
-    },
-    {
-      "Key": "revivesToKeepIncorrect",
-      "Value": "TotalAmountOfRevivesToKeep non è configurato correttamente. Il numero e' piu' piccolo di 1."
-    },
-    {
       "Key": "invFullTransferring",
       "Value": "Inventario Pokemon pieno. Trasferimento Pokemon..."
     },

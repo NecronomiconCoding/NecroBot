@@ -25,11 +25,15 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public class SniperInfo
     {
-        public double latitude { get; set; }
-        public double longitude { get; set; }
-        public double Iv { get; set; }
-        public DateTime TimeStamp { get; set; }
+        public ulong EncounterId { get; set; }
+        public DateTime ExpirationTimestamp { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public PokemonId Id { get; set; }
+        public string SpawnPointId { get; set; }
+        public PokemonMove Move1 { get; set; }
+        public PokemonMove Move2 { get; set; }
+        public double IV { get; set; }
 
         [JsonIgnore]
         public DateTime TimeStampAdded { get; set; } = DateTime.Now;
@@ -135,13 +139,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         var locationsToSnipe = SnipeLocations?.Where(q =>
                             (!session.LogicSettings.UseTransferIvForSnipe ||
-                             (q.Iv == 0 && !session.LogicSettings.SnipeIgnoreUnknownIv) ||
-                             (q.Iv >= session.Inventory.GetPokemonTransferFilter(q.Id).KeepMinIvPercentage)) &&
-                            !LocsVisited.Contains(new PokemonLocation(q.latitude, q.longitude))
-                            && !(q.TimeStamp != default(DateTime) &&
-                                 q.TimeStamp > new DateTime(2016) &&
+                             (q.IV == 0 && !session.LogicSettings.SnipeIgnoreUnknownIv) ||
+                             (q.IV >= session.Inventory.GetPokemonTransferFilter(q.Id).KeepMinIvPercentage)) &&
+                            !LocsVisited.Contains(new PokemonLocation(q.Latitude, q.Longitude))
+                            && !(q.ExpirationTimestamp != default(DateTime) &&
+                                 q.ExpirationTimestamp > new DateTime(2016) &&
                                  // make absolutely sure that the server sent a correct datetime
-                                 q.TimeStamp < DateTime.Now) &&
+                                 q.ExpirationTimestamp < DateTime.Now) &&
                             (q.Id == PokemonId.Missingno || pokemonIds.Contains(q.Id))).ToList() ??
                                                new List<SniperInfo>();
 
@@ -152,9 +156,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 session.EventDispatcher.Send(new SnipeScanEvent
                                 {
-                                    Bounds = new Location(location.latitude, location.longitude),
+                                    Bounds = new Location(location.Latitude, location.Longitude),
                                     PokemonId = location.Id,
-                                    Iv = location.Iv
+                                    Iv = location.IV
                                 });
 
                                 if (
@@ -164,8 +168,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     return;
 
                                 await
-                                    Snipe(session, pokemonIds, location.latitude, location.longitude, cancellationToken);
-                                LocsVisited.Add(new PokemonLocation(location.latitude, location.longitude));
+                                    Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
+                                LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                             }
                         }
                     }
@@ -409,8 +413,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         var info = JsonConvert.DeserializeObject<SniperInfo>(line);
 
                         if (SnipeLocations.Any(x =>
-                            Math.Abs(x.latitude - info.latitude) < 0.0001 &&
-                            Math.Abs(x.longitude - info.longitude) < 0.0001))
+                            Math.Abs(x.Latitude - info.Latitude) < 0.0001 &&
+                            Math.Abs(x.Longitude - info.Longitude) < 0.0001))
                             // we might have different precisions from other sources
                             continue;
 
