@@ -293,30 +293,6 @@
       "Value": "Recyclage rapide en cours..."
     },
     {
-      "Key": "checkingForBallsToRecycle",
-      "Value": "Recherche de PokéBalls à supprimer. En garder {0}"
-    },
-    {
-      "Key": "checkingForPotionsToRecycle",
-      "Value": "Recherche de Potions à supprimer. En garder {0}"
-    },
-    {
-      "Key": "checkingForRevivesToRecycle",
-      "Value": "Recherche de Rappels à supprimer. En garder {0}"
-    },
-    {
-      "Key": "pokeballsToKeepIncorrect",
-      "Value": "TotalAmountOfPokeballsToKeep est mal configuré. Le nombre est inférieur à 1."
-    },
-    {
-      "Key": "potionsToKeepIncorrect",
-      "Value": "TotalAmountOfPotionsToKeep est mal configuré. Le nombre est inférieur à 1."
-    },
-    {
-      "Key": "revivesToKeepIncorrect",
-      "Value": "TotalAmountOfRevivesToKeep est mal configuré. Le nombre est inférieur à 1."
-    },
-    {
       "Key": "invFullTransferring",
       "Value": "L'inventaire de Pokémon est plein. Transfert en cours..."
     },
