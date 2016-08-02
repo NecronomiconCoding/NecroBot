@@ -98,7 +98,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokémons"
+      "Value": "Pokémon"
     },
     {
       "Key": "commonWordPerfect",
@@ -114,15 +114,15 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "Pokémons con mayor PC"
+      "Value": "Pokémon con mayor PC"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Pokémons con mayor Perfección"
+      "Value": "Pokémon con mayor Perfección"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Pokémons con mayor Nivel"
+      "Value": "Pokémon con mayor Nivel"
     },
     {
       "Key": "welcomeWarning",
@@ -198,11 +198,11 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "Logueado usando {0}"
+      "Value": "Sesión iniciada como {0}"
     },
     {
       "Key": "ptcOffline",
-      "Value": "Servidores de PTC probablemente estén caídos o sus datos de acceso son incorrectos. Prueba con Google."
+      "Value": "Es probable que los servidores de PTC estén caídos o que tus datos de acceso sean incorrectos. Prueba con Google."
     },
     {
       "Key": "tryingAgainIn",
@@ -298,11 +298,11 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "El inventario de pokémons está lleno. Transferir pokémons..."
+      "Value": "El inventario de Pokémon está lleno. Transferir Pokémon..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "El inventario de pokémons está lleno. Transfiera los pokémons manualmente o active (true) TransferDuplicatePokemon en config.json..."
+      "Value": "El inventario de Pokémon está lleno. Transfiera los Pokémon manualmente o active (true) TransferDuplicatePokemon en config.json..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -330,7 +330,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Filtro Pokémons Ignorados] - Ignorando {0} tal y como se definió en la configuración actual."
+      "Value": "[Filtro Pokémon Ignorados] - Ignorando {0} tal y como se definió en la configuración actual."
     },
     {
       "Key": "catchStatusAttempt",
@@ -386,7 +386,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Como tiene habilitado Google autenticación de 2 factores, tendrá que insertar una contraseña específica de la APP en el auth.json"
+      "Value": "Como tiene habilitada la verificación en dos pasos de Google, tendrá que insertar una contraseña específica de la APP en el auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -406,7 +406,7 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Sniper] Escaneando en busca de Pokémons en {0}..."
+      "Value": "[Sniper] Escaneando en busca de Pokémon en {0}..."
     },
     {
       "Key": "snipeScanEx",
@@ -470,7 +470,7 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "Cantidad de Pokémons vistos: {0}/151, Cantidad de Pokémons capturados: {1}/151"
+      "Value": "Cantidad de Pokémon vistos: {0}/151, Cantidad de Pokémon capturados: {1}/151"
     },
     {
       "Key": "pkmPotentialEvolveCount",
