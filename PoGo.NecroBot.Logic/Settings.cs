@@ -171,7 +171,7 @@ namespace PoGo.NecroBot.Logic
         public int KeepMinCp;
         [DefaultValue(90)]
         public float KeepMinIvPercentage;
-        [DefaultValue("and")]
+        [DefaultValue("or")]
         public string KeepMinOperator;
         [DefaultValue(false)]
         public bool PrioritizeIvOverCp;
