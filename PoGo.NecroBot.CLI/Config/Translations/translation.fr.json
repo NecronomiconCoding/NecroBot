@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) |{1}-{2}| Lv {3} {6}% {4}/{5} | {7}% dist {8}m | {10} {9} restant | {11} | lat: {12} long: {13}""
+      "Value": "({0}) |{1}-{2}| Lv {3} {6}% {4}/{5} | {7}% dist {8}m | {10} {9} restant | {11} | lat: {12} long: {13}"
     },
     {
       "Key": "eventNoPokeballs",
