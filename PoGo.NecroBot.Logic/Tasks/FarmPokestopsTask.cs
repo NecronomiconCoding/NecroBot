@@ -189,7 +189,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                     }
-
+                    if (session.LogicSettings.TransferWeakPokemon)
+                    {
+                        await TransferWeakPokemonTask.Execute(session, cancellationToken);
+                    }
                     if (session.LogicSettings.RenamePokemon)
                     {
                         await RenamePokemonTask.Execute(session, cancellationToken);

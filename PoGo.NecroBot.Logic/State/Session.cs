@@ -51,7 +51,6 @@ namespace PoGo.NecroBot.Logic.State
             Translation = Common.Translation.Load(logicSettings);
             ApiFailureStrategy _apiStrategy = new ApiFailureStrategy(this);
             Client = new Client(Settings) {AuthType = settings.AuthType};
-
             // ferox wants us to set this manually
             Inventory = new Inventory(Client, logicSettings);
             Navigation = new Navigation(Client);

@@ -269,6 +269,8 @@ namespace PoGo.NecroBot.Logic
         public double UseMasterBallBelowCatchProbability;
         //transfer
         [DefaultValue(true)]
+        public bool TransferWeakPokemon;
+        [DefaultValue(true)]
         public bool TransferDuplicatePokemon;
         [DefaultValue(true)]
         public bool TransferDuplicatePokemonOnCapture;
@@ -710,6 +712,7 @@ namespace PoGo.NecroBot.Logic
         public string GeneralConfigPath => _settings.GeneralConfigPath;
         public bool AutoUpdate => _settings.AutoUpdate;
         public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
+        public bool TransferWeakPokemon => _settings.TransferWeakPokemon;
         public bool DisableHumanWalking => _settings.DisableHumanWalking;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage; 
         public string KeepMinOperator => _settings.KeepMinOperator;
@@ -724,7 +727,6 @@ namespace PoGo.NecroBot.Logic
         public float UseBerriesMinIv => _settings.UseBerriesMinIv;
         public double UseBerriesBelowCatchProbability => _settings.UseBerriesBelowCatchProbability;
         public string UseBerriesOperator => _settings.UseBerriesOperator;
-        
         public float UpgradePokemonIvMinimum => _settings.UpgradePokemonIvMinimum;
         public float UpgradePokemonCpMinimum => _settings.UpgradePokemonCpMinimum;
         public string UpgradePokemonMinimumStatsOperator => _settings.UpgradePokemonMinimumStatsOperator;
