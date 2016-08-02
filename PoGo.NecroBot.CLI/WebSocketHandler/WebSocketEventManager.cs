@@ -26,7 +26,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler
             } 
         }
 
-        public  async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
+        public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
             if (_registerdHandlers.ContainsKey((string)message.Command))
             {
