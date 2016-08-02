@@ -49,8 +49,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 else if(pokemonTransferFilter != null)
                 {
                     if (duplicatePokemon.Cp >= pokemonTransferFilter.KeepMinCp ||
-                            PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >
-                            pokemonTransferFilter.KeepMinIvPercentage ||
+                            PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >= pokemonTransferFilter.KeepMinIvPercentage ||
                             pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move1) ||
                             pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move2))
                     {
