@@ -187,7 +187,7 @@ namespace PoGo.NecroBot.Logic.Common
                 "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventItemRecycled, "{0}x {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCapture,
-                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11}"),
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} | lat: {12} long: {13}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
                 "No Pokeballs - We missed a {0} with CP {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.WaitingForMorePokemonToEvolve,
