@@ -476,5 +476,6 @@
       "Key": "pkmNotEnoughRessources",
       "Value": "Potenziamento Pokemon Fallito: Risorse Insufficienti"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

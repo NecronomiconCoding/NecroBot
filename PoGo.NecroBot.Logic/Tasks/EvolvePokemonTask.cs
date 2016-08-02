@@ -108,6 +108,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Result = evolveResponse.Result
                     });
                 }
+                var end = true;
             }
         }
 

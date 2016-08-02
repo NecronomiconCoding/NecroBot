@@ -381,5 +381,6 @@
       "Key": "noPokemonToSnipe",
       "Value": "[Sniper] Nenhum Pokémon encontrado!"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

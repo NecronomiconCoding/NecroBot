@@ -464,5 +464,6 @@
       "Key": "pkmNotEnoughRessources",
       "Value": "Pokemono pagerinimas nepavyko - nepakanka resursų"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

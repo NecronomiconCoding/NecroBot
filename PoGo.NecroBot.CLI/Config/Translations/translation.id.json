@@ -18,7 +18,7 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "AuthType salah pada config.json"
+      "Value": "Jenis AuthType pada config.json tidak diketahui"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
@@ -73,6 +73,26 @@
     {
       "Key": "eventNoPokeballs",
       "Value": "Pokeball habis - {0} dengan CP {1} tidak dapat ditangkap"
+    },
+    {
+      "Key": "WaitingForMorePokemonToEvolve",
+      "Value": "Menunggu untuk evolusi {0} Pokemon setelah {1} lagi tertangkap! ({2}/{3} dari {4}% inventori)"
+    },
+    {
+      "Key": "UseLuckyEggsMinPokemonAmountTooHigh",
+      "Value": "Telur keberuntungan tidak akan terpakai dengan pengaturan UseLuckyEggsMinPokemonAmount diatur ke {0}, gunakan <= {1}"
+    },
+    {
+      "Key": "CatchMorePokemonToUseLuckyEgg",
+      "Value": "Tangkap {0} Pokemon lagi untuk mulai menggunakan telur keberuntungan!"
+    },
+    {
+      "Key": "EventUseBerry",
+      "Value": "Terpakai {0} | {1} tersisa"
+    },
+    {
+      "Key": "ItemRazzBerry",
+      "Value": "Razz Buni"
     },
     {
       "Key": "catchStatusAttempt",
@@ -153,6 +173,10 @@
     {
       "Key": "logEntryFarming",
       "Value": "FARMING"
+    },
+    {
+      "Key": "logEntrySniper",
+      "Value": "BIDIKAN"
     },
     {
       "Key": "logEntryRecycling",
@@ -267,6 +291,21 @@
       "Value": "Lewatkan {0}"
     },
     {
+      "Key": "ZeroPokeballInv",
+      "Value": "Anda tidak memiliki PokeBall di inventori, tidak ada Pokemon yang dapat ditangkap lagi!"
+    },
+    {
+      "Key": "CurrentPokeballInv",
+      "Value": "[Inventori saat ini] PokeBall: {0} | GreatBall: {1} | UltraBall: {2} | MasterBall: {3}"
+    },
+    {
+      "Key": "MaxItemsCombinedOverMaxItemStorage",
+      "Value": "[Konfigurasi Salah] Total barang maksimum anda (ball+potion+revive={0}) melebihi penyimpanan barang maksimal anda ({1})"
+    },
+    {
+      "Key": "RecyclingQuietly",
+    },
+    {
       "Key": "invFullTransferring",
       "Value": "Inventori pokemon penuh. Mentransfer pokemon..."
     },
@@ -294,6 +333,10 @@
     {
       "Key": "pokemonRename",
       "Value": "Pokemon {0} ({1}) berubah nama dari {2} to {3}."
+    },
+    {
+      "Key": "pokemonFavorite",
+      "Value": "{0}% sempurna {1} (CP {2}) *difavoritkan*."
     },
     {
       "Key": "pokemonIgnoreFilter",
@@ -448,5 +491,6 @@
       "Key": "PkmNotEnoughRessources",
       "Value": "Peningkatan Pokemon gagal karena tidak cukup bahan"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }
