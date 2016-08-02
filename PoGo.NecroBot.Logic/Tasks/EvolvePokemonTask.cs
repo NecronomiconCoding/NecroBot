@@ -48,7 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         session.EventDispatcher.Send(new NoticeEvent()
                         {
                             Message = session.Translation.GetTranslation(TranslationString.WaitingForMorePokemonToEvolve,
-                                pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage/100.0f)
+                                pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage)
                         });
 
                         return;
