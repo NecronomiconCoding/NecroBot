@@ -93,88 +93,60 @@ namespace PoGo.NecroBot.Logic
 
             var pokemonList = pokemonFiltered.ToList();
 
-            if (keepPokemonsThatCanEvolve)
+            var results = new List<PokemonData>();
+            var pokemonsThatCanBeTransfered = pokemonList.GroupBy(p => p.PokemonId).ToList();
+
+            var myPokemonSettings = await GetPokemonSettings();
+            var pokemonSettings = myPokemonSettings.ToList();
+
+            var myPokemonFamilies = await GetPokemonFamilies();
+            var pokemonFamilies = myPokemonFamilies.ToArray();
+
+            foreach (var pokemon in pokemonsThatCanBeTransfered)
             {
-                var results = new List<PokemonData>();
-                var pokemonsThatCanBeTransfered = pokemonList.GroupBy(p => p.PokemonId).ToList();
+                var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
+                var amountToSkip = GetPokemonTransferFilter(pokemon.Key).KeepMinDuplicatePokemon;
 
-                var myPokemonSettings = await GetPokemonSettings();
-                var pokemonSettings = myPokemonSettings.ToList();
+                var transferrablePokemonTypeCount = pokemonFiltered.Where(p => p.PokemonId == pokemon.Key).Count();
+                var currentPokemonTypeCount = myPokemon.Where(p => p.PokemonId == pokemon.Key).Count();
+                var currentlyKeepingPokemonType = currentPokemonTypeCount - transferrablePokemonTypeCount;
 
-                var myPokemonFamilies = await GetPokemonFamilies();
-                var pokemonFamilies = myPokemonFamilies.ToArray();
-
-                foreach (var pokemon in pokemonsThatCanBeTransfered)
+                if (currentlyKeepingPokemonType > GetPokemonTransferFilter(pokemon.Key).KeepMinDuplicatePokemon)
                 {
-                    var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
-                    var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
-                    var amountToSkip = GetPokemonTransferFilter(pokemon.Key).KeepMinDuplicatePokemon;
-
-                    var transferrablePokemonTypeCount = pokemonFiltered.Where(p => p.PokemonId == pokemon.Key).Count();
-                    var currentPokemonTypeCount = myPokemon.Where(p => p.PokemonId == pokemon.Key).Count();
-                    var currentlyKeepingPokemonType = currentPokemonTypeCount - transferrablePokemonTypeCount;
-
-                    if (currentlyKeepingPokemonType > GetPokemonTransferFilter(pokemon.Key).KeepMinDuplicatePokemon)
-                    {
-                        amountToSkip = 0;
-                    }
-                    else if (transferrablePokemonTypeCount > amountToSkip || currentlyKeepingPokemonType > 1)
-                    {
-                        amountToSkip = (amountToSkip - currentlyKeepingPokemonType + 1);
-                    }
-
-                    // Fail safe
-                    if (amountToSkip < 0) amountToSkip = 0;
-
-                    if (settings.CandyToEvolve > 0 && _logicSettings.PokemonsToEvolve.Contains(pokemon.Key))
-                    {
-                        var amountPossible = (familyCandy.Candy_ - 1) / (settings.CandyToEvolve - 1);
-                        if (amountPossible > amountToSkip)
-                            amountToSkip += amountPossible;
-                    }
-
-                    if (prioritizeIVoverCp)
-                    {
-                        results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
-                            .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                            .ThenByDescending(n => n.Cp)
-                            .Skip(amountToSkip)
-                            .ToList());
-                    }
-                    else
-                    {
-                        results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
-                            .OrderByDescending(x => x.Cp)
-                            .ThenByDescending(PokemonInfo.CalculatePokemonPerfection)
-                            .Skip(amountToSkip)
-                            .ToList());
-                    }
+                    amountToSkip = 0;
+                }
+                else if (transferrablePokemonTypeCount > amountToSkip || currentlyKeepingPokemonType > 1)
+                {
+                    amountToSkip = (amountToSkip - currentlyKeepingPokemonType + 1);
                 }
 
-                return results;
+                // Fail safe
+                if (amountToSkip < 0) amountToSkip = 0;
+                    
+                // Don't get rid of it if we can evolve it
+                if (keepPokemonsThatCanEvolve && settings.EvolutionIds.Count != 0)
+                    continue;
+
+                if (prioritizeIVoverCp)
+                {
+                    results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
+                        .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
+                        .ThenByDescending(n => n.Cp)
+                        .Skip(amountToSkip)
+                        .ToList());
+                }
+                else
+                {
+                    results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
+                        .OrderByDescending(x => x.Cp)
+                        .ThenByDescending(PokemonInfo.CalculatePokemonPerfection)
+                        .Skip(amountToSkip)
+                        .ToList());
+                }
             }
 
-            if (prioritizeIVoverCp)
-            {
-                return pokemonList
-                    .GroupBy(p => p.PokemonId)
-                    .Where(x => x.Any())
-                    .SelectMany(
-                        p =>
-                            p.OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                                .ThenBy(n => n.StaminaMax)
-                                .Skip(GetPokemonTransferFilter(p.Key).KeepMinDuplicatePokemon)
-                                .ToList());
-            }
-            return pokemonList
-                .GroupBy(p => p.PokemonId)
-                .Where(x => x.Any())
-                .SelectMany(
-                    p =>
-                        p.OrderByDescending(x => x.Cp)
-                            .ThenBy(n => n.StaminaMax)
-                            .Skip(GetPokemonTransferFilter(p.Key).KeepMinDuplicatePokemon)
-                            .ToList());
+            return results;
+            
         }
 
         public async Task<IEnumerable<EggIncubator>> GetEggIncubators()

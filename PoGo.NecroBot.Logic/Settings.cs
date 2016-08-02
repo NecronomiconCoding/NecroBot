@@ -139,9 +139,9 @@ namespace PoGo.NecroBot.Logic
         public bool DisableHumanWalking;
         [DefaultValue(10)]
         public double DefaultAltitude;
-        [DefaultValue(40.785091)]
+        [DefaultValue(40.778915)]
         public double DefaultLatitude;
-        [DefaultValue(-73.968285)]
+        [DefaultValue(-73.962277)]
         public double DefaultLongitude;
         [DefaultValue(31.0)]
         public double WalkingSpeedInKilometerPerHour;
