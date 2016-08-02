@@ -408,15 +408,11 @@ namespace PoGo.NecroBot.Logic
                 myPokemon.Where(
                     p => (p.Cp >= _logicSettings.UpgradePokemonCpMinimum ||
                         PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.UpgradePokemonIvMinimum)).OrderByDescending(p => p.Cp).ToList();
-            /**
-             * @todo make sure theres enough candy (see line 109)
-             * @todo remove _logicSettings.AmountOfTimesToUpgradeLoop and use it as a count limitation in levelup loop for successes  instead
-             * */
+
             return upgradePokemon = (_logicSettings.LevelUpByCPorIv.ToLower().Equals("iv")) ?
                     highestPokemonForUpgrade.Where(p => (p.Cp < PokemonInfo.CalculateMaxCp(p)))
-                        .OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(_logicSettings.AmountOfTimesToUpgradeLoop).ToList() :
-                    highestPokemonForUpgrade.Where(p => (p.Cp < PokemonInfo.CalculateMaxCp(p)))
-                        .Take(_logicSettings.AmountOfTimesToUpgradeLoop).ToList();
+                        .OrderByDescending(PokemonInfo.CalculatePokemonPerfection).ToList() :
+                    highestPokemonForUpgrade.Where(p => (p.Cp < PokemonInfo.CalculateMaxCp(p))).ToList();
         }
 
         public TransferFilter GetPokemonTransferFilter(PokemonId pokemon)
