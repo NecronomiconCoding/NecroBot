@@ -84,7 +84,7 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer(
             bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCp = false,
-            IEnumerable<PokemonId> filter = null, IEnumerable<PokemonId> evolultionFilter = null)
+            IEnumerable<PokemonId> filter = null)
         {
             var myPokemon = await GetPokemons();
 
@@ -101,9 +101,6 @@ namespace PoGo.NecroBot.Logic
             if (filter != null)
                 pokemonFiltered = pokemonFiltered.Where(p => !filter.Contains(p.PokemonId));
 
-            if (evolultionFilter != null && keepPokemonsThatCanEvolve)
-                pokemonFiltered = pokemonFiltered.Where(p => !evolultionFilter.Contains(p.PokemonId));
-
             var pokemonList = pokemonFiltered.ToList();
 
             var results = new List<PokemonData>();
@@ -117,9 +114,7 @@ namespace PoGo.NecroBot.Logic
 
             foreach (var pokemon in pokemonsThatCanBeTransfered)
             {
-                var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
                 var amountToSkip = GetPokemonTransferFilter(pokemon.Key).KeepMinDuplicatePokemon;
-                var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
 
                 var transferrablePokemonTypeCount = pokemonFiltered.Where(p => p.PokemonId == pokemon.Key).Count();
                 var currentPokemonTypeCount = myPokemon.Where(p => p.PokemonId == pokemon.Key).Count();
@@ -137,14 +132,20 @@ namespace PoGo.NecroBot.Logic
                 // Fail safe
                 if (amountToSkip < 0) amountToSkip = 0;
 
-                // Check if we want to evolve this type of Pokemon before we transfer it
-                if (settings.EvolutionIds.Count != 0 && settings.CandyToEvolve > 0 && _logicSettings.PokemonsToEvolve.Contains(pokemon.Key))
+                if (keepPokemonsThatCanEvolve && _logicSettings.PokemonsToEvolve.Contains(pokemon.Key))
                 {
-                    var amountPossible = (familyCandy.Candy_ - 1) / (settings.CandyToEvolve - 1);
-                    if (amountPossible > amountToSkip)
-                        amountToSkip = amountPossible+1;
-                }
+                    var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
+                    var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
 
+                    // Check if we want to evolve this type of Pokemon before we transfer it
+                    if (settings.EvolutionIds.Count != 0 && settings.CandyToEvolve > 0 && _logicSettings.PokemonsToEvolve.Contains(pokemon.Key))
+                    {
+                        var amountPossible = (familyCandy.Candy_ - 1) / (settings.CandyToEvolve - 1);
+                        if (amountPossible > amountToSkip)
+                            amountToSkip = amountPossible + 1;
+                    }
+                }
+                
                 if (prioritizeIVoverCp)
                 {
                     results.AddRange(pokemonList.Where(x => x.PokemonId == pokemon.Key)
