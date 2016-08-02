@@ -369,7 +369,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 var resp = request.GetResponse();
                 var reader = new StreamReader(resp.GetResponseStream());
-                var fullresp = reader.ReadToEnd().Replace(" M", "Male").Replace(" F", "Female").Replace("'", "");
+                var fullresp = reader.ReadToEnd().Replace(" M", "Male").Replace(" F", "Female").Replace("Farfetch'd", "Farfetchd").Replace("Mr.Maleime", "MrMime");
 
                 scanResult = JsonConvert.DeserializeObject<ScanResult>(fullresp);
             }
