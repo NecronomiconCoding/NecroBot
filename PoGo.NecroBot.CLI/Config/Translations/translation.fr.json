@@ -477,13 +477,622 @@
       "Value": "Echec. Ressources insuffisantes pour évoluer ce Pokémon"
     },
     {
-       "Key": "eventUseBerry",
-       "Value": "{0} utilisé, {1} restant"
+      "Key": "eventUseBerry",
+      "Value": "{0} utilisé, {1} restant"
     },
     {
-       "Key": "itemRazzBerry", 
-       "Value": "Baie Framby"
+      "Key": "itemRazzBerry", 
+      "Value": "Baie Framby"
     }
   ],
-  "PokemonStrings": [ ]
+  "PokemonStrings": [
+    {
+      "Key": "Missingno",
+      "Value": "Missingno"
+    },
+    {
+      "Key": "Bulbasaur",
+      "Value": "Bulbizarre"
+    },
+    {
+      "Key": "Ivysaur",
+      "Value": "Herbizarre"
+    },
+    {
+      "Key": "Venusaur",
+      "Value": "Florizarre"
+    },
+    {
+      "Key": "Charmander",
+      "Value": "Salamèche"
+    },
+    {
+      "Key": "Charmeleon",
+      "Value": "Reptincel"
+    },
+    {
+      "Key": "Charizard",
+      "Value": "Dracaufeu"
+    },
+    {
+      "Key": "Squirtle",
+      "Value": "Carapuce"
+    },
+    {
+      "Key": "Wartortle",
+      "Value": "Carabaffe"
+    },
+    {
+      "Key": "Blastoise",
+      "Value": "Tortank"
+    },
+    {
+      "Key": "Caterpie",
+      "Value": "Chenipan"
+    },
+    {
+      "Key": "Metapod",
+      "Value": "Chrysacier"
+    },
+    {
+      "Key": "Butterfree",
+      "Value": "Papilusion"
+    },
+    {
+      "Key": "Weedle",
+      "Value": "Aspicot"
+    },
+    {
+      "Key": "Kakuna",
+      "Value": "Coconfort"
+    },
+    {
+      "Key": "Beedrill",
+      "Value": "Dardargnan"
+    },
+    {
+      "Key": "Pidgey",
+      "Value": "Roucool"
+    },
+    {
+      "Key": "Pidgeotto",
+      "Value": "Roucoups"
+    },
+    {
+      "Key": "Pidgeot",
+      "Value": "Roucarnage"
+    },
+    {
+      "Key": "Rattata",
+      "Value": "Rattata"
+    },
+    {
+      "Key": "Raticate",
+      "Value": "Rattatac"
+    },
+    {
+      "Key": "Spearow",
+       "Value": "Piafabec"
+    },
+    {
+      "Key": "Fearow",
+       "Value": "Rapasdepic"
+    },
+    {
+      "Key": "Ekans",
+       "Value": "Abo"
+    },
+    {
+      "Key": "Arbok",
+      "Value": "Arbok"
+    },
+    {
+      "Key": "Pikachu",
+      "Value": "Pikachu"
+    },
+    {
+      "Key": "Raichu",
+      "Value": "Raichu"
+    },
+    {
+      "Key": "Sandshrew",
+      "Value": "Sabelette"
+    },
+    {
+      "Key": "Sandslash",
+      "Value": "Sablaireau"
+    },
+    {
+      "Key": "NidoranFemale",
+      "Value": "NidoranF"
+    },
+    {
+      "Key": "Nidorina",
+      "Value": "Nidorina"
+    },
+    {
+      "Key": "Nidoqueen",
+      "Value": "Nidoqueen"
+    },
+    {
+      "Key": "NidoranMale",
+      "Value": "NidoranM"
+    },
+    {
+      "Key": "Nidorino",
+      "Value": "Nidorino"
+    },
+    {
+      "Key": "Nidoking",
+      "Value": "Nidoking"
+    },
+    {
+      "Key": "Clefairy",
+      "Value": "Mélofée"
+    },
+    {
+      "Key": "Clefable",
+      "Value": "Mélodelfe"
+    },
+    {
+      "Key": "Vulpix",
+      "Value": "Goupix"
+    },
+    {
+      "Key": "Ninetales",
+      "Value": "Feunard"
+    },
+    {
+      "Key": "Jigglypuff",
+      "Value": "Rondoudou"
+    },
+    {
+      "Key": "Wigglytuff",
+      "Value": "Grodoudou"
+    },
+    {
+      "Key": "Zubat",
+      "Value": "Nosferapti"
+    },
+    {
+      "Key": "Golbat",
+      "Value": "Nosferalto"
+    },
+    {
+      "Key": "Oddish",
+      "Value": "Mystherbe"
+    },
+    {
+      "Key": "Gloom",
+      "Value": "Ortide"
+    },
+    {
+      "Key": "Vileplume",
+      "Value": "Rafflesia"
+    },
+    {
+      "Key": "Paras",
+      "Value": "Paras"
+    },
+    {
+      "Key": "Parasect",
+      "Value": "Parasect"
+    },
+    {
+      "Key": "Venonat",
+      "Value": "Mimitoss"
+    },
+    {
+      "Key": "Venomoth",
+      "Value": "Aéromite"
+    },
+    {
+      "Key": "Diglett",
+      "Value": "Taupiqueur"
+    },
+    {
+      "Key": "Dugtrio",
+      "Value": "Triopikeur"
+    },
+    {
+      "Key": "Meowth",
+      "Value": "Miaouss"
+    },
+     {
+      "Key": "Persian",
+      "Value": "Persian"
+    },
+    {
+      "Key": "Psyduck",
+      "Value": "Psykokwak"
+    },
+    {
+      "Key": "Golduck",
+      "Value": "Akwakwak"
+    },
+    {
+      "Key": "Mankey",
+      "Value": "Férosinge"
+    },
+    {
+      "Key": "Primeape",
+      "Value": "Colossinge"
+    },
+    {
+      "Key": "Growlithe",
+      "Value": "Caninos"
+    },
+    {
+      "Key": "Arcanine",
+      "Value": "Arcanin"
+    },
+    {
+      "Key": "Poliwag",
+      "Value": "Ptitard"
+    },
+    {
+      "Key": "Poliwhirl",
+      "Value": "Têtarte"
+    },
+    {
+      "Key": "Poliwrath",
+      "Value": "Tartard"
+    },
+    {
+      "Key": "Abra",
+      "Value": "Abra"
+    },
+    {
+      "Key": "Kadabra",
+      "Value": "Kadabra"
+    },
+    {
+      "Key": "Alakazam",
+      "Value": "Alakazam"
+    },
+    {
+      "Key": "Machop",
+      "Value": "Machoc"
+    },
+    {
+      "Key": "Machoke",
+      "Value": "Machopeur"
+    },
+    {
+      "Key": "Machamp",
+      "Value": "Mackogneur"
+    },
+    {
+      "Key": "Bellsprout",
+      "Value": "Chétiflor"
+    },
+    {
+      "Key": "Weepinbell",
+      "Value": "Boustiflor"
+    },
+    {
+      "Key": "Victreebel",
+      "Value": "Empiflor"
+    },
+    {
+      "Key": "Tentacool",
+      "Value": "Tentacool"
+    },
+    {
+      "Key": "Tentacruel",
+      "Value": "Tentacruel"
+    },
+    {
+      "Key": "Geodude",
+      "Value": "Racaillou"
+    },
+    {
+      "Key": "Graveler",
+      "Value": "Gravalanch"
+    },
+    {
+      "Key": "Golem",
+      "Value": "Grolem"
+    },
+    {
+      "Key": "Ponyta",
+      "Value": "Ponyta"
+    },
+    {
+      "Key": "Rapidash",
+      "Value": "Galopa"
+    },
+    {
+      "Key": "Slowpoke",
+      "Value": "Ramoloss"
+    },
+    {
+      "Key": "Slowbro",
+      "Value": "Flagadoss"
+    },
+    {
+      "Key": "Magnemite",
+      "Value": "Magnéti"
+    },
+    {
+      "Key": "Magneton",
+      "Value": "Magnéton"
+    },
+    {
+      "Key": "Farfetchd",
+      "Value": "Canarticho"
+    },
+    {
+      "Key": "Doduo",
+      "Value": "Doduo"
+    },
+    {
+      "Key": "Dodrio",
+      "Value": "Dodrio"
+    },
+    {
+      "Key": "Seel",
+      "Value": "Otaria"
+    },
+    {
+      "Key": "Dewgong",
+      "Value": "Lamantine"
+    },
+    {
+      "Key": "Grimer",
+      "Value": "Tadmorv"
+    },
+    {
+      "Key": "Muk",
+      "Value": "Grotadmorv"
+    },
+    {
+      "Key": "Shellder",
+      "Value": "Kokiyas"
+    },
+    {
+      "Key": "Cloyster",
+      "Value": "Crustabri"
+    },
+    {
+      "Key": "Gastly",
+      "Value": "Fantominus"
+    },
+    {
+      "Key": "Haunter",
+      "Value": "Spectrum"
+    },
+    {
+      "Key": "Gengar",
+      "Value": "Ectoplasma"
+    },
+    {
+      "Key": "Onix",
+      "Value": "Onix"
+    },
+    {
+      "Key": "Drowzee",
+      "Value": "Soporifik"
+    },
+    {
+      "Key": "Hypno",
+      "Value": "Hypnomade"
+    },
+    {
+      "Key": "Krabby",
+      "Value": "Krabby"
+    },
+    {
+      "Key": "Kingler",
+      "Value": "Krabboss"
+    },
+    {
+      "Key": "Voltorb",
+      "Value": "Voltorbe"
+    },
+    {
+      "Key": "Electrode",
+      "Value": "Électrode"
+    },
+    {
+      "Key": "Exeggcute",
+      "Value": "Nœunœuf"
+    },
+    {
+      "Key": "Exeggutor",
+      "Value": "Noadkoko"
+    },
+    {
+      "Key": "Cubone",
+      "Value": "Osselait"
+    },
+    {
+      "Key": "Marowak",
+      "Value": "Ossatueur"
+    },
+    {
+      "Key": "Hitmonlee",
+      "Value": "Kicklee"
+    },
+    {
+      "Key": "Hitmonchan",
+      "Value": "Tygnon"
+    },
+    {
+      "Key": "Lickitung",
+      "Value": "Excelangue"
+    },
+    {
+      "Key": "Koffing",
+      "Value": "Smogo"
+    },
+    {
+      "Key": "Weezing",
+      "Value": "Smogogo"
+    },
+    {
+      "Key": "Rhyhorn",
+      "Value": "Rhinocorne"
+    },
+    {
+      "Key": "Rhydon",
+      "Value": "Rhinoféros"
+    },
+    {
+      "Key": "Chansey",
+      "Value": "Leveinard"
+    },
+    {
+      "Key": "Tangela",
+      "Value": "Saquedeneu"
+    },
+    {
+      "Key": "Kangaskhan",
+      "Value": "Kangourex"
+    },
+    {
+      "Key": "Horsea",
+      "Value": "Hypotrempe"
+    },
+    {
+      "Key": "Seadra",
+      "Value": "Hypocéan"
+    },
+    {
+      "Key": "Goldeen",
+      "Value": "Poissirène"
+    },
+    {
+      "Key": "Seaking",
+      "Value": "Poissoroy"
+    },
+    {
+      "Key": "Staryu",
+      "Value": "Stari"
+    },
+    {
+      "Key": "Starmie",
+      "Value": "Staross"
+    },
+    {
+      "Key": "MrMime",
+      "Value": "M.Mime"
+    },
+    {
+      "Key": "Scyther",
+      "Value": "Insécateur"
+    },
+    {
+      "Key": "Jynx",
+      "Value": "Lippoutou"
+    },
+    {
+      "Key": "Electabuzz",
+      "Value": "Élektek"
+    },
+    {
+      "Key": "Magmar",
+      "Value": "Magmar"
+    },
+    {
+      "Key": "Pinsir",
+      "Value": "Scarabrute"
+    },
+    {
+      "Key": "Tauros",
+      "Value": "Tauros"
+    },
+    {
+      "Key": "Magikarp",
+      "Value": "Magicarpe"
+    },
+    {
+      "Key": "Gyarados",
+      "Value": "Léviator"
+    },
+    {
+      "Key": "Lapras",
+      "Value": "Lokhlass"
+    },
+    {
+      "Key": "Ditto",
+      "Value": "Métamorph"
+    },
+    {
+      "Key": "Eevee",
+      "Value": "Évoli"
+    },
+    {
+      "Key": "Vaporeon",
+      "Value": "Aquali"
+    },
+    {
+      "Key": "Jolteon",
+      "Value": "Voltali"
+    },
+    {
+      "Key": "Flareon",
+      "Value": "Pyroli"
+    },
+    {
+      "Key": "Porygon",
+      "Value": "Porygon"
+    },
+    {
+      "Key": "Omanyte",
+      "Value": "Amonita"
+    },
+    {
+      "Key": "Omastar",
+      "Value": "Amonistar"
+    },
+    {
+      "Key": "Kabuto",
+      "Value": "Kabuto"
+    },
+    {
+      "Key": "Kabutops",
+      "Value": "Kabutops"
+    },
+    {
+      "Key": "Aerodactyl",
+      "Value": "Ptéra"
+    },
+    {
+      "Key": "Snorlax",
+      "Value": "Ronflex"
+    },
+    {
+      "Key": "Articuno",
+      "Value": "Artikodin"
+    },
+    {
+      "Key": "Zapdos",
+      "Value": "Électhor"
+    },
+    {
+      "Key": "Moltres",
+      "Value": "Sulfura"
+    },
+    {
+      "Key": "Dratini",
+      "Value": "Minidraco"
+    },
+    {
+      "Key": "Dragonair",
+      "Value": "Draco"
+    },
+    {
+      "Key": "Dragonite",
+      "Value": "Dracolosse"
+    },
+    {
+      "Key": "Mewtwo",
+      "Value": "Mewtwo"
+    },
+    {
+      "Key": "Mew",
+      "Value": "Mew"
+    }
+  ]
 }
