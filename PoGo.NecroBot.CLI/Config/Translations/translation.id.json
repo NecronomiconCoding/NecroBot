@@ -448,5 +448,6 @@
       "Key": "PkmNotEnoughRessources",
       "Value": "Peningkatan Pokemon gagal karena tidak cukup bahan"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }
