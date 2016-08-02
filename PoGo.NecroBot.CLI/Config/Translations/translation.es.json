@@ -480,5 +480,6 @@
       "Key": "pkmNotEnoughRessources",
       "Value": "Pokémon actualización fallida: No hay suficientes recursos"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }
