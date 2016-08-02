@@ -36,8 +36,6 @@ namespace PoGo.NecroBot.CLI
             if (args.Length > 0)
                 subPath = args[0];
 
-            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
-
             var settings = GlobalSettings.Load(subPath);
 
             if (settings == null)
@@ -113,7 +111,7 @@ namespace PoGo.NecroBot.CLI
 
         private static void UnhandledExceptionEventHandler(object obj, UnhandledExceptionEventArgs args)
         {
-            Logger.Write("Exceptiion caught, writing LogBuffer.", force: true);
+            Logger.Write("Exception caught");
             throw new Exception();
         }
     }

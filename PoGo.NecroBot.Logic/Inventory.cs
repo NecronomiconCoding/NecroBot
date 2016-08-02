@@ -281,7 +281,7 @@ namespace PoGo.NecroBot.Logic
             if (amountOfPokeballsToKeep < 1)
             {
                 Logger.Write(session.Translation.GetTranslation(TranslationString.PokeballsToKeepIncorrect),
-                    LogLevel.Error, ConsoleColor.Red);
+                    LogLevel.Error);
                 return new List<ItemData>();
             }
 
@@ -416,7 +416,7 @@ namespace PoGo.NecroBot.Logic
             if (amountOfPotionsToKeep < 1)
             {
                 Logger.Write(session.Translation.GetTranslation(TranslationString.PotionsToKeepIncorrect),
-                    LogLevel.Error, ConsoleColor.Red);
+                    LogLevel.Error);
                 return new List<ItemData>();
             }
 
@@ -432,7 +432,7 @@ namespace PoGo.NecroBot.Logic
             if (amountOfRevivesToKeep < 1)
             {
                 Logger.Write(session.Translation.GetTranslation(TranslationString.RevivesToKeepIncorrect),
-                    LogLevel.Error, ConsoleColor.Red);
+                    LogLevel.Error);
                 return new List<ItemData>();
             }
 
