@@ -255,7 +255,7 @@ namespace PoGo.NecroBot.CLI
             foreach (var pokemon in displayHighestsPokemonEvent.PokemonList)
                 Logger.Write(
                     $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: {session.Translation.GetPokemonTranslation(pokemon.Item1.PokemonId).PadRight(10, ' ')}\t MOVE1: {pokemon.Item5.ToString().PadRight(20, ' ')} MOVE2: {pokemon.Item6.ToString().PadRight(20, ' ')} Candy: {pokemon.Item7}",
-                    LogLevel.Info, ConsoleColor.Yellow);
+                    LogLevel.Info);
         }
 
         private static void HandleEvent(EvolveCountEvent evolveCountEvent, ISession session )
