@@ -82,5 +82,6 @@
       "Key": "candies",
       "Value": "ลูกอม: {0}"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

@@ -383,5 +383,6 @@
       "Key": "noPokemonToSnipe",
       "Value": "[Krypskytt] Inga Pokemons funna!"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

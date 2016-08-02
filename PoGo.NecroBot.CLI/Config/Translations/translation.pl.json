@@ -460,5 +460,6 @@
       "Key": "pkmNotEnoughRessources",
       "Value": "Ulepszanie Pokemona zakończone niepowodzeniem. Zbyt mało zasobów!"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

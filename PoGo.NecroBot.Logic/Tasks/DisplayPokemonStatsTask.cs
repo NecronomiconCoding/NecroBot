@@ -73,7 +73,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 foreach (var pokemon in allPokemonInBag)
                 {
                     Dumper.Dump(session,
-                        $"{pokemon.PokemonId},{PokemonInfo.GetLevel(pokemon)},{pokemon.Cp},{PokemonInfo.CalculatePokemonPerfection(pokemon)},{pokemon.Stamina},{pokemon.StaminaMax},{pokemon.Move1},{pokemon.Move2},{PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings)},{pokemon.OwnerName},{pokemon.Origin},{pokemon.HeightM},{pokemon.WeightKg},{pokemon.IndividualAttack},{pokemon.IndividualDefense},{pokemon.IndividualStamina},{pokemon.CpMultiplier},{pokemon.BattlesAttacked},{pokemon.BattlesDefended},{pokemon.CreationTimeMs},{pokemon.NumUpgrades},{pokemon.AdditionalCpMultiplier},{pokemon.Favorite},{pokemon.Nickname}",
+                        $"{session.Translation.GetPokemonTranslation(pokemon.PokemonId)},{PokemonInfo.GetLevel(pokemon)},{pokemon.Cp},{PokemonInfo.CalculatePokemonPerfection(pokemon)},{pokemon.Stamina},{pokemon.StaminaMax},{pokemon.Move1},{pokemon.Move2},{PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings)},{pokemon.OwnerName},{pokemon.Origin},{pokemon.HeightM},{pokemon.WeightKg},{pokemon.IndividualAttack},{pokemon.IndividualDefense},{pokemon.IndividualStamina},{pokemon.CpMultiplier},{pokemon.BattlesAttacked},{pokemon.BattlesDefended},{pokemon.CreationTimeMs},{pokemon.NumUpgrades},{pokemon.AdditionalCpMultiplier},{pokemon.Favorite},{pokemon.Nickname}",
                         dumpFileName);
                 }
             }
