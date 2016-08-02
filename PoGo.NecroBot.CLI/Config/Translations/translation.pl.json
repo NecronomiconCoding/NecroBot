@@ -22,7 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Znajdujesz się poza swoim zdefiniowanym zasięgiem! Przemieszczam Cię na start odległy o ({0}m) za 5 sekund. Sprawdź, czy Twój plik \"LastPos.ini\" jest poprawny!"
+      "Value": "Znajdujesz się poza swoim zdefiniowanym zasięgiem! Przemieszczę Cię na start odległy o ({0}m) za 5 sekund. Sprawdź, czy Twój plik \"LastPos.ini\" jest poprawny!"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepszy z CP: {3}  IV: {4}%] (Posiadane Cukierki: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepszy z CP: {3}   IV: {4}%] (Posiadane Cukierki: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -70,7 +70,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Brak Pokeballi - Uciekł {0} z CP {1}"
+      "Value": "Brak Pokeballi - Straciłeś {0} z CP: {1}"
     },
     {
       "Key": "eventUseBerry",
@@ -94,7 +94,7 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Przetwarzanie pliku GPX zakończone niepowodzeniem, próbuję ominąć ten krok."
+      "Value": "Przetwarzanie pliku GPX zakończone niepowodzeniem, próbuję ominąć ten krok..."
     },
     {
       "Key": "displayHighestsHeader",
@@ -138,7 +138,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Jajko wykluło się! Otrzymujesz {0} | Poziom: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "Jajko wykluło się! Otrzymujesz {0}   [Poziom: {1} CP: ({2}/{3}) IV: {4}%]"
     },
     {
       "Key": "logEntryError",
@@ -202,7 +202,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "Serwery PTC najprawdopodobniej nie działają albo Twoje dane są błędne. Spróbuj użyć konta Google."
+      "Value": "Serwery PTC najprawdopodobniej nie działają albo Twoje dane logowania są błędne. Spróbuj użyć konta Google."
     },
     {
       "Key": "tryingAgainIn",
@@ -214,11 +214,11 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Otwieram stronę Urządzenia Google. Proszę wkleić kod używając CTRL+V"
+      "Value": "Otwieram stronę Urządzeń Google. Proszę wkleić kod używając CTRL+V"
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Błąd kopiowania, zrób to ręcznie"
+      "Value": "Błąd kopiowania, zrób to ręcznie."
     },
     {
       "Key": "couldntCopyToClipboard2",
@@ -226,15 +226,15 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Wykryto realistyczne podróżowanie, przy użyciu \"UserSettings.settings\""
+      "Value": "Wykryto realistyczne podróżowanie używając \"UserSettings.settings\""
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Nie realistyczne podróżowanie na {0}, używam ostatnich ustawień z \"LastPos.ini\""
+      "Value": "Nierealistyczne podróżowanie na {0}, używam Twojej ostatniej pozycji z \"LastPos.ini\""
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Współrzędne w pliku \"LastPos.ini\" są niepoprawne, używam domyślnych współrzędnych"
+      "Value": "Współrzędne w pliku \"LastPos.ini\" są niepoprawne, używam domyślnych ustawień."
     },
     {
       "Key": "gotUpToDateVersion",
@@ -266,7 +266,7 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Poszukuję zwabionych Pokemonów... (kadzidło)"
+      "Value": "Poszukuję Pokemonów zwabionych kadzidłem..."
     },
     {
       "Key": "lookingForPokemon",
@@ -274,7 +274,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Poszukuję zwabionych Pokemonów... (przynęta)"
+      "Value": "Poszukuję Pokemonów zwabionych przynętą..."
     },
     {
       "Key": "pokemonSkipped",
@@ -318,11 +318,11 @@
     },
     {
       "Key": "pokemonRename",
-      "Nazwa": "Pokemona {0} została zmieniona z {2} na {3}."
+      "Nazwa": "Nazwa Pokemona {0} została zmieniona z {2} na {3}."
     },
     {
       "Key": "pokemonFavorite",
-      "Value": "{1} [IV: {0}% | CP: {2}] *Został Twoim Ulubieńcem*"
+      "Value": "Dodano do Ulubionych: {1}   [IV: {0}% | CP: {2}]"
     },
     {
       "Key": "pokemonIgnoreFilter",
@@ -382,7 +382,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Na twoim koncie Google aktywna jest weryfikacja dwuetapowa, będziesz musial wpisać nowe hasło do aplikacji w \"auth.json\""
+      "Value": "Na twoim koncie Google aktywna jest weryfikacja dwuetapowa, będziesz musial wprowadzić nowe hasło do aplikacji w \"auth.json\""
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -406,7 +406,7 @@
     },
     {
       "Key": "snipeScanEx",
-      "Value": "[Snajper] Mam na celowniku {0} z {1} i {2} IV..."
+      "Value": "[Snajper] Mam na celowniku {0} z IV: {1} w {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
@@ -434,19 +434,19 @@
     },
     {
       "Key": "noEggsAvailable",
-      "Value": "Brak dostępnych Jajek"
+      "Value": "Brak dostępnych Jajek."
     },
     {
       "Key": "useLuckyEggActive",
-      "Value": "Szczęśliwe Jajko zostało aktywowane"
+      "Value": "Szczęśliwe Jajko zostało aktywowane!"
     },
     {
       "Key": "noIncenseAvailable",
-      "Value": "Brak dostępnych Kadzideł"
+      "Value": "Brak dostępnych Kadzideł."
     },
     {
       "Key": "useIncenseActive",
-      "Value": "Kadzidło zostało aktywowane"
+      "Value": "Kadzidło zostało aktywowane!"
     },
     {
       "Key": "amountPkmSeenCaught",
