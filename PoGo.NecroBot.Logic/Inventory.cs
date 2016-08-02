@@ -132,18 +132,18 @@ namespace PoGo.NecroBot.Logic
                 // Fail safe
                 if (amountToSkip < 0) amountToSkip = 0;
 
-                if (keepPokemonsThatCanEvolve && _logicSettings.PokemonsToEvolve.Contains(pokemon.Key))
-                {
-                    var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
-                    var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
+                var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.Key);
+                var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
 
-                    // Check if we want to evolve this type of Pokemon before we transfer it
-                    if (settings.EvolutionIds.Count != 0 && settings.CandyToEvolve > 0 && _logicSettings.PokemonsToEvolve.Contains(pokemon.Key))
-                    {
-                        var amountPossible = (familyCandy.Candy_ - 1) / (settings.CandyToEvolve - 1);
-                        if (amountPossible > amountToSkip)
-                            amountToSkip = amountPossible + 1;
-                    }
+                // Check if we want to evolve this type of Pokemon before we transfer it, and if we have enough candy, and this pokemon can evolve
+                if (keepPokemonsThatCanEvolve && 
+                    _logicSettings.PokemonsToEvolve.Contains(pokemon.Key) && 
+                    settings.CandyToEvolve > 0 && 
+                    settings.EvolutionIds.Count != 0)
+                {
+                    var amountPossible = (familyCandy.Candy_ - 1) / (settings.CandyToEvolve - 1);
+                    if (amountPossible > amountToSkip)
+                        amountToSkip = amountPossible + 1;
                 }
                 
                 if (prioritizeIVoverCp)
