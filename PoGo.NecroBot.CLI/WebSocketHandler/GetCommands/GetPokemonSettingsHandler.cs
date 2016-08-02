@@ -4,23 +4,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SuperSocket.WebSocket;
-using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks;
+using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks;
 using PoGo.NecroBot.Logic.State;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands
+namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
 {
-    public class GetPokemonListHandler : IWebSocketRequestHandler
+    public class GetPokemonSettingsHandler : IWebSocketRequestHandler
     {
         public string Command { get; private set;}
 
-        public GetPokemonListHandler()
+        public GetPokemonSettingsHandler()
         {
-            Command = "GetPokemonList";
+            Command = "GetPokemonSettings";
         }
 
         public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
-            await GetPokemonListTask.Execute(session, webSocketSession, (string)message.RequestID);
+            await GetPokemonSettingsTask.Execute(session, webSocketSession, (string)message.RequestID);
         }
     }
 }
