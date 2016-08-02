@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} {1}m"
+      "Value": "{0} {1}m | {2}s"
     },
     {
       "Key": "eventProfileLogin",
@@ -51,6 +51,10 @@
     {
       "Key": "EventUsedIncense",
       "Value": "Utilisation d'un encens, reste : {0}"
+    },
+    {
+      "Key": "SnipeServerOffline",
+      "Value": "[Sniper] Le serveur est inaccessible." 
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -70,11 +74,23 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) |{1}-{2} Lv {3} {6}% {4}/{5} | {7}% Chance sur {8}m | {10} {9} restant, {11}"
+      "Value": "({0}) |{1}-{2} | Lv {3} {6}% {4}/{5} | {7}% Chance sur {8}m | {10} {9} restant, {11}"
     },
     {
       "Key": "eventNoPokeballs",
       "Value": "Plus de Pokeball - {0} PC{1} manqué"
+    },
+    {
+      "Key": "WaitingForMorePokemonToEvolve",
+      "Value": "Encore {1} Pokémon à capturer pour en évoluer {0} d'un coup ! ({2}/{3} pour {4}% de votre inventaire)"
+    },
+    {
+      "Key": "UseLuckyEggsMinPokemonAmountTooHigh",
+      "Value": "Un Oeuf Chance ne peut être utiliser avec UseLuckyEggsMinPokemonAmount = {0}, utilisez plutôt une valeur <= à {1}"
+    },
+    {
+      "Key": "CatchMorePokemonToUseLuckyEgg",
+      "Value": "Encore {0} Pokémon à capturer pour pouvoir utiliser un Oeuf Chance!"
     },
     {
       "Key": "catchStatusAttempt",
@@ -94,7 +110,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokémons"
+      "Value": "Pokémon"
     },
     {
       "Key": "commonWordPerfect",
@@ -202,11 +218,11 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Le compte n'est pas vérifié ! Arrêt en cours..."
+      "Value": "Votre compte n'est pas vérifié ! Arrêt en cours..."
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Chemin réaliste détecté, utilisation du fichier UserSettings.settings"
+      "Value": "Detected realistic Traveling, using Default Settings inside config.json"
     },
     {
       "Key": "notRealisticTravel",
@@ -226,7 +242,7 @@
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Téléchargement de la mise à jour..."
+      "Value": "Téléchargement d'une nouvelle mise à jour en cours..."
     },
     {
       "Key": "finishedDownloadingRelease",
@@ -250,7 +266,7 @@
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Recherche de pokémon..."
+      "Value": "Recherche de Pokémon..."
     },
     {
       "Key": "lookingForLurePokemon",
@@ -262,11 +278,11 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Vous n'avez plus de pokéballs, la capture de pokémons est impossible !"
+      "Value": "Vous n'avez plus de pokéballs, la capture de Pokémon est impossible !"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Inventaire] Pokéballs: {0} | Superballs: {1} | Hyperballs: {2} | Masterballs: {3}"
+      "Value": "[Inventaire] Poké Balls: {0} | Super Balls: {1} | Hyper Balls: {2} | Master Balls: {3}"
     },
     {
     	"Key": "MaxItemsCombinedOverMaxItemStorage",
@@ -277,36 +293,12 @@
       "Value": "Recyclage rapide en cours..."
     },
     {
-      "Key": "checkingForBallsToRecycle",
-      "Value": "Recherche de PokéBalls à supprimer. En garder {0}"
-    },
-    {
-      "Key": "checkingForPotionsToRecycle",
-      "Value": "Recherche de Potions à supprimer. En garder {0}"
-    },
-    {
-      "Key": "checkingForRevivesToRecycle",
-      "Value": "Recherche de Rappels à supprimer. En garder {0}"
-    },
-    {
-      "Key": "pokeballsToKeepIncorrect",
-      "Value": "TotalAmountOfPokeballsToKeep est mal configuré. Le nombre est inférieur à 1."
-    },
-    {
-      "Key": "potionsToKeepIncorrect",
-      "Value": "TotalAmountOfPotionsToKeep est mal configuré. Le nombre est inférieur à 1."
-    },
-    {
-      "Key": "revivesToKeepIncorrect",
-      "Value": "TotalAmountOfRevivesToKeep est mal configuré. Le nombre est inférieur à 1."
-    },
-    {
       "Key": "invFullTransferring",
-      "Value": "L'inventaire de pokémon est plein. Transfert en cours..."
+      "Value": "L'inventaire de Pokémon est plein. Transfert en cours..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "L'inventaire de pokémon est plein. Merci de transférer manuellement ou de changer la valeur de \"TransferDuplicatePokemon\" en \"true\"..."
+      "Value": "L'inventaire de Pokémon est plein. Merci de transférer manuellement ou de changer la valeur de \"TransferDuplicatePokemon\" en \"true\"..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -413,16 +405,16 @@
       "Value": "[Sniper] Scan en cours sur {0}..."
     },
     {
-      "Key": "snipeScanEx",
-      "Value": "[Sniper] Scan de {0} avec {1} IV à {2}..."
+      "Key": "SnipeScanEx",
+      "Value": "[Sniper] Scan d'un {0} avec {1} IV à {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] Echec du scan. Aucun pokémon trouvé."
+      "Value": "[Sniper] Echec du scan. Aucun Pokémon trouvé."
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Pas assez de Pokeballs pour commencer un snipping! ({0}/{1})"
+      "Value": "[Sniper] Pas assez de pokéballs ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -478,11 +470,11 @@
     },
     {
       "Key": "PkmPotentialEvolveCount",
-      "Value": "[Evolution] Total envisageable : {0}"
+      "Value": "[Evolution] Disponible : {0}"
     },
     {
       "Key": "PkmNotEnoughRessources",
-      "Value": "Echec. Ressources insuffisantes pour évoluer le pokémon"
+      "Value": "Echec. Ressources insuffisantes pour évoluer ce Pokémon"
     },
     {
        "Key": "eventUseBerry",

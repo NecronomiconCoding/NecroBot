@@ -1,8 +1,8 @@
 ﻿#region using directives
 
-using System.Collections.Generic;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
+using System.Collections.Generic;
 
 #endregion
 
@@ -46,16 +46,19 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
-        public TransferFilter(int keepMinCp, float keepMinIvPercentage, int keepMinDuplicatePokemon)
+        public TransferFilter(int keepMinCp, float keepMinIvPercentage, int keepMinDuplicatePokemon, 
+            List<PokemonMove> moves = null)
         {
             KeepMinCp = keepMinCp;
             KeepMinIvPercentage = keepMinIvPercentage;
             KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
+            Moves = moves ?? new List<PokemonMove>();
         }
 
         public int KeepMinCp { get; set; }
         public float KeepMinIvPercentage { get; set; }
         public int KeepMinDuplicatePokemon { get; set; }
+        public List<PokemonMove> Moves { get; set; }
     }
 
     public interface ILogicSettings
@@ -65,6 +68,7 @@ namespace PoGo.NecroBot.Logic
         bool TransferConfigAndAuthOnUpdate { get; }
         float KeepMinIvPercentage { get; }
         int KeepMinCp { get; }
+        string KeepMinOperator { get; }
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }
@@ -86,6 +90,7 @@ namespace PoGo.NecroBot.Logic
         float UpgradePokemonIvMinimum { get; }
         int DelayBetweenPlayerActions { get; }
         bool UsePokemonToNotCatchFilter { get; }
+        bool UsePokemonSniperFilterOnly { get; }
         int KeepMinDuplicatePokemon { get; }
         bool PrioritizeIvOverCp { get; }
         int AmountOfTimesToUpgradeLoop { get; }
@@ -97,6 +102,7 @@ namespace PoGo.NecroBot.Logic
         float UseBerriesMinIv { get; }
         double UseBerriesBelowCatchProbability { get; }
         string UseBerriesOperator { get; }
+        string UpgradePokemonMinimumStatsOperator { get; }
         int MaxTravelDistanceInMeters { get; }
         bool UseGpxPathing { get; }
         string GpxFile { get; }
@@ -130,6 +136,7 @@ namespace PoGo.NecroBot.Logic
         int TotalAmountOfPokeballsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
+        int TotalAmountOfBerriesToKeep { get; }
 
         bool ShowPokeballCountsBeforeRecycle { get; }
         bool VerboseRecycling { get; }

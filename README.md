@@ -1,7 +1,7 @@
 [![Discord](https://img.shields.io/badge/discord-NECROBOT.IO-blue.svg)](https://discord.gg/VXKxNFr)
-[![Build status](https://ci.appveyor.com/api/projects/status/4eoclxw6ee53fouu?svg=true)](https://ci.appveyor.com/project/NecronomiconCoding/necrobot)
-[![Stories in Ready](https://badge.waffle.io/NecronomiconCoding/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NecronomiconCoding/NecroBot)
-[![Stories in Progress](https://badge.waffle.io/NecronomiconCoding/NecroBot.svg?label=waffle%3Ain%20progress&title=In%20Progress)](https://waffle.io/NecronomiconCoding/NecroBot)
+[![Build status](https://ci.appveyor.com/api/projects/status/8ijvvr6b7fe2h0w2?svg=true)](https://ci.appveyor.com/project/NecronomiconCoding/necrobot)
+[![Stories in Ready](https://badge.waffle.io/NECROBOTIO/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NecronomiconCoding/NecroBot)
+[![Stories in Progress](https://badge.waffle.io/NECROBOTIO/NecroBot.svg?label=waffle%3Ain%20progress&title=In%20Progress)](https://waffle.io/NecronomiconCoding/NecroBot)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/LICENSE.md)
 
 <!-- title -->
