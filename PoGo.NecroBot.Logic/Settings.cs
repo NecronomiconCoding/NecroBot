@@ -133,6 +133,8 @@ namespace PoGo.NecroBot.Logic
         public float UpgradePokemonCpMinimum;
         [DefaultValue(95)]
         public float UpgradePokemonIvMinimum;
+        [DefaultValue("and")]
+        public string UpgradePokemonMinimumStatsOperator;
         //position
         [DefaultValue(false)]
         public bool DisableHumanWalking;
@@ -702,9 +704,10 @@ namespace PoGo.NecroBot.Logic
         public float UseBerriesMinIv => _settings.UseBerriesMinIv;
         public double UseBerriesBelowCatchProbability => _settings.UseBerriesBelowCatchProbability;
         public string UseBerriesOperator => _settings.UseBerriesOperator;
-
+        
         public float UpgradePokemonIvMinimum => _settings.UpgradePokemonIvMinimum;
         public float UpgradePokemonCpMinimum => _settings.UpgradePokemonCpMinimum;
+        public string UpgradePokemonMinimumStatsOperator => _settings.UpgradePokemonMinimumStatsOperator;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve; 
