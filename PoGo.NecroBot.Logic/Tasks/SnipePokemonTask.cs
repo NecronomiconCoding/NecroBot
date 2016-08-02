@@ -369,7 +369,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 var resp = request.GetResponse();
                 var reader = new StreamReader(resp.GetResponseStream());
-                var fullresp = reader.ReadToEnd().Replace(" M", "Male").Replace(" F", "Female").Replace("'", "");
+                var fullresp = reader.ReadToEnd().Replace(" M", "Male").Replace(" F", "Female").Replace("Farfetch'd", "Farfetchd").Replace("Mr.Maleime", "MrMime");
 
                 scanResult = JsonConvert.DeserializeObject<ScanResult>(fullresp);
             }
@@ -426,6 +426,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     // most likely System.IO.IOException
                     session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
                 }
+                await Task.Delay(100, cancellationToken);
             }
         }
     }

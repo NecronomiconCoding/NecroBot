@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using System.Collections.Generic;
+using PoGo.NecroBot.Logic.PoGoUtils;
 using POGOProtos.Enums;
 using PoGo.NecroBot.Logic.PoGoUtils;
 
