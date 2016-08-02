@@ -267,7 +267,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(0.05)]
         public double UseMasterBallBelowCatchProbability;
         //transfer
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool TransferWeakPokemon;
         [DefaultValue(true)]
         public bool TransferDuplicatePokemon;
