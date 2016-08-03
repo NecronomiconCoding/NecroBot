@@ -15,16 +15,17 @@ namespace PoGo.NecroBot.Logic.Logging
         private static string _path;
         private static DateTime _lastLogTime;
         private static readonly IList<string> LogbufferList = new List<string>();
+        private static string _lastLogMessage;
 
         private static void Log(string message, bool force = false)
         {
             lock (LogbufferList)
             {
+                LogbufferList.Add(message);
+
                 if (_lastLogTime.AddSeconds(60).Ticks > DateTime.Now.Ticks && !force)
-                {
-                    LogbufferList.Add(message);
                     return;
-                }
+
                 using (
                     var log =
                         File.AppendText(Path.Combine(_path,
@@ -73,10 +74,11 @@ namespace PoGo.NecroBot.Logic.Logging
         /// <param name="color">Optional. Default is automatic color.</param>
         public static void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black, bool force = false)
         {
-            if (_logger == null)
+            if (_logger == null || _lastLogMessage == message )
                 return;
+            _lastLogMessage = message;
             _logger.Write(message, level, color);
-            Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message, force));
+            Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message), force);
         }
     }
 

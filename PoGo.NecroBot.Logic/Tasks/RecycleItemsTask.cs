@@ -212,7 +212,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             int totalBerryCount = razz + bluk + nanab + pinap + wepar;
             if (totalBerryCount > session.LogicSettings.TotalAmountOfBerriesToKeep)
             {
-                Diff = totalBerryCount - session.LogicSettings.TotalAmountOfPotionsToKeep;
+                Diff = totalBerryCount - session.LogicSettings.TotalAmountOfBerriesToKeep;
                 if (Diff > 0)
                 {
                     await RecycleItems(session, cancellationToken, razz, ItemId.ItemRazzBerry);

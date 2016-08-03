@@ -52,10 +52,11 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(PokemonEvolveEvent pokemonEvolveEvent, ISession session)
         {
+            string strPokemon = session.Translation.GetPokemonTranslation(pokemonEvolveEvent.Id);
             Logger.Write(pokemonEvolveEvent.Result == EvolvePokemonResponse.Types.Result.Success
-                ? session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedSuccess, pokemonEvolveEvent.Id, pokemonEvolveEvent.Exp)
+                ? session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedSuccess, strPokemon, pokemonEvolveEvent.Exp)
                 : session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedFailed, pokemonEvolveEvent.Id, pokemonEvolveEvent.Result,
-                    session.Translation.GetPokemonTranslation(pokemonEvolveEvent.Id)),
+                    strPokemon),
                 LogLevel.Evolve);
         }
 
@@ -250,11 +251,14 @@ namespace PoGo.NecroBot.CLI
             }
             var strPerfect = session.Translation.GetTranslation(TranslationString.CommonWordPerfect);
             var strName = session.Translation.GetTranslation(TranslationString.CommonWordName).ToUpper();
+            var move1 = session.Translation.GetTranslation(TranslationString.DisplayHighestMove1Header);
+            var move2 = session.Translation.GetTranslation(TranslationString.DisplayHighestMove2Header);
+            var candy = session.Translation.GetTranslation(TranslationString.DisplayHighestCandy);
 
             Logger.Write($"====== {strHeader} ======", LogLevel.Info, ConsoleColor.Yellow);
             foreach (var pokemon in displayHighestsPokemonEvent.PokemonList)
                 Logger.Write(
-                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: {session.Translation.GetPokemonTranslation(pokemon.Item1.PokemonId).PadRight(10, ' ')}\t MOVE1: {pokemon.Item5.ToString().PadRight(20, ' ')} MOVE2: {pokemon.Item6.ToString().PadRight(20, ' ')} Candy: {pokemon.Item7}",
+                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: {session.Translation.GetPokemonTranslation(pokemon.Item1.PokemonId).PadRight(10, ' ')}\t {move1}: {pokemon.Item5.ToString().PadRight(20, ' ')} {move2}: {pokemon.Item6.ToString().PadRight(20, ' ')} {candy}: {pokemon.Item7}",
                     LogLevel.Info, ConsoleColor.Yellow);
         }
 
