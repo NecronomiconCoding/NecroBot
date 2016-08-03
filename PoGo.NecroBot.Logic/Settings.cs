@@ -312,6 +312,13 @@ namespace PoGo.NecroBot.Logic
         public bool UsePokemonSniperFilterOnly;
         [DefaultValue(14251)]
         public int WebSocketPort;
+
+        [DefaultValue("")]
+        public string GMapsApiKey;
+
+        [DefaultValue(false)]
+        public bool UseGMapsNavigating;
+
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
@@ -957,5 +964,7 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
         public int TotalAmountOfBerriesToKeep => _settings.TotalAmountOfBerriesToKeep;
+        public string GMapsApiKey => _settings.GMapsApiKey;
+        public bool UseGMapsNavigating => _settings.UseGMapsNavigating;
     }
 }

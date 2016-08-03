@@ -177,5 +177,9 @@ namespace PoGo.NecroBot.Logic
         SnipeSettings PokemonToSnipe { get; }
 
         bool StartupWelcomeDelay { get; }
+
+        string GMapsApiKey { get; }
+
+        bool UseGMapsNavigating { get; }
     }
 }
