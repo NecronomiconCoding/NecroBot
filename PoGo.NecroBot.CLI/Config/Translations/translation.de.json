@@ -571,7 +571,7 @@
     },
     {
       "Key": "nidoranFemale",
-      "Value": "NidoranF"
+      "Value": "NidoranW"
     },
     {
       "Key": "nidorina",
@@ -595,7 +595,7 @@
     },
     {
       "Key": "clefairy",
-      "Value": "Pipi"
+      "Value": "Piepi"
     },
     {
       "Key": "clefable",
@@ -755,7 +755,7 @@
     },
     {
       "Key": "graveler",
-      "Value": "Georock"
+      "Value": "Georok"
     },
     {
       "Key": "golem",
@@ -855,11 +855,11 @@
     },
     {
       "Key": "voltorb",
-      "Value": "Voltoball"
+      "Value": "Voltobal"
     },
     {
       "Key": "electrode",
-      "Value": "Lektroball"
+      "Value": "Lektrobal"
     },
     {
       "Key": "exeggcute",
@@ -1055,7 +1055,7 @@
     },
     {
       "Key": "mewtwo",
-      "Value": "Mewto"
+      "Value": "Mewtu"
     },
     {
       "Key": "mew",
