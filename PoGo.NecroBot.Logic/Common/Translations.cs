@@ -152,6 +152,30 @@ namespace PoGo.NecroBot.Logic.Common
         PkmNotEnoughRessources,
         EventUsedIncense,
         SnipeServerOffline,
+        PromptError,
+        FirstStartLanguagePrompt,
+        FirstStartLanguageCodePrompt,
+        FirstStartLanguageConfirm,
+        FirstStartPrompt,
+        FirstStartAutoGenSettings,
+        FirstStartSetupAccount,
+        FirstStartSetupTypePrompt,
+        FirstStartSetupTypeConfirm,
+        FirstStartSetupTypePromptError,
+        FirstStartSetupUsernamePrompt,
+        FirstStartSetupUsernameConfirm,
+        FirstStartSetupPasswordPrompt,
+        FirstStartSetupPasswordConfirm,
+        FirstStartAccountCompleted,
+        FirstStartDefaultLocationPrompt,
+        FirstStartDefaultLocationSet,
+        FirstStartDefaultLocation,
+        FirstStartSetupDefaultLocationError,
+        FirstStartSetupDefaultLatPrompt,
+        FirstStartSetupDefaultLatConfirm,
+        FirstStartSetupDefaultLongPrompt,
+        FirstStartSetupDefaultLongConfirm,
+        FirstStartSetupCompleted,
     }
 
     public class Translation : ITranslation
@@ -361,7 +385,31 @@ namespace PoGo.NecroBot.Logic.Common
                 "[Evolves] Potential Evolves: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.PkmNotEnoughRessources,
                 "Pokemon Upgrade Failed Not Enough Resources"),
-            new KeyValuePair<TranslationString, string>(TranslationString.SnipeServerOffline, "Sniping server is offline. Skipping...")
+            new KeyValuePair<TranslationString, string>(TranslationString.SnipeServerOffline, "Sniping server is offline. Skipping..."),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartPrompt, "This is your first start, would you like to begin setup? {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartLanguagePrompt, "Would you like to change the default language? {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartLanguageCodePrompt, "Please enter a new language code"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartLanguageConfirm, "Language Code Applied: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PromptError, "[INPUT ERROR] Error with input, please enter '{0}' or '{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartAutoGenSettings, "Config/Auth file automatically generated and must be completed before continuing"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupAccount, "### Setting up new USER ACCOUNT ###"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupTypePrompt, "Please choose an account type: {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupTypeConfirm, "Chosen Account Type: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupTypePromptError, "[ERROR] submitted an incorrect account type, please choose '{0}' or '{1}'"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupUsernamePrompt, "Please enter a Username"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupUsernameConfirm, "Accepted username: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupPasswordPrompt, "Please enter a Password"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupPasswordConfirm, "Accepted password: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartAccountCompleted, "### User Account Completed ###"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartDefaultLocationPrompt, "Would you like to setup a new Default Location? {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartDefaultLocationSet, "Default Location Applied"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartDefaultLocation, "### Setting Default Position ###"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLocationError, "[ERROR] Please input only a VALUE for example: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLatPrompt, "Please enter a Latitude (Right click to paste)"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLatConfirm, "Lattitude accepted: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLongPrompt, "Please enter a Longitude (Right click to paste)"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLongConfirm, "Longitude accepted: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupCompleted, "### COMPLETED CONFIG SETUP ###")
         };
 
         [JsonProperty("PokemonStrings",
@@ -614,6 +662,70 @@ namespace PoGo.NecroBot.Logic.Common
             }
 
             return translations;
+        }
+
+        public static void Reload( ILogicSettings logicSettings, Translation translations )
+        {
+            var translationsLanguageCode = logicSettings.TranslationLanguageCode;
+            var translationPath = Path.Combine( logicSettings.GeneralConfigPath, "translations" );
+            var fullPath = Path.Combine( translationPath, "translation." + translationsLanguageCode + ".json" );
+            
+            if( File.Exists( fullPath ) )
+            {
+                var input = File.ReadAllText( fullPath );
+
+                var jsonSettings = new JsonSerializerSettings();
+                jsonSettings.Converters.Add( new StringEnumConverter { CamelCaseText = true } );
+                jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
+                jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
+
+                try
+                {
+                    translations = JsonConvert.DeserializeObject<Translation>( input, jsonSettings );
+                    //TODO make json to fill default values as it won't do it now
+                    new Translation()._translationStrings.Where(
+                        item => translations._translationStrings.All( a => a.Key != item.Key ) )
+                        .ToList()
+                        .ForEach( translations._translationStrings.Add );
+                    new Translation()._pokemonTranslationStrings.Where(
+                        item => translations._pokemonTranslationStrings.All( a => a.Key != item.Key ) )
+                        .ToList()
+                        .ForEach( translations._pokemonTranslationStrings.Add );
+                }
+                catch( JsonException )
+                {
+                    Logger.Write( "[ERROR] Issue loading translations", LogLevel.Error );
+
+                    switch( translationsLanguageCode )
+                    {
+                        case "en":
+                            Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
+
+                            string strInput = Console.ReadLine().ToLower();
+
+                            if( strInput.Equals( "y" ) )
+                            {
+                                // Currently this section can only rebuild the EN translations file \\
+                                // This is because default values cannot be supplied from other languages \\
+                                Logger.Write( "Loading fresh translations and continuing" );
+                                translations = new Translation();
+                                translations.Save( Path.Combine( translationPath, "translation.en.json" ) );
+                            }
+                            else
+                            {
+                                ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error", 3, LogLevel.Error );
+                                return;
+                            }
+
+                            break;
+                        default:
+                            ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error\n"
+                                + "[ERROR] No replacement translations: Check appropriate files for typos", 5, LogLevel.Error );
+
+                            return;
+                    }
+                }
+            }
         }
 
         public void Save(string fullPath)

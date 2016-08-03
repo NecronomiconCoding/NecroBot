@@ -29,27 +29,52 @@ namespace PoGo.NecroBot.CLI
                 QuitEvent.Set();
                 eArgs.Cancel = true;
             };
-            var culture = CultureInfo.CreateSpecificCulture("en-US");
-
-            CultureInfo.DefaultThreadCurrentCulture = culture;
-            Thread.CurrentThread.CurrentCulture = culture;
             if (args.Length > 0)
                 subPath = args[0];
 
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
-            
-            var settings = GlobalSettings.Load(subPath);
 
-            if (settings == null)
+            var profilePath = Path.Combine( Directory.GetCurrentDirectory(), subPath );
+            var profileConfigPath = Path.Combine( profilePath, "config" );
+            var configFile = Path.Combine( profileConfigPath, "config.json" );
+
+            GlobalSettings settings;
+            Boolean boolNeedsSetup = false;
+
+            if( File.Exists( configFile ) )
+                settings = GlobalSettings.Load( subPath );
+            else
             {
-                Logger.Write("Press a Key to continue...",
-                    LogLevel.Warning);
-                Console.ReadKey();
-                return;
+                settings = new GlobalSettings();
+                settings.ProfilePath = profilePath;
+                settings.ProfileConfigPath = profileConfigPath;
+                settings.GeneralConfigPath = Path.Combine( Directory.GetCurrentDirectory(), "config" );
+                settings.TranslationLanguageCode = strCulture;
+
+                boolNeedsSetup = true;
             }
+
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
+            
+            if( boolNeedsSetup )
+            {
+                if( GlobalSettings.PromptForSetup( session.Translation ) )
+                    session = GlobalSettings.SetupSettings( session, settings, configFile );
+                else
+                {
+                    GlobalSettings.Load( subPath );
+
+                    Logger.Write( "Press a Key to continue...",
+                        LogLevel.Warning );
+                    Console.ReadKey();
+                    return;
+                }
+
+            }
+
             session.Client.ApiFailure = new ApiFailureStrategy(session);
 
+            Console.WriteLine( "Started Session" );
             /*SimpleSession session = new SimpleSession
             {
                 _client = new PokemonGo.RocketAPI.Client(new ClientSettings(settings)),
