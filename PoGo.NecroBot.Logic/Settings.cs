@@ -300,6 +300,8 @@ namespace PoGo.NecroBot.Logic
         public bool TransferDuplicatePokemon;
         [DefaultValue(true)]
         public bool TransferDuplicatePokemonOnCapture;
+        [DefaultValue(true)]
+        public bool DoNotTransferFavorite;
         //favorite
         [DefaultValue(95)]
         public float FavoriteMinIvPercentage;
@@ -863,6 +865,7 @@ namespace PoGo.NecroBot.Logic
         public bool AutoUpdate => _settings.AutoUpdate;
         public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
         public bool TransferWeakPokemon => _settings.TransferWeakPokemon;
+        public bool DoNotTransferFavorite => _settings.DoNotTransferFavorite;
         public bool DisableHumanWalking => _settings.DisableHumanWalking;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage; 
         public string KeepMinOperator => _settings.KeepMinOperator;

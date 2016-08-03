@@ -37,7 +37,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     (PokemonInfo.CalculatePokemonPerfection(pokemon) >= session.LogicSettings.KeepMinIvPercentage &&
                      session.LogicSettings.PrioritizeIvOverCp) ||
                      (PokemonInfo.GetLevel(pokemon) >= session.LogicSettings.KeepMinLvl && session.LogicSettings.UseKeepMinLvl) ||
-                    pokemon.Favorite == 1)
+                    (pokemon.Favorite == 1 && session.LogicSettings.DoNotTransferFavorite))
                     continue;
 
                 await session.Client.Inventory.TransferPokemon(pokemon.Id);
