@@ -594,13 +594,15 @@ namespace PoGo.NecroBot.Logic.Common
                             }
                             else
                             {
-                                ErrorHandler.ThrowFatalError( null, 3 );
+                                ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error", 3, LogLevel.Error );
                                 return null;
                             }
 
                             break;
                         default:
-                            ErrorHandler.ThrowFatalError( "[ERROR] No replacement translations: Check appropriate files for typos", 5 );
+                            ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error\n"
+                                + "[ERROR] No replacement translations: Check appropriate files for typos", 5, LogLevel.Error );
+
                             return null;
                     }
                 }
