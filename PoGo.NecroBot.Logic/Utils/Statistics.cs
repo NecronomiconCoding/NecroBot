@@ -6,6 +6,10 @@ using System;
 using System.Globalization;
 using System.Linq;
 using POGOProtos.Networking.Responses;
+using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Logging;
+using POGOProtos.Inventory.Item;
+using Google.Protobuf.Collections;
 
 #endregion
 
@@ -28,6 +32,7 @@ namespace PoGo.NecroBot.Logic.Utils
         public int TotalPokemons;
         public int TotalPokemonsTransfered;
         public int TotalStardust;
+        public int LevelForRewards = -1;
 
         public void Dirty(Inventory inventory)
         {
@@ -58,6 +63,30 @@ namespace PoGo.NecroBot.Logic.Utils
                     hours = Math.Truncate(TimeSpan.FromHours(time).TotalHours);
                     minutes = TimeSpan.FromHours(time).Minutes;
                 }
+                
+                if( LevelForRewards == -1 || stat.Level >= LevelForRewards )
+                {
+                    LevelUpRewardsResponse Result = Execute( inventory ).Result;
+
+                    if( Result.ToString().ToLower().Contains( "awarded_already" ) )
+                        LevelForRewards = stat.Level + 1;
+
+                    if( Result.ToString().ToLower().Contains( "success" ) )
+                    {
+                        Logger.Write( "Leveled up: " + stat.Level, LogLevel.Info );
+
+                        RepeatedField<ItemAward> items = Result.ItemsAwarded;
+
+                        if( items.Any<ItemAward>() )
+                        {
+                            Logger.Write( "- Received Items -", LogLevel.Info );
+                            foreach( ItemAward item in items )
+                            {
+                                Logger.Write( $"[ITEM] {item.ItemId} x {item.ItemCount} ", LogLevel.Info );
+                            }
+                        }
+                    }
+                }
 
                 output = new StatsExport
                 {
@@ -69,6 +98,12 @@ namespace PoGo.NecroBot.Logic.Utils
                 };
             }
             return output;
+        }
+
+        public async Task<LevelUpRewardsResponse> Execute( Inventory inventory )
+        {
+            var Result = await inventory.GetLevelUpRewards( inventory );
+            return Result;
         }
 
         public double GetRuntime()

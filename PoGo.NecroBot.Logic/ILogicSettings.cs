@@ -46,12 +46,13 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
-        public TransferFilter(int keepMinCp, float keepMinIvPercentage, int keepMinDuplicatePokemon, 
+        public TransferFilter(int keepMinCp, float keepMinIvPercentage, string keepMinOperator, int keepMinDuplicatePokemon, 
             List<PokemonMove> moves = null)
         {
             KeepMinCp = keepMinCp;
             KeepMinIvPercentage = keepMinIvPercentage;
             KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
+            KeepMinOperator = keepMinOperator;
             Moves = moves ?? new List<PokemonMove>();
         }
 
@@ -59,6 +60,7 @@ namespace PoGo.NecroBot.Logic
         public float KeepMinIvPercentage { get; set; }
         public int KeepMinDuplicatePokemon { get; set; }
         public List<PokemonMove> Moves { get; set; }
+        public string KeepMinOperator { get; set; }
     }
 
     public interface ILogicSettings
@@ -79,8 +81,8 @@ namespace PoGo.NecroBot.Logic
         int UseGreatBallAboveCp { get; }
         int UseUltraBallAboveCp { get; }
         int UseMasterBallAboveCp { get; }
-        int UseGreatBallAboveIv { get; }
-        int UseUltraBallAboveIv { get; }
+        double UseGreatBallAboveIv { get; }
+        double UseUltraBallAboveIv { get; }
         double UseMasterBallBelowCatchProbability { get; }
         double UseUltraBallBelowCatchProbability { get; }
         double UseGreatBallBelowCatchProbability { get; }

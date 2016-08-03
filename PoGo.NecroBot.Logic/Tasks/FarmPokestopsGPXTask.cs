@@ -37,7 +37,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    var trackPoints = track.Segments.ElementAt(0).TrackPoints;
+                    var trackPoints = track.Segments.ElementAt(curTrkSeg).TrackPoints;
                     for (var curTrkPt = 0; curTrkPt < trackPoints.Count; curTrkPt++)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
