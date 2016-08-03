@@ -49,6 +49,8 @@ namespace PoGo.NecroBot.CLI
                 settings.ProfilePath = profilePath;
                 settings.ProfileConfigPath = profileConfigPath;
                 settings.GeneralConfigPath = Path.Combine( Directory.GetCurrentDirectory(), "config" );
+
+                string strCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
                 settings.TranslationLanguageCode = strCulture;
 
                 boolNeedsSetup = true;
