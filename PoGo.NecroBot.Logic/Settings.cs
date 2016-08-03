@@ -256,10 +256,10 @@ namespace PoGo.NecroBot.Logic
         public int UseUltraBallAboveCp;
         [DefaultValue(1500)]
         public int UseMasterBallAboveCp;
-        [DefaultValue(85)]
-        public int UseGreatBallAboveIv;
-        [DefaultValue(95)]
-        public int UseUltraBallAboveIv;
+        [DefaultValue(85.0)]
+        public double UseGreatBallAboveIv;
+        [DefaultValue(95.0)]
+        public double UseUltraBallAboveIv;
         [DefaultValue(0.2)]
         public double UseGreatBallBelowCatchProbability;
         [DefaultValue(0.1)]
@@ -739,8 +739,8 @@ namespace PoGo.NecroBot.Logic
         public int UseGreatBallAboveCp => _settings.UseGreatBallAboveCp;
         public int UseUltraBallAboveCp => _settings.UseUltraBallAboveCp;
         public int UseMasterBallAboveCp => _settings.UseMasterBallAboveCp;
-        public int UseGreatBallAboveIv => _settings.UseGreatBallAboveIv;
-        public int UseUltraBallAboveIv => _settings.UseUltraBallAboveIv;
+        public double UseGreatBallAboveIv => _settings.UseGreatBallAboveIv;
+        public double UseUltraBallAboveIv => _settings.UseUltraBallAboveIv;
         public double UseMasterBallBelowCatchProbability => _settings.UseMasterBallBelowCatchProbability;
         public double UseUltraBallBelowCatchProbability => _settings.UseUltraBallBelowCatchProbability;
         public double UseGreatBallBelowCatchProbability => _settings.UseGreatBallBelowCatchProbability;
