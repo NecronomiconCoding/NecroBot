@@ -46,17 +46,21 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
-        public TransferFilter(int keepMinCp, float keepMinIvPercentage, string keepMinOperator, int keepMinDuplicatePokemon, 
+        public TransferFilter(int keepMinCp, int keepMinLvl, float keepMinIvPercentage, string keepMinOperator, bool useKeepMinLvl, int keepMinDuplicatePokemon, 
             List<PokemonMove> moves = null)
         {
             KeepMinCp = keepMinCp;
+            KeepMinLvl = keepMinLvl;
             KeepMinIvPercentage = keepMinIvPercentage;
             KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
             KeepMinOperator = keepMinOperator;
+            UseKeepMinLvl = useKeepMinLvl;
             Moves = moves ?? new List<PokemonMove>();
         }
 
         public int KeepMinCp { get; set; }
+        public int KeepMinLvl { get; set; }
+        public bool UseKeepMinLvl { get; set; }
         public float KeepMinIvPercentage { get; set; }
         public int KeepMinDuplicatePokemon { get; set; }
         public List<PokemonMove> Moves { get; set; }
@@ -71,7 +75,9 @@ namespace PoGo.NecroBot.Logic
         bool TransferConfigAndAuthOnUpdate { get; }
         float KeepMinIvPercentage { get; }
         int KeepMinCp { get; }
+        int KeepMinLvl { get; }
         string KeepMinOperator { get; }
+        bool UseKeepMinLvl { get; }
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }

@@ -92,11 +92,13 @@ namespace PoGo.NecroBot.Logic
                 myPokemon.Where(
                     p => p.DeployedFortId == string.Empty &&
                             p.Favorite == 0 && (p.Cp < GetPokemonTransferFilter(p.PokemonId).KeepMinCp ||
-                                                PokemonInfo.CalculatePokemonPerfection(p) < GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage)) :
+                                                PokemonInfo.CalculatePokemonPerfection(p) < GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage) ||
+                                                                (_logicSettings.UseKeepMinLvl && p.NumUpgrades < GetPokemonTransferFilter(p.PokemonId).KeepMinLvl)):
                 myPokemon.Where(
                     p => p.DeployedFortId == string.Empty &&
                             p.Favorite == 0 && (p.Cp < GetPokemonTransferFilter(p.PokemonId).KeepMinCp &&
-                                                PokemonInfo.CalculatePokemonPerfection(p) < GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage));
+                                                PokemonInfo.CalculatePokemonPerfection(p) < GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage) ||
+                                                        (_logicSettings.UseKeepMinLvl && p.NumUpgrades < GetPokemonTransferFilter(p.PokemonId).KeepMinLvl));
 
             if (filter != null)
                 pokemonFiltered = pokemonFiltered.Where(p => !filter.Contains(p.PokemonId));
@@ -422,8 +424,8 @@ namespace PoGo.NecroBot.Logic
             {
                 return _logicSettings.PokemonsTransferFilter[pokemon];
             }
-            return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinIvPercentage,
-                _logicSettings.KeepMinOperator, _logicSettings.KeepMinDuplicatePokemon);
+            return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinLvl, _logicSettings.KeepMinIvPercentage,
+                _logicSettings.KeepMinOperator, _logicSettings.UseKeepMinLvl, _logicSettings.KeepMinDuplicatePokemon);
         }
 
         public async Task<GetInventoryResponse> RefreshCachedInventory()
