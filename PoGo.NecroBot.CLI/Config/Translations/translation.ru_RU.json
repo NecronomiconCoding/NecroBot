@@ -21,6 +21,10 @@
       "Value": "Неизвестный AuthType в config.json"
     },
     {
+      "Key": "loginInvalid",
+      "Value": "Учетные данные пользователя недействительны, не удалось войти в систему."
+    },
+    {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
         "Вы находитесь вне указанного радиуса! Возвращаемся к точке старта (дистанция {0}м) через 5 сек. Ваш LastPos.ini файл корректен?"
@@ -32,7 +36,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "<{0}> XP:{1}, Gems:{2}, Итемов: {3}"
+      "Value": "<{0}> XP:{1}, Gems:{2}, Items:{3}, Широта:{4}, Долгота:{5}"
     },
     {
       "Key": "eventFortFailed",
@@ -45,6 +49,10 @@
     {
       "Key": "eventProfileLogin",
       "Value": "Играем за {0}"
+    },
+    {
+      "Key": "eventUsedIncense",
+      "Value": "Использованы благовония, их осталось: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
@@ -69,11 +77,31 @@
     {
       "Key": "eventPokemonCapture",
       "Value":
-        "=>({0})({1}) {2} {3}-УР (CР:{4}/{5}|VI:{6}%) c {7}% шансом на {8}м исп. {9} ({10} осталось) {11}"
+        "=>({0})({1}) {2} {3}-УР (CР:{4}/{5}|VI:{6}%) c {7}% шансом на {8}м исп. {9} ({10} осталось). | {11} | широта: {12} долгота: {13}"
     },
     {
       "Key": "eventNoPokeballs",
       "Value": "Нет Pokeball'ов - Мы упустили {0} (CP:{1})"
+    },
+    {
+      "Key": "waitingForMorePokemonToEvolve",
+      "Value": "Waiting to evolve {0} Pokemon once {1} more are caught! ({2}/{3} for {4}% inventory)"
+    },
+    {
+      "Key": "useLuckyEggsMinPokemonAmountTooHigh",
+      "Value": "Lucky eggs will never be used with UseLuckyEggsMinPokemonAmount set to {0}, use <= {1} instead"
+    },
+    {
+      "Key": "catchMorePokemonToUseLuckyEgg",
+      "Value": "Catch {0} more Pokemon to use a Lucky Egg!"
+    },
+    {
+      "Key": "eventUseBerry",
+      "Value": "Использовано {0} | {1} осталось"
+    },
+    {
+      "Key": "itemRazzBerry",
+      "Value": "Razz Berry"
     },
     {
       "Key": "catchStatusAttempt",
@@ -88,7 +116,7 @@
       "Value": "Конфет: {0}"
     },
     {
-      "Key": "unhandledGPXData",
+      "Key": "unhandledGpxData",
       "Value": "Неизвестные данные в GPX файле, пробуем пропустить."
     },
     {
@@ -108,7 +136,7 @@
       "Value": "Неизвестный"
     },
     {
-      "Key": "displayHighestsCPHeader",
+      "Key": "displayHighestsCpHeader",
       "Value": "ТОП по CP"
     },
     {
@@ -133,7 +161,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Из Яйца получили: {0}"
+      "Value": "Из Яйца получили: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -156,11 +184,15 @@
       "Value": "ФАРМ"
     },
     {
+      "Key": "logEntrySniper",
+      "Value": "СНАЙПЕР"
+    },
+    {
       "Key": "logEntryRecycling",
       "Value": "УДАЛЯЕМ"
     },
     {
-      "Key": "logEntryPKMN",
+      "Key": "logEntryPkmn",
       "Value": "ЛОВИМ"
     },
     {
@@ -218,11 +250,11 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Обнаружено реалистичное перемещение, используем UserSettings.settings"
+      "Value": "Обнаружено реалистичное перемещение, используем настройки по умолчанию в файле config.json"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Не реалистичное перемещение в {0}, используем последний файл LastPos.ini"
+      "Value": "Не реалистичное перемещение в {0}, используем последнее сохраненное в LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -249,8 +281,8 @@
       "Value": "Завершена распаковка файлов..."
     },
     {
-      "Key": "FinishedTransferringConfig",
-      "Value": "Закончено передачи своей конфигурации на новую версию..."
+      "Key": "finishedTransferringConfig",
+      "Value": "Завершена передача вашей конфигурации в новую версию..."
     },
     {
       "Key": "updateFinished",
@@ -258,7 +290,7 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Ищем покемона привлеченного Ладаном..."
+      "Value": "Ищем покемона привлеченного Благовониями..."
     },
     {
       "Key": "lookingForPokemon",
@@ -271,6 +303,26 @@
     {
       "Key": "pokemonSkipped",
       "Value": "Пропущен {0}"
+    },
+    {
+      "Key": "zeroPokeballInv",
+      "Value": "У вас больше нет покеболов в инвентаре, нет возможности больше ловить покемонов!"
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "Текущее количество Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
+    },
+    {
+      "Key": "currentItemInv",
+      "Value": "Текущее количество Potions: {0} | Revives: {1} | Berries: {2} | Incense: {3} | Lucky Eggs: {4} | Lures: {5}"
+    },
+    {
+      "Key": "maxItemsCombinedOverMaxItemStorage",
+      "Value": "[Configuration Invalid] Your maximum items combined (balls+potions+revives={0}) is over your max item storage ({1})"
+    },
+    {
+      "Key": "recyclingQuietly",
+      "Value": "Recycling Quietly..."
     },
     {
       "Key": "invFullTransferring",
@@ -300,6 +352,10 @@
     {
       "Key": "pokemonRename",
       "Value": "Покемон {0} ({1}) переименован из {2} в {3}."
+    },
+    {
+      "Key": "pokemonFavorite",
+      "Value": "{0}% IV {1} (CP {2}) *избранные*."
     },
     {
       "Key": "pokemonIgnoreFilter",
@@ -339,7 +395,7 @@
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "на Ладан"
+      "Value": "на Благовония"
     },
     {
       "Key": "webSocketFailStart",
@@ -384,8 +440,80 @@
       "Value": "[Снайпер] Ищем покемона для отлова в локации {0}..."
     },
     {
+      "Key": "snipeScanEx",
+      "Value": "Sniping a {0} with {1} IV at {2}..."
+    },
+    {
       "Key": "noPokemonToSnipe",
       "Value": "[Снайпер] Покемона для отлова не обнаружено!"
+    },
+    {
+      "Key": "notEnoughPokeballsToSnipe",
+      "Value": "Недостаточно Pokeball'ов для старта снайпинга! ({0}/{1})"
+    },
+    {
+      "Key": "displayHighestMove1Header",
+      "Value": "MOVE1"
+    },
+    {
+      "Key": "displayHighestMove2Header",
+      "Value": "MOVE2"
+    },
+    {
+      "Key": "displayHighestCandy",
+      "Value": "Конфеты"
+    },
+    {
+      "Key": "ipBannedError",
+      "Value": "Соединение разорвано. Ваш IP может быть в черном списке Niantic. Выход.."
+    },
+    {
+      "Key": "noEggsAvailable",
+      "Value": "Нет доступных яиц"
+    },
+    {
+      "Key": "useLuckyEggActive",
+      "Value": "Lucky Egg уже активно"
+    },
+    {
+      "Key": "usedLuckyEgg",
+      "Value": "Использовано Lucky Egg"
+    },
+    {
+      "Key": "useLuckyEggAmount",
+      "Value": "Lucky Egg в инвентаре: {0}"
+    },
+    {
+      "Key": "noIncenseAvailable",
+      "Value": "Нет доступных благовоний"
+    },
+    {
+      "Key": "useIncenseActive",
+      "Value": "Благовония уже активны"
+    },
+    {
+      "Key": "useIncenseAmount",
+      "Value": "Благовоний в инвентаре: {0}"
+    },
+    {
+      "Key": "usedIncense",
+      "Value": "Использованы благовония"
+    },
+    {
+      "Key": "amountPkmSeenCaught",
+      "Value": "Покемонов изучено: {0}/151, Покемонов поймано: {1}/151"
+    },
+    {
+      "Key": "pkmPotentialEvolveCount",
+      "Value": "[Эволюции] Возможных эволюций: {0}"
+    },
+    {
+      "Key": "pkmNotEnoughRessources",
+      "Value": "Апгрейд покемона провален. Недостаточно ресурсов"
+    },
+    {
+      "Key": "snipeServerOffline",
+      "Value": "Sniping сервер не доступен. Пропускаем..."
     }
   ],
   "PokemonStrings": [ ]

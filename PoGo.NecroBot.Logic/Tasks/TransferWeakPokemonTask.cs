@@ -36,6 +36,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if ((pokemon.Cp >= session.LogicSettings.KeepMinCp) ||
                     (PokemonInfo.CalculatePokemonPerfection(pokemon) >= session.LogicSettings.KeepMinIvPercentage &&
                      session.LogicSettings.PrioritizeIvOverCp) ||
+                     (PokemonInfo.GetLevel(pokemon) >= session.LogicSettings.KeepMinLvl && session.LogicSettings.UseKeepMinLvl) ||
                     pokemon.Favorite == 1)
                     continue;
 

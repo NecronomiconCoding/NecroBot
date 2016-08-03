@@ -171,8 +171,12 @@ namespace PoGo.NecroBot.Logic
         public int KeepMinCp;
         [DefaultValue(90)]
         public float KeepMinIvPercentage;
+        [DefaultValue(6)]
+        public int KeepMinLvl;
         [DefaultValue("or")]
         public string KeepMinOperator;
+        [DefaultValue(false)]
+        public bool UseKeepMinLvl;
         [DefaultValue(false)]
         public bool PrioritizeIvOverCp;
         [DefaultValue(1)]
@@ -270,6 +274,25 @@ namespace PoGo.NecroBot.Logic
         public double UseUltraBallBelowCatchProbability;
         [DefaultValue(0.05)]
         public double UseMasterBallBelowCatchProbability;
+        //customizable catch
+        [DefaultValue(false)]
+        public bool EnableHumanizedThrows;
+        [DefaultValue(40)]
+        public int NiceThrowChance;
+        [DefaultValue(30)]
+        public int GreatThrowChance;
+        [DefaultValue(10)]
+        public int ExcellentThrowChance;
+        [DefaultValue(90)]
+        public int CurveThrowChance;
+        [DefaultValue(90.00)]
+        public double ForceGreatThrowOverIv;
+        [DefaultValue(95.00)]
+        public double ForceExcellentThrowOverIv;
+        [DefaultValue(1000)]
+        public int ForceGreatThrowOverCp;
+        [DefaultValue(1500)]
+        public int ForceExcellentThrowOverCp;
         //transfer
         [DefaultValue(false)]
         public bool TransferWeakPokemon;
@@ -403,29 +426,29 @@ namespace PoGo.NecroBot.Logic
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
         {
             //criteria: based on NY Central Park and Tokyo variety + sniping optimization
-            {PokemonId.Golduck, new TransferFilter(1800, 95, "or", 1)},
-            {PokemonId.Farfetchd, new TransferFilter(1250, 80, "or", 1)},
-            {PokemonId.Krabby, new TransferFilter(1250, 95, "or", 1)},
-            {PokemonId.Kangaskhan, new TransferFilter(1500, 60, "or", 1)},
-            {PokemonId.Horsea, new TransferFilter(1250, 95, "or", 1)},
-            {PokemonId.Staryu, new TransferFilter(1250, 95, "or", 1)},
-            {PokemonId.MrMime, new TransferFilter(1250, 40, "or", 1)},
-            {PokemonId.Scyther, new TransferFilter(1800, 80, "or", 1)},
-            {PokemonId.Jynx, new TransferFilter(1250, 95, "or", 1)},
-            {PokemonId.Electabuzz, new TransferFilter(1250, 80, "or", 1)},
-            {PokemonId.Magmar, new TransferFilter(1500, 80, "or", 1)},
-            {PokemonId.Pinsir, new TransferFilter(1800, 95, "or", 1)},
-            {PokemonId.Tauros, new TransferFilter(1250, 90, "or", 1)},
-            {PokemonId.Magikarp, new TransferFilter(200, 95, "or", 1)},
-            {PokemonId.Gyarados, new TransferFilter(1250, 90, "or", 1)},
-            {PokemonId.Lapras, new TransferFilter(1800, 80, "or", 1)},
-            {PokemonId.Eevee, new TransferFilter(1250, 95, "or", 1)},
-            {PokemonId.Vaporeon, new TransferFilter(1500, 90, "or", 1)},
-            {PokemonId.Jolteon, new TransferFilter(1500, 90, "or", 1)},
-            {PokemonId.Flareon, new TransferFilter(1500, 90, "or", 1)},
-            {PokemonId.Porygon, new TransferFilter(1250, 60, "or", 1)},
-            {PokemonId.Snorlax, new TransferFilter(2600, 90, "or", 1)},
-            {PokemonId.Dragonite, new TransferFilter(2600, 90, "or", 1)}
+            {PokemonId.Golduck, new TransferFilter(1800, 6, false, 95, "or", 1)},
+            {PokemonId.Farfetchd, new TransferFilter(1250, 6, false, 80, "or", 1)},
+            {PokemonId.Krabby, new TransferFilter(1250, 6, false, 95, "or", 1)},
+            {PokemonId.Kangaskhan, new TransferFilter(1500, 6, false, 60, "or", 1)},
+            {PokemonId.Horsea, new TransferFilter(1250, 6, false, 95, "or", 1)},
+            {PokemonId.Staryu, new TransferFilter(1250, 6, false, 95, "or", 1)},
+            {PokemonId.MrMime, new TransferFilter(1250, 6, false, 40, "or", 1)},
+            {PokemonId.Scyther, new TransferFilter(1800, 6, false, 80, "or", 1)},
+            {PokemonId.Jynx, new TransferFilter(1250, 6, false, 95, "or", 1)},
+            {PokemonId.Electabuzz, new TransferFilter(1250, 6, false, 80, "or", 1)},
+            {PokemonId.Magmar, new TransferFilter(1500, 6, false, 80, "or", 1)},
+            {PokemonId.Pinsir, new TransferFilter(1800, 6, false, 95, "or", 1)},
+            {PokemonId.Tauros, new TransferFilter(1250, 6, false, 90, "or", 1)},
+            {PokemonId.Magikarp, new TransferFilter(200, 6, false, 95, "or", 1)},
+            {PokemonId.Gyarados, new TransferFilter(1250, 6, false, 90, "or", 1)},
+            {PokemonId.Lapras, new TransferFilter(1800, 6, false, 80, "or", 1)},
+            {PokemonId.Eevee, new TransferFilter(1250, 6, false, 95, "or", 1)},
+            {PokemonId.Vaporeon, new TransferFilter(1500, 6, false, 90, "or", 1)},
+            {PokemonId.Jolteon, new TransferFilter(1500, 6, false, 90, "or", 1)},
+            {PokemonId.Flareon, new TransferFilter(1500, 6, false, 90, "or", 1)},
+            {PokemonId.Porygon, new TransferFilter(1250, 6, false, 60, "or", 1)},
+            {PokemonId.Snorlax, new TransferFilter(2600, 6, false, 90, "or", 1)},
+            {PokemonId.Dragonite, new TransferFilter(2600, 6, false, 90, "or", 1)}
         };
 
         public SnipeSettings PokemonToSnipe = new SnipeSettings
@@ -721,6 +744,8 @@ namespace PoGo.NecroBot.Logic
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage; 
         public string KeepMinOperator => _settings.KeepMinOperator;
         public int KeepMinCp => _settings.KeepMinCp;
+        public int KeepMinLvl => _settings.KeepMinLvl;
+        public bool UseKeepMinLvl => _settings.UseKeepMinLvl;
         public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;
         public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;
         public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;
@@ -748,6 +773,15 @@ namespace PoGo.NecroBot.Logic
         public double UseMasterBallBelowCatchProbability => _settings.UseMasterBallBelowCatchProbability;
         public double UseUltraBallBelowCatchProbability => _settings.UseUltraBallBelowCatchProbability;
         public double UseGreatBallBelowCatchProbability => _settings.UseGreatBallBelowCatchProbability;
+        public bool EnableHumanizedThrows => _settings.EnableHumanizedThrows;
+        public int NiceThrowChance => _settings.NiceThrowChance;
+        public int GreatThrowChance => _settings.GreatThrowChance;
+        public int ExcellentThrowChance => _settings.ExcellentThrowChance;
+        public int CurveThrowChance => _settings.CurveThrowChance;
+        public double ForceGreatThrowOverIv => _settings.ForceGreatThrowOverIv;
+        public double ForceExcellentThrowOverIv => _settings.ForceExcellentThrowOverIv;
+        public int ForceGreatThrowOverCp => _settings.ForceGreatThrowOverCp;
+        public int ForceExcellentThrowOverCp => _settings.ForceExcellentThrowOverCp;
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
         public int DelayBetweenPlayerActions => _settings.DelayBetweenPlayerActions;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
