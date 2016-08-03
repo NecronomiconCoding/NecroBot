@@ -2,7 +2,9 @@
 
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.State;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using PokemonGo.RocketAPI;
@@ -588,31 +590,8 @@ namespace PoGo.NecroBot.Logic
             }
             else
             {
-                Logger.Write( "This is your first start, would you like to begin setup? Y/N", LogLevel.Warning );
-
-                bool boolBreak = false;
                 settings = new GlobalSettings();
-
-                while( !boolBreak )
-                {
-                    string strInput = Console.ReadLine().ToLower();
-
-                    switch( strInput )
-                    {
-                        case "y":
-                            boolBreak = true;
-                            SetupSettings( settings );
-                            break;
-                        case "n":
-                            Logger.Write( "Config/Auth file automatically generated and must be completed before continuing" );
-                            boolBreak = true;
-                            shouldExit = true;
-                            break;
-                        default:
-                            Logger.Write( "[INPUT ERROR] Error with input, please enter 'y' or 'n'", LogLevel.Error );
-                            continue;
-                    }
-                }
+                shouldExit = true;
             }
             
 
@@ -627,20 +606,82 @@ namespace PoGo.NecroBot.Logic
             return shouldExit ? null : settings;
         }
 
-        private static void SetupSettings( GlobalSettings settings )
+        public static bool PromptForSetup( ITranslation translator )
         {
-            SetupAccountType( settings );
-            SetupUserAccount( settings );
-            SetupConfig( settings );
+            Logger.Write( translator.GetTranslation(TranslationString.FirstStartPrompt, "Y", "N"), LogLevel.Warning );
 
-            Logger.Write( "### COMPLETED SETUP ###", LogLevel.None );
+            while( true )
+            {
+                string strInput = Console.ReadLine().ToLower();
+
+                switch( strInput )
+                {
+                    case "y":
+                        return true;
+                    case "n":
+                        Logger.Write( translator.GetTranslation( TranslationString.FirstStartAutoGenSettings ) );
+                        return false;
+                    default:
+                        Logger.Write( translator.GetTranslation( TranslationString.PromptError, "Y", "N" ), LogLevel.Error );
+                        continue;
+                }
+            }
         }
 
-        private static void SetupAccountType( GlobalSettings settings )
+        public static Session SetupSettings( Session session, GlobalSettings settings, String configPath )
+        {
+            Session newSession = SetupTranslationCode( session, session.Translation, settings );
+
+            SetupAccountType( session.Translation, settings );
+            SetupUserAccount( session.Translation, settings );
+            SetupConfig( session.Translation, settings );
+            SaveFiles( settings, configPath );
+
+            Logger.Write( session.Translation.GetTranslation( TranslationString.FirstStartSetupCompleted ), LogLevel.None );
+
+            return newSession;
+        }
+
+        private static Session SetupTranslationCode( Session session, ITranslation translator, GlobalSettings settings )
+        {
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartLanguagePrompt, "Y", "N" ), LogLevel.None );
+            string strInput;
+
+            bool boolBreak = false;
+            while( !boolBreak )
+            {
+                strInput = Console.ReadLine().ToLower();
+
+                switch( strInput )
+                {
+                    case "y":
+                        boolBreak = true;
+                        break;
+                    case "n":
+                        return session;
+                    default:
+                        Logger.Write( translator.GetTranslation( TranslationString.PromptError, "y", "n" ), LogLevel.Error );
+                        continue;
+                }
+            }
+
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartLanguageCodePrompt ) );
+            strInput = Console.ReadLine();
+
+            settings.TranslationLanguageCode = strInput;
+            session = new Session( new ClientSettings( settings ), new LogicSettings( settings ) );
+            translator = session.Translation;
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartLanguageConfirm, strInput ) );
+
+            return session;
+        }
+
+
+        private static void SetupAccountType( ITranslation translator, GlobalSettings settings )
         {
             string strInput;
-            Logger.Write( "### Setting up new USER ACCOUNT ###", LogLevel.None );
-            Logger.Write( "Please choose an account type: google/ptc" );
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupAccount ), LogLevel.None );
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupTypePrompt, "google", "ptc" ) );
 
             while( true )
             {
@@ -650,80 +691,108 @@ namespace PoGo.NecroBot.Logic
                 {
                     case "google":
                         settings.Auth.AuthType = AuthType.Google;
-                        Logger.Write( "Chosen Account Type: GOOGLE" );
+                        Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupTypeConfirm, "GOOGLE" ) );
                         return;
                     case "ptc":
                         settings.Auth.AuthType = AuthType.Ptc;
-                        Logger.Write( "Chosen Account Type: PTC" );
+                        Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupTypeConfirm, "PTC" ) );
                         return;
                     default:
-                        Logger.Write( "[ERROR] submitted an incorrect account type, please choose 'google' or 'ptc'", LogLevel.Error );
+                        Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupTypePromptError, "google", "ptc" ), LogLevel.Error );
                         break;
                 }
             }
         }
 
-        private static void SetupUserAccount( GlobalSettings settings )
+        private static void SetupUserAccount( ITranslation translator, GlobalSettings settings )
         { 
             Console.WriteLine( "" );
-            Logger.Write( "Please enter a Username", LogLevel.None );
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupUsernamePrompt ), LogLevel.None );
             string strInput = Console.ReadLine();
 
             if( settings.Auth.AuthType == AuthType.Google )
                 settings.Auth.GoogleUsername = strInput;
             else
                 settings.Auth.PtcUsername = strInput;
-            Logger.Write( "Accepted username: " + strInput );
-
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupUsernameConfirm, strInput ) );
+            
             Console.WriteLine( "" );
-            Logger.Write( "Please enter a Password", LogLevel.None );
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupPasswordPrompt ), LogLevel.None );
             strInput = Console.ReadLine();
 
             if( settings.Auth.AuthType == AuthType.Google )
                 settings.Auth.GooglePassword = strInput;
             else
                 settings.Auth.PtcPassword = strInput;
-            Logger.Write( "Accepted password: " + strInput );
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupPasswordConfirm, strInput ) );
 
-            Logger.Write( "### User Account Completed ###\n", LogLevel.None );
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartAccountCompleted ), LogLevel.None );
         }
 
-        private static void SetupConfig( GlobalSettings settings )
+        private static void SetupConfig( ITranslation translator, GlobalSettings settings )
         {
-            Logger.Write( "### Setting Default Position ###", LogLevel.None );
-            Logger.Write( "Please enter a Latitude (Right click to paste)" );            
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartDefaultLocationPrompt, "Y", "N" ), LogLevel.None );
+
+            bool boolBreak = false;
+            while( !boolBreak )
+            {
+                string strInput = Console.ReadLine().ToLower();
+
+                switch( strInput )
+                {
+                    case "y":
+                        boolBreak = true;
+                        break;
+                    case "n":
+                        Logger.Write( translator.GetTranslation( TranslationString.FirstStartDefaultLocationSet ) );
+                        return;
+                    default:
+                        // PROMPT ERROR \\
+                        Logger.Write( translator.GetTranslation( TranslationString.PromptError, "y", "n" ), LogLevel.Error );
+                        continue;
+                }
+            }
+
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartDefaultLocation ), LogLevel.None );
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLatPrompt ) );            
             while( true )
             {
                 try
                 {
                     double dblInput = double.Parse( Console.ReadLine() );
                     settings.DefaultLatitude = dblInput;
-                    Logger.Write( "Lattitude accepted: " + dblInput );
+                    Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLatConfirm, dblInput ) );
                     break;
                 }
                 catch( FormatException )
                 {
-                    Logger.Write( "[ERROR] Please input only a VALUE for example: " + settings.DefaultLatitude, LogLevel.Error );
+                    Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLocationError, settings.DefaultLatitude, LogLevel.Error ) );
                     continue;
                 }
             }
 
-            Logger.Write( "Please enter a Longitude (Right click to paste)" );
+            Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLongPrompt ) );
             while( true )
             {
                 try
                 {
                     double dblInput = double.Parse( Console.ReadLine() );
                     settings.DefaultLongitude = dblInput;
-                    Logger.Write( "Lattitude accepted: " + dblInput );
+                    Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLongConfirm, dblInput ) );
                     break;
                 }
                 catch( FormatException )
                 {
-                    Logger.Write( "[ERROR] Please input only a VALUE for example: " + settings.DefaultLongitude, LogLevel.Error );
+                    Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLocationError, settings.DefaultLongitude, LogLevel.Error ) );
                     continue;
                 }
             }
+        }
+
+        private static void SaveFiles( GlobalSettings settings, String configFile )
+        {
+            settings.Save( configFile );
+            settings.Auth.Load( Path.Combine( settings.ProfileConfigPath, "auth.json" ) );
         }
 
 
