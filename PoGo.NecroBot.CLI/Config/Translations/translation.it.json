@@ -161,7 +161,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "{0} e' uscito dall'Uovo incubato"
+      "Value": "{0} e' uscito dall'Uovo"
     },
     {
       "Key": "logEntryError",
@@ -225,7 +225,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "I Server PTC sono probabilmente offline O le tue credenziali sono sbagliate. Prova con Google"
+      "Value": "I Server PTC sono probabilmente offline o le tue credenziali sono sbagliate. Prova con Google"
     },
     {
       "Key": "tryingAgainIn",
@@ -281,7 +281,7 @@
     },
     {
       "Key": "FinishedTransferringConfig",
-      "Value": "Finito il trasferimento vostro config alla nuova versione..."
+      "Value": "Trasferimento del file config nella nuova versione completato."
     },
     {
       "Key": "updateFinished",
@@ -330,7 +330,7 @@
     {
       "Key": "invFullTransferManually",
       "Value":
-        "Inventario Pokemon pieno. Trasferisci i Pokemon manualmente o setta TransferDuplicatePokemon su 'true' nelle impostazioni..."
+        "Inventario Pokemon pieno. Trasferisci i Pokemon manualmente o setta TransferDuplicatePokemon 'true' nelle impostazioni..."
     },
     {
       "Key": "invFullPokestopLooting",
