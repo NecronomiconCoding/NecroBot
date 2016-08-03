@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepszy z CP: {3}   IV: {4}%] (Posiadane Cukierki: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepszy z CP: {3}   IV: {4}%] (Cukierki: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -346,7 +346,7 @@
     },
     {
       "Key": "pokemonRename",
-      "Nazwa": "Nazwa Pokemona {0} została zmieniona z {2} na {3}"
+      "Value": "Nazwa Pokemona {0} ({1}) została zmieniona z {2} na {3}"
     },
     {
       "Key": "pokemonFavorite",
