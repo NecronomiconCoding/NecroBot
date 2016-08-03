@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepszy z CP: {3}   IV: {4}%] (Posiadane Cukierki: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Najlepszy z CP: {3}   IV: {4}%] (Cukierki: {5})"
     },
     {
       "Key": "eventItemRecycled",
