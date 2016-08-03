@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "名称:{0} 信息:操作失败,可能被封禁.正在解封:{1}/{2}"
+      "Value": "名称:{0}|信息:操作失败,可能被封禁.正在解封:{1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "登陆账号 {0}"
+      "Value": "登陆账号:{0}"
     },
     {
       "Key": "eventUsedIncense",
@@ -58,11 +58,11 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "成功进化 {0}  经验+{1} "
+      "Value": "成功进化:{0}|经验+{1}"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": " {0} 进化失败,原因是 {1},已取消进化 {2}"
+      "Value": "{0} 进化失败,原因是{1},已取消进化:{2}"
     },
     {
       "Key": "eventPokemonTransferred",
@@ -70,31 +70,31 @@
     },
     {
       "Key": "eventItemRecycled",
-      "Value": "{0}个 {1}"
+      "Value": "{0}个{1}"
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "[{0}]|({1}){2}等级:{3} CP:({4}/{5})完美度:{6}%|捕获几率:{7}%|距离{8}米|使用{9}捕捉(剩余{10}个)|{11}|坐标:{12},{13}"
+      "Value": "[{0}]|({1}){2} 等级:{3} CP:({4}/{5})完美度:{6}%|捕获几率:{7}%|距离{8}米|使用{9}捕捉(剩余{10}个)|{11}|坐标:{12},{13}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "没有精灵球了,我们错过了一只 CP值为 {1} 的 {0} "
+      "Value": "没有精灵球了,我们错过了一只CP值为{1}的:{0}"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
-      "Value": "等待进化{0} 精灵还需要捕获 {1} 个! ({2}/{3} 为 {4}% 背包)"
+      "Value": "等待进化[{0}]还需要捕获{1}个!({2}/{3}为{4}%背包)"
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "当 UseLuckyEggsMinPokemonAmount 设为 {0}时幸运蛋永远不会使用, 请使用小于等于 {1} 的数值"
+      "Value": "当(UseLuckyEggsMinPokemonAmount)设为{0}时幸运蛋永远不会使用,请使用小于等于{1}的数值"
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "还需捕获 {0} 只精灵使用幸运蛋!"
+      "Value": "还需捕获{0}只精灵使用幸运蛋!"
     },
     {
       "Key": "eventUseBerry",
-      "Value": "使用 {0} | 剩余 {1} "
+      "Value": "使用{0}|剩余{1}"
     },
     {
       "Key": "itemRazzBerry",
@@ -102,7 +102,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} 重试第{1}遍"
+      "Value": "{0}-重试第{1}遍"
     },
     {
       "Key": "catchStatus",
@@ -110,7 +110,7 @@
     },
     {
       "Key": "candies",
-      "Value": "糖果: {0}"
+      "Value": "糖果:{0}"
     },
     {
       "Key": "unhandledGpxData",
@@ -146,7 +146,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "确认经纬度是否正确,如果错误请退出程序! 纬度:{0} 经度:{1}"
+      "Value": "确认经纬度是否正确,如果错误请退出程序!纬度:{0}经度:{1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -226,7 +226,7 @@
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "将在 {0} 秒后重试..."
+      "Value": "将在{0}秒后重试..."
     },
     {
       "Key": "accountNotVerified",
@@ -234,7 +234,7 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "正在打开 Google Device 网页,请用CTRL+V粘贴验证码"
+      "Value": "正在打开GoogleDevice网页,请用CTRL+V粘贴验证码"
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -242,15 +242,15 @@
     },
     {
       "Key": "couldntCopyToClipboard2",
-      "Value": "打开:{0} 后输入 {1}"
+      "Value": "打开:{0}后输入{1}"
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "检测到真实的旅行,使用 config.json 中的用户配置"
+      "Value": "检测到真实的旅行,使用config.json中的用户配置"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "未检测到真实的旅行 {0}, 使用上一次保存在 LastPos.ini 中的配置"
+      "Value": "未检测到真实的旅行{0},使用上一次保存在LastPos.ini中的配置"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -262,7 +262,7 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "自动更新已禁用,获取最新的版本到:{0}\n "
+      "Value": "自动更新已禁用,获取最新的版本到:{0}\n"
     },
     {
       "Key": "downloadingUpdate",
@@ -302,19 +302,19 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "背包中精灵球不足, 无法捕捉更多小精灵!"
+      "Value": "背包中精灵球不足,无法捕捉更多小精灵!"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[当前背包] 普通球:{0}|高级球:{1}|超级球:{2}|大师球:{3}"
+      "Value": "[当前背包]普通球:{0}|高级球:{1}|超级球:{2}|大师球:{3}"
     },
     {
       "Key": "currentItemInv",
-      "Value": "当前所有物品: 药水:{0}|复活宝石:{1}|浆果:{2}|熏香:{3}|幸运蛋:{4}|诱饵:{5}"
+      "Value": "当前所有物品:药水:{0}|复活宝石:{1}|浆果:{2}|熏香:{3}|幸运蛋:{4}|诱饵:{5}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[设置无效] 您设置的物品数量组合 (精灵球+药水+复活石={0}) 超出了您的背包容量 ({1})"
+      "Value": "[设置无效]您设置的物品数量组合(精灵球+药水+复活石={0})超出了您的背包容量({1})"
     },
     {
       "Key": "recyclingQuietly",
@@ -326,7 +326,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "包裹满了,请手动传输精灵或者修改配置文件 TransferDuplicatePokemon 为 true "
+      "Value": "包裹满了,请手动传输精灵或者修改配置文件TransferDuplicatePokemon为true"
     },
     {
       "Key": "invFullPokestopLooting",
@@ -338,23 +338,23 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "发生错误:诱饵吸引来的精灵 {0}"
+      "Value": "发生错误:诱饵吸引来的精灵{0}"
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "您要去的地方 {0}, {1} 距离您现在的位置太远了 {2}, {3}"
+      "Value": "您要去的地方{0},{1}距离您现在的位置太远了{2},{3}"
     },
     {
       "Key": "pokemonRename",
-      "Value": "正在将精灵 {0} ({1}) 从 {2} 重命名为 {3}."
+      "Value": "正在将精灵{0} ({1})从{2}重命名为{3}."
     },
     {
       "Key": "pokemonFavorite",
-      "Value": "将 {0}% 完美度 {1} (CP {2}) 加入*收藏*."
+      "Value": "将{0}%完美度{1}(CP:{2})加入*收藏*."
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[精灵忽略过滤器] - 忽略:{0} "
+      "Value": "[精灵忽略过滤器]忽略:{0}"
     },
     {
       "Key": "catchStatusAttempt",
@@ -398,11 +398,11 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0}-运行时间{1}-等级:{2}|经验/小时:{3:n0}|捕获/小时:{4:n0}|星尘:{5:n0}|传回:{6:n0}|丢弃:{7:n0}"
+      "Value": "{0} 运行时间{1}等级:{2}|经验/小时:{3:n0}|捕获/小时:{4:n0}|星尘:{5:n0}|传回:{6:n0}|丢弃:{7:n0}"
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (预计升级需要{1}小时{2}分钟|{3:n0}/{4:n0}经验)"
+      "Value": "{0}(预计升级需要{1}小时{2}分钟|{3:n0}/{4:n0}经验)"
     },
     {
       "Key": "requireInputText",
@@ -414,11 +414,11 @@
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "打开 Google App - 登陆与安全设置 - 密码和登录方法 - 应用专用密码,请设置一个新的应用专用密码(使用其它设备)"
+      "Value": "打开GoogleApp-登陆与安全设置-密码和登录方法-应用专用密码,请设置一个新的应用专用密码(使用其它设备)"
     },
     {
       "Key": "googleError",
-      "Value": "请确认 输入了正确的邮箱地址和密码."
+      "Value": "请确认输入了正确的邮箱地址和密码."
     },
     {
       "Key": "missingCredentialsGoogle",
@@ -434,7 +434,7 @@
     },
     {
       "Key": "snipeScanEx",
-      "Value": "狙击一个 {0} 完美度: {1}  坐标 {2}..."
+      "Value": "狙击一个{0}完美度:{1}坐标{2}..."
     },
     {
       "Key": "noPokemonToSnipe",
@@ -442,7 +442,7 @@
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "没有足够的精灵球用来狙击! ({0}/{1})"
+      "Value": "没有足够的精灵球用来狙击!({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -474,7 +474,7 @@
     },
     {
       "Key": "useLuckyEggAmount",
-      "Value": "背包中剩余幸运蛋: {0} 个"
+      "Value": "背包中剩余幸运蛋:{0}个"
     },
     {
       "Key": "noIncenseAvailable",
@@ -486,7 +486,7 @@
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "背包中剩余熏香: {0} 个"
+      "Value": "背包中剩余熏香:{0}个"
     },
     {
       "Key": "usedIncense",
@@ -494,11 +494,11 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "遇见了: {0}/151 只小精灵, 捕捉了: {1}/151 只"
+      "Value": "遇见了:{0}/151只小精灵,捕捉了:{1}/151只"
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "[进化] 可进化的精灵数量: {0}"
+      "Value": "[进化]可进化的精灵数量:{0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
