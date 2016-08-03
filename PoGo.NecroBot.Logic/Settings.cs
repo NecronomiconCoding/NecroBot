@@ -579,8 +579,12 @@ namespace PoGo.NecroBot.Logic
                     {
                         filter.Value.Moves = new List<PokemonMove>();
                     }
+                    foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.MovesOperator == null))
+                    {
+                        filter.Value.MovesOperator = "or";
+                    }
                 }
-                catch( JsonReaderException exception )
+                catch ( JsonReaderException exception )
                 {
                     Logger.Write( "JSON Exception: " + exception.Message, LogLevel.Error );
                     return null;
