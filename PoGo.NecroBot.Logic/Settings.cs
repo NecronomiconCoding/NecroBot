@@ -219,6 +219,10 @@ namespace PoGo.NecroBot.Logic
         public string SnipeLocationServer;
         [DefaultValue(16969)]
         public int SnipeLocationServerPort;
+        [DefaultValue(true)]
+        public bool GetSniperInfoFromPokezz;
+        [DefaultValue(true)]
+        public bool GetOnlyVerifiedSniperInfoFromPokezz;
         [DefaultValue(20)]
         public int MinPokeballsToSnipe;
         [DefaultValue(0)]
@@ -941,6 +945,8 @@ namespace PoGo.NecroBot.Logic
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
+        public bool GetSniperInfoFromPokezz => _settings.GetSniperInfoFromPokezz;
+        public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.GetOnlyVerifiedSniperInfoFromPokezz;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseSnipeOnlineLocationServer => _settings.UseSnipeOnlineLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;

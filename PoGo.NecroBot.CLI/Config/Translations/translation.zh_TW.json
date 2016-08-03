@@ -194,7 +194,7 @@
     },
     {
       "Key": "logEntryTransfered",
-      "Value": "傳送"
+      "Value": "轉化"
     },
     {
       "Key": "logEntryEvolved",
@@ -322,11 +322,11 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "背包滿了，正在傳送神奇寶貝..."
+      "Value": "背包滿了，正在轉化神奇寶貝..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "背包滿了，請手動傳送神奇寶貝或修改 TransferDuplicatePokemon 為 true..."
+      "Value": "背包滿了，請手動轉化神奇寶貝或修改 TransferDuplicatePokemon 為 true..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -398,7 +398,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - 運行時間 {1} - 等級: {2} | 經驗/小時: {3:0} | 捕獲/小時: {4:0} | 星塵: {5:0} | 傳送: {6:0} | 丟棄: {7:0}"
+      "Value": "{0} - 運行時間 {1} - 等級: {2} | 經驗/小時: {3:0} | 捕獲/小時: {4:0} | 星塵: {5:0} | 轉化: {6:0} | 丟棄: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
