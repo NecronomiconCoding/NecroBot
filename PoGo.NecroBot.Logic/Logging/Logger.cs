@@ -76,7 +76,7 @@ namespace PoGo.NecroBot.Logic.Logging
             if (_logger == null)
                 return;
             _logger.Write(message, level, color);
-            Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message, force));
+            Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message), force);
         }
     }
 
