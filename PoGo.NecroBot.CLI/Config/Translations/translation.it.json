@@ -21,6 +21,10 @@
       "Value": "AuthType sconosciuto nel file config.json"
     },
     {
+      "Key": "loginInvalid",
+      "Value": "Le credenziali utente non sono valide ed il login è fallito"
+    },
+    {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
         "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file LastPos.ini e' corretto?"
@@ -44,6 +48,10 @@
     {
       "Key": "eventProfileLogin",
       "Value": "Giocando come {0}"
+    },
+    {
+      "Key": "eventUsedIncense",
+      "Value": "Usato Aroma, rimanenti: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
@@ -73,6 +81,18 @@
     {
       "Key": "eventNoPokeballs",
       "Value": "Nessuna Pokeball - Perso {0} con PL {1}"
+    },
+    {
+      "Key": "waitingForMorePokemonToEvolve",
+      "Value": "In attesa di catturare ancora {1} Pokemon per evolverne {0}! ({2}/{3} per il {4}% dell'inventario)"
+    },
+    {
+      "Key": "useLuckyEggsMinPokemonAmountTooHigh",
+      "Value": "Fortunuovo non sarà mai usato con UseLuckyEggsMinPokemonAmount impostato a {0}, impostalo a <= {1}"
+    },
+    {
+      "Key": "catchMorePokemonToUseLuckyEgg",
+      "Value": "Cattura ancora {0} Pokemon per usare un Fortunuovo!"
     },
     {
       "Key": "eventUseBerry",
@@ -283,12 +303,6 @@
       "Key": "pokemonSkipped",
       "Value": "Saltato {0}"
     },
-
-
-    {
-      "Key": "pokemonSkipped",
-      "Value": "Saltato {0}"
-    },
     {
       "Key": "zeroPokeballInv",
       "Value": "Non hai piu' Pokeball, impossibile catturare altri Pokemon!"
@@ -296,6 +310,10 @@
     {
       "Key": "currentPokeballInv",
       "Value": "[Inventario Attuale] Pokeball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
+    },
+    {
+      "Key": "currentItemInv",
+      "Value": "[Inventario Attuale] Pozioni: {0} | Revitalizzanti: {1} | Bacche: {2} | Aromi: {3} | Fortunuovi: {4} | Moduli Esca: {5}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -457,12 +475,28 @@
       "Value": "Fortunuovo gia' attivo"
     },
     {
+      "Key": "usedLuckyEgg",
+      "Value": "Usato Fortunuovo"
+    },
+    {
+      "Key": "useLuckyEggAmount",
+      "Value": "Fortunuovi in Inventario: {0}"
+    },
+    {
       "Key": "noIncenseAvailable",
       "Value": "Nessun Aroma disponibile"
     },
     {
       "Key": "useIncenseActive",
       "Value": "Aroma gia' attivo"
+    },
+    {
+      "Key": "useIncenseAmount",
+      "Value": "Aroma in Inventario: {0}"
+    },
+    {
+      "Key": "usedIncense",
+      "Value": "Usato Aroma"
     },
     {
       "Key": "amountPkmSeenCaught",
@@ -475,6 +509,10 @@
     {
       "Key": "pkmNotEnoughRessources",
       "Value": "Potenziamento Pokemon Fallito: Risorse Insufficienti"
+     },
+    {
+      "Key": "snipeServerOffline",
+      "Value": "Il server Sniping è offline. Skipping..."
     }
   ],
   "PokemonStrings": [ ]
