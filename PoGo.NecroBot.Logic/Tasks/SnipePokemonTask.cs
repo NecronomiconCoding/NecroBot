@@ -137,7 +137,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (session.LogicSettings.UseSnipeLocationServer)
                     {
-                        var locationsToSnipe = SnipeLocations?.Where(q =>
+                       var locationsToSnipe = SnipeLocations?.Where(q =>
                             (!session.LogicSettings.UseTransferIvForSnipe ||
                              (q.IV == 0 && !session.LogicSettings.SnipeIgnoreUnknownIv) ||
                              (q.IV >= session.Inventory.GetPokemonTransferFilter(q.Id).KeepMinIvPercentage)) &&
@@ -192,7 +192,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 var notVisitedPokemon = filteredPokemon.Where(q => !LocsVisited.Contains(q));
                                 var notExpiredPokemon = notVisitedPokemon.Where(q => q.expires < currentTimestamp);
 
-                                locationsToSnipe.AddRange(notExpiredPokemon);
+                                if (notExpiredPokemon.Count() > 0)
+                                {
+                                    locationsToSnipe.AddRange(notExpiredPokemon);
+                                }
                             }
 
                             if (locationsToSnipe.Any())
@@ -391,6 +394,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             while (true)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+
                 try
                 {
                     var lClient = new TcpClient();
@@ -401,20 +405,27 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     while (lClient.Connected)
                     {
-                        var line = sr.ReadLine();
-                        if (line == null)
-                            throw new Exception("Unable to ReadLine from sniper socket");
+                        try
+                        {
+                            var line = sr.ReadLine();
+                            if (line == null)
+                                throw new Exception("Unable to ReadLine from sniper socket");
 
-                        var info = JsonConvert.DeserializeObject<SniperInfo>(line);
+                            var info = JsonConvert.DeserializeObject<SniperInfo>(line);
 
-                        if (SnipeLocations.Any(x =>
-                            Math.Abs(x.Latitude - info.Latitude) < 0.0001 &&
-                            Math.Abs(x.Longitude - info.Longitude) < 0.0001))
-                            // we might have different precisions from other sources
-                            continue;
+                            if (SnipeLocations.Any(x =>
+                                Math.Abs(x.Latitude - info.Latitude) < 0.0001 &&
+                                Math.Abs(x.Longitude - info.Longitude) < 0.0001))
+                                // we might have different precisions from other sources
+                                continue;
 
-                        SnipeLocations.RemoveAll(x => DateTime.Now > x.TimeStampAdded.AddMinutes(15));
-                        SnipeLocations.Add(info);
+                            SnipeLocations.RemoveAll(x => DateTime.Now > x.TimeStampAdded.AddMinutes(15));
+                            SnipeLocations.Add(info);
+                        }
+                        catch (System.IO.IOException)
+                        {
+                            session.EventDispatcher.Send(new ErrorEvent { Message = "The connection to the sniping location server was lost." });
+                        }
                     }
                 }
                 catch (SocketException)
