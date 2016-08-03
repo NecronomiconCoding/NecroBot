@@ -1,0 +1,84 @@
+{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "精灵球"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "高级球"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "超级球"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "大师球"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "错误的登录信息"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value": "您已经超出范围！5秒后返回起点（距离{0}米）。请确认MaxTravelDistanceInMeters设置是否太小？"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "您附近没有发现任何有用的补给站。请确认MaxTravelDistanceInMeters设置是否太小？"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "获得经验值: {0}, 金币: {1}, 道具: {2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "发现 {0} (距离{1}米)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "登陆账号 {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "使用幸运蛋, 剩余数量: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "成功进化 {0} 获取 {1} 经验值"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "进化失败 {0}. 结果是 {1}, 停止进化 {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP:{1}  完美度:{2}%  [最高 CP: {3}  完美度: {4}%] (共有{5}颗糖果)"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value": "({0}) | ({1}) {2} 等级:{3} CP: ({4}/{5}) 完美度: {6}%| 捕获几率: {7}%| 距离{8}米 | 剩余{10}个{9} | {11} "
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "没有精灵球了 - 我们错过了一只 CP 为 {1} 的 {0} "
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} 重试 #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "共有{0}颗糖果"
+    }
+  ]
+}
