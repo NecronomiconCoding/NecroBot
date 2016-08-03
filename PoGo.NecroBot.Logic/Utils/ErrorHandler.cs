@@ -14,12 +14,9 @@ namespace PoGo.NecroBot.Logic.Utils
         /// </summary>
         /// <param name="strMessage">Optional message to display - Leave NULL to exclude message</param>
         /// <param name="timeout">The total seconds the messag will display before shutting down</param>
-        public static void ThrowFatalError( string strMessage, int timeout )
+        public static void ThrowFatalError( string strMessage, int timeout, LogLevel level )
         {
-            Logger.Write( "[ERROR] Fatal Error", LogLevel.Error );
-
-            if( strMessage != null )
-                Console.WriteLine( strMessage );
+            Logger.Write( strMessage, level );
 
             Console.Write( "Ending Application... " );
 

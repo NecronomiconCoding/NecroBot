@@ -550,10 +550,10 @@ namespace PoGo.NecroBot.Logic
             var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
             var profileConfigPath = Path.Combine(profilePath, "config");
             var configFile = Path.Combine(profileConfigPath, "config.json");
+            var shouldExit = false;
 
             if( File.Exists( configFile ) )
             {
-
                 try
                 {
                     //if the file exists, load the settings
@@ -567,11 +567,11 @@ namespace PoGo.NecroBot.Logic
                     settings = JsonConvert.DeserializeObject<GlobalSettings>( input, jsonSettings );
 
                     //This makes sure that existing config files dont get null values which lead to an exception
-                    foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.KeepMinOperator == null))
+                    foreach( var filter in settings.PokemonsTransferFilter.Where( x => x.Value.KeepMinOperator == null ) )
                     {
                         filter.Value.KeepMinOperator = "or";
                     }
-                    foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
+                    foreach( var filter in settings.PokemonsTransferFilter.Where( x => x.Value.Moves == null ) )
                     {
                         filter.Value.Moves = new List<PokemonMove>();
                     }
@@ -583,22 +583,145 @@ namespace PoGo.NecroBot.Logic
                 }
             }
             else
+            {
+                Logger.Write( "This is your first start, would you like to begin setup? Y/N", LogLevel.Warning );
+
+                bool boolBreak = false;
                 settings = new GlobalSettings();
+
+                while( !boolBreak )
+                {
+                    string strInput = Console.ReadLine().ToLower();
+
+                    switch( strInput )
+                    {
+                        case "y":
+                            boolBreak = true;
+                            SetupSettings( settings );
+                            break;
+                        case "n":
+                            Logger.Write( "Config/Auth file automatically generated and must be completed before continuing" );
+                            boolBreak = true;
+                            shouldExit = true;
+                            break;
+                        default:
+                            Logger.Write( "[INPUT ERROR] Error with input, please enter 'y' or 'n'", LogLevel.Error );
+                            continue;
+                    }
+                }
+            }
             
 
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
-
-            var firstRun = !File.Exists(configFile);
-
             settings.migratePercentages();
 
             settings.Save(configFile);
             settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
 
-            return firstRun ? null : settings;
+            return shouldExit ? null : settings;
         }
+
+        private static void SetupSettings( GlobalSettings settings )
+        {
+            SetupAccountType( settings );
+            SetupUserAccount( settings );
+            SetupConfig( settings );
+
+            Logger.Write( "### COMPLETED SETUP ###", LogLevel.None );
+        }
+
+        private static void SetupAccountType( GlobalSettings settings )
+        {
+            string strInput;
+            Logger.Write( "### Setting up new USER ACCOUNT ###", LogLevel.None );
+            Logger.Write( "Please choose an account type: google/ptc" );
+
+            while( true )
+            {
+                strInput = Console.ReadLine().ToLower();
+
+                switch( strInput )
+                {
+                    case "google":
+                        settings.Auth.AuthType = AuthType.Google;
+                        Logger.Write( "Chosen Account Type: GOOGLE" );
+                        return;
+                    case "ptc":
+                        settings.Auth.AuthType = AuthType.Ptc;
+                        Logger.Write( "Chosen Account Type: PTC" );
+                        return;
+                    default:
+                        Logger.Write( "[ERROR] submitted an incorrect account type, please choose 'google' or 'ptc'", LogLevel.Error );
+                        break;
+                }
+            }
+        }
+
+        private static void SetupUserAccount( GlobalSettings settings )
+        { 
+            Console.WriteLine( "" );
+            Logger.Write( "Please enter a Username", LogLevel.None );
+            string strInput = Console.ReadLine();
+
+            if( settings.Auth.AuthType == AuthType.Google )
+                settings.Auth.GoogleUsername = strInput;
+            else
+                settings.Auth.PtcUsername = strInput;
+            Logger.Write( "Accepted username: " + strInput );
+
+            Console.WriteLine( "" );
+            Logger.Write( "Please enter a Password", LogLevel.None );
+            strInput = Console.ReadLine();
+
+            if( settings.Auth.AuthType == AuthType.Google )
+                settings.Auth.GooglePassword = strInput;
+            else
+                settings.Auth.PtcPassword = strInput;
+            Logger.Write( "Accepted password: " + strInput );
+
+            Logger.Write( "### User Account Completed ###\n", LogLevel.None );
+        }
+
+        private static void SetupConfig( GlobalSettings settings )
+        {
+            Logger.Write( "### Setting Default Position ###", LogLevel.None );
+            Logger.Write( "Please enter a Latitude (Right click to paste)" );            
+            while( true )
+            {
+                try
+                {
+                    double dblInput = double.Parse( Console.ReadLine() );
+                    settings.DefaultLatitude = dblInput;
+                    Logger.Write( "Lattitude accepted: " + dblInput );
+                    break;
+                }
+                catch( FormatException )
+                {
+                    Logger.Write( "[ERROR] Please input only a VALUE for example: " + settings.DefaultLatitude, LogLevel.Error );
+                    continue;
+                }
+            }
+
+            Logger.Write( "Please enter a Longitude (Right click to paste)" );
+            while( true )
+            {
+                try
+                {
+                    double dblInput = double.Parse( Console.ReadLine() );
+                    settings.DefaultLongitude = dblInput;
+                    Logger.Write( "Lattitude accepted: " + dblInput );
+                    break;
+                }
+                catch( FormatException )
+                {
+                    Logger.Write( "[ERROR] Please input only a VALUE for example: " + settings.DefaultLongitude, LogLevel.Error );
+                    continue;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Method for issue #1966
