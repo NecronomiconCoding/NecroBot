@@ -9,6 +9,8 @@ namespace PoGo.NecroBot.Logic.Utils
 {
     public static class LocationUtils
     {
+        private static Random r = new Random();
+
         public static double CalculateDistanceInMeters(double sourceLat, double sourceLng, double destLat,
             double destLng)
             // from http://stackoverflow.com/questions/6366408/calculating-distance-between-two-latitude-and-longitude-geocoordinates
@@ -107,6 +109,13 @@ namespace PoGo.NecroBot.Logic.Utils
         public static double ToRad(double degrees)
         {
             return degrees*(Math.PI/180);
+        }
+
+        public static double getRandomWalkingSpeed(double min, double max)
+        {
+            if (min > max)
+                return min;
+            return min + (max - min) * r.NextDouble();
         }
     }
 }

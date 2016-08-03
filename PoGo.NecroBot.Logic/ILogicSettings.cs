@@ -78,7 +78,8 @@ namespace PoGo.NecroBot.Logic
         int KeepMinLvl { get; }
         bool UseKeepMinLvl { get; }
         string KeepMinOperator { get; }
-        double WalkingSpeedInKilometerPerHour { get; }
+        double MinWalkingSpeedInKilometerPerHour { get; }
+        double MaxWalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
