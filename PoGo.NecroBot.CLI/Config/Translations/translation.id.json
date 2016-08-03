@@ -22,7 +22,7 @@
     },
 	{
       "Key": "loginInvalid",
-      "Value": "User credentials are invalid and login failed."
+      "Value": "Kredensial pengguna cacat dan gagal masuk."
     },
     {
       "Key": "farmPokestopsOutsideRadius",
@@ -34,7 +34,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nama: {0} XP: {1}, Gem: {2}, Barang: {3}, Lat: {4}, Long: {5}"
+      "Value": "Nama: {0} XP: {1}, Gem: {2}, Barang: {3}, Lintang: {4}, Bujur: {5}"
     },
     {
       "Key": "eventFortFailed",
@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8}m | dengan sebuah {9} (tersisa {10}). | {11} | lat: {12} long: {13}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8}m | dengan sebuah {9} (tersisa {10}). | {11} | lintang: {12} bujur: {13}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -218,7 +218,7 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "Masuk sebagai {0}"
+      "Value": "Masuk menggunakan {0}"
     },
     {
       "Key": "ptcOffline",
