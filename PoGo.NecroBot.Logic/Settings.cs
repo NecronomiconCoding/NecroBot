@@ -175,7 +175,7 @@ namespace PoGo.NecroBot.Logic
         public string KeepMinOperator;
         [DefaultValue(false)]
         public bool PrioritizeIvOverCp;
-        [DefaultValue(0)]
+        [DefaultValue(1)]
         public int KeepMinDuplicatePokemon;
         //gpx
         [DefaultValue(false)]

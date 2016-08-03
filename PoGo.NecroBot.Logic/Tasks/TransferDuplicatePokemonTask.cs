@@ -22,9 +22,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var duplicatePokemons =
                 await
-                    session.Inventory.GetDuplicatePokemonToTransfer(session.LogicSettings.KeepPokemonsThatCanEvolve,
-                        session.LogicSettings.PrioritizeIvOverCp,
-                        session.LogicSettings.PokemonsNotToTransfer);
+                    session.Inventory.GetDuplicatePokemonToTransfer(
+                        session.LogicSettings.PokemonsNotToTransfer,
+                        session.LogicSettings.PokemonsToEvolve, 
+                        session.LogicSettings.KeepPokemonsThatCanEvolve,
+                        session.LogicSettings.PrioritizeIvOverCp);
 
             var pokemonSettings = await session.Inventory.GetPokemonSettings();
             var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
@@ -33,29 +35,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var pokemonTransferFilter = session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId);
-
-                if (pokemonTransferFilter != null && session.LogicSettings.KeepMinOperator.ToLower().Equals("and"))
-                {
-                    if ((duplicatePokemon.Cp >= pokemonTransferFilter.KeepMinCp &&
-                            PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >= pokemonTransferFilter.KeepMinIvPercentage) ||
-                        pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move1) ||
-                        pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move2))
-                    {
-                        continue;
-                    }
-                }
-                else if(pokemonTransferFilter != null)
-                {
-                    if (duplicatePokemon.Cp >= pokemonTransferFilter.KeepMinCp ||
-                            PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >= pokemonTransferFilter.KeepMinIvPercentage ||
-                            pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move1) ||
-                            pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move2))
-                    {
-                        continue;
-                    }
-                }
-                
                 await session.Client.Inventory.TransferPokemon(duplicatePokemon.Id);
                 await session.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
 
