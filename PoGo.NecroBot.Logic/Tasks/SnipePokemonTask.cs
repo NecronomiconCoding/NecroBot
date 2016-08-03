@@ -318,7 +318,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 var mapObjects = session.Client.Map.GetMapObjects().Result;
                 catchablePokemon =
-                    mapObjects.MapCells.SelectMany(q => q.CatchablePokemons)
+                    mapObjects.Item1.MapCells.SelectMany(q => q.CatchablePokemons)
                         .Where(q => pokemonIds.Contains(q.PokemonId))
                         .OrderByDescending(pokemon => PokemonInfo.CalculateMaxCpMultiplier(pokemon.PokemonId))
                         .ToList();
