@@ -32,7 +32,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "<{0}> XP:{1}, Gems:{2}, Итемов: {3}"
+      "Value": "<{0}> XP:{1}, Gems:{2}, Предметы: {3}"
     },
     {
       "Key": "eventFortFailed",
