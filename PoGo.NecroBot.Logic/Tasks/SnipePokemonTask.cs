@@ -161,14 +161,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     Iv = location.IV
                                 });
 
-                                if (
-                                    !await
-                                        CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session,
-                                            cancellationToken))
+                                if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, 
+                                    session, cancellationToken))
                                     return;
 
-                                await
-                                    Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
+                                await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
                                 LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                             }
                         }
@@ -272,8 +269,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var pokemon in catchablePokemon)
             {
-                cancellationToken.ThrowIfCancellationRequested();
-
                 EncounterResponse encounter;
                 try
                 {
