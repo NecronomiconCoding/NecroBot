@@ -83,6 +83,7 @@ namespace PoGo.NecroBot.Logic
         bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
         bool TransferDuplicatePokemonOnCapture { get; }
+        bool DoNotTransferFavorite { get; }
         bool UseEggIncubators { get; }
         int UseGreatBallAboveCp { get; }
         int UseUltraBallAboveCp { get; }

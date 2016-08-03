@@ -84,14 +84,14 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer( 
                 IEnumerable<PokemonId> pokemonsNotToTransfer, IEnumerable<PokemonId> pokemonsToEvolve,
-                bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCp = false
+                bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCp = false, bool DoNotTransferFavorite = true
              )
         {
             var myPokemon = await GetPokemons();
 
             var myPokemonList = myPokemon.ToList();
 
-            var pokemonToTransfer = myPokemonList.Where(p => !pokemonsNotToTransfer.Contains(p.PokemonId) && p.DeployedFortId == string.Empty && p.Favorite == 0).ToList();
+            var pokemonToTransfer = myPokemonList.Where(p => !pokemonsNotToTransfer.Contains(p.PokemonId) && p.DeployedFortId == string.Empty && (p.Favorite == 0 || DoNotTransferFavorite == false)).ToList();
 
             pokemonToTransfer = 
                 pokemonToTransfer.Where(
