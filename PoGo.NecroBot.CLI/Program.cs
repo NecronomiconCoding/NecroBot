@@ -37,12 +37,11 @@ namespace PoGo.NecroBot.CLI
                 subPath = args[0];
 
             Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
-
+            
             var settings = GlobalSettings.Load(subPath);
 
             if (settings == null)
             {
-                Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
                 Logger.Write("Press a Key to continue...",
                     LogLevel.Warning);
                 Console.ReadKey();
