@@ -428,9 +428,8 @@ namespace PoGo.NecroBot.Logic
                         PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.UpgradePokemonIvMinimum)).OrderByDescending(p => p.Cp).ToList();
 
             return upgradePokemon = (_logicSettings.LevelUpByCPorIv.ToLower().Equals("iv")) ?
-                    highestPokemonForUpgrade.Where(p => (p.Cp < PokemonInfo.CalculateMaxCp(p)))
-                        .OrderByDescending(PokemonInfo.CalculatePokemonPerfection).ToList() :
-                    highestPokemonForUpgrade.Where(p => (p.Cp < PokemonInfo.CalculateMaxCp(p))).ToList();
+                    highestPokemonForUpgrade.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).ToList() :
+                    highestPokemonForUpgrade.OrderByDescending(p => p.Cp).ToList();
         }
 
         public TransferFilter GetPokemonTransferFilter(PokemonId pokemon)
