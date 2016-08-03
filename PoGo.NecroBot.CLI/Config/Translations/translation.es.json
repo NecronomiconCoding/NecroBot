@@ -86,7 +86,7 @@
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "Los huevos de la suerte nunca serán utilizados con UseLuckyEggsMinPokemonAmount en {0}, usar <= {1} en su lugar"
+      "Value": "Los huevos de la suerte nunca serán utilizados con UseLuckyEggsMinPokemonAmount en {0}, usa <= {1} en su lugar"
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
@@ -146,7 +146,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Asegúrese de que la Latitud y Longitud son las correctas. Salga del Programa si no es así! Lat: {0} Long: {1}"
+      "Value": "Asegúrese de que la Latitud y Longitud son las correctas. ¡Salga del Programa si no es así! Lat: {0} Long: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -254,7 +254,7 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Coordenadas en \"LastPos.ini\" no son correctas, utilizando las coordenadas predeterminadas"
+      "Value": "Las coordenadas en \"LastPos.ini\" no son correctas, utilizando las coordenadas predeterminadas"
     },
     {
       "Key": "gotUpToDateVersion",
@@ -302,11 +302,11 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "No tienes Poké Balls en el inventario, no podemos atrapar más Pokémon por ahora :("
+      "Value": "No tienes Poké Balls en el inventario, no se puede atrapar más Pokémon."
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Inventario actual] Poké Balls: {0} | Super Balls: {1} | Ultra Balls: {2} | Master Balls: {3}"
+      "Value": "[Inventario] Poké Balls: {0} | Super Balls: {1} | Ultra Balls: {2} | Master Balls: {3}"
     },
     {
       "Key": "currentItemInv",
@@ -330,7 +330,7 @@
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "El inventario está lleno, no pudimos pillar nada :("
+      "Value": "El inventario está lleno, no se puede obtener más objetos"
     },
     {
       "Key": "encounterProblem",
@@ -354,7 +354,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Filtro Pokémon Ignorados] - Ignorando {0} tal y como se definió en la configuración actual."
+      "Value": "[Filtro Pokémon] - Ignorando {0} tal y como se definió en la configuración actual."
     },
     {
       "Key": "catchStatusAttempt",
@@ -422,11 +422,11 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Es necesario rellenar GoogleUsername y GooglePassword en auth.json!"
+      "Value": "Es necesario rellenar GoogleUsername y GooglePassword en auth.json"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Es necesario rellenar PtcUsername y PtcPassword en auth.json!"
+      "Value": "Es necesario rellenar PtcUsername y PtcPassword en auth.json"
     },
     {
       "Key": "snipeScan",
@@ -438,7 +438,7 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] No se encontraron Pokémons :("
+      "Value": "[Sniper] No se han encontrado Pokémon"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
@@ -502,11 +502,11 @@
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "Pokémon actualización fallida: No hay suficientes recursos"
+      "Value": "Actualización fallida: No hay suficientes recursos"
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "[Sniper] El servidor Sniping parece que está caído. Saliendo..."
+      "Value": "[Sniper] Parece que el servidor de Snipping está caído. Saliendo..."
     }
   ],
   "PokemonStrings": [
@@ -624,7 +624,7 @@
     },
     {
       "Key": "nidoranFemale",
-      "Value": "NidoranF"
+      "Value": "Nidoran Hembra"
     },
     {
       "Key": "nidorina",
@@ -636,7 +636,7 @@
     },
     {
       "Key": "nidoranMale",
-      "Value": "NidoranM"
+      "Value": "Nidoran Macho"
     },
     {
       "Key": "nidorino",
