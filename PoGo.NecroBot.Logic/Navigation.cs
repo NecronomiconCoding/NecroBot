@@ -26,8 +26,6 @@ namespace PoGo.NecroBot.Logic
     {
         private const double SpeedDownTo = 10/3.6;
         private readonly Client _client;
-        private DateTime _LastScanTS;
-        private GetMapObjectsResponse _LastMOResponse;
 
         public Navigation(Client client)
         {
@@ -182,17 +180,6 @@ namespace PoGo.NecroBot.Logic
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
             return result;
-        }
-
-        public async Task<GetMapObjectsResponse> GetMapObjects()
-        {
-            if (DateTime.Now >= _LastScanTS.AddSeconds(30) || _LastScanTS == null)
-            {
-                _LastScanTS = DateTime.Now;
-                _LastMOResponse = await _client.Map.GetMapObjects();
-            }
-
-            return _LastMOResponse;
         }
 
         public event UpdatePositionDelegate UpdatePositionEvent;
