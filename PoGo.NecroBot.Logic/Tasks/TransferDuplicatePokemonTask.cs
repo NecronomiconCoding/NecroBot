@@ -35,29 +35,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                var pokemonTransferFilter = session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId);
-
-                if (pokemonTransferFilter != null && session.LogicSettings.KeepMinOperator.ToLower().Equals("and"))
-                {
-                    if ((duplicatePokemon.Cp >= pokemonTransferFilter.KeepMinCp &&
-                            PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >= pokemonTransferFilter.KeepMinIvPercentage) ||
-                        pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move1) ||
-                        pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move2))
-                    {
-                        continue;
-                    }
-                }
-                else if(pokemonTransferFilter != null)
-                {
-                    if (duplicatePokemon.Cp >= pokemonTransferFilter.KeepMinCp ||
-                            PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >= pokemonTransferFilter.KeepMinIvPercentage ||
-                            pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move1) ||
-                            pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move2))
-                    {
-                        continue;
-                    }
-                }
-                
                 await session.Client.Inventory.TransferPokemon(duplicatePokemon.Id);
                 await session.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
 
