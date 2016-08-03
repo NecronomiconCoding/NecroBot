@@ -346,7 +346,7 @@
     },
     {
       "Key": "pokemonRename",
-      "Nazwa": "Nazwa Pokemona {0} została zmieniona z {2} na {3}"
+      "Value": "Nazwa Pokemona {0} ({1}) została zmieniona z {2} na {3}"
     },
     {
       "Key": "pokemonFavorite",
