@@ -18,15 +18,15 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "錯誤的認證信息"
+      "Value": "錯誤的認證資訊"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "您已經走出範圍！5秒後返回起點（距離{0}米），請確認系統設置是否正確？"
+      "Value": "您已經走出範圍！5秒後返回起點(距離{0}米)，請確認系統設定是否正確？"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "您附近沒有任何可用的補給站，請確認系統設置是否正確？"
+      "Value": "您附近沒有任何可用的補給站，請確認系統設定是否正確？"
     },
     {
       "Key": "eventFortUsed",
@@ -34,15 +34,15 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "名稱：{0} 信息：操作失敗，可能被封禁。正在解封：{1}/{2}"
+      "Value": "名稱：{0} 資訊：操作失敗，可能被封禁。正在解封：{1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "前往補給站：{0} （距離{1}米）"
+      "Value": "前往補給站：{0} (距離{1}米)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "登陸賬號 {0}"
+      "Value": "登入帳號 {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP值：{1}  完美度：{2}%   [已擁有 CP值：{3}  完美度：{4}%] （還有{5}顆該種類的糖果）"
+      "Value": "{0}\t- CP值：{1}  完美度：{2}%   [已擁有 CP值：{3}  完美度：{4}%] (還有{5}顆該種類的糖果)"
     },
     {
       "Key": "eventItemRecycled",
@@ -186,11 +186,11 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "正在登錄{0}賬號"
+      "Value": "正在登入{0}帳號"
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC服務器可能關閉或您的帳號錯誤錯誤，請嘗試谷歌帳號登錄"
+      "Value": "PTC服務器可能關閉或您的帳號錯誤錯誤，請嘗試谷歌帳號登入"
     },
     {
       "Key": "tryingAgainIn",
@@ -202,7 +202,7 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "正在打開 Google Device 網頁，請用CTRL+V粘貼驗證碼"
+      "Value": "正在打開 Google Device 網頁，請用CTRL+V貼上驗證碼"
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -218,11 +218,11 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "未檢測到真實的旅行 {0}, 使用上一次保存的配置"
+      "Value": "未檢測到真實的旅行 {0}, 使用上一次儲存的配置"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "無效的座標文件，使用默認座標"
+      "Value": "無效的座標文件，使用預設座標"
     },
     {
       "Key": "gotUpToDateVersion",
@@ -230,7 +230,7 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "自動更新已禁用，獲取到最新的版本為：{0}\n "
+      "Value": "自動更新已禁用，目前最新的版本為：{0}\n "
     },
     {
       "Key": "downloadingUpdate",
@@ -290,7 +290,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[精靈忽略過濾器] - 在設置中定義忽略 {0} "
+      "Value": "[精靈忽略過濾器] - 在設定中定義忽略 {0} "
     },
     {
       "Key": "catchStatusAttempt",
@@ -346,23 +346,23 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "當您啟用了谷歌的兩步驗證後，需要在auth.json中輸入應用專用密碼"
+      "Value": "當您啟用了谷歌的兩步驟驟驗證後，需要在auth.json中輸入應用專用密碼"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "打開 Google App - 登陸與安全設置 - 密碼和登錄方法 - 應用專用密碼，請設置一個新的應用專用密碼(使用其它設備)"
+      "Value": "打開 Google App - 登入和安全性 - 密碼和帳戶登入方式 - 應用程式密碼，請設定一個新的程式專用密碼(使用其它設備)"
     },
     {
       "Key": "googleError",
-      "Value": "請確認輸入了正確的郵箱地址和密碼。"
+      "Value": "請確認輸入了正確的信箱地址和密碼。"
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "您需要在auth.json中填寫谷歌賬戶和密碼！"
+      "Value": "您需要在auth.json中填寫谷歌帳戶和密碼！"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "您需要在auth.json中填寫Ptc賬戶和密碼！"
+      "Value": "您需要在auth.json中填寫Ptc帳戶和密碼！"
     }
   ],
   "PokemonStrings": [ ]
