@@ -164,7 +164,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         await session.Navigation.HumanPathWalking(
                             trackPoints.ElementAt(curTrkPt),
-                            session.LogicSettings.WalkingSpeedInKilometerPerHour,
+                            LocationUtils.getRandomWalkingSpeed(session.LogicSettings.MinWalkingSpeedInKilometerPerHour, session.LogicSettings.MaxWalkingSpeedInKilometerPerHour),
                             async () =>
                             {
                                 await CatchNearbyPokemonsTask.Execute(session, cancellationToken);

@@ -72,7 +72,8 @@ namespace PoGo.NecroBot.Logic
         float KeepMinIvPercentage { get; }
         int KeepMinCp { get; }
         string KeepMinOperator { get; }
-        double WalkingSpeedInKilometerPerHour { get; }
+        double MinWalkingSpeedInKilometerPerHour { get; }
+        double MaxWalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
