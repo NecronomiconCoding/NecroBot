@@ -65,8 +65,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ? await session.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon)
                     : await session.Inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon)) ?? duplicatePokemon;
 
-                var setting = pokemonSettings.Single(q => q.PokemonId == duplicatePokemon.PokemonId);
-                var family = pokemonFamilies.First(q => q.FamilyId == setting.FamilyId);
+                var setting = pokemonSettings.SingleOrDefault(q => q.PokemonId == duplicatePokemon.PokemonId);
+                var family = pokemonFamilies.FirstOrDefault(q => q.FamilyId == setting.FamilyId);
 
                 family.Candy_++;
 
