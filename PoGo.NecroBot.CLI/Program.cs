@@ -42,7 +42,6 @@ namespace PoGo.NecroBot.CLI
 
             if (settings == null)
             {
-                Logger.Write("This is your first start and the bot has generated the default config!", LogLevel.Warning);
                 Logger.Write("Press a Key to continue...",
                     LogLevel.Warning);
                 Console.ReadKey();
