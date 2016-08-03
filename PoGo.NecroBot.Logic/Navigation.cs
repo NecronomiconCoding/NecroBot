@@ -35,14 +35,14 @@ namespace PoGo.NecroBot.Logic
         }
 
         public async Task<PlayerUpdateResponse> Move(GeoCoordinate targetLocation,
-            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking,
+            double minWalkingSpeedInKilometersPerHour, double maxWalkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking,
             CancellationToken cancellationToken, bool disableHumanLikeWalking)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             if (!disableHumanLikeWalking)
             {
-                var speedInMetersPerSecond = walkingSpeedInKilometersPerHour / 3.6;
+                var speedInMetersPerSecond = LocationUtils.getRandomWalkingSpeed(minWalkingSpeedInKilometersPerHour, maxWalkingSpeedInKilometersPerHour) / 3.6;
 
                 var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
                 LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
@@ -80,6 +80,7 @@ namespace PoGo.NecroBot.Logic
                         }
                     }
 
+                    speedInMetersPerSecond = LocationUtils.getRandomWalkingSpeed(minWalkingSpeedInKilometersPerHour, maxWalkingSpeedInKilometersPerHour) / 3.6;
                     nextWaypointDistance = Math.Min(currentDistanceToTarget,
                         millisecondsUntilGetUpdatePlayerLocationResponse / 1000 * speedInMetersPerSecond);
                     nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
@@ -114,7 +115,7 @@ namespace PoGo.NecroBot.Logic
         }
 
         public async Task<PlayerUpdateResponse> HumanPathWalking(GpxReader.Trkpt trk,
-            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking,
+            double minWalkingSpeedInKilometersPerHour, double maxWalkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking,
             CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -124,7 +125,7 @@ namespace PoGo.NecroBot.Logic
             var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat, CultureInfo.InvariantCulture),
                 Convert.ToDouble(trk.Lon, CultureInfo.InvariantCulture));
 
-            var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
+            var speedInMetersPerSecond = LocationUtils.getRandomWalkingSpeed(minWalkingSpeedInKilometersPerHour, minWalkingSpeedInKilometersPerHour )/ 3.6;
 
             var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
             LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
@@ -163,6 +164,7 @@ namespace PoGo.NecroBot.Logic
                 //    }
                 //}
 
+                speedInMetersPerSecond = LocationUtils.getRandomWalkingSpeed(minWalkingSpeedInKilometersPerHour, minWalkingSpeedInKilometersPerHour) / 3.6;
                 nextWaypointDistance = Math.Min(currentDistanceToTarget,
                     millisecondsUntilGetUpdatePlayerLocationResponse/1000*speedInMetersPerSecond);
                 nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
