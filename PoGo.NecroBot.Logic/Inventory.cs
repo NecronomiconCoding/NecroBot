@@ -310,15 +310,14 @@ namespace PoGo.NecroBot.Logic
             var inventory = await GetCachedInventory();
 
             var families = from item in inventory.InventoryDelta.InventoryItems
-                where item.InventoryItemData?.Candy != null
-                where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
-                group item by item.InventoryItemData?.Candy.FamilyId
-                into family
-                select new Candy
-                {
-                    FamilyId = family.First().InventoryItemData.Candy.FamilyId,
-                    Candy_ = family.First().InventoryItemData.Candy.Candy_
-                };
+                            where item.InventoryItemData?.Candy != null
+                            where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
+                            group item by item.InventoryItemData?.Candy.FamilyId into family
+                            select new Candy
+                            {
+                                FamilyId = family.First().InventoryItemData.Candy.FamilyId,
+                                Candy_ = family.First().InventoryItemData.Candy.Candy_
+                            };
 
 
             return families.ToList();
@@ -371,8 +370,8 @@ namespace PoGo.NecroBot.Logic
             var pokemonToEvolve = new List<PokemonData>();
             foreach (var pokemon in pokemons)
             {
-                var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
-                var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
+                var settings = pokemonSettings.SingleOrDefault(x => x.PokemonId == pokemon.PokemonId);
+                var familyCandy = pokemonFamilies.SingleOrDefault(x => settings.FamilyId == x.FamilyId);
 
                 //Don't evolve if we can't evolve it
                 if (settings.EvolutionIds.Count == 0)
