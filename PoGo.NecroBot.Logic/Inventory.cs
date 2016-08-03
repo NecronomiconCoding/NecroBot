@@ -98,16 +98,18 @@ namespace PoGo.NecroBot.Logic
                     p =>
                     {
                         var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
-                        
-                        return pokemonTransferFilter.KeepMinOperator.ToLower().Equals("and") 
-                                  ? 
+
+                        return pokemonTransferFilter.KeepMinOperator.ToLower().Equals("and")
+                                  ?
                                   (!((p.Cp >= pokemonTransferFilter.KeepMinCp &&
                                   PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage) ||
-                                        pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any())) 
-                                  : 
+                                        pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any() ||
+                                            (PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl && pokemonTransferFilter.UseKeepMinLvl)))
+                                  :
                                   !((p.Cp >= pokemonTransferFilter.KeepMinCp ||
                                   PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage) ||
-                                  pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any());
+                                        pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any() ||
+                                            (PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl && pokemonTransferFilter.UseKeepMinLvl));
                     }).ToList();
 
 
@@ -433,7 +435,7 @@ namespace PoGo.NecroBot.Logic
             {
                 return _logicSettings.PokemonsTransferFilter[pokemon];
             }
-            return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinIvPercentage,
+            return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinLvl, _logicSettings.UseKeepMinLvl, _logicSettings.KeepMinIvPercentage,
                 _logicSettings.KeepMinOperator, _logicSettings.KeepMinDuplicatePokemon);
         }
 
