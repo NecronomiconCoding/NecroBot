@@ -93,13 +93,19 @@ namespace PoGo.NecroBot.Logic
 
             var pokemonToTransfer = myPokemonList.Where(p => !pokemonsNotToTransfer.Contains(p.PokemonId) && p.DeployedFortId == string.Empty && p.Favorite == 0).ToList();
 
+            
+
             pokemonToTransfer = (_logicSettings.KeepMinOperator.ToLower().Equals("and") ?
                 pokemonToTransfer.Where(
-                    p => !(p.Cp >= GetPokemonTransferFilter(p.PokemonId).KeepMinCp &&
-                         PokemonInfo.CalculatePokemonPerfection(p) >= GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage)):
+                    p => !( (p.Cp >= GetPokemonTransferFilter(p.PokemonId).KeepMinCp &&
+                             PokemonInfo.CalculatePokemonPerfection(p) >= GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage) || 
+                                   GetPokemonTransferFilter(p.PokemonId).Moves.Contains(p.Move1) || 
+                                   GetPokemonTransferFilter(p.PokemonId).Moves.Contains(p.Move2))):
                 pokemonToTransfer.Where(
                     p => !(p.Cp >= GetPokemonTransferFilter(p.PokemonId).KeepMinCp ||
-                         PokemonInfo.CalculatePokemonPerfection(p) >= GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage))).ToList();
+                           PokemonInfo.CalculatePokemonPerfection(p) >= GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage || 
+                           GetPokemonTransferFilter(p.PokemonId).Moves.Contains(p.Move1) ||
+                           GetPokemonTransferFilter(p.PokemonId).Moves.Contains(p.Move2)))).ToList();
 
 
             var myPokemonSettings = await GetPokemonSettings();
