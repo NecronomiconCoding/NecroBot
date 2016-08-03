@@ -42,10 +42,6 @@ namespace PoGo.NecroBot.Logic
 
     public class TransferFilter
     {
-        public TransferFilter()
-        {
-        }
-
         public TransferFilter(int keepMinCp, int keepMinLvl, float keepMinIvPercentage, string keepMinOperator, bool useKeepMinLvl, int keepMinDuplicatePokemon, 
             List<PokemonMove> moves = null)
         {

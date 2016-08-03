@@ -93,28 +93,28 @@ namespace PoGo.NecroBot.Logic
 
             var pokemonToTransfer = myPokemonList.Where(p => !pokemonsNotToTransfer.Contains(p.PokemonId) && p.DeployedFortId == string.Empty && p.Favorite == 0).ToList();
 
-            
+                pokemonToTransfer = (_logicSettings.KeepMinOperator.ToLower().Equals("and") ?
+                    pokemonToTransfer.Where(
+                        p =>
+                        {
+                            var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
 
-            pokemonToTransfer = (_logicSettings.KeepMinOperator.ToLower().Equals("and") ?
-                pokemonToTransfer.Where(
-                    p =>
-                    {
-                        var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
-                        
-                        return !((p.Cp >= pokemonTransferFilter.KeepMinCp &&
-                                  PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage) ||
-                                        pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any());
-                                       //more tighter condition pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Count() == pokemonTransferFilter.Moves.Count);
-                    }) :
-                pokemonToTransfer.Where(
-                    p =>
-                    {
-                        var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
+                            return !((p.Cp >= pokemonTransferFilter.KeepMinCp &&
+                                      PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage) ||
+                                            pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any() ||
+                                                (PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl && pokemonTransferFilter.UseKeepMinLvl));
+                            //more tighter condition pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Count() == pokemonTransferFilter.Moves.Count);
+                        }) :
+                    pokemonToTransfer.Where(
+                        p =>
+                        {
+                            var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
 
-                        return !((p.Cp >= pokemonTransferFilter.KeepMinCp ||
-                                  PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage) ||
-                                  pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any());
-                    })).ToList();
+                            return !((p.Cp >= pokemonTransferFilter.KeepMinCp ||
+                                      PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage) ||
+                                          pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any() ||
+                                              (PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl && pokemonTransferFilter.UseKeepMinLvl));
+                        })).ToList();
 
 
             var myPokemonSettings = await GetPokemonSettings();
@@ -439,8 +439,8 @@ namespace PoGo.NecroBot.Logic
             {
                 return _logicSettings.PokemonsTransferFilter[pokemon];
             }
-            return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinIvPercentage,
-                _logicSettings.KeepMinOperator, _logicSettings.KeepMinDuplicatePokemon);
+            return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinLvl, _logicSettings.KeepMinIvPercentage,
+                _logicSettings.KeepMinOperator, _logicSettings.UseKeepMinLvl, _logicSettings.KeepMinDuplicatePokemon);
         }
 
         public async Task<GetInventoryResponse> RefreshCachedInventory()

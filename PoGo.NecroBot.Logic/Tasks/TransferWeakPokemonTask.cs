@@ -33,9 +33,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             foreach (var pokemon in pokemonsFiltered)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                if ((pokemon.Cp >= session.LogicSettings.KeepMinCp || pokemon.NumUpgrades >= session.LogicSettings.KeepMinLvl) ||
+                if ((pokemon.Cp >= session.LogicSettings.KeepMinCp) ||
                     (PokemonInfo.CalculatePokemonPerfection(pokemon) >= session.LogicSettings.KeepMinIvPercentage &&
                      session.LogicSettings.PrioritizeIvOverCp) ||
+                     (PokemonInfo.GetLevel(pokemon) >= session.LogicSettings.KeepMinLvl  && session.LogicSettings.UseKeepMinLvl) ||
                     pokemon.Favorite == 1)
                     continue;
 
