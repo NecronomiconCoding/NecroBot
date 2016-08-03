@@ -21,6 +21,10 @@
       "Value": "Tipo de autenticação desconhecida em config.json"
     },
     {
+      "Key": "loginInvalid",
+      "Value": "As credenciais de usuário estão inválidas, o login falhou."
+    },
+    {
       "Key": "farmPokestopsOutsideRadius",
       "Value": "Você está fora do seu raio definido! Caminhando para o início ({0}m de distância) em 5 segundos. Suas coordenadas em LastPos.ini estão corretas?"
     },
@@ -30,7 +34,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nome: {0} XP: {1}, Gemas: {2}, Itens: {3}"
+      "Value": "Nome: {0} XP: {1}, Gemas: {2}, Itens: {3}, Lat: {4}, Long: {5}"
     },
     {
       "Key": "eventFortFailed",
@@ -38,11 +42,15 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Chegando ao Pokestop: {0} em ({1}m)"
+      "Value": "Chegando ao Pokestop: {0} ({1}m)({2}s)"
     },
     {
       "Key": "eventProfileLogin",
       "Value": "Jogando como {0}"
+    },
+    {
+      "Key": "eventUsedIncense",
+      "Value": "Incenso utilizado, restando: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
@@ -50,7 +58,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} com sucesso para {1}xp"
+      "Value": "{0} com sucesso, +{1}xp"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -66,11 +74,31 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m de distância | com uma {9} (restando {10}). | {11}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m de distância | com uma {9} (restando {10}). | {11} | lat: {12} long: {13}"
     },
     {
       "Key": "eventNoPokeballs",
       "Value": "Sem Pokébolas - Nós perdemos um(a) {0} com {1} de CP"
+    },
+    {
+      "Key": "waitingForMorePokemonToEvolve",
+      "Value": "Esperando evoluir {0} Pokemon(s) até que mais {1} sejam capturados! ({2}/{3} para {4}% do inventário)"
+    },
+    {
+      "Key": "useLuckyEggsMinPokemonAmountTooHigh",
+      "Value": "Ovos da sorte nunca serão utilizados com a propriedade UseLuckyEggsMinPokemonAmount definida como {0}, em vez disso use um valor <= {1}"
+    },
+    {
+      "Key": "catchMorePokemonToUseLuckyEgg",
+      "Value": "Capture mais {0} Pokemons para usar o Ovo da Sorte!"
+    },
+    {
+      "Key": "eventUseBerry",
+      "Value": "Utilizado {0} | Restando {1}"
+    },
+    {
+      "Key": "itemRazzBerry",
+      "Value": "Razz Berry"
     },
     {
       "Key": "catchStatusAttempt",
@@ -130,7 +158,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "O ovo que estava na incubadora chocou: {0}"
+      "Value": "O ovo que estava na incubadora chocou: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -151,6 +179,10 @@
     {
       "Key": "logEntryFarming",
       "Value": "FARMANDO"
+    },
+    {
+      "Key": "logEntrySniper",
+      "Value": "SNIPER"
     },
     {
       "Key": "logEntryRecycling",
@@ -222,7 +254,7 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "As coodernadas no arquivo \"LastPos.ini\" são inválidas, utilizando as coordenadas padrão"
+      "Value": "As coodernadas no arquivo \"LastPos.ini\" são inválidas, utilizando coordenadas padrão"
     },
     {
       "Key": "gotUpToDateVersion",
@@ -234,19 +266,23 @@
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Baixando e aplicando atualização..."
+      "Value": "Baixando e aplicando a atualização..."
     },
     {
       "Key": "finishedDownloadingRelease",
-      "Value": "Finalizando o download da última versão..."
+      "Value": "Finalizado o download da última versão..."
     },
     {
       "Key": "finishedUnpackingFiles",
       "Value": "Terminando de descompactar arquivos..."
     },
     {
+      "Key": "finishedTransferringConfig",
+      "Value": "Terminando de transferir suas configurações para a nova versão..."
+    },
+    {
       "Key": "updateFinished",
-      "Value": "Atualização concluída, você já pode fechar essa janela."
+      "Value": "Atualização concluída, você já pode fechar essa janela agora."
     },
     {
       "Key": "lookingForIncensePokemon",
@@ -265,12 +301,32 @@
       "Value": "{0} Ignorado"
     },
     {
+      "Key": "zeroPokeballInv",
+      "Value": "Você não tem Pokebolas no seu inventário, nenhum Pokemon pode ser capturado!"
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "Quantidade atual de Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
+    },
+    {
+      "Key": "currentItemInv",
+      "Value": "Quantidade Total de Poções: {0} | Total de Revives: {1} | Frutas: {2} | Total de Incensos: {3} | Ovos da Sorte: {4} | Atratores(Lures): {5}"
+    },
+    {
+      "Key": "maxItemsCombinedOverMaxItemStorage",
+      "Value": "[Configuração Inválida] Seu limite de itens combinados (pokebolas+poções+revives={0}) está acima da capacidade máxima de seu inventário ({1})"
+    },
+    {
+      "Key": "recyclingQuietly",
+      "Value": "Reciclando silenciosamente..."
+    },
+    {
       "Key": "invFullTransferring",
       "Value": "Inventário de Pokémons cheio. Transferindo pokémons..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "O inventário de Pokémons está cheio. Por favor transfira seus pokémons manualmente altere TransferDuplicatePokemon para true nas configurações..."
+      "Value": "O inventário de Pokémons está cheio. Por favor transfira seus pokémons manualmente ou altere a propriedade TransferDuplicatePokemon para true nas configurações..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -286,15 +342,19 @@
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Seu destino desejado de {0}, {1} é muito longe de sua posição atual {2}, {3}"
+      "Value": "Seu destino desejado de {0}, {1} está muito longe de sua posição atual {2}, {3}"
     },
     {
       "Key": "pokemonRename",
       "Value": "Pokémon {0} ({1}) renomeado de {2} para {3}."
     },
     {
+      "Key": "pokemonFavorite",
+      "Value": "{0}% perfeito {1} (CP {2}) *favoritado*."
+    },
+    {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Lista de pokémons ignorados] - Ignorando {0} como definido nas configurações"
+      "Value": "[Filtro de pokémons ignorados] - Ignorando {0} como definido nas configurações"
     },
     {
       "Key": "catchStatusAttempt",
@@ -326,7 +386,7 @@
     },
     {
       "Key": "catchTypeLure",
-      "Value": "Atrair"
+      "Value": "Atraído"
     },
     {
       "Key": "catchTypeIncense",
@@ -338,11 +398,11 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Sessão {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transferidos: {6:0} | Reciclados: {7:0}"
+      "Value": "{0} - Sessão {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Transferidos: {6:n0} | Reciclados: {7:n0}"
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (próximo nível em {1}h {2}m | {3}/{4} XP)"
+      "Value": "{0} (próximo nível em {1}h {2}m | {3:n0}/{4:n0} XP)"
     },
     {
       "Key": "requireInputText",
@@ -383,6 +443,18 @@
     {
       "Key": "notEnoughPokeballsToSnipe",
       "Value": "Sem pokébolas suficientes para começar o sniping! ({0}/{1})"
+    },
+    {
+      "Key": "displayHighestMove1Header",
+      "Value": "MOVE1"
+    },
+    {
+      "Key": "displayHighestMove2Header",
+      "Value": "MOVE2"
+    },
+    {
+      "Key": "displayHighestCandy",
+      "Value": "Doce"
     },
     {
       "Key": "iPBannedError",
@@ -426,7 +498,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "[Evoluções] Possíveis Evoluções: {0}"
+      "Value": "Quantidade de Evoluções Possíveis: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
