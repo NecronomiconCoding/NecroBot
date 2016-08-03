@@ -27,10 +27,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemonToEvolveTask = await session.Inventory.GetPokemonToEvolve(session.LogicSettings.PokemonsToEvolve);
             var pokemonToEvolve = pokemonToEvolveTask.ToList();
 
-            session.EventDispatcher.Send( new EvolveCountEvent
+            session.EventDispatcher.Send(new EvolveCountEvent
             {
                 Evolves = pokemonToEvolve.Count
-            } );
+            });
 
             if (pokemonToEvolve.Any())
             {
@@ -77,8 +77,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             _lastLuckyEggTime = DateTime.Now;
             await session.Client.Inventory.UseItemXpBoost();
             await session.Inventory.RefreshCachedInventory();
-            if (luckyEgg != null) session.EventDispatcher.Send(new UseLuckyEggEvent {Count = luckyEgg.Count});
-            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
+            if (luckyEgg != null) session.EventDispatcher.Send(new UseLuckyEggEvent { Count = luckyEgg.Count });
+            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 2000);
         }
 
         private static async Task evolve(ISession session, List<PokemonData> pokemonToEvolve)
@@ -94,6 +94,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Exp = evolveResponse.ExperienceAwarded,
                     Result = evolveResponse.Result
                 });
+                //Delays only if it isn't the last pokemon to evolve
+                if (!pokemonToEvolve.Last().Equals(pokemon))
+                {
+                    DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+                }
             }
         }
 
