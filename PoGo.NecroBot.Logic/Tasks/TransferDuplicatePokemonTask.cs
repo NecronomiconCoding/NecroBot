@@ -35,11 +35,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var pokemonTransferFilter = session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId);
 
                 if (duplicatePokemon.Cp >=
-                    pokemonTransferFilter.KeepMinCp ||
+                    (pokemonTransferFilter.KeepMinCp ||
                     PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >
-                    pokemonTransferFilter.KeepMinIvPercentage ||
-                    pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move1) ||
-                    pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move2))
+                    pokemonTransferFilter.KeepMinIvPercentage) &&
+                    (pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move1) &&
+                    pokemonTransferFilter.Moves.Contains(duplicatePokemon.Move2)))
                 {
                     continue;
                 }
