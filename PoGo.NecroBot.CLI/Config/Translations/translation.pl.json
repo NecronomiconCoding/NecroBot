@@ -22,7 +22,7 @@
     },
     {
       "Key": "loginInvalid",
-      "Value": "Dane uwierzytelniania wygasły. Logowanie zakończone niepowodzeniem."
+      "Value": "Dane uwierzytelniania wygasły. Logowanie nie powiodło się."
     },
     {
       "Key": "farmPokestopsOutsideRadius",
@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Nazwa: {0}   INFO: Zbieranie przedmiotów nie udane, prawdopodobny softban. Odbanowanie za: {1}/{2}"
+      "Value": "Nazwa: {0}   INFO: Zbieranie przedmiotów nie , prawdopodobnie masz SoftBana. Odbanowanie za: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -50,11 +50,11 @@
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "Użyto Kadzidła, pozostało: {0}"
+      "Value": "Użyto Incensa, pozostało: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Użyto Szczęśliwego Jajka, pozostało: {0}"
+      "Value": "Użyto LuckyEgga, pozostało: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -62,7 +62,7 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Niepowodzenie {0}. Rezultatem jest {1}, przestaję ewoluować {2}"
+      "Value": "Niepowodzenie! {0}. W rezultacie {1}, przestaję ewoluować {2}"
     },
     {
       "Key": "eventPokemonTransferred",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Brak Pokeballi - Straciłeś {0} z CP: {1}"
+      "Value": "Brak Pokeballi - Utracono {0} z CP: {1}"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
@@ -86,11 +86,11 @@
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "Szczęśliwe Jajko nigdy nie zostanie użyte, jeśli wartość UseLuckyEggsMinPokemonAmount wynosi {0}, użyj <= {1}"
+      "Value": "LuckyEgg nie zostanie użyty, gdy wartość UseLuckyEggsMinPokemonAmount wynosi {0}, użyj <= {1}"
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "Złap jeszcze {0} Pokemonów, żeby użyto Szczęśliwego Jajka"
+      "Value": "Złap jeszcze {0} Pokemonów, żeby użyć LuckyEgga"
     },
     {
       "Key": "eventUseBerry",
@@ -114,7 +114,7 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Przetwarzanie pliku GPX zakończone niepowodzeniem, próbuję ominąć ten krok..."
+      "Value": "Przetwarzanie pliku GPX nie powiodło się, następuje próba pominięcia..."
     },
     {
       "Key": "displayHighestsHeader",
@@ -146,11 +146,11 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Upewnij się, że szerokość i długość geograficzna są poprawne. Jeżeli nie to zamknij program [Szerokość: {0} | Długość: {1}]"
+      "Value": "Upewnij się, że szerokość i długość geograficzna została wpisana poprawnie. Jeżeli nie to zamknij program [Szerokość: {0} | Długość: {1}]"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Umieszczam Jajko w inkubatorze: Pozostało {0:0.00}km"
+      "Value": "Umieszczono Jajko w inkubatorze: Pozostało {0:0.00}km"
     },
     {
       "Key": "incubatorStatusUpdate",
@@ -230,7 +230,7 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Konto niezweryfikowane! Zamykam program..."
+      "Value": "Konto niezweryfikowane! Zamykanie programu..."
     },
     {
       "Key": "openingGoogleDevicePage",
@@ -238,7 +238,7 @@
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Błąd kopiowania, zrób to ręcznie"
+      "Value": "Błąd przy kopiowaniu, zrób to ręcznie"
     },
     {
       "Key": "couldntCopyToClipboard2",
@@ -254,11 +254,11 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Współrzędne w pliku \"LastPos.ini\" są niepoprawne, sczytuje domyślne ustawienia"
+      "Value": "Współrzędne w pliku \"LastPos.ini\" są niepoprawne, wczytywanie ustawień domyślnych"
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Wspaniale! Posiadasz najnowszą wersję programu NecroBot (v{0})"
+      "Value": "Wspaniale! Twoja wersja programu NecroBot jest aktualna! (v{0})"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -282,11 +282,11 @@
     },
     {
       "Key": "updateFinished",
-      "Value": "Aktualizacja zakończona, możesz teraz zamknąć okno"
+      "Value": "Aktualizacja zakończona, możesz teraz zamknąć okno."
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Poszukuję Pokemonów zwabionych kadzidłem..."
+      "Value": "Poszukuję Pokemonów zwabionych Incensem..."
     },
     {
       "Key": "lookingForPokemon",
@@ -294,7 +294,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Poszukuję Pokemonów zwabionych przynętą..."
+      "Value": "Poszukuję Pokemonów zwabionych Lurem..."
     },
     {
       "Key": "pokemonSkipped",
@@ -314,7 +314,7 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[Błąd Konfiguracji] Ustawiona przez Ciebie dopuszczalna ilość itemów w Inwentarzu (PokeBalle+Mikstury+Wskrzeszenia={0}) przekracza maksymalną jego pojemność, która wynosi: ({1})"
+      "Value": "[Błąd Konfiguracji] Ustawiona przez Ciebie dopuszczalna ilość itemów w Ekwipunku (PokeBalle+Mikstury+Wskrzeszenia={0}) przekracza maksymalną jego pojemność, która wynosi: ({1})"
     },
     {
       "Key": "recyclingQuietly",
@@ -322,15 +322,15 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Inwentarz jest pełny. Przesyłam Pokemony..."
+      "Value": "Posiadasz maksymalną ilość pokemonów. Trwa transferowanie..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Inwentarz jest pełny. Proszę ręcznie przesłać Pokemony albo w ustawieniach zmienić wartość TransferDuplicatePokemon na true..."
+      "Value": "Posiadasz maksymalną ilość pokemonów, prześlij pokemony ręcznie albo zmień w ustawieniach wartość TransferDuplicatePokemon na true..."
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Inwentarz jest pełny, nie zebrano przedmiotów"
+      "Value": "Twoj ekwipunek jest pełny, nie zebrano przedmiotów"
     },
     {
       "Key": "encounterProblem",
@@ -354,7 +354,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Filtr Ignorowania Pokemonów] - Ignoruję {0} według twoich ustawień"
+      "Value": "[Filtr Ignorowania Pokemonów] - Ignorowanie {0} według wykrytych ustawień"
     },
     {
       "Key": "catchStatusAttempt",
@@ -374,7 +374,7 @@
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "Chybiony"
+      "Value": "Chybiono"
     },
     {
       "Key": "catchStatusSuccess",
@@ -386,11 +386,11 @@
     },
     {
       "Key": "catchTypeLure",
-      "Value": "Przynęta"
+      "Value": "Lure"
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "Kadzidło"
+      "Value": "Incense"
     },
     {
       "Key": "webSocketFailStart",
@@ -406,7 +406,7 @@
     },
     {
       "Key": "requireInputText",
-      "Value": "Wznowienie programu nastąpi po naciśnięciu dowolnego klawisza..."
+      "Value": "Trwa wznawianie programu. Naciśnij dowolny klawisz..."
     },
     {
       "Key": "googleTwoFactorAuth",
@@ -418,19 +418,19 @@
     },
     {
       "Key": "googleError",
-      "Value": "Upewnij się, że podałeś poprawny login i hasło"
+      "Value": "Upewnij się, że wpisany przez Ciebie login i hasło są prawidłowe."
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Proszę wypełnić GoogleUsername oraz GooglePassword w \"auth.json\""
+      "Value": "Wypełnij GoogleUsername oraz GooglePassword w \"auth.json\""
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Proszę wypełnić PtcUsername oraz PtcPassword w \"auth.json\""
+      "Value": "Wypełnij PtcUsername oraz PtcPassword w \"auth.json\""
     },
     {
       "Key": "snipeScan",
-      "Value": "[Snajper] Skanuję w poszukiwaniu Pokemona w {0}..."
+      "Value": "[Snajper] Skanowanie w poszukiwaniu Pokemona w {0}..."
     },
     {
       "Key": "snipeScanEx",
@@ -438,7 +438,7 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Snajper] Nie znaleziono żadnego Pokemona"
+      "Value": "[Snajper] Nie znaleziono żadnego Pokemona."
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
@@ -446,11 +446,11 @@
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "ATAK1"
+      "Value": "ATAK 1"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "ATAK2"
+      "Value": "ATAK 2"
     },
     {
       "Key": "displayHighestCandy",
@@ -462,35 +462,35 @@
     },
     {
       "Key": "noEggsAvailable",
-      "Value": "Brak Szczęśliwych Jajek"
+      "Value": "Brak LuckyEggów"
     },
     {
       "Key": "useLuckyEggActive",
-      "Value": "Szczęśliwe Jajko jest aktywne"
+      "Value": "LuckyEgg jest aktywny"
     },
     {
       "Key": "usedLuckyEgg",
-      "Value": "Aktywowano Szczęśliwe Jajko"
+      "Value": "Aktywowano LuckyEgga"
     },
     {
       "Key": "useLuckyEggAmount",
-      "Value": "Szczęśliwych Jajek w Inwentarzu: {0}"
+      "Value": "LuckyEgg w Inwentarzu: {0}"
     },
     {
       "Key": "noIncenseAvailable",
-      "Value": "Brak Kadzideł"
+      "Value": "Brak Incensa"
     },
     {
       "Key": "useIncenseActive",
-      "Value": "Kadzidło jest aktywne"
+      "Value": "Incense jest aktywny"
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "Kadzideł w Inwentarzu: {0}"
+      "Value": "Incense w Inwentarzu: {0}"
     },
     {
       "Key": "usedIncense",
-      "Value": "Aktywowano Kadzidło"
+      "Value": "Aktywowano Incensa"
     },
     {
       "Key": "amountPkmSeenCaught",
@@ -502,11 +502,11 @@
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "Ulepszanie Pokemona zakończone niepowodzeniem. Zbyt mało zasobów"
+      "Value": "Ulepszanie Pokemona nie powiodło się. Zbyt mało zasobów"
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "[Snajper] Serwer jest wyłączony. Pomijanie..."
+      "Value": "[Snajper] Serwer jest wyłączony. Pomijam..."
     }
   ],
   "PokemonStrings": [

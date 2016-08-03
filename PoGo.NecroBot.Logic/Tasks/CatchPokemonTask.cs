@@ -13,6 +13,7 @@ using POGOProtos.Map.Fort;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
 using System.Threading;
+using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -20,6 +21,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchPokemonTask
     {
+        private static Random Random => new Random((int)DateTime.Now.Ticks);
+
         public static async Task Execute(ISession session, CancellationToken cancellationToken, dynamic encounter, MapPokemon pokemon,
             FortData currentFortData = null, ulong encounterId = 0)
         {
@@ -28,7 +31,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             // If the encounter is null nothing will work below, so exit now
             if (encounter == null) return;
 
-            float probability = encounter?.CaptureProbability?.CaptureProbability_[0];
+            float probability = encounter.CaptureProbability?.CaptureProbability_[0];
 
             // Check for pokeballs before proceeding
             var pokeball = await GetBestBall(session, encounter, probability);
@@ -94,6 +97,66 @@ namespace PoGo.NecroBot.Logic.Tasks
                     return;
                 }
 
+                //default to excellent throw
+                var normalizedRecticleSize = 1.95;
+                //default spin
+                var spinModifier = 1.0;
+
+                //Humanized throws
+                if (session.LogicSettings.EnableHumanizedThrows)
+                {
+                    //thresholds: https://gist.github.com/anonymous/077d6dea82d58b8febde54ae9729b1bf
+                    var spinTxt = "Curve";
+                    var hitTxt = "Excellent";
+                    if (pokemonCp > session.LogicSettings.ForceExcellentThrowOverCp ||
+                        pokemonIv > session.LogicSettings.ForceExcellentThrowOverIv)
+                    {
+                        normalizedRecticleSize = Random.NextDouble() * (1.95 - 1.7) + 1.7;
+                    }
+                    else if (pokemonCp >= session.LogicSettings.ForceGreatThrowOverCp ||
+                             pokemonIv >= session.LogicSettings.ForceGreatThrowOverIv)
+                    {
+                        normalizedRecticleSize = Random.NextDouble() * (1.95 - 1.3) + 1.3;
+                        hitTxt = "Great";
+                    }
+                    else
+                    {
+                        var regularThrow = 100 - (session.LogicSettings.ExcellentThrowChance +
+                                                  session.LogicSettings.GreatThrowChance +
+                                                  session.LogicSettings.NiceThrowChance);
+                        var rnd = Random.Next(1 , 101);
+
+                        if (rnd <= regularThrow)
+                        {
+                            normalizedRecticleSize = Random.NextDouble() * (1 - 0.1) + 0.1;
+                            hitTxt = "Ordinary";
+                        }
+                        else if (rnd <= regularThrow + session.LogicSettings.NiceThrowChance)
+                        {
+                            normalizedRecticleSize = Random.NextDouble() * (1.3 - 1) + 1;
+                            hitTxt = "Nice";
+                        }
+                        else if (rnd <=
+                                 regularThrow + session.LogicSettings.NiceThrowChance +
+                                 session.LogicSettings.GreatThrowChance)
+                        {
+                            normalizedRecticleSize = Random.NextDouble() * (1.7 - 1.3) + 1.3;
+                            hitTxt = "Great";
+                        }
+
+                        if (Random.NextDouble() * 100 > session.LogicSettings.CurveThrowChance)
+                        {
+                            spinModifier = 0.0;
+                            spinTxt = "Straight";
+                        }
+                    }
+
+                    //round to 2 decimals
+                    normalizedRecticleSize = Math.Round(normalizedRecticleSize, 2);
+
+                    Logger.Write($"(Threw ball) {hitTxt} hit. {spinTxt}-ball...", LogLevel.Debug);
+                }
+
                 caughtPokemonResponse =
                     await session.Client.Encounter.CatchPokemon(
                         encounter is EncounterResponse || encounter is IncenseEncounterResponse
@@ -101,7 +164,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             : encounterId,
                         encounter is EncounterResponse || encounter is IncenseEncounterResponse
                             ? pokemon.SpawnPointId
-                            : currentFortData.Id, pokeball);
+                            : currentFortData.Id, pokeball, normalizedRecticleSize, spinModifier);
 
                 var lat = encounter is EncounterResponse || encounter is IncenseEncounterResponse
                              ? pokemon.Latitude : currentFortData.Latitude;
