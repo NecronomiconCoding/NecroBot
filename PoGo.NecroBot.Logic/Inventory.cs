@@ -93,28 +93,22 @@ namespace PoGo.NecroBot.Logic
 
             var pokemonToTransfer = myPokemonList.Where(p => !pokemonsNotToTransfer.Contains(p.PokemonId) && p.DeployedFortId == string.Empty && p.Favorite == 0).ToList();
 
-            
-
-            pokemonToTransfer = (_logicSettings.KeepMinOperator.ToLower().Equals("and") ?
+            pokemonToTransfer = 
                 pokemonToTransfer.Where(
                     p =>
                     {
                         var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
                         
-                        return !((p.Cp >= pokemonTransferFilter.KeepMinCp &&
+                        return pokemonTransferFilter.KeepMinOperator.ToLower().Equals("and") 
+                                  ? 
+                                  (!((p.Cp >= pokemonTransferFilter.KeepMinCp &&
                                   PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage) ||
-                                        pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any());
-                                       //more tighter condition pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Count() == pokemonTransferFilter.Moves.Count);
-                    }) :
-                pokemonToTransfer.Where(
-                    p =>
-                    {
-                        var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
-
-                        return !((p.Cp >= pokemonTransferFilter.KeepMinCp ||
+                                        pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any())) 
+                                  : 
+                                  !((p.Cp >= pokemonTransferFilter.KeepMinCp ||
                                   PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage) ||
                                   pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any());
-                    })).ToList();
+                    }).ToList();
 
 
             var myPokemonSettings = await GetPokemonSettings();
