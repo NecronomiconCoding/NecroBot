@@ -86,6 +86,16 @@ namespace PoGo.NecroBot.Logic
         double UseMasterBallBelowCatchProbability { get; }
         double UseUltraBallBelowCatchProbability { get; }
         double UseGreatBallBelowCatchProbability { get; }
+        bool EnableHumanizedThrows { get; }
+        int NiceThrowChance { get; }
+        int GreatThrowChance { get; }
+        int ExcellentThrowChance { get; }
+        int CurveThrowChance { get; }
+        double ForceGreatThrowOverIv { get; }
+        double ForceExcellentThrowOverIv { get; }
+        int ForceGreatThrowOverCp { get; }
+        int ForceExcellentThrowOverCp { get; }
+
         int DelayBetweenPokemonCatch { get; }
         bool AutomaticallyLevelUpPokemon { get; }
         string LevelUpByCPorIv { get; }

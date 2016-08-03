@@ -266,6 +266,25 @@ namespace PoGo.NecroBot.Logic
         public double UseUltraBallBelowCatchProbability;
         [DefaultValue(0.05)]
         public double UseMasterBallBelowCatchProbability;
+        //customizable catch
+        [DefaultValue(false)]
+        public bool EnableHumanizedThrows;
+        [DefaultValue(40)]
+        public int NiceThrowChance;
+        [DefaultValue(30)]
+        public int GreatThrowChance;
+        [DefaultValue(10)]
+        public int ExcellentThrowChance;
+        [DefaultValue(90)]
+        public int CurveThrowChance;
+        [DefaultValue(90.00)]
+        public double ForceGreatThrowOverIv;
+        [DefaultValue(95.00)]
+        public double ForceExcellentThrowOverIv;
+        [DefaultValue(1000)]
+        public int ForceGreatThrowOverCp;
+        [DefaultValue(1500)]
+        public int ForceExcellentThrowOverCp;
         //transfer
         [DefaultValue(false)]
         public bool TransferWeakPokemon;
@@ -744,6 +763,15 @@ namespace PoGo.NecroBot.Logic
         public double UseMasterBallBelowCatchProbability => _settings.UseMasterBallBelowCatchProbability;
         public double UseUltraBallBelowCatchProbability => _settings.UseUltraBallBelowCatchProbability;
         public double UseGreatBallBelowCatchProbability => _settings.UseGreatBallBelowCatchProbability;
+        public bool EnableHumanizedThrows => _settings.EnableHumanizedThrows;
+        public int NiceThrowChance => _settings.NiceThrowChance;
+        public int GreatThrowChance => _settings.GreatThrowChance;
+        public int ExcellentThrowChance => _settings.ExcellentThrowChance;
+        public int CurveThrowChance => _settings.CurveThrowChance;
+        public double ForceGreatThrowOverIv => _settings.ForceGreatThrowOverIv;
+        public double ForceExcellentThrowOverIv => _settings.ForceExcellentThrowOverIv;
+        public int ForceGreatThrowOverCp => _settings.ForceGreatThrowOverCp;
+        public int ForceExcellentThrowOverCp => _settings.ForceExcellentThrowOverCp;
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
         public int DelayBetweenPlayerActions => _settings.DelayBetweenPlayerActions;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
