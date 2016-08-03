@@ -32,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <SignManifests>false</SignManifests>
@@ -110,26 +111,29 @@
     <Compile Include="SimpleSession.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Events\EggListResponce.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Events\ItemListResponce.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Events\TrainerProfileResponce.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\GetEggListHandler.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\GetItemsListHandler.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\GetTrainerProfileHandler.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Helpers\TrainerProfileWeb.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\GetTrainerProfileTask.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\TransferPokemonTask.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\TransferPokemonHandler.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Helpers\EggListWeb.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\GetEggListTask.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\GetItemListTask.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Events\WebResponce.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Events\EggListResponce.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Events\ItemListResponce.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Events\TrainerProfileResponce.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\GetEggListHandler.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\GetItemsListHandler.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\GetPokemonSettingsHandler.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\GetTrainerProfileHandler.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Helpers\TrainerProfileWeb.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Tasks\GetPokemonSettingsTask.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Tasks\GetTrainerProfileTask.cs" />
+    <Compile Include="WebSocketHandler\ActionCommands\EvolvePokemonHandler.cs" />
+    <Compile Include="WebSocketHandler\ActionCommands\TransferPokemonHandler.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Helpers\EggListWeb.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Tasks\GetEggListTask.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Tasks\GetItemListTask.cs" />
     <Compile Include="WebSocketHandler\EncodingHelper.cs" />
     <Compile Include="WebSocketHandler\IWebSocketResponce.cs" />
     <Compile Include="WebSocketHandler\IWebSocketRequestHandler.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Events\PokemonListResponce.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Helpers\PokemonListWeb.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\GetPokemonListHandler.cs" />
-    <Compile Include="WebSocketHandler\BasicGetCommands\Tasks\GetPokemonListTask.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Events\PokemonListResponce.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Helpers\PokemonListWeb.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\GetPokemonListHandler.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Tasks\GetPokemonListTask.cs" />
     <Compile Include="WebSocketHandler\WebSocketEventManager.cs" />
     <Compile Include="WebSocketInterface.cs" />
   </ItemGroup>

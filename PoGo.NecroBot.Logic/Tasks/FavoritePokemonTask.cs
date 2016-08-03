@@ -34,7 +34,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.EventDispatcher.Send(new NoticeEvent
                     {
                         Message =
-                            session.Translation.GetTranslation(TranslationString.PokemonFavorite, perfection, pokemon.PokemonId, pokemon.Cp)
+                            session.Translation.GetTranslation(TranslationString.PokemonFavorite, perfection, session.Translation.GetPokemonTranslation(pokemon.PokemonId), pokemon.Cp)
                     });
                 }
             }

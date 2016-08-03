@@ -1,4 +1,4 @@
-﻿using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Events;
+﻿using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
+namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
 {
     class GetItemListTask
     {
@@ -15,7 +15,6 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
         {
             var allItems = await session.Inventory.GetItems();
             webSocketSession.Send(EncodingHelper.Serialize(new ItemListResponce(allItems, requestID)));
-            await Task.Delay(500);
         }
     }
 }

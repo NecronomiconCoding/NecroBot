@@ -126,5 +126,6 @@
       "Key": "incubatorStatusUpdate",
       "Value": "Broedmachine status update: {0:0.00}km resterend"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

@@ -37,7 +37,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    var trackPoints = track.Segments.ElementAt(0).TrackPoints;
+                    var trackPoints = track.Segments.ElementAt(curTrkSeg).TrackPoints;
                     for (var curTrkPt = 0; curTrkPt < trackPoints.Count; curTrkPt++)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
@@ -103,7 +103,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                             else
                             {
                                 await RecycleItemsTask.Execute(session, cancellationToken);
-
                             }
 
                             if (fortSearch.ItemsAwarded.Count > 0)
@@ -120,22 +119,33 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             await RecycleItemsTask.Execute(session, cancellationToken);
 
-                            if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
-                            {
-                                await SnipePokemonTask.Execute(session, cancellationToken);
-                            }
-
                             if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                                 session.LogicSettings.EvolveAllPokemonAboveIv)
                             {
                                 await EvolvePokemonTask.Execute(session, cancellationToken);
                             }
+                            await GetPokeDexCount.Execute(session, cancellationToken);
 
+                            if (session.LogicSettings.AutomaticallyLevelUpPokemon)
+                            {
+                                await LevelUpPokemonTask.Execute(session, cancellationToken);
+                            }
+                            if (session.LogicSettings.UseLuckyEggConstantly)
+                            {
+                                await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                            }
+                            if (session.LogicSettings.UseIncenseConstantly)
+                            {
+                                await UseIncenseConstantlyTask.Execute(session, cancellationToken);
+                            }
                             if (session.LogicSettings.TransferDuplicatePokemon)
                             {
                                 await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                             }
-
+                            if (session.LogicSettings.TransferWeakPokemon)
+                            {
+                                await TransferWeakPokemonTask.Execute(session, cancellationToken);
+                            }
                             if (session.LogicSettings.RenamePokemon)
                             {
                                 await RenamePokemonTask.Execute(session, cancellationToken);
@@ -144,6 +154,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                             if (session.LogicSettings.AutoFavoritePokemon)
                             {
                                 await FavoritePokemonTask.Execute(session, cancellationToken);
+                            }
+
+                            if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
+                            {
+                                await SnipePokemonTask.Execute(session, cancellationToken);
                             }
                         }
 

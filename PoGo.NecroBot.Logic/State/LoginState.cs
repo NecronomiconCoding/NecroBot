@@ -30,29 +30,30 @@ namespace PoGo.NecroBot.Logic.State
 
             try
             {
-                switch (session.Settings.AuthType)
+                if (session.Settings.AuthType != AuthType.Google || session.Settings.AuthType != AuthType.Ptc)
                 {
-                    case AuthType.Ptc:
-                        await
-                            session.Client.Login.DoPtcLogin(session.Settings.PtcUsername,
-                                session.Settings.PtcPassword);
-                        break;
-                    case AuthType.Google:
-                        await
-                            session.Client.Login.DoGoogleLogin(session.Settings.GoogleUsername,
-                                session.Settings.GooglePassword);
-                        break;
-                    default:
-                        session.EventDispatcher.Send(new ErrorEvent
-                        {
-                            Message = session.Translation.GetTranslation(TranslationString.WrongAuthType)
-                        });
-                        return null;
+                    await session.Client.Login.DoLogin();
+                }
+                else
+                {
+                    session.EventDispatcher.Send(new ErrorEvent
+                    {
+                        Message = session.Translation.GetTranslation(TranslationString.WrongAuthType)
+                    });
                 }
             }
             catch (AggregateException ae)
             {
                 throw ae.Flatten().InnerException;
+            }
+            catch (LoginFailedException)
+            {
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.LoginInvalid)
+                });
+                await Task.Delay(2000, cancellationToken);
+                Environment.Exit(0);
             }
             catch (Exception ex) when (ex is PtcOfflineException || ex is AccessTokenExpiredException)
             {
@@ -64,8 +65,6 @@ namespace PoGo.NecroBot.Logic.State
                 {
                     Message = session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20)
                 });
-                await Task.Delay(20000, cancellationToken);
-                return this;
             }
             catch (AccountNotVerifiedException)
             {
@@ -128,7 +127,8 @@ namespace PoGo.NecroBot.Logic.State
 
             int maxTheoreticalItems = session.LogicSettings.TotalAmountOfPokeballsToKeep +
                 session.LogicSettings.TotalAmountOfPotionsToKeep +
-                session.LogicSettings.TotalAmountOfRevivesToKeep;
+                session.LogicSettings.TotalAmountOfRevivesToKeep +
+                session.LogicSettings.TotalAmountOfBerriesToKeep;
 
             if (maxTheoreticalItems > session.Profile.PlayerData.MaxItemStorage)
             {

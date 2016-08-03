@@ -26,7 +26,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(pokemon));
-                var pokemonName = pokemon.PokemonId.ToString();
+                var pokemonName = session.Translation.GetPokemonTranslation(pokemon.PokemonId);
                 // iv number + templating part + pokemonName <= 12
                 var nameLength = 12 -
                                  (perfection.ToString(CultureInfo.InvariantCulture).Length +
@@ -48,7 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.EventDispatcher.Send(new NoticeEvent
                     {
                         Message =
-                            session.Translation.GetTranslation(TranslationString.PokemonRename, pokemon.PokemonId,
+                            session.Translation.GetTranslation(TranslationString.PokemonRename, session.Translation.GetPokemonTranslation(pokemon.PokemonId),
                                 pokemon.Id, oldNickname, newNickname)
                     });
                 }

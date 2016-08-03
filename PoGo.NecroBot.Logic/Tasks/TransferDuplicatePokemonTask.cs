@@ -22,9 +22,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var duplicatePokemons =
                 await
-                    session.Inventory.GetDuplicatePokemonToTransfer(session.LogicSettings.KeepPokemonsThatCanEvolve,
-                        session.LogicSettings.PrioritizeIvOverCp,
-                        session.LogicSettings.PokemonsNotToTransfer);
+                    session.Inventory.GetDuplicatePokemonToTransfer(
+                        session.LogicSettings.PokemonsNotToTransfer,
+                        session.LogicSettings.PokemonsToEvolve, 
+                        session.LogicSettings.KeepPokemonsThatCanEvolve,
+                        session.LogicSettings.PrioritizeIvOverCp);
 
             var pokemonSettings = await session.Inventory.GetPokemonSettings();
             var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
@@ -33,14 +35,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                if (duplicatePokemon.Cp >=
-                    session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinCp ||
-                    PokemonInfo.CalculatePokemonPerfection(duplicatePokemon) >
-                    session.Inventory.GetPokemonTransferFilter(duplicatePokemon.PokemonId).KeepMinIvPercentage)
-                {
-                    continue;
-                }
-
                 await session.Client.Inventory.TransferPokemon(duplicatePokemon.Id);
                 await session.Inventory.DeletePokemonFromInvById(duplicatePokemon.Id);
 
@@ -48,8 +42,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ? await session.Inventory.GetHighestPokemonOfTypeByIv(duplicatePokemon)
                     : await session.Inventory.GetHighestPokemonOfTypeByCp(duplicatePokemon)) ?? duplicatePokemon;
 
-                var setting = pokemonSettings.Single(q => q.PokemonId == duplicatePokemon.PokemonId);
-                var family = pokemonFamilies.First(q => q.FamilyId == setting.FamilyId);
+                var setting = pokemonSettings.SingleOrDefault(q => q.PokemonId == duplicatePokemon.PokemonId);
+                var family = pokemonFamilies.FirstOrDefault(q => q.FamilyId == setting.FamilyId);
 
                 family.Candy_++;
 

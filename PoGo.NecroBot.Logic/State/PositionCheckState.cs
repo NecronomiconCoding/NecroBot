@@ -18,8 +18,7 @@ namespace PoGo.NecroBot.Logic.State
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var coordsPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
-                             Path.DirectorySeparatorChar + "LastPos.ini";
+            var coordsPath = Path.Combine(session.LogicSettings.ProfileConfigPath, "LastPos.ini");
             if (File.Exists(coordsPath))
             {
                 var latLngFromFile = LoadPositionFromDisk(session);
@@ -54,7 +53,6 @@ namespace PoGo.NecroBot.Logic.State
                                 });
                             }
                         }
-                        await Task.Delay(200, cancellationToken);
                     }
                 }
             }
@@ -72,21 +70,18 @@ namespace PoGo.NecroBot.Logic.State
                         session.Client.CurrentLongitude),
                 RequireInput = session.LogicSettings.StartupWelcomeDelay
             });
-
+            await Task.Delay(100, cancellationToken);
             return new InfoState();
         }
 
         private static Tuple<double, double> LoadPositionFromDisk(ISession session)
         {
             if (
-                File.Exists(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
-                            Path.DirectorySeparatorChar + "LastPos.ini") &&
-                File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
-                                 Path.DirectorySeparatorChar + "LastPos.ini").Contains(":"))
+                File.Exists(Path.Combine(session.LogicSettings.ProfileConfigPath, "LastPos.ini")) &&
+                File.ReadAllText(Path.Combine(session.LogicSettings.ProfileConfigPath, "LastPos.ini")).Contains(":"))
             {
                 var latlngFromFile =
-                    File.ReadAllText(Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + "Config" +
-                                     Path.DirectorySeparatorChar + "LastPos.ini");
+                    File.ReadAllText(Path.Combine(session.LogicSettings.ProfileConfigPath, "LastPos.ini"));
                 var latlng = latlngFromFile.Split(':');
                 if (latlng[0].Length != 0 && latlng[1].Length != 0)
                 {

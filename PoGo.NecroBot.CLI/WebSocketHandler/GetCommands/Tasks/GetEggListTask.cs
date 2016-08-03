@@ -1,5 +1,5 @@
-﻿using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Events;
-using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Helpers;
+﻿using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events;
+using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Helpers;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
 using SuperSocket.WebSocket;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
+namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
 {
     class GetEggListTask
     {
@@ -33,8 +33,6 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
                  UnusedEggs = unusedEggs
              };
             webSocketSession.Send(EncodingHelper.Serialize(new EggListResponce(list,requestID)));
-
-            await Task.Delay(500);
         }
     }
 }

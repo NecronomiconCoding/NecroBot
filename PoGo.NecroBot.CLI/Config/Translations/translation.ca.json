@@ -278,30 +278,6 @@
       "Value": "[Inventori Actual] Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
     },
     {
-      "Key": "checkingForBallsToRecycle",
-      "Value": "Comprovant si hi ha boles per reciclar, guardant-ne {0}"
-    },
-    {
-      "Key": "checkingForPotionsToRecycle",
-      "Value": "Comprovant si hi ha pocions per reciclar, guardant-ne {0}"
-    },
-    {
-      "Key": "checkingForRevivesToRecycle",
-      "Value": "Comprovant si hi ha reviures per reciclar, guardant-ne {0}"
-    },
-    {
-      "Key": "pokeballsToKeepIncorrect",
-      "Value": "L'opció TotalAmountOfPokebalsToKeep ha estat configurada incorrectament. El nombre és menor que 1."
-    },
-    {
-      "Key": "potionsToKeepIncorrect",
-      "Value": "L'opció TotalAmountOfPotionsToKeep ha estat configurada incorrectament. El nombre és menor que 1"
-    },
-    {
-      "Key": "revivesToKeepIncorrect",
-      "Value": "L'opció TotalAmountOfRevivesToKeep ha estat configurada incorrectament. El nombre és menor que 1"
-    },
-    {
       "Key": "invFullTransferring",
       "Value": "L'inventari de pokemons està ple. Transferir pokemons..."
     },

@@ -1,4 +1,4 @@
-﻿using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks;
+﻿using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands
+namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
 {
     class GetTrainerProfileHandler : IWebSocketRequestHandler
     {

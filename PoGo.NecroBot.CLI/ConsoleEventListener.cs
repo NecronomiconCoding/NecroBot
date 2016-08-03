@@ -52,18 +52,19 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(PokemonEvolveEvent pokemonEvolveEvent, ISession session)
         {
+            string strPokemon = session.Translation.GetPokemonTranslation(pokemonEvolveEvent.Id);
             Logger.Write(pokemonEvolveEvent.Result == EvolvePokemonResponse.Types.Result.Success
-                ? session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedSuccess, pokemonEvolveEvent.Id, pokemonEvolveEvent.Exp)
+                ? session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedSuccess, strPokemon, pokemonEvolveEvent.Exp)
                 : session.Translation.GetTranslation(TranslationString.EventPokemonEvolvedFailed, pokemonEvolveEvent.Id, pokemonEvolveEvent.Result,
-                    pokemonEvolveEvent.Id),
+                    strPokemon),
                 LogLevel.Evolve);
         }
 
         private static void HandleEvent(TransferPokemonEvent transferPokemonEvent, ISession session)
         {
             Logger.Write(
-                session.Translation.GetTranslation(TranslationString.EventPokemonTransferred, 
-                transferPokemonEvent.Id, 
+                session.Translation.GetTranslation(TranslationString.EventPokemonTransferred,
+                session.Translation.GetPokemonTranslation(transferPokemonEvent.Id), 
                 transferPokemonEvent.Cp,
                 transferPokemonEvent.Perfection.ToString("0.00"), 
                 transferPokemonEvent.BestCp, 
@@ -89,7 +90,7 @@ namespace PoGo.NecroBot.CLI
         private static void HandleEvent(EggHatchedEvent eggHatchedEvent, ISession session)
         {
             Logger.Write(session.Translation.GetTranslation(TranslationString.IncubatorEggHatched,
-                eggHatchedEvent.PokemonId.ToString(), eggHatchedEvent.Level, eggHatchedEvent.Cp, eggHatchedEvent.MaxCp, eggHatchedEvent.Perfection),
+                session.Translation.GetPokemonTranslation(eggHatchedEvent.PokemonId), eggHatchedEvent.Level, eggHatchedEvent.Cp, eggHatchedEvent.MaxCp, eggHatchedEvent.Perfection),
                 LogLevel.Egg);
         }
 
@@ -100,7 +101,7 @@ namespace PoGo.NecroBot.CLI
                 : fortUsedEvent.Items;
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortUsed, fortUsedEvent.Name, fortUsedEvent.Exp, fortUsedEvent.Gems,
-                    itemString),
+                    itemString, fortUsedEvent.Latitude, fortUsedEvent.Longitude),
                 LogLevel.Pokestop);
         }
 
@@ -113,9 +114,11 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(FortTargetEvent fortTargetEvent, ISession session)
         {
+            int intTimeForArrival = (int) ( fortTargetEvent.Distance / ( session.LogicSettings.WalkingSpeedInKilometerPerHour * 0.277778 ) );
+
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortTargeted, fortTargetEvent.Name,
-                    Math.Round(fortTargetEvent.Distance)),
+                    Math.Round(fortTargetEvent.Distance), intTimeForArrival ),
                 LogLevel.Info, ConsoleColor.DarkRed);
         }
 
@@ -171,12 +174,13 @@ namespace PoGo.NecroBot.CLI
             var familyCandies = pokemonCaptureEvent.FamilyCandies > 0
                 ? session.Translation.GetTranslation(TranslationString.Candies, pokemonCaptureEvent.FamilyCandies)
                 : "";
-
-            Logger.Write(
-                session.Translation.GetTranslation(TranslationString.EventPokemonCapture, catchStatus, catchType, pokemonCaptureEvent.Id,
+            
+            var message = session.Translation.GetTranslation(TranslationString.EventPokemonCapture, catchStatus, catchType, session.Translation.GetPokemonTranslation(pokemonCaptureEvent.Id),
                     pokemonCaptureEvent.Level, pokemonCaptureEvent.Cp, pokemonCaptureEvent.MaxCp, pokemonCaptureEvent.Perfection.ToString("0.00"), pokemonCaptureEvent.Probability,
                     pokemonCaptureEvent.Distance.ToString("F2"),
-                    returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount, familyCandies), LogLevel.Caught);
+                    returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount, familyCandies, pokemonCaptureEvent.Latitude, pokemonCaptureEvent.Longitude);
+
+            Logger.Write(message, LogLevel.Caught);
         }
 
         private static void HandleEvent(NoPokeballEvent noPokeballEvent, ISession session)
@@ -212,7 +216,7 @@ namespace PoGo.NecroBot.CLI
             Logger.Write(snipeScanEvent.PokemonId == PokemonId.Missingno
                 ? session.Translation.GetTranslation(TranslationString.SnipeScan,
                     $"{snipeScanEvent.Bounds.Latitude},{snipeScanEvent.Bounds.Longitude}")
-                : session.Translation.GetTranslation(TranslationString.SnipeScanEx, snipeScanEvent.PokemonId,
+                : session.Translation.GetTranslation(TranslationString.SnipeScanEx, session.Translation.GetPokemonTranslation(snipeScanEvent.PokemonId),
                     snipeScanEvent.Iv > 0 ? snipeScanEvent.Iv.ToString(CultureInfo.InvariantCulture) : "unknown",
                     $"{snipeScanEvent.Bounds.Latitude},{snipeScanEvent.Bounds.Longitude}"), LogLevel.Sniper);
         }
@@ -247,20 +251,20 @@ namespace PoGo.NecroBot.CLI
             }
             var strPerfect = session.Translation.GetTranslation(TranslationString.CommonWordPerfect);
             var strName = session.Translation.GetTranslation(TranslationString.CommonWordName).ToUpper();
+            var move1 = session.Translation.GetTranslation(TranslationString.DisplayHighestMove1Header);
+            var move2 = session.Translation.GetTranslation(TranslationString.DisplayHighestMove2Header);
+            var candy = session.Translation.GetTranslation(TranslationString.DisplayHighestCandy);
 
             Logger.Write($"====== {strHeader} ======", LogLevel.Info, ConsoleColor.Yellow);
             foreach (var pokemon in displayHighestsPokemonEvent.PokemonList)
                 Logger.Write(
-                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: {pokemon.Item1.PokemonId.ToString().PadRight(10, ' ')}\t MOVE1: {pokemon.Item5.ToString().PadRight(20, ' ')} MOVE2: {pokemon.Item6.ToString().PadRight(20, ' ')} Candy: {pokemon.Item7}",
+                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: {session.Translation.GetPokemonTranslation(pokemon.Item1.PokemonId).PadRight(10, ' ')}\t {move1}: {pokemon.Item5.ToString().PadRight(20, ' ')} {move2}: {pokemon.Item6.ToString().PadRight(20, ' ')} {candy}: {pokemon.Item7}",
                     LogLevel.Info, ConsoleColor.Yellow);
         }
 
         private static void HandleEvent(EvolveCountEvent evolveCountEvent, ISession session )
         {
-            Logger.Write(session.Translation.GetTranslation(TranslationString.PkmPotentialEvolveCount, evolveCountEvent.Evolves) + 
-                ( session.LogicSettings.UseLuckyEggsWhileEvolving ? 
-                    $" | {session.LogicSettings.UseLuckyEggsMinPokemonAmount} required for mass evolving" 
-                    : "" ), LogLevel.Update, ConsoleColor.White );
+            Logger.Write(session.Translation.GetTranslation(TranslationString.PkmPotentialEvolveCount, evolveCountEvent.Evolves), LogLevel.Update, ConsoleColor.White);
         }
 
         private static void HandleEvent(UpdateEvent updateEvent, ISession session)

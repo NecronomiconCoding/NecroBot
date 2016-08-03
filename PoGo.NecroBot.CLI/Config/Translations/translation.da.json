@@ -63,7 +63,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Navn: {0} EP: {1}, Gems: {2}, Genstande: {3}"
+      "Value": "Navn: {0} XP: {1}, Gems: {2}, Genstande: {3}"
     },
     {
       "Key": "eventFortFailed",
@@ -208,7 +208,7 @@
     },
     {
       "Key": "logEntryEgg",
-      "Value": "EI"
+      "Value": "ÆG"
     },
     {
       "Key": "logEntryDebug",
@@ -342,6 +342,15 @@
     {
       "Key": "RequireInputText",
       "Value": "Programmet vil fortsætte efter et tryk på en knap..."
+    },
+    {
+      "Key": "SnipeScan",
+      "Value": "[Sniper] Skanner efter nogle Pokémons til at snipe ved {0}..."
+    },
+    {
+      "Key": "NoPokemonToSnipe",
+      "Value": "[Sniper] Ingen Pokémons fundet til at snipe!"
     }
-  ]
+  ],
+  "PokemonStrings": [ ]
 }

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SuperSocket.WebSocket;
-using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks;
+using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks;
 using PoGo.NecroBot.Logic.State;
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands
+namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
 {
     public class GetPokemonListHandler : IWebSocketRequestHandler
     {

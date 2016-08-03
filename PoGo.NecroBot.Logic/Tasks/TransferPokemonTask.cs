@@ -1,19 +1,22 @@
-﻿using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Events;
-using PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Helpers;
-using PoGo.NecroBot.Logic.State;
-using POGOProtos.Inventory.Item;
-using SuperSocket.WebSocket;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿#region using directives
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.PoGoUtils;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.Common;
+
+#endregion
+
+namespace PoGo.NecroBot.Logic.Tasks
 {
-    class TransferPokemonTask
+    public class TransferPokemonTask
     {
-        public static async Task Execute(ISession session, WebSocketSession webSocketSession, ulong pokemonId, string requestID)
+        public static async Task Execute(ISession session, ulong pokemonId)
         {
             var all = await session.Inventory.GetPokemons();
             var pokemons = all.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax);
@@ -47,7 +50,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.BasicGetCommands.Tasks
                 FamilyCandies = family.Candy_
             });
 
-            await Task.Delay(500);
+            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
         }
     }
 }
