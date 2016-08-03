@@ -34,7 +34,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "{0} | {1}XP | {2} | Objets: {3} | Lat: {4}, Long: {5}"
+      "Value": "{0} +{1}XP |{2}| {3} | {4},{5}"
     },
     {
       "Key": "eventFortFailed",
@@ -50,11 +50,11 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Utilisation d'un oeuf Chance, reste : {0}"
+      "Value": "Utilisation d'un oeuf Chance, reste {0}"
     },
     {
       "Key": "EventUsedIncense",
-      "Value": "Utilisation d'un encens, reste : {0}"
+      "Value": "Utilisation d'un encens, reste {0}"
     },
     {
       "Key": "SnipeServerOffline",
@@ -70,7 +70,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- {1} / {2}%   [Maximum  {3} / {4}%] ({5} Bonbons)"
+      "Value": "{0}\t- {1} / {2}%   [Maximum  {3} / {4}%] {5} Bonbons"
     },
     {
       "Key": "eventItemRecycled",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) |{1}-{2}| Lv {3} {6}% {4}/{5} | {7}% dist {8}m | {10} {9} restant | {11} | lat: {12} long: {13}"
+      "Value": "({0})|{1}-{2}| Lv {3} {6}% {4}/{5} | {7}% dist {8}m | reste {10} {9} | {11} | {12},{13}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -90,7 +90,7 @@
     },
     {
       "Key": "UseLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "Un Oeuf Chance ne peut être utiliser avec UseLuckyEggsMinPokemonAmount = {0}, utilisez plutôt une valeur <= à {1}"
+      "Value": "Un Oeuf Chance ne peut être utiliser qu'avec UseLuckyEggsMinPokemonAmount = {0}, utilisez plutôt une valeur <= à {1}"
     },
     {
       "Key": "CatchMorePokemonToUseLuckyEgg",
@@ -98,7 +98,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "#{1} - {0}"
+      "Value": "#{1} -{0}"
     },
     {
       "Key": "catchStatus",
@@ -138,23 +138,23 @@
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Classement par Level"
+      "Value": "Classement par Niveau"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Assuez vous que les coordonnées soient les bonnes. Lat: {0} Lng: {1}. Quittez le programme sinon"
+      "Value": "Destination : {0},{1}"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Incubation d'un oeuf : {0:0.00}km restant"
+      "Value": "Incubation d'un oeuf, reste {0:0.00}km"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Incubation en cours : {0:0.00}km restant"
+      "Value": "Incubation en cours, reste {0:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Eclosion de l'oeuf : {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "Eclosion d'un oeuf : {0} | Lvl: {1}  CP: ({2}/{3})  IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -378,7 +378,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Poussières: {5:0} | Transférés: {6:0} | Reçyclés: {7:0}"
+      "Value": "{0} - {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Poussières: {5:0} | Transférés: {6:0} | Reçyclés: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -414,7 +414,7 @@
     },
     {
       "Key": "SnipeScanEx",
-      "Value": "[Sniper] Scan d'un {0} avec {1} IV à {2}..."
+      "Value": "[Sniper] Scan d'un {0} avec {1}% IV à {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
@@ -486,7 +486,7 @@
     },
     {
       "Key": "eventUseBerry",
-      "Value": "{0} utilisé, {1} restant"
+      "Value": "{0} utilisé, reste {1}"
     },
     {
       "Key": "itemRazzBerry", 
