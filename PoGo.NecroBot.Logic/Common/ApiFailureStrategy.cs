@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.Logic.Common
                     await _session.Client.Login.DoLogin();
                 }
                 else
-                { 
+                {
                     _session.EventDispatcher.Send(new ErrorEvent
                     {
                         Message = _session.Translation.GetTranslation(TranslationString.WrongAuthType)
@@ -71,7 +71,20 @@ namespace PoGo.NecroBot.Logic.Common
                     Message = _session.Translation.GetTranslation(TranslationString.LoginInvalid)
                 });
             }
-            catch (Exception ex) when (ex is PtcOfflineException || ex is AccessTokenExpiredException)
+            catch (AccessTokenExpiredException)
+            {
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.AccessTokenExpired)
+                });
+                _session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 1)
+                });
+
+                await Task.Delay(1000);
+            }
+            catch (PtcOfflineException)
             {
                 _session.EventDispatcher.Send(new ErrorEvent
                 {
@@ -79,10 +92,28 @@ namespace PoGo.NecroBot.Logic.Common
                 });
                 _session.EventDispatcher.Send(new NoticeEvent
                 {
-                    Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 20)
+                    Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 15)
                 });
-            }
 
+                await Task.Delay(15000);
+            }
+            catch (InvalidResponseException)
+            {
+                _session.EventDispatcher.Send(new ErrorEvent()
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.InvalidResponse)
+                });
+                _session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 5)
+                });
+
+                await Task.Delay(5000);
+            }
+            catch (Exception ex)
+            {
+                throw ex.InnerException;
+            }
         }
         public void HandleApiSuccess(RequestEnvelope request, ResponseEnvelope response)
         {
