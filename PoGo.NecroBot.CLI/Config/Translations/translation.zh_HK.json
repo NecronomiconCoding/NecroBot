@@ -1,0 +1,128 @@
+{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "精靈球"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "高級精靈球"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "超級精靈球"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "大師精靈球"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "未知驗證類型"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value": "你已經走出範圍！5秒後返回起點(距離{0}米)，請確認座標設置是否正確？"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "你附近沒有任何可用的PokeStop，請確認最大移動距離是否太小？"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "獲得經驗值：{0}，金幣：{1}，道具：{2}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "搶劫失敗, 可是被短暫封鎖. 重試中: {0}/40"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "發現 {0} (距離{1}米)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "正在使用帳號 {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "使用幸運蛋，剩餘數量：{0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "成功進化 {0} 獲得 {1} 經驗值"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": " {0} 進化失敗，原因是 {1}，已取消進化 {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP：{1}  IV：{2}%  [已擁有最佳 CP值：{3}  IV：{4}%] (還有{5}顆糖果)"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value": "({0}) | ({1}) {2} 等級：{3}  CP值：({4}/{5}) IV：{6}%| 捕獲幾率：{7}%| 距離{8}米 | 剩餘{10}個{9} | {11} "
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "沒有精靈球了，我們錯過了一隻 CP值為 {1} 的 {0} "
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} 重試 #{1}"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "還有{0}顆糖果"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "嘗試跳過在GPX檔案中未處理的數據"
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "小精靈"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "完美"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "名稱"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "顯示最高CP值"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "顯示最完美"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "顯示最高等級"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "請確保經緯度正確。如果出現錯誤, 請退出程式! 緯度: {0} 經度: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "正在放置精靈蛋進入孵蛋器: 剩下{0:0.00}km"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "孵蛋器狀態: 剩下{0:0.00}km"
+    }
+  ]
+}
