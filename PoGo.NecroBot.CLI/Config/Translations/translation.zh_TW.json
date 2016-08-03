@@ -2,6 +2,7 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
+<<<<<<< HEAD
       "Value": "精靈球"
     },
     {
@@ -15,6 +16,21 @@
     {
       "Key": "masterPokeball",
       "Value": "大師精靈球"
+=======
+      "Value": "寶貝球"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "高級寶貝球"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "超級寶貝球"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "大師寶貝球"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "wrongAuthType",
@@ -46,7 +62,11 @@
     },
     {
       "Key": "eventProfileLogin",
+<<<<<<< HEAD
       "Value": "登入賬號 {0}"
+=======
+      "Value": "登入帳號 {0}"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "eventUsedIncense",
@@ -82,7 +102,11 @@
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
+<<<<<<< HEAD
       "Value": "目前有 {0} 隻精靈，再捕捉 {1} 隻精靈後將會進化! (目前有 {2}/{3} 占背包總量的 {4}% )"
+=======
+      "Value": "目前有 {0} 隻神奇寶貝，再捕捉 {1} 隻神奇寶貝後將會進化! (目前有 {2}/{3} 占背包總量的 {4}% )"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
@@ -90,7 +114,11 @@
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
+<<<<<<< HEAD
       "Value": "再捕捉 {0} 隻精靈後將會使用幸運蛋!"
+=======
+      "Value": "再捕捉 {0} 隻神奇寶貝後將會使用幸運蛋!"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "eventUseBerry",
@@ -118,7 +146,11 @@
     },
     {
       "Key": "displayHighestsHeader",
+<<<<<<< HEAD
       "Value": "寵物小精靈"
+=======
+      "Value": "神奇寶貝"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "commonWordPerfect",
@@ -190,7 +222,11 @@
     },
     {
       "Key": "logEntryPKMN",
+<<<<<<< HEAD
       "Value": "捕獲"
+=======
+      "Value": "捕捉"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "logEntryTransfered",
@@ -270,11 +306,19 @@
     },
     {
       "Key": "finishedDownloadingRelease",
+<<<<<<< HEAD
       "Value": "成功下載新版本..."
     },
     {
       "Key": "finishedUnpackingFiles",
       "Value": "成功解包..."
+=======
+      "Value": "新版本下載完成..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "解壓縮完成..."
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "finishedTransferringConfig",
@@ -282,6 +326,7 @@
     },
     {
       "Key": "updateFinished",
+<<<<<<< HEAD
       "Value": "更新完成，您現在可以關閉這個窗口。"
     },
     {
@@ -295,6 +340,21 @@
     {
       "Key": "lookingForLurePokemon",
       "Value": "正在搜索誘餌吸引來的精靈..."
+=======
+      "Value": "更新完畢，您現在可以關閉這個窗口。"
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "正在搜索薰香引來的神奇寶貝..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "正在搜索神奇寶貝..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "正在搜索誘餌吸引來的神奇寶貝..."
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "pokemonSkipped",
@@ -302,11 +362,19 @@
     },
     {
       "Key": "zeroPokeballInv",
+<<<<<<< HEAD
       "Value": "您身上已沒有精靈球，將不會捕捉任何精靈!"
     },
     {
       "Key": "currentPokeballInv",
       "Value": "目前擁有精靈球: {0} | 高級精靈球: {1} | 超級精靈球: {2} | 大師精靈球: {3}"
+=======
+      "Value": "您身上已沒有寶貝球，將不會捕捉任何神奇寶貝!"
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "目前擁有寶貝球: {0} | 高級寶貝球: {1} | 超級寶貝球: {2} | 大師寶貝球: {3}"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "currentItemInv",
@@ -314,7 +382,11 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
+<<<<<<< HEAD
       "Value": "[設定錯誤] 您設定的物品數量錯誤 (精靈球+藥水+復活劑={0}) 術量已超過您背包最大數量 ({1})"
+=======
+      "Value": "[設定錯誤] 您設定的物品數量錯誤 (寶貝球+藥水+復活劑={0}) 數量已超過您背包最大數量 ({1})"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "recyclingQuietly",
@@ -322,6 +394,7 @@
     },
     {
       "Key": "invFullTransferring",
+<<<<<<< HEAD
       "Value": "包裹滿了，正在傳輸精靈..."
     },
     {
@@ -331,6 +404,17 @@
     {
       "Key": "invFullPokestopLooting",
       "Value": "包裹滿了，將不會拾取任何物品..."
+=======
+      "Value": "背包滿了，正在傳送神奇寶貝..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "背包滿了，請手動傳送神奇寶貝或修改 TransferDuplicatePokemon 為 true..."
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "背包滿了，將不會拾取任何物品..."
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "encounterProblem",
@@ -338,7 +422,11 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
+<<<<<<< HEAD
       "Value": "發生錯誤：誘餌吸引來的精靈 {0}"
+=======
+      "Value": "發生錯誤：誘餌吸引來的神奇寶貝 {0}"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "desiredDestTooFar",
@@ -346,7 +434,11 @@
     },
     {
       "Key": "pokemonRename",
+<<<<<<< HEAD
       "Value": "正在將精靈 {0} ({1}) 從 {2} 重命名為 {3}."
+=======
+      "Value": "正在將神奇寶貝 {0} ({1}) 從 {2} 重命名為 {3}."
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "pokemonFavorite",
@@ -354,6 +446,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
+<<<<<<< HEAD
       "Value": "[精靈忽略過濾器] - 在設定中定義忽略 {0} "
     },
     {
@@ -383,6 +476,37 @@
     {
       "Key": "catchTypeNormal",
       "Value": "普通"
+=======
+      "Value": "[神奇寶貝忽略過濾器] - 在設定中定義忽略 {0} "
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "嘗試捕捉"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "捕捉錯誤"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "捕捉失敗"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "捕捉消失"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "錯過捕捉"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "捕捉成功"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "一般"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "catchTypeLure",
@@ -442,6 +566,7 @@
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
+<<<<<<< HEAD
       "Value": "沒有足夠的精靈球來狙擊... ({0}/{1})"
     },
     {
@@ -451,6 +576,17 @@
     {
       "Key": "displayHighestMove2Header",
       "Value": "技能二"
+=======
+      "Value": "沒有足夠的寶貝球來狙擊... ({0}/{1})"
+    },
+    {
+      "Key": "displayHighestMove1Header",
+      "Value": "技能1"
+    },
+    {
+      "Key": "displayHighestMove2Header",
+      "Value": "技能2"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "displayHighestCandy",
@@ -466,7 +602,11 @@
     },
     {
       "Key": "useLuckyEggActive",
+<<<<<<< HEAD
       "Value": "幸運蛋已使用"
+=======
+      "Value": "幸運蛋使用中..."
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "usedLuckyEgg",
@@ -474,6 +614,7 @@
     },
     {
       "Key": "useLuckyEggAmount",
+<<<<<<< HEAD
       "Value": "包裹中有幸運蛋: {0} 個"
     },
     {
@@ -483,6 +624,17 @@
     {
       "Key": "useIncenseActive",
       "Value": "幸運蛋已使用"
+=======
+      "Value": "背包中有幸運蛋: {0} 個"
+    },
+    {
+      "Key": "noIncenseAvailable",
+      "Value": "身上沒有任何薰香"
+    },
+    {
+      "Key": "useIncenseActive",
+      "Value": "薰香使用中"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "useIncenseAmount",
@@ -494,6 +646,7 @@
     },
     {
       "Key": "amountPkmSeenCaught",
+<<<<<<< HEAD
       "Value": "見過的精靈: {0}/151, 捕捉過的精靈: {1}/151"
     },
     {
@@ -503,6 +656,17 @@
     {
       "Key": "pkmNotEnoughRessources",
       "Value": "沒有足夠的糖果/星塵來升級精靈"
+=======
+      "Value": "見過的神奇寶貝: {0}/151, 捕捉過的神奇寶貝: {1}/151"
+    },
+    {
+      "Key": "pkmPotentialEvolveCount",
+      "Value": "[進化] 目前可進行進化的神奇寶貝: {0}"
+    },
+    {
+      "Key": "pkmNotEnoughRessources",
+      "Value": "沒有足夠的糖果/星塵來升級神奇寶貝"
+>>>>>>> refs/remotes/NECROBOTIO/master
     },
     {
       "Key": "snipeServerOffline",
@@ -1115,4 +1279,8 @@
       "Value": "夢幻"
     }
   ]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> refs/remotes/NECROBOTIO/master

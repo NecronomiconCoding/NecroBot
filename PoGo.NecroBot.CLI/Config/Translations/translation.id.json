@@ -26,7 +26,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Kamu di luar dari radius yang kamu tentukan! Jalan ke tempat awal (sekitar {0}m) dalam 5 detik. Apakah berkas LastPos.ini kamu benar?"
+      "Value": "Kamu di luar dari radius yang kamu tentukan! Jalan ke tempat awal (sekitar {0} meter) dalam 5 detik. Apakah berkas LastPos.ini kamu benar?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Berjalan ke PokeStop: {0} ({1}m)({2}detik)"
+      "Value": "Berjalan ke PokeStop: {0} ({1} meter)({2} detik)"
     },
     {
       "Key": "eventProfileLogin",
@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8}m | dengan sebuah {9} (tersisa {10}). | {11} | lintang: {12} bujur: {13}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8} meter | dengan sebuah {9} (tersisa {10}). | {11} | lintang: {12} bujur: {13}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -102,7 +102,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} Mencoba #{1}"
+      "Value": "{0} pada Percobaan ke- #{1}"
     },
     {
       "Key": "catchStatus",
@@ -150,11 +150,11 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Memasukkan telur ke dalam penetas: {0:0.00}km tersisa"
+      "Value": "Memasukkan telur ke dalam penetas: {0:0.00} km tersisa"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Status terbaru penetas: {0:0.00}km tersisa"
+      "Value": "Status terbaru penetas: {0:0.00} km tersisa"
     },
     {
       "Key": "incubatorEggHatched",
@@ -366,7 +366,7 @@
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Tangkapan lari"
+      "Value": "Tangkapan lepas"
     },
     {
       "Key": "catchStatusFlee",
@@ -402,7 +402,7 @@
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (level berikutnya dalam {1}jam {2}menit | {3:n0}/{4:n0} XP)"
+      "Value": "{0} (level berikutnya dalam {1} jam {2} menit | {3:n0}/{4:n0} XP)"
     },
     {
       "Key": "requireInputText",

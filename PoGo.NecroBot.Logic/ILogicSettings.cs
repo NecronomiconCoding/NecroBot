@@ -46,10 +46,12 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
-        public TransferFilter(int keepMinCp, float keepMinIvPercentage, string keepMinOperator, int keepMinDuplicatePokemon, 
+        public TransferFilter(int keepMinCp, int keepMinLvl, bool useKeepMinLvl, float keepMinIvPercentage, string keepMinOperator, int keepMinDuplicatePokemon, 
             List<PokemonMove> moves = null)
         {
             KeepMinCp = keepMinCp;
+            KeepMinLvl = keepMinLvl;
+            UseKeepMinLvl = useKeepMinLvl;
             KeepMinIvPercentage = keepMinIvPercentage;
             KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
             KeepMinOperator = keepMinOperator;
@@ -57,6 +59,8 @@ namespace PoGo.NecroBot.Logic
         }
 
         public int KeepMinCp { get; set; }
+        public int KeepMinLvl { get; set; }
+        public bool UseKeepMinLvl { get; set; }
         public float KeepMinIvPercentage { get; set; }
         public int KeepMinDuplicatePokemon { get; set; }
         public List<PokemonMove> Moves { get; set; }
@@ -71,6 +75,8 @@ namespace PoGo.NecroBot.Logic
         bool TransferConfigAndAuthOnUpdate { get; }
         float KeepMinIvPercentage { get; }
         int KeepMinCp { get; }
+        int KeepMinLvl { get; }
+        bool UseKeepMinLvl { get; }
         string KeepMinOperator { get; }
         double WalkingSpeedInKilometerPerHour { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
@@ -86,6 +92,16 @@ namespace PoGo.NecroBot.Logic
         double UseMasterBallBelowCatchProbability { get; }
         double UseUltraBallBelowCatchProbability { get; }
         double UseGreatBallBelowCatchProbability { get; }
+        bool EnableHumanizedThrows { get; }
+        int NiceThrowChance { get; }
+        int GreatThrowChance { get; }
+        int ExcellentThrowChance { get; }
+        int CurveThrowChance { get; }
+        double ForceGreatThrowOverIv { get; }
+        double ForceExcellentThrowOverIv { get; }
+        int ForceGreatThrowOverCp { get; }
+        int ForceExcellentThrowOverCp { get; }
+
         int DelayBetweenPokemonCatch { get; }
         bool AutomaticallyLevelUpPokemon { get; }
         string LevelUpByCPorIv { get; }
