@@ -97,15 +97,24 @@ namespace PoGo.NecroBot.Logic
 
             pokemonToTransfer = (_logicSettings.KeepMinOperator.ToLower().Equals("and") ?
                 pokemonToTransfer.Where(
-                    p => !( (p.Cp >= GetPokemonTransferFilter(p.PokemonId).KeepMinCp &&
-                             PokemonInfo.CalculatePokemonPerfection(p) >= GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage) || 
-                                   GetPokemonTransferFilter(p.PokemonId).Moves.Contains(p.Move1) || 
-                                   GetPokemonTransferFilter(p.PokemonId).Moves.Contains(p.Move2))):
+                    p =>
+                    {
+                        var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
+                        
+                        return !((p.Cp >= pokemonTransferFilter.KeepMinCp &&
+                                  PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage) ||
+                                        pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any());
+                                       //more tighter condition pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Count() == pokemonTransferFilter.Moves.Count);
+                    }) :
                 pokemonToTransfer.Where(
-                    p => !(p.Cp >= GetPokemonTransferFilter(p.PokemonId).KeepMinCp ||
-                           PokemonInfo.CalculatePokemonPerfection(p) >= GetPokemonTransferFilter(p.PokemonId).KeepMinIvPercentage || 
-                           GetPokemonTransferFilter(p.PokemonId).Moves.Contains(p.Move1) ||
-                           GetPokemonTransferFilter(p.PokemonId).Moves.Contains(p.Move2)))).ToList();
+                    p =>
+                    {
+                        var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
+
+                        return !((p.Cp >= pokemonTransferFilter.KeepMinCp ||
+                                  PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage) ||
+                                  pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any());
+                    })).ToList();
 
 
             var myPokemonSettings = await GetPokemonSettings();
