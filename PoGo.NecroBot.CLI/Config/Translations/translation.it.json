@@ -313,7 +313,7 @@
     },
     {
       "Key": "currentItemInv",
-      "Value": "[Inventario Attuale] Pozioni: {0} | Revitalizzanti: {1} | Bacche: {2} | Aromi: {3} | Fortunuovi: {4} | Esche: {5}"
+      "Value": "[Inventario Attuale] Pozioni: {0} | Revitalizzanti: {1} | Bacche: {2} | Aromi: {3} | Fortunuovi: {4} | Moduli Esca: {5}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
