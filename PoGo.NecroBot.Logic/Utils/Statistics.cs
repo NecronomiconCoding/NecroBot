@@ -3,7 +3,6 @@
 #region using directives
 
 using System;
-using System.Globalization;
 using System.Linq;
 using POGOProtos.Networking.Responses;
 using System.Threading.Tasks;

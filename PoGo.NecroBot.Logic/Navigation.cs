@@ -1,7 +1,5 @@
 ﻿#region using directives
 
-#region using directives
-
 using System;
 using System.Globalization;
 using System.Threading;
@@ -10,11 +8,6 @@ using GeoCoordinatePortable;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
-using System.Linq;
-
-#endregion
-
-// ReSharper disable RedundantAssignment
 
 #endregion
 
