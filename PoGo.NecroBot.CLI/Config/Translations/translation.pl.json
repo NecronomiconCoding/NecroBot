@@ -26,7 +26,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Znajdujesz się poza zdefiniowanym zasięgiem. Zostaniesz przeniesiony na start odległy o ({0}m) za 5 sekund. Sprawdź, czy Twój plik \"LastPos.ini\" jest poprawny"
+      "Value": "Znajdujesz się poza zdefiniowanym zasięgiem. Zostaniesz przeniesiony na start odległy o ({0}m) za 5 sekund. Sprawdź, czy plik \"LastPos.ini\" jest poprawny"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -34,7 +34,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nazwa: {0}   [XP: {1}, Kamienie: {2}, Przedmioty: {3}]"
+      "Value": "Nazwa: {0}   [XP: {1}, Gemy: {2}, Itemy: {3}, Szerokość: {4}, Długość: {5}]"
     },
     {
       "Key": "eventFortFailed",
@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Dotarcie do PokeStopu: {0} za ({1}m)"
+      "Value": "Dotarcie do PokeStopu: {0} za (({1}m) ({2}s)"
     },
     {
       "Key": "eventProfileLogin",
@@ -54,7 +54,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Użyto LuckyEgga, pozostało: {0}"
+      "Value": "Użyto Lucky Egga, pozostało: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2}   [Poziom: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | {11}"
+      "Value": "({0}) | ({1}) {2}   [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | {11} | Szerokość: {12} Długość: {13}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -82,15 +82,15 @@
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
-      "Value": "Pokemonów oczekujących na ewolucje: {0} | Możesz złapać ich jeszcze: {1} | {2}/{3} dla {4}% inwentarza"
+      "Value": "Pokemonów oczekujących na ewolucje: {0} | Możesz złapać ich jeszcze: {1} | {2}/{3} dla {4}% Ekwipunku"
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "LuckyEgg nie zostanie użyty, gdy wartość UseLuckyEggsMinPokemonAmount wynosi {0}, użyj <= {1}"
+      "Value": "Lucky Egg nie zostanie użyty, gdy wartość UseLuckyEggsMinPokemonAmount wynosi {0}, użyj <= {1}"
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "Złap jeszcze {0} Pokemonów, żeby użyć LuckyEgga"
+      "Value": "Złap jeszcze {0} Pokemonów, żeby aktywowano Lucky Egga"
     },
     {
       "Key": "eventUseBerry",
@@ -98,7 +98,7 @@
     },
     {
       "Key": "itemRazzBerry",
-      "Value": "Maliny"
+      "Value": "Jagoda"
     },
     {
       "Key": "catchStatusAttempt",
@@ -142,11 +142,11 @@
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Najwyższy Poziom"
+      "Value": "Najwyższy Level"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Upewnij się, że szerokość i długość geograficzna została wpisana poprawnie. Jeżeli nie to zamknij program [Szerokość: {0} | Długość: {1}]"
+      "Value": "Upewnij się, że szerokość i długość geograficzna została wpisana poprawnie. Jeżeli nie to zamknij program [Szerokość: {0} Długość: {1}]"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -202,7 +202,7 @@
     },
     {
       "Key": "logEntryBerry",
-      "Value": "MALINA"
+      "Value": "JAGODA"
     },
     {
       "Key": "logEntryEgg",
@@ -302,15 +302,15 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Brak Pokeballi w Twoim ekwipunku, nie możesz złapać więcej Pokemonów"
+      "Value": "Brak Pokeballi w Ekwipunku, nie możesz złapać więcej Pokemonów"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Aktualny Inwentarz] Pokeballe: {0} | Greatballe: {1} | Ultraballe: {2} | Masterballe: {3}"
+      "Value": "[Aktualny Ekwipunek] Pokeballe: {0} | Greatballe: {1} | Ultraballe: {2} | Masterballe: {3}"
     },
     {
       "Key": "currentItemInv",
-      "Value": "[Aktualny Inwentarz] Mikstury: {0} | Wskrzeszenia: {1} | Maliny: {2} | Kadzidła: {3} | Szczęśliwe Jajka: {4} | Przynęty: {5}"
+      "Value": "[Aktualny Ekwipunek] Potiony: {0} | Ożywienia: {1} | Jagody: {2} | Incensy: {3} | Lucky Eggy: {4} | Lury: {5}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -318,7 +318,7 @@
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "Ciche Przetwarzanie..."
+      "Value": "Ciche przetwarzanie..."
     },
     {
       "Key": "invFullTransferring",
@@ -330,7 +330,7 @@
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Twoj ekwipunek jest pełny, nie zebrano przedmiotów"
+      "Value": "Twoj Ekwipunek jest pełny, nie zebrano przedmiotów"
     },
     {
       "Key": "encounterProblem",
@@ -338,15 +338,15 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Napotkano problem: Przynęta Pokemonów {0}"
+      "Value": "Napotkano problem: Lure Pokemonów {0}"
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Twój punkt docelowy {0}, {1} jest zbyt daleko od twojej obecnej pozycji {2}, {3}"
+      "Value": "Punkt docelowy {0}, {1} jest zbyt daleko od Twojej obecnej pozycji {2}, {3}"
     },
     {
       "Key": "pokemonRename",
-      "Value": "Nazwa Pokemona {0} ({1}) została zmieniona z {2} na {3}"
+      "Value": "Nazwa Pokemona {0} została zmieniona z {2} na {3}"
     },
     {
       "Key": "pokemonFavorite",
@@ -398,11 +398,11 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Czas działania {1} - Poziom: {2} | XP na godzinę: {3:0} | Pokemony na godzinę: {4:0} | Stardust: {5:0} | Przesłano: {6:0} | Usunięto: {7:0}"
+      "Value": "{0} - Czas działania {1} - Poziom: {2} | XP na godzinę: {3:n0} | Pokemony na godzinę: {4:n0} | Stardust: {5:n0} | Przesłano: {6:n0} | Usunięto: {7:n0}"
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (Następny poziom za {1}h {2}m) | {3}/{4} XP)"
+      "Value": "{0} (Następny poziom za {1}h {2}m) | {3:n0}/{4:n0} XP)"
     },
     {
       "Key": "requireInputText",
@@ -410,7 +410,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Na twoim koncie Google aktywna jest weryfikacja dwuetapowa, będziesz musiał wprowadzić nowe hasło do aplikacji w \"auth.json\""
+      "Value": "Na Twoim koncie Google aktywna jest weryfikacja dwuetapowa, będziesz musiał wprowadzić nowe hasło do aplikacji w \"auth.json\""
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -418,7 +418,7 @@
     },
     {
       "Key": "googleError",
-      "Value": "Upewnij się, że wpisany przez Ciebie login i hasło są prawidłowe."
+      "Value": "Upewnij się, że wpisany przez Ciebie Login i Hasło są prawidłowe."
     },
     {
       "Key": "missingCredentialsGoogle",
@@ -438,7 +438,7 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Snajper] Nie znaleziono żadnego Pokemona."
+      "Value": "[Snajper] Nie znaleziono żadnego Pokemona"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
@@ -462,23 +462,23 @@
     },
     {
       "Key": "noEggsAvailable",
-      "Value": "Brak LuckyEggów"
+      "Value": "Brak Lucky Eggów"
     },
     {
       "Key": "useLuckyEggActive",
-      "Value": "LuckyEgg jest aktywny"
+      "Value": "Lucky Egg jest aktywny"
     },
     {
       "Key": "usedLuckyEgg",
-      "Value": "Aktywowano LuckyEgga"
+      "Value": "Aktywowano Lucky Egga"
     },
     {
       "Key": "useLuckyEggAmount",
-      "Value": "LuckyEgg w Inwentarzu: {0}"
+      "Value": "Lucky Eggów w Ekwipunku: {0}"
     },
     {
       "Key": "noIncenseAvailable",
-      "Value": "Brak Incensa"
+      "Value": "Brak Incensów"
     },
     {
       "Key": "useIncenseActive",
@@ -486,7 +486,7 @@
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "Incense w Inwentarzu: {0}"
+      "Value": "Incensów w Ekwipunku: {0}"
     },
     {
       "Key": "usedIncense",
