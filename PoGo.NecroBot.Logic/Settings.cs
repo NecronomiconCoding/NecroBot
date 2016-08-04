@@ -555,50 +555,10 @@ namespace PoGo.NecroBot.Logic
 
         public static GlobalSettings Default => new GlobalSettings();
 
-<<<<<<< HEAD
         public static GlobalSettings Load( string path )
         {
             return Load( path, false );
-=======
-    public static GlobalSettings Load(string path)
-    {
-      GlobalSettings settings;
-      var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
-      var profileConfigPath = Path.Combine(profilePath, "config");
-      var configFile = Path.Combine(profileConfigPath, "config.json");
-      var shouldExit = false;
-
-      if (File.Exists(configFile))
-      {
-        try
-        {
-          //if the file exists, load the settings
-          var input = File.ReadAllText(configFile);
-
-          var jsonSettings = new JsonSerializerSettings();
-          jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
-          jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
-          jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
-
-          settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
-
-          //This makes sure that existing config files dont get null values which lead to an exception
-          foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.KeepMinOperator == null))
-          {
-            filter.Value.KeepMinOperator = "or";
-          }
-          foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
-          {
-            filter.Value.Moves = new List<PokemonMove>();
-          }
-          foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.MovesOperator == null))
-          {
-            filter.Value.MovesOperator = "or";
-          }
-
->>>>>>> refs/remotes/NECROBOTIO/master
         }
-
         public static GlobalSettings Load( string path, bool boolSkipSave )
         {
             GlobalSettings settings;
@@ -620,7 +580,7 @@ namespace PoGo.NecroBot.Logic
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
                     settings = JsonConvert.DeserializeObject<GlobalSettings>( input, jsonSettings );
-                    
+
                     //This makes sure that existing config files dont get null values which lead to an exception
                     foreach( var filter in settings.PokemonsTransferFilter.Where( x => x.Value.KeepMinOperator == null ) )
                     {
@@ -629,6 +589,10 @@ namespace PoGo.NecroBot.Logic
                     foreach( var filter in settings.PokemonsTransferFilter.Where( x => x.Value.Moves == null ) )
                     {
                         filter.Value.Moves = new List<PokemonMove>();
+                    }
+                    foreach( var filter in settings.PokemonsTransferFilter.Where( x => x.Value.MovesOperator == null ) )
+                    {
+                        filter.Value.MovesOperator = "or";
                     }
                 }
                 catch( JsonReaderException exception )
