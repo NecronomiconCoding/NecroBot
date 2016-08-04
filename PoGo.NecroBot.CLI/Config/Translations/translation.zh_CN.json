@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "正在前往补给站:{0}(距离{1}米)(需要{2}秒)"
+      "Value": "正在前往补给站:{0}(距离{1}米) (需要{2}秒)"
     },
     {
       "Key": "eventProfileLogin",

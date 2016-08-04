@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Berjalan ke PokeStop: {0} ({1} meter)({2} detik)"
+      "Value": "Berjalan ke PokeStop: {0} ({1} meter) ({2} detik)"
     },
     {
       "Key": "eventProfileLogin",
@@ -246,7 +246,7 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Mendeteksi perjalanan realistis, menggunakan UserSettings.settings"
+      "Value": "Mendeteksi perjalanan realistis, menggunakan pengaturan bawaan pada config.json"
     },
     {
       "Key": "notRealisticTravel",
@@ -306,11 +306,11 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Inventori saat ini] PokeBall: {0} | GreatBall: {1} | UltraBall: {2} | MasterBall: {3}"
+      "Value": "Saat ini jumlah PokeBall: {0} | GreatBall: {1} | UltraBall: {2} | MasterBall: {3}"
     },
     {
       "Key": "currentItemInv",
-      "Value": "Saat ini Total Potions: {0} | Total Revives: {1} | Buni: {2} | Jumlah Dupa: {3} | Lucky Eggs: {4} | Pemikat: {5}"
+      "Value": "Saat ini jumlah Potion: {0} | Revive: {1} | Buni: {2} | Dupa: {3} | Lucky Eggs: {4} | Pemikat: {5}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -458,7 +458,7 @@
     },
     {
       "Key": "ipBannedError",
-      "Value": "Koneksi ditolak. Alamat IP anda mungkin sudah diblokir oleh Niantic. Keluar.."
+      "Value": "Koneksi ditolak. Alamat IP anda mungkin sudah diblokir oleh Niantic. Keluar..."
     },
     {
       "Key": "noEggsAvailable",

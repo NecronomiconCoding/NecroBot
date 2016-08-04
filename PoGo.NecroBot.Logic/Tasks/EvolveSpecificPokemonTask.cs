@@ -32,6 +32,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 Exp = evolveResponse.ExperienceAwarded,
                 Result = evolveResponse.Result
             });
+            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 2000);
         }
     }
 }
