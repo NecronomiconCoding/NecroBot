@@ -6,7 +6,7 @@
     },
     {
       "Key": "greatPokeball",
-      "Value": "SuperBall"
+      "Value": "GreatBall"
     },
     {
       "Key": "ultraPokeball",
@@ -14,7 +14,7 @@
     },
     {
       "Key": "masterPokeball",
-      "Value": "MeesterBall"
+      "Value": "MasterBall"
     },
     {
       "Key": "wrongAuthType",
@@ -84,7 +84,7 @@
     },
     {
       "Key": "candies",
-      "Value": "Snoepjes: {0}"
+      "Value": "Candies: {0}"
     },
     {
       "Key": "unhandledGpxData",
