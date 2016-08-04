@@ -229,6 +229,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
                                     LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                 }
+                                return;
                             }
                         }
 
