@@ -3,6 +3,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.Utils;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,9 @@ namespace PoGo.NecroBot.Logic.Common
 
         string GetTranslation(TranslationString translationString);
 
-        string GetPokemonTranslation(POGOProtos.Enums.PokemonId id);
+        string GetPokemonTranslation( POGOProtos.Enums.PokemonId id );
+
+        string GetPokemonMovesetTranslation( POGOProtos.Enums.PokemonMove move );
     }
 
     public enum TranslationString
@@ -580,6 +583,196 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<POGOProtos.Enums.PokemonId, string>((POGOProtos.Enums.PokemonId)151,"Mew"),
         };
 
+        [JsonProperty("PokemonMovesetStrings",
+        ItemTypeNameHandling = TypeNameHandling.Arrays,
+        ItemConverterType = typeof(KeyValuePairConverter),
+        ObjectCreationHandling = ObjectCreationHandling.Replace,
+        DefaultValueHandling = DefaultValueHandling.Populate)]
+        private readonly List<KeyValuePair<POGOProtos.Enums.PokemonMove, string>> _pokemonMovesetTranslationStrings =
+            new List<KeyValuePair< POGOProtos.Enums.PokemonMove, string>>()
+        {
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.MoveUnset, "MoveUnset" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ThunderShock, "ThunderShock" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.QuickAttack, "QuickAttack" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Scratch, "Scratch" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Ember, "Ember" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.VineWhip, "VineWhip" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Tackle, "Tackle" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.RazorLeaf, "RazorLeaf" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.TakeDown, "TakeDown" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.WaterGun, "WaterGun" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Bite, "Bite" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Pound, "Pound" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.DoubleSlap, "DoubleSlap" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Wrap, "Wrap" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.HyperBeam, "HyperBeam" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Lick, "Lick" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.DarkPulse, "DarkPulse" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Smog, "Smog" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Sludge, "Sludge" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.MetalClaw, "MetalClaw" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ViceGrip, "ViceGrip" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FlameWheel, "FlameWheel" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Megahorn, "Megahorn" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.WingAttack, "WingAttack" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Flamethrower, "Flamethrower" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.SuckerPunch, "SuckerPunch" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Dig, "Dig" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.LowKick, "LowKick" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.CrossChop, "CrossChop" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PsychoCut, "PsychoCut" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Psybeam, "Psybeam" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Earthquake, "Earthquake" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.StoneEdge, "StoneEdge" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.IcePunch, "IcePunch" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.HeartStamp, "HeartStamp" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Discharge, "Discharge" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FlashCannon, "FlashCannon" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Peck, "Peck" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.DrillPeck, "DrillPeck" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.IceBeam, "IceBeam" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Blizzard, "Blizzard" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.AirSlash, "AirSlash" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.HeatWave, "HeatWave" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Twineedle, "Twineedle" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PoisonJab, "PoisonJab" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.AerialAce, "AerialAce" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.DrillRun, "DrillRun" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PetalBlizzard, "PetalBlizzard" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.MegaDrain, "MegaDrain" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.BugBuzz, "BugBuzz" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PoisonFang, "PoisonFang" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.NightSlash, "NightSlash" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Slash, "Slash" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.BubbleBeam, "BubbleBeam" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Submission, "Submission" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.KarateChop, "KarateChop" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.LowSweep, "LowSweep" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.AquaJet, "AquaJet" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.AquaTail, "AquaTail" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.SeedBomb, "SeedBomb" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Psyshock, "Psyshock" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.RockThrow, "RockThrow" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.AncientPower, "AncientPower" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.RockTomb, "RockTomb" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.RockSlide, "RockSlide" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PowerGem, "PowerGem" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ShadowSneak, "ShadowSneak" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ShadowPunch, "ShadowPunch" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ShadowClaw, "ShadowClaw" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.OminousWind, "OminousWind" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ShadowBall, "ShadowBall" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.BulletPunch, "BulletPunch" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.MagnetBomb, "MagnetBomb" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.SteelWing, "SteelWing" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.IronHead, "IronHead" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ParabolicCharge, "ParabolicCharge" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Spark, "Spark" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ThunderPunch, "ThunderPunch" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Thunder, "Thunder" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Thunderbolt, "Thunderbolt" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Twister, "Twister" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.DragonBreath, "DragonBreath" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.DragonPulse, "DragonPulse" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.DragonClaw, "DragonClaw" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.DisarmingVoice, "DisarmingVoice" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.DrainingKiss, "DrainingKiss" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.DazzlingGleam, "DazzlingGleam" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Moonblast, "Moonblast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PlayRough, "PlayRough" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.CrossPoison, "CrossPoison" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.SludgeBomb, "SludgeBomb" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.SludgeWave, "SludgeWave" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.GunkShot, "GunkShot" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.MudShot, "MudShot" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.BoneClub, "BoneClub" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Bulldoze, "Bulldoze" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.MudBomb, "MudBomb" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FuryCutter, "FuryCutter" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.BugBite, "BugBite" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.SignalBeam, "SignalBeam" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.XScissor, "XScissor" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FlameCharge, "FlameCharge" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FlameBurst, "FlameBurst" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FireBlast, "FireBlast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Brine, "Brine" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.WaterPulse, "WaterPulse" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Scald, "Scald" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.HydroPump, "HydroPump" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Psychic, "Psychic" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Psystrike, "Psystrike" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.IceShard, "IceShard" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.IcyWind, "IcyWind" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FrostBreath, "FrostBreath" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Absorb, "Absorb" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.GigaDrain, "GigaDrain" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FirePunch, "FirePunch" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.SolarBeam, "SolarBeam" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.LeafBlade, "LeafBlade" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PowerWhip, "PowerWhip" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Splash, "Splash" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Acid, "Acid" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.AirCutter, "AirCutter" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Hurricane, "Hurricane" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.BrickBreak, "BrickBreak" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Cut, "Cut" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Swift, "Swift" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.HornAttack, "HornAttack" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Stomp, "Stomp" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Headbutt, "Headbutt" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.HyperFang, "HyperFang" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Slam, "Slam" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.BodySlam, "BodySlam" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Rest, "Rest" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.Struggle, "Struggle" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ScaldBlastoise, "ScaldBlastoise" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.HydroPumpBlastoise, "HydroPumpBlastoise" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.WrapGreen, "WrapGreen" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.WrapPink, "WrapPink" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FuryCutterFast, "FuryCutterFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.BugBiteFast, "BugBiteFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.BiteFast, "BiteFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.SuckerPunchFast, "SuckerPunchFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.DragonBreathFast, "DragonBreathFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ThunderShockFast, "ThunderShockFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.SparkFast, "SparkFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.LowKickFast, "LowKickFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.KarateChopFast, "KarateChopFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.EmberFast, "EmberFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.WingAttackFast, "WingAttackFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PeckFast, "PeckFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.LickFast, "LickFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ShadowClawFast, "ShadowClawFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.VineWhipFast, "VineWhipFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.RazorLeafFast, "RazorLeafFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.MudShotFast, "MudShotFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.IceShardFast, "IceShardFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FrostBreathFast, "FrostBreathFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.QuickAttackFast, "QuickAttackFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ScratchFast, "ScratchFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.TackleFast, "TackleFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PoundFast, "PoundFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.CutFast, "CutFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PoisonJabFast, "PoisonJabFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.AcidFast, "AcidFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PsychoCutFast, "PsychoCutFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.RockThrowFast, "RockThrowFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.MetalClawFast, "MetalClawFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.BulletPunchFast, "BulletPunchFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.WaterGunFast, "WaterGunFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.SplashFast, "SplashFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.WaterGunFastBlastoise, "WaterGunFastBlastoise" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.MudSlapFast, "MudSlapFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ZenHeadbuttFast, "ZenHeadbuttFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ConfusionFast, "ConfusionFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.PoisonStingFast, "PoisonStingFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.BubbleFast, "BubbleFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FeintAttackFast, "FeintAttackFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.SteelWingFast, "SteelWingFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.FireFangFast, "FireFangFast" ),
+            new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.RockSmashFast, "RockSmashFast" )
+        };
+
         public string GetTranslation(TranslationString translationString, params object[] data)
         {
             var translation = _translationStrings.FirstOrDefault(t => t.Key.Equals(translationString)).Value;
@@ -598,6 +791,12 @@ namespace PoGo.NecroBot.Logic.Common
         {
             var translation = _pokemonTranslationStrings.FirstOrDefault(t => t.Key.Equals(id)).Value;
             return translation != default(string) ? translation : $"Translation for pokemon {id} is missing";
+        }
+
+        public string GetPokemonMovesetTranslation( POGOProtos.Enums.PokemonMove move )
+        {
+            var translation = _pokemonMovesetTranslationStrings.FirstOrDefault( t => t.Key.Equals( move ) ).Value;
+            return translation != default( string ) ? translation : $"Translation for move {move} is missing";
         }
 
         public static Translation Load( ILogicSettings logicSettings )
