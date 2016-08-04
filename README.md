@@ -11,6 +11,8 @@ Official Website  http://necrobot.io
 Discord (Chat & Get Help!): https://discord.gg/VXKxNFr <br/>
 <br/>
 
+<strong><em>UPDATE (8/4/2016)</em></strong> - Any program utilizing PoGO's API will not function. <strong>Read more [here](https://www.reddit.com/r/pokemongodev/comments/4w1cvr/pokemongo_current_api_status/)</strong>
+
 <h2><a name="features">Features</a></h2>
 
  - [PTC Login / Google]
