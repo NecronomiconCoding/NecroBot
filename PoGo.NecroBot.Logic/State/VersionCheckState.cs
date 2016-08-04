@@ -202,10 +202,7 @@ namespace PoGo.NecroBot.Logic.State
                 var gitVersion = new Version($"{match.Groups[1]}.{match.Groups[2]}.{match.Groups[3]}");
                 RemoteVersion = gitVersion;
                 if (gitVersion >= Assembly.GetExecutingAssembly().GetName().Version)
-                {
-                    Console.WriteLine( "GitVer: " + gitVersion + " CurVer: " + Assembly.GetExecutingAssembly().GetName().Version );
                     return false;
-                }
             }
             catch (Exception)
             {
@@ -285,10 +282,24 @@ namespace PoGo.NecroBot.Logic.State
                 foreach( JProperty prop in lstNewOptions )
                     Logger.Write( prop.ToString(), LogLevel.New );
 
-                Logger.Write( "Please press enter to continue", LogLevel.None );
-                Console.ReadLine();
+                Logger.Write( "Would you like to open the Config file? Y/N", LogLevel.Info );
+                
+                while( true )
+                {
+                    string strInput = Console.ReadLine().ToLower();
 
-                return false;
+                    switch( strInput )
+                    {
+                        case "y":
+                            Process.Start( Path.Combine( configDir, "config.json" ) );
+                            return true;
+                        case "n":
+                            return true;
+                        default:
+                            Logger.Write( session.Translation.GetTranslation( TranslationString.PromptError, "y", "n" ), LogLevel.Error );
+                            continue;
+                    }
+                }
             }
             
             return true;

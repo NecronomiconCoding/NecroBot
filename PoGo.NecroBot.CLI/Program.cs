@@ -40,14 +40,11 @@ namespace PoGo.NecroBot.CLI
 
             GlobalSettings settings;
             Boolean boolNeedsSetup = false;
-
+            
             if( File.Exists( configFile ) )
             {
                 if( !VersionCheckState.IsLatest() )
-                {
-                    Console.WriteLine( "Loading unpopulated config" );
                     settings = GlobalSettings.Load( subPath, true );
-                }
                 else
                     settings = GlobalSettings.Load( subPath );
             }
