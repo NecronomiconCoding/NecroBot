@@ -598,13 +598,16 @@ namespace PoGo.NecroBot.Logic.Common
             return translation != default(string) ? translation : $"Translation for pokemon {id} is missing";
         }
 
-        public static Translation Load(ILogicSettings logicSettings)
+        public static Translation Load( ILogicSettings logicSettings )
+        {
+            return Load( logicSettings, new Translation() );
+        }
+
+        public static Translation Load(ILogicSettings logicSettings, Translation translations )
         {
             var translationsLanguageCode = logicSettings.TranslationLanguageCode;
             var translationPath = Path.Combine(logicSettings.GeneralConfigPath, "translations");
             var fullPath = Path.Combine(translationPath, "translation." + translationsLanguageCode + ".json");
-
-            Translation translations;
             if (File.Exists(fullPath))
             {
                 var input = File.ReadAllText(fullPath);
@@ -668,70 +671,6 @@ namespace PoGo.NecroBot.Logic.Common
             }
 
             return translations;
-        }
-
-        public static void Reload( ILogicSettings logicSettings, Translation translations )
-        {
-            var translationsLanguageCode = logicSettings.TranslationLanguageCode;
-            var translationPath = Path.Combine( logicSettings.GeneralConfigPath, "translations" );
-            var fullPath = Path.Combine( translationPath, "translation." + translationsLanguageCode + ".json" );
-            
-            if( File.Exists( fullPath ) )
-            {
-                var input = File.ReadAllText( fullPath );
-
-                var jsonSettings = new JsonSerializerSettings();
-                jsonSettings.Converters.Add( new StringEnumConverter { CamelCaseText = true } );
-                jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
-                jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
-
-                try
-                {
-                    translations = JsonConvert.DeserializeObject<Translation>( input, jsonSettings );
-                    //TODO make json to fill default values as it won't do it now
-                    new Translation()._translationStrings.Where(
-                        item => translations._translationStrings.All( a => a.Key != item.Key ) )
-                        .ToList()
-                        .ForEach( translations._translationStrings.Add );
-                    new Translation()._pokemonTranslationStrings.Where(
-                        item => translations._pokemonTranslationStrings.All( a => a.Key != item.Key ) )
-                        .ToList()
-                        .ForEach( translations._pokemonTranslationStrings.Add );
-                }
-                catch( JsonException )
-                {
-                    Logger.Write( "[ERROR] Issue loading translations", LogLevel.Error );
-
-                    switch( translationsLanguageCode )
-                    {
-                        case "en":
-                            Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
-
-                            string strInput = Console.ReadLine().ToLower();
-
-                            if( strInput.Equals( "y" ) )
-                            {
-                                // Currently this section can only rebuild the EN translations file \\
-                                // This is because default values cannot be supplied from other languages \\
-                                Logger.Write( "Loading fresh translations and continuing" );
-                                translations = new Translation();
-                                translations.Save( Path.Combine( translationPath, "translation.en.json" ) );
-                            }
-                            else
-                            {
-                                ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error", 3, LogLevel.Error );
-                                return;
-                            }
-
-                            break;
-                        default:
-                            ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error\n"
-                                + "[ERROR] No replacement translations: Check appropriate files for typos", 5, LogLevel.Error );
-
-                            return;
-                    }
-                }
-            }
         }
 
         public void Save(string fullPath)
