@@ -22,8 +22,9 @@ namespace PoGo.NecroBot.CLI
         private static string subPath = "";
         private static void Main(string[] args)
         {
+            string strCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionEventHandler;
-            Console.Title = "NecroBot starting";
+            Console.Title = $"NecroBot starting [{strCulture.ToUpper()}]";
             Console.CancelKeyPress += (sender, eArgs) =>
             {
                 QuitEvent.Set();
@@ -54,8 +55,6 @@ namespace PoGo.NecroBot.CLI
                 settings.ProfilePath = profilePath;
                 settings.ProfileConfigPath = profileConfigPath;
                 settings.GeneralConfigPath = Path.Combine( Directory.GetCurrentDirectory(), "config" );
-
-                string strCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
                 settings.TranslationLanguageCode = strCulture;
 
                 boolNeedsSetup = true;
@@ -99,9 +98,12 @@ namespace PoGo.NecroBot.CLI
 
             var machine = new StateMachine();
             var stats = new Statistics();
+
+            string strVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+
             stats.DirtyEvent +=
                 () =>
-                    Console.Title =
+                    Console.Title = $"[Necrobot v{strVersion}] " +
                         stats.GetTemplatedStats(
                             session.Translation.GetTranslation(TranslationString.StatsTemplateString),
                             session.Translation.GetTranslation(TranslationString.StatsXpTemplateString));
