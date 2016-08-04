@@ -30,6 +30,7 @@ namespace PoGo.NecroBot.Logic
         public string GooglePassword;
         public string PtcUsername;
         public string PtcPassword;
+<<<<<<< HEAD
 
         public void Load( string path )
         {
@@ -102,6 +103,79 @@ namespace PoGo.NecroBot.Logic
     public class GlobalSettings
     {
 
+=======
+
+        public void Load(string path)
+        {
+            try
+            {
+                _filePath = path;
+
+                if (File.Exists(_filePath))
+                {
+                    //if the file exists, load the settings
+                    var input = File.ReadAllText(_filePath);
+
+                    var settings = new JsonSerializerSettings();
+                    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+
+                    JsonConvert.PopulateObject(input, this, settings);
+                }
+                else
+                {
+                    Save(_filePath);
+                }
+            }
+            catch (JsonReaderException exception)
+            {
+                if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcUsername"))
+                    Logger.Write("JSON Exception: You need to properly configure your PtcUsername using quotations.",
+                        LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcPassword"))
+                    Logger.Write(
+                        "JSON Exception: You need to properly configure your PtcPassword using quotations.",
+                        LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") &&
+                         exception.Message.Contains("GoogleUsername"))
+                    Logger.Write(
+                        "JSON Exception: You need to properly configure your GoogleUsername using quotations.",
+                        LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") &&
+                         exception.Message.Contains("GooglePassword"))
+                    Logger.Write(
+                        "JSON Exception: You need to properly configure your GooglePassword using quotations.",
+                        LogLevel.Error);
+                else
+                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+            }
+        }
+
+        public void Save(string path)
+        {
+            var output = JsonConvert.SerializeObject(this, Formatting.Indented,
+                new StringEnumConverter { CamelCaseText = true });
+
+            var folder = Path.GetDirectoryName(path);
+            if (folder != null && !Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            File.WriteAllText(path, output);
+        }
+
+        public void Save()
+        {
+            if (!string.IsNullOrEmpty(_filePath))
+            {
+                Save(_filePath);
+            }
+        }
+    }
+
+    public class GlobalSettings
+    {
+>>>>>>> refs/remotes/NECROBOTIO/master
         [JsonIgnore]
         internal AuthSettings Auth = new AuthSettings();
         [JsonIgnore]
@@ -110,6 +184,11 @@ namespace PoGo.NecroBot.Logic
         public string ProfileConfigPath;
         [JsonIgnore]
         public string ProfilePath;
+<<<<<<< HEAD
+=======
+        [JsonIgnore]
+        public bool isGui;
+>>>>>>> refs/remotes/NECROBOTIO/master
 
         [DefaultValue("en")]
         public string TranslationLanguageCode;
@@ -537,6 +616,7 @@ namespace PoGo.NecroBot.Logic
 
         public GlobalSettings()
         {
+<<<<<<< HEAD
             InitializePropertyDefaultValues( this );
         }
 
@@ -640,10 +720,153 @@ namespace PoGo.NecroBot.Logic
                     default:
                         Logger.Write( translator.GetTranslation( TranslationString.PromptError, "Y", "N" ), LogLevel.Error );
                         continue;
+=======
+            InitializePropertyDefaultValues(this);
+        }
+
+        public void InitializePropertyDefaultValues(object obj)
+        {
+            FieldInfo[] fields = obj.GetType().GetFields();
+
+            foreach (FieldInfo field in fields)
+            {
+                var d = field.GetCustomAttribute<DefaultValueAttribute>();
+
+                if (d != null)
+                    field.SetValue(obj, d.Value);
+            }
+        }
+
+        public static GlobalSettings Default => new GlobalSettings();
+
+        public static GlobalSettings Load(string path)
+        {
+            GlobalSettings settings = null;
+            bool isGui = (AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.Contains("PoGo.NecroBot.GUI")).SingleOrDefault() != null);
+            var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
+            var profileConfigPath = Path.Combine(profilePath, "config");
+            var configFile = Path.Combine(profileConfigPath, "config.json");
+            var shouldExit = false;
+
+            if (File.Exists(configFile))
+            {
+                try
+                {
+                    //if the file exists, load the settings
+                    var input = File.ReadAllText(configFile);
+
+                    var jsonSettings = new JsonSerializerSettings();
+                    jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                    jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
+                    jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
+
+                    settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+
+                    //This makes sure that existing config files dont get null values which lead to an exception
+                    foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.KeepMinOperator == null))
+                    {
+                        filter.Value.KeepMinOperator = "or";
+                    }
+                    foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
+                    {
+                        filter.Value.Moves = new List<PokemonMove>();
+                    }
+                    foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.MovesOperator == null))
+                    {
+                        filter.Value.MovesOperator = "or";
+                    }
+
+                }
+                catch (JsonReaderException exception)
+                {
+                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+                    return null;
+                }
+            }
+            else if (!isGui)
+            {
+                Logger.Write("This is your first start, would you like to begin setup? Y/N", LogLevel.Warning);
+
+                bool boolBreak = false;
+                settings = new GlobalSettings();
+
+                while (!boolBreak)
+                {
+                    string strInput = Console.ReadLine().ToLower();
+
+                    switch (strInput)
+                    {
+                        case "y":
+                            boolBreak = true;
+                            SetupSettings(settings);
+                            break;
+                        case "n":
+                            Logger.Write("Config/Auth file automatically generated and must be completed before continuing");
+                            boolBreak = true;
+                            shouldExit = true;
+                            break;
+                        default:
+                            Logger.Write("[INPUT ERROR] Error with input, please enter 'y' or 'n'", LogLevel.Error);
+                            continue;
+                    }
+                }
+            }
+            else
+            {
+                settings = new GlobalSettings();
+                shouldExit = true;
+            }
+
+            settings.ProfilePath = profilePath;
+            settings.ProfileConfigPath = profileConfigPath;
+            settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
+            settings.isGui = isGui;
+            settings.migratePercentages();
+
+            settings.Save(configFile);
+            settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
+
+            return shouldExit ? null : settings;
+        }
+
+        private static void SetupSettings(GlobalSettings settings)
+        {
+            SetupAccountType(settings);
+            SetupUserAccount(settings);
+            SetupConfig(settings);
+
+            Logger.Write("### COMPLETED SETUP ###", LogLevel.None);
+        }
+
+        private static void SetupAccountType(GlobalSettings settings)
+        {
+            string strInput;
+            Logger.Write("### Setting up new USER ACCOUNT ###", LogLevel.None);
+            Logger.Write("Please choose an account type: google/ptc");
+
+            while (true)
+            {
+                strInput = Console.ReadLine().ToLower();
+
+                switch (strInput)
+                {
+                    case "google":
+                        settings.Auth.AuthType = AuthType.Google;
+                        Logger.Write("Chosen Account Type: GOOGLE");
+                        return;
+                    case "ptc":
+                        settings.Auth.AuthType = AuthType.Ptc;
+                        Logger.Write("Chosen Account Type: PTC");
+                        return;
+                    default:
+                        Logger.Write("[ERROR] submitted an incorrect account type, please choose 'google' or 'ptc'", LogLevel.Error);
+                        break;
+>>>>>>> refs/remotes/NECROBOTIO/master
                 }
             }
         }
 
+<<<<<<< HEAD
         public static Session SetupSettings( Session session, GlobalSettings settings, String configPath )
         {
             Session newSession = SetupTranslationCode( session, session.Translation, settings );
@@ -938,6 +1161,198 @@ namespace PoGo.NecroBot.Logic
         private readonly GlobalSettings _settings;
 
         public LogicSettings( GlobalSettings settings )
+=======
+        private static void SetupUserAccount(GlobalSettings settings)
+        {
+            Console.WriteLine("");
+            Logger.Write("Please enter a Username", LogLevel.None);
+            string strInput = Console.ReadLine();
+
+            if (settings.Auth.AuthType == AuthType.Google)
+                settings.Auth.GoogleUsername = strInput;
+            else
+                settings.Auth.PtcUsername = strInput;
+            Logger.Write("Accepted username: " + strInput);
+
+            Console.WriteLine("");
+            Logger.Write("Please enter a Password", LogLevel.None);
+            strInput = Console.ReadLine();
+
+            if (settings.Auth.AuthType == AuthType.Google)
+                settings.Auth.GooglePassword = strInput;
+            else
+                settings.Auth.PtcPassword = strInput;
+            Logger.Write("Accepted password: " + strInput);
+
+            Logger.Write("### User Account Completed ###\n", LogLevel.None);
+        }
+
+        private static void SetupConfig(GlobalSettings settings)
+        {
+            Logger.Write("### Setting Default Position ###", LogLevel.None);
+            Logger.Write("Please enter a Latitude (Right click to paste)");
+            while (true)
+            {
+                try
+                {
+                    double dblInput = double.Parse(Console.ReadLine());
+                    settings.DefaultLatitude = dblInput;
+                    Logger.Write("Lattitude accepted: " + dblInput);
+                    break;
+                }
+                catch (FormatException)
+                {
+                    Logger.Write("[ERROR] Please input only a VALUE for example: " + settings.DefaultLatitude, LogLevel.Error);
+                    continue;
+                }
+            }
+
+            Logger.Write("Please enter a Longitude (Right click to paste)");
+            while (true)
+            {
+                try
+                {
+                    double dblInput = double.Parse(Console.ReadLine());
+                    settings.DefaultLongitude = dblInput;
+                    Logger.Write("Longitude accepted: " + dblInput);
+                    break;
+                }
+                catch (FormatException)
+                {
+                    Logger.Write("[ERROR] Please input only a VALUE for example: " + settings.DefaultLongitude, LogLevel.Error);
+                    continue;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Method for issue #1966
+        /// </summary>
+        private void migratePercentages()
+        {
+            if (EvolveKeptPokemonsAtStorageUsagePercentage <= 1.0)
+            {
+                EvolveKeptPokemonsAtStorageUsagePercentage *= 100.0f;
+            }
+            if (RecycleInventoryAtUsagePercentage <= 1.0)
+            {
+                RecycleInventoryAtUsagePercentage *= 100.0f;
+            }
+        }
+
+        public void Save(string fullPath)
+        {
+            var jsonSerializeSettings = new JsonSerializerSettings
+            {
+                DefaultValueHandling = DefaultValueHandling.Include,
+                Formatting = Formatting.Indented,
+                Converters = new JsonConverter[] { new StringEnumConverter { CamelCaseText = true } }
+            };
+
+            var output = JsonConvert.SerializeObject(this, jsonSerializeSettings);
+
+            var folder = Path.GetDirectoryName(fullPath);
+            if (folder != null && !Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            File.WriteAllText(fullPath, output);
+        }
+    }
+
+    public class ClientSettings : ISettings
+    {
+        // Never spawn at the same position.
+        private readonly Random _rand = new Random();
+        private readonly GlobalSettings _settings;
+
+        public ClientSettings(GlobalSettings settings)
+        {
+            _settings = settings;
+        }
+
+
+        public string GoogleUsername => _settings.Auth.GoogleUsername;
+        public string GooglePassword => _settings.Auth.GooglePassword;
+
+        public string GoogleRefreshToken
+        {
+            get { return null; }
+            set { GoogleRefreshToken = null; }
+        }
+        AuthType ISettings.AuthType
+        {
+            get { return _settings.Auth.AuthType; }
+
+            set { _settings.Auth.AuthType = value; }
+        }
+
+        double ISettings.DefaultLatitude
+        {
+            get
+            {
+                return _settings.DefaultLatitude + _rand.NextDouble() * ((double)_settings.MaxSpawnLocationOffset / 111111);
+            }
+
+            set { _settings.DefaultLatitude = value; }
+        }
+
+        double ISettings.DefaultLongitude
+        {
+            get
+            {
+                return _settings.DefaultLongitude +
+                       _rand.NextDouble() *
+                       ((double)_settings.MaxSpawnLocationOffset / 111111 / Math.Cos(_settings.DefaultLatitude));
+            }
+
+            set { _settings.DefaultLongitude = value; }
+        }
+
+        double ISettings.DefaultAltitude
+        {
+            get { return _settings.DefaultAltitude; }
+
+            set { _settings.DefaultAltitude = value; }
+        }
+
+        string ISettings.GoogleUsername
+        {
+            get { return _settings.Auth.GoogleUsername; }
+
+            set { _settings.Auth.GoogleUsername = value; }
+        }
+
+        string ISettings.GooglePassword
+        {
+            get { return _settings.Auth.GooglePassword; }
+
+            set { _settings.Auth.GooglePassword = value; }
+        }
+
+        string ISettings.PtcUsername
+        {
+            get { return _settings.Auth.PtcUsername; }
+
+            set { _settings.Auth.PtcUsername = value; }
+        }
+
+        string ISettings.PtcPassword
+        {
+            get { return _settings.Auth.PtcPassword; }
+
+            set { _settings.Auth.PtcPassword = value; }
+        }
+    }
+
+    public class LogicSettings : ILogicSettings
+    {
+        private readonly GlobalSettings _settings;
+
+        public LogicSettings(GlobalSettings settings)
+>>>>>>> refs/remotes/NECROBOTIO/master
         {
             _settings = settings;
         }

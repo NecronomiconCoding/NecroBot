@@ -2,7 +2,7 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "PokeBall"
+      "Value": "PokéBall"
     },
     {
       "Key": "greatPokeball",
@@ -27,7 +27,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Geen geschikte PokeStops gevonden in je omgeving. Is je bereik te klein?"
+      "Value": "Geen geschikte PokéStops gevonden in je omgeving. Is je bereik te klein?"
     },
     {
       "Key": "eventFortUsed",
@@ -72,7 +72,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Geen ballen meer - Een {0} met CP {1} misgelopen "
+      "Value": "Geen Pokéballen meer - Een {0} met CP {1} misgelopen "
     },
     {
       "Key": "catchStatusAttempt",
@@ -92,7 +92,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokemons"
+      "Value": "Pokémons"
     },
     {
       "Key": "commonWordPerfect",
