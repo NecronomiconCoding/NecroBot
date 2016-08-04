@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
+        "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m entfernt). Sind die Koordinaten in der config.json korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -196,7 +196,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC Server sind wahrscheinlich down ODER die angegebenen Zugangsdaten sind falsch. Versuch Google."
+      "Value": "PTC Server sind wahrscheinlich offline ODER die angegebenen Zugangsdaten sind falsch. Versuche Google."
     },
     {
       "Key": "tryingAgainIn",
@@ -381,11 +381,11 @@
     },
     {
       "Key": "SnipeScan",
-      "Value": "Scannen nach Snipeable Pokémon in {0}..."
+      "Value": "Scannen nach Snipebaren Pokémon in {0}..."
     },
     {
       "Key": "SnipeScanEx",
-      "Value": "Sniping ein {0} mit {1} IV in {2}..."
+      "Value": "Snipe ein {0} mit {1} IV in {2}..."
     },
     {
       "Key": "NoPokemonToSnipe",

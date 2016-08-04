@@ -47,7 +47,7 @@ namespace PoGo.NecroBot.Logic
         }
 
         public TransferFilter(int keepMinCp, int keepMinLvl, bool useKeepMinLvl, float keepMinIvPercentage, string keepMinOperator, int keepMinDuplicatePokemon, 
-            List<PokemonMove> moves = null)
+            List<PokemonMove> moves = null, string movesOperator = "or")
         {
             KeepMinCp = keepMinCp;
             KeepMinLvl = keepMinLvl;
@@ -56,6 +56,7 @@ namespace PoGo.NecroBot.Logic
             KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
             KeepMinOperator = keepMinOperator;
             Moves = moves ?? new List<PokemonMove>();
+            MovesOperator = movesOperator;
         }
 
         public int KeepMinCp { get; set; }
@@ -65,6 +66,7 @@ namespace PoGo.NecroBot.Logic
         public int KeepMinDuplicatePokemon { get; set; }
         public List<PokemonMove> Moves { get; set; }
         public string KeepMinOperator { get; set; }
+        public string MovesOperator { get; set; }
     }
 
     public interface ILogicSettings
