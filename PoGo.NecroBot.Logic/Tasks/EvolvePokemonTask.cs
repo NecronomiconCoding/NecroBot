@@ -78,7 +78,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             await session.Client.Inventory.UseItemXpBoost();
             await session.Inventory.RefreshCachedInventory();
             if (luckyEgg != null) session.EventDispatcher.Send(new UseLuckyEggEvent {Count = luckyEgg.Count});
-            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
+            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 2000);
         }
 
         private static async Task evolve(ISession session, List<PokemonData> pokemonToEvolve)
@@ -94,6 +94,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Exp = evolveResponse.ExperienceAwarded,
                     Result = evolveResponse.Result
                 });
+                if(!pokemonToEvolve.Last().Equals(pokemon))
+                {
+                    DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 2000);
+                }
             }
         }
 
