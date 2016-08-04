@@ -557,6 +557,11 @@ namespace PoGo.NecroBot.Logic
 
         public static GlobalSettings Load( string path )
         {
+            return Load( path, false );
+        }
+
+        public static GlobalSettings Load( string path, bool boolSkipSave )
+        {
             GlobalSettings settings;
             var profilePath = Path.Combine( Directory.GetCurrentDirectory(), path );
             var profileConfigPath = Path.Combine( profilePath, "config" );
@@ -576,7 +581,7 @@ namespace PoGo.NecroBot.Logic
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
                     settings = JsonConvert.DeserializeObject<GlobalSettings>( input, jsonSettings );
-
+                    
                     //This makes sure that existing config files dont get null values which lead to an exception
                     foreach( var filter in settings.PokemonsTransferFilter.Where( x => x.Value.KeepMinOperator == null ) )
                     {
@@ -605,8 +610,11 @@ namespace PoGo.NecroBot.Logic
             settings.GeneralConfigPath = Path.Combine( Directory.GetCurrentDirectory(), "config" );
             settings.migratePercentages();
 
-            settings.Save( configFile );
-            settings.Auth.Load( Path.Combine( profileConfigPath, "auth.json" ) );
+            if( !boolSkipSave )
+            {
+                settings.Save( configFile );
+                settings.Auth.Load( Path.Combine( profileConfigPath, "auth.json" ) );
+            }
 
             return shouldExit ? null : settings;
         }

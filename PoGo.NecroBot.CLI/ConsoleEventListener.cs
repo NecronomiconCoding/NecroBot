@@ -267,11 +267,6 @@ namespace PoGo.NecroBot.CLI
             Logger.Write(session.Translation.GetTranslation(TranslationString.PkmPotentialEvolveCount, evolveCountEvent.Evolves), LogLevel.Update, ConsoleColor.White);
         }
 
-        private static void HandleEvent(UpdateEvent updateEvent, ISession session)
-        {
-            Logger.Write(updateEvent.ToString(), LogLevel.Update);
-        }
-
         internal void Listen(IEvent evt, ISession session)
         {
             dynamic eve = evt;

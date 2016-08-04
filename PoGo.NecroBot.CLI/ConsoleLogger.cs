@@ -44,6 +44,8 @@ namespace PoGo.NecroBot.CLI
         public void Write(string message, LogLevel level = LogLevel.Info, ConsoleColor color = ConsoleColor.Black)
         {
             // Remember to change to a font that supports your language, otherwise it'll still show as ???.
+            ///<marker></marker>
+            /// TODO Japanese language implementation
             Console.OutputEncoding = Encoding.UTF8;
             if (level > _maxLogLevel)
                 return;
@@ -106,6 +108,10 @@ namespace PoGo.NecroBot.CLI
                 case LogLevel.Update:
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Update}) {message}");
+                    break;
+                case LogLevel.New:
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine( $"[{DateTime.Now.ToString( "HH:mm:ss" )}] ({LoggingStrings.New}) {message}" );
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.White;

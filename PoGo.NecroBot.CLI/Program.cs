@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.CLI
             if (args.Length > 0)
                 subPath = args[0];
 
-            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
+            Logger.SetLogger(new ConsoleLogger(LogLevel.New), subPath);
 
             var profilePath = Path.Combine( Directory.GetCurrentDirectory(), subPath );
             var profileConfigPath = Path.Combine( profilePath, "config" );
@@ -42,7 +42,15 @@ namespace PoGo.NecroBot.CLI
             Boolean boolNeedsSetup = false;
 
             if( File.Exists( configFile ) )
-                settings = GlobalSettings.Load( subPath );
+            {
+                if( !VersionCheckState.IsLatest() )
+                {
+                    Console.WriteLine( "Loading unpopulated config" );
+                    settings = GlobalSettings.Load( subPath, true );
+                }
+                else
+                    settings = GlobalSettings.Load( subPath );
+            }
             else
             {
                 settings = new GlobalSettings();
