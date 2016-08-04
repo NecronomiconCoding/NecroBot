@@ -23,11 +23,11 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m weit weg). Sind die Koordinaten in der config.json korrekt?"
+        "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m entfernt). Sind die Koordinaten in der config.json korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Keine nutzbaren Pokestops in deiner Gegend gefunden. Ist die maximale Distanz zu klein?"
+      "Value": "Keine nutzbaren Pokéstops in deiner Gegend gefunden. Ist die maximale Distanz zu klein?"
     },
     {
       "Key": "eventFortUsed",
@@ -39,7 +39,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} in ({1}m)"
+      "Value": "{0} in ({1}m) ({2} Sekunden)"
     },
     {
       "Key": "eventProfileLogin",
@@ -96,7 +96,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokémons"
+      "Value": "Pokémon"
     },
     {
       "Key": "commonWordPerfect",
@@ -112,15 +112,15 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "ZeigeHöchsteWP"
+      "Value": "Höchste WP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "ZeigeHöchstesPerfektes"
+      "Value": "Höchste IV"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "ZeigeHöchstesLevel"
+      "Value": "Höchstes Level"
     },
     {
       "Key": "welcomeWarning",
@@ -196,7 +196,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC Server sind wahrscheinlich down ODER die angegebenen Zugangsdaten sind falsch. Versuch Google."
+      "Value": "PTC Server sind wahrscheinlich offline ODER die angegebenen Zugangsdaten sind falsch. Versuche Google."
     },
     {
       "Key": "tryingAgainIn",
@@ -240,7 +240,7 @@
     },
     {
       "Key": "FinishedTransferringConfig",
-      "Value": "Beendet Ihre Konfiguration auf die neue Version übertragen..."
+      "Value": "Ihre Konfiguration wurde auf die neue Version übertragen..."
     },
     {
       "Key": "updateFinished",
@@ -285,11 +285,11 @@
     },
     {
       "Key": "encounterProblem",
-      "Value": "Begegnungsproblem: {0}"
+      "Value": "Problem beim Fangen: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Begegnungsproblem: Modul-Pokémon {0}"
+      "Value": "Problem beim Fangen: Lockmodul-Pokémon {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -345,11 +345,11 @@
     },
     {
       "Key": "WebSocketFailStart",
-      "Value": "Fehler beim starten des WebSockets auf Port: {0}"
+      "Value": "Fehler beim Starten des WebSockets auf Port: {0}"
     },
     {
       "Key": "StatsTemplateString",
-      "Value": "{0} - Laufzeit {1} - Lvl: {2} | EP/H: {3:n0} | P/H: {4:n0} | Sternenstaub: {5:n0} | Übertragen: {6:n0} | Recycelt: {7:n0}"
+      "Value": "{0} - Laufzeit {1} - Lvl: {2} | EP/H: {3:n0} | P/H: {4:n0} | Sternenstaub: {5:n0} | Verschickt: {6:n0} | Weggeworfen: {7:n0}"
     },
     {
       "Key": "StatsXpTemplateString",
@@ -357,15 +357,15 @@
     },
     {
       "Key": "RequireInputText",
-      "Value": "Programm wird nach drücken einer Taste fortgesetzt..."
+      "Value": "Programm wird nach Drücken einer Taste fortgesetzt..."
     },
     {
       "Key": "GoogleTwoFactorAuth",
-      "Value": "Wenn Google-Zwei-Faktor-Authentifizierung aktiviert ist, muss ein App Spezifisches Passwort in die auth.json einfügen werden."
+      "Value": "Wenn Google-Zwei-Faktor-Authentifizierung aktiviert ist, muss ein App Spezifisches Passwort in die auth.json eingefügt werden."
     },
     {
       "Key": "GoogleTwoFactorAuthExplanation",
-      "Value": "Öffne App-Passwörter. Bitte erstelle ein neues Passwort(verwende bei App wählen: Andere)"
+      "Value": "Öffne App-Passwörter. Bitte erstelle ein neues Passwort (verwende bei App wählen: Andere)"
     },
     {
       "Key": "GoogleError",
@@ -381,11 +381,11 @@
     },
     {
       "Key": "SnipeScan",
-      "Value": "Scannen nach Snipeable Pokémon in {0}..."
+      "Value": "Scannen nach Snipebaren Pokémon in {0}..."
     },
     {
       "Key": "SnipeScanEx",
-      "Value": "Sniping ein {0} mit {1} IV in {2}..."
+      "Value": "Snipe ein {0} mit {1} IV in {2}..."
     },
     {
       "Key": "NoPokemonToSnipe",
@@ -409,7 +409,7 @@
     },
     {
       "Key": "IPBannedError",
-      "Value": "Verbindung nicht möglich. Deine IP könnte von Niantic auf die Blacklist gesetzt wurden sein. Beenden..."
+      "Value": "Verbindung nicht möglich. Deine IP könnte von Niantic auf die Blacklist gesetzt worden sein. Beenden..."
     },
     {
       "Key": "NoEggsAvailable",
@@ -417,15 +417,15 @@
     },
     {
       "Key": "UseLuckyEggActive",
-      "Value": "Glücksei bereits aktiv"
+      "Value": "Glücks-Ei bereits aktiv"
     },
     {
       "Key": "UsedLuckyEgg",
-      "Value": "Verwende Glücksei"
+      "Value": "Verwende Glücks-Ei"
     },
     {
       "Key": "UseLuckyEggAmount",
-      "Value": "Glückseier im Inventar: {0}"
+      "Value": "Glücks-Eier im Inventar: {0}"
     },
     {
       "Key": "NoIncenseAvailable",
@@ -445,7 +445,7 @@
     },
     {
       "Key": "AmountPkmSeenCaught",
-      "Value": "Anzahl gesehener Pokémon: {0}/151, Anzahl gefundener Pokémon: {1}/151"
+      "Value": "Anzahl gesehener Pokémon: {0}/151, Anzahl gefangener Pokémon: {1}/151"
     },
     {
       "Key": "PkmPotentialEvolveCount",
@@ -571,7 +571,7 @@
     },
     {
       "Key": "nidoranFemale",
-      "Value": "NidoranF"
+      "Value": "NidoranW"
     },
     {
       "Key": "nidorina",
@@ -595,7 +595,7 @@
     },
     {
       "Key": "clefairy",
-      "Value": "Pipi"
+      "Value": "Piepi"
     },
     {
       "Key": "clefable",
@@ -755,7 +755,7 @@
     },
     {
       "Key": "graveler",
-      "Value": "Georock"
+      "Value": "Georok"
     },
     {
       "Key": "golem",
@@ -855,11 +855,11 @@
     },
     {
       "Key": "voltorb",
-      "Value": "Voltoball"
+      "Value": "Voltobal"
     },
     {
       "Key": "electrode",
-      "Value": "Lektroball"
+      "Value": "Lektrobal"
     },
     {
       "Key": "exeggcute",
@@ -1055,7 +1055,7 @@
     },
     {
       "Key": "mewtwo",
-      "Value": "Mewto"
+      "Value": "Mewtu"
     },
     {
       "Key": "mew",
