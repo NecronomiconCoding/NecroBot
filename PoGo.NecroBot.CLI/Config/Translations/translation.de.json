@@ -454,6 +454,10 @@
     {
       "Key": "PkmNotEnoughRessources",
       "Value": "Pokémon Upgrade fehlgeschlagen, nicht genügend Ressourcen"
+    },
+    {
+      "Key": "waitingForMorePokemonToEvolve",
+      "Value": "Warte mit Entwicklungen von {0} Pokémons bis {1} weitere gefangen wurden! ({2}/{3} bis {4}% Inventar Auslastung)"
     }
   ],
   "PokemonStrings": [
