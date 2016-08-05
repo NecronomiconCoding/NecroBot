@@ -59,7 +59,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Beste CP: {3}  IV: {4}%] (Snoepjes: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Beste CP: {3}  IV: {4}%] (Candies: {5})"
     },
     {
       "Key": "eventItemRecycled",
