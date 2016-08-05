@@ -623,7 +623,7 @@ namespace PoGo.NecroBot.Logic
             settings.isGui = isGui;
             settings.migratePercentages();
 
-            if( !boolSkipSave )
+            if( !boolSkipSave || !settings.AutoUpdate )
             {
                 settings.Save( configFile );
                 settings.Auth.Load( Path.Combine( profileConfigPath, "auth.json" ) );

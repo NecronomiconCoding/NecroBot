@@ -64,7 +64,7 @@ namespace PoGo.NecroBot.CLI
             
             if( boolNeedsSetup )
             {
-                if( GlobalSettings.PromptForSetup( session.Translation ) )
+                if( GlobalSettings.PromptForSetup( session.Translation ) && !settings.isGui )
                     session = GlobalSettings.SetupSettings( session, settings, configFile );
                 else
                 {
