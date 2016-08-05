@@ -1,0 +1,1069 @@
+{
+  "TranslationStrings": [
+    {
+      "Key": "pokeball",
+      "Value": "Pokeball"
+    },
+    {
+      "Key": "greatPokeball",
+      "Value": "Superball"
+    },
+    {
+      "Key": "ultraPokeball",
+      "Value": "Ultraball"
+    },
+    {
+      "Key": "masterPokeball",
+      "Value": "Masterball"
+    },
+    {
+      "Key": "wrongAuthType",
+      "Value": "Neznámá hodnota AuthType v config.json"
+    },
+    {
+      "Key": "farmPokestopsOutsideRadius",
+      "Value":
+        "Jste mimo definovaný okruh! Chůze na start ({0}m daleko). Jsou zadané souřadnice v config.json správné?"
+    },
+    {
+      "Key": "farmPokestopsNoUsableFound",
+      "Value": "Nenalezeny žádné použitelné Pokestopy ve vaší lokaci. Máte nastavenu malou maximální vzdálenost chůze?"
+    },
+    {
+      "Key": "eventFortUsed",
+      "Value": "Název: {0} Zk: {1}, Gems: {2}, Předmětů: {3}"
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "Název: {0} INFO: Vybrání pokestopu selhalo, možná máte Softban. Odbanování skončí: {1}/{2}"
+    },
+    {
+      "Key": "eventFortTargeted",
+      "Value": "Chůze k Pokestopu: {0} ({1}m) ({2} sekund)"
+    },
+    {
+      "Key": "eventProfileLogin",
+      "Value": "Hrající jako {0}"
+    },
+    {
+      "Key": "eventUsedLuckyEgg",
+      "Value": "Použit předmět LuckyEgg, zbývá: {0}"
+    },
+    {
+      "Key": "eventPokemonEvolvedSuccess",
+      "Value": "{0} úspěšně za {1}zk"
+    },
+    {
+      "Key": "eventPokemonEvolvedFailed",
+      "Value": "Selhalo {0}. Kvůli {1}, konec vývinu {2}"
+    },
+    {
+      "Key": "eventPokemonTransferred",
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Nejlepší CP: {3}  IV: {4}%] (Bonbónů: {5})"
+    },
+    {
+      "Key": "eventItemRecycled",
+      "Value": "{0}x {1}"
+    },
+    {
+      "Key": "eventPokemonCapture",
+      "Value":
+        "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Šance: {7}% | {8}m daleko | s {9} ({10} zbývá). | {11}"
+    },
+    {
+      "Key": "eventNoPokeballs",
+      "Value": "Žádné pokebaly - Ztratili jsme {0} s CP {1}"
+    },
+    {
+      "Key": "eventUseBerry",
+      "Value": "Použito {0} | {1} zbývá"
+    },
+    {
+      "Key": "itemRazzBerry",
+      "Value": "Malina"
+    },
+    {
+      "Key": "catchStatus",
+      "Value": "{0}"
+    },
+    {
+      "Key": "candies",
+      "Value": "Bonbóny: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Neočekávaná data v souboru GPX, přeskakuji."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokémon"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "Perfektní"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "Jméno"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "Neznámý"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "Nejvyšší CP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "Nejvyšší IV"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "Nejvyšší úroveň"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "Ujistěte se, že zadané souřadnice jsou správné. Vypněte program, pokud nejsou! Lat: {0} Lng: {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "Vložení vajíčka do inkubátoru: {0:0.00}km zbývá"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "Stav inkubátoru aktualizován: {0:0.00}km zbývá"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "Unkubované vajíčko vylíhnuto: {0} | Úroveň: {1} CP: ({2}/{3}) IV: {4}%"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "CHYBA"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "POZOR"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "INFO"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "POKESTOP"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMING"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "ZAHOZENÍ"
+    },
+    {
+      "Key": "logEntryPKMN",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "PŘENOS"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "VÝVIN"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "MALINA"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "VAJÍČKO"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "DEBUG"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "AKTUALIZACE"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "Přihlašovaní pomocí {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "PTC servery jsou pravděpodobně nedostupné NEBO vaše přihlašovací údaje jsou špatné. Zkuste google"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "Opětovný pokus za {0} sekund..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "Účet neověřen! Vypínám..."
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "Detekováno realistické cestování, použito defaultní nastavení v config.json"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "Nerealistické cestování na {0}, použity poslední souřadnice ze souboru LastPos.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "Souřadnice v souboru \"LastPos.ini\" jsou nevalidní, použití defaultních souřadnic"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "Skvělé! Již používáte nejnovější verzi {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "AutoUpdater je deaktivován. Aktualizujte na poslední vydání: {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "Stahování a konfigurace aktualizace..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "Stahování nejnovější aktualizace dokončeno..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "Dokončování rozbalování souborů..."
+    },
+    {
+      "Key": "FinishedTransferringConfig",
+      "Value": "Dokončený přenos konfigurace..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "Aktualizace dokončena!"
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "Hledání pobouřeného pokemona..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "Hledání pokemona..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "Hledání kouzelného pokemona..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "Přeskočen {0}"
+    },
+    {
+      "Key": "zeroPokeballInv",
+      "Value": "Nemáte žádný další Pokeball ve vašem batohu!"
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "[Aktuální stav batohu] Pokebally: {0} | Superbally: {1} | Ultrabally: {2} | Masterbally: {3}"
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "Batoh s pokemony je plný! Přenos pokemonů..."
+    },
+    {
+      "Key": "InvFullPokestopLooting",
+      "Value": "Batoh je plný, žádné předměty nebyly sebrány."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value":
+        "Batoh s pokemony je plný! Prosím přeneste pokémona ručně nebo nastavte TransferDuplicatePokemon na true v nastavení..."
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Zjištěn problém: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Zjištěn problém: Navnaděný Pokemon {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Vaše pozice {0}, {1} je přílož vzdálená od vaší stávající pozice {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pokémon {0} ({1}) přejmenován {2} na {3}."
+    },
+    {
+      "Key": "PokemonFavorite",
+      "Value": "{0}% skvělý {1} (CP {2}) *Oblíbený*."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Pokémon ignorace] - Ignoruji {0} jak je nastaveno v nastavení!"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "{0} pokus #{1}"
+    },
+    {
+      "Key": "CatchStatusError",
+      "Value": "Chyba při chycení"
+    },
+    {
+      "Key": "CatchStatusEscape",
+      "Value": "Unikl"
+    },
+    {
+      "Key": "CatchStatusFlee",
+      "Value": "Uprchnul"
+    },
+    {
+      "Key": "CatchStatusMissed",
+      "Value": "Netrefen"
+    },
+    {
+      "Key": "CatchStatusSuccess",
+      "Value": "Chycen"
+    },
+    {
+      "Key": "CatchTypeNormal",
+      "Value": "Divoký"
+    },
+    {
+      "Key": "CatchTypeLure",
+      "Value": "Kouzelný"
+    },
+    {
+      "Key": "CatchTypeIncense",
+      "Value": "Kadidlo"
+    },
+    {
+      "Key": "WebSocketFailStart",
+      "Value": "Chyba startu websocketu na portu: {0}"
+    },
+    {
+      "Key": "StatsTemplateString",
+      "Value": "{0} - Doba spuštění {1} - Úroveň: {2} | Zk/H: {3:n0} | P/H: {4:n0} | Hvězdný prach: {5:n0} | Přeneseno: {6:n0} | Vyhozeno: {7:n0}"
+    },
+    {
+      "Key": "StatsXpTemplateString",
+      "Value": "{0} (Další úroveň za {1}h {2}m | {3:n0}/{4:n0} XP)"
+    },
+    {
+      "Key": "RequireInputText",
+      "Value": "Program bude pokračovat po stlačení jakékoliv klávesy..."
+    },
+    {
+      "Key": "GoogleTwoFactorAuth",
+      "Value": "U vašeho Google účtu máte nastaveno dvoufázové ověření, musíte vložit speciální heslo do auth.json"
+    },
+    {
+      "Key": "GoogleTwoFactorAuthExplanation",
+      "Value": "Otevírám Google App-Heslo. prosím vytvořte si nové App heslo (použijte Ostatní jako Zařízení)"
+    },
+    {
+      "Key": "GoogleError",
+      "Value": "E-mail nebo heslo je nesprávné."
+    },
+    {
+      "Key": "MissingCredentialsGoogle",
+      "Value": "Musíte vyplnit GoogleUsername a GooglePassword v auth.json!"
+    },
+    {
+      "Key": "MissingCredentialsPtc",
+      "Value": "Musíte vyplnit PtcUsername a PtcPassword v auth.json!"
+    },
+    {
+      "Key": "SnipeScan",
+      "Value": "Skenuji sestřelitelné pokemony na {0}..."
+    },
+    {
+      "Key": "SnipeScanEx",
+      "Value": "Sestřeluji {0} s {1} IV na {2}..."
+    },
+    {
+      "Key": "NoPokemonToSnipe",
+      "Value": "Žádný pokémon k sejmutí nenalezen"
+    },
+    {
+      "Key": "NotEnoughPokeballsToSnipe",
+      "Value": "Nedostatek pokeballů k sestřelení! ({0}/{1})"
+    },
+    {
+      "Key": "DisplayHighestMove1Header",
+      "Value": "ÚTOK1"
+    },
+    {
+      "Key": "DisplayHighestMove2Header",
+      "Value": "ÚTOK2"
+    },
+    {
+      "Key": "DisplayHighestCandy",
+      "Value": "Bonbón"
+    },
+    {
+      "Key": "IPBannedError",
+      "Value": "Spojení zamítnuto. Vaše IP adresa je zřejmě na černé listině společnosti Niantic. Vypínání..."
+    },
+    {
+      "Key": "NoEggsAvailable",
+      "Value": "Žádná další vajíčka"
+    },
+    {
+      "Key": "UseLuckyEggActive",
+      "Value": "Použití LuckyEgg aktivní"
+    },
+    {
+      "Key": "UsedLuckyEgg",
+      "Value": "Použito LuckyEgg"
+    },
+    {
+      "Key": "UseLuckyEggAmount",
+      "Value": "LuckyEgg v batohu: {0}"
+    },
+    {
+      "Key": "NoIncenseAvailable",
+      "Value": "Žádné kadidlo dostupné"
+    },
+    {
+      "Key": "UseIncenseActive",
+      "Value": "Kadidlo aktivní"
+    },
+    {
+      "Key": "UseIncenseAmount",
+      "Value": "Kadidel v batohu: {0}"
+    },
+    {
+      "Key": "UsedIncense",
+      "Value": "Použito kadidlo"
+    },
+    {
+      "Key": "AmountPkmSeenCaught",
+      "Value": "Počet spatřených pokemonů: {0}/151, Počet chycených pokemonů: {1}/151"
+    },
+    {
+      "Key": "PkmPotentialEvolveCount",
+      "Value": "[Vývoj] Potenciálních vývinů: {0}"
+    },
+    {
+      "Key": "PkmNotEnoughRessources",
+      "Value": "Posilnění pokemona se nezdařilo, nedostatek surovin."
+    },
+    {
+      "Key": "waitingForMorePokemonToEvolve",
+      "Value": "Čekání na vývin {0} pokemů najednou, zbývá {1} chytit! ({2}/{3} pro {4}% batohu)"
+    }
+  ],
+  "PokemonStrings": [
+    {
+      "Key": "bulbasaur",
+      "Value": "Bulbasaur"
+    },
+    {
+      "Key": "ivysaur",
+      "Value": "Ivysaur"
+    },
+    {
+      "Key": "venusaur",
+      "Value": "Venusaur"
+    },
+    {
+      "Key": "charmander",
+      "Value": "Charmander"
+    },
+    {
+      "Key": "charmeleon",
+      "Value": "Charmeleon"
+    },
+    {
+      "Key": "charizard",
+      "Value": "Charizard"
+    },
+    {
+      "Key": "squirtle",
+      "Value": "Squirtle"
+    },
+    {
+      "Key": "wartortle",
+      "Value": "Wartortle"
+    },
+    {
+      "Key": "blastoise",
+      "Value": "Blastoise"
+    },
+    {
+      "Key": "caterpie",
+      "Value": "Caterpie"
+    },
+    {
+      "Key": "metapod",
+      "Value": "Metapod"
+    },
+    {
+      "Key": "butterfree",
+      "Value": "Butterfree"
+    },
+    {
+      "Key": "weedle",
+      "Value": "Weedle"
+    },
+    {
+      "Key": "kakuna",
+      "Value": "Kakuna"
+    },
+    {
+      "Key": "beedrill",
+      "Value": "Beedrill"
+    },
+    {
+      "Key": "pidgey",
+      "Value": "Pidgey"
+    },
+    {
+      "Key": "pidgeotto",
+      "Value": "Pidgeotto"
+    },
+    {
+      "Key": "pidgeot",
+      "Value": "Pidgeot"
+    },
+    {
+      "Key": "rattata",
+      "Value": "Rattata"
+    },
+    {
+      "Key": "raticate",
+      "Value": "Raticate"
+    },
+    {
+      "Key": "spearow",
+      "Value": "Spearow"
+    },
+    {
+      "Key": "fearow",
+      "Value": "fearow"
+    },
+    {
+      "Key": "ekans",
+      "Value": "Ekans"
+    },
+    {
+      "Key": "arbok",
+      "Value": "Arbok"
+    },
+    {
+      "Key": "pikachu",
+      "Value": "Pikachu"
+    },
+    {
+      "Key": "raichu",
+      "Value": "Raichu"
+    },
+    {
+      "Key": "sandshrew",
+      "Value": "Sandshrew"
+    },
+    {
+      "Key": "sandslash",
+      "Value": "Sandslash"
+    },
+    {
+      "Key": "nidoranFemale",
+      "Value": "Nidoran - žena"
+    },
+    {
+      "Key": "nidorina",
+      "Value": "Nidorina"
+    },
+    {
+      "Key": "nidoqueen",
+      "Value": "Nidoqueen"
+    },
+    {
+      "Key": "nidoranMale",
+      "Value": "Nidoran - muž"
+    },
+    {
+      "Key": "nidorino",
+      "Value": "Nidorino"
+    },
+    {
+      "Key": "nidoking",
+      "Value": "Nidoking"
+    },
+    {
+      "Key": "clefairy",
+      "Value": "Clefairy"
+    },
+    {
+      "Key": "clefable",
+      "Value": "Clefable"
+    },
+    {
+      "Key": "vulpix",
+      "Value": "Vulpix"
+    },
+    {
+      "Key": "ninetales",
+      "Value": "ninetales"
+    },
+    {
+      "Key": "jigglypuff",
+      "Value": "jigglypuff"
+    },
+    {
+      "Key": "wigglytuff",
+      "Value": "Wigglytuff"
+    },
+    {
+      "Key": "zubat",
+      "Value": "Zubat"
+    },
+    {
+      "Key": "golbat",
+      "Value": "Golbat"
+    },
+    {
+      "Key": "oddish",
+      "Value": "Oddish"
+    },
+    {
+      "Key": "gloom",
+      "Value": "Gloom"
+    },
+    {
+      "Key": "vileplume",
+      "Value": "Vileplume"
+    },
+    {
+      "Key": "paras",
+      "Value": "Paras"
+    },
+    {
+      "Key": "parasect",
+      "Value": "Parasect"
+    },
+    {
+      "Key": "venonat",
+      "Value": "Venonat"
+    },
+    {
+      "Key": "venomoth",
+      "Value": "Venomoth"
+    },
+    {
+      "Key": "diglett",
+      "Value": "Diglett"
+    },
+    {
+      "Key": "dugtrio",
+      "Value": "Dugtrio"
+    },
+    {
+      "Key": "meowth",
+      "Value": "Meowth"
+    },
+    {
+      "Key": "persian",
+      "Value": "Persian"
+    },
+    {
+      "Key": "psyduck",
+      "Value": "Psyduck"
+    },
+    {
+      "Key": "golduck",
+      "Value": "Golduck"
+    },
+    {
+      "Key": "mankey",
+      "Value": "Mankey"
+    },
+    {
+      "Key": "primeape",
+      "Value": "Primeape"
+    },
+    {
+      "Key": "growlithe",
+      "Value": "Growlithe"
+    },
+    {
+      "Key": "arcanine",
+      "Value": "Arcanine"
+    },
+    {
+      "Key": "poliwag",
+      "Value": "Poliwag"
+    },
+    {
+      "Key": "poliwhirl",
+      "Value": "Poliwhirl"
+    },
+    {
+      "Key": "poliwrath",
+      "Value": "Poliwrath"
+    },
+    {
+      "Key": "abra",
+      "Value": "Abra"
+    },
+    {
+      "Key": "kadabra",
+      "Value": "Kadabra"
+    },
+    {
+      "Key": "alakazam",
+      "Value": "Alakazam"
+    },
+    {
+      "Key": "machop",
+      "Value": "Machop"
+    },
+    {
+      "Key": "machoke",
+      "Value": "Machoke"
+    },
+    {
+      "Key": "machamp",
+      "Value": "Machamp"
+    },
+    {
+      "Key": "bellsprout",
+      "Value": "Bellsprout"
+    },
+    {
+      "Key": "weepinbell",
+      "Value": "Weepinbell"
+    },
+    {
+      "Key": "victreebel",
+      "Value": "Victreebel"
+    },
+    {
+      "Key": "tentacool",
+      "Value": "tentacool"
+    },
+    {
+      "Key": "tentacruel",
+      "Value": "tentacruel"
+    },
+    {
+      "Key": "geodude",
+      "Value": "Geodude"
+    },
+    {
+      "Key": "graveler",
+      "Value": "Graveler"
+    },
+    {
+      "Key": "golem",
+      "Value": "Golem"
+    },
+    {
+      "Key": "ponyta",
+      "Value": "Ponyta"
+    },
+    {
+      "Key": "rapidash",
+      "Value": "Rapidash"
+    },
+    {
+      "Key": "slowpoke",
+      "Value": "Slowpoke"
+    },
+    {
+      "Key": "slowbro",
+      "Value": "Slowbro"
+    },
+    {
+      "Key": "magnemite",
+      "Value": "Magnemite"
+    },
+    {
+      "Key": "magneton",
+      "Value": "Magneton"
+    },
+    {
+      "Key": "farfetchd",
+      "Value": "farfetchd"
+    },
+    {
+      "Key": "doduo",
+      "Value": "Doduo"
+    },
+    {
+      "Key": "dodrio",
+      "Value": "Dodrio"
+    },
+    {
+      "Key": "seel",
+      "Value": "Seel"
+    },
+    {
+      "Key": "dewgong",
+      "Value": "Dewgong"
+    },
+    {
+      "Key": "grimer",
+      "Value": "Grimer"
+    },
+    {
+      "Key": "muk",
+      "Value": "Muk"
+    },
+    {
+      "Key": "shellder",
+      "Value": "Shellder"
+    },
+    {
+      "Key": "cloyster",
+      "Value": "Cloyster"
+    },
+    {
+      "Key": "gastly",
+      "Value": "Gastly"
+    },
+    {
+      "Key": "haunter",
+      "Value": "Haunter"
+    },
+    {
+      "Key": "gengar",
+      "Value": "Gengar"
+    },
+    {
+      "Key": "onix",
+      "Value": "Onix"
+    },
+    {
+      "Key": "drowzee",
+      "Value": "Drowzee"
+    },
+    {
+      "Key": "hypno",
+      "Value": "Hypno"
+    },
+    {
+      "Key": "krabby",
+      "Value": "Krabby"
+    },
+    {
+      "Key": "kingler",
+      "Value": "Kingler"
+    },
+    {
+      "Key": "voltorb",
+      "Value": "Voltorb"
+    },
+    {
+      "Key": "electrode",
+      "Value": "Electrode"
+    },
+    {
+      "Key": "exeggcute",
+      "Value": "Exeggcute"
+    },
+    {
+      "Key": "exeggutor",
+      "Value": "Exeggutor"
+    },
+    {
+      "Key": "cubone",
+      "Value": "Cubone"
+    },
+    {
+      "Key": "marowak",
+      "Value": "Marowak"
+    },
+    {
+      "Key": "hitmonlee",
+      "Value": "Hitmonlee"
+    },
+    {
+      "Key": "hitmonchan",
+      "Value": "Hitmonchan"
+    },
+    {
+      "Key": "lickitung",
+      "Value": "lickitung"
+    },
+    {
+      "Key": "koffing",
+      "Value": "Koffing"
+    },
+    {
+      "Key": "weezing",
+      "Value": "Weezing"
+    },
+    {
+      "Key": "rhyhorn",
+      "Value": "Rhyhorn"
+    },
+    {
+      "Key": "rhydon",
+      "Value": "Rhydon"
+    },
+    {
+      "Key": "chansey",
+      "Value": "Chansey"
+    },
+    {
+      "Key": "tangela",
+      "Value": "tangela"
+    },
+    {
+      "Key": "kangaskhan",
+      "Value": "Kangaskhan"
+    },
+    {
+      "Key": "horsea",
+      "Value": "Horsea"
+    },
+    {
+      "Key": "seadra",
+      "Value": "Seadra"
+    },
+    {
+      "Key": "goldeen",
+      "Value": "Goldeen"
+    },
+    {
+      "Key": "seaking",
+      "Value": "Seaking"
+    },
+    {
+      "Key": "staryu",
+      "Value": "Staryu"
+    },
+    {
+      "Key": "starmie",
+      "Value": "Starmie"
+    },
+    {
+      "Key": "mrMime",
+      "Value": "MrMime"
+    },
+    {
+      "Key": "scyther",
+      "Value": "Scyther"
+    },
+    {
+      "Key": "jynx",
+      "Value": "jynx"
+    },
+    {
+      "Key": "electabuzz",
+      "Value": "Electabuzz"
+    },
+    {
+      "Key": "magmar",
+      "Value": "Magmar"
+    },
+    {
+      "Key": "pinsir",
+      "Value": "Pinsir"
+    },
+    {
+      "Key": "tauros",
+      "Value": "tauros"
+    },
+    {
+      "Key": "magikarp",
+      "Value": "Magikarp"
+    },
+    {
+      "Key": "gyarados",
+      "Value": "Gyarados"
+    },
+    {
+      "Key": "lapras",
+      "Value": "lapras"
+    },
+    {
+      "Key": "ditto",
+      "Value": "Ditto"
+    },
+    {
+      "Key": "eevee",
+      "Value": "Eevee"
+    },
+    {
+      "Key": "vaporeon",
+      "Value": "Vaporeon"
+    },
+    {
+      "Key": "jolteon",
+      "Value": "jolteon"
+    },
+    {
+      "Key": "flareon",
+      "Value": "flareon"
+    },
+    {
+      "Key": "porygon",
+      "Value": "Porygon"
+    },
+    {
+      "Key": "omanyte",
+      "Value": "Omanyte"
+    },
+    {
+      "Key": "omastar",
+      "Value": "Omastar"
+    },
+    {
+      "Key": "kabuto",
+      "Value": "Kabuto"
+    },
+    {
+      "Key": "kabutops",
+      "Value": "Kabutops"
+    },
+    {
+      "Key": "aerodactyl",
+      "Value": "Aerodactyl"
+    },
+    {
+      "Key": "snorlax",
+      "Value": "Snorlax"
+    },
+    {
+      "Key": "articuno",
+      "Value": "Articuno"
+    },
+    {
+      "Key": "zapdos",
+      "Value": "Zapdos"
+    },
+    {
+      "Key": "moltres",
+      "Value": "Moltres"
+    },
+    {
+      "Key": "dratini",
+      "Value": "Dratini"
+    },
+    {
+      "Key": "dragonair",
+      "Value": "Dragonair"
+    },
+    {
+      "Key": "dragonite",
+      "Value": "Dragonite"
+    },
+    {
+      "Key": "mewtwo",
+      "Value": "Mewtwo"
+    },
+    {
+      "Key": "mew",
+      "Value": "Mew"
+    }
+  ]
+}
