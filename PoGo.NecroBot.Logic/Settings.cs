@@ -131,6 +131,9 @@ namespace PoGo.NecroBot.Logic
         public int AmountOfPokemonToDisplayOnStart;
         [DefaultValue(true)]
         public bool ShowPokeballCountsBeforeRecycle;
+        //pokemon
+        [DefaultValue(true)]
+        public bool CatchPokemon;
         //powerup
         [DefaultValue(false)]
         public bool AutomaticallyLevelUpPokemon;
@@ -921,6 +924,7 @@ namespace PoGo.NecroBot.Logic
         public string GeneralConfigPath => _settings.GeneralConfigPath;
         public bool AutoUpdate => _settings.AutoUpdate;
         public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
+        public bool CatchPokemon => _settings.CatchPokemon;
         public bool TransferWeakPokemon => _settings.TransferWeakPokemon;
         public bool DisableHumanWalking => _settings.DisableHumanWalking;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;

@@ -54,7 +54,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var encounter =
                     await session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId);
 
-                if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
+                if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess && session.LogicSettings.CatchPokemon)
                 {
                     await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon);
                 }
