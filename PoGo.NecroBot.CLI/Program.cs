@@ -22,32 +22,67 @@ namespace PoGo.NecroBot.CLI
         private static string subPath = "";
         private static void Main(string[] args)
         {
+            string strCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+            var culture = CultureInfo.CreateSpecificCulture( "en-US" );
+
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
+
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionEventHandler;
-            Console.Title = "NecroBot starting";
+            Console.Title = $"NecroBot starting [{strCulture.ToUpper()}]";
             Console.CancelKeyPress += (sender, eArgs) =>
             {
                 QuitEvent.Set();
                 eArgs.Cancel = true;
             };
-            var culture = CultureInfo.CreateSpecificCulture("en-US");
-
-            CultureInfo.DefaultThreadCurrentCulture = culture;
-            Thread.CurrentThread.CurrentCulture = culture;
             if (args.Length > 0)
                 subPath = args[0];
 
-            Logger.SetLogger(new ConsoleLogger(LogLevel.Info), subPath);
-            
-            var settings = GlobalSettings.Load(subPath);
+            Logger.SetLogger(new ConsoleLogger(LogLevel.New), subPath);
 
-            if (settings == null)
+            var profilePath = Path.Combine( Directory.GetCurrentDirectory(), subPath );
+            var profileConfigPath = Path.Combine( profilePath, "config" );
+            var configFile = Path.Combine( profileConfigPath, "config.json" );
+
+            GlobalSettings settings;
+            Boolean boolNeedsSetup = false;
+            
+            if( File.Exists( configFile ) )
             {
-                Logger.Write("Press a Key to continue...",
-                    LogLevel.Warning);
-                Console.ReadKey();
-                return;
+                if( !VersionCheckState.IsLatest() )
+                    settings = GlobalSettings.Load( subPath, true );
+                else
+                    settings = GlobalSettings.Load( subPath );
             }
+            else
+            {
+                settings = new GlobalSettings();
+                settings.ProfilePath = profilePath;
+                settings.ProfileConfigPath = profileConfigPath;
+                settings.GeneralConfigPath = Path.Combine( Directory.GetCurrentDirectory(), "config" );
+                settings.TranslationLanguageCode = strCulture;
+
+                boolNeedsSetup = true;
+            }
+
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
+            
+            if( boolNeedsSetup )
+            {
+                if( GlobalSettings.PromptForSetup( session.Translation ) && !settings.isGui )
+                    session = GlobalSettings.SetupSettings( session, settings, configFile );
+                else
+                {
+                    GlobalSettings.Load( subPath );
+
+                    Logger.Write( "Press a Key to continue...",
+                        LogLevel.Warning );
+                    Console.ReadKey();
+                    return;
+                }
+
+            }
+
             session.Client.ApiFailure = new ApiFailureStrategy(session);
 
             /*SimpleSession session = new SimpleSession
@@ -68,9 +103,12 @@ namespace PoGo.NecroBot.CLI
 
             var machine = new StateMachine();
             var stats = new Statistics();
+
+            string strVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
+
             stats.DirtyEvent +=
                 () =>
-                    Console.Title =
+                    Console.Title = $"[Necrobot v{strVersion}] " +
                         stats.GetTemplatedStats(
                             session.Translation.GetTranslation(TranslationString.StatsTemplateString),
                             session.Translation.GetTranslation(TranslationString.StatsXpTemplateString));
