@@ -35,11 +35,11 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Buitmaken mislukt, mogelijke softban. Opnieuw proberen: {0}/40"
+      "Value": "Items verzamelen mislukt, mogelijke softban. Opnieuw proberen: {0}/40"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} na ({1}m)"
+      "Value": "{0} over ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
@@ -116,7 +116,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Controleer of Lat & Lng kloppen. Sluit programma als dat niet zo is! Lat: {0} Lng: {1}"
+      "Value": "Controleer of Lat & Lng kloppen. Sluit de bot af als dat niet zo is! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
