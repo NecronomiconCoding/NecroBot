@@ -28,6 +28,12 @@ namespace PoGo.NecroBot.Logic
         public string GooglePassword;
         public string PtcUsername;
         public string PtcPassword;
+        public bool UseProxy;
+        public string UseProxyHost;
+        public string UseProxyPort;
+        public bool UseProxyAuthentication;
+        public string UseProxyUsername;
+        public string UseProxyPassword;
 
         public void Load(string path)
         {
@@ -125,6 +131,9 @@ namespace PoGo.NecroBot.Logic
         public int AmountOfPokemonToDisplayOnStart;
         [DefaultValue(true)]
         public bool ShowPokeballCountsBeforeRecycle;
+        //pokemon
+        [DefaultValue(true)]
+        public bool CatchPokemon;
         //powerup
         [DefaultValue(false)]
         public bool AutomaticallyLevelUpPokemon;
@@ -795,6 +804,42 @@ namespace PoGo.NecroBot.Logic
         public string GoogleUsername => _settings.Auth.GoogleUsername;
         public string GooglePassword => _settings.Auth.GooglePassword;
 
+        public bool UseProxy
+        {
+            get { return false; }
+            set { _settings.Auth.UseProxy = value; }
+        }
+
+        public string UseProxyHost
+        {
+            get { return null; }
+            set { _settings.Auth.UseProxyHost = value; }
+        }
+
+        public string UseProxyPort
+        {
+            get { return null; }
+            set { _settings.Auth.UseProxyPort = value; }
+        }
+
+        public bool UseProxyAuthentication
+        {
+            get { return false; }
+            set { _settings.Auth.UseProxyAuthentication = value; }
+        }
+
+        public string UseProxyUsername
+        {
+            get { return null;}
+            set { _settings.Auth.UseProxyUsername = value; }
+        }
+
+        public string UseProxyPassword
+        {
+            get { return null; }
+            set { _settings.Auth.UseProxyPassword = value; }
+        }
+
         public string GoogleRefreshToken
         {
             get { return null; }
@@ -879,6 +924,7 @@ namespace PoGo.NecroBot.Logic
         public string GeneralConfigPath => _settings.GeneralConfigPath;
         public bool AutoUpdate => _settings.AutoUpdate;
         public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
+        public bool CatchPokemon => _settings.CatchPokemon;
         public bool TransferWeakPokemon => _settings.TransferWeakPokemon;
         public bool DisableHumanWalking => _settings.DisableHumanWalking;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
