@@ -71,6 +71,7 @@ namespace PoGo.NecroBot.Logic
 
     public interface ILogicSettings
     {
+        bool CatchPokemon { get; }
         bool TransferWeakPokemon { get; }
         bool DisableHumanWalking { get; }
         bool AutoUpdate { get; }
