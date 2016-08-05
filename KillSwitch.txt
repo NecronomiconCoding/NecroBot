@@ -1,2 +1,2 @@
-BotStatus=ENABLED;
-Change the above to | DISABLED | and enter a description here
+BotStatus=DISABLED;
+THE BOT HAS BEEN DISABLED FOR SOME REASON
