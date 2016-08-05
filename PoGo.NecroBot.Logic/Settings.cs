@@ -30,6 +30,12 @@ namespace PoGo.NecroBot.Logic
         public string GooglePassword;
         public string PtcUsername;
         public string PtcPassword;
+        public bool UseProxy;
+        public string UseProxyHost;
+        public string UseProxyPort;
+        public bool UseProxyAuthentication;
+        public string UseProxyUsername;
+        public string UseProxyPassword;
 
         public void Load( string path )
         {
@@ -866,6 +872,42 @@ namespace PoGo.NecroBot.Logic
 
         public string GoogleUsername => _settings.Auth.GoogleUsername;
         public string GooglePassword => _settings.Auth.GooglePassword;
+
+        public bool UseProxy
+        {
+            get { return false; }
+            set { _settings.Auth.UseProxy = value; }
+        }
+
+        public string UseProxyHost
+        {
+            get { return null; }
+            set { _settings.Auth.UseProxyHost = value; }
+        }
+
+        public string UseProxyPort
+        {
+            get { return null; }
+            set { _settings.Auth.UseProxyPort = value; }
+        }
+
+        public bool UseProxyAuthentication
+        {
+            get { return false; }
+            set { _settings.Auth.UseProxyAuthentication = value; }
+        }
+
+        public string UseProxyUsername
+        {
+            get { return null;}
+            set { _settings.Auth.UseProxyUsername = value; }
+        }
+
+        public string UseProxyPassword
+        {
+            get { return null; }
+            set { _settings.Auth.UseProxyPassword = value; }
+        }
 
         public string GoogleRefreshToken
         {
