@@ -1,17 +1,20 @@
+<p align="center">
+  <a href="http://necrobot.io">
+    <img alt="Logo" src="http://necrobot.io/img/typotype-transparent.png" width="600">
+  </a>
+</p>
+
 [![Discord](https://img.shields.io/badge/discord-NECROBOT.IO-blue.svg)](https://discord.gg/VXKxNFr)
 [![Build status](https://ci.appveyor.com/api/projects/status/8ijvvr6b7fe2h0w2?svg=true)](https://ci.appveyor.com/project/NecronomiconCoding/necrobot)
 [![Stories in Ready](https://badge.waffle.io/NECROBOTIO/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NecronomiconCoding/NecroBot)
 [![Stories in Progress](https://badge.waffle.io/NECROBOTIO/NecroBot.svg?label=waffle%3Ain%20progress&title=In%20Progress)](https://waffle.io/NecronomiconCoding/NecroBot)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/LICENSE.md)
 
-<!-- title -->
-<h1>NecroBot - a Pokemon Go Bot based on RocketAPI</h1>
-Official Website  http://necrobot.io
-
 Discord (Chat & Get Help!): https://discord.gg/VXKxNFr <br/>
 <br/>
 
-<strong><em>UPDATE (8/4/2016)</em></strong> - Any program utilizing PoGO's API will not function. <strong>Read more [here](https://www.reddit.com/r/pokemongodev/comments/4w1cvr/pokemongo_current_api_status/)</strong>
+## Niantic Changes (Bot is not working ATM)
+Niantic have changed API responses, meaning that this bot and anything accessing the API though POGOProtos is currently broken. A number of developers from /r/pokemondev are working to address this and come up with a fix for this issue, find the [current status here](https://www.reddit.com/r/pokemongodev/comments/4w1cvr/pokemongo_current_api_status/)
 
 <h2><a name="features">Features</a></h2>
 
