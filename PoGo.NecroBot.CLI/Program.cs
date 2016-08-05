@@ -23,6 +23,11 @@ namespace PoGo.NecroBot.CLI
         private static void Main(string[] args)
         {
             string strCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+            var culture = CultureInfo.CreateSpecificCulture( "en-US" );
+
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            Thread.CurrentThread.CurrentCulture = culture;
+
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionEventHandler;
             Console.Title = $"NecroBot starting [{strCulture.ToUpper()}]";
             Console.CancelKeyPress += (sender, eArgs) =>
