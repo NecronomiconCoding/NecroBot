@@ -252,6 +252,8 @@ namespace PoGo.NecroBot.Logic
         public bool SnipeIgnoreUnknownIv;
         [DefaultValue(false)]
         public bool UseTransferIvForSnipe;
+        [DefaultValue(false)]
+        public bool SnipePokemonNotInPokedex;
         //rename
         [DefaultValue(false)]
         public bool RenamePokemon;
@@ -1016,6 +1018,7 @@ namespace PoGo.NecroBot.Logic
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
         public double SnipingScanOffset => _settings.SnipingScanOffset;
+        public bool SnipePokemonNotInPokedex => _settings.SnipePokemonNotInPokedex;
         public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokeballsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
