@@ -107,6 +107,10 @@ namespace PoGo.NecroBot.CLI
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Update}) {message}");
                     break;
+                case LogLevel.New:
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine( $"[{DateTime.Now.ToString( "HH:mm:ss" )}] ({LoggingStrings.New}) {message}" );
+                    break;
                 default:
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Error}) {message}");
