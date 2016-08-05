@@ -11,6 +11,7 @@ using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Tasks;
 using PoGo.NecroBot.Logic.Utils;
 using System.IO;
+using System.Net;
 
 #endregion
 
@@ -20,6 +21,9 @@ namespace PoGo.NecroBot.CLI
     {
         private static readonly ManualResetEvent QuitEvent = new ManualResetEvent(false);
         private static string subPath = "";
+        private static string strKillSwitchUri =
+            "https://raw.githubusercontent.com/Andrerm124/NecroBot/master/KillSwitch.txt";
+
         private static void Main(string[] args)
         {
             string strCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
@@ -39,6 +43,9 @@ namespace PoGo.NecroBot.CLI
                 subPath = args[0];
 
             Logger.SetLogger(new ConsoleLogger(LogLevel.New), subPath);
+
+            if( CheckKillSwitch() )
+                return;
 
             var profilePath = Path.Combine( Directory.GetCurrentDirectory(), subPath );
             var profileConfigPath = Path.Combine( profilePath, "config" );
@@ -145,6 +152,34 @@ namespace PoGo.NecroBot.CLI
             var coordsPath = Path.Combine(Directory.GetCurrentDirectory(), subPath, "Config", "LastPos.ini");
 
             File.WriteAllText(coordsPath, $"{lat}:{lng}");
+        }
+
+        private static bool CheckKillSwitch( )
+        {
+            using( var wC = new WebClient() )
+            {
+                string strResponse = wC.DownloadString( strKillSwitchUri );
+                string[] strSplit = strResponse.Split( ';' );
+                
+                if( strSplit.Length > 1 )
+                {
+                    string strStatus = strSplit[ 0 ];
+                    string strReason = strSplit[ 1 ];
+
+                    if( strStatus.ToLower().Contains( "disable" ) )
+                    {
+                        Console.WriteLine( strReason + "\n" );
+
+                        Logger.Write( "The bot will now close, please press enter to continue", LogLevel.Error );
+                        Console.ReadLine();
+                        return true;
+                    }
+                }
+                else
+                    return false;
+            }
+
+            return false;
         }
 
         private static void UnhandledExceptionEventHandler(object obj, UnhandledExceptionEventArgs args)
