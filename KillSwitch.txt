@@ -1,2 +1,2 @@
-BotStatus=DISABLED;
-THE BOT HAS BEEN DISABLED FOR SOME REASON
+BotStatus=ENABLED;
+Switch the above to DISABLED to turn off the bot and write anything on the following lines to print details of the reason
