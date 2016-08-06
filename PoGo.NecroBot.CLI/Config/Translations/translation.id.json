@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8} meter | dengan sebuah {9} (tersisa {10}). | {11} | lintang: {12} bujur: {13}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8} meter | dengan {9} (sisa {10} buah). | {11} | lintang: {12} bujur: {13}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -82,7 +82,7 @@
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
-      "Value": "Menunggu untuk evolusi {0} Pokemon setelah {1} lagi tertangkap! ({2}/{3} dari {4}% inventori)"
+      "Value": "Menunggu untuk evolusi {0} Pokemon, setelah {1} lagi tertangkap! ({2}/{3} dari {4}% inventori)"
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
@@ -102,7 +102,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} pada Percobaan ke- #{1}"
+      "Value": "Percobaan ke-{1} Hasil : {0}"
     },
     {
       "Key": "catchStatus",
@@ -226,7 +226,7 @@
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "Coba lagi dalam {0} detik..."
+      "Value": "Mencoba lagi dalam {0} detik..."
     },
     {
       "Key": "accountNotVerified",
@@ -238,7 +238,7 @@
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Tidak dapat mengopi ke clipboard, lakukan secara manual"
+      "Value": "Tidak dapat menyakin ke clipboard, lakukan secara manual"
     },
     {
       "Key": "couldntCopyToClipboard2",
@@ -334,19 +334,19 @@
     },
     {
       "Key": "encounterProblem",
-      "Value": "Terkena masalah: {0}"
+      "Value": "Terjadi masalah: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Terkena masalah: Pemikat pokemon {0}"
+      "Value": "Terjadi masalah pada: Pemikat pokemon {0}"
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Destinasi yang anda inginkan {0}, {1} terlalu jauh dari posisi anda saat ini {2}, {3}"
+      "Value": "Tujuan yang anda inginkan {0}, {1} terlalu jauh dari posisi anda saat ini {2}, {3}"
     },
     {
       "Key": "pokemonRename",
-      "Value": "Pokemon {0} ({1}) berubah nama dari {2} to {3}."
+      "Value": "Pokemon {0} ({1}) berubah nama dari {2} ke {3}."
     },
     {
       "Key": "pokemonFavorite",
@@ -498,7 +498,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "[Evolusi] Berpotensi evolusi: {0}"
+      "Value": "{0} Pokemon Berpotensi untuk evolusi"
     },
     {
       "Key": "pkmNotEnoughRessources",
