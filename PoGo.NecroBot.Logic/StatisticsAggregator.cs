@@ -48,7 +48,7 @@ namespace PoGo.NecroBot.Logic
 
         public void HandleEvent(TransferPokemonEvent evt, ISession session)
         {
-            _stats.TotalPokemonsTransfered++;
+            _stats.TotalPokemonTransferred++;
             _stats.Dirty(session.Inventory);
         }
 
