@@ -33,6 +33,8 @@ namespace PoGo.NecroBot.CLI.Models
 
         internal static string Update;
 
+        internal static string New;
+
         internal static void SetStrings(ISession session)
         {
             Attention =
@@ -89,7 +91,11 @@ namespace PoGo.NecroBot.CLI.Models
 
             Update =
                 session?.Translation.GetTranslation(
-                    TranslationString.LogEntryUpdate) ?? "UPDATE";
+                    TranslationString.LogEntryUpdate ) ?? "UPDATE";
+
+            New =
+                session?.Translation.GetTranslation(
+                    TranslationString.LogEntryNew ) ?? "NEW";
         }
     }
 }
