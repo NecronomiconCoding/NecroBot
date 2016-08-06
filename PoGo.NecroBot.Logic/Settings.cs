@@ -123,6 +123,9 @@ namespace PoGo.NecroBot.Logic
         public bool AutoUpdate;
         [DefaultValue(true)]
         public bool TransferConfigAndAuthOnUpdate;
+        //websockets
+        [DefaultValue(false)]
+        public bool UseWebsocket;
         //pressakeyshit
         [DefaultValue(false)]
         public bool StartupWelcomeDelay;
@@ -568,7 +571,7 @@ namespace PoGo.NecroBot.Logic
         public static GlobalSettings Load(string path)
         {
             GlobalSettings settings = null;
-            bool isGui = (AppDomain.CurrentDomain.GetAssemblies().Where(a => a.FullName.Contains("PoGo.NecroBot.GUI")).SingleOrDefault() != null);
+            bool isGui = (AppDomain.CurrentDomain.GetAssemblies().SingleOrDefault(a => a.FullName.Contains("PoGo.NecroBot.GUI")) != null);
             var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
             var profileConfigPath = Path.Combine(profilePath, "config");
             var configFile = Path.Combine(profileConfigPath, "config.json");
@@ -926,6 +929,7 @@ namespace PoGo.NecroBot.Logic
         public string GeneralConfigPath => _settings.GeneralConfigPath;
         public bool AutoUpdate => _settings.AutoUpdate;
         public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
+        public bool UseWebsocket => _settings.UseWebsocket;
         public bool CatchPokemon => _settings.CatchPokemon;
         public bool TransferWeakPokemon => _settings.TransferWeakPokemon;
         public bool DisableHumanWalking => _settings.DisableHumanWalking;
