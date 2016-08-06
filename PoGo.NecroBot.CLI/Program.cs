@@ -12,6 +12,7 @@ using PoGo.NecroBot.Logic.Tasks;
 using PoGo.NecroBot.Logic.Utils;
 using System.IO;
 using System.Net;
+using PoGo.NecroBot.CLI.Resources;
 
 #endregion
 
@@ -33,7 +34,8 @@ namespace PoGo.NecroBot.CLI
             Thread.CurrentThread.CurrentCulture = culture;
 
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionEventHandler;
-            Console.Title = $"NecroBot starting [{strCulture.ToUpper()}]";
+
+            Console.Title = "NecroBot";
             Console.CancelKeyPress += (sender, eArgs) =>
             {
                 QuitEvent.Set();
@@ -89,8 +91,10 @@ namespace PoGo.NecroBot.CLI
                 }
 
             }
+            ProgressBar.start( "NecroBot is starting up", 10 );
 
             session.Client.ApiFailure = new ApiFailureStrategy(session);
+            ProgressBar.fill(20);
 
             /*SimpleSession session = new SimpleSession
             {
@@ -110,17 +114,19 @@ namespace PoGo.NecroBot.CLI
 
             var machine = new StateMachine();
             var stats = new Statistics();
-
-            string strVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
-
+            
+            ProgressBar.fill(30);
+            string strVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString( 3 );
             stats.DirtyEvent +=
                 () =>
                     Console.Title = $"[Necrobot v{strVersion}] " +
                         stats.GetTemplatedStats(
                             session.Translation.GetTranslation(TranslationString.StatsTemplateString),
                             session.Translation.GetTranslation(TranslationString.StatsXpTemplateString));
+            ProgressBar.fill(40);
 
             var aggregator = new StatisticsAggregator(stats);
+            ProgressBar.fill(50);
             var listener = new ConsoleEventListener();
 
             session.EventDispatcher.EventReceived += evt => listener.Listen(evt, session);
@@ -129,15 +135,19 @@ namespace PoGo.NecroBot.CLI
             session.EventDispatcher.EventReceived += evt => new WebSocketInterface(settings.WebSocketPort, session).Listen(evt, session);
 
             machine.SetFailureState(new LoginState());
+            ProgressBar.fill(90);
 
             Logger.SetLoggerContext(session);
 
             session.Navigation.UpdatePositionEvent +=
                 (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
             session.Navigation.UpdatePositionEvent += Navigation_UpdatePositionEvent;
+            ProgressBar.fill(100);
+
             machine.AsyncStart(new VersionCheckState(), session);
             if (session.LogicSettings.UseSnipeLocationServer)
                 SnipePokemonTask.AsyncStart(session);
+            Console.Clear();
 
             QuitEvent.WaitOne();
         }
