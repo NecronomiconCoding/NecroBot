@@ -799,12 +799,7 @@ namespace PoGo.NecroBot.Logic.Common
             return translation != default( string ) ? translation : $"Translation for move {move} is missing";
         }
 
-        public static Translation Load( ILogicSettings logicSettings )
-        {
-            return Load( logicSettings, new Translation() );
-        }
-
-        public static Translation Load(ILogicSettings logicSettings, Translation translations )
+        public static Translation Load(ILogicSettings logicSettings, Translation translations = new Translation() )
         {
             var translationsLanguageCode = logicSettings.TranslationLanguageCode;
             var translationPath = Path.Combine(logicSettings.GeneralConfigPath, "translations");

@@ -568,12 +568,8 @@ namespace PoGo.NecroBot.Logic
         }
 
         public static GlobalSettings Default => new GlobalSettings();
-
-        public static GlobalSettings Load( string path )
-        {
-            return Load( path, false );
-        }
-        public static GlobalSettings Load( string path, bool boolSkipSave )
+        
+        public static GlobalSettings Load( string path, bool boolSkipSave = false )
         {
             GlobalSettings settings = null;
             bool isGui = (AppDomain.CurrentDomain.GetAssemblies().SingleOrDefault(a => a.FullName.Contains("PoGo.NecroBot.GUI")) != null);
