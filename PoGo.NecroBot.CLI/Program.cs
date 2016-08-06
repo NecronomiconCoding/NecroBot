@@ -84,14 +84,11 @@ namespace PoGo.NecroBot.CLI
             var aggregator = new StatisticsAggregator(stats);
             ProgressBar.fill(50);
             var listener = new ConsoleEventListener();
-            ProgressBar.fill(60);
-            var websocket = new WebSocketInterface(settings.WebSocketPort, session);
-            ProgressBar.fill(70);
 
             session.EventDispatcher.EventReceived += evt => listener.Listen(evt, session);
             session.EventDispatcher.EventReceived += evt => aggregator.Listen(evt, session);
-            session.EventDispatcher.EventReceived += evt => websocket.Listen(evt, session);
-            ProgressBar.fill(80);
+            if(settings.UseWebsocket)
+            session.EventDispatcher.EventReceived += evt => new WebSocketInterface(settings.WebSocketPort, session).Listen(evt, session);
 
             machine.SetFailureState(new LoginState());
             ProgressBar.fill(90);
