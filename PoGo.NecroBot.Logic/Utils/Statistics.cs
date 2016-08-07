@@ -23,13 +23,13 @@ namespace PoGo.NecroBot.Logic.Utils
     public class Statistics
     {
         private readonly DateTime _initSessionDateTime = DateTime.Now;
-
+        
         private StatsExport _exportStats;
         private string _playerName;
         public int TotalExperience;
         public int TotalItemsRemoved;
         public int TotalPokemons;
-        public int TotalPokemonsTransfered;
+        public int TotalPokemonTransferred;
         public int TotalStardust;
         public int LevelForRewards = -1;
 
@@ -114,9 +114,10 @@ namespace PoGo.NecroBot.Logic.Utils
         {
             var xpStats = string.Format(xpTemplate, _exportStats.Level, _exportStats.HoursUntilLvl,
                 _exportStats.MinutesUntilLevel, _exportStats.CurrentXp, _exportStats.LevelupXp);
+
             return string.Format(template, _playerName, FormatRuntime(), xpStats, TotalExperience/GetRuntime(),
                 TotalPokemons/GetRuntime(),
-                TotalStardust, TotalPokemonsTransfered, TotalItemsRemoved);
+                TotalStardust, TotalPokemonTransferred, TotalItemsRemoved);
         }
 
         public static int GetXpDiff(int level)
