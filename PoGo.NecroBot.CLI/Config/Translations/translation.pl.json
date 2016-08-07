@@ -446,19 +446,19 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Snajper] Skanowanie w poszukiwaniu Pokemona w {0}..."
+      "Value": "Skanowanie w poszukiwaniu Pokemona w {0}..."
     },
     {
       "Key": "snipeScanEx",
-      "Value": "[Snajper] Mam na celowniku {0} z IV: {1} w {2}..."
+      "Value": "Mam na celowniku {0} z IV: {1} w {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Snajper] Nie znaleziono żadnego Pokemona"
+      "Value": "Nie znaleziono żadnego Pokemona"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value":  "[Snajper] Zbyt mało Pokeballi ({0}/{1})"
+      "Value":  "Zbyt mało Pokeballi ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -522,7 +522,7 @@
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "[Snajper] Serwer jest wyłączony. Pomijam..."
+      "Value": "Serwer jest wyłączony. Pomijam..."
     },
     {
       "Key": "firstStartPrompt",
