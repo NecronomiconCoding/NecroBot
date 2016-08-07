@@ -546,7 +546,7 @@
     },
     {
       "Key": "firstStartAutoGenSettings",
-      "Value": "Musisz poczekać na automatyczne wygenerowanie plików 'config.json' i 'auth.json'..."
+      "Value": "Musisz poczekać na automatyczne wygenerowanie plików 'config.json' / 'auth.json'..."
     },
     {
       "Key": "firstStartSetupAccount",
