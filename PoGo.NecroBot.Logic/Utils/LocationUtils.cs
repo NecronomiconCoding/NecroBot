@@ -30,7 +30,12 @@ namespace PoGo.NecroBot.Logic.Utils
 
         public static double getElevation(double lat, double lon)
         {
-            return 20.00;
+            Random random = new Random();
+            double maximum = 11.0f;
+            double minimum = 8.6f;
+            double return1 = random.NextDouble() * (maximum - minimum) + minimum;
+
+            return return1;
         }
 
         public static GeoCoordinate CreateWaypoint(GeoCoordinate sourceLocation, double distanceInMeters,
