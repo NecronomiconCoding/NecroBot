@@ -813,9 +813,6 @@ namespace PoGo.NecroBot.Logic.Common
             var translationPath = Path.Combine(logicSettings.GeneralConfigPath, "translations");
             var fullPath = Path.Combine(translationPath, "translation." + translationsLanguageCode + ".json");
 
-            translations = new Translation();
-            translations.Save(Path.Combine(translationPath, "translation." + translationsLanguageCode + ".json"));
-
             if (File.Exists(fullPath))
             {
                 var input = File.ReadAllText(fullPath);
@@ -838,9 +835,9 @@ namespace PoGo.NecroBot.Logic.Common
                         .ToList()
                         .ForEach( translations._pokemonTranslationStrings.Add );
                 }
-                catch( JsonException )
+                catch( JsonException ex )
                 {
-                    Logger.Write( "[ERROR] Issue loading translations", LogLevel.Warning );
+                    Logger.Write( $"[ERROR] Issue loading translations: {ex.ToString()}", LogLevel.Warning );
                     Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
 
                     string strInput = Console.ReadLine().ToLower();
