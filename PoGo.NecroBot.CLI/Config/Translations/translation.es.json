@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "{0}) | ({1}) {2} | Nivel: {3} PC: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | con {9} (quedan {10}). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} | Nivel: {3} PC: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | con {9} (quedan {10}). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",

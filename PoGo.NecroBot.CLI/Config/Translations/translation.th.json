@@ -67,7 +67,7 @@
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",

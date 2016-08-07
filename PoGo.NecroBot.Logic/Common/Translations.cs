@@ -228,7 +228,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureSuccess,
                 "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureFailed,
-                "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"),
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
                 "No Pokeballs - We missed a {0} with CP {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.WaitingForMorePokemonToEvolve,
