@@ -36,7 +36,20 @@ namespace PoGo.NecroBot.Logic.Utils
             var sr = new StreamReader(response.GetResponseStream() ?? new MemoryStream()).ReadToEnd();
 
             var json = JObject.Parse(sr);
-            return (double)json.SelectToken("results[0].elevation");
+
+            if(json.SelectToken("results[0].elevation") != null)
+            {
+                return (double)json.SelectToken("results[0].elevation");
+            }
+            else // if google not working
+            {
+                Random random = new Random();
+                double maximum = 11.0f;
+                double minimum = 8.6f;
+                double return1 = random.NextDouble() * (maximum - minimum) + minimum;
+
+                return return1;
+            }
         }
 
         public static GeoCoordinate CreateWaypoint(GeoCoordinate sourceLocation, double distanceInMeters,
