@@ -20,19 +20,19 @@ We are proud to announce the release of 0.7.2, with special thanks to Kevin and 
 ## This release features automatic Device ID generation
 You can now opt to leave the device values static and your device ID will not be the same as everyone elses. If you prefer to use your own device, you can do that as well! 
 
-To change the device information in /Config/auth.json to YOUR personal device, you will need android-sdk with adb (and drivers for your phone). Here are the correlating values with the command to run to grab the value off your phone:
-"DeviceId": "", // adb.exe shell settings get secure android_id
-"AndroidBoardName": "", // adb.exe shell getprop ro.product.board
-"AndroidBootloader": "", // adb.exe shell getprop ro.boot.bootloader
-"DeviceBrand": "", // adb.exe shell getprop ro.product.brand
-"DeviceModel": "", // adb.exe shell getprop ro.product.model
-"DeviceModelIdentifier": "", // adb.exe shell getprop ro.product.name
-"DeviceModelBoot": "qcom",
-"HardwareManufacturer": "", // adb.exe shell getprop ro.product.manufacturer
-"HardwareModel": "", // adb.exe shell getprop ro.product.model
-"FirmwareBrand": "", // adb.exe shell getprop ro.product.name
-"FirmwareTags": "", // adb.exe shell getprop ro.build.tags
-"FirmwareType": "", // adb.exe shell getprop ro.build.type
+To change the device information in /Config/auth.json to YOUR personal device, you will need android-sdk with adb (and drivers for your phone). Here are the correlating values with the command to run to grab the value off your phone:<br>
+"DeviceId": "", // adb.exe shell settings get secure android_id<br>
+"AndroidBoardName": "", // adb.exe shell getprop ro.product.board<br>
+"AndroidBootloader": "", // adb.exe shell getprop ro.boot.bootloader<br>
+"DeviceBrand": "", // adb.exe shell getprop ro.product.brand<br>
+"DeviceModel": "", // adb.exe shell getprop ro.product.model<br>
+"DeviceModelIdentifier": "", // adb.exe shell getprop ro.product.name<br>
+"DeviceModelBoot": "qcom",<br>
+"HardwareManufacturer": "", // adb.exe shell getprop ro.product.manufacturer<br>
+"HardwareModel": "", // adb.exe shell getprop ro.product.model<br>
+"FirmwareBrand": "", // adb.exe shell getprop ro.product.name<br>
+"FirmwareTags": "", // adb.exe shell getprop ro.build.tags<br>
+"FirmwareType": "", // adb.exe shell getprop ro.build.type<br>
 "FirmwareFingerprint": "" // adb.exe shell getprop ro.build.fingerprint
 
 <h2><a name="features">Features</a></h2>
