@@ -6,15 +6,15 @@
     },
     {
       "Key": "greatPokeball",
-      "Value": "高級寶貝球"
+      "Value": "高級球"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "超級寶貝球"
+      "Value": "超級球"
     },
     {
       "Key": "masterPokeball",
-      "Value": "大師寶貝球"
+      "Value": "大師球"
     },
     {
       "Key": "wrongAuthType",
@@ -194,7 +194,7 @@
     },
     {
       "Key": "logEntryTransfered",
-      "Value": "轉化"
+      "Value": "傳送"
     },
     {
       "Key": "logEntryEvolved",
@@ -306,7 +306,7 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "目前擁有寶貝球: {0} | 高級寶貝球: {1} | 超級寶貝球: {2} | 大師寶貝球: {3}"
+      "Value": "目前擁有寶貝球: {0} | 高級球: {1} | 超級球: {2} | 大師球: {3}"
     },
     {
       "Key": "currentItemInv",
@@ -322,11 +322,11 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "背包滿了，正在轉化神奇寶貝..."
+      "Value": "背包滿了，正在傳送神奇寶貝..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "背包滿了，請手動轉化神奇寶貝或修改 TransferDuplicatePokemon 為 true..."
+      "Value": "背包滿了，請手動傳送神奇寶貝或修改 TransferDuplicatePokemon 為 true..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -398,7 +398,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - 運行時間 {1} - 等級: {2} | 經驗/小時: {3:0} | 捕獲/小時: {4:0} | 星塵: {5:0} | 轉化: {6:0} | 丟棄: {7:0}"
+      "Value": "{0} - 運行時間 {1} - 等級: {2} | 經驗/小時: {3:0} | 捕獲/小時: {4:0} | 星塵: {5:0} | 傳送: {6:0} | 丟棄: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
