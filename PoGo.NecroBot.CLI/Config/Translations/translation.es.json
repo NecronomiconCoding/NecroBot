@@ -523,8 +523,8 @@
     {
       "Key": "snipeServerOffline",
       "Value": "[Sniper] Parece que el servidor de Snipping está caído. Saliendo..."
-    }
-  {
+    },
+    {
       "Key": "firstStartPrompt",
       "Value": "Esta es la primera vez que inicias el bot, ¿quieres comenzar la instalación? {0}/{1}"
     },
