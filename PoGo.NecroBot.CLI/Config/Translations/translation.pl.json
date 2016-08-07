@@ -73,7 +73,7 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCaptureSuccess",
+      "Key": "eventPokemonCapture",
       "Value": "({0}) | ({1}) {2}   [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | {11} | Szerokość: {12} Długość: {13}"
     },
     {
