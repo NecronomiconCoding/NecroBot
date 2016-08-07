@@ -38,6 +38,33 @@ namespace PoGo.NecroBot.Logic
         public bool UseProxyAuthentication;
         public string UseProxyUsername;
         public string UseProxyPassword;
+        //devicedata
+        [DefaultValue("529e8aa6201f78b5")]
+        public string DeviceId;
+        [DefaultValue("msm8994")]
+        public string AndroidBoardName;
+        [DefaultValue("unknown")]
+        public string AndroidBootloader;
+        [DefaultValue("OnePlus")]
+        public string DeviceBrand;
+        [DefaultValue("OnePlus2")]
+        public string DeviceModel;
+        [DefaultValue("ONE A2003_24_160604")]
+        public string DeviceModelIdentifier;
+        [DefaultValue("qcom")]
+        public string DeviceModelBoot;
+        [DefaultValue("OnePlus")]
+        public string HardwareManufacturer;
+        [DefaultValue("ONE A2003")]
+        public string HardwareModel;
+        [DefaultValue("OnePlus2")]
+        public string FirmwareBrand;
+        [DefaultValue("dev-keys")]
+        public string FirmwareTags;
+        [DefaultValue("user")]
+        public string FirmwareType;
+        [DefaultValue("OnePlus/OnePlus2/OnePlus2:6.0.1/MMB29M/1447840820:user/release-keys")]
+        public string FirmwareFingerprint;
 
         public void Load( string path )
         {
@@ -879,37 +906,37 @@ namespace PoGo.NecroBot.Logic
 
         public bool UseProxy
         {
-            get { return false; }
+            get { return _settings.Auth.UseProxy; }
             set { _settings.Auth.UseProxy = value; }
         }
 
         public string UseProxyHost
         {
-            get { return null; }
+            get { return _settings.Auth.UseProxyHost; }
             set { _settings.Auth.UseProxyHost = value; }
         }
 
         public string UseProxyPort
         {
-            get { return null; }
+            get { return _settings.Auth.UseProxyPort; }
             set { _settings.Auth.UseProxyPort = value; }
         }
 
         public bool UseProxyAuthentication
         {
-            get { return false; }
+            get { return _settings.Auth.UseProxyAuthentication; }
             set { _settings.Auth.UseProxyAuthentication = value; }
         }
 
         public string UseProxyUsername
         {
-            get { return null;}
+            get { return _settings.Auth.UseProxyUsername; }
             set { _settings.Auth.UseProxyUsername = value; }
         }
 
         public string UseProxyPassword
         {
-            get { return null; }
+            get { return _settings.Auth.UseProxyPassword; }
             set { _settings.Auth.UseProxyPassword = value; }
         }
 
@@ -925,6 +952,71 @@ namespace PoGo.NecroBot.Logic
             set { _settings.Auth.AuthType = value; }
         }
 
+        string ISettings.DeviceId
+        {
+            get { return _settings.Auth.DeviceId; }
+            set { _settings.Auth.DeviceId = value; }
+        }
+        string ISettings.AndroidBoardName
+        {
+            get { return _settings.Auth.AndroidBoardName; }
+            set { _settings.Auth.AndroidBoardName = value; }
+        }
+        string ISettings.AndroidBootloader
+        {
+            get { return _settings.Auth.AndroidBootloader; }
+            set { _settings.Auth.AndroidBootloader = value; }
+        }
+        string ISettings.DeviceBrand
+        {
+            get { return _settings.Auth.DeviceBrand; }
+            set { _settings.Auth.DeviceBrand = value; }
+        }
+        string ISettings.DeviceModel
+        {
+            get { return _settings.Auth.DeviceModel; }
+            set { _settings.Auth.DeviceModel = value; }
+        }
+        string ISettings.DeviceModelIdentifier
+        {
+            get { return _settings.Auth.DeviceModelIdentifier; }
+            set { _settings.Auth.DeviceModelIdentifier = value; }
+        }
+        string ISettings.DeviceModelBoot
+        {
+            get { return _settings.Auth.DeviceModelBoot; }
+            set { _settings.Auth.DeviceModelBoot = value; }
+        }
+        string ISettings.HardwareManufacturer
+        {
+            get { return _settings.Auth.HardwareManufacturer; }
+            set { _settings.Auth.HardwareManufacturer = value; }
+        }
+        string ISettings.HardwareModel
+        {
+            get { return _settings.Auth.HardwareModel; }
+            set { _settings.Auth.HardwareModel = value; }
+        }
+        string ISettings.FirmwareBrand
+        {
+            get { return _settings.Auth.FirmwareBrand; }
+            set { _settings.Auth.FirmwareBrand = value; }
+        }
+        string ISettings.FirmwareTags
+        {
+            get { return _settings.Auth.FirmwareTags; }
+            set { _settings.Auth.FirmwareTags = value; }
+        }
+        string ISettings.FirmwareType
+        {
+            get { return _settings.Auth.FirmwareType; }
+            set { _settings.Auth.FirmwareType = value; }
+        }
+        string ISettings.FirmwareFingerprint
+        {
+            get { return _settings.Auth.FirmwareFingerprint; }
+            set { _settings.Auth.FirmwareFingerprint = value; }
+        }
         double ISettings.DefaultLatitude
         {
             get

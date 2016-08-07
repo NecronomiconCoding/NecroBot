@@ -6,11 +6,11 @@
     },
     {
       "Key": "greatPokeball",
-      "Value": "SuperBall"
+      "Value": "GreatBall"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "HyperBall"
+      "Value": "UltraBall"
     },
     {
       "Key": "masterPokeball",
@@ -18,47 +18,55 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Verificați câmpurile AuthType în auth.json"
+      "Value": "AuthType necunoscut în config.json"
+    },
+    {
+      "Key": "loginInvalid",
+      "Value": "Datele de conectare ale utilizatorului sunt invalide și autentificarea a eșuat."
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Ești in afara câmpului definit! Încep să merg ({0}metri de distanță) în 5 secunde."
+      "Value": "Ești în afara razei definite! Încep să merg ({0}metri distanță) în 5 secunde."
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Nu găasesc nici un portal Pokemon. Trebuie să modifici distanța în config.json , variabila MaxTravelDistanceInMeters"
+      "Value": "Niciun pokestop utilizabil găsit în zona ta. Este distanța ta maximă prea mică?"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "{0} | {1}XP, Gemuri: {2}, Obiecte: {3}"
+      "Value": "Nume: {0} XP: {1} Gemuri: {2} Obiecte: {3} Lat: {4} Long: {5}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Colectare / Captură imposibilă, încerc din nou în : {1}/{2}"
+      "Value": "Nume: {0} INFO: Colectare eșuată, posibil softban. Debanare în: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} ({1}metri)"
+      "Value": "Călătoresc la pokestopul \"{0}\" ({1}m) ({2} secunde)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Conectat la joc cu userul {0}"
+      "Value": "Te joci pe contul {0}"
+    },
+    {
+      "Key": "eventUsedIncense",
+      "Value": "Bastonaș parfumat folosit, timp rămas: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Utilizare de OU ȘANSĂ, timp rămas : {0}"
+      "Value": "Ou norocos folosit, timp rămas : {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} +{1}XP"
+      "Value": "{0} cu succes pentru {1}XP"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "{0} Eroare. Rezultatul a fost {1}, opresc evoluția {2}"
+      "Value": "Eșec la {0}. Rezultatul a fost {1}, se oprește evoluția {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- {1}/{2}%   [Cel mai bun {3}/{4}%] ({5} Bomboane)"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Cel mai bun CP: {3}  IV: {4}%] (Bomboane: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -66,15 +74,35 @@
     },
     {
       "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Nivel {3} PC ({4}/{5}) {6}%IV | {7}% Șansă captură | Distanță {8}m | {10} {9} Dispo | {11}"
+      "Value": "({0}) | ({1}) {2} Nivel: {3} CP: ({4}/{5}) IV: {6}% | Șansă: {7}% | {8}m distanță | {10} cu o {9} ({10} rămase) | {11} | lat: {12} long: {13}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Nu mai ai Pokeballs - {0} PC{1} lipsă"
+      "Value": "Nicio pokeball - Am ratat un pokemon {0} cu CP {1}"
+    },
+    {
+      "Key": "waitingForMorePokemonToEvolve",
+      "Value": "Se așteaptă evoluarea pokemonului {0} odată ce alți {1} sunt prinși! ({2}/{3} pentru inventar {4}%)"
+    },
+    {
+      "Key": "useLuckyEggsMinPokemonAmountTooHigh",
+      "Value": "Ouăle norocoase nu vor fi folosite niciodată cu UseLuckyEggsMinPokemonAmount setat pe {0}, folosește în schimb <= {1}"
+    },
+    {
+      "Key": "catchMorePokemonToUseLuckyEgg",
+      "Value": "Prinde încă {0} pokemon(i) pentru a folosi un ou norocos!"
+    },
+    {
+      "Key": "eventUseBerry",
+      "Value": "Folosite {0} | {1} rămase"
+    },
+    {
+      "Key": "itemRazzBerry",
+      "Value": "Zmeură"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Încercare #{1} - {0}"
+      "Value": "{0} Încercarea #{1}"
     },
     {
       "Key": "catchStatus",
@@ -82,55 +110,55 @@
     },
     {
       "Key": "candies",
-      "Value": "{0} Bomboane"
+      "Value": "Bomboane: {0}"
     },
     {
       "Key": "unhandledGPXData",
-      "Value": "Date non conforme în fișierul GPX, ignorare."
+      "Value": "Date negestionate în fișierul GPX, se încearcă omiterea."
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokémons"
+      "Value": "Pokemoni"
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "IV"
+      "Value": "perfect"
     },
     {
       "Key": "commonWordName",
-      "Value": ""
+      "Value": "nume"
     },
     {
       "Key": "commonWordUnknown",
       "Value": "Necunoscut"
     },
     {
-      "Key": "displayHighestsCPHeader",
-      "Value": "Clasement pe PuncteCombat - PC"
+      "Key": "displayHighestsCpHeader",
+      "Value": "Clasament în funcție de CP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Clasament pe IV"
+      "Value": "Clasament în funcție de IV"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Clasament pe Nivel"
+      "Value": "Clasament în funcție de nivel"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Latitudine: {0} Longitudine: {1} pentru start."
+      "Value": "Asigură-te că latitudinea și longitudinea sunt corecte. Ieși din program în caz contrar! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Bag Ou Pokémon în incubator: mai rămân {0:0.00} kilometri de făcut"
+      "Value": "Se pune oul în incubator: {0:0.00} km rămași"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Incubație în curs : mai rămân {0:0.00} kilometri de făcut"
+      "Value": "Actualizare pentru statusului incubatorului: {0:0.00} km rămași"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Incubare terminată, ou spart, a ieșit: {0}"
+      "Value": "Oul incubat a eclozat: {0} | Nivel: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -142,35 +170,39 @@
     },
     {
       "Key": "logEntryInfo",
-      "Value": "INFORMAȚIE"
+      "Value": "INFO"
     },
     {
       "Key": "logEntryPokestop",
-      "Value": "PORTAL POKEMON"
+      "Value": "POKESTOP"
     },
     {
       "Key": "logEntryFarming",
-      "Value": "CULEG"
+      "Value": "FARMARE"
+    },
+    {
+      "Key": "logEntrySniper",
+      "Value": "SNIPER"
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "RECICLEZ"
+      "Value": "RECICLARE"
     },
     {
-      "Key": "logEntryPKMN",
-      "Value": "POKEMON"
+      "Key": "logEntryPkmn",
+      "Value": "PKMN"
     },
     {
       "Key": "logEntryTransfered",
-      "Value": "TRANSFER"
+      "Value": "TRANSFERAT"
     },
     {
       "Key": "logEntryEvolved",
-      "Value": "EVOLUȚIE"
+      "Value": "EVOLUAT"
     },
     {
       "Key": "logEntryBerry",
-      "Value": "CĂPȘUNĂ"
+      "Value": "ZMEURĂ"
     },
     {
       "Key": "logEntryEgg",
@@ -178,35 +210,47 @@
     },
     {
       "Key": "logEntryDebug",
-      "Value": "DEBUGARE"
+      "Value": "DEPANARE"
     },
     {
       "Key": "logEntryUpdate",
-      "Value": "UPDATE"
+      "Value": "ACTUALIZARE"
+    },
+    {
+      "Key": "logEntryNew",
+      "Value": "NOU"
     },
     {
       "Key": "loggingIn",
-      "Value": "Conectat cu {0}"
+      "Value": "Se autentifică folosind {0}"
     },
     {
       "Key": "ptcOffline",
-      "Value": "Serverele sunt offline sau identifiantul PTC (Pokemon Trainer Club) nu e corect. Încearcâ cu autentificare Google."
+      "Value": "Serverele PTC sunt probabil căzute sau datele de conectare sunt greșite. Încearcă cu autentificarea Google."
+    },
+    {
+      "Key": "accessTokenExpired",
+      "Value": "Tokenul pentru autentificarea PTC a eșuat. Se reautentifică..."
+    },
+    {
+      "Key": "invalidResponse",
+      "Value": "S-a primit un răspuns invalid de la serverul Niantic"
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "Nouă încercare in {0} secunde..."
+      "Value": "Se încearcă din nou în {0} secunde..."
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Contul nu e verificat! Opresc tot ..."
+      "Value": "Contul nu este verificat! Ies din aplicație..."
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Deschid pagina Google Device. Copy/Paste codul următor cu CTRL+C/CTRL+V în pagina din navigator"
+      "Value": "Se deschide pagina Google Device. Te rugăm să lipești codul folosind CTRL+V"
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Nu pot copia codul, introdu-l manual."
+      "Value": "Nu se poate copia în clipboard, introdu codul manual"
     },
     {
       "Key": "couldntCopyToClipboard2",
@@ -214,111 +258,99 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Cale reală detectată, utilizare de fișier UserSettings.settings"
+      "Value": "Călătorie realistică detectată, se folosesc setările implicite din interiorul config.json"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Cale ireală detectată la {0}, utilizare de coordonate salvate în fișierul Coords.ini"
+      "Value": "Călătorie nerealistică la {0}, se folosește ultima locație salvată din LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Coordonatele definite in fișierul \"Coords.ini\" sunt incorecte, utilizre coordonate implicite."
+      "Value": "Coordonatele din fișierul \"LastPos.ini\" sunt invalide, se folosesc coordonatele implicite"
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Botul este ultima versiune, nici un update ( v{0} )."
+      "Value": "Perfect! Ai deja cea mai nouă versiune ({0})"
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "Update auto este dezactivat, mergi la: {0}\n "
+      "Value": "Autoactualizatorul este dezactivat. Obține cea mai nouă lansare de pe adresa: {0}\n "
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Descarc update bot..."
+      "Value": "Se descarcă și se aplică actualizarea..."
     },
     {
       "Key": "finishedDownloadingRelease",
-      "Value": "Descărcare update - OK"
+      "Value": "S-a încheiat descărcarea celei mai noi lansări..."
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "Dezarhivaj update - OK"
+      "Value": "S-a încheiat despachetarea fișierelor..."
     },
     {
       "Key": "FinishedTransferringConfig",
-      "Value": "Transfer fișiere config - OK"
+      "Value": "S-a încheiat transferarea configului tău la noua versiune..."
     },
     {
       "Key": "updateFinished",
-      "Value": "Update - OK . Acuma restartează botul (închide fereastra)."
+      "Value": "Actualizare încheiată, poți închide această fereastră acum."
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Caut bastonașe parfumate..."
+      "Value": "Se caută pokemoni atrași de bastonașe parfumate..."
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Caut pokémoni..."
+      "Value": "Se caută pokemoni..."
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Caut capcane pokémoni..."
+      "Value": "Se caută pokemoni atrași de momeală..."
     },
     {
       "Key": "pokemonSkipped",
-      "Value": "{0} ignorat"
+      "Value": "Omis {0}"
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Nu mai există pokeball în inventar, captură Pokemon imposibilă!"
+      "Value": "Nu ai nicio pokeball în inventar, niciun pokemon nu mai poate fi prins!"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Current Inventory] Mingi normale: {0} | Mingi Great: {1} | Mingi Ultra: {2} | Mingi Master: {3}"
+      "Value": "Pokeball în prezent: {0} | Greatball: {1} | Ultraball: {2} | Masterball: {3}"
     },
     {
-      "Key": "checkingForBallsToRecycle",
-      "Value": "Verific mingi pentru reciclare, păstrez {0}"
+      "Key": "currentItemInv",
+      "Value": "Poțiuni totale în prezent: {0} | Reînvieri totale: {1} | Zmeure: {2} | Bastonașe parfumate totale: {3} | Ouă norocoase: {4} | Momeli: {5}"
     },
     {
-      "Key": "checkingForPotionsToRecycle",
-      "Value": "Verific poțiuni pentru reciclare, păstrez {0}"
+      "Key": "maxItemsCombinedOverMaxItemStorage",
+      "Value": "[Configurație invalidă] Numărul maxim de obiecte combinate (bile+poțiuni+reînvieri={0}) este peste limita maximă de stocare a obiectelor ({1})"
     },
     {
-      "Key": "checkingForRevivesToRecycle",
-      "Value": "Verific resuscitator pentru reciclare, păstrez {0}"
-    },
-    {
-      "Key": "pokeballsToKeepIncorrect",
-      "Value": "TotalAmountOfPokebalsToKeep nu este corect configurat. Valoarea este mai mică decât 1."
-    },
-    {
-      "Key": "potionsToKeepIncorrect",
-      "Value": "TotalAmountOfPotionsToKeep nu este corect configurat. Valoarea este mai mică decât 1."
-    },
-    {
-      "Key": "revivesToKeepIncorrect",
-      "Value": "TotalAmountOfRevivesToKeep nu este corect configurat. Valoarea este mai mică decât 1."
+      "Key": "recyclingQuietly",
+      "Value": "Se reciclează în liniște..."
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Inventarul de pokémoni este plin. Transfer în curs..."
+      "Value": "Inventarul de pokemoni este plin. se transferă pokemoni..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Inventarul de pokémoni este plin. Tranferă manual sau schimbă valoarea \"TransferDuplicatePokemon\" în \"true\"..."
+      "Value": "Inventarul de pokemoni este plin. Te rugăm să tranferi pokemoni manual sau schimbă valoarea \"TransferDuplicatePokemon\" pe \"true\" din setări..."
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Inventarul de obiecte este plin. Nu pot culege nimic!"
+      "Value": "Inventarul este plin, niciun obiect colectat!"
     },
     {
       "Key": "encounterProblem",
-      "Value": "O eroare a fost detectată: {0}"
+      "Value": "Problemă întâmpinată: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "O problemă a fost detectată cu capcana {0}"
+      "Value": "Problemă întâmpinată: Momirea pokemonului {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -326,35 +358,39 @@
     },
     {
       "Key": "pokemonRename",
-      "Value": "{0} ({1}) a fost rebotezat din {2} în {3}."
+      "Value": "Pokemonul {0} ({1}) a fost redenumit din {2} în {3}."
+    },
+    {
+      "Key": "pokemonFavorite",
+      "Value": "{0}% perfect {1} (CP {2}) *pus ca favorit*."
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Pokemon-Ignore-Filter] - {0} a fost ignorat, conform opționilor!"
+      "Value": "[Filtru de ignorare a pokemonilor] - Se ignoră {0} precum este definit în setări"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Capturare"
+      "Value": "Tentativă de capturare"
     },
     {
       "Key": "catchStatusError",
-      "Value": "Eșec"
+      "Value": "Eroare de capturare"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "A scăpat"
+      "Value": "Captura a scăpat"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "A fugit"
+      "Value": "Captura a fugit"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "Ratare"
+      "Value": "Captură ratată"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "Capturat"
+      "Value": "Capturat cu succes"
     },
     {
       "Key": "catchTypeNormal",
@@ -362,7 +398,7 @@
     },
     {
       "Key": "catchTypeLure",
-      "Value": "Capcana"
+      "Value": "Momire"
     },
     {
       "Key": "catchTypeIncense",
@@ -370,55 +406,55 @@
     },
     {
       "Key": "webSocketFailStart",
-      "Value": "Nu pot porni serverul WebSocket pe portul : {0}"
+      "Value": "Eșec la pornirea WebSocket pe portul: {0}"
     },
     {
       "Key": "statsTemplateString",
-      "Value": "Cont {0} - {1} - NIV: {2} | EXP/ORĂ: {3:0} | POKEMONI/ORĂ : {4:0} | Praf stele: {5:0} | Transfer: {6:0} | Reciclaj: {7:0}"
+      "Value": "{0} - Durată de funcționare {1} - Nivel: {2} | EXP/ORĂ: {3:0} | POKEMONI/ORĂ: {4:0} | Praf de stele: {5:0} | Transferați: {6:0} | Reciclați: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "Nivel {0} | -=: Următorul în {1}ore {2}min | EXP {3} din {4} :=-"
+      "Value": "{0} (Avansezi la următorul nivel în {1}h {2}min | {3:n0}/{4:n0} XP)"
     },
     {
       "Key": "requireInputText",
-      "Value": "Coordonatele sunt OK ? /!\\ Ban dacă prea departe de la ultima poziție într-un timp prea scurt /!\\ Apasă orice tastă pentru continuare..."
+      "Value": "Programul va continua după apăsarea tastei..."
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Validarea Google în două etape este activată, trebuie generată o parolă app și adaugată în auth.json"
+      "Value": "Din moment ce autentificarea Google cu doi factori este activată, va trebui să introduci o parolă specifică aplicației în auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "Deschid pagina parola app. Generează o parolă app pentru bot, alege Alta (Other) in Devices"
+      "Value": "Se deschid pagina de parole pentru aplicații Google. Te rugăm să creezi o parolă nouă pentru aplicație (alege Alta (Other) în Device)"
     },
     {
       "Key": "googleError",
-      "Value": "Eroare de autentificare: Verifică GoogleUsername și GooglePassword în auth.json!"
+      "Value": "Asigură-te că ai introdus e-mailul și parola corectă."
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Trebuie completat GoogleUsername și GooglePassword în auth.json , nu uita sa pui ghilimelele, exemplu \"contulmeugoogle@gmail.com\" si \"parolamea\""
+      "Value": "Va trebui să completezi GoogleUsername și GooglePassword în auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Trebuie completat PtcUsername și PtcPassword în auth.json!"
+      "Value": "Va trebui să completezi PtcUsername și PtcPassword în auth.json!"
     },
     {
       "Key": "snipeScan",
-      "Value": "[Sniper] Scanare în curs pentru {0}..."
+      "Value": "[Sniper] Se scanează pentru pokemoni țintibili la {0}..."
     },
     {
       "Key": "snipeScanEx",
-      "Value": "[Sniper] Țintesc un {0} cu {1} IV la adresa {2}..."
+      "Value": "[Sniper] Țintesc un pokemon {0} cu {1} IV la {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] Eșec scanare. Nu am găsit nici un pokemon."
+      "Value": "[Sniper] Niciun pokemon găsit pentru a fi țintit!"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Nu există suficiente mingi pentru țintire! ({0}/{1})"
+      "Value": "Insuficiente pokeball pentru a începe țintirea! ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -427,6 +463,158 @@
     {
       "Key": "displayHighestMove2Header",
       "Value": "MIȘCARE2"
+    },
+    {
+      "Key": "displayHighestCandy",
+      "Value": "Bomboane"
+    },
+    {
+      "Key": "ipBannedError",
+      "Value": "Conexiune refuzată. IP-ul tău s-ar putea să fi fost trecut pe lista neagră de Niantic. Se iese din aplicație.."
+    },
+    {
+      "Key": "noEggsAvailable",
+      "Value": "Niciun ou disponibil"
+    },
+    {
+      "Key": "useLuckyEggActive",
+      "Value": "Ou norocos activ deja"
+    },
+    {
+      "Key": "usedLuckyEgg",
+      "Value": "Ou norocos folosit"
+    },
+    {
+      "Key": "useLuckyEggAmount",
+      "Value": "Ouă norocoase în inventar: {0}"
+    },
+    {
+      "Key": "noIncenseAvailable",
+      "Value": "Niciun bastonaș parfumat disponibil"
+    },
+    {
+      "Key": "useIncenseActive",
+      "Value": "Bastonaș parfumat activ deja"
+    },
+    {
+      "Key": "useIncenseAmount",
+      "Value": "Bastonașe parfumate în inventar: {0}"
+    },
+    {
+      "Key": "usedIncense",
+      "Value": "Folosit un bastonaș parfumat"
+    },
+    {
+      "Key": "amountPkmSeenCaught",
+      "Value": "Cantitatea de pokemoni văzută: {0}/151, cantitatea de pokemoni prinsă: {1}/151"
+    },
+    {
+      "Key": "pkmPotentialEvolveCount",
+      "Value": "[Evoluări] Evoluări potențiale: {0}"
+    },
+    {
+      "Key": "pkmNotEnoughRessources",
+      "Value": "Upgradarea pokemonului a eșuat. Resurse insuficiente"
+    },
+    {
+      "Key": "snipeServerOffline",
+      "Value": "Serverul de țintire este offline. Se trece peste..."
+    },
+    {
+      "Key": "firstStartPrompt",
+      "Value": "Aceasta este prima ta pornire, dorești să începi configurarea? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguagePrompt",
+      "Value": "Dorești să schimbi limba implicită? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguageCodePrompt",
+      "Value": "Te rugăm să introduci un cod nou al limbii"
+    },
+    {
+      "Key": "firstStartLanguageConfirm",
+      "Value": "Codul limbii aplicate: {0}"
+    },
+    {
+      "Key": "promptError",
+      "Value": "[EROARE DE INTRODUCERE] Eroare cu introducerea, te rugăm să introduci  '{0}' sau '{1}"
+    },
+    {
+      "Key": "firstStartAutoGenSettings",
+      "Value": "Fișierul config/auth generat automat și trebuie completat înainte de a continua"
+    },
+    {
+      "Key": "firstStartSetupAccount",
+      "Value": "### Se configurează un nou CONT DE UTILIZATOR ###"
+    },
+    {
+      "Key": "firstStartSetupTypePrompt",
+      "Value": "Te rugăm să selectezi tipul contului: {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTypeConfirm",
+      "Value": "Tipul contului ales: {0}"
+    },
+    {
+      "Key": "firstStartSetupTypePromptError",
+      "Value": "[EROARE] s-a trimis un tip incorect al contului, te rugăm să alegi '{0}' sau '{1}'"
+    },
+    {
+      "Key": "firstStartSetupUsernamePrompt",
+      "Value": "Te rugăm să introduci un nume de utilizator"
+    },
+    {
+      "Key": "firstStartSetupUsernameConfirm",
+      "Value": "Nume de utilizator acceptat: {0}"
+    },
+    {
+      "Key": "firstStartSetupPasswordPrompt",
+      "Value": "Te rugăm să introduci o parolă"
+    },
+    {
+      "Key": "firstStartSetupPasswordConfirm",
+      "Value": "Parolă acceptată: {0}"
+    },
+    {
+      "Key": "firstStartAccountCompleted",
+      "Value": "### Contul de utilizator încheiat ###"
+    },
+    {
+      "Key": "firstStartDefaultLocationPrompt",
+      "Value": "Dorești să configurezi o locație nouă implicită? {0}/{1}"
+    },
+    {
+      "Key": "firstStartDefaultLocationSet",
+      "Value": "Locație implicită aplicată"
+    },
+    {
+      "Key": "firstStartDefaultLocation",
+      "Value": "### Configurarea poziției implicite ###"
+    },
+    {
+      "Key": "firstStartSetupDefaultLocationError",
+      "Value": "[EROARE] Te rugăm să introduci doar o VALOARE, spre exemplu: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Te rugăm să introduci o latitudine (Click-dreapta pentru a lipi)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Latitudine acceptată: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Te rugăm să introduci o longitudine (Click-dreapta pentru a lipi)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Longitudine acceptată: {0}"
+    },
+    {
+      "Key": "firstStartSetupCompleted",
+      "Value": "### CONFIGURAREA CONFIGULUI ÎNCHEIATĂ ###"
     }
   ],
   "PokemonStrings": [
@@ -544,7 +732,7 @@
     },
     {
       "Key": "nidoranFemale",
-      "Value": "NidoranF"
+      "Value": "NidoranFemale"
     },
     {
       "Key": "nidorina",
@@ -556,7 +744,7 @@
     },
     {
       "Key": "nidoranMale",
-      "Value": "NidoranM"
+      "Value": "NidoranMale"
     },
     {
       "Key": "nidorino",
