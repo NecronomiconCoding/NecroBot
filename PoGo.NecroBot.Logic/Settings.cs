@@ -1041,7 +1041,12 @@ namespace PoGo.NecroBot.Logic
 
         double ISettings.DefaultAltitude
         {
-            get { return _settings.DefaultAltitude; }
+            get
+            {
+                return _settings.DefaultAltitude +
+                       _rand.NextDouble()*
+                       ((double) 5/Math.Cos(_settings.DefaultAltitude));
+            }
 
             set { _settings.DefaultAltitude = value; }
         }
