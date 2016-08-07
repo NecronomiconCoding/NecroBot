@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "Incienso usado, Te quedan: {0}"
+      "Value": "Incienso usado. Te quedan: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
@@ -62,7 +62,7 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Fallado {0}. El resultado fue {1}, parando evolución {2}"
+      "Value": "Falló {0}. El resultado fue {1}, parando evolución {2}"
     },
     {
       "Key": "eventPokemonTransferred",
@@ -74,11 +74,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} | Nivel: {3} PC: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | con {9} (quedan {10}). | {11} EXP ganada | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "{0}) | ({1}) {2} Nivel: {3} CP: ({4}/{5}) IV: {6}% | Prob: {7}% | {8}m dist | con {9} (quedan {10}). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -221,12 +221,24 @@
       "Value": "ACTUALIZAR"
     },
     {
+      "Key": "logEntryNew",
+      "Value": "NUEVO"
+    },
+    {
       "Key": "loggingIn",
       "Value": "Autenticando con {0}"
     },
     {
       "Key": "ptcOffline",
       "Value": "Es probable que los servidores de PTC estén caídos o que tus datos de acceso sean incorrectos. Prueba con Google."
+    },
+    {
+      "Key": "accessTokenExpired",
+      "Value": "PTC Login Token expiró. Reautenticando..."
+    },
+    {
+      "Key": "invalidResponse",
+      "Value": "Se ha recibido una respuesta invalida del servidor Niantic."
     },
     {
       "Key": "tryingAgainIn",
@@ -306,7 +318,7 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "No tienes Poké Balls en el inventario, no se puede atrapar más Pokémon."
+      "Value": "No tienes Poké Balls en el inventario, ¡no se puede atrapar más Pokémon!"
     },
     {
       "Key": "currentPokeballInv",
@@ -498,7 +510,7 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "Número de Pokémon vistos: {0}/151, Número de Pokémon capturados: {1}/151"
+      "Value": "Cantidad de Pokémon vistos: {0}/151, Cantidad de Pokémon capturados: {1}/151"
     },
     {
       "Key": "pkmPotentialEvolveCount",
@@ -511,6 +523,102 @@
     {
       "Key": "snipeServerOffline",
       "Value": "[Sniper] Parece que el servidor de Snipping está caído. Saliendo..."
+    }
+  {
+      "Key": "firstStartPrompt",
+      "Value": "Esta es la primera vez que inicias el bot, ¿quieres comenzar la instalación? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguagePrompt",
+      "Value": "¿Te gustaría cambiar el idioma predeterminado? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguageCodePrompt",
+      "Value": "Por favor, introduce el código del idioma"
+    },
+    {
+      "Key": "firstStartLanguageConfirm",
+      "Value": "Código de idioma aplicado: {0}"
+    },
+    {
+      "Key": "promptError",
+      "Value": "[INPUT ERROR] Error con la entrada, por favor, introduce '{0}' o '{1}"
+    },
+    {
+      "Key": "firstStartAutoGenSettings",
+      "Value": "Archivo Config/Auth generado de forma automática y debe completarse antes de continuar."
+    },
+    {
+      "Key": "firstStartSetupAccount",
+      "Value": "### Creación de nueva cuenta de usuario ###"
+    },
+    {
+      "Key": "firstStartSetupTypePrompt",
+      "Value": "Por favor, selecciona un tipo de cuenta: {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTypeConfirm",
+      "Value": "Tipo de cuenta elegida: {0}"
+    },
+    {
+      "Key": "firstStartSetupTypePromptError",
+      "Value": "[ERROR] Tipo de cuenta incorrecto, por favor elije '{0}' o '{1}'"
+    },
+    {
+      "Key": "firstStartSetupUsernamePrompt",
+      "Value": "Por favor, ingresa un nombre de usuario"
+    },
+    {
+      "Key": "firstStartSetupUsernameConfirm",
+      "Value": "Nombre de usuario aceptado: {0}"
+    },
+    {
+      "Key": "firstStartSetupPasswordPrompt",
+      "Value": "Por favor, ingresa una contraseña"
+    },
+    {
+      "Key": "firstStartSetupPasswordConfirm",
+      "Value": "Contraseña aceptada: {0}"
+    },
+    {
+      "Key": "firstStartAccountCompleted",
+      "Value": "### Cuenta de usuario COMPLETADA ###"
+    },
+    {
+      "Key": "firstStartDefaultLocationPrompt",
+      "Value": "¿Te gustaría establecer una nueva ubicación predeterminada? {0}/{1}"
+    },
+    {
+      "Key": "firstStartDefaultLocationSet",
+      "Value": "Ubicación predeterminada Aplicada"
+    },
+    {
+      "Key": "firstStartDefaultLocation",
+      "Value": "### Ajuste de ubicación predeterminada ###"
+    },
+    {
+      "Key": "firstStartSetupDefaultLocationError",
+      "Value": "[ERROR] Por favor, introduce solamente un VALOR. Por ejemplo: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Por favor, introduce una latitud (Recuerda... Clic derecho para pegar)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Latitud aceptada: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Por favor, introduce una Longitud (Recuerda... Clic derecho para pegar)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Longitud acepteda: {0}"
+    },
+    {
+      "Key": "firstStartSetupCompleted",
+      "Value": "### Completada la configuración ###"
     }
   ],
   "PokemonStrings": [
@@ -628,7 +736,7 @@
     },
     {
       "Key": "nidoranFemale",
-      "Value": "Nidoran Hembra"
+      "Value": "Nidoran ♀"
     },
     {
       "Key": "nidorina",
@@ -640,7 +748,7 @@
     },
     {
       "Key": "nidoranMale",
-      "Value": "Nidoran Macho"
+      "Value": "Nidoran ♂"
     },
     {
       "Key": "nidorino",
@@ -1120,7 +1228,7 @@
     }
   ],
   "PokemonMovesetStrings": [
-	  {
+    {
       "Key": "moveUnset",
       "Value": "MoveUnset"
     },
