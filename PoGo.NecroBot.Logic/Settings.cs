@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 
 #endregion
 
@@ -37,7 +38,7 @@ namespace PoGo.NecroBot.Logic
         public string UseProxyUsername;
         public string UseProxyPassword;
         //devicedata
-        [DefaultValue("529e8aa6201f78b5")]
+        [DefaultValue("8525f5d8201f78b5")]
         public string DeviceId;
         [DefaultValue("msm8994")]
         public string AndroidBoardName;
@@ -64,6 +65,24 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("OnePlus/OnePlus2/OnePlus2:6.0.1/MMB29M/1447840820:user/release-keys")]
         public string FirmwareFingerprint;
 
+        public AuthSettings()
+        {
+            InitializePropertyDefaultValues(this);
+        }
+
+        public void InitializePropertyDefaultValues(object obj)
+        {
+            FieldInfo[] fields = obj.GetType().GetFields();
+
+            foreach (FieldInfo field in fields)
+            {
+                var d = field.GetCustomAttribute<DefaultValueAttribute>();
+
+                if (d != null)
+                    field.SetValue(obj, d.Value);
+            }
+        }
+
         public void Load( string path )
         {
             try
@@ -77,13 +96,13 @@ namespace PoGo.NecroBot.Logic
 
                     var settings = new JsonSerializerSettings();
                     settings.Converters.Add( new StringEnumConverter { CamelCaseText = true } );
-
                     JsonConvert.PopulateObject( input, this, settings );
+
+                    if (this.DeviceId == "8525f5d8201f78b5")
+                        this.DeviceId = this.RandomString(16);
                 }
-                else
-                {
-                    Save( _filePath );
-                }
+
+                Save( _filePath );
             }
             catch( JsonReaderException exception )
             {
@@ -109,18 +128,24 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
-        public void Save( string path )
+        public void Save(string fullPath)
         {
-            var output = JsonConvert.SerializeObject( this, Formatting.Indented,
-                new StringEnumConverter { CamelCaseText = true } );
-
-            var folder = Path.GetDirectoryName( path );
-            if( folder != null && !Directory.Exists( folder ) )
+            var jsonSerializeSettings = new JsonSerializerSettings
             {
-                Directory.CreateDirectory( folder );
+                DefaultValueHandling = DefaultValueHandling.Include,
+                Formatting = Formatting.Indented,
+                Converters = new JsonConverter[] { new StringEnumConverter { CamelCaseText = true } }
+            };
+
+            var output = JsonConvert.SerializeObject(this, jsonSerializeSettings);
+
+            var folder = Path.GetDirectoryName(fullPath);
+            if (folder != null && !Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
             }
 
-            File.WriteAllText( path, output );
+            File.WriteAllText(fullPath, output);
         }
 
         public void Save()
@@ -128,6 +153,30 @@ namespace PoGo.NecroBot.Logic
             if( !string.IsNullOrEmpty( _filePath ) )
             {
                 Save( _filePath );
+            }
+        }
+
+        private string RandomString(int length, string alphabet = "abcdefghijklmnopqrstuvwxyz0123456789")
+        {
+            var outOfRange = Byte.MaxValue + 1 - (Byte.MaxValue + 1) % alphabet.Length;
+
+            return string.Concat(
+                Enumerable
+                    .Repeat(0, Int32.MaxValue)
+                    .Select(e => this.RandomByte())
+                    .Where(randomByte => randomByte < outOfRange)
+                    .Take(length)
+                    .Select(randomByte => alphabet[randomByte % alphabet.Length])
+            );
+        }
+
+        private byte RandomByte()
+        {
+            using (var randomizationProvider = new RNGCryptoServiceProvider())
+            {
+                var randomBytes = new byte[1];
+                randomizationProvider.GetBytes(randomBytes);
+                return randomBytes.Single();
             }
         }
     }
