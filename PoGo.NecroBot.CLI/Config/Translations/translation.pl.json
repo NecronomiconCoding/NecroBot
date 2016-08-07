@@ -73,8 +73,12 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2}   [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | {11} | Szerokość: {12} Długość: {13}"
+      "Key": "eventPokemonCaptureSuccess",
+      "Value": "({0}) | ({1}) {2}   [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | Zdobył EXPa: {11} | {12} | Szerokość: {13} Długość: {14}"
+    },
+    {
+      "Key": "eventPokemonCaptureFailed",
+      "Value": "({0}) | ({1}) {2}   [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | Szerokość: {11} Długość: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -217,12 +221,24 @@
       "Value": "AKTUALIZACJA"
     },
     {
+      "Key": "logEntryNew",
+      "Value": "NOWY"
+    },
+    {
       "Key": "loggingIn",
       "Value": "Logujesz się przy użyciu: Konta {0}"
     },
     {
       "Key": "ptcOffline",
       "Value": "Serwery PTC najprawdopodobniej nie działają albo Twoje dane logowania są błędne. Spróbuj użyć konta Google"
+    },
+    {
+      "Key": "accessTokenExpired",
+      "Value": "Token logowania PTC wygasł. Ponowne logowanie..."
+    },
+    {
+      "Key": "invalidResponse",
+      "Value": "Otrzymano niepoprawną odpowiedź od serwera Niantic"
     },
     {
       "Key": "tryingAgainIn",
@@ -507,6 +523,102 @@
     {
       "Key": "snipeServerOffline",
       "Value": "[Snajper] Serwer jest wyłączony. Pomijam..."
+    },
+    {
+      "Key": "firstStartPrompt",
+      "Value": "To są Twóje pierwsze kroki. Chciałbyś rozpocząć początkową konfigurację? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguagePrompt",
+      "Value": "Masz ochotę zmienić język domyślny? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguageCodePrompt",
+      "Value": "Wpisz nowy kod języka"
+    },
+    {
+      "Key": "firstStartLanguageConfirm",
+      "Value": "Wybrany kod języka: {0}"
+    },
+    {
+      "Key": "promptError",
+      "Value": "[ERROR] Błąd wejścia, podaj '{0}' lub '{1}"
+    },
+    {
+      "Key": "firstStartAutoGenSettings",
+      "Value": "Musisz poczekać na automatyczne wygenerowanie plików Config/Auth..."
+    },
+    {
+      "Key": "firstStartSetupAccount",
+      "Value": "### Tworzenie nowego konta użytkownika ###"
+    },
+    {
+      "Key": "firstStartSetupTypePrompt",
+      "Value": "Proszę wybrać typ konta: {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTypeConfirm",
+      "Value": "Wybrany typ konta: {0}"
+    },
+    {
+      "Key": "firstStartSetupTypePromptError",
+      "Value": "[BŁĄD] Wybrano nieprawidłowy typ konta, musisz wybrać '{0}' lub '{1}'"
+    },
+    {
+      "Key": "firstStartSetupUsernamePrompt",
+      "Value": "Proszę wprowadzić nazwę użytkownika"
+    },
+    {
+      "Key": "firstStartSetupUsernameConfirm",
+      "Value": "Zaakceptowana nazwa użytkownika: {0}"
+    },
+    {
+      "Key": "firstStartSetupPasswordPrompt",
+      "Value": "Proszę wprowadzić hasło"
+    },
+    {
+      "Key": "firstStartSetupPasswordConfirm",
+      "Value": "Zaakceptowane hasło: {0}"
+    },
+    {
+      "Key": "firstStartAccountCompleted",
+      "Value": "### Konto użytkownika utworzone ###"
+    },
+    {
+      "Key": "firstStartDefaultLocationPrompt",
+      "Value": "Chcesz ustawić nową lokalizacje domyślną? {0}/{1}"
+    },
+    {
+      "Key": "firstStartDefaultLocationSet",
+      "Value": "Domyślna lokalizacja zastosowana"
+    },
+    {
+      "Key": "firstStartDefaultLocation",
+      "Value": "### Ustawienie domyślnej pozycji ###"
+    },
+    {
+      "Key": "firstStartSetupDefaultLocationError",
+      "Value": "[BŁĄD] Proszę wpisywać tylko wartość. Na przykład: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Proszę wprowadzić Szerokość: (PPM, aby wkleić)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Zapisana Szerokość: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Proszę wprowadzić Długość: (PPM, aby wkleić)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Zapisana Długość: {0}"
+    },
+    {
+      "Key": "firstStartSetupCompleted",
+      "Value": "### Ustawianie configu zakończone ###"
     }
   ],
   "PokemonStrings": [
@@ -624,7 +736,7 @@
     },
     {
       "Key": "nidoranFemale",
-      "Value": "NidoranF"
+      "Value": "NidoranFemale"
     },
     {
       "Key": "nidorina",
@@ -636,7 +748,7 @@
     },
     {
       "Key": "nidoranMale",
-      "Value": "NidoranM"
+      "Value": "NidoranMale"
     },
     {
       "Key": "nidorino",
@@ -1116,7 +1228,7 @@
     }
   ],
   "PokemonMovesetStrings": [
-	  {
+    {
       "Key": "moveUnset",
       "Value": "MoveUnset"
     },
