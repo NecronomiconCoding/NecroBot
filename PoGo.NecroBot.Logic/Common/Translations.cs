@@ -813,8 +813,8 @@ namespace PoGo.NecroBot.Logic.Common
             var translationPath = Path.Combine(logicSettings.GeneralConfigPath, "translations");
             var fullPath = Path.Combine(translationPath, "translation." + translationsLanguageCode + ".json");
 
-            translations = new Translation();
-            translations.Save(Path.Combine(translationPath, "translation." + translationsLanguageCode + ".json"));
+            //translations = new Translation();
+            //translations.Save(Path.Combine(translationPath, "translation." + translationsLanguageCode + ".json"));
 
             if (File.Exists(fullPath))
             {
@@ -863,7 +863,8 @@ namespace PoGo.NecroBot.Logic.Common
             else
             {
                 translations = new Translation();
-                translations.Save(Path.Combine(translationPath, "translation.en.json"));
+                translations.Save(fullPath);
+                //translations.Save(Path.Combine(translationPath, "translation.en.json"));
             }
 
             return translations;
