@@ -228,6 +228,14 @@
       "Value":
         "PTC сервера возможно не работают ИЛИ неверно указаны данные учетной записи. Попробуйте использовать логин от Google аккаунта"
     },
+	{
+      "Key": "accessTokenExpired",
+      "Value": "PTC Token входа истек. Перезаходим..."
+    },
+    {
+      "Key": "invalidResponse",
+      "Value": "Получен недопустимый ответ от сервера Niantic"
+    },
     {
       "Key": "tryingAgainIn",
       "Value": "Пробуем снова через {0} сек..."
@@ -514,6 +522,102 @@
     {
       "Key": "snipeServerOffline",
       "Value": "Sniping сервер не доступен. Пропускаем..."
+    },
+    {
+      "Key": "firstStartPrompt",
+      "Value": "Это ваш первый старт, вы хотели бы начать установку? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguagePrompt",
+      "Value": "Вы хотели бы сменить язык используемый по умолчанию? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguageCodePrompt",
+      "Value": "Пожалуйста, введите новый код языка"
+    },
+    {
+      "Key": "firstStartLanguageConfirm",
+      "Value": "Применен код языка: {0}"
+    },
+    {
+      "Key": "promptError",
+      "Value": "[ОШИБКА ВВОДА] Ошибка ввода, введите '{0}' или '{1}"
+    },
+    {
+      "Key": "firstStartAutoGenSettings",
+      "Value": "Конфигурационный файл генерируется автоматически и должен быть завершен, прежде чем продолжить"
+    },
+    {
+      "Key": "firstStartSetupAccount",
+      "Value": "### Настройка новой УЧЕТНОЙ ЗАПИСИ ###"
+    },
+    {
+      "Key": "firstStartSetupTypePrompt",
+      "Value": "Пожалуйста, выберите тип учетной записи: {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTypeConfirm",
+      "Value": "Выбран тип аккаунта: {0}"
+    },
+    {
+      "Key": "firstStartSetupTypePromptError",
+      "Value": "[ОШИБКА] передан неправильный тип учетной записи, выберите '{0}' или '{1}'"
+    },
+    {
+      "Key": "firstStartSetupUsernamePrompt",
+      "Value": "Пожалуйста, введите имя пользователя"
+    },
+    {
+      "Key": "firstStartSetupUsernameConfirm",
+      "Value": "Принято имя пользователя: {0}"
+    },
+    {
+      "Key": "firstStartSetupPasswordPrompt",
+      "Value": "Пожалуйста, введите пароль"
+    },
+    {
+      "Key": "firstStartSetupPasswordConfirm",
+      "Value": "Принят пароль: {0}"
+    },
+    {
+      "Key": "firstStartAccountCompleted",
+      "Value": "### Учетная запись создана ###"
+    },
+    {
+      "Key": "firstStartDefaultLocationPrompt",
+      "Value": "Вы хотите установить новые координаты используемые по умолчанию? {0}/{1}"
+    },
+    {
+      "Key": "firstStartDefaultLocationSet",
+      "Value": "Приняты координаты используемые по умолчанию"
+    },
+    {
+      "Key": "firstStartDefaultLocation",
+      "Value": "### Настройка локации используемой по умолчанию ###"
+    },
+    {
+      "Key": "firstStartSetupDefaultLocationError",
+      "Value": "[ОШИБКА] пожалуйста, введите значение, например: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Пожалуйста, введите широту (Щелкните правой кнопкой мыши, чтобы вставить)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Принята широта: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Пожалуйста, введите долготу (Щелкните правой кнопкой мыши, чтобы вставить)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Принята долгота: {0}"
+    },
+    {
+      "Key": "firstStartSetupCompleted",
+      "Value": "### ЗАВВЕРШЕНА УСТАНОВКА CONFIG'a ###"
     }
   ],
 	"PokemonStrings": [
