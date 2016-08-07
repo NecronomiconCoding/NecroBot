@@ -526,7 +526,7 @@
     },
     {
       "Key": "firstStartPrompt",
-      "Value": "To są Twóje pierwsze kroki. Chciałbyś rozpocząć początkową konfigurację? {0}/{1}"
+      "Value": "To są Twoje pierwsze kroki. Chciałbyś rozpocząć początkową konfigurację? {0}/{1}"
     },
     {
       "Key": "firstStartLanguagePrompt",
@@ -566,7 +566,7 @@
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
-      "Value": "Proszę wprowadzić nazwę użytkownika"
+      "Value": "Proszę wprowadzić nazwę użytkownika:"
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
@@ -574,7 +574,7 @@
     },
     {
       "Key": "firstStartSetupPasswordPrompt",
-      "Value": "Proszę wprowadzić hasło"
+      "Value": "Proszę wprowadzić hasło:"
     },
     {
       "Key": "firstStartSetupPasswordConfirm",
