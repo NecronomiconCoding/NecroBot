@@ -335,6 +335,8 @@ namespace PoGo.NecroBot.Logic
         public bool UsePokemonSniperFilterOnly;
         [DefaultValue(14251)]
         public int WebSocketPort;
+        [DefaultValue(false)]
+        public bool OnlyCatchHigherCpThanCurrentMinimum;
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
@@ -1074,6 +1076,7 @@ namespace PoGo.NecroBot.Logic
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
         public ICollection<PokemonId> PokemonToUseMasterball => _settings.PokemonToUseMasterball;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
+        public bool OnlyCatchHigherCpThanCurrentMinimum => _settings.OnlyCatchHigherCpThanCurrentMinimum;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;

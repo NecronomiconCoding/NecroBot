@@ -256,6 +256,15 @@ namespace PoGo.NecroBot.Logic
                 .FirstOrDefault();
         }
 
+        public async Task<PokemonData> GetLowestPokemonOfTypeByCp(PokemonId pokemon)
+        {
+            var myPokemon = await GetPokemons();
+            var pokemons = myPokemon.ToList();
+            return pokemons.Where(x => x.PokemonId == pokemon)
+                .OrderBy(x => x.Cp)
+                .FirstOrDefault();
+        }
+
         public async Task<IEnumerable<PokemonData>> GetHighestsCp(int limit)
         {
             var myPokemon = await GetPokemons();
