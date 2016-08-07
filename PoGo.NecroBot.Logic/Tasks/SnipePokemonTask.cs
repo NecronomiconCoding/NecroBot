@@ -165,8 +165,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var st = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
                     var t = DateTime.Now.ToUniversalTime() - st;
                     var currentTimestamp = t.TotalMilliseconds;
-
-                    var pokemonIds = session.LogicSettings.PokemonToSnipe.Pokemon;
+                    List<PokemonId> pokemonIds = new List<PokemonId>();
+                    if (session.LogicSettings.SnipePokemonNotInPokedex)
+                    {
+                        var PokeDex = await session.Inventory.GetPokeDexItems();
+                        var pokemonOnlyList = session.LogicSettings.PokemonToSnipe.Pokemon;
+                        var capturedPokemon = PokeDex.Where(i => i.InventoryItemData.PokedexEntry.TimesCaptured >= 1).Select(i => i.InventoryItemData.PokedexEntry.PokemonId);
+                        var pokemonToCapture = Enum.GetValues(typeof(PokemonId)).Cast<PokemonId>().Except(capturedPokemon);
+                        pokemonIds = pokemonOnlyList.Union(pokemonToCapture).ToList();
+                    }
+                    else
+                    {
+                         pokemonIds = session.LogicSettings.PokemonToSnipe.Pokemon;
+                    }
 
                     if (session.LogicSettings.UseSnipeLocationServer)
                     {

@@ -2,6 +2,9 @@
 
 using System;
 using GeoCoordinatePortable;
+using System.Net;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 #endregion
 
@@ -23,6 +26,16 @@ namespace PoGo.NecroBot.Logic.Utils
         {
             return CalculateDistanceInMeters(sourceLocation.Latitude, sourceLocation.Longitude,
                 destinationLocation.Latitude, destinationLocation.Longitude);
+        }
+
+        public static double getElevation(double lat, double lon)
+        {
+            Random random = new Random();
+            double maximum = 11.0f;
+            double minimum = 8.6f;
+            double return1 = random.NextDouble() * (maximum - minimum) + minimum;
+
+            return return1;
         }
 
         public static GeoCoordinate CreateWaypoint(GeoCoordinate sourceLocation, double distanceInMeters,
@@ -50,7 +63,7 @@ namespace PoGo.NecroBot.Logic.Utils
             // adjust toLonRadians to be in the range -180 to +180...
             targetLongitudeRadians = (targetLongitudeRadians + 3*Math.PI)%(2*Math.PI) - Math.PI;
 
-            return new GeoCoordinate(ToDegrees(targetLatitudeRadians), ToDegrees(targetLongitudeRadians));
+            return new GeoCoordinate(ToDegrees(targetLatitudeRadians), ToDegrees(targetLongitudeRadians), getElevation(sourceLocation.Latitude, sourceLocation.Longitude));
         }
 
         public static GeoCoordinate CreateWaypoint(GeoCoordinate sourceLocation, double distanceInMeters,

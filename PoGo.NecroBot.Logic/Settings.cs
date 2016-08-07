@@ -1,10 +1,12 @@
 #region using directives
 
+using GeoCoordinatePortable;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using PokemonGo.RocketAPI;
@@ -15,6 +17,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 
 #endregion
 
@@ -36,6 +39,51 @@ namespace PoGo.NecroBot.Logic
         public bool UseProxyAuthentication;
         public string UseProxyUsername;
         public string UseProxyPassword;
+        //devicedata
+        [DefaultValue("8525f5d8201f78b5")]
+        public string DeviceId;
+        [DefaultValue("msm8994")]
+        public string AndroidBoardName;
+        [DefaultValue("unknown")]
+        public string AndroidBootloader;
+        [DefaultValue("OnePlus")]
+        public string DeviceBrand;
+        [DefaultValue("OnePlus2")]
+        public string DeviceModel;
+        [DefaultValue("ONE A2003_24_160604")]
+        public string DeviceModelIdentifier;
+        [DefaultValue("qcom")]
+        public string DeviceModelBoot;
+        [DefaultValue("OnePlus")]
+        public string HardwareManufacturer;
+        [DefaultValue("ONE A2003")]
+        public string HardwareModel;
+        [DefaultValue("OnePlus2")]
+        public string FirmwareBrand;
+        [DefaultValue("dev-keys")]
+        public string FirmwareTags;
+        [DefaultValue("user")]
+        public string FirmwareType;
+        [DefaultValue("OnePlus/OnePlus2/OnePlus2:6.0.1/MMB29M/1447840820:user/release-keys")]
+        public string FirmwareFingerprint;
+
+        public AuthSettings()
+        {
+            InitializePropertyDefaultValues(this);
+        }
+
+        public void InitializePropertyDefaultValues(object obj)
+        {
+            FieldInfo[] fields = obj.GetType().GetFields();
+
+            foreach (FieldInfo field in fields)
+            {
+                var d = field.GetCustomAttribute<DefaultValueAttribute>();
+
+                if (d != null)
+                    field.SetValue(obj, d.Value);
+            }
+        }
 
         public void Load( string path )
         {
@@ -50,13 +98,13 @@ namespace PoGo.NecroBot.Logic
 
                     var settings = new JsonSerializerSettings();
                     settings.Converters.Add( new StringEnumConverter { CamelCaseText = true } );
-
                     JsonConvert.PopulateObject( input, this, settings );
+
+                    if (this.DeviceId == "8525f5d8201f78b5")
+                        this.DeviceId = this.RandomString(16);
                 }
-                else
-                {
-                    Save( _filePath );
-                }
+
+                Save( _filePath );
             }
             catch( JsonReaderException exception )
             {
@@ -82,18 +130,24 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
-        public void Save( string path )
+        public void Save(string fullPath)
         {
-            var output = JsonConvert.SerializeObject( this, Formatting.Indented,
-                new StringEnumConverter { CamelCaseText = true } );
-
-            var folder = Path.GetDirectoryName( path );
-            if( folder != null && !Directory.Exists( folder ) )
+            var jsonSerializeSettings = new JsonSerializerSettings
             {
-                Directory.CreateDirectory( folder );
+                DefaultValueHandling = DefaultValueHandling.Include,
+                Formatting = Formatting.Indented,
+                Converters = new JsonConverter[] { new StringEnumConverter { CamelCaseText = true } }
+            };
+
+            var output = JsonConvert.SerializeObject(this, jsonSerializeSettings);
+
+            var folder = Path.GetDirectoryName(fullPath);
+            if (folder != null && !Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
             }
 
-            File.WriteAllText( path, output );
+            File.WriteAllText(fullPath, output);
         }
 
         public void Save()
@@ -101,6 +155,30 @@ namespace PoGo.NecroBot.Logic
             if( !string.IsNullOrEmpty( _filePath ) )
             {
                 Save( _filePath );
+            }
+        }
+
+        private string RandomString(int length, string alphabet = "abcdefghijklmnopqrstuvwxyz0123456789")
+        {
+            var outOfRange = Byte.MaxValue + 1 - (Byte.MaxValue + 1) % alphabet.Length;
+
+            return string.Concat(
+                Enumerable
+                    .Repeat(0, Int32.MaxValue)
+                    .Select(e => this.RandomByte())
+                    .Where(randomByte => randomByte < outOfRange)
+                    .Take(length)
+                    .Select(randomByte => alphabet[randomByte % alphabet.Length])
+            );
+        }
+
+        private byte RandomByte()
+        {
+            using (var randomizationProvider = new RNGCryptoServiceProvider())
+            {
+                var randomBytes = new byte[1];
+                randomizationProvider.GetBytes(randomBytes);
+                return randomBytes.Single();
             }
         }
     }
@@ -158,8 +236,6 @@ namespace PoGo.NecroBot.Logic
         //position
         [DefaultValue(false)]
         public bool DisableHumanWalking;
-        [DefaultValue(10)]
-        public double DefaultAltitude;
         [DefaultValue(40.778915)]
         public double DefaultLatitude;
         [DefaultValue(-73.962277)]
@@ -229,7 +305,7 @@ namespace PoGo.NecroBot.Logic
         public float UseBerriesMinIv;
         [DefaultValue(0.20)]
         public double UseBerriesBelowCatchProbability;
-        [DefaultValue("and")]
+        [DefaultValue("or")]
         public string UseBerriesOperator;
         //snipe
         [DefaultValue(true)]
@@ -258,6 +334,8 @@ namespace PoGo.NecroBot.Logic
         public bool SnipeIgnoreUnknownIv;
         [DefaultValue(false)]
         public bool UseTransferIvForSnipe;
+        [DefaultValue(false)]
+        public bool SnipePokemonNotInPokedex;
         //rename
         [DefaultValue(false)]
         public bool RenamePokemon;
@@ -877,37 +955,37 @@ namespace PoGo.NecroBot.Logic
 
         public bool UseProxy
         {
-            get { return false; }
+            get { return _settings.Auth.UseProxy; }
             set { _settings.Auth.UseProxy = value; }
         }
 
         public string UseProxyHost
         {
-            get { return null; }
+            get { return _settings.Auth.UseProxyHost; }
             set { _settings.Auth.UseProxyHost = value; }
         }
 
         public string UseProxyPort
         {
-            get { return null; }
+            get { return _settings.Auth.UseProxyPort; }
             set { _settings.Auth.UseProxyPort = value; }
         }
 
         public bool UseProxyAuthentication
         {
-            get { return false; }
+            get { return _settings.Auth.UseProxyAuthentication; }
             set { _settings.Auth.UseProxyAuthentication = value; }
         }
 
         public string UseProxyUsername
         {
-            get { return null;}
+            get { return _settings.Auth.UseProxyUsername; }
             set { _settings.Auth.UseProxyUsername = value; }
         }
 
         public string UseProxyPassword
         {
-            get { return null; }
+            get { return _settings.Auth.UseProxyPassword; }
             set { _settings.Auth.UseProxyPassword = value; }
         }
 
@@ -923,6 +1001,71 @@ namespace PoGo.NecroBot.Logic
             set { _settings.Auth.AuthType = value; }
         }
 
+        string ISettings.DeviceId
+        {
+            get { return _settings.Auth.DeviceId; }
+            set { _settings.Auth.DeviceId = value; }
+        }
+        string ISettings.AndroidBoardName
+        {
+            get { return _settings.Auth.AndroidBoardName; }
+            set { _settings.Auth.AndroidBoardName = value; }
+        }
+        string ISettings.AndroidBootloader
+        {
+            get { return _settings.Auth.AndroidBootloader; }
+            set { _settings.Auth.AndroidBootloader = value; }
+        }
+        string ISettings.DeviceBrand
+        {
+            get { return _settings.Auth.DeviceBrand; }
+            set { _settings.Auth.DeviceBrand = value; }
+        }
+        string ISettings.DeviceModel
+        {
+            get { return _settings.Auth.DeviceModel; }
+            set { _settings.Auth.DeviceModel = value; }
+        }
+        string ISettings.DeviceModelIdentifier
+        {
+            get { return _settings.Auth.DeviceModelIdentifier; }
+            set { _settings.Auth.DeviceModelIdentifier = value; }
+        }
+        string ISettings.DeviceModelBoot
+        {
+            get { return _settings.Auth.DeviceModelBoot; }
+            set { _settings.Auth.DeviceModelBoot = value; }
+        }
+        string ISettings.HardwareManufacturer
+        {
+            get { return _settings.Auth.HardwareManufacturer; }
+            set { _settings.Auth.HardwareManufacturer = value; }
+        }
+        string ISettings.HardwareModel
+        {
+            get { return _settings.Auth.HardwareModel; }
+            set { _settings.Auth.HardwareModel = value; }
+        }
+        string ISettings.FirmwareBrand
+        {
+            get { return _settings.Auth.FirmwareBrand; }
+            set { _settings.Auth.FirmwareBrand = value; }
+        }
+        string ISettings.FirmwareTags
+        {
+            get { return _settings.Auth.FirmwareTags; }
+            set { _settings.Auth.FirmwareTags = value; }
+        }
+        string ISettings.FirmwareType
+        {
+            get { return _settings.Auth.FirmwareType; }
+            set { _settings.Auth.FirmwareType = value; }
+        }
+        string ISettings.FirmwareFingerprint
+        {
+            get { return _settings.Auth.FirmwareFingerprint; }
+            set { _settings.Auth.FirmwareFingerprint = value; }
+        }
         double ISettings.DefaultLatitude
         {
             get
@@ -947,9 +1090,16 @@ namespace PoGo.NecroBot.Logic
 
         double ISettings.DefaultAltitude
         {
-            get { return _settings.DefaultAltitude; }
+            get
+            {
+                return
+                    LocationUtils.getElevation(_settings.DefaultLatitude, _settings.DefaultLongitude) +
+                    _rand.NextDouble() *
+                    ((double)5 / Math.Cos(LocationUtils.getElevation(_settings.DefaultLatitude, _settings.DefaultLongitude)));
+            }
+            
 
-            set { _settings.DefaultAltitude = value; }
+            set {}
         }
 
         string ISettings.GoogleUsername
@@ -1089,6 +1239,7 @@ namespace PoGo.NecroBot.Logic
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
         public double SnipingScanOffset => _settings.SnipingScanOffset;
+        public bool SnipePokemonNotInPokedex => _settings.SnipePokemonNotInPokedex;
         public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokeballsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;

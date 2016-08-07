@@ -3,7 +3,6 @@
 using System;
 using System.Text;
 using PoGo.NecroBot.CLI.Models;
-using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 
@@ -81,6 +80,10 @@ namespace PoGo.NecroBot.CLI
                     break;
                 case LogLevel.Caught:
                     Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Pkmn}) {message}");
+                    break;
+                case LogLevel.Flee:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Pkmn}) {message}");
                     break;
                 case LogLevel.Transfer:
