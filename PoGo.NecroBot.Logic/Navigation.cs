@@ -31,7 +31,6 @@ namespace PoGo.NecroBot.Logic
             CancellationToken cancellationToken, bool disableHumanLikeWalking)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            Logger.Write(targetLocation.Altitude + "," + _client.CurrentAltitude + "", LogLevel.Caught);
             if (!disableHumanLikeWalking)
             {
                 var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
