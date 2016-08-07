@@ -514,7 +514,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "Cczekujących ewolucji: {0}"
+      "Value": "Pokemonów oczekujących na ewolucje: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
