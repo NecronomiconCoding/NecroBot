@@ -18,7 +18,7 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Nieznany \"AuthType\" w pliku \"config.json\"."
+      "Value": "Nieznany 'AuthType' w pliku 'config.json'"
     },
     {
       "Key": "loginInvalid",
@@ -26,7 +26,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Znajdujesz się poza zdefiniowanym zasięgiem. Zostaniesz przeniesiony na start odległy o ({0}m) za 5 sekund. Sprawdź, czy plik \"LastPos.ini\" jest poprawny"
+      "Value": "Znajdujesz się poza zdefiniowanym zasięgiem. Zostaniesz przeniesiony na start odległy o ({0}m) za 5 sekund. Sprawdź, czy plik 'LastPos.ini' jest poprawny"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -262,15 +262,15 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Wykryto realistyczne podróżowanie. Załadowano ustawienia z \"config.json\""
+      "Value": "Wykryto realistyczne podróżowanie. Załadowano ustawienia z 'config.json'"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Nierealistyczne podróżowanie na {0}, używam Twojej ostatniej pozycji z \"LastPos.ini\""
+      "Value": "Nierealistyczne podróżowanie na {0}, używam Twojej ostatniej pozycji z 'LastPos.ini'"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Współrzędne w pliku \"LastPos.ini\" są niepoprawne, wczytywanie ustawień domyślnych"
+      "Value": "Współrzędne w pliku 'LastPos.ini' są niepoprawne, wczytywanie ustawień domyślnych"
     },
     {
       "Key": "gotUpToDateVersion",
@@ -426,7 +426,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Na Twoim koncie Google aktywna jest weryfikacja dwuetapowa, będziesz musiał wprowadzić nowe hasło do aplikacji w \"auth.json\""
+      "Value": "Na Twoim koncie Google aktywna jest weryfikacja dwuetapowa, będziesz musiał wprowadzić nowe hasło do aplikacji w 'auth.json'"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -438,11 +438,11 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Wypełnij GoogleUsername oraz GooglePassword w \"auth.json\""
+      "Value": "Wypełnij GoogleUsername oraz GooglePassword w 'auth.json'"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Wypełnij PtcUsername oraz PtcPassword w \"auth.json\""
+      "Value": "Wypełnij PtcUsername oraz PtcPassword w 'auth.json'"
     },
     {
       "Key": "snipeScan",
@@ -542,11 +542,11 @@
     },
     {
       "Key": "promptError",
-      "Value": "[ERROR] Błąd wejścia, podaj '{0}' lub '{1}"
+      "Value": "[ERROR] Błąd, podaj '{0}' lub '{1}"
     },
     {
       "Key": "firstStartAutoGenSettings",
-      "Value": "Musisz poczekać na automatyczne wygenerowanie plików Config/Auth..."
+      "Value": "Musisz poczekać na automatyczne wygenerowanie plików 'config.json' i 'auth.json'..."
     },
     {
       "Key": "firstStartSetupAccount",
@@ -562,7 +562,7 @@
     },
     {
       "Key": "firstStartSetupTypePromptError",
-      "Value": "[BŁĄD] Wybrano nieprawidłowy typ konta, musisz wybrać '{0}' lub '{1}'"
+      "Value": "[BŁĄD] Wybrano nieprawidłowy typ konta, proszę wybrać '{0}' lub '{1}'"
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
@@ -570,7 +570,7 @@
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
-      "Value": "Zaakceptowana nazwa użytkownika: {0}"
+      "Value": "Zapisana nazwa użytkownika: {0}"
     },
     {
       "Key": "firstStartSetupPasswordPrompt",
@@ -578,7 +578,7 @@
     },
     {
       "Key": "firstStartSetupPasswordConfirm",
-      "Value": "Zaakceptowane hasło: {0}"
+      "Value": "Zapisane hasło: {0}"
     },
     {
       "Key": "firstStartAccountCompleted",
@@ -594,7 +594,7 @@
     },
     {
       "Key": "firstStartDefaultLocation",
-      "Value": "### Ustawienie domyślnej pozycji ###"
+      "Value": "### Ustawienia domyślnej pozycji ###"
     },
     {
       "Key": "firstStartSetupDefaultLocationError",
