@@ -68,8 +68,7 @@ namespace PoGo.NecroBot.Logic.Utils
             // adjust toLonRadians to be in the range -180 to +180...
             targetLongitudeRadians = (targetLongitudeRadians + 3*Math.PI)%(2*Math.PI) - Math.PI;
 
-            var geocoord = new GeoCoordinate(ToDegrees(targetLatitudeRadians), ToDegrees(targetLongitudeRadians), getElevation(sourceLocation.Latitude, sourceLocation.Longitude));
-            return geocoord;
+            return new GeoCoordinate(ToDegrees(targetLatitudeRadians), ToDegrees(targetLongitudeRadians), getElevation(sourceLocation.Latitude, sourceLocation.Longitude));
         }
 
         public static GeoCoordinate CreateWaypoint(GeoCoordinate sourceLocation, double distanceInMeters,
