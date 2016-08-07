@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Llegando a Poképarada: {0} en ({1}m)({2}segundos)"
+      "Value": "Llegando a Poképarada: {0} en ({1}m) ({2} segundos)"
     },
     {
       "Key": "eventProfileLogin",
@@ -94,7 +94,7 @@
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "Pokémon más capturado {0} ¡utilizar un huevo suerte!"
+      "Value": "Pokémon más capturado {0} ¡utilizar un huevo de suerte!"
     },
     {
       "Key": "eventUseBerry",
