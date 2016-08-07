@@ -93,12 +93,18 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (query.Status == GoogleMapsApi.Entities.Directions.Response.DirectionsStatusCodes.OK)
                     {
                         var steps = query.Routes
+                                         .SelectMany(p => p.OverviewPath.Points)
+                                         .ToArray();
+                        //Alternative:
+                        /*
+                        var steps = query.Routes
                                          .SelectMany(p => p.Legs)
                                          .SelectMany(p => p.Steps)
                                          .ToArray();
+                         */
                         foreach (var step in steps)
                         {
-                            await MoveToLocationAsync(session, cancellationToken, step.EndLocation.Latitude, step.EndLocation.Longitude);
+                            await MoveToLocationAsync(session, cancellationToken, step.Latitude, step.Longitude);
                         }
                     }
                 }
