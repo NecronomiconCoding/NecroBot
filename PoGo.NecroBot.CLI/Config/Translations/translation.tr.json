@@ -67,7 +67,7 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
+      "Key": "eventPokemonCaptureSuccess",
       "Value":
         "({0}) | ({1}) {2} Seviye: {3} Savaş Puanı(CP): ({4}/{5}) Mükemmellik: {6}% | Başarı şansı: {7}% | {8}m mesafeden | {9} ile ({10} adet kaldı). | {11}"
     },

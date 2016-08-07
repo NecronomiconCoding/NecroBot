@@ -73,7 +73,7 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
+      "Key": "eventPokemonCaptureSuccess",
       "Value": "({0}) | ({1}) {2} 等級：{3}  CP值：({4}/{5}) 完美度：{6}%| 捕獲機率：{7}%| 距離{8}公尺 | 剩餘{10}個{9} | {11} "
     },
     {

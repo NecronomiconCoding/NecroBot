@@ -66,7 +66,7 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
+      "Key": "eventPokemonCaptureSuccess",
       "Value":
         "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kans: {7}% | Afstand: {8}m | gevangen met een {9} ({10} resterend). | {11}"
     },

@@ -62,7 +62,7 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
+      "Key": "eventPokemonCaptureSuccess",
       "Value":
         "({0}) | ({1}) {2} เลเวล: {3} CP: ({4}/{5}) IV: {6}% | โอกาส: {7}% |  ระยะทาง {8} เมตร | โดยมี {9} (คงเหลืออยู่ {10}). | {11}"
     },
