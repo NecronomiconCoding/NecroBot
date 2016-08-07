@@ -54,7 +54,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Huevo Suerte usado, Te quedan: {0}"
+      "Value": "Huevo Suerte usado. Te quedan: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
