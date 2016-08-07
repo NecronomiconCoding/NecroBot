@@ -45,26 +45,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ? encounter.WildPokemon?.PokemonData
                     : encounter?.PokemonData);
 
-            // Determine whether to use berries or not
-            if ((session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
-                    pokemonIv >= session.LogicSettings.UseBerriesMinIv &&
-                    pokemonCp >= session.LogicSettings.UseBerriesMinCp &&
-                    probability < session.LogicSettings.UseBerriesBelowCatchProbability) || 
-                (session.LogicSettings.UseBerriesOperator.ToLower().Equals("or") && (
-                    pokemonIv >= session.LogicSettings.UseBerriesMinIv ||
-                    pokemonCp >= session.LogicSettings.UseBerriesMinCp ||
-                    probability < session.LogicSettings.UseBerriesBelowCatchProbability)))
-            {
-                await
-                    UseBerry(session,
-                        encounter is EncounterResponse || encounter is IncenseEncounterResponse
-                            ? pokemon.EncounterId
-                            : encounterId,
-                        encounter is EncounterResponse || encounter is IncenseEncounterResponse
-                            ? pokemon.SpawnPointId
-                            : currentFortData?.Id);
-            }
-
             // Calculate distance away
             var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                 session.Client.CurrentLongitude,
@@ -95,6 +75,26 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 : encounter?.PokemonData?.Cp) ?? 0
                     });
                     return;
+                }
+
+                // Determine whether to use berries or not
+                if ((session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
+                        pokemonIv >= session.LogicSettings.UseBerriesMinIv &&
+                        pokemonCp >= session.LogicSettings.UseBerriesMinCp &&
+                        probability < session.LogicSettings.UseBerriesBelowCatchProbability) ||
+                    (session.LogicSettings.UseBerriesOperator.ToLower().Equals("or") && (
+                        pokemonIv >= session.LogicSettings.UseBerriesMinIv ||
+                        pokemonCp >= session.LogicSettings.UseBerriesMinCp ||
+                        probability < session.LogicSettings.UseBerriesBelowCatchProbability)))
+                {
+                    await
+                        UseBerry(session,
+                            encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                                ? pokemon.EncounterId
+                                : encounterId,
+                            encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                                ? pokemon.SpawnPointId
+                                : currentFortData?.Id);
                 }
 
                 //default to excellent throw
