@@ -30,13 +30,12 @@ namespace PoGo.NecroBot.Logic.Utils
 
         public static double getElevation(double lat, double lon)
         {
-            var point = new GeoCoordinate(lat, lon);
-            var request = (HttpWebRequest)WebRequest.Create(string.Format("https://maps.googleapis.com/maps/api/elevation/json?locations={0},{1}", point.Latitude, point.Longitude));
-            var response = (HttpWebResponse)request.GetResponse();
-            var sr = new StreamReader(response.GetResponseStream() ?? new MemoryStream()).ReadToEnd();
+            Random random = new Random();
+            double maximum = 11.0f;
+            double minimum = 8.6f;
+            double return1 = random.NextDouble() * (maximum - minimum) + minimum;
 
-            var json = JObject.Parse(sr);
-            return (double)json.SelectToken("results[0].elevation");
+            return return1;
         }
 
         public static GeoCoordinate CreateWaypoint(GeoCoordinate sourceLocation, double distanceInMeters,
