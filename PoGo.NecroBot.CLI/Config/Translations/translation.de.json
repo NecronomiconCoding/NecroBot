@@ -67,8 +67,12 @@
     },
     {
       "Key": "EventPokemonCaptureSuccess",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend).  | {11} Ep erhalten | {12} | B: {13} L: {14}"
+    },
+    {
+      "Key": "EventPokemonCaptureFailed",
       "Value":
-        "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend). | {11}"
+        "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m entfernt | mit {9} ({10} verbleibend). | B: {11} L: {12}"
     },
     {
       "Key": "eventNoPokeballs",
