@@ -38,7 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 Logger.Write(
                     session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
-                
+
                 await session.Navigation.Move(
                     new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken, session.LogicSettings.DisableHumanWalking);
@@ -58,7 +58,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 });
             }
 
-            session.EventDispatcher.Send(new PokeStopListEvent {Forts = pokestopList});
+            session.EventDispatcher.Send(new PokeStopListEvent { Forts = pokestopList });
 
             while (pokestopList.Any())
             {
@@ -77,18 +77,39 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
-                session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
+                session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
 
-                    await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude),
-                    session.LogicSettings.WalkingSpeedInKilometerPerHour,
-                    async () =>
+                if (session.LogicSettings.UseGMapsNavigating && !String.IsNullOrWhiteSpace(session.LogicSettings.GMapsApiKey))
+                {
+                    var request = new GoogleMapsApi.Entities.Directions.Request.DirectionsRequest
                     {
-                        // Catch normal map Pokemon
-                        await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
-                        //Catch Incense Pokemon
-                        await CatchIncensePokemonsTask.Execute(session, cancellationToken);
-                        return true;
-                    }, cancellationToken, session.LogicSettings.DisableHumanWalking);
+                        ApiKey = session.LogicSettings.GMapsApiKey,
+                        Origin = $"{session.Client.CurrentLatitude:0.000000},{session.Client.CurrentLongitude:0.000000}",
+                        Destination = $"{pokeStop.Latitude:0.000000},{pokeStop.Longitude:0.000000}",
+                        TravelMode = GoogleMapsApi.Entities.Directions.Request.TravelMode.Walking,
+                    };
+                    var query = await GoogleMapsApi.GoogleMaps.Directions.QueryAsync(request);
+
+                    if (query.Status == GoogleMapsApi.Entities.Directions.Response.DirectionsStatusCodes.OK)
+                    {
+                        var steps = query.Routes
+                                         .SelectMany(p => p.OverviewPath.Points)
+                                         .ToArray();
+                        //Alternative:
+                        /*
+                        var steps = query.Routes
+                                         .SelectMany(p => p.Legs)
+                                         .SelectMany(p => p.Steps)
+                                         .ToArray();
+                         */
+                        foreach (var step in steps)
+                        {
+                            await MoveToLocationAsync(session, cancellationToken, step.Latitude, step.Longitude);
+                        }
+                    }
+                }
+                //Why no else? Just to be sure =)
+                await MoveToLocationAsync(session, cancellationToken, pokeStop.Latitude, pokeStop.Longitude);
 
                 //Catch Lure Pokemon
                 if (pokeStop.LureInfo != null)
@@ -116,10 +137,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         if (timesZeroXPawarded > zeroCheck)
                         {
-                            if ((int) fortSearch.CooldownCompleteTimestampMs != 0)
+                            if ((int)fortSearch.CooldownCompleteTimestampMs != 0)
                             {
                                 break;
-                                    // Check if successfully looted, if so program can continue as this was "false alarm".
+                                // Check if successfully looted, if so program can continue as this was "false alarm".
                             }
 
                             fortTry += 1;
@@ -211,6 +232,20 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
+        private static async Task MoveToLocationAsync(ISession session, CancellationToken cancellationToken, double latitude, double longitude)
+        {
+            await session.Navigation.Move(new GeoCoordinate(latitude, longitude),
+                session.LogicSettings.WalkingSpeedInKilometerPerHour,
+                async () =>
+                {
+                    // Catch normal map Pokemon
+                    await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
+                    //Catch Incense Pokemon
+                    await CatchIncensePokemonsTask.Execute(session, cancellationToken);
+                    return true;
+                }, cancellationToken, session.LogicSettings.DisableHumanWalking);
+        }
+
         private static async Task<List<FortData>> GetPokeStops(ISession session)
         {
             var mapObjects = await session.Client.Map.GetMapObjects();
@@ -225,7 +260,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             LocationUtils.CalculateDistanceInMeters(
                                 session.Settings.DefaultLatitude, session.Settings.DefaultLongitude,
                                 i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters ||
-                        session.LogicSettings.MaxTravelDistanceInMeters == 0) 
+                        session.LogicSettings.MaxTravelDistanceInMeters == 0)
                 );
 
             return pokeStops.ToList();
