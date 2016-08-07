@@ -1,10 +1,12 @@
 #region using directives
 
+using GeoCoordinatePortable;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using PokemonGo.RocketAPI;
@@ -158,8 +160,6 @@ namespace PoGo.NecroBot.Logic
         //position
         [DefaultValue(false)]
         public bool DisableHumanWalking;
-        [DefaultValue(10)]
-        public double DefaultAltitude;
         [DefaultValue(40.778915)]
         public double DefaultLatitude;
         [DefaultValue(-73.962277)]
@@ -949,9 +949,10 @@ namespace PoGo.NecroBot.Logic
 
         double ISettings.DefaultAltitude
         {
-            get { return _settings.DefaultAltitude; }
+            get { return LocationUtils.getElevation(_settings.DefaultLatitude, _settings.DefaultLongitude); }
+            
 
-            set { _settings.DefaultAltitude = value; }
+            set {}
         }
 
         string ISettings.GoogleUsername

@@ -8,6 +8,7 @@ using GeoCoordinatePortable;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
+using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -30,7 +31,7 @@ namespace PoGo.NecroBot.Logic
             CancellationToken cancellationToken, bool disableHumanLikeWalking)
         {
             cancellationToken.ThrowIfCancellationRequested();
-
+            Logger.Write(targetLocation.Altitude + "," + _client.CurrentAltitude + "", LogLevel.Caught);
             if (!disableHumanLikeWalking)
             {
                 var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
@@ -43,10 +44,10 @@ namespace PoGo.NecroBot.Logic
 
                 //Initial walking
                 var requestSendDateTime = DateTime.Now;
-                var result =
+                var result = 
                     await
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                            _client.Settings.DefaultAltitude);
+                            waypoint.Altitude);
 
                 UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
@@ -78,7 +79,7 @@ namespace PoGo.NecroBot.Logic
                     result =
                         await
                             _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                                _client.Settings.DefaultAltitude);
+                                waypoint.Altitude);
 
                     UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
@@ -103,7 +104,7 @@ namespace PoGo.NecroBot.Logic
                 var result =
                     await
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                            _client.Settings.DefaultAltitude);
+                            waypoint.Altitude);
                 UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
                 do
@@ -131,7 +132,7 @@ namespace PoGo.NecroBot.Logic
                     result =
                         await
                             _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                                _client.Settings.DefaultAltitude);
+                                waypoint.Altitude);
 
                     UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
@@ -146,7 +147,7 @@ namespace PoGo.NecroBot.Logic
                 var result =
                     await
                         _client.Player.UpdatePlayerLocation(targetLocation.Latitude, targetLocation.Longitude,
-                            _client.Settings.DefaultAltitude);
+                            LocationUtils.getElevation(targetLocation.Latitude,targetLocation.Longitude));
                 UpdatePositionEvent?.Invoke(targetLocation.Latitude, targetLocation.Longitude);
                 return result;
             }
