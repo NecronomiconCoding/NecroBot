@@ -22,7 +22,7 @@
     },
     {
       "Key": "loginInvalid",
-      "Value": "Le credenziali utente non sono valide ed il login è fallito"
+      "Value": "Le credenziali utente inserite non sono valide ed il login è fallito"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
@@ -31,7 +31,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Nessun PokeStop disponibile trovato nella tua area. Distanza massima troppo piccola?"
+      "Value": "Nessun PokeStop disponibile è stato trovato nella tua area. Distanza massima impostata troppo piccola?"
     },
     {
       "Key": "eventFortUsed",
@@ -43,19 +43,19 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Arrivo al Pokestop: {0} in ({1}m)"
+      "Value": "Arrivo al Pokestop "{0}" in : ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Giocando come {0}"
+      "Value": "Loggato come {0}"
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "Usato Aroma, rimanenti: {0}"
+      "Value": "Usato un Aroma, rimanenti: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Usato Fortunuovo, rimanenti: {0}"
+      "Value": "Usato un Fortunuovo, rimanenti: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -67,7 +67,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- PL: {1}  IV: {2}%   [Miglior PL: {3}  IV: {4}%] (Caramelle: {5})"
+      "Value": "{0}\t- PL: {1}  IV: {2}%   [Migliore PL: {3}  IV: {4}%] (Caramelle: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -80,7 +80,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Nessuna Pokeball - Perso {0} con PL {1}"
+      "Value": "Nessuna Pokeball rimasta - Perso {0} con PL {1}"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
@@ -133,7 +133,7 @@
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "Sconosciuto"
+      "Value": "sconosciuto"
     },
     {
       "Key": "displayHighestsCpHeader",
@@ -149,7 +149,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Controlla che Lat e Lng siano corretti. Chiudi il Programma se non lo sono! Lat: {0} Lng: {1}"
+      "Value": "Controlla che Lat e Lng siano corretti. Chiudi il programma se non lo sono! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -225,19 +225,19 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "I Server PTC sono probabilmente offline o le tue credenziali sono sbagliate. Prova con Google"
+      "Value": "I Server PTC sono offline o le tue credenziali sono sbagliate. Prova ad accedere con Google"
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "Tentativo successivo in {0} secondi..."
+      "Value": "Prossimo tentativo in {0} secondi..."
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Account non verificato! Uscita..."
+      "Value": "Account non verificato! Uscita in corso..."
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Apertura pagina Dispositivi Google. Incolla il codice con CTRL+V"
+      "Value": "Apertura pagina Dispositivi Google nel browser. Incolla il codice con CTRL+V"
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -265,11 +265,11 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "Auto aggiornamento disabilitato. Ottieni l'ultima versione da: {0}\n"
+      "Value": "Aggiornamento automatico disabilitato. Scarica l'ultima versione da: {0}\n"
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Scaricamento ed installazione aggiornamento..."
+      "Value": "Scaricamento ed installazione aggiornamento in corso..."
     },
     {
       "Key": "finishedDownloadingRelease",
@@ -330,7 +330,7 @@
     {
       "Key": "invFullTransferManually",
       "Value":
-        "Inventario Pokemon pieno. Trasferisci i Pokemon manualmente o setta TransferDuplicatePokemon 'true' nelle impostazioni..."
+        "Inventario Pokemon pieno. Trasferisci i Pokemon manualmente o imposta TransferDuplicatePokemon 'true' nelle impostazioni..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -416,7 +416,7 @@
     {
       "Key": "googleTwoFactorAuth",
       "Value":
-        "Dato che hai la Verifica in Due Passaggi di Google attivata, devi inserire una Password Specifica per l'App nel file auth.json "
+        "Dato che hai la Verifica in Due Passaggi di Google attivata, devi inserire una Password Specifica per l'app nel file auth.json "
     },
     {
       "Key": "googleTwoFactorAuthExplanation",

@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Nazwa: {0}   INFO: Zbieranie przedmiotów nie , prawdopodobnie masz SoftBana. Odbanowanie za: {1}/{2}"
+      "Value": "Nazwa: {0}   INFO: Zbieranie przedmiotów nie powiodła sie, prawdopodobnie masz SoftBana. Odbanowanie za: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
