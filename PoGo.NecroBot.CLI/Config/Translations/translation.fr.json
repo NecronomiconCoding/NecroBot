@@ -494,99 +494,99 @@
     },
     {
       "Key": "firstStartPrompt",
-      "Value": "[FR]This is your first start, would you like to begin setup? {0}/{1}"
+      "Value": "Ceci est votre première fois, voulez-vous commencer par la configuration ? {0}/{1}"
     },
     {
       "Key": "firstStartLanguagePrompt",
-      "Value": "[FR]Would you like to change the default language? {0}/{1}"
+      "Value": "Voulez-vous changer la langue par défaut ? {0}/{1}"
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "[FR]Please enter a new language code"
+      "Value": "Veuillez entrer un nouveau code de Langue"
     },
     {
       "Key": "firstStartLanguageConfirm",
-      "Value": "[FR]Language Code Applied: {0}"
+      "Value": "Langue appliquée : {0}"
     },
     {
       "Key": "promptError",
-      "Value": "[FR][INPUT ERROR] Error with input, please enter '{0}' or '{1}"
+      "Value": "[ERREUR D'ENTRÉE] Entrée incorrecte, veuillez essayer '{0}' ou '{1}"
     },
     {
       "Key": "firstStartAutoGenSettings",
-      "Value": "[FR]Config/Auth file automatically generated and must be completed before continuing"
+      "Value": "Les fichiers de Config/Auth sont générés automatiquement et doivent être complétés avant de continuer"
     },
     {
       "Key": "firstStartSetupAccount",
-      "Value": "[FR]### Setting up new USER ACCOUNT ###"
+      "Value": "### Configuration du COMPTE UTILISATEUR ###"
     },
     {
       "Key": "firstStartSetupTypePrompt",
-      "Value": "[FR]Please choose an account type: {0}/{1}"
+      "Value": "Choisissez votre type de compte : {0}/{1}"
     },
     {
       "Key": "firstStartSetupTypeConfirm",
-      "Value": "[FR]Chosen Account Type: {0}"
+      "Value": "Type de compte sélectionné : {0}"
     },
     {
       "Key": "firstStartSetupTypePromptError",
-      "Value": "[FR][ERROR] submitted an incorrect account type, please choose '{0}' or '{1}'"
+      "Value": "[ERREUR] Type de compte incorrect, essayez '{0}' ou '{1}'"
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
-      "Value": "[FR]Please enter a Username"
+      "Value": "Veuillez entrer un nom d'utilisateur"
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
-      "Value": "[FR]Accepted username: {0}"
+      "Value": "Nom d'utilisateur accepté : {0}"
     },
     {
       "Key": "firstStartSetupPasswordPrompt",
-      "Value": "[FR]Please enter a Password"
+      "Value": "Veuillez entrer un mot de passe"
     },
     {
       "Key": "firstStartSetupPasswordConfirm",
-      "Value": "[FR]Accepted password: {0}"
+      "Value": "Mot de passe accepté : {0}"
     },
     {
       "Key": "firstStartAccountCompleted",
-      "Value": "[FR]### User Account Completed ###"
+      "Value": "### Compte utilisateur complété ###"
     },
     {
       "Key": "firstStartDefaultLocationPrompt",
-      "Value": "[FR]Would you like to setup a new Default Location? {0}/{1}"
+      "Value": "Voulez-vous configurer l'emplacement par défaut ? {0}/{1}"
     },
     {
       "Key": "firstStartDefaultLocationSet",
-      "Value": "[FR]Default Location Applied"
+      "Value": "Emplacement par défaut appliqué"
     },
     {
       "Key": "firstStartDefaultLocation",
-      "Value": "[FR]### Setting Default Position ###"
+      "Value": "## Configuration de la position par défaut ###"
     },
     {
       "Key": "firstStartSetupDefaultLocationError",
-      "Value": "[FR][ERROR] Please input only a VALUE for example: {0}"
+      "Value": "[ERREUR] Veuillez n'entrer qu'UNE SEULE valeur, par exemple : {0}"
     },
     {
       "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "[FR]Please enter a Latitude (Right click to paste)"
+      "Value": "Veuillez entrer une Latitude (Clic droit pour coller)"
     },
     {
       "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "[FR]Lattitude accepted: {0}"
+      "Value": "Latitude acceptée : {0}"
     },
     {
       "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "[FR]Please enter a Longitude (Right click to paste)"
+      "Value": "Veuillez entrer une Longitude (Clic droit pour coller)"
     },
     {
       "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "[FR]Longitude accepted: {0}"
+      "Value": "Longitude acceptée : {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
-      "Value": "[FR]### COMPLETED CONFIG SETUP ###"
+      "Value": "### Configuration terminée ###"
     }
   ],
   "PokemonStrings": [
