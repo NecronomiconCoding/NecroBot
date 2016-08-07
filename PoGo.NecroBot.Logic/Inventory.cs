@@ -13,9 +13,12 @@ using PokemonGo.RocketAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Utils;
+using System.Linq.Dynamic;
+using DynamicExpression = System.Linq.Dynamic.DynamicExpression;
 
 #endregion
 
@@ -93,28 +96,77 @@ namespace PoGo.NecroBot.Logic
                 bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCp = false
              )
         {
+
             var myPokemon = await GetPokemons();
-
             var myPokemonList = myPokemon.ToList();
+            var pokemonToTransfer = new List<PokemonData>();
 
-            var pokemonToTransfer = myPokemonList.Where(p => !pokemonsNotToTransfer.Contains(p.PokemonId) && p.DeployedFortId == string.Empty && p.Favorite == 0).ToList();
+            //ExpressionContext context = new ExpressionContext(this);
+            //context.Imports.AddType(typeof(Math));
+            //context.Imports.AddType(typeof(PokemonInfo));
 
-            pokemonToTransfer = 
-                pokemonToTransfer.Where(
-                    p =>
-                    {
-                        var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
+            const string additionalExample = @"
+                                       or PokemonInfo.GetPokemonCount(allPokemons, p) <= ptf.KeepMinDuplicatePokemon
+                                       or PokemonInfo.GetCountOfCpBetterPokemon(allPokemons, p) <= 0
+                                       or PokemonInfo.GetCountOfIvBetterPokemon(allPokemons, p) <= 0";
 
-                        return
-                            !pokemonTransferFilter.MovesOperator.BoolFunc(
-                                pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any(),
-                                pokemonTransferFilter.KeepMinOperator.BoolFunc(
-                                    p.Cp >= pokemonTransferFilter.KeepMinCp,
-                                    PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage,
-                                    pokemonTransferFilter.KeepMinOperator.ReverseBoolFunc(
-                                        pokemonTransferFilter.KeepMinOperator.InverseBool(pokemonTransferFilter.UseKeepMinLvl),
-                                        PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl)));
-                    }).ToList();
+            const string keepExpr =
+                                     //Keep if :
+                                     @"
+                                       ( 
+                                            (
+                                                p.Cp >= ptf.KeepMinCp 
+                                                {0} 
+                                                PokemonInfo.CalculatePokemonPerfection(p) >= ptf.KeepMinIvPercentage 
+                                                {0} 
+                                                (
+                                                    ptf.UseKeepMinLvl ? PokemonInfo.GetLevel(p) >= ptf.KeepMinLvl 
+                                                                      : ""{0}"" == ""and""
+                                                )
+                                            )
+                                            {1}
+                                            (ptf.Moves.Contains(p.Move1) or ptf.Moves.Contains(p.Move2))
+                                       ) 
+                                       ";
+
+
+            ExpressionParser.AddPredefinedType(typeof(PokemonInfo));
+            ExpressionParser.AddPredefinedType(typeof(PokemonData));
+            ExpressionParser.AddPredefinedType(typeof(List<PokemonMove>));
+
+            var p1 = Expression.Parameter(typeof(PokemonData), "p");
+            var p2 = Expression.Parameter(typeof(TransferFilter), "ptf");
+            var p3 = Expression.Parameter(typeof (List<PokemonData>), "allPokemons");
+
+            try
+            {
+                var globalKeepExpression = DynamicExpression.ParseLambda(new[] { p1, p2 , p3}, null, 
+                    string.Format(keepExpr, CommonTransferFilter.KeepMinOperator, CommonTransferFilter.MovesOperator));
+
+                var globalKeepDelegate = globalKeepExpression.Compile();
+
+                pokemonToTransfer = myPokemonList.Where(p => !pokemonsNotToTransfer.Contains(p.PokemonId) && p.DeployedFortId == string.Empty && p.Favorite == 0).ToList();
+                pokemonToTransfer =
+                    pokemonToTransfer.Where(
+                        p =>
+                        {
+                            var ptf = GetPokemonTransferFilter(p.PokemonId);
+                            if (ptf == CommonTransferFilter)
+                                return !(bool) globalKeepDelegate.DynamicInvoke(p, ptf, myPokemonList);
+
+                            var localKeepExpression = DynamicExpression.ParseLambda(new[] { p1, p2, p3 }, null,
+                                string.Format(keepExpr, ptf.KeepMinOperator, ptf.MovesOperator));
+                            var localKeepDelegate = localKeepExpression.Compile();
+
+                            return !(bool)localKeepDelegate.DynamicInvoke(p, ptf, myPokemonList);
+
+                        }).ToList();
+            }
+            catch(Exception e)
+            { 
+                throw e;
+            }
+
 
 
             var myPokemonSettings = await GetPokemonSettings();
@@ -458,15 +510,21 @@ namespace PoGo.NecroBot.Logic
                     highestPokemonForUpgrade.OrderByDescending(p => p.Cp).ToList();
         }
 
+        private TransferFilter _commonTransferFilter = null;
+        public TransferFilter CommonTransferFilter => _commonTransferFilter ??
+                                                      (_commonTransferFilter =
+                                                          new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinLvl,
+                                                              _logicSettings.UseKeepMinLvl, _logicSettings.KeepMinIvPercentage,
+                                                              _logicSettings.KeepMinOperator, _logicSettings.KeepMinDuplicatePokemon));
+
         public TransferFilter GetPokemonTransferFilter(PokemonId pokemon)
         {
-            if (_logicSettings.PokemonsTransferFilter != null &&
-                _logicSettings.PokemonsTransferFilter.ContainsKey(pokemon))
-            {
-                return _logicSettings.PokemonsTransferFilter[pokemon];
-            }
-            return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinLvl, _logicSettings.UseKeepMinLvl, _logicSettings.KeepMinIvPercentage,
-                _logicSettings.KeepMinOperator, _logicSettings.KeepMinDuplicatePokemon);
+            TransferFilter result;
+
+            if (_logicSettings.PokemonsTransferFilter == null || !_logicSettings.PokemonsTransferFilter.TryGetValue(pokemon, out result))
+                result = CommonTransferFilter;
+
+            return result;
         }
 
         public async Task<GetInventoryResponse> RefreshCachedInventory()
