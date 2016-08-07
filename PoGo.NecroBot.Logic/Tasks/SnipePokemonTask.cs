@@ -172,7 +172,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         var pokemonOnlyList = session.LogicSettings.PokemonToSnipe.Pokemon;
                         var capturedPokemon = PokeDex.Where(i => i.InventoryItemData.PokedexEntry.TimesCaptured >= 1).Select(i => i.InventoryItemData.PokedexEntry.PokemonId);
                         var pokemonToCapture = Enum.GetValues(typeof(PokemonId)).Cast<PokemonId>().Except(capturedPokemon);
-                        pokemonIds = pokemonOnlyList.Union(pokemonToCapture).ToList();
+                        pokemonIds = pokemonOnlyList.Concat(pokemonToCapture).ToList();
                     }
                     else
                     {

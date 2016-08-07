@@ -73,7 +73,7 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
+      "Key": "eventPokemonCaptureSuccess",
       "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | jarak {8} meter | dengan {9} (sisa {10} buah). | {11} | lintang: {12} bujur: {13}"
     },
     {

@@ -1,12 +1,10 @@
 #region using directives
 
-using GeoCoordinatePortable;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
-using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using PokemonGo.RocketAPI;
@@ -17,7 +15,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Security.Cryptography;
 
 #endregion
 
@@ -40,7 +37,7 @@ namespace PoGo.NecroBot.Logic
         public string UseProxyUsername;
         public string UseProxyPassword;
         //devicedata
-        [DefaultValue("8525f5d8201f78b5")]
+        [DefaultValue("529e8aa6201f78b5")]
         public string DeviceId;
         [DefaultValue("msm8994")]
         public string AndroidBoardName;
@@ -67,24 +64,6 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("OnePlus/OnePlus2/OnePlus2:6.0.1/MMB29M/1447840820:user/release-keys")]
         public string FirmwareFingerprint;
 
-        public AuthSettings()
-        {
-            InitializePropertyDefaultValues(this);
-        }
-
-        public void InitializePropertyDefaultValues(object obj)
-        {
-            FieldInfo[] fields = obj.GetType().GetFields();
-
-            foreach (FieldInfo field in fields)
-            {
-                var d = field.GetCustomAttribute<DefaultValueAttribute>();
-
-                if (d != null)
-                    field.SetValue(obj, d.Value);
-            }
-        }
-
         public void Load( string path )
         {
             try
@@ -98,13 +77,13 @@ namespace PoGo.NecroBot.Logic
 
                     var settings = new JsonSerializerSettings();
                     settings.Converters.Add( new StringEnumConverter { CamelCaseText = true } );
+
                     JsonConvert.PopulateObject( input, this, settings );
-
-                    if (this.DeviceId == "8525f5d8201f78b5")
-                        this.DeviceId = this.RandomString(16);
                 }
-
-                Save( _filePath );
+                else
+                {
+                    Save( _filePath );
+                }
             }
             catch( JsonReaderException exception )
             {
@@ -130,24 +109,18 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
-        public void Save(string fullPath)
+        public void Save( string path )
         {
-            var jsonSerializeSettings = new JsonSerializerSettings
-            {
-                DefaultValueHandling = DefaultValueHandling.Include,
-                Formatting = Formatting.Indented,
-                Converters = new JsonConverter[] { new StringEnumConverter { CamelCaseText = true } }
-            };
+            var output = JsonConvert.SerializeObject( this, Formatting.Indented,
+                new StringEnumConverter { CamelCaseText = true } );
 
-            var output = JsonConvert.SerializeObject(this, jsonSerializeSettings);
-
-            var folder = Path.GetDirectoryName(fullPath);
-            if (folder != null && !Directory.Exists(folder))
+            var folder = Path.GetDirectoryName( path );
+            if( folder != null && !Directory.Exists( folder ) )
             {
-                Directory.CreateDirectory(folder);
+                Directory.CreateDirectory( folder );
             }
 
-            File.WriteAllText(fullPath, output);
+            File.WriteAllText( path, output );
         }
 
         public void Save()
@@ -155,30 +128,6 @@ namespace PoGo.NecroBot.Logic
             if( !string.IsNullOrEmpty( _filePath ) )
             {
                 Save( _filePath );
-            }
-        }
-
-        private string RandomString(int length, string alphabet = "abcdefghijklmnopqrstuvwxyz0123456789")
-        {
-            var outOfRange = Byte.MaxValue + 1 - (Byte.MaxValue + 1) % alphabet.Length;
-
-            return string.Concat(
-                Enumerable
-                    .Repeat(0, Int32.MaxValue)
-                    .Select(e => this.RandomByte())
-                    .Where(randomByte => randomByte < outOfRange)
-                    .Take(length)
-                    .Select(randomByte => alphabet[randomByte % alphabet.Length])
-            );
-        }
-
-        private byte RandomByte()
-        {
-            using (var randomizationProvider = new RNGCryptoServiceProvider())
-            {
-                var randomBytes = new byte[1];
-                randomizationProvider.GetBytes(randomBytes);
-                return randomBytes.Single();
             }
         }
     }
@@ -236,6 +185,8 @@ namespace PoGo.NecroBot.Logic
         //position
         [DefaultValue(false)]
         public bool DisableHumanWalking;
+        [DefaultValue(10)]
+        public double DefaultAltitude;
         [DefaultValue(40.778915)]
         public double DefaultLatitude;
         [DefaultValue(-73.962277)]
@@ -1092,14 +1043,12 @@ namespace PoGo.NecroBot.Logic
         {
             get
             {
-                return
-                    LocationUtils.getElevation(_settings.DefaultLatitude, _settings.DefaultLongitude) +
-                    _rand.NextDouble() *
-                    ((double)5 / Math.Cos(LocationUtils.getElevation(_settings.DefaultLatitude, _settings.DefaultLongitude)));
+                return _settings.DefaultAltitude +
+                       _rand.NextDouble()*
+                       ((double) 5/Math.Cos(_settings.DefaultAltitude));
             }
-            
 
-            set {}
+            set { _settings.DefaultAltitude = value; }
         }
 
         string ISettings.GoogleUsername

@@ -67,7 +67,7 @@
       "Value": "{0} x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
+      "Key": "eventPokemonCaptureSuccess",
       "Value":
         "=> ({0}) ({1}) {2} {3} -рівень (CР: {4} / {5} | VI: {6}%) з {7}% шансом на {8} м ісп. {9} ({10} залишилося) {11} "
     },

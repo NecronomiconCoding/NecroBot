@@ -43,7 +43,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Arrivo al Pokestop "{0}" in : ({1}m)"
+      "Value": "Arrivo al Pokestop {0} in: ({1}m) ({2} secondi)"
     },
     {
       "Key": "eventProfileLogin",
@@ -74,8 +74,8 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
-      "Value":
+      "Key": "eventPokemonCaptureSuccess",
+      "Value": 
         "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Probabilita': {7}% | distanza {8}m | con una {9} ({10} rimanenti). | {11}"
     },
     {

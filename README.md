@@ -15,7 +15,7 @@ Discord (Chat & Get Help!): https://discord.gg/VXKxNFr <br/>
 <br/>
 
 ## NecroBot - the original For The Community, By The Community bot
-We are proud to announce the release of 0.7.2, with special thanks to Kevin and the entire crew involved at PGD!
+We are proud to announce the release of 0.7.0, with special thanks to Kevin and the entire crew involved at PGD!
 
 ## This release features automatic Device ID generation
 You can now opt to leave the device values static and your device ID will not be the same as everyone elses. If you prefer to use your own device, you can do that as well! 
