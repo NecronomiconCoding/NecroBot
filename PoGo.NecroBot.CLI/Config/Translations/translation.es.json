@@ -50,11 +50,11 @@
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "Incienso usado, Quedan: {0}"
+      "Value": "Incienso usado, Te quedan: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Huevo Suerte usado, Quedan: {0}"
+      "Value": "Huevo Suerte usado, Te quedan: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
