@@ -19,7 +19,8 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-
+            if (!session.LogicSettings.CatchPokemon) return;
+            
             Logger.Write(session.Translation.GetTranslation(TranslationString.LookingForIncensePokemon), LogLevel.Debug);
 
             var incensePokemon = await session.Client.Map.GetIncensePokemons();
