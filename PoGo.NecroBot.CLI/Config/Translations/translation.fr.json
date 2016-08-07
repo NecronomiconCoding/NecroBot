@@ -489,8 +489,104 @@
       "Value": "{0} utilisé, reste {1}"
     },
     {
-      "Key": "itemRazzBerry", 
+      "Key": "itemRazzBerry",
       "Value": "Baie Framby"
+    },
+    {
+      "Key": "firstStartPrompt",
+      "Value": "Ceci est votre première fois, voulez-vous commencer par la configuration ? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguagePrompt",
+      "Value": "Voulez-vous changer la langue par défaut ? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguageCodePrompt",
+      "Value": "Veuillez entrer un nouveau code de Langue"
+    },
+    {
+      "Key": "firstStartLanguageConfirm",
+      "Value": "Langue appliquée : {0}"
+    },
+    {
+      "Key": "promptError",
+      "Value": "[ERREUR D'ENTRÉE] Entrée incorrecte, veuillez essayer '{0}' ou '{1}"
+    },
+    {
+      "Key": "firstStartAutoGenSettings",
+      "Value": "Les fichiers de Config/Auth sont générés automatiquement et doivent être complétés avant de continuer"
+    },
+    {
+      "Key": "firstStartSetupAccount",
+      "Value": "### Configuration du COMPTE UTILISATEUR ###"
+    },
+    {
+      "Key": "firstStartSetupTypePrompt",
+      "Value": "Choisissez votre type de compte : {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTypeConfirm",
+      "Value": "Type de compte sélectionné : {0}"
+    },
+    {
+      "Key": "firstStartSetupTypePromptError",
+      "Value": "[ERREUR] Type de compte incorrect, essayez '{0}' ou '{1}'"
+    },
+    {
+      "Key": "firstStartSetupUsernamePrompt",
+      "Value": "Veuillez entrer un nom d'utilisateur"
+    },
+    {
+      "Key": "firstStartSetupUsernameConfirm",
+      "Value": "Nom d'utilisateur accepté : {0}"
+    },
+    {
+      "Key": "firstStartSetupPasswordPrompt",
+      "Value": "Veuillez entrer un mot de passe"
+    },
+    {
+      "Key": "firstStartSetupPasswordConfirm",
+      "Value": "Mot de passe accepté : {0}"
+    },
+    {
+      "Key": "firstStartAccountCompleted",
+      "Value": "### Compte utilisateur complété ###"
+    },
+    {
+      "Key": "firstStartDefaultLocationPrompt",
+      "Value": "Voulez-vous configurer l'emplacement par défaut ? {0}/{1}"
+    },
+    {
+      "Key": "firstStartDefaultLocationSet",
+      "Value": "Emplacement par défaut appliqué"
+    },
+    {
+      "Key": "firstStartDefaultLocation",
+      "Value": "## Configuration de la position par défaut ###"
+    },
+    {
+      "Key": "firstStartSetupDefaultLocationError",
+      "Value": "[ERREUR] Veuillez n'entrer qu'UNE SEULE valeur, par exemple : {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Veuillez entrer une Latitude (Clic droit pour coller)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Latitude acceptée : {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Veuillez entrer une Longitude (Clic droit pour coller)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Longitude acceptée : {0}"
+    },
+    {
+      "Key": "firstStartSetupCompleted",
+      "Value": "### Configuration terminée ###"
     }
   ],
   "PokemonStrings": [

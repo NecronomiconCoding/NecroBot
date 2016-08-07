@@ -9,12 +9,13 @@
 [![Stories in Ready](https://badge.waffle.io/NECROBOTIO/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NecronomiconCoding/NecroBot)
 [![Github All Releases](https://img.shields.io/github/downloads/NECROBOTIO/NecroBot/total.svg)](https://github.com/NECROBOTIO/NecroBot/releases)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/LICENSE.md)
+[![Twitter Follow](https://img.shields.io/twitter/follow/NECROBOTIO.svg?style=social&label=Follow&maxAge=1)](https://twitter.com/NECROBOTIO)
 
 Discord (Chat & Get Help!): https://discord.gg/VXKxNFr <br/>
 <br/>
 
-## Niantic Changes (Bot is not working ATM)
-Niantic have changed API responses, meaning that this bot and anything accessing the API though POGOProtos is currently broken. A number of developers from /r/pokemondev are working to address this and come up with a fix for this issue, find the [current status here](https://www.reddit.com/r/pokemongodev/comments/4w1cvr/pokemongo_current_api_status/)
+## NecroBot - the original For The Community, By The Community bot
+We are proud to announce the release of 0.7.0, with special thanks to Kevin and the entire crew involved at PGD!
 
 <h2><a name="features">Features</a></h2>
 
