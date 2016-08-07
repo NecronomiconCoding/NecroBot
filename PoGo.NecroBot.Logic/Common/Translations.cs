@@ -837,34 +837,22 @@ namespace PoGo.NecroBot.Logic.Common
                 catch( JsonException )
                 {
                     Logger.Write( "[ERROR] Issue loading translations", LogLevel.Error );
+                    Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
 
-                    switch( translationsLanguageCode )
+                    string strInput = Console.ReadLine().ToLower();
+
+                    if( strInput.Equals( "y" ) )
                     {
-                        case "en":
-                            Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
-
-                            string strInput = Console.ReadLine().ToLower();
-
-                            if( strInput.Equals( "y" ) )
-                            {
-                                // Currently this section can only rebuild the EN translations file \\
-                                // This is because default values cannot be supplied from other languages \\
-                                Logger.Write( "Loading fresh translations and continuing" );
-                                translations = new Translation();
-                                translations.Save( Path.Combine( translationPath, "translation.en.json" ) );
-                            }
-                            else
-                            {
-                                ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error", 3, LogLevel.Error );
-                                return null;
-                            }
-
-                            break;
-                        default:
-                            ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error\n"
-                                + "[ERROR] No replacement translations: Check appropriate files for typos", 5, LogLevel.Error );
-
-                            return null;
+                        // Currently this section can only rebuild the EN translations file \\
+                        // This is because default values cannot be supplied from other languages \\
+                        Logger.Write( "Loading fresh translations and continuing" );
+                        translations = new Translation();
+                        translations.Save( Path.Combine( translationPath, "translation.en.json" ) );
+                    }
+                    else
+                    {
+                        ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error", 3, LogLevel.Error );
+                        return null;
                     }
                 }
             }
