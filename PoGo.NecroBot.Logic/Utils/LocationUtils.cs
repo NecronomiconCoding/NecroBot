@@ -30,13 +30,17 @@ namespace PoGo.NecroBot.Logic.Utils
 
         public static double getElevation(double lat, double lon)
         {
+            return 20.00;
+            /*
             var point = new GeoCoordinate(lat, lon);
-            var request = (HttpWebRequest)WebRequest.Create(string.Format("https://maps.googleapis.com/maps/api/elevation/json?locations={0},{1}", point.Latitude, point.Longitude));
-            var response = (HttpWebResponse)request.GetResponse();
+            var request =  (HttpWebRequest)WebRequest.Create(string.Format("https://maps.googleapis.com/maps/api/elevation/json?locations={0},{1}", point.Latitude, point.Longitude));
+            var response = (HttpWebResponse) request.GetResponse();
             var sr = new StreamReader(response.GetResponseStream() ?? new MemoryStream()).ReadToEnd();
 
             var json = JObject.Parse(sr);
-            return (double)json.SelectToken("results[0].elevation");
+            double elevation = (double)json.SelectToken("results[0].elevation");
+            return elevation;
+            */
         }
 
         public static GeoCoordinate CreateWaypoint(GeoCoordinate sourceLocation, double distanceInMeters,
@@ -64,7 +68,8 @@ namespace PoGo.NecroBot.Logic.Utils
             // adjust toLonRadians to be in the range -180 to +180...
             targetLongitudeRadians = (targetLongitudeRadians + 3*Math.PI)%(2*Math.PI) - Math.PI;
 
-            return new GeoCoordinate(ToDegrees(targetLatitudeRadians), ToDegrees(targetLongitudeRadians), getElevation(sourceLocation.Latitude, sourceLocation.Longitude));
+            var geocoord = new GeoCoordinate(ToDegrees(targetLatitudeRadians), ToDegrees(targetLongitudeRadians), getElevation(sourceLocation.Latitude, sourceLocation.Longitude));
+            return geocoord;
         }
 
         public static GeoCoordinate CreateWaypoint(GeoCoordinate sourceLocation, double distanceInMeters,

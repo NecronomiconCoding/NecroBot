@@ -38,9 +38,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 Logger.Write(
                     session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
-                
+
+                var alt = LocationUtils.getElevation(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude);
+
                 await session.Navigation.Move(
-                    new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude, LocationUtils.getElevation(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude)),
+                    new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude, alt),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken, session.LogicSettings.DisableHumanWalking);
             }
 
@@ -79,7 +81,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
 
-                    await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude, LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
+                var alt = LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude);
+
+                    await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude, alt),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour,
                     async () =>
                     {
