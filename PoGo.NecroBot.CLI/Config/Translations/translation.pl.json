@@ -514,7 +514,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "Potencjalnych ewolucji: {0}"
+      "Value": "Cczekujących ewolucji: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
