@@ -305,7 +305,7 @@ namespace PoGo.NecroBot.Logic
         public float UseBerriesMinIv;
         [DefaultValue(0.20)]
         public double UseBerriesBelowCatchProbability;
-        [DefaultValue("and")]
+        [DefaultValue("or")]
         public string UseBerriesOperator;
         //snipe
         [DefaultValue(true)]
