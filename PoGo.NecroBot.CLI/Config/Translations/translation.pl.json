@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Dotarcie do PokeStopu: {0} za (({1}m) ({2}s)"
+      "Value": "Dotarcie do PokeStopu: {0} za ({1}m) ({2}s)"
     },
     {
       "Key": "eventProfileLogin",
