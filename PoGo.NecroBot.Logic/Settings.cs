@@ -36,6 +36,33 @@ namespace PoGo.NecroBot.Logic
         public bool UseProxyAuthentication;
         public string UseProxyUsername;
         public string UseProxyPassword;
+        //devicedata
+        [DefaultValue("529e8aa6201f78b5")]
+        public string DeviceId;
+        [DefaultValue("msm8994")]
+        public string AndroidBoardName;
+        [DefaultValue("unknown")]
+        public string AndroidBootloader;
+        [DefaultValue("OnePlus")]
+        public string DeviceBrand;
+        [DefaultValue("OnePlus2")]
+        public string DeviceModel;
+        [DefaultValue("ONE A2003_24_160604")]
+        public string DeviceModelIdentifier;
+        [DefaultValue("qcom")]
+        public string DeviceModelBoot;
+        [DefaultValue("OnePlus")]
+        public string HardwareManufacturer;
+        [DefaultValue("ONE A2003")]
+        public string HardwareModel;
+        [DefaultValue("OnePlus2")]
+        public string FirmwareBrand;
+        [DefaultValue("dev-keys")]
+        public string FirmwareTags;
+        [DefaultValue("user")]
+        public string FirmwareType;
+        [DefaultValue("OnePlus/OnePlus2/OnePlus2:6.0.1/MMB29M/1447840820:user/release-keys")]
+        public string FirmwareFingerprint;
 
         public void Load( string path )
         {
@@ -168,33 +195,6 @@ namespace PoGo.NecroBot.Logic
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
-        //devicedata
-        [DefaultValue("529e8aa6201f78b5")]
-        public string DeviceId;
-        [DefaultValue("msm8994")]
-        public string AndroidBoardName;
-        [DefaultValue("unknown")]
-        public string AndroidBootloader;
-        [DefaultValue("OnePlus")]
-        public string DeviceBrand;
-        [DefaultValue("OnePlus2")]
-        public string DeviceModel;
-        [DefaultValue("ONE A2003_24_160604")]
-        public string DeviceModelIdentifier;
-        [DefaultValue("qcom")]
-        public string DeviceModelBoot;
-        [DefaultValue("OnePlus")]
-        public string HardwareManufacturer;
-        [DefaultValue("ONE A2003")]
-        public string HardwareModel;
-        [DefaultValue("OnePlus2")]
-        public string FirmwareBrand;
-        [DefaultValue("dev-keys")]
-        public string FirmwareTags;
-        [DefaultValue("user")]
-        public string FirmwareType;
-        [DefaultValue("OnePlus/OnePlus2/OnePlus2:6.0.1/MMB29M/1447840820:user/release-keys")]
-        public string FirmwareFingerprint;
         //delays
         [DefaultValue(5000)]
         public int DelayBetweenPlayerActions;
@@ -954,68 +954,68 @@ namespace PoGo.NecroBot.Logic
 
         string ISettings.DeviceId
         {
-            get { return _settings.DeviceId; }
-            set { _settings.DeviceId = value; }
+            get { return _settings.Auth.DeviceId; }
+            set { _settings.Auth.DeviceId = value; }
         }
         string ISettings.AndroidBoardName
         {
-            get { return _settings.AndroidBoardName; }
-            set { _settings.AndroidBoardName = value; }
+            get { return _settings.Auth.AndroidBoardName; }
+            set { _settings.Auth.AndroidBoardName = value; }
         }
         string ISettings.AndroidBootloader
         {
-            get { return _settings.AndroidBootloader; }
-            set { _settings.AndroidBootloader = value; }
+            get { return _settings.Auth.AndroidBootloader; }
+            set { _settings.Auth.AndroidBootloader = value; }
         }
         string ISettings.DeviceBrand
         {
-            get { return _settings.DeviceBrand; }
-            set { _settings.DeviceBrand = value; }
+            get { return _settings.Auth.DeviceBrand; }
+            set { _settings.Auth.DeviceBrand = value; }
         }
         string ISettings.DeviceModel
         {
-            get { return _settings.DeviceModel; }
-            set { _settings.DeviceModel = value; }
+            get { return _settings.Auth.DeviceModel; }
+            set { _settings.Auth.DeviceModel = value; }
         }
         string ISettings.DeviceModelIdentifier
         {
-            get { return _settings.DeviceModelIdentifier; }
-            set { _settings.DeviceModelIdentifier = value; }
+            get { return _settings.Auth.DeviceModelIdentifier; }
+            set { _settings.Auth.DeviceModelIdentifier = value; }
         }
         string ISettings.DeviceModelBoot
         {
-            get { return _settings.DeviceModelBoot; }
-            set { _settings.DeviceModelBoot = value; }
+            get { return _settings.Auth.DeviceModelBoot; }
+            set { _settings.Auth.DeviceModelBoot = value; }
         }
         string ISettings.HardwareManufacturer
         {
-            get { return _settings.HardwareManufacturer; }
-            set { _settings.HardwareManufacturer = value; }
+            get { return _settings.Auth.HardwareManufacturer; }
+            set { _settings.Auth.HardwareManufacturer = value; }
         }
         string ISettings.HardwareModel
         {
-            get { return _settings.HardwareModel; }
-            set { _settings.HardwareModel = value; }
+            get { return _settings.Auth.HardwareModel; }
+            set { _settings.Auth.HardwareModel = value; }
         }
         string ISettings.FirmwareBrand
         {
-            get { return _settings.FirmwareBrand; }
-            set { _settings.FirmwareBrand = value; }
+            get { return _settings.Auth.FirmwareBrand; }
+            set { _settings.Auth.FirmwareBrand = value; }
         }
         string ISettings.FirmwareTags
         {
-            get { return _settings.FirmwareTags; }
-            set { _settings.FirmwareTags = value; }
+            get { return _settings.Auth.FirmwareTags; }
+            set { _settings.Auth.FirmwareTags = value; }
         }
         string ISettings.FirmwareType
         {
-            get { return _settings.FirmwareType; }
-            set { _settings.FirmwareType = value; }
+            get { return _settings.Auth.FirmwareType; }
+            set { _settings.Auth.FirmwareType = value; }
         }
         string ISettings.FirmwareFingerprint
         {
-            get { return _settings.FirmwareFingerprint; }
-            set { _settings.FirmwareFingerprint = value; }
+            get { return _settings.Auth.FirmwareFingerprint; }
+            set { _settings.Auth.FirmwareFingerprint = value; }
         }
         double ISettings.DefaultLatitude
         {
