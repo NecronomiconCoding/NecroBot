@@ -192,11 +192,12 @@ namespace PoGo.NecroBot.Logic
                     settings.CandyToEvolve > 0 &&
                     settings.EvolutionIds.Count != 0)
                 {
-                    var possibleCountToEvolve = ((familyCandy.Candy_ - 1) / (settings.CandyToEvolve - 1));
+                    //do not try to fix something that works, goto line 220 for explonation
+                    var possibleCountToEvolve = familyCandy.Candy_ / settings.CandyToEvolve;
                     amountToKeepInStorage = Math.Max(amountToKeepInStorage, possibleCountToEvolve);
 
                     //remain candy
-                    modFromEvolve = (familyCandy.Candy_ - 1)%(settings.CandyToEvolve - 1);
+                    modFromEvolve = familyCandy.Candy_%settings.CandyToEvolve;
                 }
 
                 var inStorage = myPokemonList.Count(data => data.PokemonId == pokemonGroupToTransfer.Key);
