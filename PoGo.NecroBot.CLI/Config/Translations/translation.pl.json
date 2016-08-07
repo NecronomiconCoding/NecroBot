@@ -446,11 +446,11 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "Skanowanie w poszukiwaniu Pokemona w {0}..."
+      "Value": "Skanowanie w poszukiwaniu Pokemona [{0}]..."
     },
     {
       "Key": "snipeScanEx",
-      "Value": "Mam na celowniku {0} z IV: {1} w {2}..."
+      "Value": "Mam na celowniku {0} z IV: {1} [{2}]..."
     },
     {
       "Key": "noPokemonToSnipe",
