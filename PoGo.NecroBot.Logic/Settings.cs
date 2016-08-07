@@ -906,37 +906,37 @@ namespace PoGo.NecroBot.Logic
 
         public bool UseProxy
         {
-            get { return false; }
+            get { return _settings.Auth.UseProxy; }
             set { _settings.Auth.UseProxy = value; }
         }
 
         public string UseProxyHost
         {
-            get { return null; }
+            get { return _settings.Auth.UseProxyHost; }
             set { _settings.Auth.UseProxyHost = value; }
         }
 
         public string UseProxyPort
         {
-            get { return null; }
+            get { return _settings.Auth.UseProxyPort; }
             set { _settings.Auth.UseProxyPort = value; }
         }
 
         public bool UseProxyAuthentication
         {
-            get { return false; }
+            get { return _settings.Auth.UseProxyAuthentication; }
             set { _settings.Auth.UseProxyAuthentication = value; }
         }
 
         public string UseProxyUsername
         {
-            get { return null;}
+            get { return _settings.Auth.UseProxyUsername; }
             set { _settings.Auth.UseProxyUsername = value; }
         }
 
         public string UseProxyPassword
         {
-            get { return null; }
+            get { return _settings.Auth.UseProxyPassword; }
             set { _settings.Auth.UseProxyPassword = value; }
         }
 
