@@ -1041,7 +1041,13 @@ namespace PoGo.NecroBot.Logic
 
         double ISettings.DefaultAltitude
         {
-            get { return LocationUtils.getElevation(_settings.DefaultLatitude, _settings.DefaultLongitude); }
+            get
+            {
+                return
+                    LocationUtils.getElevation(_settings.DefaultLatitude, _settings.DefaultLongitude) +
+                    _rand.NextDouble() *
+                    ((double)5 / Math.Cos(LocationUtils.getElevation(_settings.DefaultLatitude, _settings.DefaultLongitude)));
+            }
             
 
             set {}
