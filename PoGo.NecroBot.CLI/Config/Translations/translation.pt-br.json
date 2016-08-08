@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Chegando ao Pokestop: {0} ({1}m) ({2} s)"
+      "Value": "Chegando ao Pokestop: {0} ({1}m) ({2} segundos)"
     },
     {
       "Key": "eventProfileLogin",
@@ -73,8 +73,12 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m de distância | com uma {9} (restando {10}). | {11} | lat: {12} long: {13}"
+      "Key": "eventPokemonCaptureSuccess",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | com uma {9} (restando {10}). | {11} EXP adquirida | {12} | lat: {13} long: {14}"
+    },
+    {
+      "Key": "eventPokemonCaptureFailed",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | com uma {9} (restando {10}). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -306,11 +310,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Quantidade atual de Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
+      "Value": "Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "Quantidade Total de Poções: {0} | Total de Revives: {1} | Frutas: {2} | Total de Incensos: {3} | Ovos da Sorte: {4} | Atratores(Lures): {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -446,11 +458,11 @@
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "MOVE1"
+      "Value": "Ataque Básico"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "MOVE2"
+      "Value": "Ataque Especial"
     },
     {
       "Key": "displayHighestCandy",
@@ -503,6 +515,106 @@
     {
       "Key": "pkmNotEnoughRessources",
       "Value": "Fortalecimento do Pokemon falhado, sem recursos suficientes."
+    },
+    {
+      "Key": "snipeServerOffline",
+      "Value": "Servidor de Sniping está offline. Pulando..."
+    },
+    {
+      "Key": "firstStartPrompt",
+      "Value": "Essa é a primeira vez que inicia o programa, gostaria de começar a configuração agora? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguagePrompt",
+      "Value": "Gostaria de mudar a idioma padrão? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguageCodePrompt",
+      "Value": "Por favor insira o código do novo idioma"
+    },
+    {
+      "Key": "firstStartLanguageConfirm",
+      "Value": "Código do idioma aplicado: {0}"
+    },
+    {
+      "Key": "promptError",
+      "Value": "[ERRO DE ENTRADA] Erro na entrada, por favor encolha entre '{0}' ou '{1}"
+    },
+    {
+      "Key": "firstStartAutoGenSettings",
+      "Value": "Arquivos Config/Auth serão gerados automaticamente e precisam ser completados antes de continuar"
+    },
+    {
+      "Key": "firstStartSetupAccount",
+      "Value": "### Configurando nova conta de usuário ###"
+    },
+    {
+      "Key": "firstStartSetupTypePrompt",
+      "Value": "Por favor escolha o tipo de conta: {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTypeConfirm",
+      "Value": "Tipo de conta escolhida: {0}"
+    },
+    {
+      "Key": "firstStartSetupTypePromptError",
+      "Value": "[ERRO] informado um tipo de conta inválido, por favor encolha entre '{0}' ou '{1}'"
+    },
+    {
+      "Key": "firstStartSetupUsernamePrompt",
+      "Value": "Por favor informe o nome de usuário"
+    },
+    {
+      "Key": "firstStartSetupUsernameConfirm",
+      "Value": "Usuário aceito: {0}"
+    },
+    {
+      "Key": "firstStartSetupPasswordPrompt",
+      "Value": "Por favor informe a senha"
+    },
+    {
+      "Key": "firstStartSetupPasswordConfirm",
+      "Value": "Senha aceita: {0}"
+    },
+    {
+      "Key": "firstStartAccountCompleted",
+      "Value": "### Conta de Usuário Completa ###"
+    },
+    {
+      "Key": "firstStartDefaultLocationPrompt",
+      "Value": "Gostaria de definir uma nova localização padrão? {0}/{1}"
+    },
+    {
+      "Key": "firstStartDefaultLocationSet",
+      "Value": "Localização Padrão Aplicada"
+    },
+    {
+      "Key": "firstStartDefaultLocation",
+      "Value": "### Definir posição padrão ###"
+    },
+    {
+      "Key": "firstStartSetupDefaultLocationError",
+      "Value": "[ERRO] Por favor informe apenas um VALOR, por exemplo: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Por favor informe a Latitude (Botão direito do mouse para colar)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Lattitude aceita: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Por favor informe a Longitude (Botão direito do mouse para colar)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Longitude aceita: {0}"
+    },
+    {
+      "Key": "firstStartSetupCompleted",
+      "Value": "### CONFIGURAÇÃO COMPLETA ###"
     }
   ],
 	"PokemonStrings": [

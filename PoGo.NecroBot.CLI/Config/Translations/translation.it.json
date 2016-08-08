@@ -22,7 +22,7 @@
     },
     {
       "Key": "loginInvalid",
-      "Value": "Le credenziali utente non sono valide ed il login è fallito"
+      "Value": "Le credenziali utente inserite non sono valide ed il login è fallito"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
@@ -31,11 +31,11 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Nessun PokeStop disponibile trovato nella tua area. Distanza massima troppo piccola?"
+      "Value": "Nessun PokeStop disponibile è stato trovato nella tua area. Distanza massima impostata troppo piccola?"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nome {0} PE: {1}, Gemme: {2}, Oggetti: {3}"
+      "Value": "Nome: {0} PE: {1}, Gemme: {2}, Oggetti: {3}"
     },
     {
       "Key": "eventFortFailed",
@@ -43,23 +43,23 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Arrivo al Pokestop: {0} in ({1}m)"
+      "Value": "Camminando verso il Pokestop: {0} ({1}m) ({2} secondi)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Giocando come {0}"
+      "Value": "Loggato come {0}"
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "Usato Aroma, rimanenti: {0}"
+      "Value": "Usato un Aroma, rimanenti: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Usato Fortunuovo, rimanenti: {0}"
+      "Value": "Usato un Fortunuovo, rimanenti: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} con successo per {1}pe"
+      "Value": "{0} evoluto con successo per {1}pe"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -67,20 +67,23 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- PL: {1}  IV: {2}%   [Miglior PL: {3}  IV: {4}%] (Caramelle: {5})"
+      "Value": "{0}\t- PL: {1}  IV: {2}%   [Migliore PL: {3}  IV: {4}%] (Caramelle: {5})"
     },
     {
       "Key": "eventItemRecycled",
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
-      "Value":
-        "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Probabilita': {7}% | distanza {8}m | con una {9} ({10} rimanenti). | {11}"
+      "Key": "eventPokemonCaptureSuccess",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | {11} PE guadagnati | {12} | lat: {13} long: {14}"
+    },
+    {
+      "Key": "eventPokemonCaptureFailed",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Nessuna Pokeball - Perso {0} con PL {1}"
+      "Value": "Nessuna Pokeball rimasta - Perso {0} con PL {1}"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
@@ -133,23 +136,23 @@
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "Sconosciuto"
+      "Value": "sconosciuto"
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "MostraPLPiu'Alti"
+      "Value": "Mostra PL piu' alti"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "MostraPerfettiPiu'Alti"
+      "Value": "Mostra IV piu' alti"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "MostraLivelliPiu'Alti"
+      "Value": "Mostra livelli piu' alti"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Controlla che Lat e Lng siano corretti. Chiudi il Programma se non lo sono! Lat: {0} Lng: {1}"
+      "Value": "Controlla che Lat e Lng siano corretti. Chiudi il programma se non lo sono! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -209,7 +212,7 @@
     },
     {
       "Key": "logEntryEgg",
-      "Value": "UOVA"
+      "Value": "UOVO"
     },
     {
       "Key": "logEntryDebug",
@@ -221,23 +224,23 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "Log in come {0}"
+      "Value": "Log in tramite {0}"
     },
     {
       "Key": "ptcOffline",
-      "Value": "I Server PTC sono probabilmente offline o le tue credenziali sono sbagliate. Prova con Google"
+      "Value": "I Server PTC sono offline o le tue credenziali sono sbagliate. Prova ad accedere con Google"
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "Tentativo successivo in {0} secondi..."
+      "Value": "Prossimo tentativo in {0} secondi..."
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Account non verificato! Uscita..."
+      "Value": "Account non verificato! Uscita in corso..."
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Apertura pagina Dispositivi Google. Incolla il codice con CTRL+V"
+      "Value": "Apertura pagina Dispositivi Google nel browser. Incolla il codice con CTRL+V"
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -265,11 +268,11 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "Auto aggiornamento disabilitato. Ottieni l'ultima versione da: {0}\n"
+      "Value": "Aggiornamento automatico disabilitato. Scarica l'ultima versione da: {0}\n"
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Scaricamento ed installazione aggiornamento..."
+      "Value": "Scaricamento ed installazione aggiornamento in corso..."
     },
     {
       "Key": "finishedDownloadingRelease",
@@ -309,11 +312,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Inventario Attuale] Pokeball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
+      "Value": "Pokeball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "[Inventario Attuale] Pozioni: {0} | Revitalizzanti: {1} | Bacche: {2} | Aromi: {3} | Fortunuovi: {4} | Moduli Esca: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Pozioni: {0} | SuperPozioni: {1} | HyperPozioni: {2} | MaxPozioni: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revitalizzanti: {0} | MaxRevital: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Bacche: {0} | Incensi: {1} | Fortunuovi: {2} | Esche: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -330,7 +341,7 @@
     {
       "Key": "invFullTransferManually",
       "Value":
-        "Inventario Pokemon pieno. Trasferisci i Pokemon manualmente o setta TransferDuplicatePokemon 'true' nelle impostazioni..."
+        "Inventario Pokemon pieno. Trasferisci i Pokemon manualmente o imposta TransferDuplicatePokemon 'true' nelle impostazioni..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -338,11 +349,11 @@
     },
     {
       "Key": "encounterProblem",
-      "Value": "Problema Incontro: {0}"
+      "Value": "Problema Incontrato: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Problema Incontro: Pokemon attirato {0}"
+      "Value": "Problema Incontrato: Pokemon attirato {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -362,27 +373,27 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Tentativo Cattura"
+      "Value": "Tentativo di Cattura"
     },
     {
       "Key": "catchStatusError",
-      "Value": "Errore Cattura"
+      "Value": "Errore di Cattura"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Uscito da Pokeball"
+      "Value": "Uscito"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "Fuga da Cattura"
+      "Value": "Fuggito"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "Cattura Mancata"
+      "Value": "Mancato"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "Successo Cattura"
+      "Value": "Catturato"
     },
     {
       "Key": "catchTypeNormal",
@@ -416,7 +427,7 @@
     {
       "Key": "googleTwoFactorAuth",
       "Value":
-        "Dato che hai la Verifica in Due Passaggi di Google attivata, devi inserire una Password Specifica per l'App nel file auth.json "
+        "Dato che hai la Verifica in Due Passaggi di Google attivata, devi inserire una Password Specifica per l'app nel file auth.json "
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -460,7 +471,7 @@
     },
     {
       "Key": "displayHighestCandy",
-      "Value": "Caramella"
+      "Value": "Caramelle"
     },
     {
       "Key": "iPBannedError",

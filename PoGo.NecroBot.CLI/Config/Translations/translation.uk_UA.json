@@ -67,9 +67,12 @@
       "Value": "{0} x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
-      "Value":
-        "=> ({0}) ({1}) {2} {3} -рівень (CР: {4} / {5} | VI: {6}%) з {7}% шансом на {8} м ісп. {9} ({10} залишилося) {11} "
+      "Key": "eventPokemonCaptureSuccess",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+    },
+    {
+      "Key": "eventPokemonCaptureFailed",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",

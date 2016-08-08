@@ -18,7 +18,7 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Nieznany \"AuthType\" w pliku \"config.json\"."
+      "Value": "Nieznany 'AuthType' w pliku 'config.json'"
     },
     {
       "Key": "loginInvalid",
@@ -26,7 +26,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Znajdujesz się poza zdefiniowanym zasięgiem. Zostaniesz przeniesiony na start odległy o ({0}m) za 5 sekund. Sprawdź, czy plik \"LastPos.ini\" jest poprawny"
+      "Value": "Znajdujesz się poza zdefiniowanym zasięgiem. Zostaniesz przeniesiony na start odległy o ({0}m) za 5 sekund. Sprawdź, czy plik 'LastPos.ini' jest poprawny"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -38,11 +38,11 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Nazwa: {0}   INFO: Zbieranie przedmiotów nie , prawdopodobnie masz SoftBana. Odbanowanie za: {1}/{2}"
+      "Value": "Nazwa: {0}   INFO: Zbieranie przedmiotów nie powiodła sie, prawdopodobnie masz SoftBana. Odbanowanie za: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Dotarcie do PokeStopu: {0} za (({1}m) ({2}s)"
+      "Value": "Dotarcie do PokeStopu: {0} za ({1}m) ({2}s)"
     },
     {
       "Key": "eventProfileLogin",
@@ -73,8 +73,12 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2}   [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | {11} | Szerokość: {12} Długość: {13}"
+      "Key": "eventPokemonCaptureSuccess",
+      "Value": "({0}) | ({1}) {2}   [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | EXP: {11} | {12} | Szerokość: {13} Długość: {14}"
+    },
+    {
+      "Key": "eventPokemonCaptureFailed",
+      "Value": "({0}) | ({1}) {2}   [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | Szerokość: {11} Długość: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -217,12 +221,24 @@
       "Value": "AKTUALIZACJA"
     },
     {
+      "Key": "logEntryNew",
+      "Value": "NOWY"
+    },
+    {
       "Key": "loggingIn",
       "Value": "Logujesz się przy użyciu: Konta {0}"
     },
     {
       "Key": "ptcOffline",
       "Value": "Serwery PTC najprawdopodobniej nie działają albo Twoje dane logowania są błędne. Spróbuj użyć konta Google"
+    },
+    {
+      "Key": "accessTokenExpired",
+      "Value": "Token logowania PTC wygasł. Ponowne logowanie..."
+    },
+    {
+      "Key": "invalidResponse",
+      "Value": "Otrzymano niepoprawną odpowiedź od serwera Niantic"
     },
     {
       "Key": "tryingAgainIn",
@@ -246,15 +262,15 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Wykryto realistyczne podróżowanie. Załadowano ustawienia z \"config.json\""
+      "Value": "Wykryto realistyczne podróżowanie. Załadowano ustawienia z 'config.json'"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Nierealistyczne podróżowanie na {0}, używam Twojej ostatniej pozycji z \"LastPos.ini\""
+      "Value": "Nierealistyczne podróżowanie na {0}, używam Twojej ostatniej pozycji z 'LastPos.ini'"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Współrzędne w pliku \"LastPos.ini\" są niepoprawne, wczytywanie ustawień domyślnych"
+      "Value": "Współrzędne w pliku 'LastPos.ini' są niepoprawne, wczytywanie ustawień domyślnych"
     },
     {
       "Key": "gotUpToDateVersion",
@@ -306,15 +322,23 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Aktualny Ekwipunek] Pokeballe: {0} | Greatballe: {1} | Ultraballe: {2} | Masterballe: {3}"
+      "Value": "Pokeballe: {0} | Greatballe: {1} | Ultraballe: {2} | Masterballe: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "[Aktualny Ekwipunek] Potiony: {0} | Ożywienia: {1} | Jagody: {2} | Incensy: {3} | Lucky Eggy: {4} | Lury: {5}"
+      "Key": "currentPotionInv",
+      "Value": "Potiony: {0} | SuperPotiony: {1} | HyperPotiony: {2} | MaxPotiony: {3}"
+    },
+    {
+      "Key": "currentReviveInv",
+      "Value": "Revivy: {0} | MaxRevivy: {1}"
+    },
+    {
+      "Key": "currentMiscItemInv",
+      "Value": "Jagody: {0} | Incensy: {1} | LuckyEggy: {2} | Lury: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[Błąd Konfiguracji] Ustawiona przez Ciebie dopuszczalna ilość itemów w Ekwipunku (PokeBalle+Mikstury+Wskrzeszenia={0}) przekracza maksymalną jego pojemność, która wynosi: ({1})"
+      "Value": "[Błąd Konfiguracji] Ustawiona przez Ciebie dopuszczalna ilość itemów w Ekwipunku (PokeBalle+Potiony+Revivy={0}) przekracza maksymalną jego pojemność, która wynosi: ({1})"
     },
     {
       "Key": "recyclingQuietly",
@@ -410,7 +434,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Na Twoim koncie Google aktywna jest weryfikacja dwuetapowa, będziesz musiał wprowadzić nowe hasło do aplikacji w \"auth.json\""
+      "Value": "Na Twoim koncie Google aktywna jest weryfikacja dwuetapowa, będziesz musiał wprowadzić nowe hasło do aplikacji w 'auth.json'"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -422,27 +446,27 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Wypełnij GoogleUsername oraz GooglePassword w \"auth.json\""
+      "Value": "Wypełnij GoogleUsername oraz GooglePassword w 'auth.json'"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Wypełnij PtcUsername oraz PtcPassword w \"auth.json\""
+      "Value": "Wypełnij PtcUsername oraz PtcPassword w 'auth.json'"
     },
     {
       "Key": "snipeScan",
-      "Value": "[Snajper] Skanowanie w poszukiwaniu Pokemona w {0}..."
+      "Value": "Skanowanie w poszukiwaniu Pokemona [{0}]..."
     },
     {
       "Key": "snipeScanEx",
-      "Value": "[Snajper] Mam na celowniku {0} z IV: {1} w {2}..."
+      "Value": "Mam na celowniku {0} z IV: {1} [{2}]..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Snajper] Nie znaleziono żadnego Pokemona"
+      "Value": "Nie znaleziono żadnego Pokemona"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value":  "[Snajper] Zbyt mało Pokeballi ({0}/{1})"
+      "Value":  "Zbyt mało Pokeballi ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -498,7 +522,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "Potencjalnych ewolucji: {0}"
+      "Value": "Pokemonów oczekujących na ewolucje: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
@@ -506,7 +530,103 @@
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "[Snajper] Serwer jest wyłączony. Pomijam..."
+      "Value": "Serwer jest wyłączony. Pomijam..."
+    },
+    {
+      "Key": "firstStartPrompt",
+      "Value": "To są Twoje pierwsze kroki. Chciałbyś rozpocząć początkową konfigurację? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguagePrompt",
+      "Value": "Masz ochotę zmienić język domyślny? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguageCodePrompt",
+      "Value": "Wpisz nowy kod języka"
+    },
+    {
+      "Key": "firstStartLanguageConfirm",
+      "Value": "Wybrany kod języka: {0}"
+    },
+    {
+      "Key": "promptError",
+      "Value": "[ERROR] Błąd, podaj '{0}' lub '{1}"
+    },
+    {
+      "Key": "firstStartAutoGenSettings",
+      "Value": "Musisz poczekać na automatyczne wygenerowanie plików 'config.json' / 'auth.json'..."
+    },
+    {
+      "Key": "firstStartSetupAccount",
+      "Value": "### Tworzenie nowego konta użytkownika ###"
+    },
+    {
+      "Key": "firstStartSetupTypePrompt",
+      "Value": "Proszę wybrać typ konta: {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTypeConfirm",
+      "Value": "Wybrany typ konta: {0}"
+    },
+    {
+      "Key": "firstStartSetupTypePromptError",
+      "Value": "[BŁĄD] Wybrano nieprawidłowy typ konta, proszę wybrać '{0}' lub '{1}'"
+    },
+    {
+      "Key": "firstStartSetupUsernamePrompt",
+      "Value": "Proszę wprowadzić nazwę użytkownika:"
+    },
+    {
+      "Key": "firstStartSetupUsernameConfirm",
+      "Value": "Zapisana nazwa użytkownika: {0}"
+    },
+    {
+      "Key": "firstStartSetupPasswordPrompt",
+      "Value": "Proszę wprowadzić hasło:"
+    },
+    {
+      "Key": "firstStartSetupPasswordConfirm",
+      "Value": "Zapisane hasło: {0}"
+    },
+    {
+      "Key": "firstStartAccountCompleted",
+      "Value": "### Konto użytkownika utworzone ###"
+    },
+    {
+      "Key": "firstStartDefaultLocationPrompt",
+      "Value": "Chcesz ustawić nową lokalizacje domyślną? {0}/{1}"
+    },
+    {
+      "Key": "firstStartDefaultLocationSet",
+      "Value": "Domyślna lokalizacja zastosowana"
+    },
+    {
+      "Key": "firstStartDefaultLocation",
+      "Value": "### Ustawienia domyślnej pozycji ###"
+    },
+    {
+      "Key": "firstStartSetupDefaultLocationError",
+      "Value": "[BŁĄD] Proszę wpisywać tylko wartość. Na przykład: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Proszę wprowadzić Szerokość: (PPM, aby wkleić)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Zapisana Szerokość: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Proszę wprowadzić Długość: (PPM, aby wkleić)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Zapisana Długość: {0}"
+    },
+    {
+      "Key": "firstStartSetupCompleted",
+      "Value": "### Ustawianie configu zakończone ###"
     }
   ],
   "PokemonStrings": [
@@ -624,7 +744,7 @@
     },
     {
       "Key": "nidoranFemale",
-      "Value": "NidoranF"
+      "Value": "NidoranFemale"
     },
     {
       "Key": "nidorina",
@@ -636,7 +756,7 @@
     },
     {
       "Key": "nidoranMale",
-      "Value": "NidoranM"
+      "Value": "NidoranMale"
     },
     {
       "Key": "nidorino",
@@ -1116,7 +1236,7 @@
     }
   ],
   "PokemonMovesetStrings": [
-	  {
+    {
       "Key": "moveUnset",
       "Value": "MoveUnset"
     },

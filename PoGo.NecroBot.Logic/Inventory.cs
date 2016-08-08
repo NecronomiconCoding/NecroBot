@@ -99,31 +99,36 @@ namespace PoGo.NecroBot.Logic
 
             var pokemonToTransfer = myPokemonList.Where(p => !pokemonsNotToTransfer.Contains(p.PokemonId) && p.DeployedFortId == string.Empty && p.Favorite == 0).ToList();
 
-            pokemonToTransfer = 
-                pokemonToTransfer.Where(
-                    p =>
-                    {
-                        var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
+            try
+            {
+                pokemonToTransfer =
+                    pokemonToTransfer.Where(
+                        p =>
+                        {
+                            var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
 
-                        return
-                            !pokemonTransferFilter.MovesOperator.BoolFunc(
-                                pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any(),
-                                pokemonTransferFilter.KeepMinOperator.BoolFunc(
-                                    p.Cp >= pokemonTransferFilter.KeepMinCp,
-                                    PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage,
-                                    pokemonTransferFilter.KeepMinOperator.ReverseBoolFunc(
-                                        pokemonTransferFilter.KeepMinOperator.InverseBool(pokemonTransferFilter.UseKeepMinLvl),
-                                        PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl)));
-                    }).ToList();
-
-
+                            return
+                                !pokemonTransferFilter.MovesOperator.BoolFunc(
+                                    pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any(),
+                                    pokemonTransferFilter.KeepMinOperator.BoolFunc(
+                                        p.Cp >= pokemonTransferFilter.KeepMinCp,
+                                        PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage,
+                                        pokemonTransferFilter.KeepMinOperator.ReverseBoolFunc(
+                                            pokemonTransferFilter.KeepMinOperator.InverseBool(pokemonTransferFilter.UseKeepMinLvl),
+                                            PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl)));
+                        }).ToList();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
             var myPokemonSettings = await GetPokemonSettings();
             var pokemonSettings = myPokemonSettings.ToList();
 
             var myPokemonFamilies = await GetPokemonFamilies();
             var pokemonFamilies = myPokemonFamilies.ToArray();
-
-
+            
             var results = new List<PokemonData>();
 
             foreach (var pokemonGroupToTransfer in pokemonToTransfer.GroupBy(p => p.PokemonId).ToList())
@@ -297,6 +302,8 @@ namespace PoGo.NecroBot.Logic
         {
             var itemsToRecycle = new List<ItemData>();
             var myItems = (await GetItems()).ToList();
+            if (myItems == null)
+                return itemsToRecycle;
 
             var otherItemsToRecycle = myItems
                 .Where(x => _logicSettings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
@@ -433,6 +440,19 @@ namespace PoGo.NecroBot.Logic
             }
 
             return pokemonToEvolve;
+        }
+
+        public async Task<LevelUpRewardsResponse> GetLevelUpRewards(int level)
+        {
+            var GetData = await _client.Player.GetPlayer();
+
+
+
+            var ClientLevel = await _client.Player.GetPlayerProfile(GetData.PlayerData.Username);
+            var Rewards = await _client.Player.GetLevelUpRewards(level);
+
+            return Rewards;
+
         }
 
         public async Task<List<PokemonData>> GetPokemonToUpgrade()

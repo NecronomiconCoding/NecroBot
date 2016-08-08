@@ -71,11 +71,15 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} om ({1}m)"
+      "Value": "{0} om ({1}m) ({2}sekunder)"
     },
     {
       "Key": "eventProfileLogin",
       "Value": "Spiller som {0}"
+    },
+    {
+      "Key": "eventUsedIncense",
+      "Value": "Incense brugt. Tilbage: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
@@ -91,20 +95,43 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- WP: {1}  IV: {2}%   [Bedste CP: {3}  IV: {4}%] (Candies: {5})"
+      "Value": "{0}\t- XP: {1}  IV: {2}%   [Bedste CP: {3}  IV: {4}%] (Candies: {5})"
     },
     {
       "Key": "eventItemRecycled",
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
-      "Value":
-        "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m | med {9} ({10} tilbage). | {11}"
+      "Key": "eventPokemonCaptureSuccess",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+    },
+    {
+      "Key": "eventPokemonCaptureFailed",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
       "Value": "Ikke flere PokéBalls! - Vi mistede {0} med {1} CP!"
+    },
+    {
+      "Key": "waitingForMorePokemonToEvolve",
+      "Value": "Venter på at udvikle {0} Pokémon til at {1} mere er fanget! ({2}/{3} for {4}% inventar)"
+    },
+    {
+      "Key": "useLuckyEggsMinPokemonAmountTooHigh",
+      "Value": "Lucky eggs vil aldrig blive brugt med UseLuckyEggsMinPokemonAmount sat til {0}, brug <= {1} istedet"
+    },
+    {
+      "Key": "catchMorePokemonToUseLuckyEgg",
+      "Value": "Fang {0} Pokémon mere for at bruge et Lucky Egg!"
+    },
+    {
+      "Key": "eventUseBerry",
+      "Value": "Brugte {0} | {1} tilbage!"
+    },
+    {
+      "Key": "itemRazzBerry",
+      "Value": "Razz Berry"
     },
     {
       "Key": "catchStatusAttempt",
@@ -132,7 +159,7 @@
     },
     {
       "Key": "commonWordName",
-      "Value": "Navn"
+      "Value": "navn"
     },
     {
       "Key": "commonWordUnknown",
@@ -164,7 +191,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Æg udklækket: {0}"
+      "Value": "Inkubateret æg har udklækket: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -228,7 +255,7 @@
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "Prøver igen om {0} Sekunder..."
+      "Value": "Prøver igen om {0} sekunder..."
     },
     {
       "Key": "accountNotVerified",
@@ -264,7 +291,7 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "AutoUpdater er deaktiveret. Aktuel Version på: {0}\n "
+      "Value": "AutoUpdater er deaktiveret. Få den seneste udgivelse fra: {0}\n "
     },
     {
       "Key": "downloadingUpdate",
@@ -322,6 +349,10 @@
     {
       "Key": "pokemonRename",
       "Value": "Pokémon {0} ({1}) er blevet omdøbt fra {2} til {3}."
+    },
+    {
+      "Key": "pokemonFavorite",
+      "Value": "{0}% perfekt {1} (CP {2}) *favorited*."
     },
     {
       "Key": "pokemonIgnoreFilter",

@@ -172,7 +172,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         var pokemonOnlyList = session.LogicSettings.PokemonToSnipe.Pokemon;
                         var capturedPokemon = PokeDex.Where(i => i.InventoryItemData.PokedexEntry.TimesCaptured >= 1).Select(i => i.InventoryItemData.PokedexEntry.PokemonId);
                         var pokemonToCapture = Enum.GetValues(typeof(PokemonId)).Cast<PokemonId>().Except(capturedPokemon);
-                        pokemonIds = pokemonOnlyList.Concat(pokemonToCapture).ToList();
+                        pokemonIds = pokemonOnlyList.Union(pokemonToCapture).ToList();
                     }
                     else
                     {
@@ -312,6 +312,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             var CurrentLatitude = session.Client.CurrentLatitude;
             var CurrentLongitude = session.Client.CurrentLongitude;
+            var catchedPokemon = false;
 
             session.EventDispatcher.Send(new SnipeModeEvent {Active = true});
 
@@ -367,6 +368,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
 
                     await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon);
+                    catchedPokemon = true;
                 }
                 else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                 {
@@ -404,6 +406,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch, cancellationToken);
                 }
+            }
+
+            if (!catchedPokemon)
+            {
+                session.EventDispatcher.Send(new SnipeEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
+                });
             }
 
             session.EventDispatcher.Send(new SnipeModeEvent {Active = false});

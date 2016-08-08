@@ -26,17 +26,31 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentAmountOfUltraballs = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
             var currentAmountOfMasterballs = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
-            if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
+            if (session.LogicSettings.DetailedCountsBeforeRecycling)
                 Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
                     currentAmountOfPokeballs, currentAmountOfGreatballs, currentAmountOfUltraballs,
                     currentAmountOfMasterballs));
 
-            var currentAmountOfPotions = await session.Inventory.GetItemAmountByType(ItemId.ItemMaxPotion) +
-                await session.Inventory.GetItemAmountByType(ItemId.ItemHyperPotion) +
-                await session.Inventory.GetItemAmountByType(ItemId.ItemSuperPotion) +
-                await session.Inventory.GetItemAmountByType(ItemId.ItemPotion);
-            var currentAmountOfRevives = await session.Inventory.GetItemAmountByType(ItemId.ItemMaxRevive) +
-                await session.Inventory.GetItemAmountByType(ItemId.ItemRevive);
+            var currentPotions = await session.Inventory.GetItemAmountByType(ItemId.ItemPotion);
+            var currentSuperPotions = await session.Inventory.GetItemAmountByType(ItemId.ItemSuperPotion);
+            var currentHyperPotions = await session.Inventory.GetItemAmountByType(ItemId.ItemHyperPotion);
+            var currentMaxPotions = await session.Inventory.GetItemAmountByType(ItemId.ItemMaxPotion);
+
+            var currentAmountOfPotions = currentPotions + currentSuperPotions + currentHyperPotions + currentMaxPotions;
+
+            if (session.LogicSettings.DetailedCountsBeforeRecycling)
+                Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentPotionInv,
+                    currentPotions, currentSuperPotions, currentHyperPotions, currentMaxPotions));
+            
+            var currentRevives = await session.Inventory.GetItemAmountByType(ItemId.ItemRevive);
+            var currentMaxRevives = await session.Inventory.GetItemAmountByType(ItemId.ItemMaxRevive);
+
+            var currentAmountOfRevives = currentRevives + currentMaxRevives;
+
+            if (session.LogicSettings.DetailedCountsBeforeRecycling)
+                Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentReviveInv,
+                    currentRevives, currentMaxRevives));
+
             var currentAmountOfBerries = await session.Inventory.GetItemAmountByType(ItemId.ItemRazzBerry) +
                 await session.Inventory.GetItemAmountByType(ItemId.ItemBlukBerry) +
                 await session.Inventory.GetItemAmountByType(ItemId.ItemNanabBerry) +
@@ -49,10 +63,9 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentAmountOfLuckyEggs = await session.Inventory.GetItemAmountByType(ItemId.ItemLuckyEgg);
             var currentAmountOfLures = await session.Inventory.GetItemAmountByType(ItemId.ItemTroyDisk);
 
-            if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
-                Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentItemInv,
-                    currentAmountOfPotions, currentAmountOfRevives, currentAmountOfBerries, 
-                    currentAmountOfIncense, currentAmountOfLuckyEggs, currentAmountOfLures));
+            if (session.LogicSettings.DetailedCountsBeforeRecycling)
+                Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentMiscItemInv,
+                    currentAmountOfBerries, currentAmountOfIncense, currentAmountOfLuckyEggs, currentAmountOfLures));
             
             var currentTotalItems = await session.Inventory.GetTotalItemCount();
             if ((session.Profile.PlayerData.MaxItemStorage * session.LogicSettings.RecycleInventoryAtUsagePercentage/100.0f) > currentTotalItems)

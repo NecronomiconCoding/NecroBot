@@ -40,7 +40,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     LogLevel.Warning);
 
                 await session.Navigation.Move(
-                    new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude),
+                    new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude, LocationUtils.getElevation(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude)),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken, session.LogicSettings.DisableHumanWalking);
             }
 
