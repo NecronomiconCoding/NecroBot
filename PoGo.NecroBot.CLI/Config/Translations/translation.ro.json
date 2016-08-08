@@ -34,7 +34,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nume: {0} XP: {1} Gemuri: {2} Obiecte: {3} Lat: {4} Long: {5}"
+      "Value": "Nume: {0} XP: {1} Gemuri: {2} Obiecte: {3}"
     },
     {
       "Key": "eventFortFailed",

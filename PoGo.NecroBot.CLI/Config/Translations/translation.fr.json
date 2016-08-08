@@ -34,7 +34,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "{0} +{1}XP |{2}| {3} | {4},{5}"
+      "Value": "{0} +{1}XP |{2}| {3}"
     },
     {
       "Key": "eventFortFailed",

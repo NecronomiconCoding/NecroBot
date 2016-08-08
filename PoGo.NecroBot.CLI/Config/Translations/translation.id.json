@@ -34,7 +34,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nickname: {0} XP: {1}, Gem: {2}, Item: {3}, Koordinat X (latitude): {4}, Koordinat Y (longitude): {5}"
+      "Value": "Nickname: {0} XP: {1}, Gem: {2}, Item: {3}"
     },
     {
       "Key": "eventFortFailed",

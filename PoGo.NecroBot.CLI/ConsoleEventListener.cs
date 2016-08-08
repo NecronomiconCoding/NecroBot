@@ -180,19 +180,13 @@ namespace PoGo.NecroBot.CLI
             if (pokemonCaptureEvent.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
             {
                message = session.Translation.GetTranslation(TranslationString.EventPokemonCaptureSuccess, catchStatus, catchType, session.Translation.GetPokemonTranslation(pokemonCaptureEvent.Id),
-               pokemonCaptureEvent.Level, pokemonCaptureEvent.Cp, pokemonCaptureEvent.MaxCp, pokemonCaptureEvent.Perfection.ToString("0.00"), pokemonCaptureEvent.Probability,
-               pokemonCaptureEvent.Distance.ToString("F2"),
-               returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount,
-               pokemonCaptureEvent.Exp, familyCandies, pokemonCaptureEvent.Latitude.ToString("0.000000"), pokemonCaptureEvent.Longitude.ToString("0.000000"));
+               pokemonCaptureEvent.Cp, pokemonCaptureEvent.Perfection.ToString("0.00"), returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount);
                Logger.Write(message, LogLevel.Caught);
             }
             else
             {
                 message = session.Translation.GetTranslation(TranslationString.EventPokemonCaptureFailed, catchStatus, catchType, session.Translation.GetPokemonTranslation(pokemonCaptureEvent.Id),
-                pokemonCaptureEvent.Level, pokemonCaptureEvent.Cp, pokemonCaptureEvent.MaxCp, pokemonCaptureEvent.Perfection.ToString("0.00"), pokemonCaptureEvent.Probability,
-                pokemonCaptureEvent.Distance.ToString("F2"),
-                returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount,
-                pokemonCaptureEvent.Latitude.ToString("0.000000"), pokemonCaptureEvent.Longitude.ToString("0.000000"));
+                pokemonCaptureEvent.Cp, pokemonCaptureEvent.Perfection.ToString("0.00"), returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount);
                 Logger.Write(message, LogLevel.Flee);
             }
 
