@@ -73,6 +73,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                             });
                             return;
                         }
+                        else
+                        {
+                            if (await shouldUseLuckyEgg(session, pokemonToEvolve))
+                            {
+                                await UseLuckyEgg(session);
+                            }
+                            await evolve(session, pokemonToEvolve);
+                        }
                     }
                     else
                     {
@@ -85,13 +93,24 @@ namespace PoGo.NecroBot.Logic.Tasks
                             });
                             return;
                         }
+                        else
+                        {
+                            if (await shouldUseLuckyEgg(session, pokemonToEvolve))
+                            {
+                                await UseLuckyEgg(session);
+                            }
+                            await evolve(session, pokemonToEvolve);
+                        }
                     }
                 }
-                if (await shouldUseLuckyEgg(session, pokemonToEvolve))
+                if(session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
                 {
-                    await UseLuckyEgg(session);
+                    if (await shouldUseLuckyEgg(session, pokemonToEvolve))
+                    {
+                        await UseLuckyEgg(session);
+                    }
+                    await evolve(session, pokemonToEvolve);
                 }
-                await evolve(session, pokemonToEvolve);
             }
         }
 
