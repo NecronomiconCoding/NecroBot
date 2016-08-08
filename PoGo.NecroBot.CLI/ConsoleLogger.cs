@@ -81,6 +81,7 @@ namespace PoGo.NecroBot.CLI
                 case LogLevel.Caught:
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Pkmn}) {message}");
+                    Console.WriteLine($"{"*"}");
                     break;
                 case LogLevel.Flee:
                     Console.ForegroundColor = ConsoleColor.DarkYellow;
