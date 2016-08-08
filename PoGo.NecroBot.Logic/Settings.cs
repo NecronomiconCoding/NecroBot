@@ -350,8 +350,6 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("or")]
         public string UseBerriesOperator;
         //snipe
-        [DefaultValue(true)]
-        public bool UseSnipeOnlineLocationServer;
         [DefaultValue(false)]
         public bool UseSnipeLocationServer;
         [DefaultValue("localhost")]
@@ -1290,7 +1288,6 @@ namespace PoGo.NecroBot.Logic
         public bool GetSniperInfoFromPokezz => _settings.GetSniperInfoFromPokezz;
         public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.GetOnlyVerifiedSniperInfoFromPokezz;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
-        public bool UseSnipeOnlineLocationServer => _settings.UseSnipeOnlineLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
