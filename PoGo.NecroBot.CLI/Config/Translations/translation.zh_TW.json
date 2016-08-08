@@ -1262,7 +1262,7 @@
     },
     {
       "Key": "takeDown",
-      "Value": "TakeDown"
+      "Value": "猛撞"
     },
     {
       "Key": "waterGun",
@@ -1278,7 +1278,7 @@
     },
     {
       "Key": "doubleSlap",
-      "Value": "DoubleSlap"
+      "Value": "連環巴掌"
     },
     {
       "Key": "wrap",
@@ -1298,7 +1298,7 @@
     },
     {
       "Key": "smog",
-      "Value": "Smog"
+      "Value": "迷霧"
     },
     {
       "Key": "sludge",
@@ -1394,7 +1394,7 @@
     },
     {
       "Key": "airSlash",
-      "Value": "AirSlash"
+      "Value": "空氣砍"
     },
     {
       "Key": "heatWave",
@@ -1402,7 +1402,7 @@
     },
     {
       "Key": "twineedle",
-      "Value": "Twineedle"
+      "Value": "雙針"
     },
     {
       "Key": "poisonJab",
@@ -1750,7 +1750,7 @@
     },
     {
       "Key": "slam",
-      "Value": "Slam"
+      "Value": "摔打"
     },
     {
       "Key": "bodySlam",
@@ -1766,11 +1766,11 @@
     },
     {
       "Key": "scaldBlastoise",
-      "Value": "ScaldBlastoise"
+      "Value": "沸水(水箭龜)"
     },
     {
       "Key": "hydroPumpBlastoise",
-      "Value": "HydroPumpBlastoise"
+      "Value": "水壓(水箭龜)"
     },
     {
       "Key": "wrapGreen",
@@ -1782,171 +1782,171 @@
     },
     {
       "Key": "furyCutterFast",
-      "Value": "FuryCutterFast"
+      "Value": "連續切"
     },
     {
       "Key": "bugBiteFast",
-      "Value": "BugBiteFast"
+      "Value": "蟲食"
     },
     {
       "Key": "biteFast",
-      "Value": "BiteFast"
+      "Value": "啃咬"
     },
     {
       "Key": "suckerPunchFast",
-      "Value": "SuckerPunchFast"
+      "Value": "偷襲"
     },
     {
       "Key": "dragonBreathFast",
-      "Value": "DragonBreathFast"
+      "Value": "龍之吐息"
     },
     {
       "Key": "thunderShockFast",
-      "Value": "ThunderShockFast"
+      "Value": "電擊"
     },
     {
       "Key": "sparkFast",
-      "Value": "SparkFast"
+      "Value": "電火花"
     },
     {
       "Key": "lowKickFast",
-      "Value": "LowKickFast"
+      "Value": "過肩摔"
     },
     {
       "Key": "karateChopFast",
-      "Value": "KarateChopFast"
+      "Value": "空手刀"
     },
     {
       "Key": "emberFast",
-      "Value": "EmberFast"
+      "Value": "火苗"
     },
     {
       "Key": "wingAttackFast",
-      "Value": "WingAttackFast"
+      "Value": "翅膀拍擊"
     },
     {
       "Key": "peckFast",
-      "Value": "PeckFast"
+      "Value": "啄擊"
     },
     {
       "Key": "lickFast",
-      "Value": "LickFast"
+      "Value": "舌舔"
     },
     {
       "Key": "shadowClawFast",
-      "Value": "ShadowClawFast"
+      "Value": "暗影爪擊"
     },
     {
       "Key": "vineWhipFast",
-      "Value": "VineWhipFast"
+      "Value": "藤鞭攻擊"
     },
     {
       "Key": "razorLeafFast",
-      "Value": "RazorLeafFast"
+      "Value": "飛葉斬"
     },
     {
       "Key": "mudShotFast",
-      "Value": "MudShotFast"
+      "Value": "泥漿噴射"
     },
     {
       "Key": "iceShardFast",
-      "Value": "IceShardFast"
+      "Value": "冰之礫"
     },
     {
       "Key": "frostBreathFast",
-      "Value": "FrostBreathFast"
+      "Value": "冰之吐息"
     },
     {
       "Key": "quickAttackFast",
-      "Value": "QuickAttackFast"
+      "Value": "電光石火"
     },
     {
       "Key": "scratchFast",
-      "Value": "ScratchFast"
+      "Value": "抓擊"
     },
     {
       "Key": "tackleFast",
-      "Value": "TackleFast"
+      "Value": "撞擊"
     },
     {
       "Key": "poundFast",
-      "Value": "PoundFast"
+      "Value": "拍打"
     },
     {
       "Key": "cutFast",
-      "Value": "CutFast"
+      "Value": "居合斬"
     },
     {
       "Key": "poisonJabFast",
-      "Value": "PoisonJabFast"
+      "Value": "毒刺"
     },
     {
       "Key": "acidFast",
-      "Value": "AcidFast"
+      "Value": "溶解液"
     },
     {
       "Key": "psychoCutFast",
-      "Value": "PsychoCutFast"
+      "Value": "精神切割"
     },
     {
       "Key": "rockThrowFast",
-      "Value": "RockThrowFast"
+      "Value": "滾石"
     },
     {
       "Key": "metalClawFast",
-      "Value": "MetalClawFast"
+      "Value": "合金爪"
     },
     {
       "Key": "bulletPunchFast",
-      "Value": "BulletPunchFast"
+      "Value": "飛彈拳"
     },
     {
       "Key": "waterGunFast",
-      "Value": "WaterGunFast"
+      "Value": "水槍"
     },
     {
       "Key": "splashFast",
-      "Value": "SplashFast"
+      "Value": "水濺躍"
     },
     {
       "Key": "waterGunFastBlastoise",
-      "Value": "WaterGunFastBlastoise"
+      "Value": "水槍(水箭龜)"
     },
     {
       "Key": "mudSlapFast",
-      "Value": "MudSlapFast"
+      "Value": "擲泥"
     },
     {
       "Key": "zenHeadbuttFast",
-      "Value": "ZenHeadbuttFast"
+      "Value": "意念頭錘"
     },
     {
       "Key": "confusionFast",
-      "Value": "ConfusionFast"
+      "Value": "念力"
     },
     {
       "Key": "poisonStingFast",
-      "Value": "PoisonStingFast"
+      "Value": "毒針"
     },
     {
       "Key": "bubbleFast",
-      "Value": "BubbleFast"
+      "Value": "泡泡"
     },
     {
       "Key": "feintAttackFast",
-      "Value": "FeintAttackFast"
+      "Value": "虛晃一招"
     },
     {
       "Key": "steelWingFast",
-      "Value": "SteelWingFast"
+      "Value": "鋼之翼"
     },
     {
       "Key": "fireFangFast",
-      "Value": "FireFangFast"
+      "Value": "炎牙"
     },
     {
       "Key": "rockSmashFast",
-      "Value": "RockSmashFast"
+      "Value": "岩石粉碎"
     }
   ]
 }
