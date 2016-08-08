@@ -184,5 +184,11 @@ namespace PoGo.NecroBot.Logic
         SnipeSettings PokemonToSnipe { get; }
 
         bool StartupWelcomeDelay { get; }
+
+        bool AlertEnable { get; }
+        string AlertSound { get; }
+        int AlertCP { get; }
+        float AlertIV { get; }
+        ICollection<PokemonId> AlertTypes { get; }
     }
 }

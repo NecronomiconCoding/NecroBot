@@ -454,6 +454,27 @@ namespace PoGo.NecroBot.Logic
         public float FavoriteMinIvPercentage;
         [DefaultValue(false)]
         public bool AutoFavoritePokemon;
+        //alert
+        [DefaultValue(false)]
+        public bool AlertEnable;
+        [DefaultValue(@"C:\Windows\Media\tada.wav")]
+        public string AlertSound;
+        [DefaultValue(2000)]
+        public int AlertCP;
+        [DefaultValue(93)]
+        public float AlertIV;
+        public List<PokemonId> AlertTypes = new List<PokemonId>
+        {
+            PokemonId.Lapras,
+            PokemonId.Ditto,
+            PokemonId.Snorlax,
+            PokemonId.Articuno,
+            PokemonId.Zapdos,
+            PokemonId.Moltres,
+            PokemonId.Dragonite,
+            PokemonId.Mewtwo,
+            PokemonId.Mew
+        };
         //notcatch
         [DefaultValue(false)]
         public bool UsePokemonToNotCatchFilter;
@@ -1312,5 +1333,11 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
         public int TotalAmountOfBerriesToKeep => _settings.TotalAmountOfBerriesToKeep;
+
+        public bool AlertEnable => _settings.AlertEnable;
+        public string AlertSound => _settings.AlertSound;
+        public int AlertCP => _settings.AlertCP;
+        public float AlertIV => _settings.AlertIV;
+        public ICollection<PokemonId> AlertTypes => _settings.AlertTypes;
     }
 }
