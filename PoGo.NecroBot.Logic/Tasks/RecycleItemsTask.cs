@@ -142,7 +142,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (totalBallsCount > session.LogicSettings.TotalAmountOfPokeballsToKeep)
             {
-                if (RandomizeRecycle) {
+                if (session.LogicSettings.RandomizeRecycle) {
                     Diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
@@ -177,7 +177,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             int totalPotionsCount = potionCount + superPotionCount + hyperPotionsCount + maxPotionCount;
             if (totalPotionsCount > session.LogicSettings.TotalAmountOfPotionsToKeep)
             {
-                if (RandomizeRecycle) {
+                if (session.LogicSettings.RandomizeRecycle) {
                     Diff = totalPotionsCount - session.LogicSettings.TotalAmountOfPotionsToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
@@ -213,7 +213,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             int totalRevivesCount = reviveCount + maxReviveCount;
             if (totalRevivesCount > session.LogicSettings.TotalAmountOfRevivesToKeep)
             {
-                if (RandomizeRecycle) {
+                if (session.LogicSettings.RandomizeRecycle) {
                     Diff = totalRevivesCount - session.LogicSettings.TotalAmountOfRevivesToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
@@ -242,7 +242,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             int totalBerryCount = razz + bluk + nanab + pinap + wepar;
             if (totalBerryCount > session.LogicSettings.TotalAmountOfBerriesToKeep)
             {
-                if (RandomizeRecycle) {
+                if (session.LogicSettings.RandomizeRecycle) {
                     Diff = totalBerryCount - session.LogicSettings.TotalAmountOfBerriesToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
