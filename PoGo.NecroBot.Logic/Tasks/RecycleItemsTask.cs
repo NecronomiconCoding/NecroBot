@@ -8,6 +8,7 @@ using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Inventory.Item;
 using System.Threading;
 using System.Threading.Tasks;
+using System;
 
 #endregion
 
