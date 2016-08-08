@@ -79,30 +79,23 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
 
-                if (session.LogicSettings.UseGMapsNavigating && !String.IsNullOrWhiteSpace(session.LogicSettings.GMapsApiKey))
+                if (session.LogicSettings.UseOsmNavigating)
                 {
-                    var request = new GoogleMapsApi.Entities.Directions.Request.DirectionsRequest
-                    {
-                        ApiKey = session.LogicSettings.GMapsApiKey,
-                        Origin = $"{session.Client.CurrentLatitude:0.000000},{session.Client.CurrentLongitude:0.000000}",
-                        Destination = $"{pokeStop.Latitude:0.000000},{pokeStop.Longitude:0.000000}",
-                        TravelMode = GoogleMapsApi.Entities.Directions.Request.TravelMode.Walking,
-                    };
-                    var query = await GoogleMapsApi.GoogleMaps.Directions.QueryAsync(request);
+                    var req = System.Net.WebRequest.CreateHttp($"http://openls.geog.uni-heidelberg.de/route?start={session.Client.CurrentLatitude:0.000000},{session.Client.CurrentLongitude:0.000000}&end={pokeStop.Latitude:0.000000},{pokeStop.Longitude:0.000000}&via=&lang=en&distunit=KM&routepref=Bicycle&weighting=Shortest&avoidAreas=&useTMC=false&noMotorways=true&noTollways=false&noUnpavedroads=false&noSteps=false&noFerries=true&instructions=false");
+                    var resp = (System.Net.HttpWebResponse)await req.GetResponseAsync();
 
-                    if (query.Status == GoogleMapsApi.Entities.Directions.Response.DirectionsStatusCodes.OK)
+                    if (resp.StatusCode == System.Net.HttpStatusCode.OK)
                     {
-                        var steps = query.Routes
-                                         .SelectMany(p => p.OverviewPath.Points)
-                                         .ToArray();
-                        //Alternative:
-                        /*
-                        var steps = query.Routes
-                                         .SelectMany(p => p.Legs)
-                                         .SelectMany(p => p.Steps)
-                                         .ToArray();
-                         */
-                        foreach (var step in steps)
+                        var doc = System.Xml.Linq.XDocument.Load(resp.GetResponseStream());
+                        foreach (var step in doc.Elements("//LineString/pos").Select(p =>
+                        {
+                            String[] parts = p.Value.Split(' ');
+                            return new
+                            {
+                                Latitude = Double.Parse(parts[0]),
+                                Longitude = Double.Parse(parts[1]),
+                            };
+                        }))
                         {
                             await MoveToLocationAsync(session, cancellationToken, step.Latitude, step.Longitude);
                         }

@@ -183,8 +183,6 @@ namespace PoGo.NecroBot.Logic
 
         bool StartupWelcomeDelay { get; }
 
-        string GMapsApiKey { get; }
-
-        bool UseGMapsNavigating { get; }
+        bool UseOsmNavigating { get; }
     }
 }
