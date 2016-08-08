@@ -193,7 +193,7 @@ namespace PoGo.NecroBot.Logic
                     settings.EvolutionIds.Count != 0)
                 {
                     var candiesToUse = familyCandy.Candy_ + inStorage;
-                    var possibleCountToEvolve = (candiesToUse / settings.CandyToEvolve;
+                    var possibleCountToEvolve = candiesToUse / settings.CandyToEvolve;
                     amountToKeepInStorage = Math.Max(amountToKeepInStorage, possibleCountToEvolve);
                 }
                
