@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jauh: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jauh: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
