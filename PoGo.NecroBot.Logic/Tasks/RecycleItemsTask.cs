@@ -17,7 +17,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     public class RecycleItemsTask
     {
         private static int Diff;
-        private static Random rnd = new Random();
+        private static Random rnd = new Random(); //Random value used for Randomizing Recycle variable
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
@@ -142,7 +142,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (totalBallsCount > session.LogicSettings.TotalAmountOfPokeballsToKeep)
             {
-                if (session.LogicSettings.RandomizeRecycle) {
+                if (session.LogicSettings.RandomizeRecycle) { //Check if user wants human-like recycling
                     Diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
@@ -177,7 +177,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             int totalPotionsCount = potionCount + superPotionCount + hyperPotionsCount + maxPotionCount;
             if (totalPotionsCount > session.LogicSettings.TotalAmountOfPotionsToKeep)
             {
-                if (session.LogicSettings.RandomizeRecycle) {
+                if (session.LogicSettings.RandomizeRecycle) { //Check if user wants human-like recycling
                     Diff = totalPotionsCount - session.LogicSettings.TotalAmountOfPotionsToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
@@ -213,7 +213,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             int totalRevivesCount = reviveCount + maxReviveCount;
             if (totalRevivesCount > session.LogicSettings.TotalAmountOfRevivesToKeep)
             {
-                if (session.LogicSettings.RandomizeRecycle) {
+                if (session.LogicSettings.RandomizeRecycle) { //Check if user wants human-like recycling
                     Diff = totalRevivesCount - session.LogicSettings.TotalAmountOfRevivesToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
@@ -242,7 +242,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             int totalBerryCount = razz + bluk + nanab + pinap + wepar;
             if (totalBerryCount > session.LogicSettings.TotalAmountOfBerriesToKeep)
             {
-                if (session.LogicSettings.RandomizeRecycle) {
+                if (session.LogicSettings.RandomizeRecycle) { //Check if user wants human-like recycling
                     Diff = totalBerryCount - session.LogicSettings.TotalAmountOfBerriesToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
