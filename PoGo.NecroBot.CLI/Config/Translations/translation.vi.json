@@ -30,15 +30,15 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Không có PokeStops nào trong khu vực này. Khoảng cách di chuyển bạn cài đặt quá nhỏ ?"
+      "Value": "Không có PokeStop nào trong khu vực này. Có thể bạn đã bị ban IP rồi đó, kiếm VPN đi thôi."
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Tên trạm: {0} XP: {1}, Gems: {2}, Items: {3}, Lat: {4}, Long: {5}"
+      "Value": "Tên trạm: {0} XP: {1}, Đá: {2}, Vật phẩm: {3}, Lat: {4}, Long: {5}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Tên trạm: {0} INFO: Có thể bạn đã bị softban. Thử unband lần: {1}/{2}"
+      "Value": "Tên trạm: {0} Thông tin: Có thể bạn đã bị softban. Thử unban lần: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -50,11 +50,11 @@
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "Đã dùng Incense, còn lại : {0}"
+      "Value": "Đã dùng Mồi nhử (Incease), còn lại : {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Đã dùng Egg, còn lại : {0}"
+      "Value": "Đã dùng Trứng may mắn, còn lại : {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -62,11 +62,11 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Thất bại {0}. Kết quả: {1}, dừng tiến hoá {2}"
+      "Value": "Thất bại {0}. Kết quả: {1}, ngừng tiến hoá {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [CP cao nhất: {3}  IV: {4}%] (Kẹo: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -74,11 +74,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Cơ hội: {7}% | Khoảng cách {8}m  | Còn lại {9} {10}. | {11} EXP nhận được | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Cơ hội: {7}% | Khoảng cách {8}m  | Còn lại {9} {10}. | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -114,7 +114,7 @@
     },
     {
       "Key": "candies",
-      "Value": "Candies: {0}"
+      "Value": "Kẹo: {0}"
     },
     {
       "Key": "unhandledGpxData",
@@ -122,19 +122,19 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokemons"
+      "Value": "Pokemon"
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "perfect"
+      "Value": "hoàn hảo"
     },
     {
       "Key": "commonWordName",
-      "Value": "name"
+      "Value": "tên"
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "Unknown"
+      "Value": "Không rõ"
     },
     {
       "Key": "displayHighestsCpHeader",
@@ -146,11 +146,11 @@
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Danh sách Lever cao nhất"
+      "Value": "Danh sách Level cao nhất"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Hãy chắc chắn toạ độ của bạn đúng. Thoát Tool nếu bạn thấy sai! Lat: {0} Lng: {1}"
+      "Value": "Hãy chắc chắn toạ độ của bạn đúng. Thoát tool nếu bạn thấy sai! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -166,15 +166,15 @@
     },
     {
       "Key": "logEntryError",
-      "Value": "ERROR"
+      "Value": "LỖI"
     },
     {
       "Key": "logEntryAttention",
-      "Value": "ATTENTION"
+      "Value": "CHÚ Ý"
     },
     {
       "Key": "logEntryInfo",
-      "Value": "INFO"
+      "Value": "THÔNG TIN"
     },
     {
       "Key": "logEntryPokestop",
@@ -182,7 +182,7 @@
     },
     {
       "Key": "logEntryFarming",
-      "Value": "FARMING"
+      "Value": "ĐANG FARM"
     },
     {
       "Key": "logEntrySniper",
@@ -190,7 +190,7 @@
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "RECYCLING"
+      "Value": "LOẠI BỎ"
     },
     {
       "Key": "logEntryPkmn",
@@ -198,11 +198,11 @@
     },
     {
       "Key": "logEntryTransfered",
-      "Value": "TRANSFERED"
+      "Value": "ĐÃ TRANSFER"
     },
     {
       "Key": "logEntryEvolved",
-      "Value": "EVOLVED"
+      "Value": "ĐÃ TIẾN HÓA"
     },
     {
       "Key": "logEntryBerry",
@@ -210,15 +210,15 @@
     },
     {
       "Key": "logEntryEgg",
-      "Value": "EGG"
+      "Value": "TRỨNG"
     },
     {
       "Key": "logEntryDebug",
-      "Value": "DEBUG"
+      "Value": "GỠ LỖI"
     },
     {
       "Key": "logEntryUpdate",
-      "Value": "UPDATE"
+      "Value": "CẬP NHẬT"
     },
     {
       "Key": "loggingIn",
@@ -242,7 +242,7 @@
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Làm ơn Copy mã code bằng tay."
+      "Value": "Hãy copy mã code bằng tay."
     },
     {
       "Key": "couldntCopyToClipboard2",
@@ -250,11 +250,11 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Phát hiện bạn đang di chuyển , hãy dùng Settings mặc định trong file config.json"
+      "Value": "Phát hiện bạn đang di chuyển , hãy dùng cài đặt mặc định trong file config.json"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Không di chuyển đến {0} ?, đang sửa dụng toạ độ lần cuối của bạn trong LastPos.ini"
+      "Value": "Không di chuyển đến {0} ?, đang sử dụng toạ độ lần cuối của bạn trong LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -266,7 +266,7 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "AutoUpdater đã tắt. Cập nhật bản mới nhất tại: {0}\n "
+      "Value": "Tự động cập nhật đã tắt. Cập nhật bản mới nhất tại: {0}\n "
     },
     {
       "Key": "downloadingUpdate",
@@ -290,7 +290,7 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Đang theo dõi incense Pokemon..."
+      "Value": "Đang theo dõi mồi nhử Pokemon..."
     },
     {
       "Key": "lookingForPokemon",
@@ -302,7 +302,7 @@
     },
     {
       "Key": "pokemonSkipped",
-      "Value": "Không bắt {0}"
+      "Value": "Đã bỏ qua {0}"
     },
     {
       "Key": "zeroPokeballInv",
@@ -310,19 +310,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
+      "Value": "Pokeball: {0} | Greatball: {1} | Ultraball: {2} | Masterball: {3}"
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "Potion: {0} | SuperPotion: {1} | HyperPotion: {2} | MaxPotion: {3}"
     },
     {
       "Key": "CurrentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
+      "Value": "Revive: {0} | MaxRevive: {1}"
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "Berry: {0} | Mồi nhử: {1} | Trứng may mắn: {2} | Mồi nhử Pokestop: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -346,11 +346,11 @@
     },
     {
       "Key": "encounterProblem",
-      "Value": "Encounter problem: {0}"
+      "Value": "Lỗi chạm trán: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Encounter problem: Lure Pokemon {0}"
+      "Value": "Lỗi chạm trán: Lure Pokemon {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -362,31 +362,31 @@
     },
     {
       "Key": "pokemonFavorite",
-      "Value": "{0}% perfect {1} (CP {2}) *Đã đưa vào DSách yêu thích*."
+      "Value": "{0}% hoàn hảo {1} (CP {2}) *Đã đưa vào Danh sách yêu thích*."
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Bộ lọc Pokemon] - Không bắt {0} như bạn cài đặt trong settings"
+      "Value": "[Bộ lọc Pokemon] - Không bắt {0} như bạn cài đặt trong setting"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "CatchAttempt"
+      "Value": "Đang Thử Bắt"
     },
     {
       "Key": "catchStatusError",
-      "Value": "CatchError"
+      "Value": "Bắt Lỗi"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "CatchEscape"
+      "Value": "Pokemon Chạy Thoát"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "CatchFlee"
+      "Value": "Pokemon Chạy Trốn"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "CatchMissed"
+      "Value": "Bắt Hụt"
     },
     {
       "Key": "catchStatusSuccess",
@@ -394,15 +394,15 @@
     },
     {
       "Key": "catchTypeNormal",
-      "Value": "Normal"
+      "Value": "Bình thường"
     },
     {
       "Key": "catchTypeLure",
-      "Value": "Lure"
+      "Value": "Mồi nhử Pokestop"
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "Incense"
+      "Value": "Mồi nhử"
     },
     {
       "Key": "webSocketFailStart",
@@ -410,7 +410,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Đã chạy {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Transfered: {6:n0} | Recycled: {7:n0}"
+      "Value": "{0} - Đã chạy {1} - Lvl: {2} | EXP/Giờ: {3:n0} | P/Giờ: {4:n0} | Stardust: {5:n0} | Pokemon đã chuyển: {6:n0} | Đã vứt: {7:n0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -454,19 +454,19 @@
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Không đủ Pokeballs để bắt Pokemon! ({0}/{1})"
+      "Value": "Không đủ Pokeball để bắt Pokemon! ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "SKILL1"
+      "Value": "KĨ NĂNG 1"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "SKILL2"
+      "Value": "KĨ NĂNG 2"
     },
     {
       "Key": "displayHighestCandy",
-      "Value": "Candy"
+      "Value": "Kẹo"
     },
     {
       "Key": "ipBannedError",
@@ -474,35 +474,35 @@
     },
     {
       "Key": "noEggsAvailable",
-      "Value": "Đã hết Eggs"
+      "Value": "Đã hết Trứng may mắn"
     },
     {
       "Key": "useLuckyEggActive",
-      "Value": "Đang mở Lucky Egg"
+      "Value": "Đang mở Trứng may mắn"
     },
     {
       "Key": "usedLuckyEgg",
-      "Value": "Đã sửa dụng Lucky Egg"
+      "Value": "Đã sử dụng Trứng may mắn"
     },
     {
       "Key": "useLuckyEggAmount",
-      "Value": "Số Lucky Eggs trong rương : {0}"
+      "Value": "Số Trứng may mắn trong rương : {0}"
     },
     {
       "Key": "noIncenseAvailable",
-      "Value": "Đã hết Incense"
+      "Value": "Đã hết Mồi nhử"
     },
     {
       "Key": "useIncenseActive",
-      "Value": "Đã sửa dụng Incense"
+      "Value": "Đã sử dụng Mồi nhử"
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "Số Incense trong rương: {0}"
+      "Value": "Số Mồi nhử trong rương: {0}"
     },
     {
       "Key": "usedIncense",
-      "Value": "Đã sửa dụng Incense"
+      "Value": "Đã sử dụng Mồi nhử"
     },
     {
       "Key": "amountPkmSeenCaught",
@@ -510,15 +510,15 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "[Evolves] Khả năng tiến hoá: {0}"
+      "Value": "[Tiến hóa] Khả năng tiến hoá: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "Thiếu vật phẩm để nâng cấp Pokemon. Hãy kiểm tra số Candy hoặc Stardust"
+      "Value": "Thiếu vật phẩm để nâng cấp Pokemon. Hãy kiểm tra số kẹo hoặc Stardust"
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "Sniping server đang Offline. Bỏ qua..."
+      "Value": " Server Snipe đang Offline. Bỏ qua..."
     }
   ],
   "PokemonStrings": [
