@@ -322,11 +322,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[当前背包]普通球:{0}|高级球:{1}|超级球:{2}|大师球:{3}"
+      "Value": "普通球:{0}|高级球:{1}|超级球:{2}|大师球:{3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "当前所有物品:药水:{0}|复活宝石:{1}|浆果:{2}|熏香:{3}|幸运蛋:{4}|诱饵:{5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
