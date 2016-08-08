@@ -82,8 +82,48 @@
       "Value": "{0} benutzt, {1} verbleibend"
     },
     {
-      "Key": "itemRazzBerry",
+      "Key": "ItemRazzBerry",
       "Value": "Himmihbeere"
+    },
+    {
+      "Key": "ItemPokeBall",
+      "Value": "Pokéball"
+    },
+    {
+      "Key": "ItemGreatBall",
+      "Value": "Superball"
+    },
+    {
+      "Key": "ItemUltraBall",
+      "Value": "Hyperballball"
+    },
+    {
+      "Key": "ItemMasterBall",
+      "Value": "Meisterball"
+    },
+    {
+      "Key": "ItemPotion",
+      "Value": "Trank"
+    },
+    {
+      "Key": "ItemSuperPotion",
+      "Value": "Supertrank"
+    },
+    {
+      "Key": "ItemHyperPotion",
+      "Value": "Hypertrank"
+    },
+    {
+      "Key": "ItemMaxPotion",
+      "Value": "Top-Trank"
+    },
+    {
+      "Key": "ItemRevive",
+      "Value": "Beleber"
+    },
+    {
+      "Key": "ItemMaxRevive",
+      "Value": "Top-Beleber"
     },
     {
       "Key": "catchStatus",
@@ -275,15 +315,15 @@
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "Tränke: {0} | Supertränke: {1} | Hypertränke: {2} | Top-Tränke: {3}"
     },
     {
       "Key": "CurrentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
+      "Value": "Beleber: {0} | Top-Beleber: {1}"
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "Beeren: {0} | Rauch: {1} | Glücks-Eier: {2} | Lockmodule: {3}"
     },
     {
       "Key": "invFullTransferring",
