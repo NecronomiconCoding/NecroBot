@@ -312,6 +312,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             var CurrentLatitude = session.Client.CurrentLatitude;
             var CurrentLongitude = session.Client.CurrentLongitude;
+            var catchedPokemon = false;
 
             session.EventDispatcher.Send(new SnipeModeEvent {Active = true});
 
@@ -367,6 +368,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
 
                     await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon);
+                    catchedPokemon = true;
                 }
                 else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                 {
@@ -404,6 +406,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch, cancellationToken);
                 }
+            }
+
+            if (!catchedPokemon)
+            {
+                session.EventDispatcher.Send(new SnipeEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
+                });
             }
 
             session.EventDispatcher.Send(new SnipeModeEvent {Active = false});
