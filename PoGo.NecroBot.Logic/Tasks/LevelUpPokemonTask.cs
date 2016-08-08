@@ -31,7 +31,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var upgradedNumber = 0;
             foreach (var pokemon in upgradablePokemon)
             {
-                if (PokemonInfo.GetLevel(pokemon) >= session.Inventory.GetPlayerStats().Result.FirstOrDefault().Level) continue;
+                if (PokemonInfo.GetLevel(pokemon) >= session.Inventory.GetPlayerStats().Result.FirstOrDefault().Level + 1) continue;
 
                 var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
                 var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
