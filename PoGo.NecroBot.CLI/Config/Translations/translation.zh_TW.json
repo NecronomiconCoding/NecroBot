@@ -326,15 +326,15 @@
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "恢復藥水: {0} | 超級恢復藥水: {1} | 超群恢復藥水: {2} | 完全恢復藥水: {3}"
     },
     {
       "Key": "CurrentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
+      "Value": "復甦劑: {0} | 完全復甦劑: {1}"
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "莓果: {0} | 薰香: {1} | 幸運但: {2} | 誘捕模組: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
