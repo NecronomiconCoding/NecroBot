@@ -350,6 +350,8 @@ namespace PoGo.NecroBot.Logic
         {
             var itemsToRecycle = new List<ItemData>();
             var myItems = (await GetItems()).ToList();
+            if (myItems == null)
+                return itemsToRecycle;
 
             var otherItemsToRecycle = myItems
                 .Where(x => _logicSettings.ItemRecycleFilter.Any(f => f.Key == x.ItemId && x.Count > f.Value))
