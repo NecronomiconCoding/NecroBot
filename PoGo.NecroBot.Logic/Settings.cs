@@ -114,7 +114,7 @@ namespace PoGo.NecroBot.Logic
                 {
                     // Random is set, so pick a random device package and set it up - it will get saved to disk below and re-used in subsequent sessions
                     Random rnd = new Random();
-                    int rndIdx = rnd.Next(0, DeviceInfoHelper.DeviceInfoSets.Keys.Count + 1);
+                    int rndIdx = rnd.Next(0, DeviceInfoHelper.DeviceInfoSets.Keys.Count - 1);
                     this.DevicePackageName = DeviceInfoHelper.DeviceInfoSets.Keys.ToArray()[rndIdx];
                     SetDevInfoByKey(this.DevicePackageName);
                 }
