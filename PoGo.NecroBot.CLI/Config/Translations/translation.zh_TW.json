@@ -325,8 +325,16 @@
       "Value": "目前擁有寶貝球: {0} | 高級球: {1} | 超級球: {2} | 大師球: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "目前擁有藥水: {0} | 復活劑: {1} | 莓果: {2} | 薰香: {3} | 幸運蛋: {4} | 誘餌: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",

@@ -271,7 +271,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Aktuální stav batohu] Pokebally: {0} | Superbally: {1} | Ultrabally: {2} | Masterbally: {3}"
+      "Value": "Pokebally: {0} | Superbally: {1} | Ultrabally: {2} | Masterbally: {3}"
+    },
+    {
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "invFullTransferring",

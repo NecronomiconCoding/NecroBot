@@ -322,11 +322,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Pokeballuri în prezent: {0} | Greatballuri: {1} | Ultraballuri: {2} | Masterballuri: {3}"
+      "Value": "Pokeballuri: {0} | Greatballuri: {1} | Ultraballuri: {2} | Masterballuri: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "Poțiuni totale în prezent: {0} | Reînvieri totale: {1} | Zmeure: {2} | Bastonașe parfumate totale: {3} | Ouă norocoase: {4} | Momeli: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
