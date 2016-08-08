@@ -156,7 +156,11 @@ namespace PoGo.NecroBot.CLI
             machine.AsyncStart(new VersionCheckState(), session);
             if (session.LogicSettings.UseSnipeLocationServer)
                 SnipePokemonTask.AsyncStart(session);
-            Console.Clear();
+
+            try {
+                Console.Clear();
+            }
+            catch (IOException) { }
 
             QuitEvent.WaitOne();
         }
