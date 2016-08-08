@@ -62,15 +62,24 @@ namespace PoGo.NecroBot.Logic.Tasks
                             return;
                         }
                     }
-                    if(eggNeededToEvolve <= deltaCount)
+                    if(eggNeededToEvolve <= deltaCount || !session.LogicSettings.KeepPokemonsThatCanEvolve)
                     {
-                        if (eggNeededToEvolve > 0 || !session.LogicSettings.KeepPokemonsThatCanEvolve)
+                        if (eggNeededToEvolve > 0)
                         {
                             session.EventDispatcher.Send(new UpdateEvent()
                             {
                                 Message = session.Translation.GetTranslation(TranslationString.CatchMorePokemonToUseLuckyEgg,
                                     eggNeededToEvolve)
                             });
+                            return;
+                        }
+                        else
+                        {
+                            if (await shouldUseLuckyEgg(session, pokemonToEvolve))
+                            {
+                                await UseLuckyEgg(session);
+                            }
+                            await evolve(session, pokemonToEvolve);
                         }
                     }
                     else
@@ -82,15 +91,26 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 Message = session.Translation.GetTranslation(TranslationString.WaitingForMorePokemonToEvolve,
                                     pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage)
                             });
+                            return;
+                        }
+                        else
+                        {
+                            if (await shouldUseLuckyEgg(session, pokemonToEvolve))
+                            {
+                                await UseLuckyEgg(session);
+                            }
+                            await evolve(session, pokemonToEvolve);
                         }
                     }
-                    return;
                 }
-                if (await shouldUseLuckyEgg(session, pokemonToEvolve))
+                if(session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
                 {
-                    await UseLuckyEgg(session);
+                    if (await shouldUseLuckyEgg(session, pokemonToEvolve))
+                    {
+                        await UseLuckyEgg(session);
+                    }
+                    await evolve(session, pokemonToEvolve);
                 }
-                await evolve(session, pokemonToEvolve);
             }
         }
 

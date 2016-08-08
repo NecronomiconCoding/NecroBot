@@ -27,7 +27,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Nenalezeny žádné použitelné Pokestopy ve vaší lokaci. Máte nastavenu malou maximální vzdálenost chůze?"
+      "Value": "Nenalezeny žádné použitelné Pokestopy ve vašem okolí. Zkontrolujte nastavení MaxTravelDistanceInMeters"
     },
     {
       "Key": "eventFortUsed",
@@ -51,7 +51,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} úspěšně za {1}zk"
+      "Value": "{0} úspěšně za {1} zkušeností"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -139,7 +139,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Unkubované vajíčko vylíhnuto: {0} | Úroveň: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "Inkubované vajíčko vylíhnuto: {0} | Úroveň: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -227,7 +227,7 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "AutoUpdater je deaktivován. Aktualizujte na poslední vydání: {0}\n "
+      "Value": "AutoUpdater je deaktivován. Aktualizujte na poslední verzi: {0}\n "
     },
     {
       "Key": "downloadingUpdate",
@@ -320,7 +320,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Pokémon ignorace] - Ignoruji {0} jak je nastaveno v nastavení!"
+      "Value": "[Pokémon ignorace] - Ignoruji {0} jak je nastaveno v config.json!"
     },
     {
       "Key": "catchStatusAttempt",

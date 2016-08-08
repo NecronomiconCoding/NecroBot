@@ -106,14 +106,15 @@ namespace PoGo.NecroBot.Logic
                 if (!this.DevicePackageName.Equals("random", StringComparison.InvariantCultureIgnoreCase) && !this.DevicePackageName.Equals("custom", StringComparison.InvariantCultureIgnoreCase))
                 {
                     // User requested a specific device package, check to see if it exists and if so, set it up - otherwise fall-back to random package
+                    string keepDevId = this.DeviceId;
                     SetDevInfoByKey(this.DevicePackageName);
-                    // if (DeviceInfoHelper.DeviceInfoSets.ContainsKey()) - Show error now instead of checking and falling back to random
+                    this.DeviceId = keepDevId;
                 }
                 if (this.DevicePackageName.Equals("random", StringComparison.InvariantCultureIgnoreCase))
                 {
                     // Random is set, so pick a random device package and set it up - it will get saved to disk below and re-used in subsequent sessions
                     Random rnd = new Random();
-                    int rndIdx = rnd.Next(0, DeviceInfoHelper.DeviceInfoSets.Keys.Count + 1);
+                    int rndIdx = rnd.Next(0, DeviceInfoHelper.DeviceInfoSets.Keys.Count - 1);
                     this.DevicePackageName = DeviceInfoHelper.DeviceInfoSets.Keys.ToArray()[rndIdx];
                     SetDevInfoByKey(this.DevicePackageName);
                 }
@@ -252,6 +253,12 @@ namespace PoGo.NecroBot.Logic
         //pressakeyshit
         [DefaultValue(false)]
         public bool StartupWelcomeDelay;
+        //Telegram
+        [DefaultValue(false)]
+        public bool UseTelegramAPI;
+        [DefaultValue(null)]
+        public string TelegramAPIKey;
+
         //console options
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
@@ -290,9 +297,9 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
         //delays
-        [DefaultValue(5000)]
+        [DefaultValue(1000)]
         public int DelayBetweenPlayerActions;
-        [DefaultValue(2000)]
+        [DefaultValue(500)]
         public int DelayBetweenPokemonCatch;
         //dump stats
         [DefaultValue(false)]
@@ -1282,6 +1289,10 @@ namespace PoGo.NecroBot.Logic
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
+
+        public bool UseTelegramAPI => _settings.UseTelegramAPI;
+        public string TelegramAPIKey => _settings.TelegramAPIKey;
+
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
         public int MinPokeballsWhileSnipe => _settings.MinPokeballsWhileSnipe;
         public int MaxPokeballsPerPokemon => _settings.MaxPokeballsPerPokemon;
