@@ -400,7 +400,7 @@ namespace PoGo.NecroBot.Logic
             {
                 myPokemon =
                     myPokemon.Where(
-                        p => (_logicSettings.EvolveAllPokemonWithEnoughCandy && pokemonIds.Contains(p.PokemonId)) ||
+                        p => (pokemonIds.Contains(p.PokemonId)) ||
                              (_logicSettings.EvolveAllPokemonAboveIv &&
                               (PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.EvolveAboveIvValue)));
             }
@@ -427,13 +427,13 @@ namespace PoGo.NecroBot.Logic
                 //Don't evolve if we can't evolve it
                 if (settings.EvolutionIds.Count == 0)
                     continue;
-
+                //DO NOT CHANGE! TESTED AND WORKS
                 var pokemonCandyNeededAlready =
-                    pokemonToEvolve.Count(
-                        p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId)*
+                    (pokemonToEvolve.Count(
+                        p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId) + 1) *
                     settings.CandyToEvolve;
 
-                if (familyCandy.Candy_ - pokemonCandyNeededAlready > settings.CandyToEvolve)
+                if (familyCandy.Candy_ >= pokemonCandyNeededAlready)
                 {
                     pokemonToEvolve.Add(pokemon);
                 }
