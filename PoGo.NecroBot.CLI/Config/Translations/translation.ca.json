@@ -369,6 +369,18 @@
       "Value": "{0} - Actiu {1} - Nivell: {2} | EXP/H: {3:0} | P/H: {4:0} | P.Estel·lar: {5:0} | Transferit: {6:0} | Reciclat: {7:0}"
     },
     {
+      "Key": "ProfileStatsTemplateString",
+      "Value": "----- LVL {0} | {1} ----- \n Experience: {2}/{3} \n Pokemons catched: {4} \n Pokemons deployed: {5} \n Pokestops visited: {6} \n Eggs hatched: {6} \n Pokemons envolved: {7} \n Pokedex entries: {8} \n KM walked: {9}"
+    },
+    {
+      "Key": "ShowPokeTemplate",
+      "Value": " \n CP {0} | Name: {1}"
+    },
+    {
+      "Key": "HelpTemplate",
+      "Value": "Commands: \n \n /top <amount> - Shows you top Pokemons. \n /all - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items."
+    },
+    {
       "Key": "statsXpTemplateString",
       "Value": "{0} (proper nivell en {1}h {2}m | {3}/{4} XP)"
     },

@@ -252,6 +252,12 @@ namespace PoGo.NecroBot.Logic
         //pressakeyshit
         [DefaultValue(false)]
         public bool StartupWelcomeDelay;
+        //Telegram
+        [DefaultValue(false)]
+        public bool UseTelegramAPI;
+        [DefaultValue("ENTER KEY HERE")]
+        public string TelegramAPIKey;
+
         //console options
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
@@ -1278,6 +1284,10 @@ namespace PoGo.NecroBot.Logic
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
+
+        public bool UseTelegramAPI => _settings.UseTelegramAPI;
+        public string TelegramAPIKey => _settings.TelegramAPIKey;
+
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
         public int MinPokeballsWhileSnipe => _settings.MinPokeballsWhileSnipe;
         public int MaxPokeballsPerPokemon => _settings.MaxPokeballsPerPokemon;

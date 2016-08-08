@@ -367,6 +367,18 @@
       "Value": "{0} - Laufzeit {1} - Lvl: {2} | EP/H: {3:n0} | P/H: {4:n0} | Sternenstaub: {5:n0} | Verschickt: {6:n0} | Weggeworfen: {7:n0}"
     },
     {
+      "Key": "ProfileStatsTemplateString",
+      "Value": "----- LVL {0} | {1} ----- \n Erfahrungspunkte: {2}/{3} \n Pokemons gefangen: {4} \n Pokemons verschickt: {5} \n Pokestops besucht: {6} \n Eier geschlüpft: {6} \n Pokemons entwickelt: {7} \n Pokedex Einträge: {8} \n KM gelaufen: {9}"
+    },
+    {
+      "Key": "ShowPokeTemplate",
+      "Value": " \n WP {0} | Name: {1}"
+    },
+    {
+      "Key": "HelpTemplate",
+      "Value": "Kommandos: \n \n /top <amount> - Zeigt die besten Pokemons an. \n /all - Zeigt dir alle Pokemons an. \n /profile - Zeigt dein Profil. \n /loc - Zeigt deine Position an. \n /items - Zeigt dir deine Items"
+    },
+    {
       "Key": "StatsXpTemplateString",
       "Value": "{0} (Aufstieg in {1}h {2}m | {3:n0}/{4:n0} EP)"
     },
