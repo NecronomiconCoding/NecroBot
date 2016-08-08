@@ -1,4 +1,4 @@
-﻿{
+{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -1081,7 +1081,7 @@
       "Value": "Mew"
     }
   ],
-"PokemonMovesetStrings": [
+  "PokemonMovesetStrings": [
     {
       "Key": "moveUnset",
       "Value": "UNSET"
