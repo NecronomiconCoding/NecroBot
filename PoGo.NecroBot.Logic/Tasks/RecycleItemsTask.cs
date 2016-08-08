@@ -44,8 +44,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             
             var currentRevives = await session.Inventory.GetItemAmountByType(ItemId.ItemRevive);
             var currentMaxRevives = await session.Inventory.GetItemAmountByType(ItemId.ItemMaxRevive);
-            
-            var currentAmountOfRevives = currentRevives + currentMaxRevives
+
+            var currentAmountOfRevives = currentRevives + currentMaxRevives;
 
             if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
                 Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentReviveInv,
