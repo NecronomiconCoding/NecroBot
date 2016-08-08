@@ -389,7 +389,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(1000)]
         public int MaxTravelDistanceInMeters;
         [DefaultValue(false)]
-        public bool RandomizeRecycle;
+        public bool RandomizeRecycle; //Setup for variable recycling values
         [DefaultValue(5)]
         public int RandomRecycleValue;
         [DefaultValue(120)]
