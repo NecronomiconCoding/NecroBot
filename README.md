@@ -14,30 +14,19 @@
 Discord (Chat & Get Help!): https://discord.gg/VXKxNFr <br/>
 <br/>
 
-## NecroBot - the original For The Community, By The Community bot
-We are proud to announce the release of 0.7.6, with special thanks to Kevin and the entire crew involved at PGD!
+## NECROBOT - by the community, for the community.
 
-##IMPORTANT
-Add the following to your auth.json file to not overwrite your current custom device information:
-"DevicePackageName": "custom",
+<h2><a name="getting-started">Getting Started</a></h2>
+Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.
+<br/>
 
-## This release features automatic random device generation!
-You can now opt to leave the device values static and your device will not be the same as everyone elses. If you prefer to use your own device, you can do that as well! 
+<h2><a name="donating">Donating</a></h2>
+<a name="paypal">Feel free to buy us all a beer, by using PayPal:</a><br/>
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=farhaninoor1%40gmail%2ecom&lc=GB&item_name=NecroBot%20Donations&item_number=POGO&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)<br/>
 
-To change the device information in /Config/auth.json to YOUR personal device, you will need android-sdk with adb (and drivers for your phone). Here are the correlating values with the command to run to grab the value off your phone:<br>
-"DeviceId": "", // adb.exe shell settings get secure android_id<br>
-"AndroidBoardName": "", // adb.exe shell getprop ro.product.board<br>
-"AndroidBootloader": "", // adb.exe shell getprop ro.boot.bootloader<br>
-"DeviceBrand": "", // adb.exe shell getprop ro.product.brand<br>
-"DeviceModel": "", // adb.exe shell getprop ro.product.model<br>
-"DeviceModelIdentifier": "", // adb.exe shell getprop ro.product.name<br>
-"DeviceModelBoot": "qcom",<br>
-"HardwareManufacturer": "", // adb.exe shell getprop ro.product.manufacturer<br>
-"HardwareModel": "", // adb.exe shell getprop ro.product.model<br>
-"FirmwareBrand": "", // adb.exe shell getprop ro.product.name<br>
-"FirmwareTags": "", // adb.exe shell getprop ro.build.tags<br>
-"FirmwareType": "", // adb.exe shell getprop ro.build.type<br>
-"FirmwareFingerprint": "" // adb.exe shell getprop ro.build.fingerprint
+<a name="btc">or by using Bitcoin: *1LxBH4FHhwyEuL1eHbMvLiGsTiBrzjfa1C*</a><br/>
+
+<h6><em>[A big part of the Donations goes to the top 3 active Contributors. Other expenses as Server costs will be covered using the Donations.]</em></h6><br/>
 
 <h2><a name="features">Features</a></h2>
 
@@ -61,19 +50,6 @@ To change the device information in /Config/auth.json to YOUR personal device, y
  - [Snipe pokemon]
  - [Power-Up pokemon]
 
-<h2><a name="getting-started">Getting Started</a></h2>
-Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.
-<br/>
-
-<h2><a name="donating">Donating</a></h2>
-<a name="paypal">Feel free to buy us all a beer, by using PayPal:</a><br/>
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=farhaninoor1%40gmail%2ecom&lc=GB&item_name=NecroBot%20Donations&item_number=POGO&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)<br/>
-
-<a name="btc">or by using Bitcoin: *1LxBH4FHhwyEuL1eHbMvLiGsTiBrzjfa1C*</a><br/>
-
-<h6><em>[ A big part of the Donations goes to the top 3 active Contributors. Other expenses as Server and License costs will be covered using the Donations. ]</em></h6><br/>
-
-<a name="btc">Donate Bitcoins to FeroxRev (the API library developer): *1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e*</a><br/>
 
 <h2><a name="credits">Credits</a></h2>
 A big thank you goes to Feroxs' hard work on the API & Console. Without him, this would not have been possible. <3

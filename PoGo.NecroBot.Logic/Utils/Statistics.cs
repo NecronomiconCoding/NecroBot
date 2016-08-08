@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Logging;
 using POGOProtos.Inventory.Item;
 using Google.Protobuf.Collections;
+using PoGo.NecroBot.Logic.State;
 
 #endregion
 
@@ -86,7 +87,13 @@ namespace PoGo.NecroBot.Logic.Utils
                         }
                     }
                 }
-
+                var Result2 = Execute(inventory).Result;
+                LevelForRewards = stat.Level;
+                if (Result2.ToString().ToLower().Contains("success"))
+                {
+                    string[] tokens = Result2.Result.ToString().Split(new[] { "itemId" }, StringSplitOptions.None);
+                    Logging.Logger.Write("Items Awarded:" + Result2.ItemsAwarded.ToString());
+                }
                 output = new StatsExport
                 {
                     Level = stat.Level,
@@ -97,6 +104,12 @@ namespace PoGo.NecroBot.Logic.Utils
                 };
             }
             return output;
+        }
+
+        public async Task<LevelUpRewardsResponse> Execute(ISession ctx)
+        {
+            var Result = await ctx.Inventory.GetLevelUpRewards(LevelForRewards);
+            return Result;
         }
 
         public async Task<LevelUpRewardsResponse> Execute( Inventory inventory )
