@@ -16,6 +16,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     public class RecycleItemsTask
     {
         private static int Diff;
+		private Random rnd = new Random();
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
@@ -140,7 +141,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (totalBallsCount > session.LogicSettings.TotalAmountOfPokeballsToKeep)
             {
-                Diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep;
+                Diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep + rnd.Next(-5,5);
                 if (Diff > 0)
                 {
                     await RecycleItems(session, cancellationToken, pokeBallsCount, ItemId.ItemPokeBall);
@@ -170,7 +171,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             int totalPotionsCount = potionCount + superPotionCount + hyperPotionsCount + maxPotionCount;
             if (totalPotionsCount > session.LogicSettings.TotalAmountOfPotionsToKeep)
             {
-                Diff = totalPotionsCount - session.LogicSettings.TotalAmountOfPotionsToKeep;
+                Diff = totalPotionsCount - session.LogicSettings.TotalAmountOfPotionsToKeep + rnd.Next(-5,5);
                 if (Diff > 0)
                 {
                     await RecycleItems(session, cancellationToken, potionCount, ItemId.ItemPotion);
@@ -201,7 +202,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             int totalRevivesCount = reviveCount + maxReviveCount;
             if (totalRevivesCount > session.LogicSettings.TotalAmountOfRevivesToKeep)
             {
-                Diff = totalRevivesCount - session.LogicSettings.TotalAmountOfRevivesToKeep;
+                Diff = totalRevivesCount - session.LogicSettings.TotalAmountOfRevivesToKeep + rnd.Next(-5,5);
                 if (Diff > 0)
                 {
                     await RecycleItems(session, cancellationToken, reviveCount, ItemId.ItemRevive);
@@ -225,7 +226,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             int totalBerryCount = razz + bluk + nanab + pinap + wepar;
             if (totalBerryCount > session.LogicSettings.TotalAmountOfBerriesToKeep)
             {
-                Diff = totalBerryCount - session.LogicSettings.TotalAmountOfBerriesToKeep;
+                Diff = totalBerryCount - session.LogicSettings.TotalAmountOfBerriesToKeep + rnd.Next(-5,5);
                 if (Diff > 0)
                 {
                     await RecycleItems(session, cancellationToken, razz, ItemId.ItemRazzBerry);
