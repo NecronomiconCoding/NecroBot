@@ -495,9 +495,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                 waitforbroadcast.Set();
             });
             
-            socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_ERROR, () => { hasError = true; });
-            socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_CONNECT_ERROR, () => { hasError = true; });
+            socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_ERROR, () => { 
+                hasError = true; 
+                waitforbroadcast.Set();
+            });
 
+            socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_CONNECT_ERROR, () => {
+                hasError = true;
+                waitforbroadcast.Set();
+            });
+      
             waitforbroadcast.Wait();
             if (!hasError)
             {
