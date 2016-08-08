@@ -18,6 +18,8 @@ using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
+using Quobject.SocketIoClientDotNet.Client;
+using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -457,8 +459,68 @@ namespace PoGo.NecroBot.Logic.Tasks
             return scanResult;
         }
 
+        private static List<SniperInfo> GetSniperInfoFrom_pokezz(ISession session, List<PokemonId> pokemonIds) {
+            var options = new IO.Options();
+            options.Transports = Quobject.Collections.Immutable.ImmutableList.Create<string>("websocket");
 
-        private static List<SniperInfo> GetSniperInfoFrom_pokezz(ISession session, List<PokemonId> pokemonIds)
+            var socket = IO.Socket("http://pokezz.com", options);
+
+            var hasError = false;
+
+            ManualResetEventSlim waitforbroadcast = new ManualResetEventSlim(false);
+
+            List<PokemonLocation_pokezz> pokemons = new List<PokemonLocation_pokezz>();
+
+            socket.On("pokemons", (msg) => {
+                JArray data = JArray.FromObject(msg);
+                foreach (var pokeToken in data.Children())
+                {
+                    pokemons.Add(pokeToken.ToObject<PokemonLocation_pokezz>());
+                }
+
+                waitforbroadcast.Set();
+            });
+            
+            socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_ERROR, () => { hasError = true; });
+            socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_CONNECT_ERROR, () => { hasError = true; });
+
+            waitforbroadcast.Wait();
+            if (!hasError)
+            {
+                foreach (var pokemon in pokemons)
+                {
+                    var SnipInfo = new SniperInfo();
+                    SnipInfo.Id = pokemon.name;
+                    SnipInfo.Latitude = pokemon.lat;
+                    SnipInfo.Longitude = pokemon.lng;
+                    SnipInfo.TimeStampAdded = DateTime.Now;
+                    SnipInfo.ExpirationTimestamp = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Math.Round(pokemon.time / 1000d)).ToLocalTime();
+                    SnipInfo.IV = pokemon._iv;
+                    if (pokemon.verified || !session.LogicSettings.GetOnlyVerifiedSniperInfoFromPokezz)
+                    {
+                        SnipeLocations.Add(SnipInfo);
+                    }
+                }
+
+                var locationsToSnipe = SnipeLocations?.Where(q =>
+                (!session.LogicSettings.UseTransferIvForSnipe ||
+                 (q.IV == 0 && !session.LogicSettings.SnipeIgnoreUnknownIv) ||
+                 (q.IV >= session.Inventory.GetPokemonTransferFilter(q.Id).KeepMinIvPercentage)) &&
+                !LocsVisited.Contains(new PokemonLocation(q.Latitude, q.Longitude))
+                && !(q.ExpirationTimestamp != default(DateTime) &&
+                     q.ExpirationTimestamp > new DateTime(2016) &&
+                     // make absolutely sure that the server sent a correct datetime
+                     q.ExpirationTimestamp < DateTime.Now) &&
+                (q.Id == PokemonId.Missingno || pokemonIds.Contains(q.Id))).ToList() ??
+                                   new List<SniperInfo>();
+                return locationsToSnipe;
+            }
+            else {
+                return new List<SniperInfo>();
+            }
+        }
+
+        private static List<SniperInfo> GetSniperInfoFrom__pokezz(ISession session, List<PokemonId> pokemonIds)
         {
 
             var uri = $"http://pokezz.com/pokemons.json";
