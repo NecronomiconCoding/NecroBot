@@ -159,7 +159,6 @@
     <Compile Include="Tasks\UseNearbyPokestopsTask.cs" />
     <Compile Include="Utils\DelayingUtils.cs" />
     <Compile Include="Utils\DeviceInfoHelper.cs" />
-    <Compile Include="Utils\Dynamic.cs" />
     <Compile Include="Utils\EggWalker.cs" />
     <Compile Include="Utils\ErrorHandler.cs" />
     <Compile Include="Utils\GPXReader.cs" />

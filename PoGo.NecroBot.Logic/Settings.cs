@@ -256,7 +256,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
         [DefaultValue(true)]
-        public bool ShowPokeballCountsBeforeRecycle;
+        public bool DetailedCountsBeforeRecycling;
         //pokemon
         [DefaultValue(true)]
         public bool CatchPokemon;
@@ -366,7 +366,7 @@ namespace PoGo.NecroBot.Logic
         public int MinPokeballsWhileSnipe;
         [DefaultValue(60000)]
         public int MinDelayBetweenSnipes;
-        [DefaultValue(0.003)]
+        [DefaultValue(0.005)]
         public double SnipingScanOffset;
         [DefaultValue(false)]
         public bool SnipeAtPokestops;
@@ -1266,7 +1266,7 @@ namespace PoGo.NecroBot.Logic
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
         public bool DumpPokemonStats => _settings.DumpPokemonStats;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
-        public bool ShowPokeballCountsBeforeRecycle => _settings.ShowPokeballCountsBeforeRecycle;
+        public bool DetailedCountsBeforeRecycling => _settings.DetailedCountsBeforeRecycling;
         public bool VerboseRecycling => _settings.VerboseRecycling;
         public double RecycleInventoryAtUsagePercentage => _settings.RecycleInventoryAtUsagePercentage;
         public double EvolveKeptPokemonsAtStorageUsagePercentage => _settings.EvolveKeptPokemonsAtStorageUsagePercentage;

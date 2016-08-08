@@ -40,7 +40,7 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Название: {0} ИНФО: Не удалось получить предметы, возможно софтбан. Разбан через: {1}/{2}"
+      "Value": "Название: {0} ИНФО: Не удалось получить предметы, возможно софтбан. Попытка разбана: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -60,7 +60,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} успешно, получено {1}xp"
+      "Value": "{0} – успешно, получено {1}xp"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -90,7 +90,7 @@
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
-      "Value": "Waiting to evolve {0} Pokemon once {1} more are caught! ({2}/{3} for {4}% inventory)"
+      "Value": "Улучшения ждут {0} покемонов, собираем {1} оставшихся. ({2}/{3} на {4}% сумки)"
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
@@ -239,7 +239,7 @@
     },
 	{
       "Key": "accessTokenExpired",
-      "Value": "PTC Token входа истек. Перезаходим..."
+      "Value": "Токен PTC истек. Перезаходим..."
     },
     {
       "Key": "invalidResponse",
@@ -323,7 +323,7 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "У вас больше нет покеболов в инвентаре, нет возможности больше ловить покемонов!"
+      "Value": "Кончились покеболы, больше нет возможности ловить покемонов."
     },
     {
       "Key": "currentPokeballInv",
