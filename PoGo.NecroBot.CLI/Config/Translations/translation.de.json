@@ -86,46 +86,6 @@
       "Value": "Himmihbeere"
     },
     {
-      "Key": "ItemPokeBall",
-      "Value": "Pokéball"
-    },
-    {
-      "Key": "ItemGreatBall",
-      "Value": "Superball"
-    },
-    {
-      "Key": "ItemUltraBall",
-      "Value": "Hyperballball"
-    },
-    {
-      "Key": "ItemMasterBall",
-      "Value": "Meisterball"
-    },
-    {
-      "Key": "ItemPotion",
-      "Value": "Trank"
-    },
-    {
-      "Key": "ItemSuperPotion",
-      "Value": "Supertrank"
-    },
-    {
-      "Key": "ItemHyperPotion",
-      "Value": "Hypertrank"
-    },
-    {
-      "Key": "ItemMaxPotion",
-      "Value": "Top-Trank"
-    },
-    {
-      "Key": "ItemRevive",
-      "Value": "Beleber"
-    },
-    {
-      "Key": "ItemMaxRevive",
-      "Value": "Top-Beleber"
-    },
-    {
       "Key": "catchStatus",
       "Value": "{0}"
     },
