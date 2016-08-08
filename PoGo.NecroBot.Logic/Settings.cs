@@ -256,7 +256,7 @@ namespace PoGo.NecroBot.Logic
         //Telegram
         [DefaultValue(false)]
         public bool UseTelegramAPI;
-        [DefaultValue("ENTER KEY HERE")]
+        [DefaultValue(null)]
         public string TelegramAPIKey;
 
         //console options
@@ -297,9 +297,9 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
         //delays
-        [DefaultValue(5000)]
+        [DefaultValue(1000)]
         public int DelayBetweenPlayerActions;
-        [DefaultValue(2000)]
+        [DefaultValue(500)]
         public int DelayBetweenPokemonCatch;
         //dump stats
         [DefaultValue(false)]
