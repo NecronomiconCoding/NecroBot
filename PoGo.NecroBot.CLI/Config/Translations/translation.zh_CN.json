@@ -162,7 +162,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "孵化器已经孵出:{0}|等级:{1} CP:({2}/{3})完美度:{4}%\t\t"
+      "Value": "孵化器已经孵出:{0}|等级:{1} CP:({2}/{3})完美度:{4}%\t\t\t"
     },
     {
       "Key": "logEntryError",
@@ -458,7 +458,7 @@
     },
     {
       "Key": "snipeScanEx",
-      "Value": "狙击一个 {0} 完美度:{1}坐标{2}...\t\t"
+      "Value": "狙击一个 {0} 完美度:{1},坐标{2}...\t\t"
     },
     {
       "Key": "noPokemonToSnipe",
@@ -1446,347 +1446,347 @@
     },
     {
       "Key": "slash",
-      "Value": "Slash"
+      "Value": "劈开"
     },
     {
       "Key": "bubbleBeam",
-      "Value": "BubbleBeam"
+      "Value": "泡沫光线"
     },
     {
       "Key": "submission",
-      "Value": "Submission"
+      "Value": "地狱滚动"
     },
     {
       "Key": "karateChop",
-      "Value": "KarateChop"
+      "Value": "手刀"
     },
     {
       "Key": "lowSweep",
-      "Value": "LowSweep"
+      "Value": "低空踢"
     },
     {
       "Key": "aquaJet",
-      "Value": "AquaJet"
+      "Value": "喷射水柱"
     },
     {
       "Key": "aquaTail",
-      "Value": "AquaTail"
+      "Value": "水柱尾"
     },
     {
       "Key": "seedBomb",
-      "Value": "SeedBomb"
+      "Value": "种子炸弹"
     },
     {
       "Key": "psyshock",
-      "Value": "Psyshock"
+      "Value": "幻象攻击"
     },
     {
       "Key": "rockThrow",
-      "Value": "RockThrow"
+      "Value": "滚石"
     },
     {
       "Key": "ancientPower",
-      "Value": "AncientPower"
+      "Value": "原始之力"
     },
     {
       "Key": "rockTomb",
-      "Value": "RockTomb"
+      "Value": "岩石封闭"
     },
     {
       "Key": "rockSlide",
-      "Value": "RockSlide"
+      "Value": "山崩地裂"
     },
     {
       "Key": "powerGem",
-      "Value": "PowerGem"
+      "Value": "力量宝石"
     },
     {
       "Key": "shadowSneak",
-      "Value": "ShadowSneak"
+      "Value": "影子偷袭"
     },
     {
       "Key": "shadowPunch",
-      "Value": "ShadowPunch"
+      "Value": "影子拳"
     },
     {
       "Key": "shadowClaw",
-      "Value": "ShadowClaw"
+      "Value": "影子钩爪"
     },
     {
       "Key": "ominousWind",
-      "Value": "OminousWind"
+      "Value": "奇异之风"
     },
     {
       "Key": "shadowBall",
-      "Value": "ShadowBall"
+      "Value": "影子球"
     },
     {
       "Key": "bulletPunch",
-      "Value": "BulletPunch"
+      "Value": "飞弹拳"
     },
     {
       "Key": "magnetBomb",
-      "Value": "MagnetBomb"
+      "Value": "磁铁爆弹"
     },
     {
       "Key": "steelWing",
-      "Value": "SteelWing"
+      "Value": "钢翼"
     },
     {
       "Key": "ironHead",
-      "Value": "IronHead"
+      "Value": "铁头"
     },
     {
       "Key": "parabolicCharge",
-      "Value": "ParabolicCharge"
+      "Value": "抛物线充电"
     },
     {
       "Key": "spark",
-      "Value": "Spark"
+      "Value": "闪电"
     },
     {
       "Key": "thunderPunch",
-      "Value": "ThunderPunch"
+      "Value": "雷光掌"
     },
     {
       "Key": "thunder",
-      "Value": "Thunder"
+      "Value": "打雷"
     },
     {
       "Key": "thunderbolt",
-      "Value": "Thunderbolt"
+      "Value": "十万伏特"
     },
     {
       "Key": "twister",
-      "Value": "Twister"
+      "Value": "龙卷风"
     },
     {
       "Key": "dragonBreath",
-      "Value": "DragonBreath"
+      "Value": "龙息"
     },
     {
       "Key": "dragonPulse",
-      "Value": "DragonPulse"
+      "Value": "龙波动"
     },
     {
       "Key": "dragonClaw",
-      "Value": "DragonClaw"
+      "Value": "龙爪"
     },
     {
       "Key": "disarmingVoice",
-      "Value": "DisarmingVoice"
+      "Value": "魅力之音"
     },
     {
       "Key": "drainingKiss",
-      "Value": "DrainingKiss"
+      "Value": "吸取之吻"
     },
     {
       "Key": "dazzlingGleam",
-      "Value": "DazzlingGleam"
+      "Value": "魔法照耀"
     },
     {
       "Key": "moonblast",
-      "Value": "Moonblast"
+      "Value": "月亮攻击"
     },
     {
       "Key": "playRough",
-      "Value": "PlayRough"
+      "Value": "嬉戏"
     },
     {
       "Key": "crossPoison",
-      "Value": "CrossPoison"
+      "Value": "十字毒药"
     },
     {
       "Key": "sludgeBomb",
-      "Value": "SludgeBomb"
+      "Value": "臭泥爆弹"
     },
     {
       "Key": "sludgeWave",
-      "Value": "SludgeWave"
+      "Value": "泥浆波"
     },
     {
       "Key": "gunkShot",
-      "Value": "GunkShot"
+      "Value": "灰尘射击"
     },
     {
       "Key": "mudShot",
-      "Value": "MudShot"
+      "Value": "泥巴射击"
     },
     {
       "Key": "boneClub",
-      "Value": "BoneClub"
+      "Value": "骨棒"
     },
     {
       "Key": "bulldoze",
-      "Value": "Bulldoze"
+      "Value": "整地"
     },
     {
       "Key": "mudBomb",
-      "Value": "MudBomb"
+      "Value": "泥巴爆弹"
     },
     {
       "Key": "furyCutter",
-      "Value": "FuryCutter"
+      "Value": "连切"
     },
     {
       "Key": "bugBite",
-      "Value": "BugBite"
+      "Value": "虫咬"
     },
     {
       "Key": "signalBeam",
-      "Value": "SignalBeam"
+      "Value": "信号光束"
     },
     {
       "Key": "xScissor",
-      "Value": "XScissor"
+      "Value": "剪刀十字拳"
     },
     {
       "Key": "flameCharge",
-      "Value": "FlameCharge"
+      "Value": "火焰袭击"
     },
     {
       "Key": "flameBurst",
-      "Value": "FlameBurst"
+      "Value": "爆炸火焰"
     },
     {
       "Key": "fireBlast",
-      "Value": "FireBlast"
+      "Value": "大字爆"
     },
     {
       "Key": "brine",
-      "Value": "Brine"
+      "Value": "盐水"
     },
     {
       "Key": "waterPulse",
-      "Value": "WaterPulse"
+      "Value": "水波动"
     },
     {
       "Key": "scald",
-      "Value": "Scald"
+      "Value": "热水"
     },
     {
       "Key": "hydroPump",
-      "Value": "HydroPump"
+      "Value": "水炮"
     },
     {
       "Key": "psychic",
-      "Value": "Psychic"
+      "Value": "幻象术"
     },
     {
       "Key": "psystrike",
-      "Value": "Psystrike"
+      "Value": "精神破坏"
     },
     {
       "Key": "iceShard",
-      "Value": "IceShard"
+      "Value": "冰砾"
     },
     {
       "Key": "icyWind",
-      "Value": "IcyWind"
+      "Value": "冰冻之风"
     },
     {
       "Key": "frostBreath",
-      "Value": "FrostBreath"
+      "Value": "冰吸"
     },
     {
       "Key": "absorb",
-      "Value": "Absorb"
+      "Value": "吸收"
     },
     {
       "Key": "gigaDrain",
-      "Value": "GigaDrain"
+      "Value": "超级吸收"
     },
     {
       "Key": "firePunch",
-      "Value": "FirePunch"
+      "Value": "火焰拳"
     },
     {
       "Key": "solarBeam",
-      "Value": "SolarBeam"
+      "Value": "日光束"
     },
     {
       "Key": "leafBlade",
-      "Value": "LeafBlade"
+      "Value": "刀叶"
     },
     {
       "Key": "powerWhip",
-      "Value": "PowerWhip"
+      "Value": "能量鞭打"
     },
     {
       "Key": "splash",
-      "Value": "Splash"
+      "Value": "水溅跃"
     },
     {
       "Key": "acid",
-      "Value": "Acid"
+      "Value": "溶解液"
     },
     {
       "Key": "airCutter",
-      "Value": "AirCutter"
+      "Value": "破空斩"
     },
     {
       "Key": "hurricane",
-      "Value": "Hurricane"
+      "Value": "暴风"
     },
     {
       "Key": "brickBreak",
-      "Value": "BrickBreak"
+      "Value": "劈瓦"
     },
     {
       "Key": "cut",
-      "Value": "Cut"
+      "Value": "一字斩"
     },
     {
       "Key": "swift",
-      "Value": "Swift"
+      "Value": "高速星星"
     },
     {
       "Key": "hornAttack",
-      "Value": "HornAttack"
+      "Value": "角撞"
     },
     {
       "Key": "stomp",
-      "Value": "Stomp"
+      "Value": "践踏"
     },
     {
       "Key": "headbutt",
-      "Value": "Headbutt"
+      "Value": "铁头功"
     },
     {
       "Key": "hyperFang",
-      "Value": "HyperFang"
+      "Value": "必杀门牙"
     },
     {
       "Key": "slam",
-      "Value": "Slam"
+      "Value": "摔打"
     },
     {
       "Key": "bodySlam",
-      "Value": "BodySlam"
+      "Value": "泰山压顶"
     },
     {
       "Key": "rest",
-      "Value": "Rest"
+      "Value": "睡觉"
     },
     {
       "Key": "struggle",
-      "Value": "Struggle"
+      "Value": "挣扎"
     },
     {
       "Key": "scaldBlastoise",
-      "Value": "ScaldBlastoise"
+      "Value": "热水-水箭龟"
     },
     {
       "Key": "hydroPumpBlastoise",
-      "Value": "HydroPumpBlastoise"
+      "Value": "水炮-水箭龟"
     },
     {
       "Key": "wrapGreen",
-      "Value": "WrapGreen"
+      "Value": "捆绑绿"
     },
     {
       "Key": "wrapPink",
-      "Value": "WrapPink"
+      "Value": "捆绑粉红"
     },
     {
       "Key": "furyCutterFast",
@@ -1826,127 +1826,127 @@
     },
     {
       "Key": "emberFast",
-      "Value": "快速-Ember"
+      "Value": "快速-火花"
     },
     {
       "Key": "wingAttackFast",
-      "Value": "快速-WingAttack"
+      "Value": "快速-翅膀攻击"
     },
     {
       "Key": "peckFast",
-      "Value": "快速-Peck"
+      "Value": "快速-啄"
     },
     {
       "Key": "lickFast",
-      "Value": "快速-Lick"
+      "Value": "快速-舔舌头"
     },
     {
       "Key": "shadowClawFast",
-      "Value": "快速-ShadowClaw"
+      "Value": "快速-影子钩爪"
     },
     {
       "Key": "vineWhipFast",
-      "Value": "快速-VineWhip"
+      "Value": "快速-藤鞭"
     },
     {
       "Key": "razorLeafFast",
-      "Value": "快速-RazorLeaf"
+      "Value": "快速-飞叶快刀"
     },
     {
       "Key": "mudShotFast",
-      "Value": "快速-MudShot"
+      "Value": "快速-泥巴射击"
     },
     {
       "Key": "iceShardFast",
-      "Value": "快速-IceShard"
+      "Value": "快速-冰砾"
     },
     {
       "Key": "frostBreathFast",
-      "Value": "快速-FrostBreath"
+      "Value": "快速-冰吸"
     },
     {
       "Key": "quickAttackFast",
-      "Value": "快速-QuickAttack"
+      "Value": "快速-电光一闪"
     },
     {
       "Key": "scratchFast",
-      "Value": "快速-Scratch"
+      "Value": "快速-利爪"
     },
     {
       "Key": "tackleFast",
-      "Value": "快速-Tackle"
+      "Value": "快速-冲击"
     },
     {
       "Key": "poundFast",
-      "Value": "快速-Pound"
+      "Value": "快速-拍击"
     },
     {
       "Key": "cutFast",
-      "Value": "快速-Cut"
+      "Value": "快速-一字斩"
     },
     {
       "Key": "poisonJabFast",
-      "Value": "快速-PoisonJab"
+      "Value": "快速-毒刺"
     },
     {
       "Key": "acidFast",
-      "Value": "快速-Acid"
+      "Value": "快速-溶解液"
     },
     {
       "Key": "psychoCutFast",
-      "Value": "快速-PsychoCut"
+      "Value": "快速-幻象斩"
     },
     {
       "Key": "rockThrowFast",
-      "Value": "快速-RockThrow"
+      "Value": "快速-滚石"
     },
     {
       "Key": "metalClawFast",
-      "Value": "快速-MetalClaw"
+      "Value": "快速-合金爪"
     },
     {
       "Key": "bulletPunchFast",
-      "Value": "快速-BulletPunch"
+      "Value": "快速-飞弹拳"
     },
     {
       "Key": "waterGunFast",
-      "Value": "快速-WaterGun"
+      "Value": "快速-水枪"
     },
     {
       "Key": "splashFast",
-      "Value": "快速-Splash"
+      "Value": "快速-水溅跃"
     },
     {
       "Key": "waterGunFastBlastoise",
-      "Value": "WaterGunBlastoise"
+      "Value": "水枪-水箭龟"
     },
     {
       "Key": "mudSlapFast",
-      "Value": "快速-MudSlap"
+      "Value": "快速-掷泥"
     },
     {
       "Key": "zenHeadbuttFast",
-      "Value": "快速-ZenHeadbutt"
+      "Value": "快速-意念头锤"
     },
     {
       "Key": "confusionFast",
-      "Value": "快速-Confusion"
+      "Value": "快速-念力"
     },
     {
       "Key": "poisonStingFast",
-      "Value": "快速-PoisonSting"
+      "Value": "快速-毒针"
     },
     {
       "Key": "bubbleFast",
-      "Value": "快速-Bubble"
+      "Value": "快速-泡泡"
     },
     {
       "Key": "feintAttackFast",
-      "Value": "快速-FeintAttack"
+      "Value": "快速-虚晃一招"
     },
     {
       "Key": "steelWingFast",
-      "Value": "快速-SteelWing"
+      "Value": "快速-钢翼"
     },
     {
       "Key": "fireFangFast",
