@@ -67,11 +67,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kans: {7}% | {8}m ver | met een {9} ({10} over). | {11} EXP verdiend | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kans: {7}% | {8}m ver | met een {9} ({10} over). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -107,15 +107,15 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "ToonHoogsteCP"
+      "Value": "Top Pokémons met de Hoogste CP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "ToonHoogstePerfect"
+      "Value": "Top Perfecte Pokémons"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "ToonHoogsteLevel"
+      "Value": "Top Pokémons met het hoogste Level"
     },
     {
       "Key": "welcomeWarning",

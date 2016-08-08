@@ -220,7 +220,7 @@ namespace PoGo.NecroBot.Logic
             }
             else
             {
-                throw new ArgumentException("Invalid device info package! Check your auth.config file and make sure a valid DevicePackageName is set or simply set it to 'random'...");
+                throw new ArgumentException("Invalid device info package! Check your auth.config file and make sure a valid DevicePackageName is set. For simple use set it to 'random'. If you have a custom device, then set it to 'custom'.");
             }
         }
     }
@@ -257,6 +257,9 @@ namespace PoGo.NecroBot.Logic
         public int AmountOfPokemonToDisplayOnStart;
         [DefaultValue(true)]
         public bool DetailedCountsBeforeRecycling;
+
+        [DefaultValue(3)]
+        public int MaxBerriesToUsePerPokemon;
         //pokemon
         [DefaultValue(true)]
         public bool CatchPokemon;
@@ -1204,6 +1207,7 @@ namespace PoGo.NecroBot.Logic
         public bool CatchPokemon => _settings.CatchPokemon;
         public bool TransferWeakPokemon => _settings.TransferWeakPokemon;
         public bool DisableHumanWalking => _settings.DisableHumanWalking;
+        public int MaxBerriesToUsePerPokemon => _settings.MaxBerriesToUsePerPokemon;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public string KeepMinOperator => _settings.KeepMinOperator;
         public int KeepMinCp => _settings.KeepMinCp;
