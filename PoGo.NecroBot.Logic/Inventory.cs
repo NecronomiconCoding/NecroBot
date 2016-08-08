@@ -465,16 +465,18 @@ namespace PoGo.NecroBot.Logic
             var myPokemon = await GetPokemons();
             myPokemon = myPokemon.Where(p => p.DeployedFortId == string.Empty);
             
+
             IEnumerable<PokemonData> highestPokemonForUpgrade = (_logicSettings.UpgradePokemonMinimumStatsOperator.ToLower().Equals("and")) ?
                 myPokemon.Where(
-                        p => (p.Cp >= _logicSettings.UpgradePokemonCpMinimum &&
-                            PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.UpgradePokemonIvMinimum)).OrderByDescending(p => p.Cp).ToList() :
+                    p => (p.Cp >= _logicSettings.UpgradePokemonCpMinimum &&
+                        PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.UpgradePokemonIvMinimum)).OrderByDescending(p => p.Cp).ToList() :
                 myPokemon.Where(
                     p => (p.Cp >= _logicSettings.UpgradePokemonCpMinimum ||
                         PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.UpgradePokemonIvMinimum)).OrderByDescending(p => p.Cp).ToList();
 
+
             return upgradePokemon = (_logicSettings.LevelUpByCPorIv.ToLower().Equals("iv")) ?
-                    highestPokemonForUpgrade.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).ToList() :
+                    highestPokemonForUpgrade.OrderByDescending(p => PokemonInfo.CalculatePokemonPerfection(p)).ToList() :
                     highestPokemonForUpgrade.OrderByDescending(p => p.Cp).ToList();
         }
 
