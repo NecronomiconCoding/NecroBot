@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0})|{1}-{2}| Lv {3} {6}% {4}/{5} | {7}% dist {8}m | reste {10} {9} | {11}XP | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | dist {8}m | reste {10} {9} | {11}XP | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
