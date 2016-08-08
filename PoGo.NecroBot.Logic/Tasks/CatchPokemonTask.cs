@@ -44,6 +44,21 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemonIv = PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
                     ? encounter.WildPokemon?.PokemonData
                     : encounter?.PokemonData);
+            var pokemonId = (encounter is EncounterResponse
+                               ? encounter.WildPokemon?.PokemonData?.PokemonId
+                               : encounter.PokemonData?.PokemonId);
+
+            //Alert
+            if (session.LogicSettings.AlertEnable)
+            {
+                System.Media.SoundPlayer player = new System.Media.SoundPlayer(session.LogicSettings.AlertSound);
+                if (session.LogicSettings.AlertTypes.Contains(pokemonId))
+                    player.Play();
+                else if (pokemonCp >= session.LogicSettings.AlertCP)
+                    player.Play();
+                else if (pokemonIv >= session.LogicSettings.AlertIV)
+                    player.Play();
+            }
 
             // Determine whether to use berries or not
             if ((session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
