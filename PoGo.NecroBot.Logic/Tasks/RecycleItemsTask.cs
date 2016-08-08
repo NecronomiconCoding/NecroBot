@@ -26,7 +26,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentAmountOfUltraballs = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
             var currentAmountOfMasterballs = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
-            if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
+            if (session.LogicSettings.DetailedCountsBeforeRecycling)
                 Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
                     currentAmountOfPokeballs, currentAmountOfGreatballs, currentAmountOfUltraballs,
                     currentAmountOfMasterballs));
@@ -38,7 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var currentAmountOfPotions = currentPotions + currentSuperPotions + currentHyperPotions + currentMaxPotions;
 
-            if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
+            if (session.LogicSettings.DetailedCountsBeforeRecycling)
                 Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentPotionInv,
                     currentPotions, currentSuperPotions, currentHyperPotions, currentMaxPotions));
             
@@ -47,7 +47,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var currentAmountOfRevives = currentRevives + currentMaxRevives;
 
-            if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
+            if (session.LogicSettings.DetailedCountsBeforeRecycling)
                 Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentReviveInv,
                     currentRevives, currentMaxRevives));
 
@@ -63,7 +63,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var currentAmountOfLuckyEggs = await session.Inventory.GetItemAmountByType(ItemId.ItemLuckyEgg);
             var currentAmountOfLures = await session.Inventory.GetItemAmountByType(ItemId.ItemTroyDisk);
 
-            if (session.LogicSettings.ShowPokeballCountsBeforeRecycle)
+            if (session.LogicSettings.DetailedCountsBeforeRecycling)
                 Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentMiscItemInv,
                     currentAmountOfBerries, currentAmountOfIncense, currentAmountOfLuckyEggs, currentAmountOfLures));
             
