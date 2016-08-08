@@ -259,7 +259,7 @@ namespace PoGo.NecroBot.Logic
         public bool DetailedCountsBeforeRecycling;
 
         [DefaultValue(3)]
-        public int MaxBerriesToUse;
+        public int MaxBerriesToUsePerPokemon;
         //pokemon
         [DefaultValue(true)]
         public bool CatchPokemon;
@@ -1207,7 +1207,7 @@ namespace PoGo.NecroBot.Logic
         public bool CatchPokemon => _settings.CatchPokemon;
         public bool TransferWeakPokemon => _settings.TransferWeakPokemon;
         public bool DisableHumanWalking => _settings.DisableHumanWalking;
-        public int MaxBerriesToUse => _settings.MaxBerriesToUse;
+        public int MaxBerriesToUsePerPokemon => _settings.MaxBerriesToUsePerPokemon;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public string KeepMinOperator => _settings.KeepMinOperator;
         public int KeepMinCp => _settings.KeepMinCp;
