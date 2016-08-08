@@ -322,11 +322,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Aktualny Ekwipunek] Pokeballe: {0} | Greatballe: {1} | Ultraballe: {2} | Masterballe: {3}"
+      "Value": "Pokeballe: {0} | Greatballe: {1} | Ultraballe: {2} | Masterballe: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "[Aktualny Ekwipunek] Potiony: {0} | Ożywienia: {1} | Jagody: {2} | Incensy: {3} | Lucky Eggy: {4} | Lury: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",

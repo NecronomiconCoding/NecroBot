@@ -310,11 +310,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Saat ini jumlah PokeBall: {0} | GreatBall: {1} | UltraBall: {2} | MasterBall: {3}"
+      "Value": "PokeBall: {0} | GreatBall: {1} | UltraBall: {2} | MasterBall: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "Saat ini jumlah Potion: {0} | Revive: {1} | Anggur: {2} | Incense: {3} | Lucky Eggs: {4} | Lure: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
