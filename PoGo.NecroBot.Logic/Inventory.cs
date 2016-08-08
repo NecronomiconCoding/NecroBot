@@ -184,23 +184,18 @@ namespace PoGo.NecroBot.Logic
                 var settings = pokemonSettings.Single(x => x.PokemonId == pokemonGroupToTransfer.Key);
                 var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
 
-                int? modFromEvolve = null;
+                var inStorage = myPokemonList.Count(data => data.PokemonId == pokemonGroupToTransfer.Key);
 
                 if (keepPokemonsThatCanEvolve &&
                     pokemonsToEvolve.Contains(pokemonGroupToTransfer.Key) &&
                     settings.CandyToEvolve > 0 &&
                     settings.EvolutionIds.Count != 0)
                 {
-                    //do not try to fix something that works, goto line 220 for explonation
-                    var possibleCountToEvolve = familyCandy.Candy_ / settings.CandyToEvolve;
+                    var candiesToUse = familyCandy.Candy_ + inStorage;
+                    var possibleCountToEvolve = candiesToUse / settings.CandyToEvolve;
                     amountToKeepInStorage = Math.Max(amountToKeepInStorage, possibleCountToEvolve);
-
-                    //remain candy
-                    modFromEvolve = familyCandy.Candy_%settings.CandyToEvolve;
                 }
-
-                var inStorage = myPokemonList.Count(data => data.PokemonId == pokemonGroupToTransfer.Key);
-
+               
                 var weakPokemonCount = pokemonGroupToTransfer.Count();
 
                 var needToRemove = inStorage - amountToKeepInStorage;
@@ -211,16 +206,6 @@ namespace PoGo.NecroBot.Logic
 
                 if (canBeRemoved <= 0)
                     continue;
-
-                //Lets calc new canBeRemoved pokemons according to transferring some of them and use it as future candy to keepPokemonsThatCanEvolve
-                if (modFromEvolve.HasValue)
-                {
-                    // its an solution in fixed numbers of equations with two variables 
-                    // (N = X + Y, X + C >= Y * E) -> (X >= (N * E - C / 1 + E)
-                    // where N - current canBeRemoved,  X - new canBeRemoved, Y - possible to keep more, E - CandyToEvolve, C - modFromEvolve(remain candy) ) )
-                    canBeRemoved = (settings.CandyToEvolve * canBeRemoved - modFromEvolve.Value) / (1 + settings.CandyToEvolve) + 
-                                    Math.Sign((settings.CandyToEvolve * canBeRemoved - modFromEvolve.Value) % (1 + settings.CandyToEvolve));
-                }
 
                 var skipCount = weakPokemonCount - canBeRemoved;
                 
