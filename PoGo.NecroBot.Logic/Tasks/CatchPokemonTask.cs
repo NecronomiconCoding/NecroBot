@@ -80,7 +80,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
 
                 // Determine whether to use berries or not
-                if (!(session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
+                if ((session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
                         pokemonIv >= session.LogicSettings.UseBerriesMinIv &&
                         pokemonCp >= session.LogicSettings.UseBerriesMinCp &&
                         probability < session.LogicSettings.UseBerriesBelowCatchProbability) ||
