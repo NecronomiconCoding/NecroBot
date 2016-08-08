@@ -450,7 +450,7 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "Tidak ditemukan Pokemon untuk dibidik!"
+      "Value": "Tidak ditemukan Pokemon dalam SnipingScanOffset!"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
@@ -514,7 +514,7 @@
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "Peningkatan level Pokemon gagal karena tidak cukup permen"
+      "Value": "Peningkatan level Pokemon gagal karena tidak cukup bahan"
     },
 	{
       "Key": "snipeServerOffline",
