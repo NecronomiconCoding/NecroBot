@@ -17,7 +17,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     public class RecycleItemsTask
     {
         private static int Diff;
-	private Random rnd = new Random();
+	private static Random rnd = new Random();
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
