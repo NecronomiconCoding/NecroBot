@@ -33,11 +33,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 Evolves = pokemonToEvolve.Count
             } );
-            var myPokemonFamilies = await session.Inventory.GetPokemonFamilies();
-            var pokemonFamilies = myPokemonFamilies.ToArray();
-            var familyCandy = pokemonFamilies.Where(p => p.FamilyId == POGOProtos.Enums.PokemonFamilyId.FamilyPidgey || p.FamilyId == POGOProtos.Enums.PokemonFamilyId.FamilyWeedle);
-            Logger.Write(String.Join(",", pokemonToEvolve.Select(p => p.PokemonId)), LogLevel.Update);
-            Logger.Write(String.Join(",", familyCandy), LogLevel.Update);
+
             if (pokemonToEvolve.Any())
             {
                 if (session.LogicSettings.KeepPokemonsThatCanEvolve || session.LogicSettings.UseLuckyEggsWhileEvolving)
@@ -68,7 +64,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     if(eggNeededToEvolve <= deltaCount)
                     {
-                        if (eggNeededToEvolve > 0)
+                        if (eggNeededToEvolve > 0 || !session.LogicSettings.KeepPokemonsThatCanEvolve)
                         {
                             session.EventDispatcher.Send(new UpdateEvent()
                             {
