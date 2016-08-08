@@ -220,7 +220,7 @@ namespace PoGo.NecroBot.Logic
             }
             else
             {
-                throw new ArgumentException("Invalid device info package! Check your auth.config file and make sure a valid DevicePackageName is set or simply set it to 'random'...");
+                throw new ArgumentException("Invalid device info package! Check your auth.config file and make sure a valid DevicePackageName is set. For simple use set it to 'random'. If you have a custom device set it to 'custom'.");
             }
         }
     }
