@@ -192,11 +192,6 @@ namespace PoGo.NecroBot.Logic
                     settings.CandyToEvolve > 0 &&
                     settings.EvolutionIds.Count != 0)
                 {
-                    // It does not matter if you transfer or evolve the pokemon
-                    // You always get 1 candy back
-                    // The amount of possible evolves is the amount of candies of that family
-                    // Combined with the amount of pokemon divided by the candies needed to evolve
-                    // ( FAMILY_CANDY + POKEMON_IN_STORAGE ) / CANDY_TO_EVOLVE
                     var candiesToUse = familyCandy.Candy_ + inStorage;
                     var possibleCountToEvolve = (candiesToUse / settings.CandyToEvolve;
                     amountToKeepInStorage = Math.Max(amountToKeepInStorage, possibleCountToEvolve);
