@@ -143,7 +143,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (totalBallsCount > session.LogicSettings.TotalAmountOfPokeballsToKeep)
             {
                 if (RandomizeRecycle) {
-                    Diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep + rnd.Next(-1*RandomRecycleValue,RandomRecycleValue);
+                    Diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
                     Diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep;
@@ -178,7 +178,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (totalPotionsCount > session.LogicSettings.TotalAmountOfPotionsToKeep)
             {
                 if (RandomizeRecycle) {
-                    Diff = totalPotionsCount - session.LogicSettings.TotalAmountOfPotionsToKeep + rnd.Next(-1*RandomRecycleValue,RandomRecycleValue);
+                    Diff = totalPotionsCount - session.LogicSettings.TotalAmountOfPotionsToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
                     Diff = totalPotionsCount - session.LogicSettings.TotalAmountOfPotionsToKeep;
@@ -214,7 +214,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (totalRevivesCount > session.LogicSettings.TotalAmountOfRevivesToKeep)
             {
                 if (RandomizeRecycle) {
-                    Diff = totalRevivesCount - session.LogicSettings.TotalAmountOfRevivesToKeep + rnd.Next(-1*RandomRecycleValue,RandomRecycleValue);
+                    Diff = totalRevivesCount - session.LogicSettings.TotalAmountOfRevivesToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
                     Diff = totalRevivesCount - session.LogicSettings.TotalAmountOfRevivesToKeep;
@@ -243,7 +243,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (totalBerryCount > session.LogicSettings.TotalAmountOfBerriesToKeep)
             {
                 if (RandomizeRecycle) {
-                    Diff = totalBerryCount - session.LogicSettings.TotalAmountOfBerriesToKeep + rnd.Next(-1*RandomRecycleValue,RandomRecycleValue);
+                    Diff = totalBerryCount - session.LogicSettings.TotalAmountOfBerriesToKeep + rnd.Next(-1*session.LogicSettings.RandomRecycleValue,session.LogicSettings.RandomRecycleValue);
                 }
                 else {
                     Diff = totalBerryCount - session.LogicSettings.TotalAmountOfBerriesToKeep;
