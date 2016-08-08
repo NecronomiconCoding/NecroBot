@@ -534,7 +534,7 @@
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "請輸入語言代碼(TW=正體中文)"
+      "Value": "請輸入語言代碼(zh_tw=正體中文)"
     },
     {
       "Key": "firstStartLanguageConfirm",
