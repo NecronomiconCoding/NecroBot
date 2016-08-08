@@ -504,7 +504,7 @@ namespace PoGo.NecroBot.Logic
                         p => (p.Cp >= _logicSettings.UpgradePokemonCpMinimum &&
                             PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.UpgradePokemonIvMinimum)).OrderByDescending(p => p.Cp).ToList() :
                 myPokemon.Where(
-                    p => (p.Cp >= _logicSettings.UpgradePokemonIvMinimum ||
+                    p => (p.Cp >= _logicSettings.UpgradePokemonCpMinimum ||
                         PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.UpgradePokemonIvMinimum)).OrderByDescending(p => p.Cp).ToList();
 
             return upgradePokemon = (_logicSettings.LevelUpByCPorIv.ToLower().Equals("iv")) ?
