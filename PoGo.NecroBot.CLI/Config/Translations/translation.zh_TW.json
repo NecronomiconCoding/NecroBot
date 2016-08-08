@@ -1874,39 +1874,39 @@
     },
     {
       "Key": "cutFast",
-      "Value": "CutFast"
+      "Value": "一字斬"
     },
     {
       "Key": "poisonJabFast",
-      "Value": "PoisonJabFast"
+      "Value": "毒刺"
     },
     {
       "Key": "acidFast",
-      "Value": "AcidFast"
+      "Value": "溶解液"
     },
     {
       "Key": "psychoCutFast",
-      "Value": "PsychoCutFast"
+      "Value": "幻象斬"
     },
     {
       "Key": "rockThrowFast",
-      "Value": "RockThrowFast"
+      "Value": "滾石"
     },
     {
       "Key": "metalClawFast",
-      "Value": "MetalClawFast"
+      "Value": "合金爪"
     },
     {
       "Key": "bulletPunchFast",
-      "Value": "BulletPunchFast"
+      "Value": "飛彈拳"
     },
     {
       "Key": "waterGunFast",
-      "Value": "WaterGunFast"
+      "Value": "水槍"
     },
     {
       "Key": "splashFast",
-      "Value": "SplashFast"
+      "Value": "水濺躍"
     },
     {
       "Key": "waterGunFastBlastoise",
