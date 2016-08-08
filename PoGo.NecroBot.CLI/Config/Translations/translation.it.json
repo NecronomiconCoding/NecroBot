@@ -312,11 +312,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Inventario Attuale] Pokeball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
+      "Value": "Pokeball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "[Inventario Attuale] Pozioni: {0} | Revitalizzanti: {1} | Bacche: {2} | Arome: {3} | Fortunuova: {4} | Moduli Esca: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",

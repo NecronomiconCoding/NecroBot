@@ -30,7 +30,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Apakah jarak maksimal terlalu kecil?"
+      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Pastikan jarak maksimal tidak terlalu kecil?"
     },
     {
       "Key": "eventFortUsed",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jauh: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
+      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -310,11 +310,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Saat ini jumlah PokeBall: {0} | GreatBall: {1} | UltraBall: {2} | MasterBall: {3}"
+      "Value": "PokeBall: {0} | GreatBall: {1} | UltraBall: {2} | MasterBall: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "Saat ini jumlah Potion: {0} | Revive: {1} | Anggur: {2} | Incense: {3} | Lucky Eggs: {4} | Lure: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -346,7 +354,7 @@
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Tujuan yang kamu inginkan {0}, {1} terlalu jauh dari posisi kamu saat ini {2}, {3}"
+      "Value": "Tujuan yang kamu inginkan {0}, {1} terlalu Jarak dari posisi kamu saat ini {2}, {3}"
     },
     {
       "Key": "pokemonRename",
