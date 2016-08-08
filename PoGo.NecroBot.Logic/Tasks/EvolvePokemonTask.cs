@@ -103,6 +103,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                         }
                     }
                 }
+                if(session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
+                {
+                    if (await shouldUseLuckyEgg(session, pokemonToEvolve))
+                    {
+                        await UseLuckyEgg(session);
+                    }
+                    await evolve(session, pokemonToEvolve);
+                }
             }
         }
 
