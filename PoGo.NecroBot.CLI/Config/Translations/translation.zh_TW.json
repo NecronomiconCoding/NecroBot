@@ -1394,7 +1394,7 @@
     },
     {
       "Key": "airSlash",
-      "Value": "AirSlash"
+      "Value": "空氣砍"
     },
     {
       "Key": "heatWave",
@@ -1750,7 +1750,7 @@
     },
     {
       "Key": "slam",
-      "Value": "Slam"
+      "Value": "摔打"
     },
     {
       "Key": "bodySlam",
@@ -1766,11 +1766,11 @@
     },
     {
       "Key": "scaldBlastoise",
-      "Value": "ScaldBlastoise"
+      "Value": "沸水(水箭龜)"
     },
     {
       "Key": "hydroPumpBlastoise",
-      "Value": "HydroPumpBlastoise"
+      "Value": "水壓(水箭龜)"
     },
     {
       "Key": "wrapGreen",
@@ -1782,63 +1782,63 @@
     },
     {
       "Key": "furyCutterFast",
-      "Value": "FuryCutterFast"
+      "Value": "連續切"
     },
     {
       "Key": "bugBiteFast",
-      "Value": "BugBiteFast"
+      "Value": "蟲食"
     },
     {
       "Key": "biteFast",
-      "Value": "BiteFast"
+      "Value": "啃咬"
     },
     {
       "Key": "suckerPunchFast",
-      "Value": "SuckerPunchFast"
+      "Value": "偷襲"
     },
     {
       "Key": "dragonBreathFast",
-      "Value": "DragonBreathFast"
+      "Value": "龍之吐息"
     },
     {
       "Key": "thunderShockFast",
-      "Value": "ThunderShockFast"
+      "Value": "電擊"
     },
     {
       "Key": "sparkFast",
-      "Value": "SparkFast"
+      "Value": "電火花"
     },
     {
       "Key": "lowKickFast",
-      "Value": "LowKickFast"
+      "Value": "過肩摔"
     },
     {
       "Key": "karateChopFast",
-      "Value": "KarateChopFast"
+      "Value": "空手刀"
     },
     {
       "Key": "emberFast",
-      "Value": "EmberFast"
+      "Value": "火苗"
     },
     {
       "Key": "wingAttackFast",
-      "Value": "WingAttackFast"
+      "Value": "翅膀拍擊"
     },
     {
       "Key": "peckFast",
-      "Value": "PeckFast"
+      "Value": "啄擊"
     },
     {
       "Key": "lickFast",
-      "Value": "LickFast"
+      "Value": "舌舔"
     },
     {
       "Key": "shadowClawFast",
-      "Value": "ShadowClawFast"
+      "Value": "暗影爪擊"
     },
     {
       "Key": "vineWhipFast",
-      "Value": "VineWhipFast"
+      "Value": "藤鞭攻擊"
     },
     {
       "Key": "razorLeafFast",
