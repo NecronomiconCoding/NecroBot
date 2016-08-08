@@ -75,11 +75,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} mancanti). | {11} PE guadagnati | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | {11} PE guadagnati | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} mancanti). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -192,7 +192,7 @@
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "RICICLAGGIO"
+      "Value": "RICICLO"
     },
     {
       "Key": "logEntryPkmn",
@@ -312,11 +312,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Inventario Attuale] Pokeball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
+      "Value": "Pokeball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "[Inventario Attuale] Pozioni: {0} | Revitalizzanti: {1} | Bacche: {2} | Arome: {3} | Fortunuova: {4} | Moduli Esca: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Pozioni: {0} | SuperPozioni: {1} | HyperPozioni: {2} | MaxPozioni: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revitalizzanti: {0} | MaxRevital: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Bacche: {0} | Incensi: {1} | Fortunuovi: {2} | Esche: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -341,11 +349,11 @@
     },
     {
       "Key": "encounterProblem",
-      "Value": "Problema Incontro: {0}"
+      "Value": "Problema Incontrato: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Problema Incontro: Pokemon attirato {0}"
+      "Value": "Problema Incontrato: Pokemon attirato {0}"
     },
     {
       "Key": "desiredDestTooFar",

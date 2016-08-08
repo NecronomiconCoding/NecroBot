@@ -120,6 +120,7 @@ namespace PoGo.NecroBot.Logic
 
         int GetMinStarDustForLevelUp { get; }
         bool UseLuckyEggConstantly { get; }
+        int MaxBerriesToUsePerPokemon { get; }
         bool UseIncenseConstantly { get; }
         int UseBerriesMinCp { get; }
         float UseBerriesMinIv { get; }
@@ -153,7 +154,6 @@ namespace PoGo.NecroBot.Logic
         bool GetSniperInfoFromPokezz { get; }
         bool GetOnlyVerifiedSniperInfoFromPokezz { get; }
         bool UseSnipeLocationServer { get; }
-        bool UseSnipeOnlineLocationServer { get; }
         bool UseTransferIvForSnipe { get; }
         bool SnipeIgnoreUnknownIv { get; }
         int MinDelayBetweenSnipes { get; }
@@ -164,7 +164,7 @@ namespace PoGo.NecroBot.Logic
         int TotalAmountOfRevivesToKeep { get; }
         int TotalAmountOfBerriesToKeep { get; }
 
-        bool ShowPokeballCountsBeforeRecycle { get; }
+        bool DetailedCountsBeforeRecycling { get; }
         bool VerboseRecycling { get; }
         double RecycleInventoryAtUsagePercentage { get; }
         double EvolveKeptPokemonsAtStorageUsagePercentage { get; }

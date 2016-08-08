@@ -271,7 +271,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Aktuelles Inventar] Pokéball: {0} | Superball: {1} | Hyperball: {2} | Meisterball: {3}"
+      "Value": "Pokéball: {0} | Superball: {1} | Hyperball: {2} | Meisterball: {3}"
+    },
+    {
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "invFullTransferring",
@@ -336,7 +348,7 @@
     },
     {
       "Key": "CatchTypeNormal",
-      "Value": "Wild"
+      "Value": "Wildes"
     },
     {
       "Key": "CatchTypeLure",

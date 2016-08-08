@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "Bastonaș parfumat folosit, timp rămas: {0}"
+      "Value": "Incense folosit, timp rămas: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
@@ -302,7 +302,7 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Se caută pokemoni atrași de bastonașe parfumate..."
+      "Value": "Se caută pokemoni atrași de incense..."
     },
     {
       "Key": "lookingForPokemon",
@@ -310,7 +310,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Se caută pokemoni atrași de momeală..."
+      "Value": "Se caută pokemoni atrași de lure..."
     },
     {
       "Key": "pokemonSkipped",
@@ -322,11 +322,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Pokeballuri în prezent: {0} | Greatballuri: {1} | Ultraballuri: {2} | Masterballuri: {3}"
+      "Value": "Pokeballuri: {0} | Greatballuri: {1} | Ultraballuri: {2} | Masterballuri: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "Poțiuni totale în prezent: {0} | Reînvieri totale: {1} | Zmeure: {2} | Bastonașe parfumate totale: {3} | Ouă norocoase: {4} | Momeli: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Poțiuni: {0} | Superpoțiuni: {1} | Hiperpoțiuni: {2} | Poțiuni de viață maximă: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Reînvieri: {0} | Reînvieri de viață maximă: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Zmeure: {0} | Incense-uri: {1} | Ouă norocoase: {2} | Lure-uri: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -354,7 +362,7 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Problemă întâmpinată: Momirea pokemonului {0}"
+      "Value": "Problemă întâmpinată: Lure pentru pokemonul {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -402,11 +410,11 @@
     },
     {
       "Key": "catchTypeLure",
-      "Value": "Momire"
+      "Value": "Lure"
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "Bastonaș parfumat"
+      "Value": "Incense"
     },
     {
       "Key": "webSocketFailStart",
@@ -494,19 +502,19 @@
     },
     {
       "Key": "noIncenseAvailable",
-      "Value": "Niciun bastonaș parfumat disponibil"
+      "Value": "Niciun incense disponibil"
     },
     {
       "Key": "useIncenseActive",
-      "Value": "Bastonaș parfumat activ deja"
+      "Value": "Incense activ deja"
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "Bastonașe parfumate în inventar: {0}"
+      "Value": "Incense-uri în inventar: {0}"
     },
     {
       "Key": "usedIncense",
-      "Value": "Folosit un bastonaș parfumat"
+      "Value": "Folosit un incense"
     },
     {
       "Key": "amountPkmSeenCaught",

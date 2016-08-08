@@ -1,7 +1,6 @@
 
 #region using directives
 
-using GeoCoordinatePortable;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using PoGo.NecroBot.Logic.Common;
@@ -221,7 +220,7 @@ namespace PoGo.NecroBot.Logic
             }
             else
             {
-                throw new ArgumentException("Invalid device info package! Check your auth.config file and make sure a valid DevicePackageName is set or simply set it to 'random'...");
+                throw new ArgumentException("Invalid device info package! Check your auth.config file and make sure a valid DevicePackageName is set. For simple use set it to 'random'. If you have a custom device, then set it to 'custom'.");
             }
         }
     }
@@ -257,7 +256,10 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
         [DefaultValue(true)]
-        public bool ShowPokeballCountsBeforeRecycle;
+        public bool DetailedCountsBeforeRecycling;
+
+        [DefaultValue(3)]
+        public int MaxBerriesToUsePerPokemon;
         //pokemon
         [DefaultValue(true)]
         public bool CatchPokemon;
@@ -351,8 +353,6 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("or")]
         public string UseBerriesOperator;
         //snipe
-        [DefaultValue(true)]
-        public bool UseSnipeOnlineLocationServer;
         [DefaultValue(false)]
         public bool UseSnipeLocationServer;
         [DefaultValue("localhost")]
@@ -369,7 +369,7 @@ namespace PoGo.NecroBot.Logic
         public int MinPokeballsWhileSnipe;
         [DefaultValue(60000)]
         public int MinDelayBetweenSnipes;
-        [DefaultValue(0.003)]
+        [DefaultValue(0.005)]
         public double SnipingScanOffset;
         [DefaultValue(false)]
         public bool SnipeAtPokestops;
@@ -1207,6 +1207,7 @@ namespace PoGo.NecroBot.Logic
         public bool CatchPokemon => _settings.CatchPokemon;
         public bool TransferWeakPokemon => _settings.TransferWeakPokemon;
         public bool DisableHumanWalking => _settings.DisableHumanWalking;
+        public int MaxBerriesToUsePerPokemon => _settings.MaxBerriesToUsePerPokemon;
         public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
         public string KeepMinOperator => _settings.KeepMinOperator;
         public int KeepMinCp => _settings.KeepMinCp;
@@ -1269,7 +1270,7 @@ namespace PoGo.NecroBot.Logic
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
         public bool DumpPokemonStats => _settings.DumpPokemonStats;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
-        public bool ShowPokeballCountsBeforeRecycle => _settings.ShowPokeballCountsBeforeRecycle;
+        public bool DetailedCountsBeforeRecycling => _settings.DetailedCountsBeforeRecycling;
         public bool VerboseRecycling => _settings.VerboseRecycling;
         public double RecycleInventoryAtUsagePercentage => _settings.RecycleInventoryAtUsagePercentage;
         public double EvolveKeptPokemonsAtStorageUsagePercentage => _settings.EvolveKeptPokemonsAtStorageUsagePercentage;
@@ -1291,7 +1292,6 @@ namespace PoGo.NecroBot.Logic
         public bool GetSniperInfoFromPokezz => _settings.GetSniperInfoFromPokezz;
         public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.GetOnlyVerifiedSniperInfoFromPokezz;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
-        public bool UseSnipeOnlineLocationServer => _settings.UseSnipeOnlineLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
