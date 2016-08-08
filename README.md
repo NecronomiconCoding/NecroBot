@@ -15,10 +15,14 @@ Discord (Chat & Get Help!): https://discord.gg/VXKxNFr <br/>
 <br/>
 
 ## NecroBot - the original For The Community, By The Community bot
-We are proud to announce the release of 0.7.2, with special thanks to Kevin and the entire crew involved at PGD!
+We are proud to announce the release of 0.7.6, with special thanks to Kevin and the entire crew involved at PGD!
 
-## This release features automatic Device ID generation
-You can now opt to leave the device values static and your device ID will not be the same as everyone elses. If you prefer to use your own device, you can do that as well! 
+##IMPORTANT
+Add the following to your auth.json file to not overwrite your current custom device information:
+"DevicePackageName": "custom",
+
+## This release features automatic random device generation!
+You can now opt to leave the device values static and your device will not be the same as everyone elses. If you prefer to use your own device, you can do that as well! 
 
 To change the device information in /Config/auth.json to YOUR personal device, you will need android-sdk with adb (and drivers for your phone). Here are the correlating values with the command to run to grab the value off your phone:<br>
 "DeviceId": "", // adb.exe shell settings get secure android_id<br>
