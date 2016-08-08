@@ -24,7 +24,7 @@ namespace PoGo.NecroBot.Logic.Service
 
         public void Run(CancellationToken cancellationToken)
         {
-            if (_session.LogicSettings.EvolveAllPokemonAboveIv || _session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
+            if (_session.LogicSettings.EvolveAllPokemonAboveIv || _session.LogicSettings.EvolveAllPokemonWithEnoughCandy || _session.LogicSettings.UseLuckyEggsWhileEvolving)
             {
                 EvolvePokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
             }

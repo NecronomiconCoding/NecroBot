@@ -373,7 +373,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                 {
                     if (session.LogicSettings.EvolveAllPokemonAboveIv ||
-                        session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
+                        session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
+                        session.LogicSettings.UseLuckyEggsWhileEvolving)
                     {
                         await EvolvePokemonTask.Execute(session, cancellationToken);
                     }
