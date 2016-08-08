@@ -210,7 +210,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsNoUsableFound,
                 "No usable PokeStops found in your area. Is your maximum distance too small?"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortUsed,
-                "Name: {0} XP: {1}, Gems: {2}, Items: {3}, Lat: {4}, Long: {5}"),
+                "Name: {0} XP: {1}, Gems: {2}, Items: {3}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortFailed,
                 "Name: {0} INFO: Looting failed, possible softban. Unban in: {1}/{2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortTargeted,
