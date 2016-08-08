@@ -196,7 +196,7 @@ namespace PoGo.NecroBot.Logic
 
         [JsonIgnore]
         public bool isGui;
-
+        //language
         [DefaultValue("en")]
         public string TranslationLanguageCode;
         //autoupdate
@@ -210,15 +210,15 @@ namespace PoGo.NecroBot.Logic
         //pressakeyshit
         [DefaultValue(false)]
         public bool StartupWelcomeDelay;
-        //console options
+        //console logging options
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
         [DefaultValue(true)]
-        public bool ShowPokeballCountsBeforeRecycle;
+        public bool DetailedCountsBeforeRecycling;
         //pokemon
         [DefaultValue(true)]
         public bool CatchPokemon;
-        //powerup
+        //power up
         [DefaultValue(false)]
         public bool AutomaticallyLevelUpPokemon;
         [DefaultValue(5)]
@@ -233,7 +233,7 @@ namespace PoGo.NecroBot.Logic
         public float UpgradePokemonIvMinimum;
         [DefaultValue("and")]
         public string UpgradePokemonMinimumStatsOperator;
-        //position
+        //position/walking
         [DefaultValue(false)]
         public bool DisableHumanWalking;
         [DefaultValue(40.778915)]
@@ -244,6 +244,8 @@ namespace PoGo.NecroBot.Logic
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
+        [DefaultValue(1000)]
+        public int MaxTravelDistanceInMeters;
         //delays
         [DefaultValue(5000)]
         public int DelayBetweenPlayerActions;
@@ -263,7 +265,7 @@ namespace PoGo.NecroBot.Logic
         public double EvolveKeptPokemonsAtStorageUsagePercentage;
         [DefaultValue(false)]
         public bool KeepPokemonsThatCanEvolve;
-        //keeping
+        //transfer settings
         [DefaultValue(1250)]
         public int KeepMinCp;
         [DefaultValue(90)]
@@ -278,16 +280,17 @@ namespace PoGo.NecroBot.Logic
         public bool PrioritizeIvOverCp;
         [DefaultValue(1)]
         public int KeepMinDuplicatePokemon;
-        //gpx
+        [DefaultValue(false)]
+        public bool TransferWeakPokemon;
+        [DefaultValue(true)]
+        public bool TransferDuplicatePokemon;
+        [DefaultValue(true)]
+        public bool TransferDuplicatePokemonOnCapture;
+        //gpx walking
         [DefaultValue(false)]
         public bool UseGpxPathing;
         [DefaultValue("GPXPath.GPX")]
         public string GpxFile;
-        //recycle
-        [DefaultValue(true)]
-        public bool VerboseRecycling;
-        [DefaultValue(90.0)]
-        public double RecycleInventoryAtUsagePercentage;
         //lucky, incense and berries
         [DefaultValue(true)]
         public bool UseEggIncubators;
@@ -307,7 +310,7 @@ namespace PoGo.NecroBot.Logic
         public double UseBerriesBelowCatchProbability;
         [DefaultValue("or")]
         public string UseBerriesOperator;
-        //snipe
+        //sniping
         [DefaultValue(true)]
         public bool UseSnipeOnlineLocationServer;
         [DefaultValue(false)]
@@ -336,18 +339,20 @@ namespace PoGo.NecroBot.Logic
         public bool UseTransferIvForSnipe;
         [DefaultValue(false)]
         public bool SnipePokemonNotInPokedex;
-        //rename
+        //renaming
         [DefaultValue(false)]
         public bool RenamePokemon;
         [DefaultValue(true)]
         public bool RenameOnlyAboveIv;
         [DefaultValue("{1}_{0}")]
         public string RenameTemplate;
-        //amounts
+        //recycling
+        [DefaultValue(true)]
+        public bool VerboseRecycling;
+        [DefaultValue(90.0)]
+        public double RecycleInventoryAtUsagePercentage;
         [DefaultValue(6)]
         public int MaxPokeballsPerPokemon;
-        [DefaultValue(1000)]
-        public int MaxTravelDistanceInMeters;
         [DefaultValue(120)]
         public int TotalAmountOfPokeballsToKeep;
         [DefaultValue(80)]
@@ -356,7 +361,7 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfRevivesToKeep;
         [DefaultValue(50)]
         public int TotalAmountOfBerriesToKeep;
-        //balls
+        //ball utilization
         [DefaultValue(1000)]
         public int UseGreatBallAboveCp;
         [DefaultValue(1250)]
@@ -392,19 +397,12 @@ namespace PoGo.NecroBot.Logic
         public int ForceGreatThrowOverCp;
         [DefaultValue(1500)]
         public int ForceExcellentThrowOverCp;
-        //transfer
-        [DefaultValue(false)]
-        public bool TransferWeakPokemon;
-        [DefaultValue(true)]
-        public bool TransferDuplicatePokemon;
-        [DefaultValue(true)]
-        public bool TransferDuplicatePokemonOnCapture;
         //favorite
         [DefaultValue(95)]
         public float FavoriteMinIvPercentage;
         [DefaultValue(false)]
         public bool AutoFavoritePokemon;
-        //notcatch
+        //catch filter
         [DefaultValue(false)]
         public bool UsePokemonToNotCatchFilter;
         [DefaultValue(false)]
@@ -1212,7 +1210,7 @@ namespace PoGo.NecroBot.Logic
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
         public bool DumpPokemonStats => _settings.DumpPokemonStats;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
-        public bool ShowPokeballCountsBeforeRecycle => _settings.ShowPokeballCountsBeforeRecycle;
+        public bool DetailedCountsBeforeRecycling => _settings.DetailedCountsBeforeRecycling;
         public bool VerboseRecycling => _settings.VerboseRecycling;
         public double RecycleInventoryAtUsagePercentage => _settings.RecycleInventoryAtUsagePercentage;
         public double EvolveKeptPokemonsAtStorageUsagePercentage => _settings.EvolveKeptPokemonsAtStorageUsagePercentage;

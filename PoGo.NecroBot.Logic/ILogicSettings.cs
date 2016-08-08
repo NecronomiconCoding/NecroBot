@@ -164,7 +164,7 @@ namespace PoGo.NecroBot.Logic
         int TotalAmountOfRevivesToKeep { get; }
         int TotalAmountOfBerriesToKeep { get; }
 
-        bool ShowPokeballCountsBeforeRecycle { get; }
+        bool DetailedCountsBeforeRecycling { get; }
         bool VerboseRecycling { get; }
         double RecycleInventoryAtUsagePercentage { get; }
         double EvolveKeptPokemonsAtStorageUsagePercentage { get; }
