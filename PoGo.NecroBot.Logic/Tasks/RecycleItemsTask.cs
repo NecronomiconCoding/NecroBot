@@ -8,6 +8,7 @@ using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Inventory.Item;
 using System.Threading;
 using System.Threading.Tasks;
+using System;
 
 #endregion
 
@@ -16,7 +17,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     public class RecycleItemsTask
     {
         private static int Diff;
-		private System.Random rnd = new Random();
+	private Random rnd = new Random();
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
