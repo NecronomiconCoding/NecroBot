@@ -106,8 +106,9 @@ namespace PoGo.NecroBot.Logic
                 if (!this.DevicePackageName.Equals("random", StringComparison.InvariantCultureIgnoreCase) && !this.DevicePackageName.Equals("custom", StringComparison.InvariantCultureIgnoreCase))
                 {
                     // User requested a specific device package, check to see if it exists and if so, set it up - otherwise fall-back to random package
+                    string keepDevId = this.DeviceId;
                     SetDevInfoByKey(this.DevicePackageName);
-                    // if (DeviceInfoHelper.DeviceInfoSets.ContainsKey()) - Show error now instead of checking and falling back to random
+                    this.DeviceId = keepDevId;
                 }
                 if (this.DevicePackageName.Equals("random", StringComparison.InvariantCultureIgnoreCase))
                 {
