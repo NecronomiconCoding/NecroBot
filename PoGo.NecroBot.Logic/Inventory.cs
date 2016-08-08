@@ -442,6 +442,19 @@ namespace PoGo.NecroBot.Logic
             return pokemonToEvolve;
         }
 
+        public async Task<LevelUpRewardsResponse> GetLevelUpRewards(int level)
+        {
+            var GetData = await _client.Player.GetPlayer();
+
+
+
+            var ClientLevel = await _client.Player.GetPlayerProfile(GetData.PlayerData.Username);
+            var Rewards = await _client.Player.GetLevelUpRewards(level);
+
+            return Rewards;
+
+        }
+
         public async Task<List<PokemonData>> GetPokemonToUpgrade()
         {
             var upgradePokemon = new List<PokemonData>();
