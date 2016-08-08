@@ -99,15 +99,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     Latitude = pokeStop.Latitude,
                                     Longitude = pokeStop.Longitude
                                 });
-                            }
-                            else
-                            {
-                                await RecycleItemsTask.Execute(session, cancellationToken);
-                            }
-
-                            if (fortSearch.ItemsAwarded.Count > 0)
-                            {
-                                await session.Inventory.RefreshCachedInventory();
+                                {
+                                    await RecycleItemsTask.Execute(session, cancellationToken);                                                               
+                                    await session.Inventory.RefreshCachedInventory();
+                                }
                             }
                         }
 
