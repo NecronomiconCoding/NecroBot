@@ -1262,7 +1262,7 @@
     },
     {
       "Key": "takeDown",
-      "Value": "TakeDown"
+      "Value": "猛撞"
     },
     {
       "Key": "waterGun",
@@ -1278,7 +1278,7 @@
     },
     {
       "Key": "doubleSlap",
-      "Value": "DoubleSlap"
+      "Value": "連環巴掌"
     },
     {
       "Key": "wrap",
@@ -1298,7 +1298,7 @@
     },
     {
       "Key": "smog",
-      "Value": "Smog"
+      "Value": "迷霧"
     },
     {
       "Key": "sludge",
@@ -1402,7 +1402,7 @@
     },
     {
       "Key": "twineedle",
-      "Value": "Twineedle"
+      "Value": "雙針"
     },
     {
       "Key": "poisonJab",
@@ -1842,39 +1842,39 @@
     },
     {
       "Key": "razorLeafFast",
-      "Value": "RazorLeafFast"
+      "Value": "飛葉斬"
     },
     {
       "Key": "mudShotFast",
-      "Value": "MudShotFast"
+      "Value": "泥漿噴射"
     },
     {
       "Key": "iceShardFast",
-      "Value": "IceShardFast"
+      "Value": "冰之礫"
     },
     {
       "Key": "frostBreathFast",
-      "Value": "FrostBreathFast"
+      "Value": "冰之吐息"
     },
     {
       "Key": "quickAttackFast",
-      "Value": "QuickAttackFast"
+      "Value": "電光石火"
     },
     {
       "Key": "scratchFast",
-      "Value": "ScratchFast"
+      "Value": "抓擊"
     },
     {
       "Key": "tackleFast",
-      "Value": "TackleFast"
+      "Value": "撞擊"
     },
     {
       "Key": "poundFast",
-      "Value": "PoundFast"
+      "Value": "拍打"
     },
     {
       "Key": "cutFast",
-      "Value": "一字斬"
+      "Value": "居合斬"
     },
     {
       "Key": "poisonJabFast",
@@ -1886,7 +1886,7 @@
     },
     {
       "Key": "psychoCutFast",
-      "Value": "幻象斬"
+      "Value": "精神切割"
     },
     {
       "Key": "rockThrowFast",
@@ -1938,7 +1938,7 @@
     },
     {
       "Key": "steelWingFast",
-      "Value": "鋼翼"
+      "Value": "鋼之翼"
     },
     {
       "Key": "fireFangFast",
