@@ -70,47 +70,47 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="C5, Version=2.2.5073.27396, Culture=neutral, PublicKeyToken=282361b99ded7e8e, processorArchitecture=MSIL">
-      <HintPath>..\packages\C5.2.2.5073.27396\lib\portable-net40+sl50+wp80+win\C5.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\C5.2.2.5073.27396\lib\portable-net40+sl50+wp80+win\C5.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Google.Protobuf, Version=3.0.0.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.0.0-beta4\lib\net45\Google.Protobuf.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Google.Protobuf.3.0.0-beta4\lib\net45\Google.Protobuf.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
-      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="S2Geometry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\S2Geometry.1.0.1\lib\portable-net45+wp8+win8\S2Geometry.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\S2Geometry.1.0.1\lib\portable-net45+wp8+win8\S2Geometry.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SuperSocket.Common, Version=1.6.6.1, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <HintPath>..\packages\SuperSocket.1.6.6.1\lib\net45\SuperSocket.Common.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\SuperSocket.1.6.6.1\lib\net45\SuperSocket.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SuperSocket.Facility, Version=1.6.6.1, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <HintPath>..\packages\SuperSocket.1.6.6.1\lib\net45\SuperSocket.Facility.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\SuperSocket.1.6.6.1\lib\net45\SuperSocket.Facility.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SuperSocket.SocketBase, Version=1.6.6.1, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <HintPath>..\packages\SuperSocket.1.6.6.1\lib\net45\SuperSocket.SocketBase.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\SuperSocket.1.6.6.1\lib\net45\SuperSocket.SocketBase.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SuperSocket.SocketEngine, Version=1.6.6.1, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <HintPath>..\packages\SuperSocket.Engine.1.6.6.1\lib\net45\SuperSocket.SocketEngine.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\SuperSocket.Engine.1.6.6.1\lib\net45\SuperSocket.SocketEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SuperSocket.SocketService, Version=1.6.6.1, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <HintPath>..\packages\SuperSocket.Engine.1.6.6.1\lib\net45\SuperSocket.SocketService.exe</HintPath>
+      <HintPath>$(SolutionDir)\packages\SuperSocket.Engine.1.6.6.1\lib\net45\SuperSocket.SocketService.exe</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SuperSocket.WebSocket, Version=1.6.6.1, Culture=neutral, PublicKeyToken=6c80000676988ebb, processorArchitecture=MSIL">
-      <HintPath>..\packages\SuperSocket.WebSocket.1.6.6.1\lib\net45\SuperSocket.WebSocket.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\SuperSocket.WebSocket.1.6.6.1\lib\net45\SuperSocket.WebSocket.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -330,12 +330,12 @@ foreach (var item in filesToCleanup)
   <Target Name="CleanReferenceCopyLocalPaths" AfterTargets="AfterBuild;NonWinFodyTarget">
     <CosturaCleanup Config="FodyWeavers.xml" Files="@(ReferenceCopyLocalPaths->'$(OutDir)%(DestinationSubDirectory)%(Filename)%(Extension)')" />
   </Target>
-  <Import Project="..\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />
+  <Import Project="$(SolutionDir)\packages\Fody.1.29.4\build\dotnet\Fody.targets" Condition="Exists('$(SolutionDir)\packages\Fody.1.29.4\build\dotnet\Fody.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Fody.1.29.4\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.29.4\build\dotnet\Fody.targets'))" />
+    <Error Condition="!Exists('$(SolutionDir)\packages\Fody.1.29.4\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\packages\Fody.1.29.4\build\dotnet\Fody.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
