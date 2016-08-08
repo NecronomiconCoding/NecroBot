@@ -13,6 +13,7 @@ using PoGo.NecroBot.Logic.Utils;
 using System.IO;
 using System.Net;
 using PoGo.NecroBot.CLI.Resources;
+using System.Reflection;
 
 #endregion
 
@@ -149,12 +150,17 @@ namespace PoGo.NecroBot.CLI
             session.Navigation.UpdatePositionEvent +=
                 (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent {Latitude = lat, Longitude = lng});
             session.Navigation.UpdatePositionEvent += Navigation_UpdatePositionEvent;
+
             ProgressBar.fill(100);
 
             machine.AsyncStart(new VersionCheckState(), session);
             if (session.LogicSettings.UseSnipeLocationServer)
                 SnipePokemonTask.AsyncStart(session);
-            Console.Clear();
+
+            try {
+                Console.Clear();
+            }
+            catch (IOException) { }
 
             QuitEvent.WaitOne();
         }

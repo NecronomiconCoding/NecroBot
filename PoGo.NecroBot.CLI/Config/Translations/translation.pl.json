@@ -18,7 +18,7 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Nieznany \"AuthType\" w pliku \"config.json\"."
+      "Value": "Nieznany 'AuthType' w pliku 'config.json'"
     },
     {
       "Key": "loginInvalid",
@@ -26,7 +26,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Znajdujesz się poza zdefiniowanym zasięgiem. Zostaniesz przeniesiony na start odległy o ({0}m) za 5 sekund. Sprawdź, czy plik \"LastPos.ini\" jest poprawny"
+      "Value": "Znajdujesz się poza zdefiniowanym zasięgiem. Zostaniesz przeniesiony na start odległy o ({0}m) za 5 sekund. Sprawdź, czy plik 'LastPos.ini' jest poprawny"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -262,15 +262,15 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Wykryto realistyczne podróżowanie. Załadowano ustawienia z \"config.json\""
+      "Value": "Wykryto realistyczne podróżowanie. Załadowano ustawienia z 'config.json'"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Nierealistyczne podróżowanie na {0}, używam Twojej ostatniej pozycji z \"LastPos.ini\""
+      "Value": "Nierealistyczne podróżowanie na {0}, używam Twojej ostatniej pozycji z 'LastPos.ini'"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Współrzędne w pliku \"LastPos.ini\" są niepoprawne, wczytywanie ustawień domyślnych"
+      "Value": "Współrzędne w pliku 'LastPos.ini' są niepoprawne, wczytywanie ustawień domyślnych"
     },
     {
       "Key": "gotUpToDateVersion",
@@ -322,11 +322,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Aktualny Ekwipunek] Pokeballe: {0} | Greatballe: {1} | Ultraballe: {2} | Masterballe: {3}"
+      "Value": "Pokeballe: {0} | Greatballe: {1} | Ultraballe: {2} | Masterballe: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "[Aktualny Ekwipunek] Potiony: {0} | Ożywienia: {1} | Jagody: {2} | Incensy: {3} | Lucky Eggy: {4} | Lury: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -426,7 +434,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Na Twoim koncie Google aktywna jest weryfikacja dwuetapowa, będziesz musiał wprowadzić nowe hasło do aplikacji w \"auth.json\""
+      "Value": "Na Twoim koncie Google aktywna jest weryfikacja dwuetapowa, będziesz musiał wprowadzić nowe hasło do aplikacji w 'auth.json'"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -438,27 +446,27 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Wypełnij GoogleUsername oraz GooglePassword w \"auth.json\""
+      "Value": "Wypełnij GoogleUsername oraz GooglePassword w 'auth.json'"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Wypełnij PtcUsername oraz PtcPassword w \"auth.json\""
+      "Value": "Wypełnij PtcUsername oraz PtcPassword w 'auth.json'"
     },
     {
       "Key": "snipeScan",
-      "Value": "[Snajper] Skanowanie w poszukiwaniu Pokemona w {0}..."
+      "Value": "Skanowanie w poszukiwaniu Pokemona [{0}]..."
     },
     {
       "Key": "snipeScanEx",
-      "Value": "[Snajper] Mam na celowniku {0} z IV: {1} w {2}..."
+      "Value": "Mam na celowniku {0} z IV: {1} [{2}]..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Snajper] Nie znaleziono żadnego Pokemona"
+      "Value": "Nie znaleziono żadnego Pokemona"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value":  "[Snajper] Zbyt mało Pokeballi ({0}/{1})"
+      "Value":  "Zbyt mało Pokeballi ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -514,7 +522,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "Potencjalnych ewolucji: {0}"
+      "Value": "Pokemonów oczekujących na ewolucje: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
@@ -522,11 +530,11 @@
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "[Snajper] Serwer jest wyłączony. Pomijam..."
+      "Value": "Serwer jest wyłączony. Pomijam..."
     },
     {
       "Key": "firstStartPrompt",
-      "Value": "To są Twóje pierwsze kroki. Chciałbyś rozpocząć początkową konfigurację? {0}/{1}"
+      "Value": "To są Twoje pierwsze kroki. Chciałbyś rozpocząć początkową konfigurację? {0}/{1}"
     },
     {
       "Key": "firstStartLanguagePrompt",
@@ -542,11 +550,11 @@
     },
     {
       "Key": "promptError",
-      "Value": "[ERROR] Błąd wejścia, podaj '{0}' lub '{1}"
+      "Value": "[ERROR] Błąd, podaj '{0}' lub '{1}"
     },
     {
       "Key": "firstStartAutoGenSettings",
-      "Value": "Musisz poczekać na automatyczne wygenerowanie plików Config/Auth..."
+      "Value": "Musisz poczekać na automatyczne wygenerowanie plików 'config.json' / 'auth.json'..."
     },
     {
       "Key": "firstStartSetupAccount",
@@ -562,23 +570,23 @@
     },
     {
       "Key": "firstStartSetupTypePromptError",
-      "Value": "[BŁĄD] Wybrano nieprawidłowy typ konta, musisz wybrać '{0}' lub '{1}'"
+      "Value": "[BŁĄD] Wybrano nieprawidłowy typ konta, proszę wybrać '{0}' lub '{1}'"
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
-      "Value": "Proszę wprowadzić nazwę użytkownika"
+      "Value": "Proszę wprowadzić nazwę użytkownika:"
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
-      "Value": "Zaakceptowana nazwa użytkownika: {0}"
+      "Value": "Zapisana nazwa użytkownika: {0}"
     },
     {
       "Key": "firstStartSetupPasswordPrompt",
-      "Value": "Proszę wprowadzić hasło"
+      "Value": "Proszę wprowadzić hasło:"
     },
     {
       "Key": "firstStartSetupPasswordConfirm",
-      "Value": "Zaakceptowane hasło: {0}"
+      "Value": "Zapisane hasło: {0}"
     },
     {
       "Key": "firstStartAccountCompleted",
@@ -594,7 +602,7 @@
     },
     {
       "Key": "firstStartDefaultLocation",
-      "Value": "### Ustawienie domyślnej pozycji ###"
+      "Value": "### Ustawienia domyślnej pozycji ###"
     },
     {
       "Key": "firstStartSetupDefaultLocationError",

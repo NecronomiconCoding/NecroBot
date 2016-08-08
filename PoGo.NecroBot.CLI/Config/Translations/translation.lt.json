@@ -70,7 +70,7 @@
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -290,7 +290,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Dabartinis Inventorius] PokeRutuliai: {0} | DidiejiRutuliai: {1} | UltraRutuliai: {2} | MasterRutuliai: {3}"
+      "Value": "PokeRutuliai: {0} | DidiejiRutuliai: {1} | UltraRutuliai: {2} | MasterRutuliai: {3}"
+    },
+    {
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",

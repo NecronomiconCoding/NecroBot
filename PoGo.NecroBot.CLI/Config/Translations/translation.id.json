@@ -18,27 +18,27 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Jenis AuthType pada config.json tidak diketahui"
+      "Value": "Jenis Akun Login Tidak Diketahui"
     },
 	{
       "Key": "loginInvalid",
-      "Value": "Kredensial pengguna cacat dan gagal masuk."
+      "Value": "User Atau Password Salah"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Kamu di luar dari radius yang kamu tentukan! Jalan ke tempat awal (sekitar {0} meter) dalam 5 detik. Apakah berkas LastPos.ini kamu benar?"
+      "Value": "Kamu Telah melewati Batas dari yang kamu tentukan! Kembali ke posisi awal ( Sekitar {0} meter) dalam 5 detik. Pastikan berkas LastPos.ini Kamu sudah Benar"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Apakah jarak maksimal terlalu kecil?"
+      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Pastikan jarak maksimal tidak terlalu kecil?"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nama: {0} XP: {1}, Gem: {2}, Barang: {3}, Lintang: {4}, Bujur: {5}"
+      "Value": "Nickname: {0} XP: {1}, Gem: {2}, Item: {3}, Koordinat X (latitude): {4}, Koordinat Y (longitude): {5}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Nama: {0} INFO: Gagal mengambil barang, kemungkinan softban. Mengulang: {1}/{2}"
+      "Value": "Nickname: {0} INFO: Gagal Mengambil Item, kemungkinan softban. Mengulang: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -46,23 +46,23 @@
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Bermain sebagai {0}"
+      "Value": "Kamu Menggunakan Nickname {0}"
     },
 	{
       "Key": "eventUsedIncense",
-      "Value": "Memakai Dupa, tersisa: {0}"
+      "Value": "Memakai Incense (Kabut Buat Narik Pokemon), tersisa: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Memakai Lucky Egg, tersisa: {0}"
+      "Value": "Memakai Lucky Egg (Double EXP), tersisa: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} berhasil untuk {1}xp"
+      "Value": "{0} berhasil dan dapat {1}xp"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Gagal {0}. Hasilnya adalah {1}, menghentikan evolusi {2}"
+      "Value": "Gagal {0}. Exp Yang Didapat {1}, menghentikan evolusi {2}"
     },
     {
       "Key": "eventPokemonTransferred",
@@ -74,11 +74,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | Mendapatkan: {11} EXP | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -90,11 +90,11 @@
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "Telur keberuntungan tidak akan terpakai dengan pengaturan UseLuckyEggsMinPokemonAmount diatur ke {0}, gunakan <= {1}"
+      "Value": "Lucky Egg tidak akan terpakai dengan pengaturan UseLuckyEggsMinPokemonAmount diatur ke {0}, gunakan <= {1}"
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "Tangkap {0} Pokemon lagi untuk mulai menggunakan telur keberuntungan!"
+      "Value": "Tangkap {0} Pokemon lagi untuk mulai menggunakan LuckyEgg!"
     },
     {
       "Key": "eventUseBerry",
@@ -102,7 +102,7 @@
     },
     {
       "Key": "itemRazzBerry",
-      "Value": "Razz Buni"
+      "Value": "RazzBerry/Anggur"
     },
     {
       "Key": "catchStatusAttempt",
@@ -118,7 +118,7 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Data pada berkas GPX tidak dapat ditangani, mencoba tanpa berkas GPX..."
+      "Value": "Data pada file GPX tidak dapat ditangani, mencoba tanpa file GPX..."
     },
     {
       "Key": "displayHighestsHeader",
@@ -142,7 +142,7 @@
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Menampilkan yang terbaik di kelasnya"
+      "Value": "Menampilkan yang terbaik di jenisnya"
     },
     {
       "Key": "displayHighestsLevelHeader",
@@ -150,15 +150,15 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Pastikan lintang dan bujur benar. Tutup program jika tidak! Lintang: {0} bujur: {1}"
+      "Value": "Pastikan Kordinat Kamu Sudah Benar. Tutup program dan Konfigurasi Ulang jika tidak! X (Latitude): {0} Y (Longitude): {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Memasukkan telur ke dalam penetas: {0:0.00} km tersisa"
+      "Value": "Memasukkan telur ke dalam Inkubator: {0:0.00} km tersisa"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Status terbaru penetas: {0:0.00} km tersisa"
+      "Value": "Status terbaru Inkubator: {0:0.00} km tersisa"
     },
     {
       "Key": "incubatorEggHatched",
@@ -166,7 +166,7 @@
     },
     {
       "Key": "logEntryError",
-      "Value": "GALAT"
+      "Value": "Error"
     },
     {
       "Key": "logEntryAttention",
@@ -182,15 +182,15 @@
     },
     {
       "Key": "logEntryFarming",
-      "Value": "FARMING"
+      "Value": "Farming/Ternak"
     },
     {
       "Key": "logEntrySniper",
-      "Value": "BIDIKAN"
+      "Value": "Penembak"
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "DAURULANG"
+      "Value": "DAURULANG/BUANG"
     },
     {
       "Key": "logEntryPKMN",
@@ -206,7 +206,7 @@
     },
     {
       "Key": "logEntryBerry",
-      "Value": "BUNI"
+      "Value": "Anggur"
     },
     {
       "Key": "logEntryEgg",
@@ -226,7 +226,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "Server PTC mungkin sedang mengalami gangguan ATAU kredensial anda salah. Coba google"
+      "Value": "Server PTC mungkin sedang mengalami gangguan ATAU akun kamu salah. Coba gunakan akun google"
     },
     {
       "Key": "tryingAgainIn",
@@ -238,15 +238,15 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Membuka halaman Perangkat Google. Mohon tempelkan kode menggunakan CTRL+V"
+      "Value": "Membuka halaman Perangkat Google. Mohon masukkan kode menggunakan CTRL+V"
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Tidak dapat menyakin ke clipboard, lakukan secara manual"
+      "Value": "Tidak dapat menyalin ke clipboard, lakukan secara manual dengan CTRL+C"
     },
     {
       "Key": "couldntCopyToClipboard2",
-      "Value": "Pergi ke: {0} & masukkan {1}"
+      "Value": "Klik Link: {0} & masukkan {1}"
     },
     {
       "Key": "realisticTravelDetected",
@@ -254,15 +254,15 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Bukan perjalanan realistis {0}, menggunakan LastPos.ini yang terakhir disimpan"
+      "Value": "Bukan perjalanan realistis {0}, menggunakan LastPos.ini yang terakhir tersimpan"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinat di berkas \"LastPos.ini\" cacat, menggunakan koordinat default"
+      "Value": "Koordinat di berkas \"LastPos.ini\" Tidak Dapat digunakan, menggunakan koordinat bawaan"
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Sempurna! Anda telah mempunyai versi terbaru {0}"
+      "Value": "Sempurna! Kamu telah mempunyai versi terbaru {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -286,11 +286,11 @@
     },
     {
       "Key": "updateFinished",
-      "Value": "Pembaruan telah selesai, anda dapat menutup jendela ini sekarang."
+      "Value": "Pembaruan telah selesai, kamu dapat menutup jendela ini sekarang."
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Mencari dupa pokemon..."
+      "Value": "Mencari Incense pokemon..."
     },
     {
       "Key": "lookingForPokemon",
@@ -298,7 +298,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Mencari pemikat pokemon..."
+      "Value": "Mencari Modul Lure pokemon..."
     },
     {
       "Key": "pokemonSkipped",
@@ -306,23 +306,31 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Anda tidak memiliki PokeBall di inventori, tidak ada Pokemon yang dapat ditangkap lagi!"
+      "Value": "Kamu tidak memiliki PokeBall di inventori, tidak dapat menangkat pokemon lagi!"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Saat ini jumlah PokeBall: {0} | GreatBall: {1} | UltraBall: {2} | MasterBall: {3}"
+      "Value": "PokeBall: {0} | GreatBall: {1} | UltraBall: {2} | MasterBall: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "Saat ini jumlah Potion: {0} | Revive: {1} | Buni: {2} | Dupa: {3} | Lucky Eggs: {4} | Pemikat: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[Konfigurasi Salah] Total barang maksimum anda (ball+potion+revive={0}) melebihi penyimpanan barang maksimal anda ({1})"
+      "Value": "[Konfigurasi Salah] Total barang maksimum kamu (ball+potion+revive={0}) melebihi kapasitas tas kamu ({1})"
     },
     {
       "Key": "recyclingQuietly",
-	  "Value": "Daur ulang senyap..."
+	  "Value": "Daur ulang secara diam diam..."
     },
     {
       "Key": "invFullTransferring",
@@ -330,7 +338,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Inventori pokemon penuh. Mohon Transfer pokemon secara manual atau set TransferDuplicatePokemon menjadi true di pengaturan..."
+      "Value": "Inventori pokemon penuh. Mohon Transfer pokemon secara manual atau rubah TransferDuplicatePokemon menjadi true di pengaturan..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -342,11 +350,11 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Terjadi masalah pada: Pemikat pokemon {0}"
+      "Value": "Terjadi masalah pada: Lure pokemon {0}"
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Tujuan yang anda inginkan {0}, {1} terlalu jauh dari posisi anda saat ini {2}, {3}"
+      "Value": "Tujuan yang kamu inginkan {0}, {1} terlalu Jarak dari posisi kamu saat ini {2}, {3}"
     },
     {
       "Key": "pokemonRename",
@@ -358,15 +366,15 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Pokemon ignore filter] - Mengacuhkan {0} seperti dijelaskan di pengaturan"
+      "Value": "[Pokemon ignore filter] - Mengabaikan {0} seperti dijelaskan di pengaturan"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Status tangkapan"
+      "Value": "Status Menangkat"
     },
     {
       "Key": "catchStatusError",
-      "Value": "Galat tangkapan"
+      "Value": "Erorr Menangkat"
     },
     {
       "Key": "catchStatusEscape",
@@ -390,11 +398,11 @@
     },
     {
       "Key": "catchTypeLure",
-      "Value": "Pemikat"
+      "Value": "Lure"
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "Dupa"
+      "Value": "Incense"
     },
     {
       "Key": "webSocketFailStart",
@@ -402,7 +410,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Waktu aktif {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Ditransfer: {6:n0} | Didaur ulang: {7:n0}"
+      "Value": "{0} - Waktu aktif {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Ditransfer: {6:n0} | Dihapus: {7:n0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -410,11 +418,11 @@
     },
     {
       "Key": "requireInputText",
-      "Value": "Program akan berlanjut setelah anda menekan tombol..."
+      "Value": "Program akan berlanjut setelah kamu menekan tombol..."
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Karena anda menggunakan faktor autentifikasi ganda Google, anda perlu memasukkan kata kunci khusus aplikasi di auth.json"
+      "Value": "Karena kamu menggunakan keamanan kedua Google, kamu perlu memasukkan kata kunci khusus aplikasi di auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -422,39 +430,39 @@
     },
     {
       "Key": "googleError",
-      "Value": "Pastikan anda memasukkan surel & kata kunci yang benar."
+      "Value": "Pastikan kamu memasukkan email & password yang benar."
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Anda perlu mengisi GoogleUsername dan GooglePassword di auth.json!"
+      "Value": "Kamu harus mengisi GoogleUsername dan GooglePassword di auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Anda perlu mengisi PtcUsername dan PtcPassword di auth.json!"
+      "Value": "Kamu harus mengisi PtcUsername dan PtcPassword di auth.json!"
     },
     {
       "Key": "snipeScan",
-      "Value": "Mencari Pokemon untuk dibidik di {0}..."
+      "Value": "Mencari Pokemon untuk diincar di {0}..."
     },
     {
       "Key": "snipeScanEx",
-      "Value": "Membidik seekor {0} dengan {1} IV di {2}..."
+      "Value": "Mengincar seekor {0} IV: {1} Koordinat: {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "Tidak ditemukan Pokemon untuk dibidik!"
+      "Value": "Tidak ditemukan Pokemon untuk diincar!"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Pokeball tidak mencukupi untuk memulai bidikan! ({0}/{1})"
+      "Value": "Pokeball tidak mencukupi untuk memulai incaran! ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "GERAKAN1"
+      "Value": "Skill 1"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "GERAKAN2"
+      "Value": "Skill 2"
     },
     {
       "Key": "displayHighestCandy",
@@ -462,7 +470,7 @@
     },
     {
       "Key": "ipBannedError",
-      "Value": "Koneksi ditolak. Alamat IP anda mungkin sudah diblokir oleh Niantic. Keluar..."
+      "Value": "Koneksi ditolak. Alamat IP kamu mungkin sudah diblokir oleh Niantic. Keluar..."
     },
     {
       "Key": "noEggsAvailable",
@@ -470,31 +478,31 @@
     },
     {
       "Key": "useLuckyEggActive",
-      "Value": "Telur keberuntungan sudah aktif"
+      "Value": "LuckyEgg sudah aktif"
     },
     {
       "Key": "usedLuckyEgg",
-      "Value": "Sebuah telur keberuntungan terpakai"
+      "Value": "Sebuah LuckyEgg terpakai"
     },
     {
       "Key": "useLuckyEggAmount",
-      "Value": "Telur keberuntungan di inventori: {0}"
+      "Value": "LuckyEgg di inventori: {0}"
     },
     {
       "Key": "noIncenseAvailable",
-      "Value": "Dupa tidak tersedia"
+      "Value": "Incense tidak tersedia"
     },
     {
       "Key": "useIncenseActive",
-      "Value": "Dupa sudah aktif"
+      "Value": "Incense sudah aktif"
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "Dupa di inventori: {0}"
+      "Value": "Incense di inventori: {0}"
     },
     {
       "Key": "usedIncense",
-      "Value": "Sebuah dupa terpakai"
+      "Value": "Sebuah Incense terpakai"
     },
     {
       "Key": "amountPkmSeenCaught",
@@ -506,11 +514,11 @@
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "Peningkatan Pokemon gagal karena tidak cukup bahan"
+      "Value": "PowerUP Pokemon gagal karena tidak cukup Candy"
     },
 	{
       "Key": "snipeServerOffline",
-      "Value": "Server pembidik offline. Lewati..."
+      "Value": "Server Pengincar offline. Lewati..."
     }
   ],
 	"PokemonStrings": [

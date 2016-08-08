@@ -35,7 +35,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nome {0} PE: {1}, Gemme: {2}, Oggetti: {3}"
+      "Value": "Nome: {0} PE: {1}, Gemme: {2}, Oggetti: {3}"
     },
     {
       "Key": "eventFortFailed",
@@ -43,7 +43,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Traveling to Pokestop: {0} ({1}m) ({2} seconds)"
+      "Value": "Camminando verso il Pokestop: {0} ({1}m) ({2} secondi)"
     },
     {
       "Key": "eventProfileLogin",
@@ -59,7 +59,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} con successo per {1}pe"
+      "Value": "{0} evoluto con successo per {1}pe"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -75,11 +75,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} mancanti). | {11} PE guadagnati | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} mancanti). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -140,15 +140,15 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "MostraPLPiu'Alti"
+      "Value": "Mostra PL piu' alti"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "MostraPerfettiPiu'Alti"
+      "Value": "Mostra IV piu' alti"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "MostraLivelliPiu'Alti"
+      "Value": "Mostra livelli piu' alti"
     },
     {
       "Key": "welcomeWarning",
@@ -192,7 +192,7 @@
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "RICICLO"
+      "Value": "RICICLAGGIO"
     },
     {
       "Key": "logEntryPkmn",
@@ -212,7 +212,7 @@
     },
     {
       "Key": "logEntryEgg",
-      "Value": "UOVA"
+      "Value": "UOVO"
     },
     {
       "Key": "logEntryDebug",
@@ -224,7 +224,7 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "Log in come {0}"
+      "Value": "Log in tramite {0}"
     },
     {
       "Key": "ptcOffline",
@@ -312,11 +312,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Inventario Attuale] Pokeball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
+      "Value": "Pokeball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "[Inventario Attuale] Pozioni: {0} | Revitalizzanti: {1} | Bacche: {2} | Aromi: {3} | Fortunuovi: {4} | Moduli Esca: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -365,27 +373,27 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Tentativo Cattura"
+      "Value": "Tentativo di Cattura"
     },
     {
       "Key": "catchStatusError",
-      "Value": "Errore Cattura"
+      "Value": "Errore di Cattura"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Uscito da Pokeball"
+      "Value": "Uscito"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "Fuga da Cattura"
+      "Value": "Fuggito"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "Cattura Mancata"
+      "Value": "Mancato"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "Successo Cattura"
+      "Value": "Catturato"
     },
     {
       "Key": "catchTypeNormal",
@@ -463,7 +471,7 @@
     },
     {
       "Key": "displayHighestCandy",
-      "Value": "Caramella"
+      "Value": "Caramelle"
     },
     {
       "Key": "iPBannedError",

@@ -1,4 +1,4 @@
-﻿{
+{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -19,43 +19,66 @@
     {
       "Key": "wrongAuthType",
       "Value": "ชนิดการยืนยัน (AuthType) ใน config.json ไม่ถูกต้อง"
+
+    },
+    {
+      "Key": "loginInvalid",
+      "Value": "ไอดีไม่ถูกต้อง การเข้าสู่ระบบล้มเหลว"
+
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "คุณอยู่นอกเหนือระยะทำการ กำลังเดินกลับจุดเริ่มต้น ({0} เมตร) ใน 5 วินาที จุดพิกัดใน LastPos.ini ถูกต้องหรือเปล่า?"
+      "Value": "คุณอยู่นอกเหนือระยะทำการ กำลังเดินกลับจุดเริ่มต้น ({0} เมตร) ใน 5 วินาที จุดพิกัดใน LastPos.ini ถูกต้องหรือเปล่า?"
+
     },
     {
       "Key": "farmPokestopsNoUsableFound",
       "Value": "ไม่พบ Pokestop ที่สามารถใช้งานได้ในพื้นที่ ระยะทางสูงสุดที่ตั้งไว้น้อยไปหรือเปล่า?"
+
     },
     {
       "Key": "eventFortUsed",
-      "Value": "ค่าประสบการณ์: {0}, อัญมณี: {1}, ไอเทม: {2}"
+      "Value": "{0} ค่าประสบการณ์: {1}, อัญมณี: {2}, ไอเทม: {3}, Lat: {4}, Long: {5}"
+
+    },
+    {
+      "Key": "eventFortFailed",
+      "Value": "{0} การเก็บของล้มเหลวอาจจะโดนระงับ ยกเลิกการระงับใน: {1}/{2}"
+
     },
     {
       "Key": "eventFortTargeted",
       "Value": "{0} ใน ({1}เมตร)"
+
     },
     {
       "Key": "eventProfileLogin",
       "Value": "กำลังเล่นโดย {0}"
+
+    },
+    {
+      "Key": "eventUsedIncense",
+      "Value": "ใช้งาน Incense, จำนวนคงเหลือ: {0}"
+
     },
     {
       "Key": "eventUsedLuckyEgg",
       "Value": "ใช้งาน Lucky Egg, จำนวนคงเหลือ: {0}"
+
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
       "Value": "{0} สำเร็จ ได้รับค่าประสปการณ์ {1}หน่วย"
+
     },
     {
       "Key": "eventPokemonEvolvedFailed",
       "Value": "ล้มเหลว {0} ผลลัพธ์ {1}  หยุดการอีโว {2}"
+
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [CP ที่ดีที่สุด: {3}  IV: {4}%] (ลูกอม: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [CP ดีที่สุด: {3}  IV: {4}%] (ลูกอม: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -67,7 +90,7 @@
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
