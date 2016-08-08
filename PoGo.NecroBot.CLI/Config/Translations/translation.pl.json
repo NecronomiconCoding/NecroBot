@@ -325,20 +325,20 @@
       "Value": "Pokeballe: {0} | Greatballe: {1} | Ultraballe: {2} | Masterballe: {3}"
     },
     {
-      "Key": "CurrentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Key": "currentPotionInv",
+      "Value": "Potiony: {0} | SuperPotiony: {1} | HyperPotiony: {2} | MaxPotiony: {3}"
     },
     {
-      "Key": "CurrentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
+      "Key": "currentReviveInv",
+      "Value": "Revivy: {0} | MaxRevivy: {1}"
     },
     {
-      "Key": "CurrentMiscItemInv",
-      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Key": "currentMiscItemInv",
+      "Value": "Jagody: {0} | Incensy: {1} | LuckyEggy: {2} | Lury: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[Błąd Konfiguracji] Ustawiona przez Ciebie dopuszczalna ilość itemów w Ekwipunku (PokeBalle+Mikstury+Wskrzeszenia={0}) przekracza maksymalną jego pojemność, która wynosi: ({1})"
+      "Value": "[Błąd Konfiguracji] Ustawiona przez Ciebie dopuszczalna ilość itemów w Ekwipunku (PokeBalle+Potiony+Revivy={0}) przekracza maksymalną jego pojemność, która wynosi: ({1})"
     },
     {
       "Key": "recyclingQuietly",
