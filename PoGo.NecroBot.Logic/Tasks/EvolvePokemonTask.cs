@@ -62,15 +62,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                             return;
                         }
                     }
-                    if(eggNeededToEvolve <= deltaCount)
+                    if(eggNeededToEvolve <= deltaCount || !session.LogicSettings.KeepPokemonsThatCanEvolve)
                     {
-                        if (eggNeededToEvolve > 0 || !session.LogicSettings.KeepPokemonsThatCanEvolve)
+                        if (eggNeededToEvolve > 0)
                         {
                             session.EventDispatcher.Send(new UpdateEvent()
                             {
                                 Message = session.Translation.GetTranslation(TranslationString.CatchMorePokemonToUseLuckyEgg,
                                     eggNeededToEvolve)
                             });
+                            return;
                         }
                     }
                     else
@@ -82,9 +83,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 Message = session.Translation.GetTranslation(TranslationString.WaitingForMorePokemonToEvolve,
                                     pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage)
                             });
+                            return;
                         }
                     }
-                    return;
                 }
                 if (await shouldUseLuckyEgg(session, pokemonToEvolve))
                 {
