@@ -75,11 +75,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} mancanti). | {11} PE guadagnati | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | {11} PE guadagnati | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} mancanti). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -192,7 +192,7 @@
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "RICICLAGGIO"
+      "Value": "RICICLO"
     },
     {
       "Key": "logEntryPkmn",
@@ -316,15 +316,15 @@
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "Pozioni: {0} | SuperPozioni: {1} | HyperPozioni: {2} | MaxPozioni: {3}"
     },
     {
       "Key": "CurrentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
+      "Value": "Revitalizzanti: {0} | MaxRevital: {1}"
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "Bacche: {0} | Incensi: {1} | Fortunuovi: {2} | Esche: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -349,11 +349,11 @@
     },
     {
       "Key": "encounterProblem",
-      "Value": "Problema Incontro: {0}"
+      "Value": "Problema Incontrato: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Problema Incontro: Pokemon attirato {0}"
+      "Value": "Problema Incontrato: Pokemon attirato {0}"
     },
     {
       "Key": "desiredDestTooFar",

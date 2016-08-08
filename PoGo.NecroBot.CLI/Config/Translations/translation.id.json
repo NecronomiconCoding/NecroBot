@@ -30,7 +30,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Pastikan jarak maksimal tidak terlalu kecil?"
+      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Pastikan jarak maksimal tidak terlalu kecil !"
     },
     {
       "Key": "eventFortUsed",
@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Berjalan ke PokeStop: {0} ({1} meter) ({2} detik)"
+      "Value": "Berjalan ke PokeStop: {0} ({1} meter) dalam ({2} detik)"
     },
     {
       "Key": "eventProfileLogin",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -102,7 +102,7 @@
     },
     {
       "Key": "itemRazzBerry",
-      "Value": "RazzBerry/Anggur"
+      "Value": "RaspBeri"
     },
     {
       "Key": "catchStatusAttempt",
@@ -206,7 +206,7 @@
     },
     {
       "Key": "logEntryBerry",
-      "Value": "Anggur"
+      "Value": "RaspBeri"
     },
     {
       "Key": "logEntryEgg",
@@ -226,7 +226,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "Server PTC mungkin sedang mengalami gangguan ATAU akun kamu salah. Coba gunakan akun google"
+      "Value": "Server PTC mungkin sedang mengalami gangguan atau akun kamu salah. Coba gunakan akun google"
     },
     {
       "Key": "tryingAgainIn",
@@ -254,7 +254,7 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Bukan perjalanan realistis {0}, menggunakan LastPos.ini yang terakhir tersimpan"
+      "Value": "Bukan perjalanan realistis {0}, menggunakan berkas LastPos.ini yang terakhir tersimpan"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -282,7 +282,7 @@
     },
     {
       "Key": "finishedTransferringConfig",
-      "Value": "Selesai mentransfer config ke versi baru..."
+      "Value": "Selesai mentransfer pengaturan ke versi baru..."
     },
     {
       "Key": "updateFinished",
@@ -306,23 +306,15 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Kamu tidak memiliki PokeBall di inventori, tidak dapat menangkat pokemon lagi!"
+      "Value": "Kamu tidak memiliki PokeBall di inventori, tidak dapat menangkap pokemon lagi!"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "PokeBall: {0} | GreatBall: {1} | UltraBall: {2} | MasterBall: {3}"
+      "Value": "Saat ini jumlah PokeBall: {0} | GreatBall: {1} | UltraBall: {2} | MasterBall: {3}"
     },
     {
-      "Key": "CurrentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
-    },
-    {
-      "Key": "CurrentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
-    },
-    {
-      "Key": "CurrentMiscItemInv",
-      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Key": "currentItemInv",
+      "Value": "Saat ini jumlah Potion: {0} | Revive: {1} | Berry: {2} | Incense: {3} | Lucky Eggs: {4} | Lure: {5}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -330,7 +322,7 @@
     },
     {
       "Key": "recyclingQuietly",
-	  "Value": "Daur ulang secara diam diam..."
+	  "Value": "Daur ulang secara senyap..."
     },
     {
       "Key": "invFullTransferring",
@@ -370,11 +362,11 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Status Menangkat"
+      "Value": "Status Menangkap"
     },
     {
       "Key": "catchStatusError",
-      "Value": "Erorr Menangkat"
+      "Value": "Erorr Menangkap"
     },
     {
       "Key": "catchStatusEscape",
@@ -514,7 +506,7 @@
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "PowerUP Pokemon gagal karena tidak cukup Candy"
+      "Value": "PowerUP Pokemon gagal karena tidak cukup Permen"
     },
 	{
       "Key": "snipeServerOffline",
