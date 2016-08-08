@@ -1,5 +1,10 @@
 # Change Log
 
+## [v0.7.7](https://github.com/NECROBOTIO/NecroBot/tree/v0.7.6) (2016-08-07)
+[Full Changelog](https://github.com/NECROBOTIO/NecroBot/compare/v0.7.5...v0.7.6)
+
+# Change Log
+
 ## [v0.7.5](https://github.com/NECROBOTIO/NecroBot/tree/v0.7.5) (2016-08-07)
 [Full Changelog](https://github.com/NECROBOTIO/NecroBot/compare/v0.7.4...v0.7.5)
 

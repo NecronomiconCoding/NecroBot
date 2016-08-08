@@ -16,7 +16,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
-using PoGo.NecroBot.Logic.Utils;
 using System.Linq.Dynamic;
 using DynamicExpression = System.Linq.Dynamic.DynamicExpression;
 
@@ -104,12 +103,12 @@ namespace PoGo.NecroBot.Logic
             //ExpressionContext context = new ExpressionContext(this);
             //context.Imports.AddType(typeof(Math));
             //context.Imports.AddType(typeof(PokemonInfo));
-
+            /*
             const string additionalExample = @"
                                        or PokemonInfo.GetPokemonCount(allPokemons, p) <= ptf.KeepMinDuplicatePokemon
                                        or PokemonInfo.GetCountOfCpBetterPokemon(allPokemons, p) <= 0
                                        or PokemonInfo.GetCountOfIvBetterPokemon(allPokemons, p) <= 0";
-
+            */
             const string keepExpr =
                                      //Keep if :
                                      @"

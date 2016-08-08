@@ -37,8 +37,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (session.LogicSettings.KeepPokemonsThatCanEvolve)
                 {
                     var totalPokemon = await session.Inventory.GetPokemons();
+                    var totalEggs = await session.Inventory.GetEggs();
 
-                    var pokemonNeededInInventory = session.Profile.PlayerData.MaxPokemonStorage * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage / 100.0f;
+                    var pokemonNeededInInventory = (session.Profile.PlayerData.MaxPokemonStorage - totalEggs.Count()) * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage / 100.0f;
                     var needPokemonToStartEvolve = Math.Round(
                         Math.Max(0,
                             Math.Min(pokemonNeededInInventory, session.Profile.PlayerData.MaxPokemonStorage)));
