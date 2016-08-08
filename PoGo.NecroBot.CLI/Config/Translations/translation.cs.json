@@ -308,7 +308,7 @@
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Vaše pozice {0}, {1} je přílož vzdálená od vaší stávající pozice {2}, {3}"
+      "Value": "Vaše pozice {0}, {1} je příliš vzdálená od vaší stávající pozice {2}, {3}"
     },
     {
       "Key": "pokemonRename",
@@ -376,11 +376,11 @@
     },
     {
       "Key": "GoogleTwoFactorAuth",
-      "Value": "U vašeho Google účtu máte nastaveno dvoufázové ověření, musíte vložit speciální heslo do auth.json"
+      "Value": "U vašeho Google účtu máte nastaveno dvoufázové ověření (2FA), musíte vložit speciální heslo do auth.json"
     },
     {
       "Key": "GoogleTwoFactorAuthExplanation",
-      "Value": "Otevírám Google App-Heslo. prosím vytvořte si nové App heslo (použijte Ostatní jako Zařízení)"
+      "Value": "Otevírám Google App heslo. prosím vytvořte si nové App heslo (použijte Ostatní jako Zařízení)"
     },
     {
       "Key": "GoogleError",
@@ -590,7 +590,7 @@
     },
     {
       "Key": "nidoranFemale",
-      "Value": "Nidoran - žena"
+      "Value": "Nidoran - samice"
     },
     {
       "Key": "nidorina",
@@ -602,7 +602,7 @@
     },
     {
       "Key": "nidoranMale",
-      "Value": "Nidoran - muž"
+      "Value": "Nidoran - samec"
     },
     {
       "Key": "nidorino",
