@@ -42,29 +42,29 @@ namespace PoGo.NecroBot.Logic
         //devicedata
         [DefaultValue("8525f5d8201f78b5")]
         public string DeviceId;
-        [DefaultValue("msm8994")]
+        [DefaultValue("msm8996")]
         public string AndroidBoardName;
-        [DefaultValue("unknown")]
+        [DefaultValue("1.0.0.0000")]
         public string AndroidBootloader;
-        [DefaultValue("OnePlus")]
+        [DefaultValue("HTC")]
         public string DeviceBrand;
-        [DefaultValue("OnePlus2")]
+        [DefaultValue("HTC 10")]
         public string DeviceModel;
-        [DefaultValue("ONE A2003_24_160604")]
+        [DefaultValue("pmewl_00531")]
         public string DeviceModelIdentifier;
         [DefaultValue("qcom")]
         public string DeviceModelBoot;
-        [DefaultValue("OnePlus")]
+        [DefaultValue("HTC")]
         public string HardwareManufacturer;
-        [DefaultValue("ONE A2003")]
+        [DefaultValue("HTC 10")]
         public string HardwareModel;
-        [DefaultValue("OnePlus2")]
+        [DefaultValue("pmewl_00531")]
         public string FirmwareBrand;
-        [DefaultValue("dev-keys")]
+        [DefaultValue("release-keys")]
         public string FirmwareTags;
         [DefaultValue("user")]
         public string FirmwareType;
-        [DefaultValue("OnePlus/OnePlus2/OnePlus2:6.0.1/MMB29M/1447840820:user/release-keys")]
+        [DefaultValue("htc/pmewl_00531/htc_pmewl:6.0.1/MMB29M/770927.1:user/release-keys")]
         public string FirmwareFingerprint;
 
         public AuthSettings()
