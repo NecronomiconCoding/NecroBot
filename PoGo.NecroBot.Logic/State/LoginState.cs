@@ -117,9 +117,9 @@ namespace PoGo.NecroBot.Logic.State
                 await Task.Delay(2000, cancellationToken);
                 Environment.Exit(0);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //Logger.Write(e.ToString());
+                Logger.Write(e.ToString());
                 await Task.Delay(20000, cancellationToken);
                 return this;
             }
