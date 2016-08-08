@@ -52,7 +52,15 @@ Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBo
 
 
 <h2><a name="credits">Credits</a></h2>
-A big thank you goes to Feroxs' hard work on the API & Console. Without him, this would not have been possible. <3
+
+FeroxRev - [RocketAPI](https://github.com/FeroxRev/Pokemon-Go-Rocket-API)
+
+LineWalker - [POGOProtos-0.31.0](https://github.com/Linewalker/POGOProtos-0.31.0)
+
+Valmere - [TransferWeakPokemon](https://github.com/PocketMobsters/PokeMobBot/pull/378/files)
+
+AeonLucid - [POGOProtos](https://github.com/AeonLucid/POGOProtos)
+
 <br/>
 Thanks to everyone who volunteered by contributing via Pull Requests!
 
