@@ -366,7 +366,7 @@ namespace PoGo.NecroBot.Logic
         public int MinPokeballsWhileSnipe;
         [DefaultValue(60000)]
         public int MinDelayBetweenSnipes;
-        [DefaultValue(0.003)]
+        [DefaultValue(0.005)]
         public double SnipingScanOffset;
         [DefaultValue(false)]
         public bool SnipeAtPokestops;
