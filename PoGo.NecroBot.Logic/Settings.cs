@@ -398,6 +398,10 @@ namespace PoGo.NecroBot.Logic
         public int MaxPokeballsPerPokemon;
         [DefaultValue(1000)]
         public int MaxTravelDistanceInMeters;
+        [DefaultValue(false)]
+        public bool RandomizeRecycle; //Setup for variable recycling values
+        [DefaultValue(5)]
+        public int RandomRecycleValue;
         [DefaultValue(120)]
         public int TotalAmountOfPokeballsToKeep;
         [DefaultValue(80)]
@@ -1308,6 +1312,8 @@ namespace PoGo.NecroBot.Logic
         public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
         public double SnipingScanOffset => _settings.SnipingScanOffset;
         public bool SnipePokemonNotInPokedex => _settings.SnipePokemonNotInPokedex;
+        public bool RandomizeRecycle => _settings.RandomizeRecycle;
+        public int RandomRecycleValue => _settings.RandomRecycleValue;
         public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokeballsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
