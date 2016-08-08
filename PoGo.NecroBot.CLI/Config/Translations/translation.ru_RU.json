@@ -98,7 +98,7 @@
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "Catch {0} more Pokemon to use a Lucky Egg!"
+      "Value": "Необходимо поймать еще {0} покемонов, чтобы использовать Lucky Egg!"
     },
     {
       "Key": "eventUseBerry",
@@ -226,7 +226,7 @@
     },
 	{
       "Key": "logEntryNew",
-      "Value": "NEW"
+      "Value": "НОВЫЙ"
     },
     {
       "Key": "loggingIn",
@@ -315,7 +315,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Ищем покемона привлеченного ЛюрМодулем..."
+      "Value": "Ищем покемона привлеченного Люр Модулем..."
     },
     {
       "Key": "pokemonSkipped",
@@ -335,7 +335,7 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[Configuration Invalid] Your maximum items combined (balls+potions+revives={0}) is over your max item storage ({1})"
+      "Value": "[Ошибка Конфигурации] Общее количество выбранных предметов (шары+зелья+возр.={0}) превышает максимальное значение рюкзака ({1})"
     },
     {
       "Key": "recyclingQuietly",
@@ -372,7 +372,7 @@
     },
     {
       "Key": "pokemonFavorite",
-      "Value": "{0}% IV {1} (CP {2}) *избранные*."
+      "Value": "{0}% IV {1} (CP {2}) добавлен в *избранное*."
     },
     {
       "Key": "pokemonIgnoreFilter",
@@ -470,11 +470,11 @@
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "MOVE1"
+      "Value": "ПРИЁМ1"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "MOVE2"
+      "Value": "ПРИЁМ2"
     },
     {
       "Key": "displayHighestCandy",
@@ -632,607 +632,607 @@
 	"PokemonStrings": [
     {
       "Key": "bulbasaur",
-      "Value": "Bulbasaur"
+      "Value": "Бульбазавр"
     },
     {
       "Key": "ivysaur",
-      "Value": "Ivysaur"
+      "Value": "Ивизаавр"
     },
     {
       "Key": "venusaur",
-      "Value": "Venusaur"
+      "Value": "Венузаавр"
     },
     {
       "Key": "charmander",
-      "Value": "Charmander"
+      "Value": "Чармандер"
     },
     {
       "Key": "charmeleon",
-      "Value": "Charmeleon"
+      "Value": "Чармелеон"
     },
     {
       "Key": "charizard",
-      "Value": "Charizard"
+      "Value": "Чаризард"
     },
     {
       "Key": "squirtle",
-      "Value": "Squirtle"
+      "Value": "Сквиртл"
     },
     {
       "Key": "wartortle",
-      "Value": "Wartortle"
+      "Value": "Вартортл"
     },
     {
       "Key": "blastoise",
-      "Value": "Blastoise"
+      "Value": "Бластойз"
     },
     {
       "Key": "caterpie",
-      "Value": "Caterpie"
+      "Value": "Катерпи"
     },
     {
       "Key": "metapod",
-      "Value": "Metapod"
+      "Value": "Метапод"
     },
     {
       "Key": "butterfree",
-      "Value": "Butterfree"
+      "Value": "Баттерфри"
     },
     {
       "Key": "weedle",
-      "Value": "Weedle"
+      "Value": "Видл"
     },
     {
       "Key": "kakuna",
-      "Value": "Kakuna"
+      "Value": "Какуна"
     },
     {
       "Key": "beedrill",
-      "Value": "Beedrill"
+      "Value": "Бидрилл"
     },
     {
       "Key": "pidgey",
-      "Value": "Pidgey"
+      "Value": "Пиджи"
     },
     {
       "Key": "pidgeotto",
-      "Value": "Pidgeotto"
+      "Value": "Пиджеотто"
     },
     {
       "Key": "pidgeot",
-      "Value": "Pidgeot"
+      "Value": "Пиджит"
     },
     {
       "Key": "rattata",
-      "Value": "Rattata"
+      "Value": "Раттата"
     },
     {
       "Key": "raticate",
-      "Value": "Raticate"
+      "Value": "Ратикэйт"
     },
     {
       "Key": "spearow",
-      "Value": "Spearow"
+      "Value": "Спироу"
     },
     {
       "Key": "fearow",
-      "Value": "Fearow"
+      "Value": "Фироу"
     },
     {
       "Key": "ekans",
-      "Value": "Ekans"
+      "Value": "Эканс"
     },
     {
       "Key": "arbok",
-      "Value": "Arbok"
+      "Value": "Эрбок"
     },
     {
       "Key": "pikachu",
-      "Value": "Pikachu"
+      "Value": "Пикачу"
     },
     {
       "Key": "raichu",
-      "Value": "Raichu"
+      "Value": "Райчу"
     },
     {
       "Key": "sandshrew",
-      "Value": "Sandshrew"
+      "Value": "Сэндшру"
     },
     {
       "Key": "sandslash",
-      "Value": "Sandslash"
+      "Value": "Сэндслэш"
     },
     {
       "Key": "nidoranFemale",
-      "Value": "NidoranF"
+      "Value": "Нидоран♀"
     },
     {
       "Key": "nidorina",
-      "Value": "Nidorina"
+      "Value": "Нидорина"
     },
     {
       "Key": "nidoqueen",
-      "Value": "Nidoqueen"
+      "Value": "Нидоквин"
     },
     {
       "Key": "nidoranMale",
-      "Value": "NidoranM"
+      "Value": "Нидоран♂"
     },
     {
       "Key": "nidorino",
-      "Value": "Nidorino"
+      "Value": "Нидорино"
     },
     {
       "Key": "nidoking",
-      "Value": "Nidoking"
+      "Value": "Нидокинг"
     },
     {
       "Key": "clefairy",
-      "Value": "Clefairy"
+      "Value": "Клефейри"
     },
     {
       "Key": "clefable",
-      "Value": "Clefable"
+      "Value": "Клефейбл"
     },
     {
       "Key": "vulpix",
-      "Value": "Vulpix"
+      "Value": "Вульпикс"
     },
     {
       "Key": "ninetales",
-      "Value": "Ninetales"
+      "Value": "Найнтейлс"
     },
     {
       "Key": "jigglypuff",
-      "Value": "Jigglypuff"
+      "Value": "Джигглипуф"
     },
     {
       "Key": "wigglytuff",
-      "Value": "Wigglytuff"
+      "Value": "Вигглитаф"
     },
     {
       "Key": "zubat",
-      "Value": "Zubat"
+      "Value": "Зубат"
     },
     {
       "Key": "golbat",
-      "Value": "Golbat"
+      "Value": "Голбат"
     },
     {
       "Key": "oddish",
-      "Value": "Oddish"
+      "Value": "Оддиш"
     },
     {
       "Key": "gloom",
-      "Value": "Gloom"
+      "Value": "Глум"
     },
     {
       "Key": "vileplume",
-      "Value": "Vileplume"
+      "Value": "Вайлплум"
     },
     {
       "Key": "paras",
-      "Value": "Paras"
+      "Value": "Парас"
     },
     {
       "Key": "parasect",
-      "Value": "Parasect"
+      "Value": "Парасект"
     },
     {
       "Key": "venonat",
-      "Value": "Venonat"
+      "Value": "Венонат"
     },
     {
       "Key": "venomoth",
-      "Value": "Venomoth"
+      "Value": "Веномот"
     },
     {
       "Key": "diglett",
-      "Value": "Diglett"
+      "Value": "Диглетт"
     },
     {
       "Key": "dugtrio",
-      "Value": "Dugtrio"
+      "Value": "Дагтрио"
     },
     {
       "Key": "meowth",
-      "Value": "Meowth"
+      "Value": "Мяут"
     },
     {
       "Key": "persian",
-      "Value": "Persian"
+      "Value": "Персиан"
     },
     {
       "Key": "psyduck",
-      "Value": "Psyduck"
+      "Value": "Псидак"
     },
     {
       "Key": "golduck",
-      "Value": "Golduck"
+      "Value": "Голдак"
     },
     {
       "Key": "mankey",
-      "Value": "Mankey"
+      "Value": "Манки"
     },
     {
       "Key": "primeape",
-      "Value": "Primeape"
+      "Value": "Праймейп"
     },
     {
       "Key": "growlithe",
-      "Value": "Growlithe"
+      "Value": "Гроулит"
     },
     {
       "Key": "arcanine",
-      "Value": "Arcanine"
+      "Value": "Арканайн"
     },
     {
       "Key": "poliwag",
-      "Value": "Poliwag"
+      "Value": "Поливаг"
     },
     {
       "Key": "poliwhirl",
-      "Value": "Poliwhirl"
+      "Value": "Поливирл"
     },
     {
       "Key": "poliwrath",
-      "Value": "Poliwrath"
+      "Value": "Поливрэт"
     },
     {
       "Key": "abra",
-      "Value": "Abra"
+      "Value": "Абра"
     },
     {
       "Key": "kadabra",
-      "Value": "Kadabra"
+      "Value": "Кадабра"
     },
     {
       "Key": "alakazam",
-      "Value": "Alakazam"
+      "Value": "Алаказам"
     },
     {
       "Key": "machop",
-      "Value": "Machop"
+      "Value": "Мачоп"
     },
     {
       "Key": "machoke",
-      "Value": "Machoke"
+      "Value": "Мачок"
     },
     {
       "Key": "machamp",
-      "Value": "Machamp"
+      "Value": "Мачемп"
     },
     {
       "Key": "bellsprout",
-      "Value": "Bellsprout"
+      "Value": "Беллспраут"
     },
     {
       "Key": "weepinbell",
-      "Value": "Weepinbell"
+      "Value": "Випинбелл"
     },
     {
       "Key": "victreebel",
-      "Value": "Victreebel"
+      "Value": "Виктрибелл"
     },
     {
       "Key": "tentacool",
-      "Value": "Tentacool"
+      "Value": "Тентакул"
     },
     {
       "Key": "tentacruel",
-      "Value": "Tentacruel"
+      "Value": "Тентакруэль"
     },
     {
       "Key": "geodude",
-      "Value": "Geodude"
+      "Value": "Джеодуд"
     },
     {
       "Key": "graveler",
-      "Value": "Graveler"
+      "Value": "Гравелер"
     },
     {
       "Key": "golem",
-      "Value": "Golem"
+      "Value": "Голем"
     },
     {
       "Key": "ponyta",
-      "Value": "Ponyta"
+      "Value": "Понита"
     },
     {
       "Key": "rapidash",
-      "Value": "Rapidash"
+      "Value": "Рапидаш"
     },
     {
       "Key": "slowpoke",
-      "Value": "Slowpoke"
+      "Value": "Слоупок"
     },
     {
       "Key": "slowbro",
-      "Value": "Slowbro"
+      "Value": "Слоубро"
     },
     {
       "Key": "magnemite",
-      "Value": "Magnemite"
+      "Value": "Магремайт"
     },
     {
       "Key": "magneton",
-      "Value": "Magneton"
+      "Value": "Магнетон"
     },
     {
       "Key": "farfetchd",
-      "Value": "Farfetchd"
+      "Value": "Фарфетчд"
     },
     {
       "Key": "doduo",
-      "Value": "Doduo"
+      "Value": "Додуо"
     },
     {
       "Key": "dodrio",
-      "Value": "Dodrio"
+      "Value": "Додрио"
     },
     {
       "Key": "seel",
-      "Value": "Seel"
+      "Value": "Сил"
     },
     {
       "Key": "dewgong",
-      "Value": "Dewgong"
+      "Value": "Дьюгонг"
     },
     {
       "Key": "grimer",
-      "Value": "Grimer"
+      "Value": "Граймер"
     },
     {
       "Key": "muk",
-      "Value": "Muk"
+      "Value": "Мак"
     },
     {
       "Key": "shellder",
-      "Value": "Shellder"
+      "Value": "Шеллдер"
     },
     {
       "Key": "cloyster",
-      "Value": "Cloyster"
+      "Value": "Клойстер"
     },
     {
       "Key": "gastly",
-      "Value": "Gastly"
+      "Value": "Гастли"
     },
     {
       "Key": "haunter",
-      "Value": "Haunter"
+      "Value": "Хонтер"
     },
     {
       "Key": "gengar",
-      "Value": "Gengar"
+      "Value": "Генгар"
     },
     {
       "Key": "onix",
-      "Value": "Onix"
+      "Value": "Оникс"
     },
     {
       "Key": "drowzee",
-      "Value": "Drowzee"
+      "Value": "Дроузи"
     },
     {
       "Key": "hypno",
-      "Value": "Hypno"
+      "Value": "Гипно"
     },
     {
       "Key": "krabby",
-      "Value": "Krabby"
+      "Value": "Крабби"
     },
     {
       "Key": "kingler",
-      "Value": "Kingler"
+      "Value": "Кинглер"
     },
     {
       "Key": "voltorb",
-      "Value": "Voltorb"
+      "Value": "Волторб"
     },
     {
       "Key": "electrode",
-      "Value": "Electrode"
+      "Value": "Електрод"
     },
     {
       "Key": "exeggcute",
-      "Value": "Exeggcute"
+      "Value": "Экзеггут"
     },
     {
       "Key": "exeggutor",
-      "Value": "Exeggutor"
+      "Value": "Экзеггутор"
     },
     {
       "Key": "cubone",
-      "Value": "Cubone"
+      "Value": "Кубон"
     },
     {
       "Key": "marowak",
-      "Value": "Marowak"
+      "Value": "Маровак"
     },
     {
       "Key": "hitmonlee",
-      "Value": "Hitmonlee"
+      "Value": "Хитмонли"
     },
     {
       "Key": "hitmonchan",
-      "Value": "Hitmonchan"
+      "Value": "Хитмончан"
     },
     {
       "Key": "lickitung",
-      "Value": "Lickitung"
+      "Value": "Ликитунг"
     },
     {
       "Key": "koffing",
-      "Value": "Koffing"
+      "Value": "Коффинг"
     },
     {
       "Key": "weezing",
-      "Value": "Weezing"
+      "Value": "Визинг"
     },
     {
       "Key": "rhyhorn",
-      "Value": "Rhyhorn"
+      "Value": "Райхорн"
     },
     {
       "Key": "rhydon",
-      "Value": "Rhydon"
+      "Value": "Райдон"
     },
     {
       "Key": "chansey",
-      "Value": "Chansey"
+      "Value": "Ченси"
     },
     {
       "Key": "tangela",
-      "Value": "Tangela"
+      "Value": "Тангела"
     },
     {
       "Key": "kangaskhan",
-      "Value": "Kangaskhan"
+      "Value": "Кангасхан"
     },
     {
       "Key": "horsea",
-      "Value": "Horsea"
+      "Value": "Хорси"
     },
     {
       "Key": "seadra",
-      "Value": "Seadra"
+      "Value": "Сидра"
     },
     {
       "Key": "goldeen",
-      "Value": "Goldeen"
+      "Value": "Голдин"
     },
     {
       "Key": "seaking",
-      "Value": "Seaking"
+      "Value": "Сикинг"
     },
     {
       "Key": "staryu",
-      "Value": "Staryu"
+      "Value": "Старью"
     },
     {
       "Key": "starmie",
-      "Value": "Starmie"
+      "Value": "Старми"
     },
     {
       "Key": "mrMime",
-      "Value": "Mr. Mime"
+      "Value": "Мистер Майм"
     },
     {
       "Key": "scyther",
-      "Value": "Scyther"
+      "Value": "Скайтер"
     },
     {
       "Key": "jynx",
-      "Value": "Jynx"
+      "Value": "Джинкс"
     },
     {
       "Key": "electabuzz",
-      "Value": "Electabuzz"
+      "Value": "Электробазз"
     },
     {
       "Key": "magmar",
-      "Value": "Magmar"
+      "Value": "Магмар"
     },
     {
       "Key": "pinsir",
-      "Value": "Pinsir"
+      "Value": "Пинсир"
     },
     {
       "Key": "tauros",
-      "Value": "Tauros"
+      "Value": "Торос"
     },
     {
       "Key": "magikarp",
-      "Value": "Magikarp"
+      "Value": "Мэджикарп"
     },
     {
       "Key": "gyarados",
-      "Value": "Gyarados"
+      "Value": "Гаярдос"
     },
     {
       "Key": "lapras",
-      "Value": "Lapras"
+      "Value": "Лапрас"
     },
     {
       "Key": "ditto",
-      "Value": "Ditto"
+      "Value": "Дитто"
     },
     {
       "Key": "eevee",
-      "Value": "Eevee"
+      "Value": "Иви"
     },
     {
       "Key": "vaporeon",
-      "Value": "Vaporeon"
+      "Value": "Вапореон"
     },
     {
       "Key": "jolteon",
-      "Value": "Jolteon"
+      "Value": "Джолтеон"
     },
     {
       "Key": "flareon",
-      "Value": "Flareon"
+      "Value": "Флареон"
     },
     {
       "Key": "porygon",
-      "Value": "Porygon"
+      "Value": "Поригон"
     },
     {
       "Key": "omanyte",
-      "Value": "Omanyte"
+      "Value": "Оманайт"
     },
     {
       "Key": "omastar",
-      "Value": "Omastar"
+      "Value": "Омастар"
     },
     {
       "Key": "kabuto",
-      "Value": "Kabuto"
+      "Value": "Кабуто"
     },
     {
       "Key": "kabutops",
-      "Value": "Kabutops"
+      "Value": "Кабутопс"
     },
     {
       "Key": "aerodactyl",
-      "Value": "Aerodactyl"
+      "Value": "Аэродактиль"
     },
     {
       "Key": "snorlax",
-      "Value": "Snorlax"
+      "Value": "Снорлакс"
     },
     {
       "Key": "articuno",
-      "Value": "Articuno"
+      "Value": "Артикуно"
     },
     {
       "Key": "zapdos",
-      "Value": "Zapdos"
+      "Value": "Запдос"
     },
     {
       "Key": "moltres",
-      "Value": "Moltres"
+      "Value": "Молтрес"
     },
     {
       "Key": "dratini",
-      "Value": "Dratini"
+      "Value": "Дратини"
     },
     {
       "Key": "dragonair",
-      "Value": "Dragonair"
+      "Value": "Драгонэйр"
     },
     {
       "Key": "dragonite",
-      "Value": "Dragonite"
+      "Value": "Драконит"
     },
     {
       "Key": "mewtwo",
-      "Value": "Mewtwo"
+      "Value": "Мьюту"
     },
     {
       "Key": "mew",
-      "Value": "Mew"
+      "Value": "Мью"
     }
   ],
   "PokemonMovesetStrings": [
