@@ -45,6 +45,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ? encounter.WildPokemon?.PokemonData
                     : encounter?.PokemonData);
 
+            if (session.LogicSettings.OnlyCatchHigherCpThanCurrentMinimum)
+            {
+                var pok = await session.Inventory.GetLowestPokemonOfTypeByCp(pokemon.PokemonId);
+                if (pok != null)
+                {
+                    if (pok.Cp > pokemonCp)
+                        return;
+                }
+            }
+
             // Determine whether to use berries or not
             if ((session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
                     pokemonIv >= session.LogicSettings.UseBerriesMinIv &&
