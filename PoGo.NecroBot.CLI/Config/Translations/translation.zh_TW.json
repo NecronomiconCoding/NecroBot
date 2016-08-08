@@ -221,12 +221,24 @@
       "Value": "更新"
     },
     {
+      "Key": "logEntryNew",
+      "Value": "新"
+    },
+    {
       "Key": "loggingIn",
       "Value": "正在登入{0}帳號"
     },
     {
       "Key": "ptcOffline",
       "Value": "PTC服務器可能關閉或您的帳號錯誤錯誤，請嘗試谷歌帳號登入"
+    },
+    {
+      "Key": "accessTokenExpired",
+      "Value": "PTC登入憑證過期。重新登入..."
+    },
+    {
+      "Key": "invalidResponse",
+      "Value": "收到Niantic伺服器的無效回應"
     },
     {
       "Key": "tryingAgainIn",
@@ -322,7 +334,7 @@
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "Recycling Quietly..."
+      "Value": "丟棄不提醒..."
     },
     {
       "Key": "invFullTransferring",
@@ -511,6 +523,102 @@
     {
       "Key": "snipeServerOffline",
       "Value": "狙擊伺服器已離線. 離開中..."
+    },
+    {
+      "Key": "firstStartPrompt",
+      "Value": "這是你第一次啟動，你要開始安裝嗎？ {0}=是，{1}=否"
+    },
+    {
+      "Key": "firstStartLanguagePrompt",
+      "Value": "您要變更預設語言嗎？ {0}=是，{1}=否"
+    },
+    {
+      "Key": "firstStartLanguageCodePrompt",
+      "Value": "請輸入語言代碼(TW=正體中文)"
+    },
+    {
+      "Key": "firstStartLanguageConfirm",
+      "Value": "語言代碼已使用： {0}"
+    },
+    {
+      "Key": "promptError",
+      "Value": "[輸入錯誤]錯誤的輸入，請輸入'{0}'或'{1}'"
+    },
+    {
+      "Key": "firstStartAutoGenSettings",
+      "Value": "Config/Auth檔案將自動生成，完成後才能繼續"
+    },
+    {
+      "Key": "firstStartSetupAccount",
+      "Value": "### 設定新帳號 ###"
+    },
+    {
+      "Key": "firstStartSetupTypePrompt",
+      "Value": "請選擇帳號類型： {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTypeConfirm",
+      "Value": "選擇帳號類型： {0}"
+    },
+    {
+      "Key": "firstStartSetupTypePromptError",
+      "Value": "[錯誤]輸入了不正確的帳號類型，請選擇'{0}'或'{1}'"
+    },
+    {
+      "Key": "firstStartSetupUsernamePrompt",
+      "Value": "請輸入用戶名"
+    },
+    {
+      "Key": "firstStartSetupUsernameConfirm",
+      "Value": "確認用戶名：{0}"
+    },
+    {
+      "Key": "firstStartSetupPasswordPrompt",
+      "Value": "請輸入密碼"
+    },
+    {
+      "Key": "firstStartSetupPasswordConfirm",
+      "Value": "確認密碼：{0}"
+    },
+    {
+      "Key": "firstStartAccountCompleted",
+      "Value": "### 完成建立帳號 ###"
+    },
+    {
+      "Key": "firstStartDefaultLocationPrompt",
+      "Value": "您要設定一個新的預設地點嗎？ {0}=是，{1}=否"
+    },
+    {
+      "Key": "firstStartDefaultLocationSet",
+      "Value": "預設地點已更新"
+    },
+    {
+      "Key": "firstStartDefaultLocation",
+      "Value": "### 設定預設地點 ###"
+    },
+    {
+      "Key": "firstStartSetupDefaultLocationError",
+      "Value": "[錯誤] 請輸入一個數字。例如：{0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "請輸入緯度 (右鍵貼上)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "確認緯度：{0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "請輸入經度 (右鍵貼上)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "確認經度：{0}"
+    },
+    {
+      "Key": "firstStartSetupCompleted",
+      "Value": "### 完成配置設定 ###"
     }
   ],
   "PokemonStrings": [
