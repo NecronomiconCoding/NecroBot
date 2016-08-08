@@ -35,7 +35,7 @@ namespace PoGo.NecroBot.Logic
         public string PtcPassword;
         public bool UseProxy;
         public string UseProxyHost;
-        public string UseProxyPort;
+        public int UseProxyPort;
         public bool UseProxyAuthentication;
         public string UseProxyUsername;
         public string UseProxyPassword;
@@ -1007,7 +1007,7 @@ namespace PoGo.NecroBot.Logic
             set { _settings.Auth.UseProxyHost = value; }
         }
 
-        public string UseProxyPort
+        public int UseProxyPort
         {
             get { return _settings.Auth.UseProxyPort; }
             set { _settings.Auth.UseProxyPort = value; }
