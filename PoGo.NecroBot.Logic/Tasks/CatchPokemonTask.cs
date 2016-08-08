@@ -21,11 +21,13 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchPokemonTask
     {
+        public static int AmountOfBerries;
         private static Random Random => new Random((int)DateTime.Now.Ticks);
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken, dynamic encounter, MapPokemon pokemon,
             FortData currentFortData = null, ulong encounterId = 0)
         {
+            AmountOfBerries = 0;
             cancellationToken.ThrowIfCancellationRequested();
 
             // If the encounter is null nothing will work below, so exit now
@@ -45,26 +47,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     ? encounter.WildPokemon?.PokemonData
                     : encounter?.PokemonData);
 
-            // Determine whether to use berries or not
-            if ((session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
-                    pokemonIv >= session.LogicSettings.UseBerriesMinIv &&
-                    pokemonCp >= session.LogicSettings.UseBerriesMinCp &&
-                    probability < session.LogicSettings.UseBerriesBelowCatchProbability) || 
-                (session.LogicSettings.UseBerriesOperator.ToLower().Equals("or") && (
-                    pokemonIv >= session.LogicSettings.UseBerriesMinIv ||
-                    pokemonCp >= session.LogicSettings.UseBerriesMinCp ||
-                    probability < session.LogicSettings.UseBerriesBelowCatchProbability)))
-            {
-                await
-                    UseBerry(session,
-                        encounter is EncounterResponse || encounter is IncenseEncounterResponse
-                            ? pokemon.EncounterId
-                            : encounterId,
-                        encounter is EncounterResponse || encounter is IncenseEncounterResponse
-                            ? pokemon.SpawnPointId
-                            : currentFortData?.Id);
-            }
-
             // Calculate distance away
             var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                 session.Client.CurrentLongitude,
@@ -79,7 +61,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var attemptCounter = 1;
             do
             {
-                if ((session.LogicSettings.MaxPokeballsPerPokemon > 0 && 
+                if ((session.LogicSettings.MaxPokeballsPerPokemon > 0 &&
                     attemptCounter > session.LogicSettings.MaxPokeballsPerPokemon))
                     break;
 
@@ -95,6 +77,32 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 : encounter?.PokemonData?.Cp) ?? 0
                     });
                     return;
+                }
+
+                // Determine whether to use berries or not
+                if (!(session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
+                        pokemonIv >= session.LogicSettings.UseBerriesMinIv &&
+                        pokemonCp >= session.LogicSettings.UseBerriesMinCp &&
+                        probability < session.LogicSettings.UseBerriesBelowCatchProbability) ||
+                    (session.LogicSettings.UseBerriesOperator.ToLower().Equals("or") && (
+                        pokemonIv >= session.LogicSettings.UseBerriesMinIv ||
+                        pokemonCp >= session.LogicSettings.UseBerriesMinCp ||
+                        probability < session.LogicSettings.UseBerriesBelowCatchProbability)))
+                {
+                    
+                    AmountOfBerries++;
+                    if (AmountOfBerries < session.LogicSettings.MaxBerriesToUse)
+                    {
+                        await
+                       UseBerry(session,
+                           encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                               ? pokemon.EncounterId
+                               : encounterId,
+                           encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                               ? pokemon.SpawnPointId
+                               : currentFortData?.Id);
+                    }
+                   
                 }
 
                 //default to excellent throw
@@ -124,7 +132,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         var regularThrow = 100 - (session.LogicSettings.ExcellentThrowChance +
                                                   session.LogicSettings.GreatThrowChance +
                                                   session.LogicSettings.NiceThrowChance);
-                        var rnd = Random.Next(1 , 101);
+                        var rnd = Random.Next(1, 101);
 
                         if (rnd <= regularThrow)
                         {
@@ -312,7 +320,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
-            session.EventDispatcher.Send(new UseBerryEvent {BerryType = ItemId.ItemRazzBerry, Count = berry.Count});
+            session.EventDispatcher.Send(new UseBerryEvent { BerryType = ItemId.ItemRazzBerry, Count = berry.Count });
         }
     }
 }
