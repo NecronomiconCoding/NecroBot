@@ -1,7 +1,6 @@
 
 #region using directives
 
-using GeoCoordinatePortable;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using PoGo.NecroBot.Logic.Common;
