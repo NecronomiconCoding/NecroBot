@@ -30,7 +30,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Apakah jarak maksimal terlalu kecil?"
+      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Pastikan jarak maksimal tidak terlalu kecil?"
     },
     {
       "Key": "eventFortUsed",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jauh: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
+      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -346,7 +346,7 @@
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Tujuan yang kamu inginkan {0}, {1} terlalu jauh dari posisi kamu saat ini {2}, {3}"
+      "Value": "Tujuan yang kamu inginkan {0}, {1} terlalu Jarak dari posisi kamu saat ini {2}, {3}"
     },
     {
       "Key": "pokemonRename",
