@@ -51,7 +51,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} başarılı, {1}xp kazanıldı."
+      "Value": "{0} başarılı, {1} tecrübe kazanıldı."
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -68,11 +68,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Svy: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Svy: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -346,11 +346,11 @@
     {
       "Key": "statsTemplateString",
       "Value":
-        "{0} - Çalışıyor {1} - Seviye: {2} | XP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Aktarılan: {6:0} | Çöp Eşya: {7:0}"
+        "{0} - Çalışıyor {1} - Seviye: {2} | XP/S: {3:0} | P/S: {4:0} | Stardust: {5:0} | Aktarılan: {6:0} | Çöp Eşya: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (sonraki seviye {1}h {2}m | {3}/{4} XP)"
+      "Value": "{0} (sonraki seviye {1}s {2}d | {3}/{4} XP)"
     },
     {
       "Key": "requireInputText",
@@ -372,7 +372,7 @@
     },
     {
       "Key": "googleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "Google sunucuları büyük olasılıkla kullanım dışı, Lütfen sabırlı olun ve tekrar deneyin."
     },
     {
       "Key": "missingCredentialsGoogle",
