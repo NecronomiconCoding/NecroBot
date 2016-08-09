@@ -406,15 +406,15 @@
     },
     {
       "Key": "catchTypeNormal",
-      "Value": "BắtThường"
+      "Value": "BắtTrênĐường"
     },
     {
       "Key": "catchTypeLure",
-      "Value": "Lure"
+      "Value": "BắtỞLurePKStop"
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "LồngẤp"
+      "Value": "BắtThính"
     },
     {
       "Key": "webSocketFailStart",
@@ -423,6 +423,18 @@
     {
       "Key": "statsTemplateString",
       "Value": "{0} - Đã Chạy: {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | ĐãChuyểnHoá: {6:n0} | ĐãXoá: {7:n0}"
+    },
+	{
+      "Key": "profileStatsTemplateString",
+      "Value": "----- LVL {0} | {1} ----- \n Kinh Nghiệm: {2}/{3} \n Pokemon Đã Bắt: {4} \n Pokemon Đã Chuyển Thành Candy: {5} \n Pokestop Đã Đến: {6} \n Trứng Đã Nở: {6} \n Pokemons envolved: {7} \n Số Mục Trong Pokedex: {8} \n Đã Đi: {9} KM"
+    },
+    {
+      "Key": "showPokeTemplate",
+      "Value": "\n CP {0} | Name: {1}"
+    },
+    {
+      "Key": "helpTemplate",
+      "Value": "Các Lệnh: \n \n /top <Số lượng> - Hiển thị những Pokemon trong TOP <số lượng>. \n /all - Hiển thị tất cả Pokemon. \n /profile - Hiển thị thông tin. \n /loc - Hiển thị vị trí hiện tại. \n /items - Hiển thị những vật phẩm trong túi."
     },
     {
       "Key": "statsXpTemplateString",
@@ -446,7 +458,7 @@
     },
     {
       "Key": "googleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "Server Google có thể đã sập. Hãy kiên nhẫn và mở bot sau 1 ít phút nữa."
     },
     {
       "Key": "missingCredentialsGoogle",
