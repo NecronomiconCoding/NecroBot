@@ -110,7 +110,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (fortSearch.ExperienceAwarded > 0 && timesZeroXPawarded > 0) timesZeroXPawarded = 0;
                     if (fortSearch.ExperienceAwarded == 0)
                     {
-                        await RecycleItemsTask.Execute(session, cancellationToken);
+                        RecycleItemsTask.Execute(session, cancellationToken);
 
                         timesZeroXPawarded++;
 
@@ -131,7 +131,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 Max = retryNumber - zeroCheck
                             });
 
-                            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 400);
+                            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 10);
                         }
                     }
                     else
@@ -164,7 +164,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         await session.Inventory.RefreshCachedInventory();
                     }
 
-                    await RecycleItemsTask.Execute(session, cancellationToken);
+                    //await RecycleItemsTask.Execute(session, cancellationToken);
+                    RecycleItemsTask.Execute(session, cancellationToken);
 
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                         session.LogicSettings.EvolveAllPokemonAboveIv ||
