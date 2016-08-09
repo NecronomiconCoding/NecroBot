@@ -30,7 +30,7 @@ namespace PoGo.NecroBot.Logic.State
 
             try
             {
-                if (session.Settings.AuthType != AuthType.Google || session.Settings.AuthType != AuthType.Ptc)
+                if (session.Settings.AuthType == AuthType.Google || session.Settings.AuthType == AuthType.Ptc)
                 {
                     await session.Client.Login.DoLogin();
                 }
@@ -119,7 +119,7 @@ namespace PoGo.NecroBot.Logic.State
             }
             catch (Exception e)
             {
-                //Logger.Write(e.ToString());
+                Logger.Write(e.ToString());
                 await Task.Delay(20000, cancellationToken);
                 return this;
             }

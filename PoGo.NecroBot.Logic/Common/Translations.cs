@@ -46,7 +46,8 @@ namespace PoGo.NecroBot.Logic.Common
         EventPokemonEvolvedFailed,
         EventPokemonTransferred,
         EventItemRecycled,
-        EventPokemonCapture,
+        EventPokemonCaptureSuccess,
+        EventPokemonCaptureFailed,
         EventNoPokeballs,
         WaitingForMorePokemonToEvolve,
         UseLuckyEggsMinPokemonAmountTooHigh,
@@ -81,6 +82,7 @@ namespace PoGo.NecroBot.Logic.Common
         LogEntryDebug,
         LogEntryUpdate,
         LogEntryNew,
+        LogEntrySoftBan,
         LoggingIn,
         PtcOffline,
         AccessTokenExpired,
@@ -105,7 +107,9 @@ namespace PoGo.NecroBot.Logic.Common
         PokemonSkipped,
         ZeroPokeballInv,
         CurrentPokeballInv,
-        CurrentItemInv,
+        CurrentPotionInv,
+        CurrentReviveInv,
+        CurrentMiscItemInv,
         MaxItemsCombinedOverMaxItemStorage,
         RecyclingQuietly,
         InvFullTransferring,
@@ -130,11 +134,15 @@ namespace PoGo.NecroBot.Logic.Common
         CatchTypeIncense,
         WebSocketFailStart,
         StatsTemplateString,
+        ProfileStatsTemplateString,
+        ShowPokeTemplate,
+        HelpTemplate,
         StatsXpTemplateString,
         RequireInputText,
         GoogleTwoFactorAuth,
         GoogleTwoFactorAuthExplanation,
         GoogleError,
+        GoogleOffline,
         MissingCredentialsGoogle,
         MissingCredentialsPtc,
         SnipeScan,
@@ -159,6 +167,7 @@ namespace PoGo.NecroBot.Logic.Common
         EventUsedIncense,
         SnipeServerOffline,
         PromptError,
+        SoftBanBypassed,
         FirstStartLanguagePrompt,
         FirstStartLanguageCodePrompt,
         FirstStartLanguageConfirm,
@@ -224,8 +233,14 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonTransferred,
                 "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventItemRecycled, "{0}x {1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCapture,
-                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} | lat: {12} long: {13}"),
+
+            //Logging Cleanup (mostly uneccessary information, may want a verbose pokemon capture logger setting)
+            new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureSuccess,
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureFailed,
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"),
+
+
             new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
                 "No Pokeballs - We missed a {0} with CP {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.WaitingForMorePokemonToEvolve,
@@ -273,6 +288,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryDebug, "DEBUG"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryUpdate, "UPDATE"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryNew, "NEW"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LogEntrySoftBan, "SOFTBAN"),
             new KeyValuePair<TranslationString, string>(TranslationString.LoggingIn, "Logging in using {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.PtcOffline,
                 "PTC Servers are probably down OR your credentials are wrong. Try google"),
@@ -319,9 +335,13 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.ZeroPokeballInv,
                 "You have no pokeballs in your inventory, no more Pokemon can be caught!"),
             new KeyValuePair<TranslationString, string>(TranslationString.CurrentPokeballInv,
-                "Current Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CurrentItemInv,
-                "Current Total Potions: {0} | Total Revives: {1} | Berries: {2} | Total Incense: {3} | Lucky Eggs: {4} | Lures: {5}"),
+                "Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CurrentPotionInv,
+                "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CurrentReviveInv,
+                "Revives: {0} | MaxRevives: {1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CurrentMiscItemInv,
+                "Berries: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"),
             new KeyValuePair<TranslationString, string>(TranslationString.MaxItemsCombinedOverMaxItemStorage,
                 "[Configuration Invalid] Your maximum items combined (balls+potions+revives={0}) is over your max item storage ({1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.RecyclingQuietly, "Recycling Quietly..."),
@@ -355,6 +375,12 @@ namespace PoGo.NecroBot.Logic.Common
                 "Failed to start WebSocketServer on port : {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.StatsTemplateString,
                 "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Transfered: {6:n0} | Recycled: {7:n0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.ProfileStatsTemplateString,
+                "----- LVL {0} | {1} ----- \n Experience: {2}/{3} \n Pokemons caught: {4} \n Pokemons deployed: {5} \n Pokestops visited: {6} \n Eggs hatched: {7} \n Pokemons envolved: {8} \n Pokedex entries: {9} \n KM walked: {10}  \n Pokemons: {11}/{12}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.ShowPokeTemplate,
+                "\n CP: {0} | IV: {1}% | Name: {2}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.HelpTemplate,
+                "Commands: \n \n /top <cp/iv> <amount> - Shows you top Pokemons. \n /all <cp/iv> - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items. \n /status - Shows you the Status of the Bot. "),
             new KeyValuePair<TranslationString, string>(TranslationString.StatsXpTemplateString,
                 "{0} (Advance in {1}h {2}m | {3:n0}/{4:n0} XP)"),
             new KeyValuePair<TranslationString, string>(TranslationString.RequireInputText,
@@ -365,6 +391,8 @@ namespace PoGo.NecroBot.Logic.Common
                 "Opening Google App-Passwords. Please make a new App Password (use Other as Device)"),
             new KeyValuePair<TranslationString, string>(TranslationString.GoogleError,
                 "Make sure you have entered the right Email & Password."),
+            new KeyValuePair<TranslationString, string>(TranslationString.GoogleOffline,
+                "Google servers are probably down, Please be patient and start the bot later."),
             new KeyValuePair<TranslationString, string>(TranslationString.MissingCredentialsGoogle,
                 "You need to fill out GoogleUsername and GooglePassword in auth.json!"),
             new KeyValuePair<TranslationString, string>(TranslationString.MissingCredentialsPtc,
@@ -374,7 +402,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.SnipeScanEx,
                 "Sniping a {0} with {1} IV at {2}..."),
             new KeyValuePair<TranslationString, string>(TranslationString.NoPokemonToSnipe,
-                "No Pokemon found to snipe!"),
+                "Did not find a Pokemon within the SnipingScanOffset!"),
             new KeyValuePair<TranslationString, string>(TranslationString.NotEnoughPokeballsToSnipe,
                 "Not enough Pokeballs to start sniping! ({0}/{1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
@@ -393,7 +421,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.AmountPkmSeenCaught,
                 "Amount of Pokemon Seen: {0}/151, Amount of Pokemon Caught: {1}/151"),
             new KeyValuePair<TranslationString, string>(TranslationString.PkmPotentialEvolveCount,
-                "[Evolves] Potential Evolves: {0}"),
+                "Potential Evolutions: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.PkmNotEnoughRessources,
                 "Pokemon Upgrade Failed Not Enough Resources"),
             new KeyValuePair<TranslationString, string>(TranslationString.SnipeServerOffline, "Sniping server is offline. Skipping..."),
@@ -420,6 +448,8 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLatConfirm, "Lattitude accepted: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLongPrompt, "Please enter a Longitude (Right click to paste)"),
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLongConfirm, "Longitude accepted: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.SoftBanBypassed,
+                "Successfully bypassed!"),
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupCompleted, "### COMPLETED CONFIG SETUP ###")
         };
 
@@ -809,6 +839,7 @@ namespace PoGo.NecroBot.Logic.Common
             var translationsLanguageCode = logicSettings.TranslationLanguageCode;
             var translationPath = Path.Combine(logicSettings.GeneralConfigPath, "translations");
             var fullPath = Path.Combine(translationPath, "translation." + translationsLanguageCode + ".json");
+
             if (File.Exists(fullPath))
             {
                 var input = File.ReadAllText(fullPath);
@@ -831,37 +862,25 @@ namespace PoGo.NecroBot.Logic.Common
                         .ToList()
                         .ForEach( translations._pokemonTranslationStrings.Add );
                 }
-                catch( JsonException )
+                catch( JsonException ex )
                 {
-                    Logger.Write( "[ERROR] Issue loading translations", LogLevel.Error );
+                    Logger.Write( $"[ERROR] Issue loading translations: {ex.ToString()}", LogLevel.Warning );
+                    Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
 
-                    switch( translationsLanguageCode )
+                    string strInput = Console.ReadLine().ToLower();
+
+                    if( strInput.Equals( "y" ) )
                     {
-                        case "en":
-                            Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
-
-                            string strInput = Console.ReadLine().ToLower();
-
-                            if( strInput.Equals( "y" ) )
-                            {
-                                // Currently this section can only rebuild the EN translations file \\
-                                // This is because default values cannot be supplied from other languages \\
-                                Logger.Write( "Loading fresh translations and continuing" );
-                                translations = new Translation();
-                                translations.Save( Path.Combine( translationPath, "translation.en.json" ) );
-                            }
-                            else
-                            {
-                                ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error", 3, LogLevel.Error );
-                                return null;
-                            }
-
-                            break;
-                        default:
-                            ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error\n"
-                                + "[ERROR] No replacement translations: Check appropriate files for typos", 5, LogLevel.Error );
-
-                            return null;
+                        // Currently this section can only rebuild the EN translations file \\
+                        // This is because default values cannot be supplied from other languages \\
+                        Logger.Write( "Loading fresh translations and continuing" );
+                        translations = new Translation();
+                        translations.Save( Path.Combine( translationPath, "translation.en.json" ) );
+                    }
+                    else
+                    {
+                        ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error", 3, LogLevel.Error );
+                        return null;
                     }
                 }
             }

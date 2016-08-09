@@ -27,7 +27,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Nenalezeny žádné použitelné Pokestopy ve vaší lokaci. Máte nastavenu malou maximální vzdálenost chůze?"
+      "Value": "Nenalezeny žádné použitelné Pokestopy ve vašem okolí. Zkontrolujte nastavení MaxTravelDistanceInMeters"
     },
     {
       "Key": "eventFortUsed",
@@ -51,7 +51,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} úspěšně za {1}zk"
+      "Value": "{0} úspěšně za {1} zkušeností"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -66,13 +66,16 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
-      "Value":
-        "({0}) | ({1}) {2} Lvl: {3} WP: ({4}/{5}) IV: {6}% | Šance: {7}% | {8}m daleko | s {9} ({10} zbývá). | {11}"
+      "Key": "eventPokemonCaptureSuccess",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+    },
+    {
+      "Key": "eventPokemonCaptureFailed",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Žádné pokebaly - Ztratili jsme {0} s CP {1}"
+      "Value": "Žádné pokebally - Ztratili jsme {0} s CP {1}"
     },
     {
       "Key": "eventUseBerry",
@@ -136,7 +139,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Unkubované vajíčko vylíhnuto: {0} | Úroveň: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "Inkubované vajíčko vylíhnuto: {0} | Úroveň: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -216,7 +219,7 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Souřadnice v souboru \"LastPos.ini\" jsou nevalidní, použití defaultních souřadnic"
+      "Value": "Souřadnice v souboru \"LastPos.ini\" jsou nesprávné, použití defaultních souřadnic"
     },
     {
       "Key": "gotUpToDateVersion",
@@ -224,7 +227,7 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "AutoUpdater je deaktivován. Aktualizujte na poslední vydání: {0}\n "
+      "Value": "AutoUpdater je deaktivován. Aktualizujte na poslední verzi: {0}\n "
     },
     {
       "Key": "downloadingUpdate",
@@ -236,7 +239,7 @@
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "Dokončování rozbalování souborů..."
+      "Value": "Rozbalování souborů dokončeno..."
     },
     {
       "Key": "FinishedTransferringConfig",
@@ -256,7 +259,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Hledání kouzelného pokemona..."
+      "Value": "Hledání nalákaného pokemona..."
     },
     {
       "Key": "pokemonSkipped",
@@ -268,7 +271,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "[Aktuální stav batohu] Pokebally: {0} | Superbally: {1} | Ultrabally: {2} | Masterbally: {3}"
+      "Value": "Pokebally: {0} | Superbally: {1} | Ultrabally: {2} | Masterbally: {3}"
+    },
+    {
+      "Key": "CurrentPotionInv",
+      "Value": "Lektvar: {0} | Super-Lektvar: {1} | Hyper-Lektvar: {2} | Max-Lektvar: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Oživení: {0} | Plné Oživení: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Maliny: {0} | Kadidlo: {1} | Šťastné vejce: {2} | Návnada: {3}"
     },
     {
       "Key": "invFullTransferring",
@@ -281,7 +296,7 @@
     {
       "Key": "invFullTransferManually",
       "Value":
-        "Batoh s pokemony je plný! Prosím přeneste pokémona ručně nebo nastavte TransferDuplicatePokemon na true v nastavení..."
+        "Batoh s pokémony je plný! Prosím přeneste pokémona ručně nebo nastavte TransferDuplicatePokemon na true v nastavení..."
     },
     {
       "Key": "encounterProblem",
@@ -293,7 +308,7 @@
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Vaše pozice {0}, {1} je přílož vzdálená od vaší stávající pozice {2}, {3}"
+      "Value": "Vaše pozice {0}, {1} je příliš vzdálená od vaší stávající pozice {2}, {3}"
     },
     {
       "Key": "pokemonRename",
@@ -305,7 +320,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Pokémon ignorace] - Ignoruji {0} jak je nastaveno v nastavení!"
+      "Value": "[Pokémon ignorace] - Ignoruji {0} jak je nastaveno v config.json!"
     },
     {
       "Key": "catchStatusAttempt",
@@ -337,7 +352,7 @@
     },
     {
       "Key": "CatchTypeLure",
-      "Value": "Kouzelný"
+      "Value": "Nalákaný"
     },
     {
       "Key": "CatchTypeIncense",
@@ -361,15 +376,19 @@
     },
     {
       "Key": "GoogleTwoFactorAuth",
-      "Value": "U vašeho Google účtu máte nastaveno dvoufázové ověření, musíte vložit speciální heslo do auth.json"
+      "Value": "U vašeho Google účtu máte nastaveno dvoufázové ověření (2FA), musíte vložit speciální heslo do auth.json"
     },
     {
       "Key": "GoogleTwoFactorAuthExplanation",
-      "Value": "Otevírám Google App-Heslo. prosím vytvořte si nové App heslo (použijte Ostatní jako Zařízení)"
+      "Value": "Otevírám Google App heslo. prosím vytvořte si nové App heslo (použijte Ostatní jako Zařízení)"
     },
     {
       "Key": "GoogleError",
       "Value": "E-mail nebo heslo je nesprávné."
+    },
+    {
+      "Key": "GoogleOffline",
+      "Value": "Google servery pravděpodobně nefungují, prosím buďte trpělivý a spusťte program později."
     },
     {
       "Key": "MissingCredentialsGoogle",
@@ -389,7 +408,7 @@
     },
     {
       "Key": "NoPokemonToSnipe",
-      "Value": "Žádný pokémon k sejmutí nenalezen"
+      "Value": "Žádný pokémon k sestřelení nenalezen"
     },
     {
       "Key": "NotEnoughPokeballsToSnipe",
@@ -417,19 +436,19 @@
     },
     {
       "Key": "UseLuckyEggActive",
-      "Value": "Použití LuckyEgg aktivní"
+      "Value": "Šťastné vejce je aktivní"
     },
     {
       "Key": "UsedLuckyEgg",
-      "Value": "Použito LuckyEgg"
+      "Value": "Použito Šťastné vejce"
     },
     {
       "Key": "UseLuckyEggAmount",
-      "Value": "LuckyEgg v batohu: {0}"
+      "Value": "Šťastná vejce v batohu: {0}"
     },
     {
       "Key": "NoIncenseAvailable",
-      "Value": "Žádné kadidlo dostupné"
+      "Value": "Kadidlo není dostupné"
     },
     {
       "Key": "UseIncenseActive",
@@ -441,7 +460,7 @@
     },
     {
       "Key": "UsedIncense",
-      "Value": "Použito kadidlo"
+      "Value": "Kadidlo použito"
     },
     {
       "Key": "AmountPkmSeenCaught",
@@ -575,7 +594,7 @@
     },
     {
       "Key": "nidoranFemale",
-      "Value": "Nidoran - žena"
+      "Value": "Nidoran - samice"
     },
     {
       "Key": "nidorina",
@@ -587,7 +606,7 @@
     },
     {
       "Key": "nidoranMale",
-      "Value": "Nidoran - muž"
+      "Value": "Nidoran - samec"
     },
     {
       "Key": "nidorino",

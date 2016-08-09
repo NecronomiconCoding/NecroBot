@@ -13,9 +13,15 @@ namespace PoGo.NecroBot.Logic.State
         public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
 
-            if (session.LogicSettings.EvolveAllPokemonAboveIv || session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
+            if (session.LogicSettings.EvolveAllPokemonAboveIv || session.LogicSettings.EvolveAllPokemonWithEnoughCandy 
+               || session.LogicSettings.UseLuckyEggsWhileEvolving || session.LogicSettings.KeepPokemonsThatCanEvolve)
             {
                 await EvolvePokemonTask.Execute(session, cancellationToken);
+            }
+
+            if (session.LogicSettings.UseEggIncubators)
+            {
+                UseIncubatorsTask.Execute(session, cancellationToken);
             }
 
             if (session.LogicSettings.TransferDuplicatePokemon)
@@ -23,38 +29,33 @@ namespace PoGo.NecroBot.Logic.State
                 await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
             }
 
-            if (session.LogicSettings.AutomaticallyLevelUpPokemon)
-            {
-                await LevelUpPokemonTask.Execute(session, cancellationToken);
-            }
-
             if (session.LogicSettings.UseLuckyEggConstantly)
             {
-                await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
             }
 
             if (session.LogicSettings.UseIncenseConstantly)
             {
-                await UseIncenseConstantlyTask.Execute(session, cancellationToken);
+                UseIncenseConstantlyTask.Execute(session, cancellationToken);
             }
 
             await GetPokeDexCount.Execute(session, cancellationToken);
 
             if (session.LogicSettings.RenamePokemon)
             {
-                await RenamePokemonTask.Execute(session, cancellationToken);
+                RenamePokemonTask.Execute(session, cancellationToken);
             }
 
             if (session.LogicSettings.AutoFavoritePokemon)
             {
-                await FavoritePokemonTask.Execute(session, cancellationToken);
+                FavoritePokemonTask.Execute(session, cancellationToken);
             }
 
             await RecycleItemsTask.Execute(session, cancellationToken);
 
-            if (session.LogicSettings.UseEggIncubators)
+            if (session.LogicSettings.AutomaticallyLevelUpPokemon)
             {
-                await UseIncubatorsTask.Execute(session, cancellationToken);
+                await LevelUpPokemonTask.Execute(session, cancellationToken);
             }
 
             if (session.LogicSettings.UseGpxPathing)

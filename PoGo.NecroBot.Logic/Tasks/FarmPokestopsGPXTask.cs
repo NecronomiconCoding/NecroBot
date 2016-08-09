@@ -120,7 +120,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                             await RecycleItemsTask.Execute(session, cancellationToken);
 
                             if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
-                                session.LogicSettings.EvolveAllPokemonAboveIv)
+                                session.LogicSettings.EvolveAllPokemonAboveIv || 
+                                session.LogicSettings.UseLuckyEggsWhileEvolving ||
+                                session.LogicSettings.KeepPokemonsThatCanEvolve)
                             {
                                 await EvolvePokemonTask.Execute(session, cancellationToken);
                             }

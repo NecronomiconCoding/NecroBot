@@ -14,8 +14,19 @@
 Discord (Chat & Get Help!): https://discord.gg/VXKxNFr <br/>
 <br/>
 
-## NecroBot - the original For The Community, By The Community bot
-We are proud to announce the release of 0.7.0, with special thanks to Kevin and the entire crew involved at PGD!
+## NECROBOT - by the community, for the community.
+
+<h2><a name="getting-started">Getting Started</a></h2>
+Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.
+<br/>
+
+<h2><a name="donating">Donating</a></h2>
+<a name="paypal">Feel free to buy us all a beer, by using PayPal:</a><br/>
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=farhaninoor1%40gmail%2ecom&lc=GB&item_name=NecroBot%20Donations&item_number=POGO&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)<br/>
+
+<a name="btc">or by using Bitcoin: *1LxBH4FHhwyEuL1eHbMvLiGsTiBrzjfa1C*</a><br/>
+
+<h6><em>[A big part of the Donations goes to the top 3 active Contributors. Other expenses as Server costs will be covered using the Donations.]</em></h6><br/>
 
 <h2><a name="features">Features</a></h2>
 
@@ -38,23 +49,18 @@ We are proud to announce the release of 0.7.0, with special thanks to Kevin and 
  - [Multi bot support]
  - [Snipe pokemon]
  - [Power-Up pokemon]
-
-<h2><a name="getting-started">Getting Started</a></h2>
-Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.
-<br/>
-
-<h2><a name="donating">Donating</a></h2>
-<a name="paypal">Feel free to buy us all a beer, by using PayPal:</a><br/>
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=farhaninoor1%40gmail%2ecom&lc=GB&item_name=NecroBot%20Donations&item_number=POGO&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)<br/>
-
-<a name="btc">or by using Bitcoin: *1LxBH4FHhwyEuL1eHbMvLiGsTiBrzjfa1C*</a><br/>
-
-<h6><em>[ A big part of the Donations goes to the top 3 active Contributors. Other expenses as Server and License costs will be covered using the Donations. ]</em></h6><br/>
-
-<a name="btc">Donate Bitcoins to FeroxRev (the API library developer): *1ExYxfBb5cERHyAfqtFscJW7vm2vWBbL3e*</a><br/>
+ - [Telegram Remote Control Support]
 
 <h2><a name="credits">Credits</a></h2>
-A big thank you goes to Feroxs' hard work on the API & Console. Without him, this would not have been possible. <3
+
+FeroxRev - [RocketAPI](https://github.com/FeroxRev/Pokemon-Go-Rocket-API)
+
+LineWalker - [POGOProtos-0.31.0](https://github.com/Linewalker/POGOProtos-0.31.0)
+
+Valmere - [TransferWeakPokemon](https://github.com/PocketMobsters/PokeMobBot/pull/378/files)
+
+AeonLucid - [POGOProtos](https://github.com/AeonLucid/POGOProtos)
+
 <br/>
 Thanks to everyone who volunteered by contributing via Pull Requests!
 

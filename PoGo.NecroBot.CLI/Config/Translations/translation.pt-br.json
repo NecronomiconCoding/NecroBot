@@ -2,15 +2,15 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "PokeBall"
+      "Value": "Poké Bola Normal"
     },
     {
       "Key": "greatPokeball",
-      "Value": "GreatBall"
+      "Value": "Poké Bola Great"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "UltraBall"
+      "Value": "Poké Bola Ultra"
     },
     {
       "Key": "masterPokeball",
@@ -22,7 +22,7 @@
     },
     {
       "Key": "loginInvalid",
-      "Value": "As credenciais de usuário estão inválidas, o login falhou."
+      "Value": "O Email e/ou A Senha esta(ao), o login falhou."
     },
     {
       "Key": "farmPokestopsOutsideRadius",
@@ -30,7 +30,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Não foram encontradas PokeStops na sua área. Sua distância máxima de caminhada não está muito pequena?"
+      "Value": "Não foram encontradas PokeStops na sua área. Os Servidores (Google Login / PTC Login) Cairam?"
     },
     {
       "Key": "eventFortUsed",
@@ -38,11 +38,11 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Nome: {0} INFO: O saque falhou, possível softban. Desbanindo em: {1}/{2}"
+      "Value": "Nome: {0} INFO: O looting falhou, possível softban. Desbanindo em: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Chegando ao Pokestop: {0} ({1}m) ({2} s)"
+      "Value": "Chegando ao Pokestop: {0} ({1}m) ({2} segundos)"
     },
     {
       "Key": "eventProfileLogin",
@@ -54,7 +54,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Ovo da Sorte utilizado, restando: {0}"
+      "Value": "LuckyEgg utilizado, restando: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -73,8 +73,12 @@
       "Value": "{0}x {1}"
     },
     {
-      "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m de distância | com uma {9} (restando {10}). | {11} | lat: {12} long: {13}"
+      "Key": "eventPokemonCaptureSuccess",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m distancia | com uma {9} (restando {10}). | {11} EXP adquirida | {12} | lat: {13} long: {14}"
+    },
+    {
+      "Key": "eventPokemonCaptureFailed",
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | com uma {9} (restando {10}). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -122,11 +126,11 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "perfeito"
+      "Value": "Perfeito"
     },
     {
       "Key": "commonWordName",
-      "Value": "nome"
+      "Value": "Nome"
     },
     {
       "Key": "commonWordUnknown",
@@ -146,7 +150,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Verifique se a Lat & Lng estão corretas. O bot irá fechar caso contrário! Lat: {0} Lng: {1}"
+      "Value": "Verifique se a Latitude & Longitude estão corretas. O bot irá fechar caso contrário! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -174,7 +178,7 @@
     },
     {
       "Key": "logEntryPokestop",
-      "Value": "POKESTOP"
+      "Value": "POKÉSTOP"
     },
     {
       "Key": "logEntryFarming",
@@ -182,7 +186,7 @@
     },
     {
       "Key": "logEntrySniper",
-      "Value": "SNIPER"
+      "Value": "CAPTURA"
     },
     {
       "Key": "logEntryRecycling",
@@ -294,7 +298,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Procurando por atrator de pokémons..."
+      "Value": "Procurando por lure nos Pokéstops..."
     },
     {
       "Key": "pokemonSkipped",
@@ -306,11 +310,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Quantidade atual de Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
+      "Value": "Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "Quantidade Total de Poções: {0} | Total de Revives: {1} | Frutas: {2} | Total de Incensos: {3} | Ovos da Sorte: {4} | Atratores(Lures): {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -330,7 +342,7 @@
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "O inventório está cheio, nenhum item saqueado!"
+      "Value": "O inventário está cheio, nenhum item pego!"
     },
     {
       "Key": "encounterProblem",
@@ -350,7 +362,7 @@
     },
     {
       "Key": "pokemonFavorite",
-      "Value": "{0}% perfeito {1} (CP {2}) *favoritado*."
+      "Value": "{0}% Perfeito {1} (CP {2}) *Favoritado*."
     },
     {
       "Key": "pokemonIgnoreFilter",
@@ -358,11 +370,11 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Tentativa de Captura"
+      "Value": "Tentando Capturar"
     },
     {
       "Key": "catchStatusError",
-      "Value": "Erro de Captura"
+      "Value": "Captura Falha"
     },
     {
       "Key": "catchStatusEscape",
@@ -406,7 +418,7 @@
     },
     {
       "Key": "requireInputText",
-      "Value": "Pressione enter para dar início ao bot..."
+      "Value": "Pressione enter para iníciar o bot..."
     },
     {
       "Key": "googleTwoFactorAuth",
@@ -421,36 +433,40 @@
       "Value": "Verifique se você informou o e-mail e senha corretamente."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
-      "Value": "Você precisa informar o GoogleUsername e GooglePassword no arquivo auth.json!"
+      "Value": "Você precisa informar o GoogleUsername e GooglePassword no arquivo auth.json! Nota : Após o Update 0.7.5 é nessesario colocar as informações em auth.json e authgoogle.json dependendo de como veio o bot, verifique se o seu bot possui os dois arquivos e em caso contrário preencha-os!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Você precisa informar o PtcUsername e PtcPassword no arquivo auth.json!"
+      "Value": "Você precisa informar o PtcUsername e PtcPassword no arquivo auth.json! Nota : Após o Update 0.7.5 é nessesario colocar as informações em auth.json e authptc.json dependendo de como veio o bot, verifique se o seu bot possui os dois arquivos e em caso contrário preencha-os!"
     },
     {
       "Key": "snipeScan",
-      "Value": "[Sniper] Verificando por Snipeable Pokémon em {0}..."
+      "Value": "[Captura] Verificando por Pokémon em {0}..."
     },
     {
       "Key": "snipeScanEx",
-      "Value": "[Sniper] Mirando um {0} com {1} IV em {2}..."
+      "Value": "[Captura] Tentando Capturar um {0} com {1} IV em {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] Nenhum Pokémon encontrado!"
+      "Value": "[Captura] Nenhum Pokémon encontrado!"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Sem pokébolas suficientes para começar o sniping! ({0}/{1})"
+      "Value": "Sem pokébolas suficientes para começar a captura! ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "MOVE1"
+      "Value": "Ataque Básico"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "MOVE2"
+      "Value": "Ataque Especial"
     },
     {
       "Key": "displayHighestCandy",
@@ -503,20 +519,120 @@
     {
       "Key": "pkmNotEnoughRessources",
       "Value": "Fortalecimento do Pokemon falhado, sem recursos suficientes."
+    },
+    {
+      "Key": "snipeServerOffline",
+      "Value": "Servidor de Captura está offline. Pulando..."
+    },
+    {
+      "Key": "firstStartPrompt",
+      "Value": "Essa é a primeira vez que inicia o programa, gostaria de começar a configuração agora? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguagePrompt",
+      "Value": "Gostaria de mudar a idioma padrão? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguageCodePrompt",
+      "Value": "Por favor insira o código do novo idioma"
+    },
+    {
+      "Key": "firstStartLanguageConfirm",
+      "Value": "Código do idioma aplicado: {0}"
+    },
+    {
+      "Key": "promptError",
+      "Value": "[ERRO DE ENTRADA] Erro na entrada, por favor encolha entre '{0}' ou '{1}"
+    },
+    {
+      "Key": "firstStartAutoGenSettings",
+      "Value": "Arquivos Config/Auth serão gerados automaticamente e precisam ser completados antes de continuar"
+    },
+    {
+      "Key": "firstStartSetupAccount",
+      "Value": "### Configurando nova conta de usuário ###"
+    },
+    {
+      "Key": "firstStartSetupTypePrompt",
+      "Value": "Por favor escolha o tipo de conta: {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTypeConfirm",
+      "Value": "Tipo de conta escolhida: {0}"
+    },
+    {
+      "Key": "firstStartSetupTypePromptError",
+      "Value": "[ERRO] informado um tipo de conta inválido, por favor encolha entre '{0}' ou '{1}'"
+    },
+    {
+      "Key": "firstStartSetupUsernamePrompt",
+      "Value": "Por favor informe o nome de usuário"
+    },
+    {
+      "Key": "firstStartSetupUsernameConfirm",
+      "Value": "Usuário aceito: {0}"
+    },
+    {
+      "Key": "firstStartSetupPasswordPrompt",
+      "Value": "Por favor informe a senha"
+    },
+    {
+      "Key": "firstStartSetupPasswordConfirm",
+      "Value": "Senha aceita: {0}"
+    },
+    {
+      "Key": "firstStartAccountCompleted",
+      "Value": "### Conta de Usuário Completa ###"
+    },
+    {
+      "Key": "firstStartDefaultLocationPrompt",
+      "Value": "Gostaria de definir uma nova localização padrão? {0}/{1}"
+    },
+    {
+      "Key": "firstStartDefaultLocationSet",
+      "Value": "Localização Padrão Aplicada"
+    },
+    {
+      "Key": "firstStartDefaultLocation",
+      "Value": "### Definir posição padrão ###"
+    },
+    {
+      "Key": "firstStartSetupDefaultLocationError",
+      "Value": "[ERRO] Por favor informe apenas um VALOR, por exemplo: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Por favor informe a Latitude (Botão direito do mouse para colar)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Lattitude aceita: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Por favor informe a Longitude (Botão direito do mouse para colar)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Longitude aceita: {0}"
+    },
+    {
+      "Key": "firstStartSetupCompleted",
+      "Value": "### CONFIGURAÇÃO COMPLETA ###"
     }
   ],
 	"PokemonStrings": [
     {
       "Key": "bulbasaur",
-      "Value": "Bulbasaur"
+      "Value": "Bulbasauro"
     },
     {
       "Key": "ivysaur",
-      "Value": "Ivysaur"
+      "Value": "Ivysauro"
     },
     {
       "Key": "venusaur",
-      "Value": "Venusaur"
+      "Value": "Venusauro"
     },
     {
       "Key": "charmander",
@@ -620,7 +736,7 @@
     },
     {
       "Key": "nidoranFemale",
-      "Value": "NidoranF"
+      "Value": "NidoranFemea"
     },
     {
       "Key": "nidorina",
@@ -632,7 +748,7 @@
     },
     {
       "Key": "nidoranMale",
-      "Value": "NidoranM"
+      "Value": "NidoranMacho"
     },
     {
       "Key": "nidorino",
@@ -1020,7 +1136,7 @@
     },
     {
       "Key": "magikarp",
-      "Value": "Magikarp"
+      "Value": "Magikarpa"
     },
     {
       "Key": "gyarados",
@@ -1118,11 +1234,11 @@
     },
     {
       "Key": "thunderShock",
-      "Value": "ThunderShock"
+      "Value": "Choque Do Trovao"
     },
     {
       "Key": "quickAttack",
-      "Value": "QuickAttack"
+      "Value": "Ataque Rapido"
     },
     {
       "Key": "scratch",
@@ -1142,7 +1258,7 @@
     },
     {
       "Key": "razorLeaf",
-      "Value": "RazorLeaf"
+      "Value": "Folha Navalha"
     },
     {
       "Key": "takeDown",
@@ -1210,7 +1326,7 @@
     },
     {
       "Key": "flamethrower",
-      "Value": "Flamethrower"
+      "Value": "Lança Chamas"
     },
     {
       "Key": "suckerPunch",

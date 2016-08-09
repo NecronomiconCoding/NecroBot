@@ -18,6 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session, FortData currentFortData, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
+            if (!session.LogicSettings.CatchPokemon) return;
 
             Logger.Write(session.Translation.GetTranslation(TranslationString.LookingForLurePokemon), LogLevel.Debug);
 
@@ -50,7 +51,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             Message = session.Translation.GetTranslation(TranslationString.InvFullTransferring)
                         });
-                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                        TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                     }
                     else
                         session.EventDispatcher.Send(new WarnEvent
