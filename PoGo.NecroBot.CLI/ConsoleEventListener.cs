@@ -114,12 +114,12 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(FortTargetEvent fortTargetEvent, ISession session)
         {
-            // int intTimeForArrival = (int) ( fortTargetEvent.Distance / ( session.LogicSettings.WalkingSpeedInKilometerPerHour * 0.277778 ) );
+            int intTimeForArrival = (int) ( fortTargetEvent.Distance / ( session.LogicSettings.WalkingSpeedInKilometerPerHour * 0.2 ) );
 
             Logger.Write(
-                session.Translation.GetTranslation(TranslationString.EventFortTargeted, fortTargetEvent.Name ),
-                    // Math.Round(fortTargetEvent.Distance), intTimeForArrival ),
-                LogLevel.Info, ConsoleColor.DarkRed);
+                session.Translation.GetTranslation(TranslationString.EventFortTargeted, fortTargetEvent.Name,
+                     Math.Round(fortTargetEvent.Distance), intTimeForArrival ),
+                LogLevel.Info, ConsoleColor.Gray);
         }
 
         private static void HandleEvent(PokemonCaptureEvent pokemonCaptureEvent, ISession session)
