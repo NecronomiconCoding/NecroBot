@@ -101,8 +101,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             String[] parts = p.Split(',');
                             return new
                             {
-                                Latitude = double.Parse(parts[1]),
-                                Longitude = double.Parse(parts[0]),
+                                Latitude = double.Parse(parts[1], new System.Globalization.CultureInfo("en")),
+                                Longitude = double.Parse(parts[0], new System.Globalization.CultureInfo("en")),
                             };
                         }))
                         {
