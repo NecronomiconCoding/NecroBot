@@ -771,7 +771,6 @@ namespace PoGo.NecroBot.Logic
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
             settings.isGui = isGui;
-            settings.migratePercentages();
 
             if (!boolSkipSave || !settings.AutoUpdate)
             {
@@ -969,22 +968,6 @@ namespace PoGo.NecroBot.Logic
         {
             settings.Save(configFile);
             settings.Auth.Load(Path.Combine(settings.ProfileConfigPath, "auth.json"));
-        }
-
-
-        /// <summary>
-        /// Method for issue #1966
-        /// </summary>
-        private void migratePercentages()
-        {
-            if (EvolveKeptPokemonsAtStorageUsagePercentage <= 1.0)
-            {
-                EvolveKeptPokemonsAtStorageUsagePercentage *= 100.0f;
-            }
-            if (RecycleInventoryAtUsagePercentage <= 1.0)
-            {
-                RecycleInventoryAtUsagePercentage *= 100.0f;
-            }
         }
 
         public void Save(string fullPath)
