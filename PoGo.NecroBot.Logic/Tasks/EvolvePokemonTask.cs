@@ -55,25 +55,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (session.LogicSettings.UseLuckyEggsWhileEvolving)
                     {
-                        if (luckyEggMin > maxStorage)
-                        {
-                            session.EventDispatcher.Send(new WarnEvent
-                            {
-                                Message = session.Translation.GetTranslation(TranslationString.UseLuckyEggsMinPokemonAmountTooHigh,
-                                luckyEggMin, maxStorage)
-                            });
-                            return;
-                        }
-                        else if (pokemonNeededForLuckyEgg > 0)
-                        {
-                            session.EventDispatcher.Send(new UpdateEvent()
-                            {
-                                Message = session.Translation.GetTranslation(TranslationString.CatchMorePokemonToUseLuckyEgg,
-                                pokemonNeededForLuckyEgg)
-                            });
-                            return;
-                        }
-                        else
                         {
                             if (await shouldUseLuckyEgg(session, pokemonToEvolve))
                             {
