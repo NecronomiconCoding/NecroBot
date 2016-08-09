@@ -204,7 +204,6 @@ namespace PoGo.NecroBot.CLI
             }
             catch (IOException) { }
 
-            DelayingUtils.Delay(2000, 2000);
             settings.checkProxy();
 
             QuitEvent.WaitOne();
