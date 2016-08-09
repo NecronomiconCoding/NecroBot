@@ -46,7 +46,7 @@ namespace PoGo.NecroBot.CLI
             if (args.Length > 0)
                 subPath = args[0];
 
-            var logger = new ConsoleLogger(LogLevel.SoftBan);
+            var logger = new ConsoleLogger(LogLevel.LevelUp);
             Logger.SetLogger(logger, subPath);
 
             if( CheckKillSwitch() )
