@@ -5,6 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PokemonGo.RocketAPI.Exceptions;
+using System.IO;
+using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -29,6 +31,24 @@ namespace PoGo.NecroBot.Logic.State
             CancellationToken cancellationToken = default(CancellationToken))
         {
             var state = initialState;
+            var profilePath = Path.Combine(Directory.GetCurrentDirectory(), "");
+            var profileConfigPath = Path.Combine(profilePath, "config");
+
+            FileSystemWatcher configWatcher = new FileSystemWatcher();
+            configWatcher.Path = profileConfigPath;
+            configWatcher.Filter = "config.json";
+            configWatcher.NotifyFilter = NotifyFilters.LastWrite;
+            configWatcher.EnableRaisingEvents = true;
+            configWatcher.Changed += (sender, e) =>
+            {
+                if (e.ChangeType == WatcherChangeTypes.Changed)
+                {
+                    session.LogicSettings = new LogicSettings(GlobalSettings.Load(""));
+                    configWatcher.EnableRaisingEvents = !configWatcher.EnableRaisingEvents;
+                    configWatcher.EnableRaisingEvents = !configWatcher.EnableRaisingEvents;
+                    Logger.Write(" ##### config.json ##### ", LogLevel.Info);
+                }
+            };
             do
             {
                 try
