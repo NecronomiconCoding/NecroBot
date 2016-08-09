@@ -673,8 +673,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         SnipInfo.IV = pokemon.iv;
                         SnipeLocations.Add(SnipInfo);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
+                        // ignored
                     }
                 }
                 var locationsToSnipe = SnipeLocations?.Where(q =>
