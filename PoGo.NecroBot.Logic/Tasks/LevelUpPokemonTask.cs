@@ -38,7 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 if (session.LogicSettings.UseLevelUpList && PokemonToLevel!=null)
                 {
-                    for (int i = 0; i < PokemonToLevel.Count - 1; i++)
+                    for (int i = 0; i < PokemonToLevel.Count; i++)
                     {
                         if (PokemonToLevel.Contains(pokemon.PokemonId))
                         {
@@ -62,7 +62,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             if (upgradedNumber >= session.LogicSettings.AmountOfTimesToUpgradeLoop)
                                 break;
-                            break;
                         }
                         else
                         {
