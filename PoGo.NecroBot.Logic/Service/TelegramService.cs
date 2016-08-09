@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using POGOProtos.Data;
 using POGOProtos.Enums;
@@ -34,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Service
             bot.OnMessage += OnTelegramMessageReceived;
             bot.StartReceiving();
 
-            Logger.Write("Using TelegramAPI with " + me.Username);
+            this.session.EventDispatcher.Send(new NoticeEvent {Message = "Using TelegramAPI with " + me.Username});
         }
 
         private async void OnTelegramMessageReceived(object sender, MessageEventArgs messageEventArgs)
@@ -223,6 +225,11 @@ namespace PoGo.NecroBot.Logic.Service
                     break;
                 case "/status":
                     SendMessage(message.Chat.Id, Console.Title);
+                    break;
+                case "/restart":
+                    Process.Start(Assembly.GetEntryAssembly().Location);
+                    SendMessage(message.Chat.Id, "Restarted Bot. Closing old Instance... BYE!");
+                    Environment.Exit(-1);
                     break;
                 default:
                     answerTextmessage += session.Translation.GetTranslation(TranslationString.HelpTemplate);

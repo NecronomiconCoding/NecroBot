@@ -18,7 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static List<PokemonData> Upgrade = new List<PokemonData>();
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            if (await session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
+            if (session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
                 return;
 
             var upgradablePokemon = await session.Inventory.GetPokemonToUpgrade();
