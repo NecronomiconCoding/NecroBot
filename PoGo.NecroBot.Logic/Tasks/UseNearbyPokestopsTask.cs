@@ -57,11 +57,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Longitude = pokeStop.Longitude
                     });
                 }
-
-                if (session.LogicSettings.TransferDuplicatePokemon)
-                {
-                    await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
-                }
             }
         }
 

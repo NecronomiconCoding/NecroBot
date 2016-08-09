@@ -146,6 +146,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                             InventoryFull = fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull
                         });
 
+                        if ( fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull )
+                            storeRI = 1;
+
                         break; //Continue with program as loot was succesfull.
                     }
                 } while (fortTry < retryNumber - zeroCheck);
@@ -157,11 +160,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     storeRI = rc.Next(6, 12); //set new storeRI for new random value
                     stopsHit = 0;
+
+                    await RecycleItemsTask.Execute(session, cancellationToken);
+
                     if (fortSearch.ItemsAwarded.Count > 0)
-                    {
-                        await RecycleItemsTask.Execute(session, cancellationToken);
-                        session.Inventory.RefreshCachedInventory();
-                    }
+                        await session.Inventory.RefreshCachedInventory();
 
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                         session.LogicSettings.EvolveAllPokemonAboveIv ||
@@ -170,43 +173,33 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         await EvolvePokemonTask.Execute(session, cancellationToken);
                     }
-                    await GetPokeDexCount.Execute(session, cancellationToken);
 
-                    if (session.LogicSettings.AutomaticallyLevelUpPokemon)
-                    {
-                        await LevelUpPokemonTask.Execute(session, cancellationToken);
-                    }
                     if (session.LogicSettings.UseLuckyEggConstantly)
-                    {
-                        await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
-                    }
+                        UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+
                     if (session.LogicSettings.UseIncenseConstantly)
-                    {
-                        await UseIncenseConstantlyTask.Execute(session, cancellationToken);
-                    }
+                        UseIncenseConstantlyTask.Execute(session, cancellationToken);
+
                     if (session.LogicSettings.TransferDuplicatePokemon)
-                    {
-                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
-                    }
+                        TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+
                     if (session.LogicSettings.TransferWeakPokemon)
-                    {
-                        await TransferWeakPokemonTask.Execute(session, cancellationToken);
-                    }
+                        TransferWeakPokemonTask.Execute(session, cancellationToken);
+
                     if (session.LogicSettings.RenamePokemon)
-                    {
-                        await RenamePokemonTask.Execute(session, cancellationToken);
-                    }
+                        RenamePokemonTask.Execute(session, cancellationToken);
 
                     if (session.LogicSettings.AutoFavoritePokemon)
-                    {
-                        await FavoritePokemonTask.Execute(session, cancellationToken);
-                    }
+                        FavoritePokemonTask.Execute(session, cancellationToken);
+
+                    if (session.LogicSettings.AutomaticallyLevelUpPokemon)
+                        LevelUpPokemonTask.Execute(session, cancellationToken).Wait(cancellationToken);
+
+                    GetPokeDexCount.Execute(session, cancellationToken).Wait(cancellationToken);
                 }
 
                 if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
-                {
-                    await SnipePokemonTask.Execute(session, cancellationToken);
-                }
+                    SnipePokemonTask.Execute(session, cancellationToken).Wait(cancellationToken);
             }
         }
 
