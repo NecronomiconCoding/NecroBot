@@ -259,8 +259,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                                         return;
 
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
-                                    if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude))) 
-                                        LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                 }
                             }
                         }
@@ -286,8 +284,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                         return;
 
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
-                                    if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                        LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
+
                                 }
                             }
                         }
