@@ -116,8 +116,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             if ((int) fortSearch.CooldownCompleteTimestampMs != 0)
                             {
-                                break;
-                                    // Check if successfully looted, if so program can continue as this was "false alarm".
+                                break; // Check if successfully looted, if so program can continue as this was "false alarm".
                             }
 
                             fortTry += 1;
@@ -126,7 +125,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 Name = fortInfo.Name,
                                 Try = fortTry,
-                                Max = retryNumber - zeroCheck
+                                Max = retryNumber - zeroCheck,
+                                Looted = false
                             });
 
                             DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
@@ -134,6 +134,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     else
                     {
+                        if (fortTry != 0)
+                        {
+                            session.EventDispatcher.Send(new FortFailedEvent
+                            {
+                                Name = fortInfo.Name,
+                                Try = fortTry + 1,
+                                Max = retryNumber - zeroCheck,
+                                Looted = true
+                            });
+                        }
+
                         session.EventDispatcher.Send(new FortUsedEvent
                         {
                             Id = pokeStop.Id,

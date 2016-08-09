@@ -14,6 +14,7 @@ using System.IO;
 using System.Net;
 using PoGo.NecroBot.CLI.Resources;
 using System.Reflection;
+using PoGo.NecroBot.CLI.Plugin;
 
 #endregion
 
@@ -45,7 +46,8 @@ namespace PoGo.NecroBot.CLI
             if (args.Length > 0)
                 subPath = args[0];
 
-            Logger.SetLogger(new ConsoleLogger(LogLevel.New), subPath);
+            var logger = new ConsoleLogger(LogLevel.SoftBan);
+            Logger.SetLogger(logger, subPath);
 
             if( CheckKillSwitch() )
                 return;
@@ -74,6 +76,19 @@ namespace PoGo.NecroBot.CLI
 
                 boolNeedsSetup = true;
             }
+			
+			if (args.Length > 1) {
+				string[] crds = args[1].Split(',');
+				double lat, lng;
+				try {
+					lat = Double.Parse(crds[0]);
+					lng = Double.Parse(crds[1]);
+					settings.DefaultLatitude = lat;
+					settings.DefaultLongitude = lng;
+				}
+				catch(Exception e) {}
+			}
+			
 
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
             
@@ -138,6 +153,15 @@ namespace PoGo.NecroBot.CLI
                 var websocket = new WebSocketInterface(settings.WebSocketPort, session);
                 session.EventDispatcher.EventReceived += evt => websocket.Listen(evt, session);
             }
+
+            var plugins = new PluginManager(new PluginInitializerInfo()
+            {
+                Logger = logger,
+                Session = session,
+                Settings = settings,
+                Statistics = stats
+            });
+            plugins.InitPlugins();
 
             ProgressBar.fill(70);
 
@@ -218,7 +242,7 @@ namespace PoGo.NecroBot.CLI
 
         private static void UnhandledExceptionEventHandler(object obj, UnhandledExceptionEventArgs args)
         {
-            Logger.Write("Exceptiion caught, writing LogBuffer.", force: true);
+            Logger.Write("Exception caught, writing LogBuffer.", force: true);
             throw new Exception();
         }
     }

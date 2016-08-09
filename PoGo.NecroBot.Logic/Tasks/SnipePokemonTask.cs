@@ -103,7 +103,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     return Convert.ToDouble(iv);
                 }
-                catch 
+                catch
                 {
                     return 0;
                 }
@@ -118,7 +118,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     public class PokemonLocation_pokesnipers
     {
         public int id { get; set; }
-        public int iv { get; set; }       
+        public int iv { get; set; }
         public PokemonId name { get; set; }
         public string until { get; set; }
         public string coords { get; set; }
@@ -229,8 +229,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
 
-                                    if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                        LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
+                                    //if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
+                                        //LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
 
                                 }
                             }
@@ -262,8 +262,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                         await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
 
-                                        if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                            LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
+                                       // if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
+                                            //LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                     }
                                 }
                             }
@@ -292,8 +292,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                         await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
 
-                                        if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                            LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
+                                        //if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
+                                            //LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                     }
                                 }
                             }
@@ -336,8 +336,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                             await Snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude, cancellationToken);
 
-                                            if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                                LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
+                                            //if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
+                                            //    LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                         }
                                     }
                                 }
@@ -364,8 +364,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             List<MapPokemon> catchablePokemon;
             try
             {
-                await 
-                    session.Client.Player.UpdatePlayerLocation(latitude, longitude, session.Client.CurrentAltitude);
+                await session.Client.Player.UpdatePlayerLocation(latitude, longitude, session.Client.CurrentAltitude);
 
                 session.EventDispatcher.Send(new UpdatePositionEvent
                 {
@@ -402,7 +401,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                 {
                     if (!LocsVisited.Contains(new PokemonLocation(latitude, longitude)))
-                        LocsVisited.Add(new PokemonLocation(latitude,longitude));
+                        LocsVisited.Add(new PokemonLocation(latitude, longitude));
                     //Also add exact pokemon location to LocsVisited, some times the server one differ a little.
                     if (!LocsVisited.Contains(new PokemonLocation(pokemon.Latitude, pokemon.Longitude)))
                         LocsVisited.Add(new PokemonLocation(pokemon.Latitude, pokemon.Longitude));
@@ -450,18 +449,18 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (!Equals(catchablePokemon.ElementAtOrDefault(catchablePokemon.Count - 1), pokemon))
                     await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch, cancellationToken);
-            }
 
-            if (!catchedPokemon)
-            {
-                session.EventDispatcher.Send(new SnipeEvent
+                if (!catchedPokemon)
                 {
-                    Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
-                });
-            }
+                    session.EventDispatcher.Send(new SnipeEvent
+                    {
+                        Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
+                    });
+                }
 
-            session.EventDispatcher.Send(new SnipeModeEvent {Active = false});
-            await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);
+                session.EventDispatcher.Send(new SnipeModeEvent {Active = false});
+                await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);
+            }
         }
 
         private static ScanResult SnipeScanForPokemon(ISession session, Location location)
@@ -543,6 +542,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 waitforbroadcast.Set();
             });
 
+
             socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_CONNECT_ERROR, () => 
             {
                 hasError = true;
@@ -564,7 +564,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (pokemon.verified || !session.LogicSettings.GetOnlyVerifiedSniperInfoFromPokezz)
                         SnipeLocations.Add(SnipInfo);
                 }
-
                 var locationsToSnipe = SnipeLocations?.Where(q =>
                     (!session.LogicSettings.UseTransferIvForSnipe ||
                     (q.IV == 0 && !session.LogicSettings.SnipeIgnoreUnknownIv) ||
@@ -581,7 +580,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             else
             {
-                session.EventDispatcher.Send(new ErrorEvent { Message = "(Pokezz.com) Connection Error" });
+                session.EventDispatcher.Send(new ErrorEvent {Message = "(Pokezz.com) Connection Error"});
                 return new List<SniperInfo>();
             }
         }
@@ -607,7 +606,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             catch (Exception ex)
             {
                 // most likely System.IO.IOException
-                session.EventDispatcher.Send(new ErrorEvent { Message = "(PokeSnipers.com) " + ex.Message });
+                session.EventDispatcher.Send(new ErrorEvent {Message = "(PokeSnipers.com) " + ex.Message});
                 return new List<SniperInfo>();
             }
             if (scanResult_pokesnipers.pokemons != null)
@@ -630,7 +629,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                         SnipeLocations.Add(SnipInfo);
                     }
                 }
-
                 var locationsToSnipe = SnipeLocations?.Where(q =>
                     (!session.LogicSettings.UseTransferIvForSnipe ||
                     (q.IV == 0 && !session.LogicSettings.SnipeIgnoreUnknownIv) ||
@@ -685,7 +683,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         }
                         catch (System.IO.IOException)
                         {
-                            session.EventDispatcher.Send(new ErrorEvent { Message = "The connection to the sniping location server was lost." });
+                            session.EventDispatcher.Send(new ErrorEvent {Message = "The connection to the sniping location server was lost."});
                         }
                     }
                 }

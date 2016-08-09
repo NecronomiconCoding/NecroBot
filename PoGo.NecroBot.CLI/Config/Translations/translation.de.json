@@ -368,15 +368,15 @@
     },
     {
       "Key": "ProfileStatsTemplateString",
-      "Value": "----- LVL {0} | {1} ----- \n Erfahrungspunkte: {2}/{3} \n Pokemons gefangen: {4} \n Pokemons verschickt: {5} \n Pokestops besucht: {6} \n Eier geschlüpft: {6} \n Pokemons entwickelt: {7} \n Pokedex Einträge: {8} \n KM gelaufen: {9}"
+      "Value": "----- LVL {0} | {1} ----- \n Erfahrungspunkte: {2}/{3} \n Pokemons gefangen: {4} \n Pokemons verschickt: {5} \n Pokestops besucht: {6} \n Eier geschlüpft: {7} \n Pokemons entwickelt: {8} \n Pokedex Einträge: {9} \n KM gelaufen: {10} \n Pokemons: {11}/{12}"
     },
     {
       "Key": "ShowPokeTemplate",
-      "Value": " \n WP {0} | Name: {1}"
+      "Value": " \n WP {0} | IV : {1}% | Name: {2}"
     },
     {
       "Key": "HelpTemplate",
-      "Value": "Kommandos: \n \n /top <amount> - Zeigt die besten Pokemons an. \n /all - Zeigt dir alle Pokemons an. \n /profile - Zeigt dein Profil. \n /loc - Zeigt deine Position an. \n /items - Zeigt dir deine Items"
+      "Value": "Kommandos: \n \n /top <cp/iv> <amount> - Zeigt die besten Pokemons an. \n /all <cp/iv> - Zeigt dir alle Pokemons an. \n /profile - Zeigt dein Profil. \n /loc - Zeigt deine Position an. \n /items - Zeigt dir deine Items \n /status - Zeigt den Status vom Bot. "
     },
     {
       "Key": "StatsXpTemplateString",
