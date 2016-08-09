@@ -189,6 +189,10 @@ namespace PoGo.NecroBot.Logic.Common
         FirstStartSetupDefaultLongPrompt,
         FirstStartSetupDefaultLongConfirm,
         FirstStartSetupCompleted,
+        PokedexCatchedTelegram,
+        PokedexPokemonCatchedTelegram,
+        PokedexNeededTelegram,
+        PokedexPokemonNeededTelegram
     }
 
     public class Translation : ITranslation
@@ -445,7 +449,11 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLatConfirm, "Lattitude accepted: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLongPrompt, "Please enter a Longitude (Right click to paste)"),
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLongConfirm, "Longitude accepted: {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupCompleted, "### COMPLETED CONFIG SETUP ###")
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupCompleted, "### COMPLETED CONFIG SETUP ###"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PokedexCatchedTelegram, "--- Pokedex catched --- \n"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PokedexPokemonCatchedTelegram, "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PokedexNeededTelegram, "--- Pokedex needed --- \n"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PokedexPokemonNeededTelegram, "#{0}# Name: {1} \n"),
         };
 
         [JsonProperty("PokemonStrings",

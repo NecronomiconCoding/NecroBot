@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using POGOProtos.Data;
+using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -60,7 +61,8 @@ namespace PoGo.NecroBot.Logic.Service
                     if (messagetext.Length == 3)
                     {
                         times = Convert.ToInt32(messagetext[2]);
-                    } else if (messagetext.Length >= 2)
+                    }
+                    else if (messagetext.Length >= 2)
                     {
                         sortby = "iv";
                     }
@@ -135,6 +137,53 @@ namespace PoGo.NecroBot.Logic.Service
                              session.Profile.PlayerData.MaxPokemonStorage
                          });
                     SendMessage(message.Chat.Id, answerTextmessage);
+                    break;
+                case "/pokedex":
+                    var pokedex = session.Inventory.GetPokeDexItems().Result;
+
+                    answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexCatchedTelegram);
+                    foreach (var pokedexItem in pokedex)
+                    {
+                        answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonCatchedTelegram, Convert.ToInt32(pokedexItem.InventoryItemData.PokedexEntry.PokemonId), session.Translation.GetPokemonTranslation(pokedexItem.InventoryItemData.PokedexEntry.PokemonId), pokedexItem.InventoryItemData.PokedexEntry.TimesCaptured, pokedexItem.InventoryItemData.PokedexEntry.TimesEncountered);
+
+                        if (answerTextmessage.Length > 3800)
+                        {
+                            SendMessage(message.Chat.Id, answerTextmessage);
+                            answerTextmessage = "";
+                        }
+                    }
+
+                    var pokemonsToCapture = Enum.GetValues(typeof(PokemonId)).Cast<PokemonId>().Except(pokedex.Select(x => x.InventoryItemData.PokedexEntry.PokemonId));
+
+                    answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexNeededTelegram);
+
+                    foreach (var pokedexItem in pokemonsToCapture)
+                    {
+                        answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonCatchedTelegram, Convert.ToInt32(pokedexItem), session.Translation.GetPokemonTranslation(pokedexItem));
+
+                        if (answerTextmessage.Length > 3800)
+                        {
+                            SendMessage(message.Chat.Id, answerTextmessage);
+                            answerTextmessage = "";
+                        }
+                    }
+
+                    /* answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexNeededTelegram);
+                    foreach (var pokedexitem in pokedex)
+                    {
+                        if (pokedexitem.InventoryItemData.PokedexEntry.TimesCaptured == 0)
+                        {
+                            answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonNeededTelegram, pokedexitem.InventoryItemData.PokedexEntry.PokemonId, session.Translation.GetPokemonTranslation(pokedexitem.InventoryItemData.PokedexEntry.PokemonId), pokedexitem.InventoryItemData.PokedexEntry.TimesEncountered);
+                        }
+
+                        if (answerTextmessage.Length > 3800)
+                        {
+                            SendMessage(message.Chat.Id, answerTextmessage);
+                            answerTextmessage = "";
+                        }
+                    } */
+                    SendMessage(message.Chat.Id, answerTextmessage);
+
                     break;
                 case "/loc":
                     SendLocation(message.Chat.Id, session.Client.CurrentLatitude, session.Client.CurrentLongitude);
