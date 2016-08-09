@@ -225,6 +225,10 @@
       "Value": "新"
     },
     {
+      "Key": "logEntrySoftBan",
+      "Value": "暂封"
+    },
+    {
       "Key": "loggingIn",
       "Value": "正在登录{0}账号\t\t"
     },
@@ -639,6 +643,10 @@
     {
       "Key": "firstStartSetupDefaultLongConfirm",
       "Value": "经度已设置: {0}\t\t"
+    },
+    {
+      "Key": "softBanBypassed",
+      "Value": "成功解封!"
     },
     {
       "Key": "firstStartSetupCompleted",

@@ -34,7 +34,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nama: {0} XP: {1}, Gem: {2}, barang: {3}, lintang: {4}, bujur: {5}"
+      "Value": "Nama: {0} mendapatkan XP: {1}, Gem: {2}, barang: {3}, lintang: {4}, bujur: {5}"
     },
     {
       "Key": "eventFortFailed",
@@ -422,7 +422,7 @@
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- LVL {0} | {1} ----- \n EXP: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang disebarkan: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang dievolusikan: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9} KM \n Pokemon: {11}/{12}"
+      "Value": "----- LVL {0} | {1} ----- \n EXP: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang ditransfer: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang dievolusikan: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9} KM \n Pokemon: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
@@ -470,15 +470,15 @@
     },
     {
       "Key": "snipeScanEx",
-      "Value": "Membidik seekor {0} IV: {1} Koordinat: {2}..."
+      "Value": "Membidik {0} Nilai IV: {1} di Koordinat: {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "Tidak ditemukan Pokemon dalam SnipingScanOffset!"
+      "Value": "Tidak ditemukan Pokemon dikoordinat tersebut!"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Pokeball tidak mencukupi untuk memulai bidikan! ({0}/{1})"
+      "Value": "Tidak cukup Pokeball untuk memulai bidikan! ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -530,7 +530,7 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "Jumlah Pokemon yang terlihat: {0}/151, Jumlah Pokemon yang tertangkap: {1}/151"
+      "Value": "Jumlah Pokemon: Terlihat: {0}/151, Tertangkap: {1}/151"
     },
     {
       "Key": "pkmPotentialEvolveCount",

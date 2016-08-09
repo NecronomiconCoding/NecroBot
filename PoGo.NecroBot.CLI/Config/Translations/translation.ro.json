@@ -225,6 +225,10 @@
       "Value": "NOU"
     },
     {
+      "Key": "logEntrySoftBan",
+      "Value": "SOFTBAN"
+    },
+    {
       "Key": "loggingIn",
       "Value": "Se autentifică folosind {0}"
     },
@@ -426,15 +430,15 @@
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- NIVEL {0} | {1} ----- \n Experiență: {2}/{3} \n Pokemoni prinși: {4} \n Pokemons deployed: {5} \n Pokestopuri vizitate: {6} \n Ouă eclozate: {6} \n Pokemoni evoluați: {7} \n Intrări în pokedex: {8} \n KM străbătuți: {9}"
+      "Value": "----- NIVEL {0} | {1} ----- \n Experiență: {2}/{3} \n Pokemoni prinși: {4} \n Pokemoni transferați pentru bomboane: {5} \n Pokestopuri vizitate: {6} \n Ouă eclozate: {7} \n Pokemoni evoluați: {8} \n Intrări în pokedex: {9} \n KM străbătuți: {10}  \n Pokemoni: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
-      "Value": "\n CP {0} | Nume: {1}"
+      "Value": "\n CP {0} | IV: {1}% | Nume: {2}"
     },
     {
       "Key": "helpTemplate",
-      "Value": "Comenzi: \n \n /top <cantitate> - Afișează pokemonii tăi de top. \n /all - Afișează toți pokemonii tăi. \n /profile - Afișează profilul tău. \n /loc - Afișează locația ta. \n /items - Afișează obiectele tale."
+      "Value": "Comenzi: \n \n /top <cp/iv> <cantitate> - Afișează pokemonii tăi de top. \n /all <cp/iv> - Afișează toți pokemonii tăi. \n /profile - Afișează profilul tău. \n /loc - Afișează locația ta. \n /items - Afișează obiectele tale. \n /status - Afișează statusul botului."
     },
     {
       "Key": "statsXpTemplateString",
@@ -538,7 +542,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "[Evoluări] Evoluări potențiale: {0}"
+      "Value": "Evoluări potențiale: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
@@ -639,6 +643,10 @@
     {
       "Key": "firstStartSetupDefaultLongConfirm",
       "Value": "Longitudine acceptată: {0}"
+    },
+    {
+      "Key": "softBanBypassed",
+      "Value": "Softban ocolit cu succes!"
     },
     {
       "Key": "firstStartSetupCompleted",

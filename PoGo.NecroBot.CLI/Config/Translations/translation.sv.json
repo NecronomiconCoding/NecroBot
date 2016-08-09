@@ -56,7 +56,7 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Misslyckades med utvekling {0}. Resultat blev {1}, evolvering stoppad {2}"
+      "Value": "Misslyckades med utveckling {0}. Resultat blev {1}, evolvering stoppad {2}"
     },
     {
       "Key": "eventPokemonTransferred",
@@ -68,11 +68,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chans: {7}% | {8}m dist | med en {9} ({10} kvar). | {11} EXP intjänat | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chans: {7}% | {8}m dist | med en {9} ({10} kvar). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -136,7 +136,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Inkubator ägg har kläkts: {0}"
+      "Value": "Inkubator ägg har kläckts: {0}"
     },
     {
       "Key": "logEntryError",
@@ -209,11 +209,11 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Öppnar Googles Enhets sida. Var vänlig klistra in koden med CTRL+V."
+      "Value": "Öppnar Googles Enhets-sida. Var vänlig klistra in koden med CTRL+V."
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Kunde inte kopiera till utklipp, försök manuellt."
+      "Value": "Kunde inte kopiera till urklipp, försök manuellt."
     },
     {
       "Key": "couldntCopyToClipboard2",
@@ -237,7 +237,7 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "Automatisk uppdatering är inaktigverad. Hämta senaste versionen här: {0}\n "
+      "Value": "Automatisk uppdatering är inaktiverad. Hämta senaste versionen här: {0}\n "
     },
     {
       "Key": "downloadingUpdate",
@@ -245,7 +245,7 @@
     },
     {
       "Key": "finishedDownloadingRelease",
-      "Value": "Nedladdning av senaste version slutförd..."
+      "Value": "Nedladdning av senaste versionen slutförd..."
     },
     {
       "Key": "finishedUnpackingFiles",
@@ -360,7 +360,7 @@
     {
       "Key": "googleTwoFactorAuth",
       "Value":
-        "Du har Googles två-stegs autentisering atkiverad, du kommer behöva ange ett app-specifikt lösenord in i filen auth.json"
+        "Du har Googles två-stegs autentisering aktiverad, du kommer behöva ange ett app-specifikt lösenord in i filen auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -368,11 +368,11 @@
     },
     {
       "Key": "googleError",
-      "Value": "Försäkra dig om att du agivit korrekt epost och lösenord."
+      "Value": "Försäkra dig om att du angivit korrekt epost och lösenord."
     },
     {
       "Key": "googleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "Googles servrar är antagligen nere. Var tålmodig och starta om boten senare."
     },
     {
       "Key": "missingCredentialsGoogle",
@@ -384,7 +384,7 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Krypskytt] Letar efter Pokemons på distans{0}..."
+      "Value": "[Krypskytt] Letar efter Pokemons vid {0}..."
     },
     {
       "Key": "noPokemonToSnipe",
