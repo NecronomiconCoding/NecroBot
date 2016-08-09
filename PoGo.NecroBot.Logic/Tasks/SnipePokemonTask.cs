@@ -403,6 +403,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     if (!LocsVisited.Contains(new PokemonLocation(latitude, longitude)))
                         LocsVisited.Add(new PokemonLocation(latitude,longitude));
+                    //Also add exact pokemon location to LocsVisited, some times the server one differ a little.
                     if (!LocsVisited.Contains(new PokemonLocation(pokemon.Latitude, pokemon.Longitude)))
                         LocsVisited.Add(new PokemonLocation(pokemon.Latitude, pokemon.Longitude));
 
