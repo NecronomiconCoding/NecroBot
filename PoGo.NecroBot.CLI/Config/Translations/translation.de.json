@@ -399,6 +399,10 @@
       "Value": "Stell sicher, dass du die richtige E-Mail & Passwort eingegeben hast."
     },
     {
+      "Key": "GoogleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "MissingCredentialsGoogle",
       "Value": "Es müssen GoogleUsername & GooglePassword in auth.json ausgefüllt werden!"
     },

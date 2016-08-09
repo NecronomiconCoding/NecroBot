@@ -413,6 +413,10 @@
       "Value": "Győződj meg róla hogy a helyes e-mail és jelszót adtad-e meg."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "KLi kell töltened a GoogleUsername és GooglePassword sorokat az auth.json fájlban!"
     },

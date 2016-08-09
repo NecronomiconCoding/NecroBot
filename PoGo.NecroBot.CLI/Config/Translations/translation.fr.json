@@ -445,6 +445,10 @@
       "Value": "Veuillez vérifier vos identifiants GoogleUsername et GooglePassword dans auth.json!"
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Vous devez remplir les champs GoogleUsername et GooglePassword dans auth.json!"
     },
