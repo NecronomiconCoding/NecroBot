@@ -371,6 +371,10 @@
       "Value": "Försäkra dig om att du agivit korrekt epost och lösenord."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Du kommer att behöva ange Google-användarnamn och Google-lösenord i filen auth.json"
     },

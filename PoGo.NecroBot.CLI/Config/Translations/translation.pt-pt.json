@@ -369,6 +369,10 @@
       "Value": "Verifica se definiste um e-mail e uma palavra-passe correta."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Precisas de definir o GoogleUsername e GooglePassword no ficheiro auth.json!"
     },
