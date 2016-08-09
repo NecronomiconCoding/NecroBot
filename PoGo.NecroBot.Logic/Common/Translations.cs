@@ -402,7 +402,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.SnipeScanEx,
                 "Sniping a {0} with {1} IV at {2}..."),
             new KeyValuePair<TranslationString, string>(TranslationString.NoPokemonToSnipe,
-                "Did not find a Pokemon within the SnipingScanOffset!"),
+                "Did not find a Pokemon within the Location, pokemon despawned?"),
             new KeyValuePair<TranslationString, string>(TranslationString.NotEnoughPokeballsToSnipe,
                 "Not enough Pokeballs to start sniping! ({0}/{1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
