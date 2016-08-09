@@ -117,6 +117,7 @@ namespace PoGo.NecroBot.Logic.Service
                     var stats = session.Inventory.GetPlayerStats().Result;
                     var stat = stats.FirstOrDefault();
 
+                    var myPokemons2 = await session.Inventory.GetPokemons();
                     answerTextmessage += session.Translation.GetTranslation(TranslationString.ProfileStatsTemplateString,
                         new object[]
                          {
@@ -129,7 +130,9 @@ namespace PoGo.NecroBot.Logic.Service
                              stat.EggsHatched,
                              stat.Evolutions,
                              stat.UniquePokedexEntries,
-                             stat.KmWalked
+                             stat.KmWalked,
+                             myPokemons2.ToList().Count,
+                             session.Profile.PlayerData.MaxPokemonStorage
                          });
                     SendMessage(message.Chat.Id, answerTextmessage);
                     break;
