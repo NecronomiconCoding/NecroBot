@@ -682,6 +682,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     catch
                     {
+                        // ignored
                     }
                 }
                 var locationsToSnipe = SnipeLocations?.Where(q =>

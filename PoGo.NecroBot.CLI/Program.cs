@@ -94,7 +94,7 @@ namespace PoGo.NecroBot.CLI
                     settings.DefaultLatitude = lat;
                     settings.DefaultLongitude = lng;
                 }
-                catch (Exception e) { }
+                catch (Exception) { }
             }
 
 
