@@ -18,6 +18,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Threading;
 
 #endregion
 
@@ -757,6 +758,7 @@ namespace PoGo.NecroBot.Logic
                                 Logger.Write("configFile: " + exception.Message, LogLevel.Error);
                             }
                             count++;
+                            Thread.Sleep(1000);
                         }
                     };
 
