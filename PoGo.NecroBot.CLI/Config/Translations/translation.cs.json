@@ -387,6 +387,10 @@
       "Value": "E-mail nebo heslo je nesprávné."
     },
     {
+      "Key": "GoogleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "MissingCredentialsGoogle",
       "Value": "Musíte vyplnit GoogleUsername a GooglePassword v auth.json!"
     },

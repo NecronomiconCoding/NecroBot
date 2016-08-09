@@ -445,6 +445,10 @@
       "Value": "请确认输入正确的邮箱地址和密码.\t\t"
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "您需要在auth.json中填写谷歌账户和密码!\t\t"
     },

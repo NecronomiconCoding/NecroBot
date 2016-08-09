@@ -18,19 +18,19 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Jenis AuthType pada config.json tidak diketahui"
+      "Value": "Jenis AuthType pada config.json tidak dikenal"
     },
 	{
       "Key": "loginInvalid",
-      "Value": "Kredensial (nama pengguna dan kata kunci) cacat dan gagal masuk"
+      "Value": "Username dan password tidak cocok, login gagal!"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Kamu di luar dari radius yang kamu tentukan! Kembali ke posisi awal (sekitar {0} meter) dalam 5 detik. Apakah berkas LastPos.ini kamu benar?"
+      "Value": "Kamu diluar dari radius yang telah kamu tentukan! Kembali ke posisi awal (sekitar {0} meter) dalam 5 detik. Apakah berkas LastPos.ini kamu benar?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Pastikan jarak maksimal tidak terlalu kecil?"
+      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Pastikan jarak maksimal tidak terlalu kecil"
     },
     {
       "Key": "eventFortUsed",
@@ -50,7 +50,7 @@
     },
 	{
       "Key": "eventUsedIncense",
-      "Value": "Memakai incense, tersisa: {0}"
+      "Value": "Memakai Incense, tersisa: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -98,7 +98,7 @@
     },
     {
       "Key": "eventUseBerry",
-      "Value": "Terpakai {0} | {1} tersisa"
+      "Value": "Memakai {0} | {1} tersisa"
     },
     {
       "Key": "itemRazzBerry",
@@ -142,7 +142,7 @@
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Menampilkan yang terbaik di jenisnya"
+      "Value": "Menampilkan yang terbaik dijenisnya"
     },
     {
       "Key": "displayHighestsLevelHeader",
@@ -150,7 +150,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Pastikan koordinat Kamu Sudah Benar. Tutup program dan konfigurasi ulang jika tidak! X (lintang): {0} Y (bujur): {1}"
+      "Value": "Pastikan koordinat kamu telah benar. Tutup program dan konfigurasi ulang jika belum! X (lintang): {0} Y (bujur): {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -226,7 +226,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "Server PTC mungkin sedang mengalami gangguan ATAU akun kamu salah. Coba gunakan akun google"
+      "Value": "Server PTC mungkin sedang mati atau mengalami gangguan, jalankan bot-nya lain waktu"
     },
     {
       "Key": "tryingAgainIn",
@@ -234,7 +234,7 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Akun tidak terverifikasi! Keluar..."
+      "Value": "Akun tidak terverifikasi! Keluar dari program..."
     },
     {
       "Key": "openingGoogleDevicePage",
@@ -258,11 +258,11 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinat di berkas \"LastPos.ini\" Tidak Dapat digunakan, menggunakan koordinat bawaan"
+      "Value": "Koordinat di berkas \"LastPos.ini\" tidak dapat digunakan, menggunakan koordinat bawaan"
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Sempurna! Kamu telah mempunyai versi terbaru {0}"
+      "Value": "Sempurna! Kamu punya versi terbaru {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -278,7 +278,7 @@
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "Selesai mengbongkar berkas-berkas..."
+      "Value": "Selesai membongkar berkas-berkas..."
     },
     {
       "Key": "finishedTransferringConfig",
@@ -302,11 +302,11 @@
     },
     {
       "Key": "pokemonSkipped",
-      "Value": "Lewatkan {0}"
+      "Value": "Melewatkan {0}"
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Kamu tidak memiliki PokeBall di inventaris, tidak dapat menangkat pokemon lagi!"
+      "Value": "Kamu tidak memiliki PokeBall di inventaris, tidak dapat menangkap Pokemon lagi!"
     },
     {
       "Key": "currentPokeballInv",
@@ -330,7 +330,7 @@
     },
     {
       "Key": "recyclingQuietly",
-	  "Value": "Daur ulang senyap..."
+	  "Value": "Mendaur ulang senyap..."
     },
     {
       "Key": "invFullTransferring",
@@ -338,7 +338,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Inventaris pokemon penuh. Mohon Transfer pokemon secara manual atau rubah TransferDuplicatePokemon menjadi true di pengaturan..."
+      "Value": "Inventaris pokemon penuh. Transfer pokemon secara manual atau ubah TransferDuplicatePokemon menjadi true di pengaturan..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -413,6 +413,18 @@
       "Value": "{0} - Waktu aktif {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Ditransfer: {6:n0} | Didaur ulang: {7:n0}"
     },
     {
+      "Key": "profileStatsTemplateString",
+      "Value": "----- LVL {0} | {1} ----- \n EXP: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang disebarkan: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang dievolusikan: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9} KM"
+    },
+    {
+      "Key": "showPokeTemplate",
+      "Value": "\n CP {0} | Nama: {1}"
+    },
+    {
+      "Key": "helpTemplate",
+      "Value": "Perintah: \n \n /top <jumlah> - Menampilkan Pokemon tertinggimu.. \n /all - Menampilkan semua Pokemon-mu. \n /profile - Menampilkan profilmu. \n /loc - Menampilkan lokasimu. \n /items - Menampilkan barangmu."
+    },
+    {
       "Key": "statsXpTemplateString",
       "Value": "{0} (level berikutnya dalam {1} jam {2} menit | {3:n0}/{4:n0} XP)"
     },
@@ -430,7 +442,11 @@
     },
     {
       "Key": "googleError",
-      "Value": "Pastikan kamu memasukkan email & password yang benar."
+      "Value": "Pastikan kamu memasukkan email dan password yang benar."
+    },
+    {
+      "Key": "googleOffline",
+      "Value": "Server Google mungkin sedang mati, harap sabar dan jalankan bot-nya lain waktu."
     },
     {
       "Key": "missingCredentialsGoogle",
@@ -518,15 +534,15 @@
     },
 	{
       "Key": "snipeServerOffline",
-      "Value": "Server bidikan offline. Lewati..."
+      "Value": "Server bidikan offline. Melewati..."
     },
 	{
       "Key": "firstStartPrompt",
-      "Value": "Ini adalah pertama kalinya kamu menjalankan aplikasi, apakah kamu mau memulai pengaturan? {0}/{1}"
+      "Value": "Ini adalah pertama kalinya kamu menjalankan aplikasi, apakah kamu ingin memulai pengaturan? {0}/{1}"
     },
 	{
       "Key": "firstStartLanguagePrompt",
-      "Value": "Apakah kamu mau mengganti bahasa bawaan? {0}/{1}"
+      "Value": "Apakah kamu ingin mengganti bahasa bawaan? {0}/{1}"
     },
 	{
       "Key": "firstStartLanguageCodePrompt",
@@ -582,7 +598,7 @@
     },
 	{
       "Key": "firstStartDefaultLocationPrompt",
-      "Value": "Apakah kamu mau mengatur lokasi bawaan yang baru? {0}/{1}"
+      "Value": "Apakah kamu ingin mengatur lokasi bawaan yang baru? {0}/{1}"
     },
 	{
       "Key": "firstStartDefaultLocationSet",

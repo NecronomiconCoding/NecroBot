@@ -445,6 +445,10 @@
       "Value": "Asigură-te că ai introdus e-mailul și parola corectă."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Va trebui să completezi GoogleUsername și GooglePassword în auth.json!"
     },

@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
@@ -155,12 +155,15 @@ namespace PoGo.NecroBot.Logic
         int SnipeLocationServerPort { get; }
         bool GetSniperInfoFromPokezz { get; }
         bool GetOnlyVerifiedSniperInfoFromPokezz { get; }
+        bool GetSniperInfoFromPokeSnipers { get; }
         bool UseSnipeLocationServer { get; }
         bool UseTransferIvForSnipe { get; }
         bool SnipeIgnoreUnknownIv { get; }
         int MinDelayBetweenSnipes { get; }
         double SnipingScanOffset { get; }
         bool SnipePokemonNotInPokedex { get; }
+        bool RandomizeRecycle { get; }
+        int RandomRecycleValue { get; }
         int TotalAmountOfPokeballsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
