@@ -275,6 +275,9 @@ namespace PoGo.NecroBot.Logic
         //powerup
         [DefaultValue(false)]
         public bool AutomaticallyLevelUpPokemon;
+
+        [DefaultValue((true))]
+        public bool UseLevelUpList;
         [DefaultValue(5)]
         public int AmountOfTimesToUpgradeLoop;
         [DefaultValue(5000)]
@@ -486,6 +489,7 @@ namespace PoGo.NecroBot.Logic
             new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
         };
 
+        
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
@@ -565,7 +569,17 @@ namespace PoGo.NecroBot.Logic
             //PokemonId.Goldeen,
             //PokemonId.Staryu
         };
-
+        public List<PokemonId> PokemonsToLevelUp = new List<PokemonId>
+        {
+            //criteria: most common
+            PokemonId.Caterpie,
+            PokemonId.Weedle,
+            PokemonId.Pidgey,
+            PokemonId.Rattata,
+            PokemonId.Spearow,
+            PokemonId.Zubat,
+            PokemonId.Doduo
+        };
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
         {
             //criteria: most common
@@ -1227,6 +1241,7 @@ namespace PoGo.NecroBot.Logic
         public int KeepMinLvl => _settings.KeepMinLvl;
         public bool UseKeepMinLvl => _settings.UseKeepMinLvl;
         public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;
+        public bool UseLevelUpList => _settings.UseLevelUpList;
         public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;
         public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;
         public int GetMinStarDustForLevelUp => _settings.GetMinStarDustForLevelUp;
@@ -1289,8 +1304,10 @@ namespace PoGo.NecroBot.Logic
         public double EvolveKeptPokemonsAtStorageUsagePercentage => _settings.EvolveKeptPokemonsAtStorageUsagePercentage;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
+        public ICollection<PokemonId> PokemonsToLevelUp => _settings.PokemonsToLevelUp;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
+
         public ICollection<PokemonId> PokemonToUseMasterball => _settings.PokemonToUseMasterball;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
