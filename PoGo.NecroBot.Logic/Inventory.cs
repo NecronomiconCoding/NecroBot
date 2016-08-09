@@ -360,18 +360,28 @@ namespace PoGo.NecroBot.Logic
         {
             var inventory = await GetCachedInventory();
 
+
             var families = from item in inventory.InventoryDelta.InventoryItems
-                            where item.InventoryItemData?.Candy != null
-                            where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
-                            group item by item.InventoryItemData?.Candy.FamilyId into family
-                            select new Candy
-                            {
-                                FamilyId = family.First().InventoryItemData.Candy.FamilyId,
-                                Candy_ = family.First().InventoryItemData.Candy.Candy_
-                            };
+                           where item.InventoryItemData?.Candy != null
+                           where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
+                           group item by item.InventoryItemData?.Candy.FamilyId into family
+                           select new Candy
+                           {
+                               FamilyId = family.First().InventoryItemData.Candy.FamilyId,
+                               Candy_ = family.First().InventoryItemData.Candy.Candy_
+                           };
+
+            var families2 = inventory.InventoryDelta.InventoryItems
+                .Where(i => i.InventoryItemData?.Candy != null && i.InventoryItemData?.Candy?.FamilyId != PokemonFamilyId.FamilyUnset)
+                .GroupBy(i => i.InventoryItemData?.Candy.FamilyId).Select(i => new Candy
+                {
+                    FamilyId = i.First().InventoryItemData.Candy.FamilyId,
+                    Candy_ = i.First().InventoryItemData.Candy.Candy_
+                });
+            
 
 
-            return families.ToList();
+            return families2.ToList();
         }
 
         public async Task<IEnumerable<PokemonData>> GetPokemons()
