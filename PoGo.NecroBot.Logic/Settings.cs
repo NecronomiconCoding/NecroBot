@@ -352,6 +352,8 @@ namespace PoGo.NecroBot.Logic
         public bool RandomizeRecycle;
         [DefaultValue(5)]
         public int RandomRecycleValue;
+        [DefaultValue(false)]
+        public bool DelayBetweenRecycleActions;
         //lucky, incense and berries
         [DefaultValue(true)]
         public bool UseEggIncubators;
