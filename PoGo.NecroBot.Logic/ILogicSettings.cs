@@ -108,6 +108,7 @@ namespace PoGo.NecroBot.Logic
 
         int DelayBetweenPokemonCatch { get; }
         bool AutomaticallyLevelUpPokemon { get; }
+        bool UseLevelUpList { get; }
         string LevelUpByCPorIv { get; }
         float UpgradePokemonCpMinimum { get; }
         float UpgradePokemonIvMinimum { get; }
@@ -176,6 +177,7 @@ namespace PoGo.NecroBot.Logic
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
+        ICollection<PokemonId> PokemonsToLevelUp { get; }
 
         ICollection<PokemonId> PokemonsNotToTransfer { get; }
 
