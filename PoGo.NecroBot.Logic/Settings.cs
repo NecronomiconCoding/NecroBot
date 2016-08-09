@@ -16,8 +16,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Threading;
 
 #endregion
 
@@ -177,6 +180,37 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
+        public void checkProxy()
+        {
+            using (var tempWebClient = new NecroWebClient())
+            {
+                string unproxiedIP = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
+                if (UseProxy)
+                {
+                    tempWebClient.Proxy = this.InitProxy();
+                    string proxiedIPres = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
+                    string proxiedIP = proxiedIPres == null?"INVALID PROXY": proxiedIPres;
+                    Logger.Write(
+                       $"Your IP is: {unproxiedIP} / Proxy IP is: {proxiedIP}",
+                       LogLevel.Info, (unproxiedIP==proxiedIP)?ConsoleColor.Red:ConsoleColor.Green);
+
+                    if (unproxiedIP == proxiedIP || proxiedIPres == null)
+                    {
+                        Logger.Write("Press any key to exit so you can fix your proxy settings...",
+                            LogLevel.Info, ConsoleColor.Red);
+                        Console.ReadKey();
+                        Environment.Exit(0);
+                    }
+                }
+                else
+                {
+                    Logger.Write(
+                       $"Your IP is: {unproxiedIP}",
+                       LogLevel.Info, ConsoleColor.Red);
+                }
+            }
+        }
+
         private string RandomString(int length, string alphabet = "abcdefghijklmnopqrstuvwxyz0123456789")
         {
             var outOfRange = Byte.MaxValue + 1 - (Byte.MaxValue + 1) % alphabet.Length;
@@ -223,6 +257,18 @@ namespace PoGo.NecroBot.Logic
             {
                 throw new ArgumentException("Invalid device info package! Check your auth.config file and make sure a valid DevicePackageName is set. For simple use set it to 'random'. If you have a custom device, then set it to 'custom'.");
             }
+        }
+
+        private WebProxy InitProxy()
+        {
+            if (!UseProxy) return null;
+
+            WebProxy prox = new WebProxy(new System.Uri($"http://{UseProxyHost}:{UseProxyPort}"), false, null);
+
+            if (UseProxyAuthentication)
+                prox.Credentials = new NetworkCredential(UseProxyUsername, UseProxyPassword);
+
+            return prox;
         }
     }
 
@@ -275,6 +321,8 @@ namespace PoGo.NecroBot.Logic
         //powerup
         [DefaultValue(false)]
         public bool AutomaticallyLevelUpPokemon;
+        [DefaultValue(true)]
+        public bool OnlyUpgradeFavorites;
 
         [DefaultValue((true))]
         public bool UseLevelUpList;
@@ -740,7 +788,26 @@ namespace PoGo.NecroBot.Logic
                 try
                 {
                     //if the file exists, load the settings
-                    var input = File.ReadAllText(configFile);
+                    string input = "";
+                    int count = 0;
+                    while (true)
+                    {
+                        try
+                        {
+                            input = File.ReadAllText(configFile);
+                            break;
+                        }
+                        catch (Exception exception)
+                        {
+                            if (count > 10)
+                            {
+                                //sometimes we have to wait close to config.json for access
+                                Logger.Write("configFile: " + exception.Message, LogLevel.Error);
+                            }
+                            count++;
+                            Thread.Sleep(1000);
+                        }
+                    };
 
                     var jsonSettings = new JsonSerializerSettings();
                     jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
@@ -786,8 +853,13 @@ namespace PoGo.NecroBot.Logic
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
             }
-
+            
             return shouldExit ? null : settings;
+        }
+
+        public void checkProxy()
+        {
+            Auth.checkProxy();
         }
 
         public static bool PromptForSetup(ITranslation translator)
@@ -1233,6 +1305,7 @@ namespace PoGo.NecroBot.Logic
         public int KeepMinLvl => _settings.KeepMinLvl;
         public bool UseKeepMinLvl => _settings.UseKeepMinLvl;
         public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;
+        public bool OnlyUpgradeFavorites => _settings.OnlyUpgradeFavorites;
         public bool UseLevelUpList => _settings.UseLevelUpList;
         public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;
         public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;

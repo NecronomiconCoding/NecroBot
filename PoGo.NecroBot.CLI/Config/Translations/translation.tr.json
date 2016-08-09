@@ -2,19 +2,19 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "Pokéball"
+      "Value": "Poké Ball"
     },
     {
       "Key": "greatPokeball",
-      "Value": "Greatball"
+      "Value": "Great Ball"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "Ultraball"
+      "Value": "Ultra Ball"
     },
     {
       "Key": "masterPokeball",
-      "Value": "Masterball"
+      "Value": "Master Ball"
     },
     {
       "Key": "wrongAuthType",
@@ -30,7 +30,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Bu alanda uygun Pokéstop bulunamadı. \"MaxTravelDistanceInMeters\" değeri çok küçük olabilir."
+      "Value": "Bu alanda uygun PokéStop bulunamadı. \"MaxTravelDistanceInMeters\" değeri çok küçük olabilir."
     },
     {
       "Key": "eventFortUsed",
@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{1}m mesafedeki \"{0}\" Pokéstopuna {2} saniye sonra varılacak."
+      "Value": "{1}m mesafedeki \"{0}\" PokéStop'una {2} saniye sonra varılacak."
     },
     {
       "Key": "eventProfileLogin",
@@ -82,7 +82,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Pokéball kalmadı. - Kaçırılan Pokémon: {0} (CP: {1})"
+      "Value": "Poké topu kalmadı. - Kaçırılan Pokémon: {0} (CP: {1})"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
@@ -134,7 +134,7 @@
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "tanımsız"
+      "Value": "?"
     },
     {
       "Key": "displayHighestsCpHeader",
@@ -322,11 +322,11 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Pokéball kalmadı. Daha fazla Pokémon yakalanamaz!"
+      "Value": "Poké topu kalmadı. Daha fazla Pokémon yakalanamaz!"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Pokéball: {0} | Greatball: {1} | Ultraball: {2} | Masterball: {3}"
+      "Value": "Poké Ball: {0} | Great Ball: {1} | Ultra Ball: {2} | Master Ball: {3}"
     },
     {
       "Key": "currentPotionInv",
@@ -486,15 +486,15 @@
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Keskin nişancılık için yeterli Pokéball yok! ({0}/{1})"
+      "Value": "Keskin nişancılık için yeterli Poké topu yok! ({0}/{1})"
     },
     {
       "Key": "displayHighestMOVE1Header",
-      "Value": "SALDIRI1"
+      "Value": "SALDIRI-1"
     },
     {
       "Key": "displayHighestMOVE2Header",
-      "Value": "SALDIRI2"
+      "Value": "SALDIRI-2"
     },
     {
       "Key": "displayHighestCandy",
