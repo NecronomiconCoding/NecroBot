@@ -353,7 +353,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public int TotalAmountOfPokeballsToKeep
         {
             get { return (int)GetValue(TotalAmountOfPokeballsToKeepProperty); }
-            set { SetValue(TotalAmountOfPokeballsToKeepProperty, value); TotalItemsBeingKept = 1; }
+            set { SetValue(TotalAmountOfPokeballsToKeepProperty, value); }
         }
         public static readonly DependencyProperty TotalAmountOfPokeballsToKeepProperty =
             DependencyProperty.Register("TotalAmountOfPokeballsToKeep", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
@@ -361,7 +361,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public int TotalAmountOfPotionsToKeep
         {
             get { return (int)GetValue(TotalAmountOfPotionsToKeepProperty); }
-            set { SetValue(TotalAmountOfPotionsToKeepProperty, value); TotalItemsBeingKept = 1; }
+            set { SetValue(TotalAmountOfPotionsToKeepProperty, value); }
         }
         public static readonly DependencyProperty TotalAmountOfPotionsToKeepProperty =
             DependencyProperty.Register("TotalAmountOfPotionsToKeep", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
@@ -369,7 +369,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public int TotalAmountOfRevivesToKeep
         {
             get { return (int)GetValue(TotalAmountOfRevivesToKeepProperty); }
-            set { SetValue(TotalAmountOfRevivesToKeepProperty, value); TotalItemsBeingKept = 1; }
+            set { SetValue(TotalAmountOfRevivesToKeepProperty, value); }
         }
         public static readonly DependencyProperty TotalAmountOfRevivesToKeepProperty =
             DependencyProperty.Register("TotalAmountOfRevivesToKeep", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
@@ -377,10 +377,16 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public int TotalAmountOfBerriesToKeep
         {
             get { return (int)GetValue(TotalAmountOfBerriesToKeepProperty); }
-            set { SetValue(TotalAmountOfBerriesToKeepProperty, value); TotalItemsBeingKept = 1; }
+            set { SetValue(TotalAmountOfBerriesToKeepProperty, value); }
         }
         public static readonly DependencyProperty TotalAmountOfBerriesToKeepProperty =
-            DependencyProperty.Register("TotalAmountOfBerriesToKeep", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+            DependencyProperty.Register("TotalAmountOfBerriesToKeep", typeof(int), typeof(ObservableSettings), new FrameworkPropertyMetadata(0, new PropertyChangedCallback(ItemsKept_PropertyChanged)));
+        
+        static void ItemsKept_PropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            ObservableSettings os = obj as ObservableSettings;
+            if (null != os) os.TotalItemsBeingKept = 1;
+        }
 
         public int TotalItemsBeingKept
         {
@@ -576,6 +582,22 @@ namespace PoGo.NecroBot.ConfigUI.Models
 
         #region CAPTURE Properties
 
+        public bool CatchPokemon
+        {
+            get { return (bool)GetValue(CatchPokemonProperty); }
+            set { SetValue(CatchPokemonProperty, value); }
+        }
+        public static readonly DependencyProperty CatchPokemonProperty =
+            DependencyProperty.Register("CatchPokemon", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool UsePokemonToNotCatchFilter
+        {
+            get { return (bool)GetValue(UsePokemonToNotCatchFilterProperty); }
+            set { SetValue(UsePokemonToNotCatchFilterProperty, value); }
+        }
+        public static readonly DependencyProperty UsePokemonToNotCatchFilterProperty =
+            DependencyProperty.Register("UsePokemonToNotCatchFilter", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
         public int MaxPokeballsPerPokemon
         {
             get { return (int)GetValue(MaxPokeballsPerPokemonProperty); }
@@ -583,6 +605,196 @@ namespace PoGo.NecroBot.ConfigUI.Models
         }
         public static readonly DependencyProperty MaxPokeballsPerPokemonProperty =
             DependencyProperty.Register("MaxPokeballsPerPokemon", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int MaxBerriesToUsePerPokemon
+        {
+            get { return (int)GetValue(MaxBerriesToUsePerPokemonProperty); }
+            set { SetValue(MaxBerriesToUsePerPokemonProperty, value); }
+        }
+        public static readonly DependencyProperty MaxBerriesToUsePerPokemonProperty =
+            DependencyProperty.Register("MaxBerriesToUsePerPokemon", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int UseGreatBallAboveCp
+        {
+            get { return (int)GetValue(UseGreatBallAboveCpProperty); }
+            set { SetValue(UseGreatBallAboveCpProperty, value); }
+        }
+        public static readonly DependencyProperty UseGreatBallAboveCpProperty =
+            DependencyProperty.Register("UseGreatBallAboveCp", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int UseUltraBallAboveCp
+        {
+            get { return (int)GetValue(UseUltraBallAboveCpProperty); }
+            set { SetValue(UseUltraBallAboveCpProperty, value); }
+        }
+        public static readonly DependencyProperty UseUltraBallAboveCpProperty =
+            DependencyProperty.Register("UseUltraBallAboveCp", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int UseMasterBallAboveCp
+        {
+            get { return (int)GetValue(UseMasterBallAboveCpProperty); }
+            set { SetValue(UseMasterBallAboveCpProperty, value); }
+        }
+        public static readonly DependencyProperty UseMasterBallAboveCpProperty =
+            DependencyProperty.Register("UseMasterBallAboveCp", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public double UseGreatBallAboveIv
+        {
+            get { return (double)GetValue(UseGreatBallAboveIvProperty); }
+            set { SetValue(UseGreatBallAboveIvProperty, value); }
+        }
+        public static readonly DependencyProperty UseGreatBallAboveIvProperty =
+            DependencyProperty.Register("UseGreatBallAboveIv", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public double UseUltraBallAboveIv
+        {
+            get { return (double)GetValue(UseUltraBallAboveIvProperty); }
+            set { SetValue(UseUltraBallAboveIvProperty, value); }
+        }
+        public static readonly DependencyProperty UseUltraBallAboveIvProperty =
+            DependencyProperty.Register("UseUltraBallAboveIv", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public double UseGreatBallBelowCatchProbability
+        {
+            get { return (double)GetValue(UseGreatBallBelowCatchProbabilityProperty); }
+            set { SetValue(UseGreatBallBelowCatchProbabilityProperty, value); }
+        }
+        public static readonly DependencyProperty UseGreatBallBelowCatchProbabilityProperty =
+            DependencyProperty.Register("UseGreatBallBelowCatchProbability", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public double UseUltraBallBelowCatchProbability
+        {
+            get { return (double)GetValue(UseUltraBallBelowCatchProbabilityProperty); }
+            set { SetValue(UseUltraBallBelowCatchProbabilityProperty, value); }
+        }
+        public static readonly DependencyProperty UseUltraBallBelowCatchProbabilityProperty =
+            DependencyProperty.Register("UseUltraBallBelowCatchProbability", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public double UseMasterBallBelowCatchProbability
+        {
+            get { return (double)GetValue(UseMasterBallBelowCatchProbabilityProperty); }
+            set { SetValue(UseMasterBallBelowCatchProbabilityProperty, value); }
+        }
+        public static readonly DependencyProperty UseMasterBallBelowCatchProbabilityProperty =
+            DependencyProperty.Register("UseMasterBallBelowCatchProbability", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public int UseBerriesMinCp
+        {
+            get { return (int)GetValue(UseBerriesMinCpProperty); }
+            set { SetValue(UseBerriesMinCpProperty, value); }
+        }
+        public static readonly DependencyProperty UseBerriesMinCpProperty =
+            DependencyProperty.Register("UseBerriesMinCp", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public float UseBerriesMinIv
+        {
+            get { return (float)GetValue(UseBerriesMinIvProperty); }
+            set { SetValue(UseBerriesMinIvProperty, value); }
+        }
+        public static readonly DependencyProperty UseBerriesMinIvProperty =
+            DependencyProperty.Register("UseBerriesMinIv", typeof(float), typeof(ObservableSettings), new PropertyMetadata(0.0f));
+
+        public double UseBerriesBelowCatchProbability
+        {
+            get { return (double)GetValue(UseBerriesBelowCatchProbabilityProperty); }
+            set { SetValue(UseBerriesBelowCatchProbabilityProperty, value); }
+        }
+        public static readonly DependencyProperty UseBerriesBelowCatchProbabilityProperty =
+            DependencyProperty.Register("UseBerriesBelowCatchProbability", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public string UseBerriesOperator
+        {
+            get { return (string)GetValue(UseBerriesOperatorProperty); }
+            set { SetValue(UseBerriesOperatorProperty, value); }
+        }
+        public static readonly DependencyProperty UseBerriesOperatorProperty =
+            DependencyProperty.Register("UseBerriesOperator", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+
+        public bool EnableHumanizedThrows
+        {
+            get { return (bool)GetValue(EnableHumanizedThrowsProperty); }
+            set { SetValue(EnableHumanizedThrowsProperty, value); }
+        }
+        public static readonly DependencyProperty EnableHumanizedThrowsProperty =
+            DependencyProperty.Register("EnableHumanizedThrows", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public int NiceThrowChance
+        {
+            get { return (int)GetValue(NiceThrowChanceProperty); }
+            set { SetValue(NiceThrowChanceProperty, value); }
+        }
+        public static readonly DependencyProperty NiceThrowChanceProperty =
+            DependencyProperty.Register("NiceThrowChance", typeof(int), typeof(ObservableSettings), new FrameworkPropertyMetadata(0, new PropertyChangedCallback(ThrowChance_PropertyChanged)));
+
+        public int GreatThrowChance
+        {
+            get { return (int)GetValue(GreatThrowChanceProperty); }
+            set { SetValue(GreatThrowChanceProperty, value); }
+        }
+        public static readonly DependencyProperty GreatThrowChanceProperty =
+            DependencyProperty.Register("GreatThrowChance", typeof(int), typeof(ObservableSettings), new FrameworkPropertyMetadata(0, new PropertyChangedCallback(ThrowChance_PropertyChanged)));
+
+        public int ExcellentThrowChance
+        {
+            get { return (int)GetValue(ExcellentThrowChanceProperty); }
+            set { SetValue(ExcellentThrowChanceProperty, value); }
+        }
+        public static readonly DependencyProperty ExcellentThrowChanceProperty =
+            DependencyProperty.Register("ExcellentThrowChance", typeof(int), typeof(ObservableSettings), new FrameworkPropertyMetadata(0, new PropertyChangedCallback(ThrowChance_PropertyChanged)));
+
+        static void ThrowChance_PropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
+        {
+            ObservableSettings os = obj as ObservableSettings;
+            if (null != os) os.NormalThrowChance = 1;
+        }
+
+        public int NormalThrowChance
+        {
+            get { return 100 - (int)GetValue(ExcellentThrowChanceProperty) - (int)GetValue(GreatThrowChanceProperty) - (int)GetValue(NiceThrowChanceProperty); }
+            set { SetValue(NormalThrowChanceProperty, 100 - (int)GetValue(ExcellentThrowChanceProperty) - (int)GetValue(GreatThrowChanceProperty) - (int)GetValue(NiceThrowChanceProperty)); }
+        }
+        public static readonly DependencyProperty NormalThrowChanceProperty =
+            DependencyProperty.Register("NormalThrowChance", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int CurveThrowChance
+        {
+            get { return (int)GetValue(CurveThrowChanceProperty); }
+            set { SetValue(CurveThrowChanceProperty, value); }
+        }
+        public static readonly DependencyProperty CurveThrowChanceProperty =
+            DependencyProperty.Register("CurveThrowChance", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public double ForceGreatThrowOverIv
+        {
+            get { return (double)GetValue(ForceGreatThrowOverIvProperty); }
+            set { SetValue(ForceGreatThrowOverIvProperty, value); }
+        }
+        public static readonly DependencyProperty ForceGreatThrowOverIvProperty =
+            DependencyProperty.Register("ForceGreatThrowOverIv", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public double ForceExcellentThrowOverIv
+        {
+            get { return (double)GetValue(ForceExcellentThrowOverIvProperty); }
+            set { SetValue(ForceExcellentThrowOverIvProperty, value); }
+        }
+        public static readonly DependencyProperty ForceExcellentThrowOverIvProperty =
+            DependencyProperty.Register("ForceExcellentThrowOverIv", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public int ForceGreatThrowOverCp
+        {
+            get { return (int)GetValue(ForceGreatThrowOverCpProperty); }
+            set { SetValue(ForceGreatThrowOverCpProperty, value); }
+        }
+        public static readonly DependencyProperty ForceGreatThrowOverCpProperty =
+            DependencyProperty.Register("ForceGreatThrowOverCp", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int ForceExcellentThrowOverCp
+        {
+            get { return (int)GetValue(ForceExcellentThrowOverCpProperty); }
+            set { SetValue(ForceExcellentThrowOverCpProperty, value); }
+        }
+        public static readonly DependencyProperty ForceExcellentThrowOverCpProperty =
+            DependencyProperty.Register("ForceExcellentThrowOverCp", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
 
         #endregion CAPTURE Properties
 
@@ -675,6 +887,31 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.AutoFavoritePokemon = set.AutoFavoritePokemon;
             res.FavoriteMinIvPercentage = set.FavoriteMinIvPercentage;
             // CAPTURE
+            res.CatchPokemon = set.CatchPokemon;
+            res.UsePokemonToNotCatchFilter = set.UsePokemonToNotCatchFilter;
+            res.MaxPokeballsPerPokemon = set.MaxPokeballsPerPokemon;
+            res.MaxBerriesToUsePerPokemon = set.MaxBerriesToUsePerPokemon;
+            res.UseGreatBallAboveCp = set.UseGreatBallAboveCp;
+            res.UseUltraBallAboveCp = set.UseUltraBallAboveCp;
+            res.UseMasterBallAboveCp = set.UseMasterBallAboveCp;
+            res.UseGreatBallAboveIv = set.UseGreatBallAboveIv;
+            res.UseUltraBallAboveIv = set.UseUltraBallAboveIv;
+            res.UseGreatBallBelowCatchProbability = set.UseGreatBallBelowCatchProbability;
+            res.UseUltraBallBelowCatchProbability = set.UseUltraBallBelowCatchProbability;
+            res.UseMasterBallBelowCatchProbability = set.UseMasterBallBelowCatchProbability;
+            res.UseBerriesMinCp = set.UseBerriesMinCp;
+            res.UseBerriesMinIv = set.UseBerriesMinIv;
+            res.UseBerriesBelowCatchProbability = set.UseBerriesBelowCatchProbability;
+            res.UseBerriesOperator = set.UseBerriesOperator;
+            res.EnableHumanizedThrows = set.EnableHumanizedThrows;
+            res.NiceThrowChance = set.NiceThrowChance;
+            res.GreatThrowChance = set.GreatThrowChance;
+            res.ExcellentThrowChance = set.ExcellentThrowChance;
+            res.CurveThrowChance = set.CurveThrowChance;
+            res.ForceGreatThrowOverIv = set.ForceGreatThrowOverIv;
+            res.ForceExcellentThrowOverIv = set.ForceExcellentThrowOverIv;
+            res.ForceGreatThrowOverCp = set.ForceGreatThrowOverCp;
+            res.ForceExcellentThrowOverCp = set.ForceExcellentThrowOverCp;
             // TRANSFER
             // SNIPING
             // MISC
@@ -725,34 +962,6 @@ namespace PoGo.NecroBot.ConfigUI.Models
 
             CAPTURE
 
-        public bool CatchPokemon;
-        public int MaxPokeballsPerPokemon;
-        public int MaxBerriesToUsePerPokemon;
-
-            //balls
-        public int UseGreatBallAboveCp;
-        public int UseUltraBallAboveCp;
-        public int UseMasterBallAboveCp;
-        public double UseGreatBallAboveIv;
-        public double UseUltraBallAboveIv;
-        public double UseGreatBallBelowCatchProbability;
-        public double UseUltraBallBelowCatchProbability;
-        public double UseMasterBallBelowCatchProbability;
-        public bool EnableHumanizedThrows;
-        public int NiceThrowChance;
-        public int GreatThrowChance;
-        public int ExcellentThrowChance;
-        public int CurveThrowChance;
-        public double ForceGreatThrowOverIv;
-        public double ForceExcellentThrowOverIv;
-        public int ForceGreatThrowOverCp;
-        public int ForceExcellentThrowOverCp;
-        public bool UsePokemonToNotCatchFilter;
-
-        public int UseBerriesMinCp;
-        public float UseBerriesMinIv;
-        public double UseBerriesBelowCatchProbability;
-        public string UseBerriesOperator;
 
             TRANSFER
 
@@ -845,6 +1054,31 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.AutoFavoritePokemon = AutoFavoritePokemon;
             gs.FavoriteMinIvPercentage = FavoriteMinIvPercentage;
             // CAPTURE
+            gs.CatchPokemon = CatchPokemon;
+            gs.UsePokemonToNotCatchFilter = UsePokemonToNotCatchFilter;
+            gs.MaxPokeballsPerPokemon = MaxPokeballsPerPokemon;
+            gs.MaxBerriesToUsePerPokemon = MaxBerriesToUsePerPokemon;
+            gs.UseGreatBallAboveCp = UseGreatBallAboveCp;
+            gs.UseUltraBallAboveCp = UseUltraBallAboveCp;
+            gs.UseMasterBallAboveCp = UseMasterBallAboveCp;
+            gs.UseGreatBallAboveIv = UseGreatBallAboveIv;
+            gs.UseUltraBallAboveIv = UseUltraBallAboveIv;
+            gs.UseGreatBallBelowCatchProbability = UseGreatBallBelowCatchProbability;
+            gs.UseUltraBallBelowCatchProbability = UseUltraBallBelowCatchProbability;
+            gs.UseMasterBallBelowCatchProbability = UseMasterBallBelowCatchProbability;
+            gs.UseBerriesMinCp = UseBerriesMinCp;
+            gs.UseBerriesMinIv = UseBerriesMinIv;
+            gs.UseBerriesBelowCatchProbability = UseBerriesBelowCatchProbability;
+            gs.UseBerriesOperator = UseBerriesOperator;
+            gs.EnableHumanizedThrows = EnableHumanizedThrows;
+            gs.NiceThrowChance = NiceThrowChance;
+            gs.GreatThrowChance = GreatThrowChance;
+            gs.ExcellentThrowChance = ExcellentThrowChance;
+            gs.CurveThrowChance = CurveThrowChance;
+            gs.ForceGreatThrowOverIv = ForceGreatThrowOverIv;
+            gs.ForceExcellentThrowOverIv = ForceExcellentThrowOverIv;
+            gs.ForceGreatThrowOverCp = ForceGreatThrowOverCp;
+            gs.ForceExcellentThrowOverCp = ForceExcellentThrowOverCp;
             // TRANSFER
             // SNIPING
             // MISC

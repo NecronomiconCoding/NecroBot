@@ -208,19 +208,19 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Total Balls to Keep" ToolTip="Total number of all types of Pokeballs to keep - balls of lowest quality get recycled first." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfPokeballsToKeep}" TextChanged="ItemsKeptTotal_Changed" TextInput="ItemsKeptTotal_Input" LostFocus="ItemsKeptTotal_LostFocus" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfPokeballsToKeep}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Total Potions to Keep" ToolTip="Total number of all types of Potions to keep - potions of lowest quality get recycled first." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfPotionsToKeep}" TextChanged="ItemsKeptTotal_Changed" TextInput="ItemsKeptTotal_Input" LostFocus="ItemsKeptTotal_LostFocus" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfPotionsToKeep}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Total Revives to Keep" ToolTip="Maintains this many Revives during recycle phase." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfRevivesToKeep}" TextChanged="ItemsKeptTotal_Changed" TextInput="ItemsKeptTotal_Input" LostFocus="ItemsKeptTotal_LostFocus" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfRevivesToKeep}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Total Berries to Keep" ToolTip="Maintains this many Berries during recycle phase." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfBerriesToKeep}" TextChanged="ItemsKeptTotal_Changed" TextInput="ItemsKeptTotal_Input" LostFocus="ItemsKeptTotal_LostFocus" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfBerriesToKeep}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Total Items Being Kept" ToolTip="This is how many total items you are asking NecroBot to keep during recycle." />
@@ -254,7 +254,7 @@
                         </StackPanel>
                         <StackPanel Visibility="{Binding Settings.RenamePokemon, Converter={StaticResource VisConv}}">
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                                <CheckBox Content="Rename only above IV" IsChecked="{Binding Settings.RenameOnlyAboveIv}" ToolTip="QED." />
+                                <CheckBox Content="Rename only above IV%" IsChecked="{Binding Settings.RenameOnlyAboveIv}" ToolTip="QED." />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Rename Template" ToolTip="A template for how your Pokemon will be renamed. Tokens: {0} is the Pokemon Species, {1} is the IV%" />
@@ -274,7 +274,7 @@
                                 <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.GetMinStarDustForLevelUp}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                                <Label Style="{StaticResource LineItemLabel}" Content="Upgrade by CP or IV" ToolTip="Should the CP or IV of Pokemon be used as the upgrade priority?" />
+                                <Label Style="{StaticResource LineItemLabel}" Content="Upgrade by CP or IV%" ToolTip="Should the CP or IV% of Pokemon be used as the upgrade priority?" />
                                 <ComboBox ItemsSource="{Binding IpCvCollection}" SelectedItem="{Binding Settings.LevelUpByCPorIv}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
@@ -282,16 +282,16 @@
                                 <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UpgradePokemonCpMinimum}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                                <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Pokemon Above IV" ToolTip="QED." />
+                                <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Pokemon Above IV%" ToolTip="QED." />
                                 <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UpgradePokemonIvMinimum}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                                <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Stats Operator" ToolTip="AND means the Pokemon must meet both IP and CV requirements - OR means either." />
+                                <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Stats Operator" ToolTip="AND means the Pokemon must meet both IV% and CP requirements - OR means either." />
                                 <ComboBox ItemsSource="{Binding OperatorsCollection}" SelectedItem="{Binding Settings.UpgradePokemonMinimumStatsOperator}" />
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <CheckBox Content="Evolve All Pokemon Above IV" IsChecked="{Binding Settings.EvolveAllPokemonAboveIv}" ToolTip="QED." />
+                            <CheckBox Content="Evolve All Pokemon Above IV%" IsChecked="{Binding Settings.EvolveAllPokemonAboveIv}" ToolTip="QED." />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}" Visibility="{Binding Settings.EvolveAllPokemonAboveIv, Converter={StaticResource VisConv}}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Evolve Above IV%" ToolTip="Decimals allowed." />
@@ -320,7 +320,113 @@
 
             <TabItem Header="Capture">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                    <StackPanel></StackPanel>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Enable Catching Pokemon" IsChecked="{Binding Settings.CatchPokemon}" ToolTip="If this is unchecked, the bot will not catch any wild Pokemon." />
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding Settings.CatchPokemon, Converter={StaticResource VisConv}}">
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <CheckBox Content="Use Pokemon To Not Catch Filter" IsChecked="{Binding Settings.UsePokemonToNotCatchFilter}" ToolTip="If this is checked, Pokemon in the no-catch list will be avoided." />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Max Balls Per Pokemon" ToolTip="Sets the limit of balls to throw at a single Pokemon before giving up." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.MaxPokeballsPerPokemon}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Max Berries Per Pokemon" ToolTip="Sets the limit on how many berries to use in a single encounter." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.MaxBerriesToUsePerPokemon}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Use Great Ball Above CP" ToolTip="When Pokemon above this CP level are found, a Great Ball will be used for throws." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseGreatBallAboveCp}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Use Ultra Ball Above CP" ToolTip="When Pokemon above this CP level are found, an Ultra Ball will be used for throws." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseUltraBallAboveCp}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Use Master Ball Above CP" ToolTip="When Pokemon above this CP level are found, a Master Ball will be used for throws." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseMasterBallAboveCp}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Use Great Ball Above IV%" ToolTip="When Pokemon above this IV% are found, a Great Ball will be used for throws." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseGreatBallAboveIv}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Use Ultra Ball Above IV%" ToolTip="When Pokemon above this IV% are found, an Ultra Ball will be used for throws." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseUltraBallAboveIv}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Use Great Ball Below % Probability" ToolTip="QED." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseGreatBallBelowCatchProbability}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Use Ultra Ball Below % Probability" ToolTip="QED." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseUltraBallBelowCatchProbability}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Use Master Ball Below % Probability" ToolTip="QED." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseMasterBallBelowCatchProbability}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Use Berries when Above CP" ToolTip="Use berries on Pokemon at or above this CP level." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseBerriesMinCp}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Use Berries when Above IV%" ToolTip="Use berries on Pokemon at or above this IV%." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseBerriesMinIv}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Use Berries Below % Probability" ToolTip="QED." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseBerriesBelowCatchProbability}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content=" Operator" ToolTip="AND means the Pokemon must meet both IV% and CP requirements - OR means either." />
+                                <ComboBox ItemsSource="{Binding OperatorsCollection}" SelectedItem="{Binding Settings.UseBerriesOperator}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <CheckBox Content="Enable Human-like Throws" IsChecked="{Binding Settings.EnableHumanizedThrows}" ToolTip="This system varies the throw quality in order to keep you from being detected." />
+                            </StackPanel>
+                            <StackPanel Visibility="{Binding Settings.EnableHumanizedThrows, Converter={StaticResource VisConv}}">
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                    <Label Style="{StaticResource LineItemLabel}" Content="Nice Throw % Chance" ToolTip="QED." />
+                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.NiceThrowChance}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                    <Label Style="{StaticResource LineItemLabel}" Content="Great Throw % Chance" ToolTip="QED." />
+                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.GreatThrowChance}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                    <Label Style="{StaticResource LineItemLabel}" Content="Excellent Throw % Chance" ToolTip="QED." />
+                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.ExcellentThrowChance}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                    <Label Style="{StaticResource LineItemLabel}" Content="Computed Normal Throw % Chance" ToolTip="QED." />
+                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.NormalThrowChance}" IsReadOnly="True" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                    <Label Style="{StaticResource LineItemLabel}" Content="Curve Throw % Chance" ToolTip="CurveBalls are a throw add-on and separate from quality, setting this too high may get you flagged." />
+                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.CurveThrowChance}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                    <Label Style="{StaticResource LineItemLabel}" Content="Force Great Throw Over IV%" ToolTip="QED." />
+                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.ForceGreatThrowOverIv}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                    <Label Style="{StaticResource LineItemLabel}" Content="Force Excellent Throw Over IV%" ToolTip="QED." />
+                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.ForceExcellentThrowOverIv}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                    <Label Style="{StaticResource LineItemLabel}" Content="Force Great Throw Over CP" ToolTip="QED." />
+                                    <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.ForceGreatThrowOverCp}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                    <Label Style="{StaticResource LineItemLabel}" Content="Force Excellent Throw Over CP" ToolTip="QED." />
+                                    <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.ForceExcellentThrowOverCp}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
                 </ScrollViewer>
             </TabItem>
 

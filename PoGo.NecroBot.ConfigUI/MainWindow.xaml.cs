@@ -118,20 +118,5 @@ namespace PoGo.NecroBot.ConfigUI
             IsCustomDevicePackage = e.AddedItems[0].Equals("custom");
         }
 
-        private void ItemsKeptTotal_Changed(object sender, System.Windows.Controls.TextChangedEventArgs e)
-        {
-            Settings.TotalItemsBeingKept = 1;
-        }
-
-        private void ItemsKeptTotal_Input(object sender, System.Windows.Input.TextCompositionEventArgs e)
-        {
-            Settings.TotalItemsBeingKept = 1;
-        }
-
-        private void ItemsKeptTotal_LostFocus(object sender, RoutedEventArgs e)
-        {
-            Settings.TotalItemsBeingKept = 1;
-        }
-
     }
 }
