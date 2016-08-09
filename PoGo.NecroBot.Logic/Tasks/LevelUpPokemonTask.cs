@@ -56,7 +56,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 Logger.Write("Pokemon Upgraded:" +
                                              session.Translation.GetPokemonTranslation(
                                                  upgradeResult.UpgradedPokemon.PokemonId) + ":" +
-                                             upgradeResult.UpgradedPokemon.Cp);
+                                             upgradeResult.UpgradedPokemon.Cp,LogLevel.LevelUp);
                                 upgradedNumber++;
                             }
 
@@ -84,7 +84,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (upgradeResult.Result.ToString().ToLower().Contains("success"))
                     {
                         Logger.Write("Pokemon Upgraded:" + session.Translation.GetPokemonTranslation(upgradeResult.UpgradedPokemon.PokemonId) + ":" +
-                                        upgradeResult.UpgradedPokemon.Cp);
+                                        upgradeResult.UpgradedPokemon.Cp, LogLevel.LevelUp);
                         upgradedNumber++;
                     }
 
