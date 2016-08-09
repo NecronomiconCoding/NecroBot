@@ -107,9 +107,21 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(FortFailedEvent fortFailedEvent, ISession session)
         {
-            Logger.Write(
+            if (fortFailedEvent.Try != 1 && fortFailedEvent.Looted == false)
+            {
+                Logger.lineSelect(0, 1);
+            }
+
+            if (fortFailedEvent.Looted == true)
+            {
+                Logger.Write(
+                session.Translation.GetTranslation(TranslationString.SoftBanBypassed),
+                LogLevel.SoftBan);
+            } else {
+                Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortFailed, fortFailedEvent.Name, fortFailedEvent.Try, fortFailedEvent.Max),
-                LogLevel.Pokestop, ConsoleColor.DarkRed);
+                LogLevel.SoftBan);
+            }
         }
 
         private static void HandleEvent(FortTargetEvent fortTargetEvent, ISession session)
