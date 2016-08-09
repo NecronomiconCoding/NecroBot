@@ -16,6 +16,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
 
@@ -177,6 +179,37 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
+        public void checkProxy()
+        {
+            using (var tempWebClient = new NecroWebClient())
+            {
+                string unproxiedIP = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
+                if (UseProxy)
+                {
+                    tempWebClient.Proxy = this.InitProxy();
+                    string proxiedIPres = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
+                    string proxiedIP = proxiedIPres == null?"INVALID PROXY": proxiedIPres;
+                    Logger.Write(
+                       $"Your IP is: {unproxiedIP} / Proxy IP is: {proxiedIP}",
+                       LogLevel.Info, (unproxiedIP==proxiedIP)?ConsoleColor.Red:ConsoleColor.Green);
+
+                    if (unproxiedIP == proxiedIP || proxiedIPres == null)
+                    {
+                        Logger.Write("Press any key to exit so you can fix your proxy settings...",
+                            LogLevel.Info, ConsoleColor.Red);
+                        Console.ReadKey();
+                        Environment.Exit(0);
+                    }
+                }
+                else
+                {
+                    Logger.Write(
+                       $"Your IP is: {unproxiedIP}",
+                       LogLevel.Info, ConsoleColor.Red);
+                }
+            }
+        }
+
         private string RandomString(int length, string alphabet = "abcdefghijklmnopqrstuvwxyz0123456789")
         {
             var outOfRange = Byte.MaxValue + 1 - (Byte.MaxValue + 1) % alphabet.Length;
@@ -223,6 +256,18 @@ namespace PoGo.NecroBot.Logic
             {
                 throw new ArgumentException("Invalid device info package! Check your auth.config file and make sure a valid DevicePackageName is set. For simple use set it to 'random'. If you have a custom device, then set it to 'custom'.");
             }
+        }
+
+        private WebProxy InitProxy()
+        {
+            if (!UseProxy) return null;
+
+            WebProxy prox = new WebProxy(new System.Uri($"http://{UseProxyHost}:{UseProxyPort}"), false, null);
+
+            if (UseProxyAuthentication)
+                prox.Credentials = new NetworkCredential(UseProxyUsername, UseProxyPassword);
+
+            return prox;
         }
     }
 
@@ -788,8 +833,13 @@ namespace PoGo.NecroBot.Logic
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
             }
-
+            
             return shouldExit ? null : settings;
+        }
+
+        public void checkProxy()
+        {
+            Auth.checkProxy();
         }
 
         public static bool PromptForSetup(ITranslation translator)
