@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   Najlepszy z CP: {3}  IV: {4}%] (Cukierki: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%  [Najlepszy z CP: {3}  IV: {4}%] (Cukierki: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -318,7 +318,7 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Brak Pokeballi w Ekwipunku, nie możesz złapać więcej Pokemonów"
+      "Value": "Brak Pokeballi w ekwipunku, nie możesz złapać więcej Pokemonów"
     },
     {
       "Key": "currentPokeballInv",
@@ -338,7 +338,7 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "Ustawiona przez Ciebie dopuszczalna ilość itemów w Ekwipunku (PokeBalle+Potiony+Revivy={0}) przekracza maksymalną jego pojemność, która wynosi: ({1})"
+      "Value": "Ustawiona przez Ciebie dopuszczalna ilość itemów w ekwipunku (PokeBalle+Potiony+Revivy={0}) przekracza maksymalną jego pojemność, która wynosi: ({1})"
     },
     {
       "Key": "recyclingQuietly",
@@ -354,7 +354,7 @@
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Twoj Ekwipunek jest pełny, nie zebrano przedmiotów"
+      "Value": "Twoj ekwipunek jest pełny, nie zebrano przedmiotów"
     },
     {
       "Key": "encounterProblem",
@@ -514,7 +514,7 @@
     },
     {
       "Key": "useLuckyEggAmount",
-      "Value": "LuckyEggów w Ekwipunku: {0}"
+      "Value": "LuckyEggów w ekwipunku: {0}"
     },
     {
       "Key": "noIncenseAvailable",
@@ -526,7 +526,7 @@
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "Incensów w Ekwipunku: {0}"
+      "Value": "Incensów w ekwipunku: {0}"
     },
     {
       "Key": "usedIncense",
