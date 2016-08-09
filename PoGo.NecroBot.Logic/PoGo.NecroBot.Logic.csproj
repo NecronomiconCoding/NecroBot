@@ -194,6 +194,8 @@
     <Compile Include="Utils\LocationUtils.cs" />
     <Compile Include="Utils\Statistics.cs" />
     <Compile Include="Utils\StringUtils.cs" />
+    <Compile Include="Utils\WebClientExtensions.cs" />
+    <Compile Include="Utils\WebUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
