@@ -250,6 +250,8 @@ namespace PoGo.NecroBot.Logic
         //websockets
         [DefaultValue(false)]
         public bool UseWebsocket;
+        [DefaultValue(14251)]
+        public int WebSocketPort;
         //pressakeyshit
         [DefaultValue(false)]
         public bool StartupWelcomeDelay;
@@ -262,7 +264,7 @@ namespace PoGo.NecroBot.Logic
         //console options
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool DetailedCountsBeforeRecycling;
 
         [DefaultValue(3)]
@@ -286,7 +288,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("and")]
         public string UpgradePokemonMinimumStatsOperator;
         //position
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool DisableHumanWalking;
         [DefaultValue(40.778915)]
         public double DefaultLatitude;
@@ -297,9 +299,9 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
         //delays
-        [DefaultValue(1000)]
-        public int DelayBetweenPlayerActions;
         [DefaultValue(500)]
+        public int DelayBetweenPlayerActions;
+        [DefaultValue(100)]
         public int DelayBetweenPokemonCatch;
         //dump stats
         [DefaultValue(false)]
@@ -328,7 +330,7 @@ namespace PoGo.NecroBot.Logic
         public bool UseKeepMinLvl;
         [DefaultValue(false)]
         public bool PrioritizeIvOverCp;
-        [DefaultValue(1)]
+        [DefaultValue(0)]
         public int KeepMinDuplicatePokemon;
         //gpx
         [DefaultValue(false)]
@@ -336,7 +338,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("GPXPath.GPX")]
         public string GpxFile;
         //recycle
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool VerboseRecycling;
         [DefaultValue(90.0)]
         public double RecycleInventoryAtUsagePercentage;
@@ -370,6 +372,8 @@ namespace PoGo.NecroBot.Logic
         public bool GetSniperInfoFromPokezz;
         [DefaultValue(true)]
         public bool GetOnlyVerifiedSniperInfoFromPokezz;
+        [DefaultValue(true)]
+        public bool GetSniperInfoFromPokeSnipers;
         [DefaultValue(20)]
         public int MinPokeballsToSnipe;
         [DefaultValue(0)]
@@ -463,8 +467,6 @@ namespace PoGo.NecroBot.Logic
         public bool UsePokemonToNotCatchFilter;
         [DefaultValue(false)]
         public bool UsePokemonSniperFilterOnly;
-        [DefaultValue(14251)]
-        public int WebSocketPort;
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
@@ -1306,6 +1308,7 @@ namespace PoGo.NecroBot.Logic
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
         public bool GetSniperInfoFromPokezz => _settings.GetSniperInfoFromPokezz;
         public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.GetOnlyVerifiedSniperInfoFromPokezz;
+        public bool GetSniperInfoFromPokeSnipers => _settings.GetSniperInfoFromPokeSnipers;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
