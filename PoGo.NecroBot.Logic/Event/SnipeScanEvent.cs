@@ -11,5 +11,6 @@ namespace PoGo.NecroBot.Logic.Event
         public Location Bounds { get; set; }
         public PokemonId PokemonId { get; set; }
         public double Iv { get; set; }
+        public string Source { get; set; }
     }
 }
