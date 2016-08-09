@@ -25,6 +25,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static int TimesZeroXPawarded;
         private static int storeRI;
+        private static readonly System.Globalization.CultureInfo _CultureEnglish = new System.Globalization.CultureInfo("en");
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -81,9 +82,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
 
-                if (session.LogicSettings.UseOsmNavigating)
+                if (session.LogicSettings.UseOsmNavigating && distance >= 25d)
                 {
-                    var doc = XDocument.Load($"http://www.yournavigation.org/api/1.0/gosmore.php?flat={session.Client.CurrentLatitude:0.000000}&flon={session.Client.CurrentLongitude:0.000000}&tlat={pokeStop.Latitude:0.000000}&tlon={pokeStop.Longitude:0.000000}&v=foot");
+                    var uri = String.Format(_CultureEnglish, "http://www.yournavigation.org/api/1.0/gosmore.php?flat={0:0.000000}&flon={1:0.000000}&tlat={2:0.000000}&tlon={3:0.000000}&v=foot", session.Client.CurrentLatitude, session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
+                    var doc = XDocument.Load(uri);
                     XNamespace kmlns = XNamespace.Get("http://earth.google.com/kml/2.0");
                     var points = doc.Element(kmlns + "kml")
                                     .Element(kmlns + "Document")
@@ -101,8 +103,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             String[] parts = p.Split(',');
                             return new
                             {
-                                Latitude = double.Parse(parts[1], new System.Globalization.CultureInfo("en")),
-                                Longitude = double.Parse(parts[0], new System.Globalization.CultureInfo("en")),
+                                Latitude = double.Parse(parts[1], _CultureEnglish),
+                                Longitude = double.Parse(parts[0], _CultureEnglish),
                             };
                         }))
                         {
