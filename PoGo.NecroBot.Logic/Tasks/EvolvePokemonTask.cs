@@ -11,6 +11,7 @@ using POGOProtos.Inventory.Item;
 using PoGo.NecroBot.Logic.Common;
 using System.Collections.Generic;
 using POGOProtos.Data;
+using PoGo.NecroBot.Logic.PoGoUtils;
 
 #endregion
 
@@ -27,6 +28,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             await session.Inventory.RefreshCachedInventory();
             var pokemonToEvolveTask = await session.Inventory.GetPokemonToEvolve(session.LogicSettings.PokemonsToEvolve);
             var pokemonToEvolve = pokemonToEvolveTask.Where(p => p != null).ToList();
+            var pokemonToEvolveIv = pokemonToEvolveTask.Where(p => p != null 
+            && PokemonInfo.CalculatePokemonPerfection(p) > session.LogicSettings.EvolveAboveIvValue).ToList();
 
             session.EventDispatcher.Send(new EvolveCountEvent
             {
@@ -48,18 +51,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Math.Min(pokemonNeededInInventory, session.Profile.PlayerData.MaxPokemonStorage)));
 
                     var deltaCount = needPokemonToStartEvolve - totalPokemon.Count();
-                    if (session.LogicSettings.UseLuckyEggsWhileEvolving)
-                    {
-                        if (luckyEggMin > maxStorage)
-                        {
-                            session.EventDispatcher.Send(new WarnEvent
-                            {
-                                Message = session.Translation.GetTranslation(TranslationString.UseLuckyEggsMinPokemonAmountTooHigh,
-                                luckyEggMin, maxStorage)
-                            });
-                            return;
-                        }
-                    }
 
                     if (deltaCount > 0)
                     {
@@ -79,7 +70,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                         await evolve(session, pokemonToEvolve);
                     }
                 }
-                else if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
+                else if(session.LogicSettings.EvolveAllPokemonAboveIv)
+                {
+                    if (await shouldUseLuckyEgg(session, pokemonToEvolveIv))
+                    {
+                        await UseLuckyEgg(session);
+                    }
+                    await evolve(session, pokemonToEvolveIv);
+                }
+                else if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
                 {
                     if (await shouldUseLuckyEgg(session, pokemonToEvolve))
                     {
