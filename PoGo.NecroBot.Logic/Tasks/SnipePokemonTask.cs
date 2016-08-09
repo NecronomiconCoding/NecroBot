@@ -395,9 +395,6 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static async Task Snipe(ISession session, IEnumerable<PokemonId> pokemonIds, double latitude,
             double longitude, CancellationToken cancellationToken)
         {
-            if (_lastSnipe.AddMilliseconds(session.LogicSettings.MinDelayBetweenSnipes) > DateTime.Now)
-                return;
-
             var CurrentLatitude = session.Client.CurrentLatitude;
             var CurrentLongitude = session.Client.CurrentLongitude;
             var catchedPokemon = false;
