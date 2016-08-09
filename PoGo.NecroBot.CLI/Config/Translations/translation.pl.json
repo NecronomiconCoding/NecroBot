@@ -445,6 +445,10 @@
       "Value": "Upewnij się, że wpisany przez Ciebie Login i Hasło są prawidłowe."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Wypełnij GoogleUsername oraz GooglePassword w 'auth.json'"
     },

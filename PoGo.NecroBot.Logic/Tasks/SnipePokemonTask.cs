@@ -77,7 +77,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public override string ToString()
         {
-            return latitude.ToString("0.0000") + ", " + longitude.ToString("0.0000");
+            return latitude.ToString("0.00000000000") + ", " + longitude.ToString("0.00000000000");
         }
     }
 
@@ -210,7 +210,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     return;
 
                                 await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
-                                LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
+
+
                             }
                         }
                     }
@@ -238,7 +239,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                                         return;
 
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
-                                    LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                 }
                             }
                         }
@@ -277,9 +277,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                             CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1,
                                                 session, cancellationToken))
                                         return;
-
-                                    LocsVisited.Add(pokemonLocation);
-
+                                    
                                     await
                                         Snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude,
                                             cancellationToken);
@@ -361,6 +359,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                 {
+                    LocsVisited.Add(new PokemonLocation(latitude,longitude));
                     session.EventDispatcher.Send(new UpdatePositionEvent
                     {
                         Latitude = CurrentLatitude,

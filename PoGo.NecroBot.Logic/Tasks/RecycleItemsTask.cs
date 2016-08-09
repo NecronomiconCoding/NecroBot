@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
@@ -8,6 +8,7 @@ using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Inventory.Item;
 using System.Threading;
 using System.Threading.Tasks;
+using System;
 
 #endregion
 
@@ -16,6 +17,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     public class RecycleItemsTask
     {
         private static int Diff;
+        private static Random rnd = new Random();
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
@@ -137,10 +139,17 @@ namespace PoGo.NecroBot.Logic.Tasks
             var masterBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
             int totalBallsCount = pokeBallsCount + greatBallsCount + ultraBallsCount + masterBallsCount;
+            int random = rnd.Next(-1 * session.LogicSettings.RandomRecycleValue, session.LogicSettings.RandomRecycleValue + 1);
 
             if (totalBallsCount > session.LogicSettings.TotalAmountOfPokeballsToKeep)
             {
-                Diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep;
+                if (session.LogicSettings.RandomizeRecycle)
+                {
+                    Diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep + random;
+                } else {
+                    Diff = totalBallsCount - session.LogicSettings.TotalAmountOfPokeballsToKeep;
+                }
+                
                 if (Diff > 0)
                 {
                     await RecycleItems(session, cancellationToken, pokeBallsCount, ItemId.ItemPokeBall);
@@ -166,11 +175,20 @@ namespace PoGo.NecroBot.Logic.Tasks
             var superPotionCount = await session.Inventory.GetItemAmountByType(ItemId.ItemSuperPotion);
             var hyperPotionsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemHyperPotion);
             var maxPotionCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMaxPotion);
-
+            
             int totalPotionsCount = potionCount + superPotionCount + hyperPotionsCount + maxPotionCount;
+            int random = rnd.Next(-1 * session.LogicSettings.RandomRecycleValue, session.LogicSettings.RandomRecycleValue + 1);
             if (totalPotionsCount > session.LogicSettings.TotalAmountOfPotionsToKeep)
             {
-                Diff = totalPotionsCount - session.LogicSettings.TotalAmountOfPotionsToKeep;
+                if (session.LogicSettings.RandomizeRecycle)
+                {
+                    Diff = totalPotionsCount - session.LogicSettings.TotalAmountOfPotionsToKeep + random;
+                }
+                else
+                {
+                    Diff = totalPotionsCount - session.LogicSettings.TotalAmountOfPotionsToKeep;
+                }
+                
                 if (Diff > 0)
                 {
                     await RecycleItems(session, cancellationToken, potionCount, ItemId.ItemPotion);
@@ -199,9 +217,17 @@ namespace PoGo.NecroBot.Logic.Tasks
             var maxReviveCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMaxRevive);
 
             int totalRevivesCount = reviveCount + maxReviveCount;
+            int random = rnd.Next(-1 * session.LogicSettings.RandomRecycleValue, session.LogicSettings.RandomRecycleValue + 1);
             if (totalRevivesCount > session.LogicSettings.TotalAmountOfRevivesToKeep)
             {
-                Diff = totalRevivesCount - session.LogicSettings.TotalAmountOfRevivesToKeep;
+                if (session.LogicSettings.RandomizeRecycle)
+                {
+                    Diff = totalRevivesCount - session.LogicSettings.TotalAmountOfRevivesToKeep + random;
+                }
+                else
+                {
+                    Diff = totalRevivesCount - session.LogicSettings.TotalAmountOfRevivesToKeep;
+                }
                 if (Diff > 0)
                 {
                     await RecycleItems(session, cancellationToken, reviveCount, ItemId.ItemRevive);
@@ -223,9 +249,18 @@ namespace PoGo.NecroBot.Logic.Tasks
             var wepar = await session.Inventory.GetItemAmountByType(ItemId.ItemWeparBerry);
 
             int totalBerryCount = razz + bluk + nanab + pinap + wepar;
+            int random = rnd.Next(-1 * session.LogicSettings.RandomRecycleValue, session.LogicSettings.RandomRecycleValue + 1);
             if (totalBerryCount > session.LogicSettings.TotalAmountOfBerriesToKeep)
             {
-                Diff = totalBerryCount - session.LogicSettings.TotalAmountOfBerriesToKeep;
+                if (session.LogicSettings.RandomizeRecycle)
+                {
+                    Diff = totalBerryCount - session.LogicSettings.TotalAmountOfBerriesToKeep + random;
+                }
+                else
+                {
+                    Diff = totalBerryCount - session.LogicSettings.TotalAmountOfBerriesToKeep;
+                }
+                
                 if (Diff > 0)
                 {
                     await RecycleItems(session, cancellationToken, razz, ItemId.ItemRazzBerry);
