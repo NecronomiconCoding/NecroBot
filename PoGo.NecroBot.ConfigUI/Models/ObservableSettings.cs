@@ -63,6 +63,14 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public static readonly DependencyProperty DefaultLongitudeProperty =
             DependencyProperty.Register("DefaultLongitude", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
 
+        public int MaxTravelDistanceInMeters
+        {
+            get { return (int)GetValue(MaxTravelDistanceInMetersProperty); }
+            set { SetValue(MaxTravelDistanceInMetersProperty, value); }
+        }
+        public static readonly DependencyProperty MaxTravelDistanceInMetersProperty =
+            DependencyProperty.Register("MaxTravelDistanceInMeters", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
         public double WalkingSpeedInKilometerPerHour
         {
             get { return (double)GetValue(WalkingSpeedInKilometerPerHourProperty); }
@@ -207,8 +215,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
         #endregion AUTH Properties
 
 
-
-
+        #region DEVICE Properties
 
         public string DevicePackageName
         {
@@ -322,7 +329,137 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public static readonly DependencyProperty FirmwareFingerprintProperty =
             DependencyProperty.Register("FirmwareFingerprint", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
 
+        #endregion DEVICE Properties
 
+
+        #region INVENTORY Properties
+
+        public bool VerboseRecycling
+        {
+            get { return (bool)GetValue(VerboseRecyclingProperty); }
+            set { SetValue(VerboseRecyclingProperty, value); }
+        }
+        public static readonly DependencyProperty VerboseRecyclingProperty =
+            DependencyProperty.Register("VerboseRecycling", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public double RecycleInventoryAtUsagePercentage
+        {
+            get { return (double)GetValue(RecycleInventoryAtUsagePercentageProperty); }
+            set { SetValue(RecycleInventoryAtUsagePercentageProperty, value); }
+        }
+        public static readonly DependencyProperty RecycleInventoryAtUsagePercentageProperty =
+            DependencyProperty.Register("RecycleInventoryAtUsagePercentage", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public int TotalAmountOfPokeballsToKeep
+        {
+            get { return (int)GetValue(TotalAmountOfPokeballsToKeepProperty); }
+            set { SetValue(TotalAmountOfPokeballsToKeepProperty, value); TotalItemsBeingKept = 1; }
+        }
+        public static readonly DependencyProperty TotalAmountOfPokeballsToKeepProperty =
+            DependencyProperty.Register("TotalAmountOfPokeballsToKeep", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int TotalAmountOfPotionsToKeep
+        {
+            get { return (int)GetValue(TotalAmountOfPotionsToKeepProperty); }
+            set { SetValue(TotalAmountOfPotionsToKeepProperty, value); TotalItemsBeingKept = 1; }
+        }
+        public static readonly DependencyProperty TotalAmountOfPotionsToKeepProperty =
+            DependencyProperty.Register("TotalAmountOfPotionsToKeep", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int TotalAmountOfRevivesToKeep
+        {
+            get { return (int)GetValue(TotalAmountOfRevivesToKeepProperty); }
+            set { SetValue(TotalAmountOfRevivesToKeepProperty, value); TotalItemsBeingKept = 1; }
+        }
+        public static readonly DependencyProperty TotalAmountOfRevivesToKeepProperty =
+            DependencyProperty.Register("TotalAmountOfRevivesToKeep", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int TotalAmountOfBerriesToKeep
+        {
+            get { return (int)GetValue(TotalAmountOfBerriesToKeepProperty); }
+            set { SetValue(TotalAmountOfBerriesToKeepProperty, value); TotalItemsBeingKept = 1; }
+        }
+        public static readonly DependencyProperty TotalAmountOfBerriesToKeepProperty =
+            DependencyProperty.Register("TotalAmountOfBerriesToKeep", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int TotalItemsBeingKept
+        {
+            get { return (int)GetValue(TotalAmountOfPokeballsToKeepProperty) + (int)GetValue(TotalAmountOfPotionsToKeepProperty) + (int)GetValue(TotalAmountOfRevivesToKeepProperty) + (int)GetValue(TotalAmountOfBerriesToKeepProperty); }
+            set { SetValue(TotalItemsBeingKeptProperty, (int)GetValue(TotalAmountOfPokeballsToKeepProperty) + (int)GetValue(TotalAmountOfPotionsToKeepProperty) + (int)GetValue(TotalAmountOfRevivesToKeepProperty) + (int)GetValue(TotalAmountOfBerriesToKeepProperty)); }
+        }
+        public static readonly DependencyProperty TotalItemsBeingKeptProperty =
+            DependencyProperty.Register("TotalItemsBeingKept", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public bool UseEggIncubators
+        {
+            get { return (bool)GetValue(UseEggIncubatorsProperty); }
+            set { SetValue(UseEggIncubatorsProperty, value); }
+        }
+        public static readonly DependencyProperty UseEggIncubatorsProperty =
+            DependencyProperty.Register("UseEggIncubators", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool UseLuckyEggConstantly
+        {
+            get { return (bool)GetValue(UseLuckyEggConstantlyProperty); }
+            set { SetValue(UseLuckyEggConstantlyProperty, value); }
+        }
+        public static readonly DependencyProperty UseLuckyEggConstantlyProperty =
+            DependencyProperty.Register("UseLuckyEggConstantly", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public int UseLuckyEggsMinPokemonAmount
+        {
+            get { return (int)GetValue(UseLuckyEggsMinPokemonAmountProperty); }
+            set { SetValue(UseLuckyEggsMinPokemonAmountProperty, value); }
+        }
+        public static readonly DependencyProperty UseLuckyEggsMinPokemonAmountProperty =
+            DependencyProperty.Register("UseLuckyEggsMinPokemonAmount", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public bool UseLuckyEggsWhileEvolving
+        {
+            get { return (bool)GetValue(UseLuckyEggsWhileEvolvingProperty); }
+            set { SetValue(UseLuckyEggsWhileEvolvingProperty, value); }
+        }
+        public static readonly DependencyProperty UseLuckyEggsWhileEvolvingProperty =
+            DependencyProperty.Register("UseLuckyEggsWhileEvolving", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool UseIncenseConstantly
+        {
+            get { return (bool)GetValue(UseIncenseConstantlyProperty); }
+            set { SetValue(UseIncenseConstantlyProperty, value); }
+        }
+        public static readonly DependencyProperty UseIncenseConstantlyProperty =
+            DependencyProperty.Register("UseIncenseConstantly", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        #endregion INVENTORY Properties
+
+
+        #region POKEMON Properties
+        #endregion POKEMON Properties
+
+
+        #region CAPTURE Properties
+
+        public int MaxPokeballsPerPokemon
+        {
+            get { return (int)GetValue(MaxPokeballsPerPokemonProperty); }
+            set { SetValue(MaxPokeballsPerPokemonProperty, value); }
+        }
+        public static readonly DependencyProperty MaxPokeballsPerPokemonProperty =
+            DependencyProperty.Register("MaxPokeballsPerPokemon", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        #endregion CAPTURE Properties
+
+
+        #region TRANSFER Properties
+        #endregion TRANSFER Properties
+
+
+        #region SNIPING Properties
+        #endregion SNIPING Properties
+
+
+        #region MISC Properties
+        #endregion MISC Properties
 
 
         public ObservableSettings() { }
@@ -338,6 +475,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.DisableHumanWalking = set.DisableHumanWalking;
             res.Latitude = set.DefaultLatitude;
             res.Longitude = set.DefaultLongitude;
+            res.MaxTravelDistanceInMeters = set.MaxTravelDistanceInMeters;
             res.WalkingSpeedInKilometerPerHour = set.WalkingSpeedInKilometerPerHour;
             res.MaxSpawnLocationOffset = set.MaxSpawnLocationOffset;
             res.DelayBetweenPlayerActions = set.DelayBetweenPlayerActions;
@@ -370,6 +508,17 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.FirmwareType = set.Auth.FirmwareType;
             res.FirmwareFingerprint = set.Auth.FirmwareFingerprint;
             // INVENTORY
+            res.VerboseRecycling = set.VerboseRecycling;
+            res.RecycleInventoryAtUsagePercentage = set.RecycleInventoryAtUsagePercentage;
+            res.TotalAmountOfPokeballsToKeep = set.TotalAmountOfPokeballsToKeep;
+            res.TotalAmountOfPotionsToKeep = set.TotalAmountOfPotionsToKeep;
+            res.TotalAmountOfRevivesToKeep = set.TotalAmountOfRevivesToKeep;
+            res.TotalAmountOfBerriesToKeep = set.TotalAmountOfBerriesToKeep;
+            res.UseEggIncubators = set.UseEggIncubators;
+            res.UseLuckyEggConstantly = set.UseLuckyEggConstantly;
+            res.UseLuckyEggsMinPokemonAmount = set.UseLuckyEggsMinPokemonAmount;
+            res.UseLuckyEggsWhileEvolving = set.UseLuckyEggsWhileEvolving;
+            res.UseIncenseConstantly = set.UseIncenseConstantly;
             // POKEMON
             // CAPTURE
             // TRANSFER
@@ -379,55 +528,6 @@ namespace PoGo.NecroBot.ConfigUI.Models
         }
 
         /*
-                 AUTH
-
-            // auth data
-                public AuthType AuthType;
-                public string GoogleUsername;
-                public string GooglePassword;
-                public string PtcUsername;
-                public string PtcPassword;
-                public bool UseProxy;
-                public string UseProxyHost;
-                public string UseProxyPort;
-                public bool UseProxyAuthentication;
-                public string UseProxyUsername;
-                public string UseProxyPassword;
-
-                DEVICE
-
-            // device data
-                public string DevicePackageName;
-                public string DeviceId;
-                public string AndroidBoardName;
-                public string AndroidBootloader;
-                public string DeviceBrand;
-                public string DeviceModel;
-                public string DeviceModelIdentifier;
-                public string DeviceModelBoot;
-                public string HardwareManufacturer;
-                public string HardwareModel;
-                public string FirmwareBrand;
-                public string FirmwareTags;
-                public string FirmwareType;
-                public string FirmwareFingerprint;
-
-                BASIC
-
-            // general / basic data
-
-            public string TranslationLanguageCode;
-        public bool AutoUpdate;
-        public bool TransferConfigAndAuthOnUpdate;
-        public bool DisableHumanWalking;
-        public double DefaultLatitude;
-        public double DefaultLongitude;
-        public double WalkingSpeedInKilometerPerHour;
-        public int MaxSpawnLocationOffset;
-
-            public int DelayBetweenPlayerActions;
-        public int DelayBetweenPokemonCatch;
-
 
             POKEMONS
 
@@ -497,30 +597,10 @@ namespace PoGo.NecroBot.ConfigUI.Models
 
         public bool UsePokemonSniperFilterOnly;
 
-            INVENTORY
-
-            //recycle
-        public bool VerboseRecycling;
-        public double RecycleInventoryAtUsagePercentage;
-
-            //amounts
-        public int MaxPokeballsPerPokemon;
-        public int MaxTravelDistanceInMeters;
-        public int TotalAmountOfPokeballsToKeep;
-        public int TotalAmountOfPotionsToKeep;
-        public int TotalAmountOfRevivesToKeep;
-        public int TotalAmountOfBerriesToKeep;
-
-            //lucky, incense and berries
-        public bool UseEggIncubators;
-        public bool UseLuckyEggConstantly;
-        public int UseLuckyEggsMinPokemonAmount;
-        public bool UseLuckyEggsWhileEvolving;
-        public bool UseIncenseConstantly;
-
             CAPTURE
 
         public bool CatchPokemon;
+        public int MaxPokeballsPerPokemon;
         public int MaxBerriesToUsePerPokemon;
 
             //balls
@@ -576,6 +656,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.DisableHumanWalking = DisableHumanWalking;
             gs.DefaultLatitude = DefaultLatitude;
             gs.DefaultLongitude = DefaultLongitude;
+            gs.MaxTravelDistanceInMeters = MaxTravelDistanceInMeters;
             gs.WalkingSpeedInKilometerPerHour = WalkingSpeedInKilometerPerHour;
             gs.MaxSpawnLocationOffset = MaxSpawnLocationOffset;
             gs.DelayBetweenPlayerActions = DelayBetweenPlayerActions;
@@ -608,6 +689,17 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.Auth.FirmwareType = FirmwareType;
             gs.Auth.FirmwareFingerprint = FirmwareFingerprint;
             // INVENTORY
+            gs.VerboseRecycling = VerboseRecycling;
+            gs.RecycleInventoryAtUsagePercentage = RecycleInventoryAtUsagePercentage;
+            gs.TotalAmountOfPokeballsToKeep = TotalAmountOfPokeballsToKeep;
+            gs.TotalAmountOfPotionsToKeep = TotalAmountOfPotionsToKeep;
+            gs.TotalAmountOfRevivesToKeep = TotalAmountOfRevivesToKeep;
+            gs.TotalAmountOfBerriesToKeep = TotalAmountOfBerriesToKeep;
+            gs.UseEggIncubators = UseEggIncubators;
+            gs.UseLuckyEggConstantly = UseLuckyEggConstantly;
+            gs.UseLuckyEggsMinPokemonAmount = UseLuckyEggsMinPokemonAmount;
+            gs.UseLuckyEggsWhileEvolving = UseLuckyEggsWhileEvolving;
+            gs.UseIncenseConstantly = UseIncenseConstantly;
             // POKEMON
             // CAPTURE
             // TRANSFER

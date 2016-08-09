@@ -1,10 +1,11 @@
 ﻿<Window x:Class="PoGo.NecroBot.ConfigUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PoGo.NecroBot.ConfigUI"
-        mc:Ignorable="d"
+        xmlns:util="clr-namespace:PoGo.NecroBot.ConfigUI.Utils"
+        xmlns:rapi="clr-namespace:PokemonGo.RocketAPI.Enums;assembly=Pokemon.Go.Rocket.API"
         Title="{DynamicResource AppTitle}" Height="600" Width="800">
     <Window.Resources>
         <ResourceDictionary>
@@ -46,6 +47,10 @@
                             <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.Longitude}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Max Travel Distance in Meters" ToolTip="The maximum distance in meters the bot will travel from the Lat/Lon being used. 1000 meters = 1 kilometer, 1600 meters = 1 mile" />
+                            <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.MaxTravelDistanceInMeters}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Walking Speed (in KPH)" ToolTip="How fast your character will move from point to point. For best safety we recommend keeping this at 15 or below. Decimals are allowed." />
                             <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.WalkingSpeedInKilometerPerHour}" />
                         </StackPanel>
@@ -67,48 +72,125 @@
 
             <TabItem Header="Auth">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                    <!--
-                    public AuthType AuthType;
-                    public string GoogleUsername;
-                    public string GooglePassword;
-                    public string PtcUsername;
-                    public string PtcPassword;
-                    public bool UseProxy;
-                    public string UseProxyHost;
-                    public string UseProxyPort;
-                    public bool UseProxyAuthentication;
-                    public string UseProxyUsername;
-                    public string UseProxyPassword;-->
                     <StackPanel>
-                        
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Auth Type" ToolTip="Google and Pokemon Trainer's Club (ptc) are the currently supported login methods." />
+                            <ComboBox ItemsSource="{Binding Source={x:Type rapi:AuthType}, Converter={StaticResource EnumToArrayConv}}" SelectedItem="{Binding Settings.AuthType}" SelectionChanged="AuthType_Changed" />
+                            <!-- ItemsSource="{Binding Source={util:EnumValues{x:Type rapi:AuthType}}}" -->
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding IsGoogleAuthShowing, Converter={StaticResource VisConv}}">
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Google Username" ToolTip="The Google account username to use for login." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.GoogleUsername}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Google Password" ToolTip="The Google account password to use for login." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.GooglePassword}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding IsGoogleAuthShowing, Converter={StaticResource VisRevConv}}">
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="PTC Username" ToolTip="The Pokemon Trainer's Club account username to use for login." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.PtcUsername}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="PTC Password" ToolTip="The Pokemon Trainer's Club account password to use for login." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.PtcPassword}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Enable Proxy System" IsChecked="{Binding Settings.UseProxy}" ToolTip="QED." />
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding Settings.UseProxy, Converter={StaticResource VisConv}}">
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Proxy Host" ToolTip="QED." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseProxyHost}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Proxy Port" ToolTip="QED." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseProxyPort}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <CheckBox Content="Enable Proxy Authentication" IsChecked="{Binding Settings.UseProxyAuthentication}" ToolTip="If your proxy requires authentication, check this box." />
+                            </StackPanel>
+                            <StackPanel Visibility="{Binding Settings.UseProxyAuthentication, Converter={StaticResource VisConv}}">
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                    <Label Style="{StaticResource LineItemLabel}" Content="Proxy Username" ToolTip="Username for proxy authentication." />
+                                    <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseProxyUsername}" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                    <Label Style="{StaticResource LineItemLabel}" Content="Proxy Password" ToolTip="Password for proxy authentication." />
+                                    <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseProxyPassword}" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
             </TabItem>
 
             <TabItem Header="Device">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                    <!--public string DevicePackageName;
-                        public string DeviceId;
-                        public string AndroidBoardName;
-                        public string AndroidBootloader;
-                        public string DeviceBrand;
-                        public string DeviceModel;
-                        public string DeviceModelIdentifier;
-                        public string DeviceModelBoot;
-                        public string HardwareManufacturer;
-                        public string HardwareModel;
-                        public string FirmwareBrand;
-                        public string FirmwareTags;
-                        public string FirmwareType;
-                        public string FirmwareFingerprint;-->
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <Label Style="{StaticResource LineItemLabel}" Content="Device Package" ToolTip="The device package to use for this bot, use 'random' to choose one automatically or 'custom' ro use your own configs" />
-                            <TextBox Text="{Binding Settings.DevicePackageName}" />
+                            <TextBlock Padding="3,3,24,3" TextWrapping="Wrap" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}}"
+                                Text="We provide a number of preconfigured device packages to emulate real world devices and improve your security. If you plan to use this account on your real Android device we recommend selecting custom and entering your own actual device values. We do not offer Apple product options as the API library we use always appears to be Android on Niantic's side, hence the Android-only options here." />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <Label Style="{StaticResource LineItemLabel}" Content="Device ID" ToolTip="The device serial number" />
-                            <TextBox Text="{Binding Settings.DeviceId}" />
+                            <Label Style="{StaticResource LineItemLabel}" Content="Device Package" ToolTip="The device package to use for this bot, use 'random' to choose one automatically or 'custom' to use your own configs" />
+                            <ComboBox ItemsSource="{Binding DevicePackageCollection}" SelectedItem="{Binding Settings.DevicePackageName}" SelectionChanged="DevicePackage_Changed" />
+                            <!--<TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DevicePackageName}" />-->
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Device ID" ToolTip="The device serial number, this is unique per device and should be a 16-digit hexadecimal value" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DeviceId}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Android Board Name" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.AndroidBoardName}" IsEnabled="{Binding IsCustomDevicePackage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Android Bootloader" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.AndroidBootloader}" IsEnabled="{Binding IsCustomDevicePackage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Device Brand" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DeviceBrand}" IsEnabled="{Binding IsCustomDevicePackage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Device Model" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DeviceModel}" IsEnabled="{Binding IsCustomDevicePackage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Device Model Identifier" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DeviceModelIdentifier}" IsEnabled="{Binding IsCustomDevicePackage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Device Model Boot" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DeviceModelBoot}" IsEnabled="{Binding IsCustomDevicePackage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Hardware Manufacturer" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.HardwareManufacturer}" IsEnabled="{Binding IsCustomDevicePackage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Hardware Model" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.HardwareModel}" IsEnabled="{Binding IsCustomDevicePackage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Firmware Brand" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.FirmwareBrand}" IsEnabled="{Binding IsCustomDevicePackage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Firmware Tags" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.FirmwareTags}" IsEnabled="{Binding IsCustomDevicePackage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Firmware Type" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.FirmwareType}" IsEnabled="{Binding IsCustomDevicePackage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Firmware Fingerprint" />
+                            <TextBox Style="{StaticResource LineItemTextBoxLg}" Text="{Binding Settings.FirmwareFingerprint}" IsEnabled="{Binding IsCustomDevicePackage}" />
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -116,7 +198,51 @@
 
             <TabItem Header="Inventory">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                    <StackPanel></StackPanel>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Verbose Recycling" IsChecked="{Binding Settings.VerboseRecycling}" ToolTip="QED." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Recycle Inventory at %" ToolTip="When your inventory reaches this pewrcentage of capacity, start a recycle of spare items." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.RecycleInventoryAtUsagePercentage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Total Balls to Keep" ToolTip="Total number of all types of Pokeballs to keep - balls of lowest quality get recycled first." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfPokeballsToKeep}" TextChanged="ItemsKeptTotal_Changed" TextInput="ItemsKeptTotal_Input" LostFocus="ItemsKeptTotal_LostFocus" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Total Potions to Keep" ToolTip="Total number of all types of Potions to keep - potions of lowest quality get recycled first." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfPotionsToKeep}" TextChanged="ItemsKeptTotal_Changed" TextInput="ItemsKeptTotal_Input" LostFocus="ItemsKeptTotal_LostFocus" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Total Revives to Keep" ToolTip="Maintains this many Revives during recycle phase." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfRevivesToKeep}" TextChanged="ItemsKeptTotal_Changed" TextInput="ItemsKeptTotal_Input" LostFocus="ItemsKeptTotal_LostFocus" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Total Berries to Keep" ToolTip="Maintains this many Berries during recycle phase." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfBerriesToKeep}" TextChanged="ItemsKeptTotal_Changed" TextInput="ItemsKeptTotal_Input" LostFocus="ItemsKeptTotal_LostFocus" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Total Items Being Kept" ToolTip="This is how many total items you are asking NecroBot to keep during recycle." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalItemsBeingKept}" IsReadOnly="True" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Use Egg Incubators" IsChecked="{Binding Settings.UseEggIncubators}" ToolTip="If checked, egg incubation will be automated." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Use Lucky Eggs Constantly" IsChecked="{Binding Settings.UseLuckyEggConstantly}" ToolTip="QED." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Use Lucky Eggs Min Pokemon" ToolTip="QED." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseLuckyEggsMinPokemonAmount}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Use Lucky Eggs While Evolving" IsChecked="{Binding Settings.UseLuckyEggsWhileEvolving}" ToolTip="If checked, will use a Lucky Egg prior to doing evolves for boosted XP." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Use Incense Constantly" IsChecked="{Binding Settings.UseIncenseConstantly}" ToolTip="If checked, will always use incense if any are available in inventory." />
+                        </StackPanel>
+                    </StackPanel>
                 </ScrollViewer>
             </TabItem>
 

@@ -3,6 +3,9 @@ using System.Windows;
 using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.ConfigUI.Models;
 using System.IO;
+using PokemonGo.RocketAPI.Enums;
+using System.Collections.Generic;
+using PoGo.NecroBot.Logic.Utils;
 
 namespace PoGo.NecroBot.ConfigUI
 {
@@ -21,6 +24,34 @@ namespace PoGo.NecroBot.ConfigUI
         public static readonly DependencyProperty SettingsProperty =
             DependencyProperty.Register("Settings", typeof(ObservableSettings), typeof(MainWindow), new PropertyMetadata(null));
 
+        public bool IsGoogleAuthShowing
+        {
+            get { return (bool)GetValue(IsGoogleAuthShowingProperty); }
+            set { SetValue(IsGoogleAuthShowingProperty, value); }
+        }
+        public static readonly DependencyProperty IsGoogleAuthShowingProperty =
+            DependencyProperty.Register("IsGoogleAuthShowing", typeof(bool), typeof(MainWindow), new PropertyMetadata(true));
+
+        public bool IsCustomDevicePackage
+        {
+            get { return (bool)GetValue(IsCustomDevicePackageProperty); }
+            set { SetValue(IsCustomDevicePackageProperty, value); }
+        }
+        public static readonly DependencyProperty IsCustomDevicePackageProperty =
+            DependencyProperty.Register("IsCustomDevicePackage", typeof(bool), typeof(MainWindow), new PropertyMetadata(false));
+
+        public List<string> DevicePackageCollection
+        {
+            get { return (List<string>)GetValue(DevicePackageCollectionProperty); }
+            set { SetValue(DevicePackageCollectionProperty, value); }
+        }
+        public static readonly DependencyProperty DevicePackageCollectionProperty =
+            DependencyProperty.Register("DevicePackageCollection", typeof(List<string>), typeof(MainWindow), new PropertyMetadata(new List<string>()));
+
+
+
+
+
 
 
         public MainWindow()
@@ -32,6 +63,10 @@ namespace PoGo.NecroBot.ConfigUI
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            DevicePackageCollection.Add("custom");
+            DevicePackageCollection.Add("random");
+            foreach (string key in DeviceInfoHelper.DeviceInfoSets.Keys)
+                DevicePackageCollection.Add(key);
             ReloadButton_Click(this, null);
         }
 
@@ -59,5 +94,31 @@ namespace PoGo.NecroBot.ConfigUI
             _set.Save(configFile);
             _set.Auth.Save(authFile);
         }
+
+        private void AuthType_Changed(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            IsGoogleAuthShowing = (AuthType.Google == (AuthType)e.AddedItems[0]);
+        }
+
+        private void DevicePackage_Changed(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            IsCustomDevicePackage = e.AddedItems[0].Equals("custom");
+        }
+
+        private void ItemsKeptTotal_Changed(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            Settings.TotalItemsBeingKept = 1;
+        }
+
+        private void ItemsKeptTotal_Input(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            Settings.TotalItemsBeingKept = 1;
+        }
+
+        private void ItemsKeptTotal_LostFocus(object sender, RoutedEventArgs e)
+        {
+            Settings.TotalItemsBeingKept = 1;
+        }
+
     }
 }
