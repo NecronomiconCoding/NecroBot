@@ -48,7 +48,7 @@
       "Key": "eventProfileLogin",
       "Value": "Kullanıcı Adı: {0}"
     },
-	{
+    {
       "Key": "eventUsedIncense",
       "Value": "Tütsü(Incense) kullanıldı. Kalan süre: {0}"
     },
@@ -240,7 +240,7 @@
       "Key": "accessTokenExpired",
       "Value": "PTC oturumu sonlandı. Tekrar oturum açılıyor..."
     },
-	{
+    {
       "Key": "invalidResponse",
       "Value": "Niantic sunucuları tepki vermiyor."
     },
@@ -644,16 +644,28 @@
       "Key": "firstStartSetupDefaultLongConfirm",
       "Value": "Boylam(longitude) onaylandı: {0}"
     },
-    {
-      "Key": "SoftBanBypassed",
-      "Value": "Başarıyla açıldı!"
-    },
-    {
+	{
       "Key": "firstStartSetupCompleted",
       "Value": "### KURULUM TAMAMLANDI ###"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value": "--- Pokedex catched --- \n"
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value": "--- Pokedex needed --- \n"
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value": "#{0} Name: {1} \n"
     }
   ],
-	"PokemonStrings": [
+  "PokemonStrings": [
     {
       "Key": "bulbasaur",
       "Value": "Bulbasaur"
