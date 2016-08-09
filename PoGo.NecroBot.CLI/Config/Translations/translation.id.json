@@ -413,6 +413,18 @@
       "Value": "{0} - Waktu aktif {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Ditransfer: {6:n0} | Didaur ulang: {7:n0}"
     },
     {
+      "Key": "profileStatsTemplateString",
+      "Value": "----- LVL {0} | {1} ----- \n EXP: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang disebarkan: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang dievolusikan: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9} KM"
+    },
+    {
+      "Key": "showPokeTemplate",
+      "Value": "\n CP {0} | Nama: {1}"
+    },
+    {
+      "Key": "helpTemplate",
+      "Value": "Perintah: \n \n /top <jumlah> - Menampilkan Pokemon tertinggimu.. \n /all - Menampilkan semua Pokemon-mu. \n /profile - Menampilkan profilmu. \n /loc - Menampilkan lokasimu. \n /items - Menampilkan barangmu."
+    },
+    {
       "Key": "statsXpTemplateString",
       "Value": "{0} (level berikutnya dalam {1} jam {2} menit | {3:n0}/{4:n0} XP)"
     },
@@ -431,6 +443,10 @@
     {
       "Key": "googleError",
       "Value": "Pastikan kamu memasukkan email & password yang benar."
+    },
+    {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
     },
     {
       "Key": "missingCredentialsGoogle",

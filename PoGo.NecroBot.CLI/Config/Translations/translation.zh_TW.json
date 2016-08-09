@@ -445,6 +445,10 @@
       "Value": "請確認輸入了正確的信箱地址和密碼。"
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "您需要在 auth.json 中填寫 Google 帳戶和密碼！"
     },

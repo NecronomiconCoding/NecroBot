@@ -445,6 +445,10 @@
       "Value": "Đảm bảo rằng bạn đã điền đúng Email & Password."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Bạn cần điền GoogleUsername và GooglePassword trong auth.json!"
     },
