@@ -133,7 +133,10 @@ namespace PoGo.NecroBot.Logic.Common
             }
             catch (Exception ex)
             {
-                throw ex.InnerException;
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = ex.InnerException.ToString()
+                });
             }
         }
         public void HandleApiSuccess(RequestEnvelope request, ResponseEnvelope response)
