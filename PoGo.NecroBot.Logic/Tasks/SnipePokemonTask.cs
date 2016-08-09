@@ -276,7 +276,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                         Bounds = new Location(location.Latitude, location.Longitude),
                                         PokemonId = location.Id,
                                         Source = "PokeSnipers.com",
-                                        //Iv = location.IV
+                                        Iv = location.IV
                                     });
 
                                     if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1,
@@ -528,6 +528,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             socket.On("pokemons", (msg) =>
             {
+                socket.Close();
                 JArray data = JArray.FromObject(msg);
                 foreach (var pokeToken in data.Children())
                 {
@@ -541,12 +542,14 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_ERROR, () =>
             {
+                socket.Close();
                 hasError = true;
                 waitforbroadcast.Set();
             });
 
             socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_CONNECT_ERROR, () =>
             {
+                socket.Close();
                 hasError = true;
                 waitforbroadcast.Set();
             });
