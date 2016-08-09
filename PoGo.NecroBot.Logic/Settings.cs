@@ -264,7 +264,7 @@ namespace PoGo.NecroBot.Logic
         //console options
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool DetailedCountsBeforeRecycling;
 
         [DefaultValue(3)]
