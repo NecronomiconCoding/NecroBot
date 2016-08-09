@@ -10,7 +10,7 @@
     },
     {
       "Key": "ultraPokeball",
-      "Value": "Gigamegaszuper pokélabda"
+      "Value": "Ultra pokélabda"
     },
     {
       "Key": "masterPokeball",
@@ -26,7 +26,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Nincs használható pokéstopp a környéken. Talán a megadott maximális távolságod túl kicsi??"
+      "Value": "Nincs használható pokéstop a környéken. Talán a megadott maximális távolságod túl kicsi??"
     },
     {
       "Key": "eventFortUsed",
@@ -66,11 +66,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Esély: {7}% | {8}m távolságra | with a {9} ({10} maradt). | {11} kapott EXP | {12} | szél.: {13} hossz.: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Esély: {7}% | {8}m távolságra | with a {9} ({10} maradt). | szél.: {11} hossz.: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -214,7 +214,7 @@
     },
     {
       "Key": "couldntCopyToClipboard2",
-      "Value": "Goto: {0} & enter {1}"
+      "Value": "Látogasd meg: {0} & enter {1}"
     },
     {
       "Key": "realisticTravelDetected",
@@ -278,19 +278,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Pokélabdák: {0} | Szuper pokélabdák: {1} | Gigamegaszuper pokélabdák: {2} | Mester pokélabdák: {3}"
+      "Value": "Pokélabdák: {0} | Szuper pokélabdák: {1} | Ultra pokélabdák: {2} | Mester pokélabdák: {3}"
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "Főzetek: {0} | Szuper főzetek: {1} | Hiper főzetek: {2} | Maximum főzeteks: {3}"
     },
     {
       "Key": "CurrentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
+      "Value": "Újraélesztő: {0} | Maximum újraélesztő: {1}"
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "Málnák: {0} | Vonzók: {1} | Szerencsetojások: {2} | Csalik: {3}"
     },
     {
       "Key": "checkingForBallsToRecycle",
@@ -414,11 +414,11 @@
     },
     {
       "Key": "googleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "A Google szerverek valószínűleg túlterheltek vagy leálltak, légy türelmes és próbáld újra később."
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "KLi kell töltened a GoogleUsername és GooglePassword sorokat az auth.json fájlban!"
+      "Value": "Ki kell töltened a GoogleUsername és GooglePassword sorokat az auth.json fájlban!"
     },
     {
       "Key": "missingCredentialsPtc",
@@ -450,19 +450,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value":  "--- Regisztrált pokémonok a Pokédexben --- \n"  
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value":  "#{0} Név: {1} | Elfogva: {2} | Látott: {3} \n"  
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value":  "--- Regisztrálatlan pokémonok --- \n"  
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value":  "#{0} Név: {1} \n"  
     }
   ],
   "PokemonStrings": [
