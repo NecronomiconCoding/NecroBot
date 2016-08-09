@@ -114,6 +114,9 @@
     <Compile Include="PoGoUtils\PokemonInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BotService.cs" />
+    <Compile Include="Tasks\custom\CatchRemotePokemonsTask.cs" />
+    <Compile Include="Tasks\custom\FarmControl.cs" />
+    <Compile Include="Tasks\custom\RarePokemonsFactory.cs" />
     <Compile Include="Tasks\EggsListTask.cs" />
     <Compile Include="Tasks\EvolveSpecificPokemonTask.cs" />
     <Compile Include="Tasks\FavoritePokemonTask.cs" />

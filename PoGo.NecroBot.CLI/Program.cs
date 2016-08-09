@@ -14,6 +14,7 @@ using System.IO;
 using System.Net;
 using PoGo.NecroBot.CLI.Resources;
 using System.Reflection;
+using PoGo.NecroBot.Logic.Tasks.custom;
 
 #endregion
 
@@ -161,8 +162,53 @@ namespace PoGo.NecroBot.CLI
                 Console.Clear();
             }
             catch (IOException) { }
+            while (true)
+            {
+                try
+                {
+                    string enter = Console.ReadLine();
+                    if (enter == "stop")
+                    {
+                        FarmControl.stopping = true;
+                    }
+                    else if (enter == "autoFarm")
+                    {
+                        FarmControl.autoFarm = !FarmControl.autoFarm;
+                    }
+                    else if (enter == "go")
+                    {
+                        FarmControl.stopping = false;
+                        FarmControl.stoped = false;
+                    }
+                    else if (enter.Contains(","))
+                    {
+                        string[] tude = enter.Split(new string[] { "," }, StringSplitOptions.RemoveEmptyEntries);
+                        if (tude.Length == 2)
+                        {
+                            FarmControl.flyLatitude = Convert.ToDouble(tude[0].Trim());
+                            FarmControl.flyLongitude = Convert.ToDouble(tude[1].Trim());
+                            FarmControl.stopping = true;
+                            Logger.Write("Starting Flying", LogLevel.Info);
+                            FarmControl.flying = true;
+                        }
+                        if (tude.Length == 3)
+                        {
+                            FarmControl.flyLatitude = Convert.ToDouble(tude[0].Trim());
+                            FarmControl.flyLongitude = Convert.ToDouble(tude[1].Trim());
+                            FarmControl.flyCatchName = tude[2];
+                            FarmControl.stopping = true;
+                            Logger.Write("Starting Flying", LogLevel.Info);
+                            FarmControl.flying = true;
+                        }
+                    }
+                }
+                catch (Exception)
+                {
 
-            QuitEvent.WaitOne();
+                    Logger.Write("Entering Error", LogLevel.Error);
+                }
+            }
+            //QuitEvent.WaitOne();
         }
 
         private static void Navigation_UpdatePositionEvent(double lat, double lng)

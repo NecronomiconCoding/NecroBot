@@ -3,6 +3,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Tasks;
+using PoGo.NecroBot.Logic.Tasks.custom;
+using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -12,6 +14,21 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
+            if (FarmControl.stopping)
+            {
+                if (FarmControl.stoped && FarmControl.flying)
+                {
+                    await CatchRemotePokemonsTask.Execute(session, cancellationToken);
+                }
+                if (!FarmControl.stoped)
+                {
+                    FarmControl.stoped = true;
+                    Logger.Write("stopped", LogLevel.Warning);
+                }
+                await Task.Delay(3000);
+                return this;
+            }
+            FarmControl.stoped = false;
 
             if (session.LogicSettings.EvolveAllPokemonAboveIv || session.LogicSettings.EvolveAllPokemonWithEnoughCandy)
             {
@@ -57,7 +74,7 @@ namespace PoGo.NecroBot.Logic.State
                 await UseIncubatorsTask.Execute(session, cancellationToken);
             }
 
-            if (session.LogicSettings.UseGpxPathing)
+            if (session.LogicSettings.UseGpxPathing && !FarmControl.stopping)
             {
                 await FarmPokestopsGpxTask.Execute(session, cancellationToken);
             }

@@ -14,6 +14,7 @@ using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Responses;
+using PoGo.NecroBot.Logic.Tasks.custom;
 
 #endregion
 
@@ -26,6 +27,10 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
+            if(FarmControl.stopping)
+            {
+                return;
+            }
 
             var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
                 session.Settings.DefaultLatitude, session.Settings.DefaultLongitude,
@@ -63,7 +68,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             while (pokestopList.Any())
             {
                 cancellationToken.ThrowIfCancellationRequested();
-
+                if (FarmControl.stopping)
+                {
+                    return;
+                }
                 //resort
                 pokestopList =
                     pokestopList.OrderBy(
@@ -104,7 +112,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                 do
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-
+                    if (FarmControl.stopping)
+                    {
+                        return;
+                    }
                     fortSearch =
                         await session.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                     if (fortSearch.ExperienceAwarded > 0 && timesZeroXPawarded > 0) timesZeroXPawarded = 0;
@@ -206,6 +217,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
                 {
+                    if (FarmControl.stopping)
+                    {
+                        return;
+                    }
                     await SnipePokemonTask.Execute(session, cancellationToken);
                 }
             }

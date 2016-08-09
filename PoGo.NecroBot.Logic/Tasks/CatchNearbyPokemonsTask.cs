@@ -11,6 +11,7 @@ using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
+using PoGo.NecroBot.Logic.Tasks.custom;
 
 #endregion
 
@@ -21,6 +22,10 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
+            if (FarmControl.stopping)
+            {
+                return;
+            }
             if (!session.LogicSettings.CatchPokemon) return;
 
             Logger.Write(session.Translation.GetTranslation(TranslationString.LookingForPokemon), LogLevel.Debug);
@@ -29,7 +34,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             foreach (var pokemon in pokemons)
             {
                 cancellationToken.ThrowIfCancellationRequested();
-
+                if (FarmControl.stopping)
+                {
+                    return;
+                }
                 var pokeBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemPokeBall);
                 var greatBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemGreatBall);
                 var ultraBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
