@@ -140,9 +140,10 @@ namespace PoGo.NecroBot.Logic.Service
                     break;
                 case "/pokedex":
                     var pokedex = session.Inventory.GetPokeDexItems().Result;
+                    var pokedexSort = pokedex.OrderBy(x => x.InventoryItemData.PokedexEntry.PokemonId);
 
                     answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexCatchedTelegram);
-                    foreach (var pokedexItem in pokedex)
+                    foreach (var pokedexItem in pokedexSort)
                     {
                         answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonCatchedTelegram, Convert.ToInt32(pokedexItem.InventoryItemData.PokedexEntry.PokemonId), session.Translation.GetPokemonTranslation(pokedexItem.InventoryItemData.PokedexEntry.PokemonId), pokedexItem.InventoryItemData.PokedexEntry.TimesCaptured, pokedexItem.InventoryItemData.PokedexEntry.TimesEncountered);
 
@@ -155,11 +156,14 @@ namespace PoGo.NecroBot.Logic.Service
 
                     var pokemonsToCapture = Enum.GetValues(typeof(PokemonId)).Cast<PokemonId>().Except(pokedex.Select(x => x.InventoryItemData.PokedexEntry.PokemonId));
 
+                    SendMessage(message.Chat.Id, answerTextmessage);
+                    answerTextmessage =  "";
+
                     answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexNeededTelegram);
 
                     foreach (var pokedexItem in pokemonsToCapture)
                     {
-                        answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonCatchedTelegram, Convert.ToInt32(pokedexItem), session.Translation.GetPokemonTranslation(pokedexItem));
+                        answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonNeededTelegram, Convert.ToInt32(pokedexItem), session.Translation.GetPokemonTranslation(pokedexItem));
 
                         if (answerTextmessage.Length > 3800)
                         {
@@ -167,21 +171,6 @@ namespace PoGo.NecroBot.Logic.Service
                             answerTextmessage = "";
                         }
                     }
-
-                    /* answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexNeededTelegram);
-                    foreach (var pokedexitem in pokedex)
-                    {
-                        if (pokedexitem.InventoryItemData.PokedexEntry.TimesCaptured == 0)
-                        {
-                            answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonNeededTelegram, pokedexitem.InventoryItemData.PokedexEntry.PokemonId, session.Translation.GetPokemonTranslation(pokedexitem.InventoryItemData.PokedexEntry.PokemonId), pokedexitem.InventoryItemData.PokedexEntry.TimesEncountered);
-                        }
-
-                        if (answerTextmessage.Length > 3800)
-                        {
-                            SendMessage(message.Chat.Id, answerTextmessage);
-                            answerTextmessage = "";
-                        }
-                    } */
                     SendMessage(message.Chat.Id, answerTextmessage);
 
                     break;

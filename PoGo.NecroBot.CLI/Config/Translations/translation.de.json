@@ -489,6 +489,22 @@
     {
       "Key": "waitingForMorePokemonToEvolve",
       "Value": "Warte mit Entwicklungen von {0} Pokémon bis {1} weitere gefangen wurden! ({2}/{3} bis {4}% Inventar Auslastung)"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- Pokedex catched --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- Pokedex needed --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
   "PokemonStrings": [
