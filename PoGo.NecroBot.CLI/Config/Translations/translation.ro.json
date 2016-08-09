@@ -98,7 +98,7 @@
     },
     {
       "Key": "eventUseBerry",
-      "Value": "Folosite {0} | {1} rămase"
+      "Value": "{0} folosită | {1} rămase"
     },
     {
       "Key": "itemRazzBerry",
@@ -422,7 +422,19 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Durată de funcționare {1} - Nivel: {2} | EXP/ORĂ: {3:0} | POKEMONI/ORĂ: {4:0} | Praf de stele: {5:0} | Transferați: {6:0} | Reciclați: {7:0}"
+      "Value": "{0} - Durată de funcționare {1} - Nivel: {2} | EXP/H: {3:0} | P/H: {4:0} | Praf de stele: {5:0} | Transferați: {6:0} | Reciclați: {7:0}"
+    },
+    {
+      "Key": "profileStatsTemplateString",
+      "Value": "----- NIVEL {0} | {1} ----- \n Experiență: {2}/{3} \n Pokemoni prinși: {4} \n Pokemons deployed: {5} \n Pokestopuri vizitate: {6} \n Ouă eclozate: {6} \n Pokemoni evoluați: {7} \n Intrări în pokedex: {8} \n KM străbătuți: {9}"
+    },
+    {
+      "Key": "showPokeTemplate",
+      "Value": "\n CP {0} | Nume: {1}"
+    },
+    {
+      "Key": "helpTemplate",
+      "Value": "Comenzi: \n \n /top <cantitate> - Afișează pokemonii tăi de top. \n /all - Afișează toți pokemonii tăi. \n /profile - Afișează profilul tău. \n /loc - Afișează locația ta. \n /items - Afișează obiectele tale."
     },
     {
       "Key": "statsXpTemplateString",
@@ -446,7 +458,7 @@
     },
     {
       "Key": "googleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "Serverele Google sunt probabil căzute. Te rugăm să ai răbdare și să pornești botul mai târziu."
     },
     {
       "Key": "missingCredentialsGoogle",
@@ -458,15 +470,15 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Sniper] Se scanează pentru pokemoni țintibili la {0}..."
+      "Value": "Se scanează pentru pokemoni țintibili la {0}..."
     },
     {
       "Key": "snipeScanEx",
-      "Value": "[Sniper] Țintesc un pokemon {0} cu {1} IV la {2}..."
+      "Value": "Țintesc un pokemon {0} cu IV {1} la {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Sniper] Niciun pokemon găsit pentru a fi țintit!"
+      "Value": "Nu s-a găsit niciun pokemon în intervalul definit de SnipingScanOffset!"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
