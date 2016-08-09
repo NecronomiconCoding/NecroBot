@@ -109,6 +109,7 @@ namespace PoGo.NecroBot.Logic
 
         int DelayBetweenPokemonCatch { get; }
         bool AutomaticallyLevelUpPokemon { get; }
+        bool OnlyUpgradeFaveriots { get; }
         bool UseLevelUpList { get; }
         string LevelUpByCPorIv { get; }
         float UpgradePokemonCpMinimum { get; }
