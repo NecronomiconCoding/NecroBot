@@ -2,7 +2,7 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "PokeBall"
+      "Value": "PokéBall"
     },
     {
       "Key": "greatPokeball",
@@ -27,7 +27,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Bu alanda uygun PokeStop bulunamadı. Tanımladığın en fazla mesafe değeri doğru mu?"
+      "Value": "Bu alanda uygun PokéStop bulunamadı. Tanımladığın en fazla mesafe değeri doğru mu?"
     },
     {
       "Key": "eventFortUsed",
@@ -39,7 +39,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "({1}m) sonra \"{0}\" PokeStop una ulaşılacak."
+      "Value": "({1}m) sonra \"{0}\" PokéStop una ulaşılacak."
     },
     {
       "Key": "eventProfileLogin",
@@ -76,7 +76,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Pokeball yok - Kaçırılan pokemon: {0} (Savaş Puanı(CP): {1})"
+      "Value": "Pokéball yok - Kaçırılan pokémon: {0} (Savaş Puanı(CP): {1})"
     },
     {
       "Key": "catchStatusAttempt",
@@ -96,7 +96,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokemonlar"
+      "Value": "Pokémonlar"
     },
     {
       "Key": "commonWordPerfect",
@@ -256,15 +256,15 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Tütsü(Incense) pokemonu aranıyor..."
+      "Value": "Tütsü(Incense) pokémonu aranıyor..."
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Pokemon aranıyor..."
+      "Value": "Pokémon aranıyor..."
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Yem(Lure) pokemonu aranıyor..."
+      "Value": "Yem(Lure) pokémonu aranıyor..."
     },
     {
       "Key": "pokemonSkipped",
@@ -272,12 +272,12 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Pokemon envanteri dolu. Pokemonlar aktarılıyor..."
+      "Value": "Pokémon envanteri dolu. Pokémonlar aktarılıyor..."
     },
     {
       "Key": "invFullTransferManually",
       "Value":
-        "Pokemon envanteri dolu. Pokemonları aktararak yer açın veya ayarlarda \"TransferDuplicatePokemon\" değerini \"true\" atayın."
+        "Pokémon envanteri dolu. Pokémonları aktararak yer açın veya ayarlarda \"TransferDuplicatePokemon\" değerini \"true\" atayın."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -285,11 +285,11 @@
     },
     {
       "Key": "encounterProblem",
-      "Value": "Pokemonla karşılaşmada sorun: {0}"
+      "Value": "Pokémonla karşılaşmada sorun: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Pokemonla karşılaşmada sorun: Yem(Lure) pokemonu {0}"
+      "Value": "Pokémonla karşılaşmada sorun: Yem(Lure) pokémonu {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -297,11 +297,11 @@
     },
     {
       "Key": "pokemonRename",
-      "Value": "Pokemon {0} ({1}) ismi değiştirildi. ({2} -> {3})"
+      "Value": "Pokémon {0} ({1}) ismi değiştirildi. ({2} -> {3})"
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Pokemon Yoksayma Filtresi] - {0} ayarlarda belirtildiği üzere yoksayıldı."
+      "Value": "[Pokémon Yoksayma Filtresi] - {0} ayarlarda belirtildiği üzere yoksayıldı."
     },
     {
       "Key": "catchStatusAttempt",
@@ -388,11 +388,11 @@
     },
     {
       "Key": "snipeScanEx",
-      "Value": "[Keskin Nişancı] {1} mükemmellikte bir {0} pokemonuna, {2} noktasında nişan alındı..."
+      "Value": "[Keskin Nişancı] {1} mükemmellikte bir {0} pokémonuna, {2} noktasında nişan alındı..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Keskin Nişancı] Nişan alınacak pokemon bulunamadı."
+      "Value": "[Keskin Nişancı] Nişan alınacak pokémon bulunamadı."
     },
     {
       "Key": "displayHighestMOVE1Header",
