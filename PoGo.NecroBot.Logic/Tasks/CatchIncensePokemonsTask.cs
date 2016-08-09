@@ -65,7 +65,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 Message = session.Translation.GetTranslation(TranslationString.InvFullTransferring)
                             });
-                            TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                            await  TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                         }
                         else
                             session.EventDispatcher.Send(new WarnEvent

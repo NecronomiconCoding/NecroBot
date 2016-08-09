@@ -20,6 +20,7 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Threading;
 
 #endregion
 
@@ -320,6 +321,8 @@ namespace PoGo.NecroBot.Logic
         //powerup
         [DefaultValue(false)]
         public bool AutomaticallyLevelUpPokemon;
+        [DefaultValue(true)]
+        public bool OnlyUpgradeFavorites;
 
         [DefaultValue((true))]
         public bool UseLevelUpList;
@@ -785,7 +788,26 @@ namespace PoGo.NecroBot.Logic
                 try
                 {
                     //if the file exists, load the settings
-                    var input = File.ReadAllText(configFile);
+                    string input = "";
+                    int count = 0;
+                    while (true)
+                    {
+                        try
+                        {
+                            input = File.ReadAllText(configFile);
+                            break;
+                        }
+                        catch (Exception exception)
+                        {
+                            if (count > 10)
+                            {
+                                //sometimes we have to wait close to config.json for access
+                                Logger.Write("configFile: " + exception.Message, LogLevel.Error);
+                            }
+                            count++;
+                            Thread.Sleep(1000);
+                        }
+                    };
 
                     var jsonSettings = new JsonSerializerSettings();
                     jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
@@ -1283,6 +1305,7 @@ namespace PoGo.NecroBot.Logic
         public int KeepMinLvl => _settings.KeepMinLvl;
         public bool UseKeepMinLvl => _settings.UseKeepMinLvl;
         public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;
+        public bool OnlyUpgradeFavorites => _settings.OnlyUpgradeFavorites;
         public bool UseLevelUpList => _settings.UseLevelUpList;
         public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;
         public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;

@@ -30,8 +30,8 @@ namespace PoGo.NecroBot.CLI
         private static void Main(string[] args)
         {
             string strCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-            var culture = CultureInfo.CreateSpecificCulture(strCulture);
 
+            var culture = CultureInfo.CreateSpecificCulture( "en" );
             CultureInfo.DefaultThreadCurrentCulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;
 
@@ -88,7 +88,7 @@ namespace PoGo.NecroBot.CLI
                     settings.DefaultLatitude = lat;
                     settings.DefaultLongitude = lng;
                 }
-                catch (Exception e) { }
+                catch (Exception) { }
             }
 
 
