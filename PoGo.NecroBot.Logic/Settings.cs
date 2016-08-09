@@ -293,9 +293,9 @@ namespace PoGo.NecroBot.Logic
         //position
         [DefaultValue(false)]
         public bool DisableHumanWalking;
-        [DefaultValue(40.778915)]
+        [DefaultValue(40.785091)]
         public double DefaultLatitude;
-        [DefaultValue(-73.962277)]
+        [DefaultValue(-73.968285)]
         public double DefaultLongitude;
         [DefaultValue(19.0)]
         public double WalkingSpeedInKilometerPerHour;
@@ -348,6 +348,12 @@ namespace PoGo.NecroBot.Logic
         public bool VerboseRecycling;
         [DefaultValue(90.0)]
         public double RecycleInventoryAtUsagePercentage;
+        [DefaultValue(false)]
+        public bool RandomizeRecycle;
+        [DefaultValue(5)]
+        public int RandomRecycleValue;
+        [DefaultValue(false)]
+        public bool DelayBetweenRecycleActions;
         //lucky, incense and berries
         [DefaultValue(true)]
         public bool UseEggIncubators;
@@ -380,6 +386,10 @@ namespace PoGo.NecroBot.Logic
         public bool GetOnlyVerifiedSniperInfoFromPokezz;
         [DefaultValue(true)]
         public bool GetSniperInfoFromPokeSnipers;
+        [DefaultValue(true)]
+        public bool GetSniperInfoFromPokeWatchers;
+        [DefaultValue(true)]
+        public bool SnipeWithSkiplagged;
         [DefaultValue(20)]
         public int MinPokeballsToSnipe;
         [DefaultValue(0)]
@@ -408,12 +418,6 @@ namespace PoGo.NecroBot.Logic
         public int MaxPokeballsPerPokemon;
         [DefaultValue(1000)]
         public int MaxTravelDistanceInMeters;
-        [DefaultValue(false)]
-        public bool RandomizeRecycle;
-        [DefaultValue(5)]
-        public int RandomRecycleValue;
-        [DefaultValue(false)]
-        public bool DelayBetweenRecycleActions;
         [DefaultValue(120)]
         public int TotalAmountOfPokeballsToKeep;
         [DefaultValue(80)]
@@ -1315,6 +1319,8 @@ namespace PoGo.NecroBot.Logic
         public bool GetSniperInfoFromPokezz => _settings.GetSniperInfoFromPokezz;
         public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.GetOnlyVerifiedSniperInfoFromPokezz;
         public bool GetSniperInfoFromPokeSnipers => _settings.GetSniperInfoFromPokeSnipers;
+        public bool GetSniperInfoFromPokeWatchers => _settings.GetSniperInfoFromPokeWatchers;
+        public bool SnipeWithSkiplagged => _settings.SnipeWithSkiplagged;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;

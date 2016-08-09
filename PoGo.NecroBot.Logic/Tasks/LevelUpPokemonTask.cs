@@ -18,7 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static List<PokemonData> Upgrade = new List<PokemonData>();
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            if (await session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
+            if (session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
                 return;
 
             var upgradablePokemon = await session.Inventory.GetPokemonToUpgrade();
@@ -38,7 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 if (session.LogicSettings.UseLevelUpList && PokemonToLevel!=null)
                 {
-                    for (int i = 0; i < PokemonToLevel.Count - 1; i++)
+                    for (int i = 0; i < PokemonToLevel.Count; i++)
                     {
                         if (PokemonToLevel.Contains(pokemon.PokemonId))
                         {
@@ -56,13 +56,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 Logger.Write("Pokemon Upgraded:" +
                                              session.Translation.GetPokemonTranslation(
                                                  upgradeResult.UpgradedPokemon.PokemonId) + ":" +
-                                             upgradeResult.UpgradedPokemon.Cp);
+                                             upgradeResult.UpgradedPokemon.Cp,LogLevel.LevelUp);
                                 upgradedNumber++;
                             }
 
                             if (upgradedNumber >= session.LogicSettings.AmountOfTimesToUpgradeLoop)
                                 break;
-                            break;
                         }
                         else
                         {
@@ -84,7 +83,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (upgradeResult.Result.ToString().ToLower().Contains("success"))
                     {
                         Logger.Write("Pokemon Upgraded:" + session.Translation.GetPokemonTranslation(upgradeResult.UpgradedPokemon.PokemonId) + ":" +
-                                        upgradeResult.UpgradedPokemon.Cp);
+                                        upgradeResult.UpgradedPokemon.Cp, LogLevel.LevelUp);
                         upgradedNumber++;
                     }
 
