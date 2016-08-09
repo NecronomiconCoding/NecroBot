@@ -26,7 +26,7 @@ using System.Threading;
 
 namespace PoGo.NecroBot.Logic
 {
-    internal class AuthSettings
+    public class AuthSettings
     {
         [JsonIgnore]
         private string _filePath;
@@ -275,7 +275,7 @@ namespace PoGo.NecroBot.Logic
     public class GlobalSettings
     {
         [JsonIgnore]
-        internal AuthSettings Auth = new AuthSettings();
+        public AuthSettings Auth = new AuthSettings();
         [JsonIgnore]
         public string GeneralConfigPath;
         [JsonIgnore]
