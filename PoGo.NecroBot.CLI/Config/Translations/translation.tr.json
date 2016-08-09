@@ -371,6 +371,10 @@
       "Value": "Doğru \"mail & şifre\" kombinasyonu girdiğinden emin ol."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "\"auth.json\" dosyasına GoogleUsername ve GooglePassword değerlerini girmen gerek!"
     },

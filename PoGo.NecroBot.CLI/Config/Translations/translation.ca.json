@@ -428,6 +428,10 @@
       "Value": "Assegura't d'haver introduit el correu electrònic i contrasenya correctes."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "És necessari omplir els camps GoogleUsername i GooglePassword a l'arxiu auth.json!"
     },

@@ -445,6 +445,10 @@
       "Value": "Pastikan kamu memasukkan email & password yang benar."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Kamu harus mengisi GoogleUsername dan GooglePassword di auth.json!"
     },
