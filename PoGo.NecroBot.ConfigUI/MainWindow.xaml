@@ -248,7 +248,73 @@
 
             <TabItem Header="Pokemon">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                    <StackPanel></StackPanel>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Rename Pokemon" IsChecked="{Binding Settings.RenamePokemon}" ToolTip="Check this box to enable automatic renaming of your Pokemon." />
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding Settings.RenamePokemon, Converter={StaticResource VisConv}}">
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <CheckBox Content="Rename only above IV" IsChecked="{Binding Settings.RenameOnlyAboveIv}" ToolTip="QED." />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Rename Template" ToolTip="A template for how your Pokemon will be renamed. Tokens: {0} is the Pokemon Species, {1} is the IV%" />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.RenameTemplate}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Automatically Upgrade Pokemon" IsChecked="{Binding Settings.AutomaticallyLevelUpPokemon}" ToolTip="Check this box to have the bot automatically apply upgrades using candies and stardust." />
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding Settings.AutomaticallyLevelUpPokemon, Converter={StaticResource VisConv}}">
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Amount Of Times To Upgrade Loop" ToolTip="QED." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.AmountOfTimesToUpgradeLoop}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Minimum Stardust Reserve for Upgrade" ToolTip="If you have less stardust than this, upgrades will not be performed." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.GetMinStarDustForLevelUp}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Upgrade by CP or IV" ToolTip="Should the CP or IV of Pokemon be used as the upgrade priority?" />
+                                <ComboBox ItemsSource="{Binding IpCvCollection}" SelectedItem="{Binding Settings.LevelUpByCPorIv}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Pokemon Above CP" ToolTip="QED." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UpgradePokemonCpMinimum}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Pokemon Above IV" ToolTip="QED." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UpgradePokemonIvMinimum}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Stats Operator" ToolTip="AND means the Pokemon must meet both IP and CV requirements - OR means either." />
+                                <ComboBox ItemsSource="{Binding OperatorsCollection}" SelectedItem="{Binding Settings.UpgradePokemonMinimumStatsOperator}" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Evolve All Pokemon Above IV" IsChecked="{Binding Settings.EvolveAllPokemonAboveIv}" ToolTip="QED." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}" Visibility="{Binding Settings.EvolveAllPokemonAboveIv, Converter={StaticResource VisConv}}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Evolve Above IV%" ToolTip="Decimals allowed." />
+                            <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.EvolveAboveIvValue}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Evolve All Pokemon with Enough Candy" IsChecked="{Binding Settings.EvolveAllPokemonWithEnoughCandy}" ToolTip="QED." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Evolve Pokemon at Storage Usage %" ToolTip="Decimals allowed." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.EvolveKeptPokemonsAtStorageUsagePercentage}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Keep Pokemon which Can Evolve" IsChecked="{Binding Settings.KeepPokemonsThatCanEvolve}" ToolTip="QED." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Auto-Favorite Pokemon" IsChecked="{Binding Settings.AutoFavoritePokemon}" ToolTip="QED." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}" Visibility="{Binding Settings.AutoFavoritePokemon, Converter={StaticResource VisConv}}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Favorite Pokemon above IV%" ToolTip="If the IV of a Pokemon is at or above this % it will be favorited and not transfered. Decimals allowed." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.FavoriteMinIvPercentage}" />
+                        </StackPanel>
+                    </StackPanel>
                 </ScrollViewer>
             </TabItem>
 

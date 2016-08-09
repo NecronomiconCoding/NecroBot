@@ -434,6 +434,143 @@ namespace PoGo.NecroBot.ConfigUI.Models
 
 
         #region POKEMON Properties
+
+        public bool RenamePokemon
+        {
+            get { return (bool)GetValue(RenamePokemonProperty); }
+            set { SetValue(RenamePokemonProperty, value); }
+        }
+        public static readonly DependencyProperty RenamePokemonProperty =
+            DependencyProperty.Register("RenamePokemon", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool RenameOnlyAboveIv
+        {
+            get { return (bool)GetValue(RenameOnlyAboveIvProperty); }
+            set { SetValue(RenameOnlyAboveIvProperty, value); }
+        }
+        public static readonly DependencyProperty RenameOnlyAboveIvProperty =
+            DependencyProperty.Register("RenameOnlyAboveIv", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public string RenameTemplate
+        {
+            get { return (string)GetValue(RenameTemplateProperty); }
+            set { SetValue(RenameTemplateProperty, value); }
+        }
+        public static readonly DependencyProperty RenameTemplateProperty =
+            DependencyProperty.Register("RenameTemplate", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+
+        public bool AutomaticallyLevelUpPokemon
+        {
+            get { return (bool)GetValue(AutomaticallyLevelUpPokemonProperty); }
+            set { SetValue(AutomaticallyLevelUpPokemonProperty, value); }
+        }
+        public static readonly DependencyProperty AutomaticallyLevelUpPokemonProperty =
+            DependencyProperty.Register("AutomaticallyLevelUpPokemon", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public int AmountOfTimesToUpgradeLoop
+        {
+            get { return (int)GetValue(AmountOfTimesToUpgradeLoopProperty); }
+            set { SetValue(AmountOfTimesToUpgradeLoopProperty, value); }
+        }
+        public static readonly DependencyProperty AmountOfTimesToUpgradeLoopProperty =
+            DependencyProperty.Register("AmountOfTimesToUpgradeLoop", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int GetMinStarDustForLevelUp
+        {
+            get { return (int)GetValue(GetMinStarDustForLevelUpProperty); }
+            set { SetValue(GetMinStarDustForLevelUpProperty, value); }
+        }
+        public static readonly DependencyProperty GetMinStarDustForLevelUpProperty =
+            DependencyProperty.Register("GetMinStarDustForLevelUp", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public string LevelUpByCPorIv
+        {
+            get { return (string)GetValue(LevelUpByCPorIvProperty); }
+            set { SetValue(LevelUpByCPorIvProperty, value); }
+        }
+        public static readonly DependencyProperty LevelUpByCPorIvProperty =
+            DependencyProperty.Register("LevelUpByCPorIv", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+
+        public float UpgradePokemonCpMinimum
+        {
+            get { return (float)GetValue(UpgradePokemonCpMinimumProperty); }
+            set { SetValue(UpgradePokemonCpMinimumProperty, value); }
+        }
+        public static readonly DependencyProperty UpgradePokemonCpMinimumProperty =
+            DependencyProperty.Register("UpgradePokemonCpMinimum", typeof(float), typeof(ObservableSettings), new PropertyMetadata(0.0f));
+
+        public float UpgradePokemonIvMinimum
+        {
+            get { return (float)GetValue(UpgradePokemonIvMinimumProperty); }
+            set { SetValue(UpgradePokemonIvMinimumProperty, value); }
+        }
+        public static readonly DependencyProperty UpgradePokemonIvMinimumProperty =
+            DependencyProperty.Register("UpgradePokemonIvMinimum", typeof(float), typeof(ObservableSettings), new PropertyMetadata(0.0f));
+
+        public string UpgradePokemonMinimumStatsOperator
+        {
+            get { return (string)GetValue(UpgradePokemonMinimumStatsOperatorProperty); }
+            set { SetValue(UpgradePokemonMinimumStatsOperatorProperty, value); }
+        }
+        public static readonly DependencyProperty UpgradePokemonMinimumStatsOperatorProperty =
+            DependencyProperty.Register("UpgradePokemonMinimumStatsOperator", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+
+        public float EvolveAboveIvValue
+        {
+            get { return (float)GetValue(EvolveAboveIvValueProperty); }
+            set { SetValue(EvolveAboveIvValueProperty, value); }
+        }
+        public static readonly DependencyProperty EvolveAboveIvValueProperty =
+            DependencyProperty.Register("EvolveAboveIvValue", typeof(float), typeof(ObservableSettings), new PropertyMetadata(0.0f));
+
+        public bool EvolveAllPokemonAboveIv
+        {
+            get { return (bool)GetValue(EvolveAllPokemonAboveIvProperty); }
+            set { SetValue(EvolveAllPokemonAboveIvProperty, value); }
+        }
+        public static readonly DependencyProperty EvolveAllPokemonAboveIvProperty =
+            DependencyProperty.Register("EvolveAllPokemonAboveIv", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool EvolveAllPokemonWithEnoughCandy
+        {
+            get { return (bool)GetValue(EvolveAllPokemonWithEnoughCandyProperty); }
+            set { SetValue(EvolveAllPokemonWithEnoughCandyProperty, value); }
+        }
+        public static readonly DependencyProperty EvolveAllPokemonWithEnoughCandyProperty =
+            DependencyProperty.Register("EvolveAllPokemonWithEnoughCandy", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public double EvolveKeptPokemonsAtStorageUsagePercentage
+        {
+            get { return (double)GetValue(EvolveKeptPokemonsAtStorageUsagePercentageProperty); }
+            set { SetValue(EvolveKeptPokemonsAtStorageUsagePercentageProperty, value); }
+        }
+        public static readonly DependencyProperty EvolveKeptPokemonsAtStorageUsagePercentageProperty =
+            DependencyProperty.Register("EvolveKeptPokemonsAtStorageUsagePercentage", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public bool KeepPokemonsThatCanEvolve
+        {
+            get { return (bool)GetValue(KeepPokemonsThatCanEvolveProperty); }
+            set { SetValue(KeepPokemonsThatCanEvolveProperty, value); }
+        }
+        public static readonly DependencyProperty KeepPokemonsThatCanEvolveProperty =
+            DependencyProperty.Register("KeepPokemonsThatCanEvolve", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public float FavoriteMinIvPercentage
+        {
+            get { return (float)GetValue(FavoriteMinIvPercentageProperty); }
+            set { SetValue(FavoriteMinIvPercentageProperty, value); }
+        }
+        public static readonly DependencyProperty FavoriteMinIvPercentageProperty =
+            DependencyProperty.Register("FavoriteMinIvPercentage", typeof(float), typeof(ObservableSettings), new PropertyMetadata(0.0f));
+
+        public bool AutoFavoritePokemon
+        {
+            get { return (bool)GetValue(AutoFavoritePokemonProperty); }
+            set { SetValue(AutoFavoritePokemonProperty, value); }
+        }
+        public static readonly DependencyProperty AutoFavoritePokemonProperty =
+            DependencyProperty.Register("AutoFavoritePokemon", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
         #endregion POKEMON Properties
 
 
@@ -520,6 +657,23 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.UseLuckyEggsWhileEvolving = set.UseLuckyEggsWhileEvolving;
             res.UseIncenseConstantly = set.UseIncenseConstantly;
             // POKEMON
+            res.RenamePokemon = set.RenamePokemon;
+            res.RenameOnlyAboveIv = set.RenameOnlyAboveIv;
+            res.RenameTemplate = set.RenameTemplate;
+            res.AutomaticallyLevelUpPokemon = set.AutomaticallyLevelUpPokemon;
+            res.AmountOfTimesToUpgradeLoop = set.AmountOfTimesToUpgradeLoop;
+            res.GetMinStarDustForLevelUp = set.GetMinStarDustForLevelUp;
+            res.LevelUpByCPorIv = set.LevelUpByCPorIv;
+            res.UpgradePokemonCpMinimum = set.UpgradePokemonCpMinimum;
+            res.UpgradePokemonIvMinimum = set.UpgradePokemonIvMinimum;
+            res.UpgradePokemonMinimumStatsOperator = set.UpgradePokemonMinimumStatsOperator;
+            res.EvolveAboveIvValue = set.EvolveAboveIvValue;
+            res.EvolveAllPokemonAboveIv = set.EvolveAllPokemonAboveIv;
+            res.EvolveAllPokemonWithEnoughCandy = set.EvolveAllPokemonWithEnoughCandy;
+            res.EvolveKeptPokemonsAtStorageUsagePercentage = set.EvolveKeptPokemonsAtStorageUsagePercentage;
+            res.KeepPokemonsThatCanEvolve = set.KeepPokemonsThatCanEvolve;
+            res.AutoFavoritePokemon = set.AutoFavoritePokemon;
+            res.FavoriteMinIvPercentage = set.FavoriteMinIvPercentage;
             // CAPTURE
             // TRANSFER
             // SNIPING
@@ -528,34 +682,6 @@ namespace PoGo.NecroBot.ConfigUI.Models
         }
 
         /*
-
-            POKEMONS
-
-            //pokemon
-        public bool RenamePokemon;
-        public bool RenameOnlyAboveIv;
-        public string RenameTemplate;
-
-            //powerup
-        public bool AutomaticallyLevelUpPokemon;
-        public int AmountOfTimesToUpgradeLoop;
-        public int GetMinStarDustForLevelUp;
-        public string LevelUpByCPorIv;
-        public float UpgradePokemonCpMinimum;
-        public float UpgradePokemonIvMinimum;
-        public string UpgradePokemonMinimumStatsOperator;
-
-            //evolve
-        public float EvolveAboveIvValue;
-        public bool EvolveAllPokemonAboveIv;
-        public bool EvolveAllPokemonWithEnoughCandy;
-        public double EvolveKeptPokemonsAtStorageUsagePercentage;
-        public bool KeepPokemonsThatCanEvolve;
-
-            //favorite
-        public float FavoriteMinIvPercentage;
-        public bool AutoFavoritePokemon;
-
             MISC
 
             //gpx
@@ -701,6 +827,23 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.UseLuckyEggsWhileEvolving = UseLuckyEggsWhileEvolving;
             gs.UseIncenseConstantly = UseIncenseConstantly;
             // POKEMON
+            gs.RenamePokemon = RenamePokemon;
+            gs.RenameOnlyAboveIv = RenameOnlyAboveIv;
+            gs.RenameTemplate = RenameTemplate;
+            gs.AutomaticallyLevelUpPokemon = AutomaticallyLevelUpPokemon;
+            gs.AmountOfTimesToUpgradeLoop = AmountOfTimesToUpgradeLoop;
+            gs.GetMinStarDustForLevelUp = GetMinStarDustForLevelUp;
+            gs.LevelUpByCPorIv = LevelUpByCPorIv;
+            gs.UpgradePokemonCpMinimum = UpgradePokemonCpMinimum;
+            gs.UpgradePokemonIvMinimum = UpgradePokemonIvMinimum;
+            gs.UpgradePokemonMinimumStatsOperator = UpgradePokemonMinimumStatsOperator;
+            gs.EvolveAboveIvValue = EvolveAboveIvValue;
+            gs.EvolveAllPokemonAboveIv = EvolveAllPokemonAboveIv;
+            gs.EvolveAllPokemonWithEnoughCandy = EvolveAllPokemonWithEnoughCandy;
+            gs.EvolveKeptPokemonsAtStorageUsagePercentage = EvolveKeptPokemonsAtStorageUsagePercentage;
+            gs.KeepPokemonsThatCanEvolve = KeepPokemonsThatCanEvolve;
+            gs.AutoFavoritePokemon = AutoFavoritePokemon;
+            gs.FavoriteMinIvPercentage = FavoriteMinIvPercentage;
             // CAPTURE
             // TRANSFER
             // SNIPING

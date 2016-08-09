@@ -48,8 +48,21 @@ namespace PoGo.NecroBot.ConfigUI
         public static readonly DependencyProperty DevicePackageCollectionProperty =
             DependencyProperty.Register("DevicePackageCollection", typeof(List<string>), typeof(MainWindow), new PropertyMetadata(new List<string>()));
 
+        public List<string> OperatorsCollection
+        {
+            get { return (List<string>)GetValue(OperatorsCollectionProperty); }
+            set { SetValue(OperatorsCollectionProperty, value); }
+        }
+        public static readonly DependencyProperty OperatorsCollectionProperty =
+            DependencyProperty.Register("OperatorsCollection", typeof(List<string>), typeof(MainWindow), new PropertyMetadata(new List<string>() { "or", "and" }));
 
-
+        public List<string> IpCvCollection
+        {
+            get { return (List<string>)GetValue(IpCvCollectionProperty); }
+            set { SetValue(IpCvCollectionProperty, value); }
+        }
+        public static readonly DependencyProperty IpCvCollectionProperty =
+            DependencyProperty.Register("IpCvCollection", typeof(List<string>), typeof(MainWindow), new PropertyMetadata(new List<string>() { "iv", "cp" }));
 
 
 
