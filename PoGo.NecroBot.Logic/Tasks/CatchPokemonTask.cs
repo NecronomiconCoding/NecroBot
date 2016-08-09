@@ -91,7 +91,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     
                     AmountOfBerries++;
-                    if (AmountOfBerries < session.LogicSettings.MaxBerriesToUsePerPokemon)
+                    if (AmountOfBerries <= session.LogicSettings.MaxBerriesToUsePerPokemon)
                     {
                         await
                        UseBerry(session,
