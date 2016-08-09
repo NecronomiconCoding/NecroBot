@@ -384,7 +384,7 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Krypskytt] Letar efter Pokemons på distans{0}..."
+      "Value": "[Krypskytt] Letar efter Pokemons vid {0}..."
     },
     {
       "Key": "noPokemonToSnipe",
