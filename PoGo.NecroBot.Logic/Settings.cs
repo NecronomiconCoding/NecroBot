@@ -301,6 +301,9 @@ namespace PoGo.NecroBot.Logic
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
+        //softban related
+        [DefaultValue(false)]
+        public bool FastSoftBanBypass;
         //delays
         [DefaultValue(500)]
         public int DelayBetweenPlayerActions;
@@ -489,7 +492,7 @@ namespace PoGo.NecroBot.Logic
             new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
         };
 
-
+        
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
@@ -1238,6 +1241,7 @@ namespace PoGo.NecroBot.Logic
         public float UpgradePokemonCpMinimum => _settings.UpgradePokemonCpMinimum;
         public string UpgradePokemonMinimumStatsOperator => _settings.UpgradePokemonMinimumStatsOperator;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
+        public bool FastSoftBanBypass => _settings.FastSoftBanBypass;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
@@ -1317,6 +1321,7 @@ namespace PoGo.NecroBot.Logic
         public bool SnipePokemonNotInPokedex => _settings.SnipePokemonNotInPokedex;
         public bool RandomizeRecycle => _settings.RandomizeRecycle;
         public int RandomRecycleValue => _settings.RandomRecycleValue;
+        public bool DelayBetweenRecycleActions => _settings.DelayBetweenRecycleActions;
         public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokeballsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
