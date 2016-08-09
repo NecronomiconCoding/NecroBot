@@ -14,7 +14,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session, ulong pokemonId)
         {
             var all = await session.Inventory.GetPokemons();
-            var pokemons = all.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax);
+            var pokemons = all.OrderBy(x => x.Cp).ThenBy(n => n.StaminaMax);
             var pokemon = pokemons.FirstOrDefault(p => p.Id == pokemonId);
 
             if (pokemon == null) return;
