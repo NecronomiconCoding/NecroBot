@@ -62,13 +62,13 @@ namespace PoGo.NecroBot.Logic.Service
                     {
                         times = Convert.ToInt32(messagetext[2]);
                     }
-                    else if (messagetext.Length >= 2)
+                    if (messagetext.Length >= 2)
                     {
-                        sortby = "iv";
+                        sortby = messagetext[1];
                     }
 
                     IEnumerable<PokemonData> topPokemons;
-                    if (sortby == "iv")
+                    if (sortby.Equals("iv"))
                     {
                         topPokemons = await session.Inventory.GetHighestsPerfect(times);
                     }
