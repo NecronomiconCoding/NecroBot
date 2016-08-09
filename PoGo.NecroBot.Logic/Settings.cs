@@ -341,6 +341,8 @@ namespace PoGo.NecroBot.Logic
         //position
         [DefaultValue(false)]
         public bool DisableHumanWalking;
+        [DefaultValue(false)]
+        public bool Teleport;
         [DefaultValue(40.785091)]
         public double DefaultLatitude;
         [DefaultValue(-73.968285)]
@@ -1403,6 +1405,7 @@ namespace PoGo.NecroBot.Logic
         public bool RandomizeRecycle => _settings.RandomizeRecycle;
         public int RandomRecycleValue => _settings.RandomRecycleValue;
         public bool DelayBetweenRecycleActions => _settings.DelayBetweenRecycleActions;
+        public bool Teleport => _settings.Teleport;
         public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokeballsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;

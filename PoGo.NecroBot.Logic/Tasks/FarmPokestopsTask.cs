@@ -79,6 +79,13 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
 
+                if (session.LogicSettings.Teleport)
+                {
+                    await session.Navigation.Teleport(new GeoCoordinate(fortInfo.Latitude, fortInfo.Longitude,
+                       session.Client.Settings.DefaultAltitude));
+                }
+                else
+                {
                     await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude, LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour,
                     async () =>
@@ -89,11 +96,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                         await CatchIncensePokemonsTask.Execute(session, cancellationToken);
                         return true;
                     }, cancellationToken, session.LogicSettings.DisableHumanWalking);
+                }
 
                 //Catch Lure Pokemon
                 if (pokeStop.LureInfo != null)
                 {
                     await CatchLurePokemonsTask.Execute(session, pokeStop, cancellationToken);
+                }
+
+                if (session.LogicSettings.Teleport)
+                {
+                    await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
                 }
 
                 FortSearchResponse fortSearch;
