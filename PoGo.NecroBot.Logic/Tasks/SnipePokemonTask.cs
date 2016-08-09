@@ -49,7 +49,6 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             latitude = lat;
             longitude = lon;
-            AddTimestamp = DateTime.Now;
         }
 
         public long Id { get; set; }
@@ -58,7 +57,9 @@ namespace PoGo.NecroBot.Logic.Tasks
         public double longitude { get; set; }
         public int pokemon_id { get; set; }
         public PokemonId pokemon_name { get; set; }
-        public DateTime AddTimestamp { get; set; }
+
+        [JsonIgnore]
+        public DateTime TimeStampAdded { get; set; } = DateTime.Now;
 
         public bool Equals(PokemonLocation obj)
         {
@@ -93,7 +94,6 @@ namespace PoGo.NecroBot.Logic.Tasks
         public double time { get; set; }
         public double lat { get; set; }
         public double lng { get; set; }
-        public int id { get; set; }
         public string iv { get; set; }
         public double _iv
         {
@@ -101,7 +101,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 try
                 {
-                    return Convert.ToDouble(iv);
+                    return Convert.ToDouble(iv, CultureInfo.InvariantCulture);
                 }
                 catch
                 {
@@ -110,18 +110,24 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
         public PokemonId name { get; set; }
-        public string[] skills { get; set; }
         public Boolean verified { get; set; }
-
     }
 
     public class PokemonLocation_pokesnipers
     {
         public int id { get; set; }
-        public int iv { get; set; }
+        public double iv { get; set; }
         public PokemonId name { get; set; }
         public string until { get; set; }
         public string coords { get; set; }
+    }
+
+    public class PokemonLocation_pokewatchers
+    {
+        public PokemonId pokemon { get; set; }
+        public double timeadded { get; set; }
+        public double timeend { get; set; }
+        public string cords { get; set; }
     }
 
     public class ScanResult
@@ -135,6 +141,12 @@ namespace PoGo.NecroBot.Logic.Tasks
         public string Status { get; set; }
         [JsonProperty("results")]
         public List<PokemonLocation_pokesnipers> pokemons { get; set; }
+    }
+
+    public class ScanResult_pokewatchers
+    {
+        public string Status { get; set; }
+        public List<PokemonLocation_pokewatchers> pokemons { get; set; }
     }
 
     public static class SnipePokemonTask
@@ -175,7 +187,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (_lastSnipe.AddMilliseconds(session.LogicSettings.MinDelayBetweenSnipes) > DateTime.Now)
                 return;
 
-            LocsVisited.RemoveAll(q => DateTime.Now > q.AddTimestamp.AddMinutes(15));
+            LocsVisited.RemoveAll(q => DateTime.Now > q.TimeStampAdded.AddMinutes(15));
             SnipeLocations.RemoveAll(x => DateTime.Now > x.TimeStampAdded.AddMinutes(15));
 
             if (await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsToSnipe, session, cancellationToken))
@@ -217,7 +229,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             _lastSnipe = DateTime.Now;
                             foreach (var location in _locationsToSnipe)
                             {
-                                if (location.ExpirationTimestamp > DateTime.Now.AddSeconds(10))
+                                if ((location.ExpirationTimestamp > DateTime.Now.AddSeconds(10)) && (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude))))
                                 {
                                     session.EventDispatcher.Send(new SnipeScanEvent
                                     {
@@ -248,7 +260,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             foreach (var location in _locationsToSnipe)
                             {
-                                if (location.ExpirationTimestamp > DateTime.Now.AddSeconds(10))
+                                if ((location.ExpirationTimestamp > DateTime.Now.AddSeconds(10)) && (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude))))
                                 {
                                     session.EventDispatcher.Send(new SnipeScanEvent
                                     {
@@ -278,7 +290,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         {
                             foreach (var location in _locationsToSnipe)
                             {
-                                if (location.ExpirationTimestamp > DateTime.Now.AddSeconds(10))
+                                if ((location.ExpirationTimestamp > DateTime.Now.AddSeconds(10)) && (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude))))
                                 {
                                     session.EventDispatcher.Send(new SnipeScanEvent
                                     {
@@ -295,6 +307,36 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                     //if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
                                         //LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
+                                }
+                            }
+                        }
+                    }
+
+                    if (session.LogicSettings.GetSniperInfoFromPokeWatchers)
+                    {
+                        _lastSnipe = DateTime.Now;
+                        var _locationsToSnipe = GetSniperInfoFrom_pokewatchers(session, pokemonIds);
+                        if (_locationsToSnipe.Any())
+                        {
+                            foreach (var location in _locationsToSnipe)
+                            {
+                                if ((location.ExpirationTimestamp > DateTime.Now.AddSeconds(10)) && (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude))))
+                                {
+                                    session.EventDispatcher.Send(new SnipeScanEvent
+                                    {
+                                        Bounds = new Location(location.Latitude, location.Longitude),
+                                        PokemonId = location.Id,
+                                        Source = "PokeWatchers.com",
+                                        Iv = location.IV
+                                    });
+
+                                    if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
+                                        return;
+
+                                    await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
+
+                                    //if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
+                                    //LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                 }
                             }
                         }
@@ -331,7 +373,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 foreach (var pokemonLocation in _locationsToSnipe)
                                 {
-                                    if (pokemonLocation.expires > (((DateTime.Now.ToUniversalTime() - (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))).TotalMilliseconds) + 10000))
+                                    if ((pokemonLocation.expires > (((DateTime.Now.ToUniversalTime() - (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))).TotalMilliseconds) + 10000)) && (!LocsVisited.Contains(new PokemonLocation(pokemonLocation.latitude, pokemonLocation.longitude))))
                                     {
                                         if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                             return;
@@ -625,11 +667,72 @@ namespace PoGo.NecroBot.Logic.Tasks
                         var SnipInfo = new SniperInfo();
                         SnipInfo.Id = pokemon.name;
                         string[] coordsArray = pokemon.coords.Split(',');
-                        SnipInfo.Latitude = Convert.ToDouble(coordsArray[0]);
-                        SnipInfo.Longitude = Convert.ToDouble(coordsArray[1]);
+                        SnipInfo.Latitude = Convert.ToDouble(coordsArray[0], CultureInfo.InvariantCulture);
+                        SnipInfo.Longitude = Convert.ToDouble(coordsArray[1], CultureInfo.InvariantCulture);
                         SnipInfo.TimeStampAdded = DateTime.Now;
                         SnipInfo.ExpirationTimestamp = Convert.ToDateTime(pokemon.until);
                         SnipInfo.IV = pokemon.iv;
+                        SnipeLocations.Add(SnipInfo);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
+                }
+                var locationsToSnipe = SnipeLocations?.Where(q =>
+                    (!session.LogicSettings.UseTransferIvForSnipe ||
+                    (q.IV == 0 && !session.LogicSettings.SnipeIgnoreUnknownIv) ||
+                    (q.IV >= session.Inventory.GetPokemonTransferFilter(q.Id).KeepMinIvPercentage)) &&
+                    !LocsVisited.Contains(new PokemonLocation(q.Latitude, q.Longitude))
+                    && !(q.ExpirationTimestamp != default(DateTime) &&
+                    q.ExpirationTimestamp > new DateTime(2016) &&
+                    // make absolutely sure that the server sent a correct datetime
+                    q.ExpirationTimestamp < DateTime.Now) &&
+                    (q.Id == PokemonId.Missingno || pokemonIds.Contains(q.Id))).ToList() ??
+                    new List<SniperInfo>();
+
+                return locationsToSnipe.OrderBy(q => q.ExpirationTimestamp).ToList();
+            }
+            else
+                return new List<SniperInfo>();
+        }
+
+        private static List<SniperInfo> GetSniperInfoFrom_pokewatchers(ISession session, List<PokemonId> pokemonIds)
+        {
+
+            var uri = $"http://pokewatchers.com/api.php?act=grab";
+
+            ScanResult_pokewatchers scanResult_pokewatchers;
+            try
+            {
+                var handler = new ClearanceHandler();
+
+                // Create a HttpClient that uses the handler.
+                var client = new HttpClient(handler);
+
+                // Use the HttpClient as usual. Any JS challenge will be solved automatically for you.
+                var fullresp = "{ \"pokemons\":" + client.GetStringAsync(uri).Result.Replace(" M", "Male").Replace(" F", "Female").Replace("Farfetch'd", "Farfetchd").Replace("Mr.Maleime", "MrMime") +"}";
+
+                scanResult_pokewatchers = JsonConvert.DeserializeObject<ScanResult_pokewatchers>(fullresp);
+            }
+            catch (Exception ex)
+            {
+                // most likely System.IO.IOException
+                session.EventDispatcher.Send(new ErrorEvent { Message = "(PokeWatchers.com) " + ex.Message });
+                return new List<SniperInfo>();
+            }
+            if (scanResult_pokewatchers.pokemons != null)
+            {
+                foreach (var pokemon in scanResult_pokewatchers.pokemons)
+                {
+                    try
+                    {
+                        var SnipInfo = new SniperInfo();
+                        SnipInfo.Id = pokemon.pokemon;
+                        string[] coordsArray = pokemon.cords.Split(',');
+                        SnipInfo.Latitude = Convert.ToDouble(coordsArray[0], CultureInfo.InvariantCulture);
+                        SnipInfo.Longitude = Convert.ToDouble(coordsArray[1], CultureInfo.InvariantCulture);
+                        SnipInfo.TimeStampAdded = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Math.Round(pokemon.timeadded / 1000d)).ToLocalTime();
+                        SnipInfo.ExpirationTimestamp = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Math.Round(pokemon.timeend / 1000d)).ToLocalTime();
                         SnipeLocations.Add(SnipInfo);
                     }
                     catch

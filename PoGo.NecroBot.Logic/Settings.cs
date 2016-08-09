@@ -381,6 +381,8 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(true)]
         public bool GetSniperInfoFromPokeSnipers;
         [DefaultValue(true)]
+        public bool GetSniperInfoFromPokeWatchers;
+        [DefaultValue(true)]
         public bool SnipeWithSkiplagged;
         [DefaultValue(20)]
         public int MinPokeballsToSnipe;
@@ -1317,6 +1319,7 @@ namespace PoGo.NecroBot.Logic
         public bool GetSniperInfoFromPokezz => _settings.GetSniperInfoFromPokezz;
         public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.GetOnlyVerifiedSniperInfoFromPokezz;
         public bool GetSniperInfoFromPokeSnipers => _settings.GetSniperInfoFromPokeSnipers;
+        public bool GetSniperInfoFromPokeWatchers => _settings.GetSniperInfoFromPokeWatchers;
         public bool SnipeWithSkiplagged => _settings.SnipeWithSkiplagged;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
