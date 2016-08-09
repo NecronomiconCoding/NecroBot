@@ -160,7 +160,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (fortSearch.ItemsAwarded.Count > 0)
                     {
                         await RecycleItemsTask.Execute(session, cancellationToken);
-                        await session.Inventory.RefreshCachedInventory();
+                        session.Inventory.RefreshCachedInventory();
                     }
 
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
