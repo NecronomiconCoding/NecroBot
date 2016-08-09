@@ -126,11 +126,11 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "mükemmel"
+      "Value": "IV"
     },
     {
       "Key": "commonWordName",
-      "Value": "isim"
+      "Value": "İSİM"
     },
 	{
       "Key": "commonWordUnknown",
@@ -223,6 +223,10 @@
 	{
       "Key": "logEntryNew",
       "Value": "YENİ"
+    },
+	{
+      "Key": "logEntrySoftBan",
+      "Value": "SOFT BAN"
     },
     {
       "Key": "loggingIn",
@@ -422,23 +426,23 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Çalışma Süresi {1} - Seviye: {2} | XP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Aktarılan Pokémon: {6:n0} | Atılan Eşya: {7:n0}"
+      "Value": "{0} - Süre {1} - Seviye: {2} | XP/SA: {3:n0} | P/SA: {4:n0} | Stardust: {5:n0} | Aktarılan Pokémon: {6:n0} | Atılan Eşya: {7:n0}"
     },
 	{
       "Key": "profileStatsTemplateString",
-      "Value": "----- SEVİYE {0} | {1} ----- \n Tecrübe(XP): {2}/{3} \n Yakalanan Pokémon: {4} \n Görülen Pokémon: {5} \n Ziyaret Edilen Pokéstop: {6} \n Çatlatılan Yumurta(Egg): {6} \n Geliştirilen(Evolve) Pokémon: {7} \n Pokédex Kayıtları: {8} \n Yürünen Mesafe: {9}km"
+      "Value": "----- SEVİYE {0} | {1} ----- \n Tecrübe(XP): {2}/{3} \n Yakalanan Pokémon: {4} \n Görülen Pokémon: {5} \n Ziyaret Edilen Pokéstop: {6} \n Çatlatılan Yumurta(Egg): {7} \n Geliştirilen(Evolve) Pokémon: {8} \n Pokédex Kayıtları: {9} \n Yürünen Mesafe: {10}km  \n Pokémonlar: {11}/{12}"
     },
 	{
       "Key": "showPokeTemplate",
-      "Value": "\n CP {0} | İsim: {1}"
+      "Value": "\n CP: {0} | IV: {1}% | İsim: {2}"
     },
 	{
       "Key": "helpTemplate",
-      "Value": "Komutlar: \n \n /top <sayı> - En iyi Pokémonları gösterir. \n /all - Bütün Pokémonları gösterir. \n /profile - Profili gösterir. \n /loc - Konumu gösterir. \n /items - Eşyaları gösterir."
+      "Value": "Komutlar: \n \n /top <cp/iv> <sayı> - En iyi Pokémonları gösterir. \n /all <cp/iv> - Bütün Pokémonları gösterir. \n /profile - Profili gösterir. \n /loc - Konumu gösterir. \n /items - Eşyaları gösterir. \n /status - Bot durumunu gösterir."
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (Sonraki seviyeye kalan: {1}sa {2}dk | {3:n0}/{4:n0} XP)"
+      "Value": "{0} (Sonraki seviye: {1}sa {2}dk | {3:n0}/{4:n0} XP)"
     },
     {
       "Key": "requireInputText",
@@ -639,6 +643,10 @@
 	{
       "Key": "firstStartSetupDefaultLongConfirm",
       "Value": "Boylam(longitude) onaylandı: {0}"
+    },
+	{
+      "Key": "SoftBanBypassed",
+      "Value": "Başarıyla açıldı!"
     },
 	{
       "Key": "firstStartSetupCompleted",
