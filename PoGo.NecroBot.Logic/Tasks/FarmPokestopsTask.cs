@@ -153,13 +153,13 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 await eggWalker.ApplyDistance(distance, cancellationToken);
 
-                if (++stopsHit >= storeRI) //TODO: OR item/pokemon bag is full //check stopsHit against storeRI random without dividing.
+                if (++stopsHit >= storeRI || fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull) //TODO: OR item/pokemon bag is full //check stopsHit against storeRI random without dividing.
                 {
                     storeRI = rc.Next(6, 12); //set new storeRI for new random value
                     stopsHit = 0;
-                    if (fortSearch.ItemsAwarded.Count > 0)
+                    if (fortSearch.ItemsAwarded.Count > 0 || fortSearch.Result ==FortSearchResponse.Types.Result.InventoryFull)
                     {
-                        await RecycleItemsTask.Execute(session, cancellationToken);
+                        RecycleItemsTask.Execute(session, cancellationToken);
                         session.Inventory.RefreshCachedInventory();
                     }
 
