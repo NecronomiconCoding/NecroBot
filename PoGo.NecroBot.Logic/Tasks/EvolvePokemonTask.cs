@@ -11,6 +11,8 @@ using POGOProtos.Inventory.Item;
 using PoGo.NecroBot.Logic.Common;
 using System.Collections.Generic;
 using POGOProtos.Data;
+using PoGo.NecroBot.Logic.Logging;
+using POGOProtos.Settings.Master;
 
 #endregion
 
@@ -34,29 +36,57 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokemonToEvolve.Any())
             {
-                if (session.LogicSettings.KeepPokemonsThatCanEvolve)
+                if (session.LogicSettings.KeepPokemonsThatCanEvolve || session.LogicSettings.UseLuckyEggsWhileEvolving)
                 {
+                    var luckyEggMin = session.LogicSettings.UseLuckyEggsMinPokemonAmount;
+                    var eggNeededToEvolve = luckyEggMin - pokemonToEvolve.Count();
+                    var maxStorage =  session.Profile.PlayerData.MaxPokemonStorage;
                     var totalPokemon = await session.Inventory.GetPokemons();
                     var totalEggs = await session.Inventory.GetEggs();
 
-                    var pokemonNeededInInventory = (session.Profile.PlayerData.MaxPokemonStorage - totalEggs.Count()) * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage / 100.0f;
+                    var pokemonNeededInInventory = (maxStorage - totalEggs.Count()) * session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage / 100.0f;
                     var needPokemonToStartEvolve = Math.Round(
                         Math.Max(0,
                             Math.Min(pokemonNeededInInventory, session.Profile.PlayerData.MaxPokemonStorage)));
 
                     var deltaCount = needPokemonToStartEvolve - totalPokemon.Count();
-
-                    if (deltaCount > 0)
+                    if (session.LogicSettings.UseLuckyEggsWhileEvolving)
                     {
-                        session.EventDispatcher.Send(new NoticeEvent()
+                        if(luckyEggMin > maxStorage)
                         {
-                            Message = session.Translation.GetTranslation(TranslationString.WaitingForMorePokemonToEvolve,
-                                pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage)
-                        });
-                        return;
+                            session.EventDispatcher.Send(new WarnEvent
+                            {
+                                Message = session.Translation.GetTranslation(TranslationString.UseLuckyEggsMinPokemonAmountTooHigh,
+                                luckyEggMin, maxStorage)
+                            });
+                            return;
+                        }
+                    }
+                    if(eggNeededToEvolve <= deltaCount || !session.LogicSettings.KeepPokemonsThatCanEvolve)
+                    {
+                        if (eggNeededToEvolve > 0)
+                        {
+                            session.EventDispatcher.Send(new UpdateEvent()
+                            {
+                                Message = session.Translation.GetTranslation(TranslationString.CatchMorePokemonToUseLuckyEgg,
+                                    eggNeededToEvolve)
+                            });
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        if (deltaCount > 0)
+                        {
+                            session.EventDispatcher.Send(new UpdateEvent()
+                            {
+                                Message = session.Translation.GetTranslation(TranslationString.WaitingForMorePokemonToEvolve,
+                                    pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage)
+                            });
+                            return;
+                        }
                     }
                 }
-
                 if (await shouldUseLuckyEgg(session, pokemonToEvolve))
                 {
                     await UseLuckyEgg(session);

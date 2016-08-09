@@ -25,6 +25,13 @@ namespace PoGo.NecroBot.CLI.Resources
         {
             try
             {
+                // Window width has be be larger than what Console.CursorLeft is set to
+                // or System.ArgumentOutOfRangeException is thrown.
+                if (Console.WindowWidth < 50 + leftOffset)
+                {
+                    Console.WindowWidth = 51 + leftOffset;
+                }
+
                 Console.ForegroundColor = barColor;
                 Console.CursorLeft = 0 + leftOffset;
                 Console.Write("[");

@@ -120,6 +120,7 @@ namespace PoGo.NecroBot.Logic
 
         int GetMinStarDustForLevelUp { get; }
         bool UseLuckyEggConstantly { get; }
+        int MaxBerriesToUsePerPokemon { get; }
         bool UseIncenseConstantly { get; }
         int UseBerriesMinCp { get; }
         float UseBerriesMinIv { get; }
@@ -145,6 +146,8 @@ namespace PoGo.NecroBot.Logic
         string ProfileConfigPath { get; }
         string GeneralConfigPath { get; }
         bool SnipeAtPokestops { get; }
+        bool UseTelegramAPI { get; }
+        string TelegramAPIKey { get; }
         int MinPokeballsToSnipe { get; }
         int MinPokeballsWhileSnipe { get; }
         int MaxPokeballsPerPokemon { get; }

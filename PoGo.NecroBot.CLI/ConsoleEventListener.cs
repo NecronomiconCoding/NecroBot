@@ -64,11 +64,11 @@ namespace PoGo.NecroBot.CLI
         {
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventPokemonTransferred,
-                session.Translation.GetPokemonTranslation(transferPokemonEvent.Id), 
-                transferPokemonEvent.Cp,
-                transferPokemonEvent.Perfection.ToString("0.00"), 
-                transferPokemonEvent.BestCp, 
-                transferPokemonEvent.BestPerfection.ToString("0.00"), 
+                session.Translation.GetPokemonTranslation(transferPokemonEvent.Id).PadRight(12, ' '), 
+                transferPokemonEvent.Cp.ToString().PadLeft(4, ' '),
+                transferPokemonEvent.Perfection.ToString("0.00").PadLeft(6, ' '), 
+                transferPokemonEvent.BestCp.ToString().PadLeft(4, ' '), 
+                transferPokemonEvent.BestPerfection.ToString("0.00").PadLeft(6, ' '), 
                 transferPokemonEvent.FamilyCandies),
                 LogLevel.Transfer);
         }
@@ -114,11 +114,11 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(FortTargetEvent fortTargetEvent, ISession session)
         {
-            int intTimeForArrival = (int) ( fortTargetEvent.Distance / ( session.LogicSettings.WalkingSpeedInKilometerPerHour * 0.277778 ) );
+            // int intTimeForArrival = (int) ( fortTargetEvent.Distance / ( session.LogicSettings.WalkingSpeedInKilometerPerHour * 0.277778 ) );
 
             Logger.Write(
-                session.Translation.GetTranslation(TranslationString.EventFortTargeted, fortTargetEvent.Name,
-                    Math.Round(fortTargetEvent.Distance), intTimeForArrival ),
+                session.Translation.GetTranslation(TranslationString.EventFortTargeted, fortTargetEvent.Name ),
+                    // Math.Round(fortTargetEvent.Distance), intTimeForArrival ),
                 LogLevel.Info, ConsoleColor.DarkRed);
         }
 
