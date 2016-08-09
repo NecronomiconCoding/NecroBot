@@ -74,6 +74,19 @@ namespace PoGo.NecroBot.CLI
 
                 boolNeedsSetup = true;
             }
+			
+			if (args.Length > 1) {
+				string[] crds = args[1].Split(',');
+				double lat, lng;
+				try {
+					lat = Double.Parse(crds[0]);
+					lng = Double.Parse(crds[1]);
+					settings.DefaultLatitude = lat;
+					settings.DefaultLongitude = lng;
+				}
+				catch(Exception e) {}
+			}
+			
 
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
             
