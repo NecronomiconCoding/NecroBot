@@ -22,7 +22,7 @@
     },
 	{
       "Key": "loginInvalid",
-      "Value": "Kredensial (nama pengguna dan kata kunci) cacat dan gagal masuk"
+      "Value": "Detail pengguna (nama pengguna dan kata kunci) cacat dan gagal masuk"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
