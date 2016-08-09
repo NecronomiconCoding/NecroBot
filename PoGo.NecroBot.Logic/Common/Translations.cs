@@ -82,6 +82,7 @@ namespace PoGo.NecroBot.Logic.Common
         LogEntryDebug,
         LogEntryUpdate,
         LogEntryNew,
+        LogEntrySoftBan,
         LoggingIn,
         PtcOffline,
         AccessTokenExpired,
@@ -166,6 +167,7 @@ namespace PoGo.NecroBot.Logic.Common
         EventUsedIncense,
         SnipeServerOffline,
         PromptError,
+        SoftBanBypassed,
         FirstStartLanguagePrompt,
         FirstStartLanguageCodePrompt,
         FirstStartLanguageConfirm,
@@ -286,6 +288,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryDebug, "DEBUG"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryUpdate, "UPDATE"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryNew, "NEW"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LogEntrySoftBan, "SOFTBAN"),
             new KeyValuePair<TranslationString, string>(TranslationString.LoggingIn, "Logging in using {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.PtcOffline,
                 "PTC Servers are probably down OR your credentials are wrong. Try google"),
@@ -445,6 +448,8 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLatConfirm, "Lattitude accepted: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLongPrompt, "Please enter a Longitude (Right click to paste)"),
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLongConfirm, "Longitude accepted: {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.SoftBanBypassed,
+                "Successfully bypassed!"),
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupCompleted, "### COMPLETED CONFIG SETUP ###")
         };
 
