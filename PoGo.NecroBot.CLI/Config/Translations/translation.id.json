@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -98,7 +98,7 @@
     },
     {
       "Key": "eventUseBerry",
-      "Value": "Terpakai {0} | {1} tersisa"
+      "Value": "Memakai {0} | {1} tersisa"
     },
     {
       "Key": "itemRazzBerry",
