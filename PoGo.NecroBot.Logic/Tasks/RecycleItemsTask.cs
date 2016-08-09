@@ -23,6 +23,10 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            var currentTotalItems = await session.Inventory.GetTotalItemCount();
+            if ((session.Profile.PlayerData.MaxItemStorage * session.LogicSettings.RecycleInventoryAtUsagePercentage / 100.0f) > currentTotalItems)
+                return;
+
             var currentAmountOfPokeballs = await session.Inventory.GetItemAmountByType(ItemId.ItemPokeBall);
             var currentAmountOfGreatballs = await session.Inventory.GetItemAmountByType(ItemId.ItemGreatBall);
             var currentAmountOfUltraballs = await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
@@ -68,10 +72,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (session.LogicSettings.DetailedCountsBeforeRecycling)
                 Logger.Write(session.Translation.GetTranslation(TranslationString.CurrentMiscItemInv,
                     currentAmountOfBerries, currentAmountOfIncense, currentAmountOfLuckyEggs, currentAmountOfLures));
-            
-            var currentTotalItems = await session.Inventory.GetTotalItemCount();
-            if ((session.Profile.PlayerData.MaxItemStorage * session.LogicSettings.RecycleInventoryAtUsagePercentage/100.0f) > currentTotalItems)
-                return;
 
             if (session.LogicSettings.TotalAmountOfPokeballsToKeep != 0)
                 await OptimizedRecycleBalls(session, cancellationToken);
@@ -87,13 +87,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (session.LogicSettings.TotalAmountOfBerriesToKeep >= 0)
                 await OptimizedRecycleBerries(session, cancellationToken);
-
+            
+            await session.Inventory.RefreshCachedInventory();
             currentTotalItems = await session.Inventory.GetTotalItemCount();
-            if ((session.Profile.PlayerData.MaxItemStorage * session.LogicSettings.RecycleInventoryAtUsagePercentage/100.0f) > currentTotalItems)
-            {
-                await session.Inventory.RefreshCachedInventory();
+            if ((session.Profile.PlayerData.MaxItemStorage * session.LogicSettings.RecycleInventoryAtUsagePercentage / 100.0f) > currentTotalItems)
                 return;
-            }
 
             var items = await session.Inventory.GetItemsToRecycle(session);
 
