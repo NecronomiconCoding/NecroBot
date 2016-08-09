@@ -675,6 +675,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 // we might have different precisions from other sources
                                 continue;
 
+                            SnipeLocations.RemoveAll(x => _lastSnipe > x.TimeStampAdded);
                             SnipeLocations.RemoveAll(x => DateTime.Now > x.TimeStampAdded.AddMinutes(15));
                             SnipeLocations.Add(info);
                         }
