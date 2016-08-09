@@ -46,18 +46,22 @@ namespace PoGo.NecroBot.Logic.Common
 
         private async void DoLogin()
         {
-            try
+                        try
             {
+            begin:
+                await Task.Delay(1000);
                 if (_session.Settings.AuthType != AuthType.Google || _session.Settings.AuthType != AuthType.Ptc)
                 {
                     await _session.Client.Login.DoLogin();
                 }
                 else
                 {
-                    _session.EventDispatcher.Send(new ErrorEvent
-                    {
-                        Message = _session.Translation.GetTranslation(TranslationString.WrongAuthType)
-                    });
+                    goto begin;
+
+                  //  _session.EventDispatcher.Send(new ErrorEvent
+                 //   {
+                    //    Message = _session.Translation.GetTranslation(TranslationString.WrongAuthType)
+                 //   });
                 }
             }
             catch (AggregateException ae)
