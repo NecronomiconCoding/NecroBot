@@ -102,7 +102,7 @@
     },
     {
       "Key": "itemRazzBerry",
-      "Value": "Berry"
+      "Value": "RazzBerry"
     },
     {
       "Key": "catchStatusAttempt",
@@ -206,7 +206,7 @@
     },
     {
       "Key": "logEntryBerry",
-      "Value": "RazzBerry"
+      "Value": "Berry"
     },
     {
       "Key": "logEntryEgg",
