@@ -154,6 +154,12 @@ namespace PoGo.NecroBot.CLI
             ProgressBar.fill(100);
 
             machine.AsyncStart(new VersionCheckState(), session);
+
+            if (settings.UseTelegramAPI)
+            {
+                session.Telegram = new Logic.Service.TelegramService(settings.TelegramAPIKey, session);
+            }
+
             if (session.LogicSettings.UseSnipeLocationServer)
                 SnipePokemonTask.AsyncStart(session);
 

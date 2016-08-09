@@ -82,7 +82,7 @@
       "Value": "{0} benutzt, {1} verbleibend"
     },
     {
-      "Key": "itemRazzBerry",
+      "Key": "ItemRazzBerry",
       "Value": "Himmihbeere"
     },
     {
@@ -275,15 +275,15 @@
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "Tränke: {0} | Supertränke: {1} | Hypertränke: {2} | Top-Tränke: {3}"
     },
     {
       "Key": "CurrentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
+      "Value": "Beleber: {0} | Top-Beleber: {1}"
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "Beeren: {0} | Rauch: {1} | Glücks-Eier: {2} | Lockmodule: {3}"
     },
     {
       "Key": "invFullTransferring",
@@ -367,6 +367,18 @@
       "Value": "{0} - Laufzeit {1} - Lvl: {2} | EP/H: {3:n0} | P/H: {4:n0} | Sternenstaub: {5:n0} | Verschickt: {6:n0} | Weggeworfen: {7:n0}"
     },
     {
+      "Key": "ProfileStatsTemplateString",
+      "Value": "----- LVL {0} | {1} ----- \n Erfahrungspunkte: {2}/{3} \n Pokemons gefangen: {4} \n Pokemons verschickt: {5} \n Pokestops besucht: {6} \n Eier geschlüpft: {6} \n Pokemons entwickelt: {7} \n Pokedex Einträge: {8} \n KM gelaufen: {9}"
+    },
+    {
+      "Key": "ShowPokeTemplate",
+      "Value": " \n WP {0} | Name: {1}"
+    },
+    {
+      "Key": "HelpTemplate",
+      "Value": "Kommandos: \n \n /top <amount> - Zeigt die besten Pokemons an. \n /all - Zeigt dir alle Pokemons an. \n /profile - Zeigt dein Profil. \n /loc - Zeigt deine Position an. \n /items - Zeigt dir deine Items"
+    },
+    {
       "Key": "StatsXpTemplateString",
       "Value": "{0} (Aufstieg in {1}h {2}m | {3:n0}/{4:n0} EP)"
     },
@@ -385,6 +397,10 @@
     {
       "Key": "GoogleError",
       "Value": "Stell sicher, dass du die richtige E-Mail & Passwort eingegeben hast."
+    },
+    {
+      "Key": "GoogleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
     },
     {
       "Key": "MissingCredentialsGoogle",
@@ -412,11 +428,11 @@
     },
     {
       "Key": "DisplayHighestMove1Header",
-      "Value": "BEWEGUNG1"
+      "Value": "ATTACKE1"
     },
     {
       "Key": "DisplayHighestMove2Header",
-      "Value": "BEWEGUNG2"
+      "Value": "ATTACKE2"
     },
     {
       "Key": "DisplayHighestCandy",
@@ -1084,27 +1100,27 @@
   "PokemonMovesetStrings": [
     {
       "Key": "moveUnset",
-      "Value": "MoveUnset"
+      "Value": "Keine Attacke"
     },
     {
       "Key": "thunderShock",
-      "Value": "ThunderShock"
+      "Value": "Donnerschock"
     },
     {
       "Key": "quickAttack",
-      "Value": "QuickAttack"
+      "Value": "Ruckzuckhieb"
     },
     {
       "Key": "scratch",
-      "Value": "Scratch"
+      "Value": "Kratzer"
     },
     {
       "Key": "ember",
-      "Value": "Ember"
+      "Value": "Glut"
     },
     {
       "Key": "vineWhip",
-      "Value": "VineWhip"
+      "Value": "Rankenhieb"
     },
     {
       "Key": "tackle",
@@ -1112,43 +1128,43 @@
     },
     {
       "Key": "razorLeaf",
-      "Value": "RazorLeaf"
+      "Value": "Rasierblatt"
     },
     {
       "Key": "takeDown",
-      "Value": "TakeDown"
+      "Value": "Bodycheck"
     },
     {
       "Key": "waterGun",
-      "Value": "WaterGun"
+      "Value": "Aquaknarre"
     },
     {
       "Key": "bite",
-      "Value": "Bite"
+      "Value": "Biss"
     },
     {
       "Key": "pound",
-      "Value": "Pound"
+      "Value": "Pfund"
     },
     {
       "Key": "doubleSlap",
-      "Value": "DoubleSlap"
+      "Value": "Duplexhieb"
     },
     {
       "Key": "wrap",
-      "Value": "Wrap"
+      "Value": "Wickel"
     },
     {
       "Key": "hyperBeam",
-      "Value": "HyperBeam"
+      "Value": "Hyperstrahl"
     },
     {
       "Key": "lick",
-      "Value": "Lick"
+      "Value": "Schlecker"
     },
     {
       "Key": "darkPulse",
-      "Value": "DarkPulse"
+      "Value": "Finsteraura"
     },
     {
       "Key": "smog",
@@ -1156,91 +1172,91 @@
     },
     {
       "Key": "sludge",
-      "Value": "Sludge"
+      "Value": "Schlammbad"
     },
     {
       "Key": "metalClaw",
-      "Value": "MetalClaw"
+      "Value": "Metallklaue"
     },
     {
       "Key": "viceGrip",
-      "Value": "ViceGrip"
+      "Value": "Klammer"
     },
     {
       "Key": "flameWheel",
-      "Value": "FlameWheel"
+      "Value": "Flammenrad"
     },
     {
       "Key": "megahorn",
-      "Value": "Megahorn"
+      "Value": "Vielender"
     },
     {
       "Key": "wingAttack",
-      "Value": "WingAttack"
+      "Value": "Flügelschlag"
     },
     {
       "Key": "flamethrower",
-      "Value": "Flamethrower"
+      "Value": "Flammenwurf"
     },
     {
       "Key": "suckerPunch",
-      "Value": "SuckerPunch"
+      "Value": "Tiefschlag"
     },
     {
       "Key": "dig",
-      "Value": "Dig"
+      "Value": "Schaufler"
     },
     {
       "Key": "lowKick",
-      "Value": "LowKick"
+      "Value": "Fußkick"
     },
     {
       "Key": "crossChop",
-      "Value": "CrossChop"
+      "Value": "Kreuzhieb"
     },
     {
       "Key": "psychoCut",
-      "Value": "PsychoCut"
+      "Value": "Psychoklinge"
     },
     {
       "Key": "psybeam",
-      "Value": "Psybeam"
+      "Value": "Psystrahl"
     },
     {
       "Key": "earthquake",
-      "Value": "Earthquake"
+      "Value": "Erdbeben"
     },
     {
       "Key": "stoneEdge",
-      "Value": "StoneEdge"
+      "Value": "Steinkante"
     },
     {
       "Key": "icePunch",
-      "Value": "IcePunch"
+      "Value": "Eishieb"
     },
     {
       "Key": "heartStamp",
-      "Value": "HeartStamp"
+      "Value": "Herzstempel"
     },
     {
       "Key": "discharge",
-      "Value": "Discharge"
+      "Value": "Ladungsstoß"
     },
     {
       "Key": "flashCannon",
-      "Value": "FlashCannon"
+      "Value": "Blitzkanone"
     },
     {
       "Key": "peck",
-      "Value": "Peck"
+      "Value": "Schnabel"
     },
     {
       "Key": "drillPeck",
-      "Value": "DrillPeck"
+      "Value": "Bohrschnabel"
     },
     {
       "Key": "iceBeam",
-      "Value": "IceBeam"
+      "Value": "Eisstrahl"
     },
     {
       "Key": "blizzard",
@@ -1248,115 +1264,115 @@
     },
     {
       "Key": "airSlash",
-      "Value": "AirSlash"
+      "Value": "Luftschnitt"
     },
     {
       "Key": "heatWave",
-      "Value": "HeatWave"
+      "Value": "Hitzewelle"
     },
     {
       "Key": "twineedle",
-      "Value": "Twineedle"
+      "Value": "Duonadel"
     },
     {
       "Key": "poisonJab",
-      "Value": "PoisonJab"
+      "Value": "Gifthieb"
     },
     {
       "Key": "aerialAce",
-      "Value": "AerialAce"
+      "Value": "Aero-Ass"
     },
     {
       "Key": "drillRun",
-      "Value": "DrillRun"
+      "Value": "Schlagbohrer"
     },
     {
       "Key": "petalBlizzard",
-      "Value": "PetalBlizzard"
+      "Value": "Blütenwirbel"
     },
     {
       "Key": "megaDrain",
-      "Value": "MegaDrain"
+      "Value": "Megasauger"
     },
     {
       "Key": "bugBuzz",
-      "Value": "BugBuzz"
+      "Value": "Käfergebrumm"
     },
     {
       "Key": "poisonFang",
-      "Value": "PoisonFang"
+      "Value": "Giftzahn"
     },
     {
       "Key": "nightSlash",
-      "Value": "NightSlash"
+      "Value": "Nachthieb"
     },
     {
       "Key": "slash",
-      "Value": "Slash"
+      "Value": "Schlitzer"
     },
     {
       "Key": "bubbleBeam",
-      "Value": "BubbleBeam"
+      "Value": "Blubbstrahl"
     },
     {
       "Key": "submission",
-      "Value": "Submission"
+      "Value": "Überroller"
     },
     {
       "Key": "karateChop",
-      "Value": "KarateChop"
+      "Value": "Karateschlag"
     },
     {
       "Key": "lowSweep",
-      "Value": "LowSweep"
+      "Value": "Fußtritt"
     },
     {
       "Key": "aquaJet",
-      "Value": "AquaJet"
+      "Value": "Wasserdüse"
     },
     {
       "Key": "aquaTail",
-      "Value": "AquaTail"
+      "Value": "Nassschweif"
     },
     {
       "Key": "seedBomb",
-      "Value": "SeedBomb"
+      "Value": "Samenbomben"
     },
     {
       "Key": "psyshock",
-      "Value": "Psyshock"
+      "Value": "Psychoschock"
     },
     {
       "Key": "rockThrow",
-      "Value": "RockThrow"
+      "Value": "Steinwurf"
     },
     {
       "Key": "ancientPower",
-      "Value": "AncientPower"
+      "Value": "Antik-Kraft"
     },
     {
       "Key": "rockTomb",
-      "Value": "RockTomb"
+      "Value": "Felsgrab"
     },
     {
       "Key": "rockSlide",
-      "Value": "RockSlide"
+      "Value": "Steinhagel"
     },
     {
       "Key": "powerGem",
-      "Value": "PowerGem"
+      "Value": "Juwelenkraft"
     },
     {
       "Key": "shadowSneak",
-      "Value": "ShadowSneak"
+      "Value": "Schattenstoß"
     },
     {
       "Key": "shadowPunch",
-      "Value": "ShadowPunch"
+      "Value": "Finsterfaust"
     },
     {
       "Key": "shadowClaw",
-      "Value": "ShadowClaw"
+      "Value": "Dunkelklaue"
     },
     {
       "Key": "ominousWind",
@@ -1364,243 +1380,243 @@
     },
     {
       "Key": "shadowBall",
-      "Value": "ShadowBall"
+      "Value": "Unheilböen"
     },
     {
       "Key": "bulletPunch",
-      "Value": "BulletPunch"
+      "Value": "Patronenhieb"
     },
     {
       "Key": "magnetBomb",
-      "Value": "MagnetBomb"
+      "Value": "Magnetbombe"
     },
     {
       "Key": "steelWing",
-      "Value": "SteelWing"
+      "Value": "Stahlflügel"
     },
     {
       "Key": "ironHead",
-      "Value": "IronHead"
+      "Value": "Eisenschädel"
     },
     {
       "Key": "parabolicCharge",
-      "Value": "ParabolicCharge"
+      "Value": "Parabolladung"
     },
     {
       "Key": "spark",
-      "Value": "Spark"
+      "Value": "Funkensprung"
     },
     {
       "Key": "thunderPunch",
-      "Value": "ThunderPunch"
+      "Value": "Donnerschlag"
     },
     {
       "Key": "thunder",
-      "Value": "Thunder"
+      "Value": "Donner"
     },
     {
       "Key": "thunderbolt",
-      "Value": "Thunderbolt"
+      "Value": "Donnerblitz"
     },
     {
       "Key": "twister",
-      "Value": "Twister"
+      "Value": "Windhose"
     },
     {
       "Key": "dragonBreath",
-      "Value": "DragonBreath"
+      "Value": "Feuerodem"
     },
     {
       "Key": "dragonPulse",
-      "Value": "DragonPulse"
+      "Value": "Drachenpuls"
     },
     {
       "Key": "dragonClaw",
-      "Value": "DragonClaw"
+      "Value": "Drachenklaue"
     },
     {
       "Key": "disarmingVoice",
-      "Value": "DisarmingVoice"
+      "Value": "Säuselstimme"
     },
     {
       "Key": "drainingKiss",
-      "Value": "DrainingKiss"
+      "Value": "Diebeskuss"
     },
     {
       "Key": "dazzlingGleam",
-      "Value": "DazzlingGleam"
+      "Value": "Zauberschein"
     },
     {
       "Key": "moonblast",
-      "Value": "Moonblast"
+      "Value": "Mondgewalt"
     },
     {
       "Key": "playRough",
-      "Value": "PlayRough"
+      "Value": "Knuddler"
     },
     {
       "Key": "crossPoison",
-      "Value": "CrossPoison"
+      "Value": "Giftstreich"
     },
     {
       "Key": "sludgeBomb",
-      "Value": "SludgeBomb"
+      "Value": "Matschbombe"
     },
     {
       "Key": "sludgeWave",
-      "Value": "SludgeWave"
+      "Value": "Schlammwoge"
     },
     {
       "Key": "gunkShot",
-      "Value": "GunkShot"
+      "Value": "Mülltreffer"
     },
     {
       "Key": "mudShot",
-      "Value": "MudShot"
+      "Value": "Lehmschuss"
     },
     {
       "Key": "boneClub",
-      "Value": "BoneClub"
+      "Value": "Knochenkeule"
     },
     {
       "Key": "bulldoze",
-      "Value": "Bulldoze"
+      "Value": "Dampfwalze"
     },
     {
       "Key": "mudBomb",
-      "Value": "MudBomb"
+      "Value": "Schlammbombe"
     },
     {
       "Key": "furyCutter",
-      "Value": "FuryCutter"
+      "Value": "Zornklinge"
     },
     {
       "Key": "bugBite",
-      "Value": "BugBite"
+      "Value": "Käferbiss"
     },
     {
       "Key": "signalBeam",
-      "Value": "SignalBeam"
+      "Value": "Ampelleuchte"
     },
     {
       "Key": "xScissor",
-      "Value": "XScissor"
+      "Value": "Kreuzschere"
     },
     {
       "Key": "flameCharge",
-      "Value": "FlameCharge"
+      "Value": "Nitroladung"
     },
     {
       "Key": "flameBurst",
-      "Value": "FlameBurst"
+      "Value": "Funkenflug"
     },
     {
       "Key": "fireBlast",
-      "Value": "FireBlast"
+      "Value": "Feuersturm"
     },
     {
       "Key": "brine",
-      "Value": "Brine"
+      "Value": "Lake"
     },
     {
       "Key": "waterPulse",
-      "Value": "WaterPulse"
+      "Value": "Aquawelle"
     },
     {
       "Key": "scald",
-      "Value": "Scald"
+      "Value": "Siedewasser"
     },
     {
       "Key": "hydroPump",
-      "Value": "HydroPump"
+      "Value": "Hydropumpe"
     },
     {
       "Key": "psychic",
-      "Value": "Psychic"
+      "Value": "Psychokinese"
     },
     {
       "Key": "psystrike",
-      "Value": "Psystrike"
+      "Value": "Psychostoß"
     },
     {
       "Key": "iceShard",
-      "Value": "IceShard"
+      "Value": "Eissplitter"
     },
     {
       "Key": "icyWind",
-      "Value": "IcyWind"
+      "Value": "Eissturm"
     },
     {
       "Key": "frostBreath",
-      "Value": "FrostBreath"
+      "Value": "Eisesodem"
     },
     {
       "Key": "absorb",
-      "Value": "Absorb"
+      "Value": "Absorber"
     },
     {
       "Key": "gigaDrain",
-      "Value": "GigaDrain"
+      "Value": "Gigasauger"
     },
     {
       "Key": "firePunch",
-      "Value": "FirePunch"
+      "Value": "Feuerschlag"
     },
     {
       "Key": "solarBeam",
-      "Value": "SolarBeam"
+      "Value": "Solarstrahl"
     },
     {
       "Key": "leafBlade",
-      "Value": "LeafBlade"
+      "Value": "Laubklinge"
     },
     {
       "Key": "powerWhip",
-      "Value": "PowerWhip"
+      "Value": "Blattgeißel"
     },
     {
       "Key": "splash",
-      "Value": "Splash"
+      "Value": "Platscher"
     },
     {
       "Key": "acid",
-      "Value": "Acid"
+      "Value": "Säure"
     },
     {
       "Key": "airCutter",
-      "Value": "AirCutter"
+      "Value": "Windschnitt"
     },
     {
       "Key": "hurricane",
-      "Value": "Hurricane"
+      "Value": "Orkan"
     },
     {
       "Key": "brickBreak",
-      "Value": "BrickBreak"
+      "Value": "Durchbruch"
     },
     {
       "Key": "cut",
-      "Value": "Cut"
+      "Value": "Zerschneider"
     },
     {
       "Key": "swift",
-      "Value": "Swift"
+      "Value": "Sternschauer"
     },
     {
       "Key": "hornAttack",
-      "Value": "HornAttack"
+      "Value": "Hornattacke"
     },
     {
       "Key": "stomp",
-      "Value": "Stomp"
+      "Value": "Stampfer"
     },
     {
       "Key": "headbutt",
-      "Value": "Headbutt"
+      "Value": "Kopfnuss"
     },
     {
       "Key": "hyperFang",
-      "Value": "HyperFang"
+      "Value": "Hyperzahn"
     },
     {
       "Key": "slam",
@@ -1608,199 +1624,199 @@
     },
     {
       "Key": "bodySlam",
-      "Value": "BodySlam"
+      "Value": "Bodyslam"
     },
     {
       "Key": "rest",
-      "Value": "Rest"
+      "Value": "Erholung"
     },
     {
       "Key": "struggle",
-      "Value": "Struggle"
+      "Value": "Verzweifler"
     },
     {
       "Key": "scaldBlastoise",
-      "Value": "ScaldBlastoise"
+      "Value": "Siedewasser"
     },
     {
       "Key": "hydroPumpBlastoise",
-      "Value": "HydroPumpBlastoise"
+      "Value": "Hydropumpe"
     },
     {
       "Key": "wrapGreen",
-      "Value": "WrapGreen"
+      "Value": "Wickel"
     },
     {
       "Key": "wrapPink",
-      "Value": "WrapPink"
+      "Value": "Wickel"
     },
     {
       "Key": "furyCutterFast",
-      "Value": "FuryCutterFast"
+      "Value": "Zornklinge"
     },
     {
       "Key": "bugBiteFast",
-      "Value": "BugBiteFast"
+      "Value": "Käferbiss"
     },
     {
       "Key": "biteFast",
-      "Value": "BiteFast"
+      "Value": "Biss"
     },
     {
       "Key": "suckerPunchFast",
-      "Value": "SuckerPunchFast"
+      "Value": "Tiefschlag"
     },
     {
       "Key": "dragonBreathFast",
-      "Value": "DragonBreathFast"
+      "Value": "Feuerodem"
     },
     {
       "Key": "thunderShockFast",
-      "Value": "ThunderShockFast"
+      "Value": "Donnerschock"
     },
     {
       "Key": "sparkFast",
-      "Value": "SparkFast"
+      "Value": "Funkensprung"
     },
     {
       "Key": "lowKickFast",
-      "Value": "LowKickFast"
+      "Value": "Fußkick"
     },
     {
       "Key": "karateChopFast",
-      "Value": "KarateChopFast"
+      "Value": "Karateschlag"
     },
     {
       "Key": "emberFast",
-      "Value": "EmberFast"
+      "Value": "Glut"
     },
     {
       "Key": "wingAttackFast",
-      "Value": "WingAttackFast"
+      "Value": "Flügelschlag"
     },
     {
       "Key": "peckFast",
-      "Value": "PeckFast"
+      "Value": "Schnabel"
     },
     {
       "Key": "lickFast",
-      "Value": "LickFast"
+      "Value": "Schlecker"
     },
     {
       "Key": "shadowClawFast",
-      "Value": "ShadowClawFast"
+      "Value": "Dunkelklaue"
     },
     {
       "Key": "vineWhipFast",
-      "Value": "VineWhipFast"
+      "Value": "Rankenhieb"
     },
     {
       "Key": "razorLeafFast",
-      "Value": "RazorLeafFast"
+      "Value": "Rasierblatt"
     },
     {
       "Key": "mudShotFast",
-      "Value": "MudShotFast"
+      "Value": "Lehmschuss"
     },
     {
       "Key": "iceShardFast",
-      "Value": "IceShardFast"
+      "Value": "Eissplitter"
     },
     {
       "Key": "frostBreathFast",
-      "Value": "FrostBreathFast"
+      "Value": "Eisesodem"
     },
     {
       "Key": "quickAttackFast",
-      "Value": "QuickAttackFast"
+      "Value": "Ruckzuckhieb"
     },
     {
       "Key": "scratchFast",
-      "Value": "ScratchFast"
+      "Value": "Kratzer"
     },
     {
       "Key": "tackleFast",
-      "Value": "TackleFast"
+      "Value": "Tackle"
     },
     {
       "Key": "poundFast",
-      "Value": "PoundFast"
+      "Value": "Pfund"
     },
     {
       "Key": "cutFast",
-      "Value": "CutFast"
+      "Value": "Zerschneider"
     },
     {
       "Key": "poisonJabFast",
-      "Value": "PoisonJabFast"
+      "Value": "Gifthieb"
     },
     {
       "Key": "acidFast",
-      "Value": "AcidFast"
+      "Value": "Säure"
     },
     {
       "Key": "psychoCutFast",
-      "Value": "PsychoCutFast"
+      "Value": "Psychoklinge"
     },
     {
       "Key": "rockThrowFast",
-      "Value": "RockThrowFast"
+      "Value": "Steinwurf"
     },
     {
       "Key": "metalClawFast",
-      "Value": "MetalClawFast"
+      "Value": "Metallklaue"
     },
     {
       "Key": "bulletPunchFast",
-      "Value": "BulletPunchFast"
+      "Value": "Patronenhieb"
     },
     {
       "Key": "waterGunFast",
-      "Value": "WaterGunFast"
+      "Value": "Aquaknarre"
     },
     {
       "Key": "splashFast",
-      "Value": "SplashFast"
+      "Value": "Platscher"
     },
     {
       "Key": "waterGunFastBlastoise",
-      "Value": "WaterGunFastBlastoise"
+      "Value": "Aquaknarre"
     },
     {
       "Key": "mudSlapFast",
-      "Value": "MudSlapFast"
+      "Value": "Lehmschelle"
     },
     {
       "Key": "zenHeadbuttFast",
-      "Value": "ZenHeadbuttFast"
+      "Value": "Zen-Kopfstoß"
     },
     {
       "Key": "confusionFast",
-      "Value": "ConfusionFast"
+      "Value": "Konfusion"
     },
     {
       "Key": "poisonStingFast",
-      "Value": "PoisonStingFast"
+      "Value": "Giftstachel"
     },
     {
       "Key": "bubbleFast",
-      "Value": "BubbleFast"
+      "Value": "Blubber"
     },
     {
       "Key": "feintAttackFast",
-      "Value": "FeintAttackFast"
+      "Value": "Finte"
     },
     {
       "Key": "steelWingFast",
-      "Value": "SteelWingFast"
+      "Value": "Stahlflügel"
     },
     {
       "Key": "fireFangFast",
-      "Value": "FireFangFast"
+      "Value": "Feuerzahn"
     },
     {
       "Key": "rockSmashFast",
-      "Value": "RockSmashFast"
+      "Value": "Zertrümmerer"
     }
   ]
 }

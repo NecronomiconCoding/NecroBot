@@ -31,13 +31,13 @@ namespace PoGo.NecroBot.Logic.Tasks
             var upgradedNumber = 0;
             foreach (var pokemon in upgradablePokemon)
             {
-                if (PokemonInfo.CalculateMaxCp(pokemon) == pokemon.Cp) continue;
+                if (PokemonInfo.GetLevel(pokemon) >= session.Inventory.GetPlayerStats().Result.FirstOrDefault().Level + 1) continue;
 
                 var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
                 var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
 
                 if (familyCandy.Candy_ <= 0) continue;
-                
+
                 var upgradeResult = await session.Inventory.UpgradePokemon(pokemon.Id);
                 if (upgradeResult.Result.ToString().ToLower().Contains("success"))
                 {
@@ -47,7 +47,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
 
                 if (upgradedNumber >= session.LogicSettings.AmountOfTimesToUpgradeLoop)
-                        break;
+                    break;
             }
         }
     }

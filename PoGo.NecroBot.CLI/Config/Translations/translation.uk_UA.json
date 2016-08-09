@@ -376,6 +376,10 @@
       "Value": "Переконайтеся, що Ви ввели вірні E-mail і Пароль від аккаунта!"
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Вам потрібно заповнити настройки GoogleUsername і GooglePassword в auth.json!"
     },

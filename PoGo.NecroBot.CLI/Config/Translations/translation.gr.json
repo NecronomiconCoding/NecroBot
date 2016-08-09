@@ -373,6 +373,10 @@
       "Value": "Βεβαιώσου οτι έχεις συμπληρώσει σωστά τα Email & Password."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Πρέπει να συμπλήρωσεις τα GoogleUsername και GooglePassword στο auth.json!"
     },

@@ -438,6 +438,10 @@
       "Value": "Controlla di aver inserito Email e Password correttamente"
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Devi riempire i campi GoogleUsername e GooglePassword  nel file auth.json!"
     },
