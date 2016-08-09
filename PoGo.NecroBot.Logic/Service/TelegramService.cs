@@ -13,6 +13,7 @@ using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using PoGo.NecroBot.Logic.PoGoUtils;
 
 namespace PoGo.NecroBot.Logic.Service
 {
@@ -65,7 +66,7 @@ namespace PoGo.NecroBot.Logic.Service
 
                     foreach (var pokemon in topPokemons)
                     {
-                        answerTextmessage += session.Translation.GetTranslation(TranslationString.ShowPokeTemplate, new object[] { pokemon.Cp, session.Translation.GetPokemonTranslation(pokemon.PokemonId) });
+                        answerTextmessage += session.Translation.GetTranslation(TranslationString.ShowPokeTemplate, new object[] { pokemon.Cp, string.Format("{0:N2}%", PokemonInfo.CalculatePokemonPerfection(pokemon)), session.Translation.GetPokemonTranslation(pokemon.PokemonId) });
 
                         if (answerTextmessage.Length > 3800)
                         {
@@ -84,7 +85,7 @@ namespace PoGo.NecroBot.Logic.Service
 
                     foreach (var pokemon in allPokemons)
                     {
-                        answerTextmessage += session.Translation.GetTranslation(TranslationString.ShowPokeTemplate, new object[] { pokemon.Cp, session.Translation.GetPokemonTranslation(pokemon.PokemonId) });
+                        answerTextmessage += session.Translation.GetTranslation(TranslationString.ShowPokeTemplate, new object[] { pokemon.Cp, string.Format("{0:N2}%", PokemonInfo.CalculatePokemonPerfection(pokemon)), session.Translation.GetPokemonTranslation(pokemon.PokemonId) });
 
                         if (answerTextmessage.Length > 3800)
                         {

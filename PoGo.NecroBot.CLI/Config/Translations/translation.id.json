@@ -418,7 +418,7 @@
     },
     {
       "Key": "showPokeTemplate",
-      "Value": "\n CP {0} | Nama: {1}"
+      "Value": "\n CP {0} | IV {1} | Nama: {2}"
     },
     {
       "Key": "helpTemplate",

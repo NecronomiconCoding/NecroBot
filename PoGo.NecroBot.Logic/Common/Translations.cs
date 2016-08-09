@@ -378,7 +378,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.ProfileStatsTemplateString,
                 "----- LVL {0} | {1} ----- \n Experience: {2}/{3} \n Pokemons caught: {4} \n Pokemons deployed: {5} \n Pokestops visited: {6} \n Eggs hatched: {6} \n Pokemons envolved: {7} \n Pokedex entries: {8} \n KM walked: {9}"),
             new KeyValuePair<TranslationString, string>(TranslationString.ShowPokeTemplate,
-                "\n CP {0} | Name: {1}"),
+                "\n CP {0} | IV {1} | Name: {2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.HelpTemplate,
                 "Commands: \n \n /top <amount> - Shows you top Pokemons. \n /all - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items."),
             new KeyValuePair<TranslationString, string>(TranslationString.StatsXpTemplateString,
