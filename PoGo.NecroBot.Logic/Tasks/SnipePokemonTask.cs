@@ -427,6 +427,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                 await session.Client.Player.UpdatePlayerLocation(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude);
             }
 
+            if (catchablePokemon.Count == 0)
+            {
+                // Pokemon not found but we still add to the locations visited, so we don't keep sniping
+                // locations with no pokemon.
+                if (!LocsVisited.Contains(new PokemonLocation(latitude, longitude)))
+                    LocsVisited.Add(new PokemonLocation(latitude, longitude));
+            }
+
             foreach (var pokemon in catchablePokemon)
             {
                 EncounterResponse encounter;
