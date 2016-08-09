@@ -2,19 +2,19 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "Poké Ball"
+      "Value": "Pokéball"
     },
     {
       "Key": "greatPokeball",
-      "Value": "Great Ball"
+      "Value": "Greatball"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "Ultra Ball"
+      "Value": "Ultraball"
     },
     {
       "Key": "masterPokeball",
-      "Value": "Master Ball"
+      "Value": "Masterball"
     },
     {
       "Key": "wrongAuthType",
@@ -30,7 +30,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Bu alanda uygun PokéStop bulunamadı. \"MaxTravelDistanceInMeters\" değeri çok küçük olabilir."
+      "Value": "Bu alanda uygun Pokéstop bulunamadı. \"MaxTravelDistanceInMeters\" değeri çok küçük olabilir."
     },
     {
       "Key": "eventFortUsed",
@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{1}m mesafedeki \"{0}\" PokéStopuna {2} saniye sonra varılacak."
+      "Value": "{1}m mesafedeki \"{0}\" Pokéstopuna {2} saniye sonra varılacak."
     },
     {
       "Key": "eventProfileLogin",
@@ -82,7 +82,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Poké topu kalmadı. - Kaçırılan Pokémon: {0} (CP: {1})"
+      "Value": "Pokéball kalmadı. - Kaçırılan Pokémon: {0} (CP: {1})"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
@@ -306,7 +306,7 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Tütsü(Incense) Pokémonu aranıyor..."
+      "Value": "Tütsü(Incense) Pokémon'u aranıyor..."
     },
     {
       "Key": "lookingForPokemon",
@@ -314,7 +314,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Yem(Lure) Pokémonu aranıyor..."
+      "Value": "Yem(Lure) Pokémon'u aranıyor..."
     },
     {
       "Key": "pokemonSkipped",
@@ -322,11 +322,11 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Poké topu kalmadı. Daha fazla Pokémon yakalanamaz!"
+      "Value": "Pokéball kalmadı. Daha fazla Pokémon yakalanamaz!"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Poké Ball: {0} | Great Ball: {1} | Ultra Ball: {2} | Master Ball: {3}"
+      "Value": "Pokéball: {0} | Greatball: {1} | Ultraball: {2} | Masterball: {3}"
     },
     {
       "Key": "currentPotionInv",
@@ -366,7 +366,7 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Yem(Lure) Pokémonu yakalarken bir sorunla karşılaşıldı: {0}"
+      "Value": "Yem(Lure) Pokémon'u yakalarken bir sorunla karşılaşıldı: {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -374,7 +374,7 @@
     },
     {
       "Key": "pokemonRename",
-      "Value": "{0} ({1}) | Pokémonun ismi değiştirildi. (\"{2}\" -> \"{3}\")"
+      "Value": "{0} ({1}) | Pokémon'un ismi değiştirildi. (\"{2}\" -> \"{3}\")"
     },
     {
       "Key": "pokemonFavorite",
@@ -486,7 +486,7 @@
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Keskin nişancılık için yeterli Poké topu yok! ({0}/{1})"
+      "Value": "Keskin nişancılık için yeterli Pokéball yok! ({0}/{1})"
     },
     {
       "Key": "displayHighestMOVE1Header",
