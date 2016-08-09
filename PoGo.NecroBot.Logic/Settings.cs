@@ -39,6 +39,11 @@ namespace PoGo.NecroBot.Logic
         public bool UseProxyAuthentication;
         public string UseProxyUsername;
         public string UseProxyPassword;
+        //Telegram
+        [DefaultValue(false)]
+        public bool UseTelegramAPI;
+        [DefaultValue(null)]
+        public string TelegramAPIKey;
         // device data
         [DefaultValue("random")]
         public string DevicePackageName;
@@ -256,10 +261,16 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(false)]
         public bool StartupWelcomeDelay;
         //Telegram
-        [DefaultValue(false)]
-        public bool UseTelegramAPI;
-        [DefaultValue(null)]
-        public string TelegramAPIKey;
+        [JsonIgnore]
+        public bool UseTelegramAPI
+        {
+            get { return Auth.UseTelegramAPI; }
+        }
+        [JsonIgnore]
+        public string TelegramAPIKey
+        {
+            get { return Auth.TelegramAPIKey;  }
+        }
 
         //console options
         [DefaultValue(10)]
