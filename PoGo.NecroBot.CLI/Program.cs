@@ -29,11 +29,11 @@ namespace PoGo.NecroBot.CLI
         private static void Main(string[] args)
         {
             string strCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-            var culture = CultureInfo.CreateSpecificCulture(strCulture);
-
+            var culture = CultureInfo.CreateSpecificCulture( "en" );
             // Forcing use of decimal separator for numerical values (Fix Convert.ToDouble Single ...)
             if (culture.NumberFormat.NumberDecimalSeparator != ".")
                     culture.NumberFormat.NumberDecimalSeparator = ".";
+
 
             CultureInfo.DefaultThreadCurrentCulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;
