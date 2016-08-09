@@ -16,7 +16,7 @@
       "Key": "masterPokeball",
       "Value": "Master Ball"
     },
-	{
+    {
       "Key": "wrongAuthType",
       "Value": "\"auth.json\" dosyası içindeki \"AuthType\" değeri geçersiz."
     },
