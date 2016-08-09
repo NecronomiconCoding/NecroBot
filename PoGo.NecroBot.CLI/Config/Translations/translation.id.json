@@ -22,6 +22,7 @@
     },
 	{
       "Key": "loginInvalid",
+      "Value": "Username dan password tidak cocok, login gagal!"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
