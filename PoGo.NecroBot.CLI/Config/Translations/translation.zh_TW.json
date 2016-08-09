@@ -26,15 +26,15 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "您已經走出範圍！5秒後返回起點(距離{0}公尺)，請確認系統設定是否正確？"
+      "Value": "您已經走出範圍！5秒後返回起點(距離{0}公尺)，請確認系統設定是否正確"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "您附近沒有任何可用的補給站，請確認系統設定是否正確？"
+      "Value": "您附近沒有任何可用的補給站，請確認系統設定是否正確"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "名稱：{0} 經驗值：{1}, 金幣：{2}, 物品：{3}"
+      "Value": "名稱：{0} 經驗值：{1}，金幣：{2}，物品：{3}"
     },
     {
       "Key": "eventFortFailed",
@@ -62,7 +62,7 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": " {0} 進化失敗，原因是 {1}，已取消進化 {2}"
+      "Value": "{0} 進化失敗，原因是 {1}，已取消進化 {2}"
     },
     {
       "Key": "eventPokemonTransferred",
@@ -74,11 +74,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} 等級: {3} CP: ({4}/{5}) IV: {6}% | 捕獲機率: {7}% | 距離{8}公尺 | 使用{9}捕捉 (剩餘{10}個) | 經驗值+{11} | {12} | 座標: {13},{14}"
+      "Value": "({0}) | ({1}) {2} 等級：{3} CP：({4}/{5}) IV：{6}% | 捕獲機率：{7}% | 距離{8}公尺 | 使用{9}捕捉 (剩餘{10}個) | 經驗值+{11} | {12} | 座標：{13},{14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} 等級: {3} CP: ({4}/{5}) IV: {6}% | 捕獲機率: {7}% | 距離{8}公尺 | 使用{9}捕捉 (剩餘{10}個) | 座標: {11},{12}"
+      "Value": "({0}) | ({1}) {2} 等級：{3} CP：({4}/{5}) IV：{6}% | 捕獲機率：{7}% | 距離{8}公尺 | 使用{9}捕捉 (剩餘{10}個) | 座標：{11},{12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -86,15 +86,15 @@
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
-      "Value": "目前有 {0} 隻神奇寶貝，再捕捉 {1} 隻神奇寶貝後將會進化! (目前有 {2}/{3} 占背包總量的 {4}% )"
+      "Value": "目前有 {0} 隻神奇寶貝，再捕捉 {1} 隻神奇寶貝後將會進化！(目前有 {2}/{3} 占背包總量的 {4}% )"
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "當設定值 UseLuckyEggsMinPokemonAmount 設定為 {0} 將不會使用幸運蛋，請改為 <= {1}"
+      "Value": "當設定值 UseLuckyEggsMinPokemonAmount 為 {0} 將不會使用幸運蛋，請改為 <= {1}"
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "再捕捉 {0} 隻神奇寶貝後將會使用幸運蛋!"
+      "Value": "再捕捉 {0} 隻神奇寶貝後將會使用幸運蛋！"
     },
     {
       "Key": "eventUseBerry",
@@ -150,7 +150,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "確認經緯度是否正確，如果錯誤將會退出程序！ 緯度：{0} 經度：{1}"
+      "Value": "確認經緯度是否正確，如果錯誤將會退出程式！ 緯度：{0} 經度：{1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -214,7 +214,7 @@
     },
     {
       "Key": "logEntryDebug",
-      "Value": "調試"
+      "Value": "除錯"
     },
     {
       "Key": "logEntryUpdate",
@@ -230,7 +230,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC 服務器可能關閉或您的帳號錯誤錯誤，請嘗試 Google 帳號登入"
+      "Value": "PTC 伺服器可能關閉或您的帳號錯誤錯誤，請嘗試 Google 帳號登入"
     },
     {
       "Key": "accessTokenExpired",
@@ -266,7 +266,7 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "未檢測到真實的旅行 {0}, 使用上一次儲存的設定"
+      "Value": "未檢測到真實的旅行 {0}，使用上一次儲存的設定"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -274,7 +274,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "恭喜！你已經更新至最新版本：{0}"
+      "Value": "恭喜！您已經更新至最新版本：{0}"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -294,7 +294,7 @@
     },
     {
       "Key": "finishedTransferringConfig",
-      "Value": "成功將您的腳本更新至最新版..."
+      "Value": "成功將您的設定更新至最新版..."
     },
     {
       "Key": "updateFinished",
@@ -306,11 +306,11 @@
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "正在搜索神奇寶貝..."
+      "Value": "正在尋找神奇寶貝..."
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "正在搜索誘餌吸引來的神奇寶貝..."
+      "Value": "正在尋找誘餌吸引來的神奇寶貝..."
     },
     {
       "Key": "pokemonSkipped",
@@ -318,27 +318,27 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "您身上已沒有寶貝球，將不會捕捉任何神奇寶貝!"
+      "Value": "您身上已沒有寶貝球，將不會捕捉任何神奇寶貝！"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "目前擁有寶貝球: {0} | 高級球: {1} | 超級球: {2} | 大師球: {3}"
+      "Value": "目前擁有寶貝球：{0} | 高級球：{1} | 超級球：{2} | 大師球：{3}"
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "藥水: {0} | 強效藥水: {1} | 超級藥水: {2} | 完全恢復藥水: {3}"
+      "Value": "藥水：{0} | 強效藥水：{1} | 超級藥水：{2} | 完全恢復藥水：{3}"
     },
     {
       "Key": "CurrentReviveInv",
-      "Value": "復甦劑: {0} | 完全復甦劑: {1}"
+      "Value": "復甦劑：{0} | 完全復甦劑：{1}"
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "莓果: {0} | 薰香: {1} | 幸運蛋: {2} | 誘餌: {3}"
+      "Value": "莓果：{0} | 薰香：{1} | 幸運蛋：{2} | 誘餌：{3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[設定錯誤] 您設定的物品數量錯誤 (寶貝球+藥水+復活劑={0}) 數量已超過您背包最大數量 ({1})"
+      "Value": "[錯誤] 您設定的物品數量 (寶貝球+藥水+復甦劑={0}) 已超過您背包的最大空間 ({1})"
     },
     {
       "Key": "recyclingQuietly",
@@ -370,15 +370,15 @@
     },
     {
       "Key": "pokemonRename",
-      "Value": "正在將神奇寶貝 {0} ({1}) 從 {2} 重命名為 {3}."
+      "Value": "神奇寶貝 {0} ({1}) 已從 {2} 改名為 {3}。"
     },
     {
       "Key": "pokemonFavorite",
-      "Value": "{0}% 完美度 {1} (CP {2}) *最愛*."
+      "Value": "{0}% 完美度 {1} (CP {2}) *加入最愛*。"
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[神奇寶貝忽略過濾器] - 在設定中定義忽略 {0} "
+      "Value": "[過濾器] - 已根據設定忽略 {0} "
     },
     {
       "Key": "catchStatusAttempt",
@@ -418,11 +418,11 @@
     },
     {
       "Key": "webSocketFailStart",
-      "Value": "無法啟動WebSocket服務器的端口：{0}"
+      "Value": "WebSocketServer啟動失敗，通訊埠：{0}"
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - 運行時間 {1} - 等級: {2} | 經驗/小時: {3:0} | 捕獲/小時: {4:0} | 星塵: {5:0} | 傳送: {6:0} | 丟棄: {7:0}"
+      "Value": "{0} - 運行時間 {1} - 等級：{2} | 經驗/小時：{3:0} | 捕獲/小時：{4:0} | 星塵：{5:0} | 傳送：{6:0} | 丟棄：{7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -434,7 +434,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "當您啟用了 Google 的兩步驟驗證後，需要在 auth.json 中輸入應用專用密碼"
+      "Value": "當您啟用了 Google 的兩步驟驗證後，需要在 auth.json 中輸入應用程式專用密碼"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -445,20 +445,24 @@
       "Value": "請確認輸入了正確的信箱地址和密碼。"
     },
     {
+      "Key": "googleOffline",
+      "Value": "無法連上 Google 伺服器，請稍後再試，謝謝您的耐心等候。"
+    },
+    {
       "Key": "missingCredentialsGoogle",
-      "Value": "您需要在 auth.json 中填寫 Google 帳戶和密碼！"
+      "Value": "您需要在 auth.json 中填寫 Google 帳號和密碼！"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "您需要在 auth.json 中填寫 PTC 帳戶和密碼！"
+      "Value": "您需要在 auth.json 中填寫 PTC 帳號和密碼！"
     },
     {
       "Key": "snipeScan",
-      "Value": "在  {0} 搜尋狩獵列表的的神奇寶貝..."
+      "Value": "在 {0} 搜尋可狙擊的神奇寶貝..."
     },
     {
       "Key": "snipeScanEx",
-      "Value": "狙擊 {0} IV: {1}  於: {2}..."
+      "Value": "狙擊 {0} IV：{1} 於：{2}..."
     },
     {
       "Key": "noPokemonToSnipe",
@@ -482,7 +486,7 @@
     },
     {
       "Key": "ipBannedError",
-      "Value": "拒絕連線. 您的 IP 可能已被 Niantic 列入黑名單. 離開中.."
+      "Value": "連線遭到拒絕。您的 IP 可能已被 Niantic 列入黑名單。正在退出.."
     },
     {
       "Key": "noEggsAvailable",
@@ -498,7 +502,7 @@
     },
     {
       "Key": "useLuckyEggAmount",
-      "Value": "背包中有幸運蛋: {0} 個"
+      "Value": "背包中有幸運蛋：{0} 個"
     },
     {
       "Key": "noIncenseAvailable",
@@ -510,7 +514,7 @@
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "背包中有薰香: {0} 個"
+      "Value": "背包中有薰香：{0} 個"
     },
     {
       "Key": "usedIncense",
@@ -518,11 +522,11 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "見過的神奇寶貝: {0}/151, 捕捉過的神奇寶貝: {1}/151"
+      "Value": "見過的神奇寶貝：{0}/151, 捕捉過的神奇寶貝：{1}/151"
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "[進化] 目前可進行進化的神奇寶貝: {0}"
+      "Value": "[進化] 可進化的神奇寶貝：{0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
@@ -530,11 +534,11 @@
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "狙擊伺服器已離線. 離開中..."
+      "Value": "狙擊伺服器已離線。正在退出..."
     },
     {
       "Key": "firstStartPrompt",
-      "Value": "這是你第一次啟動，你要開始安裝嗎？ {0}=是，{1}=否"
+      "Value": "這是您第一次啟動，您要開始設定嗎？ {0}=是，{1}=否"
     },
     {
       "Key": "firstStartLanguagePrompt",
@@ -550,7 +554,7 @@
     },
     {
       "Key": "promptError",
-      "Value": "[輸入錯誤]錯誤的輸入，請輸入'{0}'或'{1}'"
+      "Value": "[錯誤] 錯誤的輸入，請輸入'{0}'或'{1}'"
     },
     {
       "Key": "firstStartAutoGenSettings",
@@ -570,15 +574,15 @@
     },
     {
       "Key": "firstStartSetupTypePromptError",
-      "Value": "[錯誤]輸入了不正確的帳號類型，請選擇'{0}'或'{1}'"
+      "Value": "[錯誤] 輸入了不正確的帳號類型，請選擇'{0}'或'{1}'"
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
-      "Value": "請輸入用戶名"
+      "Value": "請輸入使用者名稱"
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
-      "Value": "確認用戶名：{0}"
+      "Value": "確認使用者名稱：{0}"
     },
     {
       "Key": "firstStartSetupPasswordPrompt",
@@ -614,7 +618,7 @@
     },
     {
       "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "確認緯度：{0}"
+      "Value": "確認已設定：{0}"
     },
     {
       "Key": "firstStartSetupDefaultLongPrompt",
@@ -622,7 +626,7 @@
     },
     {
       "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "確認經度：{0}"
+      "Value": "經度已設定：{0}"
     },
     {
       "Key": "firstStartSetupCompleted",
@@ -1398,7 +1402,7 @@
     },
     {
       "Key": "blizzard",
-      "Value": "暴風雪 "
+      "Value": "暴風雪"
     },
     {
       "Key": "airSlash",
@@ -1754,7 +1758,7 @@
     },
     {
       "Key": "hyperFang",
-      "Value": "必殺門牙 "
+      "Value": "必殺門牙"
     },
     {
       "Key": "slam",
