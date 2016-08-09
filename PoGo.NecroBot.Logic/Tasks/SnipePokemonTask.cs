@@ -191,7 +191,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         pokemonIds = pokemonOnlyList.Union(pokemonToCapture).ToList();
                     }
                     else
+                    {
                         pokemonIds = session.LogicSettings.PokemonToSnipe.Pokemon;
+                    }
 
                     if (session.LogicSettings.UseSnipeLocationServer)
                     {
@@ -359,7 +361,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var CurrentLongitude = session.Client.CurrentLongitude;
             var catchedPokemon = false;
 
-            session.EventDispatcher.Send(new SnipeModeEvent {Active = true});
+            session.EventDispatcher.Send(new SnipeModeEvent { Active = true });
 
             List<MapPokemon> catchablePokemon;
             try
@@ -400,6 +402,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
                 {
+
                     if (!LocsVisited.Contains(new PokemonLocation(latitude, longitude)))
                         LocsVisited.Add(new PokemonLocation(latitude, longitude));
                     //Also add exact pokemon location to LocsVisited, some times the server one differ a little.
@@ -458,14 +461,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
                 }
 
-                session.EventDispatcher.Send(new SnipeModeEvent {Active = false});
+                session.EventDispatcher.Send(new SnipeModeEvent { Active = false });
                 await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);
+
             }
+
         }
 
         private static ScanResult SnipeScanForPokemon(ISession session, Location location)
         {
-            var formatter = new NumberFormatInfo {NumberDecimalSeparator = "."};
+            var formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
 
             var offset = session.LogicSettings.SnipingScanOffset;
             // 0.003 = half a mile; maximum 0.06 is 10 miles
@@ -500,7 +505,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             catch (Exception ex)
             {
                 // most likely System.IO.IOException
-                session.EventDispatcher.Send(new ErrorEvent {Message = ex.Message});
+                session.EventDispatcher.Send(new ErrorEvent { Message = ex.Message });
                 scanResult = new ScanResult
                 {
                     Status = "fail",
@@ -523,7 +528,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             List<PokemonLocation_pokezz> pokemons = new List<PokemonLocation_pokezz>();
 
-            socket.On("pokemons", (msg) => 
+            socket.On("pokemons", (msg) =>
             {
                 JArray data = JArray.FromObject(msg);
 
@@ -536,14 +541,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                 waitforbroadcast.Set();
             });
 
-            socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_ERROR, () => 
+            socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_ERROR, () =>
             {
                 hasError = true;
                 waitforbroadcast.Set();
             });
 
-
-            socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_CONNECT_ERROR, () => 
+            socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_CONNECT_ERROR, () =>
             {
                 hasError = true;
                 waitforbroadcast.Set();
@@ -564,6 +568,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (pokemon.verified || !session.LogicSettings.GetOnlyVerifiedSniperInfoFromPokezz)
                         SnipeLocations.Add(SnipInfo);
                 }
+
                 var locationsToSnipe = SnipeLocations?.Where(q =>
                     (!session.LogicSettings.UseTransferIvForSnipe ||
                     (q.IV == 0 && !session.LogicSettings.SnipeIgnoreUnknownIv) ||
@@ -694,7 +699,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 catch (Exception ex)
                 {
                     // most likely System.IO.IOException
-                    session.EventDispatcher.Send(new ErrorEvent {Message = ex.ToString()});
+                    session.EventDispatcher.Send(new ErrorEvent { Message = ex.ToString() });
                 }
                 await Task.Delay(100, cancellationToken);
             }

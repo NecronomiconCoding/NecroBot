@@ -36,7 +36,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var pokemon in upgradablePokemon)
             {
-                if (session.LogicSettings.UseLevelUpList)
+
+                if (session.LogicSettings.UseLevelUpList && PokemonToLevel!=null)
                 {
                     for (int i = 0; i < PokemonToLevel.Count - 1; i++)
                     {
