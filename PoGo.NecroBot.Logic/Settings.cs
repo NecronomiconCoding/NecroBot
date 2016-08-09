@@ -338,7 +338,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("GPXPath.GPX")]
         public string GpxFile;
         //recycle
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool VerboseRecycling;
         [DefaultValue(90.0)]
         public double RecycleInventoryAtUsagePercentage;
