@@ -47,7 +47,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokestopList = await GetPokeStops(session);
             var stopsHit = 0;
             var rc = new Random(); //initialize pokestop random cleanup counter first time
-            storeRI = rc.Next(5, 10);
+            storeRI = rc.Next(8, 15);
             var eggWalker = new EggWalker(1000, session);
 
             if (pokestopList.Count <= 0)
