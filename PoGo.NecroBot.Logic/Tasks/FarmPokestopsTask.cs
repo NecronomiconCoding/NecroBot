@@ -14,6 +14,8 @@ using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Responses;
+using System.Xml.Linq;
+using System.Xml.XPath;
 
 #endregion
 
@@ -81,19 +83,21 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (session.LogicSettings.UseOsmNavigating)
                 {
-                    var req = System.Net.WebRequest.CreateHttp($"http://openls.geog.uni-heidelberg.de/route?start={session.Client.CurrentLatitude:0.000000},{session.Client.CurrentLongitude:0.000000}&end={pokeStop.Latitude:0.000000},{pokeStop.Longitude:0.000000}&via=&lang=en&distunit=KM&routepref=Bicycle&weighting=Shortest&avoidAreas=&useTMC=false&noMotorways=true&noTollways=false&noUnpavedroads=false&noSteps=false&noFerries=true&instructions=false");
-                    var resp = (System.Net.HttpWebResponse)await req.GetResponseAsync();
+                    var doc = XDocument.Load($"http://www.yournavigation.org/api/1.0/gosmore.php?flat={session.Client.CurrentLatitude:0.000000}&flon={session.Client.CurrentLongitude:0.000000}&tlat={pokeStop.Latitude:0.000000}&tlon={pokeStop.Longitude:0.000000}&v=foot");
 
-                    if (resp.StatusCode == System.Net.HttpStatusCode.OK)
+                    var points = doc.XPathSelectElement("//coordinates")
+                                    .Value
+                                    .Trim()
+                                    .Split(Environment.NewLine.ToCharArray(),StringSplitOptions.RemoveEmptyEntries);
+                    if (points.Any())
                     {
-                        var doc = System.Xml.Linq.XDocument.Load(resp.GetResponseStream());
-                        foreach (var step in doc.Elements("//LineString/pos").Select(p =>
+                        foreach (var step in points.Select(p =>
                         {
-                            String[] parts = p.Value.Split(' ');
+                            String[] parts = p.Split(',');
                             return new
                             {
-                                Latitude = Double.Parse(parts[0]),
-                                Longitude = Double.Parse(parts[1]),
+                                Latitude = double.Parse(parts[0]),
+                                Longitude = double.Parse(parts[1]),
                             };
                         }))
                         {
