@@ -234,11 +234,11 @@
     },
     {
       "Key": "accessTokenExpired",
-      "Value": "PTC Login Token expired. Relogging..."
+      "Value": "Le token de la connexion PTC a expiré. Reconnexion..."
     },
     {
       "Key": "invalidResponse",
-      "Value": "Received an invalid response from Niantic server"
+      "Value": "Réponse invalide du serveur Niantic"
     },
     {
       "Key": "tryingAgainIn",
@@ -250,11 +250,11 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Opening Google Device page. Please paste the code using CTRL+V"
+      "Value": "Ouverture de la page de périphérique Google. Veuillez copier le code (CTRL+V)"
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Couldnt copy to clipboard, do it manually"
+      "Value": "Copie dans le presse-papier impossible, faîtes le manuellement"
     },
     {
       "Key": "couldntCopyToClipboard2",
@@ -482,7 +482,7 @@
     },
     {
       "Key": "ipBannedError",
-      "Value": "Connexion refusée. Votre IP a sans doute été bloquée par Niantic. Arrêt en cours..."
+      "Value": "Connexion refusée. Votre adresse IP a sans doute été bloquée par Niantic. Arrêt en cours..."
     },
     {
       "Key": "noEggsAvailable",
@@ -530,7 +530,7 @@
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "Sniping server is offline. Skipping..."
+      "Value": "Le serveur de Snipe est hors-ligne. Ignoré..."
     },
     {
       "Key": "firstStartPrompt",
@@ -542,7 +542,7 @@
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "Veuillez entrer un nouveau code de Langue"
+      "Value": "Veuillez entrer un nouveau code de langue"
     },
     {
       "Key": "firstStartLanguageConfirm",
