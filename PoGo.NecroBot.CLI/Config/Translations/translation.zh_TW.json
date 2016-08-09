@@ -230,7 +230,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC 服務器可能關閉或您的帳號錯誤錯誤，請嘗試 Google 帳號登入"
+      "Value": "PTC 伺服器可能關閉或您的帳號錯誤錯誤，請嘗試 Google 帳號登入"
     },
     {
       "Key": "accessTokenExpired",
@@ -578,11 +578,11 @@
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
-      "Value": "請輸入用戶名"
+      "Value": "請輸入使用者名稱"
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
-      "Value": "確認用戶名：{0}"
+      "Value": "確認使用者名稱：{0}"
     },
     {
       "Key": "firstStartSetupPasswordPrompt",
@@ -1402,7 +1402,7 @@
     },
     {
       "Key": "blizzard",
-      "Value": "暴風雪 "
+      "Value": "暴風雪"
     },
     {
       "Key": "airSlash",
@@ -1758,7 +1758,7 @@
     },
     {
       "Key": "hyperFang",
-      "Value": "必殺門牙 "
+      "Value": "必殺門牙"
     },
     {
       "Key": "slam",

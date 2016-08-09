@@ -221,6 +221,14 @@
       "Value": "PEMBARUAN"
     },
     {
+      "Key": "logEntryNew",
+      "Value": "BARU"
+    },
+    {
+      "Key": "logEntrySoftBan",
+      "Value": "SOFTBAN"
+    },
+    {
       "Key": "loggingIn",
       "Value": "Masuk menggunakan {0}"
     },
@@ -414,15 +422,15 @@
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- LVL {0} | {1} ----- \n EXP: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang disebarkan: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang dievolusikan: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9} KM"
+      "Value": "----- LVL {0} | {1} ----- \n EXP: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang disebarkan: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang dievolusikan: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9} KM \n Pokemon: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
-      "Value": "\n CP {0} | Nama: {1}"
+      "Value": "\n CP: {0} | IV: {1}% | Nama: {2}"
     },
     {
       "Key": "helpTemplate",
-      "Value": "Perintah: \n \n /top <jumlah> - Menampilkan Pokemon tertinggimu.. \n /all - Menampilkan semua Pokemon-mu. \n /profile - Menampilkan profilmu. \n /loc - Menampilkan lokasimu. \n /items - Menampilkan barangmu."
+      "Value": "Perintah: \n \n /top <cp/iv> <jumlah> - Menampilkan Pokemon tertinggimu.. \n /all <cp/iv> - Menampilkan semua Pokemon-mu. \n /profile - Menampilkan profilmu. \n /loc - Menampilkan lokasimu. \n /items - Menampilkan barangmu. \n /status - Menampilkan status bot-mu. "
     },
     {
       "Key": "statsXpTemplateString",
@@ -627,6 +635,10 @@
 	{
       "Key": "firstStartSetupDefaultLongConfirm",
       "Value": "Bujur yang diterima: {0}"
+    },
+	{
+      "Key": "softBanBypassed",
+      "Value": "Berhasil dilewati!"
     },
 	{
       "Key": "firstStartSetupCompleted",

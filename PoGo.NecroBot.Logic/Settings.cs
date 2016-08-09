@@ -264,7 +264,7 @@ namespace PoGo.NecroBot.Logic
         //console options
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool DetailedCountsBeforeRecycling;
 
         [DefaultValue(3)]
@@ -275,6 +275,9 @@ namespace PoGo.NecroBot.Logic
         //powerup
         [DefaultValue(false)]
         public bool AutomaticallyLevelUpPokemon;
+
+        [DefaultValue((true))]
+        public bool UseLevelUpList;
         [DefaultValue(5)]
         public int AmountOfTimesToUpgradeLoop;
         [DefaultValue(5000)]
@@ -288,13 +291,13 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("and")]
         public string UpgradePokemonMinimumStatsOperator;
         //position
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool DisableHumanWalking;
         [DefaultValue(40.778915)]
         public double DefaultLatitude;
         [DefaultValue(-73.962277)]
         public double DefaultLongitude;
-        [DefaultValue(31.0)]
+        [DefaultValue(19.0)]
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
@@ -338,7 +341,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("GPXPath.GPX")]
         public string GpxFile;
         //recycle
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool VerboseRecycling;
         [DefaultValue(90.0)]
         public double RecycleInventoryAtUsagePercentage;
@@ -486,6 +489,7 @@ namespace PoGo.NecroBot.Logic
             new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
         };
 
+        
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
@@ -565,7 +569,17 @@ namespace PoGo.NecroBot.Logic
             //PokemonId.Goldeen,
             //PokemonId.Staryu
         };
-
+        public List<PokemonId> PokemonsToLevelUp = new List<PokemonId>
+        {
+            //criteria: most common
+            PokemonId.Caterpie,
+            PokemonId.Weedle,
+            PokemonId.Pidgey,
+            PokemonId.Rattata,
+            PokemonId.Spearow,
+            PokemonId.Zubat,
+            PokemonId.Doduo
+        };
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
         {
             //criteria: most common
@@ -757,7 +771,6 @@ namespace PoGo.NecroBot.Logic
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
             settings.isGui = isGui;
-            settings.migratePercentages();
 
             if (!boolSkipSave || !settings.AutoUpdate)
             {
@@ -955,22 +968,6 @@ namespace PoGo.NecroBot.Logic
         {
             settings.Save(configFile);
             settings.Auth.Load(Path.Combine(settings.ProfileConfigPath, "auth.json"));
-        }
-
-
-        /// <summary>
-        /// Method for issue #1966
-        /// </summary>
-        private void migratePercentages()
-        {
-            if (EvolveKeptPokemonsAtStorageUsagePercentage <= 1.0)
-            {
-                EvolveKeptPokemonsAtStorageUsagePercentage *= 100.0f;
-            }
-            if (RecycleInventoryAtUsagePercentage <= 1.0)
-            {
-                RecycleInventoryAtUsagePercentage *= 100.0f;
-            }
         }
 
         public void Save(string fullPath)
@@ -1227,6 +1224,7 @@ namespace PoGo.NecroBot.Logic
         public int KeepMinLvl => _settings.KeepMinLvl;
         public bool UseKeepMinLvl => _settings.UseKeepMinLvl;
         public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;
+        public bool UseLevelUpList => _settings.UseLevelUpList;
         public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;
         public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;
         public int GetMinStarDustForLevelUp => _settings.GetMinStarDustForLevelUp;
@@ -1289,8 +1287,10 @@ namespace PoGo.NecroBot.Logic
         public double EvolveKeptPokemonsAtStorageUsagePercentage => _settings.EvolveKeptPokemonsAtStorageUsagePercentage;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
+        public ICollection<PokemonId> PokemonsToLevelUp => _settings.PokemonsToLevelUp;
         public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
         public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
+
         public ICollection<PokemonId> PokemonToUseMasterball => _settings.PokemonToUseMasterball;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
