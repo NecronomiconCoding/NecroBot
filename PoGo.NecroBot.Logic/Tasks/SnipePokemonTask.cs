@@ -395,9 +395,6 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static async Task Snipe(ISession session, IEnumerable<PokemonId> pokemonIds, double latitude,
             double longitude, CancellationToken cancellationToken)
         {
-            if (_lastSnipe.AddMilliseconds(session.LogicSettings.MinDelayBetweenSnipes) > DateTime.Now)
-                return;
-
             var CurrentLatitude = session.Client.CurrentLatitude;
             var CurrentLongitude = session.Client.CurrentLongitude;
             var catchedPokemon = false;
@@ -425,6 +422,14 @@ namespace PoGo.NecroBot.Logic.Tasks
             finally
             {
                 await session.Client.Player.UpdatePlayerLocation(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude);
+            }
+
+            if (catchablePokemon.Count == 0)
+            {
+                // Pokemon not found but we still add to the locations visited, so we don't keep sniping
+                // locations with no pokemon.
+                if (!LocsVisited.Contains(new PokemonLocation(latitude, longitude)))
+                    LocsVisited.Add(new PokemonLocation(latitude, longitude));
             }
 
             foreach (var pokemon in catchablePokemon)
