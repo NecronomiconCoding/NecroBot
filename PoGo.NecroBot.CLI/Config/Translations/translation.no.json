@@ -51,11 +51,11 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Failed {0}. Resultat ble {1}, stopper evolving {2}"
+      "Value": "Mislyktes {0}. Resultat ble {1}, stopper evolving {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Beste CP: {3}  IV: {4}%] (Candies: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -63,15 +63,15 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Sjanse: {7}% | {8}m dist | med en {9} ({10} igjen). | {11} EXP tjent | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Sjanse: {7}% | {8}m dist | med en {9} ({10} igjen). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Ingen Pokeballs - Vi gikk glipp av {0} med CP {1}"
+      "Value": "Ingen Pokeballer - Vi gikk glipp av {0} med CP {1}"
     },
     {
       "Key": "catchStatusAttempt",
@@ -95,11 +95,11 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "perfect"
+      "Value": "perfekt"
     },
     {
       "Key": "commonWordName",
-      "Value": "name"
+      "Value": "navn"
     },
     {
       "Key": "displayHighestsCpHeader",
