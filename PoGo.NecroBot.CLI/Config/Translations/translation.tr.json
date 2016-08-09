@@ -474,7 +474,7 @@
     },
     {
       "Key": "snipeScanEx",
-      "Value": "{2} konumunda nişan alınan Pokémon: {0} (IV: {1})"
+      "Value": "{2} konumunda nişan alınan Pokémon: {0} (IV: {1}%)"
     },
     {
       "Key": "noPokemonToSnipe",
