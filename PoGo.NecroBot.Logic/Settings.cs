@@ -276,7 +276,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(false)]
         public bool AutomaticallyLevelUpPokemon;
         [DefaultValue(true)]
-        public bool OnlyUpgradeFaveriots;
+        public bool OnlyUpgradeFavorites;
 
         [DefaultValue((true))]
         public bool UseLevelUpList;
@@ -1235,7 +1235,7 @@ namespace PoGo.NecroBot.Logic
         public int KeepMinLvl => _settings.KeepMinLvl;
         public bool UseKeepMinLvl => _settings.UseKeepMinLvl;
         public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;
-        public bool OnlyUpgradeFaveriots => _settings.OnlyUpgradeFaveriots;
+        public bool OnlyUpgradeFavorites => _settings.OnlyUpgradeFavorites;
         public bool UseLevelUpList => _settings.UseLevelUpList;
         public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;
         public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;

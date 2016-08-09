@@ -22,9 +22,9 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
            
            
-        //    if (session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
-          //      return;
-            if (session.LogicSettings.OnlyUpgradeFaveriots)
+            if (session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
+                return;
+            if (session.LogicSettings.OnlyUpgradeFavorites)
             {
                 upgradablePokemon = await session.Inventory.GetFaveriotPokemon();
             }
