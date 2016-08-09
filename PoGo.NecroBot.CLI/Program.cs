@@ -31,9 +31,6 @@ namespace PoGo.NecroBot.CLI
             string strCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
             var culture = CultureInfo.CreateSpecificCulture(strCulture);
 
-            string CultureName = Thread.CurrentThread.CurrentCulture.Name;
-            CultureInfo ci = new CultureInfo(CultureName);
-
             // Forcing use of decimal separator for numerical values (Fix Convert.ToDouble Single ...)
             if (culture.NumberFormat.NumberDecimalSeparator != ".")
                     culture.NumberFormat.NumberDecimalSeparator = ".";
