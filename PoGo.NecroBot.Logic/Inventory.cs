@@ -240,7 +240,7 @@ namespace PoGo.NecroBot.Logic
                 .FirstOrDefault();
         }
 
-        public async Task<int> GetStarDust()
+        public int GetStarDust()
         {
             GetPlayerData();
             return _player.PlayerData.Currencies[1].Amount;
