@@ -175,31 +175,31 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
 
                     if (session.LogicSettings.UseLuckyEggConstantly)
-                        UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                        await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
 
                     if (session.LogicSettings.UseIncenseConstantly)
-                        UseIncenseConstantlyTask.Execute(session, cancellationToken);
+                        await UseIncenseConstantlyTask.Execute(session, cancellationToken);
 
                     if (session.LogicSettings.TransferDuplicatePokemon)
-                        TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
 
                     if (session.LogicSettings.TransferWeakPokemon)
-                        TransferWeakPokemonTask.Execute(session, cancellationToken);
+                        await TransferWeakPokemonTask.Execute(session, cancellationToken);
 
                     if (session.LogicSettings.RenamePokemon)
-                        RenamePokemonTask.Execute(session, cancellationToken);
+                        await RenamePokemonTask.Execute(session, cancellationToken);
 
                     if (session.LogicSettings.AutoFavoritePokemon)
-                        FavoritePokemonTask.Execute(session, cancellationToken);
+                        await FavoritePokemonTask.Execute(session, cancellationToken);
 
                     if (session.LogicSettings.AutomaticallyLevelUpPokemon)
-                        LevelUpPokemonTask.Execute(session, cancellationToken).Wait(cancellationToken);
+                        await LevelUpPokemonTask.Execute(session, cancellationToken);
 
-                    GetPokeDexCount.Execute(session, cancellationToken).Wait(cancellationToken);
+                    await GetPokeDexCount.Execute(session, cancellationToken);
                 }
 
                 if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
-                    SnipePokemonTask.Execute(session, cancellationToken).Wait(cancellationToken);
+                    await SnipePokemonTask.Execute(session, cancellationToken);
             }
         }
 
