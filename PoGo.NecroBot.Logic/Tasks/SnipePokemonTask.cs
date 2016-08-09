@@ -530,6 +530,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             List<PokemonLocation_pokezz> pokemons = new List<PokemonLocation_pokezz>();
 
             socket.On("pokemons", (msg) => {
+                socket.Close();
                 JArray data = JArray.FromObject(msg);
                 foreach (var pokeToken in data.Children())
                 {
@@ -542,11 +543,13 @@ namespace PoGo.NecroBot.Logic.Tasks
             });
 
             socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_ERROR, () => {
+                socket.Close();
                 hasError = true;
                 waitforbroadcast.Set();
             });
 
             socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_CONNECT_ERROR, () => {
+                socket.Close();
                 hasError = true;
                 waitforbroadcast.Set();
             });
