@@ -121,9 +121,6 @@ namespace PoGo.NecroBot.Logic.State
 
             if( TransferConfig( baseDir, session ) )
                 Utils.ErrorHandler.ThrowFatalError( session.Translation.GetTranslation( TranslationString.FinishedTransferringConfig ), 5, LogLevel.Update );
-            
-
-            await Task.Delay(2000, cancellationToken);
 
             Process.Start(Assembly.GetEntryAssembly().Location);
             Environment.Exit(-1);
