@@ -75,7 +75,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Žádné pokebaly - Ztratili jsme {0} s CP {1}"
+      "Value": "Žádné pokebally - Ztratili jsme {0} s CP {1}"
     },
     {
       "Key": "eventUseBerry",
@@ -219,7 +219,7 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Souřadnice v souboru \"LastPos.ini\" jsou nevalidní, použití defaultních souřadnic"
+      "Value": "Souřadnice v souboru \"LastPos.ini\" jsou nesprávné, použití defaultních souřadnic"
     },
     {
       "Key": "gotUpToDateVersion",
@@ -239,7 +239,7 @@
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "Dokončování rozbalování souborů..."
+      "Value": "Rozbalování souborů dokončeno..."
     },
     {
       "Key": "FinishedTransferringConfig",
@@ -259,7 +259,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Hledání kouzelného pokemona..."
+      "Value": "Hledání nalákaného pokemona..."
     },
     {
       "Key": "pokemonSkipped",
@@ -275,15 +275,15 @@
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "Lektvar: {0} | Super-Lektvar: {1} | Hyper-Lektvar: {2} | Max-Lektvar: {3}"
     },
     {
       "Key": "CurrentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
+      "Value": "Oživení: {0} | Plné Oživení: {1}"
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "Maliny: {0} | Kadidlo: {1} | Šťastné vejce: {2} | Návnada: {3}"
     },
     {
       "Key": "invFullTransferring",
@@ -296,7 +296,7 @@
     {
       "Key": "invFullTransferManually",
       "Value":
-        "Batoh s pokemony je plný! Prosím přeneste pokémona ručně nebo nastavte TransferDuplicatePokemon na true v nastavení..."
+        "Batoh s pokémony je plný! Prosím přeneste pokémona ručně nebo nastavte TransferDuplicatePokemon na true v nastavení..."
     },
     {
       "Key": "encounterProblem",
@@ -352,7 +352,7 @@
     },
     {
       "Key": "CatchTypeLure",
-      "Value": "Kouzelný"
+      "Value": "Nalákaný"
     },
     {
       "Key": "CatchTypeIncense",
@@ -388,7 +388,7 @@
     },
     {
       "Key": "GoogleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "Google servery pravděpodobně nefungují, prosím buďte trrpělivý a spusťe program později."
     },
     {
       "Key": "MissingCredentialsGoogle",
@@ -408,7 +408,7 @@
     },
     {
       "Key": "NoPokemonToSnipe",
-      "Value": "Žádný pokémon k sejmutí nenalezen"
+      "Value": "Žádný pokémon k sestřelení nenalezen"
     },
     {
       "Key": "NotEnoughPokeballsToSnipe",
@@ -436,19 +436,19 @@
     },
     {
       "Key": "UseLuckyEggActive",
-      "Value": "Použití LuckyEgg aktivní"
+      "Value": "Šťastné vejce je aktivní"
     },
     {
       "Key": "UsedLuckyEgg",
-      "Value": "Použito LuckyEgg"
+      "Value": "Použito Šťastné vejce"
     },
     {
       "Key": "UseLuckyEggAmount",
-      "Value": "LuckyEgg v batohu: {0}"
+      "Value": "Šťastná vejce v batohu: {0}"
     },
     {
       "Key": "NoIncenseAvailable",
-      "Value": "Žádné kadidlo dostupné"
+      "Value": "Kadidlo není dostupné"
     },
     {
       "Key": "UseIncenseActive",
@@ -460,7 +460,7 @@
     },
     {
       "Key": "UsedIncense",
-      "Value": "Použito kadidlo"
+      "Value": "Kadidlo použito"
     },
     {
       "Key": "AmountPkmSeenCaught",
