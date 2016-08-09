@@ -20,6 +20,7 @@ using System.Net;
 using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Threading;
 
 #endregion
 
@@ -787,7 +788,26 @@ namespace PoGo.NecroBot.Logic
                 try
                 {
                     //if the file exists, load the settings
-                    var input = File.ReadAllText(configFile);
+                    string input = "";
+                    int count = 0;
+                    while (true)
+                    {
+                        try
+                        {
+                            input = File.ReadAllText(configFile);
+                            break;
+                        }
+                        catch (Exception exception)
+                        {
+                            if (count > 10)
+                            {
+                                //sometimes we have to wait close to config.json for access
+                                Logger.Write("configFile: " + exception.Message, LogLevel.Error);
+                            }
+                            count++;
+                            Thread.Sleep(1000);
+                        }
+                    };
 
                     var jsonSettings = new JsonSerializerSettings();
                     jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
