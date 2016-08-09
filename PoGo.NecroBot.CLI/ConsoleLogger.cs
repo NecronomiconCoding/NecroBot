@@ -111,14 +111,22 @@ namespace PoGo.NecroBot.CLI
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Update}) {message}");
                     break;
                 case LogLevel.New:
-                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Green : color;
+                    Console.ForegroundColor = ConsoleColor.Black ? ConsoleColor.Green : color;
                     Console.WriteLine( $"[{DateTime.Now.ToString( "HH:mm:ss" )}] ({LoggingStrings.New}) {message}" );
+                case LogLevel.SoftBan:
+                    Console.ForegroundColor = ConsoleColor.Black ? ConsoleColor.DarkRed : color;
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.SoftBan}) {message}");
                     break;
                 default:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.White : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Error}) {message}");
                     break;
             }
+        }
+
+        public void lineSelect(int lineChar = 0, int linesUp = 1)
+        {
+            Console.SetCursorPosition(lineChar, Console.CursorTop - linesUp);
         }
     }
 }
