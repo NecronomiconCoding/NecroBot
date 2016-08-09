@@ -388,7 +388,7 @@
     },
     {
       "Key": "GoogleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "Google servery jsou pravděpodobně nedostupné. Prosím, buďte trpěliví a zkuste spustit bota později."
     },
     {
       "Key": "MissingCredentialsGoogle",
