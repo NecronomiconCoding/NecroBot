@@ -446,7 +446,7 @@
     },
     {
       "Key": "googleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "Server Google mungkin sedang mati, harap sabar dan jalankan bot-nya lain waktu."
     },
     {
       "Key": "missingCredentialsGoogle",
