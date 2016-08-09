@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Nivel: {3} CP: ({4}/{5}) IV: {6}% | Șansă: {7}% | {8}m distanță | cu un {9} ({10} rămase) | {11} | lat: {12} long: {13}"
+      "Value": "({0}) | ({1}) {2} Nivel: {3} CP: ({4}/{5}) IV: {6}% | Șansă: {7}% | {8}m distanță | cu un {9} ({10} rămase) | {11} EXP câștigată | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
@@ -542,7 +542,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "Evoluări potențiale: {0}"
+      "Value": "Evoluții potențiale ale pokemonilor: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
