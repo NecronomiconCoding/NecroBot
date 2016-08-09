@@ -134,7 +134,7 @@
     },
 	{
       "Key": "commonWordUnknown",
-      "Value": "?"
+      "Value": "tanımsız"
     },
     {
       "Key": "displayHighestsCpHeader",
@@ -486,11 +486,11 @@
     },
     {
       "Key": "displayHighestMOVE1Header",
-      "Value": "VURUŞ1"
+      "Value": "SALDIRI1"
     },
     {
       "Key": "displayHighestMOVE2Header",
-      "Value": "VURUŞ2"
+      "Value": "SALDIRI2"
     },
 	{
       "Key": "displayHighestCandy",
