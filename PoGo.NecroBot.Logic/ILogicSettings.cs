@@ -164,6 +164,7 @@ namespace PoGo.NecroBot.Logic
         bool SnipePokemonNotInPokedex { get; }
         bool RandomizeRecycle { get; }
         int RandomRecycleValue { get; }
+        bool DelayBetweenRecycleActions { get; }
         int TotalAmountOfPokeballsToKeep { get; }
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
