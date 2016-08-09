@@ -502,6 +502,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
                 });
+                if (!LocsVisited.Contains(new PokemonLocation(latitude, longitude)))
+                    LocsVisited.Add(new PokemonLocation(latitude, longitude));
             }
 
             session.EventDispatcher.Send(new SnipeModeEvent { Active = false });
