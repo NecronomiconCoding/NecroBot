@@ -48,7 +48,7 @@ namespace PoGo.NecroBot.Logic.Common
         {
             try
             {
-                if (_session.Settings.AuthType != AuthType.Google || _session.Settings.AuthType != AuthType.Ptc)
+                if (_session.Settings.AuthType == AuthType.Google || _session.Settings.AuthType == AuthType.Ptc)
                 {
                     await _session.Client.Login.DoLogin();
                 }
@@ -63,6 +63,14 @@ namespace PoGo.NecroBot.Logic.Common
             catch (AggregateException ae)
             {
                 throw ae.Flatten().InnerException;
+            }
+            catch (NullReferenceException nre)
+            {
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = "Causing Method: " + nre.TargetSite + " Source: " + nre.Source + " Data: " + nre.Data
+                });
+                throw nre.InnerException;
             }
             catch (LoginFailedException)
             {
@@ -97,6 +105,19 @@ namespace PoGo.NecroBot.Logic.Common
 
                 await Task.Delay(15000);
             }
+            catch (GoogleOfflineException)
+            {
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.GoogleOffline)
+                });
+                _session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message = _session.Translation.GetTranslation(TranslationString.TryingAgainIn, 15)
+                });
+
+                await Task.Delay(15000);
+            }
             catch (InvalidResponseException)
             {
                 _session.EventDispatcher.Send(new ErrorEvent()
@@ -112,7 +133,10 @@ namespace PoGo.NecroBot.Logic.Common
             }
             catch (Exception ex)
             {
-                throw ex.InnerException;
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = ex.InnerException.ToString()
+                });
             }
         }
         public void HandleApiSuccess(RequestEnvelope request, ResponseEnvelope response)

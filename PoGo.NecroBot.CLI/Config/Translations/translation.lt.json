@@ -413,6 +413,10 @@
       "Value": "Įsitikinkite kad įvedėte teisingą Email ir Slaptažodį."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Jums reikia užpildyti GoogleUsername ir GooglePassword faile auth.json!"
     },
@@ -479,6 +483,22 @@
     {
       "Key": "pkmNotEnoughRessources",
       "Value": "Pokemono pagerinimas nepavyko - nepakanka resursų"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- Pokedex catched --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- Pokedex needed --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
 	"PokemonStrings": [

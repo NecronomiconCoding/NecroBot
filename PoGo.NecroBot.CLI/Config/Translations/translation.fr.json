@@ -30,11 +30,11 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Impossible de trouver un PokeStop. Modifiez la valeur de MaxTravelDistanceInMeters dans config.json"
+      "Value": "Impossible de trouver un PokeStop. Modifiez la valeur de MaxTravelDistanceInMeters dans le fichier config.json"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "{0} +{1}XP |{2}| {3}"
+      "Value": "{0} +{1}XP | {2} Gems | {3}"
     },
     {
       "Key": "eventFortFailed",
@@ -50,11 +50,11 @@
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "Utilisation d'un encens, reste {0}"
+      "Value": "Utilisation d'un encens, {0} restant"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Utilisation d'un Œuf Chance, reste {0}"
+      "Value": "Utilisation d'un Œuf Chance, {0} restant"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -74,11 +74,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | dist {8}m | reste {10} {9} | {11}XP | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | dist {8}m | {10} {9} restante(s) | {11}XP | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | avec une {9} (reste {10}) | lat: {11} long: {12} "
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | avec une {9} ({10} restante) | lat: {11} long: {12} "
     },
     {
       "Key": "eventNoPokeballs",
@@ -90,7 +90,7 @@
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "Un Œuf Chance ne peut être utiliser qu'avec UseLuckyEggsMinPokemonAmount = {0}, utilisez plutôt une valeur <= à {1}"
+      "Value": "Un Œuf Chance ne peut être utilisé qu'avec UseLuckyEggsMinPokemonAmount = {0}, utilisez plutôt une valeur <= à {1}"
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
@@ -98,7 +98,7 @@
     },
     {
       "Key": "eventUseBerry",
-      "Value": "{0} utilisé, reste {1}"
+      "Value": "{0} utilisé, {1} restante(s)"
     },
     {
       "Key": "itemRazzBerry",
@@ -154,11 +154,11 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Incubation d'un oeuf, reste {0:0.00}km"
+      "Value": "Incubation d'un oeuf, {0:0.00}km restant"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Incubation en cours, reste {0:0.00}km"
+      "Value": "Incubation en cours, {0:0.00}km restant"
     },
     {
       "Key": "incubatorEggHatched",
@@ -234,11 +234,11 @@
     },
     {
       "Key": "accessTokenExpired",
-      "Value": "PTC Login Token expired. Relogging..."
+      "Value": "Le token de la connexion PTC a expiré. Reconnexion..."
     },
     {
       "Key": "invalidResponse",
-      "Value": "Received an invalid response from Niantic server"
+      "Value": "Réponse invalide du serveur Niantic"
     },
     {
       "Key": "tryingAgainIn",
@@ -250,11 +250,11 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Opening Google Device page. Please paste the code using CTRL+V"
+      "Value": "Ouverture de la page de périphérique Google. Veuillez copier le code (CTRL+V)"
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Couldnt copy to clipboard, do it manually"
+      "Value": "Copie dans le presse-papier impossible, faîtes le manuellement"
     },
     {
       "Key": "couldntCopyToClipboard2",
@@ -426,7 +426,7 @@
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (Prochain niveau dans {1}h {2}m | {3}/{4} XP)"
+      "Value": "{0} (Niveau suivant dans {1}h {2}m | {3}/{4} XP)"
     },
     {
       "Key": "requireInputText",
@@ -438,11 +438,15 @@
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "Ouverture de la page Mots de passe d'application. Merci de générer un nouveau mot de passe spécifique à l'application. (use Other as Device)"
+      "Value": "Ouverture de la page Mots de passe d'application Google. Merci de générer un nouveau mot de passe spécifique à l'application. (utilisez 'Autre' comme périphérique)"
     },
     {
       "Key": "googleError",
       "Value": "Veuillez vérifier vos identifiants GoogleUsername et GooglePassword dans auth.json!"
+    },
+    {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
     },
     {
       "Key": "missingCredentialsGoogle",
@@ -482,7 +486,7 @@
     },
     {
       "Key": "ipBannedError",
-      "Value": "Connexion refusée. Votre IP a sans doute été bloquée par Niantic. Arrêt en cours..."
+      "Value": "Connexion refusée. Votre adresse IP a sans doute été bloquée par Niantic. Arrêt en cours..."
     },
     {
       "Key": "noEggsAvailable",
@@ -530,7 +534,7 @@
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "Sniping server is offline. Skipping..."
+      "Value": "Le serveur de Snipe est hors-ligne. Ignoré..."
     },
     {
       "Key": "firstStartPrompt",
@@ -542,7 +546,7 @@
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "Veuillez entrer un nouveau code de Langue"
+      "Value": "Veuillez entrer un nouveau code de langue"
     },
     {
       "Key": "firstStartLanguageConfirm",
@@ -627,6 +631,22 @@
     {
       "Key": "firstStartSetupCompleted",
       "Value": "### Configuration terminée ###"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- Pokedex catched --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- Pokedex needed --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
   "PokemonStrings": [

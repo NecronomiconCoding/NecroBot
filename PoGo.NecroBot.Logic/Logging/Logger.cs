@@ -87,6 +87,11 @@ namespace PoGo.NecroBot.Logic.Logging
             if (!_isGui)
                 Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message), force);
         }
+
+        public static void lineSelect(int lineChar = 0, int linesUp = 1)
+        {
+            _logger.lineSelect(lineChar, linesUp);
+        }
     }
 
     public enum LogLevel
@@ -107,6 +112,8 @@ namespace PoGo.NecroBot.Logic.Logging
         Update = 13,
         Info = 14,
         New = 15,
-        Debug = 16,
+        SoftBan = 16,
+        LevelUp = 17,
+        Debug = 18,
     }
 }
