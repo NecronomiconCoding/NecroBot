@@ -288,7 +288,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("and")]
         public string UpgradePokemonMinimumStatsOperator;
         //position
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool DisableHumanWalking;
         [DefaultValue(40.778915)]
         public double DefaultLatitude;
@@ -330,7 +330,7 @@ namespace PoGo.NecroBot.Logic
         public bool UseKeepMinLvl;
         [DefaultValue(false)]
         public bool PrioritizeIvOverCp;
-        [DefaultValue(0)]
+        [DefaultValue(1)]
         public int KeepMinDuplicatePokemon;
         //gpx
         [DefaultValue(false)]
