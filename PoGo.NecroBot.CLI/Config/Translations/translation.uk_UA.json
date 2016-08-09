@@ -1,4 +1,4 @@
-﻿{
+{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -18,7 +18,7 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Невідомий AuthType в config.json"
+      "Value": "Невідомий тип аутентифікації(AuthType) в config.json"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
@@ -28,7 +28,7 @@
     {
       "Key": "farmPokestopsNoUsableFound",
       "Value":
-        "Не знайдено активних PokeStop'ов у вашій зоні. Можливо вказана занадто маленька максимальна дистанція пошуку в налаштуваннях?"
+        "Не знайдено активних покетстопів у вашій зоні. Можливо вказана занадто маленька максимальна дистанція пошуку в налаштуваннях?"
     },
     {
       "Key": "eventFortUsed",
@@ -48,7 +48,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Використано Lucky Egg, їх залишилося: {0}"
+      "Value": "Використано щасливе яйце, їх залишилося: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -104,7 +104,7 @@
     },
     {
       "Key": "commonWordName",
-      "Value": "ім'я"
+      "Value": "Ім'я"
     },
     {
       "Key": "commonWordUnknown",
@@ -124,7 +124,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Переконайтеся, що Широта і Довгота вірні! Закрийте програму, якщо це не так! Широта: {0} Довгота: {1}"
+      "Value": "Переконайтеся, що широта і довгота вірні! Закрийте програму, якщо це не так! Широта: {0} Довгота: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -160,7 +160,7 @@
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "видаляємо"
+      "Value": "Видаляємо"
     },
     {
       "Key": "logEntryPKMN",
@@ -168,7 +168,7 @@
     },
     {
       "Key": "logEntryTransfered",
-      "Value": "обмінюються"
+      "Value": "Обмінюються"
     },
     {
       "Key": "logEntryEvolved",
@@ -192,7 +192,7 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "логін під аккаунтом {0}"
+      "Value": "Логін під аккаунтом {0}"
     },
     {
       "Key": "ptcOffline",
@@ -205,7 +205,7 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "аккаунт не підтверджений! Виходимо ..."
+      "Value": "Обліковий запис не підтверджений! Виходимо ..."
     },
     {
       "Key": "openingGoogleDevicePage",
@@ -298,7 +298,7 @@
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Зазначене местоназначеніе {0}, {1} занадто далеко від поточної позиції {2}, {3}"
+      "Value": "Зазначене місце призначення {0}, {1} занадто далеко від поточної позиції {2}, {3}"
     },
     {
       "Key": "pokemonRename",
@@ -376,12 +376,16 @@
       "Value": "Переконайтеся, що Ви ввели вірні E-mail і Пароль від аккаунта!"
     },
     {
+      "Key": "googleOffline",
+      "Value": "Можливо, сервери не працюють, зачекайте та перезапустіть программу пізніше."
+    },
+    {
       "Key": "missingCredentialsGoogle",
-      "Value": "Вам потрібно заповнити настройки GoogleUsername і GooglePassword в auth.json!"
+      "Value": "Вам потрібно заповнити налаштування GoogleUsername і GooglePassword в auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Вам потрібно заповнити настройки PtcUsername і PtcPassword в auth.json!"
+      "Value": "Вам потрібно заповнити налаштування PtcUsername і PtcPassword в auth.json!"
     },
     {
       "Key": "snipeScan",

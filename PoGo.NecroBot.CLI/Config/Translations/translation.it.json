@@ -22,16 +22,16 @@
     },
     {
       "Key": "loginInvalid",
-      "Value": "Le credenziali utente inserite non sono valide ed il login è fallito"
+      "Value": "Le credenziali utente inserite non sono valide. Login fallito"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file LastPos.ini e' corretto?"
+        "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file LastPos.ini è corretto?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Nessun PokeStop disponibile è stato trovato nella tua area. Distanza massima impostata troppo piccola?"
+      "Value": "Nessun PokeStop disponibile nella tua area. La distanza massima è troppo piccola?"
     },
     {
       "Key": "eventFortUsed",
@@ -83,7 +83,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Nessuna Pokeball rimasta - Perso {0} con PL {1}"
+      "Value": "Nessuna Pokéball rimasta - Perso {0} con PL {1}"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
@@ -95,7 +95,7 @@
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "Cattura ancora {0} Pokemon per usare un Fortunuovo!"
+      "Value": "Cattura ancora {0} Pokémon per usare un Fortunuovo!"
     },
     {
       "Key": "eventUseBerry",
@@ -120,11 +120,11 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Dati non gestiti nel file GPX, verra' ignorato."
+      "Value": "Dati non gestiti nel file GPX, verrà ignorato."
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokemon"
+      "Value": "Pokémon"
     },
     {
       "Key": "commonWordPerfect",
@@ -140,15 +140,15 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "Mostra PL piu' alti"
+      "Value": "Mostra PL più alti"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Mostra IV piu' alti"
+      "Value": "Mostra IV più alti"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Mostra livelli piu' alti"
+      "Value": "Mostra livelli più alti"
     },
     {
       "Key": "welcomeWarning",
@@ -180,7 +180,7 @@
     },
     {
       "Key": "logEntryPokestop",
-      "Value": "POKESTOP"
+      "Value": "POKÈSTOP"
     },
     {
       "Key": "logEntryFarming",
@@ -244,7 +244,7 @@
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Impossibile copiare negli appunti, fallo manualmente"
+      "Value": "Impossibile copiare negli appunti, procedi manualmente"
     },
     {
       "Key": "couldntCopyToClipboard2",
@@ -252,11 +252,11 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Spostamenti Realistici rilevati, verra' usato UserSettings.settings"
+      "Value": "Spostamenti realistici rilevati, verra' usato UserSettings.settings"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Spostamenti non Realistici in {0}, verra' usato l'ultimo salvataggio del file LastPos.ini"
+      "Value": "Spostamenti non realistici in {0}, verra' usato l'ultimo salvataggio del file LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -264,7 +264,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Perfetto! Hai gia' la versione piu' aggiornata {0}"
+      "Value": "Perfetto! Hai gia' la versione più aggiornata {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -272,11 +272,11 @@
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Scaricamento ed installazione aggiornamento in corso..."
+      "Value": "Download ed installazione aggiornamento in corso..."
     },
     {
       "Key": "finishedDownloadingRelease",
-      "Value": "Scaricamento ultima versione completato."
+      "Value": "Download ultima versione completato."
     },
     {
       "Key": "finishedUnpackingFiles",
@@ -292,15 +292,15 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Ricerca Pokemon attirati da Aroma..."
+      "Value": "Ricerca Pokémon attirati da Aroma..."
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Ricerca Pokemon..."
+      "Value": "Ricerca Pokémon..."
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Ricerca Pokemon attirati da Moduli Esca..."
+      "Value": "Ricerca Pokémon attirati da Moduli Esca..."
     },
     {
       "Key": "pokemonSkipped",
@@ -312,19 +312,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Pokeball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
+      "Value": "Pokéball: {0} | Megaball: {1} | Ultraball: {2} | Masterball: {3}"
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "Pozioni: {0} | SuperPozioni: {1} | HyperPozioni: {2} | MaxPozioni: {3}"
+      "Value": "Pozioni: {0} | SuperPozioni: {1} | IperPozioni: {2} | PozioniMax: {3}"
     },
     {
       "Key": "CurrentReviveInv",
-      "Value": "Revitalizzanti: {0} | MaxRevital: {1}"
+      "Value": "Revitalizzanti: {0} | RevitalMax: {1}"
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "Bacche: {0} | Incensi: {1} | Fortunuovi: {2} | Esche: {3}"
+      "Value": "Bacche: {0} | Aromi: {1} | Fortunuovi: {2} | Esche: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -336,12 +336,12 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Inventario Pokemon pieno. Trasferimento Pokemon..."
+      "Value": "Inventario Pokémon pieno. Trasferimento Pokémon..."
     },
     {
       "Key": "invFullTransferManually",
       "Value":
-        "Inventario Pokemon pieno. Trasferisci i Pokemon manualmente o imposta TransferDuplicatePokemon 'true' nelle impostazioni..."
+        "Inventario Pokémon pieno. Trasferisci i Pokemon manualmente o imposta TransferDuplicatePokemon 'true' nelle impostazioni..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -353,7 +353,7 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Problema Incontrato: Pokemon attirato {0}"
+      "Value": "Problema Incontrato: Pokémon attirato {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -361,7 +361,7 @@
     },
     {
       "Key": "pokemonRename",
-      "Value": "Pokemon {0} ({1}) rinominato da {2} a {3}."
+      "Value": "Pokémon {0} ({1}) rinominato da {2} a {3}."
     },
     {
       "Key": "pokemonFavorite",
@@ -369,15 +369,15 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Filtro Pokemon da ignorare] - Ignorato {0} come definito nelle impostazioni"
+      "Value": "[Filtro Pokémon da ignorare] - Ignorato {0} come definito nelle impostazioni"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Tentativo di Cattura"
+      "Value": "Tentativo di cattura"
     },
     {
       "Key": "catchStatusError",
-      "Value": "Errore di Cattura"
+      "Value": "Errore di cattura"
     },
     {
       "Key": "catchStatusEscape",
@@ -438,8 +438,12 @@
       "Value": "Controlla di aver inserito Email e Password correttamente"
     },
     {
+      "Key": "googleOffline",
+      "Value": "I server di Google sono malfunzionanti. Riprova più tardi."
+    },
+    {
       "Key": "missingCredentialsGoogle",
-      "Value": "Devi riempire i campi GoogleUsername e GooglePassword  nel file auth.json!"
+      "Value": "Devi riempire i campi GoogleUsername e GooglePassword nel file auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
@@ -455,11 +459,11 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "Nessun Pokemon trovato per lo sniping!"
+      "Value": "Nessun Pokémon trovato per lo sniping!"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Pokeball insufficienti per iniziare lo sniping! ({0}/{1})"
+      "Value": "Pokéball insufficienti per iniziare lo sniping! ({0}/{1})"
     },
     {
       "Key": "DisplayHighestMove1Header",
@@ -483,7 +487,7 @@
     },
     {
       "Key": "useLuckyEggActive",
-      "Value": "Fortunuovo gia' attivo"
+      "Value": "Fortunuovo già attivo"
     },
     {
       "Key": "usedLuckyEgg",
@@ -495,23 +499,23 @@
     },
     {
       "Key": "noIncenseAvailable",
-      "Value": "Nessun Aroma disponibile"
+      "Value": "Nessun aroma disponibile"
     },
     {
       "Key": "useIncenseActive",
-      "Value": "Aroma gia' attivo"
+      "Value": "Aroma già attivo"
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "Aroma in Inventario: {0}"
+      "Value": "Aroma in inventario: {0}"
     },
     {
       "Key": "usedIncense",
-      "Value": "Usato Aroma"
+      "Value": "Usato aroma"
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "Pokemon Visti: {0}/151, Pokemon Catturati: {1}/151"
+      "Value": "Pokémon Visti: {0}/151, Pokémon catturati: {1}/151"
     },
     {
       "Key": "pkmPotentialEvolveCount",
@@ -523,7 +527,7 @@
      },
     {
       "Key": "snipeServerOffline",
-      "Value": "Il server Sniping è offline. Skipping..."
+      "Value": "Il server di Sniping è offline. Saltando..."
     }
   ],
 	"PokemonStrings": [
@@ -1139,67 +1143,67 @@
     },
     {
       "Key": "thunderShock",
-      "Value": "ThunderShock"
+      "Value": "Tuonoshock"
     },
     {
       "Key": "quickAttack",
-      "Value": "QuickAttack"
+      "Value": "Attacco Rapido"
     },
     {
       "Key": "scratch",
-      "Value": "Scratch"
+      "Value": "Graffio"
     },
     {
       "Key": "ember",
-      "Value": "Ember"
+      "Value": "Braciere"
     },
     {
       "Key": "vineWhip",
-      "Value": "VineWhip"
+      "Value": "Frustata"
     },
     {
       "Key": "tackle",
-      "Value": "Tackle"
+      "Value": "Azione"
     },
     {
       "Key": "razorLeaf",
-      "Value": "RazorLeaf"
+      "Value": "Foglielama"
     },
     {
       "Key": "takeDown",
-      "Value": "TakeDown"
+      "Value": "Riduttore"
     },
     {
       "Key": "waterGun",
-      "Value": "WaterGun"
+      "Value": "Pistolacqua"
     },
     {
       "Key": "bite",
-      "Value": "Bite"
+      "Value": "Morso"
     },
     {
       "Key": "pound",
-      "Value": "Pound"
+      "Value": "Botta"
     },
     {
       "Key": "doubleSlap",
-      "Value": "DoubleSlap"
+      "Value": "Doppiasberla"
     },
     {
       "Key": "wrap",
-      "Value": "Wrap"
+      "Value": "Avvolgibotta"
     },
     {
       "Key": "hyperBeam",
-      "Value": "HyperBeam"
+      "Value": "Iper Raggio"
     },
     {
       "Key": "lick",
-      "Value": "Lick"
+      "Value": "Leccata"
     },
     {
       "Key": "darkPulse",
-      "Value": "DarkPulse"
+      "Value": "Neropulsar"
     },
     {
       "Key": "smog",
@@ -1207,251 +1211,251 @@
     },
     {
       "Key": "sludge",
-      "Value": "Sludge"
+      "Value": "Fango"
     },
     {
       "Key": "metalClaw",
-      "Value": "MetalClaw"
+      "Value": "Ferrartigli"
     },
     {
       "Key": "viceGrip",
-      "Value": "ViceGrip"
+      "Value": "Presa"
     },
     {
       "Key": "flameWheel",
-      "Value": "FlameWheel"
+      "Value": "Ruotafuoco"
     },
     {
       "Key": "megahorn",
-      "Value": "Megahorn"
+      "Value": "Megacorno"
     },
     {
       "Key": "wingAttack",
-      "Value": "WingAttack"
+      "Value": "Attacco D'Ala"
     },
     {
       "Key": "flamethrower",
-      "Value": "Flamethrower"
+      "Value": "Lanciafiamme"
     },
     {
       "Key": "suckerPunch",
-      "Value": "SuckerPunch"
+      "Value": "Sbigoattacco"
     },
     {
       "Key": "dig",
-      "Value": "Dig"
+      "Value": "Fossa"
     },
     {
       "Key": "lowKick",
-      "Value": "LowKick"
+      "Value": "Colpo Basso"
     },
     {
       "Key": "crossChop",
-      "Value": "CrossChop"
+      "Value": "Incrocolpo"
     },
     {
       "Key": "psychoCut",
-      "Value": "PsychoCut"
+      "Value": "Psicotaglio"
     },
     {
       "Key": "psybeam",
-      "Value": "Psybeam"
+      "Value": "Psicoraggio"
     },
     {
       "Key": "earthquake",
-      "Value": "Earthquake"
+      "Value": "Terremoto"
     },
     {
       "Key": "stoneEdge",
-      "Value": "StoneEdge"
+      "Value": "Pietrataglio"
     },
     {
       "Key": "icePunch",
-      "Value": "IcePunch"
+      "Value": "Gelopugno"
     },
     {
       "Key": "heartStamp",
-      "Value": "HeartStamp"
+      "Value": "Cuorestampo"
     },
     {
       "Key": "discharge",
-      "Value": "Discharge"
+      "Value": "Scarica"
     },
     {
       "Key": "flashCannon",
-      "Value": "FlashCannon"
+      "Value": "Cannonflash"
     },
     {
       "Key": "peck",
-      "Value": "Peck"
+      "Value": "Beccata"
     },
     {
       "Key": "drillPeck",
-      "Value": "DrillPeck"
+      "Value": "Perforbecco"
     },
     {
       "Key": "iceBeam",
-      "Value": "IceBeam"
+      "Value": "Geloraggio"
     },
     {
       "Key": "blizzard",
-      "Value": "Blizzard"
+      "Value": "Bora"
     },
     {
       "Key": "airSlash",
-      "Value": "AirSlash"
+      "Value": "Eterelama"
     },
     {
       "Key": "heatWave",
-      "Value": "HeatWave"
+      "Value": "Ondacalda"
     },
     {
       "Key": "twineedle",
-      "Value": "Twineedle"
+      "Value": "Doppio Ago"
     },
     {
       "Key": "poisonJab",
-      "Value": "PoisonJab"
+      "Value": "Velenpuntura"
     },
     {
       "Key": "aerialAce",
-      "Value": "AerialAce"
+      "Value": "Aeroassalto"
     },
     {
       "Key": "drillRun",
-      "Value": "DrillRun"
+      "Value": "Giravvita"
     },
     {
       "Key": "petalBlizzard",
-      "Value": "PetalBlizzard"
+      "Value": "Fiotempesta"
     },
     {
       "Key": "megaDrain",
-      "Value": "MegaDrain"
+      "Value": "Megassorbimento"
     },
     {
       "Key": "bugBuzz",
-      "Value": "BugBuzz"
+      "Value": "Ronzio"
     },
     {
       "Key": "poisonFang",
-      "Value": "PoisonFang"
+      "Value": "Velenodenti"
     },
     {
       "Key": "nightSlash",
-      "Value": "NightSlash"
+      "Value": "Nottesferza"
     },
     {
       "Key": "slash",
-      "Value": "Slash"
+      "Value": "Lacerazione"
     },
     {
       "Key": "bubbleBeam",
-      "Value": "BubbleBeam"
+      "Value": "Bollaraggio"
     },
     {
       "Key": "submission",
-      "Value": "Submission"
+      "Value": "Sottomissione"
     },
     {
       "Key": "karateChop",
-      "Value": "KarateChop"
+      "Value": "Colpokarate"
     },
     {
       "Key": "lowSweep",
-      "Value": "LowSweep"
+      "Value": "Calciobasso"
     },
     {
       "Key": "aquaJet",
-      "Value": "AquaJet"
+      "Value": "Acquagetto"
     },
     {
       "Key": "aquaTail",
-      "Value": "AquaTail"
+      "Value": "Idrondata"
     },
     {
       "Key": "seedBomb",
-      "Value": "SeedBomb"
+      "Value": "Semebomba"
     },
     {
       "Key": "psyshock",
-      "Value": "Psyshock"
+      "Value": "Psiscoshock"
     },
     {
       "Key": "rockThrow",
-      "Value": "RockThrow"
+      "Value": "Sassata"
     },
     {
       "Key": "ancientPower",
-      "Value": "AncientPower"
+      "Value": "Forzantica"
     },
     {
       "Key": "rockTomb",
-      "Value": "RockTomb"
+      "Value": "Rocciotomba"
     },
     {
       "Key": "rockSlide",
-      "Value": "RockSlide"
+      "Value": "Frana"
     },
     {
       "Key": "powerGem",
-      "Value": "PowerGem"
+      "Value": "Gemmoforza"
     },
     {
       "Key": "shadowSneak",
-      "Value": "ShadowSneak"
+      "Value": "Furtivombra"
     },
     {
       "Key": "shadowPunch",
-      "Value": "ShadowPunch"
+      "Value": "Pugnodombra"
     },
     {
       "Key": "shadowClaw",
-      "Value": "ShadowClaw"
+      "Value": "Ombratigli"
     },
     {
       "Key": "ominousWind",
-      "Value": "OminousWind"
+      "Value": "Funestovento"
     },
     {
       "Key": "shadowBall",
-      "Value": "ShadowBall"
+      "Value": "Palla Ombra"
     },
     {
       "Key": "bulletPunch",
-      "Value": "BulletPunch"
+      "Value": "Pugnoscarica"
     },
     {
       "Key": "magnetBomb",
-      "Value": "MagnetBomb"
+      "Value": "Bombagnete"
     },
     {
       "Key": "steelWing",
-      "Value": "SteelWing"
+      "Value": "Alacciaio"
     },
     {
       "Key": "ironHead",
-      "Value": "IronHead"
+      "Value": "Metaltestata"
     },
     {
       "Key": "parabolicCharge",
-      "Value": "ParabolicCharge"
+      "Value": "Caricaparabola"
     },
     {
       "Key": "spark",
-      "Value": "Spark"
+      "Value": "Scintilla"
     },
     {
       "Key": "thunderPunch",
-      "Value": "ThunderPunch"
+      "Value": "Tuonopugno"
     },
     {
       "Key": "thunder",
-      "Value": "Thunder"
+      "Value": "Tuono"
     },
     {
       "Key": "thunderbolt",
-      "Value": "Thunderbolt"
+      "Value": "Fulmine"
     },
     {
       "Key": "twister",
@@ -1459,155 +1463,155 @@
     },
     {
       "Key": "dragonBreath",
-      "Value": "DragonBreath"
+      "Value": "Dragospiro"
     },
     {
       "Key": "dragonPulse",
-      "Value": "DragonPulse"
+      "Value": "Dragopulsar"
     },
     {
       "Key": "dragonClaw",
-      "Value": "DragonClaw"
+      "Value": "Dragartigli"
     },
     {
       "Key": "disarmingVoice",
-      "Value": "DisarmingVoice"
+      "Value": "Incantavoce"
     },
     {
       "Key": "drainingKiss",
-      "Value": "DrainingKiss"
+      "Value": "Assorbibacio"
     },
     {
       "Key": "dazzlingGleam",
-      "Value": "DazzlingGleam"
+      "Value": "Magibrillio"
     },
     {
       "Key": "moonblast",
-      "Value": "Moonblast"
+      "Value": "Forza Lunare"
     },
     {
       "Key": "playRough",
-      "Value": "PlayRough"
+      "Value": "Carineria"
     },
     {
       "Key": "crossPoison",
-      "Value": "CrossPoison"
+      "Value": "Velenocroce"
     },
     {
       "Key": "sludgeBomb",
-      "Value": "SludgeBomb"
+      "Value": "Fangobomba"
     },
     {
       "Key": "sludgeWave",
-      "Value": "SludgeWave"
+      "Value": "Fangonda"
     },
     {
       "Key": "gunkShot",
-      "Value": "GunkShot"
+      "Value": "Sporcolancio"
     },
     {
       "Key": "mudShot",
-      "Value": "MudShot"
+      "Value": "Colpodifango"
     },
     {
       "Key": "boneClub",
-      "Value": "BoneClub"
+      "Value": "Ossoclava"
     },
     {
       "Key": "bulldoze",
-      "Value": "Bulldoze"
+      "Value": "Battiterra"
     },
     {
       "Key": "mudBomb",
-      "Value": "MudBomb"
+      "Value": "Pantanobomba"
     },
     {
       "Key": "furyCutter",
-      "Value": "FuryCutter"
+      "Value": "Tagliofuria"
     },
     {
       "Key": "bugBite",
-      "Value": "BugBite"
+      "Value": "Coleomorso"
     },
     {
       "Key": "signalBeam",
-      "Value": "SignalBeam"
+      "Value": "Segnoraggio"
     },
     {
       "Key": "xScissor",
-      "Value": "XScissor"
+      "Value": "Forbice X"
     },
     {
       "Key": "flameCharge",
-      "Value": "FlameCharge"
+      "Value": "Nitrocarica"
     },
     {
       "Key": "flameBurst",
-      "Value": "FlameBurst"
+      "Value": "Pirolancio"
     },
     {
       "Key": "fireBlast",
-      "Value": "FireBlast"
+      "Value": "Fuocobomba"
     },
     {
       "Key": "brine",
-      "Value": "Brine"
+      "Value": "Acquadisale"
     },
     {
       "Key": "waterPulse",
-      "Value": "WaterPulse"
+      "Value": "Idropulsar"
     },
     {
       "Key": "scald",
-      "Value": "Scald"
+      "Value": "Idrovampata"
     },
     {
       "Key": "hydroPump",
-      "Value": "HydroPump"
+      "Value": "Idropompa"
     },
     {
       "Key": "psychic",
-      "Value": "Psychic"
+      "Value": "Psichico"
     },
     {
       "Key": "psystrike",
-      "Value": "Psystrike"
+      "Value": "Psicobotta"
     },
     {
       "Key": "iceShard",
-      "Value": "IceShard"
+      "Value": "Geloscheggia"
     },
     {
       "Key": "icyWind",
-      "Value": "IcyWind"
+      "Value": "Ventogelato"
     },
     {
       "Key": "frostBreath",
-      "Value": "FrostBreath"
+      "Value": "Alitogelido"
     },
     {
       "Key": "absorb",
-      "Value": "Absorb"
+      "Value": "Assorbimento"
     },
     {
       "Key": "gigaDrain",
-      "Value": "GigaDrain"
+      "Value": "Gigassorbimento"
     },
     {
       "Key": "firePunch",
-      "Value": "FirePunch"
+      "Value": "Fuocopugno"
     },
     {
       "Key": "solarBeam",
-      "Value": "SolarBeam"
+      "Value": "Solarraggio"
     },
     {
       "Key": "leafBlade",
-      "Value": "LeafBlade"
+      "Value": "Fendifoglia"
     },
     {
       "Key": "powerWhip",
-      "Value": "PowerWhip"
+      "Value": "Vigorcolpo"
     },
     {
       "Key": "splash",
@@ -1615,243 +1619,243 @@
     },
     {
       "Key": "acid",
-      "Value": "Acid"
+      "Value": "Acido"
     },
     {
       "Key": "airCutter",
-      "Value": "AirCutter"
+      "Value": "Aerasoio"
     },
     {
       "Key": "hurricane",
-      "Value": "Hurricane"
+      "Value": "Tifone"
     },
     {
       "Key": "brickBreak",
-      "Value": "BrickBreak"
+      "Value": "Breccia"
     },
     {
       "Key": "cut",
-      "Value": "Cut"
+      "Value": "Taglio"
     },
     {
       "Key": "swift",
-      "Value": "Swift"
+      "Value": "Comete"
     },
     {
       "Key": "hornAttack",
-      "Value": "HornAttack"
+      "Value": "Incornata"
     },
     {
       "Key": "stomp",
-      "Value": "Stomp"
+      "Value": "Pestone"
     },
     {
       "Key": "headbutt",
-      "Value": "Headbutt"
+      "Value": "Bottintesta"
     },
     {
       "Key": "hyperFang",
-      "Value": "HyperFang"
+      "Value": "Iperzanna"
     },
     {
       "Key": "slam",
-      "Value": "Slam"
+      "Value": "Schianto"
     },
     {
       "Key": "bodySlam",
-      "Value": "BodySlam"
+      "Value": "Corposcontro"
     },
     {
       "Key": "rest",
-      "Value": "Rest"
+      "Value": "Riposo"
     },
     {
       "Key": "struggle",
-      "Value": "Struggle"
+      "Value": "Scontro"
     },
     {
       "Key": "scaldBlastoise",
-      "Value": "ScaldBlastoise"
+      "Value": "IdrovampataBlastoise"
     },
     {
       "Key": "hydroPumpBlastoise",
-      "Value": "HydroPumpBlastoise"
+      "Value": "IdropompaBlastoise"
     },
     {
       "Key": "wrapGreen",
-      "Value": "WrapGreen"
+      "Value": "AvvolgibottaGreen"
     },
     {
       "Key": "wrapPink",
-      "Value": "WrapPink"
+      "Value": "AvvolgibottaPink"
     },
     {
       "Key": "furyCutterFast",
-      "Value": "FuryCutterFast"
+      "Value": "TagliofuriaVeloce"
     },
     {
       "Key": "bugBiteFast",
-      "Value": "BugBiteFast"
+      "Value": "ColeomorsoVeloce"
     },
     {
       "Key": "biteFast",
-      "Value": "BiteFast"
+      "Value": "MorsoVeloce"
     },
     {
       "Key": "suckerPunchFast",
-      "Value": "SuckerPunchFast"
+      "Value": "SbigoattaccoVeloce"
     },
     {
       "Key": "dragonBreathFast",
-      "Value": "DragonBreathFast"
+      "Value": "DragospiroVeloce"
     },
     {
       "Key": "thunderShockFast",
-      "Value": "ThunderShockFast"
+      "Value": "TuonoshockVeloce"
     },
     {
       "Key": "sparkFast",
-      "Value": "SparkFast"
+      "Value": "ScintillaVeloce"
     },
     {
       "Key": "lowKickFast",
-      "Value": "LowKickFast"
+      "Value": "ColpoBassoVeloce"
     },
     {
       "Key": "karateChopFast",
-      "Value": "KarateChopFast"
+      "Value": "ColpokarateVeloce"
     },
     {
       "Key": "emberFast",
-      "Value": "EmberFast"
+      "Value": "BraciereVeloce"
     },
     {
       "Key": "wingAttackFast",
-      "Value": "WingAttackFast"
+      "Value": "AttaccodD'AlaVeloce"
     },
     {
       "Key": "peckFast",
-      "Value": "PeckFast"
+      "Value": "BeccataVeloce"
     },
     {
       "Key": "lickFast",
-      "Value": "LickFast"
+      "Value": "LeccataVeloce"
     },
     {
       "Key": "shadowClawFast",
-      "Value": "ShadowClawFast"
+      "Value": "OmbrartigliVeloce"
     },
     {
       "Key": "vineWhipFast",
-      "Value": "VineWhipFast"
+      "Value": "FrustataVeloce"
     },
     {
       "Key": "razorLeafFast",
-      "Value": "RazorLeafFast"
+      "Value": "FoglielamaVeloce"
     },
     {
       "Key": "mudShotFast",
-      "Value": "MudShotFast"
+      "Value": "ColpodifangoVeloce"
     },
     {
       "Key": "iceShardFast",
-      "Value": "IceShardFast"
+      "Value": "GeloscheggiaVeloce"
     },
     {
       "Key": "frostBreathFast",
-      "Value": "FrostBreathFast"
+      "Value": "AlitogelidoVeloce"
     },
     {
       "Key": "quickAttackFast",
-      "Value": "QuickAttackFast"
+      "Value": "AttaccoRapidoVeloce"
     },
     {
       "Key": "scratchFast",
-      "Value": "ScratchFast"
+      "Value": "GraffioVeloce"
     },
     {
       "Key": "tackleFast",
-      "Value": "TackleFast"
+      "Value": "AzioneVeloce"
     },
     {
       "Key": "poundFast",
-      "Value": "PoundFast"
+      "Value": "BottaVeloce"
     },
     {
       "Key": "cutFast",
-      "Value": "CutFast"
+      "Value": "TaglioVeloce"
     },
     {
       "Key": "poisonJabFast",
-      "Value": "PoisonJabFast"
+      "Value": "VelenpunturaVeloce"
     },
     {
       "Key": "acidFast",
-      "Value": "AcidFast"
+      "Value": "AcidoVeloce"
     },
     {
       "Key": "psychoCutFast",
-      "Value": "PsychoCutFast"
+      "Value": "PsicotaglioVeloce"
     },
     {
       "Key": "rockThrowFast",
-      "Value": "RockThrowFast"
+      "Value": "SassataVeloce"
     },
     {
       "Key": "metalClawFast",
-      "Value": "MetalClawFast"
+      "Value": "FerrartigliVeloce"
     },
     {
       "Key": "bulletPunchFast",
-      "Value": "BulletPunchFast"
+      "Value": "PugnoscaricaVeloce"
     },
     {
       "Key": "waterGunFast",
-      "Value": "WaterGunFast"
+      "Value": "PistolacquaVeloce"
     },
     {
       "Key": "splashFast",
-      "Value": "SplashFast"
+      "Value": "SplashVeloce"
     },
     {
       "Key": "waterGunFastBlastoise",
-      "Value": "WaterGunFastBlastoise"
+      "Value": "PistolacquaVeloceBlastoise"
     },
     {
       "Key": "mudSlapFast",
-      "Value": "MudSlapFast"
+      "Value": "FangosberlaVeloce"
     },
     {
       "Key": "zenHeadbuttFast",
-      "Value": "ZenHeadbuttFast"
+      "Value": "CozzataZenVeloce"
     },
     {
       "Key": "confusionFast",
-      "Value": "ConfusionFast"
+      "Value": "ConfusioneVeloce"
     },
     {
       "Key": "poisonStingFast",
-      "Value": "PoisonStingFast"
+      "Value": "VelenospinaVeloce"
     },
     {
       "Key": "bubbleFast",
-      "Value": "BubbleFast"
+      "Value": "BollaVeloce"
     },
     {
       "Key": "feintAttackFast",
-      "Value": "FeintAttackFast"
+      "Value": "FintoattaccoVeloce"
     },
     {
       "Key": "steelWingFast",
-      "Value": "SteelWingFast"
+      "Value": "AlacciaioVeloce"
     },
     {
       "Key": "fireFangFast",
-      "Value": "FireFangFast"
+      "Value": "RogodentiVeloce"
     },
     {
       "Key": "rockSmashFast",
-      "Value": "RockSmashFast"
+      "Value": "SpaccarocciaVeloce"
     }
   ]
 }

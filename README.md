@@ -49,7 +49,7 @@ Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBo
  - [Multi bot support]
  - [Snipe pokemon]
  - [Power-Up pokemon]
-
+ - [Telegram Remote Control Support]
 
 <h2><a name="credits">Credits</a></h2>
 
