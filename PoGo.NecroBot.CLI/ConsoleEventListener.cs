@@ -109,14 +109,14 @@ namespace PoGo.NecroBot.CLI
         {
             if (fortFailedEvent.Try != 1 && fortFailedEvent.Looted == false)
             {
-                Logger.lineSelect(0, 1);
+                Logger.lineSelect(0, 1); // Replaces the last line to prevent spam.
             }
 
             if (fortFailedEvent.Looted == true)
             {
                 Logger.Write(
                 session.Translation.GetTranslation(TranslationString.SoftBanBypassed),
-                LogLevel.SoftBan);
+                LogLevel.SoftBan, ConsoleColor.Green);
             } else {
                 Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortFailed, fortFailedEvent.Name, fortFailedEvent.Try, fortFailedEvent.Max),
@@ -126,7 +126,7 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(FortTargetEvent fortTargetEvent, ISession session)
         {
-            int intTimeForArrival = (int) ( fortTargetEvent.Distance / ( session.LogicSettings.WalkingSpeedInKilometerPerHour * 0.2 ) );
+            int intTimeForArrival = (int) ( fortTargetEvent.Distance / ( session.LogicSettings.WalkingSpeedInKilometerPerHour * 0.8 ) );
 
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortTargeted, fortTargetEvent.Name,

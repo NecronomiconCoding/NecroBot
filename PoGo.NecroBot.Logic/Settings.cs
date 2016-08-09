@@ -297,10 +297,13 @@ namespace PoGo.NecroBot.Logic
         public double DefaultLatitude;
         [DefaultValue(-73.962277)]
         public double DefaultLongitude;
-        [DefaultValue(31.0)]
+        [DefaultValue(19.0)]
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
+        //softban related
+        [DefaultValue(false)]
+        public bool FastSoftBanBypass;
         //delays
         [DefaultValue(500)]
         public int DelayBetweenPlayerActions;
@@ -409,6 +412,8 @@ namespace PoGo.NecroBot.Logic
         public bool RandomizeRecycle;
         [DefaultValue(5)]
         public int RandomRecycleValue;
+        [DefaultValue(false)]
+        public bool DelayBetweenRecycleActions;
         [DefaultValue(120)]
         public int TotalAmountOfPokeballsToKeep;
         [DefaultValue(80)]
@@ -771,7 +776,6 @@ namespace PoGo.NecroBot.Logic
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
             settings.isGui = isGui;
-            settings.migratePercentages();
 
             if (!boolSkipSave || !settings.AutoUpdate)
             {
@@ -969,22 +973,6 @@ namespace PoGo.NecroBot.Logic
         {
             settings.Save(configFile);
             settings.Auth.Load(Path.Combine(settings.ProfileConfigPath, "auth.json"));
-        }
-
-
-        /// <summary>
-        /// Method for issue #1966
-        /// </summary>
-        private void migratePercentages()
-        {
-            if (EvolveKeptPokemonsAtStorageUsagePercentage <= 1.0)
-            {
-                EvolveKeptPokemonsAtStorageUsagePercentage *= 100.0f;
-            }
-            if (RecycleInventoryAtUsagePercentage <= 1.0)
-            {
-                RecycleInventoryAtUsagePercentage *= 100.0f;
-            }
         }
 
         public void Save(string fullPath)
@@ -1255,6 +1243,7 @@ namespace PoGo.NecroBot.Logic
         public float UpgradePokemonCpMinimum => _settings.UpgradePokemonCpMinimum;
         public string UpgradePokemonMinimumStatsOperator => _settings.UpgradePokemonMinimumStatsOperator;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
+        public bool FastSoftBanBypass => _settings.FastSoftBanBypass;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
@@ -1334,6 +1323,7 @@ namespace PoGo.NecroBot.Logic
         public bool SnipePokemonNotInPokedex => _settings.SnipePokemonNotInPokedex;
         public bool RandomizeRecycle => _settings.RandomizeRecycle;
         public int RandomRecycleValue => _settings.RandomRecycleValue;
+        public bool DelayBetweenRecycleActions => _settings.DelayBetweenRecycleActions;
         public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokeballsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;

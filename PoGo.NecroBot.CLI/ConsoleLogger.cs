@@ -13,10 +13,14 @@ namespace PoGo.NecroBot.CLI
     /// <summary>
     /// The ConsoleLogger is a simple logger which writes all logs to the Console.
     /// </summary>
-    internal class ConsoleLogger : ILogger
+    public class ConsoleLogger : ILogger
     {
         private readonly LogLevel _maxLogLevel;
         private ISession _session;
+
+        // Log write event definition.
+        public delegate void LogWriteHandler(object sender, LogWriteEventArgs e);
+        public event LogWriteHandler OnLogWrite;
 
         /// <summary>
         /// To create a ConsoleLogger, we must define a maximum log level.
@@ -46,6 +50,9 @@ namespace PoGo.NecroBot.CLI
             Console.OutputEncoding = Encoding.UTF8;
             if (level > _maxLogLevel)
                 return;
+
+            // Fire log write event.
+            OnLogWrite?.Invoke(this, new LogWriteEventArgs() { Message = message, Level = level, Color = color });
 
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (level)
@@ -91,7 +98,7 @@ namespace PoGo.NecroBot.CLI
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Transferred}) {message}");
                     break;
                 case LogLevel.Evolve:
-                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Yellow : color;
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.DarkGreen : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Evolved}) {message}");
                     break;
                 case LogLevel.Berry:
@@ -129,5 +136,15 @@ namespace PoGo.NecroBot.CLI
         {
             Console.SetCursorPosition(lineChar, Console.CursorTop - linesUp);
         }
+    }
+
+    /// <summary>
+    /// Event args for Log Write Event.
+    /// </summary>
+    public class LogWriteEventArgs
+    {
+        public string Message { get; set; }
+        public LogLevel Level { get; set; }
+        public ConsoleColor Color { get; set; }
     }
 }
