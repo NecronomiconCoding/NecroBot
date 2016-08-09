@@ -14,6 +14,7 @@ using System.IO;
 using System.Net;
 using PoGo.NecroBot.CLI.Resources;
 using System.Reflection;
+using PoGo.NecroBot.CLI.Plugin;
 
 #endregion
 
@@ -45,7 +46,8 @@ namespace PoGo.NecroBot.CLI
             if (args.Length > 0)
                 subPath = args[0];
 
-            Logger.SetLogger(new ConsoleLogger(LogLevel.SoftBan), subPath);
+            var logger = new ConsoleLogger(LogLevel.SoftBan);
+            Logger.SetLogger(logger, subPath);
 
             if( CheckKillSwitch() )
                 return;
@@ -160,6 +162,15 @@ namespace PoGo.NecroBot.CLI
                 var websocket = new WebSocketInterface(settings.WebSocketPort, session);
                 session.EventDispatcher.EventReceived += evt => websocket.Listen(evt, session);
             }
+
+            var plugins = new PluginManager(new PluginInitializerInfo()
+            {
+                Logger = logger,
+                Session = session,
+                Settings = settings,
+                Statistics = stats
+            });
+            plugins.InitPlugins();
 
             ProgressBar.fill(70);
 
