@@ -406,6 +406,8 @@ namespace PoGo.NecroBot.Logic
         public bool RandomizeRecycle;
         [DefaultValue(5)]
         public int RandomRecycleValue;
+        [DefaultValue(false)]
+        public bool DelayBetweenRecycleActions;
         [DefaultValue(120)]
         public int TotalAmountOfPokeballsToKeep;
         [DefaultValue(80)]
@@ -1317,6 +1319,7 @@ namespace PoGo.NecroBot.Logic
         public bool SnipePokemonNotInPokedex => _settings.SnipePokemonNotInPokedex;
         public bool RandomizeRecycle => _settings.RandomizeRecycle;
         public int RandomRecycleValue => _settings.RandomRecycleValue;
+        public bool DelayBetweenRecycleActions => _settings.DelayBetweenRecycleActions;
         public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokeballsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
