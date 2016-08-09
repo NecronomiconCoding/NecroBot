@@ -351,6 +351,8 @@ namespace PoGo.NecroBot.Logic
         //lucky, incense and berries
         [DefaultValue(true)]
         public bool UseEggIncubators;
+        [DefaultValue(10)]
+        public int minEggKmForLimitedIncubators;
         [DefaultValue(false)]
         public bool UseLuckyEggConstantly;
         [DefaultValue(30)]
@@ -1249,6 +1251,7 @@ namespace PoGo.NecroBot.Logic
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool TransferDuplicatePokemonOnCapture => _settings.TransferDuplicatePokemonOnCapture;
         public bool UseEggIncubators => _settings.UseEggIncubators;
+        public int minEggKmForLimitedIncubators => _settings.minEggKmForLimitedIncubators;
         public int UseGreatBallAboveCp => _settings.UseGreatBallAboveCp;
         public int UseUltraBallAboveCp => _settings.UseUltraBallAboveCp;
         public int UseMasterBallAboveCp => _settings.UseMasterBallAboveCp;
