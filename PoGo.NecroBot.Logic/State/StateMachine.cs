@@ -75,6 +75,8 @@ namespace PoGo.NecroBot.Logic.State
                     state = _initialState;
                 }
             } while (state != null);
+            configWatcher.EnableRaisingEvents = false;
+            configWatcher.Dispose();
         }
     }
 }
