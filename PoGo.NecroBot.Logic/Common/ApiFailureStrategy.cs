@@ -64,6 +64,14 @@ namespace PoGo.NecroBot.Logic.Common
             {
                 throw ae.Flatten().InnerException;
             }
+            catch (NullReferenceException nre)
+            {
+                _session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = "Causing Method: " + nre.TargetSite + " Source: " + nre.Source + " Data: " + nre.Data
+                });
+                throw nre.InnerException;
+            }
             catch (LoginFailedException)
             {
                 _session.EventDispatcher.Send(new ErrorEvent
