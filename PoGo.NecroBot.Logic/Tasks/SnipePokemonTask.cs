@@ -101,7 +101,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 try
                 {
-                    return Convert.ToDouble(iv, CultureInfo.InvariantCulture);
+                    return Convert.ToDouble(iv);
                 }
                 catch
                 {
@@ -671,14 +671,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                         var SnipInfo = new SniperInfo();
                         SnipInfo.Id = pokemon.name;
                         string[] coordsArray = pokemon.coords.Split(',');
-                        SnipInfo.Latitude = Convert.ToDouble(coordsArray[0], CultureInfo.InvariantCulture);
-                        SnipInfo.Longitude = Convert.ToDouble(coordsArray[1], CultureInfo.InvariantCulture);
+                        SnipInfo.Latitude = Convert.ToDouble(coordsArray[0]);
+                        SnipInfo.Longitude = Convert.ToDouble(coordsArray[1]);
                         SnipInfo.TimeStampAdded = DateTime.Now;
                         SnipInfo.ExpirationTimestamp = Convert.ToDateTime(pokemon.until);
                         SnipInfo.IV = pokemon.iv;
                         SnipeLocations.Add(SnipInfo);
                     }
-                    catch (Exception ex)
+                    catch
                     {
                     }
                 }
