@@ -273,8 +273,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
                                     _lastSnipe = DateTime.Now;
-                                    // if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                    //LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
+                                     if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
+                                    LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                 }
                             }
                         }
@@ -376,8 +376,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                         await Snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude, cancellationToken);
                                         _lastSnipe = DateTime.Now;
-                                        //if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                        //    LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
+                                        if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
+                                            LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                     }
                                 }
                             }
@@ -673,8 +673,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         SnipInfo.IV = pokemon.iv;
                         SnipeLocations.Add(SnipInfo);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
+                        // ignored
                     }
                 }
                 var locationsToSnipe = SnipeLocations?.Where(q =>
