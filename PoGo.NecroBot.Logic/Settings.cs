@@ -264,7 +264,7 @@ namespace PoGo.NecroBot.Logic
         //console options
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool DetailedCountsBeforeRecycling;
 
         [DefaultValue(3)]
@@ -338,7 +338,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("GPXPath.GPX")]
         public string GpxFile;
         //recycle
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool VerboseRecycling;
         [DefaultValue(90.0)]
         public double RecycleInventoryAtUsagePercentage;
