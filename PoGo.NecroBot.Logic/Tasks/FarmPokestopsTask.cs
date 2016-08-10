@@ -71,7 +71,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var pokestopListWithDetails = pokestopList
                                 .Select(p =>
                                 {
-                                    Boolean useNav = session.LogicSettings.UseOsmNavigating && LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude, session.Client.CurrentLongitude, p.Latitude, p.Longitude) >= 30d;
+                                    Boolean useNav = session.LogicSettings.UseOsmNavigating && LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude, session.Client.CurrentLongitude, p.Latitude, p.Longitude) > 100d;
                                     String uri = useNav ? string.Format(_CultureEnglish, "http://www.yournavigation.org/api/1.0/gosmore.php?flat={0:0.000000}&flon={1:0.000000}&tlat={2:0.000000}&tlon={3:0.000000}&v=foot", session.Client.CurrentLatitude, session.Client.CurrentLongitude, p.Latitude, p.Longitude) : null;
                                     XDocument doc = useNav ? XDocument.Load(uri) : null;
                                     XNamespace kmlns = useNav ? XNamespace.Get("http://earth.google.com/kml/2.0") : null;
@@ -115,6 +115,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     return new
                                     {
                                         PokeStop = p,
+                                        UseOSM = useNav,
                                         Distance = dist,
                                         NavigationDocumentUri = uri,
                                         NavigationDocument = doc,
@@ -132,10 +133,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
 
-                if (session.LogicSettings.UseOsmNavigating)
+                if (pokeStop.UseOSM)
                 {
-                    var doc = pokeStop.NavigationDocument;
-                    XNamespace kmlns = pokeStop.NavigationDocumentNamespace;
                     var points = pokeStop.Points;
                     if (points.Any())
                     {
