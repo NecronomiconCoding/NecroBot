@@ -438,7 +438,7 @@
     },
     {
       "Key": "helpTemplate",
-      "Value": "Comenzi: \n \n /top <cp/iv> <cantitate> - Afișează pokemonii tăi de top. \n /all <cp/iv> - Afișează toți pokemonii tăi. \n /profile - Afișează profilul tău. \n /loc - Afișează locația ta. \n /items - Afișează obiectele tale. \n /status - Afișează statusul botului."
+      "Value": "Comenzi: \n \n /top <cp/iv> <cantitate> - Afișează pokemonii tăi de top. \n /all <cp/iv> - Afișează toți pokemonii tăi. \n /profile - Afișează profilul tău. \n /loc - Afișează locația ta. \n /items - Afișează obiectele tale. \n /status - Afișează statusul botului. \n /pokedex - Afișează pokedexul tău."
     },
     {
       "Key": "statsXpTemplateString",

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SuperSocket.WebSocket;
-using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks;
+﻿using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.State;
+using SuperSocket.WebSocket;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
 {
