@@ -139,7 +139,7 @@ namespace PoGo.NecroBot.Logic
         bool EvolveAllPokemonAboveIv { get; }
         float EvolveAboveIvValue { get; }
         bool DumpPokemonStats { get; }
-        string DumpSeperator { get; }
+        string DumpSeparator { get; }
         bool RenamePokemon { get; }
         bool RenameOnlyAboveIv { get; }
         float FavoriteMinIvPercentage { get; }
