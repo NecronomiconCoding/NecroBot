@@ -152,6 +152,7 @@ namespace PoGo.NecroBot.Logic
         bool SnipeAtPokestops { get; }
         bool UseTelegramAPI { get; }
         string TelegramAPIKey { get; }
+        string TelegramPassword { get; }
         int MinPokeballsToSnipe { get; }
         int MinPokeballsWhileSnipe { get; }
         int MaxPokeballsPerPokemon { get; }
