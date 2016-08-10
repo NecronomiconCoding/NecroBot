@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         if (PokemonToLevel.Contains(pokemon.PokemonId))
                         {
                             if (PokemonInfo.GetLevel(pokemon) >=
-                                session.Inventory.GetPlayerStats().Result.FirstOrDefault().Level + 1) break;
+                                session.Inventory.GetPlayerStats().Result.FirstOrDefault().Level + 1) continue;
 
                             var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
                             var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
@@ -82,7 +82,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else
                 {
-                    if (PokemonInfo.GetLevel(pokemon) >= session.Inventory.GetPlayerStats().Result.FirstOrDefault().Level + 1) break;
+                    if (PokemonInfo.GetLevel(pokemon) >= session.Inventory.GetPlayerStats().Result.FirstOrDefault().Level + 1) continue;
 
                     var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
                     var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);

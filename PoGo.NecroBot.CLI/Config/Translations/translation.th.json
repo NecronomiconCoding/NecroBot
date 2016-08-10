@@ -34,15 +34,15 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "{0} ค่าประสบการณ์: {1}, อัญมณี: {2}, ไอเทม: {3}, ละติจูด: {4} ลองติจูด: {5}"
+      "Value": "{0} ค่าประสบการณ์ : {1}, อัญมณี : {2}, ไอเทม : {3}, ละติจูด : {4} ลองติจูด : {5}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "{0} การเก็บของล้มเหลวอาจจะโดนระงับ ยกเลิกการระงับใน: {1}/{2}"
+      "Value": "{0} การเก็บของล้มเหลวอาจจะโดนระงับ ยกเลิกการระงับใน : {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "กำลังเดินทางไปสู่ PokeStop: {0} ({1}เมตร) ({2} วินาที)"
+      "Value": "กำลังเดินทางไปสู่ PokeStop : {0} ( {1} เมตร ) ( {2} วินาที )"
     },
     {
       "Key": "eventProfileLogin",
@@ -50,15 +50,15 @@
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "ใช้งาน Incense, จำนวนคงเหลือ: {0}"
+      "Value": "ใช้งาน Incense, จำนวนคงเหลือ : {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "ใช้งาน Lucky Egg, จำนวนคงเหลือ: {0}"
+      "Value": "ใช้งาน Lucky Egg, จำนวนคงเหลือ : {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} สำเร็จ ได้รับค่าประสบการณ์ {1}หน่วย"
+      "Value": "{0} สำเร็จ ได้รับค่าประสบการณ์ {1} EXP"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -66,23 +66,23 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [CP ที่ดีที่สุด: {3}  IV: {4}%] (ลูกอม: {5})"
+      "Value": "{0}\t- CP : {1}  IV : {2}%   [CP ที่ดีที่สุด : {3}  IV : {4}%] ( ลูกอม : {5} )"
     },
     {
       "Key": "eventItemRecycled",
-      "Value": "{0}x {1}"
+      "Value": "{0} x {1}"
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} เลเวล: {3} CP: ({4}/{5}) IV: {6}% | โอกาส: {7}% | ระยะ {8}m | จับด้วย {9} (เหลือ {10} ชิ้น). | ได้รับค่าประสบการณ์ {11} หน่วย | {12} | ละติจูด: {13} ลองติจูด: {14}"
+      "Value": "({0}) | ({1}) {2} เลเวล : {3} CP : ({4}/{5}) IV : {6}% | โอกาส : {7}% | ระยะ {8}m | จับได้ {9} (เหลือโปเกบอล {10} ชิ้น). | ได้รับค่าประสบการณ์ {11} EXP | {12} | ละติจูด : {13} ลองติจูด : {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | โอกาส: {7}% | ระยะ {8}m | จับด้วย {9} (เหลือ {10} ชิ้น). | ละติจูด: {11} ลองติจูด: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl : {3} CP : ({4}/{5}) IV : {6}% | โอกาส : {7}% | ระยะ {8}m | จับได้ {9} (เหลือโปเกบอล {10} ชิ้น). | ละติจูด : {11} ลองติจูด : {12}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "ไม่มี Pokeballs - เราพลาดที่จะจับ {0} ซึ่งมี CP {1}"
+      "Value": "ไม่มีโปเกบอล - พลาดที่จะจับ {0} ซึ่งมี CP {1}"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
@@ -114,7 +114,7 @@
     },
     {
       "Key": "candies",
-      "Value": "ลูกอม: {0}"
+      "Value": "ลูกอม : {0}"
     },
     {
       "Key": "unhandledGpxData",
@@ -122,11 +122,11 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokemons"
+      "Value": "โปเกมอล"
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "perfect"
+      "Value": "สำเร็จ"
     },
     {
       "Key": "commonWordName",
@@ -134,39 +134,39 @@
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "Unknown"
+      "Value": "ไม่ทราบ"
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "DisplayHighestsCP"
+      "Value": "หน้าจอแสดง CP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "DisplayHighestsPerfect"
+      "Value": "หน้าจอแสดงความสำเร็จ"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "DisplayHighestsLevel"
+      "Value": "หน้าจอแสดงระดับ"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "ตรวจสอบพิกัดว่าถูกต้องหรือไม่ หากไม่กรุณาออกจากโปรแกรม ละติจูด: {0} ลองติจูด: {1}"
+      "Value": "ตรวจสอบพิกัดว่าถูกต้องหรือไม่ หากไม่ถูกต้องกรุณาออกจากโปรแกรมแล้วเข้ามาใหม่ ละติจูด : {0} | ลองติจูด : {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Putting egg in incubator: {0:0.00}km left"
+      "Value": "ใส่ไข่ในแคปซูนเพาะเลี้ยง : {0:0.00}km ต่อไป"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Incubator status update: {0:0.00}km left"
+      "Value": "สถานะแคปซูนเพาะเลี้ยง : {0:0.00}km ต่อไป"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Incubated egg has hatched: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "เพราะเลี้ยงได้ : {0} | Lvl : {1} CP : ({2}/{3}) IV : {4}%"
     },
     {
       "Key": "logEntryError",
-      "Value": "ERROR"
+      "Value": "ผิดพลาด"
     },
     {
       "Key": "logEntryAttention",
@@ -174,7 +174,7 @@
     },
     {
       "Key": "logEntryInfo",
-      "Value": "INFO"
+      "Value": "ข้อมูล"
     },
     {
       "Key": "logEntryPokestop",
@@ -186,7 +186,7 @@
     },
     {
       "Key": "logEntrySniper",
-      "Value": "SNIPER"
+      "Value": "การปั่น"
     },
     {
       "Key": "logEntryRecycling",
@@ -214,7 +214,7 @@
     },
     {
       "Key": "logEntryDebug",
-      "Value": "DEBUG"
+      "Value": "ดีบัค"
     },
     {
       "Key": "logEntryUpdate",
@@ -234,11 +234,11 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC Servers are probably down OR your credentials are wrong. Try google"
+      "Value": "บัญชี PTC ขัดข้องชั่วคราวหรือหนังสือรับรองผิดพลาด. กรุณาใช้บัญชีกูเกิ้ลแทน"
     },
     {
       "Key": "accessTokenExpired",
-      "Value": "PTC Login Token expired. Relogging..."
+      "Value": "เข้าระบบโดยโทเคนของ PTC ผิดพลาด. กำลังลองใหม่..."
     },
     {
       "Key": "invalidResponse",
@@ -250,83 +250,83 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Account not verified! Exiting..."
+      "Value": "บัญชีไม่สามารถยืนยันได้ ! กำลังออกโปรแกรม..."
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Opening Google Device page. Please paste the code using CTRL+V"
+      "Value": "เปิดเว็บกูเกิ้ลไดร์ฟ. กรุณาวางโค๊ดโดยใช้คีย์ลัด CTRL+V"
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Couldnt copy to clipboard, do it manually"
+      "Value": "ไม่สามารถคัดลอกไปยังคลิปบอร์ด, กรุณาคัดลอกด้วยตัวเอง"
     },
     {
       "Key": "couldntCopyToClipboard2",
-      "Value": "Goto: {0} & enter {1}"
+      "Value": "คัดลอกไปยัง : {0} & และ Enter {1}"
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Detected realistic Traveling , using Default Settings inside config.json"
+      "Value": "ตรวจพบพิกัดที่เป็นจริง , ตามการตั้งค่าเริ่มต้นในไฟล์ config.json"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Not realistic Traveling at {0}, using last saved LastPos.ini"
+      "Value": "ไม่พบพิกัดที่เป็นจริง {0}, บันทึกไว้ในพิกัดไว้ในไฟล์ LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Coordinates in \"LastPos.ini\" file are invalid, using the default coordinates"
+      "Value": "พิกัดในไฟล์ \"LastPos.ini\" ผิดพลาดหรือไม่รู้จัก, กรุณาใช้พิกัดเริ่มต้นของโปรแกรม"
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Perfect! You already have the newest Version {0}"
+      "Value": "ยินดีด้วย! คุณมีโปรแกรมเวอร์ชั่นล่าสุดแล้ว คือเวอร์ชั่น {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "AutoUpdater is disabled. Get the latest release from: {0}\n "
+      "Value": "การอัพเดทอัตโนมัติถูกปิด. กรุณารับการอัพเดทล่าสุด จาก : {0}\n "
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Downloading and apply Update..."
+      "Value": "กำลังดาวโหลดเพื่อการปรับปรุง..."
     },
     {
       "Key": "finishedDownloadingRelease",
-      "Value": "Finished downloading newest Release..."
+      "Value": "การดาวโหลดเสร็จสิ้น โปรแกรมคุณได้ปรับปรุงใหม่แล้ว..."
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "Finished unpacking files..."
+      "Value": "แตกไฟล์เสร็จสิ้นแล้ว..."
     },
     {
       "Key": "finishedTransferringConfig",
-      "Value": "Finished transferring your config to the new version..."
+      "Value": "เปลี่ยนแปลงการตั้งค่าใหม่เรียบร้อยแล้ว..."
     },
     {
       "Key": "updateFinished",
-      "Value": "Update finished, you can close this window now."
+      "Value": "อัพเดทเสร็จสิ้น, คุณสามารถปิดแล้วเปิดใหม่ได้."
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Looking for incense Pokemon..."
+      "Value": "กำลังหาโปเกมอนในพื้นที่..."
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Looking for Pokemon..."
+      "Value": "กำลังมองหาโปเกมอน..."
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Looking for lure Pokemon..."
+      "Value": "กำลังมองหาการล่อโปเกมอน..."
     },
     {
       "Key": "pokemonSkipped",
-      "Value": "Skipped {0}"
+      "Value": "กำลังข้าม {0}"
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "You have no pokeballs in your inventory, no more Pokemon can be caught!"
+      "Value": "คุณไม่มีโปเกบอลในคลังไอเทมของคุณ, คุณไม่สามารถจับโปเกมอนได้!"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
+      "Value": "โปเกบอล : {0} | เกรสบอล : {1} | อัลตร้าบอล : {2} | มาสเตอร์บอล : {3}"
     },
     {
       "Key": "currentPotionInv",
@@ -350,7 +350,7 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Pokemon Inventory is full, transferring Pokemon..."
+      "Value": "โปรเกมอลในคลังคุณเต็มแล้ว, กรุณาโอนถ่ายโปเกมอน..."
     },
     {
       "Key": "invFullTransferManually",
@@ -390,7 +390,7 @@
     },
     {
       "Key": "catchStatusError",
-      "Value": "CatchError"
+      "Value": "จับผิดพลาด"
     },
     {
       "Key": "catchStatusEscape",
@@ -402,15 +402,15 @@
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "CatchMissed"
+      "Value": "จับไม่ได้ "
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "CatchSuccess"
+      "Value": "จับสำเร็จ "
     },
     {
       "Key": "catchTypeNormal",
-      "Value": "Normal"
+      "Value": "ปกติ"
     },
     {
       "Key": "catchTypeLure",
@@ -426,7 +426,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Transferred: {6:n0} | Recycled: {7:n0}"
+      "Value": "{0} - เวลาทำงาน {1} - Lvl : {2} | EXP/H : {3:n0} | P/H : {4:n0} | Stardust : {5:n0} | Transferred : {6:n0} | Recycled : {7:n0}"
     },
     {
       "Key": "profileStatsTemplateString",
@@ -434,11 +434,11 @@
     },
     {
       "Key": "showPokeTemplate",
-      "Value": "\n CP: {0} | IV: {1}% | Name: {2}"
+      "Value": "\n CP : {0} | IV : {1}% | ชื่อ : {2}"
     },
     {
       "Key": "helpTemplate",
-      "Value": "Commands: \n \n /top <cp/iv> <amount> - Shows you top Pokemons. \n /all <cp/iv> - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items. \n /status - Shows you the Status of the Bot. \n /pokedex - Shows you Pokedex "
+      "Value": "คำสั่ง : \n \n /top <cp/iv> <amount> - แสดงลำดับสูงสุดของ Pokemons. \n /ทั้งหมด <cp/iv> - แสดงโปเกมอนทั้งหมด. \n /profile - แสดงโปรไฟล์. \n /loc - แสดงตำแหน่ง. \n /items - แสดงไอเทม. \n /status - แสดงสถานะของบอท. \n /pokedex - แสดงโปเกมอนของคุณ "
     },
     {
       "Key": "statsXpTemplateString",
@@ -446,63 +446,63 @@
     },
     {
       "Key": "requireInputText",
-      "Value": "Program will continue after the key press..."
+      "Value": "โปรแกรมจะทำงานต่อไปหลังจากใส่ข้อมูล..."
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "As you have Google Two Factor Auth enabled, you will need to insert an App Specific Password into the auth.json"
+      "Value": "คุณยังไม่ได้เปิดบัญชี Google หรือยังไม่ได้รับการยอมรับการเข้าถึง, คุณต้องใส่รหัสหรือบัญชีใหม่ที่ไฟล์ auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "Opening Google App-Passwords. Please make a new App Password (use Other as Device)"
+      "Value": "กำลังเข้าบัญชี Google ของคุณ. กรุณาใส่รหัสผ่านหรือเปลี่ยนรหัส Google ใหม่ (กรุณาใช้อุปกรณ์ของคุณ)"
     },
     {
       "Key": "googleError",
-      "Value": "Make sure you have entered the right Email & Password."
+      "Value": "คุณแน่ใจหรือไม่ว่าอีเมล์และรหัสผ่านถูกต้อง."
     },
     {
       "Key": "googleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "บริการของ Google ขัดข้องชั่วคราว, กรุณาเปิดการใช้งานบอทถัดไปในอีกสักครู่."
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "You need to fill out GoogleUsername and GooglePassword in auth.json!"
+      "Value": "คุณจำเป็นต้องกรอกข้อมูลบัญชี Google ของคุณทั้งชื่อผู้ใช้และรหัสผ่านในไฟล์ auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "You need to fill out PtcUsername and PtcPassword in auth.json!"
+      "Value": "คุณจำเป็นต้องกรอกข้อมูลบัญชี PTC ของคุณทั้งชื่อผู้ใช้และรหัสผ่านในไฟล์ auth.json!"
     },
     {
       "Key": "snipeScan",
-      "Value": "Scanning for Snipeable Pokemon at {0}..."
+      "Value": "กำลังค้นหา PokeStop ของโปเกมอนที่ {0}..."
     },
     {
       "Key": "snipeScanEx",
-      "Value": "Sniping a {0} with {1} IV at {2}..."
+      "Value": "กำลังปั่น {0} ด้วย {1} IV ที่ {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "Did not find a Pokemon within the Location, pokemon despawned?"
+      "Value": "ไม่พบโปเกมอนในพื้นที่นี้, หรือยังไม่เกิดโปเกมอน?"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Not enough Pokeballs to start sniping! ({0}/{1})"
+      "Value": "ไม่มีโปเกบอลที่จะทำการปั่น! ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "MOVE1"
+      "Value": "เคลื่อนย้าย 1"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "MOVE2"
+      "Value": "เคลื่อนย้าย 2"
     },
     {
       "Key": "displayHighestCandy",
-      "Value": "Candy"
+      "Value": "ลูกอม"
     },
     {
       "Key": "ipBannedError",
-      "Value": "Connection refused. Your IP might have been Blacklisted by Niantic. Exiting.."
+      "Value": "การเชื่อมต่อถูกปฏิเสธ. ไอพีของคุณอาจโดนแบนก็เป็นได้. กำลังออก.."
     },
     {
       "Key": "noEggsAvailable",
@@ -562,103 +562,103 @@
     },
     {
       "Key": "firstStartPrompt",
-      "Value": "This is your first start, would you like to begin setup? {0}/{1}"
+      "Value": "นี่คือการใช้งานครั้งแรก, คุณต้องการตั้งค่าหรือไม่? {0}/{1}"
     },
     {
       "Key": "firstStartLanguagePrompt",
-      "Value": "Would you like to change the default language? {0}/{1}"
+      "Value": "คุณต้องการเปลี่ยนภาษาเริ่มต้นหรือไม่? {0}/{1}"
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "Please enter a new language code"
+      "Value": "กรุณาใส่โค๊ดภาษาใหม่ เช่น ภาษาไทย คือ th"
     },
     {
       "Key": "firstStartLanguageConfirm",
-      "Value": "Language Code Applied: {0}"
+      "Value": "ดำเนินการปรับใช้ภาษา : {0}"
     },
     {
       "Key": "promptError",
-      "Value": "[INPUT ERROR] Error with input, please enter '{0}' or '{1}"
+      "Value": "[ข้อมูลที่ใส่ผิดพลาด] ค่าที่ใส่ไม่ถูกต้อง, กรุณาใส่ '{0}' หรือ '{1}"
     },
     {
       "Key": "firstStartAutoGenSettings",
-      "Value": "Config/Auth file automatically generated and must be completed before continuing"
+      "Value": "ไฟล์การตั้งค่า/ไฟล์ตั้งค่าการเข้าถึงจะต้องตั้งค่าให้เสร็จสิ้นก่อนที่จะทำงานอย่างอื่นต่อไป"
     },
     {
       "Key": "firstStartSetupAccount",
-      "Value": "### Setting up new USER ACCOUNT ###"
+      "Value": "### การตั้งค่าบัญชีผู้ใช้งานใหม่ ###"
     },
     {
       "Key": "firstStartSetupTypePrompt",
-      "Value": "Please choose an account type: {0}/{1}"
+      "Value": "กรุณาพิมพ์ประเภทบัญชีของคุณ : {0}/{1}"
     },
     {
       "Key": "firstStartSetupTypeConfirm",
-      "Value": "Chosen Account Type: {0}"
+      "Value": "คุณเลือกประเภทบัญชีคือ : {0}"
     },
     {
       "Key": "firstStartSetupTypePromptError",
-      "Value": "[ERROR] submitted an incorrect account type, please choose '{0}' or '{1}'"
+      "Value": "[ผิดพลาด] ประเภทบัญชีที่คุณใส่ไม่มีหรือไม่ถูกต้อง, กรุณาเลือกดังต่อไปนี้ '{0}' หรือ '{1}'"
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
-      "Value": "Please enter a Username"
+      "Value": "กรุณาใส่ชื้อผู้ใช้ของบัญชีคุณ"
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
-      "Value": "Accepted username: {0}"
+      "Value": "ชื่อผู้ใช้ของคุณคือ : {0}"
     },
     {
       "Key": "firstStartSetupPasswordPrompt",
-      "Value": "Please enter a Password"
+      "Value": "กรุณาใส่รหัสของของบัญชีผู้ใช้คุณ"
     },
     {
       "Key": "firstStartSetupPasswordConfirm",
-      "Value": "Accepted password: {0}"
+      "Value": "รหัสผ่านของคุณคือ : {0}"
     },
     {
       "Key": "firstStartAccountCompleted",
-      "Value": "### User Account Completed ###"
+      "Value": "### การตั้งค่าบัญชีผู้ใช้งานเสร็จสิ้น ###"
     },
     {
       "Key": "firstStartDefaultLocationPrompt",
-      "Value": "Would you like to setup a new Default Location? {0}/{1}"
+      "Value": "คุณต้องการตั้งค่าพิกัดเริ่มต้นของ GPS หรือไม่? {0}/{1}"
     },
     {
       "Key": "firstStartDefaultLocationSet",
-      "Value": "Default Location Applied"
+      "Value": "ค่าเริ่มต้นพิกัด GPS แล้ว"
     },
     {
       "Key": "firstStartDefaultLocation",
-      "Value": "### Setting Default Position ###"
+      "Value": "### ตั้งค่าเริ่มต้นของพิกัด GPS ###"
     },
     {
       "Key": "firstStartSetupDefaultLocationError",
-      "Value": "[ERROR] Please input only a VALUE for example: {0}"
+      "Value": "[ผิดพลาด] กรุณาใส่ค่าตัวอย่างดังต่อไปนี้ : {0}"
     },
     {
       "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Please enter a Latitude (Right click to paste)"
+      "Value": "โปรดป้อนละติจูด (คลิกขวาเพื่อวาง)"
     },
     {
       "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Lattitude accepted: {0}"
+      "Value": "ละติจูดคือ : {0}"
     },
     {
       "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Please enter a Longitude (Right click to paste)"
+      "Value": "โปรดป้อนลองติจูด (คลิกขวาเพื่อวาง)"
     },
     {
       "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Longitude accepted: {0}"
+      "Value": "ลองติจูดคือ : {0}"
     },
     {
       "Key": "softBanBypassed",
-      "Value": "Successfully bypassed!"
+      "Value": "บายพาสกันแบนแล้ว!"
     },
     {
       "Key": "firstStartSetupCompleted",
-      "Value": "### COMPLETED CONFIG SETUP ###"
+      "Value": "### การตั้งค่าโปรแกรมสำเร็จแล้ว ###"
     },
     {
       "Key": "pokedexCatchedTelegram",
@@ -666,7 +666,7 @@
     },
     {
       "Key": "pokedexPokemonCatchedTelegram",
-      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value": "#{0} ชื่อ : {1} | จับได้ : {2} | พบที่ : {3} \n"
     },
     {
       "Key": "pokedexNeededTelegram",

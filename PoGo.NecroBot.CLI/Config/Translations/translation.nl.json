@@ -23,7 +23,7 @@
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Buiten het ingestelde bereik beland! Terug naar beginpunt ({0}m weg) in 5 seconden. Klopt je LastPos.ini bestand?"
+        "Buiten het ingestelde bereik beland! Terug naar beginpunt ({0} meter weg) in 5 seconden. Klopt je LastPos.ini bestand?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -31,15 +31,16 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "XP: {0}, Gems: {1}, Items: {2}"
+      "Value": "Naam: {0} XP: {1}, Gems: {2}, Items: {3}, Lat: {4}, Long: {5}"
+
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Items verzamelen mislukt, mogelijke softban. Opnieuw proberen: {0}/40"
+      "Value": "Naam: {0}. Items verzamelen mislukt, mogelijke softban. Opnieuw proberen: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} over ({1}m)"
+      "Value": "{0} over {1} meter ({2} seconden)"
     },
     {
       "Key": "eventProfileLogin",
@@ -123,11 +124,11 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Ei in broedmachine stoppen: {0:0.00}km resterend"
+      "Value": "Ei in broedmachine stoppen: {0:0.00} km resterend"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Broedmachine status update: {0:0.00}km resterend"
+      "Value": "Broedmachine status update: {0:0.00} km resterend"
     },
     {
       "Key": "PokedexCatchedTelegram",

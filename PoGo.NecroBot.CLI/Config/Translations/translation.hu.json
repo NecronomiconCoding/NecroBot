@@ -22,11 +22,11 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Kívül vagy a megadott maximális távolságon! Séta az induláshoz ({0}méterre) 5 másodperc múlva. A Coords.ini fájlod rendben van?"
+      "Value": "Kívül vagy a megadott maximális távolságon! Séta az kiindulási ponthoz ({0}méterre) 5 másodperc múlva. A Coords.ini fájlod rendben van?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Nincs használható pokéstop a környéken. Talán a megadott maximális távolságod túl kicsi??"
+      "Value": "Nincs használható pokéstop a környéken. Talán a megadott maximális távolságod túl kicsi?"
     },
     {
       "Key": "eventFortUsed",
@@ -42,11 +42,11 @@
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Játék mint {0}"
+      "Value": "Bejelentkezve mint {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Szerencsetojás aktiválva, Hátralévő idő: {0} perc"
+      "Value": "LuckyEgg aktiválva, Hátralévő idő: {0} perc"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -66,11 +66,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Esély: {7}% | {8}m távolságra | with a {9} ({10} maradt). | {11} kapott EXP | {12} | szél.: {13} hossz.: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Esély: {7}% | {8}m távolságra | használva: {9} ({10} maradt). | {11} kapott EXP | {12} | szél.: {13} hossz.: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Esély: {7}% | {8}m távolságra | with a {9} ({10} maradt). | szél.: {11} hossz.: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Esély: {7}% | {8}m távolságra | használva: {9} ({10} maradt). | szél.: {11} hossz.: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -98,7 +98,7 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "tökéletes"
+      "Value": "tökéletesség"
     },
     {
       "Key": "commonWordName",
@@ -202,7 +202,7 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "A fiók nincs megereősítve! Érdekes..."
+      "Value": "A fiók nincs megereősítve! "
     },
     {
       "Key": "openingGoogleDevicePage",
@@ -210,7 +210,7 @@
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Nem lehet másolni a vágólapra, csináld manuálisan"
+      "Value": "Nem lehet másolni a vágólapra, gépeld be"
     },
     {
       "Key": "couldntCopyToClipboard2",
@@ -258,7 +258,7 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Pokémon keresése füstölővel..."
+      "Value": "Pokémon keresése Incense használatával"
     },
     {
       "Key": "lookingForPokemon",
@@ -322,7 +322,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "A pokémon tárhely megtelt! TOvábbíts pokémonokat manuálisan a professzornak vagy állítsd a TransferDuplicatePokemon értékét true-ra a beállításokban..."
+      "Value": "A pokémon tárhely megtelt! TOvábbíts pokémonokat manuálisan a professzornak vagy állítsd a TransferDuplicatePokemon értékét true-ra a config fileban"
     },
     {
       "Key": "invFullPokestopLooting",
@@ -354,11 +354,11 @@
     },
     {
       "Key": "catchStatusError",
-      "Value": "Elfogási hibar"
+      "Value": "Elfogási hiba"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Sikertelen elfogás"
+      "Value": "Sikertelen kísérlet"
     },
     {
       "Key": "catchStatusFlee",
@@ -370,7 +370,7 @@
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "Sikeres elfogás"
+      "Value": "Elkapva"
     },
     {
       "Key": "catchTypeNormal",
@@ -382,7 +382,7 @@
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "Füstölő"
+      "Value": "Incense"
     },
     {
       "Key": "webSocketFailStart",
@@ -402,7 +402,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Hogyha van Google 2 tényezős hitelesítésed engedélyezve, be kell illesztened egy alkalmazás által meghatározott kódot az auth.json fájlba"
+      "Value": "Ha a Google kétlépcsős hitelesítésed engedélyezve van, be kell illesztened egy alkalmazás által meghatározott kódot az auth.json fájlba"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
