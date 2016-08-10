@@ -807,13 +807,13 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public static readonly DependencyProperty WarningColor =
             DependencyProperty.Register("WarningColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
 
-        public string PokeStopColor
+        public string PokestopColor
         {
-            get { return (string)GetValue(PokeStopColor); }
-            set { SetValue(PokeStopColor, value); }
+            get { return (string)GetValue(PokestopColor); }
+            set { SetValue(PokestopColor, value); }
         }
-        public static readonly DependencyProperty PokeStopColor =
-            DependencyProperty.Register("PokeStopColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty PokestopColor =
+            DependencyProperty.Register("PokestopColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
         
         public string FarmingColor
         {
