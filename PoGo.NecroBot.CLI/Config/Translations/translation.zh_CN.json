@@ -154,7 +154,7 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "正在将宠物蛋放入孵化器中:剩余{0:0.00}千米\t\t"
+      "Value": "正在将宠物蛋放入孵化器中:剩余{0:0.00}千米\t\t\t\t"
     },
     {
       "Key": "incubatorStatusUpdate",
