@@ -648,7 +648,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 // most likely System.IO.IOException
                 session.EventDispatcher.Send(new ErrorEvent {Message = "(PokeSnipers.com) " + ex.Message});
-                return new List<SniperInfo>();
+                return null;
             }
             if (scanResult_pokesnipers.pokemons != null)
             {
@@ -686,7 +686,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 return locationsToSnipe.OrderBy(q => q.ExpirationTimestamp).ToList();
             }
             else
-                return new List<SniperInfo>();
+                return null;
         }
 
         private static List<SniperInfo> GetSniperInfoFrom_pokewatchers(ISession session, List<PokemonId> pokemonIds)
