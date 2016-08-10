@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.Logic.State
         public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
             if (session.LogicSettings.EvolveAllPokemonAboveIv || session.LogicSettings.EvolveAllPokemonWithEnoughCandy 
-               || session.LogicSettings.WaitForLuckyEggEvolving || session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage > 00.0)
+               || session.LogicSettings.EvolveWhenLuckyEggsMinMet || session.LogicSettings.KeepPokemonsThatCanEvolve)
             {
                 await EvolvePokemonTask.Execute(session, cancellationToken);
             }

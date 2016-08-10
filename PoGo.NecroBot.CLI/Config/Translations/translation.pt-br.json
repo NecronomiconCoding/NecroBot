@@ -486,7 +486,7 @@
     },
     {
       "Key": "useLuckyEggIsFalse",
-       "Value": "WaitForLuckyEggEvolving requires UseLuckyEggWhileEvolving to be set to true!"
+       "Value": "EvolveWhenLuckyEggsMinMet requires UseLuckyEggWhileEvolving to be set to true!"
     },
     {
       "Key": "useLuckyEggActive",
