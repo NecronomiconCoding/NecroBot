@@ -29,10 +29,8 @@ namespace PoGo.NecroBot.Logic.Service
             this.bot = new TelegramBotClient(apiKey);
             this.session = session;
             var me = new Telegram.Bot.Types.User();
-            try
-            {
+
                 me = bot.GetMeAsync().Result;
-            }
 
             bot.OnMessage += OnTelegramMessageReceived;
             bot.StartReceiving();
