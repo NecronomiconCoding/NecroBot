@@ -154,7 +154,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static List<PokemonLocation> LocsVisited = new List<PokemonLocation>();
         private static readonly List<SniperInfo> SnipeLocations = new List<SniperInfo>();
         private static DateTime _lastSnipe = DateTime.MinValue;
-
+        
         public static Task AsyncStart(Session session, CancellationToken cancellationToken = default(CancellationToken))
         {
             return Task.Run(() => Start(session, cancellationToken), cancellationToken);
@@ -242,10 +242,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                                         return;
 
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
-                                    _lastSnipe = DateTime.Now;
-                                    //if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                    //LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
-
                                 }
                             }
                         }
@@ -270,11 +266,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                     if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                         return;
-
+                                    
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
-                                    _lastSnipe = DateTime.Now;
-                                    // if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                    //LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                 }
                             }
                         }
@@ -299,11 +292,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                     if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                         return;
-
+                                    
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
-                                    _lastSnipe = DateTime.Now;
-                                    //if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                    //LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                 }
                             }
                         }
@@ -311,7 +301,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (session.LogicSettings.GetSniperInfoFromPokeWatchers)
                     {
-                        _lastSnipe = DateTime.Now;
                         var _locationsToSnipe = GetSniperInfoFrom_pokewatchers(session, pokemonIds);
                         if (_locationsToSnipe.Any())
                         {
@@ -331,9 +320,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                                         return;
 
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
-
-                                    //if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                    //LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
                                 }
                             }
                         }
@@ -373,11 +359,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     {
                                         if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                             return;
-
-                                        await Snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude, cancellationToken);
-                                        _lastSnipe = DateTime.Now;
-                                        //if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
-                                        //    LocsVisited.Add(new PokemonLocation(location.Latitude, location.Longitude));
+                                        
+                                        await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
                                     }
                                 }
                             }
@@ -395,6 +378,9 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static async Task Snipe(ISession session, IEnumerable<PokemonId> pokemonIds, double latitude,
             double longitude, CancellationToken cancellationToken)
         {
+            if (LocsVisited.Contains(new PokemonLocation(latitude, longitude)))
+                return;
+
             var CurrentLatitude = session.Client.CurrentLatitude;
             var CurrentLongitude = session.Client.CurrentLongitude;
             var catchedPokemon = false;
@@ -431,7 +417,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (!LocsVisited.Contains(new PokemonLocation(latitude, longitude)))
                     LocsVisited.Add(new PokemonLocation(latitude, longitude));
             }
-
+            
             foreach (var pokemon in catchablePokemon)
             {
                 EncounterResponse encounter;
@@ -507,6 +493,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
                 });
             }
+
+            _lastSnipe = DateTime.Now;
 
             session.EventDispatcher.Send(new SnipeModeEvent { Active = false });
             await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);

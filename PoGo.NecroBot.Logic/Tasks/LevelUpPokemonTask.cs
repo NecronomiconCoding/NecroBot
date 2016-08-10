@@ -24,14 +24,13 @@ namespace PoGo.NecroBot.Logic.Tasks
            
             if (session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
                 return;
+            upgradablePokemon = await session.Inventory.GetPokemonToUpgrade();
             if (session.LogicSettings.OnlyUpgradeFavorites)
             {
-                upgradablePokemon = await session.Inventory.GetFaveriotPokemon();
+                var fave = upgradablePokemon.Where(i => i.Favorite == 1);
+                upgradablePokemon = fave;
             }
-            else
-            {
-                upgradablePokemon = await session.Inventory.GetPokemonToUpgrade();
-            }
+           
            
             if (upgradablePokemon.Count() == 0)
                 return;
