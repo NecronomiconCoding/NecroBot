@@ -67,20 +67,34 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await UseLuckyEgg(session);
                             }
                             await evolve(session, pokemonToEvolve);
+                            return;
                         }
                     }
-                    else
+                    else if(session.LogicSettings.UseLuckyEggsWhileEvolving)
                     {
                         if (await shouldUseLuckyEgg(session, pokemonToEvolve))
                         {
                             await UseLuckyEgg(session);
                             await evolve(session, pokemonToEvolve);
                         }
+                        return;
+                    }
+                    else
+                    {
+                        session.EventDispatcher.Send(new WarnEvent()
+                        {
+                            Message = session.Translation.GetTranslation(TranslationString.UseLuckyEggIsFlase)
+                        });
+                        return;
                     }
                 }
                 else if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
                 {
-                    await evolve(session, pokemonToEvolve);
+                    if (await shouldUseLuckyEgg(session, pokemonToEvolve))
+                    {
+                        await evolve(session, pokemonToEvolve);
+                    }
+                    return;
                 }
             }
         }

@@ -447,7 +447,15 @@
       "Value": "Keine Eier verfügbar"
     },
     {
-      "Key": "UseLuckyEggActive",
+      "Key": "usageHelp",
+       "Value": "Invalid command arguments! \n Correct usage: \n {0}"
+    },
+    {
+      "Key": "useLuckyEggIsFalse",
+       "Value": "WaitForLuckyEggEvolving requires UseLuckyEggWhileEvolving to be set to true!"
+    },
+    {
+      "Key": "useLuckyEggActive",
       "Value": "Glücks-Ei bereits aktiv"
     },
     {

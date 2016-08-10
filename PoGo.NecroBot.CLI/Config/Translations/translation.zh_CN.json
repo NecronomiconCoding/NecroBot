@@ -509,6 +509,14 @@
       "Value": "背包中没有宠物蛋\t\t"
     },
     {
+      "Key": "usageHelp",
+       "Value": "Invalid command arguments! \n Correct usage: \n {0}"
+    },
+    {
+      "Key": "useLuckyEggIsFalse",
+       "Value": "WaitForLuckyEggEvolving requires UseLuckyEggWhileEvolving to be set to true!"
+    },
+    {
       "Key": "useLuckyEggActive",
       "Value": "已经开启过幸运蛋了.\t\t"
     },
