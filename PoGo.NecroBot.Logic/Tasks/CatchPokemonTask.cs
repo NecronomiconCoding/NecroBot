@@ -164,10 +164,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     Logger.Write($"(Threw ball) {hitTxt} hit. {spinTxt}-ball...", LogLevel.Debug);
                 }
-                int missChance = Random.Next(0, 101);
-                bool hitPokemon = true;
-                                if (missChance <= session.LogicSettings.ThrowMissPercentage && session.LogicSettings.EnableMissedThrows && session.LogicSettings.EnableHumanizedThrows)
-                    hitPokemon = false;
+
                 caughtPokemonResponse =
                     await session.Client.Encounter.CatchPokemon(
                         encounter is EncounterResponse || encounter is IncenseEncounterResponse
@@ -175,7 +172,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             : encounterId,
                         encounter is EncounterResponse || encounter is IncenseEncounterResponse
                             ? pokemon.SpawnPointId
-                            : currentFortData.Id, pokeball, normalizedRecticleSize, spinModifier,1,hitPokemon);
+                            : currentFortData.Id, pokeball, normalizedRecticleSize, spinModifier);
 
                 var lat = encounter is EncounterResponse || encounter is IncenseEncounterResponse
                              ? pokemon.Latitude : currentFortData.Latitude;
