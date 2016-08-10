@@ -26,7 +26,7 @@ using System.Threading;
 
 namespace PoGo.NecroBot.Logic
 {
-    internal class AuthSettings
+    public class AuthSettings
     {
         [JsonIgnore]
         private string _filePath;
@@ -275,7 +275,7 @@ namespace PoGo.NecroBot.Logic
     public class GlobalSettings
     {
         [JsonIgnore]
-        internal AuthSettings Auth = new AuthSettings();
+        public AuthSettings Auth = new AuthSettings();
         [JsonIgnore]
         public string GeneralConfigPath;
         [JsonIgnore]
@@ -341,11 +341,11 @@ namespace PoGo.NecroBot.Logic
         //position
         [DefaultValue(false)]
         public bool DisableHumanWalking;
-        [DefaultValue(40.785091)]
+        [DefaultValue(40.785092)]
         public double DefaultLatitude;
-        [DefaultValue(-73.968285)]
+        [DefaultValue(-73.968286)]
         public double DefaultLongitude;
-        [DefaultValue(19.0)]
+        [DefaultValue(5.0)]
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
@@ -353,9 +353,9 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(false)]
         public bool FastSoftBanBypass;
         //delays
-        [DefaultValue(500)]
+        [DefaultValue(5000)]
         public int DelayBetweenPlayerActions;
-        [DefaultValue(100)]
+        [DefaultValue(2000)]
         public int DelayBetweenPokemonCatch;
         //dump stats
         [DefaultValue(false)]
@@ -405,6 +405,8 @@ namespace PoGo.NecroBot.Logic
         //lucky, incense and berries
         [DefaultValue(true)]
         public bool UseEggIncubators;
+        [DefaultValue(2)]
+        public int minEggKmForLimitedIncubators;
         [DefaultValue(false)]
         public bool UseLuckyEggConstantly;
         [DefaultValue(30)]
@@ -428,7 +430,7 @@ namespace PoGo.NecroBot.Logic
         public string SnipeLocationServer;
         [DefaultValue(16969)]
         public int SnipeLocationServerPort;
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool GetSniperInfoFromPokezz;
         [DefaultValue(true)]
         public bool GetOnlyVerifiedSniperInfoFromPokezz;
@@ -437,7 +439,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(true)]
         public bool GetSniperInfoFromPokeWatchers;
         [DefaultValue(true)]
-        public bool SnipeWithSkiplagged;
+        public bool GetSniperInfoFromSkiplagged;
         [DefaultValue(20)]
         public int MinPokeballsToSnipe;
         [DefaultValue(0)]
@@ -492,7 +494,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(0.05)]
         public double UseMasterBallBelowCatchProbability;
         //customizable catch
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool EnableHumanizedThrows;
         [DefaultValue(40)]
         public int NiceThrowChance;
@@ -628,14 +630,43 @@ namespace PoGo.NecroBot.Logic
         };
         public List<PokemonId> PokemonsToLevelUp = new List<PokemonId>
         {
-            //criteria: most common
-            PokemonId.Caterpie,
-            PokemonId.Weedle,
-            PokemonId.Pidgey,
-            PokemonId.Rattata,
-            PokemonId.Spearow,
-            PokemonId.Zubat,
-            PokemonId.Doduo
+            //criteria: from SS Tier to A Tier + Regional Exclusive
+            PokemonId.Venusaur,
+            PokemonId.Charizard,
+            PokemonId.Blastoise,
+            //PokemonId.Nidoqueen,
+            //PokemonId.Nidoking,
+            PokemonId.Clefable,
+            //PokemonId.Vileplume,
+            //PokemonId.Golduck,
+            //PokemonId.Arcanine,
+            //PokemonId.Poliwrath,
+            //PokemonId.Machamp,
+            //PokemonId.Victreebel,
+            //PokemonId.Golem,
+            //PokemonId.Slowbro,
+            //PokemonId.Farfetchd,
+            PokemonId.Muk,
+            //PokemonId.Exeggutor,
+            //PokemonId.Lickitung,
+            PokemonId.Chansey,
+            //PokemonId.Kangaskhan,
+            //PokemonId.MrMime,
+            //PokemonId.Tauros,
+            PokemonId.Gyarados,
+            //PokemonId.Lapras,
+            PokemonId.Ditto,
+            //PokemonId.Vaporeon,
+            //PokemonId.Jolteon,
+            //PokemonId.Flareon,
+            //PokemonId.Porygon,
+            PokemonId.Snorlax,
+            PokemonId.Articuno,
+            PokemonId.Zapdos,
+            PokemonId.Moltres,
+            PokemonId.Dragonite,
+            PokemonId.Mewtwo,
+            PokemonId.Mew
         };
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
         {
@@ -841,8 +872,7 @@ namespace PoGo.NecroBot.Logic
                 settings = new GlobalSettings();
                 shouldExit = true;
             }
-
-
+            
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
@@ -1326,6 +1356,7 @@ namespace PoGo.NecroBot.Logic
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool TransferDuplicatePokemonOnCapture => _settings.TransferDuplicatePokemonOnCapture;
         public bool UseEggIncubators => _settings.UseEggIncubators;
+        public int minEggKmForLimitedIncubators => _settings.minEggKmForLimitedIncubators;
         public int UseGreatBallAboveCp => _settings.UseGreatBallAboveCp;
         public int UseUltraBallAboveCp => _settings.UseUltraBallAboveCp;
         public int UseMasterBallAboveCp => _settings.UseMasterBallAboveCp;
@@ -1393,7 +1424,7 @@ namespace PoGo.NecroBot.Logic
         public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.GetOnlyVerifiedSniperInfoFromPokezz;
         public bool GetSniperInfoFromPokeSnipers => _settings.GetSniperInfoFromPokeSnipers;
         public bool GetSniperInfoFromPokeWatchers => _settings.GetSniperInfoFromPokeWatchers;
-        public bool SnipeWithSkiplagged => _settings.SnipeWithSkiplagged;
+        public bool GetSniperInfoFromSkiplagged => _settings.GetSniperInfoFromSkiplagged;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;

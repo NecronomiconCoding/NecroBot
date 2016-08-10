@@ -1,4 +1,4 @@
-*{
+{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -342,7 +342,7 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[设置无效]您设置的物品数量组合(精灵球+药水+复活石={0})超出了您的背包容量({1})\t\t"
+      "Value": "[设置无效]您当前设置的物品数量组合(精灵球+药水+复活石={0})超出了您的背包容量({1})\t\t\t\t"
     },
     {
       "Key": "recyclingQuietly",
@@ -350,7 +350,7 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "包裹满了,正在传输精灵...\t\t"
+      "Value": "包裹满了,尝试传输精灵...\t\t"
     },
     {
       "Key": "invFullTransferManually",
@@ -646,7 +646,7 @@
     },
     {
       "Key": "softBanBypassed",
-      "Value": "成功解封!"
+      "Value": "成功解封!\t\t"
     },
     {
       "Key": "firstStartSetupCompleted",
@@ -654,19 +654,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value":  "--- 图鉴已获得 --- \t\t\n"  
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value":  "#{0} 名称: {1} | 已捕获此类: {2} | 已遇见此类: {3} \t\t\n"  
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value":  "--- 图鉴未获得 --- \t\t\n"  
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value":  "#{0} 名称: {1} \t\t\n"  
     }
   ],
   "PokemonStrings": [
