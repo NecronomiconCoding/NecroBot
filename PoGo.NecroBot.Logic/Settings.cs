@@ -1,26 +1,25 @@
 
 #region using directives
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using PoGo.NecroBot.Logic.Common;
-using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.Logic.State;
-using PoGo.NecroBot.Logic.Utils;
-using POGOProtos.Enums;
-using POGOProtos.Inventory.Item;
-using PokemonGo.RocketAPI;
-using PokemonGo.RocketAPI.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Threading;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
+using PokemonGo.RocketAPI;
+using PokemonGo.RocketAPI.Enums;
+using POGOProtos.Enums;
+using POGOProtos.Inventory.Item;
 
 #endregion
 
@@ -384,7 +383,7 @@ namespace PoGo.NecroBot.Logic
         public bool UseKeepMinLvl;
         [DefaultValue(false)]
         public bool PrioritizeIvOverCp;
-        [DefaultValue(0)]
+        [DefaultValue(1)]
         public int KeepMinDuplicatePokemon;
         //gpx
         [DefaultValue(false)]
@@ -439,7 +438,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(true)]
         public bool GetSniperInfoFromPokeWatchers;
         [DefaultValue(true)]
-        public bool SnipeWithSkiplagged;
+        public bool GetSniperInfoFromSkiplagged;
         [DefaultValue(20)]
         public int MinPokeballsToSnipe;
         [DefaultValue(0)]
@@ -1424,7 +1423,7 @@ namespace PoGo.NecroBot.Logic
         public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.GetOnlyVerifiedSniperInfoFromPokezz;
         public bool GetSniperInfoFromPokeSnipers => _settings.GetSniperInfoFromPokeSnipers;
         public bool GetSniperInfoFromPokeWatchers => _settings.GetSniperInfoFromPokeWatchers;
-        public bool SnipeWithSkiplagged => _settings.SnipeWithSkiplagged;
+        public bool GetSniperInfoFromSkiplagged => _settings.GetSniperInfoFromSkiplagged;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;

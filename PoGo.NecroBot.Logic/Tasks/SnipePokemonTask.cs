@@ -1,6 +1,5 @@
 ﻿#region using directives
 
-using CloudFlareUtilities;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,7 +10,9 @@ using System.Net.Http;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using CloudFlareUtilities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
@@ -21,7 +22,6 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
 using Quobject.SocketIoClientDotNet.Client;
-using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -324,7 +324,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         }
                     }
 
-                    if (session.LogicSettings.SnipeWithSkiplagged)
+                    if (session.LogicSettings.GetSniperInfoFromSkiplagged)
                     {
                         foreach (var location in session.LogicSettings.PokemonToSnipe.Locations)
                         {

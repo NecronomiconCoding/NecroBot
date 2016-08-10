@@ -1,8 +1,8 @@
 #region using directives
 
+using System.Collections.Generic;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-using System.Collections.Generic;
 
 #endregion
 
@@ -161,7 +161,7 @@ namespace PoGo.NecroBot.Logic
         bool GetOnlyVerifiedSniperInfoFromPokezz { get; }
         bool GetSniperInfoFromPokeSnipers { get; }
         bool GetSniperInfoFromPokeWatchers { get; }
-        bool SnipeWithSkiplagged { get; }
+        bool GetSniperInfoFromSkiplagged { get; }
         bool UseSnipeLocationServer { get; }
         bool UseTransferIvForSnipe { get; }
         bool SnipeIgnoreUnknownIv { get; }
