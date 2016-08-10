@@ -155,7 +155,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 Looted = false
                             });
 
-                            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+                            if (!session.LogicSettings.FastSoftBanBypass)
+                            {
+                                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+                            }
                         }
                     }
                     else

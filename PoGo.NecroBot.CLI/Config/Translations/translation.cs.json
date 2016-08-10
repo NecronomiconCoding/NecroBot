@@ -1,4 +1,4 @@
-{
+*{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -380,7 +380,7 @@
     },
     {
       "Key": "GoogleTwoFactorAuthExplanation",
-      "Value": "Otevírám Google App heslo. prosím vytvořte si nové App heslo (použijte Ostatní jako Zařízení)"
+      "Value": "Otevírám Google App heslo. Prosím vytvořte si nové App heslo (použijte Ostatní jako Zařízení)"
     },
     {
       "Key": "GoogleError",
@@ -444,7 +444,7 @@
     },
     {
       "Key": "UseLuckyEggAmount",
-      "Value": "Šťastná vejce v batohu: {0}"
+      "Value": "Šťastných vajec v batohu: {0}"
     },
     {
       "Key": "NoIncenseAvailable",
@@ -452,7 +452,7 @@
     },
     {
       "Key": "UseIncenseActive",
-      "Value": "Kadidlo aktivní"
+      "Value": "Kadidlo je aktivní"
     },
     {
       "Key": "UseIncenseAmount",
@@ -468,7 +468,7 @@
     },
     {
       "Key": "PkmPotentialEvolveCount",
-      "Value": "[Vývoj] Potenciálních vývinů: {0}"
+      "Value": "Potenciálních evolucí: {0}"
     },
     {
       "Key": "PkmNotEnoughRessources",
@@ -477,6 +477,22 @@
     {
       "Key": "waitingForMorePokemonToEvolve",
       "Value": "Čekání na vývin {0} pokemů najednou, zbývá {1} chytit! ({2}/{3} pro {4}% batohu)"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- Pokedex catched --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- Pokedex needed --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
   "PokemonStrings": [

@@ -148,6 +148,8 @@ namespace PoGo.NecroBot.Logic
                         _client.Player.UpdatePlayerLocation(targetLocation.Latitude, targetLocation.Longitude,
                             LocationUtils.getElevation(targetLocation.Latitude,targetLocation.Longitude));
                 UpdatePositionEvent?.Invoke(targetLocation.Latitude, targetLocation.Longitude);
+                if (functionExecutedWhileWalking != null)
+                    await functionExecutedWhileWalking(); // look for pokemon
                 return result;
             }
         }
