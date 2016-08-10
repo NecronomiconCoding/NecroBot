@@ -287,6 +287,8 @@ namespace PoGo.NecroBot.Logic
 
         [DefaultValue("en")]
         public string TranslationLanguageCode;
+        [DefaultValue(true)]
+        public bool CheckForUpdates;
         //autoupdate
         [DefaultValue(true)]
         public bool AutoUpdate;
@@ -877,7 +879,7 @@ namespace PoGo.NecroBot.Logic
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
             settings.isGui = isGui;
 
-            if (!boolSkipSave || !settings.AutoUpdate)
+            if ( !boolSkipSave || !settings.CheckForUpdates || !settings.AutoUpdate )
             {
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
@@ -1321,6 +1323,7 @@ namespace PoGo.NecroBot.Logic
         public string ProfilePath => _settings.ProfilePath;
         public string ProfileConfigPath => _settings.ProfileConfigPath;
         public string GeneralConfigPath => _settings.GeneralConfigPath;
+        public bool CheckForUpdates => _settings.CheckForUpdates;
         public bool AutoUpdate => _settings.AutoUpdate;
         public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
         public bool UseWebsocket => _settings.UseWebsocket;
