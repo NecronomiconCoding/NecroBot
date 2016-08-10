@@ -86,6 +86,7 @@ namespace PoGo.NecroBot.Logic
         bool FastSoftBanBypass { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }
+        bool WaitForLuckyEggEvolving { get; }
         bool TransferDuplicatePokemon { get; }
         bool TransferDuplicatePokemonOnCapture { get; }
         bool UseEggIncubators { get; }

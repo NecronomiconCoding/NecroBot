@@ -366,6 +366,8 @@ namespace PoGo.NecroBot.Logic
         public bool EvolveAllPokemonAboveIv;
         [DefaultValue(true)]
         public bool EvolveAllPokemonWithEnoughCandy;
+        [DefaultValue(false)]
+        public bool WaitForLuckyEggEvolving;
         [DefaultValue(90.0)]
         public double EvolveKeptPokemonsAtStorageUsagePercentage;
         [DefaultValue(false)]
@@ -1351,6 +1353,7 @@ namespace PoGo.NecroBot.Logic
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
         public bool FastSoftBanBypass => _settings.FastSoftBanBypass;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
+        public bool WaitForLuckyEggEvolving => _settings.WaitForLuckyEggEvolving;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool TransferDuplicatePokemonOnCapture => _settings.TransferDuplicatePokemonOnCapture;

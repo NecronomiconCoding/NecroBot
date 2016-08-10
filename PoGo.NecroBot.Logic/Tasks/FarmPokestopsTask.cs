@@ -182,7 +182,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                         session.LogicSettings.EvolveAllPokemonAboveIv ||
-                        session.LogicSettings.UseLuckyEggsWhileEvolving ||
+                        session.LogicSettings.WaitForLuckyEggEvolving ||
                         session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage > 00.0)
                     {
                         await EvolvePokemonTask.Execute(session, cancellationToken);

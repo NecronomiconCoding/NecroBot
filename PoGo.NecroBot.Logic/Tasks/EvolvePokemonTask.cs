@@ -36,7 +36,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (pokemonToEvolve.Any())
             {
                 if (session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage > 00.0 ||
-                         session.LogicSettings.UseLuckyEggsWhileEvolving)
+                         session.LogicSettings.WaitForLuckyEggEvolving)
                 {
                     if (session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage > 00.0)
                     {
