@@ -107,6 +107,234 @@
     {
       "Key": "candies",
       "Value": "ស្ករគ្រាប់: {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "មិនអាចដោះស្រាយឯកសារ GPX​ បាន។​ នឺងរំលងកិចការងារនោះ។\t\t"
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "Pokemons"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "ល្អបំផត់"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "ឈ្មោះ"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "មិនស្គាល់"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "បង្ហាយនៅ CP ខ្ពស់ជាងគេ"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "បង្ហាយនៅ​​​​​ Pokemon ល្អជាងគេ"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "បង្ហាយនៅ Level ខ្ពស់ជាងគ"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "សូមមេត្តាពិនិត្យរយះទទឺងនឺងរយះបណ្ដាយអោយបានត្រឺមត្រូវ។​ បិទកម្មវិធីបើសិនមិនត្រឺមត្រូវ រយះទទឺង:{0} រយះបណ្ដោយ:{1}\t\t"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "ដាក់ស៊ុតទៅក្នុង incubator: នៅសល់ចម្ងាយ​ {0:0.00}គីឡូម៉ែត្រទៀត។\t\t"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "ព័តមានរបស់ incubator: នៅសល់ចម្ងាយ​ {0:0.00}គីឡូម៉ែត្រទៀត។\t\t"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "ស៊ុតបានញាស់:{0}|លេវល:{1} CP:({2}/{3})IV:{4}%\t\t\t"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "កំហុស"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "ប្រុងប្រយ័ត"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "ព័ត៌មាន"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "Pokestop"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "ធ្វើកសិកម្ម"
+    },
+    {
+      "Key": "logEntrySniper",
+      "Value": "អ្នកលបបាញ់"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "ការកែឆ្នៃ"
+    },
+    {
+      "Key": "logEntryPkmn",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "ការផ្លាស់ប្តូរ"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "ការវិវឌ្ឍ"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "ផ្លែរបែររឹ"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "ស៊ុត"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "បំបាត់កំហុស"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "ធ្វើឱ្យទាន់សម័យ"
+    },
+    {
+      "Key": "logEntryNew",
+      "Value": "ថ្មី"
+    },
+    {
+      "Key": "logEntrySoftBan",
+      "Value": "ការពិន័យ"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "ចូលគណនីយជា {0}\t\t"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "PTC server​ ប្រហែលជាមិនដំណើរការ ឬ​ អ្នកដាក់់គណនីយមិនត្រឺមត្រូវ,ព្រយាមចូលតាមGoogleទៅ។录\t\t"
+    },
+    {
+      "Key": "accessTokenExpired",
+      "Value": "PTC សញ្ញាសម្ងាតផុតកំណត់់,កុំពុងព្រយាមម្ដងទៀត..\t\t"
+    },
+    {
+      "Key": "invalidResponse",
+      "Value": "ទទួលចម្លើយខុសពី Niantic server។\t\t"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "ព្រយាមម្ដងទៀតក្នុង{0}វិនាទី...\t\t"
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "គណនីយមិនទាន់បានផ្ទៀង​ផ្ទាត់!បិទកម្មវិធី...\t\t"
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "កុំពុងបើក GoogleDevice ទំព័រ,សូមដាក់ទីនោះដោយ Ctrl+V\t\t"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "ព្រយាមចាប់"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "មិនអាចចាប់បានមានបញ្ហា"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "មិនអាចចាប់បានPokemonរួយពីបាល់"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "មិនអាចចាប់បានPokemonរត់គេចខ្លួន"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "គប់ប៉ាល់ខុស"
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "ចាប់បានសំរេច"
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "ចាប់បានប្រភេទធម្មតា"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "ថ្នាំទាក់ទាញ"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "គ្រឿងក្រអូប"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "មិនអាចចាប់ផ្ដើម WebSocketServer នៅ Port:{0}\t\t"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} Runtime {1} លេវល:{2}| បទពិសោធទ៏/ម៉ោង:{3:n0}| Pokemons/ម៉ោង:{4:n0}| Stardust:{5:n0}| ផ្លាស់ផ្ដូរ: {6:n0} | កែច្នៃឡើងវិញ: {7:n0}"
+    },
+    {
+      "Key": "showPokeTemplate",
+      "Value": "\n CP {0} | ឈ្មោះ: {1}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "សូមដាក់បញ្ចូលរយះទទឺង\t\t"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "សូមបញ្ជាក់រយះទទឺង: {0}\t\t"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "សូមដាក់បញ្ចូលរយះបណ្ដោយ\t\t"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "សូមបញ្ជាក់រយះបណ្ដោយ: {0}\t\t"
+    },
+    {
+      "Key": "softBanBypassed",
+      "Value": "ការពិន័យត្រូវបានលើកលែង!"
+    },
+    {
+      "Key": "firstStartSetupCompleted",
+      "Value": "### រៀបចំព័តមានបានសំរេច ###\t\t"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- Pokedex ចាប់បាន --- \n"
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} ឈ្មោះ: {1} | ចាប់បាន: {2} | ជួប: {3} \n"
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- Pokedex ត្រូវការ --- \n"
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} ឈ្មោះ: {1} \n"
     }
   ],
 	"PokemonStrings": [
