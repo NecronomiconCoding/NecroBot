@@ -103,19 +103,15 @@ namespace PoGo.NecroBot.Logic
                         {
                             var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
 
-                            bool ret = true;
-                            pokemonTransferFilter.Moves.ForEach(moveset =>
-                            {
-                                ret = !pokemonTransferFilter.MovesOperator.BoolFunc(
-                                    moveset.Intersect(new[] { p.Move1, p.Move2 }).Any(),
-                                    pokemonTransferFilter.KeepMinOperator.BoolFunc(
-                                        p.Cp >= pokemonTransferFilter.KeepMinCp,
-                                        PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage,
-                                        pokemonTransferFilter.KeepMinOperator.ReverseBoolFunc(
-                                            pokemonTransferFilter.KeepMinOperator.InverseBool(pokemonTransferFilter.UseKeepMinLvl),
-                                            PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl)));
-                            });
-                            return ret;
+                            return !pokemonTransferFilter.MovesOperator.BoolFunc(
+                                 pokemonTransferFilter.Moves.Any(moveset => moveset.Intersect(new[] { p.Move1, p.Move2 }).Any()),
+                                 pokemonTransferFilter.KeepMinOperator.BoolFunc(
+                                     p.Cp >= pokemonTransferFilter.KeepMinCp,
+                                     PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage,
+                                     pokemonTransferFilter.KeepMinOperator.ReverseBoolFunc(
+                                         pokemonTransferFilter.KeepMinOperator.InverseBool(pokemonTransferFilter.UseKeepMinLvl),
+                                         PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl)));
+
                         }).ToList();
             }
             catch (Exception e)
@@ -135,66 +131,52 @@ namespace PoGo.NecroBot.Logic
             {
                 var amountToKeepInStorage = Math.Max(GetPokemonTransferFilter(pokemonGroupToTransfer.Key).KeepMinDuplicatePokemon, 0);
 
+                var inStorage = myPokemonList.Count(data => data.PokemonId == pokemonGroupToTransfer.Key);
+                var needToRemove = inStorage - amountToKeepInStorage;
+
+                if (needToRemove <= 0)
+                    continue;
+
+                var weakPokemonCount = pokemonGroupToTransfer.Count();
+                var canBeRemoved = Math.Min(needToRemove, weakPokemonCount);
+
+
                 var settings = pokemonSettings.Single(x => x.PokemonId == pokemonGroupToTransfer.Key);
-                var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
-
-                int? modFromEvolve = null;
-
+                //Lets calc new canBeRemoved pokemons according to transferring some of them for +1 candy and some evolve for +1 candy
                 if (keepPokemonsThatCanEvolve &&
                     pokemonsToEvolve.Contains(pokemonGroupToTransfer.Key) &&
                     settings.CandyToEvolve > 0 &&
                     settings.EvolutionIds.Count != 0)
                 {
-                    var possibleCountToEvolve = familyCandy.Candy_ / settings.CandyToEvolve;
-                    amountToKeepInStorage = Math.Max(amountToKeepInStorage, possibleCountToEvolve);
+                    var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
 
-                    //remain candy
-                    modFromEvolve = familyCandy.Candy_%settings.CandyToEvolve;
+                    // its an solution in fixed numbers of equations with two variables 
+                    // (N = X + Y, X + C + Y >= Y * E) -> X >= (N * (E - 1) - C) / E
+                    // where N - current canBeRemoved,  X - new canBeRemoved, Y - possible to keep more, E - CandyToEvolve, C - candy amount
+                    canBeRemoved = (int)Math.Ceiling((double)((settings.CandyToEvolve - 1) * canBeRemoved - familyCandy.Candy_) / settings.CandyToEvolve);
                 }
-
-                var inStorage = myPokemonList.Count(data => data.PokemonId == pokemonGroupToTransfer.Key);
-
-                var weakPokemonCount = pokemonGroupToTransfer.Count();
-
-                var needToRemove = inStorage - amountToKeepInStorage;
-                if (needToRemove <= 0)
-                    continue;
-
-                var canBeRemoved = Math.Min(needToRemove, weakPokemonCount);
 
                 if (canBeRemoved <= 0)
                     continue;
 
-                //Lets calc new canBeRemoved pokemons according to transferring some of them and use it as future candy to keepPokemonsThatCanEvolve
-                if (modFromEvolve.HasValue)
-                {
-                    // its an solution in fixed numbers of equations with two variables 
-                    // (N = X + Y, X + C >= Y * E) -> (X >= (N * E - C / 1 + E)
-                    // where N - current canBeRemoved,  X - new canBeRemoved, Y - possible to keep more, E - CandyToEvolve, C - modFromEvolve(remain candy) ) )
-                    canBeRemoved = (settings.CandyToEvolve * canBeRemoved - modFromEvolve.Value) / (1 + settings.CandyToEvolve) + 
-                                    Math.Sign((settings.CandyToEvolve * canBeRemoved - modFromEvolve.Value) % (1 + settings.CandyToEvolve));
-                }
-
-                var skipCount = weakPokemonCount - canBeRemoved;
-                
                 if (prioritizeIVoverCp)
                 {
                     results.AddRange(pokemonGroupToTransfer
-                        .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                        .ThenByDescending(n => n.Cp)
-                        .Skip(skipCount));
+                        .OrderBy(PokemonInfo.CalculatePokemonPerfection)
+                        .ThenBy(n => n.Cp)
+                        .Take(canBeRemoved));
                 }
                 else
                 {
                     results.AddRange(pokemonGroupToTransfer
-                        .OrderByDescending(x => x.Cp)
-                        .ThenByDescending(PokemonInfo.CalculatePokemonPerfection)
-                        .Skip(skipCount));
+                        .OrderBy(x => x.Cp)
+                        .ThenBy(PokemonInfo.CalculatePokemonPerfection)
+                        .Take(canBeRemoved));
                 }
             }
 
             #region For testing
-            /*
+/*
             results.ForEach(data =>
             {
                 var bestPokemonOfType = (_logicSettings.PrioritizeIvOverCp
@@ -211,7 +193,7 @@ namespace PoGo.NecroBot.Logic
                 var bestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType);
                 var bestCp = bestPokemonOfType.Cp;
             });
-            */
+*/
             #endregion
 
             return results;
