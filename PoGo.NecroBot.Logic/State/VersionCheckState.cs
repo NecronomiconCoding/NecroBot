@@ -292,6 +292,7 @@ namespace PoGo.NecroBot.Logic.State
                             Process.Start( Path.Combine( configDir, "config.json" ) );
                             return true;
                         case "n":
+                            Utils.ErrorHandler.ThrowFatalError( session.Translation.GetTranslation( TranslationString.FinishedTransferringConfig ), 5, LogLevel.Update, true );
                             return true;
                         default:
                             Logger.Write( session.Translation.GetTranslation( TranslationString.PromptError, "y", "n" ), LogLevel.Error );
