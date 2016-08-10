@@ -531,7 +531,7 @@ namespace PoGo.NecroBot.Logic
         public bool UsePokemonSniperFilterOnly;
 
         [DefaultValue(false)]
-        public bool UseOsmNavigating;
+        public bool UseOsmNavigation;
         [DefaultValue(100d)]
         public double OsmMinDistanceInMeter;
 
@@ -1445,7 +1445,7 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
         public int TotalAmountOfBerriesToKeep => _settings.TotalAmountOfBerriesToKeep;
-        public bool UseOsmNavigating => _settings.UseOsmNavigating;
+        public bool UseOsmNavigation => _settings.UseOsmNavigation;
         public double OsmMinDistanceInMeter => _settings.OsmMinDistanceInMeter;
     }
 }
