@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using PoGo.NecroBot.Logic.Common;
+﻿using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Data;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic.Service
             bot.OnMessage += OnTelegramMessageReceived;
             bot.StartReceiving();
 
-            this.session.EventDispatcher.Send(new NoticeEvent {Message = "Using TelegramAPI with " + me.Username});
+            this.session.EventDispatcher.Send(new NoticeEvent { Message = "Using TelegramAPI with " + me.Username });
         }
 
         private async void OnTelegramMessageReceived(object sender, MessageEventArgs messageEventArgs)
@@ -49,20 +49,34 @@ namespace PoGo.NecroBot.Logic.Service
                 return;
             }
 
-            var messagetext = message.Text.Split(' ');
+            var messagetext = message.Text.ToLower().Split(' ');
 
-            switch (messagetext[0].ToLower())
+            switch (messagetext[0])
             {
                 case "/top":
                     var times = 10;
                     var sortby = "cp";
-                    if (messagetext.Length == 3)
-                    {
-                        times = Convert.ToInt32(messagetext[2]);
-                    }
+
                     if (messagetext.Length >= 2)
                     {
                         sortby = messagetext[1];
+                    }
+                    if (messagetext.Length == 3)
+                    {
+                        try
+                        {
+                            times = Convert.ToInt32(messagetext[2]);
+                        }
+                        catch (FormatException)
+                        {
+                            SendMessage(message.Chat.Id, session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [number of pokemon to show]"));
+                            break;
+                        }
+                    }
+                    else if (messagetext.Length > 3)
+                    {
+                        SendMessage(message.Chat.Id, session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [number of pokemon to show]"));
+                        break;
                     }
 
                     IEnumerable<PokemonData> topPokemons;
@@ -70,9 +84,14 @@ namespace PoGo.NecroBot.Logic.Service
                     {
                         topPokemons = await session.Inventory.GetHighestsPerfect(times);
                     }
-                    else
+                    else if (sortby.Equals("cp"))
                     {
                         topPokemons = await session.Inventory.GetHighestsCp(times);
+                    }
+                    else
+                    {
+                        SendMessage(message.Chat.Id, session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [number of pokemon to show]"));
+                        break;
                     }
 
                     foreach (var pokemon in topPokemons)
@@ -84,21 +103,35 @@ namespace PoGo.NecroBot.Logic.Service
                             SendMessage(message.Chat.Id, answerTextmessage);
                             answerTextmessage = "";
                         }
-
                     }
                     SendMessage(message.Chat.Id, answerTextmessage);
                     break;
+
                 case "/all":
                     var myPokemons = await session.Inventory.GetPokemons();
                     var allMyPokemons = myPokemons.ToList();
+                    IEnumerable<PokemonData> allPokemons = null;
 
-                    IEnumerable<PokemonData> allPokemons = await session.Inventory.GetHighestsCp(allMyPokemons.Count); ;
-                    if (messagetext.Length == 2)
+                    if (messagetext.Length == 1)
+                    {
+                        allPokemons = await session.Inventory.GetHighestsCp(allMyPokemons.Count);
+                    }
+                    else if (messagetext.Length == 2)
                     {
                         if (messagetext[1] == "iv")
                         {
                             allPokemons = await session.Inventory.GetHighestsPerfect(allMyPokemons.Count);
                         }
+                        else if (messagetext[1] != "cp")
+                        {
+                            SendMessage(message.Chat.Id, session.Translation.GetTranslation(TranslationString.UsageHelp, "/all [cp/iv]"));
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        SendMessage(message.Chat.Id, session.Translation.GetTranslation(TranslationString.UsageHelp, "/all [cp/iv]"));
+                        break;
                     }
 
                     foreach (var pokemon in allPokemons)
@@ -113,6 +146,7 @@ namespace PoGo.NecroBot.Logic.Service
                     }
                     SendMessage(message.Chat.Id, answerTextmessage);
                     break;
+
                 case "/profile":
                     var stats = session.Inventory.GetPlayerStats().Result;
                     var stat = stats.FirstOrDefault();
@@ -136,6 +170,7 @@ namespace PoGo.NecroBot.Logic.Service
                          });
                     SendMessage(message.Chat.Id, answerTextmessage);
                     break;
+
                 case "/pokedex":
                     var pokedex = session.Inventory.GetPokeDexItems().Result;
                     var pokedexSort = pokedex.OrderBy(x => x.InventoryItemData.PokedexEntry.PokemonId);
@@ -155,7 +190,7 @@ namespace PoGo.NecroBot.Logic.Service
                     var pokemonsToCapture = Enum.GetValues(typeof(PokemonId)).Cast<PokemonId>().Except(pokedex.Select(x => x.InventoryItemData.PokedexEntry.PokemonId));
 
                     SendMessage(message.Chat.Id, answerTextmessage);
-                    answerTextmessage =  "";
+                    answerTextmessage = "";
 
                     answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexNeededTelegram);
 
@@ -175,9 +210,11 @@ namespace PoGo.NecroBot.Logic.Service
                     SendMessage(message.Chat.Id, answerTextmessage);
 
                     break;
+
                 case "/loc":
                     SendLocation(message.Chat.Id, session.Client.CurrentLatitude, session.Client.CurrentLongitude);
                     break;
+
                 case "/items":
                     var inventory = session.Inventory;
                     answerTextmessage += session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
@@ -222,14 +259,17 @@ namespace PoGo.NecroBot.Logic.Service
                         });
                     SendMessage(message.Chat.Id, answerTextmessage);
                     break;
+
                 case "/status":
                     SendMessage(message.Chat.Id, Console.Title);
                     break;
+
                 case "/restart":
                     Process.Start(Assembly.GetEntryAssembly().Location);
                     SendMessage(message.Chat.Id, "Restarted Bot. Closing old Instance... BYE!");
                     Environment.Exit(-1);
                     break;
+
                 default:
                     answerTextmessage += session.Translation.GetTranslation(TranslationString.HelpTemplate);
                     SendMessage(message.Chat.Id, answerTextmessage);
@@ -244,7 +284,6 @@ namespace PoGo.NecroBot.Logic.Service
 
         private async void SendMessage(long chatID, string message)
         {
-
             await bot.SendTextMessageAsync(chatID, message, replyMarkup: new ReplyKeyboardHide());
         }
     }
