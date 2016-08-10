@@ -152,7 +152,6 @@ namespace PoGo.NecroBot.Logic.Tasks
     public static class SnipePokemonTask
     {
         public static List<PokemonLocation> LocsVisited = new List<PokemonLocation>();
-        public static List<SniperInfo> LocsVisited2 = new List<SniperInfo>();
         private static readonly List<SniperInfo> SnipeLocations = new List<SniperInfo>();
         private static DateTime _lastSnipe = DateTime.MinValue;
         
