@@ -21,7 +21,8 @@ namespace PoGo.NecroBot.Logic.Service
     {
         private TelegramBotClient bot;
         private ISession session;
-
+        private bool loggedIn;
+        private DateTime _lastLoginTime;
         public TelegramService(string apiKey, ISession session)
         {
             this.bot = new TelegramBotClient(apiKey);
@@ -38,7 +39,6 @@ namespace PoGo.NecroBot.Logic.Service
         private async void OnTelegramMessageReceived(object sender, MessageEventArgs messageEventArgs)
         {
             var message = messageEventArgs.Message;
-
             if (message == null || message.Type != MessageType.TextMessage)
                 return;
 
@@ -51,7 +51,37 @@ namespace PoGo.NecroBot.Logic.Service
 
             var messagetext = message.Text.ToLower().Split(' ');
 
-            switch (messagetext[0])
+            if (!loggedIn)
+            {
+                if (messagetext[0].ToLower().Contains("/login"))
+                {
+                    if (messagetext[0].ToLower().Contains(session.LogicSettings.TelegramPassword))
+                    {
+                        loggedIn = true;
+                        _lastLoginTime = DateTime.Now;
+                        answerTextmessage += session.Translation.GetTranslation(TranslationString.LoggedInTelegram);
+                        SendMessage(message.Chat.Id, answerTextmessage);
+                    }
+                    else
+                    {
+                        answerTextmessage += session.Translation.GetTranslation(TranslationString.LoginFailedTelegram);
+                        SendMessage(message.Chat.Id, answerTextmessage);
+                    }
+                    return;
+                }
+                answerTextmessage += session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
+                SendMessage(message.Chat.Id, answerTextmessage);
+                return;
+            }
+            if (loggedIn && _lastLoginTime.AddMinutes(5).Ticks > DateTime.Now.Ticks)
+            {
+                loggedIn = false;
+                answerTextmessage += session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
+                SendMessage(message.Chat.Id, answerTextmessage);
+                return;
+            }
+
+            switch (messagetext[0].ToLower())
             {
                 case "/top":
                     var times = 10;

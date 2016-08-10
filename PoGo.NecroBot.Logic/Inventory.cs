@@ -103,15 +103,19 @@ namespace PoGo.NecroBot.Logic
                         {
                             var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
 
-                            return
-                                !pokemonTransferFilter.MovesOperator.BoolFunc(
-                                    pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any(),
+                            bool ret = true;
+                            pokemonTransferFilter.Moves.ForEach(moveset =>
+                            {
+                                ret = !pokemonTransferFilter.MovesOperator.BoolFunc(
+                                    moveset.Intersect(new[] { p.Move1, p.Move2 }).Any(),
                                     pokemonTransferFilter.KeepMinOperator.BoolFunc(
                                         p.Cp >= pokemonTransferFilter.KeepMinCp,
                                         PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage,
                                         pokemonTransferFilter.KeepMinOperator.ReverseBoolFunc(
                                             pokemonTransferFilter.KeepMinOperator.InverseBool(pokemonTransferFilter.UseKeepMinLvl),
                                             PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl)));
+                            });
+                            return ret;
                         }).ToList();
             }
             catch (Exception e)
