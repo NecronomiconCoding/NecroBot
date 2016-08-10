@@ -71,55 +71,75 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var pokestopListWithDetails = pokestopList
                                 .Select(p =>
                                 {
-                                    String uri = session.LogicSettings.UseOsmNavigating ? string.Format(_CultureEnglish, "http://www.yournavigation.org/api/1.0/gosmore.php?flat={0:0.000000}&flon={1:0.000000}&tlat={2:0.000000}&tlon={3:0.000000}&v=foot", session.Client.CurrentLatitude, session.Client.CurrentLongitude, p.Latitude, p.Longitude) : null;
-                                    XDocument xDoc = session.LogicSettings.UseOsmNavigating ? XDocument.Load(uri) : null;
-                                    XNamespace namespaceKml = session.LogicSettings.UseOsmNavigating ? XNamespace.Get("http://earth.google.com/kml/2.0") : null;
-                                    Double dist = session.LogicSettings.UseOsmNavigating ? Double.Parse(xDoc.Element(namespaceKml + "kml").Element(namespaceKml + "Document").Element(namespaceKml + "distance").Value, _CultureEnglish) : LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude, session.Client.CurrentLongitude, p.Latitude, p.Longitude);
+                                    Boolean useNav = session.LogicSettings.UseOsmNavigating && LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude, session.Client.CurrentLongitude, p.Latitude, p.Longitude) >= 30d;
+                                    String uri = useNav ? string.Format(_CultureEnglish, "http://www.yournavigation.org/api/1.0/gosmore.php?flat={0:0.000000}&flon={1:0.000000}&tlat={2:0.000000}&tlon={3:0.000000}&v=foot", session.Client.CurrentLatitude, session.Client.CurrentLongitude, p.Latitude, p.Longitude) : null;
+                                    XDocument doc = useNav ? XDocument.Load(uri) : null;
+                                    XNamespace kmlns = useNav ? XNamespace.Get("http://earth.google.com/kml/2.0") : null;
+                                    var points = !useNav ? null :
+                                                 doc.Element(kmlns + "kml")
+                                                    .Element(kmlns + "Document")
+                                                    .Element(kmlns + "Folder")
+                                                    .Element(kmlns + "Placemark")
+                                                    .Element(kmlns + "LineString")
+                                                    .Element(kmlns + "coordinates")
+                                                    .Value
+                                                    .Trim()
+                                                    .Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
+                                                    .Select(pp =>
+                                                    {
+                                                        String[] parts = pp.Split(',');
+                                                        return new
+                                                        {
+                                                            Latitude = double.Parse(parts[1], _CultureEnglish),
+                                                            Longitude = double.Parse(parts[0], _CultureEnglish),
+                                                        };
+                                                    })
+                                                    .ToArray();
+                                    Double dist = useNav ?
+                                                          new Func<double>(() =>
+                                                          {
+                                                              Double d = 0d;
+                                                              for (int i = 1; i < points.Length; i++)
+                                                              {
+                                                                  d += LocationUtils.CalculateDistanceInMeters
+                                                                  (
+                                                                      points[i - 1].Latitude,
+                                                                      points[i - 1].Longitude,
+                                                                      points[i].Latitude,
+                                                                      points[i].Longitude
+                                                                  );
+                                                              }
+                                                              return d;
+                                                          })() :
+                                                          LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude, session.Client.CurrentLongitude, p.Latitude, p.Longitude);
                                     return new
                                     {
                                         PokeStop = p,
                                         Distance = dist,
                                         NavigationDocumentUri = uri,
-                                        NavigationDocument = xDoc,
-                                        NavigationDocumentNamespace = namespaceKml,
+                                        NavigationDocument = doc,
+                                        NavigationDocumentNamespace = kmlns,
+                                        Points = points
                                     };
                                 })
                                 .OrderBy(p => p.Distance)
                                 .ToList();
                 var pokeStop = pokestopListWithDetails[0];
-                pokestopList.RemoveAt(0);
-                pokestopListWithDetails.RemoveAt(0);
+                pokestopList.Remove(pokeStop.PokeStop);
 
-                var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
-                    session.Client.CurrentLongitude, pokeStop.PokeStop.Latitude, pokeStop.PokeStop.Longitude);
+                var distance = pokeStop.Distance;
                 var fortInfo = await session.Client.Fort.GetFort(pokeStop.PokeStop.Id, pokeStop.PokeStop.Latitude, pokeStop.PokeStop.Longitude);
 
                 session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
 
-                if (session.LogicSettings.UseOsmNavigating && distance >= 25d)
+                if (session.LogicSettings.UseOsmNavigating)
                 {
                     var doc = pokeStop.NavigationDocument;
                     XNamespace kmlns = pokeStop.NavigationDocumentNamespace;
-                    var points = doc.Element(kmlns + "kml")
-                                    .Element(kmlns + "Document")
-                                    .Element(kmlns + "Folder")
-                                    .Element(kmlns + "Placemark")
-                                    .Element(kmlns + "LineString")
-                                    .Element(kmlns + "coordinates")
-                                    .Value
-                                    .Trim()
-                                    .Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    var points = pokeStop.Points;
                     if (points.Any())
                     {
-                        foreach (var step in points.Select(p =>
-                        {
-                            String[] parts = p.Split(',');
-                            return new
-                            {
-                                Latitude = double.Parse(parts[1], _CultureEnglish),
-                                Longitude = double.Parse(parts[0], _CultureEnglish),
-                            };
-                        }))
+                        foreach (var step in points)
                         {
                             await MoveToLocationAsync(session, cancellationToken, step.Latitude, step.Longitude);
                         }
