@@ -68,25 +68,38 @@ namespace PoGo.NecroBot.Logic.Tasks
                 cancellationToken.ThrowIfCancellationRequested();
 
                 //resort
-                pokestopList =
-                    pokestopList.OrderBy(
-                        i =>
-                            LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
-                                session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
-                var pokeStop = pokestopList[0];
+                var pokestopListWithDetails = pokestopList
+                                .Select(p =>
+                                {
+                                    String uri = session.LogicSettings.UseOsmNavigating ? string.Format(_CultureEnglish, "http://www.yournavigation.org/api/1.0/gosmore.php?flat={0:0.000000}&flon={1:0.000000}&tlat={2:0.000000}&tlon={3:0.000000}&v=foot", session.Client.CurrentLatitude, session.Client.CurrentLongitude, p.Latitude, p.Longitude) : null;
+                                    XDocument xDoc = session.LogicSettings.UseOsmNavigating ? XDocument.Load(uri) : null;
+                                    XNamespace namespaceKml = session.LogicSettings.UseOsmNavigating ? XNamespace.Get("http://earth.google.com/kml/2.0") : null;
+                                    Double dist = session.LogicSettings.UseOsmNavigating ? Double.Parse(xDoc.Element(namespaceKml + "kml").Element(namespaceKml + "Document").Element(namespaceKml + "distance").Value, _CultureEnglish) : LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude, session.Client.CurrentLongitude, p.Latitude, p.Longitude);
+                                    return new
+                                    {
+                                        PokeStop = p,
+                                        Distance = dist,
+                                        NavigationDocumentUri = uri,
+                                        NavigationDocument = xDoc,
+                                        NavigationDocumentNamespace = namespaceKml,
+                                    };
+                                })
+                                .OrderBy(p => p.Distance)
+                                .ToList();
+                var pokeStop = pokestopListWithDetails[0];
                 pokestopList.RemoveAt(0);
+                pokestopListWithDetails.RemoveAt(0);
 
                 var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
-                    session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
-                var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                    session.Client.CurrentLongitude, pokeStop.PokeStop.Latitude, pokeStop.PokeStop.Longitude);
+                var fortInfo = await session.Client.Fort.GetFort(pokeStop.PokeStop.Id, pokeStop.PokeStop.Latitude, pokeStop.PokeStop.Longitude);
 
                 session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
 
                 if (session.LogicSettings.UseOsmNavigating && distance >= 25d)
                 {
-                    var uri = String.Format(_CultureEnglish, "http://www.yournavigation.org/api/1.0/gosmore.php?flat={0:0.000000}&flon={1:0.000000}&tlat={2:0.000000}&tlon={3:0.000000}&v=foot", session.Client.CurrentLatitude, session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
-                    var doc = XDocument.Load(uri);
-                    XNamespace kmlns = XNamespace.Get("http://earth.google.com/kml/2.0");
+                    var doc = pokeStop.NavigationDocument;
+                    XNamespace kmlns = pokeStop.NavigationDocumentNamespace;
                     var points = doc.Element(kmlns + "kml")
                                     .Element(kmlns + "Document")
                                     .Element(kmlns + "Folder")
@@ -113,12 +126,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                 }
                 //Why no else? Just to be sure =)
-                await MoveToLocationAsync(session, cancellationToken, pokeStop.Latitude, pokeStop.Longitude);
+                await MoveToLocationAsync(session, cancellationToken, pokeStop.PokeStop.Latitude, pokeStop.PokeStop.Longitude);
 
                 //Catch Lure Pokemon
-                if (pokeStop.LureInfo != null)
+                if (pokeStop.PokeStop.LureInfo != null)
                 {
-                    await CatchLurePokemonsTask.Execute(session, pokeStop, cancellationToken);
+                    await CatchLurePokemonsTask.Execute(session, pokeStop.PokeStop, cancellationToken);
                 }
 
                 FortSearchResponse fortSearch;
@@ -131,7 +144,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     cancellationToken.ThrowIfCancellationRequested();
 
                     fortSearch =
-                        await session.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                        await session.Client.Fort.SearchFort(pokeStop.PokeStop.Id, pokeStop.PokeStop.Latitude, pokeStop.PokeStop.Longitude);
                     if (fortSearch.ExperienceAwarded > 0 && timesZeroXPawarded > 0) timesZeroXPawarded = 0;
                     if (fortSearch.ExperienceAwarded == 0)
                     {
@@ -173,13 +186,13 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         session.EventDispatcher.Send(new FortUsedEvent
                         {
-                            Id = pokeStop.Id,
+                            Id = pokeStop.PokeStop.Id,
                             Name = fortInfo.Name,
                             Exp = fortSearch.ExperienceAwarded,
                             Gems = fortSearch.GemsAwarded,
                             Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded),
-                            Latitude = pokeStop.Latitude,
-                            Longitude = pokeStop.Longitude,
+                            Latitude = pokeStop.PokeStop.Latitude,
+                            Longitude = pokeStop.PokeStop.Longitude,
                             InventoryFull = fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull
                         });
 
