@@ -18,7 +18,7 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "未知的账户类型,请查看config.json\t\t"
+      "Value": "未知的账号类型,请查看config.json\t\t"
     },
     {
       "Key": "loginInvalid",
@@ -26,7 +26,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "您在设定的范围外!5秒后返回起点(距离{0}米),请确认lastpos.ini中经纬度是否正确?\t\t"
+      "Value": "您偏离了设定的范围!5秒后返回起点(距离{0}米),请确认lastPos.ini中经纬度是否正确?\t\t"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -150,11 +150,11 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "确认经纬度是否正确,如果错误请退出程序!纬度:{0}经度:{1}\t\t"
+      "Value": "确认经纬度是否正确,如有错误请退出程序!纬度:{0}经度:{1}\t\t"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "正在将宠物蛋放入孵化器中:剩余{0:0.00}千米\t\t"
+      "Value": "正在将宠物蛋放入孵化器中:剩余{0:0.00}千米\t\t\t\t"
     },
     {
       "Key": "incubatorStatusUpdate",
@@ -182,11 +182,11 @@
     },
     {
       "Key": "logEntryFarming",
-      "Value": "开刷"
+      "Value": "挂机"
     },
     {
       "Key": "logEntrySniper",
-      "Value": "狙击"
+      "Value": "追踪"
     },
     {
       "Key": "logEntryRecycling",
@@ -234,15 +234,15 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC服务器可能关闭或您的帐号错误错误,请尝试谷歌帐号登录\t\t"
+      "Value": "PTC服务器可能宕机或您的账号有误,请尝试谷歌账号登录\t\t"
     },
     {
       "Key": "accessTokenExpired",
-      "Value": "PTC登录过期,正在重新登录..\t\t"
+      "Value": "PTC登录凭证过期,正在重新登录..\t\t"
     },
     {
       "Key": "invalidResponse",
-      "Value": "从Niantic服务器接受到无效的响应\t\t"
+      "Value": "Niantic服务器未响应\t\t"
     },
     {
       "Key": "tryingAgainIn",
@@ -250,11 +250,11 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "帐号或密码错误!退出...\t\t"
+      "Value": "账号或密码错误! 退出...\t\t"
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "正在打开GoogleDevice网页,请用CTRL+V粘贴验证码\t\t"
+      "Value": "正在打开GoogleDevice网页,请用Ctrl+V粘贴验证码\t\t"
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -266,11 +266,11 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "检测到真实的旅行,使用config.json中的用户配置\t\t"
+      "Value": "检测到拟真移动,使用config.json中的用户配置\t\t"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "未检测到真实的旅行{0},使用上一次保存在LastPos.ini中的配置\t\t"
+      "Value": "未检测到拟真移动{0},使用上一次保存在LastPos.ini中的配置\t\t"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -278,7 +278,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "恭喜!你已经更新至最新版本:{0}\t\t\t"
+      "Value": "恭喜!您已更新至最新版本:{0}\t\t\t"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -294,11 +294,11 @@
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "解包成功...\t\t"
+      "Value": "解压完成...\t\t"
     },
     {
       "Key": "finishedTransferringConfig",
-      "Value": "完成你的配置转移到新版本...\t\t"
+      "Value": "您的配置已转移到新版本...\t\t"
     },
     {
       "Key": "updateFinished",
@@ -342,7 +342,7 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[设置无效]您当前设置的物品数量组合(精灵球+药水+复活石={0})超出了您的背包容量({1})\t\t\t\t"
+      "Value": "[设置无效]您设置的物品数量组合(精灵球+药水+复活石={0})超出了您的背包容量({1})\t\t\t\t"
     },
     {
       "Key": "recyclingQuietly",
@@ -350,15 +350,15 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "包裹满了,尝试传输精灵...\t\t"
+      "Value": "宝可梦口袋已满,正在传回精灵...\t\t"
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "宝可梦包裹满了,请手动传输宝可梦或者修改配置文件TransferDuplicatePokemon为true\t\t"
+      "Value": "宝可梦口袋已满,请手动传回宝可梦或者修改配置文件TransferDuplicatePokemon为true\t\t\t"
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "物品包裹满了,无法获得物品!\t\t"
+      "Value": "物品背包已满,无法获得物品!\t\t"
     },
     {
       "Key": "encounterProblem",
@@ -382,7 +382,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[宝可梦忽略过滤器]忽略:{0}\t\t"
+      "Value": "[宝可梦过滤器]忽略:{0}\t\t"
     },
     {
       "Key": "catchStatusAttempt",
@@ -398,7 +398,7 @@
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "消失"
+      "Value": "逃跑"
     },
     {
       "Key": "catchStatusMissed",
@@ -426,7 +426,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} 运行时间{1}等级:{2}|经验/小时:{3:n0}|捕获/小时:{4:n0}|星尘:{5:n0}|传回:{6:n0}|丢弃:{7:n0}"
+      "Value": "{0} 运行时间{1}经验/小时:{3:n0}|等级:{2}|捕获/小时:{4:n0}|星尘:{5:n0}|传回:{6:n0}|丢弃:{7:n0}"
     },
     {
       "Key": "profileStatsTemplateString",
@@ -438,7 +438,7 @@
     },
     {
       "Key": "helpTemplate",
-      "Value": "命令: \n \n /top <数量> - 显示你最高级的宝可梦列表. \t\t\n /all - 显示你所有宝可梦列表. \t\t\n /profile - 显示你个人详细信息. \t\t\n /loc - 显示你的位置. \t\t\n /items - 显示你的物品.\t\t"
+      "Value": "命令: \n \n /top <数量> - 显示您最强的宝可梦列表. \t\t\n /all - 显示您所有宝可梦列表. \t\t\n /profile - 显示您个人详细信息. \t\t\n /loc - 显示您的位置. \t\t\n /items - 显示您的物品.\t\t"
     },
     {
       "Key": "statsXpTemplateString",
@@ -454,7 +454,7 @@
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "打开GoogleApp-登陆与安全设置-密码和登录方法-应用专用密码,请设置一个新的应用专用密码(使用其它设备)\t\t\t"
+      "Value": "打开GoogleApp-登录与安全设置-密码和登录方法-应用专用密码,请设置一个新的应用专用密码(使用其它设备)\t\t\t\t"
     },
     {
       "Key": "googleError",
@@ -466,35 +466,35 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "您需要在auth.json中填写谷歌账户和密码!\t\t"
+      "Value": "您需要在auth.json中填写谷歌账号和密码!\t\t"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "您需要在auth.json中填写Ptc账户和密码!\t\t"
+      "Value": "您需要在auth.json中填写PTC账号和密码!\t\t"
     },
     {
       "Key": "snipeScan",
-      "Value": "正在搜索可狙击宝可梦,坐标:{0}\t\t"
+      "Value": "正在搜索可追踪宝可梦,坐标:{0}\t\t"
     },
     {
       "Key": "snipeScanEx",
-      "Value": "狙击一个 {0} 完美度:{1},坐标{2}...\t\t"
+      "Value": "追踪一个 {0} 完美度:{1},坐标{2}...\t\t\t"
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "没有找到可狙击的宝可梦!\t\t"
+      "Value": "没有找到可追踪的宝可梦!\t\t"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "没有足够的精灵球用来狙击!({0}/{1})\t\t"
+      "Value": "没有足够的精灵球用来追踪!({0}/{1})\t\t"
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "技能1"
+      "Value": "快速技"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "技能2"
+      "Value": "蓄力技"
     },
     {
       "Key": "displayHighestCandy",
@@ -538,7 +538,7 @@
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "背包中剩余熏香:{0}个\t\t"
+      "Value": "背包剩余熏香:{0}个\t\t"
     },
     {
       "Key": "usedIncense",
@@ -546,11 +546,11 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "遇见了:{0}/151只宝可梦,捕捉了:{1}/151只\t\t\t"
+      "Value": "遇见了:{0}/151种宝可梦,捕捉到了:{1}/151种宝可梦\t\t\t\t"
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "有{0}个可进化的宝可梦\t\t"
+      "Value": "有{0}只可进化的宝可梦\t\t"
     },
     {
       "Key": "pkmNotEnoughRessources",
@@ -558,11 +558,11 @@
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "狙击服务器当前关闭.跳过狙击....\t\t"
+      "Value": "追踪服务器当前关闭.跳过追踪....\t\t"
     },
     {
       "Key": "firstStartPrompt",
-      "Value": "这是你第一次使用,想要设置吗?{0}/{1}\t\t"
+      "Value": "这是您第一次使用,使用设置向导吗?{0}/{1}\t\t"
     },
     {
       "Key": "firstStartLanguagePrompt",
@@ -586,27 +586,27 @@
     },
     {
       "Key": "firstStartSetupAccount",
-      "Value": "### 设置新的账户 ###\t\t"
+      "Value": "### 设置新的账号 ###\t\t"
     },
     {
       "Key": "firstStartSetupTypePrompt",
-      "Value": "请输入您的一个账户类型: {1}或者{0}\t\t\t"
+      "Value": "请输入您的账号类型: {1}或者{0}\t\t\t"
     },
     {
       "Key": "firstStartSetupTypeConfirm",
-      "Value": "选择了: {0} 账户\t\t"
+      "Value": "选择了: {0} 账号\t\t"
     },
     {
       "Key": "firstStartSetupTypePromptError",
-      "Value": "[错误] 账户类型不正确,请输入 '{0}' 或者 '{1}'\t\t\t"
+      "Value": "[错误] 账号类型不正确,请输入 '{0}' 或者 '{1}'\t\t\t"
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
-      "Value": "请输入帐号\t\t"
+      "Value": "请输入账号\t\t"
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
-      "Value": "使用帐号: {0}\t\t"
+      "Value": "使用账号: {0}\t\t"
     },
     {
       "Key": "firstStartSetupPasswordPrompt",
@@ -618,11 +618,11 @@
     },
     {
       "Key": "firstStartAccountCompleted",
-      "Value": "### 用户账户设置完毕 ###\t\t"
+      "Value": "### 用户账号设置完毕 ###\t\t"
     },
     {
       "Key": "firstStartDefaultLocationPrompt",
-      "Value": "你想要设置一个新的起始坐标吗? {0}/{1}\t\t"
+      "Value": "您想要设置一个新的起始坐标吗? {0}/{1}\t\t"
     },
     {
       "Key": "firstStartDefaultLocationSet",
@@ -638,7 +638,7 @@
     },
     {
       "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "请输入一个纬度 (右键粘贴)\t\t"
+      "Value": "请输入纬度 (右键粘贴)\t\t"
     },
     {
       "Key": "firstStartSetupDefaultLatConfirm",
@@ -646,11 +646,11 @@
     },
     {
       "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "请设置一个经度 (右键粘贴)\t\t"
+      "Value": "请输入经度 (右键粘贴)\t\t"
     },
     {
       "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "经度已设置: {0}\t\t"
+      "Value": "经度已设置为: {0}\t\t"
     },
     {
       "Key": "softBanBypassed",
