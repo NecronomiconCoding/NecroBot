@@ -446,7 +446,7 @@
     },
     {
       "Key": "googleOffline",
-      "Value": "Los servidores de Google servers parecen caídos. Por favor, sea paciente e intente utilizar el bot más tarde."
+      "Value": "Los servidores de Google parecen caídos. Por favor, sea paciente e intente utilizar el bot más tarde."
     },
     {
       "Key": "missingCredentialsGoogle",
