@@ -1051,7 +1051,7 @@ namespace PoGo.NecroBot.Logic
 
                     if( strSplit.Length > 1 )
                     {
-                        double dblLat = double.Parse( strSplit[ 0 ].Trim(' ') );
+                        double dblLat = double.Parse( strSplit[ 0 ].Trim( ' ' ) );
                         double dblLong = double.Parse( strSplit[ 1 ].Trim( ' ' ) );
 
                         settings.DefaultLatitude = dblLat;
@@ -1070,23 +1070,6 @@ namespace PoGo.NecroBot.Logic
                 catch (FormatException)
                 {
                     Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, $"{settings.DefaultLatitude}, {settings.DefaultLongitude}", LogLevel.Error));
-                    continue;
-                }
-            }
-
-            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLongPrompt));
-            while (true)
-            {
-                try
-                {
-                    double dblInput = double.Parse(Console.ReadLine());
-                    settings.DefaultLongitude = dblInput;
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLongConfirm, dblInput));
-                    break;
-                }
-                catch (FormatException)
-                {
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, settings.DefaultLongitude, LogLevel.Error));
                     continue;
                 }
             }
