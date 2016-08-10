@@ -351,7 +351,7 @@ namespace PoGo.NecroBot.Logic
         //lucky, incense and berries
         [DefaultValue(true)]
         public bool UseEggIncubators;
-        [DefaultValue(10)]
+        [DefaultValue(2)]
         public int minEggKmForLimitedIncubators;
         [DefaultValue(false)]
         public bool UseLuckyEggConstantly;
