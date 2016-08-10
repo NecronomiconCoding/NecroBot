@@ -432,19 +432,19 @@
 
             <TabItem Header="Transfer">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                    <StackPanel></StackPanel>
+                    <StackPanel />
                 </ScrollViewer>
             </TabItem>
 
             <TabItem Header="Sniping">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                    <StackPanel></StackPanel>
+                    <StackPanel />
                 </ScrollViewer>
             </TabItem>
 
             <TabItem Header="Misc">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                    <StackPanel></StackPanel>
+                    <StackPanel />
                 </ScrollViewer>
             </TabItem>
 

@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Windows;
-using PoGo.NecroBot.Logic;
-using PoGo.NecroBot.ConfigUI.Models;
-using System.IO;
-using PokemonGo.RocketAPI.Enums;
 using System.Collections.Generic;
+using System.IO;
+using System.Windows;
+using PoGo.NecroBot.ConfigUI.Models;
+using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Utils;
+using PokemonGo.RocketAPI.Enums;
 
 namespace PoGo.NecroBot.ConfigUI
 {
