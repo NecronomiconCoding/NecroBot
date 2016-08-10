@@ -453,8 +453,8 @@
                                 <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.WarningColor}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                                <Label Style="{StaticResource LineItemLabel}" Content="PokeStop Message Color" ToolTip="Change the PokeStop message Color in the console." />
-                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.PokeStopColor}" />
+                                <Label Style="{StaticResource LineItemLabel}" Content="Pokestop Message Color" ToolTip="Change the Pokestop message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.PokestopColor}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Farming Message Color" ToolTip="Change the Farming message Color in the console." />
