@@ -1,12 +1,12 @@
 ﻿#region using directives
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.PoGoUtils;
-using System.Linq;
+using PoGo.NecroBot.Logic.State;
 using POGOProtos.Data;
 
 #endregion
@@ -24,14 +24,13 @@ namespace PoGo.NecroBot.Logic.Tasks
            
             if (session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
                 return;
+            upgradablePokemon = await session.Inventory.GetPokemonToUpgrade();
             if (session.LogicSettings.OnlyUpgradeFavorites)
             {
-                upgradablePokemon = await session.Inventory.GetFaveriotPokemon();
+                var fave = upgradablePokemon.Where(i => i.Favorite == 1);
+                upgradablePokemon = fave;
             }
-            else
-            {
-                upgradablePokemon = await session.Inventory.GetPokemonToUpgrade();
-            }
+           
            
             if (upgradablePokemon.Count() == 0)
                 return;

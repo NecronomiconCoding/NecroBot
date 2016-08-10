@@ -2,9 +2,9 @@
 
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Service;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
-using PoGo.NecroBot.Logic.Service;
 
 #endregion
 

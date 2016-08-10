@@ -1,16 +1,12 @@
-﻿using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.Logic.State;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
+using PoGo.NecroBot.Logic.State;
 using POGOProtos.Data;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
@@ -165,12 +161,15 @@ namespace PoGo.NecroBot.Logic.Service
 
                     foreach (var pokedexItem in pokemonsToCapture)
                     {
-                        answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonNeededTelegram, Convert.ToInt32(pokedexItem), session.Translation.GetPokemonTranslation(pokedexItem));
-
-                        if (answerTextmessage.Length > 3800)
+                        if (Convert.ToInt32(pokedexItem) > 0)
                         {
-                            SendMessage(message.Chat.Id, answerTextmessage);
-                            answerTextmessage = "";
+                            answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonNeededTelegram, Convert.ToInt32(pokedexItem), session.Translation.GetPokemonTranslation(pokedexItem));
+
+                            if (answerTextmessage.Length > 3800)
+                            {
+                                SendMessage(message.Chat.Id, answerTextmessage);
+                                answerTextmessage = "";
+                            }
                         }
                     }
                     SendMessage(message.Chat.Id, answerTextmessage);

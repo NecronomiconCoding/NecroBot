@@ -1,14 +1,13 @@
 ﻿#region using directives
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.Logic.PoGoUtils;
-using PoGo.NecroBot.Logic.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 

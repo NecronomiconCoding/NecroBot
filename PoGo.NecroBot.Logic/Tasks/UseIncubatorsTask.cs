@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Collections.Generic;
@@ -79,6 +79,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                         : unusedEggs.LastOrDefault();
 
                     if (egg == null)
+                        continue;
+
+                    //avoid using 2/5 km eggs with limited incubator
+                    if (egg.EggKmWalkedTarget < session.LogicSettings.minEggKmForLimitedIncubators && incubator.ItemId != ItemId.ItemIncubatorBasicUnlimited)
                         continue;
 
                     var response = await session.Client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);
