@@ -854,7 +854,7 @@ namespace PoGo.NecroBot.Logic
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
                     {
-                        filter.Value.Moves = new List<PokemonMove>();
+                        filter.Value.Moves = new List<List<PokemonMove>>();
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.MovesOperator == null))
                     {
