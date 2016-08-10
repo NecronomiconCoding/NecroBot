@@ -444,6 +444,78 @@
 
             <TabItem Header="Misc">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Error Message Color" ToolTip="Change the Error message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.ErrorColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Warning Message Color" ToolTip="Change the Warning message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.WarningColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="PokeStop Message Color" ToolTip="Change the PokeStop message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.PokeStopColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Farming Message Color" ToolTip="Change the Farming message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.FarmingColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Sniper Message Color" ToolTip="Change the Sniper message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.SniperColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Recycling Message Color" ToolTip="Change the Recycling message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.RecyclingColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Berry Message Color" ToolTip="Change the Berry message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.BerryColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Caught Message Color" ToolTip="Change the Caught message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.CaughtColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Flee Message Color" ToolTip="Change the Flee message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.FleeColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Transfer Message Color" ToolTip="Change the Transfer message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.TransferColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Evolve Message Color" ToolTip="Change the Evolve message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.EvolveColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Egg Message Color" ToolTip="Change the Egg message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.EggColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Update Message Color" ToolTip="Change the Update message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UpdateColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Info Message Color" ToolTip="Change the Info message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.InfoColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="New Message Color" ToolTip="Change the New message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.NewColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="SoftBan Message Color" ToolTip="Change the SoftBan message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.SoftBanColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="LevelUpColor Message Color" ToolTip="Change the LevelUpColor message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.LevelUpColor}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Debug Message Color" ToolTip="Change the Debug message Color in the console." />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.DebugColor}" />
+                        </StackPanel>
                     <StackPanel />
                 </ScrollViewer>
             </TabItem>
