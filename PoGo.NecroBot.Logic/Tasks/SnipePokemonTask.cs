@@ -358,7 +358,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                         if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                             return;
                                         
-                                        await Snipe(session, pokemonIds, pokemonLocation.Latitude, pokemonLocation.Longitude, cancellationToken);
+                                        await Snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude, cancellationToken);
                                     }
                                 }
                             }
