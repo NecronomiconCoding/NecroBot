@@ -135,7 +135,7 @@ namespace PoGo.NecroBot.Logic.Common
             {
                 _session.EventDispatcher.Send(new ErrorEvent
                 {
-                    Message = ex.InnerException.ToString()
+                    Message = (ex.InnerException ?? ex).ToString()
                 });
             }
         }

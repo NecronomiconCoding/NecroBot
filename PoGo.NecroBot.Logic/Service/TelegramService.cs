@@ -1,15 +1,14 @@
-﻿using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.Logic.State;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Reflection;
 using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
+using PoGo.NecroBot.Logic.State;
 using POGOProtos.Data;
+using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using Telegram.Bot;
 using Telegram.Bot.Args;
@@ -33,7 +32,7 @@ namespace PoGo.NecroBot.Logic.Service
             bot.OnMessage += OnTelegramMessageReceived;
             bot.StartReceiving();
 
-            Logger.Write("Using TelegramAPI with " + me.Username);
+            this.session.EventDispatcher.Send(new NoticeEvent {Message = "Using TelegramAPI with " + me.Username});
         }
 
         private async void OnTelegramMessageReceived(object sender, MessageEventArgs messageEventArgs)
@@ -60,13 +59,14 @@ namespace PoGo.NecroBot.Logic.Service
                     if (messagetext.Length == 3)
                     {
                         times = Convert.ToInt32(messagetext[2]);
-                    } else if (messagetext.Length >= 2)
+                    }
+                    if (messagetext.Length >= 2)
                     {
-                        sortby = "iv";
+                        sortby = messagetext[1];
                     }
 
                     IEnumerable<PokemonData> topPokemons;
-                    if (sortby == "iv")
+                    if (sortby.Equals("iv"))
                     {
                         topPokemons = await session.Inventory.GetHighestsPerfect(times);
                     }
@@ -136,6 +136,45 @@ namespace PoGo.NecroBot.Logic.Service
                          });
                     SendMessage(message.Chat.Id, answerTextmessage);
                     break;
+                case "/pokedex":
+                    var pokedex = session.Inventory.GetPokeDexItems().Result;
+                    var pokedexSort = pokedex.OrderBy(x => x.InventoryItemData.PokedexEntry.PokemonId);
+
+                    answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexCatchedTelegram);
+                    foreach (var pokedexItem in pokedexSort)
+                    {
+                        answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonCatchedTelegram, Convert.ToInt32(pokedexItem.InventoryItemData.PokedexEntry.PokemonId), session.Translation.GetPokemonTranslation(pokedexItem.InventoryItemData.PokedexEntry.PokemonId), pokedexItem.InventoryItemData.PokedexEntry.TimesCaptured, pokedexItem.InventoryItemData.PokedexEntry.TimesEncountered);
+
+                        if (answerTextmessage.Length > 3800)
+                        {
+                            SendMessage(message.Chat.Id, answerTextmessage);
+                            answerTextmessage = "";
+                        }
+                    }
+
+                    var pokemonsToCapture = Enum.GetValues(typeof(PokemonId)).Cast<PokemonId>().Except(pokedex.Select(x => x.InventoryItemData.PokedexEntry.PokemonId));
+
+                    SendMessage(message.Chat.Id, answerTextmessage);
+                    answerTextmessage =  "";
+
+                    answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexNeededTelegram);
+
+                    foreach (var pokedexItem in pokemonsToCapture)
+                    {
+                        if (Convert.ToInt32(pokedexItem) > 0)
+                        {
+                            answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonNeededTelegram, Convert.ToInt32(pokedexItem), session.Translation.GetPokemonTranslation(pokedexItem));
+
+                            if (answerTextmessage.Length > 3800)
+                            {
+                                SendMessage(message.Chat.Id, answerTextmessage);
+                                answerTextmessage = "";
+                            }
+                        }
+                    }
+                    SendMessage(message.Chat.Id, answerTextmessage);
+
+                    break;
                 case "/loc":
                     SendLocation(message.Chat.Id, session.Client.CurrentLatitude, session.Client.CurrentLongitude);
                     break;
@@ -185,6 +224,11 @@ namespace PoGo.NecroBot.Logic.Service
                     break;
                 case "/status":
                     SendMessage(message.Chat.Id, Console.Title);
+                    break;
+                case "/restart":
+                    Process.Start(Assembly.GetEntryAssembly().Location);
+                    SendMessage(message.Chat.Id, "Restarted Bot. Closing old Instance... BYE!");
+                    Environment.Exit(-1);
                     break;
                 default:
                     answerTextmessage += session.Translation.GetTranslation(TranslationString.HelpTemplate);

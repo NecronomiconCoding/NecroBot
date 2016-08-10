@@ -8,7 +8,6 @@ using GeoCoordinatePortable;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
-using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -148,6 +147,8 @@ namespace PoGo.NecroBot.Logic
                         _client.Player.UpdatePlayerLocation(targetLocation.Latitude, targetLocation.Longitude,
                             LocationUtils.getElevation(targetLocation.Latitude,targetLocation.Longitude));
                 UpdatePositionEvent?.Invoke(targetLocation.Latitude, targetLocation.Longitude);
+                if (functionExecutedWhileWalking != null)
+                    await functionExecutedWhileWalking(); // look for pokemon
                 return result;
             }
         }

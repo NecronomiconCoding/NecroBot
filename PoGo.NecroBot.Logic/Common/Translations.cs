@@ -1,14 +1,13 @@
 ﻿#region using directives
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.Logic.PoGoUtils;
-using PoGo.NecroBot.Logic.Utils;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -191,6 +190,10 @@ namespace PoGo.NecroBot.Logic.Common
         FirstStartSetupDefaultLongPrompt,
         FirstStartSetupDefaultLongConfirm,
         FirstStartSetupCompleted,
+        PokedexCatchedTelegram,
+        PokedexPokemonCatchedTelegram,
+        PokedexNeededTelegram,
+        PokedexPokemonNeededTelegram
     }
 
     public class Translation : ITranslation
@@ -281,7 +284,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntrySniper, "SNIPER"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryRecycling, "RECYCLING"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryPkmn, "PKMN"),
-            new KeyValuePair<TranslationString, string>(TranslationString.LogEntryTransfered, "TRANSFERED"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LogEntryTransfered, "TRANSFERRED"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryEvolved, "EVOLVED"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryBerry, "BERRY"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryEgg, "EGG"),
@@ -374,13 +377,13 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.WebSocketFailStart,
                 "Failed to start WebSocketServer on port : {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.StatsTemplateString,
-                "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Transfered: {6:n0} | Recycled: {7:n0}"),
+                "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Transferred: {6:n0} | Recycled: {7:n0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.ProfileStatsTemplateString,
-                "----- LVL {0} | {1} ----- \n Experience: {2}/{3} \n Pokemons caught: {4} \n Pokemons deployed: {5} \n Pokestops visited: {6} \n Eggs hatched: {7} \n Pokemons envolved: {8} \n Pokedex entries: {9} \n KM walked: {10}  \n Pokemons: {11}/{12}"),
+                "----- LVL {0} | {1} ----- \n Experience: {2}/{3} \n Pokemons caught: {4} \n Pokemons deployed: {5} \n Pokestops visited: {6} \n Eggs hatched: {7} \n Pokemons evolved: {8} \n Pokedex entries: {9} \n KM walked: {10}  \n Pokemons: {11}/{12}"),
             new KeyValuePair<TranslationString, string>(TranslationString.ShowPokeTemplate,
                 "\n CP: {0} | IV: {1}% | Name: {2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.HelpTemplate,
-                "Commands: \n \n /top <cp/iv> <amount> - Shows you top Pokemons. \n /all <cp/iv> - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items. \n /status - Shows you the Status of the Bot. "),
+                "Commands: \n \n /top <cp/iv> <amount> - Shows you top Pokemons. \n /all <cp/iv> - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items. \n /status - Shows you the Status of the Bot. \n /pokedex - Shows you Pokedex "),
             new KeyValuePair<TranslationString, string>(TranslationString.StatsXpTemplateString,
                 "{0} (Advance in {1}h {2}m | {3:n0}/{4:n0} XP)"),
             new KeyValuePair<TranslationString, string>(TranslationString.RequireInputText,
@@ -402,7 +405,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.SnipeScanEx,
                 "Sniping a {0} with {1} IV at {2}..."),
             new KeyValuePair<TranslationString, string>(TranslationString.NoPokemonToSnipe,
-                "Did not find a Pokemon within the SnipingScanOffset!"),
+                "Did not find a Pokemon within the Location, pokemon despawned?"),
             new KeyValuePair<TranslationString, string>(TranslationString.NotEnoughPokeballsToSnipe,
                 "Not enough Pokeballs to start sniping! ({0}/{1})"),
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestMove1Header, "MOVE1"),
@@ -450,7 +453,11 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupDefaultLongConfirm, "Longitude accepted: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.SoftBanBypassed,
                 "Successfully bypassed!"),
-            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupCompleted, "### COMPLETED CONFIG SETUP ###")
+            new KeyValuePair<TranslationString, string>(TranslationString.FirstStartSetupCompleted, "### COMPLETED CONFIG SETUP ###"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PokedexCatchedTelegram, "--- Pokedex catched --- \n"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PokedexPokemonCatchedTelegram, "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PokedexNeededTelegram, "--- Pokedex needed --- \n"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PokedexPokemonNeededTelegram, "#{0}# Name: {1} \n"),
         };
 
         [JsonProperty("PokemonStrings",

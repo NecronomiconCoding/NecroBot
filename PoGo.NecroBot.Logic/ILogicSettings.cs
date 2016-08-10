@@ -1,8 +1,8 @@
 #region using directives
 
+using System.Collections.Generic;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-using System.Collections.Generic;
 
 #endregion
 
@@ -89,6 +89,7 @@ namespace PoGo.NecroBot.Logic
         bool TransferDuplicatePokemon { get; }
         bool TransferDuplicatePokemonOnCapture { get; }
         bool UseEggIncubators { get; }
+        int minEggKmForLimitedIncubators { get; }
         int UseGreatBallAboveCp { get; }
         int UseUltraBallAboveCp { get; }
         int UseMasterBallAboveCp { get; }
@@ -109,6 +110,7 @@ namespace PoGo.NecroBot.Logic
 
         int DelayBetweenPokemonCatch { get; }
         bool AutomaticallyLevelUpPokemon { get; }
+        bool OnlyUpgradeFavorites { get; }
         bool UseLevelUpList { get; }
         string LevelUpByCPorIv { get; }
         float UpgradePokemonCpMinimum { get; }
@@ -158,6 +160,8 @@ namespace PoGo.NecroBot.Logic
         bool GetSniperInfoFromPokezz { get; }
         bool GetOnlyVerifiedSniperInfoFromPokezz { get; }
         bool GetSniperInfoFromPokeSnipers { get; }
+        bool GetSniperInfoFromPokeWatchers { get; }
+        bool GetSniperInfoFromSkiplagged { get; }
         bool UseSnipeLocationServer { get; }
         bool UseTransferIvForSnipe { get; }
         bool SnipeIgnoreUnknownIv { get; }

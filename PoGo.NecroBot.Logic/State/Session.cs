@@ -2,9 +2,9 @@
 
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Service;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
-using PoGo.NecroBot.Logic.Service;
 
 #endregion
 
@@ -12,7 +12,7 @@ namespace PoGo.NecroBot.Logic.State
 {
     public interface ISession
     {
-        ISettings Settings { get; }
+        ISettings Settings { get; set; }
         Inventory Inventory { get; }
         Client Client { get; }
         GetPlayerResponse Profile { get; set; }
@@ -35,7 +35,7 @@ namespace PoGo.NecroBot.Logic.State
             Reset(settings, LogicSettings);
         }
 
-        public ISettings Settings { get; }
+        public ISettings Settings { get; set; }
 
         public Inventory Inventory { get; private set; }
 
@@ -44,7 +44,7 @@ namespace PoGo.NecroBot.Logic.State
         public GetPlayerResponse Profile { get; set; }
         public Navigation Navigation { get; private set; }
 
-        public ILogicSettings LogicSettings { get; }
+        public ILogicSettings LogicSettings { get; set; }
 
         public ITranslation Translation { get; }
 
