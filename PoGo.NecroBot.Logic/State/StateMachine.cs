@@ -1,12 +1,12 @@
 ﻿#region using directives
 
 using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
-using PokemonGo.RocketAPI.Exceptions;
-using System.IO;
 using PoGo.NecroBot.Logic.Logging;
+using PokemonGo.RocketAPI.Exceptions;
 
 #endregion
 

@@ -1,26 +1,25 @@
 
 #region using directives
 
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
-using PoGo.NecroBot.Logic.Common;
-using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.Logic.State;
-using PoGo.NecroBot.Logic.Utils;
-using POGOProtos.Enums;
-using POGOProtos.Inventory.Item;
-using PokemonGo.RocketAPI;
-using PokemonGo.RocketAPI.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Threading;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
+using PokemonGo.RocketAPI;
+using PokemonGo.RocketAPI.Enums;
+using POGOProtos.Enums;
+using POGOProtos.Inventory.Item;
 
 #endregion
 
@@ -306,7 +305,8 @@ namespace PoGo.NecroBot.Logic
         public bool UseTelegramAPI;
         [DefaultValue(null)]
         public string TelegramAPIKey;
-
+        [DefaultValue("12345")]
+        public string TelegramPassword;
         //console options
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
@@ -384,7 +384,7 @@ namespace PoGo.NecroBot.Logic
         public bool UseKeepMinLvl;
         [DefaultValue(false)]
         public bool PrioritizeIvOverCp;
-        [DefaultValue(0)]
+        [DefaultValue(1)]
         public int KeepMinDuplicatePokemon;
         //gpx
         [DefaultValue(false)]
@@ -854,7 +854,7 @@ namespace PoGo.NecroBot.Logic
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
                     {
-                        filter.Value.Moves = new List<PokemonMove>();
+                        filter.Value.Moves = new List<List<PokemonMove>>();
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.MovesOperator == null))
                     {
@@ -1412,7 +1412,7 @@ namespace PoGo.NecroBot.Logic
 
         public bool UseTelegramAPI => _settings.UseTelegramAPI;
         public string TelegramAPIKey => _settings.TelegramAPIKey;
-
+        public string TelegramPassword => _settings.TelegramPassword;
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
         public int MinPokeballsWhileSnipe => _settings.MinPokeballsWhileSnipe;
         public int MaxPokeballsPerPokemon => _settings.MaxPokeballsPerPokemon;

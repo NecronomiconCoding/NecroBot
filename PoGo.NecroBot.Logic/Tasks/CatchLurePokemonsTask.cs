@@ -45,14 +45,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else if (encounter.Result == DiskEncounterResponse.Types.Result.PokemonInventoryFull)
                 {
-                    if (session.LogicSettings.TransferDuplicatePokemon)
-                    {
-                        session.EventDispatcher.Send(new WarnEvent
-                        {
-                            Message = session.Translation.GetTranslation(TranslationString.InvFullTransferring)
-                        });
-                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
-                    }
+					if (session.LogicSettings.TransferDuplicatePokemon || session.LogicSettings.TransferWeakPokemon)
+					{
+						session.EventDispatcher.Send(new WarnEvent
+						{
+							Message = session.Translation.GetTranslation(TranslationString.InvFullTransferring)
+						});
+						if(session.LogicSettings.TransferDuplicatePokemon)
+							await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+						if(session.LogicSettings.TransferWeakPokemon)
+							await TransferWeakPokemonTask.Execute(session, cancellationToken);
+					}
                     else
                         session.EventDispatcher.Send(new WarnEvent
                         {
