@@ -345,7 +345,7 @@ namespace PoGo.NecroBot.Logic
         public double DefaultLatitude;
         [DefaultValue(-73.968285)]
         public double DefaultLongitude;
-        [DefaultValue(19.0)]
+        [DefaultValue(15.0)]
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
@@ -353,9 +353,9 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(false)]
         public bool FastSoftBanBypass;
         //delays
-        [DefaultValue(500)]
+        [DefaultValue(5000)]
         public int DelayBetweenPlayerActions;
-        [DefaultValue(100)]
+        [DefaultValue(2000)]
         public int DelayBetweenPokemonCatch;
         //dump stats
         [DefaultValue(false)]
@@ -428,15 +428,15 @@ namespace PoGo.NecroBot.Logic
         public string SnipeLocationServer;
         [DefaultValue(16969)]
         public int SnipeLocationServerPort;
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool GetSniperInfoFromPokezz;
         [DefaultValue(true)]
         public bool GetOnlyVerifiedSniperInfoFromPokezz;
         [DefaultValue(true)]
         public bool GetSniperInfoFromPokeSnipers;
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool GetSniperInfoFromPokeWatchers;
-        [DefaultValue(true)]
+        [DefaultValue(false)]
         public bool SnipeWithSkiplagged;
         [DefaultValue(20)]
         public int MinPokeballsToSnipe;
@@ -492,7 +492,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(0.05)]
         public double UseMasterBallBelowCatchProbability;
         //customizable catch
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool EnableHumanizedThrows;
         [DefaultValue(40)]
         public int NiceThrowChance;
