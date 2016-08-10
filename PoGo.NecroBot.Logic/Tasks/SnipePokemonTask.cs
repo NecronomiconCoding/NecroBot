@@ -342,10 +342,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains(q.pokemon_name));
                                 var notVisitedPokemon = filteredPokemon.Where(q => !LocsVisited.Contains(q));
-                                var notExpiredPokemon = notVisitedPokemon.Where(q => q.expires < (DateTime.Now.ToUniversalTime() - (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))).TotalMilliseconds);
 
-                                if (notExpiredPokemon.Any())
-                                    locationsToSnipe.AddRange(notExpiredPokemon);
+                                if (notVisitedPokemon.Any())
+                                    locationsToSnipe.AddRange(notVisitedPokemon);
                             }
 
                             var _locationsToSnipe = locationsToSnipe.OrderBy(q => q.expires).ToList();
@@ -354,12 +353,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 foreach (var pokemonLocation in _locationsToSnipe)
                                 {
-                                    if (!LocsVisited.Contains(new PokemonLocation(pokemonLocation.latitude, pokemonLocation.longitude)))
+                                    if ((pokemonLocation.expires - 5) > (DateTime.Now.ToUniversalTime() - (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))).TotalSeconds)
                                     {
                                         if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                             return;
                                         
-                                        await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
+                                        await Snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude, cancellationToken);
                                     }
                                 }
                             }
