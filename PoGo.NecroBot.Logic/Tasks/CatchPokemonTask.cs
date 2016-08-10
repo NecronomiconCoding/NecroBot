@@ -1,4 +1,4 @@
-﻿#region using directives
+#region using directives
 
 using System;
 using System.Linq;
@@ -91,7 +91,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     
                     AmountOfBerries++;
-                    if (AmountOfBerries < session.LogicSettings.MaxBerriesToUsePerPokemon)
+                    if (AmountOfBerries <= session.LogicSettings.MaxBerriesToUsePerPokemon)
                     {
                         await
                        UseBerry(session,
@@ -165,6 +165,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Logger.Write($"(Threw ball) {hitTxt} hit. {spinTxt}-ball...", LogLevel.Debug);
                 }
 
+                int missChance = Random.Next(0, 101);
+                bool hitPokemon = true;
+                if (missChance <= session.LogicSettings.ThrowMissPercentage && session.LogicSettings.EnableMissedThrows && session.LogicSettings.EnableHumanizedThrows)
+                    hitPokemon = false;
                 caughtPokemonResponse =
                     await session.Client.Encounter.CatchPokemon(
                         encounter is EncounterResponse || encounter is IncenseEncounterResponse
@@ -172,7 +176,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             : encounterId,
                         encounter is EncounterResponse || encounter is IncenseEncounterResponse
                             ? pokemon.SpawnPointId
-                            : currentFortData.Id, pokeball, normalizedRecticleSize, spinModifier);
+                            : currentFortData.Id, pokeball, hitPokemon, normalizedRecticleSize, spinModifier);
 
                 var lat = encounter is EncounterResponse || encounter is IncenseEncounterResponse
                              ? pokemon.Latitude : currentFortData.Latitude;
@@ -185,7 +189,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Longitude = lng
                 };
 
-                if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
+               if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
                 {
                     var totalExp = 0;
 
@@ -254,7 +258,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 attemptCounter++;
 
-                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 2000);
+                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 0);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
