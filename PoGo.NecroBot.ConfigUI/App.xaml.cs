@@ -13,5 +13,6 @@ namespace PoGo.NecroBot.ConfigUI
     /// </summary>
     public partial class App : Application
     {
+
     }
 }
