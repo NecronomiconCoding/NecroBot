@@ -554,7 +554,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var socket = IO.Socket("http://pokezz.com", options);
 
-            var hasError = false;
+            var hasError = true;
 
             ManualResetEventSlim waitforbroadcast = new ManualResetEventSlim(false);
 
@@ -562,6 +562,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             socket.On("pokemons", (msg) =>
             {
+                hasError = false;
                 socket.Close();
                 JArray data = JArray.FromObject(msg);
 
@@ -577,18 +578,17 @@ namespace PoGo.NecroBot.Logic.Tasks
             socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_ERROR, () =>
             {
                 socket.Close();
-                hasError = true;
                 waitforbroadcast.Set();
             });
 
             socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_CONNECT_ERROR, () =>
             {
                 socket.Close();
-                hasError = true;
                 waitforbroadcast.Set();
             });
 
-            waitforbroadcast.Wait();
+            waitforbroadcast.Wait(5000); // Wait a maximum of 5 seconds for Pokezz to respond.
+            socket.Close();
             if (!hasError)
             {
                 foreach (var pokemon in pokemons)
