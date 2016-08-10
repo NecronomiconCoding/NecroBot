@@ -197,5 +197,6 @@ namespace PoGo.NecroBot.Logic
         bool StartupWelcomeDelay { get; }
 
         bool UseOsmNavigating { get; }
+        double OsmMinDistanceInMeter { get; }
     }
 }

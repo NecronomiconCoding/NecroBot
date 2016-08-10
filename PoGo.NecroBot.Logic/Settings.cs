@@ -189,10 +189,10 @@ namespace PoGo.NecroBot.Logic
                 {
                     tempWebClient.Proxy = this.InitProxy();
                     string proxiedIPres = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
-                    string proxiedIP = proxiedIPres == null?"INVALID PROXY": proxiedIPres;
+                    string proxiedIP = proxiedIPres == null ? "INVALID PROXY" : proxiedIPres;
                     Logger.Write(
                        $"Your IP is: {unproxiedIP} / Proxy IP is: {proxiedIP}",
-                       LogLevel.Info, (unproxiedIP==proxiedIP)?ConsoleColor.Red:ConsoleColor.Green);
+                       LogLevel.Info, (unproxiedIP == proxiedIP) ? ConsoleColor.Red : ConsoleColor.Green);
 
                     if (unproxiedIP == proxiedIP || proxiedIPres == null)
                     {
@@ -532,6 +532,8 @@ namespace PoGo.NecroBot.Logic
 
         [DefaultValue(false)]
         public bool UseOsmNavigating;
+        [DefaultValue(100d)]
+        public double OsmMinDistanceInMeter;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -552,7 +554,7 @@ namespace PoGo.NecroBot.Logic
             new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
         };
 
-        
+
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
@@ -888,7 +890,7 @@ namespace PoGo.NecroBot.Logic
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
             }
-            
+
             return shouldExit ? null : settings;
         }
 
@@ -1444,5 +1446,6 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
         public int TotalAmountOfBerriesToKeep => _settings.TotalAmountOfBerriesToKeep;
         public bool UseOsmNavigating => _settings.UseOsmNavigating;
+        public double OsmMinDistanceInMeter => _settings.OsmMinDistanceInMeter;
     }
 }
