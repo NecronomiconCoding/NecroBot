@@ -654,19 +654,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- 图鉴已获得 --- \t\t\n"  
+      "Value":  "--- 图鉴已获得 --- \t\t\n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} 名称: {1} | 已捕获此类: {2} | 已遇见此类: {3} \t\t\n"  
+      "Value":  "#{0} 名称: {1} | 已捕获此类: {2} | 已遇见此类: {3} \t\t\n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- 图鉴未获得 --- \t\t\n"  
+      "Value":  "--- 图鉴未获得 --- \t\t\n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} 名称: {1} \t\t\n"  
+      "Value":  "#{0} 名称: {1} \t\t\n"
     }
   ],
   "PokemonStrings": [

@@ -390,19 +390,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value":  "--- Pokedex catched --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Nome: {1} | Capturados: {2} | Encontrados: {3} \n"  
+      "Value":  "#{0} Nome: {1} | Capturados: {2} | Encontrados: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value":  "--- Pokedex needed --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Nome: {1} \n"  
+      "Value":  "#{0} Nome: {1} \n"
     }
   ],
 	"PokemonStrings": [

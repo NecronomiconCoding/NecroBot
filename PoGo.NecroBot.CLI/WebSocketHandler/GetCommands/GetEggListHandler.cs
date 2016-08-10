@@ -1,11 +1,11 @@
-﻿using System.Threading.Tasks;
-using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks;
+﻿using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
+using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
 {
-    class GetEggListHandler : IWebSocketRequestHandler
+    internal class GetEggListHandler : IWebSocketRequestHandler
     {
         public string Command { get; private set; }
 

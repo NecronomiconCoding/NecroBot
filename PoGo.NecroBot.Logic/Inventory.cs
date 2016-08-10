@@ -418,20 +418,22 @@ namespace PoGo.NecroBot.Logic
             myPokemon = myPokemon.Where(p => p.DeployedFortId == string.Empty).OrderByDescending(p => p.Cp);
             //Don't evolve pokemon in gyms
             IEnumerable<PokemonId> pokemonIds = filter as PokemonId[] ?? filter.ToArray();
-            if (pokemonIds.Any())
-            {
-                myPokemon =
-                    myPokemon.Where(
-                        p => (pokemonIds.Contains(p.PokemonId)) ||
-                             (_logicSettings.EvolveAllPokemonAboveIv &&
-                              (PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.EvolveAboveIvValue)));
-            }
-            else if (_logicSettings.EvolveAllPokemonAboveIv)
+
+            // As written in the wiki, only EvolveAllPokemonWithEnoughCandy should work with the PokemonToEvolveList :)
+            if (_logicSettings.EvolveAllPokemonAboveIv)
             {
                 myPokemon =
                     myPokemon.Where(
                         p => PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.EvolveAboveIvValue);
             }
+            // Without else if, so if the two options are on, it will take the list out of the pokemon above IV
+            if (_logicSettings.EvolveAllPokemonWithEnoughCandy && pokemonIds.Any())
+            {
+                myPokemon =
+                    myPokemon.Where(
+                        p => (pokemonIds.Contains(p.PokemonId)));
+            }
+
             var pokemons = myPokemon.ToList();
 
             var myPokemonSettings = await GetPokemonSettings();
@@ -446,16 +448,16 @@ namespace PoGo.NecroBot.Logic
                 var settings = pokemonSettings.SingleOrDefault(x => x.PokemonId == pokemon.PokemonId);
                 var familyCandy = pokemonFamilies.SingleOrDefault(x => settings.FamilyId == x.FamilyId);
 
-                //Don't evolve if we can't evolve it
+                // Don't evolve if we can't evolve it
                 if (settings.EvolutionIds.Count == 0)
                     continue;
-                //DO NOT CHANGE! TESTED AND WORKS
+                // DO NOT CHANGE! Works after testing!
                 var pokemonCandyNeededAlready =
                     (pokemonToEvolve.Count(
-                        p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId) + 1) *
-                    settings.CandyToEvolve;
+                     p => pokemonSettings.Single(x => x.PokemonId == p.PokemonId).FamilyId == settings.FamilyId) + 1) *
+                     settings.CandyToEvolve;
 
-                if (familyCandy.Candy_ >= pokemonCandyNeededAlready)
+                if (familyCandy.Candy_ > pokemonCandyNeededAlready)
                 {
                     pokemonToEvolve.Add(pokemon);
                 }
