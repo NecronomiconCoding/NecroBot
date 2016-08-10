@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
-using POGOProtos.Data;
 using PoGo.NecroBot.Logic.Utils;
+using POGOProtos.Data;
 
 #endregion
 
