@@ -430,7 +430,7 @@
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- SEVİYE {0} | {1} ----- \n Tecrübe(XP): {2}/{3} \n Yakalanan Pokémon: {4} \n Görülen Pokémon: {5} \n Ziyaret Edilen Pokéstop: {6} \n Çatlatılan Yumurta(Egg): {7} \n Geliştirilen(Evolve) Pokémon: {8} \n Pokédex Kayıtları: {9} \n Yürünen Mesafe: {10}km  \n Pokémonlar: {11}/{12}"
+      "Value": "----- SEVİYE {0} | {1} ----- \n Tecrübe(XP): {2}/{3} \n Yakalanan Pokémon: {4} \n Karşılaşılan Pokémon: {5} \n Ziyaret Edilen Pokéstop: {6} \n Çatlatılan Yumurta(Egg): {7} \n Geliştirilen(Evolve) Pokémon: {8} \n Pokédex Kayıtları: {9} \n Yürünen Mesafe: {10}km  \n Pokémonlar: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
@@ -438,7 +438,7 @@
     },
     {
       "Key": "helpTemplate",
-      "Value": "Komutlar: \n \n /top <cp/iv> <sayı> - En iyi Pokémonları gösterir. \n /all <cp/iv> - Bütün Pokémonları gösterir. \n /profile - Profili gösterir. \n /loc - Konumu gösterir. \n /items - Eşyaları gösterir. \n /status - Bot durumunu gösterir."
+      "Value": "Komutlar: \n \n /top <cp/iv> <sayı> - En iyi Pokémonları gösterir. \n /all <cp/iv> - Bütün Pokémonları gösterir. \n /profile - Profili gösterir. \n /loc - Konumu gösterir. \n /items - Eşyaları gösterir. \n /status - Bot durumunu gösterir. \n /pokedex - Pokédex'i gösterir."
     },
     {
       "Key": "statsXpTemplateString",
@@ -482,7 +482,7 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "Bu konumda nişan alınacak Pokémon bulunamadı!"
+      "Value": "Bu konumda nişan alınacak Pokémon bulunamadı! Süresi dolmuş olabilir."
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
@@ -538,11 +538,11 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "Görülen Pokémon Sayısı: {0}/151, Yakalanan Pokémon Sayısı: {1}/151"
+      "Value": "Karşılaşılan Pokémon Sayısı: {0}/151, Yakalanan Pokémon Sayısı: {1}/151"
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "[Geliştirme] Potansiyel geliştirme(evolve) sayısı: {0}"
+      "Value": "Geliştirilebilecek(evolve) Pokémon sayısı: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
@@ -650,19 +650,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value": "--- Pokedex catched --- \n"
+      "Value": "--- Pokédex Yakalandı --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value": "#{0} İsim: {1} | Yakalanan: {2} | Karşılaşılan: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value": "--- Pokedex needed --- \n"
+      "Value": "--- Pokédex Gerekiyor --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value": "#{0} Name: {1} \n"
+      "Value": "#{0} İsim: {1} \n"
     }
   ],
   "PokemonStrings": [
