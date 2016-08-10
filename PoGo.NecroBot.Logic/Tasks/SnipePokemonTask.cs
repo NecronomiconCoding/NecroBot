@@ -588,7 +588,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 waitforbroadcast.Set();
             });
 
-            waitforbroadcast.Wait(5000);
+            waitforbroadcast.Wait();
             if (!hasError)
             {
                 foreach (var pokemon in pokemons)
