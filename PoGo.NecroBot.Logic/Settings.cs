@@ -628,14 +628,43 @@ namespace PoGo.NecroBot.Logic
         };
         public List<PokemonId> PokemonsToLevelUp = new List<PokemonId>
         {
-            //criteria: most common
-            PokemonId.Caterpie,
-            PokemonId.Weedle,
-            PokemonId.Pidgey,
-            PokemonId.Rattata,
-            PokemonId.Spearow,
-            PokemonId.Zubat,
-            PokemonId.Doduo
+            //criteria: from SS Tier to A Tier + Regional Exclusive
+            PokemonId.Venusaur,
+            PokemonId.Charizard,
+            PokemonId.Blastoise,
+            //PokemonId.Nidoqueen,
+            //PokemonId.Nidoking,
+            PokemonId.Clefable,
+            //PokemonId.Vileplume,
+            //PokemonId.Golduck,
+            //PokemonId.Arcanine,
+            //PokemonId.Poliwrath,
+            //PokemonId.Machamp,
+            //PokemonId.Victreebel,
+            //PokemonId.Golem,
+            //PokemonId.Slowbro,
+            //PokemonId.Farfetchd,
+            PokemonId.Muk,
+            //PokemonId.Exeggutor,
+            //PokemonId.Lickitung,
+            PokemonId.Chansey,
+            //PokemonId.Kangaskhan,
+            //PokemonId.MrMime,
+            //PokemonId.Tauros,
+            PokemonId.Gyarados,
+            //PokemonId.Lapras,
+            PokemonId.Ditto,
+            //PokemonId.Vaporeon,
+            //PokemonId.Jolteon,
+            //PokemonId.Flareon,
+            //PokemonId.Porygon,
+            PokemonId.Snorlax,
+            PokemonId.Articuno,
+            PokemonId.Zapdos,
+            PokemonId.Moltres,
+            PokemonId.Dragonite,
+            PokemonId.Mewtwo,
+            PokemonId.Mew
         };
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
         {
