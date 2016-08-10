@@ -11,8 +11,6 @@ using POGOProtos.Inventory.Item;
 using PoGo.NecroBot.Logic.Common;
 using System.Collections.Generic;
 using POGOProtos.Data;
-using PoGo.NecroBot.Logic.Logging;
-using POGOProtos.Settings.Master;
 
 #endregion
 
@@ -26,21 +24,21 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            await session.Inventory.RefreshCachedInventory();
             var pokemonToEvolveTask = await session.Inventory.GetPokemonToEvolve(session.LogicSettings.PokemonsToEvolve);
-            var pokemonToEvolve = pokemonToEvolveTask.ToList();
+            var pokemonToEvolve = pokemonToEvolveTask.Where(p => p != null).ToList();
 
-            session.EventDispatcher.Send( new EvolveCountEvent
+            session.EventDispatcher.Send(new EvolveCountEvent
             {
-                Evolves = pokemonToEvolve.Count
-            } );
+                Evolves = pokemonToEvolve.Count()
+            });
 
             if (pokemonToEvolve.Any())
             {
-                if (session.LogicSettings.KeepPokemonsThatCanEvolve || session.LogicSettings.UseLuckyEggsWhileEvolving)
+                if (session.LogicSettings.KeepPokemonsThatCanEvolve)
                 {
                     var luckyEggMin = session.LogicSettings.UseLuckyEggsMinPokemonAmount;
-                    var eggNeededToEvolve = luckyEggMin - pokemonToEvolve.Count();
-                    var maxStorage =  session.Profile.PlayerData.MaxPokemonStorage;
+                    var maxStorage = session.Profile.PlayerData.MaxPokemonStorage;
                     var totalPokemon = await session.Inventory.GetPokemons();
                     var totalEggs = await session.Inventory.GetEggs();
 
@@ -52,7 +50,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var deltaCount = needPokemonToStartEvolve - totalPokemon.Count();
                     if (session.LogicSettings.UseLuckyEggsWhileEvolving)
                     {
-                        if(luckyEggMin > maxStorage)
+                        if (luckyEggMin > maxStorage)
                         {
                             session.EventDispatcher.Send(new WarnEvent
                             {
@@ -62,48 +60,26 @@ namespace PoGo.NecroBot.Logic.Tasks
                             return;
                         }
                     }
-                    if(eggNeededToEvolve <= deltaCount || !session.LogicSettings.KeepPokemonsThatCanEvolve)
+
+                    if (deltaCount > 0)
                     {
-                        if (eggNeededToEvolve > 0)
+                        session.EventDispatcher.Send(new UpdateEvent()
                         {
-                            session.EventDispatcher.Send(new UpdateEvent()
-                            {
-                                Message = session.Translation.GetTranslation(TranslationString.CatchMorePokemonToUseLuckyEgg,
-                                    eggNeededToEvolve)
-                            });
-                            return;
-                        }
-                        else
-                        {
-                            if (await shouldUseLuckyEgg(session, pokemonToEvolve))
-                            {
-                                await UseLuckyEgg(session);
-                            }
-                            await evolve(session, pokemonToEvolve);
-                        }
+                            Message = session.Translation.GetTranslation(TranslationString.WaitingForMorePokemonToEvolve,
+                                pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage)
+                        });
+                        return;
                     }
                     else
                     {
-                        if (deltaCount > 0)
+                        if (await shouldUseLuckyEgg(session, pokemonToEvolve))
                         {
-                            session.EventDispatcher.Send(new UpdateEvent()
-                            {
-                                Message = session.Translation.GetTranslation(TranslationString.WaitingForMorePokemonToEvolve,
-                                    pokemonToEvolve.Count, deltaCount, totalPokemon.Count(), needPokemonToStartEvolve, session.LogicSettings.EvolveKeptPokemonsAtStorageUsagePercentage)
-                            });
-                            return;
+                            await UseLuckyEgg(session);
                         }
-                        else
-                        {
-                            if (await shouldUseLuckyEgg(session, pokemonToEvolve))
-                            {
-                                await UseLuckyEgg(session);
-                            }
-                            await evolve(session, pokemonToEvolve);
-                        }
+                        await evolve(session, pokemonToEvolve);
                     }
                 }
-                if(session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
+                else if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy || session.LogicSettings.EvolveAllPokemonAboveIv)
                 {
                     if (await shouldUseLuckyEgg(session, pokemonToEvolve))
                     {
@@ -127,8 +103,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             _lastLuckyEggTime = DateTime.Now;
             await session.Client.Inventory.UseItemXpBoost();
             await session.Inventory.RefreshCachedInventory();
-            if (luckyEgg != null) session.EventDispatcher.Send(new UseLuckyEggEvent {Count = luckyEgg.Count});
-            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 2000);
+            if (luckyEgg != null) session.EventDispatcher.Send(new UseLuckyEggEvent { Count = luckyEgg.Count });
+            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
         }
 
         private static async Task evolve(ISession session, List<PokemonData> pokemonToEvolve)
@@ -144,9 +120,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Exp = evolveResponse.ExperienceAwarded,
                     Result = evolveResponse.Result
                 });
-                if(!pokemonToEvolve.Last().Equals(pokemon))
+                if (!pokemonToEvolve.Last().Equals(pokemon))
                 {
-                    DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 2000);
+                    DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
                 }
             }
         }

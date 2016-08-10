@@ -47,7 +47,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Ovo da Sorte utilizado, a restar: {0}"
+      "Value": "Ovo da Sorte utilizado, restam: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -67,11 +67,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | com uma {9} ({10} restantes). | {11} EXP ganha | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | com uma {9} ({10} restantes). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -127,11 +127,11 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Colocando ovo na incubadora: restando {0:0.00}km"
+      "Value": "A colocar ovo na incubadora: restam {0:0.00}km"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Status da incubadora atualizado: restando {0:0.00}km"
+      "Value": "Status da incubadora atualizado: restam {0:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",
@@ -191,7 +191,7 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "Entrando utilizando {0}"
+      "Value": "A entrar como {0}"
     },
     {
       "Key": "ptcOffline",
@@ -199,15 +199,15 @@
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "Tentando novamente em {0} segundos..."
+      "Value": "A tentar novamente dentro de {0} segundos..."
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Conta não verificada! Saindo..."
+      "Value": "Conta não verificada! A sair..."
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Abrindo a página de dispositivos Google. Cola o código utilizando CTRL+V"
+      "Value": "A abrir a página de dispositivos Google. Cola o código utilizando CTRL+V"
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -219,7 +219,7 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Movimentos realistas detectados, utilizando UserSettings.settings"
+      "Value": "Movimentos realistas detectados, a utilizar UserSettings.settings"
     },
     {
       "Key": "notRealisticTravel",
@@ -239,15 +239,15 @@
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Transferindo e aplicando a atualização..."
+      "Value": "A transferir e instalar a atualização..."
     },
     {
       "Key": "finishedDownloadingRelease",
-      "Value": "Finalizando o download da última versão..."
+      "Value": "A finalizar o download da última versão..."
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "Terminando de descompactar os ficheiros..."
+      "Value": "A terminar de descompactar os ficheiros..."
     },
     {
       "Key": "updateFinished",
@@ -255,15 +255,15 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Procurando por incenso de pokémon..."
+      "Value": "A procurar por incenso de pokémon..."
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Procurando por pokémon..."
+      "Value": "A procurar pokémon..."
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Procurando por atrator de pokémons..."
+      "Value": "A procurar atrator de pokémons..."
     },
     {
       "Key": "pokemonSkipped",
@@ -271,7 +271,7 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Inventário de Pokémons cheio. Transferindo pokémons..."
+      "Value": "Inventário de Pokémons cheio, a transferir pokémons..."
     },
     {
       "Key": "invFullTransferManually",
@@ -288,7 +288,7 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Problema encontrado: Atraindo pokémon {0}"
+      "Value": "Problema encontrado: A atrair pokémon {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -300,7 +300,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Lista de pokémons ignorados] - Ignorando {0} como definido nas configurações"
+      "Value": "[Lista de pokémons ignorados] - A ignorar {0} como definido nas configurações"
     },
     {
       "Key": "catchStatusAttempt",
@@ -362,11 +362,15 @@
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "Abrindo Google App-Passwords. Faz um novo App Password (utilize Outro como Dispositivo)"
+      "Value": "A abrir Google App-Passwords. Faz um novo App Password (utilize Outro como Dispositivo)"
     },
     {
       "Key": "googleError",
       "Value": "Verifica se definiste um e-mail e uma palavra-passe correta."
+    },
+    {
+      "Key": "googleOffline",
+      "Value": "Os servidores da google provavelmente estão offline. Sê paciente e tenta iniciar o bot novamente, mais tarde."
     },
     {
       "Key": "missingCredentialsGoogle",
@@ -383,6 +387,22 @@
     {
       "Key": "noPokemonToSnipe",
       "Value": "[Sniper] Nenhum Pokémon encontrado!"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- Pokedex catched --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} Nome: {1} | Capturados: {2} | Encontrados: {3} \n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- Pokedex needed --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} Nome: {1} \n"  
     }
   ],
 	"PokemonStrings": [

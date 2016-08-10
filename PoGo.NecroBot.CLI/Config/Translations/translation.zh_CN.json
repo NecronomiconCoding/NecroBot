@@ -30,7 +30,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "您附近没有任何可用的补给站,是您的最大挂机距离设置太小了吗?\t\t"
+      "Value": "您附近没有任何可用的补给站,是您的最大挂机距离设置太小了吗?\t\t\t"
     },
     {
       "Key": "eventFortUsed",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "成功进化:{0},经验+{1}\t\t"
+      "Value": "成功进化:{0},经验+{1}\t\t\t"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t-CP:{1}完美度:{2}% [已有CP:{3}完美度:{4}%] (糖果:{5})\t\t\t"
+      "Value": "{0},CP:{1}完美度:{2}% [已有CP:{3}完美度:{4}%] (糖果:{5})\t\t\t"
     },
     {
       "Key": "eventItemRecycled",
@@ -225,6 +225,10 @@
       "Value": "新"
     },
     {
+      "Key": "logEntrySoftBan",
+      "Value": "暂封"
+    },
+    {
       "Key": "loggingIn",
       "Value": "正在登录{0}账号\t\t"
     },
@@ -338,15 +342,15 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[设置无效]您设置的物品数量组合(精灵球+药水+复活石={0})超出了您的背包容量({1})\t\t"
+      "Value": "[设置无效]您当前设置的物品数量组合(精灵球+药水+复活石={0})超出了您的背包容量({1})\t\t\t\t"
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "静默回收中...\t\t"
+      "Value": "清理背包中...\t\t"
     },
     {
       "Key": "invFullTransferring",
-      "Value": "包裹满了,正在传输精灵...\t\t"
+      "Value": "包裹满了,尝试传输精灵...\t\t"
     },
     {
       "Key": "invFullTransferManually",
@@ -425,6 +429,18 @@
       "Value": "{0} 运行时间{1}等级:{2}|经验/小时:{3:n0}|捕获/小时:{4:n0}|星尘:{5:n0}|传回:{6:n0}|丢弃:{7:n0}"
     },
     {
+      "Key": "profileStatsTemplateString",
+      "Value": "----- 等级: {0} | {1} ----- \t\t\n 经验: {2}/{3} \t\t\n 捕获了{4}个精灵\t\t\n 已部署了{5}个精灵 \t\t\n 访问了{6}个补给站 \t\t\n 已孵化{6}个蛋 \t\t\n 已进化{7}个精灵\t\t\n 图鉴解锁{8}种\t\t\n 已行走{9}公里\t\t"
+    },
+    {
+      "Key": "showPokeTemplate",
+      "Value": "\n CP {0} | 名称: {1}"
+    },
+    {
+      "Key": "helpTemplate",
+      "Value": "命令: \n \n /top <数量> - 显示你最高级的精灵列表. \t\t\n /all - 显示你所有精灵列表. \t\t\n /profile - 显示你个人详细信息. \t\t\n /loc - 显示你的位置. \t\t\n /items - 显示你的物品.\t\t"
+    },
+    {
       "Key": "statsXpTemplateString",
       "Value": "{0}(预计升级需要{1}小时{2}分钟|{3:n0}/{4:n0}经验)"
     },
@@ -438,11 +454,15 @@
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "打开GoogleApp-登陆与安全设置-密码和登录方法-应用专用密码,请设置一个新的应用专用密码(使用其它设备)\t\t"
+      "Value": "打开GoogleApp-登陆与安全设置-密码和登录方法-应用专用密码,请设置一个新的应用专用密码(使用其它设备)\t\t\t"
     },
     {
       "Key": "googleError",
       "Value": "请确认输入正确的邮箱地址和密码.\t\t"
+    },
+    {
+      "Key": "googleOffline",
+      "Value": "谷歌服务器可能正在维护, 请稍后再尝试登录.\t\t"
     },
     {
       "Key": "missingCredentialsGoogle",
@@ -550,7 +570,7 @@
     },
     {
       "Key": "promptError",
-      "Value": "[输入错误] 输入错误, 请输入 '{0}' 或 '{1}\t\t"
+      "Value": "[输入错误] 输入错误, 请输入 '{0}' 或 '{1}'\t\t"
     },
     {
       "Key": "firstStartAutoGenSettings",
@@ -562,15 +582,15 @@
     },
     {
       "Key": "firstStartSetupTypePrompt",
-      "Value": "请输入您的一个账户类型: {0}或者{1}\t\t"
+      "Value": "请输入您的一个账户类型: {1}或者{0}\t\t\t"
     },
     {
       "Key": "firstStartSetupTypeConfirm",
-      "Value": "选择了: {0}账户\t\t"
+      "Value": "选择了: {0} 账户\t\t"
     },
     {
       "Key": "firstStartSetupTypePromptError",
-      "Value": "[错误] 账户类型不正确,请输入 '{0}' 或者 '{1}'\t\t"
+      "Value": "[错误] 账户类型不正确,请输入 '{0}' 或者 '{1}'\t\t\t"
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
@@ -625,8 +645,28 @@
       "Value": "经度已设置: {0}\t\t"
     },
     {
+      "Key": "softBanBypassed",
+      "Value": "成功解封!\t\t"
+    },
+    {
       "Key": "firstStartSetupCompleted",
       "Value": "### 已完成设置 ###\t\t"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- 图鉴已获得 --- \t\t\n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} 名称: {1} | 已捕获此类: {2} | 已遇见此类: {3} \t\t\n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- 图鉴未获得 --- \t\t\n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} 名称: {1} \t\t\n"  
     }
   ],
   "PokemonStrings": [

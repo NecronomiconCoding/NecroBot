@@ -373,6 +373,10 @@
       "Value": "Βεβαιώσου οτι έχεις συμπληρώσει σωστά τα Email & Password."
     },
     {
+      "Key": "googleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "missingCredentialsGoogle",
       "Value": "Πρέπει να συμπλήρωσεις τα GoogleUsername και GooglePassword στο auth.json!"
     },
@@ -387,6 +391,22 @@
     {
       "Key": "noPokemonToSnipe",
       "Value": "[Σναΐπερ] Δεν βρέθηκαν Pokemon για σναϊπάρισμα!"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- Pokedex catched --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- Pokedex needed --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
 	"PokemonStrings": [

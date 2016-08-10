@@ -371,6 +371,10 @@
       "Value": "Vær sikker på at det er den rigtige Email og det rigtige Password."
     },
     {
+      "Key": "GoogleOffline",
+      "Value": "Google servers are probably down, Please be patient and start the bot later."
+    },
+    {
       "Key": "RequireInputText",
       "Value": "Programmet vil fortsætte efter et tryk på en knap..."
     },
@@ -381,6 +385,22 @@
     {
       "Key": "NoPokemonToSnipe",
       "Value": "[Sniper] Ingen Pokémons fundet til at snipe!"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- Pokedex catched --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- Pokedex needed --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
   "PokemonStrings": [

@@ -14,6 +14,7 @@ using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using System.Collections.Generic;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -121,9 +122,6 @@ namespace PoGo.NecroBot.Logic.State
 
             if( TransferConfig( baseDir, session ) )
                 Utils.ErrorHandler.ThrowFatalError( session.Translation.GetTranslation( TranslationString.FinishedTransferringConfig ), 5, LogLevel.Update );
-            
-
-            await Task.Delay(2000, cancellationToken);
 
             Process.Start(Assembly.GetEntryAssembly().Location);
             Environment.Exit(-1);
@@ -177,7 +175,7 @@ namespace PoGo.NecroBot.Logic.State
 
         private static string DownloadServerVersion()
         {
-            using (var wC = new WebClient())
+            using (var wC = new NecroWebClient())
             {
                 return wC.DownloadString(VersionUri);
             }
@@ -294,6 +292,7 @@ namespace PoGo.NecroBot.Logic.State
                             Process.Start( Path.Combine( configDir, "config.json" ) );
                             return true;
                         case "n":
+                            Utils.ErrorHandler.ThrowFatalError( session.Translation.GetTranslation( TranslationString.FinishedTransferringConfig ), 5, LogLevel.Update, true );
                             return true;
                         default:
                             Logger.Write( session.Translation.GetTranslation( TranslationString.PromptError, "y", "n" ), LogLevel.Error );

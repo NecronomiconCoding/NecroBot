@@ -26,6 +26,20 @@ namespace PoGo.NecroBot.Logic
     {
         private readonly Client _client;
         private readonly ILogicSettings _logicSettings;
+        private GetPlayerResponse _player = null;
+        private int _level = 0;
+        private DownloadItemTemplatesResponse _templates;
+        private IEnumerable<PokemonSettings> _pokemonSettings;
+
+        private readonly List<ItemId> _revives = new List<ItemId> { ItemId.ItemRevive, ItemId.ItemMaxRevive };
+        private GetInventoryResponse _cachedInventory;
+        private DateTime _lastRefresh;
+
+        public Inventory(Client client, ILogicSettings logicSettings)
+        {
+            _client = client;
+            _logicSettings = logicSettings;
+        }
 
         private readonly List<ItemId> _pokeballs = new List<ItemId>
         {
@@ -43,16 +57,6 @@ namespace PoGo.NecroBot.Logic
             ItemId.ItemMaxPotion
         };
 
-        private readonly List<ItemId> _revives = new List<ItemId> {ItemId.ItemRevive, ItemId.ItemMaxRevive};
-        private GetInventoryResponse _cachedInventory;
-        private DateTime _lastRefresh;
-
-        public Inventory(Client client, ILogicSettings logicSettings)
-        {
-            _client = client;
-            _logicSettings = logicSettings;
-        }
-
         public async Task DeletePokemonFromInvById(ulong id)
         {
             var inventory = await GetCachedInventory();
@@ -65,28 +69,20 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<LevelUpRewardsResponse> GetLevelUpRewards(Inventory inv )
         {
-            var GetData = await _client.Player.GetPlayer(); 
-
-            var ClientLevel = await _client.Player.GetPlayerProfile( GetData.PlayerData.Username );
-            var Rewards = await _client.Player.GetLevelUpRewards( inv.GetPlayerStats().Result.FirstOrDefault().Level );
-
-            return Rewards;
-
+            return await GetLevelUpRewards(inv.GetPlayerStats().Result.FirstOrDefault().Level);
         }
+
         private async Task<GetInventoryResponse> GetCachedInventory()
         {
+            if (_player==null) GetPlayerData();
             var now = DateTime.UtcNow;
 
-            if (_lastRefresh.AddSeconds(30).Ticks > now.Ticks)
-            {
+            if (_cachedInventory!=null && _lastRefresh.AddSeconds(30).Ticks > now.Ticks)
                 return _cachedInventory;
-            }
+
             return await RefreshCachedInventory();
         }
-
-
-
-
+        
 
         public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer( 
                 IEnumerable<PokemonId> pokemonsNotToTransfer, IEnumerable<PokemonId> pokemonsToEvolve,
@@ -243,13 +239,16 @@ namespace PoGo.NecroBot.Logic
                 .OrderByDescending(x => x.Cp)
                 .FirstOrDefault();
         }
-        public async Task<int> GetStarDust()
-        {
-            var StarDust =await  _client.Player.GetPlayer();
-            var gdrfds = StarDust.PlayerData.Currencies;
-            var SplitStar = gdrfds[1].Amount;
-            return SplitStar;
 
+        public int GetStarDust()
+        {
+            GetPlayerData();
+            return _player.PlayerData.Currencies[1].Amount;
+        }
+
+        public async void GetPlayerData()
+        {
+            _player = await _client.Player.GetPlayer();
         }
 
         public async Task<PokemonData> GetHighestPokemonOfTypeByIv(PokemonData pokemon)
@@ -274,7 +273,6 @@ namespace PoGo.NecroBot.Logic
             var pokemons = myPokemon.ToList();
             return pokemons.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(limit);
         }
-
 
         public async Task<int> GetItemAmountByType(ItemId type)
         {
@@ -356,11 +354,20 @@ namespace PoGo.NecroBot.Logic
                    select items).ToList();
         }
 
-        public async Task<List<Candy>> GetPokemonFamilies()
+        public async Task<List<Candy>> GetPokemonFamilies(int retries=0)
         {
-            var inventory = await GetCachedInventory();
+            if (retries > 3) return null;
 
-            var families = from item in inventory.InventoryDelta.InventoryItems
+            IEnumerable<Candy> families = null;
+            var inventory = await GetCachedInventory();
+            if ( inventory == null || inventory.InventoryDelta==null || inventory.InventoryDelta.InventoryItems==null)
+            {
+                DelayingUtils.Delay(3000, 3000);
+                inventory = await GetCachedInventory();
+            }
+
+            try { 
+                families = from item in inventory.InventoryDelta.InventoryItems
                             where item.InventoryItemData?.Candy != null
                             where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
                             group item by item.InventoryItemData?.Candy.FamilyId into family
@@ -369,7 +376,12 @@ namespace PoGo.NecroBot.Logic
                                 FamilyId = family.First().InventoryItemData.Candy.FamilyId,
                                 Candy_ = family.First().InventoryItemData.Candy.Candy_
                             };
-
+            }
+            catch (NullReferenceException)
+            {
+                DelayingUtils.Delay(3000, 3000);
+                return await GetPokemonFamilies(++retries);
+            }
 
             return families.ToList();
         }
@@ -381,13 +393,23 @@ namespace PoGo.NecroBot.Logic
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonData)
                     .Where(p => p != null && p.PokemonId > 0);
         }
+        public async Task<IEnumerable<PokemonData>> GetFaveriotPokemon()
+        {
+            var inventory = await GetPokemons();
+            return
+                inventory.Where(i => i.Favorite == 1);
+
+        }
 
         public async Task<IEnumerable<PokemonSettings>> GetPokemonSettings()
         {
-            var templates = await _client.Download.GetItemTemplates();
-            return
-                templates.ItemTemplates.Select(i => i.PokemonSettings)
-                    .Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
+            if (_templates == null || _pokemonSettings == null)
+            {
+                _templates = await _client.Download.GetItemTemplates();
+                _pokemonSettings = _templates.ItemTemplates.Select(i => i.PokemonSettings).Where(p => p != null && p.FamilyId != PokemonFamilyId.FamilyUnset);
+            }
+
+            return _pokemonSettings;
         }
 
         public async Task<IEnumerable<PokemonData>> GetPokemonToEvolve(IEnumerable<PokemonId> filter = null)
@@ -444,15 +466,13 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<LevelUpRewardsResponse> GetLevelUpRewards(int level)
         {
-            var GetData = await _client.Player.GetPlayer();
+            if (_level == 0 || level > _level)
+            {
+                _level = level;
+                return await _client.Player.GetLevelUpRewards(level);
+            }
 
-
-
-            var ClientLevel = await _client.Player.GetPlayerProfile(GetData.PlayerData.Username);
-            var Rewards = await _client.Player.GetLevelUpRewards(level);
-
-            return Rewards;
-
+            return new LevelUpRewardsResponse();
         }
 
         public async Task<List<PokemonData>> GetPokemonToUpgrade()
@@ -489,8 +509,10 @@ namespace PoGo.NecroBot.Logic
                 _logicSettings.KeepMinOperator, _logicSettings.KeepMinDuplicatePokemon);
         }
 
-        public async Task<GetInventoryResponse> RefreshCachedInventory()
+        public async Task<GetInventoryResponse> RefreshCachedInventory(int retries=0)
         {
+            if (retries > 3) return null;
+
             var now = DateTime.UtcNow;
             var ss = new SemaphoreSlim(10);
 
@@ -500,6 +522,12 @@ namespace PoGo.NecroBot.Logic
                 _lastRefresh = now;
                 _cachedInventory = await _client.Inventory.GetInventory();
                 return _cachedInventory;
+            }
+            catch (NullReferenceException)
+            {
+                ss.Release();
+                DelayingUtils.Delay(3000, 3000);
+                return await RefreshCachedInventory(++retries);
             }
             finally
             {
