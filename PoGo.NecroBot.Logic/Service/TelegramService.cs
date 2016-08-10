@@ -1,5 +1,6 @@
 ﻿using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Data;
@@ -27,8 +28,15 @@ namespace PoGo.NecroBot.Logic.Service
         {
             this.bot = new TelegramBotClient(apiKey);
             this.session = session;
-
-            var me = bot.GetMeAsync().Result;
+            var me = new Telegram.Bot.Types.User();
+            try
+            {
+                me = bot.GetMeAsync().Result;
+            }
+            catch(AggregateException)
+            {
+                Console.ReadKey();
+            }
 
             bot.OnMessage += OnTelegramMessageReceived;
             bot.StartReceiving();
