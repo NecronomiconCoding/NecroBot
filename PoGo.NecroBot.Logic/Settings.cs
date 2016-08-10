@@ -341,11 +341,11 @@ namespace PoGo.NecroBot.Logic
         //position
         [DefaultValue(false)]
         public bool DisableHumanWalking;
-        [DefaultValue(40.785091)]
+        [DefaultValue(40.785092)]
         public double DefaultLatitude;
-        [DefaultValue(-73.968285)]
+        [DefaultValue(-73.968286)]
         public double DefaultLongitude;
-        [DefaultValue(15.0)]
+        [DefaultValue(5.0)]
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
@@ -439,7 +439,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(true)]
         public bool GetSniperInfoFromPokeWatchers;
         [DefaultValue(true)]
-        public bool SnipeWithSkiplagged;
+        public bool GetSniperInfoFromSkiplagged;
         [DefaultValue(20)]
         public int MinPokeballsToSnipe;
         [DefaultValue(0)]
@@ -878,8 +878,7 @@ namespace PoGo.NecroBot.Logic
                 settings = new GlobalSettings();
                 shouldExit = true;
             }
-
-
+            
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
@@ -1431,7 +1430,7 @@ namespace PoGo.NecroBot.Logic
         public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.GetOnlyVerifiedSniperInfoFromPokezz;
         public bool GetSniperInfoFromPokeSnipers => _settings.GetSniperInfoFromPokeSnipers;
         public bool GetSniperInfoFromPokeWatchers => _settings.GetSniperInfoFromPokeWatchers;
-        public bool SnipeWithSkiplagged => _settings.SnipeWithSkiplagged;
+        public bool GetSniperInfoFromSkiplagged => _settings.GetSniperInfoFromSkiplagged;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
