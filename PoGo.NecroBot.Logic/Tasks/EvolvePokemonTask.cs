@@ -118,6 +118,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     Id = pokemon.PokemonId,
                     Exp = evolveResponse.ExperienceAwarded,
+                    UniqueId = pokemon.Id,
                     Result = evolveResponse.Result
                 });
                 if (!pokemonToEvolve.Last().Equals(pokemon))
