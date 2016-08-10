@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}, CP值：{1}  完美度：{2}%   [已擁有 CP值：{3} 完美度：{4}%] (還有{5}顆糖果)\t\t\t\t"
+      "Value": "{0}\t- CP值：{1}  完美度：{2}%   [已擁有 CP值：{3} 完美度：{4}%] (還有{5}顆糖果)\t\t\t\t"
     },
     {
       "Key": "eventItemRecycled",
@@ -106,7 +106,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} 重試 #{1}次"
+      "Value": "{0} 重試 {1}次"
     },
     {
       "Key": "catchStatus",
@@ -150,7 +150,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "確認經緯度是否正確，如果錯誤將會退出程式！ 緯度：{0} 經度：{1}\t\t"
+      "Value": "確認經緯度是否正確，如果錯誤將會退出程式！ 緯度：{0} 經度：{1}\t\t\t"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -1205,15 +1205,15 @@
     },
     {
       "Key": "vaporeon",
-      "Value": "水精靈"
+      "Value": "水神奇寶貝"
     },
     {
       "Key": "jolteon",
-      "Value": "雷精靈"
+      "Value": "雷神奇寶貝"
     },
     {
       "Key": "flareon",
-      "Value": "火精靈"
+      "Value": "火神奇寶貝"
     },
     {
       "Key": "porygon",
