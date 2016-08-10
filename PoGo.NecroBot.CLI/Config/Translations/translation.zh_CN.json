@@ -94,7 +94,7 @@
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "还需捕获{0}只精灵使用幸运蛋!\t\t"
+      "Value": "还需捕获{0}只宝可梦使用幸运蛋!\t\t"
     },
     {
       "Key": "eventUseBerry",
@@ -122,7 +122,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "宠物小精灵"
+      "Value": "宝可梦"
     },
     {
       "Key": "commonWordPerfect",
@@ -306,15 +306,15 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "正在搜索熏香引来的精灵...\t\t"
+      "Value": "正在搜索熏香引来的宝可梦...\t\t"
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "正在搜索宠物小精灵...\t\t"
+      "Value": "正在搜索宝可梦...\t\t"
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "正在搜索诱饵吸引来的精灵...\t\t"
+      "Value": "正在搜索诱饵吸引来的宝可梦...\t\t"
     },
     {
       "Key": "pokemonSkipped",
@@ -322,7 +322,7 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "背包中精灵球不足,无法捕捉更多小精灵!\t\t"
+      "Value": "背包中精灵球不足,无法捕捉更多宝可梦!\t\t"
     },
     {
       "Key": "currentPokeballInv",
@@ -354,7 +354,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "精灵包裹满了,请手动传输精灵或者修改配置文件TransferDuplicatePokemon为true\t\t"
+      "Value": "宝可梦包裹满了,请手动传输宝可梦或者修改配置文件TransferDuplicatePokemon为true\t\t"
     },
     {
       "Key": "invFullPokestopLooting",
@@ -366,7 +366,7 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "发生错误:诱饵吸引来的精灵{0}\t\t"
+      "Value": "发生错误:诱饵吸引来的宝可梦{0}\t\t"
     },
     {
       "Key": "desiredDestTooFar",
@@ -374,7 +374,7 @@
     },
     {
       "Key": "pokemonRename",
-      "Value": "正在将精灵{0} ({1})从{2}重命名为{3}.\t\t"
+      "Value": "正在将宝可梦{0} ({1})从{2}重命名为{3}.\t\t"
     },
     {
       "Key": "pokemonFavorite",
@@ -382,7 +382,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[精灵忽略过滤器]忽略:{0}\t\t"
+      "Value": "[宝可梦忽略过滤器]忽略:{0}\t\t"
     },
     {
       "Key": "catchStatusAttempt",
@@ -430,7 +430,7 @@
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- 等级: {0} | {1} ----- \t\t\n 经验: {2}/{3} \t\t\n 捕获了{4}个精灵\t\t\n 已部署了{5}个精灵 \t\t\n 访问了{6}个补给站 \t\t\n 已孵化{6}个蛋 \t\t\n 已进化{7}个精灵\t\t\n 图鉴解锁{8}种\t\t\n 已行走{9}公里\t\t"
+      "Value": "----- 等级: {0} | {1} ----- \t\t\n 经验: {2}/{3} \t\t\n 捕获了{4}个宝可梦\t\t\n 已部署了{5}个宝可梦 \t\t\n 访问了{6}个补给站 \t\t\n 已孵化{6}个蛋 \t\t\n 已进化{7}个宝可梦\t\t\n 图鉴解锁{8}种\t\t\n 已行走{9}公里\t\t"
     },
     {
       "Key": "showPokeTemplate",
@@ -438,7 +438,7 @@
     },
     {
       "Key": "helpTemplate",
-      "Value": "命令: \n \n /top <数量> - 显示你最高级的精灵列表. \t\t\n /all - 显示你所有精灵列表. \t\t\n /profile - 显示你个人详细信息. \t\t\n /loc - 显示你的位置. \t\t\n /items - 显示你的物品.\t\t"
+      "Value": "命令: \n \n /top <数量> - 显示你最高级的宝可梦列表. \t\t\n /all - 显示你所有宝可梦列表. \t\t\n /profile - 显示你个人详细信息. \t\t\n /loc - 显示你的位置. \t\t\n /items - 显示你的物品.\t\t"
     },
     {
       "Key": "statsXpTemplateString",
@@ -474,7 +474,7 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "正在搜索可狙击精灵,坐标:{0}\t\t"
+      "Value": "正在搜索可狙击宝可梦,坐标:{0}\t\t"
     },
     {
       "Key": "snipeScanEx",
@@ -482,7 +482,7 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "没有找到可狙击的精灵!\t\t"
+      "Value": "没有找到可狙击的宝可梦!\t\t"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
@@ -538,15 +538,15 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "遇见了:{0}/151只小精灵,捕捉了:{1}/151只\t\t\t"
+      "Value": "遇见了:{0}/151只宝可梦,捕捉了:{1}/151只\t\t\t"
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "有{0}个可进化的精灵\t\t"
+      "Value": "有{0}个可进化的宝可梦\t\t"
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "精灵升级失败,材料不足\t\t"
+      "Value": "宝可梦升级失败,材料不足\t\t"
     },
     {
       "Key": "snipeServerOffline",
@@ -562,7 +562,7 @@
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "请输入新的语言代码(中文是zh_CN)\t\t"
+      "Value": "请输入新的语言代码(简体中文是zh_CN)\t\t"
     },
     {
       "Key": "firstStartLanguageConfirm",
@@ -740,7 +740,7 @@
     },
     {
       "Key": "pidgeot",
-      "Value": "比雕"
+      "Value": "大比鸟"
     },
     {
       "Key": "rattata",
@@ -896,7 +896,7 @@
     },
     {
       "Key": "primeape",
-      "Value": "火爆猴"
+      "Value": "火暴猴"
     },
     {
       "Key": "growlithe",
@@ -912,7 +912,7 @@
     },
     {
       "Key": "poliwhirl",
-      "Value": "蚊香蛙"
+      "Value": "蚊香君"
     },
     {
       "Key": "poliwrath",
