@@ -104,13 +104,18 @@ namespace PoGo.NecroBot.Logic
                             var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
 
                             return !pokemonTransferFilter.MovesOperator.BoolFunc(
-                                 pokemonTransferFilter.Moves.Any(moveset => moveset.Intersect(new[] { p.Move1, p.Move2 }).Any()),
-                                 pokemonTransferFilter.KeepMinOperator.BoolFunc(
-                                     p.Cp >= pokemonTransferFilter.KeepMinCp,
-                                     PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage,
-                                     pokemonTransferFilter.KeepMinOperator.ReverseBoolFunc(
-                                         pokemonTransferFilter.KeepMinOperator.InverseBool(pokemonTransferFilter.UseKeepMinLvl),
-                                         PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl)));
+                                        pokemonTransferFilter.MovesOperator.ReverseBoolFunc(
+                                                pokemonTransferFilter.MovesOperator.InverseBool(pokemonTransferFilter.Moves.Count > 0),
+                                                pokemonTransferFilter.Moves.Any(moveset =>
+                                                    pokemonTransferFilter.MovesOperator.ReverseBoolFunc(
+                                                        pokemonTransferFilter.MovesOperator.InverseBool(moveset.Count > 0), 
+                                                        moveset.Intersect(new[] { p.Move1, p.Move2 }).Count() == Math.Max(Math.Min(moveset.Count, 2),0)))),
+                                        pokemonTransferFilter.KeepMinOperator.BoolFunc(
+                                            p.Cp >= pokemonTransferFilter.KeepMinCp,
+                                            PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage,
+                                            pokemonTransferFilter.KeepMinOperator.ReverseBoolFunc(
+                                                pokemonTransferFilter.KeepMinOperator.InverseBool(pokemonTransferFilter.UseKeepMinLvl),
+                                                PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl)));
 
                         }).ToList();
             }
@@ -142,7 +147,7 @@ namespace PoGo.NecroBot.Logic
 
 
                 var settings = pokemonSettings.Single(x => x.PokemonId == pokemonGroupToTransfer.Key);
-                //Lets calc new canBeRemoved pokemons according to transferring some of them for +1 candy and some evolve for +1 candy
+                //Lets calc new canBeRemoved pokemons according to transferring some of them for +1 candy or to evolving for +1 candy
                 if (keepPokemonsThatCanEvolve &&
                     pokemonsToEvolve.Contains(pokemonGroupToTransfer.Key) &&
                     settings.CandyToEvolve > 0 &&
@@ -176,16 +181,19 @@ namespace PoGo.NecroBot.Logic
             }
 
             #region For testing
-/*
+
             results.ForEach(data =>
             {
-                var bestPokemonOfType = (_logicSettings.PrioritizeIvOverCp
-                 ? myPokemonList.Where(x => x.PokemonId == data.PokemonId)
-                .OrderByDescending(x => x.Cp)
-                .FirstOrDefault()
-                 : myPokemonList.Where(x => x.PokemonId == data.PokemonId)
-                .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                .FirstOrDefault()) ?? data;
+                var allpokemonoftype = myPokemonList.Where(x => x.PokemonId == data.PokemonId);
+                var bestPokemonOfType = 
+                    (_logicSettings.PrioritizeIvOverCp
+                         ? allpokemonoftype
+                        .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
+                        .FirstOrDefault()
+                         : allpokemonoftype
+                        .OrderByDescending(x => x.Cp)
+                        .FirstOrDefault()) 
+                    ?? data;
 
                 var perfection = PokemonInfo.CalculatePokemonPerfection(data);
                 var cp = data.Cp;
@@ -193,7 +201,7 @@ namespace PoGo.NecroBot.Logic
                 var bestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType);
                 var bestCp = bestPokemonOfType.Cp;
             });
-*/
+
             #endregion
 
             return results;
