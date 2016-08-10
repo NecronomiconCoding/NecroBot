@@ -256,9 +256,27 @@ namespace PoGo.NecroBot.Logic.Service
                     SendMessage(message.Chat.Id, Console.Title);
                     break;
                 case "/restart":
-                    Process.Start(Assembly.GetEntryAssembly().Location);
                     SendMessage(message.Chat.Id, "Restarted Bot. Closing old Instance... BYE!");
+                    await Task.Delay(1000); // Wait 1 second to send the response through Telegram
+                    Process.Start(Assembly.GetEntryAssembly().Location);
                     Environment.Exit(-1);
+                    break;
+                case "/port":
+                    if(messagetext.Length < 2) {
+                        SendMessage(message.Chat.Id, "/port needs an target coordinates as argument!");
+                    } else {
+                        SendMessage(message.Chat.Id, "Porting to "+ messagetext[1] + " by restarting the bot!");
+                        ProcessStartInfo pi = new ProcessStartInfo(Assembly.GetEntryAssembly().Location);
+                        String[] args = Environment.GetCommandLineArgs();
+                        if(args.Length > 1) { // we already had some arguments... 
+                                              // 2nd one is coordinates and can therefore be omitted
+                            pi.Arguments = args[1] + " " + messagetext[1];
+                        } else {
+                            pi.Arguments = ". " + messagetext[1];
+                        }
+                        Process.Start(pi);
+                        Environment.Exit(-1);
+                    }
                     break;
                 default:
                     answerTextmessage += session.Translation.GetTranslation(TranslationString.HelpTemplate);
