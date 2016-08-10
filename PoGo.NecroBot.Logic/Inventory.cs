@@ -181,7 +181,7 @@ namespace PoGo.NecroBot.Logic
             }
 
             #region For testing
-
+/*
             results.ForEach(data =>
             {
                 var allpokemonoftype = myPokemonList.Where(x => x.PokemonId == data.PokemonId);
@@ -201,7 +201,7 @@ namespace PoGo.NecroBot.Logic
                 var bestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType);
                 var bestCp = bestPokemonOfType.Cp;
             });
-
+*/
             #endregion
 
             return results;
