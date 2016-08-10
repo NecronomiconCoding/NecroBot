@@ -33,10 +33,6 @@ namespace PoGo.NecroBot.Logic.Service
             {
                 me = bot.GetMeAsync().Result;
             }
-            catch(AggregateException)
-            {
-                Console.ReadKey();
-            }
 
             bot.OnMessage += OnTelegramMessageReceived;
             bot.StartReceiving();
