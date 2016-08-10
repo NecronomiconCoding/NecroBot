@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
-using POGOProtos.Inventory.Item;
 using PoGo.NecroBot.Logic.Utils;
+using POGOProtos.Inventory.Item;
 
 #endregion
 
