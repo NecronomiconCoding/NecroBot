@@ -305,7 +305,8 @@ namespace PoGo.NecroBot.Logic
         public bool UseTelegramAPI;
         [DefaultValue(null)]
         public string TelegramAPIKey;
-
+        [DefaultValue("12345")]
+        public string TelegramPassword;
         //console options
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
@@ -853,7 +854,7 @@ namespace PoGo.NecroBot.Logic
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
                     {
-                        filter.Value.Moves = new List<PokemonMove>();
+                        filter.Value.Moves = new List<List<PokemonMove>>();
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.MovesOperator == null))
                     {
@@ -1411,7 +1412,7 @@ namespace PoGo.NecroBot.Logic
 
         public bool UseTelegramAPI => _settings.UseTelegramAPI;
         public string TelegramAPIKey => _settings.TelegramAPIKey;
-
+        public string TelegramPassword => _settings.TelegramPassword;
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
         public int MinPokeballsWhileSnipe => _settings.MinPokeballsWhileSnipe;
         public int MaxPokeballsPerPokemon => _settings.MaxPokeballsPerPokemon;
