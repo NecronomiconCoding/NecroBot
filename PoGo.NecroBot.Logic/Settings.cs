@@ -493,6 +493,10 @@ namespace PoGo.NecroBot.Logic
         public double UseMasterBallBelowCatchProbability;
         //customizable catch
         [DefaultValue(false)]
+        public bool EnableMissedThrows;
+        [DefaultValue(25)]
+        public int ThrowMissPercentage;
+        [DefaultValue(false)]
         public bool EnableHumanizedThrows;
         [DefaultValue(40)]
         public int NiceThrowChance;
@@ -1334,6 +1338,8 @@ namespace PoGo.NecroBot.Logic
         public double UseMasterBallBelowCatchProbability => _settings.UseMasterBallBelowCatchProbability;
         public double UseUltraBallBelowCatchProbability => _settings.UseUltraBallBelowCatchProbability;
         public double UseGreatBallBelowCatchProbability => _settings.UseGreatBallBelowCatchProbability;
+        public bool EnableMissedThrows => _settings.EnableMissedThrows;
+        public int ThrowMissPercentage => _settings.ThrowMissPercentage;
         public bool EnableHumanizedThrows => _settings.EnableHumanizedThrows;
         public int NiceThrowChance => _settings.NiceThrowChance;
         public int GreatThrowChance => _settings.GreatThrowChance;
