@@ -223,7 +223,7 @@ namespace PoGo.NecroBot.CLI
 
         private static bool CheckKillSwitch()
         {
-            using (var wC = new NecroWebClient())
+            using (var wC = new WebClient())
             {
                 try
                 {
