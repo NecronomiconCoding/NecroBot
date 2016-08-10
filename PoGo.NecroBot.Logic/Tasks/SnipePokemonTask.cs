@@ -223,12 +223,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                                                 new List<SniperInfo>();
 
                         var _locationsToSnipe = locationsToSnipe.OrderBy(q => q.ExpirationTimestamp).ToList();
-
-                        if (_locationsToSnipe.Any())
+                        if (_locationsToSnipe != null && _locationsToSnipe.Any())
                         {
                             foreach (var location in _locationsToSnipe)
                             {
-                                if ((location.ExpirationTimestamp > DateTime.Now.AddSeconds(10)) && (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude))))
+                                if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
                                 {
                                     session.EventDispatcher.Send(new SnipeScanEvent
                                     {
@@ -250,11 +249,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (session.LogicSettings.GetSniperInfoFromPokezz)
                     {
                         var _locationsToSnipe = GetSniperInfoFrom_pokezz(session, pokemonIds);
-                        if (_locationsToSnipe.Any())
+                        if (_locationsToSnipe!=null && _locationsToSnipe.Any())
                         {
                             foreach (var location in _locationsToSnipe)
                             {
-                                if ((location.ExpirationTimestamp > DateTime.Now.AddSeconds(10)) && (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude))))
+                                if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
                                 {
                                     session.EventDispatcher.Send(new SnipeScanEvent
                                     {
@@ -276,11 +275,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (session.LogicSettings.GetSniperInfoFromPokeSnipers)
                     {
                         var _locationsToSnipe = GetSniperInfoFrom_pokesnipers(session, pokemonIds);
-                        if (_locationsToSnipe.Any())
+                        if (_locationsToSnipe != null && _locationsToSnipe.Any())
                         {
                             foreach (var location in _locationsToSnipe)
                             {
-                                if ((location.ExpirationTimestamp > DateTime.Now.AddSeconds(10)) && (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude))))
+                                if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
                                 {
                                     session.EventDispatcher.Send(new SnipeScanEvent
                                     {
@@ -302,11 +301,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (session.LogicSettings.GetSniperInfoFromPokeWatchers)
                     {
                         var _locationsToSnipe = GetSniperInfoFrom_pokewatchers(session, pokemonIds);
-                        if (_locationsToSnipe.Any())
+                        if (_locationsToSnipe != null && _locationsToSnipe.Any())
                         {
                             foreach (var location in _locationsToSnipe)
                             {
-                                if ((location.ExpirationTimestamp > DateTime.Now.AddSeconds(10)) && (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude))))
+                                if (!LocsVisited.Contains(new PokemonLocation(location.Latitude, location.Longitude)))
                                 {
                                     session.EventDispatcher.Send(new SnipeScanEvent
                                     {
@@ -355,7 +354,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 foreach (var pokemonLocation in _locationsToSnipe)
                                 {
-                                    if ((pokemonLocation.expires > (((DateTime.Now.ToUniversalTime() - (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))).TotalMilliseconds) + 10000)) && (!LocsVisited.Contains(new PokemonLocation(pokemonLocation.latitude, pokemonLocation.longitude))))
+                                    if (!LocsVisited.Contains(new PokemonLocation(pokemonLocation.latitude, pokemonLocation.longitude)))
                                     {
                                         if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                             return;
@@ -622,7 +621,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             else
             {
                 session.EventDispatcher.Send(new ErrorEvent {Message = "(Pokezz.com) Connection Error"});
-                return new List<SniperInfo>();
+                return null;
             }
         }
 
@@ -711,7 +710,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 // most likely System.IO.IOException
                 session.EventDispatcher.Send(new ErrorEvent { Message = "(PokeWatchers.com) " + ex.Message });
-                return new List<SniperInfo>();
+                return null;
             }
             if (scanResult_pokewatchers.pokemons != null)
             {
@@ -724,8 +723,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         string[] coordsArray = pokemon.cords.Split(',');
                         SnipInfo.Latitude = Convert.ToDouble(coordsArray[0], CultureInfo.InvariantCulture);
                         SnipInfo.Longitude = Convert.ToDouble(coordsArray[1], CultureInfo.InvariantCulture);
-                        SnipInfo.TimeStampAdded = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Math.Round(pokemon.timeadded / 1000d)).ToLocalTime();
-                        SnipInfo.ExpirationTimestamp = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Math.Round(pokemon.timeend / 1000d)).ToLocalTime();
+                        SnipInfo.TimeStampAdded = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(pokemon.timeadded);
+                        SnipInfo.ExpirationTimestamp = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(pokemon.timeend);
                         SnipeLocations.Add(SnipInfo);
                     }
                     catch
@@ -747,7 +746,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 return locationsToSnipe.OrderBy(q => q.ExpirationTimestamp).ToList();
             }
             else
-                return new List<SniperInfo>();
+                return null;
         }
 
         public static async Task Start(Session session, CancellationToken cancellationToken)

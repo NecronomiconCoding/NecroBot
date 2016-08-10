@@ -8,7 +8,7 @@ namespace PoGo.NecroBot.Logic.Utils
         protected override WebRequest GetWebRequest(Uri uri)
         {
             WebRequest w = base.GetWebRequest(uri);
-            w.Timeout = 5000;
+            w.Timeout = 10000;
             return w;
         }
     }
