@@ -622,7 +622,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             else
             {
                 session.EventDispatcher.Send(new ErrorEvent {Message = "(Pokezz.com) Connection Error"});
-                return new List<SniperInfo>();
+                return null;
             }
         }
 
@@ -711,7 +711,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 // most likely System.IO.IOException
                 session.EventDispatcher.Send(new ErrorEvent { Message = "(PokeWatchers.com) " + ex.Message });
-                return new List<SniperInfo>();
+                return null;
             }
             if (scanResult_pokewatchers.pokemons != null)
             {
@@ -747,7 +747,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 return locationsToSnipe.OrderBy(q => q.ExpirationTimestamp).ToList();
             }
             else
-                return new List<SniperInfo>();
+                return null;
         }
 
         public static async Task Start(Session session, CancellationToken cancellationToken)
