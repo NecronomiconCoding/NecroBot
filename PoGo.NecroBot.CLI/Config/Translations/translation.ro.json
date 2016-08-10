@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Nivel: {3} CP: ({4}/{5}) IV: {6}% | Șansă: {7}% | {8}m distanță | cu un {9} ({10} rămase) | {11} | lat: {12} long: {13}"
+      "Value": "({0}) | ({1}) {2} Nivel: {3} CP: ({4}/{5}) IV: {6}% | Șansă: {7}% | {8}m distanță | cu un {9} ({10} rămase) | {11} EXP câștigată | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
@@ -223,6 +223,10 @@
     {
       "Key": "logEntryNew",
       "Value": "NOU"
+    },
+    {
+      "Key": "logEntrySoftBan",
+      "Value": "SOFTBAN"
     },
     {
       "Key": "loggingIn",
@@ -426,15 +430,15 @@
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- NIVEL {0} | {1} ----- \n Experiență: {2}/{3} \n Pokemoni prinși: {4} \n Pokemons deployed: {5} \n Pokestopuri vizitate: {6} \n Ouă eclozate: {6} \n Pokemoni evoluați: {7} \n Intrări în pokedex: {8} \n KM străbătuți: {9}"
+      "Value": "----- NIVEL {0} | {1} ----- \n Experiență: {2}/{3} \n Pokemoni prinși: {4} \n Pokemoni transferați pentru bomboane: {5} \n Pokestopuri vizitate: {6} \n Ouă eclozate: {7} \n Pokemoni evoluați: {8} \n Intrări în pokedex: {9} \n KM străbătuți: {10}  \n Pokemoni: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
-      "Value": "\n CP {0} | Nume: {1}"
+      "Value": "\n CP {0} | IV: {1}% | Nume: {2}"
     },
     {
       "Key": "helpTemplate",
-      "Value": "Comenzi: \n \n /top <cantitate> - Afișează pokemonii tăi de top. \n /all - Afișează toți pokemonii tăi. \n /profile - Afișează profilul tău. \n /loc - Afișează locația ta. \n /items - Afișează obiectele tale."
+      "Value": "Comenzi: \n \n /top <cp/iv> <cantitate> - Afișează pokemonii tăi de top. \n /all <cp/iv> - Afișează toți pokemonii tăi. \n /profile - Afișează profilul tău. \n /loc - Afișează locația ta. \n /items - Afișează obiectele tale. \n /status - Afișează statusul botului."
     },
     {
       "Key": "statsXpTemplateString",
@@ -478,7 +482,7 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "Nu s-a găsit niciun pokemon în intervalul definit de SnipingScanOffset!"
+      "Value": "Nu s-a găsit niciun pokemon în cadrul locației, s-a despawnat pokemonul?"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
@@ -538,7 +542,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "[Evoluări] Evoluări potențiale: {0}"
+      "Value": "Evoluții potențiale ale pokemonilor: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
@@ -641,8 +645,28 @@
       "Value": "Longitudine acceptată: {0}"
     },
     {
+      "Key": "softBanBypassed",
+      "Value": "Softban ocolit cu succes!"
+    },
+    {
       "Key": "firstStartSetupCompleted",
       "Value": "### CONFIGURAREA CONFIGULUI ÎNCHEIATĂ ###"
+    },
+    {
+      "Key": "pokedexCatchedTelegram",
+      "Value": "--- Pokedex - Pokemoni prinși --- \n"
+    },
+    {
+      "Key": "pokedexPokemonCatchedTelegram",
+      "Value": "#{0} Nume: {1} | Prins: {2} | Întâlnit: {3} \n"
+    },
+    {
+      "Key": "pokedexNeededTelegram",
+      "Value": "--- Pokedex - Pokemoni necesari --- \n"
+    },
+    {
+      "Key": "pokedexPokemonNeededTelegram",
+      "Value": "#{0}# Nume: {1} \n"
     }
   ],
   "PokemonStrings": [

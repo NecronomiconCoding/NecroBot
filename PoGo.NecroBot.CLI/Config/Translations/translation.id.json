@@ -34,7 +34,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nama: {0} XP: {1}, Gem: {2}, barang: {3}, lintang: {4}, bujur: {5}"
+      "Value": "Nama: {0} mendapatkan XP: {1}, Gem: {2}, barang: {3}, lintang: {4}, bujur: {5}"
     },
     {
       "Key": "eventFortFailed",
@@ -118,7 +118,7 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Data pada file GPX tidak dapat ditangani, mencoba tanpa file GPX..."
+      "Value": "Data pada berkas GPX tidak dapat ditangani, mencoba tanpa berkas GPX..."
     },
     {
       "Key": "displayHighestsHeader",
@@ -346,7 +346,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Inventaris pokemon penuh. Transfer pokemon secara manual atau ubah TransferDuplicatePokemon menjadi true di pengaturan..."
+      "Value": "Inventaris pokemon penuh. Transfer pokemon secara manual atau ubah TransferDuplicatePokemon menjadi true diberkas config.json"
     },
     {
       "Key": "invFullPokestopLooting",
@@ -378,27 +378,27 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "StatusTangkapan"
+      "Value": "Status Tangkapan"
     },
     {
       "Key": "catchStatusError",
-      "Value": "TangkapanError"
+      "Value": "Tangkapan Error"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "TangkapanLepas"
+      "Value": "Tangkapan Lepas"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "TangkapanKabur"
+      "Value": "Tangkapan Kabur"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "TangkapanGagal"
+      "Value": "Tangkapan Gagal"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "TangkapanBerhasil"
+      "Value": "Tangkapan Berhasil"
     },
     {
       "Key": "catchTypeNormal",
@@ -422,7 +422,7 @@
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- LVL {0} | {1} ----- \n EXP: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang disebarkan: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang dievolusikan: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9} KM \n Pokemon: {11}/{12}"
+      "Value": "----- LVL {0} | {1} ----- \n EXP: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang ditransfer: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang dievolusikan: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9} KM \n Pokemon: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
@@ -430,11 +430,11 @@
     },
     {
       "Key": "helpTemplate",
-      "Value": "Perintah: \n \n /top <cp/iv> <jumlah> - Menampilkan Pokemon tertinggimu.. \n /all <cp/iv> - Menampilkan semua Pokemon-mu. \n /profile - Menampilkan profilmu. \n /loc - Menampilkan lokasimu. \n /items - Menampilkan barangmu. \n /status - Menampilkan status bot-mu. "
+      "Value": "Perintah: \n \n /top <cp/iv> <jumlah> - Menampilkan Pokemon tertinggimu.. \n /all <cp/iv> - Menampilkan semua Pokemon-mu. \n /profile - Menampilkan profilmu. \n /loc - Menampilkan lokasimu. \n /items - Menampilkan barangmu. \n /status - Menampilkan status bot-mu. \n /pokedex - Menampilkan Pokedex-mu"
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (level berikutnya dalam {1} jam {2} menit | {3:n0}/{4:n0} XP)"
+      "Value": "{0} (level berikutnya {1} jam {2} menit | {3:n0}/{4:n0} XP)"
     },
     {
       "Key": "requireInputText",
@@ -466,19 +466,19 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "Mencari Pokemon untuk dibidik di {0}..."
+      "Value": "Mencari Pokemon untuk dibidik di koordinat: {0}"
     },
     {
       "Key": "snipeScanEx",
-      "Value": "Membidik seekor {0} IV: {1} Koordinat: {2}..."
+      "Value": "Membidik {0} Nilai IV: {1} di koordinat: {2}"
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "Tidak ditemukan Pokemon dalam SnipingScanOffset!"
+      "Value": "Tidak ditemukan Pokemon di koordinat tersebut!"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Pokeball tidak mencukupi untuk memulai bidikan! ({0}/{1})"
+      "Value": "Tidak cukup Pokeball untuk memulai bidikan! ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -530,7 +530,7 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "Jumlah Pokemon yang terlihat: {0}/151, Jumlah Pokemon yang tertangkap: {1}/151"
+      "Value": "Jumlah Pokemon: Terlihat: {0}/151, Tertangkap: {1}/151"
     },
     {
       "Key": "pkmPotentialEvolveCount",
@@ -566,7 +566,7 @@
     },
 	{
       "Key": "firstStartAutoGenSettings",
-      "Value": "Berkas \"config.json\" dan \"auth.json\" secara otomatis dibuat dan harus dilengkapi sebelum melanjutkan"
+      "Value": "Berkas \"config.json\" dan \"auth.json\" secara otomatis dibuat dan harus dilengkapi sebelum melanjutkan INFO: ubah berkas tersebut dalam folder CONFIG"
     },
 	{
       "Key": "firstStartSetupAccount",
@@ -586,7 +586,7 @@
     },
 	{
       "Key": "firstStartSetupUsernamePrompt",
-      "Value": "Mohon masukkan nama pengguna (email)"
+      "Value": "Mohon masukkan nama pengguna atau email"
     },
 	{
       "Key": "firstStartSetupUsernameConfirm",
@@ -643,6 +643,22 @@
 	{
       "Key": "firstStartSetupCompleted",
       "Value": "### PENGATURAN KONFIGURASI SELESAI ###"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- Tertangkap di Pokedex  --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} Nama: {1} | Tertangkap: {2} | Ditemukan: {3} \n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- Dibutuhkan di Pokedex --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} Nama: {1} \n"  
     }
   ],
 	"PokemonStrings": [

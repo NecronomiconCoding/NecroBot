@@ -240,7 +240,7 @@ namespace PoGo.NecroBot.Logic
                 .FirstOrDefault();
         }
 
-        public async Task<int> GetStarDust()
+        public int GetStarDust()
         {
             GetPlayerData();
             return _player.PlayerData.Currencies[1].Amount;
@@ -378,6 +378,13 @@ namespace PoGo.NecroBot.Logic
             return
                 inventory.InventoryDelta.InventoryItems.Select(i => i.InventoryItemData?.PokemonData)
                     .Where(p => p != null && p.PokemonId > 0);
+        }
+        public async Task<IEnumerable<PokemonData>> GetFaveriotPokemon()
+        {
+            var inventory = await GetPokemons();
+            return
+                inventory.Where(i => i.Favorite == 1);
+
         }
 
         public async Task<IEnumerable<PokemonSettings>> GetPokemonSettings()

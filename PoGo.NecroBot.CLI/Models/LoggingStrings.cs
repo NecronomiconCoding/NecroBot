@@ -89,7 +89,7 @@ namespace PoGo.NecroBot.CLI.Models
 
             Transferred =
                 session?.Translation.GetTranslation(
-                    TranslationString.LogEntryTransfered) ?? "TRANSFERED";
+                    TranslationString.LogEntryTransfered) ?? "TRANSFERRED";
 
             Update =
                 session?.Translation.GetTranslation(

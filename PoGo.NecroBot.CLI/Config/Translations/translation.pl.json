@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Nazwa: {0}  INFO: Zbieranie przedmiotów nie powiodła sie, prawdopodobnie masz SoftBana. Odbanowanie za: {1}/{2}"
+      "Value": "Nazwa: {0}  INFO: Zbieranie przedmiotów nie powiodła się, prawdopodobnie masz SoftBana. Odbanowanie za: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
@@ -225,6 +225,10 @@
       "Value": "NOWY"
     },
     {
+      "Key": "logEntrySoftBan",
+      "Value": "SOFTBAN"
+    },
+    {
       "Key": "loggingIn",
       "Value": "Logujesz się przy użyciu: Konta {0}"
     },
@@ -354,7 +358,7 @@
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Twoj ekwipunek jest pełny, nie zebrano przedmiotów"
+      "Value": "Twój ekwipunek jest pełny, nie zebrano przedmiotów"
     },
     {
       "Key": "encounterProblem",
@@ -426,7 +430,7 @@
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- LVL: {0} | {1} ----- \n Doświadczenie: {2}/{3} \n Złapanych Pokemonów: {4} \n Umieszczonych Pokemonów: {5} \n Odwiedzoncyh Pokestopów: {6} \n Wyklutych Jajek: {6} \n Wyewoluowanych Pokemonów: {7} \n Pokemonów w Pokedex: {8} \n Przebytych KM: {9}"
+      "Value": "----- LVL: {0} | {1} ----- \n Doświadczenie: {2}/{3} \n Złapanych Pokemonów: {4} \n Umieszczonych Pokemonów: {5} \n Odwiedzonych Pokestopów: {6} \n Wyklutych Jajek: {6} \n Wyewoluowanych Pokemonów: {7} \n Pokemonów w Pokedex: {8} \n Przebytych KM: {9}"
     },
     {
       "Key": "showPokeTemplate",
@@ -434,7 +438,7 @@
     },
     {
       "Key": "helpTemplate",
-      "Value": "Komendy: \n \n /top <wartość> - Wyświetla top Twoich Pokemonów. \n /all - Wyświetla wszystkie posiadane Pokemony. \n /profile - Wyświetla Twój profil. \n /loc - Pokazuje Twoją pokalizację. \n /items - Wyświetla Twoje itemy"
+      "Value": "Komendy: \n \n /top <wartość> - Wyświetla top Twoich Pokemonów. \n /all - Wyświetla wszystkie posiadane Pokemony. \n /profile - Wyświetla Twój profil. \n /loc - Pokazuje Twoją lokalizację. \n /items - Wyświetla Twoje itemy"
     },
     {
       "Key": "statsXpTemplateString",
@@ -641,8 +645,28 @@
       "Value": "Zapisana Długość: {0}"
     },
     {
+      "Key": "softBanBypassed",
+      "Value": "Zdejmowanie blokady zakończone sukcesem"
+    },
+    {
       "Key": "firstStartSetupCompleted",
       "Value": "### Ustawianie configu zakończone ###"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- Pokedex catched --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- Pokedex needed --- \n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
   "PokemonStrings": [
