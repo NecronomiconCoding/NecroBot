@@ -34,15 +34,15 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "補給站名稱：{0} 經驗值：{1}，金幣：{2}，物品：{3}\t\t\t\t"
+      "Value": "名稱：{0}，經驗值：{1}，金幣：{2}，物品：{3}\t\t\t\t\t"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "補給站名稱：{0} 資訊：操作失敗，可能被封禁，正在解封：{1}/{2}。\t\t\t"
+      "Value": "名稱：{0}，資訊：操作失敗，可能被封禁，正在解封：{1}/{2}。\t\t\t"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "前往補給站：{0} (距離{1}公尺，需要{2}秒)\t\t\t"
+      "Value": "前往補給站：{0} (距離{1}公尺，需要{2}秒)\t\t\t\t"
     },
     {
       "Key": "eventProfileLogin",
@@ -66,11 +66,11 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP值：{1}  完美度：{2}%   [已擁有 CP值：{3} 完美度：{4}%] (還有{5}顆糖果)\t\t\t\t"
+      "Value": "{0}\t- CP值：{1}  完美度：{2}% [已擁有 CP值：{3} 完美度：{4}%] (還有{5}顆糖果)\t\t\t\t"
     },
     {
       "Key": "eventItemRecycled",
-      "Value": "{0}x {1}\t\t"
+      "Value": "{1}×{0}\t\t"
     },
     {
       "Key": "eventPokemonCaptureSuccess",
@@ -114,7 +114,7 @@
     },
     {
       "Key": "candies",
-      "Value": "還有{0}顆糖果\t\t"
+      "Value": "糖果：{0}"
     },
     {
       "Key": "unhandledGpxData",
@@ -150,7 +150,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "確認經緯度是否正確，如果錯誤將會退出程式！ 緯度：{0} 經度：{1}\t\t\t"
+      "Value": "確認經緯度是否正確，如果錯誤將會退出程式！ 緯度：{0} 經度：{1}\t\t\t\t\t"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -190,7 +190,7 @@
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "刪除"
+      "Value": "丟棄"
     },
     {
       "Key": "logEntryPKMN",
@@ -238,7 +238,7 @@
     },
     {
       "Key": "accessTokenExpired",
-      "Value": "PTC 登入憑證過期。重新登入...\t\t"
+      "Value": "PTC 登入憑證過期。重新登入…\t\t"
     },
     {
       "Key": "invalidResponse",
@@ -246,11 +246,11 @@
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "將在 {0} 秒後重試...\t\t"
+      "Value": "將在 {0} 秒後重試…\t\t"
     },
     {
       "Key": "accountNotVerified",
-      "Value": "帳號或密碼錯誤！退出...\t\t"
+      "Value": "帳號或密碼錯誤！退出…\t\t"
     },
     {
       "Key": "openingGoogleDevicePage",
@@ -270,7 +270,7 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "未檢測到真實的旅行 {0}，使用上一次儲存於LastPos.ini的設定\t\t"
+      "Value": "未檢測到真實的旅行 {0}，使用上一次儲存於LastPos.ini的設定\t\t\t"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -286,19 +286,19 @@
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "正在下載安裝更新...\t\t"
+      "Value": "正在下載安裝更新…\t\t"
     },
     {
       "Key": "finishedDownloadingRelease",
-      "Value": "新版本下載完成...\t\t"
+      "Value": "新版本下載完成…\t\t"
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "解壓縮完成...\t\t"
+      "Value": "解壓縮完成…\t\t"
     },
     {
       "Key": "finishedTransferringConfig",
-      "Value": "成功將您的設定更新至最新版...\t\t"
+      "Value": "成功將您的設定更新至最新版…\t\t"
     },
     {
       "Key": "updateFinished",
@@ -306,15 +306,15 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "正在尋找薰香引來的神奇寶貝...\t\t"
+      "Value": "正在尋找薰香引來的神奇寶貝…\t\t"
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "正在尋找神奇寶貝...\t\t"
+      "Value": "正在尋找神奇寶貝…\t\t"
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "正在尋找誘餌吸引來的神奇寶貝...\t\t"
+      "Value": "正在尋找誘餌吸引來的神奇寶貝…\t\t"
     },
     {
       "Key": "pokemonSkipped",
@@ -326,7 +326,7 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "目前擁有寶貝球：{0} | 高級球：{1} | 超級球：{2} | 大師球：{3}\t\t\t"
+      "Value": "目前擁有寶貝球：{0} | 高級球：{1} | 超級球：{2} | 大師球：{3}\t\t\t\t"
     },
     {
       "Key": "CurrentPotionInv",
@@ -346,19 +346,19 @@
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "清理背包中...\t\t"
+      "Value": "清理背包中…\t\t"
     },
     {
       "Key": "invFullTransferring",
-      "Value": "背包滿了，正在傳送神奇寶貝...\t\t"
+      "Value": "背包滿了，正在傳送神奇寶貝…\t\t"
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "背包滿了，請手動傳送神奇寶貝或修改 TransferDuplicatePokemon 為 true...\t\t"
+      "Value": "背包滿了，請手動傳送神奇寶貝或修改 TransferDuplicatePokemon 為 true…\t\t"
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "背包滿了，將不會拾取任何物品...\t\t"
+      "Value": "背包滿了，將不會拾取任何物品…\t\t\t"
     },
     {
       "Key": "encounterProblem",
@@ -386,27 +386,27 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "嘗試捕捉"
+      "Value": "嘗試"
     },
     {
       "Key": "catchStatusError",
-      "Value": "捕捉錯誤"
+      "Value": "錯誤"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "捕捉失敗"
+      "Value": "失敗"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "捕捉消失"
+      "Value": "消失"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "錯過捕捉"
+      "Value": "錯過"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "捕捉成功"
+      "Value": "成功"
     },
     {
       "Key": "catchTypeNormal",
@@ -426,7 +426,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - 運行時間 {1} - 等級：{2} | 經驗/小時：{3:0} | 捕獲/小時：{4:0} | 星塵：{5:0} | 傳送：{6:0} | 丟棄：{7:0}"
+      "Value": "{0} - 已執行 {1} - 等級：{2} | 經驗/小時：{3:0} | 捕獲/小時：{4:0} | 星塵：{5:0} | 傳送：{6:0} | 丟棄：{7:0}"
     },
     {
       "Key": "profileStatsTemplateString",
@@ -443,11 +443,11 @@
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (預計升級時間 {1}小時 {2}分鐘 | {3}/{4}經驗 )"
+      "Value": "{0} (預計升級時間 {1}:{2} | {3}/{4}經驗 )"
     },
     {
       "Key": "RequireInputText",
-      "Value": "按任意鍵繼續...\t\t"
+      "Value": "按任意鍵繼續…\t\t"
     },
     {
       "Key": "googleTwoFactorAuth",
@@ -475,19 +475,19 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "在 {0} 搜尋可狙擊的神奇寶貝...\t\t"
+      "Value": "在 {0} 搜尋可狙擊的神奇寶貝…\t\t"
     },
     {
       "Key": "snipeScanEx",
-      "Value": "狙擊 {0} IV：{1} 於：{2}...\t\t"
+      "Value": "狙擊 {0} IV：{1} 於：{2}…\t\t"
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "沒有任何神奇寶貝可狙擊...\t\t"
+      "Value": "沒有任何神奇寶貝可狙擊…\t\t"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "沒有足夠的寶貝球來狙擊... ({0}/{1})\t\t"
+      "Value": "沒有足夠的寶貝球來狙擊… ({0}/{1})\t\t"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -539,7 +539,7 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "見過的神奇寶貝：{0}/151, 捕捉過的神奇寶貝：{1}/151\t\t\t"
+      "Value": "遇過的神奇寶貝：{0}/151，捕捉過的神奇寶貝：{1}/151\t\t\t\t"
     },
     {
       "Key": "pkmPotentialEvolveCount",
@@ -551,7 +551,7 @@
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "狙擊伺服器已離線。正在退出...\t\t"
+      "Value": "狙擊伺服器已離線。正在退出…\t\t"
     },
     {
       "Key": "firstStartPrompt",
