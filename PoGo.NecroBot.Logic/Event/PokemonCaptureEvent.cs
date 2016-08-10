@@ -18,7 +18,7 @@ namespace PoGo.NecroBot.Logic.Event
         public int Exp;
         public int FamilyCandies;
         public PokemonId Id;
-        public ulong uniqueId;
+        public ulong UniqueId;
         public double Level;
         public int MaxCp;
         public double Perfection;
