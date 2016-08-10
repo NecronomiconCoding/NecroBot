@@ -196,5 +196,24 @@ namespace PoGo.NecroBot.Logic
         SnipeSettings PokemonToSnipe { get; }
 
         bool StartupWelcomeDelay { get; }
+        
+        string ErrorColor { get; }
+        string WarningColor { get; }
+        string PokestopColor { get; }
+        string FarmingColor { get; }
+        string SniperColor { get; }
+        string RecyclingColor { get; }
+        string BerryColor { get; }
+        string CaughtColor { get; }
+        string FleeColor { get; }
+        string TransferColor { get; }
+        string EvolveColor { get; }
+        string EggColor { get; }
+        string UpdateColor { get; }
+        string InfoColor { get; }
+        string NewColor { get; }
+        string SoftBanColor { get; }
+        string LevelUpColor { get; }
+        string DebugColor { get; }
     }
 }
