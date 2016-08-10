@@ -324,7 +324,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         }
                     }
 
-                    if (session.LogicSettings.SnipeWithSkiplagged)
+                    if (session.LogicSettings.GetSniperInfoFromSkiplagged)
                     {
                         foreach (var location in session.LogicSettings.PokemonToSnipe.Locations)
                         {
