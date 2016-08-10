@@ -118,7 +118,7 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Data pada file GPX tidak dapat ditangani, mencoba tanpa file GPX..."
+      "Value": "Data pada berkas GPX tidak dapat ditangani, mencoba tanpa berkas GPX..."
     },
     {
       "Key": "displayHighestsHeader",
@@ -430,7 +430,7 @@
     },
     {
       "Key": "helpTemplate",
-      "Value": "Perintah: \n \n /top <cp/iv> <jumlah> - Menampilkan Pokemon tertinggimu.. \n /all <cp/iv> - Menampilkan semua Pokemon-mu. \n /profile - Menampilkan profilmu. \n /loc - Menampilkan lokasimu. \n /items - Menampilkan barangmu. \n /status - Menampilkan status bot-mu. "
+      "Value": "Perintah: \n \n /top <cp/iv> <jumlah> - Menampilkan Pokemon tertinggimu.. \n /all <cp/iv> - Menampilkan semua Pokemon-mu. \n /profile - Menampilkan profilmu. \n /loc - Menampilkan lokasimu. \n /items - Menampilkan barangmu. \n /status - Menampilkan status bot-mu. \n /pokedex - Menampilkan Pokedex-mu"
     },
     {
       "Key": "statsXpTemplateString",
@@ -466,15 +466,15 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "Mencari Pokemon untuk dibidik dikoordinat: {0}"
+      "Value": "Mencari Pokemon untuk dibidik di koordinat: {0}"
     },
     {
       "Key": "snipeScanEx",
-      "Value": "Membidik {0} Nilai IV: {1} dikoordinat: {2}"
+      "Value": "Membidik {0} Nilai IV: {1} di koordinat: {2}"
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "Tidak ditemukan Pokemon dikoordinat tersebut!"
+      "Value": "Tidak ditemukan Pokemon di koordinat tersebut!"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
