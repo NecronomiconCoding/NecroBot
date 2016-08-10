@@ -450,19 +450,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Regisztrált pokémonok a Pokédexben --- \n"  
+      "Value":  "--- Regisztrált pokémonok a Pokédexben --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Név: {1} | Elfogva: {2} | Látott: {3} \n"  
+      "Value":  "#{0} Név: {1} | Elfogva: {2} | Látott: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Regisztrálatlan pokémonok --- \n"  
+      "Value":  "--- Regisztrálatlan pokémonok --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Név: {1} \n"  
+      "Value":  "#{0} Név: {1} \n"
     }
   ],
   "PokemonStrings": [

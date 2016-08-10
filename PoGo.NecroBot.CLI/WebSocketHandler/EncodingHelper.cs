@@ -1,14 +1,10 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler
 {
-    class EncodingHelper
+    internal class EncodingHelper
     {
         public static string Serialize(dynamic evt)
         {

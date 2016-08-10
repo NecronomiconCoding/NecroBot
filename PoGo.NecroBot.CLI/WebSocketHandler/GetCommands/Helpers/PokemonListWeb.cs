@@ -1,9 +1,4 @@
 ﻿using POGOProtos.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
 {
@@ -23,9 +18,5 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
                 return Logic.PoGoUtils.PokemonInfo.CalculatePokemonPerfection(Base);
             }
         }
-
     }
 }
-
-
-

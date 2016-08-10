@@ -1,15 +1,11 @@
 ﻿using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
 {
-    class GetItemsListHandler : IWebSocketRequestHandler
+    internal class GetItemsListHandler : IWebSocketRequestHandler
     {
         public string Command { get; private set; }
 
@@ -22,6 +18,5 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
         {
             await GetItemListTask.Execute(session, webSocketSession, (string)message.RequestID);
         }
-
     }
 }

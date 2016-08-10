@@ -1,29 +1,26 @@
-﻿using SuperSocket.WebSocket;
+﻿using PoGo.NecroBot.Logic.State;
+using SuperSocket.WebSocket;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using PoGo.NecroBot.Logic.Tasks;
-using System.Reflection;
-using PoGo.NecroBot.Logic.State;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler
 {
-    class WebSocketEventManager
+    internal class WebSocketEventManager
     {
-        Dictionary<string, IWebSocketRequestHandler> _registerdHandlers = new Dictionary<string, IWebSocketRequestHandler>();
-        
+        private Dictionary<string, IWebSocketRequestHandler> _registerdHandlers = new Dictionary<string, IWebSocketRequestHandler>();
+
         public void RegisterHandler(string actionName, IWebSocketRequestHandler action)
-        { 
+        {
             try
             {
-                _registerdHandlers.Add(actionName,action);
+                _registerdHandlers.Add(actionName, action);
             }
             catch
             {
                 // ignore
-            } 
+            }
         }
 
         public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
@@ -36,11 +33,9 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler
             {
                 // Unknown command.
             }
-
-            
         }
 
-        // Registers all IWebSocketRequestHandler's automatically. 
+        // Registers all IWebSocketRequestHandler's automatically.
 
         public static WebSocketEventManager CreateInstance()
         {
@@ -51,7 +46,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler
                 .SelectMany(s => s.GetTypes())
                 .Where(p => type.IsAssignableFrom(p) && p.IsClass);
 
-            foreach(var plugin in types)
+            foreach (var plugin in types)
             {
                 IWebSocketRequestHandler instance = (IWebSocketRequestHandler)Activator.CreateInstance(plugin);
                 manager.RegisterHandler(instance.Command, instance);

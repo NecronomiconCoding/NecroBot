@@ -1,12 +1,12 @@
 #region using directives
 
-using System;
-using System.Text;
 using PoGo.NecroBot.CLI.Models;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
+using System;
+using System.Text;
 
-#endregion
+#endregion using directives
 
 namespace PoGo.NecroBot.CLI
 {
@@ -17,7 +17,7 @@ namespace PoGo.NecroBot.CLI
     {
         private readonly LogLevel _maxLogLevel;
         private ISession _session;
-        
+
         /// <summary>
         /// To create a ConsoleLogger, we must define a maximum log level.
         /// All levels above won't be logged.
@@ -46,7 +46,7 @@ namespace PoGo.NecroBot.CLI
             Console.OutputEncoding = Encoding.UTF8;
             if (level > _maxLogLevel)
                 return;
-            
+
             // ReSharper disable once SwitchStatementMissingSomeCases
             switch (level)
             {
@@ -54,74 +54,92 @@ namespace PoGo.NecroBot.CLI
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Red : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Error}) {message}");
                     break;
+
                 case LogLevel.Warning:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.DarkYellow : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Attention}) {message}");
                     break;
+
                 case LogLevel.Info:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.DarkCyan : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Info}) {message}");
                     break;
+
                 case LogLevel.Pokestop:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Cyan : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Pokestop}) {message}");
                     break;
+
                 case LogLevel.Farming:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Magenta : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Farming}) {message}");
                     break;
+
                 case LogLevel.Sniper:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.White : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Sniper}) {message}");
                     break;
+
                 case LogLevel.Recycling:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.DarkMagenta : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Recycling}) {message}");
                     break;
+
                 case LogLevel.Caught:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Green : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Pkmn}) {message}");
                     break;
+
                 case LogLevel.Flee:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.DarkYellow : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Pkmn}) {message}");
                     break;
+
                 case LogLevel.Transfer:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.DarkGreen : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Transferred}) {message}");
                     break;
+
                 case LogLevel.Evolve:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.DarkGreen : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Evolved}) {message}");
                     break;
+
                 case LogLevel.Berry:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.DarkYellow : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Berry}) {message}");
                     break;
+
                 case LogLevel.Egg:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.DarkYellow : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Egg}) {message}");
                     break;
+
                 case LogLevel.Debug:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Gray : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Debug}) {message}");
                     break;
+
                 case LogLevel.Update:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.White : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Update}) {message}");
                     break;
+
                 case LogLevel.New:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Green : color;
-                    Console.WriteLine( $"[{DateTime.Now.ToString( "HH:mm:ss" )}] ({LoggingStrings.New}) {message}" );
+                    Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.New}) {message}");
                     break;
+
                 case LogLevel.SoftBan:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Red : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.SoftBan}) {message}");
                     break;
+
                 case LogLevel.LevelUp:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Magenta : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Pkmn}) {message}");
                     break;
+
                 default:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.White : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Error}) {message}");

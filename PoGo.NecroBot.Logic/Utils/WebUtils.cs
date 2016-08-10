@@ -51,7 +51,7 @@ namespace PoGo.NecroBot.Logic.Utils
                     "The server returned data in an unknown encoding: " + charsetName,
                     ex);
                     */
-                var a = 1;
+               // var a = 1;
                 return null;
             }
         }

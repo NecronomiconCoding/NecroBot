@@ -1,8 +1,6 @@
 ﻿#region using directives
 
-using System;
-using System.Globalization;
-using System.Threading;
+using PoGo.NecroBot.CLI.Resources;
 using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
@@ -10,12 +8,14 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Tasks;
 using PoGo.NecroBot.Logic.Utils;
+using System;
+using System.Globalization;
 using System.IO;
 using System.Net;
-using PoGo.NecroBot.CLI.Resources;
 using System.Reflection;
+using System.Threading;
 
-#endregion
+#endregion using directives
 
 namespace PoGo.NecroBot.CLI
 {
@@ -29,7 +29,7 @@ namespace PoGo.NecroBot.CLI
         {
             string strCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
 
-            var culture = CultureInfo.CreateSpecificCulture( "en" );
+            var culture = CultureInfo.CreateSpecificCulture("en");
             CultureInfo.DefaultThreadCurrentCulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;
 
@@ -85,7 +85,6 @@ namespace PoGo.NecroBot.CLI
                 catch (Exception) { }
             }
 
-
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
 
             if (boolNeedsSetup)
@@ -110,7 +109,6 @@ namespace PoGo.NecroBot.CLI
                     Console.ReadKey();
                     return;
                 }
-
             }
             ProgressBar.start("NecroBot is starting up", 10);
 
@@ -158,7 +156,7 @@ namespace PoGo.NecroBot.CLI
                 var websocket = new WebSocketInterface(settings.WebSocketPort, session);
                 session.EventDispatcher.EventReceived += evt => websocket.Listen(evt, session);
             }
-            
+
             ProgressBar.fill(70);
 
             machine.SetFailureState(new LoginState());
@@ -174,7 +172,7 @@ namespace PoGo.NecroBot.CLI
             ProgressBar.fill(100);
 
             machine.AsyncStart(new VersionCheckState(), session);
-            
+
             if (settings.UseTelegramAPI)
             {
                 session.Telegram = new Logic.Service.TelegramService(settings.TelegramAPIKey, session);

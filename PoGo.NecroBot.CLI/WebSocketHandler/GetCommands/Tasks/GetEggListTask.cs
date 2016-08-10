@@ -3,17 +3,13 @@ using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Helpers;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
 using SuperSocket.WebSocket;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
 {
-    class GetEggListTask
+    internal class GetEggListTask
     {
-
         public static async Task Execute(ISession session, WebSocketSession webSocketSession, string requestID)
         {
             var incubators = (await session.Inventory.GetEggIncubators())
@@ -26,13 +22,12 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
                 .OrderBy(x => x.EggKmWalkedTarget - x.EggKmWalkedStart)
                 .ToList();
 
-    
-             var list =  new EggListWeb
-             {
-                 Incubators = incubators,
-                 UnusedEggs = unusedEggs
-             };
-            webSocketSession.Send(EncodingHelper.Serialize(new EggListResponce(list,requestID)));
+            var list = new EggListWeb
+            {
+                Incubators = incubators,
+                UnusedEggs = unusedEggs
+            };
+            webSocketSession.Send(EncodingHelper.Serialize(new EggListResponce(list, requestID)));
         }
     }
 }
