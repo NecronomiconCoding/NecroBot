@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
 using PoGo.NecroBot.Logic;
-using System.Windows;
 using PokemonGo.RocketAPI.Enums;
 
 namespace PoGo.NecroBot.ConfigUI.Models

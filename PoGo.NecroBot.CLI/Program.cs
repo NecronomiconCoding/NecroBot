@@ -2,7 +2,11 @@
 
 using System;
 using System.Globalization;
+using System.IO;
+using System.Net;
+using System.Reflection;
 using System.Threading;
+using PoGo.NecroBot.CLI.Resources;
 using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
@@ -10,10 +14,6 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Tasks;
 using PoGo.NecroBot.Logic.Utils;
-using System.IO;
-using System.Net;
-using PoGo.NecroBot.CLI.Resources;
-using System.Reflection;
 
 #endregion
 

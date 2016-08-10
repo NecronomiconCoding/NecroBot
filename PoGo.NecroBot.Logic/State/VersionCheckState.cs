@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
@@ -13,7 +14,6 @@ using Newtonsoft.Json.Linq;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
-using System.Collections.Generic;
 using PoGo.NecroBot.Logic.Utils;
 
 #endregion
