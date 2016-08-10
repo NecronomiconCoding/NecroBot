@@ -23,6 +23,9 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static int TimesZeroXPawarded;
         private static int storeRI;
+        private static double fromLocX = 0;
+        private static double fromLocY = 0;
+
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -83,10 +86,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.LogicSettings.WalkingSpeedInKilometerPerHour,
                     async () =>
                     {
-                        // Catch normal map Pokemon
-                        await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
-                        //Catch Incense Pokemon
-                        await CatchIncensePokemonsTask.Execute(session, cancellationToken);
+                        if (fromLocX == 0 || (LocationUtils.CalculateDistanceInMeters(fromLocX, fromLocY, session.Client.CurrentLatitude, session.Client.CurrentAltitude) >= 50))
+                        {
+                            // Catch normal map Pokemon if walked > 50m
+                            fromLocX = session.Client.CurrentLatitude;
+                            fromLocY = session.Client.CurrentAltitude; // reset last pokemon check
+                            await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
+                            //Catch Incense Pokemon
+                            await CatchIncensePokemonsTask.Execute(session, cancellationToken);
+                        }
+
                         return true;
                     }, cancellationToken, session.LogicSettings.DisableHumanWalking);
 
