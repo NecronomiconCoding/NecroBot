@@ -446,15 +446,15 @@
     },
     {
       "Key": "googleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "Los servidores de Google servers parecen caídos. Por favor, sea paciente e intente utilizar el bot más tarde."
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Es necesario rellenar GoogleUsername y GooglePassword en auth.json"
+      "Value": "Es necesario rellenar GoogleUsername y GooglePassword en auth.json para utilizar el bot"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Es necesario rellenar PtcUsername y PtcPassword en auth.json"
+      "Value": "Es necesario rellenar PtcUsername y PtcPassword en auth.json para utilizar el bot"
     },
     {
       "Key": "snipeScan",
