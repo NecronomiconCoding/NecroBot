@@ -6,6 +6,7 @@ using PoGo.NecroBot.ConfigUI.Models;
 using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Enums;
+using Xceed.Wpf.Toolkit;
 
 namespace PoGo.NecroBot.ConfigUI
 {

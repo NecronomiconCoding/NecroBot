@@ -817,8 +817,8 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.AutoUpdate = set.AutoUpdate;
             res.TransferConfigAndAuthOnUpdate = set.TransferConfigAndAuthOnUpdate;
             res.DisableHumanWalking = set.DisableHumanWalking;
-            res.Latitude = set.DefaultLatitude;
-            res.Longitude = set.DefaultLongitude;
+            res.DefaultLatitude = set.DefaultLatitude;
+            res.DefaultLongitude = set.DefaultLongitude;
             res.MaxTravelDistanceInMeters = set.MaxTravelDistanceInMeters;
             res.WalkingSpeedInKilometerPerHour = set.WalkingSpeedInKilometerPerHour;
             res.MaxSpawnLocationOffset = set.MaxSpawnLocationOffset;
