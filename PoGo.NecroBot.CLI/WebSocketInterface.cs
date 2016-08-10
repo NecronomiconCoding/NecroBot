@@ -1,5 +1,7 @@
 ﻿#region using directives
 
+using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PoGo.NecroBot.CLI.WebSocketHandler;
@@ -11,8 +13,6 @@ using PoGo.NecroBot.Logic.Tasks;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Config;
 using SuperSocket.WebSocket;
-using System;
-using System.Collections.Generic;
 
 #endregion using directives
 

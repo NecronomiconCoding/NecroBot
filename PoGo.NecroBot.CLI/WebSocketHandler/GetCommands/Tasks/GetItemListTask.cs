@@ -1,4 +1,5 @@
-﻿using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events;
+﻿using System.Threading.Tasks;
+using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
 using System.Threading.Tasks;

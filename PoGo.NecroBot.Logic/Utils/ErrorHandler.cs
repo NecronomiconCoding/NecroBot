@@ -1,11 +1,7 @@
-﻿using PoGo.NecroBot.Logic.Logging;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Logging;
 
 namespace PoGo.NecroBot.Logic.Utils
 {

@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using PoGo.NecroBot.CLI.Resources;
+using PoGo.NecroBot.CLI.Resources;
 using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
