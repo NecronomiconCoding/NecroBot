@@ -65,15 +65,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                 : await session.Inventory.GetHighestsCp(1000);
             if (session.LogicSettings.DumpPokemonStats)
             {
-                const string dumpFileName = "PokeBagStats";
+                string dumpFileName = "PokemonStats-" + session.Profile.PlayerData.Username;
                 try
                 {
                     Dumper.ClearDumpFile(session, dumpFileName);
-                    Dumper.Dump(session, "pokemonid,pokemonlevel,cp,perfection,stamina,staminamax,move1,move2,candy,ownername,origin,heightm,weightkg,individualattack,individualdefense,individualstamina,cpmultiplier,battlesattacked,battlesdefended,creationtimems,numupgrades,additionalcpmultiplier,favorite,nickname", dumpFileName);
+                    string[] dumpColumns = new string[] { "Pokemon ID", "Pokemon Level", "CP", "Perfection", "Stamina", "Stamina Max.", "Move 1", "Move 2", "Candy", "Owner Name", "Origin", "Height (m)", "Weight (kg)", "Individual Attack", "Individual Defense", "Individual Stamina", "CP Multiplier", "Battles Attacked", "Battles Defended", "Creation Time (ms)", "Upgrade Count", "Additional CP Multiplier", "Favorited", "Nickname"};
+                    Dumper.Dump(session, string.Join(session.LogicSettings.DumpSeperator, dumpColumns), dumpFileName);
                     foreach (var pokemon in allPokemonInBag)
                     {
+                        string[] dumpRow = new string[] { session.Translation.GetPokemonTranslation(pokemon.PokemonId), PokemonInfo.GetLevel(pokemon).ToString(), pokemon.Cp.ToString(), PokemonInfo.CalculatePokemonPerfection(pokemon).ToString().Replace(",","."), pokemon.Stamina.ToString(), pokemon.StaminaMax.ToString(), pokemon.Move1.ToString(), pokemon.Move2.ToString(), PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings).ToString(), pokemon.OwnerName.ToString(), pokemon.Origin.ToString(), pokemon.HeightM.ToString().Replace(",", "."), pokemon.WeightKg.ToString().Replace(",", "."), pokemon.IndividualAttack.ToString(), pokemon.IndividualDefense.ToString(), pokemon.IndividualStamina.ToString(), pokemon.CpMultiplier.ToString().Replace(",", "."), pokemon.BattlesAttacked.ToString(), pokemon.BattlesDefended.ToString(), pokemon.CreationTimeMs.ToString(), pokemon.NumUpgrades.ToString(), pokemon.AdditionalCpMultiplier.ToString(), Convert.ToBoolean(pokemon.Favorite).ToString(), pokemon.Nickname.ToString() == "" ? "-" : pokemon.Nickname.ToString() };
                         Dumper.Dump(session,
-                            $"{session.Translation.GetPokemonTranslation(pokemon.PokemonId)},{PokemonInfo.GetLevel(pokemon)},{pokemon.Cp},{PokemonInfo.CalculatePokemonPerfection(pokemon)},{pokemon.Stamina},{pokemon.StaminaMax},{pokemon.Move1},{pokemon.Move2},{PokemonInfo.GetCandy(pokemon, myPokemonFamilies, myPokeSettings)},{pokemon.OwnerName},{pokemon.Origin},{pokemon.HeightM},{pokemon.WeightKg},{pokemon.IndividualAttack},{pokemon.IndividualDefense},{pokemon.IndividualStamina},{pokemon.CpMultiplier},{pokemon.BattlesAttacked},{pokemon.BattlesDefended},{pokemon.CreationTimeMs},{pokemon.NumUpgrades},{pokemon.AdditionalCpMultiplier},{pokemon.Favorite},{pokemon.Nickname}",
+                            $"{string.Join(session.LogicSettings.DumpSeperator, dumpRow)}",
                             dumpFileName);
                     }
                 }
