@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:PoGo.NecroBot.ConfigUI"
         xmlns:util="clr-namespace:PoGo.NecroBot.ConfigUI.Utils"
         xmlns:rapi="clr-namespace:PokemonGo.RocketAPI.Enums;assembly=Pokemon.Go.Rocket.API"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         Title="{DynamicResource AppTitle}" Height="600" Width="800">
     <Window.Resources>
         <ResourceDictionary>
@@ -19,9 +20,9 @@
     <DockPanel>
 
         <UniformGrid DockPanel.Dock="Bottom" Rows="1" Columns="3">
-            <Button Margin="15" Padding="0,8" Click="DefaultsButton_Click">Defaults</Button>
-            <Button Margin="15" Padding="0,8" Click="ReloadButton_Click">Reload</Button>
-            <Button Margin="15" Padding="0,8" Click="SaveButton_Click">Save</Button>
+            <Button Margin="15" Padding="0,8" Click="DefaultsButton_Click" Content="Defaults"/>
+            <Button Margin="15" Padding="0,8" Click="ReloadButton_Click" Content="Reload"/>
+            <Button Margin="15" Padding="0,8" Click="SaveButton_Click" Content="Save"/>
         </UniformGrid>
 
         <TabControl>
@@ -32,39 +33,40 @@
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <CheckBox Content="Auto Update on Launch" IsChecked="{Binding Settings.AutoUpdate}" ToolTip="If checked, this will auto update NecroBot whenever it is started if there is an update available" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <CheckBox Content="Transfer Configs on Update" IsChecked="{Binding Settings.TransferConfigAndAuthOnUpdate}" ToolTip="QED" />
+                        <StackPanel Visibility="{Binding Settings.AutoUpdate, Converter={StaticResource VisConv}}" Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <CheckBox Content="Transfer Configs on Update" IsChecked="{Binding Settings.TransferConfigAndAuthOnUpdate}" ToolTip="QED" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <CheckBox Content="Disable Human Walking" IsChecked="{Binding Settings.DisableHumanWalking}" ToolTip="Emulate realistic human walking from stop to stop - WARNING: Disabling this could result in getting flagged or banned!" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Default Latitude" ToolTip="The default Latitude to use, if no LastPos.ini file is found will use these by default" />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.Latitude}" />
+                            <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" FormatString="F6" Value="{Binding Settings.DefaultLatitude}" Increment="0.0001" Maximum="90" Minimum="-90" ToolTip="The default Latitude to use, if no LastPos.ini file is found will use these by default"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <Label Style="{StaticResource LineItemLabel}" Content="Default Longitude" ToolTip="The default Longitude to use" />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.Longitude}" />
+                            <Label Style="{StaticResource LineItemLabel}" Content="Default Longitude" ToolTip="The default Longitude to use." />
+                            <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" FormatString="F6" Value="{Binding Settings.DefaultLongitude}" Increment="0.0001" Maximum="180" Minimum="-180" ToolTip="The default Longitude to use."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <Label Style="{StaticResource LineItemLabel}" Content="Max Travel Distance in Meters" ToolTip="The maximum distance in meters the bot will travel from the Lat/Lon being used. 1000 meters = 1 kilometer, 1600 meters = 1 mile" />
-                            <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.MaxTravelDistanceInMeters}" />
+                            <Label Style="{StaticResource LineItemLabel}" Content="Max Travel Distance in Meters" ToolTip="The maximum distance in meters the bot will travel from the Lat/Lon being used (1000 meters = 1 kilometer, 1600 meters = 1 mile)." />
+                            <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.MaxTravelDistanceInMeters}" Maximum="9999" Minimum="0" ToolTip="The maximum distance in meters the bot will travel from the Lat/Lon being used (1000 meters = 1 kilometer, 1600 meters = 1 mile)."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <Label Style="{StaticResource LineItemLabel}" Content="Walking Speed (in KPH)" ToolTip="How fast your character will move from point to point. For best safety we recommend keeping this at 15 or below. Decimals are allowed." />
-                            <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.WalkingSpeedInKilometerPerHour}" />
+                            <Label Style="{StaticResource LineItemLabel}" Content="Walking Speed (in KPH)" ToolTip="How fast your character will move from point to point. For best safety we recommend keeping this at 15 or below." />
+                            <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" FormatString="F2" Value="{Binding Settings.WalkingSpeedInKilometerPerHour}" Increment="0.5" Maximum="999.99" Minimum="0.00" ToolTip="How fast your character will move from point to point. For best safety we recommend keeping this at 15 or below."/>
+
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <Label Style="{StaticResource LineItemLabel}" Content="Max Spawn Location Offset" ToolTip="QED. Integer value." />
-                            <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.MaxSpawnLocationOffset}" />
+                            <Label Style="{StaticResource LineItemLabel}" Content="Max Spawn Location Offset" ToolTip="QED." />
+                            <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.MaxSpawnLocationOffset}" Maximum="100" Minimum="1" ToolTip="QED."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Delay Between Player Actions (ms)" ToolTip="How long to pause between player actions in milliseconds (1000 ms = 1 second). Integer value." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DelayBetweenPlayerActions}" />
+                            <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.DelayBetweenPlayerActions}" Maximum="999999" Minimum="0" ToolTip="How long to pause between player actions in milliseconds in milliseconds (1000 ms = 1 second)."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Delay Between Pokemon Catch (ms)" ToolTip="How long to pause between Pokemon captures in milliseconds (1000 ms = 1 second). Integer value." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DelayBetweenPokemonCatch}" />
+                            <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.DelayBetweenPokemonCatch}" Maximum="999999" Minimum="0" ToolTip="How long to pause between Pokemon captures in milliseconds (1000 ms = 1 second)."/>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -75,7 +77,7 @@
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Auth Type" ToolTip="Google and Pokemon Trainer's Club (ptc) are the currently supported login methods." />
-                            <ComboBox ItemsSource="{Binding Source={x:Type rapi:AuthType}, Converter={StaticResource EnumToArrayConv}}" SelectedItem="{Binding Settings.AuthType}" SelectionChanged="AuthType_Changed" />
+                            <ComboBox ItemsSource="{Binding Converter={StaticResource EnumToArrayConv}, Source={x:Type rapi:AuthType}}" SelectedItem="{Binding Settings.AuthType}" SelectionChanged="AuthType_Changed" />
                             <!-- ItemsSource="{Binding Source={util:EnumValues{x:Type rapi:AuthType}}}" -->
                         </StackPanel>
                         <StackPanel Visibility="{Binding IsGoogleAuthShowing, Converter={StaticResource VisConv}}">
@@ -108,7 +110,7 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Proxy Port" ToolTip="QED." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseProxyPort}" />
+                                <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.UseProxyPort}" Maximum="65535" Minimum="1" ToolTip="QED."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <CheckBox Content="Enable Proxy Authentication" IsChecked="{Binding Settings.UseProxyAuthentication}" ToolTip="If your proxy requires authentication, check this box." />
@@ -132,7 +134,7 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
                     <StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <TextBlock Padding="3,3,24,3" TextWrapping="Wrap" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}}"
+                            <TextBlock Padding="3,3,24,3" TextWrapping="Wrap" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType={x:Type ScrollViewer}, Mode=FindAncestor}}"
                                 Text="We provide a number of preconfigured device packages to emulate real world devices and improve your security. If you plan to use this account on your real Android device we recommend selecting custom and entering your own actual device values. We do not offer Apple product options as the API library we use always appears to be Android on Niantic's side, hence the Android-only options here." />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
@@ -204,27 +206,27 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Recycle Inventory at %" ToolTip="When your inventory reaches this pewrcentage of capacity, start a recycle of spare items." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.RecycleInventoryAtUsagePercentage}" />
+                            <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" Value="{Binding Settings.RecycleInventoryAtUsagePercentage}" FormatString="F2" Increment=".5" Maximum="100.00" Minimum="0.00" ToolTip="When your inventory reaches this pewrcentage of capacity, start a recycle of spare items."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Total Balls to Keep" ToolTip="Total number of all types of Pokeballs to keep - balls of lowest quality get recycled first." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfPokeballsToKeep}" />
+                            <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.TotalAmountOfPokeballsToKeep}" Maximum="999" Minimum="0" ToolTip="Total number of all types of Pokeballs to keep - balls of lowest quality get recycled first."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Total Potions to Keep" ToolTip="Total number of all types of Potions to keep - potions of lowest quality get recycled first." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfPotionsToKeep}" />
+                            <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.TotalAmountOfPotionsToKeep}" Maximum="999" Minimum="0" ToolTip="Total number of all types of Potions to keep - potions of lowest quality get recycled first."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Total Revives to Keep" ToolTip="Maintains this many Revives during recycle phase." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfRevivesToKeep}" />
+                            <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.TotalAmountOfRevivesToKeep}" Maximum="999" Minimum="0" ToolTip="Maintains this many Revives during recycle phase."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Total Berries to Keep" ToolTip="Maintains this many Berries during recycle phase." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalAmountOfBerriesToKeep}" />
+                            <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.TotalAmountOfBerriesToKeep}" Maximum="999" Minimum="0" ToolTip="Maintains this many Berries during recycle phase."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Total Items Being Kept" ToolTip="This is how many total items you are asking NecroBot to keep during recycle." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TotalItemsBeingKept}" IsReadOnly="True" />
+                            <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.TotalItemsBeingKept}" Maximum="999" Minimum="0" ToolTip="This is how many total items you are asking NecroBot to keep during recycle."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <CheckBox Content="Use Egg Incubators" IsChecked="{Binding Settings.UseEggIncubators}" ToolTip="If checked, egg incubation will be automated." />
@@ -233,11 +235,11 @@
                             <CheckBox Content="Use Lucky Eggs Constantly" IsChecked="{Binding Settings.UseLuckyEggConstantly}" ToolTip="QED." />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <Label Style="{StaticResource LineItemLabel}" Content="Use Lucky Eggs Min Pokemon" ToolTip="QED." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseLuckyEggsMinPokemonAmount}" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <CheckBox Content="Use Lucky Eggs While Evolving" IsChecked="{Binding Settings.UseLuckyEggsWhileEvolving}" ToolTip="If checked, will use a Lucky Egg prior to doing evolves for boosted XP." />
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding Settings.UseLuckyEggsWhileEvolving, Converter={StaticResource VisConv}}" Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="While Evolving Min Pokemon" ToolTip="QED." />
+                            <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.UseLuckyEggsMinPokemonAmount}" Maximum="999" Minimum="0" ToolTip="QED."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <CheckBox Content="Use Incense Constantly" IsChecked="{Binding Settings.UseIncenseConstantly}" ToolTip="If checked, will always use incense if any are available in inventory." />
@@ -267,11 +269,11 @@
                         <StackPanel Visibility="{Binding Settings.AutomaticallyLevelUpPokemon, Converter={StaticResource VisConv}}">
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Amount Of Times To Upgrade Loop" ToolTip="QED." />
-                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.AmountOfTimesToUpgradeLoop}" />
+                                <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.AmountOfTimesToUpgradeLoop}" Maximum="100" Minimum="0" ToolTip="QED."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Minimum Stardust Reserve for Upgrade" ToolTip="If you have less stardust than this, upgrades will not be performed." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.GetMinStarDustForLevelUp}" />
+                                <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.GetMinStarDustForLevelUp}" Maximum="999999" Minimum="0" ToolTip="If you have less stardust than this, upgrades will not be performed."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Upgrade by CP or IV%" ToolTip="Should the CP or IV% of Pokemon be used as the upgrade priority?" />
@@ -279,11 +281,11 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Pokemon Above CP" ToolTip="QED." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UpgradePokemonCpMinimum}" />
+                                <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.UpgradePokemonCpMinimum}" Maximum="9999" Minimum="0" ToolTip="QED."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Pokemon Above IV%" ToolTip="QED." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UpgradePokemonIvMinimum}" />
+                                <xctk:SingleUpDown Style="{StaticResource SingleUpDownMd}" Value="{Binding Settings.UpgradePokemonIvMinimum}" FormatString="F2" Increment=".5" Maximum="100.00" Minimum="0.00" ToolTip="QED."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Stats Operator" ToolTip="AND means the Pokemon must meet both IV% and CP requirements - OR means either." />
@@ -294,15 +296,15 @@
                             <CheckBox Content="Evolve All Pokemon Above IV%" IsChecked="{Binding Settings.EvolveAllPokemonAboveIv}" ToolTip="QED." />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}" Visibility="{Binding Settings.EvolveAllPokemonAboveIv, Converter={StaticResource VisConv}}">
-                            <Label Style="{StaticResource LineItemLabel}" Content="Evolve Above IV%" ToolTip="Decimals allowed." />
-                            <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.EvolveAboveIvValue}" />
+                            <Label Style="{StaticResource LineItemLabel}" Content="Evolve Above IV%" ToolTip="QED." />
+                            <xctk:SingleUpDown Style="{StaticResource SingleUpDownMd}" Value="{Binding Settings.EvolveAboveIvValue}" FormatString="F2" Increment=".5" Maximum="100.00" Minimum="0.00" ToolTip="QED."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <CheckBox Content="Evolve All Pokemon with Enough Candy" IsChecked="{Binding Settings.EvolveAllPokemonWithEnoughCandy}" ToolTip="QED." />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <Label Style="{StaticResource LineItemLabel}" Content="Evolve Pokemon at Storage Usage %" ToolTip="Decimals allowed." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.EvolveKeptPokemonsAtStorageUsagePercentage}" />
+                            <Label Style="{StaticResource LineItemLabel}" Content="Evolve Pokemon at Storage Usage %" ToolTip="QED." />
+                            <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" Value="{Binding Settings.EvolveKeptPokemonsAtStorageUsagePercentage}" FormatString="F2" Increment=".5" Maximum="100.00" Minimum="0.00" ToolTip="QED."/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <CheckBox Content="Keep Pokemon which Can Evolve" IsChecked="{Binding Settings.KeepPokemonsThatCanEvolve}" ToolTip="QED." />
@@ -311,8 +313,8 @@
                             <CheckBox Content="Auto-Favorite Pokemon" IsChecked="{Binding Settings.AutoFavoritePokemon}" ToolTip="QED." />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}" Visibility="{Binding Settings.AutoFavoritePokemon, Converter={StaticResource VisConv}}">
-                            <Label Style="{StaticResource LineItemLabel}" Content="Favorite Pokemon above IV%" ToolTip="If the IV of a Pokemon is at or above this % it will be favorited and not transfered. Decimals allowed." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.FavoriteMinIvPercentage}" />
+                            <Label Style="{StaticResource LineItemLabel}" Content="Favorite Pokemon above IV%" ToolTip="If the IV of a Pokemon is at or above this % it will be favorited and not transfered." />
+                            <xctk:SingleUpDown Style="{StaticResource SingleUpDownMd}" Value="{Binding Settings.FavoriteMinIvPercentage}" FormatString="F2" Increment=".5" Maximum="100.00" Minimum="0.00" ToolTip="If the IV of a Pokemon is at or above this % it will be favorited and not transfered."/>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -330,55 +332,55 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Max Balls Per Pokemon" ToolTip="Sets the limit of balls to throw at a single Pokemon before giving up." />
-                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.MaxPokeballsPerPokemon}" />
+                                <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.MaxPokeballsPerPokemon}" Maximum="999" Minimum="0" ToolTip="Sets the limit of balls to throw at a single Pokemon before giving up."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Max Berries Per Pokemon" ToolTip="Sets the limit on how many berries to use in a single encounter." />
-                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.MaxBerriesToUsePerPokemon}" />
+                                <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.MaxBerriesToUsePerPokemon}" Maximum="999" Minimum="0" ToolTip="Sets the limit on how many berries to use in a single encounter."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Use Great Ball Above CP" ToolTip="When Pokemon above this CP level are found, a Great Ball will be used for throws." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseGreatBallAboveCp}" />
+                                <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.UseGreatBallAboveCp}" Maximum="9999" Minimum="0" ToolTip="When Pokemon above this CP level are found, a Great Ball will be used for throws."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Use Ultra Ball Above CP" ToolTip="When Pokemon above this CP level are found, an Ultra Ball will be used for throws." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseUltraBallAboveCp}" />
+                                <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.UseUltraBallAboveCp}" Maximum="9999" Minimum="0" ToolTip="When Pokemon above this CP level are found, an Ultra Ball will be used for throws."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Use Master Ball Above CP" ToolTip="When Pokemon above this CP level are found, a Master Ball will be used for throws." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseMasterBallAboveCp}" />
+                                <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.UseMasterBallAboveCp}" Maximum="9999" Minimum="0" ToolTip="When Pokemon above this CP level are found, a Master Ball will be used for throws."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Use Great Ball Above IV%" ToolTip="When Pokemon above this IV% are found, a Great Ball will be used for throws." />
-                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseGreatBallAboveIv}" />
+                                <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" Value="{Binding Settings.UseGreatBallAboveIv}" FormatString="F2" Increment=".5" Maximum="100.00" Minimum="0.00" ToolTip="When Pokemon above this IV% are found, a Great Ball will be used for throws."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Use Ultra Ball Above IV%" ToolTip="When Pokemon above this IV% are found, an Ultra Ball will be used for throws." />
-                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseUltraBallAboveIv}" />
+                                <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" Value="{Binding Settings.UseUltraBallAboveIv}" FormatString="F2" Increment=".5" Maximum="100.00" Minimum="0.00" ToolTip="When Pokemon above this IV% are found, an Ultra Ball will be used for throws."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Use Great Ball Below % Probability" ToolTip="QED." />
-                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseGreatBallBelowCatchProbability}" />
+                                <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" Value="{Binding Settings.UseGreatBallBelowCatchProbability}" FormatString="P2" Increment=".005" Maximum="1" Minimum="0" ToolTip="QED."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Use Ultra Ball Below % Probability" ToolTip="QED." />
-                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseUltraBallBelowCatchProbability}" />
+                                <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" Value="{Binding Settings.UseUltraBallBelowCatchProbability}" FormatString="P2" Increment=".005" Maximum="1" Minimum="0" ToolTip="QED."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Use Master Ball Below % Probability" ToolTip="QED." />
-                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseMasterBallBelowCatchProbability}" />
+                                <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" Value="{Binding Settings.UseMasterBallBelowCatchProbability}" FormatString="P2" Increment=".005" Maximum="1" Minimum="0" ToolTip="QED."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Use Berries when Above CP" ToolTip="Use berries on Pokemon at or above this CP level." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UseBerriesMinCp}" />
+                                <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.UseBerriesMinCp}" Maximum="9999" Minimum="0" ToolTip="Use berries on Pokemon at or above this CP level."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Use Berries when Above IV%" ToolTip="Use berries on Pokemon at or above this IV%." />
-                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseBerriesMinIv}" />
+                                <xctk:SingleUpDown Style="{StaticResource SingleUpDownMd}" Value="{Binding Settings.UseBerriesMinIv}" Increment="0.5" Maximum="100" Minimum="0" ToolTip="Use berries on Pokemon at or above this IV%."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Use Berries Below % Probability" ToolTip="QED." />
-                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UseBerriesBelowCatchProbability}" />
+                                <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" Value="{Binding Settings.UseBerriesBelowCatchProbability}" FormatString="P2" Increment=".005" Maximum="1" Minimum="0" ToolTip="QED."/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content=" Operator" ToolTip="AND means the Pokemon must meet both IV% and CP requirements - OR means either." />
@@ -390,39 +392,39 @@
                             <StackPanel Visibility="{Binding Settings.EnableHumanizedThrows, Converter={StaticResource VisConv}}">
                                 <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                     <Label Style="{StaticResource LineItemLabel}" Content="Nice Throw % Chance" ToolTip="QED." />
-                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.NiceThrowChance}" />
+                                    <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.NiceThrowChance}" Maximum="100" Minimum="0" ToolTip="QED."/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                     <Label Style="{StaticResource LineItemLabel}" Content="Great Throw % Chance" ToolTip="QED." />
-                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.GreatThrowChance}" />
+                                    <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.GreatThrowChance}" Maximum="100" Minimum="0" ToolTip="QED."/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                     <Label Style="{StaticResource LineItemLabel}" Content="Excellent Throw % Chance" ToolTip="QED." />
-                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.ExcellentThrowChance}" />
+                                    <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.ExcellentThrowChance}" Maximum="100" Minimum="0" ToolTip="QED."/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                     <Label Style="{StaticResource LineItemLabel}" Content="Computed Normal Throw % Chance" ToolTip="QED." />
-                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.NormalThrowChance}" IsReadOnly="True" />
+                                    <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" IsReadOnly ="true" Value="{Binding Settings.NormalThrowChance}" Maximum="100" Minimum="0" ToolTip="QED."/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                     <Label Style="{StaticResource LineItemLabel}" Content="Curve Throw % Chance" ToolTip="CurveBalls are a throw add-on and separate from quality, setting this too high may get you flagged." />
-                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.CurveThrowChance}" />
+                                    <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.CurveThrowChance}" Maximum="100" Minimum="0" ToolTip="CurveBalls are a throw add-on and separate from quality, setting this too high may get you flagged."/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                     <Label Style="{StaticResource LineItemLabel}" Content="Force Great Throw Over IV%" ToolTip="QED." />
-                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.ForceGreatThrowOverIv}" />
+                                    <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" Value="{Binding Settings.ForceGreatThrowOverIv}" FormatString="F2" Increment=".5" Maximum="100.00" Minimum="0.00" ToolTip="QED."/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                     <Label Style="{StaticResource LineItemLabel}" Content="Force Excellent Throw Over IV%" ToolTip="QED." />
-                                    <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.ForceExcellentThrowOverIv}" />
+                                    <xctk:DoubleUpDown Style="{StaticResource DoubleUpDownMd}" Value="{Binding Settings.ForceExcellentThrowOverIv}" FormatString="F2" Increment=".5" Maximum="100.00" Minimum="0.00" ToolTip="QED."/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                     <Label Style="{StaticResource LineItemLabel}" Content="Force Great Throw Over CP" ToolTip="QED." />
-                                    <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.ForceGreatThrowOverCp}" />
+                                    <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.ForceGreatThrowOverCp}" Maximum="9999" Minimum="0" ToolTip="QED."/>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                     <Label Style="{StaticResource LineItemLabel}" Content="Force Excellent Throw Over CP" ToolTip="QED." />
-                                    <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.ForceExcellentThrowOverCp}" />
+                                    <xctk:IntegerUpDown Style="{StaticResource IntegerUpDownMd}" Value="{Binding Settings.ForceExcellentThrowOverCp}" Maximum="9999" Minimum="0" ToolTip="QED."/>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
