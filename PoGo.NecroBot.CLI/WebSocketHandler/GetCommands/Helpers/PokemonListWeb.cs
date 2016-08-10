@@ -18,9 +18,5 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
                 return Logic.PoGoUtils.PokemonInfo.CalculatePokemonPerfection(Base);
             }
         }
-
     }
 }
-
-
-

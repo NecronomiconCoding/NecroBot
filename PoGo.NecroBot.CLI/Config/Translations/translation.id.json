@@ -501,6 +501,14 @@
       "Value": "Tidak ada telur yang tersedia"
     },
     {
+      "Key": "usageHelp",
+       "Value": "Invalid command arguments! \n Correct usage: \n {0}"
+    },
+    {
+      "Key": "useLuckyEggIsFalse",
+       "Value": "EvolveWhenLuckyEggsMinMet requires UseLuckyEggWhileEvolving to be set to true!"
+    },
+    {
       "Key": "useLuckyEggActive",
       "Value": "Lucky Egg sudah aktif"
     },
@@ -646,19 +654,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Tertangkap di Pokedex  --- \n"  
+      "Value":  "--- Tertangkap di Pokedex  --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Nama: {1} | Tertangkap: {2} | Ditemukan: {3} \n"  
+      "Value":  "#{0} Nama: {1} | Tertangkap: {2} | Ditemukan: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Dibutuhkan di Pokedex --- \n"  
+      "Value":  "--- Dibutuhkan di Pokedex --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Nama: {1} \n"  
+      "Value":  "#{0} Nama: {1} \n"
     }
   ],
 	"PokemonStrings": [
