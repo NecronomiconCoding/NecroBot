@@ -75,6 +75,7 @@ namespace PoGo.NecroBot.Logic
         bool CatchPokemon { get; }
         bool TransferWeakPokemon { get; }
         bool DisableHumanWalking { get; }
+        bool CheckForUpdates { get; }
         bool AutoUpdate { get; }
         bool TransferConfigAndAuthOnUpdate { get; }
         float KeepMinIvPercentage { get; }

@@ -17,27 +17,8 @@
       "Value": "MasterBall"
     },
     {
-      "Key": "loginInvalid",
-      "Value": "Les credencials d'usuari són invàlides i el login ha fallat."
-    },
-    {
-      "Key": "loggedInTelegram",
-      "Value":  "You have been logged in sucessfully. Session is valid for 5 Minutes"
-    },
-    {
-      "Key": "loginFailedTelegram",
-      "Value":  "Wrong password entered! \n Use /login [Password]"
-    },
-    {
-      "Key": "NotLoggedInTelegram",
-      "Value":  "You are not logged in, \n use /login [Password]"
-    },
-    {
-      "Key": "LoginRemainingTime",
-      "Value":  "You are already logged in! \n Session valid for: ({0}:{1} seconds)"
-    },
-    {
-      "Key": "wrongAuthType",      "Value": "Неизвестный AuthType в config.json"
+      "Key": "wrongAuthType",
+      "Value": "Неизвестный AuthType в config.json"
     },
     {
       "Key": "loginInvalid",
@@ -532,14 +513,6 @@
       "Value": "Нет доступных яиц"
     },
     {
-      "Key": "usageHelp",
-       "Value": "Invalid command arguments! \n Correct usage: \n {0}"
-    },
-    {
-      "Key": "useLuckyEggIsFalse",
-       "Value": "EvolveWhenLuckyEggsMinMet requires UseLuckyEggWhileEvolving to be set to true!"
-    },
-    {
       "Key": "useLuckyEggActive",
       "Value": "Lucky Egg уже активно"
     },
@@ -660,20 +633,12 @@
       "Value": "[ОШИБКА] пожалуйста, введите значение, например: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Пожалуйста, введите широту (Щелкните правой кнопкой мыши, чтобы вставить)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Принята широта: {0}"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Пожалуйста, введите долготу (Щелкните правой кнопкой мыши, чтобы вставить)"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Принята долгота: {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
@@ -681,19 +646,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"
+      "Value":  "--- Pokedex catched --- \n"  
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"
+      "Value":  "--- Pokedex needed --- \n"  
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
 	"PokemonStrings": [

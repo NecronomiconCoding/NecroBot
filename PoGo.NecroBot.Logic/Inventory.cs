@@ -84,7 +84,7 @@ namespace PoGo.NecroBot.Logic
         }
 
 
-        public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer(
+        public async Task<IEnumerable<PokemonData>> GetDuplicatePokemonToTransfer( 
                 IEnumerable<PokemonId> pokemonsNotToTransfer, IEnumerable<PokemonId> pokemonsToEvolve,
                 bool keepPokemonsThatCanEvolve = false, bool prioritizeIVoverCp = false
              )
@@ -108,8 +108,8 @@ namespace PoGo.NecroBot.Logic
                                                 pokemonTransferFilter.MovesOperator.InverseBool(pokemonTransferFilter.Moves.Count > 0),
                                                 pokemonTransferFilter.Moves.Any(moveset =>
                                                     pokemonTransferFilter.MovesOperator.ReverseBoolFunc(
-                                                        pokemonTransferFilter.MovesOperator.InverseBool(moveset.Count > 0),
-                                                        moveset.Intersect(new[] { p.Move1, p.Move2 }).Count() == Math.Max(Math.Min(moveset.Count, 2), 0)))),
+                                                        pokemonTransferFilter.MovesOperator.InverseBool(moveset.Count > 0), 
+                                                        moveset.Intersect(new[] { p.Move1, p.Move2 }).Count() == Math.Max(Math.Min(moveset.Count, 2),0)))),
                                         pokemonTransferFilter.KeepMinOperator.BoolFunc(
                                             p.Cp >= pokemonTransferFilter.KeepMinCp,
                                             PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage,
@@ -506,10 +506,8 @@ namespace PoGo.NecroBot.Logic
                 _logicSettings.KeepMinOperator, _logicSettings.KeepMinDuplicatePokemon);
         }
 
-        public async Task<GetInventoryResponse> RefreshCachedInventory(int retries = 0)
+        public async Task<GetInventoryResponse> RefreshCachedInventory(int retries=0)
         {
-            if (retries > 3) return null;
-
             var now = DateTime.UtcNow;
             var ss = new SemaphoreSlim(10);
 
@@ -519,12 +517,6 @@ namespace PoGo.NecroBot.Logic
                 _lastRefresh = now;
                 _cachedInventory = await _client.Inventory.GetInventory();
                 return _cachedInventory;
-            }
-            catch (NullReferenceException)
-            {
-                ss.Release();
-                DelayingUtils.Delay(3000, 3000);
-                return await RefreshCachedInventory(++retries);
             }
             finally
             {

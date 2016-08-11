@@ -301,13 +301,13 @@
     <None Include="Config\Translations\translation.zh-CN.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-	<None Include="Config\Translations\translation.zh-CN_pp.json">
+    <None Include="Config\Translations\translation.zh-CN_pp.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Config\Translations\translation.zh-TW.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-	<None Include="Config\Translations\translation.zh-HK.json">
+    <None Include="Config\Translations\translation.zh-HK.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
@@ -354,8 +354,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>move /Y "$(TargetDir)*.dll" "$(TargetDir)Resources\"</PostBuildEvent>
   </PropertyGroup>
   <UsingTask TaskName="CosturaCleanup" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
     <ParameterGroup>
