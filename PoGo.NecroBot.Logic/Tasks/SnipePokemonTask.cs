@@ -710,17 +710,16 @@ namespace PoGo.NecroBot.Logic.Tasks
             ScanResult_pokewatchers scanResult_pokewatchers;
             try
             {
-                var request = WebRequest.CreateHttp(uri);
-                request.Accept = "application/json";
-                request.UserAgent =
-                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:47.0) Gecko/20100101 Firefox/47.0";
-                request.Method = "GET";
-                request.Timeout = 15000;
-                request.ReadWriteTimeout = 32000;
+                var handler = new ClearanceHandler();
 
-                var resp = request.GetResponse();
-                var reader = new StreamReader(resp.GetResponseStream());
-                var fullresp = "{ \"pokemons\":" + reader.ReadToEnd().Replace(" M", "Male").Replace(" F", "Female").Replace("Farfetch'd", "Farfetchd").Replace("Mr.Maleime", "MrMime") + "}";
+                // Create a HttpClient that uses the handler.
+                var client = new HttpClient(handler);
+                
+                // Our new firewall requires a user agent, or you'll be blocked.
+                client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/511.2 (KHTML, like Gecko) Chrome/15.0.041.151 Safari/555.2");
+                
+                // Use the HttpClient as usual. Any JS challenge will be solved automatically for you.
+                var fullresp = "{ \"pokemons\":" + client.GetStringAsync(uri).Result.Replace(" M", "Male").Replace(" F", "Female").Replace("Farfetch'd", "Farfetchd").Replace("Mr.Maleime", "MrMime") +"}";
 
                 scanResult_pokewatchers = JsonConvert.DeserializeObject<ScanResult_pokewatchers>(fullresp);
             }
