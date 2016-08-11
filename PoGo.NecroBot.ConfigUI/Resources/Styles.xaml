@@ -45,4 +45,13 @@
         <Setter Property="Padding" Value="3,2,3,2" />
     </Style>
 
+    <DataTemplate x:Key="PokemonToggleTemplate">
+        <CheckBox IsChecked="{Binding IsChecked}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="30"  Text="{Binding Numeric}" TextAlignment="Right" Margin="3,1" VerticalAlignment="Center" />
+                <TextBlock Width="240" Text="{Binding Name}"    TextAlignment="Left"  Margin="3,1" VerticalAlignment="Center" />
+            </StackPanel>
+        </CheckBox>
+    </DataTemplate>
+
 </ResourceDictionary>
