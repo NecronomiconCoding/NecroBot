@@ -215,6 +215,10 @@
       <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
+    <ProjectReference Include="..\POGOProtos\POGOProtos\POGOProtos.csproj">
+      <Project>{A03A7BB2-4F0B-467B-84B2-9A76E6AAE6FB}</Project>
+      <Name>POGOProtos</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
