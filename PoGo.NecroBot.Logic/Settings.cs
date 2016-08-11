@@ -282,6 +282,8 @@ namespace PoGo.NecroBot.Logic
 
         [DefaultValue("en")]
         public string TranslationLanguageCode;
+        [DefaultValue(true)]
+        public bool CheckForUpdates;
         //autoupdate
         [DefaultValue(true)]
         public bool AutoUpdate;
@@ -871,7 +873,7 @@ namespace PoGo.NecroBot.Logic
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
             settings.isGui = isGui;
 
-            if (!boolSkipSave || !settings.AutoUpdate)
+            if ( !boolSkipSave || !settings.CheckForUpdates || !settings.AutoUpdate )
             {
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
@@ -1033,36 +1035,35 @@ namespace PoGo.NecroBot.Logic
             }
 
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartDefaultLocation), LogLevel.None);
-            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLatPrompt));
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLatLongPrompt));
             while (true)
             {
                 try
                 {
-                    double dblInput = double.Parse(Console.ReadLine());
-                    settings.DefaultLatitude = dblInput;
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLatConfirm, dblInput));
-                    break;
-                }
-                catch (FormatException)
-                {
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, settings.DefaultLatitude, LogLevel.Error));
-                    continue;
-                }
-            }
+                    string strInput = Console.ReadLine();
+                    string[] strSplit = strInput.Split( ',' );
 
-            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLongPrompt));
-            while (true)
-            {
-                try
-                {
-                    double dblInput = double.Parse(Console.ReadLine());
-                    settings.DefaultLongitude = dblInput;
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLongConfirm, dblInput));
+                    if( strSplit.Length > 1 )
+                    {
+                        double dblLat = double.Parse( strSplit[ 0 ].Trim( ' ' ) );
+                        double dblLong = double.Parse( strSplit[ 1 ].Trim( ' ' ) );
+
+                        settings.DefaultLatitude = dblLat;
+                        settings.DefaultLongitude = dblLong;
+
+                        Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLatLongConfirm, $"{dblLat}, {dblLong}" ) );
+                    }
+                    else
+                    {
+                        Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLocationError, $"{settings.DefaultLatitude}, {settings.DefaultLongitude}", LogLevel.Error ) );
+                        continue;
+                    }
+                    
                     break;
                 }
                 catch (FormatException)
                 {
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, settings.DefaultLongitude, LogLevel.Error));
+                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, $"{settings.DefaultLatitude}, {settings.DefaultLongitude}", LogLevel.Error));
                     continue;
                 }
             }
@@ -1315,6 +1316,7 @@ namespace PoGo.NecroBot.Logic
         public string ProfilePath => _settings.ProfilePath;
         public string ProfileConfigPath => _settings.ProfileConfigPath;
         public string GeneralConfigPath => _settings.GeneralConfigPath;
+        public bool CheckForUpdates => _settings.CheckForUpdates;
         public bool AutoUpdate => _settings.AutoUpdate;
         public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
         public bool UseWebsocket => _settings.UseWebsocket;

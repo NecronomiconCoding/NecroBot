@@ -70,8 +70,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                         i =>
                             LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                                 session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
-                var pokeStop = pokestopList[0];
-                pokestopList.RemoveAt(0);
+
+                // randomize next pokestop between first and second by distance
+                var pokestopListNum = 0;
+                if (pokestopList.Count >= 1)
+                {
+                    pokestopListNum = rc.Next(0, 2);
+                }
+                var pokeStop = pokestopList[pokestopListNum];
+                pokestopList.RemoveAt(pokestopListNum);
 
                 var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                     session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
