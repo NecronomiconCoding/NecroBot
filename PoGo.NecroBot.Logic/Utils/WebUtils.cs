@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.Logic.Utils
 {
@@ -43,15 +41,8 @@ namespace PoGo.NecroBot.Logic.Utils
             {
                 return Encoding.GetEncoding(charsetName);
             }
-            catch (ArgumentException ex)
+            catch (ArgumentException)
             {
-                /*
-                throw new UnknownEncodingException(
-                    charsetName,
-                    "The server returned data in an unknown encoding: " + charsetName,
-                    ex);
-                    */
-                var a = 1;
                 return null;
             }
         }

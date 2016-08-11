@@ -4,12 +4,12 @@
 
 using System;
 using System.Linq;
-using POGOProtos.Networking.Responses;
 using System.Threading.Tasks;
-using PoGo.NecroBot.Logic.Logging;
-using POGOProtos.Inventory.Item;
 using Google.Protobuf.Collections;
+using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
+using POGOProtos.Inventory.Item;
+using POGOProtos.Networking.Responses;
 
 #endregion
 

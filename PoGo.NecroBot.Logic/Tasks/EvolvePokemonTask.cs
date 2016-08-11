@@ -1,16 +1,16 @@
 ﻿#region using directives
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
-using POGOProtos.Inventory.Item;
-using PoGo.NecroBot.Logic.Common;
-using System.Collections.Generic;
 using POGOProtos.Data;
+using POGOProtos.Inventory.Item;
 
 #endregion
 
@@ -103,7 +103,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             _lastLuckyEggTime = DateTime.Now;
             await session.Client.Inventory.UseItemXpBoost();
             await session.Inventory.RefreshCachedInventory();
-            if (luckyEgg != null) session.EventDispatcher.Send(new UseLuckyEggEvent { Count = luckyEgg.Count });
+            if (luckyEgg != null) session.EventDispatcher.Send(new UseLuckyEggEvent { Count = luckyEgg.Count - 1 });
             DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
         }
 

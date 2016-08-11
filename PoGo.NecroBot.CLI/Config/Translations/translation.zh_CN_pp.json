@@ -2,15 +2,15 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "普通球"
+      "Value": "宝贝球"
     },
     {
       "Key": "greatPokeball",
-      "Value": "高级球"
+      "Value": "超级球"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "超级球"
+      "Value": "特级球"
     },
     {
       "Key": "masterPokeball",
@@ -18,23 +18,23 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "未知的账号类型,请查看config.json\t\t"
+      "Value": "用户类别有误,请检查config.json\t\t"
     },
     {
       "Key": "loginInvalid",
-      "Value": "用户凭据无效,登录失败.\t\t"
+      "Value": "用户信息有误,登录失败.\t\t"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "您偏离了设定的范围!5秒后返回起点(距离{0}米),请确认lastPos.ini中经纬度是否正确?\t\t"
+      "Value": "您偏离了设定的范围!5秒后返回起点(距离{0}米),请确认LastPos.ini中经纬度是否正确?\t\t"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "您附近没有任何可用的补给站,是您的最大挂机距离设置太小了吗?\t\t\t"
+      "Value": "您附近没有可用的补给站,是您的最大挂机距离设置太小了吗?\t\t\t"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "补给站:{0} 经验+{1},宝石+{2},获得:{3},坐标{4},{5}\t\t\t"
+      "Value": "补给站:{0} 经验+{1},晶石+{2},获得:{3},坐标{4},{5}\t\t\t"
     },
     {
       "Key": "eventFortFailed",
@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "登陆账号:{0}\t\t"
+      "Value": "玩家:{0}\t\t"
     },
     {
       "Key": "eventUsedIncense",
@@ -82,7 +82,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "没有精灵球了,我们错过了一只CP值为{1}的:{0}\t\t"
+      "Value": "宝贝球已用光,我们没捉到CP值为{1}的:{0}\t\t"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
@@ -94,7 +94,7 @@
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "还需捕获{0}只宝可梦使用幸运蛋!\t\t"
+      "Value": "还需捕获{0}只神奇宝贝才会使用幸运蛋!\t\t"
     },
     {
       "Key": "eventUseBerry",
@@ -102,11 +102,11 @@
     },
     {
       "Key": "itemRazzBerry",
-      "Value": "浆果"
+      "Value": "树果"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0}-重试第{1}遍"
+      "Value": "{0}-第{1}次重试"
     },
     {
       "Key": "catchStatus",
@@ -118,11 +118,11 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "在GPX文件中发现异常数据,试图跳过.\t\t"
+      "Value": "GPX文件中有数据异常,尝试跳过.\t\t"
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "宝可梦"
+      "Value": "神奇宝贝"
     },
     {
       "Key": "commonWordPerfect",
@@ -138,23 +138,23 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "展示最高CP值"
+      "Value": "显示最高CP值"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "展示最高完美度"
+      "Value": "显示最高完美度"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "展示最高等级"
+      "Value": "显示最高等级"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "确认经纬度是否正确,如有错误请退出程序!纬度:{0}经度:{1}\t\t"
+      "Value": "请确认经纬度是否正确,如有误请退出程序!纬度:{0}经度:{1}\t\t"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "正在将宠物蛋放入孵化器中:剩余{0:0.00}千米\t\t\t\t"
+      "Value": "正在将精灵蛋放入孵化器中:剩余{0:0.00}千米\t\t"
     },
     {
       "Key": "incubatorStatusUpdate",
@@ -170,7 +170,7 @@
     },
     {
       "Key": "logEntryAttention",
-      "Value": "警告"
+      "Value": "注意"
     },
     {
       "Key": "logEntryInfo",
@@ -178,7 +178,7 @@
     },
     {
       "Key": "logEntryPokestop",
-      "Value": "补给"
+      "Value": "补给站"
     },
     {
       "Key": "logEntryFarming",
@@ -186,11 +186,11 @@
     },
     {
       "Key": "logEntrySniper",
-      "Value": "追踪"
+      "Value": "追捕"
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "丢弃"
+      "Value": "扔掉"
     },
     {
       "Key": "logEntryPkmn",
@@ -198,7 +198,7 @@
     },
     {
       "Key": "logEntryTransfered",
-      "Value": "传回"
+      "Value": "传送"
     },
     {
       "Key": "logEntryEvolved",
@@ -206,11 +206,11 @@
     },
     {
       "Key": "logEntryBerry",
-      "Value": "浆果"
+      "Value": "树果"
     },
     {
       "Key": "logEntryEgg",
-      "Value": "宠物蛋"
+      "Value": "精灵蛋"
     },
     {
       "Key": "logEntryDebug",
@@ -226,7 +226,7 @@
     },
     {
       "Key": "logEntrySoftBan",
-      "Value": "暂封"
+      "Value": "锁定"
     },
     {
       "Key": "loggingIn",
@@ -234,7 +234,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC服务器可能宕机或您的账号有误,请尝试谷歌账号登录\t\t"
+      "Value": "PTC服务器宕机或您的账号有误,请尝试Google账号登录\t\t"
     },
     {
       "Key": "accessTokenExpired",
@@ -250,11 +250,11 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "账号或密码错误! 退出...\t\t"
+      "Value": "用户名或密码错误!退出...\t\t"
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "正在打开GoogleDevice网页,请用Ctrl+V粘贴验证码\t\t"
+      "Value": "正在打开GoogleDevice网页,请使用Ctrl+V粘贴验证码\t\t"
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -266,11 +266,11 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "检测到拟真移动,使用config.json中的用户配置\t\t"
+      "Value": "检测到现实移动,使用config.json中的用户配置\t\t"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "未检测到拟真移动{0},使用上一次保存在LastPos.ini中的配置\t\t"
+      "Value": "未检测到现实移动{0},使用上一次保存在LastPos.ini中的配置\t\t"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -282,11 +282,11 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "自动更新已禁用,获取最新的版本到:{0}\n"
+      "Value": "自动更新已禁用,请获取最新版本:{0}\n"
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "正在下载安装更新...\t\t"
+      "Value": "正在下载更新...\t\t"
     },
     {
       "Key": "finishedDownloadingRelease",
@@ -298,23 +298,23 @@
     },
     {
       "Key": "finishedTransferringConfig",
-      "Value": "您的配置已转移到新版本...\t\t"
+      "Value": "您的配置已转移至新版本...\t\t"
     },
     {
       "Key": "updateFinished",
-      "Value": "更新完成,您现在可以关闭这个窗口.\t\t"
+      "Value": "更新完成,您现在可以关闭本窗口.\t\t"
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "正在搜索熏香引来的宝可梦...\t\t"
+      "Value": "正在搜索熏香吸引来的神奇宝贝...\t\t"
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "正在搜索宝可梦...\t\t"
+      "Value": "正在搜索神奇宝贝...\t\t"
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "正在搜索诱饵吸引来的宝可梦...\t\t"
+      "Value": "正在搜索诱饵吸引来的神奇宝贝...\t\t"
     },
     {
       "Key": "pokemonSkipped",
@@ -322,27 +322,27 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "背包中精灵球不足,无法捕捉更多宝可梦!\t\t"
+      "Value": "背包中宝贝球不足,无法捕捉更多神奇宝贝!\t\t"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "普通球:{0}|高级球:{1}|超级球:{2}|大师球:{3}\t\t\t"
+      "Value": "精灵球:{0}|超级球:{1}|特级球:{2}|大师球:{3}\t\t\t"
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "药水: {0} | 高级药水: {1} | 超级药水: {2} | 顶级药水: {3}\t\t\t"
+      "Value": "药水: {0} | 高级药水: {1} | 超级药水: {2} | 痊愈药水: {3}\t\t\t"
     },
     {
       "Key": "CurrentReviveInv",
-      "Value": "复活石: {0} | 顶级复活石: {1}\t\t"
+      "Value": "复活晶石: {0} | 满血复活石: {1}\t\t"
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "浆果: {0} | 熏香: {1} | 幸运蛋: {2} | 诱饵: {3}\t\t"
+      "Value": "树果: {0} | 熏香: {1} | 幸运蛋: {2} | 诱饵: {3}\t\t"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[设置无效]您设置的物品数量组合(精灵球+药水+复活石={0})超出了您的背包容量({1})\t\t\t\t"
+      "Value": "[设置无效]您设置的物品数量总和(宝贝球+药水+晶石={0})超出了您的背包容量({1})\t\t"
     },
     {
       "Key": "recyclingQuietly",
@@ -350,31 +350,31 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "宝可梦口袋已满,正在传回精灵...\t\t"
+      "Value": "口袋已满,正在传送神奇宝贝...\t\t"
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "宝可梦口袋已满,请手动传回宝可梦或者修改配置文件TransferDuplicatePokemon为true\t\t\t"
+      "Value": "神奇宝贝口袋已满,请手动传送神奇宝贝或者修改配置文件TransferDuplicatePokemon为true\t\t"
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "物品背包已满,无法获得物品!\t\t"
+      "Value": "背包已满,无法装入物品!\t\t"
     },
     {
       "Key": "encounterProblem",
-      "Value": "发生错误:{0}\t\t"
+      "Value": "故障:{0}\t\t"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "发生错误:诱饵吸引来的宝可梦{0}\t\t"
+      "Value": "故障:诱饵吸引来的神奇宝贝{0}\t\t"
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "您要去的地方{0},{1}距离您现在的位置太远了{2},{3}\t\t"
+      "Value": "您要去的地方{0},{1}距离您现在的位置太远{2},{3}\t\t"
     },
     {
       "Key": "pokemonRename",
-      "Value": "正在将宝可梦{0} ({1})从{2}重命名为{3}.\t\t"
+      "Value": "正在将神奇宝贝{0} ({1})由{2}重命名为{3}.\t\t"
     },
     {
       "Key": "pokemonFavorite",
@@ -382,7 +382,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[宝可梦过滤器]忽略:{0}\t\t"
+      "Value": "[神奇宝贝过滤器]忽略:{0}\t\t"
     },
     {
       "Key": "catchStatusAttempt",
@@ -426,11 +426,11 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} 运行时间{1}经验/小时:{3:n0}|等级:{2}|捕获/小时:{4:n0}|星尘:{5:n0}|传回:{6:n0}|丢弃:{7:n0}"
+      "Value": "{0} 已运行{1}等级:{2}|经验/小时:{3:n0}|捕获/小时:{4:n0}|星尘:{5:n0}|传送:{6:n0}|扔掉:{7:n0}"
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- 等级: {0} | {1} ----- \t\t\n 经验: {2}/{3} \t\t\n 捕获了{4}个宝可梦\t\t\n 已部署了{5}个宝可梦 \t\t\n 访问了{6}个补给站 \t\t\n 已孵化{6}个蛋 \t\t\n 已进化{7}个宝可梦\t\t\n 图鉴解锁{8}种\t\t\n 已行走{9}公里\t\t"
+      "Value": "----- 等级: {0} | {1} ----- \t\t\n 经验: {2}/{3} \t\t\n 捕获了{4}个神奇宝贝\t\t\n 已部署了{5}个神奇宝贝 \t\t\n 访问了{6}个补给站 \t\t\n 已孵化{6}个蛋 \t\t\n 已进化{7}个神奇宝贝\t\t\n 图鉴解锁{8}种\t\t\n 已行走{9}公里\t\t"
     },
     {
       "Key": "showPokeTemplate",
@@ -438,7 +438,7 @@
     },
     {
       "Key": "helpTemplate",
-      "Value": "命令: \n \n /top <数量> - 显示您最强的宝可梦列表. \t\t\n /all - 显示您所有宝可梦列表. \t\t\n /profile - 显示您个人详细信息. \t\t\n /loc - 显示您的位置. \t\t\n /items - 显示您的物品.\t\t"
+      "Value": "命令: \n \n /top <数量> - 显示您最强的神奇宝贝列表. \t\t\n /all - 显示您所有神奇宝贝列表. \t\t\n /profile - 显示您个人详细信息. \t\t\n /loc - 显示您的位置. \t\t\n /items - 显示您的物品.\t\t"
     },
     {
       "Key": "statsXpTemplateString",
@@ -446,27 +446,27 @@
     },
     {
       "Key": "requireInputText",
-      "Value": "请按键盘任意键继续...\t\t"
+      "Value": "请按任意键继续...\t\t"
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "当您启用了谷歌的两步验证后,需要在auth.json中输入应用专用密码\t\t"
+      "Value": "若您启用了Google的两步验证,则需要在auth.json中输入App Specific密码\t\t"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "打开GoogleApp-登录与安全设置-密码和登录方法-应用专用密码,请设置一个新的应用专用密码(使用其它设备)\t\t\t\t"
+      "Value": "打开GoogleApp-登录与安全设置-密码和登录方法-App Specific密码,请设置一个新的App Specific密码(使用其它设备)\t\t\t"
     },
     {
       "Key": "googleError",
-      "Value": "请确认输入正确的邮箱地址和密码.\t\t"
+      "Value": "请确认输入了正确的邮箱地址和密码.\t\t"
     },
     {
       "Key": "googleOffline",
-      "Value": "谷歌服务器可能正在维护, 请稍后再尝试登录.\t\t"
+      "Value": "Google服务器可能正在维护, 请稍后再尝试登录.\t\t"
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "您需要在auth.json中填写谷歌账号和密码!\t\t"
+      "Value": "您需要在auth.json中填写Google账号和密码!\t\t"
     },
     {
       "Key": "missingCredentialsPtc",
@@ -474,19 +474,19 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "正在搜索可追踪宝可梦,坐标:{0}\t\t"
+      "Value": "正在查找可追捕的神奇宝贝,坐标:{0}\t\t"
     },
     {
       "Key": "snipeScanEx",
-      "Value": "追踪一个 {0} 完美度:{1},坐标{2}...\t\t\t"
+      "Value": "正在追捕 {0} 完美度:{1},坐标{2}...\t\t"
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "没有找到可追踪的宝可梦!\t\t"
+      "Value": "没有发现可追捕的神奇宝贝!\t\t"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "没有足够的精灵球用来追踪!({0}/{1})\t\t"
+      "Value": "没有足够的宝贝球用来追捕!({0}/{1})\t\t"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -506,15 +506,15 @@
     },
     {
       "Key": "noEggsAvailable",
-      "Value": "背包中没有宠物蛋\t\t"
+      "Value": "背包中没有精灵蛋\t\t"
     },
     {
       "Key": "useLuckyEggActive",
-      "Value": "已经开启过幸运蛋了.\t\t"
+      "Value": "幸运蛋已激活.\t\t"
     },
     {
       "Key": "usedLuckyEgg",
-      "Value": "使用了幸运蛋.\t\t"
+      "Value": "已使用幸运蛋.\t\t"
     },
     {
       "Key": "useLuckyEggAmount",
@@ -522,15 +522,15 @@
     },
     {
       "Key": "noIncenseAvailable",
-      "Value": "背包中没有熏香了.\t\t"
+      "Value": "背包中没有熏香.\t\t"
     },
     {
       "Key": "useIncenseActive",
-      "Value": "已经开启过熏香了.\t\t"
+      "Value": "已使用熏香.\t\t"
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "背包剩余熏香:{0}个\t\t"
+      "Value": "背包中剩余熏香:{0}个\t\t"
     },
     {
       "Key": "usedIncense",
@@ -538,31 +538,32 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "遇见了:{0}/151种宝可梦,捕捉到了:{1}/151种宝可梦\t\t\t\t"
+      "Value": "已遇见:{0}/151只神奇宝贝,已捕捉:{1}/151只\t\t\t"
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "有{0}只可进化的宝可梦\t\t"
+      "Value": "{0}只神奇宝贝可进化\t\t"
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "宝可梦升级失败,材料不足\t\t"
+      "Value": "神奇宝贝强化失败,材料不足\t\t"
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "追踪服务器当前关闭.跳过追踪....\t\t"
+      "Value": "追捕服务器当前关闭.跳过追捕....\t\t"
     },
     {
       "Key": "firstStartPrompt",
-      "Value": "这是您第一次使用,使用设置向导吗?{0}/{1}\t\t"
+      "Value": "这是您第一次使用,需要设置向导吗?{0}/{1}\t\t"
     },
     {
       "Key": "firstStartLanguagePrompt",
-      "Value": "想要更改默认语言吗? {0}/{1}\t\t"
+      "Value": "需要修改默认语言(英语)吗? {0}/{1}\t\t"
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "请输入新的语言代码(简体中文是zh_CN)\t\t"
+      "Value": "请输入新的语言代码: \t\t"
+      /*语言代码:简体中文是zh_CN,中文俗语是zh_CN_pp.*/
     },
     {
       "Key": "firstStartLanguageConfirm",
@@ -586,7 +587,7 @@
     },
     {
       "Key": "firstStartSetupTypeConfirm",
-      "Value": "选择了: {0} 账号\t\t"
+      "Value": "已选择: {0} 账号\t\t"
     },
     {
       "Key": "firstStartSetupTypePromptError",
@@ -594,7 +595,7 @@
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
-      "Value": "请输入账号\t\t"
+      "Value": "请输入用户名\t\t"
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
@@ -614,7 +615,7 @@
     },
     {
       "Key": "firstStartDefaultLocationPrompt",
-      "Value": "您想要设置一个新的起始坐标吗? {0}/{1}\t\t"
+      "Value": "您要设置一个新的起始坐标吗? {0}/{1}\t\t"
     },
     {
       "Key": "firstStartDefaultLocationSet",
@@ -630,7 +631,7 @@
     },
     {
       "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "请输入纬度 (右键粘贴)\t\t"
+      "Value": "请设置纬度 (右键粘贴)\t\t"
     },
     {
       "Key": "firstStartSetupDefaultLatConfirm",
@@ -638,7 +639,7 @@
     },
     {
       "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "请输入经度 (右键粘贴)\t\t"
+      "Value": "请设置经度 (右键粘贴)\t\t"
     },
     {
       "Key": "firstStartSetupDefaultLongConfirm",
@@ -646,7 +647,7 @@
     },
     {
       "Key": "softBanBypassed",
-      "Value": "成功解封!\t\t"
+      "Value": "封禁解除!"
     },
     {
       "Key": "firstStartSetupCompleted",
@@ -654,19 +655,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- 图鉴已获得 --- \t\t\n"  
+      "Value":  "--- Pokedex catched --- \n"  
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} 名称: {1} | 已捕获此类: {2} | 已遇见此类: {3} \t\t\n"  
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- 图鉴未获得 --- \t\t\n"  
+      "Value":  "--- Pokedex needed --- \n"  
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} 名称: {1} \t\t\n"  
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
   "PokemonStrings": [
@@ -716,7 +717,7 @@
     },
     {
       "Key": "butterfree",
-      "Value": "巴大蝶"
+      "Value": "巴大蝴"
     },
     {
       "Key": "weedle",
@@ -724,7 +725,7 @@
     },
     {
       "Key": "kakuna",
-      "Value": "铁壳蛹"
+      "Value": "铁壳昆"
     },
     {
       "Key": "beedrill",
@@ -740,7 +741,7 @@
     },
     {
       "Key": "pidgeot",
-      "Value": "大比鸟"
+      "Value": "比雕"
     },
     {
       "Key": "rattata",
@@ -864,7 +865,7 @@
     },
     {
       "Key": "venomoth",
-      "Value": "摩鲁蛾"
+      "Value": "末入蛾"
     },
     {
       "Key": "diglett",
@@ -896,7 +897,7 @@
     },
     {
       "Key": "primeape",
-      "Value": "火暴猴"
+      "Value": "火爆猴"
     },
     {
       "Key": "growlithe",
@@ -912,11 +913,11 @@
     },
     {
       "Key": "poliwhirl",
-      "Value": "蚊香君"
+      "Value": "蚊香蛙"
     },
     {
       "Key": "poliwrath",
-      "Value": "蚊香泳士"
+      "Value": "快泳蛙"
     },
     {
       "Key": "abra",
@@ -924,7 +925,7 @@
     },
     {
       "Key": "kadabra",
-      "Value": "勇基拉"
+      "Value": "勇吉拉"
     },
     {
       "Key": "alakazam",
@@ -988,7 +989,7 @@
     },
     {
       "Key": "slowbro",
-      "Value": "呆壳兽"
+      "Value": "呆河马"
     },
     {
       "Key": "magnemite",
@@ -1032,7 +1033,7 @@
     },
     {
       "Key": "cloyster",
-      "Value": "刺甲贝"
+      "Value": "铁甲贝"
     },
     {
       "Key": "gastly",
@@ -1052,11 +1053,11 @@
     },
     {
       "Key": "drowzee",
-      "Value": "催眠貘"
+      "Value": "素利普"
     },
     {
       "Key": "hypno",
-      "Value": "引梦貘人"
+      "Value": "素利拍"
     },
     {
       "Key": "krabby",
@@ -1068,11 +1069,11 @@
     },
     {
       "Key": "voltorb",
-      "Value": "霹雳电球"
+      "Value": "雷电球"
     },
     {
       "Key": "electrode",
-      "Value": "顽皮雷弹"
+      "Value": "顽皮弹"
     },
     {
       "Key": "exeggcute",
@@ -1084,19 +1085,19 @@
     },
     {
       "Key": "cubone",
-      "Value": "卡拉卡拉"
+      "Value": "可拉可拉"
     },
     {
       "Key": "marowak",
-      "Value": "嘎啦嘎啦"
+      "Value": "嘎拉嘎拉"
     },
     {
       "Key": "hitmonlee",
-      "Value": "飞腿郎"
+      "Value": "沙瓦郎"
     },
     {
       "Key": "hitmonchan",
-      "Value": "快拳郎"
+      "Value": "艾比郎"
     },
     {
       "Key": "lickitung",
@@ -1112,11 +1113,11 @@
     },
     {
       "Key": "rhyhorn",
-      "Value": "独角犀牛"
+      "Value": "铁甲犀牛"
     },
     {
       "Key": "rhydon",
-      "Value": "钻角犀兽"
+      "Value": "铁甲暴龙"
     },
     {
       "Key": "chansey",
@@ -1128,7 +1129,7 @@
     },
     {
       "Key": "kangaskhan",
-      "Value": "袋兽"
+      "Value": "袋龙"
     },
     {
       "Key": "horsea",
@@ -1156,7 +1157,7 @@
     },
     {
       "Key": "mrMime",
-      "Value": "魔墙人偶"
+      "Value": "吸盘魔偶"
     },
     {
       "Key": "scyther",
@@ -1172,11 +1173,11 @@
     },
     {
       "Key": "magmar",
-      "Value": "鸭嘴火兽"
+      "Value": "鸭嘴火龙"
     },
     {
       "Key": "pinsir",
-      "Value": "凯罗斯"
+      "Value": "大甲"
     },
     {
       "Key": "tauros",
@@ -1192,7 +1193,7 @@
     },
     {
       "Key": "lapras",
-      "Value": "拉普拉斯"
+      "Value": "乘龙"
     },
     {
       "Key": "ditto",
@@ -1204,19 +1205,19 @@
     },
     {
       "Key": "vaporeon",
-      "Value": "水伊布"
+      "Value": "水精灵"
     },
     {
       "Key": "jolteon",
-      "Value": "雷伊布"
+      "Value": "雷精灵"
     },
     {
       "Key": "flareon",
-      "Value": "火伊布"
+      "Value": "火精灵"
     },
     {
       "Key": "porygon",
-      "Value": "多边兽"
+      "Value": "3D龙"
     },
     {
       "Key": "omanyte",
@@ -1278,7 +1279,7 @@
   "PokemonMovesetStrings": [
     {
       "Key": "moveUnset",
-      "Value": "无技能"
+      "Value": "无"
     },
     {
       "Key": "thunderShock",
@@ -1290,11 +1291,11 @@
     },
     {
       "Key": "scratch",
-      "Value": "利爪"
+      "Value": "抓"
     },
     {
       "Key": "ember",
-      "Value": "火花"
+      "Value": "火苗"
     },
     {
       "Key": "vineWhip",
@@ -1302,7 +1303,7 @@
     },
     {
       "Key": "tackle",
-      "Value": "冲击"
+      "Value": "撞击"
     },
     {
       "Key": "razorLeaf",
@@ -1310,7 +1311,7 @@
     },
     {
       "Key": "takeDown",
-      "Value": "猛撞"
+      "Value": "突进"
     },
     {
       "Key": "waterGun",
@@ -1318,11 +1319,11 @@
     },
     {
       "Key": "bite",
-      "Value": "咬住"
+      "Value": "啃咬"
     },
     {
       "Key": "pound",
-      "Value": "拍击"
+      "Value": "拍打"
     },
     {
       "Key": "doubleSlap",
@@ -1330,11 +1331,11 @@
     },
     {
       "Key": "wrap",
-      "Value": "捆绑"
+      "Value": "缠绕"
     },
     {
       "Key": "hyperBeam",
-      "Value": "破坏死光"
+      "Value": "破坏光线"
     },
     {
       "Key": "lick",
@@ -1346,23 +1347,23 @@
     },
     {
       "Key": "smog",
-      "Value": "迷雾"
+      "Value": "毒雾"
     },
     {
       "Key": "sludge",
-      "Value": "泥浆攻击"
+      "Value": "淤泥攻击"
     },
     {
       "Key": "metalClaw",
-      "Value": "合金爪"
+      "Value": "金属爪"
     },
     {
       "Key": "viceGrip",
-      "Value": "剪断"
+      "Value": "夹"
     },
     {
       "Key": "flameWheel",
-      "Value": "火焰轮"
+      "Value": "火焰车"
     },
     {
       "Key": "megahorn",
@@ -1378,15 +1379,15 @@
     },
     {
       "Key": "suckerPunch",
-      "Value": "突袭"
+      "Value": "偷袭"
     },
     {
       "Key": "dig",
-      "Value": "挖地洞"
+      "Value": "挖洞"
     },
     {
       "Key": "lowKick",
-      "Value": "下踢"
+      "Value": "过肩摔"
     },
     {
       "Key": "crossChop",
@@ -1394,7 +1395,7 @@
     },
     {
       "Key": "psychoCut",
-      "Value": "幻象斩"
+      "Value": "精神切割"
     },
     {
       "Key": "psybeam",
@@ -1406,15 +1407,15 @@
     },
     {
       "Key": "stoneEdge",
-      "Value": "尖石攻击"
+      "Value": "石刃"
     },
     {
       "Key": "icePunch",
-      "Value": "急冻拳"
+      "Value": "冷冻拳"
     },
     {
       "Key": "heartStamp",
-      "Value": "爱心捣击"
+      "Value": "心灵压迫"
     },
     {
       "Key": "discharge",
@@ -1422,7 +1423,7 @@
     },
     {
       "Key": "flashCannon",
-      "Value": "光泽电炮"
+      "Value": "光栅加农"
     },
     {
       "Key": "peck",
@@ -1430,11 +1431,11 @@
     },
     {
       "Key": "drillPeck",
-      "Value": "冲钻"
+      "Value": "钻孔啄"
     },
     {
       "Key": "iceBeam",
-      "Value": "急冻光线"
+      "Value": "冷冻光线"
     },
     {
       "Key": "blizzard",
@@ -1442,7 +1443,7 @@
     },
     {
       "Key": "airSlash",
-      "Value": "空气砍"
+      "Value": "空气切割"
     },
     {
       "Key": "heatWave",
@@ -1458,15 +1459,15 @@
     },
     {
       "Key": "aerialAce",
-      "Value": "回转攻"
+      "Value": "燕返"
     },
     {
       "Key": "drillRun",
-      "Value": "低空钻"
+      "Value": "钻头直击"
     },
     {
       "Key": "petalBlizzard",
-      "Value": "落花飞雪"
+      "Value": "花吹雪"
     },
     {
       "Key": "megaDrain",
@@ -1478,15 +1479,15 @@
     },
     {
       "Key": "poisonFang",
-      "Value": "毒液牙"
+      "Value": "剧毒之牙"
     },
     {
       "Key": "nightSlash",
-      "Value": "街头试刀"
+      "Value": "试刀"
     },
     {
       "Key": "slash",
-      "Value": "劈开"
+      "Value": "切裂"
     },
     {
       "Key": "bubbleBeam",
@@ -1494,11 +1495,11 @@
     },
     {
       "Key": "submission",
-      "Value": "地狱滚动"
+      "Value": "地狱车"
     },
     {
       "Key": "karateChop",
-      "Value": "手刀"
+      "Value": "空手刀"
     },
     {
       "Key": "lowSweep",
@@ -1506,11 +1507,11 @@
     },
     {
       "Key": "aquaJet",
-      "Value": "喷射水柱"
+      "Value": "水流喷射"
     },
     {
       "Key": "aquaTail",
-      "Value": "水柱尾"
+      "Value": "水尾"
     },
     {
       "Key": "seedBomb",
@@ -1522,19 +1523,19 @@
     },
     {
       "Key": "rockThrow",
-      "Value": "滚石"
+      "Value": "落石"
     },
     {
       "Key": "ancientPower",
-      "Value": "原始之力"
+      "Value": "原始力量"
     },
     {
       "Key": "rockTomb",
-      "Value": "岩石封闭"
+      "Value": "封闭岩石"
     },
     {
       "Key": "rockSlide",
-      "Value": "山崩地裂"
+      "Value": "岩崩"
     },
     {
       "Key": "powerGem",
@@ -1542,7 +1543,7 @@
     },
     {
       "Key": "shadowSneak",
-      "Value": "影子偷袭"
+      "Value": "暗影偷袭"
     },
     {
       "Key": "shadowPunch",
@@ -1550,7 +1551,7 @@
     },
     {
       "Key": "shadowClaw",
-      "Value": "影子钩爪"
+      "Value": "暗影爪"
     },
     {
       "Key": "ominousWind",
@@ -1562,11 +1563,11 @@
     },
     {
       "Key": "bulletPunch",
-      "Value": "飞弹拳"
+      "Value": "子弹拳"
     },
     {
       "Key": "magnetBomb",
-      "Value": "磁铁爆弹"
+      "Value": "磁体炸弹"
     },
     {
       "Key": "steelWing",
@@ -1574,7 +1575,7 @@
     },
     {
       "Key": "ironHead",
-      "Value": "铁头"
+      "Value": "铁头槌"
     },
     {
       "Key": "parabolicCharge",
@@ -1582,15 +1583,15 @@
     },
     {
       "Key": "spark",
-      "Value": "闪电"
+      "Value": "电火花"
     },
     {
       "Key": "thunderPunch",
-      "Value": "雷光掌"
+      "Value": "雷电拳"
     },
     {
       "Key": "thunder",
-      "Value": "打雷"
+      "Value": "雷电"
     },
     {
       "Key": "thunderbolt",
@@ -1622,7 +1623,7 @@
     },
     {
       "Key": "dazzlingGleam",
-      "Value": "魔法照耀"
+      "Value": "魔法闪光"
     },
     {
       "Key": "moonblast",
@@ -1634,7 +1635,7 @@
     },
     {
       "Key": "crossPoison",
-      "Value": "十字毒药"
+      "Value": "毒十字"
     },
     {
       "Key": "sludgeBomb",
@@ -1646,7 +1647,7 @@
     },
     {
       "Key": "gunkShot",
-      "Value": "灰尘射击"
+      "Value": "粉尘射击"
     },
     {
       "Key": "mudShot",
@@ -1654,19 +1655,19 @@
     },
     {
       "Key": "boneClub",
-      "Value": "骨棒"
+      "Value": "骨头棒"
     },
     {
       "Key": "bulldoze",
-      "Value": "整地"
+      "Value": "压路"
     },
     {
       "Key": "mudBomb",
-      "Value": "泥巴爆弹"
+      "Value": "泥巴炸弹"
     },
     {
       "Key": "furyCutter",
-      "Value": "连切"
+      "Value": "连续切"
     },
     {
       "Key": "bugBite",
@@ -1674,19 +1675,19 @@
     },
     {
       "Key": "signalBeam",
-      "Value": "信号光束"
+      "Value": "信号光线"
     },
     {
       "Key": "xScissor",
-      "Value": "剪刀十字拳"
+      "Value": "十字剪"
     },
     {
       "Key": "flameCharge",
-      "Value": "火焰袭击"
+      "Value": "硝化冲锋"
     },
     {
       "Key": "flameBurst",
-      "Value": "爆炸火焰"
+      "Value": "爆裂火焰"
     },
     {
       "Key": "fireBlast",
@@ -1694,7 +1695,7 @@
     },
     {
       "Key": "brine",
-      "Value": "盐水"
+      "Value": "潮水"
     },
     {
       "Key": "waterPulse",
@@ -1702,7 +1703,7 @@
     },
     {
       "Key": "scald",
-      "Value": "热水"
+      "Value": "沸水"
     },
     {
       "Key": "hydroPump",
@@ -1710,7 +1711,7 @@
     },
     {
       "Key": "psychic",
-      "Value": "幻象术"
+      "Value": "精神干扰"
     },
     {
       "Key": "psystrike",
@@ -1734,7 +1735,7 @@
     },
     {
       "Key": "gigaDrain",
-      "Value": "超级吸收"
+      "Value": "亿万吨吸收"
     },
     {
       "Key": "firePunch",
@@ -1742,19 +1743,19 @@
     },
     {
       "Key": "solarBeam",
-      "Value": "日光束"
+      "Value": "太阳光线"
     },
     {
       "Key": "leafBlade",
-      "Value": "刀叶"
+      "Value": "刃叶斩"
     },
     {
       "Key": "powerWhip",
-      "Value": "能量鞭打"
+      "Value": "强力鞭挞"
     },
     {
       "Key": "splash",
-      "Value": "水溅跃"
+      "Value": "弹跳"
     },
     {
       "Key": "acid",
@@ -1782,7 +1783,7 @@
     },
     {
       "Key": "hornAttack",
-      "Value": "角撞"
+      "Value": "角突"
     },
     {
       "Key": "stomp",
@@ -1790,7 +1791,7 @@
     },
     {
       "Key": "headbutt",
-      "Value": "铁头功"
+      "Value": "头槌"
     },
     {
       "Key": "hyperFang",
@@ -1798,7 +1799,7 @@
     },
     {
       "Key": "slam",
-      "Value": "摔打"
+      "Value": "击倒"
     },
     {
       "Key": "bodySlam",
@@ -1814,7 +1815,7 @@
     },
     {
       "Key": "scaldBlastoise",
-      "Value": "热水-水箭龟"
+      "Value": "沸水-水箭龟"
     },
     {
       "Key": "hydroPumpBlastoise",
@@ -1822,15 +1823,15 @@
     },
     {
       "Key": "wrapGreen",
-      "Value": "捆绑绿"
+      "Value": "绿色缠绕"
     },
     {
       "Key": "wrapPink",
-      "Value": "捆绑粉红"
+      "Value": "粉红缠绕"
     },
     {
       "Key": "furyCutterFast",
-      "Value": "快速-连切"
+      "Value": "快速-连续切"
     },
     {
       "Key": "bugBiteFast",
@@ -1838,11 +1839,11 @@
     },
     {
       "Key": "biteFast",
-      "Value": "快速-咬住"
+      "Value": "快速-啃咬"
     },
     {
       "Key": "suckerPunchFast",
-      "Value": "快速-突袭"
+      "Value": "快速-偷袭"
     },
     {
       "Key": "dragonBreathFast",
@@ -1854,19 +1855,19 @@
     },
     {
       "Key": "sparkFast",
-      "Value": "快速-闪电"
+      "Value": "快速-电火花"
     },
     {
       "Key": "lowKickFast",
-      "Value": "快速-下踢"
+      "Value": "快速-过肩摔"
     },
     {
       "Key": "karateChopFast",
-      "Value": "快速-手刀"
+      "Value": "快速-空手刀"
     },
     {
       "Key": "emberFast",
-      "Value": "快速-火花"
+      "Value": "快速-火苗"
     },
     {
       "Key": "wingAttackFast",
@@ -1882,7 +1883,7 @@
     },
     {
       "Key": "shadowClawFast",
-      "Value": "快速-影子钩爪"
+      "Value": "快速-暗影爪"
     },
     {
       "Key": "vineWhipFast",
@@ -1910,15 +1911,15 @@
     },
     {
       "Key": "scratchFast",
-      "Value": "快速-利爪"
+      "Value": "快速-抓"
     },
     {
       "Key": "tackleFast",
-      "Value": "快速-冲击"
+      "Value": "快速-撞击"
     },
     {
       "Key": "poundFast",
-      "Value": "快速-拍击"
+      "Value": "快速-拍打"
     },
     {
       "Key": "cutFast",
@@ -1934,19 +1935,19 @@
     },
     {
       "Key": "psychoCutFast",
-      "Value": "快速-幻象斩"
+      "Value": "快速-精神切割"
     },
     {
       "Key": "rockThrowFast",
-      "Value": "快速-滚石"
+      "Value": "快速-落石"
     },
     {
       "Key": "metalClawFast",
-      "Value": "快速-合金爪"
+      "Value": "快速-金属爪"
     },
     {
       "Key": "bulletPunchFast",
-      "Value": "快速-飞弹拳"
+      "Value": "快速-子弹拳"
     },
     {
       "Key": "waterGunFast",
@@ -1954,7 +1955,7 @@
     },
     {
       "Key": "splashFast",
-      "Value": "快速-水溅跃"
+      "Value": "快速-弹跳"
     },
     {
       "Key": "waterGunFastBlastoise",
@@ -1962,11 +1963,11 @@
     },
     {
       "Key": "mudSlapFast",
-      "Value": "快速-掷泥"
+      "Value": "快速-扔泥"
     },
     {
       "Key": "zenHeadbuttFast",
-      "Value": "快速-意念头锤"
+      "Value": "快速-意念头槌"
     },
     {
       "Key": "confusionFast",
@@ -1982,7 +1983,7 @@
     },
     {
       "Key": "feintAttackFast",
-      "Value": "快速-虚晃一招"
+      "Value": "快速-暗算"
     },
     {
       "Key": "steelWingFast",
@@ -1990,11 +1991,11 @@
     },
     {
       "Key": "fireFangFast",
-      "Value": "快速-炎牙"
+      "Value": "快速-火之牙"
     },
     {
       "Key": "rockSmashFast",
-      "Value": "快速-岩石粉碎"
+      "Value": "快速-碎岩"
     }
   ]
 }

@@ -1,7 +1,14 @@
 #region using directives
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
+using PokemonGo.RocketAPI;
 using POGOProtos.Data;
 using POGOProtos.Data.Player;
 using POGOProtos.Enums;
@@ -9,13 +16,6 @@ using POGOProtos.Inventory;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Networking.Responses;
 using POGOProtos.Settings.Master;
-using PokemonGo.RocketAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -77,7 +77,7 @@ namespace PoGo.NecroBot.Logic
             if (_player==null) GetPlayerData();
             var now = DateTime.UtcNow;
 
-            if (_lastRefresh.AddSeconds(30).Ticks > now.Ticks)
+            if (_cachedInventory!=null && _lastRefresh.AddSeconds(30).Ticks > now.Ticks)
                 return _cachedInventory;
 
             return await RefreshCachedInventory();
@@ -103,15 +103,20 @@ namespace PoGo.NecroBot.Logic
                         {
                             var pokemonTransferFilter = GetPokemonTransferFilter(p.PokemonId);
 
-                            return
-                                !pokemonTransferFilter.MovesOperator.BoolFunc(
-                                    pokemonTransferFilter.Moves.Intersect(new[] { p.Move1, p.Move2 }).Any(),
-                                    pokemonTransferFilter.KeepMinOperator.BoolFunc(
-                                        p.Cp >= pokemonTransferFilter.KeepMinCp,
-                                        PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage,
-                                        pokemonTransferFilter.KeepMinOperator.ReverseBoolFunc(
-                                            pokemonTransferFilter.KeepMinOperator.InverseBool(pokemonTransferFilter.UseKeepMinLvl),
-                                            PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl)));
+                            return !pokemonTransferFilter.MovesOperator.BoolFunc(
+                                        pokemonTransferFilter.MovesOperator.ReverseBoolFunc(
+                                                pokemonTransferFilter.MovesOperator.InverseBool(pokemonTransferFilter.Moves.Count > 0),
+                                                pokemonTransferFilter.Moves.Any(moveset =>
+                                                    pokemonTransferFilter.MovesOperator.ReverseBoolFunc(
+                                                        pokemonTransferFilter.MovesOperator.InverseBool(moveset.Count > 0), 
+                                                        moveset.Intersect(new[] { p.Move1, p.Move2 }).Count() == Math.Max(Math.Min(moveset.Count, 2),0)))),
+                                        pokemonTransferFilter.KeepMinOperator.BoolFunc(
+                                            p.Cp >= pokemonTransferFilter.KeepMinCp,
+                                            PokemonInfo.CalculatePokemonPerfection(p) >= pokemonTransferFilter.KeepMinIvPercentage,
+                                            pokemonTransferFilter.KeepMinOperator.ReverseBoolFunc(
+                                                pokemonTransferFilter.KeepMinOperator.InverseBool(pokemonTransferFilter.UseKeepMinLvl),
+                                                PokemonInfo.GetLevel(p) >= pokemonTransferFilter.KeepMinLvl)));
+
                         }).ToList();
             }
             catch (Exception e)
@@ -131,75 +136,64 @@ namespace PoGo.NecroBot.Logic
             {
                 var amountToKeepInStorage = Math.Max(GetPokemonTransferFilter(pokemonGroupToTransfer.Key).KeepMinDuplicatePokemon, 0);
 
+                var inStorage = myPokemonList.Count(data => data.PokemonId == pokemonGroupToTransfer.Key);
+                var needToRemove = inStorage - amountToKeepInStorage;
+
+                if (needToRemove <= 0)
+                    continue;
+
+                var weakPokemonCount = pokemonGroupToTransfer.Count();
+                var canBeRemoved = Math.Min(needToRemove, weakPokemonCount);
+
+
                 var settings = pokemonSettings.Single(x => x.PokemonId == pokemonGroupToTransfer.Key);
-                var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
-
-                int? modFromEvolve = null;
-
+                //Lets calc new canBeRemoved pokemons according to transferring some of them for +1 candy or to evolving for +1 candy
                 if (keepPokemonsThatCanEvolve &&
                     pokemonsToEvolve.Contains(pokemonGroupToTransfer.Key) &&
                     settings.CandyToEvolve > 0 &&
                     settings.EvolutionIds.Count != 0)
                 {
-                    var possibleCountToEvolve = familyCandy.Candy_ / settings.CandyToEvolve;
-                    amountToKeepInStorage = Math.Max(amountToKeepInStorage, possibleCountToEvolve);
+                    var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
 
-                    //remain candy
-                    modFromEvolve = familyCandy.Candy_%settings.CandyToEvolve;
+                    // its an solution in fixed numbers of equations with two variables 
+                    // (N = X + Y, X + C + Y >= Y * E) -> X >= (N * (E - 1) - C) / E
+                    // where N - current canBeRemoved,  X - new canBeRemoved, Y - possible to keep more, E - CandyToEvolve, C - candy amount
+                    canBeRemoved = (int)Math.Ceiling((double)((settings.CandyToEvolve - 1) * canBeRemoved - familyCandy.Candy_) / settings.CandyToEvolve);
                 }
-
-                var inStorage = myPokemonList.Count(data => data.PokemonId == pokemonGroupToTransfer.Key);
-
-                var weakPokemonCount = pokemonGroupToTransfer.Count();
-
-                var needToRemove = inStorage - amountToKeepInStorage;
-                if (needToRemove <= 0)
-                    continue;
-
-                var canBeRemoved = Math.Min(needToRemove, weakPokemonCount);
 
                 if (canBeRemoved <= 0)
                     continue;
 
-                //Lets calc new canBeRemoved pokemons according to transferring some of them and use it as future candy to keepPokemonsThatCanEvolve
-                if (modFromEvolve.HasValue)
-                {
-                    // its an solution in fixed numbers of equations with two variables 
-                    // (N = X + Y, X + C >= Y * E) -> (X >= (N * E - C / 1 + E)
-                    // where N - current canBeRemoved,  X - new canBeRemoved, Y - possible to keep more, E - CandyToEvolve, C - modFromEvolve(remain candy) ) )
-                    canBeRemoved = (settings.CandyToEvolve * canBeRemoved - modFromEvolve.Value) / (1 + settings.CandyToEvolve) + 
-                                    Math.Sign((settings.CandyToEvolve * canBeRemoved - modFromEvolve.Value) % (1 + settings.CandyToEvolve));
-                }
-
-                var skipCount = weakPokemonCount - canBeRemoved;
-                
                 if (prioritizeIVoverCp)
                 {
                     results.AddRange(pokemonGroupToTransfer
-                        .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                        .ThenByDescending(n => n.Cp)
-                        .Skip(skipCount));
+                        .OrderBy(PokemonInfo.CalculatePokemonPerfection)
+                        .ThenBy(n => n.Cp)
+                        .Take(canBeRemoved));
                 }
                 else
                 {
                     results.AddRange(pokemonGroupToTransfer
-                        .OrderByDescending(x => x.Cp)
-                        .ThenByDescending(PokemonInfo.CalculatePokemonPerfection)
-                        .Skip(skipCount));
+                        .OrderBy(x => x.Cp)
+                        .ThenBy(PokemonInfo.CalculatePokemonPerfection)
+                        .Take(canBeRemoved));
                 }
             }
 
             #region For testing
-            /*
+/*
             results.ForEach(data =>
             {
-                var bestPokemonOfType = (_logicSettings.PrioritizeIvOverCp
-                 ? myPokemonList.Where(x => x.PokemonId == data.PokemonId)
-                .OrderByDescending(x => x.Cp)
-                .FirstOrDefault()
-                 : myPokemonList.Where(x => x.PokemonId == data.PokemonId)
-                .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
-                .FirstOrDefault()) ?? data;
+                var allpokemonoftype = myPokemonList.Where(x => x.PokemonId == data.PokemonId);
+                var bestPokemonOfType = 
+                    (_logicSettings.PrioritizeIvOverCp
+                         ? allpokemonoftype
+                        .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
+                        .FirstOrDefault()
+                         : allpokemonoftype
+                        .OrderByDescending(x => x.Cp)
+                        .FirstOrDefault()) 
+                    ?? data;
 
                 var perfection = PokemonInfo.CalculatePokemonPerfection(data);
                 var cp = data.Cp;
@@ -207,7 +201,7 @@ namespace PoGo.NecroBot.Logic
                 var bestPerfection = PokemonInfo.CalculatePokemonPerfection(bestPokemonOfType);
                 var bestCp = bestPokemonOfType.Cp;
             });
-            */
+*/
             #endregion
 
             return results;
@@ -354,11 +348,20 @@ namespace PoGo.NecroBot.Logic
                    select items).ToList();
         }
 
-        public async Task<List<Candy>> GetPokemonFamilies()
+        public async Task<List<Candy>> GetPokemonFamilies(int retries=0)
         {
-            var inventory = await GetCachedInventory();
+            if (retries > 3) return null;
 
-            var families = from item in inventory.InventoryDelta.InventoryItems
+            IEnumerable<Candy> families = null;
+            var inventory = await GetCachedInventory();
+            if ( inventory == null || inventory.InventoryDelta==null || inventory.InventoryDelta.InventoryItems==null)
+            {
+                DelayingUtils.Delay(3000, 3000);
+                inventory = await GetCachedInventory();
+            }
+
+            try { 
+                families = from item in inventory.InventoryDelta.InventoryItems
                             where item.InventoryItemData?.Candy != null
                             where item.InventoryItemData?.Candy.FamilyId != PokemonFamilyId.FamilyUnset
                             group item by item.InventoryItemData?.Candy.FamilyId into family
@@ -367,7 +370,12 @@ namespace PoGo.NecroBot.Logic
                                 FamilyId = family.First().InventoryItemData.Candy.FamilyId,
                                 Candy_ = family.First().InventoryItemData.Candy.Candy_
                             };
-
+            }
+            catch (NullReferenceException)
+            {
+                DelayingUtils.Delay(3000, 3000);
+                return await GetPokemonFamilies(++retries);
+            }
 
             return families.ToList();
         }
@@ -495,8 +503,10 @@ namespace PoGo.NecroBot.Logic
                 _logicSettings.KeepMinOperator, _logicSettings.KeepMinDuplicatePokemon);
         }
 
-        public async Task<GetInventoryResponse> RefreshCachedInventory()
+        public async Task<GetInventoryResponse> RefreshCachedInventory(int retries=0)
         {
+            if (retries > 3) return null;
+
             var now = DateTime.UtcNow;
             var ss = new SemaphoreSlim(10);
 
@@ -506,6 +516,12 @@ namespace PoGo.NecroBot.Logic
                 _lastRefresh = now;
                 _cachedInventory = await _client.Inventory.GetInventory();
                 return _cachedInventory;
+            }
+            catch (NullReferenceException)
+            {
+                ss.Release();
+                DelayingUtils.Delay(3000, 3000);
+                return await RefreshCachedInventory(++retries);
             }
             finally
             {
