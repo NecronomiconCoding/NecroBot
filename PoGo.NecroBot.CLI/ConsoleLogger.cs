@@ -51,6 +51,7 @@ namespace PoGo.NecroBot.CLI
             switch (level)
             {
                 case LogLevel.Error:
+
                     ConsoleColor color;
                     if (!Enum.TryParse(session.LogicSettings.ErrorColor, out color))
                     {
@@ -63,205 +64,71 @@ namespace PoGo.NecroBot.CLI
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Error}) {message}");
                     break;
                 case LogLevel.Warning:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.WarningColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.WarningColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Attention}) {message}");
                     break;
                 case LogLevel.Info:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.InfoColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.Info) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Info}) {message}");
                     break;
                 case LogLevel.Pokestop:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.PokestopColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.PokestopColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Pokestop}) {message}");
                     break;
                 case LogLevel.Farming:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.FarmingColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.FarmingColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Farming}) {message}");
                     break;
                 case LogLevel.Sniper:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.SniperColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.SniperColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Sniper}) {message}");
                     break;
                 case LogLevel.Recycling:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.RecyclingColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.RecyclingColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Recycling}) {message}");
                     break;
                 case LogLevel.Caught:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.CaughtColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.CaughtColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Pkmn}) {message}");
                     break;
                 case LogLevel.Flee:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.FleeColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.FleeColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Pkmn}) {message}");
                     break;
                 case LogLevel.Transfer:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.TransferColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.TransferColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Transferred}) {message}");
                     break;
                 case LogLevel.Evolve:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.EvolveColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.EvolveColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Evolved}) {message}");
                     break;
                 case LogLevel.Berry:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.BerryColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.BerryColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Berry}) {message}");
                     break;
                 case LogLevel.Egg:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.EggColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.EggColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Egg}) {message}");
                     break;
                 case LogLevel.Debug:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.DebugColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.DebugColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Debug}) {message}");
                     break;
                 case LogLevel.Update:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.UpdateColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.UpdateColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Update}) {message}");
                     break;
                 case LogLevel.New:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.NewColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.NewColor) : color;
                     Console.WriteLine( $"[{DateTime.Now.ToString( "HH:mm:ss" )}] ({LoggingStrings.New}) {message}" );
                     break;
                 case LogLevel.SoftBan:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.SoftBanColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.SoftBanColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.SoftBan}) {message}");
                     break;
                 case LogLevel.LevelUp:
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.LevelUpColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.LevelUpColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Pkmn}) {message}");
                     break;
                 default:
