@@ -1225,6 +1225,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
             PokemonsToIgnore = new List<PokemonId>();
             PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>();
             PokemonToUseMasterball = new List<PokemonId>();
+            // cool comment here to test git
         }
 
 
