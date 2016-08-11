@@ -18,6 +18,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            await session.Inventory.RefreshCachedInventory();
             var duplicatePokemons =
                 await
                     session.Inventory.GetDuplicatePokemonToTransfer(
