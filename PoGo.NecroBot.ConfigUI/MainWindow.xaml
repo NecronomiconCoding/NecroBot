@@ -40,11 +40,11 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Default Latitude" ToolTip="The default Latitude to use, if no LastPos.ini file is found will use these by default" />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.Latitude}" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DefaultLatitude}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Default Longitude" ToolTip="The default Longitude to use" />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.Longitude}" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DefaultLongitude}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Max Travel Distance in Meters" ToolTip="The maximum distance in meters the bot will travel from the Lat/Lon being used. 1000 meters = 1 kilometer, 1600 meters = 1 mile" />
@@ -57,6 +57,17 @@
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Max Spawn Location Offset" ToolTip="QED. Integer value." />
                             <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.MaxSpawnLocationOffset}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Current Latitude" ToolTip="If you have run the bot before, this was the last Latitude you were at and a new start will begin here. If no current coords were found on disk, we reset this to the default values." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.Latitude}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Current Longitude" ToolTip="If you have run the bot before, this was the last Longitude you were at and a new start will begin here. If no current coords were found on disk, we reset this to the default values." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.Longitude}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Button Padding="8,4" Click="ResetCoordsButton_Click">Set Current Coords to Defaults</Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Delay Between Player Actions (ms)" ToolTip="How long to pause between player actions in milliseconds (1000 ms = 1 second). Integer value." />
@@ -283,7 +294,7 @@
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Pokemon Above IV%" ToolTip="QED." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.UpgradePokemonIvMinimum}" />
+                                <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.UpgradePokemonIvMinimum}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Upgrade Stats Operator" ToolTip="AND means the Pokemon must meet both IV% and CP requirements - OR means either." />
@@ -302,7 +313,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Evolve Pokemon at Storage Usage %" ToolTip="Decimals allowed." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.EvolveKeptPokemonsAtStorageUsagePercentage}" />
+                            <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.EvolveKeptPokemonsAtStorageUsagePercentage}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <CheckBox Content="Keep Pokemon which Can Evolve" IsChecked="{Binding Settings.KeepPokemonsThatCanEvolve}" ToolTip="QED." />
@@ -312,7 +323,7 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}" Visibility="{Binding Settings.AutoFavoritePokemon, Converter={StaticResource VisConv}}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Favorite Pokemon above IV%" ToolTip="If the IV of a Pokemon is at or above this % it will be favorited and not transfered. Decimals allowed." />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.FavoriteMinIvPercentage}" />
+                            <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.FavoriteMinIvPercentage}" />
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>
@@ -432,19 +443,73 @@
 
             <TabItem Header="Transfer">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                    <StackPanel />
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <TextBlock Padding="3,3,24,3" TextWrapping="Wrap" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}}"
+                                       Text="We are currently working on building a completely new keep/transfer logic system which will be simple to use and easier for us to manage in the code for our system. We will not be providing a UI for configuring the old system, you will have to configure transfer/keep settings by hand until we have rolled-out the new system. With the new system we will be adding the UI for configuring it here - we hope to have it done soon!" />
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Pokemon to NOT Transfer" ToolTip="Allows you to choose which Pokemon you do NOT want transferred automatically." />
+                        </StackPanel>
+                        <ScrollViewer MaxHeight="250" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Margin="0,0,15,0">
+                            <ItemsControl ItemsSource="{Binding Settings.NoTransferCollection}" ItemTemplate="{StaticResource PokemonToggleTemplate}" />
+                        </ScrollViewer>
+                    </StackPanel>
                 </ScrollViewer>
             </TabItem>
 
             <TabItem Header="Sniping">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                    <StackPanel />
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <TextBlock Padding="3,3,24,3" TextWrapping="Wrap" MaxWidth="{Binding ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}}"
+                                       Text="We are currently refactoring our entire sniping system at this time and therefore not working on the UI until the dust has settled. For now you must alter your config file by hand for sniping options. We will be adding configuration here once the dust has settled on the new sniping features. WARNING: Sniping is extremely risky and easy to detect, using sniping will almost certainly flag your account for a future ban - you have been warned!!!" />
+                        </StackPanel>
+                    </StackPanel>
                 </ScrollViewer>
             </TabItem>
 
             <TabItem Header="Misc">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Visible">
-                    <StackPanel />
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Pokemon to Display at Start" ToolTip="Allows you to set the number of Pokemon from your collection to display when starting the bot, set to 0 for none." />
+                            <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.AmountOfPokemonToDisplayOnStart}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Detailed Counts Before Recycling" IsChecked="{Binding Settings.DetailedCountsBeforeRecycling}" ToolTip="Check this box to show detailed inventory prior to recycle phases." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Dump Pokemon Stats" IsChecked="{Binding Settings.DumpPokemonStats}" ToolTip="QED." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Use Websocket Service" IsChecked="{Binding Settings.UseWebsocket}" ToolTip="Check this box to enable the websocket service while NecroBot is running." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}" Visibility="{Binding Settings.UseWebsocket, Converter={StaticResource VisConv}}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="WebSocket Port" ToolTip="The port to listen on for the NecroBot websocket service." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.WebSocketPort}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Use GPX Pathing" IsChecked="{Binding Settings.UseGpxPathing}" ToolTip="Check this box to supply a GPX file for pathing the bot and enable the feature." />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}" Visibility="{Binding Settings.UseGpxPathing, Converter={StaticResource VisConv}}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="GPX File" ToolTip="The full or relative path to the GPX file you want to use for pathing." />
+                            <TextBox Style="{StaticResource LineItemTextBoxLg}" Text="{Binding Settings.GpxFile}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <CheckBox Content="Use Telegram API" IsChecked="{Binding Settings.UseTelegramAPI}" ToolTip="Check this box to enable the Telegram messaging service from NecroBot." />
+                        </StackPanel>
+                        <StackPanel Visibility="{Binding Settings.UseTelegramAPI, Converter={StaticResource VisConv}}">
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Telegram API Key" ToolTip="QED." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TelegramAPIKey}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                                <Label Style="{StaticResource LineItemLabel}" Content="Telegram Password" ToolTip="QED." />
+                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.TelegramPassword}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
                 </ScrollViewer>
             </TabItem>
 

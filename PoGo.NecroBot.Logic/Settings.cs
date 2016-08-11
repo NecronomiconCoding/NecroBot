@@ -97,7 +97,7 @@ namespace PoGo.NecroBot.Logic
 
                 if (File.Exists(_filePath))
                 {
-                    //if the file exists, load the settings
+                    // if the file exists, load the settings
                     var input = File.ReadAllText(_filePath);
 
                     var settings = new JsonSerializerSettings();
@@ -179,7 +179,7 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
-        public void checkProxy()
+        public void checkProxy(ITranslation translator)
         {
             using (var tempWebClient = new NecroWebClient())
             {
@@ -189,23 +189,18 @@ namespace PoGo.NecroBot.Logic
                     tempWebClient.Proxy = this.InitProxy();
                     string proxiedIPres = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
                     string proxiedIP = proxiedIPres == null?"INVALID PROXY": proxiedIPres;
-                    Logger.Write(
-                       $"Your IP is: {unproxiedIP} / Proxy IP is: {proxiedIP}",
-                       LogLevel.Info, (unproxiedIP==proxiedIP)?ConsoleColor.Red:ConsoleColor.Green);
+                    Logger.Write(translator.GetTranslation(TranslationString.Proxied, unproxiedIP, proxiedIP), LogLevel.Info, (unproxiedIP == proxiedIP) ? ConsoleColor.Red : ConsoleColor.Green);
 
                     if (unproxiedIP == proxiedIP || proxiedIPres == null)
                     {
-                        Logger.Write("Press any key to exit so you can fix your proxy settings...",
-                            LogLevel.Info, ConsoleColor.Red);
+                        Logger.Write(translator.GetTranslation(TranslationString.FixProxySettings), LogLevel.Info, ConsoleColor.Red);
                         Console.ReadKey();
                         Environment.Exit(0);
                     }
                 }
                 else
                 {
-                    Logger.Write(
-                       $"Your IP is: {unproxiedIP}",
-                       LogLevel.Info, ConsoleColor.Red);
+                    Logger.Write(translator.GetTranslation(TranslationString.Unproxied, unproxiedIP), LogLevel.Info, ConsoleColor.Red);
                 }
             }
         }
@@ -297,9 +292,6 @@ namespace PoGo.NecroBot.Logic
         public bool UseWebsocket;
         [DefaultValue(14251)]
         public int WebSocketPort;
-        //pressakeyshit
-        [DefaultValue(false)]
-        public bool StartupWelcomeDelay;
         //Telegram
         [DefaultValue(false)]
         public bool UseTelegramAPI;
@@ -308,22 +300,22 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue("12345")]
         public string TelegramPassword;
         //console options
+        [DefaultValue(false)]
+        public bool StartupWelcomeDelay;
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
         [DefaultValue(true)]
         public bool DetailedCountsBeforeRecycling;
-
-        [DefaultValue(3)]
-        public int MaxBerriesToUsePerPokemon;
         //pokemon
         [DefaultValue(true)]
         public bool CatchPokemon;
+        [DefaultValue(3)]
+        public int MaxBerriesToUsePerPokemon;
         //powerup
         [DefaultValue(false)]
         public bool AutomaticallyLevelUpPokemon;
         [DefaultValue(true)]
         public bool OnlyUpgradeFavorites;
-
         [DefaultValue((true))]
         public bool UseLevelUpList;
         [DefaultValue(5)]
@@ -401,12 +393,12 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(5)]
         public int RandomRecycleValue;
         [DefaultValue(false)]
-        public bool DelayBetweenRecycleActions;
+        public bool DelayBetweenRecycleActions; // Jurann TODO: change this to int millis instead of bool
         //lucky, incense and berries
         [DefaultValue(true)]
         public bool UseEggIncubators;
         [DefaultValue(2)]
-        public int minEggKmForLimitedIncubators;
+        public int UseEggIncubatorMinKm;
         [DefaultValue(false)]
         public bool UseLuckyEggConstantly;
         [DefaultValue(30)]
@@ -529,6 +521,7 @@ namespace PoGo.NecroBot.Logic
         public bool UsePokemonToNotCatchFilter;
         [DefaultValue(false)]
         public bool UsePokemonSniperFilterOnly;
+
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
@@ -887,9 +880,9 @@ namespace PoGo.NecroBot.Logic
             return shouldExit ? null : settings;
         }
 
-        public void checkProxy()
+        public void checkProxy(ITranslation translator)
         {
-            Auth.checkProxy();
+            Auth.checkProxy(translator);
         }
 
         public static bool PromptForSetup(ITranslation translator)
@@ -1356,7 +1349,7 @@ namespace PoGo.NecroBot.Logic
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool TransferDuplicatePokemonOnCapture => _settings.TransferDuplicatePokemonOnCapture;
         public bool UseEggIncubators => _settings.UseEggIncubators;
-        public int minEggKmForLimitedIncubators => _settings.minEggKmForLimitedIncubators;
+        public int UseEggIncubatorMinKm => _settings.UseEggIncubatorMinKm;
         public int UseGreatBallAboveCp => _settings.UseGreatBallAboveCp;
         public int UseUltraBallAboveCp => _settings.UseUltraBallAboveCp;
         public int UseMasterBallAboveCp => _settings.UseMasterBallAboveCp;
