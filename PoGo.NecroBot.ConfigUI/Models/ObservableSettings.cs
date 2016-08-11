@@ -1166,29 +1166,37 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public static readonly DependencyProperty NoTransferCollectionProperty =
             DependencyProperty.Register("NoTransferCollection", typeof(ObservableCollection<PokemonToggle>), typeof(ObservableSettings), new PropertyMetadata(null));
 
-        public List<PokemonId> PokemonsToEvolve
+        public ObservableCollection<PokemonToggle> EvolveCollection
         {
-            get { return (List<PokemonId>)GetValue(PokemonsToEvolveProperty); }
-            set { SetValue(PokemonsToEvolveProperty, value); }
+            get { return (ObservableCollection<PokemonToggle>)GetValue(EvolveCollectionProperty); }
+            set { SetValue(EvolveCollectionProperty, value); }
         }
-        public static readonly DependencyProperty PokemonsToEvolveProperty =
-            DependencyProperty.Register("PokemonsToEvolve", typeof(List<PokemonId>), typeof(ObservableSettings), new PropertyMetadata(null));
+        public static readonly DependencyProperty EvolveCollectionProperty =
+            DependencyProperty.Register("EvolveCollection", typeof(ObservableCollection<PokemonToggle>), typeof(ObservableSettings), new PropertyMetadata(null));
 
-        public List<PokemonId> PokemonsToLevelUp
+        public ObservableCollection<PokemonToggle> UpgradeCollection
         {
-            get { return (List<PokemonId>)GetValue(PokemonsToLevelUpProperty); }
-            set { SetValue(PokemonsToLevelUpProperty, value); }
+            get { return (ObservableCollection<PokemonToggle>)GetValue(UpgradeCollectionProperty); }
+            set { SetValue(UpgradeCollectionProperty, value); }
         }
-        public static readonly DependencyProperty PokemonsToLevelUpProperty =
-            DependencyProperty.Register("PokemonsToLevelUp", typeof(List<PokemonId>), typeof(ObservableSettings), new PropertyMetadata(null));
+        public static readonly DependencyProperty UpgradeCollectionProperty =
+            DependencyProperty.Register("UpgradeCollection", typeof(ObservableCollection<PokemonToggle>), typeof(ObservableSettings), new PropertyMetadata(null));
 
-        public List<PokemonId> PokemonsToIgnore
+        public ObservableCollection<PokemonToggle> IgnoreCollection
         {
-            get { return (List<PokemonId>)GetValue(PokemonsToIgnoreProperty); }
-            set { SetValue(PokemonsToIgnoreProperty, value); }
+            get { return (ObservableCollection<PokemonToggle>)GetValue(IgnoreCollectionProperty); }
+            set { SetValue(IgnoreCollectionProperty, value); }
         }
-        public static readonly DependencyProperty PokemonsToIgnoreProperty =
-            DependencyProperty.Register("PokemonsToIgnore", typeof(List<PokemonId>), typeof(ObservableSettings), new PropertyMetadata(null));
+        public static readonly DependencyProperty IgnoreCollectionProperty =
+            DependencyProperty.Register("IgnoreCollection", typeof(ObservableCollection<PokemonToggle>), typeof(ObservableSettings), new PropertyMetadata(null));
+
+        public ObservableCollection<PokemonToggle> MasterballCollection
+        {
+            get { return (ObservableCollection<PokemonToggle>)GetValue(MasterballCollectionProperty); }
+            set { SetValue(MasterballCollectionProperty, value); }
+        }
+        public static readonly DependencyProperty MasterballCollectionProperty =
+            DependencyProperty.Register("MasterballCollection", typeof(ObservableCollection<PokemonToggle>), typeof(ObservableSettings), new PropertyMetadata(null));
 
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter
         {
@@ -1206,27 +1214,27 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public static readonly DependencyProperty PokemonToSnipeProperty =
             DependencyProperty.Register("PokemonToSnipe", typeof(SnipeSettings), typeof(ObservableSettings), new PropertyMetadata(null));
 
-        public List<PokemonId> PokemonToUseMasterball
-        {
-            get { return (List<PokemonId>)GetValue(PokemonToUseMasterballProperty); }
-            set { SetValue(PokemonToUseMasterballProperty, value); }
-        }
-        public static readonly DependencyProperty PokemonToUseMasterballProperty =
-            DependencyProperty.Register("PokemonToUseMasterball", typeof(List<PokemonId>), typeof(ObservableSettings), new PropertyMetadata(null));
-
 
 
         public ObservableSettings()
         {
-            ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>();
             NoTransferCollection = new ObservableCollection<PokemonToggle>();
-            PokemonsToEvolve = new List<PokemonId>();
-            PokemonsToLevelUp = new List<PokemonId>();
-            PokemonsToIgnore = new List<PokemonId>();
+            EvolveCollection = new ObservableCollection<PokemonToggle>();
+            UpgradeCollection = new ObservableCollection<PokemonToggle>();
+            IgnoreCollection = new ObservableCollection<PokemonToggle>();
+            MasterballCollection = new ObservableCollection<PokemonToggle>();
             PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>();
-            PokemonToUseMasterball = new List<PokemonId>();
+            ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>();
         }
 
+        private void LoadCurrentCoords()
+        {
+            // TODO:
+        }
+        private void SaveCurrentCoords()
+        {
+            // TODO:
+        }
 
         public static ObservableSettings CreateFromGlobalSettings(GlobalSettings set)
         {
@@ -1237,8 +1245,8 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.TransferConfigAndAuthOnUpdate = set.TransferConfigAndAuthOnUpdate;
             res.StartupWelcomeDelay = set.StartupWelcomeDelay;
             res.DisableHumanWalking = set.DisableHumanWalking;
-            res.Latitude = set.DefaultLatitude;
-            res.Longitude = set.DefaultLongitude;
+            res.DefaultLatitude = set.DefaultLatitude;
+            res.DefaultLongitude = set.DefaultLongitude;
             res.MaxTravelDistanceInMeters = set.MaxTravelDistanceInMeters;
             res.WalkingSpeedInKilometerPerHour = set.WalkingSpeedInKilometerPerHour;
             res.MaxSpawnLocationOffset = set.MaxSpawnLocationOffset;
@@ -1373,9 +1381,17 @@ namespace PoGo.NecroBot.ConfigUI.Models
             foreach (PokemonId pid in Enum.GetValues(typeof(PokemonId)))
             {
                 res.NoTransferCollection.Add(new PokemonToggle(pid, set.PokemonsNotToTransfer.Contains(pid)));
+                res.EvolveCollection.Add(new PokemonToggle(pid, set.PokemonsToEvolve.Contains(pid)));
+                res.UpgradeCollection.Add(new PokemonToggle(pid, set.PokemonsToLevelUp.Contains(pid)));
+                res.IgnoreCollection.Add(new PokemonToggle(pid, set.PokemonsToIgnore.Contains(pid)));
+                res.MasterballCollection.Add(new PokemonToggle(pid, set.PokemonToUseMasterball.Contains(pid)));
             }
+            foreach (PokemonId key in set.PokemonsTransferFilter.Keys)
+                res.PokemonsTransferFilter.Add(key, set.PokemonsTransferFilter[key]);
+            foreach (KeyValuePair<ItemId, int> kvp in set.ItemRecycleFilter)
+                res.ItemRecycleFilter.Add(kvp);
 
-                return res;
+            return res;
         }
 
         internal GlobalSettings GetGlobalSettingsObject()
@@ -1522,6 +1538,19 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.PokemonToSnipe = PokemonToSnipe;
             gs.PokemonsNotToTransfer.Clear();
             foreach (PokemonToggle pt in NoTransferCollection) if (pt.IsChecked) gs.PokemonsNotToTransfer.Add(pt.Id);
+            gs.PokemonsToEvolve.Clear();
+            foreach (PokemonToggle pt in EvolveCollection) if (pt.IsChecked) gs.PokemonsToEvolve.Add(pt.Id);
+            gs.PokemonsToLevelUp.Clear();
+            foreach (PokemonToggle pt in UpgradeCollection) if (pt.IsChecked) gs.PokemonsToLevelUp.Add(pt.Id);
+            gs.PokemonsToIgnore.Clear();
+            foreach (PokemonToggle pt in IgnoreCollection) if (pt.IsChecked) gs.PokemonsToIgnore.Add(pt.Id);
+            gs.PokemonToUseMasterball.Clear();
+            foreach (PokemonToggle pt in MasterballCollection) if (pt.IsChecked) gs.PokemonToUseMasterball.Add(pt.Id);
+            gs.PokemonsTransferFilter.Clear();
+            foreach (PokemonId key in PokemonsTransferFilter.Keys)
+                gs.PokemonsTransferFilter.Add(key, PokemonsTransferFilter[key]);
+            foreach (KeyValuePair<ItemId, int> kvp in ItemRecycleFilter)
+                gs.ItemRecycleFilter.Add(kvp);
 
             return gs;
         }
