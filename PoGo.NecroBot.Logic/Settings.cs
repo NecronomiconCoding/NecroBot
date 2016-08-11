@@ -550,7 +550,7 @@ namespace PoGo.NecroBot.Logic
             //PokemonId.Blastoise,
             //PokemonId.Nidoqueen,
             //PokemonId.Nidoking,
-            PokemonId.Clefable,
+            //PokemonId.Clefable,
             //PokemonId.Vileplume,
             //PokemonId.Golduck,
             //PokemonId.Arcanine,
