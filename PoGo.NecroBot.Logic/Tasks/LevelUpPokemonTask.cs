@@ -1,12 +1,12 @@
 ﻿#region using directives
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Logging;
-using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.PoGoUtils;
-using System.Linq;
+using PoGo.NecroBot.Logic.State;
 using POGOProtos.Data;
 
 #endregion
@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         if (PokemonToLevel.Contains(pokemon.PokemonId))
                         {
                             if (PokemonInfo.GetLevel(pokemon) >=
-                                session.Inventory.GetPlayerStats().Result.FirstOrDefault().Level + 1) break;
+                                session.Inventory.GetPlayerStats().Result.FirstOrDefault().Level + 1) continue;
 
                             var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
                             var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);
@@ -82,7 +82,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else
                 {
-                    if (PokemonInfo.GetLevel(pokemon) >= session.Inventory.GetPlayerStats().Result.FirstOrDefault().Level + 1) break;
+                    if (PokemonInfo.GetLevel(pokemon) >= session.Inventory.GetPlayerStats().Result.FirstOrDefault().Level + 1) continue;
 
                     var settings = pokemonSettings.Single(x => x.PokemonId == pokemon.PokemonId);
                     var familyCandy = pokemonFamilies.Single(x => settings.FamilyId == x.FamilyId);

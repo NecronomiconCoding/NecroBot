@@ -1,6 +1,5 @@
 ﻿#region using directives
 
-using CloudFlareUtilities;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,7 +10,9 @@ using System.Net.Http;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using CloudFlareUtilities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
@@ -21,7 +22,6 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
 using Quobject.SocketIoClientDotNet.Client;
-using Newtonsoft.Json.Linq;
 
 #endregion
 
@@ -342,10 +342,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains(q.pokemon_name));
                                 var notVisitedPokemon = filteredPokemon.Where(q => !LocsVisited.Contains(q));
-                                var notExpiredPokemon = notVisitedPokemon.Where(q => q.expires < (DateTime.Now.ToUniversalTime() - (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))).TotalMilliseconds);
 
-                                if (notExpiredPokemon.Any())
-                                    locationsToSnipe.AddRange(notExpiredPokemon);
+                                if (notVisitedPokemon.Any())
+                                    locationsToSnipe.AddRange(notVisitedPokemon);
                             }
 
                             var _locationsToSnipe = locationsToSnipe.OrderBy(q => q.expires).ToList();
@@ -354,12 +353,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 foreach (var pokemonLocation in _locationsToSnipe)
                                 {
-                                    if (!LocsVisited.Contains(new PokemonLocation(pokemonLocation.latitude, pokemonLocation.longitude)))
+                                    if ((pokemonLocation.expires - 5) > (DateTime.Now.ToUniversalTime() - (new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))).TotalSeconds)
                                     {
                                         if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                             return;
                                         
-                                        await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
+                                        await Snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude, cancellationToken);
                                     }
                                 }
                             }
@@ -554,41 +553,56 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var socket = IO.Socket("http://pokezz.com", options);
 
-            var hasError = false;
+            var hasError = true;
 
             ManualResetEventSlim waitforbroadcast = new ManualResetEventSlim(false);
 
             List<PokemonLocation_pokezz> pokemons = new List<PokemonLocation_pokezz>();
 
-            socket.On("pokemons", (msg) =>
+            socket.On("a", (msg) =>
             {
+                hasError = false;
                 socket.Close();
-                JArray data = JArray.FromObject(msg);
-
-                foreach (var pokeToken in data.Children())
+                string[] pokemonDefinitions = ((String)msg).Split('~');
+                foreach (var pokemonDefinition in pokemonDefinitions)
                 {
-                    var Token = pokeToken.ToString().Replace(" M", "Male").Replace(" F", "Female").Replace("Farfetch'd", "Farfetchd").Replace("Mr.Maleime", "MrMime");
-                    pokemons.Add(JToken.Parse(Token).ToObject<PokemonLocation_pokezz>());
-                }
+                    try
+                    {
+                        string[] pokemonDefinitionElements = pokemonDefinition.Split('|');
+                        PokemonLocation_pokezz pokezzElement = new PokemonLocation_pokezz();
+                        pokezzElement.name = (PokemonId)Convert.ToInt32(pokemonDefinitionElements[0], CultureInfo.InvariantCulture);
+                        pokezzElement.lat = Convert.ToDouble(pokemonDefinitionElements[1], CultureInfo.InvariantCulture);
+                        pokezzElement.lng = Convert.ToDouble(pokemonDefinitionElements[2], CultureInfo.InvariantCulture);
+                        pokezzElement.time = Convert.ToDouble(pokemonDefinitionElements[3], CultureInfo.InvariantCulture);
+                        pokezzElement.verified = (pokemonDefinitionElements[4] == "0") ? false : true;
+                        pokezzElement.iv = pokemonDefinitionElements[5];
 
+                        pokemons.Add(pokezzElement);
+                    }
+                    catch(Exception)
+                    {
+                        // Just in case Pokezz changes their implementation, let's catch the error and set the error flag.
+                        hasError = true;
+                    }
+                }
+                
                 waitforbroadcast.Set();
             });
 
             socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_ERROR, () =>
             {
                 socket.Close();
-                hasError = true;
                 waitforbroadcast.Set();
             });
 
             socket.On(Quobject.SocketIoClientDotNet.Client.Socket.EVENT_CONNECT_ERROR, () =>
             {
                 socket.Close();
-                hasError = true;
                 waitforbroadcast.Set();
             });
 
-            waitforbroadcast.Wait();
+            waitforbroadcast.Wait(5000); // Wait a maximum of 5 seconds for Pokezz to respond.
+            socket.Close();
             if (!hasError)
             {
                 foreach (var pokemon in pokemons)
@@ -598,7 +612,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     SnipInfo.Latitude = pokemon.lat;
                     SnipInfo.Longitude = pokemon.lng;
                     SnipInfo.TimeStampAdded = DateTime.Now;
-                    SnipInfo.ExpirationTimestamp = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(Math.Round(pokemon.time / 1000d)).ToLocalTime();
+                    SnipInfo.ExpirationTimestamp = new DateTime(1970, 1, 1, 0, 0, 0, 0).AddSeconds(pokemon.time).ToLocalTime();
                     SnipInfo.IV = pokemon._iv;
                     if (pokemon.verified || !session.LogicSettings.GetOnlyVerifiedSniperInfoFromPokezz)
                         SnipeLocations.Add(SnipInfo);
@@ -700,7 +714,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 // Create a HttpClient that uses the handler.
                 var client = new HttpClient(handler);
-
+                
+                // Our new firewall requires a user agent, or you'll be blocked.
+                client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/511.2 (KHTML, like Gecko) Chrome/15.0.041.151 Safari/555.2");
+                
                 // Use the HttpClient as usual. Any JS challenge will be solved automatically for you.
                 var fullresp = "{ \"pokemons\":" + client.GetStringAsync(uri).Result.Replace(" M", "Male").Replace(" F", "Female").Replace("Farfetch'd", "Farfetchd").Replace("Mr.Maleime", "MrMime") +"}";
 
