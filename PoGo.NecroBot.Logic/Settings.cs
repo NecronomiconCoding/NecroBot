@@ -360,9 +360,9 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(true)]
         public bool EvolveAllPokemonWithEnoughCandy;
         [DefaultValue(90.0)]
-        public double EvolveKeptPokemonsAtStorageUsagePercentage;
+        public double EvolveKeptPokemonAtStorageUsagePercentage;
         [DefaultValue(false)]
-        public bool KeepPokemonsThatCanEvolve;
+        public bool KeepPokemonThatCanEvolve;
         //keeping
         [DefaultValue(1250)]
         public int KeepMinCp;
@@ -542,7 +542,7 @@ namespace PoGo.NecroBot.Logic
         };
 
         
-        public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
+        public List<PokemonId> PokemonNotToTransfer = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
             PokemonId.Venusaur,
@@ -583,7 +583,7 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Mew
         };
 
-        public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
+        public List<PokemonId> PokemonToEvolve = new List<PokemonId>
         {
             /*NOTE: keep all the end-of-line commas exept for the last one or an exception will be thrown!
             criteria: 12 candies*/
@@ -621,7 +621,7 @@ namespace PoGo.NecroBot.Logic
             //PokemonId.Goldeen,
             //PokemonId.Staryu
         };
-        public List<PokemonId> PokemonsToLevelUp = new List<PokemonId>
+        public List<PokemonId> PokemonToLevelUp = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
             PokemonId.Venusaur,
@@ -661,7 +661,7 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Mewtwo,
             PokemonId.Mew
         };
-        public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
+        public List<PokemonId> PokemonToIgnore = new List<PokemonId>
         {
             //criteria: most common
             PokemonId.Caterpie,
@@ -673,7 +673,7 @@ namespace PoGo.NecroBot.Logic
             PokemonId.Doduo
         };
 
-        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
+        public Dictionary<PokemonId, TransferFilter> PokemonTransferFilter = new Dictionary<PokemonId, TransferFilter>
         {
             //criteria: based on NY Central Park and Tokyo variety + sniping optimization
             {PokemonId.Golduck, new TransferFilter(1800, 6, false, 95, "or", 1)},
@@ -841,15 +841,15 @@ namespace PoGo.NecroBot.Logic
                     settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
 
                     //This makes sure that existing config files dont get null values which lead to an exception
-                    foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.KeepMinOperator == null))
+                    foreach (var filter in settings.PokemonTransferFilter.Where(x => x.Value.KeepMinOperator == null))
                     {
                         filter.Value.KeepMinOperator = "or";
                     }
-                    foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
+                    foreach (var filter in settings.PokemonTransferFilter.Where(x => x.Value.Moves == null))
                     {
                         filter.Value.Moves = new List<List<PokemonMove>>();
                     }
-                    foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.MovesOperator == null))
+                    foreach (var filter in settings.PokemonTransferFilter.Where(x => x.Value.MovesOperator == null))
                     {
                         filter.Value.MovesOperator = "or";
                     }
@@ -1345,7 +1345,7 @@ namespace PoGo.NecroBot.Logic
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
         public bool FastSoftBanBypass => _settings.FastSoftBanBypass;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
-        public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
+        public bool KeepPokemonThatCanEvolve => _settings.KeepPokemonThatCanEvolve;
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool TransferDuplicatePokemonOnCapture => _settings.TransferDuplicatePokemonOnCapture;
         public bool UseEggIncubators => _settings.UseEggIncubators;
@@ -1391,15 +1391,15 @@ namespace PoGo.NecroBot.Logic
         public bool DetailedCountsBeforeRecycling => _settings.DetailedCountsBeforeRecycling;
         public bool VerboseRecycling => _settings.VerboseRecycling;
         public double RecycleInventoryAtUsagePercentage => _settings.RecycleInventoryAtUsagePercentage;
-        public double EvolveKeptPokemonsAtStorageUsagePercentage => _settings.EvolveKeptPokemonsAtStorageUsagePercentage;
+        public double EvolveKeptPokemonAtStorageUsagePercentage => _settings.EvolveKeptPokemonAtStorageUsagePercentage;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
-        public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
-        public ICollection<PokemonId> PokemonsToLevelUp => _settings.PokemonsToLevelUp;
-        public ICollection<PokemonId> PokemonsNotToTransfer => _settings.PokemonsNotToTransfer;
-        public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonsToIgnore;
+        public ICollection<PokemonId> PokemonToEvolve => _settings.PokemonToEvolve;
+        public ICollection<PokemonId> PokemonToLevelUp => _settings.PokemonToLevelUp;
+        public ICollection<PokemonId> PokemonNotToTransfer => _settings.PokemonNotToTransfer;
+        public ICollection<PokemonId> PokemonsNotToCatch => _settings.PokemonToIgnore;
 
         public ICollection<PokemonId> PokemonToUseMasterball => _settings.PokemonToUseMasterball;
-        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
+        public Dictionary<PokemonId, TransferFilter> PokemonTransferFilter => _settings.PokemonTransferFilter;
         public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
         public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
 

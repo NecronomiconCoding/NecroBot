@@ -21,9 +21,9 @@ namespace PoGo.NecroBot.Logic.Tasks
             var duplicatePokemons =
                 await
                     session.Inventory.GetDuplicatePokemonToTransfer(
-                        session.LogicSettings.PokemonsNotToTransfer,
-                        session.LogicSettings.PokemonsToEvolve, 
-                        session.LogicSettings.KeepPokemonsThatCanEvolve,
+                        session.LogicSettings.PokemonNotToTransfer,
+                        session.LogicSettings.PokemonToEvolve, 
+                        session.LogicSettings.KeepPokemonThatCanEvolve,
                         session.LogicSettings.PrioritizeIvOverCp);
 
             var orderedPokemon = duplicatePokemons.OrderBy( poke => poke.Cp );
