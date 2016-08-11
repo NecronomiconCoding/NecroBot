@@ -40,11 +40,11 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Default Latitude" ToolTip="The default Latitude to use, if no LastPos.ini file is found will use these by default" />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.Latitude}" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DefaultLatitude}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Default Longitude" ToolTip="The default Longitude to use" />
-                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.Longitude}" />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.DefaultLongitude}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Max Travel Distance in Meters" ToolTip="The maximum distance in meters the bot will travel from the Lat/Lon being used. 1000 meters = 1 kilometer, 1600 meters = 1 mile" />
@@ -57,6 +57,17 @@
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Max Spawn Location Offset" ToolTip="QED. Integer value." />
                             <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.MaxSpawnLocationOffset}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Current Latitude" ToolTip="If you have run the bot before, this was the last Latitude you were at and a new start will begin here. If no current coords were found on disk, we reset this to the default values." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.Latitude}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Label Style="{StaticResource LineItemLabel}" Content="Current Longitude" ToolTip="If you have run the bot before, this was the last Longitude you were at and a new start will begin here. If no current coords were found on disk, we reset this to the default values." />
+                            <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.Longitude}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
+                            <Button Padding="8,4" Click="ResetCoordsButton_Click">Set Current Coords to Defaults</Button>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Delay Between Player Actions (ms)" ToolTip="How long to pause between player actions in milliseconds (1000 ms = 1 second). Integer value." />
