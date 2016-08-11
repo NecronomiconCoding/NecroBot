@@ -352,6 +352,8 @@ namespace PoGo.NecroBot.Logic
         //dump stats
         [DefaultValue(false)]
         public bool DumpPokemonStats;
+        [DefaultValue(",")]
+        public string DumpSeparator;
         //evolve
         [DefaultValue(95)]
         public float EvolveAboveIvValue;
@@ -1387,6 +1389,7 @@ namespace PoGo.NecroBot.Logic
         public string RenameTemplate => _settings.RenameTemplate;
         public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
         public bool DumpPokemonStats => _settings.DumpPokemonStats;
+        public string DumpSeparator => _settings.DumpSeparator;
         public string TranslationLanguageCode => _settings.TranslationLanguageCode;
         public bool DetailedCountsBeforeRecycling => _settings.DetailedCountsBeforeRecycling;
         public bool VerboseRecycling => _settings.VerboseRecycling;
