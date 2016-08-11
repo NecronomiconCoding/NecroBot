@@ -288,7 +288,7 @@ namespace PoGo.NecroBot.Logic
         [JsonIgnore]
         public bool isGui;
 
-        [DevaultValue("Put your notes here. User notes will be preserved upon updates")]
+        [DefaultValue("Put your notes here. User notes will be preserved upon updates")]
         public string ThisConfigUserNote;
         [DefaultValue("en")]
         public string TranslationLanguageCode;
