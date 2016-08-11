@@ -179,7 +179,7 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
-        public void checkProxy(ITranslation translator)
+        public void checkProxy()
         {
             using (var tempWebClient = new NecroWebClient())
             {
@@ -189,18 +189,23 @@ namespace PoGo.NecroBot.Logic
                     tempWebClient.Proxy = this.InitProxy();
                     string proxiedIPres = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
                     string proxiedIP = proxiedIPres == null?"INVALID PROXY": proxiedIPres;
-                    Logger.Write(translator.GetTranslation(TranslationString.Proxied, unproxiedIP, proxiedIP), LogLevel.Info, (unproxiedIP == proxiedIP) ? ConsoleColor.Red : ConsoleColor.Green);
+                    Logger.Write(
+                       $"Your IP is: {unproxiedIP} / Proxy IP is: {proxiedIP}",
+                       LogLevel.Info, (unproxiedIP==proxiedIP)?ConsoleColor.Red:ConsoleColor.Green);
 
                     if (unproxiedIP == proxiedIP || proxiedIPres == null)
                     {
-                        Logger.Write(translator.GetTranslation(TranslationString.FixProxySettings), LogLevel.Info, ConsoleColor.Red);
+                        Logger.Write("Press any key to exit so you can fix your proxy settings...",
+                            LogLevel.Info, ConsoleColor.Red);
                         Console.ReadKey();
                         Environment.Exit(0);
                     }
                 }
                 else
                 {
-                    Logger.Write(translator.GetTranslation(TranslationString.Unproxied, unproxiedIP), LogLevel.Info, ConsoleColor.Red);
+                    Logger.Write(
+                       $"Your IP is: {unproxiedIP}",
+                       LogLevel.Info, ConsoleColor.Red);
                 }
             }
         }
@@ -349,6 +354,8 @@ namespace PoGo.NecroBot.Logic
         public int DelayBetweenPlayerActions;
         [DefaultValue(2000)]
         public int DelayBetweenPokemonCatch;
+        [DefaultValue(7000)]
+        public int DelayBetweenLocationUpdate;
         //dump stats
         [DefaultValue(false)]
         public bool DumpPokemonStats;
@@ -880,9 +887,9 @@ namespace PoGo.NecroBot.Logic
             return shouldExit ? null : settings;
         }
 
-        public void checkProxy(ITranslation translator)
+        public void checkProxy()
         {
-            Auth.checkProxy(translator);
+            Auth.checkProxy();
         }
 
         public static bool PromptForSetup(ITranslation translator)
@@ -1369,6 +1376,7 @@ namespace PoGo.NecroBot.Logic
         public int ForceExcellentThrowOverCp => _settings.ForceExcellentThrowOverCp;
         public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
         public int DelayBetweenPlayerActions => _settings.DelayBetweenPlayerActions;
+        public int DelayBetweenLocationUpdate => _settings.DelayBetweenLocationUpdate;
         public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
         public bool UsePokemonSniperFilterOnly => _settings.UsePokemonSniperFilterOnly;
         public int KeepMinDuplicatePokemon => _settings.KeepMinDuplicatePokemon;
