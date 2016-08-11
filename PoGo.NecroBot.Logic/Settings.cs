@@ -1363,6 +1363,8 @@ namespace PoGo.NecroBot.Logic
         public double UseUltraBallBelowCatchProbability => _settings.UseUltraBallBelowCatchProbability;
         public double UseGreatBallBelowCatchProbability => _settings.UseGreatBallBelowCatchProbability;
         public bool EnableHumanizedThrows => _settings.EnableHumanizedThrows;
+        public bool EnableMissedThrows => _settings.EnableMissedThrows;
+        public int ThrowMissPercentage => _settings.ThrowMissPercentage;
         public int NiceThrowChance => _settings.NiceThrowChance;
         public int GreatThrowChance => _settings.GreatThrowChance;
         public int ExcellentThrowChance => _settings.ExcellentThrowChance;
