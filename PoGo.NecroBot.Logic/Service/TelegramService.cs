@@ -26,16 +26,23 @@ namespace PoGo.NecroBot.Logic.Service
         private DateTime _lastLoginTime;
         public TelegramService(string apiKey, ISession session)
         {
-            this.bot = new TelegramBotClient(apiKey);
-            this.session = session;
-            var me = new Telegram.Bot.Types.User();
+            try
+            {
+                // your code 
+                this.bot = new TelegramBotClient(apiKey);
+                this.session = session;
 
-            me = bot.GetMeAsync().Result;
+                var me = bot.GetMeAsync().Result;
 
-            bot.OnMessage += OnTelegramMessageReceived;
-            bot.StartReceiving();
+                bot.OnMessage += OnTelegramMessageReceived;
+                bot.StartReceiving();
 
-            this.session.EventDispatcher.Send(new NoticeEvent { Message = "Using TelegramAPI with " + me.Username });
+                this.session.EventDispatcher.Send(new NoticeEvent {Message = "Using TelegramAPI with " + me.Username});
+            }
+            catch (AggregateException e)
+            {
+                // shit dont work
+            }
         }
 
         private async void OnTelegramMessageReceived(object sender, MessageEventArgs messageEventArgs)
