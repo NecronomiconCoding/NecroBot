@@ -282,7 +282,7 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "自動更新已停用，目前最新的版本為：{0}\n"
+      "Value": "自動更新已停用，目前最新的版本為：{0}\t\t\n"
     },
     {
       "Key": "downloadingUpdate",
@@ -306,7 +306,7 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "正在尋找薰香引來的神奇寶貝…\t\t"
+      "Value": "使用薰香吸引神奇寶貝…\t\t"
     },
     {
       "Key": "lookingForPokemon",
@@ -342,7 +342,7 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[錯誤] 您設定的物品數量 (寶貝球+藥水+復甦劑={0}) 已超過您背包的最大空間 ({1})\t\t"
+      "Value": "[錯誤] 您設定的物品數量 (寶貝球+藥水+復甦劑={0}) 已超過您背包的最大空間 ({1})\t\t\t\t"
     },
     {
       "Key": "recyclingQuietly",
@@ -354,11 +354,11 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "背包滿了，請手動傳送神奇寶貝或修改 TransferDuplicatePokemon 為 true…\t\t"
+      "Value": "背包滿了，請手動傳送神奇寶貝或修改 TransferDuplicatePokemon 為 true…\t\t\t"
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "背包滿了，無法拾取物品…"
+      "Value": "背包滿了，無法拾取物品…\t\t"
     },
     {
       "Key": "encounterProblem",
@@ -370,7 +370,7 @@
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "您要去的地方({0}, {1})距離目前的位置({2}, {3})太遠了\t\t"
+      "Value": "您要去的地方({0}, {1})距離目前的位置({2}, {3})太遠了\t\t\t"
     },
     {
       "Key": "pokemonRename",
@@ -563,7 +563,7 @@
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "請輸入語言代碼 (zh_tw=正體中文)\t\t"
+      "Value": "請輸入語言代碼(繁體中文為zh-TW)\t\t"
     },
     {
       "Key": "firstStartLanguageConfirm",
@@ -591,7 +591,7 @@
     },
     {
       "Key": "firstStartSetupTypePromptError",
-      "Value": "[錯誤] 輸入了不正確的帳號類型，請選擇'{0}'或'{1}'\t\t"
+      "Value": "[錯誤] 輸入了不正確的帳號類型，請選擇'{0}'或'{1}'\t\t\t"
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
@@ -670,16 +670,28 @@
       "Value":  "#{0} 名稱： {1} \t\t\n"  
     },
     {
+      "Key": "LoggedInTelegram",
+      "Value": " 登入成功，有效期限 5 分鐘 \t\t"
+    },
+    {
+      "Key": "LoginFailedTelegram",
+      "Value": " 密碼錯誤或格式錯誤！ 登入指令為： /login 密碼\t\t\t\t"
+    },
+    {
+      "Key": "NotLoggedInTelegram",
+      "Value": " 您尚未登入，登入指令為： /login 密碼\t\t\t"
+    },
+    {
       "Key": "Proxied",
-      "Value": " 您的IP為: {0}，Proxy伺服器IP為: {1} "
+      "Value": " 您的IP為: {0}，Proxy伺服器IP為: {1}\t\t\t\t"
     },
     {
       "Key": "FixProxySettings",
-      "Value": " 按任意鍵結束，請修改Proxy設定。 "
+      "Value": " 按任意鍵結束，請修改Proxy設定。\t\t\t"
     },
     {
       "Key": "Unproxied",
-      "Value": " 您的IP為: {0}，Proxy伺服器IP為: {1} "
+      "Value": " 您的IP為: {0}\t\t"
     }
   ],
   "PokemonStrings": [
