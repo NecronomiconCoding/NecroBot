@@ -23,6 +23,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            await session.Inventory.RefreshCachedInventory();
             var currentTotalItems = await session.Inventory.GetTotalItemCount();
             if ((session.Profile.PlayerData.MaxItemStorage * session.LogicSettings.RecycleInventoryAtUsagePercentage / 100.0f) > currentTotalItems)
                 return;
@@ -106,7 +107,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (session.LogicSettings.DelayBetweenRecycleActions)
                     DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
             }
-
             await session.Inventory.RefreshCachedInventory();
         }
 
