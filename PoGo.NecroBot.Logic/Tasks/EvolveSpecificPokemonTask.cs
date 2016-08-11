@@ -26,6 +26,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 Id = pokemon.PokemonId,
                 Exp = evolveResponse.ExperienceAwarded,
+                UniqueId = pokemon.Id,
                 Result = evolveResponse.Result
             });
             DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
