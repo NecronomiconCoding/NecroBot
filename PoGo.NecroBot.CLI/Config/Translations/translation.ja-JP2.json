@@ -629,20 +629,12 @@
       "Value": "[ERROR] Please input only a VALUE for example: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Please enter a Latitude (Right click to paste)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Lattitude accepted: {0}"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Please enter a Longitude (Right click to paste)"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Longitude accepted: {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "softBanBypassed",

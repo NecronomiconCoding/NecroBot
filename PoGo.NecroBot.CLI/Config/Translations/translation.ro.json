@@ -629,20 +629,12 @@
       "Value": "[EROARE] Te rugăm să introduci doar o VALOARE, spre exemplu: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Te rugăm să introduci o latitudine (Click-dreapta pentru a lipi)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Latitudine acceptată: {0}"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Te rugăm să introduci o longitudine (Click-dreapta pentru a lipi)"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Longitudine acceptată: {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "softBanBypassed",

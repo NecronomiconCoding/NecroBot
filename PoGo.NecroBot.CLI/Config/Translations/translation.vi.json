@@ -625,20 +625,12 @@
       "Value": "[LỖI] Hãy chỉ nhập GIÁ TRỊ như ví dụ: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Hãy nhập Vĩ độ (Nhấn chuột phải để dán)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Chấp nhận Vĩ độ: {0}"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Hãy nhập Kinh độ (Nhấn chuột phải để dán)"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Chấp nhận Kinh độ: {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
