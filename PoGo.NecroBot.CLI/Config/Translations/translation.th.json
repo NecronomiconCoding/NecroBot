@@ -629,12 +629,12 @@
       "Value": "[ผิดพลาด] กรุณาใส่ค่าตัวอย่างดังต่อไปนี้ : {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "โปรดป้อนละติจูด (คลิกขวาเพื่อวาง)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "ละติจูดคือ : {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "firstStartSetupDefaultLongPrompt",

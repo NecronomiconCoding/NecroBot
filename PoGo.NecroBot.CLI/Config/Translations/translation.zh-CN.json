@@ -629,20 +629,12 @@
       "Value": "[错误] 只能输入坐标,例如: {0}\t\t"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "请输入纬度 (右键粘贴)\t\t"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "纬度已设置为: {0}\t\t"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "请输入经度 (右键粘贴)\t\t"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "经度已设置为: {0}\t\t"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "softBanBypassed",
