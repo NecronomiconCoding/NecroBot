@@ -3,6 +3,7 @@
 using System;
 using System.IO;
 using PoGo.NecroBot.Logic.State;
+using System.Globalization;
 
 #endregion
 
@@ -34,7 +35,7 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <param name="data">Dumps the string data to the file</param>
         /// <param name="filename">Filename to be used for naming the file.</param>
         /// <param name="extension">FileExt.</param>
-        public static void Dump(ISession session, string data, string filename, string extension = "csv")
+        public static void Dump(ISession session, string[] data, string filename, string extension = "csv")
         {
             string uniqueFileName = $"{filename}";
 
@@ -47,17 +48,39 @@ namespace PoGo.NecroBot.Logic.DataDumper
         /// <param name="session"></param>
         /// <param name="data">Dumps the string data to the file</param>
         /// <param name="filename">Filename to be used for naming the file.</param>
-        private static void DumpToFile(ISession session, string data, string filename, string extension = "csv")
+        private static void DumpToFile(ISession session, string[] data, string filename, string extension = "csv")
         {
             var path = Path.Combine(session.LogicSettings.ProfilePath, "Dumps",
                 $"NecroBot-{filename}-{DateTime.Today.ToString("yyyy-MM-dd")}-{DateTime.Now.ToString("HH")}.{extension}");
+
+            CultureInfo culture = CultureInfo.CurrentUICulture;
+            string listSeparator = culture.TextInfo.ListSeparator;
 
             using (
                 var dumpFile =
                     File.AppendText(path)
                 )
             {
-                dumpFile.WriteLine(data);
+                string strData = "";
+                foreach (string str in data)
+                {
+                    if (strData != "")
+                        strData += listSeparator;
+
+                    if (str.Contains("\""))
+                    {
+                        strData += string.Format("\"{0}\"", str.Replace("\"", "\"\""));
+                    }
+                    else if (str.Contains(listSeparator))
+                    {
+                        strData += string.Format("\"{0}\"", str);
+                    }
+                    else
+                    {
+                        strData += str;
+                    }
+                }
+                dumpFile.WriteLine(strData);
                 dumpFile.Flush();
             }
         }
