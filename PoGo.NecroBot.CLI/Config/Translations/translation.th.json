@@ -17,8 +17,27 @@
       "Value": "มาสเตอร์บอล"
     },
     {
-      "Key": "wrongAuthType",
-      "Value": "ชนิดการยืนยัน (AuthType) ใน config.json ไม่ถูกต้อง"
+      "Key": "loginInvalid",
+      "Value": "Les credencials d'usuari són invàlides i el login ha fallat."
+    },
+    {
+      "Key": "loggedInTelegram",
+      "Value":  "You have been logged in sucessfully. Session is valid for 5 Minutes"
+    },
+    {
+      "Key": "loginFailedTelegram",
+      "Value":  "Wrong password entered! \n Use /login [Password]"
+    },
+    {
+      "Key": "NotLoggedInTelegram",
+      "Value":  "You are not logged in, \n use /login [Password]"
+    },
+    {
+      "Key": "LoginRemainingTime",
+      "Value":  "You are already logged in! \n Session valid for: ({0}:{1} seconds)"
+    },
+    {
+      "Key": "wrongAuthType",      "Value": "ชนิดการยืนยัน (AuthType) ใน config.json ไม่ถูกต้อง"
     },
     {
       "Key": "loginInvalid",
@@ -507,6 +526,14 @@
     {
       "Key": "noEggsAvailable",
       "Value": "ยังไม่มีไขในคลัง"
+    },
+    {
+      "Key": "usageHelp",
+       "Value": "Invalid command arguments! \n Correct usage: \n {0}"
+    },
+    {
+      "Key": "useLuckyEggIsFalse",
+       "Value": "EvolveWhenLuckyEggsMinMet requires UseLuckyEggWhileEvolving to be set to true!"
     },
     {
       "Key": "useLuckyEggActive",

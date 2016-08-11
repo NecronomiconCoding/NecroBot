@@ -68,7 +68,7 @@ namespace PoGo.NecroBot.ConfigUI
         public MainWindow()
         {
             this.DataContext = this;
-            InitializeComponent();
+            //InitializeComponent();
             this.Loaded += MainWindow_Loaded;
         }
 

@@ -17,8 +17,27 @@
       "Value": "MasterRutulys"
     },
     {
-      "Key": "wrongAuthType",
-      "Value": "Nežinomas AuthType faile config.json"
+      "Key": "loginInvalid",
+      "Value": "Les credencials d'usuari són invàlides i el login ha fallat."
+    },
+    {
+      "Key": "loggedInTelegram",
+      "Value":  "You have been logged in sucessfully. Session is valid for 5 Minutes"
+    },
+    {
+      "Key": "loginFailedTelegram",
+      "Value":  "Wrong password entered! \n Use /login [Password]"
+    },
+    {
+      "Key": "NotLoggedInTelegram",
+      "Value":  "You are not logged in, \n use /login [Password]"
+    },
+    {
+      "Key": "LoginRemainingTime",
+      "Value":  "You are already logged in! \n Session valid for: ({0}:{1} seconds)"
+    },
+    {
+      "Key": "wrongAuthType",      "Value": "Nežinomas AuthType faile config.json"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
@@ -461,6 +480,14 @@
       "Value": "Nėra kiaušinių"
     },
     {
+      "Key": "usageHelp",
+       "Value": "Invalid command arguments! \n Correct usage: \n {0}"
+    },
+    {
+      "Key": "useLuckyEggIsFalse",
+       "Value": "EvolveWhenLuckyEggsMinMet requires UseLuckyEggWhileEvolving to be set to true!"
+    },
+    {
       "Key": "useLuckyEggActive",
       "Value": "Laimės kiaušinis jau aktyvus"
     },
@@ -486,19 +513,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value":  "--- Pokedex catched --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value":  "--- Pokedex needed --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value":  "#{0} Name: {1} \n"
     }
   ],
 	"PokemonStrings": [

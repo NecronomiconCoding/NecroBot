@@ -61,10 +61,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                         }
 
                         var pokestopList = await GetPokeStops(session);
-                        session.EventDispatcher.Send(new PokeStopListEvent {Forts = pokestopList});
+                        session.EventDispatcher.Send(new PokeStopListEvent { Forts = pokestopList });
 
                         while (pokestopList.Any())
-                            // warning: this is never entered due to ps cooldowns from UseNearbyPokestopsTask 
+                        // warning: this is never entered due to ps cooldowns from UseNearbyPokestopsTask 
                         {
                             cancellationToken.ThrowIfCancellationRequested();
 
@@ -120,8 +120,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             await RecycleItemsTask.Execute(session, cancellationToken);
 
                             if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
-                                session.LogicSettings.EvolveAllPokemonAboveIv || 
-                                session.LogicSettings.UseLuckyEggsWhileEvolving ||
+                                session.LogicSettings.EvolveAllPokemonAboveIv ||
+                                session.LogicSettings.EvolveWhenLuckyEggsMinMet ||
                                 session.LogicSettings.KeepPokemonsThatCanEvolve)
                             {
                                 await EvolvePokemonTask.Execute(session, cancellationToken);
@@ -197,7 +197,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         //so do not make it more than 40 because it will never get close to those stops.
         private static async Task<List<FortData>> GetPokeStops(ISession session)
         {
-            var mapObjects = await session.Client.Map.GetMapObjects();  
+            var mapObjects = await session.Client.Map.GetMapObjects();
 
             // Wasn't sure how to make this pretty. Edit as needed.
             var pokeStops = mapObjects.Item1.MapCells.SelectMany(i => i.Forts)

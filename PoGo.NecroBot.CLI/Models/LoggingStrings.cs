@@ -93,11 +93,11 @@ namespace PoGo.NecroBot.CLI.Models
 
             Update =
                 session?.Translation.GetTranslation(
-                    TranslationString.LogEntryUpdate ) ?? "UPDATE";
+                    TranslationString.LogEntryUpdate) ?? "UPDATE";
 
             New =
                 session?.Translation.GetTranslation(
-                    TranslationString.LogEntryNew ) ?? "NEW";
+                    TranslationString.LogEntryNew) ?? "NEW";
 
             SoftBan =
                 session?.Translation.GetTranslation(
