@@ -198,7 +198,8 @@ namespace PoGo.NecroBot.Logic.Common
         PokedexPokemonNeededTelegram,
         LoggedInTelegram,
         LoginFailedTelegram,
-        NotLoggedInTelegram
+        NotLoggedInTelegram,
+        LoginRemainingTime
     }
 
     public class Translation : ITranslation
@@ -468,8 +469,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.PokedexNeededTelegram, "--- Pokedex needed --- \n"),
             new KeyValuePair<TranslationString, string>(TranslationString.PokedexPokemonNeededTelegram, "#{0}# Name: {1} \n"),
             new KeyValuePair<TranslationString, string>(TranslationString.LoggedInTelegram, "You have been logged in sucessfully. Session is valid for 5 Minutes"),
-            new KeyValuePair<TranslationString, string>(TranslationString.LoginFailedTelegram, "Wrong Password or wrong Syntax! Use /login PASSWORD"),
-            new KeyValuePair<TranslationString, string>(TranslationString.NotLoggedInTelegram, "You are not logged in, use /login PASSWORD")
+            new KeyValuePair<TranslationString, string>(TranslationString.LoginFailedTelegram, "Wrong password entered! \n Use /login [Password]"),
+            new KeyValuePair<TranslationString, string>(TranslationString.NotLoggedInTelegram, "You are not logged in, \n use /login [Password]"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LoginRemainingTime, "You are already logged in! \n Session valid for: ({0}:{1} seconds)")
         };
 
         [JsonProperty("PokemonStrings",

@@ -39,9 +39,9 @@ namespace PoGo.NecroBot.Logic.Service
 
                 this.session.EventDispatcher.Send(new NoticeEvent {Message = "Using TelegramAPI with " + me.Username});
             }
-            catch (AggregateException e)
+            catch (AggregateException ae)
             {
-                // shit dont work
+                throw ae;
             }
         }
 
@@ -60,36 +60,51 @@ namespace PoGo.NecroBot.Logic.Service
 
             var messagetext = message.Text.ToLower().Split(' ');
 
-            if (!loggedIn)
-            {
-                if (messagetext[0].ToLower().Contains("/login"))
+                if (!loggedIn && messagetext[0].ToLower().Contains("/login"))
                 {
-                    if (messagetext[0].ToLower().Contains(session.LogicSettings.TelegramPassword))
+                    if (messagetext.Length == 2)
                     {
-                        loggedIn = true;
-                        _lastLoginTime = DateTime.Now;
-                        answerTextmessage += session.Translation.GetTranslation(TranslationString.LoggedInTelegram);
-                        SendMessage(message.Chat.Id, answerTextmessage);
+                        if (messagetext[1].ToLower().Contains(session.LogicSettings.TelegramPassword))
+                        {
+                            loggedIn = true;
+                            _lastLoginTime = DateTime.Now;
+                            answerTextmessage += session.Translation.GetTranslation(TranslationString.LoggedInTelegram);
+                            SendMessage(message.Chat.Id, answerTextmessage);
+                            return;
+                        }
+                        else
+                        {
+                            answerTextmessage += session.Translation.GetTranslation(TranslationString.LoginFailedTelegram);
+                            SendMessage(message.Chat.Id, answerTextmessage);
+                            return;
+                        }
                     }
                     else
                     {
-                        answerTextmessage += session.Translation.GetTranslation(TranslationString.LoginFailedTelegram);
-                        SendMessage(message.Chat.Id, answerTextmessage);
+                    answerTextmessage += session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
+                    SendMessage(message.Chat.Id, answerTextmessage);
+                    return;
                     }
+                }
+            else if (loggedIn)
+            {
+                if (_lastLoginTime.AddMinutes(5).Ticks < DateTime.Now.Ticks)
+                {
+                    loggedIn = false;
+                    answerTextmessage += session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
+                    SendMessage(message.Chat.Id, answerTextmessage);
                     return;
                 }
-                answerTextmessage += session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
-                SendMessage(message.Chat.Id, answerTextmessage);
-                return;
+                else
+                {
+                    int remainingMins = _lastLoginTime.AddMinutes(5).Subtract(DateTime.Now).Minutes;
+                    int remainingSecs = _lastLoginTime.AddMinutes(5).Subtract(DateTime.Now).Seconds;
+                    answerTextmessage += session.Translation.GetTranslation(TranslationString.LoginRemainingTime, remainingMins, remainingSecs);
+                    SendMessage(message.Chat.Id, answerTextmessage);
+                    return;
+                }
             }
-            if (loggedIn && _lastLoginTime.AddMinutes(5).Ticks > DateTime.Now.Ticks)
-            {
-                loggedIn = false;
-                answerTextmessage += session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
-                SendMessage(message.Chat.Id, answerTextmessage);
-                return;
-            }
-
+        
             switch (messagetext[0].ToLower())
             {
                 case "/top":
@@ -108,13 +123,13 @@ namespace PoGo.NecroBot.Logic.Service
                         }
                         catch (FormatException)
                         {
-                            SendMessage(message.Chat.Id, session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [number of pokemon to show]"));
+                            SendMessage(message.Chat.Id, session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
                             break;
                         }
                     }
                     else if (messagetext.Length > 3)
                     {
-                        SendMessage(message.Chat.Id, session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [number of pokemon to show]"));
+                        SendMessage(message.Chat.Id, session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
                         break;
                     }
 
@@ -129,7 +144,7 @@ namespace PoGo.NecroBot.Logic.Service
                     }
                     else
                     {
-                        SendMessage(message.Chat.Id, session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [number of pokemon to show]"));
+                        SendMessage(message.Chat.Id, session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
                         break;
                     }
 
@@ -149,7 +164,7 @@ namespace PoGo.NecroBot.Logic.Service
                 case "/all":
                     var myPokemons = await session.Inventory.GetPokemons();
                     var allMyPokemons = myPokemons.ToList();
-                    IEnumerable<PokemonData> allPokemons = null;
+                    IEnumerable<PokemonData> allPokemons = await session.Inventory.GetHighestsCp(allMyPokemons.Count);
 
                     if (messagetext.Length == 1)
                     {
