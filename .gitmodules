@@ -1,7 +1,3 @@
-[submodule "FeroxRev"]
-	path = FeroxRev
-	url = https://github.com/NECROBOTIO/NecroBot-Rocket-API.git
-	branch = master
 [submodule "POGOProtos"]
 	path = POGOProtos
 	url = https://github.com/NECROBOTIO/POGOProtos-0.31.0.git
