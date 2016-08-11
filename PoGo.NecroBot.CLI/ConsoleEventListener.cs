@@ -292,7 +292,7 @@ namespace PoGo.NecroBot.CLI
                 Logger.Write(
                     session.Translation.GetTranslation(
                         TranslationString.HighestsPokemoCell,
-                        pokemon.Item1.Cp.ToString().PadLeft(4, ''),
+                        pokemon.Item1.Cp.ToString().PadLeft(4, ' '),
                         pokemon.Item2.ToString().PadLeft(4, ' '),
                         pokemon.Item3.ToString("0.00"),
                         strPerfect,
@@ -300,7 +300,7 @@ namespace PoGo.NecroBot.CLI
                         strName,
                         session.Translation.GetPokemonTranslation(pokemon.Item1.PokemonId).PadRight(10, ' '),
                         move1,
-                        strMove1.PadRight(20, ''),
+                        strMove1.PadRight(20, ' '),
                         move2,
                         strMove2.PadRight(20, ' '),
                         candy,
