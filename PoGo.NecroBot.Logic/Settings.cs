@@ -179,7 +179,7 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
-        public void checkProxy()
+        public void checkProxy(ITranslation translator)
         {
             using (var tempWebClient = new NecroWebClient())
             {
@@ -880,9 +880,9 @@ namespace PoGo.NecroBot.Logic
             return shouldExit ? null : settings;
         }
 
-        public void checkProxy()
+        public void checkProxy(ITranslation translator)
         {
-            Auth.checkProxy();
+            Auth.checkProxy(translator);
         }
 
         public static bool PromptForSetup(ITranslation translator)
