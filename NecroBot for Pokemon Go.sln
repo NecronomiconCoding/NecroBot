@@ -15,6 +15,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POGOProtos", "POGOProtos\POGOProtos\POGOProtos.csproj", "{A03A7BB2-4F0B-467B-84B2-9A76E6AAE6FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PoGo.NecroBot.ConfigUI", "PoGo.NecroBot.ConfigUI\PoGo.NecroBot.ConfigUI.csproj", "{E75D21C4-8E71-4A69-9B80-3F9A7368D2B3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1FEA147E-F704-497B-A538-00B053B5F672} = {1FEA147E-F704-497B-A538-00B053B5F672}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
