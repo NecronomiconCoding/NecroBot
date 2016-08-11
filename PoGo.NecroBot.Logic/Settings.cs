@@ -488,6 +488,10 @@ namespace PoGo.NecroBot.Logic
         //customizable catch
         [DefaultValue(true)]
         public bool EnableHumanizedThrows;
+        [DefaultValue(false)]
+        public bool EnableMissedThrows;
+        [DefaultValue(25)]
+        public int ThrowMissPercentage;
         [DefaultValue(40)]
         public int NiceThrowChance;
         [DefaultValue(30)]
