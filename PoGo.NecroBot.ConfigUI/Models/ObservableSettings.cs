@@ -6,6 +6,7 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Enums;
 using System.Collections.ObjectModel;
 using System;
+using System.IO;
 
 namespace PoGo.NecroBot.ConfigUI.Models
 {
@@ -1229,11 +1230,29 @@ namespace PoGo.NecroBot.ConfigUI.Models
 
         private void LoadCurrentCoords()
         {
-            // TODO:
+            Latitude = DefaultLatitude;
+            Longitude = DefaultLongitude;
+            string coordFile = Path.Combine(Directory.GetCurrentDirectory(), "Config", "LastPos.ini");
+            if (File.Exists(coordFile))
+            {
+                var latlngFromFile = File.ReadAllText(coordFile);
+                var latlng = latlngFromFile.Split(':');
+                if (latlng[0].Length != 0 && latlng[1].Length != 0)
+                {
+                    try
+                    {
+                        Latitude = Convert.ToDouble(latlng[0]);
+                        Longitude = Convert.ToDouble(latlng[1]);
+                    }
+                    catch (FormatException) { }
+                }
+            }
         }
+
         private void SaveCurrentCoords()
         {
-            // TODO:
+            var coordsPath = Path.Combine(Directory.GetCurrentDirectory(), "Config", "LastPos.ini");
+            File.WriteAllText(coordsPath, $"{Latitude}:{Longitude}");
         }
 
         public static ObservableSettings CreateFromGlobalSettings(GlobalSettings set)

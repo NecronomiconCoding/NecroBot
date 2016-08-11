@@ -18,6 +18,10 @@
 
     <DockPanel>
 
+        <Border DockPanel.Dock="Top" BorderBrush="DarkGray" BorderThickness="1" Margin="2" Padding="2">
+            <TextBlock Foreground="Red" FontWeight="Bold" Text="EXPERIMENTAL BETA - Backup your existing configs before using! You have been warned!" />
+        </Border>
+
         <UniformGrid DockPanel.Dock="Bottom" Rows="1" Columns="3">
             <Button Margin="15" Padding="0,8" Click="DefaultsButton_Click">Defaults</Button>
             <Button Margin="15" Padding="0,8" Click="ReloadButton_Click">Reload</Button>
