@@ -89,7 +89,10 @@ namespace PoGo.NecroBot.Logic
         bool TransferDuplicatePokemon { get; }
         bool TransferDuplicatePokemonOnCapture { get; }
         bool UseEggIncubators { get; }
+<<<<<<< HEAD
         int UseEggIncubatorMinKm { get; }
+=======
+>>>>>>> origin/master
         int UseGreatBallAboveCp { get; }
         int UseUltraBallAboveCp { get; }
         int UseMasterBallAboveCp { get; }
@@ -98,6 +101,8 @@ namespace PoGo.NecroBot.Logic
         double UseMasterBallBelowCatchProbability { get; }
         double UseUltraBallBelowCatchProbability { get; }
         double UseGreatBallBelowCatchProbability { get; }
+        bool EnableMissedThrows { get; }
+        int ThrowMissPercentage { get; }
         bool EnableHumanizedThrows { get; }
         int NiceThrowChance { get; }
         int GreatThrowChance { get; }
@@ -162,7 +167,7 @@ namespace PoGo.NecroBot.Logic
         bool GetOnlyVerifiedSniperInfoFromPokezz { get; }
         bool GetSniperInfoFromPokeSnipers { get; }
         bool GetSniperInfoFromPokeWatchers { get; }
-        bool GetSniperInfoFromSkiplagged { get; }
+        bool SnipeWithSkiplagged { get; }
         bool UseSnipeLocationServer { get; }
         bool UseTransferIvForSnipe { get; }
         bool SnipeIgnoreUnknownIv { get; }

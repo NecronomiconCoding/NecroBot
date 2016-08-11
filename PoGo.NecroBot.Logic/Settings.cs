@@ -337,7 +337,7 @@ namespace PoGo.NecroBot.Logic
         public double DefaultLatitude;
         [DefaultValue(-73.968286)]
         public double DefaultLongitude;
-        [DefaultValue(5.0)]
+        [DefaultValue(19.0)]
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
@@ -345,9 +345,9 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(false)]
         public bool FastSoftBanBypass;
         //delays
-        [DefaultValue(5000)]
+        [DefaultValue(500)]
         public int DelayBetweenPlayerActions;
-        [DefaultValue(2000)]
+        [DefaultValue(100)]
         public int DelayBetweenPokemonCatch;
         //dump stats
         [DefaultValue(false)]
@@ -376,7 +376,7 @@ namespace PoGo.NecroBot.Logic
         public bool UseKeepMinLvl;
         [DefaultValue(false)]
         public bool PrioritizeIvOverCp;
-        [DefaultValue(1)]
+        [DefaultValue(0)]
         public int KeepMinDuplicatePokemon;
         //gpx
         [DefaultValue(false)]
@@ -397,8 +397,11 @@ namespace PoGo.NecroBot.Logic
         //lucky, incense and berries
         [DefaultValue(true)]
         public bool UseEggIncubators;
+<<<<<<< HEAD
         [DefaultValue(2)]
         public int UseEggIncubatorMinKm;
+=======
+>>>>>>> origin/master
         [DefaultValue(false)]
         public bool UseLuckyEggConstantly;
         [DefaultValue(30)]
@@ -422,7 +425,7 @@ namespace PoGo.NecroBot.Logic
         public string SnipeLocationServer;
         [DefaultValue(16969)]
         public int SnipeLocationServerPort;
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool GetSniperInfoFromPokezz;
         [DefaultValue(true)]
         public bool GetOnlyVerifiedSniperInfoFromPokezz;
@@ -431,7 +434,7 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(true)]
         public bool GetSniperInfoFromPokeWatchers;
         [DefaultValue(true)]
-        public bool GetSniperInfoFromSkiplagged;
+        public bool SnipeWithSkiplagged;
         [DefaultValue(20)]
         public int MinPokeballsToSnipe;
         [DefaultValue(0)]
@@ -486,7 +489,11 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(0.05)]
         public double UseMasterBallBelowCatchProbability;
         //customizable catch
-        [DefaultValue(true)]
+        [DefaultValue(false)]
+        public bool EnableMissedThrows;
+        [DefaultValue(25)]
+        public int ThrowMissPercentage;
+        [DefaultValue(false)]
         public bool EnableHumanizedThrows;
         [DefaultValue(40)]
         public int NiceThrowChance;
@@ -623,43 +630,14 @@ namespace PoGo.NecroBot.Logic
         };
         public List<PokemonId> PokemonsToLevelUp = new List<PokemonId>
         {
-            //criteria: from SS Tier to A Tier + Regional Exclusive
-            PokemonId.Venusaur,
-            PokemonId.Charizard,
-            PokemonId.Blastoise,
-            //PokemonId.Nidoqueen,
-            //PokemonId.Nidoking,
-            PokemonId.Clefable,
-            //PokemonId.Vileplume,
-            //PokemonId.Golduck,
-            //PokemonId.Arcanine,
-            //PokemonId.Poliwrath,
-            //PokemonId.Machamp,
-            //PokemonId.Victreebel,
-            //PokemonId.Golem,
-            //PokemonId.Slowbro,
-            //PokemonId.Farfetchd,
-            PokemonId.Muk,
-            //PokemonId.Exeggutor,
-            //PokemonId.Lickitung,
-            PokemonId.Chansey,
-            //PokemonId.Kangaskhan,
-            //PokemonId.MrMime,
-            //PokemonId.Tauros,
-            PokemonId.Gyarados,
-            //PokemonId.Lapras,
-            PokemonId.Ditto,
-            //PokemonId.Vaporeon,
-            //PokemonId.Jolteon,
-            //PokemonId.Flareon,
-            //PokemonId.Porygon,
-            PokemonId.Snorlax,
-            PokemonId.Articuno,
-            PokemonId.Zapdos,
-            PokemonId.Moltres,
-            PokemonId.Dragonite,
-            PokemonId.Mewtwo,
-            PokemonId.Mew
+            //criteria: most common
+            PokemonId.Caterpie,
+            PokemonId.Weedle,
+            PokemonId.Pidgey,
+            PokemonId.Rattata,
+            PokemonId.Spearow,
+            PokemonId.Zubat,
+            PokemonId.Doduo
         };
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
         {
@@ -865,7 +843,8 @@ namespace PoGo.NecroBot.Logic
                 settings = new GlobalSettings();
                 shouldExit = true;
             }
-            
+
+
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
@@ -1349,7 +1328,10 @@ namespace PoGo.NecroBot.Logic
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool TransferDuplicatePokemonOnCapture => _settings.TransferDuplicatePokemonOnCapture;
         public bool UseEggIncubators => _settings.UseEggIncubators;
+<<<<<<< HEAD
         public int UseEggIncubatorMinKm => _settings.UseEggIncubatorMinKm;
+=======
+>>>>>>> origin/master
         public int UseGreatBallAboveCp => _settings.UseGreatBallAboveCp;
         public int UseUltraBallAboveCp => _settings.UseUltraBallAboveCp;
         public int UseMasterBallAboveCp => _settings.UseMasterBallAboveCp;
@@ -1358,6 +1340,8 @@ namespace PoGo.NecroBot.Logic
         public double UseMasterBallBelowCatchProbability => _settings.UseMasterBallBelowCatchProbability;
         public double UseUltraBallBelowCatchProbability => _settings.UseUltraBallBelowCatchProbability;
         public double UseGreatBallBelowCatchProbability => _settings.UseGreatBallBelowCatchProbability;
+        public bool EnableMissedThrows => _settings.EnableMissedThrows;
+        public int ThrowMissPercentage => _settings.ThrowMissPercentage;
         public bool EnableHumanizedThrows => _settings.EnableHumanizedThrows;
         public int NiceThrowChance => _settings.NiceThrowChance;
         public int GreatThrowChance => _settings.GreatThrowChance;
@@ -1417,7 +1401,7 @@ namespace PoGo.NecroBot.Logic
         public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.GetOnlyVerifiedSniperInfoFromPokezz;
         public bool GetSniperInfoFromPokeSnipers => _settings.GetSniperInfoFromPokeSnipers;
         public bool GetSniperInfoFromPokeWatchers => _settings.GetSniperInfoFromPokeWatchers;
-        public bool GetSniperInfoFromSkiplagged => _settings.GetSniperInfoFromSkiplagged;
+        public bool SnipeWithSkiplagged => _settings.SnipeWithSkiplagged;
         public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
         public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
         public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
