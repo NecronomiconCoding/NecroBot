@@ -19,9 +19,9 @@ namespace PoGo.NecroBot.Logic.Common
 
         string GetTranslation(TranslationString translationString);
 
-        string GetPokemonTranslation( POGOProtos.Enums.PokemonId id );
+        string GetPokemonTranslation(POGOProtos.Enums.PokemonId id);
 
-        string GetPokemonMovesetTranslation( POGOProtos.Enums.PokemonMove move );
+        string GetPokemonMovesetTranslation(POGOProtos.Enums.PokemonMove move);
     }
 
     public enum TranslationString
@@ -387,7 +387,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.StatsTemplateString,
                 "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Transferred: {6:n0} | Recycled: {7:n0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.ProfileStatsTemplateString,
-                "----- LVL {0} | {1} ----- \n Experience: {2}/{3} \n Pokemons caught: {4} \n Pokemons deployed: {5} \n Pokestops visited: {6} \n Eggs hatched: {7} \n Pokemons evolved: {8} \n Pokedex entries: {9} \n KM walked: {10}  \n Pokemons: {11}/{12}"),
+                "----- LVL {0} | {1} ----- \n Experience: {2}/{3} \n Pokemon caught: {4} \n Pokemon deployed: {5} \n Pokestops visited: {6} \n Eggs hatched: {7} \n Pokemon evolved: {8} \n Pokedex entries: {9} \n KM walked: {10}  \n Pokemon: {11}/{12}"),
             new KeyValuePair<TranslationString, string>(TranslationString.ShowPokeTemplate,
                 "\n CP: {0} | IV: {1}% | Name: {2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.HelpTemplate,
@@ -643,7 +643,7 @@ namespace PoGo.NecroBot.Logic.Common
         ObjectCreationHandling = ObjectCreationHandling.Replace,
         DefaultValueHandling = DefaultValueHandling.Populate)]
         private readonly List<KeyValuePair<POGOProtos.Enums.PokemonMove, string>> _pokemonMovesetTranslationStrings =
-            new List<KeyValuePair< POGOProtos.Enums.PokemonMove, string>>()
+            new List<KeyValuePair<POGOProtos.Enums.PokemonMove, string>>()
         {
             new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.MoveUnset, "MoveUnset" ),
             new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ThunderShock, "ThunderShock" ),
@@ -847,18 +847,18 @@ namespace PoGo.NecroBot.Logic.Common
             return translation != default(string) ? translation : $"Translation for pokemon {id} is missing";
         }
 
-        public string GetPokemonMovesetTranslation( POGOProtos.Enums.PokemonMove move )
+        public string GetPokemonMovesetTranslation(POGOProtos.Enums.PokemonMove move)
         {
-            var translation = _pokemonMovesetTranslationStrings.FirstOrDefault( t => t.Key.Equals( move ) ).Value;
-            return translation != default( string ) ? translation : $"Translation for move {move} is missing";
+            var translation = _pokemonMovesetTranslationStrings.FirstOrDefault(t => t.Key.Equals(move)).Value;
+            return translation != default(string) ? translation : $"Translation for move {move} is missing";
         }
 
-        public static Translation Load( ILogicSettings logicSettings )
+        public static Translation Load(ILogicSettings logicSettings)
         {
-            return Load( logicSettings, new Translation() );
+            return Load(logicSettings, new Translation());
         }
 
-        public static Translation Load(ILogicSettings logicSettings, Translation translations )
+        public static Translation Load(ILogicSettings logicSettings, Translation translations)
         {
             var translationsLanguageCode = logicSettings.TranslationLanguageCode;
             var translationPath = Path.Combine(logicSettings.GeneralConfigPath, "translations");
@@ -875,35 +875,35 @@ namespace PoGo.NecroBot.Logic.Common
 
                 try
                 {
-                    translations = JsonConvert.DeserializeObject<Translation>( input, jsonSettings );
+                    translations = JsonConvert.DeserializeObject<Translation>(input, jsonSettings);
                     //TODO make json to fill default values as it won't do it now
                     new Translation()._translationStrings.Where(
-                        item => translations._translationStrings.All( a => a.Key != item.Key ) )
+                        item => translations._translationStrings.All(a => a.Key != item.Key))
                         .ToList()
-                        .ForEach( translations._translationStrings.Add );
+                        .ForEach(translations._translationStrings.Add);
                     new Translation()._pokemonTranslationStrings.Where(
-                        item => translations._pokemonTranslationStrings.All( a => a.Key != item.Key ) )
+                        item => translations._pokemonTranslationStrings.All(a => a.Key != item.Key))
                         .ToList()
-                        .ForEach( translations._pokemonTranslationStrings.Add );
+                        .ForEach(translations._pokemonTranslationStrings.Add);
                 }
-                catch( JsonException ex )
+                catch (JsonException ex)
                 {
-                    Logger.Write( $"[ERROR] Issue loading translations: {ex.ToString()}", LogLevel.Warning );
-                    Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
+                    Logger.Write($"[ERROR] Issue loading translations: {ex.ToString()}", LogLevel.Warning);
+                    Logger.Write("[Request] Rebuild the translations folder? Y/N");
 
                     string strInput = Console.ReadLine().ToLower();
 
-                    if( strInput.Equals( "y" ) )
+                    if (strInput.Equals("y"))
                     {
                         // Currently this section can only rebuild the EN translations file \\
                         // This is because default values cannot be supplied from other languages \\
-                        Logger.Write( "Loading fresh translations and continuing" );
+                        Logger.Write("Loading fresh translations and continuing");
                         translations = new Translation();
-                        translations.Save( Path.Combine( translationPath, "translation.en.json" ) );
+                        translations.Save(Path.Combine(translationPath, "translation.en.json"));
                     }
                     else
                     {
-                        ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error", 3, LogLevel.Error );
+                        ErrorHandler.ThrowFatalError("[ERROR] Fatal Error", 3, LogLevel.Error);
                         return null;
                     }
                 }
