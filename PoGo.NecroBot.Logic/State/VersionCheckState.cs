@@ -227,7 +227,7 @@ namespace PoGo.NecroBot.Logic.State
                 var files = Directory.GetFiles(sourceFolder);
                 foreach (var file in files)
                 {
-                    if (file.Contains("vshost") || file.Contains(".gpx")) continue;
+                    if (file.Contains("vshost") || file.Contains(".gpx") || file.Contains(".bak")) continue;
                     var name = Path.GetFileName(file);
                     var dest = Path.Combine(destFolder, name);
                     File.Copy(file, dest, true);
