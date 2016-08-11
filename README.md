@@ -16,9 +16,6 @@
     <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
   </a>
 </p>
-<br/>
-<br/>
-
 ## NECROBOT - by the community, for the community.
 
 <h2><a name="getting-started">Getting Started</a></h2>
