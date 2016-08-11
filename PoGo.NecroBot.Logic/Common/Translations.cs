@@ -202,9 +202,7 @@ namespace PoGo.NecroBot.Logic.Common
         LoginRemainingTime,
         Unproxied,
         Proxied,
-        FixProxySettings,
-        UsageHelp,
-        LoginRemainingTime
+        FixProxySettings
     }
 
     public class Translation : ITranslation
