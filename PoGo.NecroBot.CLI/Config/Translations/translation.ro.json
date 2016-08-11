@@ -509,6 +509,14 @@
       "Value": "Niciun ou disponibil"
     },
     {
+      "Key": "usageHelp",
+       "Value": "Invalid command arguments! \n Correct usage: \n {0}"
+    },
+    {
+      "Key": "useLuckyEggIsFalse",
+       "Value": "EvolveWhenLuckyEggsMinMet requires UseLuckyEggWhileEvolving to be set to true!"
+    },
+    {
       "Key": "useLuckyEggActive",
       "Value": "Ou norocos activ deja"
     },

@@ -188,10 +188,10 @@ namespace PoGo.NecroBot.Logic
                 {
                     tempWebClient.Proxy = this.InitProxy();
                     string proxiedIPres = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
-                    string proxiedIP = proxiedIPres == null?"INVALID PROXY": proxiedIPres;
+                    string proxiedIP = proxiedIPres == null ? "INVALID PROXY" : proxiedIPres;
                     Logger.Write(
                        $"Your IP is: {unproxiedIP} / Proxy IP is: {proxiedIP}",
-                       LogLevel.Info, (unproxiedIP==proxiedIP)?ConsoleColor.Red:ConsoleColor.Green);
+                       LogLevel.Info, (unproxiedIP == proxiedIP) ? ConsoleColor.Red : ConsoleColor.Green);
 
                     if (unproxiedIP == proxiedIP || proxiedIPres == null)
                     {
@@ -364,6 +364,8 @@ namespace PoGo.NecroBot.Logic
         public bool EvolveAllPokemonAboveIv;
         [DefaultValue(true)]
         public bool EvolveAllPokemonWithEnoughCandy;
+        [DefaultValue(false)]
+        public bool EvolveWhenLuckyEggsMinMet;
         [DefaultValue(90.0)]
         public double EvolveKeptPokemonsAtStorageUsagePercentage;
         [DefaultValue(false)]
@@ -546,7 +548,7 @@ namespace PoGo.NecroBot.Logic
             new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
         };
 
-        
+
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
@@ -870,7 +872,7 @@ namespace PoGo.NecroBot.Logic
                 settings = new GlobalSettings();
                 shouldExit = true;
             }
-            
+
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
@@ -881,7 +883,7 @@ namespace PoGo.NecroBot.Logic
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
             }
-            
+
             return shouldExit ? null : settings;
         }
 
@@ -1350,6 +1352,7 @@ namespace PoGo.NecroBot.Logic
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
         public bool FastSoftBanBypass => _settings.FastSoftBanBypass;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
+        public bool EvolveWhenLuckyEggsMinMet => _settings.EvolveWhenLuckyEggsMinMet;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool TransferDuplicatePokemonOnCapture => _settings.TransferDuplicatePokemonOnCapture;

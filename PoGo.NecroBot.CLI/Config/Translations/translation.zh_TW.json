@@ -439,7 +439,6 @@
     {
       "Key": "helpTemplate",
       "Value": "指令： \n \n /top <數量> - 顯示你最高級的神奇寶貝列表. \t\t\n /all - 顯示你所有神奇寶貝列表. \t\t\n /profile - 顯示你個人詳細訊息. \t\t\n /loc - 顯示你的位置. \t\t\n /items - 顯示你的物品.\t\t"
-
     },
     {
       "Key": "statsXpTemplateString",
@@ -508,6 +507,14 @@
     {
       "Key": "noEggsAvailable",
       "Value": "背包裡沒有任何幸運蛋\t\t"
+    },
+    {
+      "Key": "usageHelp",
+       "Value": "Invalid command arguments! \n Correct usage: \n {0}"
+    },
+    {
+      "Key": "useLuckyEggIsFalse",
+       "Value": "EvolveWhenLuckyEggsMinMet requires UseLuckyEggWhileEvolving to be set to true!"
     },
     {
       "Key": "useLuckyEggActive",
@@ -655,19 +662,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- 圖鑑已獲得 --- \t\t\n"  
+      "Value":  "--- 圖鑑已獲得 --- \t\t\n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} 名稱： {1} | 已捕獲： {2} | 已遇見： {3} \t\t\n"  
+      "Value":  "#{0} 名稱： {1} | 已捕獲： {2} | 已遇見： {3} \t\t\n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- 圖鑑未獲得 --- \t\t\n"  
+      "Value":  "--- 圖鑑未獲得 --- \t\t\n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} 名稱： {1} \t\t\n"  
+      "Value":  "#{0} 名稱： {1} \t\t\n"
     }
   ],
   "PokemonStrings": [
