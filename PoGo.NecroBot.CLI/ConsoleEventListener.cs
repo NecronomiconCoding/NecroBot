@@ -127,7 +127,7 @@ namespace PoGo.NecroBot.CLI
         private static void HandleEvent(FortTargetEvent fortTargetEvent, ISession session)
         {
 
-            int intTimeForArrival = (int) ( fortTargetEvent.Distance / ( session.LogicSettings.WalkingSpeedInKilometerPerHour * 0.5 ) );
+            int intTimeForArrival = (int) ( fortTargetEvent.Distance / session.LogicSettings.WalkingSpeedInKilometerPerHour * 3.6  );
 
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortTargeted, fortTargetEvent.Name,
