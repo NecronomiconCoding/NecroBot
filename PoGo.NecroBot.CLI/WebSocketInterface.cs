@@ -1,7 +1,5 @@
 ﻿#region using directives
 
-using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PoGo.NecroBot.CLI.WebSocketHandler;
@@ -13,8 +11,10 @@ using PoGo.NecroBot.Logic.Tasks;
 using SuperSocket.SocketBase;
 using SuperSocket.SocketBase.Config;
 using SuperSocket.WebSocket;
+using System;
+using System.Collections.Generic;
 
-#endregion
+#endregion using directives
 
 namespace PoGo.NecroBot.CLI
 {
@@ -95,20 +95,22 @@ namespace PoGo.NecroBot.CLI
 
         private async void HandleMessage(WebSocketSession session, string message)
         {
-            switch(message)
+            switch (message)
             {
                 case "PokemonList":
                     await PokemonListTask.Execute(_session);
                     break;
+
                 case "EggsList":
                     await EggsListTask.Execute(_session);
                     break;
+
                 case "InventoryList":
                     await InventoryListTask.Execute(_session);
                     break;
             }
 
-            // Setup to only send data back to the session that requested it. 
+            // Setup to only send data back to the session that requested it.
             try
             {
                 dynamic decodedMessage = JObject.Parse(message);

@@ -2,11 +2,11 @@
 
 using System;
 
-#endregion
+#endregion using directives
 
 namespace PoGo.NecroBot.CLI.Resources
 {
-    class ProgressBar
+    internal class ProgressBar
     {
         public static int total = 100;
         private static int leftOffset;
@@ -17,7 +17,7 @@ namespace PoGo.NecroBot.CLI.Resources
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write(startText);
 
-            leftOffset = startText.Length+1;
+            leftOffset = startText.Length + 1;
             fill(startAmt);
         }
 
