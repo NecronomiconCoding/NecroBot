@@ -748,7 +748,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     response = "[]";
                 }
                 
-                var fullresp = "{ \"pokemons\":" + response + "}";
+                var fullresp = "{ \"pokemons\":" + response + "}".Replace("Mr_mime", "MrMime"); ;
                 scanResult_pokewatchers = JsonConvert.DeserializeObject<ScanResult_pokewatchers>(fullresp);
             }
             catch (Exception ex)
