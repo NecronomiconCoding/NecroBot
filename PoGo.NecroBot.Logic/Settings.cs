@@ -189,23 +189,18 @@ namespace PoGo.NecroBot.Logic
                     tempWebClient.Proxy = this.InitProxy();
                     string proxiedIPres = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
                     string proxiedIP = proxiedIPres == null?"INVALID PROXY": proxiedIPres;
-                    Logger.Write(
-                       $"Your IP is: {unproxiedIP} / Proxy IP is: {proxiedIP}",
-                       LogLevel.Info, (unproxiedIP==proxiedIP)?ConsoleColor.Red:ConsoleColor.Green);
+                    Logger.Write(translator.GetTranslation(TranslationString.Proxied, unproxiedIP, proxiedIP), LogLevel.Info, (unproxiedIP == proxiedIP) ? ConsoleColor.Red : ConsoleColor.Green);
 
                     if (unproxiedIP == proxiedIP || proxiedIPres == null)
                     {
-                        Logger.Write("Press any key to exit so you can fix your proxy settings...",
-                            LogLevel.Info, ConsoleColor.Red);
+                        Logger.Write(translator.GetTranslation(TranslationString.FixProxySettings), LogLevel.Info, ConsoleColor.Red);
                         Console.ReadKey();
                         Environment.Exit(0);
                     }
                 }
                 else
                 {
-                    Logger.Write(
-                       $"Your IP is: {unproxiedIP}",
-                       LogLevel.Info, ConsoleColor.Red);
+                    Logger.Write(translator.GetTranslation(TranslationString.Unproxied, unproxiedIP), LogLevel.Info, ConsoleColor.Red);
                 }
             }
         }
