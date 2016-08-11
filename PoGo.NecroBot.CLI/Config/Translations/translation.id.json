@@ -22,15 +22,15 @@
     },
 	{
       "Key": "loginInvalid",
-      "Value": "Username dan password tidak cocok, login gagal!"
+      "Value": "Username atau kata sandi salah, login gagal!"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Kamu diluar dari radius yang telah kamu tentukan! Kembali ke posisi awal (sekitar {0} meter) dalam 5 detik. Apakah berkas LastPos.ini kamu benar?"
+      "Value": "Anda berada diluar radius yang sudah Anda tentukan! Kembali ke posisi awal (sekitar {0} meter) dalam 5 detik. Apakah berkas LastPos.ini Anda benar?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Tidak ada PokeStop yang bisa digunakan di sekitarmu. Pastikan jarak maksimal tidak terlalu kecil"
+      "Value": "Tidak ada PokeStop yang dapat digunakan di sekitarmu. Pastikan jarak maksimal radius tidak terlalu kecil"
     },
     {
       "Key": "eventFortUsed",
@@ -50,11 +50,11 @@
     },
 	{
       "Key": "eventUsedIncense",
-      "Value": "Memakai Incense, tersisa: {0}"
+      "Value": "Menggunakan Incense, tersisa: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Memakai Lucky Egg, tersisa: {0}"
+      "Value": "Menggunakan Lucky Egg, tersisa: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -82,7 +82,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Pokeball habis - {0} dengan CP {1} tidak dapat ditangkap"
+      "Value": "Pokeball telah habis - {0} dengan CP {1} tidak dapat ditangkap"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
@@ -150,19 +150,19 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Pastikan koordinat kamu telah benar. Tutup program dan konfigurasi ulang jika belum! X (lintang): {0} Y (bujur): {1}"
+      "Value": "Pastikan koordinat Anda telah benar. Tutup program dan konfigurasi ulang jika belum! X (lintang): {0} Y (bujur): {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Memasukkan telur ke dalam penetas: {0:0.00} km tersisa"
+      "Value": "Memasukkan telur ke dalam inkubator: {0:0.00} km tersisa"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Status terbaru penetas: {0:0.00} km tersisa"
+      "Value": "Status terbaru inkubator: {0:0.00} km tersisa"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Telur telah menetas:  {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "Selamat !!! Telur telah menetas:  {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -246,7 +246,7 @@
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Membuka halaman Perangkat Google. Mohon masukkan kode menggunakan CTRL+V"
+      "Value": "Membuka halaman perangkat Google. Mohon masukkan kode menggunakan CTRL+V"
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -270,7 +270,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Sempurna! Kamu punya versi terbaru {0}"
+      "Value": "Info! Silahkan perbarui ke versi terbaru {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -294,7 +294,7 @@
     },
     {
       "Key": "updateFinished",
-      "Value": "Pembaruan telah selesai, kamu dapat menutup jendela ini sekarang."
+      "Value": "Pembaruan telah selesai, Anda dapat menutup jendela ini sekarang."
     },
     {
       "Key": "lookingForIncensePokemon",
@@ -314,7 +314,7 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Kamu tidak memiliki PokeBall di inventaris, tidak dapat menangkap Pokemon lagi!"
+      "Value": "Anda tidak memiliki PokeBall di inventaris, tidak dapat menangkap Pokemon lagi!"
     },
     {
       "Key": "currentPokeballInv",
@@ -334,19 +334,19 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[Konfigurasi Salah] Total barang maksimum kamu (ball+potion+revive={0}) melebihi kapasitas tas kamu ({1})"
+      "Value": "[Konfigurasi Salah] Total barang maksimum Anda (ball+potion+revive={0}) melebihi kapasitas tas Anda ({1})"
     },
     {
       "Key": "recyclingQuietly",
-	  "Value": "Mendaur ulang senyap..."
+	  "Value": "Daur ulang dengan santai..."
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Inventaris pokemon penuh. Mentransfer pokemon..."
+      "Value": "Kapasitas inventaris pokemon penuh. Mentransfer pokemon..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Inventaris pokemon penuh. Transfer pokemon secara manual atau ubah TransferDuplicatePokemon menjadi true diberkas config.json"
+      "Value": "Kapasitas inventaris pokemon penuh. Transfer pokemon secara manual atau ubah TransferDuplicatePokemon menjadi true diberkas config.json"
     },
     {
       "Key": "invFullPokestopLooting",
@@ -362,7 +362,7 @@
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Tujuan yang kamu inginkan {0}, {1} terlalu jauh dari posisi kamu saat ini {2}, {3}"
+      "Value": "Tujuan yang Anda inginkan {0}, {1} terlalu jauh dari posisi Anda saat ini {2}, {3}"
     },
     {
       "Key": "pokemonRename",
@@ -438,11 +438,11 @@
     },
     {
       "Key": "requireInputText",
-      "Value": "Program akan berlanjut setelah kamu menekan tombol..."
+      "Value": "Program akan berlanjut setelah Anda menekan tombol..."
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "Karena kamu menggunakan keamanan ganda Google, kamu perlu memasukkan kata kunci khusus aplikasi di auth.json"
+      "Value": "Karena Anda menggunakan keamanan ganda Google, Anda perlu memasukkan kata kunci khusus aplikasi di auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -450,7 +450,7 @@
     },
     {
       "Key": "googleError",
-      "Value": "Pastikan kamu memasukkan email dan password yang benar."
+      "Value": "Pastikan Anda memasukkan email dan password yang benar."
     },
     {
       "Key": "googleOffline",
@@ -458,11 +458,11 @@
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Kamu harus mengisi GoogleUsername dan GooglePassword di auth.json!"
+      "Value": "Anda harus mengisi GoogleUsername dan GooglePassword di auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Kamu harus mengisi PtcUsername dan PtcPassword di auth.json!"
+      "Value": "Anda harus mengisi PtcUsername dan PtcPassword di auth.json!"
     },
     {
       "Key": "snipeScan",
@@ -494,7 +494,7 @@
     },
     {
       "Key": "ipBannedError",
-      "Value": "Koneksi ditolak. Alamat IP kamu mungkin sudah diblokir oleh Niantic. Keluar..."
+      "Value": "Koneksi ditolak. Alamat IP Anda mungkin sudah diblokir oleh Niantic. Keluar..."
     },
     {
       "Key": "noEggsAvailable",
@@ -546,11 +546,11 @@
     },
 	{
       "Key": "firstStartPrompt",
-      "Value": "Ini adalah pertama kalinya kamu menjalankan aplikasi, apakah kamu ingin memulai pengaturan? {0}/{1}"
+      "Value": "Ini adalah pertama kalinya Anda menjalankan aplikasi, apakah Anda ingin memulai pengaturan? {0}/{1}"
     },
 	{
       "Key": "firstStartLanguagePrompt",
-      "Value": "Apakah kamu ingin mengganti bahasa bawaan? {0}/{1}"
+      "Value": "Apakah Anda ingin mengganti bahasa bawaan? {0}/{1}"
     },
 	{
       "Key": "firstStartLanguageCodePrompt",
@@ -606,7 +606,7 @@
     },
 	{
       "Key": "firstStartDefaultLocationPrompt",
-      "Value": "Apakah kamu ingin mengatur lokasi bawaan yang baru? {0}/{1}"
+      "Value": "Apakah Anda ingin mengatur lokasi bawaan yang baru? {0}/{1}"
     },
 	{
       "Key": "firstStartDefaultLocationSet",
