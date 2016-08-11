@@ -328,11 +328,11 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "L'inventari de pokemon està ple. Transferir pokemons..."
+      "Value": "L'inventari de pokemon està ple. Transferir pokemon..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "L'inventari de pokemon està ple. Si us plau, transfereix els pokemons manualment o activa l'opció TransferDuplicatePokemon dins l'arxiu de Configuració posant-la com a (True)..."
+      "Value": "L'inventari de pokemon està ple. Si us plau, transfereix els pokemon manualment o activa l'opció TransferDuplicatePokemon dins l'arxiu de Configuració posant-la com a (True)..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -361,7 +361,7 @@
 	
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Filtre de Pokemons Ignorats] - Ignorant {0} tal i com s'ha definit en la configuració actual."
+      "Value": "[Filtre de Pokemon Ignorats] - Ignorant {0} tal i com s'ha definit en la configuració actual."
     },
     {
       "Key": "catchStatusAttempt",
@@ -441,7 +441,7 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "Escanejant {0} en busca de Pokemons per snipejar..."
+      "Value": "Escanejant {0} en busca de Pokemon per snipejar..."
     },
     {
       "Key": "snipeScanEx",
@@ -449,7 +449,7 @@
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "No s'han trobat Pokemons per snipejar :("
+      "Value": "No s'han trobat Pokemon per snipejar :("
     },
     {
       "Key": "notEnoughPokeballsToSnipe",

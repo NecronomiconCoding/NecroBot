@@ -445,7 +445,7 @@
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- Szint {0} | {1} ----- \n Tapasztalat: {2}/{3} \n Pokemon elkapva: {4} \n Pokemon elkuldve: {5} \n Meglatogatott PokeStopok: {6} \n Kikelt tojasok: {7} \n Pokemons fejlesztve: {8} \n Pokedex bejegyzesek: {9} \n Elfutott pokemonok: {10} \n Pokemonok: {11}/{12}"
+      "Value": "----- Szint {0} | {1} ----- \n Tapasztalat: {2}/{3} \n Pokemon elkapva: {4} \n Pokemon elkuldve: {5} \n Meglatogatott PokeStopok: {6} \n Kikelt tojasok: {7} \n Pokemon fejlesztve: {8} \n Pokedex bejegyzesek: {9} \n Elfutott pokemonok: {10} \n Pokemonok: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",

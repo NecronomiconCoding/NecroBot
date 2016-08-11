@@ -133,20 +133,20 @@ namespace PoGo.NecroBot.Logic.Tasks
     public class ScanResult
     {
         public string Status { get; set; }
-        public List<PokemonLocation> pokemons { get; set; }
+        public List<PokemonLocation> pokemon { get; set; }
     }
 
     public class ScanResult_pokesnipers
     {
         public string Status { get; set; }
         [JsonProperty("results")]
-        public List<PokemonLocation_pokesnipers> pokemons { get; set; }
+        public List<PokemonLocation_pokesnipers> pokemon { get; set; }
     }
 
     public class ScanResult_pokewatchers
     {
         public string Status { get; set; }
-        public List<PokemonLocation_pokewatchers> pokemons { get; set; }
+        public List<PokemonLocation_pokewatchers> pokemon { get; set; }
     }
 
     public static class SnipePokemonTask
@@ -338,9 +338,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                             var scanResult = SnipeScanForPokemon(session, location);
 
                             var locationsToSnipe = new List<PokemonLocation>();
-                            if (scanResult.pokemons != null)
+                            if (scanResult.pokemon != null)
                             {
-                                var filteredPokemon = scanResult.pokemons.Where(q => pokemonIds.Contains(q.pokemon_name));
+                                var filteredPokemon = scanResult.pokemon.Where(q => pokemonIds.Contains(q.pokemon_name));
                                 var notVisitedPokemon = filteredPokemon.Where(q => !LocsVisited.Contains(q));
 
                                 if (notVisitedPokemon.Any())
@@ -540,7 +540,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 scanResult = new ScanResult
                 {
                     Status = "fail",
-                    pokemons = new List<PokemonLocation>()
+                    pokemon = new List<PokemonLocation>()
                 };
             }
             return scanResult;
@@ -557,7 +557,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             ManualResetEventSlim waitforbroadcast = new ManualResetEventSlim(false);
 
-            List<PokemonLocation_pokezz> pokemons = new List<PokemonLocation_pokezz>();
+            List<PokemonLocation_pokezz> pokemon = new List<PokemonLocation_pokezz>();
 
             socket.On("a", (msg) =>
             {
@@ -577,7 +577,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         pokezzElement.verified = (pokemonDefinitionElements[4] == "0") ? false : true;
                         pokezzElement.iv = pokemonDefinitionElements[5];
 
-                        pokemons.Add(pokezzElement);
+                        pokemon.Add(pokezzElement);
                     }
                     catch(Exception)
                     {
@@ -605,7 +605,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             socket.Close();
             if (!hasError)
             {
-                foreach (var pokemon in pokemons)
+                foreach (var pokemon in pokemon)
                 {
                     var SnipInfo = new SniperInfo();
                     SnipInfo.Id = pokemon.name;
@@ -663,9 +663,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(new ErrorEvent {Message = "(PokeSnipers.com) " + ex.Message});
                 return null;
             }
-            if (scanResult_pokesnipers.pokemons != null)
+            if (scanResult_pokesnipers.pokemon != null)
             {
-                foreach (var pokemon in scanResult_pokesnipers.pokemons)
+                foreach (var pokemon in scanResult_pokesnipers.pokemon)
                 {
                     try
                     {
@@ -719,7 +719,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/511.2 (KHTML, like Gecko) Chrome/15.0.041.151 Safari/555.2");
                 
                 // Use the HttpClient as usual. Any JS challenge will be solved automatically for you.
-                var fullresp = "{ \"pokemons\":" + client.GetStringAsync(uri).Result.Replace(" M", "Male").Replace(" F", "Female").Replace("Farfetch'd", "Farfetchd").Replace("Mr.Maleime", "MrMime") +"}";
+                var fullresp = "{ \"pokemon\":" + client.GetStringAsync(uri).Result.Replace(" M", "Male").Replace(" F", "Female").Replace("Farfetch'd", "Farfetchd").Replace("Mr.Maleime", "MrMime") +"}";
 
                 scanResult_pokewatchers = JsonConvert.DeserializeObject<ScanResult_pokewatchers>(fullresp);
             }
@@ -729,9 +729,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(new ErrorEvent { Message = "(PokeWatchers.com) " + ex.Message });
                 return null;
             }
-            if (scanResult_pokewatchers.pokemons != null)
+            if (scanResult_pokewatchers.pokemon != null)
             {
-                foreach (var pokemon in scanResult_pokewatchers.pokemons)
+                foreach (var pokemon in scanResult_pokewatchers.pokemon)
                 {
                     try
                     {

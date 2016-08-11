@@ -20,8 +20,8 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var pokemons = await session.Inventory.GetPokemons();
-            var pokemonDatas = pokemons as IList<PokemonData> ?? pokemons.ToList();
+            var pokemon = await session.Inventory.GetPokemons();
+            var pokemonDatas = pokemon as IList<PokemonData> ?? pokemon.ToList();
             var pokemonsFiltered =
                 pokemonDatas.Where(pokemon => !session.LogicSettings.PokemonNotToTransfer.Contains(pokemon.PokemonId))
                     .ToList().OrderBy( poke => poke.Cp );

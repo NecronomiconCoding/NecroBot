@@ -94,7 +94,7 @@
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "Capture mais {0} Pokemons para usar o Ovo da Sorte!"
+      "Value": "Capture mais {0} Pokemon para usar o Ovo da Sorte!"
     },
     {
       "Key": "eventUseBerry",
@@ -510,7 +510,7 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "Quantidade de Pokemons Vistos: {0}/151, Quantidade de Pokemons Capturados: {1}/151"
+      "Value": "Quantidade de Pokemon Vistos: {0}/151, Quantidade de Pokemon Capturados: {1}/151"
     },
     {
       "Key": "pkmPotentialEvolveCount",

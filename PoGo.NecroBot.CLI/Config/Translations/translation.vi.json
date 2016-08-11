@@ -122,7 +122,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokemons"
+      "Value": "Pokemon"
     },
     {
       "Key": "commonWordPerfect",
@@ -426,7 +426,7 @@
     },
 	{
       "Key": "profileStatsTemplateString",
-      "Value": "----- LVL {0} | {1} ----- \n Kinh Nghiệm: {2}/{3} \n Pokemon Đã Bắt: {4} \n Pokemon Đã Chuyển Thành Candy: {5} \n Pokestop Đã Đến: {6} \n Trứng Đã Nở: {6} \n Pokemons envolved: {7} \n Số Mục Trong Pokedex: {8} \n Đã Đi: {9} KM"
+      "Value": "----- LVL {0} | {1} ----- \n Kinh Nghiệm: {2}/{3} \n Pokemon Đã Bắt: {4} \n Pokemon Đã Chuyển Thành Candy: {5} \n Pokestop Đã Đến: {6} \n Trứng Đã Nở: {6} \n Pokemon envolved: {7} \n Số Mục Trong Pokedex: {8} \n Đã Đi: {9} KM"
     },
     {
       "Key": "showPokeTemplate",
