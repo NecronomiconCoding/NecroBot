@@ -179,7 +179,7 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
-        public void checkProxy()
+        public void checkProxy(ITranslation translator)
         {
             using (var tempWebClient = new NecroWebClient())
             {
@@ -195,17 +195,14 @@ namespace PoGo.NecroBot.Logic
 
                     if (unproxiedIP == proxiedIP || proxiedIPres == null)
                     {
-                        Logger.Write("Press any key to exit so you can fix your proxy settings...",
-                            LogLevel.Info, ConsoleColor.Red);
+                        Logger.Write(translator.GetTranslation(TranslationString.FixProxySettings), LogLevel.Info, ConsoleColor.Red);
                         Console.ReadKey();
                         Environment.Exit(0);
                     }
                 }
                 else
                 {
-                    Logger.Write(
-                       $"Your IP is: {unproxiedIP}",
-                       LogLevel.Info, ConsoleColor.Red);
+                    Logger.Write(translator.GetTranslation(TranslationString.Unproxied, unproxiedIP), LogLevel.Info, ConsoleColor.Red);
                 }
             }
         }
@@ -891,9 +888,9 @@ namespace PoGo.NecroBot.Logic
             return shouldExit ? null : settings;
         }
 
-        public void checkProxy()
+        public void checkProxy(ITranslation translator)
         {
-            Auth.checkProxy();
+            Auth.checkProxy(translator);
         }
 
         public static bool PromptForSetup(ITranslation translator)
