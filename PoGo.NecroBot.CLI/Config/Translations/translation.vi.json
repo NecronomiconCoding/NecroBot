@@ -274,7 +274,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Tuyệt vời! Bạn đang sử dụng phiên bản mới nhất: v{0} (Dịch Bởi: Skick - fb.me/S2Cancer2361)"
+      "Value": "Bạn đang sử dụng phiên bản mới nhất: v{0} (Dịch Bởi: Skick - Group: bit.ly/PokeAuto)"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -646,19 +646,24 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value":  "--- Pokedex - Đã Bắt --- \n"  
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value":  "#{0} Tên: {1} | Đã Bắt: {2} | Đã Gặp: {3} \n"  
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value":  "--- Pokedex - Còn Thiếu --- \n"  
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value":  "#{0} Tên: {1} \n"  
+    },
+	{
+      "Key": "softBanBypassed",
+      "Value": "Bypass SoftBan Thành Công!"
+
     }
   ],
   "PokemonStrings": [

@@ -270,7 +270,7 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "未检测到拟真移动{0},使用上一次保存在LastPos.ini中的配置\t\t"
+      "Value": "未检测到拟真移动{0},使用上一次保存在LastPos.ini中的配置\t\t\t"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -282,7 +282,7 @@
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "自动更新已禁用,获取最新的版本到:{0}\n"
+      "Value": "自动更新已禁用,获取最新的版本到:{0}\t\t\n"
     },
     {
       "Key": "downloadingUpdate",
@@ -562,7 +562,7 @@
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "请输入新的语言代码(简体中文是zh_CN)\t\t"
+      "Value": "请输入新的语言代码(简体中文是zh-CN)\t\t"
     },
     {
       "Key": "firstStartLanguageConfirm",
@@ -667,6 +667,30 @@
     {
       "Key": "PokedexPokemonNeededTelegram",
       "Value":  "#{0} 名称: {1} \t\t\n"  
+    },
+    {
+      "Key": "LoggedInTelegram",
+      "Value": "登录成功. 会话有效期5分钟\t\t"
+    },
+    {
+      "Key": "LoginFailedTelegram",
+      "Value": "密码错误或格式错误! 登录使用 /login 密码\t\t"
+    },
+    {
+      "Key": "NotLoggedInTelegram",
+      "Value": "你尚未登录, 登录使用 /login 密码\t\t"
+    },
+    {
+      "Key": "Proxied",
+      "Value": " 您的IP为:{0} | 代理服务器IP为:{1}\t\t\t\t"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "按任意键退出,请修改代理设置.\t\t"
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " 您的IP为:{0}\t\t\t"
     }
   ],
   "PokemonStrings": [
