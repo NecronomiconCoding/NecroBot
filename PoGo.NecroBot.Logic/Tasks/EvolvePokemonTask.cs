@@ -91,8 +91,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     if (await shouldUseLuckyEgg(session, pokemonToEvolve))
                     {
-                        await evolve(session, pokemonToEvolve);
+                         await UseLuckyEgg(session);
                     }
+                    await evolve(session, pokemonToEvolve);
                     return;
                 }
             }
