@@ -668,6 +668,18 @@
     {
       "Key": "PokedexPokemonNeededTelegram",
       "Value":  "#{0} 名稱： {1} \t\t\n"  
+    },
+    {
+      "Key": "Proxied",
+      "Value": " 您的IP為: {0}，Proxy伺服器IP為: {1} "
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": " 按任意鍵結束，請修改Proxy設定。 "
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " 您的IP為: {0}，Proxy伺服器IP為: {1} "
     }
   ],
   "PokemonStrings": [
