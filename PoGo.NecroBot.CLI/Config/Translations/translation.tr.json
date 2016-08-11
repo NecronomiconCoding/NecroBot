@@ -34,15 +34,15 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "İsim: {0} Tecrübe: {1}, Taşlar: {2}, Eşyalar: {3}, Enlem: {4}, Boylam: {5}"
+      "Value": "İsim: {0} XP: {1}, Taşlar: {2}, Eşyalar: {3}, Enlem: {4}, Boylam: {5}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "İsim: {0} BİLGİ: Eşya toplama başarısız oldu. Soft ban yemiş olabilirsiniz. Ban açılıyor: {1}/{2}"
+      "Value": "İsim: {0} BİLGİ: Eşya toplama başarısız oldu. Geçici ban yemiş olabilirsiniz. Ban açılıyor: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{1}m mesafedeki \"{0}\" PokéStop'una {2} saniye sonra varılacak."
+      "Value": "{2} saniye sonra {1}m mesafedeki \"{0}\" adlı PokéStop'a varılacak."
     },
     {
       "Key": "eventProfileLogin",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} | {1} Tecrübe kazanıldı."
+      "Value": "{0} | {1}XP kazanıldı."
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Yakalama Şansı: {7}% | Mesafe: {8}m | {9} kullanıldı ({10} tane kaldı) | {11}Tecrübe kazanıldı | {12} | Enlem: {13} Boylam: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Yakalama Şansı: {7}% | Mesafe: {8}m | {9} kullanıldı ({10} tane kaldı) | {11}XP kazanıldı | {12} | Enlem: {13} Boylam: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
