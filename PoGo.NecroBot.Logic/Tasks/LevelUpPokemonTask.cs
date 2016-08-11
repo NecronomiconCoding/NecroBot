@@ -16,13 +16,23 @@ namespace PoGo.NecroBot.Logic.Tasks
     internal class LevelUpPokemonTask
     {
         public static List<PokemonData> Upgrade = new List<PokemonData>();
+        private static IEnumerable<PokemonData> upgradablePokemon;
+
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
+           
+           
             if (session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
                 return;
-
-            var upgradablePokemon = await session.Inventory.GetPokemonToUpgrade();
-            if (upgradablePokemon.Count == 0)
+            upgradablePokemon = await session.Inventory.GetPokemonToUpgrade();
+            if (session.LogicSettings.OnlyUpgradeFavorites)
+            {
+                var fave = upgradablePokemon.Where(i => i.Favorite == 1);
+                upgradablePokemon = fave;
+            }
+           
+           
+            if (upgradablePokemon.Count() == 0)
                 return;
 
             var myPokemonSettings = await session.Inventory.GetPokemonSettings();

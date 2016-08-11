@@ -14,6 +14,7 @@ using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using System.Collections.Generic;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -174,7 +175,7 @@ namespace PoGo.NecroBot.Logic.State
 
         private static string DownloadServerVersion()
         {
-            using (var wC = new WebClient())
+            using (var wC = new NecroWebClient())
             {
                 return wC.DownloadString(VersionUri);
             }

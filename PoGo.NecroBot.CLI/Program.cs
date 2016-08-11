@@ -15,6 +15,7 @@ using System.Net;
 using PoGo.NecroBot.CLI.Resources;
 using System.Reflection;
 using PoGo.NecroBot.CLI.Plugin;
+using System.Net.Http;
 
 #endregion
 
@@ -188,7 +189,7 @@ namespace PoGo.NecroBot.CLI
             ProgressBar.fill(100);
 
             machine.AsyncStart(new VersionCheckState(), session);
-
+            
             if (settings.UseTelegramAPI)
             {
                 session.Telegram = new Logic.Service.TelegramService(settings.TelegramAPIKey, session);
@@ -202,6 +203,8 @@ namespace PoGo.NecroBot.CLI
                 Console.Clear();
             }
             catch (IOException) { }
+
+            settings.checkProxy();
 
             QuitEvent.WaitOne();
         }
@@ -220,7 +223,7 @@ namespace PoGo.NecroBot.CLI
 
         private static bool CheckKillSwitch()
         {
-            using (var wC = new WebClient())
+            using (var wC = new NecroWebClient())
             {
                 try
                 {
