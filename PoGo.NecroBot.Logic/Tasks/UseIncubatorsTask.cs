@@ -44,13 +44,13 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var rememberedIncubatorsFilePath = Path.Combine(session.LogicSettings.ProfilePath, "temp", "incubators.json");
             var rememberedIncubators = GetRememberedIncubators(rememberedIncubatorsFilePath);
-            var pokemons = (await session.Inventory.GetPokemons()).ToList();
+            var pokemon = (await session.Inventory.GetPokemons()).ToList();
 
             // Check if eggs in remembered incubator usages have since hatched
             // (instead of calling session.Client.Inventory.GetHatchedEgg(), which doesn't seem to work properly)
             foreach (var incubator in rememberedIncubators)
             {
-                var hatched = pokemons.FirstOrDefault(x => !x.IsEgg && x.Id == incubator.PokemonId);
+                var hatched = pokemon.FirstOrDefault(x => !x.IsEgg && x.Id == incubator.PokemonId);
                 if (hatched == null) continue;
 
                 session.EventDispatcher.Send(new EggHatchedEvent

@@ -147,7 +147,7 @@ namespace PoGo.NecroBot.Logic
 
 
                 var settings = pokemonSettings.Single(x => x.PokemonId == pokemonGroupToTransfer.Key);
-                //Lets calc new canBeRemoved pokemons according to transferring some of them for +1 candy or to evolving for +1 candy
+                //Lets calc new canBeRemoved pokemon according to transferring some of them for +1 candy or to evolving for +1 candy
                 if (keepPokemonsThatCanEvolve &&
                     pokemonsToEvolve.Contains(pokemonGroupToTransfer.Key) &&
                     settings.CandyToEvolve > 0 &&
@@ -228,8 +228,8 @@ namespace PoGo.NecroBot.Logic
         public async Task<PokemonData> GetHighestPokemonOfTypeByCp(PokemonData pokemon)
         {
             var myPokemon = await GetPokemons();
-            var pokemons = myPokemon.ToList();
-            return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
+            var pokemon = myPokemon.ToList();
+            return pokemon.Where(x => x.PokemonId == pokemon.PokemonId)
                 .OrderByDescending(x => x.Cp)
                 .FirstOrDefault();
         }
@@ -248,8 +248,8 @@ namespace PoGo.NecroBot.Logic
         public async Task<PokemonData> GetHighestPokemonOfTypeByIv(PokemonData pokemon)
         {
             var myPokemon = await GetPokemons();
-            var pokemons = myPokemon.ToList();
-            return pokemons.Where(x => x.PokemonId == pokemon.PokemonId)
+            var pokemon = myPokemon.ToList();
+            return pokemon.Where(x => x.PokemonId == pokemon.PokemonId)
                 .OrderByDescending(PokemonInfo.CalculatePokemonPerfection)
                 .FirstOrDefault();
         }
@@ -257,15 +257,15 @@ namespace PoGo.NecroBot.Logic
         public async Task<IEnumerable<PokemonData>> GetHighestsCp(int limit)
         {
             var myPokemon = await GetPokemons();
-            var pokemons = myPokemon.ToList();
-            return pokemons.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax).Take(limit);
+            var pokemon = myPokemon.ToList();
+            return pokemon.OrderByDescending(x => x.Cp).ThenBy(n => n.StaminaMax).Take(limit);
         }
      
         public async Task<IEnumerable<PokemonData>> GetHighestsPerfect(int limit)
         {
             var myPokemon = await GetPokemons();
-            var pokemons = myPokemon.ToList();
-            return pokemons.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(limit);
+            var pokemon = myPokemon.ToList();
+            return pokemon.OrderByDescending(PokemonInfo.CalculatePokemonPerfection).Take(limit);
         }
 
         public async Task<int> GetItemAmountByType(ItemId type)
@@ -426,7 +426,7 @@ namespace PoGo.NecroBot.Logic
                     myPokemon.Where(
                         p => PokemonInfo.CalculatePokemonPerfection(p) >= _logicSettings.EvolveAboveIvValue);
             }
-            var pokemons = myPokemon.ToList();
+            var pokemon = myPokemon.ToList();
 
             var myPokemonSettings = await GetPokemonSettings();
             var pokemonSettings = myPokemonSettings.ToList();
@@ -435,7 +435,7 @@ namespace PoGo.NecroBot.Logic
             var pokemonFamilies = myPokemonFamilies.ToArray();
 
             var pokemonToEvolve = new List<PokemonData>();
-            foreach (var pokemon in pokemons)
+            foreach (var pokemon in pokemon)
             {
                 var settings = pokemonSettings.SingleOrDefault(x => x.PokemonId == pokemon.PokemonId);
                 var familyCandy = pokemonFamilies.SingleOrDefault(x => settings.FamilyId == x.FamilyId);
@@ -494,10 +494,10 @@ namespace PoGo.NecroBot.Logic
 
         public TransferFilter GetPokemonTransferFilter(PokemonId pokemon)
         {
-            if (_logicSettings.PokemonsTransferFilter != null &&
-                _logicSettings.PokemonsTransferFilter.ContainsKey(pokemon))
+            if (_logicSettings.PokemonTransferFilter != null &&
+                _logicSettings.PokemonTransferFilter.ContainsKey(pokemon))
             {
-                return _logicSettings.PokemonsTransferFilter[pokemon];
+                return _logicSettings.PokemonTransferFilter[pokemon];
             }
             return new TransferFilter(_logicSettings.KeepMinCp, _logicSettings.KeepMinLvl, _logicSettings.UseKeepMinLvl, _logicSettings.KeepMinIvPercentage,
                 _logicSettings.KeepMinOperator, _logicSettings.KeepMinDuplicatePokemon);

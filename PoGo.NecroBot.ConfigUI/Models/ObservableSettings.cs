@@ -585,21 +585,21 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public static readonly DependencyProperty EvolveAllPokemonWithEnoughCandyProperty =
             DependencyProperty.Register("EvolveAllPokemonWithEnoughCandy", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
 
-        public double EvolveKeptPokemonsAtStorageUsagePercentage
+        public double EvolveKeptPokemonAtStorageUsagePercentage
         {
             get { return (double)GetValue(EvolveKeptPokemonsAtStorageUsagePercentageProperty); }
             set { SetValue(EvolveKeptPokemonsAtStorageUsagePercentageProperty, value); }
         }
         public static readonly DependencyProperty EvolveKeptPokemonsAtStorageUsagePercentageProperty =
-            DependencyProperty.Register("EvolveKeptPokemonsAtStorageUsagePercentage", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+            DependencyProperty.Register("EvolveKeptPokemonAtStorageUsagePercentage", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
 
-        public bool KeepPokemonsThatCanEvolve
+        public bool KeepPokemonThatCanEvolve
         {
             get { return (bool)GetValue(KeepPokemonsThatCanEvolveProperty); }
             set { SetValue(KeepPokemonsThatCanEvolveProperty, value); }
         }
         public static readonly DependencyProperty KeepPokemonsThatCanEvolveProperty =
-            DependencyProperty.Register("KeepPokemonsThatCanEvolve", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+            DependencyProperty.Register("KeepPokemonThatCanEvolve", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
 
         public float FavoriteMinIvPercentage
         {
@@ -1166,37 +1166,37 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public static readonly DependencyProperty NoTransferCollectionProperty =
             DependencyProperty.Register("NoTransferCollection", typeof(ObservableCollection<PokemonToggle>), typeof(ObservableSettings), new PropertyMetadata(null));
 
-        public List<PokemonId> PokemonsToEvolve
+        public List<PokemonId> PokemonToEvolve
         {
             get { return (List<PokemonId>)GetValue(PokemonsToEvolveProperty); }
             set { SetValue(PokemonsToEvolveProperty, value); }
         }
         public static readonly DependencyProperty PokemonsToEvolveProperty =
-            DependencyProperty.Register("PokemonsToEvolve", typeof(List<PokemonId>), typeof(ObservableSettings), new PropertyMetadata(null));
+            DependencyProperty.Register("PokemonToEvolve", typeof(List<PokemonId>), typeof(ObservableSettings), new PropertyMetadata(null));
 
-        public List<PokemonId> PokemonsToLevelUp
+        public List<PokemonId> PokemonToLevelUp
         {
             get { return (List<PokemonId>)GetValue(PokemonsToLevelUpProperty); }
             set { SetValue(PokemonsToLevelUpProperty, value); }
         }
         public static readonly DependencyProperty PokemonsToLevelUpProperty =
-            DependencyProperty.Register("PokemonsToLevelUp", typeof(List<PokemonId>), typeof(ObservableSettings), new PropertyMetadata(null));
+            DependencyProperty.Register("PokemonToLevelUp", typeof(List<PokemonId>), typeof(ObservableSettings), new PropertyMetadata(null));
 
-        public List<PokemonId> PokemonsToIgnore
+        public List<PokemonId> PokemonToIgnore
         {
             get { return (List<PokemonId>)GetValue(PokemonsToIgnoreProperty); }
             set { SetValue(PokemonsToIgnoreProperty, value); }
         }
         public static readonly DependencyProperty PokemonsToIgnoreProperty =
-            DependencyProperty.Register("PokemonsToIgnore", typeof(List<PokemonId>), typeof(ObservableSettings), new PropertyMetadata(null));
+            DependencyProperty.Register("PokemonToIgnore", typeof(List<PokemonId>), typeof(ObservableSettings), new PropertyMetadata(null));
 
-        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter
+        public Dictionary<PokemonId, TransferFilter> PokemonTransferFilter
         {
             get { return (Dictionary<PokemonId, TransferFilter>)GetValue(PokemonsTransferFilterProperty); }
             set { SetValue(PokemonsTransferFilterProperty, value); }
         }
         public static readonly DependencyProperty PokemonsTransferFilterProperty =
-            DependencyProperty.Register("PokemonsTransferFilter", typeof(Dictionary<PokemonId, TransferFilter>), typeof(ObservableSettings), new PropertyMetadata(null));
+            DependencyProperty.Register("PokemonTransferFilter", typeof(Dictionary<PokemonId, TransferFilter>), typeof(ObservableSettings), new PropertyMetadata(null));
 
         public SnipeSettings PokemonToSnipe
         {
@@ -1220,10 +1220,10 @@ namespace PoGo.NecroBot.ConfigUI.Models
         {
             ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>();
             NoTransferCollection = new ObservableCollection<PokemonToggle>();
-            PokemonsToEvolve = new List<PokemonId>();
-            PokemonsToLevelUp = new List<PokemonId>();
-            PokemonsToIgnore = new List<PokemonId>();
-            PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>();
+            PokemonToEvolve = new List<PokemonId>();
+            PokemonToLevelUp = new List<PokemonId>();
+            PokemonToIgnore = new List<PokemonId>();
+            PokemonTransferFilter = new Dictionary<PokemonId, TransferFilter>();
             PokemonToUseMasterball = new List<PokemonId>();
         }
 
@@ -1298,8 +1298,8 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.EvolveAboveIvValue = set.EvolveAboveIvValue;
             res.EvolveAllPokemonAboveIv = set.EvolveAllPokemonAboveIv;
             res.EvolveAllPokemonWithEnoughCandy = set.EvolveAllPokemonWithEnoughCandy;
-            res.EvolveKeptPokemonsAtStorageUsagePercentage = set.EvolveKeptPokemonsAtStorageUsagePercentage;
-            res.KeepPokemonsThatCanEvolve = set.KeepPokemonsThatCanEvolve;
+            res.EvolveKeptPokemonAtStorageUsagePercentage = set.EvolveKeptPokemonAtStorageUsagePercentage;
+            res.KeepPokemonThatCanEvolve = set.KeepPokemonThatCanEvolve;
             res.AutoFavoritePokemon = set.AutoFavoritePokemon;
             res.FavoriteMinIvPercentage = set.FavoriteMinIvPercentage;
             // CAPTURE
@@ -1372,7 +1372,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.PokemonToSnipe = set.PokemonToSnipe;
             foreach (PokemonId pid in Enum.GetValues(typeof(PokemonId)))
             {
-                res.NoTransferCollection.Add(new PokemonToggle(pid, set.PokemonsNotToTransfer.Contains(pid)));
+                res.NoTransferCollection.Add(new PokemonToggle(pid, set.PokemonNotToTransfer.Contains(pid)));
             }
 
                 return res;
@@ -1448,8 +1448,8 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.EvolveAboveIvValue = EvolveAboveIvValue;
             gs.EvolveAllPokemonAboveIv = EvolveAllPokemonAboveIv;
             gs.EvolveAllPokemonWithEnoughCandy = EvolveAllPokemonWithEnoughCandy;
-            gs.EvolveKeptPokemonsAtStorageUsagePercentage = EvolveKeptPokemonsAtStorageUsagePercentage;
-            gs.KeepPokemonsThatCanEvolve = KeepPokemonsThatCanEvolve;
+            gs.EvolveKeptPokemonAtStorageUsagePercentage = EvolveKeptPokemonAtStorageUsagePercentage;
+            gs.KeepPokemonThatCanEvolve = KeepPokemonThatCanEvolve;
             gs.AutoFavoritePokemon = AutoFavoritePokemon;
             gs.FavoriteMinIvPercentage = FavoriteMinIvPercentage;
             // CAPTURE
@@ -1520,8 +1520,8 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.DumpPokemonStats = DumpPokemonStats;
             // OBJECTS & ITERATORS
             gs.PokemonToSnipe = PokemonToSnipe;
-            gs.PokemonsNotToTransfer.Clear();
-            foreach (PokemonToggle pt in NoTransferCollection) if (pt.IsChecked) gs.PokemonsNotToTransfer.Add(pt.Id);
+            gs.PokemonNotToTransfer.Clear();
+            foreach (PokemonToggle pt in NoTransferCollection) if (pt.IsChecked) gs.PokemonNotToTransfer.Add(pt.Id);
 
             return gs;
         }

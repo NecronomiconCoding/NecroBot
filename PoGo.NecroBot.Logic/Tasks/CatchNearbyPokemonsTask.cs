@@ -25,8 +25,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             Logger.Write(session.Translation.GetTranslation(TranslationString.LookingForPokemon), LogLevel.Debug);
 
-            var pokemons = await GetNearbyPokemons(session);
-            foreach (var pokemon in pokemons)
+            var pokemon = await GetNearbyPokemons(session);
+            foreach (var pokemon in pokemon)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -96,7 +96,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
 
                 // If pokemon is not last pokemon in list, create delay between catches, else keep moving.
-                if (!Equals(pokemons.ElementAtOrDefault(pokemons.Count() - 1), pokemon))
+                if (!Equals(pokemon.ElementAtOrDefault(pokemon.Count() - 1), pokemon))
                 {
                     await Task.Delay(session.LogicSettings.DelayBetweenPokemonCatch, cancellationToken);
                 }
@@ -107,14 +107,14 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             var mapObjects = await session.Client.Map.GetMapObjects();
 
-            var pokemons = mapObjects.Item1.MapCells.SelectMany(i => i.CatchablePokemons)
+            var pokemon = mapObjects.Item1.MapCells.SelectMany(i => i.CatchablePokemons)
                 .OrderBy(
                     i =>
                         LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                             session.Client.CurrentLongitude,
                             i.Latitude, i.Longitude));
 
-            return pokemons;
+            return pokemon;
         }
     }
 }

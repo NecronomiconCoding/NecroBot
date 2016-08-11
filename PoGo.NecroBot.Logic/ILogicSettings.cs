@@ -85,7 +85,7 @@ namespace PoGo.NecroBot.Logic
         double WalkingSpeedInKilometerPerHour { get; }
         bool FastSoftBanBypass { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
-        bool KeepPokemonsThatCanEvolve { get; }
+        bool KeepPokemonThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
         bool TransferDuplicatePokemonOnCapture { get; }
         bool UseEggIncubators { get; }
@@ -180,19 +180,19 @@ namespace PoGo.NecroBot.Logic
         bool DetailedCountsBeforeRecycling { get; }
         bool VerboseRecycling { get; }
         double RecycleInventoryAtUsagePercentage { get; }
-        double EvolveKeptPokemonsAtStorageUsagePercentage { get; }
+        double EvolveKeptPokemonAtStorageUsagePercentage { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
-        ICollection<PokemonId> PokemonsToEvolve { get; }
-        ICollection<PokemonId> PokemonsToLevelUp { get; }
+        ICollection<PokemonId> PokemonToEvolve { get; }
+        ICollection<PokemonId> PokemonToLevelUp { get; }
 
-        ICollection<PokemonId> PokemonsNotToTransfer { get; }
+        ICollection<PokemonId> PokemonNotToTransfer { get; }
 
         ICollection<PokemonId> PokemonsNotToCatch { get; }
 
         ICollection<PokemonId> PokemonToUseMasterball { get; }
 
-        Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter { get; }
+        Dictionary<PokemonId, TransferFilter> PokemonTransferFilter { get; }
         SnipeSettings PokemonToSnipe { get; }
 
         bool StartupWelcomeDelay { get; }

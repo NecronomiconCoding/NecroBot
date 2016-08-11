@@ -42,7 +42,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemonFamilies = myPokemonFamilies.ToArray();
 
             var upgradedNumber = 0;
-            var PokemonToLevel = session.LogicSettings.PokemonsToLevelUp;
+            var PokemonToLevel = session.LogicSettings.PokemonToLevelUp;
 
             foreach (var pokemon in upgradablePokemon)
             {

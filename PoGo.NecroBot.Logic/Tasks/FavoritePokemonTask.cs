@@ -18,9 +18,9 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            var pokemons = await session.Inventory.GetPokemons();
+            var pokemon = await session.Inventory.GetPokemons();
 
-            foreach (var pokemon in pokemons)
+            foreach (var pokemon in pokemon)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 

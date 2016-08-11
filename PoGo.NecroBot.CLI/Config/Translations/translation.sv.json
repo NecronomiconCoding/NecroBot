@@ -96,7 +96,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokemons"
+      "Value": "Pokemon"
     },
     {
       "Key": "commonWordPerfect",
@@ -273,7 +273,7 @@
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Pokemonväskan är full. Överför pokemons..."
+      "Value": "Pokemonväskan är full. Överför pokemon..."
     },
     {
       "Key": "invFullTransferManually",
@@ -384,11 +384,11 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "[Krypskytt] Letar efter Pokemons vid {0}..."
+      "Value": "[Krypskytt] Letar efter Pokemon vid {0}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Krypskytt] Inga Pokemons funna!"
+      "Value": "[Krypskytt] Inga Pokemon funna!"
     },
     {
       "Key": "PokedexCatchedTelegram",
