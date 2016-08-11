@@ -302,10 +302,10 @@
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <Label Style="{StaticResource LineItemLabel}" Content="Evolve Pokemon at Storage Usage %" ToolTip="Decimals allowed." />
-                            <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.EvolveKeptPokemonsAtStorageUsagePercentage}" />
+                            <TextBox Style="{StaticResource LineItemTextBoxSm}" Text="{Binding Settings.EvolveKeptPokemonAtStorageUsagePercentage}" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
-                            <CheckBox Content="Keep Pokemon which Can Evolve" IsChecked="{Binding Settings.KeepPokemonsThatCanEvolve}" ToolTip="QED." />
+                            <CheckBox Content="Keep Pokemon which Can Evolve" IsChecked="{Binding Settings.KeepPokemonThatCanEvolve}" ToolTip="QED." />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                             <CheckBox Content="Auto-Favorite Pokemon" IsChecked="{Binding Settings.AutoFavoritePokemon}" ToolTip="QED." />
