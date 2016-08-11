@@ -1,13 +1,13 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events;
+﻿using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events;
 using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Helpers;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
 {
-    class GetTrainerProfileTask
+    internal class GetTrainerProfileTask
     {
         public static async Task Execute(ISession session, WebSocketSession webSocketSession, string requestID)
         {
