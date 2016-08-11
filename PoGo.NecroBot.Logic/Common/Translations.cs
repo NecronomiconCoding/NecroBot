@@ -199,7 +199,9 @@ namespace PoGo.NecroBot.Logic.Common
         NotLoggedInTelegram,
         Unproxied,
         Proxied,
-        FixProxySettings
+        FixProxySettings,
+        UsageHelp,
+        LoginRemainingTime
     }
 
     public class Translation : ITranslation
@@ -469,7 +471,10 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.NotLoggedInTelegram, "You are not logged in, use /login PASSWORD"),
             new KeyValuePair<TranslationString, string>(TranslationString.Proxied, "Your IP is: {0} | Proxy IP is: {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.Unproxied, "Your IP is: {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.FixProxySettings, "Press any key to exit so you can fix your proxy settings...")
+            new KeyValuePair<TranslationString, string>(TranslationString.FixProxySettings, "Press any key to exit so you can fix your proxy settings..."),
+            new KeyValuePair<TranslationString, string>(TranslationString.UsageHelp, "Invalid command arguments! \n Correct usage: \n {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LoginRemainingTime, "You are already logged in! \n Session valid for: ({0}:{1} seconds)")
+
         };
 
         [JsonProperty("PokemonStrings",
