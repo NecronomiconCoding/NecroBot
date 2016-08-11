@@ -13,7 +13,7 @@
 
 <p align="center">
   <a href="https://discord.gg/VXKxNFr">
-    <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner3">
+    <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
   </a>
 </p>
 <br/>
