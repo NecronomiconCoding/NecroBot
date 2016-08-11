@@ -179,7 +179,7 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
-        public void checkProxy()
+        public void checkProxy(ITranslation translator)
         {
             using (var tempWebClient = new NecroWebClient())
             {
@@ -188,24 +188,19 @@ namespace PoGo.NecroBot.Logic
                 {
                     tempWebClient.Proxy = this.InitProxy();
                     string proxiedIPres = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
-                    string proxiedIP = proxiedIPres == null?"INVALID PROXY": proxiedIPres;
-                    Logger.Write(
-                       $"Your IP is: {unproxiedIP} / Proxy IP is: {proxiedIP}",
-                       LogLevel.Info, (unproxiedIP==proxiedIP)?ConsoleColor.Red:ConsoleColor.Green);
+                    string proxiedIP = proxiedIPres == null ? "INVALID PROXY" : proxiedIPres;
+                    Logger.Write(translator.GetTranslation(TranslationString.Proxied, unproxiedIP, proxiedIP), LogLevel.Info, (unproxiedIP == proxiedIP) ? ConsoleColor.Red : ConsoleColor.Green);
 
                     if (unproxiedIP == proxiedIP || proxiedIPres == null)
                     {
-                        Logger.Write("Press any key to exit so you can fix your proxy settings...",
-                            LogLevel.Info, ConsoleColor.Red);
+                        Logger.Write(translator.GetTranslation(TranslationString.FixProxySettings), LogLevel.Info, ConsoleColor.Red);
                         Console.ReadKey();
                         Environment.Exit(0);
                     }
                 }
                 else
                 {
-                    Logger.Write(
-                       $"Your IP is: {unproxiedIP}",
-                       LogLevel.Info, ConsoleColor.Red);
+                    Logger.Write(translator.GetTranslation(TranslationString.Unproxied, unproxiedIP), LogLevel.Info, ConsoleColor.Red);
                 }
             }
         }
@@ -548,7 +543,7 @@ namespace PoGo.NecroBot.Logic
             new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
         };
 
-        
+
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
@@ -872,7 +867,7 @@ namespace PoGo.NecroBot.Logic
                 settings = new GlobalSettings();
                 shouldExit = true;
             }
-            
+
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
@@ -883,13 +878,13 @@ namespace PoGo.NecroBot.Logic
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
             }
-            
+
             return shouldExit ? null : settings;
         }
 
-        public void checkProxy()
+        public void checkProxy(ITranslation translator)
         {
-            Auth.checkProxy();
+            Auth.checkProxy(translator);
         }
 
         public static bool PromptForSetup(ITranslation translator)
