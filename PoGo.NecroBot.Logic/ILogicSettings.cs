@@ -70,6 +70,10 @@ namespace PoGo.NecroBot.Logic
     }
     public class ConsoleColors
     {
+        public ConsoleColors()
+        {
+        }
+        
         public string ErrorColor { get; set; }
         public string WarningColor { get; set; }
         public string PokestopColor { get; set; }
