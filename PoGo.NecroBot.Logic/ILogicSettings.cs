@@ -98,6 +98,8 @@ namespace PoGo.NecroBot.Logic
         double UseMasterBallBelowCatchProbability { get; }
         double UseUltraBallBelowCatchProbability { get; }
         double UseGreatBallBelowCatchProbability { get; }
+        bool EnableMissedThrows { get; }
+        int ThrowMissPercentage { get; }
         bool EnableHumanizedThrows { get; }
         int NiceThrowChance { get; }
         int GreatThrowChance { get; }
