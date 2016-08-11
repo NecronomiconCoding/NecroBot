@@ -51,16 +51,7 @@ namespace PoGo.NecroBot.CLI
             switch (level)
             {
                 case LogLevel.Error:
-
-                    ConsoleColor color;
-                    if (!Enum.TryParse(session.LogicSettings.ErrorColor, out color))
-                    {
-                    // this is the fallback color in case an invalid value was entered.
-                    color = ConsoleColor.Red;
-                    }
-
-                    Console.ForegroundColor = color;
-                    
+                    Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.(session.LogicSettings.ErrorColor) : color;
                     Console.WriteLine($"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.Error}) {message}");
                     break;
                 case LogLevel.Warning:
