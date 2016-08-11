@@ -284,11 +284,7 @@ namespace PoGo.NecroBot.CLI
             var candy = session.Translation.GetTranslation(TranslationString.DisplayHighestCandy);
 
             Logger.Write(session.Translation.GetTranslation(TranslationString.HighestsPokemoHeader, strHeader), LogLevel.Info, ConsoleColor.Yellow);
-<<<<<<< HEAD
             foreach(var pokemon in displayHighestsPokemonEvent.PokemonList)
-=======
-            foreach( var pokemon in displayHighestsPokemonEvent.PokemonList )
->>>>>>> master
             {
                 string strMove1 = session.Translation.GetPokemonMovesetTranslation(pokemon.Item5);
                 string strMove2 = session.Translation.GetPokemonMovesetTranslation(pokemon.Item6);
