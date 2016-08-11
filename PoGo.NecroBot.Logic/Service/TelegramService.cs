@@ -64,7 +64,7 @@ namespace PoGo.NecroBot.Logic.Service
                 {
                     if (messagetext.Length == 2)
                     {
-                        if (messagetext[1].ToLower().Contains(session.LogicSettings.TelegramPassword))
+                        if (messagetext[1].ToLower().Equals(session.LogicSettings.TelegramPassword))
                         {
                             loggedIn = true;
                             _lastLoginTime = DateTime.Now;
