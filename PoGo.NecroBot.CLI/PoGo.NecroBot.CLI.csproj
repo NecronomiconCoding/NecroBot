@@ -325,6 +325,9 @@
     <None Include="Config\Translations\translation.it.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+	<None Include="Config\Translations\translation.kh.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Config\Translations\translation.lt.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -367,7 +370,13 @@
     <None Include="Config\Translations\translation.zh-CN.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+	<None Include="Config\Translations\translation.zh-CN_pp.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Config\Translations\translation.zh-TW.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+	<None Include="Config\Translations\translation.zh-HK.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
