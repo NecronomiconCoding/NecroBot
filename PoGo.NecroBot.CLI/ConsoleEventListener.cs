@@ -283,15 +283,31 @@ namespace PoGo.NecroBot.CLI
             var move2 = session.Translation.GetTranslation(TranslationString.DisplayHighestMove2Header);
             var candy = session.Translation.GetTranslation(TranslationString.DisplayHighestCandy);
 
-            Logger.Write($"====== {strHeader} ======", LogLevel.Info, ConsoleColor.Yellow);
+            Logger.Write(session.Translation.GetTranslation(TranslationString.HighestsPokemoHeader, strHeader), LogLevel.Info, ConsoleColor.Yellow);
             foreach( var pokemon in displayHighestsPokemonEvent.PokemonList )
             {
                 string strMove1 = session.Translation.GetPokemonMovesetTranslation( pokemon.Item5 );
                 string strMove2 = session.Translation.GetPokemonMovesetTranslation( pokemon.Item6 );
 
                 Logger.Write(
-                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft( 4, ' ' )}/{pokemon.Item2.ToString().PadLeft( 4, ' ' )} | ({pokemon.Item3.ToString( "0.00" )}% {strPerfect})\t| Lvl {pokemon.Item4.ToString( "00" )}\t {strName}: {session.Translation.GetPokemonTranslation( pokemon.Item1.PokemonId ).PadRight( 10, ' ' )}\t {move1}: {strMove1.PadRight( 20, ' ' )} {move2}: {strMove2.PadRight( 20, ' ' )} {candy}: {pokemon.Item7}",
-                    LogLevel.Info, ConsoleColor.Yellow );
+                    session.Translation.GetTranslation(
+                        TranslationString.HighestsPokemoCell,
+                        pokemon.Item1.Cp.ToString().PadLeft(4, ''),
+                        pokemon.Item2.ToString().PadLeft(4, ' '),
+                        pokemon.Item3.ToString("0.00"), strPerfect,
+                        pokemon.Item4.ToString("00"),
+                        strName
+                        session.Translation.GetPokemonTranslation(pokemon.Item1.PokemonId).PadRight(10, ' '),
+                        move1,
+                        strMove1.PadRight( 20, ''),
+                        move2,
+                        strMove2.PadRight( 20,' ' ),
+                        candy,
+                        pokemon.Item7
+                    ),
+                    LogLevel.Info,
+                    ConsoleColor.Yellow
+                );
             }
         }
 
