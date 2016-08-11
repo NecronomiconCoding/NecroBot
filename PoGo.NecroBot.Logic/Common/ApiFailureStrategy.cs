@@ -48,7 +48,7 @@ namespace PoGo.NecroBot.Logic.Common
         {
             try
             {
-                if (_session.Settings.AuthType != AuthType.Google || _session.Settings.AuthType != AuthType.Ptc)
+                if (_session.Settings.AuthType == AuthType.Google || _session.Settings.AuthType == AuthType.Ptc)
                 {
                     await _session.Client.Login.DoLogin();
                 }
@@ -135,7 +135,7 @@ namespace PoGo.NecroBot.Logic.Common
             {
                 _session.EventDispatcher.Send(new ErrorEvent
                 {
-                    Message = ex.InnerException.ToString()
+                    Message = (ex.InnerException ?? ex).ToString()
                 });
             }
         }

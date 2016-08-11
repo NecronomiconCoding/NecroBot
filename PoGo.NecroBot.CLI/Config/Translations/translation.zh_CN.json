@@ -18,7 +18,7 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "未知的账户类型,请查看config.json\t\t"
+      "Value": "未知的账号类型,请查看config.json\t\t"
     },
     {
       "Key": "loginInvalid",
@@ -26,11 +26,11 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "您在设定的范围外!5秒后返回起点(距离{0}米),请确认lastpos.ini中经纬度是否正确?\t\t"
+      "Value": "您偏离了设定的范围!5秒后返回起点(距离{0}米),请确认lastPos.ini中经纬度是否正确?\t\t"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "您附近没有任何可用的补给站,是您的最大挂机距离设置太小了吗?\t\t"
+      "Value": "您附近没有任何可用的补给站,是您的最大挂机距离设置太小了吗?\t\t\t"
     },
     {
       "Key": "eventFortUsed",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "成功进化:{0},经验+{1}\t\t"
+      "Value": "成功进化:{0},经验+{1}\t\t\t"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -66,7 +66,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t-CP:{1}完美度:{2}% [已有CP:{3}完美度:{4}%] (糖果:{5})\t\t\t"
+      "Value": "{0},CP:{1}完美度:{2}% [已有CP:{3}完美度:{4}%] (糖果:{5})\t\t\t"
     },
     {
       "Key": "eventItemRecycled",
@@ -94,7 +94,7 @@
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "还需捕获{0}只精灵使用幸运蛋!\t\t"
+      "Value": "还需捕获{0}只宝可梦使用幸运蛋!\t\t"
     },
     {
       "Key": "eventUseBerry",
@@ -122,7 +122,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "宠物小精灵"
+      "Value": "宝可梦"
     },
     {
       "Key": "commonWordPerfect",
@@ -150,11 +150,11 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value": "确认经纬度是否正确,如果错误请退出程序!纬度:{0}经度:{1}\t\t"
+      "Value": "确认经纬度是否正确,如有错误请退出程序!纬度:{0}经度:{1}\t\t"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "正在将宠物蛋放入孵化器中:剩余{0:0.00}千米\t\t"
+      "Value": "正在将宠物蛋放入孵化器中:剩余{0:0.00}千米\t\t\t\t"
     },
     {
       "Key": "incubatorStatusUpdate",
@@ -182,11 +182,11 @@
     },
     {
       "Key": "logEntryFarming",
-      "Value": "开刷"
+      "Value": "挂机"
     },
     {
       "Key": "logEntrySniper",
-      "Value": "狙击"
+      "Value": "追踪"
     },
     {
       "Key": "logEntryRecycling",
@@ -225,20 +225,24 @@
       "Value": "新"
     },
     {
+      "Key": "logEntrySoftBan",
+      "Value": "暂封"
+    },
+    {
       "Key": "loggingIn",
       "Value": "正在登录{0}账号\t\t"
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC服务器可能关闭或您的帐号错误错误,请尝试谷歌帐号登录\t\t"
+      "Value": "PTC服务器可能宕机或您的账号有误,请尝试谷歌账号登录\t\t"
     },
     {
       "Key": "accessTokenExpired",
-      "Value": "PTC登录过期,正在重新登录..\t\t"
+      "Value": "PTC登录凭证过期,正在重新登录..\t\t"
     },
     {
       "Key": "invalidResponse",
-      "Value": "从Niantic服务器接受到无效的响应\t\t"
+      "Value": "Niantic服务器未响应\t\t"
     },
     {
       "Key": "tryingAgainIn",
@@ -246,11 +250,11 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "帐号或密码错误!退出...\t\t"
+      "Value": "账号或密码错误! 退出...\t\t"
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "正在打开GoogleDevice网页,请用CTRL+V粘贴验证码\t\t"
+      "Value": "正在打开GoogleDevice网页,请用Ctrl+V粘贴验证码\t\t"
     },
     {
       "Key": "couldntCopyToClipboard",
@@ -262,11 +266,11 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "检测到真实的旅行,使用config.json中的用户配置\t\t"
+      "Value": "检测到拟真移动,使用config.json中的用户配置\t\t"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "未检测到真实的旅行{0},使用上一次保存在LastPos.ini中的配置\t\t"
+      "Value": "未检测到拟真移动{0},使用上一次保存在LastPos.ini中的配置\t\t"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -274,7 +278,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "恭喜!你已经更新至最新版本:{0}\t\t\t"
+      "Value": "恭喜!您已更新至最新版本:{0}\t\t\t"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -290,11 +294,11 @@
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "解包成功...\t\t"
+      "Value": "解压完成...\t\t"
     },
     {
       "Key": "finishedTransferringConfig",
-      "Value": "完成你的配置转移到新版本...\t\t"
+      "Value": "您的配置已转移到新版本...\t\t"
     },
     {
       "Key": "updateFinished",
@@ -302,15 +306,15 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "正在搜索熏香引来的精灵...\t\t"
+      "Value": "正在搜索熏香引来的宝可梦...\t\t"
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "正在搜索宠物小精灵...\t\t"
+      "Value": "正在搜索宝可梦...\t\t"
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "正在搜索诱饵吸引来的精灵...\t\t"
+      "Value": "正在搜索诱饵吸引来的宝可梦...\t\t"
     },
     {
       "Key": "pokemonSkipped",
@@ -318,7 +322,7 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "背包中精灵球不足,无法捕捉更多小精灵!\t\t"
+      "Value": "背包中精灵球不足,无法捕捉更多宝可梦!\t\t"
     },
     {
       "Key": "currentPokeballInv",
@@ -338,23 +342,23 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[设置无效]您设置的物品数量组合(精灵球+药水+复活石={0})超出了您的背包容量({1})\t\t"
+      "Value": "[设置无效]您设置的物品数量组合(精灵球+药水+复活石={0})超出了您的背包容量({1})\t\t\t\t"
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "静默回收中...\t\t"
+      "Value": "清理背包中...\t\t"
     },
     {
       "Key": "invFullTransferring",
-      "Value": "包裹满了,正在传输精灵...\t\t"
+      "Value": "宝可梦口袋已满,正在传回精灵...\t\t"
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "精灵包裹满了,请手动传输精灵或者修改配置文件TransferDuplicatePokemon为true\t\t"
+      "Value": "宝可梦口袋已满,请手动传回宝可梦或者修改配置文件TransferDuplicatePokemon为true\t\t\t"
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "物品包裹满了,无法获得物品!\t\t"
+      "Value": "物品背包已满,无法获得物品!\t\t"
     },
     {
       "Key": "encounterProblem",
@@ -362,7 +366,7 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "发生错误:诱饵吸引来的精灵{0}\t\t"
+      "Value": "发生错误:诱饵吸引来的宝可梦{0}\t\t"
     },
     {
       "Key": "desiredDestTooFar",
@@ -370,7 +374,7 @@
     },
     {
       "Key": "pokemonRename",
-      "Value": "正在将精灵{0} ({1})从{2}重命名为{3}.\t\t"
+      "Value": "正在将宝可梦{0} ({1})从{2}重命名为{3}.\t\t"
     },
     {
       "Key": "pokemonFavorite",
@@ -378,7 +382,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[精灵忽略过滤器]忽略:{0}\t\t"
+      "Value": "[宝可梦过滤器]忽略:{0}\t\t"
     },
     {
       "Key": "catchStatusAttempt",
@@ -394,7 +398,7 @@
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "消失"
+      "Value": "逃跑"
     },
     {
       "Key": "catchStatusMissed",
@@ -422,7 +426,19 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} 运行时间{1}等级:{2}|经验/小时:{3:n0}|捕获/小时:{4:n0}|星尘:{5:n0}|传回:{6:n0}|丢弃:{7:n0}"
+      "Value": "{0} 运行时间{1}经验/小时:{3:n0}|等级:{2}|捕获/小时:{4:n0}|星尘:{5:n0}|传回:{6:n0}|丢弃:{7:n0}"
+    },
+    {
+      "Key": "profileStatsTemplateString",
+      "Value": "----- 等级: {0} | {1} ----- \t\t\n 经验: {2}/{3} \t\t\n 捕获了{4}个宝可梦\t\t\n 已部署了{5}个宝可梦 \t\t\n 访问了{6}个补给站 \t\t\n 已孵化{6}个蛋 \t\t\n 已进化{7}个宝可梦\t\t\n 图鉴解锁{8}种\t\t\n 已行走{9}公里\t\t"
+    },
+    {
+      "Key": "showPokeTemplate",
+      "Value": "\n CP {0} | 名称: {1}"
+    },
+    {
+      "Key": "helpTemplate",
+      "Value": "命令: \n \n /top <数量> - 显示您最强的宝可梦列表. \t\t\n /all - 显示您所有宝可梦列表. \t\t\n /profile - 显示您个人详细信息. \t\t\n /loc - 显示您的位置. \t\t\n /items - 显示您的物品.\t\t"
     },
     {
       "Key": "statsXpTemplateString",
@@ -438,7 +454,7 @@
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "打开GoogleApp-登陆与安全设置-密码和登录方法-应用专用密码,请设置一个新的应用专用密码(使用其它设备)\t\t"
+      "Value": "打开GoogleApp-登录与安全设置-密码和登录方法-应用专用密码,请设置一个新的应用专用密码(使用其它设备)\t\t\t\t"
     },
     {
       "Key": "googleError",
@@ -446,39 +462,39 @@
     },
     {
       "Key": "googleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "谷歌服务器可能正在维护, 请稍后再尝试登录.\t\t"
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "您需要在auth.json中填写谷歌账户和密码!\t\t"
+      "Value": "您需要在auth.json中填写谷歌账号和密码!\t\t"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "您需要在auth.json中填写Ptc账户和密码!\t\t"
+      "Value": "您需要在auth.json中填写PTC账号和密码!\t\t"
     },
     {
       "Key": "snipeScan",
-      "Value": "正在搜索可狙击精灵,坐标:{0}\t\t"
+      "Value": "正在搜索可追踪宝可梦,坐标:{0}\t\t"
     },
     {
       "Key": "snipeScanEx",
-      "Value": "狙击一个 {0} 完美度:{1},坐标{2}...\t\t"
+      "Value": "追踪一个 {0} 完美度:{1},坐标{2}...\t\t\t"
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "没有找到可狙击的精灵!\t\t"
+      "Value": "没有找到可追踪的宝可梦!\t\t"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "没有足够的精灵球用来狙击!({0}/{1})\t\t"
+      "Value": "没有足够的精灵球用来追踪!({0}/{1})\t\t"
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "技能1"
+      "Value": "快速技"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "技能2"
+      "Value": "蓄力技"
     },
     {
       "Key": "displayHighestCandy",
@@ -514,7 +530,7 @@
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "背包中剩余熏香:{0}个\t\t"
+      "Value": "背包剩余熏香:{0}个\t\t"
     },
     {
       "Key": "usedIncense",
@@ -522,23 +538,23 @@
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "遇见了:{0}/151只小精灵,捕捉了:{1}/151只\t\t\t"
+      "Value": "遇见了:{0}/151种宝可梦,捕捉到了:{1}/151种宝可梦\t\t\t\t"
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "有{0}个可进化的精灵\t\t"
+      "Value": "有{0}只可进化的宝可梦\t\t"
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "精灵升级失败,材料不足\t\t"
+      "Value": "宝可梦升级失败,材料不足\t\t"
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "狙击服务器当前关闭.跳过狙击....\t\t"
+      "Value": "追踪服务器当前关闭.跳过追踪....\t\t"
     },
     {
       "Key": "firstStartPrompt",
-      "Value": "这是你第一次使用,想要设置吗?{0}/{1}\t\t"
+      "Value": "这是您第一次使用,使用设置向导吗?{0}/{1}\t\t"
     },
     {
       "Key": "firstStartLanguagePrompt",
@@ -546,7 +562,7 @@
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "请输入新的语言代码(中文是zh_CN)\t\t"
+      "Value": "请输入新的语言代码(简体中文是zh_CN)\t\t"
     },
     {
       "Key": "firstStartLanguageConfirm",
@@ -554,7 +570,7 @@
     },
     {
       "Key": "promptError",
-      "Value": "[输入错误] 输入错误, 请输入 '{0}' 或 '{1}\t\t"
+      "Value": "[输入错误] 输入错误, 请输入 '{0}' 或 '{1}'\t\t"
     },
     {
       "Key": "firstStartAutoGenSettings",
@@ -562,27 +578,27 @@
     },
     {
       "Key": "firstStartSetupAccount",
-      "Value": "### 设置新的账户 ###\t\t"
+      "Value": "### 设置新的账号 ###\t\t"
     },
     {
       "Key": "firstStartSetupTypePrompt",
-      "Value": "请输入您的一个账户类型: {0}或者{1}\t\t"
+      "Value": "请输入您的账号类型: {1}或者{0}\t\t\t"
     },
     {
       "Key": "firstStartSetupTypeConfirm",
-      "Value": "选择了: {0}账户\t\t"
+      "Value": "选择了: {0} 账号\t\t"
     },
     {
       "Key": "firstStartSetupTypePromptError",
-      "Value": "[错误] 账户类型不正确,请输入 '{0}' 或者 '{1}'\t\t"
+      "Value": "[错误] 账号类型不正确,请输入 '{0}' 或者 '{1}'\t\t\t"
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
-      "Value": "请输入帐号\t\t"
+      "Value": "请输入账号\t\t"
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
-      "Value": "使用帐号: {0}\t\t"
+      "Value": "使用账号: {0}\t\t"
     },
     {
       "Key": "firstStartSetupPasswordPrompt",
@@ -594,11 +610,11 @@
     },
     {
       "Key": "firstStartAccountCompleted",
-      "Value": "### 用户账户设置完毕 ###\t\t"
+      "Value": "### 用户账号设置完毕 ###\t\t"
     },
     {
       "Key": "firstStartDefaultLocationPrompt",
-      "Value": "你想要设置一个新的起始坐标吗? {0}/{1}\t\t"
+      "Value": "您想要设置一个新的起始坐标吗? {0}/{1}\t\t"
     },
     {
       "Key": "firstStartDefaultLocationSet",
@@ -614,7 +630,7 @@
     },
     {
       "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "请输入一个纬度 (右键粘贴)\t\t"
+      "Value": "请输入纬度 (右键粘贴)\t\t"
     },
     {
       "Key": "firstStartSetupDefaultLatConfirm",
@@ -622,15 +638,35 @@
     },
     {
       "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "请设置一个经度 (右键粘贴)\t\t"
+      "Value": "请输入经度 (右键粘贴)\t\t"
     },
     {
       "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "经度已设置: {0}\t\t"
+      "Value": "经度已设置为: {0}\t\t"
+    },
+    {
+      "Key": "softBanBypassed",
+      "Value": "成功解封!\t\t"
     },
     {
       "Key": "firstStartSetupCompleted",
       "Value": "### 已完成设置 ###\t\t"
+    },
+    {
+      "Key": "PokedexCatchedTelegram",
+      "Value":  "--- 图鉴已获得 --- \t\t\n"  
+    },
+    {
+      "Key": "PokedexPokemonCatchedTelegram",
+      "Value":  "#{0} 名称: {1} | 已捕获此类: {2} | 已遇见此类: {3} \t\t\n"  
+    },
+    {
+      "Key": "PokedexNeededTelegram",
+      "Value":  "--- 图鉴未获得 --- \t\t\n"  
+    },
+    {
+      "Key": "PokedexPokemonNeededTelegram",
+      "Value":  "#{0} 名称: {1} \t\t\n"  
     }
   ],
   "PokemonStrings": [
@@ -704,7 +740,7 @@
     },
     {
       "Key": "pidgeot",
-      "Value": "比雕"
+      "Value": "大比鸟"
     },
     {
       "Key": "rattata",
@@ -860,7 +896,7 @@
     },
     {
       "Key": "primeape",
-      "Value": "火爆猴"
+      "Value": "火暴猴"
     },
     {
       "Key": "growlithe",
@@ -876,7 +912,7 @@
     },
     {
       "Key": "poliwhirl",
-      "Value": "蚊香蛙"
+      "Value": "蚊香君"
     },
     {
       "Key": "poliwrath",

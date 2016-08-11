@@ -26,10 +26,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                         session.LogicSettings.KeepPokemonsThatCanEvolve,
                         session.LogicSettings.PrioritizeIvOverCp);
 
+            var orderedPokemon = duplicatePokemons.OrderBy( poke => poke.Cp );
+
             var pokemonSettings = await session.Inventory.GetPokemonSettings();
             var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
 
-            foreach (var duplicatePokemon in duplicatePokemons)
+            foreach (var duplicatePokemon in orderedPokemon)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 

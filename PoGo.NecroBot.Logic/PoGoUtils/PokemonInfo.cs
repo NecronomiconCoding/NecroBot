@@ -1,12 +1,12 @@
 ﻿#region using directives
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using POGOProtos.Data;
 using POGOProtos.Enums;
 using POGOProtos.Inventory;
-using System.Collections.Generic;
 using POGOProtos.Settings.Master;
-using System.Linq;
 
 #endregion
 
@@ -447,7 +447,7 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
                 case 422:
                     return 10;
                 case 432:
-                    return 15;
+                    return 10.5;
                 case 443:
                     return 11;
                 case 453:
@@ -487,7 +487,7 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
                 case 597:
                     return 20;
                 case 604:
-                    return 25;
+                    return 20.5;
                 case 612:
                     return 21;
                 case 619:
@@ -527,7 +527,7 @@ namespace PoGo.NecroBot.Logic.PoGoUtils
                 case 731:
                     return 30;
                 case 734:
-                    return 35;
+                    return 30.5;
                 case 737:
                     return 31;
                 case 740:

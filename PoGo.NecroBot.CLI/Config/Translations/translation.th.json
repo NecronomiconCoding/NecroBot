@@ -2,99 +2,107 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "PokeBall"
+      "Value": "โปเกบอล"
     },
     {
       "Key": "greatPokeball",
-      "Value": "GreatBall"
+      "Value": "เกรสบอล"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "UltraBall"
+      "Value": "อัลตร้าบอล"
     },
     {
       "Key": "masterPokeball",
-      "Value": "MasterBall"
+      "Value": "มาสเตอร์บอล"
     },
     {
       "Key": "wrongAuthType",
       "Value": "ชนิดการยืนยัน (AuthType) ใน config.json ไม่ถูกต้อง"
-
     },
     {
       "Key": "loginInvalid",
       "Value": "ไอดีไม่ถูกต้อง การเข้าสู่ระบบล้มเหลว"
-
     },
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value": "คุณอยู่นอกเหนือระยะทำการ กำลังเดินกลับจุดเริ่มต้น ({0} เมตร) ใน 5 วินาที จุดพิกัดใน LastPos.ini ถูกต้องหรือเปล่า?"
-
     },
     {
       "Key": "farmPokestopsNoUsableFound",
       "Value": "ไม่พบ PokeStop ที่สามารถใช้งานได้ในพื้นที่ ระยะทางสูงสุดที่ตั้งไว้น้อยไปหรือเปล่า?"
-
     },
     {
       "Key": "eventFortUsed",
-      "Value": "{0} ค่าประสบการณ์: {1}, อัญมณี: {2}, ไอเทม: {3}, Lat: {4}, Long: {5}"
-
+      "Value": "{0} ค่าประสบการณ์ : {1}, อัญมณี : {2}, ไอเทม : {3}, ละติจูด : {4} ลองติจูด : {5}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "{0} การเก็บของล้มเหลวอาจจะโดนระงับ ยกเลิกการระงับใน: {1}/{2}"
-
+      "Value": "{0} การเก็บของล้มเหลวอาจจะโดนระงับ ยกเลิกการระงับใน : {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "เดินทางไปสู่ PokeStop: {0} ({1}เมตร)"
-
+      "Value": "กำลังเดินทางไปสู่ PokeStop : {0} ( {1} เมตร ) ( {2} วินาที )"
     },
     {
       "Key": "eventProfileLogin",
       "Value": "กำลังเล่นโดย {0}"
-
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "ใช้งาน Incense, จำนวนคงเหลือ: {0}"
-
+      "Value": "ใช้งาน Incense, จำนวนคงเหลือ : {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "ใช้งาน Lucky Egg, จำนวนคงเหลือ: {0}"
-
+      "Value": "ใช้งาน Lucky Egg, จำนวนคงเหลือ : {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} สำเร็จ ได้รับค่าประสบการณ์ {1}หน่วย"
-
+      "Value": "{0} สำเร็จ ได้รับค่าประสบการณ์ {1} EXP"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
       "Value": "ล้มเหลว {0} ผลลัพธ์ {1}  หยุดการพัฒนาร่าง {2}"
-
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [CP ที่ดีที่สุด: {3}  IV: {4}%] (ลูกอม: {5})"
+      "Value": "{0}\t- CP : {1}  IV : {2}%   [CP ที่ดีที่สุด : {3}  IV : {4}%] ( ลูกอม : {5} )"
     },
     {
       "Key": "eventItemRecycled",
-      "Value": "{0}x {1}"
+      "Value": "{0} x {1}"
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} เลเวล: {3} CP: ({4}/{5}) IV: {6}% | โอกาส: {7}% | ระยะ {8}m | จับด้วย a {9} (เหลือ {10} ชิ้น). | ได้รับค่าประสบการณ์ {11} หน่วย | {12} | ละติจูด: {13} ลองติจูด: {14}"
+      "Value": "({0}) | ({1}) {2} เลเวล : {3} CP : ({4}/{5}) IV : {6}% | โอกาส : {7}% | ระยะ {8}m | จับได้ {9} (เหลือโปเกบอล {10} ชิ้น). | ได้รับค่าประสบการณ์ {11} EXP | {12} | ละติจูด : {13} ลองติจูด : {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | โอกาส: {7}% | ระยะ {8}m | จับด้วย a {9} (เหลือ {10} ชิ้น). | ละติจูด: {11} ลองติจูด: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl : {3} CP : ({4}/{5}) IV : {6}% | โอกาส : {7}% | ระยะ {8}m | จับได้ {9} (เหลือโปเกบอล {10} ชิ้น). | ละติจูด : {11} ลองติจูด : {12}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "ไม่มี Pokeballs - เราพลาดที่จะจับ {0} ซึ่งมี CP {1}"
+      "Value": "ไม่มีโปเกบอล - พลาดที่จะจับ {0} ซึ่งมี CP {1}"
+    },
+    {
+      "Key": "waitingForMorePokemonToEvolve",
+      "Value": "Waiting to evolve {0} Pokemon once {1} more are caught! ({2}/{3} for {4}% inventory)"
+    },
+    {
+      "Key": "useLuckyEggsMinPokemonAmountTooHigh",
+      "Value": "Lucky eggs will never be used with UseLuckyEggsMinPokemonAmount set to {0}, use <= {1} instead"
+    },
+    {
+      "Key": "catchMorePokemonToUseLuckyEgg",
+      "Value": "Catch {0} more Pokemon to use a Lucky Egg!"
+    },
+    {
+      "Key": "eventUseBerry",
+      "Value": "ใช้ไป {0} | เหลืออีก {1}"
+    },
+    {
+      "Key": "itemRazzBerry",
+      "Value": "Razz Berry"
     },
     {
       "Key": "catchStatusAttempt",
@@ -106,10 +114,562 @@
     },
     {
       "Key": "candies",
-      "Value": "ลูกอม: {0}"
+      "Value": "ลูกอม : {0}"
+    },
+    {
+      "Key": "unhandledGpxData",
+      "Value": "Unhandled data in GPX file, attempting to skip."
+    },
+    {
+      "Key": "displayHighestsHeader",
+      "Value": "โปเกมอล"
+    },
+    {
+      "Key": "commonWordPerfect",
+      "Value": "สำเร็จ"
+    },
+    {
+      "Key": "commonWordName",
+      "Value": "ชื่อ"
+    },
+    {
+      "Key": "commonWordUnknown",
+      "Value": "ไม่ทราบ"
+    },
+    {
+      "Key": "displayHighestsCpHeader",
+      "Value": "หน้าจอแสดง CP"
+    },
+    {
+      "Key": "displayHighestsPerfectHeader",
+      "Value": "หน้าจอแสดงความสำเร็จ"
+    },
+    {
+      "Key": "displayHighestsLevelHeader",
+      "Value": "หน้าจอแสดงระดับ"
+    },
+    {
+      "Key": "welcomeWarning",
+      "Value": "ตรวจสอบพิกัดว่าถูกต้องหรือไม่ หากไม่ถูกต้องกรุณาออกจากโปรแกรมแล้วเข้ามาใหม่ ละติจูด : {0} | ลองติจูด : {1}"
+    },
+    {
+      "Key": "incubatorPuttingEgg",
+      "Value": "ใส่ไข่ในแคปซูนเพาะเลี้ยง : {0:0.00}km ต่อไป"
+    },
+    {
+      "Key": "incubatorStatusUpdate",
+      "Value": "สถานะแคปซูนเพาะเลี้ยง : {0:0.00}km ต่อไป"
+    },
+    {
+      "Key": "incubatorEggHatched",
+      "Value": "เพราะเลี้ยงได้ : {0} | Lvl : {1} CP : ({2}/{3}) IV : {4}%"
+    },
+    {
+      "Key": "logEntryError",
+      "Value": "ผิดพลาด"
+    },
+    {
+      "Key": "logEntryAttention",
+      "Value": "ATTENTION"
+    },
+    {
+      "Key": "logEntryInfo",
+      "Value": "ข้อมูล"
+    },
+    {
+      "Key": "logEntryPokestop",
+      "Value": "โปเกช็อป"
+    },
+    {
+      "Key": "logEntryFarming",
+      "Value": "FARMING"
+    },
+    {
+      "Key": "logEntrySniper",
+      "Value": "การปั่น"
+    },
+    {
+      "Key": "logEntryRecycling",
+      "Value": "ทิ้ง"
+    },
+    {
+      "Key": "logEntryPkmn",
+      "Value": "PKMN"
+    },
+    {
+      "Key": "logEntryTransfered",
+      "Value": "ส่งมอบ"
+    },
+    {
+      "Key": "logEntryEvolved",
+      "Value": "พัฒนาร่าง"
+    },
+    {
+      "Key": "logEntryBerry",
+      "Value": "BERRY"
+    },
+    {
+      "Key": "logEntryEgg",
+      "Value": "ไข่"
+    },
+    {
+      "Key": "logEntryDebug",
+      "Value": "ดีบัค"
+    },
+    {
+      "Key": "logEntryUpdate",
+      "Value": "อัพเดท"
+    },
+    {
+      "Key": "logEntryNew",
+      "Value": "ใหม่"
+    },
+    {
+      "Key": "logEntrySoftBan",
+      "Value": "ระงับ"
+    },
+    {
+      "Key": "loggingIn",
+      "Value": "เข้าสู่ระบบด้วย {0}"
+    },
+    {
+      "Key": "ptcOffline",
+      "Value": "บัญชี PTC ขัดข้องชั่วคราวหรือหนังสือรับรองผิดพลาด. กรุณาใช้บัญชีกูเกิ้ลแทน"
+    },
+    {
+      "Key": "accessTokenExpired",
+      "Value": "เข้าระบบโดยโทเคนของ PTC ผิดพลาด. กำลังลองใหม่..."
+    },
+    {
+      "Key": "invalidResponse",
+      "Value": "ระบบไม่ตอบสนอง"
+    },
+    {
+      "Key": "tryingAgainIn",
+      "Value": "จะลองอีกครั้งใน {0} วินาที..."
+    },
+    {
+      "Key": "accountNotVerified",
+      "Value": "บัญชีไม่สามารถยืนยันได้ ! กำลังออกโปรแกรม..."
+    },
+    {
+      "Key": "openingGoogleDevicePage",
+      "Value": "เปิดเว็บกูเกิ้ลไดร์ฟ. กรุณาวางโค๊ดโดยใช้คีย์ลัด CTRL+V"
+    },
+    {
+      "Key": "couldntCopyToClipboard",
+      "Value": "ไม่สามารถคัดลอกไปยังคลิปบอร์ด, กรุณาคัดลอกด้วยตัวเอง"
+    },
+    {
+      "Key": "couldntCopyToClipboard2",
+      "Value": "คัดลอกไปยัง : {0} & และ Enter {1}"
+    },
+    {
+      "Key": "realisticTravelDetected",
+      "Value": "ตรวจพบพิกัดที่เป็นจริง , ตามการตั้งค่าเริ่มต้นในไฟล์ config.json"
+    },
+    {
+      "Key": "notRealisticTravel",
+      "Value": "ไม่พบพิกัดที่เป็นจริง {0}, บันทึกไว้ในพิกัดไว้ในไฟล์ LastPos.ini"
+    },
+    {
+      "Key": "coordinatesAreInvalid",
+      "Value": "พิกัดในไฟล์ \"LastPos.ini\" ผิดพลาดหรือไม่รู้จัก, กรุณาใช้พิกัดเริ่มต้นของโปรแกรม"
+    },
+    {
+      "Key": "gotUpToDateVersion",
+      "Value": "ยินดีด้วย! คุณมีโปรแกรมเวอร์ชั่นล่าสุดแล้ว คือเวอร์ชั่น {0}"
+    },
+    {
+      "Key": "autoUpdaterDisabled",
+      "Value": "การอัพเดทอัตโนมัติถูกปิด. กรุณารับการอัพเดทล่าสุด จาก : {0}\n "
+    },
+    {
+      "Key": "downloadingUpdate",
+      "Value": "กำลังดาวโหลดเพื่อการปรับปรุง..."
+    },
+    {
+      "Key": "finishedDownloadingRelease",
+      "Value": "การดาวโหลดเสร็จสิ้น โปรแกรมคุณได้ปรับปรุงใหม่แล้ว..."
+    },
+    {
+      "Key": "finishedUnpackingFiles",
+      "Value": "แตกไฟล์เสร็จสิ้นแล้ว..."
+    },
+    {
+      "Key": "finishedTransferringConfig",
+      "Value": "เปลี่ยนแปลงการตั้งค่าใหม่เรียบร้อยแล้ว..."
+    },
+    {
+      "Key": "updateFinished",
+      "Value": "อัพเดทเสร็จสิ้น, คุณสามารถปิดแล้วเปิดใหม่ได้."
+    },
+    {
+      "Key": "lookingForIncensePokemon",
+      "Value": "กำลังหาโปเกมอนในพื้นที่..."
+    },
+    {
+      "Key": "lookingForPokemon",
+      "Value": "กำลังมองหาโปเกมอน..."
+    },
+    {
+      "Key": "lookingForLurePokemon",
+      "Value": "กำลังมองหาการล่อโปเกมอน..."
+    },
+    {
+      "Key": "pokemonSkipped",
+      "Value": "กำลังข้าม {0}"
+    },
+    {
+      "Key": "zeroPokeballInv",
+      "Value": "คุณไม่มีโปเกบอลในคลังไอเทมของคุณ, คุณไม่สามารถจับโปเกมอนได้!"
+    },
+    {
+      "Key": "currentPokeballInv",
+      "Value": "โปเกบอล : {0} | เกรสบอล : {1} | อัลตร้าบอล : {2} | มาสเตอร์บอล : {3}"
+    },
+    {
+      "Key": "currentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "currentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "currentMiscItemInv",
+      "Value": "Berries: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+    },
+    {
+      "Key": "maxItemsCombinedOverMaxItemStorage",
+      "Value": "[Configuration Invalid] Your maximum items combined (balls+potions+revives={0}) is over your max item storage ({1})"
+    },
+    {
+      "Key": "recyclingQuietly",
+      "Value": "Recycling Quietly..."
+    },
+    {
+      "Key": "invFullTransferring",
+      "Value": "โปรเกมอลในคลังคุณเต็มแล้ว, กรุณาโอนถ่ายโปเกมอน..."
+    },
+    {
+      "Key": "invFullTransferManually",
+      "Value": "Pokemon Inventory is full! Please transfer Pokemon manually or set TransferDuplicatePokemon to true in settings..."
+    },
+    {
+      "Key": "invFullPokestopLooting",
+      "Value": "Inventory is full, no items looted!"
+    },
+    {
+      "Key": "encounterProblem",
+      "Value": "Encounter problem: {0}"
+    },
+    {
+      "Key": "encounterProblemLurePokemon",
+      "Value": "Encounter problem: Lure Pokemon {0}"
+    },
+    {
+      "Key": "desiredDestTooFar",
+      "Value": "Your desired destination of {0}, {1} is too far from your current position of {2}, {3}"
+    },
+    {
+      "Key": "pokemonRename",
+      "Value": "Pokemon {0} ({1}) renamed from {2} to {3}."
+    },
+    {
+      "Key": "pokemonFavorite",
+      "Value": "{0}% perfect {1} (CP {2}) *favorited*."
+    },
+    {
+      "Key": "pokemonIgnoreFilter",
+      "Value": "[Pokemon ignore filter] - Ignoring {0} as defined in settings"
+    },
+    {
+      "Key": "catchStatusAttempt",
+      "Value": "CatchAttempt"
+    },
+    {
+      "Key": "catchStatusError",
+      "Value": "จับผิดพลาด"
+    },
+    {
+      "Key": "catchStatusEscape",
+      "Value": "CatchEscape"
+    },
+    {
+      "Key": "catchStatusFlee",
+      "Value": "CatchFlee"
+    },
+    {
+      "Key": "catchStatusMissed",
+      "Value": "จับไม่ได้ "
+    },
+    {
+      "Key": "catchStatusSuccess",
+      "Value": "จับสำเร็จ "
+    },
+    {
+      "Key": "catchTypeNormal",
+      "Value": "ปกติ"
+    },
+    {
+      "Key": "catchTypeLure",
+      "Value": "Lure"
+    },
+    {
+      "Key": "catchTypeIncense",
+      "Value": "Incense"
+    },
+    {
+      "Key": "webSocketFailStart",
+      "Value": "Failed to start WebSocketServer on port : {0}"
+    },
+    {
+      "Key": "statsTemplateString",
+      "Value": "{0} - เวลาทำงาน {1} - Lvl : {2} | EXP/H : {3:n0} | P/H : {4:n0} | Stardust : {5:n0} | Transferred : {6:n0} | Recycled : {7:n0}"
+    },
+    {
+      "Key": "profileStatsTemplateString",
+      "Value": "----- LVL {0} | {1} ----- \n Experience: {2}/{3} \n Pokemons caught: {4} \n Pokemons deployed: {5} \n Pokestops visited: {6} \n Eggs hatched: {7} \n Pokemons evolved: {8} \n Pokedex entries: {9} \n KM walked: {10}  \n Pokemons: {11}/{12}"
+    },
+    {
+      "Key": "showPokeTemplate",
+      "Value": "\n CP : {0} | IV : {1}% | ชื่อ : {2}"
+    },
+    {
+      "Key": "helpTemplate",
+      "Value": "คำสั่ง : \n \n /top <cp/iv> <amount> - แสดงลำดับสูงสุดของ Pokemons. \n /ทั้งหมด <cp/iv> - แสดงโปเกมอนทั้งหมด. \n /profile - แสดงโปรไฟล์. \n /loc - แสดงตำแหน่ง. \n /items - แสดงไอเทม. \n /status - แสดงสถานะของบอท. \n /pokedex - แสดงโปเกมอนของคุณ "
+    },
+    {
+      "Key": "statsXpTemplateString",
+      "Value": "{0} (Advance in {1}h {2}m | {3:n0}/{4:n0} XP)"
+    },
+    {
+      "Key": "requireInputText",
+      "Value": "โปรแกรมจะทำงานต่อไปหลังจากใส่ข้อมูล..."
+    },
+    {
+      "Key": "googleTwoFactorAuth",
+      "Value": "คุณยังไม่ได้เปิดบัญชี Google หรือยังไม่ได้รับการยอมรับการเข้าถึง, คุณต้องใส่รหัสหรือบัญชีใหม่ที่ไฟล์ auth.json"
+    },
+    {
+      "Key": "googleTwoFactorAuthExplanation",
+      "Value": "กำลังเข้าบัญชี Google ของคุณ. กรุณาใส่รหัสผ่านหรือเปลี่ยนรหัส Google ใหม่ (กรุณาใช้อุปกรณ์ของคุณ)"
+    },
+    {
+      "Key": "googleError",
+      "Value": "คุณแน่ใจหรือไม่ว่าอีเมล์และรหัสผ่านถูกต้อง."
+    },
+    {
+      "Key": "googleOffline",
+      "Value": "บริการของ Google ขัดข้องชั่วคราว, กรุณาเปิดการใช้งานบอทถัดไปในอีกสักครู่."
+    },
+    {
+      "Key": "missingCredentialsGoogle",
+      "Value": "คุณจำเป็นต้องกรอกข้อมูลบัญชี Google ของคุณทั้งชื่อผู้ใช้และรหัสผ่านในไฟล์ auth.json!"
+    },
+    {
+      "Key": "missingCredentialsPtc",
+      "Value": "คุณจำเป็นต้องกรอกข้อมูลบัญชี PTC ของคุณทั้งชื่อผู้ใช้และรหัสผ่านในไฟล์ auth.json!"
+    },
+    {
+      "Key": "snipeScan",
+      "Value": "กำลังค้นหา PokeStop ของโปเกมอนที่ {0}..."
+    },
+    {
+      "Key": "snipeScanEx",
+      "Value": "กำลังปั่น {0} ด้วย {1} IV ที่ {2}..."
+    },
+    {
+      "Key": "noPokemonToSnipe",
+      "Value": "ไม่พบโปเกมอนในพื้นที่นี้, หรือยังไม่เกิดโปเกมอน?"
+    },
+    {
+      "Key": "notEnoughPokeballsToSnipe",
+      "Value": "ไม่มีโปเกบอลที่จะทำการปั่น! ({0}/{1})"
+    },
+    {
+      "Key": "displayHighestMove1Header",
+      "Value": "เคลื่อนย้าย 1"
+    },
+    {
+      "Key": "displayHighestMove2Header",
+      "Value": "เคลื่อนย้าย 2"
+    },
+    {
+      "Key": "displayHighestCandy",
+      "Value": "ลูกอม"
+    },
+    {
+      "Key": "ipBannedError",
+      "Value": "การเชื่อมต่อถูกปฏิเสธ. ไอพีของคุณอาจโดนแบนก็เป็นได้. กำลังออก.."
+    },
+    {
+      "Key": "noEggsAvailable",
+      "Value": "No Eggs Available"
+    },
+    {
+      "Key": "useLuckyEggActive",
+      "Value": "Lucky Egg Already Active"
+    },
+    {
+      "Key": "usedLuckyEgg",
+      "Value": "Used Lucky Egg"
+    },
+    {
+      "Key": "useLuckyEggAmount",
+      "Value": "Lucky Eggs in Inventory: {0}"
+    },
+    {
+      "Key": "noIncenseAvailable",
+      "Value": "No Incense Available"
+    },
+    {
+      "Key": "useIncenseActive",
+      "Value": "Incense Already Active"
+    },
+    {
+      "Key": "useIncenseAmount",
+      "Value": "Incense in Inventory: {0}"
+    },
+    {
+      "Key": "usedIncense",
+      "Value": "Used an Incense"
+    },
+    {
+      "Key": "amountPkmSeenCaught",
+      "Value": "Amount of Pokemon Seen: {0}/151, Amount of Pokemon Caught: {1}/151"
+    },
+    {
+      "Key": "pkmPotentialEvolveCount",
+      "Value": "Potential Evolutions: {0}"
+    },
+    {
+      "Key": "pkmNotEnoughRessources",
+      "Value": "Pokemon Upgrade Failed Not Enough Resources"
+    },
+    {
+      "Key": "snipeServerOffline",
+      "Value": "Sniping server is offline. Skipping..."
+    },
+    {
+      "Key": "firstStartPrompt",
+      "Value": "นี่คือการใช้งานครั้งแรก, คุณต้องการตั้งค่าหรือไม่? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguagePrompt",
+      "Value": "คุณต้องการเปลี่ยนภาษาเริ่มต้นหรือไม่? {0}/{1}"
+    },
+    {
+      "Key": "firstStartLanguageCodePrompt",
+      "Value": "กรุณาใส่โค๊ดภาษาใหม่ เช่น ภาษาไทย คือ th"
+    },
+    {
+      "Key": "firstStartLanguageConfirm",
+      "Value": "ดำเนินการปรับใช้ภาษา : {0}"
+    },
+    {
+      "Key": "promptError",
+      "Value": "[ข้อมูลที่ใส่ผิดพลาด] ค่าที่ใส่ไม่ถูกต้อง, กรุณาใส่ '{0}' หรือ '{1}"
+    },
+    {
+      "Key": "firstStartAutoGenSettings",
+      "Value": "ไฟล์การตั้งค่า/ไฟล์ตั้งค่าการเข้าถึงจะต้องตั้งค่าให้เสร็จสิ้นก่อนที่จะทำงานอย่างอื่นต่อไป"
+    },
+    {
+      "Key": "firstStartSetupAccount",
+      "Value": "### การตั้งค่าบัญชีผู้ใช้งานใหม่ ###"
+    },
+    {
+      "Key": "firstStartSetupTypePrompt",
+      "Value": "กรุณาพิมพ์ประเภทบัญชีของคุณ : {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTypeConfirm",
+      "Value": "คุณเลือกประเภทบัญชีคือ : {0}"
+    },
+    {
+      "Key": "firstStartSetupTypePromptError",
+      "Value": "[ผิดพลาด] ประเภทบัญชีที่คุณใส่ไม่มีหรือไม่ถูกต้อง, กรุณาเลือกดังต่อไปนี้ '{0}' หรือ '{1}'"
+    },
+    {
+      "Key": "firstStartSetupUsernamePrompt",
+      "Value": "กรุณาใส่ชื้อผู้ใช้ของบัญชีคุณ"
+    },
+    {
+      "Key": "firstStartSetupUsernameConfirm",
+      "Value": "ชื่อผู้ใช้ของคุณคือ : {0}"
+    },
+    {
+      "Key": "firstStartSetupPasswordPrompt",
+      "Value": "กรุณาใส่รหัสของของบัญชีผู้ใช้คุณ"
+    },
+    {
+      "Key": "firstStartSetupPasswordConfirm",
+      "Value": "รหัสผ่านของคุณคือ : {0}"
+    },
+    {
+      "Key": "firstStartAccountCompleted",
+      "Value": "### การตั้งค่าบัญชีผู้ใช้งานเสร็จสิ้น ###"
+    },
+    {
+      "Key": "firstStartDefaultLocationPrompt",
+      "Value": "คุณต้องการตั้งค่าพิกัดเริ่มต้นของ GPS หรือไม่? {0}/{1}"
+    },
+    {
+      "Key": "firstStartDefaultLocationSet",
+      "Value": "ค่าเริ่มต้นพิกัด GPS แล้ว"
+    },
+    {
+      "Key": "firstStartDefaultLocation",
+      "Value": "### ตั้งค่าเริ่มต้นของพิกัด GPS ###"
+    },
+    {
+      "Key": "firstStartSetupDefaultLocationError",
+      "Value": "[ผิดพลาด] กรุณาใส่ค่าตัวอย่างดังต่อไปนี้ : {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "โปรดป้อนละติจูด (คลิกขวาเพื่อวาง)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "ละติจูดคือ : {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "โปรดป้อนลองติจูด (คลิกขวาเพื่อวาง)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "ลองติจูดคือ : {0}"
+    },
+    {
+      "Key": "softBanBypassed",
+      "Value": "บายพาสกันแบนแล้ว!"
+    },
+    {
+      "Key": "firstStartSetupCompleted",
+      "Value": "### การตั้งค่าโปรแกรมสำเร็จแล้ว ###"
+    },
+    {
+      "Key": "pokedexCatchedTelegram",
+      "Value": "--- Pokedex catched --- \n"
+    },
+    {
+      "Key": "pokedexPokemonCatchedTelegram",
+      "Value": "#{0} ชื่อ : {1} | จับได้ : {2} | พบที่ : {3} \n"
+    },
+    {
+      "Key": "pokedexNeededTelegram",
+      "Value": "--- Pokedex needed --- \n"
+    },
+    {
+      "Key": "pokedexPokemonNeededTelegram",
+      "Value": "#{0}# Name: {1} \n"
     }
   ],
-	"PokemonStrings": [
+  "PokemonStrings": [
     {
       "Key": "bulbasaur",
       "Value": "Bulbasaur"
@@ -224,7 +784,7 @@
     },
     {
       "Key": "nidoranFemale",
-      "Value": "NidoranF"
+      "Value": "NidoranFemale"
     },
     {
       "Key": "nidorina",
@@ -236,7 +796,7 @@
     },
     {
       "Key": "nidoranMale",
-      "Value": "NidoranM"
+      "Value": "NidoranMale"
     },
     {
       "Key": "nidorino",

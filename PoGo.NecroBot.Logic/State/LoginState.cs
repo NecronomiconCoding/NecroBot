@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using Google.Protobuf;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
-using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -30,7 +30,7 @@ namespace PoGo.NecroBot.Logic.State
 
             try
             {
-                if (session.Settings.AuthType != AuthType.Google || session.Settings.AuthType != AuthType.Ptc)
+                if (session.Settings.AuthType == AuthType.Google || session.Settings.AuthType == AuthType.Ptc)
                 {
                     await session.Client.Login.DoLogin();
                 }
@@ -117,9 +117,9 @@ namespace PoGo.NecroBot.Logic.State
                 await Task.Delay(2000, cancellationToken);
                 Environment.Exit(0);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                //Logger.Write(e.ToString());
+                Logger.Write(e.ToString());
                 await Task.Delay(20000, cancellationToken);
                 return this;
             }

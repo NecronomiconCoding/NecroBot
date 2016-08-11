@@ -6,15 +6,15 @@
     },
     {
       "Key": "greatPokeball",
-      "Value": "高級球"
+      "Value": "高級精靈球"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "超級球"
+      "Value": "超級精靈球"
     },
     {
       "Key": "masterPokeball",
-      "Value": "掌門球"
+      "Value": "掌門精靈球"
     },
     {
       "Key": "wrongAuthType",
@@ -796,7 +796,7 @@
     },
     {
       "Key": "zubat",
-      "Value": "超音蝠"
+      "Value": "波音蝠"
     },
     {
       "Key": "golbat",
@@ -1120,7 +1120,7 @@
     },
     {
       "Key": "mrMime",
-      "Value": "獨角金魚"
+      "Value": "吸盤小丑"
     },
     {
       "Key": "scyther",

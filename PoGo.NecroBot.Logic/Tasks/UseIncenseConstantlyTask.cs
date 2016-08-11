@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using POGOProtos.Inventory.Item;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
-using POGOProtos.Networking.Responses;
 using PoGo.NecroBot.Logic.State;
+using POGOProtos.Inventory.Item;
+using POGOProtos.Networking.Responses;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
