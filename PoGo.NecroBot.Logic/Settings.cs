@@ -188,10 +188,10 @@ namespace PoGo.NecroBot.Logic
                 {
                     tempWebClient.Proxy = this.InitProxy();
                     string proxiedIPres = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
-                    string proxiedIP = proxiedIPres == null?"INVALID PROXY": proxiedIPres;
+                    string proxiedIP = proxiedIPres == null ? "INVALID PROXY" : proxiedIPres;
                     Logger.Write(
                        $"Your IP is: {unproxiedIP} / Proxy IP is: {proxiedIP}",
-                       LogLevel.Info, (unproxiedIP==proxiedIP)?ConsoleColor.Red:ConsoleColor.Green);
+                       LogLevel.Info, (unproxiedIP == proxiedIP) ? ConsoleColor.Red : ConsoleColor.Green);
 
                     if (unproxiedIP == proxiedIP || proxiedIPres == null)
                     {
@@ -546,7 +546,7 @@ namespace PoGo.NecroBot.Logic
             new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
         };
 
-        
+
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
@@ -843,7 +843,13 @@ namespace PoGo.NecroBot.Logic
                     jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
-                    settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                    try
+                    {
+                        settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                    } catch (JsonSerializationException exception)
+                    {
+                        Logger.Write(exception.Message + LogLevel.Error);
+                    }
 
                     //This makes sure that existing config files dont get null values which lead to an exception
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.KeepMinOperator == null))
@@ -870,7 +876,7 @@ namespace PoGo.NecroBot.Logic
                 settings = new GlobalSettings();
                 shouldExit = true;
             }
-            
+
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
@@ -881,7 +887,7 @@ namespace PoGo.NecroBot.Logic
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
             }
-            
+
             return shouldExit ? null : settings;
         }
 

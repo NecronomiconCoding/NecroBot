@@ -61,7 +61,7 @@ namespace PoGo.NecroBot.CLI
                 // Load the settings from the config file
                 // If the current program is not the latest version, ensure we skip saving the file after loading
                 // This is to prevent saving the file with new options at their default values so we can check for differences
-                settings = GlobalSettings.Load( subPath, !VersionCheckState.IsLatest() );
+                    settings = GlobalSettings.Load(subPath, !VersionCheckState.IsLatest());
             }
             else
             {
