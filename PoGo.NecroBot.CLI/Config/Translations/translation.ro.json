@@ -694,6 +694,38 @@
     {
       "Key": "pokedexPokemonNeededTelegram",
       "Value": "#{0}# Nume: {1} \n"
+    },
+    {
+      "Key": "pokedexPokemonNeededTelegram",
+      "Value": "Te-ai autentificat cu succes. Sesiunea este validă pentru 5 minute"
+    },
+    {
+      "Key": "loginFailedTelegram",
+      "Value": "Parolă greșită sau sintaxă greșită! Folosește /login PAROLĂ"
+    },
+    {
+      "Key": "notLoggedInTelegram",
+      "Value": "Nu ești autentificat. Folosește /login PAROLĂ"
+    },
+    {
+      "Key": "proxied",
+      "Value": "IP-ul tău este: {0} | IP-ul proxy-ului este: {1}"
+    },
+    {
+      "Key": "unproxied",
+      "Value": "IP-ul tău este: {0}"
+    },
+    {
+      "Key": "fixProxySettings",
+      "Value": "Apasă orice tastă pentru a ieși astfel încât să poți fixa setările proxy-ului..."
+    },
+    {
+      "Key": "usageHelp",
+      "Value": "Argumente invalide ale comenzii! \n Utilizare corectă: \n {0}"
+    },
+    {
+      "Key": "loginRemainingTime",
+      "Value": "Ești deja autentificat! \n Sesiunea este validă pentru: ({0}:{1} secunde)"
     }
   ],
   "PokemonStrings": [

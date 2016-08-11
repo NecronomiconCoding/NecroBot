@@ -96,6 +96,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await evolve(session, pokemonToEvolve);
                     return;
                 }
+                await session.Inventory.RefreshCachedInventory();
             }
         }
 
