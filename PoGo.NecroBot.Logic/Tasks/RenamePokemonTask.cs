@@ -20,6 +20,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             cancellationToken.ThrowIfCancellationRequested();
 
             await session.Inventory.RefreshCachedInventory();
+
             var pokemons = await session.Inventory.GetPokemons();
 
             foreach (var pokemon in pokemons)
