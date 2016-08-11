@@ -1,4 +1,9 @@
-﻿using PoGo.NecroBot.Logic.Common;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.PoGoUtils;
@@ -16,32 +21,34 @@ using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
+#endregion
+
 namespace PoGo.NecroBot.Logic.Service
 {
     public class TelegramService
     {
-        private TelegramBotClient bot;
-        private ISession session;
-        private bool loggedIn;
         private DateTime _lastLoginTime;
+        private readonly TelegramBotClient _bot;
+        private bool _loggedIn;
+        private readonly ISession _session;
+
         public TelegramService(string apiKey, ISession session)
         {
             try
             {
-                // your code 
-                this.bot = new TelegramBotClient(apiKey);
-                this.session = session;
+                _bot = new TelegramBotClient(apiKey);
+                _session = session;
 
-                var me = bot.GetMeAsync().Result;
+                var me = _bot.GetMeAsync().Result;
 
-                bot.OnMessage += OnTelegramMessageReceived;
-                bot.StartReceiving();
+                _bot.OnMessage += OnTelegramMessageReceived;
+                _bot.StartReceiving();
 
-                this.session.EventDispatcher.Send(new NoticeEvent {Message = "Using TelegramAPI with " + me.Username});
+                _session.EventDispatcher.Send(new NoticeEvent {Message = "Using TelegramAPI with " + me.Username});
             }
-            catch (AggregateException ae)
+            catch (Exception)
             {
-                throw ae;
+                _session.EventDispatcher.Send(new ErrorEvent { Message = "Unkown Telegram Error occured. "});
             }
         }
 
@@ -53,7 +60,7 @@ namespace PoGo.NecroBot.Logic.Service
 
             var answerTextmessage = "";
 
-            if (session.Profile == null || session.Inventory == null)
+            if (_session.Profile == null || _session.Inventory == null)
             {
                 return;
             }
@@ -150,7 +157,9 @@ namespace PoGo.NecroBot.Logic.Service
 
                     foreach (var pokemon in topPokemons)
                     {
-                        answerTextmessage += session.Translation.GetTranslation(TranslationString.ShowPokeTemplate, new object[] { pokemon.Cp, PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"), session.Translation.GetPokemonTranslation(pokemon.PokemonId) });
+                        answerTextmessage += _session.Translation.GetTranslation(TranslationString.ShowPokeTemplate,
+                            pokemon.Cp, PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"),
+                            _session.Translation.GetPokemonTranslation(pokemon.PokemonId));
 
                         if (answerTextmessage.Length > 3800)
                         {
@@ -162,7 +171,7 @@ namespace PoGo.NecroBot.Logic.Service
                     break;
 
                 case "/all":
-                    var myPokemons = await session.Inventory.GetPokemons();
+                    var myPokemons = await _session.Inventory.GetPokemons();
                     var allMyPokemons = myPokemons.ToList();
                     IEnumerable<PokemonData> allPokemons = await session.Inventory.GetHighestsCp(allMyPokemons.Count);
 
@@ -172,9 +181,13 @@ namespace PoGo.NecroBot.Logic.Service
                     }
                     else if (messagetext.Length == 2)
                     {
+                        allPokemons = await _session.Inventory.GetHighestsCp(allMyPokemons.Count);
+                    }
+                    else if (messagetext.Length == 2)
+                    {
                         if (messagetext[1] == "iv")
                         {
-                            allPokemons = await session.Inventory.GetHighestsPerfect(allMyPokemons.Count);
+                            allPokemons = await _session.Inventory.GetHighestsPerfect(allMyPokemons.Count);
                         }
                         else if (messagetext[1] != "cp")
                         {
@@ -190,7 +203,9 @@ namespace PoGo.NecroBot.Logic.Service
 
                     foreach (var pokemon in allPokemons)
                     {
-                        answerTextmessage += session.Translation.GetTranslation(TranslationString.ShowPokeTemplate, new object[] { pokemon.Cp, PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"), session.Translation.GetPokemonTranslation(pokemon.PokemonId) });
+                        answerTextmessage += _session.Translation.GetTranslation(TranslationString.ShowPokeTemplate,
+                            pokemon.Cp, PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"),
+                            _session.Translation.GetPokemonTranslation(pokemon.PokemonId));
 
                         if (answerTextmessage.Length > 3800)
                         {
@@ -202,37 +217,33 @@ namespace PoGo.NecroBot.Logic.Service
                     break;
 
                 case "/profile":
-                    var stats = session.Inventory.GetPlayerStats().Result;
+                    var stats = _session.Inventory.GetPlayerStats().Result;
                     var stat = stats.FirstOrDefault();
 
-                    var myPokemons2 = await session.Inventory.GetPokemons();
-                    answerTextmessage += session.Translation.GetTranslation(TranslationString.ProfileStatsTemplateString,
-                        new object[]
-                         {
-                             stat.Level,
-                             session.Profile.PlayerData.Username,
-                             stat.Experience, stat.NextLevelXp,
-                             stat.PokemonsCaptured,
-                             stat.PokemonDeployed,
-                             stat.PokeStopVisits,
-                             stat.EggsHatched,
-                             stat.Evolutions,
-                             stat.UniquePokedexEntries,
-                             stat.KmWalked,
-                             myPokemons2.ToList().Count,
-                             session.Profile.PlayerData.MaxPokemonStorage
-                         });
+                    var myPokemons2 = await _session.Inventory.GetPokemons();
+                    if (stat != null)
+                        answerTextmessage += _session.Translation.GetTranslation(
+                            TranslationString.ProfileStatsTemplateString, stat.Level, _session.Profile.PlayerData.Username,
+                            stat.Experience, stat.NextLevelXp, stat.PokemonsCaptured, stat.PokemonDeployed,
+                            stat.PokeStopVisits, stat.EggsHatched, stat.Evolutions, stat.UniquePokedexEntries, stat.KmWalked,
+                            myPokemons2.ToList().Count, _session.Profile.PlayerData.MaxPokemonStorage);
                     SendMessage(message.Chat.Id, answerTextmessage);
                     break;
 
                 case "/pokedex":
-                    var pokedex = session.Inventory.GetPokeDexItems().Result;
+                    var pokedex = _session.Inventory.GetPokeDexItems().Result;
                     var pokedexSort = pokedex.OrderBy(x => x.InventoryItemData.PokedexEntry.PokemonId);
 
-                    answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexCatchedTelegram);
+                    answerTextmessage += _session.Translation.GetTranslation(TranslationString.PokedexCatchedTelegram);
                     foreach (var pokedexItem in pokedexSort)
                     {
-                        answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonCatchedTelegram, Convert.ToInt32(pokedexItem.InventoryItemData.PokedexEntry.PokemonId), session.Translation.GetPokemonTranslation(pokedexItem.InventoryItemData.PokedexEntry.PokemonId), pokedexItem.InventoryItemData.PokedexEntry.TimesCaptured, pokedexItem.InventoryItemData.PokedexEntry.TimesEncountered);
+                        answerTextmessage +=
+                            _session.Translation.GetTranslation(TranslationString.PokedexPokemonCatchedTelegram,
+                                Convert.ToInt32(pokedexItem.InventoryItemData.PokedexEntry.PokemonId),
+                                _session.Translation.GetPokemonTranslation(
+                                    pokedexItem.InventoryItemData.PokedexEntry.PokemonId),
+                                pokedexItem.InventoryItemData.PokedexEntry.TimesCaptured,
+                                pokedexItem.InventoryItemData.PokedexEntry.TimesEncountered);
 
                         if (answerTextmessage.Length > 3800)
                         {
@@ -241,18 +252,23 @@ namespace PoGo.NecroBot.Logic.Service
                         }
                     }
 
-                    var pokemonsToCapture = Enum.GetValues(typeof(PokemonId)).Cast<PokemonId>().Except(pokedex.Select(x => x.InventoryItemData.PokedexEntry.PokemonId));
+                    var pokemonsToCapture =
+                        Enum.GetValues(typeof(PokemonId))
+                            .Cast<PokemonId>()
+                            .Except(pokedex.Select(x => x.InventoryItemData.PokedexEntry.PokemonId));
 
                     SendMessage(message.Chat.Id, answerTextmessage);
                     answerTextmessage = "";
 
-                    answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexNeededTelegram);
+                    answerTextmessage += _session.Translation.GetTranslation(TranslationString.PokedexNeededTelegram);
 
                     foreach (var pokedexItem in pokemonsToCapture)
                     {
                         if (Convert.ToInt32(pokedexItem) > 0)
                         {
-                            answerTextmessage += session.Translation.GetTranslation(TranslationString.PokedexPokemonNeededTelegram, Convert.ToInt32(pokedexItem), session.Translation.GetPokemonTranslation(pokedexItem));
+                            answerTextmessage +=
+                                _session.Translation.GetTranslation(TranslationString.PokedexPokemonNeededTelegram,
+                                    Convert.ToInt32(pokedexItem), _session.Translation.GetPokemonTranslation(pokedexItem));
 
                             if (answerTextmessage.Length > 3800)
                             {
@@ -266,51 +282,39 @@ namespace PoGo.NecroBot.Logic.Service
                     break;
 
                 case "/loc":
-                    SendLocation(message.Chat.Id, session.Client.CurrentLatitude, session.Client.CurrentLongitude);
+                    SendLocation(message.Chat.Id, _session.Client.CurrentLatitude, _session.Client.CurrentLongitude);
                     break;
 
                 case "/items":
-                    var inventory = session.Inventory;
-                    answerTextmessage += session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
-                        new object[]
-                        {
-                            await inventory.GetItemAmountByType(ItemId.ItemPokeBall),
-                            await inventory.GetItemAmountByType(ItemId.ItemGreatBall),
-                            await inventory.GetItemAmountByType(ItemId.ItemUltraBall),
-                            await inventory.GetItemAmountByType(ItemId.ItemMasterBall)
-                        });
+                    var inventory = _session.Inventory;
+                    answerTextmessage += _session.Translation.GetTranslation(TranslationString.CurrentPokeballInv,
+                        await inventory.GetItemAmountByType(ItemId.ItemPokeBall),
+                        await inventory.GetItemAmountByType(ItemId.ItemGreatBall),
+                        await inventory.GetItemAmountByType(ItemId.ItemUltraBall),
+                        await inventory.GetItemAmountByType(ItemId.ItemMasterBall));
                     answerTextmessage += "\n";
-                    answerTextmessage += session.Translation.GetTranslation(TranslationString.CurrentPotionInv,
-                       new object[]
-                       {
-                            await inventory.GetItemAmountByType(ItemId.ItemPotion),
-                            await inventory.GetItemAmountByType(ItemId.ItemSuperPotion),
-                            await inventory.GetItemAmountByType(ItemId.ItemHyperPotion),
-                            await inventory.GetItemAmountByType(ItemId.ItemMaxPotion)
-                       });
+                    answerTextmessage += _session.Translation.GetTranslation(TranslationString.CurrentPotionInv,
+                        await inventory.GetItemAmountByType(ItemId.ItemPotion),
+                        await inventory.GetItemAmountByType(ItemId.ItemSuperPotion),
+                        await inventory.GetItemAmountByType(ItemId.ItemHyperPotion),
+                        await inventory.GetItemAmountByType(ItemId.ItemMaxPotion));
                     answerTextmessage += "\n";
-                    answerTextmessage += session.Translation.GetTranslation(TranslationString.CurrentReviveInv,
-                        new object[]
-                        {
-                            await inventory.GetItemAmountByType(ItemId.ItemRevive),
-                            await inventory.GetItemAmountByType(ItemId.ItemMaxRevive),
-                        });
+                    answerTextmessage += _session.Translation.GetTranslation(TranslationString.CurrentReviveInv,
+                        await inventory.GetItemAmountByType(ItemId.ItemRevive),
+                        await inventory.GetItemAmountByType(ItemId.ItemMaxRevive));
                     answerTextmessage += "\n";
-                    answerTextmessage += session.Translation.GetTranslation(TranslationString.CurrentMiscItemInv,
-                        new object[]
-                        {
-                            await session.Inventory.GetItemAmountByType(ItemId.ItemRazzBerry) +
-                            await session.Inventory.GetItemAmountByType(ItemId.ItemBlukBerry) +
-                            await session.Inventory.GetItemAmountByType(ItemId.ItemNanabBerry) +
-                            await session.Inventory.GetItemAmountByType(ItemId.ItemWeparBerry) +
-                            await session.Inventory.GetItemAmountByType(ItemId.ItemPinapBerry),
-                            await session.Inventory.GetItemAmountByType(ItemId.ItemIncenseOrdinary) +
-                            await session.Inventory.GetItemAmountByType(ItemId.ItemIncenseSpicy) +
-                            await session.Inventory.GetItemAmountByType(ItemId.ItemIncenseCool) +
-                            await session.Inventory.GetItemAmountByType(ItemId.ItemIncenseFloral),
-                            await session.Inventory.GetItemAmountByType(ItemId.ItemLuckyEgg),
-                            await session.Inventory.GetItemAmountByType(ItemId.ItemTroyDisk)
-                        });
+                    answerTextmessage += _session.Translation.GetTranslation(TranslationString.CurrentMiscItemInv,
+                        await _session.Inventory.GetItemAmountByType(ItemId.ItemRazzBerry) +
+                        await _session.Inventory.GetItemAmountByType(ItemId.ItemBlukBerry) +
+                        await _session.Inventory.GetItemAmountByType(ItemId.ItemNanabBerry) +
+                        await _session.Inventory.GetItemAmountByType(ItemId.ItemWeparBerry) +
+                        await _session.Inventory.GetItemAmountByType(ItemId.ItemPinapBerry),
+                        await _session.Inventory.GetItemAmountByType(ItemId.ItemIncenseOrdinary) +
+                        await _session.Inventory.GetItemAmountByType(ItemId.ItemIncenseSpicy) +
+                        await _session.Inventory.GetItemAmountByType(ItemId.ItemIncenseCool) +
+                        await _session.Inventory.GetItemAmountByType(ItemId.ItemIncenseFloral),
+                        await _session.Inventory.GetItemAmountByType(ItemId.ItemLuckyEgg),
+                        await _session.Inventory.GetItemAmountByType(ItemId.ItemTroyDisk));
                     SendMessage(message.Chat.Id, answerTextmessage);
                     break;
 
@@ -325,20 +329,20 @@ namespace PoGo.NecroBot.Logic.Service
                     break;
 
                 default:
-                    answerTextmessage += session.Translation.GetTranslation(TranslationString.HelpTemplate);
+                    answerTextmessage += _session.Translation.GetTranslation(TranslationString.HelpTemplate);
                     SendMessage(message.Chat.Id, answerTextmessage);
                     break;
             }
         }
 
-        private async void SendLocation(long chatID, double currentLatitude, double currentLongitude)
+        private async void SendLocation(long chatId, double currentLatitude, double currentLongitude)
         {
-            await bot.SendLocationAsync(chatID, (float)currentLatitude, (float)currentLongitude);
+            await _bot.SendLocationAsync(chatId, (float) currentLatitude, (float) currentLongitude);
         }
 
-        private async void SendMessage(long chatID, string message)
+        private async void SendMessage(long chatId, string message)
         {
-            await bot.SendTextMessageAsync(chatID, message, replyMarkup: new ReplyKeyboardHide());
+            await _bot.SendTextMessageAsync(chatId, message, replyMarkup: new ReplyKeyboardHide());
         }
     }
 }

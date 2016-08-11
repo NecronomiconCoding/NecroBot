@@ -17,27 +17,8 @@
       "Value": "Master Ball"
     },
     {
-      "Key": "loginInvalid",
-      "Value": "Les credencials d'usuari són invàlides i el login ha fallat."
-    },
-    {
-      "Key": "loggedInTelegram",
-      "Value":  "You have been logged in sucessfully. Session is valid for 5 Minutes"
-    },
-    {
-      "Key": "loginFailedTelegram",
-      "Value":  "Wrong password entered! \n Use /login [Password]"
-    },
-    {
-      "Key": "NotLoggedInTelegram",
-      "Value":  "You are not logged in, \n use /login [Password]"
-    },
-    {
-      "Key": "LoginRemainingTime",
-      "Value":  "You are already logged in! \n Session valid for: ({0}:{1} seconds)"
-    },
-    {
-      "Key": "wrongAuthType",      "Value": "AuthType desconocido en config.json"
+      "Key": "wrongAuthType",
+      "Value": "AuthType desconocido en config.json"
     },
     {
       "Key": "loginInvalid",
@@ -345,7 +326,7 @@
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "Poción: {0} | SuperPoción: {1} | Hyperpoción: {2} | Pociónmáxima: {3}"
     },
     {
       "Key": "CurrentReviveInv",
@@ -353,7 +334,7 @@
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "Baya: {0} | Incienso: {1} | Huevo Suerte: {2} | Cebo: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -512,14 +493,6 @@
       "Value": "No hay huevos disponibles"
     },
     {
-      "Key": "usageHelp",
-       "Value": "Invalid command arguments! \n Correct usage: \n {0}"
-    },
-    {
-      "Key": "useLuckyEggIsFalse",
-       "Value": "EvolveWhenLuckyEggsMinMet requires UseLuckyEggWhileEvolving to be set to true!"
-    },
-    {
       "Key": "useLuckyEggActive",
       "Value": "Huevo suerte ya está activo"
     },
@@ -661,19 +634,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"
+      "Value":  "--- Pokedex Atrapados --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value":  "#{0} Nombre: {1} | Atrapados: {2} | Encontrados: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"
+      "Value":  "--- Pokedex Necesarios --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"
+      "Value":  "#{0} Nombre: {1} \n"
     }
   ],
   "PokemonStrings": [

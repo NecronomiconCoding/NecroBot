@@ -17,27 +17,8 @@
       "Value": "MasterBall"
     },
     {
-      "Key": "loginInvalid",
-      "Value": "Les credencials d'usuari són invàlides i el login ha fallat."
-    },
-    {
-      "Key": "loggedInTelegram",
-      "Value":  "You have been logged in sucessfully. Session is valid for 5 Minutes"
-    },
-    {
-      "Key": "loginFailedTelegram",
-      "Value":  "Wrong password entered! \n Use /login [Password]"
-    },
-    {
-      "Key": "NotLoggedInTelegram",
-      "Value":  "You are not logged in, \n use /login [Password]"
-    },
-    {
-      "Key": "LoginRemainingTime",
-      "Value":  "You are already logged in! \n Session valid for: ({0}:{1} seconds)"
-    },
-    {
-      "Key": "wrongAuthType",      "Value": "Sai AuthType(Kiểu tài khoản) trong file auth.json"
+      "Key": "wrongAuthType",
+      "Value": "Sai AuthType(Kiểu tài khoản) trong file auth.json"
     },
     {
       "Key": "loginInvalid",
@@ -293,7 +274,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Tuyệt vời! Bạn đang sử dụng phiên bản mới nhất: v{0} (Dịch Bởi: Skick - fb.me/S2Cancer2361)"
+      "Value": "Bạn đang sử dụng phiên bản mới nhất: v{0} (Dịch Bởi: Skick - Group: bit.ly/PokeAuto)"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -524,14 +505,6 @@
       "Value": "Không còn Eggs"
     },
     {
-      "Key": "usageHelp",
-       "Value": "Invalid command arguments! \n Correct usage: \n {0}"
-    },
-    {
-      "Key": "useLuckyEggIsFalse",
-       "Value": "EvolveWhenLuckyEggsMinMet requires UseLuckyEggWhileEvolving to be set to true!"
-    },
-    {
       "Key": "useLuckyEggActive",
       "Value": "Lucky Egg Đã Được Kích Hoạt"
     },
@@ -673,19 +646,24 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"
+      "Value":  "--- Pokedex - Đã Bắt --- \n"  
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value":  "#{0} Tên: {1} | Đã Bắt: {2} | Đã Gặp: {3} \n"  
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"
+      "Value":  "--- Pokedex - Còn Thiếu --- \n"  
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"
+      "Value":  "#{0} Tên: {1} \n"  
+    },
+	{
+      "Key": "softBanBypassed",
+      "Value": "Bypass SoftBan Thành Công!"
+
     }
   ],
   "PokemonStrings": [

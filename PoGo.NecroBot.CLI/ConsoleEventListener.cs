@@ -64,11 +64,11 @@ namespace PoGo.NecroBot.CLI
         {
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventPokemonTransferred,
-                session.Translation.GetPokemonTranslation(transferPokemonEvent.Id).PadRight(12, ' '),
-                transferPokemonEvent.Cp.ToString().PadLeft(4, ' '),
-                transferPokemonEvent.Perfection.ToString("0.00").PadLeft(6, ' '),
-                transferPokemonEvent.BestCp.ToString().PadLeft(4, ' '),
-                transferPokemonEvent.BestPerfection.ToString("0.00").PadLeft(6, ' '),
+                session.Translation.GetPokemonTranslation(transferPokemonEvent.Id),
+                transferPokemonEvent.Cp.ToString(),
+                transferPokemonEvent.Perfection.ToString("0.00"),
+                transferPokemonEvent.BestCp.ToString(),
+                transferPokemonEvent.BestPerfection.ToString("0.00"), 
                 transferPokemonEvent.FamilyCandies),
                 LogLevel.Transfer);
         }
