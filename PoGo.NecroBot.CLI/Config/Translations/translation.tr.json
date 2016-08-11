@@ -202,7 +202,7 @@
     },
     {
       "Key": "logEntryEvolved",
-      "Value": "GELİŞTİRİLDİ"
+      "Value": "GELİŞTİRME"
     },
     {
       "Key": "logEntryBerry",
@@ -226,7 +226,7 @@
     },
     {
       "Key": "logEntrySoftBan",
-      "Value": "SOFT BAN"
+      "Value": "GEÇİCİ BAN"
     },
     {
       "Key": "loggingIn",
@@ -542,7 +542,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "Geliştirilebilecek(evolve) Pokémon sayısı: {0}"
+      "Value": "Geliştirilecek(evolve) Pokémon sayısı: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
