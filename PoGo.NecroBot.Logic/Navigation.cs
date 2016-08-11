@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic
             cancellationToken.ThrowIfCancellationRequested();
             if (!disableHumanLikeWalking)
             {
-                var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
+                var speedInMetersPerSecond = (walkingSpeedInKilometersPerHour/3.6)*7;
 
                 var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
 
@@ -84,6 +84,7 @@ namespace PoGo.NecroBot.Logic
 
                     if (functionExecutedWhileWalking != null)
                         await functionExecutedWhileWalking(); // look for pokemon
+                    Thread.Sleep(7000);
                 } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
 
                 return result;
@@ -137,6 +138,7 @@ namespace PoGo.NecroBot.Logic
 
                     if (functionExecutedWhileWalking != null)
                         await functionExecutedWhileWalking(); // look for pokemon
+                    Thread.Sleep(7000);
                 } while (LocationUtils.CalculateDistanceInMeters(curLocation, targetLocation) >= 10);
                 return result;
             }
