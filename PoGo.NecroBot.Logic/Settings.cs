@@ -70,6 +70,8 @@ namespace PoGo.NecroBot.Logic
         public string FirmwareType;
         [DefaultValue("htc/pmewl_00531/htc_pmewl:6.0.1/MMB29M/770927.1:user/release-keys")]
         public string FirmwareFingerprint;
+        [DefaultValue("0.0.0")]
+        public string AuthVersion;
 
         public AuthSettings()
         {
@@ -153,6 +155,7 @@ namespace PoGo.NecroBot.Logic
 
         public void Save(string fullPath)
         {
+            AuthVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
             var jsonSerializeSettings = new JsonSerializerSettings
             {
                 DefaultValueHandling = DefaultValueHandling.Include,
@@ -292,6 +295,9 @@ namespace PoGo.NecroBot.Logic
         public bool AutoUpdate;
         [DefaultValue(true)]
         public bool TransferConfigAndAuthOnUpdate;
+        //Version Control
+        [DefaultValue("0.0.0")]
+        public string ConfigVersion;
         //websockets
         [DefaultValue(false)]
         public bool UseWebsocket;
@@ -1081,6 +1087,7 @@ namespace PoGo.NecroBot.Logic
 
         public void Save(string fullPath)
         {
+            ConfigVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString(3);
             var jsonSerializeSettings = new JsonSerializerSettings
             {
                 DefaultValueHandling = DefaultValueHandling.Include,
