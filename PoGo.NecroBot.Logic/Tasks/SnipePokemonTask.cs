@@ -522,7 +522,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var request = WebRequest.CreateHttp(uri);
                 request.Accept = "application/json";
                 request.UserAgent =
-                    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36\r\n";
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:47.0) Gecko/20100101 Firefox/47.0";
                 request.Method = "GET";
                 request.Timeout = 15000;
                 request.ReadWriteTimeout = 32000;
@@ -714,7 +714,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 // Create a HttpClient that uses the handler.
                 var client = new HttpClient(handler);
-
+                
+                // Our new firewall requires a user agent, or you'll be blocked.
+                client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/511.2 (KHTML, like Gecko) Chrome/15.0.041.151 Safari/555.2");
+                
                 // Use the HttpClient as usual. Any JS challenge will be solved automatically for you.
                 var fullresp = "{ \"pokemons\":" + client.GetStringAsync(uri).Result.Replace(" M", "Male").Replace(" F", "Female").Replace("Farfetch'd", "Farfetchd").Replace("Mr.Maleime", "MrMime") +"}";
 
