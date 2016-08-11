@@ -19,9 +19,9 @@ namespace PoGo.NecroBot.Logic.Common
 
         string GetTranslation(TranslationString translationString);
 
-        string GetPokemonTranslation( POGOProtos.Enums.PokemonId id );
+        string GetPokemonTranslation(POGOProtos.Enums.PokemonId id);
 
-        string GetPokemonMovesetTranslation( POGOProtos.Enums.PokemonMove move );
+        string GetPokemonMovesetTranslation(POGOProtos.Enums.PokemonMove move);
     }
 
     public enum TranslationString
@@ -152,10 +152,12 @@ namespace PoGo.NecroBot.Logic.Common
         DisplayHighestMove2Header,
         DisplayHighestCandy,
         IPBannedError,
+        UsageHelp,
         NoEggsAvailable,
         UseLuckyEggActive,
         UsedLuckyEgg,
         UseLuckyEggAmount,
+        UseLuckyEggIsFalse,
         NoIncenseAvailable,
         UseIncenseActive,
         UseIncenseAmount,
@@ -197,11 +199,10 @@ namespace PoGo.NecroBot.Logic.Common
         LoggedInTelegram,
         LoginFailedTelegram,
         NotLoggedInTelegram,
+        LoginRemainingTime,
         Unproxied,
         Proxied,
-        FixProxySettings,
-        UsageHelp,
-        LoginRemainingTime
+        FixProxySettings
     }
 
     public class Translation : ITranslation
@@ -260,6 +261,8 @@ namespace PoGo.NecroBot.Logic.Common
                 "Lucky eggs will never be used with UseLuckyEggsMinPokemonAmount set to {0}, use <= {1} instead"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchMorePokemonToUseLuckyEgg,
                 "Catch {0} more Pokemon to use a Lucky Egg!"),
+            new KeyValuePair<TranslationString, string>(TranslationString.UseLuckyEggIsFalse,
+                "EvolveWhenLuckyEggsMinMet requires UseLuckyEggWhileEvolving to be set to true!"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventUseBerry, "Used {0} | {1} remaining"),
             new KeyValuePair<TranslationString, string>(TranslationString.ItemRazzBerry, "Razz Berry"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchStatusAttempt, "{0} Attempt #{1}"),
@@ -290,10 +293,10 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryPokestop, "POKESTOP"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryFarming, "FARMING"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntrySniper, "SNIPER"),
-            new KeyValuePair<TranslationString, string>(TranslationString.LogEntryRecycling, "RECYCLING"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LogEntryRecycling, "RECYCLE"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryPkmn, "PKMN"),
-            new KeyValuePair<TranslationString, string>(TranslationString.LogEntryTransfered, "TRANSFERRED"),
-            new KeyValuePair<TranslationString, string>(TranslationString.LogEntryEvolved, "EVOLVED"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LogEntryTransfered, "TRANSFER"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LogEntryEvolved, "EVOLVE"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryBerry, "BERRY"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryEgg, "EGG"),
             new KeyValuePair<TranslationString, string>(TranslationString.LogEntryDebug, "DEBUG"),
@@ -391,7 +394,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.ShowPokeTemplate,
                 "\n CP: {0} | IV: {1}% | Name: {2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.HelpTemplate,
-                "Commands: \n \n /top <cp/iv> <amount> - Shows you top Pokemons. \n /all <cp/iv> - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items. \n /status - Shows you the Status of the Bot. \n /pokedex - Shows you Pokedex "),
+                "Commands: \n \n /status - Shows the bot's status \n /top <cp/iv> <amount> - Shows you top Pokemons. \n /all <cp/iv> - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items. \n /status - Shows you the Status of the Bot. \n /pokedex - Shows you Pokedex  \n /restart - Restarts the bot"),
             new KeyValuePair<TranslationString, string>(TranslationString.StatsXpTemplateString,
                 "{0} (Advance in {1}h {2}m | {3:n0}/{4:n0} XP)"),
             new KeyValuePair<TranslationString, string>(TranslationString.RequireInputText,
@@ -421,6 +424,8 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.DisplayHighestCandy, "Candy"),
             new KeyValuePair<TranslationString, string>(TranslationString.IPBannedError,
                 "Connection refused. Your IP might have been Blacklisted by Niantic. Exiting.."),
+            new KeyValuePair<TranslationString, string>(TranslationString.UsageHelp,
+                "Invalid command arguments! \n Correct usage: \n {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.NoEggsAvailable, "No Eggs Available"),
             new KeyValuePair<TranslationString, string>(TranslationString.UseLuckyEggActive, "Lucky Egg Already Active"),
             new KeyValuePair<TranslationString, string>(TranslationString.UsedLuckyEgg, "Used Lucky Egg"),
@@ -467,8 +472,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.PokedexNeededTelegram, "--- Pokedex needed --- \n"),
             new KeyValuePair<TranslationString, string>(TranslationString.PokedexPokemonNeededTelegram, "#{0}# Name: {1} \n"),
             new KeyValuePair<TranslationString, string>(TranslationString.LoggedInTelegram, "You have been logged in sucessfully. Session is valid for 5 Minutes"),
-            new KeyValuePair<TranslationString, string>(TranslationString.LoginFailedTelegram, "Wrong Password or wrong Syntax! Use /login PASSWORD"),
-            new KeyValuePair<TranslationString, string>(TranslationString.NotLoggedInTelegram, "You are not logged in, use /login PASSWORD"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LoginFailedTelegram, "Wrong password entered! \n Use /login [Password]"),
+            new KeyValuePair<TranslationString, string>(TranslationString.NotLoggedInTelegram, "You are not logged in, \n use /login [Password]"),
+            new KeyValuePair<TranslationString, string>(TranslationString.LoginRemainingTime, "You are already logged in! \n Session valid for: ({0}:{1} seconds)"),
             new KeyValuePair<TranslationString, string>(TranslationString.Proxied, "Your IP is: {0} | Proxy IP is: {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.Unproxied, "Your IP is: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.FixProxySettings, "Press any key to exit so you can fix your proxy settings..."),
@@ -643,7 +649,7 @@ namespace PoGo.NecroBot.Logic.Common
         ObjectCreationHandling = ObjectCreationHandling.Replace,
         DefaultValueHandling = DefaultValueHandling.Populate)]
         private readonly List<KeyValuePair<POGOProtos.Enums.PokemonMove, string>> _pokemonMovesetTranslationStrings =
-            new List<KeyValuePair< POGOProtos.Enums.PokemonMove, string>>()
+            new List<KeyValuePair<POGOProtos.Enums.PokemonMove, string>>()
         {
             new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.MoveUnset, "MoveUnset" ),
             new KeyValuePair<POGOProtos.Enums.PokemonMove, string> ( POGOProtos.Enums.PokemonMove.ThunderShock, "ThunderShock" ),
@@ -847,18 +853,18 @@ namespace PoGo.NecroBot.Logic.Common
             return translation != default(string) ? translation : $"Translation for pokemon {id} is missing";
         }
 
-        public string GetPokemonMovesetTranslation( POGOProtos.Enums.PokemonMove move )
+        public string GetPokemonMovesetTranslation(POGOProtos.Enums.PokemonMove move)
         {
-            var translation = _pokemonMovesetTranslationStrings.FirstOrDefault( t => t.Key.Equals( move ) ).Value;
-            return translation != default( string ) ? translation : $"Translation for move {move} is missing";
+            var translation = _pokemonMovesetTranslationStrings.FirstOrDefault(t => t.Key.Equals(move)).Value;
+            return translation != default(string) ? translation : $"Translation for move {move} is missing";
         }
 
-        public static Translation Load( ILogicSettings logicSettings )
+        public static Translation Load(ILogicSettings logicSettings)
         {
-            return Load( logicSettings, new Translation() );
+            return Load(logicSettings, new Translation());
         }
 
-        public static Translation Load(ILogicSettings logicSettings, Translation translations )
+        public static Translation Load(ILogicSettings logicSettings, Translation translations)
         {
             var translationsLanguageCode = logicSettings.TranslationLanguageCode;
             var translationPath = Path.Combine(logicSettings.GeneralConfigPath, "translations");
@@ -875,35 +881,35 @@ namespace PoGo.NecroBot.Logic.Common
 
                 try
                 {
-                    translations = JsonConvert.DeserializeObject<Translation>( input, jsonSettings );
+                    translations = JsonConvert.DeserializeObject<Translation>(input, jsonSettings);
                     //TODO make json to fill default values as it won't do it now
                     new Translation()._translationStrings.Where(
-                        item => translations._translationStrings.All( a => a.Key != item.Key ) )
+                        item => translations._translationStrings.All(a => a.Key != item.Key))
                         .ToList()
-                        .ForEach( translations._translationStrings.Add );
+                        .ForEach(translations._translationStrings.Add);
                     new Translation()._pokemonTranslationStrings.Where(
-                        item => translations._pokemonTranslationStrings.All( a => a.Key != item.Key ) )
+                        item => translations._pokemonTranslationStrings.All(a => a.Key != item.Key))
                         .ToList()
-                        .ForEach( translations._pokemonTranslationStrings.Add );
+                        .ForEach(translations._pokemonTranslationStrings.Add);
                 }
-                catch( JsonException ex )
+                catch (JsonException ex)
                 {
-                    Logger.Write( $"[ERROR] Issue loading translations: {ex.ToString()}", LogLevel.Warning );
-                    Logger.Write( "[Request] Rebuild the translations folder? Y/N" );
+                    Logger.Write($"[ERROR] Issue loading translations: {ex.ToString()}", LogLevel.Warning);
+                    Logger.Write("[Request] Rebuild the translations folder? Y/N");
 
                     string strInput = Console.ReadLine().ToLower();
 
-                    if( strInput.Equals( "y" ) )
+                    if (strInput.Equals("y"))
                     {
                         // Currently this section can only rebuild the EN translations file \\
                         // This is because default values cannot be supplied from other languages \\
-                        Logger.Write( "Loading fresh translations and continuing" );
+                        Logger.Write("Loading fresh translations and continuing");
                         translations = new Translation();
-                        translations.Save( Path.Combine( translationPath, "translation.en.json" ) );
+                        translations.Save(Path.Combine(translationPath, "translation.en.json"));
                     }
                     else
                     {
-                        ErrorHandler.ThrowFatalError( "[ERROR] Fatal Error", 3, LogLevel.Error );
+                        ErrorHandler.ThrowFatalError("[ERROR] Fatal Error", 3, LogLevel.Error);
                         return null;
                     }
                 }

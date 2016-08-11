@@ -88,7 +88,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var response = await session.Client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);
                     unusedEggs.Remove(egg);
 
-                    newRememberedIncubators.Add(new IncubatorUsage {IncubatorId = incubator.Id, PokemonId = egg.Id});
+                    newRememberedIncubators.Add(new IncubatorUsage { IncubatorId = incubator.Id, PokemonId = egg.Id });
 
                     session.EventDispatcher.Send(new EggIncubatorStatusEvent
                     {

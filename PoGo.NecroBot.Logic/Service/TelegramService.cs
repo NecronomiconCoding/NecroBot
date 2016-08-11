@@ -1,6 +1,4 @@
-﻿#region using directives
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -17,8 +15,6 @@ using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
-#endregion
-
 namespace PoGo.NecroBot.Logic.Service
 {
     public class TelegramService
@@ -28,23 +24,23 @@ namespace PoGo.NecroBot.Logic.Service
         private bool _loggedIn;
         private readonly ISession _session;
 
-        public TelegramService(string apiKey, ISession session)
+        public TelegramService(string apiKey, ISession _session)
         {
             try
             {
                 _bot = new TelegramBotClient(apiKey);
-                _session = session;
+                this._session = _session;
 
                 var me = _bot.GetMeAsync().Result;
 
                 _bot.OnMessage += OnTelegramMessageReceived;
                 _bot.StartReceiving();
 
-                _session.EventDispatcher.Send(new NoticeEvent {Message = "Using TelegramAPI with " + me.Username});
+                this._session.EventDispatcher.Send(new NoticeEvent { Message = "Using TelegramAPI with " + me.Username});
             }
             catch (Exception)
             {
-                _session.EventDispatcher.Send(new ErrorEvent { Message = "Unkown Telegram Error occured. "});
+                this._session.EventDispatcher.Send(new ErrorEvent { Message = "Unkown Telegram Error occured. "});
             }
         }
 
@@ -63,27 +59,33 @@ namespace PoGo.NecroBot.Logic.Service
 
             var messagetext = message.Text.ToLower().Split(' ');
 
-            if (!_loggedIn && messagetext[0].ToLower().Contains("/login"))
-            {
-                if (messagetext.Length == 2)
+                if (!_loggedIn && messagetext[0].ToLower().Contains("/login"))
                 {
-                    if (messagetext[1].ToLower().Contains(_session.LogicSettings.TelegramPassword))
+                    if (messagetext.Length == 2)
                     {
-                        _loggedIn = true;
-                        _lastLoginTime = DateTime.Now;
-                        answerTextmessage += _session.Translation.GetTranslation(TranslationString.LoggedInTelegram);
-                        SendMessage(message.Chat.Id, answerTextmessage);
-                        return;
+                        if (messagetext[1].ToLower().Equals(_session.LogicSettings.TelegramPassword))
+                        {
+                            _loggedIn = true;
+                            _lastLoginTime = DateTime.Now;
+                            answerTextmessage += _session.Translation.GetTranslation(TranslationString.LoggedInTelegram);
+                            SendMessage(message.Chat.Id, answerTextmessage);
+                            return;
+                        }
+                        else
+                        {
+                            answerTextmessage += _session.Translation.GetTranslation(TranslationString.LoginFailedTelegram);
+                            SendMessage(message.Chat.Id, answerTextmessage);
+                            return;
+                        }
                     }
-                    answerTextmessage += _session.Translation.GetTranslation(TranslationString.LoginFailedTelegram);
+                    else
+                    {
+                    answerTextmessage += _session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
                     SendMessage(message.Chat.Id, answerTextmessage);
                     return;
+                    }
                 }
-                answerTextmessage += _session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
-                SendMessage(message.Chat.Id, answerTextmessage);
-                return;
-            }
-            if (_loggedIn)
+            else if (_loggedIn)
             {
                 if (_lastLoginTime.AddMinutes(5).Ticks < DateTime.Now.Ticks)
                 {
@@ -92,14 +94,16 @@ namespace PoGo.NecroBot.Logic.Service
                     SendMessage(message.Chat.Id, answerTextmessage);
                     return;
                 }
-                var remainingMins = _lastLoginTime.AddMinutes(5).Subtract(DateTime.Now).Minutes;
-                var remainingSecs = _lastLoginTime.AddMinutes(5).Subtract(DateTime.Now).Seconds;
-                answerTextmessage += _session.Translation.GetTranslation(TranslationString.LoginRemainingTime,
-                    remainingMins, remainingSecs);
-                SendMessage(message.Chat.Id, answerTextmessage);
-                return;
+                else
+                {
+                    int remainingMins = _lastLoginTime.AddMinutes(5).Subtract(DateTime.Now).Minutes;
+                    int remainingSecs = _lastLoginTime.AddMinutes(5).Subtract(DateTime.Now).Seconds;
+                    answerTextmessage += _session.Translation.GetTranslation(TranslationString.LoginRemainingTime, remainingMins, remainingSecs);
+                    SendMessage(message.Chat.Id, answerTextmessage);
+                    return;
+                }
             }
-
+        
             switch (messagetext[0].ToLower())
             {
                 case "/top":
@@ -118,15 +122,13 @@ namespace PoGo.NecroBot.Logic.Service
                         }
                         catch (FormatException)
                         {
-                            SendMessage(message.Chat.Id,
-                                _session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
+                            SendMessage(message.Chat.Id, _session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
                             break;
                         }
                     }
                     else if (messagetext.Length > 3)
                     {
-                        SendMessage(message.Chat.Id,
-                            _session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
+                        SendMessage(message.Chat.Id, _session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
                         break;
                     }
 
@@ -141,8 +143,7 @@ namespace PoGo.NecroBot.Logic.Service
                     }
                     else
                     {
-                        SendMessage(message.Chat.Id,
-                            _session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
+                        SendMessage(message.Chat.Id, _session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
                         break;
                     }
 
@@ -164,9 +165,13 @@ namespace PoGo.NecroBot.Logic.Service
                 case "/all":
                     var myPokemons = await _session.Inventory.GetPokemons();
                     var allMyPokemons = myPokemons.ToList();
-                    var allPokemons = await _session.Inventory.GetHighestsCp(allMyPokemons.Count);
+                    IEnumerable<PokemonData> allPokemons = await _session.Inventory.GetHighestsCp(allMyPokemons.Count);
 
                     if (messagetext.Length == 1)
+                    {
+                        allPokemons = await _session.Inventory.GetHighestsCp(allMyPokemons.Count);
+                    }
+                    else if (messagetext.Length == 2)
                     {
                         allPokemons = await _session.Inventory.GetHighestsCp(allMyPokemons.Count);
                     }
@@ -178,15 +183,13 @@ namespace PoGo.NecroBot.Logic.Service
                         }
                         else if (messagetext[1] != "cp")
                         {
-                            SendMessage(message.Chat.Id,
-                                _session.Translation.GetTranslation(TranslationString.UsageHelp, "/all [cp/iv]"));
+                            SendMessage(message.Chat.Id, _session.Translation.GetTranslation(TranslationString.UsageHelp, "/all [cp/iv]"));
                             break;
                         }
                     }
                     else
                     {
-                        SendMessage(message.Chat.Id,
-                            _session.Translation.GetTranslation(TranslationString.UsageHelp, "/all [cp/iv]"));
+                        SendMessage(message.Chat.Id, _session.Translation.GetTranslation(TranslationString.UsageHelp, "/all [cp/iv]"));
                         break;
                     }
 

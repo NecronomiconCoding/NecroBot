@@ -38,7 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 Logger.Write(
                     session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
-                
+
                 await session.Navigation.Move(
                     new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude, LocationUtils.getElevation(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude)),
                     session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken, session.LogicSettings.DisableHumanWalking);
@@ -58,7 +58,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 });
             }
 
-            session.EventDispatcher.Send(new PokeStopListEvent {Forts = pokestopList});
+            session.EventDispatcher.Send(new PokeStopListEvent { Forts = pokestopList });
 
             while (pokestopList.Any())
             {
@@ -77,18 +77,18 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
 
-                session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
+                session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
 
-                    await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude, LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
-                    session.LogicSettings.WalkingSpeedInKilometerPerHour,
-                    async () =>
-                    {
+                await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude, LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
+                session.LogicSettings.WalkingSpeedInKilometerPerHour,
+                async () =>
+                {
                         // Catch normal map Pokemon
                         await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
                         //Catch Incense Pokemon
                         await CatchIncensePokemonsTask.Execute(session, cancellationToken);
-                        return true;
-                    }, cancellationToken, session.LogicSettings.DisableHumanWalking);
+                    return true;
+                }, cancellationToken, session.LogicSettings.DisableHumanWalking);
 
                 //Catch Lure Pokemon
                 if (pokeStop.LureInfo != null)
@@ -114,7 +114,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         if (timesZeroXPawarded > zeroCheck)
                         {
-                            if ((int) fortSearch.CooldownCompleteTimestampMs != 0)
+                            if ((int)fortSearch.CooldownCompleteTimestampMs != 0)
                             {
                                 break; // Check if successfully looted, if so program can continue as this was "false alarm".
                             }
@@ -160,7 +160,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             InventoryFull = fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull
                         });
 
-                        if ( fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull )
+                        if (fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull)
                             storeRI = 1;
 
                         break; //Continue with program as loot was succesfull.
@@ -179,7 +179,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                         session.LogicSettings.EvolveAllPokemonAboveIv ||
-                        session.LogicSettings.UseLuckyEggsWhileEvolving ||
+                        session.LogicSettings.EvolveWhenLuckyEggsMinMet ||
                         session.LogicSettings.KeepPokemonsThatCanEvolve)
                     {
                         await EvolvePokemonTask.Execute(session, cancellationToken);
@@ -228,7 +228,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             LocationUtils.CalculateDistanceInMeters(
                                 session.Settings.DefaultLatitude, session.Settings.DefaultLongitude,
                                 i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters ||
-                        session.LogicSettings.MaxTravelDistanceInMeters == 0) 
+                        session.LogicSettings.MaxTravelDistanceInMeters == 0)
                 );
 
             return pokeStops.ToList();
