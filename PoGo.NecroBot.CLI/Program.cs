@@ -190,7 +190,7 @@ namespace PoGo.NecroBot.CLI
             }
             catch (IOException) { }
 
-            settings.checkProxy();
+            settings.checkProxy(session.Translation);
 
             QuitEvent.WaitOne();
         }
