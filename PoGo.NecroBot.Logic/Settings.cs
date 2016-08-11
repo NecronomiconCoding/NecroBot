@@ -97,7 +97,7 @@ namespace PoGo.NecroBot.Logic
 
                 if (File.Exists(_filePath))
                 {
-                    //if the file exists, load the settings
+                    // if the file exists, load the settings
                     var input = File.ReadAllText(_filePath);
 
                     var settings = new JsonSerializerSettings();
@@ -297,32 +297,30 @@ namespace PoGo.NecroBot.Logic
         public bool UseWebsocket;
         [DefaultValue(14251)]
         public int WebSocketPort;
-        //pressakeyshit
-        [DefaultValue(false)]
-        public bool StartupWelcomeDelay;
         //Telegram
         [DefaultValue(false)]
         public bool UseTelegramAPI;
         [DefaultValue(null)]
         public string TelegramAPIKey;
-
+        [DefaultValue("12345")]
+        public string TelegramPassword;
         //console options
+        [DefaultValue(false)]
+        public bool StartupWelcomeDelay;
         [DefaultValue(10)]
         public int AmountOfPokemonToDisplayOnStart;
         [DefaultValue(true)]
         public bool DetailedCountsBeforeRecycling;
-
-        [DefaultValue(3)]
-        public int MaxBerriesToUsePerPokemon;
         //pokemon
         [DefaultValue(true)]
         public bool CatchPokemon;
+        [DefaultValue(3)]
+        public int MaxBerriesToUsePerPokemon;
         //powerup
         [DefaultValue(false)]
         public bool AutomaticallyLevelUpPokemon;
         [DefaultValue(true)]
         public bool OnlyUpgradeFavorites;
-
         [DefaultValue((true))]
         public bool UseLevelUpList;
         [DefaultValue(5)]
@@ -400,12 +398,12 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(5)]
         public int RandomRecycleValue;
         [DefaultValue(false)]
-        public bool DelayBetweenRecycleActions;
+        public bool DelayBetweenRecycleActions; // Jurann TODO: change this to int millis instead of bool
         //lucky, incense and berries
         [DefaultValue(true)]
         public bool UseEggIncubators;
         [DefaultValue(2)]
-        public int minEggKmForLimitedIncubators;
+        public int UseEggIncubatorMinKm;
         [DefaultValue(false)]
         public bool UseLuckyEggConstantly;
         [DefaultValue(30)]
@@ -528,6 +526,7 @@ namespace PoGo.NecroBot.Logic
         public bool UsePokemonToNotCatchFilter;
         [DefaultValue(false)]
         public bool UsePokemonSniperFilterOnly;
+
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
@@ -853,7 +852,7 @@ namespace PoGo.NecroBot.Logic
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
                     {
-                        filter.Value.Moves = new List<PokemonMove>();
+                        filter.Value.Moves = new List<List<PokemonMove>>();
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.MovesOperator == null))
                     {
@@ -1355,7 +1354,7 @@ namespace PoGo.NecroBot.Logic
         public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
         public bool TransferDuplicatePokemonOnCapture => _settings.TransferDuplicatePokemonOnCapture;
         public bool UseEggIncubators => _settings.UseEggIncubators;
-        public int minEggKmForLimitedIncubators => _settings.minEggKmForLimitedIncubators;
+        public int UseEggIncubatorMinKm => _settings.UseEggIncubatorMinKm;
         public int UseGreatBallAboveCp => _settings.UseGreatBallAboveCp;
         public int UseUltraBallAboveCp => _settings.UseUltraBallAboveCp;
         public int UseMasterBallAboveCp => _settings.UseMasterBallAboveCp;
@@ -1411,7 +1410,7 @@ namespace PoGo.NecroBot.Logic
 
         public bool UseTelegramAPI => _settings.UseTelegramAPI;
         public string TelegramAPIKey => _settings.TelegramAPIKey;
-
+        public string TelegramPassword => _settings.TelegramPassword;
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
         public int MinPokeballsWhileSnipe => _settings.MinPokeballsWhileSnipe;
         public int MaxPokeballsPerPokemon => _settings.MaxPokeballsPerPokemon;

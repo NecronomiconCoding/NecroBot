@@ -21,24 +21,32 @@ namespace PoGo.NecroBot.Logic.Service
     {
         private TelegramBotClient bot;
         private ISession session;
-
+        private bool loggedIn;
+        private DateTime _lastLoginTime;
         public TelegramService(string apiKey, ISession session)
         {
-            this.bot = new TelegramBotClient(apiKey);
-            this.session = session;
+            try
+            {
+                // your code 
+                this.bot = new TelegramBotClient(apiKey);
+                this.session = session;
 
-            var me = bot.GetMeAsync().Result;
+                var me = bot.GetMeAsync().Result;
 
-            bot.OnMessage += OnTelegramMessageReceived;
-            bot.StartReceiving();
+                bot.OnMessage += OnTelegramMessageReceived;
+                bot.StartReceiving();
 
-            this.session.EventDispatcher.Send(new NoticeEvent {Message = "Using TelegramAPI with " + me.Username});
+                this.session.EventDispatcher.Send(new NoticeEvent {Message = "Using TelegramAPI with " + me.Username});
+            }
+            catch (AggregateException e)
+            {
+                // shit dont work
+            }
         }
 
         private async void OnTelegramMessageReceived(object sender, MessageEventArgs messageEventArgs)
         {
             var message = messageEventArgs.Message;
-
             if (message == null || message.Type != MessageType.TextMessage)
                 return;
 
@@ -50,6 +58,36 @@ namespace PoGo.NecroBot.Logic.Service
             }
 
             var messagetext = message.Text.Split(' ');
+
+            if (!loggedIn)
+            {
+                if (messagetext[0].ToLower().Contains("/login"))
+                {
+                    if (messagetext[0].ToLower().Contains(session.LogicSettings.TelegramPassword))
+                    {
+                        loggedIn = true;
+                        _lastLoginTime = DateTime.Now;
+                        answerTextmessage += session.Translation.GetTranslation(TranslationString.LoggedInTelegram);
+                        SendMessage(message.Chat.Id, answerTextmessage);
+                    }
+                    else
+                    {
+                        answerTextmessage += session.Translation.GetTranslation(TranslationString.LoginFailedTelegram);
+                        SendMessage(message.Chat.Id, answerTextmessage);
+                    }
+                    return;
+                }
+                answerTextmessage += session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
+                SendMessage(message.Chat.Id, answerTextmessage);
+                return;
+            }
+            if (loggedIn && _lastLoginTime.AddMinutes(5).Ticks > DateTime.Now.Ticks)
+            {
+                loggedIn = false;
+                answerTextmessage += session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
+                SendMessage(message.Chat.Id, answerTextmessage);
+                return;
+            }
 
             switch (messagetext[0].ToLower())
             {
