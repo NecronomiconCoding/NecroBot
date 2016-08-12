@@ -434,15 +434,15 @@
     },
     {
       "Key": "googleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "Servidores do Google estão offline provavelmente, por favor seja paciente e iniciar o bot mais tarde."
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Você precisa informar o GoogleUsername e GooglePassword no arquivo auth.json! Nota : Após o Update 0.7.5 é nessesario colocar as informações em auth.json e authgoogle.json dependendo de como veio o bot, verifique se o seu bot possui os dois arquivos e em caso contrário preencha-os!"
+      "Value": "Você precisa informar o GoogleUsername e GooglePassword no arquivo auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Você precisa informar o PtcUsername e PtcPassword no arquivo auth.json! Nota : Após o Update 0.7.5 é nessesario colocar as informações em auth.json e authptc.json dependendo de como veio o bot, verifique se o seu bot possui os dois arquivos e em caso contrário preencha-os!"
+      "Value": "Você precisa informar o PtcUsername e PtcPassword no arquivo auth.json!"
     },
     {
       "Key": "snipeScan",
@@ -602,11 +602,11 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Value": "Por favor digite uma Latitude e Longitude (Botão direito do mouse para colar) - Formato: Valor, Valor"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Value": "Latitude e Longitude aceitos: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
@@ -630,15 +630,15 @@
     },
     {
       "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+      "Value": "Seu IP: {0} | IP do Proxy: {1}"
     },
     {
       "Key": "FixProxySettings",
-      "Value": "Press any key to exit so you can fix your proxy settings..."
+      "Value": "Pressione qualquer tecla para sair, e corrigir suas configurações de proxy..."
     },
     {
       "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
+      "Value": "Seu IP: {0}"
     },
     {
       "Key": "HighestsPokemoHeader",
@@ -646,7 +646,7 @@
     },
     {
       "Key": "HighestsPokemoCell",
-      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {5}\t {6}: {7}\t {8}: {9} {10}: {11} {12}: {13}"
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
     }
   ],
 	"PokemonStrings": [

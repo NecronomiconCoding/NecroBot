@@ -18,28 +18,32 @@ namespace PoGo.NecroBot.Logic
             _stats = stats;
         }
 
+        public void HandleEvent(string evt, ISession session) { }
+        
+        private void HandleEvent(UseLuckyEggEvent event1, ISession session) { }
+        
+        public void HandleEvent(UpdateEvent evt, ISession session) { }
+
+        public void HandleEvent(UpdatePositionEvent evt, ISession session) { }
+
+        public void HandleEvent(EggIncubatorStatusEvent evt, ISession session) { }
+        
         public void HandleEvent(ProfileEvent evt, ISession session)
         {
             _stats.SetUsername(evt.Profile);
             _stats.Dirty(session.Inventory);
         }
+        
+        public void HandleEvent(SnipeModeEvent evt, ISession session) { }
 
-        public void HandleEvent(ErrorEvent evt, ISession session)
-        {
-        }
+        public void HandleEvent(ErrorEvent evt, ISession session) { }
 
-        public void HandleEvent(NoticeEvent evt, ISession session)
-        {
-        }
+        public void HandleEvent(SnipeScanEvent evt, ISession session) { }
 
-        public void HandleEvent(WarnEvent evt, ISession session)
-        {
-        }
+        public void HandleEvent(NoticeEvent evt, ISession session) { }
 
-        public void HandleEvent(UseLuckyEggEvent evt, ISession session)
-        {
-        }
-
+        public void HandleEvent(WarnEvent evt, ISession session) { }
+        
         public void HandleEvent(PokemonEvolveEvent evt, ISession session)
         {
             _stats.TotalExperience += evt.Exp;
@@ -64,9 +68,7 @@ namespace PoGo.NecroBot.Logic
             _stats.Dirty(session.Inventory);
         }
 
-        public void HandleEvent(FortTargetEvent evt, ISession session)
-        {
-        }
+        public void HandleEvent(FortTargetEvent evt, ISession session) { }
 
         public void HandleEvent(PokemonCaptureEvent evt, ISession session)
         {
@@ -79,30 +81,33 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
-        public void HandleEvent(NoPokeballEvent evt, ISession session)
-        {
-        }
+        public void HandleEvent(NoPokeballEvent evt, ISession session) { }
+        
+        public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession session) { }
 
-        public void HandleEvent(UseBerryEvent evt, ISession session)
-        {
-        }
-
-        public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession session)
-        {
-        }
+        public void HandleEvent(UseBerryEvent evt, ISession session) { }
 
         public void Listen(IEvent evt, ISession session)
         {
             dynamic eve = evt;
 
             try
-            {
-                HandleEvent(eve, session);
-            }
-            catch
-            {
-                // ignored
-            }
+            { HandleEvent(eve, session); }
+            catch { }
         }
+        
+        private void HandleEvent(PokeStopListEvent event1, ISession session) { }
+        
+        private void HandleEvent(EggHatchedEvent event1, ISession session) { }
+
+        private void HandleEvent(EggsListEvent event1, ISession session) { }
+
+        private void HandleEvent(EvolveCountEvent event1, ISession session) { }
+
+        private void HandleEvent(FortFailedEvent event1, ISession session) { }
+
+        private void HandleEvent(PokemonListEvent event1, ISession session) { }
+
+        private void HandleEvent(SnipeEvent event1, ISession session) { }
     }
 }
