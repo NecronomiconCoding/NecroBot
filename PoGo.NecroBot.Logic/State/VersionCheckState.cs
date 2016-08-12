@@ -29,7 +29,7 @@ namespace PoGo.NecroBot.Logic.State
             "https://api.github.com/repos/NoxxDev/NecroBot/releases/latest";
 
         private const string LatestRelease =
-            "https://github.com/NECROBOTIO/NecroBot/releases";
+            "https://github.com/NoxxDev/NecroBot/releases";
 
         public static Version RemoteVersion;
 
