@@ -1536,6 +1536,24 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.AmountOfPokemonToDisplayOnStart = set.AmountOfPokemonToDisplayOnStart;
             res.DetailedCountsBeforeRecycling = set.DetailedCountsBeforeRecycling;
             res.DumpPokemonStats = set.DumpPokemonStats;
+            res.ErrorColor = set.ErrorColor;
+            res.WarningColor = set.WarningColor;
+            res.PokestopColor = set.PokestopColor;
+            res.FarmingColor = set.FarmingColor;
+            res.SniperColor = set.SniperColor;
+            res.RecyclingColor = set.RecyclingColor;
+            res.BerryColor = set.BerryColor;
+            res.CaughtColor = set.CaughtColor;
+            res.FleeColor = set.FleeColor;
+            res.TransferColor = set.TransferColor;
+            res.EvolveColor = set.EvolveColor;
+            res.EggColor = set.EggColor;
+            res.UpdateColor = set.UpdateColor;
+            res.InfoColor = set.InfoColor;
+            res.NewColor = set.NewColor;
+            res.SoftBanColor = set.SoftBanColor;
+            res.LevelUpColor = set.LevelUpColor;
+            res.DebugColor = set.DebugColor;
             // OBJECTS & ITERATORS
             res.PokemonToSnipe = set.PokemonToSnipe;
             foreach (PokemonId pid in Enum.GetValues(typeof(PokemonId)))
@@ -1696,6 +1714,24 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.AmountOfPokemonToDisplayOnStart = AmountOfPokemonToDisplayOnStart;
             gs.DetailedCountsBeforeRecycling = DetailedCountsBeforeRecycling;
             gs.DumpPokemonStats = DumpPokemonStats;
+            gs.ErrorColor = ErrorColor;
+            gs.WarningColor = WarningColor;
+            gs.PokestopColor = PokestopColor;
+            gs.FarmingColor = FarmingColor;
+            gs.SniperColor = SniperColor;
+            gs.RecyclingColor = RecyclingColor;
+            gs.BerryColor = BerryColor;
+            gs.CaughtColor = CaughtColor;
+            gs.FleeColor = FleeColor;
+            gs.TransferColor = TransferColor;
+            gs.EvolveColor = EvolveColor;
+            gs.EggColor = EggColor;
+            gs.UpdateColor = UpdateColor;
+            gs.InfoColor = InfoColor;
+            gs.NewColor = NewColor;
+            gs.SoftBanColor = SoftBanColor;
+            gs.LevelUpColor = LevelUpColor;
+            gs.DebugColor = DebugColor;
             // OBJECTS & ITERATORS
             gs.PokemonToSnipe = PokemonToSnipe;
             gs.PokemonsNotToTransfer.Clear();
