@@ -17,6 +17,32 @@ namespace PoGo.NecroBot.Logic
         {
             _stats = stats;
         }
+        public void HandleEvent(string evt, ISession session)
+        {
+            // _stats = stats;
+        }
+
+
+
+
+        private void HandleEvent(UseLuckyEggEvent event1, ISession session) { }
+
+
+
+
+        public void HandleEvent(UpdateEvent evt, ISession session)
+        {
+
+        }
+        public void HandleEvent(UpdatePositionEvent evt, ISession session)
+        {
+            // _stats = stats;
+        }
+        public void HandleEvent(EggIncubatorStatusEvent evt, ISession session)
+        {
+            // _stats = stats;
+        }
+
 
         public void HandleEvent(ProfileEvent evt, ISession session)
         {
@@ -24,7 +50,17 @@ namespace PoGo.NecroBot.Logic
             _stats.Dirty(session.Inventory);
         }
 
+
+
+
+        public void HandleEvent(SnipeModeEvent evt, ISession session)
+        {
+        }
         public void HandleEvent(ErrorEvent evt, ISession session)
+        {
+        }
+
+        public void HandleEvent(SnipeScanEvent evt, ISession session)
         {
         }
 
@@ -36,9 +72,7 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
-        public void HandleEvent(UseLuckyEggEvent evt, ISession session)
-        {
-        }
+
 
         public void HandleEvent(PokemonEvolveEvent evt, ISession session)
         {
@@ -66,7 +100,7 @@ namespace PoGo.NecroBot.Logic
 
         public void HandleEvent(FortTargetEvent evt, ISession session)
         {
-        }
+        } 
 
         public void HandleEvent(PokemonCaptureEvent evt, ISession session)
         {
@@ -83,11 +117,12 @@ namespace PoGo.NecroBot.Logic
         {
         }
 
-        public void HandleEvent(UseBerryEvent evt, ISession session)
-        {
-        }
+
 
         public void HandleEvent(DisplayHighestsPokemonEvent evt, ISession session)
+        {
+        }
+        public void HandleEvent(UseBerryEvent evt, ISession session)
         {
         }
 
@@ -104,5 +139,19 @@ namespace PoGo.NecroBot.Logic
                 // ignored
             }
         }
+
+
+        private void HandleEvent(PokeStopListEvent event1, ISession session) { }
+
+
+        private void HandleEvent(EggHatchedEvent event1, ISession session) { }
+
+        private void HandleEvent(EggsListEvent event1, ISession session) { }
+        private void HandleEvent(EvolveCountEvent event1, ISession session) { }
+        private void HandleEvent(FortFailedEvent event1, ISession session) { }
+
+        private void HandleEvent(PokemonListEvent event1, ISession session) { }
+        private void HandleEvent(SnipeEvent event1, ISession session) { }
+
     }
 }
