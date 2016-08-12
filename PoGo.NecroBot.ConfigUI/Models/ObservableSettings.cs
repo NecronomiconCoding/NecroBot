@@ -1399,11 +1399,11 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.PokemonToSnipe = set.PokemonToSnipe;
             foreach (PokemonId pid in Enum.GetValues(typeof(PokemonId)))
             {
-                res.NoTransferCollection.Add(new PokemonToggle(pid, set.PokemonsNotToTransfer.Contains(pid)));
-                res.EvolveCollection.Add(new PokemonToggle(pid, set.PokemonsToEvolve.Contains(pid)));
-                res.UpgradeCollection.Add(new PokemonToggle(pid, set.PokemonsToLevelUp.Contains(pid)));
-                res.IgnoreCollection.Add(new PokemonToggle(pid, set.PokemonsToIgnore.Contains(pid)));
-                res.MasterballCollection.Add(new PokemonToggle(pid, set.PokemonToUseMasterball.Contains(pid)));
+                res.NoTransferCollection.Add(new PokemonToggle(pid, (null != set.PokemonsNotToTransfer  && set.PokemonsNotToTransfer.Contains(pid)) ));
+                res.EvolveCollection.Add(    new PokemonToggle(pid, (null != set.PokemonsToEvolve       && set.PokemonsToEvolve.Contains(pid)) ));
+                res.UpgradeCollection.Add(   new PokemonToggle(pid, (null != set.PokemonsToLevelUp      && set.PokemonsToLevelUp.Contains(pid)) ));
+                res.IgnoreCollection.Add(    new PokemonToggle(pid, (null != set.PokemonsToIgnore       && set.PokemonsToIgnore.Contains(pid)) ));
+                res.MasterballCollection.Add(new PokemonToggle(pid, (null != set.PokemonToUseMasterball && set.PokemonToUseMasterball.Contains(pid)) ));
             }
             foreach (PokemonId key in set.PokemonsTransferFilter.Keys)
                 res.PokemonsTransferFilter.Add(key, set.PokemonsTransferFilter[key]);
