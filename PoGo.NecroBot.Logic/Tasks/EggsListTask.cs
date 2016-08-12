@@ -42,7 +42,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     UnusedEggs = unusedEggs
                 });
 
-            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+            await DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
         }
     }
 }

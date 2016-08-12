@@ -21,7 +21,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Items = inventory.ToList()
                 });
 
-            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+            await DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
         }
     }
 }

@@ -150,7 +150,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             if (!session.LogicSettings.FastSoftBanBypass)
                             {
-                                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+                                await DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
                             }
                         }
                     }
@@ -195,7 +195,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         RandomNumber = rc.Next(4, 11);
                         RandomStop = 0;
                         int RandomWaitTime = rc.Next(30, 120);
-                        Thread.Sleep(RandomWaitTime);
+                        await Task.Delay(RandomWaitTime, cancellationToken);
                     }
                 }
               
