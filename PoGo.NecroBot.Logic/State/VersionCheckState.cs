@@ -26,7 +26,7 @@ namespace PoGo.NecroBot.Logic.State
             "https://rawgit.com/NoxxDev/NecroBot/master/PoGo.NecroBot.Logic/Properties/AssemblyInfo.cs";
 
         public const string LatestReleaseApi =
-            "https://api.github.com/repos/NECROBOTIO/NecroBot/releases/latest";
+            "https://api.github.com/repos/NoxxDev/NecroBot/releases/latest";
 
         private const string LatestRelease =
             "https://github.com/NECROBOTIO/NecroBot/releases";
