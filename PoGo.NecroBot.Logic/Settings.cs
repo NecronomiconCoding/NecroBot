@@ -823,7 +823,9 @@ namespace PoGo.NecroBot.Logic
                         try
                         {
                             input = File.ReadAllText(configFile);
-                            input = input.Replace("\"Moves\"", $"\"DeprecatedMoves\"");
+                            if (!input.Contains("DeprecatedMoves"))
+                                input = input.Replace("\"Moves\"", $"\"DeprecatedMoves\"");
+
                             break;
                         }
                         catch (Exception exception)
