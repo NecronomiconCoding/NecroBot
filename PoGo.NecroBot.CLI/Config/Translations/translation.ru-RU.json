@@ -138,7 +138,7 @@
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "Неизвестный"
+      "Value": "неизвестным"
     },
     {
       "Key": "displayHighestsCpHeader",
@@ -162,7 +162,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Статус инкубатора: {0:0.00}/{1:0.00}км"
+      "Value": "Статус инкубатора: {0:0.00}км осталось"
     },
     {
       "Key": "incubatorEggHatched",
@@ -315,7 +315,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Ищем покемона привлеченного Люр Модулем..."
+      "Value": "Ищем покемона привлечённого Люр Модулем..."
     },
     {
       "Key": "pokemonSkipped",
@@ -347,7 +347,7 @@
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "Recycling Quietly..."
+      "Value": "Тихо удаляем..."
     },
     {
       "Key": "invFullTransferring",
@@ -482,7 +482,7 @@
     },
     {
       "Key": "snipeScanEx",
-      "Value": "Sniping a {0} with {1} IV at {2}..."
+      "Value": "Снайпим {0} с {1} IV в {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
@@ -506,7 +506,7 @@
     },
     {
       "Key": "ipBannedError",
-      "Value": "Соединение разорвано. Ваш IP может быть в черном списке Niantic. Выход.."
+      "Value": "Соединение разорвано. Ваш IP может быть в чёрном списке Niantic. Выход.."
     },
     {
       "Key": "noEggsAvailable",
@@ -578,15 +578,15 @@
     },
     {
       "Key": "firstStartAutoGenSettings",
-      "Value": "Конфигурационный файл генерируется автоматически и должен быть завершен, прежде чем продолжить"
+      "Value": "Конфигурационный файл генерируется автоматически и должен быть завершён, прежде чем продолжить"
     },
     {
       "Key": "firstStartSetupAccount",
-      "Value": "### Настройка новой УЧЕТНОЙ ЗАПИСИ ###"
+      "Value": "### Настройка новой УЧЁТНОЙ ЗАПИСИ ###"
     },
     {
       "Key": "firstStartSetupTypePrompt",
-      "Value": "Пожалуйста, выберите тип учетной записи: {0}/{1}"
+      "Value": "Пожалуйста, выберите тип учётной записи: {0}/{1}"
     },
     {
       "Key": "firstStartSetupTypeConfirm",
@@ -614,7 +614,7 @@
     },
     {
       "Key": "firstStartAccountCompleted",
-      "Value": "### Учетная запись создана ###"
+      "Value": "### Учётная запись создана ###"
     },
     {
       "Key": "firstStartDefaultLocationPrompt",
@@ -633,40 +633,52 @@
       "Value": "[ОШИБКА] пожалуйста, введите значение, например: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Пожалуйста, введите широту (Щелкните правой кнопкой мыши, чтобы вставить)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Пожалуйста, введите Широту и Долготу (щёлкните правой кнопкой мыши, чтобы вставить) - Формат: Значение, Значение"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Принята широта: {0}"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Пожалуйста, введите долготу (Щелкните правой кнопкой мыши, чтобы вставить)"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Принята долгота: {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Широта и Долгота приняты: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
-      "Value": "### ЗАВВЕРШЕНА УСТАНОВКА CONFIG'a ###"
+      "Value": "### ЗАВЕРШЕНА УСТАНОВКА CONFIG'a ###"
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value":  "--- Поймано в покедэксе --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value": "#{0} Имя: {1} | Поймали: {2} | Встретили: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value":  "--- Нужно в покедэкс --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value":  "#{0} Имя: {1} \n"
+    },
+    {
+      "Key": "Proxied",
+      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "Press any key to exit so you can fix your proxy settings..."
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " Your IP is: {0}"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {5}\t {6}: {7}\t {8}: {9} {10}: {11} {12}: {13}"
     }
   ],
 	"PokemonStrings": [

@@ -20,7 +20,7 @@
       "Key": "wrongAuthType",
       "Value": "Jenis AuthType pada config.json tidak dikenal"
     },
-	{
+    {
       "Key": "loginInvalid",
       "Value": "Username atau kata sandi salah, login gagal!"
     },
@@ -48,7 +48,7 @@
       "Key": "eventProfileLogin",
       "Value": "Bermain sebagai {0}"
     },
-	{
+    {
       "Key": "eventUsedIncense",
       "Value": "Menggunakan Incense, tersisa: {0}"
     },
@@ -158,7 +158,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Status terbaru inkubator: {0:0.00}/{1:0.00} KM"
+      "Value": "Status terbaru inkubator: {0:0.00} KM tersisa"
     },
     {
       "Key": "incubatorEggHatched",
@@ -338,7 +338,7 @@
     },
     {
       "Key": "recyclingQuietly",
-	  "Value": "Mendaur ulang secara senyap..."
+      "Value": "Mendaur ulang secara senyap..."
     },
     {
       "Key": "invFullTransferring",
@@ -540,157 +540,157 @@
       "Key": "pkmNotEnoughRessources",
       "Value": "Peningkatan level Pokemon gagal karena tidak cukup bahan"
     },
-	{
+    {
       "Key": "snipeServerOffline",
       "Value": "Server bidikan offline. Melewati..."
     },
-	{
+    {
       "Key": "firstStartPrompt",
       "Value": "Ini adalah pertama kalinya kamu menjalankan aplikasi, apakah kamu ingin memulai pengaturan? {0}/{1}"
     },
-	{
+    {
       "Key": "firstStartLanguagePrompt",
       "Value": "Apakah kamu ingin mengganti bahasa bawaan? {0}/{1}"
     },
-	{
+    {
       "Key": "firstStartLanguageCodePrompt",
       "Value": "Mohon masukkan kode bahasa baru"
     },
-	{
+    {
       "Key": "firstStartLanguageConfirm",
       "Value": "Kode bahasa yang diterapkan: {0}"
     },
-	{
+    {
       "Key": "PromptError",
       "Value": "[MASUKAN ERROR] Terdapat error pada masukan, mohon masukkan '{0}' atau '{1}'"
     },
-	{
+    {
       "Key": "firstStartAutoGenSettings",
       "Value": "Berkas \"config.json\" dan \"auth.json\" secara otomatis dibuat dan harus dilengkapi sebelum melanjutkan INFO: ubah berkas tersebut dalam folder CONFIG"
     },
-	{
+    {
       "Key": "firstStartSetupAccount",
       "Value": "### Mengatur AKUN PENGGUNA baru ###"
     },
-	{
+    {
       "Key": "firstStartSetupTypePrompt",
       "Value": "Mohon pilih tipe akun: {0}/{1}"
     },
-	{
+    {
       "Key": "firstStartSetupTypeConfirm",
       "Value": "Tipe akun yang dipilih: {0}"
     },
-	{
+    {
       "Key": "firstStartSetupTypePromptError",
       "Value": "[ERROR] jenis akun yang salah dimasukkan, mohon pilih '{0}' atau '{1}'"
     },
-	{
+    {
       "Key": "firstStartSetupUsernamePrompt",
       "Value": "Mohon masukkan nama pengguna atau email"
     },
-	{
+    {
       "Key": "firstStartSetupUsernameConfirm",
       "Value": "Nama pengguna yang diterima: {0}"
     },
-	{
+    {
       "Key": "firstStartSetupPasswordPrompt",
       "Value": "Mohon masukkan password"
     },
-	{
+    {
       "Key": "firstStartSetupPasswordConfirm",
       "Value": "Password yang diterima: {0}"
     },
-	{
+    {
       "Key": "firstStartAccountCompleted",
       "Value": "### Akun Pengguna Selesai ###"
     },
-	{
+    {
       "Key": "firstStartDefaultLocationPrompt",
       "Value": "Apakah kamu ingin mengatur lokasi bawaan yang baru? {0}/{1}"
     },
-	{
+    {
       "Key": "firstStartDefaultLocationSet",
       "Value": "Lokasi bawaan diterapkan"
     },
-	{
+    {
       "Key": "firstStartDefaultLocation",
       "Value": "### Mengatur Lokasi Bawaan ###"
     },
-	{
+    {
       "Key": "firstStartSetupDefaultLocationError",
       "Value": "[ERROR] Tolong hanya masukkan ANGKA, contohnya: {0}"
     },
-	{
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Mohon masukkan lintang (klik kanan untuk menempelkan)"
+    {
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
-	{
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Lintang yang diterima: {0}"
+    {
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
-	{
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Mohon masukkan bujur (klik kanan untuk menempelkan)"
-    },
-	{
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Bujur yang diterima: {0}"
-    },
-	{
+    {
       "Key": "softBanBypassed",
       "Value": "Berhasil dilewati!"
     },
-	{
+    {
       "Key": "firstStartSetupCompleted",
       "Value": "### PENGATURAN KONFIGURASI SELESAI ###"
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Tertangkap di Pokedex  --- \n"
+      "Value": "--- Tertangkap di Pokedex  --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Nama: {1} | Tertangkap: {2} | Ditemukan: {3} \n"
+      "Value": "#{0} Nama: {1} | Tertangkap: {2} | Ditemukan: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Dibutuhkan di Pokedex --- \n"
+      "Value": "--- Dibutuhkan di Pokedex --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Nama: {1} \n"
+      "Value": "#{0} Nama: {1} \n"
     },
     {
       "Key": "loggedInTelegram",
-      "Value":  "Kamu berhasil login. Sesi ini hanya valid untuk 5 menit saja."
+      "Value": "Kamu berhasil login. Sesi ini hanya valid untuk 5 menit saja."
     },
     {
       "Key": "loginFailedTelegram",
-      "Value":  "Password atau perintah salah! Gunakan /login <PASSWORD>"
+      "Value": "Password atau perintah salah! Gunakan /login <PASSWORD>"
     },
     {
       "Key": "notLoggedInTelegram",
-      "Value":  "Kamu belum login, gunakan /login <PASSWORD>"
+      "Value": "Kamu belum login, gunakan /login <PASSWORD>"
     },
     {
       "Key": "proxied",
-      "Value":  "Alamat IP-mu: {0} | Alamat IP Proxy: {1}"
+      "Value": "Alamat IP-mu: {0} | Alamat IP Proxy: {1}"
     },
     {
       "Key": "unproxied",
-      "Value":  "Alamat IP-mu: {0}"
+      "Value": "Alamat IP-mu: {0}"
     },
     {
       "Key": "fixProxySettings",
-      "Value":  "Tekan sembarang tombol untuk menutup aplikasi, jadi kamu bisa memperbaiki pengaturan proxy-mu."
+      "Value": "Tekan sembarang tombol untuk menutup aplikasi, jadi kamu bisa memperbaiki pengaturan proxy-mu."
     },
     {
       "Key": "usageHelp",
-      "Value":  "Argumen perintah salah! \n Penggunaan yang benar: \n {0}"
+      "Value": "Argumen perintah salah! \n Penggunaan yang benar: \n {0}"
     },
     {
       "Key": "loginRemainingTime",
-      "Value":  "Kamu sudah login! \n Sesi ini valid untuk: ({0}:{1} detik)"
+      "Value": "Kamu sudah login! \n Sesi ini valid untuk: ({0}:{1} detik)"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {5}\t {6}: {7}\t {8}: {9} {10}: {11} {12}: {13}"
     }
   ],
 	"PokemonStrings": [
