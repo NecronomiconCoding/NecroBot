@@ -530,6 +530,11 @@ namespace PoGo.NecroBot.Logic
         [DefaultValue(false)]
         public bool UsePokemonSniperFilterOnly;
 
+        [DefaultValue(false)]
+        public bool UseOsmNavigation;
+        [DefaultValue(100d)]
+        public double OsmMinDistanceInMeter;
+
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
@@ -549,7 +554,7 @@ namespace PoGo.NecroBot.Logic
             new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
         };
 
-        
+
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
@@ -897,7 +902,7 @@ namespace PoGo.NecroBot.Logic
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
             }
-            
+
             return shouldExit ? null : settings;
         }
 
@@ -1454,5 +1459,7 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
         public int TotalAmountOfBerriesToKeep => _settings.TotalAmountOfBerriesToKeep;
+        public bool UseOsmNavigation => _settings.UseOsmNavigation;
+        public double OsmMinDistanceInMeter => _settings.OsmMinDistanceInMeter;
     }
 }

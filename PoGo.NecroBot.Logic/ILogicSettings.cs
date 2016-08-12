@@ -202,5 +202,8 @@ namespace PoGo.NecroBot.Logic
         SnipeSettings PokemonToSnipe { get; }
 
         bool StartupWelcomeDelay { get; }
+
+        bool UseOsmNavigation { get; }
+        double OsmMinDistanceInMeter { get; }
     }
 }
