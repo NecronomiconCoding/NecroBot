@@ -1147,7 +1147,151 @@ namespace PoGo.NecroBot.ConfigUI.Models
         }
         public static readonly DependencyProperty DumpPokemonStatsProperty =
             DependencyProperty.Register("DumpPokemonStats", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
-
+        
+        public string ErrorColor
+        {
+            get { return (string)GetValue(ErrorColorProperty); }
+            set { SetValue(ErrorColorProperty, value); }
+        }
+        public static readonly DependencyProperty ErrorColorProperty =
+            DependencyProperty.Register("ErrorColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+       
+        public string WarningColor
+        {
+            get { return (string)GetValue(WarningColorProperty); }
+            set { SetValue(WarningColorProperty, value); }
+        }
+        public static readonly DependencyProperty WarningColorProperty =
+            DependencyProperty.Register("WarningColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string PokestopColor
+        {
+            get { return (string)GetValue(PokestopColorProperty); }
+            set { SetValue(PokestopColorProperty, value); }
+        }
+        public static readonly DependencyProperty PokestopColorProperty =
+            DependencyProperty.Register("PokestopColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string FarmingColor
+        {
+            get { return (string)GetValue(FarmingColorProperty); }
+            set { SetValue(FarmingColorProperty, value); }
+        }
+        public static readonly DependencyProperty FarmingColorProperty =
+            DependencyProperty.Register("FarmingColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string SniperColor
+        {
+            get { return (string)GetValue(SniperColorProperty); }
+            set { SetValue(SniperColorProperty, value); }
+        }
+        public static readonly DependencyProperty SniperColorProperty =
+            DependencyProperty.Register("SniperColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string RecyclingColor
+        {
+            get { return (string)GetValue(RecyclingColorProperty); }
+            set { SetValue(RecyclingColorProperty, value); }
+        }
+        public static readonly DependencyProperty RecyclingColorProperty =
+            DependencyProperty.Register("RecyclingColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string BerryColor
+        {
+            get { return (string)GetValue(BerryColorProperty); }
+            set { SetValue(BerryColorProperty, value); }
+        }
+        public static readonly DependencyProperty BerryColorProperty =
+            DependencyProperty.Register("BerryColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string CaughtColor
+        {
+            get { return (string)GetValue(CaughtColorProperty); }
+            set { SetValue(CaughtColorProperty, value); }
+        }
+        public static readonly DependencyProperty CaughtColorProperty =
+            DependencyProperty.Register("CaughtColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string FleeColor
+        {
+            get { return (string)GetValue(FleeColorProperty); }
+            set { SetValue(FleeColorProperty, value); }
+        }
+        public static readonly DependencyProperty FleeColorProperty =
+            DependencyProperty.Register("FleeColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string TransferColor
+        {
+            get { return (string)GetValue(TransferColorProperty); }
+            set { SetValue(TransferColorProperty, value); }
+        }
+        public static readonly DependencyProperty TransferColorProperty =
+            DependencyProperty.Register("TransferColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string EvolveColor
+        {
+            get { return (string)GetValue(EvolveColorProperty); }
+            set { SetValue(EvolveColorProperty, value); }
+        }
+        public static readonly DependencyProperty EvolveColorProperty =
+            DependencyProperty.Register("EvolveColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string EggColor
+        {
+            get { return (string)GetValue(EggColorProperty); }
+            set { SetValue(EggColorProperty, value); }
+        }
+        public static readonly DependencyProperty EggColorProperty =
+            DependencyProperty.Register("EggColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string UpdateColor
+        {
+            get { return (string)GetValue(UpdateColorProperty); }
+            set { SetValue(UpdateColorProperty, value); }
+        }
+        public static readonly DependencyProperty UpdateColorProperty =
+            DependencyProperty.Register("UpdateColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string InfoColor
+        {
+            get { return (string)GetValue(InfoColorProperty); }
+            set { SetValue(InfoColorProperty, value); }
+        }
+        public static readonly DependencyProperty InfoColorProperty =
+            DependencyProperty.Register("InfoColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string NewColor
+        {
+            get { return (string)GetValue(NewColorProperty); }
+            set { SetValue(NewColorProperty, value); }
+        }
+        public static readonly DependencyProperty NewColorProperty =
+            DependencyProperty.Register("NewColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string SoftBanColor
+        {
+            get { return (string)GetValue(SoftBanColorProperty); }
+            set { SetValue(SoftBanColorProperty, value); }
+        }
+        public static readonly DependencyProperty SoftBanColorProperty =
+            DependencyProperty.Register("SoftBanColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string LevelUpColor
+        {
+            get { return (string)GetValue(LevelUpColorProperty); }
+            set { SetValue(LevelUpColorProperty, value); }
+        }
+        public static readonly DependencyProperty LevelUpColorProperty =
+            DependencyProperty.Register("LevelUpColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string DebugColor
+        {
+            get { return (string)GetValue(DebugColorProperty); }
+            set { SetValue(DebugColorProperty, value); }
+        }
+        public static readonly DependencyProperty DebugColorProperty =
+            DependencyProperty.Register("DebugColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
         #endregion MISC Properties
 
 
@@ -1395,6 +1539,24 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.AmountOfPokemonToDisplayOnStart = set.AmountOfPokemonToDisplayOnStart;
             res.DetailedCountsBeforeRecycling = set.DetailedCountsBeforeRecycling;
             res.DumpPokemonStats = set.DumpPokemonStats;
+            res.ErrorColor = set.ErrorColor;
+            res.WarningColor = set.WarningColor;
+            res.PokestopColor = set.PokestopColor;
+            res.FarmingColor = set.FarmingColor;
+            res.SniperColor = set.SniperColor;
+            res.RecyclingColor = set.RecyclingColor;
+            res.BerryColor = set.BerryColor;
+            res.CaughtColor = set.CaughtColor;
+            res.FleeColor = set.FleeColor;
+            res.TransferColor = set.TransferColor;
+            res.EvolveColor = set.EvolveColor;
+            res.EggColor = set.EggColor;
+            res.UpdateColor = set.UpdateColor;
+            res.InfoColor = set.InfoColor;
+            res.NewColor = set.NewColor;
+            res.SoftBanColor = set.SoftBanColor;
+            res.LevelUpColor = set.LevelUpColor;
+            res.DebugColor = set.DebugColor;
             // OBJECTS & ITERATORS
             res.PokemonToSnipe = set.PokemonToSnipe;
             foreach (PokemonId pid in Enum.GetValues(typeof(PokemonId)))
@@ -1555,6 +1717,24 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.AmountOfPokemonToDisplayOnStart = AmountOfPokemonToDisplayOnStart;
             gs.DetailedCountsBeforeRecycling = DetailedCountsBeforeRecycling;
             gs.DumpPokemonStats = DumpPokemonStats;
+            gs.ErrorColor = ErrorColor;
+            gs.WarningColor = WarningColor;
+            gs.PokestopColor = PokestopColor;
+            gs.FarmingColor = FarmingColor;
+            gs.SniperColor = SniperColor;
+            gs.RecyclingColor = RecyclingColor;
+            gs.BerryColor = BerryColor;
+            gs.CaughtColor = CaughtColor;
+            gs.FleeColor = FleeColor;
+            gs.TransferColor = TransferColor;
+            gs.EvolveColor = EvolveColor;
+            gs.EggColor = EggColor;
+            gs.UpdateColor = UpdateColor;
+            gs.InfoColor = InfoColor;
+            gs.NewColor = NewColor;
+            gs.SoftBanColor = SoftBanColor;
+            gs.LevelUpColor = LevelUpColor;
+            gs.DebugColor = DebugColor;
             // OBJECTS & ITERATORS
             gs.PokemonToSnipe = PokemonToSnipe;
             gs.PokemonsNotToTransfer.Clear();
