@@ -47,7 +47,7 @@ namespace PoGo.NecroBot.Logic
         }
 
         public TransferFilter(int keepMinCp, int keepMinLvl, bool useKeepMinLvl, float keepMinIvPercentage, string keepMinOperator, int keepMinDuplicatePokemon,
-            List<List<PokemonMove>> moves = null, string movesOperator = "or")
+            List<List<PokemonMove>> moves = null, List<PokemonMove> deprecatedMoves = null, string movesOperator = "or")
         {
             KeepMinCp = keepMinCp;
             KeepMinLvl = keepMinLvl;
@@ -55,7 +55,9 @@ namespace PoGo.NecroBot.Logic
             KeepMinIvPercentage = keepMinIvPercentage;
             KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
             KeepMinOperator = keepMinOperator;
-            Moves = moves ?? new List<List<PokemonMove>>();
+            Moves = (moves == null && deprecatedMoves != null)
+                        ? new List<List<PokemonMove>> { deprecatedMoves }
+                        : moves ?? new List<List<PokemonMove>>();
             MovesOperator = movesOperator;
         }
 
