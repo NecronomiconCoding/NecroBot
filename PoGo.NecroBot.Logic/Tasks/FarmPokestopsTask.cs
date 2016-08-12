@@ -21,6 +21,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsTask
     {
+        private static readonly Random RandomDevice = new Random();
         public static int TimesZeroXPawarded;
         private static int storeRI;
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
@@ -35,6 +36,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (session.LogicSettings.MaxTravelDistanceInMeters != 0 &&
                 distanceFromStart > session.LogicSettings.MaxTravelDistanceInMeters)
             {
+                
                 Logger.Write(
                     session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
@@ -83,11 +85,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                     session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-
+                double WalkingSpeed = session.LogicSettings.WalkingSpeedInKilometerPerHour;
+                var randomFactor = 0.5f;
+                var randomMin = (int)(WalkingSpeed * (1 - randomFactor));
+                var randomMax = (int)(WalkingSpeed * (1 + randomFactor));
+                var RandomWalkSpeed = RandomDevice.Next(randomMin, randomMax);
+                cancellationToken.ThrowIfCancellationRequested();
                 session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
 
                     await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude, LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
-                    session.LogicSettings.WalkingSpeedInKilometerPerHour,
+                    RandomWalkSpeed,
                     async () =>
                     {
                         // Catch normal map Pokemon
