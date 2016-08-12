@@ -171,7 +171,7 @@
     },
     {
       "Key": "logEntryEvolved",
-      "Value": "EVOLUÍDO"
+      "Value": "EVOLUÇÃO"
     },
     {
       "Key": "logEntryBerry",
@@ -406,15 +406,15 @@
     },
     {
       "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+      "Value": "O teu IP é: {0} | O IP da Proxy é: {1}"
     },
     {
       "Key": "FixProxySettings",
-      "Value": "Press any key to exit so you can fix your proxy settings..."
+      "Value": "Carrega em qualquer tecla para saires e poderes corrigir as definições de proxy..."
     },
     {
       "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
+      "Value": " O teu IP é: {0}"
     },
     {
       "Key": "HighestsPokemoHeader",
@@ -422,7 +422,7 @@
     },
     {
       "Key": "HighestsPokemoCell",
-      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {5}\t {6}: {7}\t {8}: {9} {10}: {11} {12}: {13}"
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Nível {5}\t {6}: {7}\t {8}: {9} {10}: {11} {12}: {13}"
     }
   ],
 	"PokemonStrings": [
