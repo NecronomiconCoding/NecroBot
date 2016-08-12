@@ -201,7 +201,9 @@ namespace PoGo.NecroBot.Logic.Common
         Proxied,
         FixProxySettings,
         UsageHelp,
-        LoginRemainingTime
+        LoginRemainingTime,
+        HighestsPokemoHeader,
+        HighestsPokemoCell
     }
 
     public class Translation : ITranslation
@@ -473,8 +475,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.Unproxied, "Your IP is: {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.FixProxySettings, "Press any key to exit so you can fix your proxy settings..."),
             new KeyValuePair<TranslationString, string>(TranslationString.UsageHelp, "Invalid command arguments! \n Correct usage: \n {0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.LoginRemainingTime, "You are already logged in! \n Session valid for: ({0}:{1} seconds)")
-
+            new KeyValuePair<TranslationString, string>(TranslationString.LoginRemainingTime, "You are already logged in! \n Session valid for: ({0}:{1} seconds)"),
+            new KeyValuePair<TranslationString, string>(TranslationString.HighestsPokemoHeader, "====== {0} ======"),
+            new KeyValuePair<TranslationString, string>(TranslationString.HighestsPokemoCell, "# CP {0}/{1} | ({2}% {3})\t| Lvl {5}\t {6}: {7}\t {8}: {9} {10}: {11} {12}: {13}")
         };
 
         [JsonProperty("PokemonStrings",
