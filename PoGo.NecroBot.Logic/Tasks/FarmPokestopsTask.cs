@@ -26,7 +26,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static int storeRI;
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-           
+            cancellationToken.ThrowIfCancellationRequested();
 
             var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
                 session.Settings.DefaultLatitude, session.Settings.DefaultLongitude,
