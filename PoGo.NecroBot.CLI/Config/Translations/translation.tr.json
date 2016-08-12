@@ -158,7 +158,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Kuluçka makinesi(Incubator) durum güncellemesi: {0:0.00}km kaldı"
+      "Value": "Kuluçka makinesi(Incubator) durum güncellemesi: {0:0.00}/{1:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",
@@ -629,12 +629,20 @@
       "Value": "[HATA] Lütfen sadece DEĞER girin (Örnek: {0})"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Lütfen bir enlem(latitude) girin. (Sağ tıklayıp yapıştırabilirsiniz.)"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Enlem(lattitude) onaylandı: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Lütfen bir boylam(longitude) girin. (Sağ tıklayıp yapıştırabilirsiniz.)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Boylam(longitude) onaylandı: {0}"
     },
 	{
       "Key": "firstStartSetupCompleted",

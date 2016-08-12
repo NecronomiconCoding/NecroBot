@@ -128,7 +128,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Broedmachine status update: {0:0.00} km resterend"
+      "Value": "Broedmachine status update: {0:0.00}/{1:0.00} km"
     },
     {
       "Key": "PokedexCatchedTelegram",

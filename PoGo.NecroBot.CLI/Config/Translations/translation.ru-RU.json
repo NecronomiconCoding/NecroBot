@@ -138,7 +138,7 @@
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "неизвестным"
+      "Value": "Неизвестный"
     },
     {
       "Key": "displayHighestsCpHeader",
@@ -162,7 +162,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Статус инкубатора: {0:0.00}км осталось"
+      "Value": "Статус инкубатора: {0:0.00}/{1:0.00}км"
     },
     {
       "Key": "incubatorEggHatched",
@@ -315,7 +315,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Ищем покемона привлечённого Люр Модулем..."
+      "Value": "Ищем покемона привлеченного Люр Модулем..."
     },
     {
       "Key": "pokemonSkipped",
@@ -347,7 +347,7 @@
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "Тихо удаляем..."
+      "Value": "Recycling Quietly..."
     },
     {
       "Key": "invFullTransferring",
@@ -482,7 +482,7 @@
     },
     {
       "Key": "snipeScanEx",
-      "Value": "Снайпим {0} с {1} IV в {2}..."
+      "Value": "Sniping a {0} with {1} IV at {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
@@ -506,7 +506,7 @@
     },
     {
       "Key": "ipBannedError",
-      "Value": "Соединение разорвано. Ваш IP может быть в чёрном списке Niantic. Выход.."
+      "Value": "Соединение разорвано. Ваш IP может быть в черном списке Niantic. Выход.."
     },
     {
       "Key": "noEggsAvailable",
@@ -578,15 +578,15 @@
     },
     {
       "Key": "firstStartAutoGenSettings",
-      "Value": "Конфигурационный файл генерируется автоматически и должен быть завершён, прежде чем продолжить"
+      "Value": "Конфигурационный файл генерируется автоматически и должен быть завершен, прежде чем продолжить"
     },
     {
       "Key": "firstStartSetupAccount",
-      "Value": "### Настройка новой УЧЁТНОЙ ЗАПИСИ ###"
+      "Value": "### Настройка новой УЧЕТНОЙ ЗАПИСИ ###"
     },
     {
       "Key": "firstStartSetupTypePrompt",
-      "Value": "Пожалуйста, выберите тип учётной записи: {0}/{1}"
+      "Value": "Пожалуйста, выберите тип учетной записи: {0}/{1}"
     },
     {
       "Key": "firstStartSetupTypeConfirm",
@@ -614,7 +614,7 @@
     },
     {
       "Key": "firstStartAccountCompleted",
-      "Value": "### Учётная запись создана ###"
+      "Value": "### Учетная запись создана ###"
     },
     {
       "Key": "firstStartDefaultLocationPrompt",
@@ -633,32 +633,40 @@
       "Value": "[ОШИБКА] пожалуйста, введите значение, например: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Пожалуйста, введите Широту и Долготу (щёлкните правой кнопкой мыши, чтобы вставить) - Формат: Значение, Значение"
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Пожалуйста, введите широту (Щелкните правой кнопкой мыши, чтобы вставить)"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Широта и Долгота приняты: {0}"
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Принята широта: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Пожалуйста, введите долготу (Щелкните правой кнопкой мыши, чтобы вставить)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Принята долгота: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
-      "Value": "### ЗАВЕРШЕНА УСТАНОВКА CONFIG'a ###"
+      "Value": "### ЗАВВЕРШЕНА УСТАНОВКА CONFIG'a ###"
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Поймано в покедэксе --- \n"  
+      "Value":  "--- Pokedex catched --- \n"  
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value": "#{0} Имя: {1} | Поймали: {2} | Встретили: {3} \n"
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Нужно в покедэкс --- \n"  
+      "Value":  "--- Pokedex needed --- \n"  
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Имя: {1} \n"  
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
 	"PokemonStrings": [

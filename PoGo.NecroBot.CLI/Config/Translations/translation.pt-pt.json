@@ -131,7 +131,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Status da incubadora atualizado: restam {0:0.00}km"
+      "Value": "Status da incubadora atualizado: restam {0:0.00}/{1:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",

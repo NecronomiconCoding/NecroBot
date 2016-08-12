@@ -160,7 +160,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Aggiornamento stato Incubatrice: {0:0.00}km rimanenti"
+      "Value": "Aggiornamento stato Incubatrice: {0:0.00}/{1:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",
@@ -531,19 +531,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catturati --- \n"  
+      "Value":  "--- Pokedex catched --- \n"  
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Nome: {1} | Catturati: {2} | Visti: {3} \n"  
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex da sbloccare --- \n"  
+      "Value":  "--- Pokedex needed --- \n"  
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Nome: {1} \n"  
+      "Value":  "#{0} Name: {1} \n"  
     }
   ],
 	"PokemonStrings": [
