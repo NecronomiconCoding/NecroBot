@@ -6,6 +6,7 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Enums;
 using System.Collections.ObjectModel;
 using System;
+using System.IO;
 
 namespace PoGo.NecroBot.ConfigUI.Models
 {
@@ -1229,11 +1230,29 @@ namespace PoGo.NecroBot.ConfigUI.Models
 
         private void LoadCurrentCoords()
         {
-            // TODO:
+            Latitude = DefaultLatitude;
+            Longitude = DefaultLongitude;
+            string coordFile = Path.Combine(Directory.GetCurrentDirectory(), "Config", "LastPos.ini");
+            if (File.Exists(coordFile))
+            {
+                var latlngFromFile = File.ReadAllText(coordFile);
+                var latlng = latlngFromFile.Split(':');
+                if (latlng[0].Length != 0 && latlng[1].Length != 0)
+                {
+                    try
+                    {
+                        Latitude = Convert.ToDouble(latlng[0]);
+                        Longitude = Convert.ToDouble(latlng[1]);
+                    }
+                    catch (FormatException) { }
+                }
+            }
         }
+
         private void SaveCurrentCoords()
         {
-            // TODO:
+            var coordsPath = Path.Combine(Directory.GetCurrentDirectory(), "Config", "LastPos.ini");
+            File.WriteAllText(coordsPath, $"{Latitude}:{Longitude}");
         }
 
         public static ObservableSettings CreateFromGlobalSettings(GlobalSettings set)
@@ -1380,16 +1399,18 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.PokemonToSnipe = set.PokemonToSnipe;
             foreach (PokemonId pid in Enum.GetValues(typeof(PokemonId)))
             {
-                res.NoTransferCollection.Add(new PokemonToggle(pid, set.PokemonsNotToTransfer.Contains(pid)));
-                res.EvolveCollection.Add(new PokemonToggle(pid, set.PokemonsToEvolve.Contains(pid)));
-                res.UpgradeCollection.Add(new PokemonToggle(pid, set.PokemonsToLevelUp.Contains(pid)));
-                res.IgnoreCollection.Add(new PokemonToggle(pid, set.PokemonsToIgnore.Contains(pid)));
-                res.MasterballCollection.Add(new PokemonToggle(pid, set.PokemonToUseMasterball.Contains(pid)));
+                res.NoTransferCollection.Add(new PokemonToggle(pid, (null != set.PokemonsNotToTransfer  && set.PokemonsNotToTransfer.Contains(pid)) ));
+                res.EvolveCollection.Add(    new PokemonToggle(pid, (null != set.PokemonsToEvolve       && set.PokemonsToEvolve.Contains(pid)) ));
+                res.UpgradeCollection.Add(   new PokemonToggle(pid, (null != set.PokemonsToLevelUp      && set.PokemonsToLevelUp.Contains(pid)) ));
+                res.IgnoreCollection.Add(    new PokemonToggle(pid, (null != set.PokemonsToIgnore       && set.PokemonsToIgnore.Contains(pid)) ));
+                res.MasterballCollection.Add(new PokemonToggle(pid, (null != set.PokemonToUseMasterball && set.PokemonToUseMasterball.Contains(pid)) ));
             }
             foreach (PokemonId key in set.PokemonsTransferFilter.Keys)
                 res.PokemonsTransferFilter.Add(key, set.PokemonsTransferFilter[key]);
             foreach (KeyValuePair<ItemId, int> kvp in set.ItemRecycleFilter)
                 res.ItemRecycleFilter.Add(kvp);
+
+            res.LoadCurrentCoords();
 
             return res;
         }
@@ -1551,6 +1572,8 @@ namespace PoGo.NecroBot.ConfigUI.Models
                 gs.PokemonsTransferFilter.Add(key, PokemonsTransferFilter[key]);
             foreach (KeyValuePair<ItemId, int> kvp in ItemRecycleFilter)
                 gs.ItemRecycleFilter.Add(kvp);
+
+            SaveCurrentCoords();
 
             return gs;
         }

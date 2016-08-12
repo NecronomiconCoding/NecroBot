@@ -18,6 +18,10 @@
 
     <DockPanel>
 
+        <Border DockPanel.Dock="Top" BorderBrush="DarkGray" BorderThickness="1" Margin="2" Padding="2">
+            <TextBlock Foreground="Red" FontWeight="Bold" Text="EXPERIMENTAL BETA - Backup your existing configs before using! You have been warned!" />
+        </Border>
+
         <UniformGrid DockPanel.Dock="Bottom" Rows="1" Columns="3">
             <Button Margin="15" Padding="0,8" Click="DefaultsButton_Click">Defaults</Button>
             <Button Margin="15" Padding="0,8" Click="ReloadButton_Click">Reload</Button>
@@ -92,21 +96,21 @@
                         <StackPanel Visibility="{Binding IsGoogleAuthShowing, Converter={StaticResource VisConv}}">
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Google Username" ToolTip="The Google account username to use for login." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.GoogleUsername}" />
+                                <TextBox Style="{StaticResource LineItemTextBoxLg}" Text="{Binding Settings.GoogleUsername}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Google Password" ToolTip="The Google account password to use for login." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.GooglePassword}" />
+                                <TextBox Style="{StaticResource LineItemTextBoxLg}" Text="{Binding Settings.GooglePassword}" />
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Visibility="{Binding IsGoogleAuthShowing, Converter={StaticResource VisRevConv}}">
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="PTC Username" ToolTip="The Pokemon Trainer's Club account username to use for login." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.PtcUsername}" />
+                                <TextBox Style="{StaticResource LineItemTextBoxLg}" Text="{Binding Settings.PtcUsername}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="PTC Password" ToolTip="The Pokemon Trainer's Club account password to use for login." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.PtcPassword}" />
+                                <TextBox Style="{StaticResource LineItemTextBoxLg}" Text="{Binding Settings.PtcPassword}" />
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">

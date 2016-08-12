@@ -630,20 +630,12 @@
       "Value": "[錯誤] 請輸入一個數字。例如：{0}\t\t"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "請輸入緯度 (右鍵貼上)\t\t"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "確認已設定：{0}\t\t"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "請輸入經度 (右鍵貼上)\t\t"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "經度已設定：{0}\t\t"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "softBanBypassed",

@@ -12,8 +12,9 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            if (!session.LogicSettings.UseLuckyEggConstantly)
-                return;
+            cancellationToken.ThrowIfCancellationRequested();
+
+            await session.Inventory.RefreshCachedInventory();
 
             var currentAmountOfLuckyEggs = await session.Inventory.GetItemAmountByType(ItemId.ItemLuckyEgg);
             if (currentAmountOfLuckyEggs == 0)
