@@ -662,7 +662,7 @@
     },
     {
       "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+      "Value": "Twoje IP: {0} | Proxy IP: {1}"
     },
     {
       "Key": "FixProxySettings",
