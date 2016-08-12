@@ -630,7 +630,7 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Lütfen varsayılan enlem ve boylamı girin. (Sağ tıklayıp yapıştırabilirsiniz) - Format: EnlemDeğeri, BoylamDeğeri"
+      "Value": "Lütfen varsayılan enlem ve boylamı girin. (Sağ tıklayıp yapıştırabilirsiniz.) | Format: EnlemDeğeri, BoylamDeğeri"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
