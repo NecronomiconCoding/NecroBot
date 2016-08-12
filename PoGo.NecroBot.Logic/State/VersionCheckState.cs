@@ -38,26 +38,28 @@ namespace PoGo.NecroBot.Logic.State
             cancellationToken.ThrowIfCancellationRequested();
 
             await CleanupOldFiles();
-            var autoUpdate = session.LogicSettings.AutoUpdate;
-            var isLatest = IsLatest();
-            if ( isLatest || !autoUpdate )
+
+            if( !session.LogicSettings.CheckForUpdates )
             {
-                if ( isLatest )
+                session.EventDispatcher.Send( new UpdateEvent
                 {
-                    session.EventDispatcher.Send(new UpdateEvent
-                    {
-                        Message =
-                            session.Translation.GetTranslation(TranslationString.GotUpToDateVersion, Assembly.GetExecutingAssembly().GetName().Version.ToString(3))
-                    });
-                    return new LoginState();
-                }
-                session.EventDispatcher.Send(new UpdateEvent
-                {
-                    Message = session.Translation.GetTranslation(TranslationString.AutoUpdaterDisabled, LatestRelease)
-                });
+                    Message = session.Translation.GetTranslation( TranslationString.CheckForUpdatesDisabled, Assembly.GetExecutingAssembly().GetName().Version.ToString( 3 ) )
+                } );
 
                 return new LoginState();
-            } else
+            }
+
+            var autoUpdate = session.LogicSettings.AutoUpdate;
+            var isLatest = IsLatest();
+            if ( isLatest )
+            {
+                session.EventDispatcher.Send(new UpdateEvent
+                {
+                    Message =
+                        session.Translation.GetTranslation(TranslationString.GotUpToDateVersion, Assembly.GetExecutingAssembly().GetName().Version.ToString(3))
+                });
+                return new LoginState();
+            } else if ( !autoUpdate )
             {
                 Logger.Write( "New update detected, would you like to update? Y/N", LogLevel.Update );
 

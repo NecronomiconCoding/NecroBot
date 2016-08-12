@@ -163,6 +163,11 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task<bool> CheckPokeballsToSnipe(int minPokeballs, ISession session,
             CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+
+            // Refresh inventory so that the player stats are fresh
+            await session.Inventory.RefreshCachedInventory();
+
             var pokeBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemPokeBall);
             pokeBallsCount += await session.Inventory.GetItemAmountByType(ItemId.ItemGreatBall);
             pokeBallsCount += await session.Inventory.GetItemAmountByType(ItemId.ItemUltraBall);
@@ -522,7 +527,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var request = WebRequest.CreateHttp(uri);
                 request.Accept = "application/json";
                 request.UserAgent =
-                    "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36\r\n";
+                    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:47.0) Gecko/20100101 Firefox/47.0";
                 request.Method = "GET";
                 request.Timeout = 15000;
                 request.ReadWriteTimeout = 32000;
@@ -717,10 +722,33 @@ namespace PoGo.NecroBot.Logic.Tasks
                 
                 // Our new firewall requires a user agent, or you'll be blocked.
                 client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/511.2 (KHTML, like Gecko) Chrome/15.0.041.151 Safari/555.2");
-                
-                // Use the HttpClient as usual. Any JS challenge will be solved automatically for you.
-                var fullresp = "{ \"pokemons\":" + client.GetStringAsync(uri).Result.Replace(" M", "Male").Replace(" F", "Female").Replace("Farfetch'd", "Farfetchd").Replace("Mr.Maleime", "MrMime") +"}";
 
+                string response = null;
+                int retries = 0;
+                bool retry;
+
+                // Retry up to 5 times, sleeping for 1s between retries.
+                do
+                {
+                    // Use the HttpClient as usual. Any JS challenge will be solved automatically for you.
+                    response = client.GetStringAsync(uri).Result;
+                    if (response == "You can only request the API every 5 seconds.")
+                    {
+                        retry = true;
+                        Thread.Sleep(1000);
+                    }
+                    else
+                    {
+                        retry = false;
+                    }
+                } while (retry && (retries++ < 5));
+                
+                if (response == null || response == "You can only request the API every 5 seconds.")
+                {
+                    response = "[]";
+                }
+                
+                var fullresp = "{ \"pokemons\":" + response + "}".Replace("Mr_mime", "MrMime"); ;
                 scanResult_pokewatchers = JsonConvert.DeserializeObject<ScanResult_pokewatchers>(fullresp);
             }
             catch (Exception ex)

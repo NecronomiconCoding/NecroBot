@@ -629,20 +629,12 @@
       "Value": "[エラー]正しい値を入力してください 例: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "緯度をコピペしてください"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "緯度を設定完了: {0}"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "経度をコピペしてください"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "経度を設定完了: {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "softBanBypassed",

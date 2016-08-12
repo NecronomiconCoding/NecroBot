@@ -11,6 +11,7 @@ namespace PoGo.NecroBot.Logic.Event
     {
         public int Exp;
         public PokemonId Id;
+        public ulong UniqueId;
         public EvolvePokemonResponse.Types.Result Result;
     }
 }

@@ -20,8 +20,10 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-           
-           
+            cancellationToken.ThrowIfCancellationRequested();
+
+            await session.Inventory.RefreshCachedInventory();
+
             if (session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
                 return;
             upgradablePokemon = await session.Inventory.GetPokemonToUpgrade();
@@ -30,8 +32,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var fave = upgradablePokemon.Where(i => i.Favorite == 1);
                 upgradablePokemon = fave;
             }
-           
-           
+                      
             if (upgradablePokemon.Count() == 0)
                 return;
 
@@ -78,7 +79,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                             break;
                         }
                     }
-
                 }
                 else
                 {
@@ -100,8 +100,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (upgradedNumber >= session.LogicSettings.AmountOfTimesToUpgradeLoop)
                         break;
                 }
-               
-                
             }
         }
     }
