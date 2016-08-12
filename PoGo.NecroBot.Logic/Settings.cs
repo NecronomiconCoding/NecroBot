@@ -525,6 +525,43 @@ namespace PoGo.NecroBot.Logic
         public bool UsePokemonToNotCatchFilter;
         [DefaultValue(false)]
         public bool UsePokemonSniperFilterOnly;
+        //log colors
+        [DefaultValue("Red")]
+        public string ErrorColor;
+        [DefaultValue("DarkYellow")]
+        public string WarningColor;
+        [DefaultValue("Cyan")]
+        public string PokestopColor;
+        [DefaultValue("Magenta")]
+        public string FarmingColor;
+        [DefaultValue("White")]
+        public string SniperColor;
+        [DefaultValue("DarkMagenta")]
+        public string RecyclingColor;
+        [DefaultValue("DarkYellow")]
+        public string BerryColor;
+        [DefaultValue("Green")]
+        public string CaughtColor;
+        [DefaultValue("DarkYellow")]
+        public string FleeColor;
+        [DefaultValue("DarkGreen")]
+        public string TransferColor;
+        [DefaultValue("DarkGreen")]
+        public string EvolveColor;
+        [DefaultValue("DarkYellow")]
+        public string EggColor;
+        [DefaultValue("White")]
+        public string UpdateColor;
+        [DefaultValue("DarkCyan")]
+        public string InfoColor;
+        [DefaultValue("Green")]
+        public string NewColor;
+        [DefaultValue("Red")]
+        public string SoftBanColor;
+        [DefaultValue("Magenta")]
+        public string LevelUpColor;
+        [DefaultValue("Gray")]
+        public string DebugColor;
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -1448,5 +1485,24 @@ namespace PoGo.NecroBot.Logic
         public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
         public int TotalAmountOfBerriesToKeep => _settings.TotalAmountOfBerriesToKeep;
+        
+        public string ErrorColor => _settings.ErrorColor;
+        public string WarningColor => _settings.WarningColor;
+        public string PokestopColor => _settings.PokestopColor;
+        public string FarmingColor => _settings.FarmingColor;
+        public string SniperColor => _settings.SniperColor;
+        public string RecyclingColor => _settings.RecyclingColor;
+        public string BerryColor => _settings.BerryColor;
+        public string CaughtColor => _settings.CaughtColor;
+        public string FleeColor => _settings.FleeColor;
+        public string TransferColor => _settings.TransferColor;
+        public string EvolveColor => _settings.EvolveColor;
+        public string EggColor => _settings.EggColor;
+        public string UpdateColor => _settings.UpdateColor;
+        public string InfoColor => _settings.InfoColor;
+        public string NewColor => _settings.NewColor;
+        public string SoftBanColor => _settings.SoftBanColor;
+        public string LevelUpColor => _settings.LevelUpColor;
+        public string DebugColor => _settings.DebugColor;
     }
 }
