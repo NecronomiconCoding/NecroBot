@@ -23,7 +23,7 @@ namespace PoGo.NecroBot.CLI
     {
         private static readonly ManualResetEvent QuitEvent = new ManualResetEvent(false);
         private static string subPath = "";
-        private static Uri strKillSwitchUri = new Uri("https://raw.githubusercontent.com/NECROBOTIO/NecroBot/master/KillSwitch.txt");
+        private static Uri strKillSwitchUri = new Uri("https://raw.githubusercontent.com/NoxxDev/NecroBot/master/KillSwitch.txt");
 
         private static void Main(string[] args)
         {
