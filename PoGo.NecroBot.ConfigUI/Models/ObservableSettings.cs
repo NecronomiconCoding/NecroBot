@@ -1410,6 +1410,8 @@ namespace PoGo.NecroBot.ConfigUI.Models
             foreach (KeyValuePair<ItemId, int> kvp in set.ItemRecycleFilter)
                 res.ItemRecycleFilter.Add(kvp);
 
+            res.LoadCurrentCoords();
+
             return res;
         }
 
@@ -1570,6 +1572,8 @@ namespace PoGo.NecroBot.ConfigUI.Models
                 gs.PokemonsTransferFilter.Add(key, PokemonsTransferFilter[key]);
             foreach (KeyValuePair<ItemId, int> kvp in ItemRecycleFilter)
                 gs.ItemRecycleFilter.Add(kvp);
+
+            SaveCurrentCoords();
 
             return gs;
         }
