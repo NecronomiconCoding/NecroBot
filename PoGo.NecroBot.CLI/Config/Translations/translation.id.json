@@ -622,11 +622,11 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Value": "Tolong masukkan koordinat lintang dan bujur (klik kanan untuk menempel) - format: Angka, Angka"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Value": "Koordinat lintang dan bujur yang diterima: {0}"
     },
     {
       "Key": "softBanBypassed",
