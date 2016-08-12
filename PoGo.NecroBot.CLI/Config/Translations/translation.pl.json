@@ -670,7 +670,7 @@
     },
     {
       "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
+      "Value": " Twoje IP: {0}"
     },
     {
       "Key": "HighestsPokemoHeader",
