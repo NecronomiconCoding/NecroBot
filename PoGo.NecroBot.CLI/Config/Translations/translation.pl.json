@@ -658,7 +658,7 @@
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"
+      "Value":  "#{0} Nazwa: {1} \n"
     },
     {
       "Key": "Proxied",
