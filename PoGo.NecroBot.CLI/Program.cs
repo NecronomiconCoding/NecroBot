@@ -116,6 +116,8 @@ namespace PoGo.NecroBot.CLI
 
             }
             ProgressBar.start("NecroBot is starting up", 10);
+            NecroBot_Network_Logic.Encryption.InitializeEncryption();
+
 
             session.Client.ApiFailure = new ApiFailureStrategy(session);
             ProgressBar.fill(20);
