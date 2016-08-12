@@ -622,7 +622,7 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Tolong masukkan koordinat lintang dan bujur (klik kanan untuk menempel) - format: Angka, Angka"
+      "Value": "Tolong masukkan koordinat lintang dan bujur (klik kanan untuk menempelkan) - format: angka, angka"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
