@@ -4,6 +4,9 @@
   </a>
 </p>
 
+
+Due to legal action started being started against bot creators/devs we will have to say goodbye to this amazing community, this discord will remain open but all projects will be closed related to our beloved necrobot. We had fun, it was a nice time, but sadly we have to close up
+
 [![Discord](https://discordapp.com/api/guilds/209253611031625728/widget.png)](https://discord.gg/VXKxNFr)
 [![Build status](https://ci.appveyor.com/api/projects/status/8ijvvr6b7fe2h0w2?svg=true)](https://ci.appveyor.com/project/NecronomiconCoding/necrobot)
 [![Stories in Ready](https://badge.waffle.io/NECROBOTIO/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NecronomiconCoding/NecroBot)
