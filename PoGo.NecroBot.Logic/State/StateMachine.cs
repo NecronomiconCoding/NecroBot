@@ -70,7 +70,7 @@ namespace PoGo.NecroBot.Logic.State
                 catch (Exception ex)
                 {
                     session.EventDispatcher.Send(new ErrorEvent {Message = "Pokemon Servers might be offline / unstable. Trying again..."});
-                    Thread.Sleep(1000);
+                    await Task.Delay(1000, cancellationToken);
                     session.EventDispatcher.Send(new ErrorEvent { Message = "Error: " + ex });
                     state = _initialState;
                 }

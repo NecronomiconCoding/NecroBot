@@ -356,7 +356,7 @@ namespace PoGo.NecroBot.Logic
             var inventory = await GetCachedInventory();
             if ( inventory == null || inventory.InventoryDelta==null || inventory.InventoryDelta.InventoryItems==null)
             {
-                DelayingUtils.Delay(3000, 3000);
+                await DelayingUtils.Delay(3000, 3000);
                 inventory = await GetCachedInventory();
             }
 
@@ -373,7 +373,7 @@ namespace PoGo.NecroBot.Logic
             }
             catch (NullReferenceException)
             {
-                DelayingUtils.Delay(3000, 3000);
+                await DelayingUtils.Delay(3000, 3000);
                 return await GetPokemonFamilies(++retries);
             }
 
