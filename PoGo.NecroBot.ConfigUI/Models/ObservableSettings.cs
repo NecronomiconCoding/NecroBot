@@ -1150,145 +1150,148 @@ namespace PoGo.NecroBot.ConfigUI.Models
         
         public string ErrorColor
         {
-            get { return (string)GetValue(ErrorColor); }
-            set { SetValue(ErrorColor, value); }
+            get { return (string)GetValue(ErrorColorProperty); }
+            set { SetValue(ErrorColorProperty, value); }
         }
-        public static readonly DependencyProperty ErrorColor =
-            DependencyProperty.Register("ErrorColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty ErrorColorProperty =
+            DependencyProperty.Register("ErrorColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+       
         public string WarningColor
         {
-            get { return (string)GetValue(WarningColor); }
-            set { SetValue(WarningColor, value); }
+            get { return (string)GetValue(WarningColorProperty); }
+            set { SetValue(WarningColorProperty, value); }
         }
-        public static readonly DependencyProperty WarningColor =
-            DependencyProperty.Register("WarningColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty WarningColorProperty =
+            DependencyProperty.Register("WarningColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
         public string PokestopColor
         {
-            get { return (string)GetValue(PokestopColor); }
-            set { SetValue(PokestopColor, value); }
+            get { return (string)GetValue(PokestopColorProperty); }
+            set { SetValue(PokestopColorProperty, value); }
         }
-        public static readonly DependencyProperty PokestopColor =
-            DependencyProperty.Register("PokestopColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty PokestopColorProperty =
+            DependencyProperty.Register("PokestopColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
         
         public string FarmingColor
         {
-            get { return (string)GetValue(FarmingColor); }
-            set { SetValue(FarmingColor, value); }
+            get { return (string)GetValue(FarmingColorProperty); }
+            set { SetValue(FarmingColorProperty, value); }
         }
-        public static readonly DependencyProperty FarmingColor =
-            DependencyProperty.Register("FarmingColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty FarmingColorProperty =
+            DependencyProperty.Register("FarmingColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
         
         public string SniperColor
         {
-            get { return (string)GetValue(SniperColor); }
-            set { SetValue(SniperColor, value); }
+            get { return (string)GetValue(SniperColorProperty); }
+            set { SetValue(SniperColorProperty, value); }
         }
-        public static readonly DependencyProperty SniperColor =
-            DependencyProperty.Register("SniperColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty SniperColorProperty =
+            DependencyProperty.Register("SniperColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
         
         public string RecyclingColor
         {
-            get { return (string)GetValue(RecyclingColor); }
-            set { SetValue(RecyclingColor, value); }
+            get { return (string)GetValue(RecyclingColorProperty); }
+            set { SetValue(RecyclingColorProperty, value); }
         }
-        public static readonly DependencyProperty RecyclingColor =
-            DependencyProperty.Register("RecyclingColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty RecyclingColorProperty =
+            DependencyProperty.Register("RecyclingColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
         
         public string BerryColor
         {
-            get { return (string)GetValue(BerryColor); }
-            set { SetValue(BerryColor, value); }
+            get { return (string)GetValue(BerryColorProperty); }
+            set { SetValue(BerryColorProperty, value); }
         }
-        public static readonly DependencyProperty BerryColor =
-            DependencyProperty.Register("BerryColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty BerryColorProperty =
+            DependencyProperty.Register("BerryColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
         
         public string CaughtColor
         {
-            get { return (string)GetValue(CaughtColor); }
-            set { SetValue(CaughtColor, value); }
+            get { return (string)GetValue(CaughtColorProperty); }
+            set { SetValue(CaughtColorProperty, value); }
         }
-        public static readonly DependencyProperty CaughtColor =
-            DependencyProperty.Register("CaughtColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty CaughtColorProperty =
+            DependencyProperty.Register("CaughtColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
         
         public string FleeColor
         {
-            get { return (string)GetValue(FleeColor); }
-            set { SetValue(FleeColor, value); }
+            get { return (string)GetValue(FleeColorProperty); }
+            set { SetValue(FleeColorProperty, value); }
         }
-        public static readonly DependencyProperty FleeColor =
-            DependencyProperty.Register("FleeColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty FleeColorProperty =
+            DependencyProperty.Register("FleeColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
                 
         public string TransferColor
         {
-            get { return (string)GetValue(TransferColor); }
-            set { SetValue(TransferColor, value); }
+            get { return (string)GetValue(TransferColorProperty); }
+            set { SetValue(TransferColorProperty, value); }
         }
-        public static readonly DependencyProperty TransferColor =
-            DependencyProperty.Register("TransferColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty TransferColorProperty =
+            DependencyProperty.Register("TransferColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
                 
         public string EvolveColor
         {
-            get { return (string)GetValue(EvolveColor); }
-            set { SetValue(EvolveColor, value); }
+            get { return (string)GetValue(EvolveColorProperty); }
+            set { SetValue(EvolveColorProperty, value); }
         }
-        public static readonly DependencyProperty EvolveColor =
-            DependencyProperty.Register("EvolveColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty EvolveColorProperty =
+            DependencyProperty.Register("EvolveColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
                 
         public string EggColor
         {
-            get { return (string)GetValue(EggColor); }
-            set { SetValue(EggColor, value); }
+            get { return (string)GetValue(EggColorProperty); }
+            set { SetValue(EggColorProperty, value); }
         }
-        public static readonly DependencyProperty EggColor =
-            DependencyProperty.Register("EggColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty EggColorProperty =
+            DependencyProperty.Register("EggColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
                 
         public string UpdateColor
         {
-            get { return (string)GetValue(UpdateColor); }
-            set { SetValue(UpdateColor, value); }
+            get { return (string)GetValue(UpdateColorProperty); }
+            set { SetValue(UpdateColorProperty, value); }
         }
-        public static readonly DependencyProperty UpdateColor =
-            DependencyProperty.Register("UpdateColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty UpdateColorProperty =
+            DependencyProperty.Register("UpdateColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
                 
         public string InfoColor
         {
-            get { return (string)GetValue(InfoColor); }
-            set { SetValue(InfoColor, value); }
+            get { return (string)GetValue(InfoColorProperty); }
+            set { SetValue(InfoColorProperty, value); }
         }
-        public static readonly DependencyProperty InfoColor =
-            DependencyProperty.Register("InfoColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty InfoColorProperty =
+            DependencyProperty.Register("InfoColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
                 
         public string NewColor
         {
-            get { return (string)GetValue(NewColor); }
-            set { SetValue(NewColor, value); }
+            get { return (string)GetValue(NewColorProperty); }
+            set { SetValue(NewColorProperty, value); }
         }
-        public static readonly DependencyProperty NewColor =
-            DependencyProperty.Register("NewColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty NewColorProperty =
+            DependencyProperty.Register("NewColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
                 
         public string SoftBanColor
         {
-            get { return (string)GetValue(SoftBanColor); }
-            set { SetValue(SoftBanColor, value); }
+            get { return (string)GetValue(SoftBanColorProperty); }
+            set { SetValue(SoftBanColorProperty, value); }
         }
-        public static readonly DependencyProperty SoftBanColor =
-            DependencyProperty.Register("SoftBanColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty SoftBanColorProperty =
+            DependencyProperty.Register("SoftBanColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
                 
         public string LevelUpColor
         {
-            get { return (string)GetValue(LevelUpColor); }
-            set { SetValue(LevelUpColor, value); }
+            get { return (string)GetValue(LevelUpColorProperty); }
+            set { SetValue(LevelUpColorProperty, value); }
         }
-        public static readonly DependencyProperty LevelUpColor =
-            DependencyProperty.Register("LevelUpColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty LevelUpColorProperty =
+            DependencyProperty.Register("LevelUpColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
                 
         public string DebugColor
         {
-            get { return (string)GetValue(DebugColor); }
-            set { SetValue(DebugColor, value); }
+            get { return (string)GetValue(DebugColorProperty); }
+            set { SetValue(DebugColorProperty, value); }
         }
-        public static readonly DependencyProperty DebugColor =
-            DependencyProperty.Register("DebugColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public static readonly DependencyProperty DebugColorProperty =
+            DependencyProperty.Register("DebugColorProperty", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
         #endregion MISC Properties
 
 
