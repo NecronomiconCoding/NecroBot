@@ -96,21 +96,21 @@
                         <StackPanel Visibility="{Binding IsGoogleAuthShowing, Converter={StaticResource VisConv}}">
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Google Username" ToolTip="The Google account username to use for login." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.GoogleUsername}" />
+                                <TextBox Style="{StaticResource LineItemTextBoxLg}" Text="{Binding Settings.GoogleUsername}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="Google Password" ToolTip="The Google account password to use for login." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.GooglePassword}" />
+                                <TextBox Style="{StaticResource LineItemTextBoxLg}" Text="{Binding Settings.GooglePassword}" />
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Visibility="{Binding IsGoogleAuthShowing, Converter={StaticResource VisRevConv}}">
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="PTC Username" ToolTip="The Pokemon Trainer's Club account username to use for login." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.PtcUsername}" />
+                                <TextBox Style="{StaticResource LineItemTextBoxLg}" Text="{Binding Settings.PtcUsername}" />
                             </StackPanel>
                             <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
                                 <Label Style="{StaticResource LineItemLabel}" Content="PTC Password" ToolTip="The Pokemon Trainer's Club account password to use for login." />
-                                <TextBox Style="{StaticResource LineItemTextBoxMd}" Text="{Binding Settings.PtcPassword}" />
+                                <TextBox Style="{StaticResource LineItemTextBoxLg}" Text="{Binding Settings.PtcPassword}" />
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" Style="{StaticResource LineItemPanel}">
