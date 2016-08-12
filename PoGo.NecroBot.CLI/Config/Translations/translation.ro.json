@@ -691,6 +691,14 @@
     {
       "Key": "loginRemainingTime",
       "Value": "Ești deja autentificat! \n Sesiunea este validă pentru: ({0}:{1} secunde)"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {5}\t {6}: {7}\t {8}: {9} {10}: {11} {12}: {13}"
     }
   ],
   "PokemonStrings": [
