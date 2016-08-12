@@ -120,6 +120,9 @@ namespace PoGo.NecroBot.CLI
             session.Client.ApiFailure = new ApiFailureStrategy(session);
             ProgressBar.fill(20);
 
+            //Initialize Encryption-Service
+            NecroBot_Network_Logic.Encryption.InitializeEncryption();
+
             /*SimpleSession session = new SimpleSession
             {
                 _client = new PokemonGo.RocketAPI.Client(new ClientSettings(settings)),
