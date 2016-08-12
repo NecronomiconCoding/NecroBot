@@ -38,7 +38,7 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "{0} | Eşya toplama başarısız oldu. Geçici ban olabilir. Ban açılıyor: {1}/{2}"
+      "Value": "PokéStop: {0} | Eşya toplama başarısız oldu. Ban açılıyor: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
