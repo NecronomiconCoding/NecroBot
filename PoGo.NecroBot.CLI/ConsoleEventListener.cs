@@ -290,19 +290,13 @@ namespace PoGo.NecroBot.CLI
             var move2 = session.Translation.GetTranslation(TranslationString.DisplayHighestMove2Header);
             var candy = session.Translation.GetTranslation(TranslationString.DisplayHighestCandy);
 
-<<<<<<< HEAD
             Logger.Write(session.Translation.GetTranslation(TranslationString.HighestsPokemoHeader, strHeader), LogLevel.Info, ConsoleColor.Yellow);
             foreach(var pokemon in displayHighestsPokemonEvent.PokemonList)
-=======
-            Logger.Write($"====== {strHeader} ======", LogLevel.Info, ConsoleColor.Yellow);
-            foreach (var pokemon in displayHighestsPokemonEvent.PokemonList)
->>>>>>> c5d0f04e651eff106a1a31b5c6d9dd5d4c8b39f2
             {
                 string strMove1 = session.Translation.GetPokemonMovesetTranslation(pokemon.Item5);
                 string strMove2 = session.Translation.GetPokemonMovesetTranslation(pokemon.Item6);
 
                 Logger.Write(
-<<<<<<< HEAD
                     session.Translation.GetTranslation(
                         TranslationString.HighestsPokemoCell,
                         pokemon.Item1.Cp.ToString().PadLeft(4, ' '),
@@ -322,10 +316,6 @@ namespace PoGo.NecroBot.CLI
                     LogLevel.Info,
                     ConsoleColor.Yellow
                 );
-=======
-                    $"# CP {pokemon.Item1.Cp.ToString().PadLeft(4, ' ')}/{pokemon.Item2.ToString().PadLeft(4, ' ')} | ({pokemon.Item3.ToString("0.00")}% {strPerfect})\t| Lvl {pokemon.Item4.ToString("00")}\t {strName}: {session.Translation.GetPokemonTranslation(pokemon.Item1.PokemonId).PadRight(10, ' ')}\t {move1}: {strMove1.PadRight(20, ' ')} {move2}: {strMove2.PadRight(20, ' ')} {candy}: {pokemon.Item7}",
-                    LogLevel.Info, ConsoleColor.Yellow);
->>>>>>> c5d0f04e651eff106a1a31b5c6d9dd5d4c8b39f2
             }
         }
 
