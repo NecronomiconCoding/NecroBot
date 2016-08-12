@@ -326,7 +326,7 @@
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "Poción: {0} | SuperPoción: {1} | Hyperpoción: {2} | Pociónmáxima: {3}"
     },
     {
       "Key": "CurrentReviveInv",
@@ -334,7 +334,7 @@
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "Baya: {0} | Incienso: {1} | Huevo Suerte: {2} | Cebo: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -613,20 +613,12 @@
       "Value": "[ERROR] Por favor, introduce solamente un VALOR. Por ejemplo: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Por favor, introduce una latitud (Recuerda... Clic derecho para pegar)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Latitud aceptada: {0}"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Por favor, introduce una Longitud (Recuerda... Clic derecho para pegar)"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Longitud acepteda: {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
@@ -634,19 +626,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value":  "--- Pokedex Atrapados --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value": "#{0} Nombre: {1} | Atrapados: {2} | Encontrados: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value":  "--- Pokedex Necesarios --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value":  "#{0} Nombre: {1} \n"
     }
   ],
   "PokemonStrings": [

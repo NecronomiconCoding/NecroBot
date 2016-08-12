@@ -201,6 +201,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     evt.Exp = totalExp;
                     evt.Stardust = profile.PlayerData.Currencies.ToArray()[1].Amount;
+                    evt.UniqueId = caughtPokemonResponse.CapturedPokemonId;
 
                     var pokemonSettings = await session.Inventory.GetPokemonSettings();
                     var pokemonFamilies = await session.Inventory.GetPokemonFamilies();

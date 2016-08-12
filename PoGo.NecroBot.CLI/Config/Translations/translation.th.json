@@ -30,7 +30,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "ไม่พบ PokeStop ที่สามารถใช้งานได้ในพื้นที่ ระยะทางสูงสุดที่ตั้งไว้น้อยไปหรือเปล่า?"
+      "Value": "ไม่พบ PokeStops ที่สามารถใช้งานได้ในพื้นที่ ระยะทางสูงสุดที่ตั้งไว้น้อยไปหรือเปล่า?"
     },
     {
       "Key": "eventFortUsed",
@@ -42,7 +42,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "กำลังเดินทางไปสู่ PokeStop : {0} ( {1} เมตร ) ( {2} วินาที )"
+      "Value": "กำลังเดินทางไปสู่ PokeStops : {0} ( {1} เมตร ) ( {2} วินาที )"
     },
     {
       "Key": "eventProfileLogin",
@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} เลเวล : {3} CP : ({4}/{5}) IV : {6}% | โอกาส : {7}% | ระยะ {8}m | จับได้ {9} (เหลือโปเกบอล {10} ชิ้น). | ได้รับค่าประสบการณ์ {11} EXP | {12} | ละติจูด : {13} ลองติจูด : {14}"
+      "Value": "({0}) | ({1}) {2} เลเวล : {3} CP : ({4}/{5}) IV : {6}% | โอกาส : {7}% | ระยะ {8}m | จับด้วย{9} (เหลือโปเกบอล {10} ชิ้น). | ได้รับค่าประสบการณ์ {11} EXP | {12} | ละติจูด : {13} ลองติจูด : {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
@@ -86,15 +86,15 @@
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
-      "Value": "Waiting to evolve {0} Pokemon once {1} more are caught! ({2}/{3} for {4}% inventory)"
+      "Value": "รอการแปลงร่าง {0} ของโปเกมอน {1} จับเพิ่มเติม! ({2}/{3} จาก {4}% ในคลัง)"
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "Lucky eggs will never be used with UseLuckyEggsMinPokemonAmount set to {0}, use <= {1} instead"
+      "Value": "Lucky Eggs จะไม่ถูกนำมาใช้งานกรุณาตั้งค่าที่ UseLuckyEggsMinPokemonAmount เป็น {0}, ให้ <= {1} ก่อน"
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "Catch {0} more Pokemon to use a Lucky Egg!"
+      "Value": "จับ {0} โปเกมอนอื่นโดยใช้ Lucky Egg!"
     },
     {
       "Key": "eventUseBerry",
@@ -102,7 +102,7 @@
     },
     {
       "Key": "itemRazzBerry",
-      "Value": "Razz Berry"
+      "Value": "ผลเบอรี่"
     },
     {
       "Key": "catchStatusAttempt",
@@ -118,7 +118,7 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Unhandled data in GPX file, attempting to skip."
+      "Value": "ไม่สามารถจัดการข้อมูลในไฟล์ GPX, กำลังทำการข้ามไป."
     },
     {
       "Key": "displayHighestsHeader",
@@ -154,15 +154,15 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "ใส่ไข่ในแคปซูนเพาะเลี้ยง : {0:0.00}km ต่อไป"
+      "Value": "ใส่ไข่ในแคปซูนฟักไข่อีก : {0:0.00}กิโลเมตร"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "สถานะแคปซูนเพาะเลี้ยง : {0:0.00}km ต่อไป"
+      "Value": "สถานะแคปซูนฟักไข่อีก : {0:0.00}กิโลเมตร"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "เพราะเลี้ยงได้ : {0} | Lvl : {1} CP : ({2}/{3}) IV : {4}%"
+      "Value": "ฟักไข่ได้ : {0} | Lvl : {1} CP : ({2}/{3}) IV : {4}%"
     },
     {
       "Key": "logEntryError",
@@ -170,7 +170,7 @@
     },
     {
       "Key": "logEntryAttention",
-      "Value": "ATTENTION"
+      "Value": "ประกาศ"
     },
     {
       "Key": "logEntryInfo",
@@ -182,7 +182,7 @@
     },
     {
       "Key": "logEntryFarming",
-      "Value": "FARMING"
+      "Value": "การเพาะปลูก"
     },
     {
       "Key": "logEntrySniper",
@@ -190,11 +190,11 @@
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "ทิ้ง"
+      "Value": "โยนทิ้ง"
     },
     {
       "Key": "logEntryPkmn",
-      "Value": "PKMN"
+      "Value": "การจับ"
     },
     {
       "Key": "logEntryTransfered",
@@ -206,7 +206,7 @@
     },
     {
       "Key": "logEntryBerry",
-      "Value": "BERRY"
+      "Value": "ผลเบอรี่"
     },
     {
       "Key": "logEntryEgg",
@@ -330,23 +330,23 @@
     },
     {
       "Key": "currentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "น้ำยา : {0} | ซูเปอร์น้ำยา : {1} | ไฮเปอร์น้ำยา : {2} | แม็กซ์น้ำยา : {3}"
     },
     {
       "Key": "currentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
+      "Value": "ฟื้นคืน : {0} | ฟื้นคืนสูงสุด : {1}"
     },
     {
       "Key": "currentMiscItemInv",
-      "Value": "Berries: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "ผลเบอรี่ : {0} | ตัวล่อโปเกมอน : {1} | Lucky Eggs: {2} | ตัวล่อเสา Poke Stops : {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[Configuration Invalid] Your maximum items combined (balls+potions+revives={0}) is over your max item storage ({1})"
+      "Value": "[การตั้งค่าผิดพลาด] รวมไอเทมสูงสุดของคุณ (balls+potions+revives={0}) หรือเกินจำนวนสูงสุดในคลังของคุณ ({1})"
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "Recycling Quietly..."
+      "Value": "โยนทิ้งไปเลย..."
     },
     {
       "Key": "invFullTransferring",
@@ -354,39 +354,39 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Pokemon Inventory is full! Please transfer Pokemon manually or set TransferDuplicatePokemon to true in settings..."
+      "Value": "คลังโปเกมอนเต็ม! กรุณาทำการโอนย้ายในอุปกรณ์ของคุณหรือตั้งค่า TransferDuplicatePokemon ในไฟล์ตั้งค่าเป็น true ..."
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Inventory is full, no items looted!"
+      "Value": "คลังสินค้าไอเทมเต็ม, รายการไอเทมเต็ม!"
     },
     {
       "Key": "encounterProblem",
-      "Value": "Encounter problem: {0}"
+      "Value": "กำลังเจอปัญหา : {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Encounter problem: Lure Pokemon {0}"
+      "Value": "กำลังเจอปัญหา : ตัวล่อที่ PokeStops {0}"
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Your desired destination of {0}, {1} is too far from your current position of {2}, {3}"
+      "Value": "ปลายทางที่คุณต้องการ {0}, {1} อยู่ไกลเกินจากพิกัดที่คุณยืนอยู่ {2}, {3}"
     },
     {
       "Key": "pokemonRename",
-      "Value": "Pokemon {0} ({1}) renamed from {2} to {3}."
+      "Value": "โปเกมอน {0} ( {1} ) เปลี่ยนชื่อจาก {2} ไปเป็น {3}."
     },
     {
       "Key": "pokemonFavorite",
-      "Value": "{0}% perfect {1} (CP {2}) *favorited*."
+      "Value": "{0}% สำเร็จ {1} ( CP {2} ) *favorited*."
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Pokemon ignore filter] - Ignoring {0} as defined in settings"
+      "Value": "[โปเกมอนถูกละเว้นการจับ] - ข้าม {0} ตามที่กำหนดไว้ในการตั้งค่า"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "CatchAttempt"
+      "Value": "พยายามจับ"
     },
     {
       "Key": "catchStatusError",
@@ -394,11 +394,11 @@
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "CatchEscape"
+      "Value": "หนีการจับ"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "CatchFlee"
+      "Value": "จับแล้วหนี"
     },
     {
       "Key": "catchStatusMissed",
@@ -414,23 +414,23 @@
     },
     {
       "Key": "catchTypeLure",
-      "Value": "Lure"
+      "Value": "ตัวล่อที่ PokeStops"
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "Incense"
+      "Value": "ตัวล่อ"
     },
     {
       "Key": "webSocketFailStart",
-      "Value": "Failed to start WebSocketServer on port : {0}"
+      "Value": "การเชื่อมต่อไปที่ WebSocket Server ผิดพลาด พอร์ต : {0}"
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - เวลาทำงาน {1} - Lvl : {2} | EXP/H : {3:n0} | P/H : {4:n0} | Stardust : {5:n0} | Transferred : {6:n0} | Recycled : {7:n0}"
+      "Value": "{0} - เวลาทำงาน {1} - ระดับ : {2} | EXP/H : {3:n0} | P/H : {4:n0} | ลูกอม : {5:n0} | โอนออกไป : {6:n0} | โยนทิ้ง : {7:n0}"
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- LVL {0} | {1} ----- \n Experience: {2}/{3} \n Pokemons caught: {4} \n Pokemons deployed: {5} \n Pokestops visited: {6} \n Eggs hatched: {7} \n Pokemons evolved: {8} \n Pokedex entries: {9} \n KM walked: {10}  \n Pokemons: {11}/{12}"
+      "Value": "----- LVL {0} | {1} ----- \n ประสบการณ์ : {2}/{3} \n จับโปเกมอน : {4} \n ใช้โปเกมอน : {5} \n Poke Stops ที่ : {6} \n พักไข่ : {7} \n วิวัฒนาการโปเกมอน : {8} \n รายการจากคู่มือ : {9} \n กิโล เดินไปที่ : {10}  \n โปเกมอน : {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
@@ -438,11 +438,11 @@
     },
     {
       "Key": "helpTemplate",
-      "Value": "คำสั่ง : \n \n /top <cp/iv> <amount> - แสดงลำดับสูงสุดของ Pokemons. \n /ทั้งหมด <cp/iv> - แสดงโปเกมอนทั้งหมด. \n /profile - แสดงโปรไฟล์. \n /loc - แสดงตำแหน่ง. \n /items - แสดงไอเทม. \n /status - แสดงสถานะของบอท. \n /pokedex - แสดงโปเกมอนของคุณ "
+      "Value": "คำสั่ง : \n \n /top <cp/iv> <amount> - แสดงลำดับสูงสุดของโปเกมอน. \n /ทั้งหมด <cp/iv> - แสดงโปเกมอนทั้งหมด. \n /profile - แสดงโปรไฟล์. \n /loc - แสดงตำแหน่ง. \n /items - แสดงไอเทม. \n /status - แสดงสถานะของบอท. \n /pokedex - แสดงโปเกมอนของคุณ "
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (Advance in {1}h {2}m | {3:n0}/{4:n0} XP)"
+      "Value": "{0} ( จะใช้เวลาอีก {1}h {2}m | {3:n0}/{4:n0} XP )"
     },
     {
       "Key": "requireInputText",
@@ -474,7 +474,7 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "กำลังค้นหา PokeStop ของโปเกมอนที่ {0}..."
+      "Value": "กำลังค้นหา PokeStops ของโปเกมอนที่ {0}..."
     },
     {
       "Key": "snipeScanEx",
@@ -506,39 +506,39 @@
     },
     {
       "Key": "noEggsAvailable",
-      "Value": "No Eggs Available"
+      "Value": "ยังไม่มีไขในคลัง"
     },
     {
       "Key": "useLuckyEggActive",
-      "Value": "Lucky Egg Already Active"
+      "Value": "Lucky Egg ถูกฟักไข่อยู่"
     },
     {
       "Key": "usedLuckyEgg",
-      "Value": "Used Lucky Egg"
+      "Value": "กำลังใช้ Lucky Egg"
     },
     {
       "Key": "useLuckyEggAmount",
-      "Value": "Lucky Eggs in Inventory: {0}"
+      "Value": "Lucky Eggs ที่อยู่ในคลัง : {0}"
     },
     {
       "Key": "noIncenseAvailable",
-      "Value": "No Incense Available"
+      "Value": "ไม่มีตัวช่วนล่อโปเกมอน"
     },
     {
       "Key": "useIncenseActive",
-      "Value": "Incense Already Active"
+      "Value": "มีตัวช่วยล่อโปเกมอนทำงานอยู่แล้ว"
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "Incense in Inventory: {0}"
+      "Value": "ตัวช่วยล่อโปเกมอนในคลังมี : {0}"
     },
     {
       "Key": "usedIncense",
-      "Value": "Used an Incense"
+      "Value": "ใช้ตัวช่วนล่อโปเกมอน"
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "Amount of Pokemon Seen: {0}/151, Amount of Pokemon Caught: {1}/151"
+      "Value": "รวมการดึงดูดโปเกมอน : {0}/151, รวมโปเกมอนที่จับได้ : {1}/151"
     },
     {
       "Key": "pkmPotentialEvolveCount",
@@ -546,11 +546,11 @@
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "Pokemon Upgrade Failed Not Enough Resources"
+      "Value": "โปเกมอนอัพเกรดล้มเหลวโปรดเช็คข้อมูลพื้นที่ของท่าน"
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "Sniping server is offline. Skipping..."
+      "Value": "ระบบปั่น PokeStops ไม่ทำงาน. กำลังข้ามส่วนนี้..."
     },
     {
       "Key": "firstStartPrompt",
@@ -629,12 +629,12 @@
       "Value": "[ผิดพลาด] กรุณาใส่ค่าตัวอย่างดังต่อไปนี้ : {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "โปรดป้อนละติจูด (คลิกขวาเพื่อวาง)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "ละติจูดคือ : {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "firstStartSetupDefaultLongPrompt",
@@ -654,7 +654,7 @@
     },
     {
       "Key": "pokedexCatchedTelegram",
-      "Value": "--- Pokedex catched --- \n"
+      "Value": "--- คู่มือข้อมูลการจับ --- \n"
     },
     {
       "Key": "pokedexPokemonCatchedTelegram",
@@ -662,11 +662,11 @@
     },
     {
       "Key": "pokedexNeededTelegram",
-      "Value": "--- Pokedex needed --- \n"
+      "Value": "--- ต้องการคู่มือข้อมูลการจับ --- \n"
     },
     {
       "Key": "pokedexPokemonNeededTelegram",
-      "Value": "#{0}# Name: {1} \n"
+      "Value": "#{0}# ชื่อ : {1} \n"
     }
   ],
   "PokemonStrings": [
