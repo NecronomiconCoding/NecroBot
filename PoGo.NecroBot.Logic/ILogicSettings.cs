@@ -60,7 +60,17 @@ namespace PoGo.NecroBot.Logic
                         : moves ?? new List<List<PokemonMove>>();
             MovesOperator = movesOperator;
         }
-        
+        public int KeepMinCp { get; set; }
+        public int KeepMinLvl { get; set; }
+        public bool UseKeepMinLvl { get; set; }
+        public float KeepMinIvPercentage { get; set; }
+        public int KeepMinDuplicatePokemon { get; set; }
+        public List<List<PokemonMove>> Moves { get; set; }
+        public List<PokemonMove> DeprecatedMoves { get; set; }
+        public string KeepMinOperator { get; set; }
+        public string MovesOperator { get; set; }
+    }
+    
     public class Misc
     {
         public Misc()
@@ -86,18 +96,7 @@ namespace PoGo.NecroBot.Logic
         public string LevelUpColor { get; set; }
         public string DebugColor { get; set; }
     }
-
-        public int KeepMinCp { get; set; }
-        public int KeepMinLvl { get; set; }
-        public bool UseKeepMinLvl { get; set; }
-        public float KeepMinIvPercentage { get; set; }
-        public int KeepMinDuplicatePokemon { get; set; }
-        public List<List<PokemonMove>> Moves { get; set; }
-        public List<PokemonMove> DeprecatedMoves { get; set; }
-        public string KeepMinOperator { get; set; }
-        public string MovesOperator { get; set; }
-    }
-
+    
     public interface ILogicSettings
     {
         bool UseWebsocket { get; }
