@@ -546,7 +546,7 @@
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "Yeterli Candy ve Stardust olmadığı için Pokémon leveli artırılamadı."
+      "Value": "Yeterli Stardust olmadığı için Pokémon leveli artırılamadı."
     },
     {
       "Key": "snipeServerOffline",
