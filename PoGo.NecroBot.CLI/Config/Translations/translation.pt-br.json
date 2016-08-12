@@ -202,7 +202,7 @@
     },
     {
       "Key": "logEntryEvolved",
-      "Value": "EVOLUÍDO"
+      "Value": "EVOLUÇÃO"
     },
     {
       "Key": "logEntryBerry",
@@ -602,54 +602,74 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Value": "Por favor informe a Latitude e Longitude (Botão direito do mouse para colar) - Formato: Latitude, Longitude"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Value": "Lattitude e Longitude aceita: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
       "Value": "### CONFIGURAÇÃO COMPLETA ###"
     },
     {
-      "Key": "PokedexCatchedTelegram",
-      "Value": "--- Pokedex catched --- \n"
+      "Key": "pokedexCatchedTelegram",
+      "Value": "--- Pokedex capturada --- \n"
     },
     {
-      "Key": "PokedexPokemonCatchedTelegram",
-      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Key": "pokedexPokemonCatchedTelegram",
+      "Value": "#{0} Nome: {1} | Capturado: {2} | Encontrado: {3} \n"
     },
     {
-      "Key": "PokedexNeededTelegram",
-      "Value": "--- Pokedex needed --- \n"
+      "Key": "pokedexNeededTelegram",
+      "Value": "--- Pokedex necessária --- \n"
     },
     {
-      "Key": "PokedexPokemonNeededTelegram",
-      "Value": "#{0} Name: {1} \n"
+      "Key": "pokedexPokemonNeededTelegram",
+      "Value": "#{0} Nome: {1} \n"
+    },
+    {
+      "Key": "loggedInTelegram",
+      "Value": "Você entrou com sucesso. Sessão é válida por 5 minutos"
+    },
+    {
+      "Key": "loginFailedTelegram",
+      "Value": "Senha ou sintaxe incorreta! Use /login SENHA"
+    },
+    {
+      "Key": "notLoggedInTelegram",
+      "Value": "Você não está logado, use /login SENHA"
     },
     {
       "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
-    },
-    {
-      "Key": "FixProxySettings",
-      "Value": "Press any key to exit so you can fix your proxy settings..."
+      "Value": "Seu IP é: {0} | IP do Proxy é: {1}"
     },
     {
       "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
+      "Value": " Seu IP é: {0}"
     },
     {
-      "Key": "HighestsPokemoHeader",
+      "Key": "fixProxySettings",
+      "Value": "Pressione qualquer tecla para sair, então você pode arrumar suas configurações de proxy..."
+    },
+    {
+      "Key": "usageHelp",
+      "Value": "Argumentos do comando inválidos! \n Uso correto: \n {0}"
+    },
+    {
+      "Key": "loginRemainingTime",
+      "Value": "Você já está logado! \n Sessão valida por: ({0}:{1} segundos)"
+    },
+    {
+      "Key": "highestsPokemoHeader",
       "Value": "====== {0} ======"
     },
     {
-      "Key": "HighestsPokemoCell",
+      "Key": "highestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {5}\t {6}: {7}\t {8}: {9} {10}: {11} {12}: {13}"
     }
   ],
-	"PokemonStrings": [
+  "PokemonStrings": [
     {
       "Key": "bulbasaur",
       "Value": "Bulbasauro"
