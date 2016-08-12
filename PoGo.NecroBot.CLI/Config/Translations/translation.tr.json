@@ -34,15 +34,15 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "İsim: {0} Tecrübe: {1}, Taşlar: {2}, Eşyalar: {3}, Enlem: {4}, Boylam: {5}"
+      "Value": "İsim: {0} XP: {1}, Taşlar: {2}, Eşyalar: {3}, Enlem: {4}, Boylam: {5}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "İsim: {0} BİLGİ: Eşya toplama başarısız oldu. Soft ban yemiş olabilirsiniz. Ban açılıyor: {1}/{2}"
+      "Value": "İsim: {0} BİLGİ: Eşya toplama başarısız oldu. Geçici ban yemiş olabilirsiniz. Ban açılıyor: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{1}m mesafedeki \"{0}\" PokéStop'una {2} saniye sonra varılacak."
+      "Value": "{2} saniye sonra {1}m mesafedeki \"{0}\" adlı PokéStop'a varılacak."
     },
     {
       "Key": "eventProfileLogin",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} | {1} Tecrübe kazanıldı."
+      "Value": "{0} | {1}XP kazanıldı."
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -74,7 +74,7 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Yakalama Şansı: {7}% | Mesafe: {8}m | {9} kullanıldı ({10} tane kaldı) | {11}Tecrübe kazanıldı | {12} | Enlem: {13} Boylam: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Yakalama Şansı: {7}% | Mesafe: {8}m | {9} kullanıldı ({10} tane kaldı) | {11}XP kazanıldı | {12} | Enlem: {13} Boylam: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
@@ -202,7 +202,7 @@
     },
     {
       "Key": "logEntryEvolved",
-      "Value": "GELİŞTİRİLDİ"
+      "Value": "GELİŞTİRME"
     },
     {
       "Key": "logEntryBerry",
@@ -226,7 +226,7 @@
     },
     {
       "Key": "logEntrySoftBan",
-      "Value": "SOFT BAN"
+      "Value": "GEÇİCİ BAN"
     },
     {
       "Key": "loggingIn",
@@ -542,7 +542,7 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "Geliştirilebilecek(evolve) Pokémon sayısı: {0}"
+      "Value": "Geliştirilecek(evolve) Pokémon sayısı: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
@@ -629,20 +629,12 @@
       "Value": "[HATA] Lütfen sadece DEĞER girin (Örnek: {0})"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Lütfen bir enlem(latitude) girin. (Sağ tıklayıp yapıştırabilirsiniz.)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Enlem(lattitude) onaylandı: {0}"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Lütfen bir boylam(longitude) girin. (Sağ tıklayıp yapıştırabilirsiniz.)"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Boylam(longitude) onaylandı: {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
 	{
       "Key": "firstStartSetupCompleted",
@@ -663,6 +655,26 @@
     {
       "Key": "PokedexPokemonNeededTelegram",
       "Value": "#{0} İsim: {1} \n"
+    },
+    {
+      "Key": "Proxied",
+      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "Press any key to exit so you can fix your proxy settings..."
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " Your IP is: {0}"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {5}\t {6}: {7}\t {8}: {9} {10}: {11} {12}: {13}"
     }
   ],
   "PokemonStrings": [

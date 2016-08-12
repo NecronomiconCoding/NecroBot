@@ -125,7 +125,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 })
                                 .OrderBy(p => p.Distance)
                                 .ToList();
-                var pokeStop = pokestopListWithDetails[0];
+                // randomize next pokestop between first and second by distance
+                var pokestopListNum = 0;
+                if (pokestopList.Count >= 1)
+                {
+                    pokestopListNum = rc.Next(0, 2);
+                }
+                var pokeStop = pokestopList[pokestopListNum];
+                pokestopList.RemoveAt(pokestopListNum);
+                var pokeStop = pokestopListWithDetails[pokestopListNum];
                 pokestopList.Remove(pokeStop.PokeStop);
 
                 var distance = pokeStop.Distance;
@@ -234,9 +242,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     stopsHit = 0;
 
                     await RecycleItemsTask.Execute(session, cancellationToken);
-
-                    if (fortSearch.ItemsAwarded.Count > 0)
-                        await session.Inventory.RefreshCachedInventory();
 
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                         session.LogicSettings.EvolveAllPokemonAboveIv ||

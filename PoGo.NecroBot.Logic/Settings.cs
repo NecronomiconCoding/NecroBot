@@ -20,6 +20,8 @@ using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
+using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -179,7 +181,7 @@ namespace PoGo.NecroBot.Logic
             }
         }
 
-        public void checkProxy()
+        public void checkProxy(ITranslation translator)
         {
             using (var tempWebClient = new NecroWebClient())
             {
@@ -188,24 +190,19 @@ namespace PoGo.NecroBot.Logic
                 {
                     tempWebClient.Proxy = this.InitProxy();
                     string proxiedIPres = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
-                    string proxiedIP = proxiedIPres == null ? "INVALID PROXY" : proxiedIPres;
-                    Logger.Write(
-                       $"Your IP is: {unproxiedIP} / Proxy IP is: {proxiedIP}",
-                       LogLevel.Info, (unproxiedIP == proxiedIP) ? ConsoleColor.Red : ConsoleColor.Green);
+                    string proxiedIP = proxiedIPres == null?"INVALID PROXY": proxiedIPres;
+                    Logger.Write(translator.GetTranslation(TranslationString.Proxied, unproxiedIP, proxiedIP), LogLevel.Info, (unproxiedIP == proxiedIP) ? ConsoleColor.Red : ConsoleColor.Green);
 
                     if (unproxiedIP == proxiedIP || proxiedIPres == null)
                     {
-                        Logger.Write("Press any key to exit so you can fix your proxy settings...",
-                            LogLevel.Info, ConsoleColor.Red);
+                        Logger.Write(translator.GetTranslation(TranslationString.FixProxySettings), LogLevel.Info, ConsoleColor.Red);
                         Console.ReadKey();
                         Environment.Exit(0);
                     }
                 }
                 else
                 {
-                    Logger.Write(
-                       $"Your IP is: {unproxiedIP}",
-                       LogLevel.Info, ConsoleColor.Red);
+                    Logger.Write(translator.GetTranslation(TranslationString.Unproxied, unproxiedIP), LogLevel.Info, ConsoleColor.Red);
                 }
             }
         }
@@ -287,6 +284,8 @@ namespace PoGo.NecroBot.Logic
 
         [DefaultValue("en")]
         public string TranslationLanguageCode;
+        [DefaultValue(true)]
+        public bool CheckForUpdates;
         //autoupdate
         [DefaultValue(true)]
         public bool AutoUpdate;
@@ -829,6 +828,9 @@ namespace PoGo.NecroBot.Logic
                         try
                         {
                             input = File.ReadAllText(configFile);
+                            if (!input.Contains("DeprecatedMoves"))
+                                input = input.Replace("\"Moves\"", $"\"DeprecatedMoves\"");
+
                             break;
                         }
                         catch (Exception exception)
@@ -848,7 +850,15 @@ namespace PoGo.NecroBot.Logic
                     jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
-                    settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                    try
+                    {
+                        settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                    }
+                    catch (Newtonsoft.Json.JsonSerializationException exception)
+                    {
+                        Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+                        return null;
+                    }
 
                     //This makes sure that existing config files dont get null values which lead to an exception
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.KeepMinOperator == null))
@@ -857,7 +867,9 @@ namespace PoGo.NecroBot.Logic
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
                     {
-                        filter.Value.Moves = new List<List<PokemonMove>>();
+                        filter.Value.Moves = (filter.Value.DeprecatedMoves != null)
+                                                ? new List<List<PokemonMove>> { filter.Value.DeprecatedMoves }
+                                                : filter.Value.Moves ?? new List<List<PokemonMove>>();
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.MovesOperator == null))
                     {
@@ -881,7 +893,7 @@ namespace PoGo.NecroBot.Logic
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
             settings.isGui = isGui;
 
-            if (!boolSkipSave || !settings.AutoUpdate)
+            if ( !boolSkipSave || !settings.CheckForUpdates || !settings.AutoUpdate )
             {
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
@@ -890,9 +902,9 @@ namespace PoGo.NecroBot.Logic
             return shouldExit ? null : settings;
         }
 
-        public void checkProxy()
+        public void checkProxy(ITranslation translator)
         {
-            Auth.checkProxy();
+            Auth.checkProxy(translator);
         }
 
         public static bool PromptForSetup(ITranslation translator)
@@ -1043,36 +1055,35 @@ namespace PoGo.NecroBot.Logic
             }
 
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartDefaultLocation), LogLevel.None);
-            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLatPrompt));
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLatLongPrompt));
             while (true)
             {
                 try
                 {
-                    double dblInput = double.Parse(Console.ReadLine());
-                    settings.DefaultLatitude = dblInput;
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLatConfirm, dblInput));
-                    break;
-                }
-                catch (FormatException)
-                {
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, settings.DefaultLatitude, LogLevel.Error));
-                    continue;
-                }
-            }
+                    string strInput = Console.ReadLine();
+                    string[] strSplit = strInput.Split( ',' );
 
-            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLongPrompt));
-            while (true)
-            {
-                try
-                {
-                    double dblInput = double.Parse(Console.ReadLine());
-                    settings.DefaultLongitude = dblInput;
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLongConfirm, dblInput));
+                    if( strSplit.Length > 1 )
+                    {
+                        double dblLat = double.Parse( strSplit[ 0 ].Trim( ' ' ) );
+                        double dblLong = double.Parse( strSplit[ 1 ].Trim( ' ' ) );
+
+                        settings.DefaultLatitude = dblLat;
+                        settings.DefaultLongitude = dblLong;
+
+                        Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLatLongConfirm, $"{dblLat}, {dblLong}" ) );
+                    }
+                    else
+                    {
+                        Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLocationError, $"{settings.DefaultLatitude}, {settings.DefaultLongitude}", LogLevel.Error ) );
+                        continue;
+                    }
+                    
                     break;
                 }
                 catch (FormatException)
                 {
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, settings.DefaultLongitude, LogLevel.Error));
+                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, $"{settings.DefaultLatitude}, {settings.DefaultLongitude}", LogLevel.Error));
                     continue;
                 }
             }
@@ -1325,6 +1336,7 @@ namespace PoGo.NecroBot.Logic
         public string ProfilePath => _settings.ProfilePath;
         public string ProfileConfigPath => _settings.ProfileConfigPath;
         public string GeneralConfigPath => _settings.GeneralConfigPath;
+        public bool CheckForUpdates => _settings.CheckForUpdates;
         public bool AutoUpdate => _settings.AutoUpdate;
         public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
         public bool UseWebsocket => _settings.UseWebsocket;

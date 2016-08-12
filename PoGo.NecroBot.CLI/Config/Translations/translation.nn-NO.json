@@ -1,4 +1,4 @@
-{
+﻿{
   "TranslationStrings": [
     {
       "Key": "pokeball",
@@ -18,69 +18,64 @@
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Невідомий тип аутентифікації(AuthType) в config.json"
+      "Value": "Ukjent AuthType i config.json"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
       "Value":
-        "Ви перебуваєте поза зазначеного радіусу! Повертаємося до точки старту (дистанція {0} м) через 5 сек. Ваш LastPos.ini файл коректний?"
+        "Du er utenfor din definerte radius! Går tilbake til start ({0}m borte) om 5 sekund. Er LastPos.ini filen korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value":
-        "Не знайдено активних покетстопів у вашій зоні. Можливо вказана занадто маленька максимальна дистанція пошуку в налаштуваннях?"
+      "Value": "Fant ingen PokeStops i området. Er maximum distance satt for lavt?"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "<{0}> XP: {1}, Gems: {2}, Items: {3}"
-    },
-    {
-      "Key": "eventFortFailed",
-      "Value": "Назва: {0} ІНФО: Не вдалося отримати предмети, можливо софтбан. Розбан через: {1} / {2}"
+      "Value": "XP: {0}, Gems: {1}, Items: {2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Прямуємо до <{0}>, дистанція ({1} м)"
+      "Value": "{0} in ({1}m)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Граємо за {0}"
+      "Value": "Spiller som {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Використано щасливе яйце, їх залишилося: {0}"
+      "Value": "Bruker Lucky Egg, gjenstående egg: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} успішно, отримано {1} xp"
+      "Value": "{0} Suksess for {1}xp"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Невдало: {0}. Успішно: {1}. Припинено: {2}"
+      "Value": "Mislyktes {0}. Resultat ble {1}, stopper evolving {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0} \t (CP: {1} | IV: {2}%) [у Кращого (CP: {3} | IV: {4}%)] Цукерок: {5}"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Beste CP: {3}  IV: {4}%] (Candies: {5})"
     },
     {
       "Key": "eventItemRecycled",
-      "Value": "{0} x {1}"
+      "Value": "{0}x {1}"
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Sjanse: {7}% | {8}m dist | med en {9} ({10} igjen). | {11} EXP tjent | {12} | lat: {13} long: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Sjanse: {7}% | {8}m dist | med en {9} ({10} igjen). | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Немає Pokeball'ів - Ми упустили {0} (CP: {1})"
+      "Value": "Ingen Pokeballer - Vi gikk glipp av {0} med CP {1}"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0}, спроба # {1}"
+      "Value": "{0} Forsøk #{1}"
     },
     {
       "Key": "catchStatus",
@@ -88,328 +83,83 @@
     },
     {
       "Key": "candies",
-      "Value": "Цукерок: {0}"
+      "Value": "Candies: {0}"
     },
     {
-      "Key": "unhandledGPXData",
-      "Value": "Невідомі дані в GPX файлі, пробуємо пропустити."
+      "Key": "unhandledGpxData",
+      "Value": "Ubehandlet data i GPX fila, forsøker å hoppe over."
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "ТОП покемонів"
+      "Value": "Pokemons"
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "- IV"
+      "Value": "perfekt"
     },
     {
       "Key": "commonWordName",
-      "Value": "Ім'я"
+      "Value": "navn"
     },
     {
-      "Key": "commonWordUnknown",
-      "Value": "Невідомий"
-    },
-    {
-      "Key": "displayHighestsCPHeader",
-      "Value": "ТОП по CP"
+      "Key": "displayHighestsCpHeader",
+      "Value": "DisplayHighestsCP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "ТОП по IV"
+      "Value": "DisplayHighestsPerfect"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "ТОП по LV"
+      "Value": "DisplayHighestsLevel"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Переконайтеся, що широта і довгота вірні! Закрийте програму, якщо це не так! Широта: {0} Довгота: {1}"
+      "Value": "Vær sikker på at Lat & Lng er korrekt. Exit programmet hvis ikke! Lat: {0} Lng: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Кладемо яйце в інкубатор: {0: 0.00} км залишилося"
+      "Value": "Putter egg i incubator: {0:0.00}km igjen"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Статус інкубатора: {0: 0.00} км залишилося"
-    },
-    {
-      "Key": "incubatorEggHatched",
-      "Value": "З Яйця отримали: {0}"
-    },
-    {
-      "Key": "logEntryError",
-      "Value": "ПОМИЛКА"
-    },
-    {
-      "Key": "logEntryAttention",
-      "Value": "УВАГА"
-    },
-    {
-      "Key": "logEntryInfo",
-      "Value": "ІНФО"
-    },
-    {
-      "Key": "logEntryPokestop",
-      "Value": "POKESTOP"
-    },
-    {
-      "Key": "logEntryFarming",
-      "Value": "ФАРМ"
-    },
-    {
-      "Key": "logEntryRecycling",
-      "Value": "Видаляємо"
-    },
-    {
-      "Key": "logEntryPKMN",
-      "Value": "Ловимо"
-    },
-    {
-      "Key": "logEntryTransfered",
-      "Value": "Обмінюються"
-    },
-    {
-      "Key": "logEntryEvolved",
-      "Value": "Еволюція"
-    },
-    {
-      "Key": "logEntryBerry",
-      "Value": "ЯГОДА"
-    },
-    {
-      "Key": "logEntryEgg",
-      "Value": "ЯЙЦЕ"
-    },
-    {
-      "Key": "logEntryDebug",
-      "Value": "ВІДЛАДКА"
-    },
-    {
-      "Key": "logEntryUpdate",
-      "Value": "ОНОВЛЕННЯ"
-    },
-    {
-      "Key": "loggingIn",
-      "Value": "Логін під аккаунтом {0}"
-    },
-    {
-      "Key": "ptcOffline",
-      "Value":
-        "PTC сервера можливо не працюють АБО невірно вказані дані облікового запису. Спробуйте використовувати логін від Google аккаунта"
-    },
-    {
-      "Key": "tryingAgainIn",
-      "Value": "Пробуємо знову через {0} сек ..."
-    },
-    {
-      "Key": "accountNotVerified",
-      "Value": "Обліковий запис не підтверджений! Виходимо ..."
-    },
-    {
-      "Key": "openingGoogleDevicePage",
-      "Value": "Відкриваємо сторінку Google Device. Будь ласка, вставте код використовуючи CTRL + V"
-    },
-    {
-      "Key": "couldntCopyToClipboard",
-      "Value": "Не вдалося скопіювати код в буфер обміну, зробіть це вручну"
-    },
-    {
-      "Key": "couldntCopyToClipboard2",
-      "Value": "Відкрийте посилання: {0} і введіть {1}"
-    },
-    {
-      "Key": "realisticTravelDetected",
-      "Value": "Виявлено реалістичне переміщення, використовуємо UserSettings.settings"
-    },
-    {
-      "Key": "notRealisticTravel",
-      "Value": "Не реалістичне переміщення в {0}, використовуємо останній файл LastPos.ini"
-    },
-    {
-      "Key": "coordinatesAreInvalid",
-      "Value": "Координати у файлі \" LastPos.ini \"невірні, використовуємо координати за умовчанням"
-    },
-    {
-      "Key": "gotUpToDateVersion",
-      "Value": "Дуже добре! У Вас вже встановлена ​​остання версія {0}"
-    },
-    {
-      "Key": "autoUpdaterDisabled",
-      "Value": "Оновлення відключено. Останній реліз можна скачати з: {0} \n"
-    },
-    {
-      "Key": "downloadingUpdate",
-      "Value": "Скачуємо і встановлюємо оновлення ..."
-    },
-    {
-      "Key": "finishedDownloadingRelease",
-      "Value": "Завершено скачування нового релізу ..."
-    },
-    {
-      "Key": "finishedUnpackingFiles",
-      "Value": "Завершено розпакування файлів ..."
-    },
-    {
-      "Key": "FinishedTransferringConfig",
-      "Value": "Закінчена передача конфігурації на нову версію ..."
-    },
-    {
-      "Key": "updateFinished",
-      "Value": "Оновлення завершено, тепер ви можете закрити це вікно."
-    },
-    {
-      "Key": "lookingForIncensePokemon",
-      "Value": "Шукаємо покемона залученого ладаном ..."
-    },
-    {
-      "Key": "lookingForPokemon",
-      "Value": "Шукаємо покемона ..."
-    },
-    {
-      "Key": "lookingForLurePokemon",
-      "Value": "Шукаємо покемона залученого ЛюрМодулем ..."
-    },
-    {
-      "Key": "pokemonSkipped",
-      "Value": "Пропущений {0}"
-    },
-    {
-      "Key": "invFullTransferring",
-      "Value": "Інвентар повний. Передайте покемонів Професору ..."
-    },
-    {
-      "Key": "invFullTransferManually",
-      "Value":
-        "Інвентар повний. Вручну передайте покемона Професору або встановіть налаштування TransferDuplicatePokemon як true ..."
-    },
-    {
-      "Key": "invFullPokestopLooting",
-      "Value": "Інвентар повний, не можемо взяти предмети!"
-    },
-    {
-      "Key": "encounterProblem",
-      "Value": "Проблема з виловом: {0}"
-    },
-    {
-      "Key": "encounterProblemLurePokemon",
-      "Value": "Проблема з виловом: Приманений ЛюрМодулем покемон {0}"
-    },
-    {
-      "Key": "desiredDestTooFar",
-      "Value": "Зазначене місце призначення {0}, {1} занадто далеко від поточної позиції {2}, {3}"
-    },
-    {
-      "Key": "pokemonRename",
-      "Value": "Покемон {0} ({1}) перейменований з {2} в {3}."
-    },
-    {
-      "Key": "pokemonIgnoreFilter",
-      "Value": "[Фільтр ігнор покемонів] - Ігноруємо {0} як зазначено в настройках"
-    },
-    {
-      "Key": "catchStatusAttempt",
-      "Value": "спроба"
-    },
-    {
-      "Key": "catchStatusError",
-      "Value": "ПОМИЛКА"
-    },
-    {
-      "Key": "catchStatusEscape",
-      "Value": "вибрати"
-    },
-    {
-      "Key": "catchStatusFlee",
-      "Value": "УТІК"
-    },
-    {
-      "Key": "catchStatusMissed",
-      "Value": "упустити"
-    },
-    {
-      "Key": "catchStatusSuccess",
-      "Value": "ВДАЛО"
-    },
-    {
-      "Key": "catchTypeNormal",
-      "Value": "Звичайний"
-    },
-    {
-      "Key": "catchTypeLure",
-      "Value": "на ЛюрМодуль"
-    },
-    {
-      "Key": "catchTypeIncense",
-      "Value": "на Ладан"
-    },
-    {
-      "Key": "webSocketFailStart",
-      "Value": "Не вдалося запустити WebSocketServer через порт: {0}"
-    },
-    {
-      "Key": "statsTemplateString",
-      "Value":
-        "{0} -Онлайн {1}, Рівень: {2} | XP / год: {3: 0} | П / год: {4: 0} | Пил: {5: 0} | обмін: {6: 0} | Вилучено: {7: 0} "
-    },
-    {
-      "Key": "statsXpTemplateString",
-      "Value": "{0} (наст.через {1} г {2} хв | {3} / {4} XP)"
-    },
-    {
-      "Key": "requireInputText",
-      "Value": "Натисніть будь-яку клавішу для продовження ..."
-    },
-    {
-      "Key": "googleTwoFactorAuth",
-      "Value":
-        "Оскільки у Вас включена двухфакторная аутентифікація Google, Вам потрібно помістити пароль Програми Google в файл auth.json"
-    },
-    {
-      "Key": "googleTwoFactorAuthExplanation",
-      "Value":
-        "Відкриваємо паролі Google App. Будь ласка, створіть новий пароль додатка (виберіть Other (Інше) в якості пристрою)"
-    },
-    {
-      "Key": "googleError",
-      "Value": "Переконайтеся, що Ви ввели вірні E-mail і Пароль від аккаунта!"
-    },
-    {
-      "Key": "googleOffline",
-      "Value": "Можливо, сервери не працюють, зачекайте та перезапустіть программу пізніше."
-    },
-    {
-      "Key": "missingCredentialsGoogle",
-      "Value": "Вам потрібно заповнити налаштування GoogleUsername і GooglePassword в auth.json!"
-    },
-    {
-      "Key": "missingCredentialsPtc",
-      "Value": "Вам потрібно заповнити налаштування PtcUsername і PtcPassword в auth.json!"
-    },
-    {
-      "Key": "snipeScan",
-      "Value": "[Снайпер] Шукаємо покемона для вилову в локації {0} ..."
-    },
-    {
-      "Key": "noPokemonToSnipe",
-      "Value": "[Снайпер] Покемона для вилову не виявлено!"
+      "Value": "Incubator oppdatering: {0:0.00}km igjen"
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value":  "--- Pokedex catched --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value":  "--- Pokedex needed --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value":  "#{0} Name: {1} \n"
+    },
+    {
+      "Key": "Proxied",
+      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "Press any key to exit so you can fix your proxy settings..."
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " Your IP is: {0}"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {5}\t {6}: {7}\t {8}: {9} {10}: {11} {12}: {13}"
     }
   ],
 	"PokemonStrings": [

@@ -274,7 +274,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Tuyệt vời! Bạn đang sử dụng phiên bản mới nhất: v{0} (Dịch Bởi: Skick - fb.me/S2Cancer2361)"
+      "Value": "Bạn đang sử dụng phiên bản mới nhất: v{0} (Dịch Bởi: Skick - Group: bit.ly/PokeAuto)"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -625,20 +625,12 @@
       "Value": "[LỖI] Hãy chỉ nhập GIÁ TRỊ như ví dụ: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Hãy nhập Vĩ độ (Nhấn chuột phải để dán)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Chấp nhận Vĩ độ: {0}"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Hãy nhập Kinh độ (Nhấn chuột phải để dán)"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Chấp nhận Kinh độ: {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
@@ -646,19 +638,44 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value":  "--- Pokedex - Đã Bắt --- \n"  
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value":  "#{0} Tên: {1} | Đã Bắt: {2} | Đã Gặp: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value":  "--- Pokedex - Còn Thiếu --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value":  "#{0} Tên: {1} \n"
+    },
+    {
+      "Key": "softBanBypassed",
+      "Value": "Bypass SoftBan Thành Công!"
+
+    },
+    {
+      "Key": "Proxied",
+      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "Press any key to exit so you can fix your proxy settings..."
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " Your IP is: {0}"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {5}\t {6}: {7}\t {8}: {9} {10}: {11} {12}: {13}"
     }
   ],
   "PokemonStrings": [

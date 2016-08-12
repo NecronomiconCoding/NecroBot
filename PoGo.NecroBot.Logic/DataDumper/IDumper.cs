@@ -7,6 +7,6 @@
         /// </summary>
         /// <param name="data">The data to dump.</param>
         /// <param name="filename">File to dump to</param>
-        void Dump(string data, string filename);
+        void Dump(string[] data, string filename);
     }
 }

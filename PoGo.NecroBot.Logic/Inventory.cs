@@ -503,10 +503,8 @@ namespace PoGo.NecroBot.Logic
                 _logicSettings.KeepMinOperator, _logicSettings.KeepMinDuplicatePokemon);
         }
 
-        public async Task<GetInventoryResponse> RefreshCachedInventory(int retries=0)
+        public async Task<GetInventoryResponse> RefreshCachedInventory()
         {
-            if (retries > 3) return null;
-
             var now = DateTime.UtcNow;
             var ss = new SemaphoreSlim(10);
 
@@ -516,12 +514,6 @@ namespace PoGo.NecroBot.Logic
                 _lastRefresh = now;
                 _cachedInventory = await _client.Inventory.GetInventory();
                 return _cachedInventory;
-            }
-            catch (NullReferenceException)
-            {
-                ss.Release();
-                DelayingUtils.Delay(3000, 3000);
-                return await RefreshCachedInventory(++retries);
             }
             finally
             {
