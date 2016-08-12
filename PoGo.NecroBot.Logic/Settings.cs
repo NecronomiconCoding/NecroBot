@@ -20,6 +20,8 @@ using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
+using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 #endregion
 
@@ -821,6 +823,7 @@ namespace PoGo.NecroBot.Logic
                         try
                         {
                             input = File.ReadAllText(configFile);
+                            input = input.Replace("\"Moves\"", $"\"DeprecatedMoves\"");
                             break;
                         }
                         catch (Exception exception)
@@ -840,7 +843,15 @@ namespace PoGo.NecroBot.Logic
                     jsonSettings.ObjectCreationHandling = ObjectCreationHandling.Replace;
                     jsonSettings.DefaultValueHandling = DefaultValueHandling.Populate;
 
-                    settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                    try
+                    {
+                        settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
+                    }
+                    catch (Newtonsoft.Json.JsonSerializationException exception)
+                    {
+                        Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+                        return null;
+                    }
 
                     //This makes sure that existing config files dont get null values which lead to an exception
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.KeepMinOperator == null))
@@ -849,7 +860,9 @@ namespace PoGo.NecroBot.Logic
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.Moves == null))
                     {
-                        filter.Value.Moves = new List<List<PokemonMove>>();
+                        filter.Value.Moves = (filter.Value.DeprecatedMoves != null)
+                                                ? new List<List<PokemonMove>> { filter.Value.DeprecatedMoves }
+                                                : filter.Value.Moves ?? new List<List<PokemonMove>>();
                     }
                     foreach (var filter in settings.PokemonsTransferFilter.Where(x => x.Value.MovesOperator == null))
                     {
