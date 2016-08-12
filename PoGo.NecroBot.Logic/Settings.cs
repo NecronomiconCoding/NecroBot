@@ -343,6 +343,8 @@ namespace PoGo.NecroBot.Logic
         public double DefaultLongitude;
         [DefaultValue(5.0)]
         public double WalkingSpeedInKilometerPerHour;
+        [DefaultValue(true)]
+        public bool RandomlyPauseAtStops;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
         //softban related
@@ -1432,7 +1434,7 @@ namespace PoGo.NecroBot.Logic
         public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
         public int MinPokeballsWhileSnipe => _settings.MinPokeballsWhileSnipe;
         public int MaxPokeballsPerPokemon => _settings.MaxPokeballsPerPokemon;
-
+        public bool RandomlyPauseAtStops => _settings.RandomlyPauseAtStops;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
         public string SnipeLocationServer => _settings.SnipeLocationServer;
         public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;

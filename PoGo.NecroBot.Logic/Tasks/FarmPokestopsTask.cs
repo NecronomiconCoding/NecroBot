@@ -24,6 +24,8 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static readonly Random RandomDevice = new Random();
         public static int TimesZeroXPawarded;
         private static int storeRI;
+        private static int RandomNumber;
+
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -48,8 +50,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var pokestopList = await GetPokeStops(session);
             var stopsHit = 0;
+            var RandomStop = 0;
             var rc = new Random(); //initialize pokestop random cleanup counter first time
             storeRI = rc.Next(8, 15);
+            RandomNumber = rc.Next(4, 11);
+            
             var eggWalker = new EggWalker(1000, session);
 
             if (pokestopList.Count <= 0)
@@ -183,7 +188,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                 //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
                 await eggWalker.ApplyDistance(distance, cancellationToken);
-
+                if (session.LogicSettings.RandomlyPauseAtStops)
+                {
+                    if (++RandomStop >= RandomNumber)
+                    {
+                        RandomNumber = rc.Next(4, 11);
+                        RandomStop = 0;
+                        int RandomWaitTime = rc.Next(30, 120);
+                        Thread.Sleep(RandomWaitTime);
+                    }
+                }
+              
                 if (++stopsHit >= storeRI) //TODO: OR item/pokemon bag is full //check stopsHit against storeRI random without dividing.
                 {
                     storeRI = rc.Next(6, 12); //set new storeRI for new random value
