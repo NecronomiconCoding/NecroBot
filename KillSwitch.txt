@@ -1,2 +1,2 @@
-BotStatus=DISABLE;
+BotStatus=DISABLED;
 The bot has been disabled until we can figure out what is causing the bans.
