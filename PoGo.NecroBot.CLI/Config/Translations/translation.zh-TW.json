@@ -631,11 +631,11 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Value": "請輸入經緯度 (右鍵貼上)，格式為: Latitude, Longitude"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Value": "套用經緯度: {0}"
     },
     {
       "Key": "softBanBypassed",
