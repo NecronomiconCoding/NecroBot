@@ -162,7 +162,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Статус инкубатора: {0:0.00}км осталось"
+      "Value": "Статус инкубатора: {0:0.00}/{1:0.00}км"
     },
     {
       "Key": "incubatorEggHatched",
