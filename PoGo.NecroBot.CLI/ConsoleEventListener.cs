@@ -251,6 +251,8 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(DisplayHighestsPokemonEvent displayHighestsPokemonEvent, ISession session)
         {
+            if (session.LogicSettings.AmountOfPokemonToDisplayOnStart == 0)
+                return;
             string strHeader;
             //PokemonData | CP | IV | Level | MOVE1 | MOVE2 | Candy
             switch (displayHighestsPokemonEvent.SortedBy)
