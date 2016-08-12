@@ -2,19 +2,19 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "PokeBall"
+      "Value": "ﾓﾝｽﾀｰﾎﾞｰﾙ"
     },
     {
       "Key": "greatPokeball",
-      "Value": "GreatBall"
+      "Value": "ｽｰﾊﾟｰﾎﾞｰﾙ"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "UltraBall"
+      "Value": "ﾊｲﾊﾟｰﾎﾞｰﾙ"
     },
     {
       "Key": "masterPokeball",
-      "Value": "MasterBall"
+      "Value": "ﾏｽﾀｰﾎﾞｰﾙ"
     },
     {
       "Key": "wrongAuthType",
@@ -102,7 +102,7 @@
     },
     {
       "Key": "itemRazzBerry",
-      "Value": "Razz Berry"
+      "Value": "ｽﾞﾘﾉﾐ"
     },
     {
       "Key": "catchStatusAttempt",
@@ -326,19 +326,19 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
+      "Value": "ﾓﾝｽﾀｰﾎﾞｰﾙ: {0} | ｽｰﾊﾟｰﾎﾞｰﾙ: {1} | ﾊｲﾊﾟｰﾎﾞｰﾙ: {2} | ﾏｽﾀｰﾎﾞｰﾙ: {3}"
     },
     {
       "Key": "currentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "ｷｽﾞｸﾞｽﾘ: {0} | ｲｲｷｽﾞｸﾞｽﾘ: {1} | ｽｺﾞｲｷｽﾞｸﾞｽﾘ: {2} | ﾏﾝﾀﾝﾉｸｽﾘ: {3}"
     },
     {
       "Key": "currentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
+      "Value": "ｹﾞﾝｷﾉｶｹﾗ: {0} | ｹﾞﾝｷﾉｶﾀﾏﾘ: {1}"
     },
     {
       "Key": "currentMiscItemInv",
-      "Value": "Berries: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "ｽﾞﾘﾉﾐ: {0} | ｵｺｳ: {1} | ｼｱﾜｾﾉﾀﾏｺﾞ: {2} | ﾙｱｰ: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -410,15 +410,15 @@
     },
     {
       "Key": "catchTypeNormal",
-      "Value": "Normal"
+      "Value": "ﾉｰﾏﾙ"
     },
     {
       "Key": "catchTypeLure",
-      "Value": "Lure"
+      "Value": "ﾙｱｰ"
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "Incense"
+      "Value": "ｵｺｳ"
     },
     {
       "Key": "webSocketFailStart",
@@ -490,15 +490,15 @@
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "MOVE1"
+      "Value": "ﾜｻﾞ1"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "MOVE2"
+      "Value": "ﾜｻﾞ2"
     },
     {
       "Key": "displayHighestCandy",
-      "Value": "Candy"
+      "Value": "ｱﾒ"
     },
     {
       "Key": "ipBannedError",
