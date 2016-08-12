@@ -1147,7 +1147,148 @@ namespace PoGo.NecroBot.ConfigUI.Models
         }
         public static readonly DependencyProperty DumpPokemonStatsProperty =
             DependencyProperty.Register("DumpPokemonStats", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
-
+        
+        public string ErrorColor
+        {
+            get { return (string)GetValue(ErrorColor); }
+            set { SetValue(ErrorColor, value); }
+        }
+        public static readonly DependencyProperty ErrorColor =
+            DependencyProperty.Register("ErrorColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public string WarningColor
+        {
+            get { return (string)GetValue(WarningColor); }
+            set { SetValue(WarningColor, value); }
+        }
+        public static readonly DependencyProperty WarningColor =
+            DependencyProperty.Register("WarningColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        public string PokestopColor
+        {
+            get { return (string)GetValue(PokestopColor); }
+            set { SetValue(PokestopColor, value); }
+        }
+        public static readonly DependencyProperty PokestopColor =
+            DependencyProperty.Register("PokestopColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string FarmingColor
+        {
+            get { return (string)GetValue(FarmingColor); }
+            set { SetValue(FarmingColor, value); }
+        }
+        public static readonly DependencyProperty FarmingColor =
+            DependencyProperty.Register("FarmingColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string SniperColor
+        {
+            get { return (string)GetValue(SniperColor); }
+            set { SetValue(SniperColor, value); }
+        }
+        public static readonly DependencyProperty SniperColor =
+            DependencyProperty.Register("SniperColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string RecyclingColor
+        {
+            get { return (string)GetValue(RecyclingColor); }
+            set { SetValue(RecyclingColor, value); }
+        }
+        public static readonly DependencyProperty RecyclingColor =
+            DependencyProperty.Register("RecyclingColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string BerryColor
+        {
+            get { return (string)GetValue(BerryColor); }
+            set { SetValue(BerryColor, value); }
+        }
+        public static readonly DependencyProperty BerryColor =
+            DependencyProperty.Register("BerryColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string CaughtColor
+        {
+            get { return (string)GetValue(CaughtColor); }
+            set { SetValue(CaughtColor, value); }
+        }
+        public static readonly DependencyProperty CaughtColor =
+            DependencyProperty.Register("CaughtColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+        
+        public string FleeColor
+        {
+            get { return (string)GetValue(FleeColor); }
+            set { SetValue(FleeColor, value); }
+        }
+        public static readonly DependencyProperty FleeColor =
+            DependencyProperty.Register("FleeColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string TransferColor
+        {
+            get { return (string)GetValue(TransferColor); }
+            set { SetValue(TransferColor, value); }
+        }
+        public static readonly DependencyProperty TransferColor =
+            DependencyProperty.Register("TransferColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string EvolveColor
+        {
+            get { return (string)GetValue(EvolveColor); }
+            set { SetValue(EvolveColor, value); }
+        }
+        public static readonly DependencyProperty EvolveColor =
+            DependencyProperty.Register("EvolveColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string EggColor
+        {
+            get { return (string)GetValue(EggColor); }
+            set { SetValue(EggColor, value); }
+        }
+        public static readonly DependencyProperty EggColor =
+            DependencyProperty.Register("EggColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string UpdateColor
+        {
+            get { return (string)GetValue(UpdateColor); }
+            set { SetValue(UpdateColor, value); }
+        }
+        public static readonly DependencyProperty UpdateColor =
+            DependencyProperty.Register("UpdateColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string InfoColor
+        {
+            get { return (string)GetValue(InfoColor); }
+            set { SetValue(InfoColor, value); }
+        }
+        public static readonly DependencyProperty InfoColor =
+            DependencyProperty.Register("InfoColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string NewColor
+        {
+            get { return (string)GetValue(NewColor); }
+            set { SetValue(NewColor, value); }
+        }
+        public static readonly DependencyProperty NewColor =
+            DependencyProperty.Register("NewColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string SoftBanColor
+        {
+            get { return (string)GetValue(SoftBanColor); }
+            set { SetValue(SoftBanColor, value); }
+        }
+        public static readonly DependencyProperty SoftBanColor =
+            DependencyProperty.Register("SoftBanColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string LevelUpColor
+        {
+            get { return (string)GetValue(LevelUpColor); }
+            set { SetValue(LevelUpColor, value); }
+        }
+        public static readonly DependencyProperty LevelUpColor =
+            DependencyProperty.Register("LevelUpColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+                
+        public string DebugColor
+        {
+            get { return (string)GetValue(DebugColor); }
+            set { SetValue(DebugColor, value); }
+        }
+        public static readonly DependencyProperty DebugColor =
+            DependencyProperty.Register("DebugColor", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
         #endregion MISC Properties
 
 
