@@ -135,7 +135,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Ei-Brutmaschine Status Update: {0:0.00}km verbleibend"
+      "Value": "Ei-Brutmaschine Status Update: {0:0.00}/{1:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",

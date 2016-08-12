@@ -158,7 +158,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "[Aktualizacja inkubatora] Pozostało: {0:0.00}km"
+      "Value": "[Aktualizacja inkubatora] Pozostało: {0:0.00}/{1:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",
@@ -629,12 +629,20 @@
       "Value": "[BŁĄD] Proszę wpisywać tylko wartość. Na przykład: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Proszę wprowadzić Szerokość: (PPM, aby wkleić)"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Zapisana Szerokość: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Proszę wprowadzić Długość: (PPM, aby wkleić)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Zapisana Długość: {0}"
     },
     {
       "Key": "softBanBypassed",

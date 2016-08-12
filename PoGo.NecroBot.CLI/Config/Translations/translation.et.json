@@ -164,7 +164,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Inkubaatori seis: {0:0.00} km veel jäänud"
+      "Value": "Inkubaatori seis: {0:0.00}/{1:0.00} km"
     },
     {
       "Key": "incubatorEggHatched",

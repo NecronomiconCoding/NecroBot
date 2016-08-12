@@ -158,7 +158,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Actualizando el estado de la incubadora: {0:0.00}km restantes"
+      "Value": "Actualizando el estado de la incubadora: {0:0.00}/{1:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",
@@ -613,12 +613,20 @@
       "Value": "[ERROR] Por favor, introduce solamente un VALOR. Por ejemplo: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Por favor, introduce una latitud (Recuerda... Clic derecho para pegar)"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Latitud aceptada: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Por favor, introduce una Longitud (Recuerda... Clic derecho para pegar)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Longitud acepteda: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
@@ -630,7 +638,7 @@
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value": "#{0} Nombre: {1} | Atrapados: {2} | Encontrados: {3} \n"
+      "Value":  "#{0} Nombre: {1} | Atrapados: {2} | Encontrados: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",

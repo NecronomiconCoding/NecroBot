@@ -138,7 +138,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Inkubatoriaus atnaujinimas: {0:0.00}km liko"
+      "Value": "Inkubatoriaus atnaujinimas: {0:0.00}/{1:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",

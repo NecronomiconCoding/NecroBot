@@ -123,7 +123,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Incubator oppdatering: {0:0.00}km igjen"
+      "Value": "Incubator oppdatering: {0:0.00}/{1:0.00}km"
     },
     {
       "Key": "PokedexCatchedTelegram",

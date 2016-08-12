@@ -158,7 +158,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "สถานะแคปซูนฟักไข่อีก : {0:0.00}กิโลเมตร"
+      "Value": "สถานะแคปซูนฟักไข่อีก : {0:0.00}/{1:0.00}กิโลเมตร"
     },
     {
       "Key": "incubatorEggHatched",
@@ -629,12 +629,12 @@
       "Value": "[ผิดพลาด] กรุณาใส่ค่าตัวอย่างดังต่อไปนี้ : {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "โปรดป้อนละติจูด (คลิกขวาเพื่อวาง)"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "ละติจูดคือ : {0}"
     },
     {
       "Key": "firstStartSetupDefaultLongPrompt",

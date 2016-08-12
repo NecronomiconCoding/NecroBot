@@ -173,7 +173,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Aktualis inkubator allapot: {0:0.00}km maradt"
+      "Value": "Aktualis inkubator allapot: {0:0.00}/{1:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",
@@ -644,12 +644,20 @@
       "Value": "[ERROR] Please input only a VALUE for example: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Key": "firstStartSetupDefaultLatPrompt",
+      "Value": "Latitude (szelessegi fok):"
     },
     {
-      "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Key": "firstStartSetupDefaultLatConfirm",
+      "Value": "Latitude: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "Longitude (hosszusagi fok)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "Longitude: {0}"
     },
     {
       "Key": "softBanBypassed",

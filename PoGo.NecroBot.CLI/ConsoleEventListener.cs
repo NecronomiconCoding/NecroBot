@@ -82,8 +82,8 @@ namespace PoGo.NecroBot.CLI
         private static void HandleEvent(EggIncubatorStatusEvent eggIncubatorStatusEvent, ISession session)
         {
             Logger.Write(eggIncubatorStatusEvent.WasAddedNow
-                ? session.Translation.GetTranslation(TranslationString.IncubatorPuttingEgg, eggIncubatorStatusEvent.KmRemaining)
-                : session.Translation.GetTranslation(TranslationString.IncubatorStatusUpdate, eggIncubatorStatusEvent.KmRemaining),
+                ? session.Translation.GetTranslation(TranslationString.IncubatorPuttingEgg, eggIncubatorStatusEvent.KmWalked, eggIncubatorStatusEvent.KmToWalk)
+                : session.Translation.GetTranslation(TranslationString.IncubatorStatusUpdate, eggIncubatorStatusEvent.KmWalked, eggIncubatorStatusEvent.KmToWalk),
                 LogLevel.Egg);
         }
 
