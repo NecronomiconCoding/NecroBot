@@ -3,6 +3,7 @@
 using System;
 using System.Text;
 using PoGo.NecroBot.CLI.Models;
+using PoGo.NecroBot.Logic
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 
