@@ -60,6 +60,32 @@ namespace PoGo.NecroBot.Logic
                         : moves ?? new List<List<PokemonMove>>();
             MovesOperator = movesOperator;
         }
+        
+    public class Misc
+    {
+        public Misc()
+        {
+        }
+        
+        public string ErrorColor { get; set; }
+        public string WarningColor { get; set; }
+        public string PokestopColor { get; set; }
+        public string FarmingColor { get; set; }
+        public string SniperColor { get; set; }
+        public string RecyclingColor { get; set; }
+        public string BerryColor { get; set; }
+        public string CaughtColor { get; set; }
+        public string FleeColor { get; set; }
+        public string TransferColor { get; set; }
+        public string EvolveColor { get; set; }
+        public string EggColor { get; set; }
+        public string UpdateColor { get; set; }
+        public string InfoColor { get; set; }
+        public string NewColor { get; set; }
+        public string SoftBanColor { get; set; }
+        public string LevelUpColor { get; set; }
+        public string DebugColor { get; set; }
+    }
 
         public int KeepMinCp { get; set; }
         public int KeepMinLvl { get; set; }
