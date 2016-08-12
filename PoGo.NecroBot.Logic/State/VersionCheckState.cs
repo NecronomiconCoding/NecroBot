@@ -23,7 +23,7 @@ namespace PoGo.NecroBot.Logic.State
     public class VersionCheckState : IState
     {
         public const string VersionUri =
-            "https://rawgit.com/NECROBOTIO/NecroBot/master/PoGo.NecroBot.Logic/Properties/AssemblyInfo.cs";
+            "https://rawgit.com/NoxxDev/NecroBot/master/PoGo.NecroBot.Logic/Properties/AssemblyInfo.cs";
 
         public const string LatestReleaseApi =
             "https://api.github.com/repos/NECROBOTIO/NecroBot/releases/latest";
