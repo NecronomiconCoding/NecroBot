@@ -127,12 +127,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 .ToList();
                 // randomize next pokestop between first and second by distance
                 var pokestopListNum = 0;
-                if (pokestopList.Count >= 1)
+                if (pokestopList.Count > 1)
                 {
                     pokestopListNum = rc.Next(0, 2);
                 }
-                var pokeStop = pokestopList[pokestopListNum];
-                pokestopList.RemoveAt(pokestopListNum);
+
                 var pokeStop = pokestopListWithDetails[pokestopListNum];
                 pokestopList.Remove(pokeStop.PokeStop);
 
