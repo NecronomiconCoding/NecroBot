@@ -630,7 +630,7 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Value": "Prosze wprowadzić szerokość i długość geograficzną (Klniknij prawy przycisk myszy, aby wkleić) - Format: Szerokość, Długość"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
