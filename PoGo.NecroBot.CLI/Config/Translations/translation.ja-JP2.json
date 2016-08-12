@@ -2,71 +2,71 @@
   "TranslationStrings": [
     {
       "Key": "pokeball",
-      "Value": "PokeBall"
+      "Value": "モンスターボール"
     },
     {
       "Key": "greatPokeball",
-      "Value": "GreatBall"
+      "Value": "スーパーボール"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "UltraBall"
+      "Value": "ハイパーボール"
     },
     {
       "Key": "masterPokeball",
-      "Value": "MasterBall"
+      "Value": "マスターボール"
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Unknown AuthType in config.json"
+      "Value": "アカウント種別が正しくありません(config.json)"
     },
     {
       "Key": "loginInvalid",
-      "Value": "User credentials are invalid and login failed."
+      "Value": "ユーザー資格情報が取得できません。ログインに失敗しました。"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "You're outside of your defined radius! Walking to start ({0}m away) in 5 seconds. Is your LastPos.ini file correct?"
+      "Value": "あなたが設定した最大移動距離半径の外にいます！5秒後に移動を開始します。({0}m away)LastPos.iniファイルの設定は正しいですか?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "No usable PokeStops found in your area. Is your maximum distance too small?"
+      "Value": "周辺に有効なポケストップが見つかりません。最大距離設定が短かすぎる可能性があります。"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Name: {0} XP: {1}, Gems: {2}, Items: {3}, Lat: {4}, Long: {5}"
+      "Value": "名称: {0} 経験値: {1}, ジェム: {2}, アイテム: {3}, 経度: {4}, 緯度: {5}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Name: {0} INFO: Looting failed, possible softban. Unban in: {1}/{2}"
+      "Value": "名称: {0} 注意:ルートの構成に失敗しました。ペナルティを受けた可能性があります。解除まで: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Traveling to Pokestop: {0} ({1}m) ({2} seconds)"
+      "Value": "次のポケストップへ移動中です: {0} ({1}m) ({2} 秒)"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Playing as {0}"
+      "Value": "{0} としてログインしています。"
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "Used Incense, remaining: {0}"
+      "Value": "おこうを使用しました, 残り時間: {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Used Lucky Egg, remaining: {0}"
+      "Value": "しあわせタマゴを使用しました, 残り時間: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} successfully for {1}xp"
+      "Value": "{0} 進化に成功しました {1}経験値"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Failed {0}. Result was {1}, stopping evolving {2}"
+      "Value": "進化に失敗しました。（ {0}）。 {1}, 進化が止まりました。 {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [最高記録 CP: {3}  IV: {4}%] (アメ: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -74,39 +74,39 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | 成功率: {7}% | 距離： {8}m | {9}を使用 (残り {10}) | {11} の経験値を獲得 | {12} | 緯度: {13} 経度: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "{0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | 成功率: {7}% | 距離：{8}m | {9}を使用 (残り {10}) | 緯度: {11} 経度: {12}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "No Pokeballs - We missed a {0} with CP {1}"
+      "Value": "ボールがありません - CP {1} の {0} を逃しました"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
-      "Value": "Waiting to evolve {0} Pokemon once {1} more are caught! ({2}/{3} for {4}% inventory)"
+      "Value": "進化待機中： {0} Pokemon once {1} more are caught! ({2}/{3} for {4}% inventory)"
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "Lucky eggs will never be used with UseLuckyEggsMinPokemonAmount set to {0}, use <= {1} instead"
+      "Value": "ポケモンの数が少ないため、しあわせタマゴを使用しませんでした。"
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "Catch {0} more Pokemon to use a Lucky Egg!"
+      "Value": "しあわせタマゴを使うためには {0} 匹ポケモンが足りません"
     },
     {
       "Key": "eventUseBerry",
-      "Value": "Used {0} | {1} remaining"
+      "Value": " {0} を使用しました。| 残り：{1}"
     },
     {
       "Key": "itemRazzBerry",
-      "Value": "Razz Berry"
+      "Value": "ズリのみ"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0} Attempt #{1}"
+      "Value": "{0} 試行回数： #{1}"
     },
     {
       "Key": "catchStatus",
@@ -114,519 +114,519 @@
     },
     {
       "Key": "candies",
-      "Value": "Candies: {0}"
+      "Value": "アメ: {0}"
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Unhandled data in GPX file, attempting to skip."
+      "Value": "GPXデータ内に未処理の内容、スキップします"
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokemons"
+      "Value": "ポケモン"
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "perfect"
+      "Value": "完全"
     },
     {
       "Key": "commonWordName",
-      "Value": "name"
+      "Value": "名称"
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "Unknown"
+      "Value": "不明な"
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "DisplayHighestsCP"
+      "Value": "最大CP表示"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "DisplayHighestsPerfect"
+      "Value": "最大個体表示"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "DisplayHighestsLevel"
+      "Value": "最大レベル表示"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Make sure Lat & Lng are right. Exit Program if not! Lat: {0} Lng: {1}"
+      "Value": "正しく緯度と経度が入力されているか確認してください。違う場合はプログラムを終了してください。 緯度: {0} 経度: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Putting egg in incubator: {0:0.00}km left"
+      "Value": "タマゴを孵化装置にセットしています: 残り：{0:0.00}km"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Incubator status update: {0:0.00}km left"
+      "Value": "孵化装置の状態: 残り：{0:0.00}km"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Incubated egg has hatched: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "タマゴが孵化しました: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
-      "Value": "ERROR"
+      "Value": "エラー"
     },
     {
       "Key": "logEntryAttention",
-      "Value": "ATTENTION"
+      "Value": "警告"
     },
     {
       "Key": "logEntryInfo",
-      "Value": "INFO"
+      "Value": "情報"
     },
     {
       "Key": "logEntryPokestop",
-      "Value": "POKESTOP"
+      "Value": "ポケストップ"
     },
     {
       "Key": "logEntryFarming",
-      "Value": "FARMING"
+      "Value": "ファーミング"
     },
     {
       "Key": "logEntrySniper",
-      "Value": "SNIPER"
+      "Value": "スナイパー"
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "RECYCLING"
+      "Value": "アイテム整理"
     },
     {
       "Key": "logEntryPkmn",
-      "Value": "PKMN"
+      "Value": "ポケモン"
     },
     {
       "Key": "logEntryTransfered",
-      "Value": "TRANSFERRED"
+      "Value": "博士に送ります"
     },
     {
       "Key": "logEntryEvolved",
-      "Value": "EVOLVED"
+      "Value": "進化"
     },
     {
       "Key": "logEntryBerry",
-      "Value": "BERRY"
+      "Value": "木の実"
     },
     {
       "Key": "logEntryEgg",
-      "Value": "EGG"
+      "Value": "タマゴ"
     },
     {
       "Key": "logEntryDebug",
-      "Value": "DEBUG"
+      "Value": "デバッグ"
     },
     {
       "Key": "logEntryUpdate",
-      "Value": "UPDATE"
+      "Value": "更新"
     },
     {
       "Key": "logEntryNew",
-      "Value": "NEW"
+      "Value": "新しい"
     },
     {
       "Key": "logEntrySoftBan",
-      "Value": "SOFTBAN"
+      "Value": "ソフトBAN"
     },
     {
       "Key": "loggingIn",
-      "Value": "Logging in using {0}"
+      "Value": "{0} を使ってログイン中"
     },
     {
       "Key": "ptcOffline",
-      "Value": "PTC Servers are probably down OR your credentials are wrong. Try google"
+      "Value": "PTCサーバーがダウンしているか、ログイン情報が間違っています。Googleも試してみてください。"
     },
     {
       "Key": "accessTokenExpired",
-      "Value": "PTC Login Token expired. Relogging..."
+      "Value": "PTCログイントークンの有効期限が切れています。ログインし直しています..."
     },
     {
       "Key": "invalidResponse",
-      "Value": "Received an invalid response from Niantic server"
+      "Value": "Nianticのサーバーから不正なレスポンスを受信しました"
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "Trying again in {0} seconds..."
+      "Value": "再試行しています {0} 秒お待ちください"
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Account not verified! Exiting..."
+      "Value": "アカウントがありません！ｗ 終了します..."
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Opening Google Device page. Please paste the code using CTRL+V"
+      "Value": "Googleのデバイスページを開いています。「CTRL+V」でコードをコピペしてください。"
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Couldnt copy to clipboard, do it manually"
+      "Value": "クリップボードにコピーできませんでした。手動で試行してください。"
     },
     {
       "Key": "couldntCopyToClipboard2",
-      "Value": "Goto: {0} & enter {1}"
+      "Value": "{0}へ移動中 および {1}へ到着"
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Detected realistic Traveling , using Default Settings inside config.json"
+      "Value": "疑似歩行を検知。config.json内のデフォルト設定を使用します。"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Not realistic Traveling at {0}, using last saved LastPos.ini"
+      "Value": "{0}にて不正な疑似移動を検知。LastPos.iniをロードします。"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Coordinates in \"LastPos.ini\" file are invalid, using the default coordinates"
+      "Value": "\"LastPos.ini\" ファイル内の座標が不正です。デフォルト設定を使用します。"
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Perfect! You already have the newest Version {0}"
+      "Value": "NECRO BOTは最新版です（{0}）"
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "AutoUpdater is disabled. Get the latest release from: {0}\n "
+      "Value": "自動アップデートが無効です。{0}から最新版を入手してください。\n "
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Downloading and apply Update..."
+      "Value": "最新版をダウンロードし、適用しています..."
     },
     {
       "Key": "finishedDownloadingRelease",
-      "Value": "Finished downloading newest Release..."
+      "Value": "最新版へのアップデートが完了しました"
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "Finished unpacking files..."
+      "Value": "ファイルの解凍が完了しました..."
     },
     {
       "Key": "finishedTransferringConfig",
-      "Value": "Finished transferring your config to the new version..."
+      "Value": "設定ファイルを最新版へ変換しました"
     },
     {
       "Key": "updateFinished",
-      "Value": "Update finished, you can close this window now."
+      "Value": "アップデートが完了しました。ウィンドウを閉じてください。"
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Looking for incense Pokemon..."
+      "Value": "おこう効果内のポケモンを探しています..."
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Looking for Pokemon..."
+      "Value": "ポケモンを探しています..."
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Looking for lure Pokemon..."
+      "Value": "ルアー効果内のポケモンを探しています..."
     },
     {
       "Key": "pokemonSkipped",
-      "Value": "Skipped {0}"
+      "Value": "{0}を無視しました"
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "You have no pokeballs in your inventory, no more Pokemon can be caught!"
+      "Value": "バッグにボールがない為、ポケモンを捕まえられません！"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
+      "Value": "手持ちのボール:  モンスターボール: {0} | スーパーボール: {1} | ハイパーボール: {2} | マスターボール: {3}"
     },
     {
       "Key": "currentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+      "Value": "キズぐすり: {0} | いいキズぐすり: {1} | すごいキズぐすり: {2} | まんたんのくすり: {3}"
     },
     {
       "Key": "currentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
+      "Value": "げんきのかけら: {0} | げんきのかたまり: {1}"
     },
     {
       "Key": "currentMiscItemInv",
-      "Value": "Berries: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
+      "Value": "ズリのみ: {0} | おこう: {1} | しあわせタマゴ: {2} | ルアー: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[Configuration Invalid] Your maximum items combined (balls+potions+revives={0}) is over your max item storage ({1})"
+      "Value": "[無効な設定] もちもの (ボール+キズぐすり+げんきのかけら等={0}) が所持数限界を超えています ({1})"
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "Recycling Quietly..."
+      "Value": "アイテムを整理しています..."
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Pokemon Inventory is full, transferring Pokemon..."
+      "Value": "ポケモンの所持最大数に達しました。博士に送っています..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Pokemon Inventory is full! Please transfer Pokemon manually or set TransferDuplicatePokemon to true in settings..."
+      "Value": "ポケモンが一杯です！手動でポケモンを送るか、設定の「TransferDuplicatePokemon」を「true」にしてください..."
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Inventory is full, no items looted!"
+      "Value": "もちものが一杯です、アイテムが取得できませんでした"
     },
     {
       "Key": "encounterProblem",
-      "Value": "Encounter problem: {0}"
+      "Value": "問題発生回数: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Encounter problem: Lure Pokemon {0}"
+      "Value": "問題発生: ルアーによるポケモンが {0} 匹です"
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Your desired destination of {0}, {1} is too far from your current position of {2}, {3}"
+      "Value": "指定先目的地{0}、 {1}の現在地から遠すぎます {2}, {3}"
     },
     {
       "Key": "pokemonRename",
-      "Value": "Pokemon {0} ({1}) renamed from {2} to {3}."
+      "Value": "ポケモン {0} ({1}) を {2} から {3}へ名前変更"
     },
     {
       "Key": "pokemonFavorite",
-      "Value": "{0}% perfect {1} (CP {2}) *favorited*."
+      "Value": "{0}% パーフェクト {1} (CP {2}) を *お気に入りに登録しました*。"
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Pokemon ignore filter] - Ignoring {0} as defined in settings"
+      "Value": "[ポケモン無視フィルタ] {0} を無視しています"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "CatchAttempt"
+      "Value": "捕獲を試行"
     },
     {
       "Key": "catchStatusError",
-      "Value": "CatchError"
+      "Value": "捕獲エラー"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "CatchEscape"
+      "Value": "捕獲失敗"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "CatchFlee"
+      "Value": "捕獲逃走"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "CatchMissed"
+      "Value": "捕獲失敗"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "CatchSuccess"
+      "Value": "捕獲成功"
     },
     {
       "Key": "catchTypeNormal",
-      "Value": "Normal"
+      "Value": "通常"
     },
     {
       "Key": "catchTypeLure",
-      "Value": "Lure"
+      "Value": "ルアー"
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "Incense"
+      "Value": "おこう"
     },
     {
       "Key": "webSocketFailStart",
-      "Value": "Failed to start WebSocketServer on port : {0}"
+      "Value": "WebSocketServer をポート「{0}」で開始できません"
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Runtime {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Transferred: {6:n0} | Recycled: {7:n0}"
+      "Value": "{0} - 動作時間 {1} - レベル: {2} | 経験値/時: {3:n0} | 捕獲数/時: {4:n0} | ほしのすな: {5:n0} | 転送数: {6:n0} | 捨てたアイテム: {7:n0}"
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- LVL {0} | {1} ----- \n Experience: {2}/{3} \n Pokemons caught: {4} \n Pokemons deployed: {5} \n Pokestops visited: {6} \n Eggs hatched: {7} \n Pokemons evolved: {8} \n Pokedex entries: {9} \n KM walked: {10}  \n Pokemons: {11}/{12}"
+      "Value": "----- レベル {0} | {1} ----- \n 経験値: {2}/{3} \n 捕獲: {4} \n 配置: {5} \n ポケストップ: {6} \n 孵化したポケモン: {7} \n 進化したポケモン: {8} \n ずかん: {9} \n 移動距離: {10}  \n 手持ち: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
-      "Value": "\n CP: {0} | IV: {1}% | Name: {2}"
+      "Value": "\n CP: {0} | IV: {1}% | {2}"
     },
     {
       "Key": "helpTemplate",
-      "Value": "Commands: \n \n /top <cp/iv> <amount> - Shows you top Pokemons. \n /all <cp/iv> - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items. \n /status - Shows you the Status of the Bot. \n /pokedex - Shows you Pokedex "
+      "Value": "Commands: \n \n /top <cp/iv> <amount> - トップのポケモンを表示 \n /all <cp/iv> - 全てのポケモンを表示 \n /profile - プロファイルを表示 \n /loc - 座標を表示。 \n /items - アイテムを表示 \n /status - BOTの状態を表示. \n /pokedex - ずかんを表示 "
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (Advance in {1}h {2}m | {3:n0}/{4:n0} XP)"
+      "Value": "{0} (あと {1}時間 {2}分でレベルアップ | {3:n0}/{4:n0} 経験値)"
     },
     {
       "Key": "requireInputText",
-      "Value": "Program will continue after the key press..."
+      "Value": "何かキーを押すと続行..."
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value": "As you have Google Two Factor Auth enabled, you will need to insert an App Specific Password into the auth.json"
+      "Value": "Googleツーファクタ認証が有効にになっている場合はauth.jsonに正しくトークンを記述してください"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value": "Opening Google App-Passwords. Please make a new App Password (use Other as Device)"
+      "Value": "Googleアプリケーションパスワードを開いています。新しいアプリケーションパスワードを入力してください。(別のデバイスとして使用)"
     },
     {
       "Key": "googleError",
-      "Value": "Make sure you have entered the right Email & Password."
+      "Value": "Google認証失敗。IDとパスワードが正しく記述されていることを確認してください。"
     },
     {
       "Key": "googleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "おそらくGoogleがサーバダウンしています。しばらく経ってからBOTを開始してください。"
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "You need to fill out GoogleUsername and GooglePassword in auth.json!"
+      "Value": "auth.jsonにGoogleのユーザー名とパスワードが記述されていません！"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "You need to fill out PtcUsername and PtcPassword in auth.json!"
+      "Value": "auth.jsonにPTCのユーザー名とパスワードが記述されていません！"
     },
     {
       "Key": "snipeScan",
-      "Value": "Scanning for Snipeable Pokemon at {0}..."
+      "Value": "スナイプ可能ポケモンを検索中 座標：{0}"
     },
     {
       "Key": "snipeScanEx",
-      "Value": "Sniping a {0} with {1} IV at {2}..."
+      "Value": " {1} IV の {0} をスナイプしています 座標：{2}"
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "Did not find a Pokemon within the Location, pokemon despawned?"
+      "Value": "スナイプ可能なポケモンが見つかりませんでした！"
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Not enough Pokeballs to start sniping! ({0}/{1})"
+      "Value": "スナイプに必要なモンスターボールがありません！ ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "MOVE1"
+      "Value": "わざ1"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "MOVE2"
+      "Value": "わざ2"
     },
     {
       "Key": "displayHighestCandy",
-      "Value": "Candy"
+      "Value": "あめ"
     },
     {
       "Key": "ipBannedError",
-      "Value": "Connection refused. Your IP might have been Blacklisted by Niantic. Exiting.."
+      "Value": "接続が切断されました。NianticによってIPがブロックされた可能性があります。 終了しています..."
     },
     {
       "Key": "noEggsAvailable",
-      "Value": "No Eggs Available"
+      "Value": "しあわせタマゴがありません"
     },
     {
       "Key": "useLuckyEggActive",
-      "Value": "Lucky Egg Already Active"
+      "Value": "しあわせタマゴはすでに有効です"
     },
     {
       "Key": "usedLuckyEgg",
-      "Value": "Used Lucky Egg"
+      "Value": "しあわせタマゴを使用しました"
     },
     {
       "Key": "useLuckyEggAmount",
-      "Value": "Lucky Eggs in Inventory: {0}"
+      "Value": "残りのしあわせタマゴ: {0}"
     },
     {
       "Key": "noIncenseAvailable",
-      "Value": "No Incense Available"
+      "Value": "おこうがありません"
     },
     {
       "Key": "useIncenseActive",
-      "Value": "Incense Already Active"
+      "Value": "おこうはすでに有効です"
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "Incense in Inventory: {0}"
+      "Value": "残りのおこう: {0}"
     },
     {
       "Key": "usedIncense",
-      "Value": "Used an Incense"
+      "Value": "おこうを使用しました"
     },
     {
       "Key": "amountPkmSeenCaught",
-      "Value": "Amount of Pokemon Seen: {0}/151, Amount of Pokemon Caught: {1}/151"
+      "Value": "見つけたポケモン: {0}/151　 捕まえたポケモン: {1}/151"
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "Potential Evolutions: {0}"
+      "Value": "[進化]設定個体値による進化: {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "Pokemon Upgrade Failed Not Enough Resources"
+      "Value": "リソース不足により、ポケモンのレベルアップに失敗しました"
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "Sniping server is offline. Skipping..."
+      "Value": "スナイプ用のサーバーに接続できません。スキップします..."
     },
     {
       "Key": "firstStartPrompt",
-      "Value": "This is your first start, would you like to begin setup? {0}/{1}"
+      "Value": "初めての起動です。セットアップを開始しますか？ {0}/{1}"
     },
     {
       "Key": "firstStartLanguagePrompt",
-      "Value": "Would you like to change the default language? {0}/{1}"
+      "Value": "言語設定を変更しますか？ {0}/{1}"
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "Please enter a new language code"
+      "Value": "言語コードを入力してください"
     },
     {
       "Key": "firstStartLanguageConfirm",
-      "Value": "Language Code Applied: {0}"
+      "Value": "言語コードが設定されました: {0}"
     },
     {
       "Key": "promptError",
-      "Value": "[INPUT ERROR] Error with input, please enter '{0}' or '{1}"
+      "Value": "[入力エラー]'{0}' もしくは '{1}を入力してください"
     },
     {
       "Key": "firstStartAutoGenSettings",
-      "Value": "Config/Auth file automatically generated and must be completed before continuing"
+      "Value": "Config/Auth ファイルを自動生成しました。続行するには各項目を設定してください。"
     },
     {
       "Key": "firstStartSetupAccount",
-      "Value": "### Setting up new USER ACCOUNT ###"
+      "Value": "### 新しいユーザーアカウントを設定します ###"
     },
     {
       "Key": "firstStartSetupTypePrompt",
-      "Value": "Please choose an account type: {0}/{1}"
+      "Value": "アカウントのタイプを入力してください: {0}/{1}"
     },
     {
       "Key": "firstStartSetupTypeConfirm",
-      "Value": "Chosen Account Type: {0}"
+      "Value": "{0} が選択されました"
     },
     {
       "Key": "firstStartSetupTypePromptError",
-      "Value": "[ERROR] submitted an incorrect account type, please choose '{0}' or '{1}'"
+      "Value": "[エラー]正しいアカウントタイプではありません '{0}' もしくは '{1}' と入力してください"
     },
     {
       "Key": "firstStartSetupUsernamePrompt",
-      "Value": "Please enter a Username"
+      "Value": "アカウントユーザー名を入力してください"
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
-      "Value": "Accepted username: {0}"
+      "Value": "{0} にユーザー名を設定しました"
     },
     {
       "Key": "firstStartSetupPasswordPrompt",
-      "Value": "Please enter a Password"
+      "Value": "アカウントパスワードを入力してください"
     },
     {
       "Key": "firstStartSetupPasswordConfirm",
-      "Value": "Accepted password: {0}"
+      "Value": "{0} にパスワードを設定しました"
     },
     {
       "Key": "firstStartAccountCompleted",
-      "Value": "### User Account Completed ###"
+      "Value": "### ユーザーアカウント設定完了 ###"
     },
     {
       "Key": "firstStartDefaultLocationPrompt",
-      "Value": "Would you like to setup a new Default Location? {0}/{1}"
+      "Value": "初期座標を設定しますか？ {0}/{1}"
     },
     {
       "Key": "firstStartDefaultLocationSet",
-      "Value": "Default Location Applied"
+      "Value": "初期座標を設定しました"
     },
     {
       "Key": "firstStartDefaultLocation",
-      "Value": "### Setting Default Position ###"
+      "Value": "### 初期座標を設定 ###"
     },
     {
       "Key": "firstStartSetupDefaultLocationError",
-      "Value": "[ERROR] Please input only a VALUE for example: {0}"
+      "Value": "[エラー]正しい値を入力してください 例: {0}"
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
@@ -638,27 +638,27 @@
     },
     {
       "Key": "softBanBypassed",
-      "Value": "Successfully bypassed!"
+      "Value": "解除に成功しました"
     },
     {
       "Key": "firstStartSetupCompleted",
-      "Value": "### COMPLETED CONFIG SETUP ###"
+      "Value": "### 最初の設定が完了しました ###"
     },
     {
       "Key": "pokedexCatchedTelegram",
-      "Value": "--- Pokedex catched --- \n"
+      "Value": "--- ずかんに登録 --- \n"
     },
     {
       "Key": "pokedexPokemonCatchedTelegram",
-      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value": "#{0}  {1} | 捕獲: {2} | 遭遇: {3} \n"
     },
     {
       "Key": "pokedexNeededTelegram",
-      "Value": "--- Pokedex needed --- \n"
+      "Value": "--- ずかんに未登録 --- \n"
     },
     {
       "Key": "pokedexPokemonNeededTelegram",
-      "Value": "#{0}# Name: {1} \n"
+      "Value": "#{0}#  {1} \n"
     },
     {
       "Key": "Proxied",
@@ -684,901 +684,901 @@
   "PokemonStrings": [
     {
       "Key": "bulbasaur",
-      "Value": "ﾌｼｷﾞﾀﾞﾈ"
+      "Value": "フシギダネ"
     },
     {
       "Key": "ivysaur",
-      "Value": "ﾌｼｷﾞｿｳ"
+      "Value": "フシギソウ"
     },
     {
       "Key": "venusaur",
-      "Value": "ﾌｼｷﾞﾊﾞﾅ"
+      "Value": "フシギバナ"
     },
     {
       "Key": "charmander",
-      "Value": "ﾋﾄｶｹﾞ"
+      "Value": "ヒトカゲ"
     },
     {
       "Key": "charmeleon",
-      "Value": "ﾘｻﾞｰﾄﾞ"
+      "Value": "リザード"
     },
     {
       "Key": "charizard",
-      "Value": "ﾘｻﾞｰﾄﾞﾝ"
+      "Value": "リザードン"
     },
     {
       "Key": "squirtle",
-      "Value": "ｾﾞﾆｶﾞﾒ"
+      "Value": "ゼニガメ"
     },
     {
       "Key": "wartortle",
-      "Value": "ｶﾒｰﾙ"
+      "Value": "カメール"
     },
     {
       "Key": "blastoise",
-      "Value": "ｶﾒｯｸｽ"
+      "Value": "カメックス"
     },
     {
       "Key": "caterpie",
-      "Value": "ｷｬﾀﾋﾟｰ"
+      "Value": "キャタピー"
     },
     {
       "Key": "metapod",
-      "Value": "ﾄﾗﾝｾﾙ"
+      "Value": "トランセル"
     },
     {
       "Key": "butterfree",
-      "Value": "ﾊﾞﾀﾌﾘｰ"
+      "Value": "バタフリー"
     },
     {
       "Key": "weedle",
-      "Value": "ﾋﾞｰﾄﾞﾙ"
+      "Value": "ビードル"
     },
     {
       "Key": "kakuna",
-      "Value": "ｺｸｰﾝ"
+      "Value": "コクーン"
     },
     {
       "Key": "beedrill",
-      "Value": "ｽﾋﾟｱｰ"
+      "Value": "スピアー"
     },
     {
       "Key": "pidgey",
-      "Value": "ﾎﾟｯﾎﾟ"
+      "Value": "ポッポ"
     },
     {
       "Key": "pidgeotto",
-      "Value": "ﾋﾟｼﾞｮﾝ"
+      "Value": "ピジョン"
     },
     {
       "Key": "pidgeot",
-      "Value": "ﾋﾟｼﾞｮｯﾄ"
+      "Value": "ピジョット"
     },
     {
       "Key": "rattata",
-      "Value": "ｺﾗｯﾀ"
+      "Value": "コラッタ"
     },
     {
       "Key": "raticate",
-      "Value": "ﾗｯﾀ"
+      "Value": "ラッタ"
     },
     {
       "Key": "spearow",
-      "Value": "ｵﾆｽｽﾞﾒ"
+      "Value": "オニスズメ"
     },
     {
       "Key": "fearow",
-      "Value": "ｵﾆﾄﾞﾘﾙ"
+      "Value": "オニドリル"
     },
     {
       "Key": "ekans",
-      "Value": "ｱｰﾎﾞ"
+      "Value": "アーボ"
     },
     {
       "Key": "arbok",
-      "Value": "ｱｰﾎﾞｯｸ"
+      "Value": "アーボック"
     },
     {
       "Key": "pikachu",
-      "Value": "ﾋﾟｶﾁｭｳ"
+      "Value": "ピカチュウ"
     },
     {
       "Key": "raichu",
-      "Value": "ﾗｲﾁｭｳ"
+      "Value": "ライチュウ"
     },
     {
       "Key": "sandshrew",
-      "Value": "ｻﾝﾄﾞ"
+      "Value": "サンド"
     },
     {
       "Key": "sandslash",
-      "Value": "ｻﾝﾄﾞﾊﾟﾝ"
+      "Value": "サンドパン"
     },
     {
       "Key": "nidoranFemale",
-      "Value": "ﾆﾄﾞﾗﾝﾒｽ"
+      "Value": "ニドラン♀"
     },
     {
       "Key": "nidorina",
-      "Value": "ﾆﾄﾞﾘｰﾅ"
+      "Value": "ニドリーナ"
     },
     {
       "Key": "nidoqueen",
-      "Value": "ﾆﾄﾞｸｲﾝ"
+      "Value": "ニドクイン"
     },
     {
       "Key": "nidoranMale",
-      "Value": "ﾆﾄﾞﾗﾝｵｽ"
+      "Value": "ニドラン♂"
     },
     {
       "Key": "nidorino",
-      "Value": "ﾆﾄﾞﾘｰﾉ"
+      "Value": "ニドリーノ"
     },
     {
       "Key": "nidoking",
-      "Value": "ﾆﾄﾞｷﾝｸﾞ"
+      "Value": "ニドキング"
     },
     {
       "Key": "clefairy",
-      "Value": "ﾋﾟｯﾋﾟ"
+      "Value": "ピッピ"
     },
     {
       "Key": "clefable",
-      "Value": "ﾋﾟｸｼｰ"
+      "Value": "ピクシー"
     },
     {
       "Key": "vulpix",
-      "Value": "ﾛｺﾝ"
+      "Value": "ロコン"
     },
     {
       "Key": "ninetales",
-      "Value": "ｷｭｳｺﾝ"
+      "Value": "キュウコン"
     },
     {
       "Key": "jigglypuff",
-      "Value": "ﾌﾟﾘﾝ"
+      "Value": "プリン"
     },
     {
       "Key": "wigglytuff",
-      "Value": "ﾌﾟｸﾘﾝ"
+      "Value": "プクリン"
     },
     {
       "Key": "zubat",
-      "Value": "ｽﾞﾊﾞｯﾄ"
+      "Value": "ズバット"
     },
     {
       "Key": "golbat",
-      "Value": "ｺﾞﾙﾊﾞｯﾄ"
+      "Value": "ゴルバット"
     },
     {
       "Key": "oddish",
-      "Value": "ﾅｿﾞﾉｸｻ"
+      "Value": "ナゾノクサ"
     },
     {
       "Key": "gloom",
-      "Value": "ｸｻｲﾊﾅ"
+      "Value": "クサイハナ"
     },
     {
       "Key": "vileplume",
-      "Value": "ﾗﾌﾚｼｱ"
+      "Value": "ラフレシア"
     },
     {
       "Key": "paras",
-      "Value": "ﾊﾟﾗｽ"
+      "Value": "パラス"
     },
     {
       "Key": "parasect",
-      "Value": "ﾊﾟﾗｾｸﾄ"
+      "Value": "パラセクト"
     },
     {
       "Key": "venonat",
-      "Value": "ｺﾝﾊﾟﾝ"
+      "Value": "コンパン"
     },
     {
       "Key": "venomoth",
-      "Value": "ﾓﾙﾌｫﾝ"
+      "Value": "モルフォン"
     },
     {
       "Key": "diglett",
-      "Value": "ﾃﾞｨｸﾞﾀﾞ"
+      "Value": "ディグダ"
     },
     {
       "Key": "dugtrio",
-      "Value": "ﾀﾞｸﾄﾘｵ"
+      "Value": "ダクトリオ"
     },
     {
       "Key": "meowth",
-      "Value": "ﾆｭｰｽ"
+      "Value": "ニュース"
     },
     {
       "Key": "persian",
-      "Value": "ﾍﾟﾙｼｱﾝ"
+      "Value": "ペルシアン"
     },
     {
       "Key": "psyduck",
-      "Value": "ｺﾀﾞｯｸ"
+      "Value": "コダック"
     },
     {
       "Key": "golduck",
-      "Value": "ｺﾞﾙﾀﾞｯｸ"
+      "Value": "ゴルダック"
     },
     {
       "Key": "mankey",
-      "Value": "ﾏﾝｷｰ"
+      "Value": "マンキー"
     },
     {
       "Key": "primeape",
-      "Value": "ｵｺﾘｻﾞﾙ"
+      "Value": "オコリザル"
     },
     {
       "Key": "growlithe",
-      "Value": "ｶﾞｰﾃﾞｨ"
+      "Value": "ガーディ"
     },
     {
       "Key": "arcanine",
-      "Value": "ｳｲﾝﾃﾞｨ"
+      "Value": "ウインディ"
     },
     {
       "Key": "poliwag",
-      "Value": "ﾆｮﾛﾓ"
+      "Value": "ニョロモ"
     },
     {
       "Key": "poliwhirl",
-      "Value": "ﾆｮﾛｿﾞ"
+      "Value": "ニョロゾ"
     },
     {
       "Key": "poliwrath",
-      "Value": "ﾆｮﾛﾎﾞﾝ"
+      "Value": "ニョロボン"
     },
     {
       "Key": "abra",
-      "Value": "ｹｰｼｨ"
+      "Value": "ケーシィ"
     },
     {
       "Key": "kadabra",
-      "Value": "ﾕﾝｹﾞﾗｰ"
+      "Value": "ユンゲラー"
     },
     {
       "Key": "alakazam",
-      "Value": "ﾌｰﾃﾞｨﾝ"
+      "Value": "フーディン"
     },
     {
       "Key": "machop",
-      "Value": "ﾜﾝﾘｷｰ"
+      "Value": "ワンリキー"
     },
     {
       "Key": "machoke",
-      "Value": "ｺﾞｰﾘｷｰ"
+      "Value": "ゴーリキー"
     },
     {
       "Key": "machamp",
-      "Value": "ｶｲﾘｷｰ"
+      "Value": "カイリキー"
     },
     {
       "Key": "bellsprout",
-      "Value": "ﾏﾀﾞﾂﾎﾞﾐ"
+      "Value": "マダツボミ"
     },
     {
       "Key": "weepinbell",
-      "Value": "ｳﾂﾄﾞﾝ"
+      "Value": "ウツドン"
     },
     {
       "Key": "victreebel",
-      "Value": "ｳﾂﾎﾞｯﾄ"
+      "Value": "ウツボット"
     },
     {
       "Key": "tentacool",
-      "Value": "ﾒﾉｸﾗｹﾞ"
+      "Value": "メノクラゲ"
     },
     {
       "Key": "tentacruel",
-      "Value": "ﾄﾞｸｸﾗｹﾞ"
+      "Value": "ドククラゲ"
     },
     {
       "Key": "geodude",
-      "Value": "ｲｼﾂﾌﾞﾃ"
+      "Value": "イシツブテ"
     },
     {
       "Key": "graveler",
-      "Value": "ｺﾞﾛｰﾝ"
+      "Value": "ゴローン"
     },
     {
       "Key": "golem",
-      "Value": "ｺﾞﾛｰﾆｬ"
+      "Value": "ゴローニャ"
     },
     {
       "Key": "ponyta",
-      "Value": "ﾎﾟﾆｰﾀ"
+      "Value": "ポニータ"
     },
     {
       "Key": "rapidash",
-      "Value": "ｷﾞｬﾛｯﾌﾟ"
+      "Value": "ギャロップ"
     },
     {
       "Key": "slowpoke",
-      "Value": "ﾔﾄﾞﾝ"
+      "Value": "ヤドン"
     },
     {
       "Key": "slowbro",
-      "Value": "ﾔﾄﾞﾗﾝ"
+      "Value": "ヤドラン"
     },
     {
       "Key": "magnemite",
-      "Value": "ｺｲﾙ"
+      "Value": "コイル"
     },
     {
       "Key": "magneton",
-      "Value": "ﾚｱｺｲﾙ"
+      "Value": "レアコイル"
     },
     {
       "Key": "farfetchd",
-      "Value": "ｶﾓﾈｷﾞ"
+      "Value": "カモネギ"
     },
     {
       "Key": "doduo",
-      "Value": "ﾄﾞｰﾄﾞｰ"
+      "Value": "ドードー"
     },
     {
       "Key": "dodrio",
-      "Value": "ﾄﾞｰﾄﾞﾘｵ"
+      "Value": "ドードリオ"
     },
     {
       "Key": "seel",
-      "Value": "ﾊﾟｳﾜｳ"
+      "Value": "パウワウ"
     },
     {
       "Key": "dewgong",
-      "Value": "ｼﾞｭｺﾞﾝ"
+      "Value": "ジュゴン"
     },
     {
       "Key": "grimer",
-      "Value": "ﾍﾞﾄﾍﾞﾀｰ"
+      "Value": "ベトベター"
     },
     {
       "Key": "muk",
-      "Value": "ﾍﾞﾄﾍﾞﾄﾝ"
+      "Value": "ベトベトン"
     },
     {
       "Key": "shellder",
-      "Value": "ｼｪﾙﾀﾞｰ"
+      "Value": "シェルダー"
     },
     {
       "Key": "cloyster",
-      "Value": "ﾊﾟﾙｼｪﾝ"
+      "Value": "パルシェン"
     },
     {
       "Key": "gastly",
-      "Value": "ｺﾞｰｽ"
+      "Value": "ゴース"
     },
     {
       "Key": "haunter",
-      "Value": "ｺﾞｰｽﾄ"
+      "Value": "ゴースト"
     },
     {
       "Key": "gengar",
-      "Value": "ｹﾞﾝｶﾞｰ"
+      "Value": "ゲンガー"
     },
     {
       "Key": "onix",
-      "Value": "ｲﾜｰｸ"
+      "Value": "イワーク"
     },
     {
       "Key": "drowzee",
-      "Value": "ｽﾘｰﾌﾟ"
+      "Value": "スリープ"
     },
     {
       "Key": "hypno",
-      "Value": "ｽﾘｰﾊﾟｰ"
+      "Value": "スリーパー"
     },
     {
       "Key": "krabby",
-      "Value": "ｸﾗﾌﾞ"
+      "Value": "クラブ"
     },
     {
       "Key": "kingler",
-      "Value": "ｷﾝｸﾞﾗｰ"
+      "Value": "キングラー"
     },
     {
       "Key": "voltorb",
-      "Value": "ﾋﾞﾘﾘﾀﾞﾏ"
+      "Value": "ビリリダマ"
     },
     {
       "Key": "electrode",
-      "Value": "ﾏﾙﾏｲﾝ"
+      "Value": "マルマイン"
     },
     {
       "Key": "exeggcute",
-      "Value": "ﾀﾏﾀﾏ"
+      "Value": "タマタマ"
     },
     {
       "Key": "exeggutor",
-      "Value": "ﾅｯｼｰ"
+      "Value": "ナッシー"
     },
     {
       "Key": "cubone",
-      "Value": "ｶﾗｶﾗ"
+      "Value": "カラカラ"
     },
     {
       "Key": "marowak",
-      "Value": "ｶﾞﾗｶﾞﾗ"
+      "Value": "ガラガラ"
     },
     {
       "Key": "hitmonlee",
-      "Value": "ｻﾜﾑﾗｰ"
+      "Value": "サワムラー"
     },
     {
       "Key": "hitmonchan",
-      "Value": "ｴﾋﾞﾜﾗｰ"
+      "Value": "エビワラー"
     },
     {
       "Key": "lickitung",
-      "Value": "ﾍﾞﾛﾘﾝｶﾞ"
+      "Value": "ベロリンガ"
     },
     {
       "Key": "koffing",
-      "Value": "ﾄﾞｶﾞｰｽ"
+      "Value": "ドガース"
     },
     {
       "Key": "weezing",
-      "Value": "ﾏﾀﾄﾞｶﾞｽ"
+      "Value": "マタドガス"
     },
     {
       "Key": "rhyhorn",
-      "Value": "ｻｲﾎｰﾝ"
+      "Value": "サイホーン"
     },
     {
       "Key": "rhydon",
-      "Value": "ｻｲﾄﾞﾝ"
+      "Value": "サイドン"
     },
     {
       "Key": "chansey",
-      "Value": "ﾗｯｷｰ"
+      "Value": "ラッキー"
     },
     {
       "Key": "tangela",
-      "Value": "ﾓﾝｼﾞｬﾗ"
+      "Value": "モンジャラ"
     },
     {
       "Key": "kangaskhan",
-      "Value": "ｶﾞﾙｰﾗ"
+      "Value": "ガルーラ"
     },
     {
       "Key": "horsea",
-      "Value": "ﾀｯﾂｰ"
+      "Value": "タッツー"
     },
     {
       "Key": "seadra",
-      "Value": "ｼｰﾄﾞﾗ"
+      "Value": "シードラ"
     },
     {
       "Key": "goldeen",
-      "Value": "ﾄｻｷﾝﾄ"
+      "Value": "トサキント"
     },
     {
       "Key": "seaking",
-      "Value": "ｱｽﾞﾏｵｳ"
+      "Value": "アズマオウ"
     },
     {
       "Key": "staryu",
-      "Value": "ﾋﾄﾃﾞﾏﾝ"
+      "Value": "ヒトデマン"
     },
     {
       "Key": "starmie",
-      "Value": "ｽﾀｰﾐｰ"
+      "Value": "スターミー"
     },
     {
       "Key": "mrMime",
-      "Value": "ﾊﾞﾘﾔｰﾄﾞ"
+      "Value": "バリヤード"
     },
     {
       "Key": "scyther",
-      "Value": "ｽﾄﾗｲｸ"
+      "Value": "ストライク"
     },
     {
       "Key": "jynx",
-      "Value": "ﾙｰｼﾞｭﾗ"
+      "Value": "ルージュラ"
     },
     {
       "Key": "electabuzz",
-      "Value": "ｴﾚﾌﾞｰ"
+      "Value": "エレブー"
     },
     {
       "Key": "magmar",
-      "Value": "ﾌﾞｰﾊﾞｰ"
+      "Value": "ブーバー"
     },
     {
       "Key": "pinsir",
-      "Value": "ｶｲﾛｽ"
+      "Value": "カイロス"
     },
     {
       "Key": "tauros",
-      "Value": "ｹﾝﾀﾛｽ"
+      "Value": "ケンタロス"
     },
     {
       "Key": "magikarp",
-      "Value": "ｺｲｷﾝｸﾞ"
+      "Value": "コイキング"
     },
     {
       "Key": "gyarados",
-      "Value": "ｷﾞｬﾗﾄﾞｽ"
+      "Value": "ギャラドス"
     },
     {
       "Key": "lapras",
-      "Value": "ﾗﾌﾟﾗｽ"
+      "Value": "ラプラス"
     },
     {
       "Key": "ditto",
-      "Value": "ﾒﾀﾓﾝ"
+      "Value": "メタモン"
     },
     {
       "Key": "eevee",
-      "Value": "ｲｰﾌﾞｲ"
+      "Value": "イーブイ"
     },
     {
       "Key": "vaporeon",
-      "Value": "ｼｬﾜｰｽﾞ"
+      "Value": "シャワーズ"
     },
     {
       "Key": "jolteon",
-      "Value": "ｻﾝﾀﾞｰｽ"
+      "Value": "サンダース"
     },
     {
       "Key": "flareon",
-      "Value": "ﾌﾞｰｽﾀｰ"
+      "Value": "ブースター"
     },
     {
       "Key": "porygon",
-      "Value": "ﾎﾟﾘｺﾞﾝ"
+      "Value": "ポリゴン"
     },
     {
       "Key": "omanyte",
-      "Value": "ｵﾑﾅｲﾄ"
+      "Value": "オムナイト"
     },
     {
       "Key": "omastar",
-      "Value": "ｵﾑｽﾀｰ"
+      "Value": "オムスター"
     },
     {
       "Key": "kabuto",
-      "Value": "ｶﾌﾞﾄ"
+      "Value": "カブト"
     },
     {
       "Key": "kabutops",
-      "Value": "ｶﾌﾞﾄﾌﾟｽ"
+      "Value": "カブトプス"
     },
     {
       "Key": "aerodactyl",
-      "Value": "ﾌﾟﾃﾗ"
+      "Value": "プテラ"
     },
     {
       "Key": "snorlax",
-      "Value": "ｶﾋﾞｺﾞﾝ"
+      "Value": "カビゴン"
     },
     {
       "Key": "articuno",
-      "Value": "ﾌﾘｰｻﾞｰ"
+      "Value": "フリーザー"
     },
     {
       "Key": "zapdos",
-      "Value": "ｻﾝﾀﾞｰ"
+      "Value": "サンダー"
     },
     {
       "Key": "moltres",
-      "Value": "ﾌｧｲﾔｰ"
+      "Value": "ファイヤー"
     },
     {
       "Key": "dratini",
-      "Value": "ﾐﾆﾘｭｳ"
+      "Value": "ミニリュウ"
     },
     {
       "Key": "dragonair",
-      "Value": "ﾊｸﾘｭｳ"
+      "Value": "ハクリュウ"
     },
     {
       "Key": "dragonite",
-      "Value": "ｶｲﾘｭｰ"
+      "Value": "カイリュー"
     },
     {
       "Key": "mewtwo",
-      "Value": "ﾐｭｳﾂｰ"
+      "Value": "ミュウツー"
     },
     {
       "Key": "mew",
-      "Value": "ﾐｭｳ"
+      "Value": "ミュウ"
     }
   ],
   "PokemonMovesetStrings": [
     {
       "Key": "moveUnset",
-      "Value": "ﾅｼ"
+      "Value": "なし"
     },
     {
       "Key": "thunderShock",
-      "Value": "ﾃﾞﾝｷｼｮｯｸ"
+      "Value": "でんきショック"
     },
     {
       "Key": "quickAttack",
-      "Value": "ﾃﾞﾝｺｳｾｯｶ"
+      "Value": "でんこうせっか"
     },
     {
       "Key": "scratch",
-      "Value": "ﾋｯｶｸ"
+      "Value": "ひっかく"
     },
     {
       "Key": "ember",
-      "Value": "ﾋﾉｺ"
+      "Value": "ひのこ"
     },
     {
       "Key": "vineWhip",
-      "Value": "ﾂﾙﾉﾑﾁ"
+      "Value": "つるのムチ"
     },
     {
       "Key": "tackle",
-      "Value": "ﾀｲｱﾀﾘ"
+      "Value": "たいあたり"
     },
     {
       "Key": "razorLeaf",
-      "Value": "ﾊｯﾊﾟｶｯﾀｰ"
+      "Value": "はっぱカッター"
     },
     {
       "Key": "takeDown",
-      "Value": "ﾄｯｼﾝ"
+      "Value": "とっしん"
     },
     {
       "Key": "waterGun",
-      "Value": "ﾐｽﾞﾃﾞｯﾎﾟｳ"
+      "Value": "みずでっぽう"
     },
     {
       "Key": "bite",
-      "Value": "ｶﾐﾂｸ"
+      "Value": "かみつく"
     },
     {
       "Key": "pound",
-      "Value": "ﾊﾀｸ"
+      "Value": "はたく"
     },
     {
       "Key": "doubleSlap",
-      "Value": "ｵｳﾌｸﾋﾞﾝﾀ"
+      "Value": "おうふくビンタ"
     },
     {
       "Key": "wrap",
-      "Value": "ﾏｷﾂｸ"
+      "Value": "まきつく"
     },
     {
       "Key": "hyperBeam",
-      "Value": "ﾊｶｲｺｳｾﾝ"
+      "Value": "はかいこうせん"
     },
     {
       "Key": "lick",
-      "Value": "ｼﾀﾃﾞﾅﾒﾙ"
+      "Value": "したでなめる"
     },
     {
       "Key": "darkPulse",
-      "Value": "ｱｸﾉﾊﾄﾞｳ"
+      "Value": "あくのはどう"
     },
     {
       "Key": "smog",
-      "Value": "ｽﾓｯｸﾞ"
+      "Value": "スモッグ"
     },
     {
       "Key": "sludge",
-      "Value": "ﾍﾄﾞﾛｺｳｹﾞｷ"
+      "Value": "ヘドロこうげき"
     },
     {
       "Key": "metalClaw",
-      "Value": "ﾒﾀﾙｸﾛｰ"
+      "Value": "メタルクロー"
     },
     {
       "Key": "viceGrip",
-      "Value": "ﾊｻﾑ"
+      "Value": "はさむ"
     },
     {
       "Key": "flameWheel",
-      "Value": "ｶｴﾝｸﾞﾙﾏ"
+      "Value": "かえんぐるま"
     },
     {
       "Key": "megahorn",
-      "Value": "ﾒｶﾞﾎｰﾝ"
+      "Value": "メガホーン"
     },
     {
       "Key": "wingAttack",
-      "Value": "ﾂﾊﾞｻﾃﾞｳﾂ"
+      "Value": "つばさでうつ"
     },
     {
       "Key": "flamethrower",
-      "Value": "ｶｴﾝﾎｳｼｬ"
+      "Value": "かえんほうしゃ"
     },
     {
       "Key": "suckerPunch",
-      "Value": "ﾌｲｳﾁ"
+      "Value": "ふいうち"
     },
     {
       "Key": "dig",
-      "Value": "ｱﾅｦﾎﾙ"
+      "Value": "あなをほる"
     },
     {
       "Key": "lowKick",
-      "Value": "ｹﾀｸﾞﾘ"
+      "Value": "けたぐり"
     },
     {
       "Key": "crossChop",
-      "Value": "ｸﾛｽﾁｮｯﾌﾟ"
+      "Value": "クロスチョップ"
     },
     {
       "Key": "psychoCut",
-      "Value": "ｻｲｺｶｯﾀｰ"
+      "Value": "サイコカッター"
     },
     {
       "Key": "psybeam",
-      "Value": "ｻｲｹｺｳｾﾝ"
+      "Value": "サイケこうせん"
     },
     {
       "Key": "earthquake",
-      "Value": "ｼﾞｼﾝ"
+      "Value": "じしん"
     },
     {
       "Key": "stoneEdge",
-      "Value": "ｽﾄｰﾝｴｯｼﾞ"
+      "Value": "ストーンエッジ"
     },
     {
       "Key": "icePunch",
-      "Value": "ﾚｲﾄｳﾊﾟﾝﾁ"
+      "Value": "れいとうパンチ"
     },
     {
       "Key": "heartStamp",
-      "Value": "ﾊｰﾄｽﾀﾝﾌﾟ"
+      "Value": "ハートスタンプ"
     },
     {
       "Key": "discharge",
-      "Value": "ﾎｳﾃﾞﾝ"
+      "Value": "ほうでん"
     },
     {
       "Key": "flashCannon",
-      "Value": "ﾗｽﾀｰｶﾉﾝ"
+      "Value": "ラスターカノン"
     },
     {
       "Key": "peck",
-      "Value": "ﾂﾂｸ"
+      "Value": "つつく"
     },
     {
       "Key": "drillPeck",
-      "Value": "ﾄﾞﾘﾙｸﾁﾊﾞｼ"
+      "Value": "ドリルくちばし"
     },
     {
       "Key": "iceBeam",
-      "Value": "ﾚｲﾄｳﾋﾞｰﾑ"
+      "Value": "れいとうビーム"
     },
     {
       "Key": "blizzard",
-      "Value": "ﾌﾌﾞｷ"
+      "Value": "ふぶき"
     },
     {
       "Key": "airSlash",
-      "Value": "ｴｱｽﾗｯｼｭ"
+      "Value": "エアスラッシュ"
     },
     {
       "Key": "heatWave",
-      "Value": "ﾈｯﾌﾟｳ"
+      "Value": "ねっぷう"
     },
     {
       "Key": "twineedle",
-      "Value": "ﾀﾞﾌﾞﾙﾆｰﾄﾞﾙ"
+      "Value": "ダブルニードル"
     },
     {
       "Key": "poisonJab",
-      "Value": "ﾄﾞｸﾂﾞｷ"
+      "Value": "どくづき"
     },
     {
       "Key": "aerialAce",
-      "Value": "ﾂﾊﾞﾒｶﾞｴｼ"
+      "Value": "つばめがえし"
     },
     {
       "Key": "drillRun",
-      "Value": "ﾄﾞﾘﾙﾗｲﾅｰ"
+      "Value": "ドリルライナー"
     },
     {
       "Key": "petalBlizzard",
-      "Value": "ﾊﾅﾌﾌﾞｷ"
+      "Value": "はなふぶき"
     },
     {
       "Key": "megaDrain",
-      "Value": "ﾒｶﾞﾄﾞﾚｲﾝ"
+      "Value": "メガドレイン"
     },
     {
       "Key": "bugBuzz",
-      "Value": "ﾑｼﾉｻｻﾞﾒｷ"
+      "Value": "むしのさざめき"
     },
     {
       "Key": "poisonFang",
-      "Value": "ﾄﾞｸﾄﾞｸﾉｷﾊﾞ"
+      "Value": "どくどくのキバ"
     },
     {
       "Key": "nightSlash",
-      "Value": "ﾂｼﾞｷﾞﾘ"
+      "Value": "つじぎり"
     },
     {
       "Key": "slash",
-      "Value": "ｷﾘｻｸ"
+      "Value": "きりさく"
     },
     {
       "Key": "bubbleBeam",
-      "Value": "ﾊﾞﾌﾞﾙｺｳｾﾝ"
+      "Value": "バブルこうせん"
     },
     {
       "Key": "submission",
-      "Value": "ｼﾞｺﾞｸｸﾞﾙﾏ"
+      "Value": "じごくぐるま"
     },
     {
       "Key": "karateChop",
-      "Value": "ｶﾗﾃﾁｮｯﾌﾟ"
+      "Value": "からてチョップ"
     },
     {
       "Key": "lowSweep",
-      "Value": "ﾛｰｷｯｸ"
+      "Value": "ローキック"
     },
     {
       "Key": "aquaJet",
-      "Value": "ｱｸｱｼﾞｪｯﾄ"
+      "Value": "アクアジェット"
     },
     {
       "Key": "aquaTail",
-      "Value": "ｱｸｱﾃｰﾙ"
+      "Value": "アクアテール"
     },
     {
       "Key": "seedBomb",
-      "Value": "ﾀﾈﾊﾞｸﾀﾞﾝ"
+      "Value": "たねばくだん"
     },
     {
       "Key": "psyshock",
-      "Value": "ｻｲｺｼｮｯｸ"
+      "Value": "サイコショック"
     },
     {
       "Key": "rockThrow",
-      "Value": "ｲﾜｵﾄｼ"
+      "Value": "いわおとし"
     },
     {
       "Key": "ancientPower",
-      "Value": "ｹﾞﾝｼﾉﾁｶﾗ"
+      "Value": "げんしのちから"
     },
     {
       "Key": "rockTomb",
-      "Value": "ｶﾞﾝｾｷﾌｳｼﾞ"
+      "Value": "がんせきふうじ"
     },
     {
       "Key": "rockSlide",
-      "Value": "ｲﾜﾅﾀﾞﾚ"
+      "Value": "いわなだれ"
     },
     {
       "Key": "powerGem",
-      "Value": "ﾊﾟﾜｰｼﾞｪﾑ"
+      "Value": "パワージェム"
     },
     {
       "Key": "shadowSneak",
-      "Value": "ｶｹﾞｳﾁ"
+      "Value": "かげうち"
     },
     {
       "Key": "shadowPunch",
-      "Value": "ｼｬﾄﾞｰﾊﾟﾝﾁ"
+      "Value": "シャドーパンチ"
     },
     {
       "Key": "shadowClaw",
-      "Value": "ｼｬﾄﾞｰｸﾛｰ"
+      "Value": "シャドークロー"
     },
     {
       "Key": "ominousWind",
-      "Value": "ｱﾔｼｲｶｾﾞ"
+      "Value": "あやしいかぜ"
     },
     {
       "Key": "shadowBall",
-      "Value": "ｼｬﾄﾞｰﾎﾞｰﾙ"
+      "Value": "シャドーボール"
     },
     {
       "Key": "bulletPunch",
-      "Value": "ﾊﾞﾚｯﾄﾊﾟﾝﾁ"
+      "Value": "バレットパンチ"
     },
     {
       "Key": "magnetBomb",
-      "Value": "ﾏｸﾞﾈｯﾄﾎﾞﾑ"
+      "Value": "マグネットボム"
     },
     {
       "Key": "steelWing",
@@ -1586,427 +1586,427 @@
     },
     {
       "Key": "ironHead",
-      "Value": "ｱｲｱﾝﾍｯﾄﾞ"
+      "Value": "アイアンヘッド"
     },
     {
       "Key": "parabolicCharge",
-      "Value": "ﾊﾟﾗﾎﾞﾗﾁｬｰｼﾞ"
+      "Value": "パラボラチャージ"
     },
     {
       "Key": "spark",
-      "Value": "ｽﾊﾟｰｸ"
+      "Value": "スパーク"
     },
     {
       "Key": "thunderPunch",
-      "Value": "ｶﾐﾅﾘﾊﾟﾝﾁ"
+      "Value": "かみなりパンチ"
     },
     {
       "Key": "thunder",
-      "Value": "ｶﾐﾅﾘ"
+      "Value": "かみなり"
     },
     {
       "Key": "thunderbolt",
-      "Value": "10ﾏﾝﾎﾞﾙﾄ"
+      "Value": "１０まんボルト"
     },
     {
       "Key": "twister",
-      "Value": "ﾀﾂﾏｷ"
+      "Value": "たつまき"
     },
     {
       "Key": "dragonBreath",
-      "Value": "ﾘｭｳﾉｲﾌﾞｷ"
+      "Value": "りゅうのいぶき"
     },
     {
       "Key": "dragonPulse",
-      "Value": "ﾘｭｳﾉﾊﾄﾞｳ"
+      "Value": "りゅうのはどう"
     },
     {
       "Key": "dragonClaw",
-      "Value": "ﾄﾞﾗｺﾞﾝｸﾛｰ"
+      "Value": "ドラゴンクロー"
     },
     {
       "Key": "disarmingVoice",
-      "Value": "ﾁｬｰﾑﾎﾞｲｽ"
+      "Value": "チャームボイス"
     },
     {
       "Key": "drainingKiss",
-      "Value": "ﾄﾞﾚｲﾝｷｯｽ"
+      "Value": "ドレインキッス"
     },
     {
       "Key": "dazzlingGleam",
-      "Value": "ﾏｼﾞｶﾙｼｬｲﾝ"
+      "Value": "マジカルシャイン"
     },
     {
       "Key": "moonblast",
-      "Value": "ﾑｰﾝﾌｫｰｽ"
+      "Value": "ムーンフォース"
     },
     {
       "Key": "playRough",
-      "Value": "ｼﾞｬﾚﾂｸ"
+      "Value": "じゃれつく"
     },
     {
       "Key": "crossPoison",
-      "Value": "ｸﾛｽﾎﾟｲｽﾞﾝ"
+      "Value": "クロスポイズン"
     },
     {
       "Key": "sludgeBomb",
-      "Value": "ﾍﾄﾞﾛﾊﾞｸﾀﾞﾝ"
+      "Value": "ヘドロばくだん"
     },
     {
       "Key": "sludgeWave",
-      "Value": "ﾍﾄﾞﾛｳｪｰﾌﾞ"
+      "Value": "ヘドロウェーブ"
     },
     {
       "Key": "gunkShot",
-      "Value": "ﾀﾞｽﾄｼｭｰﾄ"
+      "Value": "ダストシュート"
     },
     {
       "Key": "mudShot",
-      "Value": "ﾏｯﾄﾞｼｮｯﾄ"
+      "Value": "マッドショット"
     },
     {
       "Key": "boneClub",
-      "Value": "ﾎﾈｺﾝﾎﾞｳ"
+      "Value": "ホネこんぼう"
     },
     {
       "Key": "bulldoze",
-      "Value": "ｼﾞﾅﾗｼ"
+      "Value": "じならし"
     },
     {
       "Key": "mudBomb",
-      "Value": "ﾄﾞﾛﾊﾞｸﾀﾞﾝ"
+      "Value": "どろばくだん"
     },
     {
       "Key": "furyCutter",
-      "Value": "ﾚﾝｿﾞｸｷﾞﾘ"
+      "Value": "れんぞくぎり"
     },
     {
       "Key": "bugBite",
-      "Value": "ﾑｼｸｲ"
+      "Value": "むしくい"
     },
     {
       "Key": "signalBeam",
-      "Value": "ｼｸﾞﾅﾙﾋﾞｰﾑ"
+      "Value": "シグナルビーム"
     },
     {
       "Key": "xScissor",
-      "Value": "ｼｻﾞｰｸﾛｽ"
+      "Value": "シザークロス"
     },
     {
       "Key": "flameCharge",
-      "Value": "ﾆﾄﾛﾁｬｰｼﾞ"
+      "Value": "ニトロチャージ"
     },
     {
       "Key": "flameBurst",
-      "Value": "ﾊｼﾞｹﾙﾎﾉｵ"
+      "Value": "はじけるほのお"
     },
     {
       "Key": "fireBlast",
-      "Value": "ﾀﾞｲﾓﾝｼﾞ"
+      "Value": "だいもんじ"
     },
     {
       "Key": "brine",
-      "Value": "ｼｵﾐｽﾞ"
+      "Value": "しおみず"
     },
     {
       "Key": "waterPulse",
-      "Value": "ﾐｽﾞﾉﾊﾄﾞｳ"
+      "Value": "みずのはどう"
     },
     {
       "Key": "scald",
-      "Value": "ﾈｯﾄｳ"
+      "Value": "ねっとう"
     },
     {
       "Key": "hydroPump",
-      "Value": "ﾊｲﾄﾞﾛﾎﾟﾝﾌﾟ"
+      "Value": "ハイドロポンプ"
     },
     {
       "Key": "psychic",
-      "Value": "ｻｲｺｷﾈｼｽ"
+      "Value": "サイコキネシス"
     },
     {
       "Key": "psystrike",
-      "Value": "ｻｲｺﾌﾞﾚｲｸ"
+      "Value": "サイコブレイク"
     },
     {
       "Key": "iceShard",
-      "Value": "ｺｵﾘﾉﾂﾌﾞﾃ"
+      "Value": "こおりのつぶて"
     },
     {
       "Key": "icyWind",
-      "Value": "ｺｺﾞｴﾙｶｾﾞ"
+      "Value": "こごえるかぜ"
     },
     {
       "Key": "frostBreath",
-      "Value": "ｺｵﾘﾉｲﾌﾞｷ"
+      "Value": "こおりのいぶき"
     },
     {
       "Key": "absorb",
-      "Value": "ｽｲﾄﾙ"
+      "Value": "すいとる"
     },
     {
       "Key": "gigaDrain",
-      "Value": "ｷﾞｶﾞﾄﾞﾚｲﾝ"
+      "Value": "ギガドレイン"
     },
     {
       "Key": "firePunch",
-      "Value": "ﾎﾉｵﾉﾊﾟﾝﾁ"
+      "Value": "ほのおのパンチ"
     },
     {
       "Key": "solarBeam",
-      "Value": "ｿｰﾗｰﾋﾞｰﾑ"
+      "Value": "ソーラービーム"
     },
     {
       "Key": "leafBlade",
-      "Value": "ﾘｰﾌﾌﾞﾚｰﾄﾞ"
+      "Value": "リーフブレード"
     },
     {
       "Key": "powerWhip",
-      "Value": "ﾊﾟﾜｰｳｨｯﾌﾟ"
+      "Value": "パワーウィップ"
     },
     {
       "Key": "splash",
-      "Value": "ﾊﾈﾙ"
+      "Value": "はねる"
     },
     {
       "Key": "acid",
-      "Value": "ﾖｳｶｲｴｷ"
+      "Value": "ようかいえき"
     },
     {
       "Key": "airCutter",
-      "Value": "ｴｱｶｯﾀｰ"
+      "Value": "エアカッター"
     },
     {
       "Key": "hurricane",
-      "Value": "ﾎﾞｳﾌｳ"
+      "Value": "ぼうふう"
     },
     {
       "Key": "brickBreak",
-      "Value": "ｶﾜﾗﾜﾘ"
+      "Value": "かわらわり"
     },
     {
       "Key": "cut",
-      "Value": "ｲｱｲｷﾞﾘ"
+      "Value": "いあいぎり"
     },
     {
       "Key": "swift",
-      "Value": "ｽﾋﾟｰﾄﾞｽﾀｰ"
+      "Value": "スピードスター"
     },
     {
       "Key": "hornAttack",
-      "Value": "ﾂﾉﾃﾞﾂｸ"
+      "Value": "つのでつく"
     },
     {
       "Key": "stomp",
-      "Value": "ﾌﾐﾂｹ"
+      "Value": "ふみつけ"
     },
     {
       "Key": "headbutt",
-      "Value": "ｽﾞﾂｷ"
+      "Value": "ずつき"
     },
     {
       "Key": "hyperFang",
-      "Value": "ﾋｯｻﾂﾏｴﾊﾞ"
+      "Value": "ひっさつまえば"
     },
     {
       "Key": "slam",
-      "Value": "ﾀﾀｷﾂｹﾙ"
+      "Value": "たたきつける"
     },
     {
       "Key": "bodySlam",
-      "Value": "ﾉｼｶｶﾘ"
+      "Value": "のしかかり"
     },
     {
       "Key": "rest",
-      "Value": "ﾈﾑﾙ"
+      "Value": "ねむる"
     },
     {
       "Key": "struggle",
-      "Value": "ﾜﾙｱｶﾞｷ"
+      "Value": "わるあがき"
     },
     {
       "Key": "scaldBlastoise",
-      "Value": "ﾈｯﾄｳ(ｶﾒｯｸｽ)"
+      "Value": "ねっとう(カメックス)"
     },
     {
       "Key": "hydroPumpBlastoise",
-      "Value": "ﾊｲﾄﾞﾛﾎﾟﾝﾌﾟ(ｶﾒｯｸｽ)"
+      "Value": "ハイドロポンプ(カメックス)"
     },
     {
       "Key": "wrapGreen",
-      "Value": "ﾏｷﾂｸ(ﾐﾄﾞﾘ)"
+      "Value": "まきつく（緑）"
     },
     {
       "Key": "wrapPink",
-      "Value": "ﾏｷﾂｸ(ﾋﾟﾝｸ)"
+      "Value": "まきつく（桃）"
     },
     {
       "Key": "furyCutterFast",
-      "Value": "ﾚﾝｿﾞｸｷﾞﾘS"
+      "Value": "れんぞくぎり（高速）"
     },
     {
       "Key": "bugBiteFast",
-      "Value": "ﾑｼｸｲS"
+      "Value": "むしくい（高速）"
     },
     {
       "Key": "biteFast",
-      "Value": "ｶﾐﾂｸS"
+      "Value": "かみつく（高速）"
     },
     {
       "Key": "suckerPunchFast",
-      "Value": "ﾌｲｳﾁS"
+      "Value": "ふいうち（高速）"
     },
     {
       "Key": "dragonBreathFast",
-      "Value": "ﾘｭｳﾉｲﾌﾞｷS"
+      "Value": "りゅうのいぶき（高速）"
     },
     {
       "Key": "thunderShockFast",
-      "Value": "ﾃﾞﾝｷｼｮｯｸS"
+      "Value": "でんきショック（高速）"
     },
     {
       "Key": "sparkFast",
-      "Value": "ｽﾊﾟｰｸS"
+      "Value": "スパーク（高速）"
     },
     {
       "Key": "lowKickFast",
-      "Value": "ｹﾀｸﾞﾘS"
+      "Value": "けたぐり（高速）"
     },
     {
       "Key": "karateChopFast",
-      "Value": "ｶﾗﾃﾁｮｯﾌﾟS"
+      "Value": "からてチョップ（高速）"
     },
     {
       "Key": "emberFast",
-      "Value": "ﾋﾉｺS"
+      "Value": "ひのこ（高速）"
     },
     {
       "Key": "wingAttackFast",
-      "Value": "ﾂﾊﾞｻﾃﾞｳﾂS"
+      "Value": "つばさでうつ（高速）"
     },
     {
       "Key": "peckFast",
-      "Value": "ﾂﾂｸS"
+      "Value": "つつく（高速）"
     },
     {
       "Key": "lickFast",
-      "Value": "ｼﾀﾃﾞﾅﾒﾙS"
+      "Value": "したでなめる（高速）"
     },
     {
       "Key": "shadowClawFast",
-      "Value": "ｼｬﾄﾞｰｸﾛｰS"
+      "Value": "シャドークロー（高速）"
     },
     {
       "Key": "vineWhipFast",
-      "Value": "ﾂﾙﾉﾑﾁS"
+      "Value": "つるのムチ（高速）"
     },
     {
       "Key": "razorLeafFast",
-      "Value": "ﾊｯﾊﾟｶｯﾀｰS"
+      "Value": "はっぱカッター（高速）"
     },
     {
       "Key": "mudShotFast",
-      "Value": "ﾏｯﾄﾞｼｮｯﾄS"
+      "Value": "マッドショット（高速）"
     },
     {
       "Key": "iceShardFast",
-      "Value": "ｺｵﾘﾉﾂﾌﾞﾃS"
+      "Value": "こおりのつぶて（高速）"
     },
     {
       "Key": "frostBreathFast",
-      "Value": "ｺｵﾘﾉｲﾌﾞｷS"
+      "Value": "こおりのいぶき（高速）"
     },
     {
       "Key": "quickAttackFast",
-      "Value": "ﾃﾞﾝｺｳｾｯｶS"
+      "Value": "でんこうせっか（高速）"
     },
     {
       "Key": "scratchFast",
-      "Value": "ﾋｯｶｸS"
+      "Value": "ひっかく（高速）"
     },
     {
       "Key": "tackleFast",
-      "Value": "ﾀｲｱﾀﾘS"
+      "Value": "たいあたり（高速）"
     },
     {
       "Key": "poundFast",
-      "Value": "ﾊﾀｸS"
+      "Value": "はたく（高速）"
     },
     {
       "Key": "cutFast",
-      "Value": "ｲｱｲｷﾞﾘS"
+      "Value": "いあいぎり（高速）"
     },
     {
       "Key": "poisonJabFast",
-      "Value": "ﾄﾞｸﾂﾞｷS"
+      "Value": "どくづき（高速）"
     },
     {
       "Key": "acidFast",
-      "Value": "ﾖｳｶｲｴｷS"
+      "Value": "ようかいえき（高速）"
     },
     {
       "Key": "psychoCutFast",
-      "Value": "ｻｲｺｶｯﾀｰS"
+      "Value": "サイコカッター（高速）"
     },
     {
       "Key": "rockThrowFast",
-      "Value": "ｲﾜｵﾄｼS"
+      "Value": "いわおとし（高速）"
     },
     {
       "Key": "metalClawFast",
-      "Value": "ﾒﾀﾙｸﾛｰS"
+      "Value": "メタルクロー（高速）"
     },
     {
       "Key": "bulletPunchFast",
-      "Value": "ﾊﾞﾚｯﾄﾊﾟﾝﾁS"
+      "Value": "バレットパンチ（高速）"
     },
     {
       "Key": "waterGunFast",
-      "Value": "ﾐｽﾞﾃﾞｯﾎﾟｳS"
+      "Value": "みずでっぽう（高速）"
     },
     {
       "Key": "splashFast",
-      "Value": "ﾊﾈﾙS"
+      "Value": "はねる（高速）"
     },
     {
       "Key": "waterGunFastBlastoise",
-      "Value": "ﾐｽﾞﾃﾞｯﾎﾟｳS(ｶﾒｯｸｽ)"
+      "Value": "みずでっぽう（カメックス高速）"
     },
     {
       "Key": "mudSlapFast",
-      "Value": "ﾄﾞﾛｶｹS"
+      "Value": "どろかけ（高速）"
     },
     {
       "Key": "zenHeadbuttFast",
-      "Value": "ｼﾈﾝﾉｽﾞﾂｷS"
+      "Value": "しねんのずつき（高速）"
     },
     {
       "Key": "confusionFast",
-      "Value": "ﾈﾝﾘｷS"
+      "Value": "ねんりき（高速）"
     },
     {
       "Key": "poisonStingFast",
-      "Value": "ﾄﾞｸﾊﾞﾘS"
+      "Value": "どくばり（高速）"
     },
     {
       "Key": "bubbleFast",
-      "Value": "ｱﾜS"
+      "Value": "あわ（高速）"
     },
     {
       "Key": "feintAttackFast",
-      "Value": "ﾀﾞﾏｼｳﾁS"
+      "Value": "だましうち（高速）"
     },
     {
       "Key": "steelWingFast",
-      "Value": "ﾊｶﾞﾈﾉﾂﾊﾞｻS"
+      "Value": "はがねのつばさ（高速）"
     },
     {
       "Key": "fireFangFast",
-      "Value": "ﾎﾉｵﾉｷﾊﾞS"
+      "Value": "ほのおのキバ（高速）"
     },
     {
       "Key": "rockSmashFast",
-      "Value": "ｲﾜｸﾀﾞｷS"
+      "Value": "いわくだき（高速）"
     }
   ]
 }
