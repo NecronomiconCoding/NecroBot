@@ -630,7 +630,7 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Value": "Prosze wprowadzić szerokość i długość geograficzną (Klniknij prawy przycisk myszy, aby wkleić) - Format: Szerokość, Długość"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
@@ -658,19 +658,19 @@
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"
+      "Value":  "#{0} Nazwa: {1} \n"
     },
     {
       "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+      "Value": "Twoje IP: {0} | Proxy IP: {1}"
     },
     {
       "Key": "FixProxySettings",
-      "Value": "Press any key to exit so you can fix your proxy settings..."
+      "Value": "Kliknij dowolny klawisz, aby wyjść i naprawić ustawienia proxy..."
     },
     {
       "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
+      "Value": " Twoje IP: {0}"
     },
     {
       "Key": "HighestsPokemoHeader",
