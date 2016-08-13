@@ -1,5 +1,7 @@
 <p align="center">
+<a href="http://necrobot.io">
     <img alt="Logo" src="http://necrobot.io/img/typotype-transparent.png" width="600">
+</a>
   <a href="https://discord.gg/VXKxNFr">
     <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
   </a>
