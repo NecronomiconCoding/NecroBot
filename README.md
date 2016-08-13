@@ -23,7 +23,7 @@ Make sure you check out our [Wiki](https://github.com/NoxxDev/NecroBot/wiki) to 
 
 <h2><a name="donating">Donating</a></h2>
 <a name="paypal">Feel free to buy us all a beer, by using PayPal:</a><br/>
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=noxx%2emx%40gmail%2ecom&lc=GB&item_name=NecroBot%20Fork%20Donations&item_number=NecroBotFork&no_note=0&currency_code=BRL&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)<br/>
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](hhttps://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J2XY5Y5FKGTSE)<br/>
 
 <h6><em>[A big part of the Donations goes to the top 3 active Contributors. Other expenses as Server costs will be covered using the Donations.]</em></h6><br/>
 
