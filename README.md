@@ -5,28 +5,25 @@
 </p>
 
 [![Discord](https://discordapp.com/api/guilds/209253611031625728/widget.png)](https://discord.gg/VXKxNFr)
-[![Build status](https://ci.appveyor.com/api/projects/status/8ijvvr6b7fe2h0w2?svg=true)](https://ci.appveyor.com/project/NecronomiconCoding/necrobot)
-[![Stories in Ready](https://badge.waffle.io/NECROBOTIO/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NecronomiconCoding/NecroBot)
-[![Github All Releases](https://img.shields.io/github/downloads/NECROBOTIO/NecroBot/total.svg)](https://github.com/NECROBOTIO/NecroBot/releases)
+[![Stories in Ready](https://badge.waffle.io/NoxxDev/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NoxxDev/NecroBot)
+[![Github All Releases](https://img.shields.io/github/downloads/NoxxDev/NecroBot/total.svg)](https://github.com/NoxxDev/NecroBot/releases)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/LICENSE.md)
-[![Twitter Follow](https://img.shields.io/twitter/follow/NECROBOTIO.svg?style=social&label=Follow&maxAge=1)](https://twitter.com/NECROBOTIO)
+[![Twitter Follow](https://img.shields.io/twitter/follow/NoxxDev.svg?style=social&label=Follow&maxAge=1)](https://twitter.com/NoxxDev)
 
 <p align="center">
   <a href="https://discord.gg/VXKxNFr">
     <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
   </a>
 </p>
-## NECROBOT - by the community, for the community.
+## This repository is a fork updated of [NecroBot] (https://github.com/NECROBOTIO/NecroBot)
 
 <h2><a name="getting-started">Getting Started</a></h2>
-Make sure you check out our [Wiki](https://github.com/NecronomiconCoding/NecroBot/wiki) to get started.
+Make sure you check out our [Wiki](https://github.com/NoxxDev/NecroBot/wiki) to get started.
 <br/>
 
 <h2><a name="donating">Donating</a></h2>
 <a name="paypal">Feel free to buy us all a beer, by using PayPal:</a><br/>
-[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=farhaninoor1%40gmail%2ecom&lc=GB&item_name=NecroBot%20Donations&item_number=POGO&no_note=0&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)<br/>
-
-<a name="btc">or by using Bitcoin: *1LxBH4FHhwyEuL1eHbMvLiGsTiBrzjfa1C*</a><br/>
+[![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=noxx%2emx%40gmail%2ecom&lc=GB&item_name=NecroBot%20Fork%20Donations&item_number=NecroBotFork&no_note=0&currency_code=BRL&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHostedGuest)<br/>
 
 <h6><em>[A big part of the Donations goes to the top 3 active Contributors. Other expenses as Server costs will be covered using the Donations.]</em></h6><br/>
 
@@ -62,6 +59,8 @@ LineWalker - [POGOProtos-0.31.0](https://github.com/Linewalker/POGOProtos-0.31.0
 Valmere - [TransferWeakPokemon](https://github.com/PocketMobsters/PokeMobBot/pull/378/files)
 
 AeonLucid - [POGOProtos](https://github.com/AeonLucid/POGOProtos)
+
+NECROBOTIO - [NecroBot] (https://github.com/NECROBOTIO/NecroBot)
 
 <br/>
 Thanks to everyone who volunteered by contributing via Pull Requests!
