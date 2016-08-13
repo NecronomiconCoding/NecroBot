@@ -341,7 +341,7 @@ namespace PoGo.NecroBot.Logic
         public double DefaultLatitude;
         [DefaultValue(-73.968286)]
         public double DefaultLongitude;
-        [DefaultValue(5.0)]
+        [DefaultValue(3.6)]
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(true)]
         public bool RandomlyPauseAtStops;
