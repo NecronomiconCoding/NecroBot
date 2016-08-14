@@ -176,7 +176,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 return true;
                             },
                             session.LogicSettings.UseWalkingSpeedVariant,
-                            session.LogicSettings.WalkingSpeedVariant,
                             cancellationToken
                             );
 

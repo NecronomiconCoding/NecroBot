@@ -26,7 +26,7 @@ namespace PoGo.NecroBot.Logic
         }
 
         public async Task<PlayerUpdateResponse> Move(GeoCoordinate targetLocation,
-            double walkingSpeedInKilometersPerHour, double walkingSpeedVariant, Func<Task<bool>> functionExecutedWhileWalking,
+            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking,
             CancellationToken cancellationToken, bool disableHumanLikeWalking, bool useWalkingSpeedVariant)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -34,8 +34,7 @@ namespace PoGo.NecroBot.Logic
             {
                 var rw = new Random();
                 double SpeedVariantSec = rw.Next(1000, 10000);
-                var requestVariantDateTime = DateTime.Now;
-
+                
                 var speedInMetersPerSecond = walkingSpeedInKilometersPerHour / 3.6;
 
                 var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
@@ -46,6 +45,7 @@ namespace PoGo.NecroBot.Logic
 
                 //Initial walking
                 var requestSendDateTime = DateTime.Now;
+                var requestVariantDateTime = DateTime.Now;
                 var result =
                     await
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
@@ -78,9 +78,9 @@ namespace PoGo.NecroBot.Logic
                     {
                         if (millisecondsUntilVariant >= SpeedVariantSec)
                         {
-                            var randomMin = (int)(walkingSpeedInKilometersPerHour - walkingSpeedVariant);
-                            var randomMax = (int)(walkingSpeedInKilometersPerHour + walkingSpeedVariant);
-                            var RandomWalkSpeed = rw.NextDouble() * (randomMax - randomMin) + randomMin;//NextDouble(randomMin, randomMax);
+                            var randomMin = walkingSpeedInKilometersPerHour - 1.2;
+                            var randomMax = walkingSpeedInKilometersPerHour + 1.2;
+                            var RandomWalkSpeed = rw.NextDouble() * (randomMax - randomMin) + randomMin;
 
                             speedInMetersPerSecond = RandomWalkSpeed / 3.6;
                             SpeedVariantSec += rw.Next(5000, 15000);
@@ -173,7 +173,7 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<PlayerUpdateResponse> HumanPathWalking(GpxReader.Trkpt trk,
             double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking,
-            bool useWalkingSpeedVariant, double walkingSpeedVariant, CancellationToken cancellationToken)
+            bool useWalkingSpeedVariant, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -181,8 +181,7 @@ namespace PoGo.NecroBot.Logic
 
             var rw = new Random();
             double SpeedVariantSec = rw.Next(1000, 10000);
-            var requestVariantDateTime = DateTime.Now;
-
+            
             var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat, CultureInfo.InvariantCulture),
                 Convert.ToDouble(trk.Lon, CultureInfo.InvariantCulture));
 
@@ -200,6 +199,7 @@ namespace PoGo.NecroBot.Logic
             //Initial walking
 
             var requestSendDateTime = DateTime.Now;
+            var requestVariantDateTime = DateTime.Now;
             var result =
                 await
                     _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude, waypoint.Altitude);
@@ -231,12 +231,14 @@ namespace PoGo.NecroBot.Logic
                 {
                     if (millisecondsUntilVariant >= SpeedVariantSec)
                     {
-                        var randomMin = (int)(walkingSpeedInKilometersPerHour - walkingSpeedVariant);
-                        var randomMax = (int)(walkingSpeedInKilometersPerHour + walkingSpeedVariant);
-                        var RandomWalkSpeed = rw.NextDouble() * (randomMax - randomMin) + randomMin;//NextDouble(randomMin, randomMax);
+                        var randomMin = (int)(walkingSpeedInKilometersPerHour - 1.2);
+                        var randomMax = (int)(walkingSpeedInKilometersPerHour + 1.2);
+                        var RandomWalkSpeed = rw.NextDouble() * (randomMax - randomMin) + randomMin;
 
                         speedInMetersPerSecond = RandomWalkSpeed / 3.6;
                         SpeedVariantSec += rw.Next(5000, 15000);
+
+                        Console.WriteLine("Km/h: {0:0.##", RandomWalkSpeed);
                     }
                 }
 

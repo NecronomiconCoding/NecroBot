@@ -45,7 +45,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 
                 await session.Navigation.Move(
                     new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude, LocationUtils.getElevation(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude)),
-                    session.LogicSettings.WalkingSpeedInKilometerPerHour, session.LogicSettings.WalkingSpeedVariant, null, cancellationToken, session.LogicSettings.DisableHumanWalking,
+                    session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken, session.LogicSettings.DisableHumanWalking,
                     session.LogicSettings.UseWalkingSpeedVariant);
             }
 
@@ -100,7 +100,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
 
                     await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude, LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
-                    RandomWalkSpeed, session.LogicSettings.WalkingSpeedVariant,
+                    RandomWalkSpeed,
                     async () =>
                     {
                         // Catch normal map Pokemon
