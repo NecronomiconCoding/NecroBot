@@ -45,7 +45,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 
                 await session.Navigation.Move(
                     new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude, LocationUtils.getElevation(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude)),
-                    session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken, session.LogicSettings.DisableHumanWalking);
+                    session.LogicSettings.WalkingSpeedInKilometerPerHour, session.LogicSettings.WalkingSpeedVariant, null, cancellationToken, session.LogicSettings.DisableHumanWalking,
+                    session.LogicSettings.UseWalkingSpeedVariant);
             }
 
             var pokestopList = await GetPokeStops(session);
@@ -99,7 +100,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
 
                     await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude, LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
-                    RandomWalkSpeed,
+                    RandomWalkSpeed, session.LogicSettings.WalkingSpeedVariant,
                     async () =>
                     {
                         // Catch normal map Pokemon
@@ -107,7 +108,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         //Catch Incense Pokemon
                         await CatchIncensePokemonsTask.Execute(session, cancellationToken);
                         return true;
-                    }, cancellationToken, session.LogicSettings.DisableHumanWalking);
+                    }, cancellationToken, session.LogicSettings.DisableHumanWalking,
+                    session.LogicSettings.UseWalkingSpeedVariant);
 
                 //Catch Lure Pokemon
                 if (pokeStop.LureInfo != null)

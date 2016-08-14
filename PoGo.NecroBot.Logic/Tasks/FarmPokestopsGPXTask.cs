@@ -175,6 +175,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await UseNearbyPokestopsTask.Execute(session, cancellationToken);
                                 return true;
                             },
+                            session.LogicSettings.UseWalkingSpeedVariant,
+                            session.LogicSettings.WalkingSpeedVariant,
                             cancellationToken
                             );
 
