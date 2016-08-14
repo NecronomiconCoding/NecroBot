@@ -27,7 +27,7 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<PlayerUpdateResponse> Move(GeoCoordinate targetLocation,
             double walkingSpeedInKilometersPerHour, double walkingSpeedVariant, Func<Task<bool>> functionExecutedWhileWalking,
-            CancellationToken cancellationToken, bool disableHumanLikeWalking, bool useWalkingSpeedVariantuseWalkingVariant)
+            CancellationToken cancellationToken, bool disableHumanLikeWalking, bool useWalkingSpeedVariant)
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (!disableHumanLikeWalking)
@@ -74,7 +74,7 @@ namespace PoGo.NecroBot.Logic
                         }
                     }
 
-                    if (useWalkingSpeedVariantuseWalkingVariant)
+                    if (useWalkingSpeedVariant)
                     {
                         if (millisecondsUntilVariant >= SpeedVariantSec)
                         {
@@ -173,7 +173,7 @@ namespace PoGo.NecroBot.Logic
 
         public async Task<PlayerUpdateResponse> HumanPathWalking(GpxReader.Trkpt trk,
             double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking,
-            bool useWalkingSpeedVariantuseWalkingVariant, double walkingSpeedVariant, CancellationToken cancellationToken)
+            bool useWalkingSpeedVariant, double walkingSpeedVariant, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -227,7 +227,7 @@ namespace PoGo.NecroBot.Logic
                 //    }
                 //}
 
-                if (useWalkingSpeedVariantuseWalkingVariant)
+                if (useWalkingSpeedVariant)
                 {
                     if (millisecondsUntilVariant >= SpeedVariantSec)
                     {
