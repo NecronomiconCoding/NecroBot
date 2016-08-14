@@ -237,8 +237,6 @@ namespace PoGo.NecroBot.Logic
 
                         speedInMetersPerSecond = RandomWalkSpeed / 3.6;
                         SpeedVariantSec += rw.Next(5000, 15000);
-
-                        Console.WriteLine("Km/h: {0:0.##", RandomWalkSpeed);
                     }
                 }
 
