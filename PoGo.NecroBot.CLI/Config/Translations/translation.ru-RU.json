@@ -674,7 +674,7 @@
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Variant Walking: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
     }
   ],
 	"PokemonStrings": [

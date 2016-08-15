@@ -650,7 +650,7 @@
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Variante de Caminhada: Foi alterado, {0:n2} Km/h para {1:n2} Km/h"
+      "Value": "Velocidade de Caminhada: Foi alterado, {0:n2} Km/h para {1:n2} Km/h"
     }
   ],
   "PokemonStrings": [
