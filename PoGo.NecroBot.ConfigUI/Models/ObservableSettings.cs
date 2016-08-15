@@ -94,7 +94,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
             set { SetValue(UseWalkingSpeedVariantProperty, value); }
         }
         public static readonly DependencyProperty UseWalkingSpeedVariantProperty =
-            DependencyProperty.Register("UseWalkingSpeedVariant", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(0.0));
+            DependencyProperty.Register("UseWalkingSpeedVariant", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(true));
 
         public bool ShowVariantWalking
         {
@@ -102,7 +102,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
             set { SetValue(ShowVariantWalkingProperty, value); }
         }
         public static readonly DependencyProperty ShowVariantWalkingProperty =
-            DependencyProperty.Register("ShowVariantWalking", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(0.0));
+            DependencyProperty.Register("ShowVariantWalking", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(true));
 
         public int MaxSpawnLocationOffset
         {
