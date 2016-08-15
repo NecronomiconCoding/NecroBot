@@ -14,7 +14,6 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Tasks;
 using PoGo.NecroBot.Logic.Utils;
-using NecroBot_Network_Logic;
 
 #endregion
 
@@ -121,9 +120,6 @@ namespace PoGo.NecroBot.CLI
 
             session.Client.ApiFailure = new ApiFailureStrategy(session);
             ProgressBar.fill(20);
-
-            //Initialize Encryption-Service
-            Encryption.InitializeEncryption();
 
             /*SimpleSession session = new SimpleSession
             {
