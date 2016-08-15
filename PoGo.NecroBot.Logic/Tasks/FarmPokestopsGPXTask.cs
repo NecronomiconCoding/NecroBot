@@ -20,6 +20,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsGpxTask
     {
+        private static int curTrkSeg;
+        private static int curTrkPt;
         private static DateTime _lastTasksCall = DateTime.Now;
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
@@ -33,12 +35,16 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 var track = tracks.ElementAt(curTrk);
                 var trackSegments = track.Segments;
-                for (var curTrkSeg = 0; curTrkSeg < trackSegments.Count; curTrkSeg++)
+
+                if (curTrkSeg >= trackSegments.Count) curTrkSeg = 0;
+                for (; curTrkSeg < trackSegments.Count; curTrkSeg++)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
                     var trackPoints = track.Segments.ElementAt(curTrkSeg).TrackPoints;
-                    for (var curTrkPt = 0; curTrkPt < trackPoints.Count; curTrkPt++)
+
+                    if (curTrkPt >= trackPoints.Count) curTrkPt = 0;
+                    for (; curTrkPt < trackPoints.Count; curTrkPt++)
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
