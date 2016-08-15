@@ -663,6 +663,22 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public static readonly DependencyProperty MaxPokeballsPerPokemonProperty =
             DependencyProperty.Register("MaxPokeballsPerPokemon", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
 
+        public bool StopBotMaxCathFlee
+        {
+            get { return (bool)GetValue(MStopBotMaxCathFleeProperty); }
+            set { SetValue(MStopBotMaxCathFleeProperty, value); }
+        }
+        public static readonly DependencyProperty MStopBotMaxCathFleeProperty =
+            DependencyProperty.Register("StopBotMaxCathFlee", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int MaxCatchFleePerHours
+        {
+            get { return (int)GetValue(MaxCatchFleePerHoursProperty); }
+            set { SetValue(MaxCatchFleePerHoursProperty, value); }
+        }
+        public static readonly DependencyProperty MaxCatchFleePerHoursProperty =
+            DependencyProperty.Register("MaxCatchFleePerHours", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
         public int MaxBerriesToUsePerPokemon
         {
             get { return (int)GetValue(MaxBerriesToUsePerPokemonProperty); }
@@ -1352,6 +1368,8 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.UsePokemonToNotCatchFilter = set.UsePokemonToNotCatchFilter;
             res.MaxPokeballsPerPokemon = set.MaxPokeballsPerPokemon;
             res.MaxBerriesToUsePerPokemon = set.MaxBerriesToUsePerPokemon;
+            res.StopBotMaxCathFlee = set.StopBotMaxCathFlee;
+            res.MaxCatchFleePerHours = set.MaxCatchFleePerHours;
             res.UseGreatBallAboveCp = set.UseGreatBallAboveCp;
             res.UseUltraBallAboveCp = set.UseUltraBallAboveCp;
             res.UseMasterBallAboveCp = set.UseMasterBallAboveCp;
@@ -1513,6 +1531,8 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.CatchPokemon = CatchPokemon;
             gs.UsePokemonToNotCatchFilter = UsePokemonToNotCatchFilter;
             gs.MaxPokeballsPerPokemon = MaxPokeballsPerPokemon;
+            gs.StopBotMaxCathFlee = StopBotMaxCathFlee;
+            gs.MaxCatchFleePerHours = MaxCatchFleePerHours;
             gs.MaxBerriesToUsePerPokemon = MaxBerriesToUsePerPokemon;
             gs.UseGreatBallAboveCp = UseGreatBallAboveCp;
             gs.UseUltraBallAboveCp = UseUltraBallAboveCp;

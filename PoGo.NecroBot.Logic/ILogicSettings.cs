@@ -134,6 +134,8 @@ namespace PoGo.NecroBot.Logic
         int GetMinStarDustForLevelUp { get; }
         bool UseLuckyEggConstantly { get; }
         int MaxBerriesToUsePerPokemon { get; }
+        bool StopBotMaxCathFlee { get; }
+        int MaxCatchFleePerHours { get; }
         bool UseIncenseConstantly { get; }
         int UseBerriesMinCp { get; }
         float UseBerriesMinIv { get; }
