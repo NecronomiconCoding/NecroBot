@@ -341,13 +341,13 @@ namespace PoGo.NecroBot.Logic
         public double DefaultLatitude;
         [DefaultValue(-73.968286)]
         public double DefaultLongitude;
-        [DefaultValue(3.6)]
+        [DefaultValue(4.6)]
         public double WalkingSpeedInKilometerPerHour;
         [DefaultValue(true)]
         public bool UseWalkingSpeedVariant;
         [DefaultValue(true)]
         public bool RandomlyPauseAtStops;
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         public bool ShowVariantWalking;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
