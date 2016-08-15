@@ -111,7 +111,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 Message = "Failed to use berry. You may be softbanned"
                             });
-                            break;
                         }
                     }
                    
