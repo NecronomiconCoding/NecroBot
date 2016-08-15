@@ -14,6 +14,7 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
+using PokemonGo.RocketAPI.Exceptions;
 
 #endregion
 
@@ -93,14 +94,25 @@ namespace PoGo.NecroBot.Logic.Tasks
                     AmountOfBerries++;
                     if (AmountOfBerries <= session.LogicSettings.MaxBerriesToUsePerPokemon)
                     {
-                        await
-                       UseBerry(session,
-                           encounter is EncounterResponse || encounter is IncenseEncounterResponse
-                               ? pokemon.EncounterId
-                               : encounterId,
-                           encounter is EncounterResponse || encounter is IncenseEncounterResponse
-                               ? pokemon.SpawnPointId
-                               : currentFortData?.Id);
+                        try
+                        {
+                            await
+                           UseBerry(session,
+                               encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                                   ? pokemon.EncounterId
+                                   : encounterId,
+                               encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                                   ? pokemon.SpawnPointId
+                                   : currentFortData?.Id);
+                        }
+                        catch(SoftBanException)
+                        {
+                            session.EventDispatcher.Send(new ErrorEvent
+                            {
+                                Message = "Failed to use berry. You may be softbanned"
+                            });
+                            break;
+                        }
                     }
                    
                 }
@@ -323,7 +335,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (berry == null || berry.Count <= 0)
                 return;
 
-            await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
+            var useCaptureItem = await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
+            if (useCaptureItem.ItemCaptureMult == double.NaN)
+                throw new SoftBanException();
+
             berry.Count -= 1;
             session.EventDispatcher.Send(new UseBerryEvent { BerryType = ItemId.ItemRazzBerry, Count = berry.Count });
         }
