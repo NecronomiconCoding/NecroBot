@@ -427,6 +427,14 @@
     {
       "Key": "HumanWalkingVariant",
       "Value": "Variant Walking: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+    },
+    {
+      "Key": "MaxCatchFleeStop",
+      "Value": "Max number of catch flee {0}/{1} bot stopping..."
+    },
+    {
+      "Key": "MaxCatchFlee",
+      "Value": "Max number of catch flee {0}/{1}"
     }
   ],
 	"PokemonStrings": [
