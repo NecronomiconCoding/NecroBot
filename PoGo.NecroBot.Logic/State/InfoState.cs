@@ -13,10 +13,6 @@ namespace PoGo.NecroBot.Logic.State
     {
         public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
-            //var inventory = await session.Inventory.RefreshCachedInventory();
-            //if (!inventory.Success)
-            //    throw new PermaBannedException();
-
             cancellationToken.ThrowIfCancellationRequested();
             await DisplayPokemonStatsTask.Execute(session);
             return new FarmState();
