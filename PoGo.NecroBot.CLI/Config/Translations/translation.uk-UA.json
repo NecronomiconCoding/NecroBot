@@ -22,13 +22,11 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Ви перебуваєте поза зазначеного радіусу! Повертаємося до точки старту (дистанція {0} м) через 5 сек. Ваш LastPos.ini файл коректний?"
+      "Value": "Ви перебуваєте поза зазначеного радіусу! Повертаємося до точки старту (дистанція {0} м) через 5 сек. Ваш LastPos.ini файл коректний?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value":
-        "Не знайдено активних покетстопів у вашій зоні. Можливо вказана занадто маленька максимальна дистанція пошуку в налаштуваннях?"
+      "Value": "Не знайдено активних покетстопів у вашій зоні. Можливо вказана занадто маленька максимальна дистанція пошуку в налаштуваннях?"
     },
     {
       "Key": "eventFortUsed",
@@ -196,8 +194,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value":
-        "PTC сервера можливо не працюють АБО невірно вказані дані облікового запису. Спробуйте використовувати логін від Google аккаунта"
+      "Value": "PTC сервера можливо не працюють АБО невірно вказані дані облікового запису. Спробуйте використовувати логін від Google аккаунта"
     },
     {
       "Key": "tryingAgainIn",
@@ -281,8 +278,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "Інвентар повний. Вручну передайте покемона Професору або встановіть налаштування TransferDuplicatePokemon як true ..."
+      "Value": "Інвентар повний. Вручну передайте покемона Професору або встановіть налаштування TransferDuplicatePokemon як true ..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -350,8 +346,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value":
-        "{0} -Онлайн {1}, Рівень: {2} | XP / год: {3: 0} | П / год: {4: 0} | Пил: {5: 0} | обмін: {6: 0} | Вилучено: {7: 0} "
+      "Value": "{0} -Онлайн {1}, Рівень: {2} | XP / год: {3: 0} | П / год: {4: 0} | Пил: {5: 0} | обмін: {6: 0} | Вилучено: {7: 0} "
     },
     {
       "Key": "statsXpTemplateString",
@@ -363,13 +358,11 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value":
-        "Оскільки у Вас включена двухфакторная аутентифікація Google, Вам потрібно помістити пароль Програми Google в файл auth.json"
+      "Value": "Оскільки у Вас включена двухфакторная аутентифікація Google, Вам потрібно помістити пароль Програми Google в файл auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value":
-        "Відкриваємо паролі Google App. Будь ласка, створіть новий пароль додатка (виберіть Other (Інше) в якості пристрою)"
+      "Value": "Відкриваємо паролі Google App. Будь ласка, створіть новий пароль додатка (виберіть Other (Інше) в якості пристрою)"
     },
     {
       "Key": "googleError",
@@ -397,19 +390,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"
+      "Value": "--- Pokedex catched --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"
+      "Value": "--- Pokedex needed --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"
+      "Value": "#{0} Name: {1} \n"
     },
     {
       "Key": "Proxied",
@@ -430,6 +423,10 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Variant Walking: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
     }
   ],
 	"PokemonStrings": [

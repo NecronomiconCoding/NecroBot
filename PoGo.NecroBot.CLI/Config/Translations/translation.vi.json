@@ -424,7 +424,7 @@
       "Key": "statsTemplateString",
       "Value": "{0} - Đã Chạy: {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | ĐãChuyểnHoá: {6:n0} | ĐãXoá: {7:n0}"
     },
-	{
+    {
       "Key": "profileStatsTemplateString",
       "Value": "----- LVL {0} | {1} ----- \n Kinh Nghiệm: {2}/{3} \n Pokemon Đã Bắt: {4} \n Pokemon Đã Chuyển Thành Candy: {5} \n Pokestop Đã Đến: {6} \n Trứng Đã Nở: {6} \n Pokemons envolved: {7} \n Số Mục Trong Pokedex: {8} \n Đã Đi: {9} KM"
     },
@@ -638,19 +638,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex - Đã Bắt --- \n"  
+      "Value": "--- Pokedex - Đã Bắt --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Tên: {1} | Đã Bắt: {2} | Đã Gặp: {3} \n"
+      "Value": "#{0} Tên: {1} | Đã Bắt: {2} | Đã Gặp: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex - Còn Thiếu --- \n"
+      "Value": "--- Pokedex - Còn Thiếu --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Tên: {1} \n"
+      "Value": "#{0} Tên: {1} \n"
     },
     {
       "Key": "softBanBypassed",
@@ -676,6 +676,10 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Variant Walking: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
     }
   ],
   "PokemonStrings": [

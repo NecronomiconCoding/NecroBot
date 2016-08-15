@@ -288,13 +288,13 @@ namespace PoGo.NecroBot.CLI
             var move1 = session.Translation.GetTranslation(TranslationString.DisplayHighestMove1Header);
             var move2 = session.Translation.GetTranslation(TranslationString.DisplayHighestMove2Header);
             var candy = session.Translation.GetTranslation(TranslationString.DisplayHighestCandy);
-            
+
             Logger.Write(session.Translation.GetTranslation(TranslationString.HighestsPokemoHeader, strHeader), LogLevel.Info, ConsoleColor.Yellow);
-            foreach(var pokemon in displayHighestsPokemonEvent.PokemonList)
+            foreach (var pokemon in displayHighestsPokemonEvent.PokemonList)
             {
                 string strMove1 = session.Translation.GetPokemonMovesetTranslation(pokemon.Item5);
                 string strMove2 = session.Translation.GetPokemonMovesetTranslation(pokemon.Item6);
-                
+
                 Logger.Write(
                     session.Translation.GetTranslation(
                         TranslationString.HighestsPokemoCell,
@@ -333,10 +333,20 @@ namespace PoGo.NecroBot.CLI
         private static void HandleEvent(EggsListEvent event1, ISession session) { }
         private static void HandleEvent(InventoryListEvent event1, ISession session) { }
         private static void HandleEvent(PokemonListEvent event1, ISession session) { }
-        private static void HandleEvent(UpdatePositionEvent Event1, ISession session)
+        private static void HandleEvent(UpdatePositionEvent event1, ISession session)
         {
             //uncomment to set what happen to the character's location (during snipe double teleport)
             //Logger.Write(Event1.Latitude.ToString("0.0000") + "," + Event1.Longitude.ToString("0.0000"), LogLevel.Info, force: true);
+        }
+
+        private static void HandleEvent(HumanWalkingEvent humanWalkingEvent, ISession session)
+        {
+            if (session.LogicSettings.ShowVariantWalking)
+                Logger.Write(
+                    session.Translation.GetTranslation(TranslationString.HumanWalkingVariant,
+                    humanWalkingEvent.OldWalkingSpeed,
+                    humanWalkingEvent.CurrentWalkingSpeed),
+                    LogLevel.Info, ConsoleColor.DarkCyan);
         }
 
         internal void Listen(IEvent evt, ISession session)
@@ -344,13 +354,9 @@ namespace PoGo.NecroBot.CLI
             dynamic eve = evt;
 
             try
-            {
-                HandleEvent(eve, session);
-            }
-            // ReSharper disable once EmptyGeneralCatchClause
+            { HandleEvent(eve, session); }
             catch
-            {
-            }
+            { }
         }
     }
 }

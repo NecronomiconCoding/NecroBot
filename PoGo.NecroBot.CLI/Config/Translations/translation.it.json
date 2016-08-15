@@ -26,8 +26,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file LastPos.ini è corretto?"
+      "Value": "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file LastPos.ini è corretto?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -340,8 +339,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "Inventario Pokémon pieno. Trasferisci i Pokemon manualmente o imposta TransferDuplicatePokemon 'true' nelle impostazioni..."
+      "Value": "Inventario Pokémon pieno. Trasferisci i Pokemon manualmente o imposta TransferDuplicatePokemon 'true' nelle impostazioni..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -413,8 +411,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value":
-        "{0} - Tempo di Esecuzione {1} - Lvl: {2} | PE/H: {3:0} | PKMN/H: {4:0} | Polvere di Stella: {5:0} | Trasferiti: {6:0} | Riciclati: {7:0}"
+      "Value": "{0} - Tempo di Esecuzione {1} - Lvl: {2} | PE/H: {3:0} | PKMN/H: {4:0} | Polvere di Stella: {5:0} | Trasferiti: {6:0} | Riciclati: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -426,8 +423,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value":
-        "Dato che hai la Verifica in Due Passaggi di Google attivata, devi inserire una Password Specifica per l'app nel file auth.json "
+      "Value": "Dato che hai la Verifica in Due Passaggi di Google attivata, devi inserire una Password Specifica per l'app nel file auth.json "
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -524,26 +520,26 @@
     {
       "Key": "pkmNotEnoughRessources",
       "Value": "Potenziamento Pokemon Fallito: Risorse Insufficienti"
-     },
+    },
     {
       "Key": "snipeServerOffline",
       "Value": "Il server di Sniping è offline. Saltando..."
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catturati --- \n"
+      "Value": "--- Pokedex catturati --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Nome: {1} | Catturati: {2} | Visti: {3} \n"
+      "Value": "#{0} Nome: {1} | Catturati: {2} | Visti: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex da sbloccare --- \n"
+      "Value": "--- Pokedex da sbloccare --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Nome: {1} \n"
+      "Value": "#{0} Nome: {1} \n"
     },
     {
       "Key": "Proxied",
@@ -564,6 +560,10 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Variant Walking: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
     }
   ],
 	"PokemonStrings": [

@@ -626,7 +626,7 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex Atrapados --- \n"
+      "Value": "--- Pokedex Atrapados --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
@@ -634,11 +634,11 @@
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex Necesarios --- \n"
+      "Value": "--- Pokedex Necesarios --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Nombre: {1} \n"
+      "Value": "#{0} Nombre: {1} \n"
     },
     {
       "Key": "Proxied",
@@ -659,6 +659,10 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Variant Walking: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
     }
   ],
   "PokemonStrings": [

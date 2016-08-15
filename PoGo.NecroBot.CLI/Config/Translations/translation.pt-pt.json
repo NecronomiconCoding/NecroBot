@@ -22,8 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Estás fora do raio definido! A caminhar para o início ({0}m) em 5 segundos. As coordenadas em LastPos.ini estão corretas?"
+      "Value": "Estás fora do raio definido! A caminhar para o início ({0}m) em 5 segundos. As coordenadas em LastPos.ini estão corretas?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -275,8 +274,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "O inventário de Pokémons está cheio. Transfere os pokémons manualmente ou altera TransferDuplicatePokemon para true nas configurações..."
+      "Value": "O inventário de Pokémons está cheio. Transfere os pokémons manualmente ou altera TransferDuplicatePokemon para true nas configurações..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -344,8 +342,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value":
-        "{0} - Sessão {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transferidos: {6:0} | Reciclados: {7:0}"
+      "Value": "{0} - Sessão {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transferidos: {6:0} | Reciclados: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -357,8 +354,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value":
-        "Como tens o Google Two Factor Auth ativado, precisarás de definir o App Specific Password no ficheiro auth.json"
+      "Value": "Como tens o Google Two Factor Auth ativado, precisarás de definir o App Specific Password no ficheiro auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -390,19 +386,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"
+      "Value": "--- Pokedex catched --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Nome: {1} | Capturados: {2} | Encontrados: {3} \n"
+      "Value": "#{0} Nome: {1} | Capturados: {2} | Encontrados: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"
+      "Value": "--- Pokedex needed --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Nome: {1} \n"
+      "Value": "#{0} Nome: {1} \n"
     },
     {
       "Key": "Proxied",
@@ -423,6 +419,10 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Variant Walking: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
     }
   ],
 	"PokemonStrings": [

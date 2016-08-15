@@ -166,7 +166,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         await session.Navigation.HumanPathWalking(
                             trackPoints.ElementAt(curTrkPt),
-                            session.LogicSettings.WalkingSpeedInKilometerPerHour,
                             async () =>
                             {
                                 await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
@@ -175,9 +174,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 await UseNearbyPokestopsTask.Execute(session, cancellationToken);
                                 return true;
                             },
-                            session.LogicSettings.UseWalkingSpeedVariant,
-                            cancellationToken
-                            );
+                            session,
+                            cancellationToken);
 
                         await eggWalker.ApplyDistance(distance, cancellationToken);
                     } //end trkpts

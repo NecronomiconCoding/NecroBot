@@ -347,6 +347,8 @@ namespace PoGo.NecroBot.Logic
         public bool UseWalkingSpeedVariant;
         [DefaultValue(true)]
         public bool RandomlyPauseAtStops;
+        [DefaultValue(false)]
+        public bool ShowVariantWalking;
         [DefaultValue(10)]
         public int MaxSpawnLocationOffset;
         //softban related
@@ -1369,6 +1371,7 @@ namespace PoGo.NecroBot.Logic
         public string UpgradePokemonMinimumStatsOperator => _settings.UpgradePokemonMinimumStatsOperator;
         public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
         public bool UseWalkingSpeedVariant => _settings.UseWalkingSpeedVariant;
+        public bool ShowVariantWalking => _settings.ShowVariantWalking;
         public bool FastSoftBanBypass => _settings.FastSoftBanBypass;
         public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
         public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;

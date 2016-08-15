@@ -43,10 +43,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                     session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
                 
-                await session.Navigation.Move(
-                    new GeoCoordinate(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude, LocationUtils.getElevation(session.Settings.DefaultLatitude, session.Settings.DefaultLongitude)),
-                    session.LogicSettings.WalkingSpeedInKilometerPerHour, null, cancellationToken, session.LogicSettings.DisableHumanWalking,
-                    session.LogicSettings.UseWalkingSpeedVariant);
+                await session.Navigation.Move(new GeoCoordinate(
+                    session.Settings.DefaultLatitude,
+                    session.Settings.DefaultLongitude,
+                    LocationUtils.getElevation(session.Settings.DefaultLatitude,
+                    session.Settings.DefaultLongitude)),
+                    null,
+                    session,
+                    cancellationToken);
             }
 
             var pokestopList = await GetPokeStops(session);
@@ -82,25 +86,20 @@ namespace PoGo.NecroBot.Logic.Tasks
                 // randomize next pokestop between first and second by distance
                 var pokestopListNum = 0;
                 if (pokestopList.Count >= 1)
-                {
                     pokestopListNum = rc.Next(0, 2);
-                }
+
                 var pokeStop = pokestopList[pokestopListNum];
                 pokestopList.RemoveAt(pokestopListNum);
 
                 var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                     session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                 var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-                double WalkingSpeed = session.LogicSettings.WalkingSpeedInKilometerPerHour;
-                var randomFactor = 0.5f;
-                var randomMin = (int)(WalkingSpeed * (1 - randomFactor));
-                var randomMax = (int)(WalkingSpeed * (1 + randomFactor));
-                var RandomWalkSpeed = RandomDevice.Next(randomMin, randomMax);
+                
                 cancellationToken.ThrowIfCancellationRequested();
                 session.EventDispatcher.Send(new FortTargetEvent {Name = fortInfo.Name, Distance = distance});
 
-                    await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude, LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
-                    RandomWalkSpeed,
+                    await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude,
+                        LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
                     async () =>
                     {
                         // Catch normal map Pokemon
@@ -108,8 +107,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         //Catch Incense Pokemon
                         await CatchIncensePokemonsTask.Execute(session, cancellationToken);
                         return true;
-                    }, cancellationToken, session.LogicSettings.DisableHumanWalking,
-                    session.LogicSettings.UseWalkingSpeedVariant);
+                    },
+                    session,
+                    cancellationToken);
 
                 //Catch Lure Pokemon
                 if (pokeStop.LureInfo != null)

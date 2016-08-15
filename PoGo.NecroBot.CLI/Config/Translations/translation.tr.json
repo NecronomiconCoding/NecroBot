@@ -636,7 +636,7 @@
       "Key": "firstStartSetupDefaultLatLongConfirm",
       "Value": "Lattitude and Longitude accepted: {0}"
     },
-	{
+    {
       "Key": "firstStartSetupCompleted",
       "Value": "### KURULUM TAMAMLANDI ###"
     },
@@ -675,6 +675,10 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Variant Walking: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
     }
   ],
   "PokemonStrings": [

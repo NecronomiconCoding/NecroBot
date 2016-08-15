@@ -95,7 +95,15 @@ namespace PoGo.NecroBot.ConfigUI.Models
         }
         public static readonly DependencyProperty UseWalkingSpeedVariantProperty =
             DependencyProperty.Register("UseWalkingSpeedVariant", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(0.0));
-        
+
+        public bool ShowVariantWalking
+        {
+            get { return (bool)GetValue(ShowVariantWalkingProperty); }
+            set { SetValue(ShowVariantWalkingProperty, value); }
+        }
+        public static readonly DependencyProperty ShowVariantWalkingProperty =
+            DependencyProperty.Register("ShowVariantWalking", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
         public int MaxSpawnLocationOffset
         {
             get { return (int)GetValue(MaxSpawnLocationOffsetProperty); }
@@ -1277,6 +1285,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.MaxTravelDistanceInMeters = set.MaxTravelDistanceInMeters;
             res.WalkingSpeedInKilometerPerHour = set.WalkingSpeedInKilometerPerHour;
             res.UseWalkingSpeedVariant = set.UseWalkingSpeedVariant;
+            res.ShowVariantWalking = set.ShowVariantWalking;
             res.MaxSpawnLocationOffset = set.MaxSpawnLocationOffset;
             res.DelayBetweenPlayerActions = set.DelayBetweenPlayerActions;
             res.DelayBetweenPokemonCatch = set.DelayBetweenPokemonCatch;
@@ -1438,6 +1447,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.MaxTravelDistanceInMeters = MaxTravelDistanceInMeters;
             gs.WalkingSpeedInKilometerPerHour = WalkingSpeedInKilometerPerHour;
             gs.UseWalkingSpeedVariant = UseWalkingSpeedVariant;
+            gs.ShowVariantWalking = ShowVariantWalking;
             gs.MaxSpawnLocationOffset = MaxSpawnLocationOffset;
             gs.DelayBetweenPlayerActions = DelayBetweenPlayerActions;
             gs.DelayBetweenPokemonCatch = DelayBetweenPokemonCatch;
