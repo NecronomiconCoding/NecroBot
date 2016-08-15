@@ -1,6 +1,6 @@
 [submodule "FeroxRev"]
 	path = FeroxRev
-	url = https://github.com/NoxxDev/NecroBot-Rocket-API/tree/46f6e268065e64a03c07acbdc5096d4fab3bf42c
+	url = https://github.com/NoxxDev/NecroBot-Rocket-API.git
 	branch = master
 [submodule "POGOProtos"]
 	path = POGOProtos
