@@ -23,6 +23,9 @@ namespace PoGo.NecroBot.Logic.Tasks
     public static class CatchPokemonTask
     {
         public static int AmountOfBerries;
+        private static int AmountOfCathFlee = 0;
+        private static DateTime requestCathFleeHours;
+
         private static Random Random => new Random((int)DateTime.Now.Ticks);
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken, dynamic encounter, MapPokemon pokemon,
@@ -233,10 +236,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         evt.FamilyCandies = caughtPokemonResponse.CaptureAward.Candy.Sum();
                     }
-
-                   
                 }
-
+                
                 evt.CatchType = encounter is EncounterResponse
                     ? session.Translation.GetTranslation(TranslationString.CatchTypeNormal)
                     : encounter is DiskEncounterResponse

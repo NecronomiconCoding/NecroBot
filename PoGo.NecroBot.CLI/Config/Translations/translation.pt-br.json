@@ -651,14 +651,6 @@
     {
       "Key": "HumanWalkingVariant",
       "Value": "Variante de Caminhada: Foi alterado, {0:n2} Km/h para {1:n2} Km/h"
-    },
-    {
-      "Key": "MaxCatchFleeStop",
-      "Value": "Número máximo fuga de capturas {0}/{1} bot parando..."
-    },
-    {
-      "Key": "MaxCatchFlee",
-      "Value": "Número máximo fuga de capturas {0}/{1}"
     }
   ],
   "PokemonStrings": [
