@@ -168,6 +168,10 @@
     {
       "Key": "HumanWalkingVariant",
       "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Probably Permanent Ban!"
     }
   ],
 	"PokemonStrings": [

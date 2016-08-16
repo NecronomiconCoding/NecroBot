@@ -203,7 +203,8 @@ namespace PoGo.NecroBot.Logic.Common
         LoginRemainingTime,
         HighestsPokemoHeader,
         HighestsPokemoCell,
-        HumanWalkingVariant
+        HumanWalkingVariant,
+        AccountBanned
     }
 
     public class Translation : ITranslation
@@ -478,7 +479,8 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.LoginRemainingTime, "You are already logged in! \n Session valid for: ({0}:{1} seconds)"),
             new KeyValuePair<TranslationString, string>(TranslationString.HighestsPokemoHeader, "====== {0} ======"),
             new KeyValuePair<TranslationString, string>(TranslationString.HighestsPokemoCell, "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkingVariant, "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h")
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkingVariant, "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"),
+            new KeyValuePair<TranslationString, string>(TranslationString.AccountBanned, "Probably Permanent Ban!")
         };
 
         [JsonProperty("PokemonStrings",

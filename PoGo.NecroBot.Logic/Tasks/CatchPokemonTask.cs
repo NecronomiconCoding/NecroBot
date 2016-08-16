@@ -14,7 +14,6 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
-using PokemonGo.RocketAPI.Exceptions;
 
 #endregion
 
@@ -23,8 +22,6 @@ namespace PoGo.NecroBot.Logic.Tasks
     public static class CatchPokemonTask
     {
         public static int AmountOfBerries;
-        private static int AmountOfCathFlee = 0;
-        private static DateTime requestCathFleeHours;
 
         private static Random Random => new Random((int)DateTime.Now.Ticks);
 
@@ -93,32 +90,20 @@ namespace PoGo.NecroBot.Logic.Tasks
                         pokemonCp >= session.LogicSettings.UseBerriesMinCp ||
                         probability < session.LogicSettings.UseBerriesBelowCatchProbability)))
                 {
-                    
+
                     AmountOfBerries++;
                     if (AmountOfBerries <= session.LogicSettings.MaxBerriesToUsePerPokemon)
                     {
-                        try
-                        {
-                            await
-                           UseBerry(session,
-                               encounter is EncounterResponse || encounter is IncenseEncounterResponse
-                                   ? pokemon.EncounterId
-                                   : encounterId,
-                               encounter is EncounterResponse || encounter is IncenseEncounterResponse
-                                   ? pokemon.SpawnPointId
-                                   : currentFortData?.Id);
-                        }
-                        catch(SoftBanException)
-                        {
-                            session.EventDispatcher.Send(new ErrorEvent
-                            {
-                                Message = "Failed to use berry. You may be softbanned"
-                            });
-
-                            break;
-                        }
+                        await
+                       UseBerry(session,
+                           encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                               ? pokemon.EncounterId
+                               : encounterId,
+                           encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                               ? pokemon.SpawnPointId
+                               : currentFortData?.Id);
                     }
-                   
+
                 }
 
                 //default to excellent throw
@@ -237,7 +222,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         evt.FamilyCandies = caughtPokemonResponse.CaptureAward.Candy.Sum();
                     }
                 }
-                
+
                 evt.CatchType = encounter is EncounterResponse
                     ? session.Translation.GetTranslation(TranslationString.CatchTypeNormal)
                     : encounter is DiskEncounterResponse
@@ -289,8 +274,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             var iV =
                 Math.Round(
                     PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
-                        ? encounter.WildPokemon?.PokemonData
-                        : encounter?.PokemonData), 2);
+                    ? encounter.WildPokemon?.PokemonData
+                    : encounter?.PokemonData), 2);
 
             var pokeBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemPokeBall);
             var greatBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemGreatBall);
@@ -298,22 +283,20 @@ namespace PoGo.NecroBot.Logic.Tasks
             var masterBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
             if (masterBallsCount > 0 && (
-                    (!session.LogicSettings.PokemonToUseMasterball.Any() && (
-                        pokemonCp >= session.LogicSettings.UseMasterBallAboveCp ||
-                        probability < session.LogicSettings.UseMasterBallBelowCatchProbability)) ||
-                    session.LogicSettings.PokemonToUseMasterball.Contains(pokemonId)))
+                (!session.LogicSettings.PokemonToUseMasterball.Any() && (
+                pokemonCp >= session.LogicSettings.UseMasterBallAboveCp ||
+                probability < session.LogicSettings.UseMasterBallBelowCatchProbability)) ||
+                session.LogicSettings.PokemonToUseMasterball.Contains(pokemonId)))
                 return ItemId.ItemMasterBall;
 
-            if (ultraBallsCount > 0 && (
-                    pokemonCp >= session.LogicSettings.UseUltraBallAboveCp ||
-                    iV >= session.LogicSettings.UseUltraBallAboveIv ||
-                    probability < session.LogicSettings.UseUltraBallBelowCatchProbability))
+            if (ultraBallsCount > 0 && (pokemonCp >= session.LogicSettings.UseUltraBallAboveCp ||
+                iV >= session.LogicSettings.UseUltraBallAboveIv ||
+                probability < session.LogicSettings.UseUltraBallBelowCatchProbability))
                 return ItemId.ItemUltraBall;
 
-            if (greatBallsCount > 0 && (
-                    pokemonCp >= session.LogicSettings.UseGreatBallAboveCp ||
-                    iV >= session.LogicSettings.UseGreatBallAboveIv ||
-                    probability < session.LogicSettings.UseGreatBallBelowCatchProbability))
+            if (greatBallsCount > 0 && (pokemonCp >= session.LogicSettings.UseGreatBallAboveCp ||
+                iV >= session.LogicSettings.UseGreatBallAboveIv ||
+                probability < session.LogicSettings.UseGreatBallBelowCatchProbability))
                 return ItemId.ItemGreatBall;
 
             if (pokeBallsCount > 0)
@@ -338,9 +321,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                 return;
 
             var useCaptureItem = await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
-            if (useCaptureItem.ItemCaptureMult == double.NaN)
-                throw new SoftBanException();
-
             berry.Count -= 1;
             session.EventDispatcher.Send(new UseBerryEvent { BerryType = ItemId.ItemRazzBerry, Count = berry.Count });
         }
