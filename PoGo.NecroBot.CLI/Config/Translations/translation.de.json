@@ -22,8 +22,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m entfernt). Sind die Koordinaten in der config.json korrekt?"
+      "Value": "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m entfernt). Sind die Koordinaten in der config.json korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -295,8 +294,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "PokémonInventar ist voll. Bitte verschicke Pokémon manuell oder setze \"TransferDuplicatePokemon\" in den Einstellungen auf \"true\"..."
+      "Value": "PokémonInventar ist voll. Bitte verschicke Pokémon manuell oder setze \"TransferDuplicatePokemon\" in den Einstellungen auf \"true\"..."
     },
     {
       "Key": "encounterProblem",
@@ -492,19 +490,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex gefangen --- \n"  
+      "Value": "--- Pokedex gefangen --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Gefangen: {2} | Gesehen: {3} \n"  
+      "Value": "#{0} Name: {1} | Gefangen: {2} | Gesehen: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex gebraucht --- \n"  
+      "Value": "--- Pokedex gebraucht --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value": "#{0} Name: {1} \n"
     },
     {
       "Key": "Proxied",
@@ -525,6 +523,14 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Probably Permanent Ban!"
     }
   ],
   "PokemonStrings": [

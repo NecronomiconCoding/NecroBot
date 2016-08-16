@@ -3,7 +3,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Tasks;
-using PokemonGo.RocketAPI.Exceptions;
 
 #endregion
 

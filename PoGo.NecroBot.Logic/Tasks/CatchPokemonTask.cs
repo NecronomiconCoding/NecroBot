@@ -22,6 +22,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     public static class CatchPokemonTask
     {
         public static int AmountOfBerries;
+
         private static Random Random => new Random((int)DateTime.Now.Ticks);
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken, dynamic encounter, MapPokemon pokemon,
@@ -89,7 +90,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         pokemonCp >= session.LogicSettings.UseBerriesMinCp ||
                         probability < session.LogicSettings.UseBerriesBelowCatchProbability)))
                 {
-                    
+
                     AmountOfBerries++;
                     if (AmountOfBerries <= session.LogicSettings.MaxBerriesToUsePerPokemon)
                     {
@@ -102,7 +103,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                ? pokemon.SpawnPointId
                                : currentFortData?.Id);
                     }
-                   
+
                 }
 
                 //default to excellent throw
@@ -220,8 +221,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         evt.FamilyCandies = caughtPokemonResponse.CaptureAward.Candy.Sum();
                     }
-
-                   
                 }
 
                 evt.CatchType = encounter is EncounterResponse
@@ -275,8 +274,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             var iV =
                 Math.Round(
                     PokemonInfo.CalculatePokemonPerfection(encounter is EncounterResponse
-                        ? encounter.WildPokemon?.PokemonData
-                        : encounter?.PokemonData), 2);
+                    ? encounter.WildPokemon?.PokemonData
+                    : encounter?.PokemonData), 2);
 
             var pokeBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemPokeBall);
             var greatBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemGreatBall);
@@ -284,22 +283,20 @@ namespace PoGo.NecroBot.Logic.Tasks
             var masterBallsCount = await session.Inventory.GetItemAmountByType(ItemId.ItemMasterBall);
 
             if (masterBallsCount > 0 && (
-                    (!session.LogicSettings.PokemonToUseMasterball.Any() && (
-                        pokemonCp >= session.LogicSettings.UseMasterBallAboveCp ||
-                        probability < session.LogicSettings.UseMasterBallBelowCatchProbability)) ||
-                    session.LogicSettings.PokemonToUseMasterball.Contains(pokemonId)))
+                (!session.LogicSettings.PokemonToUseMasterball.Any() && (
+                pokemonCp >= session.LogicSettings.UseMasterBallAboveCp ||
+                probability < session.LogicSettings.UseMasterBallBelowCatchProbability)) ||
+                session.LogicSettings.PokemonToUseMasterball.Contains(pokemonId)))
                 return ItemId.ItemMasterBall;
 
-            if (ultraBallsCount > 0 && (
-                    pokemonCp >= session.LogicSettings.UseUltraBallAboveCp ||
-                    iV >= session.LogicSettings.UseUltraBallAboveIv ||
-                    probability < session.LogicSettings.UseUltraBallBelowCatchProbability))
+            if (ultraBallsCount > 0 && (pokemonCp >= session.LogicSettings.UseUltraBallAboveCp ||
+                iV >= session.LogicSettings.UseUltraBallAboveIv ||
+                probability < session.LogicSettings.UseUltraBallBelowCatchProbability))
                 return ItemId.ItemUltraBall;
 
-            if (greatBallsCount > 0 && (
-                    pokemonCp >= session.LogicSettings.UseGreatBallAboveCp ||
-                    iV >= session.LogicSettings.UseGreatBallAboveIv ||
-                    probability < session.LogicSettings.UseGreatBallBelowCatchProbability))
+            if (greatBallsCount > 0 && (pokemonCp >= session.LogicSettings.UseGreatBallAboveCp ||
+                iV >= session.LogicSettings.UseGreatBallAboveIv ||
+                probability < session.LogicSettings.UseGreatBallBelowCatchProbability))
                 return ItemId.ItemGreatBall;
 
             if (pokeBallsCount > 0)
@@ -323,7 +320,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (berry == null || berry.Count <= 0)
                 return;
 
-            await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
+            var useCaptureItem = await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;
             session.EventDispatcher.Send(new UseBerryEvent { BerryType = ItemId.ItemRazzBerry, Count = berry.Count });
         }

@@ -22,13 +22,11 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Du är utanför din definierade radius! Återgår till start ({0}m bort) om 5 sekunder. Är din LastPos.ini fil korrekt?"
+      "Value": "Du är utanför din definierade radius! Återgår till start ({0}m bort) om 5 sekunder. Är din LastPos.ini fil korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value":
-        "Inga oanvända PokeStops går att finna i ditt område. Är din maximala avgränsning satt till ett för litet område?"
+      "Value": "Inga oanvända PokeStops går att finna i ditt område. Är din maximala avgränsning satt till ett för litet område?"
     },
     {
       "Key": "eventFortUsed",
@@ -196,8 +194,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value":
-        "PTC servrarna är förmodligen frånanslutna ELLER så är dina inloggningsuppgifter felaktiga. Försök med Google."
+      "Value": "PTC servrarna är förmodligen frånanslutna ELLER så är dina inloggningsuppgifter felaktiga. Försök med Google."
     },
     {
       "Key": "tryingAgainIn",
@@ -277,8 +274,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "Pokemonväskan är full överför pkemons manuellt eller sätt TransferDuplicatePokemon till true i inställningar ..."
+      "Value": "Pokemonväskan är full överför pkemons manuellt eller sätt TransferDuplicatePokemon till true i inställningar ..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -346,8 +342,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value":
-        "{0} - Körtid {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stjärnstoff: {5:0} | Överförd: {6:0} | Återvunnet: {7:0}"
+      "Value": "{0} - Körtid {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stjärnstoff: {5:0} | Överförd: {6:0} | Återvunnet: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -359,8 +354,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value":
-        "Du har Googles två-stegs autentisering aktiverad, du kommer behöva ange ett app-specifikt lösenord in i filen auth.json"
+      "Value": "Du har Googles två-stegs autentisering aktiverad, du kommer behöva ange ett app-specifikt lösenord in i filen auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -392,19 +386,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"
+      "Value": "--- Pokedex catched --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"
+      "Value": "--- Pokedex needed --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"
+      "Value": "#{0} Name: {1} \n"
     },
     {
       "Key": "Proxied",
@@ -425,6 +419,14 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Probably Permanent Ban!"
     }
   ],
 	"PokemonStrings": [

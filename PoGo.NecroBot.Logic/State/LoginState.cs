@@ -33,10 +33,6 @@ namespace PoGo.NecroBot.Logic.State
                 if (session.Settings.AuthType == AuthType.Google || session.Settings.AuthType == AuthType.Ptc)
                 {
                     await session.Client.Login.DoLogin();
-
-                    var inventory = await session.Inventory.RefreshCachedInventory();
-                    if (!inventory.Success)
-                        throw new PermaBannedException();
                 }
                 else
                 {
@@ -45,15 +41,6 @@ namespace PoGo.NecroBot.Logic.State
                         Message = session.Translation.GetTranslation(TranslationString.WrongAuthType)
                     });
                 }
-            }
-            catch (PermaBannedException)
-            {
-                session.EventDispatcher.Send(new ErrorEvent
-                {
-                    Message = "Probably Permanent Ban!"
-                });
-                await Task.Delay(5000, cancellationToken);
-                Environment.Exit(0);
             }
             catch (AggregateException ae)
             {

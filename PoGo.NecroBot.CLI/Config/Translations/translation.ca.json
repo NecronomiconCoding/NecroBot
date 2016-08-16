@@ -19,7 +19,7 @@
     {
       "Key": "wrongAuthType",
       "Value": "AuthType desconegut dins de config.json"
-	},
+    },
     {
       "Key": "loginInvalid",
       "Value": "Les credencials d'usuari són invàlides i el login ha fallat."
@@ -47,8 +47,8 @@
     {
       "Key": "eventProfileLogin",
       "Value": "Jugant com a {0}"
-	},
-	{
+    },
+    {
       "Key": "eventUsedIncense",
       "Value": "S'ha fet servir encens, en queden: {0}"
     },
@@ -76,7 +76,7 @@
       "Key": "eventPokemonCaptureSuccess",
       "Value": "({0}) | ({1}) {2} Nvll: {3} PC: ({4}/{5}) IV: {6}% | Probabilitat: {7}% | Dist {8}m | amb una {9} (en queden {10}). | {11} punts d'EXP obtinguts | lat: {12} long: {13}"
     },
-	{
+    {
       "Key": "eventPokemonCaptureFailed",
       "Value": "({0}) | ({1}) {2} Nvll: {3} PC: ({4}/{5}) IV: {6}% | Probabilitat: {7}% | Dist {8}m | amb una {9} (en queden {10}). | lat: {11} long: {12}"
     },
@@ -84,7 +84,7 @@
       "Key": "eventNoPokeballs",
       "Value": "Sense Pokéballs! - Hem perdut un {0} amb {1} PC :("
     },
-	{
+    {
       "Key": "waitingForMorePokemonToEvolve",
       "Value": "Esperant a evolucionar {0} Pokemon un cope se n'hagin capturat {1} més! ({2}/{3} per {4}% inventari)"
     },
@@ -104,8 +104,8 @@
       "Key": "itemRazzBerry",
       "Value": "Baia"
     },
-	
-	
+
+
     {
       "Key": "catchStatusAttempt",
       "Value": "{0} Intent #{1}"
@@ -190,7 +190,7 @@
       "Key": "logEntrySniper",
       "Value": "SNIPER"
     },
-	{
+    {
       "Key": "logEntryRecycling",
       "Value": "RECICLANT"
     },
@@ -358,7 +358,7 @@
       "Key": "pokemonFavorite",
       "Value": "{0}% perfect {1} (CP {2}) *favorited*."
     },
-	
+
     {
       "Key": "pokemonIgnoreFilter",
       "Value": "[Filtre de Pokemons Ignorats] - Ignorant {0} tal i com s'ha definit en la configuració actual."
@@ -463,7 +463,7 @@
       "Key": "displayHighestMOVE2Header",
       "Value": "MOVIMENT2"
     },
-	{
+    {
       "Key": "displayHighestCandy",
       "Value": "Caramels"
     },
@@ -521,35 +521,35 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value": "--- Pokedex catched --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value": "--- Pokedex needed --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value": "#{0} Name: {1} \n"
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value": "--- Pokedex catched --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"
+      "Value": "--- Pokedex needed --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"
+      "Value": "#{0} Name: {1} \n"
     },
     {
       "Key": "Proxied",
@@ -570,6 +570,14 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Probably Permanent Ban!"
     }
   ],
   "PokemonStrings": [

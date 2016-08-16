@@ -88,6 +88,7 @@ namespace PoGo.NecroBot.Logic
         string KeepMinOperator { get; }
         double WalkingSpeedInKilometerPerHour { get; }
         bool UseWalkingSpeedVariant { get; }
+        bool ShowVariantWalking { get; }
         bool RandomlyPauseAtStops { get; }
         bool FastSoftBanBypass { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
@@ -115,7 +116,6 @@ namespace PoGo.NecroBot.Logic
         double ForceExcellentThrowOverIv { get; }
         int ForceGreatThrowOverCp { get; }
         int ForceExcellentThrowOverCp { get; }
-
         int DelayBetweenPokemonCatch { get; }
         bool AutomaticallyLevelUpPokemon { get; }
         bool OnlyUpgradeFavorites { get; }
@@ -129,7 +129,6 @@ namespace PoGo.NecroBot.Logic
         int KeepMinDuplicatePokemon { get; }
         bool PrioritizeIvOverCp { get; }
         int AmountOfTimesToUpgradeLoop { get; }
-
         int GetMinStarDustForLevelUp { get; }
         bool UseLuckyEggConstantly { get; }
         int MaxBerriesToUsePerPokemon { get; }
@@ -184,7 +183,6 @@ namespace PoGo.NecroBot.Logic
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
         int TotalAmountOfBerriesToKeep { get; }
-
         bool DetailedCountsBeforeRecycling { get; }
         bool VerboseRecycling { get; }
         double RecycleInventoryAtUsagePercentage { get; }

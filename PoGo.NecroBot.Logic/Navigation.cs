@@ -8,6 +8,8 @@ using GeoCoordinatePortable;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Event;
 
 #endregion
 
@@ -17,6 +19,7 @@ namespace PoGo.NecroBot.Logic
 
     public class Navigation
     {
+        private double LastWalkingSpeed = 0;
         private const double SpeedDownTo = 10 / 3.6;
         private readonly Client _client;
 
@@ -25,25 +28,22 @@ namespace PoGo.NecroBot.Logic
             _client = client;
         }
 
-        public async Task<PlayerUpdateResponse> Move(GeoCoordinate targetLocation,
-            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking,
-            CancellationToken cancellationToken, bool disableHumanLikeWalking, bool useWalkingSpeedVariant)
+        public async Task<PlayerUpdateResponse> Move(GeoCoordinate targetLocation, Func<Task<bool>> functionExecutedWhileWalking,
+            ISession session,
+            CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            if (!disableHumanLikeWalking)
+            if (!session.LogicSettings.DisableHumanWalking)
             {
+                if (LastWalkingSpeed <= 0)
+                    LastWalkingSpeed = session.LogicSettings.WalkingSpeedInKilometerPerHour;
+
                 var rw = new Random();
-                double SpeedVariantSec = rw.Next(1000, 10000);
-                
-                var speedInMetersPerSecond = walkingSpeedInKilometersPerHour / 3.6;
-
+                var speedInMetersPerSecond = LastWalkingSpeed / 3.6;
                 var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
-
                 var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
                 var nextWaypointDistance = speedInMetersPerSecond;
                 var waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
-
-                //Initial walking
                 var requestSendDateTime = DateTime.Now;
                 var requestVariantDateTime = DateTime.Now;
                 var result =
@@ -51,6 +51,7 @@ namespace PoGo.NecroBot.Logic
                         _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
                             waypoint.Altitude);
 
+                double SpeedVariantSec = rw.Next(1000, 10000);
                 UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
                 do
@@ -66,22 +67,24 @@ namespace PoGo.NecroBot.Logic
                     var currentDistanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
 
                     if (currentDistanceToTarget < 40)
-                    {
                         if (speedInMetersPerSecond > SpeedDownTo)
-                        {
-                            //Logger.Write("We are within 40 meters of the target. Speeding down to 10 km/h to not pass the target.", LogLevel.Info);
                             speedInMetersPerSecond = SpeedDownTo;
-                        }
-                    }
 
-                    if (useWalkingSpeedVariant)
+                    if (session.LogicSettings.UseWalkingSpeedVariant)
                     {
                         if (millisecondsUntilVariant >= SpeedVariantSec)
                         {
-                            var randomMin = walkingSpeedInKilometersPerHour - 1.2;
-                            var randomMax = walkingSpeedInKilometersPerHour + 1.2;
+                            var randomMin = session.LogicSettings.WalkingSpeedInKilometerPerHour - 1.2;
+                            var randomMax = session.LogicSettings.WalkingSpeedInKilometerPerHour + 1.2;
                             var RandomWalkSpeed = rw.NextDouble() * (randomMax - randomMin) + randomMin;
 
+                            session.EventDispatcher.Send(new HumanWalkingEvent
+                            {
+                                OldWalkingSpeed = LastWalkingSpeed,
+                                CurrentWalkingSpeed = RandomWalkSpeed
+                            });
+
+                            LastWalkingSpeed = RandomWalkSpeed;
                             speedInMetersPerSecond = RandomWalkSpeed / 3.6;
                             SpeedVariantSec += rw.Next(5000, 15000);
                         }
@@ -134,14 +137,12 @@ namespace PoGo.NecroBot.Logic
                     var currentDistanceToTarget = LocationUtils.CalculateDistanceInMeters(curLocation, targetLocation);
 
                     dist = LocationUtils.CalculateDistanceInMeters(curLocation, targetLocation);
+
                     if (dist >= 100)
-                    {
                         nextWaypointDistance = dist * 70 / 100;
-                    }
                     else
-                    {
                         nextWaypointDistance = dist;
-                    }
+
                     nextWaypointBearing = LocationUtils.DegreeBearing(curLocation, targetLocation);
                     waypoint = LocationUtils.CreateWaypoint(curLocation, nextWaypointDistance, nextWaypointBearing);
                     sentTime = DateTime.Now;
@@ -172,38 +173,34 @@ namespace PoGo.NecroBot.Logic
         }
 
         public async Task<PlayerUpdateResponse> HumanPathWalking(GpxReader.Trkpt trk,
-            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking,
-            bool useWalkingSpeedVariant, CancellationToken cancellationToken)
+            Func<Task<bool>> functionExecutedWhileWalking,
+            ISession session,
+            CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             //PlayerUpdateResponse result = null;
+            
+            if (LastWalkingSpeed <= 0)
+                LastWalkingSpeed = session.LogicSettings.WalkingSpeedInKilometerPerHour;
 
             var rw = new Random();
-            double SpeedVariantSec = rw.Next(1000, 10000);
-            
             var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat, CultureInfo.InvariantCulture),
                 Convert.ToDouble(trk.Lon, CultureInfo.InvariantCulture));
-
-            var speedInMetersPerSecond = walkingSpeedInKilometersPerHour / 3.6;
-
+            var speedInMetersPerSecond = LastWalkingSpeed / 3.6;
             var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
             LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
-            // Logger.Write($"Distance to target location: {distanceToTarget:0.##} meters. Will take {distanceToTarget/speedInMetersPerSecond:0.##} seconds!", LogLevel.Info);
-
             var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
             var nextWaypointDistance = speedInMetersPerSecond;
             var waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing,
                 Convert.ToDouble(trk.Ele, CultureInfo.InvariantCulture));
-
-            //Initial walking
-
             var requestSendDateTime = DateTime.Now;
             var requestVariantDateTime = DateTime.Now;
             var result =
                 await
                     _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude, waypoint.Altitude);
 
+            double SpeedVariantSec = rw.Next(1000, 10000);
             UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
             do
@@ -227,14 +224,21 @@ namespace PoGo.NecroBot.Logic
                 //    }
                 //}
 
-                if (useWalkingSpeedVariant)
+                if (session.LogicSettings.UseWalkingSpeedVariant)
                 {
                     if (millisecondsUntilVariant >= SpeedVariantSec)
                     {
-                        var randomMin = (int)(walkingSpeedInKilometersPerHour - 1.2);
-                        var randomMax = (int)(walkingSpeedInKilometersPerHour + 1.2);
+                        var randomMin = session.LogicSettings.WalkingSpeedInKilometerPerHour - 1.2;
+                        var randomMax = session.LogicSettings.WalkingSpeedInKilometerPerHour + 1.2;
                         var RandomWalkSpeed = rw.NextDouble() * (randomMax - randomMin) + randomMin;
 
+                        session.EventDispatcher.Send(new HumanWalkingEvent
+                        {
+                            OldWalkingSpeed = LastWalkingSpeed,
+                            CurrentWalkingSpeed = RandomWalkSpeed
+                        });
+
+                        LastWalkingSpeed = RandomWalkSpeed;
                         speedInMetersPerSecond = RandomWalkSpeed / 3.6;
                         SpeedVariantSec += rw.Next(5000, 15000);
                     }

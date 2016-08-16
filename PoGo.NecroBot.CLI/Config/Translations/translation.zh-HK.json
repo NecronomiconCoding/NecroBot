@@ -445,9 +445,9 @@
       "Value": "請確認輸入了正確的信箱地址和密碼。"
     },
     {
-      "Key": "googleOffline",		
-      "Value": "無法連接 Google 服務器，請稍後再試"		
-    },		
+      "Key": "googleOffline",
+      "Value": "無法連接 Google 服務器，請稍後再試"
+    },
     {
       "Key": "missingCredentialsGoogle",
       "Value": "您需要在 auth.json 中填寫 Google 帳戶和密碼！"
@@ -643,6 +643,14 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Probably Permanent Ban!"
     }
   ],
   "PokemonStrings": [

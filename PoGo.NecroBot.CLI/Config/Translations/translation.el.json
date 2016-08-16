@@ -22,13 +22,11 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Είστε έξω από την καθορισμένη περιοχή! Περπάτημα για ({0}m μακριά) σε 5 δευτερόλεπτα. Είναι το αρχείο LastPos.ini σωστό?"
+      "Value": "Είστε έξω από την καθορισμένη περιοχή! Περπάτημα για ({0}m μακριά) σε 5 δευτερόλεπτα. Είναι το αρχείο LastPos.ini σωστό?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value":
-        "Δεν βρεθηκαν λειτουργικά PokeStops στην περιοχή σου. Μήπως εχεις ορίσει την μέγιστη εμβέλεια πολυ χαμήλα;"
+      "Value": "Δεν βρεθηκαν λειτουργικά PokeStops στην περιοχή σου. Μήπως εχεις ορίσει την μέγιστη εμβέλεια πολυ χαμήλα;"
     },
     {
       "Key": "eventFortUsed",
@@ -196,8 +194,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value":
-        "Οι PTC Servers είναι εκτός λειτουργίας Ή τα στοιχεία σου ειναι λανθασμένα. Προσπάθησε να συνδεθείς μέσω google"
+      "Value": "Οι PTC Servers είναι εκτός λειτουργίας Ή τα στοιχεία σου ειναι λανθασμένα. Προσπάθησε να συνδεθείς μέσω google"
     },
     {
       "Key": "tryingAgainIn",
@@ -225,8 +222,7 @@
     },
     {
       "Key": "notRealisticTravel",
-      "Value":
-        "Εντοπίστηκαν μη ρεαλιστικες ρυθμίσεις στο {0}, χρήση τελευταίων αποθηκευμένων συντενταγμένων στο LastPos.ini"
+      "Value": "Εντοπίστηκαν μη ρεαλιστικες ρυθμίσεις στο {0}, χρήση τελευταίων αποθηκευμένων συντενταγμένων στο LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -278,8 +274,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "Ο κατάλογος Pokemon είναι γεμάτος.Μετέφερε pokemon χειροκίνητα η ενερποίησε την μεταφόρα διπλών pokemon απο τις ρυθμίσεις..."
+      "Value": "Ο κατάλογος Pokemon είναι γεμάτος.Μετέφερε pokemon χειροκίνητα η ενερποίησε την μεταφόρα διπλών pokemon απο τις ρυθμίσεις..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -347,8 +342,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value":
-        "{0} - Χρόνος λειτουργίας {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Μεταφέρθηκαν: {6:0} | Ανακυκλώθηκαν: {7:0}"
+      "Value": "{0} - Χρόνος λειτουργίας {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Μεταφέρθηκαν: {6:0} | Ανακυκλώθηκαν: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -360,13 +354,11 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value":
-        "Επειδή χρησημοποιείς το Google Two Factor Auth, θα πρέπει να συμπλήρωσεις έναν κωδικό συγκεκριμένο για αυτό το πρόγραμμα στο auth.json"
+      "Value": "Επειδή χρησημοποιείς το Google Two Factor Auth, θα πρέπει να συμπλήρωσεις έναν κωδικό συγκεκριμένο για αυτό το πρόγραμμα στο auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value":
-        "Άνοιγμα του Google App-Passwords. Σε παρακαλώ δημιούργησε εναν καινουργιο κωδικό για αυτο το πρόγραμμα (Για συσκευή βάλε Other/Άλλο)"
+      "Value": "Άνοιγμα του Google App-Passwords. Σε παρακαλώ δημιούργησε εναν καινουργιο κωδικό για αυτο το πρόγραμμα (Για συσκευή βάλε Other/Άλλο)"
     },
     {
       "Key": "googleError",
@@ -394,19 +386,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"
+      "Value": "--- Pokedex catched --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"
+      "Value": "--- Pokedex needed --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"
+      "Value": "#{0} Name: {1} \n"
     },
     {
       "Key": "Proxied",
@@ -427,6 +419,14 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Probably Permanent Ban!"
     }
   ],
 	"PokemonStrings": [

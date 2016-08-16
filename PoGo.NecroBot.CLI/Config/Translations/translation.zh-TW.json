@@ -647,19 +647,19 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- 圖鑑已獲得 --- \t\t\n"  
+      "Value": "--- 圖鑑已獲得 --- \t\t\n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} 名稱： {1} | 已捕獲： {2} | 已遇見： {3} \t\t\n"  
+      "Value": "#{0} 名稱： {1} | 已捕獲： {2} | 已遇見： {3} \t\t\n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- 圖鑑未獲得 --- \t\t\n"  
+      "Value": "--- 圖鑑未獲得 --- \t\t\n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} 名稱： {1} \t\t\n"  
+      "Value": "#{0} 名稱： {1} \t\t\n"
     },
     {
       "Key": "LoggedInTelegram",
@@ -692,6 +692,14 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| 等級：\t {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Probably Permanent Ban!"
     }
   ],
   "PokemonStrings": [

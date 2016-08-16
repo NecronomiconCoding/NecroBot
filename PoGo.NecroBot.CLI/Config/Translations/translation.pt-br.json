@@ -418,7 +418,7 @@
     },
     {
       "Key": "requireInputText",
-      "Value": "Pressione enter para iníciar o bot..."
+      "Value": "Pressione enter para continuar..."
     },
     {
       "Key": "googleTwoFactorAuth",
@@ -647,9 +647,17 @@
     {
       "Key": "HighestsPokemoCell",
       "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Velocidade de Caminhada: Foi alterado, {0:n2} Km/h para {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value":  "Provavel Ban Permanente!"
     }
   ],
-	"PokemonStrings": [
+  "PokemonStrings": [
     {
       "Key": "bulbasaur",
       "Value": "Bulbasauro"
