@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "χρησιμοποιήθηκε ένα Lucky Egg, απομένουν: {0}"
+      "Value": "Xρησιμοποιήθηκε ένα Lucky Egg, απομένουν: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
@@ -130,7 +130,7 @@
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Ενημέρωστη κατάστασης αυγού: {0:0.00}km απομένουν"
+      "Value": "Ενημέρωση κατάστασης αυγού: {0:0.00}km απομένουν"
     },
     {
       "Key": "incubatorEggHatched",
