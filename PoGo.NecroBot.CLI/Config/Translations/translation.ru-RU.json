@@ -654,15 +654,15 @@
     },
     {
       "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+      "Value": "Ваш IP: {0} | Прокси IP: {1}"
     },
     {
       "Key": "FixProxySettings",
-      "Value": "Press any key to exit so you can fix your proxy settings..."
+      "Value": "Нажмите любую клавишу, чтобы выйти и исправьте настройки прокси..."
     },
     {
       "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
+      "Value": " Ваш IP: {0}"
     },
     {
       "Key": "HighestsPokemoHeader",
@@ -674,11 +674,11 @@
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+      "Value": "Скорость ходьбы: была изменена, с {0:n2} км/ч на {1:n2} км/ч"
     },
     {
       "Key": "AccountBanned",
-      "Value": "Probably Permanent Ban!"
+      "Value": "Возможно перманентный бан!"
     }
   ],
 	"PokemonStrings": [
