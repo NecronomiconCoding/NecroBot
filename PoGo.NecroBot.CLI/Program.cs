@@ -70,7 +70,7 @@ namespace PoGo.NecroBot.CLI
                 settings.ProfilePath = profilePath;
                 settings.ProfileConfigPath = profileConfigPath;
                 settings.GeneralConfigPath = Path.Combine( Directory.GetCurrentDirectory(), "config" );
-                settings.TranslationLanguageCode = strCulture;
+                settings.ConsoleSettings.TranslationLanguageCode = strCulture;
 
                 boolNeedsSetup = true;
             }
@@ -83,8 +83,8 @@ namespace PoGo.NecroBot.CLI
                 {
                     lat = Double.Parse(crds[0]);
                     lng = Double.Parse(crds[1]);
-                    settings.DefaultLatitude = lat;
-                    settings.DefaultLongitude = lng;
+                    settings.LocationSettings.DefaultLatitude = lat;
+                    settings.LocationSettings.DefaultLongitude = lng;
                 }
                 catch (Exception) { }
             }
@@ -94,16 +94,13 @@ namespace PoGo.NecroBot.CLI
 
             if (boolNeedsSetup)
             {
-                if (GlobalSettings.PromptForSetup(session.Translation) && !settings.isGui)
+                if (GlobalSettings.PromptForSetup(session.Translation))
                 {
                     session = GlobalSettings.SetupSettings(session, settings, configFile);
 
-                    if (!settings.isGui)
-                    {
-                        var fileName = Assembly.GetExecutingAssembly().Location;
-                        System.Diagnostics.Process.Start(fileName);
-                        Environment.Exit(0);
-                    }
+                    var fileName = Assembly.GetExecutingAssembly().Location;
+                    System.Diagnostics.Process.Start(fileName);
+                    Environment.Exit(0);
                 }
                 else
                 {
@@ -157,9 +154,9 @@ namespace PoGo.NecroBot.CLI
 
             session.EventDispatcher.EventReceived += evt => listener.Listen(evt, session);
             session.EventDispatcher.EventReceived += evt => aggregator.Listen(evt, session);
-            if (settings.UseWebsocket)
+            if (settings.WebsocketsSettings.UseWebsocket)
             {
-                var websocket = new WebSocketInterface(settings.WebSocketPort, session);
+                var websocket = new WebSocketInterface(settings.WebsocketsSettings.WebSocketPort, session);
                 session.EventDispatcher.EventReceived += evt => websocket.Listen(evt, session);
             }
             
@@ -185,9 +182,9 @@ namespace PoGo.NecroBot.CLI
             }
             catch( IOException ) { }
 
-            if (settings.UseTelegramAPI)
+            if (settings.TelegramSettings.UseTelegramAPI)
             {
-                session.Telegram = new Logic.Service.TelegramService(settings.TelegramAPIKey, session);
+                session.Telegram = new Logic.Service.TelegramService(settings.TelegramSettings.TelegramAPIKey, session);
             }
 
             if (session.LogicSettings.UseSnipeLocationServer)

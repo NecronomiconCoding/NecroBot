@@ -20,58 +20,56 @@ using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-using Newtonsoft.Json.Linq;
-using System.Text.RegularExpressions;
 
 #endregion
 
 namespace PoGo.NecroBot.Logic
 {
-    public class AuthSettings
+    public class AuthConfig
     {
-        [JsonIgnore]
-        private string _filePath;
-
         public AuthType AuthType;
         public string GoogleUsername;
         public string GooglePassword;
         public string PtcUsername;
         public string PtcPassword;
+    }
+
+    public class ProxyConfig
+    {
         public bool UseProxy;
         public string UseProxyHost;
         public string UseProxyPort;
         public bool UseProxyAuthentication;
         public string UseProxyUsername;
         public string UseProxyPassword;
-        // device data
-        [DefaultValue("random")]
-        public string DevicePackageName;
-        [DefaultValue("8525f5d8201f78b5")]
-        public string DeviceId;
-        [DefaultValue("msm8996")]
-        public string AndroidBoardName;
-        [DefaultValue("1.0.0.0000")]
-        public string AndroidBootloader;
-        [DefaultValue("HTC")]
-        public string DeviceBrand;
-        [DefaultValue("HTC 10")]
-        public string DeviceModel;
-        [DefaultValue("pmewl_00531")]
-        public string DeviceModelIdentifier;
-        [DefaultValue("qcom")]
-        public string DeviceModelBoot;
-        [DefaultValue("HTC")]
-        public string HardwareManufacturer;
-        [DefaultValue("HTC 10")]
-        public string HardwareModel;
-        [DefaultValue("pmewl_00531")]
-        public string FirmwareBrand;
-        [DefaultValue("release-keys")]
-        public string FirmwareTags;
-        [DefaultValue("user")]
-        public string FirmwareType;
-        [DefaultValue("htc/pmewl_00531/htc_pmewl:6.0.1/MMB29M/770927.1:user/release-keys")]
-        public string FirmwareFingerprint;
+    }
+
+    public class DeviceConfig
+    {
+        public string DevicePackageName = "random";
+        public string DeviceId = "8525f5d8201f78b5";
+        public string AndroidBoardName = "msm8996";
+        public string AndroidBootloader = "1.0.0.0000";
+        public string DeviceBrand = "HTC";
+        public string DeviceModel = "HTC 10";
+        public string DeviceModelIdentifier = "pmewl_00531";
+        public string DeviceModelBoot = "qcom";
+        public string HardwareManufacturer = "HTC";
+        public string HardwareModel = "HTC 10";
+        public string FirmwareBrand = "pmewl_00531";
+        public string FirmwareTags = "release-keys";
+        public string FirmwareType = "user";
+        public string FirmwareFingerprint = "htc/pmewl_00531/htc_pmewl:6.0.1/MMB29M/770927.1:user/release-keys";
+    }
+
+    public class AuthSettings
+    {
+        [JsonIgnore]
+        private string _filePath;
+
+        public AuthConfig AuthConfig = new AuthConfig();
+        public ProxyConfig ProxyConfig = new ProxyConfig();
+        public DeviceConfig DeviceConfig = new DeviceConfig();
 
         public AuthSettings()
         {
@@ -107,23 +105,23 @@ namespace PoGo.NecroBot.Logic
                     JsonConvert.PopulateObject(input, this, settings);
                 }
                 // Do some post-load logic to determine what device info to be using - if 'custom' is set we just take what's in the file without question
-                if (!this.DevicePackageName.Equals("random", StringComparison.InvariantCultureIgnoreCase) && !this.DevicePackageName.Equals("custom", StringComparison.InvariantCultureIgnoreCase))
+                if (!this.DeviceConfig.DevicePackageName.Equals("random", StringComparison.InvariantCultureIgnoreCase) && !this.DeviceConfig.DevicePackageName.Equals("custom", StringComparison.InvariantCultureIgnoreCase))
                 {
                     // User requested a specific device package, check to see if it exists and if so, set it up - otherwise fall-back to random package
-                    string keepDevId = this.DeviceId;
-                    SetDevInfoByKey(this.DevicePackageName);
-                    this.DeviceId = keepDevId;
+                    string keepDevId = this.DeviceConfig.DeviceId;
+                    SetDevInfoByKey(this.DeviceConfig.DevicePackageName);
+                    this.DeviceConfig.DeviceId = keepDevId;
                 }
-                if (this.DevicePackageName.Equals("random", StringComparison.InvariantCultureIgnoreCase))
+                if (this.DeviceConfig.DevicePackageName.Equals("random", StringComparison.InvariantCultureIgnoreCase))
                 {
                     // Random is set, so pick a random device package and set it up - it will get saved to disk below and re-used in subsequent sessions
                     Random rnd = new Random();
                     int rndIdx = rnd.Next(0, DeviceInfoHelper.DeviceInfoSets.Keys.Count - 1);
-                    this.DevicePackageName = DeviceInfoHelper.DeviceInfoSets.Keys.ToArray()[rndIdx];
-                    SetDevInfoByKey(this.DevicePackageName);
+                    this.DeviceConfig.DevicePackageName = DeviceInfoHelper.DeviceInfoSets.Keys.ToArray()[rndIdx];
+                    SetDevInfoByKey(this.DeviceConfig.DevicePackageName);
                 }
-                if (string.IsNullOrEmpty(this.DeviceId) || this.DeviceId == "8525f5d8201f78b5")
-                    this.DeviceId = this.RandomString(16, "0123456789abcdef"); // changed to random hex as full alphabet letters could have been flagged
+                if (string.IsNullOrEmpty(this.DeviceConfig.DeviceId) || this.DeviceConfig.DeviceId == "8525f5d8201f78b5")
+                    this.DeviceConfig.DeviceId = this.RandomString(16, "0123456789abcdef"); // changed to random hex as full alphabet letters could have been flagged
 
                 // Jurann: Note that some device IDs I saw when adding devices had smaller numbers, only 12 or 14 chars instead of 16 - probably not important but noted here anyway
 
@@ -186,7 +184,7 @@ namespace PoGo.NecroBot.Logic
             using (var tempWebClient = new NecroWebClient())
             {
                 string unproxiedIP = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
-                if (UseProxy)
+                if (ProxyConfig.UseProxy)
                 {
                     tempWebClient.Proxy = this.InitProxy();
                     string proxiedIPres = WebClientExtensions.DownloadString(tempWebClient, new Uri("https://api.ipify.org/?format=text"));
@@ -233,21 +231,21 @@ namespace PoGo.NecroBot.Logic
 
         private void SetDevInfoByKey(string devKey)
         {
-            if (DeviceInfoHelper.DeviceInfoSets.ContainsKey(this.DevicePackageName))
+            if (DeviceInfoHelper.DeviceInfoSets.ContainsKey(this.DeviceConfig.DevicePackageName))
             {
-                this.AndroidBoardName = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["AndroidBoardName"];
-                this.AndroidBootloader = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["AndroidBootloader"];
-                this.DeviceBrand = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["DeviceBrand"];
-                this.DeviceId = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["DeviceId"];
-                this.DeviceModel = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["DeviceModel"];
-                this.DeviceModelBoot = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["DeviceModelBoot"];
-                this.DeviceModelIdentifier = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["DeviceModelIdentifier"];
-                this.FirmwareBrand = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["FirmwareBrand"];
-                this.FirmwareFingerprint = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["FirmwareFingerprint"];
-                this.FirmwareTags = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["FirmwareTags"];
-                this.FirmwareType = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["FirmwareType"];
-                this.HardwareManufacturer = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["HardwareManufacturer"];
-                this.HardwareModel = DeviceInfoHelper.DeviceInfoSets[this.DevicePackageName]["HardwareModel"];
+                this.DeviceConfig.AndroidBoardName = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["AndroidBoardName"];
+                this.DeviceConfig.AndroidBootloader = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["AndroidBootloader"];
+                this.DeviceConfig.DeviceBrand = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["DeviceBrand"];
+                this.DeviceConfig.DeviceId = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["DeviceId"];
+                this.DeviceConfig.DeviceModel = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["DeviceModel"];
+                this.DeviceConfig.DeviceModelBoot = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["DeviceModelBoot"];
+                this.DeviceConfig.DeviceModelIdentifier = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["DeviceModelIdentifier"];
+                this.DeviceConfig.FirmwareBrand = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["FirmwareBrand"];
+                this.DeviceConfig.FirmwareFingerprint = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["FirmwareFingerprint"];
+                this.DeviceConfig.FirmwareTags = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["FirmwareTags"];
+                this.DeviceConfig.FirmwareType = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["FirmwareType"];
+                this.DeviceConfig.HardwareManufacturer = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["HardwareManufacturer"];
+                this.DeviceConfig.HardwareModel = DeviceInfoHelper.DeviceInfoSets[this.DeviceConfig.DevicePackageName]["HardwareModel"];
             }
             else
             {
@@ -257,15 +255,192 @@ namespace PoGo.NecroBot.Logic
 
         private WebProxy InitProxy()
         {
-            if (!UseProxy) return null;
+            if (!ProxyConfig.UseProxy) return null;
 
-            WebProxy prox = new WebProxy(new System.Uri($"http://{UseProxyHost}:{UseProxyPort}"), false, null);
+            WebProxy prox = new WebProxy(new System.Uri($"http://{ProxyConfig.UseProxyHost}:{ProxyConfig.UseProxyPort}"), false, null);
 
-            if (UseProxyAuthentication)
-                prox.Credentials = new NetworkCredential(UseProxyUsername, UseProxyPassword);
+            if (ProxyConfig.UseProxyAuthentication)
+                prox.Credentials = new NetworkCredential(ProxyConfig.UseProxyUsername, ProxyConfig.UseProxyPassword);
 
             return prox;
         }
+    }
+    
+    public class ConsoleConfig
+    {
+        public string TranslationLanguageCode = "en";
+        public bool StartupWelcomeDelay;
+        public int AmountOfPokemonToDisplayOnStart = 10;
+        public bool DetailedCountsBeforeRecycling = true;
+    }
+
+    public class UpdateConfig
+    {
+        public bool CheckForUpdates = true;
+        public bool AutoUpdate = true;
+        public bool TransferConfigAndAuthOnUpdate = true;
+    }
+
+    public class WebsocketsConfig
+    {
+        public bool UseWebsocket;
+        public int WebSocketPort = 14251;
+    }
+
+    public class LocationConfig
+    {
+        public bool DisableHumanWalking;
+        public double DefaultLatitude = 40.785092;
+        public double DefaultLongitude = -73.968286;
+        public double WalkingSpeedInKilometerPerHour = 4.16;
+        public bool UseWalkingSpeedVariant = true;
+        public bool ShowVariantWalking = true;
+        public bool RandomlyPauseAtStops = true;
+        public int MaxSpawnLocationOffset = 10;
+        public int MaxTravelDistanceInMeters = 1000;
+    }
+
+    public class TelegramConfig
+    {
+        public bool UseTelegramAPI;
+        public string TelegramAPIKey;
+        public string TelegramPassword = "12345";
+    }
+
+    public class GPXConfig
+    {
+        public bool UseGpxPathing;
+        public string GpxFile = "GPXPath.GPX";
+    }
+
+    public class SnipeConfig
+    {
+        public bool UseSnipeLocationServer;
+        public string SnipeLocationServer = "localhost";
+        public int SnipeLocationServerPort = 16969;
+        public bool GetSniperInfoFromPokezz;
+        public bool GetOnlyVerifiedSniperInfoFromPokezz = true;
+        public bool GetSniperInfoFromPokeSnipers = true;
+        public bool GetSniperInfoFromPokeWatchers = true;
+        public bool GetSniperInfoFromSkiplagged = true;
+        public int MinPokeballsToSnipe = 20;
+        public int MinPokeballsWhileSnipe = 0;
+        public int MinDelayBetweenSnipes = 60000;
+        public double SnipingScanOffset = 0.005;
+        public bool SnipeAtPokestops;
+        public bool SnipeIgnoreUnknownIv;
+        public bool UseTransferIvForSnipe;
+        public bool SnipePokemonNotInPokedex;
+    }
+
+    public class PokemonConfig
+    {
+        /*Catch*/
+        public bool CatchPokemon = true;
+        public int DelayBetweenPokemonCatch = 2000;
+        /*Incense*/
+        public bool UseIncenseConstantly;
+        /*Egg*/
+        public bool UseEggIncubators = true;
+        public int UseEggIncubatorMinKm = 2;
+        public bool UseLuckyEggConstantly;
+        public int UseLuckyEggsMinPokemonAmount = 30;
+        public bool UseLuckyEggsWhileEvolving;
+        /*Berries*/
+        public int UseBerriesMinCp = 1000;
+        public float UseBerriesMinIv = 90;
+        public double UseBerriesBelowCatchProbability = 0.20;
+        public string UseBerriesOperator = "or";
+        public int MaxBerriesToUsePerPokemon = 3;
+        /*Transfer*/
+        public bool TransferWeakPokemon;
+        public bool TransferDuplicatePokemon = true;
+        public bool TransferDuplicatePokemonOnCapture = true;
+        /*Rename*/
+        public bool RenamePokemon;
+        public bool RenameOnlyAboveIv = true;
+        public string RenameTemplate = "{1}_{0}";
+        /*Favorite*/
+        public float FavoriteMinIvPercentage = 95;
+        public bool AutoFavoritePokemon;
+        /*PokeBalls*/
+        public int MaxPokeballsPerPokemon = 6;
+        public int UseGreatBallAboveCp = 1000;
+        public int UseUltraBallAboveCp = 1250;
+        public int UseMasterBallAboveCp = 1500;
+        public double UseGreatBallAboveIv = 85.0;
+        public double UseUltraBallAboveIv = 95.0;
+        public double UseGreatBallBelowCatchProbability = 0.2;
+        public double UseUltraBallBelowCatchProbability = 0.1;
+        public double UseMasterBallBelowCatchProbability = 0.05;
+        /*PoweUp*/
+        public bool AutomaticallyLevelUpPokemon;
+        public bool OnlyUpgradeFavorites = true;
+        public bool UseLevelUpList = true;
+        public int AmountOfTimesToUpgradeLoop = 5;
+        public int GetMinStarDustForLevelUp = 5000;
+        public string LevelUpByCPorIv = "iv";
+        public float UpgradePokemonCpMinimum = 1000;
+        public float UpgradePokemonIvMinimum = 95;
+        public string UpgradePokemonMinimumStatsOperator = "and";
+        /*Evolve*/
+        public float EvolveAboveIvValue = 95;
+        public bool EvolveAllPokemonAboveIv;
+        public bool EvolveAllPokemonWithEnoughCandy = true;
+        public double EvolveKeptPokemonsAtStorageUsagePercentage = 90.0;
+        /*Keep*/
+        public bool KeepPokemonsThatCanEvolve;
+        public int KeepMinCp = 1250;
+        public float KeepMinIvPercentage = 90;
+        public int KeepMinLvl = 6;
+        public string KeepMinOperator = "or";
+        public bool UseKeepMinLvl;
+        public bool PrioritizeIvOverCp;
+        public int KeepMinDuplicatePokemon = 1;
+        /*NotCatch*/
+        public bool UsePokemonToNotCatchFilter;
+        public bool UsePokemonSniperFilterOnly;
+        /*Dump Stats*/
+        public bool DumpPokemonStats;
+    }
+
+    public class RecycleConfig
+    {
+        public bool VerboseRecycling = true;
+        public double RecycleInventoryAtUsagePercentage = 90.0;
+        public bool RandomizeRecycle;
+        public int RandomRecycleValue = 5;
+        public bool DelayBetweenRecycleActions;
+        /*Amounts*/
+        public int TotalAmountOfPokeballsToKeep = 120;
+        public int TotalAmountOfPotionsToKeep = 80;
+        public int TotalAmountOfRevivesToKeep = 60;
+        public int TotalAmountOfBerriesToKeep = 50;
+    }
+
+    public class CustomCatchConfig
+    {
+        public bool EnableHumanizedThrows = true;
+        public bool EnableMissedThrows;
+        public int ThrowMissPercentage = 25;
+        public int NiceThrowChance = 40;
+        public int GreatThrowChance = 30;
+        public int ExcellentThrowChance = 10;
+        public int CurveThrowChance = 90;
+        public double ForceGreatThrowOverIv = 90.00;
+        public double ForceExcellentThrowOverIv = 95.00;
+        public int ForceGreatThrowOverCp = 1000;
+        public int ForceExcellentThrowOverCp = 1500;
+    }
+
+    public class PlayerConfig
+    {
+        public int DelayBetweenPlayerActions = 5000;
+    }
+
+    public class SoftBanConfig
+    {
+        public bool FastSoftBanBypass;
     }
 
     public class GlobalSettings
@@ -278,263 +453,19 @@ namespace PoGo.NecroBot.Logic
         public string ProfileConfigPath;
         [JsonIgnore]
         public string ProfilePath;
-
-        [JsonIgnore]
-        public bool isGui;
-
-        [DefaultValue("en")]
-        public string TranslationLanguageCode;
-        [DefaultValue(true)]
-        public bool CheckForUpdates;
-        //autoupdate
-        [DefaultValue(true)]
-        public bool AutoUpdate;
-        [DefaultValue(true)]
-        public bool TransferConfigAndAuthOnUpdate;
-        //websockets
-        [DefaultValue(false)]
-        public bool UseWebsocket;
-        [DefaultValue(14251)]
-        public int WebSocketPort;
-        //Telegram
-        [DefaultValue(false)]
-        public bool UseTelegramAPI;
-        [DefaultValue(null)]
-        public string TelegramAPIKey;
-        [DefaultValue("12345")]
-        public string TelegramPassword;
-        //console options
-        [DefaultValue(false)]
-        public bool StartupWelcomeDelay;
-        [DefaultValue(10)]
-        public int AmountOfPokemonToDisplayOnStart;
-        [DefaultValue(true)]
-        public bool DetailedCountsBeforeRecycling;
-        //pokemon
-        [DefaultValue(true)]
-        public bool CatchPokemon;
-        [DefaultValue(3)]
-        public int MaxBerriesToUsePerPokemon;
-        //powerup
-        [DefaultValue(false)]
-        public bool AutomaticallyLevelUpPokemon;
-        [DefaultValue(true)]
-        public bool OnlyUpgradeFavorites;
-        [DefaultValue((true))]
-        public bool UseLevelUpList;
-        [DefaultValue(5)]
-        public int AmountOfTimesToUpgradeLoop;
-        [DefaultValue(5000)]
-        public int GetMinStarDustForLevelUp;
-        [DefaultValue("iv")]
-        public string LevelUpByCPorIv;
-        [DefaultValue(1000)]
-        public float UpgradePokemonCpMinimum;
-        [DefaultValue(95)]
-        public float UpgradePokemonIvMinimum;
-        [DefaultValue("and")]
-        public string UpgradePokemonMinimumStatsOperator;
-        //position
-        [DefaultValue(false)]
-        public bool DisableHumanWalking;
-        [DefaultValue(40.785092)]
-        public double DefaultLatitude;
-        [DefaultValue(-73.968286)]
-        public double DefaultLongitude;
-        [DefaultValue(4.16)]
-        public double WalkingSpeedInKilometerPerHour;
-        [DefaultValue(true)]
-        public bool UseWalkingSpeedVariant;
-        [DefaultValue(true)]
-        public bool RandomlyPauseAtStops;
-        [DefaultValue(true)]
-        public bool ShowVariantWalking;
-        [DefaultValue(10)]
-        public int MaxSpawnLocationOffset;
-        //softban related
-        [DefaultValue(false)]
-        public bool FastSoftBanBypass;
-        //delays
-        [DefaultValue(5000)]
-        public int DelayBetweenPlayerActions;
-        [DefaultValue(2000)]
-        public int DelayBetweenPokemonCatch;
-        //dump stats
-        [DefaultValue(false)]
-        public bool DumpPokemonStats;
-        //evolve
-        [DefaultValue(95)]
-        public float EvolveAboveIvValue;
-        [DefaultValue(false)]
-        public bool EvolveAllPokemonAboveIv;
-        [DefaultValue(true)]
-        public bool EvolveAllPokemonWithEnoughCandy;
-        [DefaultValue(90.0)]
-        public double EvolveKeptPokemonsAtStorageUsagePercentage;
-        [DefaultValue(false)]
-        public bool KeepPokemonsThatCanEvolve;
-        //keeping
-        [DefaultValue(1250)]
-        public int KeepMinCp;
-        [DefaultValue(90)]
-        public float KeepMinIvPercentage;
-        [DefaultValue(6)]
-        public int KeepMinLvl;
-        [DefaultValue("or")]
-        public string KeepMinOperator;
-        [DefaultValue(false)]
-        public bool UseKeepMinLvl;
-        [DefaultValue(false)]
-        public bool PrioritizeIvOverCp;
-        [DefaultValue(1)]
-        public int KeepMinDuplicatePokemon;
-        //gpx
-        [DefaultValue(false)]
-        public bool UseGpxPathing;
-        [DefaultValue("GPXPath.GPX")]
-        public string GpxFile;
-        //recycle
-        [DefaultValue(true)]
-        public bool VerboseRecycling;
-        [DefaultValue(90.0)]
-        public double RecycleInventoryAtUsagePercentage;
-        [DefaultValue(false)]
-        public bool RandomizeRecycle;
-        [DefaultValue(5)]
-        public int RandomRecycleValue;
-        [DefaultValue(false)]
-        public bool DelayBetweenRecycleActions; // Jurann TODO: change this to int millis instead of bool
-        //lucky, incense and berries
-        [DefaultValue(true)]
-        public bool UseEggIncubators;
-        [DefaultValue(2)]
-        public int UseEggIncubatorMinKm;
-        [DefaultValue(false)]
-        public bool UseLuckyEggConstantly;
-        [DefaultValue(30)]
-        public int UseLuckyEggsMinPokemonAmount;
-        [DefaultValue(false)]
-        public bool UseLuckyEggsWhileEvolving;
-        [DefaultValue(false)]
-        public bool UseIncenseConstantly;
-        [DefaultValue(1000)]
-        public int UseBerriesMinCp;
-        [DefaultValue(90)]
-        public float UseBerriesMinIv;
-        [DefaultValue(0.20)]
-        public double UseBerriesBelowCatchProbability;
-        [DefaultValue("or")]
-        public string UseBerriesOperator;
-        //snipe
-        [DefaultValue(false)]
-        public bool UseSnipeLocationServer;
-        [DefaultValue("localhost")]
-        public string SnipeLocationServer;
-        [DefaultValue(16969)]
-        public int SnipeLocationServerPort;
-        [DefaultValue(false)]
-        public bool GetSniperInfoFromPokezz;
-        [DefaultValue(true)]
-        public bool GetOnlyVerifiedSniperInfoFromPokezz;
-        [DefaultValue(true)]
-        public bool GetSniperInfoFromPokeSnipers;
-        [DefaultValue(true)]
-        public bool GetSniperInfoFromPokeWatchers;
-        [DefaultValue(true)]
-        public bool GetSniperInfoFromSkiplagged;
-        [DefaultValue(20)]
-        public int MinPokeballsToSnipe;
-        [DefaultValue(0)]
-        public int MinPokeballsWhileSnipe;
-        [DefaultValue(60000)]
-        public int MinDelayBetweenSnipes;
-        [DefaultValue(0.005)]
-        public double SnipingScanOffset;
-        [DefaultValue(false)]
-        public bool SnipeAtPokestops;
-        [DefaultValue(false)]
-        public bool SnipeIgnoreUnknownIv;
-        [DefaultValue(false)]
-        public bool UseTransferIvForSnipe;
-        [DefaultValue(false)]
-        public bool SnipePokemonNotInPokedex;
-        //rename
-        [DefaultValue(false)]
-        public bool RenamePokemon;
-        [DefaultValue(true)]
-        public bool RenameOnlyAboveIv;
-        [DefaultValue("{1}_{0}")]
-        public string RenameTemplate;
-        //amounts
-        [DefaultValue(6)]
-        public int MaxPokeballsPerPokemon;
-        [DefaultValue(1000)]
-        public int MaxTravelDistanceInMeters;
-        [DefaultValue(120)]
-        public int TotalAmountOfPokeballsToKeep;
-        [DefaultValue(80)]
-        public int TotalAmountOfPotionsToKeep;
-        [DefaultValue(60)]
-        public int TotalAmountOfRevivesToKeep;
-        [DefaultValue(50)]
-        public int TotalAmountOfBerriesToKeep;
-        //balls
-        [DefaultValue(1000)]
-        public int UseGreatBallAboveCp;
-        [DefaultValue(1250)]
-        public int UseUltraBallAboveCp;
-        [DefaultValue(1500)]
-        public int UseMasterBallAboveCp;
-        [DefaultValue(85.0)]
-        public double UseGreatBallAboveIv;
-        [DefaultValue(95.0)]
-        public double UseUltraBallAboveIv;
-        [DefaultValue(0.2)]
-        public double UseGreatBallBelowCatchProbability;
-        [DefaultValue(0.1)]
-        public double UseUltraBallBelowCatchProbability;
-        [DefaultValue(0.05)]
-        public double UseMasterBallBelowCatchProbability;
-        //customizable catch
-        [DefaultValue(true)]
-        public bool EnableHumanizedThrows;
-        [DefaultValue(false)]
-        public bool EnableMissedThrows;
-        [DefaultValue(25)]
-        public int ThrowMissPercentage;
-        [DefaultValue(40)]
-        public int NiceThrowChance;
-        [DefaultValue(30)]
-        public int GreatThrowChance;
-        [DefaultValue(10)]
-        public int ExcellentThrowChance;
-        [DefaultValue(90)]
-        public int CurveThrowChance;
-        [DefaultValue(90.00)]
-        public double ForceGreatThrowOverIv;
-        [DefaultValue(95.00)]
-        public double ForceExcellentThrowOverIv;
-        [DefaultValue(1000)]
-        public int ForceGreatThrowOverCp;
-        [DefaultValue(1500)]
-        public int ForceExcellentThrowOverCp;
-        //transfer
-        [DefaultValue(false)]
-        public bool TransferWeakPokemon;
-        [DefaultValue(true)]
-        public bool TransferDuplicatePokemon;
-        [DefaultValue(true)]
-        public bool TransferDuplicatePokemonOnCapture;
-        //favorite
-        [DefaultValue(95)]
-        public float FavoriteMinIvPercentage;
-        [DefaultValue(false)]
-        public bool AutoFavoritePokemon;
-        //notcatch
-        [DefaultValue(false)]
-        public bool UsePokemonToNotCatchFilter;
-        [DefaultValue(false)]
-        public bool UsePokemonSniperFilterOnly;
+        
+        public ConsoleConfig ConsoleSettings = new ConsoleConfig();
+        public UpdateConfig UpdateSettings = new UpdateConfig();
+        public WebsocketsConfig WebsocketsSettings = new WebsocketsConfig();
+        public LocationConfig LocationSettings = new LocationConfig();
+        public TelegramConfig TelegramSettings = new TelegramConfig();
+        public GPXConfig GPXSettings = new GPXConfig();
+        public SnipeConfig SnipingSettings = new SnipeConfig();
+        public PokemonConfig PokemonSettings = new PokemonConfig();
+        public RecycleConfig RecycleSettings = new RecycleConfig();
+        public CustomCatchConfig CustomCatchSettings = new CustomCatchConfig();
+        public PlayerConfig PlayerSettings = new PlayerConfig();
+        public SoftBanConfig SoftBanSettings = new SoftBanConfig();
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -815,7 +746,6 @@ namespace PoGo.NecroBot.Logic
         public static GlobalSettings Load(string path, bool boolSkipSave = false)
         {
             GlobalSettings settings = null;
-            bool isGui = (AppDomain.CurrentDomain.GetAssemblies().SingleOrDefault(a => a.FullName.Contains("PoGo.NecroBot.GUI")) != null);
             var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
             var profileConfigPath = Path.Combine(profilePath, "config");
             var configFile = Path.Combine(profileConfigPath, "config.json");
@@ -896,9 +826,8 @@ namespace PoGo.NecroBot.Logic
             settings.ProfilePath = profilePath;
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
-            settings.isGui = isGui;
 
-            if ( !boolSkipSave || !settings.CheckForUpdates || !settings.AutoUpdate )
+            if ( !boolSkipSave || !settings.UpdateSettings.AutoUpdate )
             {
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
@@ -974,7 +903,7 @@ namespace PoGo.NecroBot.Logic
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartLanguageCodePrompt));
             strInput = Console.ReadLine();
 
-            settings.TranslationLanguageCode = strInput;
+            settings.ConsoleSettings.TranslationLanguageCode = strInput;
             session = new Session(new ClientSettings(settings), new LogicSettings(settings));
             translator = session.Translation;
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartLanguageConfirm, strInput));
@@ -996,11 +925,11 @@ namespace PoGo.NecroBot.Logic
                 switch (strInput)
                 {
                     case "google":
-                        settings.Auth.AuthType = AuthType.Google;
+                        settings.Auth.AuthConfig.AuthType = AuthType.Google;
                         Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupTypeConfirm, "GOOGLE"));
                         return;
                     case "ptc":
-                        settings.Auth.AuthType = AuthType.Ptc;
+                        settings.Auth.AuthConfig.AuthType = AuthType.Ptc;
                         Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupTypeConfirm, "PTC"));
                         return;
                     default:
@@ -1016,20 +945,20 @@ namespace PoGo.NecroBot.Logic
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupUsernamePrompt), LogLevel.None);
             string strInput = Console.ReadLine();
 
-            if (settings.Auth.AuthType == AuthType.Google)
-                settings.Auth.GoogleUsername = strInput;
+            if (settings.Auth.AuthConfig.AuthType == AuthType.Google)
+                settings.Auth.AuthConfig.GoogleUsername = strInput;
             else
-                settings.Auth.PtcUsername = strInput;
+                settings.Auth.AuthConfig.PtcUsername = strInput;
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupUsernameConfirm, strInput));
 
             Console.WriteLine("");
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupPasswordPrompt), LogLevel.None);
             strInput = Console.ReadLine();
 
-            if (settings.Auth.AuthType == AuthType.Google)
-                settings.Auth.GooglePassword = strInput;
+            if (settings.Auth.AuthConfig.AuthType == AuthType.Google)
+                settings.Auth.AuthConfig.GooglePassword = strInput;
             else
-                settings.Auth.PtcPassword = strInput;
+                settings.Auth.AuthConfig.PtcPassword = strInput;
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupPasswordConfirm, strInput));
 
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartAccountCompleted), LogLevel.None);
@@ -1073,14 +1002,14 @@ namespace PoGo.NecroBot.Logic
                         double dblLat = double.Parse( strSplit[ 0 ].Trim( ' ' ) );
                         double dblLong = double.Parse( strSplit[ 1 ].Trim( ' ' ) );
 
-                        settings.DefaultLatitude = dblLat;
-                        settings.DefaultLongitude = dblLong;
+                        settings.LocationSettings.DefaultLatitude = dblLat;
+                        settings.LocationSettings.DefaultLongitude = dblLong;
 
                         Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLatLongConfirm, $"{dblLat}, {dblLong}" ) );
                     }
                     else
                     {
-                        Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLocationError, $"{settings.DefaultLatitude}, {settings.DefaultLongitude}", LogLevel.Error ) );
+                        Logger.Write( translator.GetTranslation( TranslationString.FirstStartSetupDefaultLocationError, $"{settings.LocationSettings.DefaultLatitude}, {settings.LocationSettings.DefaultLongitude}", LogLevel.Error ) );
                         continue;
                     }
                     
@@ -1088,7 +1017,7 @@ namespace PoGo.NecroBot.Logic
                 }
                 catch (FormatException)
                 {
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, $"{settings.DefaultLatitude}, {settings.DefaultLongitude}", LogLevel.Error));
+                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, $"{settings.LocationSettings.DefaultLatitude}, {settings.LocationSettings.DefaultLongitude}", LogLevel.Error));
                     continue;
                 }
             }
@@ -1102,14 +1031,8 @@ namespace PoGo.NecroBot.Logic
 
         public void Save(string fullPath)
         {
-            var jsonSerializeSettings = new JsonSerializerSettings
-            {
-                DefaultValueHandling = DefaultValueHandling.Include,
-                Formatting = Formatting.Indented,
-                Converters = new JsonConverter[] { new StringEnumConverter { CamelCaseText = true } }
-            };
-
-            var output = JsonConvert.SerializeObject(this, jsonSerializeSettings);
+            var output = JsonConvert.SerializeObject(this, Formatting.Indented,
+                new StringEnumConverter { CamelCaseText = true });
 
             var folder = Path.GetDirectoryName(fullPath);
             if (folder != null && !Directory.Exists(folder))
@@ -1133,45 +1056,45 @@ namespace PoGo.NecroBot.Logic
         }
 
 
-        public string GoogleUsername => _settings.Auth.GoogleUsername;
-        public string GooglePassword => _settings.Auth.GooglePassword;
+        public string GoogleUsername => _settings.Auth.AuthConfig.GoogleUsername;
+        public string GooglePassword => _settings.Auth.AuthConfig.GooglePassword;
 
         #region Auth Config Values
 
         public bool UseProxy
         {
-            get { return _settings.Auth.UseProxy; }
-            set { _settings.Auth.UseProxy = value; }
+            get { return _settings.Auth.ProxyConfig.UseProxy; }
+            set { _settings.Auth.ProxyConfig.UseProxy = value; }
         }
 
         public string UseProxyHost
         {
-            get { return _settings.Auth.UseProxyHost; }
-            set { _settings.Auth.UseProxyHost = value; }
+            get { return _settings.Auth.ProxyConfig.UseProxyHost; }
+            set { _settings.Auth.ProxyConfig.UseProxyHost = value; }
         }
 
         public string UseProxyPort
         {
-            get { return _settings.Auth.UseProxyPort; }
-            set { _settings.Auth.UseProxyPort = value; }
+            get { return _settings.Auth.ProxyConfig.UseProxyPort; }
+            set { _settings.Auth.ProxyConfig.UseProxyPort = value; }
         }
 
         public bool UseProxyAuthentication
         {
-            get { return _settings.Auth.UseProxyAuthentication; }
-            set { _settings.Auth.UseProxyAuthentication = value; }
+            get { return _settings.Auth.ProxyConfig.UseProxyAuthentication; }
+            set { _settings.Auth.ProxyConfig.UseProxyAuthentication = value; }
         }
 
         public string UseProxyUsername
         {
-            get { return _settings.Auth.UseProxyUsername; }
-            set { _settings.Auth.UseProxyUsername = value; }
+            get { return _settings.Auth.ProxyConfig.UseProxyUsername; }
+            set { _settings.Auth.ProxyConfig.UseProxyUsername = value; }
         }
 
         public string UseProxyPassword
         {
-            get { return _settings.Auth.UseProxyPassword; }
-            set { _settings.Auth.UseProxyPassword = value; }
+            get { return _settings.Auth.ProxyConfig.UseProxyPassword; }
+            set { _settings.Auth.ProxyConfig.UseProxyPassword = value; }
         }
 
         public string GoogleRefreshToken
@@ -1181,37 +1104,37 @@ namespace PoGo.NecroBot.Logic
         }
         AuthType ISettings.AuthType
         {
-            get { return _settings.Auth.AuthType; }
+            get { return _settings.Auth.AuthConfig.AuthType; }
 
-            set { _settings.Auth.AuthType = value; }
+            set { _settings.Auth.AuthConfig.AuthType = value; }
         }
 
         string ISettings.GoogleUsername
         {
-            get { return _settings.Auth.GoogleUsername; }
+            get { return _settings.Auth.AuthConfig.GoogleUsername; }
 
-            set { _settings.Auth.GoogleUsername = value; }
+            set { _settings.Auth.AuthConfig.GoogleUsername = value; }
         }
 
         string ISettings.GooglePassword
         {
-            get { return _settings.Auth.GooglePassword; }
+            get { return _settings.Auth.AuthConfig.GooglePassword; }
 
-            set { _settings.Auth.GooglePassword = value; }
+            set { _settings.Auth.AuthConfig.GooglePassword = value; }
         }
 
         string ISettings.PtcUsername
         {
-            get { return _settings.Auth.PtcUsername; }
+            get { return _settings.Auth.AuthConfig.PtcUsername; }
 
-            set { _settings.Auth.PtcUsername = value; }
+            set { _settings.Auth.AuthConfig.PtcUsername = value; }
         }
 
         string ISettings.PtcPassword
         {
-            get { return _settings.Auth.PtcPassword; }
+            get { return _settings.Auth.AuthConfig.PtcPassword; }
 
-            set { _settings.Auth.PtcPassword = value; }
+            set { _settings.Auth.AuthConfig.PtcPassword = value; }
         }
 
         #endregion Auth Config Values
@@ -1220,73 +1143,73 @@ namespace PoGo.NecroBot.Logic
 
         string DevicePackageName
         {
-            get { return _settings.Auth.DevicePackageName; }
-            set { _settings.Auth.DevicePackageName = value; }
+            get { return _settings.Auth.DeviceConfig.DevicePackageName; }
+            set { _settings.Auth.DeviceConfig.DevicePackageName = value; }
         }
         string ISettings.DeviceId
         {
-            get { return _settings.Auth.DeviceId; }
-            set { _settings.Auth.DeviceId = value; }
+            get { return _settings.Auth.DeviceConfig.DeviceId; }
+            set { _settings.Auth.DeviceConfig.DeviceId = value; }
         }
         string ISettings.AndroidBoardName
         {
-            get { return _settings.Auth.AndroidBoardName; }
-            set { _settings.Auth.AndroidBoardName = value; }
+            get { return _settings.Auth.DeviceConfig.AndroidBoardName; }
+            set { _settings.Auth.DeviceConfig.AndroidBoardName = value; }
         }
         string ISettings.AndroidBootloader
         {
-            get { return _settings.Auth.AndroidBootloader; }
-            set { _settings.Auth.AndroidBootloader = value; }
+            get { return _settings.Auth.DeviceConfig.AndroidBootloader; }
+            set { _settings.Auth.DeviceConfig.AndroidBootloader = value; }
         }
         string ISettings.DeviceBrand
         {
-            get { return _settings.Auth.DeviceBrand; }
-            set { _settings.Auth.DeviceBrand = value; }
+            get { return _settings.Auth.DeviceConfig.DeviceBrand; }
+            set { _settings.Auth.DeviceConfig.DeviceBrand = value; }
         }
         string ISettings.DeviceModel
         {
-            get { return _settings.Auth.DeviceModel; }
-            set { _settings.Auth.DeviceModel = value; }
+            get { return _settings.Auth.DeviceConfig.DeviceModel; }
+            set { _settings.Auth.DeviceConfig.DeviceModel = value; }
         }
         string ISettings.DeviceModelIdentifier
         {
-            get { return _settings.Auth.DeviceModelIdentifier; }
-            set { _settings.Auth.DeviceModelIdentifier = value; }
+            get { return _settings.Auth.DeviceConfig.DeviceModelIdentifier; }
+            set { _settings.Auth.DeviceConfig.DeviceModelIdentifier = value; }
         }
         string ISettings.DeviceModelBoot
         {
-            get { return _settings.Auth.DeviceModelBoot; }
-            set { _settings.Auth.DeviceModelBoot = value; }
+            get { return _settings.Auth.DeviceConfig.DeviceModelBoot; }
+            set { _settings.Auth.DeviceConfig.DeviceModelBoot = value; }
         }
         string ISettings.HardwareManufacturer
         {
-            get { return _settings.Auth.HardwareManufacturer; }
-            set { _settings.Auth.HardwareManufacturer = value; }
+            get { return _settings.Auth.DeviceConfig.HardwareManufacturer; }
+            set { _settings.Auth.DeviceConfig.HardwareManufacturer = value; }
         }
         string ISettings.HardwareModel
         {
-            get { return _settings.Auth.HardwareModel; }
-            set { _settings.Auth.HardwareModel = value; }
+            get { return _settings.Auth.DeviceConfig.HardwareModel; }
+            set { _settings.Auth.DeviceConfig.HardwareModel = value; }
         }
         string ISettings.FirmwareBrand
         {
-            get { return _settings.Auth.FirmwareBrand; }
-            set { _settings.Auth.FirmwareBrand = value; }
+            get { return _settings.Auth.DeviceConfig.FirmwareBrand; }
+            set { _settings.Auth.DeviceConfig.FirmwareBrand = value; }
         }
         string ISettings.FirmwareTags
         {
-            get { return _settings.Auth.FirmwareTags; }
-            set { _settings.Auth.FirmwareTags = value; }
+            get { return _settings.Auth.DeviceConfig.FirmwareTags; }
+            set { _settings.Auth.DeviceConfig.FirmwareTags = value; }
         }
         string ISettings.FirmwareType
         {
-            get { return _settings.Auth.FirmwareType; }
-            set { _settings.Auth.FirmwareType = value; }
+            get { return _settings.Auth.DeviceConfig.FirmwareType; }
+            set { _settings.Auth.DeviceConfig.FirmwareType = value; }
         }
         string ISettings.FirmwareFingerprint
         {
-            get { return _settings.Auth.FirmwareFingerprint; }
-            set { _settings.Auth.FirmwareFingerprint = value; }
+            get { return _settings.Auth.DeviceConfig.FirmwareFingerprint; }
+            set { _settings.Auth.DeviceConfig.FirmwareFingerprint = value; }
         }
 
         #endregion Device Config Values
@@ -1295,22 +1218,22 @@ namespace PoGo.NecroBot.Logic
         {
             get
             {
-                return _settings.DefaultLatitude + _rand.NextDouble() * ((double)_settings.MaxSpawnLocationOffset / 111111);
+                return _settings.LocationSettings.DefaultLatitude + _rand.NextDouble() * ((double)_settings.LocationSettings.MaxSpawnLocationOffset / 111111);
             }
 
-            set { _settings.DefaultLatitude = value; }
+            set { _settings.LocationSettings.DefaultLatitude = value; }
         }
 
         double ISettings.DefaultLongitude
         {
             get
             {
-                return _settings.DefaultLongitude +
+                return _settings.LocationSettings.DefaultLongitude +
                        _rand.NextDouble() *
-                       ((double)_settings.MaxSpawnLocationOffset / 111111 / Math.Cos(_settings.DefaultLatitude));
+                       ((double)_settings.LocationSettings.MaxSpawnLocationOffset / 111111 / Math.Cos(_settings.LocationSettings.DefaultLatitude));
             }
 
-            set { _settings.DefaultLongitude = value; }
+            set { _settings.LocationSettings.DefaultLongitude = value; }
         }
 
         double ISettings.DefaultAltitude
@@ -1318,9 +1241,9 @@ namespace PoGo.NecroBot.Logic
             get
             {
                 return
-                    LocationUtils.getElevation(_settings.DefaultLatitude, _settings.DefaultLongitude) +
+                    LocationUtils.getElevation(_settings.LocationSettings.DefaultLatitude, _settings.LocationSettings.DefaultLongitude) +
                     _rand.NextDouble() *
-                    ((double)5 / Math.Cos(LocationUtils.getElevation(_settings.DefaultLatitude, _settings.DefaultLongitude)));
+                    ((double)5 / Math.Cos(LocationUtils.getElevation(_settings.LocationSettings.DefaultLatitude, _settings.LocationSettings.DefaultLongitude)));
             }
 
 
@@ -1341,88 +1264,88 @@ namespace PoGo.NecroBot.Logic
         public string ProfilePath => _settings.ProfilePath;
         public string ProfileConfigPath => _settings.ProfileConfigPath;
         public string GeneralConfigPath => _settings.GeneralConfigPath;
-        public bool CheckForUpdates => _settings.CheckForUpdates;
-        public bool AutoUpdate => _settings.AutoUpdate;
-        public bool TransferConfigAndAuthOnUpdate => _settings.TransferConfigAndAuthOnUpdate;
-        public bool UseWebsocket => _settings.UseWebsocket;
-        public bool CatchPokemon => _settings.CatchPokemon;
-        public bool TransferWeakPokemon => _settings.TransferWeakPokemon;
-        public bool DisableHumanWalking => _settings.DisableHumanWalking;
-        public int MaxBerriesToUsePerPokemon => _settings.MaxBerriesToUsePerPokemon;
-        public float KeepMinIvPercentage => _settings.KeepMinIvPercentage;
-        public string KeepMinOperator => _settings.KeepMinOperator;
-        public int KeepMinCp => _settings.KeepMinCp;
-        public int KeepMinLvl => _settings.KeepMinLvl;
-        public bool UseKeepMinLvl => _settings.UseKeepMinLvl;
-        public bool AutomaticallyLevelUpPokemon => _settings.AutomaticallyLevelUpPokemon;
-        public bool OnlyUpgradeFavorites => _settings.OnlyUpgradeFavorites;
-        public bool UseLevelUpList => _settings.UseLevelUpList;
-        public int AmountOfTimesToUpgradeLoop => _settings.AmountOfTimesToUpgradeLoop;
-        public string LevelUpByCPorIv => _settings.LevelUpByCPorIv;
-        public int GetMinStarDustForLevelUp => _settings.GetMinStarDustForLevelUp;
-        public bool UseLuckyEggConstantly => _settings.UseLuckyEggConstantly;
-        public bool UseIncenseConstantly => _settings.UseIncenseConstantly;
-        public int UseBerriesMinCp => _settings.UseBerriesMinCp;
-        public float UseBerriesMinIv => _settings.UseBerriesMinIv;
-        public double UseBerriesBelowCatchProbability => _settings.UseBerriesBelowCatchProbability;
-        public string UseBerriesOperator => _settings.UseBerriesOperator;
-        public float UpgradePokemonIvMinimum => _settings.UpgradePokemonIvMinimum;
-        public float UpgradePokemonCpMinimum => _settings.UpgradePokemonCpMinimum;
-        public string UpgradePokemonMinimumStatsOperator => _settings.UpgradePokemonMinimumStatsOperator;
-        public double WalkingSpeedInKilometerPerHour => _settings.WalkingSpeedInKilometerPerHour;
-        public bool UseWalkingSpeedVariant => _settings.UseWalkingSpeedVariant;
-        public bool ShowVariantWalking => _settings.ShowVariantWalking;
-        public bool FastSoftBanBypass => _settings.FastSoftBanBypass;
-        public bool EvolveAllPokemonWithEnoughCandy => _settings.EvolveAllPokemonWithEnoughCandy;
-        public bool KeepPokemonsThatCanEvolve => _settings.KeepPokemonsThatCanEvolve;
-        public bool TransferDuplicatePokemon => _settings.TransferDuplicatePokemon;
-        public bool TransferDuplicatePokemonOnCapture => _settings.TransferDuplicatePokemonOnCapture;
-        public bool UseEggIncubators => _settings.UseEggIncubators;
-        public int UseEggIncubatorMinKm => _settings.UseEggIncubatorMinKm;
-        public int UseGreatBallAboveCp => _settings.UseGreatBallAboveCp;
-        public int UseUltraBallAboveCp => _settings.UseUltraBallAboveCp;
-        public int UseMasterBallAboveCp => _settings.UseMasterBallAboveCp;
-        public double UseGreatBallAboveIv => _settings.UseGreatBallAboveIv;
-        public double UseUltraBallAboveIv => _settings.UseUltraBallAboveIv;
-        public double UseMasterBallBelowCatchProbability => _settings.UseMasterBallBelowCatchProbability;
-        public double UseUltraBallBelowCatchProbability => _settings.UseUltraBallBelowCatchProbability;
-        public double UseGreatBallBelowCatchProbability => _settings.UseGreatBallBelowCatchProbability;
-        public bool EnableHumanizedThrows => _settings.EnableHumanizedThrows;
-        public bool EnableMissedThrows => _settings.EnableMissedThrows;
-        public int ThrowMissPercentage => _settings.ThrowMissPercentage;
-        public int NiceThrowChance => _settings.NiceThrowChance;
-        public int GreatThrowChance => _settings.GreatThrowChance;
-        public int ExcellentThrowChance => _settings.ExcellentThrowChance;
-        public int CurveThrowChance => _settings.CurveThrowChance;
-        public double ForceGreatThrowOverIv => _settings.ForceGreatThrowOverIv;
-        public double ForceExcellentThrowOverIv => _settings.ForceExcellentThrowOverIv;
-        public int ForceGreatThrowOverCp => _settings.ForceGreatThrowOverCp;
-        public int ForceExcellentThrowOverCp => _settings.ForceExcellentThrowOverCp;
-        public int DelayBetweenPokemonCatch => _settings.DelayBetweenPokemonCatch;
-        public int DelayBetweenPlayerActions => _settings.DelayBetweenPlayerActions;
-        public bool UsePokemonToNotCatchFilter => _settings.UsePokemonToNotCatchFilter;
-        public bool UsePokemonSniperFilterOnly => _settings.UsePokemonSniperFilterOnly;
-        public int KeepMinDuplicatePokemon => _settings.KeepMinDuplicatePokemon;
-        public bool PrioritizeIvOverCp => _settings.PrioritizeIvOverCp;
-        public int MaxTravelDistanceInMeters => _settings.MaxTravelDistanceInMeters;
-        public string GpxFile => _settings.GpxFile;
-        public bool UseGpxPathing => _settings.UseGpxPathing;
-        public bool UseLuckyEggsWhileEvolving => _settings.UseLuckyEggsWhileEvolving;
-        public int UseLuckyEggsMinPokemonAmount => _settings.UseLuckyEggsMinPokemonAmount;
-        public bool EvolveAllPokemonAboveIv => _settings.EvolveAllPokemonAboveIv;
-        public float EvolveAboveIvValue => _settings.EvolveAboveIvValue;
-        public bool RenamePokemon => _settings.RenamePokemon;
-        public bool RenameOnlyAboveIv => _settings.RenameOnlyAboveIv;
-        public float FavoriteMinIvPercentage => _settings.FavoriteMinIvPercentage;
-        public bool AutoFavoritePokemon => _settings.AutoFavoritePokemon;
-        public string RenameTemplate => _settings.RenameTemplate;
-        public int AmountOfPokemonToDisplayOnStart => _settings.AmountOfPokemonToDisplayOnStart;
-        public bool DumpPokemonStats => _settings.DumpPokemonStats;
-        public string TranslationLanguageCode => _settings.TranslationLanguageCode;
-        public bool DetailedCountsBeforeRecycling => _settings.DetailedCountsBeforeRecycling;
-        public bool VerboseRecycling => _settings.VerboseRecycling;
-        public double RecycleInventoryAtUsagePercentage => _settings.RecycleInventoryAtUsagePercentage;
-        public double EvolveKeptPokemonsAtStorageUsagePercentage => _settings.EvolveKeptPokemonsAtStorageUsagePercentage;
+        public bool CheckForUpdates => _settings.UpdateSettings.CheckForUpdates;
+        public bool AutoUpdate => _settings.UpdateSettings.AutoUpdate;
+        public bool TransferConfigAndAuthOnUpdate => _settings.UpdateSettings.TransferConfigAndAuthOnUpdate;
+        public bool UseWebsocket => _settings.WebsocketsSettings.UseWebsocket;
+        public bool CatchPokemon => _settings.PokemonSettings.CatchPokemon;
+        public bool TransferWeakPokemon => _settings.PokemonSettings.TransferWeakPokemon;
+        public bool DisableHumanWalking => _settings.LocationSettings.DisableHumanWalking;
+        public int MaxBerriesToUsePerPokemon => _settings.PokemonSettings.MaxBerriesToUsePerPokemon;
+        public float KeepMinIvPercentage => _settings.PokemonSettings.KeepMinIvPercentage;
+        public string KeepMinOperator => _settings.PokemonSettings.KeepMinOperator;
+        public int KeepMinCp => _settings.PokemonSettings.KeepMinCp;
+        public int KeepMinLvl => _settings.PokemonSettings.KeepMinLvl;
+        public bool UseKeepMinLvl => _settings.PokemonSettings.UseKeepMinLvl;
+        public bool AutomaticallyLevelUpPokemon => _settings.PokemonSettings.AutomaticallyLevelUpPokemon;
+        public bool OnlyUpgradeFavorites => _settings.PokemonSettings.OnlyUpgradeFavorites;
+        public bool UseLevelUpList => _settings.PokemonSettings.UseLevelUpList;
+        public int AmountOfTimesToUpgradeLoop => _settings.PokemonSettings.AmountOfTimesToUpgradeLoop;
+        public string LevelUpByCPorIv => _settings.PokemonSettings.LevelUpByCPorIv;
+        public int GetMinStarDustForLevelUp => _settings.PokemonSettings.GetMinStarDustForLevelUp;
+        public bool UseLuckyEggConstantly => _settings.PokemonSettings.UseLuckyEggConstantly;
+        public bool UseIncenseConstantly => _settings.PokemonSettings.UseIncenseConstantly;
+        public int UseBerriesMinCp => _settings.PokemonSettings.UseBerriesMinCp;
+        public float UseBerriesMinIv => _settings.PokemonSettings.UseBerriesMinIv;
+        public double UseBerriesBelowCatchProbability => _settings.PokemonSettings.UseBerriesBelowCatchProbability;
+        public string UseBerriesOperator => _settings.PokemonSettings.UseBerriesOperator;
+        public float UpgradePokemonIvMinimum => _settings.PokemonSettings.UpgradePokemonIvMinimum;
+        public float UpgradePokemonCpMinimum => _settings.PokemonSettings.UpgradePokemonCpMinimum;
+        public string UpgradePokemonMinimumStatsOperator => _settings.PokemonSettings.UpgradePokemonMinimumStatsOperator;
+        public double WalkingSpeedInKilometerPerHour => _settings.LocationSettings.WalkingSpeedInKilometerPerHour;
+        public bool UseWalkingSpeedVariant => _settings.LocationSettings.UseWalkingSpeedVariant;
+        public bool ShowVariantWalking => _settings.LocationSettings.ShowVariantWalking;
+        public bool FastSoftBanBypass => _settings.SoftBanSettings.FastSoftBanBypass;
+        public bool EvolveAllPokemonWithEnoughCandy => _settings.PokemonSettings.EvolveAllPokemonWithEnoughCandy;
+        public bool KeepPokemonsThatCanEvolve => _settings.PokemonSettings.KeepPokemonsThatCanEvolve;
+        public bool TransferDuplicatePokemon => _settings.PokemonSettings.TransferDuplicatePokemon;
+        public bool TransferDuplicatePokemonOnCapture => _settings.PokemonSettings.TransferDuplicatePokemonOnCapture;
+        public bool UseEggIncubators => _settings.PokemonSettings.UseEggIncubators;
+        public int UseEggIncubatorMinKm => _settings.PokemonSettings.UseEggIncubatorMinKm;
+        public int UseGreatBallAboveCp => _settings.PokemonSettings.UseGreatBallAboveCp;
+        public int UseUltraBallAboveCp => _settings.PokemonSettings.UseUltraBallAboveCp;
+        public int UseMasterBallAboveCp => _settings.PokemonSettings.UseMasterBallAboveCp;
+        public double UseGreatBallAboveIv => _settings.PokemonSettings.UseGreatBallAboveIv;
+        public double UseUltraBallAboveIv => _settings.PokemonSettings.UseUltraBallAboveIv;
+        public double UseMasterBallBelowCatchProbability => _settings.PokemonSettings.UseMasterBallBelowCatchProbability;
+        public double UseUltraBallBelowCatchProbability => _settings.PokemonSettings.UseUltraBallBelowCatchProbability;
+        public double UseGreatBallBelowCatchProbability => _settings.PokemonSettings.UseGreatBallBelowCatchProbability;
+        public bool EnableHumanizedThrows => _settings.CustomCatchSettings.EnableHumanizedThrows;
+        public bool EnableMissedThrows => _settings.CustomCatchSettings.EnableMissedThrows;
+        public int ThrowMissPercentage => _settings.CustomCatchSettings.ThrowMissPercentage;
+        public int NiceThrowChance => _settings.CustomCatchSettings.NiceThrowChance;
+        public int GreatThrowChance => _settings.CustomCatchSettings.GreatThrowChance;
+        public int ExcellentThrowChance => _settings.CustomCatchSettings.ExcellentThrowChance;
+        public int CurveThrowChance => _settings.CustomCatchSettings.CurveThrowChance;
+        public double ForceGreatThrowOverIv => _settings.CustomCatchSettings.ForceGreatThrowOverIv;
+        public double ForceExcellentThrowOverIv => _settings.CustomCatchSettings.ForceExcellentThrowOverIv;
+        public int ForceGreatThrowOverCp => _settings.CustomCatchSettings.ForceGreatThrowOverCp;
+        public int ForceExcellentThrowOverCp => _settings.CustomCatchSettings.ForceExcellentThrowOverCp;
+        public int DelayBetweenPokemonCatch => _settings.PokemonSettings.DelayBetweenPokemonCatch;
+        public int DelayBetweenPlayerActions => _settings.PlayerSettings.DelayBetweenPlayerActions;
+        public bool UsePokemonToNotCatchFilter => _settings.PokemonSettings.UsePokemonToNotCatchFilter;
+        public bool UsePokemonSniperFilterOnly => _settings.PokemonSettings.UsePokemonSniperFilterOnly;
+        public int KeepMinDuplicatePokemon => _settings.PokemonSettings.KeepMinDuplicatePokemon;
+        public bool PrioritizeIvOverCp => _settings.PokemonSettings.PrioritizeIvOverCp;
+        public int MaxTravelDistanceInMeters => _settings.LocationSettings.MaxTravelDistanceInMeters;
+        public string GpxFile => _settings.GPXSettings.GpxFile;
+        public bool UseGpxPathing => _settings.GPXSettings.UseGpxPathing;
+        public bool UseLuckyEggsWhileEvolving => _settings.PokemonSettings.UseLuckyEggsWhileEvolving;
+        public int UseLuckyEggsMinPokemonAmount => _settings.PokemonSettings.UseLuckyEggsMinPokemonAmount;
+        public bool EvolveAllPokemonAboveIv => _settings.PokemonSettings.EvolveAllPokemonAboveIv;
+        public float EvolveAboveIvValue => _settings.PokemonSettings.EvolveAboveIvValue;
+        public bool RenamePokemon => _settings.PokemonSettings.RenamePokemon;
+        public bool RenameOnlyAboveIv => _settings.PokemonSettings.RenameOnlyAboveIv;
+        public float FavoriteMinIvPercentage => _settings.PokemonSettings.FavoriteMinIvPercentage;
+        public bool AutoFavoritePokemon => _settings.PokemonSettings.AutoFavoritePokemon;
+        public string RenameTemplate => _settings.PokemonSettings.RenameTemplate;
+        public int AmountOfPokemonToDisplayOnStart => _settings.ConsoleSettings.AmountOfPokemonToDisplayOnStart;
+        public bool DumpPokemonStats => _settings.PokemonSettings.DumpPokemonStats;
+        public string TranslationLanguageCode => _settings.ConsoleSettings.TranslationLanguageCode;
+        public bool DetailedCountsBeforeRecycling => _settings.ConsoleSettings.DetailedCountsBeforeRecycling;
+        public bool VerboseRecycling => _settings.RecycleSettings.VerboseRecycling;
+        public double RecycleInventoryAtUsagePercentage => _settings.RecycleSettings.RecycleInventoryAtUsagePercentage;
+        public double EvolveKeptPokemonsAtStorageUsagePercentage => _settings.PokemonSettings.EvolveKeptPokemonsAtStorageUsagePercentage;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsToLevelUp => _settings.PokemonsToLevelUp;
@@ -1431,36 +1354,36 @@ namespace PoGo.NecroBot.Logic
 
         public ICollection<PokemonId> PokemonToUseMasterball => _settings.PokemonToUseMasterball;
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter => _settings.PokemonsTransferFilter;
-        public bool StartupWelcomeDelay => _settings.StartupWelcomeDelay;
-        public bool SnipeAtPokestops => _settings.SnipeAtPokestops;
+        public bool StartupWelcomeDelay => _settings.ConsoleSettings.StartupWelcomeDelay;
+        public bool SnipeAtPokestops => _settings.SnipingSettings.SnipeAtPokestops;
 
-        public bool UseTelegramAPI => _settings.UseTelegramAPI;
-        public string TelegramAPIKey => _settings.TelegramAPIKey;
-        public string TelegramPassword => _settings.TelegramPassword;
-        public int MinPokeballsToSnipe => _settings.MinPokeballsToSnipe;
-        public int MinPokeballsWhileSnipe => _settings.MinPokeballsWhileSnipe;
-        public int MaxPokeballsPerPokemon => _settings.MaxPokeballsPerPokemon;
-        public bool RandomlyPauseAtStops => _settings.RandomlyPauseAtStops;
+        public bool UseTelegramAPI => _settings.TelegramSettings.UseTelegramAPI;
+        public string TelegramAPIKey => _settings.TelegramSettings.TelegramAPIKey;
+        public string TelegramPassword => _settings.TelegramSettings.TelegramPassword;
+        public int MinPokeballsToSnipe => _settings.SnipingSettings.MinPokeballsToSnipe;
+        public int MinPokeballsWhileSnipe => _settings.SnipingSettings.MinPokeballsWhileSnipe;
+        public int MaxPokeballsPerPokemon => _settings.PokemonSettings.MaxPokeballsPerPokemon;
+        public bool RandomlyPauseAtStops => _settings.LocationSettings.RandomlyPauseAtStops;
         public SnipeSettings PokemonToSnipe => _settings.PokemonToSnipe;
-        public string SnipeLocationServer => _settings.SnipeLocationServer;
-        public int SnipeLocationServerPort => _settings.SnipeLocationServerPort;
-        public bool GetSniperInfoFromPokezz => _settings.GetSniperInfoFromPokezz;
-        public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.GetOnlyVerifiedSniperInfoFromPokezz;
-        public bool GetSniperInfoFromPokeSnipers => _settings.GetSniperInfoFromPokeSnipers;
-        public bool GetSniperInfoFromPokeWatchers => _settings.GetSniperInfoFromPokeWatchers;
-        public bool GetSniperInfoFromSkiplagged => _settings.GetSniperInfoFromSkiplagged;
-        public bool UseSnipeLocationServer => _settings.UseSnipeLocationServer;
-        public bool UseTransferIvForSnipe => _settings.UseTransferIvForSnipe;
-        public bool SnipeIgnoreUnknownIv => _settings.SnipeIgnoreUnknownIv;
-        public int MinDelayBetweenSnipes => _settings.MinDelayBetweenSnipes;
-        public double SnipingScanOffset => _settings.SnipingScanOffset;
-        public bool SnipePokemonNotInPokedex => _settings.SnipePokemonNotInPokedex;
-        public bool RandomizeRecycle => _settings.RandomizeRecycle;
-        public int RandomRecycleValue => _settings.RandomRecycleValue;
-        public bool DelayBetweenRecycleActions => _settings.DelayBetweenRecycleActions;
-        public int TotalAmountOfPokeballsToKeep => _settings.TotalAmountOfPokeballsToKeep;
-        public int TotalAmountOfPotionsToKeep => _settings.TotalAmountOfPotionsToKeep;
-        public int TotalAmountOfRevivesToKeep => _settings.TotalAmountOfRevivesToKeep;
-        public int TotalAmountOfBerriesToKeep => _settings.TotalAmountOfBerriesToKeep;
+        public string SnipeLocationServer => _settings.SnipingSettings.SnipeLocationServer;
+        public int SnipeLocationServerPort => _settings.SnipingSettings.SnipeLocationServerPort;
+        public bool GetSniperInfoFromPokezz => _settings.SnipingSettings.GetSniperInfoFromPokezz;
+        public bool GetOnlyVerifiedSniperInfoFromPokezz => _settings.SnipingSettings.GetOnlyVerifiedSniperInfoFromPokezz;
+        public bool GetSniperInfoFromPokeSnipers => _settings.SnipingSettings.GetSniperInfoFromPokeSnipers;
+        public bool GetSniperInfoFromPokeWatchers => _settings.SnipingSettings.GetSniperInfoFromPokeWatchers;
+        public bool GetSniperInfoFromSkiplagged => _settings.SnipingSettings.GetSniperInfoFromSkiplagged;
+        public bool UseSnipeLocationServer => _settings.SnipingSettings.UseSnipeLocationServer;
+        public bool UseTransferIvForSnipe => _settings.SnipingSettings.UseTransferIvForSnipe;
+        public bool SnipeIgnoreUnknownIv => _settings.SnipingSettings.SnipeIgnoreUnknownIv;
+        public int MinDelayBetweenSnipes => _settings.SnipingSettings.MinDelayBetweenSnipes;
+        public double SnipingScanOffset => _settings.SnipingSettings.SnipingScanOffset;
+        public bool SnipePokemonNotInPokedex => _settings.SnipingSettings.SnipePokemonNotInPokedex;
+        public bool RandomizeRecycle => _settings.RecycleSettings.RandomizeRecycle;
+        public int RandomRecycleValue => _settings.RecycleSettings.RandomRecycleValue;
+        public bool DelayBetweenRecycleActions => _settings.RecycleSettings.DelayBetweenRecycleActions;
+        public int TotalAmountOfPokeballsToKeep => _settings.RecycleSettings.TotalAmountOfPokeballsToKeep;
+        public int TotalAmountOfPotionsToKeep => _settings.RecycleSettings.TotalAmountOfPotionsToKeep;
+        public int TotalAmountOfRevivesToKeep => _settings.RecycleSettings.TotalAmountOfRevivesToKeep;
+        public int TotalAmountOfBerriesToKeep => _settings.RecycleSettings.TotalAmountOfBerriesToKeep;
     }
 }
