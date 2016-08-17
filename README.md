@@ -7,7 +7,7 @@
 [![Discord](https://discordapp.com/api/guilds/209253611031625728/widget.png)](https://discord.gg/VXKxNFr)
 [![Stories in Ready](https://badge.waffle.io/NoxxDev/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NoxxDev/NecroBot)
 [![Github All Releases](https://img.shields.io/github/downloads/NoxxDev/NecroBot/total.svg)](https://github.com/NoxxDev/NecroBot/releases)
-[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NecronomiconCoding/NecroBot/master/LICENSE.md)
+[![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NoxxDev/NecroBot/master/LICENSE.md)
 [![Twitter Follow](https://img.shields.io/twitter/follow/NoxxDev.svg?style=social&label=Follow&maxAge=1)](https://twitter.com/NoxxDev)
 
 <p align="center">
@@ -15,7 +15,7 @@
     <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
   </a>
 </p>
-## This repository is a fork updated of [NecroBot] (https://github.com/NECROBOTIO/NecroBot)
+## This repository is a fork updated of [NecroBot](https://github.com/NECROBOTIO/NecroBot)
 
 <h2><a name="getting-started">Getting Started</a></h2>
 Make sure you check out our [Wiki](https://github.com/NoxxDev/NecroBot/wiki) to get started.
@@ -60,7 +60,7 @@ Valmere - [TransferWeakPokemon](https://github.com/PocketMobsters/PokeMobBot/pul
 
 AeonLucid - [POGOProtos](https://github.com/AeonLucid/POGOProtos)
 
-NECROBOTIO - [NecroBot] (https://github.com/NECROBOTIO/NecroBot)
+NECROBOTIO - [NecroBot](https://github.com/NECROBOTIO/NecroBot)
 
 <br/>
 Thanks to everyone who volunteered by contributing via Pull Requests!
