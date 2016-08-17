@@ -17,7 +17,7 @@ using POGOProtos.Inventory.Item;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    internal class UseIncubatorsTask
+    public class UseIncubatorsTask
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {

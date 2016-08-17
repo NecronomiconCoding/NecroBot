@@ -8,7 +8,7 @@ using POGOProtos.Networking.Responses;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    class UseLuckyEggConstantlyTask
+    public class UseLuckyEggConstantlyTask
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {

@@ -7,7 +7,7 @@ using PoGo.NecroBot.Logic.State;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    class GetPokeDexCount
+    public class GetPokeDexCount
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {

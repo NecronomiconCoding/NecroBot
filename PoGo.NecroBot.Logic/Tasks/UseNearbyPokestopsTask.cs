@@ -15,7 +15,7 @@ using POGOProtos.Map.Fort;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    internal class UseNearbyPokestopsTask
+    public class UseNearbyPokestopsTask
     {
         //Please do not change GetPokeStops() in this file, it's specifically set
         //to only find stops within 40 meters
