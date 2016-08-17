@@ -36,7 +36,8 @@ namespace PoGo.NecroBot.Logic
         {
             if (LastMajorVariantWalkingSpeed == DateTime.MinValue && NextMajorVariantWalkingSpeed == DateTime.MinValue)
             {
-                var minutes = randWalking.NextDouble() * (2 - 6);
+                var minutes = randWalking.NextDouble() * (2 - 6) + 2;
+                Console.WriteLine("{0}", minutes);
                 LastMajorVariantWalkingSpeed = DateTime.Now;
                 NextMajorVariantWalkingSpeed = LastMajorVariantWalkingSpeed.AddMinutes(minutes);
                 CurrentWalkingSpeed = session.LogicSettings.WalkingSpeedInKilometerPerHour;
@@ -49,7 +50,7 @@ namespace PoGo.NecroBot.Logic
                 var randomMax = session.LogicSettings.WalkingSpeedInKilometerPerHour + session.LogicSettings.WalkingSpeedVariant;
                 CurrentWalkingSpeed = randWalking.NextDouble() * (randomMax - randomMin) + randomMin;
 
-                var minutes = randWalking.NextDouble() * (2 - 6);
+                var minutes = randWalking.NextDouble() * (2 - 6) + 2;
                 LastMajorVariantWalkingSpeed = DateTime.Now;
                 NextMajorVariantWalkingSpeed = LastMajorVariantWalkingSpeed.AddMinutes(minutes);
 
@@ -73,7 +74,7 @@ namespace PoGo.NecroBot.Logic
                 {
                     var randomMax = session.LogicSettings.WalkingSpeedInKilometerPerHour + session.LogicSettings.WalkingSpeedVariant + 0.5;
 
-                    CurrentWalkingSpeed += randWalking.NextDouble() * (0.01 - 0.09);
+                    CurrentWalkingSpeed += randWalking.NextDouble() * (0.01 - 0.09) + 0.01;
                     if (CurrentWalkingSpeed > randomMax)
                         CurrentWalkingSpeed = randomMax;
                 }
@@ -81,7 +82,7 @@ namespace PoGo.NecroBot.Logic
                 {
                     var randomMin = session.LogicSettings.WalkingSpeedInKilometerPerHour - session.LogicSettings.WalkingSpeedVariant - 0.5;
 
-                    CurrentWalkingSpeed -= randWalking.NextDouble() * (0.01 - 0.9);
+                    CurrentWalkingSpeed -= randWalking.NextDouble() * (0.01 - 0.09) + 0.01;
                     if (CurrentWalkingSpeed < randomMin)
                         CurrentWalkingSpeed = randomMin;
                 }
