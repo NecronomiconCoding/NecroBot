@@ -349,6 +349,17 @@ namespace PoGo.NecroBot.CLI
                     LogLevel.Info, ConsoleColor.DarkCyan);
         }
 
+        private static void HandleEvent(KillSwitchEvent killSwitchEvent, ISession session)
+        {
+            if (killSwitchEvent.RequireStop)
+            {
+                Logger.Write(killSwitchEvent.Message, LogLevel.Warning);
+                Logger.Write(session.Translation.GetTranslation(TranslationString.RequireInputText), LogLevel.Warning);
+            }
+            else
+                Logger.Write(killSwitchEvent.Message, LogLevel.Info, ConsoleColor.White);
+        }
+
         internal void Listen(IEvent evt, ISession session)
         {
             dynamic eve = evt;

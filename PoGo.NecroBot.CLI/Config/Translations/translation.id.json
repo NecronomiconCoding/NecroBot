@@ -699,6 +699,86 @@
     {
       "Key": "AccountBanned",
       "Value": "Probably Permanent Ban!"
+    },
+    {
+      "Key": "CatchErrorExceeded",
+      "Value": "KillSwitch: Catch error exceeded {0}/{1}"
+    },
+    {
+      "Key": "CatchErrorReset",
+      "Value": "KillSwitch: Catch error restarted {0}/{1}"
+    },
+    {
+      "Key": "CatchErrorState",
+      "Value": "KillSwitch: Catch error state {0}/{1}"
+    },
+    {
+      "Key": "CatchEscapeExceeded",
+      "Value": "KillSwitch: Catch escape exceeded {0}/{1}"
+    },
+    {
+      "Key": "CatchEscapeReset",
+      "Value": "KillSwitch: Catch escape restarted {0}/{1}"
+    },
+    {
+      "Key": "CatchEscapeState",
+      "Value": "KillSwitch: Catch escape state {0}/{1}"
+    },
+    {
+      "Key": "CatchFleeExceeded",
+      "Value": "KillSwitch: Catch flee exceeded {0}/{1}"
+    },
+    {
+      "Key": "CatchFleeReset",
+      "Value": "KillSwitch: Catch flee restarted {0}/{1}"
+    },
+    {
+      "Key": "CatchFleeState",
+      "Value": "KillSwitch: Catch flee state {0}/{1}"
+    },
+    {
+      "Key": "CatchMissedExceeded",
+      "Value": "KillSwitch: Catch missed exceeded {0}/{1}"
+    },
+    {
+      "Key": "CatchMissedReset",
+      "Value": "KillSwitch: Catch missed restarted {0}/{1}"
+    },
+    {
+      "Key": "CatchMissedState",
+      "Value": "KillSwitch: Catch missed state {0}/{1}"
+    },
+    {
+      "Key": "CatchSuccessExceeded",
+      "Value": "KillSwitch: Catch success exceeded {0}/{1}"
+    },
+    {
+      "Key": "CatchSuccessReset",
+      "Value": "KillSwitch: Catch success restarted {0}/{1}"
+    },
+    {
+      "Key": "CatchSuccessState",
+      "Value": "KillSwitch: Catch success state {0}/{1}"
+    },
+    {
+      "Key": "CatchErrorStart",
+      "Value": "KillSwitch: Catch error started {0}/{1}"
+    },
+    {
+      "Key": "CatchEscapeStart",
+      "Value": "KillSwitch: Catch escape started {0}/{1}"
+    },
+    {
+      "key": "CatchFleeStart",
+      "Value": "KillSwitch: Catch flee started {0}/{1}"
+    },
+    {
+      "Key": "CatchMissedStart",
+      "Value": "KillSwitch: Catch missed started {0}/{1}"
+    },
+    {
+      "Key": "CatchSuccessStart",
+      "Value": "KillSwitch: Catch success started {0}/{1}"
     }
   ],
 	"PokemonStrings": [

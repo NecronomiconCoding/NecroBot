@@ -188,6 +188,12 @@ namespace PoGo.NecroBot.Logic
         bool VerboseRecycling { get; }
         double RecycleInventoryAtUsagePercentage { get; }
         double EvolveKeptPokemonsAtStorageUsagePercentage { get; }
+        bool UseKillSwitchCatch { get; }
+        int CatchErrorPerHours { get; }
+        int CatchEscapePerHours { get; }
+        int CatchFleePerHours { get; }
+        int CatchMissedPerHours { get; }
+        int CatchSuccessPerHours { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }

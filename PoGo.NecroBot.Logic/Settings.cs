@@ -442,6 +442,12 @@ namespace PoGo.NecroBot.Logic
     public class SoftBanConfig
     {
         public bool FastSoftBanBypass;
+        public bool UseKillSwitchCatch = true;
+        public int CatchErrorPerHours = 40;
+        public int CatchEscapePerHours = 40;
+        public int CatchFleePerHours = 40;
+        public int CatchMissedPerHours = 40;
+        public int CatchSuccessPerHours = 40;
     }
 
     public class GlobalSettings
@@ -1348,6 +1354,12 @@ namespace PoGo.NecroBot.Logic
         public bool VerboseRecycling => _settings.RecycleSettings.VerboseRecycling;
         public double RecycleInventoryAtUsagePercentage => _settings.RecycleSettings.RecycleInventoryAtUsagePercentage;
         public double EvolveKeptPokemonsAtStorageUsagePercentage => _settings.PokemonSettings.EvolveKeptPokemonsAtStorageUsagePercentage;
+        public bool UseKillSwitchCatch => _settings.SoftBanSettings.UseKillSwitchCatch;
+        public int CatchErrorPerHours => _settings.SoftBanSettings.CatchErrorPerHours;
+        public int CatchEscapePerHours => _settings.SoftBanSettings.CatchEscapePerHours;
+        public int CatchFleePerHours => _settings.SoftBanSettings.CatchFleePerHours;
+        public int CatchMissedPerHours => _settings.SoftBanSettings.CatchMissedPerHours;
+        public int CatchSuccessPerHours => _settings.SoftBanSettings.CatchSuccessPerHours;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsToLevelUp => _settings.PokemonsToLevelUp;

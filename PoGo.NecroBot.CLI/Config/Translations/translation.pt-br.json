@@ -654,7 +654,87 @@
     },
     {
       "Key": "AccountBanned",
-      "Value":  "Provavel Ban Permanente!"
+      "Value": "Provável Ban Permanente!"
+    },
+    {
+      "Key": "CatchErrorExceeded",
+      "Value": "KillSwitch: Erros de captura excederam {0}/{1}"
+    },
+    {
+      "Key": "CatchErrorReset",
+      "Value": "KillSwitch: Erros de captura foi reiniciado {0}/{1}"
+    },
+    {
+      "Key": "CatchErrorState",
+      "Value": "KillSwitch: Erros de captura {0}/{1}"
+    },
+    {
+      "Key": "CatchEscapeExceeded",
+      "Value": "KillSwitch: Capturas escapol excederam {0}/{1}"
+    },
+    {
+      "Key": "CatchEscapeReset",
+      "Value": "KillSwitch: Capturas escapol foi reiniciado {0}/{1}"
+    },
+    {
+      "Key": "CatchEscapeState",
+      "Value": "KillSwitch: Capturas escapol {0}/{1}"
+    },
+    {
+      "Key": "CatchFleeExceeded",
+      "Value": "KillSwitch: Capturas fugiu excederam {0}/{1}"
+    },
+    {
+      "Key": "CatchFleeReset",
+      "Value": "KillSwitch: Capturas fugiu foi reiniciado {0}/{1}"
+    },
+    {
+      "Key": "CatchFleeState",
+      "Value": "KillSwitch: Capturas fugiu {0}/{1}"
+    },
+    {
+      "Key": "CatchMissedExceeded",
+      "Value": "KillSwitch: Capturas perdidas excederam {0}/{1}"
+    },
+    {
+      "Key": "CatchMissedReset",
+      "Value": "KillSwitch: Capturas perdidas foi reiniciado {0}/{1}"
+    },
+    {
+      "Key": "CatchMissedState",
+      "Value": "KillSwitch: Capturas perdidas {0}/{1}"
+    },
+    {
+      "Key": "CatchSuccessExceeded",
+      "Value": "KillSwitch: Capturas com sucesso excederam {0}/{1}"
+    },
+    {
+      "Key": "CatchSuccessReset",
+      "Value": "KillSwitch: Capturas com sucesso foi reiniciado {0}/{1}"
+    },
+    {
+      "Key": "CatchSuccessState",
+      "Value": "KillSwitch: Capturas com sucesso {0}/{1}"
+    },
+    {
+      "Key": "CatchErrorStart",
+      "Value": "KillSwitch: Erro de capturas iniciado {0}/{1}"
+    },
+    {
+      "Key": "CatchEscapeStart",
+      "Value": "KillSwitch: Capturas escapadas iniciada {0}/{1}"
+    },
+    {
+      "key": "CatchFleeStart",
+      "Value": "KillSwitch: Capturas com fuga iniciado {0}/{1}"
+    },
+    {
+      "Key": "CatchMissedStart",
+      "Value": "KillSwitch: Capturas perdidas iniciada {0}/{1}"
+    },
+    {
+      "Key": "CatchSuccessStart",
+      "Value": "KillSwitch: Capturas com sucesso iniciado {0}/{1}"
     }
   ],
   "PokemonStrings": [

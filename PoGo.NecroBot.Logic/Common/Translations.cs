@@ -204,7 +204,27 @@ namespace PoGo.NecroBot.Logic.Common
         HighestsPokemoHeader,
         HighestsPokemoCell,
         HumanWalkingVariant,
-        AccountBanned
+        AccountBanned,
+        CatchErrorExceeded,
+        CatchErrorReset,
+        CatchErrorState,
+        CatchErrorStart,
+        CatchEscapeExceeded,
+        CatchEscapeReset,
+        CatchEscapeState,
+        CatchEscapeStart,
+        CatchFleeExceeded,
+        CatchFleeReset,
+        CatchFleeState,
+        CatchFleeStart,
+        CatchMissedExceeded,
+        CatchMissedReset,
+        CatchMissedState,
+        CatchMissedStart,
+        CatchSuccessExceeded,
+        CatchSuccessReset,
+        CatchSuccessState,
+        CatchSuccessStart
     }
 
     public class Translation : ITranslation
@@ -480,7 +500,27 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.HighestsPokemoHeader, "====== {0} ======"),
             new KeyValuePair<TranslationString, string>(TranslationString.HighestsPokemoCell, "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"),
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkingVariant, "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"),
-            new KeyValuePair<TranslationString, string>(TranslationString.AccountBanned, "Probably Permanent Ban!")
+            new KeyValuePair<TranslationString, string>(TranslationString.AccountBanned, "Probably Permanent Ban!"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchErrorExceeded, "KillSwitch: Catch error exceeded {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchErrorReset, "KillSwitch: Catch error restarted {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchErrorState, "KillSwitch: Catch error state {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchErrorStart, "KillSwitch: Catch error started {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchEscapeExceeded, "KillSwitch: Catch escape exceeded {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchEscapeReset, "KillSwitch: Catch escape restarted {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchEscapeState, "KillSwitch: Catch escape state {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchEscapeStart, "KillSwitch: Catch escape started {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchFleeExceeded, "KillSwitch: Catch flee exceeded {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchFleeReset, "KillSwitch: Catch flee restarted {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchFleeState, "KillSwitch: Catch flee state {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchFleeStart, "KillSwitch: Catch flee started {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchMissedExceeded, "KillSwitch: Catch missed exceeded {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchMissedReset, "KillSwitch: Catch missed restarted {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchMissedState, "KillSwitch: Catch missed state {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchMissedStart, "KillSwitch: Catch missed started {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchSuccessExceeded, "KillSwitch: Catch success exceeded {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchSuccessReset, "KillSwitch: Catch success restarted {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchSuccessState, "KillSwitch: Catch success state {0}/{1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchSuccessStart, "KillSwitch: Catch success started {0}/{1}")
         };
 
         [JsonProperty("PokemonStrings",

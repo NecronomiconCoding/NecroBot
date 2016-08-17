@@ -21,6 +21,7 @@ namespace PoGo.NecroBot.Logic.State
         ITranslation Translation { get; }
         IEventDispatcher EventDispatcher { get; }
         TelegramService Telegram { get; set; }
+        KillSwitch KillSwitch { get; }
     }
 
 
@@ -52,6 +53,8 @@ namespace PoGo.NecroBot.Logic.State
 
         public TelegramService Telegram { get; set; }
 
+        public KillSwitch KillSwitch { get; private set; }
+
         public void Reset(ISettings settings, ILogicSettings logicSettings)
         {
             ApiFailureStrategy _apiStrategy = new ApiFailureStrategy(this);
@@ -59,6 +62,7 @@ namespace PoGo.NecroBot.Logic.State
             // ferox wants us to set this manually
             Inventory = new Inventory(Client, logicSettings);
             Navigation = new Navigation(Client);
+            KillSwitch = new KillSwitch();
         }
     }
 }
