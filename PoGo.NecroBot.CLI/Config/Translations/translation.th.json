@@ -366,7 +366,7 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "กำลังเจอปัญหา : ตัวล่อที่ PokeStops {0}"
+      "Value": "กำลังเจอปัญหา : ตัวล่อที่ Poke Stops {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -670,15 +670,15 @@
     },
     {
       "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+      "Value": "IP คุณคือ : {0} | Proxy IP is: {1}"
     },
     {
       "Key": "FixProxySettings",
-      "Value": "Press any key to exit so you can fix your proxy settings..."
+      "Value": "กรุณากดคีย์อะไรก็ได้เพื่อออก หรือ คุณสามารถตั้งค่า proxy ใหม่..."
     },
     {
       "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
+      "Value": " IP ของท่านคือ : {0}"
     },
     {
       "Key": "HighestsPokemoHeader",
@@ -690,11 +690,11 @@
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+      "Value": "ความเร็วการเดิน : ถูกปรับจาก, {0:n2} Km/h ไปเป็น {1:n2} Km/h"
     },
     {
       "Key": "AccountBanned",
-      "Value": "Probably Permanent Ban!"
+      "Value": "ขออภัยบัญชีของทานถูกแบน!"
     }
   ],
   "PokemonStrings": [
