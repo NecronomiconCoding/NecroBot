@@ -14,7 +14,7 @@ using POGOProtos.Data;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    internal class TransferWeakPokemonTask
+    public class TransferWeakPokemonTask
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
