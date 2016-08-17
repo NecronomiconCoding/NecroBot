@@ -32,7 +32,7 @@ namespace PoGo.NecroBot.Logic
             _client = client;
         }
 
-        private double MajorWalkingSpedVariant(ISession session)
+        private double MajorWalkingSpeedVariant(ISession session)
         {
             if (LastMajorVariantWalkingSpeed == DateTime.MinValue && NextMajorVariantWalkingSpeed == DateTime.MinValue)
             {
@@ -63,7 +63,7 @@ namespace PoGo.NecroBot.Logic
             return CurrentWalkingSpeed / 3.6;
         }
 
-        private double MinorWalkingSpedVariant(ISession session)
+        private double MinorWalkingSpeedVariant(ISession session)
         {
             if (randWalking.Next(1, 10) > 5) //Random change or no variant speed
             {
@@ -106,7 +106,7 @@ namespace PoGo.NecroBot.Logic
             cancellationToken.ThrowIfCancellationRequested();
             if (!session.LogicSettings.DisableHumanWalking)
             {
-                var speedInMetersPerSecond = session.LogicSettings.UseWalkingSpeedVariant ? MajorWalkingSpedVariant(session) : 
+                var speedInMetersPerSecond = session.LogicSettings.UseWalkingSpeedVariant ? MajorWalkingSpeedVariant(session) : 
                     session.LogicSettings.WalkingSpeedInKilometerPerHour / 3.6;
                 var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
                 var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
@@ -136,7 +136,7 @@ namespace PoGo.NecroBot.Logic
                             speedInMetersPerSecond = SpeedDownTo;
 
                     if (session.LogicSettings.UseWalkingSpeedVariant)
-                        speedInMetersPerSecond = MinorWalkingSpedVariant(session);
+                        speedInMetersPerSecond = MinorWalkingSpeedVariant(session);
 
                     nextWaypointDistance = Math.Min(currentDistanceToTarget,
                         millisecondsUntilGetUpdatePlayerLocationResponse / 1000 * speedInMetersPerSecond);
@@ -231,7 +231,7 @@ namespace PoGo.NecroBot.Logic
             
             var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat, CultureInfo.InvariantCulture),
                 Convert.ToDouble(trk.Lon, CultureInfo.InvariantCulture));
-            var speedInMetersPerSecond = session.LogicSettings.UseWalkingSpeedVariant ? MajorWalkingSpedVariant(session) :
+            var speedInMetersPerSecond = session.LogicSettings.UseWalkingSpeedVariant ? MajorWalkingSpeedVariant(session) :
                     session.LogicSettings.WalkingSpeedInKilometerPerHour / 3.6;
             var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
             LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
@@ -267,7 +267,7 @@ namespace PoGo.NecroBot.Logic
                 //}
 
                 if (session.LogicSettings.UseWalkingSpeedVariant)
-                    speedInMetersPerSecond = MinorWalkingSpedVariant(session);
+                    speedInMetersPerSecond = MinorWalkingSpeedVariant(session);
 
                 nextWaypointDistance = Math.Min(currentDistanceToTarget,
                     millisecondsUntilGetUpdatePlayerLocationResponse / 1000 * speedInMetersPerSecond);
