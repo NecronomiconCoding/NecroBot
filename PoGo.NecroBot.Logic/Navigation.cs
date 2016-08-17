@@ -37,7 +37,6 @@ namespace PoGo.NecroBot.Logic
             if (LastMajorVariantWalkingSpeed == DateTime.MinValue && NextMajorVariantWalkingSpeed == DateTime.MinValue)
             {
                 var minutes = randWalking.NextDouble() * (2 - 6) + 2;
-                Console.WriteLine("{0}", minutes);
                 LastMajorVariantWalkingSpeed = DateTime.Now;
                 NextMajorVariantWalkingSpeed = LastMajorVariantWalkingSpeed.AddMinutes(minutes);
                 CurrentWalkingSpeed = session.LogicSettings.WalkingSpeedInKilometerPerHour;
