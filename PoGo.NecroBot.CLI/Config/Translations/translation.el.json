@@ -26,7 +26,7 @@
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Δεν βρεθηκαν λειτουργικά PokeStops στην περιοχή σου. Μήπως εχεις ορίσει την μέγιστη εμβέλεια πολυ χαμήλα;"
+      "Value": "Δεν βρεθηκαν λειτουργικά Πόκεστοπς στην περιοχή σου. Μήπως εχεις ορίσει την μέγιστη εμβέλεια πολυ χαμήλα;"
     },
     {
       "Key": "eventFortUsed",
@@ -58,7 +58,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Καλύτερο CP: {3}  IV: {4}%] (Candies: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Καλύτερο CP: {3}  IV: {4}%] (Πετράδια: {5})"
     },
     {
       "Key": "eventItemRecycled",
@@ -66,15 +66,15 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Επίπεδο: {3} CP: ({4}/{5}) IV: {6}% | Πιθανότητα: {7}% | {8}μ απόσταση | με {9} ({10} εναπομείναντα). | Λάβατε {11} πόντους εμπειρίας. | {12} | Γ.Πλάτος: {13} Γ.Μήκος: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Επίπεδο: {3} CP: ({4}/{5}) IV: {6}% | Πιθανότητα: {7}% | {8}μ απόσταση | με {9} ({10} εναπομείναντα). | Γ.Μήκος: {11} Γ.Πλάτος: {12}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Ξεμείναμε απο Pokeballs - Μας ξέφυγε ένα {0} με {1} CP"
+      "Value": "Ξεμείναμε απο Πόκεμπολς - Μας ξέφυγε ένα {0} με {1} CP"
     },
     {
       "Key": "catchStatusAttempt",
@@ -94,7 +94,7 @@
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokemons"
+      "Value": "Πόκεμονς"
     },
     {
       "Key": "commonWordPerfect",
@@ -118,7 +118,7 @@
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "DisplayHighestsLevel"
+      "Value": "Εμφάνιση Μεγαλύτερου Επιπέδου"
     },
     {
       "Key": "welcomeWarning",
@@ -278,11 +278,11 @@
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Ο κατάλογος αντικείμενων ειναι γεμάτος, δεν πήραμε αντικείμενα απο το Pokestop!"
+      "Value": "Ο κατάλογος αντικείμενων ειναι γεμάτος, δεν πήραμε αντικείμενα απο το Πόκεστοπ!"
     },
     {
       "Key": "encounterProblem",
-      "Value": "Πρόβλημα αντιμετώπισης pokemon: {0}"
+      "Value": "Πρόβλημα αντιμετώπισης πόκεμον: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
@@ -298,7 +298,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Φίλτρο αγνόησης Pokemon] - Αγνοω το {0} οπως παραμετροποιήθηκε στις ρυθμίσεις"
+      "Value": "[Φίλτρο αγνόησης Πόκεμον] - Αγνοω το {0} οπως παραμετροποιήθηκε στις ρυθμίσεις"
     },
     {
       "Key": "catchStatusAttempt",
@@ -342,11 +342,11 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Χρόνος λειτουργίας {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Μεταφέρθηκαν: {6:0} | Ανακυκλώθηκαν: {7:0}"
+      "Value": "{0} - Χρόνος λειτουργίας {1} - Επίπεδο: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Μεταφέρθηκαν: {6:0} | Ανακυκλώθηκαν: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (Επομενο Επίπεδο σε {1}h {2}m | {3}/{4} XP)"
+      "Value": "{0} (Επομενο Επίπεδο σε {1}Ώρα {2}Λεπτά | {3}/{4} Εμπειρία)"
     },
     {
       "Key": "requireInputText",
@@ -418,7 +418,7 @@
     },
     {
       "Key": "HighestsPokemoCell",
-      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Επίπεδο {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
     },
     {
       "Key": "HumanWalkingVariant",
@@ -430,83 +430,83 @@
     },
     {
       "Key": "CatchErrorExceeded",
-      "Value": "KillSwitch: Catch error exceeded {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Υπέρβαση σφάλματος πιασίματος {0}/{1}"
     },
     {
       "Key": "CatchErrorReset",
-      "Value": "KillSwitch: Catch error restarted {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Επανεκκίνηση σφάλματος πιασίματος {0}/{1}"
     },
     {
       "Key": "CatchErrorState",
-      "Value": "KillSwitch: Catch error state {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Κατάσταση σφάλματος πιασίματος {0}/{1}"
     },
     {
       "Key": "CatchEscapeExceeded",
-      "Value": "KillSwitch: Catch escape exceeded {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Υπέρβαση αποφυγής κατά τα πιασίματα {0}/{1}"
     },
     {
       "Key": "CatchEscapeReset",
-      "Value": "KillSwitch: Catch escape restarted {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Επανεκκίνηση αποφυγής κατά τα πιασίματα {0}/{1}"
     },
     {
       "Key": "CatchEscapeState",
-      "Value": "KillSwitch: Catch escape state {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Κατάσταση αποφυγής κατά τα πιασίματα {0}/{1}"
     },
     {
       "Key": "CatchFleeExceeded",
-      "Value": "KillSwitch: Catch flee exceeded {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Υπέρβαση δραπέτευσης κατά το πιάσιμο {0}/{1}"
     },
     {
       "Key": "CatchFleeReset",
-      "Value": "KillSwitch: Catch flee restarted {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Επανεκκίνηση δραπέτευσης κατά το πιάσιμο {0}/{1}"
     },
     {
       "Key": "CatchFleeState",
-      "Value": "KillSwitch: Catch flee state {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Κατάσταση δραπέτευσης κατά το πιάσιμο {0}/{1}"
     },
     {
       "Key": "CatchMissedExceeded",
-      "Value": "KillSwitch: Catch missed exceeded {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Υπέρβαση αστοχιών κατά το πιάσιμο {0}/{1}"
     },
     {
       "Key": "CatchMissedReset",
-      "Value": "KillSwitch: Catch missed restarted {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Επανεκκίνηση αστοχιών κατά το πιάσιμο {0}/{1}"
     },
     {
       "Key": "CatchMissedState",
-      "Value": "KillSwitch: Catch missed state {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Κατάσταση αστοχιών κατά το πιάσιμο {0}/{1}"
     },
     {
       "Key": "CatchSuccessExceeded",
-      "Value": "KillSwitch: Catch success exceeded {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Υπέρβαση επιτυχημένων πιασίματων {0}/{1}"
     },
     {
       "Key": "CatchSuccessReset",
-      "Value": "KillSwitch: Catch success restarted {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Επανεκκίνηση επιτυχημένων πιασίματων {0}/{1}"
     },
     {
       "Key": "CatchSuccessState",
-      "Value": "KillSwitch: Catch success state {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Κατάσταση επιτυχημένων πιασίματων {0}/{1}"
     },
     {
       "Key": "CatchErrorStart",
-      "Value": "KillSwitch: Catch error started {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Εκκίνηση βλάβης πιασιμάτων {0}/{1}"
     },
     {
       "Key": "CatchEscapeStart",
-      "Value": "KillSwitch: Catch escape started {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Εκκίνηση δραπέτευσης πιασιμάτων {0}/{1}"
     },
     {
       "key": "CatchFleeStart",
-      "Value": "KillSwitch: Catch flee started {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Εκκίνηση διαφυγής πιασιμάτων {0}/{1}"
     },
     {
       "Key": "CatchMissedStart",
-      "Value": "KillSwitch: Catch missed started {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Εκκίνηση αστοχιών πιασιμάτων {0}/{1}"
     },
     {
       "Key": "CatchSuccessStart",
-      "Value": "KillSwitch: Catch success started {0}/{1}"
+      "Value": "Διακόπτης Τερματισμού: Εκκίνηση επιτυχημένων πιασιμάτων {0}/{1}"
     }
   ],
 	"PokemonStrings": [
