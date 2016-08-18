@@ -670,15 +670,15 @@
     },
     {
       "Key": "CatchEscapeExceeded",
-      "Value": "KillSwitch: Capturas escapol excederam {0}/{1}"
+      "Value": "KillSwitch: Capturas escapou excederam {0}/{1}"
     },
     {
       "Key": "CatchEscapeReset",
-      "Value": "KillSwitch: Capturas escapol foi reiniciado {0}/{1}"
+      "Value": "KillSwitch: Capturas escapou foi reiniciado {0}/{1}"
     },
     {
       "Key": "CatchEscapeState",
-      "Value": "KillSwitch: Capturas escapol {0}/{1}"
+      "Value": "KillSwitch: Capturas escapou {0}/{1}"
     },
     {
       "Key": "CatchFleeExceeded",
@@ -718,23 +718,23 @@
     },
     {
       "Key": "CatchErrorStart",
-      "Value": "KillSwitch: Erro de capturas iniciado {0}/{1}"
+      "Value": "KillSwitch: Erro de capturas {0}/{1}"
     },
     {
       "Key": "CatchEscapeStart",
-      "Value": "KillSwitch: Capturas escapadas iniciada {0}/{1}"
+      "Value": "KillSwitch: Capturas escapou {0}/{1}"
     },
     {
       "key": "CatchFleeStart",
-      "Value": "KillSwitch: Capturas com fuga iniciado {0}/{1}"
+      "Value": "KillSwitch: Capturas com fuga {0}/{1}"
     },
     {
       "Key": "CatchMissedStart",
-      "Value": "KillSwitch: Capturas perdidas iniciada {0}/{1}"
+      "Value": "KillSwitch: Capturas perdidas {0}/{1}"
     },
     {
       "Key": "CatchSuccessStart",
-      "Value": "KillSwitch: Capturas com sucesso iniciado {0}/{1}"
+      "Value": "KillSwitch: Capturas com sucesso {0}/{1}"
     }
   ],
   "PokemonStrings": [
