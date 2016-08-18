@@ -187,11 +187,11 @@ namespace PoGo.NecroBot.Logic
 
                         sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
                         var currentDistanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, points.ToArray()[i]);
-                        //var realDistanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
 
-                        //if (realDistanceToTarget < 30)
-                        //if (speedInMetersPerSecond > SpeedDownTo)
-                        //    speedInMetersPerSecond = SpeedDownTo;
+                        var realDistanceToTargetSpeedDown = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
+                        if (realDistanceToTargetSpeedDown < 40)
+                            if (speedInMetersPerSecond > SpeedDownTo)
+                                speedInMetersPerSecond = SpeedDownTo;
 
                         if (session.LogicSettings.UseWalkingSpeedVariant)
                             speedInMetersPerSecond = MinorWalkingSpeedVariant(session);
