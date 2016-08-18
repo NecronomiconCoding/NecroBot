@@ -10,6 +10,7 @@ using PoGo.NecroBot.Logic.State;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Networking.Responses;
+using PoGo.NecroBot.CLI.Resources;
 
 #endregion
 
@@ -358,6 +359,14 @@ namespace PoGo.NecroBot.CLI
             }
             else
                 Logger.Write(killSwitchEvent.Message, LogLevel.Info, ConsoleColor.White);
+        }
+
+        private static void HandleEvent(SpinProgressBarEvent spinProgressBarEvent, ISession session)
+        {
+            if (spinProgressBarEvent.IsWorking)
+                ProgressBar.SpinTurn(spinProgressBarEvent.Message);
+            else
+                ProgressBar.SpinOff();
         }
 
         internal void Listen(IEvent evt, ISession session)
