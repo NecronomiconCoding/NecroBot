@@ -295,7 +295,7 @@ namespace PoGo.NecroBot.Logic
         public double WalkingSpeedInKilometerPerHour = 4.16;
         public bool UseWalkingSpeedVariant = true;
         public double WalkingSpeedVariant = 1.2;
-        public bool ShowVariantWalking = true;
+        public bool ShowVariantWalking = false;
         public bool RandomlyPauseAtStops = true;
         public int MaxSpawnLocationOffset = 10;
         public int MaxTravelDistanceInMeters = 1000;
