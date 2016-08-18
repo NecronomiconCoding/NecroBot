@@ -489,24 +489,12 @@
       "Value": "KillSwitch: Catch success state {0}/{1}"
     },
     {
-      "Key": "CatchErrorStart",
-      "Value": "KillSwitch: Catch error started {0}/{1}"
+      "Key": "RequestHumanDistance",
+      "Value": "Request human distance of pokestops..."
     },
     {
-      "Key": "CatchEscapeStart",
-      "Value": "KillSwitch: Catch escape started {0}/{1}"
-    },
-    {
-      "key": "CatchFleeStart",
-      "Value": "KillSwitch: Catch flee started {0}/{1}"
-    },
-    {
-      "Key": "CatchMissedStart",
-      "Value": "KillSwitch: Catch missed started {0}/{1}"
-    },
-    {
-      "Key": "CatchSuccessStart",
-      "Value": "KillSwitch: Catch success started {0}/{1}"
+      "Key": "CalculatingNextPokestop",
+      "Value": "Calculating next pokestop..."
     }
   ],
   "PokemonStrings": [

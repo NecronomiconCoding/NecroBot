@@ -29,13 +29,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-
-            session.EventDispatcher.Send(new SpinProgressBarEvent
-            {
-                Message = "Search human distance of pokestops...",
-                IsWorking = true
-            });
-
+            
             var distanceFromStart = LocationUtils.RequestDistanceInMeters(
                 session.Settings.DefaultLatitude, session.Settings.DefaultLongitude,
                 session.Client.CurrentLatitude, session.Client.CurrentLongitude);
@@ -59,6 +53,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                     cancellationToken);
             }
 
+            session.EventDispatcher.Send(new SpinProgressBarEvent
+            {
+                Message = session.Translation.GetTranslation(TranslationString.RequestHumanDistance),
+                IsWorking = true
+            });
+
             var pokestopList = await GetPokeStops(session);
             var stopsHit = 0;
             var RandomStop = 0;
@@ -77,10 +77,17 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
 
             session.EventDispatcher.Send(new PokeStopListEvent {Forts = pokestopList});
+            session.EventDispatcher.Send(new SpinProgressBarEvent { IsWorking = false });
 
             while (pokestopList.Any())
             {
                 cancellationToken.ThrowIfCancellationRequested();
+
+                session.EventDispatcher.Send(new SpinProgressBarEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.CalculatingNextPokestop),
+                    IsWorking = true
+                });
 
                 //resort
                 pokestopList =
@@ -269,7 +276,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters ||
                         session.LogicSettings.MaxTravelDistanceInMeters == 0) 
                 );
-
+            
             return pokeStops.ToList();
         }
     }

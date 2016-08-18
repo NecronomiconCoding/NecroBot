@@ -28,7 +28,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchErrorStart,
+                        TranslationString.CatchErrorState,
                         CountCatchError, session.LogicSettings.CatchErrorPerHours),
                 });
                 return;
@@ -81,7 +81,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchEscapeStart,
+                        TranslationString.CatchEscapeState,
                         CountCatchEscape, session.LogicSettings.CatchEscapePerHours),
                 });
                 return;
@@ -134,7 +134,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchFleeStart,
+                        TranslationString.CatchFleeState,
                         CountCatchFlee, session.LogicSettings.CatchFleePerHours),
                 });
                 return;
@@ -187,7 +187,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchMissedStart,
+                        TranslationString.CatchMissedState,
                         CountCatchMissed, session.LogicSettings.CatchMissedPerHours),
                 });
                 return;
@@ -240,7 +240,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchSuccessStart,
+                        TranslationString.CatchSuccessState,
                         CountCatchSuccess, session.LogicSettings.CatchSuccessPerHours),
                 });
                 return;

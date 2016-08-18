@@ -208,23 +208,20 @@ namespace PoGo.NecroBot.Logic.Common
         CatchErrorExceeded,
         CatchErrorReset,
         CatchErrorState,
-        CatchErrorStart,
         CatchEscapeExceeded,
         CatchEscapeReset,
         CatchEscapeState,
-        CatchEscapeStart,
         CatchFleeExceeded,
         CatchFleeReset,
         CatchFleeState,
-        CatchFleeStart,
         CatchMissedExceeded,
         CatchMissedReset,
         CatchMissedState,
-        CatchMissedStart,
         CatchSuccessExceeded,
         CatchSuccessReset,
         CatchSuccessState,
-        CatchSuccessStart
+        RequestHumanDistance,
+        CalculatingNextPokestop
     }
 
     public class Translation : ITranslation
@@ -504,23 +501,20 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.CatchErrorExceeded, "KillSwitch: Catch error exceeded {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchErrorReset, "KillSwitch: Catch error restarted {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchErrorState, "KillSwitch: Catch error {0}/{1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CatchErrorStart, "KillSwitch: Catch error {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchEscapeExceeded, "KillSwitch: Catch escape exceeded {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchEscapeReset, "KillSwitch: Catch escape restarted {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchEscapeState, "KillSwitch: Catch escape {0}/{1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CatchEscapeStart, "KillSwitch: Catch escape {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchFleeExceeded, "KillSwitch: Catch flee exceeded {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchFleeReset, "KillSwitch: Catch flee restarted {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchFleeState, "KillSwitch: Catch flee {0}/{1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CatchFleeStart, "KillSwitch: Catch flee {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchMissedExceeded, "KillSwitch: Catch missed exceeded {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchMissedReset, "KillSwitch: Catch missed restarted {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchMissedState, "KillSwitch: Catch missed {0}/{1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CatchMissedStart, "KillSwitch: Catch missed {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchSuccessExceeded, "KillSwitch: Catch success exceeded {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchSuccessReset, "KillSwitch: Catch success restarted {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchSuccessState, "KillSwitch: Catch success {0}/{1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CatchSuccessStart, "KillSwitch: Catch success {0}/{1}")
+            new KeyValuePair<TranslationString, string>(TranslationString.RequestHumanDistance, "Request human distance of pokestops..."),
+            new KeyValuePair<TranslationString, string>(TranslationString.CalculatingNextPokestop, "Calculating next pokestop...")
         };
 
         [JsonProperty("PokemonStrings",

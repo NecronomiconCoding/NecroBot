@@ -717,24 +717,12 @@
       "Value": "KillSwitch: Capturas com sucesso {0}/{1}"
     },
     {
-      "Key": "CatchErrorStart",
-      "Value": "KillSwitch: Erro de capturas {0}/{1}"
+      "Key": "RequestHumanDistance",
+      "Value": "Buscando distâncias humanas dos pokestops..."
     },
     {
-      "Key": "CatchEscapeStart",
-      "Value": "KillSwitch: Capturas escapou {0}/{1}"
-    },
-    {
-      "key": "CatchFleeStart",
-      "Value": "KillSwitch: Capturas com fuga {0}/{1}"
-    },
-    {
-      "Key": "CatchMissedStart",
-      "Value": "KillSwitch: Capturas perdidas {0}/{1}"
-    },
-    {
-      "Key": "CatchSuccessStart",
-      "Value": "KillSwitch: Capturas com sucesso {0}/{1}"
+      "Key": "CalculatingNextPokestop",
+      "Value": "Calculndo próximo pokestop..."
     }
   ],
   "PokemonStrings": [

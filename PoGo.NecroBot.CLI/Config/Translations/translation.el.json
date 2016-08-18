@@ -489,24 +489,12 @@
       "Value": "Διακόπτης Τερματισμού: Κατάσταση επιτυχημένων πιασίματων {0}/{1}"
     },
     {
-      "Key": "CatchErrorStart",
-      "Value": "Διακόπτης Τερματισμού: Εκκίνηση βλάβης πιασιμάτων {0}/{1}"
+      "Key": "RequestHumanDistance",
+      "Value": "Request human distance of pokestops..."
     },
     {
-      "Key": "CatchEscapeStart",
-      "Value": "Διακόπτης Τερματισμού: Εκκίνηση δραπέτευσης πιασιμάτων {0}/{1}"
-    },
-    {
-      "key": "CatchFleeStart",
-      "Value": "Διακόπτης Τερματισμού: Εκκίνηση διαφυγής πιασιμάτων {0}/{1}"
-    },
-    {
-      "Key": "CatchMissedStart",
-      "Value": "Διακόπτης Τερματισμού: Εκκίνηση αστοχιών πιασιμάτων {0}/{1}"
-    },
-    {
-      "Key": "CatchSuccessStart",
-      "Value": "Διακόπτης Τερματισμού: Εκκίνηση επιτυχημένων πιασιμάτων {0}/{1}"
+      "Key": "CalculatingNextPokestop",
+      "Value": "Calculating next pokestop..."
     }
   ],
 	"PokemonStrings": [
