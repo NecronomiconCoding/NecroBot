@@ -38,11 +38,9 @@ namespace PoGo.NecroBot.CLI
         private static void HandleEvent(WarnEvent warnEvent, ISession session)
         {
             Logger.Write(warnEvent.ToString(), LogLevel.Warning);
-            // If the event requires no input return.
+
             if (!warnEvent.RequireInput) return;
-            // Otherwise require input.
-            Logger.Write(session.Translation.GetTranslation(TranslationString.RequireInputText));
-            Console.ReadKey();
+            Logger.Write(session.Translation.GetTranslation(TranslationString.RequireInputText), LogLevel.Warning);
         }
 
         private static void HandleEvent(UseLuckyEggEvent useLuckyEggEvent, ISession session)
@@ -97,6 +95,9 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(FortUsedEvent fortUsedEvent, ISession session)
         {
+            if (session.LogicSettings.UseKillSwitchPokestops)
+                session.KillSwitch.Pokestops(session);
+
             var itemString = fortUsedEvent.InventoryFull
                 ? session.Translation.GetTranslation(TranslationString.InvFullPokestopLooting)
                 : fortUsedEvent.Items;

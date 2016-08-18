@@ -32,6 +32,7 @@ namespace PoGo.NecroBot.Logic
         public string GooglePassword;
         public string PtcUsername;
         public string PtcPassword;
+        public string GoogleAPIKey;
     }
 
     public class ProxyConfig
@@ -1270,6 +1271,7 @@ namespace PoGo.NecroBot.Logic
             _settings = settings;
         }
 
+        public string GoogleAPIKey => _settings.Auth.AuthConfig.GoogleAPIKey;
         public string ProfilePath => _settings.ProfilePath;
         public string ProfileConfigPath => _settings.ProfileConfigPath;
         public string GeneralConfigPath => _settings.GeneralConfigPath;

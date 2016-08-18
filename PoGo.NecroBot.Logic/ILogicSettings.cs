@@ -74,6 +74,7 @@ namespace PoGo.NecroBot.Logic
 
     public interface ILogicSettings
     {
+        string GoogleAPIKey { get; }
         bool UseWebsocket { get; }
         bool CatchPokemon { get; }
         bool TransferWeakPokemon { get; }

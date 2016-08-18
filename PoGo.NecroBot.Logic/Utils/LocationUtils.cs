@@ -10,23 +10,6 @@ namespace PoGo.NecroBot.Logic.Utils
 {
     public static class LocationUtils
     {
-        public static double RequestDistanceInMeters(double sourceLat, double sourceLng, double destLat,
-            double destLng)
-        {
-            var sourceLocation = new GeoCoordinate(sourceLat, sourceLng);
-            var targetLocation = new GeoCoordinate(destLat, destLng);
-
-            return RequestDistanceInMeters(sourceLocation, targetLocation);
-        }
-
-        public static double RequestDistanceInMeters(GeoCoordinate start, GeoCoordinate dest)
-        {
-            XDocument doc = XDocument.Load(
-                    $"http://www.yournavigation.org/api/dev/route.php?flat={start.Latitude}&flon={start.Longitude}&tlat={dest.Latitude}&tlon={dest.Longitude}&v=bicycle&fast=1&layer=mapnik");
-            XNamespace kmlns = XNamespace.Get("http://earth.google.com/kml/2.0");
-            return double.Parse(doc.Element(kmlns + "kml").Element(kmlns + "Document").Element(kmlns + "distance").Value.ToString()) * 1000;
-        }
-
         public static double CalculateDistanceInMeters(double sourceLat, double sourceLng, double destLat,
             double destLng)
             // from http://stackoverflow.com/questions/6366408/calculating-distance-between-two-latitude-and-longitude-geocoordinates

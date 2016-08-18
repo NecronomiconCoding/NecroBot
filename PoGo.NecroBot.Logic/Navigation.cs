@@ -13,6 +13,9 @@ using PoGo.NecroBot.Logic.Event;
 using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
+using System.Net;
+using Newtonsoft.Json.Linq;
+using System.IO;
 
 #endregion
 
@@ -101,37 +104,84 @@ namespace PoGo.NecroBot.Logic
 
             return CurrentWalkingSpeed / 3.6;
         }
-
+        
         private List<List<double>> Route(ISession session, GeoCoordinate start, GeoCoordinate dest)
         {
-            List<List<double>> result = null;
-
+            List<List<double>> result = new List<List<double>>();
+            
             try
             {
-                XDocument doc = XDocument.Load(
-                    $"http://www.yournavigation.org/api/dev/route.php?flat={start.Latitude}&flon={start.Longitude}&tlat={dest.Latitude}&tlon={dest.Longitude}&v=bicycle&fast=1&layer=mapnik");
-                XNamespace kmlns = XNamespace.Get("http://earth.google.com/kml/2.0");
-                result = doc.Element(kmlns + "kml").Element(kmlns + "Document").Element(kmlns + "Folder")
-                    .Element(kmlns + "Placemark").Element(kmlns + "LineString").Element(kmlns + "coordinates")
-                    .Value.Trim()
-                    .Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries)
-                    .Select(pp =>
+                WebRequest web = WebRequest.Create(
+                    $"https://maps.googleapis.com/maps/api/directions/json?origin={start.Latitude},{start.Longitude}&destination={dest.Latitude},{dest.Longitude}&mode=walking&units=metric&key={session.LogicSettings.GoogleAPIKey}");
+                web.Credentials = CredentialCache.DefaultCredentials;
+
+                string strResponse = string.Empty;
+                using (WebResponse response = web.GetResponse())
+                {
+                    using (Stream stream = response.GetResponseStream())
                     {
-                        string[] parts = pp.Split(',');
-                        var coords = new List<double>();
-                        var latitude = double.Parse(parts[1], CultureInfo.InvariantCulture);
-                        var longitude = double.Parse(parts[0], CultureInfo.InvariantCulture);
-                        coords.Add(longitude);
-                        coords.Add(latitude);
-                        return coords;
-                    }).ToList<List<double>>();
+                        using (StreamReader reader = new StreamReader(stream))
+                            strResponse = reader.ReadToEnd();
+                    }
+                }
+
+                JObject parseObject = JObject.Parse(strResponse);
+                result = Points(parseObject["routes"][0]["overview_polyline"]["points"].ToString(), 1e5);
             }
-            catch (Exception ex)
+            catch (WebException e)
             {
                 session.EventDispatcher.Send(new WarnEvent
                 {
-                    Message = "Route Error: " + ex.Message
+                    Message = $"Web Exception: {e.Message}"
                 });
+            }
+            catch (NullReferenceException e)
+            {
+                session.EventDispatcher.Send(new WarnEvent
+                {
+                    Message = $"Routing Error: {e.Message}"
+                });
+            }
+
+            return result;
+        }
+
+        public static List<List<double>> Points(string overview, double precision)
+        {
+            if (string.IsNullOrEmpty(overview))
+                throw new ArgumentNullException("Points");
+            
+            bool polyline = false;
+            int index = 0, lat = 0, lng = 0;
+            char[] polylineChars = overview.ToCharArray();
+            List<List<double>> result = new List<List<double>>();
+
+            while (index < polylineChars.Length)
+            {
+                int sum = 0, shifter = 0, nextBits;
+                List<double> coordinates = new List<double>();
+
+                do
+                {
+                    nextBits = polylineChars[index++] - 63;
+                    sum |= (nextBits & 0x1f) << shifter;
+                    shifter += 5;
+                } while (nextBits >= 0x20 && index < polylineChars.Length);
+
+                if (index >= polylineChars.Length && (!polyline || nextBits >= 0x20))
+                    break;
+
+                if (!polyline)
+                    lat += (sum & 1) == 1 ? ~(sum >> 1) : (sum >> 1);
+                else
+                {
+                    lng += (sum & 1) == 1 ? ~(sum >> 1) : (sum >> 1);
+                    coordinates.Add(lng / precision);
+                    coordinates.Add(lat / precision);
+                    result.Add(coordinates);
+                }
+
+                polyline = !polyline;
             }
 
             return result;
