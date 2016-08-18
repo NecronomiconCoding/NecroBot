@@ -95,9 +95,6 @@ namespace PoGo.NecroBot.CLI
 
         private static void HandleEvent(FortUsedEvent fortUsedEvent, ISession session)
         {
-            if (session.LogicSettings.UseKillSwitchPokestops)
-                session.KillSwitch.Pokestops(session);
-
             var itemString = fortUsedEvent.InventoryFull
                 ? session.Translation.GetTranslation(TranslationString.InvFullPokestopLooting)
                 : fortUsedEvent.Items;

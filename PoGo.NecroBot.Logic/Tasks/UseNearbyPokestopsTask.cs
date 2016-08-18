@@ -56,6 +56,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Latitude = pokeStop.Latitude,
                         Longitude = pokeStop.Longitude
                     });
+
+                    if (session.LogicSettings.UseKillSwitchPokestops)
+                        session.KillSwitch.Pokestops(session);
                 }
             }
         }
