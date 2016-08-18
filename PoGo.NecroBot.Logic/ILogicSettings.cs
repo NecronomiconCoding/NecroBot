@@ -194,6 +194,8 @@ namespace PoGo.NecroBot.Logic
         int CatchFleePerHours { get; }
         int CatchMissedPerHours { get; }
         int CatchSuccessPerHours { get; }
+        bool UseKillSwitchPokestops { get; }
+        int AmountPokestops { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }

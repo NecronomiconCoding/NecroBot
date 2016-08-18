@@ -448,6 +448,8 @@ namespace PoGo.NecroBot.Logic
         public int CatchFleePerHours = 40;
         public int CatchMissedPerHours = 40;
         public int CatchSuccessPerHours = 40;
+        public bool UseKillSwitchPokestops = true;
+        public int AmountPokestops = 80;
     }
 
     public class GlobalSettings
@@ -1360,6 +1362,8 @@ namespace PoGo.NecroBot.Logic
         public int CatchFleePerHours => _settings.SoftBanSettings.CatchFleePerHours;
         public int CatchMissedPerHours => _settings.SoftBanSettings.CatchMissedPerHours;
         public int CatchSuccessPerHours => _settings.SoftBanSettings.CatchSuccessPerHours;
+        public bool UseKillSwitchPokestops => _settings.SoftBanSettings.UseKillSwitchPokestops;
+        public int AmountPokestops => _settings.SoftBanSettings.AmountPokestops;
         public ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter => _settings.ItemRecycleFilter;
         public ICollection<PokemonId> PokemonsToEvolve => _settings.PokemonsToEvolve;
         public ICollection<PokemonId> PokemonsToLevelUp => _settings.PokemonsToLevelUp;

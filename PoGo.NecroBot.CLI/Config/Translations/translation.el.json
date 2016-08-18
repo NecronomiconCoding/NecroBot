@@ -429,64 +429,28 @@
       "Value": "Πιθανότατα μόνιμο Ban!"
     },
     {
-      "Key": "CatchErrorExceeded",
-      "Value": "Διακόπτης Τερματισμού: Υπέρβαση σφάλματος πιασίματος {0}/{1}"
-    },
-    {
-      "Key": "CatchErrorReset",
-      "Value": "Διακόπτης Τερματισμού: Επανεκκίνηση σφάλματος πιασίματος {0}/{1}"
-    },
-    {
-      "Key": "CatchErrorState",
+      "Key": "CatchErrorKillSwitch",
       "Value": "Διακόπτης Τερματισμού: Κατάσταση σφάλματος πιασίματος {0}/{1}"
     },
     {
-      "Key": "CatchEscapeExceeded",
-      "Value": "Διακόπτης Τερματισμού: Υπέρβαση αποφυγής κατά τα πιασίματα {0}/{1}"
-    },
-    {
-      "Key": "CatchEscapeReset",
-      "Value": "Διακόπτης Τερματισμού: Επανεκκίνηση αποφυγής κατά τα πιασίματα {0}/{1}"
-    },
-    {
-      "Key": "CatchEscapeState",
+      "Key": "CatchEscapeKillSwitch",
       "Value": "Διακόπτης Τερματισμού: Κατάσταση αποφυγής κατά τα πιασίματα {0}/{1}"
     },
     {
-      "Key": "CatchFleeExceeded",
-      "Value": "Διακόπτης Τερματισμού: Υπέρβαση δραπέτευσης κατά το πιάσιμο {0}/{1}"
-    },
-    {
-      "Key": "CatchFleeReset",
-      "Value": "Διακόπτης Τερματισμού: Επανεκκίνηση δραπέτευσης κατά το πιάσιμο {0}/{1}"
-    },
-    {
-      "Key": "CatchFleeState",
+      "Key": "CatchFleeKillSwitch",
       "Value": "Διακόπτης Τερματισμού: Κατάσταση δραπέτευσης κατά το πιάσιμο {0}/{1}"
     },
     {
-      "Key": "CatchMissedExceeded",
-      "Value": "Διακόπτης Τερματισμού: Υπέρβαση αστοχιών κατά το πιάσιμο {0}/{1}"
-    },
-    {
-      "Key": "CatchMissedReset",
-      "Value": "Διακόπτης Τερματισμού: Επανεκκίνηση αστοχιών κατά το πιάσιμο {0}/{1}"
-    },
-    {
-      "Key": "CatchMissedState",
+      "Key": "CatchMissedKillSwitch",
       "Value": "Διακόπτης Τερματισμού: Κατάσταση αστοχιών κατά το πιάσιμο {0}/{1}"
     },
     {
-      "Key": "CatchSuccessExceeded",
-      "Value": "Διακόπτης Τερματισμού: Υπέρβαση επιτυχημένων πιασίματων {0}/{1}"
-    },
-    {
-      "Key": "CatchSuccessReset",
-      "Value": "Διακόπτης Τερματισμού: Επανεκκίνηση επιτυχημένων πιασίματων {0}/{1}"
-    },
-    {
-      "Key": "CatchSuccessState",
+      "Key": "CatchSuccessKillSwitch",
       "Value": "Διακόπτης Τερματισμού: Κατάσταση επιτυχημένων πιασίματων {0}/{1}"
+    },
+    {
+      "Key": "PokestopsKillSwitch",
+      "Value": "KillSwitch: Pokestops {0}/{1}"
     },
     {
       "Key": "RequestHumanDistance",

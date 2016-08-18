@@ -17,22 +17,15 @@ namespace PoGo.NecroBot.Logic
         private int CountCatchMissed;
         private DateTime CatchSuccessHours;
         private int CountCatchSuccess;
-                
+        private DateTime PokestopsHours;
+        private int CountPokestops;
+
         public void CatchError(ISession session)
         {
             CountCatchError++;
 
             if (CatchErrorHours == DateTime.MinValue)
-            {
                 CatchErrorHours = DateTime.Now;
-                session.EventDispatcher.Send(new KillSwitchEvent
-                {
-                    Message = session.Translation.GetTranslation(
-                        TranslationString.CatchErrorState,
-                        CountCatchError, session.LogicSettings.CatchErrorPerHours),
-                });
-                return;
-            }
             
             var requestHours = (DateTime.Now - CatchErrorHours).TotalHours;
             if (requestHours <= 1 && CountCatchError >= session.LogicSettings.CatchErrorPerHours)
@@ -40,7 +33,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchErrorExceeded,
+                        TranslationString.CatchErrorKillSwitch,
                         CountCatchError, session.LogicSettings.CatchErrorPerHours),
                     RequireStop = true
                 });
@@ -56,7 +49,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchErrorReset,
+                        TranslationString.CatchErrorKillSwitch,
                         CountCatchError, session.LogicSettings.CatchErrorPerHours),
                 });
             }
@@ -65,7 +58,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchErrorState,
+                        TranslationString.CatchErrorKillSwitch,
                         CountCatchError, session.LogicSettings.CatchErrorPerHours),
                 });
             }
@@ -76,16 +69,7 @@ namespace PoGo.NecroBot.Logic
             CountCatchEscape++;
 
             if (CatchEscapeHours == DateTime.MinValue)
-            {
                 CatchEscapeHours = DateTime.Now;
-                session.EventDispatcher.Send(new KillSwitchEvent
-                {
-                    Message = session.Translation.GetTranslation(
-                        TranslationString.CatchEscapeState,
-                        CountCatchEscape, session.LogicSettings.CatchEscapePerHours),
-                });
-                return;
-            }
             
             var requestHours = (DateTime.Now - CatchEscapeHours).TotalHours;
             if (requestHours <= 1 && CountCatchEscape >= session.LogicSettings.CatchEscapePerHours)
@@ -93,7 +77,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchEscapeExceeded,
+                        TranslationString.CatchEscapeKillSwitch,
                         CountCatchEscape, session.LogicSettings.CatchEscapePerHours),
                     RequireStop = true
                 });
@@ -109,7 +93,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchEscapeReset,
+                        TranslationString.CatchEscapeKillSwitch,
                         CountCatchError, session.LogicSettings.CatchEscapePerHours),
                 });
             }
@@ -118,7 +102,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchEscapeState,
+                        TranslationString.CatchEscapeKillSwitch,
                         CountCatchEscape, session.LogicSettings.CatchEscapePerHours),
                 });
             }
@@ -129,16 +113,7 @@ namespace PoGo.NecroBot.Logic
             CountCatchFlee++;
 
             if (CatchFleeHours == DateTime.MinValue)
-            {
                 CatchFleeHours = DateTime.Now;
-                session.EventDispatcher.Send(new KillSwitchEvent
-                {
-                    Message = session.Translation.GetTranslation(
-                        TranslationString.CatchFleeState,
-                        CountCatchFlee, session.LogicSettings.CatchFleePerHours),
-                });
-                return;
-            }
                         
             var requestHours = (DateTime.Now - CatchFleeHours).TotalHours;
             if (requestHours <= 1 && CountCatchFlee >= session.LogicSettings.CatchFleePerHours)
@@ -146,7 +121,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchFleeExceeded,
+                        TranslationString.CatchFleeKillSwitch,
                         CountCatchFlee, session.LogicSettings.CatchFleePerHours),
                     RequireStop = true
                 });
@@ -162,7 +137,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchFleeReset,
+                        TranslationString.CatchFleeKillSwitch,
                         CountCatchFlee, session.LogicSettings.CatchFleePerHours),
                 });
             }
@@ -171,7 +146,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchFleeState,
+                        TranslationString.CatchFleeKillSwitch,
                         CountCatchFlee, session.LogicSettings.CatchFleePerHours),
                 });
             }
@@ -182,16 +157,7 @@ namespace PoGo.NecroBot.Logic
             CountCatchMissed++;
 
             if (CatchMissedHours == DateTime.MinValue)
-            {
                 CatchMissedHours = DateTime.Now;
-                session.EventDispatcher.Send(new KillSwitchEvent
-                {
-                    Message = session.Translation.GetTranslation(
-                        TranslationString.CatchMissedState,
-                        CountCatchMissed, session.LogicSettings.CatchMissedPerHours),
-                });
-                return;
-            }
             
             var requestHours = (DateTime.Now - CatchMissedHours).TotalHours;
             if (requestHours <= 1 && CountCatchMissed >= session.LogicSettings.CatchMissedPerHours)
@@ -199,7 +165,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchMissedExceeded,
+                        TranslationString.CatchMissedKillSwitch,
                         CountCatchMissed, session.LogicSettings.CatchMissedPerHours),
                     RequireStop = true
                 });
@@ -215,7 +181,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchMissedReset,
+                        TranslationString.CatchMissedKillSwitch,
                         CountCatchMissed, session.LogicSettings.CatchMissedPerHours),
                 });
             }
@@ -224,7 +190,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchMissedState,
+                        TranslationString.CatchMissedKillSwitch,
                         CountCatchMissed, session.LogicSettings.CatchMissedPerHours),
                 });
             }
@@ -235,16 +201,7 @@ namespace PoGo.NecroBot.Logic
             CountCatchSuccess++;
 
             if (CatchSuccessHours == DateTime.MinValue)
-            {
                 CatchSuccessHours = DateTime.Now;
-                session.EventDispatcher.Send(new KillSwitchEvent
-                {
-                    Message = session.Translation.GetTranslation(
-                        TranslationString.CatchSuccessState,
-                        CountCatchSuccess, session.LogicSettings.CatchSuccessPerHours),
-                });
-                return;
-            }
             
             var requestHours = (DateTime.Now - CatchSuccessHours).TotalHours;
             if (requestHours <= 1 && CountCatchSuccess >= session.LogicSettings.CatchSuccessPerHours)
@@ -252,7 +209,7 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchSuccessExceeded,
+                        TranslationString.CatchSuccessKillSwitch,
                         CountCatchSuccess, session.LogicSettings.CatchSuccessPerHours),
                     RequireStop = true
                 });
@@ -268,18 +225,63 @@ namespace PoGo.NecroBot.Logic
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchSuccessReset,
+                        TranslationString.CatchSuccessKillSwitch,
                         CountCatchSuccess, session.LogicSettings.CatchSuccessPerHours),
                 });
             }
             else
             {
-            
                 session.EventDispatcher.Send(new KillSwitchEvent
                 {
                     Message = session.Translation.GetTranslation(
-                        TranslationString.CatchSuccessState,
+                        TranslationString.CatchSuccessKillSwitch,
                         CountCatchSuccess, session.LogicSettings.CatchSuccessPerHours),
+                });
+            }
+        }
+
+        
+
+        public void Pokestops(ISession session)
+        {
+            CountPokestops++;
+
+            if (PokestopsHours == DateTime.MinValue)
+                PokestopsHours = DateTime.Now;
+
+            var requestHours = (DateTime.Now - PokestopsHours).TotalHours;
+            if (requestHours <= 1 && CountPokestops >= session.LogicSettings.AmountPokestops)
+            {
+                session.EventDispatcher.Send(new KillSwitchEvent
+                {
+                    Message = session.Translation.GetTranslation(
+                        TranslationString.PokestopsKillSwitch,
+                        CountPokestops, session.LogicSettings.AmountPokestops),
+                    RequireStop = true
+                });
+
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
+            else if (requestHours >= 1 && CountPokestops < session.LogicSettings.AmountPokestops)
+            {
+                CountPokestops = 1;
+                PokestopsHours = DateTime.Now;
+
+                session.EventDispatcher.Send(new KillSwitchEvent
+                {
+                    Message = session.Translation.GetTranslation(
+                        TranslationString.PokestopsKillSwitch,
+                        CountPokestops, session.LogicSettings.AmountPokestops),
+                });
+            }
+            else
+            {
+                session.EventDispatcher.Send(new KillSwitchEvent
+                {
+                    Message = session.Translation.GetTranslation(
+                        TranslationString.PokestopsKillSwitch,
+                        CountPokestops, session.LogicSettings.AmountPokestops),
                 });
             }
         }

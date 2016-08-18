@@ -199,6 +199,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         if ( fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull )
                             storeRI = 1;
 
+                        if (session.LogicSettings.UseKillSwitchPokestops)
+                            session.KillSwitch.Pokestops(session);
+
                         break; //Continue with program as loot was succesfull.
                     }
                 } while (fortTry < retryNumber - zeroCheck);
