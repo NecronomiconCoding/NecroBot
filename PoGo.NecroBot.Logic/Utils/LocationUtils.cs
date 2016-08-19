@@ -17,13 +17,12 @@ namespace PoGo.NecroBot.Logic.Utils
             var sourceLocation = new GeoCoordinate(sourceLat, sourceLng);
             var targetLocation = new GeoCoordinate(destLat, destLng);
 
-            return sourceLocation.GetDistanceTo(targetLocation);
+            return CalculateDistanceInMeters(sourceLocation, targetLocation);
         }
 
         public static double CalculateDistanceInMeters(GeoCoordinate sourceLocation, GeoCoordinate destinationLocation)
         {
-            return CalculateDistanceInMeters(sourceLocation.Latitude, sourceLocation.Longitude,
-                destinationLocation.Latitude, destinationLocation.Longitude);
+            return sourceLocation.GetDistanceTo(destinationLocation);
         }
 
         public static double getElevation(double lat, double lon)

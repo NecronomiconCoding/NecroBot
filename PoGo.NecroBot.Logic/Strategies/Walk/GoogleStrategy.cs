@@ -55,7 +55,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
                 sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
 
                 var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, nextStep);
-                var nextWaypointDistance = speedInMetersPerSecond;
+                var nextWaypointDistance = LocationUtils.CalculateDistanceInMeters(sourceLocation, nextStep);
                 var waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
 
                 var requestSendDateTime = DateTime.Now;
