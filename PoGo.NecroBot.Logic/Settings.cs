@@ -851,6 +851,19 @@ namespace PoGo.NecroBot.Logic
             Auth.checkProxy(translator);
         }
 
+        public static void CheckGoogleAPI(ITranslation translator, GlobalSettings settings)
+        {
+            if (settings.Auth.AuthConfig.GoogleAPIKey == null)
+            {
+                Console.BackgroundColor = ConsoleColor.Black;
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine(translator.GetTranslation(TranslationString.GoogleAPIFailed), LogLevel.Warning);
+                Console.WriteLine(translator.GetTranslation(TranslationString.RequireInputText), LogLevel.Warning);
+                Console.ReadLine();
+                Environment.Exit(0);
+            }
+        }
+
         public static bool PromptForSetup(ITranslation translator)
         {
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartPrompt, "Y", "N"), LogLevel.Warning);

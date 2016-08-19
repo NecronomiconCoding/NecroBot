@@ -113,6 +113,8 @@ namespace PoGo.NecroBot.CLI
                 }
 
             }
+
+            GlobalSettings.CheckGoogleAPI(session.Translation, settings);
             ProgressBar.start("NecroBot is starting up", 10);
 
             session.Client.ApiFailure = new ApiFailureStrategy(session);

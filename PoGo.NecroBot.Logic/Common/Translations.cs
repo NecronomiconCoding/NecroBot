@@ -212,7 +212,8 @@ namespace PoGo.NecroBot.Logic.Common
         CatchSuccessKillSwitch,
         PokestopsKillSwitch,
         RequestHumanDistance,
-        CalculatingNextPokestop
+        CalculatingNextPokestop,
+        GoogleAPIFailed
     }
 
     public class Translation : ITranslation
@@ -496,7 +497,8 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.CatchSuccessKillSwitch, "KillSwitch: Catch success {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.PokestopsKillSwitch, "KillSwitch: Pokestops {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.RequestHumanDistance, "Request human distance of pokestops..."),
-            new KeyValuePair<TranslationString, string>(TranslationString.CalculatingNextPokestop, "Calculating next pokestop...")
+            new KeyValuePair<TranslationString, string>(TranslationString.CalculatingNextPokestop, "Calculating next pokestop..."),
+            new KeyValuePair<TranslationString, string>(TranslationString.GoogleAPIFailed, "You need to configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key")
         };
 
         [JsonProperty("PokemonStrings",
