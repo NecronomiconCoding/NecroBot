@@ -2,7 +2,7 @@
   "TranslationStrings": [
     {
       "Key": "GoogleAPIFailed",
-      "Value": "You need to configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Value": "Sem uma Api do Google, você terá o limite de cota livre de 2500, se atingir a cota máxima, tente mudar seu IP. Para configurar o \"GoogleAPIKey\", pegar a chave de API no link: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {
       "Key": "pokeball",
