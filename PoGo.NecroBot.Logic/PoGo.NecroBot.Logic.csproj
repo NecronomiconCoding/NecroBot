@@ -141,6 +141,7 @@
     <Compile Include="Event\InventoryListEvent.cs" />
     <Compile Include="Event\ItemRecycledEvent.cs" />
     <Compile Include="Event\KillSwitchEvent.cs" />
+    <Compile Include="Event\NewPathToDestinyEvent.cs" />
     <Compile Include="Event\NoPokeballEvent.cs" />
     <Compile Include="Event\SnipeEvent.cs" />
     <Compile Include="Event\SnipeModeEvent.cs" />
@@ -155,16 +156,67 @@
     <Compile Include="Event\UpdatePositionEvent.cs" />
     <Compile Include="Event\UseBerryEvent.cs" />
     <Compile Include="Event\EggIncubatorStatusEvent.cs" />
+    <Compile Include="Interfaces\Configuration\ILogicSettings.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="KillSwitch.cs" />
     <Compile Include="Localization\Localizer.cs" />
     <Compile Include="Logging\Logger.cs" />
-    <Compile Include="ILogicSettings.cs" />
+    <Compile Include="Model\Google\GoogleObjects\Address_Components.cs" />
+    <Compile Include="Model\Google\GoogleObjects\Bounds.cs" />
+    <Compile Include="Model\Google\GoogleObjects\DirectionsResponse.cs" />
+    <Compile Include="Model\Google\GoogleObjects\DistanceMatrixResponse.cs" />
+    <Compile Include="Model\Google\GoogleObjects\Element.cs" />
+    <Compile Include="Model\Google\GoogleObjects\Geo.cs" />
+    <Compile Include="Model\Google\GoogleObjects\GeocodedWaypoints.cs" />
+    <Compile Include="Model\Google\GoogleObjects\GeocodingResponse.cs" />
+    <Compile Include="Model\Google\GoogleObjects\Geometry.cs" />
+    <Compile Include="Model\Google\GoogleObjects\GoogleType.cs" />
+    <Compile Include="Model\Google\GoogleObjects\Leg.cs" />
+    <Compile Include="Model\Google\GoogleObjects\Polyline.cs" />
+    <Compile Include="Model\Google\GoogleObjects\Result.cs" />
+    <Compile Include="Model\Google\GoogleObjects\Route.cs" />
+    <Compile Include="Model\Google\GoogleObjects\Row.cs" />
+    <Compile Include="Model\Google\GoogleObjects\Step.cs" />
+    <Compile Include="Model\Google\GoogleObjects\ValueText.cs" />
+    <Compile Include="Model\Google\GoogleResult.cs" />
+    <Compile Include="Model\Google\GoogleWalk.cs" />
+    <Compile Include="Model\Google\Teste.cs" />
+    <Compile Include="Model\Location.cs" />
+    <Compile Include="Model\Settings\AuthConfig.cs" />
+    <Compile Include="Model\Settings\AuthSettings.cs" />
+    <Compile Include="Model\Settings\ClientSettings.cs" />
+    <Compile Include="Model\Settings\ConsoleConfig.cs" />
+    <Compile Include="Model\Settings\CustomCatchConfig.cs" />
+    <Compile Include="Model\Settings\DeviceConfig.cs" />
+    <Compile Include="Model\Settings\GlobalSettings.cs" />
+    <Compile Include="Model\Settings\GoogleWalkConfig.cs" />
+    <Compile Include="Model\Settings\GpxConfig.cs" />
+    <Compile Include="Model\Settings\Location.cs" />
+    <Compile Include="Model\Settings\LocationConfig.cs" />
+    <Compile Include="Model\Settings\PlayerConfig.cs" />
+    <Compile Include="Model\Settings\PokemonConfig.cs" />
+    <Compile Include="Model\Settings\ProxyConfig.cs" />
+    <Compile Include="Model\Settings\RecycleConfig.cs" />
+    <Compile Include="Model\Settings\SnipeConfig.cs" />
+    <Compile Include="Model\Settings\SnipeSettings.cs" />
+    <Compile Include="Model\Settings\SoftBanConfig.cs" />
+    <Compile Include="Model\Settings\TelegramConfig.cs" />
+    <Compile Include="Model\Settings\TransferFilter.cs" />
+    <Compile Include="Model\Settings\UpdateConfig.cs" />
+    <Compile Include="Model\Settings\WebsocketsConfig.cs" />
+    <Compile Include="Model\SnipeSettings.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="PoGoUtils\PokemonInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BotService.cs" />
+    <Compile Include="Service\DirectionsService.cs" />
     <Compile Include="Service\TelegramService.cs" />
+    <Compile Include="Model\Settings\LogicSettings.cs" />
+    <Compile Include="Strategies\Walk\FlyStrategy.cs" />
+    <Compile Include="Strategies\Walk\GoogleStrategy.cs" />
+    <Compile Include="Strategies\Walk\HumanPathWalkingStrategy.cs" />
+    <Compile Include="Strategies\Walk\HumanStrategy.cs" />
+    <Compile Include="Strategies\Walk\IWalkStrategy.cs" />
     <Compile Include="Tasks\EggsListTask.cs" />
     <Compile Include="Tasks\EvolveSpecificPokemonTask.cs" />
     <Compile Include="Tasks\FavoritePokemonTask.cs" />
@@ -173,7 +225,6 @@
     <Compile Include="Tasks\LevelUpPokemonTask.cs" />
     <Compile Include="Tasks\PokemonListTask.cs" />
     <Compile Include="Tasks\Farm.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="State\Session.cs" />
     <Compile Include="Event\ErrorEvent.cs" />
     <Compile Include="State\FarmState.cs" />
@@ -240,6 +291,7 @@
       <Name>POGOProtos</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

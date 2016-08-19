@@ -11,6 +11,8 @@ using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.Model.Google;
+using PoGo.NecroBot.Logic.Model.Settings;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Tasks;
 using PoGo.NecroBot.Logic.Utils;
@@ -92,6 +94,7 @@ namespace PoGo.NecroBot.CLI
 
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
 
+            Teste.Testar(session);
             if (boolNeedsSetup)
             {
                 if (GlobalSettings.PromptForSetup(session.Translation))
@@ -170,9 +173,8 @@ namespace PoGo.NecroBot.CLI
             Logger.SetLoggerContext(session);
             ProgressBar.fill(90);
 
-            session.Navigation.UpdatePositionEvent +=
-                (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent { Latitude = lat, Longitude = lng });
-            session.Navigation.UpdatePositionEvent += Navigation_UpdatePositionEvent;
+            session.Navigation.WalkStrategy.UpdatePositionEvent += (lat, lng) => session.EventDispatcher.Send(new UpdatePositionEvent { Latitude = lat, Longitude = lng });
+            session.Navigation.WalkStrategy.UpdatePositionEvent += Navigation_UpdatePositionEvent;
 
             ProgressBar.fill(100);
             

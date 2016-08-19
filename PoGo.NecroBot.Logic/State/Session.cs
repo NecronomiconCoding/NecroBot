@@ -2,6 +2,7 @@
 
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Interfaces.Configuration;
 using PoGo.NecroBot.Logic.Service;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
@@ -61,7 +62,7 @@ namespace PoGo.NecroBot.Logic.State
             Client = new Client(Settings, _apiStrategy);
             // ferox wants us to set this manually
             Inventory = new Inventory(Client, logicSettings);
-            Navigation = new Navigation(Client);
+            Navigation = new Navigation(Client, logicSettings);
             KillSwitch = new KillSwitch();
         }
     }

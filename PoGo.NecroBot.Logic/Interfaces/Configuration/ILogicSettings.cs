@@ -1,80 +1,16 @@
 #region using directives
 
 using System.Collections.Generic;
+using PoGo.NecroBot.Logic.Model.Settings;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 
 #endregion
 
-namespace PoGo.NecroBot.Logic
+namespace PoGo.NecroBot.Logic.Interfaces.Configuration
 {
-    public class Location
-    {
-        public Location()
-        {
-        }
-
-        public Location(double latitude, double longitude)
-        {
-            Latitude = latitude;
-            Longitude = longitude;
-        }
-
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-    }
-
-    public class SnipeSettings
-    {
-        public SnipeSettings()
-        {
-        }
-
-        public SnipeSettings(List<Location> locations, List<PokemonId> pokemon)
-        {
-            Locations = locations;
-            Pokemon = pokemon;
-        }
-
-        public List<Location> Locations { get; set; }
-        public List<PokemonId> Pokemon { get; set; }
-    }
-
-    public class TransferFilter
-    {
-        public TransferFilter()
-        {
-        }
-
-        public TransferFilter(int keepMinCp, int keepMinLvl, bool useKeepMinLvl, float keepMinIvPercentage, string keepMinOperator, int keepMinDuplicatePokemon,
-            List<List<PokemonMove>> moves = null, List<PokemonMove> deprecatedMoves = null, string movesOperator = "or")
-        {
-            KeepMinCp = keepMinCp;
-            KeepMinLvl = keepMinLvl;
-            UseKeepMinLvl = useKeepMinLvl;
-            KeepMinIvPercentage = keepMinIvPercentage;
-            KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
-            KeepMinOperator = keepMinOperator;
-            Moves = (moves == null && deprecatedMoves != null)
-                        ? new List<List<PokemonMove>> { deprecatedMoves }
-                        : moves ?? new List<List<PokemonMove>>();
-            MovesOperator = movesOperator;
-        }
-
-        public int KeepMinCp { get; set; }
-        public int KeepMinLvl { get; set; }
-        public bool UseKeepMinLvl { get; set; }
-        public float KeepMinIvPercentage { get; set; }
-        public int KeepMinDuplicatePokemon { get; set; }
-        public List<List<PokemonMove>> Moves { get; set; }
-        public List<PokemonMove> DeprecatedMoves { get; set; }
-        public string KeepMinOperator { get; set; }
-        public string MovesOperator { get; set; }
-    }
-
     public interface ILogicSettings
     {
-        string GoogleAPIKey { get; }
         bool UseWebsocket { get; }
         bool CatchPokemon { get; }
         bool TransferWeakPokemon { get; }
@@ -212,5 +148,9 @@ namespace PoGo.NecroBot.Logic
         SnipeSettings PokemonToSnipe { get; }
 
         bool StartupWelcomeDelay { get; }
+        bool UseGoogleWalk { get; }
+        bool UseGoogleWalkCache { get; }
+        string GoogleApiKey { get; }
+        string GoogleHeuristic { get; }
     }
 }

@@ -14,6 +14,7 @@ using Newtonsoft.Json.Linq;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.Model.Settings;
 using PoGo.NecroBot.Logic.Utils;
 
 #endregion

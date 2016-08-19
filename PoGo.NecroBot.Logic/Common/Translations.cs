@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using PoGo.NecroBot.Logic.Interfaces.Configuration;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.Utils;
 
@@ -498,7 +499,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.PokestopsKillSwitch, "KillSwitch: Pokestops {0}/{1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.RequestHumanDistance, "Request human distance of pokestops..."),
             new KeyValuePair<TranslationString, string>(TranslationString.CalculatingNextPokestop, "Calculating next pokestop..."),
-            new KeyValuePair<TranslationString, string>(TranslationString.GoogleAPIFailed, "You need to configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key")
+            new KeyValuePair<TranslationString, string>(TranslationString.GoogleAPIFailed, "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key")
         };
 
         [JsonProperty("PokemonStrings",
