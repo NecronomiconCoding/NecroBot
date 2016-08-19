@@ -11,7 +11,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         //https://developers.google.com/maps/documentation/directions/intro?hl=pt-br#TravelModes
         public string GoogleHeuristic = "walking";
         // If you have a key, nowadays a single contract is $16.000,00 USD. With a key you can deactivate Cache
-        public string GoogleKey = "";
+        public string GoogleAPIKey = "";
         public bool Cache = true;
     }
     

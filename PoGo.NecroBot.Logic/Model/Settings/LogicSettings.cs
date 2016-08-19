@@ -125,7 +125,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool StartupWelcomeDelay => _settings.ConsoleSettings.StartupWelcomeDelay;
         public bool UseGoogleWalk => _settings.GoogleWalkConfig.UseGoogleWalk;
         public bool UseGoogleWalkCache => _settings.GoogleWalkConfig.Cache;
-        public string GoogleApiKey => _settings.GoogleWalkConfig.GoogleKey;
+        public string GoogleApiKey => _settings.GoogleWalkConfig.GoogleAPIKey;
         public string GoogleHeuristic => _settings.GoogleWalkConfig.GoogleHeuristic;
         public bool SnipeAtPokestops => _settings.SnipingSettings.SnipeAtPokestops;
 

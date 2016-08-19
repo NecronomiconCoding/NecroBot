@@ -417,13 +417,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         public static void CheckGoogleAPI(ITranslation translator, GlobalSettings settings)
         {
-            if (settings.GoogleWalkConfig.UseGoogleWalk && string.IsNullOrEmpty(settings.GoogleWalkConfig.GoogleKey))
-            {
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine(translator.GetTranslation(TranslationString.GoogleAPIFailed), LogLevel.Warning);
-                Console.WriteLine(translator.GetTranslation(TranslationString.RequireInputText), LogLevel.Warning);
-            }
+            if (settings.GoogleWalkConfig.UseGoogleWalk && !settings.GPXSettings.UseGpxPathing)
+                Logger.Write(translator.GetTranslation(TranslationString.GoogleAPIFailed), LogLevel.Info, ConsoleColor.Red);
         }
 
         public static bool PromptForSetup(ITranslation translator)
