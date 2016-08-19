@@ -68,10 +68,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         }
 
                         var pokestopList = await GetPokeStops(session);
-                        session.EventDispatcher.Send(new PokeStopListEvent {Forts = pokestopList});
-
+                        
                         while (pokestopList.Any())
-                            // warning: this is never entered due to ps cooldowns from UseNearbyPokestopsTask 
+                        // warning: this is never entered due to ps cooldowns from UseNearbyPokestopsTask 
                         {
                             cancellationToken.ThrowIfCancellationRequested();
 
@@ -127,7 +126,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             await RecycleItemsTask.Execute(session, cancellationToken);
 
                             if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
-                                session.LogicSettings.EvolveAllPokemonAboveIv || 
+                                session.LogicSettings.EvolveAllPokemonAboveIv ||
                                 session.LogicSettings.UseLuckyEggsWhileEvolving ||
                                 session.LogicSettings.KeepPokemonsThatCanEvolve)
                             {
@@ -205,11 +204,11 @@ namespace PoGo.NecroBot.Logic.Tasks
         //so do not make it more than 40 because it will never get close to those stops.
         private static async Task<List<FortData>> GetPokeStops(ISession session)
         {
-            var mapObjects = await session.Client.Map.GetMapObjects();  
+            List<FortData> pokeStops = await UpdateFortsData(session);
+            session.EventDispatcher.Send(new PokeStopListEvent { Forts = pokeStops });
 
             // Wasn't sure how to make this pretty. Edit as needed.
-            var pokeStops = mapObjects.Item1.MapCells.SelectMany(i => i.Forts)
-                .Where(
+            pokeStops = pokeStops.Where(
                     i =>
                         i.Type == FortType.Checkpoint &&
                         i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
@@ -217,6 +216,25 @@ namespace PoGo.NecroBot.Logic.Tasks
                             LocationUtils.CalculateDistanceInMeters(
                                 session.Client.CurrentLatitude, session.Client.CurrentLongitude,
                                 i.Latitude, i.Longitude) < 40) ||
+                        session.LogicSettings.MaxTravelDistanceInMeters == 0
+                ).ToList();
+
+            return pokeStops.ToList();
+        }
+
+        private static async Task<List<FortData>> UpdateFortsData(ISession session)
+        {
+            var mapObjects = await session.Client.Map.GetMapObjects();
+            
+            var pokeStops = mapObjects.Item1.MapCells.SelectMany(i => i.Forts)
+                .Where(
+                    i =>
+                        i.Type == FortType.Checkpoint &&
+                        i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
+                        (
+                            LocationUtils.CalculateDistanceInMeters(
+                                session.Client.CurrentLatitude, session.Client.CurrentLongitude,
+                                i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters) ||
                         session.LogicSettings.MaxTravelDistanceInMeters == 0
                 );
 
