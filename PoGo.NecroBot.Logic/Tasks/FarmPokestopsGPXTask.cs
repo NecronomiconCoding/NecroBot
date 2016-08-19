@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using GeoCoordinatePortable;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
@@ -170,8 +171,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                             }
                         }
 
-                        await session.Navigation.HumanPathWalking(
-                            trackPoints.ElementAt(curTrkPt),
+                        var geo = new GeoCoordinate(Convert.ToDouble(trackPoints.ElementAt(curTrkPt).Lat, CultureInfo.InvariantCulture),
+                            Convert.ToDouble(trackPoints.ElementAt(curTrkPt).Lon, CultureInfo.InvariantCulture));
+
+                        await session.Navigation.Move(geo,
                             async () =>
                             {
                                 await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
