@@ -97,7 +97,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
 
                 if (functionExecutedWhileWalking != null)
                     await functionExecutedWhileWalking(); // look for pokemon & hit stops
-            } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
+            } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 2);
 
             return result;
         }
