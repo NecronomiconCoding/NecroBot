@@ -38,19 +38,19 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nama: {0} mendapatkan XP: {1}, Gem: {2}, barang: {3}, lintang: {4}, bujur: {5}"
+      "Value": "{0} | Dapat {1}xp, gem: {2}, barang: {3}, koordinat: {4}, {5}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Nama: {0} INFO: Gagal Mengambil barang, kemungkinan softban. Unban dalam: {1}/{2}"
+      "Value": "Pokestop {0} INFO: Gagal mengambil barang, kemungkinan Softban. Unban dalam: {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Berjalan ke PokeStop: {0} ({1} meter) ({2} detik)"
+      "Value": "Jalan ke PokeStop {0}, {1} meter, {2} detik"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Bermain sebagai {0}"
+      "Value": "Main sebagai {0}"
     },
     {
       "Key": "eventUsedIncense",
@@ -62,7 +62,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} berhasil dan dapat {1}xp"
+      "Value": "{0} berhasil berevolusi, dapat {1}xp"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -70,7 +70,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [CP terbaik: {3}  IV: {4}%] (Permen: {5})"
+      "Value": "{0}\tCP: {1} IV: {2}% | CP terbaik: {3} IV: {4}% | Permen {5}"
     },
     {
       "Key": "eventItemRecycled",
@@ -78,15 +78,15 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | mendapatkan: {11} EXP | {12} | lintang: {13} bujur: {14}"
+      "Value": "({0}) | ({1}) {2} Lv: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan {7}%, jarak {8} meter, pakai {9} (sisa {10}), dapat {11}xp | {12}, koordinat: {13}, {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lv: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan {7}%, jarak {8} meter, pakai {9} (sisa {10}), koordinat: {11}, {12}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Pokeball telah habis - {0} dengan CP {1} tidak dapat ditangkap"
+      "Value": "Pokeball habis - {0} dengan CP {1} tidak dapat ditangkap"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
@@ -102,7 +102,7 @@
     },
     {
       "Key": "eventUseBerry",
-      "Value": "Memakai {0} | {1} tersisa"
+      "Value": "Lempar {0}, sisa {1}"
     },
     {
       "Key": "itemRazzBerry",
@@ -110,7 +110,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Percobaan ke-{1} Hasil : {0}"
+      "Value": "Percobaan ke-{1} {0}"
     },
     {
       "Key": "catchStatus",
@@ -118,7 +118,7 @@
     },
     {
       "Key": "candies",
-      "Value": "Permen: {0}"
+      "Value": "Permen {0}"
     },
     {
       "Key": "unhandledGpxData",
@@ -138,7 +138,7 @@
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "Tidak diketahui"
+      "Value": "tidak diketahui"
     },
     {
       "Key": "displayHighestsCpHeader",
@@ -150,7 +150,7 @@
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Menampilkan level terbesar"
+      "Value": "Menampilkan level tertinggi"
     },
     {
       "Key": "welcomeWarning",
@@ -158,15 +158,15 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Memasukkan telur ke dalam inkubator: {0:0.00} KM tersisa"
+      "Value": "Telur masuk inkubator: {0:0.00}km tersisa"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Status terbaru inkubator: {0:0.00} KM tersisa"
+      "Value": "Status terbaru inkubator: {0:0.00}km tersisa"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Telur telah menetas:  {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "Telur menetas:  {0} | Lv: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -186,23 +186,23 @@
     },
     {
       "Key": "logEntryFarming",
-      "Value": "FARMING"
+      "Value": "PANEN"
     },
     {
       "Key": "logEntrySniper",
-      "Value": "BIDIKAN"
+      "Value": "BIDIK"
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "DAURULANG"
+      "Value": "BUANG"
     },
     {
       "Key": "logEntryPKMN",
-      "Value": "PKMN"
+      "Value": "LEMPAR"
     },
     {
       "Key": "logEntryTransfered",
-      "Value": "DITRANSFER"
+      "Value": "TRANSFER"
     },
     {
       "Key": "logEntryEvolved",
@@ -318,7 +318,7 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Kamu tidak memiliki PokeBall di inventaris, tidak dapat menangkap Pokemon lagi!"
+      "Value": "PokeBall dalam tas habis, tidak dapat menangkap Pokemon!"
     },
     {
       "Key": "currentPokeballInv",
@@ -338,23 +338,23 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[Konfigurasi Salah] Total barang maksimum kamu (ball+potion+revive={0}) melebihi kapasitas tasmu ({1})"
+      "Value": "[Konfigurasi Salah] Total barang (ball+potion+revive={0}) melebihi kapasitas tasmu ({1})"
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "Mendaur ulang secara senyap..."
+      "Value": "Buang diam-diam..."
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Kapasitas inventaris pokemon penuh. Mentransfer pokemon..."
+      "Value": "Kapasitas tas Pokemon penuh. Melakukan transfer..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value": "Kapasitas inventaris pokemon penuh. Transfer pokemon secara manual atau ubah TransferDuplicatePokemon menjadi true diberkas config.json"
+      "Value": "Kapasitas tas Pokemon penuh. Transfer Pokemon secara manual atau ubah TransferDuplicatePokemon jadi true pada berkas config.json"
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Inventaris penuh, barang tidak diambil!"
+      "Value": "Tas penuh, barang tidak diambil!"
     },
     {
       "Key": "encounterProblem",
@@ -362,7 +362,7 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Terjadi masalah pada: lure Pokemon {0}"
+      "Value": "Terjadi masalah pada: Lure Pokemon {0}"
     },
     {
       "Key": "desiredDestTooFar",
@@ -386,23 +386,23 @@
     },
     {
       "Key": "catchStatusError",
-      "Value": "Tangkapan Error"
+      "Value": "Error"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Tangkapan Lepas"
+      "Value": "Lepas"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "Tangkapan Kabur"
+      "Value": "Kabur"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "Tangkapan Gagal"
+      "Value": "Gagal"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "Tangkapan Berhasil"
+      "Value": "Berhasil"
     },
     {
       "Key": "catchTypeNormal",
@@ -422,11 +422,11 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Waktu aktif {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | Ditransfer: {6:n0} | Didaur ulang: {7:n0}"
+      "Value": "{0} - Waktu aktif {1} - Lv: {2} | xp/j: {3:n0} | P/j: {4:n0} | Stardust: {5:n0} | Ditransfer: {6:n0} | Dibuang: {7:n0}"
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- LVL {0} | {1} ----- \n EXP: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang ditransfer: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang dievolusikan: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9} KM \n Pokemon: {11}/{12}"
+      "Value": "----- Lv {0} | {1} ----- \n xp: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang ditransfer: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang berevolusi: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9}km \n Pokemon: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
@@ -470,11 +470,11 @@
     },
     {
       "Key": "snipeScan",
-      "Value": "Mencari Pokemon untuk dibidik di koordinat: {0}"
+      "Value": "Mencari Pokemon untuk dibidik pada koordinat: {0}"
     },
     {
       "Key": "snipeScanEx",
-      "Value": "Membidik {0} Nilai IV: {1} di koordinat: {2}"
+      "Value": "Membidik {0} | Nilai IV {1} pada koordinat: {2}"
     },
     {
       "Key": "noPokemonToSnipe",
@@ -482,7 +482,7 @@
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Tidak cukup Pokeball untuk memulai bidikan! ({0}/{1})"
+      "Value": "Tidak cukup Pokeball untuk dilempar! ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -502,35 +502,35 @@
     },
     {
       "Key": "noEggsAvailable",
-      "Value": "Tidak ada telur yang tersedia"
+      "Value": "Lucky Egg kosong"
     },
     {
       "Key": "useLuckyEggActive",
-      "Value": "Lucky Egg sudah aktif"
+      "Value": "Lucky Egg aktif"
     },
     {
       "Key": "usedLuckyEgg",
-      "Value": "Sebuah Lucky Egg terpakai"
+      "Value": "Lucky Egg digunakan"
     },
     {
       "Key": "useLuckyEggAmount",
-      "Value": "Lucky Egg di inventaris: {0}"
+      "Value": "Lucky Egg dalam tas: {0}"
     },
     {
       "Key": "noIncenseAvailable",
-      "Value": "Incense tidak tersedia"
+      "Value": "Incense kosong"
     },
     {
       "Key": "useIncenseActive",
-      "Value": "Incense sudah aktif"
+      "Value": "Incense aktif"
     },
     {
       "Key": "useIncenseAmount",
-      "Value": "Incense di inventaris: {0}"
+      "Value": "Incense dalam tas: {0}"
     },
     {
       "Key": "usedIncense",
-      "Value": "Sebuah incense terpakai"
+      "Value": "Incense digunakan"
     },
     {
       "Key": "amountPkmSeenCaught",
@@ -550,15 +550,15 @@
     },
     {
       "Key": "firstStartPrompt",
-      "Value": "Ini adalah pertama kalinya kamu menjalankan aplikasi, apakah kamu ingin memulai pengaturan? {0}/{1}"
+      "Value": "Ini pertama kalinya kamu menjalankan aplikasi, apa mau buka pengaturan? {0}/{1}"
     },
     {
       "Key": "firstStartLanguagePrompt",
-      "Value": "Apakah kamu ingin mengganti bahasa bawaan? {0}/{1}"
+      "Value": "Apa mau mengganti bahasa? {0}/{1}"
     },
     {
       "Key": "firstStartLanguageCodePrompt",
-      "Value": "Mohon masukkan kode bahasa baru"
+      "Value": "Silakan masukkan kode bahasa baru"
     },
     {
       "Key": "firstStartLanguageConfirm",
@@ -626,11 +626,11 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Value": "Silakan masukkan nilai lintang dan bujur - Format: Nilai lintang, nilai bujur"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Value": "Nilai lintang dan bujur yang diterima: {0}"
     },
     {
       "Key": "softBanBypassed",
@@ -694,55 +694,55 @@
     },
     {
       "Key": "HighestsPokemoCell",
-      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lv {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+      "Value": "Kecepatan jalan berubah, dari {0:n2} km/j ke {1:n2} km/j"
     },
-    {
+	    {
       "Key": "AccountBanned",
-      "Value": "Probably Permanent Ban!"
+      "Value": "Kemungkinan kamu kena Ban Permanen!"
     },
     {
       "Key": "CatchErrorExceeded",
-      "Value": "KillSwitch: Catch error exceeded {0}/{1}"
+      "Value": "KillSwitch: Tangkapan error melebihi {0}/{1}"
     },
     {
       "Key": "CatchErrorReset",
-      "Value": "KillSwitch: Catch error restarted {0}/{1}"
+      "Value": "KillSwitch: Tangkapan error yg mulai ulang {0}/{1}"
     },
     {
       "Key": "CatchErrorKillSwitch",
-      "Value": "KillSwitch: Catch error {0}/{1}"
+      "Value": "KillSwitch: Tangkapan error {0}/{1}"
     },
     {
       "Key": "CatchEscapeKillSwitch",
-      "Value": "KillSwitch: Catch escape {0}/{1}"
+      "Value": "KillSwitch: Tangkapan lepas {0}/{1}"
     },
     {
       "Key": "CatchFleeKillSwitch",
-      "Value": "KillSwitch: Catch flee {0}/{1}"
+      "Value": "KillSwitch: Tangkapan kabur {0}/{1}"
     },
     {
       "Key": "CatchMissedKillSwitch",
-      "Value": "KillSwitch: Catch missed {0}/{1}"
+      "Value": "KillSwitch: Tangkapan gagal {0}/{1}"
     },
     {
       "Key": "CatchSuccessKillSwitch",
-      "Value": "KillSwitch: Catch success {0}/{1}"
+      "Value": "KillSwitch: Tangkapan berhasil {0}/{1}"
     },
     {
       "Key": "PokestopsKillSwitch",
-      "Value": "KillSwitch: Pokestops {0}/{1}"
+      "Value": "KillSwitch: Pokestop {0}/{1}"
     },
     {
       "Key": "RequestHumanDistance",
-      "Value": "Request human distance of pokestops..."
+      "Value": "Meminta jarak wajar untuk Pokestop..."
     },
     {
       "Key": "CalculatingNextPokestop",
-      "Value": "Calculating next pokestop..."
+      "Value": "Menghitung jarak Pokestop selanjutnya..."
     }
   ],
 	"PokemonStrings": [
