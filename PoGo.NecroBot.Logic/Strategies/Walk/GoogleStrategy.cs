@@ -30,48 +30,75 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
         {
             _client = client;
         }
-
+        
         public async Task<PlayerUpdateResponse> Walk(GeoCoordinate targetLocation, Func<Task<bool>> functionExecutedWhileWalking, ISession session, CancellationToken cancellationToken)
         {
             GetGoogleInstance(session);
-
-            var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
+            var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude, _client.CurrentAltitude);
             var googleResult = _googleDirectionsService.GetDirections(sourceLocation, new List<GeoCoordinate>(), targetLocation);
 
             if (googleResult.Directions.status.Equals("OVER_QUERY_LIMIT"))
             {
                 return await RedirectToHumanStrategy(targetLocation, functionExecutedWhileWalking, session, cancellationToken);
             }
+            session.EventDispatcher.Send(new NewPathToDestinyEvent { GoogleData = googleResult });
 
             var googleWalk = GoogleWalk.Get(googleResult);
-            var distanceToTarget = googleResult.GetDistance();
 
-            PlayerUpdateResponse result;
+            PlayerUpdateResponse result = null;
+            List<GeoCoordinate> points = googleWalk.Waypoints;
 
-            do
+            foreach (var nextStep in points)
             {
+                var speedInMetersPerSecond = session.LogicSettings.UseWalkingSpeedVariant ? MajorWalkingSpeedVariant(session) :
+                session.LogicSettings.WalkingSpeedInKilometerPerHour / 3.6;
                 sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
-                var nextPoint = googleWalk.NextStep(sourceLocation);
 
-                var speedInMetersPerSecond = session.LogicSettings.UseWalkingSpeedVariant ? MajorWalkingSpeedVariant(session) : session.LogicSettings.WalkingSpeedInKilometerPerHour / 3.6;
-
-                var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, nextPoint);
+                var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, nextStep);
                 var nextWaypointDistance = speedInMetersPerSecond;
                 var waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
 
+                var requestSendDateTime = DateTime.Now;
                 result = await _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude, waypoint.Altitude);
 
                 UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
+
                 var realDistanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
-                if (realDistanceToTarget < 30)
+                if (realDistanceToTarget < 10)
                     break;
 
+                do
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
 
-                result = await GoToWaypoint(nextPoint, functionExecutedWhileWalking, session, cancellationToken, distanceToTarget);
+                    var millisecondsUntilGetUpdatePlayerLocationResponse = (DateTime.Now - requestSendDateTime).TotalMilliseconds;
 
-                distanceToTarget -= sourceLocation.GetDistanceTo(nextPoint);
-            } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30); // ->
+                    sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
+                    var currentDistanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, nextStep);
 
+                    var realDistanceToTargetSpeedDown = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
+                    if (realDistanceToTargetSpeedDown < 40)
+                        if (speedInMetersPerSecond > SpeedDownTo)
+                            speedInMetersPerSecond = SpeedDownTo;
+
+                    if (session.LogicSettings.UseWalkingSpeedVariant)
+                        speedInMetersPerSecond = MinorWalkingSpeedVariant(session);
+
+                    nextWaypointDistance = Math.Min(currentDistanceToTarget, millisecondsUntilGetUpdatePlayerLocationResponse / 1000 * speedInMetersPerSecond);
+                    nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, nextStep);
+                    waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
+
+                    requestSendDateTime = DateTime.Now;
+                    result = await _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude, waypoint.Altitude);
+
+                    UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
+
+                    if (functionExecutedWhileWalking != null)
+                        await functionExecutedWhileWalking(); // look for pokemon
+                } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, nextStep) >= 2);
+
+                UpdatePositionEvent?.Invoke(nextStep.Latitude, nextStep.Longitude);
+            }
 
             return result;
         }
@@ -102,8 +129,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
                 if (session.LogicSettings.UseWalkingSpeedVariant)
                     speedInMetersPerSecond = MinorWalkingSpeedVariant(session);
 
-                var nextWaypointDistance = Math.Min(currentDistanceToTarget,
-                    millisecondsUntilGetUpdatePlayerLocationResponse / 1000 * speedInMetersPerSecond);
+                var nextWaypointDistance = Math.Min(currentDistanceToTarget, millisecondsUntilGetUpdatePlayerLocationResponse / 1000 * speedInMetersPerSecond);
                 var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
                 var waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
 
