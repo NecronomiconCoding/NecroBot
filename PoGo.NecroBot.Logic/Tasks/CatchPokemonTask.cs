@@ -25,6 +25,31 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         private static Random Random => new Random((int)DateTime.Now.Ticks);
 
+        private static bool CatchThresholdExceeds(ISession session)
+        {
+            if (session.LogicSettings.CatchPokemonLimit == 0)
+            {
+                return false;
+            }
+            if (session.Stats.PokemonTimestamps.Count >= session.LogicSettings.CatchPokemonLimit)
+            {
+                // delete uesless data
+                int toRemove = session.Stats.PokemonTimestamps.Count - session.LogicSettings.CatchPokemonLimit;
+                if (toRemove > 0)
+                {
+                    session.Stats.PokemonTimestamps.RemoveRange(0, toRemove);
+                }
+                var sec = (DateTime.Now - new DateTime(session.Stats.PokemonTimestamps.First())).TotalSeconds;
+                var limit = session.LogicSettings.CatchPokemonLimitMinutes * 60;
+                if (sec < limit)
+                {
+                    session.EventDispatcher.Send(new ErrorEvent { Message = "You are catching too fast. Your cannot catch another one until " + (limit - sec) + " seconds later."});
+                    return true;
+                }
+            }
+            return false;
+        }
+
         public static async Task Execute(ISession session, CancellationToken cancellationToken, dynamic encounter, MapPokemon pokemon,
             FortData currentFortData = null, ulong encounterId = 0)
         {
@@ -33,6 +58,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             // If the encounter is null nothing will work below, so exit now
             if (encounter == null) return;
+
+            if (CatchThresholdExceeds(session)) return;
 
             float probability = encounter.CaptureProbability?.CaptureProbability_[0];
 
@@ -221,6 +248,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         evt.FamilyCandies = caughtPokemonResponse.CaptureAward.Candy.Sum();
                     }
+                    session.Stats.PokemonTimestamps.Add(DateTime.Now.Ticks);
                 }
 
                 evt.CatchType = encounter is EncounterResponse

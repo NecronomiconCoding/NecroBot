@@ -28,6 +28,12 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool TransferConfigAndAuthOnUpdate => _settings.UpdateSettings.TransferConfigAndAuthOnUpdate;
         public bool UseWebsocket => _settings.WebsocketsSettings.UseWebsocket;
         public bool CatchPokemon => _settings.PokemonSettings.CatchPokemon;
+        public int CatchPokemonLimit => _settings.PokemonSettings.CatchPokemonLimit;
+        public int CatchPokemonLimitMinutes => _settings.PokemonSettings.CatchPokemonLimitMinutes;
+        public int PokeStopLimit => _settings.PokemonSettings.PokeStopLimit;
+        public int PokeStopLimitMinutes => _settings.PokemonSettings.PokeStopLimitMinutes;
+        public int SnipeCountLimit => _settings.PokemonSettings.SnipeCountLimit;
+        public int SnipeRestSeconds => _settings.PokemonSettings.SnipeRestSeconds;
         public bool TransferWeakPokemon => _settings.PokemonSettings.TransferWeakPokemon;
         public bool DisableHumanWalking => _settings.LocationSettings.DisableHumanWalking;
         public int MaxBerriesToUsePerPokemon => _settings.PokemonSettings.MaxBerriesToUsePerPokemon;

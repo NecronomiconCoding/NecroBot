@@ -23,6 +23,7 @@ namespace PoGo.NecroBot.Logic.State
         IEventDispatcher EventDispatcher { get; }
         TelegramService Telegram { get; set; }
         KillSwitch KillSwitch { get; }
+        SessionStats Stats { get; }
     }
 
 
@@ -35,6 +36,7 @@ namespace PoGo.NecroBot.Logic.State
             EventDispatcher = new EventDispatcher();
             Translation = Common.Translation.Load(logicSettings);
             Reset(settings, LogicSettings);
+            Stats = new SessionStats();
         }
 
         public ISettings Settings { get; set; }
@@ -55,6 +57,8 @@ namespace PoGo.NecroBot.Logic.State
         public TelegramService Telegram { get; set; }
 
         public KillSwitch KillSwitch { get; private set; }
+
+        public SessionStats Stats { get; set; }
 
         public void Reset(ISettings settings, ILogicSettings logicSettings)
         {

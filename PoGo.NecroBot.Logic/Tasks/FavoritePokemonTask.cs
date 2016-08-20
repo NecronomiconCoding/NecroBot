@@ -29,7 +29,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (session.LogicSettings.AutoFavoritePokemon && perfection >= session.LogicSettings.FavoriteMinIvPercentage && pokemon.Favorite!=1)
                 {
-                    await session.Client.Inventory.SetFavoritePokemon(pokemon.Id, true);
+                    await session.Client.Inventory.SetFavoritePokemon((long)pokemon.Id, true);
 
                     session.EventDispatcher.Send(new NoticeEvent
                     {

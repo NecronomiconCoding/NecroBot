@@ -4,6 +4,12 @@ namespace PoGo.NecroBot.Logic.Model.Settings
     {
         /*Catch*/
         public bool CatchPokemon = true;
+        public int SnipeRestSeconds = 10 * 60;
+        public int SnipeCountLimit = 39;
+        public int CatchPokemonLimit = 998;
+        public int CatchPokemonLimitMinutes = 60 * 24 + 30;
+        public int PokeStopLimit = 1998;
+        public int PokeStopLimitMinutes = 60 * 24 + 30;
         public int DelayBetweenPokemonCatch = 2000;
         /*Incense*/
         public bool UseIncenseConstantly;
