@@ -148,6 +148,7 @@
     <Compile Include="Event\PokemonListEvent.cs" />
     <Compile Include="Event\SnipeScanEvent.cs" />
     <Compile Include="Event\SpinProgressBarEvent.cs" />
+    <Compile Include="Event\UnaccurateLocation.cs" />
     <Compile Include="Event\UpdateEvent.cs" />
     <Compile Include="Event\PokemonCaptureEvent.cs" />
     <Compile Include="Event\PokeStopListEvent.cs" />
