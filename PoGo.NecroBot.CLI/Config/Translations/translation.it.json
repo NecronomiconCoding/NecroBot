@@ -2,7 +2,7 @@
   "TranslationStrings": [
     {
       "Key": "GoogleAPIFailed",
-      "Value": "Devi configurare la \"GoogleAPIKey\", puoi ottenere una API Key seguendo questo link: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Value": "You need to configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {
       "Key": "pokeball",
