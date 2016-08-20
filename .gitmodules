@@ -2,6 +2,3 @@
 	path = FeroxRev
 	url = https://github.com/NoxxDev/NecroBot-Rocket-API.git
 	branch = master
-[submodule "POGOProtos"]
-	path = POGOProtos
-	url = https://github.com/NoxxDev/POGOProtos-0.31.0.git
