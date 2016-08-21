@@ -1,727 +1,751 @@
-{
+﻿{
   "TranslationStrings": [
     {
-      "Key": "GoogleAPIWarning",
-      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
-    },
-    {
       "Key": "pokeball",
-      "Value": "PokeBall"
+      "Value": "كرة البوكي"
     },
     {
       "Key": "greatPokeball",
-      "Value": "GreatBall"
+      "Value": "كرة عظيمة"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "UltraBall"
+      "Value": "الكرة العظمى"
     },
     {
       "Key": "masterPokeball",
-      "Value": "MasterBall"
+      "Value": "كرة المعلم"
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Sai AuthType(Kiểu tài khoản) trong file auth.json"
+      "Value": "config.json في الملف AuthType خطأ غير معروف في"
     },
     {
       "Key": "loginInvalid",
-      "Value": "Thông tin người dùng không hợp lệ. Đăng nhập thất bại."
+      "Value": "حدث خطأ أثناء محاولة تسجيل الدخول"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value": "Bạn đang ở ngoài phạm vi xác định! Đi tới điểm xuất phát (xa {0}m) trong 5 giây. File LastPos.ini có đúng không?"
-    },
+      "Value": ".هل المعلومات الموجودة في الملف صحيحة؟  متر متبقي {0}  أنت خارج النطاق المحدد! المشي للبداية"
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Không tìm thấy PokeStops sử dụng được trong khu vực của bạn. Phạm vi tối đa của bạn có quá nhỏ không?"
+      "Value": "لا توجد محطات بوكي في منطقتك. هل المساحة العظمى صغيرة؟"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Tên: {0} XP: {1}, Gems: {2}, Items: {3}, Lat: {4}, Long: {5}"
-    },
+      "Value": "الاسم: {0} والخبرة: {1}  والممجوهرات: {2} والمواد: {3} في خط العرض: {4} وخط الطول: {5}"
     {
       "Key": "eventFortFailed",
-      "Value": "Tên: {0} THÔNGTIN: Không nhặt được vật phẩm, có thể bị softban. Quá trình Unban: {1}/{2}"
+      "Value": "الاسم: {0} معلومات: فشل سلب الغنيمة. احتمال سوفت بان. سوف يتم الأنبان بعد: {1} من {2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Đi đến Pokestop: {0} (xa {1}m) (trong {2} giây)"
+      "Value": "المشي لمحطة البوكي: {0} {1} متر {2} ثانية. "
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Tên tài khoản: {0}"
+      "Value": "يتم اللعب كـ {0}"
     },
     {
       "Key": "eventUsedIncense",
-      "Value": "Sử dụng lồng ấp trứng, còn lại: {0}"
+      "Value": "استخدم البخور متبقي: {0}"
     },
+    {"Key": "eventUsedLuckyEgg"
+      "Value": "مستعملة لاكي البيض، وتبقى: {0}"
+    }،
     {
-      "Key": "eventUsedLuckyEgg",
-      "Value": "Sử dụng Lucky Egg, còn lại: {0}"
-    },
+      "Key": "eventPokemonEvolvedSuccess"
+      "Value": "{0} بنجاح ل{1} إكس بي"
+    }،
     {
-      "Key": "eventPokemonEvolvedSuccess",
-      "Value": "Tiến hoá {0} thành công, nhận được {1}xp"
-    },
+      "Key": "eventPokemonEvolvedFailed"
+      "Value": "فشل {0} كانت النتيجة {1}، ووقف التطور {2}"
+    }،
     {
-      "Key": "eventPokemonEvolvedFailed",
-      "Value": "Tiến hoá {0} thất bại. Kết quá: {1}, ngưng tiến hoá {2}"
-    },
+      "Key": "eventPokemonTransferred"
+      "Value": "{0} \ تي CP: {1} الرابع: {2}٪ [أفضل CP: {3} الرابع: {4}٪] (الحلويات: {5})"
+    }،
     {
-      "Key": "eventPokemonTransferred",
-      "Value": "{0} CP:{1}  IV:{2}% [Chỉ số tốt nhất - CP:{3} IV:{4}%] (Candies: {5})"
-    },
+      "Key": "eventItemRecycled"
+      "Value": "{0} العاشر {1}"
+    }،
     {
-      "Key": "eventItemRecycled",
-      "Value": "{0}x {1}"
-    },
+      "Key": "eventPokemonCaptureSuccess"
+      "Value": "({0}) | ({1}) {2} لفل: {3} CP: ({4} / {5}) رابعا: {6}٪ | فرصة: {7}٪ | { 8} م شعبة نظم | مع {9} ({10} اليسار) | {11} EXP حصل | {12} | اللات:. {13} طويل: {14} "
+    }،
     {
-      "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Cơ hội bắt được: {7}% | Cách xa {8}m | Bắt bằng {9} (Còn lại {10}) | Nhận được {11} EXP | {12} | Toạ độ: {13},{14}"
-    },
+      "Key": "eventPokemonCaptureFailed"
+      "Value": "({0}) | ({1}) {2} لفل: {3} CP: ({4} / {5}) رابعا: {6}٪ | فرصة: {7}٪ | { 8} م شعبة نظم | مع {9} ({10} اليسار) | اللات:. {11} طويل: {12} "
+    }،
     {
-      "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Cơ hội bắt được: {7}% | Cách xa {8}m | Bắt bằng {9} (Còn lại {10}) | Toạ độ: {11},{12} ."
-    },
+      "Key": "eventNoPokeballs"
+      "Value": "لا Pokeballs - نذكر {0} مع CP {1}"
+    }،
     {
-      "Key": "eventNoPokeballs",
-      "Value": "Hết tất cả các loại bóng - Không bắt được {0} - CP: {1}"
-    },
+      "Key": "waitingForMorePokemonToEvolve"
+      "Value": "في انتظار أن تتطور {0} بوكيمون مرة واحدة {1} وقعوا أكثر ({2} / {3} في {4} المخزون٪)!"
+    }،
     {
-      "Key": "waitingForMorePokemonToEvolve",
-      "Value": "Đợi để tiến hoá {0} Pokemon lần {1} đã bắt! ({2}/{3} - {4}% túi)"
-    },
+      "Key": "useLuckyEggsMinPokemonAmountTooHigh"
+      "Value": "لن يتم استخدام البيض لاكي مع UseLuckyEggsMinPokemonAmount مجموعة إلى {0}، استخدم <= {1} بدلا من ذلك"
+    }،
     {
-      "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "Lucky Eggs không được sử dụng vì UseLuckyEggsMinPokemonAmount được đặt thành {0}. Giá trị phải <= {1}."
-    },
+      "Key": "catchMorePokemonToUseLuckyEgg"
+      "Value": "اقبض {0} أكثر البوكيمون لاستخدام لاكي البيض!"
+    }،
     {
-      "Key": "catchMorePokemonToUseLuckyEgg",
-      "Value": "Bắt thêm {0} Pokemon để sử dụng Lucky Egg!"
-    },
+      "Key": "eventUseBerry"
+      "Value": "تستخدم {0} | {1} المتبقية"
+    }،
     {
-      "Key": "eventUseBerry",
-      "Value": "Đã dùng {0} | Còn lại {1}"
-    },
+      "Key": "itemRazzBerry"
+      "Value": "إشجب بيري"
+    }،
     {
-      "Key": "itemRazzBerry",
-      "Value": "Razz Berry"
-    },
+      "Key": "catchStatusAttempt"
+      "Value": "{0} محاولة # {1}"
+    }،
     {
-      "Key": "catchStatusAttempt",
-      "Value": "{0} trong lần thứ {1}"
-    },
-    {
-      "Key": "catchStatus",
+      "Key": "catchStatus"
       "Value": "{0}"
-    },
+    }،
     {
-      "Key": "candies",
-      "Value": "Candies: {0}"
-    },
+      "Key": "الحلوى"،
+      "Value": "الحلويات: {0}"
+    }،
     {
-      "Key": "unhandledGpxData",
-      "Value": "Không xử lí được dữ liệu trong file GPX, bỏ qua việc sử dụng nó."
-    },
+      "Key": "unhandledGpxData"
+      "Value": "البيانات غير معالج في ملف GPX، في محاولة لتخطي".
+    }،
     {
-      "Key": "displayHighestsHeader",
+      "Key": "displayHighestsHeader"
       "Value": "Pokemons"
-    },
+    }،
     {
-      "Key": "commonWordPerfect",
-      "Value": "IV"
-    },
+      "Key": "commonWordPerfect"
+      "Value": "الكمال"
+    }،
     {
-      "Key": "commonWordName",
-      "Value": "tên"
-    },
+      "Key": "commonWordName"
+      "Value": "اسم"
+    }،
     {
-      "Key": "commonWordUnknown",
-      "Value": "không rõ"
-    },
+      "Key": "commonWordUnknown"
+      "Value": "غير معروف"
+    }،
     {
-      "Key": "displayHighestsCpHeader",
-      "Value": "Pokemon Có CP Cao Nhất"
-    },
+      "Key": "displayHighestsCpHeader"
+      "Value": "DisplayHighestsCP"
+    }،
     {
-      "Key": "displayHighestsPerfectHeader",
-      "Value": "Pokemon Có IV Cao Nhất"
-    },
+      "Key": "displayHighestsPerfectHeader"
+      "Value": "DisplayHighestsPerfect"
+    }،
     {
-      "Key": "displayHighestsLevelHeader",
-      "Value": "Pokemon Có LV Cao Nhất"
-    },
+      "Key": "displayHighestsLevelHeader"
+      "Value": "DisplayHighestsLevel"
+    }،
     {
-      "Key": "welcomeWarning",
-      "Value": "Đảm bảo rằng đã đặt đúng toạ độ. Nếu không hãy thoát chương trình! Toạ độ: {0},{1}"
-    },
+      "Key": "welcomeWarning"
+      "Value": "تأكد اللات والغاز الطبيعي المسال على حق الخروج من البرنامج إذا لم اللات:.! {0} الغاز الطبيعي المسال: {1}"
+    }،
     {
-      "Key": "incubatorPuttingEgg",
-      "Value": "Đặt trứng loại {0:0.00}km vào lồng ấp."
-    },
+      "Key": "incubatorPuttingEgg"
+      "Value": "وضع البيض في الحاضنة: {0: 0.00} كم اليسار"
+    }،
     {
-      "Key": "incubatorStatusUpdate",
-      "Value": "Tình trạng lồng ấp: còn lại {0:0.00}km"
-    },
+      "Key": "incubatorStatusUpdate"
+      "Value": "تحديث حاضنة الوضع: {0: 0.00} كم اليسار"
+    }،
     {
-      "Key": "incubatorEggHatched",
-      "Value": "Trứng trong lồng ấp đã nở: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
-    },
+      "Key": "incubatorEggHatched"
+      "Value": "لقد فقست البيضة المحتضنة: {0} | لفل: {1} CP: ({2} / {3}) رابعا: {4}٪"
+    }،
     {
-      "Key": "logEntryError",
-      "Value": "LỖI"
-    },
+      "Key": "logEntryError"
+      "Value": "خطأ"
+    }،
     {
-      "Key": "logEntryAttention",
-      "Value": "CHÚ Ý"
-    },
+      "Key": "logEntryAttention"
+      "Value": "تنبيه"
+    }،
     {
-      "Key": "logEntryInfo",
-      "Value": "THÔNG TIN"
-    },
+      "Key": "logEntryInfo"
+      "Value": "INFO"
+    }،
     {
-      "Key": "logEntryPokestop",
+      "Key": "logEntryPokestop"
       "Value": "POKESTOP"
-    },
+    }،
     {
-      "Key": "logEntryFarming",
+      "Key": "logEntryFarming"
       "Value": "FARMING"
-    },
+    }،
     {
-      "Key": "logEntrySniper",
-      "Value": "SNIPER"
-    },
+      "Key": "logEntrySniper"
+      "Value": "القناص"
+    }،
     {
-      "Key": "logEntryRecycling",
-      "Value": "XOÁ VẬT PHẨM"
-    },
+      "Key": "logEntryRecycling"
+      "Value": "إعادة التدوير"
+    }،
     {
-      "Key": "logEntryPkmn",
-      "Value": "POKEMON"
-    },
+      "Key": "logEntryPkmn"
+      "Value": "PKMN"
+    }،
     {
-      "Key": "logEntryTransfered",
-      "Value": "CHUYỂN THÀNH CANDY"
-    },
+      "Key": "logEntryTransfered"
+      "Value": "أحيلت"
+    }،
     {
-      "Key": "logEntryEvolved",
-      "Value": "TIẾN HOÁ"
-    },
+      "Key": "logEntryEvolved"
+      "Value": "تطورت"
+    }،
     {
-      "Key": "logEntryBerry",
-      "Value": "BERRY"
-    },
+      "Key": "logEntryBerry"
+      "Value": "بيري"
+    }،
     {
-      "Key": "logEntryEgg",
-      "Value": "TRỨNG"
-    },
+      "Key": "logEntryEgg"
+      "Value": "البيض"
+    }،
     {
-      "Key": "logEntryDebug",
-      "Value": "GỠ LỖI"
-    },
+      "Key": "logEntryDebug"
+      "Value": "التصحيح"
+    }،
     {
-      "Key": "logEntryUpdate",
-      "Value": "CẬP NHẬT"
-    },
+      "Key": "logEntryUpdate"
+      "Value": "تحديث"
+    }،
     {
-      "Key": "logEntryNew",
-      "Value": "MỚI"
-    },
+      "Key": "logEntryNew"
+      "Value": "NEW"
+    }،
     {
-      "Key": "loggingIn",
-      "Value": "Loại tài khoản: {0}"
-    },
+      "Key": "logEntrySoftBan"
+      "Value": "SOFTBAN"
+    }،
     {
-      "Key": "ptcOffline",
-      "Value": "Server PTC có thể đã sập HOẶC thông tin của bạn đã sai. Thử dùng Google"
-    },
+      "Key": "loggingIn"
+      "Value": "التسجيل في استخدام {0}"
+    }،
     {
-      "Key": "accessTokenExpired",
-      "Value": "Mã đăng nhập PTC đã hết hạn. Đang đăng nhập lại..."
-    },
+      "Key": "ptcOffline"
+      "Value": "خوادم المؤسسة العامة للاتصالات وربما أسفل أو بيانات الاعتماد الخاصة بك على خطأ حاول جوجل".
+    }،
     {
-      "Key": "invalidResponse",
-      "Value": "Nhận được phản hồi không hợp lệ từ server Niantic"
-    },
+      "Key": "accessTokenExpired"
+      "Value": "انتهت المؤسسة العامة للاتصالات دخول رمز Relogging ...".
+    }،
     {
-      "Key": "tryingAgainIn",
-      "Value": "Cố gắng thử lại trong {0} giây..."
-    },
+      "Key": "invalidResponse"
+      "Value": "تلقيت استجابة غير صالحة من خادم Niantic من"
+    }،
     {
-      "Key": "accountNotVerified",
-      "Value": "Tài khoản chưa được xác nhận! Đang thoát..."
-    },
+      "Key": "tryingAgainIn"
+      "Value": "محاولة مرة أخرى في {0} ثوان ..."
+    }،
     {
-      "Key": "openingGoogleDevicePage",
-      "Value": "Opening Google Device page. Please paste the code using CTRL+V"
-    },
+      "Key": "accountNotVerified"
+      "Value": "حساب لم يتم التحقق الخروج ..."
+    }،
     {
-      "Key": "couldntCopyToClipboard",
-      "Value": "Couldnt copy to clipboard, do it manually"
-    },
+      "Key": "openingGoogleDevicePage"
+      "Value": "فتح صفحة جهاز جوجل الرجاء لصق الشفرة باستخدام CTRL + V"
+    }،
     {
-      "Key": "couldntCopyToClipboard2",
-      "Value": "Goto: {0} & enter {1}"
-    },
+      "Key": "couldntCopyToClipboard"
+      "Value": "لم أستطع نسخة إلى الحافظة، أن تفعل ذلك يدويا"
+    }،
     {
-      "Key": "realisticTravelDetected",
-      "Value": "Đã phát hiện điểm đến thực tế, đang sử dụng cài đặt mặc định trong file config.json"
-    },
+      "Key": "couldntCopyToClipboard2"
+      "Value": "غوتو: {0} وإدخال {1}"
+    }،
     {
-      "Key": "notRealisticTravel",
-      "Value": "Điếm đến thực tế không phải ở {0}, sử dụng toạ độ lưu trong LastPos.ini"
-    },
+      "Key": "realisticTravelDetected"
+      "Value": "الكشف عن السفر واقعي، وذلك باستخدام الإعدادات الافتراضية داخل config.json"
+    }،
     {
-      "Key": "coordinatesAreInvalid",
-      "Value": "Toạ độ trong file \"LastPos.ini\" không hợp lệ, sử dụng toạ độ mặc định"
-    },
+      "Key": "notRealisticTravel"
+      "Value": "ليس واقعيا السفر في {0}، وذلك باستخدام آخر حفظ LastPos.ini"
+    }،
     {
-      "Key": "gotUpToDateVersion",
-      "Value": "Bạn đang sử dụng phiên bản mới nhất: v{0} (Dịch Bởi: Skick - Group: bit.ly/PokeAuto)"
-    },
+      "Key": "coordinatesAreInvalid"
+      "Value": "ينسق في \" LastPos.ini \ "ملف غير صالحة، وذلك باستخدام إحداثيات الافتراضي"
+    }،
     {
-      "Key": "autoUpdaterDisabled",
-      "Value": "Tự động cập nhật đã bị vô hiệu hoá. Tải phiên bản mới nhất tại: {0}\n "
-    },
+      "Key": "gotUpToDateVersion"
+      "Value": "الكمال لديك بالفعل أحدث نسخة {0}"
+    }،
     {
-      "Key": "downloadingUpdate",
-      "Value": "Đang tải và áp dụng bản cập nhật mới..."
-    },
+      "Key": "checkForUpdatesDisabled"
+      "Value": "هو تحديث فحص المعوقين النسخة الحالية: {0}"
+    }،
     {
-      "Key": "finishedDownloadingRelease",
-      "Value": "Đã tải xong phiên bản mới nhất..."
-    },
+      "Key": "autoUpdaterDisabled"
+      "Value": "تم تعطيل AutoUpdater الحصول على أحدث إصدار من: {0} \ ن"
+    }،
     {
-      "Key": "finishedUnpackingFiles",
-      "Value": "Đã giải nén xong..."
-    },
+      "Key": "downloadingUpdate"
+      "Value": "تنزيل وتطبيق التحديث ..."
+    }،
     {
-      "Key": "finishedTransferringConfig",
-      "Value": "Đã chuyển đổi config cũ của bạn sang phiên bản mới nhất..."
-    },
+      "Key": "finishedDownloadingRelease"
+      "Value": "انتهى أحدث إصدار تحميل ..."
+    }،
     {
-      "Key": "updateFinished",
-      "Value": "Hoàn thành cập nhật."
-    },
+      "Key": "finishedUnpackingFiles"
+      "Value": "انتهى تفريغ الملفات ..."
+    }،
     {
-      "Key": "lookingForIncensePokemon",
-      "Value": "Đang tìm kiếm Pokemon..."
-    },
+      "Key": "finishedTransferringConfig"
+      "Value": "انتهى نقل التكوين الخاص بك إلى الإصدار الجديد ..."
+    }،
     {
-      "Key": "lookingForPokemon",
-      "Value": "Đang tìm kiếm Pokemon..."
-    },
+      "Key": "updateFinished"
+      "Value": "انتهى التحديث، يمكنك إغلاق هذه النافذة الآن."
+    }،
     {
-      "Key": "lookingForLurePokemon",
-      "Value": "Đang tìm kiếm Pokemon..."
-    },
+      "Key": "lookingForIncensePokemon"
+      "Value": "أبحث عن البوكيمون البخور ..."
+    }،
     {
-      "Key": "pokemonSkipped",
-      "Value": "Bỏ qua {0}"
-    },
+      "Key": "lookingForPokemon"
+      "Value": "أبحث عن البوكيمون ..."
+    }،
     {
-      "Key": "zeroPokeballInv",
-      "Value": "Bạn đã hết tất cả ball trong túi, không thể bắt thêm Pokemon nào!"
-    },
+      "Key": "lookingForLurePokemon"
+      "Value": "أبحث عن إغراء البوكيمون ..."
+    }،
     {
-      "Key": "currentPokeballInv",
+      "Key": "pokemonSkipped"
+      "Value": "تخطي {0}"
+    }،
+    {
+      "Key": "zeroPokeballInv"
+      "Value": "لا يوجد لديك pokeballs في المخزون الخاص بك، لا مزيد من بوكيمون يمكن صيدها!"
+    }،
+    {
+      "Key": "currentPokeballInv"
       "Value": "Pokeballs: {0} | Greatballs: {1} | Ultraballs: {2} | Masterballs: {3}"
-    },
-    {
-      "Key": "currentPotionInv",
-      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
-    },
-    {
-      "Key": "currentReviveInv",
-      "Value": "Revives: {0} | MaxRevives: {1}"
-    },
-    {
-      "Key": "currentMiscItemInv",
-      "Value": "Berry: {0} | LồngẤp: {1} | LuckyEggs: {2} | Lure: {3}"
-    },
-    {
-      "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[Cấu Hình Không Hợp Lệ] Tổng số vật phẩm tối đa của bạn (balls+potions+revives={0}) đã vượt qua số lượng vật phẩm tốt đa trong túi ({1})"
-    },
-    {
-      "Key": "recyclingQuietly",
-      "Value": "Đang xoá đồ..."
-    },
-    {
-      "Key": "invFullTransferring",
-      "Value": "Túi Pokemon đã đầy, đang chuyển Pokemon thành candies..."
-    },
-    {
-      "Key": "invFullTransferManually",
-      "Value": "Túi Pokemon đã đầy! Hãy chuyển Pokemon bằng tay hoặc đặt TransferDuplicatePokemon là true trong config.json..."
-    },
-    {
-      "Key": "invFullPokestopLooting",
-      "Value": "Túi đồ đã đầy, không nhặt được vật phẩm!"
-    },
-    {
-      "Key": "encounterProblem",
-      "Value": "Gặp sự cố: {0}"
-    },
-    {
-      "Key": "encounterProblemLurePokemon",
-      "Value": "Gặp sự cố: Lure Pokemon {0}"
-    },
-    {
-      "Key": "desiredDestTooFar",
-      "Value": "Điểm đến bạn mong muốn: {0}, {1} quá xa so với vị trí hiện tại: {2}, {3}"
-    },
-    {
-      "Key": "pokemonRename",
-      "Value": "Pokemon {0} ({1}) đã đổi tên từ {2} thành {3}."
-    },
-    {
-      "Key": "pokemonFavorite",
-      "Value": "{0}%IV {1} (CP {2}) *Đã đánh dấu là yêu thích*."
-    },
-    {
-      "Key": "pokemonIgnoreFilter",
-      "Value": "[Danh Sách Pokemon Bỏ Qua] - Đang bỏ qua {0} như trong cài đặt"
-    },
-    {
-      "Key": "catchStatusAttempt",
-      "Value": "Bắt Thử"
-    },
-    {
-      "Key": "catchStatusError",
-      "Value": "Bắt Lỗi"
-    },
-    {
-      "Key": "catchStatusEscape",
-      "Value": "Bắt Trượt"
-    },
-    {
-      "Key": "catchStatusFlee",
-      "Value": "Chạy Mất"
-    },
-    {
-      "Key": "catchStatusMissed",
-      "Value": "Bỏ Lỡ"
-    },
-    {
-      "Key": "catchStatusSuccess",
-      "Value": "Bắt Thành Công"
-    },
-    {
-      "Key": "catchTypeNormal",
-      "Value": "BắtTrênĐường"
-    },
-    {
-      "Key": "catchTypeLure",
-      "Value": "BắtỞLurePKStop"
-    },
-    {
-      "Key": "catchTypeIncense",
-      "Value": "BắtThính"
-    },
-    {
-      "Key": "webSocketFailStart",
-      "Value": "Không thể bắt đầu WebSocketServer ở cổng : {0}"
-    },
-    {
-      "Key": "statsTemplateString",
-      "Value": "{0} - Đã Chạy: {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | ĐãChuyểnHoá: {6:n0} | ĐãXoá: {7:n0}"
-    },
-    {
-      "Key": "profileStatsTemplateString",
-      "Value": "----- LVL {0} | {1} ----- \n Kinh Nghiệm: {2}/{3} \n Pokemon Đã Bắt: {4} \n Pokemon Đã Chuyển Thành Candy: {5} \n Pokestop Đã Đến: {6} \n Trứng Đã Nở: {6} \n Pokemons envolved: {7} \n Số Mục Trong Pokedex: {8} \n Đã Đi: {9} KM"
-    },
-    {
-      "Key": "showPokeTemplate",
-      "Value": "\n CP {0} | Name: {1}"
-    },
-    {
-      "Key": "helpTemplate",
-      "Value": "Các Lệnh: \n \n /top <Số lượng> - Hiển thị những Pokemon trong TOP <số lượng>. \n /all - Hiển thị tất cả Pokemon. \n /profile - Hiển thị thông tin. \n /loc - Hiển thị vị trí hiện tại. \n /items - Hiển thị những vật phẩm trong túi."
-    },
-    {
-      "Key": "statsXpTemplateString",
-      "Value": "{0} (Lên cấp trong {1}h {2}m | {3:n0}/{4:n0} XP)"
-    },
-    {
-      "Key": "requireInputText",
-      "Value": "Bất một nút bất kì để bắt đầu..."
-    },
-    {
-      "Key": "googleTwoFactorAuth",
-      "Value": "Bạn đã kích hoạt Google Two Factor Auth, bạn phải điền App Specific Password vào trong file auth.json"
-    },
-    {
-      "Key": "googleTwoFactorAuthExplanation",
-      "Value": "Đang mở Google App-Passwords. Hãy tạo 1 App Password mới."
-    },
-    {
-      "Key": "googleError",
-      "Value": "Đảm bảo rằng bạn đã điền đúng Email & Password."
-    },
-    {
-      "Key": "googleOffline",
-      "Value": "Server Google có thể đã sập. Hãy kiên nhẫn và mở bot sau 1 ít phút nữa."
-    },
-    {
-      "Key": "missingCredentialsGoogle",
-      "Value": "Bạn cần điền GoogleUsername và GooglePassword trong auth.json!"
-    },
-    {
-      "Key": "missingCredentialsPtc",
-      "Value": "Bạn cần điền PtcUsername và PtcPassword trong auth.json!"
-    },
-    {
-      "Key": "snipeScan",
-      "Value": "Tìm kiếm Pokemon có thể snipe tại {0}..."
-    },
-    {
-      "Key": "snipeScanEx",
-      "Value": "Đang Snipe {0} - {1} IV tại {2}..."
-    },
-    {
-      "Key": "noPokemonToSnipe",
-      "Value": "Không tìm thấy Pokemon nào để snipe!"
-    },
-    {
-      "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Không đủ balls để snipe! ({0}/{1})"
-    },
-    {
-      "Key": "displayHighestMove1Header",
-      "Value": "SKILL1"
-    },
-    {
-      "Key": "displayHighestMove2Header",
-      "Value": "SKILL2"
-    },
-    {
-      "Key": "displayHighestCandy",
-      "Value": "Candy"
-    },
-    {
-      "Key": "ipBannedError",
-      "Value": "Kết nối bị từ chối. IP của bạn có thể đã cho vào danh sách đen (Blacklist) bởi Niantic. Đang thoát..."
-    },
-    {
-      "Key": "noEggsAvailable",
-      "Value": "Không còn Eggs"
-    },
-    {
-      "Key": "useLuckyEggActive",
-      "Value": "Lucky Egg Đã Được Kích Hoạt"
-    },
-    {
-      "Key": "usedLuckyEgg",
-      "Value": "Đã Kích Hoạt Lucky Egg"
-    },
-    {
-      "Key": "useLuckyEggAmount",
-      "Value": "Còn lại: {0} Lucky Eggs"
-    },
-    {
-      "Key": "noIncenseAvailable",
-      "Value": "Không còn lồng ấp nào"
-    },
-    {
-      "Key": "useIncenseActive",
-      "Value": "Lồng ấp đã được kích hoạt"
-    },
-    {
-      "Key": "useIncenseAmount",
-      "Value": "Còn lại: {0} lồng ấp"
-    },
-    {
-      "Key": "usedIncense",
-      "Value": "Đã sử dụng 1 lồng ấp"
-    },
-    {
-      "Key": "amountPkmSeenCaught",
-      "Value": "Số loài Pokemon đã thấy: {0}/151, số loài Pokemon đã bắt: {1}/151"
-    },
-    {
-      "Key": "pkmPotentialEvolveCount",
-      "Value": "[Evolve] Có thể tiến hoá: {0} Pokemon"
-    },
-    {
-      "Key": "pkmNotEnoughRessources",
-      "Value": "Nâng cấp Pokemon thất bại do không đủ nguyên liệu"
-    },
-    {
-      "Key": "snipeServerOffline",
-      "Value": "Sniping server đã tắt. Đang bỏ qua..."
-    },
-    {
-      "Key": "firstStartPrompt",
-      "Value": "Đây là lần mở đầu tiên, bạn có muốn cài đặt không? {0}/{1}"
-    },
-    {
-      "Key": "firstStartLanguagePrompt",
-      "Value": "Bạn có muốn thay đổi ngôn ngữ không? {0}/{1}"
-    },
-    {
-      "Key": "firstStartLanguageCodePrompt",
-      "Value": "Hãy nhập mã ngôn ngữ"
-    },
-    {
-      "Key": "firstStartLanguageConfirm",
-      "Value": "Mã ngôn ngữ: {0}"
-    },
-    {
-      "Key": "promptError",
-      "Value": "[LỖI] Lỗi dữ liệu nhập vào, hãy nhập '{0}' hoặc '{1}"
-    },
-    {
-      "Key": "firstStartAutoGenSettings",
-      "Value": "File Config/Auth đã được tạo."
-    },
+    }،
+    {
+      "Key": "currentPotionInv"
+      "Value": "الجرع: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    }،
+    {
+      "Key": "currentReviveInv"
+      "Value": "يحيي: {0} | MaxRevives: {1}"
+    }،
+    {
+      "Key": "currentMiscItemInv"
+      "Value": "التوت: {0} | البخور: {1} | LuckyEggs: {2} | السحر: {3}"
+    }،
+    {
+      "Key": "maxItemsCombinedOverMaxItemStorage"
+      "Value": "[تكوين غير صالح] القصوى السلع الخاصة بك جنبا إلى جنب (كرات + الجرع + تحيي = {0}) انتهى بك تخزين ماكس البند ({1})"
+    }،
+    {
+      "Key": "recyclingQuietly"
+      "Value": "إعادة تدوير بهدوء ..."
+    }،
+    {
+      "Key": "invFullTransferring"
+      "Value": "بوكيمون الجرد الكامل، ونقل البوكيمون ..."
+    }،
+    {
+      "Key": "invFullTransferManually"
+      "Value": "بوكيمون الجرد مليء الرجاء نقل البوكيمون يدويا أو مجموعة TransferDuplicatePokemon إلى true في الإعدادات ...!"
+    }،
+    {
+      "Key": "invFullPokestopLooting"
+      "Value": "الجرد الكامل، أي عناصر نهب!"
+    }،
+    {
+      "Key": "encounterProblem"
+      "Value": "المشكلة لقاء: {0}"
+    }،
+    {
+      "Key": "encounterProblemLurePokemon"
+      "Value": "المشكلة لقاء: سحر البوكيمون {0}"
+    }،
+    {
+      "Key": "desiredDestTooFar"
+      "Value": "غايتك المنشودة {0}، {1} هو أيضا بعيدا عن الموقف الحالي من {2}، {3}"
+    }،
+    {
+      "Key": "pokemonRename"
+      "Value": "بوكيمون {0} ({1}) التي أعيدت تسميتها من {2} إلى {3}".
+    }،
+    {
+      "Key": "pokemonFavorite"
+      "Value": "{0}٪ الكمال {1} (CP {2}) * في المفضلة *."
+    }،
+    {
+      "Key": "pokemonIgnoreFilter"
+      "Value": "[بوكيمون تجاهل فلتر] - تجاهل {0} على النحو المحدد في إعدادات"
+    }،
+    {
+      "Key": "catchStatusAttempt"
+      "Value": "CatchAttempt"
+    }،
+    {
+      "Key": "catchStatusError"
+      "Value": "CatchError"
+    }،
+    {
+      "Key": "catchStatusEscape"
+      "Value": "CatchEscape"
+    }،
+    {
+      "Key": "catchStatusFlee"
+      "Value": "CatchFlee"
+    }،
+    {
+      "Key": "catchStatusMissed"
+      "Value": "CatchMissed"
+    }،
+    {
+      "Key": "catchStatusSuccess"
+      "Value": "CatchSuccess"
+    }،
+    {
+      "Key": "catchTypeNormal"
+      "Value": "عادي"
+    }،
+    {
+      "Key": "catchTypeLure"
+      "Value": "سحر"
+    }،
+    {
+      "Key": "catchTypeIncense"
+      "Value": "البخور"
+    }،
+    {
+      "Key": "webSocketFailStart"
+      "Value": "فشل لبدء WebSocketServer على المنفذ: {0}"
+    }،
+    {
+      "Key": "statsTemplateString"
+      "Value": "{0} - وقت التشغيل {1} - لفل: {2} | EXP / H: {3: N0} | P / H: {4: N0} | ستاردست: {5: N0} | منقول: {6: N0} | المعاد: {7: N0} "
+    }،
+    {
+      "Key": "profileStatsTemplateString"
+      "Value": "----- اتس {0} | {1} ----- \ ن الخبرة: {2} / {3} \ ن Pokemons اشتعلت: {4} \ ن Pokemons نشر: {5} زار \ ن Pokestops: {6} \ ن البيض فقس: {7} \ ن Pokemons تطورت: {8} \ ن إدخالات Pokedex: {9} \ ن كم مشى: {10} \ ن Pokemons: {11} / {12 } "
+    }،
+    {
+      "Key": "showPokeTemplate"
+      "Value": "\ ن CP: {0} | رابعا: {1}٪ | اسم: {2}"
+    }،
+    {
+      "Key": "helpTemplate"
+      "Value": "أوامر:.. / أعلى <حزب المحافظين / د> <كمية> \ ن \ ن - يظهر لك أعلى Pokemons \ ن / كافة <حزب المحافظين / د> - يظهر لك جميع Pokemons \ ن / الشخصية - يظهر لك البيانات الشخصية . \ ن / الموضع - يظهر لك موقع \ ن / البنود - يبين العناصر الخاصة بك \ ن / وضع - يظهر لك وضع بوت \ ن / pokedex - يظهر لك Pokedex "
+    }،
+    {
+      "Key": "statsXpTemplateString"
+      "Value": "{0} (المتقدمة في {1} ح {2} م | {3: N0} / {4: N0} XP)"
+    }،
+    {
+      "Key": "requireInputText"
+      "Value": "ستواصل برنامج بعد اضغط على Key ..."
+    }،
+    {
+      "Key": "googleTwoFactorAuth"
+      "Value": "كما لديك تمكين جوجل اثنين عامل أصيل، وسوف تحتاج لادخال كلمة مرور محددة التطبيقات في auth.json"
+    }،
+    {
+      "Key": "googleTwoFactorAuthExplanation"
+      "Value": "فتح جوجل التطبيق-كلمات المرور يرجى تقديم كلمة مرور التطبيق الجديد (استخدام أخرى مثل الأجهزة)"
+    }،
+    {
+      "Key": "googleError"
+      "Value": "تأكد من أنك قد دخلت الصحيح البريد الإلكتروني وكلمة المرور."
+    }،
+    {
+      "Key": "googleOffline"
+      "Value": "خوادم Google هي على الأرجح إلى أسفل، يرجى التحلي بالصبر وبدء بوت في وقت لاحق."
+    }،
+    {
+      "Key": "missingCredentialsGoogle"
+      "Value": "أنت بحاجة لملء GoogleUsername وGooglePassword في auth.json!"
+    }،
+    {
+      "Key": "missingCredentialsPtc"
+      "Value": "أنت بحاجة لملء PtcUsername وPtcPassword في auth.json!"
+    }،
+    {
+      "Key": "snipeScan"
+      "Value": "لمسح Snipeable بوكيمون في {0} ..."
+    }،
+    {
+      "Key": "snipeScanEx"
+      "Value": "قنص {0} مع {1} الرابع في {2} ..."
+    }،
+    {
+      "Key": "noPokemonToSnipe"
+      "Value": "لم تجد بوكيمون داخل الموقع، البوكيمون despawned؟"
+    }،
+    {
+      "Key": "notEnoughPokeballsToSnipe"
+      "Value": "لا يكفي Pokeballs لبدء اعمال ({0} / {1})!"
+    }،
+    {
+      "Key": "displayHighestMove1Header"
+      "Value": "MOVE1"
+    }،
+    {
+      "Key": "displayHighestMove2Header"
+      "Value": "MOVE2"
+    }،
+    {
+      "Key": "displayHighestCandy"
+      "Value": "كاندي"
+    }،
+    {
+      "Key": "ipBannedError"
+      "Value": "تم رفض الاتصال IP الخاص بك قد تم القائمة السوداء من قبل Niantic من مغادر ..".
+    }،
+    {
+      "Key": "noEggsAvailable"
+      "Value": "لا البيض متوفر"
+    }،
+    {
+      "Key": "useLuckyEggActive"
+      "Value": "لاكي البيض إذا النشطة"
+    }،
+    {
+      "Key": "usedLuckyEgg"
+      "Value": "لاكي البيض مستعملة"
+    }،
+    {
+      "Key": "useLuckyEggAmount"
+      "Value": "لاكي البيض في المخزون: {0}"
+    }،
+    {
+      "Key": "noIncenseAvailable"
+      "Value": "لا البخور متاح"
+    }،
+    {
+      "Key": "useIncenseActive"
+      "Value": "البخور نشط بالفعل"
+    }،
+    {
+      "Key": "useIncenseAmount"
+      "Value": "البخور في المخزون: {0}"
+    }،
+    {
+      "Key": "usedIncense"
+      "Value": "الإستخدام البخور"
+    }،
+    {
+      "Key": "amountPkmSeenCaught"
+      "Value": "كمية بوكيمون زيارة: {0} / 151، مبلغ بوكيمون اشتعلت: {1} / 151"
+    }،
+    {
+      "Key": "pkmPotentialEvolveCount"
+      "Value": "التطورات المحتملة: {0}"
+    }،
+    {
+      "Key": "pkmNotEnoughRessources"
+      "Value": "بوكيمون ترقية فشل الموارد غير كافية"
+    }،
+    {
+      "Key": "snipeServerOffline"
+      "Value": "الخادم القنص غير متواجد حاليا الطفر ...".
+    }،
+    {
+      "Key": "firstStartPrompt"
+      "Value": "هذا هو بداية الأول، تريد أن تبدأ الإعداد {0} / {1}؟"
+    }،
+    {
+      "Key": "firstStartLanguagePrompt"
+      "Value": "هل ترغب في تغيير اللغة الافتراضية {0} / {1}؟"
+    }،
+    {
+      "Key": "firstStartLanguageCodePrompt"
+      "Value": "الرجاء إدخال رمز لغة جديدة"
+    }،
+    {
+      "Key": "firstStartLanguageConfirm"
+      "Value": "اللغة كود التطبيقية: {0}"
+    }،
+    {
+      "Key": "promptError"
+      "Value": "[خطأ في إدخال البيانات] خطأ مع المدخلات، الرجاء إدخال '{0}' أو '{1}"
+    }،
+    {
+      "Key": "firstStartAutoGenSettings"
+      "Value": "ملف التكوين / أصيل ولدت تلقائيا ويجب أن تكتمل قبل المتابعة"
+    }،
+    {
+      "Key": "firstStartSetupAccount"
+      "Value": "### إعداد حساب مستخدم جديد ###"
+    }،
+    {
+      "Key": "firstStartSetupTypePrompt"
+      "Value": "الرجاء اختيار نوع الحساب: {0} / {1}"
+    }،
+    {
+      "Key": "firstStartSetupTypeConfirm"
+      "Value": "تم اختيارها من نوع الحساب: {0}"
+    }،
+    {
+      "Key": "firstStartSetupTypePromptError"
+      "Value": "[خطأ] قدم نوع الحساب غير صحيح، الرجاء اختيار '{0}' أو '{1}'"
+    }،
+    {
+      "Key": "firstStartSetupUsernamePrompt"
+      "Value": "الرجاء إدخال اسم المستخدم"
+    }،
     {
-      "Key": "firstStartSetupAccount",
-      "Value": "### Đang cài đặt tài khoản mới###"
-    },
+      "Key": "firstStartSetupUsernameConfirm"
+      "Value": "اسم المستخدم المقبولة: {0}"
+    }،
     {
-      "Key": "firstStartSetupTypePrompt",
-      "Value": "Hãy chọn loại tài khoản: {0}/{1}"
-    },
+      "Key": "firstStartSetupPasswordPrompt"
+      "Value": "الرجاء إدخال كلمة المرور"
+    }،
     {
-      "Key": "firstStartSetupTypeConfirm",
-      "Value": "Loại tài khoản đã chọn: {0}"
-    },
+      "Key": "firstStartSetupPasswordConfirm"
+      "Value": "كلمة السر المقبولة: {0}"
+    }،
     {
-      "Key": "firstStartSetupTypePromptError",
-      "Value": "[LỖI] Đã nhập sai loại tài khoản, hãy chọn '{0}' hoặc '{1}'"
-    },
+      "Key": "firstStartAccountCompleted"
+      "Value": "### حساب المستخدم مكتمل ###"
+    }،
     {
-      "Key": "firstStartSetupUsernamePrompt",
-      "Value": "Hãy nhập tên người dùng"
-    },
+      "Key": "firstStartDefaultLocationPrompt"
+      "Value": "هل ترغب في إعداد جديد الموقع الافتراضي {0} / {1}"
+    }،
     {
-      "Key": "firstStartSetupUsernameConfirm",
-      "Value": "Chấp nhận tên người dùng: {0}"
-    },
+      "Key": "firstStartDefaultLocationSet"
+      "Value": "الموقع الافتراضي التطبيقية"
+    }،
     {
-      "Key": "firstStartSetupPasswordPrompt",
-      "Value": "Hãy nhập mật khẩu"
-    },
+      "Key": "firstStartDefaultLocation"
+      "Value": "### الإعداد الافتراضي الوظيفة ###"
+    }،
     {
-      "Key": "firstStartSetupPasswordConfirm",
-      "Value": "Chấp nhận mật khẩu: {0}"
-    },
+      "Key": "firstStartSetupDefaultLocationError"
+      "Value": "[خطأ] الرجاء إدخال LatLong الصحيح على سبيل المثال: {0}"
+    }،
     {
-      "Key": "firstStartAccountCompleted",
-      "Value": "### Đã hoàn thành cài đặt tài khoản ###"
-    },
+      "Key": "firstStartSetupDefaultLatLongPrompt"
+      "Value": "الرجاء إدخال خطوط الطول والعرض (انقر بزر الماوس الأيمن للصق) - الصيغة: Value، قيمة"
+    }،
     {
-      "Key": "firstStartDefaultLocationPrompt",
-      "Value": "Bạn có muốn cài đặt vị trí mặc định? {0}/{1}"
-    },
+      "Key": "firstStartSetupDefaultLatLongConfirm"
+      "Value": "Lattitude وخط الطول المقبولة: {0}"
+    }،
     {
-      "Key": "firstStartDefaultLocationSet",
-      "Value": "Chấp nhận vị trí mặc định"
-    },
+      "Key": "softBanBypassed"
+      "Value": "تجاوز بنجاح!"
+    }،
     {
-      "Key": "firstStartDefaultLocation",
-      "Value": "### Cài Đặt Vị Trí Mặc Định ###"
-    },
+      "Key": "firstStartSetupCompleted"
+      "Value": "### المنجزة CONFIG الإعداد ###"
+    }،
     {
-      "Key": "firstStartSetupDefaultLocationError",
-      "Value": "[LỖI] Hãy chỉ nhập GIÁ TRỊ như ví dụ: {0}"
-    },
+      "Key": "pokedexCatchedTelegram"
+      "Value": "--- Pokedex catched --- \ ن"
+    }،
     {
-      "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
-    },
+      "Key": "pokedexPokemonCatchedTelegram"
+      "Value": "# {0} اسم: {1} | Catched: {2} | مصادفة: {3} \ ن"
+    }،
     {
-      "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
-    },
+      "Key": "pokedexNeededTelegram"
+      "Value": "--- Pokedex حاجة --- \ ن"
+    }،
     {
-      "Key": "firstStartSetupCompleted",
-      "Value": "### ĐÃ HOÀN THÀNH THIẾT LẬP CẤU HÌNH ###"
-    },
+      "Key": "pokedexPokemonNeededTelegram"
+      "Value": "# {0} # الاسم: {1} \ ن"
+    }،
     {
-      "Key": "PokedexCatchedTelegram",
-      "Value": "--- Pokedex - Đã Bắt --- \n"
-    },
+      "Key": "loggedInTelegram"
+      "Value": "لقد تم تسجيل في الدورة بنجاح غير صالحة لمدة 5 دقائق."
+    }،
     {
-      "Key": "PokedexPokemonCatchedTelegram",
-      "Value": "#{0} Tên: {1} | Đã Bắt: {2} | Đã Gặp: {3} \n"
-    },
+      "Key": "loginFailedTelegram"
+      "Value": "كلمة خاطئة أو خطأ في بناء الجملة الاستخدام / السر!"
+    }،
     {
-      "Key": "PokedexNeededTelegram",
-      "Value": "--- Pokedex - Còn Thiếu --- \n"
-    },
+      "Key": "notLoggedInTelegram"
+      "Value": "أنت لم تقم بتسجيل الدخول، استخدام / السر"
+    }،
     {
-      "Key": "PokedexPokemonNeededTelegram",
-      "Value": "#{0} Tên: {1} \n"
-    },
+      "Key": "بروكسي"،
+      "Value": "IP الخاص بك هو: {0} | IP الوكيل هو: {1}"
+    }،
     {
-      "Key": "softBanBypassed",
-      "Value": "Bypass SoftBan Thành Công!"
-
-    },
+      "Key": "unproxied"
+      "Value": "IP الخاص بك هو: {0}"
+    }،
     {
-      "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
-    },
+      "Key": "fixProxySettings"
+      "Value": "اضغط على أي Key للخروج حتى تتمكن من إصلاح إعدادات الوكيل الخاص بك ..."
+    }،
     {
-      "Key": "FixProxySettings",
-      "Value": "Press any key to exit so you can fix your proxy settings..."
-    },
+      "Key": "usageHelp"
+      "Value": "الوسيطات الأمر غير صالحة \ استخدام ن الصحيح: \ ن {0}"
+    }،
     {
-      "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
-    },
+      "Key": "loginRemainingTime"
+      "Value": "لقد قمت بتسجيل بالفعل في \ ن الدورة صالحة ل: ({0}: {1} ثانية)"
+    }،
     {
-      "Key": "HighestsPokemoHeader",
+      "Key": "highestsPokemoHeader"
       "Value": "====== {0} ======"
-    },
+    }،
     {
-      "Key": "HighestsPokemoCell",
-      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
-    },
+      "Key": "highestsPokemoCell"
+      "Value": "# CP {0} / {1} | ({2}٪ {3}) \ ر | لفل {4} \ ر {5}: {6} \ ر {7}: {8} { 9}: {10} {11}: {12} "
+    }،
     {
-      "Key": "HumanWalkingVariant",
-      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
-    },
+      "Key": "humanWalkingVariant"
+      "Value": "المشي السرعة: تم تغيير، {0: N2} كم / ساعة إلى {1: N2} كم / ساعة"
+    }،
     {
-      "Key": "AccountBanned",
-      "Value": "Probably Permanent Ban!"
-    },
+      "Key": "accountBanned"
+      "Value": "ربما بان الدائم!"
+    }،
     {
-      "Key": "CatchErrorKillSwitch",
-      "Value": "KillSwitch: Catch error {0}/{1}"
-    },
+      "Key": "catchErrorKillSwitch"
+      "Value": "كيل سويتش: خطأ اقبض {0} / {1}"
+    }،
     {
-      "Key": "CatchEscapeKillSwitch",
-      "Value": "KillSwitch: Catch escape {0}/{1}"
-    },
+      "Key": "catchEscapeKillSwitch"
+      "Value": "كيل سويتش: الهروب اقبض {0} / {1}"
+    }،
     {
-      "Key": "CatchFleeKillSwitch",
-      "Value": "KillSwitch: Catch flee {0}/{1}"
-    },
+      "Key": "catchFleeKillSwitch"
+      "Value": "كيل سويتش: اقبض يهرب {0} / {1}"
+    }،
     {
-      "Key": "CatchMissedKillSwitch",
-      "Value": "KillSwitch: Catch missed {0}/{1}"
-    },
+      "Key": "catchMissedKillSwitch"
+      "Value": "كيل سويتش: القبض غاب {0} / {1}"
+    }،
     {
-      "Key": "CatchSuccessKillSwitch",
-      "Value": "KillSwitch: Catch success {0}/{1}"
-    },
+      "Key": "catchSuccessKillSwitch"
+      "Value": "كيل سويتش: نجاح الصيد {0} / {1}"
+    }،
     {
-      "Key": "PokestopsKillSwitch",
-      "Value": "KillSwitch: Pokestops {0}/{1}"
-    },
+      "Key": "pokestopsKillSwitch"
+      "Value": "كيل سويتش: Pokestops {0} / {1}"
+    }،
     {
-      "Key": "RequestHumanDistance",
-      "Value": "Request human distance of pokestops..."
-    },
+      "Key": "requestHumanDistance"
+      "Value": "طلب المسافة الإنسان من pokestops ..."
+    }،
     {
-      "Key": "CalculatingNextPokestop",
-      "Value": "Calculating next pokestop..."
+      "Key": "calculatingNextPokestop"
+      "Value": "حساب pokestop القادم ..."
+    }،
+    {
+      "Key": "GoogleAPIWarning"
+      "Value": "تحتاج إلى تكوين \" GoogleAPIKey \ "، والحصول على Key API في الرابط التالي: https://developers.google.com/maps/documentation/directions/get-api-key"
     }
-  ],
+  ]،
   "PokemonStrings": [
     {
       "Key": "bulbasaur",

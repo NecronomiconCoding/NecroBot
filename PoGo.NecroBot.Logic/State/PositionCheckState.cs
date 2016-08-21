@@ -70,6 +70,18 @@ namespace PoGo.NecroBot.Logic.State
                         session.Client.CurrentLongitude),
                 RequireInput = session.LogicSettings.StartupWelcomeDelay
             });
+
+            if (session.LogicSettings.UseGoogleWalk && !session.LogicSettings.UseGpxPathing)
+            {
+                if (string.IsNullOrWhiteSpace(session.LogicSettings.GoogleApiKey))
+                {
+                    session.EventDispatcher.Send(new WarnEvent
+                    {
+                        Message = session.Translation.GetTranslation(TranslationString.GoogleAPIWarning)
+                    });
+                }
+            }
+
             await Task.Delay(100, cancellationToken);
             return new InfoState();
         }

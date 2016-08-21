@@ -1,7 +1,7 @@
 {
   "TranslationStrings": [
     {
-      "Key": "GoogleAPIFailed",
+      "Key": "GoogleAPIWarning",
       "Value": "Sem uma Api do Google, você terá o limite de cota livre de 2500, se atingir a cota máxima, tente mudar seu IP. Para configurar o \"GoogleAPIKey\", pegar a chave de API no link: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {

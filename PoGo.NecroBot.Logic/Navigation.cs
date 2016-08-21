@@ -9,6 +9,7 @@ using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Strategies.Walk;
+using PoGo.NecroBot.Logic.Event;
 
 #endregion
 
@@ -18,14 +19,63 @@ namespace PoGo.NecroBot.Logic
 
     public class Navigation
     {
-
         public IWalkStrategy WalkStrategy { get; set; }
         private readonly Client _client;
+        private Random WalkingRandom = new Random();
 
         public Navigation(Client client, ILogicSettings logicSettings)
         {
             _client = client;
             WalkStrategy = GetStrategy(logicSettings);
+        }
+
+        public double VariantRandom(ISession session, double currentSpeed)
+        {
+            if (WalkingRandom.Next(1, 10) > 5)
+            {
+                if (WalkingRandom.Next(1, 10) > 5)
+                {
+                    var randomicSpeed = currentSpeed;
+                    var max = session.LogicSettings.WalkingSpeedInKilometerPerHour + session.LogicSettings.WalkingSpeedVariant;
+                    randomicSpeed += WalkingRandom.NextDouble() * (0.02 - 0.001) + 0.001;
+
+                    if (randomicSpeed > max)
+                        randomicSpeed = max;
+
+                    if (Math.Round(randomicSpeed, 2) != Math.Round(currentSpeed, 2))
+                    {
+                        session.EventDispatcher.Send(new HumanWalkingEvent
+                        {
+                            OldWalkingSpeed = currentSpeed,
+                            CurrentWalkingSpeed = randomicSpeed
+                        });
+                    }
+
+                    return randomicSpeed;
+                }
+                else
+                {
+                    var randomicSpeed = currentSpeed;
+                    var min = session.LogicSettings.WalkingSpeedInKilometerPerHour - session.LogicSettings.WalkingSpeedVariant;
+                    randomicSpeed -= WalkingRandom.NextDouble() * (0.02 - 0.001) + 0.001;                    
+
+                    if (randomicSpeed < min)
+                        randomicSpeed = min;
+
+                    if (Math.Round(randomicSpeed, 2) != Math.Round(currentSpeed, 2))
+                    {
+                        session.EventDispatcher.Send(new HumanWalkingEvent
+                        {
+                            OldWalkingSpeed = currentSpeed,
+                            CurrentWalkingSpeed = randomicSpeed
+                        });
+                    }
+
+                    return randomicSpeed;
+                }
+            }
+
+            return currentSpeed;
         }
 
         public async Task<PlayerUpdateResponse> Move(GeoCoordinate targetLocation,

@@ -144,7 +144,7 @@ namespace PoGo.NecroBot.Logic.State
                 Console.ReadKey();
                 System.Environment.Exit(1);
             }
-
+            
             return new PositionCheckState();
         }
 

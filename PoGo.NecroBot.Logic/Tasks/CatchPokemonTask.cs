@@ -228,6 +228,23 @@ namespace PoGo.NecroBot.Logic.Tasks
                     : encounter is DiskEncounterResponse
                         ? session.Translation.GetTranslation(TranslationString.CatchTypeLure)
                         : session.Translation.GetTranslation(TranslationString.CatchTypeIncense);
+                evt.CatchTypeText = encounter is EncounterResponse
+                    ? "normal"
+                    : encounter is DiskEncounterResponse
+                        ? "lure"
+                        : "incense";
+                evt.Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
+                evt.EncounterId = encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                    ? pokemon.EncounterId
+                    : encounterId;
+                evt.Move1 = PokemonInfo.GetPokemonMove1(encounter is EncounterResponse
+                    ? encounter.WildPokemon?.PokemonData
+                    : encounter?.PokemonData);
+                evt.Move2 = PokemonInfo.GetPokemonMove2(encounter is EncounterResponse
+                    ? encounter.WildPokemon?.PokemonData
+                    : encounter?.PokemonData);
+                evt.Expires = pokemon.ExpirationTimestampMs;
+                evt.SpawnPointId = pokemon.SpawnPointId;
                 evt.Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
                 evt.Level =
                     PokemonInfo.GetLevel(encounter is EncounterResponse
