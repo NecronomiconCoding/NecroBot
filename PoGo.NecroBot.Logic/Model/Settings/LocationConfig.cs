@@ -3,6 +3,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
     public class LocationConfig
     {
         public bool DisableHumanWalking;
+        public bool StartFromLastPosition = true;
         public double DefaultLatitude = 40.785092;
         public double DefaultLongitude = -73.968286;
         public double WalkingSpeedInKilometerPerHour = 4.16;
