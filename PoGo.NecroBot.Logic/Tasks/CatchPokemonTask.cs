@@ -233,7 +233,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     : encounter is DiskEncounterResponse
                         ? "lure"
                         : "incense";
-                evt.Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
+                evt.Id = encounter is EncounterResponse || encounter is IncenseEncounterResponse 
+                    ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
                 evt.EncounterId = encounter is EncounterResponse || encounter is IncenseEncounterResponse
                     ? pokemon.EncounterId
                     : encounterId;
