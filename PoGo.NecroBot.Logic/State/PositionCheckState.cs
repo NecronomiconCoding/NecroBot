@@ -70,6 +70,9 @@ namespace PoGo.NecroBot.Logic.State
                         session.Client.CurrentLongitude),
                 RequireInput = session.LogicSettings.StartupWelcomeDelay
             });
+            // Bugfix: Make sure to wait for keypress
+            if (session.LogicSettings.StartupWelcomeDelay) Console.ReadKey();
+
 
             if (session.LogicSettings.UseGoogleWalk && !session.LogicSettings.UseGpxPathing)
             {
