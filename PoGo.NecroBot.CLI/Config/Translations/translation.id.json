@@ -1,7 +1,7 @@
 {
   "TranslationStrings": [
     {
-      "Key": "GoogleAPIFailed",
+      "Key": "GoogleAPIWarning",
       "Value": "Kamu perlu mengatur \"GoogleAPIKey\", dapatkan \"API Key\" di tautan: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {

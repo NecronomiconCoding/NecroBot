@@ -184,9 +184,7 @@ namespace PoGo.NecroBot.CLI
                 Console.Clear();
             }
             catch( IOException ) { }
-
-            GlobalSettings.CheckGoogleAPI(session.Translation, settings);
-
+            
             if (settings.TelegramSettings.UseTelegramAPI)
             {
                 session.Telegram = new Logic.Service.TelegramService(settings.TelegramSettings.TelegramAPIKey, session);

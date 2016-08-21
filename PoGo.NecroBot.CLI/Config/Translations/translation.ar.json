@@ -742,7 +742,7 @@
       "Value": "حساب pokestop القادم ..."
     }،
     {
-      "Key": "googleAPIFailed"
+      "Key": "GoogleAPIWarning"
       "Value": "تحتاج إلى تكوين \" GoogleAPIKey \ "، والحصول على Key API في الرابط التالي: https://developers.google.com/maps/documentation/directions/get-api-key"
     }
   ]،

@@ -416,12 +416,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             Auth.checkProxy(translator);
         }
 
-        public static void CheckGoogleAPI(ITranslation translator, GlobalSettings settings)
-        {
-            if (settings.GoogleWalkConfig.UseGoogleWalk && !settings.GPXSettings.UseGpxPathing)
-                Logger.Write(translator.GetTranslation(TranslationString.GoogleAPIFailed), LogLevel.Info, ConsoleColor.Red);
-        }
-
         public static bool PromptForSetup(ITranslation translator)
         {
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartPrompt, "Y", "N"), LogLevel.Warning);

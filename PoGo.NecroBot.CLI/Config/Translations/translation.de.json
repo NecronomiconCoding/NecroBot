@@ -1,7 +1,7 @@
 ﻿{
   "TranslationStrings": [
     {
-      "Key": "GoogleAPIFailed",
+      "Key": "GoogleAPIWarning",
       "Value": "Du benötigst einen \"GoogleAPIKey\", falls Du noch keinen erstellt hast, tue dies hier und trage ihn danach in die Auth.json ein: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {

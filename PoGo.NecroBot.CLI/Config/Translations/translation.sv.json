@@ -1,8 +1,8 @@
 ﻿{
   "TranslationStrings": [
     {
-      "Key": "GoogleAPIFailed",
-      "Value": "You need to configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Key": "GoogleAPIWarning",
+      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key""
     },
     {
       "Key": "pokeball",
