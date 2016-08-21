@@ -28,5 +28,11 @@ namespace PoGo.NecroBot.Logic.Event
         public CatchPokemonResponse.Types.CatchStatus Status;
         public double Latitude;
         public double Longitude;
+        public string SpawnPointId;
+        public ulong EncounterId;
+        public PokemonMove Move1;
+        public PokemonMove Move2;
+        public long Expires;
+        public string CatchTypeText;
     }
 }
