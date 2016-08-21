@@ -91,6 +91,21 @@ namespace PoGo.NecroBot.CLI
                 catch (Exception) { }
             }
 
+            var lastPosFile = Path.Combine(profileConfigPath, "lastPos.ini");
+            if (File.Exists(lastPosFile) && settings.LocationSettings.StartFromLastPosition)
+            {
+                var text = File.ReadAllText(lastPosFile);
+                string[] crds = text.Split(':');
+                double lat, lng;
+                try
+                {
+                    lat = Double.Parse(crds[0]);
+                    lng = Double.Parse(crds[1]);
+                    settings.LocationSettings.DefaultLatitude = lat;
+                    settings.LocationSettings.DefaultLongitude = lng;
+                }
+                catch (Exception) { }
+            }
 
             var session = new Session(new ClientSettings(settings), new LogicSettings(settings));
 
