@@ -233,7 +233,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     : encounter is DiskEncounterResponse
                         ? "lure"
                         : "incense";
-                evt.Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
+                evt.Id = encounter is EncounterResponse 
+                    ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
                 evt.EncounterId = encounter is EncounterResponse || encounter is IncenseEncounterResponse
                     ? pokemon.EncounterId
                     : encounterId;
@@ -243,9 +244,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                 evt.Move2 = PokemonInfo.GetPokemonMove2(encounter is EncounterResponse
                     ? encounter.WildPokemon?.PokemonData
                     : encounter?.PokemonData);
-                evt.Expires = pokemon.ExpirationTimestampMs;
-                evt.SpawnPointId = pokemon.SpawnPointId;
-                evt.Id = encounter is EncounterResponse ? pokemon.PokemonId : encounter?.PokemonData.PokemonId;
+                evt.Expires = pokemon?.ExpirationTimestampMs ?? 0;
+                evt.SpawnPointId = encounter is EncounterResponse || encounter is IncenseEncounterResponse
+                    ? pokemon.SpawnPointId
+                    : currentFortData?.Id;
                 evt.Level =
                     PokemonInfo.GetLevel(encounter is EncounterResponse
                         ? encounter.WildPokemon?.PokemonData
