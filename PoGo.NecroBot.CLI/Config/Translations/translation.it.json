@@ -2,7 +2,7 @@
   "TranslationStrings": [
     {
       "Key": "GoogleAPIWarning",
-      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Value": "Senza una Google Api, avrai un limite pari a 2500 richieste, se raggiungi il limite delle richieste, prova a cambiare il tuo IP. Configura la \"GoogleAPIKey\", ottieni una API Key seguendo il link: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {
       "Key": "pokeball",
@@ -547,15 +547,15 @@
     },
     {
       "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+      "Value": "Il tuo IP: {0} | IP del Proxy: {1}"
     },
     {
       "Key": "FixProxySettings",
-      "Value": "Press any key to exit so you can fix your proxy settings..."
+      "Value": "Premi qualsiasi tasto per uscire e quindi aggiustare i settaggi del proxy..."
     },
     {
       "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
+      "Value": " Il tuo IP: {0}"
     },
     {
       "Key": "HighestsPokemoHeader",
@@ -567,11 +567,11 @@
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+      "Value": "Velocita di cammino: E' stata cambiata,da {0:n2} Km/h a {1:n2} Km/h"
     },
     {
       "Key": "AccountBanned",
-      "Value": "Probably Permanent Ban!"
+      "Value": "Probabilmente BANNATO PERMANENTEMENTE!"
     },
     {
       "Key": "CatchErrorKillSwitch",
@@ -599,11 +599,11 @@
     },
     {
       "Key": "RequestHumanDistance",
-      "Value": "Request human distance of pokestops..."
+      "Value": "Richiesta della distanza umana dei pokestop..."
     },
     {
       "Key": "CalculatingNextPokestop",
-      "Value": "Calculating next pokestop..."
+      "Value": "Calcolando il prossimo pokestop..."
     }
   ],
 	"PokemonStrings": [
