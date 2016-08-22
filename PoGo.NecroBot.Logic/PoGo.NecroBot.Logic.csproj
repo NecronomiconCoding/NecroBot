@@ -162,7 +162,6 @@
     <Compile Include="Event\EggIncubatorStatusEvent.cs" />
     <Compile Include="Interfaces\Configuration\ILogicSettings.cs" />
     <Compile Include="Inventory.cs" />
-    <Compile Include="KillSwitch.cs" />
     <Compile Include="Localization\Localizer.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Model\Google\GoogleObjects\Address_Components.cs" />
@@ -195,11 +194,11 @@
     <Compile Include="Model\Settings\GlobalSettings.cs" />
     <Compile Include="Model\Settings\GoogleWalkConfig.cs" />
     <Compile Include="Model\Settings\GpxConfig.cs" />
-    <Compile Include="Model\Settings\KillSwitchSettings.cs" />
     <Compile Include="Model\Settings\Location.cs" />
     <Compile Include="Model\Settings\LocationConfig.cs" />
     <Compile Include="Model\Settings\PlayerConfig.cs" />
     <Compile Include="Model\Settings\PokemonConfig.cs" />
+    <Compile Include="Model\Settings\PokeStopConfig.cs" />
     <Compile Include="Model\Settings\ProxyConfig.cs" />
     <Compile Include="Model\Settings\RecycleConfig.cs" />
     <Compile Include="Model\Settings\SnipeConfig.cs" />

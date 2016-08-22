@@ -27,20 +27,20 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonIgnore]
         public string ProfilePath;
 
-        public ConsoleConfig ConsoleSettings = new ConsoleConfig();
-        public UpdateConfig UpdateSettings = new UpdateConfig();
-        public WebsocketsConfig WebsocketsSettings = new WebsocketsConfig();
-        public LocationConfig LocationSettings = new LocationConfig();
-        public TelegramConfig TelegramSettings = new TelegramConfig();
-        public GpxConfig GPXSettings = new GpxConfig();
-        public SnipeConfig SnipingSettings = new SnipeConfig();
-        public PokemonConfig PokemonSettings = new PokemonConfig();
-        public RecycleConfig RecycleSettings = new RecycleConfig();
-        public CustomCatchConfig CustomCatchSettings = new CustomCatchConfig();
-        public PlayerConfig PlayerSettings = new PlayerConfig();
-        public SoftBanConfig SoftBanSettings = new SoftBanConfig();
+        public ConsoleConfig ConsoleConfig = new ConsoleConfig();
+        public UpdateConfig UpdateConfig = new UpdateConfig();
+        public WebsocketsConfig WebsocketsConfig = new WebsocketsConfig();
+        public LocationConfig LocationConfig = new LocationConfig();
+        public TelegramConfig TelegramConfig = new TelegramConfig();
+        public GpxConfig GPXConfig = new GpxConfig();
+        public SnipeConfig SnipeConfig = new SnipeConfig();
+        public PokeStopConfig PokeStopConfig = new PokeStopConfig();
+        public PokemonConfig PokemonConfig = new PokemonConfig();
+        public RecycleConfig RecycleConfig = new RecycleConfig();
+        public CustomCatchConfig CustomCatchConfig = new CustomCatchConfig();
+        public PlayerConfig PlayerConfig = new PlayerConfig();
+        public SoftBanConfig SoftBanConfig = new SoftBanConfig();
         public GoogleWalkConfig GoogleWalkConfig = new GoogleWalkConfig();
-        public KillSwitchSettings KillSwitchSettings = new KillSwitchSettings();
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -402,7 +402,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             settings.ProfileConfigPath = profileConfigPath;
             settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
 
-            if (!boolSkipSave || !settings.UpdateSettings.AutoUpdate)
+            if (!boolSkipSave || !settings.UpdateConfig.AutoUpdate)
             {
                 settings.Save(configFile);
                 settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"));
@@ -478,7 +478,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartLanguageCodePrompt));
             strInput = Console.ReadLine();
 
-            settings.ConsoleSettings.TranslationLanguageCode = strInput;
+            settings.ConsoleConfig.TranslationLanguageCode = strInput;
             session = new Session(new ClientSettings(settings), new LogicSettings(settings));
             translator = session.Translation;
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartLanguageConfirm, strInput));
@@ -577,14 +577,14 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                         double dblLat = double.Parse(strSplit[0].Trim(' '));
                         double dblLong = double.Parse(strSplit[1].Trim(' '));
 
-                        settings.LocationSettings.DefaultLatitude = dblLat;
-                        settings.LocationSettings.DefaultLongitude = dblLong;
+                        settings.LocationConfig.DefaultLatitude = dblLat;
+                        settings.LocationConfig.DefaultLongitude = dblLong;
 
                         Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLatLongConfirm, $"{dblLat}, {dblLong}"));
                     }
                     else
                     {
-                        Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, $"{settings.LocationSettings.DefaultLatitude}, {settings.LocationSettings.DefaultLongitude}", LogLevel.Error));
+                        Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, $"{settings.LocationConfig.DefaultLatitude}, {settings.LocationConfig.DefaultLongitude}", LogLevel.Error));
                         continue;
                     }
 
@@ -592,7 +592,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 }
                 catch (FormatException)
                 {
-                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, $"{settings.LocationSettings.DefaultLatitude}, {settings.LocationSettings.DefaultLongitude}", LogLevel.Error));
+                    Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, $"{settings.LocationConfig.DefaultLatitude}, {settings.LocationConfig.DefaultLongitude}", LogLevel.Error));
                     continue;
                 }
             }

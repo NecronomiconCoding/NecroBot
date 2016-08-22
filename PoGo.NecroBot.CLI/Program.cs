@@ -92,7 +92,7 @@ namespace PoGo.NecroBot.CLI
                 settings.ProfilePath = profilePath;
                 settings.ProfileConfigPath = profileConfigPath;
                 settings.GeneralConfigPath = Path.Combine(Directory.GetCurrentDirectory(), "config");
-                settings.ConsoleSettings.TranslationLanguageCode = strCulture;
+                settings.ConsoleConfig.TranslationLanguageCode = strCulture;
 
                 boolNeedsSetup = true;
             }
@@ -105,14 +105,14 @@ namespace PoGo.NecroBot.CLI
                 {
                     lat = Double.Parse(crds[0]);
                     lng = Double.Parse(crds[1]);
-                    settings.LocationSettings.DefaultLatitude = lat;
-                    settings.LocationSettings.DefaultLongitude = lng;
+                    settings.LocationConfig.DefaultLatitude = lat;
+                    settings.LocationConfig.DefaultLongitude = lng;
                 }
                 catch (Exception) { }
             }
 
             var lastPosFile = Path.Combine(profileConfigPath, "lastPos.ini");
-            if (File.Exists(lastPosFile) && settings.LocationSettings.StartFromLastPosition)
+            if (File.Exists(lastPosFile) && settings.LocationConfig.StartFromLastPosition)
             {
                 var text = File.ReadAllText(lastPosFile);
                 string[] crds = text.Split(':');
@@ -121,8 +121,8 @@ namespace PoGo.NecroBot.CLI
                 {
                     lat = Double.Parse(crds[0]);
                     lng = Double.Parse(crds[1]);
-                    settings.LocationSettings.DefaultLatitude = lat;
-                    settings.LocationSettings.DefaultLongitude = lng;
+                    settings.LocationConfig.DefaultLatitude = lat;
+                    settings.LocationConfig.DefaultLongitude = lng;
                 }
                 catch (Exception) { }
             }
@@ -193,9 +193,9 @@ namespace PoGo.NecroBot.CLI
 
             session.EventDispatcher.EventReceived += evt => listener.Listen(evt, session);
             session.EventDispatcher.EventReceived += evt => aggregator.Listen(evt, session);
-            if (settings.WebsocketsSettings.UseWebsocket)
+            if (settings.WebsocketsConfig.UseWebsocket)
             {
-                var websocket = new WebSocketInterface(settings.WebsocketsSettings.WebSocketPort, session);
+                var websocket = new WebSocketInterface(settings.WebsocketsConfig.WebSocketPort, session);
                 session.EventDispatcher.EventReceived += evt => websocket.Listen(evt, session);
             }
 
@@ -215,15 +215,11 @@ namespace PoGo.NecroBot.CLI
             machine.AsyncStart(new VersionCheckState(), session);
 
             try
-            {
-                Console.Clear();
-            }
+            { Console.Clear(); }
             catch (IOException) { }
             
-            if (settings.TelegramSettings.UseTelegramAPI)
-            {
-                session.Telegram = new Logic.Service.TelegramService(settings.TelegramSettings.TelegramAPIKey, session);
-            }
+            if (settings.TelegramConfig.UseTelegramAPI)
+                session.Telegram = new Logic.Service.TelegramService(settings.TelegramConfig.TelegramAPIKey, session);
 
             if (session.LogicSettings.UseSnipeLocationServer)
                 SnipePokemonTask.AsyncStart(session);
@@ -243,32 +239,24 @@ namespace PoGo.NecroBot.CLI
 
         private static void SaveTimeStampsToDisk()
         {
-            if (session == null)
-            {
-                return;
-            }
+            if (session == null) return;
+
             var path = Path.Combine(session.LogicSettings.ProfileConfigPath, "PokestopTS.txt");
             List<string> fileContent = new List<string>();
 
             foreach (var t in session.Stats.PokeStopTimestamps)
-            {
                 fileContent.Add(t.ToString());
-            }
+
             if (fileContent.Count > 0)
-            {
                 File.WriteAllLines(path, fileContent.ToArray());
-            }
 
             path = Path.Combine(session.LogicSettings.ProfileConfigPath, "PokemonTS.txt");
             fileContent = new List<string>();
             foreach (var t in session.Stats.PokemonTimestamps)
-            {
                 fileContent.Add(t.ToString());
-            }
+
             if (fileContent.Count > 0)
-            {
                 File.WriteAllLines(path, fileContent.ToArray());
-            }
         }
 
         private static bool CheckKillSwitch()
@@ -319,9 +307,8 @@ namespace PoGo.NecroBot.CLI
         private static bool OnExit(CtrlType sig)
         {
             if (LocUpdate)
-            {
                 SaveLocationToDisk(Lat, Lng);
-            }
+
             SaveTimeStampsToDisk();
             return true;
         }

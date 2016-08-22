@@ -28,10 +28,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         private static bool SearchThresholdExceeds(ISession session)
         {
-            if (session.LogicSettings.PokeStopLimit == 0)
-            {
-                return false;
-            }
+            if (!session.LogicSettings.UsePokeStopLimit) return false;
             if (session.Stats.PokeStopTimestamps.Count >= session.LogicSettings.PokeStopLimit)
             {
                 // delete uesless data
@@ -214,9 +211,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         if ( fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull )
                             storeRI = 1;
-
-                        if (session.LogicSettings.UseKillSwitchPokestops)
-                            session.KillSwitch.Pokestops(session);
 
                         session.Stats.PokeStopTimestamps.Add(DateTime.Now.Ticks);
                         break; //Continue with program as loot was succesfull.

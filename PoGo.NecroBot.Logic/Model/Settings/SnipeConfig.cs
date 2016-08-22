@@ -18,5 +18,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool SnipeIgnoreUnknownIv;
         public bool UseTransferIvForSnipe;
         public bool SnipePokemonNotInPokedex;
+        /*SnipeLimit*/
+        public bool UseSnipeLimit = true;
+        public int SnipeRestSeconds = 10 * 60;
+        public int SnipeCountLimit = 39;
     }
 }

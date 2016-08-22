@@ -27,10 +27,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         private static bool CatchThresholdExceeds(ISession session)
         {
-            if (session.LogicSettings.CatchPokemonLimit == 0)
-            {
-                return false;
-            }
+            if (!session.LogicSettings.UseCatchLimit) return false;
             if (session.Stats.PokemonTimestamps.Count >= session.LogicSettings.CatchPokemonLimit)
             {
                 // delete uesless data
@@ -306,21 +303,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (session.LogicSettings.TransferDuplicatePokemonOnCapture && session.LogicSettings.TransferDuplicatePokemon)
                     await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 0);
-
-                if (session.LogicSettings.UseKillSwitchCatch)
-                {
-                    if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchError)
-                        session.KillSwitch.CatchError(session);
-                    if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape)
-                        session.KillSwitch.CatchEscape(session);
-                    if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchFlee)
-                        session.KillSwitch.CatchFlee(session);
-                    if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed)
-                        session.KillSwitch.CatchMissed(session);
-                    if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
-                        session.KillSwitch.CatchSuccess(session);
-                }
-
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }

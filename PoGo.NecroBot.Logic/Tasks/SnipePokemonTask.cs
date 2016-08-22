@@ -190,6 +190,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         private static bool CheckSnipeConditions(ISession session)
         {
+            if (!session.LogicSettings.UseSnipeLimit) return true;
+
             session.EventDispatcher.Send(new SnipeEvent { Message = "Sniper count " + session.Stats.SnipeCount });
             if (session.Stats.SnipeCount >= session.LogicSettings.SnipeCountLimit)
             {
