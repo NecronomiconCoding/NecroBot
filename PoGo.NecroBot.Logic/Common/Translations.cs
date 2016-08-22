@@ -206,14 +206,6 @@ namespace PoGo.NecroBot.Logic.Common
         HighestsPokemoCell,
         HumanWalkingVariant,
         AccountBanned,
-        CatchErrorKillSwitch,
-        CatchEscapeKillSwitch,
-        CatchFleeKillSwitch,
-        CatchMissedKillSwitch,
-        CatchSuccessKillSwitch,
-        PokestopsKillSwitch,
-        RequestHumanDistance,
-        CalculatingNextPokestop,
         GoogleAPIWarning
     }
 
@@ -491,14 +483,6 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.HighestsPokemoCell, "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"),
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkingVariant, "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"),
             new KeyValuePair<TranslationString, string>(TranslationString.AccountBanned, "Probably Permanent Ban!"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CatchErrorKillSwitch, "KillSwitch: Catch error {0}/{1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CatchEscapeKillSwitch, "KillSwitch: Catch escape {0}/{1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CatchFleeKillSwitch, "KillSwitch: Catch flee {0}/{1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CatchMissedKillSwitch, "KillSwitch: Catch missed {0}/{1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.CatchSuccessKillSwitch, "KillSwitch: Catch success {0}/{1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.PokestopsKillSwitch, "KillSwitch: Pokestops {0}/{1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.RequestHumanDistance, "Request human distance of pokestops..."),
-            new KeyValuePair<TranslationString, string>(TranslationString.CalculatingNextPokestop, "Calculating next pokestop..."),
             new KeyValuePair<TranslationString, string>(TranslationString.GoogleAPIWarning, "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key")
         };
 

@@ -39,7 +39,6 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             {
                 return await RedirectToHumanStrategy(targetLocation, functionExecutedWhileWalking, session, cancellationToken);
             }
-            session.EventDispatcher.Send(new NewPathToDestinyEvent { GoogleData = googleResult });
 
             var googleWalk = GoogleWalk.Get(googleResult);
 

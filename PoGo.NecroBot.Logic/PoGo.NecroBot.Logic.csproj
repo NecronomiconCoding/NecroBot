@@ -145,7 +145,6 @@
     <Compile Include="Event\InventoryListEvent.cs" />
     <Compile Include="Event\ItemRecycledEvent.cs" />
     <Compile Include="Event\KillSwitchEvent.cs" />
-    <Compile Include="Event\NewPathToDestinyEvent.cs" />
     <Compile Include="Event\NoPokeballEvent.cs" />
     <Compile Include="Event\SnipeEvent.cs" />
     <Compile Include="Event\SnipeModeEvent.cs" />

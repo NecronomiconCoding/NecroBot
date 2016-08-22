@@ -703,46 +703,6 @@
 	    {
       "Key": "AccountBanned",
       "Value": "Kemungkinan kamu kena Ban Permanen!"
-    },
-    {
-      "Key": "CatchErrorExceeded",
-      "Value": "KillSwitch: Tangkapan error melebihi {0}/{1}"
-    },
-    {
-      "Key": "CatchErrorReset",
-      "Value": "KillSwitch: Tangkapan error yg mulai ulang {0}/{1}"
-    },
-    {
-      "Key": "CatchErrorKillSwitch",
-      "Value": "KillSwitch: Tangkapan error {0}/{1}"
-    },
-    {
-      "Key": "CatchEscapeKillSwitch",
-      "Value": "KillSwitch: Tangkapan lepas {0}/{1}"
-    },
-    {
-      "Key": "CatchFleeKillSwitch",
-      "Value": "KillSwitch: Tangkapan kabur {0}/{1}"
-    },
-    {
-      "Key": "CatchMissedKillSwitch",
-      "Value": "KillSwitch: Tangkapan gagal {0}/{1}"
-    },
-    {
-      "Key": "CatchSuccessKillSwitch",
-      "Value": "KillSwitch: Tangkapan berhasil {0}/{1}"
-    },
-    {
-      "Key": "PokestopsKillSwitch",
-      "Value": "KillSwitch: PokeStop {0}/{1}"
-    },
-    {
-      "Key": "RequestHumanDistance",
-      "Value": "Meminta jarak wajar untuk Pokestop..."
-    },
-    {
-      "Key": "CalculatingNextPokestop",
-      "Value": "Menghitung jarak Pokestop selanjutnya..."
     }
   ],
 	"PokemonStrings": [
