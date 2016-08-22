@@ -178,7 +178,6 @@
     <Compile Include="Model\Google\GoogleResult.cs" />
     <Compile Include="Model\Google\GoogleWalk.cs" />
     <Compile Include="Model\Google\Teste.cs" />
-    <Compile Include="Model\Location.cs" />
     <Compile Include="Model\Settings\AuthConfig.cs" />
     <Compile Include="Model\Settings\AuthSettings.cs" />
     <Compile Include="Model\Settings\ClientSettings.cs" />
@@ -202,7 +201,6 @@
     <Compile Include="Model\Settings\TransferFilter.cs" />
     <Compile Include="Model\Settings\UpdateConfig.cs" />
     <Compile Include="Model\Settings\WebsocketsConfig.cs" />
-    <Compile Include="Model\SnipeSettings.cs" />
     <Compile Include="Navigation.cs" />
     <Compile Include="PoGoUtils\PokemonInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
