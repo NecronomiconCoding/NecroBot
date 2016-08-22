@@ -1,6 +1,7 @@
 ﻿#region using directives
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
@@ -37,6 +38,24 @@ namespace PoGo.NecroBot.Logic.Tasks
                             session.Translation.GetTranslation(TranslationString.PokemonFavorite, perfection, session.Translation.GetPokemonTranslation(pokemon.PokemonId), pokemon.Cp)
                     });
                 }
+            }
+        }
+
+        public static async Task Execute(ISession session, ulong pokemonId, bool favorite)
+        {
+            var all = await session.Inventory.GetPokemons();
+            var pokemon = all.FirstOrDefault(p => p.Id == pokemonId);
+            if (pokemon != null)
+            {
+                var perfection = Math.Round(PokemonInfo.CalculatePokemonPerfection(pokemon));
+
+                await session.Client.Inventory.SetFavoritePokemon(pokemonId, favorite);
+
+                session.EventDispatcher.Send(new NoticeEvent
+                {
+                    Message =
+        session.Translation.GetTranslation(TranslationString.PokemonFavorite, perfection, session.Translation.GetPokemonTranslation(pokemon.PokemonId), pokemon.Cp)
+                });
             }
         }
     }
