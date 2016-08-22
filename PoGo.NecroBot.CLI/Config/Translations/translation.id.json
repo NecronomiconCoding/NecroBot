@@ -2,7 +2,7 @@
   "TranslationStrings": [
     {
       "Key": "GoogleAPIWarning",
-      "Value": "Kamu perlu mengatur \"GoogleAPIKey\", dapatkan \"API Key\" di tautan: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Value": "Tanpa \"API Key\" dari Google, kamu memliki batas kuota gratis sebesar 2500 kali, coba ganti IP-mu. Untuk mengatur \"GoogleAPIKey\", dapatkan \"API Key\" di tautan: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {
       "Key": "pokeball",
