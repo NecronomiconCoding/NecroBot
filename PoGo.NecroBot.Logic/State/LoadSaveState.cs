@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Utils;
+using System.Collections.Generic;
 
 #endregion
 
 namespace PoGo.NecroBot.Logic.State
 {
-    public class PositionCheckState : IState
+    public class LoadSaveState : IState
     {
         public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
@@ -26,15 +27,15 @@ namespace PoGo.NecroBot.Logic.State
                 {
                     var distance = LocationUtils.CalculateDistanceInMeters(latLngFromFile.Item1, latLngFromFile.Item2,
                         session.Settings.DefaultLatitude, session.Settings.DefaultLongitude);
-                    var lastModified = File.Exists(coordsPath) ? (DateTime?) File.GetLastWriteTime(coordsPath) : null;
+                    var lastModified = File.Exists(coordsPath) ? (DateTime?)File.GetLastWriteTime(coordsPath) : null;
                     if (lastModified != null)
                     {
                         var hoursSinceModified = (DateTime.Now - lastModified).HasValue
-                            ? (double?) ((DateTime.Now - lastModified).Value.Minutes/60.0)
+                            ? (double?)((DateTime.Now - lastModified).Value.Minutes / 60.0)
                             : null;
                         if (hoursSinceModified != null && hoursSinceModified != 0)
                         {
-                            var kmph = distance/1000/(double) hoursSinceModified;
+                            var kmph = distance / 1000 / (double)hoursSinceModified;
                             if (kmph < 80) // If speed required to get to the default location is < 80km/hr
                             {
                                 File.Delete(coordsPath);
@@ -70,6 +71,9 @@ namespace PoGo.NecroBot.Logic.State
                         session.Client.CurrentLongitude),
                 RequireInput = session.LogicSettings.StartupWelcomeDelay
             });
+            // Bugfix: Make sure to wait for keypress
+            if (session.LogicSettings.StartupWelcomeDelay) Console.ReadKey();
+
 
             if (session.LogicSettings.UseGoogleWalk && !session.LogicSettings.UseGpxPathing)
             {
@@ -80,6 +84,64 @@ namespace PoGo.NecroBot.Logic.State
                         Message = session.Translation.GetTranslation(TranslationString.GoogleAPIWarning)
                     });
                 }
+            }
+
+            List<Int64> list = new List<Int64>();
+            // for pokestops
+            try
+            {
+                var path = Path.Combine(session.LogicSettings.ProfileConfigPath, "PokestopTS.txt");
+                if (File.Exists(path))
+                {
+                    var content = File.ReadLines(path);
+                    foreach (var c in content)
+                    {
+                        if (c.Length > 0)
+                        {
+                            list.Add(Convert.ToInt64(c));
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = "Garbage information in PokestopTS.txt"
+                });
+            }
+            foreach (var l in list)
+            {
+                session.Stats.PokeStopTimestamps.Add(l);
+            }
+
+            // for pokemons
+            list = new List<Int64>();
+            try
+            {
+                var path = Path.Combine(session.LogicSettings.ProfileConfigPath, "PokemonTS.txt");
+                if (File.Exists(path))
+                {
+                    var content = File.ReadLines(path);
+                    foreach (var c in content)
+                    {
+                        if (c.Length > 0)
+                        {
+                            list.Add(Convert.ToInt64(c));
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                session.EventDispatcher.Send(new ErrorEvent
+                {
+                    Message = "Garbage information in PokemonTS.txt"
+                });
+            }
+            foreach (var l in list)
+            {
+                session.Stats.PokemonTimestamps.Add(l);
             }
 
             await Task.Delay(100, cancellationToken);

@@ -26,6 +26,29 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static int storeRI;
         private static int RandomNumber;
 
+        private static bool SearchThresholdExceeds(ISession session)
+        {
+            if (!session.LogicSettings.UsePokeStopLimit) return false;
+            if (session.Stats.PokeStopTimestamps.Count >= session.LogicSettings.PokeStopLimit)
+            {
+                // delete uesless data
+                int toRemove = session.Stats.PokeStopTimestamps.Count - session.LogicSettings.PokeStopLimit;
+                if (toRemove > 0)
+                {
+                    session.Stats.PokeStopTimestamps.RemoveRange(0, toRemove);
+                }
+                var sec = (DateTime.Now - new DateTime(session.Stats.PokeStopTimestamps.First())).TotalSeconds;
+                var limit = session.LogicSettings.PokeStopLimitMinutes * 60;
+                if (sec < limit)
+                {
+                    session.EventDispatcher.Send(new ErrorEvent { Message = "You are visiting pokestops too fast. Your cannot visit another one until " + (limit - sec) + " seconds later." });
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -126,6 +149,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
+                    if (SearchThresholdExceeds(session))
+                    {
+                        break;
+                    }
+
                     fortSearch =
                         await session.Client.Fort.SearchFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
                     if (fortSearch.ExperienceAwarded > 0 && timesZeroXPawarded > 0) timesZeroXPawarded = 0;
@@ -184,9 +212,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         if ( fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull )
                             storeRI = 1;
 
-                        if (session.LogicSettings.UseKillSwitchPokestops)
-                            session.KillSwitch.Pokestops(session);
-
+                        session.Stats.PokeStopTimestamps.Add(DateTime.Now.Ticks);
                         break; //Continue with program as loot was succesfull.
                     }
                 } while (fortTry < retryNumber - zeroCheck);

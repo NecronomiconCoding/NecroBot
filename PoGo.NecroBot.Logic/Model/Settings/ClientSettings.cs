@@ -179,22 +179,22 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         {
             get
             {
-                return _settings.LocationSettings.DefaultLatitude + _rand.NextDouble() * ((double)_settings.LocationSettings.MaxSpawnLocationOffset / 111111);
+                return _settings.LocationConfig.DefaultLatitude + _rand.NextDouble() * ((double)_settings.LocationConfig.MaxSpawnLocationOffset / 111111);
             }
 
-            set { _settings.LocationSettings.DefaultLatitude = value; }
+            set { _settings.LocationConfig.DefaultLatitude = value; }
         }
 
         double ISettings.DefaultLongitude
         {
             get
             {
-                return _settings.LocationSettings.DefaultLongitude +
+                return _settings.LocationConfig.DefaultLongitude +
                        _rand.NextDouble() *
-                       ((double)_settings.LocationSettings.MaxSpawnLocationOffset / 111111 / Math.Cos(_settings.LocationSettings.DefaultLatitude));
+                       ((double)_settings.LocationConfig.MaxSpawnLocationOffset / 111111 / Math.Cos(_settings.LocationConfig.DefaultLatitude));
             }
 
-            set { _settings.LocationSettings.DefaultLongitude = value; }
+            set { _settings.LocationConfig.DefaultLongitude = value; }
         }
 
         double ISettings.DefaultAltitude
@@ -202,9 +202,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             get
             {
                 return
-                    LocationUtils.getElevation(_settings.LocationSettings.DefaultLatitude, _settings.LocationSettings.DefaultLongitude) +
+                    LocationUtils.getElevation(_settings.LocationConfig.DefaultLatitude, _settings.LocationConfig.DefaultLongitude) +
                     _rand.NextDouble() *
-                    ((double)5 / Math.Cos(LocationUtils.getElevation(_settings.LocationSettings.DefaultLatitude, _settings.LocationSettings.DefaultLongitude)));
+                    ((double)5 / Math.Cos(LocationUtils.getElevation(_settings.LocationConfig.DefaultLatitude, _settings.LocationConfig.DefaultLongitude)));
             }
 
 

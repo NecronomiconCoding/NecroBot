@@ -3,7 +3,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
     public class CustomCatchConfig
     {
         public bool EnableHumanizedThrows = true;
-        public bool EnableMissedThrows;
+        public bool EnableMissedThrows = true;
         public int ThrowMissPercentage = 25;
         public int NiceThrowChance = 40;
         public int GreatThrowChance = 30;
