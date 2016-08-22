@@ -196,7 +196,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
         {
             //criteria: based on NY Central Park and Tokyo variety + sniping optimization
-            {PokemonId.Golduck, new TransferFilter(1800, 6, false, 95, "or", 1)},
+            {PokemonId.Golduck, new TransferFilter(1800, 6, false, 95, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.WaterGunFast,PokemonMove.HydroPump }},null,"and")},
+            {PokemonId.Aerodactyl, new TransferFilter(1250, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.BiteFast,PokemonMove.HyperBeam }},null,"and")},
+            {PokemonId.Venusaur, new TransferFilter(1800, 6, false, 95, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.VineWhipFast,PokemonMove.SolarBeam }},null,"and")},
             {PokemonId.Farfetchd, new TransferFilter(1250, 6, false, 80, "or", 1)},
             {PokemonId.Krabby, new TransferFilter(1250, 6, false, 95, "or", 1)},
             {PokemonId.Kangaskhan, new TransferFilter(1500, 6, false, 60, "or", 1)},
@@ -205,20 +207,23 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             {PokemonId.MrMime, new TransferFilter(1250, 6, false, 40, "or", 1)},
             {PokemonId.Scyther, new TransferFilter(1800, 6, false, 80, "or", 1)},
             {PokemonId.Jynx, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.Electabuzz, new TransferFilter(1250, 6, false, 80, "or", 1)},
+            {PokemonId.Charizard, new TransferFilter(1250, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.WingAttackFast,PokemonMove.FireBlast }},null,"and")},
+            {PokemonId.Electabuzz, new TransferFilter(1250, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.ThunderShockFast,PokemonMove.Thunder }},null,"and")},
             {PokemonId.Magmar, new TransferFilter(1500, 6, false, 80, "or", 1)},
-            {PokemonId.Pinsir, new TransferFilter(1800, 6, false, 95, "or", 1)},
+            {PokemonId.Pinsir, new TransferFilter(1800, 6, false, 95, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.RockSmashFast,PokemonMove.XScissor }},null,"and")},
             {PokemonId.Tauros, new TransferFilter(1250, 6, false, 90, "or", 1)},
             {PokemonId.Magikarp, new TransferFilter(200, 6, false, 95, "or", 1)},
-            {PokemonId.Gyarados, new TransferFilter(1250, 6, false, 90, "or", 1)},
-            {PokemonId.Lapras, new TransferFilter(1800, 6, false, 80, "or", 1)},
+            {PokemonId.Exeggutor, new TransferFilter(1800, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.ZenHeadbuttFast,PokemonMove.SolarBeam }},null,"and")},
+            {PokemonId.Gyarados, new TransferFilter(1250, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.DragonBreath,PokemonMove.HydroPump }},null,"and")},
+            {PokemonId.Lapras, new TransferFilter(1800, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.FrostBreathFast,PokemonMove.Blizzard }},null,"and")},
             {PokemonId.Eevee, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.Vaporeon, new TransferFilter(1500, 6, false, 90, "or", 1)},
+            {PokemonId.Vaporeon, new TransferFilter(1500, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.WaterGun,PokemonMove.HydroPump }},null,"and")},
             {PokemonId.Jolteon, new TransferFilter(1500, 6, false, 90, "or", 1)},
-            {PokemonId.Flareon, new TransferFilter(1500, 6, false, 90, "or", 1)},
+            {PokemonId.Flareon, new TransferFilter(1500, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.Ember,PokemonMove.FireBlast }},null,"and")},
             {PokemonId.Porygon, new TransferFilter(1250, 6, false, 60, "or", 1)},
-            {PokemonId.Snorlax, new TransferFilter(2600, 6, false, 90, "or", 1)},
-            {PokemonId.Dragonite, new TransferFilter(2600, 6, false, 90, "or", 1)}
+            {PokemonId.Arcanine, new TransferFilter(1800, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.FireFangFast,PokemonMove.FireBlast }},null,"and")},
+            {PokemonId.Snorlax, new TransferFilter(2600, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.ZenHeadbuttFast,PokemonMove.HyperBeam }},null,"and")},
+            {PokemonId.Dragonite, new TransferFilter(2600, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.DragonBreath,PokemonMove.DragonClaw }},null,"and")},
         };
 
         public SnipeSettings PokemonToSnipe = new SnipeSettings
