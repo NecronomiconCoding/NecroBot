@@ -158,5 +158,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool UseSnipeLimit => _settings.SnipeConfig.UseSnipeLimit;
         public bool UsePokeStopLimit => _settings.PokeStopConfig.UsePokeStopLimit;
         public bool UseCatchLimit => _settings.PokemonConfig.UseCatchLimit;
+        public int ResumeTrack => _settings.LocationConfig.ResumeTrack;
+        public int ResumeTrackSeg => _settings.LocationConfig.ResumeTrackSeg;
+        public int ResumeTrackPt => _settings.LocationConfig.ResumeTrackPt;
     }
 }
