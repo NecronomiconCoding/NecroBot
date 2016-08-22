@@ -659,38 +659,6 @@
     {
       "Key": "AccountBanned",
       "Value": "Provável Ban Permanente!"
-    },
-    {
-      "Key": "CatchErrorKillSwitch",
-      "Value": "KillSwitch: Erros de captura {0}/{1}"
-    },
-    {
-      "Key": "CatchEscapeKillSwitch",
-      "Value": "KillSwitch: Capturas escapou {0}/{1}"
-    },
-    {
-      "Key": "CatchFleeKillSwitch",
-      "Value": "KillSwitch: Capturas fugiu {0}/{1}"
-    },
-    {
-      "Key": "CatchMissedKillSwitch",
-      "Value": "KillSwitch: Capturas perdidas {0}/{1}"
-    },
-    {
-      "Key": "CatchSuccessKillSwitch",
-      "Value": "KillSwitch: Capturas com sucesso {0}/{1}"
-    },
-    {
-      "Key": "PokestopsKillSwitch",
-      "Value": "KillSwitch: Pokestops {0}/{1}"
-    },
-    {
-      "Key": "RequestHumanDistance",
-      "Value": "Buscando distâncias humanas dos pokestops..."
-    },
-    {
-      "Key": "CalculatingNextPokestop",
-      "Value": "Calculando próximo pokestop..."
     }
   ],
   "PokemonStrings": [

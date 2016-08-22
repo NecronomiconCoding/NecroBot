@@ -256,6 +256,7 @@
     <Compile Include="SimpleSession.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebSocketHandler\ActionCommands\FavoritePokemonHandler.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Events\WebResponce.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Events\EggListResponce.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Events\ItemListResponce.cs" />
@@ -286,7 +287,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Config\Translations\translation.ar.json" />
     <None Include="packages.config" />
     <None Include="Config\log4net.config" />
     <None Include="Config\log4net.unix.config" />

@@ -431,38 +431,6 @@
     {
       "Key": "AccountBanned",
       "Value": "Πιθανότατα μόνιμο Ban!"
-    },
-    {
-      "Key": "CatchErrorKillSwitch",
-      "Value": "Διακόπτης Τερματισμού: Κατάσταση σφάλματος πιασίματος {0}/{1}"
-    },
-    {
-      "Key": "CatchEscapeKillSwitch",
-      "Value": "Διακόπτης Τερματισμού: Κατάσταση αποφυγής κατά τα πιασίματα {0}/{1}"
-    },
-    {
-      "Key": "CatchFleeKillSwitch",
-      "Value": "Διακόπτης Τερματισμού: Κατάσταση δραπέτευσης κατά το πιάσιμο {0}/{1}"
-    },
-    {
-      "Key": "CatchMissedKillSwitch",
-      "Value": "Διακόπτης Τερματισμού: Κατάσταση αστοχιών κατά το πιάσιμο {0}/{1}"
-    },
-    {
-      "Key": "CatchSuccessKillSwitch",
-      "Value": "Διακόπτης Τερματισμού: Κατάσταση επιτυχημένων πιασίματων {0}/{1}"
-    },
-    {
-      "Key": "PokestopsKillSwitch",
-      "Value": "KillSwitch: Pokestops {0}/{1}"
-    },
-    {
-      "Key": "RequestHumanDistance",
-      "Value": "Request human distance of pokestops..."
-    },
-    {
-      "Key": "CalculatingNextPokestop",
-      "Value": "Calculating next pokestop..."
     }
   ],
 	"PokemonStrings": [
