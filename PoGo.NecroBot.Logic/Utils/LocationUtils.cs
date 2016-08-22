@@ -2,7 +2,6 @@
 
 using System;
 using GeoCoordinatePortable;
-using System.Xml.Linq;
 
 #endregion
 
