@@ -98,7 +98,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             while (pokestopList.Any())
             {
                 cancellationToken.ThrowIfCancellationRequested();
-                
+                //### new realtime snipe
+                await SnipeMSniperTask.CheckMSniperLocation(session, cancellationToken);
+                //###
+
                 //resort
                 pokestopList =
                     pokestopList.OrderBy(
