@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
@@ -57,17 +58,33 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Longitude = pokeStop.Longitude
                     });
                 }
+                else
+                {
+                    await RecycleItemsTask.Execute(session, cancellationToken);
+                }
+
+                if (fortSearch.ItemsAwarded.Count > 0)
+                {
+                    await session.Inventory.RefreshCachedInventory();
+                }
             }
         }
 
 
+        //Please do not change GetPokeStops() in this file, it's specifically set
+        //to only find stops within 40 meters
+        //this is for gpx pathing, we are not going to the pokestops,
+        //so do not make it more than 40 because it will never get close to those stops.
         private static async Task<List<FortData>> GetPokeStops(ISession session)
         {
-            var mapObjects = await session.Client.Map.GetMapObjects();
+            List<FortData> pokeStops = await UpdateFortsData(session);
+            if (pokeStops.Count > 0)
+            {
+                session.EventDispatcher.Send(new PokeStopListEvent { Forts = pokeStops });
+            }
 
             // Wasn't sure how to make this pretty. Edit as needed.
-            var pokeStops = mapObjects.Item1.MapCells.SelectMany(i => i.Forts)
-                .Where(
+            return pokeStops.Where(
                     i =>
                         i.Type == FortType.Checkpoint &&
                         i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
@@ -75,6 +92,23 @@ namespace PoGo.NecroBot.Logic.Tasks
                             LocationUtils.CalculateDistanceInMeters(
                                 session.Client.CurrentLatitude, session.Client.CurrentLongitude,
                                 i.Latitude, i.Longitude) < 40) ||
+                        session.LogicSettings.MaxTravelDistanceInMeters == 0
+                ).ToList();
+        }
+
+        private static async Task<List<FortData>> UpdateFortsData(ISession session)
+        {
+            var mapObjects = await session.Client.Map.GetMapObjects();
+
+            var pokeStops = mapObjects.Item1.MapCells.SelectMany(i => i.Forts)
+                .Where(
+                    i =>
+                        i.Type == FortType.Checkpoint &&
+                        i.CooldownCompleteTimestampMs < DateTime.UtcNow.ToUnixTime() &&
+                        (
+                            LocationUtils.CalculateDistanceInMeters(
+                                session.Client.CurrentLatitude, session.Client.CurrentLongitude,
+                                i.Latitude, i.Longitude) < session.LogicSettings.MaxTravelDistanceInMeters) ||
                         session.LogicSettings.MaxTravelDistanceInMeters == 0
                 );
 
