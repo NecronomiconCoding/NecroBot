@@ -162,7 +162,6 @@
     <Compile Include="Event\EggIncubatorStatusEvent.cs" />
     <Compile Include="Interfaces\Configuration\ILogicSettings.cs" />
     <Compile Include="Inventory.cs" />
-    <Compile Include="KillSwitch.cs" />
     <Compile Include="Localization\Localizer.cs" />
     <Compile Include="Logging\Logger.cs" />
     <Compile Include="Model\Google\GoogleObjects\Address_Components.cs" />
@@ -195,11 +194,11 @@
     <Compile Include="Model\Settings\GlobalSettings.cs" />
     <Compile Include="Model\Settings\GoogleWalkConfig.cs" />
     <Compile Include="Model\Settings\GpxConfig.cs" />
-    <Compile Include="Model\Settings\KillSwitchSettings.cs" />
     <Compile Include="Model\Settings\Location.cs" />
     <Compile Include="Model\Settings\LocationConfig.cs" />
     <Compile Include="Model\Settings\PlayerConfig.cs" />
     <Compile Include="Model\Settings\PokemonConfig.cs" />
+    <Compile Include="Model\Settings\PokeStopConfig.cs" />
     <Compile Include="Model\Settings\ProxyConfig.cs" />
     <Compile Include="Model\Settings\RecycleConfig.cs" />
     <Compile Include="Model\Settings\SnipeConfig.cs" />
@@ -217,6 +216,7 @@
     <Compile Include="Service\DirectionsService.cs" />
     <Compile Include="Service\TelegramService.cs" />
     <Compile Include="Model\Settings\LogicSettings.cs" />
+    <Compile Include="State\SessionStats.cs" />
     <Compile Include="Strategies\Walk\FlyStrategy.cs" />
     <Compile Include="Strategies\Walk\GoogleStrategy.cs" />
     <Compile Include="Strategies\Walk\HumanPathWalkingStrategy.cs" />
@@ -246,7 +246,7 @@
     <Compile Include="State\LoginState.cs" />
     <Compile Include="Event\NoticeEvent.cs" />
     <Compile Include="Event\PokemonEvolveEvent.cs" />
-    <Compile Include="State\PositionCheckState.cs" />
+    <Compile Include="State\LoadSaveState.cs" />
     <Compile Include="State\StateMachine.cs" />
     <Compile Include="Tasks\FarmPokestopsGPXTask.cs" />
     <Compile Include="Tasks\FarmPokestopsTask.cs" />

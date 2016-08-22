@@ -5,6 +5,10 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         /*Catch*/
         public bool CatchPokemon = true;
         public int DelayBetweenPokemonCatch = 2000;
+        /*CatchLimit*/
+        public bool UseCatchLimit = true;
+        public int CatchPokemonLimit = 998;
+        public int CatchPokemonLimitMinutes = 60 * 24 + 30;
         /*Incense*/
         public bool UseIncenseConstantly;
         /*Egg*/

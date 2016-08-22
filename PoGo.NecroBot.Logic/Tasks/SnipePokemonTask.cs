@@ -188,6 +188,26 @@ namespace PoGo.NecroBot.Logic.Tasks
             return true;
         }
 
+        private static bool CheckSnipeConditions(ISession session)
+        {
+            if (!session.LogicSettings.UseSnipeLimit) return true;
+
+            session.EventDispatcher.Send(new SnipeEvent { Message = "Sniper count " + session.Stats.SnipeCount });
+            if (session.Stats.SnipeCount >= session.LogicSettings.SnipeCountLimit)
+            {
+                if ((DateTime.Now - session.Stats.LastSnipeTime).TotalSeconds > session.LogicSettings.SnipeRestSeconds)
+                {
+                    session.Stats.SnipeCount = 0;
+                }
+                else
+                {
+                    session.EventDispatcher.Send(new SnipeEvent { Message = "Sniper need to take a rest before your account is rekt." });
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             if (_lastSnipe.AddMilliseconds(session.LogicSettings.MinDelayBetweenSnipes) > DateTime.Now)
@@ -245,7 +265,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                     if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                         return;
-
+                                    if (!CheckSnipeConditions(session)) return;
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
                                 }
                             }
@@ -271,6 +291,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                     if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                         return;
+                                    if (!CheckSnipeConditions(session)) return;
 
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
                                 }
@@ -297,6 +318,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                     if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                         return;
+                                    if (!CheckSnipeConditions(session)) return;
 
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
                                 }
@@ -323,6 +345,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                                     if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                         return;
+                                    if (!CheckSnipeConditions(session)) return;
 
                                     await Snipe(session, pokemonIds, location.Latitude, location.Longitude, cancellationToken);
                                 }
@@ -363,6 +386,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     {
                                         if (!await CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                                             return;
+                                        if (!CheckSnipeConditions(session)) return;
 
                                         await Snipe(session, pokemonIds, pokemonLocation.latitude, pokemonLocation.longitude, cancellationToken);
                                     }
@@ -500,6 +524,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             _lastSnipe = DateTime.Now;
 
+            if (catchedPokemon)
+            {
+                session.Stats.SnipeCount++;
+                session.Stats.LastSnipeTime = _lastSnipe;
+            }
             session.EventDispatcher.Send(new SnipeModeEvent { Active = false });
             await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions, cancellationToken);
 

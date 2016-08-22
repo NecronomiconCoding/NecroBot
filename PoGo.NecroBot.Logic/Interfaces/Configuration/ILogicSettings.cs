@@ -13,6 +13,12 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
     {
         bool UseWebsocket { get; }
         bool CatchPokemon { get; }
+        int CatchPokemonLimit { get; }
+        int CatchPokemonLimitMinutes { get; }
+        int PokeStopLimit { get; }
+        int PokeStopLimitMinutes { get; }
+        int SnipeCountLimit { get; }
+        int SnipeRestSeconds { get; }
         bool TransferWeakPokemon { get; }
         bool DisableHumanWalking { get; }
         bool CheckForUpdates { get; }
@@ -125,14 +131,9 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         bool VerboseRecycling { get; }
         double RecycleInventoryAtUsagePercentage { get; }
         double EvolveKeptPokemonsAtStorageUsagePercentage { get; }
-        bool UseKillSwitchCatch { get; }
-        int CatchErrorPerHours { get; }
-        int CatchEscapePerHours { get; }
-        int CatchFleePerHours { get; }
-        int CatchMissedPerHours { get; }
-        int CatchSuccessPerHours { get; }
-        bool UseKillSwitchPokestops { get; }
-        int AmountPokestops { get; }
+        bool UseSnipeLimit { get; }
+        bool UsePokeStopLimit { get; }
+        bool UseCatchLimit { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }

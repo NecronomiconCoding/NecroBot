@@ -145,7 +145,7 @@ namespace PoGo.NecroBot.Logic.State
                 System.Environment.Exit(1);
             }
             
-            return new PositionCheckState();
+            return new LoadSaveState();
         }
 
         private static async Task CheckLogin(ISession session, CancellationToken cancellationToken)
