@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
     public class LocationConfig
@@ -13,5 +15,11 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool RandomlyPauseAtStops = true;
         public int MaxSpawnLocationOffset = 10;
         public int MaxTravelDistanceInMeters = 1000;
+        [JsonIgnore]
+        public int ResumeTrack = 0;
+        [JsonIgnore]
+        public int ResumeTrackSeg = 0;
+        [JsonIgnore]
+        public int ResumeTrackPt = 0;
     }
 }

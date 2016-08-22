@@ -153,5 +153,8 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         bool UseGoogleWalkCache { get; }
         string GoogleApiKey { get; }
         string GoogleHeuristic { get; }
+        int ResumeTrack { get; }
+        int ResumeTrackSeg { get; }
+        int ResumeTrackPt { get; }
     }
 }

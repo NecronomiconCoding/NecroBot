@@ -3,6 +3,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Threading;
@@ -111,7 +112,7 @@ namespace PoGo.NecroBot.CLI
                 catch (Exception) { }
             }
 
-            var lastPosFile = Path.Combine(profileConfigPath, "lastPos.ini");
+            var lastPosFile = Path.Combine(profileConfigPath, "LastPos.ini");
             if (File.Exists(lastPosFile) && settings.LocationConfig.StartFromLastPosition)
             {
                 var text = File.ReadAllText(lastPosFile);
@@ -125,6 +126,45 @@ namespace PoGo.NecroBot.CLI
                     settings.LocationConfig.DefaultLongitude = lng;
                 }
                 catch (Exception) { }
+            }
+
+            if (settings.GPXConfig.UseGpxPathing)
+            {
+                var xmlString = File.ReadAllText(settings.GPXConfig.GpxFile);
+                var readgpx = new GpxReader(xmlString, session);
+                var nearestPt = readgpx.Tracks.SelectMany(
+                    (trk, trkindex) =>
+                    trk.Segments.SelectMany(
+                        (seg, segindex) =>
+                            seg.TrackPoints.Select(
+                                (pt, ptindex) =>
+                                    new
+                                    {
+                                        TrackPoint = pt,
+                                        TrackIndex = trkindex,
+                                        SegIndex = segindex,
+                                        PtIndex = ptindex,
+                                        Latitude = Convert.ToDouble(pt.Lat, CultureInfo.InvariantCulture),
+                                        Longitude = Convert.ToDouble(pt.Lon, CultureInfo.InvariantCulture),
+                                        Distance = LocationUtils.CalculateDistanceInMeters(
+                                            settings.LocationConfig.DefaultLatitude,
+                                            settings.LocationConfig.DefaultLongitude,
+                                            Convert.ToDouble(pt.Lat, CultureInfo.InvariantCulture),
+                                            Convert.ToDouble(pt.Lon, CultureInfo.InvariantCulture)
+                                        )
+                                    }
+                            )
+                    )
+                ).OrderBy(pt => pt.Distance).FirstOrDefault(pt => pt.Distance <= 5000);
+
+                if (nearestPt != null)
+                {
+                    settings.LocationConfig.DefaultLatitude = nearestPt.Latitude;
+                    settings.LocationConfig.DefaultLongitude = nearestPt.Longitude;
+                    settings.LocationConfig.ResumeTrack = nearestPt.TrackIndex;
+                    settings.LocationConfig.ResumeTrackSeg = nearestPt.SegIndex;
+                    settings.LocationConfig.ResumeTrackPt = nearestPt.PtIndex;
+                }
             }
 
             session = new Session(new ClientSettings(settings), new LogicSettings(settings));
