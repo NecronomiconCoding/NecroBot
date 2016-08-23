@@ -2,7 +2,11 @@
   <a href="http://necrobot.io">
     <img alt="Logo" src="http://necrobot.io/img/typotype-transparent.png" width="600">
   </a>
+  <a href="https://discord.gg/VXKxNFr">
+    <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
+  </a>
 </p>
+
 
 [![Discord](https://img.shields.io/badge/discord-NECROBOT.IO-blue.svg)](https://discord.gg/VXKxNFr)
 [![Build status](https://ci.appveyor.com/api/projects/status/8ijvvr6b7fe2h0w2?svg=true)](https://ci.appveyor.com/project/NecronomiconCoding/necrobot)
