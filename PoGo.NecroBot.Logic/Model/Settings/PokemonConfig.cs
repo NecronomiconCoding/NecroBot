@@ -22,7 +22,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public float UseBerriesMinIv = 90;
         public double UseBerriesBelowCatchProbability = 0.20;
         public string UseBerriesOperator = "or";
-        public int MaxBerriesToUsePerPokemon = 3;
+        public int MaxBerriesToUsePerPokemon = 1;
         /*Transfer*/
         public bool TransferWeakPokemon;
         public bool TransferDuplicatePokemon = true;
