@@ -6,7 +6,7 @@
     },
     {
       "Key": "SnipeExceeds",
-      "Value": "Lo sniper deve essere disattivato in quanto potrebbe essere far bannare l'account "
+      "Value": "Lo sniper é stato disattivato in quanto potrebbe far bannare l'account."
     },
     {
       "Key": "CatchExceeds",
@@ -124,7 +124,6 @@
       "Key": "eventUseBerry",
       "Value": "Usata {0} | {1} rimanenti"
     },
-
     {
       "Key": "itemRazzBerry",
       "Value": "Baccalampon"
