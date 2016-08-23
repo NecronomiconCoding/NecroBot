@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Windows;
 using PoGo.NecroBot.Logic;
-using System.Windows;
 using PokemonGo.RocketAPI.Enums;
+using System.Collections.Generic;
+using POGOProtos.Inventory.Item;
+using POGOProtos.Enums;
+using System.Collections.ObjectModel;
+using System;
+using System.IO;
 
 namespace PoGo.NecroBot.ConfigUI.Models
 {
@@ -38,6 +39,14 @@ namespace PoGo.NecroBot.ConfigUI.Models
         }
         public static readonly DependencyProperty TransferConfigAndAuthOnUpdateProperty =
             DependencyProperty.Register("TransferConfigAndAuthOnUpdate", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool StartupWelcomeDelay
+        {
+            get { return (bool)GetValue(StartupWelcomeDelayProperty); }
+            set { SetValue(StartupWelcomeDelayProperty, value); }
+        }
+        public static readonly DependencyProperty StartupWelcomeDelayProperty =
+            DependencyProperty.Register("StartupWelcomeDelay", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
 
         public bool DisableHumanWalking
         {
@@ -78,6 +87,22 @@ namespace PoGo.NecroBot.ConfigUI.Models
         }
         public static readonly DependencyProperty WalkingSpeedInKilometerPerHourProperty =
             DependencyProperty.Register("WalkingSpeedInKilometerPerHour", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public bool UseWalkingSpeedVariant
+        {
+            get { return (bool)GetValue(UseWalkingSpeedVariantProperty); }
+            set { SetValue(UseWalkingSpeedVariantProperty, value); }
+        }
+        public static readonly DependencyProperty UseWalkingSpeedVariantProperty =
+            DependencyProperty.Register("UseWalkingSpeedVariant", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(true));
+
+        public bool ShowVariantWalking
+        {
+            get { return (bool)GetValue(ShowVariantWalkingProperty); }
+            set { SetValue(ShowVariantWalkingProperty, value); }
+        }
+        public static readonly DependencyProperty ShowVariantWalkingProperty =
+            DependencyProperty.Register("ShowVariantWalking", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(true));
 
         public int MaxSpawnLocationOffset
         {
@@ -350,6 +375,30 @@ namespace PoGo.NecroBot.ConfigUI.Models
         public static readonly DependencyProperty RecycleInventoryAtUsagePercentageProperty =
             DependencyProperty.Register("RecycleInventoryAtUsagePercentage", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
 
+        public bool RandomizeRecycle
+        {
+            get { return (bool)GetValue(RandomizeRecycleProperty); }
+            set { SetValue(RandomizeRecycleProperty, value); }
+        }
+        public static readonly DependencyProperty RandomizeRecycleProperty =
+            DependencyProperty.Register("RandomizeRecycle", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public int RandomRecycleValue
+        {
+            get { return (int)GetValue(RandomRecycleValueProperty); }
+            set { SetValue(RandomRecycleValueProperty, value); }
+        }
+        public static readonly DependencyProperty RandomRecycleValueProperty =
+            DependencyProperty.Register("RandomRecycleValue", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public bool DelayBetweenRecycleActions
+        {
+            get { return (bool)GetValue(DelayBetweenRecycleActionsProperty); }
+            set { SetValue(DelayBetweenRecycleActionsProperty, value); }
+        }
+        public static readonly DependencyProperty DelayBetweenRecycleActionsProperty =
+            DependencyProperty.Register("DelayBetweenRecycleActions", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
         public int TotalAmountOfPokeballsToKeep
         {
             get { return (int)GetValue(TotalAmountOfPokeballsToKeepProperty); }
@@ -472,6 +521,14 @@ namespace PoGo.NecroBot.ConfigUI.Models
         }
         public static readonly DependencyProperty AutomaticallyLevelUpPokemonProperty =
             DependencyProperty.Register("AutomaticallyLevelUpPokemon", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool OnlyUpgradeFavorites
+        {
+            get { return (bool)GetValue(OnlyUpgradeFavoritesProperty); }
+            set { SetValue(OnlyUpgradeFavoritesProperty, value); }
+        }
+        public static readonly DependencyProperty OnlyUpgradeFavoritesProperty =
+            DependencyProperty.Register("OnlyUpgradeFavorites", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
 
         public int AmountOfTimesToUpgradeLoop
         {
@@ -605,7 +662,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
         }
         public static readonly DependencyProperty MaxPokeballsPerPokemonProperty =
             DependencyProperty.Register("MaxPokeballsPerPokemon", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
-
+        
         public int MaxBerriesToUsePerPokemon
         {
             get { return (int)GetValue(MaxBerriesToUsePerPokemonProperty); }
@@ -800,19 +857,419 @@ namespace PoGo.NecroBot.ConfigUI.Models
 
 
         #region TRANSFER Properties
+
+        public bool TransferWeakPokemon
+        {
+            get { return (bool)GetValue(TransferWeakPokemonProperty); }
+            set { SetValue(TransferWeakPokemonProperty, value); }
+        }
+        public static readonly DependencyProperty TransferWeakPokemonProperty =
+            DependencyProperty.Register("TransferWeakPokemon", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool TransferDuplicatePokemon
+        {
+            get { return (bool)GetValue(TransferDuplicatePokemonProperty); }
+            set { SetValue(TransferDuplicatePokemonProperty, value); }
+        }
+        public static readonly DependencyProperty TransferDuplicatePokemonProperty =
+            DependencyProperty.Register("TransferDuplicatePokemon", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool TransferDuplicatePokemonOnCapture
+        {
+            get { return (bool)GetValue(TransferDuplicatePokemonOnCaptureProperty); }
+            set { SetValue(TransferDuplicatePokemonOnCaptureProperty, value); }
+        }
+        public static readonly DependencyProperty TransferDuplicatePokemonOnCaptureProperty =
+            DependencyProperty.Register("TransferDuplicatePokemonOnCapture", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public int KeepMinCp
+        {
+            get { return (int)GetValue(KeepMinCpProperty); }
+            set { SetValue(KeepMinCpProperty, value); }
+        }
+        public static readonly DependencyProperty KeepMinCpProperty =
+            DependencyProperty.Register("KeepMinCp", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public float KeepMinIvPercentage
+        {
+            get { return (float)GetValue(KeepMinIvPercentageProperty); }
+            set { SetValue(KeepMinIvPercentageProperty, value); }
+        }
+        public static readonly DependencyProperty KeepMinIvPercentageProperty =
+            DependencyProperty.Register("KeepMinIvPercentage", typeof(float), typeof(ObservableSettings), new PropertyMetadata(0.0f));
+
+        public int KeepMinLvl
+        {
+            get { return (int)GetValue(KeepMinLvlProperty); }
+            set { SetValue(KeepMinLvlProperty, value); }
+        }
+        public static readonly DependencyProperty KeepMinLvlProperty =
+            DependencyProperty.Register("KeepMinLvl", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public string KeepMinOperator
+        {
+            get { return (string)GetValue(KeepMinOperatorProperty); }
+            set { SetValue(KeepMinOperatorProperty, value); }
+        }
+        public static readonly DependencyProperty KeepMinOperatorProperty =
+            DependencyProperty.Register("KeepMinOperator", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+
+        public bool UseKeepMinLevel
+        {
+            get { return (bool)GetValue(UseKeepMinLevelProperty); }
+            set { SetValue(UseKeepMinLevelProperty, value); }
+        }
+        public static readonly DependencyProperty UseKeepMinLevelProperty =
+            DependencyProperty.Register("UseKeepMinLevel", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool PrioritizeIvOverCp
+        {
+            get { return (bool)GetValue(PrioritizeIvOverCpProperty); }
+            set { SetValue(PrioritizeIvOverCpProperty, value); }
+        }
+        public static readonly DependencyProperty PrioritizeIvOverCpProperty =
+            DependencyProperty.Register("PrioritizeIvOverCp", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public int KeepMinDuplicatePokemon
+        {
+            get { return (int)GetValue(KeepMinDuplicatePokemonProperty); }
+            set { SetValue(KeepMinDuplicatePokemonProperty, value); }
+        }
+        public static readonly DependencyProperty KeepMinDuplicatePokemonProperty =
+            DependencyProperty.Register("KeepMinDuplicatePokemon", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
         #endregion TRANSFER Properties
 
 
         #region SNIPING Properties
+
+        public bool UseSnipeLocationServer
+        {
+            get { return (bool)GetValue(UseSnipeLocationServerProperty); }
+            set { SetValue(UseSnipeLocationServerProperty, value); }
+        }
+        public static readonly DependencyProperty UseSnipeLocationServerProperty =
+            DependencyProperty.Register("UseSnipeLocationServer", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public string SnipeLocationServer
+        {
+            get { return (string)GetValue(SnipeLocationServerProperty); }
+            set { SetValue(SnipeLocationServerProperty, value); }
+        }
+        public static readonly DependencyProperty SnipeLocationServerProperty =
+            DependencyProperty.Register("SnipeLocationServer", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+
+        public int SnipeLocationServerPort
+        {
+            get { return (int)GetValue(SnipeLocationServerPortProperty); }
+            set { SetValue(SnipeLocationServerPortProperty, value); }
+        }
+        public static readonly DependencyProperty SnipeLocationServerPortProperty =
+            DependencyProperty.Register("SnipeLocationServerPort", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public bool GetSniperInfoFromPokezz
+        {
+            get { return (bool)GetValue(GetSniperInfoFromPokezzProperty); }
+            set { SetValue(GetSniperInfoFromPokezzProperty, value); }
+        }
+        public static readonly DependencyProperty GetSniperInfoFromPokezzProperty =
+            DependencyProperty.Register("GetSniperInfoFromPokezz", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool GetOnlyVerifiedSniperInfoFromPokezz
+        {
+            get { return (bool)GetValue(GetOnlyVerifiedSniperInfoFromPokezzProperty); }
+            set { SetValue(GetOnlyVerifiedSniperInfoFromPokezzProperty, value); }
+        }
+        public static readonly DependencyProperty GetOnlyVerifiedSniperInfoFromPokezzProperty =
+            DependencyProperty.Register("GetOnlyVerifiedSniperInfoFromPokezz", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool GetSniperInfoFromPokeSnipers
+        {
+            get { return (bool)GetValue(GetSniperInfoFromPokeSnipersProperty); }
+            set { SetValue(GetSniperInfoFromPokeSnipersProperty, value); }
+        }
+        public static readonly DependencyProperty GetSniperInfoFromPokeSnipersProperty =
+            DependencyProperty.Register("GetSniperInfoFromPokeSnipers", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool GetSniperInfoFromPokeWatchers
+        {
+            get { return (bool)GetValue(GetSniperInfoFromPokeWatchersProperty); }
+            set { SetValue(GetSniperInfoFromPokeWatchersProperty, value); }
+        }
+        public static readonly DependencyProperty GetSniperInfoFromPokeWatchersProperty =
+            DependencyProperty.Register("GetSniperInfoFromPokeWatchers", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+        
+        public bool GetSniperInfoFromSkiplagged
+        {
+            get { return (bool)GetValue(GetSniperInfoFromSkiplaggedProperty); }
+            set { SetValue(GetSniperInfoFromSkiplaggedProperty, value); }
+        }
+        public static readonly DependencyProperty GetSniperInfoFromSkiplaggedProperty =
+            DependencyProperty.Register("GetSniperInfoFromSkiplagged", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public int MinPokeballsToSnipe
+        {
+            get { return (int)GetValue(MinPokeballsToSnipeProperty); }
+            set { SetValue(MinPokeballsToSnipeProperty, value); }
+        }
+        public static readonly DependencyProperty MinPokeballsToSnipeProperty =
+            DependencyProperty.Register("MinPokeballsToSnipe", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int MinPokeballsWhileSnipe
+        {
+            get { return (int)GetValue(MinPokeballsWhileSnipeProperty); }
+            set { SetValue(MinPokeballsWhileSnipeProperty, value); }
+        }
+        public static readonly DependencyProperty MinPokeballsWhileSnipeProperty =
+            DependencyProperty.Register("MinPokeballsWhileSnipe", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public int MinDelayBetweenSnipes
+        {
+            get { return (int)GetValue(MinDelayBetweenSnipesProperty); }
+            set { SetValue(MinDelayBetweenSnipesProperty, value); }
+        }
+        public static readonly DependencyProperty MinDelayBetweenSnipesProperty =
+            DependencyProperty.Register("MinDelayBetweenSnipes", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public double SnipingScanOffset
+        {
+            get { return (double)GetValue(SnipingScanOffsetProperty); }
+            set { SetValue(SnipingScanOffsetProperty, value); }
+        }
+        public static readonly DependencyProperty SnipingScanOffsetProperty =
+            DependencyProperty.Register("SnipingScanOffset", typeof(double), typeof(ObservableSettings), new PropertyMetadata(0.0));
+
+        public bool SnipeAtPokestops
+        {
+            get { return (bool)GetValue(SnipeAtPokestopsProperty); }
+            set { SetValue(SnipeAtPokestopsProperty, value); }
+        }
+        public static readonly DependencyProperty SnipeAtPokestopsProperty =
+            DependencyProperty.Register("SnipeAtPokestops", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool SnipeIgnoreUnknownIv
+        {
+            get { return (bool)GetValue(SnipeIgnoreUnknownIvProperty); }
+            set { SetValue(SnipeIgnoreUnknownIvProperty, value); }
+        }
+        public static readonly DependencyProperty SnipeIgnoreUnknownIvProperty =
+            DependencyProperty.Register("SnipeIgnoreUnknownIv", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool UseTransferIvForSnipe
+        {
+            get { return (bool)GetValue(UseTransferIvForSnipeProperty); }
+            set { SetValue(UseTransferIvForSnipeProperty, value); }
+        }
+        public static readonly DependencyProperty UseTransferIvForSnipeProperty =
+            DependencyProperty.Register("UseTransferIvForSnipe", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool SnipePokemonNotInPokedex
+        {
+            get { return (bool)GetValue(SnipePokemonNotInPokedexProperty); }
+            set { SetValue(SnipePokemonNotInPokedexProperty, value); }
+        }
+        public static readonly DependencyProperty SnipePokemonNotInPokedexProperty =
+            DependencyProperty.Register("SnipePokemonNotInPokedex", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
         #endregion SNIPING Properties
 
 
         #region MISC Properties
+
+        public bool FastSoftBanBypass
+        {
+            get { return (bool)GetValue(FastSoftBanBypassProperty); }
+            set { SetValue(FastSoftBanBypassProperty, value); }
+        }
+        public static readonly DependencyProperty FastSoftBanBypassProperty =
+            DependencyProperty.Register("FastSoftBanBypass", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool UseGpxPathing
+        {
+            get { return (bool)GetValue(UseGpxPathingProperty); }
+            set { SetValue(UseGpxPathingProperty, value); }
+        }
+        public static readonly DependencyProperty UseGpxPathingProperty =
+            DependencyProperty.Register("UseGpxPathing", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public string GpxFile
+        {
+            get { return (string)GetValue(GpxFileProperty); }
+            set { SetValue(GpxFileProperty, value); }
+        }
+        public static readonly DependencyProperty GpxFileProperty =
+            DependencyProperty.Register("GpxFile", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+
+        public bool UseWebsocket
+        {
+            get { return (bool)GetValue(UseWebsocketProperty); }
+            set { SetValue(UseWebsocketProperty, value); }
+        }
+        public static readonly DependencyProperty UseWebsocketProperty =
+            DependencyProperty.Register("UseWebsocket", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public int WebSocketPort
+        {
+            get { return (int)GetValue(WebSocketPortProperty); }
+            set { SetValue(WebSocketPortProperty, value); }
+        }
+        public static readonly DependencyProperty WebSocketPortProperty =
+            DependencyProperty.Register("WebSocketPort", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public bool UseTelegramAPI
+        {
+            get { return (bool)GetValue(UseTelegramAPIProperty); }
+            set { SetValue(UseTelegramAPIProperty, value); }
+        }
+        public static readonly DependencyProperty UseTelegramAPIProperty =
+            DependencyProperty.Register("UseTelegramAPI", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public string TelegramAPIKey
+        {
+            get { return (string)GetValue(TelegramAPIKeyProperty); }
+            set { SetValue(TelegramAPIKeyProperty, value); }
+        }
+        public static readonly DependencyProperty TelegramAPIKeyProperty =
+            DependencyProperty.Register("TelegramAPIKey", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+
+        public string TelegramPassword
+        {
+            get { return (string)GetValue(TelegramPasswordProperty); }
+            set { SetValue(TelegramPasswordProperty, value); }
+        }
+        public static readonly DependencyProperty TelegramPasswordProperty =
+            DependencyProperty.Register("TelegramPassword", typeof(string), typeof(ObservableSettings), new PropertyMetadata(string.Empty));
+
+        public int AmountOfPokemonToDisplayOnStart
+        {
+            get { return (int)GetValue(AmountOfPokemonToDisplayOnStartProperty); }
+            set { SetValue(AmountOfPokemonToDisplayOnStartProperty, value); }
+        }
+        public static readonly DependencyProperty AmountOfPokemonToDisplayOnStartProperty =
+            DependencyProperty.Register("AmountOfPokemonToDisplayOnStart", typeof(int), typeof(ObservableSettings), new PropertyMetadata(0));
+
+        public bool DetailedCountsBeforeRecycling
+        {
+            get { return (bool)GetValue(DetailedCountsBeforeRecyclingProperty); }
+            set { SetValue(DetailedCountsBeforeRecyclingProperty, value); }
+        }
+        public static readonly DependencyProperty DetailedCountsBeforeRecyclingProperty =
+            DependencyProperty.Register("DetailedCountsBeforeRecycling", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
+        public bool DumpPokemonStats
+        {
+            get { return (bool)GetValue(DumpPokemonStatsProperty); }
+            set { SetValue(DumpPokemonStatsProperty, value); }
+        }
+        public static readonly DependencyProperty DumpPokemonStatsProperty =
+            DependencyProperty.Register("DumpPokemonStats", typeof(bool), typeof(ObservableSettings), new PropertyMetadata(false));
+
         #endregion MISC Properties
 
 
-        public ObservableSettings() { }
+        public List<KeyValuePair<ItemId, int>> ItemRecycleFilter
+        {
+            get { return (List<KeyValuePair<ItemId, int>>)GetValue(ItemRecycleFilterProperty); }
+            set { SetValue(ItemRecycleFilterProperty, value); }
+        }
+        public static readonly DependencyProperty ItemRecycleFilterProperty =
+            DependencyProperty.Register("ItemRecycleFilter", typeof(List<KeyValuePair<ItemId, int>>), typeof(ObservableSettings), new PropertyMetadata(null));
 
+        public ObservableCollection<PokemonToggle> NoTransferCollection
+        {
+            get { return (ObservableCollection<PokemonToggle>)GetValue(NoTransferCollectionProperty); }
+            set { SetValue(NoTransferCollectionProperty, value); }
+        }
+        public static readonly DependencyProperty NoTransferCollectionProperty =
+            DependencyProperty.Register("NoTransferCollection", typeof(ObservableCollection<PokemonToggle>), typeof(ObservableSettings), new PropertyMetadata(null));
+
+        public ObservableCollection<PokemonToggle> EvolveCollection
+        {
+            get { return (ObservableCollection<PokemonToggle>)GetValue(EvolveCollectionProperty); }
+            set { SetValue(EvolveCollectionProperty, value); }
+        }
+        public static readonly DependencyProperty EvolveCollectionProperty =
+            DependencyProperty.Register("EvolveCollection", typeof(ObservableCollection<PokemonToggle>), typeof(ObservableSettings), new PropertyMetadata(null));
+
+        public ObservableCollection<PokemonToggle> UpgradeCollection
+        {
+            get { return (ObservableCollection<PokemonToggle>)GetValue(UpgradeCollectionProperty); }
+            set { SetValue(UpgradeCollectionProperty, value); }
+        }
+        public static readonly DependencyProperty UpgradeCollectionProperty =
+            DependencyProperty.Register("UpgradeCollection", typeof(ObservableCollection<PokemonToggle>), typeof(ObservableSettings), new PropertyMetadata(null));
+
+        public ObservableCollection<PokemonToggle> IgnoreCollection
+        {
+            get { return (ObservableCollection<PokemonToggle>)GetValue(IgnoreCollectionProperty); }
+            set { SetValue(IgnoreCollectionProperty, value); }
+        }
+        public static readonly DependencyProperty IgnoreCollectionProperty =
+            DependencyProperty.Register("IgnoreCollection", typeof(ObservableCollection<PokemonToggle>), typeof(ObservableSettings), new PropertyMetadata(null));
+
+        public ObservableCollection<PokemonToggle> MasterballCollection
+        {
+            get { return (ObservableCollection<PokemonToggle>)GetValue(MasterballCollectionProperty); }
+            set { SetValue(MasterballCollectionProperty, value); }
+        }
+        public static readonly DependencyProperty MasterballCollectionProperty =
+            DependencyProperty.Register("MasterballCollection", typeof(ObservableCollection<PokemonToggle>), typeof(ObservableSettings), new PropertyMetadata(null));
+
+        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter
+        {
+            get { return (Dictionary<PokemonId, TransferFilter>)GetValue(PokemonsTransferFilterProperty); }
+            set { SetValue(PokemonsTransferFilterProperty, value); }
+        }
+        public static readonly DependencyProperty PokemonsTransferFilterProperty =
+            DependencyProperty.Register("PokemonsTransferFilter", typeof(Dictionary<PokemonId, TransferFilter>), typeof(ObservableSettings), new PropertyMetadata(null));
+
+        public SnipeSettings PokemonToSnipe
+        {
+            get { return (SnipeSettings)GetValue(PokemonToSnipeProperty); }
+            set { SetValue(PokemonToSnipeProperty, value); }
+        }
+        public static readonly DependencyProperty PokemonToSnipeProperty =
+            DependencyProperty.Register("PokemonToSnipe", typeof(SnipeSettings), typeof(ObservableSettings), new PropertyMetadata(null));
+
+
+
+        public ObservableSettings()
+        {
+            NoTransferCollection = new ObservableCollection<PokemonToggle>();
+            EvolveCollection = new ObservableCollection<PokemonToggle>();
+            UpgradeCollection = new ObservableCollection<PokemonToggle>();
+            IgnoreCollection = new ObservableCollection<PokemonToggle>();
+            MasterballCollection = new ObservableCollection<PokemonToggle>();
+            PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>();
+            ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>();
+        }
+
+        private void LoadCurrentCoords()
+        {
+            Latitude = DefaultLatitude;
+            Longitude = DefaultLongitude;
+            string coordFile = Path.Combine(Directory.GetCurrentDirectory(), "Config", "LastPos.ini");
+            if (File.Exists(coordFile))
+            {
+                var latlngFromFile = File.ReadAllText(coordFile);
+                var latlng = latlngFromFile.Split(':');
+                if (latlng[0].Length != 0 && latlng[1].Length != 0)
+                {
+                    try
+                    {
+                        Latitude = Convert.ToDouble(latlng[0]);
+                        Longitude = Convert.ToDouble(latlng[1]);
+                    }
+                    catch (FormatException) { }
+                }
+            }
+        }
+
+        private void SaveCurrentCoords()
+        {
+            var coordsPath = Path.Combine(Directory.GetCurrentDirectory(), "Config", "LastPos.ini");
+            File.WriteAllText(coordsPath, $"{Latitude}:{Longitude}");
+        }
 
         public static ObservableSettings CreateFromGlobalSettings(GlobalSettings set)
         {
@@ -821,11 +1278,14 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.TranslationLanguageCode = set.TranslationLanguageCode;
             res.AutoUpdate = set.AutoUpdate;
             res.TransferConfigAndAuthOnUpdate = set.TransferConfigAndAuthOnUpdate;
+            res.StartupWelcomeDelay = set.StartupWelcomeDelay;
             res.DisableHumanWalking = set.DisableHumanWalking;
-            res.Latitude = set.DefaultLatitude;
-            res.Longitude = set.DefaultLongitude;
+            res.DefaultLatitude = set.DefaultLatitude;
+            res.DefaultLongitude = set.DefaultLongitude;
             res.MaxTravelDistanceInMeters = set.MaxTravelDistanceInMeters;
             res.WalkingSpeedInKilometerPerHour = set.WalkingSpeedInKilometerPerHour;
+            res.UseWalkingSpeedVariant = set.UseWalkingSpeedVariant;
+            res.ShowVariantWalking = set.ShowVariantWalking;
             res.MaxSpawnLocationOffset = set.MaxSpawnLocationOffset;
             res.DelayBetweenPlayerActions = set.DelayBetweenPlayerActions;
             res.DelayBetweenPokemonCatch = set.DelayBetweenPokemonCatch;
@@ -873,6 +1333,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.RenameOnlyAboveIv = set.RenameOnlyAboveIv;
             res.RenameTemplate = set.RenameTemplate;
             res.AutomaticallyLevelUpPokemon = set.AutomaticallyLevelUpPokemon;
+            res.OnlyUpgradeFavorites = set.OnlyUpgradeFavorites;
             res.AmountOfTimesToUpgradeLoop = set.AmountOfTimesToUpgradeLoop;
             res.GetMinStarDustForLevelUp = set.GetMinStarDustForLevelUp;
             res.LevelUpByCPorIv = set.LevelUpByCPorIv;
@@ -913,73 +1374,64 @@ namespace PoGo.NecroBot.ConfigUI.Models
             res.ForceGreatThrowOverCp = set.ForceGreatThrowOverCp;
             res.ForceExcellentThrowOverCp = set.ForceExcellentThrowOverCp;
             // TRANSFER
+            res.TransferWeakPokemon = set.TransferWeakPokemon;
+            res.TransferDuplicatePokemon = set.TransferDuplicatePokemon;
+            res.TransferDuplicatePokemonOnCapture = set.TransferDuplicatePokemonOnCapture;
+            res.KeepMinCp = set.KeepMinCp;
+            res.KeepMinIvPercentage = set.KeepMinIvPercentage;
+            res.KeepMinLvl = set.KeepMinLvl;
+            res.KeepMinOperator = set.KeepMinOperator;
+            res.UseKeepMinLevel = set.UseKeepMinLvl;
+            res.PrioritizeIvOverCp = set.PrioritizeIvOverCp;
+            res.KeepMinDuplicatePokemon = set.KeepMinDuplicatePokemon;
             // SNIPING
+            res.UseSnipeLocationServer = set.UseSnipeLocationServer;
+            res.SnipeLocationServer = set.SnipeLocationServer;
+            res.SnipeLocationServerPort = set.SnipeLocationServerPort;
+            res.GetSniperInfoFromPokezz = set.GetSniperInfoFromPokezz;
+            res.GetOnlyVerifiedSniperInfoFromPokezz = set.GetOnlyVerifiedSniperInfoFromPokezz;
+            res.GetSniperInfoFromPokeSnipers = set.GetSniperInfoFromPokeSnipers;
+            res.GetSniperInfoFromPokeWatchers = set.GetSniperInfoFromPokeWatchers;
+            res.GetSniperInfoFromSkiplagged = set.GetSniperInfoFromSkiplagged;
+            res.MinPokeballsToSnipe = set.MinPokeballsToSnipe;
+            res.MinPokeballsWhileSnipe = set.MinPokeballsWhileSnipe;
+            res.MinDelayBetweenSnipes = set.MinDelayBetweenSnipes;
+            res.SnipingScanOffset = set.SnipingScanOffset;
+            res.SnipeAtPokestops = set.SnipeAtPokestops;
+            res.SnipeIgnoreUnknownIv = set.SnipeIgnoreUnknownIv;
+            res.UseTransferIvForSnipe = set.UseTransferIvForSnipe;
+            res.SnipePokemonNotInPokedex = set.SnipePokemonNotInPokedex;
             // MISC
+            res.FastSoftBanBypass = set.FastSoftBanBypass;
+            res.UseGpxPathing = set.UseGpxPathing;
+            res.GpxFile = set.GpxFile;
+            res.UseWebsocket = set.UseWebsocket;
+            res.WebSocketPort = set.WebSocketPort;
+            res.UseTelegramAPI = set.UseTelegramAPI;
+            res.TelegramAPIKey = set.TelegramAPIKey;
+            res.TelegramPassword = set.TelegramPassword;
+            res.AmountOfPokemonToDisplayOnStart = set.AmountOfPokemonToDisplayOnStart;
+            res.DetailedCountsBeforeRecycling = set.DetailedCountsBeforeRecycling;
+            res.DumpPokemonStats = set.DumpPokemonStats;
+            // OBJECTS & ITERATORS
+            res.PokemonToSnipe = set.PokemonToSnipe;
+            foreach (PokemonId pid in Enum.GetValues(typeof(PokemonId)))
+            {
+                res.NoTransferCollection.Add(new PokemonToggle(pid, (null != set.PokemonsNotToTransfer  && set.PokemonsNotToTransfer.Contains(pid)) ));
+                res.EvolveCollection.Add(    new PokemonToggle(pid, (null != set.PokemonsToEvolve       && set.PokemonsToEvolve.Contains(pid)) ));
+                res.UpgradeCollection.Add(   new PokemonToggle(pid, (null != set.PokemonsToLevelUp      && set.PokemonsToLevelUp.Contains(pid)) ));
+                res.IgnoreCollection.Add(    new PokemonToggle(pid, (null != set.PokemonsToIgnore       && set.PokemonsToIgnore.Contains(pid)) ));
+                res.MasterballCollection.Add(new PokemonToggle(pid, (null != set.PokemonToUseMasterball && set.PokemonToUseMasterball.Contains(pid)) ));
+            }
+            foreach (PokemonId key in set.PokemonsTransferFilter.Keys)
+                res.PokemonsTransferFilter.Add(key, set.PokemonsTransferFilter[key]);
+            foreach (KeyValuePair<ItemId, int> kvp in set.ItemRecycleFilter)
+                res.ItemRecycleFilter.Add(kvp);
+
+            res.LoadCurrentCoords();
+
             return res;
         }
-
-        /*
-            MISC
-
-            //gpx
-        public bool UseGpxPathing;
-        public string GpxFile;
-
-            //websockets
-        public bool UseWebsocket;
-        public int WebSocketPort;
-
-            //Telegram
-        public bool UseTelegramAPI;
-        public string TelegramAPIKey;
-
-        //console options
-        public bool StartupWelcomeDelay;
-        public int AmountOfPokemonToDisplayOnStart;
-        public bool DetailedCountsBeforeRecycling;
-        public bool DumpPokemonStats;
-
-
-
-            SNIPING
-
-            //snipe
-        public bool UseSnipeLocationServer;
-        public string SnipeLocationServer;
-        public int SnipeLocationServerPort;
-        public bool GetSniperInfoFromPokezz;
-        public bool GetOnlyVerifiedSniperInfoFromPokezz;
-        public int MinPokeballsToSnipe;
-        public int MinPokeballsWhileSnipe;
-        public int MinDelayBetweenSnipes;
-        public double SnipingScanOffset;
-        public bool SnipeAtPokestops;
-        public bool SnipeIgnoreUnknownIv;
-        public bool UseTransferIvForSnipe;
-        public bool SnipePokemonNotInPokedex;
-
-        public bool UsePokemonSniperFilterOnly;
-
-            CAPTURE
-
-
-            TRANSFER
-
-            //transfer
-        public bool TransferWeakPokemon;
-        public bool TransferDuplicatePokemon;
-        public bool TransferDuplicatePokemonOnCapture;
-
-            //keeping
-        public int KeepMinCp;
-        public float KeepMinIvPercentage;
-        public int KeepMinLvl;
-        public string KeepMinOperator;
-        public bool UseKeepMinLvl;
-        public bool PrioritizeIvOverCp;
-        public int KeepMinDuplicatePokemon;
-
-           */
 
         internal GlobalSettings GetGlobalSettingsObject()
         {
@@ -988,11 +1440,14 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.TranslationLanguageCode = TranslationLanguageCode;
             gs.AutoUpdate = AutoUpdate;
             gs.TransferConfigAndAuthOnUpdate = TransferConfigAndAuthOnUpdate;
+            gs.StartupWelcomeDelay = StartupWelcomeDelay;
             gs.DisableHumanWalking = DisableHumanWalking;
             gs.DefaultLatitude = DefaultLatitude;
             gs.DefaultLongitude = DefaultLongitude;
             gs.MaxTravelDistanceInMeters = MaxTravelDistanceInMeters;
             gs.WalkingSpeedInKilometerPerHour = WalkingSpeedInKilometerPerHour;
+            gs.UseWalkingSpeedVariant = UseWalkingSpeedVariant;
+            gs.ShowVariantWalking = ShowVariantWalking;
             gs.MaxSpawnLocationOffset = MaxSpawnLocationOffset;
             gs.DelayBetweenPlayerActions = DelayBetweenPlayerActions;
             gs.DelayBetweenPokemonCatch = DelayBetweenPokemonCatch;
@@ -1040,6 +1495,7 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.RenameOnlyAboveIv = RenameOnlyAboveIv;
             gs.RenameTemplate = RenameTemplate;
             gs.AutomaticallyLevelUpPokemon = AutomaticallyLevelUpPokemon;
+            gs.OnlyUpgradeFavorites = OnlyUpgradeFavorites;
             gs.AmountOfTimesToUpgradeLoop = AmountOfTimesToUpgradeLoop;
             gs.GetMinStarDustForLevelUp = GetMinStarDustForLevelUp;
             gs.LevelUpByCPorIv = LevelUpByCPorIv;
@@ -1080,9 +1536,111 @@ namespace PoGo.NecroBot.ConfigUI.Models
             gs.ForceGreatThrowOverCp = ForceGreatThrowOverCp;
             gs.ForceExcellentThrowOverCp = ForceExcellentThrowOverCp;
             // TRANSFER
+            gs.TransferWeakPokemon = TransferWeakPokemon;
+            gs.TransferDuplicatePokemon = TransferDuplicatePokemon;
+            gs.TransferDuplicatePokemonOnCapture = TransferDuplicatePokemonOnCapture;
+            gs.KeepMinCp = KeepMinCp;
+            gs.KeepMinIvPercentage = KeepMinIvPercentage;
+            gs.KeepMinLvl = KeepMinLvl;
+            gs.KeepMinOperator = KeepMinOperator;
+            gs.UseKeepMinLvl = UseKeepMinLevel;
+            gs.PrioritizeIvOverCp = PrioritizeIvOverCp;
+            gs.KeepMinDuplicatePokemon = KeepMinDuplicatePokemon;
             // SNIPING
+            gs.UseSnipeLocationServer = UseSnipeLocationServer;
+            gs.SnipeLocationServer = SnipeLocationServer;
+            gs.SnipeLocationServerPort = SnipeLocationServerPort;
+            gs.GetSniperInfoFromPokezz = GetSniperInfoFromPokezz;
+            gs.GetOnlyVerifiedSniperInfoFromPokezz = GetOnlyVerifiedSniperInfoFromPokezz;
+            gs.GetSniperInfoFromPokeSnipers = GetSniperInfoFromPokeSnipers;
+            gs.GetSniperInfoFromPokeWatchers = GetSniperInfoFromPokeWatchers;
+            gs.GetSniperInfoFromSkiplagged = GetSniperInfoFromSkiplagged;
+            gs.MinPokeballsToSnipe = MinPokeballsToSnipe;
+            gs.MinPokeballsWhileSnipe = MinPokeballsWhileSnipe;
+            gs.MinDelayBetweenSnipes = MinDelayBetweenSnipes;
+            gs.SnipingScanOffset = SnipingScanOffset;
+            gs.SnipeAtPokestops = SnipeAtPokestops;
+            gs.SnipeIgnoreUnknownIv = SnipeIgnoreUnknownIv;
+            gs.UseTransferIvForSnipe = UseTransferIvForSnipe;
+            gs.SnipePokemonNotInPokedex = SnipePokemonNotInPokedex;
             // MISC
+            gs.FastSoftBanBypass = FastSoftBanBypass;
+            gs.UseGpxPathing = UseGpxPathing;
+            gs.GpxFile = GpxFile;
+            gs.UseWebsocket = UseWebsocket;
+            gs.WebSocketPort = WebSocketPort;
+            gs.UseTelegramAPI = UseTelegramAPI;
+            gs.TelegramAPIKey = TelegramAPIKey;
+            gs.TelegramPassword = TelegramPassword;
+            gs.AmountOfPokemonToDisplayOnStart = AmountOfPokemonToDisplayOnStart;
+            gs.DetailedCountsBeforeRecycling = DetailedCountsBeforeRecycling;
+            gs.DumpPokemonStats = DumpPokemonStats;
+            // OBJECTS & ITERATORS
+            gs.PokemonToSnipe = PokemonToSnipe;
+            gs.PokemonsNotToTransfer.Clear();
+            foreach (PokemonToggle pt in NoTransferCollection) if (pt.IsChecked) gs.PokemonsNotToTransfer.Add(pt.Id);
+            gs.PokemonsToEvolve.Clear();
+            foreach (PokemonToggle pt in EvolveCollection) if (pt.IsChecked) gs.PokemonsToEvolve.Add(pt.Id);
+            gs.PokemonsToLevelUp.Clear();
+            foreach (PokemonToggle pt in UpgradeCollection) if (pt.IsChecked) gs.PokemonsToLevelUp.Add(pt.Id);
+            gs.PokemonsToIgnore.Clear();
+            foreach (PokemonToggle pt in IgnoreCollection) if (pt.IsChecked) gs.PokemonsToIgnore.Add(pt.Id);
+            gs.PokemonToUseMasterball.Clear();
+            foreach (PokemonToggle pt in MasterballCollection) if (pt.IsChecked) gs.PokemonToUseMasterball.Add(pt.Id);
+            gs.PokemonsTransferFilter.Clear();
+            foreach (PokemonId key in PokemonsTransferFilter.Keys)
+                gs.PokemonsTransferFilter.Add(key, PokemonsTransferFilter[key]);
+            foreach (KeyValuePair<ItemId, int> kvp in ItemRecycleFilter)
+                gs.ItemRecycleFilter.Add(kvp);
+
+            SaveCurrentCoords();
+
             return gs;
+        }
+
+    } // END class ObservableSettings
+
+    public class PokemonToggle : DependencyObject
+    {
+        public string Name
+        {
+            get { return (string)GetValue(NameProperty); }
+            set { SetValue(NameProperty, value); }
+        }
+        public static readonly DependencyProperty NameProperty =
+            DependencyProperty.Register("Name", typeof(string), typeof(PokemonToggle), new PropertyMetadata(string.Empty));
+
+        public PokemonId Id
+        {
+            get { return (PokemonId)GetValue(IdProperty); }
+            set { SetValue(IdProperty, value); }
+        }
+        public static readonly DependencyProperty IdProperty =
+            DependencyProperty.Register("Id", typeof(PokemonId), typeof(PokemonToggle), new PropertyMetadata(PokemonId.Abra));
+
+        public int Numeric
+        {
+            get { return (int)GetValue(NumericProperty); }
+            set { SetValue(NumericProperty, value); }
+        }
+        public static readonly DependencyProperty NumericProperty =
+            DependencyProperty.Register("Numeric", typeof(int), typeof(PokemonToggle), new PropertyMetadata(0));
+
+        public bool IsChecked
+        {
+            get { return (bool)GetValue(IsCheckedProperty); }
+            set { SetValue(IsCheckedProperty, value); }
+        }
+        public static readonly DependencyProperty IsCheckedProperty =
+            DependencyProperty.Register("IsChecked", typeof(bool), typeof(PokemonToggle), new PropertyMetadata(false));
+
+        public PokemonToggle() { }
+        public PokemonToggle(PokemonId id, bool isChecked)
+        {
+            Name = id.ToString();
+            Id = id;
+            Numeric = (int)id;
+            IsChecked = isChecked;
         }
 
     }

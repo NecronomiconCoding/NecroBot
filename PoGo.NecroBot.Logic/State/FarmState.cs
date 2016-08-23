@@ -10,6 +10,8 @@ namespace PoGo.NecroBot.Logic.State
 {
     public class FarmState : IState
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Await.Warning", "CS4014:Await.Warning")]
+
         public async Task<IState> Execute(ISession session, CancellationToken cancellationToken)
         {
             if (session.LogicSettings.EvolveAllPokemonAboveIv || session.LogicSettings.EvolveAllPokemonWithEnoughCandy 
@@ -20,7 +22,7 @@ namespace PoGo.NecroBot.Logic.State
 
             if (session.LogicSettings.UseEggIncubators)
             {
-                UseIncubatorsTask.Execute(session, cancellationToken);
+                await UseIncubatorsTask.Execute(session, cancellationToken);
             }
 
             if (session.LogicSettings.TransferDuplicatePokemon)
@@ -30,24 +32,24 @@ namespace PoGo.NecroBot.Logic.State
 
             if (session.LogicSettings.UseLuckyEggConstantly)
             {
-                UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
             }
 
             if (session.LogicSettings.UseIncenseConstantly)
             {
-                UseIncenseConstantlyTask.Execute(session, cancellationToken);
+                await UseIncenseConstantlyTask.Execute(session, cancellationToken);
             }
 
             await GetPokeDexCount.Execute(session, cancellationToken);
 
             if (session.LogicSettings.RenamePokemon)
             {
-                RenamePokemonTask.Execute(session, cancellationToken);
+                await RenamePokemonTask.Execute(session, cancellationToken);
             }
 
             if (session.LogicSettings.AutoFavoritePokemon)
             {
-                FavoritePokemonTask.Execute(session, cancellationToken);
+                await FavoritePokemonTask.Execute(session, cancellationToken);
             }
 
             await RecycleItemsTask.Execute(session, cancellationToken);

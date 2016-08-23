@@ -7,19 +7,20 @@ using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
-using POGOProtos.Data;
 using PoGo.NecroBot.Logic.Utils;
+using POGOProtos.Data;
 
 #endregion
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    internal class TransferWeakPokemonTask
+    public class TransferWeakPokemonTask
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            await session.Inventory.RefreshCachedInventory();
             var pokemons = await session.Inventory.GetPokemons();
             var pokemonDatas = pokemons as IList<PokemonData> ?? pokemons.ToList();
             var pokemonsFiltered =

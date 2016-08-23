@@ -1,14 +1,14 @@
 #region using directives
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Inventory.Item;
-using System.Threading;
-using System.Threading.Tasks;
-using System;
 
 #endregion
 
@@ -22,6 +22,8 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
+
+            await session.Inventory.RefreshCachedInventory();
 
             var currentTotalItems = await session.Inventory.GetTotalItemCount();
             if ((session.Profile.PlayerData.MaxItemStorage * session.LogicSettings.RecycleInventoryAtUsagePercentage / 100.0f) > currentTotalItems)
@@ -106,7 +108,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (session.LogicSettings.DelayBetweenRecycleActions)
                     DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
             }
-
             await session.Inventory.RefreshCachedInventory();
         }
 
@@ -283,6 +284,18 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     await RecycleItems(session, cancellationToken, wepar, ItemId.ItemWeparBerry);
                 }
+            }
+        }
+
+        public static async Task DropItem(ISession session, ItemId item, int count)
+        {
+            if (count > 0)
+            {
+                await session.Client.Inventory.RecycleItem(item, count);
+                if (session.LogicSettings.VerboseRecycling)
+                    session.EventDispatcher.Send(new ItemRecycledEvent { Id = item, Count = count });
+                if (session.LogicSettings.DelayBetweenRecycleActions)
+                    DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
             }
         }
     }

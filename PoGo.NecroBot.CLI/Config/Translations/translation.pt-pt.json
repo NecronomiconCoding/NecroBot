@@ -1,6 +1,30 @@
 ﻿{
   "TranslationStrings": [
     {
+      "Key": "SniperCount",
+      "Value": "Sniper count {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Sniper need to take a rest before your account is banned"
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+    },
+    {
+      "Key": "Only10kmEggs",
+      "Value": "Player below level 20, saving this 10 km Egg for later"
+    },
+    {
+      "Key": "GoogleAPIWarning",
+      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+    },
+    {
       "Key": "pokeball",
       "Value": "PokeBall"
     },
@@ -22,8 +46,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Estás fora do raio definido! A caminhar para o início ({0}m) em 5 segundos. As coordenadas em LastPos.ini estão corretas?"
+      "Value": "Estás fora do raio definido! A caminhar para o início ({0}m) em 5 segundos. As coordenadas em LastPos.ini estão corretas?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -39,7 +62,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "A chegar ao Pokestop: {0} em ({1}m)"
+      "Value": "A chegar ao Pokestop: {0} em ({1}m) ({2} seconds) (route {3})"
     },
     {
       "Key": "eventProfileLogin",
@@ -275,8 +298,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "O inventário de Pokémons está cheio. Transfere os pokémons manualmente ou altera TransferDuplicatePokemon para true nas configurações..."
+      "Value": "O inventário de Pokémons está cheio. Transfere os pokémons manualmente ou altera TransferDuplicatePokemon para true nas configurações..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -344,8 +366,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value":
-        "{0} - Sessão {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transferidos: {6:0} | Reciclados: {7:0}"
+      "Value": "{0} - Sessão {1} - Lvl: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Transferidos: {6:0} | Reciclados: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -357,8 +378,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value":
-        "Como tens o Google Two Factor Auth ativado, precisarás de definir o App Specific Password no ficheiro auth.json"
+      "Value": "Como tens o Google Two Factor Auth ativado, precisarás de definir o App Specific Password no ficheiro auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -390,19 +410,47 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value": "--- Pokedex catched --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Nome: {1} | Capturados: {2} | Encontrados: {3} \n"  
+      "Value": "#{0} Nome: {1} | Capturados: {2} | Encontrados: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value": "--- Pokedex needed --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Nome: {1} \n"  
+      "Value": "#{0} Nome: {1} \n"
+    },
+    {
+      "Key": "Proxied",
+      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "Press any key to exit so you can fix your proxy settings..."
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " Your IP is: {0}"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Probably Permanent Ban!"
     }
   ],
 	"PokemonStrings": [

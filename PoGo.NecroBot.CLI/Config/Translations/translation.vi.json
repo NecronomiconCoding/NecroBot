@@ -1,6 +1,30 @@
 {
   "TranslationStrings": [
     {
+      "Key": "SniperCount",
+      "Value": "Sniper count {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Sniper need to take a rest before your account is banned"
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+    },
+    {
+      "Key": "Only10kmEggs",
+      "Value": "Player below level 20, saving this 10 km Egg for later"
+    },
+    {
+      "Key": "GoogleAPIWarning",
+      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+    },
+    {
       "Key": "pokeball",
       "Value": "PokeBall"
     },
@@ -42,7 +66,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Đi đến Pokestop: {0} (xa {1}m) (trong {2} giây)"
+      "Value": "Đi đến Pokestop: {0} (xa {1}m) (trong {2} giây) (route {3})"
     },
     {
       "Key": "eventProfileLogin",
@@ -274,7 +298,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Tuyệt vời! Bạn đang sử dụng phiên bản mới nhất: v{0} (Dịch Bởi: Skick - fb.me/S2Cancer2361)"
+      "Value": "Bạn đang sử dụng phiên bản mới nhất: v{0} (Dịch Bởi: Skick - Group: bit.ly/PokeAuto)"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -424,7 +448,7 @@
       "Key": "statsTemplateString",
       "Value": "{0} - Đã Chạy: {1} - Lvl: {2} | EXP/H: {3:n0} | P/H: {4:n0} | Stardust: {5:n0} | ĐãChuyểnHoá: {6:n0} | ĐãXoá: {7:n0}"
     },
-	{
+    {
       "Key": "profileStatsTemplateString",
       "Value": "----- LVL {0} | {1} ----- \n Kinh Nghiệm: {2}/{3} \n Pokemon Đã Bắt: {4} \n Pokemon Đã Chuyển Thành Candy: {5} \n Pokestop Đã Đến: {6} \n Trứng Đã Nở: {6} \n Pokemons envolved: {7} \n Số Mục Trong Pokedex: {8} \n Đã Đi: {9} KM"
     },
@@ -625,20 +649,12 @@
       "Value": "[LỖI] Hãy chỉ nhập GIÁ TRỊ như ví dụ: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Hãy nhập Vĩ độ (Nhấn chuột phải để dán)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Chấp nhận Vĩ độ: {0}"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Hãy nhập Kinh độ (Nhấn chuột phải để dán)"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Chấp nhận Kinh độ: {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Lattitude and Longitude accepted: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
@@ -646,19 +662,52 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value": "--- Pokedex - Đã Bắt --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value": "#{0} Tên: {1} | Đã Bắt: {2} | Đã Gặp: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value": "--- Pokedex - Còn Thiếu --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value": "#{0} Tên: {1} \n"
+    },
+    {
+      "Key": "softBanBypassed",
+      "Value": "Bypass SoftBan Thành Công!"
+
+    },
+    {
+      "Key": "Proxied",
+      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "Press any key to exit so you can fix your proxy settings..."
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " Your IP is: {0}"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Probably Permanent Ban!"
     }
   ],
   "PokemonStrings": [

@@ -1,80 +1,27 @@
 #region using directives
 
+using System.Collections.Generic;
+using PoGo.NecroBot.Logic.Model.Settings;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
-using System.Collections.Generic;
 
 #endregion
 
-namespace PoGo.NecroBot.Logic
+namespace PoGo.NecroBot.Logic.Interfaces.Configuration
 {
-    public class Location
-    {
-        public Location()
-        {
-        }
-
-        public Location(double latitude, double longitude)
-        {
-            Latitude = latitude;
-            Longitude = longitude;
-        }
-
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-    }
-
-    public class SnipeSettings
-    {
-        public SnipeSettings()
-        {
-        }
-
-        public SnipeSettings(List<Location> locations, List<PokemonId> pokemon)
-        {
-            Locations = locations;
-            Pokemon = pokemon;
-        }
-
-        public List<Location> Locations { get; set; }
-        public List<PokemonId> Pokemon { get; set; }
-    }
-
-    public class TransferFilter
-    {
-        public TransferFilter()
-        {
-        }
-
-        public TransferFilter(int keepMinCp, int keepMinLvl, bool useKeepMinLvl, float keepMinIvPercentage, string keepMinOperator, int keepMinDuplicatePokemon, 
-            List<PokemonMove> moves = null, string movesOperator = "or")
-        {
-            KeepMinCp = keepMinCp;
-            KeepMinLvl = keepMinLvl;
-            UseKeepMinLvl = useKeepMinLvl;
-            KeepMinIvPercentage = keepMinIvPercentage;
-            KeepMinDuplicatePokemon = keepMinDuplicatePokemon;
-            KeepMinOperator = keepMinOperator;
-            Moves = moves ?? new List<PokemonMove>();
-            MovesOperator = movesOperator;
-        }
-
-        public int KeepMinCp { get; set; }
-        public int KeepMinLvl { get; set; }
-        public bool UseKeepMinLvl { get; set; }
-        public float KeepMinIvPercentage { get; set; }
-        public int KeepMinDuplicatePokemon { get; set; }
-        public List<PokemonMove> Moves { get; set; }
-        public string KeepMinOperator { get; set; }
-        public string MovesOperator { get; set; }
-    }
-
     public interface ILogicSettings
     {
         bool UseWebsocket { get; }
         bool CatchPokemon { get; }
+        int CatchPokemonLimit { get; }
+        int CatchPokemonLimitMinutes { get; }
+        int PokeStopLimit { get; }
+        int PokeStopLimitMinutes { get; }
+        int SnipeCountLimit { get; }
+        int SnipeRestSeconds { get; }
         bool TransferWeakPokemon { get; }
         bool DisableHumanWalking { get; }
+        bool CheckForUpdates { get; }
         bool AutoUpdate { get; }
         bool TransferConfigAndAuthOnUpdate { get; }
         float KeepMinIvPercentage { get; }
@@ -83,13 +30,17 @@ namespace PoGo.NecroBot.Logic
         bool UseKeepMinLvl { get; }
         string KeepMinOperator { get; }
         double WalkingSpeedInKilometerPerHour { get; }
+        bool UseWalkingSpeedVariant { get; }
+        double WalkingSpeedVariant { get; }
+        bool ShowVariantWalking { get; }
+        bool RandomlyPauseAtStops { get; }
         bool FastSoftBanBypass { get; }
         bool EvolveAllPokemonWithEnoughCandy { get; }
         bool KeepPokemonsThatCanEvolve { get; }
         bool TransferDuplicatePokemon { get; }
         bool TransferDuplicatePokemonOnCapture { get; }
         bool UseEggIncubators { get; }
-        int minEggKmForLimitedIncubators { get; }
+        int UseEggIncubatorMinKm { get; }
         int UseGreatBallAboveCp { get; }
         int UseUltraBallAboveCp { get; }
         int UseMasterBallAboveCp { get; }
@@ -99,6 +50,8 @@ namespace PoGo.NecroBot.Logic
         double UseUltraBallBelowCatchProbability { get; }
         double UseGreatBallBelowCatchProbability { get; }
         bool EnableHumanizedThrows { get; }
+        bool EnableMissedThrows { get; }
+        int ThrowMissPercentage { get; }
         int NiceThrowChance { get; }
         int GreatThrowChance { get; }
         int ExcellentThrowChance { get; }
@@ -107,7 +60,6 @@ namespace PoGo.NecroBot.Logic
         double ForceExcellentThrowOverIv { get; }
         int ForceGreatThrowOverCp { get; }
         int ForceExcellentThrowOverCp { get; }
-
         int DelayBetweenPokemonCatch { get; }
         bool AutomaticallyLevelUpPokemon { get; }
         bool OnlyUpgradeFavorites { get; }
@@ -121,7 +73,6 @@ namespace PoGo.NecroBot.Logic
         int KeepMinDuplicatePokemon { get; }
         bool PrioritizeIvOverCp { get; }
         int AmountOfTimesToUpgradeLoop { get; }
-
         int GetMinStarDustForLevelUp { get; }
         bool UseLuckyEggConstantly { get; }
         int MaxBerriesToUsePerPokemon { get; }
@@ -152,6 +103,7 @@ namespace PoGo.NecroBot.Logic
         bool SnipeAtPokestops { get; }
         bool UseTelegramAPI { get; }
         string TelegramAPIKey { get; }
+        string TelegramPassword { get; }
         int MinPokeballsToSnipe { get; }
         int MinPokeballsWhileSnipe { get; }
         int MaxPokeballsPerPokemon { get; }
@@ -175,11 +127,13 @@ namespace PoGo.NecroBot.Logic
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
         int TotalAmountOfBerriesToKeep { get; }
-
         bool DetailedCountsBeforeRecycling { get; }
         bool VerboseRecycling { get; }
         double RecycleInventoryAtUsagePercentage { get; }
         double EvolveKeptPokemonsAtStorageUsagePercentage { get; }
+        bool UseSnipeLimit { get; }
+        bool UsePokeStopLimit { get; }
+        bool UseCatchLimit { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
@@ -195,5 +149,18 @@ namespace PoGo.NecroBot.Logic
         SnipeSettings PokemonToSnipe { get; }
 
         bool StartupWelcomeDelay { get; }
+        bool UseGoogleWalk { get; }
+        double DefaultStepLength { get; }
+        bool UseGoogleWalkCache { get; }
+        string GoogleApiKey { get; }
+        string GoogleHeuristic { get; }
+
+        bool UseYoursWalk { get; }
+        string YoursWalkHeuristic { get; }
+        string YoursServerUrl { get; }
+
+        int ResumeTrack { get; }
+        int ResumeTrackSeg { get; }
+        int ResumeTrackPt { get; }
     }
 }

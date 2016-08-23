@@ -1,14 +1,15 @@
 ﻿#region using directives
 
 using System;
-using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
 using GeoCoordinatePortable;
-using PoGo.NecroBot.Logic.Utils;
+using PoGo.NecroBot.Logic.Interfaces.Configuration;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
-using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Strategies.Walk;
+using PoGo.NecroBot.Logic.Event;
 
 #endregion
 
@@ -18,212 +19,101 @@ namespace PoGo.NecroBot.Logic
 
     public class Navigation
     {
-        private const double SpeedDownTo = 10/3.6;
+        public IWalkStrategy WalkStrategy { get; set; }
         private readonly Client _client;
+        private Random WalkingRandom = new Random();
 
-        public Navigation(Client client)
+        public Navigation(Client client, ILogicSettings logicSettings)
         {
             _client = client;
+            WalkStrategy = GetStrategy(logicSettings);
+        }
+
+        public double VariantRandom(ISession session, double currentSpeed)
+        {
+            if (WalkingRandom.Next(1, 10) > 5)
+            {
+                if (WalkingRandom.Next(1, 10) > 5)
+                {
+                    var randomicSpeed = currentSpeed;
+                    var max = session.LogicSettings.WalkingSpeedInKilometerPerHour + session.LogicSettings.WalkingSpeedVariant;
+                    randomicSpeed += WalkingRandom.NextDouble() * (0.02 - 0.001) + 0.001;
+
+                    if (randomicSpeed > max)
+                        randomicSpeed = max;
+
+                    if (Math.Round(randomicSpeed, 2) != Math.Round(currentSpeed, 2))
+                    {
+                        session.EventDispatcher.Send(new HumanWalkingEvent
+                        {
+                            OldWalkingSpeed = currentSpeed,
+                            CurrentWalkingSpeed = randomicSpeed
+                        });
+                    }
+
+                    return randomicSpeed;
+                }
+                else
+                {
+                    var randomicSpeed = currentSpeed;
+                    var min = session.LogicSettings.WalkingSpeedInKilometerPerHour - session.LogicSettings.WalkingSpeedVariant;
+                    randomicSpeed -= WalkingRandom.NextDouble() * (0.02 - 0.001) + 0.001;                    
+
+                    if (randomicSpeed < min)
+                        randomicSpeed = min;
+
+                    if (Math.Round(randomicSpeed, 2) != Math.Round(currentSpeed, 2))
+                    {
+                        session.EventDispatcher.Send(new HumanWalkingEvent
+                        {
+                            OldWalkingSpeed = currentSpeed,
+                            CurrentWalkingSpeed = randomicSpeed
+                        });
+                    }
+
+                    return randomicSpeed;
+                }
+            }
+
+            return currentSpeed;
         }
 
         public async Task<PlayerUpdateResponse> Move(GeoCoordinate targetLocation,
-            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking,
-            CancellationToken cancellationToken, bool disableHumanLikeWalking)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-            if (!disableHumanLikeWalking)
-            {
-                var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
-
-                var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
-
-                var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
-                var nextWaypointDistance = speedInMetersPerSecond;
-                var waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
-
-                //Initial walking
-                var requestSendDateTime = DateTime.Now;
-                var result = 
-                    await
-                        _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                            waypoint.Altitude);
-
-                UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
-
-                do
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
-
-                    var millisecondsUntilGetUpdatePlayerLocationResponse =
-                        (DateTime.Now - requestSendDateTime).TotalMilliseconds;
-
-                    sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
-                    var currentDistanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
-
-                    if (currentDistanceToTarget < 40)
-                    {
-                        if (speedInMetersPerSecond > SpeedDownTo)
-                        {
-                            //Logger.Write("We are within 40 meters of the target. Speeding down to 10 km/h to not pass the target.", LogLevel.Info);
-                            speedInMetersPerSecond = SpeedDownTo;
-                        }
-                    }
-
-                    nextWaypointDistance = Math.Min(currentDistanceToTarget,
-                        millisecondsUntilGetUpdatePlayerLocationResponse/1000*speedInMetersPerSecond);
-                    nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
-                    waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
-
-                    requestSendDateTime = DateTime.Now;
-                    result =
-                        await
-                            _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                                waypoint.Altitude);
-
-                    UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
-
-
-                    if (functionExecutedWhileWalking != null)
-                        await functionExecutedWhileWalking(); // look for pokemon
-                } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
-
-                return result;
-            }
-
-            var curLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
-            var dist = LocationUtils.CalculateDistanceInMeters(curLocation, targetLocation);
-            if (dist >= 100)
-            {
-                var nextWaypointDistance = dist*70/100;
-                var nextWaypointBearing = LocationUtils.DegreeBearing(curLocation, targetLocation);
-
-                var waypoint = LocationUtils.CreateWaypoint(curLocation, nextWaypointDistance, nextWaypointBearing);
-                var sentTime = DateTime.Now;
-
-                var result =
-                    await
-                        _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                            waypoint.Altitude);
-                UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
-
-                do
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
-
-                    var millisecondsUntilGetUpdatePlayerLocationResponse =
-                        (DateTime.Now - sentTime).TotalMilliseconds;
-
-                    curLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
-                    var currentDistanceToTarget = LocationUtils.CalculateDistanceInMeters(curLocation, targetLocation);
-
-                    dist = LocationUtils.CalculateDistanceInMeters(curLocation, targetLocation);
-                    if (dist >= 100)
-                    {
-                        nextWaypointDistance = dist*70/100;
-                    }
-                    else
-                    {
-                        nextWaypointDistance = dist;
-                    }
-                    nextWaypointBearing = LocationUtils.DegreeBearing(curLocation, targetLocation);
-                    waypoint = LocationUtils.CreateWaypoint(curLocation, nextWaypointDistance, nextWaypointBearing);
-                    sentTime = DateTime.Now;
-                    result =
-                        await
-                            _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                                waypoint.Altitude);
-
-                    UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
-
-
-                    if (functionExecutedWhileWalking != null)
-                        await functionExecutedWhileWalking(); // look for pokemon
-                } while (LocationUtils.CalculateDistanceInMeters(curLocation, targetLocation) >= 10);
-                return result;
-            }
-            else
-            {
-                var result =
-                    await
-                        _client.Player.UpdatePlayerLocation(targetLocation.Latitude, targetLocation.Longitude,
-                            LocationUtils.getElevation(targetLocation.Latitude,targetLocation.Longitude));
-                UpdatePositionEvent?.Invoke(targetLocation.Latitude, targetLocation.Longitude);
-                if (functionExecutedWhileWalking != null)
-                    await functionExecutedWhileWalking(); // look for pokemon
-                return result;
-            }
-        }
-
-        public async Task<PlayerUpdateResponse> HumanPathWalking(GpxReader.Trkpt trk,
-            double walkingSpeedInKilometersPerHour, Func<Task<bool>> functionExecutedWhileWalking,
+            Func<Task<bool>> functionExecutedWhileWalking,
+            ISession session,
             CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            //PlayerUpdateResponse result = null;
+            // If the stretegies become bigger, create a factory for easy management
 
-            var targetLocation = new GeoCoordinate(Convert.ToDouble(trk.Lat, CultureInfo.InvariantCulture),
-                Convert.ToDouble(trk.Lon, CultureInfo.InvariantCulture));
-
-            var speedInMetersPerSecond = walkingSpeedInKilometersPerHour/3.6;
-
-            var sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
-            LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
-            // Logger.Write($"Distance to target location: {distanceToTarget:0.##} meters. Will take {distanceToTarget/speedInMetersPerSecond:0.##} seconds!", LogLevel.Info);
-
-            var nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
-            var nextWaypointDistance = speedInMetersPerSecond;
-            var waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing,
-                Convert.ToDouble(trk.Ele, CultureInfo.InvariantCulture));
-
-            //Initial walking
-
-            var requestSendDateTime = DateTime.Now;
-            var result =
-                await
-                    _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude, waypoint.Altitude);
-
-            UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
-
-            do
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                var millisecondsUntilGetUpdatePlayerLocationResponse =
-                    (DateTime.Now - requestSendDateTime).TotalMilliseconds;
-
-                sourceLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude);
-                var currentDistanceToTarget = LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation);
-
-                //if (currentDistanceToTarget < 40)
-                //{
-                //    if (speedInMetersPerSecond > SpeedDownTo)
-                //    {
-                //        //Logger.Write("We are within 40 meters of the target. Speeding down to 10 km/h to not pass the target.", LogLevel.Info);
-                //        speedInMetersPerSecond = SpeedDownTo;
-                //    }
-                //}
-
-                nextWaypointDistance = Math.Min(currentDistanceToTarget,
-                    millisecondsUntilGetUpdatePlayerLocationResponse/1000*speedInMetersPerSecond);
-                nextWaypointBearing = LocationUtils.DegreeBearing(sourceLocation, targetLocation);
-                waypoint = LocationUtils.CreateWaypoint(sourceLocation, nextWaypointDistance, nextWaypointBearing);
-
-                requestSendDateTime = DateTime.Now;
-                result =
-                    await
-                        _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                            waypoint.Altitude);
-
-                UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
-
-                if (functionExecutedWhileWalking != null)
-                    await functionExecutedWhileWalking(); // look for pokemon & hit stops
-            } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 30);
-
-            return result;
+            return await WalkStrategy.Walk(targetLocation, functionExecutedWhileWalking, session, cancellationToken);
         }
 
-        public event UpdatePositionDelegate UpdatePositionEvent;
+        private IWalkStrategy GetStrategy(ILogicSettings logicSettings)
+        {
+            // Maybe change configuration for a Navigation Type.
+            if (logicSettings.DisableHumanWalking)
+            {
+                return new FlyStrategy(_client);
+            }
+
+            if (logicSettings.UseGpxPathing)
+            {
+                return new HumanPathWalkingStrategy(_client);
+            }
+
+            if (logicSettings.UseGoogleWalk)
+            {
+                return new GoogleStrategy(_client);
+            }
+
+            if (logicSettings.UseYoursWalk)
+            {
+                return new YoursNavigationStrategy(_client);
+            }
+
+            return new HumanStrategy(_client);
+        }
     }
 }

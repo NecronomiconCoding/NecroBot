@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Windows;
-using PoGo.NecroBot.Logic;
-using PoGo.NecroBot.ConfigUI.Models;
-using System.IO;
-using PokemonGo.RocketAPI.Enums;
 using System.Collections.Generic;
+using System.IO;
+using System.Windows;
+using PoGo.NecroBot.ConfigUI.Models;
+using PoGo.NecroBot.Logic;
 using PoGo.NecroBot.Logic.Utils;
+using PokemonGo.RocketAPI.Enums;
 
 namespace PoGo.NecroBot.ConfigUI
 {
@@ -65,8 +65,6 @@ namespace PoGo.NecroBot.ConfigUI
             DependencyProperty.Register("IpCvCollection", typeof(List<string>), typeof(MainWindow), new PropertyMetadata(new List<string>() { "iv", "cp" }));
 
 
-
-
         public MainWindow()
         {
             this.DataContext = this;
@@ -118,5 +116,12 @@ namespace PoGo.NecroBot.ConfigUI
             IsCustomDevicePackage = e.AddedItems[0].Equals("custom");
         }
 
+        private void ResetCoordsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Settings.Latitude  = Settings.DefaultLatitude;
+            Settings.Longitude = Settings.DefaultLongitude;
+        }
+
     }
+
 }

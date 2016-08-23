@@ -2,9 +2,10 @@
 
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Interfaces.Configuration;
+using PoGo.NecroBot.Logic.Service;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
-using PoGo.NecroBot.Logic.Service;
 
 #endregion
 
@@ -21,18 +22,24 @@ namespace PoGo.NecroBot.Logic.State
         ITranslation Translation { get; }
         IEventDispatcher EventDispatcher { get; }
         TelegramService Telegram { get; set; }
+        SessionStats Stats { get; }
     }
 
 
     public class Session : ISession
     {
-        public Session(ISettings settings, ILogicSettings logicSettings)
+        public Session(ISettings settings, ILogicSettings logicSettings) : this(settings, logicSettings, Common.Translation.Load(logicSettings))
+        {
+        }
+
+        public Session(ISettings settings, ILogicSettings logicSettings, ITranslation translation)
         {
             Settings = settings;
             LogicSettings = logicSettings;
             EventDispatcher = new EventDispatcher();
-            Translation = Common.Translation.Load(logicSettings);
+            Translation = translation;
             Reset(settings, LogicSettings);
+            Stats = new SessionStats();
         }
 
         public ISettings Settings { get; set; }
@@ -51,6 +58,8 @@ namespace PoGo.NecroBot.Logic.State
         public IEventDispatcher EventDispatcher { get; }
 
         public TelegramService Telegram { get; set; }
+        
+        public SessionStats Stats { get; set; }
 
         public void Reset(ISettings settings, ILogicSettings logicSettings)
         {
@@ -58,7 +67,7 @@ namespace PoGo.NecroBot.Logic.State
             Client = new Client(Settings, _apiStrategy);
             // ferox wants us to set this manually
             Inventory = new Inventory(Client, logicSettings);
-            Navigation = new Navigation(Client);
+            Navigation = new Navigation(Client, logicSettings);
         }
     }
 }

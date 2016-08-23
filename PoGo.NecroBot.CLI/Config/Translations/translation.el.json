@@ -1,86 +1,108 @@
-{
+﻿{
   "TranslationStrings": [
     {
+      "Key": "SniperCount",
+      "Value": "Sniper count {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Sniper need to take a rest before your account is banned"
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+    },
+    {
+      "Key": "Only10kmEggs",
+      "Value": "Player below level 20, saving this 10 km Egg for later"
+    },
+    {
+      "Key": "GoogleAPIWarning",
+      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+    },
+    {
       "Key": "pokeball",
-      "Value": "PokeBall"
+      "Value": "Πόκεμπολ"
     },
     {
       "Key": "greatPokeball",
-      "Value": "GreatBall"
+      "Value": "Γκρεϊτμπολ"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "UltraBall"
+      "Value": "Ούλτραμπολ"
     },
     {
       "Key": "masterPokeball",
-      "Value": "MasterBall"
+      "Value": "Μάστερμπολ"
     },
     {
       "Key": "wrongAuthType",
-      "Value": "Невідомий тип аутентифікації(AuthType) в config.json"
+      "Value": "Άγνωστο AuthType στο αρχείο config.json"
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Ви перебуваєте поза зазначеного радіусу! Повертаємося до точки старту (дистанція {0} м) через 5 сек. Ваш LastPos.ini файл коректний?"
+      "Value": "Είστε έξω από την καθορισμένη περιοχή! Περπάτημα για ({0}μ μακριά) σε 5 δευτερόλεπτα. Είναι το αρχείο LastPos.ini σωστό?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value":
-        "Не знайдено активних покетстопів у вашій зоні. Можливо вказана занадто маленька максимальна дистанція пошуку в налаштуваннях?"
+      "Value": "Δεν βρεθηκαν λειτουργικά Πόκεστοπς στην περιοχή σου. Μήπως εχεις ορίσει την μέγιστη εμβέλεια πολυ χαμήλα;"
     },
     {
       "Key": "eventFortUsed",
-      "Value": "<{0}> XP: {1}, Gems: {2}, Items: {3}"
+      "Value": "XP: {0}, Πετράδια: {1}, Αντικείμενα: {2}"
     },
     {
       "Key": "eventFortFailed",
-      "Value": "Назва: {0} ІНФО: Не вдалося отримати предмети, можливо софтбан. Розбан через: {1} / {2}"
+      "Value": "Αποτυχία χρήσης Pokestop, υπαρχει πιθανότητα softban. Unban σε: {0}/{1}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Прямуємо до <{0}>, дистанція ({1} м)"
+      "Value": "{0} σε απόσταση {1} μέτρων ({2} seconds) (route {3})"
     },
     {
       "Key": "eventProfileLogin",
-      "Value": "Граємо за {0}"
+      "Value": "Συνδεδεμένος ως {0}"
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Використано щасливе яйце, їх залишилося: {0}"
+      "Value": "Xρησιμοποιήθηκε ένα Lucky Egg, απομένουν: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} успішно, отримано {1} xp"
+      "Value": "{0} εξελίχθηκε επιτυχώς για {1}xp"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Невдало: {0}. Успішно: {1}. Припинено: {2}"
+      "Value": "Η εξέλιξη απέτυχε {0}. Ως αποτέλεσμα {1}, δεν εξελίχθηκε {2}"
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0} \t (CP: {1} | IV: {2}%) [у Кращого (CP: {3} | IV: {4}%)] Цукерок: {5}"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Καλύτερο CP: {3}  IV: {4}%] (Πετράδια: {5})"
     },
     {
       "Key": "eventItemRecycled",
-      "Value": "{0} x {1}"
+      "Value": "{0}x {1}"
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Επίπεδο: {3} CP: ({4}/{5}) IV: {6}% | Πιθανότητα: {7}% | {8}μ απόσταση | με {9} ({10} εναπομείναντα). | Λάβατε {11} πόντους εμπειρίας. | {12} | Γ.Πλάτος: {13} Γ.Μήκος: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Επίπεδο: {3} CP: ({4}/{5}) IV: {6}% | Πιθανότητα: {7}% | {8}μ απόσταση | με {9} ({10} εναπομείναντα). | Γ.Μήκος: {11} Γ.Πλάτος: {12}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Немає Pokeball'ів - Ми упустили {0} (CP: {1})"
+      "Value": "Ξεμείναμε απο Πόκεμπολς - Μας ξέφυγε ένα {0} με {1} CP"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "{0}, спроба # {1}"
+      "Value": "{0} Προσπάθεια #{1}"
     },
     {
       "Key": "catchStatus",
@@ -88,328 +110,347 @@
     },
     {
       "Key": "candies",
-      "Value": "Цукерок: {0}"
+      "Value": "Πετράδια: {0}"
     },
     {
-      "Key": "unhandledGPXData",
-      "Value": "Невідомі дані в GPX файлі, пробуємо пропустити."
+      "Key": "unhandledGpxData",
+      "Value": "Μη καταχωρημένα σωστά δεδομένα στο αρχείο GPX, απόπειρα παραλειψής."
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "ТОП покемонів"
+      "Value": "Πόκεμονς"
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "- IV"
+      "Value": "Ποσοστό τελειότητας IV"
     },
     {
       "Key": "commonWordName",
-      "Value": "Ім'я"
+      "Value": "Όνομα"
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "Невідомий"
+      "Value": "Άγνωστο"
     },
     {
-      "Key": "displayHighestsCPHeader",
-      "Value": "ТОП по CP"
+      "Key": "displayHighestsCpHeader",
+      "Value": "Εμφάνιση Μεγαλύτερου CP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "ТОП по IV"
+      "Value": "Εμφάνιση Μεγαλύτερου IV"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "ТОП по LV"
+      "Value": "Εμφάνιση Μεγαλύτερου Επιπέδου"
     },
     {
       "Key": "welcomeWarning",
-      "Value": "Переконайтеся, що широта і довгота вірні! Закрийте програму, якщо це не так! Широта: {0} Довгота: {1}"
+      "Value": "Βεβαιώσου οτι οι συντεταγμένες είναι σωστές. Αλλιώς κλείσε το πρόγραμμα Γ.Πλάτος: {0} Γ.Μήκος: {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Кладемо яйце в інкубатор: {0: 0.00} км залишилося"
+      "Value": "Ένα αυγό μπαίνει στο εκκολαπτήριο: {0:0.00}km απομένουν"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Статус інкубатора: {0: 0.00} км залишилося"
+      "Value": "Ενημέρωση κατάστασης αυγού: {0:0.00}km απομένουν"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "З Яйця отримали: {0}"
+      "Value": "Το εκκολαπτήριο εκκόλαψε ενα αυγό: {0}"
     },
     {
       "Key": "logEntryError",
-      "Value": "ПОМИЛКА"
+      "Value": "ΣΦΑΛΜΑ"
     },
     {
       "Key": "logEntryAttention",
-      "Value": "УВАГА"
+      "Value": "ΠΡΟΣΟΧΗ"
     },
     {
       "Key": "logEntryInfo",
-      "Value": "ІНФО"
+      "Value": "ΠΛΗΡΟΦΟΡΙΑ"
     },
     {
       "Key": "logEntryPokestop",
-      "Value": "POKESTOP"
+      "Value": "ΠΟΚΕΣΤΟΠ"
     },
     {
       "Key": "logEntryFarming",
-      "Value": "ФАРМ"
+      "Value": "ΦΑΡΜΑΡΙΣΜΑ"
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "Видаляємо"
+      "Value": "ΑΝΑΚΥΚΛΩΣΗ"
     },
     {
       "Key": "logEntryPKMN",
-      "Value": "Ловимо"
+      "Value": "PKMN"
     },
     {
       "Key": "logEntryTransfered",
-      "Value": "Обмінюються"
+      "Value": "ΜΕΤΑΦΕΡΘΗΚΕ"
     },
     {
       "Key": "logEntryEvolved",
-      "Value": "Еволюція"
+      "Value": "ΕΞΕΛΙΧΗΘΚΕ"
     },
     {
       "Key": "logEntryBerry",
-      "Value": "ЯГОДА"
+      "Value": "ΜΟΥΡΟ"
     },
     {
       "Key": "logEntryEgg",
-      "Value": "ЯЙЦЕ"
+      "Value": "ΑΥΓΟ"
     },
     {
       "Key": "logEntryDebug",
-      "Value": "ВІДЛАДКА"
+      "Value": "Ε.ΣΦΑΛΜΑΤΩΝ"
     },
     {
       "Key": "logEntryUpdate",
-      "Value": "ОНОВЛЕННЯ"
+      "Value": "ΕΝΗΜΕΡΩΣΗ"
     },
     {
       "Key": "loggingIn",
-      "Value": "Логін під аккаунтом {0}"
+      "Value": "Σύνδεση μέσω {0}"
     },
     {
       "Key": "ptcOffline",
-      "Value":
-        "PTC сервера можливо не працюють АБО невірно вказані дані облікового запису. Спробуйте використовувати логін від Google аккаунта"
+      "Value": "Οι PTC Servers είναι εκτός λειτουργίας ή τα στοιχεία σου ειναι λανθασμένα. Προσπάθησε να συνδεθείς μέσω google"
     },
     {
       "Key": "tryingAgainIn",
-      "Value": "Пробуємо знову через {0} сек ..."
+      "Value": "Επόμενη προσπάθεια σε {0}'"
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Обліковий запис не підтверджений! Виходимо ..."
+      "Value": "Ο λογαριασμός δεν είναι ενεργοποιημένος! Κλείσιμο..."
     },
     {
       "Key": "openingGoogleDevicePage",
-      "Value": "Відкриваємо сторінку Google Device. Будь ласка, вставте код використовуючи CTRL + V"
+      "Value": "Άνοιγμα της σελίδας Συσκευές Google. Παρακαλώ επικόλλησε τον κωδικό με CTRL+V"
     },
     {
       "Key": "couldntCopyToClipboard",
-      "Value": "Не вдалося скопіювати код в буфер обміну, зробіть це вручну"
+      "Value": "Δεν μπόρεσα να αντιγράψω τον κωδικό, κάντο χειροκίνητα"
     },
     {
       "Key": "couldntCopyToClipboard2",
-      "Value": "Відкрийте посилання: {0} і введіть {1}"
+      "Value": "Πάνε στο: {0} & συμπλήρωσε {1}"
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Виявлено реалістичне переміщення, використовуємо UserSettings.settings"
+      "Value": "Εντοπίστηκαν ρεαλιστικες ρυθμίσεις, χρήση του αρχείου UserSettings.settings"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Не реалістичне переміщення в {0}, використовуємо останній файл LastPos.ini"
+      "Value": "Εντοπίστηκαν μη ρεαλιστικες ρυθμίσεις στο {0}, χρήση τελευταίων αποθηκευμένων συντενταγμένων στο αρχείο LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Координати у файлі \" LastPos.ini \"невірні, використовуємо координати за умовчанням"
+      "Value": "Οι συντεναγμένες στο αρχείο \"LastPos.ini\" είναι άκυρες, χρήση αρχικών συντενταγμένων"
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Дуже добре! У Вас вже встановлена ​​остання версія {0}"
+      "Value": "Τέλεια! έχεις ήδη την πιο πρόσφατη έκδοση {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
-      "Value": "Оновлення відключено. Останній реліз можна скачати з: {0} \n"
+      "Value": "Η αυτόματη ενημέρωση είναι απενεροποιημένη. Κατέβασε την πιο πρόσφατη έκδοση απο εδώ: {0}\n "
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Скачуємо і встановлюємо оновлення ..."
+      "Value": "Κατέβασμα και εγκατάσταση ενημέρωσης..."
     },
     {
       "Key": "finishedDownloadingRelease",
-      "Value": "Завершено скачування нового релізу ..."
+      "Value": "Το κατέβασμα τελείωσε..."
     },
     {
       "Key": "finishedUnpackingFiles",
-      "Value": "Завершено розпакування файлів ..."
-    },
-    {
-      "Key": "FinishedTransferringConfig",
-      "Value": "Закінчена передача конфігурації на нову версію ..."
+      "Value": "Η αποσυμπίεση αρχείων τελείωσε..."
     },
     {
       "Key": "updateFinished",
-      "Value": "Оновлення завершено, тепер ви можете закрити це вікно."
+      "Value": "Η ενημέρωση τελείωσε, μπορείς τώρα να κλείσεις αυτο το παράθυρο."
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Шукаємо покемона залученого ладаном ..."
+      "Value": "Εύρεση pokemon με χρήση αντικειμένου insence..."
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Шукаємо покемона ..."
+      "Value": "Εύρεση pokemon..."
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Шукаємо покемона залученого ЛюрМодулем ..."
+      "Value": "Εύρεση pokemon απο lure..."
     },
     {
       "Key": "pokemonSkipped",
-      "Value": "Пропущений {0}"
+      "Value": "{0} Παραλήφθηκε"
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Інвентар повний. Передайте покемонів Професору ..."
+      "Value": "Ο κατάλογος Pokemon είναι γεμάτος. Μεταφόρα pokemon..."
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "Інвентар повний. Вручну передайте покемона Професору або встановіть налаштування TransferDuplicatePokemon як true ..."
+      "Value": "Ο κατάλογος Pokemon είναι γεμάτος. Μετέφερε pokemon χειροκίνητα η ενεργοποίησε την μεταφόρα διπλών pokemon απο τις ρυθμίσεις..."
     },
     {
       "Key": "invFullPokestopLooting",
-      "Value": "Інвентар повний, не можемо взяти предмети!"
+      "Value": "Ο κατάλογος αντικείμενων ειναι γεμάτος, δεν πήραμε αντικείμενα απο το Πόκεστοπ!"
     },
     {
       "Key": "encounterProblem",
-      "Value": "Проблема з виловом: {0}"
+      "Value": "Πρόβλημα αντιμετώπισης πόκεμον: {0}"
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Проблема з виловом: Приманений ЛюрМодулем покемон {0}"
+      "Value": "Πρόβλημα αντιμετώπισης pokemon απο lure {0}"
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Зазначене місце призначення {0}, {1} занадто далеко від поточної позиції {2}, {3}"
+      "Value": "Η επιθυμητή σου τοποθεσία: {0}, {1} είναι πολύ μακρύα απο την τωρινή σου τοποθεσία: {2}, {3}"
     },
     {
       "Key": "pokemonRename",
-      "Value": "Покемон {0} ({1}) перейменований з {2} в {3}."
+      "Value": "Το {0} ({1}) μετονομάστηκε απο {2} σε {3}."
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Фільтр ігнор покемонів] - Ігноруємо {0} як зазначено в настройках"
+      "Value": "[Φίλτρο αγνόησης Πόκεμον] - Αγνοω το {0} οπως παραμετροποιήθηκε στις ρυθμίσεις"
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "спроба"
+      "Value": "Απόπειρα"
     },
     {
       "Key": "catchStatusError",
-      "Value": "ПОМИЛКА"
+      "Value": "Υπήρξε Σφάλμα"
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "вибрати"
+      "Value": "Ξέφυγε"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "УТІК"
+      "Value": "Έτρεξε"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "упустити"
+      "Value": "Αστοχία"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "ВДАЛО"
+      "Value": "Πιάστηκε"
     },
     {
       "Key": "catchTypeNormal",
-      "Value": "Звичайний"
+      "Value": "Κανονικό"
     },
     {
       "Key": "catchTypeLure",
-      "Value": "на ЛюрМодуль"
+      "Value": "Lure"
     },
     {
       "Key": "catchTypeIncense",
-      "Value": "на Ладан"
+      "Value": "Incense"
     },
     {
       "Key": "webSocketFailStart",
-      "Value": "Не вдалося запустити WebSocketServer через порт: {0}"
+      "Value": "Αποτυχία εκκίνησης του WebSocketServer στην θύρα : {0}"
     },
     {
       "Key": "statsTemplateString",
-      "Value":
-        "{0} -Онлайн {1}, Рівень: {2} | XP / год: {3: 0} | П / год: {4: 0} | Пил: {5: 0} | обмін: {6: 0} | Вилучено: {7: 0} "
+      "Value": "{0} - Χρόνος λειτουργίας {1} - Επίπεδο: {2} | EXP/H: {3:0} | P/H: {4:0} | Stardust: {5:0} | Μεταφέρθηκαν: {6:0} | Ανακυκλώθηκαν: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (наст.через {1} г {2} хв | {3} / {4} XP)"
+      "Value": "{0} (Επομενο Επίπεδο σε {1}Ώρα {2}Λεπτά | {3}/{4} Εμπειρία)"
     },
     {
       "Key": "requireInputText",
-      "Value": "Натисніть будь-яку клавішу для продовження ..."
+      "Value": "Το πρόγραμμα θα συνεχίσει μετά το πάτημα οποιουδήποτε κουμπιού..."
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value":
-        "Оскільки у Вас включена двухфакторная аутентифікація Google, Вам потрібно помістити пароль Програми Google в файл auth.json"
+      "Value": "Επειδή χρησημοποιείς το Google Two Factor Auth, θα πρέπει να συμπλήρωσεις έναν κωδικό συγκεκριμένο για αυτό το πρόγραμμα στο auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value":
-        "Відкриваємо паролі Google App. Будь ласка, створіть новий пароль додатка (виберіть Other (Інше) в якості пристрою)"
+      "Value": "Άνοιγμα του Google App-Passwords. Σε παρακαλώ δημιούργησε εναν καινουργιο κωδικό για αυτο το πρόγραμμα (Για συσκευή βάλε Other/Άλλο)"
     },
     {
       "Key": "googleError",
-      "Value": "Переконайтеся, що Ви ввели вірні E-mail і Пароль від аккаунта!"
+      "Value": "Βεβαιώσου οτι έχεις συμπληρώσει σωστά τα Email & Password."
     },
     {
       "Key": "googleOffline",
-      "Value": "Можливо, сервери не працюють, зачекайте та перезапустіть программу пізніше."
+      "Value": "Οι Σερβερ της Google είναι πιθανόν εκτός λειτουργίας, παρακαλούμε κάντε υπομονή και τρέξτε το bot αργότερα."
     },
     {
       "Key": "missingCredentialsGoogle",
-      "Value": "Вам потрібно заповнити налаштування GoogleUsername і GooglePassword в auth.json!"
+      "Value": "Πρέπει να συμπλήρωσεις τα GoogleUsername και GooglePassword στο auth.json!"
     },
     {
       "Key": "missingCredentialsPtc",
-      "Value": "Вам потрібно заповнити налаштування PtcUsername і PtcPassword в auth.json!"
+      "Value": "Πρέπει να συμπλήρωσεις τα PtcUsername και PtcPassword στο auth.json!"
     },
     {
       "Key": "snipeScan",
-      "Value": "[Снайпер] Шукаємо покемона для вилову в локації {0} ..."
+      "Value": "[Σναΐπερ] Έρευνα για Pokemon που μπορουν να σναϊπαριστούν στο {0}..."
     },
     {
       "Key": "noPokemonToSnipe",
-      "Value": "[Снайпер] Покемона для вилову не виявлено!"
+      "Value": "[Σναΐπερ] Δεν βρέθηκαν Pokemon για σναϊπάρισμα!"
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value": "--- Πιασμένα στο Pokedex --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value": "#{0} Όνομα: {1} | Έχετε πιάσει: {2} | Έχετε αντιμετωπίσει: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value": "--- Χρειάζονται για το Pokedex --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value": "#{0} Όνομα: {1} \n"
+    },
+    {
+      "Key": "Proxied",
+      "Value": "Η IP σας είναι: {0} | Η Proxy IP σας είναι: {1}"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "Πατήστε οποιοδήποτε πλήκτρο για έξοδο ώστε να διορθώσετε τις ρυθμίσεις proxy..."
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " Η IP σας είναι: {0}"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Επίπεδο {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Ταχύτητα περπατήματος: Έχει αλλάξει, από {0:n2} Km/h σε {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Πιθανότατα μόνιμο Ban!"
     }
   ],
 	"PokemonStrings": [
@@ -1740,4 +1781,5 @@
       "Value": "RockSmashFast"
     }
   ]
+
 }

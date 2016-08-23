@@ -85,7 +85,19 @@ namespace PoGo.NecroBot.Logic.Logging
             _logger.Write(message, level, color);
 
             if (!_isGui)
-                Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message), force);
+            {
+                if (level == LogLevel.Debug)
+                {
+                    Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss.fff")}] ", message), force);
+                }
+                else
+                {
+                    Log(string.Concat($"[{DateTime.Now.ToString("HH:mm:ss")}] ", message), force);
+                }
+                
+
+            }
+                
         }
 
         public static void lineSelect(int lineChar = 0, int linesUp = 1)

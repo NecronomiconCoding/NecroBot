@@ -1,6 +1,30 @@
 ﻿{
   "TranslationStrings": [
     {
+      "Key": "SniperCount",
+      "Value": "Sniper count {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Sniper need to take a rest before your account is banned"
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+    },
+    {
+      "Key": "Only10kmEggs",
+      "Value": "Player below level 20, saving this 10 km Egg for later"
+    },
+    {
+      "Key": "GoogleAPIWarning",
+      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+    },
+    {
       "Key": "pokeball",
       "Value": "PokeBall"
     },
@@ -26,13 +50,11 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Вы находитесь вне указанного радиуса! Возвращаемся к точке старта (дистанция {0}м) через 5 сек. Ваш LastPos.ini файл корректен?"
+      "Value": "Вы находитесь вне указанного радиуса! Возвращаемся к точке старта (дистанция {0}м) через 5 сек. Ваш LastPos.ini файл корректен?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value":
-        "Не найдено активных PokeStop'ов в вашей зоне. Возможно указана слишком маленькая максимальная дистанция поиска в настройках?"
+      "Value": "Не найдено активных PokeStop'ов в вашей зоне. Возможно указана слишком маленькая максимальная дистанция поиска в настройках?"
     },
     {
       "Key": "eventFortUsed",
@@ -44,7 +66,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Направляемся к <{0}>, дистанция ({1}м) ({2} сек.)"
+      "Value": "Направляемся к <{0}>, дистанция ({1}м) ({2} сек.) (route {3})"
     },
     {
       "Key": "eventProfileLogin",
@@ -76,13 +98,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value":
-        "=>({0})({1}) {2} {3}-УР (CР:{4}/{5}|IV:{6}%) c {7}% шансом на {8}м исп. {9} ({10} осталось). | {11} EXP получено | {12} | широта: {13} долгота: {14}"
+      "Value": "=>({0})({1}) {2} {3}-УР (CР:{4}/{5}|IV:{6}%) c {7}% шансом на {8}м исп. {9} ({10} осталось). | {11} EXP получено | {12} | широта: {13} долгота: {14}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value":
-        "=>({0})({1}) {2} {3}-УР (CР:{4}/{5}|IV:{6}%) c {7}% шансом на {8}м исп. {9} ({10} осталось). | широта: {11} долгота: {12}"
+      "Value": "=>({0})({1}) {2} {3}-УР (CР:{4}/{5}|IV:{6}%) c {7}% шансом на {8}м исп. {9} ({10} осталось). | широта: {11} долгота: {12}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -138,7 +158,7 @@
     },
     {
       "Key": "commonWordUnknown",
-      "Value": "Неизвестный"
+      "Value": "неизвестным"
     },
     {
       "Key": "displayHighestsCpHeader",
@@ -224,7 +244,7 @@
       "Key": "logEntryUpdate",
       "Value": "ОБНОВЛЕНИЕ"
     },
-	{
+    {
       "Key": "logEntryNew",
       "Value": "НОВЫЙ"
     },
@@ -234,10 +254,9 @@
     },
     {
       "Key": "ptcOffline",
-      "Value":
-        "PTC сервера возможно не работают ИЛИ неверно указаны данные учетной записи. Попробуйте использовать логин от Google аккаунта"
+      "Value": "PTC сервера возможно не работают ИЛИ неверно указаны данные учетной записи. Попробуйте использовать логин от Google аккаунта"
     },
-	{
+    {
       "Key": "accessTokenExpired",
       "Value": "Токен PTC истек. Перезаходим..."
     },
@@ -315,7 +334,7 @@
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Ищем покемона привлеченного Люр Модулем..."
+      "Value": "Ищем покемона привлечённого Люр Модулем..."
     },
     {
       "Key": "pokemonSkipped",
@@ -347,7 +366,7 @@
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "Recycling Quietly..."
+      "Value": "Тихо удаляем..."
     },
     {
       "Key": "invFullTransferring",
@@ -355,8 +374,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "Инвентарь полон. Вручную передайте покемона Профессору или установите настройку TransferDuplicatePokemon как true ... "
+      "Value": "Инвентарь полон. Вручную передайте покемона Профессору или установите настройку TransferDuplicatePokemon как true ... "
     },
     {
       "Key": "invFullPokestopLooting",
@@ -431,6 +449,18 @@
       "Value": "{0}-Онлайн {1}, Ур:{2}|XP/ч:{3:0}|П/ч:{4:0}|Пыль:{5:0}|Обменено:{6:0}|Удалено:{7:0}"
     },
     {
+      "Key": "profileStatsTemplateString",
+      "Value": "----- LVL {0} | {1} ----- \n Опыта: {2}/{3} \n Покемонов поймано: {4} \n Покемонов задействовано: {5} \n Покестопов посещено: {6} \n Яиц высижено: {7} \n Покемонов эволюционировано: {8} \n Записей в покедэксе: {9} \n КМ пройдено: {10}  \n Покемонов: {11}/{12}"
+    },
+    {
+      "Key": "showPokeTemplate",
+      "Value": "\n CP: {0} | IV: {1}% | Имя: {2}"
+    },
+    {
+      "Key": "helpTemplate",
+      "Value": "Команды: \n \n /top <cp/iv> <количество> - показать лучших покемонов. \n /all <cp/iv> - показать всех ваших покемонов. \n /profile - показать профиль игрока. \n /loc - показать локацию. \n /items - показать инвентарь. \n /status - показать статус. \n /pokedex - ваш покедэкс. \n /restart - перезапустить бота."
+    },
+    {
       "Key": "statsXpTemplateString",
       "Value": "{0} (след.через {1}ч{2}м|{3}/{4} XP)"
     },
@@ -440,13 +470,11 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value":
-        "Т.к. у Вас включена двухфакторная аутентификация Google, Вам нужно поместить пароль Приложения Google в файл auth.json"
+      "Value": "Т.к. у Вас включена двухфакторная аутентификация Google, Вам нужно поместить пароль Приложения Google в файл auth.json"
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
-      "Value":
-        "Открываем пароли Google App. Пожалуйста, создайте новый пароль приложения (выберите Other(Другое) в качестве устройства)"
+      "Value": "Открываем пароли Google App. Пожалуйста, создайте новый пароль приложения (выберите Other(Другое) в качестве устройства)"
     },
     {
       "Key": "googleError",
@@ -470,7 +498,7 @@
     },
     {
       "Key": "snipeScanEx",
-      "Value": "Sniping a {0} with {1} IV at {2}..."
+      "Value": "Снайпим {0} с {1} IV в {2}..."
     },
     {
       "Key": "noPokemonToSnipe",
@@ -494,7 +522,7 @@
     },
     {
       "Key": "ipBannedError",
-      "Value": "Соединение разорвано. Ваш IP может быть в черном списке Niantic. Выход.."
+      "Value": "Соединение разорвано. Ваш IP может быть в чёрном списке Niantic. Выход.."
     },
     {
       "Key": "noEggsAvailable",
@@ -566,15 +594,15 @@
     },
     {
       "Key": "firstStartAutoGenSettings",
-      "Value": "Конфигурационный файл генерируется автоматически и должен быть завершен, прежде чем продолжить"
+      "Value": "Конфигурационный файл генерируется автоматически и должен быть завершён, прежде чем продолжить"
     },
     {
       "Key": "firstStartSetupAccount",
-      "Value": "### Настройка новой УЧЕТНОЙ ЗАПИСИ ###"
+      "Value": "### Настройка новой УЧЁТНОЙ ЗАПИСИ ###"
     },
     {
       "Key": "firstStartSetupTypePrompt",
-      "Value": "Пожалуйста, выберите тип учетной записи: {0}/{1}"
+      "Value": "Пожалуйста, выберите тип учётной записи: {0}/{1}"
     },
     {
       "Key": "firstStartSetupTypeConfirm",
@@ -602,7 +630,7 @@
     },
     {
       "Key": "firstStartAccountCompleted",
-      "Value": "### Учетная запись создана ###"
+      "Value": "### Учётная запись создана ###"
     },
     {
       "Key": "firstStartDefaultLocationPrompt",
@@ -621,40 +649,60 @@
       "Value": "[ОШИБКА] пожалуйста, введите значение, например: {0}"
     },
     {
-      "Key": "firstStartSetupDefaultLatPrompt",
-      "Value": "Пожалуйста, введите широту (Щелкните правой кнопкой мыши, чтобы вставить)"
+      "Key": "firstStartSetupDefaultLatLongPrompt",
+      "Value": "Пожалуйста, введите Широту и Долготу (щёлкните правой кнопкой мыши, чтобы вставить) - Формат: Значение, Значение"
     },
     {
-      "Key": "firstStartSetupDefaultLatConfirm",
-      "Value": "Принята широта: {0}"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongPrompt",
-      "Value": "Пожалуйста, введите долготу (Щелкните правой кнопкой мыши, чтобы вставить)"
-    },
-    {
-      "Key": "firstStartSetupDefaultLongConfirm",
-      "Value": "Принята долгота: {0}"
+      "Key": "firstStartSetupDefaultLatLongConfirm",
+      "Value": "Широта и Долгота приняты: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
-      "Value": "### ЗАВВЕРШЕНА УСТАНОВКА CONFIG'a ###"
+      "Value": "### ЗАВЕРШЕНА УСТАНОВКА CONFIG'a ###"
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value": "--- Поймано в покедэксе --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value": "#{0} Имя: {1} | Поймали: {2} | Встретили: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value": "--- Нужно в покедэкс --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value": "#{0} Имя: {1} \n"
+    },
+    {
+      "Key": "Proxied",
+      "Value": "Ваш IP: {0} | Прокси IP: {1}"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "Нажмите любую клавишу, чтобы выйти и исправьте настройки прокси..."
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " Ваш IP: {0}"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Скорость ходьбы: была изменена, с {0:n2} км/ч на {1:n2} км/ч"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Возможно перманентный бан!"
     }
   ],
 	"PokemonStrings": [

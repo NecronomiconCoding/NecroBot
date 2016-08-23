@@ -8,6 +8,7 @@ using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Networking.Envelopes;
+using POGOProtos.Networking.Requests;
 
 #endregion
 
@@ -141,6 +142,28 @@ namespace PoGo.NecroBot.Logic.Common
         }
         public void HandleApiSuccess(RequestEnvelope request, ResponseEnvelope response)
         {
+            if (response.StatusCode == 3)
+            {
+                for (int i = 0; i < request.Requests.Count; i++)
+                {
+                    if (request.Requests[i].RequestType == RequestType.GetInventory && response.Returns[i].IsEmpty)
+                    {
+                        _session.EventDispatcher.Send(new ErrorEvent
+                        {
+                            Message = _session.Translation.GetTranslation(TranslationString.AccountBanned)
+                        });
+
+                        _session.EventDispatcher.Send(new WarnEvent
+                        {
+                            Message = _session.Translation.GetTranslation(TranslationString.RequireInputText)
+                        });
+
+                        Console.ReadKey();
+                        Environment.Exit(0);
+                    }
+                }
+            }
+
             _retryCount = 0;
         }
 

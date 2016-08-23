@@ -2,6 +2,7 @@
 {
     public class FortTargetEvent : IEvent
     {
+        public string Route;
         public double Distance;
         public string Name;
     }

@@ -1,6 +1,30 @@
 ﻿{
   "TranslationStrings": [
     {
+      "Key": "SniperCount",
+      "Value": "Sniper count {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Sniper need to take a rest before your account is banned"
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+    },
+    {
+      "Key": "Only10kmEggs",
+      "Value": "Player below level 20, saving this 10 km Egg for later"
+    },
+    {
+      "Key": "GoogleAPIWarning",
+      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+    },
+    {
       "Key": "pokeball",
       "Value": "Pokéball"
     },
@@ -54,8 +78,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Oled seadistatud raadiusest väljas! Liigun alguspunkti ({0} m kaugusel) tagasi 5 sekundi pärast. Kas koordinaadid config.json'is on õiged?"
+      "Value": "Oled seadistatud raadiusest väljas! Liigun alguspunkti ({0} m kaugusel) tagasi 5 sekundi pärast. Kas koordinaadid config.json'is on õiged?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -71,7 +94,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} ({1} m pärast)"
+      "Value": "{0} ({1} m pärast) ({2} seconds) (route {3})"
     },
     {
       "Key": "eventProfileLogin",
@@ -155,8 +178,7 @@
     },
     {
       "Key": "welcomeWarning",
-      "Value":
-        "Veendu, et laius- ja pikkuskraadid on õiged. Kui ei, siis sulge programm! Laiuskraad (Lat): {0}, pikkuskraad (Lng): {1}"
+      "Value": "Veendu, et laius- ja pikkuskraadid on õiged. Kui ei, siis sulge programm! Laiuskraad (Lat): {0}, pikkuskraad (Lng): {1}"
     },
     {
       "Key": "incubatorPuttingEgg",
@@ -312,8 +334,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "Kott on Pokémon'e täis. Palun transferige Pokémon'id käsitsi või määrake sätte \"TransferDuplicatePokemon\" väärtuseks \"true\"..."
+      "Value": "Kott on Pokémon'e täis. Palun transferige Pokémon'id käsitsi või määrake sätte \"TransferDuplicatePokemon\" väärtuseks \"true\"..."
     },
     {
       "Key": "encounterProblem",
@@ -337,19 +358,47 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value": "--- Pokedex catched --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value": "--- Pokedex needed --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value": "#{0} Name: {1} \n"
+    },
+    {
+      "Key": "Proxied",
+      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "Press any key to exit so you can fix your proxy settings..."
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " Your IP is: {0}"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Probably Permanent Ban!"
     }
   ],
 	"PokemonStrings": [

@@ -1,16 +1,16 @@
 ﻿#region using directives
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
-using POGOProtos.Inventory.Item;
-using PoGo.NecroBot.Logic.Common;
-using System.Collections.Generic;
 using POGOProtos.Data;
+using POGOProtos.Inventory.Item;
 
 #endregion
 
@@ -25,6 +25,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             cancellationToken.ThrowIfCancellationRequested();
 
             await session.Inventory.RefreshCachedInventory();
+
             var pokemonToEvolveTask = await session.Inventory.GetPokemonToEvolve(session.LogicSettings.PokemonsToEvolve);
             var pokemonToEvolve = pokemonToEvolveTask.Where(p => p != null).ToList();
 
@@ -92,6 +93,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public static async Task UseLuckyEgg(ISession session)
         {
+            await session.Inventory.RefreshCachedInventory();
+
             var inventoryContent = await session.Inventory.GetItems();
 
             var luckyEggs = inventoryContent.Where(p => p.ItemId == ItemId.ItemLuckyEgg);
@@ -102,8 +105,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             _lastLuckyEggTime = DateTime.Now;
             await session.Client.Inventory.UseItemXpBoost();
-            await session.Inventory.RefreshCachedInventory();
-            if (luckyEgg != null) session.EventDispatcher.Send(new UseLuckyEggEvent { Count = luckyEgg.Count });
+            if (luckyEgg != null) session.EventDispatcher.Send(new UseLuckyEggEvent { Count = luckyEgg.Count - 1 });
             DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
         }
 
@@ -118,6 +120,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     Id = pokemon.PokemonId,
                     Exp = evolveResponse.ExperienceAwarded,
+                    UniqueId = pokemon.Id,
                     Result = evolveResponse.Result
                 });
                 if (!pokemonToEvolve.Last().Equals(pokemon))

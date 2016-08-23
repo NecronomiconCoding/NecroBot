@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using Google.Protobuf;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
 using PokemonGo.RocketAPI.Enums;
 using PokemonGo.RocketAPI.Exceptions;
-using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -144,8 +144,8 @@ namespace PoGo.NecroBot.Logic.State
                 Console.ReadKey();
                 System.Environment.Exit(1);
             }
-
-            return new PositionCheckState();
+            
+            return new LoadSaveState();
         }
 
         private static async Task CheckLogin(ISession session, CancellationToken cancellationToken)

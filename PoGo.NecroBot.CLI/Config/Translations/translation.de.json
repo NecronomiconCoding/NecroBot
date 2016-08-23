@@ -1,8 +1,32 @@
 ﻿{
   "TranslationStrings": [
     {
+      "Key": "SniperCount",
+      "Value": "Sniper count {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Sniper need to take a rest before your account is banned"
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+    },
+    {
+      "Key": "Only10kmEggs",
+      "Value": "Player below level 20, saving this 10 km Egg for later"
+    },
+    {
+      "Key": "GoogleAPIWarning",
+      "Value": "Du benoetigst einen \"GoogleAPIKey\", falls Du noch keinen erstellt hast, tue dies hier und trage ihn danach in die Auth.json ein: https://developers.google.com/maps/documentation/directions/get-api-key"
+    },
+    {
       "Key": "pokeball",
-      "Value": "Pokéball"
+      "Value": "Pokeball"
     },
     {
       "Key": "greatPokeball",
@@ -22,12 +46,11 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Du bist außerhalb des festgelegten Radius! Laufe zurück zum Anfang ({0}m entfernt). Sind die Koordinaten in der config.json korrekt?"
+      "Value": "Du bist außerhalb des festgelegten Radius! Laufe zurueck zum Anfang ({0}m entfernt). Sind die Koordinaten in der config.json korrekt?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
-      "Value": "Keine nutzbaren Pokéstops in deiner Gegend gefunden. Ist die maximale Distanz zu klein?"
+      "Value": "Keine nutzbaren Pokestops in deiner Gegend gefunden. Ist die maximale Distanz zu klein?"
     },
     {
       "Key": "eventFortUsed",
@@ -39,7 +62,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} in ({1}m) ({2} Sekunden)"
+      "Value": "{0} in ({1}m) ({2} Sekunden) (route {3})"
     },
     {
       "Key": "eventProfileLogin",
@@ -47,11 +70,11 @@
     },
     {
       "Key": "eventUsedLuckyEgg",
-      "Value": "Glücks-Ei benutzt, verbleibend: {0}"
+      "Value": "Gluecks-Ei benutzt, verbleibend: {0}"
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} wurde für {1}EP entwickelt!"
+      "Value": "{0} wurde fuer {1}EP entwickelt!"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -75,7 +98,7 @@
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Keine Pokébälle mehr! - Wir haben ein {0} mit {1} WP verpasst!"
+      "Value": "Keine Pokebaelle mehr! - Wir haben ein {0} mit {1} WP verpasst!"
     },
     {
       "Key": "eventUseBerry",
@@ -95,11 +118,11 @@
     },
     {
       "Key": "unhandledGpxData",
-      "Value": "Unerwartete Daten in GPX Datei, versuche zu überspringen."
+      "Value": "Unerwartete Daten in GPX Datei, versuche zu ueberspringen."
     },
     {
       "Key": "displayHighestsHeader",
-      "Value": "Pokémon"
+      "Value": "Pokemon"
     },
     {
       "Key": "commonWordPerfect",
@@ -115,15 +138,15 @@
     },
     {
       "Key": "displayHighestsCpHeader",
-      "Value": "Höchste WP"
+      "Value": "Hoechste WP"
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Höchste IV"
+      "Value": "Hoechste IV"
     },
     {
       "Key": "displayHighestsLevelHeader",
-      "Value": "Höchstes Level"
+      "Value": "Hoechstes Level"
     },
     {
       "Key": "welcomeWarning",
@@ -139,7 +162,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Ei ist geschlüpft: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "Ei ist geschluepft: {0} | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -207,7 +230,7 @@
     },
     {
       "Key": "accountNotVerified",
-      "Value": "Account nicht bestätigt! Stoppe..."
+      "Value": "Account nicht bestaetigt! Stoppe..."
     },
     {
       "Key": "realisticTravelDetected",
@@ -219,7 +242,7 @@
     },
     {
       "Key": "coordinatesAreInvalid",
-      "Value": "Koordinaten in \"LastPos.ini\" sind ungültig! Benutze standart Koordinaten."
+      "Value": "Koordinaten in \"LastPos.ini\" sind ungueltig! Benutze standart Koordinaten."
     },
     {
       "Key": "gotUpToDateVersion",
@@ -231,7 +254,7 @@
     },
     {
       "Key": "downloadingUpdate",
-      "Value": "Download und entpacken vom Update..."
+      "Value": "Download und entpacken von Update..."
     },
     {
       "Key": "finishedDownloadingRelease",
@@ -243,7 +266,7 @@
     },
     {
       "Key": "FinishedTransferringConfig",
-      "Value": "Ihre Konfiguration wurde auf die neue Version übertragen..."
+      "Value": "Ihre Konfiguration wurde auf die neue Version uebertragen..."
     },
     {
       "Key": "updateFinished",
@@ -251,31 +274,31 @@
     },
     {
       "Key": "lookingForIncensePokemon",
-      "Value": "Suche nach von Rauch angelockten Pokémon..."
+      "Value": "Suche nach von Rauch angelockten Pokemon..."
     },
     {
       "Key": "lookingForPokemon",
-      "Value": "Suche nach Pokémon..."
+      "Value": "Suche nach Pokemon..."
     },
     {
       "Key": "lookingForLurePokemon",
-      "Value": "Suche nach von Modulen angelockten Pokémon..."
+      "Value": "Suche nach von Modulen angelockten Pokemon..."
     },
     {
       "Key": "pokemonSkipped",
-      "Value": "Übersprungen {0}"
+      "Value": "uebersprungen {0}"
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Du hast keine Pokébälle im Inventar, es können keine Pokémon gefangen werden!"
+      "Value": "Du hast keine Pokebaelle im Inventar, es koennen keine Pokemon gefangen werden!"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Pokéball: {0} | Superball: {1} | Hyperball: {2} | Meisterball: {3}"
+      "Value": "Pokeball: {0} | Superball: {1} | Hyperball: {2} | Meisterball: {3}"
     },
     {
       "Key": "CurrentPotionInv",
-      "Value": "Tränke: {0} | Supertränke: {1} | Hypertränke: {2} | Top-Tränke: {3}"
+      "Value": "Traenke: {0} | Supertraenke: {1} | Hypertraenke: {2} | Top-Traenke: {3}"
     },
     {
       "Key": "CurrentReviveInv",
@@ -283,20 +306,19 @@
     },
     {
       "Key": "CurrentMiscItemInv",
-      "Value": "Beeren: {0} | Rauch: {1} | Glücks-Eier: {2} | Lockmodule: {3}"
+      "Value": "Beeren: {0} | Rauch: {1} | Gluecks-Eier: {2} | Lockmodule: {3}"
     },
     {
       "Key": "invFullTransferring",
-      "Value": "Das PokémonInventar ist voll. Verschicke Pokémon..."
+      "Value": "Das PokemonInventar ist voll. Verschicke Pokemon..."
     },
     {
       "Key": "InvFullPokestopLooting",
-      "Value": "Das Inventar ist voll. Es können keine Gegenstände mehr eingesammelt werden."
+      "Value": "Das Inventar ist voll. Es koennen keine Gegenstaende mehr eingesammelt werden."
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "PokémonInventar ist voll. Bitte verschicke Pokémon manuell oder setze \"TransferDuplicatePokemon\" in den Einstellungen auf \"true\"..."
+      "Value": "PokemonInventar ist voll. Bitte verschicke Pokemon manuell oder setze \"TransferDuplicatePokemon\" in den Einstellungen auf \"true\"..."
     },
     {
       "Key": "encounterProblem",
@@ -304,15 +326,15 @@
     },
     {
       "Key": "encounterProblemLurePokemon",
-      "Value": "Problem beim Fangen: Lockmodul-Pokémon {0}"
+      "Value": "Problem beim Fangen: Lockmodul-Pokemon {0}"
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "Das gewünschte Ziel ({0}, {1}), ist zu weit von deiner aktuellen Position ({2}, {3}) entfernt."
+      "Value": "Das gewuenschte Ziel ({0}, {1}), ist zu weit von deiner aktuellen Position ({2}, {3}) entfernt."
     },
     {
       "Key": "pokemonRename",
-      "Value": "Pokémon {0} ({1}) wurde von {2} zu {3} umbenannt."
+      "Value": "Pokemon {0} ({1}) wurde von {2} zu {3} umbenannt."
     },
     {
       "Key": "PokemonFavorite",
@@ -320,7 +342,7 @@
     },
     {
       "Key": "pokemonIgnoreFilter",
-      "Value": "[Pokémon-Ignore-Filter] - Ignoriere {0} wie in den Einstellungen angegeben!"
+      "Value": "[Pokemon-Ignore-Filter] - Ignoriere {0} wie in den Einstellungen angegeben!"
     },
     {
       "Key": "catchStatusAttempt",
@@ -336,7 +358,7 @@
     },
     {
       "Key": "CatchStatusFlee",
-      "Value": "Geflüchtet"
+      "Value": "Gefluechtet"
     },
     {
       "Key": "CatchStatusMissed",
@@ -368,7 +390,7 @@
     },
     {
       "Key": "ProfileStatsTemplateString",
-      "Value": "----- LVL {0} | {1} ----- \n Erfahrungspunkte: {2}/{3} \n Pokemons gefangen: {4} \n Pokemons verschickt: {5} \n Pokestops besucht: {6} \n Eier geschlüpft: {7} \n Pokemons entwickelt: {8} \n Pokedex Einträge: {9} \n KM gelaufen: {10} \n Pokemons: {11}/{12}"
+      "Value": "----- LVL {0} | {1} ----- \n Erfahrungspunkte: {2}/{3} \n Pokemons gefangen: {4} \n Pokemons verschickt: {5} \n Pokestops besucht: {6} \n Eier geschluepft: {7} \n Pokemons entwickelt: {8} \n Pokedex Eintraege: {9} \n KM gelaufen: {10} \n Pokemons: {11}/{12}"
     },
     {
       "Key": "ShowPokeTemplate",
@@ -376,7 +398,7 @@
     },
     {
       "Key": "HelpTemplate",
-      "Value": "Kommandos: \n \n /top <cp/iv> <amount> - Zeigt die besten Pokemons an. \n /all <cp/iv> - Zeigt dir alle Pokemons an. \n /profile - Zeigt dein Profil. \n /loc - Zeigt deine Position an. \n /items - Zeigt dir deine Items \n /status - Zeigt den Status vom Bot. \n /pokedex - Zeigt dein Pokedex. "
+      "Value": "Kommandos: \n \n /top <cp/iv> <amount> - Zeigt die besten Pokemons an. \n /all <cp/iv> - Zeigt dir alle Pokemons an. \n /profile - Zeigt dein Profil. \n /loc - Zeigt deine Position an. \n /items - Zeigt dir deine Items \n /status - Zeigt den Status vom Bot. \n /pokedex - Zeigt dein Pokedex. \n /restart - startet den Bot neu"
     },
     {
       "Key": "StatsXpTemplateString",
@@ -384,15 +406,15 @@
     },
     {
       "Key": "RequireInputText",
-      "Value": "Programm wird nach Drücken einer Taste fortgesetzt..."
+      "Value": "Programm wird nach Druecken einer Taste fortgesetzt..."
     },
     {
       "Key": "GoogleTwoFactorAuth",
-      "Value": "Wenn Google-Zwei-Faktor-Authentifizierung aktiviert ist, muss ein App Spezifisches Passwort in die auth.json eingefügt werden."
+      "Value": "Wenn Google-Zwei-Faktor-Authentifizierung aktiviert ist, muss ein App Spezifisches Passwort in die auth.json eingefuegt werden."
     },
     {
       "Key": "GoogleTwoFactorAuthExplanation",
-      "Value": "Öffne App-Passwörter. Bitte erstelle ein neues Passwort (verwende bei App wählen: Andere)"
+      "Value": "oeffne App-Passwoerter. Bitte erstelle ein neues Passwort (verwende bei App waehlen: Andere)"
     },
     {
       "Key": "GoogleError",
@@ -400,19 +422,19 @@
     },
     {
       "Key": "GoogleOffline",
-      "Value": "Google servers are probably down, Please be patient and start the bot later."
+      "Value": "Google Server sind vermutlich offline, bitte habe Geduld und starte den Bot spaeter erneut."
     },
     {
       "Key": "MissingCredentialsGoogle",
-      "Value": "Es müssen GoogleUsername & GooglePassword in auth.json ausgefüllt werden!"
+      "Value": "Es muessen GoogleUsername & GooglePassword in auth.json ausgefuellt werden!"
     },
     {
       "Key": "MissingCredentialsPtc",
-      "Value": "Es müssen PtcUsername & PtcPassword in auth.json ausgefüllt werden!"
+      "Value": "Es muessen PtcUsername & PtcPassword in auth.json ausgefuellt werden!"
     },
     {
       "Key": "SnipeScan",
-      "Value": "Scannen nach Snipebaren Pokémon in {0}..."
+      "Value": "Scannen nach Snipebaren Pokemon in {0}..."
     },
     {
       "Key": "SnipeScanEx",
@@ -420,11 +442,11 @@
     },
     {
       "Key": "NoPokemonToSnipe",
-      "Value": "Kein Pokémon zum Snipen gefunden"
+      "Value": "Kein Pokemon zum Snipen gefunden"
     },
     {
       "Key": "NotEnoughPokeballsToSnipe",
-      "Value": "Nicht genug Pokébälle um Snipen zu starten! ({0}/{1})"
+      "Value": "Nicht genug Pokebaelle um Snipen zu starten! ({0}/{1})"
     },
     {
       "Key": "DisplayHighestMove1Header",
@@ -440,27 +462,27 @@
     },
     {
       "Key": "IPBannedError",
-      "Value": "Verbindung nicht möglich. Deine IP könnte von Niantic auf die Blacklist gesetzt worden sein. Beenden..."
+      "Value": "Verbindung nicht moeglich. Deine IP koennte von Niantic auf die Blacklist gesetzt worden sein. Beenden..."
     },
     {
       "Key": "NoEggsAvailable",
-      "Value": "Keine Eier verfügbar"
+      "Value": "Keine Eier verfuegbar"
     },
     {
       "Key": "UseLuckyEggActive",
-      "Value": "Glücks-Ei bereits aktiv"
+      "Value": "Gluecks-Ei bereits aktiv"
     },
     {
       "Key": "UsedLuckyEgg",
-      "Value": "Verwende Glücks-Ei"
+      "Value": "Verwende Gluecks-Ei"
     },
     {
       "Key": "UseLuckyEggAmount",
-      "Value": "Glücks-Eier im Inventar: {0}"
+      "Value": "Gluecks-Eier im Inventar: {0}"
     },
     {
       "Key": "NoIncenseAvailable",
-      "Value": "Kein Rauch verfügbar"
+      "Value": "Kein Rauch verfuegbar"
     },
     {
       "Key": "UseIncenseActive",
@@ -476,35 +498,63 @@
     },
     {
       "Key": "AmountPkmSeenCaught",
-      "Value": "Anzahl gesehener Pokémon: {0}/151, Anzahl gefangener Pokémon: {1}/151"
+      "Value": "Anzahl gesehener Pokemon: {0}/151, Anzahl gefangener Pokemon: {1}/151"
     },
     {
       "Key": "PkmPotentialEvolveCount",
-      "Value": "[Entwicklung] Mögliche Entwicklungen: {0}"
+      "Value": "[Entwicklung] Moegliche Entwicklungen: {0}"
     },
     {
       "Key": "PkmNotEnoughRessources",
-      "Value": "Pokémon Upgrade fehlgeschlagen, nicht genügend Ressourcen"
+      "Value": "Pokemon Upgrade fehlgeschlagen, nicht genuegend Ressourcen"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
-      "Value": "Warte mit Entwicklungen von {0} Pokémon bis {1} weitere gefangen wurden! ({2}/{3} bis {4}% Inventar Auslastung)"
+      "Value": "Warte mit Entwicklungen von {0} Pokemon bis {1} weitere gefangen wurden! ({2}/{3} bis {4}% Inventar Auslastung)"
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex gefangen --- \n"  
+      "Value": "--- Pokedex gefangen --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Gefangen: {2} | Gesehen: {3} \n"  
+      "Value": "#{0} Name: {1} | Gefangen: {2} | Gesehen: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex gebraucht --- \n"  
+      "Value": "--- Pokedex gebraucht --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value": "#{0} Name: {1} \n"
+    },
+    {
+      "Key": "Proxied",
+      "Value": "Deine IP ist: {0} | Proxy IP is: {1}"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "Druecke eine beliebige Taste zum Beenden und korrigieren deiner Proxyeinstellungen..."
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " Deine IP ist: {0}"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Laufgeschwindigkeit: Wurde veraendert, {0:n2} Km/h zu {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Womoeglich Permanent Ban!"
     }
   ],
   "PokemonStrings": [
@@ -1208,7 +1258,7 @@
     },
     {
       "Key": "wingAttack",
-      "Value": "Flügelschlag"
+      "Value": "Fluegelschlag"
     },
     {
       "Key": "flamethrower",
@@ -1304,7 +1354,7 @@
     },
     {
       "Key": "petalBlizzard",
-      "Value": "Blütenwirbel"
+      "Value": "Bluetenwirbel"
     },
     {
       "Key": "megaDrain",
@@ -1312,7 +1362,7 @@
     },
     {
       "Key": "bugBuzz",
-      "Value": "Käfergebrumm"
+      "Value": "Kaefergebrumm"
     },
     {
       "Key": "poisonFang",
@@ -1332,7 +1382,7 @@
     },
     {
       "Key": "submission",
-      "Value": "Überroller"
+      "Value": "Ueberroller"
     },
     {
       "Key": "karateChop",
@@ -1344,7 +1394,7 @@
     },
     {
       "Key": "aquaJet",
-      "Value": "Wasserdüse"
+      "Value": "Wasserduese"
     },
     {
       "Key": "aquaTail",
@@ -1396,7 +1446,7 @@
     },
     {
       "Key": "shadowBall",
-      "Value": "Unheilböen"
+      "Value": "Unheilboeen"
     },
     {
       "Key": "bulletPunch",
@@ -1408,11 +1458,11 @@
     },
     {
       "Key": "steelWing",
-      "Value": "Stahlflügel"
+      "Value": "Stahlfluegel"
     },
     {
       "Key": "ironHead",
-      "Value": "Eisenschädel"
+      "Value": "Eisenschaedel"
     },
     {
       "Key": "parabolicCharge",
@@ -1452,7 +1502,7 @@
     },
     {
       "Key": "disarmingVoice",
-      "Value": "Säuselstimme"
+      "Value": "Saeuselstimme"
     },
     {
       "Key": "drainingKiss",
@@ -1484,7 +1534,7 @@
     },
     {
       "Key": "gunkShot",
-      "Value": "Mülltreffer"
+      "Value": "Muelltreffer"
     },
     {
       "Key": "mudShot",
@@ -1508,7 +1558,7 @@
     },
     {
       "Key": "bugBite",
-      "Value": "Käferbiss"
+      "Value": "Kaeferbiss"
     },
     {
       "Key": "signalBeam",
@@ -1596,7 +1646,7 @@
     },
     {
       "Key": "acid",
-      "Value": "Säure"
+      "Value": "Saeure"
     },
     {
       "Key": "airCutter",
@@ -1672,7 +1722,7 @@
     },
     {
       "Key": "bugBiteFast",
-      "Value": "Käferbiss"
+      "Value": "Kaeferbiss"
     },
     {
       "Key": "biteFast",
@@ -1708,7 +1758,7 @@
     },
     {
       "Key": "wingAttackFast",
-      "Value": "Flügelschlag"
+      "Value": "Fluegelschlag"
     },
     {
       "Key": "peckFast",
@@ -1768,7 +1818,7 @@
     },
     {
       "Key": "acidFast",
-      "Value": "Säure"
+      "Value": "Saeure"
     },
     {
       "Key": "psychoCutFast",
@@ -1824,7 +1874,7 @@
     },
     {
       "Key": "steelWingFast",
-      "Value": "Stahlflügel"
+      "Value": "Stahlfluegel"
     },
     {
       "Key": "fireFangFast",
@@ -1832,7 +1882,7 @@
     },
     {
       "Key": "rockSmashFast",
-      "Value": "Zertrümmerer"
+      "Value": "Zertruemmerer"
     }
   ]
 }

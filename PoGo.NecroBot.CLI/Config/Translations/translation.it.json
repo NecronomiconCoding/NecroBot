@@ -1,6 +1,30 @@
 {
   "TranslationStrings": [
     {
+      "Key": "SniperCount",
+      "Value": "Numero di snipes: {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Lo sniper deve essere disattivato in quanto potrebbe essere far bannare l'account "
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "Stai catturando pokemon troppo velocemente. Aspettando altri {0} secondi prima di catturarne altri."
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "Stai visitando Pokestop troppo velocemente. Aspettando altri {0} secondi prima di visitarne altri."
+    },
+    {
+      "Key": "Only10kmEggs",
+      "Value": "Player sotto il livello 20, mettendo da parte questo uovo da 10 km per dopo"
+    },
+    {
+      "Key": "GoogleAPIWarning",
+      "Value": "Senza una Google Api, avrai un limite pari a 2500 richieste, se raggiungi il limite delle richieste, prova a cambiare il tuo IP. Configura la \"GoogleAPIKey\", ottieni una API Key seguendo il link: https://developers.google.com/maps/documentation/directions/get-api-key"
+    },
+    {
       "Key": "pokeball",
       "Value": "PokeBall"
     },
@@ -26,8 +50,7 @@
     },
     {
       "Key": "farmPokestopsOutsideRadius",
-      "Value":
-        "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file LastPos.ini è corretto?"
+      "Value": "Sei al di fuori dell'area definita! Ritorno all'inizio (distante {0}m) in 5 secondi. Il file LastPos.ini è corretto?"
     },
     {
       "Key": "farmPokestopsNoUsableFound",
@@ -43,7 +66,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Camminando verso il Pokestop: {0} ({1}m) ({2} secondi)"
+      "Value": "Camminando verso il Pokestop: {0} ({1}m) ({2} secondi) (route {3})"
     },
     {
       "Key": "eventProfileLogin",
@@ -340,8 +363,7 @@
     },
     {
       "Key": "invFullTransferManually",
-      "Value":
-        "Inventario Pokémon pieno. Trasferisci i Pokemon manualmente o imposta TransferDuplicatePokemon 'true' nelle impostazioni..."
+      "Value": "Inventario Pokémon pieno. Trasferisci i Pokemon manualmente o imposta TransferDuplicatePokemon 'true' nelle impostazioni..."
     },
     {
       "Key": "invFullPokestopLooting",
@@ -413,8 +435,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value":
-        "{0} - Tempo di Esecuzione {1} - Lvl: {2} | PE/H: {3:0} | PKMN/H: {4:0} | Polvere di Stella: {5:0} | Trasferiti: {6:0} | Riciclati: {7:0}"
+      "Value": "{0} - Tempo di Esecuzione {1} - Lvl: {2} | PE/H: {3:0} | PKMN/H: {4:0} | Polvere di Stella: {5:0} | Trasferiti: {6:0} | Riciclati: {7:0}"
     },
     {
       "Key": "statsXpTemplateString",
@@ -426,8 +447,7 @@
     },
     {
       "Key": "googleTwoFactorAuth",
-      "Value":
-        "Dato che hai la Verifica in Due Passaggi di Google attivata, devi inserire una Password Specifica per l'app nel file auth.json "
+      "Value": "Dato che hai la Verifica in Due Passaggi di Google attivata, devi inserire una Password Specifica per l'app nel file auth.json "
     },
     {
       "Key": "googleTwoFactorAuthExplanation",
@@ -524,26 +544,54 @@
     {
       "Key": "pkmNotEnoughRessources",
       "Value": "Potenziamento Pokemon Fallito: Risorse Insufficienti"
-     },
+    },
     {
       "Key": "snipeServerOffline",
       "Value": "Il server di Sniping è offline. Saltando..."
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value":  "--- Pokedex catched --- \n"  
+      "Value": "--- Pokedex catturati --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value":  "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"  
+      "Value": "#{0} Nome: {1} | Catturati: {2} | Visti: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value":  "--- Pokedex needed --- \n"  
+      "Value": "--- Pokedex da sbloccare --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value":  "#{0} Name: {1} \n"  
+      "Value": "#{0} Nome: {1} \n"
+    },
+    {
+      "Key": "Proxied",
+      "Value": "Il tuo IP: {0} | IP del Proxy: {1}"
+    },
+    {
+      "Key": "FixProxySettings",
+      "Value": "Premi qualsiasi tasto per uscire e quindi aggiustare i settaggi del proxy..."
+    },
+    {
+      "Key": "Unproxied",
+      "Value": " Il tuo IP: {0}"
+    },
+    {
+      "Key": "HighestsPokemoHeader",
+      "Value": "====== {0} ======"
+    },
+    {
+      "Key": "HighestsPokemoCell",
+      "Value": "# PL {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+    },
+    {
+      "Key": "HumanWalkingVariant",
+      "Value": "Velocita di cammino: E' stata cambiata,da {0:n2} Km/h a {1:n2} Km/h"
+    },
+    {
+      "Key": "AccountBanned",
+      "Value": "Probabilmente BANNATO PERMANENTEMENTE!"
     }
   ],
 	"PokemonStrings": [

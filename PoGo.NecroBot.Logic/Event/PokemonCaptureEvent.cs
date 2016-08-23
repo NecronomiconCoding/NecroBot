@@ -18,6 +18,7 @@ namespace PoGo.NecroBot.Logic.Event
         public int Exp;
         public int FamilyCandies;
         public PokemonId Id;
+        public ulong UniqueId;
         public double Level;
         public int MaxCp;
         public double Perfection;
@@ -27,5 +28,11 @@ namespace PoGo.NecroBot.Logic.Event
         public CatchPokemonResponse.Types.CatchStatus Status;
         public double Latitude;
         public double Longitude;
+        public string SpawnPointId;
+        public ulong EncounterId;
+        public PokemonMove Move1;
+        public PokemonMove Move2;
+        public long Expires;
+        public string CatchTypeText;
     }
 }

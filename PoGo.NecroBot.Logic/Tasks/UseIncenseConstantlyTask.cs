@@ -1,19 +1,20 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using POGOProtos.Inventory.Item;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
-using POGOProtos.Networking.Responses;
 using PoGo.NecroBot.Logic.State;
+using POGOProtos.Inventory.Item;
+using POGOProtos.Networking.Responses;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
-    class UseIncenseConstantlyTask
+    public class UseIncenseConstantlyTask
     {
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            if (!session.LogicSettings.UseIncenseConstantly)
-                return;
+            cancellationToken.ThrowIfCancellationRequested();
+
+            await session.Inventory.RefreshCachedInventory();
 
             var currentAmountOfIncense = await session.Inventory.GetItemAmountByType(ItemId.ItemIncenseOrdinary);
             if (currentAmountOfIncense == 0)
