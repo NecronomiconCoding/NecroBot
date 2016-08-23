@@ -257,6 +257,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebSocketHandler\ActionCommands\FavoritePokemonHandler.cs" />
+    <Compile Include="WebSocketHandler\ActionCommands\DropItemHandler.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Events\WebResponce.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Events\EggListResponce.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Events\ItemListResponce.cs" />

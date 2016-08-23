@@ -286,5 +286,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
             }
         }
+
+        public static async Task DropItem(ISession session, ItemId item, int count)
+        {
+            if (count > 0)
+            {
+                await session.Client.Inventory.RecycleItem(item, count);
+                if (session.LogicSettings.VerboseRecycling)
+                    session.EventDispatcher.Send(new ItemRecycledEvent { Id = item, Count = count });
+                if (session.LogicSettings.DelayBetweenRecycleActions)
+                    DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
+            }
+        }
     }
 }
