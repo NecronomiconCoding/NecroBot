@@ -10,8 +10,6 @@ using PoGo.NecroBot.Logic.State;
 using POGOProtos.Enums;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Networking.Responses;
-using PoGo.NecroBot.CLI.Resources;
-
 #endregion
 
 namespace PoGo.NecroBot.CLI
@@ -334,8 +332,16 @@ namespace PoGo.NecroBot.CLI
         private static void HandleEvent(PokemonListEvent event1, ISession session) { }
         private static void HandleEvent(UpdatePositionEvent event1, ISession session)
         {
-            //uncomment to set what happen to the character's location (during snipe double teleport)
-            //Logger.Write(Event1.Latitude.ToString("0.0000") + "," + Event1.Longitude.ToString("0.0000"), LogLevel.Info, force: true);
+            //uncomment for more info about locations
+            //Logger.Write(event1.Latitude.ToString("0.0000000000") + "," + event1.Longitude.ToString("0.0000000000"), LogLevel.Debug, force: true);
+        }
+
+        private static void HandleEvent(PathEvent pathEvent, ISession session)
+        {
+            Logger.Write(session.Translation.GetTranslation(pathEvent.IsCalculated
+                ? TranslationString.WalkingPathCalculated
+                : TranslationString.WalkingPathReal,
+                pathEvent.StringifiedPath));
         }
 
         private static void HandleEvent(HumanWalkingEvent humanWalkingEvent, ISession session)
