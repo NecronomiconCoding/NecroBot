@@ -126,6 +126,11 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool UseGoogleWalkCache => _settings.GoogleWalkConfig.Cache;
         public string GoogleApiKey => _settings.GoogleWalkConfig.GoogleAPIKey;
         public string GoogleHeuristic => _settings.GoogleWalkConfig.GoogleHeuristic;
+
+        public bool UseYoursWalk => _settings.YoursWalkConfig.UseYoursWalk;
+        public string YoursWalkHeuristic => _settings.YoursWalkConfig.YoursWalkHeuristic;
+        public string YoursServerUrl => _settings.YoursWalkConfig.YoursServerUrl;
+
         public bool SnipeAtPokestops => _settings.SnipeConfig.SnipeAtPokestops;
 
         public bool UseTelegramAPI => _settings.TelegramConfig.UseTelegramAPI;

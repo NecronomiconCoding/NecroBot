@@ -9,7 +9,7 @@ namespace PoGo.NecroBot.Logic.Model.Google
     {
         public static void Testar(ISession session)
         {
-            var googleDirectionsService = new DirectionsService(session);
+            var googleDirectionsService = new GoogleDirectionsService(session);
 
             var googleResult = googleDirectionsService.GetDirections(new GeoCoordinate(40.780599, -73.968862), new List<GeoCoordinate>(), new GeoCoordinate(40.781939, -73.965123));
             var googleWalk = GoogleWalk.Get(googleResult);
