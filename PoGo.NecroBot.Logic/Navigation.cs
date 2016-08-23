@@ -108,6 +108,11 @@ namespace PoGo.NecroBot.Logic
                 return new GoogleStrategy(_client);
             }
 
+            if (logicSettings.UseYoursWalk)
+            {
+                return new YoursNavigationStrategy(_client);
+            }
+
             return new HumanStrategy(_client);
         }
     }
