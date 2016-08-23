@@ -141,11 +141,11 @@
     <Compile Include="Event\ItemRecycledEvent.cs" />
     <Compile Include="Event\KillSwitchEvent.cs" />
     <Compile Include="Event\NoPokeballEvent.cs" />
+    <Compile Include="Event\PathEvent.cs" />
     <Compile Include="Event\SnipeEvent.cs" />
     <Compile Include="Event\SnipeModeEvent.cs" />
     <Compile Include="Event\PokemonListEvent.cs" />
     <Compile Include="Event\SnipeScanEvent.cs" />
-    <Compile Include="Event\UnaccurateLocation.cs" />
     <Compile Include="Event\UpdateEvent.cs" />
     <Compile Include="Event\PokemonCaptureEvent.cs" />
     <Compile Include="Event\PokeStopListEvent.cs" />
