@@ -21,7 +21,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsGpxTask
     {
-        private static DateTime _lastTasksCall = DateTime.Now;
         private static int _resumeTrack = 0;
         private static int _resumeTrackSeg = 0;
         private static int _resumeTrackPt = 0;
