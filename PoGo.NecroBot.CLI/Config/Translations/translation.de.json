@@ -1,9 +1,13 @@
 ﻿{
   "TranslationStrings": [
     {
+      "Key": "Only10kmEggs",
+      "Value": "Player below level 20, saving this 10 km Egg for later"
+    },
+    {
       "Key": "GoogleAPIWarning",
-     "Value": "Du benoetigst einen \"GoogleAPIKey\", falls Du noch keinen erstellt hast, tue dies hier und trage ihn danach in die Auth.json ein: https://developers.google.com/maps/documentation/directions/get-api-key"  
-    },  
+      "Value": "Du benoetigst einen \"GoogleAPIKey\", falls Du noch keinen erstellt hast, tue dies hier und trage ihn danach in die Auth.json ein: https://developers.google.com/maps/documentation/directions/get-api-key"
+    },
     {
       "Key": "pokeball",
       "Value": "Pokeball"

@@ -336,14 +336,6 @@ namespace PoGo.NecroBot.CLI
             //Logger.Write(event1.Latitude.ToString("0.0000000000") + "," + event1.Longitude.ToString("0.0000000000"), LogLevel.Debug, force: true);
         }
 
-        private static void HandleEvent(PathEvent pathEvent, ISession session)
-        {
-            Logger.Write(session.Translation.GetTranslation(pathEvent.IsCalculated
-                ? TranslationString.WalkingPathCalculated
-                : TranslationString.WalkingPathReal,
-                pathEvent.StringifiedPath));
-        }
-
         private static void HandleEvent(HumanWalkingEvent humanWalkingEvent, ISession session)
         {
             if (session.LogicSettings.ShowVariantWalking)

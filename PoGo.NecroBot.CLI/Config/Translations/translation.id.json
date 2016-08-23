@@ -1,6 +1,10 @@
 {
   "TranslationStrings": [
     {
+      "Key": "Only10kmEggs",
+      "Value": "Player below level 20, saving this 10 km Egg for later"
+    },
+    {
       "Key": "GoogleAPIWarning",
       "Value": "Tanpa \"API Key\" dari Google, kamu memliki batas kuota gratis sebesar 2500 kali akses, coba ganti IP-mu. Untuk mengatur \"GoogleAPIKey\", dapatkan \"API Key\" di tautan: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
@@ -700,7 +704,7 @@
       "Key": "HumanWalkingVariant",
       "Value": "Kecepatan jalan berubah, dari {0:n2} km/j ke {1:n2} km/j"
     },
-	    {
+    {
       "Key": "AccountBanned",
       "Value": "Kemungkinan kamu kena Ban Permanen!"
     }

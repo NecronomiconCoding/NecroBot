@@ -1,6 +1,10 @@
 {
   "TranslationStrings": [
     {
+      "Key": "Only10kmEggs",
+      "Value": "Jogador abaixo do nivel 20, guardando ovo de 10 Km para mais tarde"
+    },
+    {
       "Key": "GoogleAPIWarning",
       "Value": "Sem uma Api do Google, você terá o limite de cota livre de 2500, se atingir a cota máxima, tente mudar seu IP. Para configurar o \"GoogleAPIKey\", pegar a chave de API no link: https://developers.google.com/maps/documentation/directions/get-api-key"
     },

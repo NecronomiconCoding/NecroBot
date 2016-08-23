@@ -13,6 +13,7 @@ using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Responses;
+using PoGo.NecroBot.Logic.Strategies.Walk;
 
 #endregion
 
@@ -93,7 +94,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                         session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                     cancellationToken.ThrowIfCancellationRequested();
-                    session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
+
+                    if (!session.LogicSettings.UseGoogleWalk)
+                        session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
+                    else
+                        GoogleStrategy.FortInfo = fortInfo;
 
                     await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude,
                         LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
