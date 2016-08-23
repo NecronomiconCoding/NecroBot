@@ -128,10 +128,13 @@ namespace PoGo.NecroBot.CLI
                 catch (Exception) { }
             }
 
+            var logicSettings = new LogicSettings(settings);
+            var translation = Translation.Load(logicSettings);
+
             if (settings.GPXConfig.UseGpxPathing)
             {
                 var xmlString = File.ReadAllText(settings.GPXConfig.GpxFile);
-                var readgpx = new GpxReader(xmlString, session);
+                var readgpx = new GpxReader(xmlString, translation);
                 var nearestPt = readgpx.Tracks.SelectMany(
                     (trk, trkindex) =>
                     trk.Segments.SelectMany(
@@ -167,7 +170,7 @@ namespace PoGo.NecroBot.CLI
                 }
             }
 
-            session = new Session(new ClientSettings(settings), new LogicSettings(settings));
+            session = new Session(new ClientSettings(settings), logicSettings, translation);
 
             Teste.Testar(session);
             if (boolNeedsSetup)
