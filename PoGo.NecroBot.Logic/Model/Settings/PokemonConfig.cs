@@ -28,8 +28,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool TransferDuplicatePokemon = true;
         public bool TransferDuplicatePokemonOnCapture = true;
         /*Rename*/
-        public bool RenamePokemon;
-        public bool RenameOnlyAboveIv = true;
+        public bool RenamePokemon = false;
+        public bool RenameOnlyAboveIv = false;
         public string RenameTemplate = "{1}_{0}";
         /*Favorite*/
         public float FavoriteMinIvPercentage = 95;
