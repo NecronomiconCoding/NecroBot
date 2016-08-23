@@ -10,11 +10,11 @@
     },
     {
       "Key": "CatchExceeds",
-      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+      "Value": "Łapiesz pokemony za szybko. Nie możesz złapac kolejnego dopiero po {0} sekundach"
     },
     {
       "Key": "PokeStopExceeds",
-      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+      "Value": "Odwiedzasz pokestopy za szybko. Nie możesz odwiedzić kolejnego dopiero po {0} sekundach"
     },
     {
       "Key": "Only10kmEggs",
@@ -654,11 +654,11 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Value": "Proszę wprowadź szerokość i długość geo. (RPM aby wkleić) - Format: Wartość, Wartość"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Value": "Szerokość i długość przyjęta: {0}"
     },
     {
       "Key": "softBanBypassed",
@@ -670,31 +670,31 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value": "--- Pokedex catched --- \n"
+      "Value": "--- Pokedex złapany --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value": "#{0} Nazwa: {1} | Złapane: {2} | Spotkane: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value": "--- Pokedex needed --- \n"
+      "Value": "--- Potrzebny Pokedex --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value": "#{0} Name: {1} \n"
+      "Value": "#{0} Nazwa: {1} \n"
     },
     {
       "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+      "Value": "Twoje IP to: {0} | IP Proxy to: {1}"
     },
     {
       "Key": "FixProxySettings",
-      "Value": "Press any key to exit so you can fix your proxy settings..."
+      "Value": "Kliknij przycisk aby wyjść by naprawić twoje ustawienia proxy..."
     },
     {
       "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
+      "Value": " Twoje IP to: {0}"
     },
     {
       "Key": "HighestsPokemoHeader",
@@ -706,11 +706,11 @@
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+      "Value": "Prędkość ruchu: Została zmieniona z, {0:n2} Km/h na {1:n2} Km/h"
     },
     {
       "Key": "AccountBanned",
-      "Value": "Probably Permanent Ban!"
+      "Value": "Prawdopodobnie masz PERMBANA!"
     }
   ],
   "PokemonStrings": [
