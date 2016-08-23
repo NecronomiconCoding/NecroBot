@@ -403,7 +403,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-        private static async Task Snipe(ISession session, IEnumerable<PokemonId> pokemonIds, double latitude,
+        public static async Task Snipe(ISession session, IEnumerable<PokemonId> pokemonIds, double latitude,
             double longitude, CancellationToken cancellationToken)
         {
             if (LocsVisited.Contains(new PokemonLocation(latitude, longitude)))
