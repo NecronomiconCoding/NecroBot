@@ -36,6 +36,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 _resumeTrack = session.LogicSettings.ResumeTrack;
                 _resumeTrackSeg = session.LogicSettings.ResumeTrackSeg;
                 _resumeTrackPt = session.LogicSettings.ResumeTrackPt;
+
+                // initialize the variables in UseNearbyPokestopsTask here, as this is a fresh start.
+                UseNearbyPokestopsTask.Initialize();
             }
 
             for (var curTrk = _resumeTrack; curTrk < tracks.Count; curTrk++)
@@ -74,59 +77,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                                         session.Client.CurrentLongitude)
                             });
                             break;
-                        }
-
-                        if (DateTime.Now > _lastTasksCall)
-                        {
-                            _lastTasksCall =
-                                DateTime.Now.AddMilliseconds(Math.Min(session.LogicSettings.DelayBetweenPlayerActions,
-                                    3000));
-
-                            await RecycleItemsTask.Execute(session, cancellationToken);
-
-                            if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
-                                session.LogicSettings.EvolveAllPokemonAboveIv ||
-                                session.LogicSettings.UseLuckyEggsWhileEvolving ||
-                                session.LogicSettings.KeepPokemonsThatCanEvolve)
-                            {
-                                await EvolvePokemonTask.Execute(session, cancellationToken);
-                            }
-                            await GetPokeDexCount.Execute(session, cancellationToken);
-
-                            if (session.LogicSettings.AutomaticallyLevelUpPokemon)
-                            {
-                                await LevelUpPokemonTask.Execute(session, cancellationToken);
-                            }
-                            if (session.LogicSettings.UseLuckyEggConstantly)
-                            {
-                                await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
-                            }
-                            if (session.LogicSettings.UseIncenseConstantly)
-                            {
-                                await UseIncenseConstantlyTask.Execute(session, cancellationToken);
-                            }
-                            if (session.LogicSettings.TransferDuplicatePokemon)
-                            {
-                                await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
-                            }
-                            if (session.LogicSettings.TransferWeakPokemon)
-                            {
-                                await TransferWeakPokemonTask.Execute(session, cancellationToken);
-                            }
-                            if (session.LogicSettings.RenamePokemon)
-                            {
-                                await RenamePokemonTask.Execute(session, cancellationToken);
-                            }
-
-                            if (session.LogicSettings.AutoFavoritePokemon)
-                            {
-                                await FavoritePokemonTask.Execute(session, cancellationToken);
-                            }
-
-                            if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
-                            {
-                                await SnipePokemonTask.Execute(session, cancellationToken);
-                            }
                         }
 
                         var geo = new GeoCoordinate(Convert.ToDouble(trackPoints.ElementAt(curTrkPt).Lat, CultureInfo.InvariantCulture),
