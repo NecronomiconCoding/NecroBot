@@ -21,8 +21,6 @@ namespace PoGo.NecroBot.Logic.Utils
     {
         private readonly XmlDocument _gpx = new XmlDocument();
 
-        private ISession _ctx;
-
         public string Author = "";
         public GpsBoundary Bounds = new GpsBoundary();
 
@@ -36,9 +34,12 @@ namespace PoGo.NecroBot.Logic.Utils
         public string UrlName = "";
         public List<Wpt> WayPoints = new List<Wpt>();
 
-        public GpxReader(string xml, ISession session)
+        public GpxReader(string xml, ISession session) : this(xml, session?.Translation)
         {
-            _ctx = session;
+        }
+
+        public GpxReader(string xml, ITranslation translation)
+        {
             if (xml.Equals("")) return;
             _gpx.LoadXml(xml);
             if (_gpx.DocumentElement == null || !_gpx.DocumentElement.Name.Equals("gpx")) return;
@@ -109,8 +110,11 @@ namespace PoGo.NecroBot.Logic.Utils
                     case "topografix:map":
                         break;
                     default:
-                        Logger.Write(session.Translation.GetTranslation(TranslationString.UnhandledGpxData),
-                            LogLevel.Info);
+                        if (translation != null)
+                        {
+                            Logger.Write(translation.GetTranslation(TranslationString.UnhandledGpxData),
+                                LogLevel.Info);
+                        }
                         break;
                 }
             }
