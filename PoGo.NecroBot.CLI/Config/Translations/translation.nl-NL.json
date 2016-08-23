@@ -1,6 +1,22 @@
 {
   "TranslationStrings": [
     {
+      "Key": "SniperCount",
+      "Value": "Sniper count {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Sniper need to take a rest before your account is banned"
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+    },
+    {
       "Key": "Only10kmEggs",
       "Value": "Player below level 20, saving this 10 km Egg for later"
     },

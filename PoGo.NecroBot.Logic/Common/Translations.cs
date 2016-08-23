@@ -207,7 +207,11 @@ namespace PoGo.NecroBot.Logic.Common
         HumanWalkingVariant,
         AccountBanned,
         GoogleAPIWarning,
-        Only10kmEggs
+        Only10kmEggs,
+        SniperCount,
+        SnipeExceeds,
+        CatchExceeds,
+        PokeStopExceeds
     }
 
     public class Translation : ITranslation
@@ -485,7 +489,11 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkingVariant, "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"),
             new KeyValuePair<TranslationString, string>(TranslationString.AccountBanned, "Probably Permanent Ban!"),
             new KeyValuePair<TranslationString, string>(TranslationString.GoogleAPIWarning, "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"),
-            new KeyValuePair<TranslationString, string>(TranslationString.Only10kmEggs, "Player below level 20, saving this 10 km Egg for later")
+            new KeyValuePair<TranslationString, string>(TranslationString.Only10kmEggs, "Player below level 20, saving this 10 km Egg for later"),
+            new KeyValuePair<TranslationString, string>(TranslationString.SniperCount, "Sniper count {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.SnipeExceeds, "Sniper need to take a rest before your account is banned"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchExceeds, "You are catching too fast. Your cannot catch another one until {0} seconds later"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PokeStopExceeds, "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later")
         };
 
         [JsonProperty("PokemonStrings",

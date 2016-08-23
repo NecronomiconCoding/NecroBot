@@ -192,7 +192,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             if (!session.LogicSettings.UseSnipeLimit) return true;
 
-            session.EventDispatcher.Send(new SnipeEvent { Message = "Sniper count " + session.Stats.SnipeCount });
+            session.EventDispatcher.Send(new SnipeEvent { Message = session.Translation.GetTranslation(TranslationString.SniperCount, session.Stats.SnipeCount) });
             if (session.Stats.SnipeCount >= session.LogicSettings.SnipeCountLimit)
             {
                 if ((DateTime.Now - session.Stats.LastSnipeTime).TotalSeconds > session.LogicSettings.SnipeRestSeconds)
@@ -201,7 +201,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 else
                 {
-                    session.EventDispatcher.Send(new SnipeEvent { Message = "Sniper need to take a rest before your account is rekt." });
+                    session.EventDispatcher.Send(new SnipeEvent { Message = session.Translation.GetTranslation(TranslationString.SnipeExceeds) });
                     return false;
                 }
             }

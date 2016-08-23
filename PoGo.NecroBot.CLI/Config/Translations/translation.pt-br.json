@@ -1,6 +1,22 @@
 {
   "TranslationStrings": [
     {
+      "Key": "SniperCount",
+      "Value": "Contagem sniper {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Sniper precisa descansar um pouco antes de sua conta ser banida"
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "Você está capturando muito rápido. Você não pode pegar outro até {0} segundos"
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "Você está visitando pokestops muito rápido. VOcê não pode visitar outro até {0} segundos"
+    },
+    {
       "Key": "Only10kmEggs",
       "Value": "Jogador abaixo do nivel 20, guardando ovo de 10 Km para mais tarde"
     },

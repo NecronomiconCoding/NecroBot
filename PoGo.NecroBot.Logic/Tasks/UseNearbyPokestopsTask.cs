@@ -51,7 +51,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var limit = session.LogicSettings.PokeStopLimitMinutes * 60;
                 if (sec < limit)
                 {
-                    session.EventDispatcher.Send(new ErrorEvent { Message = "You are visiting pokestops too fast. Your cannot visit another one until " + (limit - sec) + " seconds later." });
+                    session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.PokeStopExceeds, (limit - sec)) });
                     return true;
                 }
             }
