@@ -129,7 +129,7 @@ namespace PoGo.NecroBot.CLI
 
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortTargeted, fortTargetEvent.Name,
-                     Math.Round(fortTargetEvent.Distance), intTimeForArrival),
+                     Math.Round(fortTargetEvent.Distance), intTimeForArrival, fortTargetEvent.Route),
                 LogLevel.Info, ConsoleColor.Gray);
         }
 

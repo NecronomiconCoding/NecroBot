@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "正在前往补给站:{0} 距离{1}米,需要{2}秒\t\t\t"
+      "Value": "正在前往补给站:{0} 距离{1}米,需要{2}秒 (route {3})\t\t\t"
     },
     {
       "Key": "eventProfileLogin",

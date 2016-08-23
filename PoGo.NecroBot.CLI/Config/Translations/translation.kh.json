@@ -56,7 +56,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "ធ្វើដំណើរទៅ PokeStop: {0} ({1}វិនារទី)"
+      "Value": "ធ្វើដំណើរទៅ PokeStop: {0} ({1}វិនារទី) ({2} seconds) (route {3})"
 
     },
     {

@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Anländer till Pokestop: {0} om ({1}m)"
+      "Value": "Anländer till Pokestop: {0} om ({1}m) ({2} seconds) (route {3})"
     },
     {
       "Key": "eventProfileLogin",

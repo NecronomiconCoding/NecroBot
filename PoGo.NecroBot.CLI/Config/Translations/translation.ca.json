@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Viatjant cap a la Pokeparada: {0} ({1}m)({2}segons)"
+      "Value": "Viatjant cap a la Pokeparada: {0} ({1}m) ({2}segons) (route {3})"
     },
     {
       "Key": "eventProfileLogin",

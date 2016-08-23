@@ -37,10 +37,13 @@ namespace PoGo.NecroBot.Logic.Model.Yours
     public class YoursWalk
     {
         public List<GeoCoordinate> Waypoints { get; set; }
+        public double Distance { get; set; }
 
         public YoursWalk(string yoursResponse)
         {
             RoutingResponse yoursResponseParsed = JsonConvert.DeserializeObject<RoutingResponse>(yoursResponse);
+
+            Distance = double.Parse(yoursResponseParsed.properties.distance) * 1000;
 
             Waypoints = new List<GeoCoordinate>();
             foreach (List<double> coordinate in yoursResponseParsed.coordinates)

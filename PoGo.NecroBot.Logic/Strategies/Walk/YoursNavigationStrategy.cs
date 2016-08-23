@@ -8,6 +8,7 @@ using PoGo.NecroBot.Logic.State;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
 using PoGo.NecroBot.Logic.Model.Yours;
+using PoGo.NecroBot.Logic.Event;
 
 namespace PoGo.NecroBot.Logic.Strategies.Walk
 {
@@ -31,7 +32,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             }
             
             var yoursWalk = YoursWalk.Get(yoursResult);
-            
+            session.EventDispatcher.Send(new FortTargetEvent { Name = FortInfo.Name, Distance = yoursWalk.Distance, Route = "YoursWalk" });
             List<GeoCoordinate> points = yoursWalk.Waypoints;
             return await DoWalk(points, session, functionExecutedWhileWalking, sourceLocation, targetLocation, cancellationToken);
         }

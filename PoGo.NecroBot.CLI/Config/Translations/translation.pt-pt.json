@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "A chegar ao Pokestop: {0} em ({1}m)"
+      "Value": "A chegar ao Pokestop: {0} em ({1}m) ({2} seconds) (route {3})"
     },
     {
       "Key": "eventProfileLogin",

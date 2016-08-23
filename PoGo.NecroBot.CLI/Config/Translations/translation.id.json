@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Jalan ke PokeStop {0}, {1} meter, {2} detik"
+      "Value": "Jalan ke PokeStop {0}, {1} meter, {2} detik (route {3})"
     },
     {
       "Key": "eventProfileLogin",

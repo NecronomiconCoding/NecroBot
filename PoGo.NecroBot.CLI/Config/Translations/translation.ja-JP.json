@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "次のポケストップへ移動中です: {0} ({1}m) ({2} 秒)"
+      "Value": "次のポケストップへ移動中です: {0} ({1}m) ({2} 秒) (route {3})"
     },
     {
       "Key": "eventProfileLogin",
