@@ -95,10 +95,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                         session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
                     cancellationToken.ThrowIfCancellationRequested();
 
-                    if (!session.LogicSettings.UseGoogleWalk)
-                        session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance });
+                    if (!session.LogicSettings.UseGoogleWalk && !session.LogicSettings.UseYoursWalk)
+                        session.EventDispatcher.Send(new FortTargetEvent { Name = fortInfo.Name, Distance = distance, Route = "NecroBot" });
                     else
-                        GoogleStrategy.FortInfo = fortInfo;
+                        BaseWalkStrategy.FortInfo = fortInfo;
 
                     await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude,
                         LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),

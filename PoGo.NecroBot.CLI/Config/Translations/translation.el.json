@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} σε απόσταση {1} μέτρων"
+      "Value": "{0} σε απόσταση {1} μέτρων ({2} seconds) (route {3})"
     },
     {
       "Key": "eventProfileLogin",

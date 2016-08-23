@@ -11,12 +11,12 @@ using PoGo.NecroBot.Logic.State;
 
 namespace PoGo.NecroBot.Logic.Service
 {
-    public class DirectionsService
+    public class GoogleDirectionsService
     {
         private readonly ISession _session;
         private readonly bool _cache;
         public List<GoogleResult> OldResults { get; set; }
-        public DirectionsService(ISession session)
+        public GoogleDirectionsService(ISession session)
         {
             _session = session;
             _cache = _session.LogicSettings.UseGoogleWalkCache;

@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} ({1} m pärast)"
+      "Value": "{0} ({1} m pärast) ({2} seconds) (route {3})"
     },
     {
       "Key": "eventProfileLogin",

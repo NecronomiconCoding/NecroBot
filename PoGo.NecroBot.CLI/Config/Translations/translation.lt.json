@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Atvykstama į Pokestotelę: {0} už ({1}m)"
+      "Value": "Atvykstama į Pokestotelę: {0} už ({1}m) ({2} seconds) (route {3})"
     },
     {
       "Key": "eventProfileLogin",

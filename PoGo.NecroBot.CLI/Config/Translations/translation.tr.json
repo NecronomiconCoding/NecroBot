@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{2} saniye sonra {1}m mesafedeki \"{0}\" adlı PokéStop'a varılacak."
+      "Value": "(route {3}) {2} saniye sonra {1}m mesafedeki \"{0}\" adlı PokéStop'a varılacak."
     },
     {
       "Key": "eventProfileLogin",

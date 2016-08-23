@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "กำลังเดินทางไปสู่ PokeStops : {0} ( {1} เมตร ) ( {2} วินาที )"
+      "Value": "กำลังเดินทางไปสู่ PokeStops : {0} ( {1} เมตร ) ( {2} วินาที ) (route {3})"
     },
     {
       "Key": "eventProfileLogin",

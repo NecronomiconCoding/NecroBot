@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Прямуємо до <{0}>, дистанція ({1} м)"
+      "Value": "Прямуємо до <{0}>, дистанція ({1} м) ({2} seconds) (route {3})"
     },
     {
       "Key": "eventProfileLogin",

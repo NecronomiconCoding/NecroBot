@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Llegando a Poképarada: {0} en ({1}m) ({2} segundos)"
+      "Value": "Llegando a Poképarada: {0} en ({1}m) ({2} segundos) (route {3})"
     },
     {
       "Key": "eventProfileLogin",

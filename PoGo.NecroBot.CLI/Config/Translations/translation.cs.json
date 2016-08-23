@@ -46,7 +46,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Chůze k Pokestopu: {0} ({1}m) ({2} sekund)"
+      "Value": "Chůze k Pokestopu: {0} ({1}m) ({2} sekund) (route {3})"
     },
     {
       "Key": "eventProfileLogin",

@@ -50,7 +50,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Călătoresc la pokestopul \"{0}\" ({1}m) ({2} secunde)"
+      "Value": "Călătoresc la pokestopul \"{0}\" ({1}m) ({2} secunde) (route {3})"
     },
     {
       "Key": "eventProfileLogin",
