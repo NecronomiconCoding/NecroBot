@@ -150,6 +150,7 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
 
         bool StartupWelcomeDelay { get; }
         bool UseGoogleWalk { get; }
+        double DefaultStepLength { get; }
         bool UseGoogleWalkCache { get; }
         string GoogleApiKey { get; }
         string GoogleHeuristic { get; }

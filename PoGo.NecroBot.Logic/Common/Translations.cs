@@ -206,7 +206,9 @@ namespace PoGo.NecroBot.Logic.Common
         HighestsPokemoCell,
         HumanWalkingVariant,
         AccountBanned,
-        GoogleAPIWarning
+        GoogleAPIWarning,
+        WalkingPathCalculated,
+        WalkingPathReal
     }
 
     public class Translation : ITranslation
@@ -483,7 +485,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.HighestsPokemoCell, "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"),
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkingVariant, "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"),
             new KeyValuePair<TranslationString, string>(TranslationString.AccountBanned, "Probably Permanent Ban!"),
-            new KeyValuePair<TranslationString, string>(TranslationString.GoogleAPIWarning, "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key")
+            new KeyValuePair<TranslationString, string>(TranslationString.GoogleAPIWarning, "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"),
+            new KeyValuePair<TranslationString, string>(TranslationString.WalkingPathCalculated, "Calculated walking path:\n{0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.WalkingPathReal, "Real walking path:\n{0}")
         };
 
         [JsonProperty("PokemonStrings",
