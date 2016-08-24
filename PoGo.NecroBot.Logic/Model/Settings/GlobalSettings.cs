@@ -34,6 +34,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public TelegramConfig TelegramConfig = new TelegramConfig();
         public GpxConfig GPXConfig = new GpxConfig();
         public SnipeConfig SnipeConfig = new SnipeConfig();
+        public HumanWalkSnipeConfig HumanWalkSnipeConfig = new HumanWalkSnipeConfig();
         public PokeStopConfig PokeStopConfig = new PokeStopConfig();
         public PokemonConfig PokemonConfig = new PokemonConfig();
         public RecycleConfig RecycleConfig = new RecycleConfig();
@@ -323,6 +324,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         }
 
         public static GlobalSettings Default => new GlobalSettings();
+
+        public Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters => HumanWalkSnipeFilter.Default();
 
         public static GlobalSettings Load(string path, bool boolSkipSave = false)
         {

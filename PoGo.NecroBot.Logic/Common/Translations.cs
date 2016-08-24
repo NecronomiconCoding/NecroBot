@@ -211,7 +211,11 @@ namespace PoGo.NecroBot.Logic.Common
         SniperCount,
         SnipeExceeds,
         CatchExceeds,
-        PokeStopExceeds
+        PokeStopExceeds,
+        HumanWalkSnipe,
+        HumanWalkSnipeUpdate,
+        HumanWalkSnipeAddedPokestop,
+        HumanWalkSnipeDestinationReached
     }
 
     public class Translation : ITranslation
@@ -493,7 +497,11 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.SniperCount, "Sniper count {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.SnipeExceeds, "Sniper need to take a rest before your account is banned"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchExceeds, "You are catching too fast. Your cannot catch another one until {0} seconds later"),
-            new KeyValuePair<TranslationString, string>(TranslationString.PokeStopExceeds, "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later")
+            new KeyValuePair<TranslationString, string>(TranslationString.PokeStopExceeds, "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"),
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipe, "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeUpdate, "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all. but try to maximun catch if possible."),
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeAddedPokestop, "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops."),
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeDestinationReached, "(HUMAN WALK) destination reached | lat: {0}, lng: {1}")
         };
 
         [JsonProperty("PokemonStrings",
