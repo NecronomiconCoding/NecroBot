@@ -102,11 +102,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Sjanse: {7}% | {8}m dist | med en {9} ({10} igjen). | {11} EXP tjent | {12} | lat: {13} long: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Sjanse: {7}% | {8}m dist | med en {9} ({10} igjen). | {11} EXP tjent | {12} | lat: {13} long: {14}\r\n \t Move1: {15}\t Move2: {16}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Sjanse: {7}% | {8}m dist | med en {9} ({10} igjen). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Sjanse: {7}% | {8}m dist | med en {9} ({10} igjen). | lat: {11} long: {12}\r\n \t Move1: {13}\t Move2: {14}"
     },
     {
       "Key": "eventNoPokeballs",

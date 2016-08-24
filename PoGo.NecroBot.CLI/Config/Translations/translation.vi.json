@@ -114,11 +114,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Cơ hội bắt được: {7}% | Cách xa {8}m | Bắt bằng {9} (Còn lại {10}) | Nhận được {11} EXP | {12} | Toạ độ: {13},{14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Cơ hội bắt được: {7}% | Cách xa {8}m | Bắt bằng {9} (Còn lại {10}) | Nhận được {11} EXP | {12} | Toạ độ: {13},{14}\r\n \t Move1: {15}\t Move2: {16}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Cơ hội bắt được: {7}% | Cách xa {8}m | Bắt bằng {9} (Còn lại {10}) | Toạ độ: {11},{12} ."
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Cơ hội bắt được: {7}% | Cách xa {8}m | Bắt bằng {9} (Còn lại {10}) | Toạ độ: {11},{12}\r\n \t Move1: {13}\t Move2: {14}"
     },
     {
       "Key": "eventNoPokeballs",

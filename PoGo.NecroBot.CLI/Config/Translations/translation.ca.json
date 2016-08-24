@@ -114,11 +114,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Nvll: {3} PC: ({4}/{5}) IV: {6}% | Probabilitat: {7}% | Dist {8}m | amb una {9} (en queden {10}). | {11} punts d'EXP obtinguts | lat: {12} long: {13}"
+      "Value": "({0}) | ({1}) {2} Nvll: {3} PC: ({4}/{5}) IV: {6}% | Probabilitat: {7}% | Dist {8}m | amb una {9} (en queden {10}). | {11} punts d'EXP obtinguts | lat: {12} long: {13}\r\n \t Move1: {14}\t Move2: {15}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Nvll: {3} PC: ({4}/{5}) IV: {6}% | Probabilitat: {7}% | Dist {8}m | amb una {9} (en queden {10}). | lat: {11} long: {12}"
+      "Value": "({0}) | ({1}) {2} Nvll: {3} PC: ({4}/{5}) IV: {6}% | Probabilitat: {7}% | Dist {8}m | amb una {9} (en queden {10}). | lat: {11} long: {12}\r\n \t Move1: {13}\t Move2: {14}"
     },
     {
       "Key": "eventNoPokeballs",

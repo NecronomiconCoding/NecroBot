@@ -114,11 +114,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Esely: {7}% | {8}m tavolsagra | hasznalva: {9} ({10} maradt). | {11} kapott EXP | {12} | szel.: {13} hossz.: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Esely: {7}% | {8}m tavolsagra | hasznalva: {9} ({10} maradt). | {11} kapott EXP | {12} | szel.: {13} hossz.: {14}\r\n \t Move1: {15}\t Move2: {16}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Esely: {7}% | {8}m tavolsagra | hasznalva: {9} ({10} maradt). | szel.: {11} hossz.: {12}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Esely: {7}% | {8}m tavolsagra | hasznalva: {9} ({10} maradt). | szel.: {11} hossz.: {12}\r\n \t Move1: {13}\t Move2: {14}"
     },
     {
       "Key": "eventNoPokeballs",
