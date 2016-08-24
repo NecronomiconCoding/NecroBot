@@ -236,6 +236,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                 FetchFromPokeradar(lat, lng),
                 FetchFromSkiplagged(lat, lng)
             };
+            if(_setting.HumanWalkingSnipeIncludeDefaultLocation &&
+                LocationUtils.CalculateDistanceInMeters(lat, lng, _session.Settings.DefaultLatitude, _session.Settings.DefaultLongitude) > 1000)
+            {
+                allTasks.Add(FetchFromPokeradar(_session.Settings.DefaultLatitude, _session.Settings.DefaultLongitude));
+                allTasks.Add(FetchFromSkiplagged(_session.Settings.DefaultLatitude, _session.Settings.DefaultLongitude));
+            }
 
             Task.WaitAll(allTasks.ToArray());
             lastUpdated = DateTime.Now;
@@ -296,7 +302,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (ordered.Count > 0)
                     {
-                        Logger.Write(string.Format("          |  Name                  |  Distance     |  Expires        |  Travel times   | Catchable"));
+                        Logger.Write(string.Format("          |  Name                    |  Distance     |  Expires        |  Travel times   | Catchable"));
                         foreach (var pokemon in ordered)
                         {
                             string name = _session.Translation.GetPokemonTranslation(pokemon.Id);

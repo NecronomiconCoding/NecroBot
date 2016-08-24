@@ -10,7 +10,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
     {
         public bool DisplayPokemonList = true;
         public double MaxDistance = 1500.0;
-        public double MaxEstimateTime = 600.0;
+        public double MaxEstimateTime = 900.0;
         public int CatchEmAllMinBalls = 50;
         public bool TryCatchEmAll = true;
         public bool CatchPokemonWhileWalking = true;
@@ -19,7 +19,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public double SnipingScanOffset = 0.025;
         public bool Enable = true;
         public double WalkbackDistanceLimit = 300.0;
-
-
+        public bool IncludeDefaultLocation = true;
     }
 }
