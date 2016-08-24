@@ -1,6 +1,22 @@
 {
   "TranslationStrings": [
     {
+      "Key": "HumanWalkSnipe",
+      "Value": "(HUMAN WALK SNIPE) Encontrou {0} desova | lat: {1}, lng: {2}, dist {3:0.00}m, expira em {05:00} min {04:00} seg | Tempo de caminhada estimado: {07:00} min {06:00} sec | Spin: {8} | Captura: {9}"
+    },
+    {
+      "Key": "HumanWalkSnipeUpdate",
+      "Value": "(HUMAN WALK SNIPE) Encontrado {0} de acordo com o filtro. Human walking sniper não vai capturar todos, mas vai tentar capturar o máximo possível"
+    },
+    {
+      "Key": "HumanWalkSnipeAddedPokestop",
+      "Value": "(HUMAN WALK SNIPE) Você {0:0.00m} do pokestop mais próximo. Reiniciar farm neste lugar com {1} pokestops"
+    },
+    {
+      "Key": "HumanWalkSnipeDestinationReached",
+      "Value": "(HUMAN WALK SNIPE) Destino alcançado | lat: {0}, lng: {1}"
+    },
+    {
       "Key": "SniperCount",
       "Value": "Contagem sniper {0}"
     },
