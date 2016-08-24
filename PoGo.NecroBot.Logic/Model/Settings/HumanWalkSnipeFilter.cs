@@ -43,7 +43,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 { PokemonId.Scyther, new HumanWalkSnipeFilter(1000, 800, 3, false, false)},
                 { PokemonId.Beedrill, new HumanWalkSnipeFilter(1000, 800, 3, false, false)},
                  { PokemonId.Chansey, new HumanWalkSnipeFilter(1000, 800, 2, false, false)}  ,
-                 { PokemonId.Clefable, new HumanWalkSnipeFilter(1000, 800, 3, false, false)}
+                 { PokemonId.Clefable, new HumanWalkSnipeFilter(1000, 800, 3, false, false)},
+                  { PokemonId.Clefable, new HumanWalkSnipeFilter(500, 800, 6, true, true)}
             };
         }
     }

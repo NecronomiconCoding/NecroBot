@@ -256,8 +256,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 //the pokemon data already in the list
                 if (rarePokemons.Any(x => x.id == item.id ||
-                (LocationUtils.CalculateDistanceInMeters(x.latitude, x.longitude, item.latitude, item.latitude) < 10 && item.pokemonId == x.pokemonId))
-                )
+                (LocationUtils.CalculateDistanceInMeters(x.latitude, x.longitude, item.latitude, item.longitude) < 10 && item.pokemonId == x.pokemonId)))
                 {
                     continue;
                 }
