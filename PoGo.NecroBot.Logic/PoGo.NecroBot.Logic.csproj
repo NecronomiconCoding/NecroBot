@@ -137,6 +137,7 @@
     <Compile Include="Event\FortFailedEvent.cs" />
     <Compile Include="Event\FortUsedEvent.cs" />
     <Compile Include="Event\HumanWalkingEvent.cs" />
+    <Compile Include="Event\HumanWalkSnipeEvent.cs" />
     <Compile Include="Event\InventoryListEvent.cs" />
     <Compile Include="Event\ItemRecycledEvent.cs" />
     <Compile Include="Event\KillSwitchEvent.cs" />
@@ -186,6 +187,8 @@
     <Compile Include="Model\Settings\GlobalSettings.cs" />
     <Compile Include="Model\Settings\GoogleWalkConfig.cs" />
     <Compile Include="Model\Settings\GpxConfig.cs" />
+    <Compile Include="Model\Settings\HumanWalkSnipeConfig.cs" />
+    <Compile Include="Model\Settings\HumanWalkSnipeFilter.cs" />
     <Compile Include="Model\Settings\Location.cs" />
     <Compile Include="Model\Settings\LocationConfig.cs" />
     <Compile Include="Model\Settings\PlayerConfig.cs" />
@@ -222,6 +225,7 @@
     <Compile Include="Tasks\EvolveSpecificPokemonTask.cs" />
     <Compile Include="Tasks\FavoritePokemonTask.cs" />
     <Compile Include="Tasks\GetPokeDexCount.cs" />
+    <Compile Include="Tasks\HumanWalkSnipeTask.cs" />
     <Compile Include="Tasks\InventoryListTask.cs" />
     <Compile Include="Tasks\LevelUpPokemonTask.cs" />
     <Compile Include="Tasks\PokemonListTask.cs" />
