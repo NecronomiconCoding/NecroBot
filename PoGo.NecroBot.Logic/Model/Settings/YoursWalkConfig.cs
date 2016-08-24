@@ -6,6 +6,5 @@
     {
         public bool UseYoursWalk = false;
         public string YoursWalkHeuristic = "bicycle";
-        public string YoursServerUrl = "http://www.yournavigation.org/api/dev/route.php";
     }
 }

@@ -41,15 +41,8 @@ namespace PoGo.NecroBot.Logic.Service
 
         private string GetUrl(GeoCoordinate sourceLocation, GeoCoordinate destLocation)
         {
-            string url;
-
-            if (!string.IsNullOrEmpty(_session.LogicSettings.YoursServerUrl))
-                url = _session.LogicSettings.YoursServerUrl;
-            else
-                url = "http://www.yournavigation.org/api/dev/route.php";
-
-            url += $"?format=geojson&flat={sourceLocation.Latitude}&flon={sourceLocation.Longitude}&tlat={destLocation.Latitude}&tlon={destLocation.Longitude}&fast=1&layer=mapnik";
-
+            string url = $"http://www.yournavigation.org/api/dev/route.php?format=geojson&flat={sourceLocation.Latitude}&flon={sourceLocation.Longitude}&tlat={destLocation.Latitude}&tlon={destLocation.Longitude}&fast=1&layer=mapnik";
+            
             if (!string.IsNullOrEmpty(_session.LogicSettings.YoursWalkHeuristic))
                 url += $"&v={_session.LogicSettings.YoursWalkHeuristic}";
             else
