@@ -302,7 +302,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (ordered.Count > 0)
                     {
-                        Logger.Write(string.Format("          |  Name                    |  Distance     |  Expires        |  Travel times   | Catchable"));
+                        Logger.Write(string.Format("          |  Name                     |  Distance     |  Expires        |  Travel times   | Catchable"));
                         foreach (var pokemon in ordered)
                         {
                             string name = _session.Translation.GetPokemonTranslation(pokemon.Id);
