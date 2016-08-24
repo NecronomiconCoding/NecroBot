@@ -8,16 +8,18 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 {
     public class HumanWalkSnipeConfig
     {
-        public bool HumanWalkingSnipeDisplayList = true;
-        public double HumanWalkingSnipeMaxDistance = 1000.0;
-        public double HumanWalkingSnipeMaxEstimateTime = 300.0;
-        public int HumanWalkingSnipeCatchEmAllMinBalls = 100;
-        public bool HumanWalkingSnipeTryCatchEmAll = true;
-        public bool HumanWalkingSnipeCatchPokemonWhileWalking = true;
-        public bool HumanWalkingSnipeSpinWhileWalking = true;
-        public bool HumanWalkingSnipeAlwaysWalkBack = false;
-        public double HumanWalkingSnipeSnipingScanOffset = 0.015;
-        public bool EnableHumanWalkingSnipe = true;
+        public bool DisplayPokemonList = true;
+        public double MaxDistance = 1500.0;
+        public double MaxEstimateTime = 600.0;
+        public int CatchEmAllMinBalls = 50;
+        public bool TryCatchEmAll = true;
+        public bool CatchPokemonWhileWalking = true;
+        public bool SpinWhileWalking = true;
+        public bool AlwaysWalkback = false;
+        public double SnipingScanOffset = 0.025;
+        public bool Enable = true;
+        public double WalkbackDistanceLimit = 300.0;
+
 
     }
 }

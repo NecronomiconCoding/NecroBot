@@ -233,7 +233,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (lastUpdated > DateTime.Now.AddSeconds(-30)) return;
             List<Task<List<RarePokemonInfo>>> allTasks = new List<Task<List<RarePokemonInfo>>>()
             {
-                FetchFromPokeradar(lat, lng)   ,
+                FetchFromPokeradar(lat, lng),
                 //FetchFromSkiplagged(lat, lng)
             };
 

@@ -129,6 +129,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (session.LogicSettings.EnableHumanWalkingSnipe)
                 {
+                    //refactore to move this code inside the task later.
                     await HumanWalkSnipeTask.Execute(session, cancellationToken,
                 async (double lat, double lng) =>
                 {
@@ -153,7 +154,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                  session.Client.CurrentLongitude, i.Latitude, i.Longitude)).FirstOrDefault();
 
                      var walkedDistance = LocationUtils.CalculateDistanceInMeters(nearestStop.Latitude, nearestStop.Longitude, session.Client.CurrentLatitude, session.Client.CurrentLongitude);
-                     if (walkedDistance > 350)
+                     if (walkedDistance > session.LogicSettings.HumanWalkingSnipeMaxDistance)
                      {
                          await Task.Delay(3000);
                          var nearbyPokeStops = await UpdateFortsData(session);
