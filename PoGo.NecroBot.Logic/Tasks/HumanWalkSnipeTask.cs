@@ -133,7 +133,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     var spinPokestopEST = (pokemon.distance / 100) * 5;
 
                     bool catchPokemon = (pokemon.estimateTime + catchPokemonTimeEST) < remainTimes && pokemon.FilterSetting.CatchPokemonWhileWalking;
-                    bool spinPokestop = pokemon.FilterSetting.SpinPokestopWhileWalking &&  (pokemon.estimateTime + catchPokemonTimeEST + spinPokestopEST) < remainTimes;
+                    bool spinPokestop = pokemon.FilterSetting.SpinPokestopWhileWalking && (pokemon.estimateTime + catchPokemonTimeEST + spinPokestopEST) < remainTimes;
 
                     session.EventDispatcher.Send(new HumanWalkSnipeEvent()
                     {
@@ -234,7 +234,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             List<Task<List<RarePokemonInfo>>> allTasks = new List<Task<List<RarePokemonInfo>>>()
             {
                 FetchFromPokeradar(lat, lng),
-                //FetchFromSkiplagged(lat, lng)
+                FetchFromSkiplagged(lat, lng)
             };
 
             Task.WaitAll(allTasks.ToArray());
@@ -255,7 +255,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                 CalculateDistanceAndEstTime(item);
 
                 //the pokemon data already in the list
-                if (rarePokemons.Any(x => x.id == item.id)) continue;
+                if (rarePokemons.Any(x => x.id == item.id ||
+                (LocationUtils.CalculateDistanceInMeters(x.latitude, x.longitude, item.latitude, item.latitude) < 10 && item.pokemonId == x.pokemonId))
+                )
+                {
+                    continue;
+                }
                 //check if pokemon in the snip list
                 if (!pokemonToBeSnipedIds.Any(x => x == item.Id)) continue;
 
@@ -296,7 +301,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         foreach (var pokemon in ordered)
                         {
                             string name = _session.Translation.GetPokemonTranslation(pokemon.Id);
-                            name += "".PadLeft(20-name.Length , ' ');
+                            name += "".PadLeft(20 - name.Length, ' ');
                             Logger.Write(string.Format("SNIPPING  |  {0}  |  {1:0.00}m  \t|  {2:mm} min {2:ss} sec  |  {3:00} min {4:00} sec  | {5}",
                                 name,
                                 pokemon.distance,
