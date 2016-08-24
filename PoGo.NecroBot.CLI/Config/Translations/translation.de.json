@@ -1,9 +1,45 @@
 ﻿{
   "TranslationStrings": [
     {
+      "Key": "HumanWalkSnipe",
+      "Value": "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9}"
+    },
+    {
+      "Key": "HumanWalkSnipeUpdate",
+      "Value": "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all. but try to maximun catch if possible."
+    },
+    {
+      "Key": "HumanWalkSnipeAddedPokestop",
+      "Value": "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops."
+    },
+    {
+      "Key": "HumanWalkSnipeDestinationReached",
+      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"
+    },
+    {
+      "Key": "SniperCount",
+      "Value": "Sniper count {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Sniper need to take a rest before your account is banned"
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+    },
+    {
+      "Key": "Only10kmEggs",
+      "Value": "Player below level 20, saving this 10 km Egg for later"
+    },
+    {
       "Key": "GoogleAPIWarning",
-     "Value": "Du benoetigst einen \"GoogleAPIKey\", falls Du noch keinen erstellt hast, tue dies hier und trage ihn danach in die Auth.json ein: https://developers.google.com/maps/documentation/directions/get-api-key"  
-    },  
+      "Value": "Du benoetigst einen \"GoogleAPIKey\", falls Du noch keinen erstellt hast, tue dies hier und trage ihn danach in die Auth.json ein: https://developers.google.com/maps/documentation/directions/get-api-key"
+    },
     {
       "Key": "pokeball",
       "Value": "Pokeball"
@@ -42,7 +78,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "{0} in ({1}m) ({2} Sekunden)"
+      "Value": "{0} in ({1}m) ({2} Sekunden) (route {3})"
     },
     {
       "Key": "eventProfileLogin",

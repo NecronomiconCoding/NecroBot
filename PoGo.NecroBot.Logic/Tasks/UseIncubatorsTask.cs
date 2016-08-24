@@ -13,6 +13,7 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
+using PoGo.NecroBot.Logic.Common;
 
 #endregion
 
@@ -91,7 +92,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     // initial CP on the high IV 10 km Pokémons (unless you ONLY have 10km-eggs)
                     if (egg.EggKmWalkedTarget == 10 && playerStats.Level < 20 && !only10kmEggs)
                     {
-                        Logger.Write("Player below level 20, saving this 10 km Egg for later.", LogLevel.Egg);
+                        Logger.Write(session.Translation.GetTranslation(TranslationString.Only10kmEggs), LogLevel.Egg);
                         continue;
                     }
 

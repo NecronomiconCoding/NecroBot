@@ -1,6 +1,42 @@
 {
   "TranslationStrings": [
     {
+      "Key": "HumanWalkSnipe",
+      "Value": "(HUMAN WALK SNIPE) Encontrou {0} desova | lat: {1}, lng: {2}, dist {3:0.00}m, expira em {05:00} min {04:00} seg | Tempo de caminhada estimado: {07:00} min {06:00} sec | Spin: {8} | Captura: {9}"
+    },
+    {
+      "Key": "HumanWalkSnipeUpdate",
+      "Value": "(HUMAN WALK SNIPE) Encontrado {0} de acordo com o filtro. Human walking sniper não vai capturar todos, mas vai tentar capturar o máximo possível"
+    },
+    {
+      "Key": "HumanWalkSnipeAddedPokestop",
+      "Value": "(HUMAN WALK SNIPE) Você {0:0.00m} do pokestop mais próximo. Reiniciar farm neste lugar com {1} pokestops"
+    },
+    {
+      "Key": "HumanWalkSnipeDestinationReached",
+      "Value": "(HUMAN WALK SNIPE) Destino alcançado | lat: {0}, lng: {1}"
+    },
+    {
+      "Key": "SniperCount",
+      "Value": "Contagem sniper {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Sniper precisa descansar um pouco antes de sua conta ser banida"
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "Você está capturando muito rápido. Você não pode pegar outro em {0} segundos"
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "Você está visitando pokestops muito rápido. VOcê não pode visitar outro em {0} segundos"
+    },
+    {
+      "Key": "Only10kmEggs",
+      "Value": "Jogador abaixo do nivel 20, guardando ovo de 10 Km para mais tarde"
+    },
+    {
       "Key": "GoogleAPIWarning",
       "Value": "Sem uma Api do Google, você terá o limite de cota livre de 2500, se atingir a cota máxima, tente mudar seu IP. Para configurar o \"GoogleAPIKey\", pegar a chave de API no link: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
@@ -46,7 +82,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Chegando ao Pokestop: {0} ({1}m) ({2} segundos)"
+      "Value": "Chegando ao Pokestop: {0} ({1}m) ({2} segundos) (rota {3})"
     },
     {
       "Key": "eventProfileLogin",

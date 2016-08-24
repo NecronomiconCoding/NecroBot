@@ -28,12 +28,16 @@ namespace PoGo.NecroBot.Logic.State
 
     public class Session : ISession
     {
-        public Session(ISettings settings, ILogicSettings logicSettings)
+        public Session(ISettings settings, ILogicSettings logicSettings) : this(settings, logicSettings, Common.Translation.Load(logicSettings))
+        {
+        }
+
+        public Session(ISettings settings, ILogicSettings logicSettings, ITranslation translation)
         {
             Settings = settings;
             LogicSettings = logicSettings;
             EventDispatcher = new EventDispatcher();
-            Translation = Common.Translation.Load(logicSettings);
+            Translation = translation;
             Reset(settings, LogicSettings);
             Stats = new SessionStats();
         }

@@ -34,6 +34,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public TelegramConfig TelegramConfig = new TelegramConfig();
         public GpxConfig GPXConfig = new GpxConfig();
         public SnipeConfig SnipeConfig = new SnipeConfig();
+        public HumanWalkSnipeConfig HumanWalkSnipeConfig = new HumanWalkSnipeConfig();
         public PokeStopConfig PokeStopConfig = new PokeStopConfig();
         public PokemonConfig PokemonConfig = new PokemonConfig();
         public RecycleConfig RecycleConfig = new RecycleConfig();
@@ -41,6 +42,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public PlayerConfig PlayerConfig = new PlayerConfig();
         public SoftBanConfig SoftBanConfig = new SoftBanConfig();
         public GoogleWalkConfig GoogleWalkConfig = new GoogleWalkConfig();
+        public YoursWalkConfig YoursWalkConfig = new YoursWalkConfig();
 
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
@@ -258,7 +260,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 PokemonId.Golem,
                 PokemonId.Rapidash,
                 PokemonId.Slowbro,
-                PokemonId.Farfetchd,
+                //PokemonId.Farfetchd,
                 PokemonId.Muk,
                 PokemonId.Cloyster,
                 PokemonId.Gengar,
@@ -268,9 +270,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 PokemonId.Lickitung,
                 PokemonId.Rhydon,
                 PokemonId.Chansey,
-                PokemonId.Kangaskhan,
+                //PokemonId.Kangaskhan,
                 PokemonId.Starmie,
-                PokemonId.MrMime,
+                //PokemonId.MrMime,
                 PokemonId.Scyther,
                 PokemonId.Magmar,
                 PokemonId.Electabuzz,
@@ -322,6 +324,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         }
 
         public static GlobalSettings Default => new GlobalSettings();
+
+        public Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters => HumanWalkSnipeFilter.Default();
 
         public static GlobalSettings Load(string path, bool boolSkipSave = false)
         {

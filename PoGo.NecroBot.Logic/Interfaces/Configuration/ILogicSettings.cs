@@ -154,8 +154,26 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         bool UseGoogleWalkCache { get; }
         string GoogleApiKey { get; }
         string GoogleHeuristic { get; }
+
+        bool UseYoursWalk { get; }
+        string YoursWalkHeuristic { get; }
+
         int ResumeTrack { get; }
         int ResumeTrackSeg { get; }
         int ResumeTrackPt { get; }
+
+        bool EnableHumanWalkingSnipe { get; }
+        bool HumanWalkingSnipeDisplayList { get; }
+        bool HumanWalkingSnipeSpinWhileWalking { get; }
+        double HumanWalkingSnipeMaxDistance { get; }
+        bool HumanWalkingSnipeAlwaysWalkBack { get; }
+        double HumanWalkingSnipeMaxEstimateTime { get; }
+        bool HumanWalkingSnipeTryCatchEmAll { get; }
+        int HumanWalkingSnipeCatchEmAllMinBalls { get; }
+        bool HumanWalkingSnipeCatchPokemonWhileWalking { get; }
+        double HumanWalkingSnipeSnipingScanOffset { get; }
+        double HumanWalkingSnipeWalkbackDistanceLimit { get; }
+        bool HumanWalkingSnipeIncludeDefaultLocation { get; }
+        Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters { get; }
     }
 }

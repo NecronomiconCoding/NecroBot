@@ -40,7 +40,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var limit = session.LogicSettings.CatchPokemonLimitMinutes * 60;
                 if (sec < limit)
                 {
-                    session.EventDispatcher.Send(new ErrorEvent { Message = "You are catching too fast. Your cannot catch another one until " + (limit - sec) + " seconds later."});
+                    session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.CatchExceeds, Math.Round(limit - sec))});
                     return true;
                 }
             }

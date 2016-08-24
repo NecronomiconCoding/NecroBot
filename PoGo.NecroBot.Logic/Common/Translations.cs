@@ -207,8 +207,15 @@ namespace PoGo.NecroBot.Logic.Common
         HumanWalkingVariant,
         AccountBanned,
         GoogleAPIWarning,
-        WalkingPathCalculated,
-        WalkingPathReal
+        Only10kmEggs,
+        SniperCount,
+        SnipeExceeds,
+        CatchExceeds,
+        PokeStopExceeds,
+        HumanWalkSnipe,
+        HumanWalkSnipeUpdate,
+        HumanWalkSnipeAddedPokestop,
+        HumanWalkSnipeDestinationReached
     }
 
     public class Translation : ITranslation
@@ -238,7 +245,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortFailed,
                 "Name: {0} INFO: Looting failed, possible softban. Unban in: {1}/{2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortTargeted,
-                "Traveling to Pokestop: {0} ({1}m) ({2} seconds)"),
+                "Traveling to Pokestop: {0} ({1}m) ({2} seconds) (route {3})"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventProfileLogin, "Playing as {0}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventUsedIncense,
                 "Used Incense, remaining: {0}"),
@@ -486,8 +493,15 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkingVariant, "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"),
             new KeyValuePair<TranslationString, string>(TranslationString.AccountBanned, "Probably Permanent Ban!"),
             new KeyValuePair<TranslationString, string>(TranslationString.GoogleAPIWarning, "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"),
-            new KeyValuePair<TranslationString, string>(TranslationString.WalkingPathCalculated, "Calculated walking path:\n{0}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.WalkingPathReal, "Real walking path:\n{0}")
+            new KeyValuePair<TranslationString, string>(TranslationString.Only10kmEggs, "Player below level 20, saving this 10 km Egg for later"),
+            new KeyValuePair<TranslationString, string>(TranslationString.SniperCount, "Sniper count {0}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.SnipeExceeds, "Sniper need to take a rest before your account is banned"),
+            new KeyValuePair<TranslationString, string>(TranslationString.CatchExceeds, "You are catching too fast. Your cannot catch another one until {0} seconds later"),
+            new KeyValuePair<TranslationString, string>(TranslationString.PokeStopExceeds, "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"),
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipe, "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeUpdate, "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all. but try to maximun catch if possible."),
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeAddedPokestop, "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops."),
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeDestinationReached, "(HUMAN WALK) destination reached | lat: {0}, lng: {1}")
         };
 
         [JsonProperty("PokemonStrings",

@@ -1,6 +1,42 @@
 {
   "TranslationStrings": [
     {
+      "Key": "HumanWalkSnipe",
+      "Value": "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9}"
+    },
+    {
+      "Key": "HumanWalkSnipeUpdate",
+      "Value": "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all. but try to maximun catch if possible."
+    },
+    {
+      "Key": "HumanWalkSnipeAddedPokestop",
+      "Value": "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops."
+    },
+    {
+      "Key": "HumanWalkSnipeDestinationReached",
+      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"
+    },
+    {
+      "Key": "SniperCount",
+      "Value": "Numero di snipes: {0}"
+    },
+    {
+      "Key": "SnipeExceeds",
+      "Value": "Lo sniper è stato disattivato in quanto potrebbe far bannare l'account."
+    },
+    {
+      "Key": "CatchExceeds",
+      "Value": "Stai catturando pokemon troppo velocemente. Aspettando altri {0} secondi prima di catturarne altri."
+    },
+    {
+      "Key": "PokeStopExceeds",
+      "Value": "Stai visitando Pokestop troppo velocemente. Aspettando altri {0} secondi prima di visitarne altri."
+    },
+    {
+      "Key": "Only10kmEggs",
+      "Value": "Player sotto il livello 20, mettendo da parte questo uovo da 10 km per dopo"
+    },
+    {
       "Key": "GoogleAPIWarning",
       "Value": "Senza una Google Api, avrai un limite pari a 2500 richieste, se raggiungi il limite delle richieste, prova a cambiare il tuo IP. Configura la \"GoogleAPIKey\", ottieni una API Key seguendo il link: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
@@ -46,7 +82,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Camminando verso il Pokestop: {0} ({1}m) ({2} secondi)"
+      "Value": "Camminando verso il Pokestop: {0} ({1}m) ({2} secondi) (route {3})"
     },
     {
       "Key": "eventProfileLogin",
@@ -104,7 +140,6 @@
       "Key": "eventUseBerry",
       "Value": "Usata {0} | {1} rimanenti"
     },
-
     {
       "Key": "itemRazzBerry",
       "Value": "Baccalampon"
@@ -563,7 +598,7 @@
     },
     {
       "Key": "HighestsPokemoCell",
-      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+      "Value": "# PL {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
     },
     {
       "Key": "HumanWalkingVariant",

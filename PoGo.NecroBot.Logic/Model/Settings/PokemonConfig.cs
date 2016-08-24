@@ -22,14 +22,14 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public float UseBerriesMinIv = 90;
         public double UseBerriesBelowCatchProbability = 0.20;
         public string UseBerriesOperator = "or";
-        public int MaxBerriesToUsePerPokemon = 3;
+        public int MaxBerriesToUsePerPokemon = 1;
         /*Transfer*/
         public bool TransferWeakPokemon;
         public bool TransferDuplicatePokemon = true;
         public bool TransferDuplicatePokemonOnCapture = true;
         /*Rename*/
-        public bool RenamePokemon;
-        public bool RenameOnlyAboveIv = true;
+        public bool RenamePokemon = false;
+        public bool RenameOnlyAboveIv = false;
         public string RenameTemplate = "{1}_{0}";
         /*Favorite*/
         public float FavoriteMinIvPercentage = 95;
