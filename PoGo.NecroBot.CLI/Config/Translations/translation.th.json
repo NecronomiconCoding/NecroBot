@@ -654,11 +654,19 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "โปรดป้อน ละติจูดและลองติจูด (คลิกขวาเพื่อวาง) - รูปแบบ: ละติจูด, ลองติจูด"
+      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "ละติจูด และ ลองติจูด ยอมรับ: {0}"
+      "Value": "Lattitude and Longitude accepted: {0}"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongPrompt",
+      "Value": "โปรดป้อนลองติจูด (คลิกขวาเพื่อวาง)"
+    },
+    {
+      "Key": "firstStartSetupDefaultLongConfirm",
+      "Value": "ลองติจูดคือ : {0}"
     },
     {
       "Key": "softBanBypassed",
