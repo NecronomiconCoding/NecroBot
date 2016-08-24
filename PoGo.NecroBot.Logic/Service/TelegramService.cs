@@ -16,6 +16,7 @@ using Telegram.Bot;
 using Telegram.Bot.Args;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -40,11 +41,11 @@ namespace PoGo.NecroBot.Logic.Service
                 _bot.OnMessage += OnTelegramMessageReceived;
                 _bot.StartReceiving();
 
-                _session.EventDispatcher.Send(new NoticeEvent {Message = "Using TelegramAPI with " + me.Username});
+                _session.EventDispatcher.Send(new NoticeEvent { Message = "Using TelegramAPI with " + me.Username });
             }
             catch (Exception)
             {
-                _session.EventDispatcher.Send(new ErrorEvent { Message = "Unkown Telegram Error occured. "});
+                _session.EventDispatcher.Send(new ErrorEvent { Message = "Unkown Telegram Error occured. " });
             }
         }
 
@@ -72,15 +73,15 @@ namespace PoGo.NecroBot.Logic.Service
                         _loggedIn = true;
                         _lastLoginTime = DateTime.Now;
                         answerTextmessage += _session.Translation.GetTranslation(TranslationString.LoggedInTelegram);
-                        SendMessage(message.Chat.Id, answerTextmessage);
+                        await SendMessage(message.Chat.Id, answerTextmessage);
                         return;
                     }
                     answerTextmessage += _session.Translation.GetTranslation(TranslationString.LoginFailedTelegram);
-                    SendMessage(message.Chat.Id, answerTextmessage);
+                    await SendMessage(message.Chat.Id, answerTextmessage);
                     return;
                 }
                 answerTextmessage += _session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
-                SendMessage(message.Chat.Id, answerTextmessage);
+                await SendMessage(message.Chat.Id, answerTextmessage);
                 return;
             }
             if (_loggedIn)
@@ -89,14 +90,14 @@ namespace PoGo.NecroBot.Logic.Service
                 {
                     _loggedIn = false;
                     answerTextmessage += _session.Translation.GetTranslation(TranslationString.NotLoggedInTelegram);
-                    SendMessage(message.Chat.Id, answerTextmessage);
+                    await SendMessage(message.Chat.Id, answerTextmessage);
                     return;
                 }
                 var remainingMins = _lastLoginTime.AddMinutes(5).Subtract(DateTime.Now).Minutes;
                 var remainingSecs = _lastLoginTime.AddMinutes(5).Subtract(DateTime.Now).Seconds;
                 answerTextmessage += _session.Translation.GetTranslation(TranslationString.LoginRemainingTime,
                     remainingMins, remainingSecs);
-                SendMessage(message.Chat.Id, answerTextmessage);
+                await SendMessage(message.Chat.Id, answerTextmessage);
                 return;
             }
 
@@ -118,14 +119,14 @@ namespace PoGo.NecroBot.Logic.Service
                         }
                         catch (FormatException)
                         {
-                            SendMessage(message.Chat.Id,
+                            await SendMessage(message.Chat.Id,
                                 _session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
                             break;
                         }
                     }
                     else if (messagetext.Length > 3)
                     {
-                        SendMessage(message.Chat.Id,
+                        await SendMessage(message.Chat.Id,
                             _session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
                         break;
                     }
@@ -141,7 +142,7 @@ namespace PoGo.NecroBot.Logic.Service
                     }
                     else
                     {
-                        SendMessage(message.Chat.Id,
+                        await SendMessage(message.Chat.Id,
                             _session.Translation.GetTranslation(TranslationString.UsageHelp, "/top [cp/iv] [amount]"));
                         break;
                     }
@@ -154,11 +155,11 @@ namespace PoGo.NecroBot.Logic.Service
 
                         if (answerTextmessage.Length > 3800)
                         {
-                            SendMessage(message.Chat.Id, answerTextmessage);
+                            await SendMessage(message.Chat.Id, answerTextmessage);
                             answerTextmessage = "";
                         }
                     }
-                    SendMessage(message.Chat.Id, answerTextmessage);
+                    await SendMessage(message.Chat.Id, answerTextmessage);
                     break;
 
                 case "/all":
@@ -178,14 +179,14 @@ namespace PoGo.NecroBot.Logic.Service
                         }
                         else if (messagetext[1] != "cp")
                         {
-                            SendMessage(message.Chat.Id,
+                            await SendMessage(message.Chat.Id,
                                 _session.Translation.GetTranslation(TranslationString.UsageHelp, "/all [cp/iv]"));
                             break;
                         }
                     }
                     else
                     {
-                        SendMessage(message.Chat.Id,
+                        await SendMessage(message.Chat.Id,
                             _session.Translation.GetTranslation(TranslationString.UsageHelp, "/all [cp/iv]"));
                         break;
                     }
@@ -198,11 +199,11 @@ namespace PoGo.NecroBot.Logic.Service
 
                         if (answerTextmessage.Length > 3800)
                         {
-                            SendMessage(message.Chat.Id, answerTextmessage);
+                            await SendMessage(message.Chat.Id, answerTextmessage);
                             answerTextmessage = "";
                         }
                     }
-                    SendMessage(message.Chat.Id, answerTextmessage);
+                    await SendMessage(message.Chat.Id, answerTextmessage);
                     break;
 
                 case "/profile":
@@ -216,7 +217,7 @@ namespace PoGo.NecroBot.Logic.Service
                             stat.Experience, stat.NextLevelXp, stat.PokemonsCaptured, stat.PokemonDeployed,
                             stat.PokeStopVisits, stat.EggsHatched, stat.Evolutions, stat.UniquePokedexEntries, stat.KmWalked,
                             myPokemons2.ToList().Count, _session.Profile.PlayerData.MaxPokemonStorage);
-                    SendMessage(message.Chat.Id, answerTextmessage);
+                    await SendMessage(message.Chat.Id, answerTextmessage);
                     break;
 
                 case "/pokedex":
@@ -236,7 +237,7 @@ namespace PoGo.NecroBot.Logic.Service
 
                         if (answerTextmessage.Length > 3800)
                         {
-                            SendMessage(message.Chat.Id, answerTextmessage);
+                            await SendMessage(message.Chat.Id, answerTextmessage);
                             answerTextmessage = "";
                         }
                     }
@@ -246,7 +247,7 @@ namespace PoGo.NecroBot.Logic.Service
                             .Cast<PokemonId>()
                             .Except(pokedex.Select(x => x.InventoryItemData.PokedexEntry.PokemonId));
 
-                    SendMessage(message.Chat.Id, answerTextmessage);
+                    await SendMessage(message.Chat.Id, answerTextmessage);
                     answerTextmessage = "";
 
                     answerTextmessage += _session.Translation.GetTranslation(TranslationString.PokedexNeededTelegram);
@@ -261,12 +262,12 @@ namespace PoGo.NecroBot.Logic.Service
 
                             if (answerTextmessage.Length > 3800)
                             {
-                                SendMessage(message.Chat.Id, answerTextmessage);
+                                await SendMessage(message.Chat.Id, answerTextmessage);
                                 answerTextmessage = "";
                             }
                         }
                     }
-                    SendMessage(message.Chat.Id, answerTextmessage);
+                    await SendMessage(message.Chat.Id, answerTextmessage);
 
                     break;
 
@@ -304,32 +305,38 @@ namespace PoGo.NecroBot.Logic.Service
                         await _session.Inventory.GetItemAmountByType(ItemId.ItemIncenseFloral),
                         await _session.Inventory.GetItemAmountByType(ItemId.ItemLuckyEgg),
                         await _session.Inventory.GetItemAmountByType(ItemId.ItemTroyDisk));
-                    SendMessage(message.Chat.Id, answerTextmessage);
+                    await SendMessage(message.Chat.Id, answerTextmessage);
                     break;
 
                 case "/status":
-                    SendMessage(message.Chat.Id, Console.Title);
+                    await SendMessage(message.Chat.Id, Console.Title);
                     break;
 
                 case "/restart":
                     Process.Start(Assembly.GetEntryAssembly().Location);
-                    SendMessage(message.Chat.Id, "Restarted Bot. Closing old Instance... BYE!");
+                    await SendMessage(message.Chat.Id, "Restarted Bot. Closing old Instance... BYE!");
                     Environment.Exit(-1);
                     break;
 
+                case "/exit":
+                    await SendMessage(message.Chat.Id, "Closing Bot... BYE!");
+                    Environment.Exit(0);
+                    break;
+
+                case "/help":
                 default:
                     answerTextmessage += _session.Translation.GetTranslation(TranslationString.HelpTemplate);
-                    SendMessage(message.Chat.Id, answerTextmessage);
+                    await SendMessage(message.Chat.Id, answerTextmessage);
                     break;
             }
         }
 
         private async void SendLocation(long chatId, double currentLatitude, double currentLongitude)
         {
-            await _bot.SendLocationAsync(chatId, (float) currentLatitude, (float) currentLongitude);
+            await _bot.SendLocationAsync(chatId, (float)currentLatitude, (float)currentLongitude);
         }
 
-        private async void SendMessage(long chatId, string message)
+        private async Task SendMessage(long chatId, string message)
         {
             await _bot.SendTextMessageAsync(chatId, message, replyMarkup: new ReplyKeyboardHide());
         }
