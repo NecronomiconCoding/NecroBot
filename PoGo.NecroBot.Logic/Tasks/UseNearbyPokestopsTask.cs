@@ -283,6 +283,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded),
                         Latitude = pokeStop.Latitude,
                         Longitude = pokeStop.Longitude,
+                        Altitude = session.Client.CurrentAltitude,
                         InventoryFull = fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull
                     });
 

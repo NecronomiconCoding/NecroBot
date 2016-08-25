@@ -9,6 +9,7 @@
         public string Items;
         public double Latitude;
         public double Longitude;
+        public double Altitude;
         public string Name;
     }
 }
