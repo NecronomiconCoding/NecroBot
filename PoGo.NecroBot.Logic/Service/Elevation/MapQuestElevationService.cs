@@ -26,11 +26,15 @@ namespace PoGo.NecroBot.Logic.Service.Elevation
 
         public MapQuestElevationService(ISession session, LRUCache<string, double> cache) : base(session, cache)
         {
-            _apiKey = mapQuestDemoApiKey;
+            if (!string.IsNullOrEmpty(mapQuestDemoApiKey))
+                _apiKey = mapQuestDemoApiKey;
         }
 
         public override double GetElevationFromWebService(double lat, double lng)
         {
+            if (string.IsNullOrEmpty(_apiKey))
+                return 0;
+
             try
             {
                 string url = $"https://open.mapquestapi.com/elevation/v1/profile?key={_apiKey}&callback=handleHelloWorldResponse&shapeFormat=raw&latLngCollection={lat},{lng}";

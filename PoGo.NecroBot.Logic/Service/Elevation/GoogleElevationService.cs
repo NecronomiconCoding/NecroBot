@@ -31,11 +31,15 @@ namespace PoGo.NecroBot.Logic.Service.Elevation
     {
         public GoogleElevationService(ISession session, LRUCache<string, double> cache) : base(session, cache)
         {
-            _apiKey = session.LogicSettings.GoogleApiKey;
+            if (!string.IsNullOrEmpty(session.LogicSettings.GoogleApiKey))
+                _apiKey = session.LogicSettings.GoogleApiKey;
         }
                         
         public override double GetElevationFromWebService(double lat, double lng)
         {
+            if (string.IsNullOrEmpty(_apiKey))
+                return 0;
+
             try
             {
                 string url = $"https://maps.googleapis.com/maps/api/elevation/json?key={_apiKey}&locations={lat},{lng}";
