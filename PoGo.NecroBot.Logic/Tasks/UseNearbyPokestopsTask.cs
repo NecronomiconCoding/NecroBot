@@ -155,7 +155,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                  session.Client.CurrentLongitude, i.Latitude, i.Longitude)).FirstOrDefault();
 
                      var walkedDistance = LocationUtils.CalculateDistanceInMeters(nearestStop.Latitude, nearestStop.Longitude, session.Client.CurrentLatitude, session.Client.CurrentLongitude);
-                     if (walkedDistance > session.LogicSettings.HumanWalkingSnipeMaxDistance)
+                     if (walkedDistance > session.LogicSettings.HumanWalkingSnipeWalkbackDistanceLimit)
                      {
                          await Task.Delay(3000);
                          var nearbyPokeStops = await UpdateFortsData(session);
