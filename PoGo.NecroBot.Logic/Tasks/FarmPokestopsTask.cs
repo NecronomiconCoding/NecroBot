@@ -42,7 +42,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 await session.Navigation.Move(new GeoCoordinate(
                     session.Settings.DefaultLatitude,
                     session.Settings.DefaultLongitude,
-                    LocationUtils.getElevation(session.Settings.DefaultLatitude,
+                    LocationUtils.getElevation(session, session.Settings.DefaultLatitude,
                     session.Settings.DefaultLongitude)),
                     null,
                     session,

@@ -16,7 +16,7 @@ namespace PoGo.NecroBot.Logic.Utils
     {
         public static async Task<PlayerUpdateResponse> UpdatePlayerLocationWithAltitude(ISession session, GeoCoordinate position)
         {
-            double altitude = session.ElevationService.GetAltitude(position.Latitude, position.Longitude);
+            double altitude = session.ElevationService.GetElevation(position.Latitude, position.Longitude);
             return await session.Client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, altitude);
         }
 
@@ -36,8 +36,11 @@ namespace PoGo.NecroBot.Logic.Utils
                 destinationLocation.Latitude, destinationLocation.Longitude);
         }
 
-        public static double getElevation(double lat, double lon)
+        public static double getElevation(ISession session, double lat, double lon)
         {
+            if (session != null)
+                return session.ElevationService.GetElevation(lat, lon);
+
             Random random = new Random();
             double maximum = 11.0f;
             double minimum = 8.6f;
@@ -70,7 +73,7 @@ namespace PoGo.NecroBot.Logic.Utils
             // adjust toLonRadians to be in the range -180 to +180...
             targetLongitudeRadians = (targetLongitudeRadians + 3*Math.PI)%(2*Math.PI) - Math.PI;
 
-            return new GeoCoordinate(ToDegrees(targetLatitudeRadians), ToDegrees(targetLongitudeRadians), getElevation(sourceLocation.Latitude, sourceLocation.Longitude));
+            return new GeoCoordinate(ToDegrees(targetLatitudeRadians), ToDegrees(targetLongitudeRadians), getElevation(null, sourceLocation.Latitude, sourceLocation.Longitude));
         }
 
         public static GeoCoordinate CreateWaypoint(GeoCoordinate sourceLocation, double distanceInMeters, double bearingDegrees, double altitude)
