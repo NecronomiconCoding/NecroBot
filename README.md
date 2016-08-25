@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="http://necrobot.io">
-    <img alt="Logo" src="http://necrobot.io/img/typotype-transparent.png" width="600">
-  </a>
-</p>
-
 [![Discord](https://discordapp.com/api/guilds/209253611031625728/widget.png)](https://discord.gg/VXKxNFr)
 [![Stories in Ready](https://badge.waffle.io/NoxxDev/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NoxxDev/NecroBot)
 [![Github All Releases](https://img.shields.io/github/downloads/NoxxDev/NecroBot/total.svg)](https://github.com/NoxxDev/NecroBot/releases)
