@@ -130,7 +130,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         public bool UseYoursWalk => _settings.YoursWalkConfig.UseYoursWalk;
         public string YoursWalkHeuristic => _settings.YoursWalkConfig.YoursWalkHeuristic;
-        public string YoursServerUrl => _settings.YoursWalkConfig.YoursServerUrl;
 
         public bool SnipeAtPokestops => _settings.SnipeConfig.SnipeAtPokestops;
 

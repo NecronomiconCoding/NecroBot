@@ -1,6 +1,22 @@
 {
   "TranslationStrings": [
     {
+      "Key": "HumanWalkSnipe",
+      "Value": "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9}"
+    },
+    {
+      "Key": "HumanWalkSnipeUpdate",
+      "Value": "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all, but try to catch as many as possible"
+    },
+    {
+      "Key": "HumanWalkSnipeAddedPokestop",
+      "Value": "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops"
+    },
+    {
+      "Key": "HumanWalkSnipeDestinationReached",
+      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"
+    },
+    {
       "Key": "SniperCount",
       "Value": "Sniper count {0}"
     },
@@ -10,11 +26,11 @@
     },
     {
       "Key": "CatchExceeds",
-      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+      "Value": "Łapiesz pokemony za szybko. Nie możesz złapac kolejnego dopiero po {0} sekundach"
     },
     {
       "Key": "PokeStopExceeds",
-      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+      "Value": "Odwiedzasz pokestopy za szybko. Nie możesz odwiedzić kolejnego dopiero po {0} sekundach"
     },
     {
       "Key": "Only10kmEggs",
@@ -98,11 +114,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2}  [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | EXP: {11} | {12} | Szerokość: {13} Długość: {14}"
+      "Value": "({0}) | ({1}) {2}  [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | EXP: {11} | {12} | Szerokość: {13} Długość: {14}\r\n \t Move1: {15}\t Move2: {16}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2}  [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | Szerokość: {11} Długość: {12}"
+      "Value": "({0}) | ({1}) {2}  [Lvl: {3} | CP: ({4}/{5}) | IV: {6}%] Szansa: {7}% | Odległy o: {8}m | Użyto: {9} (Pozostało {10}) | Szerokość: {11} Długość: {12}\r\n \t Move1: {13}\t Move2: {14}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -654,11 +670,11 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Value": "Proszę wprowadź szerokość i długość geo. (RPM aby wkleić) - Format: Wartość, Wartość"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Value": "Szerokość i długość przyjęta: {0}"
     },
     {
       "Key": "softBanBypassed",
@@ -670,31 +686,31 @@
     },
     {
       "Key": "PokedexCatchedTelegram",
-      "Value": "--- Pokedex catched --- \n"
+      "Value": "--- Pokedex złapany --- \n"
     },
     {
       "Key": "PokedexPokemonCatchedTelegram",
-      "Value": "#{0} Name: {1} | Catched: {2} | Encountered: {3} \n"
+      "Value": "#{0} Nazwa: {1} | Złapane: {2} | Spotkane: {3} \n"
     },
     {
       "Key": "PokedexNeededTelegram",
-      "Value": "--- Pokedex needed --- \n"
+      "Value": "--- Potrzebny Pokedex --- \n"
     },
     {
       "Key": "PokedexPokemonNeededTelegram",
-      "Value": "#{0} Name: {1} \n"
+      "Value": "#{0} Nazwa: {1} \n"
     },
     {
       "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+      "Value": "Twoje IP to: {0} | IP Proxy to: {1}"
     },
     {
       "Key": "FixProxySettings",
-      "Value": "Press any key to exit so you can fix your proxy settings..."
+      "Value": "Kliknij przycisk aby wyjść by naprawić twoje ustawienia proxy..."
     },
     {
       "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
+      "Value": " Twoje IP to: {0}"
     },
     {
       "Key": "HighestsPokemoHeader",
@@ -706,11 +722,11 @@
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+      "Value": "Prędkość ruchu: Została zmieniona z, {0:n2} Km/h na {1:n2} Km/h"
     },
     {
       "Key": "AccountBanned",
-      "Value": "Probably Permanent Ban!"
+      "Value": "Prawdopodobnie masz PERMBANA!"
     }
   ],
   "PokemonStrings": [

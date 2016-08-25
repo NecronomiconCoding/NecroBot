@@ -51,7 +51,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var limit = session.LogicSettings.PokeStopLimitMinutes * 60;
                 if (sec < limit)
                 {
-                    session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.PokeStopExceeds, (limit - sec)) });
+                    session.EventDispatcher.Send(new ErrorEvent { Message = session.Translation.GetTranslation(TranslationString.PokeStopExceeds, Math.Round(limit - sec)) });
                     return true;
                 }
             }

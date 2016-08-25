@@ -157,7 +157,6 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
 
         bool UseYoursWalk { get; }
         string YoursWalkHeuristic { get; }
-        string YoursServerUrl { get; }
 
         int ResumeTrack { get; }
         int ResumeTrackSeg { get; }

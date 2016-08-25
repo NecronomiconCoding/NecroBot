@@ -1,28 +1,44 @@
 {
   "TranslationStrings": [
     {
+      "Key": "HumanWalkSnipe",
+      "Value": "(SNIPER HUMANIZADO) Encontrados {0} spawns | lat: {1}, lng: {2}, dist {3:0.00}m, expira en {4:00} min {5:00} sec | Tiempo estimado de caminata : {6:00} min {7:00} sec | Giros: {8} | Capturas : {9}"
+    },
+    {
+      "Key": "HumanWalkSnipeUpdate",
+      "Value": "(SNIPER HUMANIZADO) Encontrados {0} pokemon de acuerdo a tus filtros. Sniper humanizado no capturara todo, pero intentara capturar todo lo posible."
+    },
+    {
+      "Key": "HumanWalkSnipeAddedPokestop",
+      "Value": "(SNIPER HUMANIZADO) Tu estas a {0:0.00m} de la PokeParada mas cercana. Farming restante en esta ubicacion {1} PokeParada."
+    },
+    {
+      "Key": "HumanWalkSnipeDestinationReached",
+      "Value": "(SNIPER HUMANIZADO) Destino alcanzado | lat: {0}, lng: {1}"
+    },
+    {
       "Key": "SniperCount",
-      "Value": "Sniper count {0}"
+      "Value": "Contador de Sniper {0}"
     },
     {
       "Key": "SnipeExceeds",
-      "Value": "Sniper need to take a rest before your account is banned"
+      "Value": "Sniper necesita tomar un descanso antes de continuar, para evitar baneos"
     },
     {
       "Key": "CatchExceeds",
-      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+      "Value": "Estas capturando demasiado rapido. No podras capturar de nuevo en {0} segundos"
     },
     {
       "Key": "PokeStopExceeds",
-      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+      "Value": "Has visitado demasiadas paradas. No podras farmear mas paradas en {0} segundos"
     },
     {
       "Key": "Only10kmEggs",
-      "Value": "Player below level 20, saving this 10 km Egg for later"
+      "Value": "Jugador por debajo de Nivel 20, guardando este PokeHuevo de 10km para luego"
     },
     {
       "Key": "GoogleAPIWarning",
-      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Value": "Sin la API de Google, usted tendra un limite de 2500, si lo supera, cambie su IP. Para configurar su \"GoogleAPIKey\", consiga una en este enlace: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {
       "Key": "pokeball",
@@ -66,7 +82,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Llegando a Poképarada: {0} en ({1}m) ({2} segundos) (route {3})"
+      "Value": "Llegando a Poképarada: {0} en ({1}m) ({2} segundos) (Ruta {3})"
     },
     {
       "Key": "eventProfileLogin",
@@ -150,11 +166,11 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "perfecto"
+      "Value": "Perfecto"
     },
     {
       "Key": "commonWordName",
-      "Value": "nombre"
+      "Value": "Nombre"
     },
     {
       "Key": "commonWordUnknown",
@@ -638,11 +654,11 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongPrompt",
-      "Value": "Please enter a Latitude and Longitude (Right click to paste) - Format: Value, Value"
+      "Value": "Por favor ingrese su Latitud y Longitud deseada (Click Derecho para Pegar) - Formato: Lat, Long"
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "Lattitude and Longitude accepted: {0}"
+      "Value": "Latitud y Longitud aceptada: {0}"
     },
     {
       "Key": "firstStartSetupCompleted",
@@ -666,15 +682,15 @@
     },
     {
       "Key": "Proxied",
-      "Value": "Your IP is: {0} | Proxy IP is: {1}"
+      "Value": "Su IP es: {0} | Proxy IP es: {1}"
     },
     {
       "Key": "FixProxySettings",
-      "Value": "Press any key to exit so you can fix your proxy settings..."
+      "Value": "Presione una tecla para salir, y configurar correctamente su IP..."
     },
     {
       "Key": "Unproxied",
-      "Value": " Your IP is: {0}"
+      "Value": "Su IP es: {0}"
     },
     {
       "Key": "HighestsPokemoHeader",
@@ -686,11 +702,11 @@
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Walking Speed: Has been changed, {0:n2} Km/h to {1:n2} Km/h"
+      "Value": "Su Velocidad a sido cambiada, de {0:n2} Km/h a {1:n2} Km/h"
     },
     {
       "Key": "AccountBanned",
-      "Value": "Probably Permanent Ban!"
+      "Value": "Posible Ban de IP en su cuenta. Intente cambiarlo, de seguir recibiendo este mensaje posiblemente a sido baneado"
     }
   ],
   "PokemonStrings": [

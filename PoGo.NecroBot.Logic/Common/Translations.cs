@@ -262,9 +262,9 @@ namespace PoGo.NecroBot.Logic.Common
 
             //Logging Cleanup (mostly uneccessary information, may want a verbose pokemon capture logger setting)
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureSuccess,
-                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}"),
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}\r\n \t Move1: {15}\t Move2: {16}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureFailed,
-                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}"),
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}\r\n \t Move1: {13}\t Move2: {14}"),
 
 
             new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
@@ -408,7 +408,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.ShowPokeTemplate,
                 "\n CP: {0} | IV: {1}% | Name: {2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.HelpTemplate,
-                "Commands: \n \n /top <cp/iv> <amount> - Shows you top Pokemons. \n /all <cp/iv> - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items. \n /status - Shows you the Status of the Bot. \n /pokedex - Shows you Pokedex "),
+                "Commands: \n \n /help - Show commands. \n /top <cp/iv> <amount> - Shows you top Pokemons. \n /all <cp/iv> - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items. \n /status - Shows you the Status of the Bot. \n /pokedex - Shows you Pokedex. \n /restart - Restart NcroBot. \n /exit - Close NecroBot."),
             new KeyValuePair<TranslationString, string>(TranslationString.StatsXpTemplateString,
                 "{0} (Advance in {1}h {2}m | {3:n0}/{4:n0} XP)"),
             new KeyValuePair<TranslationString, string>(TranslationString.RequireInputText,
@@ -504,7 +504,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeAddedPokestop, "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops."),
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeDestinationReached, "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"),
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeNotEnoughtBalls, "(HUMAN WALK) not enought balls to activate catch Em-All mode. ({0})/{1}.")
-
+   
         };
 
         [JsonProperty("PokemonStrings",
