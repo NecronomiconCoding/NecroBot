@@ -1,6 +1,10 @@
 {
   "TranslationStrings": [
     {
+      "Key": "HumanWalkSnipeNotEnoughtBalls",
+      "Value": "(HUMAN WALK) Not enought balls to activate catch Em-All mode. ({0})/{1}"
+    },
+    {
       "Key": "HumanWalkSnipe",
       "Value": "(SNIPER HUMANIZADO) Encontrados {0} spawns | lat: {1}, lng: {2}, dist {3:0.00}m, expira en {4:00} min {5:00} sec | Tiempo estimado de caminata : {6:00} min {7:00} sec | Giros: {8} | Capturas : {9}"
     },

@@ -503,7 +503,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeUpdate, "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all. but try to maximun catch if possible."),
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeAddedPokestop, "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops."),
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeDestinationReached, "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeNotEnoughtBalls, "(HUMAN WALK) not enought balls to activate catch Em-All mode. ({0})/{1}.")
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeNotEnoughtBalls, "(HUMAN WALK) Not enought balls to activate catch Em-All mode. ({0})/{1}")
    
         };
 
