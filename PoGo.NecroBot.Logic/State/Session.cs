@@ -23,6 +23,7 @@ namespace PoGo.NecroBot.Logic.State
         IEventDispatcher EventDispatcher { get; }
         TelegramService Telegram { get; set; }
         SessionStats Stats { get; }
+        MapQuestElevationService ElevationService { get; }
     }
 
 
@@ -34,9 +35,15 @@ namespace PoGo.NecroBot.Logic.State
 
         public Session(ISettings settings, ILogicSettings logicSettings, ITranslation translation)
         {
+            EventDispatcher = new EventDispatcher();
+
+            ElevationService = new MapQuestElevationService(this);
+
+            // Update current altitude before assigning settings.
+            settings.DefaultAltitude = ElevationService.GetAltitude(settings.DefaultLatitude, settings.DefaultLongitude);
+            
             Settings = settings;
             LogicSettings = logicSettings;
-            EventDispatcher = new EventDispatcher();
             Translation = translation;
             Reset(settings, LogicSettings);
             Stats = new SessionStats();
@@ -60,6 +67,8 @@ namespace PoGo.NecroBot.Logic.State
         public TelegramService Telegram { get; set; }
         
         public SessionStats Stats { get; set; }
+
+        public MapQuestElevationService ElevationService { get; }
 
         public void Reset(ISettings settings, ILogicSettings logicSettings)
         {

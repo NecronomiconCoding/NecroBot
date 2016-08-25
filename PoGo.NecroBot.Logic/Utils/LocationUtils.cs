@@ -2,6 +2,11 @@
 
 using System;
 using GeoCoordinatePortable;
+using System.Threading.Tasks;
+using POGOProtos.Networking.Responses;
+using PoGo.NecroBot.Logic.State;
+using PokemonGo.RocketAPI;
+using PoGo.NecroBot.Logic.Service;
 
 #endregion
 
@@ -9,6 +14,12 @@ namespace PoGo.NecroBot.Logic.Utils
 {
     public static class LocationUtils
     {
+        public static async Task<PlayerUpdateResponse> UpdatePlayerLocationWithAltitude(ISession session, GeoCoordinate position)
+        {
+            double altitude = session.ElevationService.GetAltitude(position.Latitude, position.Longitude);
+            return await session.Client.Player.UpdatePlayerLocation(position.Latitude, position.Longitude, altitude);
+        }
+
         public static double CalculateDistanceInMeters(double sourceLat, double sourceLng, double destLat,
             double destLng)
             // from http://stackoverflow.com/questions/6366408/calculating-distance-between-two-latitude-and-longitude-geocoordinates
