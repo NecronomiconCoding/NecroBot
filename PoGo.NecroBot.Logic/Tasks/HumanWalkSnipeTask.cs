@@ -336,6 +336,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static async Task<List<RarePokemonInfo>> FetchFromPokeradar(double lat, double lng)
         {
             List<RarePokemonInfo> results = new List<RarePokemonInfo>();
+            if (!_setting.HumanWalkingSnipeUsePokeRadar) return results;
             try
             {
 
@@ -358,6 +359,8 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static async Task<List<RarePokemonInfo>> FetchFromSkiplagged(double lat, double lng)
         {
             List<RarePokemonInfo> results = new List<RarePokemonInfo>();
+            if (!_setting.HumanWalkingSnipeUseSkiplagged) return results;
+
             var lat1 = lat - _setting.HumanWalkingSnipeSnipingScanOffset;
             var lat2 = lat + _setting.HumanWalkingSnipeSnipingScanOffset;
             var lng1 = lng - _setting.HumanWalkingSnipeSnipingScanOffset;
