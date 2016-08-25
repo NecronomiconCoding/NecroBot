@@ -21,6 +21,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsTask
     {
+        private static bool firstStart = true;
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -30,9 +31,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.Client.CurrentLatitude, session.Client.CurrentLongitude);
 
             // Edge case for when the client somehow ends up outside the defined radius
-            if (session.LogicSettings.MaxTravelDistanceInMeters != 0 &&
+            if (session.LogicSettings.MaxTravelDistanceInMeters != 0 && firstStart  &&
                 distanceFromStart > session.LogicSettings.MaxTravelDistanceInMeters)
             {
+                firstStart = false;
                 Logger.Write(
                     session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
