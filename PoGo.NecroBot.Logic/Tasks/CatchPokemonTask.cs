@@ -22,8 +22,6 @@ namespace PoGo.NecroBot.Logic.Tasks
     public static class CatchPokemonTask
     {
         public static int AmountOfBerries;
-        private static Random NearRandom = new Random();
-
         private static Random Random => new Random((int)DateTime.Now.Ticks);
 
         private static bool CatchThresholdExceeds(ISession session)
