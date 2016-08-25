@@ -305,7 +305,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (session.LogicSettings.TransferDuplicatePokemonOnCapture && session.LogicSettings.TransferDuplicatePokemon)
                 {
                     if (session.LogicSettings.UseNearActionRandom)
-                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                        await HumanRandomActionTask.TransferRandom(session, cancellationToken);
                     else
                         await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                 }

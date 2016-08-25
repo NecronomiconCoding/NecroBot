@@ -1,8 +1,6 @@
 ﻿using PoGo.NecroBot.Logic.State;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -74,7 +72,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             await GetPokeDexCount.Execute(session, cancellationToken);
         }
 
-        public async Task TransferRandom(ISession session, CancellationToken cancellationToken)
+        public static async Task TransferRandom(ISession session, CancellationToken cancellationToken)
         {
             if (ActionRandom.Next(1, 10) > 4)
                 await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
