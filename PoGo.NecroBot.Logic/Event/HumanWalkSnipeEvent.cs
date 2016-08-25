@@ -41,5 +41,6 @@ namespace PoGo.NecroBot.Logic.Event
         public List<FortData> Pokestops { get; internal set; }
         public int CurrentBalls { get; internal set; }
         public int MinBallsToSnipe { get; internal set; }
+        public object WalkSpeedApplied { get; internal set; }
     }
 }

@@ -128,7 +128,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     caughtAnyPokemonInThisWalk = true;
                     CalculateDistanceAndEstTime(pokemon);
-                    var remainTimes = (pokemon.expired - DateTime.Now).TotalSeconds * 0.9; //just use 90% times
+                    var remainTimes = (pokemon.expired - DateTime.Now).TotalSeconds * 0.95; //just use 90% times
                     var catchPokemonTimeEST = (pokemon.distance / 100) * 10;  //assume that 100m we catch 1 pokemon and it took 10 second for each.
                     string strPokemon = session.Translation.GetPokemonTranslation(pokemon.Id);
                     var spinPokestopEST = (pokemon.distance / 100) * 5;
@@ -147,6 +147,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Setting = pokemon.FilterSetting,
                         CatchPokemon = catchPokemon,
                         SpinPokeStop = pokemon.FilterSetting.SpinPokestopWhileWalking,
+                        WalkSpeedApplied = pokemon.FilterSetting.AllowSpeedUp?pokemon.FilterSetting.MaxSpeedUpSpeed:_session.LogicSettings.WalkingSpeedInKilometerPerHour,
                         Type = HumanWalkSnipeEventTypes.StartWalking
                     });
 
@@ -168,7 +169,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                            return await Task.FromResult<bool>(true);
                        },
                        session,
-                       cancellationToken);
+                       cancellationToken,pokemon.FilterSetting.AllowSpeedUp?pokemon.FilterSetting.MaxSpeedUpSpeed:0);
                     session.EventDispatcher.Send(new HumanWalkSnipeEvent()
                     {
                         Latitude = pokemon.latitude,
@@ -190,7 +191,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         static void CalculateDistanceAndEstTime(RarePokemonInfo p)
         {
-            var speedInMetersPerSecond = _setting.WalkingSpeedInKilometerPerHour / 3.6;
+            double speed = p.FilterSetting.AllowSpeedUp ? p.FilterSetting.MaxSpeedUpSpeed : _setting.WalkingSpeedInKilometerPerHour;
+            var speedInMetersPerSecond = speed / 3.6;
 
             p.distance = LocationUtils.CalculateDistanceInMeters(_session.Client.CurrentLatitude, _session.Client.CurrentLongitude, p.latitude, p.longitude);
             p.estimateTime = p.distance / speedInMetersPerSecond + 30; //margin 30 second
@@ -260,7 +262,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             foreach (var item in pokemons)
             {
-                CalculateDistanceAndEstTime(item);
 
                 //the pokemon data already in the list
                 if (rarePokemons.Any(x => x.id == item.id ||
@@ -278,13 +279,17 @@ namespace PoGo.NecroBot.Logic.Tasks
                     _setting.HumanWalkingSnipeMaxEstimateTime,
                     3, //default priority
                     _setting.HumanWalkingSnipeTryCatchEmAll,
-                    _setting.HumanWalkingSnipeSpinWhileWalking);
+                    _setting.HumanWalkingSnipeSpinWhileWalking,
+                    _setting.HumanWalkingSnipeAllowSpeedUp,
+                    _setting.HumanWalkingSnipeMaxSpeedUpSpeed);
 
                 if (_setting.HumanWalkSnipeFilters.Any(x => x.Key == item.Id))
                 {
                     config = _setting.HumanWalkSnipeFilters.First(x => x.Key == item.Id).Value;
                 }
                 item.FilterSetting = config;
+
+                CalculateDistanceAndEstTime(item);
 
                 rarePokemons.Add(item);
             }

@@ -18,39 +18,42 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         public bool SpinPokestopWhileWalking { get; set; }
 
-        public HumanWalkSnipeFilter(double maxDistance, double maxWalkTimes, int priority, bool catchPokemon, bool spinPokestop)
+        public double MaxSpeedUpSpeed { get; set; }
+        public bool AllowSpeedUp { get; set; }
+        public HumanWalkSnipeFilter(double maxDistance, double maxWalkTimes, int priority, bool catchPokemon, bool spinPokestop, bool allowSpeedUp, double speedUpSpeed)
         {
             this.MaxDistance = maxDistance;
             this.MaxWalkTimes = maxWalkTimes;
             this.Priority = priority;
             this.CatchPokemonWhileWalking = catchPokemon;
             this.SpinPokestopWhileWalking = spinPokestop;
+            this.AllowSpeedUp = allowSpeedUp;
+            this.MaxSpeedUpSpeed = speedUpSpeed;
         }
-
         internal static Dictionary<PokemonId, HumanWalkSnipeFilter> Default()
         {
             return new Dictionary<PokemonId, HumanWalkSnipeFilter>
             {
-                { PokemonId.Magikarp, new HumanWalkSnipeFilter(300, 200, 10, true, true)},
-                { PokemonId.Eevee, new HumanWalkSnipeFilter(500, 200, 10, true, true)},
-                { PokemonId.Electabuzz, new HumanWalkSnipeFilter(1500, 600, 2, true, true)},
-                { PokemonId.Dragonite, new HumanWalkSnipeFilter(3000, 900, 1, false, false)},
-                { PokemonId.Dragonair, new HumanWalkSnipeFilter(3000, 900, 1, false, false)},
-                { PokemonId.Dratini, new HumanWalkSnipeFilter(2000, 900, 1, false, false)},
-                { PokemonId.Charizard, new HumanWalkSnipeFilter(3000, 900, 1, false, false)},
-                { PokemonId.Snorlax, new HumanWalkSnipeFilter(3000, 900, 1, false, false)},
-                { PokemonId.Lapras, new HumanWalkSnipeFilter(3000, 900, 1, false, false)} ,
-                { PokemonId.Exeggutor, new HumanWalkSnipeFilter(1500, 600, 1, false, true)} ,
-                { PokemonId.Vaporeon, new HumanWalkSnipeFilter(1800, 800, 2, false, false)}   ,
-                { PokemonId.Flareon, new HumanWalkSnipeFilter(1800, 800, 2, false, false)},
-                { PokemonId.Scyther, new HumanWalkSnipeFilter(1000, 800, 3, false, false)},
-                { PokemonId.Beedrill, new HumanWalkSnipeFilter(1000, 800, 3, false, false)},
-                { PokemonId.Chansey, new HumanWalkSnipeFilter(1000, 800, 2, false, false)}  ,
-                { PokemonId.Clefable, new HumanWalkSnipeFilter(1000, 800, 3, false, false)},
-                { PokemonId.Golbat, new HumanWalkSnipeFilter(200, 800, 6, true, true)}  ,
-                { PokemonId.Jynx, new HumanWalkSnipeFilter(1200, 800, 4, true, true)}  ,
-                { PokemonId.Kangaskhan, new HumanWalkSnipeFilter(800, 800, 4, true, true)}  ,
-                { PokemonId.Gyarados, new HumanWalkSnipeFilter(1800, 800, 2, false, false)}  ,
+                { PokemonId.Magikarp, new HumanWalkSnipeFilter(300, 200, 10, true, true,false,60.0)},
+                { PokemonId.Eevee, new HumanWalkSnipeFilter(500, 200, 10, true, true,false,60.0)},
+                { PokemonId.Electabuzz, new HumanWalkSnipeFilter(1500, 600, 2, true, true,false,60.0)},
+                { PokemonId.Dragonite, new HumanWalkSnipeFilter(3000, 900, 1, false, false,false,60.0)},
+                { PokemonId.Dragonair, new HumanWalkSnipeFilter(3000, 900, 1, false, false,false,60.0)},
+                { PokemonId.Dratini, new HumanWalkSnipeFilter(2000, 900, 1, false, false,false,60.0)},
+                { PokemonId.Charizard, new HumanWalkSnipeFilter(3000, 900, 1, false, false,false,60.0)},
+                { PokemonId.Snorlax, new HumanWalkSnipeFilter(3000, 900, 1, false, false,false,60.0)},
+                { PokemonId.Lapras, new HumanWalkSnipeFilter(3000, 900, 1, false, false,false,60.0)} ,
+                { PokemonId.Exeggutor, new HumanWalkSnipeFilter(1500, 600, 1, false, true,false,60.0)} ,
+                { PokemonId.Vaporeon, new HumanWalkSnipeFilter(1800, 800, 2, false, false,false,60.0)}   ,
+                { PokemonId.Flareon, new HumanWalkSnipeFilter(1800, 800, 2, false, false,false,60.0)},
+                { PokemonId.Scyther, new HumanWalkSnipeFilter(1000, 800, 3, false, false,false,60.0)},
+                { PokemonId.Beedrill, new HumanWalkSnipeFilter(1000, 800, 3, false, false,false,60.0)},
+                { PokemonId.Chansey, new HumanWalkSnipeFilter(1000, 800, 2, false, false,false,60.0)}  ,
+                { PokemonId.Clefable, new HumanWalkSnipeFilter(1000, 800, 3, false, false,false,60.0)},
+                { PokemonId.Golbat, new HumanWalkSnipeFilter(200, 800, 6, true, true,false,60.0)}  ,
+                { PokemonId.Jynx, new HumanWalkSnipeFilter(1200, 800, 4, true, true,false,60.0)}  ,
+                { PokemonId.Kangaskhan, new HumanWalkSnipeFilter(800, 800, 4, true, true,false,60.0)}  ,
+                { PokemonId.Gyarados, new HumanWalkSnipeFilter(1800, 800, 2, false, false,false,60.0)}  ,
             };
         }
     }
