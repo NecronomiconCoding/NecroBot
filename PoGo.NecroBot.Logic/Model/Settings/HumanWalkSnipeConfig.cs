@@ -22,5 +22,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool IncludeDefaultLocation = true;
         public bool UsePokeRadar = true;
         public bool UseSkiplagged = true;
+        public bool UseSnipePokemonList = true;
     }
 }
