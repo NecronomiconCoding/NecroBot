@@ -26,6 +26,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static Random rc; //initialize pokestop random cleanup counter first time
         private static int storeRI;
         private static int RandomNumber;
+        private static Random NearRandom = new Random();
 
         internal static void Initialize()
         {
@@ -89,37 +90,105 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     storeRI = rc.Next(6, 12); //set new storeRI for new random value
                     stopsHit = 0;
-
-                    await RecycleItemsTask.Execute(session, cancellationToken);
+                    
+                    if (session.LogicSettings.UseNearActionRandom)
+                    {
+                        if (NearRandom.Next(1, 10) > 4)
+                            await RecycleItemsTask.Execute(session, cancellationToken);
+                    }
+                    else
+                        await RecycleItemsTask.Execute(session, cancellationToken);
 
                     if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
                         session.LogicSettings.EvolveAllPokemonAboveIv ||
                         session.LogicSettings.UseLuckyEggsWhileEvolving ||
                         session.LogicSettings.KeepPokemonsThatCanEvolve)
                     {
-                        await EvolvePokemonTask.Execute(session, cancellationToken);
+                        if (session.LogicSettings.UseNearActionRandom)
+                        {
+                            if (NearRandom.Next(1, 10) > 4)
+                                await EvolvePokemonTask.Execute(session, cancellationToken);
+                        }
+                        else
+                            await EvolvePokemonTask.Execute(session, cancellationToken);
                     }
 
                     if (session.LogicSettings.UseLuckyEggConstantly)
-                        await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                    {
+                        if (session.LogicSettings.UseNearActionRandom)
+                        {
+                            if (NearRandom.Next(1, 10) > 4)
+                                await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                        }
+                        else
+                            await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                    }
 
                     if (session.LogicSettings.UseIncenseConstantly)
-                        await UseIncenseConstantlyTask.Execute(session, cancellationToken);
+                    {
+                        if (session.LogicSettings.UseNearActionRandom)
+                        {
+                            if (NearRandom.Next(1, 10) > 4)
+                                await UseIncenseConstantlyTask.Execute(session, cancellationToken);
+                        }
+                        else
+                            await UseIncenseConstantlyTask.Execute(session, cancellationToken);
+                    }
 
                     if (session.LogicSettings.TransferDuplicatePokemon)
-                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                    {
+                        if (session.LogicSettings.UseNearActionRandom)
+                        {
+                            if (NearRandom.Next(1, 10) > 4)
+                                await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                        }
+                        else
+                            await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                    }
 
                     if (session.LogicSettings.TransferWeakPokemon)
-                        await TransferWeakPokemonTask.Execute(session, cancellationToken);
+                    {
+                        if (session.LogicSettings.UseNearActionRandom)
+                        {
+                            if (NearRandom.Next(1, 10) > 4)
+                                await TransferWeakPokemonTask.Execute(session, cancellationToken);
+                        }
+                        else
+                            await TransferWeakPokemonTask.Execute(session, cancellationToken);
+                    }
 
                     if (session.LogicSettings.RenamePokemon)
-                        await RenamePokemonTask.Execute(session, cancellationToken);
+                    {
+                        if (session.LogicSettings.UseNearActionRandom)
+                        {
+                            if (NearRandom.Next(1, 10) > 4)
+                                await RenamePokemonTask.Execute(session, cancellationToken);
+                        }
+                        else
+                            await RenamePokemonTask.Execute(session, cancellationToken);
+                    }
 
                     if (session.LogicSettings.AutoFavoritePokemon)
-                        await FavoritePokemonTask.Execute(session, cancellationToken);
+                    {
+                        if (session.LogicSettings.UseNearActionRandom)
+                        {
+                            if (NearRandom.Next(1, 10) > 4)
+                                await FavoritePokemonTask.Execute(session, cancellationToken);
+                        }
+                        else
+                            await FavoritePokemonTask.Execute(session, cancellationToken);
+                    }
 
                     if (session.LogicSettings.AutomaticallyLevelUpPokemon)
-                        await LevelUpPokemonTask.Execute(session, cancellationToken);
+                    {
+                        if (session.LogicSettings.UseNearActionRandom)
+                        {
+                            if (NearRandom.Next(1, 10) > 4)
+                                await LevelUpPokemonTask.Execute(session, cancellationToken);
+                        }
+                        else
+                            await LevelUpPokemonTask.Execute(session, cancellationToken);
+                    }
 
                     await GetPokeDexCount.Execute(session, cancellationToken);
                 }

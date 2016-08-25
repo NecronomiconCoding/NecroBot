@@ -22,6 +22,7 @@ namespace PoGo.NecroBot.Logic.Tasks
     public static class CatchPokemonTask
     {
         public static int AmountOfBerries;
+        private static Random NearRandom = new Random();
 
         private static Random Random => new Random((int)DateTime.Now.Ticks);
 
@@ -300,8 +301,18 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(evt);
 
                 attemptCounter++;
+
                 if (session.LogicSettings.TransferDuplicatePokemonOnCapture && session.LogicSettings.TransferDuplicatePokemon)
-                    await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                {
+                    if (session.LogicSettings.UseNearActionRandom)
+                    {
+                        if (NearRandom.Next(1, 10) > 4)
+                            await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                    }
+                    else
+                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                }
+
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 0);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
