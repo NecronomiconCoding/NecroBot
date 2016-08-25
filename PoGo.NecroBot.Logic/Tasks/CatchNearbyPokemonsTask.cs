@@ -11,6 +11,7 @@ using PoGo.NecroBot.Logic.Utils;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
+using POGOProtos.Enums;
 
 #endregion
 
@@ -18,14 +19,17 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchNearbyPokemonsTask
     {
-        public static async Task Execute(ISession session, CancellationToken cancellationToken)
+        public static async Task Execute(ISession session, CancellationToken cancellationToken, PokemonId priority = PokemonId.Missingno)
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (!session.LogicSettings.CatchPokemon) return;
 
             Logger.Write(session.Translation.GetTranslation(TranslationString.LookingForPokemon), LogLevel.Debug);
 
-            var pokemons = await GetNearbyPokemons(session);
+            var nearbyPokemons = await GetNearbyPokemons(session);
+            var pokemons = nearbyPokemons.Where(p => p.PokemonId == priority).ToList();
+            pokemons.AddRange(nearbyPokemons.Where(p => p.PokemonId != priority).ToList());
+
             foreach (var pokemon in pokemons)
             {
                 cancellationToken.ThrowIfCancellationRequested();

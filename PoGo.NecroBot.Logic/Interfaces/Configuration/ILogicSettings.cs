@@ -174,6 +174,9 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         double HumanWalkingSnipeSnipingScanOffset { get; }
         double HumanWalkingSnipeWalkbackDistanceLimit { get; }
         bool HumanWalkingSnipeIncludeDefaultLocation { get; }
+        bool HumanWalkingSnipeUsePokeRadar { get; }
+        bool HumanWalkingSnipeUseSkiplagged { get; }
+        bool HumanWalkingSnipeUseSnipePokemonList { get; }
         Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters { get; }
     }
 }

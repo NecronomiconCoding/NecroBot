@@ -20,5 +20,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool Enable = true;
         public double WalkbackDistanceLimit = 300.0;
         public bool IncludeDefaultLocation = true;
+        public bool UsePokeRadar = true;
+        public bool UseSkiplagged = true;
+        public bool UseSnipePokemonList = true;
     }
 }
