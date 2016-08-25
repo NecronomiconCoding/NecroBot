@@ -127,7 +127,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
                     await SnipePokemonTask.Execute(session, cancellationToken);
 
-                if (session.LogicSettings.EnableHumanWalkingSnipe)
+                //samuraitruong: temoporary not allow human walk snipe until we implement a good logic to use. 
+                if (session.LogicSettings.EnableHumanWalkingSnipe && !session.LogicSettings.UseGpxPathing)
                 {
                     //refactore to move this code inside the task later.
                     await HumanWalkSnipeTask.Execute(session, cancellationToken,
@@ -154,7 +155,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                  session.Client.CurrentLongitude, i.Latitude, i.Longitude)).FirstOrDefault();
 
                      var walkedDistance = LocationUtils.CalculateDistanceInMeters(nearestStop.Latitude, nearestStop.Longitude, session.Client.CurrentLatitude, session.Client.CurrentLongitude);
-                     if (walkedDistance > session.LogicSettings.HumanWalkingSnipeMaxDistance)
+                     if (walkedDistance > session.LogicSettings.HumanWalkingSnipeWalkbackDistanceLimit)
                      {
                          await Task.Delay(3000);
                          var nearbyPokeStops = await UpdateFortsData(session);
@@ -163,11 +164,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                          session.EventDispatcher.Send(new PokeStopListEvent { Forts = pokestopList });
                          session.EventDispatcher.Send(new HumanWalkSnipeEvent()
                          {
-                                Type = HumanWalkSnipeEventTypes.PokestopUpdated,
-                                Pokestops = notexists,
-                                NearestDistane = walkedDistance
+                             Type = HumanWalkSnipeEventTypes.PokestopUpdated,
+                             Pokestops = notexists,
+                             NearestDistane = walkedDistance
                          });
-                         
+
                      }
                  });
                 }

@@ -1,9 +1,3 @@
-<p align="center">
-  <a href="http://necrobot.io">
-    <img alt="Logo" src="http://necrobot.io/img/typotype-transparent.png" width="600">
-  </a>
-</p>
-
 [![Discord](https://discordapp.com/api/guilds/209253611031625728/widget.png)](https://discord.gg/VXKxNFr)
 [![Stories in Ready](https://badge.waffle.io/NoxxDev/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NoxxDev/NecroBot)
 [![Github All Releases](https://img.shields.io/github/downloads/NoxxDev/NecroBot/total.svg)](https://github.com/NoxxDev/NecroBot/releases)
@@ -47,6 +41,10 @@ Make sure you check out our [Wiki](https://github.com/NoxxDev/NecroBot/wiki) to 
  - [Egg Hatching Automatically]
  - [Multi bot support]
  - [Snipe pokemon]
+  - [Manual Locations](https://github.com/NoxxDev/NecroBot/wiki/Manual-Locations-Sniping-Guide)
+  - [Automatic Locations](https://github.com/NoxxDev/NecroBot/wiki/Automatic-Locations-Sniping-Guide)
+  - [HumanWalk Snipping](https://github.com/NoxxDev/NecroBot/wiki/Human-walk-snipe-config)
+  - [MSniper Snipping](https://github.com/NoxxDev/NecroBot/wiki/MSniper-Manual-Snipping-Guide)
  - [Power-Up pokemon]
  - [Telegram Remote Control Support]
 
@@ -61,6 +59,8 @@ Valmere - [TransferWeakPokemon](https://github.com/PocketMobsters/PokeMobBot/pul
 AeonLucid - [POGOProtos](https://github.com/AeonLucid/POGOProtos)
 
 NECROBOTIO - [NecroBot](https://github.com/NECROBOTIO/NecroBot)
+
+Msx752 - [MSniper](https://github.com/msx752/MSniper)
 
 <br/>
 Thanks to everyone who volunteered by contributing via Pull Requests!

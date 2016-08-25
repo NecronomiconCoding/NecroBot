@@ -26,8 +26,11 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             try
             {
-                if (session.LogicSettings.CatchPokemon)//config is checking
+                if (session.LogicSettings.CatchPokemon && session.LogicSettings.SnipeAtPokestops == false)//must be
                 {
+                    if (!await SnipePokemonTask.CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
+                        return;
+
                     string pth = Path.Combine(session.LogicSettings.ProfilePath, "SnipeMS.json");
                     if (!File.Exists(pth))
                         return;

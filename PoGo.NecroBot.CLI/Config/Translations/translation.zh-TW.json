@@ -1,44 +1,48 @@
 {
   "TranslationStrings": [
     {
+      "Key": "HumanWalkSnipeNotEnoughtBalls",
+      "Value": "(仿人行走) 沒有足夠的寶貝球以啟動catch Em-All(收服所有神奇寶貝)模式 ({0})/{1}"
+    },
+    {
       "Key": "HumanWalkSnipe",
-      "Value": "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9}"
+      "Value": "(仿人行走) 發現一隻{0} | 緯度:{1}, 經度:{2}, 距離{3:0.00}公尺 , 在{4:00}分 {5:00}秒後消失 | 估計行走時間: {6:00}分 {7:00}秒 | 轉牌: {8} | 捕捉: {9}"
     },
     {
       "Key": "HumanWalkSnipeUpdate",
-      "Value": "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all. but try to maximun catch if possible."
+      "Value": "(仿人行走) 發現{0}隻神奇寶貝符合你的狙擊設定。仿人行走狙擊沒辦法捕捉所有的神奇寶貝，但會盡可能的捕捉"
     },
     {
       "Key": "HumanWalkSnipeAddedPokestop",
-      "Value": "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops."
+      "Value": "(仿人行走) 距離最近驛站{0:0.00m}。此處擁有{1}個驛站，將在此處重新開始掛機"
     },
     {
       "Key": "HumanWalkSnipeDestinationReached",
-      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"
+      "Value": "(仿人行走) 到達目的地 | 緯度: {0}, 經度: {1}"
     },
     {
       "Key": "SniperCount",
-      "Value": "Sniper count {0}"
+      "Value": "狙擊計數: {0} 次"
     },
     {
       "Key": "SnipeExceeds",
-      "Value": "Sniper need to take a rest before your account is banned"
+      "Value": "狙擊需要休息一會，以降低被ban機率"
     },
     {
       "Key": "CatchExceeds",
-      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+      "Value": "短時間捕捉過多神奇寶貝。在 {0} 秒後能捕捉新的神奇寶貝"
     },
     {
       "Key": "PokeStopExceeds",
-      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+      "Value": "短時間拜訪過多驛站。在 {0} 秒後能拜訪新的驛站"
     },
     {
       "Key": "Only10kmEggs",
-      "Value": "Player below level 20, saving this 10 km Egg for later"
+      "Value": "玩家低於等級20，暫時保留10公里的蛋之後再用"
     },
     {
       "Key": "GoogleAPIWarning",
-      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Value": "沒有Google Api，你每天將只有2500次的共享限制。如果你達到次數上限，可試著更換你的IP。或者去設定 \"GoogleAPIKey\"，在以下網址可取得API Key：https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {
       "Key": "pokeball",
@@ -46,11 +50,11 @@
     },
     {
       "Key": "greatPokeball",
-      "Value": "高級球"
+      "Value": "超級球"
     },
     {
       "Key": "ultraPokeball",
-      "Value": "超級球"
+      "Value": "高級球"
     },
     {
       "Key": "masterPokeball",
@@ -114,11 +118,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} 等級：{3} CP：({4}/{5}) IV：{6}% | 捕獲率：{7}% | 距離{8}公尺\t\t\t\t\t\n\t\t\t\t  使用{9}捕捉 (剩餘{10}個) | 經驗值+{11} | {12} | 座標：{13},{14}\t\t\t\t"
+      "Value": "({0}) | ({1}) {2} 等級：{3} CP：({4}/{5}) IV：{6}% | 捕獲率：{7}% | 距離{8}公尺\t\t\t\t\t\n\t\t\t\t  使用{9}捕捉 (剩餘{10}個) | 經驗值+{11} | {12} | 座標：{13},{14}\t\t\t\t | Move1: {15} Move2: {16}\t\t\t\t"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} 等級：{3} CP：({4}/{5}) IV：{6}% | 捕獲率：{7}% | 距離{8}公尺\t\t\t\t\t\n\t\t\t\t  使用{9}捕捉 (剩餘{10}個) | 座標：{11},{12}\t\t\t\t"
+      "Value": "({0}) | ({1}) {2} 等級：{3} CP：({4}/{5}) IV：{6}% | 捕獲率：{7}% | 距離{8}公尺\t\t\t\t\t\n\t\t\t\t  使用{9}捕捉 (剩餘{10}個) | 座標：{11},{12}\t\t\t\t | Move1: {13} Move2: {14}\t\t\t\t"
     },
     {
       "Key": "eventNoPokeballs",
@@ -366,7 +370,7 @@
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "寶貝球：{0} | 高級球：{1} | 超級球：{2} | 大師球：{3}\t\t\t\t"
+      "Value": "寶貝球：{0} | 超級球：{1} | 高級球：{2} | 大師球：{3}\t\t\t\t"
     },
     {
       "Key": "CurrentPotionInv",
@@ -442,7 +446,7 @@
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "錯過"
+      "Value": "丟失"
     },
     {
       "Key": "catchStatusSuccess",
@@ -739,7 +743,7 @@
     },
     {
       "Key": "AccountBanned",
-      "Value": "Probably Permanent Ban!"
+      "Value": "此帳號可能已被永久停權!"
     }
   ],
   "PokemonStrings": [
