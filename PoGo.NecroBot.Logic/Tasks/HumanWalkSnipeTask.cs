@@ -417,6 +417,23 @@ namespace PoGo.NecroBot.Logic.Tasks
                 created = result.expires - 15 * 60
             };
         }
+
+        public static Task PriorityPokemon(ISession session, string id)
+        {
+            return Task.Run(() =>
+            {
+                var pokemonItem = rarePokemons.FirstOrDefault(p => p.id == id);
+                if(pokemonItem!= null)
+                {
+                    pokemonItem.FilterSetting.Priority = 0;//will be going to catch next check. TODO  add code to trigger catch now
+                }
+            });
+        }
+
+        public static Task<List<RarePokemonInfo>> GetCurrentQueueItems(ISession session)
+        {
+            return Task.FromResult(rarePokemons);
+        }
     }
 
     public class SkippedLaggedWrap
