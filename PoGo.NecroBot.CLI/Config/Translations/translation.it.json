@@ -1,20 +1,24 @@
 {
   "TranslationStrings": [
     {
+      "Key": "HumanWalkSnipeNotEnoughtBalls",
+      "Value": "(HUMAN WALK) Non abbastanza pokeball per attivare la modalità Catch'em all! ({0})/{1}"
+    },
+    {
       "Key": "HumanWalkSnipe",
-      "Value": "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9}"
+      "Value": "(HUMAN WALK) È comparso un {0} | lat: {1}, lng: {2}, dist {3:0.00}m , scomparirà tra {4:00} min {5:00} sec | Tempo di camminata stimato : {6:00} min {7:00} sec | Spin: {8} | Cattura : {9}"
     },
     {
       "Key": "HumanWalkSnipeUpdate",
-      "Value": "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all. but try to maximun catch if possible."
+      "Value": "(HUMAN WALK) Trovati {0} pokemon che combaciano con i filtri. Human walk sniper non li catturerà tutti, ma cercherà di trovarne comunque il più possibile."
     },
     {
       "Key": "HumanWalkSnipeAddedPokestop",
-      "Value": "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops."
+      "Value": "(HUMAN WALK) Sei lontano {0:0.00m} dal pokestop più vicino. Ritornando a farmare in questo posto con {1} pokestop."
     },
     {
       "Key": "HumanWalkSnipeDestinationReached",
-      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"
+      "Value": "(HUMAN WALK) Destinazione raggiunta | lat: {0}, lng: {1}"
     },
     {
       "Key": "SniperCount",
@@ -114,11 +118,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | {11} PE guadagnati | {12} | lat: {13} long: {14}\r\n \t Move1: {15}\t Move2: {16}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | {11} PE guadagnati | {12} | lat: {13} long: {14} | Move1: {15} Move2: {16}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | lat: {11} long: {12}\r\n \t Move1: {13}\t Move2: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | lat: {11} long: {12} | Move1: {13} Move2: {14}"
     },
     {
       "Key": "eventNoPokeballs",

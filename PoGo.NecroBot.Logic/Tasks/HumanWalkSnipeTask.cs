@@ -82,11 +82,11 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (pokeBallsCount < minPokeballs)
             {
-                session.EventDispatcher.Send(new SnipeEvent
+                session.EventDispatcher.Send(new HumanWalkSnipeEvent
                 {
-                    Message =
-                        session.Translation.GetTranslation(TranslationString.NotEnoughPokeballsToSnipe, pokeBallsCount,
-                            minPokeballs)
+                    Type = HumanWalkSnipeEventTypes.NotEnoughtPalls,
+                    CurrentBalls = pokeBallsCount,
+                    MinBallsToSnipe = minPokeballs,
                 });
                 return false;
             }
@@ -102,11 +102,12 @@ namespace PoGo.NecroBot.Logic.Tasks
             _session = session;
             _setting = session.LogicSettings;
 
-            cancellationToken.ThrowIfCancellationRequested();
-
             if (!_setting.CatchPokemon) return;
 
-            pokemonToBeSnipedIds = _setting.PokemonToSnipe.Pokemon;
+            cancellationToken.ThrowIfCancellationRequested();
+            
+            pokemonToBeSnipedIds = _setting.HumanWalkingSnipeUseSnipePokemonList? _setting.PokemonToSnipe.Pokemon : new List<PokemonId>();
+
             pokemonToBeSnipedIds.AddRange(_setting.HumanWalkSnipeFilters.Where(x => !pokemonToBeSnipedIds.Any(t => t == x.Key)).Select(x => x.Key).ToList());      //this will combine with pokemon snipe filter
 
             if (_setting.HumanWalkingSnipeTryCatchEmAll)
@@ -150,12 +151,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
 
                     await session.Navigation.Move(new GeoCoordinate(pokemon.latitude, pokemon.longitude,
-                           LocationUtils.getElevation(pokemon.latitude, pokemon.longitude)),
+                           LocationUtils.getElevation(session, pokemon.latitude, pokemon.longitude)),
                        async () =>
                        {
                            var distance = LocationUtils.CalculateDistanceInMeters(pokemon.latitude, pokemon.longitude, session.Client.CurrentLatitude, session.Client.CurrentLongitude);
 
-                           if (catchPokemon && distance > 50)
+                           if (catchPokemon && distance > 80.0)
                            {
                                // Catch normal map Pokemon
                                await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
@@ -164,7 +165,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                            {
                                await actionWhenWalking(session.Client.CurrentLatitude, session.Client.CurrentLongitude);
                            }
-                           return await Task.FromResult<bool>(true);
+                           return true;
                        },
                        session,
                        cancellationToken);
@@ -174,7 +175,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Longitude = pokemon.longitude,
                         Type = HumanWalkSnipeEventTypes.DestinationReached
                     });
-                    await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
+                    await Task.Delay(2000);
+                    await CatchNearbyPokemonsTask.Execute(session, cancellationToken, pokemon.Id);
                     await CatchIncensePokemonsTask.Execute(session, cancellationToken);
                 }
                 keepWalking = _setting.HumanWalkingSnipeTryCatchEmAll && pokemons.Count > 0;
@@ -336,6 +338,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static async Task<List<RarePokemonInfo>> FetchFromPokeradar(double lat, double lng)
         {
             List<RarePokemonInfo> results = new List<RarePokemonInfo>();
+            if (!_setting.HumanWalkingSnipeUsePokeRadar) return results;
             try
             {
 
@@ -358,6 +361,8 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static async Task<List<RarePokemonInfo>> FetchFromSkiplagged(double lat, double lng)
         {
             List<RarePokemonInfo> results = new List<RarePokemonInfo>();
+            if (!_setting.HumanWalkingSnipeUseSkiplagged) return results;
+
             var lat1 = lat - _setting.HumanWalkingSnipeSnipingScanOffset;
             var lat2 = lat + _setting.HumanWalkingSnipeSnipingScanOffset;
             var lng1 = lng - _setting.HumanWalkingSnipeSnipingScanOffset;
@@ -397,7 +402,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             return list;
         }
-
         private static RarePokemonInfo Map(pokemon result)
         {
             return new RarePokemonInfo()

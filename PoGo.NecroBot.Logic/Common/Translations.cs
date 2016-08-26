@@ -215,7 +215,8 @@ namespace PoGo.NecroBot.Logic.Common
         HumanWalkSnipe,
         HumanWalkSnipeUpdate,
         HumanWalkSnipeAddedPokestop,
-        HumanWalkSnipeDestinationReached
+        HumanWalkSnipeDestinationReached,
+        HumanWalkSnipeNotEnoughtBalls
     }
 
     public class Translation : ITranslation
@@ -241,7 +242,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.FarmPokestopsNoUsableFound,
                 "No usable PokeStops found in your area. Is your maximum distance too small?"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortUsed,
-                "Name: {0} XP: {1}, Gems: {2}, Items: {3}, Lat: {4}, Long: {5}"),
+                "Name: {0} XP: {1}, Gems: {2}, Items: {3}, Lat: {4}, Long: {5}, Alt: {6}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortFailed,
                 "Name: {0} INFO: Looting failed, possible softban. Unban in: {1}/{2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventFortTargeted,
@@ -261,9 +262,9 @@ namespace PoGo.NecroBot.Logic.Common
 
             //Logging Cleanup (mostly uneccessary information, may want a verbose pokemon capture logger setting)
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureSuccess,
-                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14}\r\n \t Move1: {15}\t Move2: {16}"),
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14} | Move1: {15} Move2: {16}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureFailed,
-                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12}\r\n \t Move1: {13}\t Move2: {14}"),
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12} | Move1: {13} Move2: {14}"),
 
 
             new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
@@ -501,7 +502,9 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipe, "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9}"),
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeUpdate, "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all. but try to maximun catch if possible."),
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeAddedPokestop, "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops."),
-            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeDestinationReached, "(HUMAN WALK) destination reached | lat: {0}, lng: {1}")
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeDestinationReached, "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeNotEnoughtBalls, "(HUMAN WALK) Not enought balls to activate catch Em-All mode. ({0})/{1}")
+   
         };
 
         [JsonProperty("PokemonStrings",

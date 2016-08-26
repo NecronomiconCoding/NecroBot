@@ -17,7 +17,8 @@ namespace PoGo.NecroBot.Logic.Event
         DestinationReached,
         PokemonScanned,
         AddedSnipePokemon,
-        PokestopUpdated
+        PokestopUpdated,
+        NotEnoughtPalls
     }
     public class HumanWalkSnipeEvent : IEvent
     {
@@ -36,7 +37,9 @@ namespace PoGo.NecroBot.Logic.Event
         public HumanWalkSnipeFilter Setting { get; internal set; }
         public bool SpinPokeStop { get; set; }
         public bool CatchPokemon { get; set; }
-        public double NearestDistane { get; internal set; }
+        public double NearestDistance { get; internal set; }
         public List<FortData> Pokestops { get; internal set; }
+        public int CurrentBalls { get; internal set; }
+        public int MinBallsToSnipe { get; internal set; }
     }
 }

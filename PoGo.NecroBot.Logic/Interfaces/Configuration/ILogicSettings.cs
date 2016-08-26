@@ -134,6 +134,7 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         bool UseSnipeLimit { get; }
         bool UsePokeStopLimit { get; }
         bool UseCatchLimit { get; }
+        bool UseNearActionRandom { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
@@ -174,6 +175,9 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         double HumanWalkingSnipeSnipingScanOffset { get; }
         double HumanWalkingSnipeWalkbackDistanceLimit { get; }
         bool HumanWalkingSnipeIncludeDefaultLocation { get; }
+        bool HumanWalkingSnipeUsePokeRadar { get; }
+        bool HumanWalkingSnipeUseSkiplagged { get; }
+        bool HumanWalkingSnipeUseSnipePokemonList { get; }
         Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters { get; }
     }
 }

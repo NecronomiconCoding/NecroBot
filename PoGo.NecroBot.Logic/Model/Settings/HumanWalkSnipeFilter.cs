@@ -47,7 +47,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 { PokemonId.Beedrill, new HumanWalkSnipeFilter(1000, 800, 3, false, false)},
                 { PokemonId.Chansey, new HumanWalkSnipeFilter(1000, 800, 2, false, false)}  ,
                 { PokemonId.Clefable, new HumanWalkSnipeFilter(1000, 800, 3, false, false)},
-                { PokemonId.Golbat, new HumanWalkSnipeFilter(500, 800, 6, true, true)}  ,
+                { PokemonId.Golbat, new HumanWalkSnipeFilter(200, 800, 6, true, true)}  ,
                 { PokemonId.Jynx, new HumanWalkSnipeFilter(1200, 800, 4, true, true)}  ,
                 { PokemonId.Kangaskhan, new HumanWalkSnipeFilter(800, 800, 4, true, true)}  ,
                 { PokemonId.Gyarados, new HumanWalkSnipeFilter(1800, 800, 2, false, false)}  ,
