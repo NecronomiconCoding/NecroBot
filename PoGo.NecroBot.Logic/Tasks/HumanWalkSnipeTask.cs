@@ -165,7 +165,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                            {
                                await actionWhenWalking(session.Client.CurrentLatitude, session.Client.CurrentLongitude);
                            }
-                           return await Task.FromResult<bool>(true);
+                           return true;
                        },
                        session,
                        cancellationToken);
