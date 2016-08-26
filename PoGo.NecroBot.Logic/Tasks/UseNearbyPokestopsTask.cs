@@ -150,15 +150,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                                 session.Client.CurrentLongitude, i.Latitude, i.Longitude) < 30.0)
                                    .ToList();
-                            reachablePokestops = reachablePokestops.OrderBy(i => 
+                            reachablePokestops = reachablePokestops.OrderBy(i =>
                             LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                             session.Client.CurrentLongitude, i.Latitude, i.Longitude))
                                    .ToList();
                             foreach (var ps in reachablePokestops)
-                                {
-                                    pokestopList.Remove(ps);
-                                    await FortPokestop(session, cancellationToken, ps);
-                                }
+                            {
+                                pokestopList.Remove(ps);
+                                await FortPokestop(session, cancellationToken, ps);
+                            }
                         },
                         async () =>
                         {
@@ -166,7 +166,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                                 session.Client.CurrentLongitude, i.Latitude, i.Longitude)).FirstOrDefault();
 
-                            var walkedDistance = LocationUtils.CalculateDistanceInMeters(nearestStop.Latitude, 
+                            var walkedDistance = LocationUtils.CalculateDistanceInMeters(nearestStop.Latitude,
                                 nearestStop.Longitude, session.Client.CurrentLatitude, session.Client.CurrentLongitude);
                             if (walkedDistance > session.LogicSettings.HumanWalkingSnipeWalkbackDistanceLimit)
                             {
