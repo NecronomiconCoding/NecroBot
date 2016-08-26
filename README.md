@@ -43,8 +43,8 @@ Make sure you check out our [Wiki](https://github.com/NoxxDev/NecroBot/wiki) to 
  - [Snipe pokemon]
   - [Manual Locations](https://github.com/NoxxDev/NecroBot/wiki/Manual-Locations-Sniping-Guide)
   - [Automatic Locations](https://github.com/NoxxDev/NecroBot/wiki/Automatic-Locations-Sniping-Guide)
-  - [HumanWalk Snipping](https://github.com/NoxxDev/NecroBot/wiki/Human-walk-snipe-config)
-  - [MSniper Snipping](https://github.com/NoxxDev/NecroBot/wiki/MSniper-Manual-Snipping-Guide)
+  - [HumanWalk Sniping](https://github.com/NoxxDev/NecroBot/wiki/Human-walk-snipe-config)
+  - [MSniper Sniping](https://github.com/NoxxDev/NecroBot/wiki/MSniper-Manual-Sniping-Guide)
  - [Power-Up pokemon]
  - [Telegram Remote Control Support]
 
@@ -68,6 +68,6 @@ Thanks to everyone who volunteered by contributing via Pull Requests!
 <h2><a name="legal">Legal</a></h2>
 
 This Website and Project is in no way affiliated with, authorized, maintained, sponsored or endorsed by Niantic, The Pokémon Company, Nintendo or any of its affiliates or subsidiaries. This is an independent and unofficial API for educational use ONLY. 
-Using the Project might be against the TOS
+Using the Project might be against the TOS.
 
 <hr/>
