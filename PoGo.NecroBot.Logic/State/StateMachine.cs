@@ -17,10 +17,10 @@ namespace PoGo.NecroBot.Logic.State
     {
         private IState _initialState;
 
-        public Task AsyncStart(IState initialState, Session session,
+        public Task AsyncStart(IState initialState, Session session, string subPath,
             CancellationToken cancellationToken = default(CancellationToken))
         {
-            return Task.Run(() => Start(initialState, session, cancellationToken), cancellationToken);
+            return Task.Run(() => Start(initialState, session, subPath, cancellationToken), cancellationToken);
         }
 
         public void SetFailureState(IState state)
@@ -28,11 +28,11 @@ namespace PoGo.NecroBot.Logic.State
             _initialState = state;
         }
 
-        public async Task Start(IState initialState, Session session,
+        public async Task Start(IState initialState, Session session, string subPath,
             CancellationToken cancellationToken = default(CancellationToken))
         {
             var state = initialState;
-            var profilePath = Path.Combine(Directory.GetCurrentDirectory(), "");
+            var profilePath = Path.Combine(Directory.GetCurrentDirectory(), subPath);
             var profileConfigPath = Path.Combine(profilePath, "config");
 
             FileSystemWatcher configWatcher = new FileSystemWatcher();
@@ -44,7 +44,7 @@ namespace PoGo.NecroBot.Logic.State
             {
                 if (e.ChangeType == WatcherChangeTypes.Changed)
                 {
-                    session.LogicSettings = new LogicSettings(GlobalSettings.Load(""));
+                    session.LogicSettings = new LogicSettings(GlobalSettings.Load(subPath));
                     configWatcher.EnableRaisingEvents = !configWatcher.EnableRaisingEvents;
                     configWatcher.EnableRaisingEvents = !configWatcher.EnableRaisingEvents;
                     Logger.Write(" ##### config.json ##### ", LogLevel.Info);

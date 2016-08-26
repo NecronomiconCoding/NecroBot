@@ -2,11 +2,11 @@
   "TranslationStrings": [
     {
       "Key": "HumanWalkSnipeNotEnoughtBalls",
-      "Value": "(HUMAN WALK) Not enought balls to activate catch Em-All mode. ({0})/{1}"
+      "Value": "(HUMAN WALK) Niewystarczająca ilość piłem do aktywacji catch Em-All mode. ({0})/{1}"
     },
     {
       "Key": "HumanWalkSnipe",
-      "Value": "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9}"
+      "Value": "(HUMAN WALK) Znaleziono {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9}"
     },
     {
       "Key": "HumanWalkSnipeUpdate",
@@ -26,7 +26,7 @@
     },
     {
       "Key": "SnipeExceeds",
-      "Value": "Sniper need to take a rest before your account is banned"
+      "Value": "Sniper musi zrobić sobie przerwę bo inaczej konto może zostać zablokowane"
     },
     {
       "Key": "CatchExceeds",
@@ -38,11 +38,11 @@
     },
     {
       "Key": "Only10kmEggs",
-      "Value": "Player below level 20, saving this 10 km Egg for later"
+      "Value": "Gracz poniżej 20 poziomu, oszczędza 10 km Egg na potem"
     },
     {
       "Key": "GoogleAPIWarning",
-      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Value": "Bez API Google, trzeba będzie 2500 bezpłatny limit przydziału, jeśli osiągnie maksymalny limit, spróbuj zmienić swój adres IP. Do konfiguracji \"GoogleAPIKey\", weź API Key z link: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {
       "Key": "pokeball",

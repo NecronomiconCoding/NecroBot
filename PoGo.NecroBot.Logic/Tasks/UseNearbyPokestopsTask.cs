@@ -90,38 +90,36 @@ namespace PoGo.NecroBot.Logic.Tasks
                     storeRI = rc.Next(6, 12); //set new storeRI for new random value
                     stopsHit = 0;
 
-                    await RecycleItemsTask.Execute(session, cancellationToken);
-
-                    if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
-                        session.LogicSettings.EvolveAllPokemonAboveIv ||
-                        session.LogicSettings.UseLuckyEggsWhileEvolving ||
-                        session.LogicSettings.KeepPokemonsThatCanEvolve)
+                    if (session.LogicSettings.UseNearActionRandom)
                     {
-                        await EvolvePokemonTask.Execute(session, cancellationToken);
+                        await HumanRandomActionTask.Execute(session, cancellationToken);
                     }
+                    else
+                    {
+                        await RecycleItemsTask.Execute(session, cancellationToken);
 
-                    if (session.LogicSettings.UseLuckyEggConstantly)
-                        await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                        if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
+                            session.LogicSettings.EvolveAllPokemonAboveIv ||
+                            session.LogicSettings.UseLuckyEggsWhileEvolving ||
+                            session.LogicSettings.KeepPokemonsThatCanEvolve)
+                            await EvolvePokemonTask.Execute(session, cancellationToken);
+                        if (session.LogicSettings.UseLuckyEggConstantly)
+                            await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                        if (session.LogicSettings.UseIncenseConstantly)
+                            await UseIncenseConstantlyTask.Execute(session, cancellationToken);
+                        if (session.LogicSettings.TransferDuplicatePokemon)
+                            await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                        if (session.LogicSettings.TransferWeakPokemon)
+                            await TransferWeakPokemonTask.Execute(session, cancellationToken);
+                        if (session.LogicSettings.RenamePokemon)
+                            await RenamePokemonTask.Execute(session, cancellationToken);
+                        if (session.LogicSettings.AutoFavoritePokemon)
+                            await FavoritePokemonTask.Execute(session, cancellationToken);
+                        if (session.LogicSettings.AutomaticallyLevelUpPokemon)
+                            await LevelUpPokemonTask.Execute(session, cancellationToken);
 
-                    if (session.LogicSettings.UseIncenseConstantly)
-                        await UseIncenseConstantlyTask.Execute(session, cancellationToken);
-
-                    if (session.LogicSettings.TransferDuplicatePokemon)
-                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
-
-                    if (session.LogicSettings.TransferWeakPokemon)
-                        await TransferWeakPokemonTask.Execute(session, cancellationToken);
-
-                    if (session.LogicSettings.RenamePokemon)
-                        await RenamePokemonTask.Execute(session, cancellationToken);
-
-                    if (session.LogicSettings.AutoFavoritePokemon)
-                        await FavoritePokemonTask.Execute(session, cancellationToken);
-
-                    if (session.LogicSettings.AutomaticallyLevelUpPokemon)
-                        await LevelUpPokemonTask.Execute(session, cancellationToken);
-
-                    await GetPokeDexCount.Execute(session, cancellationToken);
+                        await GetPokeDexCount.Execute(session, cancellationToken);
+                    }
                 }
 
                 if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
@@ -196,7 +194,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     BaseWalkStrategy.FortInfo = fortInfo;
 
                 await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude,
-                    LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
+                    LocationUtils.getElevation(session, pokeStop.Latitude, pokeStop.Longitude)),
                 async () =>
                 {
                     // Catch normal map Pokemon
@@ -284,6 +282,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded),
                         Latitude = pokeStop.Latitude,
                         Longitude = pokeStop.Longitude,
+                        Altitude = session.Client.CurrentAltitude,
                         InventoryFull = fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull
                     });
 

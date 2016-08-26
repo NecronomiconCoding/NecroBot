@@ -255,7 +255,7 @@ namespace PoGo.NecroBot.CLI
 
             ProgressBar.fill(100);
 
-            machine.AsyncStart(new VersionCheckState(), session);
+            machine.AsyncStart(new VersionCheckState(), session, subPath);
 
             try
             { Console.Clear(); }

@@ -98,7 +98,7 @@ namespace PoGo.NecroBot.CLI
                 : fortUsedEvent.Items;
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortUsed, fortUsedEvent.Name, fortUsedEvent.Exp, fortUsedEvent.Gems,
-                    itemString, fortUsedEvent.Latitude, fortUsedEvent.Longitude),
+                    itemString, fortUsedEvent.Latitude, fortUsedEvent.Longitude, fortUsedEvent.Altitude),
                 LogLevel.Pokestop);
         }
 
