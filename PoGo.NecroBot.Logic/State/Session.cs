@@ -6,6 +6,7 @@ using PoGo.NecroBot.Logic.Interfaces.Configuration;
 using PoGo.NecroBot.Logic.Service;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
+using PoGo.NecroBot.Logic.Service.Elevation;
 
 #endregion
 
@@ -23,6 +24,7 @@ namespace PoGo.NecroBot.Logic.State
         IEventDispatcher EventDispatcher { get; }
         TelegramService Telegram { get; set; }
         SessionStats Stats { get; }
+        ElevationService ElevationService { get; }
     }
 
 
@@ -34,9 +36,16 @@ namespace PoGo.NecroBot.Logic.State
 
         public Session(ISettings settings, ILogicSettings logicSettings, ITranslation translation)
         {
-            Settings = settings;
-            LogicSettings = logicSettings;
             EventDispatcher = new EventDispatcher();
+            LogicSettings = logicSettings;
+
+            ElevationService = new ElevationService(this);
+
+            // Update current altitude before assigning settings.
+            settings.DefaultAltitude = ElevationService.GetElevation(settings.DefaultLatitude, settings.DefaultLongitude);
+            
+            Settings = settings;
+            
             Translation = translation;
             Reset(settings, LogicSettings);
             Stats = new SessionStats();
@@ -60,6 +69,8 @@ namespace PoGo.NecroBot.Logic.State
         public TelegramService Telegram { get; set; }
         
         public SessionStats Stats { get; set; }
+
+        public ElevationService ElevationService { get; }
 
         public void Reset(ISettings settings, ILogicSettings logicSettings)
         {

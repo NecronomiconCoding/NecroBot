@@ -1,14 +1,13 @@
+  <a href="https://discord.gg/VXKxNFr">
+    <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
+  </a>
+
 [![Discord](https://discordapp.com/api/guilds/209253611031625728/widget.png)](https://discord.gg/VXKxNFr)
 [![Stories in Ready](https://badge.waffle.io/NoxxDev/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NoxxDev/NecroBot)
 [![Github All Releases](https://img.shields.io/github/downloads/NoxxDev/NecroBot/total.svg)](https://github.com/NoxxDev/NecroBot/releases)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NoxxDev/NecroBot/master/LICENSE.md)
 [![Twitter Follow](https://img.shields.io/twitter/follow/NoxxDev.svg?style=social&label=Follow&maxAge=1)](https://twitter.com/NoxxDev)
 
-<p align="center">
-  <a href="https://discord.gg/VXKxNFr">
-    <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
-  </a>
-</p>
 ## This repository is a fork updated of [NecroBot](https://github.com/NECROBOTIO/NecroBot)
 
 <h2><a name="getting-started">Getting Started</a></h2>
@@ -43,8 +42,8 @@ Make sure you check out our [Wiki](https://github.com/NoxxDev/NecroBot/wiki) to 
  - [Snipe pokemon]
   - [Manual Locations](https://github.com/NoxxDev/NecroBot/wiki/Manual-Locations-Sniping-Guide)
   - [Automatic Locations](https://github.com/NoxxDev/NecroBot/wiki/Automatic-Locations-Sniping-Guide)
-  - [HumanWalk Snipping](https://github.com/NoxxDev/NecroBot/wiki/Human-walk-snipe-config)
-  - [MSniper Snipping](https://github.com/NoxxDev/NecroBot/wiki/MSniper-Manual-Snipping-Guide)
+  - [HumanWalk Sniping](https://github.com/NoxxDev/NecroBot/wiki/Human-walk-snipe-config)
+  - [MSniper Sniping](https://github.com/NoxxDev/NecroBot/wiki/MSniper-Manual-Sniping-Guide)
  - [Power-Up pokemon]
  - [Telegram Remote Control Support]
 
@@ -60,7 +59,7 @@ AeonLucid - [POGOProtos](https://github.com/AeonLucid/POGOProtos)
 
 NECROBOTIO - [NecroBot](https://github.com/NECROBOTIO/NecroBot)
 
-Msx752 - [MSniper](https://github.com/msx752/MSniper)
+Msx752 - [MSniper](https://msx752.github.io/MSniper/)
 
 <br/>
 Thanks to everyone who volunteered by contributing via Pull Requests!
@@ -68,6 +67,6 @@ Thanks to everyone who volunteered by contributing via Pull Requests!
 <h2><a name="legal">Legal</a></h2>
 
 This Website and Project is in no way affiliated with, authorized, maintained, sponsored or endorsed by Niantic, The Pokémon Company, Nintendo or any of its affiliates or subsidiaries. This is an independent and unofficial API for educational use ONLY. 
-Using the Project might be against the TOS
+Using the Project might be against the TOS.
 
 <hr/>
