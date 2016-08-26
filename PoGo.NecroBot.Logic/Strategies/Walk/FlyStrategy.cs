@@ -35,10 +35,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
                 var waypoint = LocationUtils.CreateWaypoint(curLocation, nextWaypointDistance, nextWaypointBearing);
                 var sentTime = DateTime.Now;
 
-                var result =
-                    await
-                        _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                            waypoint.Altitude);
+                var result = await LocationUtils.UpdatePlayerLocationWithAltitude(session, waypoint);
                 UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
                 do
@@ -61,11 +58,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
                     nextWaypointBearing = LocationUtils.DegreeBearing(curLocation, targetLocation);
                     waypoint = LocationUtils.CreateWaypoint(curLocation, nextWaypointDistance, nextWaypointBearing);
                     sentTime = DateTime.Now;
-                    result =
-                        await
-                            _client.Player.UpdatePlayerLocation(waypoint.Latitude, waypoint.Longitude,
-                                waypoint.Altitude);
-
+                    result = await LocationUtils.UpdatePlayerLocationWithAltitude(session, waypoint);
                     UpdatePositionEvent?.Invoke(waypoint.Latitude, waypoint.Longitude);
 
 
@@ -76,10 +69,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             }
             else
             {
-                var result =
-                    await
-                        _client.Player.UpdatePlayerLocation(targetLocation.Latitude, targetLocation.Longitude,
-                            LocationUtils.getElevation(targetLocation.Latitude, targetLocation.Longitude));
+                var result = await LocationUtils.UpdatePlayerLocationWithAltitude(session, targetLocation);
                 UpdatePositionEvent?.Invoke(targetLocation.Latitude, targetLocation.Longitude);
                 if (functionExecutedWhileWalking != null)
                     await functionExecutedWhileWalking(); // look for pokemon

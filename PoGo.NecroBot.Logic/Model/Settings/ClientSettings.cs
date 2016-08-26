@@ -202,9 +202,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             get
             {
                 return
-                    LocationUtils.getElevation(_settings.LocationConfig.DefaultLatitude, _settings.LocationConfig.DefaultLongitude) +
+                    LocationUtils.getElevation(null, _settings.LocationConfig.DefaultLatitude, _settings.LocationConfig.DefaultLongitude) +
                     _rand.NextDouble() *
-                    ((double)5 / Math.Cos(LocationUtils.getElevation(_settings.LocationConfig.DefaultLatitude, _settings.LocationConfig.DefaultLongitude)));
+                    ((double)5 / Math.Cos(LocationUtils.getElevation(null, _settings.LocationConfig.DefaultLatitude, _settings.LocationConfig.DefaultLongitude)));
             }
 
 
