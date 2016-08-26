@@ -60,7 +60,7 @@ AeonLucid - [POGOProtos](https://github.com/AeonLucid/POGOProtos)
 
 NECROBOTIO - [NecroBot](https://github.com/NECROBOTIO/NecroBot)
 
-Msx752 - [MSniper](https://github.com/msx752/MSniper)
+Msx752 - [MSniper](https://msx752.github.io/MSniper/)
 
 <br/>
 Thanks to everyone who volunteered by contributing via Pull Requests!
