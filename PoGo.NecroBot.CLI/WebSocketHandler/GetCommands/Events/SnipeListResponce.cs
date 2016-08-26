@@ -4,7 +4,7 @@
     {
         public SnipeListResponce(dynamic data,string requestID)
         {
-            Command = "PokemonSnipeList";
+            Command = "HumanWalkSnipEvent";
             Data = data;
             RequestID = requestID;
         }

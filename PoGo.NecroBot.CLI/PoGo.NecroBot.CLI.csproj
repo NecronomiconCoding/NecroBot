@@ -265,12 +265,12 @@
     <Compile Include="WebSocketHandler\GetCommands\Events\ItemListResponce.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Events\TrainerProfileResponce.cs" />
     <Compile Include="WebSocketHandler\GetCommands\GetEggListHandler.cs" />
-    <Compile Include="WebSocketHandler\GetCommands\GetSnipeQueueHandler.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\GetPokemonSnipeListHandler.cs" />
     <Compile Include="WebSocketHandler\GetCommands\GetItemsListHandler.cs" />
     <Compile Include="WebSocketHandler\GetCommands\GetPokemonSettingsHandler.cs" />
     <Compile Include="WebSocketHandler\GetCommands\GetTrainerProfileHandler.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Helpers\TrainerProfileWeb.cs" />
-    <Compile Include="WebSocketHandler\GetCommands\Tasks\GetSnipeQueueTask.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Tasks\GetPokemonSnipeListTask.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Tasks\GetPokemonSettingsTask.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Tasks\GetTrainerProfileTask.cs" />
     <Compile Include="WebSocketHandler\ActionCommands\EvolvePokemonHandler.cs" />
