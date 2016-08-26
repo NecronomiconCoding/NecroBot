@@ -78,12 +78,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
 
                 // randomize next pokestop between first and second by distance
-                var pokestopListNum = 0;
-                if (pokestopList.Count > 1)
-                    pokestopListNum = rc.Next(0, 2);
+                //var pokestopListNum = 0;
+                //if (pokestopList.Count > 1)
+                //    pokestopListNum = rc.Next(0, 2);
 
-                var pokeStop = pokestopList[pokestopListNum];
-                pokestopList.RemoveAt(pokestopListNum);
+                //var pokeStop = pokestopList[pokestopListNum];
+                //pokestopList.RemoveAt(pokestopListNum);
+
+                var pokeStop = pokestopList[0];
+                pokestopList.RemoveAt(0);
 
                 // this logic should only be called when we reach a pokestop either via GPX path or normal walking
                 // as when walk-sniping, we want to get to the snipe ASAP rather than stop for lured pokemon upon
@@ -183,18 +186,19 @@ namespace PoGo.NecroBot.Logic.Tasks
                             var reachablePokestops = allPokestops.Where(i =>
                                 LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                                     session.Client.CurrentLongitude, i.Latitude, i.Longitude) < 40).ToList();
-                            reachablePokestops = reachablePokestops.OrderBy(i => LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                            reachablePokestops = reachablePokestops.OrderBy(i => 
+                            LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                                 session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
                             foreach (var ps in reachablePokestops)
-                            {
-                                if (!session.LogicSettings.UseGpxPathing || pokestopList.Contains(ps))
                                 {
-                                    pokestopList.Remove(ps);
-                                }
+                                    if (!session.LogicSettings.UseGpxPathing || pokestopList.Contains(ps))
+                                    {
+                                        pokestopList.Remove(ps);
+                                    }
 
-                                var fi = await session.Client.Fort.GetFort(ps.Id, ps.Latitude, ps.Longitude);
-                                await FarmPokestop(session, ps, fi, cancellationToken);
-                            }
+                                    var fi = await session.Client.Fort.GetFort(ps.Id, ps.Latitude, ps.Longitude);
+                                    await FarmPokestop(session, ps, fi, cancellationToken);
+                                }
                         },
                         async () =>
                         {
