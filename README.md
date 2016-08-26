@@ -8,11 +8,6 @@
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NoxxDev/NecroBot/master/LICENSE.md)
 [![Twitter Follow](https://img.shields.io/twitter/follow/NoxxDev.svg?style=social&label=Follow&maxAge=1)](https://twitter.com/NoxxDev)
 
-<p align="center">
-  <a href="https://discord.gg/VXKxNFr">
-    <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
-  </a>
-</p>
 ## This repository is a fork updated of [NecroBot](https://github.com/NECROBOTIO/NecroBot)
 
 <h2><a name="getting-started">Getting Started</a></h2>
