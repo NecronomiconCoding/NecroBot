@@ -26,7 +26,9 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static Random rc; //initialize pokestop random cleanup counter first time
         private static int storeRI;
         private static int RandomNumber;
-
+        public static Boolean SetDestinationEnabled { get; set; } = false;
+        public static double lat { get; set; }
+        public static double lng { get; set; }
         internal static void Initialize()
         {
             stopsHit = 0;
@@ -57,11 +59,11 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             return false;
         }
-
+        private static int refcount = 0;
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
+            refcount++;
             cancellationToken.ThrowIfCancellationRequested();
-
             var pokestopList = await GetPokeStops(session);
 
             while (pokestopList.Any())
@@ -82,8 +84,19 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 var pokeStop = pokestopList[pokestopListNum];
                 pokestopList.RemoveAt(pokestopListNum);
+                if (SetDestinationEnabled && refcount == 1)
+                {
 
-                await FortPokestop(session, cancellationToken, pokeStop);
+                    SetDestinationEnabled = false;
+
+                    await FortPokestop(session, cancellationToken, pokeStop, true);
+                    break;
+                }
+                else
+                {
+                    await FortPokestop(session, cancellationToken, pokeStop);
+                }
+                
 
                 if (++stopsHit >= storeRI) //TODO: OR item/pokemon bag is full //check stopsHit against storeRI random without dividing.
                 {
@@ -142,6 +155,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             .ToList();
                     foreach (var ps in reachablePokestops)
                     {
+                        if (SetDestinationEnabled) break;
                         pokestopList.Remove(ps);
                         await FortPokestop(session, cancellationToken, ps);
                     }
@@ -170,22 +184,29 @@ namespace PoGo.NecroBot.Logic.Tasks
                      }
                  });
                 }
-
+                if (SetDestinationEnabled) break;
             }
+            refcount--;
         }
-
-        private static async Task FortPokestop(ISession session, CancellationToken cancellationToken, FortData pokeStop)
+        private static async Task FortPokestop(ISession session, CancellationToken cancellationToken, FortData pokeStop, Boolean fakePosioion = false )
         {
+            
             var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
-
+            if(fakePosioion)
+            {
+                fortInfo.Name = "User Destination.";
+                fortInfo.Latitude = lat;
+                fortInfo.Longitude = lng;
+            }
             // we only move to the PokeStop, and send the associated FortTargetEvent, when not using GPX
             // also, GPX pathing uses its own EggWalker and calls the CatchPokemon tasks internally.
             if (!session.LogicSettings.UseGpxPathing)
             {
                 var eggWalker = new EggWalker(1000, session);
 
+
                 var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
-                    session.Client.CurrentLongitude, pokeStop.Latitude, pokeStop.Longitude);
+                    session.Client.CurrentLongitude, fortInfo.Latitude, fortInfo.Longitude);
                 cancellationToken.ThrowIfCancellationRequested();
 
                 if (!session.LogicSettings.UseGoogleWalk && !session.LogicSettings.UseYoursWalk)
@@ -193,8 +214,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 else
                     BaseWalkStrategy.FortInfo = fortInfo;
 
-                await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude,
-                    LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
+                await session.Navigation.Move(new GeoCoordinate(fortInfo.Latitude, fortInfo.Longitude,
+                    LocationUtils.getElevation(fortInfo.Latitude, fortInfo.Longitude)),
                 async () =>
                 {
                     // Catch normal map Pokemon
@@ -208,6 +229,24 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 // we have moved this distance, so apply it immediately to the egg walker.
                 await eggWalker.ApplyDistance(distance, cancellationToken);
+            }
+
+
+
+            if (fakePosioion)
+            {
+                session.EventDispatcher.Send(new FortUsedEvent
+                {
+                    Id = "",
+                    Name = fortInfo.Name,
+                    Exp = 0,
+                    Gems = 0,
+                    Items = "",
+                    Latitude = fortInfo.Latitude,
+                    Longitude = fortInfo.Longitude,
+                    InventoryFull = false
+                });
+                return;
             }
 
             //Catch Lure Pokemon
@@ -304,7 +343,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Thread.Sleep(RandomWaitTime);
                 }
             }
-
         }
 
         //Please do not change GetPokeStops() in this file, it's specifically set
