@@ -132,7 +132,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             var generator = new JSchemaGenerator
             {
                 // change contract resolver so property names are camel case
-                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                //ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 // types with no defined ID have their type name as the ID
                 SchemaIdGenerationHandling = SchemaIdGenerationHandling.TypeName,
                 // use the default order of properties.
