@@ -7,19 +7,26 @@ using System.Reflection;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Serialization;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.Utils;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
+    [JsonObject(MemberSerialization.OptOut)]
     public class AuthSettings
     {
         [JsonIgnore]
         private string _filePath;
 
+        [JsonProperty("AuthConfig", Required = Required.Always)]
         public AuthConfig AuthConfig = new AuthConfig();
+        [JsonProperty("ProxyConfig", Required = Required.Always)]
         public ProxyConfig ProxyConfig = new ProxyConfig();
+        [JsonProperty("DeviceConfig", Required = Required.Always)]
         public DeviceConfig DeviceConfig = new DeviceConfig();
 
         public AuthSettings()
@@ -120,6 +127,30 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             }
 
             File.WriteAllText(fullPath, output);
+
+            // JSON Schemas from .NET types
+            var generator = new JSchemaGenerator
+            {
+                // change contract resolver so property names are camel case
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                // types with no defined ID have their type name as the ID
+                SchemaIdGenerationHandling = SchemaIdGenerationHandling.TypeName,
+                // use the default order of properties.
+                SchemaPropertyOrderHandling = SchemaPropertyOrderHandling.Default,
+                // referenced schemas are inline.
+                SchemaLocationHandling = SchemaLocationHandling.Inline,
+                // all schemas can be referenced.    
+                SchemaReferenceHandling = SchemaReferenceHandling.All
+            };
+            // change Zone enum to generate a string property
+            var strEnumGen = new StringEnumGenerationProvider {CamelCaseText = true};
+            generator.GenerationProviders.Add(strEnumGen);
+            // generate json schema 
+            var type = typeof(AuthSettings);
+            var schema = generator.Generate(type);
+            schema.Title = type.Name;
+            // save to file
+            File.WriteAllText(fullPath.Replace(".json", ".schema.json"), schema.ToString());
         }
 
         public void Save()
