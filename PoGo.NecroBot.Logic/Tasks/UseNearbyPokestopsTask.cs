@@ -194,7 +194,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     BaseWalkStrategy.FortInfo = fortInfo;
 
                 await session.Navigation.Move(new GeoCoordinate(pokeStop.Latitude, pokeStop.Longitude,
-                    LocationUtils.getElevation(pokeStop.Latitude, pokeStop.Longitude)),
+                    LocationUtils.getElevation(session, pokeStop.Latitude, pokeStop.Longitude)),
                 async () =>
                 {
                     // Catch normal map Pokemon
@@ -282,6 +282,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Items = StringUtils.GetSummedFriendlyNameOfItemAwardList(fortSearch.ItemsAwarded),
                         Latitude = pokeStop.Latitude,
                         Longitude = pokeStop.Longitude,
+                        Altitude = session.Client.CurrentAltitude,
                         InventoryFull = fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull
                     });
 
