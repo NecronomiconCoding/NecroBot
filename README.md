@@ -1,13 +1,13 @@
-  <a href="https://discord.gg/VXKxNFr">
-    <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
-  </a>
 
 [![Discord](https://discordapp.com/api/guilds/209253611031625728/widget.png)](https://discord.gg/VXKxNFr)
 [![Stories in Ready](https://badge.waffle.io/NoxxDev/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NoxxDev/NecroBot)
 [![Github All Releases](https://img.shields.io/github/downloads/NoxxDev/NecroBot/total.svg)](https://github.com/NoxxDev/NecroBot/releases)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NoxxDev/NecroBot/master/LICENSE.md)
 [![Twitter Follow](https://img.shields.io/twitter/follow/NoxxDev.svg?style=social&label=Follow&maxAge=1)](https://twitter.com/NoxxDev)
-
+  <a href="https://discord.gg/VXKxNFr">
+    <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
+  </a>
+  
 ## This repository is a fork updated of [NecroBot](https://github.com/NECROBOTIO/NecroBot)
 
 <h2><a name="getting-started">Getting Started</a></h2>
@@ -19,6 +19,7 @@ Make sure you check out our [Wiki](https://github.com/NoxxDev/NecroBot/wiki) to 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=J2XY5Y5FKGTSE)<br/>
 
 <h6><em>[A big part of the Donations goes to the top 3 active Contributors. Other expenses as Server costs will be covered using the Donations.]</em></h6><br/>
+![Display](necrobot1.gif)
 
 <h2><a name="features">Features</a></h2>
 
