@@ -26,12 +26,12 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool UseProxyAuthentication;
 
         [DefaultValue(null)]
-        [RegularExpression(@"^.{1,32}$")]
+        [RegularExpression(@"^.{0,32}$")]
         [JsonProperty("UseProxyUsername", Required = Required.AllowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
         public string UseProxyUsername;
 
         [DefaultValue(null)]
-        [RegularExpression(@"^.{1,32}$")]
+        [RegularExpression(@"^.{0,32}$")]
         [JsonProperty("UseProxyPassword", Required = Required.AllowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
         public string UseProxyPassword;
     }

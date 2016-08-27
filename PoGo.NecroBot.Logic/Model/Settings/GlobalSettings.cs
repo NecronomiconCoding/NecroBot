@@ -7,6 +7,8 @@ using System.Reflection;
 using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Serialization;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
@@ -27,20 +29,24 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonIgnore]
         public string ProfilePath;
 
+        [JsonProperty("ConsoleConfig", Required = Required.Always)]
         public ConsoleConfig ConsoleConfig = new ConsoleConfig();
         public UpdateConfig UpdateConfig = new UpdateConfig();
         public WebsocketsConfig WebsocketsConfig = new WebsocketsConfig();
         public LocationConfig LocationConfig = new LocationConfig();
         public TelegramConfig TelegramConfig = new TelegramConfig();
+        [JsonProperty("GPXConfig", Required = Required.Always)]
         public GpxConfig GPXConfig = new GpxConfig();
         public SnipeConfig SnipeConfig = new SnipeConfig();
         public HumanWalkSnipeConfig HumanWalkSnipeConfig = new HumanWalkSnipeConfig();
         public PokeStopConfig PokeStopConfig = new PokeStopConfig();
         public PokemonConfig PokemonConfig = new PokemonConfig();
         public RecycleConfig RecycleConfig = new RecycleConfig();
+        [JsonProperty("CustomCatchConfig", Required = Required.Always)]
         public CustomCatchConfig CustomCatchConfig = new CustomCatchConfig();
         public PlayerConfig PlayerConfig = new PlayerConfig();
         public SoftBanConfig SoftBanConfig = new SoftBanConfig();
+        [JsonProperty("GoogleWalkConfig", Required = Required.Always)]
         public GoogleWalkConfig GoogleWalkConfig = new GoogleWalkConfig();
         public YoursWalkConfig YoursWalkConfig = new YoursWalkConfig();
 
@@ -625,6 +631,30 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             }
 
             File.WriteAllText(fullPath, output);
+
+            // JSON Schemas from .NET types
+            var generator = new JSchemaGenerator
+            {
+                // change contract resolver so property names are camel case
+                //ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                // types with no defined ID have their type name as the ID
+                SchemaIdGenerationHandling = SchemaIdGenerationHandling.TypeName,
+                // use the default order of properties.
+                SchemaPropertyOrderHandling = SchemaPropertyOrderHandling.Default,
+                // referenced schemas are inline.
+                SchemaLocationHandling = SchemaLocationHandling.Inline,
+                // all schemas can be referenced.    
+                SchemaReferenceHandling = SchemaReferenceHandling.None
+            };
+            // change Zone enum to generate a string property
+            var strEnumGen = new StringEnumGenerationProvider { CamelCaseText = true };
+            generator.GenerationProviders.Add(strEnumGen);
+            // generate json schema 
+            var type = typeof(GlobalSettings);
+            var schema = generator.Generate(type);
+            schema.Title = type.Name;
+            // save to file
+            File.WriteAllText(fullPath.Replace(".json", ".schema.json"), schema.ToString());
         }
     }
 }
