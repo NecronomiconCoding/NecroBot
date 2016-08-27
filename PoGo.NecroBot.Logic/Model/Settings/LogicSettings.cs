@@ -68,6 +68,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool TransferDuplicatePokemon => _settings.PokemonConfig.TransferDuplicatePokemon;
         public bool TransferDuplicatePokemonOnCapture => _settings.PokemonConfig.TransferDuplicatePokemonOnCapture;
         public bool UseEggIncubators => _settings.PokemonConfig.UseEggIncubators;
+        public bool UseLimitedEggIncubators => _settings.PokemonConfig.UseLimitedEggIncubators;
         public int UseGreatBallAboveCp => _settings.PokemonConfig.UseGreatBallAboveCp;
         public int UseUltraBallAboveCp => _settings.PokemonConfig.UseUltraBallAboveCp;
         public int UseMasterBallAboveCp => _settings.PokemonConfig.UseMasterBallAboveCp;
