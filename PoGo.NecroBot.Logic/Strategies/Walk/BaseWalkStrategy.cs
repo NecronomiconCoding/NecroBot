@@ -116,7 +116,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
                 result = await LocationUtils.UpdatePlayerLocationWithAltitude(session, waypoint);
 
                 var realDistanceToTarget = LocationUtils.CalculateDistanceInMeters(currentLocation, targetLocation);
-                if (realDistanceToTarget < 10)
+                if (realDistanceToTarget < 30)
                     break;
 
                 do
