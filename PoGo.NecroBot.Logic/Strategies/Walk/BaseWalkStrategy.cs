@@ -25,7 +25,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
         protected IWalkStrategy _fallbackStrategy;
 
         public event UpdatePositionDelegate UpdatePositionEvent;
-        public abstract Task<PlayerUpdateResponse> Walk(GeoCoordinate targetLocation, Func<Task<bool>> functionExecutedWhileWalking, ISession session, CancellationToken cancellationToken);
+        public abstract Task<PlayerUpdateResponse> Walk(GeoCoordinate targetLocation, Func<Task<bool>> functionExecutedWhileWalking, ISession session, CancellationToken cancellationToken, double walkSpeed =0.0);
 
         public static FortDetailsResponse FortInfo;
 

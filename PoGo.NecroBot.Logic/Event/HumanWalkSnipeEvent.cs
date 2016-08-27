@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using PoGo.NecroBot.Logic.Model;
 using PoGo.NecroBot.Logic.Model.Settings;
+using PoGo.NecroBot.Logic.Tasks;
 using POGOProtos.Enums;
 using POGOProtos.Map.Fort;
 using Location = PoGo.NecroBot.Logic.Model.Settings.Location;
@@ -18,7 +19,11 @@ namespace PoGo.NecroBot.Logic.Event
         PokemonScanned,
         AddedSnipePokemon,
         PokestopUpdated,
-        NotEnoughtPalls
+        NotEnoughtPalls,
+        TargetedPokemon,
+        ClientRequestUpdate,
+        EncounterSnipePokemon,
+        QueueUpdated
     }
     public class HumanWalkSnipeEvent : IEvent
     {
@@ -33,7 +38,6 @@ namespace PoGo.NecroBot.Logic.Event
         public HumanWalkSnipeEventTypes Type { get; set; }
         public double Expires { get; internal set; }
         public int Estimate { get; internal set; }
-        public List<string> RarePokemons { get; internal set; }
         public HumanWalkSnipeFilter Setting { get; internal set; }
         public bool SpinPokeStop { get; set; }
         public bool CatchPokemon { get; set; }
@@ -41,5 +45,8 @@ namespace PoGo.NecroBot.Logic.Event
         public List<FortData> Pokestops { get; internal set; }
         public int CurrentBalls { get; internal set; }
         public int MinBallsToSnipe { get; internal set; }
+        public object WalkSpeedApplied { get; internal set; }
+        public List<HumanWalkSnipeTask.RarePokemonInfo> Pokemons { get; internal set; }
+        public string UniqueId { get; internal set; }
     }
 }
