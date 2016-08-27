@@ -182,7 +182,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                             //idea of this function is to spin pokestop on way. maybe risky.
                             var reachablePokestops = allPokestops.Where(i =>
                                 LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
-                                    session.Client.CurrentLongitude, i.Latitude, i.Longitude) < 40).ToList();
+                                    session.Client.CurrentLongitude, i.Latitude, i.Longitude) < 40
+                                    && i.CooldownCompleteTimestampMs == 0
+                                    ).ToList();
                             reachablePokestops = reachablePokestops.OrderBy(i =>
                             LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                                 session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
@@ -194,7 +196,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     }
 
                                     var fi = await session.Client.Fort.GetFort(ps.Id, ps.Latitude, ps.Longitude);
-                                    await FarmPokestop(session, ps, fi, cancellationToken);
+                                    await FarmPokestop(session, ps, fi, cancellationToken, true);
                                 }
                         },
                         async () =>
@@ -249,7 +251,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-        private static async Task FarmPokestop(ISession session, FortData pokeStop, FortDetailsResponse fortInfo, CancellationToken cancellationToken)
+        private static async Task FarmPokestop(ISession session, FortData pokeStop, FortDetailsResponse fortInfo, CancellationToken cancellationToken, bool doNotRetry = false)
         {
             FortSearchResponse fortSearch;
             var timesZeroXPawarded = 0;
@@ -288,7 +290,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Max = retryNumber - zeroCheck,
                             Looted = false
                         });
-
+                        if(doNotRetry)
+                        {
+                            break;
+                        }
                         if (!session.LogicSettings.FastSoftBanBypass)
                         {
                             DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
