@@ -111,7 +111,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         //Catch Incense Pokemon
                         await CatchIncensePokemonsTask.Execute(session, cancellationToken);
                         // Minor fix google route ignore pokestop
-                        await Lookokestops(session, pokeStop, cancellationToken);
+                        await LookPokestops(session, pokeStop, cancellationToken);
                         return true;
                     },
                     session,
@@ -200,7 +200,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-        private static async Task Lookokestops(ISession session, FortData currentPokestop, CancellationToken cancellationToken)
+        private static async Task LookPokestops(ISession session, FortData currentPokestop, CancellationToken cancellationToken)
         {
             if (!session.LogicSettings.UseGoogleWalk && !session.LogicSettings.UseYoursWalk)
                 return;
