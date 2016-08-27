@@ -32,6 +32,8 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             public double distance;
             public double estimateTime;
+            public bool catching;
+
             public double created { get; set; }
             public double latitude { get; set; }
             public double longitude { get; set; }
@@ -155,7 +157,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     bool catchPokemon = (pokemon.estimateTime + catchPokemonTimeEST) < remainTimes && pokemon.FilterSetting.CatchPokemonWhileWalking;
                     bool spinPokestop = pokemon.FilterSetting.SpinPokestopWhileWalking && (pokemon.estimateTime + catchPokemonTimeEST + spinPokestopEST) < remainTimes;
-
+                    pokemon.catching = true;
                     session.EventDispatcher.Send(new HumanWalkSnipeEvent()
                     {
                         PokemonId = pokemon.Id,
@@ -166,6 +168,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Estimate = (int)pokemon.estimateTime,
                         Setting = pokemon.FilterSetting,
                         CatchPokemon = catchPokemon,
+                        Pokemons = rarePokemons,
                         SpinPokeStop = pokemon.FilterSetting.SpinPokestopWhileWalking,
                         WalkSpeedApplied = pokemon.FilterSetting.AllowSpeedUp ? pokemon.FilterSetting.MaxSpeedUpSpeed : _session.LogicSettings.WalkingSpeedInKilometerPerHour,
                         Type = HumanWalkSnipeEventTypes.StartWalking
@@ -200,6 +203,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await CatchNearbyPokemonsTask.Execute(session, cancellationToken, pokemon.Id);
                     await CatchIncensePokemonsTask.Execute(session, cancellationToken);
                     pokemon.visited = true;
+                    pokemon.catching = false;
                 }
                 keepWalking = _setting.HumanWalkingSnipeTryCatchEmAll && pokemons.Count > 0;
             }
@@ -499,22 +503,43 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public static void UpdateCatchPokemon(double latitude, double longitude, PokemonId id)
         {
-            var find = rarePokemons.FirstOrDefault(p => Math.Abs(p.latitude - latitude) < 10 &&
-            Math.Abs(p.longitude - longitude) < 10.0 &&
+            var find = rarePokemons.FirstOrDefault(p => Math.Abs(p.latitude - latitude) < 30.0 &&
+            Math.Abs(p.longitude - longitude) < 30.0 &&
             p.Id == id && 
             !p.visited);
             if(find!= null)
             {
+                find.visited = true;
                 _session.EventDispatcher.Send(new HumanWalkSnipeEvent()
                 {
                     UniqueId = find.id,
                     Type = HumanWalkSnipeEventTypes.EncounterSnipePokemon,
                     PokemonId = id,
-                    Latitude = latitude, Longitude = longitude
+                    Latitude = latitude,
+                    Longitude = longitude      ,
+                    Pokemons= rarePokemons
                 });
 
-                find.visited = true;
             }
+        }
+
+        public static Task RemovePokemonFromQueue(ISession session, string id)
+        {
+            return Task.Run(() =>
+            {
+                var ele = rarePokemons.FirstOrDefault(p => p.id == id);
+                if (ele != null)
+                {
+                    ele.visited = true; //set pokemon to visited, then it won't appear on the list
+                    rarePokemons = rarePokemons.OrderBy(p => p.FilterSetting.Priority).ThenBy(p => p.distance).ToList();
+                    _session.EventDispatcher.Send(new HumanWalkSnipeEvent()
+                    {
+                        Type = HumanWalkSnipeEventTypes.QueueUpdated,
+                        Pokemons = rarePokemons,
+                    });
+                }
+            });
+
         }
     }
 

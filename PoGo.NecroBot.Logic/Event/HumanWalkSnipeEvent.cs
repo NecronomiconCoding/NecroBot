@@ -22,7 +22,8 @@ namespace PoGo.NecroBot.Logic.Event
         NotEnoughtPalls,
         TargetedPokemon,
         ClientRequestUpdate,
-        EncounterSnipePokemon
+        EncounterSnipePokemon,
+        QueueUpdated
     }
     public class HumanWalkSnipeEvent : IEvent
     {
