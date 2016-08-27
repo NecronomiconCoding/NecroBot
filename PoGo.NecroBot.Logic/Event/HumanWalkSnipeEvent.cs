@@ -20,7 +20,8 @@ namespace PoGo.NecroBot.Logic.Event
         AddedSnipePokemon,
         PokestopUpdated,
         NotEnoughtPalls,
-        TargetedPokemon
+        TargetedPokemon,
+        ClientRequestUpdate
     }
     public class HumanWalkSnipeEvent : IEvent
     {
