@@ -26,6 +26,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static Random rc; //initialize pokestop random cleanup counter first time
         private static int storeRI;
         private static int RandomNumber;
+        private static List<FortData> pokestopList;
 
         internal static void Initialize()
         {
@@ -34,6 +35,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             rc = new Random();
             storeRI = rc.Next(8, 15);
             RandomNumber = rc.Next(4, 11);
+            pokestopList = new List<FortData>();
         }
 
         private static bool SearchThresholdExceeds(ISession session)
@@ -63,7 +65,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             cancellationToken.ThrowIfCancellationRequested();
 
             var pokestopsTuple = await GetPokeStops(session);
-            var pokestopList = pokestopsTuple.Item2;
+            pokestopList = pokestopsTuple.Item2;
 
             while (pokestopList.Any())
             {
@@ -75,14 +77,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                         i =>
                             LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                                 session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
-
-                // randomize next pokestop between first and second by distance
-                var pokestopListNum = 0;
-                if (pokestopList.Count > 1)
-                    pokestopListNum = rc.Next(0, 2);
-
-                var pokeStop = pokestopList[pokestopListNum];
-                pokestopList.RemoveAt(pokestopListNum);
+                
+                var pokeStop = pokestopList[0];
+                pokestopList.RemoveAt(0);
 
                 // this logic should only be called when we reach a pokestop either via GPX path or normal walking
                 // as when walk-sniping, we want to get to the snipe ASAP rather than stop for lured pokemon upon
@@ -113,6 +110,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
                         //Catch Incense Pokemon
                         await CatchIncensePokemonsTask.Execute(session, cancellationToken);
+                        // Minor fix google route ignore pokestop
+                        await Lookokestops(session, pokeStop, cancellationToken);
                         return true;
                     },
                     session,
@@ -197,6 +196,37 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 });
                             }
                         });
+                }
+            }
+        }
+
+        private static async Task Lookokestops(ISession session, FortData currentPokestop, CancellationToken cancellationToken)
+        {
+            if (!session.LogicSettings.UseGoogleWalk && !session.LogicSettings.UseYoursWalk)
+                return;
+
+            if (pokestopList.Count > 1)
+            {
+                var currentPokestopDistance = LocationUtils.CalculateDistanceInMeters(
+                                session.Client.CurrentLatitude, session.Client.CurrentLongitude,
+                                currentPokestop.Latitude, currentPokestop.Longitude);
+                var _pokeStopList = pokestopList.Where(
+                    i =>
+                        (
+                            LocationUtils.CalculateDistanceInMeters(
+                                session.Client.CurrentLatitude, session.Client.CurrentLongitude,
+                                i.Latitude, i.Longitude) < 40 && currentPokestopDistance >= 40) ||
+                        session.LogicSettings.MaxTravelDistanceInMeters == 0
+                ).ToList();
+
+                if (_pokeStopList.Count >= 1)
+                {
+                    foreach (var pokeStop in _pokeStopList)
+                    {
+                        var fortInfo = await session.Client.Fort.GetFort(pokeStop.Id, pokeStop.Latitude, pokeStop.Longitude);
+                        await FortAction(session, pokeStop, fortInfo, cancellationToken);
+                        pokestopList.Remove(pokeStop);
+                    }
                 }
             }
         }
