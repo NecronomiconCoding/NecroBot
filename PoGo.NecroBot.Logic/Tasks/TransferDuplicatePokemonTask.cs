@@ -48,6 +48,12 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 family.Candy_++;
 
+                // Padding the TransferEvent with player-choosen delay before instead of after.
+                // This is to remedy too quick transfers, often happening within a second of the
+                // previous action otherwise
+
+                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+
                 session.EventDispatcher.Send(new TransferPokemonEvent
                 {
                     Id = duplicatePokemon.PokemonId,
@@ -58,7 +64,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     FamilyCandies = family.Candy_
                 });
 
-                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
             }
         }
     }

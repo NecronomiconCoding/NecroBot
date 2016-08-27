@@ -78,15 +78,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
 
                 // randomize next pokestop between first and second by distance
-                //var pokestopListNum = 0;
-                //if (pokestopList.Count > 1)
-                //    pokestopListNum = rc.Next(0, 2);
+                var pokestopListNum = 0;
+                if (pokestopList.Count > 1)
+                    pokestopListNum = rc.Next(0, 2);
 
-                //var pokeStop = pokestopList[pokestopListNum];
-                //pokestopList.RemoveAt(pokestopListNum);
-
-                var pokeStop = pokestopList[0];
-                pokestopList.RemoveAt(0);
+                var pokeStop = pokestopList[pokestopListNum];
+                pokestopList.RemoveAt(pokestopListNum);
 
                 // this logic should only be called when we reach a pokestop either via GPX path or normal walking
                 // as when walk-sniping, we want to get to the snipe ASAP rather than stop for lured pokemon upon
