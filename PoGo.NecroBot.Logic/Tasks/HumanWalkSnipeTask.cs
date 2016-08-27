@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
+    //need refactor this class, move list snipping pokemon to session and split function out to smaller class.
     public class HumanWalkSnipeTask
     {
         public class Wrapper
@@ -494,6 +495,26 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
                 prioritySnipeFlag = true;
             });
+        }
+
+        public static void UpdateCatchPokemon(double latitude, double longitude, PokemonId id)
+        {
+            var find = rarePokemons.FirstOrDefault(p => Math.Abs(p.latitude - latitude) < 10 &&
+            Math.Abs(p.longitude - longitude) < 10.0 &&
+            p.Id == id && 
+            !p.visited);
+            if(find!= null)
+            {
+                _session.EventDispatcher.Send(new HumanWalkSnipeEvent()
+                {
+                    UniqueId = find.id,
+                    Type = HumanWalkSnipeEventTypes.EncounterSnipePokemon,
+                    PokemonId = id,
+                    Latitude = latitude, Longitude = longitude
+                });
+
+                find.visited = true;
+            }
         }
     }
 

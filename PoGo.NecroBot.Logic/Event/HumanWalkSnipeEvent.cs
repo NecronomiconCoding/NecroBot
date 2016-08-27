@@ -21,7 +21,8 @@ namespace PoGo.NecroBot.Logic.Event
         PokestopUpdated,
         NotEnoughtPalls,
         TargetedPokemon,
-        ClientRequestUpdate
+        ClientRequestUpdate,
+        EncounterSnipePokemon
     }
     public class HumanWalkSnipeEvent : IEvent
     {
@@ -45,5 +46,6 @@ namespace PoGo.NecroBot.Logic.Event
         public int MinBallsToSnipe { get; internal set; }
         public object WalkSpeedApplied { get; internal set; }
         public List<HumanWalkSnipeTask.RarePokemonInfo> Pokemons { get; internal set; }
+        public string UniqueId { get; internal set; }
     }
 }
