@@ -133,7 +133,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await HumanWalkSnipeTask.Execute(session, cancellationToken,
                         async (double lat, double lng) =>
                         {
-                            foreach (var ps in pokestopList)
+                            var reachablePokestops = pokestopList.Where(i =>
+                            LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                            session.Client.CurrentLongitude, i.Latitude, i.Longitude) < 40).ToList();
+                            reachablePokestops = reachablePokestops.OrderBy(i =>
+                            LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                            session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
+
+                            foreach (var ps in reachablePokestops)
                             {
                                 if (!session.LogicSettings.UseGpxPathing)
                                     pokestopList.Remove(ps);
