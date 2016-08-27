@@ -14,6 +14,7 @@ using PokemonGo.RocketAPI.Extensions;
 using POGOProtos.Map.Fort;
 using POGOProtos.Networking.Responses;
 using PoGo.NecroBot.Logic.Strategies.Walk;
+using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -57,6 +58,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                     return true;
                 }
             }
+
+            Logger.Write($"(POKESTOP LIMIT) {session.Stats.PokeStopTimestamps.Count}/{session.LogicSettings.PokeStopLimit}",
+                LogLevel.Info, ConsoleColor.Yellow);
             return false;
         }
 
