@@ -63,7 +63,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             cancellationToken.ThrowIfCancellationRequested();
 
             var pokestopsTuple = await GetPokeStops(session);
-            var allPokestops = pokestopsTuple.Item1;
             var pokestopList = pokestopsTuple.Item2;
 
             while (pokestopList.Any())
@@ -123,52 +122,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await eggWalker.ApplyDistance(distance, cancellationToken);
                 }
 
-                //Catch Lure Pokemon
-                if (pokeStop.LureInfo != null)
-                {
-                    // added for cooldowns
-                    await Task.Delay(Math.Min(session.LogicSettings.DelayBetweenPlayerActions, 3000));
-                    await CatchLurePokemonsTask.Execute(session, pokeStop, cancellationToken);
-                }
-
-                await FarmPokestop(session, pokeStop, fortInfo, cancellationToken);
-
-                if (++stopsHit >= storeRI) //TODO: OR item/pokemon bag is full //check stopsHit against storeRI random without dividing.
-                {
-                    storeRI = rc.Next(6, 12); //set new storeRI for new random value
-                    stopsHit = 0;
-
-                    if (session.LogicSettings.UseNearActionRandom)
-                    {
-                        await HumanRandomActionTask.Execute(session, cancellationToken);
-                    }
-                    else
-                    {
-                        await RecycleItemsTask.Execute(session, cancellationToken);
-
-                        if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
-                            session.LogicSettings.EvolveAllPokemonAboveIv ||
-                            session.LogicSettings.UseLuckyEggsWhileEvolving ||
-                            session.LogicSettings.KeepPokemonsThatCanEvolve)
-                            await EvolvePokemonTask.Execute(session, cancellationToken);
-                        if (session.LogicSettings.UseLuckyEggConstantly)
-                            await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
-                        if (session.LogicSettings.UseIncenseConstantly)
-                            await UseIncenseConstantlyTask.Execute(session, cancellationToken);
-                        if (session.LogicSettings.TransferDuplicatePokemon)
-                            await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
-                        if (session.LogicSettings.TransferWeakPokemon)
-                            await TransferWeakPokemonTask.Execute(session, cancellationToken);
-                        if (session.LogicSettings.RenamePokemon)
-                            await RenamePokemonTask.Execute(session, cancellationToken);
-                        if (session.LogicSettings.AutoFavoritePokemon)
-                            await FavoritePokemonTask.Execute(session, cancellationToken);
-                        if (session.LogicSettings.AutomaticallyLevelUpPokemon)
-                            await LevelUpPokemonTask.Execute(session, cancellationToken);
-
-                        await GetPokeDexCount.Execute(session, cancellationToken);
-                    }
-                }
+                await FortAction(session, pokeStop, fortInfo, cancellationToken);
 
                 if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
                     await SnipePokemonTask.Execute(session, cancellationToken);
@@ -179,23 +133,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await HumanWalkSnipeTask.Execute(session, cancellationToken,
                         async (double lat, double lng) =>
                         {
-                            //idea of this function is to spin pokestop on way. maybe risky.
-                            var reachablePokestops = allPokestops.Where(i =>
-                                LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
-                                    session.Client.CurrentLongitude, i.Latitude, i.Longitude) < 40).ToList();
-                            reachablePokestops = reachablePokestops.OrderBy(i =>
-                            LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
-                                session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
-                            foreach (var ps in reachablePokestops)
-                                {
-                                    if (!session.LogicSettings.UseGpxPathing || pokestopList.Contains(ps))
-                                    {
-                                        pokestopList.Remove(ps);
-                                    }
+                            foreach (var ps in pokestopList)
+                            {
+                                if (!session.LogicSettings.UseGpxPathing)
+                                    pokestopList.Remove(ps);
 
-                                    var fi = await session.Client.Fort.GetFort(ps.Id, ps.Latitude, ps.Longitude);
-                                    await FarmPokestop(session, ps, fi, cancellationToken);
-                                }
+                                var fi = await session.Client.Fort.GetFort(ps.Id, ps.Latitude, ps.Longitude);
+                                await FortAction(session, ps, fi, cancellationToken);
+                            }
                         },
                         async () =>
                         {
@@ -245,6 +190,56 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 });
                             }
                         });
+                }
+            }
+        }
+
+        private static async Task FortAction(ISession session, FortData pokeStop, FortDetailsResponse fortInfo, CancellationToken cancellationToken)
+        {
+            //Catch Lure Pokemon
+            if (pokeStop.LureInfo != null)
+            {
+                // added for cooldowns
+                await Task.Delay(Math.Min(session.LogicSettings.DelayBetweenPlayerActions, 3000));
+                await CatchLurePokemonsTask.Execute(session, pokeStop, cancellationToken);
+            }
+
+            await FarmPokestop(session, pokeStop, fortInfo, cancellationToken);
+
+            if (++stopsHit >= storeRI) //TODO: OR item/pokemon bag is full //check stopsHit against storeRI random without dividing.
+            {
+                storeRI = rc.Next(6, 12); //set new storeRI for new random value
+                stopsHit = 0;
+
+                if (session.LogicSettings.UseNearActionRandom)
+                {
+                    await HumanRandomActionTask.Execute(session, cancellationToken);
+                }
+                else
+                {
+                    await RecycleItemsTask.Execute(session, cancellationToken);
+
+                    if (session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
+                        session.LogicSettings.EvolveAllPokemonAboveIv ||
+                        session.LogicSettings.UseLuckyEggsWhileEvolving ||
+                        session.LogicSettings.KeepPokemonsThatCanEvolve)
+                        await EvolvePokemonTask.Execute(session, cancellationToken);
+                    if (session.LogicSettings.UseLuckyEggConstantly)
+                        await UseLuckyEggConstantlyTask.Execute(session, cancellationToken);
+                    if (session.LogicSettings.UseIncenseConstantly)
+                        await UseIncenseConstantlyTask.Execute(session, cancellationToken);
+                    if (session.LogicSettings.TransferDuplicatePokemon)
+                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                    if (session.LogicSettings.TransferWeakPokemon)
+                        await TransferWeakPokemonTask.Execute(session, cancellationToken);
+                    if (session.LogicSettings.RenamePokemon)
+                        await RenamePokemonTask.Execute(session, cancellationToken);
+                    if (session.LogicSettings.AutoFavoritePokemon)
+                        await FavoritePokemonTask.Execute(session, cancellationToken);
+                    if (session.LogicSettings.AutomaticallyLevelUpPokemon)
+                        await LevelUpPokemonTask.Execute(session, cancellationToken);
+
+                    await GetPokeDexCount.Execute(session, cancellationToken);
                 }
             }
         }
