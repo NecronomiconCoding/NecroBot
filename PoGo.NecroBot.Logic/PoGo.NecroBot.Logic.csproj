@@ -69,12 +69,12 @@
       <HintPath>$(SolutionDir)\packages\Google.Protobuf.3.0.0-beta4\lib\net45\Google.Protobuf.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>$(SolutionDir)\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="LRUCache, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LRUCache.0.1.0\lib\Net20\LRUCache.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="POGOProtos, Version=1.7.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\POGOProtos.1.7.0\lib\net45\POGOProtos.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="S2Geometry, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -209,7 +209,11 @@
     <Compile Include="PoGoUtils\PokemonInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\BotService.cs" />
+    <Compile Include="Service\Elevation\BaseElevationService.cs" />
+    <Compile Include="Service\Elevation\ElevationService.cs" />
     <Compile Include="Service\GoogleDirectionsService.cs" />
+    <Compile Include="Service\Elevation\GoogleElevationService.cs" />
+    <Compile Include="Service\Elevation\MapQuestElevationService.cs" />
     <Compile Include="Service\TelegramService.cs" />
     <Compile Include="Model\Settings\LogicSettings.cs" />
     <Compile Include="Service\YoursDirectionsService.cs" />
@@ -225,6 +229,7 @@
     <Compile Include="Tasks\EvolveSpecificPokemonTask.cs" />
     <Compile Include="Tasks\FavoritePokemonTask.cs" />
     <Compile Include="Tasks\GetPokeDexCount.cs" />
+    <Compile Include="Tasks\HumanRandomActionTask.cs" />
     <Compile Include="Tasks\HumanWalkSnipeTask.cs" />
     <Compile Include="Tasks\InventoryListTask.cs" />
     <Compile Include="Tasks\LevelUpPokemonTask.cs" />
@@ -291,6 +296,10 @@
     <ProjectReference Include="..\FeroxRev\PokemonGo.RocketAPI\PokemonGo.RocketAPI.csproj">
       <Project>{05d2da44-1b8e-4cf7-94ed-4d52451cd095}</Project>
       <Name>PokemonGo.RocketAPI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\POGOProtos\POGOProtos\POGOProtos.csproj">
+      <Project>{a03a7bb2-4f0b-467b-84b2-9a76e6aae6fb}</Project>
+      <Name>POGOProtos</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

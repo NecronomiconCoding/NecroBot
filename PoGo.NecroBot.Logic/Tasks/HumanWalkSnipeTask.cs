@@ -175,7 +175,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     });
 
                     await session.Navigation.Move(new GeoCoordinate(pokemon.latitude, pokemon.longitude,
-                           LocationUtils.getElevation(pokemon.latitude, pokemon.longitude)),
+                           LocationUtils.getElevation(session, pokemon.latitude, pokemon.longitude)),
                        async () =>
                        {
                            var distance = LocationUtils.CalculateDistanceInMeters(pokemon.latitude, pokemon.longitude, session.Client.CurrentLatitude, session.Client.CurrentLongitude);
@@ -189,7 +189,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                            {
                                await actionWhenWalking(session.Client.CurrentLatitude, session.Client.CurrentLongitude);
                            }
-                           return await Task.FromResult<bool>(true);
+                           return true;
                        },
                        session,
                        cancellationToken, pokemon.FilterSetting.AllowSpeedUp ? pokemon.FilterSetting.MaxSpeedUpSpeed : 0);

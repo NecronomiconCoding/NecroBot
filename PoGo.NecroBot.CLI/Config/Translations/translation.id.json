@@ -2,43 +2,43 @@
   "TranslationStrings": [
     {
       "Key": "HumanWalkSnipeNotEnoughtBalls",
-      "Value": "(HUMAN WALK) Not enought balls to activate catch Em-All mode. ({0})/{1}"
+      "Value": "(Sambil jalan) Jumlah PokeBall untuk mengaktifkan mode 'Sapu-Bersih' tidak cukup: ({0})/{1}"
     },
     {
       "Key": "HumanWalkSnipe",
-      "Value": "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9} | Speed : {10:0.00}km/h"
+      "Value": "(Sambil jalan) {0} terlihat! | Koordinat: {1}, {2}, jarak {3:0.00} m, berakhir dalam {4:00} mnt {5:00} dtk | Waktu tempuh : {6:00} mnt {7:00} dtk | Sambil singgah di PokeStop: {8} | Sambil tangkap Pokemon lain: {9}"
     },
     {
       "Key": "HumanWalkSnipeUpdate",
-      "Value": "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all, but try to catch as many as possible"
+      "Value": "(Sambil jalan) Ada {0} pokemon cocok dengan filtermu. Tidak akan dapat semua, tapi mencoba yang terbaik."
     },
     {
       "Key": "HumanWalkSnipeAddedPokestop",
-      "Value": "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops"
+      "Value": "(Sambil jalan) Kamu {0:0.00} m jauhnya dari PokeStop terdekat. Mulai panen di lokasi ini dengan {1} PokeStop."
     },
     {
       "Key": "HumanWalkSnipeDestinationReached",
-      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"
+      "Value": "(Sambil jalan) Sampai di lokasi | Koordinat: {0}, {1}"
     },
     {
       "Key": "SniperCount",
-      "Value": "Sniper count {0}"
+      "Value": "Jumlah bidikan {0}"
     },
     {
       "Key": "SnipeExceeds",
-      "Value": "Sniper need to take a rest before your account is banned"
+      "Value": "Sniper harus diistirahatkan sebelum akun kamu kena Ban"
     },
     {
       "Key": "CatchExceeds",
-      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+      "Value": "Kamu menangkap terlalu cepat. Kamu tidak akan dapat menangkap hingga {0} detik lagi"
     },
     {
       "Key": "PokeStopExceeds",
-      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+      "Value": "Kamu singgah di PokeStop terlalu cepat. Kamu tidak akan dapat singgah hingga {0} detik lagi"
     },
     {
       "Key": "Only10kmEggs",
-      "Value": "Player below level 20, saving this 10 km Egg for later"
+      "Value": "Masih di bawah level 20, simpan dulu telur 10 km"
     },
     {
       "Key": "GoogleAPIWarning",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nama {0} | Dapat {1}xp, gem: {2}, barang: {3}, koordinat: {4}, {5}"
+      "Value": "Nama {0} | Dapat {1}xp, gem: {2}, barang: {3}, koordinat: {4}, {5}, {6}"
     },
     {
       "Key": "eventFortFailed",

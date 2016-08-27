@@ -23,6 +23,8 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
 using Quobject.SocketIoClientDotNet.Client;
+using GeoCoordinatePortable;
+using PoGo.NecroBot.Logic.Utils;
 
 #endregion
 
@@ -418,8 +420,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             List<MapPokemon> catchablePokemon;
             try
             {
-                await session.Client.Player.UpdatePlayerLocation(latitude, longitude, session.Client.CurrentAltitude);
-
+                await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(latitude, longitude, session.Client.CurrentAltitude));
+                
                 session.EventDispatcher.Send(new UpdatePositionEvent
                 {
                     Longitude = longitude,
@@ -435,7 +437,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             finally
             {
-                await session.Client.Player.UpdatePlayerLocation(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude);
+                await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
             }
 
             if (catchablePokemon.Count == 0)
@@ -451,13 +453,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                 EncounterResponse encounter;
                 try
                 {
-                    await session.Client.Player.UpdatePlayerLocation(latitude, longitude, session.Client.CurrentAltitude);
+                    await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(latitude, longitude, session.Client.CurrentAltitude));
 
                     encounter = session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
                 }
                 finally
                 {
-                    await session.Client.Player.UpdatePlayerLocation(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude);
+                    await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
                 }
 
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
@@ -768,7 +770,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static List<SniperInfo> GetSniperInfoFrom_pokewatchers(ISession session, List<PokemonId> pokemonIds)
         {
 
-            var uri = $"http://pokewatchers.com/api.php?act=grab";
+            var uri = $"http://pokewatchers.com/grab/";
 
             ScanResult_pokewatchers scanResult_pokewatchers;
             try

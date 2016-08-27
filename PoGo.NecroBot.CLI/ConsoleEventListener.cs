@@ -98,7 +98,7 @@ namespace PoGo.NecroBot.CLI
                 : fortUsedEvent.Items;
             Logger.Write(
                 session.Translation.GetTranslation(TranslationString.EventFortUsed, fortUsedEvent.Name, fortUsedEvent.Exp, fortUsedEvent.Gems,
-                    itemString, fortUsedEvent.Latitude, fortUsedEvent.Longitude),
+                    itemString, fortUsedEvent.Latitude, fortUsedEvent.Longitude, fortUsedEvent.Altitude),
                 LogLevel.Pokestop);
         }
 
@@ -390,7 +390,7 @@ namespace PoGo.NecroBot.CLI
                     Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeUpdate, ev.Pokemons.Count, 2, 3), LogLevel.Sniper, ConsoleColor.DarkMagenta);
                     break;
                     case HumanWalkSnipeEventTypes.PokestopUpdated:
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeAddedPokestop, ev.NearestDistane, ev.Pokestops.Count), LogLevel.Sniper, ConsoleColor.Yellow);
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeAddedPokestop, ev.NearestDistance, ev.Pokestops.Count), LogLevel.Sniper, ConsoleColor.Yellow);
                     break;
 
                 case HumanWalkSnipeEventTypes.NotEnoughtPalls:
