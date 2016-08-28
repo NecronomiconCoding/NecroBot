@@ -28,9 +28,9 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public class SnipePokemonInfo
         {
-            public double Distance;
-            public double EstimatedTime;
-            public bool IsCatching;
+            public double Distance { get; set; }
+            public double EstimatedTime { get; set; }
+            public bool IsCatching { get; set; }
             public double Latitude { get; set; }
             public double Longitude { get; set; }
             public int Id { get; set; }
@@ -114,7 +114,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             return source.Where(p => !p.IsVisited
             && !p.IsFake
-            && p.ExpiredTime < DateTime.Now)
+            && p.ExpiredTime > DateTime.Now.AddSeconds(p.EstimatedTime))
             .ToList();
         }
 
@@ -378,7 +378,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (ordered.Count > 0 && displayList)
                     {
-                        Logger.Write(string.Format("     Source     |  Name               |    Distance     |  Expires        |  Travel times   | Catchable"));
+                        Logger.Write(string.Format("     Source      |  Name               |    Distance    |   Expires        |  Travel times   | Catchable"));
                         foreach (var pokemon in ordered)
                         {
                             string name = _session.Translation.GetPokemonTranslation(pokemon.PokemonId);

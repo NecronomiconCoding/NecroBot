@@ -83,10 +83,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 results = GetJsonList(json);
             }
-            catch (Exception ex)
-            {
-
-            }
+            catch (Exception )
+            {}
             return results;
         }
 
