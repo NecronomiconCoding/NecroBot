@@ -25,25 +25,26 @@ namespace PoGo.NecroBot.Logic.Tasks
             public List<PokecrewItem> seens { get; set; }
         }
 
-        private static RarePokemonInfo Map(PokecrewWrap.PokecrewItem result)
+        private static SnipePokemonInfo Map(PokecrewWrap.PokecrewItem result)
         {
             long epochTicks = new DateTime(1970, 1, 1).Ticks;
             var unixBase = new DateTime(1970, 1, 1);
             long unixTime = ((result.expires_at.AddMinutes(-15).Ticks - epochTicks) / TimeSpan.TicksPerSecond);
             //double ticks = Math.Truncate((result.expires_at.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
             //unixTime = result.expires_at.AddMinutes(-15) - 
-            return new RarePokemonInfo()
+            return new SnipePokemonInfo()
             {
-                latitude = result.latitude,
-                longitude = result.longitude,
-                pokemonId = result.pokemon_id,
-                created = unixTime
+                Latitude = result.latitude,
+                Longitude = result.longitude,
+                Id = result.pokemon_id,
+                ExpiredTime = result.expires_at.ToLocalTime(),
+                Source = "Pokecrew"
             };
         }
 
-        private static async Task<List<RarePokemonInfo>> FetchFromPokecrew(double lat, double lng)
+        private static async Task<List<SnipePokemonInfo>> FetchFromPokecrew(double lat, double lng)
         {
-            List<RarePokemonInfo> results = new List<RarePokemonInfo>();
+            List<SnipePokemonInfo> results = new List<SnipePokemonInfo>();
             // if (!_setting.HumanWalkingSnipeUsePokeRadar) return results;
             try
             {

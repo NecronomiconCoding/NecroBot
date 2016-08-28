@@ -23,7 +23,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             public List<PokesniperItem> results { get; set; }
         }
 
-        private static RarePokemonInfo Map(PokesniperWrap.PokesniperItem result)
+        private static SnipePokemonInfo Map(PokesniperWrap.PokesniperItem result)
         {
             long epochTicks = new DateTime(1970, 1, 1).Ticks;
             var unixBase = new DateTime(1970, 1, 1);
@@ -31,17 +31,18 @@ namespace PoGo.NecroBot.Logic.Tasks
             //double ticks = Math.Truncate((result.expires_at.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
             //unixTime = result.expires_at.AddMinutes(-15) - 
             var arr = result.coords.Split(',');
-            return new RarePokemonInfo()
+            return new SnipePokemonInfo()
             {
-                latitude = Convert.ToDouble(arr[0]),
-                longitude = Convert.ToDouble(arr[1]),
-                pokemonId = (int)Enum.Parse(typeof(PokemonId), result.name),
-                created = unixTime
+                Latitude = Convert.ToDouble(arr[0]),
+                Longitude = Convert.ToDouble(arr[1]),
+                Id = (int)Enum.Parse(typeof(PokemonId), result.name),
+                ExpiredTime = result.until.ToLocalTime()   ,
+                Source = "Pokesnipers"
             };
         }
-        private static async Task<List<RarePokemonInfo>> FetchFromPokesnipers(double lat, double lng)
+        private static async Task<List<SnipePokemonInfo>> FetchFromPokesnipers(double lat, double lng)
         {
-            List<RarePokemonInfo> results = new List<RarePokemonInfo>();
+            List<SnipePokemonInfo> results = new List<SnipePokemonInfo>();
             // if (!_setting.HumanWalkingSnipeUsePokeRadar) return results;
             try
             {
@@ -74,9 +75,5 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             return results;
         }
-
-
-
-
     }
 }

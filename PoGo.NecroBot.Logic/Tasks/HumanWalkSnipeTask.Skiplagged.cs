@@ -59,9 +59,9 @@ namespace PoGo.NecroBot.Logic.Tasks
     //need refactor this class, move list snipping pokemon to session and split function out to smaller class.
     public partial class HumanWalkSnipeTask
     {
-        private static async Task<List<RarePokemonInfo>> FetchFromSkiplagged(double lat, double lng)
+        private static async Task<List<SnipePokemonInfo>> FetchFromSkiplagged(double lat, double lng)
         {
-            List<RarePokemonInfo> results = new List<RarePokemonInfo>();
+            List<SnipePokemonInfo> results = new List<SnipePokemonInfo>();
             if (!_setting.HumanWalkingSnipeUseSkiplagged) return results;
 
             var lat1 = lat - _setting.HumanWalkingSnipeSnipingScanOffset;
@@ -90,10 +90,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             return results;
         }
 
-        private static List<RarePokemonInfo> GetJsonList(string reader)
+        private static List<SnipePokemonInfo> GetJsonList(string reader)
         {
             var wrapper = JsonConvert.DeserializeObject<SkiplaggedWrap>(reader);
-            var list = new List<RarePokemonInfo>();
+            var list = new List<SnipePokemonInfo>();
             foreach (var result in wrapper.pokemons)
             {
                 var sniperInfo = Map(result);
@@ -104,14 +104,15 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             return list;
         }
-        private static RarePokemonInfo Map(SkiplaggedItem result)
+        private static SnipePokemonInfo Map(SkiplaggedItem result)
         {
-            return new RarePokemonInfo()
+            return new SnipePokemonInfo()
             {
-                latitude = result.latitude,
-                longitude = result.longitude,
-                pokemonId = result.pokemon_id,
-                created = result.expires - 15 * 60
+                Latitude = result.latitude,
+                Longitude = result.longitude,
+                Id = result.pokemon_id,
+                ExpiredTime = UnixTimeStampToDateTime(result.expires) ,
+                Source = "Skiplagged"
             };
         }
 

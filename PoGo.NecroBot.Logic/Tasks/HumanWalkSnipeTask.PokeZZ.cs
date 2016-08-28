@@ -11,9 +11,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public partial class HumanWalkSnipeTask
     {
-        private static async Task<List<RarePokemonInfo>> FetchFromPokeZZ(double lat, double lng)
+        private static async Task<List<SnipePokemonInfo>> FetchFromPokeZZ(double lat, double lng)
         {
-            List<RarePokemonInfo> results = new List<RarePokemonInfo>();
+            List<SnipePokemonInfo> results = new List<SnipePokemonInfo>();
             // if (!_setting.HumanWalkingSnipeUsePokeRadar) return results;
             string url = "ws://pokezz.com/socket.io/?EIO=3&transport=websocket";
             try
@@ -31,7 +31,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                 var sniperInfos = Parse(match.Groups[2].Value);
                                 if (sniperInfos != null && sniperInfos.Any())
                                 {
-                                    results.AddRange(sniperInfos.Where(p => LocationUtils.CalculateDistanceInMeters(lat, lng, p.latitude, p.longitude) < 5000).ToList());
+                                    results.AddRange(sniperInfos.Where(p => LocationUtils.CalculateDistanceInMeters(lat, lng, p.Latitude, p.Longitude) < 5000).ToList());
                                 }
                             }
                         }
@@ -49,10 +49,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             return results;
         }
 
-        private static List<RarePokemonInfo> Parse(string reader)
+        private static List<SnipePokemonInfo> Parse(string reader)
         {
             var lines = reader.Split('~');
-            var list = new List<RarePokemonInfo>();
+            var list = new List<SnipePokemonInfo>();
 
             foreach (var line in lines)
             {
@@ -65,7 +65,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             return list;
         }
 
-        private static RarePokemonInfo ParseLine(string line)
+        private static SnipePokemonInfo ParseLine(string line)
         {
             var match = Regex.Match(line,
                 @"(?<id>\d+)\|(?<lat>\-?\d+[\,|\.]\d+)\|(?<lon>\-?\d+[\,|\.]\d+)\|(?<expires>\d+)\|(?<verified>[1|0])\|\|");
@@ -73,18 +73,18 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
 
                 var pokemonId = Convert.ToInt32(match.Groups["id"].Value);
-                var sniperInfo = new RarePokemonInfo()
+                var sniperInfo = new SnipePokemonInfo()
                 {
-                    pokemonId = pokemonId,
-
+                    Id = pokemonId,
+                    Source = "PokeZZ"
                 };
 
                 //sniperInfo.Id = pokemonId;
                 var lat = Convert.ToDouble(match.Groups["lat"].Value);
                 var lon = Convert.ToDouble(match.Groups["lon"].Value);
 
-                sniperInfo.latitude = Math.Round(lat, 7);
-                sniperInfo.longitude = Math.Round(lon, 7);
+                sniperInfo.Latitude = Math.Round(lat, 7);
+                sniperInfo.Longitude = Math.Round(lon, 7);
 
                 var expires = Convert.ToInt64(match.Groups["expires"].Value);
                 if (expires != default(long))
@@ -97,7 +97,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     //}
                     //sniperInfo.ExpirationTimestamp = DateTime.Now.AddMinutes(15) < untilTime ?
                     //    DateTime.Now.AddMinutes(15) : untilTime;
-                    sniperInfo.created = expires - 15 * 60;
+                    sniperInfo.ExpiredTime = UnixTimeStampToDateTime(expires);
                 }
                 return sniperInfo;
             }
