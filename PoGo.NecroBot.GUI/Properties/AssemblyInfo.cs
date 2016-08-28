@@ -6,11 +6,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle( "Awesomium.NET WPF Sample (CSharp)" )]
-[assembly: AssemblyDescription( "Awesomium.NET WPF Starter Sample (CSharp)" )]
+[assembly: AssemblyTitle( "NecroBot.GUI" )]
+[assembly: AssemblyDescription( "NecroBot.GUI" )]
 [assembly: AssemblyConfiguration( "" )]
 [assembly: AssemblyCompany( ReleaseInfo.PRODUCT_COMPANY )]
-[assembly: AssemblyProduct( "Awesomium.NET v" + ReleaseInfo.LIBRARY_VERSION )]
+[assembly: AssemblyProduct( "Necrobot GUI v" + ReleaseInfo.LIBRARY_VERSION )]
 [assembly: AssemblyCopyright( "Copyright " + ReleaseInfo.PRODUCT_COPYRIGHT )]
 [assembly: AssemblyTrademark( ReleaseInfo.PRODUCT_TRADEMARK )]
 [assembly: AssemblyCulture( "" )]
