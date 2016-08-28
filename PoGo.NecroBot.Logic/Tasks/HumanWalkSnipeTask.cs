@@ -138,15 +138,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (!checkBall && !prioritySnipeFlag) return;
             }
 
-            bool keepWalking = true;
             bool caughtAnyPokemonInThisWalk = false;
-
-            while (keepWalking)
+            RarePokemonInfo pokemon = null;
+            do
             {
                 prioritySnipeFlag = false;
-                var pokemons = GetRarePokemons(session.Client.CurrentLatitude, session.Client.CurrentLongitude, !caughtAnyPokemonInThisWalk);
-
-                foreach (var pokemon in pokemons)
+                pokemon = GetNextSnipeablePokemon(session.Client.CurrentLatitude, session.Client.CurrentLongitude, !caughtAnyPokemonInThisWalk);
+                if (pokemon != null)
                 {
                     caughtAnyPokemonInThisWalk = true;
                     CalculateDistanceAndEstTime(pokemon);
@@ -183,7 +181,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                            if (catchPokemon && distance > 50.0)
                            {
                                // Catch normal map Pokemon
-                               await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
+                               await CatchNearbyPokemonsTask.Execute(session, cancellationToken, sessionAllowTransfer: false);
                            }
                            if (actionWhenWalking != null && spinPokestop)
                            {
@@ -197,7 +195,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         Latitude = pokemon.latitude,
                         Longitude = pokemon.longitude,
-                        PauseDuration = pokemon.FilterSetting.DelayTimeAtDestination/1000,
+                        PauseDuration = pokemon.FilterSetting.DelayTimeAtDestination / 1000,
                         Type = HumanWalkSnipeEventTypes.DestinationReached
                     });
                     await Task.Delay(pokemon.FilterSetting.DelayTimeAtDestination);
@@ -206,8 +204,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     pokemon.visited = true;
                     pokemon.catching = false;
                 }
-                keepWalking = _setting.HumanWalkingSnipeTryCatchEmAll && pokemons.Count > 0;
             }
+            while (pokemon != null && _setting.HumanWalkingSnipeTryCatchEmAll);
 
             if (caughtAnyPokemonInThisWalk && !_setting.HumanWalkingSnipeAlwaysWalkBack)
             {
@@ -221,10 +219,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             var speedInMetersPerSecond = speed / 3.6;
 
             p.distance = LocationUtils.CalculateDistanceInMeters(_session.Client.CurrentLatitude, _session.Client.CurrentLongitude, p.latitude, p.longitude);
-            p.estimateTime = p.distance / speedInMetersPerSecond + 15; //margin 30 second
+            p.estimateTime = p.distance / speedInMetersPerSecond + p.FilterSetting.DelayTimeAtDestination /1000  + 15; //margin 30 second
 
         }
-        private static List<RarePokemonInfo> GetRarePokemons(double lat, double lng, bool refreshData = true)
+        private static RarePokemonInfo GetNextSnipeablePokemon(double lat, double lng, bool refreshData = true)
         {
             if (refreshData)
             {
@@ -233,10 +231,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             rarePokemons.RemoveAll(p => p.expired < DateTime.Now);
 
-            rarePokemons.ForEach((p) =>
-            {
-                CalculateDistanceAndEstTime(p);
-            });
+            rarePokemons.ForEach(CalculateDistanceAndEstTime);
 
             //remove list not reach able (expired)
             if (rarePokemons.Count > 0)
@@ -246,7 +241,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     p.distance < p.FilterSetting.MaxDistance &&
                     p.estimateTime < p.FilterSetting.MaxWalkTimes)
                     && p.expired > DateTime.Now.AddSeconds(p.estimateTime)
-
                     )
                 )
                 .OrderBy(p => p.FilterSetting.Priority)
@@ -254,12 +248,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (ordered != null && ordered.Count() > 0)
                 {
                     var first = ordered.First();
-                    first.visited = true;
-                    var results = new List<RarePokemonInfo>() { first };
-                    return results;
+                    return first;
                 }
             }
-            return new List<RarePokemonInfo>();
+            return null;
         }
 
         private static void FetchData(double lat, double lng, bool silent = false)

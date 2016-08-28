@@ -180,7 +180,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         async (double lat, double lng) =>
                         {
                             //idea of this function is to spin pokestop on way. maybe risky.
-                            var reachablePokestops = allPokestops.Where(i =>
+                            var reachablePokestops = pokestopList.Where(i =>
                                 LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                                     session.Client.CurrentLongitude, i.Latitude, i.Longitude) < 40
                                     && i.CooldownCompleteTimestampMs == 0

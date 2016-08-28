@@ -19,7 +19,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class CatchNearbyPokemonsTask
     {
-        public static async Task Execute(ISession session, CancellationToken cancellationToken, PokemonId priority = PokemonId.Missingno)
+        public static async Task Execute(ISession session, CancellationToken cancellationToken, PokemonId priority = PokemonId.Missingno, bool sessionAllowTransfer= true)
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (!session.LogicSettings.CatchPokemon) return;
@@ -69,7 +69,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess && session.LogicSettings.CatchPokemon)
                 {
-                    await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon);
+                    await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon, sessionAllowTransfer:sessionAllowTransfer);
                 }
                 else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                 {
