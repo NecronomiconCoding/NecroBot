@@ -74,6 +74,10 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 { PokemonId.Bulbasaur, new HumanWalkSnipeFilter(500, 300, 3, true, true,false,60.0)},
                 { PokemonId.Charmander, new HumanWalkSnipeFilter(500, 300, 3, true, true,false,60.0)},
                 { PokemonId.Squirtle, new HumanWalkSnipeFilter(500, 300, 3, true, true,false,60.0)},
+                { PokemonId.Omanyte, new HumanWalkSnipeFilter(1500, 300, 3, true, true,false,60.0)},
+                { PokemonId.Marowak, new HumanWalkSnipeFilter(1500, 300, 3, true, true,false,60.0)},
+                { PokemonId.Venomoth, new HumanWalkSnipeFilter(1500, 300, 3, true, true,false,60.0)},
+                { PokemonId.Vileplume, new HumanWalkSnipeFilter(1500, 300, 3, true, true,false,60.0)},
             };
         }
     }

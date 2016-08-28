@@ -206,7 +206,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-<<<<<<< HEAD
         private static async Task LookPokestops(ISession session, FortData currentPokestop, CancellationToken cancellationToken)
         {
             if (!session.LogicSettings.UseGoogleWalk && !session.LogicSettings.UseYoursWalk)
@@ -379,7 +378,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     RandomNumber = rc.Next(4, 11);
                     RandomStop = 0;
                     int RandomWaitTime = rc.Next(30, 120);
-                    Thread.Sleep(RandomWaitTime);
+                    await Task.Delay(RandomWaitTime);
                 }
             }
 
