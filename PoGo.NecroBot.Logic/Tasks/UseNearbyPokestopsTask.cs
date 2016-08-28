@@ -136,9 +136,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await HumanWalkSnipeTask.Execute(session, cancellationToken,
                         async (double lat, double lng) =>
                         {
+                            //idea of this function is to spin pokestop on way. maybe risky.
                             var reachablePokestops = pokestopList.Where(i =>
-                            LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
-                            session.Client.CurrentLongitude, i.Latitude, i.Longitude) < 40).ToList();
+                                LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                                    session.Client.CurrentLongitude, i.Latitude, i.Longitude) < 40
+                                    && i.CooldownCompleteTimestampMs == 0
+                                    ).ToList();
                             reachablePokestops = reachablePokestops.OrderBy(i =>
                             LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                             session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
@@ -147,10 +150,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 if (!session.LogicSettings.UseGpxPathing)
                                     pokestopList.Remove(ps);
-
-                                var fi = await session.Client.Fort.GetFort(ps.Id, ps.Latitude, ps.Longitude);
-                                await FortAction(session, ps, fi, cancellationToken);
-                            }
+                                    var fi = await session.Client.Fort.GetFort(ps.Id, ps.Latitude, ps.Longitude);
+                                    await FarmPokestop(session, ps, fi, cancellationToken, true);
+                                }
                         },
                         async () =>
                         {
@@ -204,6 +206,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
+<<<<<<< HEAD
         private static async Task LookPokestops(ISession session, FortData currentPokestop, CancellationToken cancellationToken)
         {
             if (!session.LogicSettings.UseGoogleWalk && !session.LogicSettings.UseYoursWalk)
@@ -284,8 +287,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
             }
         }
-
-        private static async Task FarmPokestop(ISession session, FortData pokeStop, FortDetailsResponse fortInfo, CancellationToken cancellationToken)
+ 
+        private static async Task FarmPokestop(ISession session, FortData pokeStop, FortDetailsResponse fortInfo, CancellationToken cancellationToken, bool doNotRetry = false)
         {
             FortSearchResponse fortSearch;
             var timesZeroXPawarded = 0;
@@ -324,7 +327,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Max = retryNumber - zeroCheck,
                             Looted = false
                         });
-
+                        if(doNotRetry)
+                        {
+                            break;
+                        }
                         if (!session.LogicSettings.FastSoftBanBypass)
                         {
                             DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);

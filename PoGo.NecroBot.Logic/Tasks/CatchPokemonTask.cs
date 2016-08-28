@@ -50,7 +50,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         }
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken, dynamic encounter, MapPokemon pokemon,
-            FortData currentFortData = null, ulong encounterId = 0)
+            FortData currentFortData = null, ulong encounterId = 0, bool sessionAllowTransfer =true)
         {
             AmountOfBerries = 0;
             cancellationToken.ThrowIfCancellationRequested();
@@ -303,7 +303,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 attemptCounter++;
 
-                if (session.LogicSettings.TransferDuplicatePokemonOnCapture && session.LogicSettings.TransferDuplicatePokemon)
+                if (session.LogicSettings.TransferDuplicatePokemonOnCapture && session.LogicSettings.TransferDuplicatePokemon && sessionAllowTransfer)
                 {
                     if (session.LogicSettings.UseNearActionRandom)
                         await HumanRandomActionTask.TransferRandom(session, cancellationToken);
