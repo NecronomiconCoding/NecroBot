@@ -16,29 +16,25 @@ using System.Linq;
 using System.Net.Http;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
+using WebSocket4Net;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
     //need refactor this class, move list snipping pokemon to session and split function out to smaller class.
-    public class HumanWalkSnipeTask
+    public partial class  HumanWalkSnipeTask
     {
-        public class Wrapper
-        {
-            public List<RarePokemonInfo> data { get; set; }
-        }
         public class RarePokemonInfo
         {
             public double distance;
             public double estimateTime;
             public bool catching;
-
             public double created { get; set; }
             public double latitude { get; set; }
             public double longitude { get; set; }
             public int pokemonId { get; set; }
-
             public bool fake { get; set; }
             public string uniqueId
             {
@@ -49,7 +45,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             public bool visited { get; set; }
             public HumanWalkSnipeFilter FilterSetting { get; set; }
-
             public PokemonId Id
             {
                 get
@@ -67,13 +62,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
             }
         }
-        private static List<RarePokemonInfo> rarePokemons = new List<RarePokemonInfo>();
 
+        private static List<RarePokemonInfo> rarePokemons = new List<RarePokemonInfo>();
         private static ISession _session;
         private static ILogicSettings _setting;
-
         private static int pokestopCount = 0;
         private static List<PokemonId> pokemonToBeSnipedIds = null;
+        static bool prioritySnipeFlag = false;
+        private static DateTime lastUpdated = DateTime.Now.AddMinutes(-10);
 
         public static async Task<bool> CheckPokeballsToSnipe(int minPokeballs, ISession session,
             CancellationToken cancellationToken)
@@ -121,7 +117,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             }
         }
-        static bool prioritySnipeFlag = false;
+
         public static List<RarePokemonInfo> ApplyFilter(List<RarePokemonInfo> source)
         {
             return source.Where(p => !p.visited
@@ -129,6 +125,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             && p.expired < DateTime.Now)
             .ToList();
         }
+
         public static async Task Execute(ISession session, CancellationToken cancellationToken, Func<double, double, Task> actionWhenWalking = null, Func<Task> afterCatchFunc = null)
         {
             pokestopCount++;
@@ -207,9 +204,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                         PauseDuration = pokemon.FilterSetting.DelayTimeAtDestination / 1000,
                         Type = HumanWalkSnipeEventTypes.DestinationReached
                     });
-                    await Task.Delay(pokemon.FilterSetting.DelayTimeAtDestination);
                     await CatchNearbyPokemonsTask.Execute(session, cancellationToken, pokemon.Id);
                     await CatchIncensePokemonsTask.Execute(session, cancellationToken);
+
+                    await Task.Delay(pokemon.FilterSetting.DelayTimeAtDestination);
+                    if (!pokemon.visited)
+                    {
+                        await CatchNearbyPokemonsTask.Execute(session, cancellationToken, pokemon.Id);
+                        await CatchIncensePokemonsTask.Execute(session, cancellationToken);
+                    }
                     pokemon.visited = true;
                     pokemon.catching = false;
                 }
@@ -231,6 +234,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             p.estimateTime = p.distance / speedInMetersPerSecond + p.FilterSetting.DelayTimeAtDestination /1000  + 15; //margin 30 second
 
         }
+
         private static RarePokemonInfo GetNextSnipeablePokemon(double lat, double lng, bool refreshData = true)
         {
             if (refreshData)
@@ -284,7 +288,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 FetchFromPokeradar(lat, lng),
                 FetchFromSkiplagged(lat, lng)     ,
                 FetchFromPokecrew(lat, lng) ,
-                FetchFromPokesnipers(lat, lng)
+                FetchFromPokesnipers(lat, lng)  ,
+                FetchFromPokeZZ(lat, lng)
             };
             if (_setting.HumanWalkingSnipeIncludeDefaultLocation &&
                 LocationUtils.CalculateDistanceInMeters(lat, lng, _session.Settings.DefaultLatitude, _session.Settings.DefaultLongitude) > 1000)
@@ -299,6 +304,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             PostProcessDataFetched(fetchedPokemons, !silent);
         }
+
         public static T Clone<T>(object item)
         {
             if (item != null)
@@ -310,6 +316,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             else
                 return default(T);
         }
+
         private static void PostProcessDataFetched(IEnumerable<RarePokemonInfo> pokemons, bool displayList = true)
         {
             var rw = new Random();
@@ -402,187 +409,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
             return dtDateTime;
         }
-
-        private static DateTime lastUpdated = DateTime.Now.AddMinutes(-10);
-        private static async Task<List<RarePokemonInfo>> FetchFromPokeradar(double lat, double lng)
-        {
-            List<RarePokemonInfo> results = new List<RarePokemonInfo>();
-            if (!_setting.HumanWalkingSnipeUsePokeRadar) return results;
-            try
-            {
-
-                HttpClient client = new HttpClient();
-                double offset = _setting.HumanWalkingSnipeSnipingScanOffset; //0.015 
-                string url = $"https://www.pokeradar.io/api/v1/submissions?deviceId=1fd29370661111e6b850a13a2bdc4ebf&minLatitude={lat - offset}&maxLatitude={lat + offset}&minLongitude={lng - offset}&maxLongitude={lng + offset}&pokemonId=0";
-
-                var task = await client.GetStringAsync(url);
-
-                var data = JsonConvert.DeserializeObject<Wrapper>(task);
-                results = data.data;
-            }
-            catch (Exception ex)
-            {
-                Logger.Write("Error loading data", LogLevel.Error, ConsoleColor.DarkRed);
-            }
-            return results;
-        }
-
-        private static async Task<List<RarePokemonInfo>> FetchFromPokecrew(double lat, double lng)
-        {
-            List<RarePokemonInfo> results = new List<RarePokemonInfo>();
-           // if (!_setting.HumanWalkingSnipeUsePokeRadar) return results;
-            try
-            {
-
-                HttpClient client = new HttpClient();
-                double offset = _setting.HumanWalkingSnipeSnipingScanOffset; //0.015 
-                string url = $"https://api.pokecrew.com/api/v1/seens?center_latitude={lat}&center_longitude={lng}&live=true&minimal=false&northeast_latitude={lat+offset}&northeast_longitude={lng+offset}&pokemon_id=&southwest_latitude={lat-offset}&southwest_longitude={lng-offset}";
-
-                var task = await client.GetStringAsync(url);
-
-                var data = JsonConvert.DeserializeObject<PokecrewWrap>(task);
-                foreach (var item in data.seens)
-                {
-                    var pItem = Map(item);
-                    if(pItem!= null)
-                    {
-                        results.Add(pItem);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Write("Error loading data", LogLevel.Error, ConsoleColor.DarkRed);
-            }
-            return results;
-        }
-
-        private static async Task<List<RarePokemonInfo>> FetchFromPokesnipers(double lat, double lng)
-        {
-            List<RarePokemonInfo> results = new List<RarePokemonInfo>();
-            // if (!_setting.HumanWalkingSnipeUsePokeRadar) return results;
-            try
-            {
-
-                HttpClient client = new HttpClient();
-                double offset = _setting.HumanWalkingSnipeSnipingScanOffset; //0.015 
-                string url = $"http://pokesnipers.com/api/v1/pokemon.json";
-
-                var task = await client.GetStringAsync(url);
-
-                var data = JsonConvert.DeserializeObject<PokesniperWrap>(task);
-                foreach (var item in data.results)
-                {
-                    try {
-                        var pItem = Map(item);
-                        if (pItem != null)
-                        {
-                            results.Add(pItem);
-                        }
-                    } catch (Exception ex) {
-                        //ignore if any data failed.
-                    } 
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Write("Error loading data", LogLevel.Error, ConsoleColor.DarkRed);
-            }
-            return results;
-        }
-
-
-
-        private static async Task<List<RarePokemonInfo>> FetchFromSkiplagged(double lat, double lng)
-        {
-            List<RarePokemonInfo> results = new List<RarePokemonInfo>();
-            if (!_setting.HumanWalkingSnipeUseSkiplagged) return results;
-
-            var lat1 = lat - _setting.HumanWalkingSnipeSnipingScanOffset;
-            var lat2 = lat + _setting.HumanWalkingSnipeSnipingScanOffset;
-            var lng1 = lng - _setting.HumanWalkingSnipeSnipingScanOffset;
-            var lng2 = lng + _setting.HumanWalkingSnipeSnipingScanOffset;
-
-            string url = $"https://skiplagged.com/api/pokemon.php?bounds={lat1},{lng1},{lat2},{lng2}";
-
-            try
-            {
-                HttpClient client = new HttpClient();
-                client.DefaultRequestHeaders.Accept.TryParseAdd("text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-                client.DefaultRequestHeaders.AcceptEncoding.ParseAdd("gzip, deflate, sdch, br");
-                client.DefaultRequestHeaders.Host = "skiplagged.com";
-                client.DefaultRequestHeaders.UserAgent.TryParseAdd("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116 Safari/537.36");
-
-                var json = await client.GetStringAsync(url);
-
-                results = GetJsonList(json);
-            }
-            catch (Exception ex)
-            {
-
-            }
-            return results;
-        }
-        private static List<RarePokemonInfo> GetJsonList(string reader)
-        {
-            var wrapper = JsonConvert.DeserializeObject<SkippedLaggedWrap>(reader);
-            var list = new List<RarePokemonInfo>();
-            foreach (var result in wrapper.pokemons)
-            {
-                var sniperInfo = Map(result);
-                if (sniperInfo != null)
-                {
-                    list.Add(sniperInfo);
-                }
-            }
-            return list;
-        }
-        private static RarePokemonInfo Map(pokemon result)
-        {
-            return new RarePokemonInfo()
-            {
-                latitude = result.latitude,
-                longitude = result.longitude,
-                pokemonId = result.pokemon_id,
-                created = result.expires - 15 * 60
-            };
-        }
-
-        private static RarePokemonInfo Map(PokecrewWrap.PokecrewItem result)
-        {
-            long epochTicks = new DateTime(1970, 1, 1).Ticks;
-            var unixBase = new DateTime(1970, 1, 1);
-            long unixTime = ((result.expires_at.AddMinutes(-15).Ticks - epochTicks) / TimeSpan.TicksPerSecond);
-            //double ticks = Math.Truncate((result.expires_at.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
-            //unixTime = result.expires_at.AddMinutes(-15) - 
-            return new RarePokemonInfo()
-            {
-                latitude = result.latitude,
-                longitude = result.longitude,
-                pokemonId = result.pokemon_id,
-                created = unixTime
-            };
-        }
-
-        private static RarePokemonInfo Map(PokesniperWrap.PokesniperItem result)
-        {
-            long epochTicks = new DateTime(1970, 1, 1).Ticks;
-            var unixBase = new DateTime(1970, 1, 1);
-            long unixTime = ((result.until.AddMinutes(-15).Ticks - epochTicks) / TimeSpan.TicksPerSecond);
-            //double ticks = Math.Truncate((result.expires_at.Subtract(new DateTime(1970, 1, 1))).TotalSeconds);
-            //unixTime = result.expires_at.AddMinutes(-15) - 
-            var arr = result.coords.Split(',');
-            return new RarePokemonInfo()
-            {
-                latitude = Convert.ToDouble(arr[0]),
-                longitude = Convert.ToDouble(arr[1]),
-                pokemonId = (int)Enum.Parse(typeof(PokemonId),result.name),
-                created = unixTime
-            };
-            
-        }
-
-
+       
         public static Task PriorityPokemon(ISession session, string id)
         {
             return Task.Run(() =>
@@ -678,63 +505,6 @@ namespace PoGo.NecroBot.Logic.Tasks
             });
 
         }
+
     }
-
-    public class SkippedLaggedWrap
-    {
-        public double duration { get; set; }
-        public List<pokemon> pokemons { get; set; }
-        public SkippedLaggedWrap()
-        {
-            pokemons = new List<pokemon>();
-        }
-    }
-    public class PokecrewWrap
-    {
-        public class PokecrewItem
-        {
-            public double latitude { get; set; }
-            public double longitude { get; set; }
-            public int pokemon_id { get; set; }
-            public DateTime expires_at { get; set; }
-        }
-        public  List<PokecrewItem> seens { get; set; }
-    }
-
-    public class PokesniperWrap
-    {
-        public class PokesniperItem
-        {
-            public string coords{ get; set; }
-            public string name { get; set; }
-            public DateTime until{ get; set; }
-        }
-        public List<PokesniperItem> results { get; set; }
-    }
-
-    public class pokemon
-    {
-        public DateTime UnixTimeStampToDateTime(double unixTimeStamp)
-        {
-            // Unix timestamp is seconds past epoch
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-            return dtDateTime;
-        }
-
-        public DateTime expires_date
-        {
-            get
-            {
-                return UnixTimeStampToDateTime(expires);
-            }
-        }
-
-        public double expires { get; set; }
-        public double latitude { get; set; }
-        public double longitude { get; set; }
-        public int pokemon_id { get; set; }
-        public string pokemon_name { get; set; }
-    }
-
 }
