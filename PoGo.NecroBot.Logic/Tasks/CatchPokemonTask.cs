@@ -43,6 +43,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                     return true;
                 }
             }
+
+            Logger.Write($"(CATCH LIMIT) {session.Stats.PokemonTimestamps.Count}/{session.LogicSettings.CatchPokemonLimit}",
+                LogLevel.Info, ConsoleColor.Yellow);
             return false;
         }
 

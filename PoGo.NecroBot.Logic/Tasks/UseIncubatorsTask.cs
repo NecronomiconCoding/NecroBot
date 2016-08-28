@@ -81,8 +81,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (egg == null)
                         continue;
 
-                    //avoid using 2/5 km eggs with limited incubator
-                    if (egg.EggKmWalkedTarget < session.LogicSettings.UseEggIncubatorMinKm && incubator.ItemId != ItemId.ItemIncubatorBasicUnlimited)
+                    // Skip (save) limited incubators depending on user choice in config
+                    if (!session.LogicSettings.UseLimitedEggIncubators 
+                        && incubator.ItemId != ItemId.ItemIncubatorBasicUnlimited)
                         continue;
 
                     var response = await session.Client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);

@@ -106,6 +106,9 @@ namespace PoGo.NecroBot.CLI
                 case "InventoryList":
                     await InventoryListTask.Execute(_session);
                     break;
+                case "PokemonSnipeList":
+                    await HumanWalkSnipeTask.ExecuteFetchData(_session);
+                    break;
             }
 
             // Setup to only send data back to the session that requested it. 

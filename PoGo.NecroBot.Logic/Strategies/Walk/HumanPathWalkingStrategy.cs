@@ -20,7 +20,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             _client = client;
         }
 
-        public async Task<PlayerUpdateResponse> Walk(GeoCoordinate targetLocation, Func<Task<bool>> functionExecutedWhileWalking, ISession session, CancellationToken cancellationToken)
+        public async Task<PlayerUpdateResponse> Walk(GeoCoordinate targetLocation, Func<Task<bool>> functionExecutedWhileWalking, ISession session, CancellationToken cancellationToken, double walkSpeed = 0.0)
         {
             cancellationToken.ThrowIfCancellationRequested();
 

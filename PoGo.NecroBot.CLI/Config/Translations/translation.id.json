@@ -6,7 +6,7 @@
     },
     {
       "Key": "HumanWalkSnipe",
-      "Value": "(Sambil jalan) {0} terlihat! | Koordinat: {1}, {2}, jarak {3:0.00} m, berakhir dalam {4:00} mnt {5:00} dtk | Waktu tempuh : {6:00} mnt {7:00} dtk | Sambil singgah di PokeStop: {8} | Sambil tangkap Pokemon lain: {9}"
+      "Value": "(Sambil jalan) {0} terlihat! | Koordinat: {1}, {2}, jarak {3:0.00} m, berakhir dalam {4:00} mnt {5:00} dtk | Waktu tempuh : {6:00} mnt {7:00} dtk | Sambil singgah di PokeStop: {8} | Sambil tangkap Pokemon lain: {9} | Kecepatan: {10:0.00} km/j"
     },
     {
       "Key": "HumanWalkSnipeUpdate",
@@ -78,7 +78,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nama {0} | Dapat {1}xp, gem: {2}, barang: {3}, koordinat: {4}, {5}, {6}"
+      "Value": "Nama {0} | Dapat {1}xp, gem: {2}, barang: {3}, koordinat: {4}, {5}, alt: {6}"
     },
     {
       "Key": "eventFortFailed",
@@ -118,11 +118,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | mendapatkan: {11} EXP | {12} | lintang: {13} bujur: {14} | Move1: {15} Move2: {16}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} (Sisa {10}) | mendapatkan: {11} EXP | {12} | lintang: {13} bujur: {14}\r\nJurus: 1. {15} 2. {16}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} ( Sisa {10}). | lintang: {11} bujur: {12} | Move1: {13} Move2: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} (Sisa {10}) | lintang: {11} bujur: {12}\r\nJurus: 1. {13} 2. {14}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -526,11 +526,11 @@
     },
     {
       "Key": "displayHighestMove1Header",
-      "Value": "GERAKAN1"
+      "Value": "Jurus 1"
     },
     {
       "Key": "displayHighestMove2Header",
-      "Value": "GERAKAN2"
+      "Value": "Jurus 2"
     },
     {
       "Key": "displayHighestCandy",
