@@ -81,7 +81,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         i =>
                             LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                                 session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
-                
+
                 var pokeStop = pokestopList[0];
                 pokestopList.RemoveAt(0);
 
@@ -150,14 +150,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 if (!session.LogicSettings.UseGpxPathing)
                                     pokestopList.Remove(ps);
-                                    var fi = await session.Client.Fort.GetFort(ps.Id, ps.Latitude, ps.Longitude);
-                                    await FarmPokestop(session, ps, fi, cancellationToken, true);
-                                }
+                                var fi = await session.Client.Fort.GetFort(ps.Id, ps.Latitude, ps.Longitude);
+                                await FarmPokestop(session, ps, fi, cancellationToken, true);
+                                await Task.Delay(1000);
+                            }
                         },
                         async () =>
                         {
                             // if using GPX we have to move back to the original pokestop, to resume the path.
-                            // we do not try to use pokestops on the way back, as we will have used them getting
+                            // we do not try to use pokest;ops on the way back, as we will have used them getting
                             // here.
                             if (session.LogicSettings.UseGpxPathing)
                             {
@@ -286,7 +287,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
             }
         }
- 
+
         private static async Task FarmPokestop(ISession session, FortData pokeStop, FortDetailsResponse fortInfo, CancellationToken cancellationToken, bool doNotRetry = false)
         {
             FortSearchResponse fortSearch;
@@ -326,7 +327,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Max = retryNumber - zeroCheck,
                             Looted = false
                         });
-                        if(doNotRetry)
+                        if (doNotRetry)
                         {
                             break;
                         }

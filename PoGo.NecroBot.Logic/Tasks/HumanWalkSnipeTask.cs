@@ -176,7 +176,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                        {
                            var distance = LocationUtils.CalculateDistanceInMeters(pokemon.Latitude, pokemon.Longitude, session.Client.CurrentLatitude, session.Client.CurrentLongitude);
 
-                           if (catchPokemon && distance > 50.0)
+                           if (catchPokemon && distance > 100.0)
                            {
                                // Catch normal map Pokemon
                                await CatchNearbyPokemonsTask.Execute(session, cancellationToken, sessionAllowTransfer: false);
@@ -196,13 +196,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                         PauseDuration = pokemon.Setting.DelayTimeAtDestination / 1000,
                         Type = HumanWalkSnipeEventTypes.DestinationReached
                     });
-                    await CatchNearbyPokemonsTask.Execute(session, cancellationToken, pokemon.PokemonId);
-                    await CatchIncensePokemonsTask.Execute(session, cancellationToken);
+                    //await CatchNearbyPokemonsTask.Execute(session, cancellationToken, pokemon.PokemonId,false);
+                    //await CatchIncensePokemonsTask.Execute(session, cancellationToken);
 
                     await Task.Delay(pokemon.Setting.DelayTimeAtDestination);
-                    if (!pokemon.IsVisited)
+                   // if (!pokemon.IsVisited)
                     {
-                        await CatchNearbyPokemonsTask.Execute(session, cancellationToken, pokemon.PokemonId);
+                        await CatchNearbyPokemonsTask.Execute(session, cancellationToken, pokemon.PokemonId, false);
                         await CatchIncensePokemonsTask.Execute(session, cancellationToken);
                     }
                     pokemon.IsVisited = true;
@@ -449,8 +449,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             bool exist = false;
             rarePokemons.ForEach((p) =>
             {
-                if (Math.Abs(p.Latitude - latitude) < 30.0 &&
-                    Math.Abs(p.Longitude - longitude) < 30.0 &&
+            if (LocationUtils.CalculateDistanceInMeters(latitude, longitude, p.Latitude, p.Longitude) <30.0 &&
                     p.PokemonId == id &&
                     !p.IsVisited)
                 {

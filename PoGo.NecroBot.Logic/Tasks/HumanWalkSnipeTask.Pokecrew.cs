@@ -65,7 +65,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Logger.Write("Error loading data", LogLevel.Error, ConsoleColor.DarkRed);
             }

@@ -41,7 +41,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     client.Close();
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
 
             }

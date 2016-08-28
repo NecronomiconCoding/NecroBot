@@ -39,7 +39,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var data = JsonConvert.DeserializeObject<PokeradarWrapper>(task);
                 results = data.data.Select(p => Map(p)).ToList();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 Logger.Write("Error loading data", LogLevel.Error, ConsoleColor.DarkRed);
             }

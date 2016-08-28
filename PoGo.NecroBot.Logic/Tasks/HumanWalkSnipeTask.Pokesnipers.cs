@@ -63,13 +63,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                             results.Add(pItem);
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception )
                     {
                         //ignore if any data failed.
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Logger.Write("Error loading data", LogLevel.Error, ConsoleColor.DarkRed);
             }
