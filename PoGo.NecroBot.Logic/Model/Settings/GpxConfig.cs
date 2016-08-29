@@ -4,16 +4,17 @@ using Newtonsoft.Json;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(Description = "")]
     public class GpxConfig
     {
         [DefaultValue(false)]
-        [JsonProperty("UseGpxPathing", Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool UseGpxPathing;
 
         [DefaultValue("GPXPath.GPX")]
-        [RegularExpression(@"^.{0,32}$")]
-        [JsonProperty("GpxFile", Required = Required.AllowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        [MinLength(0)]
+        [MaxLength(32)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
         public string GpxFile = "GPXPath.GPX";
     }
 }

@@ -7,8 +7,9 @@ using System.Reflection;
 using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
-using Newtonsoft.Json.Serialization;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
@@ -29,27 +30,40 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonIgnore]
         public string ProfilePath;
 
-        [JsonProperty("ConsoleConfig", Required = Required.Always)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public ConsoleConfig ConsoleConfig = new ConsoleConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public UpdateConfig UpdateConfig = new UpdateConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public WebsocketsConfig WebsocketsConfig = new WebsocketsConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public LocationConfig LocationConfig = new LocationConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public TelegramConfig TelegramConfig = new TelegramConfig();
-        [JsonProperty("GPXConfig", Required = Required.Always)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public GpxConfig GPXConfig = new GpxConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public SnipeConfig SnipeConfig = new SnipeConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public HumanWalkSnipeConfig HumanWalkSnipeConfig = new HumanWalkSnipeConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public PokeStopConfig PokeStopConfig = new PokeStopConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public PokemonConfig PokemonConfig = new PokemonConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public RecycleConfig RecycleConfig = new RecycleConfig();
-        [JsonProperty("CustomCatchConfig", Required = Required.Always)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public CustomCatchConfig CustomCatchConfig = new CustomCatchConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public PlayerConfig PlayerConfig = new PlayerConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public SoftBanConfig SoftBanConfig = new SoftBanConfig();
-        [JsonProperty("GoogleWalkConfig", Required = Required.Always)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public GoogleWalkConfig GoogleWalkConfig = new GoogleWalkConfig();
+        [JsonProperty(Required = Required.DisallowNull)]
         public YoursWalkConfig YoursWalkConfig = new YoursWalkConfig();
 
+        [JsonProperty(Required = Required.DisallowNull)]
         public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
         {
             new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
@@ -70,6 +84,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         };
 
 
+        [JsonProperty(Required = Required.DisallowNull)]
         public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
@@ -111,6 +126,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             PokemonId.Mew
         };
 
+        [JsonProperty(Required = Required.DisallowNull)]
         public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
         {
             /*NOTE: keep all the end-of-line commas exept for the last one or an exception will be thrown!
@@ -149,6 +165,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             //PokemonId.Goldeen,
             //PokemonId.Staryu
         };
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public List<PokemonId> PokemonsToLevelUp = new List<PokemonId>
         {
             //criteria: from SS Tier to A Tier + Regional Exclusive
@@ -189,6 +207,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             PokemonId.Mewtwo,
             PokemonId.Mew
         };
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
         {
             //criteria: most common
@@ -201,6 +221,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             PokemonId.Doduo
         };
 
+        [JsonProperty(Required = Required.DisallowNull)]
         public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
         {
             //criteria: based on NY Central Park and Tokyo variety + sniping optimization
@@ -234,6 +255,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             {PokemonId.Dragonite, new TransferFilter(2600, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.DragonBreath,PokemonMove.DragonClaw }},null,"and")},
         };
 
+        [JsonProperty(Required = Required.DisallowNull)]
         public SnipeSettings PokemonToSnipe = new SnipeSettings
         {
             Locations = new List<Location>
@@ -302,6 +324,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             }
         };
 
+        [JsonProperty(Required = Required.DisallowNull)]
         public List<PokemonId> PokemonToUseMasterball = new List<PokemonId>
         {
             PokemonId.Articuno,
@@ -331,7 +354,44 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         public static GlobalSettings Default => new GlobalSettings();
 
+        [JsonProperty(Required = Required.DisallowNull)]
         public Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters = HumanWalkSnipeFilter.Default();
+
+
+        private static JSchema _schema;
+
+        public static JSchema JsonSchema
+        {
+            get
+            {
+                if (_schema != null)
+                    return _schema;
+                // JSON Schemas from .NET types
+                var generator = new JSchemaGenerator
+                {
+                    // change contract resolver so property names are camel case
+                    //ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    // types with no defined ID have their type name as the ID
+                    SchemaIdGenerationHandling = SchemaIdGenerationHandling.TypeName,
+                    // use the default order of properties.
+                    SchemaPropertyOrderHandling = SchemaPropertyOrderHandling.Default,
+                    // referenced schemas are inline.
+                    SchemaLocationHandling = SchemaLocationHandling.Inline,
+                    // no schemas can be referenced.    
+                    SchemaReferenceHandling = SchemaReferenceHandling.None
+                };
+                // change Zone enum to generate a string property
+                var strEnumGen = new StringEnumGenerationProvider { CamelCaseText = true };
+                generator.GenerationProviders.Add(strEnumGen);
+                // generate json schema 
+                var type = typeof(GlobalSettings);
+                var schema = generator.Generate(type);
+                schema.Title = type.Name;
+                // save to file
+                _schema = schema;
+                return _schema;
+            }
+        }
 
         public static GlobalSettings Load(string path, bool boolSkipSave = false)
         {
@@ -355,6 +415,23 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                             input = File.ReadAllText(configFile);
                             if (!input.Contains("DeprecatedMoves"))
                                 input = input.Replace("\"Moves\"", $"\"DeprecatedMoves\"");
+
+                            // validate Json using JsonSchema
+                            Logger.Write(@"Validating old config.json...");
+                            var jsonObj = JObject.Parse(input);
+                            IList<ValidationError> errors;
+                            var valid = jsonObj.IsValid(JsonSchema, out errors);
+                            if (!valid)
+                            {
+                                foreach (var error in errors)
+                                {
+                                    Logger.Write(
+                                        "config.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " + error.Path +
+                                        error.Message, LogLevel.Error);
+                                }
+                                Logger.Write("Fix config.json and restart NecroBot or press a key to ignore and continue...", LogLevel.Warning);
+                                Console.ReadKey();
+                            }
 
                             break;
                         }
@@ -632,29 +709,24 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
             File.WriteAllText(fullPath, output);
 
-            // JSON Schemas from .NET types
-            var generator = new JSchemaGenerator
+            //JsonSchema
+            File.WriteAllText(fullPath.Replace(".json", ".schema.json"), JsonSchema.ToString());
+
+            // validate Json using JsonSchema
+            Logger.Write("Validating new config.json...");
+            var jsonObj = JObject.Parse(output);
+            IList<ValidationError> errors;
+            var valid = jsonObj.IsValid(JsonSchema, out errors);
+            if (valid) return;
+            foreach (var error in errors)
             {
-                // change contract resolver so property names are camel case
-                //ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                // types with no defined ID have their type name as the ID
-                SchemaIdGenerationHandling = SchemaIdGenerationHandling.TypeName,
-                // use the default order of properties.
-                SchemaPropertyOrderHandling = SchemaPropertyOrderHandling.Default,
-                // referenced schemas are inline.
-                SchemaLocationHandling = SchemaLocationHandling.Inline,
-                // all schemas can be referenced.    
-                SchemaReferenceHandling = SchemaReferenceHandling.None
-            };
-            // change Zone enum to generate a string property
-            var strEnumGen = new StringEnumGenerationProvider { CamelCaseText = true };
-            generator.GenerationProviders.Add(strEnumGen);
-            // generate json schema 
-            var type = typeof(GlobalSettings);
-            var schema = generator.Generate(type);
-            schema.Title = type.Name;
-            // save to file
-            File.WriteAllText(fullPath.Replace(".json", ".schema.json"), schema.ToString());
+                Logger.Write(
+                    "config.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " + error.Path +
+                    error.Message, LogLevel.Error);
+                //"Default value is '" + error.Schema.Default + "'"
+            }
+            Logger.Write("Fix config.json and restart NecroBot or press a key to ignore and continue...", LogLevel.Warning);
+            Console.ReadKey();
         }
     }
 }

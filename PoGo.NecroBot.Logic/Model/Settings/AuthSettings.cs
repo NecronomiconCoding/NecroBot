@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -7,27 +8,64 @@ using System.Reflection;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
-using Newtonsoft.Json.Serialization;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.Utils;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
-    [JsonObject(MemberSerialization.OptOut)]
+    [JsonObject(Description = "")]
     public class AuthSettings
     {
         [JsonIgnore]
         private string _filePath;
 
-        [JsonProperty("AuthConfig", Required = Required.Always)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public AuthConfig AuthConfig = new AuthConfig();
-        [JsonProperty("ProxyConfig", Required = Required.Always)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public ProxyConfig ProxyConfig = new ProxyConfig();
-        [JsonProperty("DeviceConfig", Required = Required.Always)]
+        [JsonProperty(Required = Required.DisallowNull)]
         public DeviceConfig DeviceConfig = new DeviceConfig();
+
+        private JSchema _schema;
+
+        private JSchema JsonSchema
+        {
+            get
+            {
+                if (_schema != null)
+                    return _schema;
+                // JSON Schemas from .NET types
+                var generator = new JSchemaGenerator
+                {
+                    // change contract resolver so property names are camel case
+                    //ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    // sets the default required state of schemas
+                    DefaultRequired = Required.Default,
+                    // types with no defined ID have their type name as the ID
+                    SchemaIdGenerationHandling = SchemaIdGenerationHandling.TypeName,
+                    // use the default order of properties.
+                    SchemaPropertyOrderHandling = SchemaPropertyOrderHandling.Default,
+                    // referenced schemas are inline.
+                    SchemaLocationHandling = SchemaLocationHandling.Inline,
+                    // all schemas can be referenced.    
+                    SchemaReferenceHandling = SchemaReferenceHandling.None
+                };
+                // change Zone enum to generate a string property
+                var strEnumGen = new StringEnumGenerationProvider { CamelCaseText = true };
+                generator.GenerationProviders.Add(strEnumGen);
+                // generate json schema 
+                var type = typeof(AuthSettings);
+                var schema = generator.Generate(type);
+                schema.Title = type.Name;
+                // save to file
+                _schema = schema;
+                return _schema;
+            }
+        }
 
         public AuthSettings()
         {
@@ -57,6 +95,23 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 {
                     // if the file exists, load the settings
                     var input = File.ReadAllText(_filePath);
+
+                    // validate Json using JsonSchema
+                    Logger.Write(@"Validating old auth.json...");
+                    var jsonObj = JObject.Parse(input);
+                    IList<ValidationError> errors;
+                    var valid = jsonObj.IsValid(JsonSchema, out errors);
+                    if (!valid)
+                    {
+                        foreach (var error in errors)
+                        {
+                            Logger.Write(
+                                "auth.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " + error.Path +
+                                error.Message, LogLevel.Error);
+                        }
+                        Logger.Write("Fix auth.json and restart NecroBot or press a key to ignore and continue...", LogLevel.Warning);
+                        Console.ReadKey();
+                    }
 
                     var settings = new JsonSerializerSettings();
                     settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
@@ -128,29 +183,23 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
             File.WriteAllText(fullPath, output);
 
-            // JSON Schemas from .NET types
-            var generator = new JSchemaGenerator
+            //JsonSchema
+            File.WriteAllText(fullPath.Replace(".json", ".schema.json"), JsonSchema.ToString());
+
+            // validate Json using JsonSchema
+            Logger.Write("Validating new auth.json...");
+            var jsonObj = JObject.Parse(output);
+            IList<ValidationError> errors;
+            var valid = jsonObj.IsValid(JsonSchema, out errors);
+            if (valid) return;
+            foreach (var error in errors)
             {
-                // change contract resolver so property names are camel case
-                //ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                // types with no defined ID have their type name as the ID
-                SchemaIdGenerationHandling = SchemaIdGenerationHandling.TypeName,
-                // use the default order of properties.
-                SchemaPropertyOrderHandling = SchemaPropertyOrderHandling.Default,
-                // referenced schemas are inline.
-                SchemaLocationHandling = SchemaLocationHandling.Inline,
-                // all schemas can be referenced.    
-                SchemaReferenceHandling = SchemaReferenceHandling.All
-            };
-            // change Zone enum to generate a string property
-            var strEnumGen = new StringEnumGenerationProvider {CamelCaseText = true};
-            generator.GenerationProviders.Add(strEnumGen);
-            // generate json schema 
-            var type = typeof(AuthSettings);
-            var schema = generator.Generate(type);
-            schema.Title = type.Name;
-            // save to file
-            File.WriteAllText(fullPath.Replace(".json", ".schema.json"), schema.ToString());
+                Logger.Write(
+                    "auth.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " + error.Path +
+                    error.Message, LogLevel.Error);
+            }
+            Logger.Write("Fix auth.json and restart NecroBot or press a key to ignore and continue...", LogLevel.Warning);
+            Console.ReadKey();
         }
 
         public void Save()
