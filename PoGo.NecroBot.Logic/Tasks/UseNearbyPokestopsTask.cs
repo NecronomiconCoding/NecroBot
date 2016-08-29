@@ -27,6 +27,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static int storeRI;
         private static int RandomNumber;
         public static Boolean SetDestinationEnabled { get; set; } = false;
+        public static Boolean SetDestinationAccept { get; set; } = false;
         public static double lat { get; set; }
         public static double lng { get; set; }
         internal static void Initialize()
@@ -86,9 +87,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 pokestopList.RemoveAt(pokestopListNum);
                 if (SetDestinationEnabled && refcount == 1)
                 {
-
-                    SetDestinationEnabled = false;
-
+                    SetDestinationAccept = true;
                     await FortPokestop(session, cancellationToken, pokeStop, true);
                     break;
                 }
@@ -155,7 +154,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             .ToList();
                     foreach (var ps in reachablePokestops)
                     {
-                        if (SetDestinationEnabled) break;
+                        if (SetDestinationEnabled && !SetDestinationAccept) break; 
                         pokestopList.Remove(ps);
                         await FortPokestop(session, cancellationToken, ps);
                     }
@@ -184,7 +183,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                      }
                  });
                 }
-                if (SetDestinationEnabled) break;
+                if (SetDestinationEnabled && !SetDestinationAccept) break;
             }
             refcount--;
         }
@@ -222,6 +221,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
                     //Catch Incense Pokemon
                     await CatchIncensePokemonsTask.Execute(session, cancellationToken);
+                   // if(refcount == 1)
+                      //  await UseNearbyPokestopsTask.Execute(session, cancellationToken);
                     return true;
                 },
                 session,
@@ -246,6 +247,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Longitude = fortInfo.Longitude,
                     InventoryFull = false
                 });
+                SetDestinationAccept = false;
+                SetDestinationEnabled = false;
                 return;
             }
 
