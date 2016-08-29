@@ -54,10 +54,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool UseEggIncubators = true;
 
-        [DefaultValue(2)]
-        [Range(0, 10)]
+        [DefaultValue(true)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
-        public int UseEggIncubatorMinKm = 2;
+        public bool UseLimitedEggIncubators = true;
 
         [DefaultValue(false)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]

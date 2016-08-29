@@ -20,7 +20,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             _client = client;
         }
 
-        public async Task<PlayerUpdateResponse> Walk(GeoCoordinate targetLocation, Func<Task<bool>> functionExecutedWhileWalking, ISession session, CancellationToken cancellationToken)
+        public async Task<PlayerUpdateResponse> Walk(GeoCoordinate targetLocation, Func<Task<bool>> functionExecutedWhileWalking, ISession session, CancellationToken cancellationToken, double walkSpeed = 0.0)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -87,6 +87,10 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             } while (LocationUtils.CalculateDistanceInMeters(sourceLocation, targetLocation) >= 2);
 
             return result;
+        }
+        public async Task<double> CalculateDistance(double sourceLat, double sourceLng, double destinationLat, double destinationLng)
+        {
+            return LocationUtils.CalculateDistanceInMeters(sourceLat, sourceLng, destinationLat, destinationLng);
         }
     }
 }

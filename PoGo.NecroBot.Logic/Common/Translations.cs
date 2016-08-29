@@ -137,6 +137,7 @@ namespace PoGo.NecroBot.Logic.Common
         StatsTemplateString,
         ProfileStatsTemplateString,
         ShowPokeTemplate,
+        ShowPokeSkillTemplate,
         HelpTemplate,
         StatsXpTemplateString,
         RequireInputText,
@@ -216,7 +217,8 @@ namespace PoGo.NecroBot.Logic.Common
         HumanWalkSnipeUpdate,
         HumanWalkSnipeAddedPokestop,
         HumanWalkSnipeDestinationReached,
-        HumanWalkSnipeNotEnoughtBalls
+        HumanWalkSnipeNotEnoughtBalls,
+        HumanWalkSnipePokemonEncountered
     }
 
     public class Translation : ITranslation
@@ -264,7 +266,7 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureSuccess,
                 "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14} | Move1: {15} Move2: {16}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureFailed,
-                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12} | Move1: {13} Move2: {14}"),
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12} | Move1: {13} Move2: {14}"),
 
 
             new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
@@ -407,6 +409,8 @@ namespace PoGo.NecroBot.Logic.Common
                 "----- LVL {0} | {1} ----- \n Experience: {2}/{3} \n Pokemons caught: {4} \n Pokemons deployed: {5} \n Pokestops visited: {6} \n Eggs hatched: {7} \n Pokemons evolved: {8} \n Pokedex entries: {9} \n KM walked: {10}  \n Pokemons: {11}/{12}"),
             new KeyValuePair<TranslationString, string>(TranslationString.ShowPokeTemplate,
                 "\n CP: {0} | IV: {1}% | Name: {2}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.ShowPokeSkillTemplate,
+                "\n CP: {0} | IV: {1}% | Move: {2} + {3} | Name: {4}"),
             new KeyValuePair<TranslationString, string>(TranslationString.HelpTemplate,
                 "Commands: \n \n /help - Show commands. \n /top <cp/iv> <amount> - Shows you top Pokemons. \n /all <cp/iv> - Shows you all Pokemons. \n /profile - Shows you profile. \n /loc - Shows you location. \n /items - Shows your items. \n /status - Shows you the Status of the Bot. \n /pokedex - Shows you Pokedex. \n /restart - Restart NcroBot. \n /exit - Close NecroBot."),
             new KeyValuePair<TranslationString, string>(TranslationString.StatsXpTemplateString,
@@ -499,12 +503,12 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.SnipeExceeds, "Sniper need to take a rest before your account is banned"),
             new KeyValuePair<TranslationString, string>(TranslationString.CatchExceeds, "You are catching too fast. Your cannot catch another one until {0} seconds later"),
             new KeyValuePair<TranslationString, string>(TranslationString.PokeStopExceeds, "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"),
-            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipe, "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9}"),
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipe, "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Estimate : {6:00} min {7:00} sec | Allow spin: {8} | Allow catch : {9} | Speed {10:0.00}km/h"),
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeUpdate, "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all. but try to maximun catch if possible."),
             new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeAddedPokestop, "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops."),
-            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeDestinationReached, "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"),
-            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeNotEnoughtBalls, "(HUMAN WALK) Not enought balls to activate catch Em-All mode. ({0})/{1}")
-   
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeDestinationReached, "(HUMAN WALK) destination reached | lat: {0}, lng: {1} | wait :{2:0.00} sec"),
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipeNotEnoughtBalls, "(HUMAN WALK) Not enought balls to activate catch Em-All mode. ({0})/{1}") ,
+            new KeyValuePair<TranslationString, string>(TranslationString.HumanWalkSnipePokemonEncountered, "(HUMAN WALK) Encountered {0}  | lat :{1} , Lng : {2} | removed from snipping list")
         };
 
         [JsonProperty("PokemonStrings",
