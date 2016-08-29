@@ -770,7 +770,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static List<SniperInfo> GetSniperInfoFrom_pokewatchers(ISession session, List<PokemonId> pokemonIds)
         {
 
-            var uri = $"http://pokewatchers.com/api.php?act=grab";
+            var uri = $"http://pokewatchers.com/grab/";
 
             ScanResult_pokewatchers scanResult_pokewatchers;
             try

@@ -71,5 +71,19 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [DefaultValue(true)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool UseSnipePokemonList = true;
+
+        [DefaultValue(60.0)]
+        [Range(0, 999)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        public double MaxSpeedUpSpeed = 60.0;
+
+        [DefaultValue(true)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        public bool AllowSpeedUp = true;
+
+        [DefaultValue(10000)]
+        [Range(0, 999999)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        public int DelayTimeAtDestination = 10000;//  10 sec
     }
 }

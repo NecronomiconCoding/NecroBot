@@ -9,11 +9,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Inventory.Item;
-using PoGo.NecroBot.Logic.Common;
 
 #endregion
 
@@ -68,12 +66,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             var newRememberedIncubators = new List<IncubatorUsage>();
 
-            // Find out if there are only 10km-eggs (special case)
-            var only10kmEggs = false;
-            var testIfOnly10kmEggs = unusedEggs.FirstOrDefault(x => x.EggKmWalkedTarget < 10);
-            if (testIfOnly10kmEggs == null) only10kmEggs = true;
-
-                foreach (var incubator in incubators)
+            foreach (var incubator in incubators)
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
@@ -88,23 +81,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (egg == null)
                         continue;
 
-                    // Avoid using 10 km egg until you are level 20 in order to get higher 
-                    // initial CP on the high IV 10 km Pokémons (unless you ONLY have 10km-eggs)
-                    if (egg.EggKmWalkedTarget == 10 && playerStats.Level < 20 && !only10kmEggs)
-                    {
-                        Logger.Write(session.Translation.GetTranslation(TranslationString.Only10kmEggs), LogLevel.Egg);
-                        continue;
-                    }
-
-                    // Avoid using 2/5 km eggs with limited incubator - IF setting is 10!
-                    if (egg.EggKmWalkedTarget < session.LogicSettings.UseEggIncubatorMinKm 
+                    // Skip (save) limited incubators depending on user choice in config
+                    if (!session.LogicSettings.UseLimitedEggIncubators 
                         && incubator.ItemId != ItemId.ItemIncubatorBasicUnlimited)
                         continue;
 
                     var response = await session.Client.Inventory.UseItemEggIncubator(incubator.Id, egg.Id);
                     unusedEggs.Remove(egg);
 
-                    newRememberedIncubators.Add(new IncubatorUsage {IncubatorId = incubator.Id, PokemonId = egg.Id});
+                    newRememberedIncubators.Add(new IncubatorUsage { IncubatorId = incubator.Id, PokemonId = egg.Id });
 
                     session.EventDispatcher.Send(new EggIncubatorStatusEvent
                     {
