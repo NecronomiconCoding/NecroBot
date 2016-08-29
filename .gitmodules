@@ -6,3 +6,6 @@
 	path = POGOProtos
 	url = https://github.com/NoxxDev/POGOProtos-0.35.0.git
 	branch = master
+[submodule "PokeEase"]
+	path = PokeEase
+	url = https://github.com/GediminasMasaitis/PokeEase.git
