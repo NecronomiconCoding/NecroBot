@@ -473,6 +473,10 @@
       "Value": "\n CP: {0} | IV: {1}% | Nama: {2}"
     },
     {
+      "Key": "showPokeSkillTemplate",
+      "Value": "\n CP: {0} | IV: {1}% | Jurus: {2} + {3} | Nama: {4}"
+    },
+    {
       "Key": "helpTemplate",
       "Value": "Perintah: \n \n /top <cp/iv> <jumlah> - Menampilkan Pokemon tertinggimu.. \n /all <cp/iv> - Menampilkan semua Pokemon-mu. \n /profile - Menampilkan profilmu. \n /loc - Menampilkan lokasimu. \n /items - Menampilkan barangmu. \n /status - Menampilkan status bot-mu. \n /pokedex - Menampilkan Pokedex-mu"
     },

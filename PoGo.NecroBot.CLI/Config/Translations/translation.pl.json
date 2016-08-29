@@ -478,7 +478,11 @@
     },
     {
       "Key": "showPokeTemplate",
-      "Value": "\n CP: {0} | Nazwa: {1}"
+      "Value": "\n CP: {0} | IV: {1}% | Nazwa: {2}"
+    },
+    {
+      "Key": "showPokeSkillTemplate",
+      "Value": "\n CP: {0} | IV: {1}% | Move: {2} + {3} | Nazwa: {4}"
     },
     {
       "Key": "helpTemplate",

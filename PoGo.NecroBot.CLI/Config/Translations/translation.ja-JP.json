@@ -481,6 +481,10 @@
       "Value": "\n CP: {0} | IV: {1}% | {2}"
     },
     {
+      "Key": "showPokeSkillTemplate",
+      "Value": "\n CP: {0} | IV: {1}% | Move: {2} + {3} | {4}"
+    },
+    {
       "Key": "helpTemplate",
       "Value": "Commands: \n \n /top <cp/iv> <amount> - トップのポケモンを表示 \n /all <cp/iv> - 全てのポケモンを表示 \n /profile - プロファイルを表示 \n /loc - 座標を表示。 \n /items - アイテムを表示 \n /status - BOTの状態を表示. \n /pokedex - ずかんを表示 "
     },
