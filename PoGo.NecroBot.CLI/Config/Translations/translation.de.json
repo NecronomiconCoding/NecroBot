@@ -414,7 +414,11 @@
     },
     {
       "Key": "ShowPokeTemplate",
-      "Value": " \n WP {0} | IV : {1}% | Name: {2}"
+      "Value": " \n WP: {0} | IV : {1}% | Name: {2}"
+    },
+    {
+      "Key": "ShowPokeSkillTemplate",
+      "Value": " \n WP: {0} | IV : {1}% | Move: {2} + {3} | Name: {4}"
     },
     {
       "Key": "HelpTemplate",

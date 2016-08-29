@@ -149,9 +149,11 @@ namespace PoGo.NecroBot.Logic.Service
 
                     foreach (var pokemon in topPokemons)
                     {
-                        answerTextmessage += _session.Translation.GetTranslation(TranslationString.ShowPokeTemplate,
-                            pokemon.Cp, PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"),
-                            _session.Translation.GetPokemonTranslation(pokemon.PokemonId));
+                        answerTextmessage += _session.Translation.GetTranslation(TranslationString.ShowPokeSkillTemplate,
+                        pokemon.Cp, PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"),
+                        _session.Translation.GetPokemonMovesetTranslation(PokemonInfo.GetPokemonMove1(pokemon)),
+                        _session.Translation.GetPokemonMovesetTranslation(PokemonInfo.GetPokemonMove2(pokemon)),
+                        _session.Translation.GetPokemonTranslation(pokemon.PokemonId));
 
                         if (answerTextmessage.Length > 3800)
                         {

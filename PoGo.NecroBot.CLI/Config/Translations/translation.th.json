@@ -481,6 +481,10 @@
       "Value": "\n CP : {0} | IV : {1}% | ชื่อ : {2}"
     },
     {
+      "Key": "showPokeSkillTemplate",
+      "Value": "\n CP: {0} | IV: {1}% | Move: {2} + {3} | ชื่อ: {4}"
+    },
+    {
       "Key": "helpTemplate",
       "Value": "คำสั่ง : \n \n /top <cp/iv> <amount> - แสดงลำดับสูงสุดของโปเกมอน. \n /ทั้งหมด <cp/iv> - แสดงโปเกมอนทั้งหมด. \n /profile - แสดงโปรไฟล์. \n /loc - แสดงตำแหน่ง. \n /items - แสดงไอเทม. \n /status - แสดงสถานะของบอท. \n /pokedex - แสดงโปเกมอนของคุณ "
     },
