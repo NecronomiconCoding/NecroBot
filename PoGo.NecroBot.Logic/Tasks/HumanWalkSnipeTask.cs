@@ -222,7 +222,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             double speed = p.Setting.AllowSpeedUp ? p.Setting.MaxSpeedUpSpeed : _setting.WalkingSpeedInKilometerPerHour;
             var speedInMetersPerSecond = speed / 3.6;
 
-            p.Distance = LocationUtils.CalculateDistanceInMeters(_session.Client.CurrentLatitude, _session.Client.CurrentLongitude, p.Latitude, p.Longitude);
+            p.Distance = CalculateDistanceInMeters(_session.Client.CurrentLatitude, _session.Client.CurrentLongitude, p.Latitude, p.Longitude);
             p.EstimatedTime = p.Distance / speedInMetersPerSecond + p.Setting.DelayTimeAtDestination /1000  + 15; //margin 30 second
 
         }
@@ -444,6 +444,12 @@ namespace PoGo.NecroBot.Logic.Tasks
             });
         }
 
+        public static double CalculateDistanceInMeters(double sourceLat, double sourceLng, double destinationLat, double destinationLng)
+        {
+            var distanceTask = _session.Navigation.WalkStrategy.CalculateDistance(sourceLat, sourceLng, destinationLat, destinationLng);
+            distanceTask.Wait();
+            return distanceTask.Result;
+        }
         public static void UpdateCatchPokemon(double latitude, double longitude, PokemonId id)
         {
             bool exist = false;
