@@ -24,14 +24,18 @@ namespace PoGo.NecroBot.Logic.Tasks
     {
         public static async Task CheckMSniperLocation(ISession session, CancellationToken cancellationToken)
         {
+            string pth = Path.Combine(session.LogicSettings.ProfilePath, "SnipeMS.json");
             try
             {
-                if (session.LogicSettings.CatchPokemon && session.LogicSettings.SnipeAtPokestops == false)//must be
+                if (session.LogicSettings.CatchPokemon == true &&
+                    session.LogicSettings.SnipeAtPokestops == false &&
+                    session.LogicSettings.UseSnipeLocationServer == false &&
+                    session.LogicSettings.EnableHumanWalkingSnipe == false
+                    )//extra security
                 {
                     if (!await SnipePokemonTask.CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                         return;
 
-                    string pth = Path.Combine(session.LogicSettings.ProfilePath, "SnipeMS.json");
                     if (!File.Exists(pth))
                         return;
                     StreamReader sr = new StreamReader(pth, Encoding.UTF8);
@@ -53,7 +57,10 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             catch (Exception ex)
             {
-                session.EventDispatcher.Send(new ErrorEvent { Message = ex.Message });
+                File.Delete(pth);//fixing deserialize errors
+                ErrorEvent ee = new ErrorEvent { Message = ex.Message };
+                if (ex.InnerException != null) ee.Message = ex.InnerException.Message;
+                session.EventDispatcher.Send(ee);
             }
         }
 

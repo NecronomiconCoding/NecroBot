@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool UseIncenseConstantly;
         /*Egg*/
         public bool UseEggIncubators = true;
-        public int UseEggIncubatorMinKm = 2;
+        public bool UseLimitedEggIncubators = true;
         public bool UseLuckyEggConstantly;
         public int UseLuckyEggsMinPokemonAmount = 30;
         public bool UseLuckyEggsWhileEvolving;

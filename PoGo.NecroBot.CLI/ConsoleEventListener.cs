@@ -377,25 +377,31 @@ namespace PoGo.NecroBot.CLI
                         ev.Estimate / 60,
                         ev.Estimate % 60,
                         ev.SpinPokeStop ? "Yes" : "No",
-                        ev.CatchPokemon ? "Yes" : "No"),
+                        ev.CatchPokemon ? "Yes" : "No",
+                        ev.WalkSpeedApplied),
                         LogLevel.Sniper,
                         ConsoleColor.Yellow);
                     break;
                 case HumanWalkSnipeEventTypes.DestinationReached:
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeDestinationReached, ev.Latitude, ev.Longitude), LogLevel.Sniper);
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeDestinationReached, ev.Latitude, ev.Longitude, ev.PauseDuration), LogLevel.Sniper);
 
                     break;
                 case HumanWalkSnipeEventTypes.PokemonScanned:
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeUpdate, ev.RarePokemons.Count, 2, 3), LogLevel.Sniper, ConsoleColor.DarkMagenta);
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeUpdate, ev.Pokemons.Count, 2, 3), LogLevel.Sniper, ConsoleColor.DarkMagenta);
                     break;
                     case HumanWalkSnipeEventTypes.PokestopUpdated:
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeAddedPokestop, ev.NearestDistane, ev.Pokestops.Count), LogLevel.Sniper, ConsoleColor.Yellow);
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeAddedPokestop, ev.NearestDistance, ev.Pokestops.Count), LogLevel.Sniper, ConsoleColor.Yellow);
                     break;
 
                 case HumanWalkSnipeEventTypes.NotEnoughtPalls:
                     Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeNotEnoughtBalls, ev.CurrentBalls, ev.MinBallsToSnipe), LogLevel.Sniper, ConsoleColor.Yellow);
                     break;
-
+                case HumanWalkSnipeEventTypes.EncounterSnipePokemon:
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipePokemonEncountered,
+                        session.Translation.GetPokemonTranslation(ev.PokemonId),
+                        ev.Latitude,
+                        ev.Longitude));
+                    break;
                 default:
                     break;
             }
