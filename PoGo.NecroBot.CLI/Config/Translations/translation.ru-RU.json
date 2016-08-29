@@ -134,7 +134,7 @@
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "Lucky eggs will never be used with UseLuckyEggsMinPokemonAmount set to {0}, use <= {1} instead"
+      "Value": "Lucky eggs никогда не будут использованы при значении настройки UseLuckyEggsMinPokemonAmount установленном на {0}, лучше используйте <= {1}"
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
