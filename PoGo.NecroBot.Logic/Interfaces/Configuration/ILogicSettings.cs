@@ -180,6 +180,7 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         bool HumanWalkingSnipeUseSnipePokemonList { get; }
         Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters { get; }
         double HumanWalkingSnipeMaxSpeedUpSpeed { get; }
+        int HumanWalkingSnipeDelayTimeAtDestination { get; }
         bool HumanWalkingSnipeAllowSpeedUp { get; }
     }
 }

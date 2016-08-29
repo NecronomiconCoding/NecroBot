@@ -18,7 +18,7 @@
     },
     {
       "Key": "HumanWalkSnipeDestinationReached",
-      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"
+      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1} | wait  {3:0.00} sec"
     },
     {
       "Key": "SniperCount",

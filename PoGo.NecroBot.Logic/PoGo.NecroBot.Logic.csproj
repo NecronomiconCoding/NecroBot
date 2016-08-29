@@ -231,6 +231,21 @@
     <Compile Include="Tasks\GetPokeDexCount.cs" />
     <Compile Include="Tasks\HumanRandomActionTask.cs" />
     <Compile Include="Tasks\HumanWalkSnipeTask.cs" />
+    <Compile Include="Tasks\HumanWalkSnipeTask.Pokecrew.cs">
+      <DependentUpon>HumanWalkSnipeTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\HumanWalkSnipeTask.Pokeradar.cs">
+      <DependentUpon>HumanWalkSnipeTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\HumanWalkSnipeTask.Pokesnipers.cs">
+      <DependentUpon>HumanWalkSnipeTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\HumanWalkSnipeTask.PokeZZ.cs">
+      <DependentUpon>HumanWalkSnipeTask.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tasks\HumanWalkSnipeTask.Skiplagged.cs">
+      <DependentUpon>HumanWalkSnipeTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tasks\InventoryListTask.cs" />
     <Compile Include="Tasks\LevelUpPokemonTask.cs" />
     <Compile Include="Tasks\PokemonListTask.cs" />
