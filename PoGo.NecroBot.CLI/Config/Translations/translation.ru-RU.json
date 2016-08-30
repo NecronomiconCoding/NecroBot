@@ -1,48 +1,48 @@
-﻿{
+{
   "TranslationStrings": [
     {
       "Key": "HumanWalkSnipeNotEnoughtBalls",
-      "Value": "(HUMAN WALK) Not enought balls to activate catch Em-All mode. ({0})/{1}"
+      "Value": "(HUMAN WALK) Недостаточно покеболов чтобы активировать catch Em-All режим. ({0})/{1}"
     },
     {
       "Key": "HumanWalkSnipe",
-      "Value": "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9} | Speed : {10:0.00}km/h"
+      "Value": "(HUMAN WALK) Найдено {0} спавнящихся | широта: {1}, долгота: {2}, дальность {3:0.00}m , пропадёт через {4:00} мин {5:00} сек | Ожидаемое время достижения : {6:00} мин {7:00} сек | Крутить PokeStop'ы: {8} | Ловить покемонов: {9}"
     },
     {
       "Key": "HumanWalkSnipeUpdate",
-      "Value": "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all, but try to catch as many as possible"
+      "Value": "(HUMAN WALK) Найдено {0} покемонов проходящих ваши фильтры. Человекообразный снайпер не сможет поймать их всех, но постарается поймать как можно больше"
     },
     {
       "Key": "HumanWalkSnipeAddedPokestop",
-      "Value": "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops"
+      "Value": "(HUMAN WALK) Вы в {0:0.00m} от ближайшего PokeStop'а. Перезапуск фарма в этой точке с {1} PokeStop'ами"
     },
     {
       "Key": "HumanWalkSnipeDestinationReached",
-      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1} | wait  {3:0.00} sec"
+      "Value": "(HUMAN WALK) точка назначения достигнута | широта: {0}, долгота: {1}"
     },
     {
       "Key": "SniperCount",
-      "Value": "Sniper count {0}"
+      "Value": "Счётчик снайпера {0}"
     },
     {
       "Key": "SnipeExceeds",
-      "Value": "Sniper need to take a rest before your account is banned"
+      "Value": "Во избежание бана снайпер должен отдохнуть."
     },
     {
       "Key": "CatchExceeds",
-      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+      "Value": "Вы ловите слишком быстро. Вы сможете поймать следующего только через {0} секунд"
     },
     {
       "Key": "PokeStopExceeds",
-      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+      "Value": "Вы посещаете PokeStop'ы слишком быстро. Вы сможете посетить следующий только через {0} секунд"
     },
     {
       "Key": "Only10kmEggs",
-      "Value": "Player below level 20, saving this 10 km Egg for later"
+      "Value": "Игрок не достиг 20го уровня, оставляем 10 km Яйцо на попозже"
     },
     {
       "Key": "GoogleAPIWarning",
-      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Value": "Без Google Api, у вас будет лимит 2500 запросов, при достижении лимита попробуйте сменить свой IP. Чтобы настроить \"GoogleAPIKey\", получите API Key по ссылке: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {
       "Key": "pokeball",
@@ -134,7 +134,7 @@
     },
     {
       "Key": "useLuckyEggsMinPokemonAmountTooHigh",
-      "Value": "Lucky eggs will never be used with UseLuckyEggsMinPokemonAmount set to {0}, use <= {1} instead"
+      "Value": "Lucky eggs никогда не будут использованы при значении настройки UseLuckyEggsMinPokemonAmount установленном на {0}, лучше используйте <= {1}"
     },
     {
       "Key": "catchMorePokemonToUseLuckyEgg",
@@ -470,7 +470,7 @@
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- LVL {0} | {1} ----- \n Опыта: {2}/{3} \n Покемонов поймано: {4} \n Покемонов задействовано: {5} \n Покестопов посещено: {6} \n Яиц высижено: {7} \n Покемонов эволюционировано: {8} \n Записей в покедэксе: {9} \n КМ пройдено: {10}  \n Покемонов: {11}/{12}"
+      "Value": "----- LVL {0} | {1} ----- \n Опыта: {2}/{3} \n Покемонов поймано: {4} \n Покемонов задействовано: {5} \n PokeStop'ов посещено: {6} \n Яиц высижено: {7} \n Покемонов эволюционировано: {8} \n Записей в покедэксе: {9} \n КМ пройдено: {10}  \n Покемонов: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
