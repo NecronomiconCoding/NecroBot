@@ -2,10 +2,10 @@
   "TranslationStrings": [
     {
       "Key": "humanWalkSnipePokemonEncountered",
-      "Value": "(Sambil jalan) Menemukan: {0}  | Koordinat:{1}, {2} | Dihapus dari daftar filter."
+      "Value": "(Sambil jalan) Pokemon: {0} telah ditemukan! | Koordinat: {1}, {2} | Dihapus dari daftar filter."
     },
     {
-	"Key": "HumanWalkSnipeNotEnoughtBalls",
+      "Key": "HumanWalkSnipeNotEnoughtBalls",
       "Value": "(Sambil jalan) Jumlah PokeBall untuk mengaktifkan mode 'Sapu-Bersih' tidak cukup: ({0})/{1}"
     },
     {
@@ -20,18 +20,17 @@
       "Key": "HumanWalkSnipeAddedPokestop",
       "Value": "(Sambil jalan) Kamu {0:0.0} meter jauhnya dari lokasi awal. Berjalan di lokasi ini dengan {1} PokeStop."
     },
-
     {
       "Key": "HumanWalkSnipeDestinationReached",
-      "Value": "(Sambil jalan) Sampai di lokasi | Koordinat: {0}, {1}"
+      "Value": "(Sambil jalan) Sampai di lokasi | Koordinat: {0}, {1} | Tunggu: {2:0.00} detik"
     },
     {
       "Key": "SniperCount",
-      "Value": "Jumlah bidikan {0}"
+      "Value": "Jumlah bidikan: {0}"
     },
     {
       "Key": "SnipeExceeds",
-      "Value": "Sniper harus diistirahatkan sebelum akun kamu kena Ban"
+      "Value": "Sniper harus diistirahatkan sebelum akun kamu kena Ban!"
     },
     {
       "Key": "CatchExceeds",
@@ -83,7 +82,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nama {0} | Dapat {1}xp, gem: {2}, barang: {3}, koordinat: {4}, {5}, alt: {6}"
+      "Value": "Sampai di: {0} | Mendapatkan EXP: {1} Gem: {2} | Barang: {3} | Koordinat: {4}, {5} | Ketinggian elevasi: {6}"
     },
     {
       "Key": "eventFortFailed",
@@ -91,7 +90,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Jalan ke PokeStop {0}, {1} meter, {2} detik (route {3})"
+      "Value": "Jalan ke PokeStop: {0} | Jarak: {1} meter | Waktu tempuh: {2} detik | Menggunakan rute: {3}"
     },
     {
       "Key": "eventProfileLogin",
