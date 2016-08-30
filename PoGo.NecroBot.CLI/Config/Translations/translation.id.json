@@ -1,7 +1,7 @@
 {
   "TranslationStrings": [
     {
-      "Key": "humanWalkSnipePokemonEncounted",
+      "Key": "humanWalkSnipePokemonEncountered",
       "Value": "(Sambil jalan) Menemukan: {0}  | Koordinat:{1}, {2} | Dihapus dari daftar filter."
     },
     {
