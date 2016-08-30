@@ -46,7 +46,8 @@ namespace PoGo.NecroBot.Logic.Event
         public int CurrentBalls { get; internal set; }
         public int MinBallsToSnipe { get; internal set; }
         public object WalkSpeedApplied { get; internal set; }
-        public List<HumanWalkSnipeTask.RarePokemonInfo> Pokemons { get; internal set; }
+        public List<HumanWalkSnipeTask.SnipePokemonInfo> Pokemons { get; internal set; }
         public string UniqueId { get; internal set; }
+        public int PauseDuration { get; internal set; }
     }
 }

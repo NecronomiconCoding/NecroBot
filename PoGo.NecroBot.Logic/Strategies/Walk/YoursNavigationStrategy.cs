@@ -9,6 +9,7 @@ using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
 using PoGo.NecroBot.Logic.Model.Yours;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Utils;
 
 namespace PoGo.NecroBot.Logic.Strategies.Walk
 {
@@ -41,6 +42,10 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
         {
             if (_yoursDirectionsService == null)
                 _yoursDirectionsService = new YoursDirectionsService(session);
+        }
+        public async Task<double> CalculateDistance(double sourceLat, double sourceLng, double destinationLat, double destinationLng)
+        {
+            return 1.5 * LocationUtils.CalculateDistanceInMeters(sourceLat, sourceLng, destinationLat, destinationLng);
         }
     }
 }
