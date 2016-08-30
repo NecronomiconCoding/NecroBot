@@ -81,7 +81,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         i =>
                             LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                                 session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
-                
+
                 var pokeStop = pokestopList[0];
                 pokestopList.RemoveAt(0);
 
@@ -136,9 +136,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await HumanWalkSnipeTask.Execute(session, cancellationToken,
                         async (double lat, double lng) =>
                         {
+                            //idea of this function is to spin pokestop on way. maybe risky.
                             var reachablePokestops = pokestopList.Where(i =>
-                            LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
-                            session.Client.CurrentLongitude, i.Latitude, i.Longitude) < 40).ToList();
+                                LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
+                                    session.Client.CurrentLongitude, i.Latitude, i.Longitude) < 40
+                                    && i.CooldownCompleteTimestampMs == 0
+                                    ).ToList();
                             reachablePokestops = reachablePokestops.OrderBy(i =>
                             LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
                             session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
@@ -147,15 +150,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                             {
                                 if (!session.LogicSettings.UseGpxPathing)
                                     pokestopList.Remove(ps);
-
                                 var fi = await session.Client.Fort.GetFort(ps.Id, ps.Latitude, ps.Longitude);
-                                await FortAction(session, ps, fi, cancellationToken);
+                                await FarmPokestop(session, ps, fi, cancellationToken, true);
+                                await Task.Delay(1000);
                             }
                         },
                         async () =>
                         {
                             // if using GPX we have to move back to the original pokestop, to resume the path.
-                            // we do not try to use pokestops on the way back, as we will have used them getting
+                            // we do not try to use pokest;ops on the way back, as we will have used them getting
                             // here.
                             if (session.LogicSettings.UseGpxPathing)
                             {
@@ -285,7 +288,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-        private static async Task FarmPokestop(ISession session, FortData pokeStop, FortDetailsResponse fortInfo, CancellationToken cancellationToken)
+        private static async Task FarmPokestop(ISession session, FortData pokeStop, FortDetailsResponse fortInfo, CancellationToken cancellationToken, bool doNotRetry = false)
         {
             FortSearchResponse fortSearch;
             var timesZeroXPawarded = 0;
@@ -324,7 +327,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                             Max = retryNumber - zeroCheck,
                             Looted = false
                         });
-
+                        if (doNotRetry)
+                        {
+                            break;
+                        }
                         if (!session.LogicSettings.FastSoftBanBypass)
                         {
                             DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
@@ -373,7 +379,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     RandomNumber = rc.Next(4, 11);
                     RandomStop = 0;
                     int RandomWaitTime = rc.Next(30, 120);
-                    Thread.Sleep(RandomWaitTime);
+                    await Task.Delay(RandomWaitTime);
                 }
             }
 

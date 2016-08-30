@@ -18,7 +18,7 @@
     },
     {
       "Key": "HumanWalkSnipeDestinationReached",
-      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1}"
+      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1} | wait  {3:0.00} sec"
     },
     {
       "Key": "SniperCount",
@@ -467,6 +467,22 @@
     {
       "Key": "statsTemplateString",
       "Value": "{0} - 運行時間 {1} - 等級: {2} | 經驗/小時: {3:0} | 捕獲/小時: {4:0} | 星塵: {5:0} | 傳送: {6:0} | 丟棄: {7:0}"
+    },
+    {
+      "Key": "profileStatsTemplateString",
+      "Value": "----- 等級： {0} | {1} ----- \t\t\n 經驗： {2}/{3} \t\t\n 捕捉{4}隻神奇寶貝\t\t\n 已部署{5}隻神奇寶貝\t\t\n 造訪{6}個補給站\t\t\n 孵化{6}個蛋\t\t\n進化{7}隻神奇寶貝\t\t\n 圖鑑解鎖{8}種\t\t\n 行走{9}公里\t\t"
+    },
+    {
+      "Key": "showPokeTemplate",
+      "Value": "\n CP： {0} | IV： {1}% | 名稱： {2}"
+    },
+    {
+      "Key": "showPokeSkillTemplate",
+      "Value": "\n CP： {0} | IV： {1}% | 技能: {2} + {3} | 名稱： {4}"
+    },
+    {
+      "Key": "helpTemplate",
+      "Value": "指令： \n \n /top <cp/iv> <數量> - 顯示最高級的神奇寶貝列表。 \t\t\n /all <cp/iv> - 顯示所有神奇寶貝列表. \t\t\n /profile - 顯示個人訊息。 \t\t\n /loc - 顯示位置。\t\t\n /items - 顯示物品。\t\t\n /status - 顯示外掛狀態。 \t\t\n /pokedex - 顯視圖鑑。x\t\t"
     },
     {
       "Key": "statsXpTemplateString",

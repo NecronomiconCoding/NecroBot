@@ -1,21 +1,26 @@
 {
   "TranslationStrings": [
     {
-      "Key": "HumanWalkSnipeNotEnoughtBalls",
+      "Key": "humanWalkSnipePokemonEncounted",
+      "Value": "(Sambil jalan) Menemukan: {0}  | Koordinat:{1}, {2} | Dihapus dari daftar filter."
+    },
+    {
+	"Key": "HumanWalkSnipeNotEnoughtBalls",
       "Value": "(Sambil jalan) Jumlah PokeBall untuk mengaktifkan mode 'Sapu-Bersih' tidak cukup: ({0})/{1}"
     },
     {
       "Key": "HumanWalkSnipe",
-      "Value": "(Sambil jalan) {0} terlihat! | Koordinat: {1}, {2}, jarak {3:0.00} m, berakhir dalam {4:00} mnt {5:00} dtk | Waktu tempuh : {6:00} mnt {7:00} dtk | Sambil singgah di PokeStop: {8} | Sambil tangkap Pokemon lain: {9} | Kecepatan: {10:0.00} km/j"
+      "Value": "(Sambil jalan) {0} terlihat! | Koordinat: {1}, {2} | Jarak {3:0.00} meter | Berakhir dalam {4:00} mnt {5:00} dtk | Waktu tempuh : {6:00} mnt {7:00} dtk | Kecepatan: {10:00.00} km/j | Singgah di PokeStop: {8} | Tangkap Pokemon lain: {9}"
     },
     {
       "Key": "HumanWalkSnipeUpdate",
-      "Value": "(Sambil jalan) Ada {0} pokemon cocok dengan filtermu. Tidak akan dapat semua, tapi mencoba yang terbaik."
+      "Value": "(Sambil jalan) Ada {0} Pokemon yang cocok dengan daftar filtermu. Tidak akan dapat semua, tapi mencoba yang terbaik!"
     },
     {
       "Key": "HumanWalkSnipeAddedPokestop",
-      "Value": "(Sambil jalan) Kamu {0:0.00} m jauhnya dari PokeStop terdekat. Mulai panen di lokasi ini dengan {1} PokeStop."
+      "Value": "(Sambil jalan) Kamu {0:0.0} meter jauhnya dari lokasi awal. Berjalan di lokasi ini dengan {1} PokeStop."
     },
+
     {
       "Key": "HumanWalkSnipeDestinationReached",
       "Value": "(Sambil jalan) Sampai di lokasi | Koordinat: {0}, {1}"
@@ -471,6 +476,10 @@
     {
       "Key": "showPokeTemplate",
       "Value": "\n CP: {0} | IV: {1}% | Nama: {2}"
+    },
+    {
+      "Key": "showPokeSkillTemplate",
+      "Value": "\n CP: {0} | IV: {1}% | Jurus: {2} + {3} | Nama: {4}"
     },
     {
       "Key": "helpTemplate",

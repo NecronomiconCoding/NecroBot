@@ -383,7 +383,7 @@ namespace PoGo.NecroBot.CLI
                         ConsoleColor.Yellow);
                     break;
                 case HumanWalkSnipeEventTypes.DestinationReached:
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeDestinationReached, ev.Latitude, ev.Longitude), LogLevel.Sniper);
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeDestinationReached, ev.Latitude, ev.Longitude, ev.PauseDuration), LogLevel.Sniper);
 
                     break;
                 case HumanWalkSnipeEventTypes.PokemonScanned:
@@ -397,7 +397,7 @@ namespace PoGo.NecroBot.CLI
                     Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeNotEnoughtBalls, ev.CurrentBalls, ev.MinBallsToSnipe), LogLevel.Sniper, ConsoleColor.Yellow);
                     break;
                 case HumanWalkSnipeEventTypes.EncounterSnipePokemon:
-                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipePokemonEncounted,
+                    Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipePokemonEncountered,
                         session.Translation.GetPokemonTranslation(ev.PokemonId),
                         ev.Latitude,
                         ev.Longitude));
