@@ -15,5 +15,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [DefaultValue(true)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
         public bool UseNearActionRandom = true;
+        public bool AutoCompleteTutorial = false;
+        public string DesiredNickname;
     }
 }
