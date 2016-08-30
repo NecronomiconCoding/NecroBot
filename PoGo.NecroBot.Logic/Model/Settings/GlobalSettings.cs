@@ -454,8 +454,11 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             SetupAccountType(newSession.Translation, settings);
             SetupUserAccount(newSession.Translation, settings);
             SetupConfig(newSession.Translation, settings);
+            SetupWalkingConfig(newSession.Translation, settings);
             SetupTelegramConfig(newSession.Translation, settings);
             SetupProxyConfig(newSession.Translation, settings);
+            SetupAutoCompleteTutConfig(newSession.Translation, settings);
+            SetupWebSocketConfig(newSession.Translation, settings);
             SaveFiles(settings, configPath);
 
             Logger.Write(session.Translation.GetTranslation(TranslationString.FirstStartSetupCompleted), LogLevel.None);
@@ -562,6 +565,124 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             strInput = Console.ReadLine();
             settings.Auth.ProxyConfig.UseProxyPassword = strInput;
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupProxyPasswordConfirm, strInput));
+        }
+
+        private static void SetupWalkingConfig(ITranslation translator, GlobalSettings settings)
+        {
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupWalkingSpeedPrompt, "Y", "N"), LogLevel.None);
+            string strInput;
+
+            bool boolBreak = false;
+            while (!boolBreak)
+            {
+                strInput = Console.ReadLine().ToLower();
+
+                switch (strInput)
+                {
+                    case "y":
+                        boolBreak = true;
+                        break;
+                    case "n":
+                        return;
+                    default:
+                        Logger.Write(translator.GetTranslation(TranslationString.PromptError, "y", "n"), LogLevel.Error);
+                        continue;
+                }
+            }
+
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupWalkingSpeedKmHPrompt));
+            strInput = Console.ReadLine();
+            settings.LocationConfig.WalkingSpeedInKilometerPerHour = Double.Parse(strInput);
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupWalkingSpeedKmHConfirm, strInput));
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupUseWalkingSpeedVariantPrompt, "Y", "N"), LogLevel.None);
+
+            boolBreak = false;
+            while (!boolBreak)
+            {
+                strInput = Console.ReadLine().ToLower();
+
+                switch (strInput)
+                {
+                    case "y":
+                        boolBreak = true;
+                        settings.LocationConfig.UseWalkingSpeedVariant = true;
+                        break;
+                    case "n":
+                        settings.LocationConfig.UseWalkingSpeedVariant = false;
+                        return;
+                    default:
+                        Logger.Write(translator.GetTranslation(TranslationString.PromptError, "y", "n"), LogLevel.Error);
+                        continue;
+                }
+            }
+
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupWalkingSpeedVariantPrompt));
+            strInput = Console.ReadLine();
+            settings.LocationConfig.WalkingSpeedVariant = Double.Parse(strInput);
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupWalkingSpeedVariantConfirm, strInput));
+
+        }
+
+        private static void SetupAutoCompleteTutConfig(ITranslation translator, GlobalSettings settings)
+        {
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupAutoCompleteTutPrompt, "Y", "N"), LogLevel.None);
+            string strInput;
+
+            bool boolBreak = false;
+            while (!boolBreak)
+            {
+                strInput = Console.ReadLine().ToLower();
+
+                switch (strInput)
+                {
+                    case "y":
+                        boolBreak = true;
+                        break;
+                    case "n":
+                        return;
+                    default:
+                        Logger.Write(translator.GetTranslation(TranslationString.PromptError, "y", "n"), LogLevel.Error);
+                        continue;
+                }
+            }
+
+            settings.PlayerConfig.AutoCompleteTutorial = true;
+
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupAutoCompleteTutNicknamePrompt));
+            strInput = Console.ReadLine();
+            settings.PlayerConfig.DesiredNickname = strInput;
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupAutoCompleteTutNicknameConfirm, strInput));
+        }
+
+        private static void SetupWebSocketConfig(ITranslation translator, GlobalSettings settings)
+        {
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupWebSocketPrompt, "Y", "N"), LogLevel.None);
+            string strInput;
+
+            bool boolBreak = false;
+            while (!boolBreak)
+            {
+                strInput = Console.ReadLine().ToLower();
+
+                switch (strInput)
+                {
+                    case "y":
+                        boolBreak = true;
+                        break;
+                    case "n":
+                        return;
+                    default:
+                        Logger.Write(translator.GetTranslation(TranslationString.PromptError, "y", "n"), LogLevel.Error);
+                        continue;
+                }
+            }
+
+            settings.WebsocketsConfig.UseWebsocket = true;
+
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupWebSocketPortPrompt));
+            strInput = Console.ReadLine();
+            settings.WebsocketsConfig.WebSocketPort = int.Parse(strInput);
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupWebSocketPortConfirm, strInput));
         }
 
         private static void SetupTelegramConfig(ITranslation translator, GlobalSettings settings)
