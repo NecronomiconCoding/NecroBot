@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events;
 using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Helpers;
@@ -23,10 +24,10 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks
             var configFile = Path.Combine(profileConfigPath, "config.json");
             var configSchemaFile = Path.Combine(profileConfigPath, "config.schema.json");
 
-            var authJson = File.ReadAllText(authFile);
-            var authSchemaJson = File.ReadAllText(authSchemaFile);
-            var configJson = File.ReadAllText(configFile);
-            var configSchemaJson = File.ReadAllText(configSchemaFile);
+            var authJson = File.ReadAllText(authFile, Encoding.UTF8);
+            var authSchemaJson = File.ReadAllText(authSchemaFile, Encoding.UTF8);
+            var configJson = File.ReadAllText(configFile, Encoding.UTF8);
+            var configSchemaJson = File.ReadAllText(configSchemaFile, Encoding.UTF8);
 
             var list = new ConfigWeb
             {

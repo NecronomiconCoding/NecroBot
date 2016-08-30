@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
@@ -94,24 +95,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 if (File.Exists(_filePath))
                 {
                     // if the file exists, load the settings
-                    var input = File.ReadAllText(_filePath);
-
-                    // validate Json using JsonSchema
-                    Logger.Write(@"Validating old auth.json...");
-                    var jsonObj = JObject.Parse(input);
-                    IList<ValidationError> errors;
-                    var valid = jsonObj.IsValid(JsonSchema, out errors);
-                    if (!valid)
-                    {
-                        foreach (var error in errors)
-                        {
-                            Logger.Write(
-                                "auth.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " + error.Path +
-                                error.Message, LogLevel.Error);
-                        }
-                        Logger.Write("Fix auth.json and restart NecroBot or press a key to ignore and continue...", LogLevel.Warning);
-                        Console.ReadKey();
-                    }
+                    var input = File.ReadAllText(_filePath, Encoding.UTF8);
 
                     var settings = new JsonSerializerSettings();
                     settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
@@ -181,13 +165,13 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 Directory.CreateDirectory(folder);
             }
 
-            File.WriteAllText(fullPath, output);
+            File.WriteAllText(fullPath, output, Encoding.UTF8);
 
             //JsonSchema
-            File.WriteAllText(fullPath.Replace(".json", ".schema.json"), JsonSchema.ToString());
+            File.WriteAllText(fullPath.Replace(".json", ".schema.json"), JsonSchema.ToString(), Encoding.UTF8);
 
             // validate Json using JsonSchema
-            Logger.Write("Validating new auth.json...");
+            Logger.Write("Validating auth.json...");
             var jsonObj = JObject.Parse(output);
             IList<ValidationError> errors;
             var valid = jsonObj.IsValid(JsonSchema, out errors);

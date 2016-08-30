@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -412,26 +413,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                     {
                         try
                         {
-                            input = File.ReadAllText(configFile);
+                            input = File.ReadAllText(configFile, Encoding.UTF8);
                             if (!input.Contains("DeprecatedMoves"))
                                 input = input.Replace("\"Moves\"", $"\"DeprecatedMoves\"");
-
-                            // validate Json using JsonSchema
-                            Logger.Write(@"Validating old config.json...");
-                            var jsonObj = JObject.Parse(input);
-                            IList<ValidationError> errors;
-                            var valid = jsonObj.IsValid(JsonSchema, out errors);
-                            if (!valid)
-                            {
-                                foreach (var error in errors)
-                                {
-                                    Logger.Write(
-                                        "config.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " + error.Path +
-                                        error.Message, LogLevel.Error);
-                                }
-                                Logger.Write("Fix config.json and restart NecroBot or press a key to ignore and continue...", LogLevel.Warning);
-                                Console.ReadKey();
-                            }
 
                             break;
                         }
@@ -707,13 +691,13 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 Directory.CreateDirectory(folder);
             }
 
-            File.WriteAllText(fullPath, output);
+            File.WriteAllText(fullPath, output, Encoding.UTF8);
 
             //JsonSchema
-            File.WriteAllText(fullPath.Replace(".json", ".schema.json"), JsonSchema.ToString());
+            File.WriteAllText(fullPath.Replace(".json", ".schema.json"), JsonSchema.ToString(), Encoding.UTF8);
 
             // validate Json using JsonSchema
-            Logger.Write("Validating new config.json...");
+            Logger.Write("Validating config.json...");
             var jsonObj = JObject.Parse(output);
             IList<ValidationError> errors;
             var valid = jsonObj.IsValid(JsonSchema, out errors);
