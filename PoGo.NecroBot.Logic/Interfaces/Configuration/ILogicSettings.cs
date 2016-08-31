@@ -137,6 +137,8 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         bool UseNearActionRandom { get; }
         bool AutoCompleteTutorial { get; }
         string DesiredNickname { get; }
+        string DesiredGender { get; }
+        string DesiredStarter { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
