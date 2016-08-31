@@ -88,13 +88,13 @@ namespace PoGo.NecroBot.Logic.Tasks
             return true;
         }
 
-        public static Task ExecuteFetchData(Session session)
+        public static Task ExecuteFetchData(ISession session)
         {
             InitSession(session);
 
             return Task.Run(() =>
             {
-                FetchData(_session.Client.CurrentLatitude, _session.Client.CurrentLongitude, false);
+                FetchData(_session.Client.CurrentLatitude, _session.Client.CurrentLongitude, true);
             });
         }
 
