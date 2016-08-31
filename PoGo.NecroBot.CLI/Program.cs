@@ -233,9 +233,12 @@ namespace PoGo.NecroBot.CLI
             ProgressBar.fill(50);
             var listener = new ConsoleEventListener();
             ProgressBar.fill(60);
+            var snipeEventListener = new SniperEventListener();
 
             session.EventDispatcher.EventReceived += evt => listener.Listen(evt, session);
             session.EventDispatcher.EventReceived += evt => aggregator.Listen(evt, session);
+            session.EventDispatcher.EventReceived += evt => snipeEventListener.Listen(evt, session);
+
             if (settings.WebsocketsConfig.UseWebsocket)
             {
                 var websocket = new WebSocketInterface(settings.WebsocketsConfig.WebSocketPort, session);
@@ -255,7 +258,7 @@ namespace PoGo.NecroBot.CLI
 
             ProgressBar.fill(100);
 
-            machine.AsyncStart(new VersionCheckState(), session);
+            machine.AsyncStart(new VersionCheckState(), session, subPath);
 
             try
             { Console.Clear(); }

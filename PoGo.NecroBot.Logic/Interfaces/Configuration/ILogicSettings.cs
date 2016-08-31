@@ -40,7 +40,7 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         bool TransferDuplicatePokemon { get; }
         bool TransferDuplicatePokemonOnCapture { get; }
         bool UseEggIncubators { get; }
-        int UseEggIncubatorMinKm { get; }
+        bool UseLimitedEggIncubators { get; }
         int UseGreatBallAboveCp { get; }
         int UseUltraBallAboveCp { get; }
         int UseMasterBallAboveCp { get; }
@@ -135,6 +135,8 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         bool UsePokeStopLimit { get; }
         bool UseCatchLimit { get; }
         bool UseNearActionRandom { get; }
+        bool AutoCompleteTutorial { get; }
+        string DesiredNickname { get; }
         ICollection<KeyValuePair<ItemId, int>> ItemRecycleFilter { get; }
 
         ICollection<PokemonId> PokemonsToEvolve { get; }
@@ -179,5 +181,8 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         bool HumanWalkingSnipeUseSkiplagged { get; }
         bool HumanWalkingSnipeUseSnipePokemonList { get; }
         Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters { get; }
+        double HumanWalkingSnipeMaxSpeedUpSpeed { get; }
+        int HumanWalkingSnipeDelayTimeAtDestination { get; }
+        bool HumanWalkingSnipeAllowSpeedUp { get; }
     }
 }

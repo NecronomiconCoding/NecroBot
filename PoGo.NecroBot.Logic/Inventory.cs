@@ -18,6 +18,7 @@ using POGOProtos.Inventory;
 using POGOProtos.Inventory.Item;
 using POGOProtos.Networking.Responses;
 using POGOProtos.Settings.Master;
+using Caching;
 
 #endregion
 
@@ -43,6 +44,8 @@ namespace PoGo.NecroBot.Logic
             _logicSettings = logicSettings;
         }
 
+        private Caching.LRUCache<ItemId, int> pokeballCache = new Caching.LRUCache<ItemId, int>(capacity: 10);
+
         private readonly List<ItemId> _pokeballs = new List<ItemId>
         {
             ItemId.ItemPokeBall,
@@ -58,6 +61,19 @@ namespace PoGo.NecroBot.Logic
             ItemId.ItemHyperPotion,
             ItemId.ItemMaxPotion
         };
+
+        public async Task<int> GetCachedPokeballCount(ItemId pokeballId)
+        {
+            int pokeballCount;
+            if (!pokeballCache.TryGetValue(pokeballId, out pokeballCount))
+            {
+                await RefreshCachedInventory();
+                pokeballCount = await GetItemAmountByType(pokeballId);
+                pokeballCache.Add(pokeballId, pokeballCount);
+            }
+
+            return pokeballCount;
+        }
 
         public async Task DeletePokemonFromInvById(ulong id)
         {

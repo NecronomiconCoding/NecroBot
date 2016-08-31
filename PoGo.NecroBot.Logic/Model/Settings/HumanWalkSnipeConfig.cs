@@ -23,5 +23,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool UsePokeRadar = true;
         public bool UseSkiplagged = true;
         public bool UseSnipePokemonList = true;
+        public double MaxSpeedUpSpeed = 60.0;
+        public bool AllowSpeedUp = true;
+        public int DelayTimeAtDestination = 10000;//  10 sec
     }
 }

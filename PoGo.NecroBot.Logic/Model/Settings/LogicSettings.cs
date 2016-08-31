@@ -68,7 +68,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool TransferDuplicatePokemon => _settings.PokemonConfig.TransferDuplicatePokemon;
         public bool TransferDuplicatePokemonOnCapture => _settings.PokemonConfig.TransferDuplicatePokemonOnCapture;
         public bool UseEggIncubators => _settings.PokemonConfig.UseEggIncubators;
-        public int UseEggIncubatorMinKm => _settings.PokemonConfig.UseEggIncubatorMinKm;
+        public bool UseLimitedEggIncubators => _settings.PokemonConfig.UseLimitedEggIncubators;
         public int UseGreatBallAboveCp => _settings.PokemonConfig.UseGreatBallAboveCp;
         public int UseUltraBallAboveCp => _settings.PokemonConfig.UseUltraBallAboveCp;
         public int UseMasterBallAboveCp => _settings.PokemonConfig.UseMasterBallAboveCp;
@@ -91,6 +91,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public int DelayBetweenPokemonCatch => _settings.PokemonConfig.DelayBetweenPokemonCatch;
         public int DelayBetweenPlayerActions => _settings.PlayerConfig.DelayBetweenPlayerActions;
         public bool UseNearActionRandom => _settings.PlayerConfig.UseNearActionRandom;
+        public bool AutoCompleteTutorial => _settings.PlayerConfig.AutoCompleteTutorial;
+        public string DesiredNickname => _settings.PlayerConfig.DesiredNickname;
         public bool UsePokemonToNotCatchFilter => _settings.PokemonConfig.UsePokemonToNotCatchFilter;
         public bool UsePokemonSniperFilterOnly => _settings.PokemonConfig.UsePokemonSniperFilterOnly;
         public int KeepMinDuplicatePokemon => _settings.PokemonConfig.KeepMinDuplicatePokemon;
@@ -185,5 +187,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool HumanWalkingSnipeUseSnipePokemonList => _settings.HumanWalkSnipeConfig.UseSnipePokemonList;
         public double HumanWalkingSnipeWalkbackDistanceLimit => _settings.HumanWalkSnipeConfig.WalkbackDistanceLimit;
         public bool HumanWalkingSnipeIncludeDefaultLocation => _settings.HumanWalkSnipeConfig.IncludeDefaultLocation;
+        public double HumanWalkingSnipeMaxSpeedUpSpeed => _settings.HumanWalkSnipeConfig.MaxSpeedUpSpeed;
+        public bool HumanWalkingSnipeAllowSpeedUp => _settings.HumanWalkSnipeConfig.AllowSpeedUp;
+        public int HumanWalkingSnipeDelayTimeAtDestination => _settings.HumanWalkSnipeConfig.DelayTimeAtDestination;
     }
 }

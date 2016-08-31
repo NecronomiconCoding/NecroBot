@@ -81,13 +81,13 @@ namespace PoGo.NecroBot.Logic
         public async Task<PlayerUpdateResponse> Move(GeoCoordinate targetLocation,
             Func<Task<bool>> functionExecutedWhileWalking,
             ISession session,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken, double customWalkingSpeed =0.0)
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             // If the stretegies become bigger, create a factory for easy management
 
-            return await WalkStrategy.Walk(targetLocation, functionExecutedWhileWalking, session, cancellationToken);
+            return await WalkStrategy.Walk(targetLocation, functionExecutedWhileWalking, session, cancellationToken, customWalkingSpeed);
         }
 
         private IWalkStrategy GetStrategy(ILogicSettings logicSettings)

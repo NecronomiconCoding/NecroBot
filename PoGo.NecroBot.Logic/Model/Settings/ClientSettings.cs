@@ -2,6 +2,7 @@ using System;
 using PoGo.NecroBot.Logic.Utils;
 using PokemonGo.RocketAPI;
 using PokemonGo.RocketAPI.Enums;
+using Google.Protobuf;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
@@ -63,6 +64,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             get { return null; }
             set { GoogleRefreshToken = null; }
         }
+
+        public ByteString SessionHash { get; set; }
+
         AuthType ISettings.AuthType
         {
             get { return _settings.Auth.AuthConfig.AuthType; }
@@ -202,9 +206,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             get
             {
                 return
-                    LocationUtils.getElevation(_settings.LocationConfig.DefaultLatitude, _settings.LocationConfig.DefaultLongitude) +
+                    LocationUtils.getElevation(null, _settings.LocationConfig.DefaultLatitude, _settings.LocationConfig.DefaultLongitude) +
                     _rand.NextDouble() *
-                    ((double)5 / Math.Cos(LocationUtils.getElevation(_settings.LocationConfig.DefaultLatitude, _settings.LocationConfig.DefaultLongitude)));
+                    ((double)5 / Math.Cos(LocationUtils.getElevation(null, _settings.LocationConfig.DefaultLatitude, _settings.LocationConfig.DefaultLongitude)));
             }
 
 
