@@ -240,6 +240,9 @@
     <Compile Include="Tasks\HumanWalkSnipeTask.Pokesnipers.cs">
       <DependentUpon>HumanWalkSnipeTask.cs</DependentUpon>
     </Compile>
+    <Compile Include="Tasks\HumanWalkSnipeTask.PokeWatchers.cs">
+      <DependentUpon>HumanWalkSnipeTask.cs</DependentUpon>
+    </Compile>
     <Compile Include="Tasks\HumanWalkSnipeTask.PokeZZ.cs">
       <DependentUpon>HumanWalkSnipeTask.cs</DependentUpon>
     </Compile>

@@ -277,6 +277,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             List<Task<List<SnipePokemonInfo>>> allTasks = new List<Task<List<SnipePokemonInfo>>>()
             {
+                //FetchFromPokeWatcher(lat, lng),
                 FetchFromPokeradar(lat, lng),
                 FetchFromSkiplagged(lat, lng)     ,
                 FetchFromPokecrew(lat, lng) ,
