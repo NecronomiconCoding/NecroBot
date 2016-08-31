@@ -93,6 +93,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool UseNearActionRandom => _settings.PlayerConfig.UseNearActionRandom;
         public bool AutoCompleteTutorial => _settings.PlayerConfig.AutoCompleteTutorial;
         public string DesiredNickname => _settings.PlayerConfig.DesiredNickname;
+        public string DesiredGender => _settings.PlayerConfig.DesiredGender;
+        public string DesiredStarter => _settings.PlayerConfig.DesiredStarter;
         public bool UsePokemonToNotCatchFilter => _settings.PokemonConfig.UsePokemonToNotCatchFilter;
         public bool UsePokemonSniperFilterOnly => _settings.PokemonConfig.UsePokemonSniperFilterOnly;
         public int KeepMinDuplicatePokemon => _settings.PokemonConfig.KeepMinDuplicatePokemon;
