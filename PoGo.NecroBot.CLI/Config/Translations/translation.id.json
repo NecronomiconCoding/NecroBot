@@ -613,6 +613,130 @@
       "Value": "Kode bahasa yang diterapkan: {0}"
     },
     {
+      "Key": "firstStartSetupTelegramPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan fitur Telegram? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTelegramCodePrompt",
+      "Value": "Silakan masukkan API Key dari Telegram (Paste dengan klik kanan)"
+    },
+    {
+      "Key": "firstStartSetupTelegramCodeConfirm",
+      "Value": "API Key dari Telegram diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupTelegramPasswordPrompt",
+      "Value": "Silakan masukkan password Telegram (DEFAULT: 12345)"
+    },
+    {
+      "Key": "firstStartSetupTelegramPasswordConfirm",
+      "Value": "Password Telegram diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupProxyPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan fitur proxy? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupProxyHostPrompt",
+      "Value": "Silakan tambahkan host proxy kamu"
+    },
+    {
+      "Key": "firstStartSetupProxyHostConfirm",
+      "Value": "Host proxy diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupProxyPortPrompt",
+      "Value": "Silakan tambahkan port proxy kamu"
+    },
+    {
+      "Key": "firstStartSetupProxyPortConfirm",
+      "Value": "Port proxy diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupProxyAuthPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan otentikasi proxy? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupProxyUsernamePrompt",
+      "Value": "Silahkan tambahkan username proxy kamu (Paste dengan klik kanan)"
+    },
+    {
+      "Key": "firstStartSetupProxyUsernameConfirm",
+      "Value": "Username proxy diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupProxyPasswordPrompt",
+      "Value": "Silahkan tambahkan password proxy kamu (Paste dengan klik kanan)"
+    },
+    {
+      "Key": "firstStartSetupProxyPasswordConfirm",
+      "Value": "Password proxy diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupAutoCompleteTutPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan fitur Tutorial? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupAutoCompleteTutNicknamePrompt",
+      "Value": "Silakan tambahkan Nickname yang kamu inginkan"
+    },
+    {
+      "Key": "firstStartSetupAutoCompleteTutNicknameConfirm",
+      "Value": "Nickname diterima: {0}"
+    },
+    {
+      "Key": "FirstStartSetupAutoCompleteTutGenderPrompt",
+      "Value": "Silakan tambahkan jenis kelamin yang kamu inginkan (Bahasa Inggris: Male atau Female)"
+    },
+    {
+      "Key": "FirstStartSetupAutoCompleteTutGenderConfirm",
+      "Value": "Jenis kelamin diterima: {0}"
+    },
+    {
+      "Key": "FirstStartSetupAutoCompleteTutStarterPrompt",
+      "Value": "Silakan pilih pokemon pertamamu (Bulbasaur, Charmander, Squirtle)"
+    },
+    {
+      "Key": "FirstStartSetupAutoCompleteTutStarterConfirm",
+      "Value": "Pokemon diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupWebSocketPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan fitur WebSocket? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupWebSocketPortPrompt",
+      "Value": "Silakan masukkan port WebSocket"
+    },
+    {
+      "Key": "firstStartSetupWebSocketPortConfirm",
+      "Value": "Port diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupWalkingSpeedPrompt",
+      "Value": "Apakah kamu ingin menyunting pengaturan kecepatan berjalan? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupWalkingSpeedKmHPrompt",
+      "Value": "Silakan atur kecepatan berjalan (km/j) Contoh: 5.85"
+    },
+    {
+      "Key": "firstStartSetupWalkingSpeedKmHConfirm",
+      "Value": "Kecepatan berjalan diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupUseWalkingSpeedVariantPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan pengaturan variasi kecepatan berjalan? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupWalkingSpeedVariantPrompt",
+      "Value": "Silakan atur variasi kecepatan berjalan (km/j) Contoh: 1.2"
+    },
+    {
+      "Key": "firstStartSetupWalkingSpeedVariantConfirm",
+      "Value": "Variasi diterima: {0}"
+    },
+    {
       "Key": "PromptError",
       "Value": "[MASUKAN ERROR] Terdapat error pada masukan, mohon masukkan '{0}' atau '{1}'"
     },
