@@ -39,7 +39,24 @@ namespace PoGo.NecroBot.Logic.State
                 }
                 if (!tutState.Contains(TutorialState.AvatarSelection))
                 {
-                    var gen = new Random().Next(2) == 1 ? Gender.Male : Gender.Female;
+                    var gen = Gender.Male;
+                    switch (session.LogicSettings.DesiredGender)
+                    {
+                        case "Male":
+                            gen = Gender.Male;
+                            break;
+                        case "Female":
+                            gen = Gender.Female;
+                            break;
+                        default:
+                            session.EventDispatcher.Send(new NoticeEvent()
+                            {
+                                Message = "You didn't set a valid gender, setting to default: MALE"
+                            });
+                            //I know it is useless, but I prefer keep it
+                            gen = Gender.Male;
+                            break;
+                    }
                     var avatarRes = await session.Client.Player.SetAvatar(new PlayerAvatar()
                     {
                         Backpack = 0,
@@ -98,9 +115,29 @@ namespace PoGo.NecroBot.Logic.State
                 PokemonId.Charmander,
                 PokemonId.Squirtle
             };
-
-            var firstpokeRnd = new Random().Next(0, 2);
-            var firstPoke = firstPokeList[firstpokeRnd];
+            var firstpokenum = 0;
+            switch (session.LogicSettings.DesiredStarter)
+            {
+                case "Bulbasaur":
+                    firstpokenum = 0;
+                    break;
+                case "Charmander":
+                    firstpokenum = 1;
+                    break;
+                case "Squirtle":
+                    firstpokenum = 2;
+                    break;
+                default:
+                    session.EventDispatcher.Send(new NoticeEvent()
+                    {
+                        Message = "You didn't set a valid starter, setting to default: Bulbasaur"
+                    });
+                    //I know it is useless, but I prefer keep it
+                    firstpokenum = 0;
+                    break;
+            }
+            
+            var firstPoke = firstPokeList[firstpokenum];
 
             var res = await session.Client.Encounter.EncounterTutorialComplete(firstPoke);
             await DelayingUtils.DelayAsync(7000, 2000);
