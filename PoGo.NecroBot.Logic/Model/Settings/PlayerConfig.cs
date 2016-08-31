@@ -6,5 +6,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool UseNearActionRandom = true;
         public bool AutoCompleteTutorial = false;
         public string DesiredNickname;
+        public string DesiredGender = "Male";
+        public string DesiredStarter = "Squirtle";
     }
 }

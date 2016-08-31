@@ -652,6 +652,16 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             strInput = Console.ReadLine();
             settings.PlayerConfig.DesiredNickname = strInput;
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupAutoCompleteTutNicknameConfirm, strInput));
+
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupAutoCompleteTutGenderPrompt));
+            strInput = Console.ReadLine();
+            settings.PlayerConfig.DesiredGender = strInput;
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupAutoCompleteTutGenderConfirm, strInput));
+
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupAutoCompleteTutStarterPrompt));
+            strInput = Console.ReadLine();
+            settings.PlayerConfig.DesiredStarter = strInput;
+            Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupAutoCompleteTutStarterConfirm, strInput));
         }
 
         private static void SetupWebSocketConfig(ITranslation translator, GlobalSettings settings)
