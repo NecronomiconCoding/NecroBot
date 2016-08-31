@@ -360,7 +360,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
 
         private static JSchema _schema;
-
         public static JSchema JsonSchema
         {
             get
@@ -391,6 +390,41 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 // save to file
                 _schema = schema;
                 return _schema;
+            }
+        }
+
+        private JObject _jsonObject;
+        public JObject JsonObject
+        {
+            get
+            {
+                if (_jsonObject == null)
+                    _jsonObject = JObject.FromObject(this);
+
+                return _jsonObject;
+            }
+            set
+            {
+                _jsonObject = value;
+            }
+        }
+
+
+        public void Load(JObject jsonObj)
+        {
+            try
+            {
+                var input = jsonObj.ToString(Formatting.None, new StringEnumConverter { CamelCaseText = true });
+                var settings = new JsonSerializerSettings();
+                settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                JsonConvert.PopulateObject(input, this, settings);
+                var configFile = Path.Combine(ProfileConfigPath, "config.json");
+                this.Save(configFile);
+
+            }
+            catch (JsonReaderException exception)
+            {
+                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
             }
         }
 
@@ -560,7 +594,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             strInput = Console.ReadLine();
 
             settings.ConsoleConfig.TranslationLanguageCode = strInput;
-            session = new Session(new ClientSettings(settings), new LogicSettings(settings));
+            session = new Session(settings, new ClientSettings(settings), new LogicSettings(settings));
             translator = session.Translation;
             Logger.Write(translator.GetTranslation(TranslationString.FirstStartLanguageConfirm, strInput));
 

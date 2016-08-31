@@ -3,6 +3,7 @@
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Interfaces.Configuration;
+using PoGo.NecroBot.Logic.Model.Settings;
 using PoGo.NecroBot.Logic.Service;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
@@ -25,18 +26,20 @@ namespace PoGo.NecroBot.Logic.State
         TelegramService Telegram { get; set; }
         SessionStats Stats { get; }
         ElevationService ElevationService { get; }
+         GlobalSettings GlobalSettings { get; }
     }
 
 
     public class Session : ISession
     {
-        public Session(ISettings settings, ILogicSettings logicSettings) : this(settings, logicSettings, Common.Translation.Load(logicSettings))
+        public Session(GlobalSettings globalSettings, ISettings settings, ILogicSettings logicSettings) : this(globalSettings, settings, logicSettings, Common.Translation.Load(logicSettings))
         {
         }
 
-        public Session(ISettings settings, ILogicSettings logicSettings, ITranslation translation)
+        public Session(GlobalSettings globalSettings, ISettings settings, ILogicSettings logicSettings, ITranslation translation)
         {
             EventDispatcher = new EventDispatcher();
+            GlobalSettings = globalSettings;
             LogicSettings = logicSettings;
 
             ElevationService = new ElevationService(this);
@@ -50,6 +53,8 @@ namespace PoGo.NecroBot.Logic.State
             Reset(settings, LogicSettings);
             Stats = new SessionStats();
         }
+
+        public GlobalSettings GlobalSettings { get; set; }
 
         public ISettings Settings { get; set; }
 

@@ -32,8 +32,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public DeviceConfig DeviceConfig = new DeviceConfig();
 
         private JSchema _schema;
-
-        private JSchema JsonSchema
+        public JSchema JsonSchema
         {
             get
             {
@@ -68,6 +67,22 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             }
         }
 
+        private JObject _jsonObject;
+        public JObject JsonObject
+        {
+            get
+            {
+                if (_jsonObject == null)
+                    _jsonObject  = JObject.FromObject(this);
+
+                return _jsonObject;
+            }
+            set
+            {
+                _jsonObject = value;
+            }
+        }
+
         public AuthSettings()
         {
             InitializePropertyDefaultValues(this);
@@ -83,6 +98,62 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
                 if (d != null)
                     field.SetValue(obj, d.Value);
+            }
+        }
+
+        public void Load(JObject jsonObj)
+        {
+            try
+            {
+                // if the file exists, load the settings
+                var input = jsonObj.ToString(Formatting.None, new StringEnumConverter { CamelCaseText = true });
+                var settings = new JsonSerializerSettings();
+                settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                JsonConvert.PopulateObject(input, this, settings);
+                // Do some post-load logic to determine what device info to be using - if 'custom' is set we just take what's in the file without question
+                if (!this.DeviceConfig.DevicePackageName.Equals("random", StringComparison.InvariantCultureIgnoreCase) && !this.DeviceConfig.DevicePackageName.Equals("custom", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    // User requested a specific device package, check to see if it exists and if so, set it up - otherwise fall-back to random package
+                    string keepDevId = this.DeviceConfig.DeviceId;
+                    SetDevInfoByKey(this.DeviceConfig.DevicePackageName);
+                    this.DeviceConfig.DeviceId = keepDevId;
+                }
+                if (this.DeviceConfig.DevicePackageName.Equals("random", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    // Random is set, so pick a random device package and set it up - it will get saved to disk below and re-used in subsequent sessions
+                    Random rnd = new Random();
+                    int rndIdx = rnd.Next(0, DeviceInfoHelper.DeviceInfoSets.Keys.Count - 1);
+                    this.DeviceConfig.DevicePackageName = DeviceInfoHelper.DeviceInfoSets.Keys.ToArray()[rndIdx];
+                    SetDevInfoByKey(this.DeviceConfig.DevicePackageName);
+                }
+                if (string.IsNullOrEmpty(this.DeviceConfig.DeviceId) || this.DeviceConfig.DeviceId == "8525f5d8201f78b5")
+                    this.DeviceConfig.DeviceId = this.RandomString(16, "0123456789abcdef"); // changed to random hex as full alphabet letters could have been flagged
+
+                // Jurann: Note that some device IDs I saw when adding devices had smaller numbers, only 12 or 14 chars instead of 16 - probably not important but noted here anyway
+
+                Save(_filePath);
+            }
+            catch (JsonReaderException exception)
+            {
+                if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcUsername"))
+                    Logger.Write("JSON Exception: You need to properly configure your PtcUsername using quotations.",
+                        LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") && exception.Message.Contains("PtcPassword"))
+                    Logger.Write(
+                        "JSON Exception: You need to properly configure your PtcPassword using quotations.",
+                        LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") &&
+                         exception.Message.Contains("GoogleUsername"))
+                    Logger.Write(
+                        "JSON Exception: You need to properly configure your GoogleUsername using quotations.",
+                        LogLevel.Error);
+                else if (exception.Message.Contains("Unexpected character") &&
+                         exception.Message.Contains("GooglePassword"))
+                    Logger.Write(
+                        "JSON Exception: You need to properly configure your GooglePassword using quotations.",
+                        LogLevel.Error);
+                else
+                    Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
             }
         }
 
@@ -156,7 +227,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 Formatting = Formatting.Indented,
                 Converters = new JsonConverter[] { new StringEnumConverter { CamelCaseText = true } }
             };
-
             var output = JsonConvert.SerializeObject(this, jsonSerializeSettings);
 
             var folder = Path.GetDirectoryName(fullPath);
