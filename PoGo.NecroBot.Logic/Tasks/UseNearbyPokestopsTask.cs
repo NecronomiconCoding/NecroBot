@@ -20,6 +20,8 @@ using PoGo.NecroBot.Logic.Logging;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
+    public delegate void UpdateTimeStampsPokestopDelegate();
+
     public class UseNearbyPokestopsTask
     {
         private static int stopsHit;
@@ -28,6 +30,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static int storeRI;
         private static int RandomNumber;
         private static List<FortData> pokestopList;
+        public static event UpdateTimeStampsPokestopDelegate UpdateTimeStampsPokestop;
 
         internal static void Initialize()
         {
@@ -49,6 +52,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (toRemove > 0)
                 {
                     session.Stats.PokeStopTimestamps.RemoveRange(0, toRemove);
+                    UpdateTimeStampsPokestop?.Invoke();
                 }
                 var sec = (DateTime.Now - new DateTime(session.Stats.PokeStopTimestamps.First())).TotalSeconds;
                 var limit = session.LogicSettings.PokeStopLimitMinutes * 60;
@@ -58,9 +62,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     return true;
                 }
             }
-
-            Logger.Write($"(POKESTOP LIMIT) {session.Stats.PokeStopTimestamps.Count}/{session.LogicSettings.PokeStopLimit}",
-                LogLevel.Info, ConsoleColor.Yellow);
+            
             return false;
         }
 
@@ -371,7 +373,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                     if (fortSearch.Result == FortSearchResponse.Types.Result.InventoryFull)
                         storeRI = 1;
 
-                    session.Stats.PokeStopTimestamps.Add(DateTime.Now.Ticks);
+                    if (session.LogicSettings.UsePokeStopLimit)
+                    {
+                        session.Stats.PokeStopTimestamps.Add(DateTime.Now.Ticks);
+                        UpdateTimeStampsPokestop?.Invoke();
+                        Logger.Write($"(POKESTOP LIMIT) {session.Stats.PokeStopTimestamps.Count}/{session.LogicSettings.PokeStopLimit}",
+                            LogLevel.Info, ConsoleColor.Yellow);
+                    }
                     break; //Continue with program as loot was succesfull.
                 }
             } while (fortTry < retryNumber - zeroCheck);

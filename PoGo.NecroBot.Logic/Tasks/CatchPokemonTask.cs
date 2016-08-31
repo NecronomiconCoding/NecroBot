@@ -19,8 +19,12 @@ using POGOProtos.Networking.Responses;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
+    public delegate void UpdateTimeStampsPokemonDelegate();
+
     public static class CatchPokemonTask
     {
+        public static event UpdateTimeStampsPokemonDelegate UpdateTimeStampsPokemon;
+
         public static int AmountOfBerries;
         private static Random Random => new Random((int)DateTime.Now.Ticks);
 
@@ -34,6 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (toRemove > 0)
                 {
                     session.Stats.PokemonTimestamps.RemoveRange(0, toRemove);
+                    UpdateTimeStampsPokemon?.Invoke();
                 }
                 var sec = (DateTime.Now - new DateTime(session.Stats.PokemonTimestamps.First())).TotalSeconds;
                 var limit = session.LogicSettings.CatchPokemonLimitMinutes * 60;
@@ -43,9 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     return true;
                 }
             }
-
-            Logger.Write($"(CATCH LIMIT) {session.Stats.PokemonTimestamps.Count}/{session.LogicSettings.CatchPokemonLimit}",
-                LogLevel.Info, ConsoleColor.Yellow);
+            
             return false;
         }
 
@@ -247,7 +250,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         evt.FamilyCandies = caughtPokemonResponse.CaptureAward.Candy.Sum();
                     }
-                    session.Stats.PokemonTimestamps.Add(DateTime.Now.Ticks);
+
+                    if (session.LogicSettings.UseCatchLimit)
+                    {
+                        session.Stats.PokemonTimestamps.Add(DateTime.Now.Ticks);
+                        UpdateTimeStampsPokemon?.Invoke();
+                        Logger.Write($"(CATCH LIMIT) {session.Stats.PokemonTimestamps.Count}/{session.LogicSettings.CatchPokemonLimit}",
+                            LogLevel.Info, ConsoleColor.Yellow);
+                    }
                 }
 
                 evt.CatchType = encounter is EncounterResponse
