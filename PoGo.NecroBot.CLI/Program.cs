@@ -170,7 +170,7 @@ namespace PoGo.NecroBot.CLI
                 }
             }
 
-            session = new Session(settings, new ClientSettings(settings), logicSettings, translation);
+            session = new Session(new ClientSettings(settings), logicSettings, translation);
 
             Teste.Testar(session);
             if (boolNeedsSetup)

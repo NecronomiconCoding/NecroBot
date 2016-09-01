@@ -5,18 +5,18 @@ using SuperSocket.WebSocket;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
 {
-    class GetConfigHandler : IWebSocketRequestHandler
+    internal class GetConfigHandler : IWebSocketRequestHandler
     {
-        public string Command { get; private set; }
-
         public GetConfigHandler()
         {
             Command = "GetConfig";
         }
 
+        public string Command { get; }
+
         public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
-            await GetConfigTask.Execute(session, webSocketSession, (string)message.RequestID);
+            await GetConfigTask.Execute(session, webSocketSession, (string) message.RequestID);
         }
     }
 }

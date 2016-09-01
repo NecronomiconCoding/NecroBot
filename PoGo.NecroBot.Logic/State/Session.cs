@@ -26,20 +26,18 @@ namespace PoGo.NecroBot.Logic.State
         TelegramService Telegram { get; set; }
         SessionStats Stats { get; }
         ElevationService ElevationService { get; }
-         GlobalSettings GlobalSettings { get; }
     }
 
 
     public class Session : ISession
     {
-        public Session(GlobalSettings globalSettings, ISettings settings, ILogicSettings logicSettings) : this(globalSettings, settings, logicSettings, Common.Translation.Load(logicSettings))
+        public Session(ISettings settings, ILogicSettings logicSettings) : this(settings, logicSettings, Common.Translation.Load(logicSettings))
         {
         }
 
-        public Session(GlobalSettings globalSettings, ISettings settings, ILogicSettings logicSettings, ITranslation translation)
+        public Session(ISettings settings, ILogicSettings logicSettings, ITranslation translation)
         {
             EventDispatcher = new EventDispatcher();
-            GlobalSettings = globalSettings;
             LogicSettings = logicSettings;
 
             ElevationService = new ElevationService(this);

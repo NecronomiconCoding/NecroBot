@@ -8,9 +8,9 @@
             Data = data;
             RequestID = requestID;
         }
-        public string RequestID { get; private set; }
-        public string Command { get; private set; }
-        public dynamic Data { get; private set; }
-        
+
+        public string RequestID { get; }
+        public string Command { get; }
+        public dynamic Data { get; }
     }
 }

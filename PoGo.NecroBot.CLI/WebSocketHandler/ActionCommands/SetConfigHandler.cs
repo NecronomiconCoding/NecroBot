@@ -12,12 +12,12 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
 {
     public class SetConfigHandler : IWebSocketRequestHandler
     {
-        public string Command { get; private set;}
-
         public SetConfigHandler()
         {
             Command = "SetConfig";
         }
+
+        public string Command { get; }
 
         public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
@@ -25,6 +25,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
             var profileConfigPath = Path.Combine(profilePath, "config");
             var authFile = Path.Combine(profileConfigPath, "auth.json");
             var configFile = Path.Combine(profileConfigPath, "config.json");
+
             var jsonSerializeSettings = new JsonSerializerSettings
             {
                 DefaultValueHandling = DefaultValueHandling.Include,
@@ -34,33 +35,25 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
 
             try
             {
-                if ((string) message.Tye == "Auth")
-                {
-                    var jObj =  session.GlobalSettings.Auth.JsonObject;
-                    jObj[message.Id] = (JObject)message.Data;
-                }
-                else if ((string)message.Tye == "Config")
-                {
-                    var jObj = session.GlobalSettings.JsonObject;
-                    jObj[message.Id] = (JObject)message.Data;
-                }
-                else if ((string)message.Tye == "Finalize")
-                {
-                    //session.GlobalSettings.Auth.JsonObject.ToString();
-                }
-                else if ((string)message.Tye == "Reload")
-                {
-                    session.GlobalSettings.Auth.Load(session.GlobalSettings.Auth.JsonObject);
-                    session.GlobalSettings.Load(session.GlobalSettings.JsonObject);
-                    session.LogicSettings.rese
-                }
+                var authJson = JsonConvert.SerializeObject((JObject) message.AuthJson, jsonSerializeSettings);
+                if (!string.IsNullOrEmpty(authJson))
+                    File.WriteAllText(authFile, authJson, Encoding.UTF8);
             }
             catch (Exception)
             {
                 // ignored
             }
 
-
+            try
+            {
+                var configJson = JsonConvert.SerializeObject((JObject) message.ConfigJson, jsonSerializeSettings);
+                if (!string.IsNullOrEmpty(configJson))
+                    File.WriteAllText(configFile, configJson, Encoding.UTF8);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
     }
 }
