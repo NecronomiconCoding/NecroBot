@@ -18,6 +18,12 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             cancellationToken.ThrowIfCancellationRequested();
 
+            // Padding the TransferEvent with player-choosen delay before instead of after.
+            // This is to remedy too quick transfers, often happening within a second of the
+            // previous action otherwise
+
+            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+
             await session.Inventory.RefreshCachedInventory();
             var duplicatePokemons =
                 await
@@ -47,13 +53,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var family = pokemonFamilies.FirstOrDefault(q => q.FamilyId == setting.FamilyId);
 
                 family.Candy_++;
-
-                // Padding the TransferEvent with player-choosen delay before instead of after.
-                // This is to remedy too quick transfers, often happening within a second of the
-                // previous action otherwise
-
-                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
-
+                
                 session.EventDispatcher.Send(new TransferPokemonEvent
                 {
                     Id = duplicatePokemon.PokemonId,
