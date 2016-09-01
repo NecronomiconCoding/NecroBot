@@ -1,12 +1,13 @@
 
+<a href="https://discord.gg/VXKxNFr">
+    <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
+  </a>
+  
 [![Discord](https://discordapp.com/api/guilds/209253611031625728/widget.png)](https://discord.gg/VXKxNFr)
 [![Stories in Ready](https://badge.waffle.io/NoxxDev/NecroBot.svg?label=ready&title=Ready)](https://waffle.io/NoxxDev/NecroBot)
 [![Github All Releases](https://img.shields.io/github/downloads/NoxxDev/NecroBot/total.svg)](https://github.com/NoxxDev/NecroBot/releases)
 [![GitHub license](https://img.shields.io/badge/license-AGPL-blue.svg)](https://raw.githubusercontent.com/NoxxDev/NecroBot/master/LICENSE.md)
 [![Twitter Follow](https://img.shields.io/twitter/follow/NoxxDev.svg?style=social&label=Follow&maxAge=1)](https://twitter.com/NoxxDev)
-  <a href="https://discord.gg/VXKxNFr">
-    <img alt="Logo" src="https://discordapp.com/api/guilds/209253611031625728/widget.png?style=banner2">
-  </a>
   
 ## This repository is a fork updated of [NecroBot](https://github.com/NECROBOTIO/NecroBot)
 
@@ -51,20 +52,13 @@ Make sure you check out our [Wiki](https://github.com/NoxxDev/NecroBot/wiki) to 
 <h2><a name="credits">Credits</a></h2>
 
 FeroxRev - [RocketAPI](https://github.com/FeroxRev/Pokemon-Go-Rocket-API)
-
 LineWalker - [POGOProtos-0.31.0](https://github.com/Linewalker/POGOProtos-0.31.0)
-
 Valmere - [TransferWeakPokemon](https://github.com/PocketMobsters/PokeMobBot/pull/378/files)
-
 AeonLucid - [POGOProtos](https://github.com/AeonLucid/POGOProtos)
-
 NECROBOTIO - [NecroBot](https://github.com/NECROBOTIO/NecroBot)
-
 Msx752 - [MSniper](https://msx752.github.io/MSniper/)
-
 Lunat1q - [CheckTosState] (https://github.com/Lunat1q/Catchem-PoGo)
 
-<br/>
 ## [Contributors](https://github.com/NoxxDev/NecroBot/blob/master/CONTRIBUTORS.md)
 
 <h2><a name="legal">Legal</a></h2>
