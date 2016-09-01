@@ -111,6 +111,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         private static async Task evolve(ISession session, List<PokemonData> pokemonToEvolve)
         {
+            Random rnd = new Random();
             foreach (var pokemon in pokemonToEvolve)
             {
                 // no cancellationToken.ThrowIfCancellationRequested here, otherwise the lucky egg would be wasted.
@@ -125,7 +126,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 });
                 if (!pokemonToEvolve.Last().Equals(pokemon))
                 {
-                    DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+                    DelayingUtils.Delay(rnd.Next(session.LogicSettings.MinEvolveActionDelay, session.LogicSettings.MaxEvolveActionDelay), 0);
                 }
             }
         }
