@@ -19,8 +19,12 @@ using POGOProtos.Networking.Responses;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
+    public delegate void UpdateTimeStampsPokemonDelegate();
+
     public static class CatchPokemonTask
     {
+        public static event UpdateTimeStampsPokemonDelegate UpdateTimeStampsPokemon;
+
         public static int AmountOfBerries;
         private static Random Random => new Random((int)DateTime.Now.Ticks);
 
@@ -34,6 +38,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (toRemove > 0)
                 {
                     session.Stats.PokemonTimestamps.RemoveRange(0, toRemove);
+                    UpdateTimeStampsPokemon?.Invoke();
                 }
                 var sec = (DateTime.Now - new DateTime(session.Stats.PokemonTimestamps.First())).TotalSeconds;
                 var limit = session.LogicSettings.CatchPokemonLimitMinutes * 60;
@@ -43,9 +48,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     return true;
                 }
             }
-
-            Logger.Write($"(CATCH LIMIT) {session.Stats.PokemonTimestamps.Count}/{session.LogicSettings.CatchPokemonLimit}",
-                LogLevel.Info, ConsoleColor.Yellow);
+            
             return false;
         }
 
@@ -85,6 +88,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     : currentFortData.Longitude);
 
             CatchPokemonResponse caughtPokemonResponse;
+            var lastThrow = CatchPokemonResponse.Types.CatchStatus.CatchSuccess; // Initializing lastThrow
             var attemptCounter = 1;
             do
             {
@@ -107,14 +111,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
 
                 // Determine whether to use berries or not
-                if ((session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
+                if (((session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
                         pokemonIv >= session.LogicSettings.UseBerriesMinIv &&
                         pokemonCp >= session.LogicSettings.UseBerriesMinCp &&
                         probability < session.LogicSettings.UseBerriesBelowCatchProbability) ||
                     (session.LogicSettings.UseBerriesOperator.ToLower().Equals("or") && (
                         pokemonIv >= session.LogicSettings.UseBerriesMinIv ||
                         pokemonCp >= session.LogicSettings.UseBerriesMinCp ||
-                        probability < session.LogicSettings.UseBerriesBelowCatchProbability)))
+                        probability < session.LogicSettings.UseBerriesBelowCatchProbability))) &&
+                    lastThrow != CatchPokemonResponse.Types.CatchStatus.CatchMissed) // if last throw is a miss, no double berry
                 {
 
                     AmountOfBerries++;
@@ -216,6 +221,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Longitude = lng
                 };
 
+                lastThrow = caughtPokemonResponse.Status; // sets lastThrow status
+
                 if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
                 {
                     var totalExp = 0;
@@ -247,7 +254,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         evt.FamilyCandies = caughtPokemonResponse.CaptureAward.Candy.Sum();
                     }
-                    session.Stats.PokemonTimestamps.Add(DateTime.Now.Ticks);
+
+                    if (session.LogicSettings.UseCatchLimit)
+                    {
+                        session.Stats.PokemonTimestamps.Add(DateTime.Now.Ticks);
+                        UpdateTimeStampsPokemon?.Invoke();
+                        Logger.Write($"(CATCH LIMIT) {session.Stats.PokemonTimestamps.Count}/{session.LogicSettings.CatchPokemonLimit}",
+                            LogLevel.Info, ConsoleColor.Yellow);
+                    }
                 }
 
                 evt.CatchType = encounter is EncounterResponse
@@ -303,7 +317,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 attemptCounter++;
 
-                if (session.LogicSettings.TransferDuplicatePokemonOnCapture && session.LogicSettings.TransferDuplicatePokemon && sessionAllowTransfer)
+                if (session.LogicSettings.TransferDuplicatePokemonOnCapture && session.LogicSettings.TransferDuplicatePokemon &&
+                    sessionAllowTransfer && caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
                 {
                     if (session.LogicSettings.UseNearActionRandom)
                         await HumanRandomActionTask.TransferRandom(session, cancellationToken);

@@ -21,16 +21,16 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsGpxTask
     {
-        private static int _resumeTrack = 0;
-        private static int _resumeTrackSeg = 0;
-        private static int _resumeTrackPt = 0;
+        private static int? _resumeTrack = null;
+        private static int? _resumeTrackSeg = null;
+        private static int? _resumeTrackPt = null;
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             var tracks = GetGpxTracks(session);
             var eggWalker = new EggWalker(1000, session);
 
-            if (_resumeTrack + _resumeTrackSeg + _resumeTrackPt == 0)
+            if (!_resumeTrack.HasValue || !_resumeTrackSeg.HasValue || !_resumeTrackPt.HasValue)
             {
                 _resumeTrack = session.LogicSettings.ResumeTrack;
                 _resumeTrackSeg = session.LogicSettings.ResumeTrackSeg;
@@ -40,7 +40,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 UseNearbyPokestopsTask.Initialize();
             }
 
-            for (var curTrk = _resumeTrack; curTrk < tracks.Count; curTrk++)
+            for (var curTrk = _resumeTrack.Value; curTrk < tracks.Count; curTrk++)
             {
                 _resumeTrack = curTrk;
                 cancellationToken.ThrowIfCancellationRequested();
@@ -48,14 +48,14 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var track = tracks.ElementAt(curTrk);
                 var trackSegments = track.Segments;
 
-                for (var curTrkSeg = _resumeTrackSeg; curTrkSeg < trackSegments.Count; curTrkSeg++)
+                for (var curTrkSeg = _resumeTrackSeg.Value; curTrkSeg < trackSegments.Count; curTrkSeg++)
                 {
                     _resumeTrackSeg = curTrkSeg;
                     cancellationToken.ThrowIfCancellationRequested();
 
                     var trackPoints = trackSegments.ElementAt(curTrkSeg).TrackPoints;
 
-                    for (var curTrkPt = _resumeTrackPt; curTrkPt < trackPoints.Count; curTrkPt++)
+                    for (var curTrkPt = _resumeTrackPt.Value; curTrkPt < trackPoints.Count; curTrkPt++)
                     {
                         _resumeTrackPt = curTrkPt;
                         cancellationToken.ThrowIfCancellationRequested();
