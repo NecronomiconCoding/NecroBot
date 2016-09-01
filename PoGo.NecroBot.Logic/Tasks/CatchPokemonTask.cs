@@ -125,8 +125,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     AmountOfBerries++;
                     if (AmountOfBerries <= session.LogicSettings.MaxBerriesToUsePerPokemon)
                     {
-                        await
-                       UseBerry(session,
+                        await UseBerry(session,
                            encounter is EncounterResponse || encounter is IncenseEncounterResponse
                                ? pokemon.EncounterId
                                : encounterId,
@@ -317,7 +316,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 attemptCounter++;
 
-                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 0);
+                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
 
                 if (session.LogicSettings.TransferDuplicatePokemonOnCapture && session.LogicSettings.TransferDuplicatePokemon &&
                     sessionAllowTransfer && caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
@@ -387,6 +386,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             if (berry == null || berry.Count <= 0)
                 return;
+
+            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 500);
 
             var useCaptureItem = await session.Client.Encounter.UseCaptureItem(encounterId, ItemId.ItemRazzBerry, spawnPointId);
             berry.Count -= 1;

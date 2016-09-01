@@ -2,7 +2,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 {
     public class PlayerConfig
     {
-        public int DelayBetweenPlayerActions = 5000;
+        public int DelayBetweenPlayerActions = 10000;
         public int EvolveActionDelay = 30000;
         public int TransferActionDelay = 60000;
         public int RecycleActionDelay = 60000;
