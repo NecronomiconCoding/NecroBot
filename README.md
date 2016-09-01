@@ -62,6 +62,8 @@ NECROBOTIO - [NecroBot](https://github.com/NECROBOTIO/NecroBot)
 
 Msx752 - [MSniper](https://msx752.github.io/MSniper/)
 
+Lunat1q - [CheckTosState] (https://github.com/Lunat1q/Catchem-PoGo)
+
 <br/>
 Thanks to everyone who volunteered by contributing via Pull Requests!
 
