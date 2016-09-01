@@ -4,21 +4,21 @@ using Newtonsoft.Json;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
-    enum Operator
-    {
-        or,
-        and
-    }
-
-    enum CpIv
-    {
-        cp,
-        iv
-    }
-
-    [JsonObject(Description = "")]
+    [JsonObject(Title = "Pokemon Config", Description = "Set your pokemon settings.", ItemRequired = Required.DisallowNull)]
     public class PokemonConfig
     {
+        internal enum Operator
+        {
+            or,
+            and
+        }
+
+        internal enum CpIv
+        {
+            cp,
+            iv
+        }
+
         /*Catch*/
         [DefaultValue(true)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
@@ -117,7 +117,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         [DefaultValue(false)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
-        public bool RenameOnlyAboveIv = false;
+        public bool RenameOnlyAboveIv;
 
         [DefaultValue("{1}_{0}")]
         [MinLength(0)]
@@ -236,7 +236,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         [DefaultValue(false)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
-        public bool EvolveAllPokemonWithEnoughCandy = false;
+        public bool EvolveAllPokemonWithEnoughCandy;
 
         [DefaultValue(90)]
         [Range(0, 100)]
