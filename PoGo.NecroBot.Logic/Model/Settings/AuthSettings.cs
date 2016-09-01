@@ -18,17 +18,17 @@ using PoGo.NecroBot.Logic.Utils;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
-    [JsonObject(Description = "")]
+    [JsonObject(Title = "Authentication Settings", Description = "Set your authentication settings.", ItemRequired = Required.DisallowNull)]
     public class AuthSettings
     {
         [JsonIgnore]
         private string _filePath;
 
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Order = 1)]
         public AuthConfig AuthConfig = new AuthConfig();
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Order = 2)]
         public ProxyConfig ProxyConfig = new ProxyConfig();
-        [JsonProperty(Required = Required.DisallowNull)]
+        [JsonProperty(Order = 3)]
         public DeviceConfig DeviceConfig = new DeviceConfig();
 
         private JSchema _schema;

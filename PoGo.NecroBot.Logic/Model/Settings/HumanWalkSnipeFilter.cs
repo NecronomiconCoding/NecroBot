@@ -6,45 +6,45 @@ using POGOProtos.Enums;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
-    [JsonObject(Description = "")]
+    [JsonObject(Title = "Human Walk Snipe Config", Description = "", ItemRequired = Required.DisallowNull)]
     public class HumanWalkSnipeFilter
     {
         [DefaultValue(300.0)]
         [Range(0, 9999)]
-        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 1)]
         public double MaxDistance { get; set; }
 
         [DefaultValue(1)]
         [Range(0, 9999)]
-        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 2)]
         public int Priority { get; set; }
 
         [DefaultValue(200.0)]
         [Range(0, 9999)]
-        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 3)]
         public double MaxWalkTimes { get; set; }
 
         [DefaultValue(true)]
         [Range(0, 9999)]
-        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 4)]
         public bool CatchPokemonWhileWalking { get; set; }
 
         [DefaultValue(true)]
-        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 5)]
         public bool SpinPokestopWhileWalking { get; set; }
 
         [DefaultValue(60.0)]
         [Range(0, 999)]
-        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 6)]
         public double MaxSpeedUpSpeed { get; set; }
 
         [DefaultValue(true)]
-        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 7)]
         public bool AllowSpeedUp { get; set; }
 
         [DefaultValue(10000)]
         [Range(0, 999999)]
-        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 8)]
         public int DelayTimeAtDestination { get; set; }
 
         public HumanWalkSnipeFilter(double maxDistance, double maxWalkTimes, int priority, bool catchPokemon, bool spinPokestop, bool allowSpeedUp, double speedUpSpeed, double delay = 10)

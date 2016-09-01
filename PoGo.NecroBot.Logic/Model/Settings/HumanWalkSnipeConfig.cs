@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
-    [JsonObject(Description = "This feature allow bot pull data from pokemap site, if pokemon match with your config. bot will walk to pokemon's location to catch him. below is the config for this feature.")]
+    [JsonObject(Title = "Human Walk Snipe Config", Description = "This feature allow bot pull data from pokemap site, if pokemon match with your config. bot will walk to pokemon's location to catch him.", ItemRequired = Required.DisallowNull)]
     public class HumanWalkSnipeConfig
     {
         [DefaultValue(true)]

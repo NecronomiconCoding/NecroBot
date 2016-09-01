@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
-    [JsonObject(Description = "")]
+    [JsonObject(Title = "Gpx Config", Description = "Set your Gpx settings.", ItemRequired = Required.DisallowNull)]
     public class GpxConfig
     {
         [DefaultValue(false)]
