@@ -90,8 +90,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public int ForceExcellentThrowOverCp => _settings.CustomCatchConfig.ForceExcellentThrowOverCp;
         public int DelayBetweenPokemonCatch => _settings.PokemonConfig.DelayBetweenPokemonCatch;
         public int DelayBetweenPlayerActions => _settings.PlayerConfig.DelayBetweenPlayerActions;
-        public int MinEvolveActionDelay => _settings.PlayerConfig.MinEvolveActionDelay;
-        public int MaxEvolveActionDelay => _settings.PlayerConfig.MaxEvolveActionDelay;
+        public int EvolveActionDelay => _settings.PlayerConfig.EvolveActionDelay;
+        public int TransferActionDelay => _settings.PlayerConfig.TransferActionDelay;
+        public int RecycleActionDelay => _settings.PlayerConfig.RecycleActionDelay;
         public bool UseNearActionRandom => _settings.PlayerConfig.UseNearActionRandom;
         public bool AutoCompleteTutorial => _settings.PlayerConfig.AutoCompleteTutorial;
         public string DesiredNickname => _settings.PlayerConfig.DesiredNickname;

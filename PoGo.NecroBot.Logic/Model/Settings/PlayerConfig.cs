@@ -3,8 +3,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
     public class PlayerConfig
     {
         public int DelayBetweenPlayerActions = 5000;
-        public int MinEvolveActionDelay = 22500;
-        public int MaxEvolveActionDelay = 25500;
+        public int EvolveActionDelay = 30000;
+        public int TransferActionDelay = 60000;
+        public int RecycleActionDelay = 60000;
         public bool UseNearActionRandom = true;
         public bool AutoCompleteTutorial = false;
         public string DesiredNickname;

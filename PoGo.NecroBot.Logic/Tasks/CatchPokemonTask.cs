@@ -317,6 +317,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 attemptCounter++;
 
+                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 0);
+
                 if (session.LogicSettings.TransferDuplicatePokemonOnCapture && session.LogicSettings.TransferDuplicatePokemon &&
                     sessionAllowTransfer && caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
                 {
@@ -325,8 +327,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                     else
                         await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                 }
-
-                DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 0);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
         }
