@@ -52,11 +52,17 @@ Make sure you check out our [Wiki](https://github.com/NoxxDev/NecroBot/wiki) to 
 <h2><a name="credits">Credits</a></h2>
 
 FeroxRev - [RocketAPI](https://github.com/FeroxRev/Pokemon-Go-Rocket-API)
+
 LineWalker - [POGOProtos-0.31.0](https://github.com/Linewalker/POGOProtos-0.31.0)
+
 Valmere - [TransferWeakPokemon](https://github.com/PocketMobsters/PokeMobBot/pull/378/files)
+
 AeonLucid - [POGOProtos](https://github.com/AeonLucid/POGOProtos)
+
 NECROBOTIO - [NecroBot](https://github.com/NECROBOTIO/NecroBot)
+
 Msx752 - [MSniper](https://msx752.github.io/MSniper/)
+
 Lunat1q - [CheckTosState] (https://github.com/Lunat1q/Catchem-PoGo)
 
 ## [Contributors](https://github.com/NoxxDev/NecroBot/blob/master/CONTRIBUTORS.md)
