@@ -88,6 +88,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     : currentFortData.Longitude);
 
             CatchPokemonResponse caughtPokemonResponse;
+            var lastThrow = CatchPokemonResponse.Types.CatchStatus.CatchSuccess; // Initializing lastThrow
             var attemptCounter = 1;
             do
             {
@@ -110,14 +111,15 @@ namespace PoGo.NecroBot.Logic.Tasks
                 }
 
                 // Determine whether to use berries or not
-                if ((session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
+                if (((session.LogicSettings.UseBerriesOperator.ToLower().Equals("and") &&
                         pokemonIv >= session.LogicSettings.UseBerriesMinIv &&
                         pokemonCp >= session.LogicSettings.UseBerriesMinCp &&
                         probability < session.LogicSettings.UseBerriesBelowCatchProbability) ||
                     (session.LogicSettings.UseBerriesOperator.ToLower().Equals("or") && (
                         pokemonIv >= session.LogicSettings.UseBerriesMinIv ||
                         pokemonCp >= session.LogicSettings.UseBerriesMinCp ||
-                        probability < session.LogicSettings.UseBerriesBelowCatchProbability)))
+                        probability < session.LogicSettings.UseBerriesBelowCatchProbability))) &&
+                    lastThrow != CatchPokemonResponse.Types.CatchStatus.CatchMissed) // if last throw is a miss, no double berry
                 {
 
                     AmountOfBerries++;
@@ -218,6 +220,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Latitude = lat,
                     Longitude = lng
                 };
+
+                lastThrow = caughtPokemonResponse.Status; // sets lastThrow status
 
                 if (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchSuccess)
                 {
