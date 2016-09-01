@@ -93,6 +93,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public int EvolveActionDelay => _settings.PlayerConfig.EvolveActionDelay;
         public int TransferActionDelay => _settings.PlayerConfig.TransferActionDelay;
         public int RecycleActionDelay => _settings.PlayerConfig.RecycleActionDelay;
+        public int RenamePokemonActionDelay => _settings.PlayerConfig.RenamePokemonActionDelay;
         public bool UseNearActionRandom => _settings.PlayerConfig.UseNearActionRandom;
         public bool AutoCompleteTutorial => _settings.PlayerConfig.AutoCompleteTutorial;
         public string DesiredNickname => _settings.PlayerConfig.DesiredNickname;

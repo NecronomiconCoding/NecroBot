@@ -188,5 +188,6 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         int EvolveActionDelay { get; }
         int TransferActionDelay { get; }
         int RecycleActionDelay { get; }
+        int RenamePokemonActionDelay { get; }
     }
 }
