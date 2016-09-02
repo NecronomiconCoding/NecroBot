@@ -24,11 +24,11 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonIgnore]
         private string _filePath;
 
-        [JsonProperty(Order = 1)]
+        [JsonProperty(Required = Required.DisallowNull, Order = 1)]
         public AuthConfig AuthConfig = new AuthConfig();
-        [JsonProperty(Order = 2)]
+        [JsonProperty(Required = Required.DisallowNull, Order = 2)]
         public ProxyConfig ProxyConfig = new ProxyConfig();
-        [JsonProperty(Order = 3)]
+        [JsonProperty(Required = Required.DisallowNull, Order = 3)]
         public DeviceConfig DeviceConfig = new DeviceConfig();
 
         private JSchema _schema;
@@ -61,7 +61,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 var type = typeof(AuthSettings);
                 var schema = generator.Generate(type);
                 schema.Title = type.Name;
-                // save to file
+                //
                 _schema = schema;
                 return _schema;
             }
@@ -117,7 +117,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         //    }
         //}
 
-        public void Load(string path)
+        public void Load(string path, bool validate = true)
         {
             try
             {
@@ -128,8 +128,30 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                     // if the file exists, load the settings
                     var input = File.ReadAllText(_filePath, Encoding.UTF8);
 
+                    if (validate)
+                    {
+                        // validate Json using JsonSchema
+                        Logger.Write("Validating auth.json...");
+                        var jsonObj = JObject.Parse(input);
+                        IList<ValidationError> errors;
+                        var valid = jsonObj.IsValid(JsonSchema, out errors);
+                        if (!valid)
+                        {
+                            foreach (var error in errors)
+                            {
+                                Logger.Write(
+                                    "auth.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " +
+                                    error.Path + " " +
+                                    error.Message, LogLevel.Error);
+                            }
+                            Logger.Write("Fix auth.json and restart NecroBot or press a key to ignore and continue...",
+                                LogLevel.Warning);
+                            Console.ReadKey();
+                        }
+                    }
+
                     var settings = new JsonSerializerSettings();
-                    settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+                    settings.Converters.Add(new StringEnumConverter {CamelCaseText = true});
                     JsonConvert.PopulateObject(input, this, settings);
                 }
                 // Do some post-load logic to determine what device info to be using - if 'custom' is set we just take what's in the file without question
@@ -179,7 +201,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             }
         }
 
-        public void Save(string fullPath)
+        public void Save(string fullPath, bool validate = false)
         {
             var jsonSerializeSettings = new JsonSerializerSettings
             {
@@ -200,6 +222,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             //JsonSchema
             File.WriteAllText(fullPath.Replace(".json", ".schema.json"), JsonSchema.ToString(), Encoding.UTF8);
 
+            if (!validate) return;
+
             // validate Json using JsonSchema
             Logger.Write("Validating auth.json...");
             var jsonObj = JObject.Parse(output);
@@ -209,7 +233,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             foreach (var error in errors)
             {
                 Logger.Write(
-                    "auth.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " + error.Path +
+                    "auth.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " + error.Path + " " +
                     error.Message, LogLevel.Error);
             }
             Logger.Write("Fix auth.json and restart NecroBot or press a key to ignore and continue...", LogLevel.Warning);

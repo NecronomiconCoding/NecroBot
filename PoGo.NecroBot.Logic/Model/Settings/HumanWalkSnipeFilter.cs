@@ -6,7 +6,7 @@ using POGOProtos.Enums;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
-    [JsonObject(Title = "Human Walk Snipe Config", Description = "", ItemRequired = Required.DisallowNull)]
+    [JsonObject(Description = "", ItemRequired = Required.DisallowNull)] //Dont set Title
     public class HumanWalkSnipeFilter
     {
         [DefaultValue(300.0)]

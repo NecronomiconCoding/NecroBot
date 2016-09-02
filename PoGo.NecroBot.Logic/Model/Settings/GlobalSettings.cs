@@ -322,7 +322,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 var type = typeof(GlobalSettings);
                 var schema = generator.Generate(type);
                 schema.Title = type.Name;
-                // save to file
+                //
                 _schema = schema;
                 return _schema;
             }
@@ -363,7 +363,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         //    }
         //}
 
-        public static GlobalSettings Load(string path, bool boolSkipSave = false)
+        public static GlobalSettings Load(string path, bool boolSkipSave = false, bool validate = true)
         {
             GlobalSettings settings = null;
             var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
@@ -407,9 +407,36 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
                     try
                     {
+                        // validate Json using JsonSchema
+                        if (validate)
+                        {
+                            Logger.Write("Validating config.json...");
+                            var jsonObj = JObject.Parse(input);
+                            IList<ValidationError> errors;
+                            var valid = jsonObj.IsValid(JsonSchema, out errors);
+                            if (!valid)
+                            {
+                                foreach (var error in errors)
+                                {
+                                    Logger.Write(
+                                        "config.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " +
+                                        error.Path + " " +
+                                        error.Message, LogLevel.Error);
+                                }
+                                Logger.Write("Fix config.json and restart NecroBot or press a key to ignore and continue...",
+                                    LogLevel.Warning);
+                                Console.ReadKey();
+                            }
+                        }
+
                         settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
                     }
-                    catch (Newtonsoft.Json.JsonSerializationException exception)
+                    catch (JsonSerializationException exception)
+                    {
+                        Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+                        return null;
+                    }
+                    catch (JsonReaderException exception)
                     {
                         Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
                         return null;
@@ -884,7 +911,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             settings.Auth.Load(Path.Combine(settings.ProfileConfigPath, "auth.json"));
         }
 
-        public void Save(string fullPath)
+        public void Save(string fullPath, bool validate = false)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented,
                 new StringEnumConverter { CamelCaseText = true });
@@ -900,6 +927,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             //JsonSchema
             File.WriteAllText(fullPath.Replace(".json", ".schema.json"), JsonSchema.ToString(), Encoding.UTF8);
 
+            if (!validate) return;
+
             // validate Json using JsonSchema
             Logger.Write("Validating config.json...");
             var jsonObj = JObject.Parse(output);
@@ -909,7 +938,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             foreach (var error in errors)
             {
                 Logger.Write(
-                    "config.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " + error.Path +
+                    "config.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " + error.Path + " " +
                     error.Message, LogLevel.Error);
                 //"Default value is '" + error.Schema.Default + "'"
             }

@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
-    [JsonObject(Title = "Snipe List Of Location Config", Description = "", ItemRequired = Required.DisallowNull)]
+    [JsonObject(Title = "Location", Description = "", ItemRequired = Required.DisallowNull)]
     public class Location
     {
         public Location()
