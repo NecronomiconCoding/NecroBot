@@ -310,7 +310,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             if (!boolSkipSave || !settings.UpdateConfig.AutoUpdate)
             {
                 settings.Save(configFile);
-                settings.Auth.Load(Path.Combine(profileConfigPath, boolSkipSave, "auth.json"), validate);
+                settings.Auth.Load(Path.Combine(profileConfigPath, "auth.json"), boolSkipSave, validate);
             }
 
             return shouldExit ? null : settings;
