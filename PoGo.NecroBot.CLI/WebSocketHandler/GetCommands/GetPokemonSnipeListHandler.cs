@@ -11,12 +11,13 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
 
         public GetPokemonSnipeListHandler()
         {
-            Command = "GetPokemonSnipeList";
+            Command = "PokemonSnipeList";
         }
 
         public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
-            await GetPokemonSnipeListTask.Execute(session, webSocketSession, (string)message.RequestID);
+            await Logic.Tasks.HumanWalkSnipeTask.ExecuteFetchData(session);
+            //await GetPokemonSnipeListTask.Execute(session, webSocketSession, (string)message.RequestID);
         }
 
     }

@@ -195,7 +195,7 @@ namespace PoGo.NecroBot.CLI
                 pokemonCaptureEvent.Distance.ToString("F2"),
                 returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount,
                 pokemonCaptureEvent.Exp, familyCandies, pokemonCaptureEvent.Latitude.ToString("0.000000"), pokemonCaptureEvent.Longitude.ToString("0.000000"),
-                pokemonCaptureEvent.Move1, pokemonCaptureEvent.Move2
+                pokemonCaptureEvent.Move1, pokemonCaptureEvent.Move2  , pokemonCaptureEvent.Rarity
                );
                 Logger.Write(message, LogLevel.Caught);
             }
@@ -206,7 +206,7 @@ namespace PoGo.NecroBot.CLI
                 pokemonCaptureEvent.Distance.ToString("F2"),
                 returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount,
                 pokemonCaptureEvent.Latitude.ToString("0.000000"), pokemonCaptureEvent.Longitude.ToString("0.000000"),
-                pokemonCaptureEvent.Move1,pokemonCaptureEvent.Move2
+                pokemonCaptureEvent.Move1,pokemonCaptureEvent.Move2  , pokemonCaptureEvent.Rarity
                );
                 Logger.Write(message, LogLevel.Flee);
             }
@@ -384,9 +384,9 @@ namespace PoGo.NecroBot.CLI
                     break;
                 case HumanWalkSnipeEventTypes.DestinationReached:
                     Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeDestinationReached, ev.Latitude, ev.Longitude, ev.PauseDuration), LogLevel.Sniper);
-
                     break;
                 case HumanWalkSnipeEventTypes.PokemonScanned:
+                    if(ev.Pokemons != null && ev.Pokemons.Count > 0)
                     Logger.Write(session.Translation.GetTranslation(TranslationString.HumanWalkSnipeUpdate, ev.Pokemons.Count, 2, 3), LogLevel.Sniper, ConsoleColor.DarkMagenta);
                     break;
                     case HumanWalkSnipeEventTypes.PokestopUpdated:

@@ -325,6 +325,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         public static GlobalSettings Default => new GlobalSettings();
 
+        public Dictionary<PokemonId, UpgradeFilter> PokemonUpgradeFilters = UpgradeFilter.Default();
+
         public Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters = HumanWalkSnipeFilter.Default();
 
         public static GlobalSettings Load(string path, bool boolSkipSave = false)

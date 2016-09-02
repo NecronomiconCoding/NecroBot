@@ -21,20 +21,20 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public static class FarmPokestopsTask
     {
-        private static bool firstStart = true;
+        private static bool checkForMoveBackToDefault = true;
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            
+
             var distanceFromStart = LocationUtils.CalculateDistanceInMeters(
                 session.Settings.DefaultLatitude, session.Settings.DefaultLongitude,
                 session.Client.CurrentLatitude, session.Client.CurrentLongitude);
 
             // Edge case for when the client somehow ends up outside the defined radius
-            if (session.LogicSettings.MaxTravelDistanceInMeters != 0 && firstStart  &&
+            if (session.LogicSettings.MaxTravelDistanceInMeters != 0 && checkForMoveBackToDefault &&
                 distanceFromStart > session.LogicSettings.MaxTravelDistanceInMeters)
             {
-                firstStart = false;
+                checkForMoveBackToDefault = false;
                 Logger.Write(
                     session.Translation.GetTranslation(TranslationString.FarmPokestopsOutsideRadius, distanceFromStart),
                     LogLevel.Warning);
@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 // we have moved this distance, so apply it immediately to the egg walker.
                 await eggWalker.ApplyDistance(distanceFromStart, cancellationToken);
             }
-
+            checkForMoveBackToDefault = false;
             // initialize the variables in UseNearbyPokestopsTask here, as this is a fresh start.
             UseNearbyPokestopsTask.Initialize();
             await UseNearbyPokestopsTask.Execute(session, cancellationToken);
