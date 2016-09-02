@@ -6,7 +6,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public double RecycleInventoryAtUsagePercentage = 90.0;
         public bool RandomizeRecycle;
         public int RandomRecycleValue = 5;
-        public bool DelayBetweenRecycleActions;
         /*Amounts*/
         public int TotalAmountOfPokeballsToKeep = 120;
         public int TotalAmountOfPotionsToKeep = 80;

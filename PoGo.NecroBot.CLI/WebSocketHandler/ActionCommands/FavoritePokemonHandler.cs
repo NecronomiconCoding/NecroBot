@@ -15,7 +15,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
 
         public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
-            await Logic.Tasks.HumanWalkSnipeTask.PriorityPokemon(session,  (string)message.Id);
+            await Logic.Tasks.FavoritePokemonTask.Execute(session, (ulong)message.PokemonId, (bool)message.Favorite);
         }
     }
 }

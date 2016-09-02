@@ -311,7 +311,23 @@ namespace PoGo.NecroBot.Logic.Service
                     break;
 
                 case "/status":
-                    await SendMessage(message.Chat.Id, Console.Title);
+                    answerTextmessage += Console.Title;
+
+                    if (_session.LogicSettings.UseCatchLimit)
+                    {
+                        answerTextmessage += String.Format("\nCATCH LIMIT: {0}/{1}",
+                                    _session.Stats.PokemonTimestamps.Count,
+                                    _session.LogicSettings.CatchPokemonLimit);
+                    }
+
+                    if (_session.LogicSettings.UsePokeStopLimit)
+                    {
+                        answerTextmessage += String.Format("\nPOKESTOP LIMIT: {0}/{1}",
+                                    _session.Stats.PokeStopTimestamps.Count,
+                                    _session.LogicSettings.PokeStopLimit);
+                    }
+
+                    await SendMessage(message.Chat.Id, answerTextmessage);
                     break;
 
                 case "/restart":
