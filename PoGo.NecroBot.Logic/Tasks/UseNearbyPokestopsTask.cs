@@ -152,7 +152,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                                     pokestopList.Remove(ps);
                                 var fi = await session.Client.Fort.GetFort(ps.Id, ps.Latitude, ps.Longitude);
                                 await FarmPokestop(session, ps, fi, cancellationToken, true);
-                                await Task.Delay(1000);
+                                await Task.Delay(2000);
                             }
                         },
                         async () =>
