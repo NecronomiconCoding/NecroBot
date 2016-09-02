@@ -133,7 +133,8 @@ namespace PoGo.NecroBot.CLI
             }
 
             Console.WriteLine(finalMessage);
-            _session.EventDispatcher.Send(new LogEvent
+            //fix of null reference exception during (e.g.) the first start of the bot (session for logger not initialized in time)
+            _session?.EventDispatcher.Send(new LogEvent
             {
                 Message = finalMessage,
                 Color = GetHexColor(Console.ForegroundColor)
