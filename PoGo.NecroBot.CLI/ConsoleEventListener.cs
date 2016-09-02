@@ -70,6 +70,20 @@ namespace PoGo.NecroBot.CLI
                 LogLevel.Transfer);
         }
 
+        private static void HandleEvent(UpgradePokemonEvent upgradePokemonEvent, ISession session)
+        {
+            Logger.Write(
+                session.Translation.GetTranslation(TranslationString.EventPokemonUpgraded,
+                session.Translation.GetPokemonTranslation(upgradePokemonEvent.Id),
+                upgradePokemonEvent.Cp.ToString(),
+                upgradePokemonEvent.Perfection.ToString("0.00"),
+                upgradePokemonEvent.BestCp.ToString(),
+                upgradePokemonEvent.BestPerfection.ToString("0.00"),
+                LogLevel.LevelUp));
+        }
+
+
+
         private static void HandleEvent(ItemRecycledEvent itemRecycledEvent, ISession session)
         {
             Logger.Write(session.Translation.GetTranslation(TranslationString.EventItemRecycled, itemRecycledEvent.Count, itemRecycledEvent.Id),

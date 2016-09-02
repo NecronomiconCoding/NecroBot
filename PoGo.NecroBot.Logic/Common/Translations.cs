@@ -217,7 +217,8 @@ namespace PoGo.NecroBot.Logic.Common
         HumanWalkSnipeAddedPokestop,
         HumanWalkSnipeDestinationReached,
         HumanWalkSnipeNotEnoughtBalls,
-        HumanWalkSnipePokemonEncountered
+        HumanWalkSnipePokemonEncountered,
+        EventPokemonUpgraded
     }
 
     public class Translation : ITranslation
@@ -258,7 +259,10 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonEvolvedFailed,
                 "Failed {0}. Result was {1}, stopping evolving {2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonTransferred,
-                "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})"),
+                "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})")  ,
+             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonUpgraded,
+                "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%]"),
+
             new KeyValuePair<TranslationString, string>(TranslationString.EventItemRecycled, "{0}x {1}"),
 
             //Logging Cleanup (mostly uneccessary information, may want a verbose pokemon capture logger setting)

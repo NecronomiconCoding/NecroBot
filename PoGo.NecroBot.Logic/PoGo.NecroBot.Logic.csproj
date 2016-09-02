@@ -147,6 +147,7 @@
     <Compile Include="Event\SnipeModeEvent.cs" />
     <Compile Include="Event\PokemonListEvent.cs" />
     <Compile Include="Event\SnipeScanEvent.cs" />
+    <Compile Include="Event\UpgradePokemonEvent.cs" />
     <Compile Include="Event\UpdateEvent.cs" />
     <Compile Include="Event\PokemonCaptureEvent.cs" />
     <Compile Include="Event\PokeStopListEvent.cs" />
