@@ -36,7 +36,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
             try
             {
                 var authJson = JsonConvert.SerializeObject((JObject) message.AuthJson, jsonSerializeSettings);
-                if (!string.IsNullOrEmpty(authJson))
+                if (!string.IsNullOrEmpty(authJson) && authJson != "null")
                     File.WriteAllText(authFile, authJson, Encoding.UTF8);
             }
             catch (Exception)
@@ -47,7 +47,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
             try
             {
                 var configJson = JsonConvert.SerializeObject((JObject) message.ConfigJson, jsonSerializeSettings);
-                if (!string.IsNullOrEmpty(configJson))
+                if (!string.IsNullOrEmpty(configJson) && configJson != "null" )
                     File.WriteAllText(configFile, configJson, Encoding.UTF8);
             }
             catch (Exception)
