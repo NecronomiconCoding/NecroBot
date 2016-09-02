@@ -224,7 +224,7 @@ namespace PoGo.NecroBot.Logic.Common
         HumanWalkSnipeDestinationReached,
         HumanWalkSnipeNotEnoughtBalls,
         HumanWalkSnipePokemonEncountered,
-        EventPokemonUpgraded
+        EventPokemonUpgraded,
         FirstStartSetupProxyPrompt,
         FirstStartSetupProxyHostPrompt,
         FirstStartSetupProxyHostConfirm,
