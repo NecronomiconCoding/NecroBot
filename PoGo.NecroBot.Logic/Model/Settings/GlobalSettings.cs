@@ -4,9 +4,13 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Schema.Generation;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
@@ -16,6 +20,7 @@ using POGOProtos.Inventory.Item;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
+    [JsonObject(Title = " Global Settings", Description = "Set your global settings.", ItemRequired = Required.DisallowNull)]
     public class GlobalSettings
     {
         [JsonIgnore]
@@ -27,283 +32,80 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonIgnore]
         public string ProfilePath;
 
+        [JsonProperty(Required = Required.DisallowNull)]
         public ConsoleConfig ConsoleConfig = new ConsoleConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public UpdateConfig UpdateConfig = new UpdateConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public WebsocketsConfig WebsocketsConfig = new WebsocketsConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public LocationConfig LocationConfig = new LocationConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public TelegramConfig TelegramConfig = new TelegramConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public GpxConfig GPXConfig = new GpxConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public SnipeConfig SnipeConfig = new SnipeConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public HumanWalkSnipeConfig HumanWalkSnipeConfig = new HumanWalkSnipeConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public PokeStopConfig PokeStopConfig = new PokeStopConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public PokemonConfig PokemonConfig = new PokemonConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public RecycleConfig RecycleConfig = new RecycleConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public CustomCatchConfig CustomCatchConfig = new CustomCatchConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public PlayerConfig PlayerConfig = new PlayerConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public SoftBanConfig SoftBanConfig = new SoftBanConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public GoogleWalkConfig GoogleWalkConfig = new GoogleWalkConfig();
+
+        [JsonProperty(Required = Required.DisallowNull)]
         public YoursWalkConfig YoursWalkConfig = new YoursWalkConfig();
 
-        public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
-        {
-            new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseCool, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseFloral, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemTroyDisk, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXAttack, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXDefense, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXMiracle, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSpecialCamera, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasicUnlimited, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasic, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokemonStorageUpgrade, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
-        };
+        [JsonProperty(Required = Required.DisallowNull)]
+        public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = RecycleConfig.ItemRecycleFilterDefault();
 
+        [JsonProperty(Required = Required.DisallowNull)]
+        public List<PokemonId> PokemonsNotToTransfer = TransferConfig.PokemonsNotToTransferDefault();
 
-        public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
-        {
-            //criteria: from SS Tier to A Tier + Regional Exclusive
-            PokemonId.Venusaur,
-            PokemonId.Charizard,
-            PokemonId.Blastoise,
-            //PokemonId.Nidoqueen,
-            //PokemonId.Nidoking,
-            PokemonId.Clefable,
-            //PokemonId.Vileplume,
-            //PokemonId.Golduck,
-            //PokemonId.Arcanine,
-            //PokemonId.Poliwrath,
-            //PokemonId.Machamp,
-            //PokemonId.Victreebel,
-            //PokemonId.Golem,
-            //PokemonId.Slowbro,
-            //PokemonId.Farfetchd,
-            PokemonId.Muk,
-            //PokemonId.Exeggutor,
-            //PokemonId.Lickitung,
-            PokemonId.Chansey,
-            //PokemonId.Kangaskhan,
-            //PokemonId.MrMime,
-            //PokemonId.Tauros,
-            PokemonId.Gyarados,
-            //PokemonId.Lapras,
-            PokemonId.Ditto,
-            //PokemonId.Vaporeon,
-            //PokemonId.Jolteon,
-            //PokemonId.Flareon,
-            //PokemonId.Porygon,
-            PokemonId.Snorlax,
-            PokemonId.Articuno,
-            PokemonId.Zapdos,
-            PokemonId.Moltres,
-            PokemonId.Dragonite,
-            PokemonId.Mewtwo,
-            PokemonId.Mew
-        };
+        [JsonProperty(Required = Required.DisallowNull)]
+        public List<PokemonId> PokemonsToEvolve = EvolveConfig.PokemonsToEvolveDefault();
 
-        public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
-        {
-            /*NOTE: keep all the end-of-line commas exept for the last one or an exception will be thrown!
-            criteria: 12 candies*/
-            PokemonId.Caterpie,
-            PokemonId.Weedle,
-            PokemonId.Pidgey,
-            /*criteria: 25 candies*/
-            //PokemonId.Bulbasaur,
-            //PokemonId.Charmander,
-            //PokemonId.Squirtle,
-            PokemonId.Rattata
-            //PokemonId.NidoranFemale,
-            //PokemonId.NidoranMale,
-            //PokemonId.Oddish,
-            //PokemonId.Poliwag,
-            //PokemonId.Abra,
-            //PokemonId.Machop,
-            //PokemonId.Bellsprout,
-            //PokemonId.Geodude,
-            //PokemonId.Gastly,
-            //PokemonId.Eevee,
-            //PokemonId.Dratini,
-            /*criteria: 50 candies commons*/
-            //PokemonId.Spearow,
-            //PokemonId.Ekans,
-            //PokemonId.Zubat,
-            //PokemonId.Paras,
-            //PokemonId.Venonat,
-            //PokemonId.Psyduck,
-            //PokemonId.Slowpoke,
-            //PokemonId.Doduo,
-            //PokemonId.Drowzee,
-            //PokemonId.Krabby,
-            //PokemonId.Horsea,
-            //PokemonId.Goldeen,
-            //PokemonId.Staryu
-        };
-        public List<PokemonId> PokemonsToLevelUp = new List<PokemonId>
-        {
-            //criteria: from SS Tier to A Tier + Regional Exclusive
-            PokemonId.Venusaur,
-            PokemonId.Charizard,
-            PokemonId.Blastoise,
-            //PokemonId.Nidoqueen,
-            //PokemonId.Nidoking,
-            PokemonId.Clefable,
-            //PokemonId.Vileplume,
-            //PokemonId.Golduck,
-            //PokemonId.Arcanine,
-            //PokemonId.Poliwrath,
-            //PokemonId.Machamp,
-            //PokemonId.Victreebel,
-            //PokemonId.Golem,
-            //PokemonId.Slowbro,
-            //PokemonId.Farfetchd,
-            PokemonId.Muk,
-            //PokemonId.Exeggutor,
-            //PokemonId.Lickitung,
-            PokemonId.Chansey,
-            //PokemonId.Kangaskhan,
-            //PokemonId.MrMime,
-            //PokemonId.Tauros,
-            PokemonId.Gyarados,
-            //PokemonId.Lapras,
-            PokemonId.Ditto,
-            //PokemonId.Vaporeon,
-            //PokemonId.Jolteon,
-            //PokemonId.Flareon,
-            //PokemonId.Porygon,
-            PokemonId.Snorlax,
-            PokemonId.Articuno,
-            PokemonId.Zapdos,
-            PokemonId.Moltres,
-            PokemonId.Dragonite,
-            PokemonId.Mewtwo,
-            PokemonId.Mew
-        };
-        public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
-        {
-            //criteria: most common
-            PokemonId.Caterpie,
-            PokemonId.Weedle,
-            PokemonId.Pidgey,
-            PokemonId.Rattata,
-            PokemonId.Spearow,
-            PokemonId.Zubat,
-            PokemonId.Doduo
-        };
+        [JsonProperty(Required = Required.DisallowNull)]
+        public List<PokemonId> PokemonsToLevelUp = LevelUpConfig.PokemonsToLevelUpDefault();
 
-        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
-        {
-            //criteria: based on NY Central Park and Tokyo variety + sniping optimization
-            {PokemonId.Golduck, new TransferFilter(1800, 6, false, 95, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.WaterGunFast,PokemonMove.HydroPump }},null,"and")},
-            {PokemonId.Aerodactyl, new TransferFilter(1250, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.BiteFast,PokemonMove.HyperBeam }},null,"and")},
-            {PokemonId.Venusaur, new TransferFilter(1800, 6, false, 95, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.VineWhipFast,PokemonMove.SolarBeam }},null,"and")},
-            {PokemonId.Farfetchd, new TransferFilter(1250, 6, false, 80, "or", 1)},
-            {PokemonId.Krabby, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.Kangaskhan, new TransferFilter(1500, 6, false, 60, "or", 1)},
-            {PokemonId.Horsea, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.Staryu, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.MrMime, new TransferFilter(1250, 6, false, 40, "or", 1)},
-            {PokemonId.Scyther, new TransferFilter(1800, 6, false, 80, "or", 1)},
-            {PokemonId.Jynx, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.Charizard, new TransferFilter(1250, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.WingAttackFast,PokemonMove.FireBlast }},null,"and")},
-            {PokemonId.Electabuzz, new TransferFilter(1250, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.ThunderShockFast,PokemonMove.Thunder }},null,"and")},
-            {PokemonId.Magmar, new TransferFilter(1500, 6, false, 80, "or", 1)},
-            {PokemonId.Pinsir, new TransferFilter(1800, 6, false, 95, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.RockSmashFast,PokemonMove.XScissor }},null,"and")},
-            {PokemonId.Tauros, new TransferFilter(1250, 6, false, 90, "or", 1)},
-            {PokemonId.Magikarp, new TransferFilter(200, 6, false, 95, "or", 1)},
-            {PokemonId.Exeggutor, new TransferFilter(1800, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.ZenHeadbuttFast,PokemonMove.SolarBeam }},null,"and")},
-            {PokemonId.Gyarados, new TransferFilter(1250, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.DragonBreath,PokemonMove.HydroPump }},null,"and")},
-            {PokemonId.Lapras, new TransferFilter(1800, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.FrostBreathFast,PokemonMove.Blizzard }},null,"and")},
-            {PokemonId.Eevee, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.Vaporeon, new TransferFilter(1500, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.WaterGun,PokemonMove.HydroPump }},null,"and")},
-            {PokemonId.Jolteon, new TransferFilter(1500, 6, false, 90, "or", 1)},
-            {PokemonId.Flareon, new TransferFilter(1500, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.Ember,PokemonMove.FireBlast }},null,"and")},
-            {PokemonId.Porygon, new TransferFilter(1250, 6, false, 60, "or", 1)},
-            {PokemonId.Arcanine, new TransferFilter(1800, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.FireFangFast,PokemonMove.FireBlast }},null,"and")},
-            {PokemonId.Snorlax, new TransferFilter(2600, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.ZenHeadbuttFast,PokemonMove.HyperBeam }},null,"and")},
-            {PokemonId.Dragonite, new TransferFilter(2600, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.DragonBreath,PokemonMove.DragonClaw }},null,"and")},
-        };
+        [JsonProperty(Required = Required.DisallowNull)]
+        public List<PokemonId> PokemonsToIgnore = CatchConfig.PokemonsToIgnoreDefault();
 
-        public SnipeSettings PokemonToSnipe = new SnipeSettings
-        {
-            Locations = new List<Location>
-            {
-                new Location(38.55680748646112, -121.2383794784546), //Dratini Spot
-                new Location(-33.85901900, 151.21309800), //Magikarp Spot
-                new Location(47.5014969, -122.0959568), //Eevee Spot
-                new Location(51.5025343, -0.2055027) //Charmender Spot
-            },
-            Pokemon = new List<PokemonId>
-            {
-                PokemonId.Venusaur,
-                PokemonId.Charizard,
-                PokemonId.Blastoise,
-                PokemonId.Beedrill,
-                PokemonId.Raichu,
-                PokemonId.Sandslash,
-                PokemonId.Nidoking,
-                PokemonId.Nidoqueen,
-                PokemonId.Clefable,
-                PokemonId.Ninetales,
-                PokemonId.Golbat,
-                PokemonId.Vileplume,
-                PokemonId.Golduck,
-                PokemonId.Primeape,
-                PokemonId.Arcanine,
-                PokemonId.Poliwrath,
-                PokemonId.Alakazam,
-                PokemonId.Machamp,
-                PokemonId.Golem,
-                PokemonId.Rapidash,
-                PokemonId.Slowbro,
-                //PokemonId.Farfetchd,
-                PokemonId.Muk,
-                PokemonId.Cloyster,
-                PokemonId.Gengar,
-                PokemonId.Exeggutor,
-                PokemonId.Marowak,
-                PokemonId.Hitmonchan,
-                PokemonId.Lickitung,
-                PokemonId.Rhydon,
-                PokemonId.Chansey,
-                //PokemonId.Kangaskhan,
-                PokemonId.Starmie,
-                //PokemonId.MrMime,
-                PokemonId.Scyther,
-                PokemonId.Magmar,
-                PokemonId.Electabuzz,
-                PokemonId.Jynx,
-                PokemonId.Gyarados,
-                PokemonId.Lapras,
-                PokemonId.Ditto,
-                PokemonId.Vaporeon,
-                PokemonId.Jolteon,
-                PokemonId.Flareon,
-                PokemonId.Porygon,
-                PokemonId.Kabutops,
-                PokemonId.Aerodactyl,
-                PokemonId.Snorlax,
-                PokemonId.Articuno,
-                PokemonId.Zapdos,
-                PokemonId.Moltres,
-                PokemonId.Dragonite,
-                PokemonId.Mewtwo,
-                PokemonId.Mew
-            }
-        };
+        [JsonProperty(Required = Required.DisallowNull)]
+        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = TransferFilter.TransferFilterDefault();
 
-        public List<PokemonId> PokemonToUseMasterball = new List<PokemonId>
-        {
-            PokemonId.Articuno,
-            PokemonId.Zapdos,
-            PokemonId.Moltres,
-            PokemonId.Mew,
-            PokemonId.Mewtwo
-        };
+        [JsonProperty(Required = Required.DisallowNull)]
+        public SnipeSettings PokemonToSnipe = SnipeSettings.Default();
+
+        [JsonProperty(Required = Required.DisallowNull)]
+        public List<PokemonId> PokemonToUseMasterball = CatchConfig.PokemonsToUseMasterballDefault();
+
+        [JsonProperty(Required = Required.DisallowNull)]
+        public Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters = HumanWalkSnipeFilter.Default();
 
         public GlobalSettings()
         {
@@ -327,9 +129,76 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         public Dictionary<PokemonId, UpgradeFilter> PokemonUpgradeFilters = UpgradeFilter.Default();
 
-        public Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters = HumanWalkSnipeFilter.Default();
+        private static JSchema _schema;
+        private static JSchema JsonSchema
+        {
+            get
+            {
+                if (_schema != null)
+                    return _schema;
+                // JSON Schemas from .NET types
+                var generator = new JSchemaGenerator
+                {
+                    // change contract resolver so property names are camel case
+                    //ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    // types with no defined ID have their type name as the ID
+                    SchemaIdGenerationHandling = SchemaIdGenerationHandling.TypeName,
+                    // use the default order of properties.
+                    SchemaPropertyOrderHandling = SchemaPropertyOrderHandling.Default,
+                    // referenced schemas are inline.
+                    SchemaLocationHandling = SchemaLocationHandling.Inline,
+                    // no schemas can be referenced.    
+                    SchemaReferenceHandling = SchemaReferenceHandling.None
+                };
+                // change Zone enum to generate a string property
+                var strEnumGen = new StringEnumGenerationProvider { CamelCaseText = true };
+                generator.GenerationProviders.Add(strEnumGen);
+                // generate json schema 
+                var type = typeof(GlobalSettings);
+                var schema = generator.Generate(type);
+                schema.Title = type.Name;
+                //
+                _schema = schema;
+                return _schema;
+            }
+        }
 
-        public static GlobalSettings Load(string path, bool boolSkipSave = false)
+        //private JObject _jsonObject;
+        //public JObject JsonObject
+        //{
+        //    get
+        //    {
+        //        if (_jsonObject == null)
+        //            _jsonObject = JObject.FromObject(this);
+
+        //        return _jsonObject;
+        //    }
+        //    set
+        //    {
+        //        _jsonObject = value;
+        //    }
+        //}
+
+
+        //public void Load(JObject jsonObj)
+        //{
+        //    try
+        //    {
+        //        var input = jsonObj.ToString(Formatting.None, new StringEnumConverter { CamelCaseText = true });
+        //        var settings = new JsonSerializerSettings();
+        //        settings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+        //        JsonConvert.PopulateObject(input, this, settings);
+        //        var configFile = Path.Combine(ProfileConfigPath, "config.json");
+        //        this.Save(configFile);
+
+        //    }
+        //    catch (JsonReaderException exception)
+        //    {
+        //            Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+        //    }
+        //}
+
+        public static GlobalSettings Load(string path, bool boolSkipSave = false, bool validate = true)
         {
             GlobalSettings settings = null;
             var profilePath = Path.Combine(Directory.GetCurrentDirectory(), path);
@@ -348,7 +217,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                     {
                         try
                         {
-                            input = File.ReadAllText(configFile);
+                            input = File.ReadAllText(configFile, Encoding.UTF8);
                             if (!input.Contains("DeprecatedMoves"))
                                 input = input.Replace("\"Moves\"", $"\"DeprecatedMoves\"");
 
@@ -373,9 +242,36 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
                     try
                     {
+                        // validate Json using JsonSchema
+                        if (validate)
+                        {
+                            Logger.Write("Validating config.json...");
+                            var jsonObj = JObject.Parse(input);
+                            IList<ValidationError> errors;
+                            var valid = jsonObj.IsValid(JsonSchema, out errors);
+                            if (!valid)
+                            {
+                                foreach (var error in errors)
+                                {
+                                    Logger.Write(
+                                        "config.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " +
+                                        error.Path + " " +
+                                        error.Message, LogLevel.Error);
+                                }
+                                Logger.Write("Fix config.json and restart NecroBot or press a key to ignore and continue...",
+                                    LogLevel.Warning);
+                                Console.ReadKey();
+                            }
+                        }
+
                         settings = JsonConvert.DeserializeObject<GlobalSettings>(input, jsonSettings);
                     }
-                    catch (Newtonsoft.Json.JsonSerializationException exception)
+                    catch (JsonSerializationException exception)
+                    {
+                        Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
+                        return null;
+                    }
+                    catch (JsonReaderException exception)
                     {
                         Logger.Write("JSON Exception: " + exception.Message, LogLevel.Error);
                         return null;
@@ -850,7 +746,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             settings.Auth.Load(Path.Combine(settings.ProfileConfigPath, "auth.json"));
         }
 
-        public void Save(string fullPath)
+        public void Save(string fullPath, bool validate = false)
         {
             var output = JsonConvert.SerializeObject(this, Formatting.Indented,
                 new StringEnumConverter { CamelCaseText = true });
@@ -861,7 +757,28 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 Directory.CreateDirectory(folder);
             }
 
-            File.WriteAllText(fullPath, output);
+            File.WriteAllText(fullPath, output, Encoding.UTF8);
+
+            //JsonSchema
+            File.WriteAllText(fullPath.Replace(".json", ".schema.json"), JsonSchema.ToString(), Encoding.UTF8);
+
+            if (!validate) return;
+
+            // validate Json using JsonSchema
+            Logger.Write("Validating config.json...");
+            var jsonObj = JObject.Parse(output);
+            IList<ValidationError> errors;
+            var valid = jsonObj.IsValid(JsonSchema, out errors);
+            if (valid) return;
+            foreach (var error in errors)
+            {
+                Logger.Write(
+                    "config.json [Line: " + error.LineNumber + ", Position: " + error.LinePosition + "]: " + error.Path + " " +
+                    error.Message, LogLevel.Error);
+                //"Default value is '" + error.Schema.Default + "'"
+            }
+            Logger.Write("Fix config.json and restart NecroBot or press a key to ignore and continue...", LogLevel.Warning);
+            Console.ReadKey();
         }
     }
 }
