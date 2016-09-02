@@ -253,10 +253,12 @@
     <Compile Include="SimpleSession.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebSocketHandler\ActionCommands\SetConfigHandler.cs" />
     <Compile Include="WebSocketHandler\ActionCommands\HumanSnipeRemovePokemonHandler.cs" />
     <Compile Include="WebSocketHandler\ActionCommands\HumanSnipePriorityPokemonHandler.cs" />
     <Compile Include="WebSocketHandler\ActionCommands\FavoritePokemonHandler.cs" />
     <Compile Include="WebSocketHandler\ActionCommands\DropItemHandler.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Events\ConfigResponce.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Events\SnipeListResponce.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Events\WebResponce.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Events\EggListResponce.cs" />
@@ -267,7 +269,9 @@
     <Compile Include="WebSocketHandler\GetCommands\GetItemsListHandler.cs" />
     <Compile Include="WebSocketHandler\GetCommands\GetPokemonSettingsHandler.cs" />
     <Compile Include="WebSocketHandler\GetCommands\GetTrainerProfileHandler.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Helpers\ConfigWeb.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Helpers\TrainerProfileWeb.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\Tasks\GetConfigTask.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Tasks\GetPokemonSnipeListTask.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Tasks\GetPokemonSettingsTask.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Tasks\GetTrainerProfileTask.cs" />
@@ -277,6 +281,7 @@
     <Compile Include="WebSocketHandler\GetCommands\Tasks\GetEggListTask.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Tasks\GetItemListTask.cs" />
     <Compile Include="WebSocketHandler\EncodingHelper.cs" />
+    <Compile Include="WebSocketHandler\GetCommands\GetConfigHandler.cs" />
     <Compile Include="WebSocketHandler\IWebSocketResponce.cs" />
     <Compile Include="WebSocketHandler\IWebSocketRequestHandler.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Events\PokemonListResponce.cs" />

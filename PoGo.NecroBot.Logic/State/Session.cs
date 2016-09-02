@@ -3,6 +3,7 @@
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Interfaces.Configuration;
+using PoGo.NecroBot.Logic.Model.Settings;
 using PoGo.NecroBot.Logic.Service;
 using PokemonGo.RocketAPI;
 using POGOProtos.Networking.Responses;
@@ -50,6 +51,8 @@ namespace PoGo.NecroBot.Logic.State
             Reset(settings, LogicSettings);
             Stats = new SessionStats();
         }
+
+        public GlobalSettings GlobalSettings { get; set; }
 
         public ISettings Settings { get; set; }
 
