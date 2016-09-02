@@ -29,7 +29,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 UniqueId = pokemon.Id,
                 Result = evolveResponse.Result
             });
-            DelayingUtils.Delay(session.LogicSettings.DelayBetweenPlayerActions, 0);
+            DelayingUtils.Delay(session.LogicSettings.EvolveActionDelay, 0);
         }
     }
 }
