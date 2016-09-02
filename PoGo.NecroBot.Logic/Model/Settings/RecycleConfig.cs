@@ -25,10 +25,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 4)]
         public int RandomRecycleValue = 5;
 
-        [DefaultValue(false)]
-        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 5)]
-        public bool DelayBetweenRecycleActions;
-
         /*Amounts*/
         [DefaultValue(120)]
         [Range(0, 999)]

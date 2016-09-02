@@ -2,7 +2,7 @@
   "TranslationStrings": [
     {
       "Key": "HumanWalkSnipeNotEnoughtBalls",
-      "Value": "(HUMAN WALK) Not enought balls to activate catch Em-All mode. ({0})/{1}"
+      "Value": "(SNIPER HUMANIZADO) No tiene suficientes PokeBalls para activar el modo Capturar Todo. ({0})/{1}"
     },
     {
       "Key": "HumanWalkSnipe",
