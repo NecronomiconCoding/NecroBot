@@ -82,7 +82,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Sampai di: {0} | Mendapatkan EXP: {1} Gem: {2} | Barang: {3} | Koordinat: {4}, {5} | Ketinggian elevasi: {6}"
+      "Value": "Sampai di: {0} | Mendapatkan XP: {1} Gem: {2} | Barang: {3} | Koordinat: {4}, {5} | Ketinggian elevasi: {6}"
     },
     {
       "Key": "eventFortFailed",
@@ -106,7 +106,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} berhasil dan dapat {1}xp"
+      "Value": "{0} berhasil! | Mendapatkan: {1} XP"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -114,7 +114,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1} IV: {2}% | CP terbaik: {3} IV: {4}% | Permen {5}"
+      "Value": "{0}\t- CP: {1} IV: {2}% [CP terbaik: {3} IV: {4}%] Total permen: {5}"
     },
     {
       "Key": "eventItemRecycled",
@@ -122,11 +122,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} (Sisa {10}) | mendapatkan: {11} EXP | {12} | lintang: {13} bujur: {14}\r\nJurus: 1. {15} 2. {16}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | Menggunakan: {9} (Sisa {10}) | Mendapatkan: {11} EXP | {12} | Koordinat: {13}, {14} | Jurus: 1 {15} - 2 {16}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} (Sisa {10}) | lintang: {11} bujur: {12}\r\nJurus: 1. {13} 2. {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | Menggunakan: {9} (Sisa {10}) | Koordinat: {11}, {12} | Jurus: 1 {13} - 2 {14}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -146,7 +146,7 @@
     },
     {
       "Key": "eventUseBerry",
-      "Value": "Memakai {0} | {1} tersisa"
+      "Value": "Memberi umpan: {0} (Sisa: {1})"
     },
     {
       "Key": "itemRazzBerry",
@@ -154,7 +154,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Percobaan ke-{1}, hasil: {0}"
+      "Value": "Bola ke-{1}: {0}"
     },
     {
       "Key": "catchStatus",
@@ -162,7 +162,7 @@
     },
     {
       "Key": "candies",
-      "Value": "Permen: {0}"
+      "Value": "Total permen: {0}"
     },
     {
       "Key": "unhandledGpxData",
@@ -174,7 +174,7 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "Sempurna"
+      "Value": "IV"
     },
     {
       "Key": "commonWordName",
@@ -190,7 +190,7 @@
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Menampilkan yang terbaik dijenisnya"
+      "Value": "Menampilkan IV terbaik"
     },
     {
       "Key": "displayHighestsLevelHeader",
@@ -202,15 +202,15 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Memasukkan telur dalam inkubator: {0:0.00} km tersisa"
+      "Value": "Memasukkan telur ({0:0.00} km) ke dalam inkubator"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Status terbaru inkubator: {0:0.00} km tersisa"
+      "Value": "Status terbaru inkubator: {0:0.00} km lagi menetas!"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Telur menetas:  {0} | Lv: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "{0} menetas! | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -434,19 +434,19 @@
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Tangkapan Lepas"
+      "Value": "Pokemon Lepas!"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "Tangkapan Kabur"
+      "Value": "Pokemon Kabur!"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "Tangkapan Gagal"
+      "Value": "Lemparan Meleset!"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "Tangkapan Berhasil"
+      "Value": "Tangkapan Berhasil!"
     },
     {
       "Key": "catchTypeNormal",
@@ -466,11 +466,11 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Waktu aktif {1} - Lvl: {2} | xp/j: {3:n0} | P/j: {4:n0} | Stardust: {5:n0} | Ditransfer: {6:n0} | Didaur ulang: {7:n0}"
+      "Value": "{0} - Waktu aktif {1} - Lvl: {2} | XP/j: {3:n0} | PKMN/j: {4:n0} | Stardust: {5:n0} | Ditransfer: {6:n0} | Didaur ulang: {7:n0}"
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- Lvl {0} | {1} ----- \n xp: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang ditransfer: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang berevolusi: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9}km \n Pokemon: {11}/{12}"
+      "Value": "----- Lvl {0} | {1} ----- \n XP: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang ditransfer: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang berevolusi: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9}km \n Pokemon: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
@@ -486,7 +486,7 @@
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (level berikutnya {1} jam {2} menit | {3:n0}/{4:n0} XP)"
+      "Value": "{0} (Level berikutnya {1} jam {2} menit lagi | {3:n0}/{4:n0} XP)"
     },
     {
       "Key": "requireInputText",
@@ -866,11 +866,11 @@
     },
     {
       "Key": "HighestsPokemoCell",
-      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lv {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+      "Value": "# CP: ({0}/{1}) | {3}: {2}%\t | Lvl: {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Kecepatan jalan berubah, dari {0:n2} km/j ke {1:n2} km/j"
+      "Value": "Kecepatan jalan berubah, dari {0:n2} ke {1:n2} km/j"
     },
     {
       "Key": "AccountBanned",
