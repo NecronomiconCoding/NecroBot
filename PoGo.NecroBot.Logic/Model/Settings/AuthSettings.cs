@@ -24,11 +24,11 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonIgnore]
         private string _filePath;
 
-        [JsonProperty(Required = Required.DisallowNull, Order = 1)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 1)]
         public AuthConfig AuthConfig = new AuthConfig();
-        [JsonProperty(Required = Required.DisallowNull, Order = 2)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 2)]
         public ProxyConfig ProxyConfig = new ProxyConfig();
-        [JsonProperty(Required = Required.DisallowNull, Order = 3)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 3)]
         public DeviceConfig DeviceConfig = new DeviceConfig();
 
         private JSchema _schema;
@@ -117,7 +117,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         //    }
         //}
 
-        public void Load(string path, bool validate = true)
+        public void Load(string path, bool boolSkipSave = false, bool validate = true)
         {
             try
             {
@@ -175,7 +175,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
                 // Jurann: Note that some device IDs I saw when adding devices had smaller numbers, only 12 or 14 chars instead of 16 - probably not important but noted here anyway
 
-                Save(_filePath);
+                if (!boolSkipSave)
+                    Save(_filePath);
+
             }
             catch (JsonReaderException exception)
             {
