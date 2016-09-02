@@ -35,8 +35,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 if (session.LogicSettings.CatchPokemon == true &&
                     session.LogicSettings.SnipeAtPokestops == false &&
-                    session.LogicSettings.UseSnipeLocationServer == false /* &&
-                    session.LogicSettings.EnableHumanWalkingSnipe == false */
+                    session.LogicSettings.UseSnipeLocationServer == false 
                     )//extra security
                 {
 
@@ -45,6 +44,9 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (!await SnipePokemonTask.CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
                         return;
+
+                    var CurrentLatitude = session.Client.CurrentLatitude;
+                    var CurrentLongitude = session.Client.CurrentLongitude;
 
                     StreamReader sr = new StreamReader(pth, Encoding.UTF8);
                     string jsn = sr.ReadToEnd();
@@ -62,6 +64,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                         await OwnSnipe(session, location.Id, location.Latitude, location.Longitude, cancellationToken);
                     }
+                    await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
                 }
             }
             catch (Exception ex)
@@ -92,13 +95,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Latitude = latitude
                 });
 
-                var nearbyPokemons = await CatchNearbyPokemonsTask.GetNearbyPokemons(session);
+                var nearbyPokemons = await GetPokemons(session);
                 catchablePokemon = nearbyPokemons.Where(p => p.PokemonId == TargetPokemonId).ToList();
 
             }
             finally
             {
-                await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
+
             }
 
             if (catchablePokemon.Count > 0)
@@ -109,13 +112,10 @@ namespace PoGo.NecroBot.Logic.Tasks
                     EncounterResponse encounter;
                     try
                     {
-                        await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(latitude, longitude, session.Client.CurrentAltitude));
-
                         encounter = await session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId);
                     }
                     finally
                     {
-                        await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
                     }
 
                     if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
@@ -127,6 +127,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         });
 
                         await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon);
+                        session.Stats.SnipeCount++;
+                        session.Stats.LastSnipeTime = DateTime.Now;
                     }
                     else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                     {
@@ -169,12 +171,18 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
                 });
             }
-
             session.EventDispatcher.Send(new SnipeModeEvent { Active = false });
 
             await Task.Delay(5000, cancellationToken);
         }
 
+        private static async Task<List<MapPokemon>> GetPokemons(ISession session)
+        {
+            var mapObjects = await session.Client.Map.GetMapObjects();
+
+            List<MapPokemon> pokemons = mapObjects.Item1.MapCells.SelectMany(i => i.CatchablePokemons).ToList();
+            return pokemons;
+        }
 
     }
 }
