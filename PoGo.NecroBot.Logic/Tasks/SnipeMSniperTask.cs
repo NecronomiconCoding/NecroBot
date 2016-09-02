@@ -101,7 +101,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             finally
             {
-
+                //await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
             }
 
             if (catchablePokemon.Count > 0)
@@ -112,10 +112,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                     EncounterResponse encounter;
                     try
                     {
+                        await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(latitude, longitude, session.Client.CurrentAltitude));
+
                         encounter = await session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId);
                     }
                     finally
                     {
+                        await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
                     }
 
                     if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
