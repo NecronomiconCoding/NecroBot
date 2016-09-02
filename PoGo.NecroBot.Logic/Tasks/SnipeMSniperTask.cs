@@ -1,21 +1,21 @@
-﻿using PoGo.NecroBot.Logic.State;
+﻿
+using GeoCoordinatePortable;
+using Newtonsoft.Json;
+using PoGo.NecroBot.Logic.Common;
+using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Model.Settings;
+using PoGo.NecroBot.Logic.State;
+using PoGo.NecroBot.Logic.Utils;
+using POGOProtos.Enums;
+using POGOProtos.Map.Pokemon;
+using POGOProtos.Networking.Responses;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using PoGo.NecroBot.Logic.Model.Settings;
-using PoGo.NecroBot.Logic.Event;
-using POGOProtos.Enums;
-using Newtonsoft.Json;
-using System.IO;
-using PoGo.NecroBot.Logic.Common;
-using POGOProtos.Networking.Responses;
-using PoGo.NecroBot.Logic.Utils;
-using GeoCoordinatePortable;
-using POGOProtos.Map.Pokemon;
-using PoGo.NecroBot.Logic.PoGoUtils;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -72,8 +72,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(ee);
             }
         }
-        public static async Task OwnSnipe(ISession session, PokemonId pokemonIds, double latitude,
-           double longitude, CancellationToken cancellationToken)
+
+        public static async Task OwnSnipe(ISession session, PokemonId TargetPokemonId, double latitude,
+           double longitude, CancellationToken cancellationToken, bool sessionAllowTransfer = true)
         {
             var CurrentLatitude = session.Client.CurrentLatitude;
             var CurrentLongitude = session.Client.CurrentLongitude;
@@ -91,16 +92,12 @@ namespace PoGo.NecroBot.Logic.Tasks
                     Latitude = latitude
                 });
 
-                var mapObjects = session.Client.Map.GetMapObjects().Result;
-                catchablePokemon =
-                    mapObjects.Item1.MapCells.SelectMany(q => q.CatchablePokemons)
-                        .Where(q => pokemonIds == q.PokemonId)
-                        .OrderByDescending(pokemon => PokemonInfo.CalculateMaxCpMultiplier(pokemon.PokemonId))
-                        .ToList();
+                var nearbyPokemons = await CatchNearbyPokemonsTask.GetNearbyPokemons(session);
+                catchablePokemon = nearbyPokemons.Where(p => p.PokemonId == TargetPokemonId).ToList();
             }
             finally
             {
-                await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
+                //await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
             }
 
             if (catchablePokemon.Count > 0)
@@ -112,11 +109,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                     {
                         await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(latitude, longitude, session.Client.CurrentAltitude));
 
-                        encounter = session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
+                        encounter = await session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId);
                     }
                     finally
                     {
-                        await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
+                        //await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
                     }
 
                     if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
@@ -131,38 +128,36 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
                     {
-                        if (session.LogicSettings.EvolveAllPokemonAboveIv ||
-                            session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
-                            session.LogicSettings.UseLuckyEggsWhileEvolving ||
-                            session.LogicSettings.KeepPokemonsThatCanEvolve)
+                        if (session.LogicSettings.TransferDuplicatePokemon || session.LogicSettings.TransferWeakPokemon)
                         {
-                            await EvolvePokemonTask.Execute(session, cancellationToken);
-                        }
-
-                        if (session.LogicSettings.TransferDuplicatePokemon)
-                        {
-                            await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                            session.EventDispatcher.Send(new WarnEvent
+                            {
+                                Message = session.Translation.GetTranslation(TranslationString.InvFullTransferring)
+                            });
+                            if (session.LogicSettings.TransferDuplicatePokemon)
+                                await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                            if (session.LogicSettings.TransferWeakPokemon)
+                                await TransferWeakPokemonTask.Execute(session, cancellationToken);
                         }
                         else
-                        {
                             session.EventDispatcher.Send(new WarnEvent
                             {
                                 Message = session.Translation.GetTranslation(TranslationString.InvFullTransferManually)
                             });
-                        }
                     }
                     else
                     {
                         session.EventDispatcher.Send(new WarnEvent
                         {
                             Message =
-                                session.Translation.GetTranslation(
-                                    TranslationString.EncounterProblem, encounter.Status)
+                            session.Translation.GetTranslation(TranslationString.EncounterProblem, encounter.Status)
                         });
                     }
 
-                    if (!Equals(catchablePokemon.ElementAtOrDefault(catchablePokemon.Count - 1), pokemon))
+                    if (!Equals(catchablePokemon.ElementAtOrDefault(catchablePokemon.Count() - 1), pokemon))
+                    {
                         await Task.Delay(2000, cancellationToken);
+                    }
                 }
             }
             else
@@ -174,6 +169,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
 
             session.EventDispatcher.Send(new SnipeModeEvent { Active = false });
+
             await Task.Delay(5000, cancellationToken);
         }
 

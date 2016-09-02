@@ -107,7 +107,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
         }
 
-        private static async Task<IOrderedEnumerable<MapPokemon>> GetNearbyPokemons(ISession session)
+        public static async Task<IOrderedEnumerable<MapPokemon>> GetNearbyPokemons(ISession session)
         {
             var mapObjects = await session.Client.Map.GetMapObjects();
 
