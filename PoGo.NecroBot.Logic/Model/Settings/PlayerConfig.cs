@@ -7,7 +7,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
     [JsonObject(Title = "Player Config", Description = "Set your player settings.", ItemRequired = Required.DisallowNull)]
     public class PlayerConfig
     {
-
         internal enum Gender
         {
             Male,
