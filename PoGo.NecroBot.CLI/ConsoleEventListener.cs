@@ -195,7 +195,7 @@ namespace PoGo.NecroBot.CLI
                 pokemonCaptureEvent.Distance.ToString("F2"),
                 returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount,
                 pokemonCaptureEvent.Exp, familyCandies, pokemonCaptureEvent.Latitude.ToString("0.000000"), pokemonCaptureEvent.Longitude.ToString("0.000000"),
-                pokemonCaptureEvent.Move1, pokemonCaptureEvent.Move2
+                pokemonCaptureEvent.Move1, pokemonCaptureEvent.Move2  , pokemonCaptureEvent.Rarity
                );
                 Logger.Write(message, LogLevel.Caught);
             }
@@ -206,7 +206,7 @@ namespace PoGo.NecroBot.CLI
                 pokemonCaptureEvent.Distance.ToString("F2"),
                 returnRealBallName(pokemonCaptureEvent.Pokeball), pokemonCaptureEvent.BallAmount,
                 pokemonCaptureEvent.Latitude.ToString("0.000000"), pokemonCaptureEvent.Longitude.ToString("0.000000"),
-                pokemonCaptureEvent.Move1,pokemonCaptureEvent.Move2
+                pokemonCaptureEvent.Move1,pokemonCaptureEvent.Move2  , pokemonCaptureEvent.Rarity
                );
                 Logger.Write(message, LogLevel.Flee);
             }

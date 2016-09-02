@@ -125,6 +125,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ApiFailureStrategy.cs" />
+    <Compile Include="Common\PokemonGradeHelper.cs" />
     <Compile Include="DataDumper\IDumper.cs" />
     <Compile Include="DataDumper\Dumper.cs" />
     <Compile Include="Common\Translations.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Model\Google\GoogleResult.cs" />
     <Compile Include="Model\Google\GoogleWalk.cs" />
     <Compile Include="Model\Google\Teste.cs" />
+    <Compile Include="Model\PokemonGrade.cs" />
     <Compile Include="Model\Settings\AuthConfig.cs" />
     <Compile Include="Model\Settings\AuthSettings.cs" />
     <Compile Include="Model\Settings\ClientSettings.cs" />
@@ -202,6 +204,7 @@
     <Compile Include="Model\Settings\TelegramConfig.cs" />
     <Compile Include="Model\Settings\TransferFilter.cs" />
     <Compile Include="Model\Settings\UpdateConfig.cs" />
+    <Compile Include="Model\Settings\UpgradeFilter.cs" />
     <Compile Include="Model\Settings\WebsocketsConfig.cs" />
     <Compile Include="Model\Settings\YoursWalkConfig.cs" />
     <Compile Include="Model\Yours\YoursWalk.cs" />

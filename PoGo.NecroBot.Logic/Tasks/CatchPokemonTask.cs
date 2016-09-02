@@ -298,7 +298,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 evt.Attempt = attemptCounter;
                 await session.Inventory.RefreshCachedInventory();
                 evt.BallAmount = await session.Inventory.GetItemAmountByType(pokeball);
-
+                evt.Rarity = PokemonGradeHelper.GetPokemonGrade(evt.Id).ToString();
                 session.EventDispatcher.Send(evt);
 
                 attemptCounter++;

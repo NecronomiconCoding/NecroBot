@@ -372,7 +372,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             } while (fortTry < retryNumber - zeroCheck);
             //Stop trying if softban is cleaned earlier or if 40 times fort looting failed.
 
-            if (session.LogicSettings.RandomlyPauseAtStops)
+            if (session.LogicSettings.RandomlyPauseAtStops && !doNotRetry)
             {
                 if (++RandomStop >= RandomNumber)
                 {

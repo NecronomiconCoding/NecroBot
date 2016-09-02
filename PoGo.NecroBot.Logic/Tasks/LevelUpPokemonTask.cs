@@ -27,11 +27,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             if (session.Inventory.GetStarDust() <= session.LogicSettings.GetMinStarDustForLevelUp)
                 return;
             upgradablePokemon = await session.Inventory.GetPokemonToUpgrade();
-            if (session.LogicSettings.OnlyUpgradeFavorites)
-            {
-                var fave = upgradablePokemon.Where(i => i.Favorite == 1);
-                upgradablePokemon = fave;
-            }
+           
                       
             if (upgradablePokemon.Count() == 0)
                 return;
@@ -43,10 +39,11 @@ namespace PoGo.NecroBot.Logic.Tasks
             var pokemonFamilies = myPokemonFamilies.ToArray();
 
             var upgradedNumber = 0;
-            var PokemonToLevel = session.LogicSettings.PokemonsToLevelUp;
-
+            var PokemonToLevel = session.LogicSettings.PokemonsToLevelUp.ToList();
+            PokemonToLevel.AddRange(session.LogicSettings.PokemonUpgradeFilters.Select(p => p.Key));
             foreach (var pokemon in upgradablePokemon)
             {
+                //code seem wrong. need need refactore to cleanup code here.
                 if (session.LogicSettings.UseLevelUpList && PokemonToLevel!=null)
                 {
                     for (int i = 0; i < PokemonToLevel.Count; i++)
@@ -73,6 +70,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                             if (upgradedNumber >= session.LogicSettings.AmountOfTimesToUpgradeLoop)
                                 break;
+                            await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions);
                         }
                         else
                         {
@@ -99,6 +97,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (upgradedNumber >= session.LogicSettings.AmountOfTimesToUpgradeLoop)
                         break;
+                    await Task.Delay(session.LogicSettings.DelayBetweenPlayerActions);
                 }
             }
         }
