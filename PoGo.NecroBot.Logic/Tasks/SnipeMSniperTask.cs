@@ -10,6 +10,12 @@ using PoGo.NecroBot.Logic.Event;
 using POGOProtos.Enums;
 using Newtonsoft.Json;
 using System.IO;
+using PoGo.NecroBot.Logic.Common;
+using POGOProtos.Networking.Responses;
+using PoGo.NecroBot.Logic.Utils;
+using GeoCoordinatePortable;
+using POGOProtos.Map.Pokemon;
+using PoGo.NecroBot.Logic.PoGoUtils;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -29,15 +35,17 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 if (session.LogicSettings.CatchPokemon == true &&
                     session.LogicSettings.SnipeAtPokestops == false &&
-                    session.LogicSettings.UseSnipeLocationServer == false &&
-                    session.LogicSettings.EnableHumanWalkingSnipe == false
+                    session.LogicSettings.UseSnipeLocationServer == false /* &&
+                    session.LogicSettings.EnableHumanWalkingSnipe == false */
                     )//extra security
                 {
-                    if (!await SnipePokemonTask.CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
-                        return;
 
                     if (!File.Exists(pth))
                         return;
+
+                    if (!await SnipePokemonTask.CheckPokeballsToSnipe(session.LogicSettings.MinPokeballsWhileSnipe + 1, session, cancellationToken))
+                        return;
+
                     StreamReader sr = new StreamReader(pth, Encoding.UTF8);
                     string jsn = sr.ReadToEnd();
                     sr.Close();
@@ -51,7 +59,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                             PokemonId = location.Id,
                             Source = "MSniper"
                         });
-                        await SnipePokemonTask.Snipe(session, session.LogicSettings.PokemonToSnipe.Pokemon, location.Latitude, location.Longitude, cancellationToken);
+
+                        await OwnSnipe(session, location.Id, location.Latitude, location.Longitude, cancellationToken);
                     }
                 }
             }
@@ -62,6 +71,110 @@ namespace PoGo.NecroBot.Logic.Tasks
                 if (ex.InnerException != null) ee.Message = ex.InnerException.Message;
                 session.EventDispatcher.Send(ee);
             }
+        }
+        public static async Task OwnSnipe(ISession session, PokemonId pokemonIds, double latitude,
+           double longitude, CancellationToken cancellationToken)
+        {
+            var CurrentLatitude = session.Client.CurrentLatitude;
+            var CurrentLongitude = session.Client.CurrentLongitude;
+
+            session.EventDispatcher.Send(new SnipeModeEvent { Active = true });
+
+            List<MapPokemon> catchablePokemon;
+            try
+            {
+                await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(latitude, longitude, session.Client.CurrentAltitude));
+
+                session.EventDispatcher.Send(new UpdatePositionEvent
+                {
+                    Longitude = longitude,
+                    Latitude = latitude
+                });
+
+                var mapObjects = session.Client.Map.GetMapObjects().Result;
+                catchablePokemon =
+                    mapObjects.Item1.MapCells.SelectMany(q => q.CatchablePokemons)
+                        .Where(q => pokemonIds == q.PokemonId)
+                        .OrderByDescending(pokemon => PokemonInfo.CalculateMaxCpMultiplier(pokemon.PokemonId))
+                        .ToList();
+            }
+            finally
+            {
+                await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
+            }
+
+            if (catchablePokemon.Count > 0)
+            {
+                foreach (var pokemon in catchablePokemon)
+                {
+                    EncounterResponse encounter;
+                    try
+                    {
+                        await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(latitude, longitude, session.Client.CurrentAltitude));
+
+                        encounter = session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId).Result;
+                    }
+                    finally
+                    {
+                        await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
+                    }
+
+                    if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
+                    {
+                        session.EventDispatcher.Send(new UpdatePositionEvent
+                        {
+                            Latitude = CurrentLatitude,
+                            Longitude = CurrentLongitude
+                        });
+
+                        await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon);
+                    }
+                    else if (encounter.Status == EncounterResponse.Types.Status.PokemonInventoryFull)
+                    {
+                        if (session.LogicSettings.EvolveAllPokemonAboveIv ||
+                            session.LogicSettings.EvolveAllPokemonWithEnoughCandy ||
+                            session.LogicSettings.UseLuckyEggsWhileEvolving ||
+                            session.LogicSettings.KeepPokemonsThatCanEvolve)
+                        {
+                            await EvolvePokemonTask.Execute(session, cancellationToken);
+                        }
+
+                        if (session.LogicSettings.TransferDuplicatePokemon)
+                        {
+                            await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                        }
+                        else
+                        {
+                            session.EventDispatcher.Send(new WarnEvent
+                            {
+                                Message = session.Translation.GetTranslation(TranslationString.InvFullTransferManually)
+                            });
+                        }
+                    }
+                    else
+                    {
+                        session.EventDispatcher.Send(new WarnEvent
+                        {
+                            Message =
+                                session.Translation.GetTranslation(
+                                    TranslationString.EncounterProblem, encounter.Status)
+                        });
+                    }
+
+                    if (!Equals(catchablePokemon.ElementAtOrDefault(catchablePokemon.Count - 1), pokemon))
+                        await Task.Delay(2000, cancellationToken);
+                }
+            }
+            else
+            {
+                session.EventDispatcher.Send(new SnipeEvent
+                {
+                    Message = session.Translation.GetTranslation(TranslationString.NoPokemonToSnipe)
+                });
+            }
+
+            session.EventDispatcher.Send(new SnipeModeEvent { Active = false });
+            await Task.Delay(5000, cancellationToken);
         }
 
 
