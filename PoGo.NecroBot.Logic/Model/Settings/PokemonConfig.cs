@@ -234,9 +234,9 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 44)]
         public bool EvolveAllPokemonAboveIv;
 
-        [DefaultValue(false)]
+        [DefaultValue(true)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 45)]
-        public bool EvolveAllPokemonWithEnoughCandy;
+        public bool EvolveAllPokemonWithEnoughCandy = true;
 
         [DefaultValue(90)]
         [Range(0, 100)]
