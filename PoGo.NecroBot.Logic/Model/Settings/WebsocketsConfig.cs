@@ -7,7 +7,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
     [JsonObject(Title = "Websockets Config", Description = "Set your websockets settings.", ItemRequired = Required.DisallowNull)]
     public class WebsocketsConfig
     {
-<<<<<<< HEAD
         [DefaultValue(true)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 1)]
         public bool UseWebsocket = true;
@@ -15,9 +14,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [DefaultValue(14251)]
         [Range(1, 65535)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 2)]
-=======
-        public bool UseWebsocket = true;
->>>>>>> refs/remotes/NoxxDev/master
         public int WebSocketPort = 14251;
     }
 }
