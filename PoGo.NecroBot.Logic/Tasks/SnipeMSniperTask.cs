@@ -94,16 +94,18 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 var nearbyPokemons = await CatchNearbyPokemonsTask.GetNearbyPokemons(session);
                 catchablePokemon = nearbyPokemons.Where(p => p.PokemonId == TargetPokemonId).ToList();
+
             }
             finally
             {
-                //await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
+                await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
             }
 
             if (catchablePokemon.Count > 0)
             {
                 foreach (var pokemon in catchablePokemon)
                 {
+                    cancellationToken.ThrowIfCancellationRequested();
                     EncounterResponse encounter;
                     try
                     {
@@ -113,7 +115,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     }
                     finally
                     {
-                        //await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
+                        await LocationUtils.UpdatePlayerLocationWithAltitude(session, new GeoCoordinate(CurrentLatitude, CurrentLongitude, session.Client.CurrentAltitude));
                     }
 
                     if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
