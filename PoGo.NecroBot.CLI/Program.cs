@@ -157,6 +157,7 @@ namespace PoGo.NecroBot.CLI
             Teste.Testar(session);
             if (boolNeedsSetup)
             {
+                Logger.SetLoggerContext(session);
                 if (GlobalSettings.PromptForSetup(session.Translation))
                 {
                     session = GlobalSettings.SetupSettings(session, settings, configFile);
