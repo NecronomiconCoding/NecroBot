@@ -1,32 +1,36 @@
 {
   "TranslationStrings": [
     {
+      "Key": "humanWalkSnipePokemonEncountered",
+      "Value": "(Sambil jalan) Pokemon: {0} telah ditemukan! | Koordinat: {1}, {2} | Dihapus dari daftar filter."
+    },
+    {
       "Key": "HumanWalkSnipeNotEnoughtBalls",
       "Value": "(Sambil jalan) Jumlah PokeBall untuk mengaktifkan mode 'Sapu-Bersih' tidak cukup: ({0})/{1}"
     },
     {
       "Key": "HumanWalkSnipe",
-      "Value": "(Sambil jalan) {0} terlihat! | Koordinat: {1}, {2}, jarak {3:0.00} m, berakhir dalam {4:00} mnt {5:00} dtk | Waktu tempuh : {6:00} mnt {7:00} dtk | Sambil singgah di PokeStop: {8} | Sambil tangkap Pokemon lain: {9} | Kecepatan: {10:0.00} km/j"
+      "Value": "(Sambil jalan) {0} terlihat! | Koordinat: {1}, {2} | Jarak {3:0.00} meter | Berakhir dalam {4:00} mnt {5:00} dtk | Waktu tempuh : {6:00} mnt {7:00} dtk | Kecepatan: {10:00.00} km/j | Singgah di PokeStop: {8} | Tangkap Pokemon lain: {9}"
     },
     {
       "Key": "HumanWalkSnipeUpdate",
-      "Value": "(Sambil jalan) Ada {0} pokemon cocok dengan filtermu. Tidak akan dapat semua, tapi mencoba yang terbaik."
+      "Value": "(Sambil jalan) Ada {0} Pokemon yang cocok dengan daftar filtermu. Tidak akan dapat semua, tapi mencoba yang terbaik!"
     },
     {
       "Key": "HumanWalkSnipeAddedPokestop",
-      "Value": "(Sambil jalan) Kamu {0:0.00} m jauhnya dari PokeStop terdekat. Mulai panen di lokasi ini dengan {1} PokeStop."
+      "Value": "(Sambil jalan) Kamu {0:0.0} meter jauhnya dari lokasi awal. Berjalan di lokasi ini dengan {1} PokeStop."
     },
     {
       "Key": "HumanWalkSnipeDestinationReached",
-      "Value": "(Sambil jalan) Sampai di lokasi | Koordinat: {0}, {1}"
+      "Value": "(Sambil jalan) Sampai di lokasi | Koordinat: {0}, {1} | Tunggu: {2:0.00} detik"
     },
     {
       "Key": "SniperCount",
-      "Value": "Jumlah bidikan {0}"
+      "Value": "Jumlah bidikan: {0}"
     },
     {
       "Key": "SnipeExceeds",
-      "Value": "Sniper harus diistirahatkan sebelum akun kamu kena Ban"
+      "Value": "Sniper harus diistirahatkan sebelum akun kamu kena Ban!"
     },
     {
       "Key": "CatchExceeds",
@@ -78,7 +82,7 @@
     },
     {
       "Key": "eventFortUsed",
-      "Value": "Nama {0} | Dapat {1}xp, gem: {2}, barang: {3}, koordinat: {4}, {5}, alt: {6}"
+      "Value": "Sampai di: {0} | Mendapatkan XP: {1} Gem: {2} | Barang: {3} | Koordinat: {4}, {5} | Ketinggian elevasi: {6}"
     },
     {
       "Key": "eventFortFailed",
@@ -86,7 +90,7 @@
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "Jalan ke PokeStop {0}, {1} meter, {2} detik (route {3})"
+      "Value": "Jalan ke PokeStop: {0} | Jarak: {1} meter | Waktu tempuh: {2} detik | Menggunakan rute: {3}"
     },
     {
       "Key": "eventProfileLogin",
@@ -102,7 +106,7 @@
     },
     {
       "Key": "eventPokemonEvolvedSuccess",
-      "Value": "{0} berhasil dan dapat {1}xp"
+      "Value": "{0} berhasil! | Mendapatkan: {1} XP"
     },
     {
       "Key": "eventPokemonEvolvedFailed",
@@ -110,7 +114,7 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1} IV: {2}% | CP terbaik: {3} IV: {4}% | Permen {5}"
+      "Value": "{0}\t- CP: {1} IV: {2}% [CP terbaik: {3} IV: {4}%] Total permen: {5}"
     },
     {
       "Key": "eventItemRecycled",
@@ -118,11 +122,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} (Sisa {10}) | mendapatkan: {11} EXP | {12} | lintang: {13} bujur: {14}\r\nJurus: 1. {15} 2. {16}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | Menggunakan: {9} (Sisa {10}) | Mendapatkan: {11} EXP | {12} | Koordinat: {13}, {14} | Jurus: 1 {15} - 2 {16}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | menggunakan {9} (Sisa {10}) | lintang: {11} bujur: {12}\r\nJurus: 1. {13} 2. {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Kemungkinan: {7}% | Jarak: {8} meter | Menggunakan: {9} (Sisa {10}) | Koordinat: {11}, {12} | Jurus: 1 {13} - 2 {14}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -142,7 +146,7 @@
     },
     {
       "Key": "eventUseBerry",
-      "Value": "Memakai {0} | {1} tersisa"
+      "Value": "Memberi umpan: {0} (Sisa: {1})"
     },
     {
       "Key": "itemRazzBerry",
@@ -150,7 +154,7 @@
     },
     {
       "Key": "catchStatusAttempt",
-      "Value": "Percobaan ke-{1}, hasil: {0}"
+      "Value": "Bola ke-{1}: {0}"
     },
     {
       "Key": "catchStatus",
@@ -158,7 +162,7 @@
     },
     {
       "Key": "candies",
-      "Value": "Permen: {0}"
+      "Value": "Total permen: {0}"
     },
     {
       "Key": "unhandledGpxData",
@@ -170,7 +174,7 @@
     },
     {
       "Key": "commonWordPerfect",
-      "Value": "Sempurna"
+      "Value": "IV"
     },
     {
       "Key": "commonWordName",
@@ -186,7 +190,7 @@
     },
     {
       "Key": "displayHighestsPerfectHeader",
-      "Value": "Menampilkan yang terbaik dijenisnya"
+      "Value": "Menampilkan IV terbaik"
     },
     {
       "Key": "displayHighestsLevelHeader",
@@ -198,15 +202,15 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "Memasukkan telur dalam inkubator: {0:0.00} km tersisa"
+      "Value": "Memasukkan telur ({0:0.00} km) ke dalam inkubator"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "Status terbaru inkubator: {0:0.00} km tersisa"
+      "Value": "Status terbaru inkubator: {0:0.00} km lagi menetas!"
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "Telur menetas:  {0} | Lv: {1} CP: ({2}/{3}) IV: {4}%"
+      "Value": "{0} menetas! | Lvl: {1} CP: ({2}/{3}) IV: {4}%"
     },
     {
       "Key": "logEntryError",
@@ -430,19 +434,19 @@
     },
     {
       "Key": "catchStatusEscape",
-      "Value": "Tangkapan Lepas"
+      "Value": "Pokemon Lepas!"
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "Tangkapan Kabur"
+      "Value": "Pokemon Kabur!"
     },
     {
       "Key": "catchStatusMissed",
-      "Value": "Tangkapan Gagal"
+      "Value": "Lemparan Meleset!"
     },
     {
       "Key": "catchStatusSuccess",
-      "Value": "Tangkapan Berhasil"
+      "Value": "Tangkapan Berhasil!"
     },
     {
       "Key": "catchTypeNormal",
@@ -462,15 +466,19 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - Waktu aktif {1} - Lvl: {2} | xp/j: {3:n0} | P/j: {4:n0} | Stardust: {5:n0} | Ditransfer: {6:n0} | Didaur ulang: {7:n0}"
+      "Value": "{0} - Waktu aktif {1} - Lvl: {2} | XP/j: {3:n0} | PKMN/j: {4:n0} | Stardust: {5:n0} | Ditransfer: {6:n0} | Didaur ulang: {7:n0}"
     },
     {
       "Key": "profileStatsTemplateString",
-      "Value": "----- Lvl {0} | {1} ----- \n xp: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang ditransfer: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang berevolusi: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9}km \n Pokemon: {11}/{12}"
+      "Value": "----- Lvl {0} | {1} ----- \n XP: {2}/{3} \n Pokemon yang ditangkap: {4} \n Pokemon yang ditransfer: {5} \n Pokestop yang dikunjungi: {6} \n Telur yang ditetaskan: {6} \n Pokemon yang berevolusi: {7} \n Catatan Pokedex: {8} \n Sudah berjalan: {9}km \n Pokemon: {11}/{12}"
     },
     {
       "Key": "showPokeTemplate",
       "Value": "\n CP: {0} | IV: {1}% | Nama: {2}"
+    },
+    {
+      "Key": "showPokeSkillTemplate",
+      "Value": "\n CP: {0} | IV: {1}% | Jurus: {2} + {3} | Nama: {4}"
     },
     {
       "Key": "helpTemplate",
@@ -478,7 +486,7 @@
     },
     {
       "Key": "statsXpTemplateString",
-      "Value": "{0} (level berikutnya {1} jam {2} menit | {3:n0}/{4:n0} XP)"
+      "Value": "{0} (Level berikutnya {1} jam {2} menit lagi | {3:n0}/{4:n0} XP)"
     },
     {
       "Key": "requireInputText",
@@ -603,6 +611,130 @@
     {
       "Key": "firstStartLanguageConfirm",
       "Value": "Kode bahasa yang diterapkan: {0}"
+    },
+    {
+      "Key": "firstStartSetupTelegramPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan fitur Telegram? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupTelegramCodePrompt",
+      "Value": "Silakan masukkan API Key dari Telegram (Paste dengan klik kanan)"
+    },
+    {
+      "Key": "firstStartSetupTelegramCodeConfirm",
+      "Value": "API Key dari Telegram diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupTelegramPasswordPrompt",
+      "Value": "Silakan masukkan password Telegram (DEFAULT: 12345)"
+    },
+    {
+      "Key": "firstStartSetupTelegramPasswordConfirm",
+      "Value": "Password Telegram diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupProxyPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan fitur proxy? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupProxyHostPrompt",
+      "Value": "Silakan tambahkan host proxy kamu"
+    },
+    {
+      "Key": "firstStartSetupProxyHostConfirm",
+      "Value": "Host proxy diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupProxyPortPrompt",
+      "Value": "Silakan tambahkan port proxy kamu"
+    },
+    {
+      "Key": "firstStartSetupProxyPortConfirm",
+      "Value": "Port proxy diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupProxyAuthPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan otentikasi proxy? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupProxyUsernamePrompt",
+      "Value": "Silahkan tambahkan username proxy kamu (Paste dengan klik kanan)"
+    },
+    {
+      "Key": "firstStartSetupProxyUsernameConfirm",
+      "Value": "Username proxy diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupProxyPasswordPrompt",
+      "Value": "Silahkan tambahkan password proxy kamu (Paste dengan klik kanan)"
+    },
+    {
+      "Key": "firstStartSetupProxyPasswordConfirm",
+      "Value": "Password proxy diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupAutoCompleteTutPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan fitur Tutorial? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupAutoCompleteTutNicknamePrompt",
+      "Value": "Silakan tambahkan Nickname yang kamu inginkan"
+    },
+    {
+      "Key": "firstStartSetupAutoCompleteTutNicknameConfirm",
+      "Value": "Nickname diterima: {0}"
+    },
+    {
+      "Key": "FirstStartSetupAutoCompleteTutGenderPrompt",
+      "Value": "Silakan tambahkan jenis kelamin yang kamu inginkan (Bahasa Inggris: Male atau Female)"
+    },
+    {
+      "Key": "FirstStartSetupAutoCompleteTutGenderConfirm",
+      "Value": "Jenis kelamin diterima: {0}"
+    },
+    {
+      "Key": "FirstStartSetupAutoCompleteTutStarterPrompt",
+      "Value": "Silakan pilih pokemon pertamamu (Bulbasaur, Charmander, Squirtle)"
+    },
+    {
+      "Key": "FirstStartSetupAutoCompleteTutStarterConfirm",
+      "Value": "Pokemon diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupWebSocketPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan fitur WebSocket? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupWebSocketPortPrompt",
+      "Value": "Silakan masukkan port WebSocket"
+    },
+    {
+      "Key": "firstStartSetupWebSocketPortConfirm",
+      "Value": "Port diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupWalkingSpeedPrompt",
+      "Value": "Apakah kamu ingin menyunting pengaturan kecepatan berjalan? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupWalkingSpeedKmHPrompt",
+      "Value": "Silakan atur kecepatan berjalan (km/j) Contoh: 5.85"
+    },
+    {
+      "Key": "firstStartSetupWalkingSpeedKmHConfirm",
+      "Value": "Kecepatan berjalan diterima: {0}"
+    },
+    {
+      "Key": "firstStartSetupUseWalkingSpeedVariantPrompt",
+      "Value": "Apakah kamu ingin mengaktifkan pengaturan variasi kecepatan berjalan? {0}/{1}"
+    },
+    {
+      "Key": "firstStartSetupWalkingSpeedVariantPrompt",
+      "Value": "Silakan atur variasi kecepatan berjalan (km/j) Contoh: 1.2"
+    },
+    {
+      "Key": "firstStartSetupWalkingSpeedVariantConfirm",
+      "Value": "Variasi diterima: {0}"
     },
     {
       "Key": "PromptError",
@@ -734,11 +866,11 @@
     },
     {
       "Key": "HighestsPokemoCell",
-      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lv {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+      "Value": "# CP: ({0}/{1}) | {3}: {2}%\t | Lvl: {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Kecepatan jalan berubah, dari {0:n2} km/j ke {1:n2} km/j"
+      "Value": "Kecepatan jalan berubah, dari {0:n2} ke {1:n2} km/j"
     },
     {
       "Key": "AccountBanned",

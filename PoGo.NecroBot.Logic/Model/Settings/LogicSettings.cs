@@ -90,7 +90,15 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public int ForceExcellentThrowOverCp => _settings.CustomCatchConfig.ForceExcellentThrowOverCp;
         public int DelayBetweenPokemonCatch => _settings.PokemonConfig.DelayBetweenPokemonCatch;
         public int DelayBetweenPlayerActions => _settings.PlayerConfig.DelayBetweenPlayerActions;
+        public int EvolveActionDelay => _settings.PlayerConfig.EvolveActionDelay;
+        public int TransferActionDelay => _settings.PlayerConfig.TransferActionDelay;
+        public int RecycleActionDelay => _settings.PlayerConfig.RecycleActionDelay;
+        public int RenamePokemonActionDelay => _settings.PlayerConfig.RenamePokemonActionDelay;
         public bool UseNearActionRandom => _settings.PlayerConfig.UseNearActionRandom;
+        public bool AutoCompleteTutorial => _settings.PlayerConfig.AutoCompleteTutorial;
+        public string DesiredNickname => _settings.PlayerConfig.DesiredNickname;
+        public string DesiredGender => _settings.PlayerConfig.DesiredGender;
+        public string DesiredStarter => _settings.PlayerConfig.DesiredStarter;
         public bool UsePokemonToNotCatchFilter => _settings.PokemonConfig.UsePokemonToNotCatchFilter;
         public bool UsePokemonSniperFilterOnly => _settings.PokemonConfig.UsePokemonSniperFilterOnly;
         public int KeepMinDuplicatePokemon => _settings.PokemonConfig.KeepMinDuplicatePokemon;
@@ -159,7 +167,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool SnipePokemonNotInPokedex => _settings.SnipeConfig.SnipePokemonNotInPokedex;
         public bool RandomizeRecycle => _settings.RecycleConfig.RandomizeRecycle;
         public int RandomRecycleValue => _settings.RecycleConfig.RandomRecycleValue;
-        public bool DelayBetweenRecycleActions => _settings.RecycleConfig.DelayBetweenRecycleActions;
         public int TotalAmountOfPokeballsToKeep => _settings.RecycleConfig.TotalAmountOfPokeballsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.RecycleConfig.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.RecycleConfig.TotalAmountOfRevivesToKeep;

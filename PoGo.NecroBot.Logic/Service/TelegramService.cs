@@ -149,9 +149,11 @@ namespace PoGo.NecroBot.Logic.Service
 
                     foreach (var pokemon in topPokemons)
                     {
-                        answerTextmessage += _session.Translation.GetTranslation(TranslationString.ShowPokeTemplate,
-                            pokemon.Cp, PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"),
-                            _session.Translation.GetPokemonTranslation(pokemon.PokemonId));
+                        answerTextmessage += _session.Translation.GetTranslation(TranslationString.ShowPokeSkillTemplate,
+                        pokemon.Cp, PokemonInfo.CalculatePokemonPerfection(pokemon).ToString("0.00"),
+                        _session.Translation.GetPokemonMovesetTranslation(PokemonInfo.GetPokemonMove1(pokemon)),
+                        _session.Translation.GetPokemonMovesetTranslation(PokemonInfo.GetPokemonMove2(pokemon)),
+                        _session.Translation.GetPokemonTranslation(pokemon.PokemonId));
 
                         if (answerTextmessage.Length > 3800)
                         {
@@ -309,7 +311,23 @@ namespace PoGo.NecroBot.Logic.Service
                     break;
 
                 case "/status":
-                    await SendMessage(message.Chat.Id, Console.Title);
+                    answerTextmessage += Console.Title;
+
+                    if (_session.LogicSettings.UseCatchLimit)
+                    {
+                        answerTextmessage += String.Format("\nCATCH LIMIT: {0}/{1}",
+                                    _session.Stats.PokemonTimestamps.Count,
+                                    _session.LogicSettings.CatchPokemonLimit);
+                    }
+
+                    if (_session.LogicSettings.UsePokeStopLimit)
+                    {
+                        answerTextmessage += String.Format("\nPOKESTOP LIMIT: {0}/{1}",
+                                    _session.Stats.PokeStopTimestamps.Count,
+                                    _session.LogicSettings.PokeStopLimit);
+                    }
+
+                    await SendMessage(message.Chat.Id, answerTextmessage);
                     break;
 
                 case "/restart":
