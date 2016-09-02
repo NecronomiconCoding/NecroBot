@@ -186,15 +186,18 @@
     <Compile Include="Model\Google\Teste.cs" />
     <Compile Include="Model\Settings\AuthConfig.cs" />
     <Compile Include="Model\Settings\AuthSettings.cs" />
+    <Compile Include="Model\Settings\CatchConfig.cs" />
     <Compile Include="Model\Settings\ClientSettings.cs" />
     <Compile Include="Model\Settings\ConsoleConfig.cs" />
     <Compile Include="Model\Settings\CustomCatchConfig.cs" />
     <Compile Include="Model\Settings\DeviceConfig.cs" />
+    <Compile Include="Model\Settings\EvolveConfig.cs" />
     <Compile Include="Model\Settings\GlobalSettings.cs" />
     <Compile Include="Model\Settings\GoogleWalkConfig.cs" />
     <Compile Include="Model\Settings\GpxConfig.cs" />
     <Compile Include="Model\Settings\HumanWalkSnipeConfig.cs" />
     <Compile Include="Model\Settings\HumanWalkSnipeFilter.cs" />
+    <Compile Include="Model\Settings\LevelUpConfig.cs" />
     <Compile Include="Model\Settings\Location.cs" />
     <Compile Include="Model\Settings\LocationConfig.cs" />
     <Compile Include="Model\Settings\PlayerConfig.cs" />
@@ -206,6 +209,7 @@
     <Compile Include="Model\Settings\SnipeSettings.cs" />
     <Compile Include="Model\Settings\SoftBanConfig.cs" />
     <Compile Include="Model\Settings\TelegramConfig.cs" />
+    <Compile Include="Model\Settings\TransferConfig.cs" />
     <Compile Include="Model\Settings\TransferFilter.cs" />
     <Compile Include="Model\Settings\UpdateConfig.cs" />
     <Compile Include="Model\Settings\WebsocketsConfig.cs" />

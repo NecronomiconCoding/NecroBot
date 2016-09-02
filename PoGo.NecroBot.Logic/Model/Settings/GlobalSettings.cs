@@ -34,241 +34,75 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         [JsonProperty(Required = Required.DisallowNull)]
         public ConsoleConfig ConsoleConfig = new ConsoleConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public UpdateConfig UpdateConfig = new UpdateConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public WebsocketsConfig WebsocketsConfig = new WebsocketsConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public LocationConfig LocationConfig = new LocationConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public TelegramConfig TelegramConfig = new TelegramConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public GpxConfig GPXConfig = new GpxConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public SnipeConfig SnipeConfig = new SnipeConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public HumanWalkSnipeConfig HumanWalkSnipeConfig = new HumanWalkSnipeConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public PokeStopConfig PokeStopConfig = new PokeStopConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public PokemonConfig PokemonConfig = new PokemonConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public RecycleConfig RecycleConfig = new RecycleConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public CustomCatchConfig CustomCatchConfig = new CustomCatchConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public PlayerConfig PlayerConfig = new PlayerConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public SoftBanConfig SoftBanConfig = new SoftBanConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public GoogleWalkConfig GoogleWalkConfig = new GoogleWalkConfig();
+
         [JsonProperty(Required = Required.DisallowNull)]
         public YoursWalkConfig YoursWalkConfig = new YoursWalkConfig();
 
         [JsonProperty(Required = Required.DisallowNull)]
-        public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = new List<KeyValuePair<ItemId, int>>
-        {
-            new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-            new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseCool, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncenseFloral, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemTroyDisk, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXAttack, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXDefense, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemXMiracle, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemSpecialCamera, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasicUnlimited, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasic, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemPokemonStorageUpgrade, 100),
-            new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
-        };
-
+        public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = RecycleConfig.ItemRecycleFilterDefault();
 
         [JsonProperty(Required = Required.DisallowNull)]
-        public List<PokemonId> PokemonsNotToTransfer = new List<PokemonId>
-        {
-            //criteria: from SS Tier to A Tier + Regional Exclusive
-            PokemonId.Venusaur,
-            PokemonId.Charizard,
-            PokemonId.Blastoise,
-            //PokemonId.Nidoqueen,
-            //PokemonId.Nidoking,
-            PokemonId.Clefable,
-            //PokemonId.Vileplume,
-            //PokemonId.Golduck,
-            //PokemonId.Arcanine,
-            //PokemonId.Poliwrath,
-            //PokemonId.Machamp,
-            //PokemonId.Victreebel,
-            //PokemonId.Golem,
-            //PokemonId.Slowbro,
-            //PokemonId.Farfetchd,
-            PokemonId.Muk,
-            //PokemonId.Exeggutor,
-            //PokemonId.Lickitung,
-            PokemonId.Chansey,
-            //PokemonId.Kangaskhan,
-            //PokemonId.MrMime,
-            //PokemonId.Tauros,
-            PokemonId.Gyarados,
-            //PokemonId.Lapras,
-            PokemonId.Ditto,
-            //PokemonId.Vaporeon,
-            //PokemonId.Jolteon,
-            //PokemonId.Flareon,
-            //PokemonId.Porygon,
-            PokemonId.Snorlax,
-            PokemonId.Articuno,
-            PokemonId.Zapdos,
-            PokemonId.Moltres,
-            PokemonId.Dragonite,
-            PokemonId.Mewtwo,
-            PokemonId.Mew
-        };
+        public List<PokemonId> PokemonsNotToTransfer = TransferConfig.PokemonsNotToTransferDefault();
 
         [JsonProperty(Required = Required.DisallowNull)]
-        public List<PokemonId> PokemonsToEvolve = new List<PokemonId>
-        {
-            /*NOTE: keep all the end-of-line commas exept for the last one or an exception will be thrown!
-            criteria: 12 candies*/
-            PokemonId.Caterpie,
-            PokemonId.Weedle,
-            PokemonId.Pidgey,
-            /*criteria: 25 candies*/
-            //PokemonId.Bulbasaur,
-            //PokemonId.Charmander,
-            //PokemonId.Squirtle,
-            PokemonId.Rattata
-            //PokemonId.NidoranFemale,
-            //PokemonId.NidoranMale,
-            //PokemonId.Oddish,
-            //PokemonId.Poliwag,
-            //PokemonId.Abra,
-            //PokemonId.Machop,
-            //PokemonId.Bellsprout,
-            //PokemonId.Geodude,
-            //PokemonId.Gastly,
-            //PokemonId.Eevee,
-            //PokemonId.Dratini,
-            /*criteria: 50 candies commons*/
-            //PokemonId.Spearow,
-            //PokemonId.Ekans,
-            //PokemonId.Zubat,
-            //PokemonId.Paras,
-            //PokemonId.Venonat,
-            //PokemonId.Psyduck,
-            //PokemonId.Slowpoke,
-            //PokemonId.Doduo,
-            //PokemonId.Drowzee,
-            //PokemonId.Krabby,
-            //PokemonId.Horsea,
-            //PokemonId.Goldeen,
-            //PokemonId.Staryu
-        };
+        public List<PokemonId> PokemonsToEvolve = EvolveConfig.PokemonsToEvolveDefault();
 
         [JsonProperty(Required = Required.DisallowNull)]
-        public List<PokemonId> PokemonsToLevelUp = new List<PokemonId>
-        {
-            //criteria: from SS Tier to A Tier + Regional Exclusive
-            PokemonId.Venusaur,
-            PokemonId.Charizard,
-            PokemonId.Blastoise,
-            //PokemonId.Nidoqueen,
-            //PokemonId.Nidoking,
-            PokemonId.Clefable,
-            //PokemonId.Vileplume,
-            //PokemonId.Golduck,
-            //PokemonId.Arcanine,
-            //PokemonId.Poliwrath,
-            //PokemonId.Machamp,
-            //PokemonId.Victreebel,
-            //PokemonId.Golem,
-            //PokemonId.Slowbro,
-            //PokemonId.Farfetchd,
-            PokemonId.Muk,
-            //PokemonId.Exeggutor,
-            //PokemonId.Lickitung,
-            PokemonId.Chansey,
-            //PokemonId.Kangaskhan,
-            //PokemonId.MrMime,
-            //PokemonId.Tauros,
-            PokemonId.Gyarados,
-            //PokemonId.Lapras,
-            PokemonId.Ditto,
-            //PokemonId.Vaporeon,
-            //PokemonId.Jolteon,
-            //PokemonId.Flareon,
-            //PokemonId.Porygon,
-            PokemonId.Snorlax,
-            PokemonId.Articuno,
-            PokemonId.Zapdos,
-            PokemonId.Moltres,
-            PokemonId.Dragonite,
-            PokemonId.Mewtwo,
-            PokemonId.Mew
-        };
+        public List<PokemonId> PokemonsToLevelUp = LevelUpConfig.PokemonsToLevelUpDefault();
 
         [JsonProperty(Required = Required.DisallowNull)]
-        public List<PokemonId> PokemonsToIgnore = new List<PokemonId>
-        {
-            //criteria: most common
-            PokemonId.Caterpie,
-            PokemonId.Weedle,
-            PokemonId.Pidgey,
-            PokemonId.Rattata,
-            PokemonId.Spearow,
-            PokemonId.Zubat,
-            PokemonId.Doduo
-        };
+        public List<PokemonId> PokemonsToIgnore = CatchConfig.PokemonsToIgnoreDefault();
 
         [JsonProperty(Required = Required.DisallowNull)]
-        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = new Dictionary<PokemonId, TransferFilter>
-        {
-            //criteria: based on NY Central Park and Tokyo variety + sniping optimization
-            {PokemonId.Golduck, new TransferFilter(1800, 6, false, 95, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.WaterGunFast,PokemonMove.HydroPump }},null,"and")},
-            {PokemonId.Aerodactyl, new TransferFilter(1250, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.BiteFast,PokemonMove.HyperBeam }},null,"and")},
-            {PokemonId.Venusaur, new TransferFilter(1800, 6, false, 95, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.VineWhipFast,PokemonMove.SolarBeam }},null,"and")},
-            {PokemonId.Farfetchd, new TransferFilter(1250, 6, false, 80, "or", 1)},
-            {PokemonId.Krabby, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.Kangaskhan, new TransferFilter(1500, 6, false, 60, "or", 1)},
-            {PokemonId.Horsea, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.Staryu, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.MrMime, new TransferFilter(1250, 6, false, 40, "or", 1)},
-            {PokemonId.Scyther, new TransferFilter(1800, 6, false, 80, "or", 1)},
-            {PokemonId.Jynx, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.Charizard, new TransferFilter(1250, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.WingAttackFast,PokemonMove.FireBlast }},null,"and")},
-            {PokemonId.Electabuzz, new TransferFilter(1250, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.ThunderShockFast,PokemonMove.Thunder }},null,"and")},
-            {PokemonId.Magmar, new TransferFilter(1500, 6, false, 80, "or", 1)},
-            {PokemonId.Pinsir, new TransferFilter(1800, 6, false, 95, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.RockSmashFast,PokemonMove.XScissor }},null,"and")},
-            {PokemonId.Tauros, new TransferFilter(1250, 6, false, 90, "or", 1)},
-            {PokemonId.Magikarp, new TransferFilter(200, 6, false, 95, "or", 1)},
-            {PokemonId.Exeggutor, new TransferFilter(1800, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.ZenHeadbuttFast,PokemonMove.SolarBeam }},null,"and")},
-            {PokemonId.Gyarados, new TransferFilter(1250, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.DragonBreath,PokemonMove.HydroPump }},null,"and")},
-            {PokemonId.Lapras, new TransferFilter(1800, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.FrostBreathFast,PokemonMove.Blizzard }},null,"and")},
-            {PokemonId.Eevee, new TransferFilter(1250, 6, false, 95, "or", 1)},
-            {PokemonId.Vaporeon, new TransferFilter(1500, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.WaterGun,PokemonMove.HydroPump }},null,"and")},
-            {PokemonId.Jolteon, new TransferFilter(1500, 6, false, 90, "or", 1)},
-            {PokemonId.Flareon, new TransferFilter(1500, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.Ember,PokemonMove.FireBlast }},null,"and")},
-            {PokemonId.Porygon, new TransferFilter(1250, 6, false, 60, "or", 1)},
-            {PokemonId.Arcanine, new TransferFilter(1800, 6, false, 80, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.FireFangFast,PokemonMove.FireBlast }},null,"and")},
-            {PokemonId.Snorlax, new TransferFilter(2600, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.ZenHeadbuttFast,PokemonMove.HyperBeam }},null,"and")},
-            {PokemonId.Dragonite, new TransferFilter(2600, 6, false, 90, "or", 1,new List<List<PokemonMove>>() { new List<PokemonMove>() { PokemonMove.DragonBreath,PokemonMove.DragonClaw }},null,"and")},
-        };
+        public Dictionary<PokemonId, TransferFilter> PokemonsTransferFilter = TransferFilter.TransferFilterDefault();
 
         [JsonProperty(Required = Required.DisallowNull)]
         public SnipeSettings PokemonToSnipe = SnipeSettings.Default();
 
         [JsonProperty(Required = Required.DisallowNull)]
-        public List<PokemonId> PokemonToUseMasterball = new List<PokemonId>
-        {
-            PokemonId.Articuno,
-            PokemonId.Zapdos,
-            PokemonId.Moltres,
-            PokemonId.Mew,
-            PokemonId.Mewtwo
-        };
+        public List<PokemonId> PokemonToUseMasterball = CatchConfig.PokemonsToUseMasterballDefault();
 
         [JsonProperty(Required = Required.DisallowNull)]
         public Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters = HumanWalkSnipeFilter.Default();
@@ -292,7 +126,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         }
 
         public static GlobalSettings Default => new GlobalSettings();
-
 
         private static JSchema _schema;
         private static JSchema JsonSchema
