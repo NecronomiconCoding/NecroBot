@@ -167,7 +167,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Pokemons = ApplyFilter(rarePokemons),
                         SpinPokeStop = pokemon.Setting.SpinPokestopWhileWalking,
                         WalkSpeedApplied = pokemon.Setting.AllowSpeedUp ? pokemon.Setting.MaxSpeedUpSpeed : _session.LogicSettings.WalkingSpeedInKilometerPerHour,
-                        Type = HumanWalkSnipeEventTypes.StartWalking
+                        Type = HumanWalkSnipeEventTypes.StartWalking  ,
+                        Rarity   = PokemonGradeHelper.GetPokemonGrade(pokemon.PokemonId).ToString()
                     });
 
                     await session.Navigation.Move(new GeoCoordinate(pokemon.Latitude, pokemon.Longitude,
@@ -194,7 +195,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         Latitude = pokemon.Latitude,
                         Longitude = pokemon.Longitude,
                         PauseDuration = pokemon.Setting.DelayTimeAtDestination / 1000,
-                        Type = HumanWalkSnipeEventTypes.DestinationReached
+                        Type = HumanWalkSnipeEventTypes.DestinationReached ,
+                        UniqueId = pokemon.UniqueId
                     });
                     //await CatchNearbyPokemonsTask.Execute(session, cancellationToken, pokemon.PokemonId,false);
                     //await CatchIncensePokemonsTask.Execute(session, cancellationToken);
