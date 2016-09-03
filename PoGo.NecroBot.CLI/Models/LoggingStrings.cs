@@ -1,5 +1,9 @@
+#region using directives
+
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.State;
+
+#endregion
 
 namespace PoGo.NecroBot.CLI.Models
 {
@@ -93,15 +97,15 @@ namespace PoGo.NecroBot.CLI.Models
 
             Update =
                 session?.Translation.GetTranslation(
-                    TranslationString.LogEntryUpdate ) ?? "UPDATE";
+                    TranslationString.LogEntryUpdate) ?? "UPDATE";
 
             New =
                 session?.Translation.GetTranslation(
-                    TranslationString.LogEntryNew ) ?? "NEW";
+                    TranslationString.LogEntryNew) ?? "NEW";
 
             SoftBan =
                 session?.Translation.GetTranslation(
-                   TranslationString.LogEntrySoftBan) ?? "SOFTBAN";
+                    TranslationString.LogEntrySoftBan) ?? "SOFTBAN";
         }
     }
 }

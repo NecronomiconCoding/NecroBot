@@ -22,9 +22,9 @@ namespace PoGo.NecroBot.CLI
     {
         private readonly WebSocketServer _server;
         private readonly Session _session;
+        private readonly WebSocketEventManager _websocketHandler;
         private PokeStopListEvent _lastPokeStopList;
         private ProfileEvent _lastProfile;
-        private WebSocketEventManager _websocketHandler;
 
         public WebSocketInterface(int port, Session session)
         {
@@ -41,16 +41,20 @@ namespace PoGo.NecroBot.CLI
                     FilePath = @"cert.pfx",
                     Password = "necro"
                 },
-            };
-            config.Listeners = new List<ListenerConfig>
-            {
-                new ListenerConfig()
+                Listeners = new List<ListenerConfig>
                 {
-                    Ip = "Any", Port = port, Security = "tls"
-                },
-                new ListenerConfig()
-                {
-                    Ip = "Any", Port = port + 1, Security = "none"
+                    new ListenerConfig
+                    {
+                        Ip = "Any",
+                        Port = port,
+                        Security = "tls"
+                    },
+                    new ListenerConfig
+                    {
+                        Ip = "Any",
+                        Port = port + 1,
+                        Security = "none"
+                    }
                 }
             };
 
@@ -95,7 +99,7 @@ namespace PoGo.NecroBot.CLI
 
         private async void HandleMessage(WebSocketSession session, string message)
         {
-            switch(message)
+            switch (message)
             {
                 case "PokemonList":
                     await PokemonListTask.Execute(_session);
@@ -135,13 +139,16 @@ namespace PoGo.NecroBot.CLI
 
             try
             {
-                session.Send(Serialize(new UpdatePositionEvent()
+                session.Send(Serialize(new UpdatePositionEvent
                 {
                     Latitude = _session.Client.CurrentLatitude,
                     Longitude = _session.Client.CurrentLongitude
                 }));
             }
-            catch { }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         public void Listen(IEvent evt, Session session)
@@ -160,9 +167,9 @@ namespace PoGo.NecroBot.CLI
             Broadcast(Serialize(eve));
         }
 
-        private string Serialize(dynamic evt)
+        private static string Serialize(dynamic evt)
         {
-            var jsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+            var jsonSerializerSettings = new JsonSerializerSettings {TypeNameHandling = TypeNameHandling.All};
 
             // Add custom seriaizer to convert uong to string (ulong shoud not appear to json according to json specs)
             jsonSerializerSettings.Converters.Add(new IdToStringConverter());
@@ -173,15 +180,16 @@ namespace PoGo.NecroBot.CLI
 
     public class IdToStringConverter : JsonConverter
     {
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
+            JsonSerializer serializer)
         {
-            JToken jt = JValue.ReadFrom(reader);
+            var jt = JToken.ReadFrom(reader);
             return jt.Value<long>();
         }
 
         public override bool CanConvert(Type objectType)
         {
-            return typeof(System.Int64).Equals(objectType) || typeof(ulong).Equals(objectType);
+            return typeof(long) == objectType || typeof(ulong) == objectType;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

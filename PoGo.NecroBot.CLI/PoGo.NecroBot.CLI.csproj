@@ -250,7 +250,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\ProgressBar.cs" />
-    <Compile Include="SimpleSession.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebSocketHandler\ActionCommands\SetConfigHandler.cs" />
@@ -301,8 +300,6 @@
     <None Include="cert.pfx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="supersocket.cmd" />
-    <None Include="supersocket.sh" />
     <None Include="Config\Translations\translation.ca.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -407,9 +404,6 @@
       <Project>{a03a7bb2-4f0b-467b-84b2-9a76e6aae6fb}</Project>
       <Name>POGOProtos</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Icon.ico" />

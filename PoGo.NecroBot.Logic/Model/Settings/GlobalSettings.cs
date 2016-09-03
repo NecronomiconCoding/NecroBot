@@ -16,7 +16,6 @@ using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using PokemonGo.RocketAPI.Enums;
 using POGOProtos.Enums;
-using POGOProtos.Inventory.Item;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
@@ -63,7 +62,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public PokemonConfig PokemonConfig = new PokemonConfig();
 
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public RecycleConfig RecycleConfig = new RecycleConfig();
+        public ItemRecycleConfig RecycleConfig = new ItemRecycleConfig();
 
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Ignore)]
         public CustomCatchConfig CustomCatchConfig = new CustomCatchConfig();
@@ -81,7 +80,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public YoursWalkConfig YoursWalkConfig = new YoursWalkConfig();
 
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public List<KeyValuePair<ItemId, int>> ItemRecycleFilter = RecycleConfig.ItemRecycleFilterDefault();
+        public List<ItemRecycleFilter> ItemRecycleFilter = Settings.ItemRecycleFilter.ItemRecycleFilterDefault();
 
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Ignore)]
         public List<PokemonId> PokemonsNotToTransfer = TransferConfig.PokemonsNotToTransferDefault();
@@ -209,7 +208,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 try
                 {
                     //if the file exists, load the settings
-                    string input = "";
+                    string input;
                     int count = 0;
                     while (true)
                     {
@@ -231,7 +230,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                             count++;
                             Thread.Sleep(1000);
                         }
-                    };
+                    }
 
                     var jsonSettings = new JsonSerializerSettings();
                     jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
@@ -733,7 +732,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
                 catch (FormatException)
                 {
                     Logger.Write(translator.GetTranslation(TranslationString.FirstStartSetupDefaultLocationError, $"{settings.LocationConfig.DefaultLatitude}, {settings.LocationConfig.DefaultLongitude}", LogLevel.Error));
-                    continue;
                 }
             }
         }

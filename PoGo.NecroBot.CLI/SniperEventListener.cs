@@ -2,14 +2,10 @@
 
 using System;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
-using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
-using POGOProtos.Enums;
-using POGOProtos.Inventory.Item;
-using POGOProtos.Networking.Responses;
+using PoGo.NecroBot.Logic.Tasks;
+
 #endregion
 
 namespace PoGo.NecroBot.CLI
@@ -20,7 +16,8 @@ namespace PoGo.NecroBot.CLI
         private static void HandleEvent(PokemonCaptureEvent pokemonCaptureEvent, ISession session)
         {
             //remove pokemon from list
-            Logic.Tasks.HumanWalkSnipeTask.UpdateCatchPokemon(pokemonCaptureEvent.Latitude, pokemonCaptureEvent.Longitude, pokemonCaptureEvent.Id);
+            HumanWalkSnipeTask.UpdateCatchPokemon(pokemonCaptureEvent.Latitude, pokemonCaptureEvent.Longitude,
+                pokemonCaptureEvent.Id);
         }
 
         internal void Listen(IEvent evt, ISession session)
@@ -28,9 +25,13 @@ namespace PoGo.NecroBot.CLI
             dynamic eve = evt;
 
             try
-            { HandleEvent(eve, session); }
-            catch
-            { }
+            {
+                HandleEvent(eve, session);
+            }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
     }
 }

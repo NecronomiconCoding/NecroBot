@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region using directives
+
+using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +9,8 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
+
+#endregion
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
 {
@@ -47,7 +51,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
             try
             {
                 var configJson = JsonConvert.SerializeObject((JObject) message.ConfigJson, jsonSerializeSettings);
-                if (!string.IsNullOrEmpty(configJson) && configJson != "null" )
+                if (!string.IsNullOrEmpty(configJson) && configJson != "null")
                     File.WriteAllText(configFile, configJson, Encoding.UTF8);
             }
             catch (Exception)

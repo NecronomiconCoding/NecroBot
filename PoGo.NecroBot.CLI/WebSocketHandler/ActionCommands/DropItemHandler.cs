@@ -1,22 +1,27 @@
-﻿using System.Threading.Tasks;
+﻿#region using directives
+
+using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.State;
-using SuperSocket.WebSocket;
+using PoGo.NecroBot.Logic.Tasks;
 using POGOProtos.Inventory.Item;
+using SuperSocket.WebSocket;
+
+#endregion
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
 {
     public class DropItemHandler : IWebSocketRequestHandler
     {
-        public string Command { get; private set;}
-
         public DropItemHandler()
         {
             Command = "DropItem";
         }
 
+        public string Command { get; }
+
         public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
-            await Logic.Tasks.RecycleItemsTask.DropItem(session, (ItemId)message.ItemId, (int)message.Count);
+            await RecycleItemsTask.DropItem(session, (ItemId) message.ItemId, (int) message.Count);
         }
     }
 }
