@@ -17,11 +17,11 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             Pokemon = pokemon;
         }
 
-        [JsonProperty(Required = Required.DisallowNull, Order = 1)]
-        public List<Location> Locations;
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 1)]
+        public List<Location> Locations = new List<Location>();
 
-        [JsonProperty(Required = Required.DisallowNull, Order = 2)]
-        public List<PokemonId> Pokemon;
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 2)]
+        public List<PokemonId> Pokemon = new List<PokemonId>();
 
         internal static SnipeSettings Default()
         {

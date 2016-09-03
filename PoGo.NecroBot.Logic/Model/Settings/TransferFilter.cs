@@ -71,7 +71,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonProperty(Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Populate, Order = 8)]
         public List<PokemonMove> DeprecatedMoves { get; set; }
 
-
         [DefaultValue("and")]
         [EnumDataType(typeof(Operator))]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 9)]
