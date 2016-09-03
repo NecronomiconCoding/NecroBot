@@ -1,9 +1,13 @@
-﻿using POGOProtos.Data;
+﻿#region using directives
+
+using POGOProtos.Data;
 using POGOProtos.Data.Player;
+
+#endregion
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Helpers
 {
-    class TrainerProfileWeb
+    internal class TrainerProfileWeb
     {
         public PlayerData Profile;
         public PlayerStats Stats;

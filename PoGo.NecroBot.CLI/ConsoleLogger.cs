@@ -3,26 +3,25 @@
 using System;
 using System.Text;
 using PoGo.NecroBot.CLI.Models;
+using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
-using PoGo.NecroBot.Logic.Event;
-using System.Drawing;
 
 #endregion
 
 namespace PoGo.NecroBot.CLI
 {
     /// <summary>
-    /// The ConsoleLogger is a simple logger which writes all logs to the Console.
+    ///     The ConsoleLogger is a simple logger which writes all logs to the Console.
     /// </summary>
     internal class ConsoleLogger : ILogger
     {
         private readonly LogLevel _maxLogLevel;
         private ISession _session;
-        
+
         /// <summary>
-        /// To create a ConsoleLogger, we must define a maximum log level.
-        /// All levels above won't be logged.
+        ///     To create a ConsoleLogger, we must define a maximum log level.
+        ///     All levels above won't be logged.
         /// </summary>
         /// <param name="maxLogLevel"></param>
         internal ConsoleLogger(LogLevel maxLogLevel)
@@ -37,7 +36,7 @@ namespace PoGo.NecroBot.CLI
         }
 
         /// <summary>
-        /// Log a specific message by LogLevel. Won't log if the LogLevel is greater than the maxLogLevel set.
+        ///     Log a specific message by LogLevel. Won't log if the LogLevel is greater than the maxLogLevel set.
         /// </summary>
         /// <param name="message">The message to log. The current time will be prepended.</param>
         /// <param name="level">Optional. Default <see cref="LogLevel.Info" />.</param>
@@ -116,7 +115,7 @@ namespace PoGo.NecroBot.CLI
                     break;
                 case LogLevel.New:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Green : color;
-                    finalMessage = $"[{DateTime.Now.ToString( "HH:mm:ss" )}] ({LoggingStrings.New}) {message}";
+                    finalMessage = $"[{DateTime.Now.ToString("HH:mm:ss")}] ({LoggingStrings.New}) {message}";
                     break;
                 case LogLevel.SoftBan:
                     Console.ForegroundColor = color == ConsoleColor.Black ? ConsoleColor.Red : color;
@@ -141,9 +140,14 @@ namespace PoGo.NecroBot.CLI
             });
         }
 
+        public void lineSelect(int lineChar = 0, int linesUp = 1)
+        {
+            Console.SetCursorPosition(lineChar, Console.CursorTop - linesUp);
+        }
+
         public string GetHexColor(ConsoleColor color)
         {
-            switch(color)
+            switch (color)
             {
                 case ConsoleColor.Black:
                     return "#000000";
@@ -197,11 +201,6 @@ namespace PoGo.NecroBot.CLI
                     // Grey
                     return "#C0C0C0";
             }
-        }
-
-        public void lineSelect(int lineChar = 0, int linesUp = 1)
-        {
-            Console.SetCursorPosition(lineChar, Console.CursorTop - linesUp);
         }
     }
 }

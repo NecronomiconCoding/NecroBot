@@ -1,6 +1,11 @@
-﻿using POGOProtos.Data;
+﻿#region using directives
 
-namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
+using PoGo.NecroBot.Logic.PoGoUtils;
+using POGOProtos.Data;
+
+#endregion
+
+namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Helpers
 {
     public class PokemonListWeb
     {
@@ -11,16 +16,6 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
             Base = data;
         }
 
-        public double IvPerfection
-        {
-            get
-            {
-                return Logic.PoGoUtils.PokemonInfo.CalculatePokemonPerfection(Base);
-            }
-        }
-
+        public double IvPerfection => PokemonInfo.CalculatePokemonPerfection(Base);
     }
 }
-
-
-

@@ -197,6 +197,7 @@
     <Compile Include="Model\Settings\GpxConfig.cs" />
     <Compile Include="Model\Settings\HumanWalkSnipeConfig.cs" />
     <Compile Include="Model\Settings\HumanWalkSnipeFilter.cs" />
+    <Compile Include="Model\Settings\ItemRecycleFilter.cs" />
     <Compile Include="Model\Settings\LevelUpConfig.cs" />
     <Compile Include="Model\Settings\Location.cs" />
     <Compile Include="Model\Settings\LocationConfig.cs" />
@@ -204,7 +205,7 @@
     <Compile Include="Model\Settings\PokemonConfig.cs" />
     <Compile Include="Model\Settings\PokeStopConfig.cs" />
     <Compile Include="Model\Settings\ProxyConfig.cs" />
-    <Compile Include="Model\Settings\RecycleConfig.cs" />
+    <Compile Include="Model\Settings\ItemRecycleConfig.cs" />
     <Compile Include="Model\Settings\SnipeConfig.cs" />
     <Compile Include="Model\Settings\SnipeSettings.cs" />
     <Compile Include="Model\Settings\SoftBanConfig.cs" />

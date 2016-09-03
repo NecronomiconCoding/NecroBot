@@ -1,8 +1,8 @@
 ﻿namespace PoGo.NecroBot.CLI.WebSocketHandler
 {
-    interface IWebSocketResponce
+    internal interface IWebSocketResponce
     {
-        string RequestID { get;  }
+        string RequestID { get; }
         string Command { get; }
         dynamic Data { get; }
     }

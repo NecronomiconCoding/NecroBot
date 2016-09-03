@@ -1,4 +1,8 @@
-﻿using PoGo.NecroBot.Logic.Event;
+﻿#region using directives
+
+using PoGo.NecroBot.Logic.Event;
+
+#endregion
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events
 {
@@ -10,8 +14,9 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Events
             Data = data;
             RequestID = requestID;
         }
-        public string RequestID { get; private set; }
-        public string Command { get; private set; }
-        public dynamic Data { get; private set; }
+
+        public string RequestID { get; }
+        public string Command { get; }
+        public dynamic Data { get; }
     }
 }
