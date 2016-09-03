@@ -13,16 +13,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         {
         }
 
-        public ItemRecycleFilter(ItemId key)
-        {
-            Key = key;
-        }
-
-        public ItemRecycleFilter(int value)
-        {
-            Value = value;
-        }
-
         public ItemRecycleFilter(ItemId key, int value)
         {
             Key = key;
@@ -33,10 +23,10 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Populate, Order = 1)]
         public ItemId Key = ItemId.ItemUnknown;
 
-        [DefaultValue(100)]
+        [DefaultValue(0)]
         [Range(0, 999)]
         [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Populate, Order = 2)]
-        public int Value = 100;
+        public int Value;
 
         internal static List<ItemRecycleFilter> ItemRecycleFilterDefault()
         {
