@@ -53,7 +53,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 7)]
         public bool AutoCompleteTutorial;
 
-        [DefaultValue(null)]
+        [DefaultValue("")]
         [MinLength(0)]
         [MaxLength(64)]
         [JsonProperty(Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Populate, Order = 8)]
