@@ -21,7 +21,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         [DefaultValue(null)]
         [MinLength(0)]
-        [MaxLength(32)]
+        [MaxLength(50)]
         [JsonProperty(Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Populate, Order = 3)]
         public string GooglePassword;
 
