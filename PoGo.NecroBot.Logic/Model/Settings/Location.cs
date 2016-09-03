@@ -17,11 +17,11 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         }
 
         [Range(-90, 90)]
-        [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Populate, Order = 1)]
+        [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 1)]
         public double Latitude { get; set; }
 
         [Range(-180, 180)]
-        [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Populate, Order = 2)]
+        [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 2)]
         public double Longitude { get; set; }
     }
 }
