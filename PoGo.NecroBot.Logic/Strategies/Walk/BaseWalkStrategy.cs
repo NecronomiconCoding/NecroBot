@@ -193,7 +193,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             return randStep / 1000d;
         }
 
-        public async Task<double> CalculateDistance(double sourceLat, double sourceLng, double destinationLat, double destinationLng)
+        public virtual double CalculateDistance(double sourceLat, double sourceLng, double destinationLat, double destinationLng)
         {
             return LocationUtils.CalculateDistanceInMeters(sourceLat, sourceLng, destinationLat, destinationLng);
         }

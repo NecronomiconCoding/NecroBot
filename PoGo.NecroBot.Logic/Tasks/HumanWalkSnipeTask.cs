@@ -446,9 +446,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public static double CalculateDistanceInMeters(double sourceLat, double sourceLng, double destinationLat, double destinationLng)
         {
-            var distanceTask = _session.Navigation.WalkStrategy.CalculateDistance(sourceLat, sourceLng, destinationLat, destinationLng);
-            distanceTask.Wait();
-            return distanceTask.Result;
+            return _session.Navigation.WalkStrategy.CalculateDistance(sourceLat, sourceLng, destinationLat, destinationLng);
         }
         public static void UpdateCatchPokemon(double latitude, double longitude, PokemonId id)
         {

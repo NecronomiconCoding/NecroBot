@@ -43,9 +43,18 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             if (_yoursDirectionsService == null)
                 _yoursDirectionsService = new YoursDirectionsService(session);
         }
-        public async Task<double> CalculateDistance(double sourceLat, double sourceLng, double destinationLat, double destinationLng)
+
+        public override double CalculateDistance(double sourceLat, double sourceLng, double destinationLat, double destinationLng)
         {
-            return 1.5 * LocationUtils.CalculateDistanceInMeters(sourceLat, sourceLng, destinationLat, destinationLng);
+            var yoursResult = _yoursDirectionsService.GetDirections(new GeoCoordinate(sourceLat, sourceLng), new GeoCoordinate(destinationLat, destinationLng));
+
+            if (string.IsNullOrEmpty(yoursResult) || yoursResult.StartsWith("<?xml version=\"1.0\"") || yoursResult.Contains("error"))
+                return 1.5 * base.CalculateDistance(sourceLat, sourceLng, destinationLat, destinationLng);
+            else
+            {
+                var yoursWalk = YoursWalk.Get(yoursResult);
+                return yoursWalk.Distance;
+            }
         }
     }
 }
