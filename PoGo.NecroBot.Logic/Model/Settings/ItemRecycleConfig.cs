@@ -1,13 +1,11 @@
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
-using POGOProtos.Inventory.Item;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
     [JsonObject(Title = "Recycle Config", Description = "Set your recycle settings.", ItemRequired = Required.DisallowNull)]
-    public class RecycleConfig
+    public class ItemRecycleConfig
     {
         [DefaultValue(true)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 1)]
@@ -47,28 +45,5 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [Range(0, 999)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 9)]
         public int TotalAmountOfBerriesToKeep = 50;
-
-        internal static List<KeyValuePair<ItemId, int>> ItemRecycleFilterDefault()
-        {
-            return new List<KeyValuePair<ItemId, int>>
-            {
-                new KeyValuePair<ItemId, int>(ItemId.ItemUnknown, 0),
-                new KeyValuePair<ItemId, int>(ItemId.ItemLuckyEgg, 200),
-                new KeyValuePair<ItemId, int>(ItemId.ItemIncenseOrdinary, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemIncenseSpicy, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemIncenseCool, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemIncenseFloral, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemTroyDisk, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemXAttack, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemXDefense, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemXMiracle, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemSpecialCamera, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasicUnlimited, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemIncubatorBasic, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemPokemonStorageUpgrade, 100),
-                new KeyValuePair<ItemId, int>(ItemId.ItemItemStorageUpgrade, 100)
-            };
-        }
-
     }
 }
