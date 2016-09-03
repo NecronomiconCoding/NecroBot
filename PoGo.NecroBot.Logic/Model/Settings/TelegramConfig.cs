@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 
 namespace PoGo.NecroBot.Logic.Model.Settings
 {
-    [JsonObject(Title = "Soft Ban Config", Description = "Set your soft ban settings.", ItemRequired = Required.DisallowNull)]
+    [JsonObject(Title = "Telegram Messaging Client", Description = "Configure to use with Telegram Messaging.", ItemRequired = Required.DisallowNull)]
     public class TelegramConfig
     {
         [DefaultValue(false)]
@@ -13,7 +13,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         [DefaultValue(null)]
         [MinLength(0)]
-        [MaxLength(32)]
+        [MaxLength(64)]
         [JsonProperty(Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Populate, Order = 2)]
         public string TelegramAPIKey = null;
 
