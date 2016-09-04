@@ -1,85 +1,83 @@
-﻿<Controls:MetroWindow 
+﻿<Controls:MetroWindow
     x:Name="webWindow"
-    x:Class="PoGo.NecroBot.GUI.MainWindow" 
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    x:Class="PoGo.NecroBot.GUI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:awe="http://schemas.awesomium.com/winfx"
-    xmlns:data="http://schemas.awesomium.com/winfx/data"
-    xmlns:core="http://schemas.awesomium.com/core"
-	xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
     WindowStartupLocation="CenterScreen"
     Title="NecroBot/PokeEase"
-    Height="700" 
+    Height="700"
     Width="1200">
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <Button 
-            Content="Reload" 
-            Width="60" 
-            Command="{x:Static NavigationCommands.Refresh}" 
-            CommandParameter="False"
-            CommandTarget="{Binding ElementName=webControl}"/>
+            <Button
+                Content="Reload"
+                Width="60"
+                Command="{x:Static NavigationCommands.Refresh}"
+                CommandParameter="False"
+                CommandTarget="{Binding ElementName=webControl}" />
         </Controls:WindowCommands>
     </Controls:MetroWindow.RightWindowCommands>
     <Window.Resources>
-        <awe:WebSessionProvider x:Key="webSession" DataPath=".\Cache">
-            
-        </awe:WebSessionProvider>
+        <awe:WebSessionProvider x:Key="webSession" DataPath=".\Cache" />
         <awe:UrlConverter x:Key="UrlConverter" />
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
     </Window.Resources>
     <awe:WebDialogsLayer>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
                 <RowDefinition />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <awe:WebControl 
+            <awe:WebControl
                 Grid.Row="1"
                 x:Name="webControl"
                 NativeView="{Binding NativeView, ElementName=webWindow}"
                 WebSession="{Binding Source={StaticResource webSession}}"
                 Source="{Binding Source, ElementName=webWindow}" />
-            <StatusBar 
-                Grid.Row="2" 
-                Height="25" 
-                BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" 
+            <StatusBar
+                Grid.Row="2"
+                Height="25"
+                BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
                 BorderThickness="0,1,0,0"
                 Visibility="{Binding IsRegularWindow, ElementName=webWindow, Converter={StaticResource booleanToVisibilityConverter}}">
                 <StatusBarItem>
-                    <TextBlock 
-                        VerticalAlignment="Center" 
-                        Padding="3" 
-                        TextWrapping="NoWrap" 
-                        TextTrimming="CharacterEllipsis" 
-                        Text="{Binding TargetURL, ElementName=webControl, Converter={StaticResource UrlConverter}}"/>
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        Padding="3"
+                        TextWrapping="NoWrap"
+                        TextTrimming="CharacterEllipsis"
+                        Text="{Binding TargetURL, ElementName=webControl, Converter={StaticResource UrlConverter}}" />
                 </StatusBarItem>
                 <StatusBarItem HorizontalAlignment="Right">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock 
+                        <TextBlock
                             VerticalAlignment="Center"
-                            Margin="7,0" 
-                            Text="Zoom:"/>
-                        <Slider 
-                            DataContext="{Binding ElementName=webControl}" 
-                            Margin="3,0" 
-                            Minimum="10" 
-                            Maximum="400" 
+                            Margin="7,0"
+                            Text="Zoom:" />
+                        <Slider
+                            DataContext="{Binding ElementName=webControl}"
+                            Margin="3,0"
+                            Minimum="10"
+                            Maximum="400"
                             Width="120"
-                            VerticalAlignment="Center" 
-                            Value="{Binding Zoom}" 
-                            AutoToolTipPlacement="TopLeft" 
-                            IsSnapToTickEnabled="True" 
-                            IsMoveToPointEnabled="True" 
-                            SmallChange="1" 
-                            LargeChange="10" 
-                            TickFrequency="10" 
-                            Focusable="False" 
+                            VerticalAlignment="Center"
+                            Value="{Binding Zoom}"
+                            AutoToolTipPlacement="TopLeft"
+                            IsSnapToTickEnabled="True"
+                            IsMoveToPointEnabled="True"
+                            SmallChange="1"
+                            LargeChange="10"
+                            TickFrequency="10"
+                            Focusable="False"
                             ToolTip="{Binding Zoom}">
                             <Slider.ContextMenu>
-                                <ContextMenu DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
-                                    <MenuItem Command="{x:Static awe:WebControlCommands.ResetZoom}" CommandTarget="{Binding}" />
+                                <ContextMenu
+                                    DataContext="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}">
+                                    <MenuItem Command="{x:Static awe:WebControlCommands.ResetZoom}"
+                                              CommandTarget="{Binding}" />
                                 </ContextMenu>
                             </Slider.ContextMenu>
                         </Slider>
