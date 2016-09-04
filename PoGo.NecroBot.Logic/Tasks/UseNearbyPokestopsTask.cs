@@ -81,8 +81,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 pokestopList =
                     pokestopList.OrderBy(
                         i =>
-                            LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
-                                session.Client.CurrentLongitude, i.Latitude, i.Longitude)).ToList();
+                            session.Navigation.WalkStrategy.CalculateDistance(
+                                session.Client.CurrentLatitude, session.Client.CurrentLongitude, i.Latitude, i.Longitude, session)).ToList();
 
                 // randomize next pokestop between first and second by distance
                 var pokestopListNum = 0;
