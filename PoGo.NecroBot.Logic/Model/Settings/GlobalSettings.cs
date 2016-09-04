@@ -126,6 +126,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         public static GlobalSettings Default => new GlobalSettings();
 
+        public Dictionary<PokemonId, UpgradeFilter> PokemonUpgradeFilters = UpgradeFilter.Default();
+
         private static JSchema _schema;
         private static JSchema JsonSchema
         {

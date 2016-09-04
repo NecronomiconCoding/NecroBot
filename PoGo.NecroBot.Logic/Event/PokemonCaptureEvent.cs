@@ -34,5 +34,6 @@ namespace PoGo.NecroBot.Logic.Event
         public PokemonMove Move2;
         public long Expires;
         public string CatchTypeText;
+        public string Rarity;
     }
 }
