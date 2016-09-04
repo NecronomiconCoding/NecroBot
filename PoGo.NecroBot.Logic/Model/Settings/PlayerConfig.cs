@@ -53,11 +53,11 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 7)]
         public bool AutoCompleteTutorial;
 
-        [DefaultValue("")]
+        [DefaultValue("Nickname")]
         [MinLength(0)]
         [MaxLength(15)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 8)]
-        public string DesiredNickname;
+        public string DesiredNickname = "Nickname";
 
         [DefaultValue("Male")]
         [EnumDataType(typeof(Gender))]
