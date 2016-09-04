@@ -1,24 +1,38 @@
-﻿#region Using
+﻿#region using directives
+
 using System;
+using System.Diagnostics;
 using System.Windows;
 using Awesomium.Core;
-using System.Diagnostics;
 using Awesomium.Windows.Controls;
-using MahApps.Metro.Controls;
+
 #endregion
 
 namespace PoGo.NecroBot.GUI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    ///     Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow
     {
-        #region Fields
+        #region Overrides
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            // Destroy the WebControl and its underlying view.
+            webControl.Dispose();
+        }
+
         #endregion
 
+        #region Fields
+
+        #endregion
 
         #region Ctors
+
         public MainWindow()
         {
             InitializeComponent();
@@ -30,13 +44,13 @@ namespace PoGo.NecroBot.GUI
             // We demonstrate interaction with the page. We handle these events
             // and execute the examples, only on the initial main window.
             webControl.NativeViewInitialized += OnNativeViewInitialized;
-            
+
             webControl.ConsoleMessage += OnConsoleMessage;
             // Start with the specified Home URL.
-            this.Source = WebCore.Configuration.HomeURL;
+            Source = WebCore.Configuration.HomeURL;
         }
 
-        public MainWindow( IntPtr nativeView )
+        public MainWindow(IntPtr nativeView)
         {
             InitializeComponent();
 
@@ -44,19 +58,19 @@ namespace PoGo.NecroBot.GUI
             // links and forms with |target="_blank"| or for JavaScript
             // 'window.open' calls.
             webControl.ShowCreatedWebView += webControl_ShowCreatedWebView;
-            
+
             webControl.ConsoleMessage += OnConsoleMessage;
             // For popups, you usually want to handle WindowClose,
             // fired when the page calls 'window.close'.
             webControl.WindowClose += webControl_WindowClose;
             // Tell the WebControl that is should wrap a created child view.
-            this.NativeView = nativeView;
+            NativeView = nativeView;
             // This window will host a WebControl that is the result of 
             // JavaScript 'window.open'. Hide the address and status bar.
-            this.IsRegularWindow = false;
+            IsRegularWindow = false;
         }
 
-        public MainWindow( Uri url )
+        public MainWindow(Uri url)
         {
             InitializeComponent();
 
@@ -64,46 +78,38 @@ namespace PoGo.NecroBot.GUI
             // links and forms with |target="_blank"| or for JavaScript
             // 'window.open' calls.
             webControl.ShowCreatedWebView += webControl_ShowCreatedWebView;
-            
+
             webControl.ConsoleMessage += OnConsoleMessage;
             // For popups, you usually want to handle WindowClose,
             // fired when the page calls 'window.close'.
             webControl.WindowClose += webControl_WindowClose;
             // Tell the WebControl to load a specified target URL.
-            this.Source = url;
+            Source = url;
         }
-        #endregion
 
-
-        #region Overrides
-        protected override void OnClosed( EventArgs e )
-        {
-            base.OnClosed( e );
-
-            // Destroy the WebControl and its underlying view.
-            webControl.Dispose();
-        }
         #endregion
 
         #region Methods
+
         #endregion
 
         #region Properties
+
         // This will be set to the target URL, when this window does not
         // host a created child view. The WebControl, is bound to this property.
         public Uri Source
         {
-            get { return (Uri)GetValue( SourceProperty ); }
-            set { SetValue( SourceProperty, value ); }
+            get { return (Uri) GetValue(SourceProperty); }
+            set { SetValue(SourceProperty, value); }
         }
 
         /// <summary>
-        /// Identifies the <see cref="Source"/> dependency property.
+        ///     Identifies the <see cref="Source" /> dependency property.
         /// </summary>
         public static readonly DependencyProperty SourceProperty =
-            DependencyProperty.Register( "Source",
-            typeof( Uri ), typeof( MainWindow ),
-            new FrameworkPropertyMetadata( null ) );
+            DependencyProperty.Register("Source",
+                typeof(Uri), typeof(MainWindow),
+                new FrameworkPropertyMetadata(null));
 
 
         // This will be set to the created child view that the WebControl will wrap,
@@ -111,17 +117,17 @@ namespace PoGo.NecroBot.GUI
         // is bound to this property.
         public IntPtr NativeView
         {
-            get { return (IntPtr)GetValue( NativeViewProperty ); }
-            private set { this.SetValue( MainWindow.NativeViewPropertyKey, value ); }
+            get { return (IntPtr) GetValue(NativeViewProperty); }
+            private set { SetValue(NativeViewPropertyKey, value); }
         }
 
         private static readonly DependencyPropertyKey NativeViewPropertyKey =
-            DependencyProperty.RegisterReadOnly( "NativeView",
-            typeof( IntPtr ), typeof( MainWindow ),
-            new FrameworkPropertyMetadata( IntPtr.Zero ) );
+            DependencyProperty.RegisterReadOnly("NativeView",
+                typeof(IntPtr), typeof(MainWindow),
+                new FrameworkPropertyMetadata(IntPtr.Zero));
 
         /// <summary>
-        /// Identifies the <see cref="NativeView"/> dependency property.
+        ///     Identifies the <see cref="NativeView" /> dependency property.
         /// </summary>
         public static readonly DependencyProperty NativeViewProperty =
             NativeViewPropertyKey.DependencyProperty;
@@ -132,43 +138,45 @@ namespace PoGo.NecroBot.GUI
         // 'window.open'.
         public bool IsRegularWindow
         {
-            get { return (bool)GetValue( IsRegularWindowProperty ); }
-            private set { this.SetValue( MainWindow.IsRegularWindowPropertyKey, value ); }
+            get { return (bool) GetValue(IsRegularWindowProperty); }
+            private set { SetValue(IsRegularWindowPropertyKey, value); }
         }
 
         private static readonly DependencyPropertyKey IsRegularWindowPropertyKey =
-            DependencyProperty.RegisterReadOnly( "IsRegularWindow",
-            typeof( bool ), typeof( MainWindow ),
-            new FrameworkPropertyMetadata( true ) );
+            DependencyProperty.RegisterReadOnly("IsRegularWindow",
+                typeof(bool), typeof(MainWindow),
+                new FrameworkPropertyMetadata(true));
 
         /// <summary>
-        /// Identifies the <see cref="IsRegularWindow"/> dependency property.
+        ///     Identifies the <see cref="IsRegularWindow" /> dependency property.
         /// </summary>
         public static readonly DependencyProperty IsRegularWindowProperty =
             IsRegularWindowPropertyKey.DependencyProperty;
+
         #endregion
 
         #region Event Handlers
-        private void OnNativeViewInitialized( object sender, WebViewEventArgs e )
+
+        private void OnNativeViewInitialized(object sender, WebViewEventArgs e)
         {
             // The native view is created. You can create global JavaScript objects
             // at this point. These objects persist throughout the lifetime of the view
             // and are available to all pages loaded by this view.
         }
-                
+
         // Any JavaScript errors or JavaScript console.log calls,
         // will call this method.
-        private void OnConsoleMessage( object sender, ConsoleMessageEventArgs e )
+        private void OnConsoleMessage(object sender, ConsoleMessageEventArgs e)
         {
-            Debug.Print( "[Line: " + e.LineNumber + "] " + e.Message );
+            Debug.Print("[Line: " + e.LineNumber + "] " + e.Message);
         }
 
-        private void webControl_ShowCreatedWebView( object sender, ShowCreatedWebViewEventArgs e )
+        private void webControl_ShowCreatedWebView(object sender, ShowCreatedWebViewEventArgs e)
         {
-            if ( webControl == null )
+            if (webControl == null)
                 return;
 
-            if ( !webControl.IsLive )
+            if (!webControl.IsLive)
                 return;
 
             // An instance of our application's web window, that will
@@ -181,10 +189,10 @@ namespace PoGo.NecroBot.GUI
             // Our application does not recognize user defined, non-standard specs. 
             // Therefore child views opened with non-standard specs, will not be presented as 
             // popups but as regular new windows (still wrapping the child view however -- see below).
-            if ( e.IsPopup && !e.IsUserSpecsOnly )
+            if (e.IsPopup && !e.IsUserSpecsOnly)
             {
                 // JSWindowOpenSpecs.InitialPosition indicates screen coordinates.
-                Int32Rect screenRect = e.Specs.InitialPosition.GetInt32Rect();
+                var screenRect = e.Specs.InitialPosition.GetInt32Rect();
 
                 // Set the created native view as the underlying view of the
                 // WebControl. This will maintain the relationship between
@@ -192,7 +200,7 @@ namespace PoGo.NecroBot.GUI
                 // is the result of 'window.open' (JS can access the parent window through
                 // 'window.opener'; the parent window can manipulate the child through the 'window'
                 // object returned from the 'window.open' call).
-                newWindow = new MainWindow( e.NewViewInstance );
+                newWindow = new MainWindow(e.NewViewInstance);
                 // Do not show in the taskbar.
                 newWindow.ShowInTaskbar = false;
                 newWindow.Topmost = true;
@@ -203,16 +211,16 @@ namespace PoGo.NecroBot.GUI
 
                 // If the caller has not indicated a valid size for the new popup window,
                 // let it be opened with the default size specified at design time.
-                if ( ( screenRect.Width > 0 ) && ( screenRect.Height > 0 ) )
+                if ((screenRect.Width > 0) && (screenRect.Height > 0))
                 {
                     // The indicated size, is client size.
-                    double horizontalBorderHeight = SystemParameters.ResizeFrameHorizontalBorderHeight;
-                    double verticalBorderWidth = SystemParameters.ResizeFrameVerticalBorderWidth;
-                    double captionHeight = SystemParameters.CaptionHeight;
+                    var horizontalBorderHeight = SystemParameters.ResizeFrameHorizontalBorderHeight;
+                    var verticalBorderWidth = SystemParameters.ResizeFrameVerticalBorderWidth;
+                    var captionHeight = SystemParameters.CaptionHeight;
 
                     // Set the indicated size.
-                    newWindow.Width = screenRect.Width + ( verticalBorderWidth * 2 );
-                    newWindow.Height = screenRect.Height + captionHeight + ( horizontalBorderHeight * 2 );
+                    newWindow.Width = screenRect.Width + verticalBorderWidth*2;
+                    newWindow.Height = screenRect.Height + captionHeight + horizontalBorderHeight*2;
                 }
 
                 // Show the window.
@@ -220,20 +228,20 @@ namespace PoGo.NecroBot.GUI
 
                 // If the caller has not indicated a valid position for the new popup window,
                 // let it be opened in the default position specified at design time.
-                if ( ( screenRect.Y >= 0 ) && ( screenRect.X >= 0 ) )
+                if ((screenRect.Y >= 0) && (screenRect.X >= 0))
                 {
                     // Move it to the indicated coordinates.
                     newWindow.Top = screenRect.Y;
                     newWindow.Left = screenRect.X;
                 }
             }
-            else if ( e.IsWindowOpen || e.IsPost )
+            else if (e.IsWindowOpen || e.IsPost)
             {
                 // No specs or only non-standard specs were specified, but the event is still 
                 // the result of 'window.open' or of an HTML form with target="_blank" and method="post".
                 // We will open a normal window but we will still wrap the new native child view, 
                 // maintaining its relationship with the parent window.
-                newWindow = new MainWindow( e.NewViewInstance );
+                newWindow = new MainWindow(e.NewViewInstance);
                 // Show the window.
                 newWindow.Show();
             }
@@ -259,19 +267,20 @@ namespace PoGo.NecroBot.GUI
                 // navigation to the target URL (if any), is already queued on created child views. 
                 // We must not interrupt this navigation as we would still be breaking the parent-child
                 // relationship.
-                newWindow = new MainWindow( e.TargetURL );
+                newWindow = new MainWindow(e.TargetURL);
                 // Show the window.
                 newWindow.Show();
             }
         }
 
-        private void webControl_WindowClose( object sender, WindowCloseEventArgs e )
+        private void webControl_WindowClose(object sender, WindowCloseEventArgs e)
         {
             // The page called 'window.close'. If the call
             // comes from a frame, ignore it.
-            if ( !e.IsCalledFromFrame )
-                this.Close();
+            if (!e.IsCalledFromFrame)
+                Close();
         }
+
         #endregion
     }
 }

@@ -1,43 +1,57 @@
-﻿using System;
-using System.Linq;
-using Awesomium.Core;
+﻿#region using directives
+
+using System;
+using System.IO;
+using System.Reflection;
 using System.Windows;
-using System.Collections.Generic;
+using Awesomium.Core;
+using PoGo.NecroBot.GUI.WebUiClient;
+
+#endregion
 
 namespace PoGo.NecroBot.GUI
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
-        protected override void OnStartup( StartupEventArgs e )
+        protected override void OnStartup(StartupEventArgs e)
         {
+            var settings = new WebUiClientConfig();
+            var settingsPath = Path.Combine(Directory.GetCurrentDirectory(),
+                "Config" + Path.DirectorySeparatorChar + "WebUiClient.json");
+            settings.Load(settingsPath);
+            var webUi = settings.WebUiClients[settings.CurrentWebUiClient];
+            if (!webUi.IsUpToDate())
+                webUi.DonwloadAndInstall();
+            if (!webUi.IsInstalled())
+                return;
+
             // Initialization must be performed here,
             // before creating a WebControl.
-            if ( !WebCore.IsInitialized )
+            if (!WebCore.IsInitialized)
             {
-                Uri baseUri = new Uri(System.Reflection.Assembly.GetEntryAssembly().Location);
-
-                WebCore.Initialize( new WebConfig()
+                var baseUri = new Uri(Assembly.GetEntryAssembly().Location);
+                WebCore.Initialize(new WebConfig
                 {
-                    HomeURL = new Uri(baseUri, "html/index.html"),
+                    HomeURL = new Uri(baseUri, webUi.HomeUri),
                     LogPath = @".\starter.log",
                     LogLevel = LogLevel.Verbose,
                     RemoteDebuggingPort = 9033
-                } );
+                });
             }
 
-            base.OnStartup( e );
+            base.OnStartup(e);
         }
 
-        protected override void OnExit( ExitEventArgs e )
+        protected override void OnExit(ExitEventArgs e)
         {
             // Make sure we shutdown the core last.
-            if ( WebCore.IsInitialized )
+            if (WebCore.IsInitialized)
                 WebCore.Shutdown();
 
-            base.OnExit( e );
+            base.OnExit(e);
         }
     }
 }
