@@ -14,13 +14,17 @@ namespace PoGo.NecroBot.GUI.WebUiClient
     [JsonObject(Title = "NecroBotWebUiClient", Description = "", ItemRequired = Required.DisallowNull)]
     public class WebUiClient
     {
-        [JsonIgnore] private readonly string _basePath = Path.Combine(Directory.GetCurrentDirectory(), "WebUi");
+        [JsonIgnore]
+        private readonly string _basePath = Path.Combine(Directory.GetCurrentDirectory(), "WebUi");
 
-        [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 4)] public readonly string HtlmPath;
+        [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 4)]
+        public readonly string HtlmPath;
 
-        [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 2)] public readonly string RepoName;
+        [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 2)]
+        public readonly string RepoName;
 
-        [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 1)] public readonly string RepoOwner;
+        [JsonProperty(Required = Required.Always, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 1)]
+        public readonly string RepoOwner;
 
         public WebUiClient(string owner, string repoName, string htlmPath)
         {

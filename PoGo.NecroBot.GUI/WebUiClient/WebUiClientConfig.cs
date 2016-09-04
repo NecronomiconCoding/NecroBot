@@ -16,15 +16,16 @@ namespace PoGo.NecroBot.GUI.WebUiClient
     [JsonObject(Title = "PoGo.NecroBot.GUI Config", Description = "", ItemRequired = Required.DisallowNull)]
     public class WebUiClientConfig
     {
-        [JsonIgnore] private string _filePath;
-
-        [DefaultValue("PokeEase Official")]
-        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 1)]
-        public string CurrentWebUiClient = "NecrobotVisualizer-nicoschmitt";
+        [JsonIgnore]
+        private string _filePath;
 
         [DefaultValue(false)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 1)]
         public bool AutoUpdateWebUiClient;
+
+        [DefaultValue("PokeEase Official")]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 1)]
+        public string CurrentWebUiClient = "NecrobotVisualizer-nicoschmitt";
 
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 3)]
         public Dictionary<string, WebUiClient> WebUiClients = new Dictionary<string, WebUiClient>
