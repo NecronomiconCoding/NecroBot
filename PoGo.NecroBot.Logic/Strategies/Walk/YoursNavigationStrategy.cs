@@ -19,6 +19,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
 
         public YoursNavigationStrategy(Client client) : base(client)
         {
+            _yoursDirectionsService = null;
         }
 
         public override async Task<PlayerUpdateResponse> Walk(GeoCoordinate targetLocation, Func<Task<bool>> functionExecutedWhileWalking, ISession session, CancellationToken cancellationToken, double walkSpeed = 0.0)
@@ -44,16 +45,27 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
                 _yoursDirectionsService = new YoursDirectionsService(session);
         }
 
-        public override double CalculateDistance(double sourceLat, double sourceLng, double destinationLat, double destinationLng)
+        public override double CalculateDistance(double sourceLat, double sourceLng, double destinationLat, double destinationLng, ISession session = null)
         {
-            var yoursResult = _yoursDirectionsService.GetDirections(new GeoCoordinate(sourceLat, sourceLng), new GeoCoordinate(destinationLat, destinationLng));
+            if (session != null)
+                GetYoursInstance(session);
 
-            if (string.IsNullOrEmpty(yoursResult) || yoursResult.StartsWith("<?xml version=\"1.0\"") || yoursResult.Contains("error"))
-                return 1.5 * base.CalculateDistance(sourceLat, sourceLng, destinationLat, destinationLng);
+            if (_yoursDirectionsService != null)
+            {
+                var yoursResult = _yoursDirectionsService.GetDirections(new GeoCoordinate(sourceLat, sourceLng), new GeoCoordinate(destinationLat, destinationLng));
+                if (string.IsNullOrEmpty(yoursResult) || yoursResult.StartsWith("<?xml version=\"1.0\"") || yoursResult.Contains("error"))
+                {
+                    return 1.5 * base.CalculateDistance(sourceLat, sourceLng, destinationLat, destinationLng);
+                }
+                else
+                {
+                    var yoursWalk = YoursWalk.Get(yoursResult);
+                    return yoursWalk.Distance;
+                }
+            }
             else
             {
-                var yoursWalk = YoursWalk.Get(yoursResult);
-                return yoursWalk.Distance;
+                return 1.5 * base.CalculateDistance(sourceLat, sourceLng, destinationLat, destinationLng);
             }
         }
     }
