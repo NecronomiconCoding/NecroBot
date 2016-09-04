@@ -45,11 +45,14 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             if (_googleDirectionsService == null)
                 _googleDirectionsService = new GoogleDirectionsService(session);
         }
-        public async Task<double> CalculateDistance(double sourceLat, double sourceLng, double destinationLat, double destinationLng)
-        {
-            //need to implement API call to calculate real distance, that will impact on perfomance.
 
-            return 1.5 * LocationUtils.CalculateDistanceInMeters(sourceLat, sourceLng, destinationLat, destinationLng);
+        public override double CalculateDistance(double sourceLat, double sourceLng, double destinationLat, double destinationLng)
+        {
+            var googleResult = _googleDirectionsService.GetDirections(new GeoCoordinate(sourceLat, sourceLng), new List<GeoCoordinate>(), new GeoCoordinate(destinationLat, destinationLng));
+            if (googleResult.Directions.status.Equals("OVER_QUERY_LIMIT"))
+                return 1.5 * base.CalculateDistance(sourceLat, sourceLng, destinationLat, destinationLng);
+            else
+                return googleResult.GetDistance();
         }
     }
 }
