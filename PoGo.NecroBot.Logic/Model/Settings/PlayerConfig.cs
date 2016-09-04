@@ -55,8 +55,8 @@ namespace PoGo.NecroBot.Logic.Model.Settings
 
         [DefaultValue("")]
         [MinLength(0)]
-        [MaxLength(64)]
-        [JsonProperty(Required = Required.Default, DefaultValueHandling = DefaultValueHandling.Populate, Order = 8)]
+        [MaxLength(15)]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 8)]
         public string DesiredNickname;
 
         [DefaultValue("Male")]
