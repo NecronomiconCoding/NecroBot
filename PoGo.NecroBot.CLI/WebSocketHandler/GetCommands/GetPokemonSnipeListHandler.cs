@@ -1,26 +1,24 @@
-﻿#region using directives
-
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using PoGo.NecroBot.CLI.WebSocketHandler.GetCommands.Tasks;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
 
-#endregion
-
 namespace PoGo.NecroBot.CLI.WebSocketHandler.GetCommands
 {
-    internal class GetPokemonSnipeListHandler : IWebSocketRequestHandler
+    class GetPokemonSnipeListHandler : IWebSocketRequestHandler
     {
+        public string Command { get; private set; }
+
         public GetPokemonSnipeListHandler()
         {
-            Command = "GetPokemonSnipeList";
+            Command = "PokemonSnipeList";
         }
-
-        public string Command { get; }
 
         public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
-            await GetPokemonSnipeListTask.Execute(session, webSocketSession, (string) message.RequestID);
+            await Logic.Tasks.HumanWalkSnipeTask.ExecuteFetchData(session);
+            //await GetPokemonSnipeListTask.Execute(session, webSocketSession, (string)message.RequestID);
         }
+
     }
 }

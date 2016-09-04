@@ -224,6 +224,7 @@ namespace PoGo.NecroBot.Logic.Common
         HumanWalkSnipeDestinationReached,
         HumanWalkSnipeNotEnoughtBalls,
         HumanWalkSnipePokemonEncountered,
+        EventPokemonUpgraded,
         FirstStartSetupProxyPrompt,
         FirstStartSetupProxyHostPrompt,
         FirstStartSetupProxyHostConfirm,
@@ -290,14 +291,17 @@ namespace PoGo.NecroBot.Logic.Common
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonEvolvedFailed,
                 "Failed {0}. Result was {1}, stopping evolving {2}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonTransferred,
-                "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})"),
+                "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%] (Candies: {5})")  ,
+             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonUpgraded,
+                "{0}\t- CP: {1}  IV: {2}%   [Best CP: {3}  IV: {4}%]"),
+
             new KeyValuePair<TranslationString, string>(TranslationString.EventItemRecycled, "{0}x {1}"),
 
             //Logging Cleanup (mostly uneccessary information, may want a verbose pokemon capture logger setting)
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureSuccess,
-                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14} | Move1: {15} Move2: {16}"),
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | {11} EXP earned | {12} | lat: {13} long: {14} | Move1: {15} Move2: {16} | Rarity :{17}"),
             new KeyValuePair<TranslationString, string>(TranslationString.EventPokemonCaptureFailed,
-                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12} | Move1: {13} Move2: {14}"),
+                "({0}) | ({1}) {2} Lvl: {3} CP: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | with a {9} ({10} left). | lat: {11} long: {12} | Move1: {13} Move2: {14}| Rarity :{15}"),
 
 
             new KeyValuePair<TranslationString, string>(TranslationString.EventNoPokeballs,
