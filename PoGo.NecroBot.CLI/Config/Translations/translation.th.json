@@ -2,47 +2,47 @@
   "TranslationStrings": [
     {
       "Key": "HumanWalkSnipeNotEnoughtBalls",
-      "Value": "(HUMAN WALK) Not enought balls to activate catch Em-All mode. ({0})/{1}"
+      "Value": "(HUMAN WALK) ไม่มีลูกบอลมากพอที่จะใช้จับและใช้ในโหมดทั้งหมดของ Em. ({0})/{1}"
     },
     {
       "Key": "HumanWalkSnipe",
-      "Value": "(HUMAN WALK) Found {0} spawning | lat: {1}, lng: {2}, dist {3:0.00}m , expired in {4:00} min {5:00} sec | Walk time est : {6:00} min {7:00} sec | Spin: {8} | Catch : {9} | Speed : {10:0.00}km/h"
+      "Value": "(HUMAN WALK) พบ {0} ฟักไข่ | ละติจูด : {1}, ลองติจูด : {2}, ปลายทางอีก {3:0.00} เมตร , เหลือเวลาอีก {4:00} นาที {5:00} วินาที | ต้องใช้เวลาเดินอีก : {6:00} นาที {7:00} วินาที | หมุนเสา : {8} | จับ : {9} | ความเร็ว : {10:0.00} กิโลเมตร/ชั่วโมง"
     },
     {
       "Key": "HumanWalkSnipeUpdate",
-      "Value": "(HUMAN WALK) Found {0} pokemon matched with you filters. Human walking sniper won't catch em all, but try to catch as many as possible"
+      "Value": "(HUMAN WALK) พบ {0} โปเกมอน ที่ตรงกับที่คุณตั้งค่าไว้. Sniper ของเราจะเดินไปจับให้ได้ให้มากที่สุดเท่าที่จะทำได้"
     },
     {
       "Key": "HumanWalkSnipeAddedPokestop",
-      "Value": "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops"
+      "Value": "(HUMAN WALK) คุณห่างจาก Poke Stops ที่ใกล้ที่สุดอีก : {0:0.00m}. จะเริ่มไปที่ Poke Stops โดย : {1} "
     },
     {
       "Key": "HumanWalkSnipeDestinationReached",
-      "Value": "(HUMAN WALK) destination reached | lat: {0}, lng: {1} | wait  {3:0.00} sec"
+      "Value": "(HUMAN WALK) ถึงปลายทาง | ละติจูด : {0}, ลองติจูด : {1} | รออีก  {3:0.00} วินาที"
     },
     {
       "Key": "SniperCount",
-      "Value": "Sniper count {0}"
+      "Value": "นับ Sniper {0}"
     },
     {
       "Key": "SnipeExceeds",
-      "Value": "Sniper need to take a rest before your account is banned"
+      "Value": "Sniper จำเป็นจะต้องใช้เวลาที่เหลือของคุณ ก่อนที่บัญชีคุณจะโดนแบน"
     },
     {
       "Key": "CatchExceeds",
-      "Value": "You are catching too fast. Your cannot catch another one until {0} seconds later"
+      "Value": "คุณจับเร็วเกินไป. คุณจะไม่สามารถจับได้อีกจนกว่า  {0} วินาทีผ่านไป"
     },
     {
       "Key": "PokeStopExceeds",
-      "Value": "You are visiting pokestops too fast. Your cannot visit another one until {0} seconds later"
+      "Value": "คุณกำลังไปที่ Poke Stops เร็วเกินไป. คุณจะไม่สามารถไปสถานที่นี้ได้อีกจนกว่า {0} วินาทีผ่านไป"
     },
     {
       "Key": "Only10kmEggs",
-      "Value": "Player below level 20, saving this 10 km Egg for later"
+      "Value": "ผู้เล่นที่ต่ำกว่าระดับ 20, ต้องประหยัดไข่ไว้ 10 กิโลเมตรหรือภายหลัง"
     },
     {
       "Key": "GoogleAPIWarning",
-      "Value": "Without a Google Api, you will have 2500 free quota limit, if you reach the maximum quota, try to change your IP. To configure \"GoogleAPIKey\", get API Key in link: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Value": "ไม่มี Google Api, คุณจะได้รับการใช้งานจำกัด ฟรี 2500 โควต้า, ถ้าถึงโควต้าสูงสูดแล้ว, ลองทำการเปลี่ยน IP. หรือไปตั้งค่า \"GoogleAPIKey\", รับ API Key ที่ลิงค์ : https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {
       "Key": "pokeball",
@@ -82,11 +82,11 @@
     },
     {
       "Key": "eventFortFailed",
-      "Value": "{0} การเก็บของล้มเหลวอาจจะโดนระงับ ยกเลิกการระงับใน : {1}/{2}"
+      "Value": "{0} การเก็บของล้มเหลวอาจจะโดนระงับ ยกเลิกการระงับในอีก : {1}/{2}"
     },
     {
       "Key": "eventFortTargeted",
-      "Value": "กำลังเดินทางไปสู่ PokeStops : {0} ( {1} เมตร ) ( {2} วินาที ) (route {3})"
+      "Value": "กำลังเดินทางไปสู่ Poke Stops : {0} ( {1} เมตร ) ( {2} วินาที ) (เส้นทางคือ : {3})"
     },
     {
       "Key": "eventProfileLogin",
@@ -118,11 +118,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} เลเวล : {3} CP : ({4}/{5}) IV : {6}% | โอกาส : {7}% | ระยะ {8}m | จับด้วย{9} (เหลือโปเกบอล {10} ชิ้น). | ได้รับค่าประสบการณ์ {11} EXP | {12} | ละติจูด : {13} ลองติจูด : {14} | Move1: {15} Move2: {16}"
+      "Value": "({0}) | ({1}) {2} เลเวล : {3} CP : ({4}/{5}) IV : {6}% | โอกาส : {7}% | ระยะ {8} เมตร | จับด้วย{9} (เหลือโปเกบอล {10} ชิ้น). | ได้รับค่าประสบการณ์ {11} EXP | {12} | ละติจูด : {13} ลองติจูด : {14} | ย้าย 1 : {15} ย้าย 2 : {16}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl : {3} CP : ({4}/{5}) IV : {6}% | โอกาส : {7}% | ระยะ {8}m | จับได้ {9} (เหลือโปเกบอล {10} ชิ้น). | ละติจูด : {11} ลองติจูด : {12} | Move1: {13} Move2: {14}"
+      "Value": "({0}) | ({1}) {2} เลเวล : {3} CP : ({4}/{5}) IV : {6}% | โอกาส : {7}% | ระยะ {8} เมตร | จับได้ {9} (เหลือโปเกบอล {10} ชิ้น). | ละติจูด : {11} ลองติจูด : {12} | ย้าย 1 : {13} ย้าย 2 : {14}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -198,11 +198,11 @@
     },
     {
       "Key": "incubatorPuttingEgg",
-      "Value": "ใส่ไข่ในแคปซูนฟักไข่อีก : {0:0.00}กิโลเมตร"
+      "Value": "ใส่ไข่ในแคปซูนฟักไข่อีก : {0:0.00} กิโลเมตร"
     },
     {
       "Key": "incubatorStatusUpdate",
-      "Value": "สถานะแคปซูนฟักไข่อีก : {0:0.00}กิโลเมตร"
+      "Value": "สถานะแคปซูนฟักไข่อีก : {0:0.00} กิโลเมตร"
     },
     {
       "Key": "incubatorEggHatched",
@@ -210,35 +210,35 @@
     },
     {
       "Key": "logEntryError",
-      "Value": "ผิดพลาด"
+      "Value": " ผิดพลาด "
     },
     {
       "Key": "logEntryAttention",
-      "Value": "ประกาศ"
+      "Value": " ประกาศ "
     },
     {
       "Key": "logEntryInfo",
-      "Value": "ข้อมูล"
+      "Value": " ข้อมูล "
     },
     {
       "Key": "logEntryPokestop",
-      "Value": "โปเกช็อป"
+      "Value": " โปเกช็อป "
     },
     {
       "Key": "logEntryFarming",
-      "Value": "การเพาะปลูก"
+      "Value": " การเพาะปลูก "
     },
     {
       "Key": "logEntrySniper",
-      "Value": "การปั่น"
+      "Value": " การปั่น "
     },
     {
       "Key": "logEntryRecycling",
-      "Value": "โยนทิ้ง"
+      "Value": " เอาออก "
     },
     {
       "Key": "logEntryPkmn",
-      "Value": "การจับ"
+      "Value": " การจับ "
     },
     {
       "Key": "logEntryTransfered",
@@ -246,31 +246,31 @@
     },
     {
       "Key": "logEntryEvolved",
-      "Value": "พัฒนาร่าง"
+      "Value": " พัฒนาร่าง "
     },
     {
       "Key": "logEntryBerry",
-      "Value": "ผลเบอรี่"
+      "Value": " ผลเบอรี่ "
     },
     {
       "Key": "logEntryEgg",
-      "Value": "ไข่"
+      "Value": " ฟักไข่ "
     },
     {
       "Key": "logEntryDebug",
-      "Value": "ดีบัค"
+      "Value": " ดีบัค "
     },
     {
       "Key": "logEntryUpdate",
-      "Value": "อัพเดท"
+      "Value": " อัพเดท "
     },
     {
       "Key": "logEntryNew",
-      "Value": "ใหม่"
+      "Value": " เริ่มใหม่ "
     },
     {
       "Key": "logEntrySoftBan",
-      "Value": "ระงับ"
+      "Value": " ระงับ "
     },
     {
       "Key": "loggingIn",
@@ -278,7 +278,7 @@
     },
     {
       "Key": "ptcOffline",
-      "Value": "บัญชี PTC ขัดข้องชั่วคราวหรือหนังสือรับรองผิดพลาด. กรุณาใช้บัญชีกูเกิ้ลแทน"
+      "Value": "บัญชี PTC ขัดข้องชั่วคราวหรือหนังสือรับรองผิดพลาด. กรุณาใช้บัญชี Google แทน"
     },
     {
       "Key": "accessTokenExpired",
@@ -346,7 +346,7 @@
     },
     {
       "Key": "updateFinished",
-      "Value": "อัพเดทเสร็จสิ้น, คุณสามารถปิดแล้วเปิดใหม่ได้."
+      "Value": "อัพเดทเสร็จสิ้น, คุณสามารถปิดแล้วเปิดโปรแกรมใหม่ได้."
     },
     {
       "Key": "lookingForIncensePokemon",
@@ -378,7 +378,7 @@
     },
     {
       "Key": "currentReviveInv",
-      "Value": "ฟื้นคืน : {0} | ฟื้นคืนสูงสุด : {1}"
+      "Value": "ฟื้นฟู : {0} | ฟื้นฟูสูงสุด : {1}"
     },
     {
       "Key": "currentMiscItemInv",
@@ -390,7 +390,7 @@
     },
     {
       "Key": "recyclingQuietly",
-      "Value": "โยนทิ้งไปเลย..."
+      "Value": "เอาออกไปเลย..."
     },
     {
       "Key": "invFullTransferring",
@@ -422,7 +422,7 @@
     },
     {
       "Key": "pokemonFavorite",
-      "Value": "{0}% สำเร็จ {1} ( CP {2} ) *favorited*."
+      "Value": "{0}% สำเร็จ {1} ( CP {2} ) *ตัวโปรด*."
     },
     {
       "Key": "pokemonIgnoreFilter",
@@ -442,7 +442,7 @@
     },
     {
       "Key": "catchStatusFlee",
-      "Value": "จับแล้วหนี"
+      "Value": "จับแล้วหลุด"
     },
     {
       "Key": "catchStatusMissed",
@@ -470,7 +470,7 @@
     },
     {
       "Key": "statsTemplateString",
-      "Value": "{0} - เวลาทำงาน {1} - ระดับ : {2} | EXP/H : {3:n0} | P/H : {4:n0} | ลูกอม : {5:n0} | โอนออกไป : {6:n0} | โยนทิ้ง : {7:n0}"
+      "Value": "{0} - เวลาทำงาน {1} - ระดับ : {2} | EXP/H : {3:n0} | P/H : {4:n0} | ลูกอม : {5:n0} | โอนออกไป : {6:n0} | เอาออก : {7:n0}"
     },
     {
       "Key": "profileStatsTemplateString",
@@ -482,7 +482,7 @@
     },
     {
       "Key": "showPokeSkillTemplate",
-      "Value": "\n CP: {0} | IV: {1}% | Move: {2} + {3} | ชื่อ: {4}"
+      "Value": "\n CP: {0} | IV: {1}% | ย้าย : {2} + {3} | ชื่อ : {4}"
     },
     {
       "Key": "helpTemplate",
@@ -590,23 +590,23 @@
     },
     {
       "Key": "pkmPotentialEvolveCount",
-      "Value": "Potential Evolutions: {0}"
+      "Value": "วิวัฒนาการที่มีศักยภาพ : {0}"
     },
     {
       "Key": "pkmNotEnoughRessources",
-      "Value": "โปเกมอนอัพเกรดล้มเหลวโปรดเช็คข้อมูลพื้นที่ของท่าน"
+      "Value": "โปเกมอนอัพเกรดล้มเหลวโปรดเช็คข้อมูลพื้นที่คงเหลือของคุณ"
     },
     {
       "Key": "snipeServerOffline",
-      "Value": "ระบบปั่น PokeStops ไม่ทำงาน. กำลังข้ามส่วนนี้..."
+      "Value": "ระบบปั่น Poke Stops ไม่ทำงาน. กำลังข้ามส่วนนี้..."
     },
     {
       "Key": "firstStartPrompt",
-      "Value": "นี่คือการใช้งานครั้งแรก, คุณต้องการตั้งค่าหรือไม่? {0}/{1}"
+      "Value": "นี่คือการใช้งานครั้งแรก, คุณต้องการตั้งค่าเริ่มต้นหรือไม่? {0}/{1}"
     },
     {
       "Key": "firstStartLanguagePrompt",
-      "Value": "คุณต้องการเปลี่ยนภาษาเริ่มต้นหรือไม่? {0}/{1}"
+      "Value": "คุณต้องการปรับเปลี่ยนภาษาเริ่มต้นหรือไม่? {0}/{1}"
     },
     {
       "Key": "firstStartLanguageCodePrompt",
@@ -614,15 +614,15 @@
     },
     {
       "Key": "firstStartLanguageConfirm",
-      "Value": "ดำเนินการปรับใช้ภาษา : {0}"
+      "Value": "ดำเนินการเปลี่ยนแปลงภาษา : {0}"
     },
     {
       "Key": "promptError",
-      "Value": "[ข้อมูลที่ใส่ผิดพลาด] ค่าที่ใส่ไม่ถูกต้อง, กรุณาใส่ '{0}' หรือ '{1}"
+      "Value": "[ข้อมูลที่ใส่ผิดพลาด] ค่าที่ใส่ไม่ถูกต้อง, กรุณาใส่ '{0}' หรือ '{1}'"
     },
     {
       "Key": "firstStartAutoGenSettings",
-      "Value": "ไฟล์การตั้งค่า/ไฟล์ตั้งค่าการเข้าถึงจะต้องตั้งค่าให้เสร็จสิ้นก่อนที่จะทำงานอย่างอื่นต่อไป"
+      "Value": "ไฟล์การตั้งค่า / ไฟล์ตั้งค่าเริ่มต้นจะต้องตั้งค่าให้เสร็จสิ้นก่อนที่จะทำงานอย่างอื่นต่อไป"
     },
     {
       "Key": "firstStartSetupAccount",
@@ -646,7 +646,7 @@
     },
     {
       "Key": "firstStartSetupUsernameConfirm",
-      "Value": "ชื่อผู้ใช้ของคุณคือ : {0}"
+      "Value": "บัญชีผู้ใช้ของคุณคือ : {0}"
     },
     {
       "Key": "firstStartSetupPasswordPrompt",
@@ -682,11 +682,11 @@
     },
     {
       "Key": "firstStartSetupDefaultLatLongConfirm",
-      "Value": "ละติจูด และ ลองติจูด ยอมรับ: {0}"
+      "Value": "ละติจูด และ ลองติจูด ยอมรับ : {0}"
     },
     {
       "Key": "softBanBypassed",
-      "Value": "บายพาสกันแบนแล้ว!"
+      "Value": "คุณได้บายพาสกันแบนแล้ว!"
     },
     {
       "Key": "firstStartSetupCompleted",
@@ -718,7 +718,7 @@
     },
     {
       "Key": "Unproxied",
-      "Value": " IP ของท่านคือ : {0}"
+      "Value": " IP ของคุณคือ : {0}"
     },
     {
       "Key": "HighestsPokemoHeader",
@@ -726,11 +726,11 @@
     },
     {
       "Key": "HighestsPokemoCell",
-      "Value": "# CP {0}/{1} | ({2}% {3})\t| Lvl {4}\t {5}: {6}\t {7}: {8} {9}: {10} {11}: {12}"
+      "Value": "# CP {0}/{1} | ({2}% {3})\t | Lvl {4}\t {5} : {6}\t {7} : {8} {9} : {10} {11} : {12}"
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "ความเร็วการเดิน : ถูกปรับจาก, {0:n2} Km/h ไปเป็น {1:n2} Km/h"
+      "Value": "ความเร็วการเดิน : ถูกปรับจาก, {0:n2} กิโลเมตร/ชั่วโมง ไปเป็น {1:n2} กิโลเมตร/ชั่วโมง"
     },
     {
       "Key": "AccountBanned",
