@@ -155,8 +155,6 @@
     <When Condition="('$(SolutionName)'!='Awesomium.NET') And ('$(SolutionName)'!='Awesomium.Windows')" />
   </Choose>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-    <PostBuildEvent>
-    </PostBuildEvent>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
