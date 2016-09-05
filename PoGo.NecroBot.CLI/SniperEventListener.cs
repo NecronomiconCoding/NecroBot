@@ -23,6 +23,16 @@ namespace PoGo.NecroBot.CLI
             Logic.Tasks.HumanWalkSnipeTask.UpdateCatchPokemon(pokemonCaptureEvent.Latitude, pokemonCaptureEvent.Longitude, pokemonCaptureEvent.Id);
         }
 
+        public static void HandleEvent(SnipePokemonFoundEvent ev, ISession session)
+        {
+            Logic.Tasks.HumanWalkSnipeTask.AddSnipePokemon("Local Feeder", ev.PokemonFound.Id,
+                ev.PokemonFound.Latitude,
+                ev.PokemonFound.Longitude,
+                ev.PokemonFound.ExpirationTimestamp,
+                ev.PokemonFound.IV, 
+                session
+                );
+        }
         internal void Listen(IEvent evt, ISession session)
         {
             dynamic eve = evt;

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using POGOProtos.Enums;
 
 namespace PoGo.NecroBot.Logic.Tasks
 {
@@ -39,8 +40,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 Source = "Pokecrew"
             };
         }
-
-        private static async Task<List<SnipePokemonInfo>> FetchFromPokecrew(double lat, double lng)
+         private static async Task<List<SnipePokemonInfo>> FetchFromPokecrew(double lat, double lng)
         {
             List<SnipePokemonInfo> results = new List<SnipePokemonInfo>();
             // if (!_setting.HumanWalkingSnipeUsePokeRadar) return results;

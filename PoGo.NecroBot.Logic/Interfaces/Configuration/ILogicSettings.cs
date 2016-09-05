@@ -189,6 +189,8 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         double HumanWalkingSnipeMaxSpeedUpSpeed { get; }
         int HumanWalkingSnipeDelayTimeAtDestination { get; }
         bool HumanWalkingSnipeAllowSpeedUp { get; }
+        bool HumanWalkingSnipeUsePogoLocationFeeder { get; }
+
         int EvolveActionDelay { get; }
         int TransferActionDelay { get; }
         int RecycleActionDelay { get; }

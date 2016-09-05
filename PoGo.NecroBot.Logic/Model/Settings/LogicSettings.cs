@@ -178,7 +178,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public int ResumeTrack => _settings.LocationConfig.ResumeTrack;
         public int ResumeTrackSeg => _settings.LocationConfig.ResumeTrackSeg;
         public int ResumeTrackPt => _settings.LocationConfig.ResumeTrackPt;
-
         public bool HumanWalkingSnipeDisplayList => _settings.HumanWalkSnipeConfig.DisplayPokemonList;
         public double HumanWalkingSnipeMaxDistance => _settings.HumanWalkSnipeConfig.MaxDistance;
         public double HumanWalkingSnipeMaxEstimateTime => _settings.HumanWalkSnipeConfig.MaxEstimateTime;
@@ -199,6 +198,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public double HumanWalkingSnipeMaxSpeedUpSpeed => _settings.HumanWalkSnipeConfig.MaxSpeedUpSpeed;
         public bool HumanWalkingSnipeAllowSpeedUp => _settings.HumanWalkSnipeConfig.AllowSpeedUp;
         public int HumanWalkingSnipeDelayTimeAtDestination => _settings.HumanWalkSnipeConfig.DelayTimeAtDestination;
-                
+        public bool HumanWalkingSnipeUsePogoLocationFeeder => _settings.HumanWalkSnipeConfig.UsePogoLocationFeeder;
     }
 }
