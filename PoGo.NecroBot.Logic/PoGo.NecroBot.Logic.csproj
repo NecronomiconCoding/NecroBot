@@ -149,6 +149,7 @@
     <Compile Include="Event\KillSwitchEvent.cs" />
     <Compile Include="Event\LogEvent.cs" />
     <Compile Include="Event\NoPokeballEvent.cs" />
+    <Compile Include="Event\SnipePokemonFoundEvent.cs" />
     <Compile Include="Event\SnipeEvent.cs" />
     <Compile Include="Event\SnipeModeEvent.cs" />
     <Compile Include="Event\PokemonListEvent.cs" />
@@ -325,6 +326,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <Compile Include="Tasks\HumanWalkSnipeTask.FastPokemap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FeroxRev\PokemonGo.RocketAPI\PokemonGo.RocketAPI.csproj">

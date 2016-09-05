@@ -84,7 +84,9 @@ namespace PoGo.NecroBot.Logic.Tasks
                 results = GetJsonList(json);
             }
             catch (Exception )
-            {}
+            {
+                Logger.Write("Error loading data from skiplagged", LogLevel.Error, ConsoleColor.DarkRed);
+            }
             return results;
         }
 
