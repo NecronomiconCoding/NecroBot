@@ -42,7 +42,7 @@
     },
     {
       "Key": "GoogleAPIWarning",
-      "Value": "Senza una Google Api, avrai un limite pari a 2500 richieste, se raggiungi il limite delle richieste, prova a cambiare il tuo IP. Configura la \"GoogleAPIKey\", ottieni una API Key seguendo il link: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Value": "Senza una Google API, avrai un limite pari a 2500 richieste. Se raggiungi il limite delle richieste, prova a cambiare il tuo IP. Configura la \"GoogleAPIKey\", ottieni una API Key seguendo il link: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {
       "Key": "pokeball",
@@ -266,11 +266,11 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "Log in tramite {0}"
+      "Value": "Login tramite {0}"
     },
     {
       "Key": "ptcOffline",
-      "Value": "I Server PTC sono offline o le tue credenziali sono sbagliate. Prova ad accedere con Google"
+      "Value": "I server PTC sono offline o le tue credenziali sono sbagliate. Prova ad accedere con Google"
     },
     {
       "Key": "tryingAgainIn",
@@ -294,11 +294,11 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Spostamenti realistici rilevati, verra' usato UserSettings.settings"
+      "Value": "Spostamenti realistici rilevati, verrà usato UserSettings.settings"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Spostamenti non realistici in {0}, verra' usato l'ultimo salvataggio del file LastPos.ini"
+      "Value": "Spostamenti non realistici in {0}, verrà usato l'ultimo salvataggio del file LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -606,7 +606,7 @@
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Velocita di cammino: E' stata cambiata,da {0:n2} Km/h a {1:n2} Km/h"
+      "Value": "Velocita di cammino cambiata da {0:n2} Km/h a {1:n2} Km/h"
     },
     {
       "Key": "AccountBanned",
