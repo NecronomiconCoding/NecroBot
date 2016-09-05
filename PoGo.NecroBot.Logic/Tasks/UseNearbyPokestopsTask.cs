@@ -31,6 +31,10 @@ namespace PoGo.NecroBot.Logic.Tasks
         private static int RandomNumber;
         private static List<FortData> pokestopList;
         public static event UpdateTimeStampsPokestopDelegate UpdateTimeStampsPokestop;
+        public static Boolean SetDestinationEnabled { get; set; } = false;
+        public static Boolean SetDestinationAccept { get; set; } = false;
+        public static double SetDestinationLat { get; set; }
+        public static double SetDestinationLng { get; set; }
 
         internal static void Initialize()
         {
@@ -102,6 +106,13 @@ namespace PoGo.NecroBot.Logic.Tasks
                 // also, GPX pathing uses its own EggWalker and calls the CatchPokemon tasks internally.
                 if (!session.LogicSettings.UseGpxPathing)
                 {
+                    if (SetDestinationEnabled)
+                    {
+                        SetDestinationAccept = true;
+                        fortInfo.Name = "User Destination.";
+                        fortInfo.Latitude = pokeStop.Latitude = SetDestinationLat;
+                        fortInfo.Longitude = pokeStop.Longitude = SetDestinationLng;
+                    }
                     var eggWalker = new EggWalker(1000, session);
 
                     var distance = LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
@@ -117,6 +128,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                         LocationUtils.getElevation(session, pokeStop.Latitude, pokeStop.Longitude)),
                     async () =>
                     {
+                        if (SetDestinationEnabled && !SetDestinationAccept)
+                            return true;
                         // Catch normal map Pokemon
                         await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
                         //Catch Incense Pokemon
@@ -132,6 +145,24 @@ namespace PoGo.NecroBot.Logic.Tasks
                     await eggWalker.ApplyDistance(distance, cancellationToken);
                 }
 
+                if (SetDestinationEnabled &&  SetDestinationAccept)
+           		{
+                	session.EventDispatcher.Send(new FortUsedEvent
+                	{
+                   	Id = "",
+                   	Name = fortInfo.Name,
+                   	Exp = 0,
+                   	Gems = 0,
+                   	Items = "",
+                   	Latitude = fortInfo.Latitude,
+                   	Longitude = fortInfo.Longitude,
+                   	InventoryFull = false
+                    });
+                    SetDestinationAccept = false;
+                    SetDestinationEnabled = false;
+                	return;
+            	}
+            		
                 await FortAction(session, pokeStop, fortInfo, cancellationToken);
 
                 if (session.LogicSettings.SnipeAtPokestops || session.LogicSettings.UseSnipeLocationServer)
