@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.State;
 using SuperSocket.WebSocket;
+using PoGo.NecroBot.Logic.Tasks;
 
 namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
 {
@@ -15,7 +16,7 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
 
         public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
-            await Logic.Tasks.HumanWalkSnipeTask.PriorityPokemon(session,  (string)message.Id);
+            await FavoritePokemonTask.Execute(session, (ulong)message.PokemonId, (bool)message.Favorite);
         }
     }
 }
