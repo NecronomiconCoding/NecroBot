@@ -279,6 +279,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
             List<Task<List<SnipePokemonInfo>>> allTasks = new List<Task<List<SnipePokemonInfo>>>()
             {
+                FetchFromFastPokemap(lat, lng),
                 //FetchFromPokeWatcher(lat, lng),
                 FetchFromPokeradar(lat, lng),
                 FetchFromSkiplagged(lat, lng)     ,
@@ -291,6 +292,8 @@ namespace PoGo.NecroBot.Logic.Tasks
             {
                 allTasks.Add(FetchFromPokeradar(_session.Settings.DefaultLatitude, _session.Settings.DefaultLongitude));
                 allTasks.Add(FetchFromSkiplagged(_session.Settings.DefaultLatitude, _session.Settings.DefaultLongitude));
+                allTasks.Add(FetchFromFastPokemap(_session.Settings.DefaultLatitude, _session.Settings.DefaultLongitude));
+
             }
 
             Task.WaitAll(allTasks.ToArray());

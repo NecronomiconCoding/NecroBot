@@ -167,6 +167,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public bool SnipePokemonNotInPokedex => _settings.SnipeConfig.SnipePokemonNotInPokedex;
         public bool RandomizeRecycle => _settings.RecycleConfig.RandomizeRecycle;
         public int RandomRecycleValue => _settings.RecycleConfig.RandomRecycleValue;
+        public int MaxPokeballsToKeep => _settings.RecycleConfig.MaxPokeballsToKeep;
         public int TotalAmountOfPokeballsToKeep => _settings.RecycleConfig.TotalAmountOfPokeballsToKeep;
         public int TotalAmountOfPotionsToKeep => _settings.RecycleConfig.TotalAmountOfPotionsToKeep;
         public int TotalAmountOfRevivesToKeep => _settings.RecycleConfig.TotalAmountOfRevivesToKeep;
@@ -189,6 +190,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public int HumanWalkingSnipeCatchEmAllMinBalls => _settings.HumanWalkSnipeConfig.CatchEmAllMinBalls;
         public bool EnableHumanWalkingSnipe => _settings.HumanWalkSnipeConfig.Enable;
         public Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters => _settings.HumanWalkSnipeFilters;
+        public bool HumanWalkingSnipeUseFastPokemap => _settings.HumanWalkSnipeConfig.UseFastPokemap;
         public bool HumanWalkingSnipeUsePokeRadar => _settings.HumanWalkSnipeConfig.UsePokeRadar;
         public bool HumanWalkingSnipeUseSkiplagged => _settings.HumanWalkSnipeConfig.UseSkiplagged;
         public bool HumanWalkingSnipeUseSnipePokemonList => _settings.HumanWalkSnipeConfig.UseSnipePokemonList;
@@ -197,5 +199,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public double HumanWalkingSnipeMaxSpeedUpSpeed => _settings.HumanWalkSnipeConfig.MaxSpeedUpSpeed;
         public bool HumanWalkingSnipeAllowSpeedUp => _settings.HumanWalkSnipeConfig.AllowSpeedUp;
         public int HumanWalkingSnipeDelayTimeAtDestination => _settings.HumanWalkSnipeConfig.DelayTimeAtDestination;
+                
     }
 }

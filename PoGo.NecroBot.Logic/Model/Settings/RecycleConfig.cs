@@ -11,5 +11,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public int TotalAmountOfPotionsToKeep = 80;
         public int TotalAmountOfRevivesToKeep = 60;
         public int TotalAmountOfBerriesToKeep = 50;
+
+        public int MaxPokeballsToKeep = 50;
     }
 }

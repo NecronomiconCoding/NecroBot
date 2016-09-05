@@ -123,6 +123,8 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         bool RandomizeRecycle { get; }
         int RandomRecycleValue { get; }
         int TotalAmountOfPokeballsToKeep { get; }
+        int MaxPokeballsToKeep { get; }
+
         int TotalAmountOfPotionsToKeep { get; }
         int TotalAmountOfRevivesToKeep { get; }
         int TotalAmountOfBerriesToKeep { get; }
@@ -181,6 +183,7 @@ namespace PoGo.NecroBot.Logic.Interfaces.Configuration
         bool HumanWalkingSnipeIncludeDefaultLocation { get; }
         bool HumanWalkingSnipeUsePokeRadar { get; }
         bool HumanWalkingSnipeUseSkiplagged { get; }
+        bool HumanWalkingSnipeUseFastPokemap { get; }
         bool HumanWalkingSnipeUseSnipePokemonList { get; }
         Dictionary<PokemonId, HumanWalkSnipeFilter> HumanWalkSnipeFilters { get; }
         double HumanWalkingSnipeMaxSpeedUpSpeed { get; }

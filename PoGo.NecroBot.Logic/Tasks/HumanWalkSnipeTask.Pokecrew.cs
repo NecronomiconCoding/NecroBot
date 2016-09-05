@@ -11,8 +11,6 @@ namespace PoGo.NecroBot.Logic.Tasks
 {
     public partial class HumanWalkSnipeTask
     {
-
-
         public class PokecrewWrap
         {
             public class PokecrewItem

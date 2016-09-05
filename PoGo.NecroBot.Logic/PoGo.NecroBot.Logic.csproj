@@ -315,6 +315,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <Compile Include="Tasks\HumanWalkSnipeTask.FastPokemap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FeroxRev\PokemonGo.RocketAPI\PokemonGo.RocketAPI.csproj">

@@ -26,5 +26,6 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         public double MaxSpeedUpSpeed = 60.0;
         public bool AllowSpeedUp = true;
         public int DelayTimeAtDestination = 10000;//  10 sec
+         public bool UseFastPokemap = true;
     }
 }
