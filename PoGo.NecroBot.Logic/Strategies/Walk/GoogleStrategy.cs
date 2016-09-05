@@ -30,7 +30,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             var currentLocation = new GeoCoordinate(_client.CurrentLatitude, _client.CurrentLongitude, _client.CurrentAltitude);
             var googleResult = _googleDirectionsService.GetDirections(currentLocation, new List<GeoCoordinate>(), targetLocation);
 
-            if (googleResult.Directions.status.Equals("OVER_QUERY_LIMIT"))
+            if (googleResult == null || googleResult.Directions.status.Equals("OVER_QUERY_LIMIT"))
             {
                 return await RedirectToNextFallbackStrategy(session.LogicSettings, targetLocation, functionExecutedWhileWalking, session, cancellationToken);
             }

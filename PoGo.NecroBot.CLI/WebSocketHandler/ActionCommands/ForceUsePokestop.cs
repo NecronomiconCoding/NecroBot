@@ -11,14 +11,14 @@ namespace PoGo.NecroBot.CLI.WebSocketHandler.ActionCommands
 
         public SetDestination()
         {
-            Command = "SetDestination";
+            Command = "ForceUsePokestop";
         }
 
         public async Task Handle(ISession session, WebSocketSession webSocketSession, dynamic message)
         {
-            Logic.Tasks.UseNearbyPokestopsTask.SetDestinationLat = (double)message.lat;
-            Logic.Tasks.UseNearbyPokestopsTask.SetDestinationLng = (double)message.lng;
-            Logic.Tasks.UseNearbyPokestopsTask.SetDestinationEnabled = true;
+            Logic.Tasks.UseNearbyPokestopsTask.ForceUsePokestopLat = (double)message.lat;
+            Logic.Tasks.UseNearbyPokestopsTask.ForceUsePokestopLng = (double)message.lng;
+            Logic.Tasks.UseNearbyPokestopsTask.ForceUsePokestopEnabled = true;
             //await Logic.Tasks.SetDestinationActionTask.Execute(lat, lng, session);
         }
     }
