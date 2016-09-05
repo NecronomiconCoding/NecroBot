@@ -287,7 +287,6 @@
     <Compile Include="WebSocketHandler\GetCommands\Helpers\PokemonListWeb.cs" />
     <Compile Include="WebSocketHandler\GetCommands\GetPokemonListHandler.cs" />
     <Compile Include="WebSocketHandler\GetCommands\Tasks\GetPokemonListTask.cs" />
-    <Compile Include="WebSocketHandler\ActionCommands\SetDestinationHandler.cs" />
     <Compile Include="WebSocketHandler\WebSocketEventManager.cs" />
     <Compile Include="WebSocketInterface.cs" />
   </ItemGroup>
