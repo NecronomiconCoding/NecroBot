@@ -185,7 +185,6 @@
     <Compile Include="Model\Google\GoogleObjects\ValueText.cs" />
     <Compile Include="Model\Google\GoogleResult.cs" />
     <Compile Include="Model\Google\GoogleWalk.cs" />
-    <Compile Include="Model\Google\Teste.cs" />
     <Compile Include="Model\PokemonGrade.cs" />
     <Compile Include="Model\Settings\AuthConfig.cs" />
     <Compile Include="Model\Settings\AuthSettings.cs" />

@@ -56,7 +56,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             if (_googleDirectionsService != null)
             {
                 var googleResult = _googleDirectionsService.GetDirections(new GeoCoordinate(sourceLat, sourceLng), new List<GeoCoordinate>(), new GeoCoordinate(destinationLat, destinationLng));
-                if (googleResult.Directions.status.Equals("OVER_QUERY_LIMIT"))
+                if (googleResult == null || googleResult.Directions.status.Equals("OVER_QUERY_LIMIT"))
                 {
                     return 1.5 * base.CalculateDistance(sourceLat, sourceLng, destinationLat, destinationLng);
                 }
