@@ -285,8 +285,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                         await TransferWeakPokemonTask.Execute(session, cancellationToken);
                     if (session.LogicSettings.RenamePokemon)
                         await RenamePokemonTask.Execute(session, cancellationToken);
-                    if (session.LogicSettings.AutoFavoritePokemon)
-                        await FavoritePokemonTask.Execute(session, cancellationToken);
                     if (session.LogicSettings.AutomaticallyLevelUpPokemon)
                         await LevelUpPokemonTask.Execute(session, cancellationToken);
 

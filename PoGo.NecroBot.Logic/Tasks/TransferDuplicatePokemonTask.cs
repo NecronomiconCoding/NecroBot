@@ -17,7 +17,10 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            
+
+            if (session.LogicSettings.AutoFavoritePokemon)
+                await FavoritePokemonTask.Execute(session, cancellationToken);
+
             await session.Inventory.RefreshCachedInventory();
             var duplicatePokemons =
                 await
