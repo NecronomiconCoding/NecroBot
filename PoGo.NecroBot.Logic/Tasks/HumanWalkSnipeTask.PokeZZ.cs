@@ -1,4 +1,5 @@
-﻿using PoGo.NecroBot.Logic.Utils;
+﻿using PoGo.NecroBot.Logic.Logging;
+using PoGo.NecroBot.Logic.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +44,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             catch (Exception )
             {
+                Logger.Write("Error loading data from Pokezz", LogLevel.Error, ConsoleColor.DarkRed);
 
             }
 

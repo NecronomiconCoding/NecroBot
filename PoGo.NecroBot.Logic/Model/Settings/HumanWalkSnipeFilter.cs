@@ -47,7 +47,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 8)]
         public int DelayTimeAtDestination { get; set; }
 
-        public HumanWalkSnipeFilter(double maxDistance, double maxWalkTimes, int priority, bool catchPokemon, bool spinPokestop, bool allowSpeedUp, double speedUpSpeed, double delay = 10)
+        public HumanWalkSnipeFilter(double maxDistance, double maxWalkTimes, int priority, bool catchPokemon, bool spinPokestop, bool allowSpeedUp, double speedUpSpeed, int delay = 10)
         {
             this.MaxDistance = maxDistance;
             this.MaxWalkTimes = maxWalkTimes;
@@ -56,6 +56,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
             this.SpinPokestopWhileWalking = spinPokestop;
             this.AllowSpeedUp = allowSpeedUp;
             this.MaxSpeedUpSpeed = speedUpSpeed;
+            this.DelayTimeAtDestination = delay;
         }
 
         internal static Dictionary<PokemonId, HumanWalkSnipeFilter> Default()
