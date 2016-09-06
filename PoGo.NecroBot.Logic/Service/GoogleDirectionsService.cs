@@ -38,28 +38,40 @@ namespace PoGo.NecroBot.Logic.Service
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                HttpResponseMessage responseMessage = client.GetAsync(url).Result;
-                var resposta = responseMessage.Content.ReadAsStringAsync();
-                var google = JsonConvert.DeserializeObject<DirectionsResponse>(resposta.Result);
-
-                var resultadoPesquisa = new GoogleResult
+                try
                 {
-                    Directions = google,
-                    RequestDate = DateTime.Now,
-                    Origin = origin,
-                    Waypoints = waypoints,
-                    Destiny = destino,
-                    FromCache = false,
-                };
+                    client.BaseAddress = new Uri("https://maps.googleapis.com/maps/api/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                if (_cache)
-                    SaveResult(resultadoPesquisa);
+                    HttpResponseMessage responseMessage = client.GetAsync(url).Result;
+                    var resposta = responseMessage.Content.ReadAsStringAsync();
+                    var google = JsonConvert.DeserializeObject<DirectionsResponse>(resposta.Result);
+                    if (google.status.Equals("OVER_QUERY_LIMIT"))
+                    {
+                        // If we get an error, don't cache empty GoogleResult.  Just return null.
+                        return null;
+                    }
 
-                return resultadoPesquisa;
+                    var resultadoPesquisa = new GoogleResult
+                    {
+                        Directions = google,
+                        RequestDate = DateTime.Now,
+                        Origin = origin,
+                        Waypoints = waypoints,
+                        Destiny = destino,
+                        FromCache = false,
+                    };
+
+                    if (_cache)
+                        SaveResult(resultadoPesquisa);
+
+                    return resultadoPesquisa;
+                }
+                catch(Exception)
+                {
+                    return null;
+                }
             }
         }
 

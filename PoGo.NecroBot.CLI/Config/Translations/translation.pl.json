@@ -2,7 +2,7 @@
   "TranslationStrings": [
     {
       "Key": "HumanWalkSnipeNotEnoughtBalls",
-      "Value": "(HUMAN WALK) Niewystarczająca ilość piłem do aktywacji catch Em-All mode. ({0})/{1}"
+      "Value": "(HUMAN WALK) Niewystarczająca ilość piłek do aktywacji catch Em-All mode. ({0})/{1}"
     },
     {
       "Key": "HumanWalkSnipe",
@@ -14,7 +14,7 @@
     },
     {
       "Key": "HumanWalkSnipeAddedPokestop",
-      "Value": "(HUMAN WALK) You are {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops"
+      "Value": "(HUMAN WALK) Jesteś {0:0.00m} away from nearest pokestop. Restart farming at this place with {1} pokestops"
     },
     {
       "Key": "HumanWalkSnipeDestinationReached",

@@ -71,7 +71,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             catch (Exception)
             {
-                Logger.Write("Error loading data", LogLevel.Error, ConsoleColor.DarkRed);
+                Logger.Write("Error loading data from pokesnipers", LogLevel.Error, ConsoleColor.DarkRed);
             }
             return results;
         }

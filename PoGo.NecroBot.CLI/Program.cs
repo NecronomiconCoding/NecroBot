@@ -161,7 +161,6 @@ namespace PoGo.NecroBot.CLI
 
             _session = new Session(new ClientSettings(settings), logicSettings, translation);
 
-            Teste.Testar(_session);
             if (boolNeedsSetup)
             {
                 Logger.SetLoggerContext(_session);
@@ -247,7 +246,7 @@ namespace PoGo.NecroBot.CLI
             if (settings.TelegramConfig.UseTelegramAPI)
                 _session.Telegram = new TelegramService(settings.TelegramConfig.TelegramAPIKey, _session);
 
-            if (_session.LogicSettings.UseSnipeLocationServer)
+            if (_session.LogicSettings.UseSnipeLocationServer || _session.LogicSettings.HumanWalkingSnipeUsePogoLocationFeeder)
                 SnipePokemonTask.AsyncStart(_session);
 
             settings.checkProxy(_session.Translation);

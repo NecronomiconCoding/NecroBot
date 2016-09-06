@@ -149,6 +149,7 @@
     <Compile Include="Event\KillSwitchEvent.cs" />
     <Compile Include="Event\LogEvent.cs" />
     <Compile Include="Event\NoPokeballEvent.cs" />
+    <Compile Include="Event\SnipePokemonFoundEvent.cs" />
     <Compile Include="Event\SnipeEvent.cs" />
     <Compile Include="Event\SnipeModeEvent.cs" />
     <Compile Include="Event\PokemonListEvent.cs" />
@@ -185,7 +186,6 @@
     <Compile Include="Model\Google\GoogleObjects\ValueText.cs" />
     <Compile Include="Model\Google\GoogleResult.cs" />
     <Compile Include="Model\Google\GoogleWalk.cs" />
-    <Compile Include="Model\Google\Teste.cs" />
     <Compile Include="Model\PokemonGrade.cs" />
     <Compile Include="Model\Settings\AuthConfig.cs" />
     <Compile Include="Model\Settings\AuthSettings.cs" />
@@ -325,6 +325,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <Compile Include="Tasks\HumanWalkSnipeTask.FastPokemap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FeroxRev\PokemonGo.RocketAPI\PokemonGo.RocketAPI.csproj">

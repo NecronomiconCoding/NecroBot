@@ -36,8 +36,6 @@ namespace PoGo.NecroBot.Logic.State
 
                 if (session.LogicSettings.RenamePokemon)
                     await RenamePokemonTask.Execute(session, cancellationToken);
-                if (session.LogicSettings.AutoFavoritePokemon)
-                    await FavoritePokemonTask.Execute(session, cancellationToken);
 
                 await RecycleItemsTask.Execute(session, cancellationToken);
 

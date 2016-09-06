@@ -212,7 +212,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
         public static async Task Execute(ISession session, CancellationToken cancellationToken)
         {
-            if (_lastSnipe.AddMilliseconds(session.LogicSettings.MinDelayBetweenSnipes) > DateTime.Now)
+            if (_lastSnipe.AddMilliseconds(session.LogicSettings.MinDelayBetweenSnipes) > DateTime.Now || !session.LogicSettings.UseSnipeLocationServer)
                 return;
 
             LocsVisited.RemoveAll(q => DateTime.Now > q.TimeStampAdded.AddMinutes(15));
@@ -917,6 +917,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                             SnipeLocations.RemoveAll(x => _lastSnipe > x.TimeStampAdded);
                             SnipeLocations.RemoveAll(x => DateTime.Now > x.TimeStampAdded.AddMinutes(15));
                             SnipeLocations.Add(info);
+                            session.EventDispatcher.Send(new SnipePokemonFoundEvent() { PokemonFound = info });
                         }
                         catch (System.IO.IOException)
                         {

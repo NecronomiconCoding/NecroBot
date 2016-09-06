@@ -45,8 +45,6 @@ namespace PoGo.NecroBot.Logic.Service
                     TransferWeakPokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
                 if (_session.LogicSettings.RenamePokemon)
                     RenamePokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
-                if (_session.LogicSettings.AutoFavoritePokemon)
-                    FavoritePokemonTask.Execute(_session, cancellationToken).Wait(cancellationToken);
 
                 RecycleItemsTask.Execute(_session, cancellationToken).Wait(cancellationToken);
                 GetPokeDexCount.Execute(_session, cancellationToken).Wait(cancellationToken);

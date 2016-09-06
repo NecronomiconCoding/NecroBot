@@ -85,5 +85,7 @@ namespace PoGo.NecroBot.Logic.Model.Settings
         [Range(0, 999999)]
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate)]
         public int DelayTimeAtDestination = 10000;//  10 sec
+         public bool UseFastPokemap = true;
+        public bool UsePogoLocationFeeder = false;
     }
 }
