@@ -231,7 +231,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             }
             while (pokemon != null && _setting.HumanWalkingSnipeTryCatchEmAll);
 
-            if (caughtAnyPokemonInThisWalk && !_setting.HumanWalkingSnipeAlwaysWalkBack)
+            if (caughtAnyPokemonInThisWalk && ( !_setting.HumanWalkingSnipeAlwaysWalkBack || _setting.UseGpxPathing))
             {
                 await afterCatchFunc?.Invoke();
             }
@@ -386,7 +386,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     //caculate distance to betweek pokemon
                 }
-
             }
             if (count > 0)
             {
