@@ -386,7 +386,6 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
                     //caculate distance to betweek pokemon
                 }
-
             }
             if (count > 0)
             {

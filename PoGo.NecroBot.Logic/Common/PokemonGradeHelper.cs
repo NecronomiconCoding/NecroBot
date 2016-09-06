@@ -154,6 +154,7 @@ namespace PoGo.NecroBot.Logic.Common
                    PokemonId.Vaporeon         ,
                    PokemonId.Kabutops,
                    PokemonId.Dragonair        ,
+                   PokemonId.Dragonite        ,
                    PokemonId.Raichu           ,
                    PokemonId.Nidoqueen        ,
                    PokemonId.Nidoking         ,
