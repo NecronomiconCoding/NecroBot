@@ -56,6 +56,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             FortData currentFortData = null, ulong encounterId = 0, bool sessionAllowTransfer =true)
         {
             AmountOfBerries = 0;
+			
             cancellationToken.ThrowIfCancellationRequested();
 
             // If the encounter is null nothing will work below, so exit now
@@ -136,6 +137,8 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 }
 
+				bool hitPokemon = true;
+				
                 //default to excellent throw
                 var normalizedRecticleSize = 1.95;
                 //default spin
@@ -193,13 +196,16 @@ namespace PoGo.NecroBot.Logic.Tasks
                     //round to 2 decimals
                     normalizedRecticleSize = Math.Round(normalizedRecticleSize, 2);
 
-                    Logger.Write($"(Threw ball) {hitTxt} hit. {spinTxt}-ball...", LogLevel.Debug);
+					// Missed throw check
+					int missChance = Random.Next(1, 101);
+					if (missChance <= session.LogicSettings.ThrowMissPercentage && session.LogicSettings.EnableMissedThrows)
+					{
+						hitPokemon = false;	
+					}
+                    
+                    Logger.Write($"(Threw ball) {hitTxt} throw, {spinTxt}-ball, HitPokemon = {hitPokemon}...", LogLevel.Debug);		
                 }
 
-                int missChance = Random.Next(0, 101);
-                bool hitPokemon = true;
-                if (missChance <= session.LogicSettings.ThrowMissPercentage && session.LogicSettings.EnableMissedThrows && session.LogicSettings.EnableHumanizedThrows)
-                    hitPokemon = false;
                 caughtPokemonResponse =
                     await session.Client.Encounter.CatchPokemon(
                         encounter is EncounterResponse || encounter is IncenseEncounterResponse
@@ -245,8 +251,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     if (family != null)
                     {
-                        family.Candy_ += caughtPokemonResponse.CaptureAward.Candy.Sum();
-
+                        family.Candy_ += caughtPokemonResponse.CaptureAward.Candy.Sum();		
                         evt.FamilyCandies = family.Candy_;
                     }
                     else
