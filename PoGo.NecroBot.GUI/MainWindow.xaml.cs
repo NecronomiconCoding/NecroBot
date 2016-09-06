@@ -2,9 +2,12 @@
 
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 using System.Windows;
 using Awesomium.Core;
 using Awesomium.Windows.Controls;
+using PoGo.NecroBot.GUI.WebUiClient;
 
 #endregion
 
@@ -15,6 +18,12 @@ namespace PoGo.NecroBot.GUI
     /// </summary>
     public partial class MainWindow
     {
+        #region Fields
+
+        private readonly WebUiClientConfig _settings = new WebUiClientConfig();
+
+        #endregion
+
         #region Overrides
 
         protected override void OnClosed(EventArgs e)
@@ -24,10 +33,6 @@ namespace PoGo.NecroBot.GUI
             // Destroy the WebControl and its underlying view.
             webControl.Dispose();
         }
-
-        #endregion
-
-        #region Fields
 
         #endregion
 
@@ -156,6 +161,62 @@ namespace PoGo.NecroBot.GUI
         #endregion
 
         #region Event Handlers
+
+        private void webWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            var settingsPath = Path.Combine(Directory.GetCurrentDirectory(),
+                "WebUi" + Path.DirectorySeparatorChar + "Config.json");
+            _settings.Load(settingsPath);
+
+            var webUi = _settings.WebUiClients[_settings.CurrentWebUiClient];
+
+            if (!webUi.IsInstalled())
+            {
+                var inputDialog = new WebUiClientSelector(_settings);
+                if (inputDialog.ShowDialog() == true)
+                {
+                    if (inputDialog.DialogResult == true)
+                    {
+                        _settings.CurrentWebUiClient = inputDialog.CurrentWebUiClient;
+                        webUi = _settings.WebUiClients[_settings.CurrentWebUiClient];
+                    }
+                }
+            }
+            else if (_settings.AutoUpdateWebUiClient && !webUi.IsUpToDate())
+            {
+                var inputDialog = new WebUiClientSelector(_settings, true);
+                if (inputDialog.ShowDialog() == true)
+                {
+                    if (inputDialog.DialogResult == true)
+                    {
+                        _settings.CurrentWebUiClient = inputDialog.CurrentWebUiClient;
+                        webUi = _settings.WebUiClients[_settings.CurrentWebUiClient];
+                    }
+                }
+            }
+
+            if (!webUi.IsInstalled()) return;
+
+            Title = "NecroBot / " + _settings.CurrentWebUiClient;
+            // Tell the WebControl to load a specified target URL.
+            var baseUri = new Uri(Assembly.GetEntryAssembly().Location);
+            Source = new Uri(baseUri, webUi.HomeUri);
+        }
+
+        private void BtnWebUiConfig_Click(object sender, RoutedEventArgs e)
+        {
+            var inputDialog = new WebUiClientSelector(_settings);
+            if (inputDialog.ShowDialog() != true)
+                return;
+            if (inputDialog.DialogResult != true)
+                return;
+            _settings.CurrentWebUiClient = inputDialog.CurrentWebUiClient;
+            var webUi = _settings.WebUiClients[_settings.CurrentWebUiClient];
+            Title = "NecroBot / " + _settings.CurrentWebUiClient;
+            // Tell the WebControl to load a specified target URL.
+            var baseUri = new Uri(Assembly.GetEntryAssembly().Location);
+            Source = new Uri(baseUri, webUi.HomeUri);
+        }
 
         private void OnNativeViewInitialized(object sender, WebViewEventArgs e)
         {
