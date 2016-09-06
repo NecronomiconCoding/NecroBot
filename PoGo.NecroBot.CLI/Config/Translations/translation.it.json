@@ -42,7 +42,7 @@
     },
     {
       "Key": "GoogleAPIWarning",
-      "Value": "Senza una Google Api, avrai un limite pari a 2500 richieste, se raggiungi il limite delle richieste, prova a cambiare il tuo IP. Configura la \"GoogleAPIKey\", ottieni una API Key seguendo il link: https://developers.google.com/maps/documentation/directions/get-api-key"
+      "Value": "Senza una Google API, avrai un limite pari a 2500 richieste. Se raggiungi il limite delle richieste, prova a cambiare il tuo IP. Configura la \"GoogleAPIKey\", ottieni una API Key seguendo il link: https://developers.google.com/maps/documentation/directions/get-api-key"
     },
     {
       "Key": "pokeball",
@@ -106,7 +106,7 @@
     },
     {
       "Key": "eventPokemonEvolvedFailed",
-      "Value": "Fallita {0}. Il risultato e' stato {1}, evoluzione di {2} interrotta"
+      "Value": "Fallita {0}. Il risultato è stato {1}, evoluzione di {2} interrotta"
     },
     {
       "Key": "eventPokemonTransferred",
@@ -118,11 +118,11 @@
     },
     {
       "Key": "eventPokemonCaptureSuccess",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | {11} PE guadagnati | {12} | lat: {13} long: {14} | Move1: {15} Move2: {16}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | {11} PE guadagnati | {12} | lat: {13} long: {14} | Mossa1: {15} Mossa2: {16}"
     },
     {
       "Key": "eventPokemonCaptureFailed",
-      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | lat: {11} long: {12} | Move1: {13} Move2: {14}"
+      "Value": "({0}) | ({1}) {2} Lvl: {3} PL: ({4}/{5}) IV: {6}% | Chance: {7}% | {8}m dist | con una {9} ({10} rimanenti). | lat: {11} long: {12} | Mossa1: {13} Mossa2: {14}"
     },
     {
       "Key": "eventNoPokeballs",
@@ -206,7 +206,7 @@
     },
     {
       "Key": "incubatorEggHatched",
-      "Value": "{0} e' uscito dall'Uovo"
+      "Value": "{0} è uscito dall'Uovo"
     },
     {
       "Key": "logEntryError",
@@ -266,11 +266,11 @@
     },
     {
       "Key": "loggingIn",
-      "Value": "Log in tramite {0}"
+      "Value": "Login tramite {0}"
     },
     {
       "Key": "ptcOffline",
-      "Value": "I Server PTC sono offline o le tue credenziali sono sbagliate. Prova ad accedere con Google"
+      "Value": "I server PTC sono offline o le tue credenziali sono sbagliate. Prova ad accedere con Google"
     },
     {
       "Key": "tryingAgainIn",
@@ -294,11 +294,11 @@
     },
     {
       "Key": "realisticTravelDetected",
-      "Value": "Spostamenti realistici rilevati, verra' usato UserSettings.settings"
+      "Value": "Spostamenti realistici rilevati, verrà usato UserSettings.settings"
     },
     {
       "Key": "notRealisticTravel",
-      "Value": "Spostamenti non realistici in {0}, verra' usato l'ultimo salvataggio del file LastPos.ini"
+      "Value": "Spostamenti non realistici in {0}, verrà usato l'ultimo salvataggio del file LastPos.ini"
     },
     {
       "Key": "coordinatesAreInvalid",
@@ -306,7 +306,7 @@
     },
     {
       "Key": "gotUpToDateVersion",
-      "Value": "Perfetto! Hai gia' la versione più aggiornata {0}"
+      "Value": "Perfetto! Hai già la versione più aggiornata {0}"
     },
     {
       "Key": "autoUpdaterDisabled",
@@ -350,7 +350,7 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Non hai piu' Pokeball, impossibile catturare altri Pokemon!"
+      "Value": "Non hai più Pokeball, impossibile catturare altri Pokemon!"
     },
     {
       "Key": "currentPokeballInv",
@@ -370,7 +370,7 @@
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
-      "Value": "[Configurazione Non Valida] La somma degli oggetti (Pokeball+Pozioni+Revitalizzanti={0}) e' maggiore della capacita' massima dell'inventario ({1})"
+      "Value": "[Configurazione Non Valida] La somma degli oggetti (Pokeball+Pozioni+Revitalizzanti={0}) è maggiore della capacità massima dell'inventario ({1})"
     },
     {
       "Key": "recyclingQuietly",
@@ -398,7 +398,7 @@
     },
     {
       "Key": "desiredDestTooFar",
-      "Value": "La destinazione desiderata {0}, {1} e' troppo lontana dalla posizione attuale {2}, {3}"
+      "Value": "La destinazione desiderata {0}, {1} è troppo lontana dalla posizione attuale {2}, {3}"
     },
     {
       "Key": "pokemonRename",
@@ -606,7 +606,7 @@
     },
     {
       "Key": "HumanWalkingVariant",
-      "Value": "Velocita di cammino: E' stata cambiata,da {0:n2} Km/h a {1:n2} Km/h"
+      "Value": "Velocita di cammino cambiata da {0:n2} Km/h a {1:n2} Km/h"
     },
     {
       "Key": "AccountBanned",

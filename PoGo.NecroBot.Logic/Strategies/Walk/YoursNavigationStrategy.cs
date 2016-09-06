@@ -47,6 +47,10 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
 
         public override double CalculateDistance(double sourceLat, double sourceLng, double destinationLat, double destinationLng, ISession session = null)
         {
+            // Too expensive to calculate true distance.
+            return 1.5 * base.CalculateDistance(sourceLat, sourceLng, destinationLat, destinationLng);
+
+            /*
             if (session != null)
                 GetYoursInstance(session);
 
@@ -67,6 +71,7 @@ namespace PoGo.NecroBot.Logic.Strategies.Walk
             {
                 return 1.5 * base.CalculateDistance(sourceLat, sourceLng, destinationLat, destinationLng);
             }
+            */
         }
     }
 }

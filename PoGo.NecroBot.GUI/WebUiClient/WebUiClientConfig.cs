@@ -23,15 +23,17 @@ namespace PoGo.NecroBot.GUI.WebUiClient
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 1)]
         public bool AutoUpdateWebUiClient;
 
-        [DefaultValue("PokeEase Official")]
-        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 1)]
-        public string CurrentWebUiClient = "NecrobotVisualizer-nicoschmitt";
+        [DefaultValue("PokeEase")]
+        [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Populate, Order = 2)]
+        public string CurrentWebUiClient = "PokeEase";
 
         [JsonProperty(Required = Required.DisallowNull, DefaultValueHandling = DefaultValueHandling.Ignore, Order = 3)]
         public Dictionary<string, WebUiClient> WebUiClients = new Dictionary<string, WebUiClient>
         {
-            {"PokeEase Official", new WebUiClient("GediminasMasaitis", "PokeEase", "src")},
-            {"PokeEase Fork By jjskuld", new WebUiClient("jjskuld", "PokeEase", "src")}
+            {"PokeEase", new WebUiClient("GediminasMasaitis", "PokeEase", "src", "PokeEase.html")},
+            {"PokeEase Fork By jjskuld", new WebUiClient("jjskuld", "PokeEase", "src", "index.html")},
+            {"NecrobotVisualizer", new WebUiClient("nicoschmitt", "necrobotvisualizer", "app", "index.html")},
+            {"NecrobotJavanHawk", new WebUiClient("AndikaTanpaH", "NecrobotJavanHawk", "app", "index.html")}
         };
 
         public WebUiClientConfig()

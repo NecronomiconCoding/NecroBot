@@ -161,7 +161,6 @@ namespace PoGo.NecroBot.CLI
 
             _session = new Session(new ClientSettings(settings), logicSettings, translation);
 
-            Teste.Testar(_session);
             if (boolNeedsSetup)
             {
                 Logger.SetLoggerContext(_session);
