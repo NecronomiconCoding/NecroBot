@@ -21,7 +21,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         public static double SetMoveToTargetLng { get; set; }
 
 
-        public static void checkSetMoveToTargetStatus(ref FortDetailsResponse fortInfo,ref FortData pokeStop)
+        public static void CheckSetMoveToTargetStatus(ref FortDetailsResponse fortInfo,ref FortData pokeStop)
         {
             if (SetMoveToTargetEnabled)
             {
@@ -31,11 +31,11 @@ namespace PoGo.NecroBot.Logic.Tasks
                 fortInfo.Longitude = pokeStop.Longitude = SetMoveToTargetLng;
             }
         }
-        public static bool isStopforSetMoveToTarget()
+        public static bool CheckStopforSetMoveToTarget()
         {
             return (SetMoveToTargetEnabled && !SetMoveToTargetAccept);
         }
-        public static bool isReachTarget(ISession session)
+        public static bool CheckReachTarget(ISession session)
         {
             if (SetMoveToTargetEnabled && SetMoveToTargetAccept)
             {

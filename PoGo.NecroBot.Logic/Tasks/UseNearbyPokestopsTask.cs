@@ -104,7 +104,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 {
 
                     // Will modify Lat,Lng and Name to fake position
-                    SetMoveToTargetTask.checkSetMoveToTargetStatus(ref fortInfo, ref pokeStop); 
+                    SetMoveToTargetTask.CheckSetMoveToTargetStatus(ref fortInfo, ref pokeStop); 
 
                     var eggWalker = new EggWalker(1000, session);
 
@@ -121,7 +121,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         LocationUtils.getElevation(session, pokeStop.Latitude, pokeStop.Longitude)),
                     async () =>
                     {
-                        if (SetMoveToTargetTask.isStopforSetMoveToTarget())
+                        if (SetMoveToTargetTask.CheckStopforSetMoveToTarget())
                             return false;
                         // Catch normal map Pokemon
                         await CatchNearbyPokemonsTask.Execute(session, cancellationToken);
@@ -137,7 +137,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                     // we have moved this distance, so apply it immediately to the egg walker.
                     await eggWalker.ApplyDistance(distance, cancellationToken);
                 }
-                if (SetMoveToTargetTask.isReachTarget(session))
+                if (SetMoveToTargetTask.CheckReachTarget(session))
                     return;
             		
                 await FortAction(session, pokeStop, fortInfo, cancellationToken);
