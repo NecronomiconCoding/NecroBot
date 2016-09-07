@@ -7,6 +7,7 @@ using PoGo.NecroBot.Logic.Event;
 using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.State;
 using POGOProtos.Map.Fort;
+using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
 
 #endregion
@@ -25,7 +26,7 @@ namespace PoGo.NecroBot.Logic.Tasks
             var fortId = currentFortData.Id;
 
             var pokemonId = currentFortData.LureInfo.ActivePokemonId;
-
+			
             if( ( session.LogicSettings.UsePokemonSniperFilterOnly && !session.LogicSettings.PokemonToSnipe.Pokemon.Contains( pokemonId ) ) ||
                     ( session.LogicSettings.UsePokemonToNotCatchFilter && session.LogicSettings.PokemonsNotToCatch.Contains( pokemonId ) ) )
             {
@@ -41,7 +42,17 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                 if (encounter.Result == DiskEncounterResponse.Types.Result.Success && session.LogicSettings.CatchPokemon)
                 {
-                    await CatchPokemonTask.Execute(session, cancellationToken, encounter, null, currentFortData, encounterId);
+					var pokemon = new MapPokemon
+					{
+						EncounterId = encounterId,
+						ExpirationTimestampMs = currentFortData.LureInfo.LureExpiresTimestampMs,
+						Latitude = currentFortData.Latitude,
+						Longitude = currentFortData.Longitude,
+						PokemonId = currentFortData.LureInfo.ActivePokemonId,
+						SpawnPointId = currentFortData.Id
+					};
+					
+                    await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon, currentFortData, encounterId);
                 }
                 else if (encounter.Result == DiskEncounterResponse.Types.Result.PokemonInventoryFull)
                 {
