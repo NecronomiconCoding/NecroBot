@@ -303,6 +303,7 @@
     <Compile Include="Tasks\UseIncenseConstantlyTask.cs" />
     <Compile Include="Tasks\UseIncubatorsTask.cs" />
     <Compile Include="Tasks\UseLuckyEggConstantlyTask.cs" />
+    <Compile Include="Tasks\SetMoveToTargetTask.cs" />
     <Compile Include="Tasks\UseNearbyPokestopsTask.cs" />
     <Compile Include="Utils\DelayingUtils.cs" />
     <Compile Include="Utils\DeviceInfoHelper.cs" />

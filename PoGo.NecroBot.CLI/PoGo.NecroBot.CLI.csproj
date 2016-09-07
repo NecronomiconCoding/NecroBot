@@ -252,6 +252,7 @@
     <Compile Include="Resources\ProgressBar.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebSocketHandler\ActionCommands\SetMoveToTarget.cs" />
     <Compile Include="WebSocketHandler\ActionCommands\SetConfigHandler.cs" />
     <Compile Include="WebSocketHandler\ActionCommands\HumanSnipeRemovePokemonHandler.cs" />
     <Compile Include="WebSocketHandler\ActionCommands\HumanSnipePriorityPokemonHandler.cs" />
